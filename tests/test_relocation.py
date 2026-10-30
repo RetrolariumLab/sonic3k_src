@@ -155,3 +155,20 @@ class GeneratedSourceTests(unittest.TestCase):
             self.assertTrue((work / "src/kept.s").exists())
             self.assertFalse((work / "removed.s").exists())
             self.assertTrue((work / "notes.txt").exists())
+
+
+class PrivateLookupTailTests(unittest.TestCase):
+    def test_indexed_lookup_data_precedes_its_unreachable_guard(self):
+        text = "Entry:\n move.b Table(pc,d0.w),d0\n rts\n; End of function Entry\nTable:\n dc.b 1,2,3,4\n even\n"
+        document = collect_file("lookup.s", text)
+        self.assertEqual(document["points"][0]["after"], 7)
+        self.assertEqual(document["points"][0]["kind"], "terminal-data-tail")
+        self.assertEqual(document["points"][0]["members"], ["Entry"])
+        output = render(text, document["points"])
+        self.assertTrue(output.endswith(" dc.b 1,2,3,4\n even\n                rts\n"))
+
+    def test_live_code_or_unknown_macros_cannot_be_claimed_as_lookup_data(self):
+        for tail in (" moveq #0,d0\n dc.b 1\n", " opaque_macro 1\n"):
+            text = "Entry:\n move.b Table(pc,d0.w),d0\n rts\n; End of function Entry\nTable:\n" + tail
+            with self.subTest(tail=tail), self.assertRaisesRegex(ValueError, "safe terminal"):
+                collect_file("unsafe.s", text)

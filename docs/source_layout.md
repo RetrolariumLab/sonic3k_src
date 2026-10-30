@@ -5,12 +5,11 @@ responsibility, physical line count and source range at the preservation
 baseline. Owned data lives under `src/objects`, `src/rendering`, `src/ui`,
 `src/game` and `src/system/debug`. Engine-specific code remains separate.
 
-This registry is intentionally incomplete during extraction: 667 data units and
-20 sibling system, pause, rendering and decompression units have owners. The 60
-remaining entry, driver, memory and macro units still await complete semantic
-extraction. Run `make source-layout-inventory` for that distinction.
-`make check-source-layout` rejects pending entries and cannot certify this
-intermediate tree as 2.0.
+This registry is intentionally incomplete during extraction: 669 data units and
+28 sibling executable units have owners. The 60 remaining entry, driver, memory
+and macro units still await complete semantic extraction. Run
+`make source-layout-inventory` for that distinction. `make check-source-layout`
+rejects pending entries and cannot certify this intermediate tree as 2.0.
 
 Every owned cartridge unit has independently checked normal-build ROM ranges,
 including the applicable component and offset in the lock-on image. After an

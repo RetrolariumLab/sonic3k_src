@@ -514,6 +514,12 @@
       "commits": ["406dd409844defcd68512edc13fd0b1bf94eaf49"]
     },
     {
+      "id": "change-42e24a803544",
+      "kind": "source_or_tooling",
+      "summary": "Give sibling device and decompression libraries explicit owners",
+      "commits": ["42e24a80354489c020e7a95fbec9fa4a42d7a296"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",

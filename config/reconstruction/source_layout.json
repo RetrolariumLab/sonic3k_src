@@ -840,7 +840,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 114876,
+      "physical_lines": 113267,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "s3.s",
@@ -900,7 +900,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 198242,
+      "physical_lines": 195890,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -23426,6 +23426,301 @@
       ]
     },
     {
+      "path": "src/rendering/palettes/s3/fades_and_loading.s",
+      "owner": "rendering/palettes/s3",
+      "responsibility": "Normal and underwater palette fades, individual colour steps and palette loading interfaces.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 423,
+      "origin": {
+        "commit": "42e24a80354489c020e7a95fbec9fa4a42d7a296",
+        "path": "s3.s",
+        "first_line": 1205,
+        "last_line": 1625,
+        "sha256": "b75af2a85618130193fc2eccdfc72270b6fa4766fcde239609b774617ee4fdf3"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 12918,
+          "end": 13664
+        },
+        {
+          "profile": "s3-eu",
+          "start": 12918,
+          "end": 13664
+        },
+        {
+          "profile": "s3-jp",
+          "start": 12918,
+          "end": 13664
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2110070,
+          "end": 2110816
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/palettes/s3/transformation_cycles.s",
+      "owner": "rendering/palettes/s3",
+      "responsibility": "Complete character transformation palette state machine and its private colour sequences.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 122,
+      "origin": {
+        "commit": "42e24a80354489c020e7a95fbec9fa4a42d7a296",
+        "path": "s3.s",
+        "first_line": 1084,
+        "last_line": 1204,
+        "sha256": "ae8dcf7f2a8399a77f2a0d818e5527d8a4b6deb0f741d83ef79a7308827cc284"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named primitive library or transformation state machine retains its private tables without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 12534,
+          "end": 12918
+        },
+        {
+          "profile": "s3-eu",
+          "start": 12534,
+          "end": 12918
+        },
+        {
+          "profile": "s3-jp",
+          "start": 12534,
+          "end": 12918
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2109686,
+          "end": 2110070
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/palettes/s3/zone_cycle_colours.s",
+      "owner": "rendering/palettes/s3",
+      "responsibility": "Literal palette colour sequences consumed by the zone and competition cycle handlers.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 470,
+      "origin": {
+        "commit": "42e24a80354489c020e7a95fbec9fa4a42d7a296",
+        "path": "s3.s",
+        "first_line": 615,
+        "last_line": 1083,
+        "sha256": "087bd7506bfa7530f5d020e667185d445c51b629574fb4fc79c24ad3c34e72b3"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 10522,
+          "end": 12534
+        },
+        {
+          "profile": "s3-eu",
+          "start": 10522,
+          "end": 12534
+        },
+        {
+          "profile": "s3-jp",
+          "start": 10522,
+          "end": 12534
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2107674,
+          "end": 2109686
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/palettes/s3/zone_cycles.s",
+      "owner": "rendering/palettes/s3",
+      "responsibility": "Zone and competition palette cycle dispatch, counters and complete per-zone update handlers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 473,
+      "origin": {
+        "commit": "42e24a80354489c020e7a95fbec9fa4a42d7a296",
+        "path": "s3.s",
+        "first_line": 144,
+        "last_line": 614,
+        "sha256": "fc08e02d149c42a8b1668c4e3832a9747adb8f52e7a42dd106711ca50f6c0c5c"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 9162,
+          "end": 10522
+        },
+        {
+          "profile": "s3-eu",
+          "start": 9162,
+          "end": 10522
+        },
+        {
+          "profile": "s3-jp",
+          "start": 9162,
+          "end": 10522
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2106314,
+          "end": 2107674
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/palettes/sk/fades_and_loading.s",
+      "owner": "rendering/palettes/sk",
+      "responsibility": "Normal and underwater palette fades, individual colour steps and palette loading interfaces.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 447,
+      "origin": {
+        "commit": "42e24a80354489c020e7a95fbec9fa4a42d7a296",
+        "path": "sonic3k.s",
+        "first_line": 1924,
+        "last_line": 2368,
+        "sha256": "d6121c6394f1f9a02489a29d713ac0f76644fbedf5237b66d6641a30387a32ac"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 15088,
+          "end": 15914
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 15088,
+          "end": 15914
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/palettes/sk/transformation_cycles.s",
+      "owner": "rendering/palettes/sk",
+      "responsibility": "Complete character transformation palette state machine and its private colour sequences.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 284,
+      "origin": {
+        "commit": "42e24a80354489c020e7a95fbec9fa4a42d7a296",
+        "path": "sonic3k.s",
+        "first_line": 1641,
+        "last_line": 1923,
+        "sha256": "95ce742eb104f505e5c40d47ef3e6ba0e341e51325cdc9164054b7893463ec98"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named primitive library or transformation state machine retains its private tables without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 14160,
+          "end": 15088
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 14160,
+          "end": 15088
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/palettes/sk/zone_cycle_colours.s",
+      "owner": "rendering/palettes/sk",
+      "responsibility": "Literal palette colour sequences consumed by the zone and competition cycle handlers.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 655,
+      "origin": {
+        "commit": "42e24a80354489c020e7a95fbec9fa4a42d7a296",
+        "path": "sonic3k.s",
+        "first_line": 987,
+        "last_line": 1640,
+        "sha256": "f455cdcfef87679f7757b94c48f8330e1cb10d9c0a31b32d727fc2895e7d5eea"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 10998,
+          "end": 14160
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 10998,
+          "end": 14160
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/palettes/sk/zone_cycles.s",
+      "owner": "rendering/palettes/sk",
+      "responsibility": "Zone and competition palette cycle dispatch, counters and complete per-zone update handlers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 844,
+      "origin": {
+        "commit": "42e24a80354489c020e7a95fbec9fa4a42d7a296",
+        "path": "sonic3k.s",
+        "first_line": 145,
+        "last_line": 986,
+        "sha256": "91a9cfb80f384fed55614d5764298088686142a8f46e95aa4ee656b884056566"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-family",
+        "reason": "One zone-cycle dispatch family owns shared counters and every zone handler. Its separate literal colour sequences have their own data owner; this remaining code family stays below 900 physical lines.",
+        "proof_target": "check-source-layout"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 8514,
+          "end": 10998
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 8514,
+          "end": 10998
+        }
+      ]
+    },
+    {
       "path": "src/rendering/s3/vram_dma.s",
       "owner": "rendering/s3",
       "responsibility": "Plane-map transfer and DMA queue insertion and dispatch.",
@@ -25482,6 +25777,51 @@
       ]
     },
     {
+      "path": "src/system/s3/runtime_primitives.s",
+      "owner": "system/s3",
+      "responsibility": "Frame synchronization, deterministic random numbers and angle/sine lookup primitives with their private lookup tables.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 133,
+      "origin": {
+        "commit": "42e24a80354489c020e7a95fbec9fa4a42d7a296",
+        "path": "s3.s",
+        "first_line": 12,
+        "last_line": 143,
+        "sha256": "5aea86dfc59d07688ed8bc2240c4f4cc55f86a9a7d922f279ef3ff3df909cdeb"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named primitive library or transformation state machine retains its private tables without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 8098,
+          "end": 9162
+        },
+        {
+          "profile": "s3-eu",
+          "start": 8098,
+          "end": 9162
+        },
+        {
+          "profile": "s3-jp",
+          "start": 8098,
+          "end": 9162
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2105250,
+          "end": 2106314
+        }
+      ]
+    },
+    {
       "path": "src/system/s3/video_interrupts.s",
       "owner": "system/s3",
       "responsibility": "Vertical interrupt scheduling, display update dispatch and the primary horizontal water interrupt handlers.",
@@ -25618,6 +25958,41 @@
           "component": "sk",
           "start": 3692,
           "end": 4270
+        }
+      ]
+    },
+    {
+      "path": "src/system/sk/runtime_primitives.s",
+      "owner": "system/sk",
+      "responsibility": "Frame synchronization, deterministic random numbers and angle/sine lookup primitives with their private lookup tables.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 134,
+      "origin": {
+        "commit": "42e24a80354489c020e7a95fbec9fa4a42d7a296",
+        "path": "sonic3k.s",
+        "first_line": 12,
+        "last_line": 144,
+        "sha256": "85bee0276c08cd9b2053283aae9b6d0e891bf2601a438ef94c62a68815562010"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named primitive library or transformation state machine retains its private tables without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 7448,
+          "end": 8514
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 7448,
+          "end": 8514
         }
       ]
     },

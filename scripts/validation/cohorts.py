@@ -199,6 +199,17 @@ def collect_file(path, text):
             "tables": [],
             "code_labels": sorted(code_labels),
         }
+    instructions = [r for r in rows if r["cpu"] == "68000" and r["op"].split(".")[0] in INSTRUCTIONS]
+    if instructions:
+        terminal = instructions[-1]
+        tail = [r for r in rows[terminal["line"] :] if r["op"]]
+        # A complete lookup-table owner can end after its terminal instruction.
+        # Its own PC-relative data must precede the unreachable guard, rather
+        # than force ownership into the next unrelated function or source file.
+        data_ops = {"dc.b", "dc.w", "dc.l", "binclude", "even", "align"}
+        if terminal["op"].split(".")[0] in TERMINALS and tail and all(r["op"] in data_ops for r in tail):
+            if any(r["op"] in {"dc.b", "dc.w", "dc.l", "binclude"} for r in tail):
+                points[len(rows)] = {"after": len(rows), "return": "rts", "members": [], "kind": "terminal-data-tail"}
     spans, tables = protection_spans(rows)
     safe = [n for n in sorted(points) if not any(s["first"] <= n < s["last"] for s in spans)]
     if not safe:
