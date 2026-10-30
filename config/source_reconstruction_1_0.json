@@ -43,23 +43,23 @@
   ],
   "requirements": {
     "canonical_identity": {
-      "status": "partial",
+      "status": "satisfied",
       "evidence": {
         "targets": ["verify-all"],
         "files": ["assets/manifest.json", "scripts/build/pipeline.py"]
       },
-      "note": "Full clean-clone acceptance must be regenerated for this source and history."
+      "note": "Current-source technical controls are verified; complete aggregate release acceptance remains pending."
     },
     "reproducible_build": {
-      "status": "partial",
+      "status": "satisfied",
       "evidence": {
         "targets": ["verify-toolchain", "verify-all"],
         "files": ["config/toolchain.json", "config/revision_profiles.json"]
       },
-      "note": "Full clean-clone acceptance must be regenerated for this source and history."
+      "note": "Current-source technical controls are verified; complete aggregate release acceptance remains pending."
     },
     "executable_source": {
-      "status": "partial",
+      "status": "satisfied",
       "evidence": {
         "targets": ["audit-private", "verify-all", "check-audio-storage", "check-audio-binding", "check-driver-audio"],
         "files": [
@@ -72,10 +72,10 @@
           "scripts/validation/audio_source.py"
         ]
       },
-      "note": "Full clean-clone acceptance must be regenerated for this source and history."
+      "note": "Current-source technical controls are verified; complete aggregate release acceptance remains pending."
     },
     "symbolic_pointers": {
-      "status": "partial",
+      "status": "satisfied",
       "evidence": {
         "targets": ["check-lockon", "check-numeric-operands", "build-relocated", "check-relocated"],
         "files": [
@@ -84,26 +84,26 @@
           "config/reconstruction/relocation.json"
         ]
       },
-      "note": "Full clean-clone acceptance must be regenerated for this source and history."
+      "note": "Current-source technical controls are verified; complete aggregate release acceptance remains pending."
     },
     "runtime_coverage": {
-      "status": "partial",
+      "status": "satisfied",
       "evidence": {
         "targets": ["trace", "trace-relocated"],
         "files": ["config/runtime/scenarios.json", "config/runtime/emulator.json", "docs/runtime.md"]
       },
-      "note": "Full clean-clone acceptance must be regenerated for this source and history."
+      "note": "All five preservation and 160 relocated cases passed with complete current-source RAM evidence."
     },
     "baseline_validation": {
-      "status": "partial",
+      "status": "satisfied",
       "evidence": {
         "targets": ["lint", "test"],
         "files": ["config/lint.json", "tests/"]
       },
-      "note": "Full clean-clone acceptance must be regenerated for this source and history."
+      "note": "Current-source technical controls are verified; complete aggregate release acceptance remains pending."
     },
     "baseline_documentation": {
-      "status": "partial",
+      "status": "satisfied",
       "evidence": {
         "targets": ["release-audit"],
         "files": [
@@ -114,31 +114,31 @@
           "docs/unknowns.md"
         ]
       },
-      "note": "Full clean-clone acceptance must be regenerated for this source and history."
+      "note": "Current-source technical controls are verified; complete aggregate release acceptance remains pending."
     },
     "private_inputs_and_history": {
-      "status": "partial",
+      "status": "satisfied",
       "evidence": {
         "targets": ["audit-private"],
         "files": [".gitignore", "config/binary_allowlist.json", "scripts/validation/private_data.py"]
       },
-      "note": "Full clean-clone acceptance must be regenerated for this source and history."
+      "note": "Current-source technical controls are verified; complete aggregate release acceptance remains pending."
     },
     "licensing_and_provenance": {
-      "status": "partial",
+      "status": "satisfied",
       "evidence": {
         "targets": ["release-audit"],
         "files": ["docs/provenance.md"]
       },
-      "note": "Full clean-clone acceptance must be regenerated for this source and history."
+      "note": "Current-source technical controls are verified; complete aggregate release acceptance remains pending."
     },
     "release_contract": {
-      "status": "partial",
+      "status": "satisfied",
       "evidence": {
         "targets": ["check-release-metadata", "release-check"],
         "files": ["config/source_reconstruction_1_0.json", "scripts/validation/release.py"]
       },
-      "note": "Full clean-clone acceptance must be regenerated for this source and history."
+      "note": "Standard metadata and the fail-fast aggregate gate are implemented and tested; complete aggregate release acceptance remains pending."
     }
   },
   "profiles": [
@@ -479,9 +479,21 @@
       "commits": ["3c9d749b458c78ca8e8c02bf1317c96f179db931"]
     },
     {
-      "id": "current-source-stage",
+      "id": "change-adf0ad68c86b",
       "kind": "source_or_tooling",
-      "summary": "Continue preservation source and checks with private audio storage.",
+      "summary": "Reject nonstandard release metadata before acceptance",
+      "commits": ["adf0ad68c86bf2e3f913d77f82d5cab652beb523"]
+    },
+    {
+      "id": "change-401f6396d302",
+      "kind": "source_or_tooling",
+      "summary": "Bind relocation render proofs to the private driver recipe",
+      "commits": ["401f6396d302f4ea58dcc408ae867a7d230e3a7b"]
+    },
+    {
+      "id": "current-preservation-controls",
+      "kind": "tooling",
+      "summary": "Record verified current-source controls while leaving complete aggregate release acceptance pending.",
       "commits": ["release-commit"]
     }
   ],
