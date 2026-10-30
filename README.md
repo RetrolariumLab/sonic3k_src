@@ -1,112 +1,70 @@
-# DISCLAIMER
+# Sonic 3 / Sonic & Knuckles preservation source
 
-Any and all content presented in this repository is presented for informational
-and educational purposes only. Commercial usage is expressly prohibited. Sonic
-Retro claims no ownership of any code in these repositories. You assume any and
-all responsibility for using this content responsibly. Sonic Retro claims no
-responsibiliy or warranty.
+Buildable, ROM-free reconstruction of the Sonic Retro disassembly. It preserves
+Sonic 3 USA, Europe and Japan, Sonic & Knuckles, and the Sonic 3 & Knuckles
+lock-on composition. Sonic 3 and S&K remain separate sibling engines. No game
+images, extracted binary assets or compiler executables are distributed.
 
-# Sonic 3/Sonic & Knuckles Disassembly
+## Status
 
-## The Directory Structure
+All five preservation images build byte for byte from verified private ROM
+inputs. Direct original-image attract checks cover all five profiles, and the
+675-label S3 second-cartridge ABI is checked independently for each S3 region.
+The repository is still under reconstruction. Full procedure-coverage
+relocation, semantic source layout, editable format contracts and aggregate
+release gates remain unfinished. No Source Reconstruction 1.0 or 2.0 release is
+claimed.
 
-As should be noted, the directory structure of this disassembly is decidedly
-different from releases of previous split disassemblies. Instead of generally
-organizing data solely based on what type of data it is, effort has been made to
-seperate data contextually, grouping each file more by what they are used for
-than anything else. The first primary directory is 'General', which contains
-data used for various miscellaneous elements of the game including the title
-screen, special stage, menus, etc, and also contains the 'Sprites' folder, which
-itself contains seperate folders for each badnik and for each general-usage
-object. This is also where the data regarding the player objects themselves are
-stored.
+## Quick start
 
-The second directory is 'Levels', which provides seperate folders for each zone
-in the game, each containing all data directly used for that level, be it tiles,
-blocks, chunks, miscellaneous object data for various level elements, etc.
+Install Python 3.11 or later, GNU Make and Retrolarium Kit. Compiler sources,
+versions and binary hashes are pinned in `config/toolchain.json`; runtime
+requires the MAME build pinned in `config/runtime/emulator.json`. See
+[build instructions](docs/build.md) and [runtime setup](docs/runtime.md).
 
-For the sake of convenience, all sound-related data has been seperated into its
-own folder, 'sound'.
+Supply your own legally obtained ROM dumps. Accepted filenames and image
+identities are in `assets/manifest.json`. The importer checks their content
+before writing canonical copies below ignored `data/roms/`.
 
-And finally, data expressly used for the Sonic 3 Lock-on functionality is
-included in the 'Lockon S3' folder.
+```sh
+make init ROM_ROOT="path/to/your/dumps"
+make split
+make check-assets
+make verify-all
+```
 
-Please explore each folder to learn where everything is and how data is
-organized.
+The profile IDs are `s3-us`, `s3-eu`, `s3-jp`, `sk` and `s3k`. Use
+`make verify PROFILE=sk` for one image. All build outputs stay under `build/`.
+The regional S3 images differ at header byte 0x1f0; S3&K is the exact
+concatenation of S&K and S3 USA. Community complete builds and Knuckles in Sonic
+2 are excluded, as recorded in `config/revision_profiles.json`.
 
-## The 'Sonic3_Complete' Flag
+With inputs split and the pinned emulator available, run the current implemented
+checks in one invocation:
 
-Referenced throughout the Sonic & Knuckles disassembly is the 'Sonic3_Complete'
-flag. When it is set to 0, the disassembly will build a byte-perfect Sonic &
-Knuckles ROM, not using any specific Sonic 3 data, instead relying on an
-appended Sonic 3 ROM for that purpose. Setting it to 1, however, will change the
-assembly process, incorporating all necessary Sonic 3 data split from the
-original ROM to create a complete Sonic 3 & Knuckles ROM without any filler.
-This macro also enables certain minor changes to the code to better facilitate
-changes to the game. If your goal is to heavily modify Sonic 3 & Knuckles, then
-keeping 'Sonic3_Complete' set to 1 is the recommended choice.
+```sh
+make lint test check-assets verify-all check-lockon check-numeric-operands trace audit-private
+```
 
-## Building the Disassembly
+This is a preservation validation sequence, not the unfinished release gate. Run
+it serially; emulator scenarios must not overlap. `make test` works without ROM
+files and reports the private-input case as an explicit skip. `make` lists the
+public commands. Never commit `data/`, `build/`, ROM fragments or samples.
 
-The base directory contains two sets of build scripts - the Windows Batch files
-(*.bat), and the Lua scripts (*.lua). The Batch files are the simplest to use
-but will only work on Windows. The Lua scripts are cross platform (Windows, Mac,
-Linux, FreeBSD) but require Lua to be installed. The Batch files are ran by
-double-clicking them, while the Lua scripts are ran on the command line with
-'lua nameOfScript'.
+Read the [documentation index](docs/index.md), [open work](docs/unknowns.md),
+[contribution rules](CONTRIBUTING.md) and [provenance](docs/provenance.md).
+Editing belongs in Retrolarium; this repository contains no GUI editor.
 
-buildS3 - Builds a byte-perfect copy of the Sonic 3 ROM. buildSK - Builds a
-byte-perfect copy of the Sonic & Knuckles ROM. buildS3Complete - Builds a
-combined Sonic 3 & Knuckles ROM (using the 'Sonic3_Complete' flag detailed
-above). chkbitperfect - Builds both an S3 ROM and an S&K ROM, then verifies that
-they are byte-identical to the original ROMs.
+## Rights and original disclaimer
 
-The Lua scripts require Lua version 5.3. Earlier versions will cause errors
-about integer divisions ('//') and bit-shifts ('\<<', '>>') not being
-recognised.
+The upstream annotation has no granted license (`license_not_granted`). Game
+code and data remain the rights holder's property. This repository grants no
+license to them. See provenance for the pinned upstream source and attribution.
 
-## Editing with SonLVL
+The following original Sonic Retro disclaimer is retained verbatim:
 
-Inside the 'SonLVL INI Files' directory are project files for SonLVL. SonLVL can
-be found here: https://info.sonicretro.org/SonLVL
-
-## Editing with SonED2
-
-The disassembly also comes with a 'SonED Projects' folder, which contains
-prebuilt project files for use with SonEd2 v. 11.02.24, recently released and
-available at [Stealth's site](https://www.headcannon.com/hchc/SonED/).
-
-## The Disassembly's Completion
-
-Though this split disassembly is "complete" in that it splits all relevant data
-and is usable for editing, there are still many aspects of the disassembly that
-await completion. The naming scheme for various routines and data is
-inconsistent at best, and much of the code and unsplit data remains
-unidentified. Community work has been done to other disassemblies to alleviate
-the incomplete portions of those disassemblies and it is my expectation that
-similar efforts will be made on this one. Neither any of the contributors
-mentioned above nor I bear any direct responsibility for changes that may be
-made to the disassembly from this release forward unless otherwise stated.
-
-## How Sonic & Knuckles Works
-
-Sonic & Knuckles, and Sonic 3 for that matter, are obviously extensions of Sonic
-2's code, but are still very different in how they do things. Sonic & Knuckles
-overhauls many of the internal systems that Sonic 2 used for the sake of
-convenience, organization, and speed. This includes but is not limited to
-Moduled Kosinski decompression for realtime decompression of art data, changes
-to the object system in various ways, including major changes to the Sprite
-Status Table, usage of built-in routines to better handle relationships between
-different objects, such as those between parent and child objects, and a
-completely overhauled level drawing system that offloads much of the work to
-outside VBlank and, while being far more flexible and capable, requires a
-significantly higher level of skill and knowledge to use properly as opposed to
-how Sonic 2 did things. Furthermore, Sonic 3 & Knuckles is heavily event-driven,
-relying on very specific hardcoded instructions in various levels that must be
-taken into account when making any modifications, and require a knowledge of ASM
-coding to understand and change. Thus it is to be noted that great care must be
-taken in modifying Sonic 3 & Knuckles directly and that you MUST KNOW WHAT YOU
-ARE DOING to bear fruitful results. If you are not prepared for that type of
-task, then it's recommended that the disassembly and its data be used mostly for
-research purposes while work is done using the far more accesible Sonic 1 or
-Sonic 2 disassemblies as a base.
+> Any and all content presented in this repository is presented for
+> informational and educational purposes only. Commercial usage is expressly
+> prohibited. Sonic Retro claims no ownership of any code in these repositories.
+> You assume any and all responsibility for using this content responsibly.
+> Sonic Retro claims no responsibiliy or warranty.

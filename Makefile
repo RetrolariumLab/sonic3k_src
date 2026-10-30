@@ -1,4 +1,6 @@
 .DEFAULT_GOAL := help
+# Build and emulator stages share state and must execute serially.
+.NOTPARALLEL:
 PYTHON ?= python
 RLTOOL ?= rltool
 PROFILE ?= s3-us

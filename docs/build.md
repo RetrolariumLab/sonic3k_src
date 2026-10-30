@@ -35,10 +35,11 @@ it never deletes original inputs, extracted assets or the reconnaissance
 evidence.
 
 `make test` runs without ROM files; its optional private-input case explicitly
-skips when they are absent. `make audit-private` checks all reachable Git blobs
-and the current index against asset hashes and an explicit binary allowlist. The
-allowlist is currently empty. A passing build is not a release: symbolic
-pointer, runtime, documentation and 2.0 content gates must also pass.
+skips when they are absent. `make audit-private` checks every historical path of
+all reachable Git blobs and the current index against asset hashes, binary
+suffixes, private root paths and an explicit binary allowlist. The allowlist is
+currently empty. A passing build is not a release: symbolic pointer, runtime,
+documentation and 2.0 content gates must also pass.
 
 AS source uses `.s`; sample declarations use `.inc`. Retrolarium Kit's AS style
 scanner recognizes these suffixes. Entry and include paths are renamed
@@ -49,3 +50,9 @@ Markdown without changing source files. `make format` applies the same style and
 finishes with lint. Label-field declarations have explicit colons, and
 assignments use `equ`/`set`, so canonical indentation preserves their AS
 meaning. Comment banners use ASCII and avoid looking like macro definitions.
+
+The Makefile serializes its targets, including when a caller has parallel make
+flags. All emulator launches additionally wait for any already running MAME. Run
+`make check-lockon check-numeric-operands` after verifying assembly, and read
+[verification limits](verification.md) before interpreting a passing check as a
+release result.
