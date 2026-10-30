@@ -568,6 +568,12 @@
       "commits": ["82531d7389a6c4d2dad09fdb6c482c351281095b"]
     },
     {
+      "id": "change-0c0c07b5da0f",
+      "kind": "source_or_tooling",
+      "summary": "Give Knuckles traversal and boss transition explicit owners",
+      "commits": ["0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",

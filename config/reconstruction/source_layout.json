@@ -840,7 +840,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 91112,
+      "physical_lines": 87248,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "s3.s",
@@ -900,7 +900,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 168575,
+      "physical_lines": 163850,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -5335,6 +5335,296 @@
       ]
     },
     {
+      "path": "src/objects/effects/s3/elemental_shields.s",
+      "owner": "objects/effects/s3",
+      "responsibility": "Elemental shield states, sparks and shared shield animation and dynamic pattern-load catalogs.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 352,
+      "origin": {
+        "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
+        "path": "s3.s",
+        "first_line": 1299,
+        "last_line": 1647,
+        "sha256": "625f4e8d17d643753c539f62cb757e2eeb7c478d8dafa6d9573d25784e8569fd"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 98650,
+          "end": 101622
+        },
+        {
+          "profile": "s3-eu",
+          "start": 98650,
+          "end": 101622
+        },
+        {
+          "profile": "s3-jp",
+          "start": 98650,
+          "end": 101622
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2195802,
+          "end": 2198774
+        }
+      ]
+    },
+    {
+      "path": "src/objects/effects/s3/legacy_defense.s",
+      "owner": "objects/effects/s3",
+      "responsibility": "Preserved legacy shield, invincibility particles and their animation and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 256,
+      "origin": {
+        "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
+        "path": "s3.s",
+        "first_line": 514,
+        "last_line": 766,
+        "sha256": "0f0243dc9dbf0de1e0ed29ed1d87eac93c33345268bbce7d2ab0ef3ab16e47a8"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 95462,
+          "end": 96446
+        },
+        {
+          "profile": "s3-eu",
+          "start": 95462,
+          "end": 96446
+        },
+        {
+          "profile": "s3-jp",
+          "start": 95462,
+          "end": 96446
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2192614,
+          "end": 2193598
+        }
+      ]
+    },
+    {
+      "path": "src/objects/effects/s3/transient_player_effects.s",
+      "owner": "objects/effects/s3",
+      "responsibility": "Short-lived dash, splash and drowning particles, transformation stars and instant-shield attack display.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 535,
+      "origin": {
+        "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
+        "path": "s3.s",
+        "first_line": 767,
+        "last_line": 1298,
+        "sha256": "1341adace46be78e3e26264dcfcd75c82c3f337ae03a488fde4cd06022b53712"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 96446,
+          "end": 98650
+        },
+        {
+          "profile": "s3-eu",
+          "start": 96446,
+          "end": 98650
+        },
+        {
+          "profile": "s3-jp",
+          "start": 96446,
+          "end": 98650
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2193598,
+          "end": 2195802
+        }
+      ]
+    },
+    {
+      "path": "src/objects/effects/sk/elemental_shields.s",
+      "owner": "objects/effects/sk",
+      "responsibility": "Elemental shield states, sparks and shared shield animation and dynamic pattern-load catalogs.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 377,
+      "origin": {
+        "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
+        "path": "sonic3k.s",
+        "first_line": 1458,
+        "last_line": 1831,
+        "sha256": "1f963c423e06653b929b78d45d27b34b2f132106f69272be1d32e9de4d108850"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 103846,
+          "end": 106864
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 103846,
+          "end": 106864
+        }
+      ]
+    },
+    {
+      "path": "src/objects/effects/sk/legacy_defense.s",
+      "owner": "objects/effects/sk",
+      "responsibility": "Preserved legacy shield, invincibility particles and their animation and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 260,
+      "origin": {
+        "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
+        "path": "sonic3k.s",
+        "first_line": 527,
+        "last_line": 783,
+        "sha256": "7a8c3d221cb2d22458a94a0b97c2195454f83e6b089b8b65f9e3748c1a250571"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 100182,
+          "end": 101182
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 100182,
+          "end": 101182
+        }
+      ]
+    },
+    {
+      "path": "src/objects/effects/sk/super_player_effects.s",
+      "owner": "objects/effects/sk",
+      "responsibility": "Super Tails bird companions and hyper Sonic or Knuckles after-image trail objects.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 389,
+      "origin": {
+        "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
+        "path": "sonic3k.s",
+        "first_line": 1832,
+        "last_line": 2217,
+        "sha256": "90546b13efe4f625fbbcdcabe0123aebd3d73f0ff8d90eff72b661c058e0c9e8"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 106864,
+          "end": 107802
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 106864,
+          "end": 107802
+        }
+      ]
+    },
+    {
+      "path": "src/objects/effects/sk/transient_player_effects.s",
+      "owner": "objects/effects/sk",
+      "responsibility": "Short-lived dash, splash and drowning particles, transformation stars and instant-shield attack display.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 677,
+      "origin": {
+        "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
+        "path": "sonic3k.s",
+        "first_line": 784,
+        "last_line": 1457,
+        "sha256": "9570b3063b423264e709082ee15cb3104154aa220b990e884ef76337708d5a13"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 101182,
+          "end": 103846
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 101182,
+          "end": 103846
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/common/s3/air_supply.s",
+      "owner": "objects/players/common/s3",
+      "responsibility": "Player underwater air countdown, warning numbers, small bubbles and air timer restoration.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 423,
+      "origin": {
+        "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
+        "path": "s3.s",
+        "first_line": 94,
+        "last_line": 513,
+        "sha256": "cd3f8a20d62bda21f3e8603a5b7facc045aff9716b7f615fea912504e6ac2d23"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 93948,
+          "end": 95462
+        },
+        {
+          "profile": "s3-eu",
+          "start": 93948,
+          "end": 95462
+        },
+        {
+          "profile": "s3-jp",
+          "start": 93948,
+          "end": 95462
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2191100,
+          "end": 2192614
+        }
+      ]
+    },
+    {
       "path": "src/objects/players/common/s3/competition_animation.s",
       "owner": "objects/players/common/s3",
       "responsibility": "Shared Sonic and Knuckles competition animation and compact dynamic pattern loading.",
@@ -5511,6 +5801,36 @@
           "component": "s3-us",
           "start": 2173574,
           "end": 2174156
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/common/sk/air_supply.s",
+      "owner": "objects/players/common/sk",
+      "responsibility": "Player underwater air countdown, warning numbers, small bubbles and air timer restoration.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 426,
+      "origin": {
+        "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
+        "path": "sonic3k.s",
+        "first_line": 104,
+        "last_line": 526,
+        "sha256": "86444234333a4d12e7e8b76b8fc3cbeee961609154de208722c12d495b23f98b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 98660,
+          "end": 100182
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 98660,
+          "end": 100182
         }
       ]
     },
@@ -7675,6 +7995,46 @@
       ]
     },
     {
+      "path": "src/objects/rings/s3/ring_objects.s",
+      "owner": "objects/rings/s3",
+      "responsibility": "Dynamic ring objects, collection rewards, bouncing lost rings and attracted ring motion.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 387,
+      "origin": {
+        "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
+        "path": "s3.s",
+        "first_line": 1648,
+        "last_line": 2031,
+        "sha256": "15eccc7b76940b0a73582c5f152eb896e6c4b672a850d25b0bbbee28991a1cdc"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 101622,
+          "end": 102706
+        },
+        {
+          "profile": "s3-eu",
+          "start": 101622,
+          "end": 102706
+        },
+        {
+          "profile": "s3-jp",
+          "start": 101622,
+          "end": 102706
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2198774,
+          "end": 2199858
+        }
+      ]
+    },
+    {
       "path": "src/objects/rings/s3/ring_rendering.s",
       "owner": "objects/rings/s3",
       "responsibility": "Visible ring sprite construction and its private ring mapping table.",
@@ -7765,6 +8125,36 @@
       ]
     },
     {
+      "path": "src/objects/rings/sk/ring_objects.s",
+      "owner": "objects/rings/sk",
+      "responsibility": "Dynamic ring objects, collection rewards, bouncing lost rings and attracted ring motion.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 497,
+      "origin": {
+        "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
+        "path": "sonic3k.s",
+        "first_line": 2218,
+        "last_line": 2711,
+        "sha256": "2e3333760ef8eb4945f601778695ef6787b65acf5cdc9409492acfc88d785f5d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 107802,
+          "end": 109166
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 107802,
+          "end": 109166
+        }
+      ]
+    },
+    {
       "path": "src/objects/rings/sk/ring_rendering.s",
       "owner": "objects/rings/sk",
       "responsibility": "Visible ring sprite construction and its private ring mapping table.",
@@ -7826,6 +8216,226 @@
           "component": "sk",
           "start": 59562,
           "end": 60294
+        }
+      ]
+    },
+    {
+      "path": "src/objects/runtime/s3/execution_and_animation.s",
+      "owner": "objects/runtime/s3",
+      "responsibility": "Sprite table initialization, object execution, movement, deletion, draw queuing and animation interfaces.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 345,
+      "origin": {
+        "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
+        "path": "s3.s",
+        "first_line": 2032,
+        "last_line": 2373,
+        "sha256": "dc458d85fed4d8d8a5ac58e3d25bd3f86e2a0595ff5153c77721ff1384845181"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 102706,
+          "end": 103310
+        },
+        {
+          "profile": "s3-eu",
+          "start": 102706,
+          "end": 103310
+        },
+        {
+          "profile": "s3-jp",
+          "start": 102706,
+          "end": 103310
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2199858,
+          "end": 2200462
+        }
+      ]
+    },
+    {
+      "path": "src/objects/runtime/s3/sprite_spawning.s",
+      "owner": "objects/runtime/s3",
+      "responsibility": "Placed-object streaming, free-slot allocation and level object and ring memory reset.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 534,
+      "origin": {
+        "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
+        "path": "s3.s",
+        "first_line": 3437,
+        "last_line": 3967,
+        "sha256": "4baa767f45d573b727951f35bc0ef63f5112d6da30c617b055e33958226eb48f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 105714,
+          "end": 106894
+        },
+        {
+          "profile": "s3-eu",
+          "start": 105714,
+          "end": 106894
+        },
+        {
+          "profile": "s3-jp",
+          "start": 105714,
+          "end": 106894
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2202866,
+          "end": 2204046
+        }
+      ]
+    },
+    {
+      "path": "src/objects/runtime/s3/visibility_and_culling.s",
+      "owner": "objects/runtime/s3",
+      "responsibility": "Sprite visibility tests, out-of-range deletion and touch-aware culling wrappers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 131,
+      "origin": {
+        "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
+        "path": "s3.s",
+        "first_line": 3309,
+        "last_line": 3436,
+        "sha256": "dbe1f739286e438f95401fe7f6172f9ee0b5b2d23da239c5ea271050f74c4b19"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 105450,
+          "end": 105714
+        },
+        {
+          "profile": "s3-eu",
+          "start": 105450,
+          "end": 105714
+        },
+        {
+          "profile": "s3-jp",
+          "start": 105450,
+          "end": 105714
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2202602,
+          "end": 2202866
+        }
+      ]
+    },
+    {
+      "path": "src/objects/runtime/sk/execution_and_animation.s",
+      "owner": "objects/runtime/sk",
+      "responsibility": "Sprite table initialization, object execution, movement, deletion, draw queuing and animation interfaces.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 395,
+      "origin": {
+        "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
+        "path": "sonic3k.s",
+        "first_line": 2712,
+        "last_line": 3103,
+        "sha256": "ae112a1f0a242b9191b039384735e1ea5d1ca5467132c68a71b9b655f0956bcf"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 109166,
+          "end": 109856
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 109166,
+          "end": 109856
+        }
+      ]
+    },
+    {
+      "path": "src/objects/runtime/sk/sprite_spawning.s",
+      "owner": "objects/runtime/sk",
+      "responsibility": "Placed-object streaming, free-slot allocation and level object and ring memory reset.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 670,
+      "origin": {
+        "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
+        "path": "sonic3k.s",
+        "first_line": 4173,
+        "last_line": 4839,
+        "sha256": "4211f8845d8437cdeb0e3bc6970292c567ade71ad727a41d3b30fb0e5beb32be"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 112272,
+          "end": 113760
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 112272,
+          "end": 113760
+        }
+      ]
+    },
+    {
+      "path": "src/objects/runtime/sk/visibility_and_culling.s",
+      "owner": "objects/runtime/sk",
+      "responsibility": "Sprite visibility tests, out-of-range deletion and touch-aware culling wrappers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 131,
+      "origin": {
+        "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
+        "path": "sonic3k.s",
+        "first_line": 4045,
+        "last_line": 4172,
+        "sha256": "b5c3a894183b1ba80fcce9b161e91b486020dc8dc2a59c8f8d7d6a583d91b1f3"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 112008,
+          "end": 112272
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 112008,
+          "end": 112272
         }
       ]
     },
@@ -29526,6 +30136,46 @@
       ]
     },
     {
+      "path": "src/rendering/s3/competition_sprite_renderer.s",
+      "owner": "rendering/s3",
+      "responsibility": "Competition sprite display and its private piece-coordinate lookup tables.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 372,
+      "origin": {
+        "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
+        "path": "s3.s",
+        "first_line": 2940,
+        "last_line": 3308,
+        "sha256": "f0913bd25cc287ecc178116afe5c53667a82faf8850afb163ec82fb5e233fa05"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 104534,
+          "end": 105450
+        },
+        {
+          "profile": "s3-eu",
+          "start": 104534,
+          "end": 105450
+        },
+        {
+          "profile": "s3-jp",
+          "start": 104534,
+          "end": 105450
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2201686,
+          "end": 2202602
+        }
+      ]
+    },
+    {
       "path": "src/rendering/s3/hud.s",
       "owner": "rendering/s3",
       "responsibility": "One and two player HUD drawing, score, rings, time, lives and numeric glyph output.",
@@ -29651,6 +30301,46 @@
       ]
     },
     {
+      "path": "src/rendering/s3/normal_sprite_renderer.s",
+      "owner": "rendering/s3",
+      "responsibility": "Prioritized normal sprite display, mapping-piece expansion and orientation-specific rendering helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 569,
+      "origin": {
+        "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
+        "path": "s3.s",
+        "first_line": 2374,
+        "last_line": 2939,
+        "sha256": "54ed9e026c6157eaea034f239820b30aa0d548e5577e734a5b5124a469b0e97f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 103310,
+          "end": 104534
+        },
+        {
+          "profile": "s3-eu",
+          "start": 103310,
+          "end": 104534
+        },
+        {
+          "profile": "s3-jp",
+          "start": 103310,
+          "end": 104534
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2200462,
+          "end": 2201686
+        }
+      ]
+    },
+    {
       "path": "src/rendering/s3/vram_dma.s",
       "owner": "rendering/s3",
       "responsibility": "Plane-map transfer and DMA queue insertion and dispatch.",
@@ -29766,6 +30456,36 @@
       "range_kind": "canonical-normal-build"
     },
     {
+      "path": "src/rendering/sk/competition_sprite_renderer.s",
+      "owner": "rendering/sk",
+      "responsibility": "Competition sprite display and its private piece-coordinate lookup tables.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 372,
+      "origin": {
+        "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
+        "path": "sonic3k.s",
+        "first_line": 3676,
+        "last_line": 4044,
+        "sha256": "2c2fea68dbcb9c3c1902e6c6b543f55007390500e16f0193b91c2c56684960ed"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 111092,
+          "end": 112008
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 111092,
+          "end": 112008
+        }
+      ]
+    },
+    {
       "path": "src/rendering/sk/hud.s",
       "owner": "rendering/sk",
       "responsibility": "One and two player HUD drawing, score, rings, time, lives and numeric glyph output.",
@@ -29857,6 +30577,36 @@
           "component": "sk",
           "start": 49158,
           "end": 49420
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/sk/normal_sprite_renderer.s",
+      "owner": "rendering/sk",
+      "responsibility": "Prioritized normal sprite display, mapping-piece expansion and orientation-specific rendering helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 575,
+      "origin": {
+        "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
+        "path": "sonic3k.s",
+        "first_line": 3104,
+        "last_line": 3675,
+        "sha256": "33c67eee9ac9dd12594969a2d73a820a3130596d4229e4b867f2b7815c93ca01"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 109856,
+          "end": 111092
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 109856,
+          "end": 111092
         }
       ]
     },
