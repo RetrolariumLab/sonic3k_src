@@ -5,6 +5,20 @@
     "Lockon S3/Screen Events.s",
     "s3.s",
     "sonic3k.s",
+    "src/game/level/s3/collision_and_oscillation.s",
+    "src/game/level/s3/demo_input.s",
+    "src/game/level/s3/environment_loading.s",
+    "src/game/level/s3/environment_state.s",
+    "src/game/level/s3/mode_and_attract.s",
+    "src/game/level/s3/player_spawn.s",
+    "src/game/level/s3/water_tunnel_motion.s",
+    "src/game/level/sk/collision_and_oscillation.s",
+    "src/game/level/sk/demo_input.s",
+    "src/game/level/sk/environment_loading.s",
+    "src/game/level/sk/environment_state.s",
+    "src/game/level/sk/mode_and_attract.s",
+    "src/game/level/sk/player_spawn.s",
+    "src/game/level/sk/water_tunnel_motion.s",
     "src/game/modes/s3/pause.s",
     "src/game/modes/s3/title_screen.s",
     "src/game/modes/s3/title_widgets.s",
@@ -61,7 +75,14 @@
         "src/rendering/palettes/s3/transformation_cycles.s",
         "src/rendering/palettes/s3/fades_and_loading.s",
         "src/game/modes/s3/title_screen.s",
-        "src/game/modes/s3/title_widgets.s"
+        "src/game/modes/s3/title_widgets.s",
+        "src/game/level/s3/mode_and_attract.s",
+        "src/game/level/s3/player_spawn.s",
+        "src/game/level/s3/environment_state.s",
+        "src/game/level/s3/water_tunnel_motion.s",
+        "src/game/level/s3/demo_input.s",
+        "src/game/level/s3/collision_and_oscillation.s",
+        "src/game/level/s3/environment_loading.s"
       ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/s3/bootstrap.s"
@@ -84,7 +105,14 @@
         "src/rendering/palettes/s3/transformation_cycles.s",
         "src/rendering/palettes/s3/fades_and_loading.s",
         "src/game/modes/s3/title_screen.s",
-        "src/game/modes/s3/title_widgets.s"
+        "src/game/modes/s3/title_widgets.s",
+        "src/game/level/s3/mode_and_attract.s",
+        "src/game/level/s3/player_spawn.s",
+        "src/game/level/s3/environment_state.s",
+        "src/game/level/s3/water_tunnel_motion.s",
+        "src/game/level/s3/demo_input.s",
+        "src/game/level/s3/collision_and_oscillation.s",
+        "src/game/level/s3/environment_loading.s"
       ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/s3/bootstrap.s"
@@ -107,7 +135,14 @@
         "src/rendering/palettes/s3/transformation_cycles.s",
         "src/rendering/palettes/s3/fades_and_loading.s",
         "src/game/modes/s3/title_screen.s",
-        "src/game/modes/s3/title_widgets.s"
+        "src/game/modes/s3/title_widgets.s",
+        "src/game/level/s3/mode_and_attract.s",
+        "src/game/level/s3/player_spawn.s",
+        "src/game/level/s3/environment_state.s",
+        "src/game/level/s3/water_tunnel_motion.s",
+        "src/game/level/s3/demo_input.s",
+        "src/game/level/s3/collision_and_oscillation.s",
+        "src/game/level/s3/environment_loading.s"
       ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/s3/bootstrap.s"
@@ -135,7 +170,14 @@
         "src/game/modes/sk/standalone_title_screen.s",
         "src/game/modes/sk/standalone_title_characters.s",
         "src/game/modes/sk/standalone_title_badges.s",
-        "src/game/modes/sk/standalone_title_display.s"
+        "src/game/modes/sk/standalone_title_display.s",
+        "src/game/level/sk/mode_and_attract.s",
+        "src/game/level/sk/player_spawn.s",
+        "src/game/level/sk/environment_state.s",
+        "src/game/level/sk/water_tunnel_motion.s",
+        "src/game/level/sk/demo_input.s",
+        "src/game/level/sk/collision_and_oscillation.s",
+        "src/game/level/sk/environment_loading.s"
       ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/sk/bootstrap.s"

@@ -840,7 +840,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 112366,
+      "physical_lines": 110402,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "s3.s",
@@ -900,7 +900,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 193800,
+      "physical_lines": 191458,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -1808,6 +1808,601 @@
       ],
       "applicability": "emitted",
       "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/game/level/s3/collision_and_oscillation.s",
+      "owner": "game/level/s3",
+      "responsibility": "Level collision data initialization, deterministic object oscillators and ring animation updates.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 146,
+      "origin": {
+        "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
+        "path": "s3.s",
+        "first_line": 1618,
+        "last_line": 1760,
+        "sha256": "cd339956952f44ebb935e2e14ca79a8a8c7e813a93eea0e4cbb4e460b3d7d1a0"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 22728,
+          "end": 23072
+        },
+        {
+          "profile": "s3-eu",
+          "start": 22728,
+          "end": 23072
+        },
+        {
+          "profile": "s3-jp",
+          "start": 22728,
+          "end": 23072
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2119880,
+          "end": 2120224
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/s3/demo_input.s",
+      "owner": "game/level/s3",
+      "responsibility": "Attract recording selection and recorded player-input playback.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 52,
+      "origin": {
+        "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
+        "path": "s3.s",
+        "first_line": 1569,
+        "last_line": 1617,
+        "sha256": "160c885c2f4b94412d336882dcb8d5624e270ce3a701c58e62e37c4918b7557c"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 22602,
+          "end": 22728
+        },
+        {
+          "profile": "s3-eu",
+          "start": 22602,
+          "end": 22728
+        },
+        {
+          "profile": "s3-jp",
+          "start": 22602,
+          "end": 22728
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2119754,
+          "end": 2119880
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/s3/environment_loading.s",
+      "owner": "game/level/s3",
+      "responsibility": "Per-level descriptor loading, water applicability and underwater palette selection.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 234,
+      "origin": {
+        "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
+        "path": "s3.s",
+        "first_line": 1761,
+        "last_line": 1992,
+        "sha256": "b6b66e825cc2b42d5fcb7900817ba3c9eacc5f467d5c652f50fb0bd01a0d59c2"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 23072,
+          "end": 24902
+        },
+        {
+          "profile": "s3-eu",
+          "start": 23072,
+          "end": 24902
+        },
+        {
+          "profile": "s3-jp",
+          "start": 23072,
+          "end": 24902
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2120224,
+          "end": 2122054
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/s3/environment_state.s",
+      "owner": "game/level/s3",
+      "responsibility": "Competition environment palette, collision response reset, water surface height and dynamic water-level state.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 337,
+      "origin": {
+        "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
+        "path": "s3.s",
+        "first_line": 757,
+        "last_line": 1090,
+        "sha256": "90d1b796564d2f8eb437c6e608119924643fd5524bb751187eca9ed9c305a495"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 20626,
+          "end": 21402
+        },
+        {
+          "profile": "s3-eu",
+          "start": 20626,
+          "end": 21402
+        },
+        {
+          "profile": "s3-jp",
+          "start": 20626,
+          "end": 21402
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2117778,
+          "end": 2118554
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/s3/mode_and_attract.s",
+      "owner": "game/level/s3",
+      "responsibility": "Level initialization, gameplay loop and product-specific attract/demo mode transitions.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 480,
+      "origin": {
+        "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
+        "path": "s3.s",
+        "first_line": 21,
+        "last_line": 497,
+        "sha256": "f65223372b75a6b4d4ed30ed16f54fb19f981c6ca037e8711484f106d0e66a03"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 18096,
+          "end": 19864
+        },
+        {
+          "profile": "s3-eu",
+          "start": 18096,
+          "end": 19864
+        },
+        {
+          "profile": "s3-jp",
+          "start": 18096,
+          "end": 19864
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2115248,
+          "end": 2117016
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/s3/player_spawn.s",
+      "owner": "game/level/s3",
+      "responsibility": "Active-character loading, level-owned HUD and power-up creation, and player spawn setup.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 262,
+      "origin": {
+        "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
+        "path": "s3.s",
+        "first_line": 498,
+        "last_line": 756,
+        "sha256": "c0566c6fed1269ca08cdfdb2231f407e1137f0a72cf2f129740e755863491319"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 19864,
+          "end": 20626
+        },
+        {
+          "profile": "s3-eu",
+          "start": 19864,
+          "end": 20626
+        },
+        {
+          "profile": "s3-jp",
+          "start": 19864,
+          "end": 20626
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2117016,
+          "end": 2117778
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/s3/water_interrupt_tables.s",
+      "owner": "game/level/s3",
+      "responsibility": "Water motion lookup values and per-zone palette transfer sequences for horizontal interrupts.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 158,
+      "origin": {
+        "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
+        "path": "s3.s",
+        "first_line": 1413,
+        "last_line": 1568,
+        "sha256": "7acd171b3438dfe93151ec2d14479f66ce1ac33f0ff12481e162c3122027510b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 22330,
+          "end": 22602
+        },
+        {
+          "profile": "s3-eu",
+          "start": 22330,
+          "end": 22602
+        },
+        {
+          "profile": "s3-jp",
+          "start": 22330,
+          "end": 22602
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2119482,
+          "end": 2119754
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/s3/water_tunnel_motion.s",
+      "owner": "game/level/s3",
+      "responsibility": "Hydrocity water tunnel detection, movement helpers and water-region player response.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 325,
+      "origin": {
+        "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
+        "path": "s3.s",
+        "first_line": 1091,
+        "last_line": 1412,
+        "sha256": "b1d66793948baadef9b961ef05b3d17e677e28b0fcc6cb6d588572b4743e4da0"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 21402,
+          "end": 22330
+        },
+        {
+          "profile": "s3-eu",
+          "start": 21402,
+          "end": 22330
+        },
+        {
+          "profile": "s3-jp",
+          "start": 21402,
+          "end": 22330
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2118554,
+          "end": 2119482
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/sk/collision_and_oscillation.s",
+      "owner": "game/level/sk",
+      "responsibility": "Level collision data initialization, deterministic object oscillators and ring animation updates.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 155,
+      "origin": {
+        "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
+        "path": "sonic3k.s",
+        "first_line": 2035,
+        "last_line": 2186,
+        "sha256": "f4d29b6c4ab605741fea127cfea2f0533a60db51c6109f49d6465e8a904040f0"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 30374,
+          "end": 30738
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 30374,
+          "end": 30738
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/sk/demo_input.s",
+      "owner": "game/level/sk",
+      "responsibility": "Attract recording selection and recorded player-input playback.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 83,
+      "origin": {
+        "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
+        "path": "sonic3k.s",
+        "first_line": 1955,
+        "last_line": 2034,
+        "sha256": "9b1b4143b452ae52f081e83b721bd1a0dcae4221a5daaf1b870acff396a83b4b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 30162,
+          "end": 30374
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 30162,
+          "end": 30374
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/sk/environment_loading.s",
+      "owner": "game/level/sk",
+      "responsibility": "Per-level descriptor loading, water applicability and underwater palette selection.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 191,
+      "origin": {
+        "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
+        "path": "sonic3k.s",
+        "first_line": 2187,
+        "last_line": 2375,
+        "sha256": "75805e63329fa41f72364c9a4024a5ad515c24fbaea0b92d1812bc2cd6c538a5"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 30738,
+          "end": 31348
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 30738,
+          "end": 31348
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/sk/environment_state.s",
+      "owner": "game/level/sk",
+      "responsibility": "Competition environment palette, collision response reset, water surface height and dynamic water-level state.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 354,
+      "origin": {
+        "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
+        "path": "sonic3k.s",
+        "first_line": 970,
+        "last_line": 1320,
+        "sha256": "ba5f506508f1cfa9ddf80fe1312dca32d0924095fd27ecc82dad0677cfd07ade"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 27660,
+          "end": 28490
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 27660,
+          "end": 28490
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/sk/mode_and_attract.s",
+      "owner": "game/level/sk",
+      "responsibility": "Level initialization, gameplay loop and product-specific attract/demo mode transitions.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 580,
+      "origin": {
+        "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
+        "path": "sonic3k.s",
+        "first_line": 26,
+        "last_line": 602,
+        "sha256": "fa58a937efe2864a3f74b007fe101a4bb36dcb925f87d00d66374b5861e275a8"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 24498,
+          "end": 26550
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 24498,
+          "end": 26550
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/sk/player_spawn.s",
+      "owner": "game/level/sk",
+      "responsibility": "Active-character loading, level-owned HUD and power-up creation, and player spawn setup.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 370,
+      "origin": {
+        "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
+        "path": "sonic3k.s",
+        "first_line": 603,
+        "last_line": 969,
+        "sha256": "cccab9bcd1a72e170dced3039b8bbe14dc2f1a2d6ac422d2f276590d8ce56a7f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 26550,
+          "end": 27660
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 26550,
+          "end": 27660
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/sk/water_interrupt_tables.s",
+      "owner": "game/level/sk",
+      "responsibility": "Water motion lookup values and per-zone palette transfer sequences for horizontal interrupts.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 164,
+      "origin": {
+        "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
+        "path": "sonic3k.s",
+        "first_line": 1793,
+        "last_line": 1954,
+        "sha256": "11860f7660a04627548146f38b9c7ec6e6ca0976501bb5efcd9fccec6c4a9b3d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 29838,
+          "end": 30162
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 29838,
+          "end": 30162
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/sk/water_tunnel_motion.s",
+      "owner": "game/level/sk",
+      "responsibility": "Hydrocity water tunnel detection, movement helpers and water-region player response.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 475,
+      "origin": {
+        "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
+        "path": "sonic3k.s",
+        "first_line": 1321,
+        "last_line": 1792,
+        "sha256": "c65611fd796f6812f4962a81b4f9962226260c9f56f9a772c3211dce5006ad13"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 28490,
+          "end": 29838
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 28490,
+          "end": 29838
+        }
+      ]
     },
     {
       "path": "src/game/modes/s3/pause.s",

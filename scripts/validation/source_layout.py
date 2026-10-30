@@ -8,7 +8,9 @@ from scripts.build.project import ROOT, atomic, image_records, load, profiles, s
 from scripts.build.relocation import source_names
 from scripts.validation.numeric_operands import code_part
 
-DATA_OPS = frozenset(("dc.b", "dc.w", "dc.l", "even", "dbglistobj", "palptr", "macro", "endm", "equ"))
+DATA_OPS = frozenset(
+    ("dc.b", "dc.w", "dc.l", "even", "dbglistobj", "palptr", "watertransheader", "macro", "endm", "equ")
+)
 
 
 def check_ledger(text, source_includes=(), binary_includes=()):
