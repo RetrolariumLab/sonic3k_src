@@ -556,6 +556,12 @@
       "commits": ["936341bdc39cf12eefb781658c9e2fd6a1b73b4d"]
     },
     {
+      "id": "change-becb5f8b9c06",
+      "kind": "source_or_tooling",
+      "summary": "Give Sonic physics and player state explicit subsystem owners",
+      "commits": ["becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",

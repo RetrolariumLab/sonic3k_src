@@ -18,6 +18,10 @@ level-owned tables, `Process_Sprites` updates object state, and `Render_Sprites`
 produces the sprite display. These names occur independently in both engines;
 similar names do not prove identical implementations.
 
+Tails retains dedicated slope routines in S3. Its S&K mode dispatch calls the
+existing player-common slope routines instead. Source ownership preserves this
+product distinction alongside the separate flight and carrying implementations.
+
 ## Graphics and level content
 
 `src/` places common UI, player, object, zone and debugging data under their

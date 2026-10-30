@@ -840,7 +840,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 95044,
+      "physical_lines": 91215,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "s3.s",
@@ -900,7 +900,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 175635,
+      "physical_lines": 171572,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -6235,6 +6235,211 @@
       ]
     },
     {
+      "path": "src/objects/players/tails/s3/ai_scripted_sequences.s",
+      "owner": "objects/players/tails/s3",
+      "responsibility": "Follower reset and interaction helpers, idle spindash and level-scripted flight or carrying sequences.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 418,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "s3.s",
+        "first_line": 749,
+        "last_line": 1164,
+        "sha256": "df5f9cb35298dcc53208196552a028533ddaed64f631e251d15f40a70188d7bc"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 84824,
+          "end": 86080
+        },
+        {
+          "profile": "s3-eu",
+          "start": 84824,
+          "end": 86080
+        },
+        {
+          "profile": "s3-jp",
+          "start": 84824,
+          "end": 86080
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2181976,
+          "end": 2183232
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/s3/ai_tracking.s",
+      "owner": "objects/players/tails/s3",
+      "responsibility": "Follower control dispatch, stage-specific initialization, flying catch-up and normal companion navigation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 404,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "s3.s",
+        "first_line": 348,
+        "last_line": 748,
+        "sha256": "1b7a84df51bf12a22ee7ebbcf2852284d19772a9a8c879a54e43c4963edd1970"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 83678,
+          "end": 84824
+        },
+        {
+          "profile": "s3-eu",
+          "start": 83678,
+          "end": 84824
+        },
+        {
+          "profile": "s3-jp",
+          "start": 83678,
+          "end": 84824
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2180830,
+          "end": 2181976
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/s3/animation_and_patterns.s",
+      "owner": "objects/players/tails/s3",
+      "responsibility": "Normal Tails and tail animation sequences with dynamic pattern loading.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 311,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "s3.s",
+        "first_line": 3105,
+        "last_line": 3413,
+        "sha256": "cccbb6e3d381d97ccd4e50733f6dc7cc4f29461ca8eb93322292ee21c7ffcb10"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 90986,
+          "end": 92076
+        },
+        {
+          "profile": "s3-eu",
+          "start": 90986,
+          "end": 92076
+        },
+        {
+          "profile": "s3-jp",
+          "start": 90986,
+          "end": 92076
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2188138,
+          "end": 2189228
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/s3/carrying.s",
+      "owner": "objects/players/tails/s3",
+      "responsibility": "Sonic carrying attachment, release input, relative position checks and carry-coordinate synchronization.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 175,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "s3.s",
+        "first_line": 1165,
+        "last_line": 1337,
+        "sha256": "5099bac958d9e615dfbf853188e9d312d08f3f999311aacfbe4b45406b34544a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 86080,
+          "end": 86660
+        },
+        {
+          "profile": "s3-eu",
+          "start": 86080,
+          "end": 86660
+        },
+        {
+          "profile": "s3-jp",
+          "start": 86080,
+          "end": 86660
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2183232,
+          "end": 2183812
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/s3/competition_and_tail_display.s",
+      "owner": "objects/players/tails/s3",
+      "responsibility": "Competition Tails animation and pattern loading plus normal and competition tail object rendering.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 510,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "s3.s",
+        "first_line": 3414,
+        "last_line": 3921,
+        "sha256": "1bb96c415e6f5d044889416bc63945a6357ed04200fffc8b695d2ff399e50b3d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 92076,
+          "end": 93584
+        },
+        {
+          "profile": "s3-eu",
+          "start": 92076,
+          "end": 93584
+        },
+        {
+          "profile": "s3-jp",
+          "start": 92076,
+          "end": 93584
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2189228,
+          "end": 2190736
+        }
+      ]
+    },
+    {
       "path": "src/objects/players/tails/s3/competition_player.s",
       "owner": "objects/players/tails/s3",
       "responsibility": "Competition Tails object dispatch, active control, flying and two-player movement helpers.",
@@ -6275,6 +6480,561 @@
       ]
     },
     {
+      "path": "src/objects/players/tails/s3/damage_and_respawn.s",
+      "owner": "objects/players/tails/s3",
+      "responsibility": "Tails hurt, death, restart and recovery animation dispatch.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 138,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "s3.s",
+        "first_line": 2970,
+        "last_line": 3104,
+        "sha256": "a882a16162f69efd4596eda90ba24a8ae9a9e0ca5b8de11a24e4e690476c0242"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 90634,
+          "end": 90986
+        },
+        {
+          "profile": "s3-eu",
+          "start": 90634,
+          "end": 90986
+        },
+        {
+          "profile": "s3-jp",
+          "start": 90634,
+          "end": 90986
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2187786,
+          "end": 2188138
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/s3/environment_and_modes.s",
+      "owner": "objects/players/tails/s3",
+      "responsibility": "Tails water transitions and ground, air, rolling, jumping, flying and swimming mode dispatch.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 149,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "s3.s",
+        "first_line": 1338,
+        "last_line": 1483,
+        "sha256": "6fdad7e73b9bdbd70104f4929f2d1bdce1a3a300360625457d1f0132b7767b44"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 86660,
+          "end": 87098
+        },
+        {
+          "profile": "s3-eu",
+          "start": 86660,
+          "end": 87098
+        },
+        {
+          "profile": "s3-jp",
+          "start": 86660,
+          "end": 87098
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2183812,
+          "end": 2184250
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/s3/flight_and_swim.s",
+      "owner": "objects/players/tails/s3",
+      "responsibility": "Tails flight and swimming motion, exhaustion state and flight animation selection.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 190,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "s3.s",
+        "first_line": 1484,
+        "last_line": 1670,
+        "sha256": "068b8cf5cd5d0bff4c6fd0368fd0fadb4343b5d0b285accb9ec336a60d0829ab"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 87098,
+          "end": 87536
+        },
+        {
+          "profile": "s3-eu",
+          "start": 87098,
+          "end": 87536
+        },
+        {
+          "profile": "s3-jp",
+          "start": 87098,
+          "end": 87536
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2184250,
+          "end": 2184688
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/s3/ground_movement.s",
+      "owner": "objects/players/tails/s3",
+      "responsibility": "Tails ground input acceleration, balance, braking and horizontal movement helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 328,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "s3.s",
+        "first_line": 1671,
+        "last_line": 1995,
+        "sha256": "e6aa510a191eab002faf4caac0abdeb05307a166ab19b533bba5550307e29f78"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 87536,
+          "end": 88312
+        },
+        {
+          "profile": "s3-eu",
+          "start": 87536,
+          "end": 88312
+        },
+        {
+          "profile": "s3-jp",
+          "start": 87536,
+          "end": 88312
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2184688,
+          "end": 2185464
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/s3/jump_actions.s",
+      "owner": "objects/players/tails/s3",
+      "responsibility": "Tails screen bounds, rolling initiation, jump launch and jump height control.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 213,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "s3.s",
+        "first_line": 2212,
+        "last_line": 2421,
+        "sha256": "381638a9671c2fa0cd4bb449ec30af1031178f9f07ac87e82be79d60c8851467"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 88758,
+          "end": 89308
+        },
+        {
+          "profile": "s3-eu",
+          "start": 88758,
+          "end": 89308
+        },
+        {
+          "profile": "s3-jp",
+          "start": 88758,
+          "end": 89308
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2185910,
+          "end": 2186460
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/s3/lifecycle.s",
+      "owner": "objects/players/tails/s3",
+      "responsibility": "Tails object dispatch, initialization, active player control, timed powers and normal display state.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 272,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "s3.s",
+        "first_line": 79,
+        "last_line": 347,
+        "sha256": "f48504f1bc3b47529ef7c0e7e6cd6b1104388dcc3a6aff30ea4db3dda0301727"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 82866,
+          "end": 83678
+        },
+        {
+          "profile": "s3-eu",
+          "start": 82866,
+          "end": 83678
+        },
+        {
+          "profile": "s3-jp",
+          "start": 82866,
+          "end": 83678
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2180018,
+          "end": 2180830
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/s3/rolling_and_air_steering.s",
+      "owner": "objects/players/tails/s3",
+      "responsibility": "Tails rolling speed control and airborne input acceleration.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 219,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "s3.s",
+        "first_line": 1996,
+        "last_line": 2211,
+        "sha256": "d5eba6dedf24d8334c0142c4f275a3b9f30906012c08d529b6b922e994ea5f98"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 88312,
+          "end": 88758
+        },
+        {
+          "profile": "s3-eu",
+          "start": 88312,
+          "end": 88758
+        },
+        {
+          "profile": "s3-jp",
+          "start": 88312,
+          "end": 88758
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2185464,
+          "end": 2185910
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/s3/spindash_and_slopes.s",
+      "owner": "objects/players/tails/s3",
+      "responsibility": "Tails spindash charge, slope resistance, rolling repulsion, slope detachment and airborne angle control.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 295,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "s3.s",
+        "first_line": 2422,
+        "last_line": 2713,
+        "sha256": "cba501a162c7d91bb1346f1923ba24519fed62026a0766f6e0ebf17429ecc47d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 89308,
+          "end": 89976
+        },
+        {
+          "profile": "s3-eu",
+          "start": 89308,
+          "end": 89976
+        },
+        {
+          "profile": "s3-jp",
+          "start": 89308,
+          "end": 89976
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2186460,
+          "end": 2187128
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/s3/terrain_landing.s",
+      "owner": "objects/players/tails/s3",
+      "responsibility": "Tails terrain collision, floor attachment and landing state restoration.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 259,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "s3.s",
+        "first_line": 2714,
+        "last_line": 2969,
+        "sha256": "ce005e503052657816e0540fb788355f80f49dbcc722d2bcd51fe8c297d62055"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 89976,
+          "end": 90634
+        },
+        {
+          "profile": "s3-eu",
+          "start": 89976,
+          "end": 90634
+        },
+        {
+          "profile": "s3-jp",
+          "start": 89976,
+          "end": 90634
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2187128,
+          "end": 2187786
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/sk/ai_scripted_sequences.s",
+      "owner": "objects/players/tails/sk",
+      "responsibility": "Follower reset and interaction helpers, idle spindash and level-scripted flight or carrying sequences.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 424,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "sonic3k.s",
+        "first_line": 819,
+        "last_line": 1240,
+        "sha256": "7a1e73e18ec1ba7fb8b3d748181fc6ed84e70b3bda336920301323c9a7000427"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 81610,
+          "end": 82874
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 81610,
+          "end": 82874
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/sk/ai_tracking.s",
+      "owner": "objects/players/tails/sk",
+      "responsibility": "Follower control dispatch, stage-specific initialization, flying catch-up and normal companion navigation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 448,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "sonic3k.s",
+        "first_line": 374,
+        "last_line": 818,
+        "sha256": "74c65f18eed7d8877dd96b7cdf48ae6d9a22dfcc38c4f253d2e6d094b8e8f1ba"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 80332,
+          "end": 81610
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 80332,
+          "end": 81610
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/sk/animation_and_patterns.s",
+      "owner": "objects/players/tails/sk",
+      "responsibility": "Normal Tails and tail animation sequences with dynamic pattern loading.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 322,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "sonic3k.s",
+        "first_line": 3317,
+        "last_line": 3636,
+        "sha256": "19384e3ba97d5df4894ac16ce975dfea808b2f07112032cd89673916adcbe8bb"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 88162,
+          "end": 89296
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 88162,
+          "end": 89296
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/sk/carrying.s",
+      "owner": "objects/players/tails/sk",
+      "responsibility": "Sonic carrying attachment, release input, relative position checks and carry-coordinate synchronization.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 196,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "sonic3k.s",
+        "first_line": 1241,
+        "last_line": 1434,
+        "sha256": "fbb11efadf82ec9012279979e9a2cbc9bf37b529d6fe5d4ce7074e738d566ca9"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 82874,
+          "end": 83506
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 82874,
+          "end": 83506
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/sk/competition_and_tail_display.s",
+      "owner": "objects/players/tails/sk",
+      "responsibility": "Competition Tails animation and pattern loading plus normal and competition tail object rendering.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 522,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "sonic3k.s",
+        "first_line": 3637,
+        "last_line": 4156,
+        "sha256": "25f911fc01aa6b973da846c7b3425d9349ad45562a35321fe4c37dc57f3f0bfb"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 89296,
+          "end": 90840
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 89296,
+          "end": 90840
+        }
+      ]
+    },
+    {
       "path": "src/objects/players/tails/sk/competition_player.s",
       "owner": "objects/players/tails/sk",
       "responsibility": "Competition Tails object dispatch, active control, flying and two-player movement helpers.",
@@ -6301,6 +7061,311 @@
           "component": "sk",
           "start": 78082,
           "end": 79452
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/sk/damage_and_respawn.s",
+      "owner": "objects/players/tails/sk",
+      "responsibility": "Tails hurt, death, restart and recovery animation dispatch.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 178,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "sonic3k.s",
+        "first_line": 3142,
+        "last_line": 3316,
+        "sha256": "89fd2ac2cb33f3c3a110a7c68713d1f61935f325eb65371287ed700faaa8749e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 87708,
+          "end": 88162
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 87708,
+          "end": 88162
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/sk/environment_and_modes.s",
+      "owner": "objects/players/tails/sk",
+      "responsibility": "Tails water transitions and ground, air, rolling, jumping, flying and swimming mode dispatch.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 171,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "sonic3k.s",
+        "first_line": 1435,
+        "last_line": 1602,
+        "sha256": "7ffee5939769aef55cb3b51f6ae7b62f665a46db5c1cd82772d749d074374e80"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 83506,
+          "end": 84002
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 83506,
+          "end": 84002
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/sk/flight_and_swim.s",
+      "owner": "objects/players/tails/sk",
+      "responsibility": "Tails flight and swimming motion, exhaustion state and flight animation selection.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 198,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "sonic3k.s",
+        "first_line": 1603,
+        "last_line": 1797,
+        "sha256": "d0e77fd80d73c3667bd76007882ca12138e09e422ef9024cd62cb62e36ccd942"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 84002,
+          "end": 84452
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 84002,
+          "end": 84452
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/sk/ground_movement.s",
+      "owner": "objects/players/tails/sk",
+      "responsibility": "Tails ground input acceleration, balance, braking and horizontal movement helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 364,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "sonic3k.s",
+        "first_line": 1798,
+        "last_line": 2158,
+        "sha256": "1206e216d590bbdff07e324bb883ae0b34846c1444c3b0642affb667c3c38428"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 84452,
+          "end": 85298
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 84452,
+          "end": 85298
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/sk/jump_actions.s",
+      "owner": "objects/players/tails/sk",
+      "responsibility": "Tails screen bounds, rolling initiation, jump launch and jump height control.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 283,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "sonic3k.s",
+        "first_line": 2389,
+        "last_line": 2668,
+        "sha256": "ad7b02dd99de3dcf578b0927b8dfbe2ba0d5445d99ee5c1afe66c28a640b732a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 85768,
+          "end": 86524
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 85768,
+          "end": 86524
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/sk/lifecycle.s",
+      "owner": "objects/players/tails/sk",
+      "responsibility": "Tails object dispatch, initialization, active player control, timed powers and normal display state.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 297,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "sonic3k.s",
+        "first_line": 80,
+        "last_line": 373,
+        "sha256": "34a08f7c299bc9fdf0580696de1813c2d8b12d15d7a6b07e14bc18df56663f2a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 79452,
+          "end": 80332
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 79452,
+          "end": 80332
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/sk/rolling_and_air_steering.s",
+      "owner": "objects/players/tails/sk",
+      "responsibility": "Tails rolling speed control and airborne input acceleration.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 233,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "sonic3k.s",
+        "first_line": 2159,
+        "last_line": 2388,
+        "sha256": "3aac03d835d50df6a1bfe5669b16865d8238259ea29ec1daed13806d4f6f302e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 85298,
+          "end": 85768
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 85298,
+          "end": 85768
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/sk/spindash.s",
+      "owner": "objects/players/tails/sk",
+      "responsibility": "Tails spindash charging, release and sound command sequencing.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 177,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "sonic3k.s",
+        "first_line": 2669,
+        "last_line": 2842,
+        "sha256": "e76fdc5036fd77f2ec4ca4f4c68e861012322dbc52b887a8f23becfb0b5bcab1"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 86524,
+          "end": 86978
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 86524,
+          "end": 86978
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/sk/terrain_landing.s",
+      "owner": "objects/players/tails/sk",
+      "responsibility": "Tails terrain collision, floor attachment and landing state restoration.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 302,
+      "origin": {
+        "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
+        "path": "sonic3k.s",
+        "first_line": 2843,
+        "last_line": 3141,
+        "sha256": "c6032d5f4e06925c4cd482af95e6a2cf10a4f71719dbcc288805f0d583750138"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 86978,
+          "end": 87708
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 86978,
+          "end": 87708
         }
       ]
     },
