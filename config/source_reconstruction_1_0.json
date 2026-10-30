@@ -628,6 +628,12 @@
       "commits": ["a4af3e3425c225cb2ed0f0a121b2504e3242337c"]
     },
     {
+      "id": "change-56d2c214b205",
+      "kind": "source_or_tooling",
+      "summary": "Own ending scenes and Sky Sanctuary or Death Egg mechanisms",
+      "commits": ["56d2c214b205114aa54dfc39e1f6605a3e683b9d"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",

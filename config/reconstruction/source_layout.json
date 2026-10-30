@@ -840,7 +840,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 36695,
+      "physical_lines": 31417,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "s3.s",
@@ -900,7 +900,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 106581,
+      "physical_lines": 104705,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -6960,6 +6960,281 @@
       ]
     },
     {
+      "path": "src/objects/bonus/pachinko/sk/energy_trap.s",
+      "owner": "objects/bonus/pachinko/sk",
+      "responsibility": "Pachinko energy trap capture, player response and sprite resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 137,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "sonic3k.s",
+        "first_line": 684,
+        "last_line": 817,
+        "sha256": "e1e08487101b82777dc469d4a3367c58ce6d2f77eb35b638e531b9b825ca7e0a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 302830,
+          "end": 303258
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 302830,
+          "end": 303258
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bonus/pachinko/sk/flipper.s",
+      "owner": "objects/bonus/pachinko/sk",
+      "responsibility": "Pachinko flipper timing, player contact, launch and sprite resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 199,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "sonic3k.s",
+        "first_line": 488,
+        "last_line": 683,
+        "sha256": "d49e54546b3650dba7bfbf963b43ffbe850e4b1b591478389626bf82a005d9c7"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 302174,
+          "end": 302830
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 302174,
+          "end": 302830
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bonus/pachinko/sk/invisible_object.s",
+      "owner": "objects/bonus/pachinko/sk",
+      "responsibility": "Pachinko invisible object placement and preserved state or collision response.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 42,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "sonic3k.s",
+        "first_line": 818,
+        "last_line": 855,
+        "sha256": "baf30781c2acc41cea08e65fb9ec472935e751d922486c14655fd9b9692b216e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_PachinkoInvisibleUnknown",
+          "kind": "terminal-tail",
+          "reason": "The complete final object state keeps its conditional early return with its unconditional state-transition or sprite-service tail call and contains no original independent return boundary.",
+          "origin_first_line": 820,
+          "origin_terminal_line": 849,
+          "origin_end_line": 855
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 303258,
+          "end": 303494
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 303258,
+          "end": 303494
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bonus/pachinko/sk/item_orb.s",
+      "owner": "objects/bonus/pachinko/sk",
+      "responsibility": "Pachinko item-orb contact, collection and sprite state.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 56,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "sonic3k.s",
+        "first_line": 881,
+        "last_line": 932,
+        "sha256": "f1902fe8c9afefbeacc24ff479ab5e3d77015e45ee69a48a7b0a1b8072924e3f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_PachinkoItemOrb",
+          "kind": "terminal-tail",
+          "reason": "The complete final object state keeps its conditional early return with its unconditional state-transition or sprite-service tail call and contains no original independent return boundary.",
+          "origin_first_line": 883,
+          "origin_terminal_line": 927,
+          "origin_end_line": 932
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 303590,
+          "end": 303814
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 303590,
+          "end": 303814
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bonus/pachinko/sk/magnet_orb.s",
+      "owner": "objects/bonus/pachinko/sk",
+      "responsibility": "Pachinko magnet orb player attraction, capture, motion and release.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 204,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "sonic3k.s",
+        "first_line": 1045,
+        "last_line": 1245,
+        "sha256": "2f74b01d46800ce07b1cb4631cc9122a1a5331e5876dfeb0a42edc11b6050ffb"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 304092,
+          "end": 304708
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 304092,
+          "end": 304708
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bonus/pachinko/sk/platform.s",
+      "owner": "objects/bonus/pachinko/sk",
+      "responsibility": "Pachinko platform placement, movement and player collision.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 29,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "sonic3k.s",
+        "first_line": 856,
+        "last_line": 880,
+        "sha256": "3ea03f7c0e1a922e71d3b6037f838043c9c4693e7df72271190df1cc52886c81"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_Pachinko_Platform",
+          "kind": "terminal-tail",
+          "reason": "The complete final object state keeps its conditional early return with its unconditional state-transition or sprite-service tail call and contains no original independent return boundary.",
+          "origin_first_line": 858,
+          "origin_terminal_line": 877,
+          "origin_end_line": 880
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 303494,
+          "end": 303590
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 303494,
+          "end": 303590
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bonus/pachinko/sk/triangle_bumper.s",
+      "owner": "objects/bonus/pachinko/sk",
+      "responsibility": "Pachinko triangle bumper contact, bounce response and sprite resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 121,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "sonic3k.s",
+        "first_line": 370,
+        "last_line": 487,
+        "sha256": "c37cf64e19b9c1d2aeae52aced0742199c2eac0279dd4ab935ad8f9ff6cc65be"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 301742,
+          "end": 302174
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 301742,
+          "end": 302174
+        }
+      ]
+    },
+    {
       "path": "src/objects/bonus/s3/gumball_bumpers.s",
       "owner": "objects/bonus/s3",
       "responsibility": "Gumball triangle bumpers, player collision, bounce response and shared bonus resources.",
@@ -7085,6 +7360,261 @@
       ]
     },
     {
+      "path": "src/objects/bonus/sk/gumball_item.s",
+      "owner": "objects/bonus/sk",
+      "responsibility": "Gumball item collection, effect selection, player response and sprite resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 115,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "sonic3k.s",
+        "first_line": 933,
+        "last_line": 1044,
+        "sha256": "0d8137f7406cc0c48103185835ea942c66df4acd09e62417d62772023de1e358"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 303814,
+          "end": 304092
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 303814,
+          "end": 304092
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/aiz/end_boss/s3/attachments_and_attacks.s",
+      "owner": "objects/bosses/aiz/end_boss/s3",
+      "responsibility": "Angel Island end-boss attachment states, attack actors, projectiles and private movement records.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 417,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "s3.s",
+        "first_line": 1361,
+        "last_line": 1774,
+        "sha256": "4a821479bfd4c5ba24e71a817616c50fdcad719030d05041e78c7d54666fb2ca"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 291974,
+          "end": 293142
+        },
+        {
+          "profile": "s3-eu",
+          "start": 291974,
+          "end": 293142
+        },
+        {
+          "profile": "s3-jp",
+          "start": 291974,
+          "end": 293142
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2389126,
+          "end": 2390294
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/aiz/end_boss/s3/child_motion_helpers.s",
+      "owner": "objects/bosses/aiz/end_boss/s3",
+      "responsibility": "Angel Island end-boss child positioning, synchronized drawing, animation and spawn helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 208,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "s3.s",
+        "first_line": 1775,
+        "last_line": 1979,
+        "sha256": "5e848055db45e8da3d59c69a15c2262cd0b9f82efcd967055a6038f6e3009ab1"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 293142,
+          "end": 293674
+        },
+        {
+          "profile": "s3-eu",
+          "start": 293142,
+          "end": 293674
+        },
+        {
+          "profile": "s3-jp",
+          "start": 293142,
+          "end": 293674
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2390294,
+          "end": 2390826
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/aiz/end_boss/s3/main_control.s",
+      "owner": "objects/bosses/aiz/end_boss/s3",
+      "responsibility": "Angel Island end-boss initialization, battle state, defeat sequence and player transition.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 314,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "s3.s",
+        "first_line": 1051,
+        "last_line": 1360,
+        "sha256": "b470c88d79e5d2d878bf41bba636cc49a376569eeced4c9a2ace99372b1efe54"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_47466",
+          "kind": "terminal-tail",
+          "reason": "The complete final object state keeps its conditional early return with its unconditional state-transition or sprite-service tail call and contains no original independent return boundary.",
+          "origin_first_line": 1350,
+          "origin_terminal_line": 1360,
+          "origin_end_line": 1360
+        }
+      ],
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 290994,
+          "end": 291974
+        },
+        {
+          "profile": "s3-eu",
+          "start": 290994,
+          "end": 291974
+        },
+        {
+          "profile": "s3-jp",
+          "start": 290994,
+          "end": 291974
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2388146,
+          "end": 2389126
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/aiz/end_boss/s3/object_catalog.s",
+      "owner": "objects/bosses/aiz/end_boss/s3",
+      "responsibility": "Angel Island end-boss object attributes, child creation records, animation and palette resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 228,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "s3.s",
+        "first_line": 1980,
+        "last_line": 2204,
+        "sha256": "03fc438daa4ff054fedd4e2921432f801cbe17fce947b1cbcc392dc8418aa4f8"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 293674,
+          "end": 294134
+        },
+        {
+          "profile": "s3-eu",
+          "start": 293674,
+          "end": 294134
+        },
+        {
+          "profile": "s3-jp",
+          "start": 293674,
+          "end": 294134
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2390826,
+          "end": 2391286
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/aiz/s3/miniboss.s",
+      "owner": "objects/bosses/aiz/s3",
+      "responsibility": "Angel Island miniboss lifecycle, attack states, coordinated child actors and private object or animation records.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 751,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "s3.s",
+        "first_line": 303,
+        "last_line": 1050,
+        "sha256": "6efa56b19598d2b2405985002a7cdbf67f0f1d2c416ebbeaec4d572f4d3dea5d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-family",
+        "reason": "The complete miniboss family retains its coupled state programs, child actor records and private animation resources below 900 physical lines.",
+        "proof_target": "check-source-layout"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 289140,
+          "end": 290994
+        },
+        {
+          "profile": "s3-eu",
+          "start": 289140,
+          "end": 290994
+        },
+        {
+          "profile": "s3-jp",
+          "start": 289140,
+          "end": 290994
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2386292,
+          "end": 2388146
+        }
+      ]
+    },
+    {
       "path": "src/objects/bosses/aiz/s3/miniboss_arrival.s",
       "owner": "objects/bosses/aiz/s3",
       "responsibility": "Angel Island miniboss arrival cutscene, flame actors and scene transitions.",
@@ -7206,6 +7736,426 @@
           "component": "s3-us",
           "start": 2384000,
           "end": 2384962
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/hcz/end_boss/s3/attacks_and_transition.s",
+      "owner": "objects/bosses/hcz/end_boss/s3",
+      "responsibility": "Hydrocity end-boss attack actors, movement states, geyser effects and player transition.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 439,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "s3.s",
+        "first_line": 4131,
+        "last_line": 4566,
+        "sha256": "04bfca20a9968c0ed3e23ab18b63f103efb586f89df660dec3f6adf2006fc5c3"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 299496,
+          "end": 300788
+        },
+        {
+          "profile": "s3-eu",
+          "start": 299496,
+          "end": 300788
+        },
+        {
+          "profile": "s3-jp",
+          "start": 299496,
+          "end": 300788
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2396648,
+          "end": 2397940
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/hcz/end_boss/s3/main_and_chassis.s",
+      "owner": "objects/bosses/hcz/end_boss/s3",
+      "responsibility": "Hydrocity end-boss battle control, defeat sequence, chassis states and coordinated child actors.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 413,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "s3.s",
+        "first_line": 3721,
+        "last_line": 4130,
+        "sha256": "2a1256af89e49bb4fc2313c018f42e601f6f9405d08eb51ad76659e011709f40"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 298202,
+          "end": 299496
+        },
+        {
+          "profile": "s3-eu",
+          "start": 298202,
+          "end": 299496
+        },
+        {
+          "profile": "s3-jp",
+          "start": 298202,
+          "end": 299496
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2395354,
+          "end": 2396648
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/hcz/end_boss/s3/motion_helpers.s",
+      "owner": "objects/bosses/hcz/end_boss/s3",
+      "responsibility": "Hydrocity end-boss player response, child motion, collision, callback and debris creation helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 501,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "s3.s",
+        "first_line": 4567,
+        "last_line": 5064,
+        "sha256": "fb6343e9d310f606b3eecb658fe244a62b9c2693e9bc3783b1a2526e9a39f2e4"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 300788,
+          "end": 301922
+        },
+        {
+          "profile": "s3-eu",
+          "start": 300788,
+          "end": 301922
+        },
+        {
+          "profile": "s3-jp",
+          "start": 300788,
+          "end": 301922
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2397940,
+          "end": 2399074
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/hcz/end_boss/s3/object_catalog.s",
+      "owner": "objects/bosses/hcz/end_boss/s3",
+      "responsibility": "Hydrocity end-boss object attributes, child records, animation and palette resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 244,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "s3.s",
+        "first_line": 5065,
+        "last_line": 5305,
+        "sha256": "618260d8789d4f30c75afa11b2ad9c49751f594aa889a8c7ab987f25828d76ae"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 301922,
+          "end": 302450
+        },
+        {
+          "profile": "s3-eu",
+          "start": 301922,
+          "end": 302450
+        },
+        {
+          "profile": "s3-jp",
+          "start": 301922,
+          "end": 302450
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2399074,
+          "end": 2399602
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/hcz/miniboss/s3/engine_and_effects.s",
+      "owner": "objects/bosses/hcz/miniboss/s3",
+      "responsibility": "Hydrocity miniboss engine actors, coordinated effects, defeat sequence and debris states.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 372,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "s3.s",
+        "first_line": 2717,
+        "last_line": 3084,
+        "sha256": "d860faacde54cd67be86af67bcf1eb73e3f88e20e98e901eb46d6d8654a9e244"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_48732",
+          "kind": "terminal-tail",
+          "reason": "The complete final object state keeps its conditional early return with its unconditional state-transition or sprite-service tail call and contains no original independent return boundary.",
+          "origin_first_line": 3074,
+          "origin_terminal_line": 3084,
+          "origin_end_line": 3084
+        }
+      ],
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 295666,
+          "end": 296794
+        },
+        {
+          "profile": "s3-eu",
+          "start": 295666,
+          "end": 296794
+        },
+        {
+          "profile": "s3-jp",
+          "start": 295666,
+          "end": 296794
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2392818,
+          "end": 2393946
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/hcz/miniboss/s3/main_and_loop.s",
+      "owner": "objects/bosses/hcz/miniboss/s3",
+      "responsibility": "Hydrocity miniboss initialization, battle control and looping chassis states.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 341,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "s3.s",
+        "first_line": 2205,
+        "last_line": 2542,
+        "sha256": "be03d7e778d0fda289f4817e8ac40f7ed21a27765b17c711cc5c7e58405bf051"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 294134,
+          "end": 295178
+        },
+        {
+          "profile": "s3-eu",
+          "start": 294134,
+          "end": 295178
+        },
+        {
+          "profile": "s3-jp",
+          "start": 294134,
+          "end": 295178
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2391286,
+          "end": 2392330
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/hcz/miniboss/s3/motion_helpers.s",
+      "owner": "objects/bosses/hcz/miniboss/s3",
+      "responsibility": "Hydrocity miniboss motion, acceleration, child positioning, collision and animation helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 474,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "s3.s",
+        "first_line": 3085,
+        "last_line": 3555,
+        "sha256": "bb977e7c6faafe2a5907fdd20caf8c58b0ce87670c9771fcd2c87d8870c51d3b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 296794,
+          "end": 297780
+        },
+        {
+          "profile": "s3-eu",
+          "start": 296794,
+          "end": 297780
+        },
+        {
+          "profile": "s3-jp",
+          "start": 296794,
+          "end": 297780
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2393946,
+          "end": 2394932
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/hcz/miniboss/s3/object_catalog.s",
+      "owner": "objects/bosses/hcz/miniboss/s3",
+      "responsibility": "Hydrocity miniboss object attributes, child records, splash DPLC, animation and palette resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 168,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "s3.s",
+        "first_line": 3556,
+        "last_line": 3720,
+        "sha256": "e41bc82e9624dbce1598bf5fbfa80983070da46c78b3d33a3a0acdd71a7ba329"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 297780,
+          "end": 298202
+        },
+        {
+          "profile": "s3-eu",
+          "start": 297780,
+          "end": 298202
+        },
+        {
+          "profile": "s3-jp",
+          "start": 297780,
+          "end": 298202
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2394932,
+          "end": 2395354
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/hcz/miniboss/s3/rockets.s",
+      "owner": "objects/bosses/hcz/miniboss/s3",
+      "responsibility": "Hydrocity miniboss rocket actors, flight states and attack behavior.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 177,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "s3.s",
+        "first_line": 2543,
+        "last_line": 2716,
+        "sha256": "90a99ac27bdc3621e83570b79afd12fe036261a26c9f0740a0b7d8f6a7d20126"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 295178,
+          "end": 295666
+        },
+        {
+          "profile": "s3-eu",
+          "start": 295178,
+          "end": 295666
+        },
+        {
+          "profile": "s3-jp",
+          "start": 295178,
+          "end": 295666
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2392330,
+          "end": 2392818
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/mgz/s3/drilling_arrival.s",
+      "owner": "objects/bosses/mgz/s3",
+      "responsibility": "Marble Garden drilling Robotnik arrival scene, movement and battle transition.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 293,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "s3.s",
+        "first_line": 5306,
+        "last_line": 5595,
+        "sha256": "70929dddb1eadf0d2a2904d4205230da1721be2ec244a49813a3438f4223f092"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 302450,
+          "end": 303352
+        },
+        {
+          "profile": "s3-eu",
+          "start": 302450,
+          "end": 303352
+        },
+        {
+          "profile": "s3-jp",
+          "start": 302450,
+          "end": 303352
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2399602,
+          "end": 2400504
         }
       ]
     },
@@ -42766,6 +43716,41 @@
       ]
     },
     {
+      "path": "src/objects/zones/lrz/sk/chained_platforms.s",
+      "owner": "objects/zones/lrz/sk",
+      "responsibility": "Lava Reef chained platform coordination, movement, player riding and sprite resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 291,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "sonic3k.s",
+        "first_line": 1246,
+        "last_line": 1533,
+        "sha256": "24e97154330639fd6c80e70518687bb93be3d92e0e663ada3973293e86599996"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 304708,
+          "end": 305576
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 304708,
+          "end": 305576
+        }
+      ]
+    },
+    {
       "path": "src/objects/zones/lrz/sk/collapsing_bridge.s",
       "owner": "objects/zones/lrz/sk",
       "responsibility": "Collapsing bridge segment creation, player contact, timed collapse and fragments.",
@@ -45432,6 +46417,41 @@
           "component": "sk",
           "start": 261332,
           "end": 262774
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/soz/sk/rappel_wire.s",
+      "owner": "objects/zones/soz/sk",
+      "responsibility": "Sandopolis rappel wire geometry, player attachment, constrained travel, character motion and release.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 725,
+      "origin": {
+        "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
+        "path": "sonic3k.s",
+        "first_line": 1534,
+        "last_line": 2255,
+        "sha256": "7363ad841cbaf20e20ae3ffd244e3afae25e6aba6ecc22488971651a16919d16"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-family",
+        "reason": "The complete rappel wire family keeps its linked player state, wire geometry and character positioning helpers together below 900 physical lines.",
+        "proof_target": "check-source-layout"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 305576,
+          "end": 308054
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 305576,
+          "end": 308054
         }
       ]
     },
