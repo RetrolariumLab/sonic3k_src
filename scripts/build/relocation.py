@@ -94,7 +94,15 @@ def rendered_fingerprint(policy, plan, group, names, widenings):
     anchors = {profiles()[key]["entry"]: engine["startup_label"] for key, engine in policy["engines"].items()}
     chosen = selected(plan, group)
     digestor = hashlib.sha256()
-    for name in sorted(set(names) | {"assets/manifest.json", "config/revision_profiles.json", "config/toolchain.json"}):
+    for name in sorted(
+        set(names)
+        | {
+            "assets/manifest.json",
+            "config/revision_profiles.json",
+            "config/toolchain.json",
+            "config/audio_driver_payloads.json",
+        }
+    ):
         payload = (ROOT / name).read_bytes()
         if name.endswith((".s", ".inc")):
             text = render(payload.decode("utf-8"), [p for p in chosen if p["path"] == name], anchors.get(name))
