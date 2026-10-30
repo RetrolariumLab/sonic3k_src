@@ -10,11 +10,11 @@ images, extracted binary assets or compiler executables are distributed.
 All five preservation images build byte for byte from verified private ROM
 inputs. Direct original-image attract checks cover all five profiles, and the
 675-label S3 second-cartridge ABI is checked independently for each S3 region.
-Music/SFX storage now comes from ROM-extracted SMPS streams, with executable Z80
-drivers retained as source. The full relocation/runtime tooling is implemented;
-current clean-clone 1.0 aggregate acceptance is pending after this storage
-migration. Semantic source layout and editable format contracts remain
-unfinished. No Source Reconstruction 1.0 or 2.0 release is claimed.
+The complete Source Reconstruction 1.0 gate passed from a clean clone, including
+ROM-extracted SMPS storage, all-profile relocation and runtime. The 1.0 manifest
+records the accepted commit and source binding; the tag remains a maintainer
+action. Work continues toward 2.0 semantic source layout and editable format
+contracts. No Source Reconstruction 2.0 release is claimed.
 
 ## Quick start
 
@@ -47,10 +47,9 @@ preservation gate in one invocation:
 make release-check
 ```
 
-This is a preservation validation sequence, not the unfinished release gate. Run
-it serially; emulator scenarios must not overlap. `make test` works without ROM
-files and reports the private-input case as an explicit skip. `make` lists the
-public commands. Never commit `data/`, `build/`, ROM fragments or samples.
+Run it serially; emulator scenarios must not overlap. `make test` works without
+ROM files and reports the private-input case as an explicit skip. `make` lists
+the public commands. Never commit `data/`, `build/`, ROM fragments or samples.
 
 Read the [documentation index](docs/index.md), [open work](docs/unknowns.md),
 [contribution rules](CONTRIBUTING.md) and [provenance](docs/provenance.md).

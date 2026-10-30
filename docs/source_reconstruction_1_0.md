@@ -1,9 +1,10 @@
 # Source Reconstruction 1.0
 
-The preservation contract is `config/source_reconstruction_1_0.json`. It names
-all five accepted images, private input identities, untracked output artifacts,
-external tools, runtime coverage, rights boundaries and project-owned checks. It
-is in development; a complete aggregate acceptance run is pending.
+The preservation contract is `config/source_reconstruction_1_0.json`. Its
+complete clean-clone aggregate run passed at the commit recorded under
+`evidence.accepted_baseline`. All five images, fixed interfaces, audio storage,
+32 relocation groups, 165 runtime cases and the clean history were checked. The
+manifest is tag-ready; tags and publication remain maintainer actions.
 
 After importing user images, run `make release-check` (alias
 `make source-1-check`). The fail-fast sequence is lint, tests, input/tool pins,
@@ -25,7 +26,7 @@ Tags and publication remain maintainer actions. A candidate manifest, partial
 matrix, original-image-only runtime run or passing byte comparison alone does
 not establish completion of this release line.
 
-The manifest remains in `development` until complete clean-clone acceptance.
-Requirement evidence identifies the implemented controls and their checks; a
-complete current-source aggregate report is required for release acceptance.
-Metadata is validated before expensive build and runtime stages.
+The manifest is now `tag-ready` following complete clean-clone acceptance.
+Publication metadata records that source binding without changing assembly,
+inputs, compiler settings, scenarios or expected state. Metadata is checked
+before expensive stages and again against actual evidence during the audit.

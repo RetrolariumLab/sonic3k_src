@@ -26,14 +26,13 @@ only after its movie check succeeds; no screenshot comparison is used.
 
 The public [relocation producer](relocation.md) builds every declared variant
 and checks exact source-derived cohort coverage and independent symbol movement.
-All 160 relocated runtime cases have passed. SMPS storage is now ROM-extracted;
-current-source clean-clone aggregate acceptance must regenerate all evidence
-after that migration. Exploratory candidates are not substitutes for these
-public commands.
+The complete clean-clone 1.0 gate passed after the SMPS storage migration,
+including all 160 relocated and five preservation runtime cases. Its commit and
+source binding are recorded in the release manifest. Exploratory artifacts are
+not substitutes for these public commands.
 
-The candidate `make release-check` sequence fails at the first unsuccessful
-stage: style, tests, private inputs, clean assembly, identity, complete
-relocation, relocated runtime, privacy/publication audit and clean tracked tree.
-Its input and evidence manifests must be reproducible from a clean clone. Source
-2.0 also requires semantic source ownership and validated editable data
+`make release-check` fails at the first unsuccessful stage: style and metadata,
+tests, private inputs, clean assembly, identity, complete relocation, relocated
+runtime, privacy/publication audit and clean tracked tree. Source 2.0
+additionally requires semantic source ownership and validated editable data
 contracts. See [remaining work](unknowns.md).

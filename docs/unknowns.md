@@ -2,9 +2,6 @@
 
 ## Unaccepted release requirements
 
-- Complete current-source 1.0 aggregate clean-clone acceptance after the SMPS
-  storage migration. The prior source passed all 32 relocation groups and 160
-  relocated runtime cases; those source bindings must now be regenerated.
 - Semantic subsystem source layout with documented size exceptions and a label
   rename registry. The large imported entry units are still present.
 - Editable contracts/codecs for every stored and assembler-owned format,
@@ -25,6 +22,3 @@ annotation grants no explicit license; its status remains `license_not_granted`.
 Runtime currently observes a finite attract path and nine RAM cells, so it is
 not exhaustive gameplay coverage. Host support beyond the pinned Windows runtime
 is not claimed by portable ROM-less tests.
-
-Complete clean-clone acceptance for the current source and history remains
-pending.

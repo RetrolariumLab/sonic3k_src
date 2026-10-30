@@ -7,7 +7,7 @@
   },
   "release_kind": "preservation",
   "tag": "source-reconstruction-1.0",
-  "status": "development",
+  "status": "tag-ready",
   "predecessor": null,
   "predecessor_note": "First preservation release line; tags are maintainer actions.",
   "reference": {
@@ -48,7 +48,7 @@
         "targets": ["verify-all"],
         "files": ["assets/manifest.json", "scripts/build/pipeline.py"]
       },
-      "note": "Current-source technical controls are verified; complete aggregate release acceptance remains pending."
+      "note": "The preservation controls passed complete clean-clone acceptance at the recorded baseline; current semantic work requires fresh aggregate evidence."
     },
     "reproducible_build": {
       "status": "satisfied",
@@ -56,7 +56,7 @@
         "targets": ["verify-toolchain", "verify-all"],
         "files": ["config/toolchain.json", "config/revision_profiles.json"]
       },
-      "note": "Current-source technical controls are verified; complete aggregate release acceptance remains pending."
+      "note": "The preservation controls passed complete clean-clone acceptance at the recorded baseline; current semantic work requires fresh aggregate evidence."
     },
     "executable_source": {
       "status": "satisfied",
@@ -72,7 +72,7 @@
           "scripts/validation/audio_source.py"
         ]
       },
-      "note": "Current-source technical controls are verified; complete aggregate release acceptance remains pending."
+      "note": "The preservation controls passed complete clean-clone acceptance at the recorded baseline; current semantic work requires fresh aggregate evidence."
     },
     "symbolic_pointers": {
       "status": "satisfied",
@@ -84,7 +84,7 @@
           "config/reconstruction/relocation.json"
         ]
       },
-      "note": "Current-source technical controls are verified; complete aggregate release acceptance remains pending."
+      "note": "The preservation controls passed complete clean-clone acceptance at the recorded baseline; current semantic work requires fresh aggregate evidence."
     },
     "runtime_coverage": {
       "status": "satisfied",
@@ -92,7 +92,7 @@
         "targets": ["trace", "trace-relocated"],
         "files": ["config/runtime/scenarios.json", "config/runtime/emulator.json", "docs/runtime.md"]
       },
-      "note": "All five preservation and 160 relocated cases passed with complete current-source RAM evidence."
+      "note": "The preservation controls passed complete clean-clone acceptance at the recorded baseline; current semantic work requires fresh aggregate evidence."
     },
     "baseline_validation": {
       "status": "satisfied",
@@ -100,7 +100,7 @@
         "targets": ["lint", "test"],
         "files": ["config/lint.json", "tests/"]
       },
-      "note": "Current-source technical controls are verified; complete aggregate release acceptance remains pending."
+      "note": "The preservation controls passed complete clean-clone acceptance at the recorded baseline; current semantic work requires fresh aggregate evidence."
     },
     "baseline_documentation": {
       "status": "satisfied",
@@ -114,7 +114,7 @@
           "docs/unknowns.md"
         ]
       },
-      "note": "Current-source technical controls are verified; complete aggregate release acceptance remains pending."
+      "note": "The preservation controls passed complete clean-clone acceptance at the recorded baseline; current semantic work requires fresh aggregate evidence."
     },
     "private_inputs_and_history": {
       "status": "satisfied",
@@ -122,7 +122,7 @@
         "targets": ["audit-private"],
         "files": [".gitignore", "config/binary_allowlist.json", "scripts/validation/private_data.py"]
       },
-      "note": "Current-source technical controls are verified; complete aggregate release acceptance remains pending."
+      "note": "The preservation controls passed complete clean-clone acceptance at the recorded baseline; current semantic work requires fresh aggregate evidence."
     },
     "licensing_and_provenance": {
       "status": "satisfied",
@@ -130,7 +130,7 @@
         "targets": ["release-audit"],
         "files": ["docs/provenance.md"]
       },
-      "note": "Current-source technical controls are verified; complete aggregate release acceptance remains pending."
+      "note": "The preservation controls passed complete clean-clone acceptance at the recorded baseline; current semantic work requires fresh aggregate evidence."
     },
     "release_contract": {
       "status": "satisfied",
@@ -138,7 +138,7 @@
         "targets": ["check-release-metadata", "release-check"],
         "files": ["config/source_reconstruction_1_0.json", "scripts/validation/release.py"]
       },
-      "note": "Standard metadata and the fail-fast aggregate gate are implemented and tested; complete aggregate release acceptance remains pending."
+      "note": "The preservation controls passed complete clean-clone acceptance at the recorded baseline; current semantic work requires fresh aggregate evidence."
     }
   },
   "profiles": [
@@ -404,7 +404,6 @@
     "Sound/SFX/",
     "Sound/_smps2asm_inc."
   ],
-  "development_note": "The controls are implemented and evidenced individually. Complete current-source clean-clone acceptance remains pending; no tag-ready claim is made.",
   "delta": [
     {
       "id": "change-dae39529140a",
@@ -491,9 +490,15 @@
       "commits": ["401f6396d302f4ea58dcc408ae867a7d230e3a7b"]
     },
     {
-      "id": "current-preservation-controls",
-      "kind": "tooling",
-      "summary": "Record verified current-source controls while leaving complete aggregate release acceptance pending.",
+      "id": "change-aaed5295fa40",
+      "kind": "source_or_tooling",
+      "summary": "Record verified controls before complete release acceptance",
+      "commits": ["aaed5295fa40a3c6547a2161f20d37af546f7b63"]
+    },
+    {
+      "id": "current-source-stage",
+      "kind": "source_or_tooling",
+      "summary": "Continue preservation source and checks with private audio storage.",
       "commits": ["release-commit"]
     }
   ],
@@ -503,6 +508,13 @@
     "relocation": "build/relocated/manifest.json",
     "preservation_runtime": "build/runtime/evidence/check.json",
     "relocated_runtime": "build/runtime/evidence/matrix.json",
-    "aggregate": "build/release/source-1-check.json"
+    "aggregate": "build/release/source-1-check.json",
+    "accepted_baseline": {
+      "commit": "aaed5295fa40a3c6547a2161f20d37af546f7b63",
+      "source_sha256": "8d71fbc18329a7f9d557327994758050c108ff38bc5b50b710d330e980b09e97",
+      "report": "build/release/source-1-check.json",
+      "command": "make release-check",
+      "clean_clone": true
+    }
   }
 }
