@@ -1,0 +1,22 @@
+{
+  "schema": "retrolarium.lint",
+  "schema_version": 1,
+  "assembly": {
+    "dialect": "asl",
+    "paths": [
+      "s3.s",
+      "sonic3k.s",
+      "s3.constants.s",
+      "sonic3k.constants.s",
+      "sonic3k.macros.s",
+      "sonic3k.macrosetup.s",
+      "General",
+      "Levels",
+      "Sound",
+      "Lockon S3"
+    ]
+  },
+  "text": {
+    "json": "valid"
+  }
+}

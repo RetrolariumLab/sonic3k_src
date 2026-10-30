@@ -41,6 +41,19 @@ audit-private:
 clean:
 	$(PYTHON) -m scripts.run build.pipeline clean
 
+.PHONY: lint format format-check
+
+lint:
+	$(RLTOOL) lint --project .
+
+format:
+	$(RLTOOL) lint --project . --fix --only text
+	$(RLTOOL) lint --project . --fix --only assembly
+	$(RLTOOL) format --project .
+	$(MAKE) lint
+
+format-check: lint
+
 .PHONY: check-driver-audio check-driver-audio-storage
 
 check-driver-audio:

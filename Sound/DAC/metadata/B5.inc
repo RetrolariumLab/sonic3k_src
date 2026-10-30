@@ -1,3 +1,3 @@
-.sample_rate = 12155
-.size = 1600
-	binclude "data/Sound/DAC/generated/B5.dpcm"
+                .sample_rate: equ 12155
+                .size:  equ 1600
+                binclude "data/Sound/DAC/generated/B5.dpcm"

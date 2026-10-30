@@ -4,9 +4,9 @@ The baseline is the Sonic Retro Sonic 3 / Sonic & Knuckles buildable
 disassembly, https://github.com/sonicretro/skdisasm, commit
 `73de97c6b55055bcb8089c1d55d006b02136f163`, dated 2026-10-11. This import
 collapses 758 commits attributed by Git shortlog to 37 public contributor names.
-The original buildable disassembly, labeling and formatting credit is
-Stealth (2006). Subsequent upstream attribution in the source is retained.
-IDA license banners and an original machine-local file path were removed.
+The original buildable disassembly, labeling and formatting credit is Stealth
+(2006). Subsequent upstream attribution in the source is retained. IDA license
+banners and an original machine-local file path were removed.
 
 ## Public upstream contributor names
 
@@ -56,8 +56,8 @@ were omitted. Their deletion from a later commit would not remove them from
 history, so they never enter this repository's initial tree.
 
 The upstream Lua/batch build, split executables and bundled compiler binaries
-are omitted. Original source remains text; the first import intentionally
-cannot build without the subsequent extraction/build workflow.
+are omitted. Original source remains text; the first import intentionally cannot
+build without the subsequent extraction/build workflow.
 
 The community complete build and its LockOn Data module are excluded. Bug-fix,
 optimization and complete-build alternatives can be recovered from the pinned

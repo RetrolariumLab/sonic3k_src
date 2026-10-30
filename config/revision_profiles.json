@@ -39,10 +39,7 @@
     {
       "id": "s3k",
       "image": "s3k",
-      "compose": [
-        "sk",
-        "s3-us"
-      ]
+      "compose": ["sk", "s3-us"]
     }
   ],
   "excluded_scope": [

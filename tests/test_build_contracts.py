@@ -1,4 +1,5 @@
 """Regressions for header arithmetic, private data and manifest contracts."""
+
 import hashlib
 import json
 from pathlib import Path
@@ -16,12 +17,12 @@ class HeaderTests(unittest.TestCase):
         raw = bytearray(0x206)
         raw[0x200:] = bytes.fromhex("ffff00010002")
         built = fix_header(raw)
-        self.assertEqual(built[0x18e:0x190], bytes.fromhex("0002"))
-        self.assertEqual(int.from_bytes(built[0x1a4:0x1a8], "big"), 0x205)
+        self.assertEqual(built[0x18E:0x190], bytes.fromhex("0002"))
+        self.assertEqual(int.from_bytes(built[0x1A4:0x1A8], "big"), 0x205)
         self.assertEqual(fix_header(built), built)
 
     def test_invalid_container_is_rejected(self):
-        for data in (b"", bytes(0x1fe), bytes(0x201)):
+        for data in (b"", bytes(0x1FE), bytes(0x201)):
             with self.subTest(length=len(data)), self.assertRaises(ValueError):
                 fix_header(data)
 
@@ -41,8 +42,8 @@ class PrivateDataTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate_blob(b"a\0b", set(), {}, "tool.bin")
         with self.assertRaises(ValueError):
-            validate_blob(b"a\0b", set(), {"tool.bin":"0"*64}, "tool.bin")
-        validate_blob(b"a\0b", set(), {"tool.bin":hashlib.sha256(b"a\0b").hexdigest()}, "tool.bin")
+            validate_blob(b"a\0b", set(), {"tool.bin": "0" * 64}, "tool.bin")
+        validate_blob(b"a\0b", set(), {"tool.bin": hashlib.sha256(b"a\0b").hexdigest()}, "tool.bin")
 
 
 class ManifestTests(unittest.TestCase):
@@ -55,15 +56,15 @@ class ManifestTests(unittest.TestCase):
             self.assertNotIn(asset["path"], paths)
             paths.add(asset["path"])
             self.assertGreater(asset["size"], 0)
-            self.assertLessEqual(asset["offset"]+asset["size"], images[asset["image"]]["size"])
-            inside(manifest["output"]+"/"+asset["path"])
+            self.assertLessEqual(asset["offset"] + asset["size"], images[asset["image"]]["size"])
+            inside(manifest["output"] + "/" + asset["path"])
         values = profiles()
         for profile in values.values():
             self.assertIn(profile["image"], images)
             for child in profile.get("compose", []):
                 self.assertIn(child, values)
             if "entry" in profile:
-                self.assertTrue((ROOT/profile["entry"]).is_file())
+                self.assertTrue((ROOT / profile["entry"]).is_file())
 
     def test_escape_paths_are_rejected(self):
         with self.assertRaises(ValueError):
@@ -75,7 +76,7 @@ class ManifestTests(unittest.TestCase):
         self.assertIn("check-assets", output)
 
     def test_optional_private_inputs(self):
-        if not all((ROOT/i["file"]).is_file() for i in image_records().values()):
+        if not all((ROOT / i["file"]).is_file() for i in image_records().values()):
             self.skipTest("Private ROM inputs are absent; synthetic tool tests still run")
         for image in image_records().values():
             read_reference(image)
