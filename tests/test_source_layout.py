@@ -80,3 +80,66 @@ class DataEncodingContextTests(unittest.TestCase):
         ):
             with self.subTest(text=text), self.assertRaises(ValueError):
                 check_ledger(text)
+
+
+class TerminalAnnotationTests(unittest.TestCase):
+    def test_draw_tail_call_and_private_data_have_an_unreachable_probe(self):
+        from scripts.validation.source_layout import check_added_annotations
+        from scripts.validation.cohorts import collect_file, render
+
+        text = "Entry:\n move.l #Map,mappings(a0)\n jmp Draw_Sprite\nMap:\n dc.w 0\n; End of function Entry\n"
+        row = {
+            "role": "code",
+            "origin": {"first_line": 1, "last_line": 5},
+            "added_annotations": [
+                {
+                    "name": "Entry",
+                    "kind": "terminal-tail",
+                    "reason": "Existing draw tail call owns its map",
+                    "origin_first_line": 1,
+                    "origin_terminal_line": 3,
+                    "origin_end_line": 5,
+                }
+            ],
+        }
+        check_added_annotations(row, text)
+        document = collect_file("scenery.s", text)
+        self.assertEqual(document["returns"], [])
+        self.assertEqual([r["name"] for r in document["procedures"]], ["Entry"])
+        self.assertTrue(render(text, document["points"]).endswith("; End of function Entry\n                rts\n"))
+
+    def test_terminal_annotation_rejects_live_code_unknown_data_and_bad_origin(self):
+        import copy
+        from scripts.validation.source_layout import check_added_annotations
+
+        text = "Entry:\n jmp Draw_Sprite\nMap: dc.w 0\n; End of function Entry\n"
+        row = {
+            "role": "code",
+            "origin": {"first_line": 1, "last_line": 3},
+            "added_annotations": [
+                {
+                    "name": "Entry",
+                    "kind": "terminal-tail",
+                    "reason": "Existing tail call",
+                    "origin_first_line": 1,
+                    "origin_terminal_line": 2,
+                    "origin_end_line": 3,
+                }
+            ],
+        }
+        for changed in (
+            text.replace("jmp Draw_Sprite", "moveq #0,d0"),
+            text.replace("dc.w 0", 'include "src/unowned.s"'),
+            text.replace("; End of function Entry\n", ""),
+        ):
+            with self.subTest(text=changed), self.assertRaises(ValueError):
+                check_added_annotations(row, changed)
+        for change in ({"origin_end_line": 4}, {"reason": ""}, {"kind": "assumed"}):
+            broken = copy.deepcopy(row)
+            broken["added_annotations"][0].update(change)
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                check_added_annotations(broken, text)
+        broken = copy.deepcopy(row)
+        broken["added_annotations"] *= 2
+        with self.assertRaises(ValueError):
+            check_added_annotations(broken, text)

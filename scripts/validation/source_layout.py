@@ -7,6 +7,7 @@ import re
 from scripts.build.project import ROOT, atomic, image_records, load, profiles, source_fingerprint
 from scripts.build.relocation import source_names
 from scripts.validation.numeric_operands import code_part
+from scripts.validation.cohorts import INSTRUCTIONS, TERMINALS, statements
 
 DATA_OPS = frozenset(
     (
@@ -88,6 +89,44 @@ def check_data_graph(dependencies):
         raise ValueError("Cyclic assembler data includes")
 
 
+def check_added_annotations(row, text, source_includes=(), binary_includes=()):
+    annotations = row.get("added_annotations", [])
+    if not annotations:
+        return
+    if row.get("role") != "code" or len({a["name"] for a in annotations}) != len(annotations):
+        raise ValueError("Invalid or duplicate terminal annotation owner")
+    rows = statements(text)
+    lines = text.splitlines(keepends=True)
+    origin = row["origin"]
+    for item in annotations:
+        name = item["name"]
+        if (
+            item.get("kind") != "terminal-tail"
+            or not item.get("reason")
+            or not re.fullmatch(r"[A-Za-z_][A-Za-z_0-9]*", name)
+        ):
+            raise ValueError("Invalid terminal annotation contract")
+        if (
+            not origin["first_line"]
+            <= item["origin_first_line"]
+            <= item["origin_terminal_line"]
+            <= item["origin_end_line"]
+            <= origin["last_line"]
+        ):
+            raise ValueError("Terminal annotation leaves its historical source range")
+        starts = [r["line"] for r in rows if r["label"] == name]
+        ends = [r["line"] for r in rows if r["end"] == name]
+        if len(starts) != 1 or len(ends) != 1 or starts[0] >= ends[0]:
+            raise ValueError("Terminal annotation has no unique entry and closure")
+        body = [r for r in rows if starts[0] <= r["line"] < ends[0]]
+        if any(r["end"] for r in body):
+            raise ValueError("Terminal annotation overlaps an existing procedure")
+        instructions = [r for r in body if r["cpu"] == "68000" and r["op"].split(".")[0] in INSTRUCTIONS]
+        if not instructions or instructions[-1]["op"].split(".")[0] not in TERMINALS:
+            raise ValueError("Terminal annotation does not follow a terminal instruction")
+        check_ledger("".join(lines[instructions[-1]["line"] : ends[0] - 1]), source_includes, binary_includes)
+
+
 def validate_entry(row, text, inventory=False, source_includes=(), binary_includes=()):
     lines = len(text.splitlines())
     if not row.get("owner") or not row.get("responsibility") or row.get("physical_lines") != lines:
@@ -110,6 +149,7 @@ def validate_entry(row, text, inventory=False, source_includes=(), binary_includ
         raise ValueError("Source module has only an address or page number")
     if row["role"] == "data":
         check_ledger(text, source_includes, binary_includes)
+    check_added_annotations(row, text, source_includes, binary_includes)
     exception = row.get("size_exception", {})
     if lines > 900 and (not exception.get("kind") or not exception.get("reason") or not exception.get("proof_target")):
         raise ValueError("Large module needs a checkable cohesion exception")

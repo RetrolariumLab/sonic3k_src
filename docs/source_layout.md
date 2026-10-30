@@ -6,7 +6,7 @@ baseline. Owned data lives under `src/objects`, `src/rendering`, `src/ui`,
 `src/game` and `src/system/debug`. Engine-specific code remains separate.
 
 This registry is intentionally incomplete during extraction: 687 data units and
-214 sibling executable units have owners. The 60 remaining entry, driver, memory
+234 sibling executable units have owners. The 60 remaining entry, driver, memory
 and macro units still await complete semantic extraction. Run
 `make source-layout-inventory` for that distinction. `make check-source-layout`
 rejects pending entries and cannot certify this intermediate tree as 2.0.
@@ -35,3 +35,10 @@ relocation policy retains the preservation baseline's code-entry coverage.
 Normal assembly and every relocated symbol proof must keep the alias equal to
 its independently discovered target; assigning different source owners cannot
 silently discard the alias or change that relationship.
+
+Comments mark the ends of object programs that finish with a shared display or
+solid-collision tail call. The registry records these as "added_annotations"
+with historical source ranges. The checker requires a terminal instruction and
+allows only checked data after it. Relocation may place its unreachable probe
+after that complete tail; normal assembly emits no bytes for the comments. An
+existing annotated closure takes precedence over a derived EOF data boundary.

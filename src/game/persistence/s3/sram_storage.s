@@ -1,6 +1,14 @@
 ; Owner: game/persistence/s3
 ; Responsibility: Initial lives, SRAM initialization, default records, checksum validation, record reads and game-state persistence
 ; Source provenance and ranges: config/reconstruction/source_layout.json
+
+; =============== S U B R O U T I N E =======================================
+
+sub_B5EC:
+                move.w  #1,(Competition_mode).w
+                bra.s   loc_B5F8
+; ---------------------------------------------------------------------------
+
 Set_Lives_and_Continues:
                 clr.w   (Competition_mode).w
 

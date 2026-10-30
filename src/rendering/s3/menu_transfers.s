@@ -132,10 +132,3 @@ loc_B5DE:
 locret_B5EA:
                 rts
 ; End of function sub_B5D2
-
-; =============== S U B R O U T I N E =======================================
-
-sub_B5EC:
-                move.w  #1,(Competition_mode).w
-                bra.s   loc_B5F8
-; ---------------------------------------------------------------------------

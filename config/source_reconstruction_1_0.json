@@ -580,6 +580,12 @@
       "commits": ["332abac9176a546d9574ff1b49161b69b0af33e2"]
     },
     {
+      "id": "change-112c6fc7e9ba",
+      "kind": "source_or_tooling",
+      "summary": "Give camera events and solid collision explicit source owners",
+      "commits": ["112c6fc7e9ba620c0c05a2197fdcce4fb164e687"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",
