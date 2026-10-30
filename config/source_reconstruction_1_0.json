@@ -604,6 +604,12 @@
       "commits": ["cb38b95cbe1cded4de16d140782f81ded9c90567"]
     },
     {
+      "id": "change-282c4cb1c6db",
+      "kind": "source_or_tooling",
+      "summary": "Own tile animation and zone transport object families",
+      "commits": ["282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",

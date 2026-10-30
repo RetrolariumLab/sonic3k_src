@@ -5,8 +5,8 @@ responsibility, physical line count and source range at the preservation
 baseline. Owned data lives under `src/objects`, `src/rendering`, `src/ui`,
 `src/game` and `src/system/debug`. Engine-specific code remains separate.
 
-This registry is intentionally incomplete during extraction: 696 data units and
-347 sibling executable units have owners. The 60 remaining entry, driver, memory
+This registry is intentionally incomplete during extraction: 702 data units and
+420 sibling executable units have owners. The 60 remaining entry, driver, memory
 and macro units still await complete semantic extraction. Run
 `make source-layout-inventory` for that distinction. `make check-source-layout`
 rejects pending entries and cannot certify this intermediate tree as 2.0.
@@ -29,12 +29,13 @@ solely to meet a size target.
 No code or data labels were renamed in this move. The mandatory
 `config/reconstruction/label_renames.json` records that empty migration.
 
-The final water transition table sentinel also shares the address of the next
-demo-input procedure. Its explicit `data-end-code-alias` contract in the
-relocation policy retains the preservation baseline's code-entry coverage.
-Normal assembly and every relocated symbol proof must keep the alias equal to
-its independently discovered target; assigning different source owners cannot
-silently discard the alias or change that relationship.
+The final water-transition and enemy-art catalog sentinels share the addresses
+of the following demo-input and bubble-emitter entries. Their explicit
+`data-end-code-alias` contracts in the relocation policy retain the preservation
+baseline's code-entry coverage. Normal assembly and every relocated symbol proof
+must keep the alias equal to its independently discovered target; assigning
+different source owners cannot silently discard the alias or change that
+relationship.
 
 Comments mark the ends of object programs that finish with a shared display or
 solid-collision tail call. The registry records these as "added_annotations"

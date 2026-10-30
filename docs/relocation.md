@@ -22,12 +22,14 @@ reader therefore move together. Internal return sites in such a span belong to
 the next safe physical terminal. No return site or annotated member disappears
 when cohorts merge; exact ownership counters are checked.
 
-For the current source, 7152 return sites and 2559 annotations map to 4589 safe
-physical boundaries. These are derived counts, not acceptance constants. The
-matrix partitions every boundary once over the 32 groups in
-`config/reconstruction/relocation.json`. Each selected terminal gets an
-unreachable duplicate `rts`/`rte`; a pure tail-jump terminal gets an unreachable
-return guard. Procedure-owned trailing data stays inside its cohort.
+The accepted preservation baseline has 7152 return sites and 2559 imported
+annotations. Semantic owners also record explicitly checked terminal
+annotations; the current source determines its physical boundaries. These are
+derived counts, not acceptance constants. The matrix partitions every boundary
+once over the 32 groups in `config/reconstruction/relocation.json`. Each
+selected terminal gets an unreachable duplicate `rts`/`rte`; a pure tail-jump
+terminal gets an unreachable return guard. Procedure-owned trailing data stays
+inside its cohort.
 
 An additional unreachable return before `ErrorTrap`, immediately after the fixed
 header, moves the initial engine code too. In S&K `ErrorTrap` deliberately falls

@@ -1,0 +1,173 @@
+; Owner: rendering/sk
+; Responsibility: Zone enemy-art selection, decompression queue dispatch and product-specific pattern-load catalogs
+; Source provenance and ranges: config/reconstruction/source_layout.json
+
+; =============== S U B R O U T I N E =======================================
+
+LoadEnemyArt:
+                lea     Offs_LoadEnemyArt(pc),a6
+                move.w  #$D00,d0
+                cmpi.b  #$16,(Current_zone).w
+                beq.s   loc_2F798
+                move.w  #$E00,d0
+                cmpi.w  #$1700,(Current_zone_and_act).w
+                bne.s   loc_2F79E
+
+loc_2F798:
+                move.b  (Current_act).w,d0
+                bra.s   loc_2F7A2
+; ---------------------------------------------------------------------------
+
+loc_2F79E:
+                move.w  (Current_zone_and_act).w,d0
+
+loc_2F7A2:
+                ror.b   #1,d0
+                lsr.w   #6,d0
+                adda.w  (a6,d0.w),a6
+                move.w  (a6)+,d6
+                bmi.s   .return
+
+                .loop:
+                movea.l (a6)+,a1
+                move.w  (a6)+,d2
+                jsr     (Queue_Kos_Module).l
+                dbf     d6,.loop
+
+                .return:
+                rts
+; End of function LoadEnemyArt
+
+; ---------------------------------------------------------------------------
+Offs_LoadEnemyArt:
+                dc.w    PLCKosM_AIZ-Offs_LoadEnemyArt
+                dc.w    PLCKosM_AIZ-Offs_LoadEnemyArt
+                dc.w    PLCKosM_HCZ1-Offs_LoadEnemyArt
+                dc.w    PLCKosM_HCZ2-Offs_LoadEnemyArt
+                dc.w    PLCKosM_MGZ1-Offs_LoadEnemyArt
+                dc.w    PLCKosM_MGZ2-Offs_LoadEnemyArt
+                dc.w    PLCKosM_CNZ-Offs_LoadEnemyArt
+                dc.w    PLCKosM_CNZ-Offs_LoadEnemyArt
+                dc.w    PLCKosM_FBZ-Offs_LoadEnemyArt
+                dc.w    PLCKosM_FBZ-Offs_LoadEnemyArt
+                dc.w    PLCKosM_ICZ-Offs_LoadEnemyArt
+                dc.w    PLCKosM_ICZ-Offs_LoadEnemyArt
+                dc.w    PLCKosM_LBZ-Offs_LoadEnemyArt
+                dc.w    PLCKosM_LBZ-Offs_LoadEnemyArt
+                dc.w    PLCKosM_MHZ1-Offs_LoadEnemyArt
+                dc.w    PLCKosM_MHZ2-Offs_LoadEnemyArt
+                dc.w    PLCKosM_SOZ-Offs_LoadEnemyArt
+                dc.w    PLCKosM_SOZ-Offs_LoadEnemyArt
+                dc.w    PLCKosM_LRZ-Offs_LoadEnemyArt
+                dc.w    PLCKosM_LRZ-Offs_LoadEnemyArt
+                dc.w    PLCKosM_SSZ-Offs_LoadEnemyArt
+                dc.w    PLCKosM_SSZ-Offs_LoadEnemyArt
+                dc.w    PLCKosM_DEZ-Offs_LoadEnemyArt
+                dc.w    PLCKosM_DEZ-Offs_LoadEnemyArt
+                dc.w    PLCKosM_DDZ-Offs_LoadEnemyArt
+                dc.w    PLCKosM_DDZ-Offs_LoadEnemyArt
+                dc.w    PLCKosM_Pachinko-Offs_LoadEnemyArt
+                dc.w    PLCKosM_Pachinko-Offs_LoadEnemyArt
+                dc.w    PLCKosM_Slots-Offs_LoadEnemyArt
+                dc.w    PLCKosM_Slots-Offs_LoadEnemyArt
+
+PLCKosM_AIZ:    plrlistheader
+                plreq   ArtTile_MonkeyDude, ArtKosM_AIZ_MonkeyDude
+                plreq   ArtTile_Bloominator, ArtKosM_AIZ_Bloominator
+                plreq   ArtTile_CaterkillerJr, ArtKosM_AIZ_CaterkillerJr
+PLCKosM_AIZ_End:
+
+PLCKosM_HCZ1:   plrlistheader
+                plreq   ArtTile_Blastoid, ArtKosM_Blastoid
+                plreq   ArtTile_TurboSpiker, ArtKosM_TurboSpiker
+                plreq   ArtTile_MegaChopper, ArtKosM_MegaChopper
+                plreq   ArtTile_Pointdexter, ArtKosM_Pointdexter
+PLCKosM_HCZ1_End:
+
+PLCKosM_HCZ2:   plrlistheader
+                plreq   ArtTile_Jawz, ArtKosM_Jawz
+                plreq   ArtTile_TurboSpiker, ArtKosM_TurboSpiker
+                plreq   ArtTile_MegaChopper, ArtKosM_MegaChopper
+                plreq   ArtTile_Pointdexter, ArtKosM_Pointdexter
+PLCKosM_HCZ2_End:
+
+PLCKosM_MGZ1:   plrlistheader
+                plreq   ArtTile_Spiker, ArtKosM_Spiker
+                plreq   ArtTile_MGZMiniboss, ArtKosM_MGZMiniboss
+                plreq   ArtTile_MGZMiniBossDebris, ArtKosM_MGZEndBossDebris
+PLCKosM_MGZ1_End:
+
+PLCKosM_MGZ2:   plrlistheader
+                plreq   ArtTile_Spiker, ArtKosM_Spiker
+                plreq   ArtTile_Mantis, ArtKosM_Mantis
+PLCKosM_MGZ2_End:
+
+PLCKosM_CNZ:    plrlistheader
+                plreq   ArtTile_Sparkle, ArtKosM_Sparkle
+                plreq   ArtTile_Batbot, ArtKosM_Batbot
+                plreq   ArtTile_Clamer+$70, ArtKosM_ClamerShot
+                plreq   ArtTile_CNZBalloon, ArtKosM_CNZBalloon
+PLCKosM_CNZ_End:
+
+PLCKosM_FBZ:    plrlistheader
+                plreq   ArtTile_Blaster, ArtKosM_Blaster
+                plreq   ArtTile_Technosqueek, ArtKosM_Technosqueek
+                plreq   ArtTile_FBZButton, ArtKosM_FBZButton
+PLCKosM_FBZ_End:
+
+PLCKosM_ICZ:    plrlistheader
+                plreq   ArtTile_ICZSnowdust, ArtKosM_ICZSnowdust
+                plreq   ArtTile_StarPointer, ArtKosM_StarPointer
+PLCKosM_ICZ_End:
+
+PLCKosM_LBZ:    plrlistheader
+                plreq   ArtTile_SnaleBlaster, ArtKosM_SnaleBlaster
+                plreq   ArtTile_Orbinaut, ArtKosM_Orbinaut
+                plreq   ArtTile_Ribot, ArtKosM_Ribot
+                plreq   ArtTile_Corkey, ArtKosM_Corkey
+PLCKosM_LBZ_End:
+
+PLCKosM_MHZ1:   plrlistheader
+                plreq   ArtTile_Madmole, ArtKosM_Madmole
+                plreq   ArtTile_Mushmeanie, ArtKosM_Mushmeanie
+                plreq   ArtTile_Dragonfly, ArtKosM_Dragonfly
+PLCKosM_MHZ1_End:
+
+PLCKosM_MHZ2:   plrlistheader
+                plreq   ArtTile_Cluckoid+$22, ArtKosM_CluckoidArrow
+                plreq   ArtTile_Madmole, ArtKosM_Madmole
+                plreq   ArtTile_Mushmeanie, ArtKosM_Mushmeanie
+                plreq   ArtTile_Dragonfly, ArtKosM_Dragonfly
+PLCKosM_MHZ2_End:
+
+PLCKosM_SOZ:    plrlistheader
+                plreq   ArtTile_Skorp, ArtKosM_Skorp
+                plreq   ArtTile_Sandworm, ArtKosM_Sandworm
+                plreq   ArtTile_Rockn, ArtKosM_Rockn
+PLCKosM_SOZ_End:
+
+PLCKosM_LRZ:    plrlistheader
+                plreq   ArtTile_FirewormSegments, ArtKosM_FirewormSegments
+                plreq   ArtTile_Iwamodoki, ArtKosM_Iwamodoki
+                plreq   ArtTile_Toxomister, ArtKosM_Toxomister
+PLCKosM_LRZ_End:
+
+PLCKosM_SSZ:    plrlistheader
+                plreq   ArtTile_EggRoboBadnik, ArtKosM_EggRoboBadnik
+PLCKosM_SSZ_End:
+
+PLCKosM_DEZ:    plrlistheader
+                plreq   ArtTile_Spikebonker, ArtKosM_Spikebonker
+                plreq   ArtTile_Chainspike, ArtKosM_Chainspike
+PLCKosM_DEZ_End:
+
+PLCKosM_DDZ:    plrlistheader
+                plreq   ArtTile_EggRoboBadnik, ArtKosM_EggRoboBadnik
+PLCKosM_DDZ_End:
+
+PLCKosM_Pachinko:   plrlistheader
+                plreq   ArtTile_HPZTeleporter, ArtKosM_Teleporter
+PLCKosM_Pachinko_End:
+
+PLCKosM_Slots:  plrlistheader
+PLCKosM_Slots_End:
