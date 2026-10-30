@@ -1,0 +1,9 @@
+# retrolarium movie 1
+platform megadrive
+source mame
+title Power-on attract sequence
+kind attract
+frames 3600
+offset 0
+---
+3600 0 0

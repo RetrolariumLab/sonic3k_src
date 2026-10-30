@@ -1,0 +1,125 @@
+{
+  "schema": "retrolarium.movie-check",
+  "schema_version": 1,
+  "movie": "../attract.rlmovie",
+  "machine": "genesis",
+  "cells": {
+    "Game_mode": {
+      "address": "0xfff600",
+      "length": 1
+    },
+    "Current_zone": {
+      "address": "0xfffe10",
+      "length": 1
+    },
+    "Current_act": {
+      "address": "0xfffe11",
+      "length": 1
+    },
+    "Camera_X_pos": {
+      "address": "0xffee78",
+      "length": 2
+    },
+    "Ring_count": {
+      "address": "0xfffe20",
+      "length": 2
+    },
+    "Score": {
+      "address": "0xfffe26",
+      "length": 4
+    },
+    "Life_count": {
+      "address": "0xfffe12",
+      "length": 1
+    },
+    "Level_frame_counter": {
+      "address": "0xfffe04",
+      "length": 2
+    },
+    "V_int_run_count": {
+      "address": "0xfffe0c",
+      "length": 4
+    }
+  },
+  "frames": [300, 600, 1200, 1800, 2400, 3000, "end"],
+  "expected": {
+    "300": {
+      "Game_mode": "04",
+      "Current_zone": "00",
+      "Current_act": "00",
+      "Camera_X_pos": "0000",
+      "Ring_count": "0000",
+      "Score": "00000000",
+      "Life_count": "00",
+      "Level_frame_counter": "0000",
+      "V_int_run_count": "0000011d"
+    },
+    "600": {
+      "Game_mode": "04",
+      "Current_zone": "00",
+      "Current_act": "00",
+      "Camera_X_pos": "0000",
+      "Ring_count": "0000",
+      "Score": "00000000",
+      "Life_count": "00",
+      "Level_frame_counter": "0000",
+      "V_int_run_count": "00000249"
+    },
+    "1200": {
+      "Game_mode": "04",
+      "Current_zone": "00",
+      "Current_act": "00",
+      "Camera_X_pos": "0000",
+      "Ring_count": "0000",
+      "Score": "00000000",
+      "Life_count": "00",
+      "Level_frame_counter": "0000",
+      "V_int_run_count": "000004a1"
+    },
+    "1800": {
+      "Game_mode": "08",
+      "Current_zone": "00",
+      "Current_act": "00",
+      "Camera_X_pos": "0320",
+      "Ring_count": "0000",
+      "Score": "00000000",
+      "Life_count": "03",
+      "Level_frame_counter": "01e7",
+      "V_int_run_count": "000006f8"
+    },
+    "2400": {
+      "Game_mode": "08",
+      "Current_zone": "00",
+      "Current_act": "00",
+      "Camera_X_pos": "1308",
+      "Ring_count": "0000",
+      "Score": "00000000",
+      "Life_count": "03",
+      "Level_frame_counter": "043f",
+      "V_int_run_count": "00000950"
+    },
+    "3000": {
+      "Game_mode": "08",
+      "Current_zone": "00",
+      "Current_act": "00",
+      "Camera_X_pos": "1995",
+      "Ring_count": "000e",
+      "Score": "00000000",
+      "Life_count": "03",
+      "Level_frame_counter": "0697",
+      "V_int_run_count": "00000ba8"
+    },
+    "end": {
+      "Game_mode": "04",
+      "Current_zone": "00",
+      "Current_act": "00",
+      "Camera_X_pos": "0000",
+      "Ring_count": "000e",
+      "Score": "00000000",
+      "Life_count": "03",
+      "Level_frame_counter": "0708",
+      "V_int_run_count": "00000dfb"
+    }
+  },
+  "reference_image": "s3k"
+}

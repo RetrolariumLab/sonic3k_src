@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "name": "MAME consoles target",
+  "source": "https://github.com/mamedev/mame",
+  "source_commit": "c662f9ca1900ed7462dc4fe8d338a98e8e4ce3c3",
+  "provenance": "external_source_built",
+  "hosts": {
+    "windows-x86_64": {
+      "size": 140820542,
+      "sha256": "ff35833b41905185cd16dd591a8b1c8652e98c45c2dc5518e566a78ce63400ab"
+    }
+  },
+  "busy_timeout_seconds": 1800,
+  "run_timeout_seconds": 240,
+  "execution": "One MAME process at a time; defer while any existing consoles process is active. Never kill a foreign process."
+}

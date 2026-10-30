@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "movie": "scenarios/attract.rlmovie",
+  "frames": 3600,
+  "cell_symbols": {
+    "Game_mode": 1,
+    "Current_zone": 1,
+    "Current_act": 1,
+    "Camera_X_pos": 2,
+    "Ring_count": 2,
+    "Score": 4,
+    "Life_count": 1,
+    "Level_frame_counter": 2,
+    "V_int_run_count": 4
+  },
+  "scenarios": [
+    {
+      "profile": "s3-us",
+      "check": "scenarios/attract/s3-us.check.json",
+      "cart_mapping": "direct",
+      "demo_zone": 0
+    },
+    {
+      "profile": "s3-eu",
+      "check": "scenarios/attract/s3-eu.check.json",
+      "cart_mapping": "direct",
+      "demo_zone": 0
+    },
+    {
+      "profile": "s3-jp",
+      "check": "scenarios/attract/s3-jp.check.json",
+      "cart_mapping": "direct",
+      "demo_zone": 0
+    },
+    {
+      "profile": "sk",
+      "check": "scenarios/attract/sk.check.json",
+      "cart_mapping": "empty-upper",
+      "demo_zone": 7
+    },
+    {
+      "profile": "s3k",
+      "check": "scenarios/attract/s3k.check.json",
+      "cart_mapping": "direct",
+      "demo_zone": 0
+    }
+  ]
+}
