@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "groups": 32,
+  "code_sources": ["s3.s", "sonic3k.s", "Lockon S3/Screen Events.s"],
+  "engines": {
+    "s3-us": {
+      "sources": ["s3.s"],
+      "startup_label": "ErrorTrap"
+    },
+    "s3-eu": {
+      "sources": ["s3.s"],
+      "startup_label": "ErrorTrap"
+    },
+    "s3-jp": {
+      "sources": ["s3.s"],
+      "startup_label": "ErrorTrap"
+    },
+    "sk": {
+      "sources": ["sonic3k.s", "Lockon S3/Screen Events.s"],
+      "startup_label": "ErrorTrap"
+    }
+  },
+  "composites": {
+    "s3k": {
+      "relocated": "sk",
+      "fixed": "s3-us"
+    }
+  },
+  "neutral_widening": ["bra.s", "bsr.s"],
+  "timing_reference": {
+    "url": "https://www.nxp.com/docs/en/reference-manual/MC68000UM.pdf",
+    "table": "8-9",
+    "cpu": "MC68000",
+    "bra_byte_clocks": 10,
+    "bra_word_clocks": 10,
+    "bsr_byte_clocks": 18,
+    "bsr_word_clocks": 18
+  },
+  "coverage": "Every source rts/rte and every annotated procedure belongs to a derived physical cohort. Short conditional and indexed-slot spans remain inseparable; unannotated safe return boundaries add perturbations."
+}

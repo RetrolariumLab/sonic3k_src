@@ -2,12 +2,10 @@
 
 ## Unaccepted release requirements
 
-- Complete relocation procedure ownership and safe physical cohorts, including
-  fallthrough helpers, indexed branch tables and short conditional branches.
-- A reproducible public relocation producer, complete coverage/movement proof,
-  all-profile relocated runtime matrix and negative coverage tests.
-- A fail-fast Source Reconstruction 1.0 manifest/gate and a full clean-clone
-  run.
+- Replace remaining SMPS music/SFX assembler data with ROM-extracted streams,
+  retaining executable drivers and their required FM helper macros.
+- Complete the 1.0 aggregate clean-clone acceptance. The source-derived matrix
+  build, movement proof and all 160 relocated runtime cases have passed.
 - Semantic subsystem source layout with documented size exceptions and a label
   rename registry. The large imported entry units are still present.
 - Editable contracts/codecs for every stored and assembler-owned format,
@@ -28,3 +26,6 @@ annotation grants no explicit license; its status remains `license_not_granted`.
 Runtime currently observes a finite attract path and nine RAM cells, so it is
 not exhaustive gameplay coverage. Host support beyond the pinned Windows runtime
 is not claimed by portable ROM-less tests.
+
+Complete clean-clone acceptance for the current source and history remains
+pending.

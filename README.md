@@ -10,10 +10,11 @@ images, extracted binary assets or compiler executables are distributed.
 All five preservation images build byte for byte from verified private ROM
 inputs. Direct original-image attract checks cover all five profiles, and the
 675-label S3 second-cartridge ABI is checked independently for each S3 region.
-The repository is still under reconstruction. Full procedure-coverage
-relocation, semantic source layout, editable format contracts and aggregate
-release gates remain unfinished. No Source Reconstruction 1.0 or 2.0 release is
-claimed.
+The source-derived 32-group relocation matrix and all 160 relocated runtime
+cases pass. The repository remains under reconstruction: ROM-extracted SMPS
+music/SFX storage and clean-clone 1.0 aggregate acceptance are pending, followed
+by semantic source layout and editable format contracts. No Source
+Reconstruction 1.0 or 2.0 release is claimed.
 
 ## Quick start
 

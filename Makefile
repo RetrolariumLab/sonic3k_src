@@ -68,6 +68,25 @@ include mk/runtime.mk
 check-numeric-operands:
 	$(PYTHON) -m scripts.run validation.numeric_operands
 
+.PHONY: build-relocated check-relocated
+
+build-relocated:
+	$(PYTHON) -m scripts.run build.relocation build
+
+check-relocated:
+	$(PYTHON) -m scripts.run build.relocation check
+
+.PHONY: check-inputs release-check source-1-check release-audit
+
+check-inputs:
+	$(PYTHON) -m scripts.run build.pipeline check-inputs
+
+release-check source-1-check:
+	$(PYTHON) -m scripts.run validation.release check
+
+release-audit:
+	$(PYTHON) -m scripts.run validation.release audit
+
 .PHONY: check-driver-audio check-driver-audio-storage
 
 check-driver-audio:
@@ -75,3 +94,16 @@ check-driver-audio:
 
 check-driver-audio-storage:
 	$(PYTHON) -m scripts.run authoring.driver_payloads check --catalog-only
+
+.PHONY: check-audio-storage check-audio-binding
+
+check-audio-storage:
+	$(PYTHON) -m scripts.run validation.audio_storage
+
+check-audio-binding:
+	$(PYTHON) -m scripts.run validation.audio_storage --built
+
+.PHONY: check-release-metadata
+
+check-release-metadata:
+	$(PYTHON) -m scripts.run validation.release metadata

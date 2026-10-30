@@ -1,0 +1,484 @@
+{
+  "schema_version": 1,
+  "release_line": "1.0",
+  "release": {
+    "name": "Source Reconstruction 1.0",
+    "version": "1.0"
+  },
+  "release_kind": "preservation",
+  "tag": "source-reconstruction-1.0",
+  "status": "development",
+  "predecessor": null,
+  "predecessor_note": "First preservation release line; tags are maintainer actions.",
+  "reference": {
+    "manifest": "assets/manifest.json",
+    "images": ["s3-us", "s3-eu", "s3-jp", "sk", "s3k"]
+  },
+  "included_scope": [
+    "five_official_profiles",
+    "all_executable_cpu_source",
+    "byte_identity",
+    "symbolic_interfaces",
+    "bounded_procedure_relocation",
+    "direct_regional_runtime",
+    "private_history_audit"
+  ],
+  "excluded_scope": [
+    {
+      "id": "community-mods",
+      "reason": "Bug fixes, cheats, complete builds and optimizations change official preservation bytes."
+    },
+    {
+      "id": "knuckles-in-sonic-2",
+      "reason": "The second-cartridge game and its patch ROM are outside this release."
+    },
+    {
+      "id": "prototypes",
+      "reason": "Only the five checked official product/region images are accepted."
+    },
+    {
+      "id": "engine-merging",
+      "reason": "Sonic 3 and Sonic & Knuckles keep separate sibling engines."
+    }
+  ],
+  "requirements": {
+    "canonical_identity": {
+      "status": "partial",
+      "evidence": {
+        "targets": ["verify-all"],
+        "files": ["assets/manifest.json", "scripts/build/pipeline.py"]
+      },
+      "note": "Full clean-clone acceptance must be regenerated for this source and history."
+    },
+    "reproducible_build": {
+      "status": "partial",
+      "evidence": {
+        "targets": ["verify-toolchain", "verify-all"],
+        "files": ["config/toolchain.json", "config/revision_profiles.json"]
+      },
+      "note": "Full clean-clone acceptance must be regenerated for this source and history."
+    },
+    "executable_source": {
+      "status": "partial",
+      "evidence": {
+        "targets": ["audit-private", "verify-all", "check-audio-storage", "check-audio-binding", "check-driver-audio"],
+        "files": [
+          "docs/architecture.md",
+          "Sound/Z80 Sound Driver.s",
+          "config/audio_streams.json",
+          "Sound/FM_Voice_Macros.s",
+          "config/audio_driver_payloads.json",
+          "scripts/authoring/driver_payloads.py",
+          "scripts/validation/audio_source.py"
+        ]
+      },
+      "note": "Full clean-clone acceptance must be regenerated for this source and history."
+    },
+    "symbolic_pointers": {
+      "status": "partial",
+      "evidence": {
+        "targets": ["check-lockon", "check-numeric-operands", "build-relocated", "check-relocated"],
+        "files": [
+          "config/reconstruction/fixed_regions.json",
+          "config/reconstruction/lockon_abi.json",
+          "config/reconstruction/relocation.json"
+        ]
+      },
+      "note": "Full clean-clone acceptance must be regenerated for this source and history."
+    },
+    "runtime_coverage": {
+      "status": "partial",
+      "evidence": {
+        "targets": ["trace", "trace-relocated"],
+        "files": ["config/runtime/scenarios.json", "config/runtime/emulator.json", "docs/runtime.md"]
+      },
+      "note": "Full clean-clone acceptance must be regenerated for this source and history."
+    },
+    "baseline_validation": {
+      "status": "partial",
+      "evidence": {
+        "targets": ["lint", "test"],
+        "files": ["config/lint.json", "tests/"]
+      },
+      "note": "Full clean-clone acceptance must be regenerated for this source and history."
+    },
+    "baseline_documentation": {
+      "status": "partial",
+      "evidence": {
+        "targets": ["release-audit"],
+        "files": [
+          "docs/index.md",
+          "docs/architecture.md",
+          "docs/memory_map.md",
+          "docs/verification.md",
+          "docs/unknowns.md"
+        ]
+      },
+      "note": "Full clean-clone acceptance must be regenerated for this source and history."
+    },
+    "private_inputs_and_history": {
+      "status": "partial",
+      "evidence": {
+        "targets": ["audit-private"],
+        "files": [".gitignore", "config/binary_allowlist.json", "scripts/validation/private_data.py"]
+      },
+      "note": "Full clean-clone acceptance must be regenerated for this source and history."
+    },
+    "licensing_and_provenance": {
+      "status": "partial",
+      "evidence": {
+        "targets": ["release-audit"],
+        "files": ["docs/provenance.md"]
+      },
+      "note": "Full clean-clone acceptance must be regenerated for this source and history."
+    },
+    "release_contract": {
+      "status": "partial",
+      "evidence": {
+        "targets": ["check-release-metadata", "release-check"],
+        "files": ["config/source_reconstruction_1_0.json", "scripts/validation/release.py"]
+      },
+      "note": "Full clean-clone acceptance must be regenerated for this source and history."
+    }
+  },
+  "profiles": [
+    {
+      "id": "s3-us",
+      "status": "supported",
+      "artifact": "s3-us_rom",
+      "identity": "byte-identical"
+    },
+    {
+      "id": "s3-eu",
+      "status": "supported",
+      "artifact": "s3-eu_rom",
+      "identity": "byte-identical"
+    },
+    {
+      "id": "s3-jp",
+      "status": "supported",
+      "artifact": "s3-jp_rom",
+      "identity": "byte-identical"
+    },
+    {
+      "id": "sk",
+      "status": "supported",
+      "artifact": "sk_rom",
+      "identity": "byte-identical"
+    },
+    {
+      "id": "s3k",
+      "status": "supported",
+      "artifact": "s3k_rom",
+      "identity": "byte-identical"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "s3-us_rom",
+      "profile": "s3-us",
+      "build_target": "verify-all",
+      "path": "build/images/s3-us.bin",
+      "size": 2097152,
+      "sha1": "75e9c4705259d84112b3e697a6c00a0813d47d71",
+      "sha256": "d6404843c5ba32486f4c8c744acb7e1932069376960d886b1de37969787d3f9c",
+      "tracked": false
+    },
+    {
+      "id": "s3-eu_rom",
+      "profile": "s3-eu",
+      "build_target": "verify-all",
+      "path": "build/images/s3-eu.bin",
+      "size": 2097152,
+      "sha1": "2ff45bb056ede0f745e52f8d02c54b4ca724ca4c",
+      "sha256": "9a2a9a93cdb906628a9dafe6e0e16b2f5505498be12de46b43e69a60d291fc69",
+      "tracked": false
+    },
+    {
+      "id": "s3-jp_rom",
+      "profile": "s3-jp",
+      "build_target": "verify-all",
+      "path": "build/images/s3-jp.bin",
+      "size": 2097152,
+      "sha1": "7b98b21b7274233e962132bc22a7ccdf548c0ddb",
+      "sha256": "f3314b3603fa717cbfecacab3e4b39e03a130d61d058d53fa0acceed17b07012",
+      "tracked": false
+    },
+    {
+      "id": "sk_rom",
+      "profile": "sk",
+      "build_target": "verify-all",
+      "path": "build/images/sk.bin",
+      "size": 2097152,
+      "sha1": "88d6499d874dcb5721ff58d76fe1b9af811192e3",
+      "sha256": "6e12e6b33c26ebfcd0be433251d21cf6284eafe9f71b027bda3767ae59affec1",
+      "tracked": false
+    },
+    {
+      "id": "s3k_rom",
+      "profile": "s3k",
+      "build_target": "verify-all",
+      "path": "build/images/s3k.bin",
+      "size": 4194304,
+      "sha1": "cfbf98c36c776677290a872547ac47c53d2761d6",
+      "sha256": "fba0677fde9f76df93f3e98d6310d8af68b9847bde16e253d73cd4dd8134ed23",
+      "tracked": false
+    }
+  ],
+  "runtime_coverage": {
+    "policy": "direct",
+    "scenario_manifest": "config/runtime/scenarios.json",
+    "profiles": ["s3-us", "s3-eu", "s3-jp", "sk", "s3k"],
+    "relocated_variants": "config/reconstruction/relocation.json",
+    "pixels_compared": false,
+    "limitation": "Finite input-free attract coverage: nine RAM cells at seven checkpoints, not exhaustive gameplay."
+  },
+  "toolchain": {
+    "manifest": "config/toolchain.json",
+    "runtime_manifest": "config/runtime/emulator.json",
+    "supported_hosts": [
+      {
+        "os": "windows",
+        "architecture": "x86_64",
+        "shell": "powershell",
+        "python_minimum": "3.11",
+        "status": "supported",
+        "scope": "complete preservation build and pinned MAME runtime"
+      }
+    ],
+    "other_hosts_status": "unsupported_for_complete_runtime"
+  },
+  "aggregate_gates": {
+    "release-check": "preservation",
+    "source-1-check": "preservation"
+  },
+  "layout_deviations": [
+    {
+      "rule_id": "source-root-entry",
+      "actual_path": ["s3.s", "sonic3k.s"],
+      "reason": "Imported sibling engines retain their root entries for the preservation milestone; semantic subsystem extraction belongs to the next milestone.",
+      "equivalent_control": "Profile-owned entries, exact builds, source-derived return coverage and the architecture map keep ownership explicit."
+    }
+  ],
+  "licensing": [
+    {
+      "component": "game_code_and_data",
+      "license_id_or_status": "license_not_granted",
+      "redistribution": "not_permitted",
+      "origin": "Sega game code and data reconstructed from the user-owned Sonic 3 and Sonic & Knuckles images"
+    },
+    {
+      "component": "upstream_annotation",
+      "license_id_or_status": "license_not_granted",
+      "origin": "https://github.com/sonicretro/skdisasm",
+      "notes": "See docs/provenance.md for the pinned source and contributor attribution."
+    },
+    {
+      "component": "reference_images",
+      "license_id_or_status": "private_user_supplied",
+      "redistribution": "not_permitted",
+      "origin": "Private original dumps supplied by the user"
+    },
+    {
+      "component": "fm_voice_macro_helpers",
+      "license_id_or_status": "licensed",
+      "origin": "Flamewing, based on S1SMPS2ASM 1.1 by Marc Gordon; permission notice retained in Sound/FM_Voice_Macros.s",
+      "redistribution": "allowed_under_retained_notice"
+    },
+    {
+      "component": "retrolarium_kit",
+      "category": "external_tool",
+      "origin": "https://github.com/Retrolarium/retrolarium-kit",
+      "license_id_or_status": "external_unbundled",
+      "redistribution": "not_bundled",
+      "notes": "Pinned external dependency; its upstream license remains authoritative."
+    },
+    {
+      "component": "retrolarium_core",
+      "category": "external_tool",
+      "origin": "https://github.com/Retrolarium/retrolarium-core",
+      "license_id_or_status": "external_unbundled",
+      "redistribution": "not_bundled",
+      "notes": "Pinned external dependency; its upstream license remains authoritative."
+    },
+    {
+      "component": "as_and_p2bin",
+      "category": "external_tool",
+      "origin": "config/toolchain.json",
+      "license_id_or_status": "external_unbundled",
+      "redistribution": "not_bundled",
+      "notes": "Pinned external dependency; its upstream license remains authoritative."
+    },
+    {
+      "component": "mame",
+      "category": "external_tool",
+      "origin": "config/runtime/emulator.json",
+      "license_id_or_status": "external_unbundled",
+      "redistribution": "not_bundled",
+      "notes": "Pinned external dependency; its upstream license remains authoritative."
+    }
+  ],
+  "provenance": {
+    "references": ["docs/provenance.md", "docs/unknowns.md", "assets/manifest.json"],
+    "private_inputs_tracked": false
+  },
+  "required_documents": [
+    "README.md",
+    "CONTRIBUTING.md",
+    "docs/index.md",
+    "docs/build.md",
+    "docs/architecture.md",
+    "docs/memory_map.md",
+    "docs/revisions.md",
+    "docs/verification.md",
+    "docs/runtime.md",
+    "docs/lockon_abi.md",
+    "docs/numeric_operands.md",
+    "docs/unknowns.md",
+    "docs/provenance.md",
+    "docs/source_reconstruction_1_0.md",
+    "docs/relocation.md",
+    "docs/audio_storage.md"
+  ],
+  "release_commands": [
+    "lint",
+    "check-release-metadata",
+    "test",
+    "check-inputs",
+    "verify-toolchain",
+    "split",
+    "check-assets",
+    "clean",
+    "verify-all",
+    "check-lockon",
+    "check-numeric-operands",
+    "check-audio-binding",
+    "build-relocated",
+    "check-relocated",
+    "verify-emulator",
+    "trace",
+    "trace-relocated",
+    "release-audit"
+  ],
+  "prohibited_tracked_extensions": [
+    ".bin",
+    ".gen",
+    ".smd",
+    ".rom",
+    ".nes",
+    ".fds",
+    ".chr",
+    ".nem",
+    ".kos",
+    ".kosm",
+    ".eni",
+    ".unc",
+    ".wav",
+    ".pcm",
+    ".dpcm",
+    ".pcx",
+    ".bmp",
+    ".png",
+    ".jpg",
+    ".jpeg",
+    ".gif",
+    ".webp",
+    ".exe",
+    ".dll",
+    ".so",
+    ".o",
+    ".obj",
+    ".p",
+    ".zip",
+    ".7z",
+    ".gz"
+  ],
+  "prohibited_tracked_prefixes": [
+    "data/",
+    "build/",
+    "Split/",
+    "SonED Projects/",
+    "SonLVL INI Files/",
+    "Fixed Binary Files/",
+    "Sound/Music/",
+    "Sound/SFX/",
+    "Sound/_smps2asm_inc."
+  ],
+  "development_note": "The controls are implemented and evidenced individually. Complete current-source clean-clone acceptance remains pending; no tag-ready claim is made.",
+  "delta": [
+    {
+      "id": "change-dae39529140a",
+      "kind": "source_or_tooling",
+      "summary": "Import skdisasm at 73de97c",
+      "commits": ["dae39529140a6881b7abbb0cd3c49cd8d86fa833"]
+    },
+    {
+      "id": "change-1c6011b30054",
+      "kind": "source_or_tooling",
+      "summary": "Rebuild all official profiles from private ROM inputs",
+      "commits": ["1c6011b30054d1cc1a9c10ce531b931633314dac"]
+    },
+    {
+      "id": "change-011832767657",
+      "kind": "source_or_tooling",
+      "summary": "Use the AS source suffix recognized by Kit lint",
+      "commits": ["0118327676576da08b0119c2ca27f9b6d1486edd"]
+    },
+    {
+      "id": "change-c2616fc9877a",
+      "kind": "source_or_tooling",
+      "summary": "Normalize AS notation and apply the shared house style",
+      "commits": ["c2616fc9877a85ad477e3a5ee5c165febf16115b"]
+    },
+    {
+      "id": "change-e521a21a9c63",
+      "kind": "source_or_tooling",
+      "summary": "Exclude the mechanical formatting revision from blame",
+      "commits": ["e521a21a9c63d191bee69871d7a85d3bf42c6d38"]
+    },
+    {
+      "id": "change-dcfcf6e555ed",
+      "kind": "source_or_tooling",
+      "summary": "Prove the second-cartridge ABI against all Sonic 3 profiles",
+      "commits": ["dcfcf6e555edef6565cc4f9ddb352b3dd95b034c"]
+    },
+    {
+      "id": "change-344c05c5b068",
+      "kind": "source_or_tooling",
+      "summary": "Add pinned sequential MAME checks for every preservation profile",
+      "commits": ["344c05c5b0686793e5ccabd704db290e15fca1a9"]
+    },
+    {
+      "id": "change-120a3e1a46e7",
+      "kind": "source_or_tooling",
+      "summary": "Reject binary payload aliases throughout Git history",
+      "commits": ["120a3e1a46e792f39d9885783e78bb7efc6a1d8a"]
+    },
+    {
+      "id": "change-01837913d855",
+      "kind": "source_or_tooling",
+      "summary": "Name fixed cartridge and RAM operands without changing preserved behavior",
+      "commits": ["01837913d8551eb6a40516184d55e41fb49a7b8d"]
+    },
+    {
+      "id": "change-abf9bea4009f",
+      "kind": "source_or_tooling",
+      "summary": "Document the preservation workflow and remaining release requirements",
+      "commits": ["abf9bea4009fd3054b16c861af458b345fc964ca"]
+    },
+    {
+      "id": "current-source-stage",
+      "kind": "source_or_tooling",
+      "summary": "Continue preservation source and checks with private audio storage.",
+      "commits": ["release-commit"]
+    }
+  ],
+  "evidence": {
+    "identity": "build/identity.json",
+    "source_binding": "build/source_binding.json",
+    "relocation": "build/relocated/manifest.json",
+    "preservation_runtime": "build/runtime/evidence/check.json",
+    "relocated_runtime": "build/runtime/evidence/matrix.json",
+    "aggregate": "build/release/source-1-check.json"
+  }
+}

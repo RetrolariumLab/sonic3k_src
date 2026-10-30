@@ -22,15 +22,15 @@ only after its movie check succeeds; no screenshot comparison is used.
 
 ## Relocation and release limits
 
-The runtime runner accepts a relocation artifact manifest through
-`make trace-relocated`. The complete reproducible producer, procedure-coverage
-proof and aggregate release checks remain unfinished. Private exploratory
-candidates are not release evidence. Do not infer a release from byte identity
-or a subset of relocated runtime runs.
+The public [relocation producer](relocation.md) builds every declared variant
+and checks exact source-derived cohort coverage and independent symbol movement.
+All 160 relocated runtime cases have passed. ROM-extracted SMPS storage and
+clean-clone aggregate acceptance are still pending. Exploratory candidates are
+not substitutes for these public commands.
 
-A future accepted release sequence must fail at the first unsuccessful stage:
-style, tests, private inputs, clean assembly, identity, complete relocation,
-relocated runtime, privacy/publication audit and clean tracked tree. Its input
-and evidence manifests must be reproducible from a clean clone. Source 2.0 also
-requires semantic source ownership and validated editable data contracts. See
-[remaining work](unknowns.md).
+The candidate `make release-check` sequence fails at the first unsuccessful
+stage: style, tests, private inputs, clean assembly, identity, complete
+relocation, relocated runtime, privacy/publication audit and clean tracked tree.
+Its input and evidence manifests must be reproducible from a clean clone. Source
+2.0 also requires semantic source ownership and validated editable data
+contracts. See [remaining work](unknowns.md).

@@ -1,6 +1,7 @@
 """Declarative runtime contracts and cartridge bus wrappers."""
 
 from pathlib import Path
+import hashlib
 import re
 
 from scripts.build.project import ROOT, image_records, inside, load, profiles
@@ -74,3 +75,33 @@ def scenarios():
             raise ValueError("Movie source or frame budget differs from the declaration")
         validate_golden(entry, spec, contract)
     return contract, entries
+
+
+def runtime_signature():
+    """Bind observations to movie, original expectations and emulator contract."""
+    contract = load("config/runtime/scenarios.json")
+    names = {"config/runtime/scenarios.json", "config/runtime/emulator.json", contract["movie"]}
+    names.update(row["check"] for row in contract["scenarios"])
+    result = hashlib.sha256()
+    for name in sorted(names):
+        result.update(name.encode() + b"\0" + (ROOT / name).read_bytes() + b"\0")
+    return result.hexdigest()
+
+
+def check_run_evidence(evidence, source, signature, expected, manifest_hash=None):
+    if (
+        evidence.get("complete") is not True
+        or evidence.get("source_sha256") != source
+        or evidence.get("scenario_sha256") != signature
+    ):
+        raise ValueError("Runtime evidence is incomplete or stale")
+    if evidence.get("manifest_sha256") != manifest_hash:
+        raise ValueError("Runtime evidence used a different relocation matrix")
+    results = evidence.get("results", [])
+    pairs = [(r.get("profile"), r.get("variant")) for r in results]
+    if (
+        len(pairs) != len(set(pairs))
+        or set(pairs) != set(expected)
+        or any(r.get("passed") is not True for r in results)
+    ):
+        raise ValueError("Runtime evidence lacks a successful unique profile/variant case")

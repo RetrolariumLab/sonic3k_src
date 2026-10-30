@@ -15,7 +15,7 @@ from scripts.build.project import (
     sha,
     source_fingerprint,
 )
-from scripts.runtime.contracts import bus_image, scenarios, validate_golden
+from scripts.runtime.contracts import bus_image, runtime_signature, scenarios, validate_golden
 from scripts.runtime.native import prepare, run_movie
 from scripts.validation.symbols import parse_symbols
 
@@ -27,6 +27,15 @@ def main(argv=None):
     parser.add_argument("--profile")
     parser.add_argument("--manifest", default="build/relocated/manifest.json")
     args = parser.parse_args(argv)
+    evidence_path = ROOT / "build/runtime/evidence" / (args.command + ".json")
+    start_source = source_fingerprint()
+    start_signature = runtime_signature()
+    if args.command != "prepare":
+        atomic(
+            evidence_path,
+            (json.dumps({"complete": False, "command": args.command, "source_sha256": start_source}) + "\n").encode(),
+        )
+        atomic(ROOT / "build/runtime/results.json", b"[]\n")
     mame = prepare(args.mame)
     if args.command == "prepare":
         print("[OK] Pinned MAME ready under build/")
@@ -43,7 +52,9 @@ def main(argv=None):
     variants = [None]
     matrix = None
     if args.command == "matrix":
-        matrix = load(args.manifest)
+        from scripts.build.relocation import verify_manifest
+
+        matrix = verify_manifest(args.manifest)
         if matrix["source_sha256"] != source_fingerprint():
             raise ValueError("Relocation evidence is stale; rebuild the probe matrix")
         variants = matrix["variants"]
@@ -95,8 +106,22 @@ def main(argv=None):
                     "image_sha256": sha(image.read_bytes()),
                     "checks": entry["check"],
                     "passed": True,
+                    "log": log.relative_to(ROOT / "build").as_posix(),
+                    "log_sha256": sha(log.read_bytes()),
                 }
             )
             atomic(ROOT / "build/runtime/results.json", (json.dumps(results, indent=2) + "\n").encode())
             print("[OK] Runtime RAM matched: " + label, flush=True)
+    if start_source != source_fingerprint() or (args.command != "golden" and start_signature != runtime_signature()):
+        raise ValueError("Source or scenario changed during runtime verification")
+    evidence = {
+        "schema_version": 1,
+        "complete": True,
+        "command": args.command,
+        "source_sha256": start_source,
+        "scenario_sha256": runtime_signature(),
+        "manifest_sha256": sha((ROOT / args.manifest).read_bytes()) if matrix is not None else None,
+        "results": results,
+    }
+    atomic(evidence_path, (json.dumps(evidence, indent=2) + "\n").encode())
     return 0

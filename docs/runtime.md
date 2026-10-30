@@ -46,3 +46,12 @@ The composite S3&K bus image contains S&K followed by the verified original S3
 half. Its golden reaches the Angel Island demo. Composite relocation keeps the
 attached S3 cartridge on its fixed external ABI, checked independently by
 `make check-lockon`. The content of two halves alone does not prove runtime.
+
+## Complete run binding
+
+Successful checks write separate `build/runtime/evidence/check.json` and
+`matrix.json` records. A record becomes complete only after every requested case
+passes. It binds source, movies, goldens, emulator contract and relocation
+manifest, and records each bus image and log hash. The release audit requires
+the exact complete profile/variant product; a previous run or successful subset
+cannot replace missing observations.
