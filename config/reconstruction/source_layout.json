@@ -900,7 +900,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 98740,
+      "physical_lines": 82386,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -4221,6 +4221,96 @@
       ]
     },
     {
+      "path": "src/game/level/zones/aiz/sk/act1_screen.s",
+      "owner": "game/level/zones/aiz/sk",
+      "responsibility": "Angel Island act-one screen and background setup, events, tree reveal and transition floor.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 560,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 400,
+        "last_line": 956,
+        "sha256": "28c8b4bdc7af11e94356cfce0e556b3d204757bde07699ef2326c7403353f6a2"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 325894,
+          "end": 327434
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 325894,
+          "end": 327434
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/aiz/sk/act2_air_raid.s",
+      "owner": "game/level/zones/aiz/sk",
+      "responsibility": "Angel Island act-two battleship scene, bombs, background trees and small boss actors.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 417,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 1347,
+        "last_line": 1760,
+        "sha256": "ff62f8f4c08d9828c7f88ceb177f637efad8b3ca5fc04bfd209cdebb4392d830"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 328522,
+          "end": 330622
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 328522,
+          "end": 330622
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/aiz/sk/act2_screen_control.s",
+      "owner": "game/level/zones/aiz/sk",
+      "responsibility": "Angel Island act-two screen and background initialization, event control and deformation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 393,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 957,
+        "last_line": 1346,
+        "sha256": "d5c3aed8a51dfdeb8ac565813fbb6d9c999c2cb40a874918c9a8418a287c22ca"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 327434,
+          "end": 328522
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 327434,
+          "end": 328522
+        }
+      ]
+    },
+    {
       "path": "src/game/level/zones/cnz/s3/act1_screen.s",
       "owner": "game/level/zones/cnz/s3",
       "responsibility": "Carnival Night act-one screen and background control, deformation and miniboss scroll objects.",
@@ -4316,6 +4406,351 @@
       ]
     },
     {
+      "path": "src/game/level/zones/cnz/sk/act1_screen.s",
+      "owner": "game/level/zones/cnz/sk",
+      "responsibility": "Carnival Night act-one screen control, background events, deformation and miniboss scroll actors.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 549,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 3401,
+        "last_line": 3946,
+        "sha256": "e647b7ee6fe39778ebe82c0a200903eb0941ee8a70fff259f006b770fd98500f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 334740,
+          "end": 336136
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 334740,
+          "end": 336136
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/cnz/sk/act2_screen.s",
+      "owner": "game/level/zones/cnz/sk",
+      "responsibility": "Carnival Night act-two screen control, background events and teleporter actor.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 271,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 3947,
+        "last_line": 4214,
+        "sha256": "0659e3b9ecf0b8ad1d7776837ad806624691812d02aef0bed062619f8eff894c"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 336136,
+          "end": 336876
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 336136,
+          "end": 336876
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/ddz/sk/screen.s",
+      "owner": "game/level/zones/ddz/sk",
+      "responsibility": "Doomsday screen and background initialization, progression events and private state.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 194,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 14775,
+        "last_line": 14965,
+        "sha256": "076f6e020e92e08c951e8960554b2b78e98d3090bc736ac3133f24257d76dd41"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 365932,
+          "end": 366372
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 365932,
+          "end": 366372
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/dez/sk/act1_screen.s",
+      "owner": "game/level/zones/dez/sk",
+      "responsibility": "Death Egg act-one screen and background initialization, event dispatch and deformation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 105,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 14585,
+        "last_line": 14685,
+        "sha256": "2e34193d92e54ff39a55b7d7170e45422976675a40b895375d41a196b407682b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "DEZ1_ScreenInit",
+          "kind": "terminal-tail",
+          "reason": "The complete screen and background program ends in an unconditional shared deformation or screen-event service tail call and contains no original independent return boundary.",
+          "origin_first_line": 14587,
+          "origin_terminal_line": 14685,
+          "origin_end_line": 14685
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 365394,
+          "end": 365710
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 365394,
+          "end": 365710
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/dez/sk/act2_screen.s",
+      "owner": "game/level/zones/dez/sk",
+      "responsibility": "Death Egg act-two screen and background initialization and event control.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 93,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 14686,
+        "last_line": 14774,
+        "sha256": "0240dab8543402b21399fef7daf84814be80296c3301eb161559282bbee752b8"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "DEZ2_ScreenInit",
+          "kind": "terminal-tail",
+          "reason": "The complete screen and background program ends in an unconditional shared deformation or screen-event service tail call and contains no original independent return boundary.",
+          "origin_first_line": 14688,
+          "origin_terminal_line": 14774,
+          "origin_end_line": 14774
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 365710,
+          "end": 365932
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 365710,
+          "end": 365932
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/dez/sk/act3_screen.s",
+      "owner": "game/level/zones/dez/sk",
+      "responsibility": "Death Egg act-three screen and background events, deformation and coordinated scene actors.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 560,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 16188,
+        "last_line": 16744,
+        "sha256": "3c193be9ab2a703574f81e2d5b2fba7d749ccc144f4cae552db9080dcab07647"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 369588,
+          "end": 371202
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 369588,
+          "end": 371202
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/fbz/sk/act1_background.s",
+      "owner": "game/level/zones/fbz/sk",
+      "responsibility": "Flying Battery act-one background initialization, events, deformation and outdoor background motion.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 635,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 4735,
+        "last_line": 5366,
+        "sha256": "ac0ad0b4e94f56c27e94eb6e0b34dd3d9e8d5b40d693b58c1b28140cdce35029"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 338012,
+          "end": 339424
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 338012,
+          "end": 339424
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/fbz/sk/act1_screen_control.s",
+      "owner": "game/level/zones/fbz/sk",
+      "responsibility": "Flying Battery act-one screen initialization, event dispatch and progression control.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 523,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 4215,
+        "last_line": 4734,
+        "sha256": "aa518bf58ac3410588f6d2316c6cfd860afccfaa01f22a7f5e9f65625ea90591"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 336876,
+          "end": 338012
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 336876,
+          "end": 338012
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/fbz/sk/act2_background.s",
+      "owner": "game/level/zones/fbz/sk",
+      "responsibility": "Flying Battery act-two background events, end-boss event actors, pillars and clouds.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 543,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 5568,
+        "last_line": 6107,
+        "sha256": "8af89683869bf822be82b5f499abfe220745c5f71ba9862ff00f5fb5d73ede96"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 339880,
+          "end": 341512
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 339880,
+          "end": 341512
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/fbz/sk/act2_screen_control.s",
+      "owner": "game/level/zones/fbz/sk",
+      "responsibility": "Flying Battery act-two screen initialization, event dispatch and progression control.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 204,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 5367,
+        "last_line": 5567,
+        "sha256": "7ec2eb751cea789916f3c1ba36c70bcee3a17692fe5c02ee31fd3e226bdf1dc4"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 339424,
+          "end": 339880
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 339424,
+          "end": 339880
+        }
+      ]
+    },
+    {
       "path": "src/game/level/zones/hcz/s3/act1_screen.s",
       "owner": "game/level/zones/hcz/s3",
       "responsibility": "Hydrocity act-one screen and background initialization, events, deformation and private geometry.",
@@ -4401,6 +4836,151 @@
       ]
     },
     {
+      "path": "src/game/level/zones/hcz/sk/act1_screen.s",
+      "owner": "game/level/zones/hcz/sk",
+      "responsibility": "Hydrocity act-one screen and background initialization, events, deformation and private geometry.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 314,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 1761,
+        "last_line": 2071,
+        "sha256": "118d6d5af7710e9971ebbdf11f9b15c28914d2e7c6a751228b99c26eb5ace5ec"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 330622,
+          "end": 331400
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 330622,
+          "end": 331400
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/hcz/sk/act2_screen.s",
+      "owner": "game/level/zones/hcz/sk",
+      "responsibility": "Hydrocity act-two screen and background initialization, events, deformation and wall actor.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 263,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 2072,
+        "last_line": 2331,
+        "sha256": "40679a02dd3da8c59822bcc9d3479d3b7cb3b45140f49282cda21c411dfcb345"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 331400,
+          "end": 332056
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 331400,
+          "end": 332056
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/hpz/sk/screen.s",
+      "owner": "game/level/zones/hpz/sk",
+      "responsibility": "Hidden Palace screen and background initialization, event state and progression control.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 252,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 15939,
+        "last_line": 16187,
+        "sha256": "9f4f3fb619c2b689bf6b9375e86a90d8a33631dde8220a47993fc2226b9c8f89"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 368942,
+          "end": 369588
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 368942,
+          "end": 369588
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/hpz/sk/special_screen.s",
+      "owner": "game/level/zones/hpz/sk",
+      "responsibility": "Hidden Palace special screen and background initialization and event state.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 56,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 16745,
+        "last_line": 16796,
+        "sha256": "030814393b38210287b7ce24f83359d007bad15d5bbb2eb7473068f9dd44d1ea"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "HPZS_ScreenInit",
+          "kind": "terminal-tail",
+          "reason": "The complete screen and background program ends in an unconditional shared deformation or screen-event service tail call and contains no original independent return boundary.",
+          "origin_first_line": 16747,
+          "origin_terminal_line": 16796,
+          "origin_end_line": 16796
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 371202,
+          "end": 371362
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 371202,
+          "end": 371362
+        }
+      ]
+    },
+    {
       "path": "src/game/level/zones/icz/s3/act1_screen.s",
       "owner": "game/level/zones/icz/s3",
       "responsibility": "IceCap act-one introductory screen control, background events and deformation.",
@@ -4477,6 +5057,81 @@
           "component": "s3-us",
           "start": 2350870,
           "end": 2351704
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/icz/sk/act1_screen.s",
+      "owner": "game/level/zones/icz/sk",
+      "responsibility": "IceCap act-one screen and background events, deformation, snow pile and teleporter actors.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 600,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 6108,
+        "last_line": 6704,
+        "sha256": "a09ccb2029500a9924c13ca57b29d7b662d325752801bbcb04e719f3ba562922"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 341512,
+          "end": 343236
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 341512,
+          "end": 343236
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/icz/sk/act2_screen.s",
+      "owner": "game/level/zones/icz/sk",
+      "responsibility": "IceCap act-two screen and background initialization, event control and deformation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 187,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 6705,
+        "last_line": 6887,
+        "sha256": "8af8e144306090b1cb6bb985695ef992ea64e641f90e385882227b8020bf3579"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "ICZ2_ScreenInit",
+          "kind": "terminal-tail",
+          "reason": "The complete IceCap act-two screen and background program ends with an unconditional branch to its shared update state and contains no original independent return boundary.",
+          "origin_first_line": 6707,
+          "origin_terminal_line": 6887,
+          "origin_end_line": 6887
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 343236,
+          "end": 343702
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 343236,
+          "end": 343702
         }
       ]
     },
@@ -4606,6 +5261,196 @@
       ]
     },
     {
+      "path": "src/game/level/zones/lbz/sk/act1_screen.s",
+      "owner": "game/level/zones/lbz/sk",
+      "responsibility": "Launch Base act-one screen and background events, invisible barrier and deformation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 453,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 6888,
+        "last_line": 7337,
+        "sha256": "e0630bc1f64b11b70e1ffdbab814464d598479c15d0228ff4d0b22c88933a5c7"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 343702,
+          "end": 344904
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 343702,
+          "end": 344904
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/lbz/sk/act2_deformation.s",
+      "owner": "game/level/zones/lbz/sk",
+      "responsibility": "Launch Base act-two and Death Egg background deformation, window effects and private geometry.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 580,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 7623,
+        "last_line": 8199,
+        "sha256": "f14a518b2739b5c2d5612dfbb2edf743e05aa4bc64d0dac6d22dd2d400da5e79"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 345608,
+          "end": 346806
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 345608,
+          "end": 346806
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/lbz/sk/act2_screen_control.s",
+      "owner": "game/level/zones/lbz/sk",
+      "responsibility": "Launch Base act-two screen and background initialization and event control.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 288,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 7338,
+        "last_line": 7622,
+        "sha256": "c1d642818c4e657ef661c1d120f0b80d81f130658cd30bb8c548fa48bb98f3a2"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 344904,
+          "end": 345608
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 344904,
+          "end": 345608
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/lrz/sk/act1_screen.s",
+      "owner": "game/level/zones/lrz/sk",
+      "responsibility": "Lava Reef act-one screen and background events, deformation and coordinated scene actors.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 456,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 11187,
+        "last_line": 11639,
+        "sha256": "cad01a122438890b578bb28f90f9cf0dd4926c9061365957051a0df780fbd23b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 355076,
+          "end": 356262
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 355076,
+          "end": 356262
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/lrz/sk/act2_screen.s",
+      "owner": "game/level/zones/lrz/sk",
+      "responsibility": "Lava Reef act-two screen and background initialization, event dispatch and deformation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 201,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 11640,
+        "last_line": 11837,
+        "sha256": "16b86f6cf447b12ce4b4e1e722e73536613ba26d115982ea4a7e5ba26d3977c4"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 356262,
+          "end": 356854
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 356262,
+          "end": 356854
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/lrz/sk/act3_screen.s",
+      "owner": "game/level/zones/lrz/sk",
+      "responsibility": "Lava Reef act-three screen and background events, deformation and coordinated scene objects.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 678,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 15264,
+        "last_line": 15938,
+        "sha256": "9516b25260d5b35d3612ec8d1f25461485663c203e66671e194a3647faade0c4"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 367230,
+          "end": 368942
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 367230,
+          "end": 368942
+        }
+      ]
+    },
+    {
       "path": "src/game/level/zones/mgz/s3/act1_screen.s",
       "owner": "game/level/zones/mgz/s3",
       "responsibility": "Marble Garden act-one screen and background initialization, events, deformation and private geometry.",
@@ -4727,6 +5572,596 @@
           "component": "s3-us",
           "start": 2345492,
           "end": 2346784
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/mgz/sk/act1_screen.s",
+      "owner": "game/level/zones/mgz/sk",
+      "responsibility": "Marble Garden act-one screen and background initialization, events and deformation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 131,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 2332,
+        "last_line": 2459,
+        "sha256": "a8ab36e9ff136b7413b965e9fd774076b339ce8d15528a4e5536561d2d36d810"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 332056,
+          "end": 332454
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 332056,
+          "end": 332454
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/mgz/sk/act2_collapse_background.s",
+      "owner": "game/level/zones/mgz/sk",
+      "responsibility": "Marble Garden act-two collapse solids, background events and coordinated character-dependent movement.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 377,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 3027,
+        "last_line": 3400,
+        "sha256": "8fbfa94c9b68f505dcc8df42b12a39e95a519801cd2af0df1a6266928a803ab3"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 333834,
+          "end": 334740
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 333834,
+          "end": 334740
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/mgz/sk/act2_screen_control.s",
+      "owner": "game/level/zones/mgz/sk",
+      "responsibility": "Marble Garden act-two screen initialization, event control and collapse triggering.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 570,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 2460,
+        "last_line": 3026,
+        "sha256": "8ef37c84c9112a55584c9ad823bd1d6595925379d8edb0eb56c8e833d100f409"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 332454,
+          "end": 333834
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 332454,
+          "end": 333834
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/mhz/sk/act1_screen.s",
+      "owner": "game/level/zones/mhz/sk",
+      "responsibility": "Mushroom Hill act-one screen and background initialization, events and deformation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 242,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 8200,
+        "last_line": 8438,
+        "sha256": "2911aeab9773eafb1673f12802befebf613d2c67c31a526165227d6567a0dd50"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 346806,
+          "end": 347440
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 346806,
+          "end": 347440
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/mhz/sk/act2_background.s",
+      "owner": "game/level/zones/mhz/sk",
+      "responsibility": "Mushroom Hill act-two background initialization, events, deformation and private sequence data.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 735,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 8853,
+        "last_line": 9584,
+        "sha256": "c011ab916b4b9e1a240b1ae0efc495f209bca17736995c7e7d0c313b05bd326e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-family",
+        "reason": "The complete act-two background program keeps its dispatch, sequence state, deformation and private geometry together below 900 physical lines.",
+        "proof_target": "check-source-layout"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 348528,
+          "end": 350788
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 348528,
+          "end": 350788
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "owner": "game/level/zones/mhz/sk",
+      "responsibility": "Mushroom Hill act-two screen initialization, event dispatch and progression control.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 417,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 8439,
+        "last_line": 8852,
+        "sha256": "bcb5b76de03bebc319ccbc2802a74da016ebe654952700933423103d8afcbdd5"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 347440,
+          "end": 348528
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 347440,
+          "end": 348528
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/pachinko/sk/screen.s",
+      "owner": "game/level/zones/pachinko/sk",
+      "responsibility": "Pachinko bonus screen and background initialization and event state.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 45,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 14966,
+        "last_line": 15007,
+        "sha256": "fa160f7df3c2d3e8f16aea6cce3a86c19dc7620ba78fd1fcaf5de78335cf8ae5"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 366372,
+          "end": 366470
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 366372,
+          "end": 366470
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/slots/sk/screen.s",
+      "owner": "game/level/zones/slots/sk",
+      "responsibility": "Rotating slot bonus screen setup, progression events and background control.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 259,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 15008,
+        "last_line": 15263,
+        "sha256": "378cbdcdeaf13ed47108f5594ad4d8fda9fae4f101aaa6e9751611b9820ed82b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 366470,
+          "end": 367230
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 366470,
+          "end": 367230
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/soz/sk/act1_screen.s",
+      "owner": "game/level/zones/soz/sk",
+      "responsibility": "Sandopolis act-one screen and background initialization, event control, deformation and private sequence data.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 645,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 9585,
+        "last_line": 10226,
+        "sha256": "baac83c9e85eabc6d069f57d96825fb8d483a7a34422cee8dcdb50c9246b463a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 350788,
+          "end": 352652
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 350788,
+          "end": 352652
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/soz/sk/act2_background.s",
+      "owner": "game/level/zones/soz/sk",
+      "responsibility": "Sandopolis act-two background initialization, event control, deformation and private sequence data.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 877,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 10313,
+        "last_line": 11186,
+        "sha256": "b7fcbe1a935f9188b628372d99072953f64d36e37f56ac2480f3adf3826529a7"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-family",
+        "reason": "The complete act-two background program keeps its dispatch, sequence state, deformation and private geometry together below 900 physical lines.",
+        "proof_target": "check-source-layout"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 352872,
+          "end": 355076
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 352872,
+          "end": 355076
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/soz/sk/act2_screen_control.s",
+      "owner": "game/level/zones/soz/sk",
+      "responsibility": "Sandopolis act-two screen initialization, event dispatch and progression control.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 89,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 10227,
+        "last_line": 10312,
+        "sha256": "cb3b7fda32c9c8995ceb2150306148193c13019ca202d36e41c6ff0ab6f7bf2d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 352652,
+          "end": 352872
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 352652,
+          "end": 352872
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/ssz/sk/act1_arrival_transport.s",
+      "owner": "game/level/zones/ssz/sk",
+      "responsibility": "Sky Sanctuary arrival beam, player transport, timed character placement and Knuckles scene support.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 193,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 12737,
+        "last_line": 12926,
+        "sha256": "0903e0e658c256c1db552de7e4499c3ea516e40857b1c3cb79779b68cccbb1c5"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 359454,
+          "end": 360086
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 359454,
+          "end": 360086
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/ssz/sk/act1_background.s",
+      "owner": "game/level/zones/ssz/sk",
+      "responsibility": "Sky Sanctuary act-one background initialization, events, deformation and private geometry.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 375,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 12365,
+        "last_line": 12736,
+        "sha256": "89c034a922d5d26c19cc5bf5e86e195f55a6cf64019b71acde17e5c59389f136"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 358394,
+          "end": 359454
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 358394,
+          "end": 359454
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/ssz/sk/act1_camera_transition.s",
+      "owner": "game/level/zones/ssz/sk",
+      "responsibility": "Sky Sanctuary camera transition, character motion, collapsing bridge actors and next-level handoff.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 497,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 12927,
+        "last_line": 13420,
+        "sha256": "621c617656b186f1f30fef65b0dcfbd6d8db36494f4f690578e2f33bb8bba1c5"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 360086,
+          "end": 361406
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 360086,
+          "end": 361406
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/ssz/sk/act1_ramp_debris.s",
+      "owner": "game/level/zones/ssz/sk",
+      "responsibility": "Sky Sanctuary spiral-ramp debris state, rumble effects and cloud or ramp sprite resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 273,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 13421,
+        "last_line": 13690,
+        "sha256": "41cdb1598985a1fa7e6b14c2584f81317fc1676e7567e4c92fe7ec9586d44b2a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 361406,
+          "end": 363078
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 361406,
+          "end": 363078
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/ssz/sk/act1_screen_control.s",
+      "owner": "game/level/zones/ssz/sk",
+      "responsibility": "Sky Sanctuary act-one screen initialization, event dispatch and progression control.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 530,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 11838,
+        "last_line": 12364,
+        "sha256": "58ea6584357e5321f766f72815a9e1400ad53455261d58e9043faca413ba971e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 356854,
+          "end": 358394
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 356854,
+          "end": 358394
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/ssz/sk/act2_background.s",
+      "owner": "game/level/zones/ssz/sk",
+      "responsibility": "Sky Sanctuary act-two background initialization, event state, deformation and private records.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 665,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 13923,
+        "last_line": 14584,
+        "sha256": "0229deb496767a2164945b960a6b7184d5f91fa72d4f15e0a6a75b715e059787"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 363722,
+          "end": 365394
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 363722,
+          "end": 365394
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/ssz/sk/act2_screen_control.s",
+      "owner": "game/level/zones/ssz/sk",
+      "responsibility": "Sky Sanctuary act-two screen initialization, event dispatch and progression control.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 235,
+      "origin": {
+        "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
+        "path": "sonic3k.s",
+        "first_line": 13691,
+        "last_line": 13922,
+        "sha256": "03090a3b5d7eafe1e8abb34c6fbb5099d99a80adc51df231d45d720b7c9cee81"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 363078,
+          "end": 363722
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 363078,
+          "end": 363722
         }
       ]
     },
