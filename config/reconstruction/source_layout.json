@@ -840,7 +840,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 102561,
+      "physical_lines": 98720,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "s3.s",
@@ -900,7 +900,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 183314,
+      "physical_lines": 179751,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -1218,6 +1218,431 @@
       ],
       "applicability": "emitted",
       "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/game/collision/s3/floor_clearance.s",
+      "owner": "game/collision/s3",
+      "responsibility": "Overhead and floor clearance wrappers, floor-edge checks and object, fire and ring floor probes.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 301,
+      "origin": {
+        "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+        "path": "s3.s",
+        "first_line": 2158,
+        "last_line": 2455,
+        "sha256": "1fcd29af1100af35e260bbc11b72353af72c043d32b82ab973050b26d798d574"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 68234,
+          "end": 68886
+        },
+        {
+          "profile": "s3-eu",
+          "start": 68234,
+          "end": 68886
+        },
+        {
+          "profile": "s3-jp",
+          "start": 68234,
+          "end": 68886
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2165386,
+          "end": 2166038
+        }
+      ]
+    },
+    {
+      "path": "src/game/collision/s3/object_touch_response.s",
+      "owner": "game/collision/s3",
+      "responsibility": "Normal, shield and product-specific hyper contact response, hit boxes, enemy rewards and player harm.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 603,
+      "origin": {
+        "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+        "path": "s3.s",
+        "first_line": 2869,
+        "last_line": 3469,
+        "sha256": "ceb4db073dab35b2bb074414388fba07969e0a2a30c306703754d341d757b49b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 69960,
+          "end": 71388
+        },
+        {
+          "profile": "s3-eu",
+          "start": 69960,
+          "end": 71388
+        },
+        {
+          "profile": "s3-jp",
+          "start": 69960,
+          "end": 71388
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2167112,
+          "end": 2168540
+        }
+      ]
+    },
+    {
+      "path": "src/game/collision/s3/surface_attachment.s",
+      "owner": "game/collision/s3",
+      "responsibility": "Player floor-angle attachment and transitions along right walls, ceilings and left walls.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 386,
+      "origin": {
+        "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+        "path": "s3.s",
+        "first_line": 1108,
+        "last_line": 1490,
+        "sha256": "b35e9de88c0977c0fcffdf8e9270687a47572e4684f4fce794950723101b1c99"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 65444,
+          "end": 66348
+        },
+        {
+          "profile": "s3-eu",
+          "start": 65444,
+          "end": 66348
+        },
+        {
+          "profile": "s3-jp",
+          "start": 65444,
+          "end": 66348
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2162596,
+          "end": 2163500
+        }
+      ]
+    },
+    {
+      "path": "src/game/collision/s3/tile_and_floor_probes.s",
+      "owner": "game/collision/s3",
+      "responsibility": "Foreground/background chunk addressing and floor height sampling for players, objects and rings.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 349,
+      "origin": {
+        "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+        "path": "s3.s",
+        "first_line": 1491,
+        "last_line": 1836,
+        "sha256": "e2d83e53e8829f094cd513026befbce2d8433d8c8095a9e9daa47cd49a4d6180"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 66348,
+          "end": 67560
+        },
+        {
+          "profile": "s3-eu",
+          "start": 66348,
+          "end": 67560
+        },
+        {
+          "profile": "s3-jp",
+          "start": 66348,
+          "end": 67560
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2163500,
+          "end": 2164712
+        }
+      ]
+    },
+    {
+      "path": "src/game/collision/s3/wall_and_ceiling_clearance.s",
+      "owner": "game/collision/s3",
+      "responsibility": "Left and right wall and ceiling clearance wrappers, including product-specific reverse-gravity probes.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 415,
+      "origin": {
+        "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+        "path": "s3.s",
+        "first_line": 2456,
+        "last_line": 2868,
+        "sha256": "25753697e7657e83decd4b9ad9df76a0dea5b136039ff1975c8fd7b118f49fcd"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 68886,
+          "end": 69960
+        },
+        {
+          "profile": "s3-eu",
+          "start": 68886,
+          "end": 69960
+        },
+        {
+          "profile": "s3-jp",
+          "start": 68886,
+          "end": 69960
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2166038,
+          "end": 2167112
+        }
+      ]
+    },
+    {
+      "path": "src/game/collision/s3/wall_probes.s",
+      "owner": "game/collision/s3",
+      "responsibility": "Wall height sampling and direction-dependent collision angle conversion.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 324,
+      "origin": {
+        "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+        "path": "s3.s",
+        "first_line": 1837,
+        "last_line": 2157,
+        "sha256": "7fcd4848ab6e63ba5b9d4feff84dfda5bdb36f3ab4d97aa4dbc8dd33a1db2a4e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 67560,
+          "end": 68234
+        },
+        {
+          "profile": "s3-eu",
+          "start": 67560,
+          "end": 68234
+        },
+        {
+          "profile": "s3-jp",
+          "start": 67560,
+          "end": 68234
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2164712,
+          "end": 2165386
+        }
+      ]
+    },
+    {
+      "path": "src/game/collision/sk/floor_clearance.s",
+      "owner": "game/collision/sk",
+      "responsibility": "Overhead and floor clearance wrappers, floor-edge checks and object, fire and ring floor probes.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 301,
+      "origin": {
+        "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+        "path": "sonic3k.s",
+        "first_line": 1626,
+        "last_line": 1923,
+        "sha256": "9d35de8f27ccd029211b57c16e392bb0272e0c0362555dc4911270286db1946f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 63278,
+          "end": 63930
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 63278,
+          "end": 63930
+        }
+      ]
+    },
+    {
+      "path": "src/game/collision/sk/object_touch_response.s",
+      "owner": "game/collision/sk",
+      "responsibility": "Normal, shield and product-specific hyper contact response, hit boxes, enemy rewards and player harm.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 814,
+      "origin": {
+        "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+        "path": "sonic3k.s",
+        "first_line": 2386,
+        "last_line": 3197,
+        "sha256": "1cab55dd066da3a8a4838e6785cfa9c877b066c24eb7451775d03ebf518ba938"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-family",
+        "reason": "A complete object-contact dispatch family retains its normal, shield and hyper response paths, shared hit boxes and scoring helpers. The cohesive family remains below 900 lines.",
+        "proof_target": "check-source-layout"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 65134,
+          "end": 67012
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 65134,
+          "end": 67012
+        }
+      ]
+    },
+    {
+      "path": "src/game/collision/sk/surface_attachment.s",
+      "owner": "game/collision/sk",
+      "responsibility": "Player floor-angle attachment and transitions along right walls, ceilings and left walls.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 386,
+      "origin": {
+        "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+        "path": "sonic3k.s",
+        "first_line": 572,
+        "last_line": 954,
+        "sha256": "a1689870c548acd3ba6a49c9dc1ab379fbd44377888b09b7a593af304c4fabbc"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 60462,
+          "end": 61366
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 60462,
+          "end": 61366
+        }
+      ]
+    },
+    {
+      "path": "src/game/collision/sk/tile_and_floor_probes.s",
+      "owner": "game/collision/sk",
+      "responsibility": "Foreground/background chunk addressing and floor height sampling for players, objects and rings.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 352,
+      "origin": {
+        "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+        "path": "sonic3k.s",
+        "first_line": 955,
+        "last_line": 1303,
+        "sha256": "3ba25ab70b980663ef4bec84ff54c2e0b682fca21a51766bbc8a7d89fe3193e1"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 61366,
+          "end": 62590
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 61366,
+          "end": 62590
+        }
+      ]
+    },
+    {
+      "path": "src/game/collision/sk/wall_and_ceiling_clearance.s",
+      "owner": "game/collision/sk",
+      "responsibility": "Left and right wall and ceiling clearance wrappers, including product-specific reverse-gravity probes.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 464,
+      "origin": {
+        "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+        "path": "sonic3k.s",
+        "first_line": 1924,
+        "last_line": 2385,
+        "sha256": "9866a555e60bc60f2f91f56b32108264bd74bc2369b7efba982cf884920d660a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 63930,
+          "end": 65134
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 63930,
+          "end": 65134
+        }
+      ]
+    },
+    {
+      "path": "src/game/collision/sk/wall_probes.s",
+      "owner": "game/collision/sk",
+      "responsibility": "Wall height sampling and direction-dependent collision angle conversion.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 325,
+      "origin": {
+        "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+        "path": "sonic3k.s",
+        "first_line": 1304,
+        "last_line": 1625,
+        "sha256": "cd1b28c3b1a694c37a7e63c3ca44bc8f128959fd35089a43bf52e5d3d34248c4"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 62590,
+          "end": 63278
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 62590,
+          "end": 63278
+        }
+      ]
     },
     {
       "path": "src/game/competition/shared/2p_zone/anim_goal_marker.s",
@@ -4906,6 +5331,231 @@
           "component": "sk",
           "start": 37394,
           "end": 37956
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/sonic/s3/competition_player.s",
+      "owner": "objects/players/sonic/s3",
+      "responsibility": "Competition Sonic object dispatch, player initialization and shared two-player movement helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 440,
+      "origin": {
+        "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+        "path": "s3.s",
+        "first_line": 3470,
+        "last_line": 3907,
+        "sha256": "1754da678d123bd8014d9d17c78748e0416af81b296a702acbb7db5750c67537"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 71388,
+          "end": 72632
+        },
+        {
+          "profile": "s3-eu",
+          "start": 71388,
+          "end": 72632
+        },
+        {
+          "profile": "s3-jp",
+          "start": 71388,
+          "end": 72632
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2168540,
+          "end": 2169784
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/sonic/sk/competition_player.s",
+      "owner": "objects/players/sonic/sk",
+      "responsibility": "Competition Sonic object dispatch, player initialization and shared two-player movement helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 435,
+      "origin": {
+        "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+        "path": "sonic3k.s",
+        "first_line": 3198,
+        "last_line": 3630,
+        "sha256": "c94e4cea593e87e3c022772b673ae62d348cb55a461a00f8103fc42607324a51"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 67012,
+          "end": 68244
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 67012,
+          "end": 68244
+        }
+      ]
+    },
+    {
+      "path": "src/objects/rings/s3/ring_rendering.s",
+      "owner": "objects/rings/s3",
+      "responsibility": "Visible ring sprite construction and its private ring mapping table.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 115,
+      "origin": {
+        "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+        "path": "s3.s",
+        "first_line": 347,
+        "last_line": 459,
+        "sha256": "3519c9fb2e0e4ccb7da54f0ca1ac435e580d808e066e448c002064410c3a2a5b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 63510,
+          "end": 63678
+        },
+        {
+          "profile": "s3-eu",
+          "start": 63510,
+          "end": 63678
+        },
+        {
+          "profile": "s3-jp",
+          "start": 63510,
+          "end": 63678
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2160662,
+          "end": 2160830
+        }
+      ]
+    },
+    {
+      "path": "src/objects/rings/s3/ring_runtime.s",
+      "owner": "objects/rings/s3",
+      "responsibility": "Ring manager initialization, camera-window streaming, player collection and attraction response.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 283,
+      "origin": {
+        "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+        "path": "s3.s",
+        "first_line": 67,
+        "last_line": 346,
+        "sha256": "c7bac2cf819b553643b625343ae5157b37601f8c76201f7784c8841c0ed68141"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 62962,
+          "end": 63510
+        },
+        {
+          "profile": "s3-eu",
+          "start": 62962,
+          "end": 63510
+        },
+        {
+          "profile": "s3-jp",
+          "start": 62962,
+          "end": 63510
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2160114,
+          "end": 2160662
+        }
+      ]
+    },
+    {
+      "path": "src/objects/rings/sk/ring_rendering.s",
+      "owner": "objects/rings/sk",
+      "responsibility": "Visible ring sprite construction and its private ring mapping table.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 115,
+      "origin": {
+        "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+        "path": "sonic3k.s",
+        "first_line": 459,
+        "last_line": 571,
+        "sha256": "3bb52a933b30092cc6256cb19748fa5528a370748a91d1366c1ced5e737bd4b0"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 60294,
+          "end": 60462
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 60294,
+          "end": 60462
+        }
+      ]
+    },
+    {
+      "path": "src/objects/rings/sk/ring_runtime.s",
+      "owner": "objects/rings/sk",
+      "responsibility": "Ring manager initialization, camera-window streaming, player collection and attraction response.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 392,
+      "origin": {
+        "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+        "path": "sonic3k.s",
+        "first_line": 70,
+        "last_line": 458,
+        "sha256": "ce3987d913d059928b1cd960ee96353f2aac0f4670b17ecb8ce1f725b6cca26b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 59562,
+          "end": 60294
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 59562,
+          "end": 60294
         }
       ]
     },
@@ -25841,6 +26491,86 @@
       "range_kind": "canonical-normal-build"
     },
     {
+      "path": "src/objects/zones/cnz/s3/legacy_bumper_layouts.s",
+      "owner": "objects/zones/cnz/s3",
+      "responsibility": "Preserved Carnival Night act-specific bumper placement tables.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 117,
+      "origin": {
+        "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+        "path": "s3.s",
+        "first_line": 993,
+        "last_line": 1107,
+        "sha256": "617fcbfb2888c7786474b7cfd9c9671dd067107f73f4dd639bed579fdd60569d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 64796,
+          "end": 65444
+        },
+        {
+          "profile": "s3-eu",
+          "start": 64796,
+          "end": 65444
+        },
+        {
+          "profile": "s3-jp",
+          "start": 64796,
+          "end": 65444
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2161948,
+          "end": 2162596
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/cnz/s3/legacy_bumpers.s",
+      "owner": "objects/zones/cnz/s3",
+      "responsibility": "Preserved Carnival Night bumper streaming, collision and player rebound behavior.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 536,
+      "origin": {
+        "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+        "path": "s3.s",
+        "first_line": 460,
+        "last_line": 992,
+        "sha256": "a409c2c7ec9eefff58ce8b96e8578176be48842a90545a07ee7867ad3771bb2d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 63678,
+          "end": 64796
+        },
+        {
+          "profile": "s3-eu",
+          "start": 63678,
+          "end": 64796
+        },
+        {
+          "profile": "s3-jp",
+          "start": 63678,
+          "end": 64796
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2160830,
+          "end": 2161948
+        }
+      ]
+    },
+    {
       "path": "src/rendering/compression/s3/enigma.s",
       "owner": "rendering/compression/s3",
       "responsibility": "Complete Enigma map decompressor with inline-value and bitstream helpers.",
@@ -26486,6 +27216,46 @@
       ]
     },
     {
+      "path": "src/rendering/s3/hud_fonts.s",
+      "owner": "rendering/s3",
+      "responsibility": "HUD, life count and debug digit tile storage.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 14,
+      "origin": {
+        "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+        "path": "s3.s",
+        "first_line": 55,
+        "last_line": 66,
+        "sha256": "53bf212360abf705f25c097cf8245f1794e0b51a345598c7053baec067a033ad"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 61138,
+          "end": 62962
+        },
+        {
+          "profile": "s3-eu",
+          "start": 61138,
+          "end": 62962
+        },
+        {
+          "profile": "s3-jp",
+          "start": 61138,
+          "end": 62962
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2158290,
+          "end": 2160114
+        }
+      ]
+    },
+    {
       "path": "src/rendering/s3/menu_transfers.s",
       "owner": "rendering/s3",
       "responsibility": "Menu art decompression, listed map and VRAM transfers and shared menu display helpers.",
@@ -26672,6 +27442,36 @@
           "component": "sk",
           "start": 56124,
           "end": 57738
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/sk/hud_fonts.s",
+      "owner": "rendering/sk",
+      "responsibility": "HUD, life count and debug digit tile storage.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 14,
+      "origin": {
+        "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+        "path": "sonic3k.s",
+        "first_line": 58,
+        "last_line": 69,
+        "sha256": "53bf212360abf705f25c097cf8245f1794e0b51a345598c7053baec067a033ad"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 57738,
+          "end": 59562
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 57738,
+          "end": 59562
         }
       ]
     },
