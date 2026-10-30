@@ -840,7 +840,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 43231,
+      "physical_lines": 36695,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "s3.s",
@@ -900,7 +900,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 112812,
+      "physical_lines": 106581,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -4380,6 +4380,166 @@
       ]
     },
     {
+      "path": "src/game/modes/s3/continue_resources.s",
+      "owner": "game/modes/s3",
+      "responsibility": "Continue screen mapping entries, icon placement records and checked art resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 27,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "s3.s",
+        "first_line": 822,
+        "last_line": 845,
+        "sha256": "e971cf23c37ed1b9a5e920ceeed621cb58d2800e0083a7f949bad9f1a358746f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 259864,
+          "end": 262984
+        },
+        {
+          "profile": "s3-eu",
+          "start": 259864,
+          "end": 262984
+        },
+        {
+          "profile": "s3-jp",
+          "start": 259864,
+          "end": 262984
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2357016,
+          "end": 2360136
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/s3/continue_screen.s",
+      "owner": "game/modes/s3",
+      "responsibility": "Continue screen mode, character and icon actors, countdown display and private art resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 544,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "s3.s",
+        "first_line": 281,
+        "last_line": 821,
+        "sha256": "54bb6adf8658f8c1ccd6a752b37e524bdb420d0aa5265db7a1765f5bae60f00c"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 258090,
+          "end": 259864
+        },
+        {
+          "profile": "s3-eu",
+          "start": 258090,
+          "end": 259864
+        },
+        {
+          "profile": "s3-jp",
+          "start": 258090,
+          "end": 259864
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2355242,
+          "end": 2357016
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/s3/ending_credits.s",
+      "owner": "game/modes/s3",
+      "responsibility": "Ending and credits mode, scene coordination, logo and text actors and text drawing helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 632,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "s3.s",
+        "first_line": 846,
+        "last_line": 1474,
+        "sha256": "cd0b7f3c7bbaa97fc577c039a893d7e5d43482e5eef4c221219d1e3584dafe54"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 262984,
+          "end": 264988
+        },
+        {
+          "profile": "s3-eu",
+          "start": 262984,
+          "end": 264988
+        },
+        {
+          "profile": "s3-jp",
+          "start": 262984,
+          "end": 264988
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2360136,
+          "end": 2362140
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/s3/ending_credits_data.s",
+      "owner": "game/modes/s3",
+      "responsibility": "Ending credit text, plane maps, palettes, animation records and checked art resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 618,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "s3.s",
+        "first_line": 1475,
+        "last_line": 2089,
+        "sha256": "3c32d0207f61346ce9ccd5e27b11874603bd6b3cd9c8ae39442d0a4737bbf9ca"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 264988,
+          "end": 274750
+        },
+        {
+          "profile": "s3-eu",
+          "start": 264988,
+          "end": 274750
+        },
+        {
+          "profile": "s3-jp",
+          "start": 264988,
+          "end": 274750
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2362140,
+          "end": 2371902
+        }
+      ]
+    },
+    {
       "path": "src/game/modes/s3/legacy_competition_selection.s",
       "owner": "game/modes/s3",
       "responsibility": "Preserved Sonic 2 style competition selection, completion marks and menu text transfer.",
@@ -6800,6 +6960,256 @@
       ]
     },
     {
+      "path": "src/objects/bonus/s3/gumball_bumpers.s",
+      "owner": "objects/bonus/s3",
+      "responsibility": "Gumball triangle bumpers, player collision, bounce response and shared bonus resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 557,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "s3.s",
+        "first_line": 2985,
+        "last_line": 3538,
+        "sha256": "d268a7b3a767359b3793c48762786f80c9c4381f015ef3d9c43b329c13a103e4"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 277256,
+          "end": 278614
+        },
+        {
+          "profile": "s3-eu",
+          "start": 277256,
+          "end": 278614
+        },
+        {
+          "profile": "s3-jp",
+          "start": 277256,
+          "end": 278614
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2374408,
+          "end": 2375766
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bonus/s3/gumball_machine.s",
+      "owner": "objects/bonus/s3",
+      "responsibility": "Gumball bonus machine state, dispensers, item creation and sprite motion.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 239,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "s3.s",
+        "first_line": 2749,
+        "last_line": 2984,
+        "sha256": "c73f6b96ec2ffbd2105798c9633a7d12a98b3b51b7db81cbaa0bb1d690df382f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 276528,
+          "end": 277256
+        },
+        {
+          "profile": "s3-eu",
+          "start": 276528,
+          "end": 277256
+        },
+        {
+          "profile": "s3-jp",
+          "start": 276528,
+          "end": 277256
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2373680,
+          "end": 2374408
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bonus/s3/gumball_mapping.s",
+      "owner": "objects/bonus/s3",
+      "responsibility": "Gumball bonus mapping entry and checked shared mapping resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 5,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "s3.s",
+        "first_line": 3539,
+        "last_line": 3540,
+        "sha256": "4327ff96180f43ce6055bac18af6da090ede6045205e94cabbca3dae85a6d8e3"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 278614,
+          "end": 279094
+        },
+        {
+          "profile": "s3-eu",
+          "start": 278614,
+          "end": 279094
+        },
+        {
+          "profile": "s3-jp",
+          "start": 278614,
+          "end": 279094
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2375766,
+          "end": 2376246
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/aiz/s3/miniboss_arrival.s",
+      "owner": "objects/bosses/aiz/s3",
+      "responsibility": "Angel Island miniboss arrival cutscene, flame actors and scene transitions.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 486,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "s3.s",
+        "first_line": 6356,
+        "last_line": 6838,
+        "sha256": "01d6216833645bea113a0df4fa9f8ac83c0f3fd6e0e4286a8a3a835e4b36fa12"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 287810,
+          "end": 289140
+        },
+        {
+          "profile": "s3-eu",
+          "start": 287810,
+          "end": 289140
+        },
+        {
+          "profile": "s3-jp",
+          "start": 287810,
+          "end": 289140
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2384962,
+          "end": 2386292
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/common/s3/robotnik_heads.s",
+      "owner": "objects/bosses/common/s3",
+      "responsibility": "Shared Robotnik head actors, expression variants and boss-scene display states.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 192,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "s3.s",
+        "first_line": 5780,
+        "last_line": 5968,
+        "sha256": "49f5a380362f58f0a209af155b3e1ff580df37d2219ceb071079c3d8ae53badd"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 286374,
+          "end": 286848
+        },
+        {
+          "profile": "s3-eu",
+          "start": 286374,
+          "end": 286848
+        },
+        {
+          "profile": "s3-jp",
+          "start": 286374,
+          "end": 286848
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2383526,
+          "end": 2384000
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/common/s3/robotnik_ships.s",
+      "owner": "objects/bosses/common/s3",
+      "responsibility": "Shared Robotnik ship variants, flight and escape states, flame actors and sprite resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 390,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "s3.s",
+        "first_line": 5969,
+        "last_line": 6355,
+        "sha256": "d264ca4d2c8e8f61a67e31fe1abe1169fca8dc9b832730b943fb6aa7072c2620"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 286848,
+          "end": 287810
+        },
+        {
+          "profile": "s3-eu",
+          "start": 286848,
+          "end": 287810
+        },
+        {
+          "profile": "s3-jp",
+          "start": 286848,
+          "end": 287810
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2384000,
+          "end": 2384962
+        }
+      ]
+    },
+    {
       "path": "src/objects/checkpoints/s3/starpost.s",
       "owner": "objects/checkpoints/s3",
       "responsibility": "Checkpoint post activation, star sprites, saved player state and restart support.",
@@ -7742,6 +8152,246 @@
       ]
     },
     {
+      "path": "src/objects/cutscenes/knuckles/s3/angel_island.s",
+      "owner": "objects/cutscenes/knuckles/s3",
+      "responsibility": "Knuckles cutscene dispatch and Angel Island act-one and act-two scene programs.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 326,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "s3.s",
+        "first_line": 3762,
+        "last_line": 4083,
+        "sha256": "d42ceed1027bc7ef85c71b16ba90d57406658b253c011ed46b7f94697f4904aa"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "CutsceneKnux_Delete",
+          "kind": "terminal-tail",
+          "reason": "The complete object state or helper keeps its conditional early return with its final unconditional sprite-service tail call; only checked private data resources follow.",
+          "origin_first_line": 4082,
+          "origin_terminal_line": 4083,
+          "origin_end_line": 4083
+        }
+      ],
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 280306,
+          "end": 281252
+        },
+        {
+          "profile": "s3-eu",
+          "start": 280306,
+          "end": 281252
+        },
+        {
+          "profile": "s3-jp",
+          "start": 280306,
+          "end": 281252
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2377458,
+          "end": 2378404
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/knuckles/s3/carnival_night.s",
+      "owner": "objects/cutscenes/knuckles/s3",
+      "responsibility": "Knuckles Carnival Night act-two cutscene variants, trigger logic and scene object records.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 337,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "s3.s",
+        "first_line": 4194,
+        "last_line": 4526,
+        "sha256": "6534eb836c5a437485689c3ac1767df52172ef3330c663368bebd08c1da11af9"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_44F94",
+          "kind": "terminal-tail",
+          "reason": "The complete object state or helper keeps its conditional early return with its final unconditional sprite-service tail call; only checked private data resources follow.",
+          "origin_first_line": 4514,
+          "origin_terminal_line": 4526,
+          "origin_end_line": 4526
+        }
+      ],
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 281594,
+          "end": 282554
+        },
+        {
+          "profile": "s3-eu",
+          "start": 281594,
+          "end": 282554
+        },
+        {
+          "profile": "s3-jp",
+          "start": 281594,
+          "end": 282554
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2378746,
+          "end": 2379706
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/knuckles/s3/hydrocity.s",
+      "owner": "objects/cutscenes/knuckles/s3",
+      "responsibility": "Knuckles Hydrocity act-two cutscene state and scene object records.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 113,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "s3.s",
+        "first_line": 4084,
+        "last_line": 4193,
+        "sha256": "45e07f9d972afa8544236a135b9ae61c10920beac61fc31dad23fdfaf7dc5b12"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 281252,
+          "end": 281594
+        },
+        {
+          "profile": "s3-eu",
+          "start": 281252,
+          "end": 281594
+        },
+        {
+          "profile": "s3-jp",
+          "start": 281252,
+          "end": 281594
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2378404,
+          "end": 2378746
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/knuckles/s3/launch_base.s",
+      "owner": "objects/cutscenes/knuckles/s3",
+      "responsibility": "Knuckles Launch Base act-one and act-two cutscene programs, helpers and scene records.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 394,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "s3.s",
+        "first_line": 4527,
+        "last_line": 4916,
+        "sha256": "201d3559dabaf3b237220f414d604e12d2d27cada04f62e0b1fdc3bd4646bb55"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_45410",
+          "kind": "terminal-tail",
+          "reason": "The complete object state or helper keeps its conditional early return with its final unconditional sprite-service tail call; only checked private data resources follow.",
+          "origin_first_line": 4912,
+          "origin_terminal_line": 4916,
+          "origin_end_line": 4916
+        }
+      ],
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 282554,
+          "end": 283684
+        },
+        {
+          "profile": "s3-eu",
+          "start": 282554,
+          "end": 283684
+        },
+        {
+          "profile": "s3-jp",
+          "start": 282554,
+          "end": 283684
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2379706,
+          "end": 2380836
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/s3/button.s",
+      "owner": "objects/cutscenes/s3",
+      "responsibility": "Cutscene button contact, activation and trigger state.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 124,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "s3.s",
+        "first_line": 4941,
+        "last_line": 5061,
+        "sha256": "a80f5861138a96eea7cd6624fccfd6d6a01bb76e91016e8e31452e0770ee0098"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 283804,
+          "end": 284148
+        },
+        {
+          "profile": "s3-eu",
+          "start": 283804,
+          "end": 284148
+        },
+        {
+          "profile": "s3-jp",
+          "start": 283804,
+          "end": 284148
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2380956,
+          "end": 2381300
+        }
+      ]
+    },
+    {
       "path": "src/objects/development/s3/sphere_mapping.s",
       "owner": "objects/development/s3",
       "responsibility": "Experimental sphere mapping entry and its checked shared mapping data owner.",
@@ -8325,6 +8975,46 @@
           "component": "s3-us",
           "start": 2283724,
           "end": 2285372
+        }
+      ]
+    },
+    {
+      "path": "src/objects/interface/s3/sega_screen_actor.s",
+      "owner": "objects/interface/s3",
+      "responsibility": "Sega-screen Sonic actor and the preceding debug trap dispatch whose empty indexed function list aliases the actor entry.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 338,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "s3.s",
+        "first_line": 2090,
+        "last_line": 2424,
+        "sha256": "bf9ba567b2fcbbaef964f52b9eb1dc5df397d28f4b533ac9d8f8a8216a008333"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 274750,
+          "end": 275884
+        },
+        {
+          "profile": "s3-eu",
+          "start": 274750,
+          "end": 275884
+        },
+        {
+          "profile": "s3-jp",
+          "start": 274750,
+          "end": 275884
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2371902,
+          "end": 2373036
         }
       ]
     },
@@ -19245,6 +19935,51 @@
           "component": "sk",
           "start": 236096,
           "end": 236390
+        }
+      ]
+    },
+    {
+      "path": "src/objects/shared/sk/intro_player_run.s",
+      "owner": "objects/shared/sk",
+      "responsibility": "Introductory player running state and character control.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 32,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 336,
+        "last_line": 363,
+        "sha256": "c6d20662cc692384f33516e46744bd833007c1c7c6a5566e4445194a11c62276"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_LevelIntro_PlayerRun",
+          "kind": "terminal-tail",
+          "reason": "The complete object state or helper keeps its conditional early return with its final unconditional sprite-service tail call; only checked private data resources follow.",
+          "origin_first_line": 338,
+          "origin_terminal_line": 363,
+          "origin_end_line": 363
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 281100,
+          "end": 281192
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 281100,
+          "end": 281192
         }
       ]
     },
@@ -35190,6 +35925,51 @@
       "range_kind": "canonical-normal-build"
     },
     {
+      "path": "src/objects/special_stage/s3/entry_ring.s",
+      "owner": "objects/special_stage/s3",
+      "responsibility": "Special-stage entry ring collection, entry flash, player transition and sprite resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 224,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "s3.s",
+        "first_line": 3541,
+        "last_line": 3761,
+        "sha256": "79a271ed0dddbee4afb53dd1d03e95c59e5b0a7788c08619677b461124aac58e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 279094,
+          "end": 280306
+        },
+        {
+          "profile": "s3-eu",
+          "start": 279094,
+          "end": 280306
+        },
+        {
+          "profile": "s3-jp",
+          "start": 279094,
+          "end": 280306
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2376246,
+          "end": 2377458
+        }
+      ]
+    },
+    {
       "path": "src/objects/zones/aiz/s3/collapsing_log_bridge.s",
       "owner": "objects/zones/aiz/s3",
       "responsibility": "Angel Island collapsing log bridge timing, log and fire fragments and shared bridge mappings.",
@@ -35611,6 +36391,46 @@
           "component": "s3-us",
           "start": 2216900,
           "end": 2217550
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/aiz/s3/plane_intro.s",
+      "owner": "objects/zones/aiz/s3",
+      "responsibility": "Angel Island opening plane scene, coordinated character motion and transition control.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 545,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "s3.s",
+        "first_line": 5238,
+        "last_line": 5779,
+        "sha256": "37b49a920e93bf9d4ed71a4ea87aa21c76344e7d6eee72e1e4623c5e9efda01e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 284750,
+          "end": 286374
+        },
+        {
+          "profile": "s3-eu",
+          "start": 284750,
+          "end": 286374
+        },
+        {
+          "profile": "s3-jp",
+          "start": 284750,
+          "end": 286374
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2381902,
+          "end": 2383526
         }
       ]
     },
@@ -36911,6 +37731,51 @@
       ]
     },
     {
+      "path": "src/objects/zones/cnz/s3/water_level_controls.s",
+      "owner": "objects/zones/cnz/s3",
+      "responsibility": "Carnival Night cork floor and button controls for water-level cutscenes.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 179,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "s3.s",
+        "first_line": 5062,
+        "last_line": 5237,
+        "sha256": "e719de5052771d7dda3333b92e54c99bdc760435c15389d671c4600add145e36"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 284148,
+          "end": 284750
+        },
+        {
+          "profile": "s3-eu",
+          "start": 284148,
+          "end": 284750
+        },
+        {
+          "profile": "s3-jp",
+          "start": 284148,
+          "end": 284750
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2381300,
+          "end": 2381902
+        }
+      ]
+    },
+    {
       "path": "src/objects/zones/cnz/s3/wire_cage.s",
       "owner": "objects/zones/cnz/s3",
       "responsibility": "Carnival Night wire-cage player capture, spin, motion and release.",
@@ -37401,6 +38266,146 @@
       ]
     },
     {
+      "path": "src/objects/zones/dez/sk/bumper_wall.s",
+      "owner": "objects/zones/dez/sk",
+      "responsibility": "Bumper wall player collision, bounce response and sprite resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 132,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 6311,
+        "last_line": 6439,
+        "sha256": "12f29c4a5db7635c6c73f7a0b02a3ff6c82c390a252b1e732793491b0bc45b33"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 300902,
+          "end": 301266
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 300902,
+          "end": 301266
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/dez/sk/conveyor_belt.s",
+      "owner": "objects/zones/dez/sk",
+      "responsibility": "Conveyor belt player contact and transport response.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 53,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 3892,
+        "last_line": 3941,
+        "sha256": "27a13568a0b7a6818ad418ec639d0526e946cd919ca9c92ff086f04fc7a3de35"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 292886,
+          "end": 293010
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 292886,
+          "end": 293010
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "owner": "objects/zones/dez/sk",
+      "responsibility": "Conveyor pad movement, player riding and transport state.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 287,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 3995,
+        "last_line": 4278,
+        "sha256": "ab6b397d2245ea650f62846bc6812cd0ef8e9100a30f9cfd4330c6c2ae33bb9a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 293222,
+          "end": 294446
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 293222,
+          "end": 294446
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/dez/sk/energy_bridges.s",
+      "owner": "objects/zones/dez/sk",
+      "responsibility": "Straight and curved energy bridge activation, segment state and player collision.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 187,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 4279,
+        "last_line": 4462,
+        "sha256": "7edcd2a5ee4c66b9dd27ee0b8c06954e3670933d25f5b318e28ebc354e089d1f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 294446,
+          "end": 295050
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 294446,
+          "end": 295050
+        }
+      ]
+    },
+    {
       "path": "src/objects/zones/dez/sk/floating_platform.s",
       "owner": "objects/zones/dez/sk",
       "responsibility": "Death Egg floating platform placement, motion and player collision.",
@@ -37442,6 +38447,646 @@
           "component": "sk",
           "start": 154160,
           "end": 154352
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/dez/sk/gravity_hub.s",
+      "owner": "objects/zones/dez/sk",
+      "responsibility": "Gravity hub player contact, directional control and release.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 156,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 5901,
+        "last_line": 6053,
+        "sha256": "d04235f7c834d1280c74039c68fbfc7e2e1e36b7b011fb7d2c25834cd95a5e5c"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 299698,
+          "end": 300124
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 299698,
+          "end": 300124
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/dez/sk/gravity_puzzle.s",
+      "owner": "objects/zones/dez/sk",
+      "responsibility": "Gravity puzzle state, coordinated sprites and player interactions.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 164,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 6440,
+        "last_line": 6600,
+        "sha256": "ca1bec9278ae9ddc339335f42aa7cbbbc27a7f02c27341a3d809d88cdf1db05b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 301266,
+          "end": 301742
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 301266,
+          "end": 301742
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/dez/sk/gravity_room.s",
+      "owner": "objects/zones/dez/sk",
+      "responsibility": "Gravity room player control, transition and movement response.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 145,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 6169,
+        "last_line": 6310,
+        "sha256": "3a3149f5e2f4482a222cc41db020f6df8324cdbeff221d4166b544c1f4738ef8"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 300546,
+          "end": 300902
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 300546,
+          "end": 300902
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/dez/sk/gravity_swap.s",
+      "owner": "objects/zones/dez/sk",
+      "responsibility": "Gravity swap trigger detection and player gravity transition.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 74,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 5830,
+        "last_line": 5900,
+        "sha256": "90ba208fa1771dffb60268beb07ac56909bf91fbb1624b7c5ea7e85bbf11f2f8"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 299508,
+          "end": 299698
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 299508,
+          "end": 299698
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/dez/sk/gravity_switch.s",
+      "owner": "objects/zones/dez/sk",
+      "responsibility": "Gravity switch contact, activation and player gravity state.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 115,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 5167,
+        "last_line": 5278,
+        "sha256": "87aa3c436092d952e4549174ce7c2f394b7137052243c4e8f7540ef39ac0a594"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 297642,
+          "end": 298006
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 297642,
+          "end": 298006
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/dez/sk/gravity_tube.s",
+      "owner": "objects/zones/dez/sk",
+      "responsibility": "Gravity tube player capture, constrained transport and release.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 298,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 5535,
+        "last_line": 5829,
+        "sha256": "dde3a79369c219ab3fa10109027f1120ee64bd096d6eeb07a3f63c282657ec5c"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 298670,
+          "end": 299508
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 298670,
+          "end": 299508
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/dez/sk/hanging_carrier.s",
+      "owner": "objects/zones/dez/sk",
+      "responsibility": "Hanging carrier movement, player attachment and release.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 169,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 3225,
+        "last_line": 3390,
+        "sha256": "7c8b0afe9df4d12921157287e88de6809f24a39ca7b35d69451d1654ceeefa01"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 290692,
+          "end": 291226
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 290692,
+          "end": 291226
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/dez/sk/hover_machine.s",
+      "owner": "objects/zones/dez/sk",
+      "responsibility": "Hover machine state, player interaction, movement and sprite resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 118,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 6054,
+        "last_line": 6168,
+        "sha256": "6bc1e73ef4d216470c8dd232bc6e7adbb74c62f5b03e9ef12510714dc5207fff"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 300124,
+          "end": 300546
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 300124,
+          "end": 300546
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/dez/sk/lift_pad.s",
+      "owner": "objects/zones/dez/sk",
+      "responsibility": "Lift pad motion, player contact, transport and release.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 231,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 3471,
+        "last_line": 3698,
+        "sha256": "6467ab7144ef0e6748636f84f4738e41fb254846024394d3f10aa38dc92046c9"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 291704,
+          "end": 292414
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 291704,
+          "end": 292414
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/dez/sk/lightning.s",
+      "owner": "objects/zones/dez/sk",
+      "responsibility": "Lightning hazard timing, animation, player collision and sprite resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 57,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 3942,
+        "last_line": 3994,
+        "sha256": "7c1fa8b5bf9c86dff819345663ccc3cab8fd7cbb777a6d2991786fe07ff66248"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_DEZLightning",
+          "kind": "terminal-tail",
+          "reason": "The complete object state or helper keeps its conditional early return with its final unconditional sprite-service tail call; only checked private data resources follow.",
+          "origin_first_line": 3945,
+          "origin_terminal_line": 3989,
+          "origin_end_line": 3994
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 293010,
+          "end": 293222
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 293010,
+          "end": 293222
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/dez/sk/retracting_spring.s",
+      "owner": "objects/zones/dez/sk",
+      "responsibility": "Retracting spring timing, extension and player launch response.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 102,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 4463,
+        "last_line": 4560,
+        "sha256": "876963b8c07a5cb41bf52ec6c8518f9bf93795896731ec1ab24210ddbbc230f5"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_DEZRetractingSpring",
+          "kind": "terminal-tail",
+          "reason": "The complete object state or helper keeps its conditional early return with its final unconditional sprite-service tail call; only checked private data resources follow.",
+          "origin_first_line": 4469,
+          "origin_terminal_line": 4555,
+          "origin_end_line": 4560
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 295050,
+          "end": 295410
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 295050,
+          "end": 295410
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/dez/sk/staircase.s",
+      "owner": "objects/zones/dez/sk",
+      "responsibility": "Staircase activation, coordinated block movement and player collision.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 196,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 3699,
+        "last_line": 3891,
+        "sha256": "d6ad9be9732eaf9cd516b8a666ec9baedc6ebd17d9283cd1a39b8542131cf9f7"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 292414,
+          "end": 292886
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 292414,
+          "end": 292886
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/dez/sk/teleporter.s",
+      "owner": "objects/zones/dez/sk",
+      "responsibility": "Teleporter player capture, path state, transport and release.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 259,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 5279,
+        "last_line": 5534,
+        "sha256": "cd0b8b1b36d06a5bab4933fcf51b2682d8363950f1ccfb5fff93a6f037eb856d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 298006,
+          "end": 298670
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 298006,
+          "end": 298670
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/dez/sk/tilting_bridge.s",
+      "owner": "objects/zones/dez/sk",
+      "responsibility": "Tilting bridge coordination, motion and player collision.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 149,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 3080,
+        "last_line": 3224,
+        "sha256": "7cbf61d263fe2138cd0a092fe2a289e7f8bfb16e3a0a755e47badd99e18602d7"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_DEZTiltingBridge",
+          "kind": "terminal-tail",
+          "reason": "The complete object state or helper keeps its conditional early return with its final unconditional sprite-service tail call; only checked private data resources follow.",
+          "origin_first_line": 3082,
+          "origin_terminal_line": 3221,
+          "origin_end_line": 3224
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 290206,
+          "end": 290692
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 290206,
+          "end": 290692
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/dez/sk/torpedo_launcher.s",
+      "owner": "objects/zones/dez/sk",
+      "responsibility": "Torpedo launcher activation, projectile creation and player collision.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 84,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 3391,
+        "last_line": 3470,
+        "sha256": "96ce3736b4788687a379c78f922a7e98268c0ab99e11cdbc245896875029d148"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_DEZTorpedoLauncher",
+          "kind": "terminal-tail",
+          "reason": "The complete object state or helper keeps its conditional early return with its final unconditional sprite-service tail call; only checked private data resources follow.",
+          "origin_first_line": 3393,
+          "origin_terminal_line": 3467,
+          "origin_end_line": 3470
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 291226,
+          "end": 291704
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 291226,
+          "end": 291704
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/dez/sk/tunnel_control.s",
+      "owner": "objects/zones/dez/sk",
+      "responsibility": "Tunnel movement control, path state, transition-ring spawning and transport effects.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 431,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 4740,
+        "last_line": 5166,
+        "sha256": "a74a564e2e5d5eee314f30738c6a8cb57e1c793f4276347ffa821f3efe8f1b1c"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_DEZTransRing",
+          "kind": "terminal-tail",
+          "reason": "The complete object state or helper keeps its conditional early return with its final unconditional sprite-service tail call; only checked private data resources follow.",
+          "origin_first_line": 5152,
+          "origin_terminal_line": 5161,
+          "origin_end_line": 5166
+        }
+      ],
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 296112,
+          "end": 297642
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 296112,
+          "end": 297642
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/dez/sk/tunnel_launcher.s",
+      "owner": "objects/zones/dez/sk",
+      "responsibility": "Tunnel launcher capture, launch countdown, player transport and release.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 182,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 4561,
+        "last_line": 4739,
+        "sha256": "170fafdcbe5843dc66d58cb36b0ad9ff261670b1d084d92db2fb2cfd1724fcaa"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 295410,
+          "end": 296112
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 295410,
+          "end": 296112
         }
       ]
     },
@@ -39782,6 +41427,61 @@
           "component": "s3-us",
           "start": 2261638,
           "end": 2261944
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/lbz/s3/knuckles_pillar.s",
+      "owner": "objects/zones/lbz/s3",
+      "responsibility": "Launch Base Knuckles cutscene pillar creation, motion and sprite resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 28,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "s3.s",
+        "first_line": 4917,
+        "last_line": 4940,
+        "sha256": "5ccbcdd9b4fb073d7debe69e6d809272a62fe7d74250093a1234368112ee2ee2"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_LBZKnuxPillar",
+          "kind": "terminal-tail",
+          "reason": "The complete object state or helper keeps its conditional early return with its final unconditional sprite-service tail call; only checked private data resources follow.",
+          "origin_first_line": 4919,
+          "origin_terminal_line": 4937,
+          "origin_end_line": 4940
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 283684,
+          "end": 283804
+        },
+        {
+          "profile": "s3-eu",
+          "start": 283684,
+          "end": 283804
+        },
+        {
+          "profile": "s3-jp",
+          "start": 283684,
+          "end": 283804
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2380836,
+          "end": 2380956
         }
       ]
     },
@@ -43951,6 +45651,426 @@
       ]
     },
     {
+      "path": "src/objects/zones/ssz/sk/bouncy_cloud.s",
+      "owner": "objects/zones/ssz/sk",
+      "responsibility": "Bouncy cloud contact, deformation, player response and movement.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 272,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 916,
+        "last_line": 1184,
+        "sha256": "96f49d53ee0c32caabc8bd94365a4c193fff3f4ced400848b9bf8c1bd385c267"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 282788,
+          "end": 283500
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 282788,
+          "end": 283500
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/ssz/sk/collapsing_bridges.s",
+      "owner": "objects/zones/ssz/sk",
+      "responsibility": "Normal and diagonal collapsing bridge segment state and player collision.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 288,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 516,
+        "last_line": 800,
+        "sha256": "6a4aff146f2ec5f71b1ba98111799166d4f1ace2539a8c13cfcbe081d1c08e22"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 281668,
+          "end": 282450
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 281668,
+          "end": 282450
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/ssz/sk/collapsing_column.s",
+      "owner": "objects/zones/ssz/sk",
+      "responsibility": "Collapsing column activation, fragments and player collision.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 117,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 403,
+        "last_line": 515,
+        "sha256": "69bcb5e0323c8c68c4108a22449dfe692e4aa8154221f2f9887c4c46bbaf76bd"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_SSZCollapsingColumn",
+          "kind": "terminal-tail",
+          "reason": "The complete object state or helper keeps its conditional early return with its final unconditional sprite-service tail call; only checked private data resources follow.",
+          "origin_first_line": 405,
+          "origin_terminal_line": 515,
+          "origin_end_line": 515
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 281312,
+          "end": 281668
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 281312,
+          "end": 281668
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/ssz/sk/cutscene_bridge.s",
+      "owner": "objects/zones/ssz/sk",
+      "responsibility": "Cutscene bridge state, coordinated movement and player interaction.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 118,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 801,
+        "last_line": 915,
+        "sha256": "521ac76e4ef5221a4c26234f90ef6f90b5c47905a3a3a8d64fc2da708c6ce3ca"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 282450,
+          "end": 282788
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 282450,
+          "end": 282788
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/ssz/sk/elevator_bar.s",
+      "owner": "objects/zones/ssz/sk",
+      "responsibility": "Elevator bar motion, player attachment and release.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 138,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 1185,
+        "last_line": 1319,
+        "sha256": "c28113b4225a4b32d1c24871913dd604249bc72f34b2211f20e996cbb30bdf8c"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 283500,
+          "end": 283944
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 283500,
+          "end": 283944
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/ssz/sk/floating_platform.s",
+      "owner": "objects/zones/ssz/sk",
+      "responsibility": "Floating platform motion and player riding.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 43,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 364,
+        "last_line": 402,
+        "sha256": "9c7376ee703b422762828cc597007a88c7f2b3c120933a1220c43178db43e82a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_SSZFloatingPlatform",
+          "kind": "terminal-tail",
+          "reason": "The complete object state or helper keeps its conditional early return with its final unconditional sprite-service tail call; only checked private data resources follow.",
+          "origin_first_line": 366,
+          "origin_terminal_line": 402,
+          "origin_end_line": 402
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 281192,
+          "end": 281312
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 281192,
+          "end": 281312
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/ssz/sk/hidden_palace_teleporter.s",
+      "owner": "objects/zones/ssz/sk",
+      "responsibility": "Sky Sanctuary and Hidden Palace teleporter capture, transition control and player release.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 315,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 1320,
+        "last_line": 1631,
+        "sha256": "e34f8e730504af68e708b1376bfa2117c190f85414604980913097a7edcb8c70"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 283944,
+          "end": 284852
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 283944,
+          "end": 284852
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/ssz/sk/mapping_catalog.s",
+      "owner": "objects/zones/ssz/sk",
+      "responsibility": "Sky Sanctuary mapping entry labels and checked shared object mapping resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 21,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 3062,
+        "last_line": 3079,
+        "sha256": "8b643a34bc23e4162251aecdabb33e8224f3ae0ebef42a507195cdfecd1677e2"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 289024,
+          "end": 290206
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 289024,
+          "end": 290206
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/ssz/sk/retracting_spring.s",
+      "owner": "objects/zones/ssz/sk",
+      "responsibility": "Retracting spring timing, extension and player launch responses.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 374,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 2691,
+        "last_line": 3061,
+        "sha256": "60c413baba8229a3e49811e4f0bd26fbeabdc17f2941a53b1c9ad8da36e2f448"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 287782,
+          "end": 289024
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 287782,
+          "end": 289024
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/ssz/sk/rotating_platform.s",
+      "owner": "objects/zones/ssz/sk",
+      "responsibility": "Rotating platform movement, player riding and collision.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 296,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 2116,
+        "last_line": 2408,
+        "sha256": "a9aac8193cef584d1fce5714b9aa6db6a65a2d357a0ceec9bb6214b0be23156e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 286126,
+          "end": 286936
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 286126,
+          "end": 286936
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/ssz/sk/swinging_carrier.s",
+      "owner": "objects/zones/ssz/sk",
+      "responsibility": "Swinging carrier coordination, player attachment, travel and release.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 285,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 2409,
+        "last_line": 2690,
+        "sha256": "f7161be743f05c30ee4d18dc0ca6d3e0c0b119f4590867a9af3282baf24951dd"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 286936,
+          "end": 287782
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 286936,
+          "end": 287782
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/ssz/sk/teleporter_beam.s",
+      "owner": "objects/zones/ssz/sk",
+      "responsibility": "Teleporter beam spawning, expansion, animation and transition effects.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 487,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "sonic3k.s",
+        "first_line": 1632,
+        "last_line": 2115,
+        "sha256": "cb67a26b0ace699f9e12722348d5d6217eb37f9c5ac731095a5635582848e529"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 284852,
+          "end": 286126
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 284852,
+          "end": 286126
+        }
+      ]
+    },
+    {
       "path": "src/rendering/compression/s3/enigma.s",
       "owner": "rendering/compression/s3",
       "responsibility": "Complete Enigma map decompressor with inline-value and bitstream helpers.",
@@ -44976,6 +47096,51 @@
       ]
     },
     {
+      "path": "src/rendering/s3/pixel_scale_2x.s",
+      "owner": "rendering/s3",
+      "responsibility": "Two-times pixel scaling, single-tile scaling and left or right pixel expansion helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 204,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "s3.s",
+        "first_line": 2548,
+        "last_line": 2748,
+        "sha256": "39ef9a3b8efb0cf345646dbdfe7d9edd430ec8c5c9f82b5ae5791f1d9ffe5ce4"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 276146,
+          "end": 276528
+        },
+        {
+          "profile": "s3-eu",
+          "start": 276146,
+          "end": 276528
+        },
+        {
+          "profile": "s3-jp",
+          "start": 276146,
+          "end": 276528
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2373298,
+          "end": 2373680
+        }
+      ]
+    },
+    {
       "path": "src/rendering/s3/plane_refresh.s",
       "owner": "rendering/s3",
       "responsibility": "Full and partial plane refresh, direct scroll modes and drawing during camera motion.",
@@ -45017,6 +47182,51 @@
           "component": "s3-us",
           "start": 2333536,
           "end": 2333956
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/s3/sega_screen_transfers.s",
+      "owner": "rendering/s3",
+      "responsibility": "Sega screen VInt transfer, streak fading and private horizontal offset data.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 126,
+      "origin": {
+        "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
+        "path": "s3.s",
+        "first_line": 2425,
+        "last_line": 2547,
+        "sha256": "594a01175cc672249a28797cfba1c64e2803aa12907d36e35883211e93080997"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 275884,
+          "end": 276146
+        },
+        {
+          "profile": "s3-eu",
+          "start": 275884,
+          "end": 276146
+        },
+        {
+          "profile": "s3-jp",
+          "start": 275884,
+          "end": 276146
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2373036,
+          "end": 2373298
         }
       ]
     },

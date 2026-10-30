@@ -33,6 +33,14 @@ Nemesis, Kosinski, moduled Kosinski and Enigma decoders remain executable
 source. The asset manifest identifies storage ranges; it is not yet a full
 editable format/capacity contract.
 
+The S3 Sega-screen actor keeps its preceding debug dispatch shim in the same
+bounded owner. `Func_Listing` is an empty indexed function-list label sharing
+the address of `Obj_SonicOnSegaScr`; it emits no table data. The shim reads that
+label through indexed PC addressing. Keeping both in
+`src/objects/interface/s3/sega_screen_actor.s` preserves the actual indexed span
+and return cohort instead of placing a relocation probe between the empty
+listing label and its aliased entry.
+
 ## Audio
 
 `Sound/Z80 Sound Driver.s` contains executable Z80 driver source, hardware/RAM
