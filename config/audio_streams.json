@@ -1,0 +1,2522 @@
+{
+  "schema_version": 1,
+  "source": "ROM-extracted SMPS storage; executable drivers remain assembly.",
+  "bank_bytes": 32768,
+  "window_base": 32768,
+  "address_space": "z80-rom-window",
+  "zero_edit_storage": "original_stream",
+  "engines": {
+    "s3-us": {
+      "abi": "s3-z80",
+      "profiles": ["s3-us", "s3-eu", "s3-jp", "s3k"]
+    },
+    "sk": {
+      "abi": "sk-z80",
+      "profiles": ["sk", "s3k"]
+    }
+  },
+  "streams": [
+    {
+      "id": "s3/Music/Miniboss (Sonic 3)",
+      "asset": "Sound/SMPS/s3/Music/Miniboss (Sonic 3).bin",
+      "base_symbol": "Snd_Minib",
+      "source_annotation": "Sound/Music/Miniboss (Sonic 3).asm"
+    },
+    {
+      "id": "s3/Music/Final Boss",
+      "asset": "Sound/SMPS/s3/Music/Final Boss.bin",
+      "base_symbol": "Snd_FinalBoss",
+      "source_annotation": "Sound/Music/Final Boss.asm"
+    },
+    {
+      "id": "s3/Music/AIZ1",
+      "asset": "Sound/SMPS/s3/Music/AIZ1.bin",
+      "base_symbol": "Snd_AIZ1",
+      "source_annotation": "Sound/Music/AIZ1.asm"
+    },
+    {
+      "id": "s3/Music/AIZ2",
+      "asset": "Sound/SMPS/s3/Music/AIZ2.bin",
+      "base_symbol": "Snd_AIZ2",
+      "source_annotation": "Sound/Music/AIZ2.asm"
+    },
+    {
+      "id": "s3/Music/HCZ1",
+      "asset": "Sound/SMPS/s3/Music/HCZ1.bin",
+      "base_symbol": "Snd_HCZ1",
+      "source_annotation": "Sound/Music/HCZ1.asm"
+    },
+    {
+      "id": "s3/Music/HCZ2",
+      "asset": "Sound/SMPS/s3/Music/HCZ2.bin",
+      "base_symbol": "Snd_HCZ2",
+      "source_annotation": "Sound/Music/HCZ2.asm"
+    },
+    {
+      "id": "s3/Music/MGZ1",
+      "asset": "Sound/SMPS/s3/Music/MGZ1.bin",
+      "base_symbol": "Snd_MGZ1",
+      "source_annotation": "Sound/Music/MGZ1.asm"
+    },
+    {
+      "id": "s3/Music/MGZ2",
+      "asset": "Sound/SMPS/s3/Music/MGZ2.bin",
+      "base_symbol": "Snd_MGZ2",
+      "source_annotation": "Sound/Music/MGZ2.asm"
+    },
+    {
+      "id": "s3/Music/CNZ2",
+      "asset": "Sound/SMPS/s3/Music/CNZ2.bin",
+      "base_symbol": "Snd_CNZ2",
+      "source_annotation": "Sound/Music/CNZ2.asm"
+    },
+    {
+      "id": "s3/Music/CNZ1",
+      "asset": "Sound/SMPS/s3/Music/CNZ1.bin",
+      "base_symbol": "Snd_CNZ1",
+      "source_annotation": "Sound/Music/CNZ1.asm"
+    },
+    {
+      "id": "s3/Music/FBZ1 (Sonic 3)",
+      "asset": "Sound/SMPS/s3/Music/FBZ1 (Sonic 3).bin",
+      "base_symbol": "Snd_FBZ1",
+      "source_annotation": "Sound/Music/FBZ1 (Sonic 3).asm"
+    },
+    {
+      "id": "s3/Music/FBZ2",
+      "asset": "Sound/SMPS/s3/Music/FBZ2.bin",
+      "base_symbol": "Snd_FBZ2",
+      "source_annotation": "Sound/Music/FBZ2.asm"
+    },
+    {
+      "id": "s3/Music/DDZ",
+      "asset": "Sound/SMPS/s3/Music/DDZ.bin",
+      "base_symbol": "Snd_DDZ",
+      "source_annotation": "Sound/Music/DDZ.asm"
+    },
+    {
+      "id": "s3/Music/ICZ2",
+      "asset": "Sound/SMPS/s3/Music/ICZ2.bin",
+      "base_symbol": "Snd_ICZ2",
+      "source_annotation": "Sound/Music/ICZ2.asm"
+    },
+    {
+      "id": "s3/Music/ICZ1",
+      "asset": "Sound/SMPS/s3/Music/ICZ1.bin",
+      "base_symbol": "Snd_ICZ1",
+      "source_annotation": "Sound/Music/ICZ1.asm"
+    },
+    {
+      "id": "s3/Music/LBZ2",
+      "asset": "Sound/SMPS/s3/Music/LBZ2.bin",
+      "base_symbol": "Snd_LBZ2",
+      "source_annotation": "Sound/Music/LBZ2.asm"
+    },
+    {
+      "id": "s3/Music/LBZ1",
+      "asset": "Sound/SMPS/s3/Music/LBZ1.bin",
+      "base_symbol": "Snd_LBZ1",
+      "source_annotation": "Sound/Music/LBZ1.asm"
+    },
+    {
+      "id": "s3/Music/MHZ1",
+      "asset": "Sound/SMPS/s3/Music/MHZ1.bin",
+      "base_symbol": "Snd_MHZ1",
+      "source_annotation": "Sound/Music/MHZ1.asm"
+    },
+    {
+      "id": "s3/Music/MHZ2",
+      "asset": "Sound/SMPS/s3/Music/MHZ2.bin",
+      "base_symbol": "Snd_MHZ2",
+      "source_annotation": "Sound/Music/MHZ2.asm"
+    },
+    {
+      "id": "s3/Music/SOZ1",
+      "asset": "Sound/SMPS/s3/Music/SOZ1.bin",
+      "base_symbol": "Snd_SOZ1",
+      "source_annotation": "Sound/Music/SOZ1.asm"
+    },
+    {
+      "id": "s3/Music/SOZ2",
+      "asset": "Sound/SMPS/s3/Music/SOZ2.bin",
+      "base_symbol": "Snd_SOZ2",
+      "source_annotation": "Sound/Music/SOZ2.asm"
+    },
+    {
+      "id": "s3/Music/LRZ1",
+      "asset": "Sound/SMPS/s3/Music/LRZ1.bin",
+      "base_symbol": "Snd_LRZ1",
+      "source_annotation": "Sound/Music/LRZ1.asm"
+    },
+    {
+      "id": "s3/Music/LRZ2",
+      "asset": "Sound/SMPS/s3/Music/LRZ2.bin",
+      "base_symbol": "Snd_LRZ2",
+      "source_annotation": "Sound/Music/LRZ2.asm"
+    },
+    {
+      "id": "s3/Music/SSZ (Sonic 3)",
+      "asset": "Sound/SMPS/s3/Music/SSZ (Sonic 3).bin",
+      "base_symbol": "Snd_SSZ",
+      "source_annotation": "Sound/Music/SSZ (Sonic 3).asm"
+    },
+    {
+      "id": "s3/Music/DEZ1",
+      "asset": "Sound/SMPS/s3/Music/DEZ1.bin",
+      "base_symbol": "Snd_DEZ1",
+      "source_annotation": "Sound/Music/DEZ1.asm"
+    },
+    {
+      "id": "s3/Music/DEZ2",
+      "asset": "Sound/SMPS/s3/Music/DEZ2.bin",
+      "base_symbol": "Snd_DEZ2",
+      "source_annotation": "Sound/Music/DEZ2.asm"
+    },
+    {
+      "id": "s3/Music/Miniboss (Sonic & Knuckles)",
+      "asset": "Sound/SMPS/s3/Music/Miniboss (Sonic & Knuckles).bin",
+      "base_symbol": "Snd_Minib_SK",
+      "source_annotation": "Sound/Music/Miniboss (Sonic & Knuckles).asm"
+    },
+    {
+      "id": "s3/Music/Zone Boss",
+      "asset": "Sound/SMPS/s3/Music/Zone Boss.bin",
+      "base_symbol": "Snd_Boss",
+      "source_annotation": "Sound/Music/Zone Boss.asm"
+    },
+    {
+      "id": "s3/Music/Pachinko",
+      "asset": "Sound/SMPS/s3/Music/Pachinko.bin",
+      "base_symbol": "Snd_PachBonus",
+      "source_annotation": "Sound/Music/Pachinko.asm"
+    },
+    {
+      "id": "s3/Music/Special Stage",
+      "asset": "Sound/SMPS/s3/Music/Special Stage.bin",
+      "base_symbol": "Snd_SpecialS",
+      "source_annotation": "Sound/Music/Special Stage.asm"
+    },
+    {
+      "id": "s3/Music/Level Outro",
+      "asset": "Sound/SMPS/s3/Music/Level Outro.bin",
+      "base_symbol": "Snd_Results",
+      "source_annotation": "Sound/Music/Level Outro.asm"
+    },
+    {
+      "id": "s3/Music/Menu (Sonic 3)",
+      "asset": "Sound/SMPS/s3/Music/Menu (Sonic 3).bin",
+      "base_symbol": "Snd_Menu",
+      "source_annotation": "Sound/Music/Menu (Sonic 3).asm"
+    },
+    {
+      "id": "s3/Music/Slots",
+      "asset": "Sound/SMPS/s3/Music/Slots.bin",
+      "base_symbol": "Snd_SlotBonus",
+      "source_annotation": "Sound/Music/Slots.asm"
+    },
+    {
+      "id": "s3/Music/Gum Ball Machine",
+      "asset": "Sound/SMPS/s3/Music/Gum Ball Machine.bin",
+      "base_symbol": "Snd_GumBonus",
+      "source_annotation": "Sound/Music/Gum Ball Machine.asm"
+    },
+    {
+      "id": "s3/Music/Knuckles (Sonic 3)",
+      "asset": "Sound/SMPS/s3/Music/Knuckles (Sonic 3).bin",
+      "base_symbol": "Snd_Knux",
+      "source_annotation": "Sound/Music/Knuckles (Sonic 3).asm"
+    },
+    {
+      "id": "s3/Music/Azure Lake",
+      "asset": "Sound/SMPS/s3/Music/Azure Lake.bin",
+      "base_symbol": "Snd_ALZ",
+      "source_annotation": "Sound/Music/Azure Lake.asm"
+    },
+    {
+      "id": "s3/Music/Balloon Park",
+      "asset": "Sound/SMPS/s3/Music/Balloon Park.bin",
+      "base_symbol": "Snd_BPZ",
+      "source_annotation": "Sound/Music/Balloon Park.asm"
+    },
+    {
+      "id": "s3/Music/Desert Palace",
+      "asset": "Sound/SMPS/s3/Music/Desert Palace.bin",
+      "base_symbol": "Snd_DPZ",
+      "source_annotation": "Sound/Music/Desert Palace.asm"
+    },
+    {
+      "id": "s3/Music/Chrome Gadget",
+      "asset": "Sound/SMPS/s3/Music/Chrome Gadget.bin",
+      "base_symbol": "Snd_CGZ",
+      "source_annotation": "Sound/Music/Chrome Gadget.asm"
+    },
+    {
+      "id": "s3/Music/Endless Mine",
+      "asset": "Sound/SMPS/s3/Music/Endless Mine.bin",
+      "base_symbol": "Snd_EMZ",
+      "source_annotation": "Sound/Music/Endless Mine.asm"
+    },
+    {
+      "id": "s3/Music/Title (Sonic 3)",
+      "asset": "Sound/SMPS/s3/Music/Title (Sonic 3).bin",
+      "base_symbol": "Snd_Title",
+      "source_annotation": "Sound/Music/Title (Sonic 3).asm"
+    },
+    {
+      "id": "s3/Music/Credits (Sonic 3)",
+      "asset": "Sound/SMPS/s3/Music/Credits (Sonic 3).bin",
+      "base_symbol": "Snd_S3Credits",
+      "source_annotation": "Sound/Music/Credits (Sonic 3).asm"
+    },
+    {
+      "id": "s3/Music/Game Over",
+      "asset": "Sound/SMPS/s3/Music/Game Over.bin",
+      "base_symbol": "Snd_GameOver",
+      "source_annotation": "Sound/Music/Game Over.asm"
+    },
+    {
+      "id": "s3/Music/Continue (Sonic 3)",
+      "asset": "Sound/SMPS/s3/Music/Continue (Sonic 3).bin",
+      "base_symbol": "Snd_Continue",
+      "source_annotation": "Sound/Music/Continue (Sonic 3).asm"
+    },
+    {
+      "id": "s3/Music/1UP (Sonic 3)",
+      "asset": "Sound/SMPS/s3/Music/1UP (Sonic 3).bin",
+      "base_symbol": "Snd_1UP",
+      "source_annotation": "Sound/Music/1UP (Sonic 3).asm"
+    },
+    {
+      "id": "s3/Music/Chaos Emerald",
+      "asset": "Sound/SMPS/s3/Music/Chaos Emerald.bin",
+      "base_symbol": "Snd_Emerald",
+      "source_annotation": "Sound/Music/Chaos Emerald.asm"
+    },
+    {
+      "id": "s3/Music/Invincible (Sonic 3)",
+      "asset": "Sound/SMPS/s3/Music/Invincible (Sonic 3).bin",
+      "base_symbol": "Snd_Invic",
+      "source_annotation": "Sound/Music/Invincible (Sonic 3).asm"
+    },
+    {
+      "id": "s3/Music/Competition Menu",
+      "asset": "Sound/SMPS/s3/Music/Competition Menu.bin",
+      "base_symbol": "Snd_2PMenu",
+      "source_annotation": "Sound/Music/Competition Menu.asm"
+    },
+    {
+      "id": "s3/Music/Countdown",
+      "asset": "Sound/SMPS/s3/Music/Countdown.bin",
+      "base_symbol": "Snd_Drown",
+      "source_annotation": "Sound/Music/Countdown.asm"
+    },
+    {
+      "id": "s3/Music/Game Complete (Sonic 3)",
+      "asset": "Sound/SMPS/s3/Music/Game Complete (Sonic 3).bin",
+      "base_symbol": "Snd_PresSega",
+      "source_annotation": "Sound/Music/Game Complete (Sonic 3).asm"
+    },
+    {
+      "id": "s3/SFX/33 - Ring (Right)",
+      "asset": "Sound/SMPS/s3/SFX/33 - Ring (Right).bin",
+      "base_symbol": "Sound_33",
+      "source_annotation": "Sound/SFX/33 - Ring (Right).asm"
+    },
+    {
+      "id": "s3/SFX/34 - Ring (Left)",
+      "asset": "Sound/SMPS/s3/SFX/34 - Ring (Left).bin",
+      "base_symbol": "Sound_34",
+      "source_annotation": "Sound/SFX/34 - Ring (Left).asm"
+    },
+    {
+      "id": "s3/SFX/35 - Death",
+      "asset": "Sound/SMPS/s3/SFX/35 - Death.bin",
+      "base_symbol": "Sound_35",
+      "source_annotation": "Sound/SFX/35 - Death.asm"
+    },
+    {
+      "id": "s3/SFX/36 - Skid",
+      "asset": "Sound/SMPS/s3/SFX/36 - Skid.bin",
+      "base_symbol": "Sound_36",
+      "source_annotation": "Sound/SFX/36 - Skid.asm"
+    },
+    {
+      "id": "s3/SFX/37 - Spike Hit",
+      "asset": "Sound/SMPS/s3/SFX/37 - Spike Hit.bin",
+      "base_symbol": "Sound_37",
+      "source_annotation": "Sound/SFX/37 - Spike Hit.asm"
+    },
+    {
+      "id": "s3/SFX/38 - Bubble",
+      "asset": "Sound/SMPS/s3/SFX/38 - Bubble.bin",
+      "base_symbol": "Sound_38",
+      "source_annotation": "Sound/SFX/38 - Bubble.asm"
+    },
+    {
+      "id": "s3/SFX/39 - Splash",
+      "asset": "Sound/SMPS/s3/SFX/39 - Splash.bin",
+      "base_symbol": "Sound_39",
+      "source_annotation": "Sound/SFX/39 - Splash.asm"
+    },
+    {
+      "id": "s3/SFX/3A - Shield",
+      "asset": "Sound/SMPS/s3/SFX/3A - Shield.bin",
+      "base_symbol": "Sound_3A",
+      "source_annotation": "Sound/SFX/3A - Shield.asm"
+    },
+    {
+      "id": "s3/SFX/3B - Drown",
+      "asset": "Sound/SMPS/s3/SFX/3B - Drown.bin",
+      "base_symbol": "Sound_3B",
+      "source_annotation": "Sound/SFX/3B - Drown.asm"
+    },
+    {
+      "id": "s3/SFX/3C - Roll",
+      "asset": "Sound/SMPS/s3/SFX/3C - Roll.bin",
+      "base_symbol": "Sound_3C",
+      "source_annotation": "Sound/SFX/3C - Roll.asm"
+    },
+    {
+      "id": "s3/SFX/3D - Break",
+      "asset": "Sound/SMPS/s3/SFX/3D - Break.bin",
+      "base_symbol": "Sound_3D",
+      "source_annotation": "Sound/SFX/3D - Break.asm"
+    },
+    {
+      "id": "s3/SFX/3E - Fire Shield",
+      "asset": "Sound/SMPS/s3/SFX/3E - Fire Shield.bin",
+      "base_symbol": "Sound_3E",
+      "source_annotation": "Sound/SFX/3E - Fire Shield.asm"
+    },
+    {
+      "id": "s3/SFX/3F - Bubble Shield",
+      "asset": "Sound/SMPS/s3/SFX/3F - Bubble Shield.bin",
+      "base_symbol": "Sound_3F",
+      "source_annotation": "Sound/SFX/3F - Bubble Shield.asm"
+    },
+    {
+      "id": "s3/SFX/40 - Unknown Shield",
+      "asset": "Sound/SMPS/s3/SFX/40 - Unknown Shield.bin",
+      "base_symbol": "Sound_40",
+      "source_annotation": "Sound/SFX/40 - Unknown Shield.asm"
+    },
+    {
+      "id": "s3/SFX/41 - Lightning Shield",
+      "asset": "Sound/SMPS/s3/SFX/41 - Lightning Shield.bin",
+      "base_symbol": "Sound_41",
+      "source_annotation": "Sound/SFX/41 - Lightning Shield.asm"
+    },
+    {
+      "id": "s3/SFX/42 - Insta Shield Attack",
+      "asset": "Sound/SMPS/s3/SFX/42 - Insta Shield Attack.bin",
+      "base_symbol": "Sound_42",
+      "source_annotation": "Sound/SFX/42 - Insta Shield Attack.asm"
+    },
+    {
+      "id": "s3/SFX/43 - Fire Shield Attack",
+      "asset": "Sound/SMPS/s3/SFX/43 - Fire Shield Attack.bin",
+      "base_symbol": "Sound_43",
+      "source_annotation": "Sound/SFX/43 - Fire Shield Attack.asm"
+    },
+    {
+      "id": "s3/SFX/44 - Bubble Shield Attack",
+      "asset": "Sound/SMPS/s3/SFX/44 - Bubble Shield Attack.bin",
+      "base_symbol": "Sound_44",
+      "source_annotation": "Sound/SFX/44 - Bubble Shield Attack.asm"
+    },
+    {
+      "id": "s3/SFX/45 - Lightning Shield Attack",
+      "asset": "Sound/SMPS/s3/SFX/45 - Lightning Shield Attack.bin",
+      "base_symbol": "Sound_45",
+      "source_annotation": "Sound/SFX/45 - Lightning Shield Attack.asm"
+    },
+    {
+      "id": "s3/SFX/46 - Whistle",
+      "asset": "Sound/SMPS/s3/SFX/46 - Whistle.bin",
+      "base_symbol": "Sound_46",
+      "source_annotation": "Sound/SFX/46 - Whistle.asm"
+    },
+    {
+      "id": "s3/SFX/47 - Sand Wall Rise",
+      "asset": "Sound/SMPS/s3/SFX/47 - Sand Wall Rise.bin",
+      "base_symbol": "Sound_47",
+      "source_annotation": "Sound/SFX/47 - Sand Wall Rise.asm"
+    },
+    {
+      "id": "s3/SFX/48 - Blast",
+      "asset": "Sound/SMPS/s3/SFX/48 - Blast.bin",
+      "base_symbol": "Sound_48",
+      "source_annotation": "Sound/SFX/48 - Blast.asm"
+    },
+    {
+      "id": "s3/SFX/49 - Thump",
+      "asset": "Sound/SMPS/s3/SFX/49 - Thump.bin",
+      "base_symbol": "Sound_49",
+      "source_annotation": "Sound/SFX/49 - Thump.asm"
+    },
+    {
+      "id": "s3/SFX/4A - Grab",
+      "asset": "Sound/SMPS/s3/SFX/4A - Grab.bin",
+      "base_symbol": "Sound_4A",
+      "source_annotation": "Sound/SFX/4A - Grab.asm"
+    },
+    {
+      "id": "s3/SFX/4B - Waterfall Splash",
+      "asset": "Sound/SMPS/s3/SFX/4B - Waterfall Splash.bin",
+      "base_symbol": "Sound_4B",
+      "source_annotation": "Sound/SFX/4B - Waterfall Splash.asm"
+    },
+    {
+      "id": "s3/SFX/4C - Glide Land",
+      "asset": "Sound/SMPS/s3/SFX/4C - Glide Land.bin",
+      "base_symbol": "Sound_4C",
+      "source_annotation": "Sound/SFX/4C - Glide Land.asm"
+    },
+    {
+      "id": "s3/SFX/4D - Projectile",
+      "asset": "Sound/SMPS/s3/SFX/4D - Projectile.bin",
+      "base_symbol": "Sound_4D",
+      "source_annotation": "Sound/SFX/4D - Projectile.asm"
+    },
+    {
+      "id": "s3/SFX/4E - Missile Explode",
+      "asset": "Sound/SMPS/s3/SFX/4E - Missile Explode.bin",
+      "base_symbol": "Sound_4E",
+      "source_annotation": "Sound/SFX/4E - Missile Explode.asm"
+    },
+    {
+      "id": "s3/SFX/4F - Flamethrower (Quiet)",
+      "asset": "Sound/SMPS/s3/SFX/4F - Flamethrower (Quiet).bin",
+      "base_symbol": "Sound_4F",
+      "source_annotation": "Sound/SFX/4F - Flamethrower (Quiet).asm"
+    },
+    {
+      "id": "s3/SFX/50 - Boss Activate",
+      "asset": "Sound/SMPS/s3/SFX/50 - Boss Activate.bin",
+      "base_symbol": "Sound_50",
+      "source_annotation": "Sound/SFX/50 - Boss Activate.asm"
+    },
+    {
+      "id": "s3/SFX/51 - Missile Throw",
+      "asset": "Sound/SMPS/s3/SFX/51 - Missile Throw.bin",
+      "base_symbol": "Sound_51",
+      "source_annotation": "Sound/SFX/51 - Missile Throw.asm"
+    },
+    {
+      "id": "s3/SFX/52 - Spike Move",
+      "asset": "Sound/SMPS/s3/SFX/52 - Spike Move.bin",
+      "base_symbol": "Sound_52",
+      "source_annotation": "Sound/SFX/52 - Spike Move.asm"
+    },
+    {
+      "id": "s3/SFX/53 - Charging",
+      "asset": "Sound/SMPS/s3/SFX/53 - Charging.bin",
+      "base_symbol": "Sound_53",
+      "source_annotation": "Sound/SFX/53 - Charging.asm"
+    },
+    {
+      "id": "s3/SFX/54 - Boss Laser",
+      "asset": "Sound/SMPS/s3/SFX/54 - Boss Laser.bin",
+      "base_symbol": "Sound_54",
+      "source_annotation": "Sound/SFX/54 - Boss Laser.asm"
+    },
+    {
+      "id": "s3/SFX/55 - Block Conveyor",
+      "asset": "Sound/SMPS/s3/SFX/55 - Block Conveyor.bin",
+      "base_symbol": "Sound_55",
+      "source_annotation": "Sound/SFX/55 - Block Conveyor.asm"
+    },
+    {
+      "id": "s3/SFX/56 - Flip Bridge",
+      "asset": "Sound/SMPS/s3/SFX/56 - Flip Bridge.bin",
+      "base_symbol": "Sound_56",
+      "source_annotation": "Sound/SFX/56 - Flip Bridge.asm"
+    },
+    {
+      "id": "s3/SFX/57 - Geyser",
+      "asset": "Sound/SMPS/s3/SFX/57 - Geyser.bin",
+      "base_symbol": "Sound_57",
+      "source_annotation": "Sound/SFX/57 - Geyser.asm"
+    },
+    {
+      "id": "s3/SFX/58 - Fan Latch",
+      "asset": "Sound/SMPS/s3/SFX/58 - Fan Latch.bin",
+      "base_symbol": "Sound_58",
+      "source_annotation": "Sound/SFX/58 - Fan Latch.asm"
+    },
+    {
+      "id": "s3/SFX/59 - Collapse",
+      "asset": "Sound/SMPS/s3/SFX/59 - Collapse.bin",
+      "base_symbol": "Sound_59",
+      "source_annotation": "Sound/SFX/59 - Collapse.asm"
+    },
+    {
+      "id": "s3/SFX/5A - Unknown Charge",
+      "asset": "Sound/SMPS/s3/SFX/5A - Unknown Charge.bin",
+      "base_symbol": "Sound_5A",
+      "source_annotation": "Sound/SFX/5A - Unknown Charge.asm"
+    },
+    {
+      "id": "s3/SFX/5B - Switch",
+      "asset": "Sound/SMPS/s3/SFX/5B - Switch.bin",
+      "base_symbol": "Sound_5B",
+      "source_annotation": "Sound/SFX/5B - Switch.asm"
+    },
+    {
+      "id": "s3/SFX/5C - Mecha Spark",
+      "asset": "Sound/SMPS/s3/SFX/5C - Mecha Spark.bin",
+      "base_symbol": "Sound_5C",
+      "source_annotation": "Sound/SFX/5C - Mecha Spark.asm"
+    },
+    {
+      "id": "s3/SFX/5D - Floor Thump",
+      "asset": "Sound/SMPS/s3/SFX/5D - Floor Thump.bin",
+      "base_symbol": "Sound_5D",
+      "source_annotation": "Sound/SFX/5D - Floor Thump.asm"
+    },
+    {
+      "id": "s3/SFX/5E - Laser",
+      "asset": "Sound/SMPS/s3/SFX/5E - Laser.bin",
+      "base_symbol": "Sound_5E",
+      "source_annotation": "Sound/SFX/5E - Laser.asm"
+    },
+    {
+      "id": "s3/SFX/5F - Crash",
+      "asset": "Sound/SMPS/s3/SFX/5F - Crash.bin",
+      "base_symbol": "Sound_5F",
+      "source_annotation": "Sound/SFX/5F - Crash.asm"
+    },
+    {
+      "id": "s3/SFX/60 - Boss Zoom",
+      "asset": "Sound/SMPS/s3/SFX/60 - Boss Zoom.bin",
+      "base_symbol": "Sound_60",
+      "source_annotation": "Sound/SFX/60 - Boss Zoom.asm"
+    },
+    {
+      "id": "s3/SFX/61 - Boss Hit Floor",
+      "asset": "Sound/SMPS/s3/SFX/61 - Boss Hit Floor.bin",
+      "base_symbol": "Sound_61",
+      "source_annotation": "Sound/SFX/61 - Boss Hit Floor.asm"
+    },
+    {
+      "id": "s3/SFX/62 - Jump",
+      "asset": "Sound/SMPS/s3/SFX/62 - Jump.bin",
+      "base_symbol": "Sound_62",
+      "source_annotation": "Sound/SFX/62 - Jump.asm"
+    },
+    {
+      "id": "s3/SFX/63 - Star Post",
+      "asset": "Sound/SMPS/s3/SFX/63 - Star Post.bin",
+      "base_symbol": "Sound_63",
+      "source_annotation": "Sound/SFX/63 - Star Post.asm"
+    },
+    {
+      "id": "s3/SFX/64 - Pulley Grab",
+      "asset": "Sound/SMPS/s3/SFX/64 - Pulley Grab.bin",
+      "base_symbol": "Sound_64",
+      "source_annotation": "Sound/SFX/64 - Pulley Grab.asm"
+    },
+    {
+      "id": "s3/SFX/65 - Blue Sphere",
+      "asset": "Sound/SMPS/s3/SFX/65 - Blue Sphere.bin",
+      "base_symbol": "Sound_65",
+      "source_annotation": "Sound/SFX/65 - Blue Sphere.asm"
+    },
+    {
+      "id": "s3/SFX/66 - All Spheres Collected",
+      "asset": "Sound/SMPS/s3/SFX/66 - All Spheres Collected.bin",
+      "base_symbol": "Sound_66",
+      "source_annotation": "Sound/SFX/66 - All Spheres Collected.asm"
+    },
+    {
+      "id": "s3/SFX/67 - Level Projectile",
+      "asset": "Sound/SMPS/s3/SFX/67 - Level Projectile.bin",
+      "base_symbol": "Sound_67",
+      "source_annotation": "Sound/SFX/67 - Level Projectile.asm"
+    },
+    {
+      "id": "s3/SFX/68 - Perfect",
+      "asset": "Sound/SMPS/s3/SFX/68 - Perfect.bin",
+      "base_symbol": "Sound_68",
+      "source_annotation": "Sound/SFX/68 - Perfect.asm"
+    },
+    {
+      "id": "s3/SFX/69 - Push Block",
+      "asset": "Sound/SMPS/s3/SFX/69 - Push Block.bin",
+      "base_symbol": "Sound_69",
+      "source_annotation": "Sound/SFX/69 - Push Block.asm"
+    },
+    {
+      "id": "s3/SFX/6A - Goal",
+      "asset": "Sound/SMPS/s3/SFX/6A - Goal.bin",
+      "base_symbol": "Sound_6A",
+      "source_annotation": "Sound/SFX/6A - Goal.asm"
+    },
+    {
+      "id": "s3/SFX/6B - Action Block",
+      "asset": "Sound/SMPS/s3/SFX/6B - Action Block.bin",
+      "base_symbol": "Sound_6B",
+      "source_annotation": "Sound/SFX/6B - Action Block.asm"
+    },
+    {
+      "id": "s3/SFX/6C - Splash 2",
+      "asset": "Sound/SMPS/s3/SFX/6C - Splash 2.bin",
+      "base_symbol": "Sound_6C",
+      "source_annotation": "Sound/SFX/6C - Splash 2.asm"
+    },
+    {
+      "id": "s3/SFX/6D - Unknown Shift",
+      "asset": "Sound/SMPS/s3/SFX/6D - Unknown Shift.bin",
+      "base_symbol": "Sound_6D",
+      "source_annotation": "Sound/SFX/6D - Unknown Shift.asm"
+    },
+    {
+      "id": "s3/SFX/6E - Boss Hit",
+      "asset": "Sound/SMPS/s3/SFX/6E - Boss Hit.bin",
+      "base_symbol": "Sound_6E",
+      "source_annotation": "Sound/SFX/6E - Boss Hit.asm"
+    },
+    {
+      "id": "s3/SFX/6F - Rumble 2",
+      "asset": "Sound/SMPS/s3/SFX/6F - Rumble 2.bin",
+      "base_symbol": "Sound_6F",
+      "source_annotation": "Sound/SFX/6F - Rumble 2.asm"
+    },
+    {
+      "id": "s3/SFX/70 - Lava Ball",
+      "asset": "Sound/SMPS/s3/SFX/70 - Lava Ball.bin",
+      "base_symbol": "Sound_70",
+      "source_annotation": "Sound/SFX/70 - Lava Ball.asm"
+    },
+    {
+      "id": "s3/SFX/71 - Shield 2",
+      "asset": "Sound/SMPS/s3/SFX/71 - Shield 2.bin",
+      "base_symbol": "Sound_71",
+      "source_annotation": "Sound/SFX/71 - Shield 2.asm"
+    },
+    {
+      "id": "s3/SFX/72 - Hoverpad",
+      "asset": "Sound/SMPS/s3/SFX/72 - Hoverpad.bin",
+      "base_symbol": "Sound_72",
+      "source_annotation": "Sound/SFX/72 - Hoverpad.asm"
+    },
+    {
+      "id": "s3/SFX/73 - Transporter",
+      "asset": "Sound/SMPS/s3/SFX/73 - Transporter.bin",
+      "base_symbol": "Sound_73",
+      "source_annotation": "Sound/SFX/73 - Transporter.asm"
+    },
+    {
+      "id": "s3/SFX/74 - Tunnel Booster",
+      "asset": "Sound/SMPS/s3/SFX/74 - Tunnel Booster.bin",
+      "base_symbol": "Sound_74",
+      "source_annotation": "Sound/SFX/74 - Tunnel Booster.asm"
+    },
+    {
+      "id": "s3/SFX/75 - Balloon Platform",
+      "asset": "Sound/SMPS/s3/SFX/75 - Balloon Platform.bin",
+      "base_symbol": "Sound_75",
+      "source_annotation": "Sound/SFX/75 - Balloon Platform.asm"
+    },
+    {
+      "id": "s3/SFX/76 - Trap Door",
+      "asset": "Sound/SMPS/s3/SFX/76 - Trap Door.bin",
+      "base_symbol": "Sound_76",
+      "source_annotation": "Sound/SFX/76 - Trap Door.asm"
+    },
+    {
+      "id": "s3/SFX/77 - Balloon",
+      "asset": "Sound/SMPS/s3/SFX/77 - Balloon.bin",
+      "base_symbol": "Sound_77",
+      "source_annotation": "Sound/SFX/77 - Balloon.asm"
+    },
+    {
+      "id": "s3/SFX/78 - Gravity Machine",
+      "asset": "Sound/SMPS/s3/SFX/78 - Gravity Machine.bin",
+      "base_symbol": "Sound_78",
+      "source_annotation": "Sound/SFX/78 - Gravity Machine.asm"
+    },
+    {
+      "id": "s3/SFX/79 - Lightning",
+      "asset": "Sound/SMPS/s3/SFX/79 - Lightning.bin",
+      "base_symbol": "Sound_79",
+      "source_annotation": "Sound/SFX/79 - Lightning.asm"
+    },
+    {
+      "id": "s3/SFX/7A - Boss Magma",
+      "asset": "Sound/SMPS/s3/SFX/7A - Boss Magma.bin",
+      "base_symbol": "Sound_7A",
+      "source_annotation": "Sound/SFX/7A - Boss Magma.asm"
+    },
+    {
+      "id": "s3/SFX/7B - Small Bumpers",
+      "asset": "Sound/SMPS/s3/SFX/7B - Small Bumpers.bin",
+      "base_symbol": "Sound_7B",
+      "source_annotation": "Sound/SFX/7B - Small Bumpers.asm"
+    },
+    {
+      "id": "s3/SFX/7C - Chain Tension",
+      "asset": "Sound/SMPS/s3/SFX/7C - Chain Tension.bin",
+      "base_symbol": "Sound_7C",
+      "source_annotation": "Sound/SFX/7C - Chain Tension.asm"
+    },
+    {
+      "id": "s3/SFX/7D - Unknown Pump",
+      "asset": "Sound/SMPS/s3/SFX/7D - Unknown Pump.bin",
+      "base_symbol": "Sound_7D",
+      "source_annotation": "Sound/SFX/7D - Unknown Pump.asm"
+    },
+    {
+      "id": "s3/SFX/7E - Ground Slide",
+      "asset": "Sound/SMPS/s3/SFX/7E - Ground Slide.bin",
+      "base_symbol": "Sound_7E",
+      "source_annotation": "Sound/SFX/7E - Ground Slide.asm"
+    },
+    {
+      "id": "s3/SFX/7F - Frost Puff",
+      "asset": "Sound/SMPS/s3/SFX/7F - Frost Puff.bin",
+      "base_symbol": "Sound_7F",
+      "source_annotation": "Sound/SFX/7F - Frost Puff.asm"
+    },
+    {
+      "id": "s3/SFX/80 - Ice Spikes",
+      "asset": "Sound/SMPS/s3/SFX/80 - Ice Spikes.bin",
+      "base_symbol": "Sound_80",
+      "source_annotation": "Sound/SFX/80 - Ice Spikes.asm"
+    },
+    {
+      "id": "s3/SFX/81 - Tube Launcher",
+      "asset": "Sound/SMPS/s3/SFX/81 - Tube Launcher.bin",
+      "base_symbol": "Sound_81",
+      "source_annotation": "Sound/SFX/81 - Tube Launcher.asm"
+    },
+    {
+      "id": "s3/SFX/82 - Sand Splash",
+      "asset": "Sound/SMPS/s3/SFX/82 - Sand Splash.bin",
+      "base_symbol": "Sound_82",
+      "source_annotation": "Sound/SFX/82 - Sand Splash.asm"
+    },
+    {
+      "id": "s3/SFX/83 - Bridge Collapse",
+      "asset": "Sound/SMPS/s3/SFX/83 - Bridge Collapse.bin",
+      "base_symbol": "Sound_83",
+      "source_annotation": "Sound/SFX/83 - Bridge Collapse.asm"
+    },
+    {
+      "id": "s3/SFX/84 - Unknown Power-Up",
+      "asset": "Sound/SMPS/s3/SFX/84 - Unknown Power-Up.bin",
+      "base_symbol": "Sound_84",
+      "source_annotation": "Sound/SFX/84 - Unknown Power-Up.asm"
+    },
+    {
+      "id": "s3/SFX/85 - Unknown Power-Down",
+      "asset": "Sound/SMPS/s3/SFX/85 - Unknown Power-Down.bin",
+      "base_symbol": "Sound_85",
+      "source_annotation": "Sound/SFX/85 - Unknown Power-Down.asm"
+    },
+    {
+      "id": "s3/SFX/86 - Alarm",
+      "asset": "Sound/SMPS/s3/SFX/86 - Alarm.bin",
+      "base_symbol": "Sound_86",
+      "source_annotation": "Sound/SFX/86 - Alarm.asm"
+    },
+    {
+      "id": "s3/SFX/87 - Mushroom Bounce",
+      "asset": "Sound/SMPS/s3/SFX/87 - Mushroom Bounce.bin",
+      "base_symbol": "Sound_87",
+      "source_annotation": "Sound/SFX/87 - Mushroom Bounce.asm"
+    },
+    {
+      "id": "s3/SFX/88 - Pulley Move",
+      "asset": "Sound/SMPS/s3/SFX/88 - Pulley Move.bin",
+      "base_symbol": "Sound_88",
+      "source_annotation": "Sound/SFX/88 - Pulley Move.asm"
+    },
+    {
+      "id": "s3/SFX/89 - Weather Machine",
+      "asset": "Sound/SMPS/s3/SFX/89 - Weather Machine.bin",
+      "base_symbol": "Sound_89",
+      "source_annotation": "Sound/SFX/89 - Weather Machine.asm"
+    },
+    {
+      "id": "s3/SFX/8A - Bouncy",
+      "asset": "Sound/SMPS/s3/SFX/8A - Bouncy.bin",
+      "base_symbol": "Sound_8A",
+      "source_annotation": "Sound/SFX/8A - Bouncy.asm"
+    },
+    {
+      "id": "s3/SFX/8B - Chop Tree",
+      "asset": "Sound/SMPS/s3/SFX/8B - Chop Tree.bin",
+      "base_symbol": "Sound_8B",
+      "source_annotation": "Sound/SFX/8B - Chop Tree.asm"
+    },
+    {
+      "id": "s3/SFX/8C - Chop Stuck",
+      "asset": "Sound/SMPS/s3/SFX/8C - Chop Stuck.bin",
+      "base_symbol": "Sound_8C",
+      "source_annotation": "Sound/SFX/8C - Chop Stuck.asm"
+    },
+    {
+      "id": "s3/SFX/8D - Unknown Flutter",
+      "asset": "Sound/SMPS/s3/SFX/8D - Unknown Flutter.bin",
+      "base_symbol": "Sound_8D",
+      "source_annotation": "Sound/SFX/8D - Unknown Flutter.asm"
+    },
+    {
+      "id": "s3/SFX/8E - Unknown Revving",
+      "asset": "Sound/SMPS/s3/SFX/8E - Unknown Revving.bin",
+      "base_symbol": "Sound_8E",
+      "source_annotation": "Sound/SFX/8E - Unknown Revving.asm"
+    },
+    {
+      "id": "s3/SFX/8F - Door Open",
+      "asset": "Sound/SMPS/s3/SFX/8F - Door Open.bin",
+      "base_symbol": "Sound_8F",
+      "source_annotation": "Sound/SFX/8F - Door Open.asm"
+    },
+    {
+      "id": "s3/SFX/90 - Door Move",
+      "asset": "Sound/SMPS/s3/SFX/90 - Door Move.bin",
+      "base_symbol": "Sound_90",
+      "source_annotation": "Sound/SFX/90 - Door Move.asm"
+    },
+    {
+      "id": "s3/SFX/91 - Door Close",
+      "asset": "Sound/SMPS/s3/SFX/91 - Door Close.bin",
+      "base_symbol": "Sound_91",
+      "source_annotation": "Sound/SFX/91 - Door Close.asm"
+    },
+    {
+      "id": "s3/SFX/92 - Ghost Appear",
+      "asset": "Sound/SMPS/s3/SFX/92 - Ghost Appear.bin",
+      "base_symbol": "Sound_92",
+      "source_annotation": "Sound/SFX/92 - Ghost Appear.asm"
+    },
+    {
+      "id": "s3/SFX/93 - Boss Recovery",
+      "asset": "Sound/SMPS/s3/SFX/93 - Boss Recovery.bin",
+      "base_symbol": "Sound_93",
+      "source_annotation": "Sound/SFX/93 - Boss Recovery.asm"
+    },
+    {
+      "id": "s3/SFX/94 - Chain Tick",
+      "asset": "Sound/SMPS/s3/SFX/94 - Chain Tick.bin",
+      "base_symbol": "Sound_94",
+      "source_annotation": "Sound/SFX/94 - Chain Tick.asm"
+    },
+    {
+      "id": "s3/SFX/95 - Boss Hand",
+      "asset": "Sound/SMPS/s3/SFX/95 - Boss Hand.bin",
+      "base_symbol": "Sound_95",
+      "source_annotation": "Sound/SFX/95 - Boss Hand.asm"
+    },
+    {
+      "id": "s3/SFX/96 - Mecha Land",
+      "asset": "Sound/SMPS/s3/SFX/96 - Mecha Land.bin",
+      "base_symbol": "Sound_96",
+      "source_annotation": "Sound/SFX/96 - Mecha Land.asm"
+    },
+    {
+      "id": "s3/SFX/97 - Enemy Breath",
+      "asset": "Sound/SMPS/s3/SFX/97 - Enemy Breath.bin",
+      "base_symbol": "Sound_97",
+      "source_annotation": "Sound/SFX/97 - Enemy Breath.asm"
+    },
+    {
+      "id": "s3/SFX/98 - Boss Projectile",
+      "asset": "Sound/SMPS/s3/SFX/98 - Boss Projectile.bin",
+      "base_symbol": "Sound_98",
+      "source_annotation": "Sound/SFX/98 - Boss Projectile.asm"
+    },
+    {
+      "id": "s3/SFX/99 - Unknown Plink",
+      "asset": "Sound/SMPS/s3/SFX/99 - Unknown Plink.bin",
+      "base_symbol": "Sound_99",
+      "source_annotation": "Sound/SFX/99 - Unknown Plink.asm"
+    },
+    {
+      "id": "s3/SFX/9A - Spring Latch",
+      "asset": "Sound/SMPS/s3/SFX/9A - Spring Latch.bin",
+      "base_symbol": "Sound_9A",
+      "source_annotation": "Sound/SFX/9A - Spring Latch.asm"
+    },
+    {
+      "id": "s3/SFX/9B - Thump Boss (Sonic 3)",
+      "asset": "Sound/SMPS/s3/SFX/9B - Thump Boss (Sonic 3).bin",
+      "base_symbol": "Sound_9B",
+      "source_annotation": "Sound/SFX/9B - Thump Boss (Sonic 3).asm"
+    },
+    {
+      "id": "s3/SFX/9C - Super Emerald",
+      "asset": "Sound/SMPS/s3/SFX/9C - Super Emerald.bin",
+      "base_symbol": "Sound_9C",
+      "source_annotation": "Sound/SFX/9C - Super Emerald.asm"
+    },
+    {
+      "id": "s3/SFX/9D - Targeting",
+      "asset": "Sound/SMPS/s3/SFX/9D - Targeting.bin",
+      "base_symbol": "Sound_9D",
+      "source_annotation": "Sound/SFX/9D - Targeting.asm"
+    },
+    {
+      "id": "s3/SFX/9E - Clank",
+      "asset": "Sound/SMPS/s3/SFX/9E - Clank.bin",
+      "base_symbol": "Sound_9E",
+      "source_annotation": "Sound/SFX/9E - Clank.asm"
+    },
+    {
+      "id": "s3/SFX/9F - Super Transform",
+      "asset": "Sound/SMPS/s3/SFX/9F - Super Transform.bin",
+      "base_symbol": "Sound_9F",
+      "source_annotation": "Sound/SFX/9F - Super Transform.asm"
+    },
+    {
+      "id": "s3/SFX/A0 - Missile Shoot",
+      "asset": "Sound/SMPS/s3/SFX/A0 - Missile Shoot.bin",
+      "base_symbol": "Sound_A0",
+      "source_annotation": "Sound/SFX/A0 - Missile Shoot.asm"
+    },
+    {
+      "id": "s3/SFX/A1 - Unknown Ominous",
+      "asset": "Sound/SMPS/s3/SFX/A1 - Unknown Ominous.bin",
+      "base_symbol": "Sound_A1",
+      "source_annotation": "Sound/SFX/A1 - Unknown Ominous.asm"
+    },
+    {
+      "id": "s3/SFX/A2 - Floor Launcher",
+      "asset": "Sound/SMPS/s3/SFX/A2 - Floor Launcher.bin",
+      "base_symbol": "Sound_A2",
+      "source_annotation": "Sound/SFX/A2 - Floor Launcher.asm"
+    },
+    {
+      "id": "s3/SFX/A3 - Gravity Lift",
+      "asset": "Sound/SMPS/s3/SFX/A3 - Gravity Lift.bin",
+      "base_symbol": "Sound_A3",
+      "source_annotation": "Sound/SFX/A3 - Gravity Lift.asm"
+    },
+    {
+      "id": "s3/SFX/A4 - Mecha Transform",
+      "asset": "Sound/SMPS/s3/SFX/A4 - Mecha Transform.bin",
+      "base_symbol": "Sound_A4",
+      "source_annotation": "Sound/SFX/A4 - Mecha Transform.asm"
+    },
+    {
+      "id": "s3/SFX/A5 - Unknown Rise",
+      "asset": "Sound/SMPS/s3/SFX/A5 - Unknown Rise.bin",
+      "base_symbol": "Sound_A5",
+      "source_annotation": "Sound/SFX/A5 - Unknown Rise.asm"
+    },
+    {
+      "id": "s3/SFX/A6 - Launch Grab",
+      "asset": "Sound/SMPS/s3/SFX/A6 - Launch Grab.bin",
+      "base_symbol": "Sound_A6",
+      "source_annotation": "Sound/SFX/A6 - Launch Grab.asm"
+    },
+    {
+      "id": "s3/SFX/A7 - Launch Ready",
+      "asset": "Sound/SMPS/s3/SFX/A7 - Launch Ready.bin",
+      "base_symbol": "Sound_A7",
+      "source_annotation": "Sound/SFX/A7 - Launch Ready.asm"
+    },
+    {
+      "id": "s3/SFX/A8 - Energy Zap",
+      "asset": "Sound/SMPS/s3/SFX/A8 - Energy Zap.bin",
+      "base_symbol": "Sound_A8",
+      "source_annotation": "Sound/SFX/A8 - Energy Zap.asm"
+    },
+    {
+      "id": "s3/SFX/A9 - Air Ding",
+      "asset": "Sound/SMPS/s3/SFX/A9 - Air Ding.bin",
+      "base_symbol": "Sound_A9",
+      "source_annotation": "Sound/SFX/A9 - Air Ding.asm"
+    },
+    {
+      "id": "s3/SFX/AA - Bumper",
+      "asset": "Sound/SMPS/s3/SFX/AA - Bumper.bin",
+      "base_symbol": "Sound_AA",
+      "source_annotation": "Sound/SFX/AA - Bumper.asm"
+    },
+    {
+      "id": "s3/SFX/AB - Spin Dash",
+      "asset": "Sound/SMPS/s3/SFX/AB - Spin Dash.bin",
+      "base_symbol": "Sound_AB",
+      "source_annotation": "Sound/SFX/AB - Spin Dash.asm"
+    },
+    {
+      "id": "s3/SFX/AC - Continue",
+      "asset": "Sound/SMPS/s3/SFX/AC - Continue.bin",
+      "base_symbol": "Sound_AC",
+      "source_annotation": "Sound/SFX/AC - Continue.asm"
+    },
+    {
+      "id": "s3/SFX/AD - Launch Go (Sonic 3)",
+      "asset": "Sound/SMPS/s3/SFX/AD - Launch Go (Sonic 3).bin",
+      "base_symbol": "Sound_AD",
+      "source_annotation": "Sound/SFX/AD - Launch Go (Sonic 3).asm"
+    },
+    {
+      "id": "s3/SFX/AE - Flipper",
+      "asset": "Sound/SMPS/s3/SFX/AE - Flipper.bin",
+      "base_symbol": "Sound_AE",
+      "source_annotation": "Sound/SFX/AE - Flipper.asm"
+    },
+    {
+      "id": "s3/SFX/AF - Enter Special Stage",
+      "asset": "Sound/SMPS/s3/SFX/AF - Enter Special Stage.bin",
+      "base_symbol": "Sound_AF",
+      "source_annotation": "Sound/SFX/AF - Enter Special Stage.asm"
+    },
+    {
+      "id": "s3/SFX/B0 - Register",
+      "asset": "Sound/SMPS/s3/SFX/B0 - Register.bin",
+      "base_symbol": "Sound_B0",
+      "source_annotation": "Sound/SFX/B0 - Register.asm"
+    },
+    {
+      "id": "s3/SFX/B1 - Spring",
+      "asset": "Sound/SMPS/s3/SFX/B1 - Spring.bin",
+      "base_symbol": "Sound_B1",
+      "source_annotation": "Sound/SFX/B1 - Spring.asm"
+    },
+    {
+      "id": "s3/SFX/B2 - Error",
+      "asset": "Sound/SMPS/s3/SFX/B2 - Error.bin",
+      "base_symbol": "Sound_B2",
+      "source_annotation": "Sound/SFX/B2 - Error.asm"
+    },
+    {
+      "id": "s3/SFX/B3 - Big Ring",
+      "asset": "Sound/SMPS/s3/SFX/B3 - Big Ring.bin",
+      "base_symbol": "Sound_B3",
+      "source_annotation": "Sound/SFX/B3 - Big Ring.asm"
+    },
+    {
+      "id": "s3/SFX/B4 - Explode",
+      "asset": "Sound/SMPS/s3/SFX/B4 - Explode.bin",
+      "base_symbol": "Sound_B4",
+      "source_annotation": "Sound/SFX/B4 - Explode.asm"
+    },
+    {
+      "id": "s3/SFX/B5 - Diamonds",
+      "asset": "Sound/SMPS/s3/SFX/B5 - Diamonds.bin",
+      "base_symbol": "Sound_B5",
+      "source_annotation": "Sound/SFX/B5 - Diamonds.asm"
+    },
+    {
+      "id": "s3/SFX/B6 - Dash",
+      "asset": "Sound/SMPS/s3/SFX/B6 - Dash.bin",
+      "base_symbol": "Sound_B6",
+      "source_annotation": "Sound/SFX/B6 - Dash.asm"
+    },
+    {
+      "id": "s3/SFX/B7 - Slot Machine",
+      "asset": "Sound/SMPS/s3/SFX/B7 - Slot Machine.bin",
+      "base_symbol": "Sound_B7",
+      "source_annotation": "Sound/SFX/B7 - Slot Machine.asm"
+    },
+    {
+      "id": "s3/SFX/B8 - Signpost",
+      "asset": "Sound/SMPS/s3/SFX/B8 - Signpost.bin",
+      "base_symbol": "Sound_B8",
+      "source_annotation": "Sound/SFX/B8 - Signpost.asm"
+    },
+    {
+      "id": "s3/SFX/B9 - Ring Loss",
+      "asset": "Sound/SMPS/s3/SFX/B9 - Ring Loss.bin",
+      "base_symbol": "Sound_B9",
+      "source_annotation": "Sound/SFX/B9 - Ring Loss.asm"
+    },
+    {
+      "id": "s3/SFX/BA - Flying",
+      "asset": "Sound/SMPS/s3/SFX/BA - Flying.bin",
+      "base_symbol": "Sound_BA",
+      "source_annotation": "Sound/SFX/BA - Flying.asm"
+    },
+    {
+      "id": "s3/SFX/BB - Flying (Tired)",
+      "asset": "Sound/SMPS/s3/SFX/BB - Flying (Tired).bin",
+      "base_symbol": "Sound_BB",
+      "source_annotation": "Sound/SFX/BB - Flying (Tired).asm"
+    },
+    {
+      "id": "s3/SFX/BC - Slide Skid (Loud)",
+      "asset": "Sound/SMPS/s3/SFX/BC - Slide Skid (Loud).bin",
+      "base_symbol": "Sound_BC",
+      "source_annotation": "Sound/SFX/BC - Slide Skid (Loud).asm"
+    },
+    {
+      "id": "s3/SFX/BD - Large Ship",
+      "asset": "Sound/SMPS/s3/SFX/BD - Large Ship.bin",
+      "base_symbol": "Sound_BD",
+      "source_annotation": "Sound/SFX/BD - Large Ship.asm"
+    },
+    {
+      "id": "s3/SFX/BE - Robotnik Siren",
+      "asset": "Sound/SMPS/s3/SFX/BE - Robotnik Siren.bin",
+      "base_symbol": "Sound_BE",
+      "source_annotation": "Sound/SFX/BE - Robotnik Siren.asm"
+    },
+    {
+      "id": "s3/SFX/BF - Boss Rotate",
+      "asset": "Sound/SMPS/s3/SFX/BF - Boss Rotate.bin",
+      "base_symbol": "Sound_BF",
+      "source_annotation": "Sound/SFX/BF - Boss Rotate.asm"
+    },
+    {
+      "id": "s3/SFX/C0 - Fan (Big)",
+      "asset": "Sound/SMPS/s3/SFX/C0 - Fan (Big).bin",
+      "base_symbol": "Sound_C0",
+      "source_annotation": "Sound/SFX/C0 - Fan (Big).asm"
+    },
+    {
+      "id": "s3/SFX/C1 - Fan (Small)",
+      "asset": "Sound/SMPS/s3/SFX/C1 - Fan (Small).bin",
+      "base_symbol": "Sound_C1",
+      "source_annotation": "Sound/SFX/C1 - Fan (Small).asm"
+    },
+    {
+      "id": "s3/SFX/C2 - Flamethrower (Loud)",
+      "asset": "Sound/SMPS/s3/SFX/C2 - Flamethrower (Loud).bin",
+      "base_symbol": "Sound_C2",
+      "source_annotation": "Sound/SFX/C2 - Flamethrower (Loud).asm"
+    },
+    {
+      "id": "s3/SFX/C3 - Gravity Tunnel",
+      "asset": "Sound/SMPS/s3/SFX/C3 - Gravity Tunnel.bin",
+      "base_symbol": "Sound_C3",
+      "source_annotation": "Sound/SFX/C3 - Gravity Tunnel.asm"
+    },
+    {
+      "id": "s3/SFX/C4 - Boss Panic",
+      "asset": "Sound/SMPS/s3/SFX/C4 - Boss Panic.bin",
+      "base_symbol": "Sound_C4",
+      "source_annotation": "Sound/SFX/C4 - Boss Panic.asm"
+    },
+    {
+      "id": "s3/SFX/C5 - Unknown Spin",
+      "asset": "Sound/SMPS/s3/SFX/C5 - Unknown Spin.bin",
+      "base_symbol": "Sound_C5",
+      "source_annotation": "Sound/SFX/C5 - Unknown Spin.asm"
+    },
+    {
+      "id": "s3/SFX/C6 - Wave Hover",
+      "asset": "Sound/SMPS/s3/SFX/C6 - Wave Hover.bin",
+      "base_symbol": "Sound_C6",
+      "source_annotation": "Sound/SFX/C6 - Wave Hover.asm"
+    },
+    {
+      "id": "s3/SFX/C7 - Cannon Turn",
+      "asset": "Sound/SMPS/s3/SFX/C7 - Cannon Turn.bin",
+      "base_symbol": "Sound_C7",
+      "source_annotation": "Sound/SFX/C7 - Cannon Turn.asm"
+    },
+    {
+      "id": "s3/SFX/C8 - Slide Skid (Quiet)",
+      "asset": "Sound/SMPS/s3/SFX/C8 - Slide Skid (Quiet).bin",
+      "base_symbol": "Sound_C8",
+      "source_annotation": "Sound/SFX/C8 - Slide Skid (Quiet).asm"
+    },
+    {
+      "id": "s3/SFX/C9 - Spike Balls",
+      "asset": "Sound/SMPS/s3/SFX/C9 - Spike Balls.bin",
+      "base_symbol": "Sound_C9",
+      "source_annotation": "Sound/SFX/C9 - Spike Balls.asm"
+    },
+    {
+      "id": "s3/SFX/CA - Light Tunnel",
+      "asset": "Sound/SMPS/s3/SFX/CA - Light Tunnel.bin",
+      "base_symbol": "Sound_CA",
+      "source_annotation": "Sound/SFX/CA - Light Tunnel.asm"
+    },
+    {
+      "id": "s3/SFX/CB - Rumble",
+      "asset": "Sound/SMPS/s3/SFX/CB - Rumble.bin",
+      "base_symbol": "Sound_CB",
+      "source_annotation": "Sound/SFX/CB - Rumble.asm"
+    },
+    {
+      "id": "s3/SFX/CC - Big Rumble",
+      "asset": "Sound/SMPS/s3/SFX/CC - Big Rumble.bin",
+      "base_symbol": "Sound_CC",
+      "source_annotation": "Sound/SFX/CC - Big Rumble.asm"
+    },
+    {
+      "id": "s3/SFX/CD - Death Egg Rise (Loud)",
+      "asset": "Sound/SMPS/s3/SFX/CD - Death Egg Rise (Loud).bin",
+      "base_symbol": "Sound_CD",
+      "source_annotation": "Sound/SFX/CD - Death Egg Rise (Loud).asm"
+    },
+    {
+      "id": "s3/SFX/CE - Wind (Quiet)",
+      "asset": "Sound/SMPS/s3/SFX/CE - Wind (Quiet).bin",
+      "base_symbol": "Sound_CE",
+      "source_annotation": "Sound/SFX/CE - Wind (Quiet).asm"
+    },
+    {
+      "id": "s3/SFX/CF - Wind (Loud)",
+      "asset": "Sound/SMPS/s3/SFX/CF - Wind (Loud).bin",
+      "base_symbol": "Sound_CF",
+      "source_annotation": "Sound/SFX/CF - Wind (Loud).asm"
+    },
+    {
+      "id": "s3/SFX/D0 - Rising",
+      "asset": "Sound/SMPS/s3/SFX/D0 - Rising.bin",
+      "base_symbol": "Sound_D0",
+      "source_annotation": "Sound/SFX/D0 - Rising.asm"
+    },
+    {
+      "id": "s3/SFX/D1 - Unknown Flutter 2",
+      "asset": "Sound/SMPS/s3/SFX/D1 - Unknown Flutter 2.bin",
+      "base_symbol": "Sound_D1",
+      "source_annotation": "Sound/SFX/D1 - Unknown Flutter 2.asm"
+    },
+    {
+      "id": "s3/SFX/D2 - Gumball Tab",
+      "asset": "Sound/SMPS/s3/SFX/D2 - Gumball Tab.bin",
+      "base_symbol": "Sound_D2",
+      "source_annotation": "Sound/SFX/D2 - Gumball Tab.asm"
+    },
+    {
+      "id": "s3/SFX/D3 - Death Egg Rise (Quiet)",
+      "asset": "Sound/SMPS/s3/SFX/D3 - Death Egg Rise (Quiet).bin",
+      "base_symbol": "Sound_D3",
+      "source_annotation": "Sound/SFX/D3 - Death Egg Rise (Quiet).asm"
+    },
+    {
+      "id": "s3/SFX/D4 - Turbine Hum",
+      "asset": "Sound/SMPS/s3/SFX/D4 - Turbine Hum.bin",
+      "base_symbol": "Sound_D4",
+      "source_annotation": "Sound/SFX/D4 - Turbine Hum.asm"
+    },
+    {
+      "id": "s3/SFX/D5 - Lava Fall",
+      "asset": "Sound/SMPS/s3/SFX/D5 - Lava Fall.bin",
+      "base_symbol": "Sound_D5",
+      "source_annotation": "Sound/SFX/D5 - Lava Fall.asm"
+    },
+    {
+      "id": "s3/SFX/D6 - Unknown Zap",
+      "asset": "Sound/SMPS/s3/SFX/D6 - Unknown Zap.bin",
+      "base_symbol": "Sound_D6",
+      "source_annotation": "Sound/SFX/D6 - Unknown Zap.asm"
+    },
+    {
+      "id": "s3/SFX/D7 - Conveyor Platform",
+      "asset": "Sound/SMPS/s3/SFX/D7 - Conveyor Platform.bin",
+      "base_symbol": "Sound_D7",
+      "source_annotation": "Sound/SFX/D7 - Conveyor Platform.asm"
+    },
+    {
+      "id": "s3/SFX/D8 - Unknown Saw",
+      "asset": "Sound/SMPS/s3/SFX/D8 - Unknown Saw.bin",
+      "base_symbol": "Sound_D8",
+      "source_annotation": "Sound/SFX/D8 - Unknown Saw.asm"
+    },
+    {
+      "id": "s3/SFX/D9 - Magnetic Spike",
+      "asset": "Sound/SMPS/s3/SFX/D9 - Magnetic Spike.bin",
+      "base_symbol": "Sound_D9",
+      "source_annotation": "Sound/SFX/D9 - Magnetic Spike.asm"
+    },
+    {
+      "id": "s3/SFX/DA - Leaf Blower",
+      "asset": "Sound/SMPS/s3/SFX/DA - Leaf Blower.bin",
+      "base_symbol": "Sound_DA",
+      "source_annotation": "Sound/SFX/DA - Leaf Blower.asm"
+    },
+    {
+      "id": "s3/SFX/DB - Water Skid",
+      "asset": "Sound/SMPS/s3/SFX/DB - Water Skid.bin",
+      "base_symbol": "Sound_DB",
+      "source_annotation": "Sound/SFX/DB - Water Skid.asm"
+    },
+    {
+      "id": "sk/Music/Credits (Sonic & Knuckles)",
+      "asset": "Sound/SMPS/sk/Music/Credits (Sonic & Knuckles).bin",
+      "base_symbol": "Snd_SKCredits",
+      "source_annotation": "Sound/Music/Credits (Sonic & Knuckles).asm"
+    },
+    {
+      "id": "sk/Music/Game Over",
+      "asset": "Sound/SMPS/sk/Music/Game Over.bin",
+      "base_symbol": "Snd_GameOver",
+      "source_annotation": "Sound/Music/Game Over.asm"
+    },
+    {
+      "id": "sk/Music/Continue (Sonic & Knuckles)",
+      "asset": "Sound/SMPS/sk/Music/Continue (Sonic & Knuckles).bin",
+      "base_symbol": "Snd_Continue",
+      "source_annotation": "Sound/Music/Continue (Sonic & Knuckles).asm"
+    },
+    {
+      "id": "sk/Music/Level Outro",
+      "asset": "Sound/SMPS/sk/Music/Level Outro.bin",
+      "base_symbol": "Snd_Results",
+      "source_annotation": "Sound/Music/Level Outro.asm"
+    },
+    {
+      "id": "sk/Music/Invincible (Sonic & Knuckles)",
+      "asset": "Sound/SMPS/sk/Music/Invincible (Sonic & Knuckles).bin",
+      "base_symbol": "Snd_Invic",
+      "source_annotation": "Sound/Music/Invincible (Sonic & Knuckles).asm"
+    },
+    {
+      "id": "sk/Music/Menu (Sonic & Knuckles)",
+      "asset": "Sound/SMPS/sk/Music/Menu (Sonic & Knuckles).bin",
+      "base_symbol": "Snd_Menu",
+      "source_annotation": "Sound/Music/Menu (Sonic & Knuckles).asm"
+    },
+    {
+      "id": "sk/Music/Final Boss",
+      "asset": "Sound/SMPS/sk/Music/Final Boss.bin",
+      "base_symbol": "Snd_FinalBoss",
+      "source_annotation": "Sound/Music/Final Boss.asm"
+    },
+    {
+      "id": "sk/Music/Game Complete (Sonic & Knuckles)",
+      "asset": "Sound/SMPS/sk/Music/Game Complete (Sonic & Knuckles).bin",
+      "base_symbol": "Snd_PresSega",
+      "source_annotation": "Sound/Music/Game Complete (Sonic & Knuckles).asm"
+    },
+    {
+      "id": "sk/Music/FBZ1 (Sonic & Knuckles)",
+      "asset": "Sound/SMPS/sk/Music/FBZ1 (Sonic & Knuckles).bin",
+      "base_symbol": "Snd_FBZ1",
+      "source_annotation": "Sound/Music/FBZ1 (Sonic & Knuckles).asm"
+    },
+    {
+      "id": "sk/Music/FBZ2",
+      "asset": "Sound/SMPS/sk/Music/FBZ2.bin",
+      "base_symbol": "Snd_FBZ2",
+      "source_annotation": "Sound/Music/FBZ2.asm"
+    },
+    {
+      "id": "sk/Music/MHZ1",
+      "asset": "Sound/SMPS/sk/Music/MHZ1.bin",
+      "base_symbol": "Snd_MHZ1",
+      "source_annotation": "Sound/Music/MHZ1.asm"
+    },
+    {
+      "id": "sk/Music/MHZ2",
+      "asset": "Sound/SMPS/sk/Music/MHZ2.bin",
+      "base_symbol": "Snd_MHZ2",
+      "source_annotation": "Sound/Music/MHZ2.asm"
+    },
+    {
+      "id": "sk/Music/SOZ1",
+      "asset": "Sound/SMPS/sk/Music/SOZ1.bin",
+      "base_symbol": "Snd_SOZ1",
+      "source_annotation": "Sound/Music/SOZ1.asm"
+    },
+    {
+      "id": "sk/Music/SOZ2",
+      "asset": "Sound/SMPS/sk/Music/SOZ2.bin",
+      "base_symbol": "Snd_SOZ2",
+      "source_annotation": "Sound/Music/SOZ2.asm"
+    },
+    {
+      "id": "sk/Music/LRZ1",
+      "asset": "Sound/SMPS/sk/Music/LRZ1.bin",
+      "base_symbol": "Snd_LRZ1",
+      "source_annotation": "Sound/Music/LRZ1.asm"
+    },
+    {
+      "id": "sk/Music/LRZ2",
+      "asset": "Sound/SMPS/sk/Music/LRZ2.bin",
+      "base_symbol": "Snd_LRZ2",
+      "source_annotation": "Sound/Music/LRZ2.asm"
+    },
+    {
+      "id": "sk/Music/SSZ (Sonic & Knuckles)",
+      "asset": "Sound/SMPS/sk/Music/SSZ (Sonic & Knuckles).bin",
+      "base_symbol": "Snd_SSZ",
+      "source_annotation": "Sound/Music/SSZ (Sonic & Knuckles).asm"
+    },
+    {
+      "id": "sk/Music/DEZ1",
+      "asset": "Sound/SMPS/sk/Music/DEZ1.bin",
+      "base_symbol": "Snd_DEZ1",
+      "source_annotation": "Sound/Music/DEZ1.asm"
+    },
+    {
+      "id": "sk/Music/DEZ2",
+      "asset": "Sound/SMPS/sk/Music/DEZ2.bin",
+      "base_symbol": "Snd_DEZ2",
+      "source_annotation": "Sound/Music/DEZ2.asm"
+    },
+    {
+      "id": "sk/Music/Miniboss (Sonic & Knuckles)",
+      "asset": "Sound/SMPS/sk/Music/Miniboss (Sonic & Knuckles).bin",
+      "base_symbol": "Snd_Minib_SK",
+      "source_annotation": "Sound/Music/Miniboss (Sonic & Knuckles).asm"
+    },
+    {
+      "id": "sk/Music/Zone Boss",
+      "asset": "Sound/SMPS/sk/Music/Zone Boss.bin",
+      "base_symbol": "Snd_Boss",
+      "source_annotation": "Sound/Music/Zone Boss.asm"
+    },
+    {
+      "id": "sk/Music/DDZ",
+      "asset": "Sound/SMPS/sk/Music/DDZ.bin",
+      "base_symbol": "Snd_DDZ",
+      "source_annotation": "Sound/Music/DDZ.asm"
+    },
+    {
+      "id": "sk/Music/Pachinko",
+      "asset": "Sound/SMPS/sk/Music/Pachinko.bin",
+      "base_symbol": "Snd_PachBonus",
+      "source_annotation": "Sound/Music/Pachinko.asm"
+    },
+    {
+      "id": "sk/Music/Special Stage",
+      "asset": "Sound/SMPS/sk/Music/Special Stage.bin",
+      "base_symbol": "Snd_SpecialS",
+      "source_annotation": "Sound/Music/Special Stage.asm"
+    },
+    {
+      "id": "sk/Music/Slots",
+      "asset": "Sound/SMPS/sk/Music/Slots.bin",
+      "base_symbol": "Snd_SlotBonus",
+      "source_annotation": "Sound/Music/Slots.asm"
+    },
+    {
+      "id": "sk/Music/Knuckles (Sonic & Knuckles)",
+      "asset": "Sound/SMPS/sk/Music/Knuckles (Sonic & Knuckles).bin",
+      "base_symbol": "Snd_Knux",
+      "source_annotation": "Sound/Music/Knuckles (Sonic & Knuckles).asm"
+    },
+    {
+      "id": "sk/Music/Title (Sonic & Knuckles)",
+      "asset": "Sound/SMPS/sk/Music/Title (Sonic & Knuckles).bin",
+      "base_symbol": "Snd_Title",
+      "source_annotation": "Sound/Music/Title (Sonic & Knuckles).asm"
+    },
+    {
+      "id": "sk/Music/1UP (Sonic & Knuckles)",
+      "asset": "Sound/SMPS/sk/Music/1UP (Sonic & Knuckles).bin",
+      "base_symbol": "Snd_1UP",
+      "source_annotation": "Sound/Music/1UP (Sonic & Knuckles).asm"
+    },
+    {
+      "id": "sk/Music/Chaos Emerald",
+      "asset": "Sound/SMPS/sk/Music/Chaos Emerald.bin",
+      "base_symbol": "Snd_Emerald",
+      "source_annotation": "Sound/Music/Chaos Emerald.asm"
+    },
+    {
+      "id": "sk/SFX/33 - Ring (Right)",
+      "asset": "Sound/SMPS/sk/SFX/33 - Ring (Right).bin",
+      "base_symbol": "Sound_33",
+      "source_annotation": "Sound/SFX/33 - Ring (Right).asm"
+    },
+    {
+      "id": "sk/SFX/34 - Ring (Left)",
+      "asset": "Sound/SMPS/sk/SFX/34 - Ring (Left).bin",
+      "base_symbol": "Sound_34",
+      "source_annotation": "Sound/SFX/34 - Ring (Left).asm"
+    },
+    {
+      "id": "sk/SFX/35 - Death",
+      "asset": "Sound/SMPS/sk/SFX/35 - Death.bin",
+      "base_symbol": "Sound_35",
+      "source_annotation": "Sound/SFX/35 - Death.asm"
+    },
+    {
+      "id": "sk/SFX/36 - Skid",
+      "asset": "Sound/SMPS/sk/SFX/36 - Skid.bin",
+      "base_symbol": "Sound_36",
+      "source_annotation": "Sound/SFX/36 - Skid.asm"
+    },
+    {
+      "id": "sk/SFX/37 - Spike Hit",
+      "asset": "Sound/SMPS/sk/SFX/37 - Spike Hit.bin",
+      "base_symbol": "Sound_37",
+      "source_annotation": "Sound/SFX/37 - Spike Hit.asm"
+    },
+    {
+      "id": "sk/SFX/38 - Bubble",
+      "asset": "Sound/SMPS/sk/SFX/38 - Bubble.bin",
+      "base_symbol": "Sound_38",
+      "source_annotation": "Sound/SFX/38 - Bubble.asm"
+    },
+    {
+      "id": "sk/SFX/39 - Splash",
+      "asset": "Sound/SMPS/sk/SFX/39 - Splash.bin",
+      "base_symbol": "Sound_39",
+      "source_annotation": "Sound/SFX/39 - Splash.asm"
+    },
+    {
+      "id": "sk/SFX/3A - Shield",
+      "asset": "Sound/SMPS/sk/SFX/3A - Shield.bin",
+      "base_symbol": "Sound_3A",
+      "source_annotation": "Sound/SFX/3A - Shield.asm"
+    },
+    {
+      "id": "sk/SFX/3B - Drown",
+      "asset": "Sound/SMPS/sk/SFX/3B - Drown.bin",
+      "base_symbol": "Sound_3B",
+      "source_annotation": "Sound/SFX/3B - Drown.asm"
+    },
+    {
+      "id": "sk/SFX/3C - Roll",
+      "asset": "Sound/SMPS/sk/SFX/3C - Roll.bin",
+      "base_symbol": "Sound_3C",
+      "source_annotation": "Sound/SFX/3C - Roll.asm"
+    },
+    {
+      "id": "sk/SFX/3D - Break",
+      "asset": "Sound/SMPS/sk/SFX/3D - Break.bin",
+      "base_symbol": "Sound_3D",
+      "source_annotation": "Sound/SFX/3D - Break.asm"
+    },
+    {
+      "id": "sk/SFX/3E - Fire Shield",
+      "asset": "Sound/SMPS/sk/SFX/3E - Fire Shield.bin",
+      "base_symbol": "Sound_3E",
+      "source_annotation": "Sound/SFX/3E - Fire Shield.asm"
+    },
+    {
+      "id": "sk/SFX/3F - Bubble Shield",
+      "asset": "Sound/SMPS/sk/SFX/3F - Bubble Shield.bin",
+      "base_symbol": "Sound_3F",
+      "source_annotation": "Sound/SFX/3F - Bubble Shield.asm"
+    },
+    {
+      "id": "sk/SFX/40 - Unknown Shield",
+      "asset": "Sound/SMPS/sk/SFX/40 - Unknown Shield.bin",
+      "base_symbol": "Sound_40",
+      "source_annotation": "Sound/SFX/40 - Unknown Shield.asm"
+    },
+    {
+      "id": "sk/SFX/41 - Lightning Shield",
+      "asset": "Sound/SMPS/sk/SFX/41 - Lightning Shield.bin",
+      "base_symbol": "Sound_41",
+      "source_annotation": "Sound/SFX/41 - Lightning Shield.asm"
+    },
+    {
+      "id": "sk/SFX/42 - Insta Shield Attack",
+      "asset": "Sound/SMPS/sk/SFX/42 - Insta Shield Attack.bin",
+      "base_symbol": "Sound_42",
+      "source_annotation": "Sound/SFX/42 - Insta Shield Attack.asm"
+    },
+    {
+      "id": "sk/SFX/43 - Fire Shield Attack",
+      "asset": "Sound/SMPS/sk/SFX/43 - Fire Shield Attack.bin",
+      "base_symbol": "Sound_43",
+      "source_annotation": "Sound/SFX/43 - Fire Shield Attack.asm"
+    },
+    {
+      "id": "sk/SFX/44 - Bubble Shield Attack",
+      "asset": "Sound/SMPS/sk/SFX/44 - Bubble Shield Attack.bin",
+      "base_symbol": "Sound_44",
+      "source_annotation": "Sound/SFX/44 - Bubble Shield Attack.asm"
+    },
+    {
+      "id": "sk/SFX/45 - Lightning Shield Attack",
+      "asset": "Sound/SMPS/sk/SFX/45 - Lightning Shield Attack.bin",
+      "base_symbol": "Sound_45",
+      "source_annotation": "Sound/SFX/45 - Lightning Shield Attack.asm"
+    },
+    {
+      "id": "sk/SFX/46 - Whistle",
+      "asset": "Sound/SMPS/sk/SFX/46 - Whistle.bin",
+      "base_symbol": "Sound_46",
+      "source_annotation": "Sound/SFX/46 - Whistle.asm"
+    },
+    {
+      "id": "sk/SFX/47 - Sand Wall Rise",
+      "asset": "Sound/SMPS/sk/SFX/47 - Sand Wall Rise.bin",
+      "base_symbol": "Sound_47",
+      "source_annotation": "Sound/SFX/47 - Sand Wall Rise.asm"
+    },
+    {
+      "id": "sk/SFX/48 - Blast",
+      "asset": "Sound/SMPS/sk/SFX/48 - Blast.bin",
+      "base_symbol": "Sound_48",
+      "source_annotation": "Sound/SFX/48 - Blast.asm"
+    },
+    {
+      "id": "sk/SFX/49 - Thump",
+      "asset": "Sound/SMPS/sk/SFX/49 - Thump.bin",
+      "base_symbol": "Sound_49",
+      "source_annotation": "Sound/SFX/49 - Thump.asm"
+    },
+    {
+      "id": "sk/SFX/4A - Grab",
+      "asset": "Sound/SMPS/sk/SFX/4A - Grab.bin",
+      "base_symbol": "Sound_4A",
+      "source_annotation": "Sound/SFX/4A - Grab.asm"
+    },
+    {
+      "id": "sk/SFX/4B - Waterfall Splash",
+      "asset": "Sound/SMPS/sk/SFX/4B - Waterfall Splash.bin",
+      "base_symbol": "Sound_4B",
+      "source_annotation": "Sound/SFX/4B - Waterfall Splash.asm"
+    },
+    {
+      "id": "sk/SFX/4C - Glide Land",
+      "asset": "Sound/SMPS/sk/SFX/4C - Glide Land.bin",
+      "base_symbol": "Sound_4C",
+      "source_annotation": "Sound/SFX/4C - Glide Land.asm"
+    },
+    {
+      "id": "sk/SFX/4D - Projectile",
+      "asset": "Sound/SMPS/sk/SFX/4D - Projectile.bin",
+      "base_symbol": "Sound_4D",
+      "source_annotation": "Sound/SFX/4D - Projectile.asm"
+    },
+    {
+      "id": "sk/SFX/4E - Missile Explode",
+      "asset": "Sound/SMPS/sk/SFX/4E - Missile Explode.bin",
+      "base_symbol": "Sound_4E",
+      "source_annotation": "Sound/SFX/4E - Missile Explode.asm"
+    },
+    {
+      "id": "sk/SFX/4F - Flamethrower (Quiet)",
+      "asset": "Sound/SMPS/sk/SFX/4F - Flamethrower (Quiet).bin",
+      "base_symbol": "Sound_4F",
+      "source_annotation": "Sound/SFX/4F - Flamethrower (Quiet).asm"
+    },
+    {
+      "id": "sk/SFX/50 - Boss Activate",
+      "asset": "Sound/SMPS/sk/SFX/50 - Boss Activate.bin",
+      "base_symbol": "Sound_50",
+      "source_annotation": "Sound/SFX/50 - Boss Activate.asm"
+    },
+    {
+      "id": "sk/SFX/51 - Missile Throw",
+      "asset": "Sound/SMPS/sk/SFX/51 - Missile Throw.bin",
+      "base_symbol": "Sound_51",
+      "source_annotation": "Sound/SFX/51 - Missile Throw.asm"
+    },
+    {
+      "id": "sk/SFX/52 - Spike Move",
+      "asset": "Sound/SMPS/sk/SFX/52 - Spike Move.bin",
+      "base_symbol": "Sound_52",
+      "source_annotation": "Sound/SFX/52 - Spike Move.asm"
+    },
+    {
+      "id": "sk/SFX/53 - Charging",
+      "asset": "Sound/SMPS/sk/SFX/53 - Charging.bin",
+      "base_symbol": "Sound_53",
+      "source_annotation": "Sound/SFX/53 - Charging.asm"
+    },
+    {
+      "id": "sk/SFX/54 - Boss Laser",
+      "asset": "Sound/SMPS/sk/SFX/54 - Boss Laser.bin",
+      "base_symbol": "Sound_54",
+      "source_annotation": "Sound/SFX/54 - Boss Laser.asm"
+    },
+    {
+      "id": "sk/SFX/55 - Block Conveyor",
+      "asset": "Sound/SMPS/sk/SFX/55 - Block Conveyor.bin",
+      "base_symbol": "Sound_55",
+      "source_annotation": "Sound/SFX/55 - Block Conveyor.asm"
+    },
+    {
+      "id": "sk/SFX/56 - Flip Bridge",
+      "asset": "Sound/SMPS/sk/SFX/56 - Flip Bridge.bin",
+      "base_symbol": "Sound_56",
+      "source_annotation": "Sound/SFX/56 - Flip Bridge.asm"
+    },
+    {
+      "id": "sk/SFX/57 - Geyser",
+      "asset": "Sound/SMPS/sk/SFX/57 - Geyser.bin",
+      "base_symbol": "Sound_57",
+      "source_annotation": "Sound/SFX/57 - Geyser.asm"
+    },
+    {
+      "id": "sk/SFX/58 - Fan Latch",
+      "asset": "Sound/SMPS/sk/SFX/58 - Fan Latch.bin",
+      "base_symbol": "Sound_58",
+      "source_annotation": "Sound/SFX/58 - Fan Latch.asm"
+    },
+    {
+      "id": "sk/SFX/59 - Collapse",
+      "asset": "Sound/SMPS/sk/SFX/59 - Collapse.bin",
+      "base_symbol": "Sound_59",
+      "source_annotation": "Sound/SFX/59 - Collapse.asm"
+    },
+    {
+      "id": "sk/SFX/5A - Unknown Charge",
+      "asset": "Sound/SMPS/sk/SFX/5A - Unknown Charge.bin",
+      "base_symbol": "Sound_5A",
+      "source_annotation": "Sound/SFX/5A - Unknown Charge.asm"
+    },
+    {
+      "id": "sk/SFX/5B - Switch",
+      "asset": "Sound/SMPS/sk/SFX/5B - Switch.bin",
+      "base_symbol": "Sound_5B",
+      "source_annotation": "Sound/SFX/5B - Switch.asm"
+    },
+    {
+      "id": "sk/SFX/5C - Mecha Spark",
+      "asset": "Sound/SMPS/sk/SFX/5C - Mecha Spark.bin",
+      "base_symbol": "Sound_5C",
+      "source_annotation": "Sound/SFX/5C - Mecha Spark.asm"
+    },
+    {
+      "id": "sk/SFX/5D - Floor Thump",
+      "asset": "Sound/SMPS/sk/SFX/5D - Floor Thump.bin",
+      "base_symbol": "Sound_5D",
+      "source_annotation": "Sound/SFX/5D - Floor Thump.asm"
+    },
+    {
+      "id": "sk/SFX/5E - Laser",
+      "asset": "Sound/SMPS/sk/SFX/5E - Laser.bin",
+      "base_symbol": "Sound_5E",
+      "source_annotation": "Sound/SFX/5E - Laser.asm"
+    },
+    {
+      "id": "sk/SFX/5F - Crash",
+      "asset": "Sound/SMPS/sk/SFX/5F - Crash.bin",
+      "base_symbol": "Sound_5F",
+      "source_annotation": "Sound/SFX/5F - Crash.asm"
+    },
+    {
+      "id": "sk/SFX/60 - Boss Zoom",
+      "asset": "Sound/SMPS/sk/SFX/60 - Boss Zoom.bin",
+      "base_symbol": "Sound_60",
+      "source_annotation": "Sound/SFX/60 - Boss Zoom.asm"
+    },
+    {
+      "id": "sk/SFX/61 - Boss Hit Floor",
+      "asset": "Sound/SMPS/sk/SFX/61 - Boss Hit Floor.bin",
+      "base_symbol": "Sound_61",
+      "source_annotation": "Sound/SFX/61 - Boss Hit Floor.asm"
+    },
+    {
+      "id": "sk/SFX/62 - Jump",
+      "asset": "Sound/SMPS/sk/SFX/62 - Jump.bin",
+      "base_symbol": "Sound_62",
+      "source_annotation": "Sound/SFX/62 - Jump.asm"
+    },
+    {
+      "id": "sk/SFX/63 - Star Post",
+      "asset": "Sound/SMPS/sk/SFX/63 - Star Post.bin",
+      "base_symbol": "Sound_63",
+      "source_annotation": "Sound/SFX/63 - Star Post.asm"
+    },
+    {
+      "id": "sk/SFX/64 - Pulley Grab",
+      "asset": "Sound/SMPS/sk/SFX/64 - Pulley Grab.bin",
+      "base_symbol": "Sound_64",
+      "source_annotation": "Sound/SFX/64 - Pulley Grab.asm"
+    },
+    {
+      "id": "sk/SFX/65 - Blue Sphere",
+      "asset": "Sound/SMPS/sk/SFX/65 - Blue Sphere.bin",
+      "base_symbol": "Sound_65",
+      "source_annotation": "Sound/SFX/65 - Blue Sphere.asm"
+    },
+    {
+      "id": "sk/SFX/66 - All Spheres Collected",
+      "asset": "Sound/SMPS/sk/SFX/66 - All Spheres Collected.bin",
+      "base_symbol": "Sound_66",
+      "source_annotation": "Sound/SFX/66 - All Spheres Collected.asm"
+    },
+    {
+      "id": "sk/SFX/67 - Level Projectile",
+      "asset": "Sound/SMPS/sk/SFX/67 - Level Projectile.bin",
+      "base_symbol": "Sound_67",
+      "source_annotation": "Sound/SFX/67 - Level Projectile.asm"
+    },
+    {
+      "id": "sk/SFX/68 - Perfect",
+      "asset": "Sound/SMPS/sk/SFX/68 - Perfect.bin",
+      "base_symbol": "Sound_68",
+      "source_annotation": "Sound/SFX/68 - Perfect.asm"
+    },
+    {
+      "id": "sk/SFX/69 - Push Block",
+      "asset": "Sound/SMPS/sk/SFX/69 - Push Block.bin",
+      "base_symbol": "Sound_69",
+      "source_annotation": "Sound/SFX/69 - Push Block.asm"
+    },
+    {
+      "id": "sk/SFX/6A - Goal",
+      "asset": "Sound/SMPS/sk/SFX/6A - Goal.bin",
+      "base_symbol": "Sound_6A",
+      "source_annotation": "Sound/SFX/6A - Goal.asm"
+    },
+    {
+      "id": "sk/SFX/6B - Action Block",
+      "asset": "Sound/SMPS/sk/SFX/6B - Action Block.bin",
+      "base_symbol": "Sound_6B",
+      "source_annotation": "Sound/SFX/6B - Action Block.asm"
+    },
+    {
+      "id": "sk/SFX/6C - Splash 2",
+      "asset": "Sound/SMPS/sk/SFX/6C - Splash 2.bin",
+      "base_symbol": "Sound_6C",
+      "source_annotation": "Sound/SFX/6C - Splash 2.asm"
+    },
+    {
+      "id": "sk/SFX/6D - Unknown Shift",
+      "asset": "Sound/SMPS/sk/SFX/6D - Unknown Shift.bin",
+      "base_symbol": "Sound_6D",
+      "source_annotation": "Sound/SFX/6D - Unknown Shift.asm"
+    },
+    {
+      "id": "sk/SFX/6E - Boss Hit",
+      "asset": "Sound/SMPS/sk/SFX/6E - Boss Hit.bin",
+      "base_symbol": "Sound_6E",
+      "source_annotation": "Sound/SFX/6E - Boss Hit.asm"
+    },
+    {
+      "id": "sk/SFX/6F - Rumble 2",
+      "asset": "Sound/SMPS/sk/SFX/6F - Rumble 2.bin",
+      "base_symbol": "Sound_6F",
+      "source_annotation": "Sound/SFX/6F - Rumble 2.asm"
+    },
+    {
+      "id": "sk/SFX/70 - Lava Ball",
+      "asset": "Sound/SMPS/sk/SFX/70 - Lava Ball.bin",
+      "base_symbol": "Sound_70",
+      "source_annotation": "Sound/SFX/70 - Lava Ball.asm"
+    },
+    {
+      "id": "sk/SFX/71 - Shield 2",
+      "asset": "Sound/SMPS/sk/SFX/71 - Shield 2.bin",
+      "base_symbol": "Sound_71",
+      "source_annotation": "Sound/SFX/71 - Shield 2.asm"
+    },
+    {
+      "id": "sk/SFX/72 - Hoverpad",
+      "asset": "Sound/SMPS/sk/SFX/72 - Hoverpad.bin",
+      "base_symbol": "Sound_72",
+      "source_annotation": "Sound/SFX/72 - Hoverpad.asm"
+    },
+    {
+      "id": "sk/SFX/73 - Transporter",
+      "asset": "Sound/SMPS/sk/SFX/73 - Transporter.bin",
+      "base_symbol": "Sound_73",
+      "source_annotation": "Sound/SFX/73 - Transporter.asm"
+    },
+    {
+      "id": "sk/SFX/74 - Tunnel Booster",
+      "asset": "Sound/SMPS/sk/SFX/74 - Tunnel Booster.bin",
+      "base_symbol": "Sound_74",
+      "source_annotation": "Sound/SFX/74 - Tunnel Booster.asm"
+    },
+    {
+      "id": "sk/SFX/75 - Balloon Platform",
+      "asset": "Sound/SMPS/sk/SFX/75 - Balloon Platform.bin",
+      "base_symbol": "Sound_75",
+      "source_annotation": "Sound/SFX/75 - Balloon Platform.asm"
+    },
+    {
+      "id": "sk/SFX/76 - Trap Door",
+      "asset": "Sound/SMPS/sk/SFX/76 - Trap Door.bin",
+      "base_symbol": "Sound_76",
+      "source_annotation": "Sound/SFX/76 - Trap Door.asm"
+    },
+    {
+      "id": "sk/SFX/77 - Balloon",
+      "asset": "Sound/SMPS/sk/SFX/77 - Balloon.bin",
+      "base_symbol": "Sound_77",
+      "source_annotation": "Sound/SFX/77 - Balloon.asm"
+    },
+    {
+      "id": "sk/SFX/78 - Gravity Machine",
+      "asset": "Sound/SMPS/sk/SFX/78 - Gravity Machine.bin",
+      "base_symbol": "Sound_78",
+      "source_annotation": "Sound/SFX/78 - Gravity Machine.asm"
+    },
+    {
+      "id": "sk/SFX/79 - Lightning",
+      "asset": "Sound/SMPS/sk/SFX/79 - Lightning.bin",
+      "base_symbol": "Sound_79",
+      "source_annotation": "Sound/SFX/79 - Lightning.asm"
+    },
+    {
+      "id": "sk/SFX/7A - Boss Magma",
+      "asset": "Sound/SMPS/sk/SFX/7A - Boss Magma.bin",
+      "base_symbol": "Sound_7A",
+      "source_annotation": "Sound/SFX/7A - Boss Magma.asm"
+    },
+    {
+      "id": "sk/SFX/7B - Small Bumpers",
+      "asset": "Sound/SMPS/sk/SFX/7B - Small Bumpers.bin",
+      "base_symbol": "Sound_7B",
+      "source_annotation": "Sound/SFX/7B - Small Bumpers.asm"
+    },
+    {
+      "id": "sk/SFX/7C - Chain Tension",
+      "asset": "Sound/SMPS/sk/SFX/7C - Chain Tension.bin",
+      "base_symbol": "Sound_7C",
+      "source_annotation": "Sound/SFX/7C - Chain Tension.asm"
+    },
+    {
+      "id": "sk/SFX/7D - Unknown Pump",
+      "asset": "Sound/SMPS/sk/SFX/7D - Unknown Pump.bin",
+      "base_symbol": "Sound_7D",
+      "source_annotation": "Sound/SFX/7D - Unknown Pump.asm"
+    },
+    {
+      "id": "sk/SFX/7E - Ground Slide",
+      "asset": "Sound/SMPS/sk/SFX/7E - Ground Slide.bin",
+      "base_symbol": "Sound_7E",
+      "source_annotation": "Sound/SFX/7E - Ground Slide.asm"
+    },
+    {
+      "id": "sk/SFX/7F - Frost Puff",
+      "asset": "Sound/SMPS/sk/SFX/7F - Frost Puff.bin",
+      "base_symbol": "Sound_7F",
+      "source_annotation": "Sound/SFX/7F - Frost Puff.asm"
+    },
+    {
+      "id": "sk/SFX/80 - Ice Spikes",
+      "asset": "Sound/SMPS/sk/SFX/80 - Ice Spikes.bin",
+      "base_symbol": "Sound_80",
+      "source_annotation": "Sound/SFX/80 - Ice Spikes.asm"
+    },
+    {
+      "id": "sk/SFX/81 - Tube Launcher",
+      "asset": "Sound/SMPS/sk/SFX/81 - Tube Launcher.bin",
+      "base_symbol": "Sound_81",
+      "source_annotation": "Sound/SFX/81 - Tube Launcher.asm"
+    },
+    {
+      "id": "sk/SFX/82 - Sand Splash",
+      "asset": "Sound/SMPS/sk/SFX/82 - Sand Splash.bin",
+      "base_symbol": "Sound_82",
+      "source_annotation": "Sound/SFX/82 - Sand Splash.asm"
+    },
+    {
+      "id": "sk/SFX/83 - Bridge Collapse",
+      "asset": "Sound/SMPS/sk/SFX/83 - Bridge Collapse.bin",
+      "base_symbol": "Sound_83",
+      "source_annotation": "Sound/SFX/83 - Bridge Collapse.asm"
+    },
+    {
+      "id": "sk/SFX/84 - Unknown Power-Up",
+      "asset": "Sound/SMPS/sk/SFX/84 - Unknown Power-Up.bin",
+      "base_symbol": "Sound_84",
+      "source_annotation": "Sound/SFX/84 - Unknown Power-Up.asm"
+    },
+    {
+      "id": "sk/SFX/85 - Unknown Power-Down",
+      "asset": "Sound/SMPS/sk/SFX/85 - Unknown Power-Down.bin",
+      "base_symbol": "Sound_85",
+      "source_annotation": "Sound/SFX/85 - Unknown Power-Down.asm"
+    },
+    {
+      "id": "sk/SFX/86 - Alarm",
+      "asset": "Sound/SMPS/sk/SFX/86 - Alarm.bin",
+      "base_symbol": "Sound_86",
+      "source_annotation": "Sound/SFX/86 - Alarm.asm"
+    },
+    {
+      "id": "sk/SFX/87 - Mushroom Bounce",
+      "asset": "Sound/SMPS/sk/SFX/87 - Mushroom Bounce.bin",
+      "base_symbol": "Sound_87",
+      "source_annotation": "Sound/SFX/87 - Mushroom Bounce.asm"
+    },
+    {
+      "id": "sk/SFX/88 - Pulley Move",
+      "asset": "Sound/SMPS/sk/SFX/88 - Pulley Move.bin",
+      "base_symbol": "Sound_88",
+      "source_annotation": "Sound/SFX/88 - Pulley Move.asm"
+    },
+    {
+      "id": "sk/SFX/89 - Weather Machine",
+      "asset": "Sound/SMPS/sk/SFX/89 - Weather Machine.bin",
+      "base_symbol": "Sound_89",
+      "source_annotation": "Sound/SFX/89 - Weather Machine.asm"
+    },
+    {
+      "id": "sk/SFX/8A - Bouncy",
+      "asset": "Sound/SMPS/sk/SFX/8A - Bouncy.bin",
+      "base_symbol": "Sound_8A",
+      "source_annotation": "Sound/SFX/8A - Bouncy.asm"
+    },
+    {
+      "id": "sk/SFX/8B - Chop Tree",
+      "asset": "Sound/SMPS/sk/SFX/8B - Chop Tree.bin",
+      "base_symbol": "Sound_8B",
+      "source_annotation": "Sound/SFX/8B - Chop Tree.asm"
+    },
+    {
+      "id": "sk/SFX/8C - Chop Stuck",
+      "asset": "Sound/SMPS/sk/SFX/8C - Chop Stuck.bin",
+      "base_symbol": "Sound_8C",
+      "source_annotation": "Sound/SFX/8C - Chop Stuck.asm"
+    },
+    {
+      "id": "sk/SFX/8D - Unknown Flutter",
+      "asset": "Sound/SMPS/sk/SFX/8D - Unknown Flutter.bin",
+      "base_symbol": "Sound_8D",
+      "source_annotation": "Sound/SFX/8D - Unknown Flutter.asm"
+    },
+    {
+      "id": "sk/SFX/8E - Unknown Revving",
+      "asset": "Sound/SMPS/sk/SFX/8E - Unknown Revving.bin",
+      "base_symbol": "Sound_8E",
+      "source_annotation": "Sound/SFX/8E - Unknown Revving.asm"
+    },
+    {
+      "id": "sk/SFX/8F - Door Open",
+      "asset": "Sound/SMPS/sk/SFX/8F - Door Open.bin",
+      "base_symbol": "Sound_8F",
+      "source_annotation": "Sound/SFX/8F - Door Open.asm"
+    },
+    {
+      "id": "sk/SFX/90 - Door Move",
+      "asset": "Sound/SMPS/sk/SFX/90 - Door Move.bin",
+      "base_symbol": "Sound_90",
+      "source_annotation": "Sound/SFX/90 - Door Move.asm"
+    },
+    {
+      "id": "sk/SFX/91 - Door Close",
+      "asset": "Sound/SMPS/sk/SFX/91 - Door Close.bin",
+      "base_symbol": "Sound_91",
+      "source_annotation": "Sound/SFX/91 - Door Close.asm"
+    },
+    {
+      "id": "sk/SFX/92 - Ghost Appear",
+      "asset": "Sound/SMPS/sk/SFX/92 - Ghost Appear.bin",
+      "base_symbol": "Sound_92",
+      "source_annotation": "Sound/SFX/92 - Ghost Appear.asm"
+    },
+    {
+      "id": "sk/SFX/93 - Boss Recovery",
+      "asset": "Sound/SMPS/sk/SFX/93 - Boss Recovery.bin",
+      "base_symbol": "Sound_93",
+      "source_annotation": "Sound/SFX/93 - Boss Recovery.asm"
+    },
+    {
+      "id": "sk/SFX/94 - Chain Tick",
+      "asset": "Sound/SMPS/sk/SFX/94 - Chain Tick.bin",
+      "base_symbol": "Sound_94",
+      "source_annotation": "Sound/SFX/94 - Chain Tick.asm"
+    },
+    {
+      "id": "sk/SFX/95 - Boss Hand",
+      "asset": "Sound/SMPS/sk/SFX/95 - Boss Hand.bin",
+      "base_symbol": "Sound_95",
+      "source_annotation": "Sound/SFX/95 - Boss Hand.asm"
+    },
+    {
+      "id": "sk/SFX/96 - Mecha Land",
+      "asset": "Sound/SMPS/sk/SFX/96 - Mecha Land.bin",
+      "base_symbol": "Sound_96",
+      "source_annotation": "Sound/SFX/96 - Mecha Land.asm"
+    },
+    {
+      "id": "sk/SFX/97 - Enemy Breath",
+      "asset": "Sound/SMPS/sk/SFX/97 - Enemy Breath.bin",
+      "base_symbol": "Sound_97",
+      "source_annotation": "Sound/SFX/97 - Enemy Breath.asm"
+    },
+    {
+      "id": "sk/SFX/98 - Boss Projectile",
+      "asset": "Sound/SMPS/sk/SFX/98 - Boss Projectile.bin",
+      "base_symbol": "Sound_98",
+      "source_annotation": "Sound/SFX/98 - Boss Projectile.asm"
+    },
+    {
+      "id": "sk/SFX/99 - Unknown Plink",
+      "asset": "Sound/SMPS/sk/SFX/99 - Unknown Plink.bin",
+      "base_symbol": "Sound_99",
+      "source_annotation": "Sound/SFX/99 - Unknown Plink.asm"
+    },
+    {
+      "id": "sk/SFX/9A - Spring Latch",
+      "asset": "Sound/SMPS/sk/SFX/9A - Spring Latch.bin",
+      "base_symbol": "Sound_9A",
+      "source_annotation": "Sound/SFX/9A - Spring Latch.asm"
+    },
+    {
+      "id": "sk/SFX/9B - Thump Boss (Sonic & Knuckles)",
+      "asset": "Sound/SMPS/sk/SFX/9B - Thump Boss (Sonic & Knuckles).bin",
+      "base_symbol": "Sound_9B",
+      "source_annotation": "Sound/SFX/9B - Thump Boss (Sonic & Knuckles).asm"
+    },
+    {
+      "id": "sk/SFX/9C - Super Emerald",
+      "asset": "Sound/SMPS/sk/SFX/9C - Super Emerald.bin",
+      "base_symbol": "Sound_9C",
+      "source_annotation": "Sound/SFX/9C - Super Emerald.asm"
+    },
+    {
+      "id": "sk/SFX/9D - Targeting",
+      "asset": "Sound/SMPS/sk/SFX/9D - Targeting.bin",
+      "base_symbol": "Sound_9D",
+      "source_annotation": "Sound/SFX/9D - Targeting.asm"
+    },
+    {
+      "id": "sk/SFX/9E - Clank",
+      "asset": "Sound/SMPS/sk/SFX/9E - Clank.bin",
+      "base_symbol": "Sound_9E",
+      "source_annotation": "Sound/SFX/9E - Clank.asm"
+    },
+    {
+      "id": "sk/SFX/9F - Super Transform",
+      "asset": "Sound/SMPS/sk/SFX/9F - Super Transform.bin",
+      "base_symbol": "Sound_9F",
+      "source_annotation": "Sound/SFX/9F - Super Transform.asm"
+    },
+    {
+      "id": "sk/SFX/A0 - Missile Shoot",
+      "asset": "Sound/SMPS/sk/SFX/A0 - Missile Shoot.bin",
+      "base_symbol": "Sound_A0",
+      "source_annotation": "Sound/SFX/A0 - Missile Shoot.asm"
+    },
+    {
+      "id": "sk/SFX/A1 - Unknown Ominous",
+      "asset": "Sound/SMPS/sk/SFX/A1 - Unknown Ominous.bin",
+      "base_symbol": "Sound_A1",
+      "source_annotation": "Sound/SFX/A1 - Unknown Ominous.asm"
+    },
+    {
+      "id": "sk/SFX/A2 - Floor Launcher",
+      "asset": "Sound/SMPS/sk/SFX/A2 - Floor Launcher.bin",
+      "base_symbol": "Sound_A2",
+      "source_annotation": "Sound/SFX/A2 - Floor Launcher.asm"
+    },
+    {
+      "id": "sk/SFX/A3 - Gravity Lift",
+      "asset": "Sound/SMPS/sk/SFX/A3 - Gravity Lift.bin",
+      "base_symbol": "Sound_A3",
+      "source_annotation": "Sound/SFX/A3 - Gravity Lift.asm"
+    },
+    {
+      "id": "sk/SFX/A4 - Mecha Transform",
+      "asset": "Sound/SMPS/sk/SFX/A4 - Mecha Transform.bin",
+      "base_symbol": "Sound_A4",
+      "source_annotation": "Sound/SFX/A4 - Mecha Transform.asm"
+    },
+    {
+      "id": "sk/SFX/A5 - Unknown Rise",
+      "asset": "Sound/SMPS/sk/SFX/A5 - Unknown Rise.bin",
+      "base_symbol": "Sound_A5",
+      "source_annotation": "Sound/SFX/A5 - Unknown Rise.asm"
+    },
+    {
+      "id": "sk/SFX/A6 - Launch Grab",
+      "asset": "Sound/SMPS/sk/SFX/A6 - Launch Grab.bin",
+      "base_symbol": "Sound_A6",
+      "source_annotation": "Sound/SFX/A6 - Launch Grab.asm"
+    },
+    {
+      "id": "sk/SFX/A7 - Launch Ready",
+      "asset": "Sound/SMPS/sk/SFX/A7 - Launch Ready.bin",
+      "base_symbol": "Sound_A7",
+      "source_annotation": "Sound/SFX/A7 - Launch Ready.asm"
+    },
+    {
+      "id": "sk/SFX/A8 - Energy Zap",
+      "asset": "Sound/SMPS/sk/SFX/A8 - Energy Zap.bin",
+      "base_symbol": "Sound_A8",
+      "source_annotation": "Sound/SFX/A8 - Energy Zap.asm"
+    },
+    {
+      "id": "sk/SFX/A9 - Air Ding",
+      "asset": "Sound/SMPS/sk/SFX/A9 - Air Ding.bin",
+      "base_symbol": "Sound_A9",
+      "source_annotation": "Sound/SFX/A9 - Air Ding.asm"
+    },
+    {
+      "id": "sk/SFX/AA - Bumper",
+      "asset": "Sound/SMPS/sk/SFX/AA - Bumper.bin",
+      "base_symbol": "Sound_AA",
+      "source_annotation": "Sound/SFX/AA - Bumper.asm"
+    },
+    {
+      "id": "sk/SFX/AB - Spin Dash",
+      "asset": "Sound/SMPS/sk/SFX/AB - Spin Dash.bin",
+      "base_symbol": "Sound_AB",
+      "source_annotation": "Sound/SFX/AB - Spin Dash.asm"
+    },
+    {
+      "id": "sk/SFX/AC - Continue",
+      "asset": "Sound/SMPS/sk/SFX/AC - Continue.bin",
+      "base_symbol": "Sound_AC",
+      "source_annotation": "Sound/SFX/AC - Continue.asm"
+    },
+    {
+      "id": "sk/SFX/AD - Launch Go (Sonic & Knuckles)",
+      "asset": "Sound/SMPS/sk/SFX/AD - Launch Go (Sonic & Knuckles).bin",
+      "base_symbol": "Sound_AD",
+      "source_annotation": "Sound/SFX/AD - Launch Go (Sonic & Knuckles).asm"
+    },
+    {
+      "id": "sk/SFX/AE - Flipper",
+      "asset": "Sound/SMPS/sk/SFX/AE - Flipper.bin",
+      "base_symbol": "Sound_AE",
+      "source_annotation": "Sound/SFX/AE - Flipper.asm"
+    },
+    {
+      "id": "sk/SFX/AF - Enter Special Stage",
+      "asset": "Sound/SMPS/sk/SFX/AF - Enter Special Stage.bin",
+      "base_symbol": "Sound_AF",
+      "source_annotation": "Sound/SFX/AF - Enter Special Stage.asm"
+    },
+    {
+      "id": "sk/SFX/B0 - Register",
+      "asset": "Sound/SMPS/sk/SFX/B0 - Register.bin",
+      "base_symbol": "Sound_B0",
+      "source_annotation": "Sound/SFX/B0 - Register.asm"
+    },
+    {
+      "id": "sk/SFX/B1 - Spring",
+      "asset": "Sound/SMPS/sk/SFX/B1 - Spring.bin",
+      "base_symbol": "Sound_B1",
+      "source_annotation": "Sound/SFX/B1 - Spring.asm"
+    },
+    {
+      "id": "sk/SFX/B2 - Error",
+      "asset": "Sound/SMPS/sk/SFX/B2 - Error.bin",
+      "base_symbol": "Sound_B2",
+      "source_annotation": "Sound/SFX/B2 - Error.asm"
+    },
+    {
+      "id": "sk/SFX/B3 - Big Ring",
+      "asset": "Sound/SMPS/sk/SFX/B3 - Big Ring.bin",
+      "base_symbol": "Sound_B3",
+      "source_annotation": "Sound/SFX/B3 - Big Ring.asm"
+    },
+    {
+      "id": "sk/SFX/B4 - Explode",
+      "asset": "Sound/SMPS/sk/SFX/B4 - Explode.bin",
+      "base_symbol": "Sound_B4",
+      "source_annotation": "Sound/SFX/B4 - Explode.asm"
+    },
+    {
+      "id": "sk/SFX/B5 - Diamonds",
+      "asset": "Sound/SMPS/sk/SFX/B5 - Diamonds.bin",
+      "base_symbol": "Sound_B5",
+      "source_annotation": "Sound/SFX/B5 - Diamonds.asm"
+    },
+    {
+      "id": "sk/SFX/B6 - Dash",
+      "asset": "Sound/SMPS/sk/SFX/B6 - Dash.bin",
+      "base_symbol": "Sound_B6",
+      "source_annotation": "Sound/SFX/B6 - Dash.asm"
+    },
+    {
+      "id": "sk/SFX/B7 - Slot Machine",
+      "asset": "Sound/SMPS/sk/SFX/B7 - Slot Machine.bin",
+      "base_symbol": "Sound_B7",
+      "source_annotation": "Sound/SFX/B7 - Slot Machine.asm"
+    },
+    {
+      "id": "sk/SFX/B8 - Signpost",
+      "asset": "Sound/SMPS/sk/SFX/B8 - Signpost.bin",
+      "base_symbol": "Sound_B8",
+      "source_annotation": "Sound/SFX/B8 - Signpost.asm"
+    },
+    {
+      "id": "sk/SFX/B9 - Ring Loss",
+      "asset": "Sound/SMPS/sk/SFX/B9 - Ring Loss.bin",
+      "base_symbol": "Sound_B9",
+      "source_annotation": "Sound/SFX/B9 - Ring Loss.asm"
+    },
+    {
+      "id": "sk/SFX/BA - Flying",
+      "asset": "Sound/SMPS/sk/SFX/BA - Flying.bin",
+      "base_symbol": "Sound_BA",
+      "source_annotation": "Sound/SFX/BA - Flying.asm"
+    },
+    {
+      "id": "sk/SFX/BB - Flying (Tired)",
+      "asset": "Sound/SMPS/sk/SFX/BB - Flying (Tired).bin",
+      "base_symbol": "Sound_BB",
+      "source_annotation": "Sound/SFX/BB - Flying (Tired).asm"
+    },
+    {
+      "id": "sk/SFX/BC - Slide Skid (Loud)",
+      "asset": "Sound/SMPS/sk/SFX/BC - Slide Skid (Loud).bin",
+      "base_symbol": "Sound_BC",
+      "source_annotation": "Sound/SFX/BC - Slide Skid (Loud).asm"
+    },
+    {
+      "id": "sk/SFX/BD - Large Ship",
+      "asset": "Sound/SMPS/sk/SFX/BD - Large Ship.bin",
+      "base_symbol": "Sound_BD",
+      "source_annotation": "Sound/SFX/BD - Large Ship.asm"
+    },
+    {
+      "id": "sk/SFX/BE - Robotnik Siren",
+      "asset": "Sound/SMPS/sk/SFX/BE - Robotnik Siren.bin",
+      "base_symbol": "Sound_BE",
+      "source_annotation": "Sound/SFX/BE - Robotnik Siren.asm"
+    },
+    {
+      "id": "sk/SFX/BF - Boss Rotate",
+      "asset": "Sound/SMPS/sk/SFX/BF - Boss Rotate.bin",
+      "base_symbol": "Sound_BF",
+      "source_annotation": "Sound/SFX/BF - Boss Rotate.asm"
+    },
+    {
+      "id": "sk/SFX/C0 - Fan (Big)",
+      "asset": "Sound/SMPS/sk/SFX/C0 - Fan (Big).bin",
+      "base_symbol": "Sound_C0",
+      "source_annotation": "Sound/SFX/C0 - Fan (Big).asm"
+    },
+    {
+      "id": "sk/SFX/C1 - Fan (Small)",
+      "asset": "Sound/SMPS/sk/SFX/C1 - Fan (Small).bin",
+      "base_symbol": "Sound_C1",
+      "source_annotation": "Sound/SFX/C1 - Fan (Small).asm"
+    },
+    {
+      "id": "sk/SFX/C2 - Flamethrower (Loud)",
+      "asset": "Sound/SMPS/sk/SFX/C2 - Flamethrower (Loud).bin",
+      "base_symbol": "Sound_C2",
+      "source_annotation": "Sound/SFX/C2 - Flamethrower (Loud).asm"
+    },
+    {
+      "id": "sk/SFX/C3 - Gravity Tunnel",
+      "asset": "Sound/SMPS/sk/SFX/C3 - Gravity Tunnel.bin",
+      "base_symbol": "Sound_C3",
+      "source_annotation": "Sound/SFX/C3 - Gravity Tunnel.asm"
+    },
+    {
+      "id": "sk/SFX/C4 - Boss Panic",
+      "asset": "Sound/SMPS/sk/SFX/C4 - Boss Panic.bin",
+      "base_symbol": "Sound_C4",
+      "source_annotation": "Sound/SFX/C4 - Boss Panic.asm"
+    },
+    {
+      "id": "sk/SFX/C5 - Unknown Spin",
+      "asset": "Sound/SMPS/sk/SFX/C5 - Unknown Spin.bin",
+      "base_symbol": "Sound_C5",
+      "source_annotation": "Sound/SFX/C5 - Unknown Spin.asm"
+    },
+    {
+      "id": "sk/SFX/C6 - Wave Hover",
+      "asset": "Sound/SMPS/sk/SFX/C6 - Wave Hover.bin",
+      "base_symbol": "Sound_C6",
+      "source_annotation": "Sound/SFX/C6 - Wave Hover.asm"
+    },
+    {
+      "id": "sk/SFX/C7 - Cannon Turn",
+      "asset": "Sound/SMPS/sk/SFX/C7 - Cannon Turn.bin",
+      "base_symbol": "Sound_C7",
+      "source_annotation": "Sound/SFX/C7 - Cannon Turn.asm"
+    },
+    {
+      "id": "sk/SFX/C8 - Slide Skid (Quiet)",
+      "asset": "Sound/SMPS/sk/SFX/C8 - Slide Skid (Quiet).bin",
+      "base_symbol": "Sound_C8",
+      "source_annotation": "Sound/SFX/C8 - Slide Skid (Quiet).asm"
+    },
+    {
+      "id": "sk/SFX/C9 - Spike Balls",
+      "asset": "Sound/SMPS/sk/SFX/C9 - Spike Balls.bin",
+      "base_symbol": "Sound_C9",
+      "source_annotation": "Sound/SFX/C9 - Spike Balls.asm"
+    },
+    {
+      "id": "sk/SFX/CA - Light Tunnel",
+      "asset": "Sound/SMPS/sk/SFX/CA - Light Tunnel.bin",
+      "base_symbol": "Sound_CA",
+      "source_annotation": "Sound/SFX/CA - Light Tunnel.asm"
+    },
+    {
+      "id": "sk/SFX/CB - Rumble",
+      "asset": "Sound/SMPS/sk/SFX/CB - Rumble.bin",
+      "base_symbol": "Sound_CB",
+      "source_annotation": "Sound/SFX/CB - Rumble.asm"
+    },
+    {
+      "id": "sk/SFX/CC - Big Rumble",
+      "asset": "Sound/SMPS/sk/SFX/CC - Big Rumble.bin",
+      "base_symbol": "Sound_CC",
+      "source_annotation": "Sound/SFX/CC - Big Rumble.asm"
+    },
+    {
+      "id": "sk/SFX/CD - Death Egg Rise (Loud)",
+      "asset": "Sound/SMPS/sk/SFX/CD - Death Egg Rise (Loud).bin",
+      "base_symbol": "Sound_CD",
+      "source_annotation": "Sound/SFX/CD - Death Egg Rise (Loud).asm"
+    },
+    {
+      "id": "sk/SFX/CE - Wind (Quiet)",
+      "asset": "Sound/SMPS/sk/SFX/CE - Wind (Quiet).bin",
+      "base_symbol": "Sound_CE",
+      "source_annotation": "Sound/SFX/CE - Wind (Quiet).asm"
+    },
+    {
+      "id": "sk/SFX/CF - Wind (Loud)",
+      "asset": "Sound/SMPS/sk/SFX/CF - Wind (Loud).bin",
+      "base_symbol": "Sound_CF",
+      "source_annotation": "Sound/SFX/CF - Wind (Loud).asm"
+    },
+    {
+      "id": "sk/SFX/D0 - Rising",
+      "asset": "Sound/SMPS/sk/SFX/D0 - Rising.bin",
+      "base_symbol": "Sound_D0",
+      "source_annotation": "Sound/SFX/D0 - Rising.asm"
+    },
+    {
+      "id": "sk/SFX/D1 - Unknown Flutter 2",
+      "asset": "Sound/SMPS/sk/SFX/D1 - Unknown Flutter 2.bin",
+      "base_symbol": "Sound_D1",
+      "source_annotation": "Sound/SFX/D1 - Unknown Flutter 2.asm"
+    },
+    {
+      "id": "sk/SFX/D2 - Gumball Tab",
+      "asset": "Sound/SMPS/sk/SFX/D2 - Gumball Tab.bin",
+      "base_symbol": "Sound_D2",
+      "source_annotation": "Sound/SFX/D2 - Gumball Tab.asm"
+    },
+    {
+      "id": "sk/SFX/D3 - Death Egg Rise (Quiet)",
+      "asset": "Sound/SMPS/sk/SFX/D3 - Death Egg Rise (Quiet).bin",
+      "base_symbol": "Sound_D3",
+      "source_annotation": "Sound/SFX/D3 - Death Egg Rise (Quiet).asm"
+    },
+    {
+      "id": "sk/SFX/D4 - Turbine Hum",
+      "asset": "Sound/SMPS/sk/SFX/D4 - Turbine Hum.bin",
+      "base_symbol": "Sound_D4",
+      "source_annotation": "Sound/SFX/D4 - Turbine Hum.asm"
+    },
+    {
+      "id": "sk/SFX/D5 - Lava Fall",
+      "asset": "Sound/SMPS/sk/SFX/D5 - Lava Fall.bin",
+      "base_symbol": "Sound_D5",
+      "source_annotation": "Sound/SFX/D5 - Lava Fall.asm"
+    },
+    {
+      "id": "sk/SFX/D6 - Unknown Zap",
+      "asset": "Sound/SMPS/sk/SFX/D6 - Unknown Zap.bin",
+      "base_symbol": "Sound_D6",
+      "source_annotation": "Sound/SFX/D6 - Unknown Zap.asm"
+    },
+    {
+      "id": "sk/SFX/D7 - Conveyor Platform",
+      "asset": "Sound/SMPS/sk/SFX/D7 - Conveyor Platform.bin",
+      "base_symbol": "Sound_D7",
+      "source_annotation": "Sound/SFX/D7 - Conveyor Platform.asm"
+    },
+    {
+      "id": "sk/SFX/D8 - Unknown Saw",
+      "asset": "Sound/SMPS/sk/SFX/D8 - Unknown Saw.bin",
+      "base_symbol": "Sound_D8",
+      "source_annotation": "Sound/SFX/D8 - Unknown Saw.asm"
+    },
+    {
+      "id": "sk/SFX/D9 - Magnetic Spike",
+      "asset": "Sound/SMPS/sk/SFX/D9 - Magnetic Spike.bin",
+      "base_symbol": "Sound_D9",
+      "source_annotation": "Sound/SFX/D9 - Magnetic Spike.asm"
+    },
+    {
+      "id": "sk/SFX/DA - Leaf Blower",
+      "asset": "Sound/SMPS/sk/SFX/DA - Leaf Blower.bin",
+      "base_symbol": "Sound_DA",
+      "source_annotation": "Sound/SFX/DA - Leaf Blower.asm"
+    },
+    {
+      "id": "sk/SFX/DB - Water Skid",
+      "asset": "Sound/SMPS/sk/SFX/DB - Water Skid.bin",
+      "base_symbol": "Sound_DB",
+      "source_annotation": "Sound/SFX/DB - Water Skid.asm"
+    }
+  ]
+}

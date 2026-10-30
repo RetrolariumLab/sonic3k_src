@@ -12,11 +12,9 @@
 		include "s3.constants.asm"		; RAM addresses moved around between S3 and S&K
 ; ---------------------------------------------------------------------------
 ; Include SMPS2ASM, for expressing SMPS bytecode in a portable and human-readable form.
-FixMusicAndSFXDataBugs = 0
 SonicDriverVer = 3 ; Tell SMPS2ASM that we are targeting Sonic 3's sound driver
-		include "Sound/_smps2asm_inc.asm"
+		include "Sound/FM_Voice_Macros.asm"
 
-FixBugs = 0
 ; If 1, fixes multiple bugs within the game
 
 Size_of_Snd_driver_guess = $1300
@@ -70,7 +68,7 @@ Unknown_Header:	dc.w 1
 		dc.l SRAM_start
 		dc.l SRAM_end
 		dc.b "                "
-Country_Code:	dc.b "U               "
+Country_Code:	dc.b S3_Region,"               "
 ; ---------------------------------------------------------------------------
 ; Crash/Freeze the 68000. Like Sonic 2 the Z80 will still keep running, so music playback will continue.
 
@@ -1562,15 +1560,10 @@ Clear_DisplayData_No2P:
 Clear_DisplayData_Cont:
 		clr.l	(V_scroll_value).w
 		clr.l	(_unkF61A).w
-	if FixBugs
-		clearRAM Sprite_table,(Sprite_table_end-Sprite_table)
-		clearRAM H_scroll_buffer,(Collision_response_list_end-H_scroll_buffer)
-	else
 		; Bug: this should be (Sprite_table_End-Sprite_table)
 		clearRAM Sprite_table,(Sprite_table_end-Sprite_table)+4
 		; Bug: this should be (Collision_response_list_End-H_scroll_buffer)
 		clearRAM H_scroll_buffer,(Collision_response_list_end-H_scroll_buffer)+4
-	endif
 
 		startZ80
 		rts
@@ -2385,20 +2378,6 @@ Process_Nem_Queue_ShiftUp:
 		move.l	6(a0),(a0)+
 		dbf	d0,.loop
 
-	if FixBugs
-		; The above code does not properly 'pop' the 16th PLC entry.
-		; Because of this, occupying the 16th slot will cause it to
-		; be repeatedly decompressed infinitely.
-		; Granted, this could be considered more of an optimization
-		; than a bug: treating the 16th entry as a dummy that
-		; should never be occupied makes this code unnecessary.
-		; Still, the overhead of this code is minimal.
-		if (Nem_decomp_queue_End-Nem_decomp_queue-6)&2
-		move.w	6(a0),(a0)
-		endif
-
-		clr.l	(Nem_decomp_queue_End-6).w
-	endif
 
 		rts
 ; End of function Process_Nem_Queue_Main
@@ -3189,7 +3168,7 @@ GetSineCosine:
 
 ; ---------------------------------------------------------------------------
 SineTable:
-		binclude "Levels/Misc/sine.bin"
+		binclude "data/Levels/Misc/sine.bin"
 		even
 ; ---------------------------------------------------------------------------
 ; Calculates the arctangent of y/x and returns it in d0 (360 degrees = 256)
@@ -3257,7 +3236,7 @@ GetArcTan_Zero:
 
 ; ---------------------------------------------------------------------------
 ArcTanTable:
-		binclude "Levels/Misc/arctan.bin"
+		binclude "data/Levels/Misc/arctan.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -4259,14 +4238,9 @@ SuperSonic_PalCycle_Revert:	; runs the fade in transition backwards
 		move.w	(Palette_frame).w,d0
 		subq.w	#6,(Palette_frame).w	; previous frame
 		bcc.s	loc_3194		; branch, if it isn't the first frame
-	if FixBugs
-		; Set it to word to clear the entirety of Palette_frame.
-		move.w	#0,(Palette_frame).w
-	else
 		; Bug: this only clears the high byte of Palette_frame, causing subsequent
 		; fade-ins to pull color values from Pal_FromBlack
 		move.b	#0,(Palette_frame).w
-	endif
 		move.b	#0,(Super_palette_status).w	; 0 = off
 
 loc_3194:
@@ -4284,12 +4258,8 @@ SuperSonic_PalCycle_Normal:
 		move.w	(Palette_frame).w,d0
 		addq.w	#6,(Palette_frame).w	; next frame
 		cmpi.w	#$36,(Palette_frame).w	; is it the last frame?
-	if FixBugs
-		bls.s	loc_31BE		; if not, branch
-	else
 		; This condition causes the last frame to be skipped.
 		blo.s	loc_31BE		; if not, branch
-	endif
 		move.w	#$24,(Palette_frame).w	; reset frame counter (Super Sonic's normal palette cycle starts at $24. Everything before that is for the palette fade)
 
 loc_31BE:
@@ -5319,46 +5289,46 @@ TitleSonic_Frames:
 		dc.l Pal_TitleSonicD
 		dc.l MapEni_S3TitleSonicD
 Pal_Title:
-		binclude "General/Title/Palettes/S3.bin"
+		binclude "data/General/Title/Palettes/S3.bin"
 		even
 Pal_TitleSonic1:
-		binclude "General/Title/Palettes/S3 Sonic 1.bin"
+		binclude "data/General/Title/Palettes/S3 Sonic 1.bin"
 		even
 Pal_TitleSonic2:
-		binclude "General/Title/Palettes/S3 Sonic 2.bin"
+		binclude "data/General/Title/Palettes/S3 Sonic 2.bin"
 		even
 Pal_TitleSonic3:
-		binclude "General/Title/Palettes/S3 Sonic 3.bin"
+		binclude "data/General/Title/Palettes/S3 Sonic 3.bin"
 		even
 Pal_TitleSonic4:
-		binclude "General/Title/Palettes/S3 Sonic 4.bin"
+		binclude "data/General/Title/Palettes/S3 Sonic 4.bin"
 		even
 Pal_TitleSonic5:
-		binclude "General/Title/Palettes/S3 Sonic 5.bin"
+		binclude "data/General/Title/Palettes/S3 Sonic 5.bin"
 		even
 Pal_TitleSonic6:
-		binclude "General/Title/Palettes/S3 Sonic 6.bin"
+		binclude "data/General/Title/Palettes/S3 Sonic 6.bin"
 		even
 Pal_TitleSonic7:
-		binclude "General/Title/Palettes/S3 Sonic 7.bin"
+		binclude "data/General/Title/Palettes/S3 Sonic 7.bin"
 		even
 Pal_TitleSonic8:
-		binclude "General/Title/Palettes/S3 Sonic 8.bin"
+		binclude "data/General/Title/Palettes/S3 Sonic 8.bin"
 		even
 Pal_TitleSonic9:
-		binclude "General/Title/Palettes/S3 Sonic 9.bin"
+		binclude "data/General/Title/Palettes/S3 Sonic 9.bin"
 		even
 Pal_TitleSonicA:
-		binclude "General/Title/Palettes/S3 Sonic A.bin"
+		binclude "data/General/Title/Palettes/S3 Sonic A.bin"
 		even
 Pal_TitleSonicB:
-		binclude "General/Title/Palettes/S3 Sonic B.bin"
+		binclude "data/General/Title/Palettes/S3 Sonic B.bin"
 		even
 Pal_TitleSonicC:
-		binclude "General/Title/Palettes/S3 Sonic C.bin"
+		binclude "data/General/Title/Palettes/S3 Sonic C.bin"
 		even
 Pal_TitleSonicD:
-		binclude "General/Title/Palettes/S3 Sonic D.bin"
+		binclude "data/General/Title/Palettes/S3 Sonic D.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -5423,7 +5393,7 @@ loc_3FC2:
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Pal_TitleWaterRot:
-		binclude "General/Title/Palettes/S3 Water Anim.bin"
+		binclude "data/General/Title/Palettes/S3 Water Anim.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -5666,7 +5636,7 @@ LSelect3CodeDat:
 Map_TitleScreenText:
 		include "General/Title/Map - S3 Screen Text.asm"
 ArtNem_TitleScreenText:
-		binclude "General/Title/Nemesis Art/S3 Screen Text.nem"
+		binclude "data/General/Title/Nemesis Art/S3 Screen Text.nem"
 		even
 Map_TitleSonicAnim:
 		include "General/Title/Map - S3 Sonic Anim.asm"
@@ -5943,9 +5913,6 @@ loc_4A0C:
 		move.w	d0,(Monitors_broken_P2).w
 		move.w	d0,(Loser_time_left).w
 		move.b	d0,(LRZ_rocks_routine).w
-	if FixBugs
-		move.b	d0,(Super_Sonic_Knux_flag).w
-	endif
 		bsr.w	OscillateNumInit
 		move.b	#1,(Update_HUD_score).w
 		move.b	#1,(Update_HUD_ring_count).w
@@ -6450,7 +6417,7 @@ loc_508A:
 		rts
 ; ---------------------------------------------------------------------------
 Pal_Level_2P:
-		binclude "Levels/Misc/Palettes/2P Level Secondary.bin"
+		binclude "data/Levels/Misc/Palettes/2P Level Secondary.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -6468,17 +6435,6 @@ UpdateWaterSurface:
 		tst.b	(Water_flag).w
 		beq.s	locret_50DC
 		move.w	(Camera_X_pos).w,d1
-	if FixBugs
-		; This function can cause the water surface's to be cut off at the
-		; left when the game is paused. This is because this function pushes
-		; the water surface sprite to the right every frame. To fix this,
-		; just avoid pushing the sprite to the right when the game is about
-		; to be paused.
-		move.b	(Ctrl_1_pressed).w,d0 ; is Start button pressed?
-		or.b	(Ctrl_2_pressed).w,d0 ; (either player)
-		andi.b	#button_start_mask,d0
-		bne.s	loc_50D2
-	endif
 		btst	#0,(Level_frame_counter+1).w
 		beq.s	loc_50D2
 		addi.w	#$20,d1
@@ -6601,7 +6557,7 @@ loc_51D0:
 		rts
 ; ---------------------------------------------------------------------------
 StartingWaterHeights:
-		binclude "Levels/Misc/StartingWaterHeights.bin"
+		binclude "data/Levels/Misc/StartingWaterHeights.bin"
 		even
 
 ; =============== S U B R O U T I N E =======================================
@@ -7485,7 +7441,7 @@ loc_5A18:
 
 ; ---------------------------------------------------------------------------
 S2_DemoDat_AIZ:
-		binclude "Levels/AIZ/Demodata/1 Proto.bin"
+		binclude "data/Levels/AIZ/Demodata/1 Proto.bin"
 		even
 
 ; =============== S U B R O U T I N E =======================================
@@ -8575,12 +8531,6 @@ LevelSelect_StartZone:
 		move.w	d0,(Current_zone_and_act).w
 		move.w	d0,(Apparent_zone_and_act).w
 		move.w	d0,(Saved_zone_and_act).w
-	if FixBugs
-		; Sonic 3 Alone fails to set the saved apparent zone and act. This causes the "Doilus Stage" bug found in the level select when entering a Bonus Stage.
-		; This can also be affected by checkpoints as well when returning to the level select from different zones.
-		; This bug was fixed in Sonic & Knuckles since the 0517 Prototype.
-		move.w	d0,(Saved_apparent_zone_and_act).w
-	endif
 		move.b	#GameMode_Level,(Game_mode).w
 		move.b	#3,(Life_count).w
 		move.b	#3,(Life_count_P2).w
@@ -8885,22 +8835,9 @@ LevelSelect_DrawIcon:
 		lsl.w	#5,d0
 		lea	(a1,d0.w),a1
 		lea	(Normal_palette_line_3).w,a2
-	if FixBugs
-		; When the icon changes, the colors are briefly incorrect. This is
-		; because there's a delay between the icon being updated and the
-		; colors being updated, due to the colors being uploaded to the VDP
-		; during V-Int. To avoid this we can upload the colors ourselves right
-		; here.
-		; Prepare the VDP for data transfer.
-		move.l  #vdpComm(2*16*2,CRAM,WRITE),VDP_control_port-VDP_data_port(a6)
-	endif
 		moveq	#bytesToLcnt($20),d1
 
 loc_6DAA:
-	if FixBugs
-		; Upload colors to the VDP.
-		move.l	(a1),(a6)
-	endif
 		move.l	(a1)+,(a2)+
 		dbf	d1,loc_6DAA
 		rts
@@ -9098,19 +9035,19 @@ LevelSelectText:
 		levselstr "SOUND TEST  *"
 		even
 Pal_S2LevelIcons:
-		binclude "General/S2Menu/Palettes/Level Select Icons.bin"
+		binclude "data/General/S2Menu/Palettes/Level Select Icons.bin"
 		even
 MapEni_S2LevSel2P:
-		binclude "General/S2Menu/Enigma Map/Level Select 2P.eni"
+		binclude "data/General/S2Menu/Enigma Map/Level Select 2P.eni"
 		even
 MapEni_S2Options:
-		binclude "General/S2Menu/Enigma Map/Options Screen.eni"
+		binclude "data/General/S2Menu/Enigma Map/Options Screen.eni"
 		even
 MapEni_S2LevSel:
-		binclude "General/S2Menu/Enigma Map/Level Select.eni"
+		binclude "data/General/S2Menu/Enigma Map/Level Select.eni"
 		even
 MapEni_S2LevSelIcon:
-		binclude "General/S2Menu/Enigma Map/Level Select Icons.eni"
+		binclude "data/General/S2Menu/Enigma Map/Level Select Icons.eni"
 		even
 AniPLC_SONICMILES: zoneanimstart
 	; Sonic/Miles animated background
@@ -9489,31 +9426,31 @@ SS_Pal_Map_Ptrs:
 		dc.l MapUnc_SStageLayout+$1180
 		dc.l Pal_SStage_1
 Pal_SStage_Main:
-		binclude "General/Special Stage/Palettes/Main.bin"
+		binclude "data/General/Special Stage/Palettes/Main.bin"
 		even
 Pal_SStage_1:
-		binclude "General/Special Stage/Palettes/3-1.bin"
+		binclude "data/General/Special Stage/Palettes/3-1.bin"
 		even
 Pal_SStage_2:
-		binclude "General/Special Stage/Palettes/3-2.bin"
+		binclude "data/General/Special Stage/Palettes/3-2.bin"
 		even
 Pal_SStage_3:
-		binclude "General/Special Stage/Palettes/3-3.bin"
+		binclude "data/General/Special Stage/Palettes/3-3.bin"
 		even
 Pal_SStage_4:
-		binclude "General/Special Stage/Palettes/3-4.bin"
+		binclude "data/General/Special Stage/Palettes/3-4.bin"
 		even
 Pal_SStage_5:
-		binclude "General/Special Stage/Palettes/3-5.bin"
+		binclude "data/General/Special Stage/Palettes/3-5.bin"
 		even
 Pal_SStage_6:
-		binclude "General/Special Stage/Palettes/3-6.bin"
+		binclude "data/General/Special Stage/Palettes/3-6.bin"
 		even
 Pal_SStage_7:
-		binclude "General/Special Stage/Palettes/3-7.bin"
+		binclude "data/General/Special Stage/Palettes/3-7.bin"
 		even
 Pal_SStage_8:
-		binclude "General/Special Stage/Palettes/3-8 S3.bin"
+		binclude "data/General/Special Stage/Palettes/3-8 S3.bin"
 		even
 
 ; =============== S U B R O U T I N E =======================================
@@ -9559,10 +9496,10 @@ SSNum_Precision:
 		dc.w 10
 		dc.w 1
 MapUnc_SSNum:
-		binclude "General/Special Stage/Uncompressed Map/HUD Numbers.bin"
+		binclude "data/General/Special Stage/Uncompressed Map/HUD Numbers.bin"
 		even
 MapUnc_SSNum000:
-		binclude "General/Special Stage/Uncompressed Map/HUD.bin"
+		binclude "data/General/Special Stage/Uncompressed Map/HUD.bin"
 		even
 
 ; =============== S U B R O U T I N E =======================================
@@ -10864,7 +10801,7 @@ locret_8B58:
 
 ; ---------------------------------------------------------------------------
 Pal_SStage_Emeralds:
-		binclude "General/Special Stage/Palettes/Emeralds S3.bin"
+		binclude "data/General/Special Stage/Palettes/Emeralds S3.bin"
 		even
 
 ; =============== S U B R O U T I N E =======================================
@@ -11566,7 +11503,7 @@ GetScalars2:
 
 ; ---------------------------------------------------------------------------
 ScalarTable2:
-		binclude "General/Special Stage/Scalars.bin"
+		binclude "data/General/Special Stage/Scalars.bin"
 		even
 Map_SStageSphere:
 		include "General/Special Stage/Map - Sphere.asm"
@@ -11818,7 +11755,7 @@ locret_9816:
 		rts
 ; ---------------------------------------------------------------------------
 Pal_Competition1:
-		binclude "General/Competition Menu/Palettes/1.bin"
+		binclude "data/General/Competition Menu/Palettes/1.bin"
 		even
 ObjDat_9878:
 		dc.w 7-1
@@ -12456,7 +12393,7 @@ ObjDat_CompetitionTimeAttack:
 		dc.w    $B5,  $101, palette_line_0
 		dc.b    1,   2
 MapUnc_CompetitionNumbers:
-		binclude "General/Competition Menu/Uncompressed Map/Numbers.bin"
+		binclude "data/General/Competition Menu/Uncompressed Map/Numbers.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -12792,13 +12729,13 @@ locret_A55C:
 		rts
 ; ---------------------------------------------------------------------------
 Pal_Competition2:
-		binclude "General/Competition Menu/Palettes/2.bin"
+		binclude "data/General/Competition Menu/Palettes/2.bin"
 		even
 Pal_Competition3:
-		binclude "General/Competition Menu/Palettes/3.bin"
+		binclude "data/General/Competition Menu/Palettes/3.bin"
 		even
 Pal_Competition4:
-		binclude "General/Competition Menu/Palettes/4.bin"
+		binclude "data/General/Competition Menu/Palettes/4.bin"
 		even
 ObjDat_A65E:
 		dc.w $B-1
@@ -13189,7 +13126,7 @@ loc_AD7A:
 
 ; ---------------------------------------------------------------------------
 Pal_CompetitionResults:
-		binclude "General/Competition Menu/Palettes/Results.bin"
+		binclude "data/General/Competition Menu/Palettes/Results.bin"
 		even
 ObjDat_ADA4:
 		dc.w 8-1
@@ -13238,25 +13175,25 @@ VRAMDatList_AE06:
 		dc.l MapUnc_CompetitionResultsTOTAL
 		dc.w VRAM_Plane_A_Name_Table+$CD0,   5-1,   2-1
 MapEni_CompetitionResultsLED:
-		binclude "General/Competition Menu/Enigma Map/Menu.eni"
+		binclude "data/General/Competition Menu/Enigma Map/Menu.eni"
 		even
 MapUnc_CompetitionResultsLetters:
-		binclude "General/Competition Menu/Uncompressed Map/Results Letters.bin"
+		binclude "data/General/Competition Menu/Uncompressed Map/Results Letters.bin"
 		even
 MapUnc_CompetitionResultsDividers:
-		binclude "General/Competition Menu/Uncompressed Map/Results Dividers.bin"
+		binclude "data/General/Competition Menu/Uncompressed Map/Results Dividers.bin"
 		even
 MapUnc_CompetitionResultsTOTAL:
-		binclude "General/Competition Menu/Uncompressed Map/Results TOTAL.bin"
+		binclude "data/General/Competition Menu/Uncompressed Map/Results TOTAL.bin"
 		even
 MapUnc_ResultsWin:
-		binclude "General/Competition Menu/Uncompressed Map/Results Win.bin"
+		binclude "data/General/Competition Menu/Uncompressed Map/Results Win.bin"
 		even
 MapUnc_ResultsLose:
-		binclude "General/Competition Menu/Uncompressed Map/Results Lose.bin"
+		binclude "data/General/Competition Menu/Uncompressed Map/Results Lose.bin"
 		even
 MapUnc_ResultsTie:
-		binclude "General/Competition Menu/Uncompressed Map/Results Tie.bin"
+		binclude "data/General/Competition Menu/Uncompressed Map/Results Tie.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -13494,7 +13431,7 @@ locret_B26A:
 		rts
 ; ---------------------------------------------------------------------------
 Pal_CompetitionTimeAttack:
-		binclude "General/Competition Menu/Palettes/Time Attack.bin"
+		binclude "data/General/Competition Menu/Palettes/Time Attack.bin"
 		even
 ObjDat_B28C:
 		dc.w 5-1
@@ -13534,13 +13471,13 @@ VRAMDatList_B2CA:
 		dc.l MapUnc_Competition1st2nd3rd
 		dc.w VRAM_Plane_A_Name_Table+$944,   3-1,   8-1
 MapUnc_CompetitionLAPNum:
-		binclude "General/Competition Menu/Uncompressed Map/LAP.bin"
+		binclude "data/General/Competition Menu/Uncompressed Map/LAP.bin"
 		even
 MapUnc_CompetitionRECORDS:
-		binclude "General/Competition Menu/Uncompressed Map/RECORDS.bin"
+		binclude "data/General/Competition Menu/Uncompressed Map/RECORDS.bin"
 		even
 MapUnc_Competition1st2nd3rd:
-		binclude "General/Competition Menu/Uncompressed Map/1ST 2ND 3RD.bin"
+		binclude "data/General/Competition Menu/Uncompressed Map/1ST 2ND 3RD.bin"
 		even
 CompTimeAttack_LevelNameMaps:
 		dc.l MapUnc_CompetitionAZURELAKE
@@ -13549,19 +13486,19 @@ CompTimeAttack_LevelNameMaps:
 		dc.l MapUnc_CompetitionCHROMEGADGET
 		dc.l MapUnc_CompetitionENDLESSMINE
 MapUnc_CompetitionAZURELAKE:
-		binclude "General/Competition Menu/Uncompressed Map/AZURE LAKE.bin"
+		binclude "data/General/Competition Menu/Uncompressed Map/AZURE LAKE.bin"
 		even
 MapUnc_CompetitionBALLOONPARK:
-		binclude "General/Competition Menu/Uncompressed Map/BALLOON PARK.bin"
+		binclude "data/General/Competition Menu/Uncompressed Map/BALLOON PARK.bin"
 		even
 MapUnc_CompetitionCHROMEGADGET:
-		binclude "General/Competition Menu/Uncompressed Map/CHROME GADGET.bin"
+		binclude "data/General/Competition Menu/Uncompressed Map/CHROME GADGET.bin"
 		even
 MapUnc_CompetitionDESERTPALACE:
-		binclude "General/Competition Menu/Uncompressed Map/DESERT PALACE.bin"
+		binclude "data/General/Competition Menu/Uncompressed Map/DESERT PALACE.bin"
 		even
 MapUnc_CompetitionENDLESSMINE:
-		binclude "General/Competition Menu/Uncompressed Map/ENDLESS MINE.bin"
+		binclude "data/General/Competition Menu/Uncompressed Map/ENDLESS MINE.bin"
 		even
 
 ; =============== S U B R O U T I N E =======================================
@@ -14254,37 +14191,37 @@ DataSelectS3_ZoneNums:
 		dc.b 0
 		even
 Pal_Save_Chars:
-		binclude "General/Save Menu/Palettes/Chars.bin"
+		binclude "data/General/Save Menu/Palettes/Chars.bin"
 		even
 Pal_Save_Emeralds:
-		binclude "General/Save Menu/Palettes/Emeralds.bin"
+		binclude "data/General/Save Menu/Palettes/Emeralds.bin"
 		even
 Pal_Save_FinishCard1:
-		binclude "General/Save Menu/Palettes/Finish Card 1.bin"
+		binclude "data/General/Save Menu/Palettes/Finish Card 1.bin"
 		even
 Pal_Save_FinishCard2:
-		binclude "General/Save Menu/Palettes/Finish Card 2.bin"
+		binclude "data/General/Save Menu/Palettes/Finish Card 2.bin"
 		even
 Pal_Save_ZoneCard1:
-		binclude "General/Save Menu/Palettes/Zone Card 1.bin"
+		binclude "data/General/Save Menu/Palettes/Zone Card 1.bin"
 		even
 Pal_Save_ZoneCard2:
-		binclude "General/Save Menu/Palettes/Zone Card 2.bin"
+		binclude "data/General/Save Menu/Palettes/Zone Card 2.bin"
 		even
 Pal_Save_ZoneCard3:
-		binclude "General/Save Menu/Palettes/Zone Card 3.bin"
+		binclude "data/General/Save Menu/Palettes/Zone Card 3.bin"
 		even
 Pal_Save_ZoneCard4:
-		binclude "General/Save Menu/Palettes/Zone Card 4.bin"
+		binclude "data/General/Save Menu/Palettes/Zone Card 4.bin"
 		even
 Pal_Save_ZoneCard8:
-		binclude "General/Save Menu/Palettes/Zone Card 8 S3.bin"
+		binclude "data/General/Save Menu/Palettes/Zone Card 8 S3.bin"
 		even
 Pal_Save_ZoneCard5:
-		binclude "General/Save Menu/Palettes/Zone Card 5.bin"
+		binclude "data/General/Save Menu/Palettes/Zone Card 5.bin"
 		even
 Pal_Save_ZoneCard6:
-		binclude "General/Save Menu/Palettes/Zone Card 6.bin"
+		binclude "data/General/Save Menu/Palettes/Zone Card 6.bin"
 		even
 word_BD16:
 		dc.w 8-1
@@ -15136,7 +15073,7 @@ Clear_Text:
 		restore
 
 ArtKos_SaveScreenS3Zone:
-		binclude "General/Save Menu/Kosinski Art/Zone Art.kos"
+		binclude "data/General/Save Menu/Kosinski Art/Zone Art.kos"
 		even
 
 ; =============== S U B R O U T I N E =======================================
@@ -15755,13 +15692,13 @@ loc_EEC6:
 
 ; ---------------------------------------------------------------------------
 ArtUnc_HUDDigits:
-		binclude "General/Sprites/HUD Icon/HUD Digits.unc"
+		binclude "data/General/Sprites/HUD Icon/HUD Digits.unc"
 		even
 ArtUnc_LivesDigits:
-		binclude "General/Sprites/HUD Icon/Lives Digits.unc"
+		binclude "data/General/Sprites/HUD Icon/Lives Digits.unc"
 		even
 ArtUnc_DebugDigits:
-		binclude "General/Sprites/HUD Icon/Debug Digits.unc"
+		binclude "data/General/Sprites/HUD Icon/Debug Digits.unc"
 		even
 
 ; =============== S U B R O U T I N E =======================================
@@ -18607,12 +18544,6 @@ locret_11116:
 
 ObjCheckLeftWallDist:
 		add.w	x_pos(a0),d3
-	if FixBugs
-		; Engine bug: colliding with left walls is erratic with this function.
-		; The cause is this: a missing instruction to flip collision on the found
-		; 16x16 block; this one:
-		eori.w	#$F,d3
-	endif
 
 ObjCheckLeftWallDist_Part2:
 		move.w	y_pos(a0),d2
@@ -20574,11 +20505,6 @@ loc_124BA:
 
 loc_124C2:
 		move.w	d0,ground_vel(a0)
-	if FixBugs
-		move.b	angle(a0),d1
-		addi.b	#$20,d1
-		andi.b	#$C0,d1
-	else
 		; These three instructions partially overwrite the inertia value in
 		; 'd0'! This causes the character to trigger their skidding
 		; animation at different speeds depending on whether they're going
@@ -20587,7 +20513,6 @@ loc_124C2:
 		move.b	angle(a0),d0
 		addi.b	#$20,d0
 		andi.b	#$C0,d0
-	endif
 		bne.s	locret_1250A
 		cmpi.w	#$400,d0
 		blt.s	locret_1250A
@@ -20640,11 +20565,6 @@ loc_12540:
 
 loc_12548:
 		move.w	d0,ground_vel(a0)
-	if FixBugs
-		move.b	angle(a0),d1
-		addi.b	#$20,d1
-		andi.b	#$C0,d1
-	else
 		; These three instructions partially overwrite the inertia value in
 		; 'd0'! This causes the character to trigger their skidding
 		; animation at different speeds depending on whether they're going
@@ -20653,7 +20573,6 @@ loc_12548:
 		move.b	angle(a0),d0
 		addi.b	#$20,d0
 		andi.b	#$C0,d0
-	endif
 		bne.s	locret_12590
 		cmpi.w	#-$400,d0
 		bgt.s	locret_12590
@@ -21212,12 +21131,8 @@ Sonic_Super:
 		tst.b	(Update_HUD_timer).w	; Level over?
 		beq.s	.revertToNormal
 		subq.w	#1,(Super_frame_count).w
-	if FixBugs
-		bhi.w	.return
-	else
 		; Bug: This should be a 'bhi'; currently counts down 61 frames
 		bpl.w	.return
-	endif
 		move.w	#60,(Super_frame_count).w
 		tst.w	(Ring_count).w
 		beq.s	.revertToNormal	; If rings depleted, return to normal
@@ -25296,11 +25211,6 @@ loc_15820:
 
 loc_15828:
 		move.w	d0,ground_vel(a0)
-	if FixBugs
-		move.b	angle(a0),d1
-		addi.b	#$20,d1
-		andi.b	#$C0,d1
-	else
 		; These three instructions partially overwrite the inertia value in
 		; 'd0'! This causes the character to trigger their skidding
 		; animation at different speeds depending on whether they're going
@@ -25309,7 +25219,6 @@ loc_15828:
 		move.b	angle(a0),d0
 		addi.b	#$20,d0
 		andi.b	#$C0,d0
-	endif
 		bne.s	locret_15870
 		cmpi.w	#$400,d0
 		blt.s	locret_15870
@@ -25362,11 +25271,6 @@ loc_158A6:
 
 loc_158AE:
 		move.w	d0,ground_vel(a0)
-	if FixBugs
-		move.b	angle(a0),d1
-		addi.b	#$20,d1
-		andi.b	#$C0,d1
-	else
 		; These three instructions partially overwrite the inertia value in
 		; 'd0'! This causes the character to trigger their skidding
 		; animation at different speeds depending on whether they're going
@@ -25375,7 +25279,6 @@ loc_158AE:
 		move.b	angle(a0),d0
 		addi.b	#$20,d0
 		andi.b	#$C0,d0
-	endif
 		bne.s	locret_158F6
 		cmpi.w	#-$400,d0
 		bgt.s	locret_158F6
@@ -29331,14 +29234,10 @@ loc_19028:
 		bclr	#7,(a2)
 
 loc_19034:
-	if FixBugs
-		move.w	$30(a0),d0
-	else
 		; Bug: Probably meant to be $30(a0), as Test_Ring_Collisions_AttractRing
 		; stores the ring's address in the ring status table there.
 		; This is corrected in Sonic & Knuckles Collection.
 		move.w	$30,d0
-	endif
 		beq.s	loc_19040
 		movea.w	d0,a2
 		move.w	#0,(a2)
@@ -32052,11 +31951,9 @@ Do_ResizeEvents:
 		move.w	(Current_zone_and_act).w,d0
 		ror.b	#1,d0
 		lsr.w	#6,d0
-	if FixBugs=0
 		; Bug: this clamps the array index too hard, causing Competition and bonus
 		; stages to execute resize routines meant for the early game levels
 		andi.w	#$3E,d0
-	endif
 		move.w	LevelResizeArray(pc,d0.w),d0
 		jsr	LevelResizeArray(pc,d0.w)
 		moveq	#2,d1
@@ -32462,12 +32359,8 @@ loc_1AC4E:
 		cmpi.w	#$3E0,(Camera_Y_pos).w
 		blo.s	locret_1AC72
 		lea	(Normal_palette_line_4+$10).w,a1
-	if FixBugs
-		move.w	#$680,(a1)+
-	else
 		; Bug: this should be $680
 		move.w	#$B80,(a1)+
-	endif
 		move.w	#$240,(a1)+
 		move.w	#$220,(a1)+
 		addq.b	#2,(Dynamic_resize_routine).w
@@ -32532,12 +32425,8 @@ locret_1ACD6:
 ; ---------------------------------------------------------------------------
 
 MGZ1_Resize:
-	if FixBugs
-		rts
-	else
 		; Bug: MGZ1 uses a dynamic resize routine meant for MGZ2
 		; This causes the act 2 boss to spawn in out-of-bounds act 1
-	endif
 
 MGZ2_Resize:
 		moveq	#0,d0
@@ -32892,7 +32781,7 @@ locret_1AF68:
 
 ; ---------------------------------------------------------------------------
 LRZ_Rock_SpriteData:
-		binclude "Levels/LRZ/Misc/Rock Sprite Attribute Data S3.bin"
+		binclude "data/Levels/LRZ/Misc/Rock Sprite Attribute Data S3.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -36089,13 +35978,9 @@ sub_1D436:
 		bsr.s	sub_1D44C
 		lea	(Player_2).w,a1
 		lea	$34(a0),a2
-	if FixBugs
-		moveq	#p2_standing_bit,d6
-	else
 		; Bug: if player 1 was riding the object, then d6 may have become dirty from
 		; a call to Perform_Player_DPLC, causing player 2 to behave erratically
 		addq.b	#p2_standing_bit-p1_standing_bit,d6
-	endif
 ; End of function sub_1D436
 
 
@@ -36781,14 +36666,10 @@ loc_1DB88:
 		ori.w	#high_priority,art_tile(a1)
 		move.w	#$80,priority(a1)
 		move.b	#$18,width_pixels(a1)
-	if FixBugs
-		move.b	#$18,height_pixels(a1)
-	else
 		; Bug: This only covers the width, when it
 		; should be covering the height as the width
 		; has already been defined.
 		move.b	#$18,width_pixels(a1)
-	endif
 		move.w	(a4)+,x_vel(a1)
 		move.w	(a4)+,y_vel(a1)
 		move.b	d6,mapping_frame(a1)
@@ -42037,7 +41918,7 @@ sub_2366C:
 
 ; ---------------------------------------------------------------------------
 Pal_SphereTest:
-		binclude "General/Special Stage/Palettes/Eosian Spheres.bin"
+		binclude "data/General/Special Stage/Palettes/Eosian Spheres.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -42304,7 +42185,7 @@ GetScalars:
 
 ; ---------------------------------------------------------------------------
 ScalarTable:
-		binclude "General/Special Stage/Scalars.bin"
+		binclude "data/General/Special Stage/Scalars.bin"
 		even
 Map_SphereTest:
 		include "General/Special Stage/Map - Eosian Spheres.asm"
@@ -45421,23 +45302,15 @@ loc_2634C:
 
 
 sub_2636C:
-	if FixBugs
-		lea	$30(a0),a2
-	else
 		; Bug: probably meant to be $30(a0)
 		lea	$30,a2
-	endif
 		lea	(Player_1).w,a1
 		moveq	#p1_standing_bit,d6
 		movem.l	d1-d3,-(sp)
 		bsr.s	sub_2638A
 		movem.l	(sp)+,d1-d3
-	if FixBugs
-		lea	$34(a0),a2
-	else
 		; Bug: probably meant to be $34(a0)
 		lea	$34,a2
-	endif
 		lea	(Player_2).w,a1
 		addq.b	#p2_standing_bit-p1_standing_bit,d6
 ; End of function sub_2636C
@@ -45777,20 +45650,11 @@ loc_26714:
 		move.l	a3,mappings(a1)
 		move.b	d5,render_flags(a1)
 		move.w	art_tile(a0),art_tile(a1)
-	if FixBugs
-		; Just to be on the safe side, we'll use word here.
-		move.w	priority(a0),priority(a1)
-	else
 		; this is not a bug because the design of this object is that priority is set to $200
 		; copying priority as a byte would lead to $8 being 0x02 and $9 being 00 by default would still end up as $200 anyway but if you
 		; change priority to something like $280 it would bug up so using a word here would be better
 		move.b	priority(a0),priority(a1)
-	endif
 		move.b	width_pixels(a0),width_pixels(a1)
-	if FixBugs
-		; The height was originally missing, which would result in it disappearing too quickly vertically.
-		move.b	height_pixels(a0),height_pixels(a1)
-	endif
 		move.w	(a4)+,x_vel(a1)
 		move.w	(a4)+,y_vel(a1)
 		move.b	(a5)+,mapping_frame(a1)
@@ -45832,20 +45696,11 @@ loc_26798:
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
 		move.w	art_tile(a0),art_tile(a1)
-	if FixBugs
-		; Just to be on the safe side, we'll use word here.
-		move.w	priority(a0),priority(a1)
-	else
 		; this is not a bug because the design of this object is that priority is set to $200
 		; copying priority as a byte would lead to $8 being 0x02 and $9 being 00 by default would still end up as $200 anyway but if you
 		; change priority to something like $280 it would bug up so using a word here would be better
 		move.b	priority(a0),priority(a1)
-	endif
 		move.b	width_pixels(a0),width_pixels(a1)
-	if FixBugs
-		; The height was originally missing, which would result in it disappearing too quickly vertically.
-		move.b	height_pixels(a0),height_pixels(a1)
-	endif
 		move.w	(a4)+,x_vel(a1)
 		move.w	(a4)+,y_vel(a1)
 		dbf	d1,loc_2678E
@@ -53944,7 +53799,7 @@ loc_2D378:
 		rts
 ; ---------------------------------------------------------------------------
 Pal_Results:
-		binclude "General/Special Stage/Palettes/Results S3.bin"
+		binclude "data/General/Special Stage/Palettes/Results S3.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -55503,13 +55358,8 @@ loc_2F0EA:
 		move.w	#make_art_tile(ArtTile_Bubbles,0,0),art_tile(a1)
 		move.b	#$84,render_flags(a1)
 		move.b	#4,width_pixels(a1)
-	if FixBugs
-		; This identifies the height without identifying the width twice.
-		move.b	#4,height_pixels(a1)
-	else
 		; Bug: This is missing the height, and only really repeats what the previous line did.
 		move.b	#4,width_pixels(a1)
-	endif
 		move.w	#$300,priority(a1)
 		move.w	x_pos(a0),x_pos(a1)
 		jsr	(Random_Number).l
@@ -55827,13 +55677,8 @@ Obj_HCZHandLauncher:
 		move.w	#make_art_tile(ArtTile_HCZMisc+$1A,1,0),art_tile(a1)
 		move.b	render_flags(a0),render_flags(a1)
 		move.b	#$20,width_pixels(a1)
-	if FixBugs
-		; This identifies the height without overwriting the width value.
-		move.b	#$30,height_pixels(a1)
-	else
 		; Bug: This is missing the height, and it overwrites what the previous line did.
 		move.b	#$30,width_pixels(a1)
-	endif
 		move.w	#$280,priority(a1)
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
@@ -56853,13 +56698,9 @@ loc_303CC:
 loc_303DA:
 		lea	(Ani_CNZBalloon).l,a1
 		jsr	(Animate_Sprite).l
-	if FixBugs
-		tst.b	routine(a0)
-	else
 		; Bug: probably meant to be routine(a0), and at some point the animation terminated
 		; with code $FC (increment routine counter) rather than $FB (move offscreen)
 		tst.b	routine
-	endif
 		beq.s	loc_303F2
 		move.w	#$7F00,x_pos(a0)
 
@@ -59875,14 +59716,9 @@ loc_32A98:
 		bsr.s	sub_32AFE
 		lea	(Player_2).w,a1
 		lea	$34(a0),a2
-	if FixBugs
-		; Set the entirety of d6 to be the standing bit, which fixes d6's dirtiness.
-		moveq	#p2_standing_bit,d6
-	else
 		; Bug: if player 1 was riding the object, then d6 may have become dirty from
 		; a call to Perform_Player_DPLC, causing player 2 to behave erratically
 		addq.b	#p2_standing_bit-p1_standing_bit,d6
-	endif
 		move.w	(Ctrl_2_logical).w,d5
 		bsr.s	sub_32AFE
 		move.b	(Level_frame_counter+1).w,d0
@@ -62439,11 +62275,6 @@ loc_34B28:
 
 loc_34B30:
 		move.w	d0,ground_vel(a0)
-	if FixBugs
-		move.b	angle(a0),d1
-		addi.b	#$20,d1
-		andi.b	#$C0,d1
-	else
 		; These three instructions partially overwrite the inertia value in
 		; 'd0'! This causes the character to trigger their skidding
 		; animation at different speeds depending on whether they're going
@@ -62452,7 +62283,6 @@ loc_34B30:
 		move.b	angle(a0),d0
 		addi.b	#$20,d0
 		andi.b	#$C0,d0
-	endif
 		bne.s	locret_34B74
 		cmpi.w	#$400,d0
 		blt.s	locret_34B74
@@ -62504,11 +62334,6 @@ loc_34BAA:
 
 loc_34BB2:
 		move.w	d0,ground_vel(a0)
-	if FixBugs
-		move.b	angle(a0),d1
-		addi.b	#$20,d1
-		andi.b	#$C0,d1
-	else
 		; These three instructions partially overwrite the inertia value in
 		; 'd0'! This causes the character to trigger their skidding
 		; animation at different speeds depending on whether they're going
@@ -62517,7 +62342,6 @@ loc_34BB2:
 		move.b	angle(a0),d0
 		addi.b	#$20,d0
 		andi.b	#$C0,d0
-	endif
 		bne.s	locret_34BF6
 		cmpi.w	#-$400,d0
 		bgt.s	locret_34BF6
@@ -67248,7 +67072,7 @@ Ani_SnowboardDust:
 Map_SnowboardDust:
 		include "General/Sprites/Snowboard/Map - Snowboard Dust.asm"
 ArtNem_SnowboardDust:
-		binclude "General/Sprites/Snowboard/Snowboard Dust.nem"
+		binclude "data/General/Sprites/Snowboard/Snowboard Dust.nem"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -71469,10 +71293,10 @@ AIZ2_ALZ_BGDeformDelta:
 		dc.w  -2,  1,  2,  2, -1,  2,  2,  1,  2, -1, -2, -2, -2,  1, -1, -1
 		dc.w  -1,  0, -2,  0,  0,  0, -2,  0, -2,  2,  0, -2,  2,  2, -1, -2
 Pal_AIZBattleship:
-		binclude "Levels/AIZ/Palettes/Battleship.bin"
+		binclude "data/Levels/AIZ/Palettes/Battleship.bin"
 		even
 Pal_AIZBossSmall:
-		binclude "Levels/AIZ/Palettes/Boss Small.bin"
+		binclude "data/Levels/AIZ/Palettes/Boss Small.bin"
 		even
 AIZBattleShip_BobbingMotion:
 		dc.b    4,   4,   3,   3,   2,   1,   1,   0,   0,   0,   1,   1,   2,   3,   3,   4
@@ -76773,7 +76597,7 @@ aCONTINUE:
 		dc.b "C O N T I N U E",0
 		even
 Pal_ContinueScreen:
-		binclude "General/Continue/Palettes/Palette S3.bin"
+		binclude "data/General/Continue/Palettes/Palette S3.bin"
 		even
 Map_ContinueSprites:
 		include "General/Continue/Map - Player Sprites S3.asm"
@@ -76791,13 +76615,13 @@ byte_3F840:
 		dc.b    8,   4,   5,   6, $FC
 		even
 ArtNem_ContinueSprites:
-		binclude "General/Continue/Nemesis Art/Player Sprites.nem"
+		binclude "data/General/Continue/Nemesis Art/Player Sprites.nem"
 		even
 ArtNem_ContinueIcons:
-		binclude "General/Continue/Nemesis Art/Player Icons.nem"
+		binclude "data/General/Continue/Nemesis Art/Player Icons.nem"
 		even
 ArtNem_ContinueDigits:
-		binclude "General/Continue/Nemesis Art/Digits.nem"
+		binclude "data/General/Continue/Nemesis Art/Digits.nem"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -76822,15 +76646,10 @@ S3Credits:
 		andi.b	#$BF,d0
 		move.w	d0,(VDP_control_port).l
 		jsr	(Clear_DisplayData).l
-	if FixBugs
-		clearRAM	Sprite_table,(Sprite_table_end-Sprite_table)
-		clearRAM	H_scroll_buffer,(Collision_response_list_end-H_scroll_buffer)
-	else
 		; Bug: this should be Sprite_table_End-Sprite_table
 		clearRAM	Sprite_table,(Sprite_table_end-Sprite_table)+4
 		; Bug: this should be Collision_response_list_End-H_scroll_buffer
 		clearRAM	H_scroll_buffer,(Collision_response_list_end-H_scroll_buffer)+4
-	endif
 		clearRAM	Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
 		clearRAM	Player_1,(Kos_decomp_buffer-Player_1)
 		clearRAM	RAM_start+$2000,$2000
@@ -78014,16 +77833,16 @@ word_415F4:	dc.w 2-1
 word_41602:	dc.w 1-1
 		dc.w     0,     0,     0
 Pal_Ending:
-		binclude "General/Ending/Palettes/S3 Ending.bin"
+		binclude "data/General/Ending/Palettes/S3 Ending.bin"
 		even
 Pal_EndingS3Logo:
-		binclude "General/Ending/Palettes/S3 Logo.bin"
+		binclude "data/General/Ending/Palettes/S3 Logo.bin"
 		even
 Pal_EndingEyecatchKnuckles:
-		binclude "General/Ending/Palettes/S3 Knuckles Eyecatch.bin"
+		binclude "data/General/Ending/Palettes/S3 Knuckles Eyecatch.bin"
 		even
 Pal_EndingS3LogoFlash:
-		binclude "General/Ending/Palettes/S3 Logo Flash.bin"
+		binclude "data/General/Ending/Palettes/S3 Logo Flash.bin"
 		even
 Map_EndingGraphics:
 		include "General/Ending/Map - S3 Ending Graphics.asm"
@@ -78051,7 +77870,7 @@ AniRaw_41959:
 		dc.b  $10, $1F,  $F,   7,  $E,   0, $F4
 		even
 ArtNem_EndingGraphics:
-		binclude "General/Ending/Nemesis Art/S3 Ending Graphics.nem"
+		binclude "data/General/Ending/Nemesis Art/S3 Ending Graphics.nem"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -78198,12 +78017,8 @@ loc_4328A:
 		subi.w	#$28,x_pos(a0)
 		bchg	#0,render_flags(a0)
 		bchg	#0,status(a0)
-	if FixBugs
-		clearRAM	H_scroll_buffer,(Target_water_palette-H_scroll_buffer)
-	else
 		; Bug: this should be (Target_water_palette-H_scroll_buffer)
 		clearRAM	H_scroll_buffer,(Target_water_palette-H_scroll_buffer)+4
-	endif
 		lea	(H_scroll_buffer+$13C).w,a1
 		lea	Streak_Horizontal_offsets(pc),a2
 		moveq	#0,d0
@@ -78373,14 +78188,14 @@ byte_433F4:
 		dc.b  $10
 		dc.b  $FF
 		dc.w Normal_palette+$10
-		binclude "General/S2Menu/Palettes/Sega Screen 2.bin"
+		binclude "data/General/S2Menu/Palettes/Sega Screen 2.bin"
 byte_4346A:
 		dc.b    4
 		dc.b    7
 		dc.b  $10
 		dc.b  $FF
 		dc.w Normal_palette
-		binclude "General/S2Menu/Palettes/Sega Screen 3.bin"
+		binclude "data/General/S2Menu/Palettes/Sega Screen 3.bin"
 ObjDat3_434E0:
 		dc.l Map_SonicOnSegaScr
 		dc.w make_art_tile(ArtTile_S2Sega+8,2,1)
@@ -81236,10 +81051,10 @@ byte_4579E:
 		dc.b  $F4
 		even
 Pal_CutsceneKnux:
-		binclude "General/Sprites/Knuckles/Cutscene/Pal.bin"
+		binclude "data/General/Sprites/Knuckles/Cutscene/Pal.bin"
 		even
 Pal_CNZFlash:
-		binclude "Levels/CNZ/Palettes/Flash.bin"
+		binclude "data/Levels/CNZ/Palettes/Flash.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -81502,13 +81317,8 @@ loc_45B56:
 		move.w	#make_art_tile(ArtTile_AIZIntroPlane,0,0),art_tile(a0)
 		move.w	#$280,priority(a0)
 		move.b	#$40,width_pixels(a0)
-	if FixBugs
-		; This identifies the height without overwriting the width value.
-		move.b	#$20,height_pixels(a0)
-	else
 		; Bug: This is missing the height, and it overwrites what the previous line did.
 		move.b	#$20,width_pixels(a0)
-	endif
 		jsr	Swing_Setup1(pc)
 		lea	(ArtKosM_AIZIntroPlane).l,a1
 		move.w	#tiles_to_bytes(ArtTile_AIZIntroPlane),d2
@@ -81555,13 +81365,8 @@ loc_45C00:
 		move.w	#make_art_tile(ArtTile_AIZIntroPlane,0,0),art_tile(a0)
 		move.w	#$280,priority(a0)
 		move.b	#4,width_pixels(a0)
-	if FixBugs
-		; This identifies the height without overwriting the width value.
-		move.b	#$C,height_pixels(a0)
-	else
 		; Bug: This is missing the height, and it overwrites what the previous line did.
 		move.b	#$C,width_pixels(a0)
-	endif
 		move.l	#loc_45C26,(a0)
 
 loc_45C26:
@@ -81576,13 +81381,8 @@ loc_45C3E:
 		move.w	#make_art_tile(ArtTile_AIZIntroPlane,0,0),art_tile(a0)
 		move.w	#$280,priority(a0)
 		move.b	#4,width_pixels(a0)
-	if FixBugs
-		; This identifies the height without overwriting the width value.
-		move.b	#$C,height_pixels(a0)
-	else
 		; Bug: This is missing the height, and it overwrites what the previous line did.
 		move.b	#$C,width_pixels(a0)
-	endif
 		move.l	#loc_45C64,(a0)
 
 loc_45C64:
@@ -81698,12 +81498,8 @@ loc_45DAE:
 		move.w	(Palette_frame).w,d0
 		addq.w	#6,(Palette_frame).w
 		cmpi.w	#$36,(Palette_frame).w
-	if FixBugs
-		bls.s	loc_45DD6
-	else
 		; This condition causes the last frame to be skipped.
 		blo.s	loc_45DD6
-	endif
 		move.w	#$24,(Palette_frame).w
 
 loc_45DD6:
@@ -81803,7 +81599,7 @@ byte_45E77:
 		dc.b  $F4
 		even
 Pal_AIZIntroEmeralds:
-		binclude "Levels/AIZ/Palettes/Intro Emeralds.bin"
+		binclude "data/Levels/AIZ/Palettes/Intro Emeralds.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -81906,12 +81702,8 @@ Obj_FBZRobotnikHeadMain:
 loc_45F9A:
 		clr.b	mapping_frame(a0)
 		movea.w	$44(a0),a1
-	if FixBugs
-		btst	#2,$38(a1)
-	else
 		; Bug: this should check bit 2 of $38(a1)
 		btst	#2,$38(a0)
-	endif
 		beq.s	loc_45FB0
 		move.b	#1,mapping_frame(a0)
 
@@ -83619,7 +83411,7 @@ byte_47085:
 		dc.b  $F4
 		even
 Pal_AIZMiniboss:
-		binclude "Levels/AIZ/Palettes/Miniboss.bin"
+		binclude "data/Levels/AIZ/Palettes/Miniboss.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -84781,7 +84573,7 @@ byte_47CBB:
 		dc.b  $F4
 		even
 Pal_AIZEndBoss:
-		binclude "Levels/AIZ/Palettes/End Boss.bin"
+		binclude "data/Levels/AIZ/Palettes/End Boss.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -84844,12 +84636,8 @@ loc_47D82:
 
 loc_47DBA:
 		move.l	#Obj_HCZ_MinibossLoop,(a0)
-	if FixBugs
-		moveq	#signextendB(mus_Miniboss),d0
-	else
 		; Bug: This is incorrectly using the End Boss music for a Miniboss.
 		moveq	#signextendB(mus_EndBoss),d0
-	endif
 		jsr	(Play_Music).l
 
 locret_47DC8:
@@ -86327,10 +86115,10 @@ byte_48C96:
 		dc.b    0,   3, $16, $FC
 		even
 Pal_HCZMiniboss:
-		binclude "Levels/HCZ/Palettes/Miniboss.bin"
+		binclude "data/Levels/HCZ/Palettes/Miniboss.bin"
 		even
 Pal_HCZMinibossWater:
-		binclude "Levels/HCZ/Palettes/Miniboss Water.bin"
+		binclude "data/Levels/HCZ/Palettes/Miniboss Water.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -87941,7 +87729,7 @@ byte_49D4A:
 		dc.b    7,   0,   0,   1,   2,   3,   4, $F4
 		even
 Pal_HCZEndBoss:
-		binclude "Levels/HCZ/Palettes/End Boss.bin"
+		binclude "data/Levels/HCZ/Palettes/End Boss.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -90212,7 +90000,7 @@ RawAni_4B584:
 		dc.b    5,   0,   1, $FC
 		even
 Pal_MGZEndBoss:
-		binclude "Levels/MGZ/Palettes/End Boss.bin"
+		binclude "data/Levels/MGZ/Palettes/End Boss.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -91124,7 +90912,7 @@ AniRaw_CNZMBossBoundEffect:
 		dc.b   $C,   0,  $D,   1,  $E,   1, $F4
 		even
 Pal_CNZMiniboss:
-		binclude "Levels/CNZ/Palettes/Miniboss.bin"
+		binclude "data/Levels/CNZ/Palettes/Miniboss.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -92091,7 +91879,7 @@ byte_4C911:
 		dc.b    7,   0,   1, $FC
 		even
 Pal_CNZEndBoss:
-		binclude "Levels/CNZ/Palettes/End Boss.bin"
+		binclude "data/Levels/CNZ/Palettes/End Boss.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -93343,7 +93131,7 @@ ChildObjDat_4D4F6:
 		dc.b    3,   9,  $A,  $B,  $C,  $D,  $E,  $F, $10, $FC
 		even
 Pal_FBZMiniboss:
-		binclude "Levels/FBZ/Palettes/S3 Miniboss.bin"
+		binclude "data/Levels/FBZ/Palettes/S3 Miniboss.bin"
 		even
 word_4D540:	palscriptptr .header, .data
 		dc.w 0
@@ -93848,12 +93636,8 @@ loc_4DAB2:
 		moveq	#0,d0
 		btst	#0,$20(a0)
 		bne.s	loc_4DAC4
-	if FixBugs
-		addq.w	#2*3,d0
-	else
 		; Bug: this should be 2*3
 		addq.w	#2*2,d0
-	endif
 
 loc_4DAC4:
 		lea	word_4DAEA(pc),a1
@@ -93943,7 +93727,7 @@ byte_4DB79:
 		dc.b    7,   0,   1,   2,   1, $FC
 		even
 Pal_FBZ2Subboss:
-		binclude "Levels/FBZ/Palettes/FBZ2 Subboss.bin"
+		binclude "data/Levels/FBZ/Palettes/FBZ2 Subboss.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -94740,7 +94524,7 @@ byte_4E350:
 		dc.b  $F4
 		even
 Pal_FBZEndBoss:
-		binclude "Levels/FBZ/Palettes/FBZ End Boss.bin"
+		binclude "data/Levels/FBZ/Palettes/FBZ End Boss.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -95598,7 +95382,7 @@ ChildObjDat_4EB98:
 		dc.b  $F4
 		even
 Pal_ICZMiniboss:
-		binclude "Levels/ICZ/Palettes/Miniboss.bin"
+		binclude "data/Levels/ICZ/Palettes/Miniboss.bin"
 		even
 word_4EBE2:	palscriptptr .header, .data
 		dc.w 0
@@ -96385,7 +96169,7 @@ byte_4F430:
 		dc.b    5,   0,   1, $FC
 		even
 Pal_ICZEndBoss:
-		binclude "Levels/ICZ/Palettes/End Boss.bin"
+		binclude "data/Levels/ICZ/Palettes/End Boss.bin"
 		even
 byte_4F464:
 		dc.b    0,   2
@@ -96928,7 +96712,7 @@ byte_4F97A:
 .jump2:
 		dc.b    7,   5,   4,   3,   4, $FC
 Pal_LBZMiniboss:
-		binclude "Levels/LBZ/Palettes/Miniboss.bin"
+		binclude "data/Levels/LBZ/Palettes/Miniboss.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -97974,7 +97758,7 @@ byte_503E7:
 		dc.b    1,  $C,  $D,  $E,  $D,  $C, $F4
 		even
 Pal_LBZFinalBoss1:
-		binclude "Levels/LBZ/Palettes/Final Boss 1.bin"
+		binclude "data/Levels/LBZ/Palettes/Final Boss 1.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -98812,7 +98596,7 @@ byte_50C84:
 		dc.b    5,   7,   7,   8,   9, $F4
 		even
 Pal_LBZEndBoss:
-		binclude "Levels/LBZ/Palettes/End Boss.bin"
+		binclude "data/Levels/LBZ/Palettes/End Boss.bin"
 		even
 ; ---------------------------------------------------------------------------
 
@@ -100344,12 +100128,8 @@ loc_51D52:
 
 loc_51D78:
 		tst.b	$30(a0)
-	if FixBugs
-		beq.s	loc_51D82
-	else
 		; Bug: this branch is inverted, freeing the player if they're _not_ being held
 		bne.s	loc_51D82
-	endif
 		jsr	Restore_PlayerControl(pc)
 
 loc_51D82:
@@ -100739,19 +100519,19 @@ byte_520D2:
 		dc.b    0, $A6
 		dc.b    0, $FF
 Pal_LBZFinalBoss2:
-		binclude "Levels/LBZ/Palettes/Final Boss 2.bin"
+		binclude "data/Levels/LBZ/Palettes/Final Boss 2.bin"
 		even
 Pal_LBZEnding:
-		binclude "Levels/LBZ/Palettes/Ending.bin"
+		binclude "data/Levels/LBZ/Palettes/Ending.bin"
 		even
 Pal_SonicEndPose:
-		binclude "General/Ending/Palettes/Sonic End Pose.bin"
+		binclude "data/General/Ending/Palettes/Sonic End Pose.bin"
 		even
 Pal_TailsEndPose:
-		binclude "General/Ending/Palettes/Tails End Pose.bin"
+		binclude "data/General/Ending/Palettes/Tails End Pose.bin"
 		even
 Pal_SuperSonicEndPose:
-		binclude "General/Ending/Palettes/S3 Super Sonic End Pose.bin"
+		binclude "data/General/Ending/Palettes/S3 Super Sonic End Pose.bin"
 		even
 Map_SonicTailsEndPoses:
 		include "General/Ending/Map - Sonic Tails Ending Poses S3.asm"
@@ -101034,15 +100814,9 @@ EndSign_CheckPlayerHit:
 		tst.w	d0				; Is Sonic?
 		beq.s	loc_525C0		; If it's not Sonic, branch
 
-	if FixBugs
-		move.l	d0,-(sp)			; Save players address
-		bsr.w	sub_525C6
-		move.l	(sp)+,d0			; Restore players address
-	else
 		; Bug: After returning from the subroutine, the address of the characters in d0
 		; will be corrupted and the check will not work correctly.
 		bsr.w	sub_525C6
-	endif
 
 loc_525C0:
 		swap	d0				; Get Tails address
@@ -101244,10 +101018,10 @@ PLC_AfterMiniboss_AIZ: plrlistheader
 PLC_AfterMiniboss_AIZ_End
 
 Pal_AfterMiniboss_AIZ:
-		binclude "Levels/AIZ/Palettes/Miniboss After.bin"
+		binclude "data/Levels/AIZ/Palettes/Miniboss After.bin"
 		even
 Pal_AfterMiniboss_ICZ:
-		binclude "Levels/ICZ/Palettes/Miniboss After.bin"
+		binclude "data/Levels/ICZ/Palettes/Miniboss After.bin"
 		even
 PLC_MonitorsSpikesSprings: plrlistheader
 		plreq ArtTile_Monitors, ArtNem_Monitors
@@ -104069,27 +103843,19 @@ Displace_PlayerOffObject:
 		bclr	#p1_standing_bit,status(a0)
 		beq.s	loc_53ED0
 		lea	(Player_1).w,a1
-	if FixBugs
-		bclr	#Status_OnObj,status(a1)
-	else
 		; Bug: This should clear Status_OnObj instead of p1_standing_bit.
 		; Thankfully, they both equal 3. Sonic (3) & Knuckles corrects this.
 		bclr	#p1_standing_bit,status(a1)
-	endif
 		bset	#Status_InAir,status(a1)
 
 loc_53ED0:
 		bclr	#p2_standing_bit,status(a0)
 		beq.s	locret_53EE8
 		lea	(Player_2).w,a1
-	if FixBugs
-		bclr	#Status_RollJump,status(a1)
-	else
 		; Bug: this should clear Status_OnObj instead of p2_standing_bit.
 		; As a result, player 2's Status_RollJump is cleared instead.
 		; Sonic (3) & Knuckles corrects this as well.
 		bclr	#p2_standing_bit,status(a1)
-	endif
 		bset	#Status_InAir,status(a1)
 
 locret_53EE8:
@@ -112423,12 +112189,8 @@ sub_58B62:
 loc_58B78:
 		btst	#p2_standing_bit,d0
 		beq.s	locret_58BD0
-	if FixBugs
-		lea	(Player_2).w,a1
-	else
 		; Bug: this should instead write Player_2 to a1
 		lea	(Player_1).w,a2
-	endif
 		cmpi.b	#2,$3B(a0)
 		bne.s	locret_58BD0
 
@@ -112529,23 +112291,13 @@ loc_58C8C:
 loc_58C98:
 		add.w	d0,d0
 		movea.w	word_58CC4-2(pc,d0.w),a1
-	if FixBugs
-		btst	#Status_Invincible,status_secondary(a1)
-		bne.s	loc_58CAA
-		tst.b	invulnerability_timer(a1)
-		bne.s	loc_58CAA
-	else
 		; Bug: no invincibility or invulnerability checks are performed,
 		; allowing Super Sonic to be hurt
-	endif
 		movea.l	a0,a2
 		movea.l	a1,a0
 		jsr	(HurtCharacter).l
 		movea.l	a2,a0
 
-	if FixBugs
-loc_58CAA:
-	endif
 		lea	ChildObjDat_58CE2(pc),a2
 		jsr	CreateChild6_Simple(pc)
 		jsr	Go_Delete_Sprite(pc)
@@ -116481,20 +116233,20 @@ Character_Speeds:
 		dc.w  $4C0,  $1C,  $70,    0
 		dc.w  $580,  $10, $200,    0
 Start_Locations:
-		binclude "Levels/AIZ/Start Location/Sonic/1.bin"
-		binclude "Levels/AIZ/Start Location/Sonic/2.bin"
-		binclude "Levels/HCZ/Start Location/Sonic/1.bin"
-		binclude "Levels/HCZ/Start Location/Sonic/2.bin"
-		binclude "Levels/MGZ/Start Location/Sonic/1.bin"
-		binclude "Levels/MGZ/Start Location/Sonic/2.bin"
-		binclude "Levels/CNZ/Start Location/Sonic/1.bin"
-		binclude "Levels/CNZ/Start Location/Sonic/2.bin"
+		binclude "data/Levels/AIZ/Start Location/Sonic/1.bin"
+		binclude "data/Levels/AIZ/Start Location/Sonic/2.bin"
+		binclude "data/Levels/HCZ/Start Location/Sonic/1.bin"
+		binclude "data/Levels/HCZ/Start Location/Sonic/2.bin"
+		binclude "data/Levels/MGZ/Start Location/Sonic/1.bin"
+		binclude "data/Levels/MGZ/Start Location/Sonic/2.bin"
+		binclude "data/Levels/CNZ/Start Location/Sonic/1.bin"
+		binclude "data/Levels/CNZ/Start Location/Sonic/2.bin"
 		dc.w    $60,  $6EC
 		dc.w    $60,  $5EC
-		binclude "Levels/ICZ/Start Location/Sonic/1.bin"
-		binclude "Levels/ICZ/Start Location/Sonic/2.bin"
-		binclude "Levels/LBZ/Start Location/Sonic/1.bin"
-		binclude "Levels/LBZ/Start Location/Sonic/2.bin"
+		binclude "data/Levels/ICZ/Start Location/Sonic/1.bin"
+		binclude "data/Levels/ICZ/Start Location/Sonic/2.bin"
+		binclude "data/Levels/LBZ/Start Location/Sonic/1.bin"
+		binclude "data/Levels/LBZ/Start Location/Sonic/2.bin"
 		dc.w    $80,  $6AA
 		dc.w    $80,  $3AA
 		dc.w   $230,  $1AC
@@ -116509,18 +116261,18 @@ Start_Locations:
 		dc.w    $60,  $58C
 		dc.w    $60,  $1EC
 		dc.w    $60,  $12C
-		binclude "Levels/ALZ/Start Location/Sonic/1.bin"
-		binclude "Levels/ALZ/Start Location/Sonic/2.bin"
-		binclude "Levels/BPZ/Start Location/Sonic/1.bin"
-		binclude "Levels/BPZ/Start Location/Sonic/2.bin"
-		binclude "Levels/DPZ/Start Location/Sonic/1.bin"
-		binclude "Levels/DPZ/Start Location/Sonic/2.bin"
-		binclude "Levels/CGZ/Start Location/Sonic/1.bin"
-		binclude "Levels/CGZ/Start Location/Sonic/2.bin"
-		binclude "Levels/EMZ/Start Location/Sonic/1.bin"
-		binclude "Levels/EMZ/Start Location/Sonic/2.bin"
-		binclude "Levels/Gumball/Start Location/Sonic/1.bin"
-		binclude "Levels/Gumball/Start Location/Sonic/2.bin"
+		binclude "data/Levels/ALZ/Start Location/Sonic/1.bin"
+		binclude "data/Levels/ALZ/Start Location/Sonic/2.bin"
+		binclude "data/Levels/BPZ/Start Location/Sonic/1.bin"
+		binclude "data/Levels/BPZ/Start Location/Sonic/2.bin"
+		binclude "data/Levels/DPZ/Start Location/Sonic/1.bin"
+		binclude "data/Levels/DPZ/Start Location/Sonic/2.bin"
+		binclude "data/Levels/CGZ/Start Location/Sonic/1.bin"
+		binclude "data/Levels/CGZ/Start Location/Sonic/2.bin"
+		binclude "data/Levels/EMZ/Start Location/Sonic/1.bin"
+		binclude "data/Levels/EMZ/Start Location/Sonic/2.bin"
+		binclude "data/Levels/Gumball/Start Location/Sonic/1.bin"
+		binclude "data/Levels/Gumball/Start Location/Sonic/2.bin"
 		dc.w    $60,   $70
 		dc.w    $60,   $70
 		dc.w    $60,   $70
@@ -116672,102 +116424,102 @@ SStageLayoutPtrs:
 SpriteTerminat1:
 		dc.w  $FFFF,     0,     0
 AIZ1_Sprites:
-		binclude "Levels/AIZ/Object Pos/1-S3.bin"
+		binclude "data/Levels/AIZ/Object Pos/1-S3.bin"
 		even
 AIZ2_Sprites:
-		binclude "Levels/AIZ/Object Pos/2-S3.bin"
+		binclude "data/Levels/AIZ/Object Pos/2-S3.bin"
 		even
 AIZ1_Rings:
-		binclude "Levels/AIZ/Ring Pos/1-S3.bin"
+		binclude "data/Levels/AIZ/Ring Pos/1-S3.bin"
 		even
 AIZ2_Rings:
-		binclude "Levels/AIZ/Ring Pos/2-S3.bin"
+		binclude "data/Levels/AIZ/Ring Pos/2-S3.bin"
 		even
 SpriteTerminat2:
 		dc.w  $FFFF,     0,     0
 HCZ1_Sprites:
-		binclude "Levels/HCZ/Object Pos/1-S3.bin"
+		binclude "data/Levels/HCZ/Object Pos/1-S3.bin"
 		even
 HCZ2_Sprites:
-		binclude "Levels/HCZ/Object Pos/2-S3.bin"
+		binclude "data/Levels/HCZ/Object Pos/2-S3.bin"
 		even
 HCZ1_Rings:
-		binclude "Levels/HCZ/Ring Pos/1-S3.bin"
+		binclude "data/Levels/HCZ/Ring Pos/1-S3.bin"
 		even
 HCZ2_Rings:
-		binclude "Levels/HCZ/Ring Pos/2-S3.bin"
+		binclude "data/Levels/HCZ/Ring Pos/2-S3.bin"
 		even
 SpriteTerminat3:
 		dc.w  $FFFF,     0,     0
 MGZ1_Sprites:
-		binclude "Levels/MGZ/Object Pos/1-S3.bin"
+		binclude "data/Levels/MGZ/Object Pos/1-S3.bin"
 		even
 MGZ1_Rings:
-		binclude "Levels/MGZ/Ring Pos/1-S3.bin"
+		binclude "data/Levels/MGZ/Ring Pos/1-S3.bin"
 		even
 SpriteTerminat4:
 		dc.w  $FFFF,     0,     0
 MGZ2_Sprites:
-		binclude "Levels/MGZ/Object Pos/2-S3.bin"
+		binclude "data/Levels/MGZ/Object Pos/2-S3.bin"
 		even
 MGZ2_Rings:
-		binclude "Levels/MGZ/Ring Pos/2-S3.bin"
+		binclude "data/Levels/MGZ/Ring Pos/2-S3.bin"
 		even
 SpriteTerminat5:
 		dc.w  $FFFF,     0,     0
 CNZ1_Sprites:
-		binclude "Levels/CNZ/Object Pos/1-S3.bin"
+		binclude "data/Levels/CNZ/Object Pos/1-S3.bin"
 		even
 CNZ2_Sprites:
-		binclude "Levels/CNZ/Object Pos/2-S3.bin"
+		binclude "data/Levels/CNZ/Object Pos/2-S3.bin"
 		even
 CNZ1_Rings:
-		binclude "Levels/CNZ/Ring Pos/1-S3.bin"
+		binclude "data/Levels/CNZ/Ring Pos/1-S3.bin"
 		even
 CNZ2_Rings:
-		binclude "Levels/CNZ/Ring Pos/2-S3.bin"
+		binclude "data/Levels/CNZ/Ring Pos/2-S3.bin"
 		even
 SpriteTerminat6:
 		dc.w  $FFFF,     0,     0
 FBZ1_Sprites:
-		binclude "Levels/FBZ/Object Pos/1-S3.bin"
+		binclude "data/Levels/FBZ/Object Pos/1-S3.bin"
 		even
 FBZ2_Sprites:
-		binclude "Levels/FBZ/Object Pos/2-S3.bin"
+		binclude "data/Levels/FBZ/Object Pos/2-S3.bin"
 		even
 FBZ1_Rings:
-		binclude "Levels/FBZ/Ring Pos/1-S3.bin"
+		binclude "data/Levels/FBZ/Ring Pos/1-S3.bin"
 		even
 FBZ2_Rings:
-		binclude "Levels/FBZ/Ring Pos/2-S3.bin"
+		binclude "data/Levels/FBZ/Ring Pos/2-S3.bin"
 		even
 SpriteTerminat7:
 		dc.w  $FFFF,     0,     0
 ICZ1_Sprites:
-		binclude "Levels/ICZ/Object Pos/1-S3.bin"
+		binclude "data/Levels/ICZ/Object Pos/1-S3.bin"
 		even
 ICZ2_Sprites:
-		binclude "Levels/ICZ/Object Pos/2-S3.bin"
+		binclude "data/Levels/ICZ/Object Pos/2-S3.bin"
 		even
 ICZ1_Rings:
-		binclude "Levels/ICZ/Ring Pos/1-S3.bin"
+		binclude "data/Levels/ICZ/Ring Pos/1-S3.bin"
 		even
 ICZ2_Rings:
-		binclude "Levels/ICZ/Ring Pos/2-S3.bin"
+		binclude "data/Levels/ICZ/Ring Pos/2-S3.bin"
 		even
 SpriteTerminat8:
 		dc.w  $FFFF,     0,     0
 LBZ1_Sprites:
-		binclude "Levels/LBZ/Object Pos/1-S3.bin"
+		binclude "data/Levels/LBZ/Object Pos/1-S3.bin"
 		even
 LBZ2_Sprites:
-		binclude "Levels/LBZ/Object Pos/2-S3.bin"
+		binclude "data/Levels/LBZ/Object Pos/2-S3.bin"
 		even
 LBZ1_Rings:
-		binclude "Levels/LBZ/Ring Pos/1-S3.bin"
+		binclude "data/Levels/LBZ/Ring Pos/1-S3.bin"
 		even
 LBZ2_Rings:
-		binclude "Levels/LBZ/Ring Pos/2-S3.bin"
+		binclude "data/Levels/LBZ/Ring Pos/2-S3.bin"
 		even
 AutoTunnel_00:
 		dc.w $C
@@ -117166,10 +116918,10 @@ AutoTunnel_14:
 SpriteTerminat9:
 		dc.w  $FFFF,     0,     0
 MHZ1_Sprites:
-		binclude "Levels/MHZ/Object Pos/1-S3.bin"
+		binclude "data/Levels/MHZ/Object Pos/1-S3.bin"
 		even
 MHZ2_Sprites:
-		binclude "Levels/MHZ/Object Pos/2-S3.bin"
+		binclude "data/Levels/MHZ/Object Pos/2-S3.bin"
 		even
 MHZ1_Rings:
 		dc.w    $80, $7100, $FFFF
@@ -117251,7 +117003,7 @@ Ending2_Rings:
 SpriteTerminatG:
 		dc.w  $FFFF,     0,     0
 ALZ1_Sprites:
-		binclude "Levels/ALZ/Object Pos/1.bin"
+		binclude "data/Levels/ALZ/Object Pos/1.bin"
 		even
 ALZ2_Sprites:
 		dc.w    $80,   $80,     0
@@ -117263,7 +117015,7 @@ ALZ2_Rings:
 SpriteTerminatH:
 		dc.w  $FFFF,     0,     0
 BPZ1_Sprites:
-		binclude "Levels/BPZ/Object Pos/1.bin"
+		binclude "data/Levels/BPZ/Object Pos/1.bin"
 		even
 BPZ2_Sprites:
 		dc.w    $80,   $80,     0
@@ -117275,7 +117027,7 @@ BPZ2_Rings:
 SpriteTerminatI:
 		dc.w  $FFFF,     0,     0
 DPZ1_Sprites:
-		binclude "Levels/DPZ/Object Pos/1.bin"
+		binclude "data/Levels/DPZ/Object Pos/1.bin"
 		even
 DPZ2_Sprites:
 		dc.w    $80,   $80,     0
@@ -117287,7 +117039,7 @@ DPZ2_Rings:
 SpriteTerminatJ:
 		dc.w  $FFFF,     0,     0
 CGZ1_Sprites:
-		binclude "Levels/CGZ/Object Pos/1.bin"
+		binclude "data/Levels/CGZ/Object Pos/1.bin"
 		even
 CGZ2_Sprites:
 		dc.w    $80,   $80,     0
@@ -117299,7 +117051,7 @@ CGZ2_Rings:
 SpriteTerminatK:
 		dc.w  $FFFF,     0,     0
 EMZ1_Sprites:
-		binclude "Levels/EMZ/Object Pos/1.bin"
+		binclude "data/Levels/EMZ/Object Pos/1.bin"
 		even
 EMZ2_Sprites:
 		dc.w    $80,   $80,     0
@@ -117311,7 +117063,7 @@ EMZ2_Rings:
 SpriteTerminatL:
 		dc.w  $FFFF,     0,     0
 Gumball1_Sprites:
-		binclude "Levels/Gumball/Object Pos/1-S3.bin"
+		binclude "data/Levels/Gumball/Object Pos/1-S3.bin"
 		even
 Gumball2_Sprites:
 		dc.w    $80,   $80,     0
@@ -117365,43 +117117,43 @@ DEZ3_Rings:
 HPZMini_Rings:
 		dc.w    $80, $7100, $FFFF
 SStage1_Layout:
-		binclude "General/Special Stage/Layout/S3 1.bin"
+		binclude "data/General/Special Stage/Layout/S3 1.bin"
 		even
 SStage2_Layout:
-		binclude "General/Special Stage/Layout/S3 2.bin"
+		binclude "data/General/Special Stage/Layout/S3 2.bin"
 		even
 SStage3_Layout:
-		binclude "General/Special Stage/Layout/S3 3.bin"
+		binclude "data/General/Special Stage/Layout/S3 3.bin"
 		even
 SStage4_Layout:
-		binclude "General/Special Stage/Layout/S3 4.bin"
+		binclude "data/General/Special Stage/Layout/S3 4.bin"
 		even
 SStage5_Layout:
-		binclude "General/Special Stage/Layout/S3 5.bin"
+		binclude "data/General/Special Stage/Layout/S3 5.bin"
 		even
 SStage6_Layout:
-		binclude "General/Special Stage/Layout/S3 6.bin"
+		binclude "data/General/Special Stage/Layout/S3 6.bin"
 		even
 SStage7_Layout:
-		binclude "General/Special Stage/Layout/S3 7.bin"
+		binclude "data/General/Special Stage/Layout/S3 7.bin"
 		even
 SStage8_Layout:
-		binclude "General/Special Stage/Layout/S3 8.bin"
+		binclude "data/General/Special Stage/Layout/S3 8.bin"
 		align $1000
 HCZ_WaterlineScroll_Data:
-		binclude "Levels/HCZ/Misc/HCZ Waterline Scroll Data.bin"
+		binclude "data/Levels/HCZ/Misc/HCZ Waterline Scroll Data.bin"
 		even
 LBZ_WaterlineScroll_Data:
-		binclude "Levels/LBZ/Misc/LBZ Waterline Scroll Data.bin"
+		binclude "data/Levels/LBZ/Misc/LBZ Waterline Scroll Data.bin"
 		even
 AngleArray:
-		binclude "Levels/Misc/Angles S3.bin"
+		binclude "data/Levels/Misc/Angles S3.bin"
 		even
 HeightMaps:
-		binclude "Levels/Misc/Height Maps S3.bin"
+		binclude "data/Levels/Misc/Height Maps S3.bin"
 		even
 HeightMapsRot:
-		binclude "Levels/Misc/Height Maps Rotated S3.bin"
+		binclude "data/Levels/Misc/Height Maps Rotated S3.bin"
 		even
 SolidIndexes:
 		dc.l Solid_AIZ1
@@ -117453,58 +117205,58 @@ SolidIndexes:
 		dc.l Solid_Slots_Special
 		dc.l Solid_Slots_Special
 Solid_AIZ1:
-		binclude "Levels/AIZ/Collision/1.bin"
+		binclude "data/Levels/AIZ/Collision/1.bin"
 		even
 Solid_AIZ2:
-		binclude "Levels/AIZ/Collision/2.bin"
+		binclude "data/Levels/AIZ/Collision/2.bin"
 		even
 Solid_HCZ1:
-		binclude "Levels/HCZ/Collision/1.bin"
+		binclude "data/Levels/HCZ/Collision/1.bin"
 		even
 Solid_HCZ2:
-		binclude "Levels/HCZ/Collision/2.bin"
+		binclude "data/Levels/HCZ/Collision/2.bin"
 		even
 Solid_MGZ1:
-		binclude "Levels/MGZ/Collision/1.bin"
+		binclude "data/Levels/MGZ/Collision/1.bin"
 		even
 Solid_MGZ2:
-		binclude "Levels/MGZ/Collision/2.bin"
+		binclude "data/Levels/MGZ/Collision/2.bin"
 		even
 Solid_CNZ:
-		binclude "Levels/CNZ/Collision/1.bin"
+		binclude "data/Levels/CNZ/Collision/1.bin"
 		even
 Solid_FBZ1:
 Solid_FBZ2:
 Solid_ICZ1:
 
-	binclude "Levels/ICZ/Collision/1.bin"
+	binclude "data/Levels/ICZ/Collision/1.bin"
 		even
 Solid_ICZ2:
-		binclude "Levels/ICZ/Collision/2.bin"
+		binclude "data/Levels/ICZ/Collision/2.bin"
 		even
 Solid_LBZ1:
-		binclude "Levels/LBZ/Collision/1.bin"
+		binclude "data/Levels/LBZ/Collision/1.bin"
 		even
 Solid_LBZ2:
-		binclude "Levels/LBZ/Collision/2.bin"
+		binclude "data/Levels/LBZ/Collision/2.bin"
 		even
 Solid_ALZ:
-		binclude "Levels/ALZ/Collision/1.bin"
+		binclude "data/Levels/ALZ/Collision/1.bin"
 		even
 Solid_BPZ:
-		binclude "Levels/BPZ/Collision/1.bin"
+		binclude "data/Levels/BPZ/Collision/1.bin"
 		even
 Solid_DPZ:
-		binclude "Levels/DPZ/Collision/1.bin"
+		binclude "data/Levels/DPZ/Collision/1.bin"
 		even
 Solid_CGZ:
-		binclude "Levels/CGZ/Collision/1.bin"
+		binclude "data/Levels/CGZ/Collision/1.bin"
 		even
 Solid_EMZ:
-		binclude "Levels/EMZ/Collision/1.bin"
+		binclude "data/Levels/EMZ/Collision/1.bin"
 		even
 Solid_Gumball_Special:
-		binclude "Levels/Gumball/Collision/1.bin"
+		binclude "data/Levels/Gumball/Collision/1.bin"
 		even
 Solid_Pachinko_Special:
 Solid_Slots_Special:
@@ -117558,235 +117310,235 @@ LevelPtrs:
 		dc.l Layout_Slot_Special
 		dc.l Layout_Slot_Special
 Layout_AIZ1:
-		binclude "Levels/AIZ/Layout/1.bin"
+		binclude "data/Levels/AIZ/Layout/1.bin"
 		even
 Layout_AIZ2:
-		binclude "Levels/AIZ/Layout/2.bin"
+		binclude "data/Levels/AIZ/Layout/2.bin"
 		even
 Layout_HCZ1:
-		binclude "Levels/HCZ/Layout/1.bin"
+		binclude "data/Levels/HCZ/Layout/1.bin"
 		even
 Layout_HCZ2:
-		binclude "Levels/HCZ/Layout/2.bin"
+		binclude "data/Levels/HCZ/Layout/2.bin"
 		even
 Layout_MGZ1:
-		binclude "Levels/MGZ/Layout/1.bin"
+		binclude "data/Levels/MGZ/Layout/1.bin"
 		even
 Layout_MGZ2:
-		binclude "Levels/MGZ/Layout/2.bin"
+		binclude "data/Levels/MGZ/Layout/2.bin"
 		even
 Layout_CNZ1:
-		binclude "Levels/CNZ/Layout/1.bin"
+		binclude "data/Levels/CNZ/Layout/1.bin"
 		even
 Layout_CNZ2:
-		binclude "Levels/CNZ/Layout/2.bin"
+		binclude "data/Levels/CNZ/Layout/2.bin"
 		even
 Layout_FBZ1:
 Layout_FBZ2:
 Layout_ICZ1:
-		binclude "Levels/ICZ/Layout/1.bin"
+		binclude "data/Levels/ICZ/Layout/1.bin"
 		even
 Layout_ICZ2:
-		binclude "Levels/ICZ/Layout/2.bin"
+		binclude "data/Levels/ICZ/Layout/2.bin"
 		even
 Layout_LBZ1:
-		binclude "Levels/LBZ/Layout/1.bin"
+		binclude "data/Levels/LBZ/Layout/1.bin"
 		even
 Layout_LBZ2:
-		binclude "Levels/LBZ/Layout/2.bin"
+		binclude "data/Levels/LBZ/Layout/2.bin"
 		even
 Layout_ALZ:
-		binclude "Levels/ALZ/Layout/1.bin"
+		binclude "data/Levels/ALZ/Layout/1.bin"
 		even
 Layout_BPZ:
-		binclude "Levels/BPZ/Layout/1.bin"
+		binclude "data/Levels/BPZ/Layout/1.bin"
 		even
 Layout_DPZ:
-		binclude "Levels/DPZ/Layout/1.bin"
+		binclude "data/Levels/DPZ/Layout/1.bin"
 		even
 Layout_CGZ:
-		binclude "Levels/CGZ/Layout/1.bin"
+		binclude "data/Levels/CGZ/Layout/1.bin"
 		even
 Layout_EMZ:
-		binclude "Levels/EMZ/Layout/1.bin"
+		binclude "data/Levels/EMZ/Layout/1.bin"
 		even
 Layout_Gumball_Special:
-		binclude "Levels/Gumball/Layout/1.bin"
+		binclude "data/Levels/Gumball/Layout/1.bin"
 		even
 Layout_Pachinko_Special:
-		binclude "Levels/Pachinko/Layout/1-S3.bin"
+		binclude "data/Levels/Pachinko/Layout/1-S3.bin"
 		even
 Layout_Slot_Special:
-		binclude "Levels/Slots/Layout/1-S3.bin"
+		binclude "data/Levels/Slots/Layout/1-S3.bin"
 		even
 PalPoint:
 		include "Levels/Misc/Palette pointers S3.asm"
 
 Pal_S2Sega:
-		binclude "General/S2Menu/Palettes/Sega Screen.bin"
+		binclude "data/General/S2Menu/Palettes/Sega Screen.bin"
 		even
 Pal_S2Title:
-		binclude "General/S2Menu/Palettes/Title Screen.bin"
+		binclude "data/General/S2Menu/Palettes/Title Screen.bin"
 		even
 Pal_S2LevSel:
-		binclude "General/S2Menu/Palettes/Proto Level Select.bin"
+		binclude "data/General/S2Menu/Palettes/Proto Level Select.bin"
 		even
 Pal_SonicTails:
-		binclude "General/Sprites/Sonic/Palettes/SonicAndTails.bin"
+		binclude "data/General/Sprites/Sonic/Palettes/SonicAndTails.bin"
 		even
 Pal_S2Menu:
-		binclude "General/S2Menu/Palettes/Main.bin"
+		binclude "data/General/S2Menu/Palettes/Main.bin"
 		even
 Pal_Knuckles:
-		binclude "General/Sprites/Knuckles/Palettes/Main.bin"
+		binclude "data/General/Sprites/Knuckles/Palettes/Main.bin"
 		even
 Pal_AIZIntro:
-		binclude "Levels/AIZ/Palettes/Intro.bin"
+		binclude "data/Levels/AIZ/Palettes/Intro.bin"
 		even
 Pal_AIZ:
-		binclude "Levels/AIZ/Palettes/Main.bin"
+		binclude "data/Levels/AIZ/Palettes/Main.bin"
 		even
 Pal_AIZFire:
-		binclude "Levels/AIZ/Palettes/Fire.bin"
+		binclude "data/Levels/AIZ/Palettes/Fire.bin"
 		even
 Pal_AIZBoss:
-		binclude "Levels/AIZ/Palettes/Boss.bin"
+		binclude "data/Levels/AIZ/Palettes/Boss.bin"
 		even
 Pal_AIZ_Water:
-		binclude "Levels/AIZ/Palettes/Water.bin"
+		binclude "data/Levels/AIZ/Palettes/Water.bin"
 		even
 Pal_AIZ2_Water:
-		binclude "Levels/AIZ/Palettes/Act 2 Water.bin"
+		binclude "data/Levels/AIZ/Palettes/Act 2 Water.bin"
 		even
 Pal_HCZ1:
-		binclude "Levels/HCZ/Palettes/1.bin"
+		binclude "data/Levels/HCZ/Palettes/1.bin"
 		even
 Pal_HCZ2:
-		binclude "Levels/HCZ/Palettes/2.bin"
+		binclude "data/Levels/HCZ/Palettes/2.bin"
 		even
 Pal_HCZ1_Water:
-		binclude "Levels/HCZ/Palettes/Act 1 Water.bin"
+		binclude "data/Levels/HCZ/Palettes/Act 1 Water.bin"
 		even
 Pal_HCZ2_Water:
-		binclude "Levels/HCZ/Palettes/Act 2 Water.bin"
+		binclude "data/Levels/HCZ/Palettes/Act 2 Water.bin"
 		even
 Pal_MGZ:
-		binclude "Levels/MGZ/Palettes/Main.bin"
+		binclude "data/Levels/MGZ/Palettes/Main.bin"
 		even
 Pal_CNZ:
-		binclude "Levels/CNZ/Palettes/Main.bin"
+		binclude "data/Levels/CNZ/Palettes/Main.bin"
 		even
 Pal_CNZ_Water:
-		binclude "Levels/CNZ/Palettes/Water.bin"
+		binclude "data/Levels/CNZ/Palettes/Water.bin"
 		even
 Pal_FBZ:
 Pal_ICZ1:
-		binclude "Levels/ICZ/Palettes/1.bin"
+		binclude "data/Levels/ICZ/Palettes/1.bin"
 		even
 Pal_ICZ2:
-		binclude "Levels/ICZ/Palettes/2.bin"
+		binclude "data/Levels/ICZ/Palettes/2.bin"
 		even
 Pal_ICZ2_Water:
-		binclude "Levels/ICZ/Palettes/Act 2 Water.bin"
+		binclude "data/Levels/ICZ/Palettes/Act 2 Water.bin"
 		even
 Pal_LBZ1:
-		binclude "Levels/LBZ/Palettes/1.bin"
+		binclude "data/Levels/LBZ/Palettes/1.bin"
 		even
 Pal_LBZ2:
-		binclude "Levels/LBZ/Palettes/2.bin"
+		binclude "data/Levels/LBZ/Palettes/2.bin"
 		even
 Pal_LBZ_Water:
-		binclude "Levels/LBZ/Palettes/Act 2 Water.bin"
+		binclude "data/Levels/LBZ/Palettes/Act 2 Water.bin"
 		even
 Pal_LBZ_Water2:
-		binclude "Levels/LBZ/Palettes/Act 2 Water 2.bin"
+		binclude "data/Levels/LBZ/Palettes/Act 2 Water 2.bin"
 		even
 Pal_ALZ:
-		binclude "Levels/ALZ/Palettes/Main.bin"
+		binclude "data/Levels/ALZ/Palettes/Main.bin"
 		even
 Pal_BPZ:
-		binclude "Levels/BPZ/Palettes/Main.bin"
+		binclude "data/Levels/BPZ/Palettes/Main.bin"
 		even
 Pal_DPZ:
-		binclude "Levels/DPZ/Palettes/Main.bin"
+		binclude "data/Levels/DPZ/Palettes/Main.bin"
 		even
 Pal_CGZ:
-		binclude "Levels/CGZ/Palettes/Main.bin"
+		binclude "data/Levels/CGZ/Palettes/Main.bin"
 		even
 Pal_EMZ:
-		binclude "Levels/EMZ/Palettes/Main.bin"
+		binclude "data/Levels/EMZ/Palettes/Main.bin"
 		even
 Pal_Gumball_Special:
-		binclude "Levels/Gumball/Palettes/Main.bin"
+		binclude "data/Levels/Gumball/Palettes/Main.bin"
 		even
 Pal_Pachinko_Special:
-		binclude "Levels/Pachinko/Palettes/S3.bin"
+		binclude "data/Levels/Pachinko/Palettes/S3.bin"
 		even
 Pal_Slot_Special:
-		binclude "Levels/Slots/Palettes/S3.bin"
+		binclude "data/Levels/Slots/Palettes/S3.bin"
 		even
 ArtUnc_CNZCannon:
-		binclude "Levels/CNZ/Uncompressed Art/Cannon.unc"
+		binclude "data/Levels/CNZ/Uncompressed Art/Cannon.unc"
 		even
 ArtUnc_AirCountdown:
-		binclude "General/Sprites/Bubbles/Air Countdown.unc"
+		binclude "data/General/Sprites/Bubbles/Air Countdown.unc"
 		even
 ArtUnc_SONICMILES:
-		binclude "General/S2Menu/Uncompressed Art/SONICMILES.unc"
+		binclude "data/General/S2Menu/Uncompressed Art/SONICMILES.unc"
 		even
 ArtUnc_SStageSonic:
-		binclude "General/Sprites/Sonic/Art/SStage Sonic.unc"
+		binclude "data/General/Sprites/Sonic/Art/SStage Sonic.unc"
 		even
 Map_SStageSonic:
 		include "General/Sprites/Sonic/Map - SStage Sonic.asm"
 ArtUnc_SStageTails:
-		binclude "General/Sprites/Tails/Art/SStage Tails.unc"
+		binclude "data/General/Sprites/Tails/Art/SStage Tails.unc"
 		even
 Map_SStageTails:
 		include "General/Sprites/Tails/Map - SStage Tails.asm"
 ArtUnc_SStageTailstails:
-		binclude "General/Sprites/Tails/Art/SStage Tails tails.unc"
+		binclude "data/General/Sprites/Tails/Art/SStage Tails tails.unc"
 		even
 Map_SStageTailstails:
 		include "General/Sprites/Tails/Map - SStage Tails tails.asm"
 ArtNem_SphereTest:
-		binclude "General/Special Stage/Nemesis Art/Eosian Spheres.nem"
+		binclude "data/General/Special Stage/Nemesis Art/Eosian Spheres.nem"
 		even
 ArtNem_SStageShadow:
-		binclude "General/Special Stage/Nemesis Art/Shadow.nem"
+		binclude "data/General/Special Stage/Nemesis Art/Shadow.nem"
 		even
 ArtNem_GetBlueSpheres:
-		binclude "General/Special Stage/Nemesis Art/Get Blue Spheres.nem"
+		binclude "data/General/Special Stage/Nemesis Art/Get Blue Spheres.nem"
 		even
 ArtNem_GBSArrow:
-		binclude "General/Special Stage/Nemesis Art/Get Blue Spheres Arrow.nem"
+		binclude "data/General/Special Stage/Nemesis Art/Get Blue Spheres Arrow.nem"
 		even
 ArtNem_SStageDigits:
-		binclude "General/Special Stage/Nemesis Art/Digits.nem"
+		binclude "data/General/Special Stage/Nemesis Art/Digits.nem"
 		even
 ArtNem_SStageIcons:
-		binclude "General/Special Stage/Nemesis Art/Icons.nem"
+		binclude "data/General/Special Stage/Nemesis Art/Icons.nem"
 		even
 ArtNem_SStageSphere:
-		binclude "General/Special Stage/Nemesis Art/Sphere.nem"
+		binclude "data/General/Special Stage/Nemesis Art/Sphere.nem"
 		even
 ArtNem_SStageRing:
-		binclude "General/Special Stage/Nemesis Art/Ring.nem"
+		binclude "data/General/Special Stage/Nemesis Art/Ring.nem"
 		even
 ArtKosM_SStageChaosEmerald:
-		binclude "General/Special Stage/KosinskiM Art/Special Stage Chaos Emerald.kosm"
+		binclude "data/General/Special Stage/KosinskiM Art/Special Stage Chaos Emerald.kosm"
 		even
 MapEni_SStageBG:
-		binclude "General/Special Stage/Enigma Map/BG.eni"
+		binclude "data/General/Special Stage/Enigma Map/BG.eni"
 		even
 ArtNem_SStageBG:
-		binclude "General/Special Stage/Nemesis Art/BG.nem"
+		binclude "data/General/Special Stage/Nemesis Art/BG.nem"
 		even
 MapUnc_SStageLayout:
-		binclude "General/Special Stage/Uncompressed Map/Layout S3.bin"
+		binclude "data/General/Special Stage/Uncompressed Map/Layout S3.bin"
 		even
 ArtNem_SStageLayout:
-		binclude "General/Special Stage/Nemesis Art/Layout.nem"
+		binclude "data/General/Special Stage/Nemesis Art/Layout.nem"
 		even
 SStage_PerspectiveMapPtrs:
 		dc.l SStage_PerspectiveMaps
@@ -117813,7 +117565,7 @@ SStage_PerspectiveMapPtrs:
 		dc.l SStage_PerspectiveMaps+$4920
 		dc.l SStage_PerspectiveMaps+$4EC0
 SStage_PerspectiveMaps:
-		binclude "General/Special Stage/Layout/S3 Perspective Maps.bin"
+		binclude "data/General/Special Stage/Layout/S3 Perspective Maps.bin"
 		even
 Map_Sonic2P:
 		include "General/Sprites/Sonic/Map - Sonic 2P.asm"
@@ -117832,207 +117584,207 @@ Map_Knuckles2P:
 PLC_Knuckles2P:
 		include "General/Sprites/Knuckles/DPLC - Knuckles 2P.asm"
 ArtUnc_SurfboardIntro:
-		binclude "General/Sprites/Sonic/Art/Sonic Surfboarding.unc"
+		binclude "data/General/Sprites/Sonic/Art/Sonic Surfboarding.unc"
 		align0 $20
 ArtUnc_AniAIZ1_0:
-		binclude "Levels/AIZ/Animated Tiles/Act1 0.unc"
+		binclude "data/Levels/AIZ/Animated Tiles/Act1 0.unc"
 		even
 ArtUnc_AniAIZ1_1:
-		binclude "Levels/AIZ/Animated Tiles/Act1 1.unc"
+		binclude "data/Levels/AIZ/Animated Tiles/Act1 1.unc"
 		even
 ArtUnc_AniAIZ2_1:
-		binclude "Levels/AIZ/Animated Tiles/Act2 1.unc"
+		binclude "data/Levels/AIZ/Animated Tiles/Act2 1.unc"
 		even
 ArtUnc_AniAIZ2_0:
-		binclude "Levels/AIZ/Animated Tiles/Act2 0.unc"
+		binclude "data/Levels/AIZ/Animated Tiles/Act2 0.unc"
 		even
 ArtUnc_AniAIZ2_3:
-		binclude "Levels/AIZ/Animated Tiles/Act2 3.unc"
+		binclude "data/Levels/AIZ/Animated Tiles/Act2 3.unc"
 		even
 ArtUnc_AniAIZ2_2:
-		binclude "Levels/AIZ/Animated Tiles/Act2 2.unc"
+		binclude "data/Levels/AIZ/Animated Tiles/Act2 2.unc"
 		even
 ArtUnc_AniAIZ2_FirstTree:
-		binclude "Levels/AIZ/Animated Tiles/Act2 First Tree.unc"
+		binclude "data/Levels/AIZ/Animated Tiles/Act2 First Tree.unc"
 		even
 ArtUnc_AniHCZ1_0:
-		binclude "Levels/HCZ/Animated Tiles/Act1 0.unc"
+		binclude "data/Levels/HCZ/Animated Tiles/Act1 0.unc"
 		even
 ArtUnc_AniHCZ1_WaterlineBelow:
-		binclude "Levels/HCZ/Animated Tiles/Act1 Water Below 1.unc"
+		binclude "data/Levels/HCZ/Animated Tiles/Act1 Water Below 1.unc"
 		even
 ArtUnc_FixHCZ1_UpperBG1:
-		binclude "Levels/HCZ/Animated Tiles/Act1 Upper BG 1.unc"
+		binclude "data/Levels/HCZ/Animated Tiles/Act1 Upper BG 1.unc"
 		even
 ArtUnc_AniHCZ1_WaterlineAbove:
-		binclude "Levels/HCZ/Animated Tiles/Act1 Water Above 1.unc"
+		binclude "data/Levels/HCZ/Animated Tiles/Act1 Water Above 1.unc"
 		even
 ArtUnc_FixHCZ1_LowerBG1:
-		binclude "Levels/HCZ/Animated Tiles/Act1 Lower BG 1.unc"
+		binclude "data/Levels/HCZ/Animated Tiles/Act1 Lower BG 1.unc"
 		even
 ArtUnc_AniHCZ1_WaterlineBelow2:
-		binclude "Levels/HCZ/Animated Tiles/Act1 Water Below 2.unc"
+		binclude "data/Levels/HCZ/Animated Tiles/Act1 Water Below 2.unc"
 		even
 ArtUnc_FixHCZ1_UpperBG2:
-		binclude "Levels/HCZ/Animated Tiles/Act1 Upper BG 2.unc"
+		binclude "data/Levels/HCZ/Animated Tiles/Act1 Upper BG 2.unc"
 		even
 ArtUnc_AniHCZ1_WaterlineAbove2:
-		binclude "Levels/HCZ/Animated Tiles/Act1 Water Above 2.unc"
+		binclude "data/Levels/HCZ/Animated Tiles/Act1 Water Above 2.unc"
 		even
 ArtUnc_FixHCZ1_LowerBG2:
-		binclude "Levels/HCZ/Animated Tiles/Act1 Lower BG 2.unc"
+		binclude "data/Levels/HCZ/Animated Tiles/Act1 Lower BG 2.unc"
 		even
 ArtUnc_AniHCZ__1:
-		binclude "Levels/HCZ/Animated Tiles/0.unc"
+		binclude "data/Levels/HCZ/Animated Tiles/0.unc"
 		even
 ArtUnc_AniHCZ2_0:
-		binclude "Levels/HCZ/Animated Tiles/Act2 0.unc"
+		binclude "data/Levels/HCZ/Animated Tiles/Act2 0.unc"
 		even
 ArtUnc_AniHCZ2_SmallBGLine:
-		binclude "Levels/HCZ/Animated Tiles/Act2 1.unc"
+		binclude "data/Levels/HCZ/Animated Tiles/Act2 1.unc"
 		even
 ArtUnc_AniHCZ2_2:
-		binclude "Levels/HCZ/Animated Tiles/Act2 2.unc"
+		binclude "data/Levels/HCZ/Animated Tiles/Act2 2.unc"
 		even
 ArtUnc_AniHCZ2_3:
-		binclude "Levels/HCZ/Animated Tiles/Act2 3.unc"
+		binclude "data/Levels/HCZ/Animated Tiles/Act2 3.unc"
 		even
 ArtUnc_AniHCZ2_4:
-		binclude "Levels/HCZ/Animated Tiles/Act2 4.unc"
+		binclude "data/Levels/HCZ/Animated Tiles/Act2 4.unc"
 		even
 ArtUnc_AniMGZ__0:
-		binclude "Levels/MGZ/Animated Tiles/MGZ Animated 0.unc"
+		binclude "data/Levels/MGZ/Animated Tiles/MGZ Animated 0.unc"
 		even
 ArtUnc_AniMGZ__1:
-		binclude "Levels/MGZ/Animated Tiles/MGZ Animated 1.unc"
+		binclude "data/Levels/MGZ/Animated Tiles/MGZ Animated 1.unc"
 		even
 ArtUnc_AniCNZ__0:
-		binclude "Levels/CNZ/Animated Tiles/0.unc"
+		binclude "data/Levels/CNZ/Animated Tiles/0.unc"
 		even
 ArtUnc_AniCNZ__1:
-		binclude "Levels/CNZ/Animated Tiles/1.unc"
+		binclude "data/Levels/CNZ/Animated Tiles/1.unc"
 		even
 ArtUnc_AniCNZ__2:
-		binclude "Levels/CNZ/Animated Tiles/2.unc"
+		binclude "data/Levels/CNZ/Animated Tiles/2.unc"
 		even
 ArtUnc_AniCNZ__3:
-		binclude "Levels/CNZ/Animated Tiles/3.unc"
+		binclude "data/Levels/CNZ/Animated Tiles/3.unc"
 		even
 ArtUnc_AniCNZ__4:
-		binclude "Levels/CNZ/Animated Tiles/4.unc"
+		binclude "data/Levels/CNZ/Animated Tiles/4.unc"
 		even
 ArtUnc_AniCNZ__6:
-		binclude "Levels/CNZ/Animated Tiles/6.unc"
+		binclude "data/Levels/CNZ/Animated Tiles/6.unc"
 		even
 ArtUnc_AniCNZ__5:
-		binclude "Levels/CNZ/Animated Tiles/5.unc"
+		binclude "data/Levels/CNZ/Animated Tiles/5.unc"
 		even
 ArtUnc_AniICZ__1:
-		binclude "Levels/ICZ/Animated Tiles/1.unc"
+		binclude "data/Levels/ICZ/Animated Tiles/1.unc"
 		even
 ArtUnc_AniICZ__2:
-		binclude "Levels/ICZ/Animated Tiles/2.unc"
+		binclude "data/Levels/ICZ/Animated Tiles/2.unc"
 		even
 ArtUnc_AniICZ__3:
-		binclude "Levels/ICZ/Animated Tiles/3.unc"
+		binclude "data/Levels/ICZ/Animated Tiles/3.unc"
 		even
 ArtUnc_AniICZ__4:
-		binclude "Levels/ICZ/Animated Tiles/4.unc"
+		binclude "data/Levels/ICZ/Animated Tiles/4.unc"
 		even
 ArtUnc_AniICZ__5:
-		binclude "Levels/ICZ/Animated Tiles/5.unc"
+		binclude "data/Levels/ICZ/Animated Tiles/5.unc"
 		even
 ArtUnc_AniICZ__0:
-		binclude "Levels/ICZ/Animated Tiles/0.unc"
+		binclude "data/Levels/ICZ/Animated Tiles/0.unc"
 		even
 ArtUnc_AniLBZ1_0:
-		binclude "Levels/LBZ/Animated Tiles/Act1 0.unc"
+		binclude "data/Levels/LBZ/Animated Tiles/Act1 0.unc"
 		even
 ArtUnc_AniLBZ1_1:
-		binclude "Levels/LBZ/Animated Tiles/Act1 1.unc"
+		binclude "data/Levels/LBZ/Animated Tiles/Act1 1.unc"
 		even
 ArtUnc_AniLBZ1_2:
-		binclude "Levels/LBZ/Animated Tiles/Act1 2.unc"
+		binclude "data/Levels/LBZ/Animated Tiles/Act1 2.unc"
 		even
 ArtUnc_AniLBZ2_2:
-		binclude "Levels/LBZ/Animated Tiles/Act2 2.unc"
+		binclude "data/Levels/LBZ/Animated Tiles/Act2 2.unc"
 		even
 ArtUnc_AniLBZ2_WaterlineBelow:
-		binclude "Levels/LBZ/Animated Tiles/Act2 Water Below.unc"
+		binclude "data/Levels/LBZ/Animated Tiles/Act2 Water Below.unc"
 		even
 ArtUnc_AniLBZ2_LowerBG:
-		binclude "Levels/LBZ/Animated Tiles/Act2 Lower BG.unc"
+		binclude "data/Levels/LBZ/Animated Tiles/Act2 Lower BG.unc"
 		even
 ArtUnc_AniLBZ2_WaterlineAbove:
-		binclude "Levels/LBZ/Animated Tiles/Act2 Water Above.unc"
+		binclude "data/Levels/LBZ/Animated Tiles/Act2 Water Above.unc"
 		even
 ArtUnc_AniLBZ2_UpperBG:
-		binclude "Levels/LBZ/Animated Tiles/Act2 Upper BG.unc"
+		binclude "data/Levels/LBZ/Animated Tiles/Act2 Upper BG.unc"
 		even
 ArtUnc_AniLBZ__0:
-		binclude "Levels/LBZ/Animated Tiles/0.unc"
+		binclude "data/Levels/LBZ/Animated Tiles/0.unc"
 		even
 ArtUnc_AniLBZ2_0:
-		binclude "Levels/LBZ/Animated Tiles/Act2 0.unc"
+		binclude "data/Levels/LBZ/Animated Tiles/Act2 0.unc"
 		even
 ArtUnc_AniLBZ2_1:
-		binclude "Levels/LBZ/Animated Tiles/Act2 1.unc"
+		binclude "data/Levels/LBZ/Animated Tiles/Act2 1.unc"
 		even
 ArtUnc_AniLRZ__BG:
 ArtUnc_AniLRZ__BG2:
 ArtUnc_AniALZ:
-		binclude "Levels/ALZ/Animated Tiles/0.unc"
+		binclude "data/Levels/ALZ/Animated Tiles/0.unc"
 		even
 ArtUnc_AniBPZ__0:
-		binclude "Levels/BPZ/Animated Tiles/0.unc"
+		binclude "data/Levels/BPZ/Animated Tiles/0.unc"
 		even
 ArtUnc_AniBPZ__1:
-		binclude "Levels/BPZ/Animated Tiles/1.unc"
+		binclude "data/Levels/BPZ/Animated Tiles/1.unc"
 		even
 ArtUnc_AniBPZ__2:
-		binclude "Levels/BPZ/Animated Tiles/2.unc"
+		binclude "data/Levels/BPZ/Animated Tiles/2.unc"
 		even
 ArtUnc_AniBPZ__3:
-		binclude "Levels/BPZ/Animated Tiles/3.unc"
+		binclude "data/Levels/BPZ/Animated Tiles/3.unc"
 		even
 ArtUnc_AniDPZ:
-		binclude "Levels/DPZ/Animated Tiles/0.unc"
+		binclude "data/Levels/DPZ/Animated Tiles/0.unc"
 		even
 ArtUnc_AniDPZ__BG:
-		binclude "Levels/DPZ/Animated Tiles/BG 0.unc"
+		binclude "data/Levels/DPZ/Animated Tiles/BG 0.unc"
 		even
 ArtUnc_AniGumball:
-		binclude "Levels/Gumball/Animated Tiles/0.unc"
+		binclude "data/Levels/Gumball/Animated Tiles/0.unc"
 		even
 ArtUnc_SplashDrown:
-		binclude "General/Sprites/Dash Dust/Splash Drown.unc"
+		binclude "data/General/Sprites/Dash Dust/Splash Drown.unc"
 		even
 ArtNem_S22POptions:
-		binclude "General/S2Menu/Nemesis Art/2P Options.nem"
+		binclude "data/General/S2Menu/Nemesis Art/2P Options.nem"
 		even
 ArtNem_1P2PWins:
-		binclude "General/S2Menu/Nemesis Art/1P 2P Wins.nem"
+		binclude "data/General/S2Menu/Nemesis Art/1P 2P Wins.nem"
 		even
 MapEni_S22POptions:
-		binclude "General/S2Menu/Enigma Map/2P Options.eni"
+		binclude "data/General/S2Menu/Enigma Map/2P Options.eni"
 		even
 ArtNem_S2MenuBox:
-		binclude "General/S2Menu/Nemesis Art/Menu Box.nem"
+		binclude "data/General/S2Menu/Nemesis Art/Menu Box.nem"
 		even
 ArtNem_S2LevelSelectPics:
-		binclude "General/S2Menu/Nemesis Art/Level Select Icons.nem"
+		binclude "data/General/S2Menu/Nemesis Art/Level Select Icons.nem"
 		even
 ArtNem_Title_SonicSprites:
-		binclude "General/Title/Nemesis Art/S3 Sonic Sprites.nem"
+		binclude "data/General/Title/Nemesis Art/S3 Sonic Sprites.nem"
 		even
 DemoDat_AIZ:
-		binclude "Levels/AIZ/Demodata/1.bin"
+		binclude "data/Levels/AIZ/Demodata/1.bin"
 		even
 DemoDat_HCZ:
-		binclude "Levels/HCZ/Demodata/1.bin"
+		binclude "data/Levels/HCZ/Demodata/1.bin"
 		even
 DemoDat_MGZ:
-		binclude "Levels/MGZ/Demodata/1.bin"
+		binclude "data/Levels/MGZ/Demodata/1.bin"
 		even
 
 ; ===========================================================================
@@ -118044,8 +117796,8 @@ DemoDat_MGZ:
 ; Music Bank 1
 ; ---------------------------------------------------------------------------
 Snd_Bank1_Start:
-Snd_Minib:	include "Sound/Music/Miniboss (Sonic 3).asm"
-Snd_FinalBoss:	include "Sound/Music/Final Boss.asm"
+Snd_Minib:	binclude "data/Sound/SMPS/s3/Music/Miniboss (Sonic 3).bin"
+Snd_FinalBoss:	binclude "data/Sound/SMPS/s3/Music/Final Boss.bin"
 Snd_Bank1_End
 
 	if Snd_Bank1_End - Snd_Bank1_Start > $8000
@@ -118059,17 +117811,17 @@ Snd_Bank1_End
 ; Music Bank 2
 ; ---------------------------------------------------------------------------
 Snd_Bank2_Start:	startBank
-Snd_AIZ1:	include "Sound/Music/AIZ1.asm"
-Snd_AIZ2:	include "Sound/Music/AIZ2.asm"
-Snd_HCZ1:	include "Sound/Music/HCZ1.asm"
-Snd_HCZ2:	include "Sound/Music/HCZ2.asm"
-Snd_MGZ1:	include "Sound/Music/MGZ1.asm"
-Snd_MGZ2:	include "Sound/Music/MGZ2.asm"
-Snd_CNZ2:	include "Sound/Music/CNZ2.asm"
-Snd_CNZ1:	include "Sound/Music/CNZ1.asm"
-Snd_FBZ1:	include "Sound/Music/FBZ1 (Sonic 3).asm"
-Snd_FBZ2:	include "Sound/Music/FBZ2.asm"
-Snd_DDZ:	include "Sound/Music/DDZ.asm"
+Snd_AIZ1:	binclude "data/Sound/SMPS/s3/Music/AIZ1.bin"
+Snd_AIZ2:	binclude "data/Sound/SMPS/s3/Music/AIZ2.bin"
+Snd_HCZ1:	binclude "data/Sound/SMPS/s3/Music/HCZ1.bin"
+Snd_HCZ2:	binclude "data/Sound/SMPS/s3/Music/HCZ2.bin"
+Snd_MGZ1:	binclude "data/Sound/SMPS/s3/Music/MGZ1.bin"
+Snd_MGZ2:	binclude "data/Sound/SMPS/s3/Music/MGZ2.bin"
+Snd_CNZ2:	binclude "data/Sound/SMPS/s3/Music/CNZ2.bin"
+Snd_CNZ1:	binclude "data/Sound/SMPS/s3/Music/CNZ1.bin"
+Snd_FBZ1:	binclude "data/Sound/SMPS/s3/Music/FBZ1 (Sonic 3).bin"
+Snd_FBZ2:	binclude "data/Sound/SMPS/s3/Music/FBZ2.bin"
+Snd_DDZ:	binclude "data/Sound/SMPS/s3/Music/DDZ.bin"
 
 	finishBank
 
@@ -118077,25 +117829,25 @@ Snd_DDZ:	include "Sound/Music/DDZ.asm"
 ; Music Bank 3
 ; ---------------------------------------------------------------------------
 Snd_Bank3_Start:	startBank
-Snd_ICZ2:	include "Sound/Music/ICZ2.asm"
-Snd_ICZ1:	include "Sound/Music/ICZ1.asm"
-Snd_LBZ2:	include "Sound/Music/LBZ2.asm"
-Snd_LBZ1:	include "Sound/Music/LBZ1.asm"
-Snd_MHZ1:	include "Sound/Music/MHZ1.asm"
-Snd_MHZ2:	include "Sound/Music/MHZ2.asm"
-Snd_SOZ1:	include "Sound/Music/SOZ1.asm"
-Snd_SOZ2:	include "Sound/Music/SOZ2.asm"
-Snd_LRZ1:	include "Sound/Music/LRZ1.asm"
-Snd_LRZ2:	include "Sound/Music/LRZ2.asm"
-Snd_SSZ:	include "Sound/Music/SSZ (Sonic 3).asm"
-Snd_DEZ1:	include "Sound/Music/DEZ1.asm"
-Snd_DEZ2:	include "Sound/Music/DEZ2.asm"
-Snd_Minib_SK:	include "Sound/Music/Miniboss (Sonic & Knuckles).asm"
-Snd_Boss:	include "Sound/Music/Zone Boss.asm"
-Snd_PachBonus:	include "Sound/Music/Pachinko.asm"
-Snd_SpecialS:	include "Sound/Music/Special Stage.asm"
-Snd_Results:	include "Sound/Music/Level Outro.asm"
-Snd_Menu:	include "Sound/Music/Menu (Sonic 3).asm"
+Snd_ICZ2:	binclude "data/Sound/SMPS/s3/Music/ICZ2.bin"
+Snd_ICZ1:	binclude "data/Sound/SMPS/s3/Music/ICZ1.bin"
+Snd_LBZ2:	binclude "data/Sound/SMPS/s3/Music/LBZ2.bin"
+Snd_LBZ1:	binclude "data/Sound/SMPS/s3/Music/LBZ1.bin"
+Snd_MHZ1:	binclude "data/Sound/SMPS/s3/Music/MHZ1.bin"
+Snd_MHZ2:	binclude "data/Sound/SMPS/s3/Music/MHZ2.bin"
+Snd_SOZ1:	binclude "data/Sound/SMPS/s3/Music/SOZ1.bin"
+Snd_SOZ2:	binclude "data/Sound/SMPS/s3/Music/SOZ2.bin"
+Snd_LRZ1:	binclude "data/Sound/SMPS/s3/Music/LRZ1.bin"
+Snd_LRZ2:	binclude "data/Sound/SMPS/s3/Music/LRZ2.bin"
+Snd_SSZ:	binclude "data/Sound/SMPS/s3/Music/SSZ (Sonic 3).bin"
+Snd_DEZ1:	binclude "data/Sound/SMPS/s3/Music/DEZ1.bin"
+Snd_DEZ2:	binclude "data/Sound/SMPS/s3/Music/DEZ2.bin"
+Snd_Minib_SK:	binclude "data/Sound/SMPS/s3/Music/Miniboss (Sonic & Knuckles).bin"
+Snd_Boss:	binclude "data/Sound/SMPS/s3/Music/Zone Boss.bin"
+Snd_PachBonus:	binclude "data/Sound/SMPS/s3/Music/Pachinko.bin"
+Snd_SpecialS:	binclude "data/Sound/SMPS/s3/Music/Special Stage.bin"
+Snd_Results:	binclude "data/Sound/SMPS/s3/Music/Level Outro.bin"
+Snd_Menu:	binclude "data/Sound/SMPS/s3/Music/Menu (Sonic 3).bin"
 
 	finishBank
 
@@ -118103,24 +117855,24 @@ Snd_Menu:	include "Sound/Music/Menu (Sonic 3).asm"
 ; Music Bank 4
 ; ---------------------------------------------------------------------------
 Snd_Bank4_Start:	startBank
-Snd_SlotBonus:	include "Sound/Music/Slots.asm"
-Snd_GumBonus:	include "Sound/Music/Gum Ball Machine.asm"
-Snd_Knux:	include "Sound/Music/Knuckles (Sonic 3).asm"
-Snd_ALZ:	include "Sound/Music/Azure Lake.asm"
-Snd_BPZ:	include "Sound/Music/Balloon Park.asm"
-Snd_DPZ:	include "Sound/Music/Desert Palace.asm"
-Snd_CGZ:	include "Sound/Music/Chrome Gadget.asm"
-Snd_EMZ:	include "Sound/Music/Endless Mine.asm"
-Snd_Title:	include "Sound/Music/Title (Sonic 3).asm"
-Snd_S3Credits:	include "Sound/Music/Credits (Sonic 3).asm"
-Snd_GameOver:	include "Sound/Music/Game Over.asm"
-Snd_Continue:	include "Sound/Music/Continue (Sonic 3).asm"
-Snd_1UP:	include "Sound/Music/1UP (Sonic 3).asm"
-Snd_Emerald:	include "Sound/Music/Chaos Emerald.asm"
-Snd_Invic:	include "Sound/Music/Invincible (Sonic 3).asm"
-Snd_2PMenu:	include "Sound/Music/Competition Menu.asm"
-Snd_Drown:	include "Sound/Music/Countdown.asm"
-Snd_PresSega:	include "Sound/Music/Game Complete (Sonic 3).asm"
+Snd_SlotBonus:	binclude "data/Sound/SMPS/s3/Music/Slots.bin"
+Snd_GumBonus:	binclude "data/Sound/SMPS/s3/Music/Gum Ball Machine.bin"
+Snd_Knux:	binclude "data/Sound/SMPS/s3/Music/Knuckles (Sonic 3).bin"
+Snd_ALZ:	binclude "data/Sound/SMPS/s3/Music/Azure Lake.bin"
+Snd_BPZ:	binclude "data/Sound/SMPS/s3/Music/Balloon Park.bin"
+Snd_DPZ:	binclude "data/Sound/SMPS/s3/Music/Desert Palace.bin"
+Snd_CGZ:	binclude "data/Sound/SMPS/s3/Music/Chrome Gadget.bin"
+Snd_EMZ:	binclude "data/Sound/SMPS/s3/Music/Endless Mine.bin"
+Snd_Title:	binclude "data/Sound/SMPS/s3/Music/Title (Sonic 3).bin"
+Snd_S3Credits:	binclude "data/Sound/SMPS/s3/Music/Credits (Sonic 3).bin"
+Snd_GameOver:	binclude "data/Sound/SMPS/s3/Music/Game Over.bin"
+Snd_Continue:	binclude "data/Sound/SMPS/s3/Music/Continue (Sonic 3).bin"
+Snd_1UP:	binclude "data/Sound/SMPS/s3/Music/1UP (Sonic 3).bin"
+Snd_Emerald:	binclude "data/Sound/SMPS/s3/Music/Chaos Emerald.bin"
+Snd_Invic:	binclude "data/Sound/SMPS/s3/Music/Invincible (Sonic 3).bin"
+Snd_2PMenu:	binclude "data/Sound/SMPS/s3/Music/Competition Menu.bin"
+Snd_Drown:	binclude "data/Sound/SMPS/s3/Music/Countdown.bin"
+Snd_PresSega:	binclude "data/Sound/SMPS/s3/Music/Game Complete (Sonic 3).bin"
 
 	finishBank
 
@@ -118132,19 +117884,19 @@ Snd_PresSega:	include "Sound/Music/Game Complete (Sonic 3).asm"
 ; ---------------------------------------------------------------------------
 DacBank1:	startDACBank
 
-DAC_86_Data:			include "Sound/DAC/generated/86.inc"
-DAC_81_Data:			include "Sound/DAC/generated/81.inc"
-DAC_82_83_84_85_Data:		include "Sound/DAC/generated/82-85.inc"
-DAC_94_95_96_97_Data:		include "Sound/DAC/generated/94-97.inc"
-DAC_90_91_92_93_Data:		include "Sound/DAC/generated/90-93.inc"
-DAC_88_Data:			include "Sound/DAC/generated/88.inc"
-DAC_8A_8B_Data:			include "Sound/DAC/generated/8A-8B.inc"
-DAC_8C_Data:			include "Sound/DAC/generated/8C.inc"
-DAC_8D_8E_Data:			include "Sound/DAC/generated/8D-8E.inc"
-DAC_87_Data:			include "Sound/DAC/generated/87.inc"
-DAC_8F_Data:			include "Sound/DAC/generated/8F.inc"
-DAC_89_Data:			include "Sound/DAC/generated/89.inc"
-DAC_98_99_9A_Data:		include "Sound/DAC/generated/98-9A.inc"
+DAC_86_Data:			include "Sound/DAC/metadata/86.inc"
+DAC_81_Data:			include "Sound/DAC/metadata/81.inc"
+DAC_82_83_84_85_Data:		include "Sound/DAC/metadata/82-85.inc"
+DAC_94_95_96_97_Data:		include "Sound/DAC/metadata/94-97.inc"
+DAC_90_91_92_93_Data:		include "Sound/DAC/metadata/90-93.inc"
+DAC_88_Data:			include "Sound/DAC/metadata/88.inc"
+DAC_8A_8B_Data:			include "Sound/DAC/metadata/8A-8B.inc"
+DAC_8C_Data:			include "Sound/DAC/metadata/8C.inc"
+DAC_8D_8E_Data:			include "Sound/DAC/metadata/8D-8E.inc"
+DAC_87_Data:			include "Sound/DAC/metadata/87.inc"
+DAC_8F_Data:			include "Sound/DAC/metadata/8F.inc"
+DAC_89_Data:			include "Sound/DAC/metadata/89.inc"
+DAC_98_99_9A_Data:		include "Sound/DAC/metadata/98-9A.inc"
 
 	finishBank
 
@@ -118157,22 +117909,22 @@ DAC_98_99_9A_Data:		include "Sound/DAC/generated/98-9A.inc"
 ; ---------------------------------------------------------------------------
 DacBank2:	startDACBank
 
-DAC_9B_Data:			include "Sound/DAC/generated/9B.inc"
-DAC_9C_Data:			include "Sound/DAC/generated/9C.inc"
-DAC_9D_Data:			include "Sound/DAC/generated/9D.inc"
-DAC_9E_Data:			include "Sound/DAC/generated/9E.inc"
-DAC_9F_Data:			include "Sound/DAC/generated/9F.inc"
-DAC_A0_Data:			include "Sound/DAC/generated/A0.inc"
-DAC_A1_Data:			include "Sound/DAC/generated/A1.inc"
-DAC_A2_Data:			include "Sound/DAC/generated/A2.inc"
-DAC_A3_Data:			include "Sound/DAC/generated/A3.inc"
-DAC_A4_Data:			include "Sound/DAC/generated/A4.inc"
-DAC_A5_Data:			include "Sound/DAC/generated/A5.inc"
-DAC_A6_Data:			include "Sound/DAC/generated/A6.inc"
-DAC_A7_Data:			include "Sound/DAC/generated/A7.inc"
-DAC_A8_Data:			include "Sound/DAC/generated/A8.inc"
-DAC_A9_Data:			include "Sound/DAC/generated/A9.inc"
-DAC_AA_Data:			include "Sound/DAC/generated/AA.inc"
+DAC_9B_Data:			include "Sound/DAC/metadata/9B.inc"
+DAC_9C_Data:			include "Sound/DAC/metadata/9C.inc"
+DAC_9D_Data:			include "Sound/DAC/metadata/9D.inc"
+DAC_9E_Data:			include "Sound/DAC/metadata/9E.inc"
+DAC_9F_Data:			include "Sound/DAC/metadata/9F.inc"
+DAC_A0_Data:			include "Sound/DAC/metadata/A0.inc"
+DAC_A1_Data:			include "Sound/DAC/metadata/A1.inc"
+DAC_A2_Data:			include "Sound/DAC/metadata/A2.inc"
+DAC_A3_Data:			include "Sound/DAC/metadata/A3.inc"
+DAC_A4_Data:			include "Sound/DAC/metadata/A4.inc"
+DAC_A5_Data:			include "Sound/DAC/metadata/A5.inc"
+DAC_A6_Data:			include "Sound/DAC/metadata/A6.inc"
+DAC_A7_Data:			include "Sound/DAC/metadata/A7.inc"
+DAC_A8_Data:			include "Sound/DAC/metadata/A8.inc"
+DAC_A9_Data:			include "Sound/DAC/metadata/A9.inc"
+DAC_AA_Data:			include "Sound/DAC/metadata/AA.inc"
 
 	finishBank
 
@@ -118181,25 +117933,25 @@ DAC_AA_Data:			include "Sound/DAC/generated/AA.inc"
 ; ---------------------------------------------------------------------------
 DacBank3:	startDACBank
 
-DAC_AB_Data:			include "Sound/DAC/generated/AB.inc"
-DAC_AC_Data:			include "Sound/DAC/generated/AC.inc"
-DAC_AD_AE_Data:			include "Sound/DAC/generated/AD-AE.inc"
-DAC_AF_B0_Data:			include "Sound/DAC/generated/AF-B0.inc"
-DAC_Unused_Data:		include "Sound/DAC/generated/Unused.inc"
-DAC_B1_Data:			include "Sound/DAC/generated/B1.inc"
-DAC_B2_B3_Data:			include "Sound/DAC/generated/B2-B3 (Sonic 3).inc"
-DAC_B4_C1_C2_C3_C4_Data:	include "Sound/DAC/generated/B4C1-C4.inc"
-DAC_B5_Data:			include "Sound/DAC/generated/B5.inc"
-DAC_B6_Data:			include "Sound/DAC/generated/B6.inc"
-DAC_B7_Data:			include "Sound/DAC/generated/B7.inc"
-DAC_B8_B9_Data:			include "Sound/DAC/generated/B8-B9.inc"
-DAC_BA_Data:			include "Sound/DAC/generated/BA.inc"
-DAC_BB_Data:			include "Sound/DAC/generated/BB.inc"
-DAC_BC_Data:			include "Sound/DAC/generated/BC.inc"
-DAC_BD_Data:			include "Sound/DAC/generated/BD.inc"
-DAC_BE_Data:			include "Sound/DAC/generated/BE.inc"
-DAC_BF_Data:			include "Sound/DAC/generated/BF.inc"
-DAC_C0_Data:			include "Sound/DAC/generated/C0.inc"
+DAC_AB_Data:			include "Sound/DAC/metadata/AB.inc"
+DAC_AC_Data:			include "Sound/DAC/metadata/AC.inc"
+DAC_AD_AE_Data:			include "Sound/DAC/metadata/AD-AE.inc"
+DAC_AF_B0_Data:			include "Sound/DAC/metadata/AF-B0.inc"
+DAC_Unused_Data:		include "Sound/DAC/metadata/Unused.inc"
+DAC_B1_Data:			include "Sound/DAC/metadata/B1.inc"
+DAC_B2_B3_Data:			include "Sound/DAC/metadata/B2-B3 (Sonic 3).inc"
+DAC_B4_C1_C2_C3_C4_Data:	include "Sound/DAC/metadata/B4C1-C4.inc"
+DAC_B5_Data:			include "Sound/DAC/metadata/B5.inc"
+DAC_B6_Data:			include "Sound/DAC/metadata/B6.inc"
+DAC_B7_Data:			include "Sound/DAC/metadata/B7.inc"
+DAC_B8_B9_Data:			include "Sound/DAC/metadata/B8-B9.inc"
+DAC_BA_Data:			include "Sound/DAC/metadata/BA.inc"
+DAC_BB_Data:			include "Sound/DAC/metadata/BB.inc"
+DAC_BC_Data:			include "Sound/DAC/metadata/BC.inc"
+DAC_BD_Data:			include "Sound/DAC/metadata/BD.inc"
+DAC_BE_Data:			include "Sound/DAC/metadata/BE.inc"
+DAC_BF_Data:			include "Sound/DAC/metadata/BF.inc"
+DAC_C0_Data:			include "Sound/DAC/metadata/C0.inc"
 
 	finishBank
 
@@ -118208,202 +117960,202 @@ DAC_C0_Data:			include "Sound/DAC/generated/C0.inc"
 ; ===========================================================================
 SndBank:			startBank
 
-SEGA_PCM:	include "Sound/PCM/generated/Sega.inc"
+SEGA_PCM:	include "Sound/PCM/metadata/Sega.inc"
 
 		align 2
-Sound_33:	include "Sound/SFX/33 - Ring (Right).asm"
-Sound_34:	include "Sound/SFX/34 - Ring (Left).asm"
-Sound_35:	include "Sound/SFX/35 - Death.asm"
-Sound_36:	include "Sound/SFX/36 - Skid.asm"
-Sound_37:	include "Sound/SFX/37 - Spike Hit.asm"
-Sound_38:	include "Sound/SFX/38 - Bubble.asm"
-Sound_39:	include "Sound/SFX/39 - Splash.asm"
-Sound_3A:	include "Sound/SFX/3A - Shield.asm"
-Sound_3B:	include "Sound/SFX/3B - Drown.asm"
-Sound_3C:	include "Sound/SFX/3C - Roll.asm"
-Sound_3D:	include "Sound/SFX/3D - Break.asm"
-Sound_3E:	include "Sound/SFX/3E - Fire Shield.asm"
-Sound_3F:	include "Sound/SFX/3F - Bubble Shield.asm"
-Sound_40:	include "Sound/SFX/40 - Unknown Shield.asm"
-Sound_41:	include "Sound/SFX/41 - Lightning Shield.asm"
-Sound_42:	include "Sound/SFX/42 - Insta Shield Attack.asm"
-Sound_43:	include "Sound/SFX/43 - Fire Shield Attack.asm"
-Sound_44:	include "Sound/SFX/44 - Bubble Shield Attack.asm"
-Sound_45:	include "Sound/SFX/45 - Lightning Shield Attack.asm"
-Sound_46:	include "Sound/SFX/46 - Whistle.asm"
-Sound_47:	include "Sound/SFX/47 - Sand Wall Rise.asm"
-Sound_48:	include "Sound/SFX/48 - Blast.asm"
-Sound_49:	include "Sound/SFX/49 - Thump.asm"
-Sound_4A:	include "Sound/SFX/4A - Grab.asm"
-Sound_4B:	include "Sound/SFX/4B - Waterfall Splash.asm"
-Sound_4C:	include "Sound/SFX/4C - Glide Land.asm"
-Sound_4D:	include "Sound/SFX/4D - Projectile.asm"
-Sound_4E:	include "Sound/SFX/4E - Missile Explode.asm"
-Sound_4F:	include "Sound/SFX/4F - Flamethrower (Quiet).asm"
-Sound_50:	include "Sound/SFX/50 - Boss Activate.asm"
-Sound_51:	include "Sound/SFX/51 - Missile Throw.asm"
-Sound_52:	include "Sound/SFX/52 - Spike Move.asm"
-Sound_53:	include "Sound/SFX/53 - Charging.asm"
-Sound_54:	include "Sound/SFX/54 - Boss Laser.asm"
-Sound_55:	include "Sound/SFX/55 - Block Conveyor.asm"
-Sound_56:	include "Sound/SFX/56 - Flip Bridge.asm"
-Sound_57:	include "Sound/SFX/57 - Geyser.asm"
-Sound_58:	include "Sound/SFX/58 - Fan Latch.asm"
-Sound_59:	include "Sound/SFX/59 - Collapse.asm"
-Sound_5A:	include "Sound/SFX/5A - Unknown Charge.asm"
-Sound_5B:	include "Sound/SFX/5B - Switch.asm"
-Sound_5C:	include "Sound/SFX/5C - Mecha Spark.asm"
-Sound_5D:	include "Sound/SFX/5D - Floor Thump.asm"
-Sound_5E:	include "Sound/SFX/5E - Laser.asm"
-Sound_5F:	include "Sound/SFX/5F - Crash.asm"
-Sound_60:	include "Sound/SFX/60 - Boss Zoom.asm"
-Sound_61:	include "Sound/SFX/61 - Boss Hit Floor.asm"
-Sound_62:	include "Sound/SFX/62 - Jump.asm"
-Sound_63:	include "Sound/SFX/63 - Star Post.asm"
-Sound_64:	include "Sound/SFX/64 - Pulley Grab.asm"
-Sound_65:	include "Sound/SFX/65 - Blue Sphere.asm"
-Sound_66:	include "Sound/SFX/66 - All Spheres Collected.asm"
-Sound_67:	include "Sound/SFX/67 - Level Projectile.asm"
-Sound_68:	include "Sound/SFX/68 - Perfect.asm"
-Sound_69:	include "Sound/SFX/69 - Push Block.asm"
-Sound_6A:	include "Sound/SFX/6A - Goal.asm"
-Sound_6B:	include "Sound/SFX/6B - Action Block.asm"
-Sound_6C:	include "Sound/SFX/6C - Splash 2.asm"
-Sound_6D:	include "Sound/SFX/6D - Unknown Shift.asm"
-Sound_6E:	include "Sound/SFX/6E - Boss Hit.asm"
-Sound_6F:	include "Sound/SFX/6F - Rumble 2.asm"
-Sound_70:	include "Sound/SFX/70 - Lava Ball.asm"
-Sound_71:	include "Sound/SFX/71 - Shield 2.asm"
-Sound_72:	include "Sound/SFX/72 - Hoverpad.asm"
-Sound_73:	include "Sound/SFX/73 - Transporter.asm"
-Sound_74:	include "Sound/SFX/74 - Tunnel Booster.asm"
-Sound_75:	include "Sound/SFX/75 - Balloon Platform.asm"
-Sound_76:	include "Sound/SFX/76 - Trap Door.asm"
-Sound_77:	include "Sound/SFX/77 - Balloon.asm"
-Sound_78:	include "Sound/SFX/78 - Gravity Machine.asm"
-Sound_79:	include "Sound/SFX/79 - Lightning.asm"
-Sound_7A:	include "Sound/SFX/7A - Boss Magma.asm"
-Sound_7B:	include "Sound/SFX/7B - Small Bumpers.asm"
-Sound_7C:	include "Sound/SFX/7C - Chain Tension.asm"
-Sound_7D:	include "Sound/SFX/7D - Unknown Pump.asm"
-Sound_7E:	include "Sound/SFX/7E - Ground Slide.asm"
-Sound_7F:	include "Sound/SFX/7F - Frost Puff.asm"
-Sound_80:	include "Sound/SFX/80 - Ice Spikes.asm"
-Sound_81:	include "Sound/SFX/81 - Tube Launcher.asm"
-Sound_82:	include "Sound/SFX/82 - Sand Splash.asm"
-Sound_83:	include "Sound/SFX/83 - Bridge Collapse.asm"
-Sound_84:	include "Sound/SFX/84 - Unknown Power-Up.asm"
-Sound_85:	include "Sound/SFX/85 - Unknown Power-Down.asm"
-Sound_86:	include "Sound/SFX/86 - Alarm.asm"
-Sound_87:	include "Sound/SFX/87 - Mushroom Bounce.asm"
-Sound_88:	include "Sound/SFX/88 - Pulley Move.asm"
-Sound_89:	include "Sound/SFX/89 - Weather Machine.asm"
-Sound_8A:	include "Sound/SFX/8A - Bouncy.asm"
-Sound_8B:	include "Sound/SFX/8B - Chop Tree.asm"
-Sound_8C:	include "Sound/SFX/8C - Chop Stuck.asm"
-Sound_8D:	include "Sound/SFX/8D - Unknown Flutter.asm"
-Sound_8E:	include "Sound/SFX/8E - Unknown Revving.asm"
-Sound_8F:	include "Sound/SFX/8F - Door Open.asm"
-Sound_90:	include "Sound/SFX/90 - Door Move.asm"
-Sound_91:	include "Sound/SFX/91 - Door Close.asm"
-Sound_92:	include "Sound/SFX/92 - Ghost Appear.asm"
-Sound_93:	include "Sound/SFX/93 - Boss Recovery.asm"
-Sound_94:	include "Sound/SFX/94 - Chain Tick.asm"
-Sound_95:	include "Sound/SFX/95 - Boss Hand.asm"
-Sound_96:	include "Sound/SFX/96 - Mecha Land.asm"
-Sound_97:	include "Sound/SFX/97 - Enemy Breath.asm"
-Sound_98:	include "Sound/SFX/98 - Boss Projectile.asm"
-Sound_99:	include "Sound/SFX/99 - Unknown Plink.asm"
-Sound_9A:	include "Sound/SFX/9A - Spring Latch.asm"
-Sound_9B:	include "Sound/SFX/9B - Thump Boss (Sonic 3).asm"
-Sound_9C:	include "Sound/SFX/9C - Super Emerald.asm"
-Sound_9D:	include "Sound/SFX/9D - Targeting.asm"
-Sound_9E:	include "Sound/SFX/9E - Clank.asm"
-Sound_9F:	include "Sound/SFX/9F - Super Transform.asm"
-Sound_A0:	include "Sound/SFX/A0 - Missile Shoot.asm"
-Sound_A1:	include "Sound/SFX/A1 - Unknown Ominous.asm"
-Sound_A2:	include "Sound/SFX/A2 - Floor Launcher.asm"
-Sound_A3:	include "Sound/SFX/A3 - Gravity Lift.asm"
-Sound_A4:	include "Sound/SFX/A4 - Mecha Transform.asm"
-Sound_A5:	include "Sound/SFX/A5 - Unknown Rise.asm"
-Sound_A6:	include "Sound/SFX/A6 - Launch Grab.asm"
-Sound_A7:	include "Sound/SFX/A7 - Launch Ready.asm"
-Sound_A8:	include "Sound/SFX/A8 - Energy Zap.asm"
-Sound_A9:	include "Sound/SFX/A9 - Air Ding.asm"
-Sound_AA:	include "Sound/SFX/AA - Bumper.asm"
-Sound_AB:	include "Sound/SFX/AB - Spin Dash.asm"
-Sound_AC:	include "Sound/SFX/AC - Continue.asm"
-Sound_AD:	include "Sound/SFX/AD - Launch Go (Sonic 3).asm"
-Sound_AE:	include "Sound/SFX/AE - Flipper.asm"
-Sound_AF:	include "Sound/SFX/AF - Enter Special Stage.asm"
-Sound_B0:	include "Sound/SFX/B0 - Register.asm"
-Sound_B1:	include "Sound/SFX/B1 - Spring.asm"
-Sound_B2:	include "Sound/SFX/B2 - Error.asm"
-Sound_B3:	include "Sound/SFX/B3 - Big Ring.asm"
-Sound_B4:	include "Sound/SFX/B4 - Explode.asm"
-Sound_B5:	include "Sound/SFX/B5 - Diamonds.asm"
-Sound_B6:	include "Sound/SFX/B6 - Dash.asm"
-Sound_B7:	include "Sound/SFX/B7 - Slot Machine.asm"
-Sound_B8:	include "Sound/SFX/B8 - Signpost.asm"
-Sound_B9:	include "Sound/SFX/B9 - Ring Loss.asm"
-Sound_BA:	include "Sound/SFX/BA - Flying.asm"
-Sound_BB:	include "Sound/SFX/BB - Flying (Tired).asm"
-Sound_BC:	include "Sound/SFX/BC - Slide Skid (Loud).asm"
-Sound_BD:	include "Sound/SFX/BD - Large Ship.asm"
-Sound_BE:	include "Sound/SFX/BE - Robotnik Siren.asm"
-Sound_BF:	include "Sound/SFX/BF - Boss Rotate.asm"
-Sound_C0:	include "Sound/SFX/C0 - Fan (Big).asm"
-Sound_C1:	include "Sound/SFX/C1 - Fan (Small).asm"
-Sound_C2:	include "Sound/SFX/C2 - Flamethrower (Loud).asm"
-Sound_C3:	include "Sound/SFX/C3 - Gravity Tunnel.asm"
-Sound_C4:	include "Sound/SFX/C4 - Boss Panic.asm"
-Sound_C5:	include "Sound/SFX/C5 - Unknown Spin.asm"
-Sound_C6:	include "Sound/SFX/C6 - Wave Hover.asm"
-Sound_C7:	include "Sound/SFX/C7 - Cannon Turn.asm"
-Sound_C8:	include "Sound/SFX/C8 - Slide Skid (Quiet).asm"
-Sound_C9:	include "Sound/SFX/C9 - Spike Balls.asm"
-Sound_CA:	include "Sound/SFX/CA - Light Tunnel.asm"
-Sound_CB:	include "Sound/SFX/CB - Rumble.asm"
-Sound_CC:	include "Sound/SFX/CC - Big Rumble.asm"
-Sound_CD:	include "Sound/SFX/CD - Death Egg Rise (Loud).asm"
-Sound_CE:	include "Sound/SFX/CE - Wind (Quiet).asm"
-Sound_CF:	include "Sound/SFX/CF - Wind (Loud).asm"
-Sound_D0:	include "Sound/SFX/D0 - Rising.asm"
-Sound_D1:	include "Sound/SFX/D1 - Unknown Flutter 2.asm"
-Sound_D2:	include "Sound/SFX/D2 - Gumball Tab.asm"
-Sound_D3:	include "Sound/SFX/D3 - Death Egg Rise (Quiet).asm"
-Sound_D4:	include "Sound/SFX/D4 - Turbine Hum.asm"
-Sound_D5:	include "Sound/SFX/D5 - Lava Fall.asm"
-Sound_D6:	include "Sound/SFX/D6 - Unknown Zap.asm"
-Sound_D7:	include "Sound/SFX/D7 - Conveyor Platform.asm"
-Sound_D8:	include "Sound/SFX/D8 - Unknown Saw.asm"
-Sound_D9:	include "Sound/SFX/D9 - Magnetic Spike.asm"
-Sound_DA:	include "Sound/SFX/DA - Leaf Blower.asm"
-Sound_DB:	include "Sound/SFX/DB - Water Skid.asm"
+Sound_33:	binclude "data/Sound/SMPS/s3/SFX/33 - Ring (Right).bin"
+Sound_34:	binclude "data/Sound/SMPS/s3/SFX/34 - Ring (Left).bin"
+Sound_35:	binclude "data/Sound/SMPS/s3/SFX/35 - Death.bin"
+Sound_36:	binclude "data/Sound/SMPS/s3/SFX/36 - Skid.bin"
+Sound_37:	binclude "data/Sound/SMPS/s3/SFX/37 - Spike Hit.bin"
+Sound_38:	binclude "data/Sound/SMPS/s3/SFX/38 - Bubble.bin"
+Sound_39:	binclude "data/Sound/SMPS/s3/SFX/39 - Splash.bin"
+Sound_3A:	binclude "data/Sound/SMPS/s3/SFX/3A - Shield.bin"
+Sound_3B:	binclude "data/Sound/SMPS/s3/SFX/3B - Drown.bin"
+Sound_3C:	binclude "data/Sound/SMPS/s3/SFX/3C - Roll.bin"
+Sound_3D:	binclude "data/Sound/SMPS/s3/SFX/3D - Break.bin"
+Sound_3E:	binclude "data/Sound/SMPS/s3/SFX/3E - Fire Shield.bin"
+Sound_3F:	binclude "data/Sound/SMPS/s3/SFX/3F - Bubble Shield.bin"
+Sound_40:	binclude "data/Sound/SMPS/s3/SFX/40 - Unknown Shield.bin"
+Sound_41:	binclude "data/Sound/SMPS/s3/SFX/41 - Lightning Shield.bin"
+Sound_42:	binclude "data/Sound/SMPS/s3/SFX/42 - Insta Shield Attack.bin"
+Sound_43:	binclude "data/Sound/SMPS/s3/SFX/43 - Fire Shield Attack.bin"
+Sound_44:	binclude "data/Sound/SMPS/s3/SFX/44 - Bubble Shield Attack.bin"
+Sound_45:	binclude "data/Sound/SMPS/s3/SFX/45 - Lightning Shield Attack.bin"
+Sound_46:	binclude "data/Sound/SMPS/s3/SFX/46 - Whistle.bin"
+Sound_47:	binclude "data/Sound/SMPS/s3/SFX/47 - Sand Wall Rise.bin"
+Sound_48:	binclude "data/Sound/SMPS/s3/SFX/48 - Blast.bin"
+Sound_49:	binclude "data/Sound/SMPS/s3/SFX/49 - Thump.bin"
+Sound_4A:	binclude "data/Sound/SMPS/s3/SFX/4A - Grab.bin"
+Sound_4B:	binclude "data/Sound/SMPS/s3/SFX/4B - Waterfall Splash.bin"
+Sound_4C:	binclude "data/Sound/SMPS/s3/SFX/4C - Glide Land.bin"
+Sound_4D:	binclude "data/Sound/SMPS/s3/SFX/4D - Projectile.bin"
+Sound_4E:	binclude "data/Sound/SMPS/s3/SFX/4E - Missile Explode.bin"
+Sound_4F:	binclude "data/Sound/SMPS/s3/SFX/4F - Flamethrower (Quiet).bin"
+Sound_50:	binclude "data/Sound/SMPS/s3/SFX/50 - Boss Activate.bin"
+Sound_51:	binclude "data/Sound/SMPS/s3/SFX/51 - Missile Throw.bin"
+Sound_52:	binclude "data/Sound/SMPS/s3/SFX/52 - Spike Move.bin"
+Sound_53:	binclude "data/Sound/SMPS/s3/SFX/53 - Charging.bin"
+Sound_54:	binclude "data/Sound/SMPS/s3/SFX/54 - Boss Laser.bin"
+Sound_55:	binclude "data/Sound/SMPS/s3/SFX/55 - Block Conveyor.bin"
+Sound_56:	binclude "data/Sound/SMPS/s3/SFX/56 - Flip Bridge.bin"
+Sound_57:	binclude "data/Sound/SMPS/s3/SFX/57 - Geyser.bin"
+Sound_58:	binclude "data/Sound/SMPS/s3/SFX/58 - Fan Latch.bin"
+Sound_59:	binclude "data/Sound/SMPS/s3/SFX/59 - Collapse.bin"
+Sound_5A:	binclude "data/Sound/SMPS/s3/SFX/5A - Unknown Charge.bin"
+Sound_5B:	binclude "data/Sound/SMPS/s3/SFX/5B - Switch.bin"
+Sound_5C:	binclude "data/Sound/SMPS/s3/SFX/5C - Mecha Spark.bin"
+Sound_5D:	binclude "data/Sound/SMPS/s3/SFX/5D - Floor Thump.bin"
+Sound_5E:	binclude "data/Sound/SMPS/s3/SFX/5E - Laser.bin"
+Sound_5F:	binclude "data/Sound/SMPS/s3/SFX/5F - Crash.bin"
+Sound_60:	binclude "data/Sound/SMPS/s3/SFX/60 - Boss Zoom.bin"
+Sound_61:	binclude "data/Sound/SMPS/s3/SFX/61 - Boss Hit Floor.bin"
+Sound_62:	binclude "data/Sound/SMPS/s3/SFX/62 - Jump.bin"
+Sound_63:	binclude "data/Sound/SMPS/s3/SFX/63 - Star Post.bin"
+Sound_64:	binclude "data/Sound/SMPS/s3/SFX/64 - Pulley Grab.bin"
+Sound_65:	binclude "data/Sound/SMPS/s3/SFX/65 - Blue Sphere.bin"
+Sound_66:	binclude "data/Sound/SMPS/s3/SFX/66 - All Spheres Collected.bin"
+Sound_67:	binclude "data/Sound/SMPS/s3/SFX/67 - Level Projectile.bin"
+Sound_68:	binclude "data/Sound/SMPS/s3/SFX/68 - Perfect.bin"
+Sound_69:	binclude "data/Sound/SMPS/s3/SFX/69 - Push Block.bin"
+Sound_6A:	binclude "data/Sound/SMPS/s3/SFX/6A - Goal.bin"
+Sound_6B:	binclude "data/Sound/SMPS/s3/SFX/6B - Action Block.bin"
+Sound_6C:	binclude "data/Sound/SMPS/s3/SFX/6C - Splash 2.bin"
+Sound_6D:	binclude "data/Sound/SMPS/s3/SFX/6D - Unknown Shift.bin"
+Sound_6E:	binclude "data/Sound/SMPS/s3/SFX/6E - Boss Hit.bin"
+Sound_6F:	binclude "data/Sound/SMPS/s3/SFX/6F - Rumble 2.bin"
+Sound_70:	binclude "data/Sound/SMPS/s3/SFX/70 - Lava Ball.bin"
+Sound_71:	binclude "data/Sound/SMPS/s3/SFX/71 - Shield 2.bin"
+Sound_72:	binclude "data/Sound/SMPS/s3/SFX/72 - Hoverpad.bin"
+Sound_73:	binclude "data/Sound/SMPS/s3/SFX/73 - Transporter.bin"
+Sound_74:	binclude "data/Sound/SMPS/s3/SFX/74 - Tunnel Booster.bin"
+Sound_75:	binclude "data/Sound/SMPS/s3/SFX/75 - Balloon Platform.bin"
+Sound_76:	binclude "data/Sound/SMPS/s3/SFX/76 - Trap Door.bin"
+Sound_77:	binclude "data/Sound/SMPS/s3/SFX/77 - Balloon.bin"
+Sound_78:	binclude "data/Sound/SMPS/s3/SFX/78 - Gravity Machine.bin"
+Sound_79:	binclude "data/Sound/SMPS/s3/SFX/79 - Lightning.bin"
+Sound_7A:	binclude "data/Sound/SMPS/s3/SFX/7A - Boss Magma.bin"
+Sound_7B:	binclude "data/Sound/SMPS/s3/SFX/7B - Small Bumpers.bin"
+Sound_7C:	binclude "data/Sound/SMPS/s3/SFX/7C - Chain Tension.bin"
+Sound_7D:	binclude "data/Sound/SMPS/s3/SFX/7D - Unknown Pump.bin"
+Sound_7E:	binclude "data/Sound/SMPS/s3/SFX/7E - Ground Slide.bin"
+Sound_7F:	binclude "data/Sound/SMPS/s3/SFX/7F - Frost Puff.bin"
+Sound_80:	binclude "data/Sound/SMPS/s3/SFX/80 - Ice Spikes.bin"
+Sound_81:	binclude "data/Sound/SMPS/s3/SFX/81 - Tube Launcher.bin"
+Sound_82:	binclude "data/Sound/SMPS/s3/SFX/82 - Sand Splash.bin"
+Sound_83:	binclude "data/Sound/SMPS/s3/SFX/83 - Bridge Collapse.bin"
+Sound_84:	binclude "data/Sound/SMPS/s3/SFX/84 - Unknown Power-Up.bin"
+Sound_85:	binclude "data/Sound/SMPS/s3/SFX/85 - Unknown Power-Down.bin"
+Sound_86:	binclude "data/Sound/SMPS/s3/SFX/86 - Alarm.bin"
+Sound_87:	binclude "data/Sound/SMPS/s3/SFX/87 - Mushroom Bounce.bin"
+Sound_88:	binclude "data/Sound/SMPS/s3/SFX/88 - Pulley Move.bin"
+Sound_89:	binclude "data/Sound/SMPS/s3/SFX/89 - Weather Machine.bin"
+Sound_8A:	binclude "data/Sound/SMPS/s3/SFX/8A - Bouncy.bin"
+Sound_8B:	binclude "data/Sound/SMPS/s3/SFX/8B - Chop Tree.bin"
+Sound_8C:	binclude "data/Sound/SMPS/s3/SFX/8C - Chop Stuck.bin"
+Sound_8D:	binclude "data/Sound/SMPS/s3/SFX/8D - Unknown Flutter.bin"
+Sound_8E:	binclude "data/Sound/SMPS/s3/SFX/8E - Unknown Revving.bin"
+Sound_8F:	binclude "data/Sound/SMPS/s3/SFX/8F - Door Open.bin"
+Sound_90:	binclude "data/Sound/SMPS/s3/SFX/90 - Door Move.bin"
+Sound_91:	binclude "data/Sound/SMPS/s3/SFX/91 - Door Close.bin"
+Sound_92:	binclude "data/Sound/SMPS/s3/SFX/92 - Ghost Appear.bin"
+Sound_93:	binclude "data/Sound/SMPS/s3/SFX/93 - Boss Recovery.bin"
+Sound_94:	binclude "data/Sound/SMPS/s3/SFX/94 - Chain Tick.bin"
+Sound_95:	binclude "data/Sound/SMPS/s3/SFX/95 - Boss Hand.bin"
+Sound_96:	binclude "data/Sound/SMPS/s3/SFX/96 - Mecha Land.bin"
+Sound_97:	binclude "data/Sound/SMPS/s3/SFX/97 - Enemy Breath.bin"
+Sound_98:	binclude "data/Sound/SMPS/s3/SFX/98 - Boss Projectile.bin"
+Sound_99:	binclude "data/Sound/SMPS/s3/SFX/99 - Unknown Plink.bin"
+Sound_9A:	binclude "data/Sound/SMPS/s3/SFX/9A - Spring Latch.bin"
+Sound_9B:	binclude "data/Sound/SMPS/s3/SFX/9B - Thump Boss (Sonic 3).bin"
+Sound_9C:	binclude "data/Sound/SMPS/s3/SFX/9C - Super Emerald.bin"
+Sound_9D:	binclude "data/Sound/SMPS/s3/SFX/9D - Targeting.bin"
+Sound_9E:	binclude "data/Sound/SMPS/s3/SFX/9E - Clank.bin"
+Sound_9F:	binclude "data/Sound/SMPS/s3/SFX/9F - Super Transform.bin"
+Sound_A0:	binclude "data/Sound/SMPS/s3/SFX/A0 - Missile Shoot.bin"
+Sound_A1:	binclude "data/Sound/SMPS/s3/SFX/A1 - Unknown Ominous.bin"
+Sound_A2:	binclude "data/Sound/SMPS/s3/SFX/A2 - Floor Launcher.bin"
+Sound_A3:	binclude "data/Sound/SMPS/s3/SFX/A3 - Gravity Lift.bin"
+Sound_A4:	binclude "data/Sound/SMPS/s3/SFX/A4 - Mecha Transform.bin"
+Sound_A5:	binclude "data/Sound/SMPS/s3/SFX/A5 - Unknown Rise.bin"
+Sound_A6:	binclude "data/Sound/SMPS/s3/SFX/A6 - Launch Grab.bin"
+Sound_A7:	binclude "data/Sound/SMPS/s3/SFX/A7 - Launch Ready.bin"
+Sound_A8:	binclude "data/Sound/SMPS/s3/SFX/A8 - Energy Zap.bin"
+Sound_A9:	binclude "data/Sound/SMPS/s3/SFX/A9 - Air Ding.bin"
+Sound_AA:	binclude "data/Sound/SMPS/s3/SFX/AA - Bumper.bin"
+Sound_AB:	binclude "data/Sound/SMPS/s3/SFX/AB - Spin Dash.bin"
+Sound_AC:	binclude "data/Sound/SMPS/s3/SFX/AC - Continue.bin"
+Sound_AD:	binclude "data/Sound/SMPS/s3/SFX/AD - Launch Go (Sonic 3).bin"
+Sound_AE:	binclude "data/Sound/SMPS/s3/SFX/AE - Flipper.bin"
+Sound_AF:	binclude "data/Sound/SMPS/s3/SFX/AF - Enter Special Stage.bin"
+Sound_B0:	binclude "data/Sound/SMPS/s3/SFX/B0 - Register.bin"
+Sound_B1:	binclude "data/Sound/SMPS/s3/SFX/B1 - Spring.bin"
+Sound_B2:	binclude "data/Sound/SMPS/s3/SFX/B2 - Error.bin"
+Sound_B3:	binclude "data/Sound/SMPS/s3/SFX/B3 - Big Ring.bin"
+Sound_B4:	binclude "data/Sound/SMPS/s3/SFX/B4 - Explode.bin"
+Sound_B5:	binclude "data/Sound/SMPS/s3/SFX/B5 - Diamonds.bin"
+Sound_B6:	binclude "data/Sound/SMPS/s3/SFX/B6 - Dash.bin"
+Sound_B7:	binclude "data/Sound/SMPS/s3/SFX/B7 - Slot Machine.bin"
+Sound_B8:	binclude "data/Sound/SMPS/s3/SFX/B8 - Signpost.bin"
+Sound_B9:	binclude "data/Sound/SMPS/s3/SFX/B9 - Ring Loss.bin"
+Sound_BA:	binclude "data/Sound/SMPS/s3/SFX/BA - Flying.bin"
+Sound_BB:	binclude "data/Sound/SMPS/s3/SFX/BB - Flying (Tired).bin"
+Sound_BC:	binclude "data/Sound/SMPS/s3/SFX/BC - Slide Skid (Loud).bin"
+Sound_BD:	binclude "data/Sound/SMPS/s3/SFX/BD - Large Ship.bin"
+Sound_BE:	binclude "data/Sound/SMPS/s3/SFX/BE - Robotnik Siren.bin"
+Sound_BF:	binclude "data/Sound/SMPS/s3/SFX/BF - Boss Rotate.bin"
+Sound_C0:	binclude "data/Sound/SMPS/s3/SFX/C0 - Fan (Big).bin"
+Sound_C1:	binclude "data/Sound/SMPS/s3/SFX/C1 - Fan (Small).bin"
+Sound_C2:	binclude "data/Sound/SMPS/s3/SFX/C2 - Flamethrower (Loud).bin"
+Sound_C3:	binclude "data/Sound/SMPS/s3/SFX/C3 - Gravity Tunnel.bin"
+Sound_C4:	binclude "data/Sound/SMPS/s3/SFX/C4 - Boss Panic.bin"
+Sound_C5:	binclude "data/Sound/SMPS/s3/SFX/C5 - Unknown Spin.bin"
+Sound_C6:	binclude "data/Sound/SMPS/s3/SFX/C6 - Wave Hover.bin"
+Sound_C7:	binclude "data/Sound/SMPS/s3/SFX/C7 - Cannon Turn.bin"
+Sound_C8:	binclude "data/Sound/SMPS/s3/SFX/C8 - Slide Skid (Quiet).bin"
+Sound_C9:	binclude "data/Sound/SMPS/s3/SFX/C9 - Spike Balls.bin"
+Sound_CA:	binclude "data/Sound/SMPS/s3/SFX/CA - Light Tunnel.bin"
+Sound_CB:	binclude "data/Sound/SMPS/s3/SFX/CB - Rumble.bin"
+Sound_CC:	binclude "data/Sound/SMPS/s3/SFX/CC - Big Rumble.bin"
+Sound_CD:	binclude "data/Sound/SMPS/s3/SFX/CD - Death Egg Rise (Loud).bin"
+Sound_CE:	binclude "data/Sound/SMPS/s3/SFX/CE - Wind (Quiet).bin"
+Sound_CF:	binclude "data/Sound/SMPS/s3/SFX/CF - Wind (Loud).bin"
+Sound_D0:	binclude "data/Sound/SMPS/s3/SFX/D0 - Rising.bin"
+Sound_D1:	binclude "data/Sound/SMPS/s3/SFX/D1 - Unknown Flutter 2.bin"
+Sound_D2:	binclude "data/Sound/SMPS/s3/SFX/D2 - Gumball Tab.bin"
+Sound_D3:	binclude "data/Sound/SMPS/s3/SFX/D3 - Death Egg Rise (Quiet).bin"
+Sound_D4:	binclude "data/Sound/SMPS/s3/SFX/D4 - Turbine Hum.bin"
+Sound_D5:	binclude "data/Sound/SMPS/s3/SFX/D5 - Lava Fall.bin"
+Sound_D6:	binclude "data/Sound/SMPS/s3/SFX/D6 - Unknown Zap.bin"
+Sound_D7:	binclude "data/Sound/SMPS/s3/SFX/D7 - Conveyor Platform.bin"
+Sound_D8:	binclude "data/Sound/SMPS/s3/SFX/D8 - Unknown Saw.bin"
+Sound_D9:	binclude "data/Sound/SMPS/s3/SFX/D9 - Magnetic Spike.bin"
+Sound_DA:	binclude "data/Sound/SMPS/s3/SFX/DA - Leaf Blower.bin"
+Sound_DB:	binclude "data/Sound/SMPS/s3/SFX/DB - Water Skid.bin"
 
 	finishBank
 
 		align $8000
 ArtUnc_Sonic:
-		binclude "General/Sprites/Sonic/Art/Sonic.unc"
+		binclude "data/General/Sprites/Sonic/Art/Sonic.unc"
 		even
 ArtUnc_Tails:
-		binclude "General/Sprites/Tails/Art/Tails.unc"
+		binclude "data/General/Sprites/Tails/Art/Tails.unc"
 		even
 ArtUnc_Tails_Tail:
-		binclude "General/Sprites/Tails/Art/Tails tails.unc"
+		binclude "data/General/Sprites/Tails/Art/Tails tails.unc"
 		even
 ArtUnc_Sonic2P:
-		binclude "General/Sprites/Sonic/Art/Sonic 2P.unc"
+		binclude "data/General/Sprites/Sonic/Art/Sonic 2P.unc"
 		even
 ArtUnc_Tails2P:
-		binclude "General/Sprites/Tails/Art/Tails 2P.unc"
+		binclude "data/General/Sprites/Tails/Art/Tails 2P.unc"
 		even
 ArtUnc_Tails2P_Tail:
-		binclude "General/Sprites/Tails/Art/Tails tails 2P.unc"
+		binclude "data/General/Sprites/Tails/Art/Tails tails 2P.unc"
 		even
 ArtUnc_Knuckles2P:
-		binclude "General/Sprites/Knuckles/Art/Knuckles 2P.unc"
+		binclude "data/General/Sprites/Knuckles/Art/Knuckles 2P.unc"
 		even
 Map_Sonic:
 		include "General/Sprites/Sonic/Map - Sonic S3.asm"
@@ -118418,16 +118170,16 @@ Map_Tails_Tail:
 PLC_Tails_Tail:
 		include "General/Sprites/Tails/DPLC - Tails tails.asm"
 ICZSnowboard_Slope1:
-		binclude "Levels/ICZ/Misc/ICZ Snowboard Slope 1.bin"
+		binclude "data/Levels/ICZ/Misc/ICZ Snowboard Slope 1.bin"
 		even
 ICZSnowboard_Slope2:
-		binclude "Levels/ICZ/Misc/ICZ Snowboard Slope 2.bin"
+		binclude "data/Levels/ICZ/Misc/ICZ Snowboard Slope 2.bin"
 		even
 ArtUnc_SonicSnowboard:
-		binclude "General/Sprites/Sonic/Art/Sonic Snowboarding.unc"
+		binclude "data/General/Sprites/Sonic/Art/Sonic Snowboarding.unc"
 		even
 ArtUnc_Snowboard:
-		binclude "General/Sprites/Snowboard/Snowboard.unc"
+		binclude "data/General/Sprites/Snowboard/Snowboard.unc"
 		even
 Map_SonicSnowboard:
 		include "General/Sprites/Sonic/Map - Sonic Snowboarding.asm"
@@ -118438,203 +118190,203 @@ Map_Snowboard:
 DPLC_Snowboard:
 		include "General/Sprites/Snowboard/DPLC - Snowboard.asm"
 ArtNem_AIZIntroSprites:
-		binclude "Levels/AIZ/Nemesis Art/Intro Waves.nem"
+		binclude "data/Levels/AIZ/Nemesis Art/Intro Waves.nem"
 		even
 ArtNem_SurfboardSplash:
-		binclude "General/Sprites/Surfboard/Surfboard Splash.nem"
+		binclude "data/General/Sprites/Surfboard/Surfboard Splash.nem"
 		even
 ArtNem_Surfboard:
-		binclude "General/Sprites/Surfboard/Surfboard.nem"
+		binclude "data/General/Sprites/Surfboard/Surfboard.nem"
 		even
 ArtUnc_Invincibility:
-		binclude "General/Sprites/Shields/Invincibility.unc"
+		binclude "data/General/Sprites/Shields/Invincibility.unc"
 ArtUnc_Invincibility_end:
 		even
 ArtUnc_DashDust:
-		binclude "General/Sprites/Dash Dust/Dash Dust.unc"
+		binclude "data/General/Sprites/Dash Dust/Dash Dust.unc"
 		even
 ArtUnc_SuperSonic_Stars:
-		binclude "General/Sprites/Shields/Super Sonic Stars.unc"
+		binclude "data/General/Sprites/Shields/Super Sonic Stars.unc"
 		even
 ArtUnc_InstaShield:
-		binclude "General/Sprites/Shields/Insta-Shield.unc"
+		binclude "data/General/Sprites/Shields/Insta-Shield.unc"
 		even
 ArtUnc_FireShield:
-		binclude "General/Sprites/Shields/Fire Shield.unc"
+		binclude "data/General/Sprites/Shields/Fire Shield.unc"
 		even
 ArtUnc_LightningShield:
-		binclude "General/Sprites/Shields/Lightning Shield.unc"
+		binclude "data/General/Sprites/Shields/Lightning Shield.unc"
 		even
 ArtUnc_LightningShield_Sparks:
-		binclude "General/Sprites/Shields/Sparks.unc"
+		binclude "data/General/Sprites/Shields/Sparks.unc"
 ArtUnc_LightningShield_Sparks_end:
 		even
 ArtUnc_BubbleShield:
-		binclude "General/Sprites/Shields/Bubble Shield.unc"
+		binclude "data/General/Sprites/Shields/Bubble Shield.unc"
 		even
 ArtNem_2PDashdust:
-		binclude "General/2P Zone/Nemesis Art/Spindash Dust.nem"
+		binclude "data/General/2P Zone/Nemesis Art/Spindash Dust.nem"
 		even
 MapEni_S3TitleSonic1:
-		binclude "General/Title/Enigma Map/S3 Sonic 1.eni"
+		binclude "data/General/Title/Enigma Map/S3 Sonic 1.eni"
 		even
 MapEni_S3TitleSonic2:
-		binclude "General/Title/Enigma Map/S3 Sonic 2.eni"
+		binclude "data/General/Title/Enigma Map/S3 Sonic 2.eni"
 		even
 MapEni_S3TitleSonic3:
-		binclude "General/Title/Enigma Map/S3 Sonic 3.eni"
+		binclude "data/General/Title/Enigma Map/S3 Sonic 3.eni"
 		even
 MapEni_S3TitleSonic4:
-		binclude "General/Title/Enigma Map/S3 Sonic 4.eni"
+		binclude "data/General/Title/Enigma Map/S3 Sonic 4.eni"
 		even
 MapEni_S3TitleSonic5:
-		binclude "General/Title/Enigma Map/S3 Sonic 5.eni"
+		binclude "data/General/Title/Enigma Map/S3 Sonic 5.eni"
 		even
 MapEni_S3TitleSonic6:
-		binclude "General/Title/Enigma Map/S3 Sonic 6.eni"
+		binclude "data/General/Title/Enigma Map/S3 Sonic 6.eni"
 		even
 MapEni_S3TitleSonic7:
-		binclude "General/Title/Enigma Map/S3 Sonic 7.eni"
+		binclude "data/General/Title/Enigma Map/S3 Sonic 7.eni"
 		even
 MapEni_S3TitleSonic8:
-		binclude "General/Title/Enigma Map/S3 Sonic 8.eni"
+		binclude "data/General/Title/Enigma Map/S3 Sonic 8.eni"
 		even
 MapEni_S3TitleSonic9:
-		binclude "General/Title/Enigma Map/S3 Sonic 9.eni"
+		binclude "data/General/Title/Enigma Map/S3 Sonic 9.eni"
 		even
 MapEni_S3TitleSonicA:
-		binclude "General/Title/Enigma Map/S3 Sonic A.eni"
+		binclude "data/General/Title/Enigma Map/S3 Sonic A.eni"
 		even
 MapEni_S3TitleSonicB:
-		binclude "General/Title/Enigma Map/S3 Sonic B.eni"
+		binclude "data/General/Title/Enigma Map/S3 Sonic B.eni"
 		even
 MapEni_S3TitleSonicC:
-		binclude "General/Title/Enigma Map/S3 Sonic C.eni"
+		binclude "data/General/Title/Enigma Map/S3 Sonic C.eni"
 		even
 MapEni_S3TitleSonicD:
-		binclude "General/Title/Enigma Map/S3 Sonic D.eni"
+		binclude "data/General/Title/Enigma Map/S3 Sonic D.eni"
 		even
 MapEni_S3TitleBg:
-		binclude "General/Title/Enigma Map/S3 BG.eni"
+		binclude "data/General/Title/Enigma Map/S3 BG.eni"
 		even
 Map_S3TitleBanner:
 		include "General/Title/Map - S3 Banner.asm"
 ArtNem_Title_S3Banner:
-		binclude "General/Title/Nemesis Art/S3 Banner.nem"
+		binclude "data/General/Title/Nemesis Art/S3 Banner.nem"
 		even
 ArtKos_S3TitleSonic1:
-		binclude "General/Title/Kosinski Art/S3 Sonic 1.kos"
+		binclude "data/General/Title/Kosinski Art/S3 Sonic 1.kos"
 		even
 ArtKos_S3TitleSonic8:
-		binclude "General/Title/Kosinski Art/S3 Sonic 8.kos"
+		binclude "data/General/Title/Kosinski Art/S3 Sonic 8.kos"
 		even
 ArtKos_S3TitleSonic9:
-		binclude "General/Title/Kosinski Art/S3 Sonic 9.kos"
+		binclude "data/General/Title/Kosinski Art/S3 Sonic 9.kos"
 		even
 ArtKos_S3TitleSonicA:
-		binclude "General/Title/Kosinski Art/S3 Sonic A.kos"
+		binclude "data/General/Title/Kosinski Art/S3 Sonic A.kos"
 		even
 ArtKos_S3TitleSonicB:
-		binclude "General/Title/Kosinski Art/S3 Sonic B.kos"
+		binclude "data/General/Title/Kosinski Art/S3 Sonic B.kos"
 		even
 ArtKos_S3TitleSonicC:
-		binclude "General/Title/Kosinski Art/S3 Sonic C.kos"
+		binclude "data/General/Title/Kosinski Art/S3 Sonic C.kos"
 		even
 ArtKos_S3TitleSonicD:
-		binclude "General/Title/Kosinski Art/S3 Sonic D.kos"
+		binclude "data/General/Title/Kosinski Art/S3 Sonic D.kos"
 		align $100
 ArtNem_GrayButton:
-		binclude "General/Sprites/Buttons/Gray Button.nem"
+		binclude "data/General/Sprites/Buttons/Gray Button.nem"
 		even
 ArtNem_VerticalSpring:
-		binclude "General/Sprites/Level Misc/Vertical Spring.nem"
+		binclude "data/General/Sprites/Level Misc/Vertical Spring.nem"
 		even
 ArtNem_HorizontalSpring:
-		binclude "General/Sprites/Level Misc/Horizontal Spring.nem"
+		binclude "data/General/Sprites/Level Misc/Horizontal Spring.nem"
 		even
 ArtNem_DiagonalSpring:
-		binclude "General/Sprites/Level Misc/Diagonal Spring.nem"
+		binclude "data/General/Sprites/Level Misc/Diagonal Spring.nem"
 		even
 ArtNem_HUDText:
-		binclude "General/Sprites/HUD Icon/HUD Text.nem"
+		binclude "data/General/Sprites/HUD Icon/HUD Text.nem"
 		even
 ArtNem_SonicLifeIcon:
-		binclude "General/Sprites/HUD Icon/Sonic Life Icon.nem"
+		binclude "data/General/Sprites/HUD Icon/Sonic Life Icon.nem"
 		even
 ArtNem_TailsLifeIcon:
-		binclude "General/Sprites/HUD Icon/Tails Life Icon.nem"
+		binclude "data/General/Sprites/HUD Icon/Tails Life Icon.nem"
 		even
 ArtNem_KnucklesLifeIcon:
-		binclude "General/Sprites/HUD Icon/Knuckles Life Icon.nem"
+		binclude "data/General/Sprites/HUD Icon/Knuckles Life Icon.nem"
 		even
 ArtNem_Ring:
-		binclude "General/Sprites/Ring/Ring.nem"
+		binclude "data/General/Sprites/Ring/Ring.nem"
 		even
 ArtNem_Monitors:
-		binclude "General/Sprites/Monitors/Monitors.nem"
+		binclude "data/General/Sprites/Monitors/Monitors.nem"
 		even
 ArtNem_VerticalSpikes:
-		binclude "General/Sprites/Level Misc/Vertical Spikes.nem"
+		binclude "data/General/Sprites/Level Misc/Vertical Spikes.nem"
 		even
 ArtNem_HorizontalSpikes:
-		binclude "General/Sprites/Level Misc/Horizontal Spikes.nem"
+		binclude "data/General/Sprites/Level Misc/Horizontal Spikes.nem"
 		even
 ArtNem_EnemyPoints:
-		binclude "General/Sprites/Enemy Misc/Enemy Points.nem"
+		binclude "data/General/Sprites/Enemy Misc/Enemy Points.nem"
 		even
 ArtNem_StarPost:
-		binclude "General/Sprites/Starpost/Starpost.nem"
+		binclude "data/General/Sprites/Starpost/Starpost.nem"
 		even
 ArtNem_S2Signpost:
-		binclude "General/S2Menu/Nemesis Art/Signpost.nem"
+		binclude "data/General/S2Menu/Nemesis Art/Signpost.nem"
 		even
 ArtNem_Bubbles:
-		binclude "General/Sprites/Bubbles/Bubbles.nem"
+		binclude "data/General/Sprites/Bubbles/Bubbles.nem"
 		even
 ArtNem_GameOver:
-		binclude "General/Sprites/Game Over/GameOver.nem"
+		binclude "data/General/Sprites/Game Over/GameOver.nem"
 		even
 ArtNem_Explosion:
-		binclude "General/Sprites/Enemy Misc/Explosion.nem"
+		binclude "data/General/Sprites/Enemy Misc/Explosion.nem"
 		even
 ArtNem_ContinueTails:
-		binclude "General/S2Menu/Nemesis Art/Tails Continue Sprites.nem"
+		binclude "data/General/S2Menu/Nemesis Art/Tails Continue Sprites.nem"
 		even
 ArtNem_MiniSonic:
-		binclude "General/S2Menu/Nemesis Art/Sonic Continue Icon.nem"
+		binclude "data/General/S2Menu/Nemesis Art/Sonic Continue Icon.nem"
 		even
 ArtNem_MiniTails:
-		binclude "General/S2Menu/Nemesis Art/Tails Continue Icon.nem"
+		binclude "data/General/S2Menu/Nemesis Art/Tails Continue Icon.nem"
 		even
 ArtNem_SpikesSprings:
-		binclude "General/Sprites/Level Misc/SpikesSprings.nem"
+		binclude "data/General/Sprites/Level Misc/SpikesSprings.nem"
 		even
 ArtNem_RingHUDText:
-		binclude "General/Sprites/Ring/RingHUDText.nem"
+		binclude "data/General/Sprites/Ring/RingHUDText.nem"
 		even
 ArtNem_EnemyPtsStarPost:
-		binclude "General/Sprites/Enemy Misc/EnemyPtsStarpost.nem"
+		binclude "data/General/Sprites/Enemy Misc/EnemyPtsStarpost.nem"
 		even
 ArtNem_Seal:
-		binclude "General/Sprites/Animals/Seal.nem"
+		binclude "data/General/Sprites/Animals/Seal.nem"
 		even
 ArtNem_Pig:
-		binclude "General/Sprites/Animals/Pig.nem"
+		binclude "data/General/Sprites/Animals/Pig.nem"
 		even
 ArtNem_BlueFlicky:
-		binclude "General/Sprites/Animals/Blue Flicky.nem"
+		binclude "data/General/Sprites/Animals/Blue Flicky.nem"
 		even
 ArtNem_Chicken:
-		binclude "General/Sprites/Animals/Chicken.nem"
+		binclude "data/General/Sprites/Animals/Chicken.nem"
 		even
 ArtNem_Penguin:
-		binclude "General/Sprites/Animals/Penguin.nem"
+		binclude "data/General/Sprites/Animals/Penguin.nem"
 		even
 ArtNem_Squirrel:
-		binclude "General/Sprites/Animals/Squirrel.nem"
+		binclude "data/General/Sprites/Animals/Squirrel.nem"
 		even
 ArtNem_Rabbit:
-		binclude "General/Sprites/Animals/Rabbit.nem"
+		binclude "data/General/Sprites/Animals/Rabbit.nem"
 		even
 Map_RobotnikShip:
 		include "General/Sprites/Robotnik/Map - Robotnik Ship.asm"
@@ -118974,486 +118726,486 @@ Map_LBZFinalBoss1:
 Map_LBZDeathEggSmall:
 		include "Levels/LBZ/Misc Object Data/Map - Death Egg Small.asm"
 Pal_MGZFadeCNZ:
-		binclude "Levels/MGZ/Palettes/Fade to CNZ.bin"
+		binclude "data/Levels/MGZ/Palettes/Fade to CNZ.bin"
 		even
 Map_LBZFinalBoss2:
 		include "Levels/LBZ/Misc Object Data/Map - Final Boss 2.asm"
 ArtNem_AIZMiniboss:
-		binclude "Levels/AIZ/Nemesis Art/Miniboss.nem"
+		binclude "data/Levels/AIZ/Nemesis Art/Miniboss.nem"
 		even
 ArtKosM_AIZEndBoss:
-		binclude "Levels/AIZ/KosinskiM Art/End Boss.kosm"
+		binclude "data/Levels/AIZ/KosinskiM Art/End Boss.kosm"
 		even
 ArtNem_AIZMinibossSmall:
-		binclude "Levels/AIZ/Nemesis Art/Miniboss Small.nem"
+		binclude "data/Levels/AIZ/Nemesis Art/Miniboss Small.nem"
 		even
 ArtUnc_AIZRhinobot:
-		binclude "General/Sprites/Rhinobot/Rhinobot.unc"
+		binclude "data/General/Sprites/Rhinobot/Rhinobot.unc"
 		even
 ArtKosM_AIZ_Bloominator:
-		binclude "General/Sprites/Bloominator/Bloominator.kosm"
+		binclude "data/General/Sprites/Bloominator/Bloominator.kosm"
 		even
 ArtKosM_AIZ_MonkeyDude:
-		binclude "General/Sprites/Monkey Dude/Monkey Dude.kosm"
+		binclude "data/General/Sprites/Monkey Dude/Monkey Dude.kosm"
 		even
 ArtKosM_AIZ_CaterkillerJr:
-		binclude "General/Sprites/Caterkiller Jr/Caterkiller Jr.kosm"
+		binclude "data/General/Sprites/Caterkiller Jr/Caterkiller Jr.kosm"
 		even
 ArtNem_HCZMiniboss:
-		binclude "Levels/HCZ/Nemesis Art/Miniboss.nem"
+		binclude "data/Levels/HCZ/Nemesis Art/Miniboss.nem"
 		even
 ArtNem_HCZEndBoss:
-		binclude "Levels/HCZ/Nemesis Art/End Boss.nem"
+		binclude "data/Levels/HCZ/Nemesis Art/End Boss.nem"
 		even
 ArtNem_HCZDragonfly:
-		binclude "General/Sprites/Buggernaut/Buggernaut.nem"
+		binclude "data/General/Sprites/Buggernaut/Buggernaut.nem"
 		even
 ArtKosM_Jawz:
-		binclude "General/Sprites/Jawz/Jawz.kosm"
+		binclude "data/General/Sprites/Jawz/Jawz.kosm"
 		even
 ArtKosM_MegaChopper:
-		binclude "General/Sprites/Mega Chopper/Mega Chopper.kosm"
+		binclude "data/General/Sprites/Mega Chopper/Mega Chopper.kosm"
 		even
 ArtKosM_Blastoid:
-		binclude "General/Sprites/Blastoid/Blastoid.kosm"
+		binclude "data/General/Sprites/Blastoid/Blastoid.kosm"
 		even
 ArtKosM_TurboSpiker:
-		binclude "General/Sprites/Turbo Spiker/Turbo Spiker.kosm"
+		binclude "data/General/Sprites/Turbo Spiker/Turbo Spiker.kosm"
 		even
 ArtKosM_Pointdexter:
-		binclude "General/Sprites/Pointdexter/Pointdexter.kosm"
+		binclude "data/General/Sprites/Pointdexter/Pointdexter.kosm"
 		even
 ArtKosM_MGZMiniboss:
-		binclude "Levels/MGZ/KosinskiM Art/Miniboss.kosm"
+		binclude "data/Levels/MGZ/KosinskiM Art/Miniboss.kosm"
 		even
 ArtNem_MGZSpire:
-		binclude "Levels/MGZ/Nemesis Art/Spire.nem"
+		binclude "data/Levels/MGZ/Nemesis Art/Spire.nem"
 		even
 ArtKosM_MGZEndBoss:
-		binclude "Levels/MGZ/KosinskiM Art/End Boss.kosm"
+		binclude "data/Levels/MGZ/KosinskiM Art/End Boss.kosm"
 		even
 ArtScaled_MGZEndBoss:
-		binclude "Levels/MGZ/Misc/MGZ End Boss Scaled.bin"
+		binclude "data/Levels/MGZ/Misc/MGZ End Boss Scaled.bin"
 		even
 ArtKosM_MGZEndBossDebris:
-		binclude "Levels/MGZ/KosinskiM Art/End Boss Debris.kosm"
+		binclude "data/Levels/MGZ/KosinskiM Art/End Boss Debris.kosm"
 		even
 ArtUnc_BubblesBadnik:
-		binclude "General/Sprites/Bubbles Badnik/Bubbles Badnik.unc"
+		binclude "data/General/Sprites/Bubbles Badnik/Bubbles Badnik.unc"
 		even
 ArtKosM_Spiker:
-		binclude "General/Sprites/Spiker/Spiker.kosm"
+		binclude "data/General/Sprites/Spiker/Spiker.kosm"
 		even
 ArtKosM_Mantis:
-		binclude "General/Sprites/Mantis/Mantis.kosm"
+		binclude "data/General/Sprites/Mantis/Mantis.kosm"
 		even
 ArtNem_CNZMiniboss:
-		binclude "Levels/CNZ/Nemesis Art/Miniboss.nem"
+		binclude "data/Levels/CNZ/Nemesis Art/Miniboss.nem"
 		even
 ArtNem_CNZEndBoss:
-		binclude "Levels/CNZ/Nemesis Art/End Boss.nem"
+		binclude "data/Levels/CNZ/Nemesis Art/End Boss.nem"
 		even
 ArtUnc_Clamer:
-		binclude "General/Sprites/Clamer/Clamer.unc"
+		binclude "data/General/Sprites/Clamer/Clamer.unc"
 		even
 ArtKosM_ClamerShot:
-		binclude "General/Sprites/Clamer/Clamer Shot.kosm"
+		binclude "data/General/Sprites/Clamer/Clamer Shot.kosm"
 		even
 ArtKosM_Sparkle:
-		binclude "General/Sprites/Sparkle/Sparkle.kosm"
+		binclude "data/General/Sprites/Sparkle/Sparkle.kosm"
 		even
 ArtKosM_Batbot:
-		binclude "General/Sprites/Batbot/Batbot.kosm"
+		binclude "data/General/Sprites/Batbot/Batbot.kosm"
 		even
 ArtKosM_CNZBalloon:
-		binclude "Levels/CNZ/KosinskiM Art/Balloon.kosm"
+		binclude "data/Levels/CNZ/KosinskiM Art/Balloon.kosm"
 		even
 ArtNem_FBZMiniboss:
-		binclude "Levels/FBZ/Nemesis Art/S3 Miniboss.nem"
+		binclude "data/Levels/FBZ/Nemesis Art/S3 Miniboss.nem"
 		even
 ArtNem_FBZ2Subboss:
-		binclude "Levels/FBZ/Nemesis Art/Act 2 Subboss.nem"
+		binclude "data/Levels/FBZ/Nemesis Art/Act 2 Subboss.nem"
 		even
 ArtNem_FBZEndBoss:
-		binclude "Levels/FBZ/Nemesis Art/End Boss.nem"
+		binclude "data/Levels/FBZ/Nemesis Art/End Boss.nem"
 		even
 ArtKosM_Blaster:
-		binclude "General/Sprites/Blaster/Blaster.kosm"
+		binclude "data/General/Sprites/Blaster/Blaster.kosm"
 		even
 ArtKosM_Technosqueek:
-		binclude "General/Sprites/Technosqueek/Technosqueek.kosm"
+		binclude "data/General/Sprites/Technosqueek/Technosqueek.kosm"
 		even
 ArtNem_ICZMisc1:
-		binclude "Levels/ICZ/Nemesis Art/Misc Art 1.nem"
+		binclude "data/Levels/ICZ/Nemesis Art/Misc Art 1.nem"
 		even
 ArtNem_ICZIntroSprites:
-		binclude "Levels/ICZ/Nemesis Art/Intro Sprites.nem"
+		binclude "data/Levels/ICZ/Nemesis Art/Intro Sprites.nem"
 		even
 ArtNem_ICZMisc2:
-		binclude "Levels/ICZ/Nemesis Art/Misc Art 2.nem"
+		binclude "data/Levels/ICZ/Nemesis Art/Misc Art 2.nem"
 		even
 ArtNem_ICZEndBoss:
-		binclude "Levels/ICZ/Nemesis Art/End Boss.nem"
+		binclude "data/Levels/ICZ/Nemesis Art/End Boss.nem"
 		even
 ArtNem_ICZMiniboss:
-		binclude "Levels/ICZ/Nemesis Art/Miniboss.nem"
+		binclude "data/Levels/ICZ/Nemesis Art/Miniboss.nem"
 		even
 ArtUnc_Penguinator:
-		binclude "General/Sprites/Penguinator/Penguinator.unc"
+		binclude "data/General/Sprites/Penguinator/Penguinator.unc"
 		even
 ArtKosM_ICZSnowdust:
-		binclude "Levels/ICZ/KosinskiM Art/Snowdust.kosm"
+		binclude "data/Levels/ICZ/KosinskiM Art/Snowdust.kosm"
 		even
 ArtKosM_StarPointer:
-		binclude "General/Sprites/Star Pointer/Star Pointer.kosm"
+		binclude "data/General/Sprites/Star Pointer/Star Pointer.kosm"
 		even
 ArtKosM_LBZMiniboss:
-		binclude "Levels/LBZ/KosinskiM Art/Miniboss.kosm"
+		binclude "data/Levels/LBZ/KosinskiM Art/Miniboss.kosm"
 		even
 ArtKosM_LBZMinibossBox:
-		binclude "Levels/LBZ/KosinskiM Art/Miniboss Box.kosm"
+		binclude "data/Levels/LBZ/KosinskiM Art/Miniboss Box.kosm"
 		even
 ArtNem_LBZFinalBoss1:
-		binclude "Levels/LBZ/Nemesis Art/Final Boss 1.nem"
+		binclude "data/Levels/LBZ/Nemesis Art/Final Boss 1.nem"
 		even
 ArtKosM_LBZEndBoss:
-		binclude "Levels/LBZ/KosinskiM Art/End Boss.kosm"
+		binclude "data/Levels/LBZ/KosinskiM Art/End Boss.kosm"
 		even
 ArtKosM_LBZFinalBoss2:
-		binclude "Levels/LBZ/KosinskiM Art/Final Boss 2.kosm"
+		binclude "data/Levels/LBZ/KosinskiM Art/Final Boss 2.kosm"
 		even
 ArtKosM_SnaleBlaster:
-		binclude "General/Sprites/Snale Blaster/Snale Blaster.kosm"
+		binclude "data/General/Sprites/Snale Blaster/Snale Blaster.kosm"
 		even
 ArtKosM_Ribot:
-		binclude "General/Sprites/Ribot/Ribot.kosm"
+		binclude "data/General/Sprites/Ribot/Ribot.kosm"
 		even
 ArtKosM_Orbinaut:
-		binclude "General/Sprites/Orbinaut/Orbinaut.kosm"
+		binclude "data/General/Sprites/Orbinaut/Orbinaut.kosm"
 		even
 ArtKosM_Corkey:
-		binclude "General/Sprites/Corkey/Corkey.kosm"
+		binclude "data/General/Sprites/Corkey/Corkey.kosm"
 		even
 ArtUnc_Flybot767:
-		binclude "General/Sprites/Flybot767/Flybot767.unc"
+		binclude "data/General/Sprites/Flybot767/Flybot767.unc"
 		even
 ArtNem_LBZKnuxBomb:
-		binclude "General/Sprites/Knuckles/Cutscene/Knuckles Bomb.nem"
+		binclude "data/General/Sprites/Knuckles/Cutscene/Knuckles Bomb.nem"
 		even
 ArtKosM_LBZ2DeathEggSmall:
-		binclude "Levels/LBZ/KosinskiM Art/Act 2 Death Egg Small.kosm"
+		binclude "data/Levels/LBZ/KosinskiM Art/Act 2 Death Egg Small.kosm"
 		even
 ArtScaled_LBZ2UnusedRobotnik:
-		binclude "General/Sprites/Robotnik/Robotnik Fly Scaled.bin"
+		binclude "data/General/Sprites/Robotnik/Robotnik Fly Scaled.bin"
 		even
 ArtKosM_LBZ2DeathEgg2_8x8:
-		binclude "Levels/LBZ/Tiles/Act 2 Death Egg 2.kosm"
+		binclude "data/Levels/LBZ/Tiles/Act 2 Death Egg 2.kosm"
 		even
 ArtNem_BossExplosion:
-		binclude "General/Sprites/Boss Explosion/Boss Explosion.nem"
+		binclude "data/General/Sprites/Boss Explosion/Boss Explosion.nem"
 		even
 ArtNem_AIZBossFire:
-		binclude "Levels/AIZ/Nemesis Art/Miniboss Fire.nem"
+		binclude "data/Levels/AIZ/Nemesis Art/Miniboss Fire.nem"
 		even
 ArtNem_FBZEndBossFlame:
-		binclude "Levels/FBZ/Nemesis Art/End Boss Flame.nem"
+		binclude "data/Levels/FBZ/Nemesis Art/End Boss Flame.nem"
 		even
 ArtNem_RobotnikShip:
-		binclude "General/Sprites/Robotnik/Ship.nem"
+		binclude "data/General/Sprites/Robotnik/Ship.nem"
 		even
 ArtNem_FBZRobotnikHead:
-		binclude "General/Sprites/Robotnik/FBZ Robotnik Head.nem"
+		binclude "data/General/Sprites/Robotnik/FBZ Robotnik Head.nem"
 		even
 ArtNem_FBZRobotnikStand:
-		binclude "General/Sprites/Robotnik/FBZ Robotnik Stand.nem"
+		binclude "data/General/Sprites/Robotnik/FBZ Robotnik Stand.nem"
 		even
 ArtNem_FBZRobotnikRun:
-		binclude "General/Sprites/Robotnik/FBZ Robotnik Run.nem"
+		binclude "data/General/Sprites/Robotnik/FBZ Robotnik Run.nem"
 		even
 ArtUnc_EndSigns:
-		binclude "General/Sprites/Signpost/End Signs.unc"
+		binclude "data/General/Sprites/Signpost/End Signs.unc"
 		even
 ArtNem_SignpostStub:
-		binclude "General/Sprites/Signpost/Stub.nem"
+		binclude "data/General/Sprites/Signpost/Stub.nem"
 		even
 ArtNem_EggCapsule:
-		binclude "General/Sprites/Egg Capsule/Egg Capsule.nem"
+		binclude "data/General/Sprites/Egg Capsule/Egg Capsule.nem"
 		even
 ArtKosM_AIZIntroPlane:
-		binclude "Levels/AIZ/KosinskiM Art/Intro Plane.kosm"
+		binclude "data/Levels/AIZ/KosinskiM Art/Intro Plane.kosm"
 		even
 ArtUnc_CutsceneKnux:
-		binclude "General/Sprites/Knuckles/Cutscene/Cutscene Main.unc"
+		binclude "data/General/Sprites/Knuckles/Cutscene/Cutscene Main.unc"
 		even
 ArtKosM_AIZIntroEmeralds:
-		binclude "Levels/AIZ/KosinskiM Art/Intro Emeralds.kosm"
+		binclude "data/Levels/AIZ/KosinskiM Art/Intro Emeralds.kosm"
 		even
 ArtUnc_SSEntryRing:
-		binclude "General/Sprites/SS Entry/Entry Ring.unc"
+		binclude "data/General/Sprites/SS Entry/Entry Ring.unc"
 		even
 ArtUnc_SSEntryFlash:
-		binclude "General/Sprites/SS Entry/Entry Flash.unc"
+		binclude "data/General/Sprites/SS Entry/Entry Flash.unc"
 		even
 ArtKosM_BadnikExplosion:
-		binclude "General/Sprites/SS Entry/Badnik Explosion.kosm"
+		binclude "data/General/Sprites/SS Entry/Badnik Explosion.kosm"
 		even
 ArtNem_BonusStage:
-		binclude "Levels/Gumball/Nemesis Art/Gumball Bonus.nem"
+		binclude "data/Levels/Gumball/Nemesis Art/Gumball Bonus.nem"
 		even
 ArtKosM_SonicEndPose:
-		binclude "General/Ending/KosinskiM Art/Sonic 3 Sonic Ending Pose.kosm"
+		binclude "data/General/Ending/KosinskiM Art/Sonic 3 Sonic Ending Pose.kosm"
 		even
 ArtKosM_TailsEndPose:
-		binclude "General/Ending/KosinskiM Art/Tails Ending Pose.kosm"
+		binclude "data/General/Ending/KosinskiM Art/Tails Ending Pose.kosm"
 		even
 ArtKosM_SuperSonicEndPose:
-		binclude "General/Ending/KosinskiM Art/Sonic 3 Super Sonic Ending Pose.kosm"
+		binclude "data/General/Ending/KosinskiM Art/Sonic 3 Super Sonic Ending Pose.kosm"
 		even
 ArtNem_S3CreditsText:
-		binclude "General/Ending/Nemesis Art/S3 Large Text.nem"
+		binclude "data/General/Ending/Nemesis Art/S3 Large Text.nem"
 		even
 ArtNem_S38x16Font:
-		binclude "General/Ending/Nemesis Art/S3 8x16 Font.nem"
+		binclude "data/General/Ending/Nemesis Art/S3 8x16 Font.nem"
 		even
 ArtNem_AIZCorkFloor:
-		binclude "Levels/AIZ/Nemesis Art/Cork Floor 1.nem"
+		binclude "data/Levels/AIZ/Nemesis Art/Cork Floor 1.nem"
 		even
 ArtNem_AIZCorkFloor2:
-		binclude "Levels/AIZ/Nemesis Art/Cork Floor 2.nem"
+		binclude "data/Levels/AIZ/Nemesis Art/Cork Floor 2.nem"
 		even
 ArtNem_AIZSwingVine:
-		binclude "Levels/AIZ/Nemesis Art/Swing Vine.nem"
+		binclude "data/Levels/AIZ/Nemesis Art/Swing Vine.nem"
 		even
 ArtNem_AIZSlideRope:
-		binclude "Levels/AIZ/Nemesis Art/Zip Vine.nem"
+		binclude "data/Levels/AIZ/Nemesis Art/Zip Vine.nem"
 		even
 ArtNem_AIZBackgroundTree:
-		binclude "Levels/AIZ/Nemesis Art/BG Tree.nem"
+		binclude "data/Levels/AIZ/Nemesis Art/BG Tree.nem"
 		even
 ArtNem_AIZMisc1:
-		binclude "Levels/AIZ/Nemesis Art/Misc Art 1.nem"
+		binclude "data/Levels/AIZ/Nemesis Art/Misc Art 1.nem"
 		even
 ArtNem_AIZFallingLog:
-		binclude "Levels/AIZ/Nemesis Art/Falling Log.nem"
+		binclude "data/Levels/AIZ/Nemesis Art/Falling Log.nem"
 		even
 ArtNem_AIZMisc2:
-		binclude "Levels/AIZ/Nemesis Art/Misc Art 2.nem"
+		binclude "data/Levels/AIZ/Nemesis Art/Misc Art 2.nem"
 		even
 ArtNem_HCZSpikeBall:
-		binclude "Levels/HCZ/Nemesis Art/Spike Ball.nem"
+		binclude "data/Levels/HCZ/Nemesis Art/Spike Ball.nem"
 		even
 ArtNem_HCZWaveSplash:
-		binclude "Levels/HCZ/Nemesis Art/Wave Splash.nem"
+		binclude "data/Levels/HCZ/Nemesis Art/Wave Splash.nem"
 		even
 ArtNem_HCZButton:
-		binclude "Levels/HCZ/Nemesis Art/Button.nem"
+		binclude "data/Levels/HCZ/Nemesis Art/Button.nem"
 		even
 ArtNem_HCZMisc:
-		binclude "Levels/HCZ/Nemesis Art/Misc Art.nem"
+		binclude "data/Levels/HCZ/Nemesis Art/Misc Art.nem"
 		even
 ArtNem_HCZWaterRush:
-		binclude "Levels/HCZ/Nemesis Art/Water Rush.nem"
+		binclude "data/Levels/HCZ/Nemesis Art/Water Rush.nem"
 		even
 ArtKosM_HCZLargeFan:
-		binclude "Levels/HCZ/KosinskiM Art/Large Fan.kosm"
+		binclude "data/Levels/HCZ/KosinskiM Art/Large Fan.kosm"
 		even
 ArtKosM_HCZGeyserHorz:
-		binclude "Levels/HCZ/KosinskiM Art/Geyser Horizontal.kosm"
+		binclude "data/Levels/HCZ/KosinskiM Art/Geyser Horizontal.kosm"
 		even
 ArtKosM_HCZGeyserVert:
-		binclude "Levels/HCZ/KosinskiM Art/Geyser Vertical.kosm"
+		binclude "data/Levels/HCZ/KosinskiM Art/Geyser Vertical.kosm"
 		even
 ArtNem_HCZ2Slide:
-		binclude "Levels/HCZ/Nemesis Art/Act 2 Slide.nem"
+		binclude "data/Levels/HCZ/Nemesis Art/Act 2 Slide.nem"
 		even
 ArtNem_HCZ2BlockPlat:
-		binclude "Levels/HCZ/Nemesis Art/Act 2 Block Platform.nem"
+		binclude "data/Levels/HCZ/Nemesis Art/Act 2 Block Platform.nem"
 		even
 ArtUnc_HCZWaterSplash2:
-		binclude "Levels/HCZ/Animated Tiles/Water Splash 2.unc"
+		binclude "data/Levels/HCZ/Animated Tiles/Water Splash 2.unc"
 		even
 ArtUnc_HCZWaterSplash:
-		binclude "Levels/HCZ/Animated Tiles/Water Splash.unc"
+		binclude "data/Levels/HCZ/Animated Tiles/Water Splash.unc"
 		even
 ArtNem_HCZ2KnuxWall:
-		binclude "Levels/HCZ/Nemesis Art/Act 2 Knuckles Wall.nem"
+		binclude "data/Levels/HCZ/Nemesis Art/Act 2 Knuckles Wall.nem"
 		even
 ArtNem_MGZMisc1:
-		binclude "Levels/MGZ/Nemesis Art/Misc Art 1.nem"
+		binclude "data/Levels/MGZ/Nemesis Art/Misc Art 1.nem"
 		even
 ArtNem_MGZMisc2:
-		binclude "Levels/MGZ/Nemesis Art/Misc Art 2.nem"
+		binclude "data/Levels/MGZ/Nemesis Art/Misc Art 2.nem"
 		even
 ArtNem_MGZSigns:
-		binclude "Levels/MGZ/Nemesis Art/Direction Signs.nem"
+		binclude "data/Levels/MGZ/Nemesis Art/Direction Signs.nem"
 		even
 ArtNem_CNZMisc:
-		binclude "Levels/CNZ/Nemesis Art/Misc Art.nem"
+		binclude "data/Levels/CNZ/Nemesis Art/Misc Art.nem"
 		even
 ArtNem_CNZPlatform:
-		binclude "Levels/CNZ/Nemesis Art/Platform.nem"
+		binclude "data/Levels/CNZ/Nemesis Art/Platform.nem"
 		even
 ArtNem_LBZMisc:
-		binclude "Levels/LBZ/Nemesis Art/Misc Art.nem"
+		binclude "data/Levels/LBZ/Nemesis Art/Misc Art.nem"
 		even
 ArtNem_LBZTubeTrans:
-		binclude "Levels/LBZ/Nemesis Art/Tube Transport.nem"
+		binclude "data/Levels/LBZ/Nemesis Art/Tube Transport.nem"
 		even
 ArtNem_LBZ2Misc:
-		binclude "Levels/LBZ/Nemesis Art/Act 2 Misc Art.nem"
+		binclude "data/Levels/LBZ/Nemesis Art/Act 2 Misc Art.nem"
 		even
 ArtNem_2PArt_1:
-		binclude "General/2P Zone/Nemesis Art/Misc Art 1.nem"
+		binclude "data/General/2P Zone/Nemesis Art/Misc Art 1.nem"
 		even
 ArtNem_2PArt_2:
-		binclude "General/2P Zone/Nemesis Art/Misc Art 2.nem"
+		binclude "data/General/2P Zone/Nemesis Art/Misc Art 2.nem"
 		even
 ArtNem_2PArt_3:
-		binclude "General/2P Zone/Nemesis Art/Misc Art 3.nem"
+		binclude "data/General/2P Zone/Nemesis Art/Misc Art 3.nem"
 		even
 ArtNem_2PStartPost:
-		binclude "General/2P Zone/Nemesis Art/Start Post.nem"
+		binclude "data/General/2P Zone/Nemesis Art/Start Post.nem"
 		even
 ArtNem_2PTime:
-		binclude "General/2P Zone/Nemesis Art/Time Display.nem"
+		binclude "data/General/2P Zone/Nemesis Art/Time Display.nem"
 		even
 ArtNem_2PLapNum:
-		binclude "General/2P Zone/Nemesis Art/Lap Numbers.nem"
+		binclude "data/General/2P Zone/Nemesis Art/Lap Numbers.nem"
 		even
 ArtNem_2PPosIcon:
-		binclude "General/2P Zone/Nemesis Art/Position Icons.nem"
+		binclude "data/General/2P Zone/Nemesis Art/Position Icons.nem"
 		even
 ArtNem_BPZMisc:
-		binclude "Levels/BPZ/Nemesis Art/Misc Art.nem"
+		binclude "data/Levels/BPZ/Nemesis Art/Misc Art.nem"
 		even
 ArtNem_DPZMisc:
-		binclude "Levels/DPZ/Nemesis Art/Misc Art.nem"
+		binclude "data/Levels/DPZ/Nemesis Art/Misc Art.nem"
 		even
 ArtNem_CGZMisc:
-		binclude "Levels/CGZ/Nemesis Art/Platform.nem"
+		binclude "data/Levels/CGZ/Nemesis Art/Platform.nem"
 		even
 ArtNem_EMZMisc:
-		binclude "Levels/EMZ/Nemesis Art/Misc Art.nem"
+		binclude "data/Levels/EMZ/Nemesis Art/Misc Art.nem"
 		even
 ArtKosM_AIZ2Bombership2_8x8:
-		binclude "Levels/AIZ/Tiles/Act 2 Bombership 2.kosm"
+		binclude "data/Levels/AIZ/Tiles/Act 2 Bombership 2.kosm"
 		even
 ArtKosM_ResultsSONIC:
-		binclude "General/Sprites/Results/Results SONIC S3.kosm"
+		binclude "data/General/Sprites/Results/Results SONIC S3.kosm"
 		even
 ArtKosM_ResultsMILES:
-		binclude "General/Sprites/Results/Results MILES.kosm"
+		binclude "data/General/Sprites/Results/Results MILES.kosm"
 		even
 ArtKosM_ResultsTAILS:
-		binclude "General/Sprites/Results/Results TAILS.kosm"
+		binclude "data/General/Sprites/Results/Results TAILS.kosm"
 		even
 ArtKosM_ResultsKNUCKLES:
-		binclude "General/Sprites/Results/Results KNUCKLES.kosm"
+		binclude "data/General/Sprites/Results/Results KNUCKLES.kosm"
 		even
 ArtKosM_ResultsGeneral:
-		binclude "General/Sprites/Results/Results General.kosm"
+		binclude "data/General/Sprites/Results/Results General.kosm"
 		even
 ArtKosM_TitleCardNum1:
-		binclude "General/Sprites/Title Card/Title Card Number 1.kosm"
+		binclude "data/General/Sprites/Title Card/Title Card Number 1.kosm"
 		even
 ArtKosM_TitleCardNum2:
-		binclude "General/Sprites/Title Card/Title Card Number 2.kosm"
+		binclude "data/General/Sprites/Title Card/Title Card Number 2.kosm"
 		even
 ArtKosM_SSResults:
 		dc.w $1220
 ArtKos_SSResultsGeneral:
-		binclude "General/Special Stage/Kosinski Art/S3 SSResults General.kos"
+		binclude "data/General/Special Stage/Kosinski Art/S3 SSResults General.kos"
 ArtKos_SSResultsTKIcons:
-		binclude "General/Special Stage/Kosinski Art/S3 SSResults Tails Knuckles Icons.kos"
+		binclude "data/General/Special Stage/Kosinski Art/S3 SSResults Tails Knuckles Icons.kos"
 		even
 ArtKosM_TitleCardRedAct:
-		binclude "General/Sprites/Title Card/Title Card Red ACT.kosm"
+		binclude "data/General/Sprites/Title Card/Title Card Red ACT.kosm"
 		even
 ArtKosM_AIZTitleCard:
-		binclude "Levels/AIZ/KosinskiM Art/Title Card.kosm"
+		binclude "data/Levels/AIZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_HCZTitleCard:
-		binclude "Levels/HCZ/KosinskiM Art/Title Card.kosm"
+		binclude "data/Levels/HCZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_MGZTitleCard:
-		binclude "Levels/MGZ/KosinskiM Art/Title Card.kosm"
+		binclude "data/Levels/MGZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_CNZTitleCard:
-		binclude "Levels/CNZ/KosinskiM Art/Title Card.kosm"
+		binclude "data/Levels/CNZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_FBZTitleCard:
-		binclude "Levels/FBZ/KosinskiM Art/Title Card.kosm"
+		binclude "data/Levels/FBZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_ICZTitleCard:
-		binclude "Levels/ICZ/KosinskiM Art/Title Card.kosm"
+		binclude "data/Levels/ICZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_LBZTitleCard:
-		binclude "Levels/LBZ/KosinskiM Art/Title Card.kosm"
+		binclude "data/Levels/LBZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_ALZTitleCard:
-		binclude "Levels/ALZ/KosinskiM Art/Title Card.kosm"
+		binclude "data/Levels/ALZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_BPZTitleCard:
-		binclude "Levels/BPZ/KosinskiM Art/Title Card.kosm"
+		binclude "data/Levels/BPZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_CGZTitleCard:
-		binclude "Levels/CGZ/KosinskiM Art/Title Card.kosm"
+		binclude "data/Levels/CGZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_DPZTitleCard:
-		binclude "Levels/DPZ/KosinskiM Art/Title Card.kosm"
+		binclude "data/Levels/DPZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_EMZTitleCard:
-		binclude "Levels/EMZ/KosinskiM Art/Title Card.kosm"
+		binclude "data/Levels/EMZ/KosinskiM Art/Title Card.kosm"
 		even
 ArtKosM_BonusTitleCard:
-		binclude "General/Sprites/Title Card/Bonus Title Card.kosm"
+		binclude "data/General/Sprites/Title Card/Bonus Title Card.kosm"
 		even
 Pal_SaveMenuBG:
-		binclude "General/Save Menu/Palettes/BG.bin"
+		binclude "data/General/Save Menu/Palettes/BG.bin"
 		even
 Pal_CompetitionMenuBG:
-		binclude "General/Competition Menu/Palettes/BG.bin"
+		binclude "data/General/Competition Menu/Palettes/BG.bin"
 		even
 MapEni_S3MenuBG:
-		binclude "General/Save Menu/Enigma Map/Menu BG.eni"
+		binclude "data/General/Save Menu/Enigma Map/Menu BG.eni"
 		even
 ArtKos_S3MenuBG:
-		binclude "General/Save Menu/Kosinski Art/Menu BG.kos"
+		binclude "data/General/Save Menu/Kosinski Art/Menu BG.kos"
 		even
 MapEni_CompetitionLevBorder:
-		binclude "General/Competition Menu/Enigma Map/Level Border.eni"
+		binclude "data/General/Competition Menu/Enigma Map/Level Border.eni"
 		even
 MapUnc_CompetitionTimeBorder:
-		binclude "General/Competition Menu/Uncompressed Map/Time Border.bin"
+		binclude "data/General/Competition Menu/Uncompressed Map/Time Border.bin"
 		even
 MapUnc_CompetitionBESTTIME:
-		binclude "General/Competition Menu/Uncompressed Map/Time Text.bin"
+		binclude "data/General/Competition Menu/Uncompressed Map/Time Text.bin"
 		even
 MapEni_CompetitionLevImage:
-		binclude "General/Competition Menu/Enigma Map/Level Images.eni"
+		binclude "data/General/Competition Menu/Enigma Map/Level Images.eni"
 		even
 MapEni_CompetitionLevName:
-		binclude "General/Competition Menu/Enigma Map/Level Names.eni"
+		binclude "data/General/Competition Menu/Enigma Map/Level Names.eni"
 		even
 ArtKos_CompetitionMode:
-		binclude "General/Competition Menu/Kosinski Art/Mode Select.kos"
+		binclude "data/General/Competition Menu/Kosinski Art/Mode Select.kos"
 		even
 ArtKos_CompetitionLevel:
-		binclude "General/Competition Menu/Kosinski Art/Level Select.kos"
+		binclude "data/General/Competition Menu/Kosinski Art/Level Select.kos"
 		even
 ArtKos_CompetitionResults:
-		binclude "General/Competition Menu/Kosinski Art/Results.kos"
+		binclude "data/General/Competition Menu/Kosinski Art/Results.kos"
 		even
 Map_CompetitionPlayerSprite:
 		include "General/Competition Menu/Map - Competition Player Sprites.asm"
 ArtKos_CompetitionPlayer:
-		binclude "General/Competition Menu/Kosinski Art/Player Sprites.kos"
+		binclude "data/General/Competition Menu/Kosinski Art/Player Sprites.kos"
 		even
 MapEni_SaveScreen_Layout:
-		binclude "General/Save Menu/Enigma Map/Save Screen Layout.eni"
+		binclude "data/General/Save Menu/Enigma Map/Save Screen Layout.eni"
 		even
 MapUnc_SaveScreenNEW:
-		binclude "General/Save Menu/Uncompressed Map/NEW.bin"
+		binclude "data/General/Save Menu/Uncompressed Map/NEW.bin"
 		even
 MapPtrs_SaveScreenStatic:
 		dc.l MapUnc_SaveScreenStatic1
@@ -119461,130 +119213,130 @@ MapPtrs_SaveScreenStatic:
 		dc.l MapUnc_SaveScreenStatic3
 		dc.l MapUnc_SaveScreenStatic4
 MapUnc_SaveScreenStatic1:
-		binclude "General/Save Menu/Uncompressed Map/Static 1.bin"
+		binclude "data/General/Save Menu/Uncompressed Map/Static 1.bin"
 		even
 MapUnc_SaveScreenStatic2:
-		binclude "General/Save Menu/Uncompressed Map/Static 2.bin"
+		binclude "data/General/Save Menu/Uncompressed Map/Static 2.bin"
 		even
 MapUnc_SaveScreenStatic3:
-		binclude "General/Save Menu/Uncompressed Map/Static 3.bin"
+		binclude "data/General/Save Menu/Uncompressed Map/Static 3.bin"
 		even
 MapUnc_SaveScreenStatic4:
-		binclude "General/Save Menu/Uncompressed Map/Static 4.bin"
+		binclude "data/General/Save Menu/Uncompressed Map/Static 4.bin"
 		even
 ArtKos_SaveScreenMisc:
-		binclude "General/Save Menu/Kosinski Art/Misc.kos"
+		binclude "data/General/Save Menu/Kosinski Art/Misc.kos"
 		even
 AIZ1_16x16_Primary_Kos:
-		binclude "Levels/AIZ/Blocks/Act 1 Primary.kos"
+		binclude "data/Levels/AIZ/Blocks/Act 1 Primary.kos"
 		even
 AIZ1_16x16_Secondary_Kos:
-		binclude "Levels/AIZ/Blocks/Act 1 Secondary.kos"
+		binclude "data/Levels/AIZ/Blocks/Act 1 Secondary.kos"
 		even
 AIZ1_16x16_MainLevel_Kos:
-		binclude "Levels/AIZ/Blocks/Act 1 Main Level.kos"
+		binclude "data/Levels/AIZ/Blocks/Act 1 Main Level.kos"
 		even
 AIZ1_8x8_Primary_KosM:
-		binclude "Levels/AIZ/Tiles/Act 1 Primary.kosm"
+		binclude "data/Levels/AIZ/Tiles/Act 1 Primary.kosm"
 		even
 AIZ1_8x8_Secondary_KosM:
-		binclude "Levels/AIZ/Tiles/Act 1 Secondary.kosm"
+		binclude "data/Levels/AIZ/Tiles/Act 1 Secondary.kosm"
 		even
 AIZ1_8x8_MainLevel_KosM:
-		binclude "Levels/AIZ/Tiles/Act 1 Main Level.kosm"
+		binclude "data/Levels/AIZ/Tiles/Act 1 Main Level.kosm"
 		even
 AIZ1_128x128_Kos:
-		binclude "Levels/AIZ/Chunks/Act 1.kos"
+		binclude "data/Levels/AIZ/Chunks/Act 1.kos"
 		even
 AIZ1_8x8_Flames_KosM:
-		binclude "Levels/AIZ/Tiles/Act 1 Fire Overlay.kosm"
+		binclude "data/Levels/AIZ/Tiles/Act 1 Fire Overlay.kosm"
 		even
 AIZ2_16x16_Primary_Kos:
-		binclude "Levels/AIZ/Blocks/Act 2 Primary.kos"
+		binclude "data/Levels/AIZ/Blocks/Act 2 Primary.kos"
 		even
 AIZ2_16x16_Secondary_Kos:
-		binclude "Levels/AIZ/Blocks/Act 2 Secondary.kos"
+		binclude "data/Levels/AIZ/Blocks/Act 2 Secondary.kos"
 		even
 AIZ2_16x16_BomberShip_Kos:
-		binclude "Levels/AIZ/Blocks/Act 2 BomberShip.kos"
+		binclude "data/Levels/AIZ/Blocks/Act 2 BomberShip.kos"
 		even
 AIZ2_8x8_Primary_KosM:
-		binclude "Levels/AIZ/Tiles/Act 2 Primary.kosm"
+		binclude "data/Levels/AIZ/Tiles/Act 2 Primary.kosm"
 		even
 AIZ2_8x8_Secondary_KosM:
-		binclude "Levels/AIZ/Tiles/Act 2 Secondary.kosm"
+		binclude "data/Levels/AIZ/Tiles/Act 2 Secondary.kosm"
 		even
 AIZ2_8x8_BomberShip_KosM:
-		binclude "Levels/AIZ/Tiles/Act 2 Bombership.kosm"
+		binclude "data/Levels/AIZ/Tiles/Act 2 Bombership.kosm"
 		even
 AIZ2_128x128_Kos:
-		binclude "Levels/AIZ/Chunks/Act 2.kos"
+		binclude "data/Levels/AIZ/Chunks/Act 2.kos"
 		even
 HCZ_16x16_Primary_Kos:
-		binclude "Levels/HCZ/Blocks/Primary.kos"
+		binclude "data/Levels/HCZ/Blocks/Primary.kos"
 		even
 HCZ_8x8_Primary_KosM:
-		binclude "Levels/HCZ/Tiles/Primary.kosm"
+		binclude "data/Levels/HCZ/Tiles/Primary.kosm"
 		even
 HCZ_128x128_Primary_Kos:
-		binclude "Levels/HCZ/Chunks/Primary.kos"
+		binclude "data/Levels/HCZ/Chunks/Primary.kos"
 		even
 HCZ1_16x16_Secondary_Kos:
-		binclude "Levels/HCZ/Blocks/Act 1 Secondary.kos"
+		binclude "data/Levels/HCZ/Blocks/Act 1 Secondary.kos"
 		even
 HCZ1_8x8_Secondary_KosM:
-		binclude "Levels/HCZ/Tiles/Act 1 Secondary.kosm"
+		binclude "data/Levels/HCZ/Tiles/Act 1 Secondary.kosm"
 		even
 HCZ1_128x128_Secondary_Kos:
-		binclude "Levels/HCZ/Chunks/Act 1 Secondary.kos"
+		binclude "data/Levels/HCZ/Chunks/Act 1 Secondary.kos"
 		even
 HCZ2_16x16_Secondary_Kos:
-		binclude "Levels/HCZ/Blocks/Act 2 Secondary.kos"
+		binclude "data/Levels/HCZ/Blocks/Act 2 Secondary.kos"
 		even
 HCZ2_8x8_Secondary_KosM:
-		binclude "Levels/HCZ/Tiles/Act 2 Secondary.kosm"
+		binclude "data/Levels/HCZ/Tiles/Act 2 Secondary.kosm"
 		even
 HCZ2_128x128_Secondary_Kos:
-		binclude "Levels/HCZ/Chunks/Act 2 Secondary.kos"
+		binclude "data/Levels/HCZ/Chunks/Act 2 Secondary.kos"
 		even
 MGZ_16x16_Primary_Kos:
-		binclude "Levels/MGZ/Blocks/Primary.kos"
+		binclude "data/Levels/MGZ/Blocks/Primary.kos"
 		even
 MGZ_8x8_Primary_KosM:
-		binclude "Levels/MGZ/Tiles/Primary.kosm"
+		binclude "data/Levels/MGZ/Tiles/Primary.kosm"
 		even
 MGZ_128x128_Primary_Kos:
-		binclude "Levels/MGZ/Chunks/Primary.kos"
+		binclude "data/Levels/MGZ/Chunks/Primary.kos"
 		even
 MGZ1_16x16_Secondary_Kos:
-		binclude "Levels/MGZ/Blocks/Act 1 Secondary.kos"
+		binclude "data/Levels/MGZ/Blocks/Act 1 Secondary.kos"
 		even
 MGZ1_8x8_Secondary_KosM:
-		binclude "Levels/MGZ/Tiles/Act 1 Secondary.kosm"
+		binclude "data/Levels/MGZ/Tiles/Act 1 Secondary.kosm"
 		even
 MGZ1_128x128_Secondary_Kos:
-		binclude "Levels/MGZ/Chunks/Act 1 Secondary.kos"
+		binclude "data/Levels/MGZ/Chunks/Act 1 Secondary.kos"
 		even
 MGZ2_16x16_Secondary_Kos:
-		binclude "Levels/MGZ/Blocks/Act 2 Secondary.kos"
+		binclude "data/Levels/MGZ/Blocks/Act 2 Secondary.kos"
 		even
 MGZ2_8x8_Secondary_KosM:
-		binclude "Levels/MGZ/Tiles/Act 2 Secondary.kosm"
+		binclude "data/Levels/MGZ/Tiles/Act 2 Secondary.kosm"
 		even
 MGZ2_128x128_Secondary_Kos:
-		binclude "Levels/MGZ/Chunks/Act 2 Secondary.kos"
+		binclude "data/Levels/MGZ/Chunks/Act 2 Secondary.kos"
 		even
 MGZ2_QuakeChunks:
-		binclude "Levels/MGZ/Misc/Act 2 Quake Chunks.bin"
+		binclude "data/Levels/MGZ/Misc/Act 2 Quake Chunks.bin"
 		even
 CNZ_16x16_Kos:
-		binclude "Levels/CNZ/Blocks/Primary.kos"
+		binclude "data/Levels/CNZ/Blocks/Primary.kos"
 		even
 CNZ_8x8_KosM:
-		binclude "Levels/CNZ/Tiles/Primary.kosm"
+		binclude "data/Levels/CNZ/Tiles/Primary.kosm"
 		even
 CNZ_128x128_Kos:
-		binclude "Levels/CNZ/Chunks/Primary.kos"
+		binclude "data/Levels/CNZ/Chunks/Primary.kos"
 		even
 FBZ1_16x16_Kos:
 FBZ1_8x8_KosM:
@@ -119593,67 +119345,67 @@ FBZ2_16x16_Kos:
 FBZ2_8x8_KosM:
 FBZ2_128x128_Kos:
 ICZ_16x16_Primary_Kos:
-		binclude "Levels/ICZ/Blocks/Primary.kos"
+		binclude "data/Levels/ICZ/Blocks/Primary.kos"
 		even
 ICZ_8x8_Primary_KosM:
-		binclude "Levels/ICZ/Tiles/Primary.kosm"
+		binclude "data/Levels/ICZ/Tiles/Primary.kosm"
 		even
 ICZ_128x128_Primary_Kos:
-		binclude "Levels/ICZ/Chunks/Primary.kos"
+		binclude "data/Levels/ICZ/Chunks/Primary.kos"
 		even
 ICZ1_16x16_Secondary_Kos:
-		binclude "Levels/ICZ/Blocks/Act 1 Secondary.kos"
+		binclude "data/Levels/ICZ/Blocks/Act 1 Secondary.kos"
 		even
 ICZ1_8x8_Secondary_KosM:
-		binclude "Levels/ICZ/Tiles/Act 1 Secondary.kosm"
+		binclude "data/Levels/ICZ/Tiles/Act 1 Secondary.kosm"
 		even
 ICZ1_128x128_Secondary_Kos:
-		binclude "Levels/ICZ/Chunks/Act 1 Secondary.kos"
+		binclude "data/Levels/ICZ/Chunks/Act 1 Secondary.kos"
 		even
 ICZ2_16x16_Secondary_Kos:
-		binclude "Levels/ICZ/Blocks/Act 2 Secondary.kos"
+		binclude "data/Levels/ICZ/Blocks/Act 2 Secondary.kos"
 		even
 ICZ2_8x8_Secondary_KosM:
-		binclude "Levels/ICZ/Tiles/Act 2 Secondary.kosm"
+		binclude "data/Levels/ICZ/Tiles/Act 2 Secondary.kosm"
 		even
 ICZ2_128x128_Secondary_Kos:
-		binclude "Levels/ICZ/Chunks/Act 2 Secondary.kos"
+		binclude "data/Levels/ICZ/Chunks/Act 2 Secondary.kos"
 		even
 LBZ_16x16_Primary_Kos:
-		binclude "Levels/LBZ/Blocks/Primary.kos"
+		binclude "data/Levels/LBZ/Blocks/Primary.kos"
 		even
 LBZ1_16x16_Secondary_Kos:
-		binclude "Levels/LBZ/Blocks/Act 1 Secondary.kos"
+		binclude "data/Levels/LBZ/Blocks/Act 1 Secondary.kos"
 		even
 LBZ_8x8_Primary_KosM:
-		binclude "Levels/LBZ/Tiles/Primary.kosm"
+		binclude "data/Levels/LBZ/Tiles/Primary.kosm"
 		even
 LBZ1_8x8_Secondary_KosM:
-		binclude "Levels/LBZ/Tiles/Act 1 Secondary.kosm"
+		binclude "data/Levels/LBZ/Tiles/Act 1 Secondary.kosm"
 		even
 LBZ1_Unknown_Kos:
-		binclude "Levels/LBZ/Chunks/Unknown Unused.kos"
+		binclude "data/Levels/LBZ/Chunks/Unknown Unused.kos"
 		even
 LBZ1_128x128_Kos:
-		binclude "Levels/LBZ/Chunks/Act 1.kos"
+		binclude "data/Levels/LBZ/Chunks/Act 1.kos"
 		even
 LBZ2_16x16_Secondary_Kos:
-		binclude "Levels/LBZ/Blocks/Act 2 Secondary.kos"
+		binclude "data/Levels/LBZ/Blocks/Act 2 Secondary.kos"
 		even
 LBZ2_16x16_DeathEgg_Kos:
-		binclude "Levels/LBZ/Blocks/Act 2 Death Egg.kos"
+		binclude "data/Levels/LBZ/Blocks/Act 2 Death Egg.kos"
 		even
 LBZ2_8x8_Secondary_KosM:
-		binclude "Levels/LBZ/Tiles/Act 2 Secondary.kosm"
+		binclude "data/Levels/LBZ/Tiles/Act 2 Secondary.kosm"
 		even
 LBZ2_8x8_DeathEgg_KosM:
-		binclude "Levels/LBZ/Tiles/Act 2 Death Egg.kosm"
+		binclude "data/Levels/LBZ/Tiles/Act 2 Death Egg.kosm"
 		even
 LBZ2_128x128_Kos:
-		binclude "Levels/LBZ/Chunks/Act 2.kos"
+		binclude "data/Levels/LBZ/Chunks/Act 2.kos"
 		even
 LBZ2_128x128_DeathEgg_Kos:
-		binclude "Levels/LBZ/Chunks/Act 2 Death Egg.kos"
+		binclude "data/Levels/LBZ/Chunks/Act 2 Death Egg.kos"
 		even
 MHZ_16x16_Kos:
 ArtKosM_MHZ:
@@ -119662,58 +119414,58 @@ LRZ_16x16_Kos:
 ArtKosM_LRZ:
 LRZ_128x128_Kos:
 ALZ_16x16_Kos:
-		binclude "Levels/ALZ/Blocks/Primary.kos"
+		binclude "data/Levels/ALZ/Blocks/Primary.kos"
 		even
 ALZ_8x8_KosM:
-		binclude "Levels/ALZ/Tiles/Primary.kosm"
+		binclude "data/Levels/ALZ/Tiles/Primary.kosm"
 		even
 ALZ_128x128_Kos:
-		binclude "Levels/ALZ/Chunks/Primary.kos"
+		binclude "data/Levels/ALZ/Chunks/Primary.kos"
 		even
 BPZ_16x16_Kos:
-		binclude "Levels/BPZ/Blocks/Primary.kos"
+		binclude "data/Levels/BPZ/Blocks/Primary.kos"
 		even
 BPZ_8x8_KosM:
-		binclude "Levels/BPZ/Tiles/Primary.kosm"
+		binclude "data/Levels/BPZ/Tiles/Primary.kosm"
 		even
 BPZ_128x128_Kos:
-		binclude "Levels/BPZ/Chunks/Primary.kos"
+		binclude "data/Levels/BPZ/Chunks/Primary.kos"
 		even
 DPZ_16x16_Kos:
-		binclude "Levels/DPZ/Blocks/Primary.kos"
+		binclude "data/Levels/DPZ/Blocks/Primary.kos"
 		even
 DPZ_8x8_KosM:
-		binclude "Levels/DPZ/Tiles/Primary.kosm"
+		binclude "data/Levels/DPZ/Tiles/Primary.kosm"
 		even
 DPZ_128x128_Kos:
-		binclude "Levels/DPZ/Chunks/Primary.kos"
+		binclude "data/Levels/DPZ/Chunks/Primary.kos"
 		even
 CGZ_16x16_Kos:
-		binclude "Levels/CGZ/Blocks/Primary.kos"
+		binclude "data/Levels/CGZ/Blocks/Primary.kos"
 		even
 CGZ_8x8_KosM:
-		binclude "Levels/CGZ/Tiles/Primary.kosm"
+		binclude "data/Levels/CGZ/Tiles/Primary.kosm"
 		even
 CGZ_128x128_Kos:
-		binclude "Levels/CGZ/Chunks/Primary.kos"
+		binclude "data/Levels/CGZ/Chunks/Primary.kos"
 		even
 EMZ_16x16_Kos:
-		binclude "Levels/EMZ/Blocks/Primary.kos"
+		binclude "data/Levels/EMZ/Blocks/Primary.kos"
 		even
 EMZ_8x8_KosM:
-		binclude "Levels/EMZ/Tiles/Primary.kosm"
+		binclude "data/Levels/EMZ/Tiles/Primary.kosm"
 		even
 EMZ_128x128_Kos:
-		binclude "Levels/EMZ/Chunks/Primary.kos"
+		binclude "data/Levels/EMZ/Chunks/Primary.kos"
 		even
 Gumball_16x16_Kos:
-		binclude "Levels/Gumball/Blocks/Primary.kos"
+		binclude "data/Levels/Gumball/Blocks/Primary.kos"
 		even
 Gumball_8x8_KosM:
-		binclude "Levels/Gumball/Tiles/Gumball.kosm"
+		binclude "data/Levels/Gumball/Tiles/Gumball.kosm"
 		even
 Gumball_128x128_Kos:
-		binclude "Levels/Gumball/Chunks/Primary.kos"
+		binclude "data/Levels/Gumball/Chunks/Primary.kos"
 		even
 Pachinko_16x16_Kos:
 ArtKosM_Pachinko:

@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "kit_release": "2026.10.11",
+  "dependencies": [
+    {
+      "name": "retrolarium-kit",
+      "source": "https://github.com/Retrolarium/retrolarium-kit",
+      "commit": "fab4af3440f14e2a1aa98631b12c1113b50ea13b"
+    },
+    {
+      "name": "retrolarium-core",
+      "source": "https://github.com/Retrolarium/retrolarium-core",
+      "commit": "cd5ac6974de99137214866ec72be547449235600"
+    }
+  ],
+  "components": [
+    {
+      "id": "asl",
+      "version": "1.42-beta-build-212",
+      "source": "https://github.com/flamewing/asl-releases/tree/721a327a803585e2d1f59acac93cbd0768213d06",
+      "hosts": {
+        "windows-x86_64": {
+          "commands": {
+            "asl": "asl/asl.exe"
+          },
+          "files": [
+            {
+              "install_path": "asl/asl.exe",
+              "size": 2258944,
+              "sha256": "73a35502b6e4c3bf5c0d5999a7872955bd4f05567874761dd026c296b33038f7"
+            },
+            {
+              "install_path": "asl/as.msg",
+              "size": 26005,
+              "sha256": "c359ab2b8b894bcd6bf912f0e36839c11141d7f70d560b44823ab25dc0124f37"
+            },
+            {
+              "install_path": "asl/cmdarg.msg",
+              "size": 307,
+              "sha256": "371b06c672c25ea23513902e5f7aff889f61c0f213ffe1ddceb065b7df26c5ff"
+            },
+            {
+              "install_path": "asl/ioerrs.msg",
+              "size": 2862,
+              "sha256": "c6428057293bd2542a4c47c0fe85ea8346b9905588e80ccab7226035ba0080dd"
+            }
+          ]
+        },
+        "linux-x86_64": {
+          "commands": {
+            "asl": "asl/asl"
+          },
+          "files": [
+            {
+              "install_path": "asl/asl",
+              "size": 3294184,
+              "sha256": "cd56b49aaf110ad6c4c6a5c74e853f4976aa46cac0e12aa57ac833d3459804e3"
+            },
+            {
+              "install_path": "asl/as.msg",
+              "size": 26005,
+              "sha256": "c359ab2b8b894bcd6bf912f0e36839c11141d7f70d560b44823ab25dc0124f37"
+            },
+            {
+              "install_path": "asl/cmdarg.msg",
+              "size": 307,
+              "sha256": "371b06c672c25ea23513902e5f7aff889f61c0f213ffe1ddceb065b7df26c5ff"
+            },
+            {
+              "install_path": "asl/ioerrs.msg",
+              "size": 2862,
+              "sha256": "c6428057293bd2542a4c47c0fe85ea8346b9905588e80ccab7226035ba0080dd"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "p2bin",
+      "version": "e26d8aa8c43e285bac5e3b7df3be1adae515994f",
+      "source": "https://github.com/Clownacy/p2bin/tree/e26d8aa8c43e285bac5e3b7df3be1adae515994f",
+      "hosts": {
+        "windows-x86_64": {
+          "commands": {
+            "p2bin": "p2bin/p2bin.exe"
+          },
+          "files": [
+            {
+              "install_path": "p2bin/p2bin.exe",
+              "size": 33792,
+              "sha256": "b6b7db88a3ecccb26f61410fa0f14bee7eda3ddf62ee9335ca51ef11c0d73252"
+            }
+          ]
+        },
+        "linux-x86_64": {
+          "commands": {
+            "p2bin": "p2bin/p2bin"
+          },
+          "files": [
+            {
+              "install_path": "p2bin/p2bin",
+              "size": 826088,
+              "sha256": "804baf51dc84f99c227afddb211b827bbe1d99fec94a61b444ed024e0dcc88be"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "hosts": [
+    {
+      "id": "windows-x86_64",
+      "status": "supported",
+      "python": ">=3.11",
+      "make": "GNU Make"
+    },
+    {
+      "id": "linux-x86_64",
+      "status": "partial",
+      "reason": "Bundled tools are pinned; full gates have not run on this host."
+    }
+  ]
+}

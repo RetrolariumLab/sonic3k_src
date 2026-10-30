@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "default": "s3-us",
+  "profiles": [
+    {
+      "id": "s3-us",
+      "image": "s3-us",
+      "entry": "s3.asm",
+      "defines": {
+        "S3_Region": 85
+      },
+      "driver_compression": "uncompressed"
+    },
+    {
+      "id": "s3-eu",
+      "image": "s3-eu",
+      "entry": "s3.asm",
+      "defines": {
+        "S3_Region": 69
+      },
+      "driver_compression": "uncompressed"
+    },
+    {
+      "id": "s3-jp",
+      "image": "s3-jp",
+      "entry": "s3.asm",
+      "defines": {
+        "S3_Region": 74
+      },
+      "driver_compression": "uncompressed"
+    },
+    {
+      "id": "sk",
+      "image": "sk",
+      "entry": "sonic3k.asm",
+      "defines": {},
+      "driver_compression": "kosinski"
+    },
+    {
+      "id": "s3k",
+      "image": "s3k",
+      "compose": [
+        "sk",
+        "s3-us"
+      ]
+    }
+  ],
+  "excluded_scope": [
+    {
+      "id": "community-mods",
+      "reason": "Bug fixes, cheats, complete builds and optimizations change official preservation bytes."
+    },
+    {
+      "id": "knuckles-in-sonic-2",
+      "reason": "The second-cartridge game and its patch ROM are outside this release."
+    },
+    {
+      "id": "prototypes",
+      "reason": "Only the five checked official product/region images are accepted."
+    },
+    {
+      "id": "engine-merging",
+      "reason": "Sonic 3 and Sonic & Knuckles keep separate sibling engines."
+    }
+  ]
+}

@@ -1,0 +1,610 @@
+{
+  "schema_version": 1,
+  "address_space": "z80-driver-ram",
+  "virtual_base": 4864,
+  "address_limit": 7168,
+  "containers": {
+    "s3-us": {
+      "asset": "Sound/Driver/Containers/s3_tables.bin",
+      "codec": "raw",
+      "decoded_size": 2115,
+      "decoded_sha256": "f5579a54623acdb76a0dd66c4c164b48e0d5dd311ac41acb25b5c05b283cd0b0",
+      "slot_capacity": 2115
+    },
+    "sk": {
+      "asset": "Sound/Driver/Containers/sk_tables.kos",
+      "codec": "kos",
+      "decoded_size": 2115,
+      "decoded_sha256": "2968585bb0b829eb8773f9d0f40f5b1e76bd736fd4a274979dbde56fb8f4647a",
+      "slot_capacity": 1680
+    }
+  },
+  "assets": [
+    {
+      "path": "Sound/Driver/Payloads/shared/modenv_01.bin",
+      "label": "ModEnv_01",
+      "format": "modulation-envelope",
+      "size": 1,
+      "sha1": "5ba93c9db0cff93f52b521d7420e43f6eda2784f",
+      "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+      "origins": {
+        "s3-us": 30,
+        "sk": 30
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/modenv_00.bin",
+      "label": "ModEnv_00",
+      "format": "modulation-envelope",
+      "size": 12,
+      "sha1": "4f5016f0c3de0aecdb8b76b803da0e47d3342c13",
+      "sha256": "6aff7bcee380b24c6816122bd077e32a43a04253f35d9369eee9c9b803fdb81e",
+      "origins": {
+        "s3-us": 31,
+        "sk": 31
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/modenv_02.bin",
+      "label": "ModEnv_02",
+      "format": "modulation-envelope",
+      "size": 13,
+      "sha1": "fb64c58b3e384456b6b6b473da81ee02db66c09d",
+      "sha256": "9a8a3a95f1679c94c98ca8fb3b8645827bfcfc9fcd3f37e5253e5242d232c723",
+      "origins": {
+        "s3-us": 43,
+        "sk": 43
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/modenv_03.bin",
+      "label": "ModEnv_03",
+      "format": "modulation-envelope",
+      "size": 14,
+      "sha1": "2421a7ae3bcece5a20f76bb0f2bd968f1f04cf62",
+      "sha256": "e86411b73788b57681db963228eb835314f74b9840144a5f8b90b3d0e888c8c6",
+      "origins": {
+        "s3-us": 56,
+        "sk": 56
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/modenv_04.bin",
+      "label": "ModEnv_04",
+      "format": "modulation-envelope",
+      "size": 12,
+      "sha1": "00b71c91693bdadbdcd6f2ff77a6cb27f5a88a52",
+      "sha256": "ae393c94f78d20c265438933edef058f4f893af1e1ba96e6b97f5107efa6ddd8",
+      "origins": {
+        "s3-us": 70,
+        "sk": 70
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/modenv_05.bin",
+      "label": "ModEnv_05",
+      "format": "modulation-envelope",
+      "size": 18,
+      "sha1": "176197e043aa52a8088a23a577a8330642b1dce6",
+      "sha256": "01efd1f71d4a2e0461fc7f2a2a997e240d6e7e1a10cf9525b57b5a6381313f30",
+      "origins": {
+        "s3-us": 82,
+        "sk": 82
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/modenv_06.bin",
+      "label": "ModEnv_06",
+      "format": "modulation-envelope",
+      "size": 17,
+      "sha1": "384fb4b442025ef2958dc99e97daeb1ac105a900",
+      "sha256": "0baa811f3011743fe0e0b99428de33d4778efa0d94073d929fb6981c0b989857",
+      "origins": {
+        "s3-us": 100,
+        "sk": 100
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/modenv_07.bin",
+      "label": "ModEnv_07",
+      "format": "modulation-envelope",
+      "size": 18,
+      "sha1": "1494602af8acce18d89ce91a8d9152471615e2c0",
+      "sha256": "02a4a35259ec54fa814d7442ac6d96c5eed771aea8d483eadb198a92abbff68d",
+      "origins": {
+        "s3-us": 117,
+        "sk": 117
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_01.bin",
+      "label": "VolEnv_01",
+      "format": "volume-envelope",
+      "size": 2,
+      "sha1": "09a50bdd0055b572f328ffc49247947c9619229d",
+      "sha256": "e63852c1622847b07a8455da1769f270e3d0128ba3b9cd00433da077d887fc81",
+      "origins": {
+        "s3-us": 213,
+        "sk": 213
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_02.bin",
+      "label": "VolEnv_02",
+      "format": "volume-envelope",
+      "size": 7,
+      "sha1": "8441bb644f01f8a6683452355cb092ea661265ac",
+      "sha256": "45356815a46f183ee6bb16102678d8ac10747a4e1f1a1e98a3d94ba3c005487b",
+      "origins": {
+        "s3-us": 215,
+        "sk": 215
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_03.bin",
+      "label": "VolEnv_03",
+      "format": "volume-envelope",
+      "size": 25,
+      "sha1": "60bf4b1bcb4d5d81cad9e28a6270e3756514876f",
+      "sha256": "3868d35405a28bb71af372922fb5f30317b32244af085664201c78ada2b6c7f9",
+      "origins": {
+        "s3-us": 222,
+        "sk": 222
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_04.bin",
+      "label": "VolEnv_04",
+      "format": "volume-envelope",
+      "size": 12,
+      "sha1": "f6d1090a8aea82915b4fa495da3e1f71a5830f8a",
+      "sha256": "1131df9e03eeb21b33e6f00fd9575a660fa67e04fb456d22905ece0b52a768f2",
+      "origins": {
+        "s3-us": 247,
+        "sk": 247
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_05.bin",
+      "label": "VolEnv_05",
+      "format": "volume-envelope",
+      "size": 11,
+      "sha1": "497e3c68a0d3ab674935b67a1efa6958738674bd",
+      "sha256": "cebf35207bbf9a588e8ac34be01c81e5354e0cd64ebfec606e4630ff8ded98e7",
+      "origins": {
+        "s3-us": 259,
+        "sk": 259
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_06.bin",
+      "label": "VolEnv_06",
+      "format": "volume-envelope",
+      "size": 15,
+      "sha1": "755eb8c48b49735cb7dc543a1ea5193e1c95c7a2",
+      "sha256": "0fa33fe8988be6f9877135582a7e9ff1566c2a2701a95b23894593503e11d128",
+      "origins": {
+        "s3-us": 270,
+        "sk": 270
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_07.bin",
+      "label": "VolEnv_07",
+      "format": "volume-envelope",
+      "size": 9,
+      "sha1": "603c83c616e97431f4dfd3381f799a60bd4c07b6",
+      "sha256": "5e43147257b7d5f147a39afaf0dcc4d4b3f2716ecd77e4d545cf96ac4df8f621",
+      "origins": {
+        "s3-us": 285,
+        "sk": 285
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_08.bin",
+      "label": "VolEnv_08",
+      "format": "volume-envelope",
+      "size": 17,
+      "sha1": "f17a2d28b37577b16d57360fc44b4970ab58683f",
+      "sha256": "10041b8230c144af8ce8a28e9fedcdf2a6fd2a1c0d7996d563445349e08d9841",
+      "origins": {
+        "s3-us": 294,
+        "sk": 294
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_09.bin",
+      "label": "VolEnv_09",
+      "format": "volume-envelope",
+      "size": 11,
+      "sha1": "f332685080badb8cb2eff795a99e060c389dbd21",
+      "sha256": "20bdab82e3338512536863684241a68e26d51c164c06baa00e9d6f9099ad46dc",
+      "origins": {
+        "s3-us": 311,
+        "sk": 311
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_0a.bin",
+      "label": "VolEnv_0A",
+      "format": "volume-envelope",
+      "size": 21,
+      "sha1": "869df6cc05e6048c88afbc561cfe968c03706be1",
+      "sha256": "877cfe20b72c0cd9fecb9dd0129a68f2172f94885b05368c3f8195de73d9d6ad",
+      "origins": {
+        "s3-us": 322,
+        "sk": 322
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_0b.bin",
+      "label": "VolEnv_0B",
+      "format": "volume-envelope",
+      "size": 10,
+      "sha1": "d20f3218280a550418baf30435ed59b473e7896d",
+      "sha256": "54c58afff70783ffcaef5c7cd0a489c3970ba7a60785b55916d856031d2a9a66",
+      "origins": {
+        "s3-us": 343,
+        "sk": 343
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_0c.bin",
+      "label": "VolEnv_0C",
+      "format": "volume-envelope",
+      "size": 9,
+      "sha1": "902fd6569d7f2d69e67f42e6198081f3c2eaba96",
+      "sha256": "a503823e0eb387db2e82fac72b0ae7b7ed72cbb96f45af702a3ba1aac0c2ca10",
+      "origins": {
+        "s3-us": 353,
+        "sk": 353
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_0d.bin",
+      "label": "VolEnv_0D",
+      "format": "volume-envelope",
+      "size": 2,
+      "sha1": "3680b5ba23f6a46bea6b63e3ad53c9416c17bd5d",
+      "sha256": "fb13e8eb4ee0b20345624f1ad3a29eb8e4c09ca68f5ae26f2dcfd0edf81ab81c",
+      "origins": {
+        "s3-us": 362,
+        "sk": 362
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_0e.bin",
+      "label": "VolEnv_0E",
+      "format": "volume-envelope",
+      "size": 2,
+      "sha1": "09a50bdd0055b572f328ffc49247947c9619229d",
+      "sha256": "e63852c1622847b07a8455da1769f270e3d0128ba3b9cd00433da077d887fc81",
+      "origins": {
+        "s3-us": 364,
+        "sk": 364
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_0f.bin",
+      "label": "VolEnv_0F",
+      "format": "volume-envelope",
+      "size": 7,
+      "sha1": "8441bb644f01f8a6683452355cb092ea661265ac",
+      "sha256": "45356815a46f183ee6bb16102678d8ac10747a4e1f1a1e98a3d94ba3c005487b",
+      "origins": {
+        "s3-us": 366,
+        "sk": 366
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_10.bin",
+      "label": "VolEnv_10",
+      "format": "volume-envelope",
+      "size": 31,
+      "sha1": "2d7c49413314d8a485ba15c1202fbe189050fb55",
+      "sha256": "5176ed6835d74d862541e944dfbda1cdc548c55241988da75efe847ec8d9cd0d",
+      "origins": {
+        "s3-us": 373,
+        "sk": 373
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_11.bin",
+      "label": "VolEnv_11",
+      "format": "volume-envelope",
+      "size": 7,
+      "sha1": "c38758eb966829f9a4582135827cac969f64871a",
+      "sha256": "c70de0b11d4d13a61138b932832da0c2e156dd6a96a6a7b2e1bd989f6005cdcd",
+      "origins": {
+        "s3-us": 404,
+        "sk": 404
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_12.bin",
+      "label": "VolEnv_12",
+      "format": "volume-envelope",
+      "size": 11,
+      "sha1": "497e3c68a0d3ab674935b67a1efa6958738674bd",
+      "sha256": "cebf35207bbf9a588e8ac34be01c81e5354e0cd64ebfec606e4630ff8ded98e7",
+      "origins": {
+        "s3-us": 411,
+        "sk": 411
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_13.bin",
+      "label": "VolEnv_13",
+      "format": "volume-envelope",
+      "size": 15,
+      "sha1": "755eb8c48b49735cb7dc543a1ea5193e1c95c7a2",
+      "sha256": "0fa33fe8988be6f9877135582a7e9ff1566c2a2701a95b23894593503e11d128",
+      "origins": {
+        "s3-us": 422,
+        "sk": 422
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_14.bin",
+      "label": "VolEnv_14",
+      "format": "volume-envelope",
+      "size": 6,
+      "sha1": "cb47b9007776b9c36cf7ab0d7d6a940dca62474d",
+      "sha256": "a5c98b3c3f2b51520a40c3eb62bf8d08c29ffe5755a9eda624febca8b42a6f46",
+      "origins": {
+        "s3-us": 437,
+        "sk": 437
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_15.bin",
+      "label": "VolEnv_15",
+      "format": "volume-envelope",
+      "size": 17,
+      "sha1": "f17a2d28b37577b16d57360fc44b4970ab58683f",
+      "sha256": "10041b8230c144af8ce8a28e9fedcdf2a6fd2a1c0d7996d563445349e08d9841",
+      "origins": {
+        "s3-us": 443,
+        "sk": 443
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_16.bin",
+      "label": "VolEnv_16",
+      "format": "volume-envelope",
+      "size": 11,
+      "sha1": "f332685080badb8cb2eff795a99e060c389dbd21",
+      "sha256": "20bdab82e3338512536863684241a68e26d51c164c06baa00e9d6f9099ad46dc",
+      "origins": {
+        "s3-us": 460,
+        "sk": 460
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_17.bin",
+      "label": "VolEnv_17",
+      "format": "volume-envelope",
+      "size": 21,
+      "sha1": "869df6cc05e6048c88afbc561cfe968c03706be1",
+      "sha256": "877cfe20b72c0cd9fecb9dd0129a68f2172f94885b05368c3f8195de73d9d6ad",
+      "origins": {
+        "s3-us": 471,
+        "sk": 471
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_18.bin",
+      "label": "VolEnv_18",
+      "format": "volume-envelope",
+      "size": 25,
+      "sha1": "5b8512c44ef8578eef83736cbd9edeba6167d3ea",
+      "sha256": "5ab150bc26f9f36d679419b66f6b175f534b5cddd63accad1741b071b885e3f0",
+      "origins": {
+        "s3-us": 492,
+        "sk": 492
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_19.bin",
+      "label": "VolEnv_19",
+      "format": "volume-envelope",
+      "size": 9,
+      "sha1": "902fd6569d7f2d69e67f42e6198081f3c2eaba96",
+      "sha256": "a503823e0eb387db2e82fac72b0ae7b7ed72cbb96f45af702a3ba1aac0c2ca10",
+      "origins": {
+        "s3-us": 517,
+        "sk": 517
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_1a.bin",
+      "label": "VolEnv_1A",
+      "format": "volume-envelope",
+      "size": 7,
+      "sha1": "608e1d1867f78bcd22271a9c9f871c1d35fd4cc0",
+      "sha256": "e7b63502bbc7a478c7bee1446ae8d8f834a06552f0081becdc7f8b640e7f3e8c",
+      "origins": {
+        "s3-us": 526,
+        "sk": 526
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_1b.bin",
+      "label": "VolEnv_1B",
+      "format": "volume-envelope",
+      "size": 9,
+      "sha1": "902fd6569d7f2d69e67f42e6198081f3c2eaba96",
+      "sha256": "a503823e0eb387db2e82fac72b0ae7b7ed72cbb96f45af702a3ba1aac0c2ca10",
+      "origins": {
+        "s3-us": 533,
+        "sk": 533
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_1c.bin",
+      "label": "VolEnv_1C",
+      "format": "volume-envelope",
+      "size": 17,
+      "sha1": "5195673350bf969649a9d91e4fa8eca4217adddb",
+      "sha256": "32e9639c1f89dfa50f0ab34587576aff026b45ce1f6d9daf3e9a9386bbe190c9",
+      "origins": {
+        "s3-us": 542,
+        "sk": 542
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_1d.bin",
+      "label": "VolEnv_1D",
+      "format": "volume-envelope",
+      "size": 45,
+      "sha1": "2a21756d4ce228c28c9c962b2d0c913c8266f754",
+      "sha256": "6e83ae473dbf3b72dc269a082a048defb8a28a04dc863ec4a76ba2bee78e82e0",
+      "origins": {
+        "s3-us": 559,
+        "sk": 559
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_1e.bin",
+      "label": "VolEnv_1E",
+      "format": "volume-envelope",
+      "size": 3,
+      "sha1": "e6639f8a1de45359f3464c56a52c5ab70beabfa4",
+      "sha256": "336b89d23aee6cd6e4fb359fa6a5f2023f4c514e6528207a2c1b34d693758454",
+      "origins": {
+        "s3-us": 604,
+        "sk": 604
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_1f.bin",
+      "label": "VolEnv_1F",
+      "format": "volume-envelope",
+      "size": 4,
+      "sha1": "f99848eef32340bfe63de5cf0ae338a398b15f3c",
+      "sha256": "0fef7551c4d1c971ea753cad1ea4e8ccadf6f34daddb6eef50f34b4c83496744",
+      "origins": {
+        "s3-us": 607,
+        "sk": 607
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_20.bin",
+      "label": "VolEnv_20",
+      "format": "volume-envelope",
+      "size": 13,
+      "sha1": "86359a3837a172d7e76b277f0aefee6febec765b",
+      "sha256": "b580875192b5c1c0f1d1e63ca20bb4d8dd26c9ae99cef3ce7ca970a78de533f0",
+      "origins": {
+        "s3-us": 611,
+        "sk": 611
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_21.bin",
+      "label": "VolEnv_21",
+      "format": "volume-envelope",
+      "size": 18,
+      "sha1": "80258a406ea95e83c77308cc6c90cc1368a388c7",
+      "sha256": "8ea2423fc143663600747db81a533e08b82b6b8c3c1f15c300d105d39a1b3238",
+      "origins": {
+        "s3-us": 624,
+        "sk": 624
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_22.bin",
+      "label": "VolEnv_22",
+      "format": "volume-envelope",
+      "size": 7,
+      "sha1": "7895b636eac07b1a39d0e74276f710cf32dadbe0",
+      "sha256": "fea1a09cccfff1760b831f4cb394d65b989e857a35ce66cb127eb741aa6b09ff",
+      "origins": {
+        "s3-us": 642,
+        "sk": 642
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_23.bin",
+      "label": "VolEnv_23",
+      "format": "volume-envelope",
+      "size": 9,
+      "sha1": "620305e477b31c2311d3e39157c5d7125eb71b94",
+      "sha256": "075253286458a25323d69acf96e8021aa2f79ce1ef84fb55cf230a035d8cfad8",
+      "origins": {
+        "s3-us": 649,
+        "sk": 649
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_24.bin",
+      "label": "VolEnv_24",
+      "format": "volume-envelope",
+      "size": 4,
+      "sha1": "120de41f6b1ec68cdc4add53f6e3e11c28acf35c",
+      "sha256": "30977e3fb806e779f379e32038b1fb3d87e0d51b7c7adb8e857a81b98393d62d",
+      "origins": {
+        "s3-us": 658,
+        "sk": 658
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_25.bin",
+      "label": "VolEnv_25",
+      "format": "volume-envelope",
+      "size": 18,
+      "sha1": "21a35b92b7268bcd7385eeb9b3adcbf1a0c5882a",
+      "sha256": "adbbaa9b6a11101647306a79146b44c5d6b5f4f78a5a9d41c1fe2d32d719f428",
+      "origins": {
+        "s3-us": 662,
+        "sk": 662
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/s3/volenv_26.bin",
+      "label": "VolEnv_26",
+      "format": "volume-envelope",
+      "size": 101,
+      "sha1": "69cbbfb43c4e5c984aae65c88cd5c957ec79d7cb",
+      "sha256": "b5d703ca7efb08c3940b78e831e3c56961ef44eeb61a696a2a30f23f09bbea62",
+      "origins": {
+        "s3-us": 680
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/sk/volenv_26.bin",
+      "label": "VolEnv_26",
+      "format": "volume-envelope",
+      "size": 99,
+      "sha1": "fb4a0a48923b7d962cc4d12eb0fab52330491a02",
+      "sha256": "cefe596aa8e3472bcf97b6f5053bdca3ab49bd16cdac774f8484920f0c2374cb",
+      "origins": {
+        "sk": 680
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/volenv_27.bin",
+      "label": "VolEnv_27",
+      "format": "volume-envelope",
+      "size": 13,
+      "sha1": "bb60da47f4eea31fee9995afc0fec858582b5f23",
+      "sha256": "41bd2020951d4458e667c0c52786871d1261a7718f3ae0692a565051200717fa",
+      "origins": {
+        "s3-us": 781,
+        "sk": 779
+      }
+    },
+    {
+      "path": "Sound/Driver/Payloads/shared/z80_univoicebank.bin",
+      "label": "z80_UniVoiceBank",
+      "format": "fm-voice-bank",
+      "size": 875,
+      "sha1": "64cb71b7cb172e944219247e201134e89d06bc1a",
+      "sha256": "df3c1ed18bc21b2147e7aef2daa41dd2e4e3127f4c06b12a88eede7cab7c3e68",
+      "origins": {
+        "s3-us": 1240,
+        "sk": 1240
+      }
+    }
+  ]
+}

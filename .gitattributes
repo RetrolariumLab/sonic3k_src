@@ -1,7 +1,6 @@
-*.asm		text
-*.txt		text
-*.xml		text
-*.cs		text
-*.cpp		text
-*.ini		text
-*.bin		binary
+* text=auto eol=lf
+*.asm text eol=lf
+*.py text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+Makefile text eol=lf

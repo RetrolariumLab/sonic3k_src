@@ -899,10 +899,10 @@ AIZ2_BGDeformMake:
 		dc.b  $FF
 		even
 Pal_AIZBattleship:
-		binclude "Levels/AIZ/Palettes/Battleship.bin"
+		binclude "data/Levels/AIZ/Palettes/Battleship.bin"
 		even
 Pal_AIZBossSmall:
-		binclude "Levels/AIZ/Palettes/Boss Small.bin"
+		binclude "data/Levels/AIZ/Palettes/Boss Small.bin"
 		even
 AIZBattleShip_BobbingMotion:
 		dc.b   4,  4,  3,  3,  2,  1,  1,  0,  0,  0,  1,  1,  2,  3,  3,  4

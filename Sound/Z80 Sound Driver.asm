@@ -4358,7 +4358,7 @@ zPlayDigitalAudio:
 ; JMan2050's DAC decode lookup table
 ; ===========================================================================
 DecTable:
-		binclude "Sound/DAC/deltas.bin"
+		binclude "data/Sound/DAC/deltas.bin"
 ; ---------------------------------------------------------------------------
 
 ; =============== S U B	R O U T	I N E =======================================
