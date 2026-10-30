@@ -840,7 +840,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 110402,
+      "physical_lines": 106638,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "s3.s",
@@ -900,7 +900,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 191458,
+      "physical_lines": 187968,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -2405,6 +2405,166 @@
       ]
     },
     {
+      "path": "src/game/modes/s3/legacy_competition_selection.s",
+      "owner": "game/modes/s3",
+      "responsibility": "Preserved Sonic 2 style competition selection, completion marks and menu text transfer.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 318,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "s3.s",
+        "first_line": 29,
+        "last_line": 343,
+        "sha256": "c46ba1a647e58df6e0be3d72244abe6540d09e1a3e3bf97d2d435819757ff331"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 24902,
+          "end": 25932
+        },
+        {
+          "profile": "s3-eu",
+          "start": 24902,
+          "end": 25932
+        },
+        {
+          "profile": "s3-jp",
+          "start": 24902,
+          "end": 25932
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2122054,
+          "end": 2123084
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/s3/legacy_options.s",
+      "owner": "game/modes/s3",
+      "responsibility": "Preserved options screen, sound test, player choices and text pointer tables.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 307,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "s3.s",
+        "first_line": 344,
+        "last_line": 648,
+        "sha256": "89161ce21c9d43d9017629dd6ce9b34fe05b4318cca5b4e3d0fbd3725ea7e3c4"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 25932,
+          "end": 26748
+        },
+        {
+          "profile": "s3-eu",
+          "start": 25932,
+          "end": 26748
+        },
+        {
+          "profile": "s3-jp",
+          "start": 25932,
+          "end": 26748
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2123084,
+          "end": 2123900
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/s3/level_selection.s",
+      "owner": "game/modes/s3",
+      "responsibility": "Level selection initialization, zone dispatch, cursor control, sound test and cheat input processing.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 638,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "s3.s",
+        "first_line": 649,
+        "last_line": 1283,
+        "sha256": "bb4c6a2978ba49d25493785fb1791c45d3c47b0c61538c6273a9dc141bc3e35e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 26748,
+          "end": 28368
+        },
+        {
+          "profile": "s3-eu",
+          "start": 26748,
+          "end": 28368
+        },
+        {
+          "profile": "s3-jp",
+          "start": 26748,
+          "end": 28368
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2123900,
+          "end": 2125520
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/s3/level_selection_data.s",
+      "owner": "game/modes/s3",
+      "responsibility": "Level selection text, mapping offsets, identifier sequences and display asset storage.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 107,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "s3.s",
+        "first_line": 1284,
+        "last_line": 1388,
+        "sha256": "daa7065162528603624f9618b26150616efe7385c06c922937b2abcf0e53a480"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 28368,
+          "end": 29878
+        },
+        {
+          "profile": "s3-eu",
+          "start": 28368,
+          "end": 29878
+        },
+        {
+          "profile": "s3-jp",
+          "start": 28368,
+          "end": 29878
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2125520,
+          "end": 2127030
+        }
+      ]
+    },
+    {
       "path": "src/game/modes/s3/pause.s",
       "owner": "game/modes/s3",
       "responsibility": "Complete pause, resume, slow motion and single-frame advance state machine.",
@@ -2566,6 +2726,66 @@
           "component": "s3-us",
           "start": 2112476,
           "end": 2114250
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/sk/level_selection.s",
+      "owner": "game/modes/sk",
+      "responsibility": "Sonic and Knuckles level selection, permitted character checks, cursor control and sound test.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 601,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "sonic3k.s",
+        "first_line": 34,
+        "last_line": 631,
+        "sha256": "0d8ddfb6020aba3fba41b030d86e151b70c8db18e2c6f6f25a9251917b2072ac"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 31348,
+          "end": 32832
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 31348,
+          "end": 32832
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/sk/level_selection_data.s",
+      "owner": "game/modes/sk",
+      "responsibility": "Level selection text, mapping offsets, identifier sequences and display asset storage.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 92,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "sonic3k.s",
+        "first_line": 632,
+        "last_line": 721,
+        "sha256": "25a0ddadb863eff1e7f7b6043a57e1c01f02e006cfba1f2d4d6dcbe25f473b85"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 32832,
+          "end": 33222
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 32832,
+          "end": 33222
         }
       ]
     },
@@ -2851,6 +3071,386 @@
           "component": "sk",
           "start": 17664,
           "end": 19602
+        }
+      ]
+    },
+    {
+      "path": "src/game/special_stage/s3/mode_and_display.s",
+      "owner": "game/special_stage/s3",
+      "responsibility": "Special stage entry, layout preparation, active mode loop and palette/map display updates.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 314,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "s3.s",
+        "first_line": 1389,
+        "last_line": 1699,
+        "sha256": "1e6173a01615d63512a7b02e14a6dff9024e3f10897ef12345bc82d917166019"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 29878,
+          "end": 31086
+        },
+        {
+          "profile": "s3-eu",
+          "start": 29878,
+          "end": 31086
+        },
+        {
+          "profile": "s3-jp",
+          "start": 29878,
+          "end": 31086
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2127030,
+          "end": 2128238
+        }
+      ]
+    },
+    {
+      "path": "src/game/special_stage/s3/number_display.s",
+      "owner": "game/special_stage/s3",
+      "responsibility": "Special stage decimal number conversion, fixed HUD glyph output and private number graphics.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 52,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "s3.s",
+        "first_line": 1779,
+        "last_line": 1827,
+        "sha256": "8a100774c24a43c711920ded68c6cbb9f2f249191e988d294ff5317664693cfb"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 31702,
+          "end": 31956
+        },
+        {
+          "profile": "s3-eu",
+          "start": 31702,
+          "end": 31956
+        },
+        {
+          "profile": "s3-jp",
+          "start": 31702,
+          "end": 31956
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2128854,
+          "end": 2129108
+        }
+      ]
+    },
+    {
+      "path": "src/game/special_stage/s3/object_allocation.s",
+      "owner": "game/special_stage/s3",
+      "responsibility": "Complete fixed-slot special-stage object allocator and its preserved return behavior.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 32,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "s3.s",
+        "first_line": 1828,
+        "last_line": 1856,
+        "sha256": "acce057a2479dd4fd571a9e69ff01ed19341ead748ee880987b8430027c322b8"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 31956,
+          "end": 32112
+        },
+        {
+          "profile": "s3-eu",
+          "start": 31956,
+          "end": 32112
+        },
+        {
+          "profile": "s3-jp",
+          "start": 31956,
+          "end": 32112
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2129108,
+          "end": 2129264
+        }
+      ]
+    },
+    {
+      "path": "src/game/special_stage/s3/palette_catalog.s",
+      "owner": "game/special_stage/s3",
+      "responsibility": "Special stage palette pointer families and product-specific colour asset storage.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 81,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "s3.s",
+        "first_line": 1700,
+        "last_line": 1778,
+        "sha256": "bb525539d2aaa8b7840eb538eae4cda67c4c40b693955004bdc990442c26bfb4"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 31086,
+          "end": 31702
+        },
+        {
+          "profile": "s3-eu",
+          "start": 31086,
+          "end": 31702
+        },
+        {
+          "profile": "s3-jp",
+          "start": 31086,
+          "end": 31702
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2128238,
+          "end": 2128854
+        }
+      ]
+    },
+    {
+      "path": "src/game/special_stage/s3/player_and_start_cues.s",
+      "owner": "game/special_stage/s3",
+      "responsibility": "Stage icons, moving instruction cues and the primary character state machine with player frame-loading support.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 292,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "s3.s",
+        "first_line": 1857,
+        "last_line": 2146,
+        "sha256": "c144d045e0f18697d1b19206599304621e376d20cb11907dc3d0fdfbd0754dd3"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 32112,
+          "end": 33096
+        },
+        {
+          "profile": "s3-eu",
+          "start": 32112,
+          "end": 33096
+        },
+        {
+          "profile": "s3-jp",
+          "start": 32112,
+          "end": 33096
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2129264,
+          "end": 2130248
+        }
+      ]
+    },
+    {
+      "path": "src/game/special_stage/s3/projected_character_motion.s",
+      "owner": "game/special_stage/s3",
+      "responsibility": "Projected tail and shadow rendering, scalar setup, stage motion and layout-space response.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 399,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "s3.s",
+        "first_line": 2286,
+        "last_line": 2681,
+        "sha256": "5be1a2b8421491ecd00bcf781e4644197c9b40d652c7f01e254b2c41da4f5e32"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 33518,
+          "end": 34608
+        },
+        {
+          "profile": "s3-eu",
+          "start": 33518,
+          "end": 34608
+        },
+        {
+          "profile": "s3-jp",
+          "start": 33518,
+          "end": 34608
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2130670,
+          "end": 2131760
+        }
+      ]
+    },
+    {
+      "path": "src/game/special_stage/s3/sphere_contacts.s",
+      "owner": "game/special_stage/s3",
+      "responsibility": "Sphere and ring contact responses, ring enclosure conversion, emerald completion and private geometry/mapping tables.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 699,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "s3.s",
+        "first_line": 3109,
+        "last_line": 3805,
+        "sha256": "fd30edc68c725cce5e30c8b09b59e73e6186b04a23ca0ab1c490ecf448a6aa03"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 35674,
+          "end": 38192
+        },
+        {
+          "profile": "s3-eu",
+          "start": 35674,
+          "end": 38192
+        },
+        {
+          "profile": "s3-jp",
+          "start": 35674,
+          "end": 38192
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2132826,
+          "end": 2135344
+        }
+      ]
+    },
+    {
+      "path": "src/game/special_stage/s3/sprite_rendering.s",
+      "owner": "game/special_stage/s3",
+      "responsibility": "Special stage sprite projection, normal and departing sphere display and product-specific sprite output.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 430,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "s3.s",
+        "first_line": 2682,
+        "last_line": 3108,
+        "sha256": "c459b99eef18720ba308a9d79c56371eb0039c5ca71d8184115716e351a7ee2b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 34608,
+          "end": 35674
+        },
+        {
+          "profile": "s3-eu",
+          "start": 34608,
+          "end": 35674
+        },
+        {
+          "profile": "s3-jp",
+          "start": 34608,
+          "end": 35674
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2131760,
+          "end": 2132826
+        }
+      ]
+    },
+    {
+      "path": "src/game/special_stage/s3/tails_follower.s",
+      "owner": "game/special_stage/s3",
+      "responsibility": "Tails special-stage follower animation, delayed position history and history reset.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 142,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "s3.s",
+        "first_line": 2147,
+        "last_line": 2285,
+        "sha256": "ef205c21ebdbb71d3e242c8ebe7e97030168de77c00a888588faac2ecfbaed12"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 33096,
+          "end": 33518
+        },
+        {
+          "profile": "s3-eu",
+          "start": 33096,
+          "end": 33518
+        },
+        {
+          "profile": "s3-jp",
+          "start": 33096,
+          "end": 33518
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2130248,
+          "end": 2130670
         }
       ]
     },
@@ -3218,6 +3818,296 @@
       ],
       "applicability": "emitted",
       "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/game/special_stage/sk/mode_and_display.s",
+      "owner": "game/special_stage/sk",
+      "responsibility": "Special stage entry, layout preparation, active mode loop and palette/map display updates.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 517,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "sonic3k.s",
+        "first_line": 722,
+        "last_line": 1235,
+        "sha256": "e68d8c227351cdeb8acf35fd67f024635a8923a578c8173c9cd071445f595703"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 33222,
+          "end": 34998
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 33222,
+          "end": 34998
+        }
+      ]
+    },
+    {
+      "path": "src/game/special_stage/sk/number_display.s",
+      "owner": "game/special_stage/sk",
+      "responsibility": "Special stage decimal number conversion, fixed HUD glyph output and private number graphics.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 52,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "sonic3k.s",
+        "first_line": 1342,
+        "last_line": 1390,
+        "sha256": "89df191558a8cda76696e6cdadeb8d4c0fa0c839b836e0b72a4ef8cdd686fc2b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 35934,
+          "end": 36188
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 35934,
+          "end": 36188
+        }
+      ]
+    },
+    {
+      "path": "src/game/special_stage/sk/object_allocation.s",
+      "owner": "game/special_stage/sk",
+      "responsibility": "Complete fixed-slot special-stage object allocator and its preserved return behavior.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 32,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "sonic3k.s",
+        "first_line": 1391,
+        "last_line": 1419,
+        "sha256": "acce057a2479dd4fd571a9e69ff01ed19341ead748ee880987b8430027c322b8"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 36188,
+          "end": 36344
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 36188,
+          "end": 36344
+        }
+      ]
+    },
+    {
+      "path": "src/game/special_stage/sk/palette_catalog.s",
+      "owner": "game/special_stage/sk",
+      "responsibility": "Special stage palette pointer families and product-specific colour asset storage.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 108,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "sonic3k.s",
+        "first_line": 1236,
+        "last_line": 1341,
+        "sha256": "670390aa73a834f9756791de427558aff8d7c0da51ea0dfa6439522268e32ddf"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 34998,
+          "end": 35934
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 34998,
+          "end": 35934
+        }
+      ]
+    },
+    {
+      "path": "src/game/special_stage/sk/player_and_start_cues.s",
+      "owner": "game/special_stage/sk",
+      "responsibility": "Stage icons, moving instruction cues and the primary character state machine with player frame-loading support.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 313,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "sonic3k.s",
+        "first_line": 1420,
+        "last_line": 1730,
+        "sha256": "2b70b96e546098e5b495e15a02bdb02bd149a4fba4d02813ae89bfc9c0c0184d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 36344,
+          "end": 37394
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 36344,
+          "end": 37394
+        }
+      ]
+    },
+    {
+      "path": "src/game/special_stage/sk/projected_character_motion.s",
+      "owner": "game/special_stage/sk",
+      "responsibility": "Projected tail and shadow rendering, scalar setup, stage motion and layout-space response.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 431,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "sonic3k.s",
+        "first_line": 1916,
+        "last_line": 2343,
+        "sha256": "0017a134deb8aa565dda64eefd045ef3399ed58e84590da329c2032c10347fce"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 37956,
+          "end": 39088
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 37956,
+          "end": 39088
+        }
+      ]
+    },
+    {
+      "path": "src/game/special_stage/sk/sphere_contacts.s",
+      "owner": "game/special_stage/sk",
+      "responsibility": "Sphere and ring contact responses, ring enclosure conversion, emerald completion and private geometry/mapping tables.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 737,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "sonic3k.s",
+        "first_line": 2800,
+        "last_line": 3534,
+        "sha256": "032c5494e1d18a80a93e29c05bdf710ed413885e0d487511a849fb2013719613"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-family",
+        "reason": "One complete contact and ring-enclosure family retains its geometry tables and terminal return after the tables. Indexed PC references and contact exit branches stay within the owner; the complete family remains below 900 lines.",
+        "proof_target": "check-source-layout"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 40222,
+          "end": 43102
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 40222,
+          "end": 43102
+        }
+      ]
+    },
+    {
+      "path": "src/game/special_stage/sk/sprite_rendering.s",
+      "owner": "game/special_stage/sk",
+      "responsibility": "Special stage sprite projection, normal and departing sphere display and product-specific sprite output.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 459,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "sonic3k.s",
+        "first_line": 2344,
+        "last_line": 2799,
+        "sha256": "aeda145436cd326039b81f2def21c1603ed5557e8ab365cef43b699e71d43a76"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 39088,
+          "end": 40222
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 39088,
+          "end": 40222
+        }
+      ]
+    },
+    {
+      "path": "src/game/special_stage/sk/tails_follower.s",
+      "owner": "game/special_stage/sk",
+      "responsibility": "Tails special-stage follower animation, delayed position history and history reset.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 188,
+      "origin": {
+        "commit": "dc09abaa4de117f92491789747178b9736494966",
+        "path": "sonic3k.s",
+        "first_line": 1731,
+        "last_line": 1915,
+        "sha256": "e9eaf031eefb0a2b2a2e8c765a10b899435b6929ea88dead6dad5166f0d21947"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 37394,
+          "end": 37956
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 37394,
+          "end": 37956
+        }
+      ]
     },
     {
       "path": "src/objects/shared/animals/map_animals_1.s",

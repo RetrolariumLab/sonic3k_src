@@ -143,6 +143,34 @@ def check_bank_storage(symbols, original, relocated):
         raise ValueError("Relocation changed fixed music/sample bank storage")
 
 
+def checked_code_aliases(policy, profile, symbols, declared):
+    records = policy.get("code_entry_aliases", [])
+    names = [row["alias"] for row in records]
+    if len(names) != len(set(names)):
+        raise ValueError("Duplicate code-entry alias")
+    result = {}
+    for row in records:
+        if (
+            row.get("kind") != "data-end-code-alias"
+            or not row.get("reason")
+            or not set(row["profiles"]) <= set(policy["engines"])
+        ):
+            raise ValueError("Invalid code-entry alias contract")
+        if profile not in row["profiles"]:
+            continue
+        alias, target = row["alias"], row["target"]
+        if (
+            alias == target
+            or target not in declared
+            or alias not in symbols
+            or target not in symbols
+            or symbols[alias] != symbols[target]
+        ):
+            raise ValueError("Code-entry alias differs from its independently discovered target")
+        result[alias] = symbols[alias]
+    return result
+
+
 def baseline(policy, plan):
     result = {}
     documents = {d["path"]: d for d in plan["documents"]}
@@ -155,6 +183,7 @@ def baseline(policy, plan):
             (ROOT / "build/objects" / key / "main.lst").read_text(encoding="utf-8", errors="replace")
         )
         declared = {n for p in engine["sources"] for n in documents[p]["code_labels"]}
+        declared.update(checked_code_aliases(policy, key, symbols, declared))
         entries = {n: symbols[n] for n in sorted(declared) if n in symbols and 0x200 <= symbols[n] < 0x200000}
         if not entries or engine["startup_label"] not in entries:
             raise ValueError("Missing independently assembled code entries for " + key)
@@ -236,6 +265,7 @@ def symbol_evidence(policy, base, key, listing):
     entries = base[key]["entries"]
     if any(n not in symbols for n in entries):
         raise ValueError("A relocated code entry disappeared")
+    checked_code_aliases(policy, key, symbols, set(entries))
     after = {n: symbols[n] for n in entries}
     if any(v & 1 or not 0x200 <= v < 0x200000 for v in after.values()):
         raise ValueError("A 68000 code entry became odd")
@@ -291,6 +321,7 @@ def verify_manifest(path="build/relocated/manifest.json"):
                 or set(proof["after"]) != set(proof["before"])
             ):
                 raise ValueError("Relocation symbol coverage differs from independent entries")
+            checked_code_aliases(policy, key, proof["after"], set(base[key]["entries"]))
             if any(value & 1 or not 0x200 <= value < 0x200000 for value in proof["after"].values()):
                 raise ValueError("Odd relocated code address")
             if set(proof["fixed"]) != fixed_names(key):

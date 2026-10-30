@@ -9,7 +9,22 @@ from scripts.build.relocation import source_names
 from scripts.validation.numeric_operands import code_part
 
 DATA_OPS = frozenset(
-    ("dc.b", "dc.w", "dc.l", "even", "dbglistobj", "palptr", "watertransheader", "macro", "endm", "equ")
+    (
+        "dc.b",
+        "dc.w",
+        "dc.l",
+        "even",
+        "dbglistobj",
+        "palptr",
+        "watertransheader",
+        "levselstr",
+        "zoneanimstart",
+        "zoneanimdecl",
+        "zoneanimend",
+        "macro",
+        "endm",
+        "equ",
+    )
 )
 
 

@@ -172,3 +172,27 @@ class PrivateLookupTailTests(unittest.TestCase):
             text = "Entry:\n move.b Table(pc,d0.w),d0\n rts\n; End of function Entry\nTable:\n" + tail
             with self.subTest(tail=tail), self.assertRaisesRegex(ValueError, "safe terminal"):
                 collect_file("unsafe.s", text)
+
+
+class CodeAliasTests(unittest.TestCase):
+    def test_a_data_end_alias_remains_bound_to_discovered_code(self):
+        from scripts.build.relocation import checked_code_aliases
+
+        policy = {
+            "engines": {"s3": {}},
+            "code_entry_aliases": [
+                {
+                    "alias": "Table_End",
+                    "target": "NextProcedure",
+                    "kind": "data-end-code-alias",
+                    "reason": "Shared boundary",
+                    "profiles": ["s3"],
+                }
+            ],
+        }
+        symbols = {"Table_End": 0x300, "NextProcedure": 0x300}
+        self.assertEqual(checked_code_aliases(policy, "s3", symbols, {"NextProcedure"}), {"Table_End": 0x300})
+        with self.assertRaisesRegex(ValueError, "independently discovered"):
+            checked_code_aliases(policy, "s3", symbols, set())
+        with self.assertRaisesRegex(ValueError, "differs"):
+            checked_code_aliases(policy, "s3", symbols | {"Table_End": 0x302}, {"NextProcedure"})

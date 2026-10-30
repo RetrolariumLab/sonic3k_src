@@ -19,9 +19,13 @@
     "src/game/level/sk/mode_and_attract.s",
     "src/game/level/sk/player_spawn.s",
     "src/game/level/sk/water_tunnel_motion.s",
+    "src/game/modes/s3/legacy_competition_selection.s",
+    "src/game/modes/s3/legacy_options.s",
+    "src/game/modes/s3/level_selection.s",
     "src/game/modes/s3/pause.s",
     "src/game/modes/s3/title_screen.s",
     "src/game/modes/s3/title_widgets.s",
+    "src/game/modes/sk/level_selection.s",
     "src/game/modes/sk/pause.s",
     "src/game/modes/sk/standalone_title_badges.s",
     "src/game/modes/sk/standalone_title_characters.s",
@@ -29,6 +33,22 @@
     "src/game/modes/sk/standalone_title_screen.s",
     "src/game/modes/sk/title_screen.s",
     "src/game/modes/sk/title_widgets.s",
+    "src/game/special_stage/s3/mode_and_display.s",
+    "src/game/special_stage/s3/number_display.s",
+    "src/game/special_stage/s3/object_allocation.s",
+    "src/game/special_stage/s3/player_and_start_cues.s",
+    "src/game/special_stage/s3/projected_character_motion.s",
+    "src/game/special_stage/s3/sphere_contacts.s",
+    "src/game/special_stage/s3/sprite_rendering.s",
+    "src/game/special_stage/s3/tails_follower.s",
+    "src/game/special_stage/sk/mode_and_display.s",
+    "src/game/special_stage/sk/number_display.s",
+    "src/game/special_stage/sk/object_allocation.s",
+    "src/game/special_stage/sk/player_and_start_cues.s",
+    "src/game/special_stage/sk/projected_character_motion.s",
+    "src/game/special_stage/sk/sphere_contacts.s",
+    "src/game/special_stage/sk/sprite_rendering.s",
+    "src/game/special_stage/sk/tails_follower.s",
     "src/rendering/compression/s3/enigma.s",
     "src/rendering/compression/s3/kosinski_streaming.s",
     "src/rendering/compression/s3/nemesis.s",
@@ -82,7 +102,18 @@
         "src/game/level/s3/water_tunnel_motion.s",
         "src/game/level/s3/demo_input.s",
         "src/game/level/s3/collision_and_oscillation.s",
-        "src/game/level/s3/environment_loading.s"
+        "src/game/level/s3/environment_loading.s",
+        "src/game/modes/s3/legacy_competition_selection.s",
+        "src/game/modes/s3/legacy_options.s",
+        "src/game/modes/s3/level_selection.s",
+        "src/game/special_stage/s3/mode_and_display.s",
+        "src/game/special_stage/s3/number_display.s",
+        "src/game/special_stage/s3/object_allocation.s",
+        "src/game/special_stage/s3/player_and_start_cues.s",
+        "src/game/special_stage/s3/tails_follower.s",
+        "src/game/special_stage/s3/projected_character_motion.s",
+        "src/game/special_stage/s3/sprite_rendering.s",
+        "src/game/special_stage/s3/sphere_contacts.s"
       ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/s3/bootstrap.s"
@@ -112,7 +143,18 @@
         "src/game/level/s3/water_tunnel_motion.s",
         "src/game/level/s3/demo_input.s",
         "src/game/level/s3/collision_and_oscillation.s",
-        "src/game/level/s3/environment_loading.s"
+        "src/game/level/s3/environment_loading.s",
+        "src/game/modes/s3/legacy_competition_selection.s",
+        "src/game/modes/s3/legacy_options.s",
+        "src/game/modes/s3/level_selection.s",
+        "src/game/special_stage/s3/mode_and_display.s",
+        "src/game/special_stage/s3/number_display.s",
+        "src/game/special_stage/s3/object_allocation.s",
+        "src/game/special_stage/s3/player_and_start_cues.s",
+        "src/game/special_stage/s3/tails_follower.s",
+        "src/game/special_stage/s3/projected_character_motion.s",
+        "src/game/special_stage/s3/sprite_rendering.s",
+        "src/game/special_stage/s3/sphere_contacts.s"
       ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/s3/bootstrap.s"
@@ -142,7 +184,18 @@
         "src/game/level/s3/water_tunnel_motion.s",
         "src/game/level/s3/demo_input.s",
         "src/game/level/s3/collision_and_oscillation.s",
-        "src/game/level/s3/environment_loading.s"
+        "src/game/level/s3/environment_loading.s",
+        "src/game/modes/s3/legacy_competition_selection.s",
+        "src/game/modes/s3/legacy_options.s",
+        "src/game/modes/s3/level_selection.s",
+        "src/game/special_stage/s3/mode_and_display.s",
+        "src/game/special_stage/s3/number_display.s",
+        "src/game/special_stage/s3/object_allocation.s",
+        "src/game/special_stage/s3/player_and_start_cues.s",
+        "src/game/special_stage/s3/tails_follower.s",
+        "src/game/special_stage/s3/projected_character_motion.s",
+        "src/game/special_stage/s3/sprite_rendering.s",
+        "src/game/special_stage/s3/sphere_contacts.s"
       ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/s3/bootstrap.s"
@@ -177,7 +230,16 @@
         "src/game/level/sk/water_tunnel_motion.s",
         "src/game/level/sk/demo_input.s",
         "src/game/level/sk/collision_and_oscillation.s",
-        "src/game/level/sk/environment_loading.s"
+        "src/game/level/sk/environment_loading.s",
+        "src/game/modes/sk/level_selection.s",
+        "src/game/special_stage/sk/mode_and_display.s",
+        "src/game/special_stage/sk/number_display.s",
+        "src/game/special_stage/sk/object_allocation.s",
+        "src/game/special_stage/sk/player_and_start_cues.s",
+        "src/game/special_stage/sk/tails_follower.s",
+        "src/game/special_stage/sk/projected_character_motion.s",
+        "src/game/special_stage/sk/sprite_rendering.s",
+        "src/game/special_stage/sk/sphere_contacts.s"
       ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/sk/bootstrap.s"
@@ -199,5 +261,14 @@
     "bsr_byte_clocks": 18,
     "bsr_word_clocks": 18
   },
-  "coverage": "Every source rts/rte and every annotated procedure belongs to a derived physical cohort. Short conditional and indexed-slot spans remain inseparable; unannotated safe return boundaries add perturbations."
+  "coverage": "Every source rts/rte and every annotated procedure belongs to a derived physical cohort. Short conditional and indexed-slot spans remain inseparable; unannotated safe return boundaries add perturbations.",
+  "code_entry_aliases": [
+    {
+      "alias": "WaterTransition_Unk_End",
+      "target": "GetDemoPtr",
+      "kind": "data-end-code-alias",
+      "profiles": ["s3-us", "s3-eu", "s3-jp", "sk"],
+      "reason": "The final water transition data sentinel is also the address of the immediately following demo input entry. Keep its original code-entry coverage after assigning the data and code to distinct owners."
+    }
+  ]
 }
