@@ -592,6 +592,12 @@
       "commits": ["21b0a899f14ebf22404b12ac17b1396d0db4809e"]
     },
     {
+      "id": "change-bbbb7a46d3fb",
+      "kind": "source_or_tooling",
+      "summary": "Own destructible terrain and zone vine object families",
+      "commits": ["bbbb7a46d3fb58038025ceb0f6303b48a2db1594"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",
