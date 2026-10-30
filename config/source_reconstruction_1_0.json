@@ -586,6 +586,12 @@
       "commits": ["112c6fc7e9ba620c0c05a2197fdcce4fb164e687"]
     },
     {
+      "id": "change-21b0a899f14e",
+      "kind": "source_or_tooling",
+      "summary": "Define complete zone object owners and terminal cohorts",
+      "commits": ["21b0a899f14ebf22404b12ac17b1396d0db4809e"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",

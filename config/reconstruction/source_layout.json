@@ -840,7 +840,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 82491,
+      "physical_lines": 79427,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "s3.s",
@@ -900,7 +900,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 158210,
+      "physical_lines": 154588,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -13974,6 +13974,126 @@
       "range_kind": "canonical-normal-build"
     },
     {
+      "path": "src/objects/shared/s3/breakable_rocks.s",
+      "owner": "objects/shared/s3",
+      "responsibility": "Shared Angel Island, Lava Reef and Endless Mine rock states, player breakage, fragments and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 628,
+      "origin": {
+        "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
+        "path": "s3.s",
+        "first_line": 123,
+        "last_line": 747,
+        "sha256": "f1f0c752be20775bcf788f6ca73d50096392a349940a40149d5d54d018a4a6a5"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 120398,
+          "end": 122396
+        },
+        {
+          "profile": "s3-eu",
+          "start": 120398,
+          "end": 122396
+        },
+        {
+          "profile": "s3-jp",
+          "start": 120398,
+          "end": 122396
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2217550,
+          "end": 2219548
+        }
+      ]
+    },
+    {
+      "path": "src/objects/shared/s3/breakable_walls.s",
+      "owner": "objects/shared/s3",
+      "responsibility": "Breakable wall contact, player response, fracture geometry and fragment creation with zone-specific mappings.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 516,
+      "origin": {
+        "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
+        "path": "s3.s",
+        "first_line": 1373,
+        "last_line": 1885,
+        "sha256": "157c595cec6327ed48e9746b329d1d91e3f66bbd4ef8c27f75cdde784557d7c4"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 128700,
+          "end": 131246
+        },
+        {
+          "profile": "s3-eu",
+          "start": 128700,
+          "end": 131246
+        },
+        {
+          "profile": "s3-jp",
+          "start": 128700,
+          "end": 131246
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2225852,
+          "end": 2228398
+        }
+      ]
+    },
+    {
+      "path": "src/objects/shared/s3/collapsing_platforms.s",
+      "owner": "objects/shared/s3",
+      "responsibility": "Collapsing platforms and bridges, player release, fragment creation, collapse timing and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 628,
+      "origin": {
+        "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
+        "path": "s3.s",
+        "first_line": 748,
+        "last_line": 1372,
+        "sha256": "43ae9345666658dfb63d7dcf17b548cda711fcd1f15d8b540d2387be343c805c"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 122396,
+          "end": 128700
+        },
+        {
+          "profile": "s3-eu",
+          "start": 122396,
+          "end": 128700
+        },
+        {
+          "profile": "s3-jp",
+          "start": 122396,
+          "end": 128700
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2219548,
+          "end": 2225852
+        }
+      ]
+    },
+    {
       "path": "src/objects/shared/s3/damage_regions.s",
       "owner": "objects/shared/s3",
       "responsibility": "Invisible horizontal and vertical harmful regions, product-specific shock or lava reactions and shared player contact geometry.",
@@ -15207,6 +15327,101 @@
       "range_kind": "canonical-normal-build"
     },
     {
+      "path": "src/objects/shared/sk/breakable_rocks.s",
+      "owner": "objects/shared/sk",
+      "responsibility": "Shared rock initialization, active state and character contact or release logic.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 491,
+      "origin": {
+        "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
+        "path": "sonic3k.s",
+        "first_line": 135,
+        "last_line": 622,
+        "sha256": "19d2cf31313b51a5ffc7f4bf1a824d388a08999526ed1947103a97f32a9cc0e5"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 129488,
+          "end": 130888
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 129488,
+          "end": 130888
+        }
+      ]
+    },
+    {
+      "path": "src/objects/shared/sk/breakable_walls.s",
+      "owner": "objects/shared/sk",
+      "responsibility": "Breakable wall contact, player response, fracture geometry and fragment creation with zone-specific mappings.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 577,
+      "origin": {
+        "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
+        "path": "sonic3k.s",
+        "first_line": 1799,
+        "last_line": 2372,
+        "sha256": "6b3cb9fd537cd7f8f1a4d44f6704cb2795741f971c0984a0192a0acf6434821f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 135964,
+          "end": 138350
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 135964,
+          "end": 138350
+        }
+      ]
+    },
+    {
+      "path": "src/objects/shared/sk/collapsing_platforms.s",
+      "owner": "objects/shared/sk",
+      "responsibility": "Collapsing platforms and bridges, player release, fragment creation, collapse timing and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 735,
+      "origin": {
+        "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
+        "path": "sonic3k.s",
+        "first_line": 1067,
+        "last_line": 1798,
+        "sha256": "6688e11f9a5878c89c9a745f1cd4b1c0d9c85c4c63cdc5af5965c65da89e9dff"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-family",
+        "reason": "The complete platform and bridge collapse family shares its fragment and player-release helpers and timing tables. It remains below 900 lines.",
+        "proof_target": "check-source-layout"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 132350,
+          "end": 135964
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 132350,
+          "end": 135964
+        }
+      ]
+    },
+    {
       "path": "src/objects/shared/sk/damage_regions.s",
       "owner": "objects/shared/sk",
       "responsibility": "Invisible horizontal and vertical harmful regions, product-specific shock or lava reactions and shared player contact geometry.",
@@ -15333,6 +15548,36 @@
           "component": "sk",
           "start": 117934,
           "end": 119046
+        }
+      ]
+    },
+    {
+      "path": "src/objects/shared/sk/rock_break_responses.s",
+      "owner": "objects/shared/sk",
+      "responsibility": "Additional standing and character break responses, push recovery, fragment creation and shared fragment or mapping tables.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 447,
+      "origin": {
+        "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
+        "path": "sonic3k.s",
+        "first_line": 623,
+        "last_line": 1066,
+        "sha256": "cf98dec10700db6e851b0b2b14d8235dcadc72264bc1c22ab2c5c1c8ba20a299"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 130888,
+          "end": 132350
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 130888,
+          "end": 132350
         }
       ]
     },
@@ -30393,6 +30638,51 @@
       "range_kind": "canonical-normal-build"
     },
     {
+      "path": "src/objects/zones/aiz/s3/giant_ride_vine.s",
+      "owner": "objects/zones/aiz/s3",
+      "responsibility": "Giant Angel Island ride-vine motion, player positioning and shared vine mapping storage.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 219,
+      "origin": {
+        "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
+        "path": "s3.s",
+        "first_line": 2482,
+        "last_line": 2697,
+        "sha256": "589a83e87ae02944641c8e5c2467f27406747c782ae8ba880f68da27cc46daaf"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 132968,
+          "end": 133902
+        },
+        {
+          "profile": "s3-eu",
+          "start": 132968,
+          "end": 133902
+        },
+        {
+          "profile": "s3-jp",
+          "start": 132968,
+          "end": 133902
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2230120,
+          "end": 2231054
+        }
+      ]
+    },
+    {
       "path": "src/objects/zones/aiz/s3/hollow_tree.s",
       "owner": "objects/zones/aiz/s3",
       "responsibility": "Angel Island hollow-tree player movement, release and private player-frame lookup data.",
@@ -30434,6 +30724,46 @@
           "component": "s3-us",
           "start": 2216900,
           "end": 2217550
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/aiz/s3/ride_vine.s",
+      "owner": "objects/zones/aiz/s3",
+      "responsibility": "Normal Angel Island ride-vine motion, player contact, handle state and positioning helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 599,
+      "origin": {
+        "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
+        "path": "s3.s",
+        "first_line": 1886,
+        "last_line": 2481,
+        "sha256": "744ba6a828017ec33e5c33310cdeccac670b14aa3488e4a8f86b6778309da4ca"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 131246,
+          "end": 132968
+        },
+        {
+          "profile": "s3-eu",
+          "start": 131246,
+          "end": 132968
+        },
+        {
+          "profile": "s3-jp",
+          "start": 131246,
+          "end": 132968
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2228398,
+          "end": 2230120
         }
       ]
     },
@@ -30501,6 +30831,81 @@
       ]
     },
     {
+      "path": "src/objects/zones/aiz/s3/surfboard_intro.s",
+      "owner": "objects/zones/aiz/s3",
+      "responsibility": "Angel Island surfboard introduction, character motion, waves, splash objects, board display and shared art loading.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 498,
+      "origin": {
+        "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
+        "path": "s3.s",
+        "first_line": 2698,
+        "last_line": 3192,
+        "sha256": "ecc5b21bf9fef3f4caea7504a2634e61837721f49d4f09e7be9132555c645b18"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 133902,
+          "end": 136152
+        },
+        {
+          "profile": "s3-eu",
+          "start": 133902,
+          "end": 136152
+        },
+        {
+          "profile": "s3-jp",
+          "start": 133902,
+          "end": 136152
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2231054,
+          "end": 2233304
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/aiz/sk/giant_ride_vine.s",
+      "owner": "objects/zones/aiz/sk",
+      "responsibility": "Giant Angel Island ride-vine motion and player positioning.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 216,
+      "origin": {
+        "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
+        "path": "sonic3k.s",
+        "first_line": 3019,
+        "last_line": 3231,
+        "sha256": "1a193d02ac5c03269b1bfa9ab36015b981e8c568afa0b9950eacc2e6face74b8"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 140158,
+          "end": 140752
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 140158,
+          "end": 140752
+        }
+      ]
+    },
+    {
       "path": "src/objects/zones/aiz/sk/hollow_tree.s",
       "owner": "objects/zones/aiz/sk",
       "responsibility": "Angel Island hollow-tree player movement, release and private player-frame lookup data.",
@@ -30532,6 +30937,36 @@
           "component": "sk",
           "start": 128838,
           "end": 129488
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/aiz/sk/ride_vine.s",
+      "owner": "objects/zones/aiz/sk",
+      "responsibility": "Normal Angel Island ride-vine motion, player contact, handle state and positioning helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 649,
+      "origin": {
+        "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
+        "path": "sonic3k.s",
+        "first_line": 2373,
+        "last_line": 3018,
+        "sha256": "b8ed47590f6566d003ad6470cf99eb315aec1124160a18e0a7993f49f5e11106"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 138350,
+          "end": 140158
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 138350,
+          "end": 140158
         }
       ]
     },
@@ -31015,6 +31450,36 @@
           "component": "sk",
           "start": 90840,
           "end": 91204
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/mhz/sk/swing_vine.s",
+      "owner": "objects/zones/mhz/sk",
+      "responsibility": "Mushroom Hill swing-vine motion, character launch, player positioning and shared vine mapping storage.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 535,
+      "origin": {
+        "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
+        "path": "sonic3k.s",
+        "first_line": 3232,
+        "last_line": 3763,
+        "sha256": "00bdd20330ef3a46d31c2b1406e95298495a439fb26e20314770c846be1962c5"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 140752,
+          "end": 142598
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 140752,
+          "end": 142598
         }
       ]
     },
