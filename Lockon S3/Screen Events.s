@@ -958,17 +958,17 @@ AIZMakeTreeScript:
 		dc.w  $557, $280
 		dc.w $FFFF
 Map_AIZShipPropeller:
-		include "Levels/AIZ/Misc Object Data/Map - Act 2 Ship Propeller.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Act 2 Ship Propeller.s"
 Ani_AIZShipPropeller:
-		include "Levels/AIZ/Misc Object Data/Anim - Act 2 Ship Propeller.asm"
+		include "Levels/AIZ/Misc Object Data/Anim - Act 2 Ship Propeller.s"
 Map_AIZ2BombExplode:
-		include "Levels/AIZ/Misc Object Data/Map - Act 2 Bomb Explosion.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Act 2 Bomb Explosion.s"
 Ani_AIZ2BombExplode:
-		include "Levels/AIZ/Misc Object Data/Anim - Act 2 Bomb Explosion.asm"
+		include "Levels/AIZ/Misc Object Data/Anim - Act 2 Bomb Explosion.s"
 Map_AIZ2BGTree:
-		include "Levels/AIZ/Misc Object Data/Map - Act 2 Background Tree.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Act 2 Background Tree.s"
 Map_AIZ2BossSmall:
-		include "Levels/AIZ/Misc Object Data/Map - Act 2 Boss Small.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Act 2 Boss Small.s"
 HCZ1_BGDeformArray:
 		dc.w $40, 8, 8, 5, 5, 6, $F0, 6, 5, 5, 8, 8, $30, $80C0, $7FFF
 HCZ2_BGDeformArray:

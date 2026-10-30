@@ -6,14 +6,14 @@
 
 ; ---------------------------------------------------------------------------
 		cpu 68000
-		include "sonic3k.macrosetup.asm"	; include a few basic macros
-		include "sonic3k.macros.asm"		; include some simplifying macros and functions
-		include "sonic3k.constants.asm"		; include some constants
-		include "s3.constants.asm"		; RAM addresses moved around between S3 and S&K
+		include "sonic3k.macrosetup.s"	; include a few basic macros
+		include "sonic3k.macros.s"		; include some simplifying macros and functions
+		include "sonic3k.constants.s"		; include some constants
+		include "s3.constants.s"		; RAM addresses moved around between S3 and S&K
 ; ---------------------------------------------------------------------------
 ; Include SMPS2ASM, for expressing SMPS bytecode in a portable and human-readable form.
 SonicDriverVer = 3 ; Tell SMPS2ASM that we are targeting Sonic 3's sound driver
-		include "Sound/FM_Voice_Macros.asm"
+		include "Sound/FM_Voice_Macros.s"
 
 ; If 1, fixes multiple bugs within the game
 
@@ -5531,7 +5531,7 @@ Obj_TitleSonicFinger_Display:
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_TitleSonicFinger:
-		include "General/Title/Anim - S3 Sonic Finger.asm"
+		include "General/Title/Anim - S3 Sonic Finger.s"
 ; ---------------------------------------------------------------------------
 
 Obj_TitleSonicWink:
@@ -5550,7 +5550,7 @@ Obj_TitleSonicWink_Display:
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_TitleSonicWink:
-		include "General/Title/Anim - S3 Sonic Wink.asm"
+		include "General/Title/Anim - S3 Sonic Wink.s"
 ; ---------------------------------------------------------------------------
 
 Obj_TitleTailsPlane:
@@ -5591,7 +5591,7 @@ loc_426C:
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_TitleTailsPlane:
-		include "General/Title/Anim - S3 Tails Plane.asm"
+		include "General/Title/Anim - S3 Tails Plane.s"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -5634,14 +5634,14 @@ LSelect3CodeDat:
 		dc.b 0
 		even
 Map_TitleScreenText:
-		include "General/Title/Map - S3 Screen Text.asm"
+		include "General/Title/Map - S3 Screen Text.s"
 ArtNem_TitleScreenText:
 		binclude "data/General/Title/Nemesis Art/S3 Screen Text.nem"
 		even
 Map_TitleSonicAnim:
-		include "General/Title/Map - S3 Sonic Anim.asm"
+		include "General/Title/Map - S3 Sonic Anim.s"
 Map_TitleTailsPlane:
-		include "General/Title/Map - S3 Tails Plane.asm"
+		include "General/Title/Map - S3 Tails Plane.s"
 LevelMusic_Playlist:
 		dc.b mus_AIZ1,		mus_AIZ2	; ANGEL ISLAND ZONE
 		dc.b mus_HCZ1,		mus_HCZ2	; HYDROCITY ZONE
@@ -9551,7 +9551,7 @@ loc_7DA2:
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_SSIcons:
-		include "General/Special Stage/Map - Icons.asm"
+		include "General/Special Stage/Map - Icons.s"
 ; ---------------------------------------------------------------------------
 
 Obj_SStage_7DB8:
@@ -9653,7 +9653,7 @@ loc_7EC2:
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_GetBlueSpheres:
-		include "General/Special Stage/Map - Get Blue Spheres.asm"
+		include "General/Special Stage/Map - Get Blue Spheres.s"
 ; ---------------------------------------------------------------------------
 
 Obj_SStage_7F1C:
@@ -10048,7 +10048,7 @@ Obj_SStage_83E4:
 		bra.s	loc_8392
 ; ---------------------------------------------------------------------------
 Map_SStageShadow:
-		include "General/Special Stage/Map - Shadow.asm"
+		include "General/Special Stage/Map - Shadow.s"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -11506,11 +11506,11 @@ ScalarTable2:
 		binclude "data/General/Special Stage/Scalars.bin"
 		even
 Map_SStageSphere:
-		include "General/Special Stage/Map - Sphere.asm"
+		include "General/Special Stage/Map - Sphere.s"
 Map_SStageRing:
-		include "General/Special Stage/Map - Ring.asm"
+		include "General/Special Stage/Map - Ring.s"
 Map_SStageChaosEmerald:
-		include "General/Special Stage/Map - Chaos Emerald.asm"
+		include "General/Special Stage/Map - Chaos Emerald.s"
 ; ---------------------------------------------------------------------------
 
 locret_952E:
@@ -11781,7 +11781,7 @@ ObjDat_9878:
 		dc.w      0,   $A8
 		dc.b    6, $FF
 Map_CompetitionObject:
-		include "General/Competition Menu/Map - Competition Objects.asm"
+		include "General/Competition Menu/Map - Competition Objects.s"
 ; ---------------------------------------------------------------------------
 
 Competition_LevelSelect:
@@ -12773,7 +12773,7 @@ ObjDat_A65E:
 		dc.w   $121,  $126, palette_line_1
 		dc.b    5,   0
 Map_CompetitionSelect:
-		include "General/Competition Menu/Map - Competition Select.asm"
+		include "General/Competition Menu/Map - Competition Select.s"
 ; ---------------------------------------------------------------------------
 
 Competition_Results:
@@ -14242,7 +14242,7 @@ word_BD16:
 		dc.l RAM_start+$0222
 		dc.w VRAM_Plane_A_Name_Table+$2B4, $B-1,  $C-1
 Map_SaveScreen:
-		include "General/Save Menu/Map - Save Screen General S3.asm"
+		include "General/Save Menu/Map - Save Screen General S3.s"
 ObjDat_SaveScreen:
 		dc.w $A-1
 		dc.l Draw_Sprite				; "Data Select" Text
@@ -15147,7 +15147,7 @@ Render_HUD_P2:
 
 ; ---------------------------------------------------------------------------
 Map_HUD:
-		include "General/Sprites/HUD Icon/Map - HUD.asm"
+		include "General/Sprites/HUD Icon/Map - HUD.s"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -22518,7 +22518,7 @@ loc_137FE:
 
 ; ---------------------------------------------------------------------------
 AniSonic:
-		include "General/Sprites/Sonic/Anim - Sonic S3.asm"
+		include "General/Sprites/Sonic/Anim - Sonic S3.s"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -22823,7 +22823,7 @@ loc_13CC0:
 
 ; ---------------------------------------------------------------------------
 AniSonic2P:
-		include "General/Sprites/Sonic/Anim - Sonic Knuckles 2P.asm"
+		include "General/Sprites/Sonic/Anim - Sonic Knuckles 2P.s"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -26692,7 +26692,7 @@ loc_16580:
 		rts
 ; ---------------------------------------------------------------------------
 AniTails:
-		include "General/Sprites/Tails/Anim - Tails S3.asm"
+		include "General/Sprites/Tails/Anim - Tails S3.s"
 ; ---------------------------------------------------------------------------
 
 Tails_Tail_Load_PLC:
@@ -27034,7 +27034,7 @@ loc_16A0E:
 		rts
 ; ---------------------------------------------------------------------------
 AniTails2P:
-		include "General/Sprites/Tails/Anim - Tails 2P.asm"
+		include "General/Sprites/Tails/Anim - Tails 2P.s"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -27187,7 +27187,7 @@ Obj_Tails_Tail_AniSelection:
 		dc.b 0
 		even
 AniTails_Tail:
-		include "General/Sprites/Tails/Anim - Tails Tail.asm"
+		include "General/Sprites/Tails/Anim - Tails Tail.s"
 ; ---------------------------------------------------------------------------
 
 Obj_Tails2P_Tail:
@@ -27265,7 +27265,7 @@ byte_16D58:
 		dc.b 0,0
 		even
 AniTails2P_Tail:
-		include "General/Sprites/Tails/Anim - Tails 2P Tail.asm"
+		include "General/Sprites/Tails/Anim - Tails 2P Tail.s"
 ; ---------------------------------------------------------------------------
 
 Obj_MGZ2_BossTransition:
@@ -27795,7 +27795,7 @@ loc_1744C:
 
 ; ---------------------------------------------------------------------------
 Ani_AirCountdown:
-		include "General/Sprites/Bubbles/Anim - Air Countdown.asm"
+		include "General/Sprites/Bubbles/Anim - Air Countdown.s"
 ; ---------------------------------------------------------------------------
 
 Obj_S2Shield:
@@ -28045,11 +28045,11 @@ byte_1779B:
 		dc.b    6,   5,   4,   3,   2
 		even
 Ani_S2Shield:
-		include "General/Sprites/Shields/Anim - S2 Shield.asm"
+		include "General/Sprites/Shields/Anim - S2 Shield.s"
 Map_S2Shield:
-		include "General/Sprites/Shields/Map - S2 Shield.asm"
+		include "General/Sprites/Shields/Map - S2 Shield.s"
 Map_Invincibility:
-		include "General/Sprites/Shields/Map - Invincibility.asm"
+		include "General/Sprites/Shields/Map - Invincibility.s"
 ; ---------------------------------------------------------------------------
 
 Obj_DashDust:
@@ -28253,11 +28253,11 @@ locret_17B0A:
 
 ; ---------------------------------------------------------------------------
 Ani_DashSplashDrown:
-		include "General/Sprites/Dash Dust/Anim - Dash Dust.asm"
+		include "General/Sprites/Dash Dust/Anim - Dash Dust.s"
 Map_DashDust:
-		include "General/Sprites/Dash Dust/Map - Dash Dust.asm"
+		include "General/Sprites/Dash Dust/Map - Dash Dust.s"
 DPLC_DashSplashDrown:
-		include "General/Sprites/Dash Dust/DPLC - Dash Dust.asm"
+		include "General/Sprites/Dash Dust/DPLC - Dash Dust.s"
 ; ---------------------------------------------------------------------------
 
 Obj_DashDust2P:
@@ -28382,9 +28382,9 @@ locret_17E3C:
 		rts
 ; ---------------------------------------------------------------------------
 Ani_DashDust2P:
-		include "General/Sprites/Dash Dust/Anim - Dash Dust 2P.asm"
+		include "General/Sprites/Dash Dust/Anim - Dash Dust 2P.s"
 Map_DashDust2P:
-		include "General/Sprites/Dash Dust/Map - Dash Dust 2P.asm"
+		include "General/Sprites/Dash Dust/Map - Dash Dust 2P.s"
 ; ---------------------------------------------------------------------------
 
 Obj_SuperSonic_Stars:
@@ -28526,7 +28526,7 @@ loc_18018:
 		bra.w	Draw_Sprite
 ; ---------------------------------------------------------------------------
 Map_SuperSonic_Stars:
-		include "General/Sprites/Shields/Map - Super Sonic Stars.asm"
+		include "General/Sprites/Shields/Map - Super Sonic Stars.s"
 ; ---------------------------------------------------------------------------
 
 Obj_InstaShield:
@@ -28912,29 +28912,29 @@ locret_18576:
 
 ; ---------------------------------------------------------------------------
 Ani_InstaShield:
-		include "General/Sprites/Shields/Anim - Insta-Shield.asm"
+		include "General/Sprites/Shields/Anim - Insta-Shield.s"
 Ani_FireShield:
-		include "General/Sprites/Shields/Anim - Fire Shield.asm"
+		include "General/Sprites/Shields/Anim - Fire Shield.s"
 Ani_LightningShield:
-		include "General/Sprites/Shields/Anim - Lightning Shield S3.asm"
+		include "General/Sprites/Shields/Anim - Lightning Shield S3.s"
 Ani_BubbleShield:
-		include "General/Sprites/Shields/Anim - Bubble Shield.asm"
+		include "General/Sprites/Shields/Anim - Bubble Shield.s"
 Map_FireShield:
-		include "General/Sprites/Shields/Map - Fire Shield.asm"
+		include "General/Sprites/Shields/Map - Fire Shield.s"
 DPLC_FireShield:
-		include "General/Sprites/Shields/DPLC - Fire Shield.asm"
+		include "General/Sprites/Shields/DPLC - Fire Shield.s"
 Map_LightningShield:
-		include "General/Sprites/Shields/Map - Lightning Shield.asm"
+		include "General/Sprites/Shields/Map - Lightning Shield.s"
 DPLC_LightningShield:
-		include "General/Sprites/Shields/DPLC - Lightning Shield.asm"
+		include "General/Sprites/Shields/DPLC - Lightning Shield.s"
 Map_BubbleShield:
-		include "General/Sprites/Shields/Map - Bubble Shield.asm"
+		include "General/Sprites/Shields/Map - Bubble Shield.s"
 DPLC_BubbleShield:
-		include "General/Sprites/Shields/DPLC - Bubble Shield.asm"
+		include "General/Sprites/Shields/DPLC - Bubble Shield.s"
 Map_InstaShield:
-		include "General/Sprites/Shields/Map - Insta-Shield.asm"
+		include "General/Sprites/Shields/Map - Insta-Shield.s"
 DPLC_InstaShield:
-		include "General/Sprites/Shields/DPLC - Insta-Shield.asm"
+		include "General/Sprites/Shields/DPLC - Insta-Shield.s"
 ; ---------------------------------------------------------------------------
 
 Obj_Ring:
@@ -29318,9 +29318,9 @@ AttractedRing_ApplyMovementY:
 
 ; ---------------------------------------------------------------------------
 Ani_RingSparkle:
-		include "General/Sprites/Ring/Anim - Ring Sparkle.asm"
+		include "General/Sprites/Ring/Anim - Ring Sparkle.s"
 Map_Ring:
-		include "General/Sprites/Ring/Map - Ring.asm"
+		include "General/Sprites/Ring/Map - Ring.s"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -33106,7 +33106,7 @@ locret_1B370:
 
 ; ---------------------------------------------------------------------------
 Map_PathSwap:
-		include "General/Sprites/Level Misc/Map - Path Swap.asm"
+		include "General/Sprites/Level Misc/Map - Path Swap.s"
 ; ---------------------------------------------------------------------------
 
 Obj_Monitor:
@@ -33560,9 +33560,9 @@ loc_1B8E4:
 		bra.w	Draw_Sprite
 ; ---------------------------------------------------------------------------
 Ani_Monitor:
-		include "General/Sprites/Monitors/Anim - Monitor.asm"
+		include "General/Sprites/Monitors/Anim - Monitor.s"
 Map_Monitor:
-		include "General/Sprites/Monitors/Map - Monitor S3.asm"
+		include "General/Sprites/Monitors/Map - Monitor S3.s"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -34656,7 +34656,7 @@ loc_1C384:
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_Explosion:
-		include "General/Sprites/Enemy Misc/Map - Explosion S3.asm"
+		include "General/Sprites/Enemy Misc/Map - Explosion S3.s"
 ; ---------------------------------------------------------------------------
 
 Obj_AIZ1Tree:
@@ -34671,7 +34671,7 @@ loc_1C3E2:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_AIZ1Tree:
-		include "Levels/AIZ/Misc Object Data/Map - Act 1 Tree.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Act 1 Tree.s"
 ; ---------------------------------------------------------------------------
 
 Obj_AIZ1ZiplinePeg:
@@ -34686,7 +34686,7 @@ loc_1C424:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_AIZ1ZiplinePeg:
-		include "Levels/AIZ/Misc Object Data/Map - Act 1 Zipline Peg.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Act 1 Zipline Peg.s"
 ; ---------------------------------------------------------------------------
 
 Obj_AutoSpin:
@@ -34993,9 +34993,9 @@ loc_1C784:
 		jmp	(Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_S2LavaMarker:
-		include "General/Sprites/Level Misc/Map - Lava Marker S2.asm"
+		include "General/Sprites/Level Misc/Map - Lava Marker S2.s"
 Map_S2LavaMarkerDebug:
-		include "General/Sprites/Level Misc/Map - Lava Marker S2 Debug.asm"
+		include "General/Sprites/Level Misc/Map - Lava Marker S2 Debug.s"
 ; ---------------------------------------------------------------------------
 
 Obj_InvisibleBlock:
@@ -35058,7 +35058,7 @@ loc_1C872:
 		bra.w	SolidObjectFull2
 ; ---------------------------------------------------------------------------
 Map_InvisibleBlock:
-		include "General/Sprites/Level Misc/Map - Invisible Block.asm"
+		include "General/Sprites/Level Misc/Map - Invisible Block.s"
 ; ---------------------------------------------------------------------------
 byte_1C8E2:
 		dc.b  $14, $28, $20,   0
@@ -35502,7 +35502,7 @@ loc_1CDC2:
 
 ; ---------------------------------------------------------------------------
 Map_HCZBreakableBar:
-		include "Levels/HCZ/Misc Object Data/Map - Breakable Bar.asm"
+		include "Levels/HCZ/Misc Object Data/Map - Breakable Bar.s"
 ; ---------------------------------------------------------------------------
 
 Obj_HCZWaveSplash:
@@ -35568,7 +35568,7 @@ loc_1CF24:
 		bra.w	Draw_Sprite
 ; ---------------------------------------------------------------------------
 Map_HCZWaveSplash:
-		include "Levels/HCZ/Misc Object Data/Map - Wave Splash.asm"
+		include "Levels/HCZ/Misc Object Data/Map - Wave Splash.s"
 ; ---------------------------------------------------------------------------
 byte_1CFEA:
 		dc.b $10, $10
@@ -35604,7 +35604,7 @@ loc_1D02A:
 		bra.w	Sprite_OnScreen_Test
 ; ---------------------------------------------------------------------------
 Map_HCZBlock:
-		include "Levels/HCZ/Misc Object Data/Map - Block.asm"
+		include "Levels/HCZ/Misc Object Data/Map - Block.s"
 ; ---------------------------------------------------------------------------
 
 Obj_InvisibleHurtBlockHorizontal:
@@ -36779,11 +36779,11 @@ word_1DCC4:
 		dc.w  $240, -$100
 		dc.w  $200, -$100
 Map_AIZRock:
-		include "Levels/AIZ/Misc Object Data/Map - Rock.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Rock.s"
 Map_AIZRock2:
-		include "Levels/AIZ/Misc Object Data/Map - Rock 2.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Rock 2.s"
 Map_EMZRock:
-		include "Levels/EMZ/Misc Object Data/Map - Rock.asm"
+		include "Levels/EMZ/Misc Object Data/Map - Rock.s"
 ; ---------------------------------------------------------------------------
 
 Obj_CollapsingPlatform:
@@ -37399,19 +37399,19 @@ byte_1E698:
 		dc.b  $2F, $2F, $2F, $2F, $2E, $2E, $2E, $2E, $2E, $2E, $2E, $2E, $2D, $2D, $2D, $2D, $2D, $2D, $2D, $2D
 		dc.b  $2D, $2D, $2D, $2D, $2D, $2C, $2B, $2A
 Map_AIZCollapsingPlatform:
-		include "Levels/AIZ/Misc Object Data/Map - Collapsing Platform.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Collapsing Platform.s"
 Map_AIZCollapsingPlatform2:
-		include "Levels/AIZ/Misc Object Data/Map - Collapsing Platform 2.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Collapsing Platform 2.s"
 Map_LBZCollapsingBridge:
-		include "Levels/LBZ/Misc Object Data/Map - Collapsing Bridge.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Collapsing Bridge.s"
 Map_LBZCollapsingLedge:
-		include "Levels/LBZ/Misc Object Data/Map - Collapsing Ledge.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Collapsing Ledge.s"
 Map_HCZCollapsingBridge:
-		include "Levels/HCZ/Misc Object Data/Map - Collapsing Bridge.asm"
+		include "Levels/HCZ/Misc Object Data/Map - Collapsing Bridge.s"
 Map_MGZCollapsingBridge:
-		include "Levels/MGZ/Misc Object Data/Map - Collapsing Bridge.asm"
+		include "Levels/MGZ/Misc Object Data/Map - Collapsing Bridge.s"
 Map_ICZCollapsingBridge:
-		include "Levels/ICZ/Misc Object Data/Map - Collapsing Bridge.asm"
+		include "Levels/ICZ/Misc Object Data/Map - Collapsing Bridge.s"
 ; ---------------------------------------------------------------------------
 
 Obj_BreakableWall:
@@ -37921,15 +37921,15 @@ word_1FD32:
 		dc.w  -$600,  $600
 		dc.w  -$400,  $500
 Map_AIZBreakableWall:
-		include "Levels/AIZ/Misc Object Data/Map - Breakable Wall.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Breakable Wall.s"
 Map_CNZBreakableWall:
-		include "Levels/CNZ/Misc Object Data/Map - Breakable Wall S3.asm"
+		include "Levels/CNZ/Misc Object Data/Map - Breakable Wall S3.s"
 Map_MGZBreakableWall:
-		include "Levels/MGZ/Misc Object Data/Map - Breakable Wall.asm"
+		include "Levels/MGZ/Misc Object Data/Map - Breakable Wall.s"
 Map_HCZBreakableWall:
-		include "Levels/HCZ/Misc Object Data/Map - Breakable Wall.asm"
+		include "Levels/HCZ/Misc Object Data/Map - Breakable Wall.s"
 Map_LBZBreakableWall:
-		include "Levels/LBZ/Misc Object Data/Map - Breakable Wall.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Breakable Wall.s"
 ; ---------------------------------------------------------------------------
 
 Obj_AIZRideVine:
@@ -38746,7 +38746,7 @@ locret_209B8:
 		rts
 ; ---------------------------------------------------------------------------
 Map_AIZRideVine:
-		include "Levels/AIZ/Misc Object Data/Map - Ride Vine S3.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Ride Vine S3.s"
 ; ---------------------------------------------------------------------------
 
 Obj_AIZSurfboardIntro:
@@ -38847,7 +38847,7 @@ loc_20C74:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Ani_SurfboardIntro:
-		include "General/Sprites/Sonic/Anim - Sonic Surfboard.asm"
+		include "General/Sprites/Sonic/Anim - Sonic Surfboard.s"
 ; ---------------------------------------------------------------------------
 
 Obj_AIZSurfboardIntro_Run:
@@ -38999,9 +38999,9 @@ locret_20E32:
 
 ; ---------------------------------------------------------------------------
 Map_SurfboardIntro:
-		include "General/Sprites/Sonic/Map - Sonic Surfboarding.asm"
+		include "General/Sprites/Sonic/Map - Sonic Surfboarding.s"
 DPLC_SurfboardIntro:
-		include "General/Sprites/Sonic/DPLC - Sonic Surfboarding.asm"
+		include "General/Sprites/Sonic/DPLC - Sonic Surfboarding.s"
 ; ---------------------------------------------------------------------------
 
 Obj_SurfboardWaves:
@@ -39032,7 +39032,7 @@ loc_20FE6:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Ani_SurfboardWaves:
-		include "General/Sprites/Surfboard/Anim - Surfboard Waves.asm"
+		include "General/Sprites/Surfboard/Anim - Surfboard Waves.s"
 ; ---------------------------------------------------------------------------
 
 Obj_SurfboardSplash:
@@ -39198,11 +39198,11 @@ locret_21186:
 
 ; ---------------------------------------------------------------------------
 Ani_SurfboardSplash:
-		include "General/Sprites/Surfboard/Anim - Surfboard Splash.asm"
+		include "General/Sprites/Surfboard/Anim - Surfboard Splash.s"
 Map_AIZIntroWaves:
-		include "Levels/AIZ/Misc Object Data/Map - Intro Waves.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Intro Waves.s"
 Map_SurfboardSplash:
-		include "General/Sprites/Surfboard/Map - Surfboard Splash.asm"
+		include "General/Sprites/Surfboard/Map - Surfboard Splash.s"
 ; ---------------------------------------------------------------------------
 
 Obj_Surfboard:
@@ -39244,9 +39244,9 @@ loc_2133C:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Ani_Surfboard:
-		include "General/Sprites/Surfboard/Anim - Surfboard.asm"
+		include "General/Sprites/Surfboard/Anim - Surfboard.s"
 Map_Surfboard:
-		include "General/Sprites/Surfboard/Map - Surfboard.asm"
+		include "General/Sprites/Surfboard/Map - Surfboard.s"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -40128,11 +40128,11 @@ byte_21D94:
 		dc.b    4
 		even
 Ani_Spring:
-		include "General/Sprites/Level Misc/Anim - Spring.asm"
+		include "General/Sprites/Level Misc/Anim - Spring.s"
 Map_Spring:
-		include "General/Sprites/Level Misc/Map - Spring.asm"
+		include "General/Sprites/Level Misc/Map - Spring.s"
 Map_2PSpring:
-		include "General/Sprites/Level Misc/Map - 2P Spring.asm"
+		include "General/Sprites/Level Misc/Map - 2P Spring.s"
 ; ---------------------------------------------------------------------------
 
 Obj_RetractingSpring:
@@ -40636,7 +40636,7 @@ locret_225D6:
 		rts
 ; ---------------------------------------------------------------------------
 Map_2PRetractingSpring:
-		include "General/Sprites/Level Misc/Map - 2P Retracting Spring.asm"
+		include "General/Sprites/Level Misc/Map - 2P Retracting Spring.s"
 ; ---------------------------------------------------------------------------
 byte_22602:
 		dc.b  $10, $10
@@ -41087,9 +41087,9 @@ locret_22A5A:
 
 ; ---------------------------------------------------------------------------
 Map_Spikes:
-		include "General/Sprites/Level Misc/Map - Spikes.asm"
+		include "General/Sprites/Level Misc/Map - Spikes.s"
 Map_2PSpikes:
-		include "General/2P Zone/Map - Spikes.asm"
+		include "General/2P Zone/Map - Spikes.s"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -41653,7 +41653,7 @@ loc_231DC:
 		rts
 ; ---------------------------------------------------------------------------
 Map_ScaledArt:
-		include "General/Sprites/Level Misc/Map - Scaled Art.asm"
+		include "General/Sprites/Level Misc/Map - Scaled Art.s"
 ; ---------------------------------------------------------------------------
 
 Obj_SphereTest:
@@ -42188,7 +42188,7 @@ ScalarTable:
 		binclude "data/General/Special Stage/Scalars.bin"
 		even
 Map_SphereTest:
-		include "General/Special Stage/Map - Eosian Spheres.asm"
+		include "General/Special Stage/Map - Eosian Spheres.s"
 ; ---------------------------------------------------------------------------
 
 Obj_TwistedRamp:
@@ -42808,7 +42808,7 @@ loc_24218:
 		rts
 ; ---------------------------------------------------------------------------
 Map_LBZMovingPlatform:
-		include "Levels/LBZ/Misc Object Data/Map - Moving Platform.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Moving Platform.s"
 ; ---------------------------------------------------------------------------
 
 Obj_LBZUnusedBarPlatform:
@@ -42942,7 +42942,7 @@ locret_243DE:
 
 ; ---------------------------------------------------------------------------
 Map_LBZUnusedBarPlatform:
-		include "Levels/LBZ/Misc Object Data/Map - Unused Bar Platform.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Unused Bar Platform.s"
 ; ---------------------------------------------------------------------------
 byte_243F0:
 		dc.b  $20, $20,   0
@@ -43057,11 +43057,11 @@ loc_24544:
 		jmp	(Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_MGZFloatingPlatform:
-		include "Levels/MGZ/Misc Object Data/Map - Floating Platform.asm"
+		include "Levels/MGZ/Misc Object Data/Map - Floating Platform.s"
 Map_HCZFloatingPlatform:
-		include "Levels/HCZ/Misc Object Data/Map - Floating Platform.asm"
+		include "Levels/HCZ/Misc Object Data/Map - Floating Platform.s"
 Map_AIZFloatingPlatform:
-		include "Levels/AIZ/Misc Object Data/Map - Floating Platform.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Floating Platform.s"
 ; ---------------------------------------------------------------------------
 
 Obj_HCZSnakeBlocks:
@@ -43378,7 +43378,7 @@ locret_248E8:
 
 ; ---------------------------------------------------------------------------
 Map_LBZUnusedElevator:
-		include "Levels/LBZ/Misc Object Data/Map - Unused Elevator.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Unused Elevator.s"
 ; ---------------------------------------------------------------------------
 
 Obj_LBZExplodingTrigger:
@@ -43433,7 +43433,7 @@ locret_249A6:
 
 ; ---------------------------------------------------------------------------
 Map_LBZExplodingTrigger:
-		include "Levels/LBZ/Misc Object Data/Map - Exploding Trigger.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Exploding Trigger.s"
 ; ---------------------------------------------------------------------------
 
 Obj_MGZDashTrigger:
@@ -43604,7 +43604,7 @@ byte_24B6C:
 		dc.b  -$A
 		dc.b  -$A
 Map_MGZDashTrigger:
-		include "Levels/MGZ/Misc Object Data/Map - Dash Trigger.asm"
+		include "Levels/MGZ/Misc Object Data/Map - Dash Trigger.s"
 ; ---------------------------------------------------------------------------
 byte_24BE4:	; X offset, Y offset, X width, Y width, init routine counter, init mapping frame, second routine counter, second mapping frame
 		dc.b  $48,   0,   8, $40,   0,   0,  $A,   8
@@ -43772,7 +43772,7 @@ locret_24DE4:
 		rts
 ; ---------------------------------------------------------------------------
 Map_LBZTriggerBridge:
-		include "Levels/LBZ/Misc Object Data/Map - Trigger Bridge.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Trigger Bridge.s"
 ; ---------------------------------------------------------------------------
 word_250CE:
 		dc.w $1000
@@ -44007,7 +44007,7 @@ locret_2534A:
 
 ; ---------------------------------------------------------------------------
 Map_LBZPlayerLauncher:
-		include "Levels/LBZ/Misc Object Data/Map - Player Launcher.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Player Launcher.s"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -44078,9 +44078,9 @@ loc_2543A:
 		jmp	(Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
 Ani_LBZFlameThrower:
-		include "Levels/LBZ/Misc Object Data/Anim - Flame Thrower.asm"
+		include "Levels/LBZ/Misc Object Data/Anim - Flame Thrower.s"
 Map_LBZFlameThrower:
-		include "Levels/LBZ/Misc Object Data/Map - Flame Thrower.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Flame Thrower.s"
 LBZRideGrapple_Range:
 		dc.w   $A08,  $C78	; 0
 		dc.w  $1208, $14F8	; 1
@@ -44507,7 +44507,7 @@ loc_259D0:
 
 ; ---------------------------------------------------------------------------
 Map_LBZRideGrapple:
-		include "Levels/LBZ/Misc Object Data/Map - Ride Grapple.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Ride Grapple.s"
 ; ---------------------------------------------------------------------------
 
 Obj_LBZCupElevator:
@@ -45175,7 +45175,7 @@ loc_26194:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_LBZCupElevator:
-		include "Levels/LBZ/Misc Object Data/Map - Cup Elevator.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Cup Elevator.s"
 ; ---------------------------------------------------------------------------
 
 Obj_LBZUnusedTiltingBridge:
@@ -45468,7 +45468,7 @@ locret_264DE:
 		rts
 ; ---------------------------------------------------------------------------
 Map_LBZUnusedTiltingBridge:
-		include "Levels/LBZ/Misc Object Data/Map - Unused Tilting Bridge.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Unused Tilting Bridge.s"
 ; ---------------------------------------------------------------------------
 
 Obj_LBZPipePlug:
@@ -45746,7 +45746,7 @@ word_26814:
 		dc.w   $100,  -$80
 		dc.w   $400,  -$80
 Map_LBZPipePlug:
-		include "Levels/LBZ/Misc Object Data/Map - PipePlug.asm"
+		include "Levels/LBZ/Misc Object Data/Map - PipePlug.s"
 ; ---------------------------------------------------------------------------
 
 Obj_LBZUnusedSolidHurt:
@@ -45830,9 +45830,9 @@ sub_269E0:
 
 ; ---------------------------------------------------------------------------
 Ani_LBZUnusedSolidHurt:
-		include "Levels/LBZ/Misc Object Data/Anim - Unused Solid Hurt.asm"
+		include "Levels/LBZ/Misc Object Data/Anim - Unused Solid Hurt.s"
 Map_LBZUnusedSolidHurt:
-		include "Levels/LBZ/Misc Object Data/Map - Unused Solid Hurt.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Unused Solid Hurt.s"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -47756,7 +47756,7 @@ byte_27B96:
 		dc.b  $21
 		even
 Map_LBZSpinLauncher:
-		include "Levels/LBZ/Misc Object Data/Map - Spin Launcher.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Spin Launcher.s"
 ; ---------------------------------------------------------------------------
 
 Obj_LBZLoweringGrapple:
@@ -47923,7 +47923,7 @@ locret_27DBA:
 
 ; ---------------------------------------------------------------------------
 Map_LBZLoweringGrapple:
-		include "Levels/LBZ/Misc Object Data/Map - Lowering Grapple.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Lowering Grapple.s"
 ; ---------------------------------------------------------------------------
 
 Obj_MGZLBZSmashingPillar:
@@ -48022,9 +48022,9 @@ loc_28230:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_LBZSmashingSpikes:
-		include "Levels/LBZ/Misc Object Data/Map - Smashing Spikes.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Smashing Spikes.s"
 Map_MGZSmashingPillar:
-		include "Levels/MGZ/Misc Object Data/Map - Smashing Pillar.asm"
+		include "Levels/MGZ/Misc Object Data/Map - Smashing Pillar.s"
 ; ---------------------------------------------------------------------------
 
 Obj_LBZGateLaser:
@@ -48107,7 +48107,7 @@ loc_2838E:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_LBZGateLaser:
-		include "Levels/LBZ/Misc Object Data/Map - Gate Laser.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Gate Laser.s"
 ; ---------------------------------------------------------------------------
 
 Obj_LBZAlarm:
@@ -48869,7 +48869,7 @@ locret_28BFA:
 
 ; ---------------------------------------------------------------------------
 Map_TunnelExhaust:
-		include "Levels/LBZ/Misc Object Data/Map - (&LRZ) Tunnel Exhaust.asm"
+		include "Levels/LBZ/Misc Object Data/Map - (&LRZ) Tunnel Exhaust.s"
 ; ---------------------------------------------------------------------------
 
 Obj_LBZTubeElevator:
@@ -49378,7 +49378,7 @@ locret_291A2:
 
 ; ---------------------------------------------------------------------------
 Map_LBZTubeElevator:
-		include "Levels/LBZ/Misc Object Data/Map - Tube Elevator.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Tube Elevator.s"
 ; ---------------------------------------------------------------------------
 word_29316:
 		dc.w     1
@@ -49496,9 +49496,9 @@ loc_29478:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Ani_AIZDisappearingFloor:
-		include "Levels/AIZ/Misc Object Data/Anim - Disappearing Floor.asm"
+		include "Levels/AIZ/Misc Object Data/Anim - Disappearing Floor.s"
 Map_AIZDisappearingFloor:
-		include "Levels/AIZ/Misc Object Data/Map - Disappearing Floor.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Disappearing Floor.s"
 ; ---------------------------------------------------------------------------
 
 Obj_CorkFloor:
@@ -49941,15 +49941,15 @@ word_29B20:
 		dc.w   $140, -$340
 		dc.w   $340, -$340
 Map_AIZCorkFloor:
-		include "Levels/AIZ/Misc Object Data/Map - Cork Floor.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Cork Floor.s"
 Map_AIZCorkFloor2:
-		include "Levels/AIZ/Misc Object Data/Map - Cork Floor 2.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Cork Floor 2.s"
 Map_CNZCorkFloor:
-		include "Levels/CNZ/Misc Object Data/Map - Cork Floor.asm"
+		include "Levels/CNZ/Misc Object Data/Map - Cork Floor.s"
 Map_ICZCorkFloor:
-		include "Levels/ICZ/Misc Object Data/Map - Cork Floor.asm"
+		include "Levels/ICZ/Misc Object Data/Map - Cork Floor.s"
 Map_LBZCorkFloor:
-		include "Levels/LBZ/Misc Object Data/Map - Cork Floor.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Cork Floor.s"
 ; ---------------------------------------------------------------------------
 
 Obj_AIZFlippingBridge:
@@ -50273,7 +50273,7 @@ locret_2A30E:
 
 ; ---------------------------------------------------------------------------
 Map_AIZFlippingBridge:
-		include "Levels/AIZ/Misc Object Data/Map - Flipping Bridge.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Flipping Bridge.s"
 ; ---------------------------------------------------------------------------
 
 Obj_AIZCollapsingLogBridge:
@@ -50568,9 +50568,9 @@ loc_2A724:
 
 ; ---------------------------------------------------------------------------
 Map_AIZCollapsingLogBridge:
-		include "Levels/AIZ/Misc Object Data/Map - Collapsing Log Bridge.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Collapsing Log Bridge.s"
 Map_AIZDrawBridgeFire:
-		include "Levels/AIZ/Misc Object Data/Map - Draw Bridge Fire.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Draw Bridge Fire.s"
 ; ---------------------------------------------------------------------------
 
 Obj_AIZDrawBridge:
@@ -50950,7 +50950,7 @@ byte_2AC10:
 		dc.b    2
 		even
 Map_AIZDrawBridge:
-		include "Levels/AIZ/Misc Object Data/Map - Drawbridge.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Drawbridge.s"
 word_2AC2E:
 		dc.w      1
 		dc.w      3
@@ -51121,13 +51121,13 @@ loc_2AE1A:
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_AIZFallingLog2:
-		include "Levels/AIZ/Misc Object Data/Map - Falling Log 2.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Falling Log 2.s"
 Map_AIZFallingLog:
-		include "Levels/AIZ/Misc Object Data/Map - Falling Log.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Falling Log.s"
 Map_AIZFallingLogSplash2:
-		include "Levels/AIZ/Misc Object Data/Map - Falling Log Splash 2.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Falling Log Splash 2.s"
 Map_AIZFallingLogSplash:
-		include "Levels/AIZ/Misc Object Data/Map - Falling Log Splash.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Falling Log Splash.s"
 ; ---------------------------------------------------------------------------
 
 Obj_AIZSpikedLog:
@@ -51290,7 +51290,7 @@ byte_2B0E0:
 		dc.b  -$C, -$C,   0,   0,   0,   0,   0,  $C,  $C,  $C,   0,   0,   0,   0,   0, -$C
 		even
 Map_AIZSpikedLog:
-		include "Levels/AIZ/Misc Object Data/Map - Spiked Log.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Spiked Log.s"
 ; ---------------------------------------------------------------------------
 
 Obj_StillSprite:
@@ -51387,7 +51387,7 @@ word_2B31A:
 		dc.w    $80
 		dc.b  $10, $40
 Map_StillSprites:
-		include "Levels/Misc/Map - Still Sprites S3.asm"
+		include "Levels/Misc/Map - Still Sprites S3.s"
 ; ---------------------------------------------------------------------------
 
 Obj_AnimatedStillSprite:
@@ -51420,9 +51420,9 @@ word_2B6B6:
 		dc.w   $300
 		dc.b    8,  $C
 Ani_AnimatedStillSprites:
-		include "Levels/Misc/Anim - Animated Still Sprites S3.asm"
+		include "Levels/Misc/Anim - Animated Still Sprites S3.s"
 Map_AnimatedStillSprites:
-		include "Levels/Misc/Map - Animated Still Sprites S3.asm"
+		include "Levels/Misc/Map - Animated Still Sprites S3.s"
 ; ---------------------------------------------------------------------------
 
 Obj_AIZForegroundPlant:
@@ -51580,7 +51580,7 @@ loc_2B8B8:
 		jmp	(Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
 Map_AIZForegroundPlant:
-		include "Levels/AIZ/Misc Object Data/Map - Foreground Plant.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Foreground Plant.s"
 ; ---------------------------------------------------------------------------
 
 Obj_AIZ2FGTree:
@@ -51608,7 +51608,7 @@ word_2B994:
 		dc.w   $300
 		dc.b    8, $40
 Map_AIZ2FGTree:
-		include "Levels/AIZ/Misc Object Data/Map - Act 2 Foreground Tree.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Act 2 Foreground Tree.s"
 ; ---------------------------------------------------------------------------
 
 Obj_LBZRollingDrum:
@@ -51904,14 +51904,14 @@ loc_2BCEA:
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_Button:
-		include "General/Sprites/Buttons/Map - Button.asm"
+		include "General/Sprites/Buttons/Map - Button.s"
 ;Map_Button2:
 Map_HCZButton:
-		include "Levels/HCZ/Misc Object Data/Map - Button.asm"
+		include "Levels/HCZ/Misc Object Data/Map - Button.s"
 Map_CNZButton:
-		include "Levels/CNZ/Misc Object Data/Map - Button.asm"
+		include "Levels/CNZ/Misc Object Data/Map - Button.s"
 Map_2PButton:
-		include "General/2P Zone/Map - 2P Button.asm"
+		include "General/2P Zone/Map - 2P Button.s"
 ; ---------------------------------------------------------------------------
 
 Obj_Animal:
@@ -52397,17 +52397,17 @@ loc_2C316:
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_Animals1:
-		include "General/Sprites/Animals/Map - Animals 1.asm"
+		include "General/Sprites/Animals/Map - Animals 1.s"
 Map_Animals2:
-		include "General/Sprites/Animals/Map - Animals 2.asm"
+		include "General/Sprites/Animals/Map - Animals 2.s"
 Map_Animals3:
-		include "General/Sprites/Animals/Map - Animals 3.asm"
+		include "General/Sprites/Animals/Map - Animals 3.s"
 Map_Animals4:
-		include "General/Sprites/Animals/Map - Animals 4.asm"
+		include "General/Sprites/Animals/Map - Animals 4.s"
 Map_Animals5:
-		include "General/Sprites/Animals/Map - Animals 5.asm"
+		include "General/Sprites/Animals/Map - Animals 5.s"
 Map_EnemyScore:
-		include "General/Sprites/Enemy Misc/Map - Enemy Points.asm"
+		include "General/Sprites/Enemy Misc/Map - Enemy Points.s"
 ; ---------------------------------------------------------------------------
 
 Obj_StarPost:
@@ -52675,11 +52675,11 @@ locret_2C7AC:
 
 ; ---------------------------------------------------------------------------
 Ani_Starpost:
-		include "General/Sprites/Starpost/Anim - Starpost.asm"
+		include "General/Sprites/Starpost/Anim - Starpost.s"
 Map_StarPost:
-		include "General/Sprites/Starpost/Map - Starpost.asm"
+		include "General/Sprites/Starpost/Map - Starpost.s"
 Map_StarpostStars:
-		include "General/Sprites/Starpost/Map - Starpost Stars.asm"
+		include "General/Sprites/Starpost/Map - Starpost Stars.s"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -54248,11 +54248,11 @@ sub_2D8A4:
 
 ; ---------------------------------------------------------------------------
 Map_GameOver:
-		include "General/Sprites/Game Over/Map - Game Over.asm"
+		include "General/Sprites/Game Over/Map - Game Over.s"
 Map_TitleCard:
-		include "General/Sprites/Title Card/Map - Title Card S3.asm"
+		include "General/Sprites/Title Card/Map - Title Card S3.s"
 Map_Results:
-		include "General/Sprites/Results/Map - Results S3.asm"
+		include "General/Sprites/Results/Map - Results S3.s"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -54654,9 +54654,9 @@ locret_2E392:
 		rts
 ; ---------------------------------------------------------------------------
 Ani_Bubbler:
-		include "General/Sprites/Bubbles/Anim - Bubbler.asm"
+		include "General/Sprites/Bubbles/Anim - Bubbler.s"
 Map_Bubbler:
-		include "General/Sprites/Bubbles/Map - Bubbler.asm"
+		include "General/Sprites/Bubbles/Map - Bubbler.s"
 ; ---------------------------------------------------------------------------
 
 Obj_HCZWaterRush:
@@ -54751,9 +54751,9 @@ loc_2E5E8:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_HCZWaterRush:
-		include "Levels/HCZ/Misc Object Data/Map - Water Rush.asm"
+		include "Levels/HCZ/Misc Object Data/Map - Water Rush.s"
 Map_HCZWaterRushBlock:
-		include "Levels/HCZ/Misc Object Data/Map - Water Rush Block.asm"
+		include "Levels/HCZ/Misc Object Data/Map - Water Rush Block.s"
 ; ---------------------------------------------------------------------------
 
 Obj_HCZWaterWall:
@@ -55014,7 +55014,7 @@ loc_2EACE:
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_HCZWaterWall:
-		include "Levels/HCZ/Misc Object Data/Anim - Water Wall.asm"
+		include "Levels/HCZ/Misc Object Data/Anim - Water Wall.s"
 ; ---------------------------------------------------------------------------
 
 loc_2EB24:
@@ -55230,9 +55230,9 @@ loc_2EDFE:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_HCZWaterWall:
-		include "Levels/HCZ/Misc Object Data/Map - Waterfall.asm"
+		include "Levels/HCZ/Misc Object Data/Map - Waterfall.s"
 Map_HCZWaterWallDebris:
-		include "Levels/HCZ/Misc Object Data/Map - Water Wall Debris.asm"
+		include "Levels/HCZ/Misc Object Data/Map - Water Wall Debris.s"
 ; ---------------------------------------------------------------------------
 
 Obj_HCZCGZFan:
@@ -55572,9 +55572,9 @@ loc_2F3A4:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_HCZFan:
-		include "Levels/HCZ/Misc Object Data/Map - Fan.asm"
+		include "Levels/HCZ/Misc Object Data/Map - Fan.s"
 Map_HCZLargeFan:
-		include "Levels/HCZ/Misc Object Data/Map - Large Fan.asm"
+		include "Levels/HCZ/Misc Object Data/Map - Large Fan.s"
 ; ---------------------------------------------------------------------------
 
 loc_2F51C:
@@ -55656,7 +55656,7 @@ locret_2F61E:
 
 ; ---------------------------------------------------------------------------
 Map_CGZFan:
-		include "Levels/CGZ/Misc Object Data/Map - Fan.asm"
+		include "Levels/CGZ/Misc Object Data/Map - Fan.s"
 ; ---------------------------------------------------------------------------
 
 Obj_HCZHandLauncher:
@@ -55952,7 +55952,7 @@ loc_2F992:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_HCZHandLauncher:
-		include "Levels/HCZ/Misc Object Data/Map - Hand Launcher.asm"
+		include "Levels/HCZ/Misc Object Data/Map - Hand Launcher.s"
 ; ---------------------------------------------------------------------------
 byte_2FAA8:
 		dc.b  $10, $20
@@ -56079,7 +56079,7 @@ locret_2FBFA:
 
 ; ---------------------------------------------------------------------------
 Map_HCZCNZDoor:
-		include "Levels/HCZ/Misc Object Data/Map - (&CNZ) Door S3.asm"
+		include "Levels/HCZ/Misc Object Data/Map - (&CNZ) Door S3.s"
 ; ---------------------------------------------------------------------------
 byte_2FC28:
 		dc.b  $20,   8
@@ -56200,7 +56200,7 @@ locret_2FD60:
 
 ; ---------------------------------------------------------------------------
 Map_CNZDoorHorizontal:
-		include "Levels/CNZ/Misc Object Data/Map - Door Horizontal.asm"
+		include "Levels/CNZ/Misc Object Data/Map - Door Horizontal.s"
 ; ---------------------------------------------------------------------------
 word_2FD7E:
 		dc.w   $B28,  $CD8
@@ -56661,7 +56661,7 @@ word_302BE:
 		dc.w   -$18,  -$18,  -$18,  -$17,  -$17,  -$16,  -$14,  -$13,  -$11,  -$10,   -$E,   -$C,   -$A,    -7,    -5,    -3
 		dc.w      0,     2,     4,     6,     9,    $B,    $D,    $F,   $10,   $12,   $13,   $15,   $16,   $16,   $17,   $17
 Map_HCZConveyorSpike:
-		include "Levels/HCZ/Misc Object Data/Map - Conveyor Spike.asm"
+		include "Levels/HCZ/Misc Object Data/Map - Conveyor Spike.s"
 ; ---------------------------------------------------------------------------
 
 Obj_CNZBalloon:
@@ -56778,9 +56778,9 @@ byte_304B8:
 		dc.b    0,   0,   1,   3
 		even
 Ani_CNZBalloon:
-		include "Levels/CNZ/Misc Object Data/Anim - Balloon.asm"
+		include "Levels/CNZ/Misc Object Data/Anim - Balloon.s"
 Map_CNZBalloon:
-		include "Levels/CNZ/Misc Object Data/Map - Balloon.asm"
+		include "Levels/CNZ/Misc Object Data/Map - Balloon.s"
 ; ---------------------------------------------------------------------------
 
 Obj_CNZCannon:
@@ -57036,9 +57036,9 @@ locret_30A30:
 
 ; ---------------------------------------------------------------------------
 Map_CNZCannon:
-		include "Levels/CNZ/Misc Object Data/Map - Cannon.asm"
+		include "Levels/CNZ/Misc Object Data/Map - Cannon.s"
 DPLC_CNZCannon:
-		include "Levels/CNZ/Misc Object Data/DPLC - Cannon.asm"
+		include "Levels/CNZ/Misc Object Data/DPLC - Cannon.s"
 ; ---------------------------------------------------------------------------
 
 Obj_CNZRisingPlatform:
@@ -57064,7 +57064,7 @@ loc_30C10:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Ani_CNZRisingPlatform:
-		include "Levels/CNZ/Misc Object Data/Anim - Rising Platform.asm"
+		include "Levels/CNZ/Misc Object Data/Anim - Rising Platform.s"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -57123,7 +57123,7 @@ loc_30CC4:
 
 ; ---------------------------------------------------------------------------
 Map_CNZRisingPlatform:
-		include "Levels/CNZ/Misc Object Data/Map - Rising Platform.asm"
+		include "Levels/CNZ/Misc Object Data/Map - Rising Platform.s"
 ; ---------------------------------------------------------------------------
 
 Obj_CNZTrapDoor:
@@ -57172,9 +57172,9 @@ locret_30DBE:
 
 ; ---------------------------------------------------------------------------
 Ani_CNZTrapDoor:
-		include "Levels/CNZ/Misc Object Data/Anim - Trap Door.asm"
+		include "Levels/CNZ/Misc Object Data/Anim - Trap Door.s"
 Map_CNZTrapDoor:
-		include "Levels/CNZ/Misc Object Data/Map - Trap Door.asm"
+		include "Levels/CNZ/Misc Object Data/Map - Trap Door.s"
 ; ---------------------------------------------------------------------------
 
 Obj_CNZLightBulb:
@@ -57204,7 +57204,7 @@ loc_30E4C:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_CNZLightBulb:
-		include "Levels/CNZ/Misc Object Data/Map - Light Bulb.asm"
+		include "Levels/CNZ/Misc Object Data/Map - Light Bulb.s"
 ; ---------------------------------------------------------------------------
 
 Obj_CNZHoverFan:
@@ -57342,7 +57342,7 @@ locret_3100E:
 
 ; ---------------------------------------------------------------------------
 Map_CNZHoverFan:
-		include "Levels/CNZ/Misc Object Data/Map - Hover Fan.asm"
+		include "Levels/CNZ/Misc Object Data/Map - Hover Fan.s"
 ; ---------------------------------------------------------------------------
 
 Obj_CNZVacuumTube:
@@ -58022,7 +58022,7 @@ PlayerTwistFlip:
 		dc.b    0,   1,   1,   0,   0,   0,   1,   1,   1,   0,   0,   0
 		even
 Map_CNZCylinder:
-		include "Levels/CNZ/Misc Object Data/Map - Cylinder.asm"
+		include "Levels/CNZ/Misc Object Data/Map - Cylinder.s"
 ; ---------------------------------------------------------------------------
 
 Obj_HCZSpinningColumn:
@@ -58241,7 +58241,7 @@ loc_31AE8:
 
 ; ---------------------------------------------------------------------------
 Map_HCZSpinningColumn:
-		include "Levels/HCZ/Misc Object Data/Map - Spinning Column.asm"
+		include "Levels/HCZ/Misc Object Data/Map - Spinning Column.s"
 ; ---------------------------------------------------------------------------
 
 Obj_CNZGiantWheel:
@@ -58930,11 +58930,11 @@ loc_322A8:
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_Bumper:
-		include "General/Sprites/Level Misc/Anim - Bumper.asm"
+		include "General/Sprites/Level Misc/Anim - Bumper.s"
 Map_Bumper:
-		include "General/Sprites/Level Misc/Map - Bumper.asm"
+		include "General/Sprites/Level Misc/Map - Bumper.s"
 Map_2PBumper:
-		include "General/2P Zone/Map - 2P Bumper.asm"
+		include "General/2P Zone/Map - 2P Bumper.s"
 ; ---------------------------------------------------------------------------
 
 Obj_CNZSpiralTube:
@@ -60443,7 +60443,7 @@ loc_332E8:
 
 ; ---------------------------------------------------------------------------
 Map_MGZSwingingPlatform:
-		include "Levels/MGZ/Misc Object Data/Map - Swinging Platform.asm"
+		include "Levels/MGZ/Misc Object Data/Map - Swinging Platform.s"
 ; ---------------------------------------------------------------------------
 
 Obj_MGZSwingingSpikeBall:
@@ -60635,7 +60635,7 @@ loc_33556:
 
 ; ---------------------------------------------------------------------------
 Map_MGZSwingingSpikeBall:
-		include "Levels/MGZ/Misc Object Data/Map - Swinging Spike Ball.asm"
+		include "Levels/MGZ/Misc Object Data/Map - Swinging Spike Ball.s"
 ; ---------------------------------------------------------------------------
 
 Obj_MGZHeadTrigger:
@@ -60787,9 +60787,9 @@ loc_337E0:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Ani_MGZHeadTrigger:
-		include "Levels/MGZ/Misc Object Data/Anim - Head Trigger.asm"
+		include "Levels/MGZ/Misc Object Data/Anim - Head Trigger.s"
 Map_MGZHeadTrigger:
-		include "Levels/MGZ/Misc Object Data/Map - Head Trigger.asm"
+		include "Levels/MGZ/Misc Object Data/Map - Head Trigger.s"
 ; ---------------------------------------------------------------------------
 byte_33868:
 		dc.b  $40, $1E,   0, $40
@@ -60900,7 +60900,7 @@ loc_3398E:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_MGZTriggerPlatform:
-		include "Levels/MGZ/Misc Object Data/Map - Trigger Platform.asm"
+		include "Levels/MGZ/Misc Object Data/Map - Trigger Platform.s"
 ; ---------------------------------------------------------------------------
 
 Obj_MGZMovingSpikePlatform:
@@ -60991,7 +60991,7 @@ loc_33B8E:
 		jmp	(Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
 Map_MGZMovingSpikePlatform:
-		include "Levels/MGZ/Misc Object Data/Map - Moving Spike Platform.asm"
+		include "Levels/MGZ/Misc Object Data/Map - Moving Spike Platform.s"
 ; ---------------------------------------------------------------------------
 
 Obj_MGZPulley:
@@ -61352,7 +61352,7 @@ loc_340B6:
 		jmp	(Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
 Map_MGZPulley:
-		include "Levels/MGZ/Misc Object Data/Map - Pulley.asm"
+		include "Levels/MGZ/Misc Object Data/Map - Pulley.s"
 ; ---------------------------------------------------------------------------
 
 Obj_MGZTopPlatform:
@@ -62635,7 +62635,7 @@ locret_34EF4:
 
 ; ---------------------------------------------------------------------------
 Map_MGZTopPlatform:
-		include "Levels/MGZ/Misc Object Data/Map - Top Platform.asm"
+		include "Levels/MGZ/Misc Object Data/Map - Top Platform.s"
 ; ---------------------------------------------------------------------------
 
 Obj_MGZTopLauncher:
@@ -62799,7 +62799,7 @@ loc_35138:
 		jmp	(Add_SpriteToCollisionResponseList).l
 ; ---------------------------------------------------------------------------
 Map_CGZBladePlatform:
-		include "Levels/CGZ/Misc Object Data/Map - Blade Platform.asm"
+		include "Levels/CGZ/Misc Object Data/Map - Blade Platform.s"
 ; ---------------------------------------------------------------------------
 
 Obj_BPZElephantBlock:
@@ -62919,7 +62919,7 @@ locret_352EA:
 
 ; ---------------------------------------------------------------------------
 Map_BPZElephantBlock:
-		include "Levels/BPZ/Misc Object Data/Map - Elephant Block.asm"
+		include "Levels/BPZ/Misc Object Data/Map - Elephant Block.s"
 ; ---------------------------------------------------------------------------
 
 Obj_BPZBalloon:
@@ -63002,9 +63002,9 @@ loc_35400:
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_BPZBalloon:
-		include "Levels/BPZ/Misc Object Data/Anim - Balloon.asm"
+		include "Levels/BPZ/Misc Object Data/Anim - Balloon.s"
 Map_BPZBalloon:
-		include "Levels/BPZ/Misc Object Data/Map - Balloon.asm"
+		include "Levels/BPZ/Misc Object Data/Map - Balloon.s"
 ; ---------------------------------------------------------------------------
 
 Obj_DPZDisolvingSandBar:
@@ -63082,9 +63082,9 @@ byte_355B8:
 		dc.b    0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
 		even
 Ani_DPZDissolvingSandBar:
-		include "Levels/DPZ/Misc Object Data/Anim - Dissolving Sand Bar.asm"
+		include "Levels/DPZ/Misc Object Data/Anim - Dissolving Sand Bar.s"
 Map_DPZDissolvingSandBar:
-		include "Levels/DPZ/Misc Object Data/Map - Dissolving Sand Bar.asm"
+		include "Levels/DPZ/Misc Object Data/Map - Dissolving Sand Bar.s"
 ; ---------------------------------------------------------------------------
 
 Obj_DPZButton:
@@ -63139,7 +63139,7 @@ loc_358DC:
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_DPZButton:
-		include "Levels/DPZ/Misc Object Data/Map - Button.asm"
+		include "Levels/DPZ/Misc Object Data/Map - Button.s"
 ; ---------------------------------------------------------------------------
 
 Obj_2PItem:
@@ -63808,9 +63808,9 @@ locret_35FE8:
 
 ; ---------------------------------------------------------------------------
 Ani_2PItem:
-		include "General/2P Zone/Anim - Item.asm"
+		include "General/2P Zone/Anim - Item.s"
 Map_2PItem:
-		include "General/2P Zone/Map - Item.asm"
+		include "General/2P Zone/Map - Item.s"
 ; ---------------------------------------------------------------------------
 
 Obj_2PGoalMarker:
@@ -64151,9 +64151,9 @@ byte_3656C:
 		dc.b    4,   5,   6,   0
 		even
 Ani_2PGoalMarker:
-		include "General/2P Zone/Anim - Goal Marker.asm"
+		include "General/2P Zone/Anim - Goal Marker.s"
 Map_2PGoalMarker:
-		include "General/2P Zone/Map - Goal Marker.asm"
+		include "General/2P Zone/Map - Goal Marker.s"
 ; ---------------------------------------------------------------------------
 
 loc_365CC:
@@ -64209,7 +64209,7 @@ loc_36654:
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_2PLapNumbers:
-		include "General/2P Zone/Map - Lap Numbers.asm"
+		include "General/2P Zone/Map - Lap Numbers.s"
 ; ---------------------------------------------------------------------------
 
 loc_366CC:
@@ -64569,9 +64569,9 @@ loc_36A8E:
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_2PNeonDisplay:
-		include "General/2P Zone/Anim - Neon Display.asm"
+		include "General/2P Zone/Anim - Neon Display.s"
 Map_2PNeonDisplay:
-		include "General/2P Zone/Map - Neon Display.asm"
+		include "General/2P Zone/Map - Neon Display.s"
 ; ---------------------------------------------------------------------------
 
 loc_37220:
@@ -64808,7 +64808,7 @@ loc_374F2:
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_2PItemIcon:
-		include "General/2P Zone/Map - Item Icon.asm"
+		include "General/2P Zone/Map - Item Icon.s"
 ; ---------------------------------------------------------------------------
 		; unused
 		move.l	#Map_2PPosition,mappings(a0)
@@ -64885,7 +64885,7 @@ loc_3764E:
 		bra.s	loc_37602
 ; ---------------------------------------------------------------------------
 Map_2PPosition:
-		include "General/2P Zone/Map - Position Icons (Unused).asm"
+		include "General/2P Zone/Map - Position Icons (Unused).s"
 ; ---------------------------------------------------------------------------
 
 Obj_EMZDripper:
@@ -65005,7 +65005,7 @@ loc_377DE:
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_EMZDripper:
-		include "Levels/EMZ/Misc Object Data/Map - Dripper.asm"
+		include "Levels/EMZ/Misc Object Data/Map - Dripper.s"
 ; ---------------------------------------------------------------------------
 
 locret_3780C:
@@ -65111,9 +65111,9 @@ loc_37922:
 
 ; ---------------------------------------------------------------------------
 Ani_HCZWaterDrop:
-		include "Levels/HCZ/Misc Object Data/Anim - Water Drop.asm"
+		include "Levels/HCZ/Misc Object Data/Anim - Water Drop.s"
 Map_HCZWaterDrop:
-		include "Levels/HCZ/Misc Object Data/Map - Water Drop.asm"
+		include "Levels/HCZ/Misc Object Data/Map - Water Drop.s"
 ; ---------------------------------------------------------------------------
 
 Obj_HCZWaterSplash:
@@ -65365,9 +65365,9 @@ loc_37C2A:
 
 ; ---------------------------------------------------------------------------
 Map_HCZWaterSplash:
-		include "Levels/HCZ/Misc Object Data/Map - Water Splash.asm"
+		include "Levels/HCZ/Misc Object Data/Map - Water Splash.s"
 Map_HCZWaterSplash2:
-		include "Levels/HCZ/Misc Object Data/Map - Water Splash 2.asm"
+		include "Levels/HCZ/Misc Object Data/Map - Water Splash 2.s"
 ; ---------------------------------------------------------------------------
 
 Obj_TensionBridge:
@@ -66250,9 +66250,9 @@ BridgeBendData:
 		dc.b  $19, $31, $4A, $67, $7E, $93, $A7, $BD, $CD, $DB, $E7, $F3, $F9, $FE, $FF,   0
 		dc.b  $19, $31, $4A, $61, $78, $8E, $A2, $B5, $C5, $D4, $E1, $EC, $F4, $FB, $FE, $FF
 Map_ICZTensionBridge:
-		include "Levels/ICZ/Misc Object Data/Map - ICZ Tension Bridge.asm"
+		include "Levels/ICZ/Misc Object Data/Map - ICZ Tension Bridge.s"
 Map_TensionBridge:
-		include "Levels/Misc/Map - Tension Bridge.asm"
+		include "Levels/Misc/Map - Tension Bridge.s"
 ; ---------------------------------------------------------------------------
 byte_38604:
 		dc.b    2,   4,   4,   4,   4,   4,  $C,   0
@@ -66649,7 +66649,7 @@ loc_38A5C:
 		jmp	(Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_SonicSnowboard:
-		include "General/Sprites/Sonic/Anim - Sonic Snowboard.asm"
+		include "General/Sprites/Sonic/Anim - Sonic Snowboard.s"
 ; ---------------------------------------------------------------------------
 
 loc_38A9E:
@@ -67068,9 +67068,9 @@ loc_38FC8:
 		jmp	(Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_SnowboardDust:
-		include "General/Sprites/Snowboard/Anim - Snowboard Dust.asm"
+		include "General/Sprites/Snowboard/Anim - Snowboard Dust.s"
 Map_SnowboardDust:
-		include "General/Sprites/Snowboard/Map - Snowboard Dust.asm"
+		include "General/Sprites/Snowboard/Map - Snowboard Dust.s"
 ArtNem_SnowboardDust:
 		binclude "data/General/Sprites/Snowboard/Snowboard Dust.nem"
 		even
@@ -71353,17 +71353,17 @@ AIZMakeTreeScript:
 		dc.w   $557,  $280
 		dc.w  $FFFF
 Map_AIZShipPropeller:
-		include "Levels/AIZ/Misc Object Data/Map - Act 2 Ship Propeller.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Act 2 Ship Propeller.s"
 Ani_AIZShipPropeller:
-		include "Levels/AIZ/Misc Object Data/Anim - Act 2 Ship Propeller.asm"
+		include "Levels/AIZ/Misc Object Data/Anim - Act 2 Ship Propeller.s"
 Map_AIZ2BombExplode:
-		include "Levels/AIZ/Misc Object Data/Map - Act 2 Bomb Explosion.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Act 2 Bomb Explosion.s"
 Ani_AIZ2BombExplode:
-		include "Levels/AIZ/Misc Object Data/Anim - Act 2 Bomb Explosion.asm"
+		include "Levels/AIZ/Misc Object Data/Anim - Act 2 Bomb Explosion.s"
 Map_AIZ2BGTree:
-		include "Levels/AIZ/Misc Object Data/Map - Act 2 Background Tree.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Act 2 Background Tree.s"
 Map_AIZ2BossSmall:
-		include "Levels/AIZ/Misc Object Data/Map - Act 2 Boss Small.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Act 2 Boss Small.s"
 ; ---------------------------------------------------------------------------
 
 HCZ1_ScreenInit:
@@ -76600,9 +76600,9 @@ Pal_ContinueScreen:
 		binclude "data/General/Continue/Palettes/Palette S3.bin"
 		even
 Map_ContinueSprites:
-		include "General/Continue/Map - Player Sprites S3.asm"
+		include "General/Continue/Map - Player Sprites S3.s"
 Map_ContinueIcons:
-		include "General/Continue/Map - Player Icons.asm"
+		include "General/Continue/Map - Player Icons.s"
 byte_3F834:	dc.b 0
 		dc.b 1
 byte_3F836:	dc.b 2
@@ -77845,7 +77845,7 @@ Pal_EndingS3LogoFlash:
 		binclude "data/General/Ending/Palettes/S3 Logo Flash.bin"
 		even
 Map_EndingGraphics:
-		include "General/Ending/Map - S3 Ending Graphics.asm"
+		include "General/Ending/Map - S3 Ending Graphics.s"
 ChildObjDat_4192A:
 		dc.w 1-1
 		dc.l loc_40854
@@ -78209,9 +78209,9 @@ ObjDat3_434EA:
 		dc.b    8
 		dc.b    0
 Ani_SonicOnSegaScr:
-		include "General/S2Menu/Anim - Sonic On Sega Screen.asm"
+		include "General/S2Menu/Anim - Sonic On Sega Screen.s"
 Map_SonicOnSegaScr:
-		include "General/S2Menu/Map - Sonic On Sega Screen.asm"
+		include "General/S2Menu/Map - Sonic On Sega Screen.s"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -79355,7 +79355,7 @@ byte_4404E:
 byte_44052:
 		dc.b    1, $10, $11, $FC
 Map_GumballBonus:
-		include "Levels/Gumball/Misc Object Data/Map - Gumball Bonus.asm"
+		include "Levels/Gumball/Misc Object Data/Map - Gumball Bonus.s"
 ; ---------------------------------------------------------------------------
 
 Obj_SSEntryRing:
@@ -79570,13 +79570,13 @@ AniRaw_SSEntryFlash:
 		dc.b    0,   0,   0,   1,   2,   3|$40,   3,   2,   1,   0, $F4
 		even
 Map_SSEntryRing:
-		include "General/Sprites/SS Entry/Map - Entry Ring.asm"
+		include "General/Sprites/SS Entry/Map - Entry Ring.s"
 DPLC_SSEntryRing:
-		include "General/Sprites/SS Entry/DPLC - Special Stage Entry Ring.asm"
+		include "General/Sprites/SS Entry/DPLC - Special Stage Entry Ring.s"
 Map_SSEntryFlash:
-		include "General/Sprites/SS Entry/Map - Entry Flash.asm"
+		include "General/Sprites/SS Entry/Map - Entry Flash.s"
 DPLC_SSEntryFlash:
-		include "General/Sprites/SS Entry/DPLC - Special Stage Entry Flash.asm"
+		include "General/Sprites/SS Entry/DPLC - Special Stage Entry Flash.s"
 ; ---------------------------------------------------------------------------
 
 Obj_CutsceneKnuckles:
@@ -80757,7 +80757,7 @@ loc_45450:
 		jmp	(Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_LBZKnuxPillar:
-		include "Levels/LBZ/Misc Object Data/Map - Knuckles Pillar.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Knuckles Pillar.s"
 ; ---------------------------------------------------------------------------
 
 Obj_CutsceneButton:
@@ -100534,7 +100534,7 @@ Pal_SuperSonicEndPose:
 		binclude "data/General/Ending/Palettes/S3 Super Sonic End Pose.bin"
 		even
 Map_SonicTailsEndPoses:
-		include "General/Ending/Map - Sonic Tails Ending Poses S3.asm"
+		include "General/Ending/Map - Sonic Tails Ending Poses S3.s"
 
 PalSPtr_LBZFinalBoss2_FadeIn:
 		palscriptptr .header, .data
@@ -107265,7 +107265,7 @@ byte_55D1D:
 		dc.b    1,   8,   9,  $A,  $B,  $C,  $D, $F4
 		even
 Map_TurboSpikerHidden:
-		include "General/Sprites/Turbo Spiker/Map - Turbo Spiker Hidden.asm"
+		include "General/Sprites/Turbo Spiker/Map - Turbo Spiker Hidden.s"
 ; ---------------------------------------------------------------------------
 
 Obj_MegaChopper:
@@ -108391,7 +108391,7 @@ byte_56937:
 		dc.b    0,   0,   1,   2, $FC
 		even
 Map_MGZMinibossSpires:
-		include "Levels/MGZ/Misc Object Data/Map - Miniboss Spires.asm"
+		include "Levels/MGZ/Misc Object Data/Map - Miniboss Spires.s"
 PLC_MGZMiniboss: plrlistheader
 		plreq ArtTile_BossExplosion, ArtNem_BossExplosion
 		plreq ArtTile_MGZSpire, ArtNem_MGZSpire
@@ -116188,44 +116188,44 @@ sub_5B764:
 ; End of function sub_5B764
 
 ; ---------------------------------------------------------------------------
-DebugOffs:		include "Levels/Misc/Debug list pointers.asm"
+DebugOffs:		include "Levels/Misc/Debug list pointers.s"
 
-Debug_AIZ1:		dbglistinclude "Levels/AIZ/Debug/Act 1 S3.asm"
-Debug_AIZ2:		dbglistinclude "Levels/AIZ/Debug/Act 2 S3.asm"
-Debug_HCZ:		dbglistinclude "Levels/HCZ/Debug/S3.asm"
-Debug_MGZ:		dbglistinclude "Levels/MGZ/Debug/S3.asm"
-Debug_CNZ:		dbglistinclude "Levels/CNZ/Debug/S3.asm"
+Debug_AIZ1:		dbglistinclude "Levels/AIZ/Debug/Act 1 S3.s"
+Debug_AIZ2:		dbglistinclude "Levels/AIZ/Debug/Act 2 S3.s"
+Debug_HCZ:		dbglistinclude "Levels/HCZ/Debug/S3.s"
+Debug_MGZ:		dbglistinclude "Levels/MGZ/Debug/S3.s"
+Debug_CNZ:		dbglistinclude "Levels/CNZ/Debug/S3.s"
 Debug_FBZ1:
-Debug_FBZ2:		dbglistinclude "Levels/FBZ/Debug/S3.asm"
-Debug_ICZ1:		dbglistinclude "Levels/ICZ/Debug/Act 1 S3.asm"
-Debug_ICZ2:		dbglistinclude "Levels/ICZ/Debug/Act 2 S3.asm"
-Debug_LBZ1:		dbglistinclude "Levels/LBZ/Debug/Act 1 S3.asm"
-Debug_LBZ2:		dbglistinclude "Levels/LBZ/Debug/Act 2 S3.asm"
-Debug_MHZ:		dbglistinclude "Levels/MHZ/Debug/S3.asm"
+Debug_FBZ2:		dbglistinclude "Levels/FBZ/Debug/S3.s"
+Debug_ICZ1:		dbglistinclude "Levels/ICZ/Debug/Act 1 S3.s"
+Debug_ICZ2:		dbglistinclude "Levels/ICZ/Debug/Act 2 S3.s"
+Debug_LBZ1:		dbglistinclude "Levels/LBZ/Debug/Act 1 S3.s"
+Debug_LBZ2:		dbglistinclude "Levels/LBZ/Debug/Act 2 S3.s"
+Debug_MHZ:		dbglistinclude "Levels/MHZ/Debug/S3.s"
 Debug_SOZ1:
-Debug_SOZ2:		dbglistinclude "Levels/SOZ/Debug/S3.asm"
+Debug_SOZ2:		dbglistinclude "Levels/SOZ/Debug/S3.s"
 Debug_LRZ1:
-Debug_LRZ2:		dbglistinclude "Levels/LRZ/Debug/S3.asm"
+Debug_LRZ2:		dbglistinclude "Levels/LRZ/Debug/S3.s"
 			; Presumably, these belong to the LRZ debug list, but the header only counts five entries, ignoring these three.
 			dbglistobj Obj_Spring, Map_Spring, $90,   3, make_art_tile(ArtTile_SpikesSprings+$20,0,0)
 			dbglistobj Obj_Spring, Map_Spring, $A0,   6, make_art_tile(ArtTile_SpikesSprings+$10,0,0)
 			dbglistobj Obj_Spikes, Map_Spikes,   0,   0, make_art_tile(ArtTile_SpikesSprings+$8,0,0)
-Debug_SSZ:		dbglistinclude "Levels/SSZ/Debug/S3.asm"
+Debug_SSZ:		dbglistinclude "Levels/SSZ/Debug/S3.s"
 Debug_DEZ1:
-Debug_DEZ2:		dbglistinclude "Levels/DEZ/Debug/S3.asm"
+Debug_DEZ2:		dbglistinclude "Levels/DEZ/Debug/S3.s"
 Debug_DDZ1:
-Debug_DDZ2:		dbglistinclude "Levels/DDZ/Debug/S3.asm"
-Debug_Ending:		dbglistinclude "Levels/SSZ/Debug/Ending S3.asm"
-Debug_ALZ:		dbglistinclude "Levels/ALZ/Debug/Main.asm"
-Debug_BPZ:		dbglistinclude "Levels/BPZ/Debug/Main.asm"
-Debug_DPZ:		dbglistinclude "Levels/DPZ/Debug/Main.asm"
-Debug_CGZ:		dbglistinclude "Levels/CGZ/Debug/Main.asm"
-Debug_EMZ:		dbglistinclude "Levels/EMZ/Debug/Main.asm"
+Debug_DDZ2:		dbglistinclude "Levels/DDZ/Debug/S3.s"
+Debug_Ending:		dbglistinclude "Levels/SSZ/Debug/Ending S3.s"
+Debug_ALZ:		dbglistinclude "Levels/ALZ/Debug/Main.s"
+Debug_BPZ:		dbglistinclude "Levels/BPZ/Debug/Main.s"
+Debug_DPZ:		dbglistinclude "Levels/DPZ/Debug/Main.s"
+Debug_CGZ:		dbglistinclude "Levels/CGZ/Debug/Main.s"
+Debug_EMZ:		dbglistinclude "Levels/EMZ/Debug/Main.s"
 Debug_Pachinko_Special:
 Debug_HPZ:
-Debug_Gumball_Special:	dbglistinclude "Levels/Gumball/Debug/S3.asm"
+Debug_Gumball_Special:	dbglistinclude "Levels/Gumball/Debug/S3.s"
 
-Sprite_Listing:	include "Levels/Misc/Object pointers - S3 Set.asm"
+Sprite_Listing:	include "Levels/Misc/Object pointers - S3 Set.s"
 
 		align $2000
 Character_Speeds:
@@ -117372,7 +117372,7 @@ Layout_Slot_Special:
 		binclude "data/Levels/Slots/Layout/1-S3.bin"
 		even
 PalPoint:
-		include "Levels/Misc/Palette pointers S3.asm"
+		include "Levels/Misc/Palette pointers S3.s"
 
 Pal_S2Sega:
 		binclude "data/General/S2Menu/Palettes/Sega Screen.bin"
@@ -117490,17 +117490,17 @@ ArtUnc_SStageSonic:
 		binclude "data/General/Sprites/Sonic/Art/SStage Sonic.unc"
 		even
 Map_SStageSonic:
-		include "General/Sprites/Sonic/Map - SStage Sonic.asm"
+		include "General/Sprites/Sonic/Map - SStage Sonic.s"
 ArtUnc_SStageTails:
 		binclude "data/General/Sprites/Tails/Art/SStage Tails.unc"
 		even
 Map_SStageTails:
-		include "General/Sprites/Tails/Map - SStage Tails.asm"
+		include "General/Sprites/Tails/Map - SStage Tails.s"
 ArtUnc_SStageTailstails:
 		binclude "data/General/Sprites/Tails/Art/SStage Tails tails.unc"
 		even
 Map_SStageTailstails:
-		include "General/Sprites/Tails/Map - SStage Tails tails.asm"
+		include "General/Sprites/Tails/Map - SStage Tails tails.s"
 ArtNem_SphereTest:
 		binclude "data/General/Special Stage/Nemesis Art/Eosian Spheres.nem"
 		even
@@ -117568,21 +117568,21 @@ SStage_PerspectiveMaps:
 		binclude "data/General/Special Stage/Layout/S3 Perspective Maps.bin"
 		even
 Map_Sonic2P:
-		include "General/Sprites/Sonic/Map - Sonic 2P.asm"
+		include "General/Sprites/Sonic/Map - Sonic 2P.s"
 PLC_Sonic2P:
-		include "General/Sprites/Sonic/DPLC - Sonic 2P.asm"
+		include "General/Sprites/Sonic/DPLC - Sonic 2P.s"
 Map_Tails2P:
-		include "General/Sprites/Tails/Map - Tails 2P.asm"
+		include "General/Sprites/Tails/Map - Tails 2P.s"
 Map_Tails2P_Tail:
-		include "General/Sprites/Tails/Map - Tails tail 2P.asm"
+		include "General/Sprites/Tails/Map - Tails tail 2P.s"
 PLC_Tails2P:
-		include "General/Sprites/Tails/DPLC - Tails 2P.asm"
+		include "General/Sprites/Tails/DPLC - Tails 2P.s"
 DPLC_Tails2P_Tail:
-		include "General/Sprites/Tails/DPLC - Tails tails 2P.asm"
+		include "General/Sprites/Tails/DPLC - Tails tails 2P.s"
 Map_Knuckles2P:
-		include "General/Sprites/Knuckles/Map - Knuckles 2P.asm"
+		include "General/Sprites/Knuckles/Map - Knuckles 2P.s"
 PLC_Knuckles2P:
-		include "General/Sprites/Knuckles/DPLC - Knuckles 2P.asm"
+		include "General/Sprites/Knuckles/DPLC - Knuckles 2P.s"
 ArtUnc_SurfboardIntro:
 		binclude "data/General/Sprites/Sonic/Art/Sonic Surfboarding.unc"
 		align0 $20
@@ -117902,7 +117902,7 @@ DAC_98_99_9A_Data:		include "Sound/DAC/metadata/98-9A.inc"
 
 		align $1000
 
-		include "Sound/Z80 Sound Driver.asm"
+		include "Sound/Z80 Sound Driver.s"
 
 ; ---------------------------------------------------------------------------
 ; Dac Bank 2
@@ -118158,17 +118158,17 @@ ArtUnc_Knuckles2P:
 		binclude "data/General/Sprites/Knuckles/Art/Knuckles 2P.unc"
 		even
 Map_Sonic:
-		include "General/Sprites/Sonic/Map - Sonic S3.asm"
+		include "General/Sprites/Sonic/Map - Sonic S3.s"
 PLC_Sonic:
-		include "General/Sprites/Sonic/DPLC - Sonic S3.asm"
+		include "General/Sprites/Sonic/DPLC - Sonic S3.s"
 Map_Tails:
-		include "General/Sprites/Tails/Map - Tails S3.asm"
+		include "General/Sprites/Tails/Map - Tails S3.s"
 PLC_Tails:
-		include "General/Sprites/Tails/DPLC - Tails S3.asm"
+		include "General/Sprites/Tails/DPLC - Tails S3.s"
 Map_Tails_Tail:
-		include "General/Sprites/Tails/Map - Tails tails.asm"
+		include "General/Sprites/Tails/Map - Tails tails.s"
 PLC_Tails_Tail:
-		include "General/Sprites/Tails/DPLC - Tails tails.asm"
+		include "General/Sprites/Tails/DPLC - Tails tails.s"
 ICZSnowboard_Slope1:
 		binclude "data/Levels/ICZ/Misc/ICZ Snowboard Slope 1.bin"
 		even
@@ -118182,13 +118182,13 @@ ArtUnc_Snowboard:
 		binclude "data/General/Sprites/Snowboard/Snowboard.unc"
 		even
 Map_SonicSnowboard:
-		include "General/Sprites/Sonic/Map - Sonic Snowboarding.asm"
+		include "General/Sprites/Sonic/Map - Sonic Snowboarding.s"
 DPLC_SonicSnowboard:
-		include "General/Sprites/Sonic/DPLC - Sonic Snowboarding.asm"
+		include "General/Sprites/Sonic/DPLC - Sonic Snowboarding.s"
 Map_Snowboard:
-		include "General/Sprites/Snowboard/Map - Snowboard.asm"
+		include "General/Sprites/Snowboard/Map - Snowboard.s"
 DPLC_Snowboard:
-		include "General/Sprites/Snowboard/DPLC - Snowboard.asm"
+		include "General/Sprites/Snowboard/DPLC - Snowboard.s"
 ArtNem_AIZIntroSprites:
 		binclude "data/Levels/AIZ/Nemesis Art/Intro Waves.nem"
 		even
@@ -118270,7 +118270,7 @@ MapEni_S3TitleBg:
 		binclude "data/General/Title/Enigma Map/S3 BG.eni"
 		even
 Map_S3TitleBanner:
-		include "General/Title/Map - S3 Banner.asm"
+		include "General/Title/Map - S3 Banner.s"
 ArtNem_Title_S3Banner:
 		binclude "data/General/Title/Nemesis Art/S3 Banner.nem"
 		even
@@ -118389,31 +118389,31 @@ ArtNem_Rabbit:
 		binclude "data/General/Sprites/Animals/Rabbit.nem"
 		even
 Map_RobotnikShip:
-		include "General/Sprites/Robotnik/Map - Robotnik Ship.asm"
+		include "General/Sprites/Robotnik/Map - Robotnik Ship.s"
 Map_FBZRobotnikRun:
-		include "General/Sprites/Robotnik/Map - FBZ Robotnik Run.asm"
+		include "General/Sprites/Robotnik/Map - FBZ Robotnik Run.s"
 Map_FBZRobotnikHead:
-		include "General/Sprites/Robotnik/Map - FBZ Robotnik Head.asm"
+		include "General/Sprites/Robotnik/Map - FBZ Robotnik Head.s"
 Map_LBZMiniboss:
-		include "Levels/LBZ/Misc Object Data/Map - Miniboss.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Miniboss.s"
 Map_LBZMinibossBox:
-		include "Levels/LBZ/Misc Object Data/Map - Miniboss Box.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Miniboss Box.s"
 Map_SnaleBlaster:
-		include "General/Sprites/Snale Blaster/Map - Snale Blaster.asm"
+		include "General/Sprites/Snale Blaster/Map - Snale Blaster.s"
 Map_Orbinaut:
-		include "General/Sprites/Orbinaut/Map - Orbinaut.asm"
+		include "General/Sprites/Orbinaut/Map - Orbinaut.s"
 Map_Ribot:
-		include "General/Sprites/Ribot/Map - Ribot.asm"
+		include "General/Sprites/Ribot/Map - Ribot.s"
 Map_Corkey:
-		include "General/Sprites/Corkey/Map - Corkey.asm"
+		include "General/Sprites/Corkey/Map - Corkey.s"
 Map_Flybot767:
-		include "General/Sprites/Flybot767/Map - Flybot767.asm"
+		include "General/Sprites/Flybot767/Map - Flybot767.s"
 DPLC_Flybot767:
-		include "General/Sprites/Flybot767/DPLC - Flybot767.asm"
+		include "General/Sprites/Flybot767/DPLC - Flybot767.s"
 Map_LBZEndBoss:
-		include "Levels/LBZ/Misc Object Data/Map - End Boss.asm"
+		include "Levels/LBZ/Misc Object Data/Map - End Boss.s"
 Map_CNZEndBoss:
-		include "Levels/CNZ/Misc Object Data/Map - End Boss.asm"
+		include "Levels/CNZ/Misc Object Data/Map - End Boss.s"
 CNZEndBossMagnet_AngleX:
 		dc.b    0,   1,   2,   3,   4,   5,   6,   8,   9,  $A,  $B,  $C,  $D,  $E,  $F, $10
 		dc.b  $11, $12, $13, $14, $15, $16, $17, $18, $18, $19, $1A, $1B, $1C, $1D, $1E, $1E
@@ -118425,108 +118425,108 @@ LBZFinalBoss2_CircleLookup:
 		dc.b  $1C, $1D, $1E, $1E, $1F, $20, $20, $21, $21, $22, $22, $23, $23, $24, $24, $25
 		dc.b  $25, $25, $26, $26, $26, $27, $27, $27, $27, $27, $28, $28, $28, $28, $28, $28
 Map_FBZMiniboss:
-		include "Levels/FBZ/Misc Object Data/Map - Miniboss.asm"
+		include "Levels/FBZ/Misc Object Data/Map - Miniboss.s"
 Map_FBZEggCapsule:
-		include "Levels/FBZ/Misc Object Data/Map - Egg Capsule S3.asm"
+		include "Levels/FBZ/Misc Object Data/Map - Egg Capsule S3.s"
 Map_Blastoid:
-		include "General/Sprites/Blastoid/Map - Blastoid.asm"
+		include "General/Sprites/Blastoid/Map - Blastoid.s"
 Map_Toxomister:
-		include "General/Sprites/Toxomister/Map - Toxomister S3.asm"
+		include "General/Sprites/Toxomister/Map - Toxomister S3.s"
 Map_Poindexter:
-		include "General/Sprites/Pointdexter/Map - Pointdexter.asm"
+		include "General/Sprites/Pointdexter/Map - Pointdexter.s"
 Map_Buggernaut:
-		include "General/Sprites/Buggernaut/Map - Buggernaut.asm"
+		include "General/Sprites/Buggernaut/Map - Buggernaut.s"
 Map_MegaChopper:
-		include "General/Sprites/Mega Chopper/Map - Mega Chopper.asm"
+		include "General/Sprites/Mega Chopper/Map - Mega Chopper.s"
 Map_Dragonfly:
-		include "General/Sprites/Dragonfly/Map - Dragonfly.asm"
+		include "General/Sprites/Dragonfly/Map - Dragonfly.s"
 DPLC_Cluckoid:
-		include "General/Sprites/Cluckoid/DPLC - Cluckoid.asm"
+		include "General/Sprites/Cluckoid/DPLC - Cluckoid.s"
 Map_CluckoidArrow:
-		include "General/Sprites/Cluckoid/Map - Cluckoid Arrow.asm"
+		include "General/Sprites/Cluckoid/Map - Cluckoid Arrow.s"
 Map_Cluckoid:
-		include "General/Sprites/Cluckoid/Map - Cluckoid.asm"
+		include "General/Sprites/Cluckoid/Map - Cluckoid.s"
 Map_Butterdroid:
-		include "General/Sprites/Butterdroid/Map - Butterdroid.asm"
+		include "General/Sprites/Butterdroid/Map - Butterdroid.s"
 DPLC_Butterdroid:
-		include "General/Sprites/Butterdroid/DPLC - Butterdroid.asm"
+		include "General/Sprites/Butterdroid/DPLC - Butterdroid.s"
 Map_TurboSpiker:
-		include "General/Sprites/Turbo Spiker/Map - Turbo Spiker.asm"
+		include "General/Sprites/Turbo Spiker/Map - Turbo Spiker.s"
 Map_FirewormSegments:
-		include "General/Sprites/Fireworm/Map - Fireworm Segments.asm"
+		include "General/Sprites/Fireworm/Map - Fireworm Segments.s"
 DPLC_Fireworm:
-		include "General/Sprites/Fireworm/DPLC - Fireworm.asm"
+		include "General/Sprites/Fireworm/DPLC - Fireworm.s"
 Map_Fireworm:
-		include "General/Sprites/Fireworm/Map - Fireworm.asm"
+		include "General/Sprites/Fireworm/Map - Fireworm.s"
 Map_Jawz:
-		include "General/Sprites/Jawz/Map - Jawz.asm"
+		include "General/Sprites/Jawz/Map - Jawz.s"
 Map_Mushmeanie:
-		include "General/Sprites/Mushmeanie/Map - Mushmeanie.asm"
+		include "General/Sprites/Mushmeanie/Map - Mushmeanie.s"
 Map_Madmole:
-		include "General/Sprites/Madmole/Map - Madmole S3.asm"
+		include "General/Sprites/Madmole/Map - Madmole S3.s"
 Map_Iwamodoki:
-		include "General/Sprites/Iwamodoki/Map - Iwamodoki S3.asm"
+		include "General/Sprites/Iwamodoki/Map - Iwamodoki S3.s"
 DPLC_Rhinobot:
-		include "General/Sprites/Rhinobot/DPLC - Rhinobot.asm"
+		include "General/Sprites/Rhinobot/DPLC - Rhinobot.s"
 Map_Rhinobot:
-		include "General/Sprites/Rhinobot/Map - Rhinobot.asm"
+		include "General/Sprites/Rhinobot/Map - Rhinobot.s"
 		dc.w $A
 		dc.w $1C
 		dc.w $24
 		dc.w $2C
 		dc.w $34
 Map_BossExplosion:
-		include "General/Sprites/Boss Explosion/Map - Boss Explosion.asm"
+		include "General/Sprites/Boss Explosion/Map - Boss Explosion.s"
 Map_AIZMinibossFlame:
-		include "Levels/AIZ/Misc Object Data/Map - Miniboss Flame.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Miniboss Flame.s"
 Map_FBZEndBossFlame:
-		include "Levels/FBZ/Misc Object Data/Map - End Boss Flame.asm"
+		include "Levels/FBZ/Misc Object Data/Map - End Boss Flame.s"
 Map_Bloominator:
-		include "General/Sprites/Bloominator/Map - Bloominator.asm"
+		include "General/Sprites/Bloominator/Map - Bloominator.s"
 Map_MonkeyDude:
-		include "General/Sprites/Monkey Dude/Map - Monkey Dude.asm"
+		include "General/Sprites/Monkey Dude/Map - Monkey Dude.s"
 Map_SOZMiniboss:
-		include "Levels/SOZ/Misc Object Data/Map - Miniboss.asm"
+		include "Levels/SOZ/Misc Object Data/Map - Miniboss.s"
 Map_MGZMiniboss:
-		include "Levels/MGZ/Misc Object Data/Map - Miniboss.asm"
+		include "Levels/MGZ/Misc Object Data/Map - Miniboss.s"
 Map_CaterKillerJr:
-		include "General/Sprites/Caterkiller Jr/Map - Caterkiller Jr.asm"
+		include "General/Sprites/Caterkiller Jr/Map - Caterkiller Jr.s"
 DPLC_Clamer:
-		include "General/Sprites/Clamer/DPLC - Clamer.asm"
+		include "General/Sprites/Clamer/DPLC - Clamer.s"
 Map_Clamer:
-		include "General/Sprites/Clamer/Map - Clamer.asm"
+		include "General/Sprites/Clamer/Map - Clamer.s"
 Map_Sparkle:
-		include "General/Sprites/Sparkle/Map - Sparkle.asm"
+		include "General/Sprites/Sparkle/Map - Sparkle.s"
 Map_Batbot:
-		include "General/Sprites/Batbot/Map - Batbot.asm"
+		include "General/Sprites/Batbot/Map - Batbot.s"
 DPLC_BubblesBadnik:
-		include "General/Sprites/Bubbles Badnik/DPLC - Bubbles Badnik.asm"
+		include "General/Sprites/Bubbles Badnik/DPLC - Bubbles Badnik.s"
 Map_BubblesBadnik:
-		include "General/Sprites/Bubbles Badnik/Map - Bubbles Badnik.asm"
+		include "General/Sprites/Bubbles Badnik/Map - Bubbles Badnik.s"
 Map_Spiker:
-		include "General/Sprites/Spiker/Map - Spiker.asm"
+		include "General/Sprites/Spiker/Map - Spiker.s"
 Map_Mantis:
-		include "General/Sprites/Mantis/Map - Mantis.asm"
+		include "General/Sprites/Mantis/Map - Mantis.s"
 Map_Blaster:
-		include "General/Sprites/Blaster/Map - Blaster.asm"
+		include "General/Sprites/Blaster/Map - Blaster.s"
 DPLC_Penguinator:
-		include "General/Sprites/Penguinator/DPLC - Penguinator.asm"
+		include "General/Sprites/Penguinator/DPLC - Penguinator.s"
 Map_Penguinator:
-		include "General/Sprites/Penguinator/Map - Penguinator.asm"
+		include "General/Sprites/Penguinator/Map - Penguinator.s"
 Map_ICZSnowdust:
-		include "Levels/ICZ/Misc Object Data/Map - Snowdust.asm"
+		include "Levels/ICZ/Misc Object Data/Map - Snowdust.s"
 Map_TechnoSqueek:
-		include "General/Sprites/Technosqueek/Map - Technosqueek.asm"
+		include "General/Sprites/Technosqueek/Map - Technosqueek.s"
 Map_StarPointer:
-		include "General/Sprites/Star Pointer/Map - Star Pointer.asm"
+		include "General/Sprites/Star Pointer/Map - Star Pointer.s"
 Map_AIZEndBoss:
-		include "Levels/AIZ/Misc Object Data/Map - End Boss.asm"
+		include "Levels/AIZ/Misc Object Data/Map - End Boss.s"
 Map_AIZMiniboss:
-		include "Levels/AIZ/Misc Object Data/Map - Miniboss.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Miniboss.s"
 Map_AIZMinibossSmall:
-		include "Levels/AIZ/Misc Object Data/Map - Miniboss Small.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Miniboss Small.s"
 Map_MGZEndBoss:
-		include "Levels/MGZ/Misc Object Data/Map - End Boss.asm"
+		include "Levels/MGZ/Misc Object Data/Map - End Boss.s"
 HCZMiniboss_RocketTwistLookup:
 		dc.b  $18, $18, $18, $18, $18, $18, $18, $18, $18, $17, $17, $17, $17, $17, $17, $16
 		dc.b  $16, $16, $16, $15, $15, $15, $15, $14, $14, $14, $13, $13, $13, $12, $12, $11
@@ -118553,13 +118553,13 @@ LBZ2FinalBoss2_CircleLookup2:
 		dc.b  $12, $13, $13, $13, $13, $13, $13, $14, $14, $14, $14, $14, $14, $14, $14, $14
 		even
 Map_HCZMiniboss:
-		include "Levels/HCZ/Misc Object Data/Map - Miniboss.asm"
+		include "Levels/HCZ/Misc Object Data/Map - Miniboss.s"
 Map_HCZMinibossSplash:
-		include "Levels/HCZ/Misc Object Data/Map - Miniboss Splash.asm"
+		include "Levels/HCZ/Misc Object Data/Map - Miniboss Splash.s"
 DPLC_HCZMinibossSplash:
-		include "Levels/HCZ/Misc Object Data/DPLC - Miniboss Splash.asm"
+		include "Levels/HCZ/Misc Object Data/DPLC - Miniboss Splash.s"
 Map_ICZEndBoss:
-		include "Levels/ICZ/Misc Object Data/Map - End Boss.asm"
+		include "Levels/ICZ/Misc Object Data/Map - End Boss.s"
 
 PalSPtr_CNZMinibossNormal:
 		palscriptptr .header, .data
@@ -118623,7 +118623,7 @@ PalSPtr_CNZMinibossOpen:
 	palscriptrept
 
 Map_CNZMiniboss:
-		include "Levels/CNZ/Misc Object Data/Map - Miniboss.asm"
+		include "Levels/CNZ/Misc Object Data/Map - Miniboss.s"
 
 word_16322C:	palscriptptr .header, .data
 		dc.w 0
@@ -118688,48 +118688,48 @@ ICZMiniboss_OrbAngleLookup:
 		dc.b  $2C, $2D, $2D, $2E, $2E, $2E, $2F, $2F, $2F, $2F, $2F, $30, $30, $30, $30, $30
 		even
 Map_ICZMiniboss:
-		include "Levels/ICZ/Misc Object Data/Map - Miniboss.asm"
+		include "Levels/ICZ/Misc Object Data/Map - Miniboss.s"
 Map_FBZEndBoss:
-		include "Levels/FBZ/Misc Object Data/Map - End Boss.asm"
+		include "Levels/FBZ/Misc Object Data/Map - End Boss.s"
 Map_HCZEndBoss:
-		include "Levels/HCZ/Misc Object Data/Map - End Boss.asm"
+		include "Levels/HCZ/Misc Object Data/Map - End Boss.s"
 Map_MGZEndBossDebris:
-		include "Levels/MGZ/Misc Object Data/Map - End Boss Debris.asm"
+		include "Levels/MGZ/Misc Object Data/Map - End Boss Debris.s"
 Map_FBZ2Subboss:
-		include "Levels/FBZ/Misc Object Data/Map - Act 2 Subboss S3.asm"
+		include "Levels/FBZ/Misc Object Data/Map - Act 2 Subboss S3.s"
 Map_FBZRobotnikStand:
-		include "General/Sprites/Robotnik/Map - FBZ Robotnik Stand.asm"
+		include "General/Sprites/Robotnik/Map - FBZ Robotnik Stand.s"
 Map_ICZWallAndColumn:
-		include "Levels/ICZ/Misc Object Data/Map - Wall and Column.asm"
+		include "Levels/ICZ/Misc Object Data/Map - Wall and Column.s"
 Map_ICZPlatforms:
-		include "Levels/ICZ/Misc Object Data/Map - Platforms.asm"
+		include "Levels/ICZ/Misc Object Data/Map - Platforms.s"
 DPLC_EndSigns:
-		include "General/Sprites/Signpost/DPLC - End Signs.asm"
+		include "General/Sprites/Signpost/DPLC - End Signs.s"
 Map_EndSigns:
-		include "General/Sprites/Signpost/Map - End Signs.asm"
+		include "General/Sprites/Signpost/Map - End Signs.s"
 Map_SignpostStub:
-		include "General/Sprites/Signpost/Map - Signpost Stub.asm"
+		include "General/Sprites/Signpost/Map - Signpost Stub.s"
 Map_EggCapsule:
-		include "General/Sprites/Egg Capsule/Map - Egg Capsule S3.asm"
+		include "General/Sprites/Egg Capsule/Map - Egg Capsule S3.s"
 Map_LBZKnuxBomb:
-		include "General/Sprites/Knuckles/Cutscene/Map - Knuckles Bomb.asm"
+		include "General/Sprites/Knuckles/Cutscene/Map - Knuckles Bomb.s"
 Map_CutsceneKnux:
-		include "General/Sprites/Knuckles/Cutscene/Map - Cutscene Knuckles.asm"
+		include "General/Sprites/Knuckles/Cutscene/Map - Cutscene Knuckles.s"
 DPLC_CutsceneKnux:
-		include "General/Sprites/Knuckles/Cutscene/DPLC - Cutscene Knuckles.asm"
+		include "General/Sprites/Knuckles/Cutscene/DPLC - Cutscene Knuckles.s"
 Map_AIZIntroPlane:
-		include "Levels/AIZ/Misc Object Data/Map - Intro Plane.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Intro Plane.s"
 Map_AIZIntroEmeralds:
-		include "Levels/AIZ/Misc Object Data/Map - Intro Emeralds.asm"
+		include "Levels/AIZ/Misc Object Data/Map - Intro Emeralds.s"
 Map_LBZFinalBoss1:
-		include "Levels/LBZ/Misc Object Data/Map - Final Boss 1.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Final Boss 1.s"
 Map_LBZDeathEggSmall:
-		include "Levels/LBZ/Misc Object Data/Map - Death Egg Small.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Death Egg Small.s"
 Pal_MGZFadeCNZ:
 		binclude "data/Levels/MGZ/Palettes/Fade to CNZ.bin"
 		even
 Map_LBZFinalBoss2:
-		include "Levels/LBZ/Misc Object Data/Map - Final Boss 2.asm"
+		include "Levels/LBZ/Misc Object Data/Map - Final Boss 2.s"
 ArtNem_AIZMiniboss:
 		binclude "data/Levels/AIZ/Nemesis Art/Miniboss.nem"
 		even
@@ -119197,7 +119197,7 @@ ArtKos_CompetitionResults:
 		binclude "data/General/Competition Menu/Kosinski Art/Results.kos"
 		even
 Map_CompetitionPlayerSprite:
-		include "General/Competition Menu/Map - Competition Player Sprites.asm"
+		include "General/Competition Menu/Map - Competition Player Sprites.s"
 ArtKos_CompetitionPlayer:
 		binclude "data/General/Competition Menu/Kosinski Art/Player Sprites.kos"
 		even

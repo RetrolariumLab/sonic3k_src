@@ -5,7 +5,7 @@
     {
       "id": "s3-us",
       "image": "s3-us",
-      "entry": "s3.asm",
+      "entry": "s3.s",
       "defines": {
         "S3_Region": 85
       },
@@ -14,7 +14,7 @@
     {
       "id": "s3-eu",
       "image": "s3-eu",
-      "entry": "s3.asm",
+      "entry": "s3.s",
       "defines": {
         "S3_Region": 69
       },
@@ -23,7 +23,7 @@
     {
       "id": "s3-jp",
       "image": "s3-jp",
-      "entry": "s3.asm",
+      "entry": "s3.s",
       "defines": {
         "S3_Region": 74
       },
@@ -32,7 +32,7 @@
     {
       "id": "sk",
       "image": "sk",
-      "entry": "sonic3k.asm",
+      "entry": "sonic3k.s",
       "defines": {},
       "driver_compression": "kosinski"
     },

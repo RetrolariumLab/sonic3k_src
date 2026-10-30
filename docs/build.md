@@ -37,3 +37,7 @@ skips when they are absent. `make audit-private` checks all reachable Git blobs
 and the current index against asset hashes and an explicit binary allowlist.
 The allowlist is currently empty. A passing build is not a release: symbolic
 pointer, runtime, documentation and 2.0 content gates must also pass.
+
+AS source uses `.s`; sample declarations use `.inc`. Retrolarium Kit's
+AS style scanner recognizes these suffixes. Entry and include paths are
+renamed mechanically; the source instruction/data order is unchanged.
