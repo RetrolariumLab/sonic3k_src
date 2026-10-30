@@ -61,6 +61,11 @@ check-lockon:
 
 include mk/runtime.mk
 
+.PHONY: check-numeric-operands
+
+check-numeric-operands:
+	$(PYTHON) -m scripts.run validation.numeric_operands
+
 .PHONY: check-driver-audio check-driver-audio-storage
 
 check-driver-audio:

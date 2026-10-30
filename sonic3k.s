@@ -2139,7 +2139,7 @@ Process_Nem_Queue_Main:
                 lea     (Nem_code_table).w,a1
 
 Process_Nem_Queue_Loop:
-                movea.w #8,a5                           ; decompress all 8 rows in a pattern
+                movea.w #Nem_Tile_Row_Count,a5          ; decompress all 8 rows in a pattern
                 bsr.w   Nem_PCD_NewRow
                 subq.w  #1,(Nem_patterns_left).w        ; have all the patterns been decompressed?
                 beq.s   Process_Nem_Queue_ShiftUp       ; if yes, shift all other queue entries up
@@ -13338,7 +13338,7 @@ loc_AA74:
                 move.b  #GameMode_CompetitionLevelSelect+$80,(Game_mode).w
 
 loc_AA8E:
-                lea     ($FF7800).l,a1
+                lea     ((RAM_start+$7800)&$FFFFFF).l,a1
                 moveq   #0,d0
                 moveq   #bytesToLcnt($28),d1
 
@@ -14625,12 +14625,12 @@ loc_B9EC:
 ; =============== S U B R O U T I N E =======================================
 
 sub_BA04:
-                lea     ($FF7800).l,a0
+                lea     ((RAM_start+$7800)&$FFFFFF).l,a0
                 move.w  #$C15A,d7
                 jsr     sub_BAEE(pc)
                 move.w  #$C7DA,d7
                 jsr     sub_BAEE(pc)
-                lea     ($FF7800).l,a0
+                lea     ((RAM_start+$7800)&$FFFFFF).l,a0
                 jsr     sub_BB04(pc)
                 move.w  #$C65A,d7
                 move.l  d6,(_unkEE98).w
@@ -14652,7 +14652,7 @@ loc_BA4A:
 loc_BA52:
                 jsr     sub_B066(pc)
                 clr.w   (_unkEEA2).w
-                lea     ($FF7800).l,a0
+                lea     ((RAM_start+$7800)&$FFFFFF).l,a0
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table+$148,VRAM,WRITE),d5
                 moveq   #5-1,d7
 
@@ -14979,7 +14979,7 @@ loc_BEA4:
 ; =============== S U B R O U T I N E =======================================
 
 sub_BEB2:
-                lea     ($FF7828).l,a0
+                lea     ((RAM_start+$7828)&$FFFFFF).l,a0
                 move.w  #VRAM_Plane_A_Name_Table+$15A,d7
                 moveq   #6-1,d0
                 jsr     loc_BAF0(pc)
@@ -15294,13 +15294,13 @@ loc_C1CA:
                 dbf     d0,loc_C1CA                     ; Write default game data
                 lea     (SRAM_S3game).l,a0
                 lea     (SRAM_S3game_backup).l,a1
-                lea     ($FF0000).l,a2                  ; Attempt to see if there's any existing S3 save data
+                lea     ((RAM_start+$0)&$FFFFFF).l,a2   ; Attempt to see if there's any existing S3 save data
                 moveq   #bytesToWcnt(SRAM_S3game_size),d0
                 move.w  #$4244,d1
                 jsr     Get_From_SRAM(pc)
                 bne.s   loc_C252                        ; If write was not successful, branch
                 lea     (Saved_data).w,a0               ; If there's valid data from Sonic 3, we'll now go through the process of migrating it to SK
-                lea     ($FF0000).l,a1
+                lea     ((RAM_start+$0)&$FFFFFF).l,a1
                 lea     SaveData_S3LevRef(pc),a2
                 moveq   #6-1,d0
 
@@ -18426,7 +18426,7 @@ loc_EC88:
                 ext.w   d0
                 add.w   d0,d3
                 lea     (Primary_Angle).w,a4
-                movea.w #$10,a3
+                movea.w #Collision_Scan_Step,a3
                 move.w  #0,d6
                 bsr.w   FindFloor
                 move.w  d1,-(sp)
@@ -18441,7 +18441,7 @@ loc_EC88:
                 neg.w   d0
                 add.w   d0,d3
                 lea     (Secondary_Angle).w,a4
-                movea.w #$10,a3
+                movea.w #Collision_Scan_Step,a3
                 move.w  #0,d6
                 bsr.w   FindFloor
                 move.w  (sp)+,d0
@@ -18534,7 +18534,7 @@ Player_WalkVertR:
                 ext.w   d0
                 add.w   d0,d3
                 lea     (Primary_Angle).w,a4
-                movea.w #$10,a3
+                movea.w #Collision_Scan_Step,a3
                 move.w  #0,d6
                 bsr.w   FindWall
                 move.w  d1,-(sp)
@@ -18548,7 +18548,7 @@ Player_WalkVertR:
                 ext.w   d0
                 add.w   d0,d3
                 lea     (Secondary_Angle).w,a4
-                movea.w #$10,a3
+                movea.w #Collision_Scan_Step,a3
                 move.w  #0,d6
                 bsr.w   FindWall
                 move.w  (sp)+,d0
@@ -18621,7 +18621,7 @@ Player_WalkCeiling:
                 ext.w   d0
                 add.w   d0,d3
                 lea     (Primary_Angle).w,a4
-                movea.w #-$10,a3
+                movea.w #-Collision_Scan_Step,a3
                 move.w  #$800,d6
                 bsr.w   FindFloor
                 move.w  d1,-(sp)
@@ -18636,7 +18636,7 @@ Player_WalkCeiling:
                 ext.w   d0
                 sub.w   d0,d3
                 lea     (Secondary_Angle).w,a4
-                movea.w #-$10,a3
+                movea.w #-Collision_Scan_Step,a3
                 move.w  #$800,d6
                 bsr.w   FindFloor
                 move.w  (sp)+,d0
@@ -18693,7 +18693,7 @@ Player_WalkVertL:
                 sub.w   d0,d3
                 eori.w  #$F,d3
                 lea     (Primary_Angle).w,a4
-                movea.w #-$10,a3
+                movea.w #-Collision_Scan_Step,a3
                 move.w  #$400,d6
                 bsr.w   FindWall
                 move.w  d1,-(sp)
@@ -18708,7 +18708,7 @@ Player_WalkVertL:
                 sub.w   d0,d3
                 eori.w  #$F,d3
                 lea     (Secondary_Angle).w,a4
-                movea.w #-$10,a3
+                movea.w #-Collision_Scan_Step,a3
                 move.w  #$400,d6
                 bsr.w   FindWall
                 move.w  (sp)+,d0
@@ -19475,7 +19475,7 @@ loc_F782:
                 ext.w   d0
                 add.w   d0,d3
                 lea     (Primary_Angle).w,a4
-                movea.w #$10,a3
+                movea.w #Collision_Scan_Step,a3
                 move.w  #0,d6
                 bsr.w   FindFloor
                 move.w  d1,-(sp)
@@ -19489,7 +19489,7 @@ loc_F782:
                 ext.w   d0
                 sub.w   d0,d3
                 lea     (Secondary_Angle).w,a4
-                movea.w #$10,a3
+                movea.w #Collision_Scan_Step,a3
                 move.w  #0,d6
                 bsr.w   FindFloor
                 move.w  (sp)+,d0
@@ -19529,7 +19529,7 @@ CheckFloorDist:                                         ; unused/dead code
 CheckFloorDist_Part2:
                 addi.w  #$A,d2
                 lea     (Primary_Angle).w,a4
-                movea.w #$10,a3
+                movea.w #Collision_Scan_Step,a3
                 move.w  #0,d6
                 bsr.w   FindFloor
                 move.b  #0,d2
@@ -19552,7 +19552,7 @@ sub_F828:
                 ext.w   d0
                 add.w   d0,d2
                 lea     (Primary_Angle).w,a4
-                movea.w #$10,a3
+                movea.w #Collision_Scan_Step,a3
                 move.w  #0,d6
                 bsr.w   FindFloor
                 move.b  #0,d2
@@ -19573,7 +19573,7 @@ sub_F846:
 loc_F864:
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
-                movea.w #$10,a3
+                movea.w #Collision_Scan_Step,a3
                 move.w  #0,d6
                 move.b  lrb_solid_bit(a0),d5
                 movem.l a4-a6,-(sp)
@@ -19609,7 +19609,7 @@ ChkFloorEdge_Part3:
 loc_F8BA:
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
-                movea.w #$10,a3
+                movea.w #Collision_Scan_Step,a3
                 move.w  #0,d6
                 move.b  top_solid_bit(a0),d5
                 movem.l a4-a6,-(sp)
@@ -19641,7 +19641,7 @@ SonicOnObjHitFloor:
 loc_F910:
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
-                movea.w #$10,a3
+                movea.w #Collision_Scan_Step,a3
                 move.w  #0,d6
                 move.b  top_solid_bit(a1),d5
                 bsr.w   FindFloor
@@ -19671,7 +19671,7 @@ ObjCheckFloorDist2:
                 add.w   d0,d2
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
-                movea.w #$10,a3
+                movea.w #Collision_Scan_Step,a3
                 move.w  #0,d6
                 moveq   #$C,d5
                 bsr.w   FindFloor
@@ -19700,7 +19700,7 @@ FireCheckFloorDist:
                 add.w   d0,d2
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
-                movea.w #$10,a3
+                movea.w #Collision_Scan_Step,a3
                 move.w  #0,d6
                 moveq   #$C,d5
                 bra.w   FindFloor
@@ -19715,7 +19715,7 @@ RingCheckFloorDist:
                 add.w   d0,d2
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
-                movea.w #$10,a3
+                movea.w #Collision_Scan_Step,a3
                 move.w  #0,d6
                 moveq   #$C,d5
                 bra.w   Ring_FindFloor
@@ -19734,7 +19734,7 @@ CheckRightCeilingDist:
                 ext.w   d0
                 add.w   d0,d3
                 lea     (Primary_Angle).w,a4
-                movea.w #$10,a3
+                movea.w #Collision_Scan_Step,a3
                 move.w  #0,d6
                 bsr.w   FindWall
                 move.w  d1,-(sp)
@@ -19748,7 +19748,7 @@ CheckRightCeilingDist:
                 ext.w   d0
                 add.w   d0,d3
                 lea     (Secondary_Angle).w,a4
-                movea.w #$10,a3
+                movea.w #Collision_Scan_Step,a3
                 move.w  #0,d6
                 bsr.w   FindWall
                 move.w  (sp)+,d0
@@ -19768,7 +19768,7 @@ sub_FA1A:
                 ext.w   d0
                 add.w   d0,d3
                 lea     (Primary_Angle).w,a4
-                movea.w #$10,a3
+                movea.w #Collision_Scan_Step,a3
                 move.w  #0,d6
                 bsr.w   FindWall
                 move.w  d1,-(sp)
@@ -19782,7 +19782,7 @@ sub_FA1A:
                 ext.w   d0
                 add.w   d0,d3
                 lea     (Secondary_Angle).w,a4
-                movea.w #$10,a3
+                movea.w #Collision_Scan_Step,a3
                 move.w  #0,d6
                 bsr.w   FindWall
                 move.w  (sp)+,d0
@@ -19801,7 +19801,7 @@ CheckRightWallDist:
 loc_FA88:
                 addi.w  #$A,d3
                 lea     (Primary_Angle).w,a4
-                movea.w #$10,a3
+                movea.w #Collision_Scan_Step,a3
                 move.w  #0,d6
                 bsr.w   FindWall
                 move.b  #-$40,d2
@@ -19813,7 +19813,7 @@ loc_FAA4:
                 ext.w   d0
                 add.w   d0,d3
                 lea     (Primary_Angle).w,a4
-                movea.w #$10,a3
+                movea.w #Collision_Scan_Step,a3
                 move.w  #0,d6
                 bsr.w   FindWall
                 move.b  #-$40,d2
@@ -19827,7 +19827,7 @@ ObjCheckRightWallDist:
                 move.w  y_pos(a0),d2
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
-                movea.w #$10,a3
+                movea.w #Collision_Scan_Step,a3
                 move.w  #0,d6
                 moveq   #$D,d5
                 bsr.w   FindWall
@@ -19854,7 +19854,7 @@ Sonic_CheckCeiling:
                 ext.w   d0
                 add.w   d0,d3
                 lea     (Primary_Angle).w,a4
-                movea.w #-$10,a3
+                movea.w #-Collision_Scan_Step,a3
                 move.w  #$800,d6
                 bsr.w   FindFloor
                 move.w  d1,-(sp)
@@ -19869,7 +19869,7 @@ Sonic_CheckCeiling:
                 ext.w   d0
                 sub.w   d0,d3
                 lea     (Secondary_Angle).w,a4
-                movea.w #-$10,a3
+                movea.w #-Collision_Scan_Step,a3
                 move.w  #$800,d6
                 bsr.w   FindFloor
                 move.w  (sp)+,d0
@@ -19892,7 +19892,7 @@ sub_FB5A:
                 subq.w  #2,d0
                 add.w   d0,d3
                 lea     (Primary_Angle).w,a4
-                movea.w #-$10,a3
+                movea.w #-Collision_Scan_Step,a3
                 move.w  #$800,d6
                 bsr.w   FindFloor
                 move.w  d1,-(sp)
@@ -19908,7 +19908,7 @@ sub_FB5A:
                 subq.w  #2,d0
                 sub.w   d0,d3
                 lea     (Secondary_Angle).w,a4
-                movea.w #-$10,a3
+                movea.w #-Collision_Scan_Step,a3
                 move.w  #$800,d6
                 bsr.w   FindFloor
                 move.w  (sp)+,d0
@@ -19926,7 +19926,7 @@ CheckCeilingDist_Part2:
                 subi.w  #$A,d2
                 eori.w  #$F,d2
                 lea     (Primary_Angle).w,a4
-                movea.w #-$10,a3
+                movea.w #-Collision_Scan_Step,a3
                 move.w  #$800,d6
                 bsr.w   FindFloor
                 move.b  #$80,d2
@@ -19940,7 +19940,7 @@ CheckCeilingDist_WithRadius:
                 sub.w   d0,d2
                 eori.w  #$F,d2
                 lea     (Primary_Angle).w,a4
-                movea.w #-$10,a3
+                movea.w #-Collision_Scan_Step,a3
                 move.w  #$800,d6
                 bsr.w   FindFloor
                 move.b  #$80,d2
@@ -19957,7 +19957,7 @@ ObjCheckCeilingDist:
                 sub.w   d0,d2
                 eori.w  #$F,d2
                 lea     (Primary_Angle).w,a4
-                movea.w #-$10,a3
+                movea.w #-Collision_Scan_Step,a3
                 move.w  #$800,d6
                 moveq   #$D,d5
                 bsr.w   FindFloor
@@ -19989,7 +19989,7 @@ ChkFloorEdge_ReverseGravity_Part2:
 loc_FC70:
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
-                movea.w #-$10,a3
+                movea.w #-Collision_Scan_Step,a3
                 move.w  #$800,d6
                 move.b  top_solid_bit(a0),d5
                 movem.l a4-a6,-(sp)
@@ -20016,7 +20016,7 @@ RingCheckFloorDist_ReverseGravity:
                 eori.w  #$F,d2
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
-                movea.w #-$10,a3
+                movea.w #-Collision_Scan_Step,a3
                 move.w  #$800,d6
                 moveq   #$C,d5
                 bra.w   Ring_FindFloor
@@ -20036,7 +20036,7 @@ CheckLeftCeilingDist:
                 sub.w   d0,d3
                 eori.w  #$F,d3
                 lea     (Primary_Angle).w,a4
-                movea.w #-$10,a3
+                movea.w #-Collision_Scan_Step,a3
                 move.w  #$400,d6
                 bsr.w   FindWall
                 move.w  d1,-(sp)
@@ -20051,7 +20051,7 @@ CheckLeftCeilingDist:
                 sub.w   d0,d3
                 eori.w  #$F,d3
                 lea     (Secondary_Angle).w,a4
-                movea.w #-$10,a3
+                movea.w #-Collision_Scan_Step,a3
                 move.w  #$400,d6
                 bsr.w   FindWall
                 move.w  (sp)+,d0
@@ -20072,7 +20072,7 @@ sub_FD32:
                 sub.w   d0,d3
                 eori.w  #$F,d3
                 lea     (Primary_Angle).w,a4
-                movea.w #-$10,a3
+                movea.w #-Collision_Scan_Step,a3
                 move.w  #$400,d6
                 bsr.w   FindWall
                 move.w  d1,-(sp)
@@ -20087,7 +20087,7 @@ sub_FD32:
                 sub.w   d0,d3
                 eori.w  #$F,d3
                 lea     (Secondary_Angle).w,a4
-                movea.w #-$10,a3
+                movea.w #-Collision_Scan_Step,a3
                 move.w  #$400,d6
                 bsr.w   FindWall
                 move.w  (sp)+,d0
@@ -20107,7 +20107,7 @@ loc_FDA8:
                 subi.w  #$A,d3
                 eori.w  #$F,d3
                 lea     (Primary_Angle).w,a4
-                movea.w #-$10,a3
+                movea.w #-Collision_Scan_Step,a3
                 move.w  #$400,d6
                 bsr.w   FindWall
                 move.b  #$40,d2
@@ -20120,7 +20120,7 @@ loc_FDC8:
                 sub.w   d0,d3
                 eori.w  #$F,d3
                 lea     (Primary_Angle).w,a4
-                movea.w #-$10,a3
+                movea.w #-Collision_Scan_Step,a3
                 move.w  #$400,d6
                 bsr.w   FindWall
                 move.b  #$40,d2
@@ -20144,7 +20144,7 @@ loc_FE00:
                 eori.w  #$F,d3
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
-                movea.w #-$10,a3
+                movea.w #-Collision_Scan_Step,a3
                 move.w  #$400,d6
                 move.b  lrb_solid_bit(a0),d5
                 bsr.w   FindWall
@@ -20167,7 +20167,7 @@ ObjCheckLeftWallDist_Part2:
                 move.w  y_pos(a0),d2
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
-                movea.w #-$10,a3
+                movea.w #-Collision_Scan_Step,a3
                 move.w  #$400,d6
                 moveq   #$D,d5
                 bsr.w   FindWall
@@ -35113,7 +35113,7 @@ loc_1A8F0:
 ; Bug: Probably meant to be $30(a0), as Test_Ring_Collisions_AttractRing
 ; stores the ring's address in the ring status table there
 ; This is corrected in Sonic & Knuckles Collection
-                move.w  $30,d0
+                move.w  (Vectors+$30).w,d0
                 beq.s   loc_1A8FC
                 movea.w d0,a2
                 move.w  #0,(a2)
@@ -52453,14 +52453,14 @@ loc_27250:
 
 sub_27270:
 ; Bug: probably meant to be $30(a0)
-                lea     $30,a2
+                lea     (Vectors+$30).w,a2
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 movem.l d1-d3,-(sp)
                 bsr.s   sub_2728E
                 movem.l (sp)+,d1-d3
 ; Bug: probably meant to be $34(a0)
-                lea     $34,a2
+                lea     (Vectors+$34).w,a2
                 lea     (Player_2).w,a1
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
 ; End of function sub_27270
@@ -72891,13 +72891,13 @@ loc_36CEA:
                 lea     (Competition_current_lap).w,a3
                 lea     (Competition_lap_count_flag).w,a4
                 lea     (Timer).w,a5
-                lea     ($FF7828).l,a6
+                lea     ((RAM_start+$7828)&$FFFFFF).l,a6
                 bsr.w   sub_36DFC
                 lea     (Player_2).w,a1
                 lea     (Competition_current_lap_2P).w,a3
                 lea     (Competition_lap_count_flag_P2).w,a4
                 lea     (Timer_P2).w,a5
-                lea     ($FF7840).l,a6
+                lea     ((RAM_start+$7840)&$FFFFFF).l,a6
                 bsr.w   sub_36DFC
                 lea     (Ani_2PGoalMarker).l,a1
                 jsr     (Animate_Sprite).l
@@ -73086,7 +73086,7 @@ locret_36F58:
 ; =============== S U B R O U T I N E =======================================
 
 sub_36F5A:
-                lea     ($FF7828).l,a1
+                lea     ((RAM_start+$7828)&$FFFFFF).l,a1
                 moveq   #bytesToLcnt($30),d0
 
                 .loop:
@@ -73410,7 +73410,7 @@ loc_3733C:
                 move.b  (Current_zone).w,d0
                 subi.b  #$E,d0
                 move.b  byte_3739F(pc,d0.w),d0
-                lea     ($FF7800).l,a1
+                lea     ((RAM_start+$7800)&$FFFFFF).l,a1
                 move.l  (Competition_time_record).w,(a1,d0.w)
                 move.l  (Competition_time_record_P2).w,$14(a1,d0.w)
                 tst.b   (Update_HUD_timer).w
@@ -73603,7 +73603,7 @@ loc_37CDC:
                 move.b  (Competition_lap_count).w,d1
                 lea     (Update_HUD_timer).w,a4
                 lea     (Competition_time_record).w,a5
-                lea     ($FF7828).l,a6
+                lea     ((RAM_start+$7828)&$FFFFFF).l,a6
                 bra.s   loc_37D7C
 ; ---------------------------------------------------------------------------
 
@@ -73639,7 +73639,7 @@ loc_37D5A:
                 move.b  (Competition_lap_count_2P).w,d1
                 lea     (Update_HUD_timer_P2).w,a4
                 lea     (Competition_time_record_P2).w,a5
-                lea     ($FF7840).l,a6
+                lea     ((RAM_start+$7840)&$FFFFFF).l,a6
 
 loc_37D7C:
                 tst.b   (a4)
@@ -84278,7 +84278,7 @@ loc_40852:
                 bsr.s   sub_40878
                 bsr.w   sub_40A08
                 move.w  #$30,d1
-                lea     ($FF8F00).l,a2
+                lea     ((RAM_start+$8F00)&$FFFFFF).l,a2
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectTopSloped).l
                 jmp     (Delete_Sprite_If_Not_In_Range).l
@@ -84487,7 +84487,7 @@ sub_40A08:
                 asl.l   #8,d0
                 move.w  d1,d2
                 subq.w  #1,d2
-                lea     ($FF8F00).l,a2
+                lea     ((RAM_start+$8F00)&$FFFFFF).l,a2
                 moveq   #0,d3
 
 loc_40A3E:
@@ -84514,7 +84514,7 @@ loc_40A62:
                 dbf     d2,loc_40A62
 
 loc_40A6E:
-                lea     ($FF8F06).l,a3
+                lea     ((RAM_start+$8F06)&$FFFFFF).l,a3
                 move.w  y_pos(a0),d2
                 addq.w  #6,d2
                 movea.w $3C(a0),a1
@@ -99171,7 +99171,7 @@ Obj_SpheresTitle_4CEAA:
 
 loc_4CEB6:
 ; Bug: no idea what this was meant to be
-                tst.b   0
+                tst.b   (Vectors).w
                 bne.s   locret_4CEC6
                 move.b  (Ctrl_1).w,d0
                 cmpi.b  #button_A_mask|button_B_mask|button_C_mask,d0
@@ -102930,25 +102930,25 @@ Adjust_AIZ1Chunks2:
                 lea     word_4FAE4(pc),a5
                 move.l  (a5)+,(a1)+
                 move.l  (a5),(a1)
-                lea     ($FF4C70).l,a1
+                lea     ((RAM_start+$4C70)&$FFFFFF).l,a1
                 bsr.s   sub_4FAD8
-                lea     ($FF4CF0).l,a1
+                lea     ((RAM_start+$4CF0)&$FFFFFF).l,a1
                 bsr.s   sub_4FAD8
-                lea     ($FF4D70).l,a1
+                lea     ((RAM_start+$4D70)&$FFFFFF).l,a1
                 bsr.s   sub_4FAD8
-                lea     ($FF52F0).l,a1
+                lea     ((RAM_start+$52F0)&$FFFFFF).l,a1
                 bsr.s   sub_4FAD8
-                lea     ($FF4980).l,a1
+                lea     ((RAM_start+$4980)&$FFFFFF).l,a1
                 bsr.s   sub_4FAD8
-                lea     ($FF4D80).l,a1
+                lea     ((RAM_start+$4D80)&$FFFFFF).l,a1
                 bsr.s   sub_4FAD8
-                lea     ($FF3420).l,a1
+                lea     ((RAM_start+$3420)&$FFFFFF).l,a1
                 bsr.s   sub_4FAD8
                 move.w  #$402,(a1)+
                 moveq   #6-1,d1
                 bsr.s   sub_4FADA
                 move.w  #2,(a1)
-                lea     ($FF3FA0).l,a1
+                lea     ((RAM_start+$3FA0)&$FFFFFF).l,a1
                 bsr.s   sub_4FAD8
                 addq.w  #4,a1
                 move.w  #$C,(a1)+
@@ -102956,7 +102956,7 @@ Adjust_AIZ1Chunks2:
                 move.w  #$4B,(a1)+
                 move.w  #$4B,(a1)+
                 move.w  #$40A,2(a1)
-                lea     ($FF5820).l,a1
+                lea     ((RAM_start+$5820)&$FFFFFF).l,a1
                 move.w  #$40B,(a1)+
                 moveq   #6-1,d1
                 bsr.s   sub_4FADA
@@ -103266,15 +103266,15 @@ loc_4FE4A:
 Adjust_AIZ2Layout:
                 cmpi.w  #3,(Player_mode).w
                 bne.s   loc_4FECC
-                move.w  #$5B,($FF1020).l                ; Only do this if playing as Knuckles
-                lea     ($FF3420).l,a1
+                move.w  #$5B,((RAM_start+$1020)&$FFFFFF).l  ; Only do this if playing as Knuckles
+                lea     ((RAM_start+$3420)&$FFFFFF).l,a1
                 moveq   #8-1,d1
                 bsr.s   sub_4FF00
                 move.w  #$CAE,(a1)+
                 moveq   #6-1,d1
                 bsr.s   sub_4FF00
                 move.w  #$8AE,(a1)
-                lea     ($FF3FA0).l,a1
+                lea     ((RAM_start+$3FA0)&$FFFFFF).l,a1
                 moveq   #8-1,d1
                 bsr.s   sub_4FF00
                 addq.w  #4,a1
@@ -103283,7 +103283,7 @@ Adjust_AIZ2Layout:
                 move.w  #$5B,(a1)+
                 move.w  #$5B,(a1)+
                 move.w  #$4B7,2(a1)
-                lea     ($FF5822).l,a1
+                lea     ((RAM_start+$5822)&$FFFFFF).l,a1
                 moveq   #6-1,d1
                 bsr.s   sub_4FF00
                 addq.w  #6,a1
@@ -105375,9 +105375,9 @@ locret_517D4:
 
 MGZ2_ModifyChunk:
                 lea     (MGZ2_ChunkReplaceArray).l,a1
-                lea     ($FF5880).l,a5
+                lea     ((RAM_start+$5880)&$FFFFFF).l,a5
                 bsr.s   sub_517EA
-                lea     ($FF7500).l,a5
+                lea     ((RAM_start+$7500)&$FFFFFF).l,a5
 ; End of function MGZ2_ModifyChunk
 
 ; =============== S U B R O U T I N E =======================================
@@ -109550,7 +109550,7 @@ LBZ1_RotateChunks:
                 moveq   #$18-1,d2
 
 loc_54148:
-                lea     ($FF6E00).l,a1
+                lea     ((RAM_start+$6E00)&$FFFFFF).l,a1
                 lea     -2(a1),a5
                 move.w  (a5),d0
                 moveq   #$3F-1,d1
@@ -117500,7 +117500,7 @@ loc_5988C:
                 move.l  d0,(Events_bg+$06).w
                 add.l   d0,(Camera_Y_pos_BG_copy).w
                 andi.w  #$FF,(Camera_Y_pos_BG_copy).w
-                lea     ($FF1000).l,a0
+                lea     ((RAM_start+$1000)&$FFFFFF).l,a0
                 move.l  a0,(Plane_buffer_2_addr).w
                 clr.w   (a0)
                 clr.w   (Events_bg+$04).w
@@ -125684,7 +125684,7 @@ Obj_GumballMachine:
                 move.b  #1,(Update_HUD_ring_count).w
                 bset    #7,(Player_1+art_tile).w
                 bset    #7,(Player_2+art_tile).w
-                lea     ($FF2000).l,a1
+                lea     ((RAM_start+$2000)&$FFFFFF).l,a1
                 moveq   #-1,d0
                 moveq   #bytesToLcnt($24),d1
 
@@ -125774,7 +125774,7 @@ loc_60D7E:
 ; ---------------------------------------------------------------------------
 
 loc_60D96:
-                clr.b   ($FF2022).l
+                clr.b   ((RAM_start+$2022)&$FFFFFF).l
                 lea     ChildObjDat_6143E(pc),a2
                 jsr     (CreateChild6_Simple).l
                 jmp     (Go_Delete_Sprite).l
@@ -125911,7 +125911,7 @@ Obj_GumballTriangleBumper:
                 move.l  #loc_60F3E,(a0)
 
 loc_60F3E:
-                tst.w   ($FF2020).l
+                tst.w   ((RAM_start+$2020)&$FFFFFF).l
                 bpl.s   loc_60F8E
                 moveq   #$D,d1
                 moveq   #8,d2
@@ -125964,9 +125964,9 @@ loc_60FB4:
                 clr.b   jumping(a1)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                lea     ($FF2000).l,a1
+                lea     ((RAM_start+$2000)&$FFFFFF).l,a1
                 clr.b   (a1,d0.w)
-                move.w  #$F,($FF2020).l
+                move.w  #$F,((RAM_start+$2020)&$FFFFFF).l
                 movea.w (_unkFAA4).w,a1
                 bset    #0,$38(a1)
                 moveq   #signextendB(sfx_Spring),d0
@@ -126007,7 +126007,7 @@ loc_61044:
                 move.l  #loc_61050,(a0)
 
 loc_61050:
-                subq.w  #1,($FF2020).l
+                subq.w  #1,((RAM_start+$2020)&$FFFFFF).l
                 lea     word_610AE(pc),a1
                 jsr     (Check_PlayerInRange).l
                 tst.w   d0
@@ -126097,12 +126097,12 @@ loc_61120:
 ; ---------------------------------------------------------------------------
 
 loc_61130:
-                tst.b   ($FF2022).l
+                tst.b   ((RAM_start+$2022)&$FFFFFF).l
                 bne.s   locret_6110C
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.s   locret_6110C
                 move.l  #loc_60D58,(a1)
-                st      ($FF2022).l
+                st      ((RAM_start+$2022)&$FFFFFF).l
 
 locret_6114C:
                 rts
@@ -126218,7 +126218,7 @@ loc_61264:
 sub_6126C:
                 bclr    #0,$38(a0)
                 beq.s   loc_61294
-                lea     ($FF2000).l,a1
+                lea     ((RAM_start+$2000)&$FFFFFF).l,a1
                 moveq   #0,d0
                 moveq   #$E-1,d1
 
@@ -198457,8 +198457,8 @@ ArtNem_KnuxEndPose:
                 binclude "data/General/Ending/Nemesis Art/Knuckles Ending Pose.nem"
                 even
 
-; Some sprite pointers below point to S2 or S2K data, which we're not dealing with in this disassembly for the time being
-; As such, they are intentionally left unlabeled
+; Local lists are preserved here; external Sonic 2 lists use their own fixed ABI names
+; The Sonic 2 lock-on game profile is outside this repository's reconstruction scope
 S2K_Sprite_Lists:
                 dc.l    S2KSprite_EHZ1                  ; 0
                 dc.l    S2KSprite_EHZ2                  ; 1
@@ -198476,24 +198476,24 @@ S2K_Sprite_Lists:
                 dc.l    S2KSprite_WFZ2                  ; 13
                 dc.l    S2KSprite_HTZ1                  ; 14
                 dc.l    S2KSprite_HTZ2                  ; 15
-                dc.l    $2E8C80                         ; byte_2E8C80 ; 16
-                dc.l    $2E8D94                         ; byte_2E8D94 ; 17
+                dc.l    S2_External_Sprite_List_16      ; fixed Sonic 2 list 16
+                dc.l    S2_External_Sprite_List_17      ; fixed Sonic 2 list 17
                 dc.l    S2KSprite_NULL                  ; 18
                 dc.l    S2KSprite_NULL                  ; 19
                 dc.l    S2KSprite_OOZ1                  ; 20
                 dc.l    S2KSprite_OOZ2                  ; 21
                 dc.l    S2KSprite_MCZ1                  ; 22
                 dc.l    S2KSprite_MCZ2                  ; 23
-                dc.l    byte_33F06E                     ; byte_33F06E ; 24
-                dc.l    byte_33F74C                     ; byte_33F74C ; 25
+                dc.l    S2_External_Sprite_List_24      ; fixed Sonic 2 list 24
+                dc.l    S2_External_Sprite_List_25      ; fixed Sonic 2 list 25
                 dc.l    S2KSprite_CPZ1                  ; 26
                 dc.l    S2KSprite_CPZ2                  ; 27
-                dc.l    $2EB230                         ; byte_2EB230 ; 28
-                dc.l    $2EB254                         ; byte_2EB254 ; 29
+                dc.l    S2_External_Sprite_List_28      ; fixed Sonic 2 list 28
+                dc.l    S2_External_Sprite_List_29      ; fixed Sonic 2 list 29
                 dc.l    S2KSprite_ARZ1                  ; 30
                 dc.l    S2KSprite_ARZ2                  ; 31
-                dc.l    $2EBBDE                         ; byte_2EBBDE ; 32
-                dc.l    $2EBD4C                         ; byte_2EBD4C ; 33
+                dc.l    S2_External_Sprite_List_32      ; fixed Sonic 2 list 32
+                dc.l    S2_External_Sprite_List_33      ; fixed Sonic 2 list 33
                 dc.w    $FFFF, 0, 0
 S2KSprite_EHZ1:
                 binclude "data/Levels/Misc/S2K Object Pos/EHZ_1.bin"

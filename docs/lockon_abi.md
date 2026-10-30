@@ -25,3 +25,18 @@ Sonic 2 lock-on game profile remains excluded.
 Composite relocation keeps the second S3 cartridge on this preservation ABI;
 standalone S3 probes may move its source independently. A byte-identical half
 image alone does not establish runtime coverage for the composite product.
+
+The eight external entries in `S2K_Sprite_Lists` belong to Sonic 2, not Sonic 3.
+They use `S2_External_Sprite_List_*` constants relative to
+`S2_Second_Cartridge_Base`. Two bus addresses happen to coincide with S3
+interior-byte exports; those names must not be substituted into the Sonic 2
+table. Retaining this fixed compatibility table does not add a Sonic 2 profile.
+
+Absolute RAM operands retain their original positive 24-bit long encoding
+through `(RAM_start+offset)&$FFFFFF`. The erroneous absolute vector-area reads
+in `sub_2636C` and its S&K counterpart remain `Vectors+$30` and `Vectors+$34`;
+replacing them with object-relative fields would change preserved behavior.
+
+The preserved attract-ring bug also reads `Vectors+$30`; the Blue Sphere menu
+bug tests `Vectors` itself. These are reads of the original vector-area bytes.
+Their comments remain in source; the reconstruction does not repair them.

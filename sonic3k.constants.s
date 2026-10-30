@@ -1,7 +1,20 @@
 ; Fixed cartridge bus interfaces
-MD_Cartridge_Bus_End:   equ     $400000
-S2_LockOn_Patch_Start:  equ     $300000
-S2_LockOn_Patch_End:    equ     $340000
+MD_Cartridge_Bus_End:       equ     $400000
+S2_Second_Cartridge_Base:   equ     $200000
+; Fixed exports of the excluded Sonic 2 second-cartridge ABI
+S2_External_Sprite_List_16: equ     S2_Second_Cartridge_Base+$E8C80
+S2_External_Sprite_List_17: equ     S2_Second_Cartridge_Base+$E8D94
+S2_External_Sprite_List_24: equ     S2_Second_Cartridge_Base+$13F06E
+S2_External_Sprite_List_25: equ     S2_Second_Cartridge_Base+$13F74C
+S2_External_Sprite_List_28: equ     S2_Second_Cartridge_Base+$EB230
+S2_External_Sprite_List_29: equ     S2_Second_Cartridge_Base+$EB254
+S2_External_Sprite_List_32: equ     S2_Second_Cartridge_Base+$EBBDE
+S2_External_Sprite_List_33: equ     S2_Second_Cartridge_Base+$EBD4C
+S2_LockOn_Patch_Start:      equ     $300000
+S2_LockOn_Patch_End:        equ     $340000
+
+; Collision probes advance one 16-pixel block at a time; a3 carries a scalar
+Collision_Scan_Step:    equ     $10
 
 ; Equates section - names for variables
 
@@ -1698,3 +1711,6 @@ sfx__End:       equ     *                               ; next ID after the last
 
                 dephase
                 !org    0                               ; make sure we reset the ROM position to 0
+
+; Nemesis writes eight pixel rows per 8x8 tile; a5 carries this loop count
+Nem_Tile_Row_Count: equ     8
