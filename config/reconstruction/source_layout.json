@@ -840,7 +840,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 58881,
+      "physical_lines": 51828,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "s3.s",
@@ -900,7 +900,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 132222,
+      "physical_lines": 125165,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -5930,6 +5930,447 @@
       ]
     },
     {
+      "path": "src/objects/competition/s3/balloon.s",
+      "owner": "objects/competition/s3",
+      "responsibility": "Balloon Park balloon motion, player bounce and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 87,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 3045,
+        "last_line": 3128,
+        "sha256": "b4f4b96ebb8ee6be44c0dfa76097f937094c717ca23e1d8e2886fe06dd41e9d6"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 217874,
+          "end": 218316
+        },
+        {
+          "profile": "s3-eu",
+          "start": 217874,
+          "end": 218316
+        },
+        {
+          "profile": "s3-jp",
+          "start": 217874,
+          "end": 218316
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2315026,
+          "end": 2315468
+        }
+      ]
+    },
+    {
+      "path": "src/objects/competition/s3/blade_platform.s",
+      "owner": "objects/competition/s3",
+      "responsibility": "Competition blade-platform motion, player collision and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 96,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 2834,
+        "last_line": 2925,
+        "sha256": "341192874b919a2b2ae35e63d7f02a57c4a874a5bed985443c33c3cda9852fa0"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_CGZBladePlatform",
+          "kind": "terminal-tail",
+          "reason": "The complete named object state program terminates in an unconditional sprite or collision-service tail call; only checked private data resources follow.",
+          "origin_first_line": 2836,
+          "origin_terminal_line": 2922,
+          "origin_end_line": 2925
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 217100,
+          "end": 217482
+        },
+        {
+          "profile": "s3-eu",
+          "start": 217100,
+          "end": 217482
+        },
+        {
+          "profile": "s3-jp",
+          "start": 217100,
+          "end": 217482
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2314252,
+          "end": 2314634
+        }
+      ]
+    },
+    {
+      "path": "src/objects/competition/s3/desert_button.s",
+      "owner": "objects/competition/s3",
+      "responsibility": "Desert Palace button state, trigger behavior and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 59,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 3209,
+        "last_line": 3263,
+        "sha256": "bf3f00e91409620a2f5c531d3d0f6c6ce043eb7b18b6401f633fd83100ddb86e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_DPZButton",
+          "kind": "terminal-tail",
+          "reason": "The complete named object state program terminates in an unconditional sprite or collision-service tail call; only checked private data resources follow.",
+          "origin_first_line": 3211,
+          "origin_terminal_line": 3260,
+          "origin_end_line": 3263
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 219188,
+          "end": 219382
+        },
+        {
+          "profile": "s3-eu",
+          "start": 219188,
+          "end": 219382
+        },
+        {
+          "profile": "s3-jp",
+          "start": 219188,
+          "end": 219382
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2316340,
+          "end": 2316534
+        }
+      ]
+    },
+    {
+      "path": "src/objects/competition/s3/dissolving_sand_bar.s",
+      "owner": "objects/competition/s3",
+      "responsibility": "Desert Palace dissolving sand-bar activation, collapse and player collision.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 84,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 3129,
+        "last_line": 3208,
+        "sha256": "607c8b8cbb323b6a8349ec8f481e55a923e6a6f96f7f8c0ae0878d720801ec31"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_DPZDisolvingSandBar",
+          "kind": "terminal-tail",
+          "reason": "The complete named object state program terminates in an unconditional sprite or collision-service tail call; only checked private data resources follow.",
+          "origin_first_line": 3131,
+          "origin_terminal_line": 3199,
+          "origin_end_line": 3208
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 218316,
+          "end": 219188
+        },
+        {
+          "profile": "s3-eu",
+          "start": 218316,
+          "end": 219188
+        },
+        {
+          "profile": "s3-jp",
+          "start": 218316,
+          "end": 219188
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2315468,
+          "end": 2316340
+        }
+      ]
+    },
+    {
+      "path": "src/objects/competition/s3/elephant_block.s",
+      "owner": "objects/competition/s3",
+      "responsibility": "Balloon Park elephant-block movement, player collision and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 122,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 2926,
+        "last_line": 3044,
+        "sha256": "15e498539ff9b89a2aa6c95920fcc80bcf0a6cb2acf0c87adb2ea1ff15daccee"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 217482,
+          "end": 217874
+        },
+        {
+          "profile": "s3-eu",
+          "start": 217482,
+          "end": 217874
+        },
+        {
+          "profile": "s3-jp",
+          "start": 217482,
+          "end": 217874
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2314634,
+          "end": 2315026
+        }
+      ]
+    },
+    {
+      "path": "src/objects/competition/s3/goal_and_laps.s",
+      "owner": "objects/competition/s3",
+      "responsibility": "Competition goal marker activation, race lap accounting and lap number sprites.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 395,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 3925,
+        "last_line": 4316,
+        "sha256": "66ecd0804aabff44dccf63fb9e55af9750836458fdf74bbdd805add12926fac9"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 221554,
+          "end": 222924
+        },
+        {
+          "profile": "s3-eu",
+          "start": 221554,
+          "end": 222924
+        },
+        {
+          "profile": "s3-jp",
+          "start": 221554,
+          "end": 222924
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2318706,
+          "end": 2320076
+        }
+      ]
+    },
+    {
+      "path": "src/objects/competition/s3/item_objects.s",
+      "owner": "objects/competition/s3",
+      "responsibility": "Competition item selection, collection, effects, object motion and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 664,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 3264,
+        "last_line": 3924,
+        "sha256": "cdf44f0715b334ad066610db3e647ec33700f32c7fb795a63be6d0ac6c871737"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 219382,
+          "end": 221554
+        },
+        {
+          "profile": "s3-eu",
+          "start": 219382,
+          "end": 221554
+        },
+        {
+          "profile": "s3-jp",
+          "start": 219382,
+          "end": 221554
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2316534,
+          "end": 2318706
+        }
+      ]
+    },
+    {
+      "path": "src/objects/competition/s3/neon_display.s",
+      "owner": "objects/competition/s3",
+      "responsibility": "Competition neon display animation, start countdown, race state and finish presentation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 360,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 4317,
+        "last_line": 4673,
+        "sha256": "d849cb5e93c7d7d24ece4fc6d00f66357bdc76116d6678229cc8385dec1119e1"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 222924,
+          "end": 225824
+        },
+        {
+          "profile": "s3-eu",
+          "start": 222924,
+          "end": 225824
+        },
+        {
+          "profile": "s3-jp",
+          "start": 222924,
+          "end": 225824
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2320076,
+          "end": 2322976
+        }
+      ]
+    },
+    {
+      "path": "src/objects/competition/s3/race_hud.s",
+      "owner": "objects/competition/s3",
+      "responsibility": "Competition time display, live mapping construction, item icons and position widgets.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 320,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 4674,
+        "last_line": 4987,
+        "sha256": "e33adc8c7f970c7b612ffd2be92adb88004935993b3b8a85d5dd05d996788895"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_37220",
+          "kind": "terminal-tail",
+          "reason": "The complete live time display ends with a draw-service tail call followed by its private mapping and digit lookup data.",
+          "origin_first_line": 4676,
+          "origin_terminal_line": 4816,
+          "origin_end_line": 4844
+        },
+        {
+          "name": "loc_37454",
+          "kind": "terminal-tail",
+          "reason": "The complete item-icon state ends with an unconditional draw-service tail call before its mapping resources.",
+          "origin_first_line": 4847,
+          "origin_terminal_line": 4907,
+          "origin_end_line": 4907
+        },
+        {
+          "name": "loc_375B0",
+          "kind": "terminal-tail",
+          "reason": "The player-position display branches back to its shared update state and has only checked mapping data after that terminal branch.",
+          "origin_first_line": 4925,
+          "origin_terminal_line": 4984,
+          "origin_end_line": 4987
+        }
+      ],
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 225824,
+          "end": 226954
+        },
+        {
+          "profile": "s3-eu",
+          "start": 225824,
+          "end": 226954
+        },
+        {
+          "profile": "s3-jp",
+          "start": 225824,
+          "end": 226954
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2322976,
+          "end": 2324106
+        }
+      ]
+    },
+    {
       "path": "src/objects/competition/s3/triangle_bumpers.s",
       "owner": "objects/competition/s3",
       "responsibility": "Competition triangle bumper variants, collision and bounce response.",
@@ -5971,6 +6412,357 @@
           "component": "s3-us",
           "start": 2301690,
           "end": 2302082
+        }
+      ]
+    },
+    {
+      "path": "src/objects/competition/sk/balloon.s",
+      "owner": "objects/competition/sk",
+      "responsibility": "Balloon Park balloon motion, player bounce and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 87,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 3058,
+        "last_line": 3141,
+        "sha256": "49fb8945eafc8b6ca3d7be87aacd57bd08ecbd288ffb9b577f2869244a4b3a78"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 220544,
+          "end": 220986
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 220544,
+          "end": 220986
+        }
+      ]
+    },
+    {
+      "path": "src/objects/competition/sk/blade_platform.s",
+      "owner": "objects/competition/sk",
+      "responsibility": "Competition blade-platform motion, player collision and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 96,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 2847,
+        "last_line": 2938,
+        "sha256": "6b0870c8a1ac2d8b03d9ca5050640b0fc47bdd0acbf3af0db68b21a75497c67f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_CGZBladePlatform",
+          "kind": "terminal-tail",
+          "reason": "The complete named object state program terminates in an unconditional sprite or collision-service tail call; only checked private data resources follow.",
+          "origin_first_line": 2849,
+          "origin_terminal_line": 2935,
+          "origin_end_line": 2938
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 219770,
+          "end": 220152
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 219770,
+          "end": 220152
+        }
+      ]
+    },
+    {
+      "path": "src/objects/competition/sk/desert_button.s",
+      "owner": "objects/competition/sk",
+      "responsibility": "Desert Palace button state, trigger behavior and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 59,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 3222,
+        "last_line": 3276,
+        "sha256": "4187bc9c268d3e0953a6c4be8eb89f3ae74347249235e79de95e1f1c79040ae3"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_DPZButton",
+          "kind": "terminal-tail",
+          "reason": "The complete named object state program terminates in an unconditional sprite or collision-service tail call; only checked private data resources follow.",
+          "origin_first_line": 3224,
+          "origin_terminal_line": 3273,
+          "origin_end_line": 3276
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 221858,
+          "end": 222052
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 221858,
+          "end": 222052
+        }
+      ]
+    },
+    {
+      "path": "src/objects/competition/sk/dissolving_sand_bar.s",
+      "owner": "objects/competition/sk",
+      "responsibility": "Desert Palace dissolving sand-bar activation, collapse and player collision.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 84,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 3142,
+        "last_line": 3221,
+        "sha256": "19ac1d3e0617c684896d87617150b415e76c7a7cdabd18437a6a37c23b25e646"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_DPZDisolvingSandBar",
+          "kind": "terminal-tail",
+          "reason": "The complete named object state program terminates in an unconditional sprite or collision-service tail call; only checked private data resources follow.",
+          "origin_first_line": 3144,
+          "origin_terminal_line": 3212,
+          "origin_end_line": 3221
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 220986,
+          "end": 221858
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 220986,
+          "end": 221858
+        }
+      ]
+    },
+    {
+      "path": "src/objects/competition/sk/elephant_block.s",
+      "owner": "objects/competition/sk",
+      "responsibility": "Balloon Park elephant-block movement, player collision and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 122,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 2939,
+        "last_line": 3057,
+        "sha256": "4ca8fe89e0748d155ecaf7b90b2071b2d7d967ff674ab940e9eebe8683bb215e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 220152,
+          "end": 220544
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 220152,
+          "end": 220544
+        }
+      ]
+    },
+    {
+      "path": "src/objects/competition/sk/goal_and_laps.s",
+      "owner": "objects/competition/sk",
+      "responsibility": "Competition goal marker activation, race lap accounting and lap number sprites.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 395,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 3938,
+        "last_line": 4329,
+        "sha256": "a61f17e7cc6f1011dcca17f03baa7b8c84ed8a20813f3f011a6a1e1f072fd13b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 224224,
+          "end": 225594
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 224224,
+          "end": 225594
+        }
+      ]
+    },
+    {
+      "path": "src/objects/competition/sk/item_objects.s",
+      "owner": "objects/competition/sk",
+      "responsibility": "Competition item selection, collection, effects, object motion and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 664,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 3277,
+        "last_line": 3937,
+        "sha256": "8981bc8e5c4aa0eede734fcc5e25207603f149d68f5f7a3a51b8cb5ab6542051"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 222052,
+          "end": 224224
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 222052,
+          "end": 224224
+        }
+      ]
+    },
+    {
+      "path": "src/objects/competition/sk/neon_display.s",
+      "owner": "objects/competition/sk",
+      "responsibility": "Competition neon display animation, start countdown, race state and finish presentation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 360,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 4330,
+        "last_line": 4686,
+        "sha256": "99fe96cb34183275897e6be68305e22b6abbf27fe16937ca7f495c5753989f4e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 225594,
+          "end": 228494
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 225594,
+          "end": 228494
+        }
+      ]
+    },
+    {
+      "path": "src/objects/competition/sk/race_hud.s",
+      "owner": "objects/competition/sk",
+      "responsibility": "Competition time display, live mapping construction, item icons and position widgets.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 320,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 4687,
+        "last_line": 5000,
+        "sha256": "57dee608b9d16e19993d8674eaaea12966127935e043746882d80a08bb738409"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_37C8E",
+          "kind": "terminal-tail",
+          "reason": "The complete live time display ends with a draw-service tail call followed by its private mapping and digit lookup data.",
+          "origin_first_line": 4689,
+          "origin_terminal_line": 4829,
+          "origin_end_line": 4857
+        },
+        {
+          "name": "loc_37EC2",
+          "kind": "terminal-tail",
+          "reason": "The complete item-icon state ends with an unconditional draw-service tail call before its mapping resources.",
+          "origin_first_line": 4860,
+          "origin_terminal_line": 4920,
+          "origin_end_line": 4920
+        },
+        {
+          "name": "loc_3801E",
+          "kind": "terminal-tail",
+          "reason": "The player-position display branches back to its shared update state and has only checked mapping data after that terminal branch.",
+          "origin_first_line": 4938,
+          "origin_terminal_line": 4997,
+          "origin_end_line": 5000
+        }
+      ],
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 228494,
+          "end": 229624
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 228494,
+          "end": 229624
         }
       ]
     },
@@ -15529,6 +16321,51 @@
       ]
     },
     {
+      "path": "src/objects/shared/s3/intro_player_launch.s",
+      "owner": "objects/shared/s3",
+      "responsibility": "Shared introductory player launch, ground motion and character control helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 113,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 7142,
+        "last_line": 7251,
+        "sha256": "9ee33bd3ded65de0fd8aae3d976b04801682c3dadc9a2f1e7527170d39bcf11a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 233534,
+          "end": 233828
+        },
+        {
+          "profile": "s3-eu",
+          "start": 233534,
+          "end": 233828
+        },
+        {
+          "profile": "s3-jp",
+          "start": 233534,
+          "end": 233828
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2330686,
+          "end": 2330980
+        }
+      ]
+    },
+    {
       "path": "src/objects/shared/s3/invisible_solids.s",
       "owner": "objects/shared/s3",
       "responsibility": "Invisible solid block setup, player contact and optional debug display.",
@@ -15925,6 +16762,51 @@
           "component": "s3-us",
           "start": 2243696,
           "end": 2243882
+        }
+      ]
+    },
+    {
+      "path": "src/objects/shared/s3/water_drop.s",
+      "owner": "objects/shared/s3",
+      "responsibility": "Water-drop motion, collision, destruction and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 106,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 5111,
+        "last_line": 5213,
+        "sha256": "d4411eced676f105bceac07fb7288f4224c75620232f055f5e9c019d332412bd"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 227342,
+          "end": 227732
+        },
+        {
+          "profile": "s3-eu",
+          "start": 227342,
+          "end": 227732
+        },
+        {
+          "profile": "s3-jp",
+          "start": 227342,
+          "end": 227732
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2324494,
+          "end": 2324884
         }
       ]
     },
@@ -17357,6 +18239,41 @@
       ]
     },
     {
+      "path": "src/objects/shared/sk/intro_player_launch.s",
+      "owner": "objects/shared/sk",
+      "responsibility": "Shared introductory player launch, ground motion and character control helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 113,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 7153,
+        "last_line": 7262,
+        "sha256": "3c4acd21dac58e56aef44336c451d679c00f8599e0a646e096c9b1804a1c9b10"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 236096,
+          "end": 236390
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 236096,
+          "end": 236390
+        }
+      ]
+    },
+    {
       "path": "src/objects/shared/sk/invisible_solids.s",
       "owner": "objects/shared/sk",
       "responsibility": "Invisible solid block setup, player contact and optional debug display.",
@@ -17688,6 +18605,41 @@
           "component": "sk",
           "start": 150888,
           "end": 151092
+        }
+      ]
+    },
+    {
+      "path": "src/objects/shared/sk/water_drop.s",
+      "owner": "objects/shared/sk",
+      "responsibility": "Water-drop motion, collision, destruction and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 104,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 5124,
+        "last_line": 5224,
+        "sha256": "4e227246bb264b1a6ab8133f2714a6a740b98a4ef9c03e574a2e8a10a16b378e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 230012,
+          "end": 230332
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 230012,
+          "end": 230332
         }
       ]
     },
@@ -20546,6 +21498,216 @@
       ],
       "applicability": "emitted",
       "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/objects/shared/tension_bridge/s3/bending_and_collision.s",
+      "owner": "objects/shared/tension_bridge/s3",
+      "responsibility": "Tension bridge segment bending, player collision, movement helpers and private bend data.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 527,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 5799,
+        "last_line": 6322,
+        "sha256": "5a644c3ed1e1ceb0f9d137e33302436bf12950945667ad06bf2c5c6a37dc2be9"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 229340,
+          "end": 230840
+        },
+        {
+          "profile": "s3-eu",
+          "start": 229340,
+          "end": 230840
+        },
+        {
+          "profile": "s3-jp",
+          "start": 229340,
+          "end": 230840
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2326492,
+          "end": 2327992
+        }
+      ]
+    },
+    {
+      "path": "src/objects/shared/tension_bridge/s3/mappings.s",
+      "owner": "objects/shared/tension_bridge/s3",
+      "responsibility": "Tension bridge mapping entry labels and checked shared mapping resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 7,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 6323,
+        "last_line": 6326,
+        "sha256": "ea833f97a6cb8b9822eac6d56742c7f9f300bf5d76f057ce07a5afaee7e3750f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 230840,
+          "end": 230916
+        },
+        {
+          "profile": "s3-eu",
+          "start": 230840,
+          "end": 230916
+        },
+        {
+          "profile": "s3-jp",
+          "start": 230840,
+          "end": 230916
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2327992,
+          "end": 2328068
+        }
+      ]
+    },
+    {
+      "path": "src/objects/shared/tension_bridge/s3/state_and_segments.s",
+      "owner": "objects/shared/tension_bridge/s3",
+      "responsibility": "Tension bridge initialization, coordinated segments, player state and active control.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 337,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 5465,
+        "last_line": 5798,
+        "sha256": "4ff2c69a35ab36a75242aff544dfe67f51e2493f5f4ad6e24d940172d230558a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 228500,
+          "end": 229340
+        },
+        {
+          "profile": "s3-eu",
+          "start": 228500,
+          "end": 229340
+        },
+        {
+          "profile": "s3-jp",
+          "start": 228500,
+          "end": 229340
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2325652,
+          "end": 2326492
+        }
+      ]
+    },
+    {
+      "path": "src/objects/shared/tension_bridge/sk/bending_and_collision.s",
+      "owner": "objects/shared/tension_bridge/sk",
+      "responsibility": "Tension bridge segment bending, player collision, movement helpers and private bend data.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 527,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 5810,
+        "last_line": 6333,
+        "sha256": "211616e56c9a038c9bdd3df49872f02cf6ffe98f66ec692a2d6c0e05cbcd1c5b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 231902,
+          "end": 233402
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 231902,
+          "end": 233402
+        }
+      ]
+    },
+    {
+      "path": "src/objects/shared/tension_bridge/sk/mappings.s",
+      "owner": "objects/shared/tension_bridge/sk",
+      "responsibility": "Tension bridge mapping entry labels and checked shared mapping resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 7,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 6334,
+        "last_line": 6337,
+        "sha256": "ea833f97a6cb8b9822eac6d56742c7f9f300bf5d76f057ce07a5afaee7e3750f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 233402,
+          "end": 233478
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 233402,
+          "end": 233478
+        }
+      ]
+    },
+    {
+      "path": "src/objects/shared/tension_bridge/sk/state_and_segments.s",
+      "owner": "objects/shared/tension_bridge/sk",
+      "responsibility": "Tension bridge initialization, coordinated segments, player state and active control.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 343,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 5470,
+        "last_line": 5809,
+        "sha256": "7f0ff6f89e578e8e0fa81af3598c9d9ab29e03589ac9f9a6f6d3c329e99bdc2a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 231048,
+          "end": 231902
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 231048,
+          "end": 231902
+        }
+      ]
     },
     {
       "path": "src/objects/shared/title_card/map_title_card.s",
@@ -35274,6 +36436,86 @@
       ]
     },
     {
+      "path": "src/objects/zones/emz/s3/dripper.s",
+      "owner": "objects/zones/emz/s3",
+      "responsibility": "Endless Mine dripper timing, water-drop creation and sprite resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 126,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 4988,
+        "last_line": 5110,
+        "sha256": "d2214374984b95cf52c7c85ca6553c2adedc2faece07c9a17de767e363b089f0"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 226954,
+          "end": 227342
+        },
+        {
+          "profile": "s3-eu",
+          "start": 226954,
+          "end": 227342
+        },
+        {
+          "profile": "s3-jp",
+          "start": 226954,
+          "end": 227342
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2324106,
+          "end": 2324494
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/emz/sk/dripper.s",
+      "owner": "objects/zones/emz/sk",
+      "responsibility": "Endless Mine dripper timing, water-drop creation and sprite resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 126,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 5001,
+        "last_line": 5123,
+        "sha256": "c7173f1f9b19071e874aa0800cf7b3c7620c16c841dcdc6cc33604ea654b3e31"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 229624,
+          "end": 230012
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 229624,
+          "end": 230012
+        }
+      ]
+    },
+    {
       "path": "src/objects/zones/hcz/s3/breakable_bar.s",
       "owner": "objects/zones/hcz/s3",
       "responsibility": "Hydrocity breakable bar attachment, movement, breakage and shared player geometry.",
@@ -35634,6 +36876,46 @@
       ]
     },
     {
+      "path": "src/objects/zones/hcz/s3/twisting_loop.s",
+      "owner": "objects/zones/hcz/s3",
+      "responsibility": "Hydrocity twisting-loop geometry, player capture, scripted movement and release.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 595,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 6327,
+        "last_line": 6918,
+        "sha256": "f24697ff55fe831348708c9939cba54ea1bb790deddbc9df1663e57a4966fa8c"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 230916,
+          "end": 232674
+        },
+        {
+          "profile": "s3-eu",
+          "start": 230916,
+          "end": 232674
+        },
+        {
+          "profile": "s3-jp",
+          "start": 230916,
+          "end": 232674
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2328068,
+          "end": 2329826
+        }
+      ]
+    },
+    {
       "path": "src/objects/zones/hcz/s3/water_and_air_objects.s",
       "owner": "objects/zones/hcz/s3",
       "responsibility": "Hydrocity air-bubble, water-rush and water-wall object families with player contact, debris and shared sprite resources.",
@@ -35685,6 +36967,51 @@
           "component": "s3-us",
           "start": 2285646,
           "end": 2289502
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/hcz/s3/water_splash.s",
+      "owner": "objects/zones/hcz/s3",
+      "responsibility": "Hydrocity splash emission, particle motion, player contact and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 254,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 5214,
+        "last_line": 5464,
+        "sha256": "c5781d5daad13d4a939bd18ccf435fd593a9feaadf60346a1a05abc8d934f5ae"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 227732,
+          "end": 228500
+        },
+        {
+          "profile": "s3-eu",
+          "start": 227732,
+          "end": 228500
+        },
+        {
+          "profile": "s3-jp",
+          "start": 227732,
+          "end": 228500
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2324884,
+          "end": 2325652
         }
       ]
     },
@@ -35994,6 +37321,36 @@
       ]
     },
     {
+      "path": "src/objects/zones/hcz/sk/twisting_loop.s",
+      "owner": "objects/zones/hcz/sk",
+      "responsibility": "Hydrocity twisting-loop geometry, player capture, scripted movement and release.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 595,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 6338,
+        "last_line": 6929,
+        "sha256": "125f59d78acf423dd33edb3423707ff96a814dd722ebb8de135afd4a9be27ce7"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 233478,
+          "end": 235236
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 233478,
+          "end": 235236
+        }
+      ]
+    },
+    {
       "path": "src/objects/zones/hcz/sk/water_and_air_objects.s",
       "owner": "objects/zones/hcz/sk",
       "responsibility": "Hydrocity air-bubble, water-rush and water-wall object families with player contact, debris and shared sprite resources.",
@@ -36039,6 +37396,41 @@
       ]
     },
     {
+      "path": "src/objects/zones/hcz/sk/water_splash.s",
+      "owner": "objects/zones/hcz/sk",
+      "responsibility": "Hydrocity splash emission, particle motion, player contact and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 248,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 5225,
+        "last_line": 5469,
+        "sha256": "993b010cd439a060427bbbf4d8457a6d29e3d10cd7aba16b11aeca11a20fc811"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 230332,
+          "end": 231048
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 230332,
+          "end": 231048
+        }
+      ]
+    },
+    {
       "path": "src/objects/zones/hcz/sk/wave_splash.s",
       "owner": "objects/zones/hcz/sk",
       "responsibility": "Hydrocity wave splash state, sprite animation and mapping storage.",
@@ -36080,6 +37472,166 @@
           "component": "sk",
           "start": 127490,
           "end": 127882
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/icz/s3/snowboard_intro.s",
+      "owner": "objects/zones/icz/s3",
+      "responsibility": "IceCap opening scene control, snowboard dust objects and sprite resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 226,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 6919,
+        "last_line": 7141,
+        "sha256": "587b1c0b0e1657f2d15457accaf3bf5e5bfdbaf2539c106acee0fdc74e888b5f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 232674,
+          "end": 233534
+        },
+        {
+          "profile": "s3-eu",
+          "start": 232674,
+          "end": 233534
+        },
+        {
+          "profile": "s3-jp",
+          "start": 232674,
+          "end": 233534
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2329826,
+          "end": 2330686
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/icz/s3/tails_intro.s",
+      "owner": "objects/zones/icz/s3",
+      "responsibility": "IceCap Tails introductory player control, timed release and crash transition.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 58,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 7252,
+        "last_line": 7306,
+        "sha256": "65825500d6df4b880893b858b49226b214d9b4b10c2123b161146584186ed962"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 233828,
+          "end": 234046
+        },
+        {
+          "profile": "s3-eu",
+          "start": 233828,
+          "end": 234046
+        },
+        {
+          "profile": "s3-jp",
+          "start": 233828,
+          "end": 234046
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2330980,
+          "end": 2331198
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/icz/sk/snowboard_intro.s",
+      "owner": "objects/zones/icz/sk",
+      "responsibility": "IceCap opening scene control, snowboard dust objects and sprite resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 226,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 6930,
+        "last_line": 7152,
+        "sha256": "c23334606f5a4823728eff3fd6068c477860cf6848995a69b30394c79f69a8dd"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 235236,
+          "end": 236096
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 235236,
+          "end": 236096
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/icz/sk/tails_intro.s",
+      "owner": "objects/zones/icz/sk",
+      "responsibility": "IceCap Tails introductory player control, timed release and crash transition.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 62,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 7263,
+        "last_line": 7321,
+        "sha256": "170229e9069d35cd0159c9cf1c8f8ce29c2445acc061f123e0f8e716c873e7eb"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 236390,
+          "end": 236624
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 236390,
+          "end": 236624
         }
       ]
     },
@@ -37674,6 +39226,401 @@
       ]
     },
     {
+      "path": "src/objects/zones/mgz/s3/head_trigger.s",
+      "owner": "objects/zones/mgz/s3",
+      "responsibility": "Marble Garden head trigger activation, coordinated motion and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 158,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 786,
+        "last_line": 939,
+        "sha256": "d7373f4c2facf20ea19da9a5aad53b85798a59ecc97e2fcb514ae81189042c4d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_MGZHeadTrigger",
+          "kind": "terminal-tail",
+          "reason": "The complete named object state program terminates in an unconditional sprite or collision-service tail call; only checked private data resources follow.",
+          "origin_first_line": 788,
+          "origin_terminal_line": 934,
+          "origin_end_line": 939
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 210348,
+          "end": 211048
+        },
+        {
+          "profile": "s3-eu",
+          "start": 210348,
+          "end": 211048
+        },
+        {
+          "profile": "s3-jp",
+          "start": 210348,
+          "end": 211048
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2307500,
+          "end": 2308200
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/mgz/s3/moving_spike_platform.s",
+      "owner": "objects/zones/mgz/s3",
+      "responsibility": "Marble Garden moving spike-platform motion, player collision and damage.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 95,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 1051,
+        "last_line": 1141,
+        "sha256": "6a8702652569438846bad0d67b746ff0fd397325f5dd156bb36b28f3595c95cb"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_MGZMovingSpikePlatform",
+          "kind": "terminal-tail",
+          "reason": "The complete named object state program terminates in an unconditional sprite or collision-service tail call; only checked private data resources follow.",
+          "origin_first_line": 1053,
+          "origin_terminal_line": 1138,
+          "origin_end_line": 1141
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 211578,
+          "end": 212168
+        },
+        {
+          "profile": "s3-eu",
+          "start": 211578,
+          "end": 212168
+        },
+        {
+          "profile": "s3-jp",
+          "start": 211578,
+          "end": 212168
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2308730,
+          "end": 2309320
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/mgz/s3/pulley.s",
+      "owner": "objects/zones/mgz/s3",
+      "responsibility": "Marble Garden pulley travel, player attachment, coordinated sprites and release.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 359,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 1142,
+        "last_line": 1497,
+        "sha256": "190d6faafea8b5de532cfff7c8fb823d02dbff6fc842bb1f5d99b1868bd2ce95"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 212168,
+          "end": 213392
+        },
+        {
+          "profile": "s3-eu",
+          "start": 212168,
+          "end": 213392
+        },
+        {
+          "profile": "s3-jp",
+          "start": 212168,
+          "end": 213392
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2309320,
+          "end": 2310544
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/mgz/s3/swinging_platform.s",
+      "owner": "objects/zones/mgz/s3",
+      "responsibility": "Marble Garden swinging platform motion, player riding and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 109,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 491,
+        "last_line": 596,
+        "sha256": "e10edae00773982374ff0d40c11be573ce7d4c5895f510279d8d58c07207bf95"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 209360,
+          "end": 209724
+        },
+        {
+          "profile": "s3-eu",
+          "start": 209360,
+          "end": 209724
+        },
+        {
+          "profile": "s3-jp",
+          "start": 209360,
+          "end": 209724
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2306512,
+          "end": 2306876
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/mgz/s3/swinging_spike_ball.s",
+      "owner": "objects/zones/mgz/s3",
+      "responsibility": "Marble Garden swinging spike-ball motion, chain sprites and player collision.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 192,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 597,
+        "last_line": 785,
+        "sha256": "39edbbdbdb1dd22aede180ca7d62d3b217a138401b328ccecbf17ce237de4a5f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 209724,
+          "end": 210348
+        },
+        {
+          "profile": "s3-eu",
+          "start": 209724,
+          "end": 210348
+        },
+        {
+          "profile": "s3-jp",
+          "start": 209724,
+          "end": 210348
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2306876,
+          "end": 2307500
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/mgz/s3/top_launcher.s",
+      "owner": "objects/zones/mgz/s3",
+      "responsibility": "Marble Garden spinning top launcher initialization, motion and player response.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 76,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 2762,
+        "last_line": 2833,
+        "sha256": "d80c56ce2c232c24d8d174b3866863629001ce1c53f6fd34a5fdb081b5a9fb6b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_MGZTopLauncher",
+          "kind": "terminal-tail",
+          "reason": "The complete named object state program terminates in an unconditional sprite or collision-service tail call; only checked private data resources follow.",
+          "origin_first_line": 2764,
+          "origin_terminal_line": 2833,
+          "origin_end_line": 2833
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 216864,
+          "end": 217100
+        },
+        {
+          "profile": "s3-eu",
+          "start": 216864,
+          "end": 217100
+        },
+        {
+          "profile": "s3-jp",
+          "start": 216864,
+          "end": 217100
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2314016,
+          "end": 2314252
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/mgz/s3/trigger_platform.s",
+      "owner": "objects/zones/mgz/s3",
+      "responsibility": "Marble Garden triggered platform initialization, movement and player riding.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 115,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 940,
+        "last_line": 1050,
+        "sha256": "de37e03ed491d06678b01833b8ba34e30da00597f521cc8b1a82cc67d23fee8a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_MGZTriggerPlatform",
+          "kind": "terminal-tail",
+          "reason": "The complete named object state program terminates in an unconditional sprite or collision-service tail call; only checked private data resources follow.",
+          "origin_first_line": 948,
+          "origin_terminal_line": 1047,
+          "origin_end_line": 1050
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 211048,
+          "end": 211578
+        },
+        {
+          "profile": "s3-eu",
+          "start": 211048,
+          "end": 211578
+        },
+        {
+          "profile": "s3-jp",
+          "start": 211048,
+          "end": 211578
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2308200,
+          "end": 2308730
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/mgz/s3/twisting_loop.s",
+      "owner": "objects/zones/mgz/s3",
+      "responsibility": "Marble Garden twisting loop player capture, scripted rotation and release.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 270,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 224,
+        "last_line": 490,
+        "sha256": "46d0f5c9f89c188d239fa9aa72dbcb7c1a095572309f09c11929b71fe86eda5c"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 208576,
+          "end": 209360
+        },
+        {
+          "profile": "s3-eu",
+          "start": 208576,
+          "end": 209360
+        },
+        {
+          "profile": "s3-jp",
+          "start": 208576,
+          "end": 209360
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2305728,
+          "end": 2306512
+        }
+      ]
+    },
+    {
       "path": "src/objects/zones/mgz/sk/boss_transition.s",
       "owner": "objects/zones/mgz/sk",
       "responsibility": "Marble Garden boss transition controller, partner recovery and player carrying setup.",
@@ -37740,6 +39687,541 @@
           "component": "sk",
           "start": 154964,
           "end": 155434
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/mgz/sk/head_trigger.s",
+      "owner": "objects/zones/mgz/sk",
+      "responsibility": "Marble Garden head trigger activation, coordinated motion and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 157,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 790,
+        "last_line": 942,
+        "sha256": "13daa8b73db5493e06cbd0dc813838d4ce4196fa5640e2c9afe2008197b8b4be"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_MGZHeadTrigger",
+          "kind": "terminal-tail",
+          "reason": "The complete named object state program terminates in an unconditional sprite or collision-service tail call; only checked private data resources follow.",
+          "origin_first_line": 793,
+          "origin_terminal_line": 939,
+          "origin_end_line": 942
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 213762,
+          "end": 214376
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 213762,
+          "end": 214376
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/mgz/sk/moving_spike_platform.s",
+      "owner": "objects/zones/mgz/sk",
+      "responsibility": "Marble Garden moving spike-platform motion, player collision and damage.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 92,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 1068,
+        "last_line": 1155,
+        "sha256": "34cacf30f08fa449e0a3e810e2970c840c04dd0a653f7d9a0ed6ab4a5bee3dea"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_MGZMovingSpikePlatform",
+          "kind": "terminal-tail",
+          "reason": "The complete named object state program terminates in an unconditional sprite or collision-service tail call; only checked private data resources follow.",
+          "origin_first_line": 1070,
+          "origin_terminal_line": 1155,
+          "origin_end_line": 1155
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 214754,
+          "end": 215040
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 214754,
+          "end": 215040
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/mgz/sk/pulley.s",
+      "owner": "objects/zones/mgz/sk",
+      "responsibility": "Marble Garden pulley travel, player attachment, coordinated sprites and release.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 356,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 1156,
+        "last_line": 1508,
+        "sha256": "a8bd8a12076e1ed1aff30f0d1e0b34bd1ced0812e30f1af165d461adf8524857"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 215040,
+          "end": 216056
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 215040,
+          "end": 216056
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/mgz/sk/swinging_platform.s",
+      "owner": "objects/zones/mgz/sk",
+      "responsibility": "Marble Garden swinging platform motion, player riding and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 105,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 502,
+        "last_line": 603,
+        "sha256": "82132e0350014dfd2715fded2c1bce7fecb37c16478fc6a0a3ef42547eec1c6e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 212868,
+          "end": 213196
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 212868,
+          "end": 213196
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/mgz/sk/swinging_spike_ball.s",
+      "owner": "objects/zones/mgz/sk",
+      "responsibility": "Marble Garden swinging spike-ball motion, chain sprites and player collision.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 189,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 604,
+        "last_line": 789,
+        "sha256": "08781a04e4a422b61ab7e15fd83dc419aaaa3e465bc0c94dbccffb8f99198adb"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 213196,
+          "end": 213762
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 213196,
+          "end": 213762
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/mgz/sk/top_launcher.s",
+      "owner": "objects/zones/mgz/sk",
+      "responsibility": "Marble Garden spinning top launcher initialization, motion and player response.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 76,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 2775,
+        "last_line": 2846,
+        "sha256": "e2607871a7bb9319c7634d21ef9c65295245e0578abe8f8343a2b75085be76cb"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_MGZTopLauncher",
+          "kind": "terminal-tail",
+          "reason": "The complete named object state program terminates in an unconditional sprite or collision-service tail call; only checked private data resources follow.",
+          "origin_first_line": 2777,
+          "origin_terminal_line": 2846,
+          "origin_end_line": 2846
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 219534,
+          "end": 219770
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 219534,
+          "end": 219770
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/mgz/sk/trigger_platform.s",
+      "owner": "objects/zones/mgz/sk",
+      "responsibility": "Marble Garden triggered platform initialization, movement and player riding.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 129,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 943,
+        "last_line": 1067,
+        "sha256": "93044bb802bf54e2db098590b488545fd87c92a7056993c90569abdcbbcb41a0"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_MGZTriggerPlatform",
+          "kind": "terminal-tail",
+          "reason": "The complete named object state program terminates in an unconditional sprite or collision-service tail call; only checked private data resources follow.",
+          "origin_first_line": 951,
+          "origin_terminal_line": 1067,
+          "origin_end_line": 1067
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 214376,
+          "end": 214754
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 214376,
+          "end": 214754
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/mgz/sk/twisting_loop.s",
+      "owner": "objects/zones/mgz/sk",
+      "responsibility": "Marble Garden twisting loop player capture, scripted rotation and release.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 270,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 235,
+        "last_line": 501,
+        "sha256": "f5d2e312469dd57d132f6c2e1a2cccd8644fff284061e41b750e1bcf6a0ff236"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 212084,
+          "end": 212868
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 212084,
+          "end": 212868
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/mgz/top_platform/s3/scripted_paths.s",
+      "owner": "objects/zones/mgz/top_platform/s3",
+      "responsibility": "Marble Garden spinning top scripted loop entry, constrained path traversal and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 278,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 2487,
+        "last_line": 2761,
+        "sha256": "e6e5123e3904273e07a5f2e22c72edf8e7a14651bd2d653244914038beef2fca"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 216056,
+          "end": 216864
+        },
+        {
+          "profile": "s3-eu",
+          "start": 216056,
+          "end": 216864
+        },
+        {
+          "profile": "s3-jp",
+          "start": 216056,
+          "end": 216864
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2313208,
+          "end": 2314016
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/mgz/top_platform/s3/state_and_riders.s",
+      "owner": "objects/zones/mgz/top_platform/s3",
+      "responsibility": "Marble Garden spinning top initialization, active state, rider attachment and input handling.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 605,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 1498,
+        "last_line": 2099,
+        "sha256": "fb0505f72f75444c09e8da84c62f312d7008941445f0e57ee13e07f4aa4fe113"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 213392,
+          "end": 215036
+        },
+        {
+          "profile": "s3-eu",
+          "start": 213392,
+          "end": 215036
+        },
+        {
+          "profile": "s3-jp",
+          "start": 213392,
+          "end": 215036
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2310544,
+          "end": 2312188
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/mgz/top_platform/s3/terrain_physics.s",
+      "owner": "objects/zones/mgz/top_platform/s3",
+      "responsibility": "Marble Garden spinning top terrain contact, slope handling, acceleration and braking.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 390,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "s3.s",
+        "first_line": 2100,
+        "last_line": 2486,
+        "sha256": "e70db91b13b35ee4ab19357950907b89bd4e04981c3866b2455c66f5f5a865d6"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 215036,
+          "end": 216056
+        },
+        {
+          "profile": "s3-eu",
+          "start": 215036,
+          "end": 216056
+        },
+        {
+          "profile": "s3-jp",
+          "start": 215036,
+          "end": 216056
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2312188,
+          "end": 2313208
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/mgz/top_platform/sk/scripted_paths.s",
+      "owner": "objects/zones/mgz/top_platform/sk",
+      "responsibility": "Marble Garden spinning top scripted loop entry, constrained path traversal and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 278,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 2500,
+        "last_line": 2774,
+        "sha256": "3221115cb133be642ee1b83bbfab15fa242b97396f9a00b7bd9a0a79c8ca6782"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 218726,
+          "end": 219534
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 218726,
+          "end": 219534
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/mgz/top_platform/sk/state_and_riders.s",
+      "owner": "objects/zones/mgz/top_platform/sk",
+      "responsibility": "Marble Garden spinning top initialization, active state, rider attachment and input handling.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 607,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 1509,
+        "last_line": 2112,
+        "sha256": "91d5cca8130082358300ab83ed4ded171e473edb1e7a2ce0e396e3996d7fb302"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 216056,
+          "end": 217706
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 216056,
+          "end": 217706
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/mgz/top_platform/sk/terrain_physics.s",
+      "owner": "objects/zones/mgz/top_platform/sk",
+      "responsibility": "Marble Garden spinning top terrain contact, slope handling, acceleration and braking.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 390,
+      "origin": {
+        "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
+        "path": "sonic3k.s",
+        "first_line": 2113,
+        "last_line": 2499,
+        "sha256": "ac2ad16552e558c2ebc6f467464287e264163b8c131c71b02ca17679836afd69"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 217706,
+          "end": 218726
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 217706,
+          "end": 218726
         }
       ]
     },

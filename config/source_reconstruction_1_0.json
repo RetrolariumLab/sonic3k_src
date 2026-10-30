@@ -610,6 +610,12 @@
       "commits": ["282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c"]
     },
     {
+      "id": "change-7cfdadcea160",
+      "kind": "source_or_tooling",
+      "summary": "Own result presentation and Hydrocity or Carnival mechanisms",
+      "commits": ["7cfdadcea16038302a35278b3ab4d04253f3169a"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",
