@@ -840,7 +840,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 116703,
+      "physical_lines": 114876,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "s3.s",
@@ -900,7 +900,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 200067,
+      "physical_lines": 198242,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -1738,6 +1738,86 @@
       ],
       "applicability": "emitted",
       "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/game/modes/s3/pause.s",
+      "owner": "game/modes/s3",
+      "responsibility": "Complete pause, resume, slow motion and single-frame advance state machine.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 78,
+      "origin": {
+        "commit": "406dd409844defcd68512edc13fd0b1bf94eaf49",
+        "path": "s3.s",
+        "first_line": 457,
+        "last_line": 532,
+        "sha256": "8f77ba2bb1b3568fa20a829449b0e93907ac15a80e6cae9ac064ddd01695644b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "The complete named subsystem is smaller than the target range. Keep its state, helper routines and interface together without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 5742,
+          "end": 6000
+        },
+        {
+          "profile": "s3-eu",
+          "start": 5742,
+          "end": 6000
+        },
+        {
+          "profile": "s3-jp",
+          "start": 5742,
+          "end": 6000
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2102894,
+          "end": 2103152
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/sk/pause.s",
+      "owner": "game/modes/sk",
+      "responsibility": "Complete pause, resume, slow motion and single-frame advance state machine.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 82,
+      "origin": {
+        "commit": "406dd409844defcd68512edc13fd0b1bf94eaf49",
+        "path": "sonic3k.s",
+        "first_line": 449,
+        "last_line": 528,
+        "sha256": "1411e42791b2b678e3bbfef0211badeb21fc3269cd4ac9fe02b42233ef5eb2f3"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "The complete named subsystem is smaller than the target range. Keep its state, helper routines and interface together without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 5092,
+          "end": 5350
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 5092,
+          "end": 5350
+        }
+      ]
     },
     {
       "path": "src/game/special_stage/shared/special_stage/map_chaos_emerald.s",
@@ -23036,6 +23116,361 @@
       "range_kind": "canonical-normal-build"
     },
     {
+      "path": "src/rendering/compression/s3/enigma.s",
+      "owner": "rendering/compression/s3",
+      "responsibility": "Complete Enigma map decompressor with inline-value and bitstream helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 266,
+      "origin": {
+        "commit": "406dd409844defcd68512edc13fd0b1bf94eaf49",
+        "path": "s3.s",
+        "first_line": 1157,
+        "last_line": 1420,
+        "sha256": "7af8d66bbe38dac6abc9aa7d5f5b59c1551622b7a51de01f106632b835635572"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "The complete named subsystem is smaller than the target range. Keep its state, helper routines and interface together without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 6974,
+          "end": 7356
+        },
+        {
+          "profile": "s3-eu",
+          "start": 6974,
+          "end": 7356
+        },
+        {
+          "profile": "s3-jp",
+          "start": 6974,
+          "end": 7356
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2104126,
+          "end": 2104508
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/compression/s3/kosinski_streaming.s",
+      "owner": "rendering/compression/s3",
+      "responsibility": "Kosinski decompression, moduled scheduling and interrupt-resumable queue state.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 420,
+      "origin": {
+        "commit": "406dd409844defcd68512edc13fd0b1bf94eaf49",
+        "path": "s3.s",
+        "first_line": 1421,
+        "last_line": 1838,
+        "sha256": "86c86d53bf55924c59a6f62d5848fe18b8f4f64540a4692620093c16f7f45ed9"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 7356,
+          "end": 8098
+        },
+        {
+          "profile": "s3-eu",
+          "start": 7356,
+          "end": 8098
+        },
+        {
+          "profile": "s3-jp",
+          "start": 7356,
+          "end": 8098
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2104508,
+          "end": 2105250
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/compression/s3/nemesis.s",
+      "owner": "rendering/compression/s3",
+      "responsibility": "Complete Nemesis tile decompressor and its code-table construction.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 224,
+      "origin": {
+        "commit": "406dd409844defcd68512edc13fd0b1bf94eaf49",
+        "path": "s3.s",
+        "first_line": 668,
+        "last_line": 889,
+        "sha256": "6d41a72318a158f51fad60be85b01d219c75ec8f4f587fe336c3fea6022c39dd"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "The complete named subsystem is smaller than the target range. Keep its state, helper routines and interface together without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 6212,
+          "end": 6532
+        },
+        {
+          "profile": "s3-eu",
+          "start": 6212,
+          "end": 6532
+        },
+        {
+          "profile": "s3-jp",
+          "start": 6212,
+          "end": 6532
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2103364,
+          "end": 2103684
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/compression/s3/nemesis_queue.s",
+      "owner": "rendering/compression/s3",
+      "responsibility": "Pattern load request insertion, immediate loading and incremental Nemesis processing.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 269,
+      "origin": {
+        "commit": "406dd409844defcd68512edc13fd0b1bf94eaf49",
+        "path": "s3.s",
+        "first_line": 890,
+        "last_line": 1156,
+        "sha256": "fb7c4f61a2fbab0b7c3d2e91c30354aed23994bbc306eb6b8173a107c28e1fa4"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "The complete named subsystem is smaller than the target range. Keep its state, helper routines and interface together without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 6532,
+          "end": 6974
+        },
+        {
+          "profile": "s3-eu",
+          "start": 6532,
+          "end": 6974
+        },
+        {
+          "profile": "s3-jp",
+          "start": 6532,
+          "end": 6974
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2103684,
+          "end": 2104126
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/compression/sk/enigma.s",
+      "owner": "rendering/compression/sk",
+      "responsibility": "Complete Enigma map decompressor with inline-value and bitstream helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 266,
+      "origin": {
+        "commit": "406dd409844defcd68512edc13fd0b1bf94eaf49",
+        "path": "sonic3k.s",
+        "first_line": 1155,
+        "last_line": 1418,
+        "sha256": "e3dad68f520514242bc3d73aa46e4eb2bf4ce87d44c9a8b3c99598a09187d6b2"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "The complete named subsystem is smaller than the target range. Keep its state, helper routines and interface together without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 6324,
+          "end": 6706
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 6324,
+          "end": 6706
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/compression/sk/kosinski_streaming.s",
+      "owner": "rendering/compression/sk",
+      "responsibility": "Kosinski decompression, moduled scheduling and interrupt-resumable queue state.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 420,
+      "origin": {
+        "commit": "406dd409844defcd68512edc13fd0b1bf94eaf49",
+        "path": "sonic3k.s",
+        "first_line": 1419,
+        "last_line": 1836,
+        "sha256": "10081c19ce6a6db05823d37d81e7380caa97251725b0df9eec0b606568d9990c"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 6706,
+          "end": 7448
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 6706,
+          "end": 7448
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/compression/sk/nemesis.s",
+      "owner": "rendering/compression/sk",
+      "responsibility": "Complete Nemesis tile decompressor and its code-table construction.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 224,
+      "origin": {
+        "commit": "406dd409844defcd68512edc13fd0b1bf94eaf49",
+        "path": "sonic3k.s",
+        "first_line": 665,
+        "last_line": 886,
+        "sha256": "8b744451d82cd0fc50aa827d9d36b155ac3fd26e4857690ad425eb7a200f6dda"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "The complete named subsystem is smaller than the target range. Keep its state, helper routines and interface together without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 5562,
+          "end": 5882
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 5562,
+          "end": 5882
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/compression/sk/nemesis_queue.s",
+      "owner": "rendering/compression/sk",
+      "responsibility": "Pattern load request insertion, immediate loading and incremental Nemesis processing.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 270,
+      "origin": {
+        "commit": "406dd409844defcd68512edc13fd0b1bf94eaf49",
+        "path": "sonic3k.s",
+        "first_line": 887,
+        "last_line": 1154,
+        "sha256": "952b9f45b6d23aa683f951cda8a9751b85639d88219ebded33275fb9ae699b44"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "The complete named subsystem is smaller than the target range. Keep its state, helper routines and interface together without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 5882,
+          "end": 6324
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 5882,
+          "end": 6324
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/s3/vram_dma.s",
+      "owner": "rendering/s3",
+      "responsibility": "Plane-map transfer and DMA queue insertion and dispatch.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 137,
+      "origin": {
+        "commit": "406dd409844defcd68512edc13fd0b1bf94eaf49",
+        "path": "s3.s",
+        "first_line": 533,
+        "last_line": 667,
+        "sha256": "dc2af555c67d3e98dd04425b1cdb70fd552a6c5fcf945e7043cf2e053c1489a7"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "The complete named subsystem is smaller than the target range. Keep its state, helper routines and interface together without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 6000,
+          "end": 6212
+        },
+        {
+          "profile": "s3-eu",
+          "start": 6000,
+          "end": 6212
+        },
+        {
+          "profile": "s3-jp",
+          "start": 6000,
+          "end": 6212
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2103152,
+          "end": 2103364
+        }
+      ]
+    },
+    {
       "path": "src/rendering/shared/palettes/palette_pointers.s",
       "owner": "rendering/shared/palettes",
       "responsibility": "Assembler data for Levels/Misc/Palette pointers",
@@ -23104,6 +23539,41 @@
       ],
       "applicability": "emitted",
       "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/rendering/sk/vram_dma.s",
+      "owner": "rendering/sk",
+      "responsibility": "Plane-map transfer and DMA queue insertion and dispatch.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 138,
+      "origin": {
+        "commit": "406dd409844defcd68512edc13fd0b1bf94eaf49",
+        "path": "sonic3k.s",
+        "first_line": 529,
+        "last_line": 664,
+        "sha256": "414bb10f3cabfd089c90628b58e433c441dda6e8486c022d4d97f1044a4103e5"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "The complete named subsystem is smaller than the target range. Keep its state, helper routines and interface together without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 5350,
+          "end": 5562
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 5350,
+          "end": 5562
+        }
+      ]
     },
     {
       "path": "src/system/debug/shared/debug_list_pointers.s",
@@ -24922,6 +25392,96 @@
       ]
     },
     {
+      "path": "src/system/s3/device_services.s",
+      "owner": "system/s3",
+      "responsibility": "Controller and VDP initialization, display clearing, Z80 driver loading and audio command interface.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 255,
+      "origin": {
+        "commit": "406dd409844defcd68512edc13fd0b1bf94eaf49",
+        "path": "s3.s",
+        "first_line": 204,
+        "last_line": 456,
+        "sha256": "2b2aa6a84e9d93c33df472234067733317ff5f168aa8225e9a0575826d410323"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "The complete named subsystem is smaller than the target range. Keep its state, helper routines and interface together without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 4928,
+          "end": 5742
+        },
+        {
+          "profile": "s3-eu",
+          "start": 4928,
+          "end": 5742
+        },
+        {
+          "profile": "s3-jp",
+          "start": 4928,
+          "end": 5742
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2102080,
+          "end": 2102894
+        }
+      ]
+    },
+    {
+      "path": "src/system/s3/horizontal_interrupts.s",
+      "owner": "system/s3",
+      "responsibility": "Complete alternate horizontal water palette interrupt handlers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 202,
+      "origin": {
+        "commit": "406dd409844defcd68512edc13fd0b1bf94eaf49",
+        "path": "s3.s",
+        "first_line": 4,
+        "last_line": 203,
+        "sha256": "f4f270b015e85af796670a5aa5b2270ef0cf74530802976eb05829c7378cb472"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "The complete named subsystem is smaller than the target range. Keep its state, helper routines and interface together without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 4350,
+          "end": 4928
+        },
+        {
+          "profile": "s3-eu",
+          "start": 4350,
+          "end": 4928
+        },
+        {
+          "profile": "s3-jp",
+          "start": 4350,
+          "end": 4928
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2101502,
+          "end": 2102080
+        }
+      ]
+    },
+    {
       "path": "src/system/s3/video_interrupts.s",
       "owner": "system/s3",
       "responsibility": "Vertical interrupt scheduling, display update dispatch and the primary horizontal water interrupt handlers.",
@@ -24988,6 +25548,76 @@
           "component": "sk",
           "start": 0,
           "end": 1412
+        }
+      ]
+    },
+    {
+      "path": "src/system/sk/device_services.s",
+      "owner": "system/sk",
+      "responsibility": "Controller and VDP initialization, display clearing, Z80 driver loading and audio command interface.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 247,
+      "origin": {
+        "commit": "406dd409844defcd68512edc13fd0b1bf94eaf49",
+        "path": "sonic3k.s",
+        "first_line": 204,
+        "last_line": 448,
+        "sha256": "3e55c0293ccdc4d487ed8ac01b290c2a020daaf02329850201f063caf02db4fc"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "The complete named subsystem is smaller than the target range. Keep its state, helper routines and interface together without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 4270,
+          "end": 5092
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 4270,
+          "end": 5092
+        }
+      ]
+    },
+    {
+      "path": "src/system/sk/horizontal_interrupts.s",
+      "owner": "system/sk",
+      "responsibility": "Complete alternate horizontal water palette interrupt handlers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 202,
+      "origin": {
+        "commit": "406dd409844defcd68512edc13fd0b1bf94eaf49",
+        "path": "sonic3k.s",
+        "first_line": 4,
+        "last_line": 203,
+        "sha256": "f4f270b015e85af796670a5aa5b2270ef0cf74530802976eb05829c7378cb472"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "The complete named subsystem is smaller than the target range. Keep its state, helper routines and interface together without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 3692,
+          "end": 4270
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 3692,
+          "end": 4270
         }
       ]
     },

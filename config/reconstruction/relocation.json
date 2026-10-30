@@ -5,24 +5,76 @@
     "Lockon S3/Screen Events.s",
     "s3.s",
     "sonic3k.s",
+    "src/game/modes/s3/pause.s",
+    "src/game/modes/sk/pause.s",
+    "src/rendering/compression/s3/enigma.s",
+    "src/rendering/compression/s3/kosinski_streaming.s",
+    "src/rendering/compression/s3/nemesis.s",
+    "src/rendering/compression/s3/nemesis_queue.s",
+    "src/rendering/compression/sk/enigma.s",
+    "src/rendering/compression/sk/kosinski_streaming.s",
+    "src/rendering/compression/sk/nemesis.s",
+    "src/rendering/compression/sk/nemesis_queue.s",
+    "src/rendering/s3/vram_dma.s",
+    "src/rendering/sk/vram_dma.s",
     "src/system/s3/bootstrap.s",
+    "src/system/s3/device_services.s",
+    "src/system/s3/horizontal_interrupts.s",
     "src/system/s3/video_interrupts.s",
     "src/system/sk/bootstrap.s",
+    "src/system/sk/device_services.s",
+    "src/system/sk/horizontal_interrupts.s",
     "src/system/sk/video_interrupts.s"
   ],
   "engines": {
     "s3-us": {
-      "sources": ["s3.s", "src/system/s3/bootstrap.s", "src/system/s3/video_interrupts.s"],
+      "sources": [
+        "s3.s",
+        "src/system/s3/bootstrap.s",
+        "src/system/s3/video_interrupts.s",
+        "src/system/s3/horizontal_interrupts.s",
+        "src/system/s3/device_services.s",
+        "src/game/modes/s3/pause.s",
+        "src/rendering/s3/vram_dma.s",
+        "src/rendering/compression/s3/nemesis.s",
+        "src/rendering/compression/s3/nemesis_queue.s",
+        "src/rendering/compression/s3/enigma.s",
+        "src/rendering/compression/s3/kosinski_streaming.s"
+      ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/s3/bootstrap.s"
     },
     "s3-eu": {
-      "sources": ["s3.s", "src/system/s3/bootstrap.s", "src/system/s3/video_interrupts.s"],
+      "sources": [
+        "s3.s",
+        "src/system/s3/bootstrap.s",
+        "src/system/s3/video_interrupts.s",
+        "src/system/s3/horizontal_interrupts.s",
+        "src/system/s3/device_services.s",
+        "src/game/modes/s3/pause.s",
+        "src/rendering/s3/vram_dma.s",
+        "src/rendering/compression/s3/nemesis.s",
+        "src/rendering/compression/s3/nemesis_queue.s",
+        "src/rendering/compression/s3/enigma.s",
+        "src/rendering/compression/s3/kosinski_streaming.s"
+      ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/s3/bootstrap.s"
     },
     "s3-jp": {
-      "sources": ["s3.s", "src/system/s3/bootstrap.s", "src/system/s3/video_interrupts.s"],
+      "sources": [
+        "s3.s",
+        "src/system/s3/bootstrap.s",
+        "src/system/s3/video_interrupts.s",
+        "src/system/s3/horizontal_interrupts.s",
+        "src/system/s3/device_services.s",
+        "src/game/modes/s3/pause.s",
+        "src/rendering/s3/vram_dma.s",
+        "src/rendering/compression/s3/nemesis.s",
+        "src/rendering/compression/s3/nemesis_queue.s",
+        "src/rendering/compression/s3/enigma.s",
+        "src/rendering/compression/s3/kosinski_streaming.s"
+      ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/s3/bootstrap.s"
     },
@@ -31,7 +83,15 @@
         "sonic3k.s",
         "Lockon S3/Screen Events.s",
         "src/system/sk/bootstrap.s",
-        "src/system/sk/video_interrupts.s"
+        "src/system/sk/video_interrupts.s",
+        "src/system/sk/horizontal_interrupts.s",
+        "src/system/sk/device_services.s",
+        "src/game/modes/sk/pause.s",
+        "src/rendering/sk/vram_dma.s",
+        "src/rendering/compression/sk/nemesis.s",
+        "src/rendering/compression/sk/nemesis_queue.s",
+        "src/rendering/compression/sk/enigma.s",
+        "src/rendering/compression/sk/kosinski_streaming.s"
       ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/sk/bootstrap.s"

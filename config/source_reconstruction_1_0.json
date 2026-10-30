@@ -508,6 +508,12 @@
       "commits": ["311352b95436c810fb897541f11a169c69104fe0"]
     },
     {
+      "id": "change-406dd409844d",
+      "kind": "source_or_tooling",
+      "summary": "Extract sibling bootstrap and primary video interrupt modules",
+      "commits": ["406dd409844defcd68512edc13fd0b1bf94eaf49"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",
