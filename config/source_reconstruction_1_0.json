@@ -562,6 +562,12 @@
       "commits": ["becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866"]
     },
     {
+      "id": "change-82531d7389a6",
+      "kind": "source_or_tooling",
+      "summary": "Organize Tails companion AI, flight and display families",
+      "commits": ["82531d7389a6c4d2dad09fdb6c482c351281095b"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",

@@ -87,6 +87,15 @@
     "src/objects/players/common/sk/damage_and_respawn.s",
     "src/objects/players/common/sk/slope_physics.s",
     "src/objects/players/common/sk/transformation_and_spindash.s",
+    "src/objects/players/knuckles/sk/animation_and_patterns.s",
+    "src/objects/players/knuckles/sk/damage_and_respawn.s",
+    "src/objects/players/knuckles/sk/environment_and_modes.s",
+    "src/objects/players/knuckles/sk/glide_and_climbing.s",
+    "src/objects/players/knuckles/sk/glide_motion.s",
+    "src/objects/players/knuckles/sk/ground_movement.s",
+    "src/objects/players/knuckles/sk/jump_actions.s",
+    "src/objects/players/knuckles/sk/lifecycle.s",
+    "src/objects/players/knuckles/sk/rolling_and_air_steering.s",
     "src/objects/players/sonic/s3/animation_and_patterns.s",
     "src/objects/players/sonic/s3/competition_player.s",
     "src/objects/players/sonic/s3/environment_and_modes.s",
@@ -138,6 +147,8 @@
     "src/objects/rings/sk/ring_rendering.s",
     "src/objects/rings/sk/ring_runtime.s",
     "src/objects/zones/cnz/s3/legacy_bumpers.s",
+    "src/objects/zones/mgz/s3/boss_transition.s",
+    "src/objects/zones/mgz/sk/boss_transition.s",
     "src/rendering/compression/s3/enigma.s",
     "src/rendering/compression/s3/kosinski_streaming.s",
     "src/rendering/compression/s3/nemesis.s",
@@ -253,7 +264,8 @@
         "src/objects/players/tails/s3/terrain_landing.s",
         "src/objects/players/tails/s3/damage_and_respawn.s",
         "src/objects/players/tails/s3/animation_and_patterns.s",
-        "src/objects/players/tails/s3/competition_and_tail_display.s"
+        "src/objects/players/tails/s3/competition_and_tail_display.s",
+        "src/objects/zones/mgz/s3/boss_transition.s"
       ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/s3/bootstrap.s"
@@ -341,7 +353,8 @@
         "src/objects/players/tails/s3/terrain_landing.s",
         "src/objects/players/tails/s3/damage_and_respawn.s",
         "src/objects/players/tails/s3/animation_and_patterns.s",
-        "src/objects/players/tails/s3/competition_and_tail_display.s"
+        "src/objects/players/tails/s3/competition_and_tail_display.s",
+        "src/objects/zones/mgz/s3/boss_transition.s"
       ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/s3/bootstrap.s"
@@ -429,7 +442,8 @@
         "src/objects/players/tails/s3/terrain_landing.s",
         "src/objects/players/tails/s3/damage_and_respawn.s",
         "src/objects/players/tails/s3/animation_and_patterns.s",
-        "src/objects/players/tails/s3/competition_and_tail_display.s"
+        "src/objects/players/tails/s3/competition_and_tail_display.s",
+        "src/objects/zones/mgz/s3/boss_transition.s"
       ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/s3/bootstrap.s"
@@ -519,7 +533,17 @@
         "src/objects/players/tails/sk/terrain_landing.s",
         "src/objects/players/tails/sk/damage_and_respawn.s",
         "src/objects/players/tails/sk/animation_and_patterns.s",
-        "src/objects/players/tails/sk/competition_and_tail_display.s"
+        "src/objects/players/tails/sk/competition_and_tail_display.s",
+        "src/objects/zones/mgz/sk/boss_transition.s",
+        "src/objects/players/knuckles/sk/lifecycle.s",
+        "src/objects/players/knuckles/sk/environment_and_modes.s",
+        "src/objects/players/knuckles/sk/glide_and_climbing.s",
+        "src/objects/players/knuckles/sk/glide_motion.s",
+        "src/objects/players/knuckles/sk/ground_movement.s",
+        "src/objects/players/knuckles/sk/rolling_and_air_steering.s",
+        "src/objects/players/knuckles/sk/jump_actions.s",
+        "src/objects/players/knuckles/sk/damage_and_respawn.s",
+        "src/objects/players/knuckles/sk/animation_and_patterns.s"
       ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/sk/bootstrap.s"
