@@ -100,6 +100,14 @@ check-audio-binding:
 check-release-metadata:
 	$(PYTHON) -m scripts.run validation.release metadata
 
+.PHONY: check-source-layout source-layout-inventory
+
+check-source-layout:
+	$(PYTHON) -m scripts.run validation.source_layout
+
+source-layout-inventory:
+	$(PYTHON) -m scripts.run validation.source_layout --inventory
+
 .PHONY: check-driver-audio check-driver-audio-storage
 
 check-driver-audio:

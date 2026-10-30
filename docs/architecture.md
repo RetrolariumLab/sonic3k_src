@@ -18,13 +18,14 @@ similar names do not prove identical implementations.
 
 ## Graphics and level content
 
-`General/` owns common UI, player and object assets; `Levels/` groups content by
-zone. Source tables retain mappings, DPLC, animation and other assembler-owned
-structures beside their original content owners. The binary payloads named by
-those includes are extracted under the corresponding paths in `data/`. Nemesis,
-Kosinski, moduled Kosinski and Enigma decoders remain executable source. The
-asset manifest identifies storage ranges; it is not yet a full editable
-format/capacity contract.
+`src/` places common UI, player, object, zone and debugging data under their
+semantic owners. Source tables retain mappings, DPLC, animation and other
+assembler-owned structures. `docs/source_layout.md` describes the checked
+ownership registry and the remaining executable extraction. The binary payloads
+named by those includes are extracted under the corresponding paths in `data/`.
+Nemesis, Kosinski, moduled Kosinski and Enigma decoders remain executable
+source. The asset manifest identifies storage ranges; it is not yet a full
+editable format/capacity contract.
 
 ## Audio
 

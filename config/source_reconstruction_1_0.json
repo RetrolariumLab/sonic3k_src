@@ -7,7 +7,7 @@
   },
   "release_kind": "preservation",
   "tag": "source-reconstruction-1.0",
-  "status": "tag-ready",
+  "status": "development",
   "predecessor": null,
   "predecessor_note": "First preservation release line; tags are maintainer actions.",
   "reference": {
@@ -494,6 +494,12 @@
       "kind": "source_or_tooling",
       "summary": "Record verified controls before complete release acceptance",
       "commits": ["aaed5295fa40a3c6547a2161f20d37af546f7b63"]
+    },
+    {
+      "id": "change-09ca77790fb4",
+      "kind": "source_or_tooling",
+      "summary": "Record the verified preservation milestone before semantic source work",
+      "commits": ["09ca77790fb4b66ca4f16224dbab249942145dfc"]
     },
     {
       "id": "current-source-stage",

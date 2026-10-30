@@ -10,10 +10,9 @@
       "sonic3k.constants.s",
       "sonic3k.macros.s",
       "sonic3k.macrosetup.s",
-      "General",
-      "Levels",
       "Sound",
-      "Lockon S3"
+      "Lockon S3",
+      "src"
     ]
   },
   "text": {
