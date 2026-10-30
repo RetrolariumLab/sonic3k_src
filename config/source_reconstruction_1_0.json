@@ -502,6 +502,12 @@
       "commits": ["09ca77790fb4b66ca4f16224dbab249942145dfc"]
     },
     {
+      "id": "change-311352b95436",
+      "kind": "source_or_tooling",
+      "summary": "Move assembler data into checked semantic owners",
+      "commits": ["311352b95436c810fb897541f11a169c69104fe0"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",

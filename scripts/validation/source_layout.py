@@ -92,7 +92,7 @@ def check_ranges(rows):
     owned = {
         r["path"]: r
         for r in rows
-        if r["status"] == "owned" and r["role"] == "data" and r.get("address_space", "cartridge-rom") == "cartridge-rom"
+        if r["status"] == "owned" and r.get("address_space", "cartridge-rom") == "cartridge-rom"
     }
     actual = {name: [] for name in owned}
     registry = profiles()

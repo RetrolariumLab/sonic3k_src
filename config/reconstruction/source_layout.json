@@ -840,7 +840,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 117921,
+      "physical_lines": 116703,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "s3.s",
@@ -900,7 +900,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 201113,
+      "physical_lines": 200067,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -24880,6 +24880,146 @@
       ],
       "applicability": "emitted",
       "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/system/s3/bootstrap.s",
+      "owner": "system/s3",
+      "responsibility": "Cartridge vectors and header, hardware startup, cartridge validation and initial game-mode dispatch.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 689,
+      "origin": {
+        "commit": "311352b95436c810fb897541f11a169c69104fe0",
+        "path": "s3.s",
+        "first_line": 1,
+        "last_line": 687,
+        "sha256": "1f34716de330a4b25cf8feca37691317149e1781a6f0b1890d23cb772647b18f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 0,
+          "end": 2050
+        },
+        {
+          "profile": "s3-eu",
+          "start": 0,
+          "end": 2050
+        },
+        {
+          "profile": "s3-jp",
+          "start": 0,
+          "end": 2050
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2097152,
+          "end": 2099202
+        }
+      ]
+    },
+    {
+      "path": "src/system/s3/video_interrupts.s",
+      "owner": "system/s3",
+      "responsibility": "Vertical interrupt scheduling, display update dispatch and the primary horizontal water interrupt handlers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 536,
+      "origin": {
+        "commit": "311352b95436c810fb897541f11a169c69104fe0",
+        "path": "s3.s",
+        "first_line": 688,
+        "last_line": 1221,
+        "sha256": "05c73cffdad60b04cf979f72904750887ffb445e342d7bc86d7e73cf66fca9f1"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 2050,
+          "end": 4350
+        },
+        {
+          "profile": "s3-eu",
+          "start": 2050,
+          "end": 4350
+        },
+        {
+          "profile": "s3-jp",
+          "start": 2050,
+          "end": 4350
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2099202,
+          "end": 2101502
+        }
+      ]
+    },
+    {
+      "path": "src/system/sk/bootstrap.s",
+      "owner": "system/sk",
+      "responsibility": "Cartridge vectors and header, hardware startup, cartridge validation and initial game-mode dispatch.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 499,
+      "origin": {
+        "commit": "311352b95436c810fb897541f11a169c69104fe0",
+        "path": "sonic3k.s",
+        "first_line": 1,
+        "last_line": 497,
+        "sha256": "6210ba893a0b4d6afb7775078cdf92c8f7aa6dd2eb63b292cb162a3dc1a06d35"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 0,
+          "end": 1412
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 0,
+          "end": 1412
+        }
+      ]
+    },
+    {
+      "path": "src/system/sk/video_interrupts.s",
+      "owner": "system/sk",
+      "responsibility": "Vertical interrupt scheduling, display update dispatch and the primary horizontal water interrupt handlers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 554,
+      "origin": {
+        "commit": "311352b95436c810fb897541f11a169c69104fe0",
+        "path": "sonic3k.s",
+        "first_line": 498,
+        "last_line": 1049,
+        "sha256": "f5241037421ef4b56fc84bae748606f43ae35d3a82a5a1c06ce6fb1be58e3c3d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 1412,
+          "end": 3692
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1412,
+          "end": 3692
+        }
+      ]
     },
     {
       "path": "src/ui/shared/competition_menu/map_competition_objects.s",

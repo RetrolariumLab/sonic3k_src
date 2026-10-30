@@ -5,14 +5,15 @@ responsibility, physical line count and source range at the preservation
 baseline. Owned data lives under `src/objects`, `src/rendering`, `src/ui`,
 `src/game` and `src/system/debug`. Engine-specific code remains separate.
 
-This registry is intentionally incomplete during extraction: 667 data units have
-owners and 60 units still await semantic extraction. Run
+This registry is intentionally incomplete during extraction: 667 data units and
+four sibling bootstrap/interrupt units have owners. The 60 remaining entry,
+driver, memory and macro units still await complete semantic extraction. Run
 `make source-layout-inventory` for that distinction. `make check-source-layout`
 rejects pending entries and cannot certify this intermediate tree as 2.0.
 
-Every owned cartridge data unit has independently checked normal-build ROM
-ranges, including the applicable component and offset in the lock-on image.
-After an all-profile build, run
+Every owned cartridge unit has independently checked normal-build ROM ranges,
+including the applicable component and offset in the lock-on image. After an
+all-profile build, run
 `python -m scripts.run validation.source_layout --inventory --built` to compare
 these ranges with AS include-depth records and the current source binding. Macro
 expansion records do not close their containing file's interval.

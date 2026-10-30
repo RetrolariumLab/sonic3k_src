@@ -137,3 +137,21 @@ class MatrixCoverageTests(unittest.TestCase):
         for value in variants:
             with self.subTest(value=value), self.assertRaises(ValueError):
                 check_coverage(self.plan, value, ["us", "eu"])
+
+
+class GeneratedSourceTests(unittest.TestCase):
+    def test_removed_include_cannot_survive_in_relocation_work(self):
+        import tempfile
+        from pathlib import Path
+        from scripts.build.relocation import prune_source
+
+        with tempfile.TemporaryDirectory() as folder:
+            work = Path(folder)
+            (work / "src").mkdir()
+            (work / "src/kept.s").write_text("rts")
+            (work / "removed.s").write_text("rts")
+            (work / "notes.txt").write_text("retained research note")
+            prune_source(work, ["src/kept.s"])
+            self.assertTrue((work / "src/kept.s").exists())
+            self.assertFalse((work / "removed.s").exists())
+            self.assertTrue((work / "notes.txt").exists())

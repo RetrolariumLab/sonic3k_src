@@ -91,7 +91,10 @@ def fixed_names(profile):
 
 
 def rendered_fingerprint(policy, plan, group, names, widenings):
-    anchors = {profiles()[key]["entry"]: engine["startup_label"] for key, engine in policy["engines"].items()}
+    anchors = {
+        engine.get("startup_source", profiles()[key]["entry"]): engine["startup_label"]
+        for key, engine in policy["engines"].items()
+    }
     chosen = selected(plan, group)
     digestor = hashlib.sha256()
     for name in sorted(
@@ -159,9 +162,26 @@ def baseline(policy, plan):
     return result
 
 
+def prune_source(work, names):
+    """Discard only obsolete AS inputs beneath the checked generated-source root."""
+    allowed = set(names)
+    work = work.resolve()
+    for path in work.rglob("*"):
+        if path.suffix not in (".s", ".inc"):
+            continue
+        if path.is_symlink() or not path.resolve().is_relative_to(work):
+            raise ValueError("Generated source escapes its work directory")
+        if path.is_file() and path.relative_to(work).as_posix() not in allowed:
+            path.unlink()
+
+
 def prepare_source(policy, plan, group, names):
     work = inside("work/source", DEST)
-    anchors = {profiles()[key]["entry"]: engine["startup_label"] for key, engine in policy["engines"].items()}
+    prune_source(work, names)
+    anchors = {
+        engine.get("startup_source", profiles()[key]["entry"]): engine["startup_label"]
+        for key, engine in policy["engines"].items()
+    }
     chosen = selected(plan, group)
     for name in names:
         text = (ROOT / name).read_text(encoding="utf-8")

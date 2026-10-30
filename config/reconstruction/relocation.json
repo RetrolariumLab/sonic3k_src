@@ -1,23 +1,40 @@
 {
   "schema_version": 1,
   "groups": 32,
-  "code_sources": ["s3.s", "sonic3k.s", "Lockon S3/Screen Events.s"],
+  "code_sources": [
+    "Lockon S3/Screen Events.s",
+    "s3.s",
+    "sonic3k.s",
+    "src/system/s3/bootstrap.s",
+    "src/system/s3/video_interrupts.s",
+    "src/system/sk/bootstrap.s",
+    "src/system/sk/video_interrupts.s"
+  ],
   "engines": {
     "s3-us": {
-      "sources": ["s3.s"],
-      "startup_label": "ErrorTrap"
+      "sources": ["s3.s", "src/system/s3/bootstrap.s", "src/system/s3/video_interrupts.s"],
+      "startup_label": "ErrorTrap",
+      "startup_source": "src/system/s3/bootstrap.s"
     },
     "s3-eu": {
-      "sources": ["s3.s"],
-      "startup_label": "ErrorTrap"
+      "sources": ["s3.s", "src/system/s3/bootstrap.s", "src/system/s3/video_interrupts.s"],
+      "startup_label": "ErrorTrap",
+      "startup_source": "src/system/s3/bootstrap.s"
     },
     "s3-jp": {
-      "sources": ["s3.s"],
-      "startup_label": "ErrorTrap"
+      "sources": ["s3.s", "src/system/s3/bootstrap.s", "src/system/s3/video_interrupts.s"],
+      "startup_label": "ErrorTrap",
+      "startup_source": "src/system/s3/bootstrap.s"
     },
     "sk": {
-      "sources": ["sonic3k.s", "Lockon S3/Screen Events.s"],
-      "startup_label": "ErrorTrap"
+      "sources": [
+        "sonic3k.s",
+        "Lockon S3/Screen Events.s",
+        "src/system/sk/bootstrap.s",
+        "src/system/sk/video_interrupts.s"
+      ],
+      "startup_label": "ErrorTrap",
+      "startup_source": "src/system/sk/bootstrap.s"
     }
   },
   "composites": {

@@ -6,8 +6,10 @@
 macro definitions and much of the memory description, but remain independent
 programs with their own object, level and game-mode behavior. S3 applies
 `s3.constants.s` after the common `sonic3k.constants.s` declarations where its
-RAM layout differs. Source still has large imported entry units; subsystem
-extraction is pending and must preserve instruction/data order and label scope.
+RAM layout differs. Bootstrap and primary video interrupts have separate owners
+under `src/system/s3` and `src/system/sk`. Large imported entry remainders still
+need subsystem extraction while preserving instruction/data order and label
+scope.
 
 Both entries begin with the vector table and cartridge header, then bootstrap
 through `EntryPoint`. `GameModes` dispatches the active mode; `VInt` and `HInt`
