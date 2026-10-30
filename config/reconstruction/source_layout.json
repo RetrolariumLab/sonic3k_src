@@ -840,7 +840,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 98720,
+      "physical_lines": 95044,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "s3.s",
@@ -900,7 +900,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 179751,
+      "physical_lines": 175635,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -5335,6 +5335,366 @@
       ]
     },
     {
+      "path": "src/objects/players/common/s3/competition_animation.s",
+      "owner": "objects/players/common/s3",
+      "responsibility": "Shared Sonic and Knuckles competition animation and compact dynamic pattern loading.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 294,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "s3.s",
+        "first_line": 2976,
+        "last_line": 3267,
+        "sha256": "e37e059f0ea74c82f9db136d28f2144a6a6f910cf8f2a4a8b073554e232aab3f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 80524,
+          "end": 81496
+        },
+        {
+          "profile": "s3-eu",
+          "start": 80524,
+          "end": 81496
+        },
+        {
+          "profile": "s3-jp",
+          "start": 80524,
+          "end": 81496
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2177676,
+          "end": 2178648
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/common/s3/damage_and_respawn.s",
+      "owner": "objects/players/common/s3",
+      "responsibility": "Existing shared player hurt, death, speed restoration, restart and animation dispatch state.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 265,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "s3.s",
+        "first_line": 2270,
+        "last_line": 2531,
+        "sha256": "875307512a0176dea42adcd64321b5cb5f76dab67221228178113e8230faf938"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 78146,
+          "end": 78924
+        },
+        {
+          "profile": "s3-eu",
+          "start": 78146,
+          "end": 78924
+        },
+        {
+          "profile": "s3-jp",
+          "start": 78146,
+          "end": 78924
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2175298,
+          "end": 2176076
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/common/s3/slope_physics.s",
+      "owner": "objects/players/common/s3",
+      "responsibility": "Shared slope resistance, rolling repulsion, slope detachment and airborne angle normalization.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 209,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "s3.s",
+        "first_line": 1754,
+        "last_line": 1959,
+        "sha256": "d34a618062a0ef4fd740189822b230d036ca95000f5e7b32869a39187718d144"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 77004,
+          "end": 77330
+        },
+        {
+          "profile": "s3-eu",
+          "start": 77004,
+          "end": 77330
+        },
+        {
+          "profile": "s3-jp",
+          "start": 77004,
+          "end": 77330
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2174156,
+          "end": 2174482
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/common/s3/transformation_and_spindash.s",
+      "owner": "objects/players/common/s3",
+      "responsibility": "Existing shared transformation state and Sonic or Knuckles spindash logic, including product-specific Tails super handling.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 206,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "s3.s",
+        "first_line": 1551,
+        "last_line": 1753,
+        "sha256": "f1d2f8795a4a4f24626c70b7c805ff17714216a0745526288243a9bf2ea706fb"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 76422,
+          "end": 77004
+        },
+        {
+          "profile": "s3-eu",
+          "start": 76422,
+          "end": 77004
+        },
+        {
+          "profile": "s3-jp",
+          "start": 76422,
+          "end": 77004
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2173574,
+          "end": 2174156
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/common/sk/competition_animation.s",
+      "owner": "objects/players/common/sk",
+      "responsibility": "Shared Sonic and Knuckles competition animation and compact dynamic pattern loading.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 294,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "sonic3k.s",
+        "first_line": 3417,
+        "last_line": 3708,
+        "sha256": "c8f481fb586ab3cfaff6ce356d4797b704c8326bfd6a8ec4e8629233c3aac5dd"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 77110,
+          "end": 78082
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 77110,
+          "end": 78082
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/common/sk/damage_and_respawn.s",
+      "owner": "objects/players/common/sk",
+      "responsibility": "Existing shared player hurt, death, speed restoration, restart and animation dispatch state.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 292,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "sonic3k.s",
+        "first_line": 2591,
+        "last_line": 2879,
+        "sha256": "7fa91a66ee00718ed2491d569abf7ead77f306ec8f595cde62ae91f59c4b1d91"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 74430,
+          "end": 75264
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 74430,
+          "end": 75264
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/common/sk/slope_physics.s",
+      "owner": "objects/players/common/sk",
+      "responsibility": "Shared slope resistance, rolling repulsion, slope detachment and airborne angle normalization.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 209,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "sonic3k.s",
+        "first_line": 1988,
+        "last_line": 2193,
+        "sha256": "a35530b1d08407dc11f6514e3302864b2b5b22dd1c3973404b640cbab8e36bb6"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 73126,
+          "end": 73452
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 73126,
+          "end": 73452
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/common/sk/transformation_and_spindash.s",
+      "owner": "objects/players/common/sk",
+      "responsibility": "Existing shared transformation state and Sonic or Knuckles spindash logic, including product-specific Tails super handling.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 241,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "sonic3k.s",
+        "first_line": 1750,
+        "last_line": 1987,
+        "sha256": "97da832c54846747485241fd41a14911f3505381a0fec41f917442e031423cae"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 72486,
+          "end": 73126
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 72486,
+          "end": 73126
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/sonic/s3/animation_and_patterns.s",
+      "owner": "objects/players/sonic/s3",
+      "responsibility": "Sonic animation selection, dynamic pattern loading and the common player DPLC dispatch interface.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 446,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "s3.s",
+        "first_line": 2532,
+        "last_line": 2975,
+        "sha256": "6993a2fb0b4013735d3765a92580ba76fd4d6bee93ffea6cd2f70a6545fc37f9"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 78924,
+          "end": 80524
+        },
+        {
+          "profile": "s3-eu",
+          "start": 78924,
+          "end": 80524
+        },
+        {
+          "profile": "s3-jp",
+          "start": 78924,
+          "end": 80524
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2176076,
+          "end": 2177676
+        }
+      ]
+    },
+    {
       "path": "src/objects/players/sonic/s3/competition_player.s",
       "owner": "objects/players/sonic/s3",
       "responsibility": "Competition Sonic object dispatch, player initialization and shared two-player movement helpers.",
@@ -5375,6 +5735,286 @@
       ]
     },
     {
+      "path": "src/objects/players/sonic/s3/environment_and_modes.s",
+      "owner": "objects/players/sonic/s3",
+      "responsibility": "Sonic water transitions and ground, air, rolling and jumping mode dispatch.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 189,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "s3.s",
+        "first_line": 395,
+        "last_line": 580,
+        "sha256": "7a5539009d1ba2d9a8d35a299957c555f43837f4dea7f9509f20d969905e7cf8"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 73516,
+          "end": 74012
+        },
+        {
+          "profile": "s3-eu",
+          "start": 73516,
+          "end": 74012
+        },
+        {
+          "profile": "s3-jp",
+          "start": 73516,
+          "end": 74012
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2170668,
+          "end": 2171164
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/sonic/s3/ground_movement.s",
+      "owner": "objects/players/sonic/s3",
+      "responsibility": "Sonic ground acceleration, balance, braking and horizontal movement helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 454,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "s3.s",
+        "first_line": 581,
+        "last_line": 1031,
+        "sha256": "d8a5058c97519794dbb6fc8e3be3830385e6a671e9a5cce40590126bd18a8b25"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 74012,
+          "end": 75154
+        },
+        {
+          "profile": "s3-eu",
+          "start": 74012,
+          "end": 75154
+        },
+        {
+          "profile": "s3-jp",
+          "start": 74012,
+          "end": 75154
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2171164,
+          "end": 2172306
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/sonic/s3/jump_actions.s",
+      "owner": "objects/players/sonic/s3",
+      "responsibility": "Player level bounds, rolling initiation, jump launch, jump height and shield or hyper jump actions with private direction data.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 299,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "s3.s",
+        "first_line": 1254,
+        "last_line": 1550,
+        "sha256": "102f208707df27c438b39e68febdc47080a8e3d2500bae4d66986f7beafc27ef"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 75598,
+          "end": 76422
+        },
+        {
+          "profile": "s3-eu",
+          "start": 75598,
+          "end": 76422
+        },
+        {
+          "profile": "s3-jp",
+          "start": 75598,
+          "end": 76422
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2172750,
+          "end": 2173574
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/sonic/s3/lifecycle.s",
+      "owner": "objects/players/sonic/s3",
+      "responsibility": "Sonic object dispatch, initialization, active control, timed powers and player position history.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 331,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "s3.s",
+        "first_line": 67,
+        "last_line": 394,
+        "sha256": "e5527b38bbbe9cdf655f6881ee7e53a819ce5f01bc9655f208f6db49ccbbbdcd"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 72632,
+          "end": 73516
+        },
+        {
+          "profile": "s3-eu",
+          "start": 72632,
+          "end": 73516
+        },
+        {
+          "profile": "s3-jp",
+          "start": 72632,
+          "end": 73516
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2169784,
+          "end": 2170668
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/sonic/s3/rolling_and_air_steering.s",
+      "owner": "objects/players/sonic/s3",
+      "responsibility": "Sonic rolling speed control, airborne direction changes and jump peak deceleration.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 225,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "s3.s",
+        "first_line": 1032,
+        "last_line": 1253,
+        "sha256": "43ab90af3f5d952bdbc03d589cfd69a617dfb0d86163469040670a705e0a1824"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 75154,
+          "end": 75598
+        },
+        {
+          "profile": "s3-eu",
+          "start": 75154,
+          "end": 75598
+        },
+        {
+          "profile": "s3-jp",
+          "start": 75154,
+          "end": 75598
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2172306,
+          "end": 2172750
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/sonic/s3/terrain_landing.s",
+      "owner": "objects/players/sonic/s3",
+      "responsibility": "Sonic or Knuckles terrain collision, landing attachment and bubble shield bounce response.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 313,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "s3.s",
+        "first_line": 1960,
+        "last_line": 2269,
+        "sha256": "8bec641723f8e563bd8d3652e7d8c9e1d339c3c142af15b4839ebb04047aa59e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 77330,
+          "end": 78146
+        },
+        {
+          "profile": "s3-eu",
+          "start": 77330,
+          "end": 78146
+        },
+        {
+          "profile": "s3-jp",
+          "start": 77330,
+          "end": 78146
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2174482,
+          "end": 2175298
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/sonic/sk/animation_and_patterns.s",
+      "owner": "objects/players/sonic/sk",
+      "responsibility": "Sonic animation selection, dynamic pattern loading and the common player DPLC dispatch interface.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 539,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "sonic3k.s",
+        "first_line": 2880,
+        "last_line": 3416,
+        "sha256": "2b1cd2c406604f7bc921ef378fc9d6c2a1fd23c5d92c13fc940f36805238fba2"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 75264,
+          "end": 77110
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 75264,
+          "end": 77110
+        }
+      ]
+    },
+    {
       "path": "src/objects/players/sonic/sk/competition_player.s",
       "owner": "objects/players/sonic/sk",
       "responsibility": "Competition Sonic object dispatch, player initialization and shared two-player movement helpers.",
@@ -5401,6 +6041,266 @@
           "component": "sk",
           "start": 67012,
           "end": 68244
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/sonic/sk/environment_and_modes.s",
+      "owner": "objects/players/sonic/sk",
+      "responsibility": "Sonic water transitions and ground, air, rolling and jumping mode dispatch.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 225,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "sonic3k.s",
+        "first_line": 407,
+        "last_line": 628,
+        "sha256": "bb06c2b158c1274601b31c3a8127c93959e10b833d82f0f28e8c144d78543e32"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 69158,
+          "end": 69728
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 69158,
+          "end": 69728
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/sonic/sk/ground_movement.s",
+      "owner": "objects/players/sonic/sk",
+      "responsibility": "Sonic ground acceleration, balance, braking and horizontal movement helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 485,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "sonic3k.s",
+        "first_line": 629,
+        "last_line": 1110,
+        "sha256": "106c4898d1281792cea2de1dd9ebb5a0e121f2503979190b90606a84ba8d7a7d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 69728,
+          "end": 70920
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 69728,
+          "end": 70920
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/sonic/sk/jump_actions.s",
+      "owner": "objects/players/sonic/sk",
+      "responsibility": "Player level bounds, rolling initiation, jump launch, jump height and shield or hyper jump actions with private direction data.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 404,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "sonic3k.s",
+        "first_line": 1348,
+        "last_line": 1749,
+        "sha256": "60eb9bf0e4d4cfe60c3e70597b758f38b80b1dbdfaa9a651db7cf6e64dd7efa0"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 71390,
+          "end": 72486
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 71390,
+          "end": 72486
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/sonic/sk/lifecycle.s",
+      "owner": "objects/players/sonic/sk",
+      "responsibility": "Sonic object dispatch, initialization, active control, timed powers and player position history.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 342,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "sonic3k.s",
+        "first_line": 68,
+        "last_line": 406,
+        "sha256": "60f0d79cb417aa94bccb23b3286d7744aaa2381c2ade9b2825617093651832a2"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 68244,
+          "end": 69158
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 68244,
+          "end": 69158
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/sonic/sk/rolling_and_air_steering.s",
+      "owner": "objects/players/sonic/sk",
+      "responsibility": "Sonic rolling speed control, airborne direction changes and jump peak deceleration.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 240,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "sonic3k.s",
+        "first_line": 1111,
+        "last_line": 1347,
+        "sha256": "adb6776c79c2a8afe93983b59d6e7312c59c016d6917d9845f4b6156667ad1cd"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 70920,
+          "end": 71390
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 70920,
+          "end": 71390
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/sonic/sk/terrain_landing.s",
+      "owner": "objects/players/sonic/sk",
+      "responsibility": "Sonic or Knuckles terrain collision, landing attachment and bubble shield bounce response.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 400,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "sonic3k.s",
+        "first_line": 2194,
+        "last_line": 2590,
+        "sha256": "04792d731c4cd6172058f1f053038c95e906ca9f5456197248afd580952d3a19"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 73452,
+          "end": 74430
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 73452,
+          "end": 74430
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/s3/competition_player.s",
+      "owner": "objects/players/tails/s3",
+      "responsibility": "Competition Tails object dispatch, active control, flying and two-player movement helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 489,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "s3.s",
+        "first_line": 3268,
+        "last_line": 3754,
+        "sha256": "b1bffe216880fbf1a8f37e8da059461b8b8c26008086fcae5b8f2b1fbf9c98ca"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 81496,
+          "end": 82866
+        },
+        {
+          "profile": "s3-eu",
+          "start": 81496,
+          "end": 82866
+        },
+        {
+          "profile": "s3-jp",
+          "start": 81496,
+          "end": 82866
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2178648,
+          "end": 2180018
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/tails/sk/competition_player.s",
+      "owner": "objects/players/tails/sk",
+      "responsibility": "Competition Tails object dispatch, active control, flying and two-player movement helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 489,
+      "origin": {
+        "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
+        "path": "sonic3k.s",
+        "first_line": 3709,
+        "last_line": 4195,
+        "sha256": "05618619d6faf4ba4ca0f4d71b8d801ee5cfc32818a269eaea575ac903623814"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 78082,
+          "end": 79452
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 78082,
+          "end": 79452
         }
       ]
     },
