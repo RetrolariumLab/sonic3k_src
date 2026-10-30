@@ -66,3 +66,17 @@ class DataIncludeTests(unittest.TestCase):
         for graph in ({"a": ["b"]}, {"a": ["b"], "b": ["a"]}, {"a": ["a"]}):
             with self.subTest(graph=graph), self.assertRaises(ValueError):
                 check_data_graph(graph)
+
+
+class DataEncodingContextTests(unittest.TestCase):
+    def test_save_text_owns_its_complete_encoding_context(self):
+        check_ledger(' save\n codepage LEVELSELECT\nText: dc.b "SAVE",$FF\n even\n restore\n')
+        for text in (
+            "restore\n",
+            "save\n dc.b 1\n",
+            "codepage LEVELSELECT\n",
+            "save\n codepage UNKNOWN\n restore\n",
+            "save\n cpu Z80\n restore\n",
+        ):
+            with self.subTest(text=text), self.assertRaises(ValueError):
+                check_ledger(text)

@@ -31,11 +31,22 @@ DATA_OPS = frozenset(
 def check_ledger(text, source_includes=(), binary_includes=()):
     dependencies = []
     depth = 0
+    state_depth = 0
     for line in text.splitlines():
         code = re.sub(r"^[A-Za-z_.][A-Za-z_0-9.]*:\s*", "", code_part(line).strip())
         if not code:
             continue
-        op = code.split()[0].lower()
+        parts = code.split(None, 1)
+        op = parts[0].lower()
+        if op in ("save", "restore", "codepage"):
+            if op == "codepage":
+                if not state_depth or len(parts) != 2 or parts[1] != "LEVELSELECT":
+                    raise ValueError("Data code page lacks a bounded known encoding context")
+            else:
+                state_depth += 1 if op == "save" else -1
+                if state_depth < 0:
+                    raise ValueError("Unbalanced data encoding restore")
+            continue
         if op in ("include", "binclude"):
             target = re.fullmatch(r'(?:include|binclude)\s+"([^"\r\n]+)"', code, re.I)
             accepted = source_includes if op == "include" else binary_includes
@@ -51,6 +62,8 @@ def check_ledger(text, source_includes=(), binary_includes=()):
             raise ValueError("Unbalanced data macro")
     if depth:
         raise ValueError("Unclosed data macro")
+    if state_depth:
+        raise ValueError("Unclosed data encoding context")
     return dependencies
 
 

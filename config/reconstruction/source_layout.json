@@ -840,7 +840,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 106638,
+      "physical_lines": 102561,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "s3.s",
@@ -900,7 +900,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 187968,
+      "physical_lines": 183314,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -2405,6 +2405,171 @@
       ]
     },
     {
+      "path": "src/game/modes/s3/competition_menu.s",
+      "owner": "game/modes/s3",
+      "responsibility": "Competition entry menu, shared menu objects, palette and menu-object mapping storage.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 269,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "s3.s",
+        "first_line": 42,
+        "last_line": 308,
+        "sha256": "8c1188367c604cfbaa7c15c2cdaac6fb310046d10edd7f8ce0c9915411af5f0f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 38192,
+          "end": 39420
+        },
+        {
+          "profile": "s3-eu",
+          "start": 38192,
+          "end": 39420
+        },
+        {
+          "profile": "s3-jp",
+          "start": 38192,
+          "end": 39420
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2135344,
+          "end": 2136572
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/s3/competition_player_selection.s",
+      "owner": "game/modes/s3",
+      "responsibility": "Competition character and player-count selection, animated character widgets and input prompts.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 381,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "s3.s",
+        "first_line": 910,
+        "last_line": 1288,
+        "sha256": "0af047de26db79a72c13ad450506bbeedf6f4f4de5cc05c6f8e7d5240bb94fc6"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 41316,
+          "end": 43412
+        },
+        {
+          "profile": "s3-eu",
+          "start": 41316,
+          "end": 43412
+        },
+        {
+          "profile": "s3-jp",
+          "start": 41316,
+          "end": 43412
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2138468,
+          "end": 2140564
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/s3/competition_results.s",
+      "owner": "game/modes/s3",
+      "responsibility": "Competition results initialization, win and loss displays, totals and results resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 418,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "s3.s",
+        "first_line": 1289,
+        "last_line": 1704,
+        "sha256": "153e8cc7d3196d248429875a768036b63556243fee1b59c6bbbd7a8d5618ea51"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 43412,
+          "end": 44832
+        },
+        {
+          "profile": "s3-eu",
+          "start": 43412,
+          "end": 44832
+        },
+        {
+          "profile": "s3-jp",
+          "start": 43412,
+          "end": 44832
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2140564,
+          "end": 2141984
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/s3/competition_zone_selection.s",
+      "owner": "game/modes/s3",
+      "responsibility": "Competition zone selection, completion display, menu controls and zone preview resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 603,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "s3.s",
+        "first_line": 309,
+        "last_line": 909,
+        "sha256": "91d409692d112b5a885685dbadc03740ac1ce8fc634c41cdf021b14f056df579"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 39420,
+          "end": 41316
+        },
+        {
+          "profile": "s3-eu",
+          "start": 39420,
+          "end": 41316
+        },
+        {
+          "profile": "s3-jp",
+          "start": 39420,
+          "end": 41316
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2136572,
+          "end": 2138468
+        }
+      ]
+    },
+    {
       "path": "src/game/modes/s3/legacy_competition_selection.s",
       "owner": "game/modes/s3",
       "responsibility": "Preserved Sonic 2 style competition selection, completion marks and menu text transfer.",
@@ -2610,6 +2775,256 @@
       ]
     },
     {
+      "path": "src/game/modes/s3/save_screen.s",
+      "owner": "game/modes/s3",
+      "responsibility": "Save selection mode initialization, active loop, navigation and product-specific save-slot presentation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 258,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "s3.s",
+        "first_line": 2406,
+        "last_line": 2660,
+        "sha256": "1dd7eaa3282ff49a70dbcf4a88f023d2299c33bb2b5335c1acd228cb42c40e9e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 47196,
+          "end": 48054
+        },
+        {
+          "profile": "s3-eu",
+          "start": 47196,
+          "end": 48054
+        },
+        {
+          "profile": "s3-jp",
+          "start": 47196,
+          "end": 48054
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2144348,
+          "end": 2145206
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/s3/save_screen_data.s",
+      "owner": "game/modes/s3",
+      "responsibility": "Save menu palettes, map-transfer descriptors, mapping owner and fixed menu-object creation records.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 109,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "s3.s",
+        "first_line": 2661,
+        "last_line": 2767,
+        "sha256": "040c528982d569968f0ede1d37fb7b21609c2a7df8abc9eb2b1bace8bba4cc77"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 48054,
+          "end": 49256
+        },
+        {
+          "profile": "s3-eu",
+          "start": 48054,
+          "end": 49256
+        },
+        {
+          "profile": "s3-jp",
+          "start": 48054,
+          "end": 49256
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2145206,
+          "end": 2146408
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/s3/save_slot_erase.s",
+      "owner": "game/modes/s3",
+      "responsibility": "Save-slot emerald decoration, erase-state transitions and slot icon art loading.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 286,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "s3.s",
+        "first_line": 3234,
+        "last_line": 3517,
+        "sha256": "ec23e8710ba9c1e3fbcc13f78cba7a36da38abbe7cdd7ad35399c6d079b691cc"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 50440,
+          "end": 51134
+        },
+        {
+          "profile": "s3-eu",
+          "start": 50440,
+          "end": 51134
+        },
+        {
+          "profile": "s3-jp",
+          "start": 50440,
+          "end": 51134
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2147592,
+          "end": 2148286
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/s3/save_slot_text.s",
+      "owner": "game/modes/s3",
+      "responsibility": "Save slot text strings and product-specific zone icon art storage.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 26,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "s3.s",
+        "first_line": 3518,
+        "last_line": 3541,
+        "sha256": "867a14b69071c74cf7f40d10a6e80a6cb078991d98f2e13f9f8eccecd6d0d675"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 51134,
+          "end": 59584
+        },
+        {
+          "profile": "s3-eu",
+          "start": 51134,
+          "end": 59584
+        },
+        {
+          "profile": "s3-jp",
+          "start": 51134,
+          "end": 59584
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2148286,
+          "end": 2156736
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/s3/save_slot_widgets.s",
+      "owner": "game/modes/s3",
+      "responsibility": "Save-slot selector, empty and populated slot displays, level icons and child sprite setup.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 468,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "s3.s",
+        "first_line": 2768,
+        "last_line": 3233,
+        "sha256": "96454cdc4801e7e229e12cd61a07fc2b4e5c0efb17598e1f6c471d093d2f5e89"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 49256,
+          "end": 50440
+        },
+        {
+          "profile": "s3-eu",
+          "start": 49256,
+          "end": 50440
+        },
+        {
+          "profile": "s3-jp",
+          "start": 49256,
+          "end": 50440
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2146408,
+          "end": 2147592
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/s3/time_attack_records.s",
+      "owner": "game/modes/s3",
+      "responsibility": "Competition time-attack record selection, record display, rank and zone-name resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 307,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "s3.s",
+        "first_line": 1705,
+        "last_line": 2009,
+        "sha256": "5c8a633a3e5fe27b0a86130234f2f3ada2158787c727258fc3bc1f05f5e5ec82"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 44832,
+          "end": 46318
+        },
+        {
+          "profile": "s3-eu",
+          "start": 44832,
+          "end": 46318
+        },
+        {
+          "profile": "s3-jp",
+          "start": 44832,
+          "end": 46318
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2141984,
+          "end": 2143470
+        }
+      ]
+    },
+    {
       "path": "src/game/modes/s3/title_data.s",
       "owner": "game/modes/s3",
       "responsibility": "Sonic 3 title cheat sequence, mapping owners and compressed screen-text storage.",
@@ -2730,6 +3145,131 @@
       ]
     },
     {
+      "path": "src/game/modes/sk/competition_menu.s",
+      "owner": "game/modes/sk",
+      "responsibility": "Competition entry menu, shared menu objects, palette and menu-object mapping storage.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 264,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "sonic3k.s",
+        "first_line": 45,
+        "last_line": 306,
+        "sha256": "9c7736408b75b3ce5e51b9506fb43ac8f149555fd6c18411e2e5e9194107099d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 43102,
+          "end": 43920
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 43102,
+          "end": 43920
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/sk/competition_player_selection.s",
+      "owner": "game/modes/sk",
+      "responsibility": "Competition character and player-count selection, animated character widgets and input prompts.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 370,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "sonic3k.s",
+        "first_line": 905,
+        "last_line": 1272,
+        "sha256": "46a7a224a8f2e193c0a2a255b6fb33cc3df66c972a8352594da0ad980aa2f885"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 45772,
+          "end": 46926
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 45772,
+          "end": 46926
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/sk/competition_results.s",
+      "owner": "game/modes/sk",
+      "responsibility": "Competition results initialization, win and loss displays, totals and results resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 394,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "sonic3k.s",
+        "first_line": 1273,
+        "last_line": 1664,
+        "sha256": "61293c9f0c24c876239d6351ae169e37deae43cb0bed2ab0480569a58876d25e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 46926,
+          "end": 48136
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 46926,
+          "end": 48136
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/sk/competition_zone_selection.s",
+      "owner": "game/modes/sk",
+      "responsibility": "Competition zone selection, completion display, menu controls and zone preview resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 600,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "sonic3k.s",
+        "first_line": 307,
+        "last_line": 904,
+        "sha256": "37742bc08cfb67fda9a552b294f6439edb3637e81c19ad057a956ee5d385b431"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 43920,
+          "end": 45772
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 43920,
+          "end": 45772
+        }
+      ]
+    },
+    {
       "path": "src/game/modes/sk/level_selection.s",
       "owner": "game/modes/sk",
       "responsibility": "Sonic and Knuckles level selection, permitted character checks, cursor control and sound test.",
@@ -2821,6 +3361,156 @@
           "component": "sk",
           "start": 5092,
           "end": 5350
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/sk/save_screen.s",
+      "owner": "game/modes/sk",
+      "responsibility": "Save selection mode initialization, active loop, navigation and product-specific save-slot presentation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 424,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "sonic3k.s",
+        "first_line": 2556,
+        "last_line": 2976,
+        "sha256": "daf34f0ced78232e6a7244ac7f786f75f6e92aedd44f2b56164626f77f639c9d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 50544,
+          "end": 51832
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 50544,
+          "end": 51832
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/sk/save_screen_data.s",
+      "owner": "game/modes/sk",
+      "responsibility": "Save menu palettes, map-transfer descriptors, mapping owner and fixed menu-object creation records.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 174,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "sonic3k.s",
+        "first_line": 2977,
+        "last_line": 3148,
+        "sha256": "9a02711055291055724120fc8136fc6b4ac922826e439b751665cafdf1d18de5"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 51832,
+          "end": 53686
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 51832,
+          "end": 53686
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/sk/save_slot_erase.s",
+      "owner": "game/modes/sk",
+      "responsibility": "Save-slot emerald decoration, erase-state transitions and slot icon art loading.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 423,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "sonic3k.s",
+        "first_line": 3658,
+        "last_line": 4078,
+        "sha256": "d7af7d58e9e916e0b199b3248321735be02d677cbf9cc02de51c93331922f2db"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 55052,
+          "end": 56092
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 55052,
+          "end": 56092
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/sk/save_slot_text.s",
+      "owner": "game/modes/sk",
+      "responsibility": "Save slot text strings and product-specific zone icon art storage.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 21,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "sonic3k.s",
+        "first_line": 4079,
+        "last_line": 4097,
+        "sha256": "73ef50674883fc664ec2457c499cca0e1d355ad5a8c02667c6adac6cf7dcfe97"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 56092,
+          "end": 56124
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 56092,
+          "end": 56124
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/sk/save_slot_widgets.s",
+      "owner": "game/modes/sk",
+      "responsibility": "Save-slot selector, empty and populated slot displays, level icons and child sprite setup.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 511,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "sonic3k.s",
+        "first_line": 3149,
+        "last_line": 3657,
+        "sha256": "297aa27674e56cd065c9c416cae31ad1cea3f33a92e3a11c69e09e9534c0b18c"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 53686,
+          "end": 55052
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 53686,
+          "end": 55052
         }
       ]
     },
@@ -2985,6 +3675,41 @@
       ]
     },
     {
+      "path": "src/game/modes/sk/time_attack_records.s",
+      "owner": "game/modes/sk",
+      "responsibility": "Competition time-attack record selection, record display, rank and zone-name resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 280,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "sonic3k.s",
+        "first_line": 1665,
+        "last_line": 1942,
+        "sha256": "4f35a519a3b234711610105a949362f686cad7f3ee851f2becfdc3ae601fdfbe"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 48136,
+          "end": 49158
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 48136,
+          "end": 49158
+        }
+      ]
+    },
+    {
       "path": "src/game/modes/sk/title_data.s",
       "owner": "game/modes/sk",
       "responsibility": "Sonic 3 title cheat sequence, mapping owners and compressed screen-text storage.",
@@ -3071,6 +3796,81 @@
           "component": "sk",
           "start": 17664,
           "end": 19602
+        }
+      ]
+    },
+    {
+      "path": "src/game/persistence/s3/sram_storage.s",
+      "owner": "game/persistence/s3",
+      "responsibility": "Initial lives, SRAM initialization, default records, checksum validation, record reads and game-state persistence.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 259,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "s3.s",
+        "first_line": 2149,
+        "last_line": 2405,
+        "sha256": "a0683d1cb23e5cbaedb30d2726269072f4964d88ea2338062196f7e8722f34ee"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 46580,
+          "end": 47196
+        },
+        {
+          "profile": "s3-eu",
+          "start": 46580,
+          "end": 47196
+        },
+        {
+          "profile": "s3-jp",
+          "start": 46580,
+          "end": 47196
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2143732,
+          "end": 2144348
+        }
+      ]
+    },
+    {
+      "path": "src/game/persistence/sk/sram_storage.s",
+      "owner": "game/persistence/sk",
+      "responsibility": "Initial lives, SRAM initialization, default records, checksum validation, record reads and game-state persistence.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 476,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "sonic3k.s",
+        "first_line": 2082,
+        "last_line": 2555,
+        "sha256": "311ffc4c90177f59ded4d083a24a8b0f47b94601cf30274a5193dd3cd0d55de9"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 49420,
+          "end": 50544
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 49420,
+          "end": 50544
         }
       ]
     },
@@ -25646,6 +26446,91 @@
       ]
     },
     {
+      "path": "src/rendering/s3/hud.s",
+      "owner": "rendering/s3",
+      "responsibility": "One and two player HUD drawing, score, rings, time, lives and numeric glyph output.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 593,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "s3.s",
+        "first_line": 3542,
+        "last_line": 4131,
+        "sha256": "c96b3509a7cf25a8d7010562f33fb22989843e6d549b5fb82969e6f26856a240"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 59584,
+          "end": 61138
+        },
+        {
+          "profile": "s3-eu",
+          "start": 59584,
+          "end": 61138
+        },
+        {
+          "profile": "s3-jp",
+          "start": 59584,
+          "end": 61138
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2156736,
+          "end": 2158290
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/s3/menu_transfers.s",
+      "owner": "rendering/s3",
+      "responsibility": "Menu art decompression, listed map and VRAM transfers and shared menu display helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 141,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "s3.s",
+        "first_line": 2010,
+        "last_line": 2148,
+        "sha256": "12aab1f7fb3acb2f9c4000f88f0a4fd44b34d6c8c1e6226e9615a4e2a44b4611"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 46318,
+          "end": 46580
+        },
+        {
+          "profile": "s3-eu",
+          "start": 46318,
+          "end": 46580
+        },
+        {
+          "profile": "s3-jp",
+          "start": 46318,
+          "end": 46580
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2143470,
+          "end": 2143732
+        }
+      ]
+    },
+    {
       "path": "src/rendering/s3/vram_dma.s",
       "owner": "rendering/s3",
       "responsibility": "Plane-map transfer and DMA queue insertion and dispatch.",
@@ -25759,6 +26644,71 @@
       ],
       "applicability": "emitted",
       "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/rendering/sk/hud.s",
+      "owner": "rendering/sk",
+      "responsibility": "One and two player HUD drawing, score, rings, time, lives and numeric glyph output.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 617,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "sonic3k.s",
+        "first_line": 4098,
+        "last_line": 4711,
+        "sha256": "1d10c42b202b2fe2276a01f60eb17132a872513d423f1688f7f999c0742abd65"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 56124,
+          "end": 57738
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 56124,
+          "end": 57738
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/sk/menu_transfers.s",
+      "owner": "rendering/sk",
+      "responsibility": "Menu art decompression, listed map and VRAM transfers and shared menu display helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 141,
+      "origin": {
+        "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
+        "path": "sonic3k.s",
+        "first_line": 1943,
+        "last_line": 2081,
+        "sha256": "c1311e84288ba66d7751ccc3bf1ef9cef0886e83736fc22c13c7dd9d5b7ff0de"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 49158,
+          "end": 49420
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 49158,
+          "end": 49420
+        }
+      ]
     },
     {
       "path": "src/rendering/sk/vram_dma.s",

@@ -538,6 +538,12 @@
       "commits": ["dc09abaa4de117f92491789747178b9736494966"]
     },
     {
+      "id": "change-6e2a91309b3a",
+      "kind": "source_or_tooling",
+      "summary": "Give level selection and special stages complete semantic owners",
+      "commits": ["6e2a91309b3ad31b3b927e20062c94aafc76515d"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",

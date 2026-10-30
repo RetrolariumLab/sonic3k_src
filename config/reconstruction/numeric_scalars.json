@@ -2,7 +2,7 @@
   "schema_version": 1,
   "exceptions": [
     {
-      "path": "s3.s",
+      "path": "src/rendering/s3/hud.s",
       "owner": "dword_ED88",
       "kind": "rom-range-long",
       "operand": "100000",
@@ -83,7 +83,7 @@
       "reason": "Loaded into d2, optionally negated, and added to long x_pos in the preceding movement helper."
     },
     {
-      "path": "sonic3k.s",
+      "path": "src/rendering/sk/hud.s",
       "owner": "dword_E040",
       "kind": "rom-range-long",
       "operand": "100000",
