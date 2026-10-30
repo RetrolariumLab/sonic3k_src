@@ -900,7 +900,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 104705,
+      "physical_lines": 98740,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -1220,6 +1220,357 @@
       "range_kind": "canonical-normal-build"
     },
     {
+      "path": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "owner": "game/blue_sphere/sk",
+      "responsibility": "Blue Sphere level and serial-code entry widgets, digit state and conversion helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 328,
+      "origin": {
+        "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
+        "path": "sonic3k.s",
+        "first_line": 3196,
+        "last_line": 3519,
+        "sha256": "1481aa36ad0f7c9286bc57ef3b5f493c758bd2243527a573b357171a6d5f631c"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_4D5FA",
+          "kind": "terminal-tail",
+          "reason": "The final digit display actor keeps its conditional early return and final drawing-service tail call together.",
+          "origin_first_line": 3508,
+          "origin_terminal_line": 3519,
+          "origin_end_line": 3519
+        }
+      ],
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 316124,
+          "end": 316944
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 316124,
+          "end": 316944
+        }
+      ]
+    },
+    {
+      "path": "src/game/blue_sphere/sk/difficulty_character_display.s",
+      "owner": "game/blue_sphere/sk",
+      "responsibility": "Blue Sphere difficulty character selection, Sonic or Tails and Knuckles display actors and emerald resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 135,
+      "origin": {
+        "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
+        "path": "sonic3k.s",
+        "first_line": 4217,
+        "last_line": 4347,
+        "sha256": "e09e8f7adf69829a844913e2465ebf6a58be6786a8e9211d5c89e92a8e0a9f95"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_Difficulty_Knuckles",
+          "kind": "terminal-tail",
+          "reason": "The final character display actor ends in a drawing-service tail call followed by checked emerald mapping resources.",
+          "origin_first_line": 4322,
+          "origin_terminal_line": 4344,
+          "origin_end_line": 4347
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 319840,
+          "end": 320348
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 319840,
+          "end": 320348
+        }
+      ]
+    },
+    {
+      "path": "src/game/blue_sphere/sk/menu_and_stage_number.s",
+      "owner": "game/blue_sphere/sk",
+      "responsibility": "Blue Sphere menu input, stage selection, stage-number widgets and numeric encoding helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 442,
+      "origin": {
+        "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
+        "path": "sonic3k.s",
+        "first_line": 2757,
+        "last_line": 3195,
+        "sha256": "72333bde3b136b0b1d8a7a9816fd309b2e6f2e3f2b0759287ccc67923359049f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 315050,
+          "end": 316124
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 315050,
+          "end": 316124
+        }
+      ]
+    },
+    {
+      "path": "src/game/blue_sphere/sk/mode_label_and_icons.s",
+      "owner": "game/blue_sphere/sk",
+      "responsibility": "Blue Sphere mode label and rotating option-icon placement, selection state and private position records.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 152,
+      "origin": {
+        "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
+        "path": "sonic3k.s",
+        "first_line": 3520,
+        "last_line": 3666,
+        "sha256": "903aa1622fef097cdedf3ddef5dbc78679a7cae54f4fe5ede129c1ca6ee8b086"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_SpheresTitle_4D610",
+          "kind": "terminal-tail",
+          "reason": "The complete mode-label actor ends in a drawing-service tail call.",
+          "origin_first_line": 3522,
+          "origin_terminal_line": 3534,
+          "origin_end_line": 3534
+        },
+        {
+          "name": "Obj_SpheresTitle_4D64E",
+          "kind": "terminal-tail",
+          "reason": "The complete rotating option-icon family ends in a drawing-service tail call followed by private position records.",
+          "origin_first_line": 3537,
+          "origin_terminal_line": 3657,
+          "origin_end_line": 3666
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 316944,
+          "end": 317374
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 316944,
+          "end": 317374
+        }
+      ]
+    },
+    {
+      "path": "src/game/blue_sphere/sk/results_mode.s",
+      "owner": "game/blue_sphere/sk",
+      "responsibility": "Blue Sphere results mode, display setup, pattern-load resources and result text helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 282,
+      "origin": {
+        "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
+        "path": "sonic3k.s",
+        "first_line": 3739,
+        "last_line": 4017,
+        "sha256": "23be07b8cffa0beb4f7f2c707f75e191120ce3402a2b7e3afaf0034277494258"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 318078,
+          "end": 319224
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 318078,
+          "end": 319224
+        }
+      ]
+    },
+    {
+      "path": "src/game/blue_sphere/sk/results_widgets.s",
+      "owner": "game/blue_sphere/sk",
+      "responsibility": "Blue Sphere results timing, perfect message, score elements and interface object states.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 202,
+      "origin": {
+        "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
+        "path": "sonic3k.s",
+        "first_line": 4018,
+        "last_line": 4216,
+        "sha256": "6e89ddcd92e2f730fcdba89683b80ff9c41afd73dda5a0a2183b89ba8b172263"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 319224,
+          "end": 319840
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 319224,
+          "end": 319840
+        }
+      ]
+    },
+    {
+      "path": "src/game/blue_sphere/sk/title_footer.s",
+      "owner": "game/blue_sphere/sk",
+      "responsibility": "Blue Sphere title character sprites, private placement records, animation and copyright display.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 71,
+      "origin": {
+        "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
+        "path": "sonic3k.s",
+        "first_line": 3673,
+        "last_line": 3738,
+        "sha256": "f755920c1673cbde7666ab65b9a4c180d87ffc579b9a12a02b67cb79dafad344"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_SpheresTitle_4D986",
+          "kind": "terminal-tail",
+          "reason": "The complete title character-sprite family ends in a drawing-service tail call followed by checked animation resources.",
+          "origin_first_line": 3681,
+          "origin_terminal_line": 3718,
+          "origin_end_line": 3721
+        },
+        {
+          "name": "Obj_SpheresTitle_4DA30",
+          "kind": "terminal-tail",
+          "reason": "The complete copyright display actor ends in a drawing-service tail call followed by checked mapping resources.",
+          "origin_first_line": 3724,
+          "origin_terminal_line": 3735,
+          "origin_end_line": 3738
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 317814,
+          "end": 318078
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 317814,
+          "end": 318078
+        }
+      ]
+    },
+    {
+      "path": "src/game/blue_sphere/sk/title_mapping_catalog.s",
+      "owner": "game/blue_sphere/sk",
+      "responsibility": "Blue Sphere title text, number and icon mapping entry labels and checked shared resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 9,
+      "origin": {
+        "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
+        "path": "sonic3k.s",
+        "first_line": 3667,
+        "last_line": 3672,
+        "sha256": "6df47a8db62aeb532cc246c6375ec73b1cb5b90445203006dc9848738f123a81"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 317374,
+          "end": 317814
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 317374,
+          "end": 317814
+        }
+      ]
+    },
+    {
+      "path": "src/game/blue_sphere/sk/title_mode.s",
+      "owner": "game/blue_sphere/sk",
+      "responsibility": "Blue Sphere title mode, display setup, serial and date text and title helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 342,
+      "origin": {
+        "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
+        "path": "sonic3k.s",
+        "first_line": 2418,
+        "last_line": 2756,
+        "sha256": "61731bea2b7ee20c3b23dc464f08ebcbcd3451fcc12faee2c534c86097b34ac2"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 313726,
+          "end": 315050
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 313726,
+          "end": 315050
+        }
+      ]
+    },
+    {
       "path": "src/game/bonus/s3/gumball_screen.s",
       "owner": "game/bonus/s3",
       "responsibility": "Gumball bonus screen setup, vertical scroll, background events and deformation.",
@@ -1261,6 +1612,101 @@
           "component": "s3-us",
           "start": 2355032,
           "end": 2355242
+        }
+      ]
+    },
+    {
+      "path": "src/game/bonus/slots/sk/layout_rendering.s",
+      "owner": "game/bonus/slots/sk",
+      "responsibility": "Rotating slot bonus layout rendering, transformed tile lookup, collision and private mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 494,
+      "origin": {
+        "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
+        "path": "sonic3k.s",
+        "first_line": 380,
+        "last_line": 870,
+        "sha256": "b0dd8a44f67fa3b3488da67ffccbe4bc8ed6b7c1b5e9186af82d85b8d32d94d6"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 308054,
+          "end": 309592
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 308054,
+          "end": 309592
+        }
+      ]
+    },
+    {
+      "path": "src/game/bonus/slots/sk/player_controller.s",
+      "owner": "game/bonus/slots/sk",
+      "responsibility": "Rotating slot bonus Sonic lifecycle, movement, collision, gravity and cage sprite resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 895,
+      "origin": {
+        "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
+        "path": "sonic3k.s",
+        "first_line": 871,
+        "last_line": 1762,
+        "sha256": "5b3ed5b4f67e7ab8bb670bbc4c298b202c507d18af88a4413081b2a8ac9b4c96"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-family",
+        "reason": "The complete rotating slot player controller retains its linked movement, collision and cage programs with their shared helpers and lookup data below 900 physical lines.",
+        "proof_target": "check-source-layout"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 309592,
+          "end": 312180
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 309592,
+          "end": 312180
+        }
+      ]
+    },
+    {
+      "path": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "owner": "game/bonus/slots/sk",
+      "responsibility": "Rotating slot option cycling, outcome state, player awards, effects and shared helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 614,
+      "origin": {
+        "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
+        "path": "sonic3k.s",
+        "first_line": 1807,
+        "last_line": 2417,
+        "sha256": "4f6e12b162053fb9b7caa8d7dc371aaf18649b5bd0a85caa6a096d46e6abfb75"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 312304,
+          "end": 313726
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 312304,
+          "end": 313726
         }
       ]
     },
@@ -3431,6 +3877,76 @@
           "component": "sk",
           "start": 115370,
           "end": 115594
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/sk/screen_dispatch.s",
+      "owner": "game/level/sk",
+      "responsibility": "Level screen and background setup, event dispatch and paired zone callback catalogs.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 174,
+      "origin": {
+        "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
+        "path": "sonic3k.s",
+        "first_line": 4348,
+        "last_line": 4518,
+        "sha256": "dc92c18068678f806f61dc39023a3ce6571aaa025746b0b4b1ae08e2a1d2b19a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 320348,
+          "end": 321368
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 320348,
+          "end": 321368
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/sk/scroll_events.s",
+      "owner": "game/level/sk",
+      "responsibility": "Tile-offset reset, camera scroll state, special events, screen shake, transition offsets, private wave tables and switch reset.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 247,
+      "origin": {
+        "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
+        "path": "sonic3k.s",
+        "first_line": 6121,
+        "last_line": 6364,
+        "sha256": "69fd87dd6db88436cc48dc4ef8f55db6d770e842552a92219a29e4970116513f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 324314,
+          "end": 325894
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 324314,
+          "end": 325894
         }
       ]
     },
@@ -7391,6 +7907,51 @@
           "component": "sk",
           "start": 303814,
           "end": 304092
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bonus/slots/sk/spike.s",
+      "owner": "objects/bonus/slots/sk",
+      "responsibility": "Rotating slot bonus spike initialization, player collision and mapping resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 48,
+      "origin": {
+        "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
+        "path": "sonic3k.s",
+        "first_line": 1763,
+        "last_line": 1806,
+        "sha256": "8a06a01da2805b208fba7043f7d67fd055fe422d26d4deb335a73ec4af8fd8f8"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_SlotSpike",
+          "kind": "terminal-tail",
+          "reason": "The complete rotating slot spike actor ends in a drawing-service tail call, followed only by checked mapping resources.",
+          "origin_first_line": 1765,
+          "origin_terminal_line": 1803,
+          "origin_end_line": 1806
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 312180,
+          "end": 312304
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 312180,
+          "end": 312304
         }
       ]
     },
@@ -48466,6 +49027,71 @@
       ]
     },
     {
+      "path": "src/rendering/sk/deformation_operators.s",
+      "owner": "rendering/sk",
+      "responsibility": "Normal or flipped deformation array construction, foreground or background application and vertical-scroll output.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 430,
+      "origin": {
+        "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
+        "path": "sonic3k.s",
+        "first_line": 5694,
+        "last_line": 6120,
+        "sha256": "1823ee9b63c39faccd31e958d1f778bfaa14bc53b7814fbedd77091318e940f7"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 323698,
+          "end": 324314
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 323698,
+          "end": 324314
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/sk/deformed_tile_drawing.s",
+      "owner": "rendering/sk",
+      "responsibility": "Deformed tile drawing, range selection and directional plane operations.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 284,
+      "origin": {
+        "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
+        "path": "sonic3k.s",
+        "first_line": 5413,
+        "last_line": 5693,
+        "sha256": "e80a3bc9edb8481302c90458b7d967c8b02f268755feed7d6655dc3da8c11dde"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 323204,
+          "end": 323698
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 323204,
+          "end": 323698
+        }
+      ]
+    },
+    {
       "path": "src/rendering/sk/enemy_art_loading.s",
       "owner": "rendering/sk",
       "responsibility": "Zone enemy-art selection, decompression queue dispatch and product-specific pattern-load catalogs.",
@@ -48561,6 +49187,41 @@
       ]
     },
     {
+      "path": "src/rendering/sk/level_video_transfers.s",
+      "owner": "rendering/sk",
+      "responsibility": "Level VInt drawing, VRAM operations and special window or scroll transfers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 241,
+      "origin": {
+        "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
+        "path": "sonic3k.s",
+        "first_line": 4519,
+        "last_line": 4756,
+        "sha256": "45caac4f69dbf40ff5726637ca4dedc0c5c1da620552231e93ada2694e7a9a95"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 321368,
+          "end": 321834
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 321368,
+          "end": 321834
+        }
+      ]
+    },
+    {
       "path": "src/rendering/sk/menu_transfers.s",
       "owner": "rendering/sk",
       "responsibility": "Menu art decompression, listed map and VRAM transfers and shared menu display helpers.",
@@ -48622,6 +49283,71 @@
           "component": "sk",
           "start": 109856,
           "end": 111092
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/sk/plane_refresh.s",
+      "owner": "rendering/sk",
+      "responsibility": "Full or partial plane refresh, direct scroll modes and drawing during camera motion.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 222,
+      "origin": {
+        "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
+        "path": "sonic3k.s",
+        "first_line": 5194,
+        "last_line": 5412,
+        "sha256": "8dd6895ffb9f316f02996916a8c39fe01141cea5e0e3823955c506d65cc47a8d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 322766,
+          "end": 323204
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 322766,
+          "end": 323204
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/sk/tile_grid_drawing.s",
+      "owner": "rendering/sk",
+      "responsibility": "Tile column and row drawing, chunk lookup and competition row setup.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 440,
+      "origin": {
+        "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
+        "path": "sonic3k.s",
+        "first_line": 4757,
+        "last_line": 5193,
+        "sha256": "f24ecb5a2ad25466210e941d1cbf15eb8d5388c54149eb9f6e112105b18017d6"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 321834,
+          "end": 322766
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 321834,
+          "end": 322766
         }
       ]
     },
