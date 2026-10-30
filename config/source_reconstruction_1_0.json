@@ -473,6 +473,12 @@
       "commits": ["2f99824e03115756ac9a64a7b7d697610927c203"]
     },
     {
+      "id": "change-3c9d749b458c",
+      "kind": "source_or_tooling",
+      "summary": "Extract SMPS storage while retaining executable audio drivers",
+      "commits": ["3c9d749b458c78ca8e8c02bf1317c96f179db931"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",

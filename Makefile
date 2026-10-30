@@ -95,6 +95,11 @@ check-audio-storage:
 check-audio-binding:
 	$(PYTHON) -m scripts.run validation.audio_storage --built
 
+.PHONY: check-release-metadata
+
+check-release-metadata:
+	$(PYTHON) -m scripts.run validation.release metadata
+
 .PHONY: check-driver-audio check-driver-audio-storage
 
 check-driver-audio:
@@ -102,8 +107,3 @@ check-driver-audio:
 
 check-driver-audio-storage:
 	$(PYTHON) -m scripts.run authoring.driver_payloads check --catalog-only
-
-.PHONY: check-release-metadata
-
-check-release-metadata:
-	$(PYTHON) -m scripts.run validation.release metadata
