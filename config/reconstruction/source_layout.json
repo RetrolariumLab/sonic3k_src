@@ -840,7 +840,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 87248,
+      "physical_lines": 84070,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "s3.s",
@@ -900,7 +900,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 163850,
+      "physical_lines": 159857,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -1300,6 +1300,86 @@
       ]
     },
     {
+      "path": "src/game/collision/s3/solid_rectangles.s",
+      "owner": "game/collision/s3",
+      "responsibility": "Rectangular solid-platform collision variants, offsets and player attachment motion.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 620,
+      "origin": {
+        "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
+        "path": "s3.s",
+        "first_line": 2353,
+        "last_line": 2969,
+        "sha256": "1e5dbad7aee0bf3a203cdbfe18baa866e0082c933393d3636966659998bd96af"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 113164,
+          "end": 114502
+        },
+        {
+          "profile": "s3-eu",
+          "start": 113164,
+          "end": 114502
+        },
+        {
+          "profile": "s3-jp",
+          "start": 113164,
+          "end": 114502
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2210316,
+          "end": 2211654
+        }
+      ]
+    },
+    {
+      "path": "src/game/collision/s3/solid_slopes_and_riding.s",
+      "owner": "game/collision/s3",
+      "responsibility": "Sloped and top-only solid platforms, ride attachment and player release checks.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 324,
+      "origin": {
+        "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
+        "path": "s3.s",
+        "first_line": 2970,
+        "last_line": 3290,
+        "sha256": "aef725703dc03279df1427a0d39a87462e5f618c70fced315ae694c8e7afc8a3"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 114502,
+          "end": 115220
+        },
+        {
+          "profile": "s3-eu",
+          "start": 114502,
+          "end": 115220
+        },
+        {
+          "profile": "s3-jp",
+          "start": 114502,
+          "end": 115220
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2211654,
+          "end": 2212372
+        }
+      ]
+    },
+    {
       "path": "src/game/collision/s3/surface_attachment.s",
       "owner": "game/collision/s3",
       "responsibility": "Player floor-angle attachment and transitions along right walls, ceilings and left walls.",
@@ -1521,6 +1601,66 @@
           "component": "sk",
           "start": 65134,
           "end": 67012
+        }
+      ]
+    },
+    {
+      "path": "src/game/collision/sk/solid_rectangles.s",
+      "owner": "game/collision/sk",
+      "responsibility": "Rectangular solid-platform collision variants, offsets and player attachment motion.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 686,
+      "origin": {
+        "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
+        "path": "sonic3k.s",
+        "first_line": 3007,
+        "last_line": 3689,
+        "sha256": "5cfa0fdd7418765cfa9bfd8a08e49d733a683b327f11e97d5020f04ca8beb318"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 121942,
+          "end": 123422
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 121942,
+          "end": 123422
+        }
+      ]
+    },
+    {
+      "path": "src/game/collision/sk/solid_slopes_and_riding.s",
+      "owner": "game/collision/sk",
+      "responsibility": "Sloped and top-only solid platforms, ride attachment and player release checks.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 431,
+      "origin": {
+        "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
+        "path": "sonic3k.s",
+        "first_line": 3690,
+        "last_line": 4117,
+        "sha256": "8f6f3e4cd6e513d14dad8428aa6a0d3cca5104c8a0e26410a20d6919562f6c6d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 123422,
+          "end": 124384
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 123422,
+          "end": 124384
         }
       ]
     },
@@ -2235,6 +2375,131 @@
       "range_kind": "canonical-normal-build"
     },
     {
+      "path": "src/game/level/s3/bounds_catalog.s",
+      "owner": "game/level/s3",
+      "responsibility": "Initial level bounds selection and the product-specific level size catalog.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 176,
+      "origin": {
+        "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
+        "path": "s3.s",
+        "first_line": 104,
+        "last_line": 276,
+        "sha256": "c1a67cbd06a43d5330e2036b9e8dd7d21e4c14917357aa9c24472ea6581cbb70"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 106894,
+          "end": 107640
+        },
+        {
+          "profile": "s3-eu",
+          "start": 106894,
+          "end": 107640
+        },
+        {
+          "profile": "s3-jp",
+          "start": 106894,
+          "end": 107640
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2204046,
+          "end": 2204792
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/s3/camera.s",
+      "owner": "game/level/s3",
+      "responsibility": "Background deformation, horizontal and vertical camera tracking and two-player camera updates.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 374,
+      "origin": {
+        "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
+        "path": "s3.s",
+        "first_line": 277,
+        "last_line": 647,
+        "sha256": "ee3dfca0a6d3a97874f21e13bad60b24cf7159f3a356a3b5c3d0cf50b80f8a76"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 107640,
+          "end": 108380
+        },
+        {
+          "profile": "s3-eu",
+          "start": 107640,
+          "end": 108380
+        },
+        {
+          "profile": "s3-jp",
+          "start": 107640,
+          "end": 108380
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2204792,
+          "end": 2205532
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/s3/camera_bounds_events.s",
+      "owner": "game/level/s3",
+      "responsibility": "Zone and act camera-bound event dispatch, character-specific limits and shared maximum-height adjustment.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 694,
+      "origin": {
+        "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
+        "path": "s3.s",
+        "first_line": 744,
+        "last_line": 1434,
+        "sha256": "1d0df2d270356097a7adba6cd1b70220346142f092a7801b9eff6845dbbdb1c2"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 108604,
+          "end": 110216
+        },
+        {
+          "profile": "s3-eu",
+          "start": 108604,
+          "end": 110216
+        },
+        {
+          "profile": "s3-jp",
+          "start": 108604,
+          "end": 110216
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2205756,
+          "end": 2207368
+        }
+      ]
+    },
+    {
       "path": "src/game/level/s3/collision_and_oscillation.s",
       "owner": "game/level/s3",
       "responsibility": "Level collision data initialization, deterministic object oscillators and ring animation updates.",
@@ -2495,6 +2760,51 @@
       ]
     },
     {
+      "path": "src/game/level/s3/resource_setup.s",
+      "owner": "game/level/s3",
+      "responsibility": "Level setup entry, descriptor loading and initial level resource dispatch.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 99,
+      "origin": {
+        "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
+        "path": "s3.s",
+        "first_line": 648,
+        "last_line": 743,
+        "sha256": "324761fbc4cb725b845b4c0c727b389709716f7c605671d0585a27935ae2192d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 108380,
+          "end": 108604
+        },
+        {
+          "profile": "s3-eu",
+          "start": 108380,
+          "end": 108604
+        },
+        {
+          "profile": "s3-jp",
+          "start": 108380,
+          "end": 108604
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2205532,
+          "end": 2205756
+        }
+      ]
+    },
+    {
       "path": "src/game/level/s3/water_interrupt_tables.s",
       "owner": "game/level/s3",
       "responsibility": "Water motion lookup values and per-zone palette transfer sequences for horizontal interrupts.",
@@ -2571,6 +2881,106 @@
           "component": "s3-us",
           "start": 2118554,
           "end": 2119482
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/sk/bounds_catalog.s",
+      "owner": "game/level/sk",
+      "responsibility": "Initial level bounds selection and the product-specific level size catalog.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 213,
+      "origin": {
+        "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
+        "path": "sonic3k.s",
+        "first_line": 115,
+        "last_line": 324,
+        "sha256": "4369dbe0d754daa8804d6bbd1ac8956dc5774aab887ecd3b749048fca40400e0"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 113760,
+          "end": 114608
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 113760,
+          "end": 114608
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/sk/camera.s",
+      "owner": "game/level/sk",
+      "responsibility": "Background deformation, horizontal and vertical camera tracking and two-player camera updates.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 381,
+      "origin": {
+        "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
+        "path": "sonic3k.s",
+        "first_line": 325,
+        "last_line": 702,
+        "sha256": "3486fad0acc517e693d508d19151d04d89e04896c32169191a8621acd2d174d3"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 114608,
+          "end": 115370
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 114608,
+          "end": 115370
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/sk/camera_bounds_events.s",
+      "owner": "game/level/sk",
+      "responsibility": "Zone and act camera-bound event dispatch, character-specific limits and shared maximum-height adjustment.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 779,
+      "origin": {
+        "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
+        "path": "sonic3k.s",
+        "first_line": 799,
+        "last_line": 1574,
+        "sha256": "a157912d2ac804032567fbf245c024c620362e069dc8220eae2f4baca5716c9e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-family",
+        "reason": "One complete camera-bound dispatch catalog retains its compact zone handlers and the additional Knuckles paths. The cohesive dispatch and shared state family remains below 900 physical lines.",
+        "proof_target": "check-source-layout"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 115594,
+          "end": 117452
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 115594,
+          "end": 117452
         }
       ]
     },
@@ -2766,6 +3176,41 @@
           "component": "sk",
           "start": 26550,
           "end": 27660
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/sk/resource_setup.s",
+      "owner": "game/level/sk",
+      "responsibility": "Level setup entry, descriptor loading and initial level resource dispatch.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 99,
+      "origin": {
+        "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
+        "path": "sonic3k.s",
+        "first_line": 703,
+        "last_line": 798,
+        "sha256": "1c0463a36688d2e476527d565ed1558142924959b590f8a25840459f79922651"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 115370,
+          "end": 115594
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 115370,
+          "end": 115594
         }
       ]
     },
@@ -5581,6 +6026,76 @@
           "component": "sk",
           "start": 101182,
           "end": 103846
+        }
+      ]
+    },
+    {
+      "path": "src/objects/items/s3/monitor.s",
+      "owner": "objects/items/s3",
+      "responsibility": "Item monitor initialization, solid contact, breakage and product-specific reward effects with animation resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 455,
+      "origin": {
+        "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
+        "path": "s3.s",
+        "first_line": 1901,
+        "last_line": 2352,
+        "sha256": "30f78adf723b1ae261b041f071c1fd24ecd33632efca7f7c35556d3df059be70"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 111646,
+          "end": 113164
+        },
+        {
+          "profile": "s3-eu",
+          "start": 111646,
+          "end": 113164
+        },
+        {
+          "profile": "s3-jp",
+          "start": 111646,
+          "end": 113164
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2208798,
+          "end": 2210316
+        }
+      ]
+    },
+    {
+      "path": "src/objects/items/sk/monitor.s",
+      "owner": "objects/items/sk",
+      "responsibility": "Item monitor initialization, solid contact, breakage and product-specific reward effects with animation resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 550,
+      "origin": {
+        "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
+        "path": "sonic3k.s",
+        "first_line": 2460,
+        "last_line": 3006,
+        "sha256": "0e8a4d67c86e4513ec09098766ca442f00dc088c5a03a8d891cbdb1084f27927"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 120166,
+          "end": 121942
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 120166,
+          "end": 121942
         }
       ]
     },
@@ -13327,6 +13842,46 @@
       "range_kind": "canonical-normal-build"
     },
     {
+      "path": "src/objects/shared/s3/path_switcher.s",
+      "owner": "objects/shared/s3",
+      "responsibility": "Shared foreground priority and collision-path switcher state and geometric contact helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 325,
+      "origin": {
+        "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
+        "path": "s3.s",
+        "first_line": 1579,
+        "last_line": 1900,
+        "sha256": "c58bcb1e536c9d7aa2141ce33794855779c1f86e57a08217bc8647b8a0830d8e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 110530,
+          "end": 111646
+        },
+        {
+          "profile": "s3-eu",
+          "start": 110530,
+          "end": 111646
+        },
+        {
+          "profile": "s3-jp",
+          "start": 110530,
+          "end": 111646
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2207682,
+          "end": 2208798
+        }
+      ]
+    },
+    {
       "path": "src/objects/shared/sandworm/map_sandworm.s",
       "owner": "objects/shared/sandworm",
       "responsibility": "Assembler data for General/Sprites/Sandworm/Map - Sandworm",
@@ -14343,6 +14898,36 @@
       ],
       "applicability": "emitted",
       "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/objects/shared/sk/path_switcher.s",
+      "owner": "objects/shared/sk",
+      "responsibility": "Shared foreground priority and collision-path switcher state and geometric contact helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 325,
+      "origin": {
+        "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
+        "path": "sonic3k.s",
+        "first_line": 1722,
+        "last_line": 2043,
+        "sha256": "5cff5310ed30778c75b45530afd4dec5685877ab3168148e73f82a435494735d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 117934,
+          "end": 119046
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 117934,
+          "end": 119046
+        }
+      ]
     },
     {
       "path": "src/objects/shared/skorp/map_skorp.s",
@@ -29531,6 +30116,36 @@
       ]
     },
     {
+      "path": "src/objects/zones/soz/sk/path_switcher.s",
+      "owner": "objects/zones/soz/sk",
+      "responsibility": "Sandopolis-specific collision-path switcher and its player contact geometry.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 419,
+      "origin": {
+        "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
+        "path": "sonic3k.s",
+        "first_line": 2044,
+        "last_line": 2459,
+        "sha256": "fce2b57266d9b0e509509a5acb8b84ca4d0da4abb0a9fabbf958786145c1457b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 119046,
+          "end": 120166
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 119046,
+          "end": 120166
+        }
+      ]
+    },
+    {
       "path": "src/rendering/compression/s3/enigma.s",
       "owner": "rendering/compression/s3",
       "responsibility": "Complete Enigma map decompressor with inline-value and bitstream helpers.",
@@ -30642,6 +31257,86 @@
           "component": "sk",
           "start": 5350,
           "end": 5562
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/zones/lrz/s3/foreground_rocks.s",
+      "owner": "rendering/zones/lrz/s3",
+      "responsibility": "Lava Reef foreground rock sprite selection, projection and private sprite piece data.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 147,
+      "origin": {
+        "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
+        "path": "s3.s",
+        "first_line": 1435,
+        "last_line": 1578,
+        "sha256": "5e7f370cdbdc64b8d2c9f7c513f7ea9ddb30dd36c723b06406866f2a0f1a3f94"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 110216,
+          "end": 110530
+        },
+        {
+          "profile": "s3-eu",
+          "start": 110216,
+          "end": 110530
+        },
+        {
+          "profile": "s3-jp",
+          "start": 110216,
+          "end": 110530
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2207368,
+          "end": 2207682
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/zones/lrz/sk/foreground_rocks.s",
+      "owner": "rendering/zones/lrz/sk",
+      "responsibility": "Lava Reef foreground rock sprite selection, projection and private sprite piece data.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 150,
+      "origin": {
+        "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
+        "path": "sonic3k.s",
+        "first_line": 1575,
+        "last_line": 1721,
+        "sha256": "2fd60cb7c21049777e9a627c7b6199baabc4fdd34f7b6dc7a3c15fe0cbd6c802"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 117452,
+          "end": 117934
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 117452,
+          "end": 117934
         }
       ]
     },

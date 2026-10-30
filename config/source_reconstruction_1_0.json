@@ -574,6 +574,12 @@
       "commits": ["0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9"]
     },
     {
+      "id": "change-332abac9176a",
+      "kind": "source_or_tooling",
+      "summary": "Organize player effects and the sprite execution pipeline",
+      "commits": ["332abac9176a546d9574ff1b49161b69b0af33e2"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",
