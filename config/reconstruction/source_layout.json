@@ -840,7 +840,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 113267,
+      "physical_lines": 112366,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "s3.s",
@@ -900,7 +900,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 195890,
+      "physical_lines": 193800,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -908,6 +908,76 @@
         "last_line": 201113,
         "sha256": "826460637347fb4a0219941cd59dfd96bc0d00860ccc46193aba77f37250bd38"
       }
+    },
+    {
+      "path": "src/audio/s3/level_music_playlist.s",
+      "owner": "audio/s3",
+      "responsibility": "Product-specific zone and act music identifier lookup table.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 30,
+      "origin": {
+        "commit": "eb0ce00a4f241944bd05626f880d9028e1a4b1ad",
+        "path": "s3.s",
+        "first_line": 894,
+        "last_line": 921,
+        "sha256": "f1f3091099dc0664f64aea15f8b59da1ec774845429d7ba5b439f875a49d8d1e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 18048,
+          "end": 18096
+        },
+        {
+          "profile": "s3-eu",
+          "start": 18048,
+          "end": 18096
+        },
+        {
+          "profile": "s3-jp",
+          "start": 18048,
+          "end": 18096
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2115200,
+          "end": 2115248
+        }
+      ]
+    },
+    {
+      "path": "src/audio/sk/level_music_playlist.s",
+      "owner": "audio/sk",
+      "responsibility": "Product-specific zone and act music identifier lookup table.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 30,
+      "origin": {
+        "commit": "eb0ce00a4f241944bd05626f880d9028e1a4b1ad",
+        "path": "sonic3k.s",
+        "first_line": 2088,
+        "last_line": 2115,
+        "sha256": "aafd48d8baf909b0055822c47848dc905b95d780fb99d7912efbbd907b7eaf1f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 24450,
+          "end": 24498
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 24450,
+          "end": 24498
+        }
+      ]
     },
     {
       "path": "src/game/blue_sphere/shared/blue_sphere/anim_character_sprites.s",
@@ -1785,6 +1855,126 @@
       ]
     },
     {
+      "path": "src/game/modes/s3/title_data.s",
+      "owner": "game/modes/s3",
+      "responsibility": "Sonic 3 title cheat sequence, mapping owners and compressed screen-text storage.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 25,
+      "origin": {
+        "commit": "eb0ce00a4f241944bd05626f880d9028e1a4b1ad",
+        "path": "s3.s",
+        "first_line": 872,
+        "last_line": 893,
+        "sha256": "566862a0d0cb18412f0002448c84416f5c4cd02e219a8d48d8e708d7c8b28737"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 17098,
+          "end": 18048
+        },
+        {
+          "profile": "s3-eu",
+          "start": 17098,
+          "end": 18048
+        },
+        {
+          "profile": "s3-jp",
+          "start": 17098,
+          "end": 18048
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2114250,
+          "end": 2115200
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/s3/title_screen.s",
+      "owner": "game/modes/s3",
+      "responsibility": "SEGA transition, Sonic 3 title initialization, title loop and animated player-frame loading.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 485,
+      "origin": {
+        "commit": "eb0ce00a4f241944bd05626f880d9028e1a4b1ad",
+        "path": "s3.s",
+        "first_line": 17,
+        "last_line": 498,
+        "sha256": "92e1b13bb404172753f33dfec4de6c5a160ed433af67cb79bbe6f1d5ded560d3"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 13664,
+          "end": 15324
+        },
+        {
+          "profile": "s3-eu",
+          "start": 13664,
+          "end": 15324
+        },
+        {
+          "profile": "s3-jp",
+          "start": 13664,
+          "end": 15324
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2110816,
+          "end": 2112476
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/s3/title_widgets.s",
+      "owner": "game/modes/s3",
+      "responsibility": "Sonic 3 title frame declarations, banner, text and player widgets plus the preserved level-select input sequence.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 376,
+      "origin": {
+        "commit": "eb0ce00a4f241944bd05626f880d9028e1a4b1ad",
+        "path": "s3.s",
+        "first_line": 499,
+        "last_line": 871,
+        "sha256": "c501dd5c1fed3f8cb38f33d21ed0cf86c0acb9d31796a5c398814b0d9bef2d67"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 15324,
+          "end": 17098
+        },
+        {
+          "profile": "s3-eu",
+          "start": 15324,
+          "end": 17098
+        },
+        {
+          "profile": "s3-jp",
+          "start": 15324,
+          "end": 17098
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2112476,
+          "end": 2114250
+        }
+      ]
+    },
+    {
       "path": "src/game/modes/sk/pause.s",
       "owner": "game/modes/sk",
       "responsibility": "Complete pause, resume, slow motion and single-frame advance state machine.",
@@ -1816,6 +2006,256 @@
           "component": "sk",
           "start": 5092,
           "end": 5350
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/sk/standalone_title_badges.s",
+      "owner": "game/modes/sk",
+      "responsibility": "Standalone title character animation sequences, menu icons and trademark widget.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 154,
+      "origin": {
+        "commit": "eb0ce00a4f241944bd05626f880d9028e1a4b1ad",
+        "path": "sonic3k.s",
+        "first_line": 1704,
+        "last_line": 1854,
+        "sha256": "3b722ae385a69ed048c784278d3728ac132bce4887ccb25c750ceb3f29df9abe"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 23188,
+          "end": 23728
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 23188,
+          "end": 23728
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/sk/standalone_title_characters.s",
+      "owner": "game/modes/sk",
+      "responsibility": "Standalone title character landing, scenery, banner and hand animation state machines.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 372,
+      "origin": {
+        "commit": "eb0ce00a4f241944bd05626f880d9028e1a4b1ad",
+        "path": "sonic3k.s",
+        "first_line": 1335,
+        "last_line": 1703,
+        "sha256": "41b774d55ab909fdf4dff2e7b14237629ae92373eff764d9d2ac4cdc2b5d8f70"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 21896,
+          "end": 23188
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 21896,
+          "end": 23188
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/sk/standalone_title_data.s",
+      "owner": "game/modes/sk",
+      "responsibility": "Standalone title shake sequence and icon, trademark and copyright mapping owners.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 18,
+      "origin": {
+        "commit": "eb0ce00a4f241944bd05626f880d9028e1a4b1ad",
+        "path": "sonic3k.s",
+        "first_line": 2073,
+        "last_line": 2087,
+        "sha256": "5693d85ec332c7bbcf4cd412ae6facd8a60cdc3172ead821461b5bcebae55bfa"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 24214,
+          "end": 24450
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 24214,
+          "end": 24450
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/sk/standalone_title_display.s",
+      "owner": "game/modes/sk",
+      "responsibility": "Standalone copyright widget, map transfers, VRAM clearing, screen shake and background deformation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 221,
+      "origin": {
+        "commit": "eb0ce00a4f241944bd05626f880d9028e1a4b1ad",
+        "path": "sonic3k.s",
+        "first_line": 1855,
+        "last_line": 2072,
+        "sha256": "a6320c374b101b71997b64119c45dbc220fc085247b583e08b8c5e90836fa2f0"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 23728,
+          "end": 24214
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 23728,
+          "end": 24214
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/sk/standalone_title_screen.s",
+      "owner": "game/modes/sk",
+      "responsibility": "Standalone Sonic and Knuckles title initialization, active loop and Mushroom Hill attract preparation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 360,
+      "origin": {
+        "commit": "eb0ce00a4f241944bd05626f880d9028e1a4b1ad",
+        "path": "sonic3k.s",
+        "first_line": 978,
+        "last_line": 1334,
+        "sha256": "f4f49d6146f348a174ac4d57e6262339bd120f9f529bcb95bb3180c73b8d9266"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 20552,
+          "end": 21896
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 20552,
+          "end": 21896
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/sk/title_data.s",
+      "owner": "game/modes/sk",
+      "responsibility": "Sonic 3 title cheat sequence, mapping owners and compressed screen-text storage.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 26,
+      "origin": {
+        "commit": "eb0ce00a4f241944bd05626f880d9028e1a4b1ad",
+        "path": "sonic3k.s",
+        "first_line": 954,
+        "last_line": 977,
+        "sha256": "06e294530aea009bec6a48985e626447f45002b3aa70277361e87567466ebaa8"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 19602,
+          "end": 20552
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 19602,
+          "end": 20552
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/sk/title_screen.s",
+      "owner": "game/modes/sk",
+      "responsibility": "SEGA transition, Sonic 3 title initialization, title loop and animated player-frame loading.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 524,
+      "origin": {
+        "commit": "eb0ce00a4f241944bd05626f880d9028e1a4b1ad",
+        "path": "sonic3k.s",
+        "first_line": 17,
+        "last_line": 537,
+        "sha256": "03c020f376916f935672a88f4ae3fe723bdf5ca5b1d8e807acc2bd1f4ddad30e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 15914,
+          "end": 17664
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 15914,
+          "end": 17664
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/sk/title_widgets.s",
+      "owner": "game/modes/sk",
+      "responsibility": "Sonic 3 title frame declarations, banner, text and player widgets plus the preserved level-select input sequence.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 419,
+      "origin": {
+        "commit": "eb0ce00a4f241944bd05626f880d9028e1a4b1ad",
+        "path": "sonic3k.s",
+        "first_line": 538,
+        "last_line": 953,
+        "sha256": "bc22ddbbc0818cf2ec3afd9de21214c857dfcf7b77cbf27c74c879f03f0f9e6a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 17664,
+          "end": 19602
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 17664,
+          "end": 19602
         }
       ]
     },

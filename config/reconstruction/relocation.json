@@ -6,7 +6,15 @@
     "s3.s",
     "sonic3k.s",
     "src/game/modes/s3/pause.s",
+    "src/game/modes/s3/title_screen.s",
+    "src/game/modes/s3/title_widgets.s",
     "src/game/modes/sk/pause.s",
+    "src/game/modes/sk/standalone_title_badges.s",
+    "src/game/modes/sk/standalone_title_characters.s",
+    "src/game/modes/sk/standalone_title_display.s",
+    "src/game/modes/sk/standalone_title_screen.s",
+    "src/game/modes/sk/title_screen.s",
+    "src/game/modes/sk/title_widgets.s",
     "src/rendering/compression/s3/enigma.s",
     "src/rendering/compression/s3/kosinski_streaming.s",
     "src/rendering/compression/s3/nemesis.s",
@@ -51,7 +59,9 @@
         "src/system/s3/runtime_primitives.s",
         "src/rendering/palettes/s3/zone_cycles.s",
         "src/rendering/palettes/s3/transformation_cycles.s",
-        "src/rendering/palettes/s3/fades_and_loading.s"
+        "src/rendering/palettes/s3/fades_and_loading.s",
+        "src/game/modes/s3/title_screen.s",
+        "src/game/modes/s3/title_widgets.s"
       ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/s3/bootstrap.s"
@@ -72,7 +82,9 @@
         "src/system/s3/runtime_primitives.s",
         "src/rendering/palettes/s3/zone_cycles.s",
         "src/rendering/palettes/s3/transformation_cycles.s",
-        "src/rendering/palettes/s3/fades_and_loading.s"
+        "src/rendering/palettes/s3/fades_and_loading.s",
+        "src/game/modes/s3/title_screen.s",
+        "src/game/modes/s3/title_widgets.s"
       ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/s3/bootstrap.s"
@@ -93,7 +105,9 @@
         "src/system/s3/runtime_primitives.s",
         "src/rendering/palettes/s3/zone_cycles.s",
         "src/rendering/palettes/s3/transformation_cycles.s",
-        "src/rendering/palettes/s3/fades_and_loading.s"
+        "src/rendering/palettes/s3/fades_and_loading.s",
+        "src/game/modes/s3/title_screen.s",
+        "src/game/modes/s3/title_widgets.s"
       ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/s3/bootstrap.s"
@@ -115,7 +129,13 @@
         "src/system/sk/runtime_primitives.s",
         "src/rendering/palettes/sk/zone_cycles.s",
         "src/rendering/palettes/sk/transformation_cycles.s",
-        "src/rendering/palettes/sk/fades_and_loading.s"
+        "src/rendering/palettes/sk/fades_and_loading.s",
+        "src/game/modes/sk/title_screen.s",
+        "src/game/modes/sk/title_widgets.s",
+        "src/game/modes/sk/standalone_title_screen.s",
+        "src/game/modes/sk/standalone_title_characters.s",
+        "src/game/modes/sk/standalone_title_badges.s",
+        "src/game/modes/sk/standalone_title_display.s"
       ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/sk/bootstrap.s"

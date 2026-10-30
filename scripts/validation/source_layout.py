@@ -11,13 +11,22 @@ from scripts.validation.numeric_operands import code_part
 DATA_OPS = frozenset(("dc.b", "dc.w", "dc.l", "even", "dbglistobj", "palptr", "macro", "endm", "equ"))
 
 
-def check_ledger(text):
+def check_ledger(text, source_includes=(), binary_includes=()):
+    dependencies = []
     depth = 0
     for line in text.splitlines():
         code = re.sub(r"^[A-Za-z_.][A-Za-z_0-9.]*:\s*", "", code_part(line).strip())
         if not code:
             continue
         op = code.split()[0].lower()
+        if op in ("include", "binclude"):
+            target = re.fullmatch(r'(?:include|binclude)\s+"([^"\r\n]+)"', code, re.I)
+            accepted = source_includes if op == "include" else binary_includes
+            if not target or target[1] not in accepted:
+                raise ValueError("Data include has no checked source or extracted-asset owner")
+            if op == "include":
+                dependencies.append(target[1])
+            continue
         if op not in DATA_OPS:
             raise ValueError("A data ledger contains executable or unknown syntax: " + op)
         depth += (op == "macro") - (op == "endm")
@@ -25,9 +34,31 @@ def check_ledger(text):
             raise ValueError("Unbalanced data macro")
     if depth:
         raise ValueError("Unclosed data macro")
+    return dependencies
 
 
-def validate_entry(row, text, inventory=False):
+def check_data_graph(dependencies):
+    remaining = {name: len(set(children)) for name, children in dependencies.items()}
+    parents = {name: set() for name in dependencies}
+    for name, children in dependencies.items():
+        for child in set(children):
+            if child not in parents:
+                raise ValueError("Included source has no data contract")
+            parents[child].add(name)
+    ready = [name for name, count in remaining.items() if not count]
+    visited = 0
+    while ready:
+        child = ready.pop()
+        visited += 1
+        for parent in parents[child]:
+            remaining[parent] -= 1
+            if not remaining[parent]:
+                ready.append(parent)
+    if visited != len(dependencies):
+        raise ValueError("Cyclic assembler data includes")
+
+
+def validate_entry(row, text, inventory=False, source_includes=(), binary_includes=()):
     lines = len(text.splitlines())
     if not row.get("owner") or not row.get("responsibility") or row.get("physical_lines") != lines:
         raise ValueError("Missing ownership or stale physical line count: " + row["path"])
@@ -48,7 +79,7 @@ def validate_entry(row, text, inventory=False):
     if re.fullmatch(r"(?:code|routine|room_part|part)_[0-9a-f]+", row["path"].rsplit("/", 1)[-1].split(".")[0], re.I):
         raise ValueError("Source module has only an address or page number")
     if row["role"] == "data":
-        check_ledger(text)
+        check_ledger(text, source_includes, binary_includes)
     exception = row.get("size_exception", {})
     if lines > 900 and (not exception.get("kind") or not exception.get("reason") or not exception.get("proof_target")):
         raise ValueError("Large module needs a checkable cohesion exception")
@@ -134,9 +165,17 @@ def check(inventory=False, built=False):
     paths = [r["path"] for r in rows]
     if len(paths) != len(set(paths)) or set(paths) != set(source_names()):
         raise ValueError("Source ownership registry omits or duplicates files")
+    source_includes = {r["path"] for r in rows if r["status"] == "owned" and r["role"] == "data"}
+    assets = load("assets/manifest.json")
+    binary_includes = {assets["output"] + "/" + r["path"] for r in assets["assets"]}
+    dependencies = {}
     accepted = 0
     for row in rows:
-        accepted += validate_entry(row, (ROOT / row["path"]).read_text(encoding="utf-8"), inventory)
+        text = (ROOT / row["path"]).read_text(encoding="utf-8")
+        accepted += validate_entry(row, text, inventory, source_includes, binary_includes)
+        if row["path"] in source_includes:
+            dependencies[row["path"]] = check_ledger(text, source_includes, binary_includes)
+    check_data_graph(dependencies)
     pending = len(rows) - accepted
     if not inventory and (registry["state"] != "complete" or pending):
         raise ValueError("Semantic source layout is incomplete")

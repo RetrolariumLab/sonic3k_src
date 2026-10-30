@@ -2,7 +2,7 @@
 
 import unittest
 
-from scripts.validation.source_layout import check_ledger, parse_include_ranges, validate_entry
+from scripts.validation.source_layout import check_data_graph, check_ledger, parse_include_ranges, validate_entry
 
 
 class SourceLayoutTests(unittest.TestCase):
@@ -51,3 +51,18 @@ class SourceLayoutTests(unittest.TestCase):
         }
         with self.assertRaisesRegex(ValueError, "hard review"):
             validate_entry(row, "nop\n" * 2001)
+
+
+class DataIncludeTests(unittest.TestCase):
+    def test_only_owned_data_and_manifest_assets_can_be_included(self):
+        text = 'Map: include "src/map.s"\nArt: binclude "data/art.nem"\n even\n'
+        self.assertEqual(check_ledger(text, {"src/map.s"}, {"data/art.nem"}), ["src/map.s"])
+        for source, binary in ((set(), {"data/art.nem"}), ({"src/map.s"}, set())):
+            with self.subTest(source=source, binary=binary), self.assertRaisesRegex(ValueError, "no checked"):
+                check_ledger(text, source, binary)
+
+    def test_recursive_or_missing_data_contracts_are_rejected(self):
+        check_data_graph({"a": ["b"], "b": []})
+        for graph in ({"a": ["b"]}, {"a": ["b"], "b": ["a"]}, {"a": ["a"]}):
+            with self.subTest(graph=graph), self.assertRaises(ValueError):
+                check_data_graph(graph)
