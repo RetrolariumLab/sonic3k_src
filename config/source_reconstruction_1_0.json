@@ -467,6 +467,12 @@
       "commits": ["abf9bea4009fd3054b16c861af458b345fc964ca"]
     },
     {
+      "id": "change-2f99824e0311",
+      "kind": "source_or_tooling",
+      "summary": "Add complete procedure relocation checks for every preservation profile",
+      "commits": ["2f99824e03115756ac9a64a7b7d697610927c203"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",

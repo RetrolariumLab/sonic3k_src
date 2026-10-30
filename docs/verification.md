@@ -7,6 +7,8 @@
 | `make lint`                   | Read-only AS, text, Python, JSON and Markdown style checks                                 |
 | `make test`                   | ROM-less build, ABI, privacy, numeric-operand and runtime contract regressions             |
 | `make verify-toolchain`       | Pinned compiler/linker binaries                                                            |
+| `make check-audio-storage`    | ROM-less audio ownership, ABI and bank bounds                                              |
+| `make check-audio-binding`    | Independent audio addresses and dialects in every standalone profile                       |
 | `make check-assets`           | Every manifest-owned extracted payload                                                     |
 | `make verify-all`             | Cleanly assembled images compared with all five private reference images                   |
 | `make check-lockon`           | 675 exports against each independently assembled S3 regional symbol table                  |
@@ -24,9 +26,10 @@ only after its movie check succeeds; no screenshot comparison is used.
 
 The public [relocation producer](relocation.md) builds every declared variant
 and checks exact source-derived cohort coverage and independent symbol movement.
-All 160 relocated runtime cases have passed. ROM-extracted SMPS storage and
-clean-clone aggregate acceptance are still pending. Exploratory candidates are
-not substitutes for these public commands.
+All 160 relocated runtime cases have passed. SMPS storage is now ROM-extracted;
+current-source clean-clone aggregate acceptance must regenerate all evidence
+after that migration. Exploratory candidates are not substitutes for these
+public commands.
 
 The candidate `make release-check` sequence fails at the first unsuccessful
 stage: style, tests, private inputs, clean assembly, identity, complete

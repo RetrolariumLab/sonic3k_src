@@ -56,3 +56,10 @@ flags. All emulator launches additionally wait for any already running MAME. Run
 `make check-lockon check-numeric-operands` after verifying assembly, and read
 [verification limits](verification.md) before interpreting a passing check as a
 release result.
+
+Music and SFX are ROM-extracted SMPS3/SMPS4 streams under `data/Sound/SMPS/`.
+The audio catalog owns ABI applicability, while the asset manifest owns storage
+identity. `make check-audio-storage` is ROM-less; `make check-audio-binding`
+compares storage symbols and dialects with a verified AS build. Generic FM
+helpers required by the executable drivers retain their permission notice; no
+score assembly or full score macro library remains in the final tree.

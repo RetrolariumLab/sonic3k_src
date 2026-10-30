@@ -11,7 +11,7 @@
                 include "sonic3k.constants.s"           ; include some constants
                 include "s3.constants.s"                ; RAM addresses moved around between S3 and S&K
 ; ---------------------------------------------------------------------------
-; Include SMPS2ASM, for expressing SMPS bytecode in a portable and human-readable form
+; FM voice macros required by the executable Z80 driver
 SonicDriverVer: equ     3                               ; Tell SMPS2ASM that we are targeting Sonic 3's sound driver
                 include "Sound/FM_Voice_Macros.s"
 

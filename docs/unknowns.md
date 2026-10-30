@@ -2,10 +2,9 @@
 
 ## Unaccepted release requirements
 
-- Replace remaining SMPS music/SFX assembler data with ROM-extracted streams,
-  retaining executable drivers and their required FM helper macros.
-- Complete the 1.0 aggregate clean-clone acceptance. The source-derived matrix
-  build, movement proof and all 160 relocated runtime cases have passed.
+- Complete current-source 1.0 aggregate clean-clone acceptance after the SMPS
+  storage migration. The prior source passed all 32 relocation groups and 160
+  relocated runtime cases; those source bindings must now be regenerated.
 - Semantic subsystem source layout with documented size exceptions and a label
   rename registry. The large imported entry units are still present.
 - Editable contracts/codecs for every stored and assembler-owned format,

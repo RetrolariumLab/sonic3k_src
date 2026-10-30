@@ -11,6 +11,8 @@
   matrix coverage.
 - [Preservation gate](source_reconstruction_1_0.md): candidate 1.0 contract and
   fail-fast acceptance.
+- [Audio storage](audio_storage.md): ROM-extracted SMPS streams and driver ABI
+  boundaries.
 - [Runtime](runtime.md): pinned MAME, original goldens and empty upper window.
 - [Unknowns and remaining work](unknowns.md): incomplete release requirements.
 - [Provenance and rights](provenance.md): import, exclusions and attribution.

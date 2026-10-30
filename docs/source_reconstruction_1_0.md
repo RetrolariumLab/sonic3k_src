@@ -24,3 +24,8 @@ preservation guarantee.
 Tags and publication remain maintainer actions. A candidate manifest, partial
 matrix, original-image-only runtime run or passing byte comparison alone does
 not establish completion of this release line.
+
+Requirement status `implemented` records that the executable control exists. It
+is not an acceptance result. Only a complete current-source aggregate run proves
+acceptance, including regenerated relocated builds and runtime after any
+storage/source migration.

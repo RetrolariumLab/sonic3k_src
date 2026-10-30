@@ -10,7 +10,7 @@
                 include "sonic3k.macros.s"              ; include some simplifying macros and functions
                 include "sonic3k.constants.s"           ; include some constants
 ; ---------------------------------------------------------------------------
-; Include SMPS2ASM, for expressing SMPS bytecode in a portable and human-readable form
+; FM voice macros required by the executable Z80 driver
 SonicDriverVer: equ     4                               ; Tell SMPS2ASM that we are targeting Sonic & Knuckles' sound driver
                 include "Sound/FM_Voice_Macros.s"
 ; ---------------------------------------------------------------------------
