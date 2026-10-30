@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "regions": [
+    {
+      "id": "vectors",
+      "base": "0x0",
+      "end": "0x100",
+      "owner": "Vectors",
+      "reason": "68000 exception vector slots are hardware-defined."
+    },
+    {
+      "id": "header",
+      "base": "0x100",
+      "end": "0x200",
+      "owner": "Header",
+      "reason": "Mega Drive cartridge header has a fixed bus position."
+    },
+    {
+      "id": "second-cartridge",
+      "base": "0x200000",
+      "end": "0x400000",
+      "owner": "LockOnROM_Start",
+      "reason": "S&K reads the separate S3 cartridge through a fixed external ABI.",
+      "profiles": ["sk"]
+    },
+    {
+      "id": "s2-patch-window",
+      "base_symbol": "S2_LockOn_Patch_Start",
+      "end_symbol": "S2_LockOn_Patch_End",
+      "reason": "Preserved external patch-window fields and entry; its game profile is excluded.",
+      "base": "0x300000",
+      "end": "0x340000"
+    },
+    {
+      "id": "s3-solid-comparison",
+      "symbol": "S3_Level_Solid_Data",
+      "value": "0x260000",
+      "reason": "An external-address comparison boundary, not a data export or a procedure entry.",
+      "profiles": ["sk"]
+    },
+    {
+      "id": "z80-banks",
+      "window_bytes": 32768,
+      "reason": "Z80 ROM bank pointers address 32 KiB windows; bank origins and padding are assembler-computed.",
+      "tail_aligned_start": "Snd_Bank1_Start",
+      "tail_allocation": "Size_of_Snd_Bank1"
+    }
+  ]
+}

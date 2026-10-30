@@ -1,3 +1,8 @@
+; Fixed cartridge bus interfaces
+MD_Cartridge_Bus_End:   equ     $400000
+S2_LockOn_Patch_Start:  equ     $300000
+S2_LockOn_Patch_End:    equ     $340000
+
 ; Equates section - names for variables
 
 ; ---------------------------------------------------------------------------

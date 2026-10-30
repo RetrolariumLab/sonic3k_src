@@ -54,6 +54,11 @@ format:
 
 format-check: lint
 
+.PHONY: check-lockon
+
+check-lockon:
+	$(PYTHON) -m scripts.run validation.lockon
+
 .PHONY: check-driver-audio check-driver-audio-storage
 
 check-driver-audio:

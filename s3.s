@@ -64,7 +64,7 @@ Modem_Info:         dc.b    "  "
 Unknown_Header: dc.w    1
                 dc.b    "      "
                 dc.l    EndOfROM
-                dc.l    $3FFFFF
+                dc.l    MD_Cartridge_Bus_End-1
                 dc.l    SRAM_start
                 dc.l    SRAM_end
                 dc.b    "                "

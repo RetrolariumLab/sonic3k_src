@@ -76,10 +76,10 @@ Unknown_Header: dc.w    0
                 dc.b    "        "
 KiS2ROM_Info:       dc.b    "RO"
 KiS2ROM_Type:       dc.w    %10000000100000
-KiS2ROMStartLoc:    tribyte $300000
-KiS2ROMEndLoc:      tribyte $33FFFF
-KiS2ROMStartLoc2:   tribyte $300000
-KiS2ROMEndLoc2:     tribyte $33FFFF
+KiS2ROMStartLoc:    tribyte S2_LockOn_Patch_Start
+KiS2ROMEndLoc:      tribyte (S2_LockOn_Patch_End-1)
+KiS2ROMStartLoc2:   tribyte S2_LockOn_Patch_Start
+KiS2ROMEndLoc2:     tribyte (S2_LockOn_Patch_End-1)
 Country_Code:       dc.b    "JUE             "
 ; ---------------------------------------------------------------------------
 ; Unlike the games before this doesn't crash/freeze the 68000, instead it falls through into the EntryPoint which causes the game to soft-restart
@@ -317,7 +317,7 @@ S2orS3LockedOn:
                 tst.w   d1
                 beq.w   SonicAndKnucklesStartup
                 move.b  #1,(SRAM_access_flag).l
-                jmp     ($300000).l                     ; May be changed at a later date to become compatible with S2K disassembly
+                jmp     (S2_LockOn_Patch_Start).l       ; May be changed at a later date to become compatible with S2K disassembly
 ; ---------------------------------------------------------------------------
 LockonSerialsText:
                 dc.b    "GM 00001051-00"                ; Sonic 2 REV00/1/2
@@ -198484,8 +198484,8 @@ S2K_Sprite_Lists:
                 dc.l    S2KSprite_OOZ2                  ; 21
                 dc.l    S2KSprite_MCZ1                  ; 22
                 dc.l    S2KSprite_MCZ2                  ; 23
-                dc.l    $33F06E                         ; byte_33F06E ; 24
-                dc.l    $33F74C                         ; byte_33F74C ; 25
+                dc.l    byte_33F06E                     ; byte_33F06E ; 24
+                dc.l    byte_33F74C                     ; byte_33F74C ; 25
                 dc.l    S2KSprite_CPZ1                  ; 26
                 dc.l    S2KSprite_CPZ2                  ; 27
                 dc.l    $2EB230                         ; byte_2EB230 ; 28

@@ -1,0 +1,2719 @@
+{
+  "schema_version": 1,
+  "pointer_source": "Lockon S3/LockOn Pointers.s",
+  "base": "0x200000",
+  "second_cartridge_profiles": ["s3-us", "s3-eu", "s3-jp"],
+  "external_profile": "sk",
+  "exports": [
+    {
+      "external": "LockOnROM_Start",
+      "target": "StartOfROM"
+    },
+    {
+      "external": "byte_200011",
+      "target": "Vectors",
+      "addend": 17
+    },
+    {
+      "external": "byte_2000BD",
+      "target": "Vectors",
+      "addend": 189
+    },
+    {
+      "external": "LockonHeader",
+      "target": "Header"
+    },
+    {
+      "external": "SSMagic_TestLoc_200114",
+      "target": "Copyright",
+      "addend": 4
+    },
+    {
+      "external": "SSMagic_TestLoc_20011A",
+      "target": "Copyright",
+      "addend": 10
+    },
+    {
+      "external": "LockonDate",
+      "target": "Copyright",
+      "addend": 12
+    },
+    {
+      "external": "SSMagic_TestLoc_200150",
+      "target": "Overseas_Name"
+    },
+    {
+      "external": "LockonSerialNumber",
+      "target": "Serial_Number"
+    },
+    {
+      "external": "SSMagic_TestLoc_2001A4",
+      "target": "ROMEndLoc"
+    },
+    {
+      "external": "byte_200281",
+      "target": "Init_ClearVSRAM",
+      "addend": 5
+    },
+    {
+      "external": "byte_20032D",
+      "target": "CheckVDP",
+      "addend": 35
+    },
+    {
+      "external": "Pal_Competition1",
+      "target": "Pal_Competition1"
+    },
+    {
+      "external": "Map_CompetitionObject",
+      "target": "Map_CompetitionObject"
+    },
+    {
+      "external": "MapUnc_CompetitionNumbers",
+      "target": "MapUnc_CompetitionNumbers"
+    },
+    {
+      "external": "Pal_Competition2",
+      "target": "Pal_Competition2"
+    },
+    {
+      "external": "Pal_Competition3",
+      "target": "Pal_Competition3"
+    },
+    {
+      "external": "Pal_Competition4",
+      "target": "Pal_Competition4"
+    },
+    {
+      "external": "Map_CompetitionSelect",
+      "target": "Map_CompetitionSelect"
+    },
+    {
+      "external": "Pal_CompetitionResults",
+      "target": "Pal_CompetitionResults"
+    },
+    {
+      "external": "MapEni_CompetitionResultsLED",
+      "target": "MapEni_CompetitionResultsLED"
+    },
+    {
+      "external": "MapUnc_CompetitionResultsLetters",
+      "target": "MapUnc_CompetitionResultsLetters"
+    },
+    {
+      "external": "MapUnc_CompetitionResultsDividers",
+      "target": "MapUnc_CompetitionResultsDividers"
+    },
+    {
+      "external": "MapUnc_CompetitionResultsTOTAL",
+      "target": "MapUnc_CompetitionResultsTOTAL"
+    },
+    {
+      "external": "MapUnc_ResultsWin",
+      "target": "MapUnc_ResultsWin"
+    },
+    {
+      "external": "MapUnc_ResultsLose",
+      "target": "MapUnc_ResultsLose"
+    },
+    {
+      "external": "MapUnc_ResultsTie",
+      "target": "MapUnc_ResultsTie"
+    },
+    {
+      "external": "Pal_CompetitionTimeAttack",
+      "target": "Pal_CompetitionTimeAttack"
+    },
+    {
+      "external": "MapUnc_CompetitionLAPNum",
+      "target": "MapUnc_CompetitionLAPNum"
+    },
+    {
+      "external": "MapUnc_CompetitionRECORDS",
+      "target": "MapUnc_CompetitionRECORDS"
+    },
+    {
+      "external": "MapUnc_Competition1st2nd3rd",
+      "target": "MapUnc_Competition1st2nd3rd"
+    },
+    {
+      "external": "MapUnc_CompetitionAZURELAKE",
+      "target": "MapUnc_CompetitionAZURELAKE"
+    },
+    {
+      "external": "MapUnc_CompetitionBALLOONPARK",
+      "target": "MapUnc_CompetitionBALLOONPARK"
+    },
+    {
+      "external": "MapUnc_CompetitionCHROMEGADGET",
+      "target": "MapUnc_CompetitionCHROMEGADGET"
+    },
+    {
+      "external": "MapUnc_CompetitionDESERTPALACE",
+      "target": "MapUnc_CompetitionDESERTPALACE"
+    },
+    {
+      "external": "MapUnc_CompetitionENDLESSMINE",
+      "target": "MapUnc_CompetitionENDLESSMINE"
+    },
+    {
+      "external": "ArtKos_SaveScreenS3Zone",
+      "target": "ArtKos_SaveScreenS3Zone"
+    },
+    {
+      "external": "Map_AIZ1Tree",
+      "target": "Map_AIZ1Tree"
+    },
+    {
+      "external": "Map_AIZ1ZiplinePeg",
+      "target": "Map_AIZ1ZiplinePeg"
+    },
+    {
+      "external": "Map_HCZBreakableBar",
+      "target": "Map_HCZBreakableBar"
+    },
+    {
+      "external": "Map_HCZBlock",
+      "target": "Map_HCZBlock"
+    },
+    {
+      "external": "Map_AIZRock",
+      "target": "Map_AIZRock"
+    },
+    {
+      "external": "Map_AIZRock2",
+      "target": "Map_AIZRock2"
+    },
+    {
+      "external": "Map_EMZRock",
+      "target": "Map_EMZRock"
+    },
+    {
+      "external": "Map_AIZCollapsingPlatform",
+      "target": "Map_AIZCollapsingPlatform"
+    },
+    {
+      "external": "Map_AIZCollapsingPlatform2",
+      "target": "Map_AIZCollapsingPlatform2"
+    },
+    {
+      "external": "Map_LBZCollapsingBridge",
+      "target": "Map_LBZCollapsingBridge"
+    },
+    {
+      "external": "Map_LBZCollapsingLedge",
+      "target": "Map_LBZCollapsingLedge"
+    },
+    {
+      "external": "Map_HCZCollapsingBridge",
+      "target": "Map_HCZCollapsingBridge"
+    },
+    {
+      "external": "Map_MGZCollapsingBridge",
+      "target": "Map_MGZCollapsingBridge"
+    },
+    {
+      "external": "Map_ICZCollapsingBridge",
+      "target": "Map_ICZCollapsingBridge"
+    },
+    {
+      "external": "Map_AIZBreakableWall",
+      "target": "Map_AIZBreakableWall"
+    },
+    {
+      "external": "Map_MGZBreakableWall",
+      "target": "Map_MGZBreakableWall"
+    },
+    {
+      "external": "Map_HCZBreakableWall",
+      "target": "Map_HCZBreakableWall"
+    },
+    {
+      "external": "Map_LBZBreakableWall",
+      "target": "Map_LBZBreakableWall"
+    },
+    {
+      "external": "Map_AIZIntroWaves",
+      "target": "Map_AIZIntroWaves"
+    },
+    {
+      "external": "Map_LBZUnusedElevator",
+      "target": "Map_LBZUnusedElevator"
+    },
+    {
+      "external": "Map_LBZExplodingTrigger",
+      "target": "Map_LBZExplodingTrigger"
+    },
+    {
+      "external": "Map_MGZDashTrigger",
+      "target": "Map_MGZDashTrigger"
+    },
+    {
+      "external": "Map_LBZTriggerBridge",
+      "target": "Map_LBZTriggerBridge"
+    },
+    {
+      "external": "Map_LBZPlayerLauncher",
+      "target": "Map_LBZPlayerLauncher"
+    },
+    {
+      "external": "Map_LBZFlameThrower",
+      "target": "Map_LBZFlameThrower"
+    },
+    {
+      "external": "Map_LBZCupElevator",
+      "target": "Map_LBZCupElevator"
+    },
+    {
+      "external": "Map_LBZUnusedTiltingBridge",
+      "target": "Map_LBZUnusedTiltingBridge"
+    },
+    {
+      "external": "Map_LBZPipePlug",
+      "target": "Map_LBZPipePlug"
+    },
+    {
+      "external": "Map_LBZSpinLauncher",
+      "target": "Map_LBZSpinLauncher"
+    },
+    {
+      "external": "Map_LBZLoweringGrapple",
+      "target": "Map_LBZLoweringGrapple"
+    },
+    {
+      "external": "Map_LBZSmashingSpikes",
+      "target": "Map_LBZSmashingSpikes"
+    },
+    {
+      "external": "Map_MGZSmashingPillar",
+      "target": "Map_MGZSmashingPillar"
+    },
+    {
+      "external": "Map_LBZGateLaser",
+      "target": "Map_LBZGateLaser"
+    },
+    {
+      "external": "Map_LBZTubeElevator",
+      "target": "Map_LBZTubeElevator"
+    },
+    {
+      "external": "Map_AIZDisappearingFloor",
+      "target": "Map_AIZDisappearingFloor"
+    },
+    {
+      "external": "Map_AIZDisappearingFloor2",
+      "target": "Map_AIZDisappearingFloor2"
+    },
+    {
+      "external": "Map_AIZCorkFloor",
+      "target": "Map_AIZCorkFloor"
+    },
+    {
+      "external": "Map_AIZCorkFloor2",
+      "target": "Map_AIZCorkFloor2"
+    },
+    {
+      "external": "Map_CNZCorkFloor",
+      "target": "Map_CNZCorkFloor"
+    },
+    {
+      "external": "Map_ICZCorkFloor",
+      "target": "Map_ICZCorkFloor"
+    },
+    {
+      "external": "Map_LBZCorkFloor",
+      "target": "Map_LBZCorkFloor"
+    },
+    {
+      "external": "Map_AIZFlippingBridge",
+      "target": "Map_AIZFlippingBridge"
+    },
+    {
+      "external": "Map_AIZFallingLog2",
+      "target": "Map_AIZFallingLog2"
+    },
+    {
+      "external": "Map_AIZFallingLog",
+      "target": "Map_AIZFallingLog"
+    },
+    {
+      "external": "Map_AIZFallingLogSplash2",
+      "target": "Map_AIZFallingLogSplash2"
+    },
+    {
+      "external": "Map_AIZFallingLogSplash",
+      "target": "Map_AIZFallingLogSplash"
+    },
+    {
+      "external": "Map_AIZSpikedLog",
+      "target": "Map_AIZSpikedLog"
+    },
+    {
+      "external": "Map_AIZForegroundPlant",
+      "target": "Map_AIZForegroundPlant"
+    },
+    {
+      "external": "Map_HCZButton",
+      "target": "Map_HCZButton"
+    },
+    {
+      "external": "Map_CNZButton",
+      "target": "Map_CNZButton"
+    },
+    {
+      "external": "Map_2PButton",
+      "target": "Map_2PButton"
+    },
+    {
+      "external": "Map_HCZWaterRush",
+      "target": "Map_HCZWaterRush"
+    },
+    {
+      "external": "Map_HCZWaterRushBlock",
+      "target": "Map_HCZWaterRushBlock"
+    },
+    {
+      "external": "Map_HCZWaterWall",
+      "target": "Map_HCZWaterWall"
+    },
+    {
+      "external": "Map_HCZWaterWallDebris",
+      "target": "Map_HCZWaterWallDebris"
+    },
+    {
+      "external": "Map_HCZFan",
+      "target": "Map_HCZFan"
+    },
+    {
+      "external": "Map_HCZLargeFan",
+      "target": "Map_HCZLargeFan"
+    },
+    {
+      "external": "Map_CGZFan",
+      "target": "Map_CGZFan"
+    },
+    {
+      "external": "Map_HCZHandLauncher",
+      "target": "Map_HCZHandLauncher"
+    },
+    {
+      "external": "Map_HCZConveyorSpike",
+      "target": "Map_HCZConveyorSpike"
+    },
+    {
+      "external": "Map_CNZBalloon",
+      "target": "Map_CNZBalloon"
+    },
+    {
+      "external": "Map_CNZCannon",
+      "target": "Map_CNZCannon"
+    },
+    {
+      "external": "Map_CNZRisingPlatform",
+      "target": "Map_CNZRisingPlatform"
+    },
+    {
+      "external": "Map_CNZTrapDoor",
+      "target": "Map_CNZTrapDoor"
+    },
+    {
+      "external": "Map_CNZLightBulb",
+      "target": "Map_CNZLightBulb"
+    },
+    {
+      "external": "Map_CNZHoverFan",
+      "target": "Map_CNZHoverFan"
+    },
+    {
+      "external": "Map_CNZCylinder",
+      "target": "Map_CNZCylinder"
+    },
+    {
+      "external": "Map_HCZSpinningColumn",
+      "target": "Map_HCZSpinningColumn"
+    },
+    {
+      "external": "Map_Bumper",
+      "target": "Map_Bumper"
+    },
+    {
+      "external": "Map_2PBumper",
+      "target": "Map_2PBumper"
+    },
+    {
+      "external": "Map_MGZSwingingPlatform",
+      "target": "Map_MGZSwingingPlatform"
+    },
+    {
+      "external": "Map_MGZSwingingSpikeBall",
+      "target": "Map_MGZSwingingSpikeBall"
+    },
+    {
+      "external": "Map_MGZHeadTrigger",
+      "target": "Map_MGZHeadTrigger"
+    },
+    {
+      "external": "Map_MGZTriggerPlatform",
+      "target": "Map_MGZTriggerPlatform"
+    },
+    {
+      "external": "Map_MGZMovingSpikePlatform",
+      "target": "Map_MGZMovingSpikePlatform"
+    },
+    {
+      "external": "Map_MGZPulley",
+      "target": "Map_MGZPulley"
+    },
+    {
+      "external": "Map_HCZWaterDrop",
+      "target": "Map_HCZWaterDrop"
+    },
+    {
+      "external": "Map_HCZWaterSplash",
+      "target": "Map_HCZWaterSplash"
+    },
+    {
+      "external": "Map_HCZWaterSplash2",
+      "target": "Map_HCZWaterSplash2"
+    },
+    {
+      "external": "Comp_ScreenInit",
+      "target": "Comp_ScreenInit"
+    },
+    {
+      "external": "Comp_ScreenEvent",
+      "target": "Comp_ScreenEvent"
+    },
+    {
+      "external": "CGZ_ScreenEvent",
+      "target": "CGZ_ScreenEvent"
+    },
+    {
+      "external": "ALZ_BackgroundInit",
+      "target": "ALZ_BackgroundInit"
+    },
+    {
+      "external": "BPZ_BackgroundInit",
+      "target": "BPZ_BackgroundInit"
+    },
+    {
+      "external": "DPZ_BackgroundInit",
+      "target": "DPZ_BackgroundInit"
+    },
+    {
+      "external": "CGZ_BackgroundInit",
+      "target": "CGZ_BackgroundInit"
+    },
+    {
+      "external": "EMZ_BackgroundInit",
+      "target": "EMZ_BackgroundInit"
+    },
+    {
+      "external": "ALZ_BackgroundEvent",
+      "target": "ALZ_BackgroundEvent"
+    },
+    {
+      "external": "BPZ_BackgroundEvent",
+      "target": "BPZ_BackgroundEvent"
+    },
+    {
+      "external": "CGZ_BackgroundEvent",
+      "target": "CGZ_BackgroundEvent"
+    },
+    {
+      "external": "EMZ_BackgroundEvent",
+      "target": "EMZ_BackgroundEvent"
+    },
+    {
+      "external": "DPZ_BackgroundEvent",
+      "target": "DPZ_BackgroundEvent"
+    },
+    {
+      "external": "AIZ_TreeReveal",
+      "target": "AIZ_TreeReveal"
+    },
+    {
+      "external": "AIZ_TreeRevealArray",
+      "target": "AIZ_TreeRevealArray"
+    },
+    {
+      "external": "AIZ1_IntroDeform",
+      "target": "AIZ1_IntroDeform"
+    },
+    {
+      "external": "AIZ1_Deform",
+      "target": "AIZ1_Deform"
+    },
+    {
+      "external": "AIZ1_ApplyDeformWater",
+      "target": "AIZ1_ApplyDeformWater"
+    },
+    {
+      "external": "AIZ1_FireRise",
+      "target": "AIZ1_FireRise"
+    },
+    {
+      "external": "AIZTrans_WavyFlame",
+      "target": "AIZTrans_WavyFlame"
+    },
+    {
+      "external": "AIZ1_IntroDrawArray",
+      "target": "AIZ1_IntroDrawArray"
+    },
+    {
+      "external": "AIZ1_IntroDeformArray",
+      "target": "AIZ1_IntroDeformArray"
+    },
+    {
+      "external": "AIZ1_BGDrawArray",
+      "target": "AIZ1_BGDrawArray"
+    },
+    {
+      "external": "AIZ2_Deform",
+      "target": "AIZ2_Deform"
+    },
+    {
+      "external": "AIZ2_ApplyDeform",
+      "target": "AIZ2_ApplyDeform"
+    },
+    {
+      "external": "Pal_AIZBattleship",
+      "target": "Pal_AIZBattleship"
+    },
+    {
+      "external": "Pal_AIZBossSmall",
+      "target": "Pal_AIZBossSmall"
+    },
+    {
+      "external": "AIZBattleShip_BobbingMotion",
+      "target": "AIZBattleShip_BobbingMotion"
+    },
+    {
+      "external": "AIZBattleship_BombScript",
+      "target": "AIZBattleship_BombScript"
+    },
+    {
+      "external": "AIZBombExplodeDat",
+      "target": "AIZBombExplodeDat"
+    },
+    {
+      "external": "AIZMakeTreeScript",
+      "target": "AIZMakeTreeScript"
+    },
+    {
+      "external": "Map_AIZShipPropeller",
+      "target": "Map_AIZShipPropeller"
+    },
+    {
+      "external": "Ani_AIZShipPropeller",
+      "target": "Ani_AIZShipPropeller"
+    },
+    {
+      "external": "Map_AIZ2BombExplode",
+      "target": "Map_AIZ2BombExplode"
+    },
+    {
+      "external": "Ani_AIZ2BombExplode",
+      "target": "Ani_AIZ2BombExplode"
+    },
+    {
+      "external": "Map_AIZ2BGTree",
+      "target": "Map_AIZ2BGTree"
+    },
+    {
+      "external": "Map_AIZ2BossSmall",
+      "target": "Map_AIZ2BossSmall"
+    },
+    {
+      "external": "HCZ1_BGDeformArray",
+      "target": "HCZ1_BGDeformArray"
+    },
+    {
+      "external": "HCZ2_BGDeformArray",
+      "target": "HCZ2_BGDeformArray"
+    },
+    {
+      "external": "HCZ2_BGDeformIndex",
+      "target": "HCZ2_BGDeformIndex"
+    },
+    {
+      "external": "MGZ1_Deform",
+      "target": "MGZ1_Deform"
+    },
+    {
+      "external": "MGZ1_BGDeformArray",
+      "target": "MGZ1_BGDeformArray"
+    },
+    {
+      "external": "MGZ2_QuakeEventArray",
+      "target": "MGZ2_QuakeEventArray"
+    },
+    {
+      "external": "MGZ2_ChunkEventArray",
+      "target": "MGZ2_ChunkEventArray"
+    },
+    {
+      "external": "MGZ2_ScreenRedrawArray",
+      "target": "MGZ2_ScreenRedrawArray"
+    },
+    {
+      "external": "MGZ2_ChunkReplaceArray",
+      "target": "MGZ2_ChunkReplaceArray"
+    },
+    {
+      "external": "MGZ2_CollapseScrollDelay",
+      "target": "MGZ2_CollapseScrollDelay"
+    },
+    {
+      "external": "MGZ2_FGVScrollArray",
+      "target": "MGZ2_FGVScrollArray"
+    },
+    {
+      "external": "MGZ2_BGDeform",
+      "target": "MGZ2_BGDeform"
+    },
+    {
+      "external": "MGZ2_BGDrawArray",
+      "target": "MGZ2_BGDrawArray"
+    },
+    {
+      "external": "MGZ2_BGDeformArray",
+      "target": "MGZ2_BGDeformArray"
+    },
+    {
+      "external": "ICZ1_SetIntroPal",
+      "target": "ICZ1_SetIntroPal"
+    },
+    {
+      "external": "ICZ1_SetIndoorPal",
+      "target": "ICZ1_SetIndoorPal"
+    },
+    {
+      "external": "ICZ1_IntroBGDeformArray",
+      "target": "ICZ1_IntroBGDeformArray"
+    },
+    {
+      "external": "ICZ2_OutDeform",
+      "target": "ICZ2_OutDeform"
+    },
+    {
+      "external": "ICZ2_InDeform",
+      "target": "ICZ2_InDeform"
+    },
+    {
+      "external": "ICZ2_SetOutdoorsPal",
+      "target": "ICZ2_SetOutdoorsPal"
+    },
+    {
+      "external": "ICZ2_SetIndoorsPal",
+      "target": "ICZ2_SetIndoorsPal"
+    },
+    {
+      "external": "ICZ2_SetICZ1Pal",
+      "target": "ICZ2_SetICZ1Pal"
+    },
+    {
+      "external": "ICZ2_OutBGDeformArray",
+      "target": "ICZ2_OutBGDeformArray"
+    },
+    {
+      "external": "ICZ2_InBGDeformArray",
+      "target": "ICZ2_InBGDeformArray"
+    },
+    {
+      "external": "LBZ1_CheckLayoutMod",
+      "target": "LBZ1_CheckLayoutMod"
+    },
+    {
+      "external": "LBZ1_DoMod4",
+      "target": "LBZ1_DoMod4"
+    },
+    {
+      "external": "LBZ1_DoMod3",
+      "target": "LBZ1_DoMod3"
+    },
+    {
+      "external": "LBZ1_DoMod2",
+      "target": "LBZ1_DoMod2"
+    },
+    {
+      "external": "LBZ1_DoMod1",
+      "target": "LBZ1_DoMod1"
+    },
+    {
+      "external": "LBZ1_FGVScrollArray",
+      "target": "LBZ1_FGVScrollArray"
+    },
+    {
+      "external": "LBZ1_LayoutModExitRange",
+      "target": "LBZ1_LayoutModExitRange"
+    },
+    {
+      "external": "LBZ1_CollapseScrollSpeed",
+      "target": "LBZ1_CollapseScrollSpeed"
+    },
+    {
+      "external": "LBZ1_Deform",
+      "target": "LBZ1_Deform"
+    },
+    {
+      "external": "LBZ2_BGDeformArray",
+      "target": "LBZ2_BGDeformArray"
+    },
+    {
+      "external": "LBZ2_DEBGDeformArray",
+      "target": "LBZ2_DEBGDeformArray"
+    },
+    {
+      "external": "LBZ2_CloudDeformArray",
+      "target": "LBZ2_CloudDeformArray"
+    },
+    {
+      "external": "LBZ2_BGUWDeformRange",
+      "target": "LBZ2_BGUWDeformRange"
+    },
+    {
+      "external": "Gumball_ScreenInit",
+      "target": "Gumball_ScreenInit"
+    },
+    {
+      "external": "Gumball_ScreenEvent",
+      "target": "Gumball_ScreenEvent"
+    },
+    {
+      "external": "Gumball_BackgroundInit",
+      "target": "Gumball_BackgroundInit"
+    },
+    {
+      "external": "Gumball_BackgroundEvent",
+      "target": "Gumball_BackgroundEvent"
+    },
+    {
+      "external": "Map_S3EndingGraphics",
+      "target": "Map_EndingGraphics"
+    },
+    {
+      "external": "ArtNem_S3EndingGraphics",
+      "target": "ArtNem_EndingGraphics"
+    },
+    {
+      "external": "SStageLayoutPtrs",
+      "target": "SStageLayoutPtrs"
+    },
+    {
+      "external": "HCZ_WaterlineScroll_Data",
+      "target": "HCZ_WaterlineScroll_Data"
+    },
+    {
+      "external": "LBZ_WaterlineScroll_Data",
+      "target": "LBZ_WaterlineScroll_Data"
+    },
+    {
+      "external": "Solid_AIZ1",
+      "target": "Solid_AIZ1"
+    },
+    {
+      "external": "Solid_AIZ2",
+      "target": "Solid_AIZ2"
+    },
+    {
+      "external": "Solid_HCZ1",
+      "target": "Solid_HCZ1"
+    },
+    {
+      "external": "Solid_HCZ2",
+      "target": "Solid_HCZ2"
+    },
+    {
+      "external": "Solid_MGZ1",
+      "target": "Solid_MGZ1"
+    },
+    {
+      "external": "Solid_MGZ2",
+      "target": "Solid_MGZ2"
+    },
+    {
+      "external": "Solid_CNZ",
+      "target": "Solid_CNZ"
+    },
+    {
+      "external": "Solid_ICZ1",
+      "target": "Solid_ICZ1"
+    },
+    {
+      "external": "Solid_ICZ2",
+      "target": "Solid_ICZ2"
+    },
+    {
+      "external": "Solid_LBZ1",
+      "target": "Solid_LBZ1"
+    },
+    {
+      "external": "Solid_LBZ2",
+      "target": "Solid_LBZ2"
+    },
+    {
+      "external": "Solid_ALZ",
+      "target": "Solid_ALZ"
+    },
+    {
+      "external": "Solid_BPZ",
+      "target": "Solid_BPZ"
+    },
+    {
+      "external": "Solid_DPZ",
+      "target": "Solid_DPZ"
+    },
+    {
+      "external": "Solid_CGZ",
+      "target": "Solid_CGZ"
+    },
+    {
+      "external": "Solid_EMZ",
+      "target": "Solid_EMZ"
+    },
+    {
+      "external": "Solid_Gumball_Special",
+      "target": "Solid_Gumball_Special"
+    },
+    {
+      "external": "Layout_AIZ1",
+      "target": "Layout_AIZ1"
+    },
+    {
+      "external": "Layout_AIZ2",
+      "target": "Layout_AIZ2"
+    },
+    {
+      "external": "Layout_HCZ1",
+      "target": "Layout_HCZ1"
+    },
+    {
+      "external": "Layout_HCZ2",
+      "target": "Layout_HCZ2"
+    },
+    {
+      "external": "Layout_MGZ1",
+      "target": "Layout_MGZ1"
+    },
+    {
+      "external": "Layout_MGZ2",
+      "target": "Layout_MGZ2"
+    },
+    {
+      "external": "Layout_CNZ1",
+      "target": "Layout_CNZ1"
+    },
+    {
+      "external": "Layout_CNZ2",
+      "target": "Layout_CNZ2"
+    },
+    {
+      "external": "Layout_ICZ1",
+      "target": "Layout_ICZ1"
+    },
+    {
+      "external": "Layout_ICZ2",
+      "target": "Layout_ICZ2"
+    },
+    {
+      "external": "Layout_LBZ1",
+      "target": "Layout_LBZ1"
+    },
+    {
+      "external": "Layout_LBZ2",
+      "target": "Layout_LBZ2"
+    },
+    {
+      "external": "Layout_ALZ",
+      "target": "Layout_ALZ"
+    },
+    {
+      "external": "Layout_BPZ",
+      "target": "Layout_BPZ"
+    },
+    {
+      "external": "Layout_DPZ",
+      "target": "Layout_DPZ"
+    },
+    {
+      "external": "Layout_CGZ",
+      "target": "Layout_CGZ"
+    },
+    {
+      "external": "Layout_EMZ",
+      "target": "Layout_EMZ"
+    },
+    {
+      "external": "Layout_Gumball_Special",
+      "target": "Layout_Gumball_Special"
+    },
+    {
+      "external": "ArtUnc_CNZCannon",
+      "target": "ArtUnc_CNZCannon"
+    },
+    {
+      "external": "ArtUnc_SStageTails",
+      "target": "ArtUnc_SStageTails"
+    },
+    {
+      "external": "Map_SStageTails",
+      "target": "Map_SStageTails"
+    },
+    {
+      "external": "PLC_SStageTails",
+      "target": "PLC_SStageTails"
+    },
+    {
+      "external": "ArtUnc_SStageTailstails",
+      "target": "ArtUnc_SStageTailstails"
+    },
+    {
+      "external": "Map_SStageTailstails",
+      "target": "Map_SStageTailstails"
+    },
+    {
+      "external": "PLC_SStageTailstails",
+      "target": "PLC_SStageTailstails"
+    },
+    {
+      "external": "Map_Sonic2P",
+      "target": "Map_Sonic2P"
+    },
+    {
+      "external": "PLC_Sonic2P",
+      "target": "PLC_Sonic2P"
+    },
+    {
+      "external": "Map_Tails2P",
+      "target": "Map_Tails2P"
+    },
+    {
+      "external": "Map_Tails2P_Tail",
+      "target": "Map_Tails2P_Tail"
+    },
+    {
+      "external": "PLC_Tails2P",
+      "target": "PLC_Tails2P"
+    },
+    {
+      "external": "DPLC_Tails2P_Tail",
+      "target": "DPLC_Tails2P_Tail"
+    },
+    {
+      "external": "Map_Knuckles2P",
+      "target": "Map_Knuckles2P"
+    },
+    {
+      "external": "PLC_Knuckles2P",
+      "target": "PLC_Knuckles2P"
+    },
+    {
+      "external": "ArtUnc_AniAIZ1_0",
+      "target": "ArtUnc_AniAIZ1_0"
+    },
+    {
+      "external": "ArtUnc_AniAIZ1_1",
+      "target": "ArtUnc_AniAIZ1_1"
+    },
+    {
+      "external": "ArtUnc_AniAIZ2_1",
+      "target": "ArtUnc_AniAIZ2_1"
+    },
+    {
+      "external": "ArtUnc_AniAIZ2_0",
+      "target": "ArtUnc_AniAIZ2_0"
+    },
+    {
+      "external": "ArtUnc_AniAIZ2_3",
+      "target": "ArtUnc_AniAIZ2_3"
+    },
+    {
+      "external": "ArtUnc_AniAIZ2_2",
+      "target": "ArtUnc_AniAIZ2_2"
+    },
+    {
+      "external": "ArtUnc_AniAIZ2_FirstTree",
+      "target": "ArtUnc_AniAIZ2_FirstTree"
+    },
+    {
+      "external": "ArtUnc_AniHCZ1_0",
+      "target": "ArtUnc_AniHCZ1_0"
+    },
+    {
+      "external": "ArtUnc_AniHCZ1_WaterlineBelow",
+      "target": "ArtUnc_AniHCZ1_WaterlineBelow"
+    },
+    {
+      "external": "ArtUnc_FixHCZ1_UpperBG1",
+      "target": "ArtUnc_FixHCZ1_UpperBG1"
+    },
+    {
+      "external": "ArtUnc_AniHCZ1_WaterlineAbove",
+      "target": "ArtUnc_AniHCZ1_WaterlineAbove"
+    },
+    {
+      "external": "ArtUnc_FixHCZ1_LowerBG1",
+      "target": "ArtUnc_FixHCZ1_LowerBG1"
+    },
+    {
+      "external": "ArtUnc_AniHCZ1_WaterlineBelow2",
+      "target": "ArtUnc_AniHCZ1_WaterlineBelow2"
+    },
+    {
+      "external": "ArtUnc_FixHCZ1_UpperBG2",
+      "target": "ArtUnc_FixHCZ1_UpperBG2"
+    },
+    {
+      "external": "ArtUnc_AniHCZ1_WaterlineAbove2",
+      "target": "ArtUnc_AniHCZ1_WaterlineAbove2"
+    },
+    {
+      "external": "ArtUnc_FixHCZ1_LowerBG2",
+      "target": "ArtUnc_FixHCZ1_LowerBG2"
+    },
+    {
+      "external": "ArtUnc_AniHCZ__1",
+      "target": "ArtUnc_AniHCZ__1"
+    },
+    {
+      "external": "ArtUnc_AniHCZ2_0",
+      "target": "ArtUnc_AniHCZ2_0"
+    },
+    {
+      "external": "ArtUnc_AniHCZ2_SmallBGLine",
+      "target": "ArtUnc_AniHCZ2_SmallBGLine"
+    },
+    {
+      "external": "ArtUnc_AniHCZ2_2",
+      "target": "ArtUnc_AniHCZ2_2"
+    },
+    {
+      "external": "ArtUnc_AniHCZ2_3",
+      "target": "ArtUnc_AniHCZ2_3"
+    },
+    {
+      "external": "ArtUnc_AniHCZ2_4",
+      "target": "ArtUnc_AniHCZ2_4"
+    },
+    {
+      "external": "ArtUnc_AniMGZ__0",
+      "target": "ArtUnc_AniMGZ__0"
+    },
+    {
+      "external": "ArtUnc_AniMGZ__1",
+      "target": "ArtUnc_AniMGZ__1"
+    },
+    {
+      "external": "ArtUnc_AniCNZ__0",
+      "target": "ArtUnc_AniCNZ__0"
+    },
+    {
+      "external": "ArtUnc_AniCNZ__1",
+      "target": "ArtUnc_AniCNZ__1"
+    },
+    {
+      "external": "ArtUnc_AniCNZ__2",
+      "target": "ArtUnc_AniCNZ__2"
+    },
+    {
+      "external": "ArtUnc_AniCNZ__3",
+      "target": "ArtUnc_AniCNZ__3"
+    },
+    {
+      "external": "ArtUnc_AniCNZ__4",
+      "target": "ArtUnc_AniCNZ__4"
+    },
+    {
+      "external": "ArtUnc_AniCNZ__6",
+      "target": "ArtUnc_AniCNZ__6"
+    },
+    {
+      "external": "ArtUnc_AniCNZ__5",
+      "target": "ArtUnc_AniCNZ__5"
+    },
+    {
+      "external": "ArtUnc_AniICZ__1",
+      "target": "ArtUnc_AniICZ__1"
+    },
+    {
+      "external": "ArtUnc_AniICZ__2",
+      "target": "ArtUnc_AniICZ__2"
+    },
+    {
+      "external": "ArtUnc_AniICZ__3",
+      "target": "ArtUnc_AniICZ__3"
+    },
+    {
+      "external": "ArtUnc_AniICZ__4",
+      "target": "ArtUnc_AniICZ__4"
+    },
+    {
+      "external": "ArtUnc_AniICZ__5",
+      "target": "ArtUnc_AniICZ__5"
+    },
+    {
+      "external": "ArtUnc_AniICZ__0",
+      "target": "ArtUnc_AniICZ__0"
+    },
+    {
+      "external": "ArtUnc_AniLBZ1_0",
+      "target": "ArtUnc_AniLBZ1_0"
+    },
+    {
+      "external": "ArtUnc_AniLBZ1_1",
+      "target": "ArtUnc_AniLBZ1_1"
+    },
+    {
+      "external": "ArtUnc_AniLBZ1_2",
+      "target": "ArtUnc_AniLBZ1_2"
+    },
+    {
+      "external": "ArtUnc_AniLBZ2_2",
+      "target": "ArtUnc_AniLBZ2_2"
+    },
+    {
+      "external": "ArtUnc_AniLBZ2_WaterlineBelow",
+      "target": "ArtUnc_AniLBZ2_WaterlineBelow"
+    },
+    {
+      "external": "ArtUnc_AniLBZ2_LowerBG",
+      "target": "ArtUnc_AniLBZ2_LowerBG"
+    },
+    {
+      "external": "ArtUnc_AniLBZ2_WaterlineAbove",
+      "target": "ArtUnc_AniLBZ2_WaterlineAbove"
+    },
+    {
+      "external": "ArtUnc_AniLBZ2_UpperBG",
+      "target": "ArtUnc_AniLBZ2_UpperBG"
+    },
+    {
+      "external": "ArtUnc_AniLBZ__0",
+      "target": "ArtUnc_AniLBZ__0"
+    },
+    {
+      "external": "ArtUnc_AniLBZ2_0",
+      "target": "ArtUnc_AniLBZ2_0"
+    },
+    {
+      "external": "ArtUnc_AniLBZ2_1",
+      "target": "ArtUnc_AniLBZ2_1"
+    },
+    {
+      "external": "ArtUnc_AniALZ",
+      "target": "ArtUnc_AniALZ"
+    },
+    {
+      "external": "ArtUnc_AniBPZ__0",
+      "target": "ArtUnc_AniBPZ__0"
+    },
+    {
+      "external": "ArtUnc_AniBPZ__1",
+      "target": "ArtUnc_AniBPZ__1"
+    },
+    {
+      "external": "ArtUnc_AniBPZ__2",
+      "target": "ArtUnc_AniBPZ__2"
+    },
+    {
+      "external": "ArtUnc_AniBPZ__3",
+      "target": "ArtUnc_AniBPZ__3"
+    },
+    {
+      "external": "ArtUnc_AniDPZ",
+      "target": "ArtUnc_AniDPZ"
+    },
+    {
+      "external": "ArtUnc_AniDPZ__BG",
+      "target": "ArtUnc_AniDPZ__BG"
+    },
+    {
+      "external": "ArtUnc_AniGumball",
+      "target": "ArtUnc_AniGumball"
+    },
+    {
+      "external": "ArtUnc_SplashDrown",
+      "target": "ArtUnc_SplashDrown"
+    },
+    {
+      "external": "ArtNem_Title_SonicSprites",
+      "target": "ArtNem_Title_SonicSprites"
+    },
+    {
+      "external": "DemoDat_AIZ",
+      "target": "DemoDat_AIZ"
+    },
+    {
+      "external": "DemoDat_HCZ",
+      "target": "DemoDat_HCZ"
+    },
+    {
+      "external": "DemoDat_MGZ",
+      "target": "DemoDat_MGZ"
+    },
+    {
+      "external": "Snd_AIZ1",
+      "target": "Snd_AIZ1"
+    },
+    {
+      "external": "Snd_AIZ2",
+      "target": "Snd_AIZ2"
+    },
+    {
+      "external": "Snd_HCZ1",
+      "target": "Snd_HCZ1"
+    },
+    {
+      "external": "Snd_HCZ2",
+      "target": "Snd_HCZ2"
+    },
+    {
+      "external": "Snd_MGZ1",
+      "target": "Snd_MGZ1"
+    },
+    {
+      "external": "Snd_MGZ2",
+      "target": "Snd_MGZ2"
+    },
+    {
+      "external": "Snd_CNZ2",
+      "target": "Snd_CNZ2"
+    },
+    {
+      "external": "Snd_CNZ1",
+      "target": "Snd_CNZ1"
+    },
+    {
+      "external": "Snd_ICZ2",
+      "target": "Snd_ICZ2"
+    },
+    {
+      "external": "Snd_ICZ1",
+      "target": "Snd_ICZ1"
+    },
+    {
+      "external": "Snd_LBZ2",
+      "target": "Snd_LBZ2"
+    },
+    {
+      "external": "Snd_LBZ1",
+      "target": "Snd_LBZ1"
+    },
+    {
+      "external": "Snd_GumBonus",
+      "target": "Snd_GumBonus"
+    },
+    {
+      "external": "Snd_ALZ",
+      "target": "Snd_ALZ"
+    },
+    {
+      "external": "Snd_BPZ",
+      "target": "Snd_BPZ"
+    },
+    {
+      "external": "Snd_DPZ",
+      "target": "Snd_DPZ"
+    },
+    {
+      "external": "Snd_CGZ",
+      "target": "Snd_CGZ"
+    },
+    {
+      "external": "Snd_EMZ",
+      "target": "Snd_EMZ"
+    },
+    {
+      "external": "Snd_S3Credits",
+      "target": "Snd_S3Credits"
+    },
+    {
+      "external": "Snd_2PMenu",
+      "target": "Snd_2PMenu"
+    },
+    {
+      "external": "Snd_Drown",
+      "target": "Snd_Drown"
+    },
+    {
+      "external": "DacBank2",
+      "target": "DacBank2"
+    },
+    {
+      "external": "DAC_9C_Data",
+      "target": "DAC_9C_Data"
+    },
+    {
+      "external": "DAC_9D_Data",
+      "target": "DAC_9D_Data"
+    },
+    {
+      "external": "DAC_9E_Data",
+      "target": "DAC_9E_Data"
+    },
+    {
+      "external": "DAC_9F_Data",
+      "target": "DAC_9F_Data"
+    },
+    {
+      "external": "DAC_A0_Data",
+      "target": "DAC_A0_Data"
+    },
+    {
+      "external": "DAC_A1_Data",
+      "target": "DAC_A1_Data"
+    },
+    {
+      "external": "DAC_A2_Data",
+      "target": "DAC_A2_Data"
+    },
+    {
+      "external": "DAC_A3_Data",
+      "target": "DAC_A3_Data"
+    },
+    {
+      "external": "DAC_A4_Data",
+      "target": "DAC_A4_Data"
+    },
+    {
+      "external": "DAC_A5_Data",
+      "target": "DAC_A5_Data"
+    },
+    {
+      "external": "DAC_A6_Data",
+      "target": "DAC_A6_Data"
+    },
+    {
+      "external": "DAC_A7_Data",
+      "target": "DAC_A7_Data"
+    },
+    {
+      "external": "DAC_A8_Data",
+      "target": "DAC_A8_Data"
+    },
+    {
+      "external": "DAC_A9_Data",
+      "target": "DAC_A9_Data"
+    },
+    {
+      "external": "DAC_AA_Data",
+      "target": "DAC_AA_Data"
+    },
+    {
+      "external": "DAC_AB_Data",
+      "target": "DAC_AB_Data"
+    },
+    {
+      "external": "DAC_AC_Data",
+      "target": "DAC_AC_Data"
+    },
+    {
+      "external": "DAC_AD_AE_Data",
+      "target": "DAC_AD_AE_Data"
+    },
+    {
+      "external": "DAC_AF_B0_Data",
+      "target": "DAC_AF_B0_Data"
+    },
+    {
+      "external": "DAC_B1_Data",
+      "target": "DAC_B1_Data"
+    },
+    {
+      "external": "DAC_B4_C1_C2_C3_C4_Data",
+      "target": "DAC_B4_C1_C2_C3_C4_Data"
+    },
+    {
+      "external": "DAC_B5_Data",
+      "target": "DAC_B5_Data"
+    },
+    {
+      "external": "DAC_B6_Data",
+      "target": "DAC_B6_Data"
+    },
+    {
+      "external": "DAC_B7_Data",
+      "target": "DAC_B7_Data"
+    },
+    {
+      "external": "DAC_B8_B9_Data",
+      "target": "DAC_B8_B9_Data"
+    },
+    {
+      "external": "DAC_BA_Data",
+      "target": "DAC_BA_Data"
+    },
+    {
+      "external": "DAC_BB_Data",
+      "target": "DAC_BB_Data"
+    },
+    {
+      "external": "DAC_BC_Data",
+      "target": "DAC_BC_Data"
+    },
+    {
+      "external": "DAC_BD_Data",
+      "target": "DAC_BD_Data"
+    },
+    {
+      "external": "DAC_BE_Data",
+      "target": "DAC_BE_Data"
+    },
+    {
+      "external": "DAC_BF_Data",
+      "target": "DAC_BF_Data"
+    },
+    {
+      "external": "DAC_C0_Data",
+      "target": "DAC_C0_Data"
+    },
+    {
+      "external": "ArtUnc_Tails",
+      "target": "ArtUnc_Tails"
+    },
+    {
+      "external": "ArtUnc_Tails_Tail",
+      "target": "ArtUnc_Tails_Tail"
+    },
+    {
+      "external": "ArtUnc_Sonic2P",
+      "target": "ArtUnc_Sonic2P"
+    },
+    {
+      "external": "ArtUnc_Tails2P",
+      "target": "ArtUnc_Tails2P"
+    },
+    {
+      "external": "ArtUnc_Tails2P_Tail",
+      "target": "ArtUnc_Tails2P_Tail"
+    },
+    {
+      "external": "ArtUnc_Knuckles2P",
+      "target": "ArtUnc_Knuckles2P"
+    },
+    {
+      "external": "byte_33F06E",
+      "target": "ArtUnc_Knuckles2P",
+      "addend": 5390
+    },
+    {
+      "external": "byte_33F74C",
+      "target": "ArtUnc_Knuckles2P",
+      "addend": 7148
+    },
+    {
+      "external": "Map_Tails_Tail",
+      "target": "Map_Tails_Tail"
+    },
+    {
+      "external": "PLC_Tails_Tail",
+      "target": "PLC_Tails_Tail"
+    },
+    {
+      "external": "ICZSnowboard_Slope1",
+      "target": "ICZSnowboard_Slope1"
+    },
+    {
+      "external": "ICZSnowboard_Slope2",
+      "target": "ICZSnowboard_Slope2"
+    },
+    {
+      "external": "ArtUnc_SonicSnowboard",
+      "target": "ArtUnc_SonicSnowboard"
+    },
+    {
+      "external": "ArtUnc_Snowboard",
+      "target": "ArtUnc_Snowboard"
+    },
+    {
+      "external": "Map_SonicSnowboard",
+      "target": "Map_SonicSnowboard"
+    },
+    {
+      "external": "DPLC_SonicSnowboard",
+      "target": "DPLC_SonicSnowboard"
+    },
+    {
+      "external": "Map_Snowboard",
+      "target": "Map_Snowboard"
+    },
+    {
+      "external": "DPLC_Snowboard",
+      "target": "DPLC_Snowboard"
+    },
+    {
+      "external": "ArtNem_AIZIntroSprites",
+      "target": "ArtNem_AIZIntroSprites"
+    },
+    {
+      "external": "ArtNem_2PDashdust",
+      "target": "ArtNem_2PDashdust"
+    },
+    {
+      "external": "MapEni_S3TitleSonic1",
+      "target": "MapEni_S3TitleSonic1"
+    },
+    {
+      "external": "MapEni_S3TitleSonic2",
+      "target": "MapEni_S3TitleSonic2"
+    },
+    {
+      "external": "MapEni_S3TitleSonic3",
+      "target": "MapEni_S3TitleSonic3"
+    },
+    {
+      "external": "MapEni_S3TitleSonic4",
+      "target": "MapEni_S3TitleSonic4"
+    },
+    {
+      "external": "MapEni_S3TitleSonic5",
+      "target": "MapEni_S3TitleSonic5"
+    },
+    {
+      "external": "MapEni_S3TitleSonic6",
+      "target": "MapEni_S3TitleSonic6"
+    },
+    {
+      "external": "MapEni_S3TitleSonic7",
+      "target": "MapEni_S3TitleSonic7"
+    },
+    {
+      "external": "MapEni_S3TitleSonic8",
+      "target": "MapEni_S3TitleSonic8"
+    },
+    {
+      "external": "MapEni_S3TitleSonic9",
+      "target": "MapEni_S3TitleSonic9"
+    },
+    {
+      "external": "MapEni_S3TitleSonicA",
+      "target": "MapEni_S3TitleSonicA"
+    },
+    {
+      "external": "MapEni_S3TitleSonicB",
+      "target": "MapEni_S3TitleSonicB"
+    },
+    {
+      "external": "MapEni_S3TitleSonicC",
+      "target": "MapEni_S3TitleSonicC"
+    },
+    {
+      "external": "MapEni_S3TitleSonicD",
+      "target": "MapEni_S3TitleSonicD"
+    },
+    {
+      "external": "MapEni_S3TitleBg",
+      "target": "MapEni_S3TitleBg"
+    },
+    {
+      "external": "Map_S3TitleBanner",
+      "target": "Map_S3TitleBanner"
+    },
+    {
+      "external": "ArtNem_Title_S3Banner",
+      "target": "ArtNem_Title_S3Banner"
+    },
+    {
+      "external": "ArtKos_S3TitleSonic1",
+      "target": "ArtKos_S3TitleSonic1"
+    },
+    {
+      "external": "ArtKos_S3TitleSonic8",
+      "target": "ArtKos_S3TitleSonic8"
+    },
+    {
+      "external": "ArtKos_S3TitleSonic9",
+      "target": "ArtKos_S3TitleSonic9"
+    },
+    {
+      "external": "ArtKos_S3TitleSonicA",
+      "target": "ArtKos_S3TitleSonicA"
+    },
+    {
+      "external": "ArtKos_S3TitleSonicB",
+      "target": "ArtKos_S3TitleSonicB"
+    },
+    {
+      "external": "ArtKos_S3TitleSonicC",
+      "target": "ArtKos_S3TitleSonicC"
+    },
+    {
+      "external": "ArtKos_S3TitleSonicD",
+      "target": "ArtKos_S3TitleSonicD"
+    },
+    {
+      "external": "ArtNem_TailsLifeIcon",
+      "target": "ArtNem_TailsLifeIcon"
+    },
+    {
+      "external": "Map_LBZMiniboss",
+      "target": "Map_LBZMiniboss"
+    },
+    {
+      "external": "Map_LBZMinibossBox",
+      "target": "Map_LBZMinibossBox"
+    },
+    {
+      "external": "Map_SnaleBlaster",
+      "target": "Map_SnaleBlaster"
+    },
+    {
+      "external": "Map_Orbinaut",
+      "target": "Map_Orbinaut"
+    },
+    {
+      "external": "Map_Ribot",
+      "target": "Map_Ribot"
+    },
+    {
+      "external": "Map_Corkey",
+      "target": "Map_Corkey"
+    },
+    {
+      "external": "Map_Flybot767",
+      "target": "Map_Flybot767"
+    },
+    {
+      "external": "DPLC_Flybot767",
+      "target": "DPLC_Flybot767"
+    },
+    {
+      "external": "Map_LBZEndBoss",
+      "target": "Map_LBZEndBoss"
+    },
+    {
+      "external": "Map_CNZEndBoss",
+      "target": "Map_CNZEndBoss"
+    },
+    {
+      "external": "CNZEndBossMagnet_AngleX",
+      "target": "CNZEndBossMagnet_AngleX"
+    },
+    {
+      "external": "LBZFinalBoss2_CircleLookup",
+      "target": "LBZFinalBoss2_CircleLookup"
+    },
+    {
+      "external": "Map_Blastoid",
+      "target": "Map_Blastoid"
+    },
+    {
+      "external": "Map_Poindexter",
+      "target": "Map_Poindexter"
+    },
+    {
+      "external": "Map_Buggernaut",
+      "target": "Map_Buggernaut"
+    },
+    {
+      "external": "Map_MegaChopper",
+      "target": "Map_MegaChopper"
+    },
+    {
+      "external": "Map_TurboSpiker",
+      "target": "Map_TurboSpiker"
+    },
+    {
+      "external": "Map_Jawz",
+      "target": "Map_Jawz"
+    },
+    {
+      "external": "DPLC_Rhinobot",
+      "target": "DPLC_Rhinobot"
+    },
+    {
+      "external": "Map_Rhinobot",
+      "target": "Map_Rhinobot"
+    },
+    {
+      "external": "Map_AIZMinibossFlame",
+      "target": "Map_AIZMinibossFlame"
+    },
+    {
+      "external": "Map_Bloominator",
+      "target": "Map_Bloominator"
+    },
+    {
+      "external": "Map_MonkeyDude",
+      "target": "Map_MonkeyDude"
+    },
+    {
+      "external": "Map_MGZMiniboss",
+      "target": "Map_MGZMiniboss"
+    },
+    {
+      "external": "Map_CaterKillerJr",
+      "target": "Map_CaterKillerJr"
+    },
+    {
+      "external": "DPLC_Clamer",
+      "target": "DPLC_Clamer"
+    },
+    {
+      "external": "Map_Clamer",
+      "target": "Map_Clamer"
+    },
+    {
+      "external": "Map_Sparkle",
+      "target": "Map_Sparkle"
+    },
+    {
+      "external": "Map_Batbot",
+      "target": "Map_Batbot"
+    },
+    {
+      "external": "DPLC_BubblesBadnik",
+      "target": "DPLC_BubblesBadnik"
+    },
+    {
+      "external": "Map_BubblesBadnik",
+      "target": "Map_BubblesBadnik"
+    },
+    {
+      "external": "Map_Spiker",
+      "target": "Map_Spiker"
+    },
+    {
+      "external": "Map_Mantis",
+      "target": "Map_Mantis"
+    },
+    {
+      "external": "DPLC_Penguinator",
+      "target": "DPLC_Penguinator"
+    },
+    {
+      "external": "Map_Penguinator",
+      "target": "Map_Penguinator"
+    },
+    {
+      "external": "Map_ICZSnowdust",
+      "target": "Map_ICZSnowdust"
+    },
+    {
+      "external": "Map_StarPointer",
+      "target": "Map_StarPointer"
+    },
+    {
+      "external": "Map_AIZEndBoss",
+      "target": "Map_AIZEndBoss"
+    },
+    {
+      "external": "Map_AIZMiniboss",
+      "target": "Map_AIZMiniboss"
+    },
+    {
+      "external": "Map_AIZMinibossSmall",
+      "target": "Map_AIZMinibossSmall"
+    },
+    {
+      "external": "Map_MGZEndBoss",
+      "target": "Map_MGZEndBoss"
+    },
+    {
+      "external": "HCZMiniboss_RocketTwistLookup",
+      "target": "HCZMiniboss_RocketTwistLookup"
+    },
+    {
+      "external": "LBZ2FinalBoss2_CircleLookup2",
+      "target": "LBZ2FinalBoss2_CircleLookup2"
+    },
+    {
+      "external": "Map_HCZMiniboss",
+      "target": "Map_HCZMiniboss"
+    },
+    {
+      "external": "Map_HCZMinibossSplash",
+      "target": "Map_HCZMinibossSplash"
+    },
+    {
+      "external": "DPLC_HCZMinibossSplash",
+      "target": "DPLC_HCZMinibossSplash"
+    },
+    {
+      "external": "Map_ICZEndBoss",
+      "target": "Map_ICZEndBoss"
+    },
+    {
+      "external": "Map_CNZMiniboss",
+      "target": "Map_CNZMiniboss"
+    },
+    {
+      "external": "ICZMiniboss_OrbAngleLookup",
+      "target": "ICZMiniboss_OrbAngleLookup"
+    },
+    {
+      "external": "Map_ICZMiniboss",
+      "target": "Map_ICZMiniboss"
+    },
+    {
+      "external": "Map_HCZEndBoss",
+      "target": "Map_HCZEndBoss"
+    },
+    {
+      "external": "Map_MGZEndBossDebris",
+      "target": "Map_MGZEndBossDebris"
+    },
+    {
+      "external": "Map_ICZWallAndColumn",
+      "target": "Map_ICZWallAndColumn"
+    },
+    {
+      "external": "Map_ICZPlatforms",
+      "target": "Map_ICZPlatforms"
+    },
+    {
+      "external": "Map_LBZKnuxBomb",
+      "target": "Map_LBZKnuxBomb"
+    },
+    {
+      "external": "Map_CutsceneKnux",
+      "target": "Map_CutsceneKnux"
+    },
+    {
+      "external": "DPLC_CutsceneKnux",
+      "target": "DPLC_CutsceneKnux"
+    },
+    {
+      "external": "Map_AIZIntroPlane",
+      "target": "Map_AIZIntroPlane"
+    },
+    {
+      "external": "Map_AIZIntroEmeralds",
+      "target": "Map_AIZIntroEmeralds"
+    },
+    {
+      "external": "Map_LBZFinalBoss1",
+      "target": "Map_LBZFinalBoss1"
+    },
+    {
+      "external": "Map_LBZDeathEggSmall",
+      "target": "Map_LBZDeathEggSmall"
+    },
+    {
+      "external": "Pal_MGZFadeCNZ",
+      "target": "Pal_MGZFadeCNZ"
+    },
+    {
+      "external": "Map_LBZFinalBoss2",
+      "target": "Map_LBZFinalBoss2"
+    },
+    {
+      "external": "ArtNem_AIZMiniboss",
+      "target": "ArtNem_AIZMiniboss"
+    },
+    {
+      "external": "ArtKosM_AIZEndBoss",
+      "target": "ArtKosM_AIZEndBoss"
+    },
+    {
+      "external": "ArtNem_AIZMinibossSmall",
+      "target": "ArtNem_AIZMinibossSmall"
+    },
+    {
+      "external": "ArtUnc_AIZRhinobot",
+      "target": "ArtUnc_AIZRhinobot"
+    },
+    {
+      "external": "ArtKosM_AIZ_Bloominator",
+      "target": "ArtKosM_AIZ_Bloominator"
+    },
+    {
+      "external": "ArtKosM_AIZ_MonkeyDude",
+      "target": "ArtKosM_AIZ_MonkeyDude"
+    },
+    {
+      "external": "ArtKosM_AIZ_CaterkillerJr",
+      "target": "ArtKosM_AIZ_CaterkillerJr"
+    },
+    {
+      "external": "ArtNem_HCZMiniboss",
+      "target": "ArtNem_HCZMiniboss"
+    },
+    {
+      "external": "ArtNem_HCZEndBoss",
+      "target": "ArtNem_HCZEndBoss"
+    },
+    {
+      "external": "ArtNem_HCZDragonfly",
+      "target": "ArtNem_HCZDragonfly"
+    },
+    {
+      "external": "ArtKosM_Jawz",
+      "target": "ArtKosM_Jawz"
+    },
+    {
+      "external": "ArtKosM_MegaChopper",
+      "target": "ArtKosM_MegaChopper"
+    },
+    {
+      "external": "ArtKosM_Blastoid",
+      "target": "ArtKosM_Blastoid"
+    },
+    {
+      "external": "ArtKosM_TurboSpiker",
+      "target": "ArtKosM_TurboSpiker"
+    },
+    {
+      "external": "ArtKosM_Pointdexter",
+      "target": "ArtKosM_Pointdexter"
+    },
+    {
+      "external": "ArtKosM_MGZMiniboss",
+      "target": "ArtKosM_MGZMiniboss"
+    },
+    {
+      "external": "ArtNem_MGZSpire",
+      "target": "ArtNem_MGZSpire"
+    },
+    {
+      "external": "ArtKosM_MGZEndBoss",
+      "target": "ArtKosM_MGZEndBoss"
+    },
+    {
+      "external": "ArtScaled_MGZEndBoss",
+      "target": "ArtScaled_MGZEndBoss"
+    },
+    {
+      "external": "ArtKosM_MGZEndBossDebris",
+      "target": "ArtKosM_MGZEndBossDebris"
+    },
+    {
+      "external": "ArtUnc_BubblesBadnik",
+      "target": "ArtUnc_BubblesBadnik"
+    },
+    {
+      "external": "ArtKosM_Spiker",
+      "target": "ArtKosM_Spiker"
+    },
+    {
+      "external": "ArtKosM_Mantis",
+      "target": "ArtKosM_Mantis"
+    },
+    {
+      "external": "ArtNem_CNZMiniboss",
+      "target": "ArtNem_CNZMiniboss"
+    },
+    {
+      "external": "ArtNem_CNZEndBoss",
+      "target": "ArtNem_CNZEndBoss"
+    },
+    {
+      "external": "ArtUnc_Clamer",
+      "target": "ArtUnc_Clamer"
+    },
+    {
+      "external": "ArtKosM_ClamerShot",
+      "target": "ArtKosM_ClamerShot"
+    },
+    {
+      "external": "ArtKosM_Sparkle",
+      "target": "ArtKosM_Sparkle"
+    },
+    {
+      "external": "ArtKosM_Batbot",
+      "target": "ArtKosM_Batbot"
+    },
+    {
+      "external": "ArtKosM_CNZBalloon",
+      "target": "ArtKosM_CNZBalloon"
+    },
+    {
+      "external": "ArtNem_ICZMisc1",
+      "target": "ArtNem_ICZMisc1"
+    },
+    {
+      "external": "ArtNem_ICZIntroSprites",
+      "target": "ArtNem_ICZIntroSprites"
+    },
+    {
+      "external": "ArtNem_ICZMisc2",
+      "target": "ArtNem_ICZMisc2"
+    },
+    {
+      "external": "ArtNem_ICZEndBoss",
+      "target": "ArtNem_ICZEndBoss"
+    },
+    {
+      "external": "ArtNem_ICZMiniboss",
+      "target": "ArtNem_ICZMiniboss"
+    },
+    {
+      "external": "ArtUnc_Penguinator",
+      "target": "ArtUnc_Penguinator"
+    },
+    {
+      "external": "ArtKosM_ICZSnowdust",
+      "target": "ArtKosM_ICZSnowdust"
+    },
+    {
+      "external": "ArtKosM_StarPointer",
+      "target": "ArtKosM_StarPointer"
+    },
+    {
+      "external": "ArtKosM_LBZMiniboss",
+      "target": "ArtKosM_LBZMiniboss"
+    },
+    {
+      "external": "ArtKosM_LBZMinibossBox",
+      "target": "ArtKosM_LBZMinibossBox"
+    },
+    {
+      "external": "ArtNem_LBZFinalBoss1",
+      "target": "ArtNem_LBZFinalBoss1"
+    },
+    {
+      "external": "ArtKosM_LBZEndBoss",
+      "target": "ArtKosM_LBZEndBoss"
+    },
+    {
+      "external": "ArtKosM_LBZFinalBoss2",
+      "target": "ArtKosM_LBZFinalBoss2"
+    },
+    {
+      "external": "ArtKosM_SnaleBlaster",
+      "target": "ArtKosM_SnaleBlaster"
+    },
+    {
+      "external": "ArtKosM_Ribot",
+      "target": "ArtKosM_Ribot"
+    },
+    {
+      "external": "ArtKosM_Orbinaut",
+      "target": "ArtKosM_Orbinaut"
+    },
+    {
+      "external": "ArtKosM_Corkey",
+      "target": "ArtKosM_Corkey"
+    },
+    {
+      "external": "ArtUnc_Flybot767",
+      "target": "ArtUnc_Flybot767"
+    },
+    {
+      "external": "ArtNem_LBZKnuxBomb",
+      "target": "ArtNem_LBZKnuxBomb"
+    },
+    {
+      "external": "ArtKosM_LBZ2DeathEggSmall",
+      "target": "ArtKosM_LBZ2DeathEggSmall"
+    },
+    {
+      "external": "ArtKosM_LBZ2DeathEgg2_8x8",
+      "target": "ArtKosM_LBZ2DeathEgg2_8x8"
+    },
+    {
+      "external": "ArtNem_AIZBossFire",
+      "target": "ArtNem_AIZBossFire"
+    },
+    {
+      "external": "ArtKosM_AIZIntroPlane",
+      "target": "ArtKosM_AIZIntroPlane"
+    },
+    {
+      "external": "ArtUnc_CutsceneKnux",
+      "target": "ArtUnc_CutsceneKnux"
+    },
+    {
+      "external": "ArtKosM_AIZIntroEmeralds",
+      "target": "ArtKosM_AIZIntroEmeralds"
+    },
+    {
+      "external": "ArtKosM_TailsEndPose",
+      "target": "ArtKosM_TailsEndPose"
+    },
+    {
+      "external": "ArtNem_S38x16Font",
+      "target": "ArtNem_S38x16Font"
+    },
+    {
+      "external": "ArtNem_AIZCorkFloor",
+      "target": "ArtNem_AIZCorkFloor"
+    },
+    {
+      "external": "ArtNem_AIZCorkFloor2",
+      "target": "ArtNem_AIZCorkFloor2"
+    },
+    {
+      "external": "ArtNem_AIZSwingVine",
+      "target": "ArtNem_AIZSwingVine"
+    },
+    {
+      "external": "ArtNem_AIZSlideRope",
+      "target": "ArtNem_AIZSlideRope"
+    },
+    {
+      "external": "ArtNem_AIZBackgroundTree",
+      "target": "ArtNem_AIZBackgroundTree"
+    },
+    {
+      "external": "ArtNem_AIZMisc1",
+      "target": "ArtNem_AIZMisc1"
+    },
+    {
+      "external": "ArtNem_AIZFallingLog",
+      "target": "ArtNem_AIZFallingLog"
+    },
+    {
+      "external": "ArtNem_AIZMisc2",
+      "target": "ArtNem_AIZMisc2"
+    },
+    {
+      "external": "ArtNem_HCZSpikeBall",
+      "target": "ArtNem_HCZSpikeBall"
+    },
+    {
+      "external": "ArtNem_HCZWaveSplash",
+      "target": "ArtNem_HCZWaveSplash"
+    },
+    {
+      "external": "ArtNem_HCZButton",
+      "target": "ArtNem_HCZButton"
+    },
+    {
+      "external": "ArtNem_HCZMisc",
+      "target": "ArtNem_HCZMisc"
+    },
+    {
+      "external": "ArtNem_HCZWaterRush",
+      "target": "ArtNem_HCZWaterRush"
+    },
+    {
+      "external": "ArtKosM_HCZLargeFan",
+      "target": "ArtKosM_HCZLargeFan"
+    },
+    {
+      "external": "ArtKosM_HCZGeyserHorz",
+      "target": "ArtKosM_HCZGeyserHorz"
+    },
+    {
+      "external": "ArtKosM_HCZGeyserVert",
+      "target": "ArtKosM_HCZGeyserVert"
+    },
+    {
+      "external": "ArtNem_HCZ2Slide",
+      "target": "ArtNem_HCZ2Slide"
+    },
+    {
+      "external": "ArtNem_HCZ2BlockPlat",
+      "target": "ArtNem_HCZ2BlockPlat"
+    },
+    {
+      "external": "ArtUnc_HCZWaterSplash2",
+      "target": "ArtUnc_HCZWaterSplash2"
+    },
+    {
+      "external": "ArtUnc_HCZWaterSplash",
+      "target": "ArtUnc_HCZWaterSplash"
+    },
+    {
+      "external": "ArtNem_HCZ2KnuxWall",
+      "target": "ArtNem_HCZ2KnuxWall"
+    },
+    {
+      "external": "ArtNem_MGZMisc1",
+      "target": "ArtNem_MGZMisc1"
+    },
+    {
+      "external": "ArtNem_MGZMisc2",
+      "target": "ArtNem_MGZMisc2"
+    },
+    {
+      "external": "ArtNem_MGZSigns",
+      "target": "ArtNem_MGZSigns"
+    },
+    {
+      "external": "ArtNem_CNZMisc",
+      "target": "ArtNem_CNZMisc"
+    },
+    {
+      "external": "ArtNem_CNZPlatform",
+      "target": "ArtNem_CNZPlatform"
+    },
+    {
+      "external": "ArtNem_LBZMisc",
+      "target": "ArtNem_LBZMisc"
+    },
+    {
+      "external": "ArtNem_LBZTubeTrans",
+      "target": "ArtNem_LBZTubeTrans"
+    },
+    {
+      "external": "ArtNem_LBZ2Misc",
+      "target": "ArtNem_LBZ2Misc"
+    },
+    {
+      "external": "ArtNem_2PArt_1",
+      "target": "ArtNem_2PArt_1"
+    },
+    {
+      "external": "ArtNem_2PArt_2",
+      "target": "ArtNem_2PArt_2"
+    },
+    {
+      "external": "ArtNem_2PArt_3",
+      "target": "ArtNem_2PArt_3"
+    },
+    {
+      "external": "ArtNem_2PStartPost",
+      "target": "ArtNem_2PStartPost"
+    },
+    {
+      "external": "ArtNem_2PTime",
+      "target": "ArtNem_2PTime"
+    },
+    {
+      "external": "ArtNem_2PLapNum",
+      "target": "ArtNem_2PLapNum"
+    },
+    {
+      "external": "ArtNem_2PPosIcon",
+      "target": "ArtNem_2PPosIcon"
+    },
+    {
+      "external": "ArtNem_BPZMisc",
+      "target": "ArtNem_BPZMisc"
+    },
+    {
+      "external": "ArtNem_DPZMisc",
+      "target": "ArtNem_DPZMisc"
+    },
+    {
+      "external": "ArtNem_CGZMisc",
+      "target": "ArtNem_CGZMisc"
+    },
+    {
+      "external": "ArtNem_EMZMisc",
+      "target": "ArtNem_EMZMisc"
+    },
+    {
+      "external": "ArtKosM_AIZ2Bombership2_8x8",
+      "target": "ArtKosM_AIZ2Bombership2_8x8"
+    },
+    {
+      "external": "ArtKosM_ResultsMILES",
+      "target": "ArtKosM_ResultsMILES"
+    },
+    {
+      "external": "ArtKosM_ResultsTAILS",
+      "target": "ArtKosM_ResultsTAILS"
+    },
+    {
+      "external": "ArtKosM_AIZTitleCard",
+      "target": "ArtKosM_AIZTitleCard"
+    },
+    {
+      "external": "ArtKosM_HCZTitleCard",
+      "target": "ArtKosM_HCZTitleCard"
+    },
+    {
+      "external": "ArtKosM_MGZTitleCard",
+      "target": "ArtKosM_MGZTitleCard"
+    },
+    {
+      "external": "ArtKosM_CNZTitleCard",
+      "target": "ArtKosM_CNZTitleCard"
+    },
+    {
+      "external": "ArtKosM_ICZTitleCard",
+      "target": "ArtKosM_ICZTitleCard"
+    },
+    {
+      "external": "ArtKosM_LBZTitleCard",
+      "target": "ArtKosM_LBZTitleCard"
+    },
+    {
+      "external": "ArtKosM_ALZTitleCard",
+      "target": "ArtKosM_ALZTitleCard"
+    },
+    {
+      "external": "ArtKosM_BPZTitleCard",
+      "target": "ArtKosM_BPZTitleCard"
+    },
+    {
+      "external": "ArtKosM_CGZTitleCard",
+      "target": "ArtKosM_CGZTitleCard"
+    },
+    {
+      "external": "ArtKosM_DPZTitleCard",
+      "target": "ArtKosM_DPZTitleCard"
+    },
+    {
+      "external": "ArtKosM_EMZTitleCard",
+      "target": "ArtKosM_EMZTitleCard"
+    },
+    {
+      "external": "Pal_SaveMenuBG",
+      "target": "Pal_SaveMenuBG"
+    },
+    {
+      "external": "Pal_CompetitionMenuBG",
+      "target": "Pal_CompetitionMenuBG"
+    },
+    {
+      "external": "MapEni_S3MenuBG",
+      "target": "MapEni_S3MenuBG"
+    },
+    {
+      "external": "ArtKos_S3MenuBG",
+      "target": "ArtKos_S3MenuBG"
+    },
+    {
+      "external": "MapEni_CompetitionLevBorder",
+      "target": "MapEni_CompetitionLevBorder"
+    },
+    {
+      "external": "MapUnc_CompetitionTimeBorder",
+      "target": "MapUnc_CompetitionTimeBorder"
+    },
+    {
+      "external": "MapUnc_CompetitionBESTTIME",
+      "target": "MapUnc_CompetitionBESTTIME"
+    },
+    {
+      "external": "MapEni_CompetitionLevImage",
+      "target": "MapEni_CompetitionLevImage"
+    },
+    {
+      "external": "MapEni_CompetitionLevName",
+      "target": "MapEni_CompetitionLevName"
+    },
+    {
+      "external": "ArtKos_CompetitionMode",
+      "target": "ArtKos_CompetitionMode"
+    },
+    {
+      "external": "ArtKos_CompetitionLevel",
+      "target": "ArtKos_CompetitionLevel"
+    },
+    {
+      "external": "ArtKos_CompetitionResults",
+      "target": "ArtKos_CompetitionResults"
+    },
+    {
+      "external": "Map_CompetitionPlayerSprite",
+      "target": "Map_CompetitionPlayerSprite"
+    },
+    {
+      "external": "ArtKos_CompetitionPlayer",
+      "target": "ArtKos_CompetitionPlayer"
+    },
+    {
+      "external": "MapEni_SaveScreen_Layout",
+      "target": "MapEni_SaveScreen_Layout"
+    },
+    {
+      "external": "MapUnc_SaveScreenNEW",
+      "target": "MapUnc_SaveScreenNEW"
+    },
+    {
+      "external": "MapPtrs_SaveScreenStatic",
+      "target": "MapPtrs_SaveScreenStatic"
+    },
+    {
+      "external": "ArtKos_SaveScreenMisc",
+      "target": "ArtKos_SaveScreenMisc"
+    },
+    {
+      "external": "AIZ1_16x16_Primary_Kos",
+      "target": "AIZ1_16x16_Primary_Kos"
+    },
+    {
+      "external": "AIZ1_16x16_Secondary_Kos",
+      "target": "AIZ1_16x16_Secondary_Kos"
+    },
+    {
+      "external": "AIZ1_16x16_MainLevel_Kos",
+      "target": "AIZ1_16x16_MainLevel_Kos"
+    },
+    {
+      "external": "AIZ1_8x8_Primary_KosM",
+      "target": "AIZ1_8x8_Primary_KosM"
+    },
+    {
+      "external": "AIZ1_8x8_Secondary_KosM",
+      "target": "AIZ1_8x8_Secondary_KosM"
+    },
+    {
+      "external": "AIZ1_8x8_MainLevel_KosM",
+      "target": "AIZ1_8x8_MainLevel_KosM"
+    },
+    {
+      "external": "AIZ1_128x128_Kos",
+      "target": "AIZ1_128x128_Kos"
+    },
+    {
+      "external": "AIZ1_8x8_Flames_KosM",
+      "target": "AIZ1_8x8_Flames_KosM"
+    },
+    {
+      "external": "AIZ2_16x16_Primary_Kos",
+      "target": "AIZ2_16x16_Primary_Kos"
+    },
+    {
+      "external": "AIZ2_16x16_Secondary_Kos",
+      "target": "AIZ2_16x16_Secondary_Kos"
+    },
+    {
+      "external": "AIZ2_16x16_BomberShip_Kos",
+      "target": "AIZ2_16x16_BomberShip_Kos"
+    },
+    {
+      "external": "AIZ2_8x8_Primary_KosM",
+      "target": "AIZ2_8x8_Primary_KosM"
+    },
+    {
+      "external": "AIZ2_8x8_Secondary_KosM",
+      "target": "AIZ2_8x8_Secondary_KosM"
+    },
+    {
+      "external": "AIZ2_8x8_BomberShip_KosM",
+      "target": "AIZ2_8x8_BomberShip_KosM"
+    },
+    {
+      "external": "AIZ2_128x128_Kos",
+      "target": "AIZ2_128x128_Kos"
+    },
+    {
+      "external": "HCZ_16x16_Primary_Kos",
+      "target": "HCZ_16x16_Primary_Kos"
+    },
+    {
+      "external": "HCZ_8x8_Primary_KosM",
+      "target": "HCZ_8x8_Primary_KosM"
+    },
+    {
+      "external": "HCZ_128x128_Primary_Kos",
+      "target": "HCZ_128x128_Primary_Kos"
+    },
+    {
+      "external": "HCZ1_16x16_Secondary_Kos",
+      "target": "HCZ1_16x16_Secondary_Kos"
+    },
+    {
+      "external": "HCZ1_8x8_Secondary_KosM",
+      "target": "HCZ1_8x8_Secondary_KosM"
+    },
+    {
+      "external": "HCZ1_128x128_Secondary_Kos",
+      "target": "HCZ1_128x128_Secondary_Kos"
+    },
+    {
+      "external": "HCZ2_16x16_Secondary_Kos",
+      "target": "HCZ2_16x16_Secondary_Kos"
+    },
+    {
+      "external": "HCZ2_8x8_Secondary_KosM",
+      "target": "HCZ2_8x8_Secondary_KosM"
+    },
+    {
+      "external": "HCZ2_128x128_Secondary_Kos",
+      "target": "HCZ2_128x128_Secondary_Kos"
+    },
+    {
+      "external": "MGZ_16x16_Primary_Kos",
+      "target": "MGZ_16x16_Primary_Kos"
+    },
+    {
+      "external": "MGZ_8x8_Primary_KosM",
+      "target": "MGZ_8x8_Primary_KosM"
+    },
+    {
+      "external": "MGZ_128x128_Primary_Kos",
+      "target": "MGZ_128x128_Primary_Kos"
+    },
+    {
+      "external": "MGZ1_16x16_Secondary_Kos",
+      "target": "MGZ1_16x16_Secondary_Kos"
+    },
+    {
+      "external": "MGZ1_8x8_Secondary_KosM",
+      "target": "MGZ1_8x8_Secondary_KosM"
+    },
+    {
+      "external": "MGZ1_128x128_Secondary_Kos",
+      "target": "MGZ1_128x128_Secondary_Kos"
+    },
+    {
+      "external": "MGZ2_16x16_Secondary_Kos",
+      "target": "MGZ2_16x16_Secondary_Kos"
+    },
+    {
+      "external": "MGZ2_8x8_Secondary_KosM",
+      "target": "MGZ2_8x8_Secondary_KosM"
+    },
+    {
+      "external": "MGZ2_128x128_Secondary_Kos",
+      "target": "MGZ2_128x128_Secondary_Kos"
+    },
+    {
+      "external": "MGZ2_QuakeChunks",
+      "target": "MGZ2_QuakeChunks"
+    },
+    {
+      "external": "CNZ_16x16_Kos",
+      "target": "CNZ_16x16_Kos"
+    },
+    {
+      "external": "CNZ_8x8_KosM",
+      "target": "CNZ_8x8_KosM"
+    },
+    {
+      "external": "CNZ_128x128_Kos",
+      "target": "CNZ_128x128_Kos"
+    },
+    {
+      "external": "ICZ_16x16_Primary_Kos",
+      "target": "ICZ_16x16_Primary_Kos"
+    },
+    {
+      "external": "ICZ_8x8_Primary_KosM",
+      "target": "ICZ_8x8_Primary_KosM"
+    },
+    {
+      "external": "ICZ_128x128_Primary_Kos",
+      "target": "ICZ_128x128_Primary_Kos"
+    },
+    {
+      "external": "ICZ1_16x16_Secondary_Kos",
+      "target": "ICZ1_16x16_Secondary_Kos"
+    },
+    {
+      "external": "ICZ1_8x8_Secondary_KosM",
+      "target": "ICZ1_8x8_Secondary_KosM"
+    },
+    {
+      "external": "ICZ1_128x128_Secondary_Kos",
+      "target": "ICZ1_128x128_Secondary_Kos"
+    },
+    {
+      "external": "ICZ2_16x16_Secondary_Kos",
+      "target": "ICZ2_16x16_Secondary_Kos"
+    },
+    {
+      "external": "ICZ2_8x8_Secondary_KosM",
+      "target": "ICZ2_8x8_Secondary_KosM"
+    },
+    {
+      "external": "ICZ2_128x128_Secondary_Kos",
+      "target": "ICZ2_128x128_Secondary_Kos"
+    },
+    {
+      "external": "LBZ_16x16_Primary_Kos",
+      "target": "LBZ_16x16_Primary_Kos"
+    },
+    {
+      "external": "LBZ1_16x16_Secondary_Kos",
+      "target": "LBZ1_16x16_Secondary_Kos"
+    },
+    {
+      "external": "LBZ_8x8_Primary_KosM",
+      "target": "LBZ_8x8_Primary_KosM"
+    },
+    {
+      "external": "LBZ1_8x8_Secondary_KosM",
+      "target": "LBZ1_8x8_Secondary_KosM"
+    },
+    {
+      "external": "LBZ1_128x128_Kos",
+      "target": "LBZ1_128x128_Kos"
+    },
+    {
+      "external": "LBZ2_16x16_Secondary_Kos",
+      "target": "LBZ2_16x16_Secondary_Kos"
+    },
+    {
+      "external": "LBZ2_16x16_DeathEgg_Kos",
+      "target": "LBZ2_16x16_DeathEgg_Kos"
+    },
+    {
+      "external": "LBZ2_8x8_Secondary_KosM",
+      "target": "LBZ2_8x8_Secondary_KosM"
+    },
+    {
+      "external": "LBZ2_8x8_DeathEgg_KosM",
+      "target": "LBZ2_8x8_DeathEgg_KosM"
+    },
+    {
+      "external": "LBZ2_128x128_Kos",
+      "target": "LBZ2_128x128_Kos"
+    },
+    {
+      "external": "LBZ2_128x128_DeathEgg_Kos",
+      "target": "LBZ2_128x128_DeathEgg_Kos"
+    },
+    {
+      "external": "ALZ_16x16_Kos",
+      "target": "ALZ_16x16_Kos"
+    },
+    {
+      "external": "ALZ_8x8_KosM",
+      "target": "ALZ_8x8_KosM"
+    },
+    {
+      "external": "ALZ_128x128_Kos",
+      "target": "ALZ_128x128_Kos"
+    },
+    {
+      "external": "BPZ_16x16_Kos",
+      "target": "BPZ_16x16_Kos"
+    },
+    {
+      "external": "BPZ_8x8_KosM",
+      "target": "BPZ_8x8_KosM"
+    },
+    {
+      "external": "BPZ_128x128_Kos",
+      "target": "BPZ_128x128_Kos"
+    },
+    {
+      "external": "DPZ_16x16_Kos",
+      "target": "DPZ_16x16_Kos"
+    },
+    {
+      "external": "DPZ_8x8_KosM",
+      "target": "DPZ_8x8_KosM"
+    },
+    {
+      "external": "DPZ_128x128_Kos",
+      "target": "DPZ_128x128_Kos"
+    },
+    {
+      "external": "CGZ_16x16_Kos",
+      "target": "CGZ_16x16_Kos"
+    },
+    {
+      "external": "CGZ_8x8_KosM",
+      "target": "CGZ_8x8_KosM"
+    },
+    {
+      "external": "CGZ_128x128_Kos",
+      "target": "CGZ_128x128_Kos"
+    },
+    {
+      "external": "EMZ_16x16_Kos",
+      "target": "EMZ_16x16_Kos"
+    },
+    {
+      "external": "EMZ_8x8_KosM",
+      "target": "EMZ_8x8_KosM"
+    },
+    {
+      "external": "EMZ_128x128_Kos",
+      "target": "EMZ_128x128_Kos"
+    },
+    {
+      "external": "Gumball_16x16_Kos",
+      "target": "Gumball_16x16_Kos"
+    },
+    {
+      "external": "Gumball_8x8_KosM",
+      "target": "Gumball_8x8_KosM"
+    },
+    {
+      "external": "Gumball_128x128_Kos",
+      "target": "Gumball_128x128_Kos"
+    }
+  ],
+  "notes": "Interior aliases name bytes inside source-owned ranges; their consumers are not independently reinterpreted here."
+}
