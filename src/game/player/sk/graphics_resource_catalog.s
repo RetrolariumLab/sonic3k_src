@@ -18,18 +18,18 @@ ArtUnc_Tails_Extra:
                 even
 ; [FixBugs]: These two files contain some bugs. Read their contents for details
 Map_Sonic:
-                include "src/objects/shared/sonic/map_sonic.s"
+                include "src/objects/shared/sonic/mappings/sonic.s"
 PLC_Sonic:
-                include "src/objects/shared/sonic/dplc_sonic.s"
+                include "src/objects/shared/sonic/dplc/sonic.s"
 
 Map_Tails:
-                include "src/objects/shared/tails/map_tails.s"
+                include "src/objects/shared/tails/mappings/tails.s"
 PLC_Tails:
-                include "src/objects/shared/tails/dplc_tails.s"
+                include "src/objects/shared/tails/dplc/tails.s"
 Map_Knuckles:
-                include "src/objects/shared/knuckles/map_knuckles.s"
+                include "src/objects/shared/knuckles/mappings/knuckles.s"
 PLC_Knuckles:
-                include "src/objects/shared/knuckles/dplc_knuckles.s"
+                include "src/objects/shared/knuckles/dplc/knuckles.s"
 ArtKosM_HyperSonicStars:
                 binclude "data/General/Sprites/Sonic/Art/Hyper Sonic Stars.kosm"
                 even

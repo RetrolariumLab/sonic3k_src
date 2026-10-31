@@ -50,7 +50,7 @@ loc_4A274:
                 bra.w   loc_4A31A
 ; ---------------------------------------------------------------------------
 Ani_PachinkoItemOrb:
-                include "src/objects/shared/zones/pachinko/anim_item_orb.s"
+                include "src/objects/shared/zones/pachinko/animations/item_orb.s"
 Map_PachinkoItemOrb:
-                include "src/objects/shared/zones/pachinko/map_item_orb.s"
+                include "src/objects/shared/zones/pachinko/mappings/item_orb.s"
 ; End of function Obj_PachinkoItemOrb

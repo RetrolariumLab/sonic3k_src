@@ -134,4 +134,4 @@ loc_4A07A:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_PachinkoEnergyTrap:
-                include "src/objects/shared/zones/pachinko/map_energy_trap.s"
+                include "src/objects/shared/zones/pachinko/mappings/energy_trap.s"

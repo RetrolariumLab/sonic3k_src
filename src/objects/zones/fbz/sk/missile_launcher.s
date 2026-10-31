@@ -244,5 +244,5 @@ loc_3C768:
                 jmp     (Obj_Explosion).l
 ; ---------------------------------------------------------------------------
 Map_FBZMissileLauncher:
-                include "src/objects/shared/zones/fbz/map_missile_launcher.s"
+                include "src/objects/shared/zones/fbz/mappings/missile_launcher.s"
 ; End of function Obj_FBZMissileLauncher

@@ -111,5 +111,5 @@ loc_3398E:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_MGZTriggerPlatform:
-                include "src/objects/shared/zones/mgz/map_trigger_platform.s"
+                include "src/objects/shared/zones/mgz/mappings/trigger_platform.s"
 ; End of function Obj_MGZTriggerPlatform

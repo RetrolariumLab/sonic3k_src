@@ -233,7 +233,7 @@ locret_2534A:
 
 ; ---------------------------------------------------------------------------
 Map_LBZPlayerLauncher:
-                include "src/objects/shared/zones/lbz/map_player_launcher.s"
+                include "src/objects/shared/zones/lbz/mappings/player_launcher.s"
 
 ; =============== S U B R O U T I N E =======================================
 

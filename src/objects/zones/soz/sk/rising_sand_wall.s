@@ -162,4 +162,4 @@ loc_40D0A:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_SOZRisingSandWall:
-                include "src/objects/shared/zones/soz/map_rising_sand_wall.s"
+                include "src/objects/shared/zones/soz/mappings/rising_sand_wall.s"

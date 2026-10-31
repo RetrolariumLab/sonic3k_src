@@ -340,7 +340,7 @@ Obj_SuperTailsBirds_FindTarget:
 
 ; ---------------------------------------------------------------------------
 Map_SuperTails_Birds:
-                include "src/objects/shared/tails/map_super_tails_birds.s"
+                include "src/objects/shared/tails/mappings/super_tails_birds.s"
 ; ---------------------------------------------------------------------------
 ; unused
                 dc.l    byte_189ED

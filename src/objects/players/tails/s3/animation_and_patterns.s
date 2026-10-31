@@ -250,7 +250,7 @@ loc_16580:
                 rts
 ; ---------------------------------------------------------------------------
 AniTails:
-                include "src/objects/shared/tails/anim_tails_s3.s"
+                include "src/objects/shared/tails/animations/s3.s"
 ; ---------------------------------------------------------------------------
 
 Tails_Tail_Load_PLC:

@@ -112,4 +112,4 @@ loc_4A3B6:
 
 ; ---------------------------------------------------------------------------
 Map_PachinkoFItem:
-                include "src/objects/shared/zones/pachinko/map_f_item.s"
+                include "src/objects/shared/zones/pachinko/mappings/f_item.s"

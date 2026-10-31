@@ -442,6 +442,6 @@ word_203C0:
                 dc.w    $40, -$1C0
                 dc.w    $100, -$1E0
 Map_LRZBreakableRock:
-                include "src/objects/shared/zones/lrz/map_breakable_rock.s"
+                include "src/objects/shared/zones/lrz/mappings/breakable_rock.s"
 Map_LRZBreakableRock2:
-                include "src/objects/shared/zones/lrz/map_breakable_rock_2.s"
+                include "src/objects/shared/zones/lrz/mappings/breakable_rock_2.s"

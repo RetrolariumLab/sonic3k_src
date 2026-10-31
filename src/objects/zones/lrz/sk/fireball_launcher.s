@@ -70,5 +70,5 @@ loc_42CAC:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_LRZFireballLauncher:
-                include "src/objects/shared/zones/lrz/map_fireball_launcher.s"
+                include "src/objects/shared/zones/lrz/mappings/fireball_launcher.s"
 ; End of function Obj_LRZFireballLauncher

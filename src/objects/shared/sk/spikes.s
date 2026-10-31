@@ -500,6 +500,6 @@ locret_24454:
 
 ; ---------------------------------------------------------------------------
 Map_Spikes:
-                include "src/objects/shared/level_misc/map_spikes.s"
+                include "src/objects/shared/level_misc/mappings/spikes.s"
 Map_2PSpikes:
-                include "src/game/competition/shared/2p_zone/map_spikes.s"
+                include "src/game/competition/shared/mappings/spikes.s"

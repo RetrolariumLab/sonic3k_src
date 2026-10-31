@@ -24,5 +24,5 @@ loc_45450:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_LBZKnuxPillar:
-                include "src/objects/shared/zones/lbz/map_knuckles_pillar.s"
+                include "src/objects/shared/zones/lbz/mappings/knuckles_pillar.s"
 ; End of function Obj_LBZKnuxPillar

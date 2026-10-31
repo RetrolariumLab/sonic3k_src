@@ -1,8 +1,8 @@
 # Second-cartridge ABI
 
 Sonic & Knuckles addresses its attached Sonic 3 cartridge at 0x200000. The
-`src/memory/lockon/sonic3_exports.s` declarations reserve a virtual address map;
-they do not add Sonic 3 bytes to the Sonic & Knuckles image. This external
+`src/memory/lockon/sonic3_exports.inc` declarations reserve a virtual address
+map; they do not add Sonic 3 bytes to the Sonic & Knuckles image. This external
 interface stays fixed when the S&K engine is relocated.
 
 `config/reconstruction/lockon_abi.json` maps every one of its 675 labels to an

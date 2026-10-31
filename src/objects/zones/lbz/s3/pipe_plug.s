@@ -277,4 +277,4 @@ word_26814:
                 dc.w    $100,  -$80
                 dc.w    $400,  -$80
 Map_LBZPipePlug:
-                include "src/objects/shared/zones/lbz/map_pipeplug.s"
+                include "src/objects/shared/zones/lbz/mappings/pipeplug.s"

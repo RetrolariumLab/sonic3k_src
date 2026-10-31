@@ -131,4 +131,4 @@ locret_243DE:
 
 ; ---------------------------------------------------------------------------
 Map_LBZUnusedBarPlatform:
-                include "src/objects/shared/zones/lbz/map_unused_bar_platform.s"
+                include "src/objects/shared/zones/lbz/mappings/unused_bar_platform.s"

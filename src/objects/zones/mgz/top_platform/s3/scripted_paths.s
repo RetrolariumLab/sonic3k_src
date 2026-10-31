@@ -275,4 +275,4 @@ locret_34EF4:
 
 ; ---------------------------------------------------------------------------
 Map_MGZTopPlatform:
-                include "src/objects/shared/zones/mgz/map_top_platform.s"
+                include "src/objects/shared/zones/mgz/mappings/top_platform.s"

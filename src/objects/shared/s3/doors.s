@@ -126,7 +126,7 @@ locret_2FBFA:
 
 ; ---------------------------------------------------------------------------
 Map_HCZCNZDoor:
-                include "src/objects/shared/zones/hcz/map_cnz_door_s3.s"
+                include "src/objects/shared/zones/hcz/mappings/cnz_door_s3.s"
 ; ---------------------------------------------------------------------------
 byte_2FC28:
                 dc.b    $20,   8
@@ -246,4 +246,4 @@ locret_2FD60:
 
 ; ---------------------------------------------------------------------------
 Map_CNZDoorHorizontal:
-                include "src/objects/shared/zones/cnz/map_door_horizontal.s"
+                include "src/objects/shared/zones/cnz/mappings/door_horizontal.s"

@@ -147,4 +147,4 @@ loc_40432:
                 bra.w   loc_403A2
 ; ---------------------------------------------------------------------------
 Map_SOZSpawningSandBlocks:
-                include "src/objects/shared/zones/soz/map_spawning_sand_blocks.s"
+                include "src/objects/shared/zones/soz/mappings/spawning_sand_blocks.s"

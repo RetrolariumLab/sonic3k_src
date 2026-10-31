@@ -91,5 +91,5 @@ loc_33B8E:
                 jmp     (Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
 Map_MGZMovingSpikePlatform:
-                include "src/objects/shared/zones/mgz/map_moving_spike_platform.s"
+                include "src/objects/shared/zones/mgz/mappings/moving_spike_platform.s"
 ; End of function Obj_MGZMovingSpikePlatform

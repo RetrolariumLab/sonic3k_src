@@ -108,5 +108,5 @@ loc_41828:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_SOZBreakableSandRock:
-                include "src/objects/shared/zones/soz/map_breakable_sand_rock.s"
+                include "src/objects/shared/zones/soz/mappings/breakable_sand_rock.s"
 ; End of function loc_417DE

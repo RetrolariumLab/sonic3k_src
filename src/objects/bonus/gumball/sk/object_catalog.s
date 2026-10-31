@@ -105,4 +105,4 @@ byte_61482:
 byte_61486:
                 dc.b    1, $10, $11, $FC
 Map_GumballBonus:
-                include "src/objects/shared/zones/gumball/map_gumball_bonus.s"
+                include "src/objects/shared/zones/gumball/mappings/bonus.s"

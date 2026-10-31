@@ -292,6 +292,6 @@ loc_2A724:
 
 ; ---------------------------------------------------------------------------
 Map_AIZCollapsingLogBridge:
-                include "src/objects/shared/zones/aiz/map_collapsing_log_bridge.s"
+                include "src/objects/shared/zones/aiz/mappings/collapsing_log_bridge.s"
 Map_AIZDrawBridgeFire:
-                include "src/objects/shared/zones/aiz/map_draw_bridge_fire.s"
+                include "src/objects/shared/zones/aiz/mappings/draw_bridge_fire.s"

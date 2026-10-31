@@ -145,5 +145,5 @@ loc_46F54:
                 jmp     (Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
 Map_DEZTiltingBridge:
-                include "src/objects/shared/zones/dez/map_tilting_bridge.s"
+                include "src/objects/shared/zones/dez/mappings/tilting_bridge.s"
 ; End of function Obj_DEZTiltingBridge

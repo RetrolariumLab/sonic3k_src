@@ -217,4 +217,4 @@ loc_31AE8:
 
 ; ---------------------------------------------------------------------------
 Map_HCZSpinningColumn:
-                include "src/objects/shared/zones/hcz/map_spinning_column.s"
+                include "src/objects/shared/zones/hcz/mappings/spinning_column.s"

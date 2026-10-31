@@ -557,4 +557,4 @@ locret_5A9AA:
                 rts
 ; ---------------------------------------------------------------------------
 Map_DEZ3Blocks:
-                include "src/objects/shared/zones/dez/map_act_3_blocks.s"
+                include "src/objects/shared/zones/dez/act3/mappings/blocks.s"

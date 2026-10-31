@@ -216,4 +216,4 @@ locret_209B8:
                 rts
 ; ---------------------------------------------------------------------------
 Map_AIZRideVine:
-                include "src/objects/shared/zones/aiz/map_ride_vine_s3.s"
+                include "src/objects/shared/zones/aiz/mappings/ride_vine_s3.s"

@@ -79,5 +79,5 @@ loc_3C3EE:
                 jmp     (Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
 Map_FBZPlatformBlocks:
-                include "src/objects/shared/zones/fbz/map_platform_blocks.s"
+                include "src/objects/shared/zones/fbz/mappings/platform_blocks.s"
 ; End of function Obj_FBZPlatformBlocks

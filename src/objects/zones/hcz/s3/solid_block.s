@@ -36,5 +36,5 @@ loc_1D02A:
                 bra.w   Sprite_OnScreen_Test
 ; ---------------------------------------------------------------------------
 Map_HCZBlock:
-                include "src/objects/shared/zones/hcz/map_block.s"
+                include "src/objects/shared/zones/hcz/mappings/block.s"
 ; End of function Obj_HCZBlock

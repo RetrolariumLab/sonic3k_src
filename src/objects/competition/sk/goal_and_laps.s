@@ -334,9 +334,9 @@ byte_36FDA:
                 dc.b    4,   5,   6,   0
                 even
 Ani_2PGoalMarker:
-                include "src/game/competition/shared/2p_zone/anim_goal_marker.s"
+                include "src/game/competition/shared/animations/goal_marker.s"
 Map_2PGoalMarker:
-                include "src/game/competition/shared/2p_zone/map_goal_marker.s"
+                include "src/game/competition/shared/mappings/goal_marker.s"
 ; ---------------------------------------------------------------------------
 
 loc_3703A:
@@ -392,4 +392,4 @@ loc_370C2:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_2PLapNumbers:
-                include "src/game/competition/shared/2p_zone/map_lap_numbers.s"
+                include "src/game/competition/shared/mappings/lap_numbers.s"

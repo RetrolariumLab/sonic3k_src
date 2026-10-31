@@ -106,6 +106,6 @@ byte_7749B:
                 dc.b    $F4
                 even
 Map_SOZMiniboss:
-                include "src/objects/shared/zones/soz/map_miniboss.s"
+                include "src/objects/shared/zones/soz/mappings/miniboss.s"
 Map_SOZMinibossDust:
-                include "src/objects/shared/zones/soz/map_miniboss_landing_dust.s"
+                include "src/objects/shared/zones/soz/miniboss/mappings/landing_dust.s"

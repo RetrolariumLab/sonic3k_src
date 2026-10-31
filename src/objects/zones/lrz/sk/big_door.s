@@ -81,5 +81,5 @@ loc_42B08:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_LRZBigDoor:
-                include "src/objects/shared/zones/lrz/map_big_door.s"
+                include "src/objects/shared/zones/lrz/mappings/big_door.s"
 ; End of function Obj_LRZBigDoor

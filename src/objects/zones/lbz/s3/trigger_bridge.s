@@ -168,4 +168,4 @@ locret_24DE4:
                 rts
 ; ---------------------------------------------------------------------------
 Map_LBZTriggerBridge:
-                include "src/objects/shared/zones/lbz/map_trigger_bridge.s"
+                include "src/objects/shared/zones/lbz/mappings/trigger_bridge.s"

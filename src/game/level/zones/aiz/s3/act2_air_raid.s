@@ -488,14 +488,14 @@ AIZMakeTreeScript:
                 dc.w    $557,  $280
                 dc.w    $FFFF
 Map_AIZShipPropeller:
-                include "src/objects/shared/zones/aiz/map_act_2_ship_propeller.s"
+                include "src/objects/shared/zones/aiz/act2/mappings/ship_propeller.s"
 Ani_AIZShipPropeller:
-                include "src/objects/shared/zones/aiz/anim_act_2_ship_propeller.s"
+                include "src/objects/shared/zones/aiz/act2/animations/ship_propeller.s"
 Map_AIZ2BombExplode:
-                include "src/objects/shared/zones/aiz/map_act_2_bomb_explosion.s"
+                include "src/objects/shared/zones/aiz/act2/mappings/bomb_explosion.s"
 Ani_AIZ2BombExplode:
-                include "src/objects/shared/zones/aiz/anim_act_2_bomb_explosion.s"
+                include "src/objects/shared/zones/aiz/act2/animations/bomb_explosion.s"
 Map_AIZ2BGTree:
-                include "src/objects/shared/zones/aiz/map_act_2_background_tree.s"
+                include "src/objects/shared/zones/aiz/act2/mappings/background_tree.s"
 Map_AIZ2BossSmall:
-                include "src/objects/shared/zones/aiz/map_act_2_boss_small.s"
+                include "src/objects/shared/zones/aiz/act2/mappings/boss_small.s"

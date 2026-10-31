@@ -226,4 +226,4 @@ loc_416C0:
 
 ; ---------------------------------------------------------------------------
 Map_SOZSwingingPlatform:
-                include "src/objects/shared/zones/soz/map_swinging_platform.s"
+                include "src/objects/shared/zones/soz/mappings/swinging_platform.s"

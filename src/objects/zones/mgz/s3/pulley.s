@@ -356,4 +356,4 @@ loc_340B6:
                 jmp     (Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
 Map_MGZPulley:
-                include "src/objects/shared/zones/mgz/map_pulley.s"
+                include "src/objects/shared/zones/mgz/mappings/pulley.s"

@@ -14,13 +14,23 @@ from scripts.validation.symbols import parse_symbols
 CATALOG = "config/authoring/assembly_formats.json"
 
 
+def validate_sources(names, rows):
+    families = {"mappings": "map", "animations": "anim", "dplc": "dplc"}
+    expected = {name for name in names if Path(name).parent.name in families}
+    actual = {row["path"] for row in rows}
+    if (
+        len(rows) != len(actual)
+        or actual != expected
+        or any(row["family"] != families.get(Path(row["path"]).parent.name) for row in rows)
+    ):
+        raise ValueError("Assembly resource registry omits, duplicates or misclassifies retained content")
+
+
 def catalog():
     if load("config/authoring/data_formats.json").get("assembly_catalog") != CATALOG:
         raise ValueError("Main format registry does not own the assembly content catalog")
     result = AssemblyCatalog(load(CATALOG), profiles())
-    expected = {name for name in source_names() if Path(name).name.startswith(("map_", "dplc_", "anim_"))}
-    if {row["path"] for row in result.rows()} != expected:
-        raise ValueError("Assembly resource registry omits or duplicates retained content")
+    validate_sources(source_names(), result.rows())
     for row in result.rows():
         text = (ROOT / row["path"]).read_text()
         result._original(row, text, {name: 0 for name in row["external_symbols"]})

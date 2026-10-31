@@ -322,4 +322,4 @@ locret_1D058:
 
 ; ---------------------------------------------------------------------------
 Map_PathSwap:
-                include "src/objects/shared/level_misc/map_path_swap.s"
+                include "src/objects/shared/level_misc/mappings/path_swap.s"

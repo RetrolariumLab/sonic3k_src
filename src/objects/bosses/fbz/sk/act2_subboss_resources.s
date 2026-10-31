@@ -75,7 +75,7 @@ Pal_FBZ2Subboss:
                 binclude "data/Levels/FBZ/Palettes/FBZ2 Subboss.bin"
                 even
 Map_FBZ2Subboss:
-                include "src/objects/shared/zones/fbz/map_act_2_subboss.s"
+                include "src/objects/shared/zones/fbz/act2/mappings/subboss.s"
 PLC_FBZ2Subboss_SonicTails: plrlistheader
                 plreq   ArtTile_FBZ2Subboss, ArtNem_FBZ2Subboss
                 plreq   ArtTile_FBZRobotnikStand, ArtNem_FBZRobotnikStand

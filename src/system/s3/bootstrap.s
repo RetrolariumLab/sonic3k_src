@@ -8,19 +8,19 @@
 
 ; ---------------------------------------------------------------------------
                 cpu     68000
-                include "src/system/assembly/compiler_setup.s"
-                include "src/system/assembly/hardware_helpers.s"
-                include "src/system/assembly/data_record_macros.s"
-                include "src/audio/shared/bank_and_sample_macros.s"
-                include "src/memory/shared/object_offsets.s"
-                include "src/memory/shared/hardware.s"
-                include "src/memory/shared/sram.s"
-                include "src/memory/shared/ram.s"
-                include "src/memory/shared/special_stage_overlays.s"
-                include "src/memory/shared/art_tiles.s"
-                include "src/memory/shared/sound_ids.s"
-                include "src/memory/shared/assembly_cursor.s"
-                include "src/memory/s3/overrides.s"
+                include "src/system/assembly/compiler_setup.inc"
+                include "src/system/assembly/hardware_helpers.inc"
+                include "src/system/assembly/data_record_macros.inc"
+                include "src/audio/shared/bank_macros.inc"
+                include "src/memory/shared/object_offsets.inc"
+                include "src/memory/shared/hardware.inc"
+                include "src/memory/shared/sram.inc"
+                include "src/memory/shared/ram.inc"
+                include "src/memory/shared/special_stage_overlays.inc"
+                include "src/memory/shared/art_tiles.inc"
+                include "src/memory/shared/sound_ids.inc"
+                include "src/memory/shared/assembly_cursor.inc"
+                include "src/memory/s3/overrides.inc"
 ; ---------------------------------------------------------------------------
 SonicDriverVer: equ     3                               ; Original product-specific Z80 driver ABI
 

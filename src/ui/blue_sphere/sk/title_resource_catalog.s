@@ -8,7 +8,7 @@ ArtKos_BlueSphereChar:
                 binclude "data/General/Blue Sphere/Kosinski Art/Characters.kos"
                 even
 Map_BlueSphereCharSprite:
-                include "src/game/blue_sphere/shared/blue_sphere/map_character_sprites.s"
+                include "src/game/blue_sphere/shared/mappings/character_sprites.s"
                 even
 ArtKos_BlueSphereCharSprite:
                 binclude "data/General/Blue Sphere/Kosinski Art/Character Sprites.kos"

@@ -27,145 +27,145 @@
     },
     {
       "name": "align",
-      "source": "src/system/assembly/compiler_setup.s",
+      "source": "src/system/assembly/compiler_setup.inc",
       "sha256": "dd466024b26a9e29a7746a06e681cb81908e674a69f7ade876b38cb888005e4a",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
     {
       "name": "align0",
-      "source": "src/system/assembly/compiler_setup.s",
+      "source": "src/system/assembly/compiler_setup.inc",
       "sha256": "145a71e95d46db173fdda0310621e83e022519158439cbeacfc24ae0c32bdaa7",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
     {
       "name": "cnop",
-      "source": "src/system/assembly/compiler_setup.s",
+      "source": "src/system/assembly/compiler_setup.inc",
       "sha256": "fe543da5886d4225b97e03b651c536e06d27bd383d58edc07d03abaeccfda4bc",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
     {
       "name": "cnop0",
-      "source": "src/system/assembly/compiler_setup.s",
+      "source": "src/system/assembly/compiler_setup.inc",
       "sha256": "9c0ea50f8f1a13346a7f6a197a5af1d0dde140fe5f42c92b9b6da99ad51d8ac4",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
     {
       "name": "even",
-      "source": "src/system/assembly/compiler_setup.s",
+      "source": "src/system/assembly/compiler_setup.inc",
       "sha256": "01539954734152c88955493d6bdb40ee683e3c90159475010b293b5f44f93327",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
     {
       "name": "org",
-      "source": "src/system/assembly/compiler_setup.s",
+      "source": "src/system/assembly/compiler_setup.inc",
       "sha256": "bbf56836de0be9250a67d852572032dfc75c1ab59ee081dbe32956ae9aed3455",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
     {
       "name": "org0",
-      "source": "src/system/assembly/compiler_setup.s",
+      "source": "src/system/assembly/compiler_setup.inc",
       "sha256": "299fea69040b7feffc8165c9fc185f39ef6e3aa6965d50a0ff5f6e1764f74a34",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
     {
       "name": "dbglistinclude",
-      "source": "src/system/assembly/data_record_macros.s",
+      "source": "src/system/assembly/data_record_macros.inc",
       "sha256": "b480d1e55ab2f94a0e1ed6047de50c8f82f38371bdce8e31d92ebbba8571eef1",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
     {
       "name": "dbglistobj",
-      "source": "src/system/assembly/data_record_macros.s",
+      "source": "src/system/assembly/data_record_macros.inc",
       "sha256": "d5fffa6d22430428add48b8a2f9fa357f6180fc72557cc294c3b71d5a04558b3",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
     {
       "name": "levartptrs",
-      "source": "src/system/assembly/data_record_macros.s",
+      "source": "src/system/assembly/data_record_macros.inc",
       "sha256": "2aa88479537090124ad215903ebc440ea3ab99dcc6b2a6c156ea1add0d14ed8f",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
     {
       "name": "levselstr",
-      "source": "src/system/assembly/data_record_macros.s",
+      "source": "src/system/assembly/data_record_macros.inc",
       "sha256": "39988c1c877184eafec16ff2a21185842575c38746cf3edf83d6204104edfa9c",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
     {
       "name": "palscriptdata",
-      "source": "src/system/assembly/data_record_macros.s",
+      "source": "src/system/assembly/data_record_macros.inc",
       "sha256": "b2b60a60cccd4b50de4462ea48cd1c0a2a5a03e030a16aff730f593a0333966b",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
     {
       "name": "palscriptfile",
-      "source": "src/system/assembly/data_record_macros.s",
+      "source": "src/system/assembly/data_record_macros.inc",
       "sha256": "6a045411aa457bc9a06f259d86878ac5bfeb8f38ab089dcefb9f00c47c684534",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
     {
       "name": "palscripthdr",
-      "source": "src/system/assembly/data_record_macros.s",
+      "source": "src/system/assembly/data_record_macros.inc",
       "sha256": "af6bf4b9599dfd5db94abe6f13fe1f775354104019ee9cdc786f5e32c0d737ea",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
     {
       "name": "palscriptloop",
-      "source": "src/system/assembly/data_record_macros.s",
+      "source": "src/system/assembly/data_record_macros.inc",
       "sha256": "c1557a645e5c1496beee29f4bd84e194badfd45fa85a1a67cb0a3bfbac53c23b",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
     {
       "name": "palscriptptr",
-      "source": "src/system/assembly/data_record_macros.s",
+      "source": "src/system/assembly/data_record_macros.inc",
       "sha256": "9cc3040f8d0eec9ab6e1f10eeabb45284f326b5bdc66d817a906434a173282c5",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
     {
       "name": "palscriptrept",
-      "source": "src/system/assembly/data_record_macros.s",
+      "source": "src/system/assembly/data_record_macros.inc",
       "sha256": "9a938c3b7c943508c593940ebbc9304d1ef66e57a5d9e38d2478479b9979e136",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
     {
       "name": "palscriptrun",
-      "source": "src/system/assembly/data_record_macros.s",
+      "source": "src/system/assembly/data_record_macros.inc",
       "sha256": "9e5c31a8cb77e561d66d47b481783bb7a266d76050339e0f3527e65c3c7cf320",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
     {
       "name": "plreq",
-      "source": "src/system/assembly/data_record_macros.s",
+      "source": "src/system/assembly/data_record_macros.inc",
       "sha256": "d517f4104cd5a7ff4fa3876678e24f722883193dc17ec4e099be5d75c9a38713",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
     {
       "name": "plrlistheader",
-      "source": "src/system/assembly/data_record_macros.s",
+      "source": "src/system/assembly/data_record_macros.inc",
       "sha256": "194e829b58186776e8082685bf31ef7f359a51ca4f5f119b76e82d1e039ce7f2",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
     {
       "name": "watertransheader",
-      "source": "src/system/assembly/data_record_macros.s",
+      "source": "src/system/assembly/data_record_macros.inc",
       "sha256": "1a7c537e4b2a598554e000d6444d4a8a52768fa927e2ede0392ce03ce49220a0",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
     {
       "name": "zoneanimdecl",
-      "source": "src/system/assembly/data_record_macros.s",
+      "source": "src/system/assembly/data_record_macros.inc",
       "sha256": "acf69a546f0c273e1c3c118bb72ace9264c818e78f0d01748aea36537878b0fd",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
     {
       "name": "zoneanimend",
-      "source": "src/system/assembly/data_record_macros.s",
+      "source": "src/system/assembly/data_record_macros.inc",
       "sha256": "eee9df4cd0251de9536e6e8b3ead0d7655fb445907ca2ee61c68350d721e650d",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
     {
       "name": "zoneanimstart",
-      "source": "src/system/assembly/data_record_macros.s",
+      "source": "src/system/assembly/data_record_macros.inc",
       "sha256": "5cb9b973166da37b6ac733e90feea2d2bfc87ae1a74f8802b270f2cd59d5f581",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     }

@@ -129,4 +129,4 @@ locret_498C0:
 
 ; ---------------------------------------------------------------------------
 Map_DEZBumperWall:
-                include "src/objects/shared/zones/dez/map_bumper_wall.s"
+                include "src/objects/shared/zones/dez/mappings/bumper_wall.s"

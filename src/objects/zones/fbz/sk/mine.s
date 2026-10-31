@@ -66,4 +66,4 @@ loc_3C9E4:
                 jmp     (Obj_Explosion).l
 ; ---------------------------------------------------------------------------
 Map_FBZMine:
-                include "src/objects/shared/zones/fbz/map_mine.s"
+                include "src/objects/shared/zones/fbz/mappings/mine.s"

@@ -44,5 +44,5 @@ loc_4C3E0:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_SlotSpike:
-                include "src/objects/shared/zones/slots/map_spike.s"
+                include "src/objects/shared/zones/slots/mappings/spike.s"
 ; End of function Obj_SlotSpike

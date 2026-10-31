@@ -338,8 +338,8 @@ word_8E438:
                 dc.w    $60,   $48
                 dc.w    $80,   $68
 DPLC_Cluckoid:
-                include "src/objects/shared/cluckoid/dplc_cluckoid.s"
+                include "src/objects/shared/cluckoid/dplc/cluckoid.s"
 Map_CluckoidArrow:
-                include "src/objects/shared/cluckoid/map_cluckoid_arrow.s"
+                include "src/objects/shared/cluckoid/mappings/arrow.s"
 Map_Cluckoid:
-                include "src/objects/shared/cluckoid/map_cluckoid.s"
+                include "src/objects/shared/cluckoid/mappings/cluckoid.s"

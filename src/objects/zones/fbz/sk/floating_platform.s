@@ -165,4 +165,4 @@ locret_3A740:
                 rts
 ; ---------------------------------------------------------------------------
 Map_FBZFloatingPlatform:
-                include "src/objects/shared/zones/fbz/map_floating_platform.s"
+                include "src/objects/shared/zones/fbz/mappings/floating_platform.s"

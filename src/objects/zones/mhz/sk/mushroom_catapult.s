@@ -240,4 +240,4 @@ byte_3FB50:
                 dc.b    $C,  $C,  $C,  $B,  $B,  $A,   9,   8,   7,   6,   5,   4
                 even
 Map_MHZMushroomCatapult:
-                include "src/objects/shared/zones/mhz/map_mushroom_catapult.s"
+                include "src/objects/shared/zones/mhz/mappings/mushroom_catapult.s"

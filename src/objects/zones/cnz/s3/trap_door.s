@@ -48,6 +48,6 @@ locret_30DBE:
 
 ; ---------------------------------------------------------------------------
 Ani_CNZTrapDoor:
-                include "src/objects/shared/zones/cnz/anim_trap_door.s"
+                include "src/objects/shared/zones/cnz/animations/trap_door.s"
 Map_CNZTrapDoor:
-                include "src/objects/shared/zones/cnz/map_trap_door.s"
+                include "src/objects/shared/zones/cnz/mappings/trap_door.s"

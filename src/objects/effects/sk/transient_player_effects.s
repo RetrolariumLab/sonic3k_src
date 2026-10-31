@@ -227,11 +227,11 @@ locret_18DBE:
 
 ; ---------------------------------------------------------------------------
 Ani_DashSplashDrown:
-                include "src/objects/shared/dash_dust/anim_dash_dust.s"
+                include "src/objects/shared/dash_dust/animations/dash_dust.s"
 Map_DashDust:
-                include "src/objects/shared/dash_dust/map_dash_dust.s"
+                include "src/objects/shared/dash_dust/mappings/dash_dust.s"
 DPLC_DashSplashDrown:
-                include "src/objects/shared/dash_dust/dplc_dash_dust.s"
+                include "src/objects/shared/dash_dust/dplc/dash_dust.s"
 ; ---------------------------------------------------------------------------
 
 Obj_DashDust2P:
@@ -356,9 +356,9 @@ locret_190F0:
                 rts
 ; ---------------------------------------------------------------------------
 Ani_DashDust2P:
-                include "src/objects/shared/dash_dust/anim_dash_dust_2p.s"
+                include "src/objects/shared/dash_dust/animations/competition.s"
 Map_DashDust2P:
-                include "src/objects/shared/dash_dust/map_dash_dust_2p.s"
+                include "src/objects/shared/dash_dust/mappings/competition.s"
 ; ---------------------------------------------------------------------------
 
 Obj_SuperSonicKnux_Stars:
@@ -499,7 +499,7 @@ loc_192CC:
                 bra.w   Draw_Sprite
 ; ---------------------------------------------------------------------------
 Map_SuperSonic_Stars:
-                include "src/objects/shared/shields/map_super_sonic_stars.s"
+                include "src/objects/shared/shields/mappings/super_sonic_stars.s"
 ; ---------------------------------------------------------------------------
 
 Obj_HyperSonic_Stars:
@@ -610,7 +610,7 @@ loc_19486:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_HyperSonicStars:
-                include "src/objects/shared/sonic/map_hyper_sonic_stars.s"
+                include "src/objects/shared/sonic/mappings/hyper_sonic_stars.s"
 ; ---------------------------------------------------------------------------
 
 Obj_InstaShield:

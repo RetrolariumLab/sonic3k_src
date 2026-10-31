@@ -613,16 +613,16 @@ byte_1E698:
                 dc.b    $2F, $2F, $2F, $2F, $2E, $2E, $2E, $2E, $2E, $2E, $2E, $2E, $2D, $2D, $2D, $2D, $2D, $2D, $2D, $2D
                 dc.b    $2D, $2D, $2D, $2D, $2D, $2C, $2B, $2A
 Map_AIZCollapsingPlatform:
-                include "src/objects/shared/zones/aiz/map_collapsing_platform.s"
+                include "src/objects/shared/zones/aiz/mappings/collapsing_platform.s"
 Map_AIZCollapsingPlatform2:
-                include "src/objects/shared/zones/aiz/map_collapsing_platform_2.s"
+                include "src/objects/shared/zones/aiz/mappings/collapsing_platform_2.s"
 Map_LBZCollapsingBridge:
-                include "src/objects/shared/zones/lbz/map_collapsing_bridge.s"
+                include "src/objects/shared/zones/lbz/mappings/collapsing_bridge.s"
 Map_LBZCollapsingLedge:
-                include "src/objects/shared/zones/lbz/map_collapsing_ledge.s"
+                include "src/objects/shared/zones/lbz/mappings/collapsing_ledge.s"
 Map_HCZCollapsingBridge:
-                include "src/objects/shared/zones/hcz/map_collapsing_bridge.s"
+                include "src/objects/shared/zones/hcz/mappings/collapsing_bridge.s"
 Map_MGZCollapsingBridge:
-                include "src/objects/shared/zones/mgz/map_collapsing_bridge.s"
+                include "src/objects/shared/zones/mgz/mappings/collapsing_bridge.s"
 Map_ICZCollapsingBridge:
-                include "src/objects/shared/zones/icz/map_collapsing_bridge.s"
+                include "src/objects/shared/zones/icz/mappings/collapsing_bridge.s"

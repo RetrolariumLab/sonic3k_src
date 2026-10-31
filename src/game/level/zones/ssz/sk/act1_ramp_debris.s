@@ -216,7 +216,7 @@ word_58758:
                 dc.w    $AC,  $1C0, $B600,     2
                 dc.w    $D8,  $140, $CE00,     1
 Map_SSZRoamingClouds:
-                include "src/objects/shared/zones/ssz/map_roaming_clouds.s"
+                include "src/objects/shared/zones/ssz/mappings/roaming_clouds.s"
 byte_587A8:
                 dc.b    $EF, $FA, $F9, $F8, $F7, $F6, $F5, $F4, $F3, $F2, $F1, $F0
 byte_587B4:
@@ -260,7 +260,7 @@ word_58894:
                 dc.w    $FFFE, $4054, $4058, $405C, $485C, $4858, $4854, $FFFD
                 dc.w    $FFFF, $FFFF, $FFFE, $4068, $4868, $FFFD, $FFFF, $FFFF
 Map_SSZSpiralRampPieces:
-                include "src/objects/shared/zones/ssz/map_spiral_ramp_pieces.s"
+                include "src/objects/shared/zones/ssz/mappings/spiral_ramp_pieces.s"
 byte_58A3E:
                 dc.b    $1C
                 dc.b    8

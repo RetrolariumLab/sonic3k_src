@@ -69,5 +69,5 @@ loc_3C322:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_FBZPiston:
-                include "src/objects/shared/zones/fbz/map_piston.s"
+                include "src/objects/shared/zones/fbz/mappings/piston.s"
 ; End of function Obj_FBZPiston

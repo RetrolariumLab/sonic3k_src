@@ -251,6 +251,6 @@ locret_30A30:
 
 ; ---------------------------------------------------------------------------
 Map_CNZCannon:
-                include "src/objects/shared/zones/cnz/map_cannon.s"
+                include "src/objects/shared/zones/cnz/mappings/cannon.s"
 DPLC_CNZCannon:
-                include "src/objects/shared/zones/cnz/dplc_cannon.s"
+                include "src/objects/shared/zones/cnz/dplc/cannon.s"

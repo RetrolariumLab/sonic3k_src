@@ -308,5 +308,5 @@ byte_90085:
                 dc.b    7,   7,   6,   5,   4,   3,   2, $F4
                 even
 Map_Toxomister:
-                include "src/objects/shared/toxomister/map_toxomister.s"
+                include "src/objects/shared/toxomister/mappings/toxomister.s"
 ; End of function loc_90002

@@ -50,5 +50,5 @@ word_25AB8:
                 dc.w    loc_25960-word_25AB8
 ; ---------------------------------------------------------------------------
 Map_DEZFloatingPlatform:
-                include "src/objects/shared/zones/dez/map_floating_platform.s"
+                include "src/objects/shared/zones/dez/mappings/floating_platform.s"
 ; End of function Obj_DEZFloatingPlatform

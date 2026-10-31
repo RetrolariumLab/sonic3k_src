@@ -265,5 +265,5 @@ ObjDat_9878:
                 dc.w    0,   $A8
                 dc.b    6, $FF
 Map_CompetitionObject:
-                include "src/ui/shared/competition_menu/map_competition_objects.s"
+                include "src/ui/shared/competition_menu/mappings/competition_objects.s"
 ; ---------------------------------------------------------------------------

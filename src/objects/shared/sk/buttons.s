@@ -176,7 +176,7 @@ loc_2C718:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_Button:
-                include "src/objects/shared/buttons/map_button.s"
+                include "src/objects/shared/buttons/mappings/button.s"
 Map_LRZButton:
-                include "src/objects/shared/zones/lrz/map_button.s"
+                include "src/objects/shared/zones/lrz/mappings/button.s"
 ; End of function Obj_Button

@@ -25,14 +25,14 @@ ArtUnc_Knuckles2P:
                 binclude "data/General/Sprites/Knuckles/Art/Knuckles 2P.unc"
                 even
 Map_Sonic:
-                include "src/objects/shared/sonic/map_sonic_s3.s"
+                include "src/objects/shared/sonic/mappings/s3.s"
 PLC_Sonic:
-                include "src/objects/shared/sonic/dplc_sonic_s3.s"
+                include "src/objects/shared/sonic/dplc/s3.s"
 Map_Tails:
-                include "src/objects/shared/tails/map_tails_s3.s"
+                include "src/objects/shared/tails/mappings/s3.s"
 PLC_Tails:
-                include "src/objects/shared/tails/dplc_tails_s3.s"
+                include "src/objects/shared/tails/dplc/s3.s"
 Map_Tails_Tail:
-                include "src/objects/shared/tails/map_tails_tails.s"
+                include "src/objects/shared/tails/mappings/tail.s"
 PLC_Tails_Tail:
-                include "src/objects/shared/tails/dplc_tails_tails.s"
+                include "src/objects/shared/tails/dplc/tail.s"

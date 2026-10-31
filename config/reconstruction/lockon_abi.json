@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "pointer_source": "src/memory/lockon/sonic3_exports.s",
+  "pointer_source": "src/memory/lockon/sonic3_exports.inc",
   "base": "0x200000",
   "second_cartridge_profiles": ["s3-us", "s3-eu", "s3-jp"],
   "external_profile": "sk",

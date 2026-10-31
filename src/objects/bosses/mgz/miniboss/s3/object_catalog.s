@@ -63,7 +63,7 @@ byte_56937:
                 dc.b    0,   0,   1,   2, $FC
                 even
 Map_MGZMinibossSpires:
-                include "src/objects/shared/zones/mgz/map_miniboss_spires.s"
+                include "src/objects/shared/zones/mgz/miniboss/mappings/spires.s"
 PLC_MGZMiniboss:    plrlistheader
                 plreq   ArtTile_BossExplosion, ArtNem_BossExplosion
                 plreq   ArtTile_MGZSpire, ArtNem_MGZSpire

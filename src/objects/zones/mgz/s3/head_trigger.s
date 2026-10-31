@@ -152,7 +152,7 @@ loc_337E0:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Ani_MGZHeadTrigger:
-                include "src/objects/shared/zones/mgz/anim_head_trigger.s"
+                include "src/objects/shared/zones/mgz/animations/head_trigger.s"
 Map_MGZHeadTrigger:
-                include "src/objects/shared/zones/mgz/map_head_trigger.s"
+                include "src/objects/shared/zones/mgz/mappings/head_trigger.s"
 ; End of function Obj_MGZHeadTrigger

@@ -4,8 +4,8 @@
 
 ; ---------------------------------------------------------------------------
 Map_GameOver:
-                include "src/objects/shared/game_over/map_game_over.s"
+                include "src/objects/shared/game_over/mappings/game_over.s"
 Map_TitleCard:
-                include "src/objects/shared/title_card/map_title_card_s3.s"
+                include "src/objects/shared/title_card/mappings/s3.s"
 Map_Results:
-                include "src/objects/shared/results/map_results_s3.s"
+                include "src/objects/shared/results/mappings/s3.s"

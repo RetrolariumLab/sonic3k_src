@@ -642,4 +642,4 @@ word_560EA:
 word_56100:
                 dc.w    $6AE,  $664,  $422,  $402,  $200,     0,     0,  $EEE,  $466,  $224,     0,   $46,  $6EE,  $48C,  $26A
 Map_SOZ1EndDoor:
-                include "src/objects/shared/zones/soz/map_act_1_end_door.s"
+                include "src/objects/shared/zones/soz/act1/mappings/end_door.s"

@@ -227,4 +227,4 @@ locret_3EA4A:
 
 ; ---------------------------------------------------------------------------
 Map_MHZCurledVine:
-                include "src/objects/shared/zones/mhz/map_curled_vine.s"
+                include "src/objects/shared/zones/mhz/mappings/curled_vine.s"

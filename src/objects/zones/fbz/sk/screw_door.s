@@ -129,7 +129,7 @@ loc_3BD54:
                 bra.w   loc_3BC92
 ; ---------------------------------------------------------------------------
 Ani_FBZScrewDoor:
-                include "src/objects/shared/zones/fbz/anim_screw_door.s"
+                include "src/objects/shared/zones/fbz/animations/screw_door.s"
 Map_FBZScrewDoor:
-                include "src/objects/shared/zones/fbz/map_screw_door.s"
+                include "src/objects/shared/zones/fbz/mappings/screw_door.s"
 ; End of function Obj_FBZScrewDoor

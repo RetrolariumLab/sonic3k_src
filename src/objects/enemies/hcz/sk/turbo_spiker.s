@@ -365,4 +365,4 @@ byte_87F37:
                 dc.b    1,   8,   9,  $A,  $B,  $C,  $D, $F4
                 even
 Map_TurboSpikerHidden:
-                include "src/objects/shared/turbo_spiker/map_turbo_spiker_hidden.s"
+                include "src/objects/shared/turbo_spiker/mappings/hidden.s"

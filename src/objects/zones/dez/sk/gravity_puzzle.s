@@ -161,4 +161,4 @@ byte_49A5A:
                 dc.b    $20,   4
                 even
 Map_DEZGravityPuzzle:
-                include "src/objects/shared/zones/dez/map_gravity_puzzle.s"
+                include "src/objects/shared/zones/dez/mappings/gravity_puzzle.s"

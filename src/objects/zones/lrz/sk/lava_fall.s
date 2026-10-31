@@ -68,5 +68,5 @@ loc_4377C:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_LRZLavaFall:
-                include "src/objects/shared/zones/lrz/map_lava_fall.s"
+                include "src/objects/shared/zones/lrz/mappings/lava_fall.s"
 ; End of function Obj_LRZLavaFall

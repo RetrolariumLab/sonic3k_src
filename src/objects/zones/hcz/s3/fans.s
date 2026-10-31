@@ -340,9 +340,9 @@ loc_2F3A4:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_HCZFan:
-                include "src/objects/shared/zones/hcz/map_fan.s"
+                include "src/objects/shared/zones/hcz/mappings/fan.s"
 Map_HCZLargeFan:
-                include "src/objects/shared/zones/hcz/map_large_fan.s"
+                include "src/objects/shared/zones/hcz/mappings/large_fan.s"
 ; ---------------------------------------------------------------------------
 
 loc_2F51C:
@@ -423,4 +423,4 @@ locret_2F61E:
 
 ; ---------------------------------------------------------------------------
 Map_CGZFan:
-                include "src/objects/shared/zones/cgz/map_fan.s"
+                include "src/objects/shared/zones/cgz/mappings/fan.s"

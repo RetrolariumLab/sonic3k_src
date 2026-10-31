@@ -96,7 +96,7 @@ loc_4818C:
                 jmp     (Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
 Ani_DEZRetractingSpring:
-                include "src/objects/shared/zones/dez/anim_retracting_spring.s"
+                include "src/objects/shared/zones/dez/animations/retracting_spring.s"
 Map_DEZRetractingSpring:
-                include "src/objects/shared/zones/dez/map_retracting_spring.s"
+                include "src/objects/shared/zones/dez/mappings/retracting_spring.s"
 ; End of function Obj_DEZRetractingSpring

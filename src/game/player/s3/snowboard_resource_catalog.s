@@ -14,10 +14,10 @@ ArtUnc_Snowboard:
                 binclude "data/General/Sprites/Snowboard/Snowboard.unc"
                 even
 Map_SonicSnowboard:
-                include "src/objects/shared/sonic/map_sonic_snowboarding.s"
+                include "src/objects/shared/sonic/mappings/snowboarding.s"
 DPLC_SonicSnowboard:
-                include "src/objects/shared/sonic/dplc_sonic_snowboarding.s"
+                include "src/objects/shared/sonic/dplc/snowboarding.s"
 Map_Snowboard:
-                include "src/objects/shared/snowboard/map_snowboard.s"
+                include "src/objects/shared/snowboard/mappings/snowboard.s"
 DPLC_Snowboard:
-                include "src/objects/shared/snowboard/dplc_snowboard.s"
+                include "src/objects/shared/snowboard/dplc/snowboard.s"

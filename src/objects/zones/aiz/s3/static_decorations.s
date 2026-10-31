@@ -15,7 +15,7 @@ loc_1C3E2:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_AIZ1Tree:
-                include "src/objects/shared/zones/aiz/map_act_1_tree.s"
+                include "src/objects/shared/zones/aiz/act1/mappings/tree.s"
 ; End of function Obj_AIZ1Tree
 ; ---------------------------------------------------------------------------
 
@@ -31,5 +31,5 @@ loc_1C424:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_AIZ1ZiplinePeg:
-                include "src/objects/shared/zones/aiz/map_act_1_zipline_peg.s"
+                include "src/objects/shared/zones/aiz/act1/mappings/zipline_peg.s"
 ; End of function Obj_AIZ1ZiplinePeg

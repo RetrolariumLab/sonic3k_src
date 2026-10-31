@@ -233,4 +233,4 @@ locret_3F35E:
                 rts
 ; ---------------------------------------------------------------------------
 Map_MHZSwingBarVertical:
-                include "src/objects/shared/zones/mhz/map_swing_bar_vertical.s"
+                include "src/objects/shared/zones/mhz/mappings/swing_bar_vertical.s"

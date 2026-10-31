@@ -52,11 +52,11 @@ loc_3F40A:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Ani_MHZMushroomPlatform:
-                include "src/objects/shared/zones/mhz/anim_mushroom_platform.s"
+                include "src/objects/shared/zones/mhz/animations/mushroom_platform.s"
 byte_3F42A:
                 dc.b    $C,  $D,  $E,  $F, $10, $11, $12, $13, $13, $14, $14, $14, $14, $14, $14, $14, $14, $14, $14, $14
                 dc.b    $14, $14, $14, $13, $13, $12, $11, $10,  $F,  $E,  $D,  $C
                 even
 Map_MHZMushroomPlatform:
-                include "src/objects/shared/zones/mhz/map_mushroom_platform.s"
+                include "src/objects/shared/zones/mhz/mappings/mushroom_platform.s"
 ; End of function Obj_MHZMushroomPlatform

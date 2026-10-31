@@ -239,7 +239,7 @@ loc_37F60:
 ; End of function loc_37EC2
 ; ---------------------------------------------------------------------------
 Map_2PItemIcon:
-                include "src/game/competition/shared/2p_zone/map_item_icon.s"
+                include "src/game/competition/shared/mappings/item_icon.s"
 ; ---------------------------------------------------------------------------
 ; unused
                 move.l  #Map_2PPosition,mappings(a0)
@@ -316,5 +316,5 @@ loc_380BC:
                 bra.s   loc_38070
 ; ---------------------------------------------------------------------------
 Map_2PPosition:
-                include "src/game/competition/shared/2p_zone/map_position_icons_unused.s"
+                include "src/game/competition/shared/mappings/position_icons_unused.s"
 ; End of function loc_3801E

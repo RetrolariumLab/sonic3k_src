@@ -171,10 +171,10 @@ loc_2AE1A:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_AIZFallingLog2:
-                include "src/objects/shared/zones/aiz/map_falling_log_2.s"
+                include "src/objects/shared/zones/aiz/mappings/falling_log_2.s"
 Map_AIZFallingLog:
-                include "src/objects/shared/zones/aiz/map_falling_log.s"
+                include "src/objects/shared/zones/aiz/mappings/falling_log.s"
 Map_AIZFallingLogSplash2:
-                include "src/objects/shared/zones/aiz/map_falling_log_splash_2.s"
+                include "src/objects/shared/zones/aiz/mappings/log_splash_2.s"
 Map_AIZFallingLogSplash:
-                include "src/objects/shared/zones/aiz/map_falling_log_splash.s"
+                include "src/objects/shared/zones/aiz/mappings/falling_log_splash.s"

@@ -347,29 +347,29 @@ locret_199E8:
 
 ; ---------------------------------------------------------------------------
 Ani_InstaShield:
-                include "src/objects/shared/shields/anim_insta_shield.s"
+                include "src/objects/shared/shields/animations/insta_shield.s"
 Ani_FireShield:
-                include "src/objects/shared/shields/anim_fire_shield.s"
+                include "src/objects/shared/shields/animations/fire_shield.s"
 Ani_LightningShield:
-                include "src/objects/shared/shields/anim_lightning_shield.s"
+                include "src/objects/shared/shields/animations/lightning_shield.s"
 Ani_BubbleShield:
-                include "src/objects/shared/shields/anim_bubble_shield.s"
+                include "src/objects/shared/shields/animations/bubble_shield.s"
 Map_FireShield:
-                include "src/objects/shared/shields/map_fire_shield.s"
+                include "src/objects/shared/shields/mappings/fire_shield.s"
 DPLC_FireShield:
-                include "src/objects/shared/shields/dplc_fire_shield.s"
+                include "src/objects/shared/shields/dplc/fire_shield.s"
 Map_LightningShield:
-                include "src/objects/shared/shields/map_lightning_shield.s"
+                include "src/objects/shared/shields/mappings/lightning_shield.s"
 DPLC_LightningShield:
-                include "src/objects/shared/shields/dplc_lightning_shield.s"
+                include "src/objects/shared/shields/dplc/lightning_shield.s"
 Map_BubbleShield:
-                include "src/objects/shared/shields/map_bubble_shield.s"
+                include "src/objects/shared/shields/mappings/bubble_shield.s"
 DPLC_BubbleShield:
-                include "src/objects/shared/shields/dplc_bubble_shield.s"
+                include "src/objects/shared/shields/dplc/bubble_shield.s"
 Map_InstaShield:
-                include "src/objects/shared/shields/map_insta_shield.s"
+                include "src/objects/shared/shields/mappings/insta_shield.s"
 DPLC_InstaShield:
-                include "src/objects/shared/shields/dplc_insta_shield.s"
+                include "src/objects/shared/shields/dplc/insta_shield.s"
 ; ---------------------------------------------------------------------------
 superTailsBirds_target_found:   equ     $30
 superTailsBirds_search_delay:   equ     $32

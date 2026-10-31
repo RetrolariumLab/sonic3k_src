@@ -60,5 +60,5 @@ byte_3CAD0:
                 dc.b    $1D, $1D, $1D, $1E, $1E, $1E, $1F, $1F, $1F, $20, $20, $20, $21, $21, $21, $21, $21, $21, $21, $21
                 even
 Map_FBZElevator:
-                include "src/objects/shared/zones/fbz/map_elevator.s"
+                include "src/objects/shared/zones/fbz/mappings/elevator.s"
 ; End of function Obj_FBZElevator

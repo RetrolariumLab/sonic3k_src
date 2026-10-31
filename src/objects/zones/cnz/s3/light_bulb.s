@@ -30,5 +30,5 @@ loc_30E4C:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_CNZLightBulb:
-                include "src/objects/shared/zones/cnz/map_light_bulb.s"
+                include "src/objects/shared/zones/cnz/mappings/light_bulb.s"
 ; End of function Obj_CNZLightBulb

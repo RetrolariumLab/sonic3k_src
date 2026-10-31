@@ -23,5 +23,5 @@ word_86D22:
                 dc.w    $280
                 dc.b    8, $18,   1,   0
 Map_FBZExitHall:
-                include "src/objects/shared/zones/fbz/map_exit_hall.s"
+                include "src/objects/shared/zones/fbz/mappings/exit_hall.s"
 ; End of function Obj_FBZExitHall

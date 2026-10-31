@@ -179,4 +179,4 @@ locret_48422:
 
 ; ---------------------------------------------------------------------------
 Map_DEZTunnelLauncher:
-                include "src/objects/shared/zones/dez/map_tunnel_launcher.s"
+                include "src/objects/shared/zones/dez/mappings/tunnel_launcher.s"

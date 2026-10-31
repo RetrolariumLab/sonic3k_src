@@ -11,6 +11,8 @@ from scripts.validation.cohorts import INSTRUCTIONS, TERMINALS, collect_file, st
 from scripts.validation.definitions import check_definitions, check_nonemitting_range, named_declaration
 from scripts.validation.data_macros import DATA_MACROS, HEADER as MACRO_HEADER, check_data_macros
 from scripts.validation import memory_layout, composition_sources, z80_driver
+from scripts.validation.source_names import check_source_names
+from scripts.validation.documentation import tracked
 
 DATA_OPS = (
     frozenset(("dc.b", "dc.w", "dc.l", "even", "align", "align0", "cnop", "cnop0", "macro", "endm", "equ", "label"))
@@ -300,6 +302,7 @@ def check_ranges(rows):
 def check(inventory=False, built=False):
     registry = load("config/reconstruction/source_layout.json")
     rows = registry["files"]
+    check_source_names(rows, tracked(ROOT))
     paths = [r["path"] for r in rows]
     if len(paths) != len(set(paths)) or set(paths) != set(source_names()):
         raise ValueError("Source ownership registry omits or duplicates files")

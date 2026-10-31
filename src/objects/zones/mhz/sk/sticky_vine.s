@@ -277,4 +277,4 @@ loc_3ED0A:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_MHZStickyVine:
-                include "src/objects/shared/zones/mhz/map_sticky_vine.s"
+                include "src/objects/shared/zones/mhz/mappings/sticky_vine.s"

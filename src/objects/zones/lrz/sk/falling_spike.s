@@ -69,5 +69,5 @@ loc_42904:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_LRZFallingSpike:
-                include "src/objects/shared/zones/lrz/map_falling_spike.s"
+                include "src/objects/shared/zones/lrz/mappings/falling_spike.s"
 ; End of function Obj_LRZFallingSpike

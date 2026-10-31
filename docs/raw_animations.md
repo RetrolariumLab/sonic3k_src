@@ -58,9 +58,9 @@ a shared ABI.
 
 The primary readers are in `src/objects/runtime/{s3,sk}/raw_animation.s`. The S3
 external-player reader is in
-`src/objects/bosses/lbz/final_boss_2/s3/motion_and_ending_helpers.s`. The carry
-reader remains in the Tails carrying source. The source and its active AS
-symbols are authoritative when interpreting a consumer.
+`src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s`. The carry reader
+remains in the Tails carrying source. The source and its active AS symbols are
+authoritative when interpreting a consumer.
 
 ## Verification and source generation
 

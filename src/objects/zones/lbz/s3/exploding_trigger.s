@@ -54,4 +54,4 @@ locret_249A6:
 
 ; ---------------------------------------------------------------------------
 Map_LBZExplodingTrigger:
-                include "src/objects/shared/zones/lbz/map_exploding_trigger.s"
+                include "src/objects/shared/zones/lbz/mappings/exploding_trigger.s"

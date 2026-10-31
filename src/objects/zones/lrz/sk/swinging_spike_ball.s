@@ -117,4 +117,4 @@ loc_43636:
 
 ; ---------------------------------------------------------------------------
 Map_LRZSwingingSpikeBall:
-                include "src/objects/shared/zones/lrz/map_swinging_spike_ball.s"
+                include "src/objects/shared/zones/lrz/mappings/swinging_spike_ball.s"

@@ -505,12 +505,12 @@ word_1FD32:
                 dc.w    -$600,  $600
                 dc.w    -$400,  $500
 Map_AIZBreakableWall:
-                include "src/objects/shared/zones/aiz/map_breakable_wall.s"
+                include "src/objects/shared/zones/aiz/mappings/breakable_wall.s"
 Map_CNZBreakableWall:
-                include "src/objects/shared/zones/cnz/map_breakable_wall_s3.s"
+                include "src/objects/shared/zones/cnz/mappings/breakable_wall_s3.s"
 Map_MGZBreakableWall:
-                include "src/objects/shared/zones/mgz/map_breakable_wall.s"
+                include "src/objects/shared/zones/mgz/mappings/breakable_wall.s"
 Map_HCZBreakableWall:
-                include "src/objects/shared/zones/hcz/map_breakable_wall.s"
+                include "src/objects/shared/zones/hcz/mappings/breakable_wall.s"
 Map_LBZBreakableWall:
-                include "src/objects/shared/zones/lbz/map_breakable_wall.s"
+                include "src/objects/shared/zones/lbz/mappings/breakable_wall.s"

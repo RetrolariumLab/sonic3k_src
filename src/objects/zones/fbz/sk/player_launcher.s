@@ -119,4 +119,4 @@ loc_3BA70:
                 jmp     (Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
 Map_FBZDEZPlayerLauncher:
-                include "src/objects/shared/zones/fbz/map_dez_player_launcher.s"
+                include "src/objects/shared/zones/fbz/mappings/dez_player_launcher.s"

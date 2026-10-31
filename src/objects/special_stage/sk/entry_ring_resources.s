@@ -2,13 +2,13 @@
 ; Responsibility: Special-stage entry ring and flash mappings, DPLC resources and palette scripts
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 Map_SSEntryRing:
-                include "src/objects/shared/ss_entry/map_entry_ring.s"
+                include "src/objects/shared/ss_entry/mappings/entry_ring.s"
 DPLC_SSEntryRing:
-                include "src/objects/shared/ss_entry/dplc_special_stage_entry_ring.s"
+                include "src/objects/shared/ss_entry/dplc/ring.s"
 Map_SSEntryFlash:
-                include "src/objects/shared/ss_entry/map_entry_flash.s"
+                include "src/objects/shared/ss_entry/mappings/entry_flash.s"
 DPLC_SSEntryFlash:
-                include "src/objects/shared/ss_entry/dplc_special_stage_entry_flash.s"
+                include "src/objects/shared/ss_entry/dplc/flash.s"
 PalSPtr_SSEntry:
                 palscriptptr .header, .data
                 .header: palscripthdr Normal_palette_line_2+$A, 2, 0

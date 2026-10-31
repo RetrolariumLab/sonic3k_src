@@ -532,4 +532,4 @@ locret_22B9C:
                 rts
 ; ---------------------------------------------------------------------------
 Map_AIZMHZRideVine:
-                include "src/objects/shared/zones/aiz/map_mhz_ride_vine.s"
+                include "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s"

@@ -222,4 +222,4 @@ sub_4076E:
 
 ; ---------------------------------------------------------------------------
 Map_SOZPushableRock:
-                include "src/objects/shared/zones/soz/map_pushable_rock.s"
+                include "src/objects/shared/zones/soz/mappings/pushable_rock.s"

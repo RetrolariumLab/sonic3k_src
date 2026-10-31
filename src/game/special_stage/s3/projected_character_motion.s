@@ -83,7 +83,7 @@ Obj_SStage_83E4:
                 bra.s   loc_8392
 ; ---------------------------------------------------------------------------
 Map_SStageShadow:
-                include "src/game/special_stage/shared/special_stage/map_shadow.s"
+                include "src/game/special_stage/shared/mappings/shadow.s"
 
 ; =============== S U B R O U T I N E =======================================
 

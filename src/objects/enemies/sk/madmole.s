@@ -447,4 +447,4 @@ byte_8D9E7:
                 dc.b    2,   5,   6,   7,   8,   9,  $A,  $B,  $C, $FC
                 even
 Map_Madmole:
-                include "src/objects/shared/madmole/map_madmole.s"
+                include "src/objects/shared/madmole/mappings/madmole.s"

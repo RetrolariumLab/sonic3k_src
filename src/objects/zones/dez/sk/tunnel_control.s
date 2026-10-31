@@ -425,7 +425,7 @@ loc_488BC:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_DEZTransRings:
-                include "src/objects/shared/zones/dez/anim_transporter_rings.s"
+                include "src/objects/shared/zones/dez/animations/transporter_rings.s"
 Map_DEZTransRings:
-                include "src/objects/shared/zones/dez/map_transporter_rings.s"
+                include "src/objects/shared/zones/dez/mappings/transporter_rings.s"
 ; End of function Obj_DEZTransRing

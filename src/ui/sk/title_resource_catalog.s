@@ -2,16 +2,16 @@
 ; Responsibility: Sonic and Knuckles title scene mappings, art, background frames and menu resource bindings
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 Map_SKTitle_SonicFall:
-                include "src/ui/shared/title/map_sk_sonic_falling.s"
+                include "src/ui/shared/title/mappings/sk_sonic_falling.s"
                 even
 Map_SKTitle_DeathEgg:
-                include "src/ui/shared/title/map_sk_death_egg.s"
+                include "src/ui/shared/title/mappings/sk_death_egg.s"
                 even
 Map_SKTitle_Banner:
-                include "src/ui/shared/title/map_sk_banner.s"
+                include "src/ui/shared/title/mappings/sk_banner.s"
                 even
 Map_SKTitle_Mountain:
-                include "src/ui/shared/title/map_sk_mountain.s"
+                include "src/ui/shared/title/mappings/sk_mountain.s"
                 even
 MapEni_SKTitle_Sega:
                 binclude "data/General/Title/Enigma Map/SK SEGA.eni"

@@ -421,11 +421,11 @@ byte_7D6B3:
                 dc.b    $F4
                 even
 Map_RoboshipPieces:
-                include "src/objects/shared/robotnik/map_robotnik_ship_pieces.s"
+                include "src/objects/shared/robotnik/mappings/ship_pieces.s"
 Map_SSZMasterEmerald:
-                include "src/objects/shared/ssz_master_emerald/map_master_emerald.s"
+                include "src/objects/shared/ssz_master_emerald/mappings/master_emerald.s"
 Map_MechaSonicPieces:
-                include "src/objects/shared/mecha_sonic/map_mecha_sonic_pieces.s"
+                include "src/objects/shared/mecha_sonic/mappings/pieces.s"
 
 word_7D842:     palscriptptr .header, .data
                 dc.w    0

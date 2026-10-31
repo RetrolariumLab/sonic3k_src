@@ -112,4 +112,4 @@ loc_48BE4:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_DEZGravitySwitch:
-                include "src/objects/shared/zones/dez/map_gravity_switch.s"
+                include "src/objects/shared/zones/dez/mappings/gravity_switch.s"

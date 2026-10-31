@@ -86,5 +86,5 @@ loc_3C900:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_FBZWallMissile:
-                include "src/objects/shared/zones/fbz/map_wall_missile.s"
+                include "src/objects/shared/zones/fbz/mappings/wall_missile.s"
 ; End of function Obj_FBZWallMissile

@@ -131,7 +131,7 @@ Obj_SKTitle_Icon2Display:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_SKTitle_Icon:
-                include "src/ui/shared/title/anim_sk_icon.s"
+                include "src/ui/shared/title/animations/sk_icon.s"
 ; ---------------------------------------------------------------------------
 
 Obj_SKTitle_TM:

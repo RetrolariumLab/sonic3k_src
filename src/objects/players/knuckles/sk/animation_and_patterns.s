@@ -199,7 +199,7 @@ loc_17EE4:
 
 ; ---------------------------------------------------------------------------
 AniKnuckles:
-                include "src/objects/shared/knuckles/anim_knuckles.s"
+                include "src/objects/shared/knuckles/animations/knuckles.s"
 
 ; =============== S U B R O U T I N E =======================================
 

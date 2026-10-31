@@ -171,5 +171,5 @@ loc_3D2F6:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_FBZSpiderCrane:
-                include "src/objects/shared/zones/fbz/map_spider_crane.s"
+                include "src/objects/shared/zones/fbz/mappings/spider_crane.s"
 ; End of function Obj_FBZSpiderCrane

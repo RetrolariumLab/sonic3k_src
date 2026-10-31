@@ -486,4 +486,4 @@ locret_3AD88:
                 rts
 ; ---------------------------------------------------------------------------
 Map_FBZChainLink:
-                include "src/objects/shared/zones/fbz/map_chain_link.s"
+                include "src/objects/shared/zones/fbz/mappings/chain_link.s"

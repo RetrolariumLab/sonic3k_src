@@ -189,6 +189,6 @@ MHZMushroomCap_BounceCharacter:
 
 ; ---------------------------------------------------------------------------
 Ani_MHZMushroomCap:
-                include "src/objects/shared/zones/mhz/anim_mushroom_cap.s"
+                include "src/objects/shared/zones/mhz/animations/mushroom_cap.s"
 Map_MHZMushroomCap:
-                include "src/objects/shared/zones/mhz/map_mushroom_cap.s"
+                include "src/objects/shared/zones/mhz/mappings/mushroom_cap.s"

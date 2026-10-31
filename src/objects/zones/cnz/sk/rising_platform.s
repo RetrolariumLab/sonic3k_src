@@ -26,7 +26,7 @@ loc_31BD2:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Ani_CNZRisingPlatform:
-                include "src/objects/shared/zones/cnz/anim_rising_platform.s"
+                include "src/objects/shared/zones/cnz/animations/rising_platform.s"
 
 ; =============== S U B R O U T I N E =======================================
 

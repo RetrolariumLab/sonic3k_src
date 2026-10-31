@@ -124,5 +124,5 @@ loc_3B256:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 Map_FBZMagneticSpikeBall:
-                include "src/objects/shared/zones/fbz/map_magnetic_spike_ball.s"
+                include "src/objects/shared/zones/fbz/mappings/magnetic_spike_ball.s"
 ; End of function Obj_FBZMagneticSpikeBall

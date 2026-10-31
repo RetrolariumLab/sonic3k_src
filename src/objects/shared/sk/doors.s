@@ -138,7 +138,7 @@ locret_30F84:
 
 ; ---------------------------------------------------------------------------
 Map_HCZCNZDEZDoor:
-                include "src/objects/shared/zones/hcz/map_cnz_dez_door.s"
+                include "src/objects/shared/zones/hcz/mappings/cnz_dez_door.s"
 ; ---------------------------------------------------------------------------
 byte_30FCE:
                 dc.b    $20,   8
@@ -258,4 +258,4 @@ locret_31106:
 
 ; ---------------------------------------------------------------------------
 Map_CNZDoorHorizontal:
-                include "src/objects/shared/zones/cnz/map_door_horizontal.s"
+                include "src/objects/shared/zones/cnz/mappings/door_horizontal.s"

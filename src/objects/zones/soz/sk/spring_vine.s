@@ -328,4 +328,4 @@ byte_40AAA:
                 dc.b    $16, $15, $14, $13, $12, $11, $10,  $F,  $E,  $D,  $C,  $B,  $A,   9,   8,   7,   0,   0
                 even
 Map_SOZSpringVine:
-                include "src/objects/shared/zones/soz/map_spring_vine.s"
+                include "src/objects/shared/zones/soz/mappings/spring_vine.s"

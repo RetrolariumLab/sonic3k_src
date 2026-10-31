@@ -57,7 +57,7 @@ needed for byte identity.
 
 ## Lock-on boundary
 
-src/memory/lockon/sonic3_exports.s describes the separately attached S3
+src/memory/lockon/sonic3_exports.inc describes the separately attached S3
 cartridge at 0x200000 without emitting its bytes into the base S&K image. Its
 exported labels are compared with independently assembled S3 labels. Composite
 construction concatenates verified components; engine relocation must keep the

@@ -288,4 +288,4 @@ word_4A94E:     dc.w    8-1
                 dc.w    $20,   $F0,   $28
                 dc.w    $20,   $72,   $28
 Map_LRZChainedPlatforms:
-                include "src/objects/shared/zones/lrz/map_chained_platforms.s"
+                include "src/objects/shared/zones/lrz/mappings/chained_platforms.s"

@@ -192,4 +192,4 @@ locret_3C19A:
                 rts
 ; ---------------------------------------------------------------------------
 Map_FBZSpinningPole:                                    ; unused
-                include "src/objects/shared/zones/fbz/map_spinning_pole_unused.s"
+                include "src/objects/shared/zones/fbz/mappings/spinning_pole_unused.s"

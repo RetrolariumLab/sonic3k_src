@@ -419,4 +419,4 @@ loc_2690C:
 
 ; ---------------------------------------------------------------------------
 Map_LBZRideGrapple:
-                include "src/objects/shared/zones/lbz/map_ride_grapple.s"
+                include "src/objects/shared/zones/lbz/mappings/ride_grapple.s"

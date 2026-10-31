@@ -89,9 +89,9 @@ byte_78348:
                 dc.b    7,  $A,  $A,  $B,  $C, $F4
                 even
 Map_SOZEndBoss:
-                include "src/objects/shared/zones/soz/map_end_boss.s"
+                include "src/objects/shared/zones/soz/mappings/end_boss.s"
 Map_SOZEndBossBody:
-                include "src/objects/shared/zones/soz/map_end_boss_body.s"
+                include "src/objects/shared/zones/soz/boss/mappings/body.s"
 Pal_SOZEndBoss1:
                 binclude "data/Levels/SOZ/Palettes/End Boss 1.bin"
                 even

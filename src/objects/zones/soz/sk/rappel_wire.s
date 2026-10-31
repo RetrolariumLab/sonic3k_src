@@ -722,4 +722,4 @@ locret_4B1CE:
 
 ; ---------------------------------------------------------------------------
 Map_SOZRapelWire:
-                include "src/objects/shared/zones/soz/map_rapel_wire.s"
+                include "src/objects/shared/zones/soz/mappings/rapel_wire.s"

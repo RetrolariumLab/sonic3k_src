@@ -289,5 +289,5 @@ loc_2F992:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_HCZHandLauncher:
-                include "src/objects/shared/zones/hcz/map_hand_launcher.s"
+                include "src/objects/shared/zones/hcz/mappings/hand_launcher.s"
 ; End of function loc_2F96C

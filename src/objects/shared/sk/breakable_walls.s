@@ -570,8 +570,8 @@ word_21A9A:
                 dc.w    -$600,  $600
                 dc.w    -$400,  $500
 Map_CNZSOZBreakableWall:
-                include "src/objects/shared/zones/cnz/map_soz_breakable_wall.s"
+                include "src/objects/shared/zones/cnz/mappings/soz_breakable_wall.s"
 Map_MHZBreakableWall:
-                include "src/objects/shared/zones/mhz/map_breakable_wall.s"
+                include "src/objects/shared/zones/mhz/mappings/breakable_wall.s"
 Map_LRZBreakableWall:
-                include "src/objects/shared/zones/lrz/map_breakable_wall.s"
+                include "src/objects/shared/zones/lrz/mappings/breakable_wall.s"

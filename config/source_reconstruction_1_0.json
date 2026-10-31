@@ -64,7 +64,7 @@
         "targets": ["audit-private", "verify-all", "check-audio-storage", "check-audio-binding", "check-driver-audio"],
         "files": [
           "docs/architecture.md",
-          "src/audio/driver/cartridge_container.s",
+          "src/audio/driver/cartridge_container.asm",
           "config/audio_streams.json",
           "config/audio_driver_payloads.json",
           "scripts/authoring/driver_payloads.py",

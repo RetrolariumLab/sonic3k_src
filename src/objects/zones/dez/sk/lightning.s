@@ -51,7 +51,7 @@ loc_4791A:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Ani_DEZLightning:
-                include "src/objects/shared/zones/dez/anim_lightning.s"
+                include "src/objects/shared/zones/dez/animations/lightning.s"
 Map_DEZLightning:
-                include "src/objects/shared/zones/dez/map_lightning.s"
+                include "src/objects/shared/zones/dez/mappings/lightning.s"
 ; End of function Obj_DEZLightning

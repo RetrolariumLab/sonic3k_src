@@ -82,4 +82,4 @@ loc_2838E:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_LBZGateLaser:
-                include "src/objects/shared/zones/lbz/map_gate_laser.s"
+                include "src/objects/shared/zones/lbz/mappings/gate_laser.s"

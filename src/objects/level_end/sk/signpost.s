@@ -372,8 +372,8 @@ AniRaw_SignpostSparkle:
                 dc.b    1,   4,   5,   6,   7, $FC
                 even
 DPLC_EndSigns:
-                include "src/objects/shared/signpost/dplc_end_signs.s"
+                include "src/objects/shared/signpost/dplc/end_signs.s"
 Map_EndSigns:
-                include "src/objects/shared/signpost/map_end_signs.s"
+                include "src/objects/shared/signpost/mappings/end_signs.s"
 Map_SignpostStub:
-                include "src/objects/shared/signpost/map_signpost_stub.s"
+                include "src/objects/shared/signpost/mappings/stub.s"

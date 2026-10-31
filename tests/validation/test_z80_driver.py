@@ -7,7 +7,7 @@ from scripts.validation import z80_driver as codec
 
 class Z80DriverTests(unittest.TestCase):
     def test_real_ram_layout_has_independent_field_and_overlay_offsets(self):
-        text = (ROOT / "src/audio/driver/ram_layout.s").read_text()
+        text = (ROOT / "src/audio/driver/ram_layout.asm").read_text()
         model = codec.ram_declarations(text)
         symbols = model["symbols"]
         self.assertEqual(model["track_instances"], 25)
@@ -18,7 +18,7 @@ class Z80DriverTests(unittest.TestCase):
         self.assertEqual(symbols["zTempVariablesEnd"], 0x1FA0)
 
     def test_ram_rejects_initialized_bytes_executable_code_and_stack_overflow(self):
-        text = (ROOT / "src/audio/driver/ram_layout.s").read_text()
+        text = (ROOT / "src/audio/driver/ram_layout.asm").read_text()
         for changed in (
             text.replace("padding off", "CPU Z80", 1),
             text.replace("ds.b 1", "db 0", 1),

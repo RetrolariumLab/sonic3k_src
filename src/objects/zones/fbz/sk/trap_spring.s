@@ -89,6 +89,6 @@ loc_3CC44:
 
 ; ---------------------------------------------------------------------------
 Ani_FBZTrapSpring:
-                include "src/objects/shared/zones/fbz/anim_trap_spring.s"
+                include "src/objects/shared/zones/fbz/animations/trap_spring.s"
 Map_FBZTrapSpring:
-                include "src/objects/shared/zones/fbz/map_trap_spring.s"
+                include "src/objects/shared/zones/fbz/mappings/trap_spring.s"

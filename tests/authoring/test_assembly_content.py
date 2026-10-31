@@ -98,3 +98,17 @@ class AssemblyContentTests(unittest.TestCase):
         ):
             with self.assertRaises(ValueError):
                 catalog.decode("src/frames.s", "first", altered, external_symbols={})
+
+
+class AssemblyOwnerDiscoveryTests(unittest.TestCase):
+    def test_semantic_kind_directories_require_every_owner_and_the_correct_family(self):
+        from scripts.authoring.assembly_workflow import validate_sources
+
+        names = ["src/objects/item/mappings/main.s", "src/objects/item/animations/main.s", "src/game/control.s"]
+        rows = [{"path": names[0], "family": "map"}, {"path": names[1], "family": "anim"}]
+        validate_sources(names, rows)
+        for invalid in (rows[:-1], rows + [rows[0]], [rows[0] | {"family": "dplc"}, rows[1]]):
+            with self.subTest(rows=invalid), self.assertRaises(ValueError):
+                validate_sources(names, invalid)
+        with self.assertRaises(ValueError):
+            validate_sources(names + ["src/objects/item/mappings/hidden.s"], rows)

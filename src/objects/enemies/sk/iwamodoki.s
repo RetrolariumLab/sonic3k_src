@@ -169,4 +169,4 @@ byte_8FC8B:
                 dc.b    0,   7,   9, $FC
                 even
 Map_Iwamodoki:
-                include "src/objects/shared/iwamodoki/map_iwamodoki.s"
+                include "src/objects/shared/iwamodoki/mappings/iwamodoki.s"

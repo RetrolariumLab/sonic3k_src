@@ -65,7 +65,7 @@ Render_HUD_P2:
 
 ; ---------------------------------------------------------------------------
 Map_HUD:
-                include "src/objects/shared/hud_icon/map_hud.s"
+                include "src/objects/shared/hud_icon/mappings/hud.s"
 
 ; =============== S U B R O U T I N E =======================================
 

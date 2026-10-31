@@ -320,4 +320,4 @@ locret_2A30E:
 
 ; ---------------------------------------------------------------------------
 Map_AIZFlippingBridge:
-                include "src/objects/shared/zones/aiz/map_flipping_bridge.s"
+                include "src/objects/shared/zones/aiz/mappings/flipping_bridge.s"

@@ -298,4 +298,4 @@ byte_89775:
                 dc.b    2,   7,   8,   9,  $A, $FC
                 even
 Map_Blaster:
-                include "src/objects/shared/blaster/map_blaster.s"
+                include "src/objects/shared/blaster/mappings/blaster.s"

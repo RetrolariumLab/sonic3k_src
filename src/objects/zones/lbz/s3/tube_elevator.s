@@ -507,4 +507,4 @@ locret_291A2:
 
 ; ---------------------------------------------------------------------------
 Map_LBZTubeElevator:
-                include "src/objects/shared/zones/lbz/map_tube_elevator.s"
+                include "src/objects/shared/zones/lbz/mappings/tube_elevator.s"

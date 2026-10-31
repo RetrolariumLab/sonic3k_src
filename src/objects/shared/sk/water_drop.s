@@ -101,4 +101,4 @@ loc_38390:
 
 ; ---------------------------------------------------------------------------
 Ani_HCZWaterDrop:
-                include "src/objects/shared/zones/hcz/anim_water_drop.s"
+                include "src/objects/shared/zones/hcz/animations/water_drop.s"

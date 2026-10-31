@@ -249,6 +249,6 @@ loc_37C2A:
 
 ; ---------------------------------------------------------------------------
 Map_HCZWaterSplash:
-                include "src/objects/shared/zones/hcz/map_water_splash.s"
+                include "src/objects/shared/zones/hcz/mappings/water_splash.s"
 Map_HCZWaterSplash2:
-                include "src/objects/shared/zones/hcz/map_water_splash_2.s"
+                include "src/objects/shared/zones/hcz/mappings/water_splash_2.s"

@@ -129,4 +129,4 @@ Hyudoro_chg_pg01:
                 dc.b    $F8, Hyudoro_pg02-Hyudoro_chg_pg01
 
 DPLC_SOZGhosts:
-                include "src/objects/shared/soz_ghosts/dplc_soz_ghosts.s"
+                include "src/objects/shared/soz_ghosts/dplc/soz_ghosts.s"

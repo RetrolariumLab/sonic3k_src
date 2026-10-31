@@ -198,4 +198,4 @@ locret_57182:
 LRZ2_BGDeformArray:
                 dc.w    $20,   $20,   $20,   $10,   $10,   $10,   $10,   $F0,   $10,   $10,   $10,   $20, $7FFF
 Map_LRZ2DeathEggBG:
-                include "src/objects/shared/zones/lrz/map_act_2_bg_death_egg.s"
+                include "src/objects/shared/zones/lrz/act2/mappings/bg_death_egg.s"

@@ -173,4 +173,4 @@ word_41E96:
                 dc.w    $60, -$1E0
                 dc.w    $1E0, -$1E0
 Map_SOZSandCork:
-                include "src/objects/shared/zones/soz/map_sand_cork.s"
+                include "src/objects/shared/zones/soz/mappings/sand_cork.s"

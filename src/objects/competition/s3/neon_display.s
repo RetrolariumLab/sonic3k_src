@@ -355,6 +355,6 @@ loc_36A8E:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_2PNeonDisplay:
-                include "src/game/competition/shared/2p_zone/anim_neon_display.s"
+                include "src/game/competition/shared/animations/neon_display.s"
 Map_2PNeonDisplay:
-                include "src/game/competition/shared/2p_zone/map_neon_display.s"
+                include "src/game/competition/shared/mappings/neon_display.s"

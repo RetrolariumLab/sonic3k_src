@@ -505,5 +505,5 @@ loc_3D98E:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_FBZMagneticPendulum:
-                include "src/objects/shared/zones/fbz/map_magnetic_pendulum.s"
+                include "src/objects/shared/zones/fbz/mappings/magnetic_pendulum.s"
 ; End of function Obj_FBZMagneticPendulum

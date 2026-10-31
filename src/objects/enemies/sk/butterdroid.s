@@ -53,6 +53,6 @@ AniRaw_Butterdroid:
                 dc.b    7,   0,   1,   2,   3,   4,   3,   2,   1, $FC
                 even
 Map_Butterdroid:
-                include "src/objects/shared/butterdroid/map_butterdroid.s"
+                include "src/objects/shared/butterdroid/mappings/butterdroid.s"
 DPLC_Butterdroid:
-                include "src/objects/shared/butterdroid/dplc_butterdroid.s"
+                include "src/objects/shared/butterdroid/dplc/butterdroid.s"

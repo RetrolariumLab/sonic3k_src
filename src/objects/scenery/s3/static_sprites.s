@@ -97,5 +97,5 @@ word_2B31A:
                 dc.w    $80
                 dc.b    $10, $40
 Map_StillSprites:
-                include "src/objects/shared/world/map_still_sprites_s3.s"
+                include "src/objects/shared/world/still_sprites/mappings/s3.s"
 ; End of function Obj_StillSprite

@@ -215,10 +215,10 @@ AniRaw_SSEntryFlash:
                 dc.b    0,   0,   0,   1,   2,   3|$40,   3,   2,   1,   0, $F4
                 even
 Map_SSEntryRing:
-                include "src/objects/shared/ss_entry/map_entry_ring.s"
+                include "src/objects/shared/ss_entry/mappings/entry_ring.s"
 DPLC_SSEntryRing:
-                include "src/objects/shared/ss_entry/dplc_special_stage_entry_ring.s"
+                include "src/objects/shared/ss_entry/dplc/ring.s"
 Map_SSEntryFlash:
-                include "src/objects/shared/ss_entry/map_entry_flash.s"
+                include "src/objects/shared/ss_entry/mappings/entry_flash.s"
 DPLC_SSEntryFlash:
-                include "src/objects/shared/ss_entry/dplc_special_stage_entry_flash.s"
+                include "src/objects/shared/ss_entry/dplc/flash.s"

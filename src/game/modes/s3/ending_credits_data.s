@@ -589,7 +589,7 @@ Pal_EndingS3LogoFlash:
                 binclude "data/General/Ending/Palettes/S3 Logo Flash.bin"
                 even
 Map_EndingGraphics:
-                include "src/ui/shared/ending/map_s3_ending_graphics.s"
+                include "src/ui/shared/ending/mappings/s3_ending_graphics.s"
 ChildObjDat_4192A:
                 dc.w    1-1
                 dc.l    loc_40854

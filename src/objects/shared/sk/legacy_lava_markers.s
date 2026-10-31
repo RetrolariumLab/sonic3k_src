@@ -56,6 +56,6 @@ loc_1EBB6:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_S2LavaMarker:
-                include "src/objects/shared/level_misc/map_lava_marker_s2.s"
+                include "src/objects/shared/level_misc/mappings/lava_marker_s2.s"
 Map_S2LavaMarkerDebug:
-                include "src/objects/shared/level_misc/map_lava_marker_s2_debug.s"
+                include "src/objects/shared/level_misc/mappings/lava_marker_debug.s"

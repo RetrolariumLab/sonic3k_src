@@ -518,7 +518,7 @@ Obj_FBZCloud:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_FBZ2Preboss:
-                include "src/objects/shared/zones/fbz/map_act_2_preboss.s"
+                include "src/objects/shared/zones/fbz/act2/mappings/preboss.s"
 FBZ2_CloudDeformIndex:
                 dc.w    4
                 dc.w    $E

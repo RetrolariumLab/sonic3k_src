@@ -379,4 +379,4 @@ byte_2B548:
                 dc.b    2
                 even
 Map_AIZDrawBridge:
-                include "src/objects/shared/zones/aiz/map_drawbridge.s"
+                include "src/objects/shared/zones/aiz/mappings/drawbridge.s"

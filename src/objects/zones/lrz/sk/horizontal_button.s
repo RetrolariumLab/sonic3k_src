@@ -58,5 +58,5 @@ loc_42D76:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_LRZButtonHorizontal:
-                include "src/objects/shared/zones/lrz/map_button_horizontal.s"
+                include "src/objects/shared/zones/lrz/mappings/button_horizontal.s"
 ; End of function Obj_LRZButtonHorizontal

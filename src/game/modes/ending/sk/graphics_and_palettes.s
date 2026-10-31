@@ -2,29 +2,29 @@
 ; Responsibility: Ending mappings, scene palettes and the Super Tails palette rotation script
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 Map_KnuxEnding:
-                include "src/objects/shared/knuckles/cutscene/map_ending_cutscene.s"
+                include "src/objects/shared/knuckles/cutscene/mappings/ending_cutscene.s"
 Map_SonicPlane:
-                include "src/ui/shared/ending/map_sonic_plane.s"
+                include "src/ui/shared/ending/mappings/sonic_plane.s"
 Map_SonicPlaneEnding:
-                include "src/ui/shared/ending/map_sonic_plane_ending.s"
+                include "src/ui/shared/ending/mappings/sonic_plane_ending.s"
 Map_SKPoseBanner:
-                include "src/ui/shared/ending/map_sonic_and_knuckles_pose_banner.s"
+                include "src/ui/shared/ending/mappings/sonic_knuckles_banner.s"
 Map_S3PoseBanner:
-                include "src/ui/shared/ending/map_sonic_3_pose_banner.s"
+                include "src/ui/shared/ending/mappings/sonic_banner_s3.s"
 Map_IslandLiftGfx:
-                include "src/ui/shared/ending/map_island_lift_sprites.s"
+                include "src/ui/shared/ending/mappings/island_lift_sprites.s"
 Map_EndingAnimals:
-                include "src/ui/shared/ending/map_ending_pelican_and_dolphin.s"
+                include "src/ui/shared/ending/mappings/pelican_dolphin.s"
 Map_SonicTailsEndPoses:
-                include "src/ui/shared/ending/map_sonic_tails_ending_poses.s"
+                include "src/ui/shared/ending/mappings/sonic_tails_poses.s"
 Map_ANDKnuckles:
-                include "src/ui/shared/ending/map_andknuckles_subtitle.s"
+                include "src/ui/shared/ending/mappings/andknuckles_subtitle.s"
 Map_EndingEyecatchEggRobo:
-                include "src/ui/shared/ending/map_ending_egg_robo_eyecatch.s"
+                include "src/ui/shared/ending/mappings/egg_robo_eyecatch.s"
 Map_EndingEyecatchEggman:
-                include "src/ui/shared/ending/map_ending_eggman_eyecatch.s"
+                include "src/ui/shared/ending/mappings/eggman_eyecatch.s"
 Map_KnuxEndPose:
-                include "src/ui/shared/ending/map_knuckles_end_pose.s"
+                include "src/ui/shared/ending/mappings/knuckles_end_pose.s"
 Pal_EndingSmallPlane:
                 binclude "data/General/Ending/Palettes/Small Plane.bin"
                 even

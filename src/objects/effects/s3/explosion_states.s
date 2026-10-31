@@ -114,5 +114,5 @@ loc_1C384:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_Explosion:
-                include "src/objects/shared/enemy_misc/map_explosion_s3.s"
+                include "src/objects/shared/enemy_misc/mappings/explosion_s3.s"
 ; End of function loc_1C31E

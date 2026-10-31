@@ -258,7 +258,7 @@ loc_15A92:
                 rts
 ; ---------------------------------------------------------------------------
 AniTails:
-                include "src/objects/shared/tails/anim_tails.s"
+                include "src/objects/shared/tails/animations/tails.s"
 ; ---------------------------------------------------------------------------
 
 Tails_Tail_Load_PLC:

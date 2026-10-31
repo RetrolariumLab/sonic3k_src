@@ -101,7 +101,7 @@ loc_20C74:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Ani_SurfboardIntro:
-                include "src/objects/shared/sonic/anim_sonic_surfboard.s"
+                include "src/objects/shared/sonic/animations/surfboard.s"
 ; ---------------------------------------------------------------------------
 
 Obj_AIZSurfboardIntro_Run:
@@ -250,9 +250,9 @@ locret_20E32:
 
 ; ---------------------------------------------------------------------------
 Map_SurfboardIntro:
-                include "src/objects/shared/sonic/map_sonic_surfboarding.s"
+                include "src/objects/shared/sonic/mappings/surfboarding.s"
 DPLC_SurfboardIntro:
-                include "src/objects/shared/sonic/dplc_sonic_surfboarding.s"
+                include "src/objects/shared/sonic/dplc/surfboarding.s"
 ; ---------------------------------------------------------------------------
 
 Obj_SurfboardWaves:
@@ -283,7 +283,7 @@ loc_20FE6:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Ani_SurfboardWaves:
-                include "src/objects/shared/surfboard/anim_surfboard_waves.s"
+                include "src/objects/shared/surfboard/animations/waves.s"
 ; ---------------------------------------------------------------------------
 
 Obj_SurfboardSplash:
@@ -447,11 +447,11 @@ locret_21186:
 
 ; ---------------------------------------------------------------------------
 Ani_SurfboardSplash:
-                include "src/objects/shared/surfboard/anim_surfboard_splash.s"
+                include "src/objects/shared/surfboard/animations/splash.s"
 Map_AIZIntroWaves:
-                include "src/objects/shared/zones/aiz/map_intro_waves.s"
+                include "src/objects/shared/zones/aiz/mappings/intro_waves.s"
 Map_SurfboardSplash:
-                include "src/objects/shared/surfboard/map_surfboard_splash.s"
+                include "src/objects/shared/surfboard/mappings/splash.s"
 ; ---------------------------------------------------------------------------
 
 Obj_Surfboard:
@@ -493,6 +493,6 @@ loc_2133C:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Ani_Surfboard:
-                include "src/objects/shared/surfboard/anim_surfboard.s"
+                include "src/objects/shared/surfboard/animations/surfboard.s"
 Map_Surfboard:
-                include "src/objects/shared/surfboard/map_surfboard.s"
+                include "src/objects/shared/surfboard/mappings/surfboard.s"

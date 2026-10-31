@@ -555,4 +555,4 @@ loc_24218:
                 rts
 ; ---------------------------------------------------------------------------
 Map_LBZMovingPlatform:
-                include "src/objects/shared/zones/lbz/map_moving_platform.s"
+                include "src/objects/shared/zones/lbz/mappings/moving_platform.s"

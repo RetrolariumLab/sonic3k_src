@@ -224,4 +224,4 @@ byte_27B96:
                 dc.b    $21
                 even
 Map_LBZSpinLauncher:
-                include "src/objects/shared/zones/lbz/map_spin_launcher.s"
+                include "src/objects/shared/zones/lbz/mappings/spin_launcher.s"

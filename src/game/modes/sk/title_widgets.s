@@ -193,7 +193,7 @@ Obj_TitleANDKnuckles_Display:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_TitleANDKnuckles:
-                include "src/ui/shared/title/map_s3_andknuckles.s"
+                include "src/ui/shared/title/mappings/s3_andknuckles.s"
 ; ---------------------------------------------------------------------------
 
 ; Dead code
@@ -318,7 +318,7 @@ Obj_TitleSonicFinger_Display:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_TitleSonicFinger:
-                include "src/ui/shared/title/anim_s3_sonic_finger.s"
+                include "src/ui/shared/title/animations/s3_sonic_finger.s"
 ; ---------------------------------------------------------------------------
 
 Obj_TitleSonicWink:
@@ -340,7 +340,7 @@ Obj_TitleSonicWink_Display:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_TitleSonicWink:
-                include "src/ui/shared/title/anim_s3_sonic_wink.s"
+                include "src/ui/shared/title/animations/s3_sonic_wink.s"
 ; ---------------------------------------------------------------------------
 
 Obj_TitleTailsPlane:
@@ -386,7 +386,7 @@ loc_4C3E:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_TitleTailsPlane:
-                include "src/ui/shared/title/anim_s3_tails_plane.s"
+                include "src/ui/shared/title/animations/s3_tails_plane.s"
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -115,14 +115,14 @@ byte_70F70:
                 dc.b    $F4
                 even
 Map_FBZExitDoor:
-                include "src/objects/shared/zones/fbz/map_exit_door.s"
+                include "src/objects/shared/zones/fbz/mappings/exit_door.s"
 Pal_FBZEndBoss:
                 binclude "data/Levels/FBZ/Palettes/FBZ End Boss.bin"
                 even
 Map_FBZEndBoss:
-                include "src/objects/shared/zones/fbz/map_end_boss.s"
+                include "src/objects/shared/zones/fbz/mappings/end_boss.s"
 Map_FBZEndBossFlame:
-                include "src/objects/shared/zones/fbz/map_end_boss_flame.s"
+                include "src/objects/shared/zones/fbz/boss/mappings/flame.s"
 FBZEndBoss_CircleLookup1:
                 dc.b    0,   2,   4,   5,   7,   9,  $B,  $C,  $E, $10, $11, $13, $15, $17, $18, $1A, $1C, $1D, $1F, $20
                 dc.b    $22, $23, $25, $27, $28, $29, $2B, $2C, $2E, $2F, $30, $32, $33, $34, $35, $37, $38, $39, $3A, $3B

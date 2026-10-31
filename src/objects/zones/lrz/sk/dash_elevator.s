@@ -156,4 +156,4 @@ loc_43092:
 
 ; ---------------------------------------------------------------------------
 Map_LRZDashElevator:
-                include "src/objects/shared/zones/lrz/map_dash_elevator.s"
+                include "src/objects/shared/zones/lrz/mappings/dash_elevator.s"

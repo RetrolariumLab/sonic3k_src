@@ -184,7 +184,7 @@ locret_259C2:
 
 ; ---------------------------------------------------------------------------
 Map_LRZSolidMovingPlatforms:
-                include "src/objects/shared/zones/lrz/map_solid_moving_platforms.s"
+                include "src/objects/shared/zones/lrz/mappings/solid_moving_platforms.s"
 ; ---------------------------------------------------------------------------
 ; unused
                 dc.b    $20, $10,   0

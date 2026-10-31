@@ -82,6 +82,6 @@ loc_35E6E:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_BPZBalloon:
-                include "src/objects/shared/zones/bpz/anim_balloon.s"
+                include "src/objects/shared/zones/bpz/animations/balloon.s"
 Map_BPZBalloon:
-                include "src/objects/shared/zones/bpz/map_balloon.s"
+                include "src/objects/shared/zones/bpz/mappings/balloon.s"

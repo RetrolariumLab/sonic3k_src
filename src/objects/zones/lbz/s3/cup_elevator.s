@@ -663,4 +663,4 @@ loc_26194:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_LBZCupElevator:
-                include "src/objects/shared/zones/lbz/map_cup_elevator.s"
+                include "src/objects/shared/zones/lbz/mappings/cup_elevator.s"

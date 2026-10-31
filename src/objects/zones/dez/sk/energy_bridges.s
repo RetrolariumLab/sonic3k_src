@@ -182,6 +182,6 @@ locret_47FF6:
 
 ; ---------------------------------------------------------------------------
 Map_DEZEnergyBridge:
-                include "src/objects/shared/zones/dez/map_energy_bridge.s"
+                include "src/objects/shared/zones/dez/mappings/energy_bridge.s"
 Map_DEZEnergyBridgeCurved:
-                include "src/objects/shared/zones/dez/map_energy_bridge_curved.s"
+                include "src/objects/shared/zones/dez/mappings/energy_bridge_curved.s"

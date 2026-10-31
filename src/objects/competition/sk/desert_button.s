@@ -55,5 +55,5 @@ loc_3634A:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_DPZButton:
-                include "src/objects/shared/zones/dpz/map_button.s"
+                include "src/objects/shared/zones/dpz/mappings/button.s"
 ; End of function Obj_DPZButton

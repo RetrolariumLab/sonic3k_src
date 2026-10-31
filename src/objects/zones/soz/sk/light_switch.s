@@ -187,4 +187,4 @@ locret_4108E:
 
 ; ---------------------------------------------------------------------------
 Map_SOZLightSwitch:
-                include "src/objects/shared/zones/soz/map_light_switch.s"
+                include "src/objects/shared/zones/soz/mappings/light_switch.s"

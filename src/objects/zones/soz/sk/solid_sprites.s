@@ -40,5 +40,5 @@ loc_41FAC:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_SOZSolidSprites:
-                include "src/objects/shared/zones/soz/map_solid_sprites.s"
+                include "src/objects/shared/zones/soz/mappings/solid_sprites.s"
 ; End of function Obj_SOZSolidSprites

@@ -117,5 +117,5 @@ loc_1E752:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_Explosion:
-                include "src/objects/shared/enemy_misc/map_explosion.s"
+                include "src/objects/shared/enemy_misc/mappings/explosion.s"
 ; End of function loc_1E6EC

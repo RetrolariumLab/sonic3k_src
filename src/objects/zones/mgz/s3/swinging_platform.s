@@ -106,4 +106,4 @@ loc_332E8:
 
 ; ---------------------------------------------------------------------------
 Map_MGZSwingingPlatform:
-                include "src/objects/shared/zones/mgz/map_swinging_platform.s"
+                include "src/objects/shared/zones/mgz/mappings/swinging_platform.s"

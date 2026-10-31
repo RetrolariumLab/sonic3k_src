@@ -31,5 +31,5 @@ CollisionSizes_FBZPropeller:
                 dc.b    $B6,   0, $B6, $B7
                 even
 Map_FBZPropeller:
-                include "src/objects/shared/zones/fbz/map_propeller.s"
+                include "src/objects/shared/zones/fbz/mappings/propeller.s"
 ; End of function Obj_FBZPropeller

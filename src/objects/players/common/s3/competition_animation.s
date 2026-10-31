@@ -246,7 +246,7 @@ loc_13CC0:
 
 ; ---------------------------------------------------------------------------
 AniSonic2P:
-                include "src/objects/shared/sonic/anim_sonic_knuckles_2p.s"
+                include "src/objects/shared/sonic/animations/knuckles_2p.s"
 
 ; =============== S U B R O U T I N E =======================================
 

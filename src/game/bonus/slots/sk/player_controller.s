@@ -892,4 +892,4 @@ locret_4C29E:
                 rts
 ; ---------------------------------------------------------------------------
 Map_SlotBonusCage:
-                include "src/objects/shared/zones/slots/map_bonus_cage_unused.s"
+                include "src/objects/shared/zones/slots/mappings/bonus_cage_unused.s"

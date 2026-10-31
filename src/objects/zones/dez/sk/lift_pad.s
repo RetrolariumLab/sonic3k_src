@@ -228,4 +228,4 @@ loc_4760E:
 
 ; ---------------------------------------------------------------------------
 Map_DEZLiftPad:
-                include "src/objects/shared/zones/dez/map_lift_pad.s"
+                include "src/objects/shared/zones/dez/mappings/lift_pad.s"

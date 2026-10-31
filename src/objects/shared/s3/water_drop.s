@@ -101,6 +101,6 @@ loc_37922:
 
 ; ---------------------------------------------------------------------------
 Ani_HCZWaterDrop:
-                include "src/objects/shared/zones/hcz/anim_water_drop.s"
+                include "src/objects/shared/zones/hcz/animations/water_drop.s"
 Map_HCZWaterDrop:
-                include "src/objects/shared/zones/hcz/map_water_drop.s"
+                include "src/objects/shared/zones/hcz/mappings/water_drop.s"

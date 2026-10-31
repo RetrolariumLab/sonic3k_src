@@ -447,4 +447,4 @@ locret_3E71E:
                 rts
 ; ---------------------------------------------------------------------------
 Map_MHZPulleyLift:
-                include "src/objects/shared/zones/mhz/map_pulley_lift.s"
+                include "src/objects/shared/zones/mhz/mappings/pulley_lift.s"

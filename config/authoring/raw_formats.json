@@ -4,12 +4,12 @@
   "coverage": "registered-consumer-corpora",
   "consumer_sources": [
     {
-      "path": "src/game/blue_sphere/sk/mode_label_and_icons.s",
+      "path": "src/game/blue_sphere/sk/mode_widgets.s",
       "sha256": "d9981819f39de853012167789be8461635a085df6fb94553044515a0a051cc5b"
     },
     {
       "path": "src/game/level/zones/aiz/s3/act2_air_raid.s",
-      "sha256": "cf44350fc815e1b305035bafda876a1620dbf05a3e10229c2dce537c532dbb5a"
+      "sha256": "83808576a7d578f4312651ddf8fcbacc13f5e5963e0a155d0e7ed52f4d5d9a66"
     },
     {
       "path": "src/game/level/zones/aiz/sk/act2_air_raid.s",
@@ -21,7 +21,7 @@
     },
     {
       "path": "src/game/modes/s3/continue_resources.s",
-      "sha256": "d199db5734ead8409a55f8dd358e422aeec9d3b6238d547735deff79e317faab"
+      "sha256": "a2f1e03043cf745e65bb9aabfa3bc8f1ebea541a84d58ff7ff4bfc10f7ce8685"
     },
     {
       "path": "src/game/modes/s3/continue_screen.s",
@@ -33,7 +33,7 @@
     },
     {
       "path": "src/game/modes/s3/ending_credits_data.s",
-      "sha256": "9d29a0c9496bcb7bd855172cd7ff3405c3a112a8e3df595753b4d08aff37877a"
+      "sha256": "4e5fb18dcd54dc9167fcc0562477ec7f9adc5ea2980d121a71bf677cf0d76ab2"
     },
     {
       "path": "src/objects/bonus/gumball/sk/machine.s",
@@ -45,11 +45,11 @@
     },
     {
       "path": "src/objects/bonus/gumball/sk/object_catalog.s",
-      "sha256": "307d7d47b4ac7babf17352b62f7a4234eff6178f6b8ed2994a85706c4648322b"
+      "sha256": "9002085f2e6edfdecd81193e780fd3c73a83b816f06014a3a65757be94ee8360"
     },
     {
       "path": "src/objects/bonus/pachinko/sk/invisible_object.s",
-      "sha256": "12befcdc2db537a117ccfcaa0a42c92603aff0c8a4f12d183b9071ab99e0dc49"
+      "sha256": "2b900a6f5da7db850b8f2c73d167d90270787e59aade77bd1b1f3d14a369512e"
     },
     {
       "path": "src/objects/bonus/s3/gumball_bumpers.s",
@@ -169,7 +169,7 @@
     },
     {
       "path": "src/objects/bosses/ddz/sk/object_catalog.s",
-      "sha256": "0df1c4c2dcbe0ba432ee1b4dde4dbbccd777b86fdf26d6a164c5aac07a8dfec4"
+      "sha256": "32752ff2bd6c28f4bcea6caf493be74ac912b5c7164b54a668b884d185a787b9"
     },
     {
       "path": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
@@ -184,11 +184,11 @@
       "sha256": "13ed70140345ddb286bbe95ce82939a86d3d3df247f325f472936e33e6a1d38a"
     },
     {
-      "path": "src/objects/bosses/dez/final_boss/sk/attack_and_defeat_actors.s",
+      "path": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
       "sha256": "bdefcaf8f27539e3724ccbe9f5c9e7bbd552970d56fd8f558df56a278ab9664d"
     },
     {
-      "path": "src/objects/bosses/dez/final_boss/sk/body_and_arm_parts.s",
+      "path": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
       "sha256": "cea5e3bf475b6addfdd17be069b619d61c2eb014471b9094a7790fe4a22bb24d"
     },
     {
@@ -217,7 +217,7 @@
     },
     {
       "path": "src/objects/bosses/fbz/end_boss/sk/object_catalog.s",
-      "sha256": "f456bced1999f7aaf607c0f159b40aa0a99b1c656ce01353fb9c68fc53af9785"
+      "sha256": "ce20ac68bcfda9df04654714868f465f8b4bf522c8cc3745b0f7e687312585ff"
     },
     {
       "path": "src/objects/bosses/fbz/s3/act2_subboss.s",
@@ -233,7 +233,7 @@
     },
     {
       "path": "src/objects/bosses/fbz/sk/act2_subboss_resources.s",
-      "sha256": "f69eeabf51c656686caf174ff4ba2186c2c0d78165c07eb828e06d59946737d7"
+      "sha256": "2f24a3da633f8a6a96308eaea4aa2ba7534429da66d5b775a9de53d0efa526eb"
     },
     {
       "path": "src/objects/bosses/hcz/end_boss/s3/attacks_and_transition.s",
@@ -336,8 +336,8 @@
       "sha256": "fedd2c18d7b4a1ef10d89fea8a7451a94652f80d1d16482697abaf78b6a926b9"
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/s3/object_and_ending_catalog.s",
-      "sha256": "7f339f7a6f5158db137fd01ef019941fcc227c70ac0c3af93d8b49c4d4bb0fb5"
+      "path": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "sha256": "720a671a0b00d26719d05f9c23ed27f7ccb374f5afb8399052cf06e4234fc6ba"
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
@@ -433,7 +433,7 @@
     },
     {
       "path": "src/objects/bosses/mgz/miniboss/s3/object_catalog.s",
-      "sha256": "bd9ee8361cdb5e955927ffae6ee97ad7fd751b08f12e19492e08807044948635"
+      "sha256": "9b81f8b164e5e7b4942a93c012d3434c02c7318f2b156b05b322b9db888a752a"
     },
     {
       "path": "src/objects/bosses/mgz/miniboss/s3/tunnelbot_and_battle.s",
@@ -441,7 +441,7 @@
     },
     {
       "path": "src/objects/bosses/mgz/miniboss/sk/object_catalog.s",
-      "sha256": "89d549bae5082c5c41dfbd96c52aea07a27465304efc33745713339584a4bd2e"
+      "sha256": "e55855550c90f5381cfcbaad58a1fc40d1c7d0dcb75f41baf6e556bd93340426"
     },
     {
       "path": "src/objects/bosses/mgz/miniboss/sk/tunnelbot_and_battle.s",
@@ -481,7 +481,7 @@
     },
     {
       "path": "src/objects/bosses/shared/sk/robotnik_ships.s",
-      "sha256": "b423695a5a2cd20b6478bb3dc25404da349b84c6a24e66677084241f451396fa"
+      "sha256": "ab80e4eacc233869cbb00d7ef84082ef38dd3d0ec0a9369d0798a32ad001ebed"
     },
     {
       "path": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
@@ -489,7 +489,7 @@
     },
     {
       "path": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
-      "sha256": "3c96ac620c6521a96c6bbc78027f4ea6a6d5f403827c6d094bd232b28e4a69cf"
+      "sha256": "a3f32736fdda45b94b7a6eb3de5db3f40d5ac2993d8cf223b75869a37c5143a2"
     },
     {
       "path": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
@@ -497,7 +497,7 @@
     },
     {
       "path": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
-      "sha256": "650a0098980e077f33079613c6032d46f9ce7cd0f0435e115fe2b870880fc4f1"
+      "sha256": "00be60924c58e12d68334d59c3458f2bbce62ef55773354d2c04431ae3e2a2a5"
     },
     {
       "path": "src/objects/bosses/ssz/end_boss/sk/battle.s",
@@ -513,10 +513,10 @@
     },
     {
       "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
-      "sha256": "6076352c8c804721c8a44e5651637bbeb4c80d6ca7134ade17d2131929db24d2"
+      "sha256": "9f62efc861f4c4e3ab6ef8997f7052b14c3dfc3a5717910a05a77a95a7f6adbb"
     },
     {
-      "path": "src/objects/cutscenes/hpz/sk/aftermath_and_player_guidance.s",
+      "path": "src/objects/cutscenes/hpz/sk/aftermath.s",
       "sha256": "0eaf1e05768d9a23767a4a200363a2ea90ad6711b728c5955494542a87c41ee7"
     },
     {
@@ -609,22 +609,22 @@
     },
     {
       "path": "src/objects/effects/s3/legacy_defense.s",
-      "sha256": "75829f7ee3af614e12c32e650326452a37c5ba363d8d8ff3859f3a17d370f095"
+      "sha256": "3354ecb860d90601a5dc6e9ea1cfa29373111a4b65ba327ef87c02686cac6f21"
     },
     {
       "path": "src/objects/effects/sk/boss_explosions.s",
-      "sha256": "62fe0528523ced9b104c7b94527b7d80f68ef877e3198a34b001c26c00a7d5f6"
+      "sha256": "4dba15923f60d41f5f7e4ce8dcff1af7456d6cd48e33804527fa29c7b25caca6"
     },
     {
       "path": "src/objects/effects/sk/legacy_defense.s",
-      "sha256": "48729fc45e13ce33bb21064aaf8820cd0c19b8d5e2519e6dbf81795fb93053a3"
+      "sha256": "d566bf72e923435947718463bc0140d753b5ea6acbfc039f52bb2e2ead936e68"
     },
     {
       "path": "src/objects/ending/sk/character_poses.s",
       "sha256": "8acbb7490fccf4b8a486e1c3b792b9d595d25516dea155ccceab819ba1882465"
     },
     {
-      "path": "src/objects/ending/sk/eggman_and_egg_robo_eyecatch.s",
+      "path": "src/objects/ending/sk/villain_eyecatch.s",
       "sha256": "27cf18e424539b27a989eb15f42c8132b908b361cb6894c426a1fdae7e8c9321"
     },
     {
@@ -640,7 +640,7 @@
       "sha256": "b04a7e62d234afcedddfb9607ae6c4fea06ef5f7edaf3f5e852f8dc09deaafd3"
     },
     {
-      "path": "src/objects/ending/sk/pose_and_plane_scene.s",
+      "path": "src/objects/ending/sk/plane_scene.s",
       "sha256": "f58675798206d9c8bdaa6b7748a9d48e4f058df959c3e4ce8164a6d6091935af"
     },
     {
@@ -713,11 +713,11 @@
     },
     {
       "path": "src/objects/enemies/fbz/sk/blaster.s",
-      "sha256": "8ecd65d5c04d6f589e72279d7f355ef2d43c134316f615ddf7e877462d6d2975"
+      "sha256": "550ad7535cf2eff8f889652687e8289f002e8d8b401abed1f6f9fe1fe8132b7a"
     },
     {
       "path": "src/objects/enemies/fbz/sk/techno_squeek.s",
-      "sha256": "b9b347000d6b45ad48c0fa49ee6ed7637900b8fe8e543bf74ba12a50d28db416"
+      "sha256": "c1778e4d5d9d2f1496ebbd5a0a2209bca6d694e4f7faef1150ab52f2148f4b99"
     },
     {
       "path": "src/objects/enemies/hcz/s3/blastoid.s",
@@ -745,7 +745,7 @@
     },
     {
       "path": "src/objects/enemies/hcz/s3/turbo_spiker.s",
-      "sha256": "c87e97fbeb2acdd168ae2eee7b29be6cf6147cc38496a2bac3f326d245c005d4"
+      "sha256": "fafd51501b5627e18221901f282e06cd8a67d9e6e733520a72ee7b3327e78a6b"
     },
     {
       "path": "src/objects/enemies/hcz/sk/blastoid.s",
@@ -773,7 +773,7 @@
     },
     {
       "path": "src/objects/enemies/hcz/sk/turbo_spiker.s",
-      "sha256": "b1fb11932a885bd1c692a201b69f86984588e9ae87b94a6117f14615454c9b7c"
+      "sha256": "ded2c5fefc8ecb906479235383eb557b54c94643c94b98b2d8751c5b48bee1ea"
     },
     {
       "path": "src/objects/enemies/icz/s3/penguinator.s",
@@ -849,7 +849,7 @@
     },
     {
       "path": "src/objects/enemies/sk/butterdroid.s",
-      "sha256": "7e3c4f44816cad7aff2b659a6176b598cbc2f214772c39865404dda4d13a92de"
+      "sha256": "502ae44b5ad0f5e537a2cb1d780c8c614ea808d953ba0ea6f0df622c830cbb60"
     },
     {
       "path": "src/objects/enemies/sk/chainspike.s",
@@ -857,31 +857,31 @@
     },
     {
       "path": "src/objects/enemies/sk/cluckoid.s",
-      "sha256": "a234b8e100c759283ca1a9b8e39d99e714374491797a9fed24332ae9e7659e3e"
+      "sha256": "8b47210f0725fe971e4cb8a44ce6927bb5451c6c26bf3a13570a0b93c7350fe2"
     },
     {
       "path": "src/objects/enemies/sk/dragonfly.s",
-      "sha256": "2729cbcb1f6774a44081f8f96a416aac0dbd85ce514535729ecbd7d0f16a6976"
+      "sha256": "bd78ed8d697471fb8eb905fb9fbaed4efc04209f1617406b1bafbac88145cfc3"
     },
     {
       "path": "src/objects/enemies/sk/fireworm.s",
-      "sha256": "31b56ceee2ac5889bcfe27c4daf470378535f9073b750cea729e02c1a590b93b"
+      "sha256": "95cd941c836aeaa01bc4840ec0a9ebc11affaa72f6964e92369ebd94de00a6b4"
     },
     {
       "path": "src/objects/enemies/sk/iwamodoki.s",
-      "sha256": "05c0697bd8bc6ece2460ee31c1c2778b6607af52e1d8a2336ffecd64b2e78375"
+      "sha256": "fa17d55716406779bdaf504d76f0189bcd8a146e8541eb48658008c5cee6563f"
     },
     {
       "path": "src/objects/enemies/sk/madmole.s",
-      "sha256": "e9809fd44145ddb8ad4f5fcd34db84cfefd3fe32340716e8a8f15fe6b5247952"
+      "sha256": "792152f33e6ce783250ca52e5f8fe97a7dc96d3d4e61a91c17b0098565da179c"
     },
     {
       "path": "src/objects/enemies/sk/mushmeanie.s",
-      "sha256": "98c5f54089a5b49e83116064ad9f6f0e63faf9c6906ae5524c9f7c027f9776a1"
+      "sha256": "8bf03d2019fe7121eaf9495f5129475f492ed532ac38b1dc6dfa31d067708b67"
     },
     {
       "path": "src/objects/enemies/sk/rockn.s",
-      "sha256": "05fd167638a9f565e2c5667de5e7fdaa1978b49150fe087a320cab33175e22ee"
+      "sha256": "ea538e50652a0e89575d35a4654f0a2c063c2a1eb47520a7bb6713a2b22b94e6"
     },
     {
       "path": "src/objects/enemies/sk/sandworm.s",
@@ -893,7 +893,7 @@
     },
     {
       "path": "src/objects/enemies/sk/toxomister.s",
-      "sha256": "65c04f12531da1afa600e8c825e779bcbe2f77ce1aaef64b994f5e37802eddb2"
+      "sha256": "375093ba34374707e042abad32c8231b9d08b03aa621a1642f7a21f7b8f963af"
     },
     {
       "path": "src/objects/interface/blue_sphere/sk/difficulty_banner_portrait.s",
@@ -921,7 +921,7 @@
     },
     {
       "path": "src/objects/level_end/sk/capsule_resources.s",
-      "sha256": "c679ddf0159c60a6192f6adcb64bc850403ac9fb179b8abc6f6c7b7ce05c5a8a"
+      "sha256": "720cbb0fda2bfc3187d08b6004f87c872c32ae9fc87797822283f366dcf71040"
     },
     {
       "path": "src/objects/level_end/sk/egg_capsule.s",
@@ -929,7 +929,7 @@
     },
     {
       "path": "src/objects/level_end/sk/signpost.s",
-      "sha256": "887bfce78ff797c7c5f1ffc6cec762339b5437ea31dc69cf9c5f5af6030d5c0d"
+      "sha256": "999a4de69f80a64c5988f8272dc31f307015461dd475ce1e03ea064279f4e0cb"
     },
     {
       "path": "src/objects/players/knuckles/sk/glide_motion.s",
@@ -996,7 +996,7 @@
       "sha256": "ebb5978e0e30df0b1134c3ebbbecb5b5692f3cf15d5c26f4c248205d119776ed"
     },
     {
-      "path": "src/objects/runtime/s3/timed_display_and_patterns.s",
+      "path": "src/objects/runtime/s3/display_helpers.s",
       "sha256": "a0bd1a6bcf23bbcd918574f977eac2cf1b7c531b571bf4d29227f7ea5a2cbb77"
     },
     {
@@ -1008,7 +1008,7 @@
       "sha256": "ef0d77cf129a95be2ced7d82ab645efc7c8653a0a80419e7daa1465d873c461f"
     },
     {
-      "path": "src/objects/runtime/s3/wait_and_surface_transitions.s",
+      "path": "src/objects/runtime/s3/state_transitions.s",
       "sha256": "37ba9c23809f8a420fd10e00c4d42196e3a710ab8a5b14f1c105cf6f5e93ba33"
     },
     {
@@ -1040,7 +1040,7 @@
       "sha256": "bd73a82dee380ea5884f858e519375338cb77814981032ca7ba57a0cccc685bc"
     },
     {
-      "path": "src/objects/runtime/sk/mask_and_player_callbacks.s",
+      "path": "src/objects/runtime/sk/mask_callbacks.s",
       "sha256": "0d461f7fbbc06152b90e562835ecd1a141054d05d108c6f4135d46386d9cfff0"
     },
     {
@@ -1076,7 +1076,7 @@
       "sha256": "c54351da596d0daa0a7eb8073d9ee6875d8241cf6e84dcb39bf7386ab70f926e"
     },
     {
-      "path": "src/objects/runtime/sk/timed_display_and_patterns.s",
+      "path": "src/objects/runtime/sk/display_helpers.s",
       "sha256": "c1945cc0e98e0f83b593f8804cd9496dc601e60b23c9a0d6d7d946e61b1c915d"
     },
     {
@@ -1088,20 +1088,20 @@
       "sha256": "774d9f11e580a60c3c0ecaa8aba7b63755843daa15bd41ee9402d8cae940fa53"
     },
     {
-      "path": "src/objects/runtime/sk/wait_and_surface_transitions.s",
+      "path": "src/objects/runtime/sk/state_transitions.s",
       "sha256": "923993d902834218f43da35b0700709c02898b34b7ca101684e020970f87d9ef"
     },
     {
       "path": "src/objects/shared/s3/collapsing_platforms.s",
-      "sha256": "aa825c18993e2278f21de7631e2d1a1290d7775e0bbef9ad29fa10485db264f0"
+      "sha256": "99469094cff7c1b19226be17b08c634f3051e466194fd28432b26f6bf18a57be"
     },
     {
       "path": "src/objects/shared/sk/collapsing_platforms.s",
-      "sha256": "1ec9699a291b898ce73584796a54883ea49fcb540ffa4f7c555ccfe0b93641d1"
+      "sha256": "2c353f179dd9dd064260c3e6e15cd70d055a9510b3c093a25dd5f755607fbaf3"
     },
     {
       "path": "src/objects/special_stage/s3/entry_ring.s",
-      "sha256": "bc2acacf9cca8a1e3627dac167a7d724d504176e26aa129e355eb354b10128c0"
+      "sha256": "0d226f32c91d82b9cd125bc0f8b91a5368dcd5c801ac118a5afce13011b273dc"
     },
     {
       "path": "src/objects/special_stage/sk/entry_ring.s",
@@ -1217,11 +1217,11 @@
     },
     {
       "path": "src/objects/zones/fbz/sk/chain_link.s",
-      "sha256": "7125b29916fd713454b4fc4a39f8c81f5e02eb7aa0edc6afec76c529b953c712"
+      "sha256": "b40469545dd334c710b2e74734c2378df2e5d8fa0b215e4a59337ad6019b9ba3"
     },
     {
       "path": "src/objects/zones/fbz/sk/spinning_pole.s",
-      "sha256": "e90bbd261826b5d61cf846caad6489fe9ec3ce3884a16d53750610fcdc4f27fe"
+      "sha256": "0b60be22a2e6da1271aaa48c516673c8db0c1e6053ee508e1ce5bc10ffaa40d0"
     },
     {
       "path": "src/objects/zones/fbz/sk/wire_cages.s",
@@ -1229,7 +1229,7 @@
     },
     {
       "path": "src/objects/zones/hpz/sk/emerald_resources.s",
-      "sha256": "759dcc6aaa7b3448d46141fe86415e7cf82dbe9f7a0247cd72c690c13f10dc60"
+      "sha256": "3b698f9fa0a8d09cc471f4422540292fd6f920d5a8fe42319c9a5bdd4d46de48"
     },
     {
       "path": "src/objects/zones/hpz/sk/master_emerald.s",
@@ -1241,15 +1241,15 @@
     },
     {
       "path": "src/objects/zones/lbz/s3/ride_grapple.s",
-      "sha256": "9b6e60dd47f5591b04395981bb90e8bb6a3b6de4492208ca3b37b3d4a21e957e"
+      "sha256": "e2c036e9d94e46a8e812cd10fbef102c8ecef3ad956b8c785f56bc8b975f03b6"
     },
     {
       "path": "src/objects/zones/lbz/s3/tube_elevator.s",
-      "sha256": "cd3729a9016c7a6c01e6259f183c105ce0b77dd3dd233000b5d6c595d238af02"
+      "sha256": "f81b68362554616dcd31f448e5713d2b3062e3b419572425a4a45c0bb6f5b0ec"
     },
     {
       "path": "src/objects/zones/lbz/sk/ride_grapple.s",
-      "sha256": "bc92c2d26e2c42cafd81c81b44426514d2de93439a910d43c53c42bcd527225b"
+      "sha256": "418f7a4b9eb77b114b91d0410451e318602b52895b693b545c8c56935c040f0f"
     },
     {
       "path": "src/objects/zones/lbz/sk/tube_elevator.s",
@@ -1261,11 +1261,11 @@
     },
     {
       "path": "src/objects/zones/lrz/sk/smashing_spike_platform.s",
-      "sha256": "3ef4a7ebd10d5424cc834cbe94077791d53f81638bf62d0869f7782dcfc2dccb"
+      "sha256": "ae4c85f0c72c91dc044c7e0b920eaff98b5db18fe74199e38dcbde915b910f81"
     },
     {
       "path": "src/objects/zones/lrz/sk/turbine_sprites.s",
-      "sha256": "52f4fb6c21df8a4ed1ae0ac10ca58644efbe553c06f7c977ab6b08f0ba55978f"
+      "sha256": "caa0023878a20e192cfdf603f1e5dd7ee29a8963b908adb4bb806ff0d9d5da22"
     },
     {
       "path": "src/objects/zones/lrz/sk/wall_ride.s",
@@ -1285,15 +1285,15 @@
     },
     {
       "path": "src/objects/zones/mhz/sk/mushroom_parachute.s",
-      "sha256": "71a49ebd137ccdbc894fe99cfd0e396e5c53a3f1e6ab407bf6f97af58b3f10a0"
+      "sha256": "d0f52293585f60c4d0045dd41a936d88f3e10842dfc8f4ba6103ad3ef0547920"
     },
     {
       "path": "src/objects/zones/mhz/sk/swing_vine.s",
-      "sha256": "74c24a56bb7419d7083e1b15b79a188e34c267d8fec7852351c69c4333800b0f"
+      "sha256": "09775e05a011ed5c9a9557c92453096495ad3585950da8ba77f8ffafc2c2daca"
     },
     {
       "path": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
-      "sha256": "f85fbee504435c927e7c1fa6b81ebdb076d2d813c59bc0152ba12ef0e0de94ad"
+      "sha256": "6759455a065281c34cb73cf14412be9ba16e7dad78afd3de0de0666a185b7fbb"
     },
     {
       "path": "src/objects/zones/soz/sk/ghost_capsule.s",
@@ -1305,11 +1305,11 @@
     },
     {
       "path": "src/objects/zones/soz/sk/ghost_resources.s",
-      "sha256": "59ef0d3a52b4bffbede73ff4828a48f217235e3f1f8502c254d8c0f5d30b3ad3"
+      "sha256": "934d5bc4659a79beeb643880aeb324279c23ce9c566d5ff3854c4948f10c32a0"
     },
     {
       "path": "src/objects/zones/soz/sk/rappel_wire.s",
-      "sha256": "32aed9d0f7210f4dc58202667a3f94f8fc7eed29a7642face58d804b111f33d1"
+      "sha256": "e2207ab13e7c38552632a614f8c3d1b508871996052a85b991f0b785b579c994"
     }
   ],
   "groups": [
@@ -1934,7 +1934,7 @@
       "stored_markers": []
     },
     {
-      "path": "src/objects/bosses/dez/final_boss/sk/attack_and_defeat_actors.s",
+      "path": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
       "symbol": "byte_80AD4",
       "scope": "byte_80AD4",
       "first_line": 75,
@@ -2518,7 +2518,7 @@
       "stored_markers": []
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/s3/object_and_ending_catalog.s",
+      "path": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
       "symbol": "byte_5205A",
       "scope": "byte_5205A",
       "first_line": 139,
@@ -2538,7 +2538,7 @@
       "stored_markers": []
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/s3/object_and_ending_catalog.s",
+      "path": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
       "symbol": "byte_52098",
       "scope": "byte_52098",
       "first_line": 166,

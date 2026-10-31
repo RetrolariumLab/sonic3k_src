@@ -159,4 +159,4 @@ loc_3B6AE:
 
 ; ---------------------------------------------------------------------------
 Map_FBZSnakePlatform:
-                include "src/objects/shared/zones/fbz/map_snake_platform.s"
+                include "src/objects/shared/zones/fbz/mappings/snake_platform.s"

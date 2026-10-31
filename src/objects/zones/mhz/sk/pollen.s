@@ -221,6 +221,6 @@ locret_3DC5A:
 
 ; ---------------------------------------------------------------------------
 Map_MHZPollen:
-                include "src/objects/shared/zones/mhz/map_pollen_leaves.s"
+                include "src/objects/shared/zones/mhz/mappings/pollen_leaves.s"
 Map_MHZBigLeaves:
-                include "src/objects/shared/zones/mhz/map_big_leaves.s"
+                include "src/objects/shared/zones/mhz/mappings/big_leaves.s"

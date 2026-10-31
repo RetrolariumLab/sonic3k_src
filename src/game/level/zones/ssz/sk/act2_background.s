@@ -595,7 +595,7 @@ loc_5926A:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_KnuxEndingIslandMask:
-                include "src/ui/shared/ending/map_knuckles_ending_island_mask.s"
+                include "src/ui/shared/ending/mappings/knuckles_island_mask.s"
 
 ; =============== S U B R O U T I N E =======================================
 

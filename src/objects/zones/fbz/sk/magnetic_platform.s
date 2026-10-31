@@ -154,4 +154,4 @@ locret_3B4DC:
 
 ; ---------------------------------------------------------------------------
 Map_FBZMagneticPlatform:
-                include "src/objects/shared/zones/fbz/map_magnetic_platform.s"
+                include "src/objects/shared/zones/fbz/mappings/magnetic_platform.s"

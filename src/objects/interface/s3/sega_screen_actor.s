@@ -333,6 +333,6 @@ ObjDat3_434EA:
                 dc.b    8
                 dc.b    0
 Ani_SonicOnSegaScr:
-                include "src/ui/shared/s2menu/anim_sonic_on_sega_screen.s"
+                include "src/ui/shared/s2menu/animations/sega_sonic.s"
 Map_SonicOnSegaScr:
-                include "src/ui/shared/s2menu/map_sonic_on_sega_screen.s"
+                include "src/ui/shared/s2menu/mappings/sega_sonic.s"

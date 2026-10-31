@@ -33,7 +33,7 @@ word_2B6B6:
                 dc.w    $300
                 dc.b    8,  $C
 Ani_AnimatedStillSprites:
-                include "src/objects/shared/world/anim_animated_still_sprites_s3.s"
+                include "src/objects/shared/world/still_sprites/animations/animated_s3.s"
 Map_AnimatedStillSprites:
-                include "src/objects/shared/world/map_animated_still_sprites_s3.s"
+                include "src/objects/shared/world/still_sprites/mappings/animated_s3.s"
 ; End of function Obj_AnimatedStillSprite

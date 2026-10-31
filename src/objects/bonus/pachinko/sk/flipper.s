@@ -194,6 +194,6 @@ byte_49E5A:
                 dc.b    -$10,-$11,-$12,-$13,-$14,-$15,-$16,-$17,-$18,-$19,-$1A,-$1B
                 even
 Ani_PachinkoFlipper:
-                include "src/objects/shared/zones/pachinko/anim_flipper.s"
+                include "src/objects/shared/zones/pachinko/animations/flipper.s"
 Map_PachinkoFlipper:
-                include "src/objects/shared/zones/pachinko/map_flipper.s"
+                include "src/objects/shared/zones/pachinko/mappings/flipper.s"

@@ -25,5 +25,5 @@ loc_4A1B2:
                 jmp     (loc_49B22).l
 ; ---------------------------------------------------------------------------
 Map_PachinkoPlatform:
-                include "src/objects/shared/zones/pachinko/map_platform.s"
+                include "src/objects/shared/zones/pachinko/mappings/platform.s"
 ; End of function Obj_Pachinko_Platform

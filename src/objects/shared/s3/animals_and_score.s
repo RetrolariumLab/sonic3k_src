@@ -481,14 +481,14 @@ loc_2C316:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_Animals1:
-                include "src/objects/shared/animals/map_animals_1.s"
+                include "src/objects/shared/animals/mappings/set_1.s"
 Map_Animals2:
-                include "src/objects/shared/animals/map_animals_2.s"
+                include "src/objects/shared/animals/mappings/set_2.s"
 Map_Animals3:
-                include "src/objects/shared/animals/map_animals_3.s"
+                include "src/objects/shared/animals/mappings/set_3.s"
 Map_Animals4:
-                include "src/objects/shared/animals/map_animals_4.s"
+                include "src/objects/shared/animals/mappings/set_4.s"
 Map_Animals5:
-                include "src/objects/shared/animals/map_animals_5.s"
+                include "src/objects/shared/animals/mappings/set_5.s"
 Map_EnemyScore:
-                include "src/objects/shared/enemy_misc/map_enemy_points.s"
+                include "src/objects/shared/enemy_misc/mappings/enemy_points.s"

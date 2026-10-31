@@ -166,4 +166,4 @@ locret_27DBA:
 
 ; ---------------------------------------------------------------------------
 Map_LBZLoweringGrapple:
-                include "src/objects/shared/zones/lbz/map_lowering_grapple.s"
+                include "src/objects/shared/zones/lbz/mappings/lowering_grapple.s"

@@ -44,7 +44,7 @@ MapEni_S3TitleBg:
                 binclude "data/General/Title/Enigma Map/S3 BG.eni"
                 even
 Map_S3TitleBanner:
-                include "src/ui/shared/title/map_s3_banner.s"
+                include "src/ui/shared/title/mappings/s3_banner.s"
 ArtNem_Title_S3Banner:
                 binclude "data/General/Title/Nemesis Art/S3 Banner.nem"
                 even

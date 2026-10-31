@@ -93,5 +93,5 @@ loc_41C68:
                 bra.s   loc_41C16
 ; ---------------------------------------------------------------------------
 Map_SOZDoor:
-                include "src/objects/shared/zones/soz/map_door.s"
+                include "src/objects/shared/zones/soz/mappings/door.s"
 ; End of function Obj_SOZDoor

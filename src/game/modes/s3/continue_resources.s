@@ -2,9 +2,9 @@
 ; Responsibility: Continue screen mapping entries, icon placement records and checked art resources
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 Map_ContinueSprites:
-                include "src/ui/shared/continue/map_player_sprites_s3.s"
+                include "src/ui/shared/continue/mappings/player_sprites_s3.s"
 Map_ContinueIcons:
-                include "src/ui/shared/continue/map_player_icons.s"
+                include "src/ui/shared/continue/mappings/player_icons.s"
 byte_3F834:     dc.b    0
                 dc.b    1
 byte_3F836:     dc.b    2

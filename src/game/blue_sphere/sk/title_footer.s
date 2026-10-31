@@ -49,7 +49,7 @@ loc_4D9FE:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_BlueSphereCharSprite:
-                include "src/game/blue_sphere/shared/blue_sphere/anim_character_sprites.s"
+                include "src/game/blue_sphere/shared/animations/character_sprites.s"
 ; End of function Obj_SpheresTitle_4D986
 ; ---------------------------------------------------------------------------
 
@@ -67,5 +67,5 @@ loc_4DA62:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_BlueSpheresCopyright:
-                include "src/game/blue_sphere/shared/blue_sphere/map_copyright.s"
+                include "src/game/blue_sphere/shared/mappings/copyright.s"
 ; End of function Obj_SpheresTitle_4DA30

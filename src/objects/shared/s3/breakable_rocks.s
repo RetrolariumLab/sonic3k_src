@@ -621,8 +621,8 @@ word_1DCC4:
                 dc.w    $240, -$100
                 dc.w    $200, -$100
 Map_AIZRock:
-                include "src/objects/shared/zones/aiz/map_rock.s"
+                include "src/objects/shared/zones/aiz/mappings/rock.s"
 Map_AIZRock2:
-                include "src/objects/shared/zones/aiz/map_rock_2.s"
+                include "src/objects/shared/zones/aiz/mappings/rock_2.s"
 Map_EMZRock:
-                include "src/objects/shared/zones/emz/map_rock.s"
+                include "src/objects/shared/zones/emz/mappings/rock.s"

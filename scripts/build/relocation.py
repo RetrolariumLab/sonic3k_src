@@ -220,7 +220,7 @@ def prune_source(work, names):
     for path in work.rglob("*"):
         if path.relative_to(work).parts[0] == "data":
             continue
-        if path.suffix not in (".s", ".inc"):
+        if path.suffix not in (".s", ".inc", ".asm"):
             continue
         if path.is_symlink() or not path.resolve().is_relative_to(work):
             raise ValueError("Generated source escapes its work directory")

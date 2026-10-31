@@ -48,5 +48,5 @@ loc_42804:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_LRZSinkingRock:
-                include "src/objects/shared/zones/lrz/map_sinking_rock.s"
+                include "src/objects/shared/zones/lrz/mappings/sinking_rock.s"
 ; End of function Obj_LRZSinkingRock

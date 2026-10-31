@@ -150,5 +150,5 @@ loc_43D04:
                 jmp     (loc_1B666).l
 ; ---------------------------------------------------------------------------
 Map_LRZOrbitingSpikeBall:
-                include "src/objects/shared/zones/lrz/map_orbiting_spike_ball.s"
+                include "src/objects/shared/zones/lrz/mappings/orbiting_spike_ball.s"
 ; End of function Obj_LRZOrbitingSpikeBallHorizontal

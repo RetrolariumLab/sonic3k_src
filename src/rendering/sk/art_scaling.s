@@ -559,4 +559,4 @@ loc_24BD6:
                 rts
 ; ---------------------------------------------------------------------------
 Map_ScaledArt:
-                include "src/objects/shared/level_misc/map_scaled_art.s"
+                include "src/objects/shared/level_misc/mappings/scaled_art.s"

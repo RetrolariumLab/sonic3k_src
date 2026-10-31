@@ -3,7 +3,7 @@
   "scope": "preservation-fixed-footprint",
   "resources": [
     {
-      "path": "src/game/blue_sphere/shared/blue_sphere/anim_character_sprites.s",
+      "path": "src/game/blue_sphere/shared/animations/character_sprites.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -76,7 +76,7 @@
       ]
     },
     {
-      "path": "src/game/blue_sphere/shared/blue_sphere/map_character_sprites.s",
+      "path": "src/game/blue_sphere/shared/mappings/character_sprites.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -210,7 +210,7 @@
       ]
     },
     {
-      "path": "src/game/blue_sphere/shared/blue_sphere/map_copyright.s",
+      "path": "src/game/blue_sphere/shared/mappings/copyright.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -240,7 +240,7 @@
       ]
     },
     {
-      "path": "src/game/blue_sphere/shared/blue_sphere/map_numbers.s",
+      "path": "src/game/blue_sphere/shared/mappings/numbers.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -413,7 +413,7 @@
       ]
     },
     {
-      "path": "src/game/blue_sphere/shared/blue_sphere/map_results_emerald.s",
+      "path": "src/game/blue_sphere/shared/mappings/results_emerald.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -521,7 +521,7 @@
       ]
     },
     {
-      "path": "src/game/blue_sphere/shared/blue_sphere/map_rotating_icon.s",
+      "path": "src/game/blue_sphere/shared/mappings/rotating_icon.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -642,7 +642,7 @@
       ]
     },
     {
-      "path": "src/game/blue_sphere/shared/blue_sphere/map_tails_pose.s",
+      "path": "src/game/blue_sphere/shared/mappings/tails_pose.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -672,7 +672,7 @@
       ]
     },
     {
-      "path": "src/game/blue_sphere/shared/blue_sphere/map_text.s",
+      "path": "src/game/blue_sphere/shared/mappings/text.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -767,7 +767,7 @@
       ]
     },
     {
-      "path": "src/game/competition/shared/2p_zone/anim_goal_marker.s",
+      "path": "src/game/competition/shared/animations/goal_marker.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -798,7 +798,7 @@
       ]
     },
     {
-      "path": "src/game/competition/shared/2p_zone/anim_item.s",
+      "path": "src/game/competition/shared/animations/item.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -983,7 +983,7 @@
       ]
     },
     {
-      "path": "src/game/competition/shared/2p_zone/anim_neon_display.s",
+      "path": "src/game/competition/shared/animations/neon_display.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -1112,7 +1112,7 @@
       ]
     },
     {
-      "path": "src/game/competition/shared/2p_zone/map_2p_bumper.s",
+      "path": "src/game/competition/shared/mappings/competition_bumper.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -1155,7 +1155,7 @@
       ]
     },
     {
-      "path": "src/game/competition/shared/2p_zone/map_2p_button.s",
+      "path": "src/game/competition/shared/mappings/competition_button.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -1211,7 +1211,7 @@
       ]
     },
     {
-      "path": "src/game/competition/shared/2p_zone/map_goal_marker.s",
+      "path": "src/game/competition/shared/mappings/goal_marker.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -1280,7 +1280,7 @@
       ]
     },
     {
-      "path": "src/game/competition/shared/2p_zone/map_item.s",
+      "path": "src/game/competition/shared/mappings/item.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -1713,7 +1713,7 @@
       ]
     },
     {
-      "path": "src/game/competition/shared/2p_zone/map_item_icon.s",
+      "path": "src/game/competition/shared/mappings/item_icon.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -1782,7 +1782,7 @@
       ]
     },
     {
-      "path": "src/game/competition/shared/2p_zone/map_lap_numbers.s",
+      "path": "src/game/competition/shared/mappings/lap_numbers.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -1929,7 +1929,7 @@
       ]
     },
     {
-      "path": "src/game/competition/shared/2p_zone/map_neon_display.s",
+      "path": "src/game/competition/shared/mappings/neon_display.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -2193,7 +2193,7 @@
       ]
     },
     {
-      "path": "src/game/competition/shared/2p_zone/map_position_icons_unused.s",
+      "path": "src/game/competition/shared/mappings/position_icons_unused.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -2275,7 +2275,7 @@
       ]
     },
     {
-      "path": "src/game/competition/shared/2p_zone/map_spikes.s",
+      "path": "src/game/competition/shared/mappings/spikes.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -2396,7 +2396,7 @@
       ]
     },
     {
-      "path": "src/game/special_stage/shared/special_stage/map_chaos_emerald.s",
+      "path": "src/game/special_stage/shared/mappings/chaos_emerald.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -2609,7 +2609,7 @@
       ]
     },
     {
-      "path": "src/game/special_stage/shared/special_stage/map_eosian_spheres.s",
+      "path": "src/game/special_stage/shared/mappings/eosian_spheres.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -2834,7 +2834,7 @@
       ]
     },
     {
-      "path": "src/game/special_stage/shared/special_stage/map_get_blue_spheres.s",
+      "path": "src/game/special_stage/shared/mappings/get_blue_spheres.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -2903,7 +2903,7 @@
       ]
     },
     {
-      "path": "src/game/special_stage/shared/special_stage/map_icons.s",
+      "path": "src/game/special_stage/shared/mappings/icons.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -2933,7 +2933,7 @@
       ]
     },
     {
-      "path": "src/game/special_stage/shared/special_stage/map_ring.s",
+      "path": "src/game/special_stage/shared/mappings/ring.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -3548,7 +3548,7 @@
       ]
     },
     {
-      "path": "src/game/special_stage/shared/special_stage/map_shadow.s",
+      "path": "src/game/special_stage/shared/mappings/shadow.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -3578,7 +3578,7 @@
       ]
     },
     {
-      "path": "src/game/special_stage/shared/special_stage/map_sphere.s",
+      "path": "src/game/special_stage/shared/mappings/sphere.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -3824,7 +3824,7 @@
       ]
     },
     {
-      "path": "src/game/special_stage/shared/special_stage/map_super_emerald.s",
+      "path": "src/game/special_stage/shared/mappings/super_emerald.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -4037,7 +4037,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/animals/map_animals_1.s",
+      "path": "src/objects/shared/animals/mappings/set_1.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -4093,7 +4093,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/animals/map_animals_2.s",
+      "path": "src/objects/shared/animals/mappings/set_2.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -4149,7 +4149,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/animals/map_animals_3.s",
+      "path": "src/objects/shared/animals/mappings/set_3.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -4205,7 +4205,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/animals/map_animals_4.s",
+      "path": "src/objects/shared/animals/mappings/set_4.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -4261,7 +4261,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/animals/map_animals_5.s",
+      "path": "src/objects/shared/animals/mappings/set_5.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -4317,7 +4317,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/batbot/map_batbot.s",
+      "path": "src/objects/shared/batbot/mappings/batbot.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -4425,7 +4425,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/blaster/map_blaster.s",
+      "path": "src/objects/shared/blaster/mappings/blaster.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -4585,7 +4585,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/blastoid/map_blastoid.s",
+      "path": "src/objects/shared/blastoid/mappings/blastoid.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -4654,7 +4654,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/bloominator/map_bloominator.s",
+      "path": "src/objects/shared/bloominator/mappings/bloominator.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -4736,7 +4736,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/boss_explosion/map_boss_explosion.s",
+      "path": "src/objects/shared/boss_explosion/mappings/boss_explosion.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -4831,7 +4831,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/bubbles/anim_air_countdown.s",
+      "path": "src/objects/shared/bubbles/animations/air_countdown.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -5058,7 +5058,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/bubbles/anim_bubbler.s",
+      "path": "src/objects/shared/bubbles/animations/bubbler.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -5192,7 +5192,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/bubbles/map_bubbler.s",
+      "path": "src/objects/shared/bubbles/mappings/bubbler.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -5623,7 +5623,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/bubbles_badnik/dplc_bubbles_badnik.s",
+      "path": "src/objects/shared/bubbles_badnik/dplc/bubbles_badnik.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -5705,7 +5705,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/bubbles_badnik/map_bubbles_badnik.s",
+      "path": "src/objects/shared/bubbles_badnik/mappings/bubbles_badnik.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -5787,7 +5787,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/buggernaut/map_buggernaut.s",
+      "path": "src/objects/shared/buggernaut/mappings/buggernaut.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -5882,7 +5882,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/butterdroid/dplc_butterdroid.s",
+      "path": "src/objects/shared/butterdroid/dplc/butterdroid.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -5964,7 +5964,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/butterdroid/map_butterdroid.s",
+      "path": "src/objects/shared/butterdroid/mappings/butterdroid.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -6046,7 +6046,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/buttons/map_button.s",
+      "path": "src/objects/shared/buttons/mappings/button.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -6102,7 +6102,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/caterkiller_jr/map_caterkiller_jr.s",
+      "path": "src/objects/shared/caterkiller_jr/mappings/caterkiller_jr.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -6197,7 +6197,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/chainspike/map_chainspike.s",
+      "path": "src/objects/shared/chainspike/mappings/chainspike.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -6318,7 +6318,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/clamer/dplc_clamer.s",
+      "path": "src/objects/shared/clamer/dplc/clamer.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -6478,7 +6478,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/clamer/map_clamer.s",
+      "path": "src/objects/shared/clamer/mappings/clamer.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -6651,7 +6651,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/cluckoid/dplc_cluckoid.s",
+      "path": "src/objects/shared/cluckoid/dplc/cluckoid.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -6850,7 +6850,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/cluckoid/map_cluckoid.s",
+      "path": "src/objects/shared/cluckoid/mappings/cluckoid.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -7049,7 +7049,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/cluckoid/map_cluckoid_arrow.s",
+      "path": "src/objects/shared/cluckoid/mappings/arrow.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -7079,7 +7079,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/corkey/map_corkey.s",
+      "path": "src/objects/shared/corkey/mappings/corkey.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -7200,7 +7200,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/dash_dust/anim_dash_dust.s",
+      "path": "src/objects/shared/dash_dust/animations/dash_dust.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -7292,7 +7292,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/dash_dust/anim_dash_dust_2p.s",
+      "path": "src/objects/shared/dash_dust/animations/competition.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -7365,7 +7365,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/dash_dust/dplc_dash_dust.s",
+      "path": "src/objects/shared/dash_dust/dplc/dash_dust.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -7754,7 +7754,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/dash_dust/map_dash_dust.s",
+      "path": "src/objects/shared/dash_dust/mappings/dash_dust.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -8119,7 +8119,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/dash_dust/map_dash_dust_2p.s",
+      "path": "src/objects/shared/dash_dust/mappings/competition.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -8240,7 +8240,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/dragonfly/map_dragonfly.s",
+      "path": "src/objects/shared/dragonfly/mappings/dragonfly.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -8387,7 +8387,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/egg_capsule/map_egg_capsule.s",
+      "path": "src/objects/shared/egg_capsule/mappings/egg_capsule.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -8573,7 +8573,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/egg_capsule/map_egg_capsule_s3.s",
+      "path": "src/objects/shared/egg_capsule/mappings/s3.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -8746,7 +8746,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/egg_robo/map_egg_robo_badnik.s",
+      "path": "src/objects/shared/egg_robo/mappings/badnik.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -8867,7 +8867,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/egg_robo/map_egg_robo_head.s",
+      "path": "src/objects/shared/egg_robo/mappings/head.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -8936,7 +8936,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/egg_robo/map_egg_robo_run.s",
+      "path": "src/objects/shared/egg_robo/mappings/run.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -9005,7 +9005,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/egg_robo/map_egg_robo_stand.s",
+      "path": "src/objects/shared/egg_robo/mappings/stand.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -9074,7 +9074,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/enemy_misc/map_enemy_points.s",
+      "path": "src/objects/shared/enemy_misc/mappings/enemy_points.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -9182,7 +9182,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/enemy_misc/map_explosion.s",
+      "path": "src/objects/shared/enemy_misc/mappings/explosion.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -9264,7 +9264,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/enemy_misc/map_explosion_s3.s",
+      "path": "src/objects/shared/enemy_misc/mappings/explosion_s3.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -9346,7 +9346,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/fireworm/dplc_fireworm.s",
+      "path": "src/objects/shared/fireworm/dplc/fireworm.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -9415,7 +9415,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/fireworm/map_fireworm.s",
+      "path": "src/objects/shared/fireworm/mappings/fireworm.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -9484,7 +9484,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/fireworm/map_fireworm_segments.s",
+      "path": "src/objects/shared/fireworm/mappings/segments.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -9605,7 +9605,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/flybot767/dplc_flybot767.s",
+      "path": "src/objects/shared/flybot767/dplc/flybot767.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -9895,7 +9895,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/flybot767/map_flybot767.s",
+      "path": "src/objects/shared/flybot767/mappings/flybot767.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -10185,7 +10185,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/game_over/map_game_over.s",
+      "path": "src/objects/shared/game_over/mappings/game_over.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -10254,7 +10254,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/hud_icon/map_hud.s",
+      "path": "src/objects/shared/hud_icon/mappings/hud.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -10349,7 +10349,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/iwamodoki/map_iwamodoki.s",
+      "path": "src/objects/shared/iwamodoki/mappings/iwamodoki.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -10496,7 +10496,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/iwamodoki/map_iwamodoki_s3.s",
+      "path": "src/objects/shared/iwamodoki/mappings/s3.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -10643,7 +10643,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/jawz/map_jawz.s",
+      "path": "src/objects/shared/jawz/mappings/jawz.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -10686,7 +10686,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/knuckles/anim_knuckles.s",
+      "path": "src/objects/shared/knuckles/animations/knuckles.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -11226,7 +11226,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/knuckles/cutscene/dplc_cutscene_knuckles.s",
+      "path": "src/objects/shared/knuckles/cutscene/dplc/knuckles.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -11724,7 +11724,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/knuckles/cutscene/dplc_hpz_grab.s",
+      "path": "src/objects/shared/knuckles/cutscene/dplc/hpz_grab.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -11988,7 +11988,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/knuckles/cutscene/dplc_intro_laying.s",
+      "path": "src/objects/shared/knuckles/cutscene/dplc/intro_laying.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -12070,7 +12070,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/knuckles/cutscene/dplc_mhz_press.s",
+      "path": "src/objects/shared/knuckles/cutscene/dplc/mhz_press.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -12139,7 +12139,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/knuckles/cutscene/dplc_ssz_tired.s",
+      "path": "src/objects/shared/knuckles/cutscene/dplc/ssz_tired.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -12247,7 +12247,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/knuckles/cutscene/map_act_2_knuckles_switch.s",
+      "path": "src/objects/shared/knuckles/cutscene/act2/mappings/knuckles_switch.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -12290,7 +12290,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/knuckles/cutscene/map_cutscene_knuckles.s",
+      "path": "src/objects/shared/knuckles/cutscene/mappings/knuckles.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -12788,7 +12788,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/knuckles/cutscene/map_ending_cutscene.s",
+      "path": "src/objects/shared/knuckles/cutscene/mappings/ending_cutscene.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -12909,7 +12909,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/knuckles/cutscene/map_hpz_grab.s",
+      "path": "src/objects/shared/knuckles/cutscene/mappings/hpz_grab.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -13173,7 +13173,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/knuckles/cutscene/map_intro_bomb.s",
+      "path": "src/objects/shared/knuckles/cutscene/mappings/intro_bomb.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -13307,7 +13307,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/knuckles/cutscene/map_intro_laying.s",
+      "path": "src/objects/shared/knuckles/cutscene/mappings/intro_laying.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -13389,7 +13389,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/knuckles/cutscene/map_knuckles_bomb.s",
+      "path": "src/objects/shared/knuckles/cutscene/mappings/bomb.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -13419,7 +13419,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/knuckles/cutscene/map_mhz2_press.s",
+      "path": "src/objects/shared/knuckles/cutscene/mappings/mhz2_press.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -13488,7 +13488,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/knuckles/cutscene/map_ssz_tired.s",
+      "path": "src/objects/shared/knuckles/cutscene/mappings/ssz_tired.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -13596,7 +13596,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/knuckles/dplc_knuckles.s",
+      "path": "src/objects/shared/knuckles/dplc/knuckles.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -16858,7 +16858,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/knuckles/dplc_knuckles_2p.s",
+      "path": "src/objects/shared/knuckles/dplc/competition.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -17525,7 +17525,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/knuckles/map_knuckles.s",
+      "path": "src/objects/shared/knuckles/mappings/knuckles.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -20799,7 +20799,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/knuckles/map_knuckles_2p.s",
+      "path": "src/objects/shared/knuckles/mappings/competition.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -21466,7 +21466,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/knuckles/map_sstage_knuckles.s",
+      "path": "src/objects/shared/knuckles/mappings/sstage_knuckles.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -21791,7 +21791,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/level_misc/anim_bumper.s",
+      "path": "src/objects/shared/level_misc/animations/bumper.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -21841,7 +21841,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/level_misc/anim_spring.s",
+      "path": "src/objects/shared/level_misc/animations/spring.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -21947,7 +21947,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/level_misc/map_2p_retracting_spring.s",
+      "path": "src/objects/shared/level_misc/mappings/competition_retracting_spring.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -22046,7 +22046,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/level_misc/map_2p_spring.s",
+      "path": "src/objects/shared/level_misc/mappings/competition_spring.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -22247,7 +22247,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/level_misc/map_bumper.s",
+      "path": "src/objects/shared/level_misc/mappings/bumper.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -22290,7 +22290,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/level_misc/map_invisible_block.s",
+      "path": "src/objects/shared/level_misc/mappings/invisible_block.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -22346,7 +22346,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/level_misc/map_lava_marker_s2.s",
+      "path": "src/objects/shared/level_misc/mappings/lava_marker_s2.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -22390,7 +22390,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/level_misc/map_lava_marker_s2_debug.s",
+      "path": "src/objects/shared/level_misc/mappings/lava_marker_debug.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -22446,7 +22446,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/level_misc/map_path_swap.s",
+      "path": "src/objects/shared/level_misc/mappings/path_swap.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -22555,7 +22555,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/level_misc/map_scaled_art.s",
+      "path": "src/objects/shared/level_misc/mappings/scaled_art.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -22838,7 +22838,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/level_misc/map_spikes.s",
+      "path": "src/objects/shared/level_misc/mappings/spikes.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -22959,7 +22959,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/level_misc/map_spring.s",
+      "path": "src/objects/shared/level_misc/mappings/spring.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -23264,7 +23264,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/level_misc/map_sprite_mask.s",
+      "path": "src/objects/shared/level_misc/mappings/sprite_mask.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -23502,7 +23502,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/madmole/map_madmole.s",
+      "path": "src/objects/shared/madmole/mappings/madmole.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -23701,7 +23701,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/madmole/map_madmole_s3.s",
+      "path": "src/objects/shared/madmole/mappings/s3.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -23900,7 +23900,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/mantis/map_mantis.s",
+      "path": "src/objects/shared/mantis/mappings/mantis.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -23995,7 +23995,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/mecha_sonic/dplc_mecha_sonic.s",
+      "path": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -24298,7 +24298,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/mecha_sonic/map_mecha_sonic.s",
+      "path": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -24601,7 +24601,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/mecha_sonic/map_mecha_sonic_extra.s",
+      "path": "src/objects/shared/mecha_sonic/mappings/extra.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -24969,7 +24969,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/mecha_sonic/map_mecha_sonic_head.s",
+      "path": "src/objects/shared/mecha_sonic/mappings/head.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -24999,7 +24999,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/mecha_sonic/map_mecha_sonic_pieces.s",
+      "path": "src/objects/shared/mecha_sonic/mappings/pieces.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -25224,7 +25224,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/mega_chopper/map_mega_chopper.s",
+      "path": "src/objects/shared/mega_chopper/mappings/mega_chopper.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -25293,7 +25293,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/monitors/anim_monitor.s",
+      "path": "src/objects/shared/monitors/animations/monitor.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -25464,7 +25464,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/monitors/map_monitor.s",
+      "path": "src/objects/shared/monitors/mappings/monitor.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -25637,7 +25637,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/monitors/map_monitor_s3.s",
+      "path": "src/objects/shared/monitors/mappings/monitor_s3.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -25810,7 +25810,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/monkey_dude/map_monkey_dude.s",
+      "path": "src/objects/shared/monkey_dude/mappings/monkey_dude.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -25918,7 +25918,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/mushmeanie/map_mushmeanie.s",
+      "path": "src/objects/shared/mushmeanie/mappings/mushmeanie.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -25987,7 +25987,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/orbinaut/map_orbinaut.s",
+      "path": "src/objects/shared/orbinaut/mappings/orbinaut.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -26030,7 +26030,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/penguinator/dplc_penguinator.s",
+      "path": "src/objects/shared/penguinator/dplc/penguinator.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -26164,7 +26164,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/penguinator/map_penguinator.s",
+      "path": "src/objects/shared/penguinator/mappings/penguinator.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -26298,7 +26298,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/pointdexter/map_pointdexter.s",
+      "path": "src/objects/shared/pointdexter/mappings/pointdexter.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -26354,7 +26354,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/results/map_results.s",
+      "path": "src/objects/shared/results/mappings/results.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -27138,7 +27138,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/results/map_results_s3.s",
+      "path": "src/objects/shared/results/mappings/s3.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -27727,7 +27727,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/rhinobot/dplc_rhinobot.s",
+      "path": "src/objects/shared/rhinobot/dplc/rhinobot.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -27848,7 +27848,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/rhinobot/map_rhinobot.s",
+      "path": "src/objects/shared/rhinobot/mappings/rhinobot.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -27969,7 +27969,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/ribot/map_ribot.s",
+      "path": "src/objects/shared/ribot/mappings/ribot.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -28090,7 +28090,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/ring/anim_ring.s",
+      "path": "src/objects/shared/ring/animations/ring.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -28121,7 +28121,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/ring/anim_ring_sparkle.s",
+      "path": "src/objects/shared/ring/animations/sparkle.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -28152,7 +28152,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/ring/map_ring.s",
+      "path": "src/objects/shared/ring/mappings/ring.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -28286,7 +28286,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/robotnik/map_fbz_robotnik_head.s",
+      "path": "src/objects/shared/robotnik/mappings/fbz_robotnik_head.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -28355,7 +28355,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/robotnik/map_fbz_robotnik_run.s",
+      "path": "src/objects/shared/robotnik/mappings/fbz_robotnik_run.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -28463,7 +28463,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/robotnik/map_fbz_robotnik_stand.s",
+      "path": "src/objects/shared/robotnik/mappings/fbz_robotnik_stand.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -28532,7 +28532,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/robotnik/map_robotnik_ship.s",
+      "path": "src/objects/shared/robotnik/mappings/ship.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -28718,7 +28718,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/robotnik/map_robotnik_ship_crane.s",
+      "path": "src/objects/shared/robotnik/mappings/ship_crane.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -29112,7 +29112,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/robotnik/map_robotnik_ship_pieces.s",
+      "path": "src/objects/shared/robotnik/mappings/ship_pieces.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -29181,7 +29181,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/rockn/map_rock_n.s",
+      "path": "src/objects/shared/rockn/mappings/rock_n.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -29263,7 +29263,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/sandworm/map_sandworm.s",
+      "path": "src/objects/shared/sandworm/mappings/sandworm.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -29397,7 +29397,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/shields/anim_bubble_shield.s",
+      "path": "src/objects/shared/shields/animations/bubble_shield.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -29461,7 +29461,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/shields/anim_fire_shield.s",
+      "path": "src/objects/shared/shields/animations/fire_shield.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -29511,7 +29511,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/shields/anim_insta_shield.s",
+      "path": "src/objects/shared/shields/animations/insta_shield.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -29556,7 +29556,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/shields/anim_lightning_shield.s",
+      "path": "src/objects/shared/shields/animations/lightning_shield.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -29620,7 +29620,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/shields/anim_lightning_shield_s3.s",
+      "path": "src/objects/shared/shields/animations/lightning_shield_s3.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -29670,7 +29670,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/shields/anim_s2_shield.s",
+      "path": "src/objects/shared/shields/animations/s2_shield.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -29701,7 +29701,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/shields/dplc_bubble_shield.s",
+      "path": "src/objects/shared/shields/dplc/bubble_shield.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -29887,7 +29887,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/shields/dplc_fire_shield.s",
+      "path": "src/objects/shared/shields/dplc/fire_shield.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -30229,7 +30229,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/shields/dplc_insta_shield.s",
+      "path": "src/objects/shared/shields/dplc/insta_shield.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -30314,7 +30314,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/shields/dplc_lightning_shield.s",
+      "path": "src/objects/shared/shields/dplc/lightning_shield.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -30576,7 +30576,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/shields/map_bubble_shield.s",
+      "path": "src/objects/shared/shields/mappings/bubble_shield.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -30762,7 +30762,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/shields/map_fire_shield.s",
+      "path": "src/objects/shared/shields/mappings/fire_shield.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -31104,7 +31104,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/shields/map_insta_shield.s",
+      "path": "src/objects/shared/shields/mappings/insta_shield.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -31219,7 +31219,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/shields/map_invincibility.s",
+      "path": "src/objects/shared/shields/mappings/invincibility.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -31353,7 +31353,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/shields/map_lightning_shield.s",
+      "path": "src/objects/shared/shields/mappings/lightning_shield.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -31628,7 +31628,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/shields/map_s2_shield.s",
+      "path": "src/objects/shared/shields/mappings/s2_shield.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -31723,7 +31723,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/shields/map_super_sonic_stars.s",
+      "path": "src/objects/shared/shields/mappings/super_sonic_stars.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -31854,7 +31854,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/signpost/dplc_end_signs.s",
+      "path": "src/objects/shared/signpost/dplc/end_signs.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -31962,7 +31962,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/signpost/map_end_signs.s",
+      "path": "src/objects/shared/signpost/mappings/end_signs.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -32070,7 +32070,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/signpost/map_signpost_stub.s",
+      "path": "src/objects/shared/signpost/mappings/stub.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -32100,7 +32100,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/skorp/map_skorp.s",
+      "path": "src/objects/shared/skorp/mappings/skorp.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -32182,7 +32182,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/snale_blaster/map_snale_blaster.s",
+      "path": "src/objects/shared/snale_blaster/mappings/snale_blaster.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -32342,7 +32342,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/snowboard/anim_snowboard_dust.s",
+      "path": "src/objects/shared/snowboard/animations/dust.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -32373,7 +32373,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/snowboard/dplc_snowboard.s",
+      "path": "src/objects/shared/snowboard/dplc/snowboard.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -32546,7 +32546,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/snowboard/map_snowboard.s",
+      "path": "src/objects/shared/snowboard/mappings/snowboard.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -32719,7 +32719,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/snowboard/map_snowboard_dust.s",
+      "path": "src/objects/shared/snowboard/mappings/dust.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -32788,7 +32788,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/sonic/anim_sonic.s",
+      "path": "src/objects/shared/sonic/animations/sonic.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -33581,7 +33581,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/sonic/anim_sonic_knuckles_2p.s",
+      "path": "src/objects/shared/sonic/animations/knuckles_2p.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -34304,7 +34304,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/sonic/anim_sonic_s3.s",
+      "path": "src/objects/shared/sonic/animations/s3.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -35097,7 +35097,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/sonic/anim_sonic_snowboard.s",
+      "path": "src/objects/shared/sonic/animations/snowboard.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -35198,7 +35198,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/sonic/anim_sonic_surfboard.s",
+      "path": "src/objects/shared/sonic/animations/surfboard.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -35229,7 +35229,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/sonic/dplc_sonic.s",
+      "path": "src/objects/shared/sonic/dplc/sonic.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -40532,7 +40532,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/sonic/dplc_sonic_2p.s",
+      "path": "src/objects/shared/sonic/dplc/competition.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -41115,7 +41115,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/sonic/dplc_sonic_s3.s",
+      "path": "src/objects/shared/sonic/dplc/s3.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -45788,7 +45788,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/sonic/dplc_sonic_snowboarding.s",
+      "path": "src/objects/shared/sonic/dplc/snowboarding.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -45974,7 +45974,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/sonic/dplc_sonic_surfboarding.s",
+      "path": "src/objects/shared/sonic/dplc/surfboarding.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -46121,7 +46121,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/sonic/map_hyper_sonic_stars.s",
+      "path": "src/objects/shared/sonic/mappings/hyper_sonic_stars.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -46216,7 +46216,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/sonic/map_sonic.s",
+      "path": "src/objects/shared/sonic/mappings/sonic.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -51531,7 +51531,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/sonic/map_sonic_2p.s",
+      "path": "src/objects/shared/sonic/mappings/competition.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -52114,7 +52114,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/sonic/map_sonic_s3.s",
+      "path": "src/objects/shared/sonic/mappings/s3.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -56799,7 +56799,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/sonic/map_sonic_snowboarding.s",
+      "path": "src/objects/shared/sonic/mappings/snowboarding.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -56985,7 +56985,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/sonic/map_sonic_surfboarding.s",
+      "path": "src/objects/shared/sonic/mappings/surfboarding.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -57132,7 +57132,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/sonic/map_sstage_sonic.s",
+      "path": "src/objects/shared/sonic/mappings/sstage_sonic.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -57457,7 +57457,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/soz_ghosts/dplc_soz_ghosts.s",
+      "path": "src/objects/shared/soz_ghosts/dplc/soz_ghosts.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -57708,7 +57708,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/soz_ghosts/map_soz_ghosts.s",
+      "path": "src/objects/shared/soz_ghosts/mappings/soz_ghosts.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -57959,7 +57959,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/sparkle/map_sparkle.s",
+      "path": "src/objects/shared/sparkle/mappings/sparkle.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -58093,7 +58093,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/spikebonker/map_spikebonker.s",
+      "path": "src/objects/shared/spikebonker/mappings/spikebonker.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -58162,7 +58162,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/spiker/map_spiker.s",
+      "path": "src/objects/shared/spiker/mappings/spiker.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -58283,7 +58283,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/ss_entry/dplc_special_stage_entry_flash.s",
+      "path": "src/objects/shared/ss_entry/dplc/flash.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -58357,7 +58357,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/ss_entry/dplc_special_stage_entry_ring.s",
+      "path": "src/objects/shared/ss_entry/dplc/ring.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -58530,7 +58530,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/ss_entry/map_entry_flash.s",
+      "path": "src/objects/shared/ss_entry/mappings/entry_flash.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -58604,7 +58604,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/ss_entry/map_entry_ring.s",
+      "path": "src/objects/shared/ss_entry/mappings/entry_ring.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -58777,7 +58777,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/ssz_master_emerald/map_master_emerald.s",
+      "path": "src/objects/shared/ssz_master_emerald/mappings/master_emerald.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -58833,7 +58833,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/star_pointer/map_star_pointer.s",
+      "path": "src/objects/shared/star_pointer/mappings/star_pointer.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -58902,7 +58902,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/starpost/anim_starpost.s",
+      "path": "src/objects/shared/starpost/animations/starpost.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -58961,7 +58961,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/starpost/map_starpost.s",
+      "path": "src/objects/shared/starpost/mappings/starpost.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -59043,7 +59043,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/starpost/map_starpost_stars.s",
+      "path": "src/objects/shared/starpost/mappings/stars.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -59099,7 +59099,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/surfboard/anim_surfboard.s",
+      "path": "src/objects/shared/surfboard/animations/surfboard.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -59130,7 +59130,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/surfboard/anim_surfboard_splash.s",
+      "path": "src/objects/shared/surfboard/animations/splash.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -59166,7 +59166,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/surfboard/anim_surfboard_waves.s",
+      "path": "src/objects/shared/surfboard/animations/waves.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -59197,7 +59197,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/surfboard/map_surfboard.s",
+      "path": "src/objects/shared/surfboard/mappings/surfboard.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -59279,7 +59279,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/surfboard/map_surfboard_splash.s",
+      "path": "src/objects/shared/surfboard/mappings/splash.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -59387,7 +59387,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/tails/anim_tails.s",
+      "path": "src/objects/shared/tails/animations/tails.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -59992,7 +59992,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/tails/anim_tails_2p.s",
+      "path": "src/objects/shared/tails/animations/competition.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -60429,7 +60429,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/tails/anim_tails_2p_tail.s",
+      "path": "src/objects/shared/tails/animations/competition_tail.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -60500,7 +60500,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/tails/anim_tails_s3.s",
+      "path": "src/objects/shared/tails/animations/s3.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -61096,7 +61096,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/tails/anim_tails_tail.s",
+      "path": "src/objects/shared/tails/animations/tail.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -61295,7 +61295,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/tails/dplc_tails.s",
+      "path": "src/objects/shared/tails/dplc/tails.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -64443,7 +64443,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/tails/dplc_tails_2p.s",
+      "path": "src/objects/shared/tails/dplc/competition.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -65052,7 +65052,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/tails/dplc_tails_s3.s",
+      "path": "src/objects/shared/tails/dplc/s3.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -67774,7 +67774,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/tails/dplc_tails_tails.s",
+      "path": "src/objects/shared/tails/dplc/tail.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -68376,7 +68376,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/tails/dplc_tails_tails_2p.s",
+      "path": "src/objects/shared/tails/dplc/tails_2p.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -68601,7 +68601,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/tails/map_sstage_tails.s",
+      "path": "src/objects/shared/tails/mappings/sstage_tails.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -68926,7 +68926,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/tails/map_sstage_tails_tails.s",
+      "path": "src/objects/shared/tails/mappings/sstage_tails_tails.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -69329,7 +69329,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/tails/map_super_tails_birds.s",
+      "path": "src/objects/shared/tails/mappings/super_tails_birds.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -69385,7 +69385,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/tails/map_tails.s",
+      "path": "src/objects/shared/tails/mappings/tails.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -72575,7 +72575,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/tails/map_tails_2p.s",
+      "path": "src/objects/shared/tails/mappings/competition.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -73184,7 +73184,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/tails/map_tails_s3.s",
+      "path": "src/objects/shared/tails/mappings/s3.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -75918,7 +75918,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/tails/map_tails_tail_2p.s",
+      "path": "src/objects/shared/tails/mappings/tail_2p.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -76143,7 +76143,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/tails/map_tails_tails.s",
+      "path": "src/objects/shared/tails/mappings/tail.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -76745,7 +76745,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/technosqueek/map_technosqueek.s",
+      "path": "src/objects/shared/technosqueek/mappings/technosqueek.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -76892,7 +76892,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/teleporter/map_teleporter.s",
+      "path": "src/objects/shared/teleporter/mappings/teleporter.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -77052,7 +77052,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/title_card/map_title_card.s",
+      "path": "src/objects/shared/title_card/mappings/title_card.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -77337,7 +77337,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/title_card/map_title_card_s3.s",
+      "path": "src/objects/shared/title_card/mappings/s3.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -77585,7 +77585,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/toxomister/map_toxomister.s",
+      "path": "src/objects/shared/toxomister/mappings/toxomister.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -77706,7 +77706,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/toxomister/map_toxomister_s3.s",
+      "path": "src/objects/shared/toxomister/mappings/s3.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -77827,7 +77827,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/turbo_spiker/map_turbo_spiker.s",
+      "path": "src/objects/shared/turbo_spiker/mappings/turbo_spiker.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -78026,7 +78026,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/turbo_spiker/map_turbo_spiker_hidden.s",
+      "path": "src/objects/shared/turbo_spiker/mappings/hidden.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -78056,7 +78056,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/world/anim_animated_still_sprites.s",
+      "path": "src/objects/shared/world/still_sprites/animations/animated.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -78185,7 +78185,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/world/anim_animated_still_sprites_s3.s",
+      "path": "src/objects/shared/world/still_sprites/animations/animated_s3.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -78235,7 +78235,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/world/map_animated_still_sprites.s",
+      "path": "src/objects/shared/world/still_sprites/mappings/animated.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -78642,7 +78642,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/world/map_animated_still_sprites_s3.s",
+      "path": "src/objects/shared/world/still_sprites/mappings/animated_s3.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -78776,7 +78776,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/world/map_still_sprites.s",
+      "path": "src/objects/shared/world/still_sprites/mappings/main.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -79438,7 +79438,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/world/map_still_sprites_s3.s",
+      "path": "src/objects/shared/world/still_sprites/mappings/s3.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -79755,7 +79755,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/world/map_tension_bridge.s",
+      "path": "src/objects/shared/world/mappings/tension_bridge.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -79798,7 +79798,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/anim_act_2_bomb_explosion.s",
+      "path": "src/objects/shared/zones/aiz/act2/animations/bomb_explosion.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -79843,7 +79843,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/anim_act_2_ship_propeller.s",
+      "path": "src/objects/shared/zones/aiz/act2/animations/ship_propeller.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -79874,7 +79874,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/anim_disappearing_floor.s",
+      "path": "src/objects/shared/zones/aiz/animations/disappearing_floor.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -79938,7 +79938,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_act_1_tree.s",
+      "path": "src/objects/shared/zones/aiz/act1/mappings/tree.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -79968,7 +79968,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_act_1_zipline_peg.s",
+      "path": "src/objects/shared/zones/aiz/act1/mappings/zipline_peg.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -79998,7 +79998,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_act_2_background_tree.s",
+      "path": "src/objects/shared/zones/aiz/act2/mappings/background_tree.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -80028,7 +80028,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_act_2_bomb_explosion.s",
+      "path": "src/objects/shared/zones/aiz/act2/mappings/bomb_explosion.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -80201,7 +80201,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_act_2_boss_small.s",
+      "path": "src/objects/shared/zones/aiz/act2/mappings/boss_small.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -80231,7 +80231,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_act_2_foreground_tree.s",
+      "path": "src/objects/shared/zones/aiz/act2/mappings/foreground_tree.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -80261,7 +80261,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_act_2_ship_propeller.s",
+      "path": "src/objects/shared/zones/aiz/act2/mappings/ship_propeller.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -80330,7 +80330,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_breakable_wall.s",
+      "path": "src/objects/shared/zones/aiz/mappings/breakable_wall.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -80425,7 +80425,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_collapsing_log_bridge.s",
+      "path": "src/objects/shared/zones/aiz/mappings/collapsing_log_bridge.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -80475,7 +80475,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_collapsing_platform.s",
+      "path": "src/objects/shared/zones/aiz/mappings/collapsing_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -80532,7 +80532,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_collapsing_platform_2.s",
+      "path": "src/objects/shared/zones/aiz/mappings/collapsing_platform_2.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -80589,7 +80589,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_cork_floor.s",
+      "path": "src/objects/shared/zones/aiz/mappings/cork_floor.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -80632,7 +80632,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_cork_floor_2.s",
+      "path": "src/objects/shared/zones/aiz/mappings/cork_floor_2.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -80675,7 +80675,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_disappearing_floor.s",
+      "path": "src/objects/shared/zones/aiz/mappings/disappearing_floor.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -80830,7 +80830,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_draw_bridge_fire.s",
+      "path": "src/objects/shared/zones/aiz/mappings/draw_bridge_fire.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -80951,7 +80951,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_drawbridge.s",
+      "path": "src/objects/shared/zones/aiz/mappings/drawbridge.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -80994,7 +80994,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_end_boss.s",
+      "path": "src/objects/shared/zones/aiz/mappings/end_boss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -81721,7 +81721,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_falling_log.s",
+      "path": "src/objects/shared/zones/aiz/mappings/falling_log.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -81751,7 +81751,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_falling_log_2.s",
+      "path": "src/objects/shared/zones/aiz/mappings/falling_log_2.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -81781,7 +81781,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_falling_log_splash.s",
+      "path": "src/objects/shared/zones/aiz/mappings/falling_log_splash.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -81850,7 +81850,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_falling_log_splash_2.s",
+      "path": "src/objects/shared/zones/aiz/mappings/log_splash_2.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -81919,7 +81919,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_flipping_bridge.s",
+      "path": "src/objects/shared/zones/aiz/mappings/flipping_bridge.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -82196,7 +82196,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_floating_platform.s",
+      "path": "src/objects/shared/zones/aiz/mappings/floating_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -82226,7 +82226,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_foreground_plant.s",
+      "path": "src/objects/shared/zones/aiz/mappings/foreground_plant.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -82269,7 +82269,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_intro_emeralds.s",
+      "path": "src/objects/shared/zones/aiz/mappings/intro_emeralds.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -82377,7 +82377,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_intro_plane.s",
+      "path": "src/objects/shared/zones/aiz/mappings/intro_plane.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -82537,7 +82537,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_intro_waves.s",
+      "path": "src/objects/shared/zones/aiz/mappings/intro_waves.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -82632,7 +82632,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_mhz_ride_vine.s",
+      "path": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -83117,7 +83117,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_miniboss.s",
+      "path": "src/objects/shared/zones/aiz/mappings/miniboss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -83368,7 +83368,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_miniboss_flame.s",
+      "path": "src/objects/shared/zones/aiz/miniboss/mappings/flame.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -83450,7 +83450,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_miniboss_small.s",
+      "path": "src/objects/shared/zones/aiz/miniboss/mappings/small.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -83506,7 +83506,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_ride_vine_s3.s",
+      "path": "src/objects/shared/zones/aiz/mappings/ride_vine_s3.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -83965,7 +83965,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_rock.s",
+      "path": "src/objects/shared/zones/aiz/mappings/rock.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -84073,7 +84073,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_rock_2.s",
+      "path": "src/objects/shared/zones/aiz/mappings/rock_2.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -84181,7 +84181,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/map_spiked_log.s",
+      "path": "src/objects/shared/zones/aiz/mappings/spiked_log.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -84406,7 +84406,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/bpz/anim_balloon.s",
+      "path": "src/objects/shared/zones/bpz/animations/balloon.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -84484,7 +84484,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/bpz/map_balloon.s",
+      "path": "src/objects/shared/zones/bpz/mappings/balloon.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -84631,7 +84631,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/bpz/map_elephant_block.s",
+      "path": "src/objects/shared/zones/bpz/mappings/elephant_block.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -84674,7 +84674,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/cgz/map_blade_platform.s",
+      "path": "src/objects/shared/zones/cgz/mappings/blade_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -84731,7 +84731,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/cgz/map_fan.s",
+      "path": "src/objects/shared/zones/cgz/mappings/fan.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -84787,7 +84787,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/cnz/anim_balloon.s",
+      "path": "src/objects/shared/zones/cnz/animations/balloon.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -84944,7 +84944,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/cnz/anim_rising_platform.s",
+      "path": "src/objects/shared/zones/cnz/animations/rising_platform.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -85003,7 +85003,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/cnz/anim_trap_door.s",
+      "path": "src/objects/shared/zones/cnz/animations/trap_door.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -85048,7 +85048,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/cnz/dplc_cannon.s",
+      "path": "src/objects/shared/zones/cnz/dplc/cannon.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -85158,7 +85158,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/cnz/map_balloon.s",
+      "path": "src/objects/shared/zones/cnz/mappings/balloon.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -85500,7 +85500,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/cnz/map_breakable_wall_s3.s",
+      "path": "src/objects/shared/zones/cnz/mappings/breakable_wall_s3.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -85569,7 +85569,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/cnz/map_button.s",
+      "path": "src/objects/shared/zones/cnz/mappings/button.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -85625,7 +85625,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/cnz/map_cannon.s",
+      "path": "src/objects/shared/zones/cnz/mappings/cannon.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -85772,7 +85772,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/cnz/map_cork_floor.s",
+      "path": "src/objects/shared/zones/cnz/mappings/cork_floor.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -85815,7 +85815,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/cnz/map_cylinder.s",
+      "path": "src/objects/shared/zones/cnz/mappings/cylinder.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -85884,7 +85884,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/cnz/map_door_horizontal.s",
+      "path": "src/objects/shared/zones/cnz/mappings/door_horizontal.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -85914,7 +85914,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/cnz/map_end_boss.s",
+      "path": "src/objects/shared/zones/cnz/mappings/end_boss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -86100,7 +86100,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/cnz/map_hover_fan.s",
+      "path": "src/objects/shared/zones/cnz/mappings/hover_fan.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -86197,7 +86197,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/cnz/map_light_bulb.s",
+      "path": "src/objects/shared/zones/cnz/mappings/light_bulb.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -86240,7 +86240,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/cnz/map_miniboss.s",
+      "path": "src/objects/shared/zones/cnz/mappings/miniboss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -86543,7 +86543,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/cnz/map_rising_platform.s",
+      "path": "src/objects/shared/zones/cnz/mappings/rising_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -86599,7 +86599,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/cnz/map_soz_breakable_wall.s",
+      "path": "src/objects/shared/zones/cnz/mappings/soz_breakable_wall.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -86694,7 +86694,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/cnz/map_trap_door.s",
+      "path": "src/objects/shared/zones/cnz/mappings/trap_door.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -86750,7 +86750,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/ddz/map_missile_asteroid.s",
+      "path": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -87575,7 +87575,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/anim_conveyor_pad.s",
+      "path": "src/objects/shared/zones/dez/animations/conveyor_pad.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -87639,7 +87639,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/anim_lightning.s",
+      "path": "src/objects/shared/zones/dez/animations/lightning.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -87670,7 +87670,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/anim_retracting_spring.s",
+      "path": "src/objects/shared/zones/dez/animations/retracting_spring.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -87720,7 +87720,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/anim_transporter_rings.s",
+      "path": "src/objects/shared/zones/dez/animations/transporter_rings.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -87933,7 +87933,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/map_act_3_blocks.s",
+      "path": "src/objects/shared/zones/dez/act3/mappings/blocks.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -87996,7 +87996,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/map_bumper_wall.s",
+      "path": "src/objects/shared/zones/dez/mappings/bumper_wall.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -88026,7 +88026,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/map_conveyor_pad.s",
+      "path": "src/objects/shared/zones/dez/mappings/conveyor_pad.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -88144,7 +88144,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/map_end_boss.s",
+      "path": "src/objects/shared/zones/dez/mappings/end_boss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -88681,7 +88681,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/map_energy_bridge.s",
+      "path": "src/objects/shared/zones/dez/mappings/energy_bridge.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -88750,7 +88750,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/map_energy_bridge_curved.s",
+      "path": "src/objects/shared/zones/dez/mappings/energy_bridge_curved.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -88819,7 +88819,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/map_final_boss_debris.s",
+      "path": "src/objects/shared/zones/dez/final_boss/mappings/debris.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -88875,7 +88875,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/map_final_boss_master_emerald.s",
+      "path": "src/objects/shared/zones/dez/final_boss/mappings/master_emerald.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -88918,7 +88918,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/map_final_boss_misc.s",
+      "path": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -89345,7 +89345,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/map_floating_platform.s",
+      "path": "src/objects/shared/zones/dez/mappings/floating_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -89388,7 +89388,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/map_gravity_puzzle.s",
+      "path": "src/objects/shared/zones/dez/mappings/gravity_puzzle.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -89464,7 +89464,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/map_gravity_switch.s",
+      "path": "src/objects/shared/zones/dez/mappings/gravity_switch.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -89507,7 +89507,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/map_hang_carrier.s",
+      "path": "src/objects/shared/zones/dez/mappings/hang_carrier.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -89537,7 +89537,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/map_hover_machine.s",
+      "path": "src/objects/shared/zones/dez/mappings/hover_machine.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -89593,7 +89593,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/map_lift_pad.s",
+      "path": "src/objects/shared/zones/dez/mappings/lift_pad.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -89649,7 +89649,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/map_lightning.s",
+      "path": "src/objects/shared/zones/dez/mappings/lightning.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -89731,7 +89731,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/map_miniboss.s",
+      "path": "src/objects/shared/zones/dez/mappings/miniboss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -90255,7 +90255,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/map_retracting_spring.s",
+      "path": "src/objects/shared/zones/dez/mappings/retracting_spring.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -90311,7 +90311,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/map_tilting_bridge.s",
+      "path": "src/objects/shared/zones/dez/mappings/tilting_bridge.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -90341,7 +90341,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/map_torpedo_launcher.s",
+      "path": "src/objects/shared/zones/dez/mappings/torpedo_launcher.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -90488,7 +90488,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/map_transporter_rings.s",
+      "path": "src/objects/shared/zones/dez/mappings/transporter_rings.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -90681,7 +90681,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dez/map_tunnel_launcher.s",
+      "path": "src/objects/shared/zones/dez/mappings/tunnel_launcher.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -90841,7 +90841,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dpz/anim_dissolving_sand_bar.s",
+      "path": "src/objects/shared/zones/dpz/animations/dissolving_sand_bar.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -90914,7 +90914,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dpz/map_button.s",
+      "path": "src/objects/shared/zones/dpz/mappings/button.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -90957,7 +90957,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/dpz/map_dissolving_sand_bar.s",
+      "path": "src/objects/shared/zones/dpz/mappings/dissolving_sand_bar.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -91515,7 +91515,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/emz/map_dripper.s",
+      "path": "src/objects/shared/zones/emz/mappings/dripper.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -91584,7 +91584,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/emz/map_rock.s",
+      "path": "src/objects/shared/zones/emz/mappings/rock.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -91681,7 +91681,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/anim_disappearing_platform.s",
+      "path": "src/objects/shared/zones/fbz/animations/disappearing_platform.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -91754,7 +91754,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/anim_screw_door.s",
+      "path": "src/objects/shared/zones/fbz/animations/screw_door.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -91855,7 +91855,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/anim_trap_spring.s",
+      "path": "src/objects/shared/zones/fbz/animations/trap_spring.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -91900,7 +91900,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_act_2_preboss.s",
+      "path": "src/objects/shared/zones/fbz/act2/mappings/preboss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -91969,7 +91969,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_act_2_subboss.s",
+      "path": "src/objects/shared/zones/fbz/act2/mappings/subboss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -92129,7 +92129,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_act_2_subboss_s3.s",
+      "path": "src/objects/shared/zones/fbz/act2/mappings/subboss_s3.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -92289,7 +92289,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_bent_pipe.s",
+      "path": "src/objects/shared/zones/fbz/mappings/bent_pipe.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -92345,7 +92345,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_chain_link.s",
+      "path": "src/objects/shared/zones/fbz/mappings/chain_link.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -92551,7 +92551,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_collapsing_bridge.s",
+      "path": "src/objects/shared/zones/fbz/mappings/collapsing_bridge.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -92607,7 +92607,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_cork_floor.s",
+      "path": "src/objects/shared/zones/fbz/mappings/cork_floor.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -92650,7 +92650,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_dez_player_launcher.s",
+      "path": "src/objects/shared/zones/fbz/mappings/dez_player_launcher.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -92693,7 +92693,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_disappearing_platform.s",
+      "path": "src/objects/shared/zones/fbz/mappings/disappearing_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -92749,7 +92749,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_egg_capsule.s",
+      "path": "src/objects/shared/zones/fbz/mappings/egg_capsule.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -92911,7 +92911,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_egg_capsule_s3.s",
+      "path": "src/objects/shared/zones/fbz/mappings/egg_capsule_s3.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -93026,7 +93026,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_elevator.s",
+      "path": "src/objects/shared/zones/fbz/mappings/elevator.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -93056,7 +93056,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_end_boss.s",
+      "path": "src/objects/shared/zones/fbz/mappings/end_boss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -93281,7 +93281,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_end_boss_flame.s",
+      "path": "src/objects/shared/zones/fbz/boss/mappings/flame.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -93363,7 +93363,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_exit_door.s",
+      "path": "src/objects/shared/zones/fbz/mappings/exit_door.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -93393,7 +93393,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_exit_hall.s",
+      "path": "src/objects/shared/zones/fbz/mappings/exit_hall.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -93436,7 +93436,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_flamethrower.s",
+      "path": "src/objects/shared/zones/fbz/mappings/flamethrower.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -93687,7 +93687,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_floating_platform.s",
+      "path": "src/objects/shared/zones/fbz/mappings/floating_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -93743,7 +93743,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_magnetic_pendulum.s",
+      "path": "src/objects/shared/zones/fbz/mappings/magnetic_pendulum.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -93812,7 +93812,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_magnetic_platform.s",
+      "path": "src/objects/shared/zones/fbz/mappings/magnetic_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -93894,7 +93894,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_magnetic_spike_ball.s",
+      "path": "src/objects/shared/zones/fbz/mappings/magnetic_spike_ball.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -94002,7 +94002,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_mine.s",
+      "path": "src/objects/shared/zones/fbz/mappings/mine.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -94045,7 +94045,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_miniboss.s",
+      "path": "src/objects/shared/zones/fbz/mappings/miniboss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -94296,7 +94296,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_missile_launcher.s",
+      "path": "src/objects/shared/zones/fbz/mappings/missile_launcher.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -94404,7 +94404,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_piston.s",
+      "path": "src/objects/shared/zones/fbz/mappings/piston.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -94434,7 +94434,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_platform_blocks.s",
+      "path": "src/objects/shared/zones/fbz/mappings/platform_blocks.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -94503,7 +94503,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_propeller.s",
+      "path": "src/objects/shared/zones/fbz/mappings/propeller.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -94566,7 +94566,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_rotating_platform.s",
+      "path": "src/objects/shared/zones/fbz/mappings/rotating_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -94609,7 +94609,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_screw_door.s",
+      "path": "src/objects/shared/zones/fbz/mappings/screw_door.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -94782,7 +94782,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_snake_platform.s",
+      "path": "src/objects/shared/zones/fbz/mappings/snake_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -94812,7 +94812,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_spider_crane.s",
+      "path": "src/objects/shared/zones/fbz/mappings/spider_crane.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -95011,7 +95011,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_spinning_pole_unused.s",
+      "path": "src/objects/shared/zones/fbz/mappings/spinning_pole_unused.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -95041,7 +95041,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_trap_spring.s",
+      "path": "src/objects/shared/zones/fbz/mappings/trap_spring.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -95097,7 +95097,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/fbz/map_wall_missile.s",
+      "path": "src/objects/shared/zones/fbz/mappings/wall_missile.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -95206,7 +95206,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/gumball/map_gumball_bonus.s",
+      "path": "src/objects/shared/zones/gumball/mappings/bonus.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -95535,7 +95535,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/anim_water_drop.s",
+      "path": "src/objects/shared/zones/hcz/animations/water_drop.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -95585,7 +95585,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/anim_water_wall.s",
+      "path": "src/objects/shared/zones/hcz/animations/water_wall.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -95707,7 +95707,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/dplc_miniboss_splash.s",
+      "path": "src/objects/shared/zones/hcz/miniboss/dplc/splash.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -95841,7 +95841,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_block.s",
+      "path": "src/objects/shared/zones/hcz/mappings/block.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -95910,7 +95910,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_breakable_bar.s",
+      "path": "src/objects/shared/zones/hcz/mappings/breakable_bar.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -96031,7 +96031,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_breakable_wall.s",
+      "path": "src/objects/shared/zones/hcz/mappings/breakable_wall.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -96094,7 +96094,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_button.s",
+      "path": "src/objects/shared/zones/hcz/mappings/button.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -96150,7 +96150,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_cnz_dez_door.s",
+      "path": "src/objects/shared/zones/hcz/mappings/cnz_dez_door.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -96206,7 +96206,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_cnz_door_s3.s",
+      "path": "src/objects/shared/zones/hcz/mappings/cnz_door_s3.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -96249,7 +96249,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_collapsing_bridge.s",
+      "path": "src/objects/shared/zones/hcz/mappings/collapsing_bridge.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -96416,7 +96416,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_conveyor_spike.s",
+      "path": "src/objects/shared/zones/hcz/mappings/conveyor_spike.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -96446,7 +96446,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_end_boss.s",
+      "path": "src/objects/shared/zones/hcz/mappings/end_boss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -97113,7 +97113,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_fan.s",
+      "path": "src/objects/shared/zones/hcz/mappings/fan.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -97195,7 +97195,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_floating_platform.s",
+      "path": "src/objects/shared/zones/hcz/mappings/floating_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -97238,7 +97238,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_hand_launcher.s",
+      "path": "src/objects/shared/zones/hcz/mappings/hand_launcher.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -97359,7 +97359,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_large_fan.s",
+      "path": "src/objects/shared/zones/hcz/mappings/large_fan.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -97441,7 +97441,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_miniboss.s",
+      "path": "src/objects/shared/zones/hcz/mappings/miniboss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -97920,7 +97920,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_miniboss_splash.s",
+      "path": "src/objects/shared/zones/hcz/miniboss/mappings/splash.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -98054,7 +98054,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_spinning_column.s",
+      "path": "src/objects/shared/zones/hcz/mappings/spinning_column.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -98110,7 +98110,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_water_drop.s",
+      "path": "src/objects/shared/zones/hcz/mappings/water_drop.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -98218,7 +98218,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_water_rush.s",
+      "path": "src/objects/shared/zones/hcz/mappings/water_rush.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -98287,7 +98287,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_water_rush_block.s",
+      "path": "src/objects/shared/zones/hcz/mappings/water_rush_block.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -98330,7 +98330,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_water_splash.s",
+      "path": "src/objects/shared/zones/hcz/mappings/water_splash.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -98394,7 +98394,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_water_splash_2.s",
+      "path": "src/objects/shared/zones/hcz/mappings/water_splash_2.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -98459,7 +98459,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_water_wall_debris.s",
+      "path": "src/objects/shared/zones/hcz/mappings/water_wall_debris.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -98580,7 +98580,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_waterfall.s",
+      "path": "src/objects/shared/zones/hcz/mappings/waterfall.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -98740,7 +98740,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/map_wave_splash.s",
+      "path": "src/objects/shared/zones/hcz/mappings/wave_splash.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -98842,7 +98842,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hpz/map_chaos_emeralds.s",
+      "path": "src/objects/shared/zones/hpz/mappings/chaos_emeralds.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -98963,7 +98963,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hpz/map_collapsing_bridge.s",
+      "path": "src/objects/shared/zones/hpz/mappings/collapsing_bridge.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -99019,7 +99019,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hpz/map_emerald_misc_art.s",
+      "path": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -99517,7 +99517,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hpz/map_knuckles_dizzy_stars.s",
+      "path": "src/objects/shared/zones/hpz/mappings/knuckles_dizzy_stars.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -99612,7 +99612,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/icz/map_collapsing_bridge.s",
+      "path": "src/objects/shared/zones/icz/mappings/collapsing_bridge.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -99701,7 +99701,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/icz/map_cork_floor.s",
+      "path": "src/objects/shared/zones/icz/mappings/cork_floor.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -99868,7 +99868,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/icz/map_end_boss.s",
+      "path": "src/objects/shared/zones/icz/mappings/end_boss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -100210,7 +100210,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/icz/map_icz_tension_bridge.s",
+      "path": "src/objects/shared/zones/icz/mappings/tension_bridge.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -100335,7 +100335,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/icz/map_miniboss.s",
+      "path": "src/objects/shared/zones/icz/mappings/miniboss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -100547,7 +100547,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/icz/map_platforms.s",
+      "path": "src/objects/shared/zones/icz/mappings/platforms.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -101084,7 +101084,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/icz/map_snowdust.s",
+      "path": "src/objects/shared/zones/icz/mappings/snowdust.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -101179,7 +101179,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/icz/map_wall_and_column.s",
+      "path": "src/objects/shared/zones/icz/mappings/wall_column.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -101378,7 +101378,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/anim_flame_thrower.s",
+      "path": "src/objects/shared/zones/lbz/animations/flame_thrower.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -101409,7 +101409,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/anim_unused_solid_hurt.s",
+      "path": "src/objects/shared/zones/lbz/animations/unused_solid_hurt.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -101440,7 +101440,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_breakable_wall.s",
+      "path": "src/objects/shared/zones/lbz/mappings/breakable_wall.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -101483,7 +101483,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_collapsing_bridge.s",
+      "path": "src/objects/shared/zones/lbz/mappings/collapsing_bridge.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -101539,7 +101539,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_collapsing_ledge.s",
+      "path": "src/objects/shared/zones/lbz/mappings/collapsing_ledge.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -101589,7 +101589,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_cork_floor.s",
+      "path": "src/objects/shared/zones/lbz/mappings/cork_floor.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -101632,7 +101632,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_cup_elevator.s",
+      "path": "src/objects/shared/zones/lbz/mappings/cup_elevator.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -101714,7 +101714,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_death_egg_small.s",
+      "path": "src/objects/shared/zones/lbz/mappings/death_egg_small.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -101887,7 +101887,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_end_boss.s",
+      "path": "src/objects/shared/zones/lbz/mappings/end_boss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -102099,7 +102099,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_exploding_trigger.s",
+      "path": "src/objects/shared/zones/lbz/mappings/exploding_trigger.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -102129,7 +102129,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_final_boss_1.s",
+      "path": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -102750,7 +102750,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_final_boss_2.s",
+      "path": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -103001,7 +103001,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_flame_thrower.s",
+      "path": "src/objects/shared/zones/lbz/mappings/flame_thrower.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -103135,7 +103135,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_gate_laser.s",
+      "path": "src/objects/shared/zones/lbz/mappings/gate_laser.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -103191,7 +103191,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_knuckles_pillar.s",
+      "path": "src/objects/shared/zones/lbz/mappings/knuckles_pillar.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -103234,7 +103234,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_lowering_grapple.s",
+      "path": "src/objects/shared/zones/lbz/mappings/lowering_grapple.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -103440,7 +103440,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_lrz_tunnel_exhaust.s",
+      "path": "src/objects/shared/zones/lbz/mappings/lrz_tunnel_exhaust.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -103483,7 +103483,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_miniboss.s",
+      "path": "src/objects/shared/zones/lbz/mappings/miniboss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -103617,7 +103617,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_miniboss_box.s",
+      "path": "src/objects/shared/zones/lbz/miniboss/mappings/box.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -103790,7 +103790,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_moving_platform.s",
+      "path": "src/objects/shared/zones/lbz/mappings/moving_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -103846,7 +103846,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_pipeplug.s",
+      "path": "src/objects/shared/zones/lbz/mappings/pipeplug.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -103967,7 +103967,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_player_launcher.s",
+      "path": "src/objects/shared/zones/lbz/mappings/player_launcher.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -104010,7 +104010,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_ride_grapple.s",
+      "path": "src/objects/shared/zones/lbz/mappings/ride_grapple.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -104066,7 +104066,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_smashing_spikes.s",
+      "path": "src/objects/shared/zones/lbz/mappings/smashing_spikes.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -104096,7 +104096,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_spin_launcher.s",
+      "path": "src/objects/shared/zones/lbz/mappings/spin_launcher.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -104126,7 +104126,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_trigger_bridge.s",
+      "path": "src/objects/shared/zones/lbz/mappings/trigger_bridge.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -104455,7 +104455,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_tube_elevator.s",
+      "path": "src/objects/shared/zones/lbz/mappings/tube_elevator.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -104563,7 +104563,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_unused_bar_platform.s",
+      "path": "src/objects/shared/zones/lbz/mappings/unused_bar_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -104593,7 +104593,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_unused_elevator.s",
+      "path": "src/objects/shared/zones/lbz/mappings/unused_elevator.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -104623,7 +104623,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_unused_solid_hurt.s",
+      "path": "src/objects/shared/zones/lbz/mappings/unused_solid_hurt.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -104705,7 +104705,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/map_unused_tilting_bridge.s",
+      "path": "src/objects/shared/zones/lbz/mappings/unused_tilting_bridge.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -104748,7 +104748,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/anim_spike_ball_launcher.s",
+      "path": "src/objects/shared/zones/lrz/animations/spike_ball_launcher.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -104793,7 +104793,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_act_2_bg_death_egg.s",
+      "path": "src/objects/shared/zones/lrz/act2/mappings/bg_death_egg.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -104823,7 +104823,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_act_3_autoscroll.s",
+      "path": "src/objects/shared/zones/lrz/act3/mappings/autoscroll.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -105100,7 +105100,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_act_3_death_egg_flash.s",
+      "path": "src/objects/shared/zones/lrz/act3/mappings/death_egg_flash.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -105182,7 +105182,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_act_3_platform.s",
+      "path": "src/objects/shared/zones/lrz/act3/mappings/platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -105706,7 +105706,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_act_3_platform_debris.s",
+      "path": "src/objects/shared/zones/lrz/act3/mappings/platform_debris.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -105775,7 +105775,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_big_door.s",
+      "path": "src/objects/shared/zones/lrz/mappings/big_door.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -105805,7 +105805,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_breakable_rock.s",
+      "path": "src/objects/shared/zones/lrz/mappings/breakable_rock.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -105959,7 +105959,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_breakable_rock_2.s",
+      "path": "src/objects/shared/zones/lrz/mappings/breakable_rock_2.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -106096,7 +106096,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_breakable_wall.s",
+      "path": "src/objects/shared/zones/lrz/mappings/breakable_wall.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -106139,7 +106139,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_button.s",
+      "path": "src/objects/shared/zones/lrz/mappings/button.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -106195,7 +106195,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_button_horizontal.s",
+      "path": "src/objects/shared/zones/lrz/mappings/button_horizontal.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -106273,7 +106273,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_chained_platforms.s",
+      "path": "src/objects/shared/zones/lrz/mappings/chained_platforms.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -106303,7 +106303,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_collapsing_bridge.s",
+      "path": "src/objects/shared/zones/lrz/mappings/collapsing_bridge.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -106437,7 +106437,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_collapsing_platform.s",
+      "path": "src/objects/shared/zones/lrz/mappings/collapsing_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -106493,7 +106493,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_dash_elevator.s",
+      "path": "src/objects/shared/zones/lrz/mappings/dash_elevator.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -106549,7 +106549,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_door.s",
+      "path": "src/objects/shared/zones/lrz/mappings/door.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -106592,7 +106592,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_end_boss.s",
+      "path": "src/objects/shared/zones/lrz/mappings/end_boss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -106843,7 +106843,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_falling_spike.s",
+      "path": "src/objects/shared/zones/lrz/mappings/falling_spike.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -106873,7 +106873,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_fireball_launcher.s",
+      "path": "src/objects/shared/zones/lrz/mappings/fireball_launcher.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -106929,7 +106929,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_flamethrower.s",
+      "path": "src/objects/shared/zones/lrz/mappings/flamethrower.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -107050,7 +107050,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_knuckles_boulder.s",
+      "path": "src/objects/shared/zones/lrz/mappings/knuckles_boulder.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -107080,7 +107080,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_lava_fall.s",
+      "path": "src/objects/shared/zones/lrz/mappings/lava_fall.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -107110,7 +107110,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_miniboss.s",
+      "path": "src/objects/shared/zones/lrz/mappings/miniboss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -107387,7 +107387,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_orbiting_spike_ball.s",
+      "path": "src/objects/shared/zones/lrz/mappings/orbiting_spike_ball.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -107430,7 +107430,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_rock_crusher.s",
+      "path": "src/objects/shared/zones/lrz/mappings/rock_crusher.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -107486,7 +107486,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_rock_debris.s",
+      "path": "src/objects/shared/zones/lrz/mappings/rock_debris.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -107555,7 +107555,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_shooting_trigger.s",
+      "path": "src/objects/shared/zones/lrz/mappings/shooting_trigger.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -107598,7 +107598,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_sinking_rock.s",
+      "path": "src/objects/shared/zones/lrz/mappings/sinking_rock.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -107641,7 +107641,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_smashing_spike_platform.s",
+      "path": "src/objects/shared/zones/lrz/mappings/smashing_spike_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -107775,7 +107775,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_solid_moving_platforms.s",
+      "path": "src/objects/shared/zones/lrz/mappings/solid_moving_platforms.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -107818,7 +107818,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_solid_rock.s",
+      "path": "src/objects/shared/zones/lrz/mappings/solid_rock.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -107848,7 +107848,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_spike_ball.s",
+      "path": "src/objects/shared/zones/lrz/mappings/spike_ball.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -107904,7 +107904,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_spike_ball_launcher.s",
+      "path": "src/objects/shared/zones/lrz/mappings/spike_ball_launcher.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -107986,7 +107986,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_swinging_spike_ball.s",
+      "path": "src/objects/shared/zones/lrz/mappings/swinging_spike_ball.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -108071,7 +108071,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/map_turbine.s",
+      "path": "src/objects/shared/zones/lrz/mappings/turbine.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -108201,7 +108201,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mgz/anim_head_trigger.s",
+      "path": "src/objects/shared/zones/mgz/animations/head_trigger.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -108265,7 +108265,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mgz/map_breakable_wall.s",
+      "path": "src/objects/shared/zones/mgz/mappings/breakable_wall.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -108322,7 +108322,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mgz/map_collapsing_bridge.s",
+      "path": "src/objects/shared/zones/mgz/mappings/collapsing_bridge.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -108450,7 +108450,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mgz/map_dash_trigger.s",
+      "path": "src/objects/shared/zones/mgz/mappings/dash_trigger.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -108532,7 +108532,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mgz/map_end_boss.s",
+      "path": "src/objects/shared/zones/mgz/mappings/end_boss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -109186,7 +109186,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mgz/map_end_boss_debris.s",
+      "path": "src/objects/shared/zones/mgz/boss/mappings/debris.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -109255,7 +109255,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mgz/map_floating_platform.s",
+      "path": "src/objects/shared/zones/mgz/mappings/floating_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -109285,7 +109285,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mgz/map_head_trigger.s",
+      "path": "src/objects/shared/zones/mgz/mappings/head_trigger.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -109406,7 +109406,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mgz/map_miniboss.s",
+      "path": "src/objects/shared/zones/mgz/mappings/miniboss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -109514,7 +109514,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mgz/map_miniboss_spires.s",
+      "path": "src/objects/shared/zones/mgz/miniboss/mappings/spires.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -109544,7 +109544,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mgz/map_moving_spike_platform.s",
+      "path": "src/objects/shared/zones/mgz/mappings/moving_spike_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -109613,7 +109613,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mgz/map_pulley.s",
+      "path": "src/objects/shared/zones/mgz/mappings/pulley.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -109721,7 +109721,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mgz/map_smashing_pillar.s",
+      "path": "src/objects/shared/zones/mgz/mappings/smashing_pillar.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -109751,7 +109751,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mgz/map_swinging_platform.s",
+      "path": "src/objects/shared/zones/mgz/mappings/swinging_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -109807,7 +109807,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mgz/map_swinging_spike_ball.s",
+      "path": "src/objects/shared/zones/mgz/mappings/swinging_spike_ball.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -109876,7 +109876,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mgz/map_top_platform.s",
+      "path": "src/objects/shared/zones/mgz/mappings/top_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -109932,7 +109932,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mgz/map_trigger_platform.s",
+      "path": "src/objects/shared/zones/mgz/mappings/trigger_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -109975,7 +109975,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mhz/anim_end_propellers.s",
+      "path": "src/objects/shared/zones/mhz/animations/end_propellers.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -110011,7 +110011,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mhz/anim_mushroom_cap.s",
+      "path": "src/objects/shared/zones/mhz/animations/mushroom_cap.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -110056,7 +110056,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mhz/anim_mushroom_platform.s",
+      "path": "src/objects/shared/zones/mhz/animations/mushroom_platform.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -110106,7 +110106,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mhz/map_act_2_knuckles_leaves.s",
+      "path": "src/objects/shared/zones/mhz/act2/mappings/knuckles_leaves.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -110136,7 +110136,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mhz/map_big_leaves.s",
+      "path": "src/objects/shared/zones/mhz/mappings/big_leaves.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -110205,7 +110205,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mhz/map_breakable_wall.s",
+      "path": "src/objects/shared/zones/mhz/mappings/breakable_wall.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -110248,7 +110248,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mhz/map_curled_vine.s",
+      "path": "src/objects/shared/zones/mhz/mappings/curled_vine.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -110278,7 +110278,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mhz/map_end_boss.s",
+      "path": "src/objects/shared/zones/mhz/mappings/end_boss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -110607,7 +110607,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mhz/map_end_boss_misc.s",
+      "path": "src/objects/shared/zones/mhz/boss/mappings/misc.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -110728,7 +110728,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mhz/map_knuckles_peering.s",
+      "path": "src/objects/shared/zones/mhz/mappings/knuckles_peering.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -110810,7 +110810,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mhz/map_knuckles_switch_door.s",
+      "path": "src/objects/shared/zones/mhz/mappings/knuckles_switch_door.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -110840,7 +110840,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mhz/map_miniboss.s",
+      "path": "src/objects/shared/zones/mhz/mappings/miniboss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -111234,7 +111234,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mhz/map_miniboss_log.s",
+      "path": "src/objects/shared/zones/mhz/miniboss/mappings/log.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -111355,7 +111355,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mhz/map_miniboss_tree.s",
+      "path": "src/objects/shared/zones/mhz/miniboss/mappings/tree.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -111450,7 +111450,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mhz/map_mushroom_cap.s",
+      "path": "src/objects/shared/zones/mhz/mappings/mushroom_cap.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -111519,7 +111519,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mhz/map_mushroom_catapult.s",
+      "path": "src/objects/shared/zones/mhz/mappings/mushroom_catapult.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -111562,7 +111562,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mhz/map_mushroom_parachute.s",
+      "path": "src/objects/shared/zones/mhz/mappings/mushroom_parachute.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -111592,7 +111592,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mhz/map_mushroom_platform.s",
+      "path": "src/objects/shared/zones/mhz/mappings/mushroom_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -111648,7 +111648,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mhz/map_pollen_leaves.s",
+      "path": "src/objects/shared/zones/mhz/mappings/pollen_leaves.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -111705,7 +111705,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mhz/map_pulley_lift.s",
+      "path": "src/objects/shared/zones/mhz/mappings/pulley_lift.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -111826,7 +111826,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mhz/map_sticky_vine.s",
+      "path": "src/objects/shared/zones/mhz/mappings/sticky_vine.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -111856,7 +111856,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mhz/map_swing_bar_horizontal.s",
+      "path": "src/objects/shared/zones/mhz/mappings/swing_bar_horizontal.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -111886,7 +111886,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/mhz/map_swing_bar_vertical.s",
+      "path": "src/objects/shared/zones/mhz/mappings/swing_bar_vertical.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -111916,7 +111916,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/pachinko/anim_flipper.s",
+      "path": "src/objects/shared/zones/pachinko/animations/flipper.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -111966,7 +111966,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/pachinko/anim_item_orb.s",
+      "path": "src/objects/shared/zones/pachinko/animations/item_orb.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -111997,7 +111997,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/pachinko/anim_triangle_bumper.s",
+      "path": "src/objects/shared/zones/pachinko/animations/triangle_bumper.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -112042,7 +112042,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/pachinko/map_bumper.s",
+      "path": "src/objects/shared/zones/pachinko/mappings/bumper.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -112085,7 +112085,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/pachinko/map_energy_trap.s",
+      "path": "src/objects/shared/zones/pachinko/mappings/energy_trap.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -112115,7 +112115,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/pachinko/map_f_item.s",
+      "path": "src/objects/shared/zones/pachinko/mappings/f_item.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -112145,7 +112145,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/pachinko/map_flipper.s",
+      "path": "src/objects/shared/zones/pachinko/mappings/flipper.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -112227,7 +112227,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/pachinko/map_invisible_unknown.s",
+      "path": "src/objects/shared/zones/pachinko/mappings/invisible_unknown.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -112309,7 +112309,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/pachinko/map_item_orb.s",
+      "path": "src/objects/shared/zones/pachinko/mappings/item_orb.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -112391,7 +112391,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/pachinko/map_platform.s",
+      "path": "src/objects/shared/zones/pachinko/mappings/platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -112421,7 +112421,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/pachinko/map_triangle_bumper.s",
+      "path": "src/objects/shared/zones/pachinko/mappings/triangle_bumper.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -112477,7 +112477,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/slots/map_bonus_cage_unused.s",
+      "path": "src/objects/shared/zones/slots/mappings/bonus_cage_unused.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -112560,7 +112560,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/slots/map_bumper.s",
+      "path": "src/objects/shared/zones/slots/mappings/bumper.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -112616,7 +112616,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/slots/map_colored_wall.s",
+      "path": "src/objects/shared/zones/slots/mappings/colored_wall.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -112841,7 +112841,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/slots/map_goal.s",
+      "path": "src/objects/shared/zones/slots/mappings/goal.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -112897,7 +112897,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/slots/map_r_and_peppermint.s",
+      "path": "src/objects/shared/zones/slots/mappings/r_peppermint.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -112966,7 +112966,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/slots/map_ring.s",
+      "path": "src/objects/shared/zones/slots/mappings/ring.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -113105,7 +113105,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/slots/map_slot.s",
+      "path": "src/objects/shared/zones/slots/mappings/slot.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -113188,7 +113188,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/slots/map_spike.s",
+      "path": "src/objects/shared/zones/slots/mappings/spike.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -113218,7 +113218,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/soz/map_act_1_end_door.s",
+      "path": "src/objects/shared/zones/soz/act1/mappings/end_door.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -113261,7 +113261,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/soz/map_breakable_sand_rock.s",
+      "path": "src/objects/shared/zones/soz/mappings/breakable_sand_rock.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -113343,7 +113343,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/soz/map_collapsing_bridge.s",
+      "path": "src/objects/shared/zones/soz/mappings/collapsing_bridge.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -113399,7 +113399,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/soz/map_door.s",
+      "path": "src/objects/shared/zones/soz/mappings/door.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -113442,7 +113442,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/soz/map_end_boss.s",
+      "path": "src/objects/shared/zones/soz/mappings/end_boss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -113667,7 +113667,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/soz/map_end_boss_body.s",
+      "path": "src/objects/shared/zones/soz/boss/mappings/body.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -113697,7 +113697,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/soz/map_floating_pillar.s",
+      "path": "src/objects/shared/zones/soz/mappings/floating_pillar.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -113753,7 +113753,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/soz/map_light_switch.s",
+      "path": "src/objects/shared/zones/soz/mappings/light_switch.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -113874,7 +113874,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/soz/map_miniboss.s",
+      "path": "src/objects/shared/zones/soz/mappings/miniboss.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -114242,7 +114242,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/soz/map_miniboss_landing_dust.s",
+      "path": "src/objects/shared/zones/soz/miniboss/mappings/landing_dust.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -114311,7 +114311,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/soz/map_push_switch.s",
+      "path": "src/objects/shared/zones/soz/mappings/push_switch.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -114354,7 +114354,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/soz/map_pushable_rock.s",
+      "path": "src/objects/shared/zones/soz/mappings/pushable_rock.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -114384,7 +114384,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/soz/map_rapel_wire.s",
+      "path": "src/objects/shared/zones/soz/mappings/rapel_wire.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -114908,7 +114908,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/soz/map_rising_sand_wall.s",
+      "path": "src/objects/shared/zones/soz/mappings/rising_sand_wall.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -115107,7 +115107,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/soz/map_sand_cork.s",
+      "path": "src/objects/shared/zones/soz/mappings/sand_cork.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -115163,7 +115163,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/soz/map_solid_sprites.s",
+      "path": "src/objects/shared/zones/soz/mappings/solid_sprites.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -115206,7 +115206,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/soz/map_spawning_sand_blocks.s",
+      "path": "src/objects/shared/zones/soz/mappings/spawning_sand_blocks.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -115236,7 +115236,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/soz/map_spring_vine.s",
+      "path": "src/objects/shared/zones/soz/mappings/spring_vine.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -115266,7 +115266,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/soz/map_swinging_platform.s",
+      "path": "src/objects/shared/zones/soz/mappings/swinging_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -115322,7 +115322,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/ssz/anim_bouncy_cloud.s",
+      "path": "src/objects/shared/zones/ssz/animations/bouncy_cloud.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -115386,7 +115386,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/ssz/anim_mtzorbs.s",
+      "path": "src/objects/shared/zones/ssz/animations/mtzorbs.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -115515,7 +115515,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/ssz/anim_rotating_platform.s",
+      "path": "src/objects/shared/zones/ssz/animations/rotating_platform.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -115551,7 +115551,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/ssz/dplc_death_egg_cloud.s",
+      "path": "src/objects/shared/zones/ssz/dplc/death_egg_cloud.s",
       "family": "dplc",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -115737,7 +115737,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/ssz/map_bouncy_cloud.s",
+      "path": "src/objects/shared/zones/ssz/mappings/bouncy_cloud.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -115858,7 +115858,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/ssz/map_collapsing_bridge.s",
+      "path": "src/objects/shared/zones/ssz/mappings/collapsing_bridge.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -116057,7 +116057,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/ssz/map_death_egg_cloud.s",
+      "path": "src/objects/shared/zones/ssz/mappings/death_egg_cloud.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -116243,7 +116243,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/ssz/map_death_egg_small.s",
+      "path": "src/objects/shared/zones/ssz/mappings/death_egg_small.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -116351,7 +116351,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/ssz/map_elevator_bar.s",
+      "path": "src/objects/shared/zones/ssz/mappings/elevator_bar.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -116433,7 +116433,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/ssz/map_floating_platform.s",
+      "path": "src/objects/shared/zones/ssz/mappings/floating_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -116541,7 +116541,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/ssz/map_ghz_misc.s",
+      "path": "src/objects/shared/zones/ssz/mappings/ghz_misc.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -116610,7 +116610,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/ssz/map_mtz_orbs.s",
+      "path": "src/objects/shared/zones/ssz/mappings/mtz_orbs.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -116902,7 +116902,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/ssz/map_retracting_spring.s",
+      "path": "src/objects/shared/zones/ssz/mappings/retracting_spring.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -116997,7 +116997,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/ssz/map_roaming_clouds.s",
+      "path": "src/objects/shared/zones/ssz/mappings/roaming_clouds.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -117047,7 +117047,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/ssz/map_rotating_platform.s",
+      "path": "src/objects/shared/zones/ssz/mappings/rotating_platform.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -117103,7 +117103,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/ssz/map_spiral_ramp_pieces.s",
+      "path": "src/objects/shared/zones/ssz/mappings/spiral_ramp_pieces.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -117159,7 +117159,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/competition_menu/map_competition_objects.s",
+      "path": "src/ui/shared/competition_menu/mappings/competition_objects.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -117267,7 +117267,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/competition_menu/map_competition_player_sprites.s",
+      "path": "src/ui/shared/competition_menu/mappings/competition_player_sprites.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -117323,7 +117323,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/competition_menu/map_competition_select.s",
+      "path": "src/ui/shared/competition_menu/mappings/competition_select.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -117548,7 +117548,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/continue/map_player_icons.s",
+      "path": "src/ui/shared/continue/mappings/player_icons.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -117682,7 +117682,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/continue/map_player_sprites.s",
+      "path": "src/ui/shared/continue/mappings/player_sprites.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -117803,7 +117803,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/continue/map_player_sprites_s3.s",
+      "path": "src/ui/shared/continue/mappings/player_sprites_s3.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -117924,7 +117924,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/ending/map_andknuckles_subtitle.s",
+      "path": "src/ui/shared/ending/mappings/andknuckles_subtitle.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -117980,7 +117980,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/ending/map_ending_egg_robo_eyecatch.s",
+      "path": "src/ui/shared/ending/mappings/egg_robo_eyecatch.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -118088,7 +118088,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/ending/map_ending_eggman_eyecatch.s",
+      "path": "src/ui/shared/ending/mappings/eggman_eyecatch.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -118131,7 +118131,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/ending/map_ending_pelican_and_dolphin.s",
+      "path": "src/ui/shared/ending/mappings/pelican_dolphin.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -118213,7 +118213,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/ending/map_island_lift_sprites.s",
+      "path": "src/ui/shared/ending/mappings/island_lift_sprites.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -118581,7 +118581,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/ending/map_knuckles_end_pose.s",
+      "path": "src/ui/shared/ending/mappings/knuckles_end_pose.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -118637,7 +118637,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/ending/map_knuckles_ending_island_mask.s",
+      "path": "src/ui/shared/ending/mappings/knuckles_island_mask.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -118667,7 +118667,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/ending/map_s3_ending_graphics.s",
+      "path": "src/ui/shared/ending/mappings/s3_ending_graphics.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -118905,7 +118905,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/ending/map_sonic_3_pose_banner.s",
+      "path": "src/ui/shared/ending/mappings/sonic_banner_s3.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -118935,7 +118935,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/ending/map_sonic_and_knuckles_pose_banner.s",
+      "path": "src/ui/shared/ending/mappings/sonic_knuckles_banner.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -118965,7 +118965,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/ending/map_sonic_plane.s",
+      "path": "src/ui/shared/ending/mappings/sonic_plane.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -119151,7 +119151,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/ending/map_sonic_plane_ending.s",
+      "path": "src/ui/shared/ending/mappings/sonic_plane_ending.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -119507,7 +119507,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/ending/map_sonic_tails_ending_poses.s",
+      "path": "src/ui/shared/ending/mappings/sonic_tails_poses.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -119589,7 +119589,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/ending/map_sonic_tails_ending_poses_s3.s",
+      "path": "src/ui/shared/ending/mappings/sonic_tails_s3.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -119671,7 +119671,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/s2menu/anim_sonic_on_sega_screen.s",
+      "path": "src/ui/shared/s2menu/animations/sega_sonic.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -119702,7 +119702,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/s2menu/map_sonic_on_sega_screen.s",
+      "path": "src/ui/shared/s2menu/mappings/sega_sonic.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -119784,7 +119784,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/save_menu/map_save_screen_general.s",
+      "path": "src/ui/shared/save_menu/mappings/save_screen_general.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -120269,7 +120269,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/save_menu/map_save_screen_general_s3.s",
+      "path": "src/ui/shared/save_menu/mappings/general_s3.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -120637,7 +120637,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/title/anim_s3_sonic_finger.s",
+      "path": "src/ui/shared/title/animations/s3_sonic_finger.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -120668,7 +120668,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/title/anim_s3_sonic_wink.s",
+      "path": "src/ui/shared/title/animations/s3_sonic_wink.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -120704,7 +120704,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/title/anim_s3_tails_plane.s",
+      "path": "src/ui/shared/title/animations/s3_tails_plane.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -120735,7 +120735,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/title/anim_sk_icon.s",
+      "path": "src/ui/shared/title/animations/sk_icon.s",
       "family": "anim",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -120799,7 +120799,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/title/map_s3_andknuckles.s",
+      "path": "src/ui/shared/title/mappings/s3_andknuckles.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -120829,7 +120829,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/title/map_s3_banner.s",
+      "path": "src/ui/shared/title/mappings/s3_banner.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -120872,7 +120872,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/title/map_s3_screen_text.s",
+      "path": "src/ui/shared/title/mappings/s3_screen_text.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -120941,7 +120941,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/title/map_s3_sonic_anim.s",
+      "path": "src/ui/shared/title/mappings/s3_sonic_anim.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -121023,7 +121023,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/title/map_s3_tails_plane.s",
+      "path": "src/ui/shared/title/mappings/s3_tails_plane.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -121118,7 +121118,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/title/map_sk_banner.s",
+      "path": "src/ui/shared/title/mappings/sk_banner.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -121148,7 +121148,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/title/map_sk_copyright.s",
+      "path": "src/ui/shared/title/mappings/sk_copyright.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -121178,7 +121178,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/title/map_sk_death_egg.s",
+      "path": "src/ui/shared/title/mappings/sk_death_egg.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -121208,7 +121208,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/title/map_sk_icon.s",
+      "path": "src/ui/shared/title/mappings/sk_icon.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -121342,7 +121342,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/title/map_sk_mountain.s",
+      "path": "src/ui/shared/title/mappings/sk_mountain.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -121372,7 +121372,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/title/map_sk_sonic_falling.s",
+      "path": "src/ui/shared/title/mappings/sk_sonic_falling.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],
@@ -121402,7 +121402,7 @@
       ]
     },
     {
-      "path": "src/ui/shared/title/map_sk_tm.s",
+      "path": "src/ui/shared/title/mappings/sk_tm.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],

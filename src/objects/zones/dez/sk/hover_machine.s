@@ -115,4 +115,4 @@ locret_495D6:
 
 ; ---------------------------------------------------------------------------
 Map_DEZHoverMachine:
-                include "src/objects/shared/zones/dez/map_hover_machine.s"
+                include "src/objects/shared/zones/dez/mappings/hover_machine.s"

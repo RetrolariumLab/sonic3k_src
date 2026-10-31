@@ -92,5 +92,5 @@ loc_35138:
                 jmp     (Add_SpriteToCollisionResponseList).l
 ; ---------------------------------------------------------------------------
 Map_CGZBladePlatform:
-                include "src/objects/shared/zones/cgz/map_blade_platform.s"
+                include "src/objects/shared/zones/cgz/mappings/blade_platform.s"
 ; End of function Obj_CGZBladePlatform

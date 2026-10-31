@@ -99,7 +99,7 @@ loc_28230:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_LBZSmashingSpikes:
-                include "src/objects/shared/zones/lbz/map_smashing_spikes.s"
+                include "src/objects/shared/zones/lbz/mappings/smashing_spikes.s"
 Map_MGZSmashingPillar:
-                include "src/objects/shared/zones/mgz/map_smashing_pillar.s"
+                include "src/objects/shared/zones/mgz/mappings/smashing_pillar.s"
 ; End of function Obj_MGZLBZSmashingPillar

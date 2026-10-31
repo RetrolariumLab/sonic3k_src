@@ -7,7 +7,7 @@
 ; ===========================================================================
 SndBank:        startBank
 
-SEGA_PCM:       include "src/audio/pcm/shared/sega_voice.inc"
+SEGA_PCM:       include "src/audio/pcm/shared/sega_voice.s"
 
                 align   2
 Sound_33:       binclude "data/Sound/SMPS/s3/SFX/33 - Ring (Right).bin"

@@ -158,5 +158,5 @@ loc_2B8B8:
                 jmp     (Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
 Map_AIZForegroundPlant:
-                include "src/objects/shared/zones/aiz/map_foreground_plant.s"
+                include "src/objects/shared/zones/aiz/mappings/foreground_plant.s"
 ; End of function Obj_AIZForegroundPlant

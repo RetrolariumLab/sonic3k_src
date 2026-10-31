@@ -185,4 +185,4 @@ locret_248E8:
 
 ; ---------------------------------------------------------------------------
 Map_LBZUnusedElevator:
-                include "src/objects/shared/zones/lbz/map_unused_elevator.s"
+                include "src/objects/shared/zones/lbz/mappings/unused_elevator.s"

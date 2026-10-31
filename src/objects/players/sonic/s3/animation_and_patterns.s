@@ -390,7 +390,7 @@ loc_137FE:
 
 ; ---------------------------------------------------------------------------
 AniSonic:
-                include "src/objects/shared/sonic/anim_sonic_s3.s"
+                include "src/objects/shared/sonic/animations/s3.s"
 
 ; =============== S U B R O U T I N E =======================================
 

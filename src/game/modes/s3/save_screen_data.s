@@ -53,7 +53,7 @@ word_BD16:
                 dc.l    RAM_start+$0222
                 dc.w    VRAM_Plane_A_Name_Table+$2B4, $B-1,  $C-1
 Map_SaveScreen:
-                include "src/ui/shared/save_menu/map_save_screen_general_s3.s"
+                include "src/ui/shared/save_menu/mappings/general_s3.s"
 ObjDat_SaveScreen:
                 dc.w    $A-1
                 dc.l    Draw_Sprite                     ; "Data Select" Text

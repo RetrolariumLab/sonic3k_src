@@ -286,4 +286,4 @@ locret_41B54:
 
 ; ---------------------------------------------------------------------------
 Map_SOZPushSwitch:
-                include "src/objects/shared/zones/soz/map_push_switch.s"
+                include "src/objects/shared/zones/soz/mappings/push_switch.s"

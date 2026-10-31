@@ -170,4 +170,4 @@ byte_24B6C:
                 dc.b    -$A
                 dc.b    -$A
 Map_MGZDashTrigger:
-                include "src/objects/shared/zones/mgz/map_dash_trigger.s"
+                include "src/objects/shared/zones/mgz/mappings/dash_trigger.s"

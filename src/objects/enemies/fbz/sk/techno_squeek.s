@@ -325,7 +325,7 @@ byte_89B73:
                 dc.b    3,   7,   8,   9, $FC
                 even
 Map_TechnoSqueek:
-                include "src/objects/shared/technosqueek/map_technosqueek.s"
+                include "src/objects/shared/technosqueek/mappings/technosqueek.s"
 ; ---------------------------------------------------------------------------
 
 Obj_FBZEggPrison:

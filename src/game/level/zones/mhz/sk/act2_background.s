@@ -730,6 +730,6 @@ word_558E8:
                 dc.w    $200
                 dc.w    $402
 Map_MHZEndBossMisc:
-                include "src/objects/shared/zones/mhz/map_end_boss_misc.s"
+                include "src/objects/shared/zones/mhz/boss/mappings/misc.s"
 Ani_MHZEndPropellers:
-                include "src/objects/shared/zones/mhz/anim_end_propellers.s"
+                include "src/objects/shared/zones/mhz/animations/end_propellers.s"

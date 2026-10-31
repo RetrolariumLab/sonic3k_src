@@ -248,9 +248,9 @@ locret_47BF2:
 
 ; ---------------------------------------------------------------------------
 Ani_DEZConveyorPad:
-                include "src/objects/shared/zones/dez/anim_conveyor_pad.s"
+                include "src/objects/shared/zones/dez/animations/conveyor_pad.s"
 Map_DEZConveyorPad:
-                include "src/objects/shared/zones/dez/map_conveyor_pad.s"
+                include "src/objects/shared/zones/dez/mappings/conveyor_pad.s"
 ; ---------------------------------------------------------------------------
 word_47DD6:
                 dc.w    $7F

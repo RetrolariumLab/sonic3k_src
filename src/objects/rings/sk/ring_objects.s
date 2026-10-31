@@ -441,9 +441,9 @@ AttractedRing_ApplyMovementY:
 
 ; ---------------------------------------------------------------------------
 Ani_RingSparkle:
-                include "src/objects/shared/ring/anim_ring_sparkle.s"
+                include "src/objects/shared/ring/animations/sparkle.s"
 Map_Ring:
-                include "src/objects/shared/ring/map_ring.s"
+                include "src/objects/shared/ring/mappings/ring.s"
 ; ---------------------------------------------------------------------------
 
 Obj_SlotRing:
@@ -494,4 +494,4 @@ loc_1AA62:
                 bra.w   Delete_Current_Sprite
 ; ---------------------------------------------------------------------------
 Ani_Ring:
-                include "src/objects/shared/ring/anim_ring.s"
+                include "src/objects/shared/ring/animations/ring.s"

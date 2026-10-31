@@ -230,6 +230,6 @@ loc_3307C:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_Bumper:
-                include "src/objects/shared/level_misc/anim_bumper.s"
+                include "src/objects/shared/level_misc/animations/bumper.s"
 Map_PachinkoBumper:
-                include "src/objects/shared/zones/pachinko/map_bumper.s"
+                include "src/objects/shared/zones/pachinko/mappings/bumper.s"

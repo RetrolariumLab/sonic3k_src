@@ -395,7 +395,7 @@ loc_3945E:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_SonicSnowboard:
-                include "src/objects/shared/sonic/anim_sonic_snowboard.s"
+                include "src/objects/shared/sonic/animations/snowboard.s"
 ; ---------------------------------------------------------------------------
 
 loc_394A0:

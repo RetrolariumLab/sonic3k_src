@@ -226,5 +226,5 @@ loc_44084:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_LRZFlameThrower:
-                include "src/objects/shared/zones/lrz/map_flamethrower.s"
+                include "src/objects/shared/zones/lrz/mappings/flamethrower.s"
 ; End of function Obj_LRZFlameThrower

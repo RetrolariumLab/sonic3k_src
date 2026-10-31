@@ -51,7 +51,7 @@ word_2BF6C:
                 dc.w    $300
                 dc.b    $54,   4
 Ani_AnimatedStillSprites:
-                include "src/objects/shared/world/anim_animated_still_sprites.s"
+                include "src/objects/shared/world/still_sprites/animations/animated.s"
 Map_AnimatedStillSprites:
-                include "src/objects/shared/world/map_animated_still_sprites.s"
+                include "src/objects/shared/world/still_sprites/mappings/animated.s"
 ; End of function Obj_AnimatedStillSprite

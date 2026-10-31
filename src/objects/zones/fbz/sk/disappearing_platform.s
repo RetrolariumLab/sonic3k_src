@@ -88,6 +88,6 @@ locret_3BB98:
 
 ; ---------------------------------------------------------------------------
 Ani_FBZDisappearingPlatform:
-                include "src/objects/shared/zones/fbz/anim_disappearing_platform.s"
+                include "src/objects/shared/zones/fbz/animations/disappearing_platform.s"
 Map_FBZDisappearingPlatform:
-                include "src/objects/shared/zones/fbz/map_disappearing_platform.s"
+                include "src/objects/shared/zones/fbz/mappings/disappearing_platform.s"

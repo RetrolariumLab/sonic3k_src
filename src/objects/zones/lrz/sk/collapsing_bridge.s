@@ -196,4 +196,4 @@ word_39E20:     dc.w    $16-1
                 dc.b    -$2C,  $C,   4, $16
                 dc.b    $2C,  $C,   5, $14
 Map_LRZCollapsingBridge:
-                include "src/objects/shared/zones/lrz/map_collapsing_bridge.s"
+                include "src/objects/shared/zones/lrz/mappings/collapsing_bridge.s"

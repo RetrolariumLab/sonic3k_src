@@ -502,4 +502,4 @@ locret_23F48:
                 rts
 ; ---------------------------------------------------------------------------
 Map_2PRetractingSpring:
-                include "src/objects/shared/level_misc/map_2p_retracting_spring.s"
+                include "src/objects/shared/level_misc/mappings/competition_retracting_spring.s"

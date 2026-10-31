@@ -260,11 +260,11 @@ locret_2D336:
 
 ; ---------------------------------------------------------------------------
 Ani_Starpost:
-                include "src/objects/shared/starpost/anim_starpost.s"
+                include "src/objects/shared/starpost/animations/starpost.s"
 Map_StarPost:
-                include "src/objects/shared/starpost/map_starpost.s"
+                include "src/objects/shared/starpost/mappings/starpost.s"
 Map_StarpostStars:
-                include "src/objects/shared/starpost/map_starpost_stars.s"
+                include "src/objects/shared/starpost/mappings/stars.s"
 
 ; =============== S U B R O U T I N E =======================================
 

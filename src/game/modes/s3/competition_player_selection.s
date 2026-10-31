@@ -377,5 +377,5 @@ ObjDat_A65E:
                 dc.w    $121,  $126, palette_line_1
                 dc.b    5,   0
 Map_CompetitionSelect:
-                include "src/ui/shared/competition_menu/map_competition_select.s"
+                include "src/ui/shared/competition_menu/mappings/competition_select.s"
 ; ---------------------------------------------------------------------------

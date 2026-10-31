@@ -109,7 +109,7 @@ word_CD58:
                 dc.l    RAM_start+$0104
                 dc.w    VRAM_Plane_A_Name_Table+$ECE, $D-1,  $B-1
 Map_SaveScreen:
-                include "src/ui/shared/save_menu/map_save_screen_general.s"
+                include "src/ui/shared/save_menu/mappings/save_screen_general.s"
 ObjDat_SaveScreen:
                 dc.l    Draw_Sprite                     ; "Data Select" Text
                 dc.w    $120                            ; x_pos, objoff_12 (x_pos copy)

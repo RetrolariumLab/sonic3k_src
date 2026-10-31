@@ -78,7 +78,7 @@ byte_355B8:
                 dc.b    0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
                 even
 Ani_DPZDissolvingSandBar:
-                include "src/objects/shared/zones/dpz/anim_dissolving_sand_bar.s"
+                include "src/objects/shared/zones/dpz/animations/dissolving_sand_bar.s"
 Map_DPZDissolvingSandBar:
-                include "src/objects/shared/zones/dpz/map_dissolving_sand_bar.s"
+                include "src/objects/shared/zones/dpz/mappings/dissolving_sand_bar.s"
 ; End of function Obj_DPZDisolvingSandBar

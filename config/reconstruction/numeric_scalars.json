@@ -92,7 +92,7 @@
       "reason": "Consumed by subtraction/add-carry digit extraction; this number is a decimal place weight, not a bus pointer."
     },
     {
-      "path": "src/game/blue_sphere/sk/menu_and_stage_number.s",
+      "path": "src/game/blue_sphere/sk/stage_selection.s",
       "owner": "dword_4D21C",
       "kind": "rom-range-long",
       "operand": "1000000",
@@ -101,7 +101,7 @@
       "reason": "Consumed by subtraction/add-carry digit extraction; this number is a decimal place weight, not a bus pointer."
     },
     {
-      "path": "src/game/blue_sphere/sk/menu_and_stage_number.s",
+      "path": "src/game/blue_sphere/sk/stage_selection.s",
       "owner": "dword_4D21C",
       "kind": "rom-range-long",
       "operand": "100000",
@@ -110,7 +110,7 @@
       "reason": "Consumed by subtraction/add-carry digit extraction; this number is a decimal place weight, not a bus pointer."
     },
     {
-      "path": "src/game/blue_sphere/sk/menu_and_stage_number.s",
+      "path": "src/game/blue_sphere/sk/stage_selection.s",
       "owner": "word_4D294",
       "kind": "rom-range-long",
       "operand": "1000000",
@@ -119,7 +119,7 @@
       "reason": "Consumed by subtraction/add-carry digit extraction; this number is a decimal place weight, not a bus pointer."
     },
     {
-      "path": "src/game/blue_sphere/sk/menu_and_stage_number.s",
+      "path": "src/game/blue_sphere/sk/stage_selection.s",
       "owner": "word_4D294",
       "kind": "rom-range-long",
       "operand": "100000",

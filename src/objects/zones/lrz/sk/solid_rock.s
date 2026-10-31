@@ -157,4 +157,4 @@ loc_4427C:
 
 ; ---------------------------------------------------------------------------
 Map_LRZSolidRock:
-                include "src/objects/shared/zones/lrz/map_solid_rock.s"
+                include "src/objects/shared/zones/lrz/mappings/solid_rock.s"

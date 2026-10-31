@@ -166,4 +166,4 @@ loc_412D6:
                 rts
 ; ---------------------------------------------------------------------------
 Map_SOZFloatingPillar:
-                include "src/objects/shared/zones/soz/map_floating_pillar.s"
+                include "src/objects/shared/zones/soz/mappings/floating_pillar.s"

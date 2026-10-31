@@ -327,4 +327,4 @@ locret_3F850:
 
 ; ---------------------------------------------------------------------------
 Map_MHZMushroomParachute:
-                include "src/objects/shared/zones/mhz/map_mushroom_parachute.s"
+                include "src/objects/shared/zones/mhz/mappings/mushroom_parachute.s"

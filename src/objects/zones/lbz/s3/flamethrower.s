@@ -58,7 +58,7 @@ loc_2543A:
                 jmp     (Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
 Ani_LBZFlameThrower:
-                include "src/objects/shared/zones/lbz/anim_flame_thrower.s"
+                include "src/objects/shared/zones/lbz/animations/flame_thrower.s"
 Map_LBZFlameThrower:
-                include "src/objects/shared/zones/lbz/map_flame_thrower.s"
+                include "src/objects/shared/zones/lbz/mappings/flame_thrower.s"
 ; End of function Obj_LBZFlameThrower

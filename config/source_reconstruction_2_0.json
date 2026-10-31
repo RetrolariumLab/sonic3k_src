@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 69
+    "commit_count": 70
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -461,9 +461,15 @@
       "commits": ["e6562dc2febb89c3f16499aaf17ea9dfd68a0dc0"]
     },
     {
+      "id": "change-eb7abf61f63f",
+      "kind": "tooling",
+      "summary": "Keep processor-specific assembly inside the official style checks",
+      "commits": ["eb7abf61f63feba234ad0f7ae43ad1969e5e6332"]
+    },
+    {
       "id": "current-release-stage",
       "kind": "source",
-      "summary": "Keep processor-specific .asm sources inside official AS lint and explicit formatting through disposable suffix-only copies.",
+      "summary": "Normalize source basenames and processor suffixes, group declarations by their semantic owners and preserve all assembly tokens, source origins and include order.",
       "commits": ["release-commit"]
     }
   ],

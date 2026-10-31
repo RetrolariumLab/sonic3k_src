@@ -659,6 +659,6 @@ locret_36A56:
 
 ; ---------------------------------------------------------------------------
 Ani_2PItem:
-                include "src/game/competition/shared/2p_zone/anim_item.s"
+                include "src/game/competition/shared/animations/item.s"
 Map_2PItem:
-                include "src/game/competition/shared/2p_zone/map_item.s"
+                include "src/game/competition/shared/mappings/item.s"

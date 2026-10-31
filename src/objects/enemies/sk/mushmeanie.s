@@ -212,4 +212,4 @@ byte_8DCED:
                 dc.b    $F4
                 even
 Map_Mushmeanie:
-                include "src/objects/shared/mushmeanie/map_mushmeanie.s"
+                include "src/objects/shared/mushmeanie/mappings/mushmeanie.s"

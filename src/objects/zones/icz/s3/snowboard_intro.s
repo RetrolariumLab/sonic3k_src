@@ -218,9 +218,9 @@ loc_38FC8:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_SnowboardDust:
-                include "src/objects/shared/snowboard/anim_snowboard_dust.s"
+                include "src/objects/shared/snowboard/animations/dust.s"
 Map_SnowboardDust:
-                include "src/objects/shared/snowboard/map_snowboard_dust.s"
+                include "src/objects/shared/snowboard/mappings/dust.s"
 ArtNem_SnowboardDust:
                 binclude "data/General/Sprites/Snowboard/Snowboard Dust.nem"
                 even

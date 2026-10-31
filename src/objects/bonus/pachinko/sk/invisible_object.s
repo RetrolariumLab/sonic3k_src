@@ -38,5 +38,5 @@ RawAni_4A110:
                 dc.b    0,   1,   2,   3,   4,   3,   2,   1
                 even
 Map_PachinkoInvisibleUnknown:
-                include "src/objects/shared/zones/pachinko/map_invisible_unknown.s"
+                include "src/objects/shared/zones/pachinko/mappings/invisible_unknown.s"
 ; End of function Obj_PachinkoInvisibleUnknown

@@ -35,5 +35,5 @@ loc_3B718:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_FBZBentPipe:
-                include "src/objects/shared/zones/fbz/map_bent_pipe.s"
+                include "src/objects/shared/zones/fbz/mappings/bent_pipe.s"
 ; End of function Obj_FBZBentPipe

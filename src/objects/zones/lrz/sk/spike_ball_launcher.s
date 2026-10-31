@@ -90,7 +90,7 @@ loc_44954:
                 jmp     (Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
 Ani_LRZSpikeBallLauncher:
-                include "src/objects/shared/zones/lrz/anim_spike_ball_launcher.s"
+                include "src/objects/shared/zones/lrz/animations/spike_ball_launcher.s"
 Map_LRZSpikeBallLauncher:
-                include "src/objects/shared/zones/lrz/map_spike_ball_launcher.s"
+                include "src/objects/shared/zones/lrz/mappings/spike_ball_launcher.s"
 ; End of function Obj_LRZSpikeBallLauncher

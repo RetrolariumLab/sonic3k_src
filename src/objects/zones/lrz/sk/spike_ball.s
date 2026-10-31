@@ -236,6 +236,6 @@ loc_43A88:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_LRZSpikeBall:
-                include "src/objects/shared/zones/lrz/map_spike_ball.s"
+                include "src/objects/shared/zones/lrz/mappings/spike_ball.s"
 Map_LRZRockDebris:
-                include "src/objects/shared/zones/lrz/map_rock_debris.s"
+                include "src/objects/shared/zones/lrz/mappings/rock_debris.s"

@@ -64,4 +64,4 @@ loc_1ECAA:
                 bra.w   SolidObjectFull2
 ; ---------------------------------------------------------------------------
 Map_InvisibleBlock:
-                include "src/objects/shared/level_misc/map_invisible_block.s"
+                include "src/objects/shared/level_misc/mappings/invisible_block.s"

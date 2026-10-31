@@ -454,14 +454,14 @@ AniRaw_EggRoboHead:
                 dc.b    $F,   0,   1, $FC
                 even
 Map_EggRoboHead:
-                include "src/objects/shared/egg_robo/map_egg_robo_head.s"
+                include "src/objects/shared/egg_robo/mappings/head.s"
 Map_MechaSonicHead:
-                include "src/objects/shared/mecha_sonic/map_mecha_sonic_head.s"
+                include "src/objects/shared/mecha_sonic/mappings/head.s"
 Map_RobotnikShip:
-                include "src/objects/shared/robotnik/map_robotnik_ship.s"
+                include "src/objects/shared/robotnik/mappings/ship.s"
 Map_FBZRobotnikRun:
-                include "src/objects/shared/robotnik/map_fbz_robotnik_run.s"
+                include "src/objects/shared/robotnik/mappings/fbz_robotnik_run.s"
 Map_FBZRobotnikHead:
-                include "src/objects/shared/robotnik/map_fbz_robotnik_head.s"
+                include "src/objects/shared/robotnik/mappings/fbz_robotnik_head.s"
 Map_FBZRobotnikStand:
-                include "src/objects/shared/robotnik/map_fbz_robotnik_stand.s"
+                include "src/objects/shared/robotnik/mappings/fbz_robotnik_stand.s"

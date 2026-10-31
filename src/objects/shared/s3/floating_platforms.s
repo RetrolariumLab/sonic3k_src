@@ -115,9 +115,9 @@ loc_24544:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_MGZFloatingPlatform:
-                include "src/objects/shared/zones/mgz/map_floating_platform.s"
+                include "src/objects/shared/zones/mgz/mappings/floating_platform.s"
 Map_HCZFloatingPlatform:
-                include "src/objects/shared/zones/hcz/map_floating_platform.s"
+                include "src/objects/shared/zones/hcz/mappings/floating_platform.s"
 Map_AIZFloatingPlatform:
-                include "src/objects/shared/zones/aiz/map_floating_platform.s"
+                include "src/objects/shared/zones/aiz/mappings/floating_platform.s"
 ; End of function Obj_FloatingPlatform

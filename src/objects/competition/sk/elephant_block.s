@@ -119,4 +119,4 @@ locret_35D58:
 
 ; ---------------------------------------------------------------------------
 Map_BPZElephantBlock:
-                include "src/objects/shared/zones/bpz/map_elephant_block.s"
+                include "src/objects/shared/zones/bpz/mappings/elephant_block.s"

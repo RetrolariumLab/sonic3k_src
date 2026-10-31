@@ -307,4 +307,4 @@ byte_8F080:
                 dc.b    8,   0,   1,   0,   2, $FC
                 even
 Map_Rockn:
-                include "src/objects/shared/rockn/map_rock_n.s"
+                include "src/objects/shared/rockn/mappings/rock_n.s"

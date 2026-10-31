@@ -477,7 +477,7 @@ loc_12AA2:
 
 ; ---------------------------------------------------------------------------
 AniSonic:
-                include "src/objects/shared/sonic/anim_sonic.s"
+                include "src/objects/shared/sonic/animations/sonic.s"
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -103,7 +103,7 @@ loc_4E29C:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_BSTailsPose:
-                include "src/game/blue_sphere/shared/blue_sphere/map_tails_pose.s"
+                include "src/game/blue_sphere/shared/mappings/tails_pose.s"
 ; ---------------------------------------------------------------------------
 
 Obj_Difficulty_Knuckles:
@@ -131,5 +131,5 @@ loc_4E310:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_BSResultsEmerald:
-                include "src/game/blue_sphere/shared/blue_sphere/map_results_emerald.s"
+                include "src/game/blue_sphere/shared/mappings/results_emerald.s"
 ; End of function Obj_Difficulty_Knuckles

@@ -286,4 +286,4 @@ locret_264DE:
                 rts
 ; ---------------------------------------------------------------------------
 Map_LBZUnusedTiltingBridge:
-                include "src/objects/shared/zones/lbz/map_unused_tilting_bridge.s"
+                include "src/objects/shared/zones/lbz/mappings/unused_tilting_bridge.s"

@@ -80,5 +80,5 @@ loc_472A2:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_TorpedoLauncher:
-                include "src/objects/shared/zones/dez/map_torpedo_launcher.s"
+                include "src/objects/shared/zones/dez/mappings/torpedo_launcher.s"
 ; End of function Obj_DEZTorpedoLauncher

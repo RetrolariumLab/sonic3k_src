@@ -38,9 +38,9 @@ byte_90FF6:
                 dc.b    0, $1D, $1F, $1D, $20, $1D, $21, $1D, $22, $1D, $23, $1D, $24, $1D, $F4
                 even
 Map_HPZEmeraldMisc:
-                include "src/objects/shared/zones/hpz/map_emerald_misc_art.s"
+                include "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s"
 Map_HPZChaosEmeralds:
-                include "src/objects/shared/zones/hpz/map_chaos_emeralds.s"
+                include "src/objects/shared/zones/hpz/mappings/chaos_emeralds.s"
 off_914CE:
                 dc.l    off_914EE
                 dc.w    2-1

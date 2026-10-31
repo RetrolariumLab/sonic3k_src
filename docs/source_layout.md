@@ -139,7 +139,7 @@ must finish at the original 2-MiB boundary.
 
 ## Second-cartridge declaration window
 
-The original lock-on map is owned by src/memory/lockon/sonic3_exports.s. Its
+The original lock-on map is owned by src/memory/lockon/sonic3_exports.inc. Its
 non-emitting phase starts at the caller's existing 0x200000 cursor and describes
 exactly the two-MiB second cartridge. An independent byte cursor accounts for
 every literal reservation and bounded DAC metadata declaration; all 675 address
@@ -176,3 +176,20 @@ independently computed fields and original code/table entry addresses with the
 accepted 1.0 build, checks actual AS child ranges in 0x0000--0x1300 and
 0x1300--0x1C00, and requires the current physical object coverage and cartridge
 identity witness.
+
+## Source filename convention
+
+All source basenames use lowercase snake_case, at most three words, and the
+nearest semantic directory context. Names describe the primary entity rather
+than enumerating every child operation. Mapping, animation and DPLC declarations
+are grouped by kind beneath their existing semantic owner; repeated mode-name
+directories are collapsed without changing content sharing or include order.
+
+The `.s` suffix identifies 68000 code, structural composition and emitted
+content declarations. Shared definitions and memory declarations use `.inc`;
+typed Z80 driver modules use `.asm`. Supplemental official AS lint covers those
+`.asm` files through disposable `.s` copies. Source-layout checks enforce names,
+suffixes and ownership of every file below `src/`. AS symbols retain their
+existing spellings: filename normalization does not rename assembly labels.
+Historical source origins continue to name the exact files at their original
+commits. The historical entry and procedure comparison remains mandatory.

@@ -450,6 +450,6 @@ loc_1B8E4:
                 bra.w   Draw_Sprite
 ; ---------------------------------------------------------------------------
 Ani_Monitor:
-                include "src/objects/shared/monitors/anim_monitor.s"
+                include "src/objects/shared/monitors/animations/monitor.s"
 Map_Monitor:
-                include "src/objects/shared/monitors/map_monitor_s3.s"
+                include "src/objects/shared/monitors/mappings/monitor_s3.s"

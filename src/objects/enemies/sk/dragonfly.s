@@ -260,4 +260,4 @@ byte_8DFCE:
                 dc.b    $7F,   0,   0, $FC
                 even
 Map_Dragonfly:
-                include "src/objects/shared/dragonfly/map_dragonfly.s"
+                include "src/objects/shared/dragonfly/mappings/dragonfly.s"

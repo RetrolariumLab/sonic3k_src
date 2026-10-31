@@ -118,5 +118,5 @@ loc_3B90C:
                 jmp     (loc_1B666).l
 ; ---------------------------------------------------------------------------
 Map_FBZRotatingPlatform:
-                include "src/objects/shared/zones/fbz/map_rotating_platform.s"
+                include "src/objects/shared/zones/fbz/mappings/rotating_platform.s"
 ; End of function Obj_FBZRotatingPlatform

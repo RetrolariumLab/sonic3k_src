@@ -726,10 +726,10 @@ byte_20EDE:
                 dc.b    $2F, $2F, $2F, $2F, $2E, $2E, $2E, $2E, $2E, $2E, $2E, $2E, $2D, $2D, $2D, $2D, $2D, $2D, $2D, $2D
                 dc.b    $2D, $2D, $2D, $2D, $2D, $2C, $2B, $2A
 Map_LRZCollapsingPlatform:
-                include "src/objects/shared/zones/lrz/map_collapsing_platform.s"
+                include "src/objects/shared/zones/lrz/mappings/collapsing_platform.s"
 Map_HPZCollapsingBridge:
-                include "src/objects/shared/zones/hpz/map_collapsing_bridge.s"
+                include "src/objects/shared/zones/hpz/mappings/collapsing_bridge.s"
 Map_FBZCollapsingBridge:
-                include "src/objects/shared/zones/fbz/map_collapsing_bridge.s"
+                include "src/objects/shared/zones/fbz/mappings/collapsing_bridge.s"
 Map_SOZCollapsingBridge:
-                include "src/objects/shared/zones/soz/map_collapsing_bridge.s"
+                include "src/objects/shared/zones/soz/mappings/collapsing_bridge.s"

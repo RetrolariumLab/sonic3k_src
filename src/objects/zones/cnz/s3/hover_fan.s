@@ -137,4 +137,4 @@ locret_3100E:
 
 ; ---------------------------------------------------------------------------
 Map_CNZHoverFan:
-                include "src/objects/shared/zones/cnz/map_hover_fan.s"
+                include "src/objects/shared/zones/cnz/mappings/hover_fan.s"

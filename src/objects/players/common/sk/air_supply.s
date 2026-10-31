@@ -423,4 +423,4 @@ loc_186BC:
 
 ; ---------------------------------------------------------------------------
 Ani_AirCountdown:
-                include "src/objects/shared/bubbles/anim_air_countdown.s"
+                include "src/objects/shared/bubbles/animations/air_countdown.s"

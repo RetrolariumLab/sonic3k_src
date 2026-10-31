@@ -49,4 +49,4 @@ locret_31D2C:
 
 ; ---------------------------------------------------------------------------
 Ani_CNZTrapDoor:
-                include "src/objects/shared/zones/cnz/anim_trap_door.s"
+                include "src/objects/shared/zones/cnz/animations/trap_door.s"

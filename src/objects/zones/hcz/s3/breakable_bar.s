@@ -441,4 +441,4 @@ loc_1CDC2:
 
 ; ---------------------------------------------------------------------------
 Map_HCZBreakableBar:
-                include "src/objects/shared/zones/hcz/map_breakable_bar.s"
+                include "src/objects/shared/zones/hcz/mappings/breakable_bar.s"

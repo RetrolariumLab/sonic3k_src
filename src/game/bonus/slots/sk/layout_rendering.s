@@ -481,14 +481,14 @@ SlotBonusMaps:
                 dc.l    Map_SB_Ring+(7<<24)
                 dc.w    make_art_tile(ArtTile_Ring,1,0)
 Map_SB_Slot:
-                include "src/objects/shared/zones/slots/map_slot.s"
+                include "src/objects/shared/zones/slots/mappings/slot.s"
 Map_SB_R_and_Peppermint:
-                include "src/objects/shared/zones/slots/map_r_and_peppermint.s"
+                include "src/objects/shared/zones/slots/mappings/r_peppermint.s"
 Map_SB_Goal:
-                include "src/objects/shared/zones/slots/map_goal.s"
+                include "src/objects/shared/zones/slots/mappings/goal.s"
 Map_SB_Bumper:
-                include "src/objects/shared/zones/slots/map_bumper.s"
+                include "src/objects/shared/zones/slots/mappings/bumper.s"
 Map_SB_Ring:
-                include "src/objects/shared/zones/slots/map_ring.s"
+                include "src/objects/shared/zones/slots/mappings/ring.s"
 Map_SB_ColoredWall:
-                include "src/objects/shared/zones/slots/map_colored_wall.s"
+                include "src/objects/shared/zones/slots/mappings/colored_wall.s"

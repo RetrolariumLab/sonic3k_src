@@ -234,5 +234,5 @@ loc_44592:
                 jmp     (Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
 Map_LRZTurbineSprites:
-                include "src/objects/shared/zones/lrz/map_turbine.s"
+                include "src/objects/shared/zones/lrz/mappings/turbine.s"
 ; End of function loc_44592

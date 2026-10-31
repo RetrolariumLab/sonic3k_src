@@ -251,4 +251,4 @@ locret_31B70:
 
 ; ---------------------------------------------------------------------------
 DPLC_CNZCannon:
-                include "src/objects/shared/zones/cnz/dplc_cannon.s"
+                include "src/objects/shared/zones/cnz/dplc/cannon.s"

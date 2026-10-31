@@ -276,4 +276,4 @@ loc_3CFCA:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_FBZFlameThrower:
-                include "src/objects/shared/zones/fbz/map_flamethrower.s"
+                include "src/objects/shared/zones/fbz/mappings/flamethrower.s"

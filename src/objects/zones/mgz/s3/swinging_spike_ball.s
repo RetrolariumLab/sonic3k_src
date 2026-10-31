@@ -189,4 +189,4 @@ loc_33556:
 
 ; ---------------------------------------------------------------------------
 Map_MGZSwingingSpikeBall:
-                include "src/objects/shared/zones/mgz/map_swinging_spike_ball.s"
+                include "src/objects/shared/zones/mgz/mappings/swinging_spike_ball.s"

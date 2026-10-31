@@ -101,4 +101,4 @@ loc_42F00:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_LRZShootingTrigger:
-                include "src/objects/shared/zones/lrz/map_shooting_trigger.s"
+                include "src/objects/shared/zones/lrz/mappings/shooting_trigger.s"

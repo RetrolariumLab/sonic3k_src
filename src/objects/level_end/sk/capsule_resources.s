@@ -84,4 +84,4 @@ byte_86BF6:
                 dc.b    0,   6,   7,   8,   9, $FC
                 even
 Map_EggCapsule:
-                include "src/objects/shared/egg_capsule/map_egg_capsule.s"
+                include "src/objects/shared/egg_capsule/mappings/egg_capsule.s"

@@ -239,5 +239,5 @@ Child6_MakeNormalExplosion:
                 dc.w    1-1
                 dc.l    Obj_Explosion
 Map_BossExplosion:
-                include "src/objects/shared/boss_explosion/map_boss_explosion.s"
+                include "src/objects/shared/boss_explosion/mappings/boss_explosion.s"
 ; End of function loc_83EC2

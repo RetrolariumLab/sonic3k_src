@@ -95,7 +95,7 @@
     {
       "path": "docs/source_layout.md",
       "decision": "reworked",
-      "reason": "Remove the obsolete claim that unused FM score encoders are required; reflect their deletion, the exact current source inventory and private audio ownership."
+      "reason": "Describe concise owner-based basenames, declaration-kind subdirectories and processor-oriented suffixes while preserving original symbol spellings, historical origins and physical include order."
     },
     {
       "path": "docs/source_reconstruction_1_0.md",

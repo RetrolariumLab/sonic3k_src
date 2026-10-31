@@ -114,5 +114,5 @@ loc_43244:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_LRZSmashingSpikePlatform:
-                include "src/objects/shared/zones/lrz/map_smashing_spike_platform.s"
+                include "src/objects/shared/zones/lrz/mappings/smashing_spike_platform.s"
 ; End of function Obj_LRZSmashingSpikePlatform

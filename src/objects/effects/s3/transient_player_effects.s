@@ -203,11 +203,11 @@ locret_17B0A:
 
 ; ---------------------------------------------------------------------------
 Ani_DashSplashDrown:
-                include "src/objects/shared/dash_dust/anim_dash_dust.s"
+                include "src/objects/shared/dash_dust/animations/dash_dust.s"
 Map_DashDust:
-                include "src/objects/shared/dash_dust/map_dash_dust.s"
+                include "src/objects/shared/dash_dust/mappings/dash_dust.s"
 DPLC_DashSplashDrown:
-                include "src/objects/shared/dash_dust/dplc_dash_dust.s"
+                include "src/objects/shared/dash_dust/dplc/dash_dust.s"
 ; ---------------------------------------------------------------------------
 
 Obj_DashDust2P:
@@ -332,9 +332,9 @@ locret_17E3C:
                 rts
 ; ---------------------------------------------------------------------------
 Ani_DashDust2P:
-                include "src/objects/shared/dash_dust/anim_dash_dust_2p.s"
+                include "src/objects/shared/dash_dust/animations/competition.s"
 Map_DashDust2P:
-                include "src/objects/shared/dash_dust/map_dash_dust_2p.s"
+                include "src/objects/shared/dash_dust/mappings/competition.s"
 ; ---------------------------------------------------------------------------
 
 Obj_SuperSonic_Stars:
@@ -475,7 +475,7 @@ loc_18018:
                 bra.w   Draw_Sprite
 ; ---------------------------------------------------------------------------
 Map_SuperSonic_Stars:
-                include "src/objects/shared/shields/map_super_sonic_stars.s"
+                include "src/objects/shared/shields/mappings/super_sonic_stars.s"
 ; ---------------------------------------------------------------------------
 
 Obj_InstaShield:

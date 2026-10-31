@@ -116,6 +116,6 @@ loc_49BEE:
 
 ; ---------------------------------------------------------------------------
 Ani_PachinkoTriangleBumper:
-                include "src/objects/shared/zones/pachinko/anim_triangle_bumper.s"
+                include "src/objects/shared/zones/pachinko/animations/triangle_bumper.s"
 Map_PachinkoTriangleBumper:
-                include "src/objects/shared/zones/pachinko/map_triangle_bumper.s"
+                include "src/objects/shared/zones/pachinko/mappings/triangle_bumper.s"

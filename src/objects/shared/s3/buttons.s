@@ -161,12 +161,12 @@ loc_2BCEA:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_Button:
-                include "src/objects/shared/buttons/map_button.s"
+                include "src/objects/shared/buttons/mappings/button.s"
 ; Map_Button2:
 Map_HCZButton:
-                include "src/objects/shared/zones/hcz/map_button.s"
+                include "src/objects/shared/zones/hcz/mappings/button.s"
 Map_CNZButton:
-                include "src/objects/shared/zones/cnz/map_button.s"
+                include "src/objects/shared/zones/cnz/mappings/button.s"
 Map_2PButton:
-                include "src/game/competition/shared/2p_zone/map_2p_button.s"
+                include "src/game/competition/shared/mappings/competition_button.s"
 ; End of function Obj_Button

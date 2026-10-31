@@ -119,7 +119,7 @@ loc_377DE:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_EMZDripper:
-                include "src/objects/shared/zones/emz/map_dripper.s"
+                include "src/objects/shared/zones/emz/mappings/dripper.s"
 ; ---------------------------------------------------------------------------
 
 locret_3780C:

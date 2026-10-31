@@ -55,5 +55,5 @@ loc_429BC:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_LRZDoor:
-                include "src/objects/shared/zones/lrz/map_door.s"
+                include "src/objects/shared/zones/lrz/mappings/door.s"
 ; End of function Obj_LRZDoor

@@ -83,6 +83,6 @@ sub_269E0:
 
 ; ---------------------------------------------------------------------------
 Ani_LBZUnusedSolidHurt:
-                include "src/objects/shared/zones/lbz/anim_unused_solid_hurt.s"
+                include "src/objects/shared/zones/lbz/animations/unused_solid_hurt.s"
 Map_LBZUnusedSolidHurt:
-                include "src/objects/shared/zones/lbz/map_unused_solid_hurt.s"
+                include "src/objects/shared/zones/lbz/mappings/unused_solid_hurt.s"

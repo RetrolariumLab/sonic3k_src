@@ -3,7 +3,7 @@
   "scope": "preservation-fixed-footprint",
   "groups": [
     {
-      "path": "src/rendering/s3/actor_rendering_resource_catalog.s",
+      "path": "src/rendering/s3/actor_mappings.s",
       "scope": "PalSPtr_CNZMinibossNormal",
       "first_line": 178,
       "last_line": 199,
@@ -14,7 +14,7 @@
       "file_frames": []
     },
     {
-      "path": "src/rendering/s3/actor_rendering_resource_catalog.s",
+      "path": "src/rendering/s3/actor_mappings.s",
       "scope": "PalSPtr_CNZMinibossSparks",
       "first_line": 202,
       "last_line": 221,
@@ -25,7 +25,7 @@
       "file_frames": []
     },
     {
-      "path": "src/rendering/s3/actor_rendering_resource_catalog.s",
+      "path": "src/rendering/s3/actor_mappings.s",
       "scope": "PalSPtr_CNZMinibossOpen",
       "first_line": 224,
       "last_line": 236,
@@ -36,7 +36,7 @@
       "file_frames": []
     },
     {
-      "path": "src/rendering/s3/actor_rendering_resource_catalog.s",
+      "path": "src/rendering/s3/actor_mappings.s",
       "scope": "word_16322C",
       "first_line": 241,
       "last_line": 267,
@@ -47,7 +47,7 @@
       "file_frames": []
     },
     {
-      "path": "src/rendering/s3/actor_rendering_resource_catalog.s",
+      "path": "src/rendering/s3/actor_mappings.s",
       "scope": "word_163298",
       "first_line": 269,
       "last_line": 295,
@@ -184,7 +184,7 @@
       "file_frames": []
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/s3/object_and_ending_catalog.s",
+      "path": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
       "scope": "PalSPtr_LBZFinalBoss2_FadeIn",
       "first_line": 221,
       "last_line": 228,
@@ -195,7 +195,7 @@
       "file_frames": []
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/s3/object_and_ending_catalog.s",
+      "path": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
       "scope": "PalSPtr_LBZFinalBoss2_FadeOut",
       "first_line": 231,
       "last_line": 238,

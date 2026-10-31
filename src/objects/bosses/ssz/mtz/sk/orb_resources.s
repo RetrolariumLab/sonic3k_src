@@ -4,7 +4,7 @@
 
 ; ---------------------------------------------------------------------------
 Ani_SSZMTZOrbs:
-                include "src/objects/shared/zones/ssz/anim_mtzorbs.s"
+                include "src/objects/shared/zones/ssz/animations/mtzorbs.s"
 Pal_SSZMTZOrbs:
                 binclude "data/Levels/SSZ/Palettes/MTZOrbs.bin"
                 even

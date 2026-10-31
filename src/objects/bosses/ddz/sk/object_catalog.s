@@ -144,4 +144,4 @@ byte_832D9:
                 dc.b    $FC
                 even
 Map_DDZMissileAsteroid:
-                include "src/objects/shared/zones/ddz/map_missile_asteroid.s"
+                include "src/objects/shared/zones/ddz/mappings/missile_asteroid.s"

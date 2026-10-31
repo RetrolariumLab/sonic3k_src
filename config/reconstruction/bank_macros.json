@@ -3,31 +3,31 @@
   "definitions": [
     {
       "name": "startbank",
-      "source": "src/audio/shared/bank_and_sample_macros.s",
+      "source": "src/audio/shared/bank_macros.inc",
       "sha256": "6788559482afbef771547e11f62414886b0a5381140af12f1b7185cfdad90111",
       "reason": "Compile-time bank alignment, capacity, little-endian pointers and bounded DAC setup declarations."
     },
     {
       "name": "finishbank",
-      "source": "src/audio/shared/bank_and_sample_macros.s",
+      "source": "src/audio/shared/bank_macros.inc",
       "sha256": "3c86214bf3abaff9fd04ed479bec77a239da730fd4f6f49e969009a3bd8b0af9",
       "reason": "Compile-time bank alignment, capacity, little-endian pointers and bounded DAC setup declarations."
     },
     {
       "name": "offsetbanktableentry",
-      "source": "src/audio/shared/bank_and_sample_macros.s",
+      "source": "src/audio/shared/bank_macros.inc",
       "sha256": "63547332db3271f0805b2e8435c3df0b79b10a69bc3533a2669d73c00eb06a06",
       "reason": "Compile-time bank alignment, capacity, little-endian pointers and bounded DAC setup declarations."
     },
     {
       "name": "dac_setup",
-      "source": "src/audio/shared/bank_and_sample_macros.s",
+      "source": "src/audio/shared/bank_macros.inc",
       "sha256": "466a553ca408017d44f5103e1f8eba69d0f147f99735cde3ed54f683ef2fb870",
       "reason": "Compile-time bank alignment, capacity, little-endian pointers and bounded DAC setup declarations."
     },
     {
       "name": "startdacbank",
-      "source": "src/audio/shared/bank_and_sample_macros.s",
+      "source": "src/audio/shared/bank_macros.inc",
       "sha256": "6d0b2090c0cce6d3a2902891f135d2fa3c5b0a4b1cadd4fce442249540c42733",
       "reason": "Compile-time bank alignment, capacity, little-endian pointers and bounded DAC setup declarations."
     }

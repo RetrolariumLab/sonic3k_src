@@ -15,12 +15,12 @@ LSelect3CodeDat:
                 dc.b    0
                 even
 Map_TitleScreenText:
-                include "src/ui/shared/title/map_s3_screen_text.s"
+                include "src/ui/shared/title/mappings/s3_screen_text.s"
 ArtNem_TitleScreenText:
                 binclude "data/General/Title/Nemesis Art/S3 Screen Text.nem"
                 even
 Map_TitleSonicAnim:
-                include "src/ui/shared/title/map_s3_sonic_anim.s"
+                include "src/ui/shared/title/mappings/s3_sonic_anim.s"
 Map_TitleTailsPlane:
-                include "src/ui/shared/title/map_s3_tails_plane.s"
+                include "src/ui/shared/title/mappings/s3_tails_plane.s"
 ; ---------------------------------------------------------------------------

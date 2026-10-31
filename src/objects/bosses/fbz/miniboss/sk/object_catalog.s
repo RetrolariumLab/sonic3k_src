@@ -73,7 +73,7 @@ word_6FAE0:     palscriptptr .header, .data
                 palscriptrun
 
 Map_FBZMiniboss:
-                include "src/objects/shared/zones/fbz/map_miniboss.s"
+                include "src/objects/shared/zones/fbz/mappings/miniboss.s"
 ; ---------------------------------------------------------------------------
 word_6FCFC:
                 dc.w    $560,  $660, $2900, $2C00

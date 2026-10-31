@@ -116,4 +116,4 @@ byte_3185A:
                 dc.b    0,   0,   1,   3
                 even
 Ani_CNZBalloon:
-                include "src/objects/shared/zones/cnz/anim_balloon.s"
+                include "src/objects/shared/zones/cnz/animations/balloon.s"

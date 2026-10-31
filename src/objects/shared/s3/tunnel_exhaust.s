@@ -334,4 +334,4 @@ locret_28BFA:
 
 ; ---------------------------------------------------------------------------
 Map_TunnelExhaust:
-                include "src/objects/shared/zones/lbz/map_lrz_tunnel_exhaust.s"
+                include "src/objects/shared/zones/lbz/mappings/lrz_tunnel_exhaust.s"

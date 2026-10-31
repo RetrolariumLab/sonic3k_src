@@ -119,5 +119,5 @@ loc_2A394:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Ani_AIZDisappearingFloor:
-                include "src/objects/shared/zones/aiz/anim_disappearing_floor.s"
+                include "src/objects/shared/zones/aiz/animations/disappearing_floor.s"
 ; End of function Obj_AIZDisappearingFloor

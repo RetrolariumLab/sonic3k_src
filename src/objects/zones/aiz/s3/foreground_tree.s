@@ -28,5 +28,5 @@ word_2B994:
                 dc.w    $300
                 dc.b    8, $40
 Map_AIZ2FGTree:
-                include "src/objects/shared/zones/aiz/map_act_2_foreground_tree.s"
+                include "src/objects/shared/zones/aiz/act2/mappings/foreground_tree.s"
 ; End of function Obj_AIZ2FGTree

@@ -687,11 +687,11 @@ ScalarTable2:
                 binclude "data/General/Special Stage/Scalars.bin"
                 even
 Map_SStageSphere:
-                include "src/game/special_stage/shared/special_stage/map_sphere.s"
+                include "src/game/special_stage/shared/mappings/sphere.s"
 Map_SStageRing:
-                include "src/game/special_stage/shared/special_stage/map_ring.s"
+                include "src/game/special_stage/shared/mappings/ring.s"
 Map_SStageChaosEmerald:
-                include "src/game/special_stage/shared/special_stage/map_chaos_emerald.s"
+                include "src/game/special_stage/shared/mappings/chaos_emerald.s"
 ; ---------------------------------------------------------------------------
 
 locret_952E:

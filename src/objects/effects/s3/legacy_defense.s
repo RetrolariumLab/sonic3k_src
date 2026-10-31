@@ -249,8 +249,8 @@ byte_1779B:
                 dc.b    6,   5,   4,   3,   2
                 even
 Ani_S2Shield:
-                include "src/objects/shared/shields/anim_s2_shield.s"
+                include "src/objects/shared/shields/animations/s2_shield.s"
 Map_S2Shield:
-                include "src/objects/shared/shields/map_s2_shield.s"
+                include "src/objects/shared/shields/mappings/s2_shield.s"
 Map_Invincibility:
-                include "src/objects/shared/shields/map_invincibility.s"
+                include "src/objects/shared/shields/mappings/invincibility.s"

@@ -66,5 +66,5 @@ loc_1CF24:
                 bra.w   Draw_Sprite
 ; ---------------------------------------------------------------------------
 Map_HCZWaveSplash:
-                include "src/objects/shared/zones/hcz/map_wave_splash.s"
+                include "src/objects/shared/zones/hcz/mappings/wave_splash.s"
 ; End of function Obj_HCZWaveSplash

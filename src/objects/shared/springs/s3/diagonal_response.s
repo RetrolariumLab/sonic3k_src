@@ -255,8 +255,8 @@ byte_21D94:
                 dc.b    4
                 even
 Ani_Spring:
-                include "src/objects/shared/level_misc/anim_spring.s"
+                include "src/objects/shared/level_misc/animations/spring.s"
 Map_Spring:
-                include "src/objects/shared/level_misc/map_spring.s"
+                include "src/objects/shared/level_misc/mappings/spring.s"
 Map_2PSpring:
-                include "src/objects/shared/level_misc/map_2p_spring.s"
+                include "src/objects/shared/level_misc/mappings/competition_spring.s"

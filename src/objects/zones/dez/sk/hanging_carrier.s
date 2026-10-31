@@ -166,4 +166,4 @@ locret_4717C:
 
 ; ---------------------------------------------------------------------------
 Map_DEZHangCarrier:
-                include "src/objects/shared/zones/dez/map_hang_carrier.s"
+                include "src/objects/shared/zones/dez/mappings/hang_carrier.s"

@@ -305,8 +305,8 @@ byte_8FA56:
                 dc.b    3,   4,   4,   5,   6, $F4
                 even
 Map_FirewormSegments:
-                include "src/objects/shared/fireworm/map_fireworm_segments.s"
+                include "src/objects/shared/fireworm/mappings/segments.s"
 DPLC_Fireworm:
-                include "src/objects/shared/fireworm/dplc_fireworm.s"
+                include "src/objects/shared/fireworm/dplc/fireworm.s"
 Map_Fireworm:
-                include "src/objects/shared/fireworm/map_fireworm.s"
+                include "src/objects/shared/fireworm/mappings/fireworm.s"

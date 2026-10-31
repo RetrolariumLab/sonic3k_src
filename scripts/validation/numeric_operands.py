@@ -3,11 +3,9 @@
 import argparse
 import json
 from collections import Counter
-from pathlib import Path
 import re
-import subprocess
 
-from scripts.build.project import ROOT, atomic, load
+from scripts.build.project import ROOT, atomic, load, source_names
 
 LABEL = re.compile(r"^([A-Za-z_.][A-Za-z_0-9.]*):\s*")
 NUMBER = re.compile(r"(?:\$[0-9a-f]+|0x[0-9a-f]+|[0-9][0-9a-f]*h|%[01]+|[0-9]+)", re.I)
@@ -150,8 +148,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--inventory", action="store_true")
     args = parser.parse_args(argv)
-    files = subprocess.check_output(["git", "-C", str(ROOT), "ls-files", "-z"]).decode().split("\0")
-    sources = [p for p in files if Path(p).suffix in (".s", ".inc")]
+    sources = source_names()
     rows = [row for p in sources for row in candidates(p, (ROOT / p).read_text(encoding="utf-8"))]
     atomic(
         ROOT / "build/audits/numeric_operands.json",

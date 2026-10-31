@@ -189,8 +189,8 @@ loc_322A8:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_Bumper:
-                include "src/objects/shared/level_misc/anim_bumper.s"
+                include "src/objects/shared/level_misc/animations/bumper.s"
 Map_Bumper:
-                include "src/objects/shared/level_misc/map_bumper.s"
+                include "src/objects/shared/level_misc/mappings/bumper.s"
 Map_2PBumper:
-                include "src/game/competition/shared/2p_zone/map_2p_bumper.s"
+                include "src/game/competition/shared/mappings/competition_bumper.s"

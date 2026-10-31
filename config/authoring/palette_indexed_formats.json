@@ -38,23 +38,23 @@
     },
     {
       "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
-      "sha256": "6076352c8c804721c8a44e5651637bbeb4c80d6ca7134ade17d2131929db24d2"
+      "sha256": "9f62efc861f4c4e3ab6ef8997f7052b14c3dfc3a5717910a05a77a95a7f6adbb"
     },
     {
       "path": "src/objects/ending/sk/master_emerald.s",
       "sha256": "a22c49190199cd446a0dafec8f08efc34d6e5f6ccf55bf5cc0fae1eed9135cac"
     },
     {
-      "path": "src/objects/ending/sk/pose_and_plane_scene.s",
+      "path": "src/objects/ending/sk/plane_scene.s",
       "sha256": "f58675798206d9c8bdaa6b7748a9d48e4f058df959c3e4ce8164a6d6091935af"
     },
     {
-      "path": "src/objects/interface/blue_sphere/sk/mecha_and_emerald_widgets.s",
+      "path": "src/objects/interface/blue_sphere/sk/difficulty_widgets.s",
       "sha256": "8828b944d1bd72c4bfebaf51e635cf9616c30cbd057b55a430d8e8c25382e464"
     },
     {
       "path": "src/objects/zones/hpz/sk/emerald_resources.s",
-      "sha256": "759dcc6aaa7b3448d46141fe86415e7cf82dbe9f7a0247cd72c690c13f10dc60"
+      "sha256": "3b698f9fa0a8d09cc471f4422540292fd6f920d5a8fe42319c9a5bdd4d46de48"
     },
     {
       "path": "src/objects/zones/hpz/sk/master_emerald.s",
@@ -78,7 +78,7 @@
       ]
     },
     {
-      "path": "src/objects/interface/blue_sphere/sk/mecha_and_emerald_widgets.s",
+      "path": "src/objects/interface/blue_sphere/sk/difficulty_widgets.s",
       "call_line": 59,
       "header": "off_7DD5A",
       "destinations": [
@@ -89,7 +89,7 @@
       ]
     },
     {
-      "path": "src/objects/ending/sk/pose_and_plane_scene.s",
+      "path": "src/objects/ending/sk/plane_scene.s",
       "call_line": 419,
       "header": "off_7DD5A",
       "destinations": [
