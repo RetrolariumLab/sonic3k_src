@@ -57,9 +57,11 @@ The emitter contract also covers the complete alignment-helper dependency graph.
 The checker understands nested assembler iteration blocks, rejects unchecked
 primitive overrides and requires an acyclic reviewed helper closure. Data
 ledgers may request only bounded literal power-of-two alignment or argument-free
-`even`; implementation helpers such as `org` and `cnop` remain unavailable
-there. Debug-list calls require a literal owned data-source include and
-participate in the same cycle checks as ordinary data includes. PLC pointer
+`even`. Both fill variants (`align`/`align0` and `cnop`/`cnop0`) use the same
+reviewed helper closure. An explicit offset must be a literal strictly within
+its alignment interval. Dynamic offsets and direct `org`/`org0` remain
+unavailable there. Debug-list calls require a literal owned data-source include
+and participate in the same cycle checks as ordinary data includes. PLC pointer
 declarations use compile-time labels and data words only.
 
 Definition libraries have their own role. Their top level accepts only named

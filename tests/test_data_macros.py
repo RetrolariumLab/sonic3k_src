@@ -139,8 +139,16 @@ class EmitterClosureTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Cyclic"):
             check_data_graph({"src/debug.s": ["src/list.s"], "src/list.s": ["src/debug.s"]})
 
-    def test_ledger_alignment_is_literal_bounded_and_helpers_are_not_callable(self):
-        for call in ("even", "align 2", "align $1000", "align 32768"):
+    def test_ledger_padding_is_literal_bounded_and_org_is_not_callable(self):
+        for call in (
+            "even",
+            "align 2",
+            "align $1000",
+            "align 32768",
+            "align0 $20",
+            "cnop0 -$40,$100",
+            "cnop -$600,$1000",
+        ):
             check_ledger(call)
         for call in (
             "even 2",
@@ -150,14 +158,32 @@ class EmitterClosureTests(unittest.TestCase):
             "align 65536",
             "align Size",
             "org $1000",
-            "cnop 0,16",
-            "align0 16",
+            "cnop Offset,16",
+            "align0 Size",
         ):
             with self.subTest(call=call), self.assertRaises(ValueError):
                 check_ledger(call)
         check_ledger(
             "plcptr macro plc\n__LABEL__: label (*-Offs_PLC)/2\n dc.w plc-Offs_PLC\n endm\nPLCID: plcptr PLC_AIZ\n"
         )
+
+    def test_padding_rejects_dynamic_offsets_unbounded_domains_and_extra_arguments(self):
+        for call in (
+            "cnop0 -$100,$100",
+            "cnop $100,$100",
+            "cnop -Size_of_Bank,$8000",
+            "cnop0 0,3",
+            "cnop 0,65536",
+            "cnop0 0,16,1",
+            "align0 0",
+            "align0 -16",
+            "align0 16,0",
+            "org0 $100",
+        ):
+            with self.subTest(call=call), self.assertRaises(ValueError):
+                check_ledger(call)
+        for call in ("cnop0 -255,256", "cnop 255,256", "cnop0 0,$8000", "align0 0002"):
+            check_ledger(call)
 
     def test_debug_macro_cannot_approve_a_different_include_parameter(self):
         for body in ("include OtherPath", 'include "src/list.s"', "binclude path"):

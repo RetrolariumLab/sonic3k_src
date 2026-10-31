@@ -742,6 +742,12 @@
       "commits": ["36ebf5ff592b0d5d65187aaebf0fb05558bba588"]
     },
     {
+      "id": "change-7db5651f6580",
+      "kind": "source_or_tooling",
+      "summary": "Own assembler helper and audio definition libraries",
+      "commits": ["7db5651f658098272980c7074a5dc19910a9c23a"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",

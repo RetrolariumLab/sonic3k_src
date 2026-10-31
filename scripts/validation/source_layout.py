@@ -11,7 +11,30 @@ from scripts.validation.cohorts import INSTRUCTIONS, TERMINALS, collect_file, st
 from scripts.validation.definitions import check_definitions, check_nonemitting_range, named_declaration
 from scripts.validation.data_macros import DATA_MACROS, HEADER as MACRO_HEADER, check_data_macros
 
-DATA_OPS = frozenset(("dc.b", "dc.w", "dc.l", "even", "align", "macro", "endm", "equ", "label")) | DATA_MACROS
+DATA_OPS = (
+    frozenset(("dc.b", "dc.w", "dc.l", "even", "align", "align0", "cnop", "cnop0", "macro", "endm", "equ", "label"))
+    | DATA_MACROS
+)
+
+
+def check_literal_padding(code):
+    parts = code.split(None, 1)
+    name = parts[0].lower()
+    fields = parts[1].split(",") if len(parts) == 2 else []
+    expected = 2 if name.startswith("cnop") else 1
+    if len(fields) != expected or any(not re.fullmatch(r"-?(?:\$[0-9A-Fa-f]+|[0-9]+)", f.strip()) for f in fields):
+        raise ValueError("Data padding needs bounded literal alignment and offset")
+    values = []
+    for field in fields:
+        field = field.strip()
+        token = field.removeprefix("-")
+        value = int(token[1:], 16) if token.startswith("$") else int(token)
+        values.append(-value if field.startswith("-") else value)
+    alignment = values[-1]
+    if not 2 <= alignment <= 0x8000 or alignment & (alignment - 1):
+        raise ValueError("Data alignment leaves its bounded power-of-two domain")
+    if expected == 2 and not -alignment < values[0] < alignment:
+        raise ValueError("Data padding offset leaves its alignment domain")
 
 
 def check_ledger(text, source_includes=(), binary_includes=()):
@@ -52,13 +75,8 @@ def check_ledger(text, source_includes=(), binary_includes=()):
         if op == "even":
             if code.lower() != "even":
                 raise ValueError("Even alignment takes no data arguments")
-        if op == "align":
-            item = re.fullmatch(r"align\s+(\$[0-9A-Fa-f]+|[0-9]+)", code, re.I)
-            if not item:
-                raise ValueError("Data alignment needs a bounded literal power of two")
-            value = int(item[1][1:], 16) if item[1].startswith("$") else int(item[1])
-            if not 2 <= value <= 0x8000 or value & (value - 1):
-                raise ValueError("Data alignment leaves its bounded power-of-two domain")
+        if op in ("align", "align0", "cnop", "cnop0"):
+            check_literal_padding(code)
         if op == "dbglistinclude":
             item = re.fullmatch(r'dbglistinclude\s+"([^"\r\n]+)"', code, re.I)
             if not item or item[1] not in source_includes:
