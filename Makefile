@@ -4,6 +4,7 @@
 PYTHON ?= python
 RLTOOL ?= rltool
 PROFILE ?= s3-us
+AUDIT_MODE ?=
 ROM_ROOT ?=
 
 .PHONY: help init split check-assets build verify verify-all verify-toolchain test audit-private clean
@@ -85,7 +86,7 @@ release-check source-1-check:
 	$(PYTHON) -m scripts.run validation.release check
 
 release-audit:
-	$(PYTHON) -m scripts.run validation.release audit
+	$(PYTHON) -m scripts.run validation.release audit $(AUDIT_MODE)
 
 .PHONY: check-audio-storage check-audio-binding
 

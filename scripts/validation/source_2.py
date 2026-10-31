@@ -38,17 +38,29 @@ def validate_content(report, manifest, source, tooling, images):
         raise ValueError("Content evidence omits a declared family")
 
 
-def audit():
-    manifest, documents, history = metadata()
-    source, tooling, public = source_fingerprint(), tooling_fingerprint(), public_fingerprint()
-    running = load(DESTINATION)
+def validate_aggregate(running, source, tooling, public, post_tag=False, final_audit_hash=None):
+    expected_stages = STAGES if post_tag else STAGES[:-1]
+    if post_tag and (
+        running.get("complete") is not True
+        or final_audit_hash is None
+        or running.get("audit_sha256") != final_audit_hash
+    ):
+        raise ValueError("Post-tag audit requires the completed exact aggregate and its final audit")
     if (
         running.get("public_sha256") != public
         or running.get("source_sha256") != source
         or running.get("tooling_sha256") != tooling
-        or running.get("stages") != [list(targets) for _, targets in STAGES[:-1]]
+        or running.get("stages") != [list(targets) for _, targets in expected_stages]
     ):
         raise ValueError("Release audit requires this complete aggregate's preceding stages")
+
+
+def audit(post_tag=False):
+    manifest, documents, history = metadata()
+    source, tooling, public = source_fingerprint(), tooling_fingerprint(), public_fingerprint()
+    running = load(DESTINATION)
+    final_audit_hash = sha((ROOT / "build/release/source-2-audit.json").read_bytes()) if post_tag else None
+    validate_aggregate(running, source, tooling, public, post_tag, final_audit_hash)
     first = load("build/release/source-1-check.json")
     if (
         first.get("complete") is not True
@@ -57,7 +69,7 @@ def audit():
         or running.get("source_1_report_sha256") != sha((ROOT / "build/release/source-1-check.json").read_bytes())
     ):
         raise ValueError("The full current Source 1.0 gate has not passed")
-    release.audit()  # Recheck current images, full runtime matrix, privacy and clean tree.
+    release.audit(post_tag=post_tag)  # Recheck artifacts without replacing pre-tag acceptance reports.
     content = load("build/authoring/zero-edit-containers.json")
     validate_content(content, manifest, source, tooling, image_records())
     roundtrip = load("build/authoring/roundtrip.json")
@@ -105,7 +117,9 @@ def audit():
             )
         },
     }
-    save("build/release/source-2-audit.json", report)
+    if post_tag:
+        report["release_identity"] = load("build/release/post-tag.json")["release_identity"]
+    save("build/release/source-2-post-tag.json" if post_tag else "build/release/source-2-audit.json", report)
     print("[OK] Source 2.0 current preservation, content, documentation and history audit")
     return report
 
@@ -144,11 +158,14 @@ def check():
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=("metadata", "audit", "check"))
+    parser.add_argument("--post-tag", action="store_true")
     args = parser.parse_args(argv)
+    if args.post_tag and args.command != "audit":
+        parser.error("--post-tag is available only for audit")
     if args.command == "metadata":
         metadata()
     elif args.command == "audit":
-        audit()
+        audit(post_tag=args.post_tag)
     else:
         check()
     return 0

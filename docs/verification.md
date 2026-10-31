@@ -44,3 +44,22 @@ records the accepted commit and source/tooling identities. The successful run
 included all 1979 source owners, the complete runtime matrix and all five
 containers assembled from the actual encoded resource tree. Generated reports
 remain local and every changed release candidate must run the full gate again.
+
+## Candidate and annotated-tag audits
+
+Pre-tag acceptance uses a clean checkout without publishing remotes. It rejects
+the active future release tag; an owner-deferred predecessor tag may be absent.
+An existing predecessor tag must be annotated and name the accepted commit.
+
+After the owner creates release tags, `make source-2-post-tag-audit` requires
+the completed current aggregate, its unchanged final audit, an annotated 2.0 tag
+on HEAD and an annotated 1.0 tag on the exact predecessor. Both annotations need
+a summary. The manifests in the corresponding commits must agree with these
+identities. `make release-audit AUDIT_MODE=--post-tag` performs the preservation
+layer's current artifact and local tag checks. No command creates a tag or
+pushes. Remote publication identity remains an explicit owner verification.
+
+Post-tag reports use separate files below `build/release/`; they never overwrite
+the pre-tag reports or hashes that establish full aggregate acceptance. A
+metadata-only check is not sufficient. Tests use in-memory tag observations and
+do not create release refs.

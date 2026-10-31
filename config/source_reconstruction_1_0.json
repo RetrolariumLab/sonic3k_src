@@ -249,7 +249,9 @@
   },
   "aggregate_gates": {
     "release-check": "preservation",
-    "source-1-check": "preservation"
+    "source-1-check": "preservation",
+    "pre_tag": ["make release-check"],
+    "post_tag": ["make release-audit AUDIT_MODE=--post-tag"]
   },
   "layout_deviations": [
     {

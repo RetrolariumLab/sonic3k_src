@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 66
+    "commit_count": 67
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -443,9 +443,15 @@
       "commits": ["22f5ca0a4959343032314ceb3b4a71e57275274a"]
     },
     {
+      "id": "change-421f632dcb8f",
+      "kind": "source_or_tooling",
+      "summary": "Remove unused transitional SMPS2ASM instrument encoders",
+      "commits": ["421f632dcb8fc99f2d1b1c10e523630eafbe437e"]
+    },
+    {
       "id": "current-release-stage",
       "kind": "source",
-      "summary": "Remove the unused transitional FM score-encoder library and enforce absence of SMPS2ASM macros in the current source tree.",
+      "summary": "Separate read-only pre-tag and post-tag acceptance, require exact annotated release identities and preserve completed aggregate evidence.",
       "commits": ["release-commit"]
     }
   ],
@@ -534,7 +540,7 @@
     "aggregate_acceptance": {
       "status": "satisfied",
       "evidence": {
-        "targets": ["source-2-check", "source-2-release-audit"],
+        "targets": ["source-2-check", "source-2-release-audit", "source-2-post-tag-audit"],
         "files": ["docs/source_reconstruction_2_0.md"]
       },
       "note": "The complete scope passed clean-clone acceptance at the recorded baseline; current release checks regenerate their evidence."
@@ -757,8 +763,8 @@
   ],
   "aggregate_gates": {
     "pre_tag": ["make source-2-check"],
-    "post_tag": ["make source-2-check"],
-    "tag_policy": "Checks neither require owner-deferred tags nor create or publish them."
+    "post_tag": ["make source-2-post-tag-audit"],
+    "tag_policy": "Pre-tag checks allow an owner-deferred predecessor tag. Post-tag checks require annotated current and predecessor tags on their exact commits; no check creates or publishes a tag."
   },
   "release_commands": [
     "source-2-check",
@@ -767,7 +773,8 @@
     "scaffold-check",
     "check-docs",
     "check-content-zero-edit",
-    "release-check"
+    "release-check",
+    "source-2-post-tag-audit"
   ],
   "semantic_source": {
     "manifest": "config/reconstruction/source_layout.json",

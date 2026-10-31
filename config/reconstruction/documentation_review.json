@@ -115,7 +115,7 @@
     {
       "path": "docs/verification.md",
       "decision": "reworked",
-      "reason": "Remove the obsolete claim that unused FM score encoders are required; reflect their deletion, the exact current source inventory and private audio ownership."
+      "reason": "Explain separate candidate and annotated-tag checks, immutable aggregate evidence, exact predecessor identities and the local publication boundary."
     },
     {
       "path": "README.md",

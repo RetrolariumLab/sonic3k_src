@@ -11,6 +11,7 @@ from scripts.runtime.contracts import bus_image, check_run_evidence, runtime_sig
 from scripts.validation.private_data import audit_repository
 from scripts.validation.audio_storage import check as check_audio_storage
 from scripts.authoring.driver_payloads import check as check_driver_payloads
+from scripts.validation.release_tags import audit_tags
 
 REQUIREMENTS = frozenset(
     (
@@ -154,15 +155,16 @@ def check_metadata():
     return manifest
 
 
-def audit():
+def audit(post_tag=False):
     manifest = check_metadata()
+    tags = audit_tags(manifest, post_tag)
     if (
         manifest["schema_version"] != 1
         or manifest["release_line"] != "1.0"
         or manifest["release_kind"] != "preservation"
     ):
         raise ValueError("Invalid preservation release identity")
-    if manifest["status"] not in ("development", "tag-ready"):
+    if manifest["status"] not in ("tag-ready", "tagged"):
         raise ValueError("Unknown preservation release status")
     if set(manifest["requirements"]) != REQUIREMENTS:
         raise ValueError("Release requirements are incomplete or unknown")
@@ -211,12 +213,6 @@ def audit():
     dirty = subprocess.check_output(["git", "-C", str(ROOT), "status", "--porcelain=v1", "--untracked-files=normal"])
     if dirty.strip():
         raise ValueError("Release requires a clean tracked tree and no unignored files")
-    if manifest["status"] == "tag-ready":
-        tag = subprocess.run(
-            ["git", "-C", str(ROOT), "show-ref", "--verify", "--quiet", "refs/tags/" + manifest["tag"]]
-        )
-        if tag.returncode == 0:
-            raise ValueError("The pending release tag already exists")
     report = {
         "schema_version": 1,
         "complete": True,
@@ -224,8 +220,10 @@ def audit():
         "profiles": list(profiles()),
         "relocation_variants": len(matrix["variants"]),
         "privacy": privacy,
+        "release_identity": tags,
     }
-    atomic(ROOT / "build/release/audit.json", (json.dumps(report, indent=2) + "\n").encode())
+    destination = "build/release/post-tag.json" if post_tag else "build/release/audit.json"
+    atomic(ROOT / destination, (json.dumps(report, indent=2) + "\n").encode())
     print("[OK] Preservation publication audit, runtime matrix and clean history")
 
 
@@ -262,11 +260,14 @@ def check():
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=("check", "audit", "metadata"))
+    parser.add_argument("--post-tag", action="store_true")
     args = parser.parse_args(argv)
+    if args.post_tag and args.command != "audit":
+        parser.error("--post-tag is available only for audit")
     if args.command == "check":
         check()
     elif args.command == "audit":
-        audit()
+        audit(post_tag=args.post_tag)
     else:
         check_metadata()
     return 0

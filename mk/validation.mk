@@ -7,7 +7,7 @@ source-2-audit:
 	$(PYTHON) -m scripts.run validation.source_2 metadata
 
 source-2-release-audit:
-	$(PYTHON) -m scripts.run validation.source_2 audit
+	$(PYTHON) -m scripts.run validation.source_2 audit $(AUDIT_MODE)
 
 source-2-check:
 	$(PYTHON) -m scripts.run validation.source_2 check
@@ -22,3 +22,7 @@ scaffold-check:
 
 check-source-ranges:
 	$(PYTHON) -m scripts.run validation.source_layout --built
+
+.PHONY: source-2-post-tag-audit
+source-2-post-tag-audit:
+	$(PYTHON) -m scripts.run validation.source_2 audit --post-tag
