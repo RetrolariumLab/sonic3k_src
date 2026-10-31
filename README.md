@@ -13,15 +13,19 @@ inputs. Direct original-image attract checks cover all five profiles, and the
 The complete Source Reconstruction 1.0 gate passed from a clean clone, including
 ROM-extracted SMPS storage, all-profile relocation and runtime. The 1.0 manifest
 records the accepted commit and source binding; the tag remains a maintainer
-action. Work continues toward 2.0 semantic source layout and editable format
-contracts. No Source Reconstruction 2.0 release is claimed.
+action. The 2.0 candidate adds complete semantic source ownership and headless
+content contracts. Its aggregate and clean-clone acceptance remain pending;
+consult the generated evidence before treating a candidate as accepted.
 
 ## Quick start
 
 Install Python 3.11 or later, GNU Make and Retrolarium Kit. Compiler sources,
 versions and binary hashes are pinned in `config/toolchain.json`; runtime
 requires the MAME build pinned in `config/runtime/emulator.json`. See
-[build instructions](docs/build.md) and [runtime setup](docs/runtime.md).
+[build instructions](docs/build.md) and [runtime setup](docs/runtime.md). Full
+content checks also need CMake 3.21+, a C++17 compiler and a public Core
+checkout containing the pinned revision. Set `RETROLARIUM_CORE_SOURCE` to that
+checkout; `make prepare-core` builds its backend only below ignored `build/`.
 
 Supply your own legally obtained ROM dumps. Accepted filenames and image
 identities are in `assets/manifest.json`. The importer checks their content
@@ -40,16 +44,19 @@ The regional S3 images differ at header byte 0x1f0; S3&K is the exact
 concatenation of S&K and S3 USA. Community complete builds and Knuckles in Sonic
 2 are excluded, as recorded in `config/revision_profiles.json`.
 
-With inputs split and the pinned emulator available, run the complete
-preservation gate in one invocation:
+With inputs split and the pinned emulator available, run the complete Source
+Reconstruction 2.0 gate in one invocation:
 
 ```sh
-make release-check
+make source-2-check
 ```
 
+This first runs the complete preservation gate, then source ownership, memory,
+Z80 and content checks. `make release-check` remains the standalone 1.0 gate.
 Run it serially; emulator scenarios must not overlap. `make test` works without
-ROM files and reports the private-input case as an explicit skip. `make` lists
-the public commands. Never commit `data/`, `build/`, ROM fragments or samples.
+ROM files and reports private-input cases as explicit skips.
+`make scaffold-check` checks the public structure without ROMs. `make` lists the
+public commands. Never commit `data/`, `build/`, ROM fragments or samples.
 
 Read the [documentation index](docs/index.md), [open work](docs/unknowns.md),
 [contribution rules](CONTRIBUTING.md) and [provenance](docs/provenance.md).

@@ -1,24 +1,29 @@
-# Unknowns and remaining work
+# Known limits and unresolved interpretation
 
-## Unaccepted release requirements
+These limits apply to the accepted preservation profiles and the 2.0 candidate.
+They are not substitutes for missing release evidence. Aggregate acceptance is
+recorded by the commands in [verification](verification.md).
 
-- Semantic subsystem source layout with documented size exceptions and a label
-  rename registry. The large imported entry units are still present.
-- Editable contracts/codecs for every stored and assembler-owned format,
-  allocator capacities, malformed/overflow rejection and zero-edit round trips.
-- Source Reconstruction 2.0 manifest/gate, final clean-clone evidence and owner
-  review. No release tag or publication is part of the automated work.
+- **Meaning of inherited labels.** Many `sub_*`, `loc_*`, `word_*` and `byte_*`
+  names retain address-based spelling. Semantic source ownership does not prove
+  their individual meanings. The label registry records no speculative renames.
+- **Runtime reach.** The 165-case matrix checks finite attract paths and nine
+  RAM cells. It does not establish exhaustive gameplay or hardware equivalence.
+- **Host coverage.** Full runtime is supported only by the pinned Windows MAME
+  host. Portable headless tests do not certify other runtime platforms.
+- **HPZ shared state.** The alternate palette initializer is also copied as a
+  normal palette state and yields an odd script pointer. Its first eight bytes
+  remain immutable. This is source-derived behavior; a runtime crash is not
+  claimed. See [indexed palettes](indexed_palettes.md).
+- **Stored animation records.** Explicit stored continuations and terminal tails
+  remain typed and preserved. Storage does not prove that every record is
+  reached in the default game path. Registered consumers and ABI choices are
+  documented in [raw animations](raw_animations.md).
+- **Editing limits.** Capacities and structural pointers stay fixed. Variable
+  allocation, expanded ROMs, engine merging and GUI editors are outside this
+  release. Compressor identity for changed content is not promised.
+- **Rights.** Upstream annotation has no granted license. Reconstruction grants
+  no rights to original code, scores, samples or other game data.
 
-## Preserved source uncertainty
-
-Many imported `sub_*`, `loc_*`, `word_*` and `byte_*` labels still express
-addresses rather than established meaning. A coincident address is not evidence
-that two products share a semantic owner. Interior-byte lock-on aliases are
-validated as external addresses without inventing a consumer interpretation.
-
-Original comments identify several erroneous absolute vector-area reads. They
-are deliberately preserved and named in source, not repaired. The upstream
-annotation grants no explicit license; its status remains `license_not_granted`.
-Runtime currently observes a finite attract path and nine RAM cells, so it is
-not exhaustive gameplay coverage. Host support beyond the pinned Windows runtime
-is not claimed by portable ROM-less tests.
+Original vector-area reads and other known bugs remain preserved. Resolved
+workflow questions are in [resolved unknowns](resolved_unknowns.md).

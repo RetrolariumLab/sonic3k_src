@@ -254,10 +254,10 @@
   },
   "layout_deviations": [
     {
-      "rule_id": "source-root-entry",
-      "actual_path": ["s3.s", "sonic3k.s"],
-      "reason": "Imported sibling engines retain their root entries for the preservation milestone; semantic subsystem extraction belongs to the next milestone.",
-      "equivalent_control": "Profile-owned entries, exact builds, source-derived return coverage and the architecture map keep ownership explicit."
+      "rule_id": "sibling-product-entries",
+      "actual_path": ["src/revisions/s3.s", "src/revisions/sk.s"],
+      "reason": "The accepted products retain separate sibling engines; regional S3 profiles share one entry and S3&K composes verified components.",
+      "equivalent_control": "Profile-owned entries, complete semantic ownership, historical procedure preservation and exact images check every product."
     }
   ],
   "licensing": [

@@ -3,8 +3,10 @@
 The models in scripts/authoring accept bytes and semantic values and return
 encoded bytes. They do not write ROMs. Callers must check the product ABI,
 target profile, decoded capacity and immutable storage allocation before any
-write. The public aggregate registry and complete container round trip remain
-under development; these APIs alone do not establish Source Reconstruction 2.0.
+write. The public registry covers every extracted input and the declared
+retained assembler resource families. Complete content checks complement the
+full preservation/runtime gate; these APIs alone do not establish release
+acceptance.
 
 ## Compression
 
@@ -67,8 +69,8 @@ immutable allocation checks remain necessary before writes.
 
 Make test discovers normal package tests under tests/authoring. Fixtures are
 synthetic. They cover field semantics, edits, malformed records, capacities and
-ABI mismatches. Complete original-resource and rebuilt-container checks remain
-the next integration step.
+ABI mismatches. The complete original-resource and rebuilt-container commands
+are described below; synthetic tests never substitute for those commands.
 
 ## Immutable write allocations
 
@@ -112,8 +114,8 @@ Make check-content-zero-edit then copies the retained assembly into that
 workspace and builds all five preservation containers from those encoded inputs.
 Every output must match its original ROM, including both composite halves.
 Reports bind assembly, authoring tooling and registry identities. These content
-checks do not replace the full preservation/runtime gate or the remaining source
-ownership work.
+checks do not replace the full preservation/runtime gate or the built source
+ownership checks.
 
 Core scratch cleanup can leave a directory in ignored build storage when a
 Windows process still holds a temporary file. Execution, encoding, output
@@ -202,11 +204,12 @@ receive the component offset. The encoder preserves stored records after a
 terminal command without asserting they are reachable through the default
 initializer graph.
 
-These 13 complete source files join the 613 encoded mapping/DPLC/animation files
-in the content workspace. All 626 encoded owners are hashed before the complete
-five-profile container rebuild. Contract checks and synthetic edit tests need no
-ROM inputs; actual byte and container checks require the private extracted
-assets and preservation builds.
+Palette groups join raw-animation and indexed-palette fragments through one
+shared source composer. Its 264 fragments produce 212 complete owner files
+alongside the 613 whole-file mapping/DPLC/animation resources. Every final
+source owner is hashed before the five-profile container rebuild. Contract
+checks and synthetic edit tests need no ROM inputs; actual byte and container
+checks require the private extracted assets and preservation builds.
 
 ## Composing inline source owners
 

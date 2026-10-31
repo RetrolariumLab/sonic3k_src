@@ -35,4 +35,6 @@ not substitutes for these public commands.
 tests, private inputs, clean assembly, identity, complete relocation, relocated
 runtime, privacy/publication audit and clean tracked tree. Source 2.0
 additionally requires semantic source ownership and validated editable data
-contracts. See [remaining work](unknowns.md).
+contracts. Run `make source-2-check` for both layers; `make scaffold-check`
+checks public structure without ROMs. See the
+[2.0 gate](source_reconstruction_2_0.md) and [known limits](unknowns.md).

@@ -221,6 +221,10 @@ def main(argv=None):
             "make build-relocated        build the complete procedure matrix\n"
             "make check-relocated        verify coverage and code movement\n"
             "make release-check          run the complete preservation gate\n"
+            "make source-2-check         run preservation plus the full 2.0 gate\n"
+            "make scaffold-check         validate public structure without ROMs\n"
+            "make check-docs             review documentation links and coverage\n"
+            "make check-content-zero-edit rebuild all profiles from encoded resources\n"
             "make check-numeric-operands  audit explicit numeric address forms\n"
             "make verify-emulator        prepare the pinned MAME executable\n"
             "make trace                  check preservation attract RAM\n"
@@ -229,6 +233,9 @@ def main(argv=None):
             "make audit-private          inspect every reachable Git blob\n"
             "make clean                  remove only disposable build outputs"
         )
+        from scripts.build.make_interface import recipes
+
+        print("Public targets: " + ", ".join(sorted(recipes(ROOT))))
     elif args.command == "init":
         if args.rom_root is None:
             parser.error("init needs --rom-root")

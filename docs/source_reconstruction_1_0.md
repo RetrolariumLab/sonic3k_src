@@ -1,32 +1,24 @@
 # Source Reconstruction 1.0
 
-The preservation contract is `config/source_reconstruction_1_0.json`. Its
-complete clean-clone aggregate run passed at the commit recorded under
-`evidence.accepted_baseline`. All five images, fixed interfaces, audio storage,
-32 relocation groups, 165 runtime cases and the clean history were checked. The
-manifest is tag-ready; tags and publication remain maintainer actions.
+The preservation manifest is `config/source_reconstruction_1_0.json`. Its
+`evidence.accepted_baseline` records historical clean-clone acceptance: all five
+exact images, the second-cartridge ABI, audio storage, 32 relocation groups, 165
+runtime cases and clean history. The accepted predecessor metadata commit is
+pinned by the 2.0 manifest. No release tag is created automatically.
 
 After importing user images, run `make release-check` (alias
-`make source-1-check`). The fail-fast sequence is lint, tests, input/tool pins,
-reproducible extraction, clean all-profile assembly and byte identity,
-independent ABI/numeric audits, the full relocation matrix, preservation and
-relocated runtime, publication/privacy checks and a clean tracked tree. Golden
-generation is not part of the gate. No saved research artifact supplies an input
-to the gate; everything required is reproducible from a clean clone and the
-declared private dependencies.
+`make source-1-check`). The fail-fast sequence is lint and metadata, tests,
+private inputs and tool pins, extraction, clean all-profile assembly and byte
+identity, independent ABI/numeric audits, complete relocation, preservation and
+relocated runtime, privacy/publication checks and a clean tracked tree. Golden
+generation is separate and always uses original inputs.
 
-The sibling engine entries temporarily remain at the root. This is an explicit
-layout deviation for the preservation milestone, with profile-owned entries,
-code/data maps, source-derived return coverage and exact assembly as controls.
-Semantic source organization and editable content formats remain the next
-milestone's additional requirements. Passing a content check cannot replace any
-preservation guarantee.
+The current 1.0 manifest stays in development while source evolves toward 2.0.
+Historical acceptance does not certify current code. Source 2.0 invokes the
+entire preservation gate again before additional controls. Source ownership and
+content checks cannot replace any preservation guarantee.
 
-Tags and publication remain maintainer actions. A candidate manifest, partial
-matrix, original-image-only runtime run or passing byte comparison alone does
-not establish completion of this release line.
-
-The manifest is now `tag-ready` following complete clean-clone acceptance.
-Publication metadata records that source binding without changing assembly,
-inputs, compiler settings, scenarios or expected state. Metadata is checked
-before expensive stages and again against actual evidence during the audit.
+The historical baseline used root entry units; current entries live under
+`src/revisions/`. [Source layout](source_layout.md) describes semantic owners
+and independent preservation comparison. Tags and publication remain maintainer
+actions.

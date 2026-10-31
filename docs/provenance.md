@@ -87,8 +87,8 @@ licenses. No bundled compiler binaries are needed for the current host.
 
 ## Audio storage migration and helper license
 
-The initially imported music/SFX score assembly has been replaced in the final
-tree by exact ROM extraction recipes: 219 S3 and 198 S&K streams. Their internal
+The initial import excludes music/SFX score assembly and inline audio payloads.
+Exact ROM extraction recipes cover 219 S3 and 198 S&K streams. Their internal
 score labels are not referenced by retained executable source; outer storage
 labels and driver pointer tables remain source-owned. The full score macro
 library is removed.
@@ -99,3 +99,10 @@ S1SMPS2ASM 1.1 by Marc Gordon and explicitly grants permission to use, copy,
 modify and distribute that software. The notice is retained in the helper file.
 This file-specific grant does not change the general upstream annotation status
 or grant rights to game code, scores or sample data.
+
+## Label provenance
+
+The canonical
+[label rename registry](../config/reconstruction/label_renames.json) records the
+retained upstream spellings. Address-based names are preserved when their
+meaning is uncertain; path ownership does not establish a new label meaning.

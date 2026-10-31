@@ -146,3 +146,5 @@ check-z80-contract:
 
 check-z80-driver:
 	$(PYTHON) -m scripts.run validation.z80_driver --built
+
+include mk/validation.mk

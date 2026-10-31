@@ -5,10 +5,10 @@
 
 | Profile | Entry or composition     | Bytes   | Region define      | Runtime machine                         |
 | ------- | ------------------------ | ------- | ------------------ | --------------------------------------- |
-| `s3-us` | `s3.s`                   | 2097152 | `S3_Region=85` (U) | `genesis`                               |
-| `s3-eu` | `s3.s`                   | 2097152 | `S3_Region=69` (E) | `megadriv`                              |
-| `s3-jp` | `s3.s`                   | 2097152 | `S3_Region=74` (J) | `megadrij`                              |
-| `sk`    | `sonic3k.s`              | 2097152 | none               | `genesis`, empty upper cartridge window |
+| `s3-us` | `src/revisions/s3.s`     | 2097152 | `S3_Region=85` (U) | `genesis`                               |
+| `s3-eu` | `src/revisions/s3.s`     | 2097152 | `S3_Region=69` (E) | `megadriv`                              |
+| `s3-jp` | `src/revisions/s3.s`     | 2097152 | `S3_Region=74` (J) | `megadrij`                              |
+| `sk`    | `src/revisions/sk.s`     | 2097152 | none               | `genesis`, empty upper cartridge window |
 | `s3k`   | `sk` followed by `s3-us` | 4194304 | component-owned    | `genesis`                               |
 
 The accepted S3 regional images differ at exactly byte 0x1f0, the header region
