@@ -68,9 +68,12 @@ files stay under `build/runtime/tmp`.
 A Windows process snapshot records descendant relationships and creation times
 while the owned runner is active. Cleanup checks creation time and terminates
 through the same process handle, preventing a reused PID from redirecting it to
-a foreign process. Leftovers fail the run even when they are cleaned. Failure
-and timeout paths apply the same ownership rules; unrelated processes remain
-untouched. The runtime evidence signature also binds these runner sources.
+a foreign process. Owned leftovers fail the run even when they are cleaned.
+Failure and timeout paths apply the same ownership rules; unrelated processes
+remain untouched. A foreign emulator started during the movie is not an owned
+leftover and cannot replace the movie's own success or failure. The next movie
+waits for active emulators before starting. The runtime evidence signature also
+binds these runner sources.
 
 ## Extended controller routes and cartridge saves
 

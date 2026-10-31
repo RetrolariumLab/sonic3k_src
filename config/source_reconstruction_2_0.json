@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 76
+    "commit_count": 77
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -503,9 +503,15 @@
       "commits": ["cf18ef8bc68a275b3732805088da510fea09868e"]
     },
     {
+      "id": "change-aa8cfd9bed10",
+      "kind": "tooling",
+      "summary": "Validate inactive preservation state through the active release candidate",
+      "commits": ["aa8cfd9bed103b6e19570f28d686834cd668ec8d"]
+    },
+    {
       "id": "current-release-stage",
       "kind": "tooling",
-      "summary": "Validate preservation-layer status against the already verified active release identity, retaining an inactive development manifest under a ready 2.0 candidate without weakening active 1.0 or annotated-tag checks.",
+      "summary": "Distinguish foreign emulators started during a movie from owned leftovers, retain exact owned cleanup and preserve the runner's original failure.",
       "commits": ["release-commit"]
     }
   ],

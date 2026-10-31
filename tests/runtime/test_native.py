@@ -140,6 +140,13 @@ class IsolatedMovieTests(unittest.TestCase):
                 self.run_with(patches)
             terminate.assert_called_once_with(11, 100)
 
+    def test_success_preserves_a_foreign_process_started_during_the_movie(self):
+        proc = Mock(pid=10)
+        proc.wait.return_value = 0
+        foreign = {"pid": 12, "created": 200, "ancestors": [9]}
+        mocks = self.run_with(self.invoke(proc, [[], [foreign]]))
+        mocks[-1].assert_not_called()
+
     def test_failed_movie_still_checks_ownership_and_does_not_kill_foreign_process(self):
         proc = Mock(pid=10)
         proc.wait.side_effect = OSError("synthetic runner failure")
@@ -147,7 +154,7 @@ class IsolatedMovieTests(unittest.TestCase):
         patches = self.invoke(proc, [[], [foreign]])
         with patch.object(native, "terminate_owned") as terminate:
             patches.pop()
-            with self.assertRaisesRegex(RuntimeError, "unrelated processes preserved"):
+            with self.assertRaisesRegex(OSError, "synthetic runner failure"):
                 self.run_with(patches)
             terminate.assert_not_called()
 

@@ -168,7 +168,7 @@ def run_movie(args, log, *, nvram=None):
             leftovers = owned_leftovers(rows, owned)
             for row in leftovers:
                 terminate_owned(row["pid"], row["created"])
-            if rows:
+            if leftovers:
                 foreign = [row["pid"] for row in rows if row not in leftovers]
                 raise RuntimeError(
                     "MAME remained after the run; owned cleanup attempted for "

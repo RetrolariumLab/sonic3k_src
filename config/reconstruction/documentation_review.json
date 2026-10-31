@@ -100,7 +100,7 @@
     {
       "path": "docs/runtime.md",
       "decision": "reworked",
-      "reason": "Document canonical controller-movie bytes across Windows and Git, official text-style coverage, exact original provenance and finite runtime scope."
+      "reason": "Describe exact owned-process cleanup without failing or masking a movie result when another repository starts its own emulator, together with isolated state and the extended controller/SRAM evidence."
     },
     {
       "path": "docs/source_layout.md",
