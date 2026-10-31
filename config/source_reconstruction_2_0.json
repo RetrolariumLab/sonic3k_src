@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 71
+    "commit_count": 72
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -473,9 +473,15 @@
       "commits": ["ed755595ff434265dcd1534c8caa16bb082f35cc"]
     },
     {
+      "id": "change-3390f1ba112d",
+      "kind": "tooling",
+      "summary": "Verify extended controller routes and real cartridge SRAM reload",
+      "commits": ["3390f1ba112d3c56cdc0ba71070f8b63c202e731"]
+    },
+    {
       "id": "current-release-stage",
       "kind": "tooling",
-      "summary": "Compare extended original-input controller routes, require ordered reached states and active progress, and verify real cartridge SRAM reload across isolated emulator processes.",
+      "summary": "Prove bounded nonzero edits through actual five-profile ROM rebuilding, independently derived consumer and checksum changes, unchanged assembler symbols and rejected invalid writes.",
       "commits": ["release-commit"]
     }
   ],
@@ -515,15 +521,17 @@
     "content_formats": {
       "status": "satisfied",
       "evidence": {
-        "targets": ["check-content-contract", "check-content-zero-edit"],
+        "targets": ["check-content-contract", "check-content-zero-edit", "check-content-edits"],
         "files": [
           "config/authoring/data_formats.json",
           "docs/data_formats.md",
           "scripts/build/source_inputs.py",
-          "tests/build/test_assembly_workspace.py"
+          "tests/build/test_assembly_workspace.py",
+          "config/authoring/edit_probes.json",
+          "scripts/authoring/edited_containers.py"
         ]
       },
-      "note": "The complete scope passed clean-clone acceptance at the recorded baseline; current release checks regenerate their evidence."
+      "note": "The retained baseline is historical acceptance. Current aggregate checks require both complete zero-edit containers and bounded real edits in all five ROMs."
     },
     "regional_profiles": {
       "status": "satisfied",
@@ -801,7 +809,8 @@
     "check-docs",
     "check-content-zero-edit",
     "release-check",
-    "source-2-post-tag-audit"
+    "source-2-post-tag-audit",
+    "check-content-edits"
   ],
   "semantic_source": {
     "manifest": "config/reconstruction/source_layout.json",
@@ -817,7 +826,9 @@
     "raw_groups": 233,
     "raw_source_entries": 735,
     "indexed_palette_groups": 2,
-    "gui_editors": false
+    "gui_editors": false,
+    "nonzero_edit_probes": 2,
+    "edited_containers": 5
   },
   "evidence": {
     "aggregate": "build/release/source-2-check.json",
@@ -834,6 +845,7 @@
       "runtime_cases": 165,
       "report": "build/release/source-2-check.json",
       "note": "Historical clean-clone acceptance; generated current reports must independently pass for a changed HEAD."
-    }
+    },
+    "content_edits": "build/authoring/edited-containers.json"
   }
 }

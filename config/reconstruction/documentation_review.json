@@ -30,7 +30,7 @@
     {
       "path": "docs/content_codecs.md",
       "decision": "reworked",
-      "reason": "Retain the cohesive topic and state the single-root AS contract, hash-bound private input staging and real-AS edit regression evidence."
+      "reason": "Require real bounded palette edits through actual five-profile ROM assembly, independently calculated exact differences and unchanged symbols, beyond zero-edit round trips."
     },
     {
       "path": "docs/data_formats.md",
@@ -105,7 +105,7 @@
     {
       "path": "docs/source_reconstruction_2_0.md",
       "decision": "reworked",
-      "reason": "Retain the reader journey and replace pending candidate claims with actual clean-clone acceptance, inherited preservation boundaries and reproducible pinned-tool setup."
+      "reason": "Require real bounded palette edits through actual five-profile ROM assembly, independently calculated exact differences and unchanged symbols, beyond zero-edit round trips."
     },
     {
       "path": "docs/unknowns.md",
@@ -115,7 +115,7 @@
     {
       "path": "docs/verification.md",
       "decision": "reworked",
-      "reason": "Explain separate candidate and annotated-tag checks, immutable aggregate evidence, exact predecessor identities and the local publication boundary."
+      "reason": "Require real bounded palette edits through actual five-profile ROM assembly, independently calculated exact differences and unchanged symbols, beyond zero-edit round trips."
     },
     {
       "path": "README.md",

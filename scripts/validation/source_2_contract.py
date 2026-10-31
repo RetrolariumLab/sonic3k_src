@@ -36,7 +36,7 @@ STAGES = (
             "check-z80-driver",
         ),
     ),
-    ("encoded-content", ("check-content-contract", "check-content-zero-edit")),
+    ("encoded-content", ("check-content-contract", "check-content-zero-edit", "check-content-edits")),
     ("documentation", ("check-docs",)),
     ("publication-audit", ("source-2-release-audit",)),
 )

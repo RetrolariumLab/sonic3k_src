@@ -16,3 +16,8 @@ roundtrip-formats: verify-all check-core
 
 check-content-zero-edit: roundtrip-formats
 	$(PYTHON) -m scripts.run authoring.formats_workflow zero-edit
+
+.PHONY: check-content-edits
+
+check-content-edits: check-content-zero-edit
+	$(PYTHON) -m scripts.run authoring.edited_containers check

@@ -72,6 +72,9 @@ def audit(post_tag=False):
     release.audit(post_tag=post_tag)  # Recheck artifacts without replacing pre-tag acceptance reports.
     content = load("build/authoring/zero-edit-containers.json")
     validate_content(content, manifest, source, tooling, image_records())
+    from scripts.authoring.edited_containers import audit as audit_edited
+
+    audit_edited()
     roundtrip = load("build/authoring/roundtrip.json")
     if (
         roundtrip.get("complete") is not True
@@ -113,6 +116,10 @@ def audit(post_tag=False):
                 "build/release/audit.json",
                 "build/authoring/roundtrip.json",
                 "build/authoring/zero-edit-containers.json",
+                "build/authoring/edited-containers.json",
+                "build/runtime/evidence/check.json",
+                "build/runtime/evidence/matrix.json",
+                "build/runtime/evidence/extended.json",
                 "build/release/documentation.json",
             )
         },

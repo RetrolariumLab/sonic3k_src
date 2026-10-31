@@ -33,3 +33,9 @@ private inputs. The manifest records that accepted commit and its source and
 tooling identities. Current evidence must still be regenerated for a changed
 HEAD; standalone content reports or an older predecessor run do not establish
 current acceptance. The manifest is tag-ready and creates no tag automatically.
+
+Current content acceptance additionally requires `make check-content-edits`: two
+nonzero typed palette edits must rebuild all five ROMs with exact independently
+derived changes and unchanged assembler symbols. Its generated evidence is
+required by the final audit; a successful zero-edit report alone is
+insufficient.

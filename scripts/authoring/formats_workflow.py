@@ -271,6 +271,9 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if args.command == "check-contract":
         catalog, assets = load_catalog()
+        from scripts.authoring.edited_containers import probe_definitions
+
+        probe_definitions(catalog, assets)
         source_catalog = assembly_workflow.catalog()
         palette_catalog, palette_sources = palette_workflow.catalog()
         raw_catalog, raw_sources = raw_workflow.catalog()

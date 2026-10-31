@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "probes": [
+    {
+      "profile": "s3-us",
+      "asset": "General/Competition Menu/Palettes/1.bin",
+      "color": 1,
+      "channel": "red"
+    },
+    {
+      "profile": "sk",
+      "asset": "General/Blue Sphere/Palettes/Title 1.bin",
+      "color": 1,
+      "channel": "blue"
+    }
+  ]
+}

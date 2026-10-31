@@ -227,3 +227,32 @@ The palette workflow exposes prepared patches as well as its standalone round
 trip. Additional inline content families use the same composer and contribute
 their own semantic validation before source composition. Each final owner has a
 single output hash and the report retains separate encoded-span identities.
+
+## Actual bounded edits
+
+`make check-content-edits` first requires the complete encoded-resource and
+zero-edit container checks. It then copies that validated source/input tree to
+another ignored workspace and changes one RGB channel bit in one independently
+owned palette per engine. The public probe declaration names the resources and
+semantic edit coordinates, without copying their private payloads.
+
+The check exercises the actual content writer. A foreign-profile packet and an
+overflowing model must fail before changing their allocated file. The valid
+edits keep the original storage capacities. All five ROMs are assembled from the
+edited workspace, with no original-tree include fallback.
+
+Expected payload positions come independently from the preservation AS includes,
+including every active consumer and the attached S3 component offset. Expected
+images are constructed from verified originals plus those exact encoded bytes;
+the cartridge word checksum is computed independently of the build pipeline.
+Every rebuilt byte must agree. S3K must also equal the two independently rebuilt
+siblings concatenated in the declared order. Every assembler symbol must retain
+its normal value in each base profile.
+
+The generated `build/authoring/edited-containers.json` binds the current source,
+tooling, encoded baseline, exact changed ranges, owned consumer allocations,
+actual image hashes, symbol listings and unchanged-allocation rejection checks.
+The final 2.0 audit rechecks these files and every other source/input hash.
+Preservation outputs and private original ROMs remain untouched. This proves
+fixed-footprint palette editing; it does not claim variable allocation or
+successful gameplay for arbitrary edits.
