@@ -66,7 +66,10 @@ def definitions():
         movie = inside(case["movie"])
         if not movie.is_relative_to((ROOT / "scenarios/extended").resolve()):
             raise ValueError("Extended movie leaves its scenario owner")
-        text = movie.read_text(encoding="utf-8")
+        raw = movie.read_bytes()
+        if b"\r" in raw:
+            raise ValueError("Controller movies require canonical LF bytes; run make format")
+        text = raw.decode("utf-8")
         if "source mame\n" not in text or "frames " + str(case["frames"]) + "\n" not in text:
             raise ValueError("Extended movie budget/source differs")
         # Public routes use controller input only; resets and injected state are absent.

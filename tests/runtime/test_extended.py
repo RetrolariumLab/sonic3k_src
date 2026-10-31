@@ -83,3 +83,24 @@ class ExtendedRouteTests(unittest.TestCase):
         )
         with self.assertRaisesRegex(ValueError, "work RAM"):
             extended.cell_addresses(contract, case, {"Player": 0x200000, "x_pos": 16})
+
+    def test_noncanonical_movie_is_rejected_before_capture_provenance(self):
+        from pathlib import Path
+        import tempfile
+
+        from scripts.build.project import ROOT
+
+        base = ROOT / "build/tests"
+        base.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=base) as folder:
+            root = Path(folder)
+            contract = load(extended.CONFIG)
+            movie = root / contract["cases"][0]["movie"]
+            movie.parent.mkdir(parents=True)
+            movie.write_bytes(b"source mame\r\n")
+            with (
+                patch.object(extended, "ROOT", root),
+                patch.object(extended, "inside", side_effect=lambda name: root / name),
+            ):
+                with self.assertRaisesRegex(ValueError, "canonical LF"):
+                    extended.definitions()

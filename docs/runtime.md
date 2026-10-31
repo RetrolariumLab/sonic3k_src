@@ -107,3 +107,13 @@ visits, stationary progress observations and stale evidence fail acceptance.
 This remains finite RAM coverage: it does not prove pixel output, full-game
 completion or every ending. Extended relocation uses one declared cohort
 variant; all 32 variants retain the complete short-attract comparison.
+
+## Canonical movie text
+
+Controller movies use UTF-8 text with LF line endings. Git attributes and
+`make format` must produce the same bytes in a Windows working tree and a clean
+checkout. The pinned Kit text selector does not include `.rlmovie`, so the
+repository checks disposable `.txt` copies through its official text contract.
+Read-only lint never rewrites the movies; explicit formatting copies back only
+normalized text. Extended capture rejects CRLF before creating provenance.
+Line-ending normalization preserves every controller record and observation.

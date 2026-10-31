@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 74
+    "commit_count": 75
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -491,9 +491,15 @@
       "commits": ["2d59442d2369ac0b20ca183ec048e5e7c57d506d"]
     },
     {
-      "id": "current-release-stage",
+      "id": "change-3e3a03255437",
       "kind": "documentation",
-      "summary": "Present the reconstruction fork and complete original contributor credits, reconcile current acceptance commands and retain all historical provenance and rights boundaries.",
+      "summary": "Expose reconstruction fork identity and retain complete contributor credits",
+      "commits": ["3e3a0325543796f0910a0d30d68e9142b4002f01"]
+    },
+    {
+      "id": "current-release-stage",
+      "kind": "tooling",
+      "summary": "Keep controller movie bytes canonical across Windows working trees and Git checkouts, validate them through the pinned official text contract and bind original provenance to unchanged LF controller records.",
       "commits": ["release-commit"]
     }
   ],

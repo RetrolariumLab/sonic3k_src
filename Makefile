@@ -48,10 +48,12 @@ clean:
 
 lint:
 	$(RLTOOL) lint --project .
+	$(PYTHON) -m scripts.run validation.movie_style
 	$(PYTHON) -m scripts.run validation.assembly_style
 
 format:
 	$(RLTOOL) lint --project . --fix --only text
+	$(PYTHON) -m scripts.run validation.movie_style --fix
 	$(RLTOOL) lint --project . --fix --only assembly
 	$(PYTHON) -m scripts.run validation.assembly_style --fix
 	$(RLTOOL) format --project .

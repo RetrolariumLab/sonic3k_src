@@ -9,7 +9,7 @@
       "profile": "s3-us",
       "case": "long-s3",
       "reference_sha256": "d6404843c5ba32486f4c8c744acb7e1932069376960d886b1de37969787d3f9c",
-      "movie_sha256": "3be9d053356d4936bafcac8e8842989c34388538d45de03b4884fe15d359761f",
+      "movie_sha256": "ec5a0f80735ab0ad5a670c7797b91213d5e7194c1dc1a7ed62da350c064a5dd6",
       "check_sha256": "839f6b26931d0d2f3dd46d082e1b0427381849a9e37fb262f5c1b87d7c319b18",
       "emulator_sha256": "c9464e306ceb911e37c9b7227c0647dfcfbe7377b86ca508c04661dbf32e6c36",
       "nvram_sha256": null
@@ -18,7 +18,7 @@
       "profile": "s3-eu",
       "case": "long-s3",
       "reference_sha256": "9a2a9a93cdb906628a9dafe6e0e16b2f5505498be12de46b43e69a60d291fc69",
-      "movie_sha256": "3be9d053356d4936bafcac8e8842989c34388538d45de03b4884fe15d359761f",
+      "movie_sha256": "ec5a0f80735ab0ad5a670c7797b91213d5e7194c1dc1a7ed62da350c064a5dd6",
       "check_sha256": "82b883b0d877e471653fb553ef4fbb907deed80f01ba06251d4b9ebbb209be04",
       "emulator_sha256": "c9464e306ceb911e37c9b7227c0647dfcfbe7377b86ca508c04661dbf32e6c36",
       "nvram_sha256": null
@@ -27,7 +27,7 @@
       "profile": "s3-jp",
       "case": "long-s3",
       "reference_sha256": "f3314b3603fa717cbfecacab3e4b39e03a130d61d058d53fa0acceed17b07012",
-      "movie_sha256": "3be9d053356d4936bafcac8e8842989c34388538d45de03b4884fe15d359761f",
+      "movie_sha256": "ec5a0f80735ab0ad5a670c7797b91213d5e7194c1dc1a7ed62da350c064a5dd6",
       "check_sha256": "09188ac34a02650378ca177266dc770310b72fe13a00f9c9b4fd5d15538e801a",
       "emulator_sha256": "c9464e306ceb911e37c9b7227c0647dfcfbe7377b86ca508c04661dbf32e6c36",
       "nvram_sha256": null
@@ -36,7 +36,7 @@
       "profile": "sk",
       "case": "long-sk",
       "reference_sha256": "6e12e6b33c26ebfcd0be433251d21cf6284eafe9f71b027bda3767ae59affec1",
-      "movie_sha256": "622c42ffb5636b4e597d804796578d25f28bbc8768236b30168165552b27119c",
+      "movie_sha256": "2c1ab9f3ef759388357e8e0ddb10498472d90fb87f223ac86121c5a23c3b1fa6",
       "check_sha256": "b1b702c84a22a656f795a6264290f2cd6afb445fad30f7e5cfb13cad69e983db",
       "emulator_sha256": "c9464e306ceb911e37c9b7227c0647dfcfbe7377b86ca508c04661dbf32e6c36",
       "nvram_sha256": null
@@ -45,7 +45,7 @@
       "profile": "s3k",
       "case": "long-lockon",
       "reference_sha256": "fba0677fde9f76df93f3e98d6310d8af68b9847bde16e253d73cd4dd8134ed23",
-      "movie_sha256": "c9c409ce11378331b9469058604b525341dbe38916d63b198a14c5e2c8d61ccc",
+      "movie_sha256": "281f9ed09de209633e627924b4d7a484b1145b0013761e6f0d916bca927829b0",
       "check_sha256": "ba4b5de71ddc08dbd0441c43e9f1c48aeb259890aa4fb001ee95fe4f5485387f",
       "emulator_sha256": "c9464e306ceb911e37c9b7227c0647dfcfbe7377b86ca508c04661dbf32e6c36",
       "nvram_sha256": null
@@ -54,7 +54,7 @@
       "profile": "s3-us",
       "case": "competition",
       "reference_sha256": "d6404843c5ba32486f4c8c744acb7e1932069376960d886b1de37969787d3f9c",
-      "movie_sha256": "f912ea223d98397ac017e0cadb122e4a1ef31950a1c07dbed58e8399139baaab",
+      "movie_sha256": "5d0971785ee94447d1426d5ca5565cf491a3d0b47caddd583c4e35e63fc6fb91",
       "check_sha256": "dbc388f57bba4fd6ad31a96555326c867e2aa9d64d81647d7043fdf2aadd6a67",
       "emulator_sha256": "c9464e306ceb911e37c9b7227c0647dfcfbe7377b86ca508c04661dbf32e6c36",
       "nvram_sha256": null
@@ -63,7 +63,7 @@
       "profile": "s3-eu",
       "case": "competition",
       "reference_sha256": "9a2a9a93cdb906628a9dafe6e0e16b2f5505498be12de46b43e69a60d291fc69",
-      "movie_sha256": "f912ea223d98397ac017e0cadb122e4a1ef31950a1c07dbed58e8399139baaab",
+      "movie_sha256": "5d0971785ee94447d1426d5ca5565cf491a3d0b47caddd583c4e35e63fc6fb91",
       "check_sha256": "9d06493583894012fd530d05be52da9a323b9217fec65313c8c8c86eb59b8a61",
       "emulator_sha256": "c9464e306ceb911e37c9b7227c0647dfcfbe7377b86ca508c04661dbf32e6c36",
       "nvram_sha256": null
@@ -72,7 +72,7 @@
       "profile": "s3-jp",
       "case": "competition",
       "reference_sha256": "f3314b3603fa717cbfecacab3e4b39e03a130d61d058d53fa0acceed17b07012",
-      "movie_sha256": "f912ea223d98397ac017e0cadb122e4a1ef31950a1c07dbed58e8399139baaab",
+      "movie_sha256": "5d0971785ee94447d1426d5ca5565cf491a3d0b47caddd583c4e35e63fc6fb91",
       "check_sha256": "b00ee3f4d7514e108252eebe1a138971c0b338c90d29c3acfd89350440818493",
       "emulator_sha256": "c9464e306ceb911e37c9b7227c0647dfcfbe7377b86ca508c04661dbf32e6c36",
       "nvram_sha256": null
@@ -81,7 +81,7 @@
       "profile": "s3k",
       "case": "competition",
       "reference_sha256": "fba0677fde9f76df93f3e98d6310d8af68b9847bde16e253d73cd4dd8134ed23",
-      "movie_sha256": "f912ea223d98397ac017e0cadb122e4a1ef31950a1c07dbed58e8399139baaab",
+      "movie_sha256": "5d0971785ee94447d1426d5ca5565cf491a3d0b47caddd583c4e35e63fc6fb91",
       "check_sha256": "d4b95472180170578532f376cbbf4e71b662a7d432f0eab64c6199bb7123aeb6",
       "emulator_sha256": "c9464e306ceb911e37c9b7227c0647dfcfbe7377b86ca508c04661dbf32e6c36",
       "nvram_sha256": null
@@ -90,7 +90,7 @@
       "profile": "sk",
       "case": "knuckles-sk",
       "reference_sha256": "6e12e6b33c26ebfcd0be433251d21cf6284eafe9f71b027bda3767ae59affec1",
-      "movie_sha256": "5b73bc6bd547198694f394d99b600fe913a86ae1f0fbbd86d44b0112777bfa19",
+      "movie_sha256": "f4ae8622bcb6b4b02baf46549b520cf60b3af48397efcb02118b8bb90de3cde5",
       "check_sha256": "b6e8a23eb4b08fb865a28dc58732abb6b3df6f5e518ed5651ca7671470b8dc1b",
       "emulator_sha256": "c9464e306ceb911e37c9b7227c0647dfcfbe7377b86ca508c04661dbf32e6c36",
       "nvram_sha256": null
@@ -99,7 +99,7 @@
       "profile": "s3k",
       "case": "knuckles-lockon",
       "reference_sha256": "fba0677fde9f76df93f3e98d6310d8af68b9847bde16e253d73cd4dd8134ed23",
-      "movie_sha256": "7707d847d364ad350c962deef1a88ae8f731921c7fe49b426d24944ccb113382",
+      "movie_sha256": "73b670c6cefeed950d3b9c585bd6994687e0b39c29eda42278cf6c9a2c80f121",
       "check_sha256": "21c76336bf61df3a3d33d5aac1621a14550e94191d3301c9aa5b04d983b5cbfb",
       "emulator_sha256": "c9464e306ceb911e37c9b7227c0647dfcfbe7377b86ca508c04661dbf32e6c36",
       "nvram_sha256": null
@@ -108,7 +108,7 @@
       "profile": "s3-us",
       "case": "tails-write-s3",
       "reference_sha256": "d6404843c5ba32486f4c8c744acb7e1932069376960d886b1de37969787d3f9c",
-      "movie_sha256": "a4479d070a98c1bf99e67c027f60c2725c1b5e8b0fd2618d4208478c5db78d93",
+      "movie_sha256": "11bf511fba8c1bc4950d40c41a0c2b7ea9019f6e7edbe801f79e9d4dcb4cc4bc",
       "check_sha256": "364766917306df93f918622eff63195b1e89413f75a0a8a94a74b3dfdf359466",
       "emulator_sha256": "c9464e306ceb911e37c9b7227c0647dfcfbe7377b86ca508c04661dbf32e6c36",
       "nvram_sha256": "28e05e18fab3abd339b16806f983e2f2ea45c96a2299b419f552bdd3836545ee"
@@ -117,7 +117,7 @@
       "profile": "s3-eu",
       "case": "tails-write-s3",
       "reference_sha256": "9a2a9a93cdb906628a9dafe6e0e16b2f5505498be12de46b43e69a60d291fc69",
-      "movie_sha256": "a4479d070a98c1bf99e67c027f60c2725c1b5e8b0fd2618d4208478c5db78d93",
+      "movie_sha256": "11bf511fba8c1bc4950d40c41a0c2b7ea9019f6e7edbe801f79e9d4dcb4cc4bc",
       "check_sha256": "e2c8bf84fac813ee437f3772d55bfe8b83fcf7d7af38dead243c44561ba57a79",
       "emulator_sha256": "c9464e306ceb911e37c9b7227c0647dfcfbe7377b86ca508c04661dbf32e6c36",
       "nvram_sha256": "28e05e18fab3abd339b16806f983e2f2ea45c96a2299b419f552bdd3836545ee"
@@ -126,7 +126,7 @@
       "profile": "s3-jp",
       "case": "tails-write-s3",
       "reference_sha256": "f3314b3603fa717cbfecacab3e4b39e03a130d61d058d53fa0acceed17b07012",
-      "movie_sha256": "a4479d070a98c1bf99e67c027f60c2725c1b5e8b0fd2618d4208478c5db78d93",
+      "movie_sha256": "11bf511fba8c1bc4950d40c41a0c2b7ea9019f6e7edbe801f79e9d4dcb4cc4bc",
       "check_sha256": "4b01a2a2174cbb7cdadfaeb9f138f24fad43f80c8008e9fda83eda5da751b345",
       "emulator_sha256": "c9464e306ceb911e37c9b7227c0647dfcfbe7377b86ca508c04661dbf32e6c36",
       "nvram_sha256": "28e05e18fab3abd339b16806f983e2f2ea45c96a2299b419f552bdd3836545ee"
@@ -135,7 +135,7 @@
       "profile": "s3k",
       "case": "tails-write-lockon",
       "reference_sha256": "fba0677fde9f76df93f3e98d6310d8af68b9847bde16e253d73cd4dd8134ed23",
-      "movie_sha256": "48e5852382000c465b1aab1b0d7b333299460df6dd5ef1cfe00242d36afd3a5d",
+      "movie_sha256": "8763bf458c67a47902de3181056eea25db7727e72891ecbb347e4e2ead39fb6c",
       "check_sha256": "6b80534a7f704c89933ee2394cccfc6067c49c542153186567bd3c5977e930f2",
       "emulator_sha256": "c9464e306ceb911e37c9b7227c0647dfcfbe7377b86ca508c04661dbf32e6c36",
       "nvram_sha256": "f4be3a2542cd6b05f2c9294c1cbc42fbf096fee76c37d2c7e30937d9999865da"
@@ -144,7 +144,7 @@
       "profile": "s3-us",
       "case": "tails-reload-s3",
       "reference_sha256": "d6404843c5ba32486f4c8c744acb7e1932069376960d886b1de37969787d3f9c",
-      "movie_sha256": "cbf16333804397e45c46b326b8ef4cd83703329965eaad0fadcd7b0937fd1184",
+      "movie_sha256": "a7b928c7c07d129d0f334d50f0297ef4e31fb21ddde92024c1a02ee5ba0a3bc8",
       "check_sha256": "da9b62592bcf40cad3da7a22ede3320527d75707a13704fb638c9360859c3bbe",
       "emulator_sha256": "c9464e306ceb911e37c9b7227c0647dfcfbe7377b86ca508c04661dbf32e6c36",
       "nvram_sha256": null
@@ -153,7 +153,7 @@
       "profile": "s3-eu",
       "case": "tails-reload-s3",
       "reference_sha256": "9a2a9a93cdb906628a9dafe6e0e16b2f5505498be12de46b43e69a60d291fc69",
-      "movie_sha256": "cbf16333804397e45c46b326b8ef4cd83703329965eaad0fadcd7b0937fd1184",
+      "movie_sha256": "a7b928c7c07d129d0f334d50f0297ef4e31fb21ddde92024c1a02ee5ba0a3bc8",
       "check_sha256": "6b9281ffaa44ed95b061ed38c7a42c3caccfd0ed24bc640dbdb16ddf7ebf225d",
       "emulator_sha256": "c9464e306ceb911e37c9b7227c0647dfcfbe7377b86ca508c04661dbf32e6c36",
       "nvram_sha256": null
@@ -162,7 +162,7 @@
       "profile": "s3-jp",
       "case": "tails-reload-s3",
       "reference_sha256": "f3314b3603fa717cbfecacab3e4b39e03a130d61d058d53fa0acceed17b07012",
-      "movie_sha256": "cbf16333804397e45c46b326b8ef4cd83703329965eaad0fadcd7b0937fd1184",
+      "movie_sha256": "a7b928c7c07d129d0f334d50f0297ef4e31fb21ddde92024c1a02ee5ba0a3bc8",
       "check_sha256": "e5b51ffc08091e439409127e70360097113744bc56d2389af5245ef60c047a4e",
       "emulator_sha256": "c9464e306ceb911e37c9b7227c0647dfcfbe7377b86ca508c04661dbf32e6c36",
       "nvram_sha256": null
@@ -171,7 +171,7 @@
       "profile": "s3k",
       "case": "tails-reload-lockon",
       "reference_sha256": "fba0677fde9f76df93f3e98d6310d8af68b9847bde16e253d73cd4dd8134ed23",
-      "movie_sha256": "d0c2e3218facada50ab92725f73ee96024fd7007c0d192fab56d70f53a474f39",
+      "movie_sha256": "3a88b0b669366a53ef69470128cc999428474cbdede41e53fb6b04457de6a21e",
       "check_sha256": "03b924696e3f4a1d4eb25c55e82ea3c2fc8f3a39a44029b73ed91f9aaa7d7f20",
       "emulator_sha256": "c9464e306ceb911e37c9b7227c0647dfcfbe7377b86ca508c04661dbf32e6c36",
       "nvram_sha256": null
@@ -180,7 +180,7 @@
       "profile": "s3-us",
       "case": "special-s3",
       "reference_sha256": "d6404843c5ba32486f4c8c744acb7e1932069376960d886b1de37969787d3f9c",
-      "movie_sha256": "df8b72d5bbbdc90beed28c2693c0e0254df373ea60bf709c18830e4cf7e24d9b",
+      "movie_sha256": "092503444c74adcf6e519ab39eb609c4d2990e895362b19b28463a7fe44ec6f4",
       "check_sha256": "70971677d0d593e307b3957c15e003f276810d65dcf1d7076afc2702ce6720e7",
       "emulator_sha256": "c9464e306ceb911e37c9b7227c0647dfcfbe7377b86ca508c04661dbf32e6c36",
       "nvram_sha256": null
