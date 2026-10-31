@@ -900,7 +900,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 51679,
+      "physical_lines": 41180,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -5757,6 +5757,36 @@
           "component": "sk",
           "start": 356262,
           "end": 356854
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/zones/lrz/sk/act3_autoscroll.s",
+      "owner": "game/level/zones/lrz/sk",
+      "responsibility": "Lava Reef act-three autoscroll event, bridge or rock actors, movement helpers and private scene resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 664,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 9435,
+        "last_line": 10095,
+        "sha256": "4be1b57f6998cafac9638e6b932d5a702156918a236b69504f280a91a8647f1e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 495446,
+          "end": 497542
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 495446,
+          "end": 497542
         }
       ]
     },
@@ -12681,6 +12711,101 @@
       ]
     },
     {
+      "path": "src/objects/bosses/lbz/end_boss/sk/battle_and_attacks.s",
+      "owner": "objects/bosses/lbz/end_boss/sk",
+      "responsibility": "Launch Base end-boss controller, attached attack actors and battle progression.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 656,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 1953,
+        "last_line": 2605,
+        "sha256": "34f4db2aec9e7bf0205578c2d987ee4c3fc0489d7494ad9f97c835d69403394f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 473302,
+          "end": 475086
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 473302,
+          "end": 475086
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lbz/end_boss/sk/motion_helpers.s",
+      "owner": "objects/bosses/lbz/end_boss/sk",
+      "responsibility": "Launch Base end-boss motion, parent synchronization and private lookup helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 97,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 2606,
+        "last_line": 2699,
+        "sha256": "15d5f51144826c517804165ea794152b9110dcd60bceee390c17bbf14a711dce"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 475086,
+          "end": 475372
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 475086,
+          "end": 475372
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lbz/end_boss/sk/object_catalog.s",
+      "owner": "objects/bosses/lbz/end_boss/sk",
+      "responsibility": "Launch Base end-boss object attributes, child construction, raw animations and graphics resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 138,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 2700,
+        "last_line": 2834,
+        "sha256": "76ffacfbd5d3c850a054e1bc6d53b964a387502194c2c2f09e9b6486e0c09700"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 475372,
+          "end": 475746
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 475372,
+          "end": 475746
+        }
+      ]
+    },
+    {
       "path": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
       "owner": "objects/bosses/lbz/final_boss_1/s3",
       "responsibility": "Launch Base first final boss battle state, attacks and coordinated child actors.",
@@ -12802,6 +12927,96 @@
           "component": "s3-us",
           "start": 2425508,
           "end": 2425870
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "owner": "objects/bosses/lbz/final_boss_1/sk",
+      "responsibility": "Launch Base Knuckles final-boss variant, coordinated actors, motion and collision helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 642,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 1115,
+        "last_line": 1753,
+        "sha256": "15339ecf851c326bafe1720396e8c685bbaddf171048552f91a5fd4d5356cef2"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 471034,
+          "end": 472780
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 471034,
+          "end": 472780
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "owner": "objects/bosses/lbz/final_boss_1/sk",
+      "responsibility": "Launch Base first final-boss variants object attributes, child construction, animation and palette resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 202,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 1754,
+        "last_line": 1952,
+        "sha256": "d0b7638ca1ccfb23cc7977bebccbaa63952c37d463fd11d002e0f160cfc7f365"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 472780,
+          "end": 473302
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 472780,
+          "end": 473302
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "owner": "objects/bosses/lbz/final_boss_1/sk",
+      "responsibility": "Launch Base first final-boss battle controller, attack state and helper callbacks for Sonic or Tails.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 565,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 553,
+        "last_line": 1114,
+        "sha256": "ebc6b5a796a7ca227fdba2a825c3a8240a89040aa3dbbab97b83ea7a059dff29"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 469434,
+          "end": 471034
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 469434,
+          "end": 471034
         }
       ]
     },
@@ -13002,6 +13217,131 @@
           "component": "s3-us",
           "start": 2432792,
           "end": 2433770
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "owner": "objects/bosses/lbz/final_boss_2/sk",
+      "responsibility": "Launch Base final boss attached actors, orbiting parts, capture children and defeat effects with private placement records.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 420,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 3468,
+        "last_line": 3884,
+        "sha256": "c9541d7503b566b51adca86ffac4277b50f66c2a9d437d8763f21c448034a74e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 477614,
+          "end": 478908
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 477614,
+          "end": 478908
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "owner": "objects/bosses/lbz/final_boss_2/sk",
+      "responsibility": "Launch Base final boss battle controller, player capture or release, defeat and scene transition.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 636,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 2835,
+        "last_line": 3467,
+        "sha256": "e78baa05f6d136f547a93b773ef4481f3b3bc1d6b559abfed17b2c47a75cd73a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 475746,
+          "end": 477614
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 475746,
+          "end": 477614
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "owner": "objects/bosses/lbz/final_boss_2/sk",
+      "responsibility": "Launch Base final boss player response, palette, motion and parent or child callback helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 199,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 3885,
+        "last_line": 4080,
+        "sha256": "7824ab547b407d06ac35906ae8754e08adb771e1c283bb0a749134fac42c39b5"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 478908,
+          "end": 479414
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 478908,
+          "end": 479414
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
+      "owner": "objects/bosses/lbz/final_boss_2/sk",
+      "responsibility": "Launch Base final boss object attributes, child construction, animation, mappings and palette resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 105,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 4081,
+        "last_line": 4182,
+        "sha256": "998d87c2c5f4ed3e6652444d6ccedb3da14bfb13280b763d6ac04be78fb15d59"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 479414,
+          "end": 479690
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 479414,
+          "end": 479690
         }
       ]
     },
@@ -13257,6 +13597,241 @@
           "component": "sk",
           "start": 467936,
           "end": 469434
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lrz/end_boss/sk/battle_and_attacks.s",
+      "owner": "objects/bosses/lrz/end_boss/sk",
+      "responsibility": "Lava Reef end-boss battle controller, attacks, parent actors and stage completion progression.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 420,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 10096,
+        "last_line": 10511,
+        "sha256": "e0d2c343b0e010d61ae99182f7cc1ef97e8c68fff945e9dacb6ee217946b0b17"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_79AA8",
+          "kind": "terminal-tail",
+          "reason": "Close the Lava Reef attached-actor update family after the preceding annotated helper; its conditional returns remain inseparable until the final child drawing tail.",
+          "origin_first_line": 10374,
+          "origin_terminal_line": 10511,
+          "origin_end_line": 10511
+        }
+      ],
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 497542,
+          "end": 498770
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 497542,
+          "end": 498770
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lrz/end_boss/sk/motion_helpers.s",
+      "owner": "objects/bosses/lrz/end_boss/sk",
+      "responsibility": "Lava Reef end-boss motion, collision, palette, angle and parent-state helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 266,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 10731,
+        "last_line": 10993,
+        "sha256": "3d4c74ace84c81bea562a8ab0ef19ea1a3fbb0b50c7c1639de07983377c2b1e2"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 499382,
+          "end": 500032
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 499382,
+          "end": 500032
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lrz/end_boss/sk/object_catalog.s",
+      "owner": "objects/bosses/lrz/end_boss/sk",
+      "responsibility": "Lava Reef end-boss and platform attributes, child creation, animation and graphics resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 93,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 10994,
+        "last_line": 11083,
+        "sha256": "43d8c9d07b46a6aa1610d96fce41fc5176c261b6a6f84b8571224ec522707be3"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 500032,
+          "end": 500238
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 500032,
+          "end": 500238
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lrz/end_boss/sk/platform.s",
+      "owner": "objects/bosses/lrz/end_boss/sk",
+      "responsibility": "Lava Reef boss-scene moving platform, state dispatch and attached motion callbacks.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 222,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 10512,
+        "last_line": 10730,
+        "sha256": "563062e2ec40819d39bce2992a705b3dfd4cffe9e5a965898b2e16d1112441ce"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 498770,
+          "end": 499382
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 498770,
+          "end": 499382
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lrz/miniboss/sk/battle_and_attacks.s",
+      "owner": "objects/bosses/lrz/miniboss/sk",
+      "responsibility": "Lava Reef miniboss startup, battle controller, attack state and attached actor updates.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 553,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 8553,
+        "last_line": 9102,
+        "sha256": "dfb9e2b9d74d75ffa4420766ab82e99cf5fdc808e7ca21d2787d96b8375d77f1"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 492784,
+          "end": 494392
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 492784,
+          "end": 494392
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lrz/miniboss/sk/motion_helpers.s",
+      "owner": "objects/bosses/lrz/miniboss/sk",
+      "responsibility": "Lava Reef miniboss child movement, collision, palette and parent-state helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 225,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 9103,
+        "last_line": 9324,
+        "sha256": "9a017554b37c8193fbe53af37673a149978061b24319e32fe6c560ad9ce84489"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 494392,
+          "end": 494938
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 494392,
+          "end": 494938
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lrz/miniboss/sk/object_catalog.s",
+      "owner": "objects/bosses/lrz/miniboss/sk",
+      "responsibility": "Lava Reef miniboss object attributes, child creation, animation and graphics resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 113,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 9325,
+        "last_line": 9434,
+        "sha256": "801f62f4267e9cf1956ba42e5929025382b1fad17121e36bc2234e0baec93235"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 494938,
+          "end": 495446
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 494938,
+          "end": 495446
         }
       ]
     },
@@ -13766,6 +14341,311 @@
       ]
     },
     {
+      "path": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "owner": "objects/bosses/mhz/end_boss/sk",
+      "responsibility": "Mushroom Hill end-boss controller, attached actors, attack and defeat states.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 610,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 5480,
+        "last_line": 6086,
+        "sha256": "faf6c34ec60590a9b5bb9f7ec76f0ecd21b738a27a7093c3f08abf663e00669a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 483152,
+          "end": 485140
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 483152,
+          "end": 485140
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "owner": "objects/bosses/mhz/end_boss/sk",
+      "responsibility": "Mushroom Hill end-boss collision, movement, palette and parent-state helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 206,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 6087,
+        "last_line": 6288,
+        "sha256": "78bcb2af2c6aa8de6361657c55d411ae0057604384e0d6a4ff2658f1ff9369c6"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_768FE",
+          "kind": "terminal-tail",
+          "reason": "Close the final scripted player movement callback including its conditional return, stop and deletion tail.",
+          "origin_first_line": 6276,
+          "origin_terminal_line": 6288,
+          "origin_end_line": 6288
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 485140,
+          "end": 485672
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 485140,
+          "end": 485672
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
+      "owner": "objects/bosses/mhz/end_boss/sk",
+      "responsibility": "Mushroom Hill end-boss attributes, child creation, animation and graphics resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 95,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 6289,
+        "last_line": 6380,
+        "sha256": "1c0276be60ef2520b25a21380478b1658f276577878c659a79656eba39c12c88"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 485672,
+          "end": 485906
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 485672,
+          "end": 485906
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "owner": "objects/bosses/mhz/miniboss/sk",
+      "responsibility": "Mushroom Hill miniboss controller, attacks, parent actors and battle progression.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 596,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 4183,
+        "last_line": 4774,
+        "sha256": "5ccc4090388eb3c43a0826539d900417504970ad91124d57c64be0ea500eb9da"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_757A0",
+          "kind": "terminal-tail",
+          "reason": "Keep the final Mushroom Hill miniboss child attack and landing callbacks together after earlier independent battle returns.",
+          "origin_first_line": 4667,
+          "origin_terminal_line": 4774,
+          "origin_end_line": 4774
+        }
+      ],
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 479690,
+          "end": 481470
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 479690,
+          "end": 481470
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "owner": "objects/bosses/mhz/miniboss/sk",
+      "responsibility": "Mushroom Hill miniboss collision, projectile and movement helper callbacks.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 175,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 4775,
+        "last_line": 4945,
+        "sha256": "8b2e20693979d2b1e809388fa49237246c510015359119957f77734bc8baee27"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_75986",
+          "kind": "terminal-tail",
+          "reason": "Close the final moving child, landing and offscreen deletion callback family after all earlier helper returns.",
+          "origin_first_line": 4852,
+          "origin_terminal_line": 4945,
+          "origin_end_line": 4945
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 481470,
+          "end": 481924
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 481470,
+          "end": 481924
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
+      "owner": "objects/bosses/mhz/miniboss/sk",
+      "responsibility": "Mushroom Hill miniboss linked actor movement, collision, palette and state helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 335,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 5030,
+        "last_line": 5360,
+        "sha256": "e64d8b3e4c3c840553b869ed8becf543cfe3ae53793e4ea27a7333962f8ab28a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_75E1A",
+          "kind": "terminal-tail",
+          "reason": "Keep the final camera-limit transition callback conditional return and deletion tail together without overlapping the preceding palette helper annotation.",
+          "origin_first_line": 5340,
+          "origin_terminal_line": 5360,
+          "origin_end_line": 5360
+        }
+      ],
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 482158,
+          "end": 482898
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 482158,
+          "end": 482898
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/mhz/miniboss/sk/object_catalog.s",
+      "owner": "objects/bosses/mhz/miniboss/sk",
+      "responsibility": "Mushroom Hill miniboss and tree object attributes, construction, animation and graphics resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 122,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 5361,
+        "last_line": 5479,
+        "sha256": "a91edf96fe0ae7f1e7d84fd89521eec2210a2e21f13b3ee88cd4fc04eea60299"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 482898,
+          "end": 483152
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 482898,
+          "end": 483152
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/mhz/miniboss/sk/tree_actor.s",
+      "owner": "objects/bosses/mhz/miniboss/sk",
+      "responsibility": "Mushroom Hill miniboss tree actor, scene interaction and child motion.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 88,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 4946,
+        "last_line": 5029,
+        "sha256": "90bee3289c62cedf9cfa87f7c497ef28cf318df17eb4f27dbebf73929f67a3ca"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_MHZMinibossTree",
+          "kind": "terminal-tail",
+          "reason": "Close the complete tree actor controller and child collision dispatch, which has no original independent return boundary.",
+          "origin_first_line": 4948,
+          "origin_terminal_line": 5029,
+          "origin_end_line": 5029
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 481924,
+          "end": 482158
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 481924,
+          "end": 482158
+        }
+      ]
+    },
+    {
       "path": "src/objects/bosses/shared/sk/robotnik_heads.s",
       "owner": "objects/bosses/shared/sk",
       "responsibility": "Robotnik and Mecha Sonic head variants, initialization and parent-linked expression or movement states.",
@@ -13827,6 +14707,201 @@
           "component": "sk",
           "start": 425282,
           "end": 427244
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "owner": "objects/bosses/soz/end_boss/sk",
+      "responsibility": "Sandopolis end-boss body, attached actors, attack state, player interaction and defeat progression.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 847,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 7351,
+        "last_line": 8194,
+        "sha256": "13702103f87c58e537fb9ea8f9813cf3119dfb1d0040cd09d12ad63c8ec3ec14"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-family",
+        "reason": "The complete Sandopolis boss body and coordinated attached-actor battle state graph retain their private positional tables and defeat progression; collision or motion helpers and object resources have separate owners.",
+        "proof_target": "check-source-layout"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 489038,
+          "end": 491576
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 489038,
+          "end": 491576
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/soz/end_boss/sk/motion_helpers.s",
+      "owner": "objects/bosses/soz/end_boss/sk",
+      "responsibility": "Sandopolis end-boss child motion, collision, palette and attack helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 258,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 8195,
+        "last_line": 8449,
+        "sha256": "57c3df4fac6c1693bec7a9d0bf574651d247aaaff62e86853dcf133f3e96a36b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 491576,
+          "end": 492170
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 491576,
+          "end": 492170
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
+      "owner": "objects/bosses/soz/end_boss/sk",
+      "responsibility": "Sandopolis end-boss object attributes, construction records, animation and graphics resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 106,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 8450,
+        "last_line": 8552,
+        "sha256": "86437abf94801aafdc8c62df780caa55a5f11b1dffd7380ad20f9668c331931f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 492170,
+          "end": 492784
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 492170,
+          "end": 492784
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "owner": "objects/bosses/soz/miniboss/sk",
+      "responsibility": "Sandopolis miniboss battle controller, attack actors, collision and defeat progression.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 625,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 6381,
+        "last_line": 7002,
+        "sha256": "6e75573a22799e375ad15b46eecc8ed829430d7594335b718db58bd66856e8c1"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 485906,
+          "end": 487658
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 485906,
+          "end": 487658
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/soz/miniboss/sk/motion_helpers.s",
+      "owner": "objects/bosses/soz/miniboss/sk",
+      "responsibility": "Sandopolis miniboss child movement, collision, palette and parent-state helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 243,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 7003,
+        "last_line": 7242,
+        "sha256": "9eb46bd00696f8d0f9fb1b17f32c76c1cd2b5ef104316fd4e31c9bb7dfa3335f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 487658,
+          "end": 488364
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 487658,
+          "end": 488364
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
+      "owner": "objects/bosses/soz/miniboss/sk",
+      "responsibility": "Sandopolis miniboss attributes, construction records, animation and graphics resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 111,
+      "origin": {
+        "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
+        "path": "sonic3k.s",
+        "first_line": 7243,
+        "last_line": 7350,
+        "sha256": "1228ea677b060ab7a6e2094c4ca579c9dbc700f3b5fb94f98b0e52b42412ae11"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 488364,
+          "end": 489038
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 488364,
+          "end": 489038
         }
       ]
     },
