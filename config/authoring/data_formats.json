@@ -27865,5 +27865,6 @@
     }
   ],
   "assembly_catalog": "config/authoring/assembly_formats.json",
-  "palette_catalog": "config/authoring/palette_formats.json"
+  "palette_catalog": "config/authoring/palette_formats.json",
+  "raw_catalog": "config/authoring/raw_formats.json"
 }

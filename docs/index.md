@@ -13,6 +13,8 @@
   fail-fast acceptance.
 - [Audio storage](audio_storage.md): ROM-extracted SMPS streams and driver ABI
   boundaries.
+- [Raw sprite animations](raw_animations.md): interpreter ABIs, source edit
+  packets and current catalog coverage.
 - [Runtime](runtime.md): pinned MAME, original goldens and empty upper window.
 - [Unknowns and remaining work](unknowns.md): incomplete release requirements.
 - [Provenance and rights](provenance.md): import, exclusions and attribution.
