@@ -60,7 +60,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 2436,
+      "physical_lines": 2130,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "s3.s",
@@ -90,7 +90,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 4103,
+      "physical_lines": 3303,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -2587,6 +2587,66 @@
       ]
     },
     {
+      "path": "src/collision/sk/height_and_angle_resources.s",
+      "owner": "collision/sk",
+      "responsibility": "Shared surface angles and both orientations of collision height maps.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 13,
+      "origin": {
+        "commit": "5dbc40370891c990665a98d78f2351a8bf61f266",
+        "path": "sonic3k.s",
+        "first_line": 730,
+        "last_line": 740,
+        "sha256": "64985b1578f520160268d195ca1b668908d5a65c40898f3d7df0890fa8fb98a9"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 614400,
+          "end": 622848
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 614400,
+          "end": 622848
+        }
+      ]
+    },
+    {
+      "path": "src/collision/sk/zone_collision_catalog.s",
+      "owner": "collision/sk",
+      "responsibility": "Zone collision index mode, pointers and complete extracted collision resource bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 97,
+      "origin": {
+        "commit": "5dbc40370891c990665a98d78f2351a8bf61f266",
+        "path": "sonic3k.s",
+        "first_line": 741,
+        "last_line": 834,
+        "sha256": "5c73b90269af2b8d4f5a15ff798b80ceacceb11e27cdb05baec1a8f54bd41a4a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 622848,
+          "end": 644544
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 622848,
+          "end": 644544
+        }
+      ]
+    },
+    {
       "path": "src/game/blue_sphere/shared/blue_sphere/anim_character_sprites.s",
       "owner": "game/blue_sphere/shared/blue_sphere",
       "responsibility": "Assembler data for General/Blue Sphere/Anim - Character Sprites",
@@ -4513,6 +4573,46 @@
       "range_kind": "canonical-normal-build"
     },
     {
+      "path": "src/game/demo/s3/input_resource_catalog.s",
+      "owner": "game/demo/s3",
+      "responsibility": "The three original attract-mode demo input streams.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 12,
+      "origin": {
+        "commit": "5dbc40370891c990665a98d78f2351a8bf61f266",
+        "path": "s3.s",
+        "first_line": 738,
+        "last_line": 747,
+        "sha256": "e3027c8be46ea1336abdcd54729f43bbc4fee1bc9d426651f722f80b6cbe960f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 808484,
+          "end": 814244
+        },
+        {
+          "profile": "s3-eu",
+          "start": 808484,
+          "end": 814244
+        },
+        {
+          "profile": "s3-jp",
+          "start": 808484,
+          "end": 814244
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2905636,
+          "end": 2911396
+        }
+      ]
+    },
+    {
       "path": "src/game/level/ending/sk/background.s",
       "owner": "game/level/ending/sk",
       "responsibility": "Ending background event program, scroll deformation and private sky palette.",
@@ -6069,6 +6169,36 @@
           "component": "sk",
           "start": 543304,
           "end": 543512
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/sk/layout_catalog.s",
+      "owner": "game/level/sk",
+      "responsibility": "Zone layout pointer table and complete extracted level layout bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 110,
+      "origin": {
+        "commit": "5dbc40370891c990665a98d78f2351a8bf61f266",
+        "path": "sonic3k.s",
+        "first_line": 835,
+        "last_line": 941,
+        "sha256": "427ca10508cc622cb3f8c4ac494cdcb2679dea2454cfce57a54ec93f7734a135"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 644544,
+          "end": 689964
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 644544,
+          "end": 689964
         }
       ]
     },
@@ -7943,6 +8073,36 @@
       ]
     },
     {
+      "path": "src/game/level/zones/lrz/sk/rock_placement_resources.s",
+      "owner": "game/level/zones/lrz/sk",
+      "responsibility": "Original rock placement lists for both Lava Reef acts.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 11,
+      "origin": {
+        "commit": "5dbc40370891c990665a98d78f2351a8bf61f266",
+        "path": "sonic3k.s",
+        "first_line": 1294,
+        "last_line": 1301,
+        "sha256": "13cb55f9adafb23e1f357b60fe3a93602fa42cc0833b3918a89fee7e361d2b76"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 830720,
+          "end": 833632
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 830720,
+          "end": 833632
+        }
+      ]
+    },
+    {
       "path": "src/game/level/zones/mgz/s3/act1_screen.s",
       "owner": "game/level/zones/mgz/s3",
       "responsibility": "Marble Garden act-one screen and background initialization, events, deformation and private geometry.",
@@ -8654,6 +8814,36 @@
           "component": "sk",
           "start": 363078,
           "end": 363722
+        }
+      ]
+    },
+    {
+      "path": "src/game/lockon/sk/sonic2_placement_catalog.s",
+      "owner": "game/lockon/sk",
+      "responsibility": "Local Sonic 2 lock-on object placement records retained in the accepted cartridge; no Sonic 2 game profile is implied.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 95,
+      "origin": {
+        "commit": "5dbc40370891c990665a98d78f2351a8bf61f266",
+        "path": "sonic3k.s",
+        "first_line": 1449,
+        "last_line": 1541,
+        "sha256": "91114128fa76b1a1b8e3a83c898a2d3736e5fea1380cc53e1ef5fc52b14332a3"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 914288,
+          "end": 934068
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 914288,
+          "end": 934068
         }
       ]
     },
@@ -65699,6 +65889,46 @@
       ]
     },
     {
+      "path": "src/rendering/s3/common_sprite_resource_catalog.s",
+      "owner": "rendering/s3",
+      "responsibility": "Common sprites, special-stage graphics and perspective data, and competition character mapping/DPLC bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 109,
+      "origin": {
+        "commit": "5dbc40370891c990665a98d78f2351a8bf61f266",
+        "path": "s3.s",
+        "first_line": 438,
+        "last_line": 543,
+        "sha256": "c21fd9e422538e91ad9bba3f95bf26ddd1ec9945ad2130308303aed7607882b2"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 577140,
+          "end": 656834
+        },
+        {
+          "profile": "s3-eu",
+          "start": 577140,
+          "end": 656834
+        },
+        {
+          "profile": "s3-jp",
+          "start": 577140,
+          "end": 656834
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2674292,
+          "end": 2753986
+        }
+      ]
+    },
+    {
       "path": "src/rendering/s3/competition_sprite_renderer.s",
       "owner": "rendering/s3",
       "responsibility": "Competition sprite display and its private piece-coordinate lookup tables.",
@@ -66464,6 +66694,46 @@
       ]
     },
     {
+      "path": "src/rendering/s3/zone_animation_resources.s",
+      "owner": "rendering/s3",
+      "responsibility": "Intro surfboard art, complete zone animated-tile resources and original unused zone aliases with their physical padding.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 176,
+      "origin": {
+        "commit": "5dbc40370891c990665a98d78f2351a8bf61f266",
+        "path": "s3.s",
+        "first_line": 544,
+        "last_line": 716,
+        "sha256": "9c5cd1ccb1dce4671f4057de79a99606efa42893b010fa1a35cbf8e877667266"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 656834,
+          "end": 795264
+        },
+        {
+          "profile": "s3-eu",
+          "start": 656834,
+          "end": 795264
+        },
+        {
+          "profile": "s3-jp",
+          "start": 656834,
+          "end": 795264
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2753986,
+          "end": 2892416
+        }
+      ]
+    },
+    {
       "path": "src/rendering/shared/palettes/palette_pointers.s",
       "owner": "rendering/shared/palettes",
       "responsibility": "Assembler data for Levels/Misc/Palette pointers",
@@ -66534,6 +66804,36 @@
       "range_kind": "canonical-normal-build"
     },
     {
+      "path": "src/rendering/sk/actor_and_ending_resource_catalog.s",
+      "owner": "rendering/sk",
+      "responsibility": "Shared actor graphics, Flying Battery enemies and bosses, and original ending art resource bindings and physical padding.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 66,
+      "origin": {
+        "commit": "5dbc40370891c990665a98d78f2351a8bf61f266",
+        "path": "sonic3k.s",
+        "first_line": 1386,
+        "last_line": 1448,
+        "sha256": "42690231e25352872f125404f96d055ac2080261bccf5449fd80a424fb41be11"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 881614,
+          "end": 914288
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 881614,
+          "end": 914288
+        }
+      ]
+    },
+    {
       "path": "src/rendering/sk/animal_pattern_lists.s",
       "owner": "rendering/sk",
       "responsibility": "Zone-specific animal graphics load records used by the indexed completion loader.",
@@ -66590,6 +66890,36 @@
           "component": "sk",
           "start": 148990,
           "end": 150888
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/sk/common_sprite_resource_catalog.s",
+      "owner": "rendering/sk",
+      "responsibility": "Common sprites, special-stage graphics and perspective data resource bindings with their following physical padding.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 65,
+      "origin": {
+        "commit": "5dbc40370891c990665a98d78f2351a8bf61f266",
+        "path": "sonic3k.s",
+        "first_line": 1108,
+        "last_line": 1169,
+        "sha256": "cb1ee8a97d2491418e9142d36e6105647bccd3939b5ccb08b90740bc81c1d648"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 695804,
+          "end": 747968
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 695804,
+          "end": 747968
         }
       ]
     },
@@ -66884,6 +67214,36 @@
       ]
     },
     {
+      "path": "src/rendering/sk/palettes/resource_catalog.s",
+      "owner": "rendering/sk/palettes",
+      "responsibility": "Palette pointer catalog and all original shared and zone palette resource bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 169,
+      "origin": {
+        "commit": "5dbc40370891c990665a98d78f2351a8bf61f266",
+        "path": "sonic3k.s",
+        "first_line": 942,
+        "last_line": 1107,
+        "sha256": "456d4cf7646de05da875a1a2af68b1842bdf6235ef765454ebcf630d365b6a0b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 689964,
+          "end": 695804
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 689964,
+          "end": 695804
+        }
+      ]
+    },
+    {
       "path": "src/rendering/sk/pattern_load_catalog.s",
       "owner": "rendering/sk",
       "responsibility": "Pattern-load identifiers, relative pointer macro and complete primary level and scene art request catalog.",
@@ -67010,6 +67370,36 @@
           "component": "sk",
           "start": 5350,
           "end": 5562
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/sk/zone_animation_resources.s",
+      "owner": "rendering/sk",
+      "responsibility": "Complete zone animated-tile resources and their original physical order.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 121,
+      "origin": {
+        "commit": "5dbc40370891c990665a98d78f2351a8bf61f266",
+        "path": "sonic3k.s",
+        "first_line": 1170,
+        "last_line": 1287,
+        "sha256": "95691c70f1925de13c149f54da307edbd35c95ac4217005b78e13a5d2d8dba44"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 747968,
+          "end": 828896
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 747968,
+          "end": 828896
         }
       ]
     },
@@ -70588,6 +70978,46 @@
       ]
     },
     {
+      "path": "src/ui/s3/title_and_menu_art_catalog.s",
+      "owner": "ui/s3",
+      "responsibility": "Splash/drowning sprite, competition options, menu and title graphics resource bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 24,
+      "origin": {
+        "commit": "5dbc40370891c990665a98d78f2351a8bf61f266",
+        "path": "s3.s",
+        "first_line": 717,
+        "last_line": 737,
+        "sha256": "2c51e7a4925f2ac51603b27f3554a18d036e3b8cace1f6609409f996720e02ea"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 795264,
+          "end": 808484
+        },
+        {
+          "profile": "s3-eu",
+          "start": 795264,
+          "end": 808484
+        },
+        {
+          "profile": "s3-jp",
+          "start": 795264,
+          "end": 808484
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2892416,
+          "end": 2905636
+        }
+      ]
+    },
+    {
       "path": "src/ui/shared/competition_menu/map_competition_objects.s",
       "owner": "ui/shared/competition_menu",
       "responsibility": "Assembler data for General/Competition Menu/Map - Competition Objects",
@@ -72033,6 +72463,96 @@
       ],
       "applicability": "emitted",
       "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/ui/sk/competition_options_resources.s",
+      "owner": "ui/sk",
+      "responsibility": "Competition options graphics and layout resource bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 9,
+      "origin": {
+        "commit": "5dbc40370891c990665a98d78f2351a8bf61f266",
+        "path": "sonic3k.s",
+        "first_line": 1288,
+        "last_line": 1293,
+        "sha256": "e2377ee6de0c6a8799cbfae7cc32cbeec7656143506bf9c360c3a556bc3be0ee"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 828896,
+          "end": 830720
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 828896,
+          "end": 830720
+        }
+      ]
+    },
+    {
+      "path": "src/ui/sk/results_and_title_card_resources.s",
+      "owner": "ui/sk",
+      "responsibility": "Results lettering and stage title-card art resource bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 24,
+      "origin": {
+        "commit": "5dbc40370891c990665a98d78f2351a8bf61f266",
+        "path": "sonic3k.s",
+        "first_line": 1365,
+        "last_line": 1385,
+        "sha256": "486b5374a5fbf45571c569e8acb040b576a799c08184769307dcc0de79b98a3f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 878576,
+          "end": 881614
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 878576,
+          "end": 881614
+        }
+      ]
+    },
+    {
+      "path": "src/ui/sk/title_resource_catalog.s",
+      "owner": "ui/sk",
+      "responsibility": "Sonic and Knuckles title scene mappings, art, background frames and menu resource bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 66,
+      "origin": {
+        "commit": "5dbc40370891c990665a98d78f2351a8bf61f266",
+        "path": "sonic3k.s",
+        "first_line": 1302,
+        "last_line": 1364,
+        "sha256": "c426432a3975abf5c220cef6d46f862090c722ae4fc29fc047eabd3d2bf7906f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 833632,
+          "end": 878576
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 833632,
+          "end": 878576
+        }
+      ]
     }
   ]
 }

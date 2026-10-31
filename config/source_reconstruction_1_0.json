@@ -748,6 +748,12 @@
       "commits": ["7db5651f658098272980c7074a5dc19910a9c23a"]
     },
     {
+      "id": "change-5dbc40370891",
+      "kind": "source_or_tooling",
+      "summary": "Bound literal zero-fill and offset padding in data owners",
+      "commits": ["5dbc40370891c990665a98d78f2351a8bf61f266"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",

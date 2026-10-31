@@ -5,7 +5,7 @@ responsibility, physical line count and source range at the preservation
 baseline. Owned data lives under `src/objects`, `src/rendering`, `src/ui`,
 `src/game` and `src/system/debug`. Engine-specific code remains separate.
 
-This registry is intentionally incomplete during extraction: 838 data units and
+This registry is intentionally incomplete during extraction: 854 data units and
 1043 sibling executable units and 5 definition libraries have owners. The 6
 remaining entry, driver, memory and macro units still await complete semantic
 extraction. Run `make source-layout-inventory` for that distinction.
