@@ -88,9 +88,9 @@ score labels are not referenced by retained executable source; outer storage
 labels and driver pointer tables remain source-owned. The full score macro
 library is removed.
 
-`Sound/FM_Voice_Macros.s` retains only generic instrument helpers needed by the
-Z80 drivers. Its original notice credits Flamewing and S1SMPS2ASM 1.1 by Marc
-Gordon and explicitly grants permission to use, copy, modify and distribute that
-software. The notice is retained in the helper file. This file-specific grant
-does not change the general upstream annotation status or grant rights to game
-code, scores or sample data.
+`src/audio/shared/fm_instrument_macros.s` retains only generic instrument
+helpers needed by the Z80 drivers. Its original notice credits Flamewing and
+S1SMPS2ASM 1.1 by Marc Gordon and explicitly grants permission to use, copy,
+modify and distribute that software. The notice is retained in the helper file.
+This file-specific grant does not change the general upstream annotation status
+or grant rights to game code, scores or sample data.

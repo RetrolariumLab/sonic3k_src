@@ -25,21 +25,6 @@
       }
     },
     {
-      "path": "Sound/FM_Voice_Macros.s",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 197,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/FM_Voice_Macros.s",
-        "first_line": 1,
-        "last_line": 197,
-        "sha256": "ec469d726b001d69ac41bae8abc18e9d46390ec7947c40c3f309cebe3ac54c23"
-      }
-    },
-    {
       "path": "Sound/Z80 Sound Driver.s",
       "owner": "pending/audio",
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
@@ -97,36 +82,6 @@
         "first_line": 1,
         "last_line": 1716,
         "sha256": "041c3447415f494b4d749a71022d4dc796261cc3634ef32e1798fa41c308f75f"
-      }
-    },
-    {
-      "path": "sonic3k.macros.s",
-      "owner": "pending/engine",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 467,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "sonic3k.macros.s",
-        "first_line": 1,
-        "last_line": 467,
-        "sha256": "5a9571b0cbd0cdd65757235146f792d5ba1617c47f67daabafd4fa15279d95f8"
-      }
-    },
-    {
-      "path": "sonic3k.macrosetup.s",
-      "owner": "pending/engine",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 97,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "sonic3k.macrosetup.s",
-        "first_line": 1,
-        "last_line": 97,
-        "sha256": "a4185f541bba2bc209ca6cb11273029ebd0a819178ef3e8ee4473da13395c864"
       }
     },
     {
@@ -2381,6 +2336,108 @@
           "component": "s3-us",
           "start": 2441268,
           "end": 2441400
+        }
+      ]
+    },
+    {
+      "path": "src/audio/shared/bank_and_sample_macros.s",
+      "owner": "audio/shared",
+      "responsibility": "Audio bank boundaries, sample timing, bank-relative pointers and DAC metadata declarations.",
+      "role": "definitions",
+      "status": "owned",
+      "physical_lines": 202,
+      "origin": {
+        "commit": "36ebf5ff592b0d5d65187aaebf0fb05558bba588",
+        "path": "sonic3k.macros.s",
+        "first_line": 269,
+        "last_line": 467,
+        "sha256": "b25a3cb42423a4f32b576a0d5e7389ad6201431a3fab1b231a347e09415130f2"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 0,
+          "end": 0
+        },
+        {
+          "profile": "s3-eu",
+          "start": 0,
+          "end": 0
+        },
+        {
+          "profile": "s3-jp",
+          "start": 0,
+          "end": 0
+        },
+        {
+          "profile": "sk",
+          "start": 0,
+          "end": 0
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2097152,
+          "end": 2097152
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "path": "src/audio/shared/fm_instrument_macros.s",
+      "owner": "audio/shared",
+      "responsibility": "Licensed driver-local FM instrument parameter and voice record definition helpers.",
+      "role": "definitions",
+      "status": "owned",
+      "physical_lines": 200,
+      "origin": {
+        "commit": "36ebf5ff592b0d5d65187aaebf0fb05558bba588",
+        "path": "Sound/FM_Voice_Macros.s",
+        "first_line": 1,
+        "last_line": 197,
+        "sha256": "ec469d726b001d69ac41bae8abc18e9d46390ec7947c40c3f309cebe3ac54c23"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 0,
+          "end": 0
+        },
+        {
+          "profile": "s3-eu",
+          "start": 0,
+          "end": 0
+        },
+        {
+          "profile": "s3-jp",
+          "start": 0,
+          "end": 0
+        },
+        {
+          "profile": "sk",
+          "start": 0,
+          "end": 0
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2097152,
+          "end": 2097152
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 0,
+          "end": 0
         }
       ]
     },
@@ -68072,6 +68129,159 @@
       ]
     },
     {
+      "path": "src/system/assembly/compiler_setup.s",
+      "owner": "system/assembly",
+      "responsibility": "Assembler output options, safe physical padding macros and compile-time numeric functions.",
+      "role": "definitions",
+      "status": "owned",
+      "physical_lines": 100,
+      "origin": {
+        "commit": "36ebf5ff592b0d5d65187aaebf0fb05558bba588",
+        "path": "sonic3k.macrosetup.s",
+        "first_line": 1,
+        "last_line": 97,
+        "sha256": "a4185f541bba2bc209ca6cb11273029ebd0a819178ef3e8ee4473da13395c864"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 0,
+          "end": 0
+        },
+        {
+          "profile": "s3-eu",
+          "start": 0,
+          "end": 0
+        },
+        {
+          "profile": "s3-jp",
+          "start": 0,
+          "end": 0
+        },
+        {
+          "profile": "sk",
+          "start": 0,
+          "end": 0
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2097152,
+          "end": 2097152
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "path": "src/system/assembly/data_record_macros.s",
+      "owner": "system/assembly/data_records",
+      "responsibility": "Level, palette, debug-list and graphics-load record declarations and level-select text encoding.",
+      "role": "definitions",
+      "status": "owned",
+      "physical_lines": 148,
+      "origin": {
+        "commit": "36ebf5ff592b0d5d65187aaebf0fb05558bba588",
+        "path": "sonic3k.macros.s",
+        "first_line": 123,
+        "last_line": 268,
+        "sha256": "93665bac717e1563a1040a51883214d051a6c5f4d8a6d566c3111557b4bb4f19"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 0,
+          "end": 0
+        },
+        {
+          "profile": "s3-eu",
+          "start": 0,
+          "end": 0
+        },
+        {
+          "profile": "s3-jp",
+          "start": 0,
+          "end": 0
+        },
+        {
+          "profile": "sk",
+          "start": 0,
+          "end": 0
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2097152,
+          "end": 2097152
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "path": "src/system/assembly/hardware_helpers.s",
+      "owner": "system/assembly",
+      "responsibility": "Reusable RAM, VDP, Z80 bus and tile-address conversion helpers.",
+      "role": "definitions",
+      "status": "owned",
+      "physical_lines": 124,
+      "origin": {
+        "commit": "36ebf5ff592b0d5d65187aaebf0fb05558bba588",
+        "path": "sonic3k.macros.s",
+        "first_line": 1,
+        "last_line": 122,
+        "sha256": "a282b25fd9b9a3e88c893fc4766590728226a4064485843ab73e90579c336f51"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 0,
+          "end": 0
+        },
+        {
+          "profile": "s3-eu",
+          "start": 0,
+          "end": 0
+        },
+        {
+          "profile": "s3-jp",
+          "start": 0,
+          "end": 0
+        },
+        {
+          "profile": "sk",
+          "start": 0,
+          "end": 0
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2097152,
+          "end": 2097152
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 0,
+          "end": 0
+        }
+      ]
+    },
+    {
       "path": "src/system/debug/s3/placement_catalog.s",
       "owner": "system/debug/s3",
       "responsibility": "Zone debug-list pointer table and literal inclusions of each owned placement catalog.",
@@ -70003,7 +70213,7 @@
       "responsibility": "Cartridge vectors and header, hardware startup, cartridge validation and initial game-mode dispatch.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 689,
+      "physical_lines": 691,
       "origin": {
         "commit": "311352b95436c810fb897541f11a169c69104fe0",
         "path": "s3.s",
@@ -70218,7 +70428,7 @@
       "responsibility": "Cartridge vectors and header, hardware startup, cartridge validation and initial game-mode dispatch.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 499,
+      "physical_lines": 501,
       "origin": {
         "commit": "311352b95436c810fb897541f11a169c69104fe0",
         "path": "sonic3k.s",

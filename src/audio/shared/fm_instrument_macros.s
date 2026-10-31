@@ -1,3 +1,6 @@
+; Owner: audio/shared
+; Responsibility: Licensed driver-local FM instrument parameter and voice record definition helpers
+; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ===========================================================================
 ; Created by Flamewing, based on S1SMPS2ASM version 1.1 by Marc Gordon (AKA Cinossu)
 ; ===========================================================================

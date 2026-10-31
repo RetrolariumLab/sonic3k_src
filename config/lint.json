@@ -3,17 +3,7 @@
   "schema_version": 1,
   "assembly": {
     "dialect": "asl",
-    "paths": [
-      "s3.s",
-      "sonic3k.s",
-      "s3.constants.s",
-      "sonic3k.constants.s",
-      "sonic3k.macros.s",
-      "sonic3k.macrosetup.s",
-      "Sound",
-      "Lockon S3",
-      "src"
-    ]
+    "paths": ["s3.s", "sonic3k.s", "s3.constants.s", "sonic3k.constants.s", "Sound", "Lockon S3", "src"]
   },
   "text": {
     "json": "valid"

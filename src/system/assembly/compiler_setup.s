@@ -1,3 +1,6 @@
+; Owner: system/assembly
+; Responsibility: Assembler output options, safe physical padding macros and compile-time numeric functions
+; Source provenance and ranges: config/reconstruction/source_layout.json
                 padding off                             ; we don't want AS padding out dc.b instructions
                 listing purecode                        ; Want listing file, but only the final code in expanded macros
                 supmode on                              ; we don't need warnings about privileged instructions

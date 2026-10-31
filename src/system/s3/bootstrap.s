@@ -8,14 +8,16 @@
 
 ; ---------------------------------------------------------------------------
                 cpu     68000
-                include "sonic3k.macrosetup.s"          ; include a few basic macros
-                include "sonic3k.macros.s"              ; include some simplifying macros and functions
+                include "src/system/assembly/compiler_setup.s"
+                include "src/system/assembly/hardware_helpers.s"
+                include "src/system/assembly/data_record_macros.s"
+                include "src/audio/shared/bank_and_sample_macros.s"
                 include "sonic3k.constants.s"           ; include some constants
                 include "s3.constants.s"                ; RAM addresses moved around between S3 and S&K
 ; ---------------------------------------------------------------------------
 ; FM voice macros required by the executable Z80 driver
 SonicDriverVer: equ     3                               ; Tell SMPS2ASM that we are targeting Sonic 3's sound driver
-                include "Sound/FM_Voice_Macros.s"
+                include "src/audio/shared/fm_instrument_macros.s"
 
 ; If 1, fixes multiple bugs within the game
 

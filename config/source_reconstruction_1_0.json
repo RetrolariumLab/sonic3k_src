@@ -66,7 +66,7 @@
           "docs/architecture.md",
           "Sound/Z80 Sound Driver.s",
           "config/audio_streams.json",
-          "Sound/FM_Voice_Macros.s",
+          "src/audio/shared/fm_instrument_macros.s",
           "config/audio_driver_payloads.json",
           "scripts/authoring/driver_payloads.py",
           "scripts/validation/audio_source.py"
@@ -282,7 +282,7 @@
     {
       "component": "fm_voice_macro_helpers",
       "license_id_or_status": "licensed",
-      "origin": "Flamewing, based on S1SMPS2ASM 1.1 by Marc Gordon; permission notice retained in Sound/FM_Voice_Macros.s",
+      "origin": "Flamewing, based on S1SMPS2ASM 1.1 by Marc Gordon; permission notice retained in src/audio/shared/fm_instrument_macros.s",
       "redistribution": "allowed_under_retained_notice"
     },
     {
@@ -734,6 +734,12 @@
       "kind": "source_or_tooling",
       "summary": "Remove the unused lock-on screen-event reference",
       "commits": ["f124bbdc4be73cba9df0ae49f5c6871e33e1ca8f"]
+    },
+    {
+      "id": "change-36ebf5ff592b",
+      "kind": "source_or_tooling",
+      "summary": "Check nonemitting assembler definition libraries",
+      "commits": ["36ebf5ff592b0d5d65187aaebf0fb05558bba588"]
     },
     {
       "id": "current-source-stage",
