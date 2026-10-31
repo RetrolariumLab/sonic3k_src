@@ -350,3 +350,49 @@ class RegisteredReaderTests(unittest.TestCase):
         changed = RawCatalog(registry, {"first": {}})
         with self.assertRaises(ValueError):
             changed.encode(packet, target_profile="first", original=text, base=0, symbols={})
+
+
+class IndexedFrameTests(unittest.TestCase):
+    def test_high_frames_are_data_and_alignment_is_not_an_editable_frame(self):
+        raw = bytes.fromhex("bac45600d6d7d800")
+        model = graph.decode(raw, [(0, "frame-index"), (4, "frame-index")], [3, 7])
+        self.assertEqual([len(n["model"]["tokens"]) - 1 for n in model["nodes"]], [3, 3])
+        model["nodes"][0]["model"]["tokens"][0]["frame"] = 255
+        self.assertEqual(graph.encode(model), bytes.fromhex("ffc45600d6d7d800"))
+        with self.assertRaises(ValueError):
+            graph.decode(raw, [(0, "frame-index")], [3, 7])
+        model["nodes"][0]["model"]["tokens"].insert(-1, {"op": "frame", "frame": 1})
+        with self.assertRaises(ValueError):
+            graph.encode(model)
+
+    def test_indexed_flip_is_an_unsigned_stored_flag_not_a_toggle_or_sentinel(self):
+        raw = bytes.fromhex("5a01590055ff")
+        model = codec.decode(raw, abi="frame-flip-index")
+        self.assertEqual(model["tokens"][2], {"op": "frame", "frame": 85, "flip_flag": 255})
+        model["tokens"][0]["flip_flag"] = 2
+        self.assertEqual(codec.encode(model, target_abi="frame-flip-index"), bytes.fromhex("5a02590055ff"))
+        for value in (256, -1, True):
+            model["tokens"][0]["flip_flag"] = value
+            with self.assertRaises(ValueError):
+                codec.encode(model, target_abi="frame-flip-index")
+        with self.assertRaises(ValueError):
+            codec.decode(b"\x5a", abi="frame-flip-index")
+
+    def test_source_lookup_edits_keep_two_physical_aligned_sections(self):
+        original = "Start: dc.b $ba,$ad,$56\neven\ndc.b $c4,$b0,$d6\neven\n"
+        raw, labels, pad = source.assemble(source.parse(original), scope="Start", base=0, external={})
+        model = graph.decode(raw, [(0, "frame-index"), (4, "frame-index")], pad)
+        model["nodes"][1]["model"]["tokens"][1]["frame"] = 0xFC
+        rendered, encoded = source.encode_graph_source(
+            original, model, entries=[(0, "frame-index"), (4, "frame-index")], scope="Start", base=0, external={}
+        )
+        self.assertEqual(encoded, bytes.fromhex("baad5600c4fcd600"))
+        self.assertEqual(rendered.count("even"), 2)
+
+
+class IndexedCoverageTests(unittest.TestCase):
+    def test_discovery_requires_an_actual_literal_pc_relative_frame_read(self):
+        from scripts.authoring.raw_workflow import indexed_references
+
+        text = 'Label: move.b Frames(pc,d0.w),mapping_frame(a1) ; comment\nmove.b Other(pc,d3.w),mapping_frame(a0)\n; move.b Hidden(pc,d0.w),mapping_frame(a0)\ndc.b "move.b Quoted(pc,d0.w),mapping_frame(a0)"\nmove.b (a1,d0.w),mapping_frame(a0)\n'
+        self.assertEqual(indexed_references(text), {"Frames", "Other"})

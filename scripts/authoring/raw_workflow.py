@@ -35,6 +35,21 @@ def dependencies(records, scope):
     return names - labels
 
 
+def indexed_references(text):
+    """Literal indexed frame reads, excluding comments, quotes and register bases."""
+    result = set()
+    for line in text.splitlines():
+        code = line.split(";", 1)[0]
+        match = re.fullmatch(
+            r"\s*(?:[A-Za-z_]\w*:\s*)?move\.b\s+([A-Za-z_]\w*)\(pc,d[0-7]\.w\),\s*mapping_frame\(a[0-6]\)\s*",
+            code,
+            re.I,
+        )
+        if match:
+            result.add(match[1])
+    return result
+
+
 def catalog():
     if load("config/authoring/data_formats.json").get("raw_catalog") != CATALOG:
         raise ValueError("Main format registry does not own the raw source catalog")
@@ -67,8 +82,11 @@ def catalog():
     named = {
         (name, match[1])
         for name in names
-        for match in re.finditer(r"^(AniRaw_[A-Za-z_0-9]+):", (ROOT / name).read_text(), re.M)
+        for match in re.finditer(r"^((?:AniRaw|RawAni)_[A-Za-z_0-9]+):", (ROOT / name).read_text(), re.M)
     }
+    indexed = set().union(*(indexed_references((ROOT / name).read_text()) for name in names))
+    if not indexed <= {symbol for name, symbol in declared}:
+        raise ValueError("Raw catalog omits a direct indexed sprite-frame source")
     if not named <= declared:
         raise ValueError("Raw catalog omits an explicitly named source stream")
     return result, sources

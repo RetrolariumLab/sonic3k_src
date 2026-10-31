@@ -1,13 +1,20 @@
-"""Counted plane frames and four-byte moving frames used by dedicated readers."""
+"""Bounded indexed frames, counted frames, moving frames and particle lanes."""
 
 from scripts.authoring.graphics import _bytes, _integer
 
-ABIS = frozenset(("counted", "delta-frames", "negative-sentinel", "paired-lanes"))
+ABIS = frozenset(("counted", "delta-frames", "negative-sentinel", "paired-lanes", "frame-index", "frame-flip-index"))
 
 
 def length(data, start, abi):
     raw = _bytes(data)
+    if not 0 < len(raw) <= 65536:
+        raise ValueError("Dedicated animation allocation exceeds its bounded storage")
     _integer(start, len(raw), "Dedicated raw source entry")
+    if abi in ("frame-index", "frame-flip-index"):
+        size = len(raw) - start
+        if abi == "frame-flip-index" and size % 2:
+            raise ValueError("Indexed frame/flip table ends inside a record")
+        return size
     if abi in ("negative-sentinel", "paired-lanes"):
         end = next((i for i in range(start, len(raw)) if raw[i] & 128), None)
         if end is None or end == start:
@@ -37,7 +44,14 @@ def decode(data, *, abi):
     raw = _bytes(data)
     if length(raw, 0, abi) != len(raw):
         raise ValueError("Dedicated raw substream includes bytes beyond its reader")
-    if abi in ("negative-sentinel", "paired-lanes"):
+    if abi in ("frame-index", "frame-flip-index"):
+        width = 2 if abi == "frame-flip-index" else 1
+        header = {}
+        tokens = [
+            {"op": "frame", "frame": raw[i]} | ({"flip_flag": raw[i + 1]} if width == 2 else {})
+            for i in range(0, len(raw), width)
+        ] + [{"op": "index-bound"}]
+    elif abi in ("negative-sentinel", "paired-lanes"):
         count = next(i for i, value in enumerate(raw) if value & 128)
         header = {"secondary_offset": count + 1} if abi == "paired-lanes" else {}
         tokens = [
@@ -98,7 +112,35 @@ def _encode_particles(model, target_abi):
     return result
 
 
+def _encode_lookup(model, target_abi):
+    width = 2 if target_abi == "frame-flip-index" else 1
+    if (
+        not isinstance(model, dict)
+        or set(model) != {"abi", "header", "tokens"}
+        or model["abi"] != target_abi
+        or model["header"] != {}
+        or not isinstance(model["tokens"], list)
+        or not 1 < len(model["tokens"]) <= 65536 // width + 1
+        or model["tokens"][-1] != {"op": "index-bound"}
+    ):
+        raise ValueError("Indexed frame table differs from its bounded record layout")
+    output = bytearray()
+    fields = {"op", "frame", "flip_flag"} if width == 2 else {"op", "frame"}
+    for frame in model["tokens"][:-1]:
+        if not isinstance(frame, dict) or set(frame) != fields or frame["op"] != "frame":
+            raise ValueError("Indexed frame fields differ from their caller ABI")
+        output.append(_integer(frame["frame"], 256, "Indexed sprite frame"))
+        if width == 2:
+            output.append(_integer(frame["flip_flag"], 256, "Indexed frame flip flag"))
+    result = bytes(output)
+    if decode(result, abi=target_abi) != model:
+        raise ValueError("Indexed frame encoding changes its record boundaries")
+    return result
+
+
 def encode(model, *, target_abi):
+    if target_abi in ("frame-index", "frame-flip-index"):
+        return _encode_lookup(model, target_abi)
     if target_abi in ("negative-sentinel", "paired-lanes"):
         return _encode_particles(model, target_abi)
     if (

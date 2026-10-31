@@ -1,13 +1,17 @@
 # Raw sprite animation source
 
 The registered source catalog is `config/authoring/raw_formats.json`, linked
-from the main content registry. It covers 638 named source entries in 136 closed
-allocation groups across 135 source files. These include all 72 `AniRaw_*`
+from the main content registry. It covers 735 source entries in 233 closed
+allocation groups across 205 source files. These include all 72 `AniRaw_*`
 declarations, direct NoSST inputs, object-state assignments, pointer-table
 targets, complex-child inputs and dedicated particle readers. The catalog pins
-275 consumer source owners so reader changes require ABI review. Directly
-indexed `RawAni_*` frame tables remain a separate unfinished contract; this
-catalog does not claim that every inline animation table is already covered.
+327 consumer source owners so reader changes require ABI review.
+
+All 59 `RawAni_*` declarations are covered: 58 indexed tables and one ordinary
+raw program. The catalog additionally registers 39 anonymous or differently
+named tables used by direct indexed frame reads. Source coverage checks both
+label prefixes and literal PC-relative reads into mapping_frame, independently
+of the table names.
 
 `RawCatalog` exposes profile-bound decode/encode packets. A packet binds the
 source declaration tree, scoped entry symbol, byte capacity, exact external
@@ -93,8 +97,14 @@ child constructors may also supply a zero pointer and a movement-only callback.
 The constructor packet is 22 bytes: four longwords, signed X/Y offset bytes and
 two velocity words, after the shared count-minus-one word.
 
-Directly indexed `RawAni_*` frame lookups and additional palette-cycle formats
-still need their own source editing contracts before complete content
-acceptance. The registered program corpora are byte-checked independently in
-every active base profile and in their composite views; this does not replace
-that remaining format work or the full release gate.
+Additional palette-cycle formats still need their source editing contracts
+before complete content acceptance. The registered program corpora are
+byte-checked independently in every active base profile and in their composite
+views; this does not replace that remaining format work or the full release
+gate.
+
+Indexed lookups stop at their declared allocation or explicit alignment, not at
+an opcode byte. `RawAni_90BCA` contains two three-frame sections separated by
+even alignment; both sections are registered, and alignment bytes cannot turn
+into extra editable frames. Continue-screen records retain their full stored
+flip flag byte: nonzero means set X flip, rather than toggle it.

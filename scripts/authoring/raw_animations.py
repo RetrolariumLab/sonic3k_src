@@ -22,6 +22,8 @@ ABIS = frozenset(
         "delta-frames",
         "negative-sentinel",
         "paired-lanes",
+        "frame-index",
+        "frame-flip-index",
     )
 )
 COMMANDS = {0xFC: "restart", 0xF8: "jump", 0xF4: "custom-routine"}

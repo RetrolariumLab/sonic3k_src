@@ -40,8 +40,16 @@
       "sha256": "c361d70f0015ee36a61650d43fb302d675bca1b1d9be8a03d74da39420fc6a2d"
     },
     {
+      "path": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "sha256": "59a4d4cfbdb156ea6b7f5dd1d8c3c57debfdb1e3bbd3c13d1ddaff2d340bfc96"
+    },
+    {
       "path": "src/objects/bonus/gumball/sk/object_catalog.s",
       "sha256": "307d7d47b4ac7babf17352b62f7a4234eff6178f6b8ed2994a85706c4648322b"
+    },
+    {
+      "path": "src/objects/bonus/pachinko/sk/invisible_object.s",
+      "sha256": "12befcdc2db537a117ccfcaa0a42c92603aff0c8a4f12d183b9071ab99e0dc49"
     },
     {
       "path": "src/objects/bonus/s3/gumball_bumpers.s",
@@ -184,12 +192,20 @@
       "sha256": "cea5e3bf475b6addfdd17be069b619d61c2eb014471b9094a7790fe4a22bb24d"
     },
     {
+      "path": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "sha256": "f0fe6991d60008c2ddd7553fe7e3d43fe6b2245d7919265928a6c60c291d3ef7"
+    },
+    {
       "path": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
       "sha256": "bc2489a8f612fc7b3d0429217f7076f9b2b5c94fb2646aa3b9a1566def333891"
     },
     {
       "path": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
       "sha256": "88d50ebdc7c022f85f6e883c52d8fe7dba16d634ac74a2aea2658691708e329d"
+    },
+    {
+      "path": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "sha256": "0a49936399244838e1c8195db1666633e4fcedfe01c28397101750cd0325706e"
     },
     {
       "path": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
@@ -248,12 +264,20 @@
       "sha256": "7b8101f50234b58c9e6ae7191444a16e0c35ac4e23c471029bea93e5cb70b1a0"
     },
     {
+      "path": "src/objects/bosses/hcz/miniboss/s3/motion_helpers.s",
+      "sha256": "48a274674bd8b1a72bcf1c4c00314c5daf1ca0862435e03bd22f499e7160c5bc"
+    },
+    {
       "path": "src/objects/bosses/hcz/miniboss/s3/object_catalog.s",
       "sha256": "1a57c6c0b09c58e932b3d2855ddfbf6406a3806b5e2d802ee353150610eddbaf"
     },
     {
       "path": "src/objects/bosses/hcz/miniboss/sk/engine_and_effects.s",
       "sha256": "ace0b46901a0c5b9de41066b98bdee06387cdde2d32792791e6039749f0a8db6"
+    },
+    {
+      "path": "src/objects/bosses/hcz/miniboss/sk/motion_helpers.s",
+      "sha256": "303d7a48883bd19adfcc474c281dbd86dac361316098d5c0395f8db7adec1f21"
     },
     {
       "path": "src/objects/bosses/hcz/miniboss/sk/object_catalog.s",
@@ -264,8 +288,16 @@
       "sha256": "5f898b3734b2ce10efc3b12c03482618af9dbc3e60bc7b139f47c019bfa57086"
     },
     {
+      "path": "src/objects/bosses/icz/s3/miniboss.s",
+      "sha256": "8383b174fff0dab18938e6006305d3d60dd8dda09b1499ef5e851b86e7866ec0"
+    },
+    {
       "path": "src/objects/bosses/icz/sk/end_boss.s",
       "sha256": "4f9e5851c7d07845477f89b18f0cd041cf03be3544f380615636fc62a2354963"
+    },
+    {
+      "path": "src/objects/bosses/icz/sk/miniboss.s",
+      "sha256": "e6c2b9b05450c14e53f157ee410e48d677a43ce2a0803666860d541d13783215"
     },
     {
       "path": "src/objects/bosses/lbz/end_boss/sk/battle_and_attacks.s",
@@ -320,6 +352,10 @@
       "sha256": "0de1cd95af8e180d48a68e67b44600c2e65baab3aaf3adb7308595942201c87d"
     },
     {
+      "path": "src/objects/bosses/lbz/s3/act2_robotnik_ship.s",
+      "sha256": "3d67ce5bef17e7a8d8b7b4dedc4bddfb505c936bbba8a1cedbbc623824ee0bc6"
+    },
+    {
       "path": "src/objects/bosses/lbz/s3/end_boss.s",
       "sha256": "2811ccf577013e689eb051c4a8d5ec6537cae47944d8ff1e101b1086067bdbde"
     },
@@ -332,12 +368,20 @@
       "sha256": "42ecdc7ffe44827abb43b767a4442cd0d586e45ae5bcdcf549265cfd0be37382"
     },
     {
+      "path": "src/objects/bosses/lbz/sk/act2_robotnik_ship.s",
+      "sha256": "3d86961a358dd35b5ceeb11fce2fb92fb78aaaa21e79858f47b2944c08948761"
+    },
+    {
       "path": "src/objects/bosses/lbz/sk/miniboss.s",
       "sha256": "4ffdad1ec7eeb30e608a6d67deefa573c7ad020389dd69932f050a4a1826c9e7"
     },
     {
       "path": "src/objects/bosses/lrz/end_boss/sk/battle_and_attacks.s",
       "sha256": "fd110b86287b15d722e3cf81efc2f8f77376c09e8d0f07b9751b311d9021ccf8"
+    },
+    {
+      "path": "src/objects/bosses/lrz/end_boss/sk/motion_helpers.s",
+      "sha256": "0ea9f5a466a589aa31072d390095968f84d8efb9e99ad248d0608360f30706df"
     },
     {
       "path": "src/objects/bosses/lrz/end_boss/sk/object_catalog.s",
@@ -360,6 +404,10 @@
       "sha256": "5766f3670c678db8d618a49f8e7aa374c87a0c7d647adef0d517cc49e7ef349f"
     },
     {
+      "path": "src/objects/bosses/mgz/end_boss/s3/motion_helpers.s",
+      "sha256": "99343d8d73dfe7a4b2228139f35c61facfea451d85efdf853b5dfffb41cfb562"
+    },
+    {
       "path": "src/objects/bosses/mgz/end_boss/s3/object_catalog.s",
       "sha256": "82baf09cab060aa5b8ed8141fc6a66574760c1cd00218d339913f70b8cf880d3"
     },
@@ -372,8 +420,16 @@
       "sha256": "cc78260324639163fb1a99db4abdce0f764c957abf8e8691823c9ba1a16a6583"
     },
     {
+      "path": "src/objects/bosses/mgz/end_boss/sk/motion_helpers.s",
+      "sha256": "1996a266b50098972314c4dde6f165bdc819b1e19ff76c768cb46c54921b91d7"
+    },
+    {
       "path": "src/objects/bosses/mgz/end_boss/sk/object_catalog.s",
       "sha256": "365b71b51ae6bf7c09fa08e2be53ada1670b1e2d55f3248a07c248197390fbf6"
+    },
+    {
+      "path": "src/objects/bosses/mgz/end_boss/sk/projectiles_and_defeat.s",
+      "sha256": "e87b07690ff7a8f735978634478b3dd9841d3089a4bc8dc56be4f280ba20ade4"
     },
     {
       "path": "src/objects/bosses/mgz/miniboss/s3/object_catalog.s",
@@ -406,6 +462,10 @@
     {
       "path": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
       "sha256": "c5046777ad6312c27f088b15afd2301952792400074bd32f25993a1767e79618"
+    },
+    {
+      "path": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
+      "sha256": "f70248540e0605022ec5eadab691b38c545631c696b996d7c30962220367f885"
     },
     {
       "path": "src/objects/bosses/mhz/miniboss/sk/object_catalog.s",
@@ -458,6 +518,10 @@
     {
       "path": "src/objects/cutscenes/hpz/sk/aftermath_and_player_guidance.s",
       "sha256": "0eaf1e05768d9a23767a4a200363a2ea90ad6711b728c5955494542a87c41ee7"
+    },
+    {
+      "path": "src/objects/cutscenes/hpz/sk/crane.s",
+      "sha256": "ae94d60e6dd49bc824a1b2ba04209f5acf10209307e5ca5c0daa354608095c5c"
     },
     {
       "path": "src/objects/cutscenes/hpz/sk/effects.s",
@@ -586,6 +650,10 @@
     {
       "path": "src/objects/ending/sk/scenery_and_creatures.s",
       "sha256": "fb501174f3630472af4b3676270b7b4d66a6924bfa68922d99054fa210b717b1"
+    },
+    {
+      "path": "src/objects/ending/sk/super_character_transition.s",
+      "sha256": "1cad9c5407baa8fee2060542674fbc11031b0d0a25e173fe072148bca5e477dc"
     },
     {
       "path": "src/objects/enemies/aiz/s3/bloominator.s",
@@ -864,6 +932,10 @@
       "sha256": "887bfce78ff797c7c5f1ffc6cec762339b5437ea31dc69cf9c5f5af6030d5c0d"
     },
     {
+      "path": "src/objects/players/knuckles/sk/glide_motion.s",
+      "sha256": "96ae9756148bd4d183ba3fc7773a2f9b42d6b0d6ac3fb8ac5c9d1c5ed82fe7c3"
+    },
+    {
       "path": "src/objects/players/tails/s3/carrying.s",
       "sha256": "4c46d2c79f05c720a39581e22a694c5fe48b01e05962dfd26b054f3cc804e704"
     },
@@ -1052,6 +1124,10 @@
       "sha256": "f6a946fd6b6ba6f9e66fd1931820f6b04eb89d5c5672f88719ed5dbbd4c4e9d2"
     },
     {
+      "path": "src/objects/terrain/icz/s3/snow_pile.s",
+      "sha256": "1446c74c1a0844ed714f3fc1da9050ba5c01aba44de4edae00f900fc5d7b868f"
+    },
+    {
       "path": "src/objects/terrain/icz/s3/stalactite.s",
       "sha256": "5d9b4f850e108856a1045b3c02949d9d1d734a941c6e2a6430ff85c87b446d22"
     },
@@ -1072,24 +1148,152 @@
       "sha256": "a3a69bf29ef6fb264082cc160794a9c88db0b5a4842ece5ecd9ad61c8a4e3318"
     },
     {
+      "path": "src/objects/terrain/icz/sk/snow_pile.s",
+      "sha256": "cfbc83bb64dcb78a7a0b9bb6f7a5a1ea312813c1b2f5716c3b57c0402b96f487"
+    },
+    {
       "path": "src/objects/terrain/icz/sk/stalactite.s",
       "sha256": "b985d4febc8755ff320d72f5caf4dd1c85812039fdaff58bf780f942322bf0b3"
+    },
+    {
+      "path": "src/objects/zones/aiz/s3/hollow_tree.s",
+      "sha256": "5a71af55b7518d3ce8590cd134a37d05d12846bced68112cd4ae81a960e9cb59"
     },
     {
       "path": "src/objects/zones/aiz/s3/plane_intro.s",
       "sha256": "ef91c0f5e8fb1d5f80339915ac59c00043b8121608845711720bd20c83ef29f9"
     },
     {
+      "path": "src/objects/zones/aiz/s3/ride_vine.s",
+      "sha256": "5489c2826862638aaa4d5ca8ee860aada057409c395b2c61ab32ef60654b8f06"
+    },
+    {
+      "path": "src/objects/zones/aiz/s3/spiked_log.s",
+      "sha256": "f3654203a93241770f2159bc222a1324ca6d37347442ba227e29da27b90031a6"
+    },
+    {
+      "path": "src/objects/zones/aiz/sk/hollow_tree.s",
+      "sha256": "403fc0c296bea9d36c409c0a3076e8b0a5959745cc0820797c05dad7d79af203"
+    },
+    {
+      "path": "src/objects/zones/aiz/sk/ride_vine.s",
+      "sha256": "afbc15dd3e4a515980c621f04599f7e8e168a23060041b4a21fb1b8f39ed4ba0"
+    },
+    {
+      "path": "src/objects/zones/aiz/sk/spiked_log.s",
+      "sha256": "605ff65dc7ec3d9ed22135f14f64de0ea7a3860271ecaad2c7409899672aa016"
+    },
+    {
+      "path": "src/objects/zones/cnz/s3/cylinder.s",
+      "sha256": "d0b98a631f5ebcb38497aaaa651224226daf34c0a3066caabf83300514c6a4aa"
+    },
+    {
       "path": "src/objects/zones/cnz/s3/water_level_controls.s",
       "sha256": "74428a8fbc770180d151aec35dcbf53cf3eb0f75adf4e8d8e5ce374a294a06e1"
+    },
+    {
+      "path": "src/objects/zones/cnz/s3/wire_cage.s",
+      "sha256": "af42c46ce1724ce939d0fc8eeedff69139ec73d8af759332a4d2b9496de217a7"
+    },
+    {
+      "path": "src/objects/zones/cnz/sk/cylinder.s",
+      "sha256": "2504d3837556eaa88cfce719f0563a0e24d2a8d32c3c383a08f3702ca272b3f6"
+    },
+    {
+      "path": "src/objects/zones/cnz/sk/wire_cage.s",
+      "sha256": "0c7685ec0fdce4512dee59e7f124ed18e3cf27c6b2b68f30da0446a2f8f33356"
+    },
+    {
+      "path": "src/objects/zones/dez/sk/gravity_hub.s",
+      "sha256": "efaac8b940cd2792c2e3242c6ee53cd50bf6b31a35adb6cead3a50c1f28d66a6"
+    },
+    {
+      "path": "src/objects/zones/dez/sk/gravity_tube.s",
+      "sha256": "f2909bcb1143bc50b4d9612d6d3cc24db0f4716541b93352009818bae45e2f1c"
+    },
+    {
+      "path": "src/objects/zones/dez/sk/teleporter.s",
+      "sha256": "4eac44f2dccbef453219133942eaaa9e03e1476ce2f23a92544590584adfa125"
+    },
+    {
+      "path": "src/objects/zones/fbz/sk/chain_link.s",
+      "sha256": "7125b29916fd713454b4fc4a39f8c81f5e02eb7aa0edc6afec76c529b953c712"
+    },
+    {
+      "path": "src/objects/zones/fbz/sk/spinning_pole.s",
+      "sha256": "e90bbd261826b5d61cf846caad6489fe9ec3ce3884a16d53750610fcdc4f27fe"
+    },
+    {
+      "path": "src/objects/zones/fbz/sk/wire_cages.s",
+      "sha256": "f626520dec4c54b949020dfb41fdacb8f82702accff64b54831d195609b01ded"
     },
     {
       "path": "src/objects/zones/hpz/sk/emerald_resources.s",
       "sha256": "759dcc6aaa7b3448d46141fe86415e7cf82dbe9f7a0247cd72c690c13f10dc60"
     },
     {
+      "path": "src/objects/zones/hpz/sk/master_emerald.s",
+      "sha256": "3feaf8cd7c64c7543274151822ef8bf56a1e94bfb44cb1eea0d6c7befde74cbc"
+    },
+    {
       "path": "src/objects/zones/hpz/sk/special_stage_control.s",
       "sha256": "9e953de1e93c171657e0a7071605af2d7df84b1952bc547d029178fa2faa5e2d"
+    },
+    {
+      "path": "src/objects/zones/lbz/s3/ride_grapple.s",
+      "sha256": "9b6e60dd47f5591b04395981bb90e8bb6a3b6de4492208ca3b37b3d4a21e957e"
+    },
+    {
+      "path": "src/objects/zones/lbz/s3/tube_elevator.s",
+      "sha256": "cd3729a9016c7a6c01e6259f183c105ce0b77dd3dd233000b5d6c595d238af02"
+    },
+    {
+      "path": "src/objects/zones/lbz/sk/ride_grapple.s",
+      "sha256": "bc92c2d26e2c42cafd81c81b44426514d2de93439a910d43c53c42bcd527225b"
+    },
+    {
+      "path": "src/objects/zones/lbz/sk/tube_elevator.s",
+      "sha256": "f0ce0e67e5a7ade4055864c2075e9b4557957374027336550ea2a824d55c90a6"
+    },
+    {
+      "path": "src/objects/zones/lrz/sk/corkscrew.s",
+      "sha256": "4e53ca95b6f070c77f7be77b91ce6065d22ae4266ab2ac9354e2fdeab6ed2beb"
+    },
+    {
+      "path": "src/objects/zones/lrz/sk/smashing_spike_platform.s",
+      "sha256": "3ef4a7ebd10d5424cc834cbe94077791d53f81638bf62d0869f7782dcfc2dccb"
+    },
+    {
+      "path": "src/objects/zones/lrz/sk/turbine_sprites.s",
+      "sha256": "52f4fb6c21df8a4ed1ae0ac10ca58644efbe553c06f7c977ab6b08f0ba55978f"
+    },
+    {
+      "path": "src/objects/zones/lrz/sk/wall_ride.s",
+      "sha256": "902642af6af1626b98b2252e7e1467de10c31a605cbadf95b18601fdcac554f3"
+    },
+    {
+      "path": "src/objects/zones/mgz/s3/twisting_loop.s",
+      "sha256": "2b5bdc91af0b58ca0bf7556e1d9905a404869ae98c1bfe21743ddd428748b97d"
+    },
+    {
+      "path": "src/objects/zones/mgz/sk/twisting_loop.s",
+      "sha256": "e3be89ffeb83d61c06c826ca73e57e43a138b7ef6bace85679a37204b22cc8ad"
+    },
+    {
+      "path": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "sha256": "06b7abf43806647ec2e67890f6cca4ecdbde8e4809b2bbd9a16c43b48b747885"
+    },
+    {
+      "path": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "sha256": "71a49ebd137ccdbc894fe99cfd0e396e5c53a3f1e6ab407bf6f97af58b3f10a0"
+    },
+    {
+      "path": "src/objects/zones/mhz/sk/swing_vine.s",
+      "sha256": "74c24a56bb7419d7083e1b15b79a188e34c267d8fec7852351c69c4333800b0f"
+    },
+    {
+      "path": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
+      "sha256": "f85fbee504435c927e7c1fa6b81ebdb076d2d813c59bc0152ba12ef0e0de94ad"
     },
     {
       "path": "src/objects/zones/soz/sk/ghost_capsule.s",
@@ -1102,9 +1306,41 @@
     {
       "path": "src/objects/zones/soz/sk/ghost_resources.s",
       "sha256": "59ef0d3a52b4bffbede73ff4828a48f217235e3f1f8502c254d8c0f5d30b3ad3"
+    },
+    {
+      "path": "src/objects/zones/soz/sk/rappel_wire.s",
+      "sha256": "32aed9d0f7210f4dc58202667a3f94f8fc7eed29a7642face58d804b111f33d1"
     }
   ],
   "groups": [
+    {
+      "path": "src/game/level/zones/lrz/sk/act3_autoscroll.s",
+      "symbol": "RawAni_7917E",
+      "scope": "RawAni_7917E",
+      "first_line": 183,
+      "last_line": 185,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 4,
+      "declarations_sha256": "c431301473e48b563afbdf87bf1345b327198d8e2c1c633f8414fa6c6ba34c82",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_7917E"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/game/level/zones/lrz/sk/act3_autoscroll.s",
+      "symbol": "byte_79554",
+      "scope": "byte_79554",
+      "first_line": 489,
+      "last_line": 508,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 18,
+      "declarations_sha256": "61deae666fc4f4ffbf12c6c41791b6a2934b6f8c4dc7a88c7179b7427c5f9877",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_79554"],
+      "stored_markers": []
+    },
     {
       "path": "src/game/level/zones/lrz/sk/act3_autoscroll.s",
       "symbol": "byte_7968C",
@@ -1142,6 +1378,20 @@
       "stored_markers": []
     },
     {
+      "path": "src/game/modes/s3/continue_screen.s",
+      "symbol": "RawAni_3F320",
+      "scope": "RawAni_3F320",
+      "first_line": 212,
+      "last_line": 218,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 10,
+      "declarations_sha256": "a51ef76137a61de7c60e0babc7e75f0a1845123c12ef54b6401fe7f2def9e00f",
+      "entries": [[0, "frame-flip-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_3F320"],
+      "stored_markers": []
+    },
+    {
       "path": "src/game/modes/s3/ending_credits_data.s",
       "symbol": "AniRaw_41932",
       "scope": "AniRaw_41932",
@@ -1169,6 +1419,20 @@
         "AniRaw_41950",
         "AniRaw_41959"
       ],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "symbol": "RawAni_61388",
+      "scope": "RawAni_61388",
+      "first_line": 423,
+      "last_line": 424,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 4,
+      "declarations_sha256": "dde20e2cadcd986db78a73dcbf57c902bd15012dc8127cb1d1e3a36db1a4bfc9",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_61388"],
       "stored_markers": []
     },
     {
@@ -1208,6 +1472,34 @@
         "byte_61482",
         "byte_61486"
       ],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/bonus/pachinko/sk/invisible_object.s",
+      "symbol": "RawAni_4A110",
+      "scope": "RawAni_4A110",
+      "first_line": 37,
+      "last_line": 39,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 8,
+      "declarations_sha256": "a2c8c4a71ecd371c80c8cde17137b9519c4727c7f1d3bece1a3da4b7124d8f69",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_4A110"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/bonus/s3/gumball_bumpers.s",
+      "symbol": "RawAni_43F54",
+      "scope": "RawAni_43F54",
+      "first_line": 453,
+      "last_line": 454,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 4,
+      "declarations_sha256": "0b043b634c83986669ed851b60cca32b851b89e3e4cf57130ad998f0b0b531b5",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_43F54"],
       "stored_markers": []
     },
     {
@@ -1335,6 +1627,20 @@
     },
     {
       "path": "src/objects/bosses/aiz/s3/miniboss.s",
+      "symbol": "byte_46D96",
+      "scope": "byte_46D96",
+      "first_line": 393,
+      "last_line": 400,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 6,
+      "declarations_sha256": "1ed386d3ee576b634c437ac94dc83f25288f594cb477a2d48a1841ec914e10df",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_46D96"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/bosses/aiz/s3/miniboss.s",
       "symbol": "byte_4703C",
       "scope": "byte_4703C",
       "first_line": 697,
@@ -1365,6 +1671,20 @@
         "byte_4707A",
         "byte_47085"
       ],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/bosses/aiz/sk/miniboss.s",
+      "symbol": "byte_68E78",
+      "scope": "byte_68E78",
+      "first_line": 410,
+      "last_line": 417,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 6,
+      "declarations_sha256": "2fec5250b6cdb16e7ffc4110f954ea6642554e3024b316601c8401df4bab1d00",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_68E78"],
       "stored_markers": []
     },
     {
@@ -1444,6 +1764,20 @@
       "stored_markers": []
     },
     {
+      "path": "src/objects/bosses/cnz/miniboss/s3/coil_and_sparks.s",
+      "symbol": "CNZMinibossDebris_Frames",
+      "scope": "CNZMinibossDebris_Frames",
+      "first_line": 171,
+      "last_line": 173,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 10,
+      "declarations_sha256": "e99cc78b5525848e6db60557ae418be8deee895927449a68cb9ce05723d5359b",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["CNZMinibossDebris_Frames"],
+      "stored_markers": []
+    },
+    {
       "path": "src/objects/bosses/cnz/miniboss/s3/object_catalog.s",
       "symbol": "AniRaw_CNZMinibossOpening",
       "scope": "AniRaw_CNZMinibossOpening",
@@ -1477,6 +1811,20 @@
         "AniRaw_CNZMinibossSparks3",
         "AniRaw_CNZMBossBoundEffect"
       ],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/bosses/cnz/miniboss/sk/coil_and_sparks.s",
+      "symbol": "CNZMinibossDebris_Frames",
+      "scope": "CNZMinibossDebris_Frames",
+      "first_line": 171,
+      "last_line": 173,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 10,
+      "declarations_sha256": "e99cc78b5525848e6db60557ae418be8deee895927449a68cb9ce05723d5359b",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["CNZMinibossDebris_Frames"],
       "stored_markers": []
     },
     {
@@ -1527,6 +1875,20 @@
       "entries": [[0, "fixed"]],
       "external_symbols": [],
       "members": ["AniRaw_RobotnikHead"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/bosses/ddz/sk/battle_control.s",
+      "symbol": "byte_81DB0",
+      "scope": "byte_81DB0",
+      "first_line": 493,
+      "last_line": 497,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 4,
+      "declarations_sha256": "469b190ed7be003ff76b15841b9f5608d4caf77597ebaa593cd81a78c7116ffb",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_81DB0"],
       "stored_markers": []
     },
     {
@@ -1606,6 +1968,20 @@
       ]
     },
     {
+      "path": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "symbol": "RawAni_80490",
+      "scope": "RawAni_80490",
+      "first_line": 276,
+      "last_line": 278,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 4,
+      "declarations_sha256": "fe1e5f7e96c50699ada5d187c5cb919c6b73fefe3c853ffb4e8795c895cfe94c",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_80490"],
+      "stored_markers": []
+    },
+    {
       "path": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
       "symbol": "byte_8133E",
       "scope": "byte_8133E",
@@ -1625,6 +2001,34 @@
       ],
       "external_symbols": [],
       "members": ["byte_8133E", "byte_81349", "byte_81354", "byte_8135A", "byte_8138E", "byte_81397"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "symbol": "byte_7ED50",
+      "scope": "byte_7ED50",
+      "first_line": 292,
+      "last_line": 297,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 4,
+      "declarations_sha256": "e1316e57bd5f7083b3ccc4f6a2c177bff63605bc35f5e38c6f8d09cbb9137dd4",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_7ED50"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "symbol": "byte_7EF2E",
+      "scope": "byte_7EF2E",
+      "first_line": 501,
+      "last_line": 502,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 12,
+      "declarations_sha256": "170e1e2aa8302b26a6b645a6fa81d6057724e48491ea5983fcdc153df17d69ca",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_7EF2E"],
       "stored_markers": []
     },
     {
@@ -1829,6 +2233,34 @@
       "stored_markers": []
     },
     {
+      "path": "src/objects/bosses/hcz/miniboss/s3/motion_helpers.s",
+      "symbol": "byte_48994",
+      "scope": "byte_48994",
+      "first_line": 288,
+      "last_line": 305,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 16,
+      "declarations_sha256": "3ef32fcb21f9e290ccea804d234d8914b02ea6369c3e3c970661055a12292c1e",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_48994"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/bosses/hcz/miniboss/s3/motion_helpers.s",
+      "symbol": "byte_48A7C",
+      "scope": "byte_48A7C",
+      "first_line": 414,
+      "last_line": 423,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 16,
+      "declarations_sha256": "8b7060f741ca40a075c7a8fa63bb915c9dc24516989cdb939f2da91f416945e9",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_48A7C"],
+      "stored_markers": []
+    },
+    {
       "path": "src/objects/bosses/hcz/miniboss/s3/object_catalog.s",
       "symbol": "byte_48C30",
       "scope": "byte_48C30",
@@ -1858,6 +2290,34 @@
         "byte_48C92",
         "byte_48C96"
       ],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/bosses/hcz/miniboss/sk/motion_helpers.s",
+      "symbol": "byte_6AB50",
+      "scope": "byte_6AB50",
+      "first_line": 288,
+      "last_line": 305,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 16,
+      "declarations_sha256": "7fc7592ebb6305460b2bb7c1a53b9e042dda2c8ebc368537367d6315babdc7ca",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_6AB50"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/bosses/hcz/miniboss/sk/motion_helpers.s",
+      "symbol": "byte_6AC38",
+      "scope": "byte_6AC38",
+      "first_line": 414,
+      "last_line": 423,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 16,
+      "declarations_sha256": "e1ac87f825059b4e1fcf40943aaff686b27b8c0128eef2ede32957e2b0d0a954",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_6AC38"],
       "stored_markers": []
     },
     {
@@ -1912,6 +2372,20 @@
       "stored_markers": []
     },
     {
+      "path": "src/objects/bosses/icz/s3/miniboss.s",
+      "symbol": "RawAni_4E8BA",
+      "scope": "RawAni_4E8BA",
+      "first_line": 519,
+      "last_line": 521,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 6,
+      "declarations_sha256": "93be160bd6a8a6705686afa14af4ed9dfb5aebe4295d1652932d4bf184238f4a",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_4E8BA"],
+      "stored_markers": []
+    },
+    {
       "path": "src/objects/bosses/icz/sk/end_boss.s",
       "symbol": "byte_72380",
       "scope": "byte_72380",
@@ -1928,6 +2402,20 @@
       ],
       "external_symbols": [],
       "members": ["byte_72380", "byte_7238F", "byte_7239C"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/bosses/icz/sk/miniboss.s",
+      "symbol": "RawAni_716C2",
+      "scope": "RawAni_716C2",
+      "first_line": 517,
+      "last_line": 519,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 6,
+      "declarations_sha256": "f697d85e4ab16bbb402c0f96ec9f803975ba158b29303b3c967a4e0eb6f3aabe",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_716C2"],
       "stored_markers": []
     },
     {
@@ -1999,6 +2487,34 @@
         "byte_7386A",
         "byte_73874"
       ],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "symbol": "RawAni_72E96",
+      "scope": "RawAni_72E96",
+      "first_line": 452,
+      "last_line": 454,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 8,
+      "declarations_sha256": "7f7dc99d3629c31af826c00350f750e40960e04d8840b920d03d464ae5002c74",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_72E96"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "symbol": "RawAni_5169C",
+      "scope": "RawAni_5169C",
+      "first_line": 425,
+      "last_line": 427,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 8,
+      "declarations_sha256": "2658cf513a249a1cf12ec4e4fd71d3d03e9240f1c6a35139bf848d5f87963842",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_5169C"],
       "stored_markers": []
     },
     {
@@ -2077,6 +2593,20 @@
       "stored_markers": []
     },
     {
+      "path": "src/objects/bosses/lbz/s3/act2_robotnik_ship.s",
+      "symbol": "RawAni_5AAE8",
+      "scope": "RawAni_5AAE8",
+      "first_line": 223,
+      "last_line": 225,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 2,
+      "declarations_sha256": "52dc59447af9d3600ecb88cf7c4685fdb7f7fe32ef8b43f35813c66e80a14821",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_5AAE8"],
+      "stored_markers": []
+    },
+    {
       "path": "src/objects/bosses/lbz/s3/end_boss.s",
       "symbol": "byte_50C76",
       "scope": "byte_50C76",
@@ -2093,6 +2623,20 @@
       ],
       "external_symbols": [],
       "members": ["byte_50C76", "byte_50C7C", "byte_50C80", "byte_50C84"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/bosses/lbz/s3/miniboss.s",
+      "symbol": "byte_4F7FA",
+      "scope": "byte_4F7FA",
+      "first_line": 358,
+      "last_line": 359,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 6,
+      "declarations_sha256": "ea8d05ffbc6f552fff6d868957e82eabfada146d1a5b8e26e6095019a9286052",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_4F7FA"],
       "stored_markers": []
     },
     {
@@ -2131,6 +2675,34 @@
       "stored_markers": []
     },
     {
+      "path": "src/objects/bosses/lbz/sk/act2_robotnik_ship.s",
+      "symbol": "RawAni_8D55C",
+      "scope": "RawAni_8D55C",
+      "first_line": 225,
+      "last_line": 227,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 2,
+      "declarations_sha256": "7d2770044c749dc0eb88a3134d8d84e850e7e68aa08b88a7e9d02c2e738c8942",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_8D55C"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/bosses/lbz/sk/miniboss.s",
+      "symbol": "byte_727EE",
+      "scope": "byte_727EE",
+      "first_line": 386,
+      "last_line": 387,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 6,
+      "declarations_sha256": "cd332ceded9cbee1730b3a4aa2692725601b5cfd12644a8a1fae596ffa33347b",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_727EE"],
+      "stored_markers": []
+    },
+    {
       "path": "src/objects/bosses/lbz/sk/miniboss.s",
       "symbol": "byte_72988",
       "scope": "byte_72988",
@@ -2142,6 +2714,20 @@
       "entries": [[0, "fixed"]],
       "external_symbols": [],
       "members": ["byte_72988"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/bosses/lrz/end_boss/sk/motion_helpers.s",
+      "symbol": "RawAni_7A0BA",
+      "scope": "RawAni_7A0BA",
+      "first_line": 217,
+      "last_line": 219,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 10,
+      "declarations_sha256": "a39717ca39e776fd3272f4c754b505dc61f9ae9735f71566e1ec7d55455b4035",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_7A0BA"],
       "stored_markers": []
     },
     {
@@ -2165,6 +2751,20 @@
       "stored_markers": []
     },
     {
+      "path": "src/objects/bosses/lrz/miniboss/sk/battle_and_attacks.s",
+      "symbol": "RawAni_78A9C",
+      "scope": "RawAni_78A9C",
+      "first_line": 504,
+      "last_line": 506,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 12,
+      "declarations_sha256": "dddb6c70231873fa1a230cb0b594044c3839713764f0040e9f5139980612f6f6",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_78A9C"],
+      "stored_markers": []
+    },
+    {
       "path": "src/objects/bosses/lrz/miniboss/sk/object_catalog.s",
       "symbol": "byte_78DE2",
       "scope": "byte_78DE2",
@@ -2181,6 +2781,34 @@
       ],
       "external_symbols": [],
       "members": ["byte_78DE2", "byte_78DF1", "byte_78DF8", "byte_78E05"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/bosses/mgz/end_boss/s3/attachments.s",
+      "symbol": "RawAni_4A948",
+      "scope": "RawAni_4A948",
+      "first_line": 292,
+      "last_line": 294,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 8,
+      "declarations_sha256": "c7073a50df4572a64bc524db21ff4bc60c80de07db331019f28ce81152b6cc9e",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_4A948"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/bosses/mgz/end_boss/s3/motion_helpers.s",
+      "symbol": "RawAni_4B06E",
+      "scope": "RawAni_4B06E",
+      "first_line": 219,
+      "last_line": 221,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 10,
+      "declarations_sha256": "c166aa6a52cbb25a91846c1b50a4defd095d08c512cea90717b42e8452346de6",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_4B06E"],
       "stored_markers": []
     },
     {
@@ -2230,6 +2858,34 @@
       "stored_markers": []
     },
     {
+      "path": "src/objects/bosses/mgz/end_boss/sk/attachments.s",
+      "symbol": "RawAni_6CCB8",
+      "scope": "RawAni_6CCB8",
+      "first_line": 300,
+      "last_line": 302,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 8,
+      "declarations_sha256": "777e2f5a318865906501df91db8028ccb2079226e5c787c47fa7a088408ab971",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_6CCB8"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/bosses/mgz/end_boss/sk/motion_helpers.s",
+      "symbol": "RawAni_6D3FC",
+      "scope": "RawAni_6D3FC",
+      "first_line": 219,
+      "last_line": 221,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 10,
+      "declarations_sha256": "e9c8ec7f3f4b82494af712912b2da28eb346fd2189f3e45dfc95e5f68ba9aea5",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_6D3FC"],
+      "stored_markers": []
+    },
+    {
       "path": "src/objects/bosses/mgz/end_boss/sk/object_catalog.s",
       "symbol": "byte_6D853",
       "scope": "byte_6D853",
@@ -2274,6 +2930,20 @@
       "stored_markers": []
     },
     {
+      "path": "src/objects/bosses/mgz/end_boss/sk/projectiles_and_defeat.s",
+      "symbol": "RawAni_6D224",
+      "scope": "RawAni_6D224",
+      "first_line": 385,
+      "last_line": 387,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 4,
+      "declarations_sha256": "1276dc8c9300611d579065798d5387bc4103bf2e06d5d30b1f6a87b8f1ed6024",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_6D224"],
+      "stored_markers": []
+    },
+    {
       "path": "src/objects/bosses/mgz/miniboss/s3/object_catalog.s",
       "symbol": "byte_56931",
       "scope": "byte_56931",
@@ -2288,6 +2958,20 @@
       ],
       "external_symbols": [],
       "members": ["byte_56931", "byte_56937"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/bosses/mgz/miniboss/s3/tunnelbot_and_battle.s",
+      "symbol": "RawAni_5673C",
+      "scope": "RawAni_5673C",
+      "first_line": 437,
+      "last_line": 439,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 6,
+      "declarations_sha256": "915fc9cee29afb3fd0a50ad8547c20aa7fc31cfbbd9851beadc3cdaff42417e3",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_5673C"],
       "stored_markers": []
     },
     {
@@ -2308,6 +2992,20 @@
       "stored_markers": []
     },
     {
+      "path": "src/objects/bosses/mgz/miniboss/sk/tunnelbot_and_battle.s",
+      "symbol": "RawAni_88970",
+      "scope": "RawAni_88970",
+      "first_line": 447,
+      "last_line": 449,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 6,
+      "declarations_sha256": "9949e6eb99887c6d9d6a04c8ec9b6108226f5db151fe7c2474dda1be26a70464",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_88970"],
+      "stored_markers": []
+    },
+    {
       "path": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
       "symbol": "byte_769B6",
       "scope": "byte_769B6",
@@ -2323,6 +3021,20 @@
       ],
       "external_symbols": [],
       "members": ["byte_769B6", "byte_769C1", "byte_769CE"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
+      "symbol": "RawAni_75CB6",
+      "scope": "RawAni_75CB6",
+      "first_line": 141,
+      "last_line": 144,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 22,
+      "declarations_sha256": "3b46e2eaef6cdec49e02e760c760d5d22ebfda919f86ef16f20e50d11495d26a",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_75CB6"],
       "stored_markers": []
     },
     {
@@ -2506,6 +3218,34 @@
       "stored_markers": []
     },
     {
+      "path": "src/objects/cutscenes/hpz/sk/crane.s",
+      "symbol": "RawAni_65550",
+      "scope": "RawAni_65550",
+      "first_line": 216,
+      "last_line": 218,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 4,
+      "declarations_sha256": "f33ac0a4d38917073beb7c3669903b203e1792f173301a34d0ff11cda7b97bab",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_65550"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/cutscenes/hpz/sk/effects.s",
+      "symbol": "RawAni_6525C",
+      "scope": "RawAni_6525C",
+      "first_line": 70,
+      "last_line": 72,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 6,
+      "declarations_sha256": "97f0cd4367c67a191dd2db2f149558b12834b0215b9fda3371e777414e34c6c8",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_6525C"],
+      "stored_markers": []
+    },
+    {
       "path": "src/objects/cutscenes/sk/angel_island_plane.s",
       "symbol": "byte_67A84",
       "scope": "byte_67A84",
@@ -2636,6 +3376,20 @@
       "stored_markers": []
     },
     {
+      "path": "src/objects/cutscenes/sk/movement_and_collision.s",
+      "symbol": "RawAni_65EB0",
+      "scope": "RawAni_65EB0",
+      "first_line": 101,
+      "last_line": 103,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 4,
+      "declarations_sha256": "d88107d69ec26cf19a98d03e393fdc812380fcc90c9b793447336dceed244820",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_65EB0"],
+      "stored_markers": []
+    },
+    {
       "path": "src/objects/effects/s3/boss_explosions.s",
       "symbol": "AniRaw_BossExplosion",
       "scope": "AniRaw_BossExplosion",
@@ -2755,6 +3509,34 @@
         "AniRaw_602C6",
         "AniRaw_602CA"
       ],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/ending/sk/scenery_and_creatures.s",
+      "symbol": "byte_5ED0E",
+      "scope": "byte_5ED0E",
+      "first_line": 125,
+      "last_line": 130,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 10,
+      "declarations_sha256": "c118740d3a232be96f1352b57bedbef51aeb4ce5a741680c677155e7479ce370",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_5ED0E"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/ending/sk/super_character_transition.s",
+      "symbol": "byte_5FDA0",
+      "scope": "byte_5FDA0",
+      "first_line": 117,
+      "last_line": 122,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 4,
+      "declarations_sha256": "3d7c6c3ded49ec6f43a2514f8639630a7d958ae28e38da2ee9e39ea1e4492a3e",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_5FDA0"],
       "stored_markers": []
     },
     {
@@ -3285,6 +4067,20 @@
     },
     {
       "path": "src/objects/enemies/icz/s3/penguinator.s",
+      "symbol": "RawAni_5954A",
+      "scope": "RawAni_5954A",
+      "first_line": 278,
+      "last_line": 280,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 16,
+      "declarations_sha256": "5ee8d7efd89de3b7a4dab8dc2a7ec575a8cf35e0e49d8e782cd5d979615fbd9f",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_5954A"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/enemies/icz/s3/penguinator.s",
       "symbol": "byte_595A2",
       "scope": "byte_595A2",
       "first_line": 314,
@@ -3334,6 +4130,20 @@
       "entries": [[0, "fixed"]],
       "external_symbols": [],
       "members": ["byte_59740"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/enemies/icz/sk/penguinator.s",
+      "symbol": "RawAni_8BDB2",
+      "scope": "RawAni_8BDB2",
+      "first_line": 278,
+      "last_line": 280,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 16,
+      "declarations_sha256": "bb230c71d7c9875c090067afe6c55514769b2b198dd8613f537877143fbc90d6",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_8BDB2"],
       "stored_markers": []
     },
     {
@@ -3619,6 +4429,20 @@
     },
     {
       "path": "src/objects/enemies/sk/chainspike.s",
+      "symbol": "RawAni_91ED4",
+      "scope": "RawAni_91ED4",
+      "first_line": 274,
+      "last_line": 276,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 6,
+      "declarations_sha256": "140048df4049f28103eddd5534c76dbe0d661e5da3c73f20c80b46bb58d06bc1",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_91ED4"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/enemies/sk/chainspike.s",
       "symbol": "byte_91F06",
       "scope": "byte_91F06",
       "first_line": 295,
@@ -3806,6 +4630,20 @@
       "stored_markers": []
     },
     {
+      "path": "src/objects/interface/continue/sk/characters.s",
+      "symbol": "RawAni_5C622",
+      "scope": "RawAni_5C622",
+      "first_line": 86,
+      "last_line": 92,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 10,
+      "declarations_sha256": "4816d5d19f36803fc835bb2f71c226a0edd079fa1d203d2ab40d84d9a1830e16",
+      "entries": [[0, "frame-flip-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_5C622"],
+      "stored_markers": []
+    },
+    {
       "path": "src/objects/interface/continue/sk/countdown_and_patterns.s",
       "symbol": "byte_5CBB4",
       "scope": "byte_5CBB4",
@@ -3836,6 +4674,34 @@
       "entries": [[0, "fixed"]],
       "external_symbols": [],
       "members": ["byte_54B40"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/level_end/s3/egg_capsule.s",
+      "symbol": "byte_549BE",
+      "scope": "byte_549BE",
+      "first_line": 514,
+      "last_line": 516,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 6,
+      "declarations_sha256": "d9760f7f223905dd28da0d62a2800e8db40af4014905d2eb4af3301a32e88990",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_549BE"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/level_end/s3/signpost.s",
+      "symbol": "FrameArray_EndSign",
+      "scope": "FrameArray_EndSign",
+      "first_line": 103,
+      "last_line": 105,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 4,
+      "declarations_sha256": "906de82ac1385db5f6f67a067017a6dcb6e52e232a025f490643645ba0c288ea",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["FrameArray_EndSign"],
       "stored_markers": []
     },
     {
@@ -3870,6 +4736,34 @@
       "stored_markers": []
     },
     {
+      "path": "src/objects/level_end/sk/egg_capsule.s",
+      "symbol": "byte_86A74",
+      "scope": "byte_86A74",
+      "first_line": 564,
+      "last_line": 566,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 6,
+      "declarations_sha256": "64f0943cdad13cb36a71dbb47ec724c1ddf64d4c72f91108e4584019572800c1",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_86A74"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/level_end/sk/signpost.s",
+      "symbol": "FrameArray_EndSign",
+      "scope": "FrameArray_EndSign",
+      "first_line": 130,
+      "last_line": 132,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 4,
+      "declarations_sha256": "906de82ac1385db5f6f67a067017a6dcb6e52e232a025f490643645ba0c288ea",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["FrameArray_EndSign"],
+      "stored_markers": []
+    },
+    {
       "path": "src/objects/level_end/sk/signpost.s",
       "symbol": "AniRaw_EndSigns1",
       "scope": "AniRaw_EndSigns1",
@@ -3885,6 +4779,20 @@
       ],
       "external_symbols": [],
       "members": ["AniRaw_EndSigns1", "AniRaw_EndSigns2", "AniRaw_SignpostSparkle"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/players/knuckles/sk/glide_motion.s",
+      "symbol": "RawAni_Knuckles_GlideTurn",
+      "scope": "RawAni_Knuckles_GlideTurn",
+      "first_line": 58,
+      "last_line": 67,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 8,
+      "declarations_sha256": "efee7f97eeb73dfaf6bdbf74d00790c4a0a2a4362c025d523c965c50eb648dcb",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_Knuckles_GlideTurn"],
       "stored_markers": []
     },
     {
@@ -3985,6 +4893,20 @@
       "stored_markers": []
     },
     {
+      "path": "src/objects/terrain/icz/s3/snow_pile.s",
+      "symbol": "RawAni_58EAC",
+      "scope": "RawAni_58EAC",
+      "first_line": 186,
+      "last_line": 188,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 4,
+      "declarations_sha256": "1f879229e00290ffea608913d20ef3728fa37b54c8360bb4c25207f3fbd38db5",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_58EAC"],
+      "stored_markers": []
+    },
+    {
       "path": "src/objects/terrain/icz/sk/breakable_ice.s",
       "symbol": "byte_8A43E",
       "scope": "byte_8A43E",
@@ -4020,6 +4942,34 @@
       "stored_markers": []
     },
     {
+      "path": "src/objects/terrain/icz/sk/snow_pile.s",
+      "symbol": "RawAni_8B714",
+      "scope": "RawAni_8B714",
+      "first_line": 186,
+      "last_line": 188,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 4,
+      "declarations_sha256": "1392f0250b984683202d033c4df95143873a3cce007f1a1e7d3e291e2c5306ff",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_8B714"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/aiz/s3/hollow_tree.s",
+      "symbol": "AIZTree_PlayerFrames",
+      "scope": "AIZTree_PlayerFrames",
+      "first_line": 220,
+      "last_line": 223,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 54,
+      "declarations_sha256": "909abf2b02660aded800316ee5c1ca3ca2e19314c7745b92a1213f1f5c36e134",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["AIZTree_PlayerFrames"],
+      "stored_markers": []
+    },
+    {
       "path": "src/objects/zones/aiz/s3/plane_intro.s",
       "symbol": "byte_45E60",
       "scope": "byte_45E60",
@@ -4043,6 +4993,118 @@
           "purpose": "unread-terminal-marker"
         }
       ]
+    },
+    {
+      "path": "src/objects/zones/aiz/s3/ride_vine.s",
+      "symbol": "byte_20624",
+      "scope": "byte_20624",
+      "first_line": 481,
+      "last_line": 483,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 16,
+      "declarations_sha256": "02b44cb8a13182d992d8b65ee8a93add206bfd30fe2e23b2ead676942816e657",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_20624"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/aiz/s3/ride_vine.s",
+      "symbol": "byte_206BE",
+      "scope": "byte_206BE",
+      "first_line": 533,
+      "last_line": 549,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 16,
+      "declarations_sha256": "7ded8adf50b6a0658c771d4c59002482a46e7c9d5bbd3b1b5ac15b478bff3920",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_206BE"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/aiz/s3/spiked_log.s",
+      "symbol": "byte_2B056",
+      "scope": "byte_2B056",
+      "first_line": 101,
+      "last_line": 109,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 8,
+      "declarations_sha256": "f8ab2814df265ab33c1c72f3f19aa8617c935dff5c01a42f167cd7f342b66b89",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_2B056"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/aiz/sk/hollow_tree.s",
+      "symbol": "AIZTree_PlayerFrames",
+      "scope": "AIZTree_PlayerFrames",
+      "first_line": 220,
+      "last_line": 223,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 54,
+      "declarations_sha256": "909abf2b02660aded800316ee5c1ca3ca2e19314c7745b92a1213f1f5c36e134",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["AIZTree_PlayerFrames"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/aiz/sk/ride_vine.s",
+      "symbol": "byte_22248",
+      "scope": "byte_22248",
+      "first_line": 536,
+      "last_line": 538,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 16,
+      "declarations_sha256": "eb24139756a59efd8de03b98ddad3a5605240ed2da9f9564c7965d2992132a12",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_22248"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/aiz/sk/ride_vine.s",
+      "symbol": "byte_222D4",
+      "scope": "byte_222D4",
+      "first_line": 583,
+      "last_line": 599,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 16,
+      "declarations_sha256": "389ddb0599c098514375eaeec7dad91025c8a97876870c1344ed89eb602068e1",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_222D4"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/aiz/sk/spiked_log.s",
+      "symbol": "byte_2B88E",
+      "scope": "byte_2B88E",
+      "first_line": 101,
+      "last_line": 109,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 8,
+      "declarations_sha256": "6a223ec7e89c38056e1a8fff36e1d51173e034b8b251fc347798f62b4bf729cc",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_2B88E"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/cnz/s3/cylinder.s",
+      "symbol": "PlayerTwistFrames",
+      "scope": "PlayerTwistFrames",
+      "first_line": 494,
+      "last_line": 495,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 12,
+      "declarations_sha256": "04213f647d3f232c1d511170e1a9759a62c774d6e0c7ef5a85f72709440f8ae6",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["PlayerTwistFrames"],
+      "stored_markers": []
     },
     {
       "path": "src/objects/zones/cnz/s3/water_level_controls.s",
@@ -4077,6 +5139,188 @@
       "stored_markers": []
     },
     {
+      "path": "src/objects/zones/cnz/s3/wire_cage.s",
+      "symbol": "RawAni_32D00",
+      "scope": "RawAni_32D00",
+      "first_line": 234,
+      "last_line": 237,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 24,
+      "declarations_sha256": "996ec64ce1fa4913314fe917c33f75421f85ebfac32e4d3835aaa9ccf2e7b6a8",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_32D00"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/cnz/s3/wire_cage.s",
+      "symbol": "RawAni_32E50",
+      "scope": "RawAni_32E50",
+      "first_line": 341,
+      "last_line": 344,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 24,
+      "declarations_sha256": "11aa77aa4b4a2356a662f38ace7d0ab586330649236629d5367a5e4703758935",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_32E50"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/cnz/sk/cylinder.s",
+      "symbol": "PlayerTwistFrames",
+      "scope": "PlayerTwistFrames",
+      "first_line": 502,
+      "last_line": 503,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 12,
+      "declarations_sha256": "04213f647d3f232c1d511170e1a9759a62c774d6e0c7ef5a85f72709440f8ae6",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["PlayerTwistFrames"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/cnz/sk/wire_cage.s",
+      "symbol": "RawAni_33AC6",
+      "scope": "RawAni_33AC6",
+      "first_line": 234,
+      "last_line": 237,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 24,
+      "declarations_sha256": "736483b8ba2a08246cf928873421cb55e02e518164e3f3b8edb578ab18eeed13",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_33AC6"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/cnz/sk/wire_cage.s",
+      "symbol": "RawAni_33C1C",
+      "scope": "RawAni_33C1C",
+      "first_line": 342,
+      "last_line": 345,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 24,
+      "declarations_sha256": "d8c363a1a6aded9bd0a944ee12b86b5d76fa5aa5a9d8e06aaa2d5368f7c993d5",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_33C1C"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/dez/sk/gravity_hub.s",
+      "symbol": "RawAni_493DA",
+      "scope": "RawAni_493DA",
+      "first_line": 111,
+      "last_line": 114,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 24,
+      "declarations_sha256": "071aae376ac0c1f28dd379bf6404f4d657a77a3273c2b8c42a8dfa5a574383c8",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_493DA"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/dez/sk/gravity_tube.s",
+      "symbol": "RawAni_491DA",
+      "scope": "RawAni_491DA",
+      "first_line": 295,
+      "last_line": 298,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 26,
+      "declarations_sha256": "ba3dc9edd656b9d2f9b053d6a8c5f550388e382b666799489744a1b20dcba16c",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_491DA"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/dez/sk/teleporter.s",
+      "symbol": "RawAni_48DB2",
+      "scope": "RawAni_48DB2",
+      "first_line": 150,
+      "last_line": 151,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 12,
+      "declarations_sha256": "754a2e20984887325dd72ae6c9e42710ac9188d32d500de2b9274e61a82926bb",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_48DB2"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/fbz/sk/chain_link.s",
+      "symbol": "RawAni_3AC38",
+      "scope": "RawAni_3AC38",
+      "first_line": 373,
+      "last_line": 374,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 8,
+      "declarations_sha256": "6ae5926f8eb64f05907b30ea96a575484fb459a16dd7f12b81797c0ee23fb9dc",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_3AC38"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/fbz/sk/spinning_pole.s",
+      "symbol": "RawAni_3C048",
+      "scope": "RawAni_3C048",
+      "first_line": 100,
+      "last_line": 101,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 16,
+      "declarations_sha256": "84188ecac4e18234cd485139eda73194c276080190558dd2561a1605e4abf48d",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_3C048"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/fbz/sk/wire_cages.s",
+      "symbol": "RawAni_3A220",
+      "scope": "RawAni_3A220",
+      "first_line": 274,
+      "last_line": 277,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 26,
+      "declarations_sha256": "2539cd55ea9d89b3651e23f2209bf0a9c4fdb7d63f58f17ca828356cd651de6a",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_3A220"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/fbz/sk/wire_cages.s",
+      "symbol": "RawAni_3A474",
+      "scope": "RawAni_3A474",
+      "first_line": 477,
+      "last_line": 479,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 12,
+      "declarations_sha256": "77656acba7ac5501e392b19b355793c3aaa92f03715c31cfa4d3a9c0db154a67",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_3A474"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/fbz/sk/wire_cages.s",
+      "symbol": "RawAni_3A548",
+      "scope": "RawAni_3A548",
+      "first_line": 549,
+      "last_line": 552,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 36,
+      "declarations_sha256": "322b6cd93d5c7deb09364c3160a13e6f893f42eeeac7bf7b337ff4c6089b1a55",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_3A548"],
+      "stored_markers": []
+    },
+    {
       "path": "src/objects/zones/hpz/sk/emerald_resources.s",
       "symbol": "byte_90FF6",
       "scope": "byte_90FF6",
@@ -4088,6 +5332,275 @@
       "entries": [[0, "fixed"]],
       "external_symbols": [],
       "members": ["byte_90FF6"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/hpz/sk/master_emerald.s",
+      "symbol": "RawAni_90768",
+      "scope": "RawAni_90768",
+      "first_line": 68,
+      "last_line": 70,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 12,
+      "declarations_sha256": "650446310a06028e59f4952ffdf86787c07cbfa5e58c79bd2e4239df8741e12e",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_90768"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "symbol": "RawAni_90BCA",
+      "scope": "RawAni_90BCA",
+      "first_line": 225,
+      "last_line": 229,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 8,
+      "declarations_sha256": "bf5c57a88b52e7805d5fa6f21ad67e8ce08c477cd346dcc630733658f3c00738",
+      "entries": [
+        [0, "frame-index"],
+        [4, "frame-index"]
+      ],
+      "external_symbols": [],
+      "members": ["RawAni_90BCA"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "symbol": "byte_90DD8",
+      "scope": "byte_90DD8",
+      "first_line": 425,
+      "last_line": 427,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 4,
+      "declarations_sha256": "aa7d1bec92df1560797bfd0db90e3a6e5904fc890103e9ca8200f8e4748ae9f3",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_90DD8"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "symbol": "RawAni_90F06",
+      "scope": "RawAni_90F06",
+      "first_line": 545,
+      "last_line": 547,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 4,
+      "declarations_sha256": "0f862ebc0d682fb473377b4987b615bf0291c844bbf9b8463b5cabf8a1b10075",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_90F06"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/lbz/s3/ride_grapple.s",
+      "symbol": "byte_25858",
+      "scope": "byte_25858",
+      "first_line": 267,
+      "last_line": 269,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 16,
+      "declarations_sha256": "1454a974781fdc1b4c81c8e912314dc4343f23d4901c3ad36a10a0a6fe54f66c",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_25858"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/lbz/s3/tube_elevator.s",
+      "symbol": "LBZTubeElevator_PlayerFrame",
+      "scope": "LBZTubeElevator_PlayerFrame",
+      "first_line": 497,
+      "last_line": 498,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 12,
+      "declarations_sha256": "6a6e9695e16eaec2d168a1db0686d2d9cade9a922ad7f9bcdf0bbaa4be88db01",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["LBZTubeElevator_PlayerFrame"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/lbz/sk/ride_grapple.s",
+      "symbol": "byte_26794",
+      "scope": "byte_26794",
+      "first_line": 267,
+      "last_line": 269,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 16,
+      "declarations_sha256": "a3ec9ee1817fcf3acd0f2f23ab37ee2b39147bcb0de5be5f823b831354bc288c",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_26794"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/lbz/sk/tube_elevator.s",
+      "symbol": "LBZTubeElevator_PlayerFrame",
+      "scope": "LBZTubeElevator_PlayerFrame",
+      "first_line": 497,
+      "last_line": 498,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 12,
+      "declarations_sha256": "6a6e9695e16eaec2d168a1db0686d2d9cade9a922ad7f9bcdf0bbaa4be88db01",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["LBZTubeElevator_PlayerFrame"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/lrz/sk/corkscrew.s",
+      "symbol": "RawAni_4247E",
+      "scope": "RawAni_4247E",
+      "first_line": 179,
+      "last_line": 180,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 12,
+      "declarations_sha256": "50bd4b13d13ffa4f4b5e780b857c62ade8054388f73bf509e05d7a07e67a9c13",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_4247E"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/lrz/sk/smashing_spike_platform.s",
+      "symbol": "RawAni_43196",
+      "scope": "RawAni_43196",
+      "first_line": 54,
+      "last_line": 56,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 20,
+      "declarations_sha256": "71f0f6e4e876156a4cc641293ab421ac50a629918deca3a198323c5602178aec",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_43196"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/lrz/sk/turbine_sprites.s",
+      "symbol": "RawAni_44552",
+      "scope": "RawAni_44552",
+      "first_line": 220,
+      "last_line": 222,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 32,
+      "declarations_sha256": "04989f3ddb56bea2d69f4b3d99c42c24d22c356d505a12e96ccbacff4f033643",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_44552"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/lrz/sk/wall_ride.s",
+      "symbol": "RawAni_42792",
+      "scope": "RawAni_42792",
+      "first_line": 196,
+      "last_line": 198,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 12,
+      "declarations_sha256": "6c5d376024a9ee17739c45fa15a7e245e1d4033102b9902ef0f316fb50fba66b",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_42792"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/mgz/s3/twisting_loop.s",
+      "symbol": "byte_331B8",
+      "scope": "byte_331B8",
+      "first_line": 267,
+      "last_line": 270,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 24,
+      "declarations_sha256": "c43e069c271f0b7d1e69a405e1370e267375aeae4efea37f20c34d6dc29740b8",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_331B8"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/mgz/sk/twisting_loop.s",
+      "symbol": "byte_33F6C",
+      "scope": "byte_33F6C",
+      "first_line": 267,
+      "last_line": 270,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 24,
+      "declarations_sha256": "f9ae8520e8478722d179e05e5a67af355103eb7be3b709ec7ab6e3c5bb1d00cb",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_33F6C"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "symbol": "RawAni_3F01A",
+      "scope": "RawAni_3F01A",
+      "first_line": 254,
+      "last_line": 256,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 32,
+      "declarations_sha256": "f90cb47838c5d93a7da430a98b25cfe16a64a3e26c76811aa5d3e3e6477704d6",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_3F01A"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "symbol": "RawAni_3F6EE",
+      "scope": "RawAni_3F6EE",
+      "first_line": 190,
+      "last_line": 192,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 16,
+      "declarations_sha256": "033427755f74c508b92944159f890e0c1e0817a0dd08b59c3832fbcb022eec33",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_3F6EE"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/mhz/sk/swing_vine.s",
+      "symbol": "byte_22A4C",
+      "scope": "byte_22A4C",
+      "first_line": 401,
+      "last_line": 403,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 16,
+      "declarations_sha256": "a92cb32430b1e00845ef31f389e51a5a47e5de56e8c56a1c36c50fcbcc6a53ec",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_22A4C"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/mhz/sk/swing_vine.s",
+      "symbol": "byte_22AD8",
+      "scope": "byte_22AD8",
+      "first_line": 448,
+      "last_line": 465,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 17,
+      "declarations_sha256": "07d3208876711a02adf1449893759fc30673ceae69fd4a960c110a0708eee7d0",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["byte_22AD8"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
+      "symbol": "RawAni_3F146",
+      "scope": "RawAni_3F146",
+      "first_line": 85,
+      "last_line": 86,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 16,
+      "declarations_sha256": "fe5f9bb4c8d8123ad42523039d6d332acdbdf2010b78f3fee4392438783f0b93",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_3F146"],
       "stored_markers": []
     },
     {
@@ -4122,6 +5635,62 @@
         "Hyudoro_chg_pg00",
         "Hyudoro_chg_pg01"
       ],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/soz/sk/rappel_wire.s",
+      "symbol": "RawAni_4AF70",
+      "scope": "RawAni_4AF70",
+      "first_line": 541,
+      "last_line": 543,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 16,
+      "declarations_sha256": "6c3601569a41ab5132ea7ad8684f793fdcc57140209cf2d668c8c109e2d1519e",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_4AF70"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/soz/sk/rappel_wire.s",
+      "symbol": "RawAni_4B0A0",
+      "scope": "RawAni_4B0A0",
+      "first_line": 636,
+      "last_line": 638,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 16,
+      "declarations_sha256": "c8a4639c17fb9207b31d8d00e6adcf0aa681e6447e56e46e1d0a426a31627209",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_4B0A0"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/soz/sk/rappel_wire.s",
+      "symbol": "RawAni_4B0CE",
+      "scope": "RawAni_4B0CE",
+      "first_line": 652,
+      "last_line": 654,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 16,
+      "declarations_sha256": "01e49de7019de31937a17aa56dce1b01bc34b1a1a68d4aafbf3d49281d634b23",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_4B0CE"],
+      "stored_markers": []
+    },
+    {
+      "path": "src/objects/zones/soz/sk/rappel_wire.s",
+      "symbol": "RawAni_4B110",
+      "scope": "RawAni_4B110",
+      "first_line": 671,
+      "last_line": 672,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 16,
+      "declarations_sha256": "9959d539b2539288cd4404a1bf88d1fa20658fd26183883a14bcc2a32165ebad",
+      "entries": [[0, "frame-index"]],
+      "external_symbols": [],
+      "members": ["RawAni_4B110"],
       "stored_markers": []
     }
   ]

@@ -45,9 +45,12 @@ def _stored(items, size):
     return sorted(result, key=lambda item: item["offset"])
 
 
-def node(data, start, abi):
+def node(data, start, abi, padding=()):
     if abi in raw_special.ABIS:
-        end = start + raw_special.length(data, start, abi)
+        if abi in ("frame-index", "frame-flip-index"):
+            end = min((offset for offset in padding if offset >= start), default=len(data))
+        else:
+            end = start + raw_special.length(data, start, abi)
         return {"offset": start, "abi": abi, "model": linear.decode(data[start:end], abi=abi), "target": None}
     pairs, extended, flip = linear._mode(abi)
     header = (
@@ -128,7 +131,7 @@ def decode(data, entries, padding=(), stored=()):
         seen.add((start, abi))
         if len(seen) > 4096:
             raise ValueError("Raw graph node capacity exceeded")
-        item = node(raw, start, abi)
+        item = node(raw, start, abi, padding)
         nodes.append(item)
         if item["target"] is not None:
             _integer(item["target"], len(raw), "Raw jump target")
