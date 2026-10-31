@@ -13,9 +13,10 @@ inputs. Direct original-image attract checks cover all five profiles, and the
 The complete Source Reconstruction 1.0 gate passed from a clean clone, including
 ROM-extracted SMPS storage, all-profile relocation and runtime. The 1.0 manifest
 records the accepted commit and source binding; the tag remains a maintainer
-action. The 2.0 candidate adds complete semantic source ownership and headless
-content contracts. Its aggregate and clean-clone acceptance remain pending;
-consult the generated evidence before treating a candidate as accepted.
+action. The Source Reconstruction 2.0 baseline adds complete semantic source
+ownership and headless content contracts. Its complete aggregate passed from a
+clean clone: 340 tests, all 165 runtime cases and all five images rebuilt from
+encoded resources. Tags and publication remain maintainer actions.
 
 ## Quick start
 

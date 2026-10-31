@@ -25,7 +25,7 @@
     {
       "path": "docs/build.md",
       "decision": "reworked",
-      "reason": "Keep reproducible setup and correct the source sample-metadata path."
+      "reason": "Retain the reader journey and replace pending candidate claims with actual clean-clone acceptance, inherited preservation boundaries and reproducible pinned-tool setup."
     },
     {
       "path": "docs/content_codecs.md",
@@ -40,7 +40,7 @@
     {
       "path": "docs/index.md",
       "decision": "reworked",
-      "reason": "Make every thematic document reachable through one navigation page."
+      "reason": "Retain the reader journey and replace pending candidate claims with actual clean-clone acceptance, inherited preservation boundaries and reproducible pinned-tool setup."
     },
     {
       "path": "docs/indexed_palettes.md",
@@ -100,27 +100,27 @@
     {
       "path": "docs/source_reconstruction_1_0.md",
       "decision": "reworked",
-      "reason": "Separate historical acceptance from current development and fix moved entry paths."
+      "reason": "Retain the reader journey and replace pending candidate claims with actual clean-clone acceptance, inherited preservation boundaries and reproducible pinned-tool setup."
     },
     {
       "path": "docs/source_reconstruction_2_0.md",
-      "decision": "added",
-      "reason": "Define aggregate ordering, bounded scope and evidence requirements."
+      "decision": "reworked",
+      "reason": "Retain the reader journey and replace pending candidate claims with actual clean-clone acceptance, inherited preservation boundaries and reproducible pinned-tool setup."
     },
     {
       "path": "docs/unknowns.md",
       "decision": "reworked",
-      "reason": "Remove completed source/content tasks and retain concrete runtime and editing limits."
+      "reason": "Retain the reader journey and replace pending candidate claims with actual clean-clone acceptance, inherited preservation boundaries and reproducible pinned-tool setup."
     },
     {
       "path": "docs/verification.md",
       "decision": "reworked",
-      "reason": "Retain evidence overview and link the full 2.0 aggregate."
+      "reason": "Retain the reader journey and replace pending candidate claims with actual clean-clone acceptance, inherited preservation boundaries and reproducible pinned-tool setup."
     },
     {
       "path": "README.md",
       "decision": "reworked",
-      "reason": "State candidate scope, legal inputs and the single complete aggregate command."
+      "reason": "Retain the reader journey and replace pending candidate claims with actual clean-clone acceptance, inherited preservation boundaries and reproducible pinned-tool setup."
     }
   ]
 }

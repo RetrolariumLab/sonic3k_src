@@ -7,7 +7,7 @@
   },
   "release_kind": "baseline",
   "tag": "source-reconstruction-2.0",
-  "status": "development",
+  "status": "tag-ready",
   "publication": {
     "mode": "maintainer-only",
     "tags_created_by_checks": false,
@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 64
+    "commit_count": 65
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -431,9 +431,15 @@
       "commits": ["d4c90fdbe08e1b49e86fb269c7c2d5ec5395b491"]
     },
     {
+      "id": "change-db6f44c1dcca",
+      "kind": "tooling",
+      "summary": "Partition relocation probes in canonical cartridge order",
+      "commits": ["db6f44c1dcca0c0a0df421bda6af969f6ef5a47f"]
+    },
+    {
       "id": "current-release-stage",
-      "kind": "validation_and_documentation",
-      "summary": "Partition the same 32 relocation groups in canonical emission order, preserving original PC-relative addressing and every physical cohort.",
+      "kind": "documentation",
+      "summary": "Record complete clean-clone acceptance and align release-ready documentation and metadata without changing assembly, inputs or gate behavior.",
       "commits": ["release-commit"]
     }
   ],
@@ -444,7 +450,7 @@
         "targets": ["release-check"],
         "files": ["config/source_reconstruction_1_0.json"]
       },
-      "note": "Executable controls are present; acceptance requires a current complete aggregate from a clean clone."
+      "note": "The complete scope passed clean-clone acceptance at the recorded baseline; current release checks regenerate their evidence."
     },
     "semantic_source": {
       "status": "satisfied",
@@ -452,7 +458,7 @@
         "targets": ["check-source-layout", "check-source-preservation", "check-source-ranges"],
         "files": ["config/reconstruction/source_layout.json", "config/reconstruction/label_renames.json"]
       },
-      "note": "Executable controls are present; acceptance requires a current complete aggregate from a clean clone."
+      "note": "The complete scope passed clean-clone acceptance at the recorded baseline; current release checks regenerate their evidence."
     },
     "memory_and_composition": {
       "status": "satisfied",
@@ -460,7 +466,7 @@
         "targets": ["check-memory-layout", "check-composition"],
         "files": ["docs/memory_map.md", "config/reconstruction/source_layout.json"]
       },
-      "note": "Executable controls are present; acceptance requires a current complete aggregate from a clean clone."
+      "note": "The complete scope passed clean-clone acceptance at the recorded baseline; current release checks regenerate their evidence."
     },
     "z80_contexts": {
       "status": "satisfied",
@@ -468,7 +474,7 @@
         "targets": ["check-z80-driver"],
         "files": ["config/reconstruction/z80_driver.json"]
       },
-      "note": "Executable controls are present; acceptance requires a current complete aggregate from a clean clone."
+      "note": "The complete scope passed clean-clone acceptance at the recorded baseline; current release checks regenerate their evidence."
     },
     "content_formats": {
       "status": "satisfied",
@@ -481,7 +487,7 @@
           "tests/build/test_assembly_workspace.py"
         ]
       },
-      "note": "Executable controls are present; acceptance requires a current complete aggregate from a clean clone."
+      "note": "The complete scope passed clean-clone acceptance at the recorded baseline; current release checks regenerate their evidence."
     },
     "regional_profiles": {
       "status": "satisfied",
@@ -489,7 +495,7 @@
         "targets": ["verify-all", "trace", "trace-relocated"],
         "files": ["config/revision_profiles.json"]
       },
-      "note": "Executable controls are present; acceptance requires a current complete aggregate from a clean clone."
+      "note": "The complete scope passed clean-clone acceptance at the recorded baseline; current release checks regenerate their evidence."
     },
     "documentation": {
       "status": "satisfied",
@@ -501,7 +507,7 @@
           "docs/resolved_unknowns.md"
         ]
       },
-      "note": "Executable controls are present; acceptance requires a current complete aggregate from a clean clone."
+      "note": "The complete scope passed clean-clone acceptance at the recorded baseline; current release checks regenerate their evidence."
     },
     "headless_validation": {
       "status": "satisfied",
@@ -509,7 +515,7 @@
         "targets": ["scaffold-check", "test"],
         "files": ["tests/"]
       },
-      "note": "Executable controls are present; acceptance requires a current complete aggregate from a clean clone."
+      "note": "The complete scope passed clean-clone acceptance at the recorded baseline; current release checks regenerate their evidence."
     },
     "privacy_and_provenance": {
       "status": "satisfied",
@@ -517,7 +523,7 @@
         "targets": ["audit-private"],
         "files": ["config/binary_allowlist.json", "docs/provenance.md"]
       },
-      "note": "Executable controls are present; acceptance requires a current complete aggregate from a clean clone."
+      "note": "The complete scope passed clean-clone acceptance at the recorded baseline; current release checks regenerate their evidence."
     },
     "aggregate_acceptance": {
       "status": "satisfied",
@@ -525,7 +531,7 @@
         "targets": ["source-2-check", "source-2-release-audit"],
         "files": ["docs/source_reconstruction_2_0.md"]
       },
-      "note": "Executable controls are present; acceptance requires a current complete aggregate from a clean clone."
+      "note": "The complete scope passed clean-clone acceptance at the recorded baseline; current release checks regenerate their evidence."
     }
   },
   "reference": {
@@ -783,6 +789,17 @@
     "aggregate": "build/release/source-2-check.json",
     "audit": "build/release/source-2-audit.json",
     "documentation": "build/release/documentation.json",
-    "content": "build/authoring/zero-edit-containers.json"
+    "content": "build/authoring/zero-edit-containers.json",
+    "accepted_baseline": {
+      "commit": "db6f44c1dcca0c0a0df421bda6af969f6ef5a47f",
+      "command": "make source-2-check",
+      "clean_clone": true,
+      "source_sha256": "1a6410407cf9cab5e7284c07d0363d0b1e7a0abc5f44741cf96d68a8adadd5ae",
+      "tooling_sha256": "d2c05d8f4ac6f48df99eeaa7249c6899b29f0faebcc7bc89b8170182f47716cc",
+      "public_sha256": "4cbd35cf499cac2e08801792062f329c5e2102b5914ade10bf261b0fb89b940b",
+      "runtime_cases": 165,
+      "report": "build/release/source-2-check.json",
+      "note": "Historical clean-clone acceptance; generated current reports must independently pass for a changed HEAD."
+    }
   }
 }

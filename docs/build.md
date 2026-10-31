@@ -2,8 +2,12 @@
 
 Install Python 3.11 or later, GNU Make, and Retrolarium Kit. The exact external
 dependency commits, compiler sources and binary hashes are pinned in
-`config/toolchain.json`. The build verifies the compiler binaries before use;
-Kit supplies AS and an authentic p2bin supporting both Z80 compression modes.
+`config/toolchain.json`. Use the recorded Kit dependency revision for
+acceptance. `RLTOOL` can select an installed pinned CLI or its command line
+without changing a separate development checkout. Public commands need no
+project-specific PYTHONPATH setup. The build verifies the compiler binaries
+before use; Kit supplies AS and an authentic p2bin supporting both Z80
+compression modes.
 
 Import the five user-owned images with `make init ROM_ROOT="path/to/dumps"`.
 Their original filenames, canonical local paths, sizes and cryptographic hashes

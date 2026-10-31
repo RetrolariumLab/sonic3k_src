@@ -38,3 +38,9 @@ additionally requires semantic source ownership and validated editable data
 contracts. Run `make source-2-check` for both layers; `make scaffold-check`
 checks public structure without ROMs. See the
 [2.0 gate](source_reconstruction_2_0.md) and [known limits](unknowns.md).
+
+The 2.0 baseline passed the full aggregate from a clean clone. Its manifest
+records the accepted commit and source/tooling identities. The successful run
+included all 1980 source owners, the complete runtime matrix and all five
+containers assembled from the actual encoded resource tree. Generated reports
+remain local and every changed release candidate must run the full gate again.

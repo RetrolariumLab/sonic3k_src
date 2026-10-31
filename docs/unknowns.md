@@ -1,6 +1,6 @@
 # Known limits and unresolved interpretation
 
-These limits apply to the accepted preservation profiles and the 2.0 candidate.
+These limits apply to the accepted preservation profiles and the 2.0 baseline.
 They are not substitutes for missing release evidence. Aggregate acceptance is
 recorded by the commands in [verification](verification.md).
 

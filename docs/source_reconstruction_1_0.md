@@ -13,10 +13,11 @@ identity, independent ABI/numeric audits, complete relocation, preservation and
 relocated runtime, privacy/publication checks and a clean tracked tree. Golden
 generation is separate and always uses original inputs.
 
-The current 1.0 manifest stays in development while source evolves toward 2.0.
-Historical acceptance does not certify current code. Source 2.0 invokes the
-entire preservation gate again before additional controls. Source ownership and
-content checks cannot replace any preservation guarantee.
+The 1.0 manifest remains the inherited preservation contract in the 2.0 tree;
+its accepted historical milestone is pinned separately. Historical acceptance
+does not certify current code. Source 2.0 invokes the entire preservation gate
+again before additional controls. Source ownership and content checks cannot
+replace any preservation guarantee.
 
 The historical baseline used root entry units; current entries live under
 `src/revisions/`. [Source layout](source_layout.md) describes semantic owners

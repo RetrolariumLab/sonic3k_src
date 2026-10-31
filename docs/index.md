@@ -47,5 +47,5 @@
 
 - [Resolved questions](resolved_unknowns.md): established workflow decisions.
 
-- [2.0 candidate gate](source_reconstruction_2_0.md): scope and aggregate
+- [2.0 baseline gate](source_reconstruction_2_0.md): scope and aggregate
   evidence.
