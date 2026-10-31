@@ -652,6 +652,12 @@
       "commits": ["995400f4b92884b1e428dc4a5225824813b45712"]
     },
     {
+      "id": "change-5cf1cd0686f1",
+      "kind": "source_or_tooling",
+      "summary": "Own the remaining Sonic 3 boss programs and verify data macros",
+      "commits": ["5cf1cd0686f103ae66a1861daa2799443f211942"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",

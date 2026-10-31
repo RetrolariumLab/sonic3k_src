@@ -1,0 +1,340 @@
+; Owner: objects/runtime/s3
+; Responsibility: Object attribute initialization, eight child construction layouts, tree lists and parent-relative position refresh
+; Source provenance and ranges: config/reconstruction/source_layout.json
+
+; =============== S U B R O U T I N E =======================================
+
+SetUp_ObjAttributes:
+                move.l  (a1)+,mappings(a0)              ; Mappings location
+
+SetUp_ObjAttributes2:
+                move.w  (a1)+,art_tile(a0)              ; VRAM offset
+
+SetUp_ObjAttributes3:
+                move.w  (a1)+,priority(a0)              ; Priority
+                move.b  (a1)+,width_pixels(a0)          ; Width
+                move.b  (a1)+,height_pixels(a0)         ; Height
+                move.b  (a1)+,mapping_frame(a0)         ; Mappings frame
+                move.b  (a1)+,collision_flags(a0)       ; Collision Number
+                bset    #2,render_flags(a0)             ; Object uses world coordinates
+                addq.b  #2,routine(a0)                  ; Increase routine counter
+
+locret_529CE:
+                rts
+; End of function SetUp_ObjAttributes
+
+; =============== S U B R O U T I N E =======================================
+
+CreateChild1_Normal:
+                moveq   #0,d2                           ; Includes positional offset data
+                move.w  (a2)+,d6
+
+                .loop:
+                jsr     (AllocateObjectAfterCurrent).l
+                bne.s   .end
+                move.w  a0,parent3(a1)                  ; Parent RAM address into $46
+                move.l  mappings(a0),mappings(a1)
+                move.l  art_tile(a0),art_tile(a1)       ; Mappings and VRAM offset copied from parent object
+                move.l  (a2)+,(a1)                      ; Object address
+                move.b  d2,subtype(a1)                  ; Index of child object (done sequentially for each object)
+                move.w  x_pos(a0),d0
+                move.b  (a2)+,d1                        ; X Positional offset
+                move.b  d1,child_dx(a1)                 ; $42 has the X offset
+                ext.w   d1
+                add.w   d1,d0
+                move.w  d0,x_pos(a1)                    ; Apply offset to new position
+                move.w  y_pos(a0),d0
+                move.b  (a2)+,d1                        ; Same as above for Y
+                move.b  d1,child_dy(a1)                 ; $43 has the Y offset
+                ext.w   d1
+                add.w   d1,d0
+                move.w  d0,y_pos(a1)                    ; Apply offset
+                addq.w  #2,d2                           ; Add 2 to index
+                dbf     d6,.loop                        ; Loop
+                moveq   #0,d0
+
+                .end:
+                rts
+; End of function CreateChild1_Normal
+
+; =============== S U B R O U T I N E =======================================
+
+CreateChild2_Complex:
+                moveq   #0,d2                           ; Includes positional offset data, velocity, and a few pointers
+                move.w  (a2)+,d6
+
+                .loop:
+                jsr     (AllocateObjectAfterCurrent).l
+                bne.s   .end
+                move.w  a0,parent3(a1)                  ; Parent RAM address into $46
+                move.l  mappings(a0),mappings(a1)
+                move.l  art_tile(a0),art_tile(a1)       ; Mappings and VRAM offset copied from parent object
+                move.l  (a2)+,(a1)                      ; Object address
+                move.l  (a2)+,$3E(a1)                   ; Object data (to be read by SetUp_ObjAttributes)
+                move.l  (a2)+,$30(a1)                   ; Raw animation pointer
+                move.l  (a2)+,$34(a1)                   ; Next routine
+                move.b  d2,subtype(a1)
+                move.w  x_pos(a0),d0
+                move.b  (a2)+,d1
+                move.b  d1,child_dx(a1)                 ; See offset information above
+                ext.w   d1
+                add.w   d1,d0
+                move.w  d0,x_pos(a1)
+                move.w  y_pos(a0),d0
+                move.b  (a2)+,d1
+                move.b  d1,child_dy(a1)                 ; See offset information above
+                ext.w   d1
+                add.w   d1,d0
+                move.w  d0,y_pos(a1)
+                move.w  (a2)+,x_vel(a1)                 ; X velocity
+                move.w  (a2)+,y_vel(a1)                 ; Y velocity
+                addq.w  #2,d2
+                dbf     d6,.loop
+                moveq   #0,d0
+
+                .end:
+                rts
+; End of function CreateChild2_Complex
+
+; =============== S U B R O U T I N E =======================================
+
+CreateChild3_NormalRepeated:
+                moveq   #0,d2                           ; Same as Child creation routine 1, except it repeats one object several times rather than different objects sequentially
+                move.w  (a2)+,d6
+
+                .loop:
+                movea.l a2,a3
+                jsr     (AllocateObjectAfterCurrent).l
+                bne.s   .end
+                move.w  a0,parent3(a1)
+                move.l  mappings(a0),mappings(a1)
+                move.l  art_tile(a0),art_tile(a1)
+                move.l  (a3)+,(a1)
+                move.b  d2,subtype(a1)
+                move.w  x_pos(a0),d0
+                move.b  (a3)+,d1
+                move.b  d1,child_dx(a1)
+                ext.w   d1
+                add.w   d1,d0
+                move.w  d0,x_pos(a1)
+                move.w  y_pos(a0),d0
+                move.b  (a3)+,d1
+                move.b  d1,child_dy(a1)
+                ext.w   d1
+                add.w   d1,d0
+                move.w  d0,y_pos(a1)
+                addq.w  #2,d2
+                dbf     d6,.loop
+                moveq   #0,d0
+
+                .end:
+                rts
+; End of function CreateChild3_NormalRepeated
+
+; =============== S U B R O U T I N E =======================================
+
+CreateChild4_LinkListRepeated:
+                movea.l a0,a3                           ; Creates a linked object list. Previous object address is in $46, while next object in list is at $44
+                moveq   #0,d2
+                move.w  (a2)+,d6
+
+                .loop:
+                jsr     (AllocateObjectAfterCurrent).l
+                bne.s   .end
+                move.w  a3,parent3(a1)
+                move.w  a1,$44(a3)
+                movea.l a1,a3
+                move.l  mappings(a0),mappings(a1)
+                move.l  art_tile(a0),art_tile(a1)
+                move.l  (a2),(a1)
+                move.b  d2,subtype(a1)
+                move.w  x_pos(a0),x_pos(a1)
+                move.w  y_pos(a0),y_pos(a1)
+                addq.w  #2,d2
+                dbf     d6,.loop
+                moveq   #0,d0
+
+                .end:
+                rts
+; End of function CreateChild4_LinkListRepeated
+
+; =============== S U B R O U T I N E =======================================
+
+CreateChild5_ComplexAdjusted:
+                moveq   #0,d2                           ; Same as child routine 2, but adjusts both X position and X velocity based on parent object's orientation
+                move.w  (a2)+,d6
+
+                .loop:
+                jsr     (AllocateObjectAfterCurrent).l
+                bne.s   .end
+                move.w  a0,parent3(a1)
+                move.l  mappings(a0),mappings(a1)
+                move.l  art_tile(a0),art_tile(a1)
+                move.l  (a2)+,(a1)
+                move.l  (a2)+,$3E(a1)
+                move.l  (a2)+,$30(a1)
+                move.l  (a2)+,$34(a1)
+                move.b  d2,subtype(a1)
+                move.w  x_pos(a0),d0
+                move.b  (a2)+,d1
+                move.b  d1,child_dx(a1)
+                ext.w   d1
+                btst    #0,render_flags(a0)
+                beq.s   .noflip
+                neg.w   d1
+
+                .noflip:
+                add.w   d1,d0
+                move.w  d0,x_pos(a1)
+                move.w  y_pos(a0),d0
+                move.b  (a2)+,d1
+                move.b  d1,child_dy(a1)
+                ext.w   d1
+                add.w   d1,d0
+                move.w  d0,y_pos(a1)
+                move.w  (a2)+,d1
+                btst    #0,render_flags(a0)
+                beq.s   .noflip2
+                neg.w   d1
+
+                .noflip2:
+                move.w  d1,x_vel(a1)
+                move.w  (a2)+,y_vel(a1)
+                addq.w  #2,d2
+                dbf     d6,.loop
+                moveq   #0,d0
+
+                .end:
+                rts
+; End of function CreateChild5_ComplexAdjusted
+
+; =============== S U B R O U T I N E =======================================
+
+CreateChild6_Simple:
+                moveq   #0,d2                           ; Simple child creation routine, merely creates x number of the same object at the parent's position
+                move.w  (a2)+,d6
+
+                .loop:
+                jsr     (AllocateObjectAfterCurrent).l
+                bne.s   .end
+                move.w  a0,parent3(a1)
+                move.l  (a2),(a1)
+                move.b  d2,subtype(a1)
+                move.w  x_pos(a0),x_pos(a1)
+                move.w  y_pos(a0),y_pos(a1)
+                addq.w  #2,d2
+                dbf     d6,.loop
+                moveq   #0,d0
+
+                .end:
+                rts
+; End of function CreateChild6_Simple
+
+; =============== S U B R O U T I N E =======================================
+
+CreateChild7_Normal2:
+                moveq   #0,d2                           ; Same as child routine 1, but does not limit children to object slots after the parent
+                move.w  (a2)+,d6
+
+                .loop:
+                jsr     (AllocateObject).l
+                bne.s   .end
+                move.w  a0,parent3(a1)
+                move.l  mappings(a0),mappings(a1)
+                move.l  art_tile(a0),art_tile(a1)
+                move.l  (a2)+,(a1)
+                move.b  d2,subtype(a1)
+                move.w  x_pos(a0),d0
+                move.b  (a2)+,d1
+                move.b  d1,child_dx(a1)
+                ext.w   d1
+                add.w   d1,d0
+                move.w  d0,x_pos(a1)
+                move.w  y_pos(a0),d0
+                move.b  (a2)+,d1
+                move.b  d1,child_dy(a1)
+                ext.w   d1
+                add.w   d1,d0
+                move.w  d0,y_pos(a1)
+                addq.w  #2,d2
+                dbf     d6,.loop
+                moveq   #0,d0
+
+                .end:
+                rts
+; End of function CreateChild7_Normal2
+
+; =============== S U B R O U T I N E =======================================
+
+CreateChild8_TreeListRepeated:
+                movea.l a0,a3                           ; Creates a linked object list like routine 4, but they only chain themselves one way. All maintain the calling object as their parent
+                moveq   #0,d2
+                move.w  (a2)+,d6
+
+                .loop:
+                jsr     (AllocateObjectAfterCurrent).l
+                bne.s   .end
+                move.w  a3,parent3(a1)
+                move.w  a0,$44(a1)
+                movea.l a1,a3
+                move.l  mappings(a0),mappings(a1)
+                move.l  art_tile(a0),art_tile(a1)
+                move.l  (a2),(a1)
+                move.b  d2,subtype(a1)
+                move.w  x_pos(a0),x_pos(a1)
+                move.w  y_pos(a0),y_pos(a1)
+                addq.w  #2,d2
+                dbf     d6,.loop
+                moveq   #0,d0
+
+                .end:
+                rts
+; End of function CreateChild8_TreeListRepeated
+
+; =============== S U B R O U T I N E =======================================
+
+Refresh_ChildPosition:
+                movea.w parent3(a0),a1
+                move.w  x_pos(a1),d0
+                move.b  child_dx(a0),d1
+                ext.w   d1
+                add.w   d1,d0
+                move.w  d0,x_pos(a0)
+                move.w  y_pos(a1),d0
+                move.b  child_dy(a0),d1
+                ext.w   d1
+                add.w   d1,d0
+                move.w  d0,y_pos(a0)
+                rts
+; End of function Refresh_ChildPosition
+
+; =============== S U B R O U T I N E =======================================
+
+Refresh_ChildPositionAdjusted:
+                movea.w parent3(a0),a1
+                move.w  x_pos(a1),d0
+                move.b  child_dx(a0),d1
+                ext.w   d1
+                bclr    #0,render_flags(a0)
+                btst    #0,render_flags(a1)
+                beq.s   loc_52C96
+                neg.w   d1
+                bset    #0,render_flags(a0)
+
+loc_52C96:
+                add.w   d1,d0
+                move.w  d0,x_pos(a0)
+                move.w  y_pos(a1),d0
+                move.b  child_dy(a0),d1
+                ext.w   d1
+                bclr    #1,render_flags(a0)
+                btst    #1,render_flags(a1)
+                beq.s   loc_52CBC
+                neg.w   d1
+                bset    #1,render_flags(a0)
+
+loc_52CBC:
+                add.w   d1,d0
+                move.w  d0,y_pos(a0)
+                rts
+; End of function Refresh_ChildPositionAdjusted

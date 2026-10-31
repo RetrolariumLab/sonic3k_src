@@ -840,7 +840,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 19021,
+      "physical_lines": 4460,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "s3.s",
@@ -946,6 +946,51 @@
           "component": "s3-us",
           "start": 2115200,
           "end": 2115248
+        }
+      ]
+    },
+    {
+      "path": "src/audio/s3/level_music_transition.s",
+      "owner": "audio/s3",
+      "responsibility": "Fade transition actors, invincibility-aware level music restoration and zone playlist.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 58,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 3743,
+        "last_line": 3797,
+        "sha256": "d0c9934738ed6747dbaeb4cb5c77ddda3fb6db14bc9b19d28887407cf2978ab6"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 344116,
+          "end": 344248
+        },
+        {
+          "profile": "s3-eu",
+          "start": 344116,
+          "end": 344248
+        },
+        {
+          "profile": "s3-jp",
+          "start": 344116,
+          "end": 344248
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2441268,
+          "end": 2441400
         }
       ]
     },
@@ -2906,6 +2951,51 @@
       "range_kind": "canonical-normal-build"
     },
     {
+      "path": "src/game/level/s3/act_transition.s",
+      "owner": "game/level/s3",
+      "responsibility": "Change to second-act bounds and construct level-size transition actors or restart the level.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 49,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 3951,
+        "last_line": 3996,
+        "sha256": "55f70f9bc2f5737d5d3c6aea2fb481771d58b857d1256b71f76cb0768db4884e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 344642,
+          "end": 344742
+        },
+        {
+          "profile": "s3-eu",
+          "start": 344642,
+          "end": 344742
+        },
+        {
+          "profile": "s3-jp",
+          "start": 344642,
+          "end": 344742
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2441794,
+          "end": 2441894
+        }
+      ]
+    },
+    {
       "path": "src/game/level/s3/bounds_catalog.s",
       "owner": "game/level/s3",
       "responsibility": "Initial level bounds selection and the product-specific level size catalog.",
@@ -3251,6 +3341,51 @@
       ]
     },
     {
+      "path": "src/game/level/s3/gradual_bounds.s",
+      "owner": "game/level/s3",
+      "responsibility": "Gradual camera bound changes and their four object child descriptors.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 90,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 1969,
+        "last_line": 2055,
+        "sha256": "6786d5f51a9bdee7b8b1594ff9cdb296324e23f92422b4a1ba6785b064bf4f75"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 340378,
+          "end": 340586
+        },
+        {
+          "profile": "s3-eu",
+          "start": 340378,
+          "end": 340586
+        },
+        {
+          "profile": "s3-jp",
+          "start": 340378,
+          "end": 340586
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2437530,
+          "end": 2437738
+        }
+      ]
+    },
+    {
       "path": "src/game/level/s3/mode_and_attract.s",
       "owner": "game/level/s3",
       "responsibility": "Level initialization, gameplay loop and product-specific attract/demo mode transitions.",
@@ -3336,6 +3471,91 @@
       ]
     },
     {
+      "path": "src/game/level/s3/post_boss_cleanup.s",
+      "owner": "game/level/s3",
+      "responsibility": "Post-boss zone-specific cleanup dispatch and replacement graphics or palettes.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 75,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 723,
+        "last_line": 794,
+        "sha256": "4225f101dddd5d7f6a9b5fb9d602a4c05f93e6eca6e517f961ea351fc41275b6"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 337592,
+          "end": 337712
+        },
+        {
+          "profile": "s3-eu",
+          "start": 337592,
+          "end": 337712
+        },
+        {
+          "profile": "s3-jp",
+          "start": 337592,
+          "end": 337712
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2434744,
+          "end": 2434864
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/s3/post_boss_resources.s",
+      "owner": "game/level/s3",
+      "responsibility": "Post-boss graphics load records and zone palettes for monitors, animals, explosions and capsule.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 46,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 795,
+        "last_line": 837,
+        "sha256": "8d0eeaef075f5aec8764163f8ba3596fd6547f3fcae50ee72a6a51851220ac35"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 337712,
+          "end": 337886
+        },
+        {
+          "profile": "s3-eu",
+          "start": 337712,
+          "end": 337886
+        },
+        {
+          "profile": "s3-jp",
+          "start": 337712,
+          "end": 337886
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2434864,
+          "end": 2435038
+        }
+      ]
+    },
+    {
       "path": "src/game/level/s3/resource_setup.s",
       "owner": "game/level/s3",
       "responsibility": "Level setup entry, descriptor loading and initial level resource dispatch.",
@@ -3377,6 +3597,61 @@
           "component": "s3-us",
           "start": 2205532,
           "end": 2205756
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/s3/ring_awards.s",
+      "owner": "game/level/s3",
+      "responsibility": "Saturating ring awards, extra-life thresholds, HUD updates and award sound selection.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 45,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 4229,
+        "last_line": 4269,
+        "sha256": "c05283238cc6223d0fff216ac4e11480f4c9afb8969b2712d3f58060e3b9113f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "AddRings",
+          "kind": "terminal-tail",
+          "reason": "Close the full ring award and extra-life sound dispatch program, which has only unconditional terminal jumps.",
+          "origin_first_line": 4231,
+          "origin_terminal_line": 4269,
+          "origin_end_line": 4269
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 345220,
+          "end": 345312
+        },
+        {
+          "profile": "s3-eu",
+          "start": 345220,
+          "end": 345312
+        },
+        {
+          "profile": "s3-jp",
+          "start": 345220,
+          "end": 345312
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2442372,
+          "end": 2442464
         }
       ]
     },
@@ -11081,6 +11356,91 @@
       ]
     },
     {
+      "path": "src/objects/bosses/lbz/s3/act1_robotnik_scene.s",
+      "owner": "objects/bosses/lbz/s3",
+      "responsibility": "Launch Base act-one Robotnik and miniboss-box scene states, helpers and private object records.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 514,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 14230,
+        "last_line": 14740,
+        "sha256": "8e7c80fa12ee39a6507d414bf050697a0dcffd5d43823f6cfcc167d3f6c0f274"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 369344,
+          "end": 370740
+        },
+        {
+          "profile": "s3-eu",
+          "start": 369344,
+          "end": 370740
+        },
+        {
+          "profile": "s3-jp",
+          "start": 369344,
+          "end": 370740
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2466496,
+          "end": 2467892
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lbz/s3/act2_robotnik_ship.s",
+      "owner": "objects/bosses/lbz/s3",
+      "responsibility": "Launch Base act-two Robotnik escape ship, children and private animation or object data.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 245,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 14741,
+        "last_line": 14982,
+        "sha256": "c09138060fd2c7ec34a628a7a83917085917b0d2798fee9706aea42c4272fa16"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 370740,
+          "end": 371468
+        },
+        {
+          "profile": "s3-eu",
+          "start": 370740,
+          "end": 371468
+        },
+        {
+          "profile": "s3-jp",
+          "start": 370740,
+          "end": 371468
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2467892,
+          "end": 2468620
+        }
+      ]
+    },
+    {
       "path": "src/objects/bosses/lbz/s3/end_boss.s",
       "owner": "objects/bosses/lbz/s3",
       "responsibility": "Launch Base end-boss lifecycle, attacks, child actors, helpers and private resources.",
@@ -11417,6 +11777,86 @@
           "component": "s3-us",
           "start": 2402950,
           "end": 2403994
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/mgz/miniboss/s3/object_catalog.s",
+      "owner": "objects/bosses/mgz/miniboss/s3",
+      "responsibility": "Marble Garden miniboss object or child construction, animation, spire mappings and graphics load records.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 70,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 7939,
+        "last_line": 8005,
+        "sha256": "7c30aaccc26a22cbde0a16ef15b20a842d34e7511d4a5e4cc716ede188b0f4b0"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 354484,
+          "end": 354644
+        },
+        {
+          "profile": "s3-eu",
+          "start": 354484,
+          "end": 354644
+        },
+        {
+          "profile": "s3-jp",
+          "start": 354484,
+          "end": 354644
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2451636,
+          "end": 2451796
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/mgz/miniboss/s3/tunnelbot_and_battle.s",
+      "owner": "objects/bosses/mgz/miniboss/s3",
+      "responsibility": "Marble Garden Tunnelbot and miniboss state machines, spawned spires, movement helpers and private palette constants.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 581,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 7361,
+        "last_line": 7938,
+        "sha256": "87bc7cf261bbf254360b1a7800c28f0e1749d0b6df2405529657eec9f90dbc00"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 352838,
+          "end": 354484
+        },
+        {
+          "profile": "s3-eu",
+          "start": 352838,
+          "end": 354484
+        },
+        {
+          "profile": "s3-jp",
+          "start": 352838,
+          "end": 354484
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2449990,
+          "end": 2451636
         }
       ]
     },
@@ -12728,6 +13168,51 @@
       ]
     },
     {
+      "path": "src/objects/effects/s3/boss_explosions.s",
+      "owner": "objects/effects/s3",
+      "responsibility": "Boss and ordinary explosion controllers, spawning parameters, child actors and private animation records.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 190,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 838,
+        "last_line": 1024,
+        "sha256": "a0beb7efa2233c653b085c61c097fb5e2c6d309e6f9eaf664ab0cd646e4d8e46"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 337886,
+          "end": 338344
+        },
+        {
+          "profile": "s3-eu",
+          "start": 337886,
+          "end": 338344
+        },
+        {
+          "profile": "s3-jp",
+          "start": 337886,
+          "end": 338344
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2435038,
+          "end": 2435496
+        }
+      ]
+    },
+    {
       "path": "src/objects/effects/s3/elemental_shields.s",
       "owner": "objects/effects/s3",
       "responsibility": "Elemental shield states, sparks and shared shield animation and dynamic pattern-load catalogs.",
@@ -12880,6 +13365,51 @@
           "component": "s3-us",
           "start": 2192614,
           "end": 2193598
+        }
+      ]
+    },
+    {
+      "path": "src/objects/effects/s3/sound_and_color_callbacks.s",
+      "owner": "objects/effects/s3",
+      "responsibility": "Continuous sound playback and callback-driven object palette fade effects with their color-channel helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 123,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 3997,
+        "last_line": 4116,
+        "sha256": "64d703d6f5d596d7ca8a6c3db464a3c960f156b1b82fc0e55405e99127f5ecb4"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 344742,
+          "end": 344988
+        },
+        {
+          "profile": "s3-eu",
+          "start": 344742,
+          "end": 344988
+        },
+        {
+          "profile": "s3-jp",
+          "start": 344742,
+          "end": 344988
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2441894,
+          "end": 2442140
         }
       ]
     },
@@ -13106,6 +13636,1101 @@
           "component": "sk",
           "start": 101182,
           "end": 103846
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/aiz/s3/bloominator.s",
+      "owner": "objects/enemies/aiz/s3",
+      "responsibility": "Bloominator enemy states, projectiles and child resources, including the shared callback projectile initializer referenced by enemy child records.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 113,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 4938,
+        "last_line": 5047,
+        "sha256": "9581fe00a46d26e8db63f1156e93aee2710748ad2202874f77a7909a970b245c"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 346950,
+          "end": 347218
+        },
+        {
+          "profile": "s3-eu",
+          "start": 346950,
+          "end": 347218
+        },
+        {
+          "profile": "s3-jp",
+          "start": 346950,
+          "end": 347218
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2444102,
+          "end": 2444370
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/aiz/s3/monkey_dude.s",
+      "owner": "objects/enemies/aiz/s3",
+      "responsibility": "Monkey Dude patrol and projectile states, helper callbacks and private child data.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 616,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 5369,
+        "last_line": 5981,
+        "sha256": "f2efde6d1044487c5999307e5bcf6b7ff0c6056ebffe4abc9f326c4c269f1175"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 347986,
+          "end": 349382
+        },
+        {
+          "profile": "s3-eu",
+          "start": 347986,
+          "end": 349382
+        },
+        {
+          "profile": "s3-jp",
+          "start": 347986,
+          "end": 349382
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2445138,
+          "end": 2446534
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/aiz/s3/rhinobot.s",
+      "owner": "objects/enemies/aiz/s3",
+      "responsibility": "Rhinobot charge and tracking states, movement helpers and sprite pattern resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 324,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 5048,
+        "last_line": 5368,
+        "sha256": "a3db4bb0d0b71b99ecbaa8097e524b7aff509282efc367ae4cb1e56774be7312"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 347218,
+          "end": 347986
+        },
+        {
+          "profile": "s3-eu",
+          "start": 347218,
+          "end": 347986
+        },
+        {
+          "profile": "s3-jp",
+          "start": 347218,
+          "end": 347986
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2444370,
+          "end": 2445138
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/cnz/s3/clamer.s",
+      "owner": "objects/enemies/cnz/s3",
+      "responsibility": "Clamer attack and projectile state, tracking slots and private graphics resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 197,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 8487,
+        "last_line": 8680,
+        "sha256": "5b08237fe058db64a82f1812f49afb20693f34b0bf3b108dbf87a36ff3d613e9"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 355698,
+          "end": 356172
+        },
+        {
+          "profile": "s3-eu",
+          "start": 355698,
+          "end": 356172
+        },
+        {
+          "profile": "s3-jp",
+          "start": 355698,
+          "end": 356172
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2452850,
+          "end": 2453324
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/cnz/s3/sparkle.s",
+      "owner": "objects/enemies/cnz/s3",
+      "responsibility": "Sparkle controller and child actors with private attributes and construction data.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 216,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 8681,
+        "last_line": 8893,
+        "sha256": "3533aaee7150391ca51513e4116abd2240301a98366e5765be4832133b87779b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 356172,
+          "end": 356650
+        },
+        {
+          "profile": "s3-eu",
+          "start": 356172,
+          "end": 356650
+        },
+        {
+          "profile": "s3-jp",
+          "start": 356172,
+          "end": 356650
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2453324,
+          "end": 2453802
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/fbz/s3/batbot.s",
+      "owner": "objects/enemies/fbz/s3",
+      "responsibility": "Batbot flight and attack controller with private object and child construction records.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 143,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 8894,
+        "last_line": 9033,
+        "sha256": "cdb1b5f05ff9bd3e9334e0eb31a2df39f9df273ae5a5f48bdf3f83199579788c"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 356650,
+          "end": 356930
+        },
+        {
+          "profile": "s3-eu",
+          "start": 356650,
+          "end": 356930
+        },
+        {
+          "profile": "s3-jp",
+          "start": 356650,
+          "end": 356930
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2453802,
+          "end": 2454082
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/fbz/s3/blaster.s",
+      "owner": "objects/enemies/fbz/s3",
+      "responsibility": "Blaster attack and projectile state machines, movement helpers and child resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 253,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 9034,
+        "last_line": 9283,
+        "sha256": "1f1d1bf40eec6308d62dbe9b873af7e94950e593fa56ec5f922a0e49a3969281"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 356930,
+          "end": 357560
+        },
+        {
+          "profile": "s3-eu",
+          "start": 356930,
+          "end": 357560
+        },
+        {
+          "profile": "s3-jp",
+          "start": 356930,
+          "end": 357560
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2454082,
+          "end": 2454712
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/fbz/s3/techno_squeek.s",
+      "owner": "objects/enemies/fbz/s3",
+      "responsibility": "Techno Squeek movement and attack states with private child and object resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 270,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 9284,
+        "last_line": 9550,
+        "sha256": "91858c6a1870a6262ec542c25c00f79255f459ad1e3d4e8236084d2814f14300"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 357560,
+          "end": 358244
+        },
+        {
+          "profile": "s3-eu",
+          "start": 357560,
+          "end": 358244
+        },
+        {
+          "profile": "s3-jp",
+          "start": 357560,
+          "end": 358244
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2454712,
+          "end": 2455396
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/hcz/s3/blastoid.s",
+      "owner": "objects/enemies/hcz/s3",
+      "responsibility": "Blastoid launcher, projectiles, helper callback and private construction records.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 106,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 6232,
+        "last_line": 6334,
+        "sha256": "397e6c134a00ade4200101fa3af1c2affbaf21102f8440b44fbb5ef8178b6a55"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 349990,
+          "end": 350218
+        },
+        {
+          "profile": "s3-eu",
+          "start": 349990,
+          "end": 350218
+        },
+        {
+          "profile": "s3-jp",
+          "start": 349990,
+          "end": 350218
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2447142,
+          "end": 2447370
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/hcz/s3/buggernaut.s",
+      "owner": "objects/enemies/hcz/s3",
+      "responsibility": "Buggernaut parent and baby flight states with private movement, animation and child records.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 184,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 6335,
+        "last_line": 6515,
+        "sha256": "cf50f618d3de43541e0fbda6b35e2d493ad3356ba8822adc5dfc30d039942477"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 350218,
+          "end": 350634
+        },
+        {
+          "profile": "s3-eu",
+          "start": 350218,
+          "end": 350634
+        },
+        {
+          "profile": "s3-jp",
+          "start": 350218,
+          "end": 350634
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2447370,
+          "end": 2447786
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/hcz/s3/caterkiller_jr.s",
+      "owner": "objects/enemies/hcz/s3",
+      "responsibility": "Caterkiller Junior controller, following segments and child construction data.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 204,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 5982,
+        "last_line": 6182,
+        "sha256": "439d19f10eb13add149bbb96dcec194f8d47066feacc32ddac447adb5e7eaedc"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 349382,
+          "end": 349870
+        },
+        {
+          "profile": "s3-eu",
+          "start": 349382,
+          "end": 349870
+        },
+        {
+          "profile": "s3-jp",
+          "start": 349382,
+          "end": 349870
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2446534,
+          "end": 2447022
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/hcz/s3/jawz.s",
+      "owner": "objects/enemies/hcz/s3",
+      "responsibility": "Jawz swimming enemy and its private object attribute record.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 53,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 6183,
+        "last_line": 6231,
+        "sha256": "428e9dbf2441461eca42e6f1ce2a2de3aef6bff5968e5e20e0f74d72ff262197"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_Jawz",
+          "kind": "terminal-tail",
+          "reason": "Close the complete swimming enemy program and its private indexed player table or animation records after the final defeat tail dispatch.",
+          "origin_first_line": 6185,
+          "origin_terminal_line": 6218,
+          "origin_end_line": 6231
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 349870,
+          "end": 349990
+        },
+        {
+          "profile": "s3-eu",
+          "start": 349870,
+          "end": 349990
+        },
+        {
+          "profile": "s3-jp",
+          "start": 349870,
+          "end": 349990
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2447022,
+          "end": 2447142
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/hcz/s3/mega_chopper.s",
+      "owner": "objects/enemies/hcz/s3",
+      "responsibility": "Mega Chopper swimming, player attachment, damage and private animation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 302,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 6881,
+        "last_line": 7179,
+        "sha256": "6fd99d84fcdd15ae7fd7df5f1a7d0153315345394d754575ab8ac1f4b603ce41"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 351548,
+          "end": 352360
+        },
+        {
+          "profile": "s3-eu",
+          "start": 351548,
+          "end": 352360
+        },
+        {
+          "profile": "s3-jp",
+          "start": 351548,
+          "end": 352360
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2448700,
+          "end": 2449512
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/hcz/s3/poindexter.s",
+      "owner": "objects/enemies/hcz/s3",
+      "responsibility": "Poindexter launch and attack states with private attributes and animation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 72,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 7180,
+        "last_line": 7248,
+        "sha256": "91137866f055d4ca51da6e43777c347b2461d31644fd434eceb8e35461e0b65d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 352360,
+          "end": 352546
+        },
+        {
+          "profile": "s3-eu",
+          "start": 352360,
+          "end": 352546
+        },
+        {
+          "profile": "s3-jp",
+          "start": 352360,
+          "end": 352546
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2449512,
+          "end": 2449698
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/hcz/s3/turbo_spiker.s",
+      "owner": "objects/enemies/hcz/s3",
+      "responsibility": "Turbo Spiker attack states, detached spikes, motion helpers and private resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 368,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 6516,
+        "last_line": 6880,
+        "sha256": "935a93fadbb29c252db845a04fe84ed1b907a1437b9c4ecae08bf60d5a192ace"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 350634,
+          "end": 351548
+        },
+        {
+          "profile": "s3-eu",
+          "start": 350634,
+          "end": 351548
+        },
+        {
+          "profile": "s3-jp",
+          "start": 350634,
+          "end": 351548
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2447786,
+          "end": 2448700
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/icz/s3/penguinator.s",
+      "owner": "objects/enemies/icz/s3",
+      "responsibility": "Penguinator sliding or attack states, snowdust effect actors and private pattern resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 325,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 12513,
+        "last_line": 12834,
+        "sha256": "814e9d0fe5e6348e72482f877f0216b5e8d0dc30e731d45783e53b3568847c62"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 365174,
+          "end": 366022
+        },
+        {
+          "profile": "s3-eu",
+          "start": 365174,
+          "end": 366022
+        },
+        {
+          "profile": "s3-jp",
+          "start": 365174,
+          "end": 366022
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2462326,
+          "end": 2463174
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/icz/s3/snale_blaster.s",
+      "owner": "objects/enemies/icz/s3",
+      "responsibility": "Snale Blaster locomotion and projectile states with private child or object resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 346,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 12987,
+        "last_line": 13329,
+        "sha256": "fd62346c558641418542038173a7202fedd764c0b0c8820e8e4daee3c72427e1"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 366406,
+          "end": 367220
+        },
+        {
+          "profile": "s3-eu",
+          "start": 366406,
+          "end": 367220
+        },
+        {
+          "profile": "s3-jp",
+          "start": 366406,
+          "end": 367220
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2463558,
+          "end": 2464372
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/icz/s3/star_pointer.s",
+      "owner": "objects/enemies/icz/s3",
+      "responsibility": "Star Pointer enemy and child motion with private construction data.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 155,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 12835,
+        "last_line": 12986,
+        "sha256": "9d1d8d3236ef8799c4d34b20804f281198572e72473b4a9b779a5447eead362a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 366022,
+          "end": 366406
+        },
+        {
+          "profile": "s3-eu",
+          "start": 366022,
+          "end": 366406
+        },
+        {
+          "profile": "s3-jp",
+          "start": 366022,
+          "end": 366406
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2463174,
+          "end": 2463558
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/lbz/s3/corkey.s",
+      "owner": "objects/enemies/lbz/s3",
+      "responsibility": "Corkey flying enemy, spawned projectiles and private construction records.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 246,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 13815,
+        "last_line": 14057,
+        "sha256": "c43cd86deb8e410a45ecdd7a345e19873523018c492230ba87e22a5f8db4ce52"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 368292,
+          "end": 368858
+        },
+        {
+          "profile": "s3-eu",
+          "start": 368292,
+          "end": 368858
+        },
+        {
+          "profile": "s3-jp",
+          "start": 368292,
+          "end": 368858
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2465444,
+          "end": 2466010
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/lbz/s3/flybot_767.s",
+      "owner": "objects/enemies/lbz/s3",
+      "responsibility": "Flybot 767 flight and attack states with tracking-slot and pattern resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 175,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 14058,
+        "last_line": 14229,
+        "sha256": "57f1a1c71ba17d7c7029090c374d093240a19b14aa5df061e60f911cdb4d8d6b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 368858,
+          "end": 369344
+        },
+        {
+          "profile": "s3-eu",
+          "start": 368858,
+          "end": 369344
+        },
+        {
+          "profile": "s3-jp",
+          "start": 368858,
+          "end": 369344
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2466010,
+          "end": 2466496
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/lbz/s3/orbinaut.s",
+      "owner": "objects/enemies/lbz/s3",
+      "responsibility": "Orbinaut orbiting enemy, orb children and private construction records.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 116,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 13702,
+        "last_line": 13814,
+        "sha256": "1f125d0047ea544d09cdcc11be1e82c078a569b004d5ad1d84c7e8cf1937af65"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 368050,
+          "end": 368292
+        },
+        {
+          "profile": "s3-eu",
+          "start": 368050,
+          "end": 368292
+        },
+        {
+          "profile": "s3-jp",
+          "start": 368050,
+          "end": 368292
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2465202,
+          "end": 2465444
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/lbz/s3/ribot.s",
+      "owner": "objects/enemies/lbz/s3",
+      "responsibility": "Ribot enemy and spawned actors with private movement and construction data.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 375,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 13330,
+        "last_line": 13701,
+        "sha256": "9444014c57302b771a8841b3d40bc0ff57fe06da854f69d47909885381454094"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 367220,
+          "end": 368050
+        },
+        {
+          "profile": "s3-eu",
+          "start": 367220,
+          "end": 368050
+        },
+        {
+          "profile": "s3-jp",
+          "start": 367220,
+          "end": 368050
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2464372,
+          "end": 2465202
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/mgz/s3/bubbles.s",
+      "owner": "objects/enemies/mgz/s3",
+      "responsibility": "Bubbles enemy states, tracking-slot resources and graphics loading descriptors.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 115,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 7249,
+        "last_line": 7360,
+        "sha256": "43c0307f1654c498837ea7fa50d8e1edb2b584952808030e5eabe2d8037a3fc1"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 352546,
+          "end": 352838
+        },
+        {
+          "profile": "s3-eu",
+          "start": 352546,
+          "end": 352838
+        },
+        {
+          "profile": "s3-jp",
+          "start": 352546,
+          "end": 352838
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2449698,
+          "end": 2449990
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/mgz/s3/mantis.s",
+      "owner": "objects/enemies/mgz/s3",
+      "responsibility": "Mantis enemy and projectile states with private child construction records.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 164,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 8326,
+        "last_line": 8486,
+        "sha256": "571ba1625bbf6f7c13149e2eb5ac2ece477b9988c4746dc7a40f70e1de26e93f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 355358,
+          "end": 355698
+        },
+        {
+          "profile": "s3-eu",
+          "start": 355358,
+          "end": 355698
+        },
+        {
+          "profile": "s3-jp",
+          "start": 355358,
+          "end": 355698
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2452510,
+          "end": 2452850
+        }
+      ]
+    },
+    {
+      "path": "src/objects/enemies/mgz/s3/spiker.s",
+      "owner": "objects/enemies/mgz/s3",
+      "responsibility": "Spiker enemy state machine, projectile motion and private construction records.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 323,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 8006,
+        "last_line": 8325,
+        "sha256": "14c22e8491ca335e2f7479f2368b434301a937f097935664fcfa0d0ffb22ca28"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 354644,
+          "end": 355358
+        },
+        {
+          "profile": "s3-eu",
+          "start": 354644,
+          "end": 355358
+        },
+        {
+          "profile": "s3-jp",
+          "start": 354644,
+          "end": 355358
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2451796,
+          "end": 2452510
         }
       ]
     },
@@ -13670,6 +15295,51 @@
       ]
     },
     {
+      "path": "src/objects/items/s3/hidden_monitor.s",
+      "owner": "objects/items/s3",
+      "responsibility": "Reveal a hidden item monitor after its trigger and spawn its monitor contents.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 66,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 349,
+        "last_line": 411,
+        "sha256": "d9bbf02f0ef7436da64d202b14cb2fdb1cc81c6a89bb9f9dd7b72723faaa7b88"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 336618,
+          "end": 336806
+        },
+        {
+          "profile": "s3-eu",
+          "start": 336618,
+          "end": 336806
+        },
+        {
+          "profile": "s3-jp",
+          "start": 336618,
+          "end": 336806
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2433770,
+          "end": 2433958
+        }
+      ]
+    },
+    {
       "path": "src/objects/items/s3/monitor.s",
       "owner": "objects/items/s3",
       "responsibility": "Item monitor initialization, solid contact, breakage and product-specific reward effects with animation resources.",
@@ -13736,6 +15406,216 @@
           "component": "sk",
           "start": 120166,
           "end": 121942
+        }
+      ]
+    },
+    {
+      "path": "src/objects/level_end/s3/boss_completion.s",
+      "owner": "objects/level_end/s3",
+      "responsibility": "Emerald-dependent player completion state and boss defeat score or timer setup.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 39,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 4117,
+        "last_line": 4152,
+        "sha256": "4ad7e81863f2443cf8cd5b55f490c490b80f09ead4d67114726ee8b2151f7b80"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 344988,
+          "end": 345044
+        },
+        {
+          "profile": "s3-eu",
+          "start": 344988,
+          "end": 345044
+        },
+        {
+          "profile": "s3-jp",
+          "start": 344988,
+          "end": 345044
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2442140,
+          "end": 2442196
+        }
+      ]
+    },
+    {
+      "path": "src/objects/level_end/s3/capsule_resources.s",
+      "owner": "objects/level_end/s3",
+      "responsibility": "Egg capsule object attributes, release child construction records and animal animation data.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 85,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 4856,
+        "last_line": 4937,
+        "sha256": "75dbc76a167d63d1c0f719d830dd750c8f7132bec230ece30abae87e479bc20a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 346748,
+          "end": 346950
+        },
+        {
+          "profile": "s3-eu",
+          "start": 346748,
+          "end": 346950
+        },
+        {
+          "profile": "s3-jp",
+          "start": 346748,
+          "end": 346950
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2443900,
+          "end": 2444102
+        }
+      ]
+    },
+    {
+      "path": "src/objects/level_end/s3/egg_capsule.s",
+      "owner": "objects/level_end/s3",
+      "responsibility": "Egg capsule state machine, release children, ending poses and freed-animal movement helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 589,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 4270,
+        "last_line": 4855,
+        "sha256": "ecc5cc1f5ecb38f68e850cdb916dec7608a5a662c2c24eab37263988b8d89d43"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 345312,
+          "end": 346748
+        },
+        {
+          "profile": "s3-eu",
+          "start": 345312,
+          "end": 346748
+        },
+        {
+          "profile": "s3-jp",
+          "start": 345312,
+          "end": 346748
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2442464,
+          "end": 2443900
+        }
+      ]
+    },
+    {
+      "path": "src/objects/level_end/s3/signpost.s",
+      "owner": "objects/level_end/s3",
+      "responsibility": "End-of-act signpost states, bounce detection, score sparkles, stub children and their private resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 314,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 412,
+        "last_line": 722,
+        "sha256": "2b3fb8faf8a34fe972316f2b2542a209817769560044a4dedd0aeee50680ca97"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 336806,
+          "end": 337592
+        },
+        {
+          "profile": "s3-eu",
+          "start": 336806,
+          "end": 337592
+        },
+        {
+          "profile": "s3-jp",
+          "start": 336806,
+          "end": 337592
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2433958,
+          "end": 2434744
+        }
+      ]
+    },
+    {
+      "path": "src/objects/level_end/s3/signpost_control.s",
+      "owner": "objects/level_end/s3",
+      "responsibility": "Restore player control, create and sequence the end sign, and wait for camera transition conditions.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 156,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 3798,
+        "last_line": 3950,
+        "sha256": "e69e8d21449ff334e311d6d05f63172538e23e32c202a1a6ddf099a9963999a4"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 344248,
+          "end": 344642
+        },
+        {
+          "profile": "s3-eu",
+          "start": 344248,
+          "end": 344642
+        },
+        {
+          "profile": "s3-jp",
+          "start": 344248,
+          "end": 344642
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2441400,
+          "end": 2441794
         }
       ]
     },
@@ -16375,6 +18255,231 @@
       ]
     },
     {
+      "path": "src/objects/runtime/s3/attributes_and_children.s",
+      "owner": "objects/runtime/s3",
+      "responsibility": "Object attribute initialization, eight child construction layouts, tree lists and parent-relative position refresh.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 340,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 1025,
+        "last_line": 1361,
+        "sha256": "f6408a52a7fab72cc18fbf417750b7826c7ca964655a09a0de83906d577f8966"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 338344,
+          "end": 339140
+        },
+        {
+          "profile": "s3-eu",
+          "start": 338344,
+          "end": 339140
+        },
+        {
+          "profile": "s3-jp",
+          "start": 338344,
+          "end": 339140
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2435496,
+          "end": 2436292
+        }
+      ]
+    },
+    {
+      "path": "src/objects/runtime/s3/child_drawing.s",
+      "owner": "objects/runtime/s3",
+      "responsibility": "Parent-aware child drawing, touch interaction, remembered placement and flicker-motion wrappers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 116,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 1857,
+        "last_line": 1968,
+        "sha256": "854b11ac41e4899e5a28572fa7a3c35dd1517022ce2b00c9a3c9244b0458259b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Draw_And_Touch_Sprite",
+          "kind": "terminal-tail",
+          "reason": "All draw and flicker child wrappers form a complete tail-dispatch family with no original independent return boundary.",
+          "origin_first_line": 1859,
+          "origin_terminal_line": 1968,
+          "origin_end_line": 1968
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 340102,
+          "end": 340378
+        },
+        {
+          "profile": "s3-eu",
+          "start": 340102,
+          "end": 340378
+        },
+        {
+          "profile": "s3-jp",
+          "start": 340102,
+          "end": 340378
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2437254,
+          "end": 2437530
+        }
+      ]
+    },
+    {
+      "path": "src/objects/runtime/s3/child_initialization.s",
+      "owner": "objects/runtime/s3",
+      "responsibility": "Child sprite priority propagation and fixed-size word record copying.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 66,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 3640,
+        "last_line": 3702,
+        "sha256": "eed9b43fcae1eccfb3ac4837e642ce9bb87a17dd647a324e46bfaecb0e2f9162"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 343940,
+          "end": 344024
+        },
+        {
+          "profile": "s3-eu",
+          "start": 343940,
+          "end": 344024
+        },
+        {
+          "profile": "s3-jp",
+          "start": 343940,
+          "end": 344024
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2441092,
+          "end": 2441176
+        }
+      ]
+    },
+    {
+      "path": "src/objects/runtime/s3/curved_motion.s",
+      "owner": "objects/runtime/s3",
+      "responsibility": "Light gravity and circular, angle and indexed coordinate motion with their inseparable lookup tables.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 342,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 2155,
+        "last_line": 2493,
+        "sha256": "44764f28a7b5c3512e46f1367d515a468954cdacbd730ba01a64865216e2efe4"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 340754,
+          "end": 341452
+        },
+        {
+          "profile": "s3-eu",
+          "start": 340754,
+          "end": 341452
+        },
+        {
+          "profile": "s3-jp",
+          "start": 340754,
+          "end": 341452
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2437906,
+          "end": 2438604
+        }
+      ]
+    },
+    {
+      "path": "src/objects/runtime/s3/deletion_and_tracking.s",
+      "owner": "objects/runtime/s3",
+      "responsibility": "Bounds-based object deletion, touch variants, flicker motion and object tracking slot removal.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 262,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 2631,
+        "last_line": 2889,
+        "sha256": "fd368597397abe74763d5c663d6dcb035dc12a6764f0e3553e3389c6684dfe51"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 341764,
+          "end": 342522
+        },
+        {
+          "profile": "s3-eu",
+          "start": 341764,
+          "end": 342522
+        },
+        {
+          "profile": "s3-jp",
+          "start": 341764,
+          "end": 342522
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2438916,
+          "end": 2439674
+        }
+      ]
+    },
+    {
       "path": "src/objects/runtime/s3/execution_and_animation.s",
       "owner": "objects/runtime/s3",
       "responsibility": "Sprite table initialization, object execution, movement, deletion, draw queuing and animation interfaces.",
@@ -16415,6 +18520,201 @@
       ]
     },
     {
+      "path": "src/objects/runtime/s3/movement_and_drawing.s",
+      "owner": "objects/runtime/s3",
+      "responsibility": "Combined motion, animation, waiting, collision and sprite drawing object callbacks.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 101,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 3270,
+        "last_line": 3366,
+        "sha256": "847c1f5f8a8307a832c736ce6f0b3c839c63fc4925a62f8a8f61bd85d558ae6c"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "MoveFall_AnimateRaw",
+          "kind": "terminal-tail",
+          "reason": "Close the complete family of move, animate, wait and draw callback tails, including the retained unused variants.",
+          "origin_first_line": 3273,
+          "origin_terminal_line": 3366,
+          "origin_end_line": 3366
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 343216,
+          "end": 343404
+        },
+        {
+          "profile": "s3-eu",
+          "start": 343216,
+          "end": 343404
+        },
+        {
+          "profile": "s3-jp",
+          "start": 343216,
+          "end": 343404
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2440368,
+          "end": 2440556
+        }
+      ]
+    },
+    {
+      "path": "src/objects/runtime/s3/offscreen_wait.s",
+      "owner": "objects/runtime/s3",
+      "responsibility": "Suspend offscreen objects with a private empty mapping before their normal activation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 43,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 3703,
+        "last_line": 3742,
+        "sha256": "b67369df35a818c16af0843c003957309b0448b31129952d90d96bb2fe54341d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 344024,
+          "end": 344116
+        },
+        {
+          "profile": "s3-eu",
+          "start": 344024,
+          "end": 344116
+        },
+        {
+          "profile": "s3-jp",
+          "start": 344024,
+          "end": 344116
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2441176,
+          "end": 2441268
+        }
+      ]
+    },
+    {
+      "path": "src/objects/runtime/s3/player_interactions.s",
+      "owner": "objects/runtime/s3",
+      "responsibility": "Enemy defeat scoring, controller shake, player collision or proximity, palette transfer and object displacement.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 184,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 3367,
+        "last_line": 3547,
+        "sha256": "a8e8e7a5beb4cbe7fcbb2c19b3f111e00ac42a02bf30b277b765a19637c4202d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 343404,
+          "end": 343786
+        },
+        {
+          "profile": "s3-eu",
+          "start": 343404,
+          "end": 343786
+        },
+        {
+          "profile": "s3-jp",
+          "start": 343404,
+          "end": 343786
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2440556,
+          "end": 2440938
+        }
+      ]
+    },
+    {
+      "path": "src/objects/runtime/s3/raw_animation.s",
+      "owner": "objects/runtime/s3",
+      "responsibility": "Raw animation interpreters, flip variants, multi-delay streams and accelerating or decelerating animation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 332,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 1362,
+        "last_line": 1689,
+        "sha256": "a373a01f8d9977391577d532d350d4043f36ecbe584656ca45f8be191782abbc"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Animate_RawGetSlower",
+          "kind": "terminal-tail",
+          "reason": "Keep the final conditional return and its callback tail together as one complete decelerating animation program.",
+          "origin_first_line": 1649,
+          "origin_terminal_line": 1689,
+          "origin_end_line": 1689
+        }
+      ],
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 339140,
+          "end": 339812
+        },
+        {
+          "profile": "s3-eu",
+          "start": 339140,
+          "end": 339812
+        },
+        {
+          "profile": "s3-jp",
+          "start": 339140,
+          "end": 339812
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2436292,
+          "end": 2436964
+        }
+      ]
+    },
+    {
       "path": "src/objects/runtime/s3/sprite_spawning.s",
       "owner": "objects/runtime/s3",
       "responsibility": "Placed-object streaming, free-slot allocation and level object and ring memory reset.",
@@ -16451,6 +18751,181 @@
           "component": "s3-us",
           "start": 2202866,
           "end": 2204046
+        }
+      ]
+    },
+    {
+      "path": "src/objects/runtime/s3/swing_motion.s",
+      "owner": "objects/runtime/s3",
+      "responsibility": "Vertical and horizontal oscillation and counted swing motion helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 90,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 1690,
+        "last_line": 1776,
+        "sha256": "6e38a12ca97b1545276ffb8e73f6cecc80fa8a3df31dd79eee3bd4a7fa8639e5"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 339812,
+          "end": 339976
+        },
+        {
+          "profile": "s3-eu",
+          "start": 339812,
+          "end": 339976
+        },
+        {
+          "profile": "s3-jp",
+          "start": 339812,
+          "end": 339976
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2436964,
+          "end": 2437128
+        }
+      ]
+    },
+    {
+      "path": "src/objects/runtime/s3/target_selection.s",
+      "owner": "objects/runtime/s3",
+      "responsibility": "Nearest player or other-object selection and facing from position, velocity or parent flags.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 102,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 2056,
+        "last_line": 2154,
+        "sha256": "5d7e4f44da7accf8c5068393f4ceccbe704877a5e4ea379202efb4eb4a52dd35"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 340586,
+          "end": 340754
+        },
+        {
+          "profile": "s3-eu",
+          "start": 340586,
+          "end": 340754
+        },
+        {
+          "profile": "s3-jp",
+          "start": 340586,
+          "end": 340754
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2437738,
+          "end": 2437906
+        }
+      ]
+    },
+    {
+      "path": "src/objects/runtime/s3/timed_display_and_patterns.s",
+      "owner": "objects/runtime/s3",
+      "responsibility": "Timed sprite drawing, screen lock, boss flashing, slotted attributes and dynamic pattern loading.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 140,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 2494,
+        "last_line": 2630,
+        "sha256": "0a53096fc85c9f5f2ffdebbb1570b72ca8ad13c88234e170a1ba817f67e728dd"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 341452,
+          "end": 341764
+        },
+        {
+          "profile": "s3-eu",
+          "start": 341452,
+          "end": 341764
+        },
+        {
+          "profile": "s3-jp",
+          "start": 341452,
+          "end": 341764
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2438604,
+          "end": 2438916
+        }
+      ]
+    },
+    {
+      "path": "src/objects/runtime/s3/velocity_and_chasing.s",
+      "owner": "objects/runtime/s3",
+      "responsibility": "Indexed velocity, eight-way player targeting, tracking and object chase helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 320,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 2890,
+        "last_line": 3206,
+        "sha256": "a2ee5c920d095cb748af37e49bc7d25a2d951ba5826ba74f2f17c5a58aad3a59"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 342522,
+          "end": 343100
+        },
+        {
+          "profile": "s3-eu",
+          "start": 342522,
+          "end": 343100
+        },
+        {
+          "profile": "s3-jp",
+          "start": 342522,
+          "end": 343100
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2439674,
+          "end": 2440252
         }
       ]
     },
@@ -16496,6 +18971,61 @@
           "component": "s3-us",
           "start": 2202602,
           "end": 2202866
+        }
+      ]
+    },
+    {
+      "path": "src/objects/runtime/s3/wait_and_surface_transitions.s",
+      "owner": "objects/runtime/s3",
+      "responsibility": "Timed object waits and floor or wall contact transitions to the next routine.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 84,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 1777,
+        "last_line": 1856,
+        "sha256": "92447211ddbb223afcd0f3bada25e700060d7e8b62f8fabd1e62a1286088a2f5"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "ObjHitWall2_DoRoutine",
+          "kind": "terminal-tail",
+          "reason": "Close the complete left-wall transition, including its early return and final callback jump, without absorbing earlier wall helper boundaries.",
+          "origin_first_line": 1846,
+          "origin_terminal_line": 1856,
+          "origin_end_line": 1856
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 339976,
+          "end": 340102
+        },
+        {
+          "profile": "s3-eu",
+          "start": 339976,
+          "end": 340102
+        },
+        {
+          "profile": "s3-jp",
+          "start": 339976,
+          "end": 340102
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2437128,
+          "end": 2437254
         }
       ]
     },
@@ -40226,6 +42756,536 @@
       ]
     },
     {
+      "path": "src/objects/terrain/icz/s3/breakable_ice.s",
+      "owner": "objects/terrain/icz/s3",
+      "responsibility": "IceCap breakable wall and ice-block behavior, collision helpers and private construction data.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 215,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 9887,
+        "last_line": 10098,
+        "sha256": "65a30d3d3f29335bf97dd70893fd5224de126a911d52fb17bbe476faace8a134"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 359058,
+          "end": 359508
+        },
+        {
+          "profile": "s3-eu",
+          "start": 359058,
+          "end": 359508
+        },
+        {
+          "profile": "s3-jp",
+          "start": 359058,
+          "end": 359508
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2456210,
+          "end": 2456660
+        }
+      ]
+    },
+    {
+      "path": "src/objects/terrain/icz/s3/crushing_column.s",
+      "owner": "objects/terrain/icz/s3",
+      "responsibility": "IceCap crushing column states and private object or child descriptors.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 221,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 10099,
+        "last_line": 10316,
+        "sha256": "ed0d933fc0e2e3375dcd521813fbe41e69213de876b5dba1ed0402ea86ebb56b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 359508,
+          "end": 359992
+        },
+        {
+          "profile": "s3-eu",
+          "start": 359508,
+          "end": 359992
+        },
+        {
+          "profile": "s3-jp",
+          "start": 359508,
+          "end": 359992
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2456660,
+          "end": 2457144
+        }
+      ]
+    },
+    {
+      "path": "src/objects/terrain/icz/s3/freezer.s",
+      "owner": "objects/terrain/icz/s3",
+      "responsibility": "IceCap freezer trap, player freeze and release states, fragments and private resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 523,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 10317,
+        "last_line": 10836,
+        "sha256": "9a9f655ecba8e905c0e94ce4ff249003e647f48741941585d73a7ea31effcefb"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 359992,
+          "end": 361252
+        },
+        {
+          "profile": "s3-eu",
+          "start": 359992,
+          "end": 361252
+        },
+        {
+          "profile": "s3-jp",
+          "start": 359992,
+          "end": 361252
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2457144,
+          "end": 2458404
+        }
+      ]
+    },
+    {
+      "path": "src/objects/terrain/icz/s3/harmful_ice.s",
+      "owner": "objects/terrain/icz/s3",
+      "responsibility": "IceCap harmful ice collision controller and private object or child descriptors.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 60,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 11844,
+        "last_line": 11899,
+        "sha256": "101b6c6c126e36646a5f58727bad05a7c1bc61e7ab459bfe74062eb81de41f7b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_ICZHarmfulIce",
+          "kind": "terminal-tail",
+          "reason": "Close the complete harmful ice collision program after its final draw jump and private player or child data.",
+          "origin_first_line": 11846,
+          "origin_terminal_line": 11881,
+          "origin_end_line": 11899
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 363626,
+          "end": 363752
+        },
+        {
+          "profile": "s3-eu",
+          "start": 363626,
+          "end": 363752
+        },
+        {
+          "profile": "s3-jp",
+          "start": 363626,
+          "end": 363752
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2460778,
+          "end": 2460904
+        }
+      ]
+    },
+    {
+      "path": "src/objects/terrain/icz/s3/ice_cube.s",
+      "owner": "objects/terrain/icz/s3",
+      "responsibility": "IceCap moving ice cube controller and private motion or fragment data.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 114,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 11733,
+        "last_line": 11843,
+        "sha256": "c6439705ebb4f4fdecb2102836ec893aa8729b057f4b5c134deed6f572730f87"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 363300,
+          "end": 363626
+        },
+        {
+          "profile": "s3-eu",
+          "start": 363300,
+          "end": 363626
+        },
+        {
+          "profile": "s3-jp",
+          "start": 363300,
+          "end": 363626
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2460452,
+          "end": 2460778
+        }
+      ]
+    },
+    {
+      "path": "src/objects/terrain/icz/s3/ice_spikes.s",
+      "owner": "objects/terrain/icz/s3",
+      "responsibility": "IceCap ice-spike hazards and their private child construction records.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 88,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 11648,
+        "last_line": 11732,
+        "sha256": "a4ed0815a186db0a20c396e0e5cc08986dfd472f2e8afbccd84a8a63fadb2436"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 363096,
+          "end": 363300
+        },
+        {
+          "profile": "s3-eu",
+          "start": 363096,
+          "end": 363300
+        },
+        {
+          "profile": "s3-jp",
+          "start": 363096,
+          "end": 363300
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2460248,
+          "end": 2460452
+        }
+      ]
+    },
+    {
+      "path": "src/objects/terrain/icz/s3/path_platform.s",
+      "owner": "objects/terrain/icz/s3",
+      "responsibility": "IceCap path-following platform variants and their shared path controller.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 339,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 9551,
+        "last_line": 9886,
+        "sha256": "2834ee442470cae9f9fe860c87ca9007781f5059b9f67e2b148c9255e912b413"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 358244,
+          "end": 359058
+        },
+        {
+          "profile": "s3-eu",
+          "start": 358244,
+          "end": 359058
+        },
+        {
+          "profile": "s3-jp",
+          "start": 358244,
+          "end": 359058
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2455396,
+          "end": 2456210
+        }
+      ]
+    },
+    {
+      "path": "src/objects/terrain/icz/s3/segment_column.s",
+      "owner": "objects/terrain/icz/s3",
+      "responsibility": "IceCap segmented column movement, collision and private child records.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 165,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 10837,
+        "last_line": 10998,
+        "sha256": "b70eda7870ebcbc17eace7b6b12d07088c5387c5245e6bfabd0ba702c1546fa6"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 361252,
+          "end": 361660
+        },
+        {
+          "profile": "s3-eu",
+          "start": 361252,
+          "end": 361660
+        },
+        {
+          "profile": "s3-jp",
+          "start": 361252,
+          "end": 361660
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2458404,
+          "end": 2458812
+        }
+      ]
+    },
+    {
+      "path": "src/objects/terrain/icz/s3/snow_pile.s",
+      "owner": "objects/terrain/icz/s3",
+      "responsibility": "IceCap snow-pile controller, thrown snow, child helpers and private resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 342,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 11900,
+        "last_line": 12238,
+        "sha256": "edf8125761211cc1721a4fa0c51df78dcb2d20c6396ca44c72a97faa01e4558a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 363752,
+          "end": 364594
+        },
+        {
+          "profile": "s3-eu",
+          "start": 363752,
+          "end": 364594
+        },
+        {
+          "profile": "s3-jp",
+          "start": 363752,
+          "end": 364594
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2460904,
+          "end": 2461746
+        }
+      ]
+    },
+    {
+      "path": "src/objects/terrain/icz/s3/stalactite.s",
+      "owner": "objects/terrain/icz/s3",
+      "responsibility": "IceCap falling stalactite state, trigger helper and private child data.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 109,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 11542,
+        "last_line": 11647,
+        "sha256": "ab775d5f267bc20531f927c40069896a62227fbf34ad47ff2ec7a7acaa3c1ed2"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 362828,
+          "end": 363096
+        },
+        {
+          "profile": "s3-eu",
+          "start": 362828,
+          "end": 363096
+        },
+        {
+          "profile": "s3-jp",
+          "start": 362828,
+          "end": 363096
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2459980,
+          "end": 2460248
+        }
+      ]
+    },
+    {
+      "path": "src/objects/terrain/icz/s3/swinging_platform.s",
+      "owner": "objects/terrain/icz/s3",
+      "responsibility": "IceCap swinging platform states, linked children, motion helpers and private resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 546,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 10999,
+        "last_line": 11541,
+        "sha256": "2c0e4c49d59033b25f1d913e2145d106a5b7e7d3a339ce9f32001062b90e0d76"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 361660,
+          "end": 362828
+        },
+        {
+          "profile": "s3-eu",
+          "start": 361660,
+          "end": 362828
+        },
+        {
+          "profile": "s3-jp",
+          "start": 361660,
+          "end": 362828
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2458812,
+          "end": 2459980
+        }
+      ]
+    },
+    {
+      "path": "src/objects/terrain/icz/s3/tension_platform.s",
+      "owner": "objects/terrain/icz/s3",
+      "responsibility": "IceCap tension platform mechanics, collision helpers and private child construction data.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 277,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 12239,
+        "last_line": 12512,
+        "sha256": "5d347736a3a3c8618499625488d745908959fe8f8763e4f427921bc5a004e87f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 364594,
+          "end": 365174
+        },
+        {
+          "profile": "s3-eu",
+          "start": 364594,
+          "end": 365174
+        },
+        {
+          "profile": "s3-jp",
+          "start": 364594,
+          "end": 365174
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2461746,
+          "end": 2462326
+        }
+      ]
+    },
+    {
       "path": "src/objects/zones/aiz/s3/collapsing_log_bridge.s",
       "owner": "objects/zones/aiz/s3",
       "responsibility": "Angel Island collapsing log bridge timing, log and fire fragments and shared bridge mappings.",
@@ -50747,6 +53807,106 @@
       ]
     },
     {
+      "path": "src/rendering/palettes/s3/object_fade.s",
+      "owner": "rendering/palettes/s3",
+      "responsibility": "Selected object palette fade-in and per-channel color increments.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 66,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 3207,
+        "last_line": 3269,
+        "sha256": "de8eee64153fd2da2b469f169e2c8654b5e9c027b93313e9b623b036e15a32ff"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 343100,
+          "end": 343216
+        },
+        {
+          "profile": "s3-eu",
+          "start": 343100,
+          "end": 343216
+        },
+        {
+          "profile": "s3-jp",
+          "start": 343100,
+          "end": 343216
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2440252,
+          "end": 2440368
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/palettes/s3/rotation_script.s",
+      "owner": "rendering/palettes/s3",
+      "responsibility": "Object palette rotation script execution and delay or step helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 96,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 3548,
+        "last_line": 3639,
+        "sha256": "c9c4fce52e4e2fdd4f19edd2548e93943d90808b7c9e3adfbc5273623c4a6e4c"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_53F76",
+          "kind": "terminal-tail",
+          "reason": "The final custom palette callback restores the interpreter continuation through an unconditional tail branch; preceding interpreter returns keep their independent boundaries.",
+          "origin_first_line": 3633,
+          "origin_terminal_line": 3639,
+          "origin_end_line": 3639
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 343786,
+          "end": 343940
+        },
+        {
+          "profile": "s3-eu",
+          "start": 343786,
+          "end": 343940
+        },
+        {
+          "profile": "s3-jp",
+          "start": 343786,
+          "end": 343940
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2440938,
+          "end": 2441092
+        }
+      ]
+    },
+    {
       "path": "src/rendering/palettes/s3/transformation_cycles.s",
       "owner": "rendering/palettes/s3",
       "responsibility": "Complete character transformation palette state machine and its private colour sequences.",
@@ -50998,6 +54158,46 @@
           "component": "sk",
           "start": 8514,
           "end": 10998
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/s3/animal_pattern_lists.s",
+      "owner": "rendering/s3",
+      "responsibility": "Zone-specific animal graphics loading records, separate from their indexed dispatch table and loader.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 37,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 4195,
+        "last_line": 4228,
+        "sha256": "9041fa5ba95a70805bb20252ee8489c1c3ae9b5ce1cf71527cdee87eb3429aa0"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 345122,
+          "end": 345220
+        },
+        {
+          "profile": "s3-eu",
+          "start": 345122,
+          "end": 345220
+        },
+        {
+          "profile": "s3-jp",
+          "start": 345122,
+          "end": 345220
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2442274,
+          "end": 2442372
         }
       ]
     },
@@ -51508,6 +54708,51 @@
           "component": "s3-us",
           "start": 2333536,
           "end": 2333956
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/s3/player_and_animal_patterns.s",
+      "owner": "rendering/s3",
+      "responsibility": "Player-character graphics dispatch and zone-specific animal or explosion graphics loading.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 45,
+      "origin": {
+        "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+        "path": "s3.s",
+        "first_line": 4153,
+        "last_line": 4194,
+        "sha256": "d58dbfefd01be38884bca717411d62d9643fb1cd0385d93a429468f3b8c0354d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 345044,
+          "end": 345122
+        },
+        {
+          "profile": "s3-eu",
+          "start": 345044,
+          "end": 345122
+        },
+        {
+          "profile": "s3-jp",
+          "start": 345044,
+          "end": 345122
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2442196,
+          "end": 2442274
         }
       ]
     },
