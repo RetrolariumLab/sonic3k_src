@@ -900,7 +900,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 41180,
+      "physical_lines": 27923,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -11316,6 +11316,731 @@
       ]
     },
     {
+      "path": "src/objects/bosses/ddz/sk/asteroids.s",
+      "owner": "objects/bosses/ddz/sk",
+      "responsibility": "Doomsday asteroid actor variants, movement, collisions, fragments and scene effects.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 466,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 12185,
+        "last_line": 12647,
+        "sha256": "ac20f5dace54a228fc558d8944b79977fec417d11e7c5ba2c28ba46f3067965c"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 532958,
+          "end": 534338
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 532958,
+          "end": 534338
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/ddz/sk/battle_control.s",
+      "owner": "objects/bosses/ddz/sk",
+      "responsibility": "Doomsday final-boss battle controller, chase stages, damage state, world scrolling and completion progression.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 713,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 11296,
+        "last_line": 12005,
+        "sha256": "9f2922ef26e7b16b66528eadfc735bf315a28cd5a1ca8e8d93a36d8fa6efee9f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-family",
+        "reason": "The complete Doomsday boss chase and damage state graph retains its private stage transitions; missiles, asteroids, player control and helpers have separate owners.",
+        "proof_target": "check-source-layout"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 530394,
+          "end": 532462
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 530394,
+          "end": 532462
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/ddz/sk/missile.s",
+      "owner": "objects/bosses/ddz/sk",
+      "responsibility": "Doomsday missile initialization, tracking, player interaction and destruction.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 183,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 12006,
+        "last_line": 12184,
+        "sha256": "84e29d23a7a1c9e4c286443f306e4aa8a69e77a8132e291d30104f91aedb911d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_820D0",
+          "kind": "terminal-tail",
+          "reason": "Close the missile tracking, impact and destruction callback tails after the earlier original independent missile returns.",
+          "origin_first_line": 12083,
+          "origin_terminal_line": 12184,
+          "origin_end_line": 12184
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 532462,
+          "end": 532958
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 532462,
+          "end": 532958
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "owner": "objects/bosses/ddz/sk",
+      "responsibility": "Doomsday boss, missile and asteroid attributes, child construction, animation and graphics resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 147,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 13736,
+        "last_line": 13879,
+        "sha256": "9b9b6c154e4541c785d6340ecfff1f70820cc44bc2709b1f693da2c8aeadb455"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 537018,
+          "end": 538336
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 537018,
+          "end": 538336
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/ddz/sk/palette_and_defeat_helpers.s",
+      "owner": "objects/bosses/ddz/sk",
+      "responsibility": "Doomsday palette transfer, player response, defeat progression, spawning and scene motion helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 393,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 13346,
+        "last_line": 13735,
+        "sha256": "cb6f558974e47fd9a8166d0458e99e5220119b7023aaf864281d9b372f10be8b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 535922,
+          "end": 537018
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 535922,
+          "end": 537018
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/ddz/sk/tracking_and_motion_helpers.s",
+      "owner": "objects/bosses/ddz/sk",
+      "responsibility": "Doomsday missile targeting, angle selection, boss motion, collisions and parent-state helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 341,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 13008,
+        "last_line": 13345,
+        "sha256": "e08d074059ff2a5f5826f22c96ceb74ae90469a5b8b079ff26e1d30bc67cbc87"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 535170,
+          "end": 535922
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 535170,
+          "end": 535922
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "owner": "objects/bosses/dez/end_boss/sk",
+      "responsibility": "Death Egg end-boss controller, player interaction and coordinated attack state progression.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 395,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 7490,
+        "last_line": 7881,
+        "sha256": "b3c9ca49e0da2aafe30e1b451aabc868fe3e33ceae756601fc777c442ccfda33"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 520300,
+          "end": 521400
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 520300,
+          "end": 521400
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "owner": "objects/bosses/dez/end_boss/sk",
+      "responsibility": "Death Egg end-boss child attacks, destruction effects, attached actors and battle callbacks.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 376,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 7882,
+        "last_line": 8254,
+        "sha256": "ad255686229cfbb84b5736f8a52e9e4dde0723dbd81bc5325154ff658bb21ae1"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 521400,
+          "end": 522400
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 521400,
+          "end": 522400
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "owner": "objects/bosses/dez/end_boss/sk",
+      "responsibility": "Death Egg end-boss movement, collision, palette, angle and parent-state helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 413,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 8255,
+        "last_line": 8664,
+        "sha256": "f07bf8754888ba0a842d43859439ad141b86f21999461a926b4dd1764e762037"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 522400,
+          "end": 523332
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 522400,
+          "end": 523332
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
+      "owner": "objects/bosses/dez/end_boss/sk",
+      "responsibility": "Death Egg end-boss attributes, child construction, animation, palette and mappings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 167,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 8665,
+        "last_line": 8828,
+        "sha256": "a8100a72833856ae4e581055508f057780924b8bb56d7c4d46f0d231da4ddd2e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 523332,
+          "end": 523624
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 523332,
+          "end": 523624
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "owner": "objects/bosses/dez/final_boss/sk",
+      "responsibility": "Death Egg final-boss attached control actors, damage flags, movement and parent synchronization.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 192,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 9499,
+        "last_line": 9687,
+        "sha256": "7da5bab6638cf2e60e56b3b36484b25ac85029c17441d7921dba30c95bcadeec"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 525488,
+          "end": 526042
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 525488,
+          "end": 526042
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/dez/final_boss/sk/attack_and_defeat_actors.s",
+      "owner": "objects/bosses/dez/final_boss/sk",
+      "responsibility": "Death Egg final-boss secondary attack and defeat actors, scene callbacks and child state progression.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 391,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 10010,
+        "last_line": 10397,
+        "sha256": "b72e264cab8b4ab59eb9db68633a8152b5c3f78baafe264201d3b05d7c780e70"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 526906,
+          "end": 527916
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 526906,
+          "end": 527916
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/dez/final_boss/sk/body_and_arm_parts.s",
+      "owner": "objects/bosses/dez/final_boss/sk",
+      "responsibility": "Death Egg final-boss body and arm actors, collision states, animation and parent-relative motion.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 225,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 9688,
+        "last_line": 9909,
+        "sha256": "b4a46c863cac73c0bdf3163ddf5cb2d81752af033c5d17951c65bf5d321c16f7"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 526042,
+          "end": 526656
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 526042,
+          "end": 526656
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "owner": "objects/bosses/dez/final_boss/sk",
+      "responsibility": "Death Egg final-boss escape ship state, defeat explosions, debris actors and end-of-scene progression.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 288,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 9215,
+        "last_line": 9498,
+        "sha256": "7b66c0c803d9a1ed1712059b8ad98e6d48630d870e4987aff6487b0ad110821d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_80426",
+          "kind": "terminal-tail",
+          "reason": "Close the final moving debris callback, private indexed placement table and conditional offscreen drawing tail after the original ship sequence returns.",
+          "origin_first_line": 9456,
+          "origin_terminal_line": 9498,
+          "origin_end_line": 9498
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 524640,
+          "end": 525488
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 524640,
+          "end": 525488
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/dez/final_boss/sk/fireball.s",
+      "owner": "objects/bosses/dez/final_boss/sk",
+      "responsibility": "Death Egg final-boss fireball state, trajectory and player interaction.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 103,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 9910,
+        "last_line": 10009,
+        "sha256": "d3b33b8393015cf34c9dc9cc0711e753091c07d36d1155e3814e766f055c3366"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 526656,
+          "end": 526906
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 526656,
+          "end": 526906
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "owner": "objects/bosses/dez/final_boss/sk",
+      "responsibility": "Death Egg final-boss movement, collision, palette, parent-state and damage helpers with private lookup constants.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 450,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 10398,
+        "last_line": 10844,
+        "sha256": "b6705a3a6d7243786516f99328fcd4351acd11b0315ac397058bd995edec63b3"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 527916,
+          "end": 529030
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 527916,
+          "end": 529030
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "owner": "objects/bosses/dez/final_boss/sk",
+      "responsibility": "Death Egg final-boss object attributes, child construction, animation and palette scripts.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 202,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 10845,
+        "last_line": 11043,
+        "sha256": "52cd6ca9a1b80e1a7c9736479505543c080455806f3bf3df4f624f46fa822a55"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 529030,
+          "end": 529554
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 529030,
+          "end": 529554
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "owner": "objects/bosses/dez/final_boss/sk",
+      "responsibility": "Death Egg final-boss stage initialization, player control, world motion, battle progression and completion events.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 390,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 8829,
+        "last_line": 9214,
+        "sha256": "f233ea765b3574a690caf46805ef04ac56176462f210b2c74983ff956162cc15"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_800DE",
+          "kind": "terminal-tail",
+          "reason": "Close the final stage motion and scene transition callbacks after the preceding original independent return, ending at the unconditional object deletion dispatch.",
+          "origin_first_line": 9175,
+          "origin_terminal_line": 9214,
+          "origin_end_line": 9214
+        }
+      ],
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 523624,
+          "end": 524640
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 523624,
+          "end": 524640
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "owner": "objects/bosses/dez/miniboss/sk",
+      "responsibility": "Death Egg miniboss controller, flight, attack and coordinated child state progression.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 831,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 5629,
+        "last_line": 6456,
+        "sha256": "f3d64bcfafc8fb18d60b27975d238775e49f7ad3a1c44a4babbd69ad8a3fe9cc"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-family",
+        "reason": "The complete Death Egg miniboss flight and coordinated attack state graph stays together; child attack programs, common helpers and object resources have separate owners.",
+        "proof_target": "check-source-layout"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 515508,
+          "end": 517844
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 515508,
+          "end": 517844
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "owner": "objects/bosses/dez/miniboss/sk",
+      "responsibility": "Death Egg miniboss child attack, timed motion, collision and defeat callbacks.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 437,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 6457,
+        "last_line": 6890,
+        "sha256": "ca5268f3b015bc76df66cba0b43d02f5e528cc0a1239fdb9122bc2c220b8be94"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 517844,
+          "end": 518964
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 517844,
+          "end": 518964
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "owner": "objects/bosses/dez/miniboss/sk",
+      "responsibility": "Death Egg miniboss movement, collision, palette, angle and parent-state helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 505,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 6891,
+        "last_line": 7392,
+        "sha256": "65e50c23b7404a08f430470e807a33ce6c48d737490774064e5ab6ed848dd716"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 518964,
+          "end": 520006
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 518964,
+          "end": 520006
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "owner": "objects/bosses/dez/miniboss/sk",
+      "responsibility": "Death Egg miniboss attributes, child construction, animation, palette and mappings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 100,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 7393,
+        "last_line": 7489,
+        "sha256": "a686786f0b49aa09af10b4a7d0ebefa42ce12358d9ad3b30349f874e53725f17"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 520006,
+          "end": 520300
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 520006,
+          "end": 520300
+        }
+      ]
+    },
+    {
       "path": "src/objects/bosses/fbz/end_boss/sk/battle_and_attacks.s",
       "owner": "objects/bosses/fbz/end_boss/sk",
       "responsibility": "Flying Battery end-boss controller, player attacks, attached actors and defeat sequence.",
@@ -14902,6 +15627,441 @@
           "component": "sk",
           "start": 488364,
           "end": 489038
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "owner": "objects/bosses/ssz/end_boss/sk",
+      "responsibility": "Sky Sanctuary Mecha Sonic battle controller, coordinated attacks, player response and defeat progression.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 891,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 2138,
+        "last_line": 3025,
+        "sha256": "6c372fdf10039bb03e716355a2aa57e2214416418726d426d2c642267c615582"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-family",
+        "reason": "The complete Sky Sanctuary Mecha Sonic battle state graph retains coordinated attack actors and defeat progression; shared helpers and object resources have separate semantic owners.",
+        "proof_target": "check-source-layout"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 504456,
+          "end": 507212
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 504456,
+          "end": 507212
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "owner": "objects/bosses/ssz/ghz/sk",
+      "responsibility": "Sky Sanctuary Green Hill-style boss controller, ball attack, motion helpers and private object resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 434,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 585,
+        "last_line": 1015,
+        "sha256": "a934ce6456e1a6105b85b2f7b40a03c75c5d27f070301b987b38a2772450f69e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 500238,
+          "end": 501414
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 500238,
+          "end": 501414
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "owner": "objects/bosses/ssz/knuckles_boss/sk",
+      "responsibility": "Knuckles Sky Sanctuary Mecha Sonic battle controller, super phase, attacks and coordinated progression.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 776,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 3026,
+        "last_line": 3798,
+        "sha256": "19e25793b7b36479daa603f92d4e84f90845efdc863848251929f2508b71309b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-family",
+        "reason": "The complete Knuckles Mecha Sonic controller retains its coordinated super-phase attack graph; phase helpers, sparks, crane and shared resources have separate owners.",
+        "proof_target": "check-source-layout"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 507212,
+          "end": 509532
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 507212,
+          "end": 509532
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "owner": "objects/bosses/ssz/knuckles_boss/sk",
+      "responsibility": "Knuckles final-boss crane actor, linked children, platform interaction and scene motion.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 458,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 4142,
+        "last_line": 4596,
+        "sha256": "9782f378d9a3c43fc4f15054f11465967e3cc00d9d3952566b459524a3232031"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 510492,
+          "end": 511908
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 510492,
+          "end": 511908
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "owner": "objects/bosses/ssz/knuckles_boss/sk",
+      "responsibility": "Knuckles Mecha Sonic phase transitions, child motion and private movement or response helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 265,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 3799,
+        "last_line": 4060,
+        "sha256": "755decf482fdebb72a2df5f7a2df6f14c7cf0a868beb25c6ab325d0553739ba1"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 509532,
+          "end": 510280
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 509532,
+          "end": 510280
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "owner": "objects/bosses/ssz/mtz/sk",
+      "responsibility": "Sky Sanctuary Metropolis-style boss attached actors, orbiting or moving attack states and defeat effects.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 386,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 1432,
+        "last_line": 1814,
+        "sha256": "134bd81ad884b99bf9d5ca97ad34aad9e6e8fbff86157cf4892929f2129de1bc"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 502614,
+          "end": 503642
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 502614,
+          "end": 503642
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "owner": "objects/bosses/ssz/mtz/sk",
+      "responsibility": "Sky Sanctuary Metropolis-style boss controller, attack progression and initial coordinated actors.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 419,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 1016,
+        "last_line": 1431,
+        "sha256": "8d15a9d58cb556a5f06c95e581177fa95cac6cf01c8f54022d5ba91e288de6f2"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 501414,
+          "end": 502614
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 501414,
+          "end": 502614
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/ssz/mtz/sk/motion_and_orb_helpers.s",
+      "owner": "objects/bosses/ssz/mtz/sk",
+      "responsibility": "Sky Sanctuary Metropolis-style boss child motion, player contact and orb animation decoder.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 319,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 1815,
+        "last_line": 2130,
+        "sha256": "6f2c9866aff71c18cc394f3ee1bdba5069c748865cee219c9cf483a1f0918c8a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 503642,
+          "end": 504348
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 503642,
+          "end": 504348
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/ssz/mtz/sk/orb_resources.s",
+      "owner": "objects/bosses/ssz/mtz/sk",
+      "responsibility": "Sky Sanctuary Metropolis-style boss orb animation and palette resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 10,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 2131,
+        "last_line": 2137,
+        "sha256": "92c84449cb11c31ace4ad2c85f3ed8e6802e122b3a2f35a75c84dc4d6383a752"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 504348,
+          "end": 504456
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 504348,
+          "end": 504456
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/ssz/shared/sk/motion_and_palette_helpers.s",
+      "owner": "objects/bosses/ssz/shared/sk",
+      "responsibility": "Shared Mecha Sonic movement, collision, pattern, parent-state and palette helper callbacks with private lookup constants.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 342,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 4751,
+        "last_line": 5089,
+        "sha256": "43c046f5fbab9e79725a7d2b8e2989de79f0d0de424d730bb1ddf6ec43307ecf"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 512336,
+          "end": 513002
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 512336,
+          "end": 513002
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "owner": "objects/bosses/ssz/shared/sk",
+      "responsibility": "Mecha Sonic tracking slots, object attributes, children, animation, pattern records, mappings and palette scripts.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 542,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 5090,
+        "last_line": 5628,
+        "sha256": "9b017d05992f6cafce443d10a801bcdb343776319667ece2f4b99073d21b871a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 513002,
+          "end": 515508
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 513002,
+          "end": 515508
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/ssz/shared/sk/scene_transition_callbacks.s",
+      "owner": "objects/bosses/ssz/shared/sk",
+      "responsibility": "Sky Sanctuary post-battle player control restoration, palette fade and camera boundary transition actors.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 99,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 4656,
+        "last_line": 4750,
+        "sha256": "8685871ba3e1d6695b2d18319d761d23e9e0bb2547cacfef37af46df93f5f638"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_7D078",
+          "kind": "terminal-tail",
+          "reason": "Close the post-battle player, palette and camera callbacks after the preceding timed wait return; their final conditional camera return and deletion tail remain inseparable.",
+          "origin_first_line": 4673,
+          "origin_terminal_line": 4750,
+          "origin_end_line": 4750
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 512086,
+          "end": 512336
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 512086,
+          "end": 512336
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/ssz/shared/sk/sparks_and_camera.s",
+      "owner": "objects/bosses/ssz/shared/sk",
+      "responsibility": "Mecha Sonic spark effects, parent interaction and associated camera transition callbacks.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 85,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 4061,
+        "last_line": 4141,
+        "sha256": "81789344186d3c551149dd2ffa50801dda39ebc1c4b2d70e9d713400995e6596"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_7C9F6",
+          "kind": "terminal-tail",
+          "reason": "Keep the final camera transition conditional return and deletion tail together after the original spark or scene returns.",
+          "origin_first_line": 4127,
+          "origin_terminal_line": 4141,
+          "origin_end_line": 4141
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 510280,
+          "end": 510492
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 510280,
+          "end": 510492
         }
       ]
     },
@@ -19305,6 +20465,51 @@
       ]
     },
     {
+      "path": "src/objects/interface/blue_sphere/sk/mecha_and_emerald_widgets.s",
+      "owner": "objects/interface/blue_sphere/sk",
+      "responsibility": "Shared difficulty-screen Mecha Sonic portrait and Master Emerald display widgets, pattern selection and palette animation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 63,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 4597,
+        "last_line": 4655,
+        "sha256": "9776f1addf922ddde784f612756481e9b0ce89b17aff65372503ad77fbd09220"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_Difficulty_MasterEmerald",
+          "kind": "terminal-tail",
+          "reason": "Keep the complete Master Emerald difficulty widget with its conditional initialization return, indexed position table and palette or draw callbacks after the independent portrait return.",
+          "origin_first_line": 4626,
+          "origin_terminal_line": 4655,
+          "origin_end_line": 4655
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 511908,
+          "end": 512086
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 511908,
+          "end": 512086
+        }
+      ]
+    },
+    {
       "path": "src/objects/interface/continue/sk/characters.s",
       "owner": "objects/interface/continue/sk",
       "responsibility": "Continue-scene Sonic, Tails, Knuckles, EggRobo and attached icon actor state machines.",
@@ -20641,6 +21846,71 @@
           "component": "sk",
           "start": 72486,
           "end": 73126
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/ddz/sk/flight_controller.s",
+      "owner": "objects/players/ddz/sk",
+      "responsibility": "Doomsday player flight controller, scripted entry, camera limits, debugging transition and failure state.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 255,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 11044,
+        "last_line": 11295,
+        "sha256": "b6c102f3f2c651d470c12e56a47108f31f58e0a31c868096b3ac0bd397ebf3ce"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 529554,
+          "end": 530394
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 529554,
+          "end": 530394
+        }
+      ]
+    },
+    {
+      "path": "src/objects/players/ddz/sk/flight_helpers.s",
+      "owner": "objects/players/ddz/sk",
+      "responsibility": "Doomsday player motion, ring or state updates, camera synchronization and controller helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 363,
+      "origin": {
+        "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
+        "path": "sonic3k.s",
+        "first_line": 12648,
+        "last_line": 13007,
+        "sha256": "16ea09bd51d60041737c0b2a75b1456bd46117235e85d7bebfa8f97b67787f56"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 534338,
+          "end": 535170
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 534338,
+          "end": 535170
         }
       ]
     },
