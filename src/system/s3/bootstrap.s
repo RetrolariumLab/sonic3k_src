@@ -12,8 +12,15 @@
                 include "src/system/assembly/hardware_helpers.s"
                 include "src/system/assembly/data_record_macros.s"
                 include "src/audio/shared/bank_and_sample_macros.s"
-                include "sonic3k.constants.s"           ; include some constants
-                include "s3.constants.s"                ; RAM addresses moved around between S3 and S&K
+                include "src/memory/shared/object_offsets.s"
+                include "src/memory/shared/hardware.s"
+                include "src/memory/shared/sram.s"
+                include "src/memory/shared/ram.s"
+                include "src/memory/shared/special_stage_overlays.s"
+                include "src/memory/shared/art_tiles.s"
+                include "src/memory/shared/sound_ids.s"
+                include "src/memory/shared/assembly_cursor.s"
+                include "src/memory/s3/overrides.s"
 ; ---------------------------------------------------------------------------
 ; FM voice macros required by the executable Z80 driver
 SonicDriverVer: equ     3                               ; Tell SMPS2ASM that we are targeting Sonic 3's sound driver

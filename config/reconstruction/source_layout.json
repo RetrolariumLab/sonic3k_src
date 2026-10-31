@@ -40,21 +40,6 @@
       }
     },
     {
-      "path": "s3.constants.s",
-      "owner": "pending/engine",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 103,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "s3.constants.s",
-        "first_line": 1,
-        "last_line": 103,
-        "sha256": "c67c64936815d4470b0ef91dd2443b1e575027531f3f0e1ccbed983c1a2c645a"
-      }
-    },
-    {
       "path": "s3.s",
       "owner": "pending/engine",
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
@@ -67,21 +52,6 @@
         "first_line": 1,
         "last_line": 117921,
         "sha256": "a793291d6b4b15707954de649b4e19eadc65598e95796491336506fe7f9a182f"
-      }
-    },
-    {
-      "path": "sonic3k.constants.s",
-      "owner": "pending/engine",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 1716,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "sonic3k.constants.s",
-        "first_line": 1,
-        "last_line": 1716,
-        "sha256": "041c3447415f494b4d749a71022d4dc796261cc3634ef32e1798fa41c308f75f"
       }
     },
     {
@@ -12591,6 +12561,216 @@
           "end": 37956
         }
       ]
+    },
+    {
+      "path": "src/memory/s3/overrides.s",
+      "owner": "memory/s3",
+      "responsibility": "Official Sonic 3 RAM overlay and interrupt storage overrides",
+      "role": "memory",
+      "status": "owned",
+      "address_space": "declarations",
+      "physical_lines": 108,
+      "origin": {
+        "commit": "5a299a8b29707c4a70e42a6860964cf3c1dc95f1",
+        "path": "s3.constants.s",
+        "first_line": 1,
+        "last_line": 103,
+        "sha256": "c67c64936815d4470b0ef91dd2443b1e575027531f3f0e1ccbed983c1a2c645a"
+      },
+      "memory_contract": {
+        "kind": "overlay",
+        "phases": [
+          "Level_layout_header+$400",
+          "Stat_table+$12",
+          "_unkF712+8",
+          "_tempFF88",
+          "Demo_mode_flag",
+          "V_int_jump"
+        ],
+        "rewind": true,
+        "profiles": ["s3-us", "s3-eu", "s3-jp"]
+      }
+    },
+    {
+      "path": "src/memory/shared/art_tiles.s",
+      "owner": "memory/shared",
+      "responsibility": "VDP attribute masks and art tile assignments shared by the sibling engines",
+      "role": "memory",
+      "status": "owned",
+      "address_space": "declarations",
+      "physical_lines": 365,
+      "origin": {
+        "commit": "5a299a8b29707c4a70e42a6860964cf3c1dc95f1",
+        "path": "sonic3k.constants.s",
+        "first_line": 1100,
+        "last_line": 1459,
+        "sha256": "ac269dc44e7d8e56ba472ec3828c931919f907025ca4e07ebfb058717e363b74"
+      },
+      "memory_contract": {
+        "kind": "offsets",
+        "phases": [],
+        "rewind": false,
+        "profiles": ["s3-us", "s3-eu", "s3-jp", "sk"]
+      }
+    },
+    {
+      "path": "src/memory/shared/assembly_cursor.s",
+      "owner": "memory/shared",
+      "responsibility": "Reset the non-emitting allocation cursor before cartridge assembly",
+      "role": "memory",
+      "status": "owned",
+      "address_space": "declarations",
+      "physical_lines": 9,
+      "origin": {
+        "commit": "5a299a8b29707c4a70e42a6860964cf3c1dc95f1",
+        "path": "sonic3k.constants.s",
+        "first_line": 1713,
+        "last_line": 1716,
+        "sha256": "24008cdbec31e3620c68036c056fe25cbfa9d27e4be858834894e1d7abacc142"
+      },
+      "memory_contract": {
+        "kind": "cursor",
+        "phases": [],
+        "rewind": true,
+        "profiles": ["s3-us", "s3-eu", "s3-jp", "sk"]
+      },
+      "size_exception": {
+        "kind": "fixed-address-tail",
+        "reason": "The allocation cursor must reset once after declarations and before vectors.",
+        "proof_target": "check-memory-layout"
+      }
+    },
+    {
+      "path": "src/memory/shared/hardware.s",
+      "owner": "memory/shared",
+      "responsibility": "Master clocks, Z80 bus registers and Mega Drive hardware ports",
+      "role": "memory",
+      "status": "owned",
+      "address_space": "declarations",
+      "physical_lines": 55,
+      "origin": {
+        "commit": "5a299a8b29707c4a70e42a6860964cf3c1dc95f1",
+        "path": "sonic3k.constants.s",
+        "first_line": 215,
+        "last_line": 264,
+        "sha256": "1698c941f5608c8283db2e320adaaa052115d6f27c16e7164713cb6f5d6c5184"
+      },
+      "memory_contract": {
+        "kind": "hardware",
+        "phases": [],
+        "rewind": false,
+        "profiles": ["s3-us", "s3-eu", "s3-jp", "sk"]
+      }
+    },
+    {
+      "path": "src/memory/shared/object_offsets.s",
+      "owner": "memory/shared",
+      "responsibility": "Object state, cartridge interfaces and shared collision scalar conventions",
+      "role": "memory",
+      "status": "owned",
+      "address_space": "declarations",
+      "physical_lines": 218,
+      "origin": {
+        "commit": "5a299a8b29707c4a70e42a6860964cf3c1dc95f1",
+        "path": "sonic3k.constants.s",
+        "first_line": 1,
+        "last_line": 214,
+        "sha256": "f589d4a2023a071c780c3b23f861dd7cabb871887fc6ef0b1fc179182520462a"
+      },
+      "memory_contract": {
+        "kind": "offsets",
+        "phases": [],
+        "rewind": false,
+        "profiles": ["s3-us", "s3-eu", "s3-jp", "sk"]
+      }
+    },
+    {
+      "path": "src/memory/shared/ram.s",
+      "owner": "memory/shared",
+      "responsibility": "Complete 68000 RAM allocation, aliases, interrupt trampolines and capacity guard",
+      "role": "memory",
+      "status": "owned",
+      "address_space": "declarations",
+      "physical_lines": 765,
+      "origin": {
+        "commit": "5a299a8b29707c4a70e42a6860964cf3c1dc95f1",
+        "path": "sonic3k.constants.s",
+        "first_line": 293,
+        "last_line": 1052,
+        "sha256": "72189b81db94bcdaf0818d7db982436e8499c4f2ffd1c1118028a9b0f5aa6094"
+      },
+      "memory_contract": {
+        "kind": "ram",
+        "phases": ["$FFFF0000"],
+        "rewind": false,
+        "profiles": ["s3-us", "s3-eu", "s3-jp", "sk"]
+      }
+    },
+    {
+      "path": "src/memory/shared/sound_ids.s",
+      "owner": "memory/shared",
+      "responsibility": "Sound command, music and effect identifier domains",
+      "role": "memory",
+      "status": "owned",
+      "address_space": "declarations",
+      "physical_lines": 258,
+      "origin": {
+        "commit": "5a299a8b29707c4a70e42a6860964cf3c1dc95f1",
+        "path": "sonic3k.constants.s",
+        "first_line": 1460,
+        "last_line": 1712,
+        "sha256": "f692188bd6d0127833b4642e9852e16fb5bae4703376bd3baced98140b5c5c20"
+      },
+      "memory_contract": {
+        "kind": "enumerations",
+        "phases": ["$E1", "$01", "$33"],
+        "rewind": false,
+        "profiles": ["s3-us", "s3-eu", "s3-jp", "sk"]
+      }
+    },
+    {
+      "path": "src/memory/shared/special_stage_overlays.s",
+      "owner": "memory/shared",
+      "responsibility": "Special-stage scratch overlays in player position history storage",
+      "role": "memory",
+      "status": "owned",
+      "address_space": "declarations",
+      "physical_lines": 52,
+      "origin": {
+        "commit": "5a299a8b29707c4a70e42a6860964cf3c1dc95f1",
+        "path": "sonic3k.constants.s",
+        "first_line": 1053,
+        "last_line": 1099,
+        "sha256": "c9a7c5d4b514e7723ce426b610527b5d6dd1b061dd36ae5eb5966697d97796be"
+      },
+      "memory_contract": {
+        "kind": "overlay",
+        "phases": ["Pos_table_P2"],
+        "rewind": false,
+        "profiles": ["s3-us", "s3-eu", "s3-jp", "sk"]
+      }
+    },
+    {
+      "path": "src/memory/shared/sram.s",
+      "owner": "memory/shared",
+      "responsibility": "Odd-address SRAM save allocations and backup strides",
+      "role": "memory",
+      "status": "owned",
+      "address_space": "declarations",
+      "physical_lines": 33,
+      "origin": {
+        "commit": "5a299a8b29707c4a70e42a6860964cf3c1dc95f1",
+        "path": "sonic3k.constants.s",
+        "first_line": 265,
+        "last_line": 292,
+        "sha256": "bb488a76464240641118db9698751e1d31379d6605515ec4724d3ec8c98fec8b"
+      },
+      "memory_contract": {
+        "kind": "sram",
+        "phases": ["$200001"],
+        "rewind": false,
+        "profiles": ["s3-us", "s3-eu", "s3-jp", "sk"]
+      }
     },
     {
       "path": "src/objects/bonus/gumball/sk/machine.s",
@@ -71493,7 +71673,7 @@
       "responsibility": "Cartridge vectors and header, hardware startup, cartridge validation and initial game-mode dispatch.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 691,
+      "physical_lines": 698,
       "origin": {
         "commit": "311352b95436c810fb897541f11a169c69104fe0",
         "path": "s3.s",
@@ -71708,7 +71888,7 @@
       "responsibility": "Cartridge vectors and header, hardware startup, cartridge validation and initial game-mode dispatch.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 501,
+      "physical_lines": 508,
       "origin": {
         "commit": "311352b95436c810fb897541f11a169c69104fe0",
         "path": "sonic3k.s",

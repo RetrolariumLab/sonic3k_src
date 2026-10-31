@@ -87,3 +87,31 @@ ancestor, so a new empty comparison cannot silently replace the accepted base.
 The historical checkout uses the same verified private inputs and builds all
 five original containers. This supplements byte identity and relocation/runtime
 checks; it does not replace either. Cached historical source must remain clean.
+
+## Memory declaration owners
+
+Shared object offsets, hardware ports and clocks, odd-byte SRAM, the complete
+68000 RAM map, special-stage overlays, art tile assignments and sound
+identifiers have separate owners under src/memory. Sonic 3's RAM changes form
+one explicit override module. The allocation cursor resets before the cartridge
+vectors.
+
+Memory modules use a distinct declaration role, not executable or ROM-data
+ownership. Every module explicitly disables padding. The grammar accepts only
+named EQU/SET declarations, explicit offset enumerations, balanced declared
+PHASE regions, uninitialized DS reservations and bounded fatal-only capacity
+guards. It rejects instructions, includes, initialized storage, CPU switches,
+nested or unknown phases and allocation primitive overrides. SRAM reserves words
+so its live bytes stay at odd bus addresses.
+
+Make check-memory-contract checks this grammar without ROMs. Make
+check-memory-layout additionally requires a fresh historical preservation
+witness and current assemblies. Every declared global symbol must match the
+pre-layout baseline for its applicable product. Actual AS includes establish
+applicability. RAM, sound identifier and odd SRAM domains are checked.
+
+The built proof also reads AS absolute records and independently accounts for
+every physical cartridge byte exactly once. It reconciles both virtual Z80
+segments with their physical containers, bounded reservations, product padding
+and header patches. The CPU identifier alone never selects an address space.
+This prevents an allegedly non-emitting allocation from hiding cartridge data.

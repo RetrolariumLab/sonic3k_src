@@ -1,3 +1,8 @@
+; Owner: memory/s3
+; Responsibility: Official Sonic 3 RAM overlay and interrupt storage overrides
+; Source provenance and ranges: config/reconstruction/source_layout.json
+
+                padding off
 ; Zone IDs from Sonic 2
 emerald_hill_zone:  equ     $00
 mystic_cave_zone:   equ     $0B

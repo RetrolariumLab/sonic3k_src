@@ -18,3 +18,19 @@ def parse_symbols(text):
     if not values:
         raise ValueError("AS listing contains no integer symbol table")
     return values
+
+
+STRING_SYMBOL = re.compile(
+    r"""(?:^|\|)\s*\*?([A-Za-z_.][A-Za-z_0-9.]*)\s*:\s*('(?:[^'\r\n]|'')*'|"(?:[^"\r\n]|"")*")\s+[A-Z-]\s*(?=\||$)""",
+    re.MULTILINE,
+)
+
+
+def parse_declaration_symbols(text):
+    """Retain the distinction between integer and quoted-string AS constants."""
+    values = parse_symbols(text)
+    for name, value in STRING_SYMBOL.findall(text):
+        if name in values and values[name] != value:
+            raise ValueError("Conflicting AS declaration symbol: " + name)
+        values[name] = value
+    return values

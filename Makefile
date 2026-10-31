@@ -122,3 +122,11 @@ include mk/authoring.mk
 
 check-source-preservation:
 	$(PYTHON) -m scripts.run validation.preservation
+
+.PHONY: check-memory-contract check-memory-layout
+
+check-memory-contract:
+	$(PYTHON) -m scripts.run validation.memory_layout
+
+check-memory-layout:
+	$(PYTHON) -m scripts.run validation.memory_layout --built

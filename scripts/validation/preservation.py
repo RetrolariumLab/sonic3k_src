@@ -11,6 +11,7 @@ import sys
 from scripts.build.project import ROOT, atomic, image_records, load, read_reference, source_fingerprint
 from scripts.build.relocation import baseline, derive
 from scripts.validation.cohorts import collect_file
+from scripts.validation.symbols import parse_declaration_symbols
 
 EXPORT = """
 from pathlib import Path
@@ -26,7 +27,7 @@ procedures={}
 for key,engine in policy['engines'].items():
  counts=Counter((p['name'],p['terminal'],p['exact_start']) for path in engine['sources'] for p in documents[path]['procedures'])
  procedures[key]=[{'name':name,'terminal':terminal,'exact_start':exact,'count':count} for (name,terminal,exact),count in sorted(counts.items())]
-report={'source_sha256':source_fingerprint(),'entries':{key:row['entries'] for key,row in normal.items()},'procedures':procedures}
+report={'symbols':{key:row['symbols'] for key,row in normal.items()},'source_sha256':source_fingerprint(),'entries':{key:row['entries'] for key,row in normal.items()},'procedures':procedures}
 Path('build/preservation-export.json').write_text(json.dumps(report,indent=2))
 """
 
@@ -100,6 +101,10 @@ def historical_build(revision):
     if _git("status", "--porcelain", cwd=folder):
         raise ValueError("Historical preservation check modified tracked source")
     report = json.loads((folder / "build/preservation-export.json").read_text())
+    report["symbols"] = {
+        key: parse_declaration_symbols((folder / "build/objects" / key / "main.lst").read_text(errors="replace"))
+        for key in report["entries"]
+    }
     report["baseline_commit"] = revision
     return report
 
@@ -143,11 +148,15 @@ def check():
             ]
             if absorbed:
                 raise ValueError("Added procedure annotation absorbs an existing independent return boundary")
+    from scripts.authoring.formats_workflow import tooling_fingerprint
+
     report = {
         "schema_version": 1,
         "complete": True,
         "baseline_commit": reference["baseline_commit"],
         "baseline_source_sha256": reference["source_sha256"],
+        "historical_symbols": reference["symbols"],
+        "tooling_sha256": tooling_fingerprint(),
         "source_sha256": source_fingerprint(),
         "profiles": result,
         "additional_annotations": len(added),

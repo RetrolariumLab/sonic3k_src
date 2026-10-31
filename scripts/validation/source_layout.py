@@ -10,6 +10,7 @@ from scripts.validation.numeric_operands import code_part
 from scripts.validation.cohorts import INSTRUCTIONS, TERMINALS, collect_file, statements
 from scripts.validation.definitions import check_definitions, check_nonemitting_range, named_declaration
 from scripts.validation.data_macros import DATA_MACROS, HEADER as MACRO_HEADER, check_data_macros
+from scripts.validation import memory_layout
 
 DATA_OPS = (
     frozenset(("dc.b", "dc.w", "dc.l", "even", "align", "align0", "cnop", "cnop0", "macro", "endm", "equ", "label"))
@@ -180,10 +181,15 @@ def validate_entry(row, text, inventory=False, source_includes=(), binary_includ
         raise ValueError("Owned source is outside src")
     if re.fullmatch(r"(?:code|routine|room_part|part)_[0-9a-f]+", row["path"].rsplit("/", 1)[-1].split(".")[0], re.I):
         raise ValueError("Source module has only an address or page number")
-    if row["role"] not in ("code", "data", "definitions"):
-        raise ValueError("Unknown source ownership role")
-    if row.get("address_space", "cartridge-rom") != "cartridge-rom":
-        raise ValueError("Unsupported source address space requires an explicit checked contract")
+    if row["role"] == "memory":
+        if row.get("address_space") != "declarations":
+            raise ValueError("Memory ownership needs its non-emitting declaration domain")
+        memory_layout.declarations(text, row.get("memory_contract", {}))
+    else:
+        if row["role"] not in ("code", "data", "definitions"):
+            raise ValueError("Unknown source ownership role")
+        if row.get("address_space", "cartridge-rom") != "cartridge-rom":
+            raise ValueError("Unsupported source address space requires an explicit checked contract")
     if row["role"] == "definitions":
         check_definitions(text)
     if row["role"] == "data":
@@ -272,6 +278,7 @@ def check_ranges(rows):
     for path, row in owned.items():
         if sorted(row.get("rom_ranges", []), key=order) != sorted(actual[path], key=order):
             raise ValueError("Source data range differs from independent AS output: " + path)
+    memory_layout.check_built(rows)
 
 
 def check(inventory=False, built=False):
@@ -282,6 +289,7 @@ def check(inventory=False, built=False):
         raise ValueError("Source ownership registry omits or duplicates files")
     texts = {row["path"]: (ROOT / row["path"]).read_text(encoding="utf-8") for row in rows}
     macro_count = check_data_macros(texts, load("config/reconstruction/data_macros.json"))
+    memory_layout.check_primitives(texts)
     source_includes = {r["path"] for r in rows if r["status"] == "owned" and r["role"] == "data"}
     assets = load("assets/manifest.json")
     binary_includes = {assets["output"] + "/" + r["path"] for r in assets["assets"]}
