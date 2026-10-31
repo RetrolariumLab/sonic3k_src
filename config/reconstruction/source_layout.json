@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "state": "in_progress",
+  "state": "complete",
   "baseline_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
   "line_policy": {
     "target_min": 300,
@@ -9,21 +9,6 @@
     "hard_review": 2000
   },
   "files": [
-    {
-      "path": "Sound/Z80 Sound Driver.s",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 4278,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/Z80 Sound Driver.s",
-        "first_line": 1,
-        "last_line": 4691,
-        "sha256": "306313eb65e85a1b4c279f7f80c8abf351cbef10e3cf587522f5f2a072df3eb9"
-      }
-    },
     {
       "path": "src/audio/banks/s3/dac_bank_1.s",
       "owner": "audio/s3",
@@ -2673,6 +2658,326 @@
           "end": 1010004
         }
       ]
+    },
+    {
+      "path": "src/audio/driver/banking_helpers.s",
+      "owner": "audio/driver",
+      "responsibility": "Bank selection helpers, restart-vector assertions and cartridge pointer conversion.",
+      "role": "z80-driver",
+      "status": "owned",
+      "address_space": "z80-driver-code",
+      "physical_lines": 122,
+      "origin": {
+        "commit": "62002dc1e0ed0c8d77b3482bfe0ab2255827e6b7",
+        "path": "Sound/Z80 Sound Driver.s",
+        "first_line": 219,
+        "last_line": 335,
+        "sha256": "9d3f75e5a010500b6164883ff9ef43996bbfedc5d81fc25697ccb82d2be00602"
+      },
+      "driver_contract": {
+        "kind": "definitions",
+        "context": "code"
+      }
+    },
+    {
+      "path": "src/audio/driver/cartridge_container.s",
+      "owner": "audio/driver",
+      "responsibility": "Physical cartridge reservations and explicit Z80 code, table and RAM assembly contexts.",
+      "role": "z80-driver",
+      "status": "owned",
+      "address_space": "driver-container",
+      "physical_lines": 64,
+      "origin": {
+        "commit": "62002dc1e0ed0c8d77b3482bfe0ab2255827e6b7",
+        "path": "Sound/Z80 Sound Driver.s",
+        "first_line": 1,
+        "last_line": 4278,
+        "sha256": "628da63ba1691b38f5f3b7e0846512a3655ee367e2aa1d91abe3d83ceb1ee7af"
+      },
+      "driver_contract": {
+        "kind": "wrapper",
+        "context": "container"
+      }
+    },
+    {
+      "path": "src/audio/driver/coordination_meta_and_tempo.s",
+      "owner": "audio/driver",
+      "responsibility": "Meta commands, tempo changes, driver halt, memory copy and SSG-EG settings.",
+      "role": "z80-driver",
+      "status": "owned",
+      "address_space": "z80-driver-code",
+      "physical_lines": 192,
+      "origin": {
+        "commit": "62002dc1e0ed0c8d77b3482bfe0ab2255827e6b7",
+        "path": "Sound/Z80 Sound Driver.s",
+        "first_line": 3473,
+        "last_line": 3659,
+        "sha256": "b92984c1ba3ef5fbfc8f43100cf10b3d612b8a7b304238cb50b11c41706f41c4"
+      },
+      "driver_contract": {
+        "kind": "code",
+        "context": "code"
+      }
+    },
+    {
+      "path": "src/audio/driver/coordination_modulation_and_flow.s",
+      "owner": "audio/driver",
+      "responsibility": "Modulation, track stop, PSG noise, loops, calls and FM3 settings.",
+      "role": "z80-driver",
+      "status": "owned",
+      "address_space": "z80-driver-code",
+      "physical_lines": 407,
+      "origin": {
+        "commit": "62002dc1e0ed0c8d77b3482bfe0ab2255827e6b7",
+        "path": "Sound/Z80 Sound Driver.s",
+        "first_line": 3071,
+        "last_line": 3472,
+        "sha256": "dfd105c9990959ab572eec3a89481e4d79195f6cbdb19cda7cf5bbae30f9f9ac"
+      },
+      "driver_contract": {
+        "kind": "code",
+        "context": "code"
+      }
+    },
+    {
+      "path": "src/audio/driver/coordination_volume_and_instruments.s",
+      "owner": "audio/driver",
+      "responsibility": "Coordination commands for volume, transposition and instrument upload.",
+      "role": "z80-driver",
+      "status": "owned",
+      "address_space": "z80-driver-code",
+      "physical_lines": 350,
+      "origin": {
+        "commit": "62002dc1e0ed0c8d77b3482bfe0ab2255827e6b7",
+        "path": "Sound/Z80 Sound Driver.s",
+        "first_line": 2726,
+        "last_line": 3070,
+        "sha256": "0b3d170caebf8a4df580b464f06266f33590e0b0efdd40d40009ddcc03c0c7c7"
+      },
+      "driver_contract": {
+        "kind": "code",
+        "context": "code"
+      }
+    },
+    {
+      "path": "src/audio/driver/dac_and_coordination_dispatch.s",
+      "owner": "audio/driver",
+      "responsibility": "DAC track updates, coordination command dispatch and panning.",
+      "role": "z80-driver",
+      "status": "owned",
+      "address_space": "z80-driver-code",
+      "physical_lines": 168,
+      "origin": {
+        "commit": "62002dc1e0ed0c8d77b3482bfe0ab2255827e6b7",
+        "path": "Sound/Z80 Sound Driver.s",
+        "first_line": 2563,
+        "last_line": 2725,
+        "sha256": "7ae6655c5ced164c696243108f076612864122e8545d42d4716454ac013d46f3"
+      },
+      "driver_contract": {
+        "kind": "code",
+        "context": "code"
+      }
+    },
+    {
+      "path": "src/audio/driver/digital_sample_playback.s",
+      "owner": "audio/driver",
+      "responsibility": "DPCM and PCM playback with the extracted sixteen-byte delta codebook.",
+      "role": "z80-driver",
+      "status": "owned",
+      "address_space": "z80-driver-code",
+      "physical_lines": 175,
+      "origin": {
+        "commit": "62002dc1e0ed0c8d77b3482bfe0ab2255827e6b7",
+        "path": "Sound/Z80 Sound Driver.s",
+        "first_line": 3829,
+        "last_line": 3999,
+        "sha256": "5f4f71081b5a143ffb112993ee8f27bc6bcb3caf4e89c9be939c3941745bdf73"
+      },
+      "driver_contract": {
+        "kind": "code",
+        "context": "code"
+      }
+    },
+    {
+      "path": "src/audio/driver/driver_pointer_tables.s",
+      "owner": "audio/driver",
+      "responsibility": "Driver pointer arrays and checked private envelope and instrument resources.",
+      "role": "z80-driver",
+      "status": "owned",
+      "address_space": "z80-driver-tables",
+      "physical_lines": 263,
+      "origin": {
+        "commit": "62002dc1e0ed0c8d77b3482bfe0ab2255827e6b7",
+        "path": "Sound/Z80 Sound Driver.s",
+        "first_line": 4017,
+        "last_line": 4274,
+        "sha256": "bcef9db9dd9c2afd98d64fb580f31ad59cc6b2cbd8e1b31a24b932bcaae406e0"
+      },
+      "driver_contract": {
+        "kind": "data",
+        "context": "tables"
+      }
+    },
+    {
+      "path": "src/audio/driver/fm_modulation_and_instruments.s",
+      "owner": "audio/driver",
+      "responsibility": "FM volume envelopes, pitch modulation and instrument register uploads.",
+      "role": "z80-driver",
+      "status": "owned",
+      "address_space": "z80-driver-code",
+      "physical_lines": 367,
+      "origin": {
+        "commit": "62002dc1e0ed0c8d77b3482bfe0ab2255827e6b7",
+        "path": "Sound/Z80 Sound Driver.s",
+        "first_line": 1086,
+        "last_line": 1447,
+        "sha256": "4d7d4b0f36cbebcc6d03c70be7f5cdf3c33a0f7624be5cc08614aa7344463bc5"
+      },
+      "driver_contract": {
+        "kind": "code",
+        "context": "code"
+      }
+    },
+    {
+      "path": "src/audio/driver/frequency_and_bank_tables.s",
+      "owner": "audio/driver",
+      "responsibility": "PSG and FM frequency conversion tables and music bank identifiers.",
+      "role": "z80-driver",
+      "status": "owned",
+      "address_space": "z80-driver-code",
+      "physical_lines": 83,
+      "origin": {
+        "commit": "62002dc1e0ed0c8d77b3482bfe0ab2255827e6b7",
+        "path": "Sound/Z80 Sound Driver.s",
+        "first_line": 2485,
+        "last_line": 2562,
+        "sha256": "58734cfbc05ac34968c84919b426468a93b1e60ed4b90f1787f4c3ecd6ef6e10"
+      },
+      "driver_contract": {
+        "kind": "data",
+        "context": "code"
+      }
+    },
+    {
+      "path": "src/audio/driver/interrupts_and_bootstrap.s",
+      "owner": "audio/driver",
+      "responsibility": "Restart vectors, vertical interrupt, startup, YM register I/O and DAC bank table.",
+      "role": "z80-driver",
+      "status": "owned",
+      "address_space": "z80-driver-code",
+      "physical_lines": 275,
+      "origin": {
+        "commit": "62002dc1e0ed0c8d77b3482bfe0ab2255827e6b7",
+        "path": "Sound/Z80 Sound Driver.s",
+        "first_line": 336,
+        "last_line": 605,
+        "sha256": "5bcca49e6c6884c65c7b4a7574dbb629b3e00c07b26a876a0eb6ad0fbefb0291"
+      },
+      "driver_contract": {
+        "kind": "code",
+        "context": "code"
+      }
+    },
+    {
+      "path": "src/audio/driver/music_track_update.s",
+      "owner": "audio/driver",
+      "responsibility": "Music tick scheduling, track decoding, frequency and note duration updates.",
+      "role": "z80-driver",
+      "status": "owned",
+      "address_space": "z80-driver-code",
+      "physical_lines": 485,
+      "origin": {
+        "commit": "62002dc1e0ed0c8d77b3482bfe0ab2255827e6b7",
+        "path": "Sound/Z80 Sound Driver.s",
+        "first_line": 606,
+        "last_line": 1085,
+        "sha256": "701141b59caa3e4b7436800f80e92817807275ef1fcac915f640a033b17d3704"
+      },
+      "driver_contract": {
+        "kind": "code",
+        "context": "code"
+      }
+    },
+    {
+      "path": "src/audio/driver/pause_fades_and_pcm_dispatch.s",
+      "owner": "audio/driver",
+      "responsibility": "Pause handling, volume fades, sound queues and Sega PCM dispatch.",
+      "role": "z80-driver",
+      "status": "owned",
+      "address_space": "z80-driver-code",
+      "physical_lines": 487,
+      "origin": {
+        "commit": "62002dc1e0ed0c8d77b3482bfe0ab2255827e6b7",
+        "path": "Sound/Z80 Sound Driver.s",
+        "first_line": 2003,
+        "last_line": 2484,
+        "sha256": "a68521c0d878b6a54d123cd69a2826f570edca9381f2a138c0f24a2610c84680"
+      },
+      "driver_contract": {
+        "kind": "code",
+        "context": "code"
+      }
+    },
+    {
+      "path": "src/audio/driver/psg_track_update.s",
+      "owner": "audio/driver",
+      "responsibility": "PSG track processing, volume envelopes, note release and silence.",
+      "role": "z80-driver",
+      "status": "owned",
+      "address_space": "z80-driver-code",
+      "physical_lines": 174,
+      "origin": {
+        "commit": "62002dc1e0ed0c8d77b3482bfe0ab2255827e6b7",
+        "path": "Sound/Z80 Sound Driver.s",
+        "first_line": 3660,
+        "last_line": 3828,
+        "sha256": "b95d48469b867aa19dd60bf4f65a0fdf59b58e69f74659c3e8c997afa8cbe344"
+      },
+      "driver_contract": {
+        "kind": "code",
+        "context": "code"
+      }
+    },
+    {
+      "path": "src/audio/driver/ram_layout.s",
+      "owner": "audio/driver",
+      "responsibility": "Track structure, hardware ports, music and sound-effect RAM with explicit backup overlay.",
+      "role": "z80-driver",
+      "status": "owned",
+      "address_space": "declarations",
+      "physical_lines": 194,
+      "origin": {
+        "commit": "62002dc1e0ed0c8d77b3482bfe0ab2255827e6b7",
+        "path": "Sound/Z80 Sound Driver.s",
+        "first_line": 18,
+        "last_line": 207,
+        "sha256": "5647338716d012eab4744d09edda0e628f9a85bb13b7ac359be4a76764d28f3e"
+      },
+      "driver_contract": {
+        "kind": "memory",
+        "context": "declarations"
+      }
+    },
+    {
+      "path": "src/audio/driver/sound_loading.s",
+      "owner": "audio/driver",
+      "responsibility": "Sound queue dispatch, music and effect loading and track initialization.",
+      "role": "z80-driver",
+      "status": "owned",
+      "address_space": "z80-driver-code",
+      "physical_lines": 560,
+      "origin": {
+        "commit": "62002dc1e0ed0c8d77b3482bfe0ab2255827e6b7",
+        "path": "Sound/Z80 Sound Driver.s",
+        "first_line": 1448,
+        "last_line": 2002,
+        "sha256": "087f175f7e6f22d46d4df4f39b89dfa2b978a7c38792db4523b96e09a12cd41b"
+      },
+      "driver_contract": {
+        "kind": "code",
+        "context": "code"
+      }
     },
     {
       "path": "src/audio/pcm/shared/sega_voice.inc",

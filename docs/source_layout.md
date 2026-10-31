@@ -5,12 +5,11 @@ responsibility, physical line count and source range at the preservation
 baseline. Owned data lives under `src/objects`, `src/rendering`, `src/ui`,
 `src/game` and `src/system/debug`. Engine-specific code remains separate.
 
-This registry is intentionally incomplete during extraction: 886 data owners,
-1043 sibling executable owners, 5 definition libraries, 10 checked memory
-modules and 20 structural composition modules. The 2 remaining driver and
-external-ABI containers still await complete semantic ownership. The inventory
-keeps that distinction explicit; a complete source layout cannot accept pending
-entries.
+The registry has 1980 owned units: 886 data owners, 1043 sibling executable
+owners, 5 definition libraries, 10 checked memory modules, 20 structural
+composition modules and 16 typed Z80 driver owners. No source unit remains
+pending. Source-layout acceptance also requires the built range, historical ABI
+and physical object coverage checks.
 
 Every owned cartridge unit has independently checked normal-build ROM ranges,
 including the applicable component and offset in the lock-on image. After an
@@ -151,3 +150,29 @@ uninitialized byte reservation. Initialized data, other macro bodies, missing
 space, overflow and a different bus base are rejected. The existing lock-on gate
 still compares every export with actual Sonic 3 source plus 0x200000 in all
 three regional builds. This adds no second-cartridge Sonic 2 runtime profile.
+
+## Z80 driver ownership
+
+The driver lives under src/audio/driver. Its cartridge container retains the
+original two physical reservations, SAVE/RESTORE pairs, virtual origins and
+capacity assertions. Ordered children own RAM, helper definitions, runtime
+subsystems, frequency/bank data and pointer tables. Every emitting child
+declares CPU Z80 inside the original saved context. The RAM child leaves the
+caller CPU unchanged and allocates no cartridge bytes.
+
+Make check-z80-contract compares all original statements with the independently
+pinned pre-extraction source. Only comments, spacing and the explicit leaf
+context prefixes differ. Labels, instructions, macro bodies, conditionals,
+resource paths and wrapper order remain checked. Executable children need real
+Z80 instructions; data cannot execute instructions. Code includes only the
+extracted sixteen-byte delta codebook; table resources require extraction
+recipes. Unknown CPU, origin, include and iteration directives are rejected.
+
+The RAM parser independently computes the 48-byte track fields, aliases and all
+25 track instances. Music and effects occupy their declared RAM; song backups
+explicitly overlay effects and end at 0x1FA0. The final 96 bytes up to 0x2000
+remain reserved for the stack. Make check-z80-driver compares these
+independently computed fields and original code/table entry addresses with the
+accepted 1.0 build, checks actual AS child ranges in 0x0000--0x1300 and
+0x1300--0x1C00, and requires the current physical object coverage and cartridge
+identity witness.

@@ -6,7 +6,7 @@
                 include "src/audio/banks/sk/music_bank_1.s"
                 include "src/audio/banks/sk/music_bank_2.s"
                 include "src/audio/banks/sk/dac_bank.s"
-                include "Sound/Z80 Sound Driver.s"
+                include "src/audio/driver/cartridge_container.s"
                 include "src/audio/banks/sk/effect_bank.s"
                 include "src/revisions/sk/graphics_order.s"
                 include "src/revisions/sk/cartridge_tail.s"

@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "baseline_commit": "62002dc1e0ed0c8d77b3482bfe0ab2255827e6b7",
+  "baseline_path": "Sound/Z80 Sound Driver.s",
+  "baseline_sha256": "628da63ba1691b38f5f3b7e0846512a3655ee367e2aa1d91abe3d83ceb1ee7af",
+  "wrapper": "src/audio/driver/cartridge_container.s",
+  "modules": [
+    {
+      "path": "src/audio/driver/ram_layout.s",
+      "kind": "memory",
+      "context": "declarations",
+      "first_line": 18,
+      "last_line": 207
+    },
+    {
+      "path": "src/audio/driver/banking_helpers.s",
+      "kind": "definitions",
+      "context": "code",
+      "first_line": 219,
+      "last_line": 335
+    },
+    {
+      "path": "src/audio/driver/interrupts_and_bootstrap.s",
+      "kind": "code",
+      "context": "code",
+      "first_line": 336,
+      "last_line": 605
+    },
+    {
+      "path": "src/audio/driver/music_track_update.s",
+      "kind": "code",
+      "context": "code",
+      "first_line": 606,
+      "last_line": 1085
+    },
+    {
+      "path": "src/audio/driver/fm_modulation_and_instruments.s",
+      "kind": "code",
+      "context": "code",
+      "first_line": 1086,
+      "last_line": 1447
+    },
+    {
+      "path": "src/audio/driver/sound_loading.s",
+      "kind": "code",
+      "context": "code",
+      "first_line": 1448,
+      "last_line": 2002
+    },
+    {
+      "path": "src/audio/driver/pause_fades_and_pcm_dispatch.s",
+      "kind": "code",
+      "context": "code",
+      "first_line": 2003,
+      "last_line": 2484
+    },
+    {
+      "path": "src/audio/driver/frequency_and_bank_tables.s",
+      "kind": "data",
+      "context": "code",
+      "first_line": 2485,
+      "last_line": 2562
+    },
+    {
+      "path": "src/audio/driver/dac_and_coordination_dispatch.s",
+      "kind": "code",
+      "context": "code",
+      "first_line": 2563,
+      "last_line": 2725
+    },
+    {
+      "path": "src/audio/driver/coordination_volume_and_instruments.s",
+      "kind": "code",
+      "context": "code",
+      "first_line": 2726,
+      "last_line": 3070
+    },
+    {
+      "path": "src/audio/driver/coordination_modulation_and_flow.s",
+      "kind": "code",
+      "context": "code",
+      "first_line": 3071,
+      "last_line": 3472
+    },
+    {
+      "path": "src/audio/driver/coordination_meta_and_tempo.s",
+      "kind": "code",
+      "context": "code",
+      "first_line": 3473,
+      "last_line": 3659
+    },
+    {
+      "path": "src/audio/driver/psg_track_update.s",
+      "kind": "code",
+      "context": "code",
+      "first_line": 3660,
+      "last_line": 3828
+    },
+    {
+      "path": "src/audio/driver/digital_sample_playback.s",
+      "kind": "code",
+      "context": "code",
+      "first_line": 3829,
+      "last_line": 3999
+    },
+    {
+      "path": "src/audio/driver/driver_pointer_tables.s",
+      "kind": "data",
+      "context": "tables",
+      "first_line": 4017,
+      "last_line": 4274
+    }
+  ],
+  "code_window": [0, 4864],
+  "tables_window": [4864, 7168],
+  "ram_window": [7168, 8096],
+  "stack_window": [8096, 8192]
+}

@@ -8,7 +8,7 @@
                 include "src/audio/banks/s3/music_bank_3.s"
                 include "src/audio/banks/s3/music_bank_4.s"
                 include "src/audio/banks/s3/dac_bank_1.s"
-                include "Sound/Z80 Sound Driver.s"
+                include "src/audio/driver/cartridge_container.s"
                 include "src/audio/banks/s3/dac_bank_2.s"
                 include "src/audio/banks/s3/dac_bank_3.s"
                 include "src/audio/banks/s3/effect_bank.s"

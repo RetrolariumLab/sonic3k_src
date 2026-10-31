@@ -10,7 +10,7 @@ from scripts.validation.numeric_operands import code_part
 from scripts.validation.cohorts import INSTRUCTIONS, TERMINALS, collect_file, statements
 from scripts.validation.definitions import check_definitions, check_nonemitting_range, named_declaration
 from scripts.validation.data_macros import DATA_MACROS, HEADER as MACRO_HEADER, check_data_macros
-from scripts.validation import memory_layout, composition_sources
+from scripts.validation import memory_layout, composition_sources, z80_driver
 
 DATA_OPS = (
     frozenset(("dc.b", "dc.w", "dc.l", "even", "align", "align0", "cnop", "cnop0", "macro", "endm", "equ", "label"))
@@ -181,7 +181,9 @@ def validate_entry(row, text, inventory=False, source_includes=(), binary_includ
         raise ValueError("Owned source is outside src")
     if re.fullmatch(r"(?:code|routine|room_part|part)_[0-9a-f]+", row["path"].rsplit("/", 1)[-1].split(".")[0], re.I):
         raise ValueError("Source module has only an address or page number")
-    if row["role"] == "composition":
+    if row["role"] == "z80-driver":
+        z80_driver.check_module(text, row.get("driver_contract", {}))
+    elif row["role"] == "composition":
         contract = row.get("composition_contract", {})
         expected_space = "assembly-order" if contract.get("kind") == "entry" else "cartridge-rom"
         if row.get("address_space") != expected_space or source_owners is None:
@@ -291,6 +293,8 @@ def check_ranges(rows):
             raise ValueError("Source data range differs from independent AS output: " + path)
     memory_layout.check_built(rows)
     composition_sources.check_built(rows)
+    if any(row["role"] == "z80-driver" for row in rows):
+        z80_driver.check_built(rows)
 
 
 def check(inventory=False, built=False):
@@ -328,6 +332,8 @@ def check(inventory=False, built=False):
             )
         if row["path"] in source_includes:
             dependencies[row["path"]] = check_ledger(text, source_includes, binary_includes)
+    if any(row["role"] == "z80-driver" for row in rows):
+        z80_driver.check_sources(rows)
     check_data_graph(dependencies)
     composition_sources.check_order_graph(structural)
     pending = len(rows) - accepted

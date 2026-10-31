@@ -138,3 +138,11 @@ check-composition-contract:
 
 check-composition:
 	$(PYTHON) -m scripts.run validation.composition_sources --built
+
+.PHONY: check-z80-contract check-z80-driver
+
+check-z80-contract:
+	$(PYTHON) -m scripts.run validation.z80_driver
+
+check-z80-driver:
+	$(PYTHON) -m scripts.run validation.z80_driver --built
