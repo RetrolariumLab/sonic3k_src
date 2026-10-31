@@ -67,6 +67,38 @@ def import_inputs(folder):
     print("[OK] Imported verified private images: " + ", ".join(sorted(copied)))
 
 
+def assemble(commands, profile, source_root, objdir):
+    """Resolve every source and binary include inside this one explicit tree."""
+    source_root = source_root.resolve()
+    objdir.mkdir(parents=True, exist_ok=True)
+    obj = objdir / "main.p"
+    obj.unlink(missing_ok=True)
+    args = [
+        commands["asl"],
+        "-xx",
+        "-n",
+        "-q",
+        "-A",
+        "-L",
+        "-U",
+        "-i",
+        str(source_root),
+        "-o",
+        obj,
+        "-olist",
+        objdir / "main.lst",
+    ]
+    for name, value in profile["defines"].items():
+        args += ["-D", name + "=" + str(value)]
+    entry = inside(profile["entry"], source_root)
+    if not entry.is_file():
+        raise ValueError("Missing source entry: " + str(entry))
+    run([*args, entry], cwd=objdir, log=objdir / "assembler.log")
+    if not obj.is_file():
+        raise RuntimeError("AS produced no object for " + profile["entry"])
+    return obj
+
+
 def build_selected(selected, *, source_root=ROOT, output_root=None, verify=False):
     values = profiles()
     images = image_records()
@@ -87,34 +119,7 @@ def build_selected(selected, *, source_root=ROOT, output_root=None, verify=False
             data = b"".join(one(child).read_bytes() for child in profile["compose"])
         else:
             objdir = output_root.parent / "objects" / key
-            objdir.mkdir(parents=True, exist_ok=True)
-            obj = objdir / "main.p"
-            obj.unlink(missing_ok=True)
-            args = [
-                commands["asl"],
-                "-xx",
-                "-n",
-                "-q",
-                "-A",
-                "-L",
-                "-U",
-                "-i",
-                str(source_root),
-                "-o",
-                obj,
-                "-olist",
-                objdir / "main.lst",
-            ]
-            if source_root != ROOT:
-                args += ["-i", str(ROOT)]
-            for name, value in profile["defines"].items():
-                args += ["-D", name + "=" + str(value)]
-            entry = inside(profile["entry"], source_root)
-            if not entry.is_file():
-                raise ValueError("Missing source entry: " + str(entry))
-            run([*args, entry], cwd=objdir, log=objdir / "assembler.log")
-            if not obj.is_file():
-                raise RuntimeError("AS produced no object for " + key)
+            obj = assemble(commands, profile, source_root, objdir)
             temporary = objdir / "linked.bin"
             temporary.unlink(missing_ok=True)
             codec = profile["driver_compression"]

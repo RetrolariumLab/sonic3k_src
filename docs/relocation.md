@@ -5,6 +5,11 @@ ignored `build/relocated/`. `make check-relocated` derives the expected coverage
 again from current source and verifies the matrix. No saved research source or
 original developer checkout is an input. Run `make verify-all` first.
 
+The generated tree receives hash-checked copies of the declared private binary
+inputs. AS searches only that tree: an absent transformed include is an error,
+not permission to use the preservation source. Synthetic real-AS regressions
+check nested source edits and missing input rejection.
+
 ## Source-derived physical cohorts
 
 The collector discovers return-bearing and annotated procedure files rather than

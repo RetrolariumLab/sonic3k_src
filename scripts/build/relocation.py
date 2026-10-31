@@ -20,6 +20,7 @@ from scripts.build.project import (
     source_names,
 )
 from scripts.build.pipeline import build_selected
+from scripts.build.source_inputs import stage as stage_inputs
 from scripts.validation.cohorts import collect_file, render, table_slot
 from scripts.validation.lockon import check_fixed
 from scripts.validation.symbols import parse_symbols
@@ -195,6 +196,8 @@ def prune_source(work, names):
     allowed = set(names)
     work = work.resolve()
     for path in work.rglob("*"):
+        if path.relative_to(work).parts[0] == "data":
+            continue
         if path.suffix not in (".s", ".inc"):
             continue
         if path.is_symlink() or not path.resolve().is_relative_to(work):
@@ -205,6 +208,13 @@ def prune_source(work, names):
 
 def prepare_source(policy, plan, group, names):
     work = inside("work/source", DEST)
+    manifest = load("assets/manifest.json")
+    stage_inputs(
+        work,
+        manifest["assets"] + load("config/audio_driver_payloads.json")["assets"],
+        source_root=ROOT / manifest["output"],
+        output=manifest["output"],
+    )
     prune_source(work, names)
     anchors = {
         engine.get("startup_source", profiles()[key]["entry"]): engine["startup_label"]

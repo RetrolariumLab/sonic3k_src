@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 62
+    "commit_count": 63
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -419,9 +419,15 @@
       "commits": ["fe145ec98a979e6c2556c757f0672065b9975946"]
     },
     {
+      "id": "change-6929f90fa753",
+      "kind": "tooling",
+      "summary": "Mirror preservation tests under their tool owners",
+      "commits": ["6929f90fa7532bd16c0eee48ca6f26a67e0c7b1e"]
+    },
+    {
       "id": "current-release-stage",
       "kind": "validation_and_documentation",
-      "summary": "Mirror preservation regression tests under their tool responsibility packages and check discoverable ownership.",
+      "summary": "Isolate actual generated AS source and binary inputs, exercise nested edits with real AS and require fresh relocation and content evidence.",
       "commits": ["release-commit"]
     }
   ],
@@ -462,7 +468,12 @@
       "status": "satisfied",
       "evidence": {
         "targets": ["check-content-contract", "check-content-zero-edit"],
-        "files": ["config/authoring/data_formats.json", "docs/data_formats.md"]
+        "files": [
+          "config/authoring/data_formats.json",
+          "docs/data_formats.md",
+          "scripts/build/source_inputs.py",
+          "tests/build/test_assembly_workspace.py"
+        ]
       },
       "note": "Executable controls are present; acceptance requires a current complete aggregate from a clean clone."
     },

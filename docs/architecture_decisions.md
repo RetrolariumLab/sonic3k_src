@@ -45,6 +45,15 @@ Nemesis backend. This game's Enigma semantics differ from the pinned Core
 implementation, so its bounded codec follows the retained 68000 decoder and
 checks all 35 original streams. Neither dependency checkout is modified.
 
+## Isolate generated assembly inputs
+
+AS receives one source root. A relocation or content workspace cannot fall back
+to preservation source when an include is missing. Relocation stages only
+manifest-owned binary resources, validating every path, size and hash before
+writing any file. Content workspaces already contain their encoded resources.
+Real-AS synthetic tests verify nested edits in emitted object bytes and reject
+missing source or binary inputs even when originals exist in another tree.
+
 ## Keep evidence reproducible
 
 The complete 1.0 gate runs first in 2.0. Structural tests work without ROMs;

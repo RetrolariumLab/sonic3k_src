@@ -112,10 +112,12 @@ under ignored build/authoring.
 
 Make check-content-zero-edit then copies the retained assembly into that
 workspace and builds all five preservation containers from those encoded inputs.
-Every output must match its original ROM, including both composite halves.
-Reports bind assembly, authoring tooling and registry identities. These content
-checks do not replace the full preservation/runtime gate or the built source
-ownership checks.
+Every output must match its original ROM, including both composite halves. AS
+searches only the encoded workspace; missing generated source or binary inputs
+cannot fall back to the preservation tree. Real-AS synthetic edit tests check
+that nested generated values reach emitted object bytes. Reports bind assembly,
+authoring tooling and registry identities. These content checks do not replace
+the full preservation/runtime gate or the built source ownership checks.
 
 Core scratch cleanup can leave a directory in ignored build storage when a
 Windows process still holds a temporary file. Execution, encoding, output

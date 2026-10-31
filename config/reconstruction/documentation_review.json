@@ -14,8 +14,8 @@
     },
     {
       "path": "docs/architecture_decisions.md",
-      "decision": "added",
-      "reason": "Consolidate product, storage, editing, context, dependency and evidence rationale."
+      "decision": "reworked",
+      "reason": "Retain the cohesive topic and state the single-root AS contract, hash-bound private input staging and real-AS edit regression evidence."
     },
     {
       "path": "docs/audio_storage.md",
@@ -30,7 +30,7 @@
     {
       "path": "docs/content_codecs.md",
       "decision": "reworked",
-      "reason": "Retain detailed APIs; correct obsolete integration status and source composition counts."
+      "reason": "Retain the cohesive topic and state the single-root AS contract, hash-bound private input staging and real-AS edit regression evidence."
     },
     {
       "path": "docs/data_formats.md",
@@ -74,8 +74,8 @@
     },
     {
       "path": "docs/relocation.md",
-      "decision": "kept",
-      "reason": "Keep this cohesive subsystem reference; commands, constraints and evidence boundaries agree with current implementation."
+      "decision": "reworked",
+      "reason": "Retain the cohesive topic and state the single-root AS contract, hash-bound private input staging and real-AS edit regression evidence."
     },
     {
       "path": "docs/resolved_unknowns.md",
