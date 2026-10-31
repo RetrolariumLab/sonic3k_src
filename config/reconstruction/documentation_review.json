@@ -9,8 +9,8 @@
     },
     {
       "path": "docs/architecture.md",
-      "decision": "kept",
-      "reason": "Keep this cohesive subsystem reference; commands, constraints and evidence boundaries agree with current implementation."
+      "decision": "reworked",
+      "reason": "Retain engine and data ownership; align test-package ownership with the public tool packages."
     },
     {
       "path": "docs/architecture_decisions.md",

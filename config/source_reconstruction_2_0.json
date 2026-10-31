@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 61
+    "commit_count": 62
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -413,9 +413,15 @@
       "commits": ["f7bf38d7e5518a032d4266bbd57f4ddb55221ee2"]
     },
     {
+      "id": "change-fe145ec98a97",
+      "kind": "tooling",
+      "summary": "Add serial Source 2.0 gates and reconcile project documentation",
+      "commits": ["fe145ec98a979e6c2556c757f0672065b9975946"]
+    },
+    {
       "id": "current-release-stage",
       "kind": "validation_and_documentation",
-      "summary": "Aggregate preservation, semantic ownership, content and documentation checks with reproducible release evidence.",
+      "summary": "Mirror preservation regression tests under their tool responsibility packages and check discoverable ownership.",
       "commits": ["release-commit"]
     }
   ],

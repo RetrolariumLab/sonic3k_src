@@ -69,5 +69,7 @@ separate fixed interface whose game profile is excluded.
 `scripts/build/` validates inputs and tool pins, assembles, links and compares
 images. `scripts/validation/` checks external exports, numeric operands and Git
 privacy. `scripts/runtime/` prepares the pinned emulator and serial RAM checks.
-`mk/runtime.mk` exposes runtime commands. Tests exercise these contracts without
-requiring distributed game bytes. No host GUI editor is part of the repository.
+`mk/runtime.mk` exposes runtime commands. Tests mirror the build, runtime,
+validation and authoring tool packages, with a discoverable owner for every
+public workflow. They exercise contracts without requiring distributed game
+bytes. No host GUI editor is part of the repository.
