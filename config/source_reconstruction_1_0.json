@@ -658,6 +658,12 @@
       "commits": ["5cf1cd0686f103ae66a1861daa2799443f211942"]
     },
     {
+      "id": "change-3781cfe8dc7b",
+      "kind": "source_or_tooling",
+      "summary": "Own Sonic 3 object services, enemies and IceCap mechanisms",
+      "commits": ["3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",

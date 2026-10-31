@@ -35,6 +35,8 @@
     "src/game/collision/sk/wall_and_ceiling_clearance.s",
     "src/game/collision/sk/wall_probes.s",
     "src/game/competition/s3/screen_backgrounds.s",
+    "src/game/level/ending/sk/background.s",
+    "src/game/level/ending/sk/screen.s",
     "src/game/level/s3/act_transition.s",
     "src/game/level/s3/bounds_catalog.s",
     "src/game/level/s3/camera.s",
@@ -126,6 +128,9 @@
     "src/game/level/zones/ssz/sk/act1_screen_control.s",
     "src/game/level/zones/ssz/sk/act2_background.s",
     "src/game/level/zones/ssz/sk/act2_screen_control.s",
+    "src/game/modes/continue/sk/screen.s",
+    "src/game/modes/ending/sk/credits_sequence.s",
+    "src/game/modes/ending/sk/scroll_parameters.s",
     "src/game/modes/s3/competition_menu.s",
     "src/game/modes/s3/competition_player_selection.s",
     "src/game/modes/s3/competition_results.s",
@@ -270,6 +275,9 @@
     "src/objects/effects/sk/legacy_defense.s",
     "src/objects/effects/sk/super_player_effects.s",
     "src/objects/effects/sk/transient_player_effects.s",
+    "src/objects/ending/sk/master_emerald.s",
+    "src/objects/ending/sk/plane_and_knuckles.s",
+    "src/objects/ending/sk/scene_controller.s",
     "src/objects/enemies/aiz/s3/bloominator.s",
     "src/objects/enemies/aiz/s3/monkey_dude.s",
     "src/objects/enemies/aiz/s3/rhinobot.s",
@@ -295,6 +303,8 @@
     "src/objects/enemies/mgz/s3/bubbles.s",
     "src/objects/enemies/mgz/s3/mantis.s",
     "src/objects/enemies/mgz/s3/spiker.s",
+    "src/objects/interface/continue/sk/characters.s",
+    "src/objects/interface/continue/sk/countdown_and_patterns.s",
     "src/objects/interface/s3/game_over.s",
     "src/objects/interface/s3/level_results.s",
     "src/objects/interface/s3/sega_screen_actor.s",
@@ -2405,7 +2415,17 @@
         "src/game/level/zones/lrz/sk/act3_screen.s",
         "src/game/level/zones/hpz/sk/screen.s",
         "src/game/level/zones/dez/sk/act3_screen.s",
-        "src/game/level/zones/hpz/sk/special_screen.s"
+        "src/game/level/zones/hpz/sk/special_screen.s",
+        "src/game/level/ending/sk/screen.s",
+        "src/game/level/ending/sk/background.s",
+        "src/game/modes/ending/sk/credits_sequence.s",
+        "src/game/modes/ending/sk/scroll_parameters.s",
+        "src/game/modes/continue/sk/screen.s",
+        "src/objects/interface/continue/sk/characters.s",
+        "src/objects/interface/continue/sk/countdown_and_patterns.s",
+        "src/objects/ending/sk/scene_controller.s",
+        "src/objects/ending/sk/master_emerald.s",
+        "src/objects/ending/sk/plane_and_knuckles.s"
       ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/sk/bootstrap.s"
@@ -2470,6 +2490,13 @@
       "kind": "data-end-code-alias",
       "profiles": ["s3-us", "s3-eu", "s3-jp"],
       "reason": "The Marble Garden miniboss graphics load catalog ends at the immediately following code entry. Preserve the original code-entry name and independently verify identical AS symbol addresses after assigning the data and code to separate semantic owners."
+    },
+    {
+      "alias": "PLC_CreditsKnuxPose_End",
+      "target": "sub_5B514",
+      "kind": "data-end-code-alias",
+      "profiles": ["sk"],
+      "reason": "The final Knuckles credit-pose graphics descriptor ends at the following credit scroll parameter selector. Preserve its original code-entry alias and require independently assembled equal addresses in normal and relocated builds."
     }
   ]
 }

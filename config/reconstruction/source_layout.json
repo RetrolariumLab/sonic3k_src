@@ -900,7 +900,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 82386,
+      "physical_lines": 78939,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -2949,6 +2949,71 @@
       ],
       "applicability": "emitted",
       "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/game/level/ending/sk/background.s",
+      "owner": "game/level/ending/sk",
+      "responsibility": "Ending background event program, scroll deformation and private sky palette.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 265,
+      "origin": {
+        "commit": "3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e",
+        "path": "sonic3k.s",
+        "first_line": 786,
+        "last_line": 1047,
+        "sha256": "25c55d60accb3072ad48ee1ebcd90a78972e1b507ddd03f3cf7f4f3f31b87af3"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 372488,
+          "end": 373134
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 372488,
+          "end": 373134
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/ending/sk/screen.s",
+      "owner": "game/level/ending/sk",
+      "responsibility": "Ending foreground screen initialization, event sequence and camera tracking.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 346,
+      "origin": {
+        "commit": "3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e",
+        "path": "sonic3k.s",
+        "first_line": 443,
+        "last_line": 785,
+        "sha256": "f7c903423c9f136d6469da372ae588822ee2c1b9457d03abf4ea19bdac866e57"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 371362,
+          "end": 372488
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 371362,
+          "end": 372488
+        }
+      ]
     },
     {
       "path": "src/game/level/s3/act_transition.s",
@@ -6437,6 +6502,316 @@
           "component": "sk",
           "start": 363078,
           "end": 363722
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/continue/sk/resources.s",
+      "owner": "game/modes/continue/sk",
+      "responsibility": "Continue sprite and icon mappings, compressed art and digit graphics resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 16,
+      "origin": {
+        "commit": "3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e",
+        "path": "sonic3k.s",
+        "first_line": 3136,
+        "last_line": 3148,
+        "sha256": "60ad3d430ad4318233f708d3881be203235624611e377cdbc3b97b4a0c1cdfb2"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 379978,
+          "end": 383080
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 379978,
+          "end": 383080
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/continue/sk/screen.s",
+      "owner": "game/modes/continue/sk",
+      "responsibility": "Continue mode video and palette setup, countdown input and scene creation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 150,
+      "origin": {
+        "commit": "3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e",
+        "path": "sonic3k.s",
+        "first_line": 2391,
+        "last_line": 2537,
+        "sha256": "12d3787572fc1e351cdb81920304f27194f43dbff5dc69dfaf9c985622807156"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 377568,
+          "end": 378154
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 377568,
+          "end": 378154
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/ending/sk/credits_glyphs.s",
+      "owner": "game/modes/ending/sk",
+      "responsibility": "Credits glyph plane mapping and NTSC or PAL scroll delay and speed records for standalone or lock-on endings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 72,
+      "origin": {
+        "commit": "3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e",
+        "path": "sonic3k.s",
+        "first_line": 1505,
+        "last_line": 1573,
+        "sha256": "15634f6ec4f683598edbd9b4dbbd64a1ff6ae02e70e33214041e96a275258afe"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 374118,
+          "end": 374502
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 374118,
+          "end": 374502
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/ending/sk/credits_sequence.s",
+      "owner": "game/modes/ending/sk",
+      "responsibility": "Ending credit progression, character-specific pose graphics and scrolling tile transfer helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 409,
+      "origin": {
+        "commit": "3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e",
+        "path": "sonic3k.s",
+        "first_line": 1048,
+        "last_line": 1453,
+        "sha256": "db6c2e8f69d15404ed446420a1e2f9d47dd5b118ce4469926f25206886df001a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 373134,
+          "end": 374020
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 373134,
+          "end": 374020
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/ending/sk/lockon_closing_credits.s",
+      "owner": "game/modes/ending/sk",
+      "responsibility": "Closing credit text stream, relative offset index and display positions for Sonic 3 & Knuckles.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 257,
+      "origin": {
+        "commit": "3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e",
+        "path": "sonic3k.s",
+        "first_line": 2137,
+        "last_line": 2390,
+        "sha256": "ebf47f39948860d245c230dd4725b859ec77050616e942841ac2c97c154b21cf"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 376648,
+          "end": 377568
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 376648,
+          "end": 377568
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/ending/sk/lockon_opening_credits.s",
+      "owner": "game/modes/ending/sk",
+      "responsibility": "Opening credit text stream, relative offset index and display positions for Sonic 3 & Knuckles.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 182,
+      "origin": {
+        "commit": "3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e",
+        "path": "sonic3k.s",
+        "first_line": 1958,
+        "last_line": 2136,
+        "sha256": "3a1cb3ef49455e1d6a2417afb239765c744fac8ba67dcba926e1e5a76dbc290d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 375946,
+          "end": 376648
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 375946,
+          "end": 376648
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/ending/sk/pose_pattern_lists.s",
+      "owner": "game/modes/ending/sk",
+      "responsibility": "Ending S3 pose and Knuckles credits graphics load descriptors.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 11,
+      "origin": {
+        "commit": "3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e",
+        "path": "sonic3k.s",
+        "first_line": 1454,
+        "last_line": 1461,
+        "sha256": "2bc845e85c7af734898a1ff02b3dd37902e7acbf850b3f4857f1d770fef40750"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 374020,
+          "end": 374036
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 374020,
+          "end": 374036
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/ending/sk/scroll_parameters.s",
+      "owner": "game/modes/ending/sk",
+      "responsibility": "Choose credit scroll speed and delay from product, region, character and emerald completion state.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 46,
+      "origin": {
+        "commit": "3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e",
+        "path": "sonic3k.s",
+        "first_line": 1462,
+        "last_line": 1504,
+        "sha256": "a7836731f8f27b0450227cdcecba2392d2b492f28c3de18925787a08c504abe8"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 374036,
+          "end": 374118
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 374036,
+          "end": 374118
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/ending/sk/standalone_closing_credits.s",
+      "owner": "game/modes/ending/sk",
+      "responsibility": "Closing credit text stream, relative offset index and display positions for standalone S&K.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 208,
+      "origin": {
+        "commit": "3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e",
+        "path": "sonic3k.s",
+        "first_line": 1753,
+        "last_line": 1957,
+        "sha256": "15792ca2a4fbb354aca1807d6c498fa7f3038d59ba4c8a87f49f84f2a1ae8477"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 375204,
+          "end": 375946
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 375204,
+          "end": 375946
+        }
+      ]
+    },
+    {
+      "path": "src/game/modes/ending/sk/standalone_opening_credits.s",
+      "owner": "game/modes/ending/sk",
+      "responsibility": "Opening credit text stream, relative offset index and display positions for standalone S&K.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 182,
+      "origin": {
+        "commit": "3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e",
+        "path": "sonic3k.s",
+        "first_line": 1574,
+        "last_line": 1752,
+        "sha256": "079d73278b66dc1b780ebdb91063eeb87fd31eb62a3d9b090d401ec5b02a56c5"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 374502,
+          "end": 375204
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 374502,
+          "end": 375204
         }
       ]
     },
@@ -13640,6 +14015,106 @@
       ]
     },
     {
+      "path": "src/objects/ending/sk/master_emerald.s",
+      "owner": "objects/ending/sk",
+      "responsibility": "Ending Master Emerald actor state, movement and scene transitions.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 156,
+      "origin": {
+        "commit": "3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e",
+        "path": "sonic3k.s",
+        "first_line": 3635,
+        "last_line": 3787,
+        "sha256": "866bbc7bc1e353cbe18515db64b3b2e8518dc5f675e18a666b1a4612e821ed09"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 384608,
+          "end": 385006
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 384608,
+          "end": 385006
+        }
+      ]
+    },
+    {
+      "path": "src/objects/ending/sk/plane_and_knuckles.s",
+      "owner": "objects/ending/sk",
+      "responsibility": "Ending plane and Knuckles pose actors, motion and private state dispatch tables.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 122,
+      "origin": {
+        "commit": "3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e",
+        "path": "sonic3k.s",
+        "first_line": 3788,
+        "last_line": 3906,
+        "sha256": "d735a64194d60c5b1cc3113eee4ad3df33b99c7e96242833c0cf4c5a8eaaa069"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 385006,
+          "end": 385418
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 385006,
+          "end": 385418
+        }
+      ]
+    },
+    {
+      "path": "src/objects/ending/sk/scene_controller.s",
+      "owner": "objects/ending/sk",
+      "responsibility": "Ending scene coordination, player character state, completion progression and retained legacy credits return entry.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 489,
+      "origin": {
+        "commit": "3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e",
+        "path": "sonic3k.s",
+        "first_line": 3149,
+        "last_line": 3634,
+        "sha256": "ced32d1d9fbd17c7c550c8393a0221fa20f8537fc3d6fbb670b361fda58fc9d4"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 383080,
+          "end": 384608
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 383080,
+          "end": 384608
+        }
+      ]
+    },
+    {
       "path": "src/objects/enemies/aiz/s3/bloominator.s",
       "owner": "objects/enemies/aiz/s3",
       "responsibility": "Bloominator enemy states, projectiles and child resources, including the shared callback projectile initializer referenced by enemy child records.",
@@ -14731,6 +15206,71 @@
           "component": "s3-us",
           "start": 2451796,
           "end": 2452510
+        }
+      ]
+    },
+    {
+      "path": "src/objects/interface/continue/sk/characters.s",
+      "owner": "objects/interface/continue/sk",
+      "responsibility": "Continue-scene Sonic, Tails, Knuckles, EggRobo and attached icon actor state machines.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 466,
+      "origin": {
+        "commit": "3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e",
+        "path": "sonic3k.s",
+        "first_line": 2538,
+        "last_line": 3000,
+        "sha256": "ebc76e71799c30021965b7409c935474eafc471bca45c86164759064a15e1656"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 378154,
+          "end": 379566
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 378154,
+          "end": 379566
+        }
+      ]
+    },
+    {
+      "path": "src/objects/interface/continue/sk/countdown_and_patterns.s",
+      "owner": "objects/interface/continue/sk",
+      "responsibility": "Continue countdown digit transfer, character child selection and private palette or animation records.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 138,
+      "origin": {
+        "commit": "3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e",
+        "path": "sonic3k.s",
+        "first_line": 3001,
+        "last_line": 3135,
+        "sha256": "02e987a0e58c7875ba992d6f7c40cab32308c88c3571ef9a026869b46c711716"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 379566,
+          "end": 379978
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 379566,
+          "end": 379978
         }
       ]
     },
