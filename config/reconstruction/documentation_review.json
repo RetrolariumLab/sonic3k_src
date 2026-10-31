@@ -25,7 +25,7 @@
     {
       "path": "docs/build.md",
       "decision": "reworked",
-      "reason": "Remove the obsolete claim that unused FM score encoders are required; reflect their deletion, the exact current source inventory and private audio ownership."
+      "reason": "Document complete official AS style coverage for processor-specific suffixes, read-only lint and explicit formatting through bounded disposable copies."
     },
     {
       "path": "docs/content_codecs.md",

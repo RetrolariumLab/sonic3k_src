@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 68
+    "commit_count": 69
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -455,9 +455,15 @@
       "commits": ["9b01ceac2fbf783da3701d8d3bf51b9e799c1c77"]
     },
     {
+      "id": "change-e6562dc2febb",
+      "kind": "tooling",
+      "summary": "Isolate emulator state and clean only handle-owned descendants",
+      "commits": ["e6562dc2febb89c3f16499aaf17ea9dfd68a0dc0"]
+    },
+    {
       "id": "current-release-stage",
       "kind": "source",
-      "summary": "Reset isolated MAME state for every invocation and clean only handle-identified owned descendants on success and failure paths.",
+      "summary": "Keep processor-specific .asm sources inside official AS lint and explicit formatting through disposable suffix-only copies.",
       "commits": ["release-commit"]
     }
   ],

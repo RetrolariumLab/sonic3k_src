@@ -66,3 +66,13 @@ identity. `make check-audio-storage` is ROM-less; `make check-audio-binding`
 compares storage symbols and dialects with a verified AS build. No score
 assembly or SMPS2ASM encoder macro library remains in the final tree; the
 executable drivers consume the extracted instrument and envelope payloads.
+
+## Processor-specific AS suffixes
+
+The pinned Kit AS selector accepts `.s` and `.inc`. Supplemental checks stage
+owned `.asm` sources as disposable `.s` copies below `build/style/` and invoke
+the same public AS linter. `make lint` leaves original source bytes unchanged.
+Only `make format` copies explicit formatting results back; it then runs lint.
+The adapter changes no assembly labels or tokens and modifies neither Kit nor
+Core. Real-CLI tests reject malformed `.asm` formatting, preserve read-only
+inputs and verify token-preserving explicit formatting.
