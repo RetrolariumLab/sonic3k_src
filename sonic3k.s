@@ -2489,21 +2489,21 @@ Snd_Emerald:        binclude "data/Sound/SMPS/sk/Music/Chaos Emerald.bin"
 ; ---------------------------------------------------------------------------
 DacBank1:       startDACBank
 
-DAC_86_Data:            include "Sound/DAC/metadata/86.inc"
-DAC_81_Data:            include "Sound/DAC/metadata/81.inc"
-DAC_82_83_84_85_Data:   include "Sound/DAC/metadata/82-85.inc"
-DAC_94_95_96_97_Data:   include "Sound/DAC/metadata/94-97.inc"
-DAC_90_91_92_93_Data:   include "Sound/DAC/metadata/90-93.inc"
-DAC_88_Data:            include "Sound/DAC/metadata/88.inc"
-DAC_8A_8B_Data:         include "Sound/DAC/metadata/8A-8B.inc"
-DAC_8C_Data:            include "Sound/DAC/metadata/8C.inc"
-DAC_8D_8E_Data:         include "Sound/DAC/metadata/8D-8E.inc"
-DAC_87_Data:            include "Sound/DAC/metadata/87.inc"
-DAC_8F_Data:            include "Sound/DAC/metadata/8F.inc"
-DAC_89_Data:            include "Sound/DAC/metadata/89.inc"
-DAC_98_99_9A_Data:      include "Sound/DAC/metadata/98-9A.inc"
-DAC_9B_Data:            include "Sound/DAC/metadata/9B.inc"
-DAC_B2_B3_Data:         include "Sound/DAC/metadata/B2-B3 (Sonic & Knuckles).inc"
+DAC_86_Data:            include "src/audio/dac/shared/sample_86.inc"
+DAC_81_Data:            include "src/audio/dac/shared/sample_81.inc"
+DAC_82_83_84_85_Data:   include "src/audio/dac/shared/sample_82_85.inc"
+DAC_94_95_96_97_Data:   include "src/audio/dac/shared/sample_94_97.inc"
+DAC_90_91_92_93_Data:   include "src/audio/dac/shared/sample_90_93.inc"
+DAC_88_Data:            include "src/audio/dac/shared/sample_88.inc"
+DAC_8A_8B_Data:         include "src/audio/dac/shared/sample_8a_8b.inc"
+DAC_8C_Data:            include "src/audio/dac/shared/sample_8c.inc"
+DAC_8D_8E_Data:         include "src/audio/dac/shared/sample_8d_8e.inc"
+DAC_87_Data:            include "src/audio/dac/shared/sample_87.inc"
+DAC_8F_Data:            include "src/audio/dac/shared/sample_8f.inc"
+DAC_89_Data:            include "src/audio/dac/shared/sample_89.inc"
+DAC_98_99_9A_Data:      include "src/audio/dac/shared/sample_98_9a.inc"
+DAC_9B_Data:            include "src/audio/dac/shared/sample_9b.inc"
+DAC_B2_B3_Data:         include "src/audio/dac/sk/sample_b2_b3.inc"
 
                 finishBank
 
@@ -2516,7 +2516,7 @@ DAC_B2_B3_Data:         include "Sound/DAC/metadata/B2-B3 (Sonic & Knuckles).inc
 ; ===========================================================================
 SndBank:        startBank
 
-SEGA_PCM:       include "Sound/PCM/metadata/Sega.inc"
+SEGA_PCM:       include "src/audio/pcm/shared/sega_voice.inc"
 
                 align   2
 Sound_33:       binclude "data/Sound/SMPS/sk/SFX/33 - Ring (Right).bin"

@@ -706,6 +706,12 @@
       "commits": ["1616b6c2e29f266ddceab52d6b96b3b07759daab"]
     },
     {
+      "id": "change-ed87256709c1",
+      "kind": "source_or_tooling",
+      "summary": "Own S&K remaining enemies and Hidden Palace emerald hub",
+      "commits": ["ed87256709c180029c7c2276d2ccafebe5ca9a9b"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",

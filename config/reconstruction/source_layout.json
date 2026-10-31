@@ -40,741 +40,6 @@
       }
     },
     {
-      "path": "Sound/DAC/metadata/81.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/81.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "2c94341667eeae9df70dc87e10cd54ab3ed42e39c187d7ff345844021c685d25"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/82-85.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/82-85.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "3e8c5736cf5712a0ab735473f3a56e55ddce7b369345738436876f303f21e0f2"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/86.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/86.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "acdbcbbd32eb4970d53bb8ca95c742cc45d6fe734f7e361b002ce6f549c70a11"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/87.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/87.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "725678ede43677f8e6bdbd071fae13ac36902dfca774af7191454cb063693b7e"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/88.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/88.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "e56276a80790a2ce204e5a05024ffd3e62849946f21a8c1fbf14114c6b074a8b"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/89.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/89.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "518c81c56ddf2536e4a70ce90e9958ef3b226bbd0f313b6dc65e37d2fc765f85"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/8A-8B.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/8A-8B.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "aab629a034dde039f869a86ea68594ffe2dc1e64e55ea33735c75670c6a55097"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/8C.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/8C.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "de7da5ad65a08a823ec51b1308b0f00cc75a96facb01f25042564e5b81f77818"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/8D-8E.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/8D-8E.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "f14cb5018391f38f7948cdf2ef99858d088693d16444d628b4da18644d6dec6e"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/8F.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/8F.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "d9444ab9a8ec36f0f6f8a46b19a57f4ee8a2b0cd618a900ab1b8df30e1a55266"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/90-93.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/90-93.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "cb73a4186b63240bae78a7def6b5e46f405e071f1fd45f4df4e20def52935aba"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/94-97.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/94-97.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "dd6c9d0e742837ed58b0a8f620108f802c0cdced39d6f1a6518b460c4aca236f"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/98-9A.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/98-9A.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "7d8c0e686407f0d05b736e35d6c3fd247f1d22484d8dbaf2268fe17752efc01d"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/9B.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/9B.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "4dcce943bc12b0ad3aaff4a616942d1c311604ce2cb0902275a499403d8461b5"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/9C.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/9C.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "f8d509dbf8516664928cc6719a39abcfb07b6ec53528808b57a4de770d27e0a8"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/9D.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/9D.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "9e3626823e9b282150187b5639cfdf4ba1fe8d38555196f38860c46c79164712"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/9E.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/9E.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "6059db5d0882124b4b2ed697528d26121d0329027ad471b5eaf5787c5380fda1"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/9F.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/9F.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "46d9f5e4cfc92620d6f896a4f31d5208c910df50e355d7d4f003c76f9f92c14a"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/A0.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/A0.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "6b2e84e887488b103fd7a2cea4df712cd12f5d97b74022b03099ba590e5b331a"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/A1.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/A1.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "a9cdd0475fd78be0cc5dc43f96280dca34bef8bd51c129524775ca7d80516105"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/A2.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/A2.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "0ffef6a9421166ae80676e3bd0bdb68ed57a9f46858a99af5232409657c83d67"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/A3.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/A3.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "5379388b52a2eae26854c78e559d4de55abb580eba9de5c823d92685fb0af8a0"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/A4.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/A4.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "495d90172fea4ff1d36fda64c819b06f5b5a69029cc8e67036cac9ceb0628849"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/A5.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/A5.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "075bc77a177c4238a1c871013b21d3c0f891e00727eddc9c2feba0671483118b"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/A6.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/A6.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "06c208024218ddad9f4887144face896f10c7e578c36fb080b77fc9935e88020"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/A7.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/A7.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "398c5575ab99ed040b1cbc24c7c92fb27d40f084eb6d72591fa44ce8e301d81f"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/A8.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/A8.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "3ee2cd4256cf07cabee1cf37f3a9e88b8dec519f75647716d43b058acfcd618d"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/A9.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/A9.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "154e6aa980e22118877504f9cf2769ffec59edec3d8993fd4ab52d453b2bea44"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/AA.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/AA.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "4bad37b8a064771cb80fe9eee766c5f581496e30bda34b76ded244bde7d958a8"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/AB.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/AB.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "cd46858692c6805d99e1fb1c81d5e3b14d1e4d6b82d3baecb844f6b0b57f4e60"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/AC.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/AC.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "112725c367a49cb3ac2c4767d5fc70cf93325205090dd39209f27514dc5ac3b2"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/AD-AE.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/AD-AE.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "fffe4690e30ca4ac4c1ebfe15f0ccabf491f2414851fbc9e14c514497eb8a5a9"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/AF-B0.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/AF-B0.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "1623b057618717d74b6ddc02b732607d073ea0d2ded185b8cc414fe2c672411b"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/B1.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/B1.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "5ec954d70154ccda12c4c751969cd8ae3d959a54fa138d42de66f41057c8bdd5"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/B2-B3 (Sonic & Knuckles).inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/B2-B3 (Sonic & Knuckles).inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "00936316bc08c70d605de0c17d69514dcb4dcb85041dfb8aa187f69ee63eb025"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/B2-B3 (Sonic 3).inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/B2-B3 (Sonic 3).inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "ce5178b82b77a482d421a6414dfe1bf89dac1d7e22fd2dfe8da4f25cc8d996f1"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/B4C1-C4.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/B4C1-C4.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "b45a2f549eef580cab8479029d4b1fdc5b3cc4c27d3bceb11448fd2457814b50"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/B5.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/B5.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "a83ba278f2da695ce4d2658796018f29bb724307cd74906de46530c0282592d8"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/B6.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/B6.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "2175a7c622e26ca52ec3064e1628fee4a70da7ba588b9e88348c9e05a2f812ba"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/B7.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/B7.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "1690fab40d3e4b9e440e1ee1370461cf1b374194705dc092d3d271e7c365fe27"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/B8-B9.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/B8-B9.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "9d5bc18ac48d4be0bb107aeb38765f8c8c612db745f149c3083388e364546ea7"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/BA.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/BA.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "f899519fde9d165e82195d587c97df453b699c709b6d80c7d4cf41b0f692a7d6"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/BB.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/BB.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "deb45a8bfc70e10e4349680c58c5a67567553338af36c67960ad6d42e5028791"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/BC.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/BC.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "78a4b2b1d86a27f343dcf511bd12bcc92bc62a325274c048362ca7b0ccb3ebad"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/BD.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/BD.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "4452f290f158d4bb7858757e8d4b30bec2b00da42dd72cc9847b34441698965a"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/BE.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/BE.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "39dd9a465d83f9c29fd773540bc14724bb29904d64ca8fa7111741a74ea2c697"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/BF.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/BF.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "fe0dd33336a82d0947cd84e0f6ec20ee7f6f2f74c76bc5986728ae0590ad820a"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/C0.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/C0.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "992d093cf0b6ace41e159942d429a1caea6b7ba522134f890aee3510e936aaa3"
-      }
-    },
-    {
-      "path": "Sound/DAC/metadata/Unused.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/DAC/metadata/Unused.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "01f4d9123a328a03f88ee617a297eaec630248dec1eae844d5758f594db32e0f"
-      }
-    },
-    {
       "path": "Sound/FM_Voice_Macros.s",
       "owner": "pending/audio",
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
@@ -787,21 +52,6 @@
         "first_line": 1,
         "last_line": 197,
         "sha256": "ec469d726b001d69ac41bae8abc18e9d46390ec7947c40c3f309cebe3ac54c23"
-      }
-    },
-    {
-      "path": "Sound/PCM/metadata/Sega.inc",
-      "owner": "pending/audio",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 3,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Sound/PCM/metadata/Sega.inc",
-        "first_line": 1,
-        "last_line": 3,
-        "sha256": "558194fe0d7835f85e4b743c2a9d1c5a1ed64a5e61f823401b49d04dd8b13904"
       }
     },
     {
@@ -908,6 +158,2161 @@
         "last_line": 201113,
         "sha256": "826460637347fb4a0219941cd59dfd96bc0d00860ccc46193aba77f37250bd38"
       }
+    },
+    {
+      "path": "src/audio/dac/s3/sample_9c.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample 9C rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/9C.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "f8d509dbf8516664928cc6719a39abcfb07b6ec53528808b57a4de770d27e0a8"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 952311,
+          "end": 953129
+        },
+        {
+          "profile": "s3-eu",
+          "start": 952311,
+          "end": 953129
+        },
+        {
+          "profile": "s3-jp",
+          "start": 952311,
+          "end": 953129
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3049463,
+          "end": 3050281
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_9d.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample 9D rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/9D.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "9e3626823e9b282150187b5639cfdf4ba1fe8d38555196f38860c46c79164712"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 953129,
+          "end": 953714
+        },
+        {
+          "profile": "s3-eu",
+          "start": 953129,
+          "end": 953714
+        },
+        {
+          "profile": "s3-jp",
+          "start": 953129,
+          "end": 953714
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3050281,
+          "end": 3050866
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_9e.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample 9E rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/9E.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "6059db5d0882124b4b2ed697528d26121d0329027ad471b5eaf5787c5380fda1"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 953714,
+          "end": 954354
+        },
+        {
+          "profile": "s3-eu",
+          "start": 953714,
+          "end": 954354
+        },
+        {
+          "profile": "s3-jp",
+          "start": 953714,
+          "end": 954354
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3050866,
+          "end": 3051506
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_9f.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample 9F rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/9F.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "46d9f5e4cfc92620d6f896a4f31d5208c910df50e355d7d4f003c76f9f92c14a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 954354,
+          "end": 959127
+        },
+        {
+          "profile": "s3-eu",
+          "start": 954354,
+          "end": 959127
+        },
+        {
+          "profile": "s3-jp",
+          "start": 954354,
+          "end": 959127
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3051506,
+          "end": 3056279
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_a0.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample A0 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/A0.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "6b2e84e887488b103fd7a2cea4df712cd12f5d97b74022b03099ba590e5b331a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 959127,
+          "end": 962641
+        },
+        {
+          "profile": "s3-eu",
+          "start": 959127,
+          "end": 962641
+        },
+        {
+          "profile": "s3-jp",
+          "start": 959127,
+          "end": 962641
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3056279,
+          "end": 3059793
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_a1.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample A1 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/A1.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "a9cdd0475fd78be0cc5dc43f96280dca34bef8bd51c129524775ca7d80516105"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 962641,
+          "end": 965625
+        },
+        {
+          "profile": "s3-eu",
+          "start": 962641,
+          "end": 965625
+        },
+        {
+          "profile": "s3-jp",
+          "start": 962641,
+          "end": 965625
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3059793,
+          "end": 3062777
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_a2.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample A2 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/A2.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "0ffef6a9421166ae80676e3bd0bdb68ed57a9f46858a99af5232409657c83d67"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 965625,
+          "end": 969041
+        },
+        {
+          "profile": "s3-eu",
+          "start": 965625,
+          "end": 969041
+        },
+        {
+          "profile": "s3-jp",
+          "start": 965625,
+          "end": 969041
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3062777,
+          "end": 3066193
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_a3.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample A3 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/A3.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "5379388b52a2eae26854c78e559d4de55abb580eba9de5c823d92685fb0af8a0"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 969041,
+          "end": 969711
+        },
+        {
+          "profile": "s3-eu",
+          "start": 969041,
+          "end": 969711
+        },
+        {
+          "profile": "s3-jp",
+          "start": 969041,
+          "end": 969711
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3066193,
+          "end": 3066863
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_a4.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample A4 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/A4.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "495d90172fea4ff1d36fda64c819b06f5b5a69029cc8e67036cac9ceb0628849"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 969711,
+          "end": 970361
+        },
+        {
+          "profile": "s3-eu",
+          "start": 969711,
+          "end": 970361
+        },
+        {
+          "profile": "s3-jp",
+          "start": 969711,
+          "end": 970361
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3066863,
+          "end": 3067513
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_a5.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample A5 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/A5.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "075bc77a177c4238a1c871013b21d3c0f891e00727eddc9c2feba0671483118b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 970361,
+          "end": 973529
+        },
+        {
+          "profile": "s3-eu",
+          "start": 970361,
+          "end": 973529
+        },
+        {
+          "profile": "s3-jp",
+          "start": 970361,
+          "end": 973529
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3067513,
+          "end": 3070681
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_a6.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample A6 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/A6.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "06c208024218ddad9f4887144face896f10c7e578c36fb080b77fc9935e88020"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 973529,
+          "end": 975279
+        },
+        {
+          "profile": "s3-eu",
+          "start": 973529,
+          "end": 975279
+        },
+        {
+          "profile": "s3-jp",
+          "start": 973529,
+          "end": 975279
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3070681,
+          "end": 3072431
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_a7.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample A7 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/A7.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "398c5575ab99ed040b1cbc24c7c92fb27d40f084eb6d72591fa44ce8e301d81f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 975279,
+          "end": 977057
+        },
+        {
+          "profile": "s3-eu",
+          "start": 975279,
+          "end": 977057
+        },
+        {
+          "profile": "s3-jp",
+          "start": 975279,
+          "end": 977057
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3072431,
+          "end": 3074209
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_a8.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample A8 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/A8.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "3ee2cd4256cf07cabee1cf37f3a9e88b8dec519f75647716d43b058acfcd618d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 977057,
+          "end": 977947
+        },
+        {
+          "profile": "s3-eu",
+          "start": 977057,
+          "end": 977947
+        },
+        {
+          "profile": "s3-jp",
+          "start": 977057,
+          "end": 977947
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3074209,
+          "end": 3075099
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_a9.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample A9 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/A9.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "154e6aa980e22118877504f9cf2769ffec59edec3d8993fd4ab52d453b2bea44"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 977947,
+          "end": 980586
+        },
+        {
+          "profile": "s3-eu",
+          "start": 977947,
+          "end": 980586
+        },
+        {
+          "profile": "s3-jp",
+          "start": 977947,
+          "end": 980586
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3075099,
+          "end": 3077738
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_aa.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample AA rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/AA.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "4bad37b8a064771cb80fe9eee766c5f581496e30bda34b76ded244bde7d958a8"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 980586,
+          "end": 982264
+        },
+        {
+          "profile": "s3-eu",
+          "start": 980586,
+          "end": 982264
+        },
+        {
+          "profile": "s3-jp",
+          "start": 980586,
+          "end": 982264
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3077738,
+          "end": 3079416
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_ab.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample AB rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/AB.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "cd46858692c6805d99e1fb1c81d5e3b14d1e4d6b82d3baecb844f6b0b57f4e60"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 983511,
+          "end": 985819
+        },
+        {
+          "profile": "s3-eu",
+          "start": 983511,
+          "end": 985819
+        },
+        {
+          "profile": "s3-jp",
+          "start": 983511,
+          "end": 985819
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3080663,
+          "end": 3082971
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_ac.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample AC rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/AC.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "112725c367a49cb3ac2c4767d5fc70cf93325205090dd39209f27514dc5ac3b2"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 985819,
+          "end": 987228
+        },
+        {
+          "profile": "s3-eu",
+          "start": 985819,
+          "end": 987228
+        },
+        {
+          "profile": "s3-jp",
+          "start": 985819,
+          "end": 987228
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3082971,
+          "end": 3084380
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_ad_ae.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample AD-AE rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/AD-AE.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "fffe4690e30ca4ac4c1ebfe15f0ccabf491f2414851fbc9e14c514497eb8a5a9"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 987228,
+          "end": 987672
+        },
+        {
+          "profile": "s3-eu",
+          "start": 987228,
+          "end": 987672
+        },
+        {
+          "profile": "s3-jp",
+          "start": 987228,
+          "end": 987672
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3084380,
+          "end": 3084824
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_af_b0.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample AF-B0 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/AF-B0.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "1623b057618717d74b6ddc02b732607d073ea0d2ded185b8cc414fe2c672411b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 987672,
+          "end": 988548
+        },
+        {
+          "profile": "s3-eu",
+          "start": 987672,
+          "end": 988548
+        },
+        {
+          "profile": "s3-jp",
+          "start": 987672,
+          "end": 988548
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3084824,
+          "end": 3085700
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_b1.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample B1 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/B1.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "5ec954d70154ccda12c4c751969cd8ae3d959a54fa138d42de66f41057c8bdd5"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 993504,
+          "end": 996453
+        },
+        {
+          "profile": "s3-eu",
+          "start": 993504,
+          "end": 996453
+        },
+        {
+          "profile": "s3-jp",
+          "start": 993504,
+          "end": 996453
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3090656,
+          "end": 3093605
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_b2_b3.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample B2-B3 (Sonic 3) rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/B2-B3 (Sonic 3).inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "ce5178b82b77a482d421a6414dfe1bf89dac1d7e22fd2dfe8da4f25cc8d996f1"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 996453,
+          "end": 998573
+        },
+        {
+          "profile": "s3-eu",
+          "start": 996453,
+          "end": 998573
+        },
+        {
+          "profile": "s3-jp",
+          "start": 996453,
+          "end": 998573
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3093605,
+          "end": 3095725
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_b4c1_c4.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample B4C1-C4 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/B4C1-C4.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "b45a2f549eef580cab8479029d4b1fdc5b3cc4c27d3bceb11448fd2457814b50"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 998573,
+          "end": 1000106
+        },
+        {
+          "profile": "s3-eu",
+          "start": 998573,
+          "end": 1000106
+        },
+        {
+          "profile": "s3-jp",
+          "start": 998573,
+          "end": 1000106
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3095725,
+          "end": 3097258
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_b5.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample B5 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/B5.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "a83ba278f2da695ce4d2658796018f29bb724307cd74906de46530c0282592d8"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1000106,
+          "end": 1001706
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1000106,
+          "end": 1001706
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1000106,
+          "end": 1001706
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3097258,
+          "end": 3098858
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_b6.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample B6 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/B6.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "2175a7c622e26ca52ec3064e1628fee4a70da7ba588b9e88348c9e05a2f812ba"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1001706,
+          "end": 1003071
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1001706,
+          "end": 1003071
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1001706,
+          "end": 1003071
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3098858,
+          "end": 3100223
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_b7.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample B7 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/B7.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "1690fab40d3e4b9e440e1ee1370461cf1b374194705dc092d3d271e7c365fe27"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1003071,
+          "end": 1004272
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1003071,
+          "end": 1004272
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1003071,
+          "end": 1004272
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3100223,
+          "end": 3101424
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_b8_b9.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample B8-B9 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/B8-B9.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "9d5bc18ac48d4be0bb107aeb38765f8c8c612db745f149c3083388e364546ea7"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1004272,
+          "end": 1005866
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1004272,
+          "end": 1005866
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1004272,
+          "end": 1005866
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3101424,
+          "end": 3103018
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_ba.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample BA rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/BA.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "f899519fde9d165e82195d587c97df453b699c709b6d80c7d4cf41b0f692a7d6"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1005866,
+          "end": 1007069
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1005866,
+          "end": 1007069
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1005866,
+          "end": 1007069
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3103018,
+          "end": 3104221
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_bb.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample BB rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/BB.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "deb45a8bfc70e10e4349680c58c5a67567553338af36c67960ad6d42e5028791"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1007069,
+          "end": 1007507
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1007069,
+          "end": 1007507
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1007069,
+          "end": 1007507
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3104221,
+          "end": 3104659
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_bc.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample BC rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/BC.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "78a4b2b1d86a27f343dcf511bd12bcc92bc62a325274c048362ca7b0ccb3ebad"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1007507,
+          "end": 1009738
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1007507,
+          "end": 1009738
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1007507,
+          "end": 1009738
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3104659,
+          "end": 3106890
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_bd.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample BD rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/BD.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "4452f290f158d4bb7858757e8d4b30bec2b00da42dd72cc9847b34441698965a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1009738,
+          "end": 1011208
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1009738,
+          "end": 1011208
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1009738,
+          "end": 1011208
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3106890,
+          "end": 3108360
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_be.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample BE rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/BE.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "39dd9a465d83f9c29fd773540bc14724bb29904d64ca8fa7111741a74ea2c697"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1011208,
+          "end": 1013016
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1011208,
+          "end": 1013016
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1011208,
+          "end": 1013016
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3108360,
+          "end": 3110168
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_bf.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample BF rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/BF.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "fe0dd33336a82d0947cd84e0f6ec20ee7f6f2f74c76bc5986728ae0590ad820a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1013016,
+          "end": 1013492
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1013016,
+          "end": 1013492
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1013016,
+          "end": 1013492
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3110168,
+          "end": 3110644
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/sample_c0.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample C0 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/C0.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "992d093cf0b6ace41e159942d429a1caea6b7ba522134f890aee3510e936aaa3"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1013492,
+          "end": 1015594
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1013492,
+          "end": 1015594
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1013492,
+          "end": 1015594
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3110644,
+          "end": 3112746
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/s3/unused_sample.inc",
+      "owner": "audio/dac/s3",
+      "responsibility": "DPCM sample Unused rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/Unused.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "01f4d9123a328a03f88ee617a297eaec630248dec1eae844d5758f594db32e0f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 988548,
+          "end": 993504
+        },
+        {
+          "profile": "s3-eu",
+          "start": 988548,
+          "end": 993504
+        },
+        {
+          "profile": "s3-jp",
+          "start": 988548,
+          "end": 993504
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3085700,
+          "end": 3090656
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/shared/sample_81.inc",
+      "owner": "audio/dac/shared",
+      "responsibility": "DPCM sample 81 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/81.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "2c94341667eeae9df70dc87e10cd54ab3ed42e39c187d7ff345844021c685d25"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 918694,
+          "end": 920612
+        },
+        {
+          "profile": "s3-eu",
+          "start": 918694,
+          "end": 920612
+        },
+        {
+          "profile": "s3-jp",
+          "start": 918694,
+          "end": 920612
+        },
+        {
+          "profile": "sk",
+          "start": 984230,
+          "end": 986148
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3015846,
+          "end": 3017764
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 984230,
+          "end": 986148
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/shared/sample_82_85.inc",
+      "owner": "audio/dac/shared",
+      "responsibility": "DPCM sample 82-85 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/82-85.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "3e8c5736cf5712a0ab735473f3a56e55ddce7b369345738436876f303f21e0f2"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 920612,
+          "end": 921745
+        },
+        {
+          "profile": "s3-eu",
+          "start": 920612,
+          "end": 921745
+        },
+        {
+          "profile": "s3-jp",
+          "start": 920612,
+          "end": 921745
+        },
+        {
+          "profile": "sk",
+          "start": 986148,
+          "end": 987281
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3017764,
+          "end": 3018897
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 986148,
+          "end": 987281
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/shared/sample_86.inc",
+      "owner": "audio/dac/shared",
+      "responsibility": "DPCM sample 86 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/86.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "acdbcbbd32eb4970d53bb8ca95c742cc45d6fe734f7e361b002ce6f549c70a11"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 917975,
+          "end": 918694
+        },
+        {
+          "profile": "s3-eu",
+          "start": 917975,
+          "end": 918694
+        },
+        {
+          "profile": "s3-jp",
+          "start": 917975,
+          "end": 918694
+        },
+        {
+          "profile": "sk",
+          "start": 983511,
+          "end": 984230
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3015127,
+          "end": 3015846
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 983511,
+          "end": 984230
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/shared/sample_87.inc",
+      "owner": "audio/dac/shared",
+      "responsibility": "DPCM sample 87 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/87.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "725678ede43677f8e6bdbd071fae13ac36902dfca774af7191454cb063693b7e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 931964,
+          "end": 933784
+        },
+        {
+          "profile": "s3-eu",
+          "start": 931964,
+          "end": 933784
+        },
+        {
+          "profile": "s3-jp",
+          "start": 931964,
+          "end": 933784
+        },
+        {
+          "profile": "sk",
+          "start": 997500,
+          "end": 999320
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3029116,
+          "end": 3030936
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 997500,
+          "end": 999320
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/shared/sample_88.inc",
+      "owner": "audio/dac/shared",
+      "responsibility": "DPCM sample 88 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/88.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "e56276a80790a2ce204e5a05024ffd3e62849946f21a8c1fbf14114c6b074a8b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 925710,
+          "end": 930357
+        },
+        {
+          "profile": "s3-eu",
+          "start": 925710,
+          "end": 930357
+        },
+        {
+          "profile": "s3-jp",
+          "start": 925710,
+          "end": 930357
+        },
+        {
+          "profile": "sk",
+          "start": 991246,
+          "end": 995893
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3022862,
+          "end": 3027509
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 991246,
+          "end": 995893
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/shared/sample_89.inc",
+      "owner": "audio/dac/shared",
+      "responsibility": "DPCM sample 89 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/89.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "518c81c56ddf2536e4a70ce90e9958ef3b226bbd0f313b6dc65e37d2fc765f85"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 935047,
+          "end": 937604
+        },
+        {
+          "profile": "s3-eu",
+          "start": 935047,
+          "end": 937604
+        },
+        {
+          "profile": "s3-jp",
+          "start": 935047,
+          "end": 937604
+        },
+        {
+          "profile": "sk",
+          "start": 1000583,
+          "end": 1003140
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3032199,
+          "end": 3034756
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1000583,
+          "end": 1003140
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/shared/sample_8a_8b.inc",
+      "owner": "audio/dac/shared",
+      "responsibility": "DPCM sample 8A-8B rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/8A-8B.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "aab629a034dde039f869a86ea68594ffe2dc1e64e55ea33735c75670c6a55097"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 930357,
+          "end": 930709
+        },
+        {
+          "profile": "s3-eu",
+          "start": 930357,
+          "end": 930709
+        },
+        {
+          "profile": "s3-jp",
+          "start": 930357,
+          "end": 930709
+        },
+        {
+          "profile": "sk",
+          "start": 995893,
+          "end": 996245
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3027509,
+          "end": 3027861
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 995893,
+          "end": 996245
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/shared/sample_8c.inc",
+      "owner": "audio/dac/shared",
+      "responsibility": "DPCM sample 8C rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/8C.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "de7da5ad65a08a823ec51b1308b0f00cc75a96facb01f25042564e5b81f77818"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 930709,
+          "end": 930805
+        },
+        {
+          "profile": "s3-eu",
+          "start": 930709,
+          "end": 930805
+        },
+        {
+          "profile": "s3-jp",
+          "start": 930709,
+          "end": 930805
+        },
+        {
+          "profile": "sk",
+          "start": 996245,
+          "end": 996341
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3027861,
+          "end": 3027957
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 996245,
+          "end": 996341
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/shared/sample_8d_8e.inc",
+      "owner": "audio/dac/shared",
+      "responsibility": "DPCM sample 8D-8E rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/8D-8E.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "f14cb5018391f38f7948cdf2ef99858d088693d16444d628b4da18644d6dec6e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 930805,
+          "end": 931964
+        },
+        {
+          "profile": "s3-eu",
+          "start": 930805,
+          "end": 931964
+        },
+        {
+          "profile": "s3-jp",
+          "start": 930805,
+          "end": 931964
+        },
+        {
+          "profile": "sk",
+          "start": 996341,
+          "end": 997500
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3027957,
+          "end": 3029116
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 996341,
+          "end": 997500
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/shared/sample_8f.inc",
+      "owner": "audio/dac/shared",
+      "responsibility": "DPCM sample 8F rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/8F.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "d9444ab9a8ec36f0f6f8a46b19a57f4ee8a2b0cd618a900ab1b8df30e1a55266"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 933784,
+          "end": 935047
+        },
+        {
+          "profile": "s3-eu",
+          "start": 933784,
+          "end": 935047
+        },
+        {
+          "profile": "s3-jp",
+          "start": 933784,
+          "end": 935047
+        },
+        {
+          "profile": "sk",
+          "start": 999320,
+          "end": 1000583
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3030936,
+          "end": 3032199
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 999320,
+          "end": 1000583
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/shared/sample_90_93.inc",
+      "owner": "audio/dac/shared",
+      "responsibility": "DPCM sample 90-93 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/90-93.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "cb73a4186b63240bae78a7def6b5e46f405e071f1fd45f4df4e20def52935aba"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 924140,
+          "end": 925710
+        },
+        {
+          "profile": "s3-eu",
+          "start": 924140,
+          "end": 925710
+        },
+        {
+          "profile": "s3-jp",
+          "start": 924140,
+          "end": 925710
+        },
+        {
+          "profile": "sk",
+          "start": 989676,
+          "end": 991246
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3021292,
+          "end": 3022862
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 989676,
+          "end": 991246
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/shared/sample_94_97.inc",
+      "owner": "audio/dac/shared",
+      "responsibility": "DPCM sample 94-97 rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/94-97.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "dd6c9d0e742837ed58b0a8f620108f802c0cdced39d6f1a6518b460c4aca236f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 921745,
+          "end": 924140
+        },
+        {
+          "profile": "s3-eu",
+          "start": 921745,
+          "end": 924140
+        },
+        {
+          "profile": "s3-jp",
+          "start": 921745,
+          "end": 924140
+        },
+        {
+          "profile": "sk",
+          "start": 987281,
+          "end": 989676
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3018897,
+          "end": 3021292
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 987281,
+          "end": 989676
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/shared/sample_98_9a.inc",
+      "owner": "audio/dac/shared",
+      "responsibility": "DPCM sample 98-9A rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/98-9A.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "7d8c0e686407f0d05b736e35d6c3fd247f1d22484d8dbaf2268fe17752efc01d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 937604,
+          "end": 940780
+        },
+        {
+          "profile": "s3-eu",
+          "start": 937604,
+          "end": 940780
+        },
+        {
+          "profile": "s3-jp",
+          "start": 937604,
+          "end": 940780
+        },
+        {
+          "profile": "sk",
+          "start": 1003140,
+          "end": 1006316
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3034756,
+          "end": 3037932
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1003140,
+          "end": 1006316
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/shared/sample_9b.inc",
+      "owner": "audio/dac/shared",
+      "responsibility": "DPCM sample 9B rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/9B.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "4dcce943bc12b0ad3aaff4a616942d1c311604ce2cb0902275a499403d8461b5"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 950743,
+          "end": 952311
+        },
+        {
+          "profile": "s3-eu",
+          "start": 950743,
+          "end": 952311
+        },
+        {
+          "profile": "s3-jp",
+          "start": 950743,
+          "end": 952311
+        },
+        {
+          "profile": "sk",
+          "start": 1006316,
+          "end": 1007884
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3047895,
+          "end": 3049463
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1006316,
+          "end": 1007884
+        }
+      ]
+    },
+    {
+      "path": "src/audio/dac/sk/sample_b2_b3.inc",
+      "owner": "audio/dac/sk",
+      "responsibility": "DPCM sample B2-B3 (Sonic & Knuckles) rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/DAC/metadata/B2-B3 (Sonic & Knuckles).inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "00936316bc08c70d605de0c17d69514dcb4dcb85041dfb8aa187f69ee63eb025"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 1007884,
+          "end": 1010004
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1007884,
+          "end": 1010004
+        }
+      ]
+    },
+    {
+      "path": "src/audio/pcm/shared/sega_voice.inc",
+      "owner": "audio/pcm/shared",
+      "responsibility": "Sega PCM voice rate, declared size and manifest-owned ROM payload; sample command identity and caller label context are preserved.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "ed87256709c180029c7c2276d2ccafebe5ca9a9b",
+        "path": "Sound/PCM/metadata/Sega.inc",
+        "first_line": 1,
+        "last_line": 3,
+        "sha256": "558194fe0d7835f85e4b743c2a9d1c5a1ed64a5e61f823401b49d04dd8b13904"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1015808,
+          "end": 1039919
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1015808,
+          "end": 1039919
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1015808,
+          "end": 1039919
+        },
+        {
+          "profile": "sk",
+          "start": 1015808,
+          "end": 1039919
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3112960,
+          "end": 3137071
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1015808,
+          "end": 1039919
+        }
+      ]
     },
     {
       "path": "src/audio/s3/level_music_playlist.s",
