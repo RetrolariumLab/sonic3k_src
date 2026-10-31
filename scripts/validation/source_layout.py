@@ -285,6 +285,14 @@ def check(inventory=False, built=False):
     source_includes = {r["path"] for r in rows if r["status"] == "owned" and r["role"] == "data"}
     assets = load("assets/manifest.json")
     binary_includes = {assets["output"] + "/" + r["path"] for r in assets["assets"]}
+    from scripts.authoring.driver_payloads import resolve_contract
+
+    derived = resolve_contract(
+        load("config/audio_driver_payloads.json"),
+        {r["path"]: r for r in assets["assets"]},
+        load("config/audio_streams.json")["engines"],
+    )
+    binary_includes.update(assets["output"] + "/" + r["path"] for r in derived)
     dependencies = {}
     accepted = 0
     for row in rows:

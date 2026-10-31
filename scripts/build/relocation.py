@@ -8,7 +8,17 @@ from pathlib import Path
 import re
 import subprocess
 
-from scripts.build.project import ROOT, atomic, image_records, inside, load, profiles, sha, source_fingerprint
+from scripts.build.project import (
+    ROOT,
+    atomic,
+    image_records,
+    inside,
+    load,
+    profiles,
+    sha,
+    source_fingerprint,
+    source_names,
+)
 from scripts.build.pipeline import build_selected
 from scripts.validation.cohorts import collect_file, render, table_slot
 from scripts.validation.lockon import check_fixed
@@ -23,17 +33,6 @@ def encoded(value):
 
 def digest(value):
     return hashlib.sha256(encoded(value)).hexdigest()
-
-
-def source_names():
-    names = (
-        subprocess.check_output(
-            ["git", "-C", str(ROOT), "ls-files", "-z", "--cached", "--others", "--exclude-standard"]
-        )
-        .decode()
-        .split("\0")
-    )
-    return sorted({n for n in names if n.endswith((".s", ".inc"))})
 
 
 def derive(policy):
@@ -107,7 +106,7 @@ def rendered_fingerprint(policy, plan, group, names, widenings):
         }
     ):
         payload = (ROOT / name).read_bytes()
-        if name.endswith((".s", ".inc")):
+        if name.endswith((".s", ".inc", ".asm")):
             text = render(payload.decode("utf-8"), [p for p in chosen if p["path"] == name], anchors.get(name))
             lines = text.splitlines(keepends=True)
             for change in [w for w in widenings if w["path"] == name]:
