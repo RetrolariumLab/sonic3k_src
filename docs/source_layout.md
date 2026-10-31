@@ -6,8 +6,8 @@ baseline. Owned data lives under `src/objects`, `src/rendering`, `src/ui`,
 `src/game` and `src/system/debug`. Engine-specific code remains separate.
 
 This registry is intentionally incomplete during extraction: 838 data units and
-1043 sibling executable units have owners. The 10 remaining entry, driver,
-memory and macro units still await complete semantic extraction. Run
+1043 sibling executable units have owners. The 9 remaining entry, driver, memory
+and macro units still await complete semantic extraction. Run
 `make source-layout-inventory` for that distinction. `make check-source-layout`
 rejects pending entries and cannot certify this intermediate tree as 2.0.
 

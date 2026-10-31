@@ -2,7 +2,6 @@
   "schema_version": 1,
   "groups": 32,
   "code_sources": [
-    "Lockon S3/Screen Events.s",
     "src/audio/s3/level_music_transition.s",
     "src/audio/sk/level_music_transition.s",
     "src/game/blue_sphere/sk/code_entry_widgets.s",
@@ -2220,7 +2219,6 @@
     },
     "sk": {
       "sources": [
-        "Lockon S3/Screen Events.s",
         "src/system/sk/bootstrap.s",
         "src/system/sk/video_interrupts.s",
         "src/system/sk/horizontal_interrupts.s",

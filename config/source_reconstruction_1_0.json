@@ -724,6 +724,12 @@
       "commits": ["8833ccd9229820266e103e4386e7dc75285a1913"]
     },
     {
+      "id": "change-f51c89f7506f",
+      "kind": "source_or_tooling",
+      "summary": "Own level resource catalogs and debug placement control",
+      "commits": ["f51c89f7506f5fa6ac53724aac62d016c2f45fd7"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",

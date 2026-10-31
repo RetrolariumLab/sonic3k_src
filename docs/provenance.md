@@ -64,6 +64,13 @@ optimization and complete-build alternatives can be recovered from the pinned
 upstream commit; they are not official preservation revisions. Editing belongs
 in Retrolarium, not in bundled GUI tools or external-editor projects.
 
+The unused upstream `Lockon S3/Screen Events.s` reference module was never
+included by an accepted revision. Its duplicate event implementations are
+removed from the source tree and the relocation source inventory. Live Sonic 3
+events remain under their subsystem owners; the second-cartridge interface
+continues to use the independently checked fixed lock-on symbol declarations.
+Normal-build listings and all accepted image identities confirm this exclusion.
+
 ## Licensing boundaries
 
 Upstream has a disclaimer, retained in README, but grants no license to its

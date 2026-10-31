@@ -25,21 +25,6 @@
       }
     },
     {
-      "path": "Lockon S3/Screen Events.s",
-      "owner": "pending/engine",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 1698,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Lockon S3/Screen Events.s",
-        "first_line": 1,
-        "last_line": 1698,
-        "sha256": "778ebbc15e7f8bca1342666a30dbe673dfd1a4ce29dedc78270effe108e1f714"
-      }
-    },
-    {
       "path": "Sound/FM_Voice_Macros.s",
       "owner": "pending/audio",
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
