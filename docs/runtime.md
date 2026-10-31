@@ -55,3 +55,19 @@ passes. It binds source, movies, goldens, emulator contract and relocation
 manifest, and records each bus image and log hash. The release audit requires
 the exact complete profile/variant product; a previous run or successful subset
 cannot replace missing observations.
+
+## Isolated state and owned process cleanup
+
+Every invocation starts with a clean generated emulator directory under
+`build/runtime/mame`. Only the hash-checked executable survives; configuration,
+NVRAM and save-state defaults cannot leak from an earlier profile or scenario.
+Cleanup validates every resolved path before removing anything and cannot touch
+external emulator installations or adjacent runtime evidence. Temporary movie
+files stay under `build/runtime/tmp`.
+
+A Windows process snapshot records descendant relationships and creation times
+while the owned runner is active. Cleanup checks creation time and terminates
+through the same process handle, preventing a reused PID from redirecting it to
+a foreign process. Leftovers fail the run even when they are cleaned. Failure
+and timeout paths apply the same ownership rules; unrelated processes remain
+untouched. The runtime evidence signature also binds these runner sources.

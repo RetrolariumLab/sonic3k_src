@@ -8,7 +8,7 @@ from unittest.mock import patch
 
 from scripts.build.project import rltool_command
 from scripts.runtime.contracts import scenarios, validate_golden, wrap_empty_upper
-from scripts.runtime.native import listed_process_ids, validate_executable, wait_idle
+from scripts.runtime.native import validate_executable, wait_idle
 
 
 class RuntimeContracts(unittest.TestCase):
@@ -76,10 +76,3 @@ class NativeRunnerContracts(unittest.TestCase):
     def test_hook_style_multiword_rltool_is_an_argv_not_a_shell(self):
         with patch.dict(os.environ, {"RLTOOL": "python -m retrolarium_kit"}):
             self.assertEqual(rltool_command(), ["python", "-m", "retrolarium_kit"])
-
-
-class WindowsProcessListTests(unittest.TestCase):
-    def test_localized_memory_and_status_text_do_not_hide_a_process(self):
-        data = b'"consoles.exe","321","Console","1","20 \x88\x81"\r\n'
-        self.assertEqual(listed_process_ids(data), [321])
-        self.assertEqual(listed_process_ids(b"\x88\x8d\x94\x8e: no matching task\r\n"), [])

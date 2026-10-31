@@ -90,7 +90,7 @@
     {
       "path": "docs/runtime.md",
       "decision": "kept",
-      "reason": "Keep this cohesive subsystem reference; commands, constraints and evidence boundaries agree with current implementation."
+      "reason": "Describe per-invocation clean emulator state, bounded deletion and creation-identity-bound descendant cleanup without affecting foreign processes."
     },
     {
       "path": "docs/source_layout.md",

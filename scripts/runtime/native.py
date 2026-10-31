@@ -1,9 +1,5 @@
-"""Prepare a pinned emulator and serialize runs without touching other tasks."""
+"""Isolate pinned emulator state and serialize handle-owned native runs."""
 
-import csv
-import ctypes
-from ctypes import wintypes
-import io
 import os
 from pathlib import Path
 import platform
@@ -12,6 +8,7 @@ import subprocess
 import time
 
 from scripts.build.project import ROOT, atomic, load, rltool, sha
+from scripts.runtime.processes import owned_leftovers, processes, remember_owned, terminate_owned
 
 
 def validate_executable(data, expected):
@@ -38,44 +35,8 @@ def prepare(named=None):
     return target
 
 
-def listed_process_ids(raw):
-    # tasklist follows the Windows console code page. Process names/PIDs are
-    # ASCII; localized status/memory fields must not break the busy guard.
-    text = raw.decode("utf-8", errors="replace")
-    result = []
-    for row in csv.reader(io.StringIO(text)):
-        if len(row) >= 2 and row[0].lower() == "consoles.exe":
-            result.append(int(row[1]))
-    return result
-
-
 def active_processes():
-    if os.name != "nt":
-        return []
-    result = subprocess.run(
-        ["tasklist", "/fi", "IMAGENAME eq consoles.exe", "/fo", "csv", "/nh"],
-        capture_output=True,
-        creationflags=0x08000000,
-        check=True,
-    )
-    kernel = ctypes.WinDLL("kernel32", use_last_error=True)
-    kernel.OpenProcess.argtypes = [wintypes.DWORD, wintypes.BOOL, wintypes.DWORD]
-    kernel.OpenProcess.restype = wintypes.HANDLE
-    kernel.GetExitCodeProcess.argtypes = [wintypes.HANDLE, ctypes.POINTER(wintypes.DWORD)]
-    kernel.GetExitCodeProcess.restype = wintypes.BOOL
-    kernel.CloseHandle.argtypes = [wintypes.HANDLE]
-    pids = []
-    for pid in listed_process_ids(result.stdout):
-        handle = kernel.OpenProcess(0x1000, False, pid)
-        if not handle:
-            pids.append(pid)
-            continue
-        code = wintypes.DWORD()
-        ok = kernel.GetExitCodeProcess(handle, ctypes.byref(code))
-        kernel.CloseHandle(handle)
-        if not ok or code.value == 259:
-            pids.append(pid)
-    return pids
+    return [row["pid"] for row in processes()]
 
 
 def wait_idle(timeout):
@@ -94,34 +55,91 @@ def wait_idle(timeout):
         time.sleep(1)
 
 
+def reset_emulator(mame):
+    stage = ROOT / "build/runtime/mame"
+    resolved = stage.resolve()
+    if (
+        resolved != stage.absolute()
+        or not resolved.is_relative_to((ROOT / "build").resolve())
+        or mame.is_symlink()
+        or mame.resolve() != resolved / "consoles.exe"
+    ):
+        raise ValueError("MAME state cleanup leaves its exact isolated build directory")
+    children = [path for path in stage.iterdir() if path.name != "consoles.exe"]
+    # Preflight the entire deletion set before removing even its first entry.
+    for path in children:
+        target = path.resolve()
+        if path.is_symlink() or target == resolved or not target.is_relative_to(resolved):
+            raise ValueError("MAME state cleanup encountered an escaping path")
+    for path in children:
+        if path.is_dir():
+            shutil.rmtree(path)
+        else:
+            path.unlink()
+
+
 def run_movie(args, log):
     from scripts.build.project import rltool_command
 
     spec = load("config/runtime/emulator.json")
     wait_idle(spec["busy_timeout_seconds"])
+    try:
+        position = args.index("--mame")
+        mame = Path(args[position + 1])
+    except (ValueError, IndexError) as error:
+        raise ValueError("Runtime must name the isolated emulator explicitly") from error
+    reset_emulator(mame)
     temporary = ROOT / "build/runtime/tmp"
     temporary.mkdir(parents=True, exist_ok=True)
-    env = dict(os.environ, TEMP=str(temporary), TMP=str(temporary), TMPDIR=str(temporary))
+    env = dict(os.environ, PYTHONDONTWRITEBYTECODE="1", TEMP=str(temporary), TMP=str(temporary), TMPDIR=str(temporary))
     log.parent.mkdir(parents=True, exist_ok=True)
-    with log.open("w", encoding="utf-8") as stream:
-        proc = subprocess.Popen(
-            [*rltool_command(), "movie", *map(str, args)],
-            cwd=ROOT,
-            env=env,
-            stdout=stream,
-            stderr=subprocess.STDOUT,
-            creationflags=0x08000000 if os.name == "nt" else 0,
-        )
+    proc, owned = None, {}
+    try:
+        with log.open("w", encoding="utf-8") as stream:
+            proc = subprocess.Popen(
+                [*rltool_command(), "movie", *map(str, args)],
+                cwd=ROOT,
+                env=env,
+                stdout=stream,
+                stderr=subprocess.STDOUT,
+                creationflags=0x08000000 if os.name == "nt" else 0,
+            )
+            deadline = time.monotonic() + spec["run_timeout_seconds"]
+            while True:
+                remember_owned(processes(), proc.pid, owned)
+                remaining = deadline - time.monotonic()
+                if remaining <= 0:
+                    raise subprocess.TimeoutExpired(proc.args, spec["run_timeout_seconds"])
+                try:
+                    code = proc.wait(timeout=min(0.2, remaining))
+                    break
+                except subprocess.TimeoutExpired:
+                    if time.monotonic() >= deadline:
+                        raise
+    except subprocess.TimeoutExpired as error:
+        if proc is not None and proc.poll() is None:
+            proc.kill()
+            proc.wait(timeout=5)
+        raise RuntimeError("Owned MAME runner exceeded its frame/run budget") from error
+    finally:
         try:
-            code = proc.wait(timeout=spec["run_timeout_seconds"])
-        except subprocess.TimeoutExpired:
-            # Kill only the runner process tree we created. A shell timeout
-            # alone would leave its MAME child alive on Windows.
-            if os.name == "nt":
-                subprocess.run(["taskkill", "/PID", str(proc.pid), "/T", "/F"], capture_output=True)
-            else:
+            if proc is not None and proc.poll() is None:
                 proc.kill()
-            raise RuntimeError("Owned MAME runner exceeded its frame/run budget")
+                proc.wait(timeout=5)
+        finally:
+            rows = processes()
+            if proc is not None:
+                remember_owned(rows, proc.pid, owned)
+            leftovers = owned_leftovers(rows, owned)
+            for row in leftovers:
+                terminate_owned(row["pid"], row["created"])
+            if rows:
+                foreign = [row["pid"] for row in rows if row not in leftovers]
+                raise RuntimeError(
+                    "MAME remained after the run; owned cleanup attempted for "
+                    + str([row["pid"] for row in leftovers])
+                    + "; unrelated processes preserved: "
+                    + str(foreign)
+                )
     if code:
         raise RuntimeError(log.read_text(encoding="utf-8", errors="replace")[-3000:])
-    wait_idle(spec["busy_timeout_seconds"])

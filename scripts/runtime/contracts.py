@@ -82,6 +82,7 @@ def runtime_signature():
     contract = load("config/runtime/scenarios.json")
     names = {"config/runtime/scenarios.json", "config/runtime/emulator.json", contract["movie"]}
     names.update(row["check"] for row in contract["scenarios"])
+    names.update({"scripts/runtime/native.py", "scripts/runtime/processes.py"})
     result = hashlib.sha256()
     for name in sorted(names):
         result.update(name.encode() + b"\0" + (ROOT / name).read_bytes() + b"\0")

@@ -12,5 +12,6 @@
   },
   "busy_timeout_seconds": 1800,
   "run_timeout_seconds": 240,
-  "execution": "One MAME process at a time; defer while any existing consoles process is active. Never kill a foreign process."
+  "execution": "One MAME process at a time, with clean isolated configuration, NVRAM and state before each invocation. Cleanup is limited to observed descendants with matching Windows creation identities; foreign processes are preserved.",
+  "state_isolation": "Reset only the checked build/runtime/mame directory; preserve its pinned executable. Movie temporary files remain under build/runtime/tmp."
 }

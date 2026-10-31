@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 67
+    "commit_count": 68
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -449,9 +449,15 @@
       "commits": ["421f632dcb8fc99f2d1b1c10e523630eafbe437e"]
     },
     {
+      "id": "change-9b01ceac2fbf",
+      "kind": "tooling",
+      "summary": "Separate annotated release audits from candidate acceptance",
+      "commits": ["9b01ceac2fbf783da3701d8d3bf51b9e799c1c77"]
+    },
+    {
       "id": "current-release-stage",
       "kind": "source",
-      "summary": "Separate read-only pre-tag and post-tag acceptance, require exact annotated release identities and preserve completed aggregate evidence.",
+      "summary": "Reset isolated MAME state for every invocation and clean only handle-identified owned descendants on success and failure paths.",
       "commits": ["release-commit"]
     }
   ],
