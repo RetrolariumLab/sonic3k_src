@@ -15,6 +15,7 @@ from scripts.authoring import (
     driver_inputs,
     format_codecs,
     smps_storage,
+    palette_workflow,
 )
 from scripts.authoring.content_contract import ContentCatalog
 from scripts.authoring.driver_payloads import resolve_contract
@@ -154,7 +155,11 @@ def roundtrip():
             raise ValueError("Encoded resource leaves its workspace")
         atomic(destination, data)
     report["assembly_content"] = assembly_workflow.roundtrip(workspace)
+    report["palette_content"] = palette_workflow.roundtrip(workspace)
     source_outputs = dict(report["assembly_content"]["outputs"])
+    if set(source_outputs) & set(report["palette_content"]["outputs"]):
+        raise ValueError("Semantic source content has duplicate authoring owners")
+    source_outputs.update(report["palette_content"]["outputs"])
     for name in source_names():
         if name not in source_outputs:
             payload = (ROOT / name).read_bytes()
@@ -211,6 +216,9 @@ def zero_edit():
         "roundtrip_workspace": report["workspace"],
         "all_registered_inputs": len(assets),
         "assembly_resources": report["assembly_content"]["resources"],
+        "palette_groups": report["palette_content"]["groups"],
+        "palette_initializers": report["palette_content"]["initializers"],
+        "palette_source_files": report["palette_content"]["source_files"],
         "workspace_source_sha256": report["workspace_source_sha256"],
         "profiles": {key: hashlib.sha256(path.read_bytes()).hexdigest() for key, path in outputs.items()},
     }
@@ -226,12 +234,15 @@ def main(argv=None):
     if args.command == "check-contract":
         catalog, assets = load_catalog()
         source_catalog = assembly_workflow.catalog()
+        palette_catalog, palette_sources = palette_workflow.catalog()
         print(
             "[OK] Complete immutable content registry: "
             + str(len(catalog.rows()))
             + " inputs and "
             + str(len(source_catalog.rows()))
-            + " source resources"
+            + " source resources and "
+            + str(len(palette_catalog.rows()))
+            + " palette groups"
         )
     elif args.command == "roundtrip":
         roundtrip()

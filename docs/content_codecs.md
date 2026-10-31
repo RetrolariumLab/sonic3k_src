@@ -166,3 +166,44 @@ The container command checks all resulting source hashes and builds all five ROM
 profiles from that workspace; it never overwrites encoded source with the
 original files. The current source fingerprint and tooling fingerprint bind
 every report to the checked inputs.
+
+## Palette rotation script source
+
+The linked config/authoring/palette_formats.json catalog owns 29 scoped source
+groups in 13 files, containing all 31 state initializers and 463 palette DSL
+calls. It includes adjacent initializer arrays, named header chains, external
+frame includes and the original color records stored after restart commands. The
+surrounding code, data and source includes remain outside those exact physical
+spans and are copied without modification.
+
+palette_scripts parses the restricted declaration language and independently
+models state initializers, normal-palette destinations, color counts, counter
+limits, RGB frames, delays, header transitions, repeats and custom routine
+commands. A frame has one to 64 CRAM colors; its first word must retain a clear
+sign bit because the interpreter uses negative words for commands. The runtime
+copies the low delay byte into a signed countdown, so editable durations are one
+to 128 ticks. Header destinations must fit the 64-color normal palette staging
+area. Reserved color bits remain explicit in the RGB model.
+
+A zero counter limit makes negative commands restart at the current header's
+first frame. Nonzero limits enable the original counter and transition logic;
+therefore limits, color widths, state pointers and command graphs are structural
+fields. The API edits inline RGB values, durations and bounded destination
+positions while preserving those fields and all scoped label spellings. File
+frame colors belong to their binary palette resource; this API edits their
+duration and verifies the immutable source context by manifest hash. The source
+encoder never creates a second owner for a shared palette file.
+
+The actual AS proof checks every qualified local label and every emitted byte,
+requires each transition to enter a registered header, and binds each
+initializer to the first frame after its header. Both lock-on views keep their
+component's assembly addresses in longwords; only physical image positions
+receive the component offset. The encoder preserves stored records after a
+terminal command without asserting they are reachable through the default
+initializer graph.
+
+These 13 complete source files join the 613 encoded mapping/DPLC/animation files
+in the content workspace. All 626 encoded owners are hashed before the complete
+five-profile container rebuild. Contract checks and synthetic edit tests need no
+ROM inputs; actual byte and container checks require the private extracted
+assets and preservation builds.

@@ -27864,5 +27864,6 @@
       "address_spaces": ["cartridge-rom"]
     }
   ],
-  "assembly_catalog": "config/authoring/assembly_formats.json"
+  "assembly_catalog": "config/authoring/assembly_formats.json",
+  "palette_catalog": "config/authoring/palette_formats.json"
 }

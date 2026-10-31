@@ -1,0 +1,352 @@
+{
+  "schema_version": 1,
+  "scope": "preservation-fixed-footprint",
+  "groups": [
+    {
+      "path": "src/rendering/s3/actor_rendering_resource_catalog.s",
+      "scope": "PalSPtr_CNZMinibossNormal",
+      "first_line": 178,
+      "last_line": 199,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 88,
+      "declarations_sha256": "00952a05fa6bcd916bc28960511a51a7734f617adbc77d09a467667869ba76ad",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
+      "file_frames": []
+    },
+    {
+      "path": "src/rendering/s3/actor_rendering_resource_catalog.s",
+      "scope": "PalSPtr_CNZMinibossSparks",
+      "first_line": 202,
+      "last_line": 221,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 82,
+      "declarations_sha256": "8b2b029dd0b023a75a507d1431513141f874ec98447ac2335c3fe1c08a061082",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_2", "PalSPtr_CNZMinibossNormal.headr3"],
+      "file_frames": []
+    },
+    {
+      "path": "src/rendering/s3/actor_rendering_resource_catalog.s",
+      "scope": "PalSPtr_CNZMinibossOpen",
+      "first_line": 224,
+      "last_line": 236,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 52,
+      "declarations_sha256": "7b69dc4c7745bdb500461c88d427e49a3cbc574cf89e7d7c251f44aa87f859d7",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
+      "file_frames": []
+    },
+    {
+      "path": "src/rendering/s3/actor_rendering_resource_catalog.s",
+      "scope": "word_16322C",
+      "first_line": 241,
+      "last_line": 267,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 108,
+      "declarations_sha256": "e22c8c52dbd1c033031261f2e7e45c51a5bd98329a11d76b6b851498f3846f88",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
+      "file_frames": []
+    },
+    {
+      "path": "src/rendering/s3/actor_rendering_resource_catalog.s",
+      "scope": "word_163298",
+      "first_line": 269,
+      "last_line": 295,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 108,
+      "declarations_sha256": "d8ef378c1ada94de97357c50d9a419fe3da85c8c97350a2348335a217f90a8be",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
+      "file_frames": []
+    },
+    {
+      "path": "src/objects/special_stage/sk/entry_ring_resources.s",
+      "scope": "PalSPtr_SSEntry",
+      "first_line": 13,
+      "last_line": 34,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 124,
+      "declarations_sha256": "f942b801d1fe9aae2a10d1d82cafea7d1d53f34872547056e2965c6465c58c5b",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
+      "file_frames": []
+    },
+    {
+      "path": "src/objects/special_stage/sk/entry_ring_resources.s",
+      "scope": "PalSPtr_SSEntry2",
+      "first_line": 37,
+      "last_line": 74,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 168,
+      "declarations_sha256": "7c44db623b4a6050dce872e8a5ae63c770e28ce5a0eab4566f9621e12726e67c",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
+      "file_frames": []
+    },
+    {
+      "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "scope": "word_7D842",
+      "first_line": 430,
+      "last_line": 445,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 424,
+      "declarations_sha256": "d781514a08bc9397d4e2e7372f5c201cc5a864f585e3dfc8d0037c04c47f56d9",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
+      "file_frames": [
+        "data/General/Sprites/Mecha Sonic/Palettes/Flash 1.bin",
+        "data/General/Sprites/Mecha Sonic/Palettes/Flash 2.bin",
+        "data/General/Sprites/Mecha Sonic/Palettes/Main.bin"
+      ]
+    },
+    {
+      "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "scope": "word_7D9EA",
+      "first_line": 449,
+      "last_line": 455,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 118,
+      "declarations_sha256": "d94a9aef98160993619a59a70dcea13c8328c80a9851a5570f1c4bde68f1dea4",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
+      "file_frames": [
+        "data/General/Sprites/Mecha Sonic/Palettes/Flash 1.bin",
+        "data/General/Sprites/Mecha Sonic/Palettes/Flash 2.bin",
+        "data/General/Sprites/Mecha Sonic/Palettes/Main.bin"
+      ]
+    },
+    {
+      "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "scope": "word_7DA60",
+      "first_line": 457,
+      "last_line": 469,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 262,
+      "declarations_sha256": "045dad83eb515dd9d6ffdb393fca54707145962c64fbb62a12c84c9ea34928e8",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
+      "file_frames": [
+        "data/General/Sprites/Mecha Sonic/Palettes/Flash 1.bin",
+        "data/General/Sprites/Mecha Sonic/Palettes/Flash 2.bin",
+        "data/General/Sprites/Mecha Sonic/Palettes/Flash 3.bin",
+        "data/General/Sprites/Mecha Sonic/Palettes/Super 1.bin",
+        "data/General/Sprites/Mecha Sonic/Palettes/Super 2.bin",
+        "data/General/Sprites/Mecha Sonic/Palettes/Super 3.bin"
+      ]
+    },
+    {
+      "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "scope": "word_7DB66",
+      "first_line": 471,
+      "last_line": 480,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 160,
+      "declarations_sha256": "80d3ba2d59af417c027b738f3e03de4f3f95419d5dee835b68d15e77332a8d32",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
+      "file_frames": [
+        "data/General/Sprites/Mecha Sonic/Palettes/Flash 1.bin",
+        "data/General/Sprites/Mecha Sonic/Palettes/Flash 2.bin",
+        "data/General/Sprites/Mecha Sonic/Palettes/Main.bin"
+      ]
+    },
+    {
+      "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "scope": "word_7DC06",
+      "first_line": 482,
+      "last_line": 488,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 120,
+      "declarations_sha256": "72faba92e402697b051aa40d81ee4c1306711ac0d1e377e828f7146d240f88db",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_2", "word_7DA60.headr2"],
+      "file_frames": [
+        "data/General/Sprites/Mecha Sonic/Palettes/Flash 1.bin",
+        "data/General/Sprites/Mecha Sonic/Palettes/Flash 2.bin",
+        "data/General/Sprites/Mecha Sonic/Palettes/Main.bin"
+      ]
+    },
+    {
+      "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "scope": "word_7DC7E",
+      "first_line": 490,
+      "last_line": 499,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 220,
+      "declarations_sha256": "28922ac4ae403b97d803e1bad0741c413d9654e040470fe8bfa9c9746d8344df",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
+      "file_frames": [
+        "data/General/Sprites/Mecha Sonic/Palettes/Flash 1.bin",
+        "data/General/Sprites/Mecha Sonic/Palettes/Flash 2.bin",
+        "data/General/Sprites/Mecha Sonic/Palettes/Main.bin"
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lrz/miniboss/sk/object_catalog.s",
+      "scope": "word_78EAA",
+      "first_line": 97,
+      "last_line": 113,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 172,
+      "declarations_sha256": "cf0d752a5701290d1889282413912315937f2c9e3164b9221efd6cc59b9da1e9",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_3"],
+      "file_frames": []
+    },
+    {
+      "path": "src/objects/bosses/lbz/final_boss_2/s3/object_and_ending_catalog.s",
+      "scope": "PalSPtr_LBZFinalBoss2_FadeIn",
+      "first_line": 221,
+      "last_line": 228,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 56,
+      "declarations_sha256": "bf8f87ca80c78d4a1d9c27f94f288817d2fd3f4ed3a7e9725660ff9851d08cdf",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_4"],
+      "file_frames": []
+    },
+    {
+      "path": "src/objects/bosses/lbz/final_boss_2/s3/object_and_ending_catalog.s",
+      "scope": "PalSPtr_LBZFinalBoss2_FadeOut",
+      "first_line": 231,
+      "last_line": 238,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 56,
+      "declarations_sha256": "ffeac50364590345a92e7e254106f3635545558c57f8c7a9da382471aa87e40d",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_4"],
+      "file_frames": []
+    },
+    {
+      "path": "src/objects/bosses/icz/s3/miniboss_palette_script.s",
+      "scope": "word_4EBE2",
+      "first_line": 4,
+      "last_line": 17,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 236,
+      "declarations_sha256": "6a35d2ea61ff30800577686afbdbc56e5f4b9ebc27d4cd737b1e7bfc746caff5",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_4"],
+      "file_frames": []
+    },
+    {
+      "path": "src/objects/bosses/icz/sk/miniboss_palette_script.s",
+      "scope": "word_719FA",
+      "first_line": 4,
+      "last_line": 17,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 236,
+      "declarations_sha256": "fd74c14a8241ac9bb26950e9fe484576172ff40e672ea799444984b1c799ebc9",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_4"],
+      "file_frames": []
+    },
+    {
+      "path": "src/objects/bosses/icz/sk/miniboss_palette_script.s",
+      "scope": "word_71AE6",
+      "first_line": 19,
+      "last_line": 45,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 108,
+      "declarations_sha256": "394e4da49246662ab1012f1d257a9702054fde6cb7fd9d55d56a843930478ebd",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
+      "file_frames": []
+    },
+    {
+      "path": "src/objects/bosses/icz/sk/miniboss_palette_script.s",
+      "scope": "word_71B52",
+      "first_line": 47,
+      "last_line": 73,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 108,
+      "declarations_sha256": "456f571b53227f1206095ba755ffe2ba891cc7a05953c690096549cf68cf738b",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
+      "file_frames": []
+    },
+    {
+      "path": "src/objects/bosses/fbz/miniboss/s3/object_catalog.s",
+      "scope": "word_4D540",
+      "first_line": 85,
+      "last_line": 90,
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
+      "capacity_bytes": 24,
+      "declarations_sha256": "ea6dd08372075f1007b35e0fd8fe843a33b3cd27f5ffea9266de4d23ac6f9488",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
+      "file_frames": []
+    },
+    {
+      "path": "src/objects/bosses/fbz/miniboss/sk/object_catalog.s",
+      "scope": "word_6FAE0",
+      "first_line": 68,
+      "last_line": 73,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 24,
+      "declarations_sha256": "d5c1fff3d578fc82b006adfb85a0df1070b50fb3fbd511ddccc7b68c9fabef54",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
+      "file_frames": []
+    },
+    {
+      "path": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "scope": "word_7F03C",
+      "first_line": 93,
+      "last_line": 100,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 48,
+      "declarations_sha256": "50cf1638fbd110f9e26938ea26e6534be6f0a24d36b7bfe2b5826424168d0778",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
+      "file_frames": []
+    },
+    {
+      "path": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "scope": "word_813AA",
+      "first_line": 146,
+      "last_line": 173,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 116,
+      "declarations_sha256": "5ef452f27f632b6b8781bc6d907b9dfd7ffb21fa7b7b90f0cc3913100cef34ba",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_3"],
+      "file_frames": []
+    },
+    {
+      "path": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "scope": "word_8141E",
+      "first_line": 175,
+      "last_line": 202,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 116,
+      "declarations_sha256": "478ed61107049d528fa0c01c41dbba2f6d9efa6423b85413f0a3d979fb7885e0",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_4"],
+      "file_frames": []
+    },
+    {
+      "path": "src/objects/bosses/cnz/miniboss/sk/object_catalog.s",
+      "scope": "PalSPtr_CNZMinibossNormal",
+      "first_line": 90,
+      "last_line": 111,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 88,
+      "declarations_sha256": "00952a05fa6bcd916bc28960511a51a7734f617adbc77d09a467667869ba76ad",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
+      "file_frames": []
+    },
+    {
+      "path": "src/objects/bosses/cnz/miniboss/sk/object_catalog.s",
+      "scope": "PalSPtr_CNZMinibossSparks",
+      "first_line": 114,
+      "last_line": 133,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 82,
+      "declarations_sha256": "8b2b029dd0b023a75a507d1431513141f874ec98447ac2335c3fe1c08a061082",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_2", "PalSPtr_CNZMinibossNormal.headr3"],
+      "file_frames": []
+    },
+    {
+      "path": "src/objects/bosses/cnz/miniboss/sk/object_catalog.s",
+      "scope": "PalSPtr_CNZMinibossOpen",
+      "first_line": 136,
+      "last_line": 148,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 52,
+      "declarations_sha256": "7b69dc4c7745bdb500461c88d427e49a3cbc574cf89e7d7c251f44aa87f859d7",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
+      "file_frames": []
+    },
+    {
+      "path": "src/game/modes/ending/sk/graphics_and_palettes.s",
+      "scope": "PalSPtr_EndingSuperTails",
+      "first_line": 65,
+      "last_line": 74,
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 76,
+      "declarations_sha256": "2a2d774768f81d0f2faadbd0b424f73ccfcdf93bac5923a5bd13802bef58e3d1",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_3"],
+      "file_frames": []
+    }
+  ]
+}
