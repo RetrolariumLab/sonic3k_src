@@ -694,6 +694,12 @@
       "commits": ["0bf63c6483ed4a12120f35cb9d44e58ff431865d"]
     },
     {
+      "id": "change-caf88d995b77",
+      "kind": "source_or_tooling",
+      "summary": "Own S&K Sky Sanctuary, Death Egg and Doomsday boss programs",
+      "commits": ["caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",
