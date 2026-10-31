@@ -676,6 +676,12 @@
       "commits": ["685ff61c714d63ac4759d95513e2a3c2d4726221"]
     },
     {
+      "id": "change-8059ad84d047",
+      "kind": "source_or_tooling",
+      "summary": "Own S&K Knuckles cutscenes and Hidden Palace actors",
+      "commits": ["8059ad84d047094386e41f09e544b994df680179"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",

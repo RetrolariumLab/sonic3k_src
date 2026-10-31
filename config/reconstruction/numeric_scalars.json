@@ -128,7 +128,7 @@
       "reason": "Consumed by subtraction/add-carry digit extraction; this number is a decimal place weight, not a bus pointer."
     },
     {
-      "path": "sonic3k.s",
+      "path": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
       "owner": "dword_6EC7E",
       "kind": "rom-range-long",
       "operand": "$28000",
@@ -137,7 +137,7 @@
       "reason": "Loaded into d2, optionally negated, and added to long x_pos in the preceding movement helper."
     },
     {
-      "path": "sonic3k.s",
+      "path": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
       "owner": "dword_6EC7E",
       "kind": "rom-range-long",
       "operand": "$20000",
@@ -146,7 +146,7 @@
       "reason": "Loaded into d2, optionally negated, and added to long x_pos in the preceding movement helper."
     },
     {
-      "path": "sonic3k.s",
+      "path": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
       "owner": "dword_6EC7E",
       "kind": "rom-range-long",
       "operand": "$1C000",
@@ -155,7 +155,7 @@
       "reason": "Loaded into d2, optionally negated, and added to long x_pos in the preceding movement helper."
     },
     {
-      "path": "sonic3k.s",
+      "path": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
       "owner": "dword_6EC7E",
       "kind": "rom-range-long",
       "operand": "$18000",
@@ -164,7 +164,7 @@
       "reason": "Loaded into d2, optionally negated, and added to long x_pos in the preceding movement helper."
     },
     {
-      "path": "sonic3k.s",
+      "path": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
       "owner": "dword_6EC7E",
       "kind": "rom-range-long",
       "operand": "$14000",
@@ -173,7 +173,7 @@
       "reason": "Loaded into d2, optionally negated, and added to long x_pos in the preceding movement helper."
     },
     {
-      "path": "sonic3k.s",
+      "path": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
       "owner": "dword_6EC7E",
       "kind": "rom-range-long",
       "operand": "$10000",
@@ -182,7 +182,7 @@
       "reason": "Loaded into d2, optionally negated, and added to long x_pos in the preceding movement helper."
     },
     {
-      "path": "sonic3k.s",
+      "path": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
       "owner": "dword_6EC7E",
       "kind": "rom-range-long",
       "operand": "$C000",
@@ -191,7 +191,7 @@
       "reason": "Loaded into d2, optionally negated, and added to long x_pos in the preceding movement helper."
     },
     {
-      "path": "sonic3k.s",
+      "path": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
       "owner": "dword_6EC7E",
       "kind": "rom-range-long",
       "operand": "$8000",
