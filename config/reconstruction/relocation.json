@@ -3,8 +3,6 @@
   "groups": 32,
   "code_sources": [
     "Lockon S3/Screen Events.s",
-    "s3.s",
-    "sonic3k.s",
     "src/audio/s3/level_music_transition.s",
     "src/audio/sk/level_music_transition.s",
     "src/game/blue_sphere/sk/code_entry_widgets.s",
@@ -1036,6 +1034,8 @@
     "src/rendering/zones/lrz/sk/tile_animation.s",
     "src/rendering/zones/mhz/sk/tile_animation.s",
     "src/rendering/zones/soz/sk/tile_animation.s",
+    "src/system/debug/s3/placement_control.s",
+    "src/system/debug/sk/placement_control.s",
     "src/system/s3/bootstrap.s",
     "src/system/s3/device_services.s",
     "src/system/s3/horizontal_interrupts.s",
@@ -1050,7 +1050,6 @@
   "engines": {
     "s3-us": {
       "sources": [
-        "s3.s",
         "src/system/s3/bootstrap.s",
         "src/system/s3/video_interrupts.s",
         "src/system/s3/horizontal_interrupts.s",
@@ -1433,14 +1432,14 @@
         "src/objects/enemies/lbz/s3/corkey.s",
         "src/objects/enemies/lbz/s3/flybot_767.s",
         "src/objects/bosses/lbz/s3/act1_robotnik_scene.s",
-        "src/objects/bosses/lbz/s3/act2_robotnik_ship.s"
+        "src/objects/bosses/lbz/s3/act2_robotnik_ship.s",
+        "src/system/debug/s3/placement_control.s"
       ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/s3/bootstrap.s"
     },
     "s3-eu": {
       "sources": [
-        "s3.s",
         "src/system/s3/bootstrap.s",
         "src/system/s3/video_interrupts.s",
         "src/system/s3/horizontal_interrupts.s",
@@ -1823,14 +1822,14 @@
         "src/objects/enemies/lbz/s3/corkey.s",
         "src/objects/enemies/lbz/s3/flybot_767.s",
         "src/objects/bosses/lbz/s3/act1_robotnik_scene.s",
-        "src/objects/bosses/lbz/s3/act2_robotnik_ship.s"
+        "src/objects/bosses/lbz/s3/act2_robotnik_ship.s",
+        "src/system/debug/s3/placement_control.s"
       ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/s3/bootstrap.s"
     },
     "s3-jp": {
       "sources": [
-        "s3.s",
         "src/system/s3/bootstrap.s",
         "src/system/s3/video_interrupts.s",
         "src/system/s3/horizontal_interrupts.s",
@@ -2213,14 +2212,14 @@
         "src/objects/enemies/lbz/s3/corkey.s",
         "src/objects/enemies/lbz/s3/flybot_767.s",
         "src/objects/bosses/lbz/s3/act1_robotnik_scene.s",
-        "src/objects/bosses/lbz/s3/act2_robotnik_ship.s"
+        "src/objects/bosses/lbz/s3/act2_robotnik_ship.s",
+        "src/system/debug/s3/placement_control.s"
       ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/s3/bootstrap.s"
     },
     "sk": {
       "sources": [
-        "sonic3k.s",
         "Lockon S3/Screen Events.s",
         "src/system/sk/bootstrap.s",
         "src/system/sk/video_interrupts.s",
@@ -2879,7 +2878,8 @@
         "src/objects/zones/hpz/sk/special_stage_control.s",
         "src/objects/enemies/sk/egg_robo.s",
         "src/objects/enemies/sk/spikebonker.s",
-        "src/objects/enemies/sk/chainspike.s"
+        "src/objects/enemies/sk/chainspike.s",
+        "src/system/debug/sk/placement_control.s"
       ],
       "startup_label": "ErrorTrap",
       "startup_source": "src/system/sk/bootstrap.s"
@@ -2986,6 +2986,13 @@
       "kind": "data-end-code-alias",
       "profiles": ["sk"],
       "reason": "The final zone-animal graphics load record ends at the next code entry. Preserve its original code-entry alias and require independently assembled equal normal and relocated addresses after assigning the data and code to separate owners."
+    },
+    {
+      "alias": "PLC_78_79_7A_7B_End",
+      "target": "DebugMode",
+      "kind": "data-end-code-alias",
+      "profiles": ["s3-us", "s3-eu", "s3-jp", "sk"],
+      "reason": "The final primary pattern-load catalog sentinel is also the immediately following debug placement entry. Preserve its original code-entry coverage and require independently assembled equal normal and relocated symbol addresses after assigning data and executable owners."
     }
   ]
 }

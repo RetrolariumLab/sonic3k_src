@@ -1,0 +1,37 @@
+; Owner: system/debug/sk
+; Responsibility: Zone debug-list pointer table and literal inclusions of each owned placement catalog
+; Source provenance and ranges: config/reconstruction/source_layout.json
+
+; ---------------------------------------------------------------------------
+DebugOffs:      include "src/system/debug/shared/debug_list_pointers.s"
+
+Debug_AIZ1:             dbglistinclude "src/system/debug/shared/zones/aiz/act_1.s"
+Debug_AIZ2:             dbglistinclude "src/system/debug/shared/zones/aiz/act_2.s"
+Debug_HCZ:              dbglistinclude "src/system/debug/shared/zones/hcz/main.s"
+Debug_MGZ:              dbglistinclude "src/system/debug/shared/zones/mgz/main.s"
+Debug_CNZ:              dbglistinclude "src/system/debug/shared/zones/cnz/main.s"
+Debug_FBZ1:             dbglistinclude "src/system/debug/shared/zones/fbz/act_1.s"
+Debug_FBZ2:             dbglistinclude "src/system/debug/shared/zones/fbz/act_2.s"
+Debug_ICZ1:             dbglistinclude "src/system/debug/shared/zones/icz/act_1.s"
+Debug_ICZ2:             dbglistinclude "src/system/debug/shared/zones/icz/act_2.s"
+Debug_LBZ1:             dbglistinclude "src/system/debug/shared/zones/lbz/act_1.s"
+Debug_LBZ2:             dbglistinclude "src/system/debug/shared/zones/lbz/act_2.s"
+Debug_MHZ:              dbglistinclude "src/system/debug/shared/zones/mhz/main.s"
+Debug_SOZ1:             dbglistinclude "src/system/debug/shared/zones/soz/act_1.s"
+Debug_SOZ2:             dbglistinclude "src/system/debug/shared/zones/soz/act_2.s"
+Debug_LRZ1:             dbglistinclude "src/system/debug/shared/zones/lrz/act_1.s"
+Debug_LRZ2:             dbglistinclude "src/system/debug/shared/zones/lrz/act_2.s"
+Debug_SSZ:              dbglistinclude "src/system/debug/shared/zones/ssz/main.s"
+Debug_DEZ1:             dbglistinclude "src/system/debug/shared/zones/dez/act_1.s"
+Debug_DEZ2:             dbglistinclude "src/system/debug/shared/zones/dez/act_2.s"
+Debug_DDZ1:             dbglistinclude "src/system/debug/shared/zones/ddz/main.s"
+Debug_DDZ2:             dbglistinclude "src/system/debug/shared/zones/dez/boss.s"
+Debug_Ending:           dbglistinclude "src/system/debug/shared/zones/ssz/ending.s"
+Debug_ALZ:              dbglistinclude "src/system/debug/shared/zones/alz/main.s"
+Debug_BPZ:              dbglistinclude "src/system/debug/shared/zones/bpz/main.s"
+Debug_DPZ:              dbglistinclude "src/system/debug/shared/zones/dpz/main.s"
+Debug_CGZ:              dbglistinclude "src/system/debug/shared/zones/cgz/main.s"
+Debug_EMZ:              dbglistinclude "src/system/debug/shared/zones/emz/main.s"
+Debug_Pachinko_Special: dbglistinclude "src/system/debug/shared/zones/pachinko/main.s"
+Debug_HPZ:              dbglistinclude "src/system/debug/shared/zones/hpz/main.s"
+Debug_Gumball_Special:  dbglistinclude "src/system/debug/shared/zones/gumball/main.s"

@@ -90,7 +90,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 4460,
+      "physical_lines": 2436,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "s3.s",
@@ -150,7 +150,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 4990,
+      "physical_lines": 4103,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -2465,6 +2465,86 @@
       ]
     },
     {
+      "path": "src/collision/s3/height_and_angle_resources.s",
+      "owner": "collision/s3",
+      "responsibility": "Sonic 3 surface angles and both orientations of collision height maps.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 12,
+      "origin": {
+        "commit": "8833ccd9229820266e103e4386e7dc75285a1913",
+        "path": "s3.s",
+        "first_line": 2131,
+        "last_line": 2139,
+        "sha256": "50d4f3d33c16141caadc5d90b9bf7c881069f8bc508b8bc347f648b755706c7c"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 459936,
+          "end": 476832
+        },
+        {
+          "profile": "s3-eu",
+          "start": 459936,
+          "end": 476832
+        },
+        {
+          "profile": "s3-jp",
+          "start": 459936,
+          "end": 476832
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2557088,
+          "end": 2573984
+        }
+      ]
+    },
+    {
+      "path": "src/collision/s3/zone_collision_catalog.s",
+      "owner": "collision/s3",
+      "responsibility": "Zone collision index pointer table and complete extracted collision resource bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 108,
+      "origin": {
+        "commit": "8833ccd9229820266e103e4386e7dc75285a1913",
+        "path": "s3.s",
+        "first_line": 2140,
+        "last_line": 2244,
+        "sha256": "ea42969553eb3a3217b08b5738d348cdbb98c91ed666f1ebad777e2e90e513af"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 476832,
+          "end": 529248
+        },
+        {
+          "profile": "s3-eu",
+          "start": 476832,
+          "end": 529248
+        },
+        {
+          "profile": "s3-jp",
+          "start": 476832,
+          "end": 529248
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2573984,
+          "end": 2626400
+        }
+      ]
+    },
+    {
       "path": "src/game/blue_sphere/shared/blue_sphere/anim_character_sprites.s",
       "owner": "game/blue_sphere/shared/blue_sphere",
       "responsibility": "Assembler data for General/Blue Sphere/Anim - Character Sprites",
@@ -4501,6 +4581,46 @@
       ]
     },
     {
+      "path": "src/game/level/s3/automatic_tunnel_paths.s",
+      "owner": "game/level/s3",
+      "responsibility": "Complete automatic tunnel control point records and associated zone path pointer tables.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 397,
+      "origin": {
+        "commit": "8833ccd9229820266e103e4386e7dc75285a1913",
+        "path": "s3.s",
+        "first_line": 1506,
+        "last_line": 1899,
+        "sha256": "af31d7707d19e80d292bf7e69038a3c692885ad11780405cbabe0f817a0d4526"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 431252,
+          "end": 432708
+        },
+        {
+          "profile": "s3-eu",
+          "start": 431252,
+          "end": 432708
+        },
+        {
+          "profile": "s3-jp",
+          "start": 431252,
+          "end": 432708
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2528404,
+          "end": 2529860
+        }
+      ]
+    },
+    {
       "path": "src/game/level/s3/bounds_catalog.s",
       "owner": "game/level/s3",
       "responsibility": "Initial level bounds selection and the product-specific level size catalog.",
@@ -4626,6 +4746,46 @@
       ]
     },
     {
+      "path": "src/game/level/s3/character_start_records.s",
+      "owner": "game/level/s3",
+      "responsibility": "Original character speed parameters and complete zone/act start-location records.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 56,
+      "origin": {
+        "commit": "8833ccd9229820266e103e4386e7dc75285a1913",
+        "path": "s3.s",
+        "first_line": 1213,
+        "last_line": 1265,
+        "sha256": "20571cfeee7bdd731a036071b5261b9c9c0fd7e9b48299b724c1bdf61a710134"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 385024,
+          "end": 385240
+        },
+        {
+          "profile": "s3-eu",
+          "start": 385024,
+          "end": 385240
+        },
+        {
+          "profile": "s3-jp",
+          "start": 385024,
+          "end": 385240
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2482176,
+          "end": 2482392
+        }
+      ]
+    },
+    {
       "path": "src/game/level/s3/collision_and_oscillation.s",
       "owner": "game/level/s3",
       "responsibility": "Level collision data initialization, deterministic object oscillators and ring animation updates.",
@@ -4667,6 +4827,46 @@
           "component": "s3-us",
           "start": 2119880,
           "end": 2120224
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/s3/competition_and_unused_placements.s",
+      "owner": "game/level/s3",
+      "responsibility": "Competition and remaining unused zone object and ring placement lists, including their terminators.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 204,
+      "origin": {
+        "commit": "8833ccd9229820266e103e4386e7dc75285a1913",
+        "path": "s3.s",
+        "first_line": 1900,
+        "last_line": 2100,
+        "sha256": "3af83846fc3069709c5dc9030d404eeab6c96afb1b1c6af2b6190b90d7544396"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 432708,
+          "end": 434400
+        },
+        {
+          "profile": "s3-eu",
+          "start": 432708,
+          "end": 434400
+        },
+        {
+          "profile": "s3-jp",
+          "start": 432708,
+          "end": 434400
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2529860,
+          "end": 2531552
         }
       ]
     },
@@ -4891,6 +5091,86 @@
       ]
     },
     {
+      "path": "src/game/level/s3/layout_catalog.s",
+      "owner": "game/level/s3",
+      "responsibility": "Zone layout pointer table and complete extracted level layout bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 114,
+      "origin": {
+        "commit": "8833ccd9229820266e103e4386e7dc75285a1913",
+        "path": "s3.s",
+        "first_line": 2245,
+        "last_line": 2355,
+        "sha256": "90678d5949b90ce933ba5d5bf0376b034c9952f2ecaff8ae51e3690ebc1ba1c4"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 529248,
+          "end": 573268
+        },
+        {
+          "profile": "s3-eu",
+          "start": 529248,
+          "end": 573268
+        },
+        {
+          "profile": "s3-jp",
+          "start": 529248,
+          "end": 573268
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2626400,
+          "end": 2670420
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/s3/main_zone_placements.s",
+      "owner": "game/level/s3",
+      "responsibility": "Main Sonic 3 zone object and ring placements, retaining their physical list terminators.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 103,
+      "origin": {
+        "commit": "8833ccd9229820266e103e4386e7dc75285a1913",
+        "path": "s3.s",
+        "first_line": 1406,
+        "last_line": 1505,
+        "sha256": "63acbb7ba281d12f39b91b1f6c1dd236ea1912b5c47392d095b1f4f62571bd45"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 385784,
+          "end": 431252
+        },
+        {
+          "profile": "s3-eu",
+          "start": 385784,
+          "end": 431252
+        },
+        {
+          "profile": "s3-jp",
+          "start": 385784,
+          "end": 431252
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2482936,
+          "end": 2528404
+        }
+      ]
+    },
+    {
       "path": "src/game/level/s3/mode_and_attract.s",
       "owner": "game/level/s3",
       "responsibility": "Level initialization, gameplay loop and product-specific attract/demo mode transitions.",
@@ -4927,6 +5207,46 @@
           "component": "s3-us",
           "start": 2115248,
           "end": 2117016
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/s3/placement_pointers.s",
+      "owner": "game/level/s3",
+      "responsibility": "Object, ring, automatic tunnel and special-stage layout pointer tables indexed by zone or stage.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 143,
+      "origin": {
+        "commit": "8833ccd9229820266e103e4386e7dc75285a1913",
+        "path": "s3.s",
+        "first_line": 1266,
+        "last_line": 1405,
+        "sha256": "b1771a012438149d90ca4de78b27ba8c6a8d1b3b5462a2a391681e7da644828f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 385240,
+          "end": 385784
+        },
+        {
+          "profile": "s3-eu",
+          "start": 385240,
+          "end": 385784
+        },
+        {
+          "profile": "s3-jp",
+          "start": 385240,
+          "end": 385784
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2482392,
+          "end": 2482936
         }
       ]
     },
@@ -5057,6 +5377,46 @@
           "component": "s3-us",
           "start": 2434864,
           "end": 2435038
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/s3/resource_load_records.s",
+      "owner": "game/level/s3",
+      "responsibility": "Zone and act graphics, block, chunk and palette load records, including original unused level slots.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 59,
+      "origin": {
+        "commit": "8833ccd9229820266e103e4386e7dc75285a1913",
+        "path": "s3.s",
+        "first_line": 422,
+        "last_line": 477,
+        "sha256": "109ee1d1e5452d27c7b1baf2421ec62c73ef013ca4beac3b59b4e5780cd1cb86"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 371468,
+          "end": 372620
+        },
+        {
+          "profile": "s3-eu",
+          "start": 371468,
+          "end": 372620
+        },
+        {
+          "profile": "s3-jp",
+          "start": 371468,
+          "end": 372620
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2468620,
+          "end": 2469772
         }
       ]
     },
@@ -5827,6 +6187,36 @@
           "component": "sk",
           "start": 539854,
           "end": 540036
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/sk/resource_load_records.s",
+      "owner": "game/level/sk",
+      "responsibility": "Zone and act graphics, block, chunk and palette load records, including original unused level slots.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 59,
+      "origin": {
+        "commit": "8833ccd9229820266e103e4386e7dc75285a1913",
+        "path": "sonic3k.s",
+        "first_line": 725,
+        "last_line": 780,
+        "sha256": "27fa9c59c5e96c1c404f2bf8e012c443f91207d70b167bbfd64407de4e73b813"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 597772,
+          "end": 598924
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 597772,
+          "end": 598924
         }
       ]
     },
@@ -10192,6 +10582,46 @@
           "component": "sk",
           "start": 49412,
           "end": 50544
+        }
+      ]
+    },
+    {
+      "path": "src/game/special_stage/s3/layout_catalog.s",
+      "owner": "game/special_stage/s3",
+      "responsibility": "Eight Sonic 3 special-stage layouts and the original following physical alignment.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 27,
+      "origin": {
+        "commit": "8833ccd9229820266e103e4386e7dc75285a1913",
+        "path": "s3.s",
+        "first_line": 2101,
+        "last_line": 2124,
+        "sha256": "4cc8e071d497c6c4885e3e6c7ec8dca5fec0a2c0d890c08ea1978f89b8c20e3e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 434400,
+          "end": 446464
+        },
+        {
+          "profile": "s3-eu",
+          "start": 434400,
+          "end": 446464
+        },
+        {
+          "profile": "s3-jp",
+          "start": 434400,
+          "end": 446464
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2531552,
+          "end": 2543616
         }
       ]
     },
@@ -29026,6 +29456,46 @@
           "component": "sk",
           "start": 542858,
           "end": 542996
+        }
+      ]
+    },
+    {
+      "path": "src/objects/s3/world/object_catalog.s",
+      "owner": "objects/s3/world",
+      "responsibility": "Engine object dispatch catalog and its following physical resource alignment.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 7,
+      "origin": {
+        "commit": "8833ccd9229820266e103e4386e7dc75285a1913",
+        "path": "s3.s",
+        "first_line": 1209,
+        "last_line": 1212,
+        "sha256": "a6be9ab35ef4bebf446ee26fd42b7162d602ebc4e33196e8851f07095e1801bc"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 380054,
+          "end": 385024
+        },
+        {
+          "profile": "s3-eu",
+          "start": 380054,
+          "end": 385024
+        },
+        {
+          "profile": "s3-jp",
+          "start": 380054,
+          "end": 385024
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2477206,
+          "end": 2482176
         }
       ]
     },
@@ -52616,6 +53086,36 @@
       "range_kind": "canonical-normal-build"
     },
     {
+      "path": "src/objects/sk/world/object_catalog.s",
+      "owner": "objects/sk/world",
+      "responsibility": "Engine object dispatch catalog and its following physical resource alignment.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 8,
+      "origin": {
+        "commit": "8833ccd9229820266e103e4386e7dc75285a1913",
+        "path": "sonic3k.s",
+        "first_line": 1612,
+        "last_line": 1616,
+        "sha256": "409f7efa7f5b17c5120b2acc5a211fc543e5d29fc1ed8f1afdc32a0c524dd6ee"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 609954,
+          "end": 614400
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 609954,
+          "end": 614400
+        }
+      ]
+    },
+    {
       "path": "src/objects/special_stage/s3/entry_ring.s",
       "owner": "objects/special_stage/s3",
       "responsibility": "Special-stage entry ring collection, entry flash, player transition and sprite resources.",
@@ -65537,6 +66037,86 @@
       ]
     },
     {
+      "path": "src/rendering/s3/palettes/resource_catalog.s",
+      "owner": "rendering/s3/palettes",
+      "responsibility": "Palette pointer catalog and all original shared and zone palette resource bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 109,
+      "origin": {
+        "commit": "8833ccd9229820266e103e4386e7dc75285a1913",
+        "path": "s3.s",
+        "first_line": 2356,
+        "last_line": 2461,
+        "sha256": "38b4d202ccc1ef41986fccb0c3821be062eff4b074297096014a6f71944c21dc"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 573268,
+          "end": 577140
+        },
+        {
+          "profile": "s3-eu",
+          "start": 573268,
+          "end": 577140
+        },
+        {
+          "profile": "s3-jp",
+          "start": 573268,
+          "end": 577140
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2670420,
+          "end": 2674292
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/s3/pattern_load_catalog.s",
+      "owner": "rendering/s3",
+      "responsibility": "Pattern-load identifiers, relative pointer macro and complete primary level and scene art request catalog.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 467,
+      "origin": {
+        "commit": "8833ccd9229820266e103e4386e7dc75285a1913",
+        "path": "s3.s",
+        "first_line": 478,
+        "last_line": 941,
+        "sha256": "c2bb761371c34dfc601e4ba5227cd20f7bea303b6edc3fdfdacfa5ebc9b4f16d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 372620,
+          "end": 374048
+        },
+        {
+          "profile": "s3-eu",
+          "start": 372620,
+          "end": 374048
+        },
+        {
+          "profile": "s3-jp",
+          "start": 372620,
+          "end": 374048
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2469772,
+          "end": 2471200
+        }
+      ]
+    },
+    {
       "path": "src/rendering/s3/pixel_scale_2x.s",
       "owner": "rendering/s3",
       "responsibility": "Two-times pixel scaling, single-tile scaling and left or right pixel expansion helpers.",
@@ -65798,6 +66378,46 @@
           "component": "s3-us",
           "start": 2103152,
           "end": 2103364
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/s3/waterline_scroll_resources.s",
+      "owner": "rendering/s3",
+      "responsibility": "Hydrocity and Launch Base waterline scroll resource bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 9,
+      "origin": {
+        "commit": "8833ccd9229820266e103e4386e7dc75285a1913",
+        "path": "s3.s",
+        "first_line": 2125,
+        "last_line": 2130,
+        "sha256": "d9f2696f2ade1a4465fb099ed9819187f1b14230fddd7e05abba5c90fd1257f6"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 446464,
+          "end": 459936
+        },
+        {
+          "profile": "s3-eu",
+          "start": 446464,
+          "end": 459936
+        },
+        {
+          "profile": "s3-jp",
+          "start": 446464,
+          "end": 459936
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2543616,
+          "end": 2557088
         }
       ]
     },
@@ -66218,6 +66838,36 @@
           "component": "sk",
           "start": 109856,
           "end": 111092
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/sk/pattern_load_catalog.s",
+      "owner": "rendering/sk",
+      "responsibility": "Pattern-load identifiers, relative pointer macro and complete primary level and scene art request catalog.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 552,
+      "origin": {
+        "commit": "8833ccd9229820266e103e4386e7dc75285a1913",
+        "path": "sonic3k.s",
+        "first_line": 781,
+        "last_line": 1329,
+        "sha256": "f786bce62d156a1307cc220d2d97e58c35f97937f733306a655e659da90b0176"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 598924,
+          "end": 600590
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 598924,
+          "end": 600590
         }
       ]
     },
@@ -67433,6 +68083,91 @@
           "component": "sk",
           "start": 164280,
           "end": 164532
+        }
+      ]
+    },
+    {
+      "path": "src/system/debug/s3/placement_catalog.s",
+      "owner": "system/debug/s3",
+      "responsibility": "Zone debug-list pointer table and literal inclusions of each owned placement catalog.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 41,
+      "origin": {
+        "commit": "8833ccd9229820266e103e4386e7dc75285a1913",
+        "path": "s3.s",
+        "first_line": 1171,
+        "last_line": 1208,
+        "sha256": "3235db04794713da03184ba9918d658bfde912fa210810c033286cd3a80e6c79"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 374662,
+          "end": 380054
+        },
+        {
+          "profile": "s3-eu",
+          "start": 374662,
+          "end": 380054
+        },
+        {
+          "profile": "s3-jp",
+          "start": 374662,
+          "end": 380054
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2471814,
+          "end": 2477206
+        }
+      ]
+    },
+    {
+      "path": "src/system/debug/s3/placement_control.s",
+      "owner": "system/debug/s3",
+      "responsibility": "Debug placement state, movement, object selection and player restoration callbacks.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 232,
+      "origin": {
+        "commit": "8833ccd9229820266e103e4386e7dc75285a1913",
+        "path": "s3.s",
+        "first_line": 942,
+        "last_line": 1170,
+        "sha256": "f2cd8286bed9a81c371a70b26f366ea20cfc4733c9feb28c8cb4902ea4752c70"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 374048,
+          "end": 374662
+        },
+        {
+          "profile": "s3-eu",
+          "start": 374048,
+          "end": 374662
+        },
+        {
+          "profile": "s3-jp",
+          "start": 374048,
+          "end": 374662
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2471200,
+          "end": 2471814
         }
       ]
     },
@@ -69211,6 +69946,71 @@
       ],
       "applicability": "emitted",
       "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/system/debug/sk/placement_catalog.s",
+      "owner": "system/debug/sk",
+      "responsibility": "Zone debug-list pointer table and literal inclusions of each owned placement catalog.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 37,
+      "origin": {
+        "commit": "8833ccd9229820266e103e4386e7dc75285a1913",
+        "path": "sonic3k.s",
+        "first_line": 1578,
+        "last_line": 1611,
+        "sha256": "d29ea4e947571b2ec76678bd146cb78f34dbd5fada9b007aa3711997d10a52fd"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 601258,
+          "end": 609954
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 601258,
+          "end": 609954
+        }
+      ]
+    },
+    {
+      "path": "src/system/debug/sk/placement_control.s",
+      "owner": "system/debug/sk",
+      "responsibility": "Debug placement state, movement, object selection and player restoration callbacks.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 251,
+      "origin": {
+        "commit": "8833ccd9229820266e103e4386e7dc75285a1913",
+        "path": "sonic3k.s",
+        "first_line": 1330,
+        "last_line": 1577,
+        "sha256": "c7af6118087f32d7252c24b5be294b4d064723d9421840ebb2e76d956c618862"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 600590,
+          "end": 601258
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 600590,
+          "end": 601258
+        }
+      ]
     },
     {
       "path": "src/system/s3/bootstrap.s",

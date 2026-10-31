@@ -2,12 +2,6 @@
   "schema_version": 1,
   "definitions": [
     {
-      "name": "plcptr",
-      "source": "s3.s",
-      "sha256": "230bfc4f4e61b8ddac232292679dcb5747bfe58cf0d7ad0024f706c866097403",
-      "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
-    },
-    {
       "name": "dbglistinclude",
       "source": "sonic3k.macros.s",
       "sha256": "b480d1e55ab2f94a0e1ed6047de50c8f82f38371bdce8e31d92ebbba8571eef1",
@@ -153,7 +147,7 @@
     },
     {
       "name": "plcptr",
-      "source": "sonic3k.s",
+      "source": "src/rendering/s3/pattern_load_catalog.s",
       "sha256": "230bfc4f4e61b8ddac232292679dcb5747bfe58cf0d7ad0024f706c866097403",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     },
@@ -167,6 +161,12 @@
       "name": "palptr",
       "source": "src/rendering/shared/palettes/palette_pointers_s3.s",
       "sha256": "f379602ed4a2ec38bad6b53a61cf97312c014c8f1b388931974eb32e66984f78",
+      "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
+    },
+    {
+      "name": "plcptr",
+      "source": "src/rendering/sk/pattern_load_catalog.s",
+      "sha256": "230bfc4f4e61b8ddac232292679dcb5747bfe58cf0d7ad0024f706c866097403",
       "reason": "Reviewed data-emitter definition with its complete bounded helper closure."
     }
   ]
