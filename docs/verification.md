@@ -64,3 +64,11 @@ Post-tag reports use separate files below `build/release/`; they never overwrite
 the pre-tag reports or hashes that establish full aggregate acceptance. A
 metadata-only check is not sufficient. Tests use in-memory tag observations and
 do not create release refs.
+
+`make source-2-release-audit` can also recheck an already completed pre-tag
+aggregate. It first requires every completed stage and the unchanged accepted
+final audit, then checks current artifacts again. The resulting preservation and
+2.0 re-audits use `build/release/reaudit.json` and
+`build/release/source-2-reaudit.json`. They preserve the primary completed
+aggregate and both accepted audit files. An in-progress aggregate still uses the
+final audit stage's ordinary report; post-tag checks remain a separate mode.

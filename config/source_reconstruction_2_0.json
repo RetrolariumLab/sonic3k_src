@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 72
+    "commit_count": 73
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -479,9 +479,15 @@
       "commits": ["3390f1ba112d3c56cdc0ba71070f8b63c202e731"]
     },
     {
+      "id": "change-c18a4a8ceb0f",
+      "kind": "tooling",
+      "summary": "Prove bounded content edits in actual rebuilt cartridge images",
+      "commits": ["c18a4a8ceb0fa2311481ed470ca7b531bfe20cc2"]
+    },
+    {
       "id": "current-release-stage",
       "kind": "tooling",
-      "summary": "Prove bounded nonzero edits through actual five-profile ROM rebuilding, independently derived consumer and checksum changes, unchanged assembler symbols and rejected invalid writes.",
+      "summary": "Allow exact completed pre-tag aggregates to be audited again while preserving accepted primary reports and retaining separate post-tag identity checks.",
       "commits": ["release-commit"]
     }
   ],

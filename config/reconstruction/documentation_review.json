@@ -115,7 +115,7 @@
     {
       "path": "docs/verification.md",
       "decision": "reworked",
-      "reason": "Require real bounded palette edits through actual five-profile ROM assembly, independently calculated exact differences and unchanged symbols, beyond zero-edit round trips."
+      "reason": "Describe exact completed pre-tag re-audits without overwriting accepted reports, separate post-tag tag identity checks and current real-edit evidence."
     },
     {
       "path": "README.md",

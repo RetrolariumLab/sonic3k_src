@@ -39,13 +39,14 @@ def validate_content(report, manifest, source, tooling, images):
 
 
 def validate_aggregate(running, source, tooling, public, post_tag=False, final_audit_hash=None):
-    expected_stages = STAGES if post_tag else STAGES[:-1]
-    if post_tag and (
+    completed = running.get("complete") is True
+    expected_stages = STAGES if post_tag or completed else STAGES[:-1]
+    if (post_tag or completed) and (
         running.get("complete") is not True
         or final_audit_hash is None
         or running.get("audit_sha256") != final_audit_hash
     ):
-        raise ValueError("Post-tag audit requires the completed exact aggregate and its final audit")
+        raise ValueError("Completed re-audit requires the exact finished aggregate and its final audit")
     if (
         running.get("public_sha256") != public
         or running.get("source_sha256") != source
@@ -59,7 +60,8 @@ def audit(post_tag=False):
     manifest, documents, history = metadata()
     source, tooling, public = source_fingerprint(), tooling_fingerprint(), public_fingerprint()
     running = load(DESTINATION)
-    final_audit_hash = sha((ROOT / "build/release/source-2-audit.json").read_bytes()) if post_tag else None
+    completed = running.get("complete") is True
+    final_audit_hash = sha((ROOT / "build/release/source-2-audit.json").read_bytes()) if post_tag or completed else None
     validate_aggregate(running, source, tooling, public, post_tag, final_audit_hash)
     first = load("build/release/source-1-check.json")
     if (
@@ -69,7 +71,7 @@ def audit(post_tag=False):
         or running.get("source_1_report_sha256") != sha((ROOT / "build/release/source-1-check.json").read_bytes())
     ):
         raise ValueError("The full current Source 1.0 gate has not passed")
-    release.audit(post_tag=post_tag)  # Recheck artifacts without replacing pre-tag acceptance reports.
+    release.audit(post_tag=post_tag, reaudit=completed and not post_tag)
     content = load("build/authoring/zero-edit-containers.json")
     validate_content(content, manifest, source, tooling, image_records())
     from scripts.authoring.edited_containers import audit as audit_edited
@@ -126,7 +128,16 @@ def audit(post_tag=False):
     }
     if post_tag:
         report["release_identity"] = load("build/release/post-tag.json")["release_identity"]
-    save("build/release/source-2-post-tag.json" if post_tag else "build/release/source-2-audit.json", report)
+    if completed and not post_tag:
+        report["preservation_reaudit_sha256"] = sha((ROOT / "build/release/reaudit.json").read_bytes())
+    destination = (
+        "build/release/source-2-post-tag.json"
+        if post_tag
+        else "build/release/source-2-reaudit.json"
+        if completed
+        else "build/release/source-2-audit.json"
+    )
+    save(destination, report)
     print("[OK] Source 2.0 current preservation, content, documentation and history audit")
     return report
 

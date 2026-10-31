@@ -111,3 +111,14 @@ class CompletedAggregateTests(unittest.TestCase):
             validate_aggregate(report, "source", "tools", "public", True, "audit")
         with self.assertRaises(ValueError):
             validate_aggregate(self.report(), "source", "tools", "public")
+
+    def test_completed_pre_tag_reaudit_requires_the_unchanged_finished_audit(self):
+        report = self.report()
+        validate_aggregate(report, "source", "tools", "public", False, "audit")
+        for field, value in (
+            ("audit_sha256", "changed"),
+            ("stages", report["stages"][:-1]),
+            ("source_sha256", "changed"),
+        ):
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                validate_aggregate(report | {field: value}, "source", "tools", "public", False, "audit")

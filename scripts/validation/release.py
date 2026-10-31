@@ -158,7 +158,9 @@ def check_metadata():
     return manifest
 
 
-def audit(post_tag=False):
+def audit(post_tag=False, *, reaudit=False):
+    if post_tag and reaudit:
+        raise ValueError("Post-tag and completed pre-tag re-audits use distinct reports")
     manifest = check_metadata()
     tags = audit_tags(manifest, post_tag)
     if (
@@ -225,7 +227,13 @@ def audit(post_tag=False):
         "privacy": privacy,
         "release_identity": tags,
     }
-    destination = "build/release/post-tag.json" if post_tag else "build/release/audit.json"
+    destination = (
+        "build/release/post-tag.json"
+        if post_tag
+        else "build/release/reaudit.json"
+        if reaudit
+        else "build/release/audit.json"
+    )
     atomic(ROOT / destination, (json.dumps(report, indent=2) + "\n").encode())
     print("[OK] Preservation publication audit, runtime matrix and clean history")
 
