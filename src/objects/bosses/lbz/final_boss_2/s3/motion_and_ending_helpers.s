@@ -1,0 +1,356 @@
+; Owner: objects/bosses/lbz/final_boss_2/s3
+; Responsibility: Launch Base final battle and ending motion, collision, art scaling and external player-sprite animation helpers
+; Source provenance and ranges: config/reconstruction/source_layout.json
+
+; =============== S U B R O U T I N E =======================================
+
+sub_51BC8:
+                movea.w parent3(a0),a1
+                btst    #7,art_tile(a1)
+                beq.s   locret_51BE0
+                bset    #7,art_tile(a0)
+                move.l  (sp),(a0)
+                move.b  d0,collision_flags(a0)
+
+locret_51BE0:
+                rts
+; End of function sub_51BC8
+
+; ---------------------------------------------------------------------------
+; unused
+                movea.w $44(a0),a1
+                movea.w parent3(a0),a2
+                move.w  x_pos(a1),d0
+                moveq   #$10,d2
+                btst    #0,render_flags(a2)
+                beq.s   loc_51BFA
+                neg.w   d2
+
+loc_51BFA:
+                add.w   d2,d0
+                move.w  x_pos(a2),d1
+                moveq   #$C,d2
+                btst    #0,render_flags(a2)
+                beq.s   loc_51C0C
+                neg.w   d2
+
+loc_51C0C:
+                add.w   d2,d1
+                sub.w   d1,d0
+                asr.w   #1,d0
+                add.w   d0,d1
+                move.w  d1,x_pos(a0)
+                move.w  y_pos(a1),d0
+                subq.w  #4,d0
+                move.w  y_pos(a2),d1
+                subq.w  #4,d1
+                sub.w   d1,d0
+                asr.w   #1,d0
+                add.w   d0,d1
+                move.w  d1,y_pos(a0)
+                rts
+; ---------------------------------------------------------------------------
+
+loc_51C30:
+                jsr     (Random_Number).l
+                andi.w  #6,d0
+                move.w  d0,$3A(a0)
+                move.w  (Camera_X_pos).w,d1
+                move.w  #$1A8,d2
+                move.w  #-$300,d3
+                btst    #0,render_flags(a0)
+                beq.s   loc_51C58
+                move.w  #-$68,d2
+                neg.w   d3
+
+loc_51C58:
+                add.w   d2,d1
+                move.w  d1,x_pos(a0)
+                move.w  d3,x_vel(a0)
+                move.w  (Camera_Y_pos).w,d1
+                move.w  word_51C7E(pc,d0.w),d2
+                add.w   d1,d2
+                move.w  d2,y_pos(a0)
+                move.w  word_51C86(pc,d0.w),y_vel(a0)
+                move.w  #8,$3C(a0)
+                rts
+; ---------------------------------------------------------------------------
+word_51C7E:
+                dc.w    $60,   $10,   $A0,   $80
+word_51C86:
+                dc.w    0,  $200, -$200,     0
+; ---------------------------------------------------------------------------
+
+loc_51C8E:
+                move.w  #-$300,d0
+                btst    #0,render_flags(a0)
+                beq.s   loc_51C9C
+                neg.w   d0
+
+loc_51C9C:
+                move.w  d0,x_vel(a0)
+                jsr     (Random_Number).l
+                andi.w  #$7F,d0
+                addi.w  #$C0,d0
+                move.w  d0,$2E(a0)
+                rts
+
+; =============== S U B R O U T I N E =======================================
+
+sub_51CB4:
+                move.w  (Camera_X_pos).w,d0
+                tst.w   x_vel(a0)
+                bmi.s   loc_51CCA
+                add.w   d2,d0
+                cmp.w   x_pos(a0),d0
+                bls.s   loc_51CD2
+                bra.w   locret_51CDC
+; ---------------------------------------------------------------------------
+
+loc_51CCA:
+                add.w   d1,d0
+                cmp.w   x_pos(a0),d0
+                blo.s   locret_51CDC
+
+loc_51CD2:
+                bchg    #0,render_flags(a0)
+                neg.w   x_vel(a0)
+
+locret_51CDC:
+                rts
+; End of function sub_51CB4
+
+; =============== S U B R O U T I N E =======================================
+
+sub_51CDE:
+                cmpi.b  #8,routine(a0)
+                blo.s   locret_51D50
+                tst.b   collision_flags(a0)
+                bne.s   locret_51D50
+                move.b  collision_property(a0),d0
+                beq.s   loc_51D52
+                tst.b   $20(a0)
+                bne.s   loc_51D1C
+                cmpi.b  #$A,routine(a0)
+                bne.s   loc_51D06
+                move.w  #8,$3A(a0)
+
+loc_51D06:
+                move.b  #$3C,$20(a0)
+                moveq   #signextendB(sfx_BossHit),d0
+                jsr     (Play_SFX).l
+                movea.w $44(a0),a1
+                clr.b   collision_flags(a1)
+
+loc_51D1C:
+                bset    #6,status(a0)
+                moveq   #0,d0
+                btst    #0,$20(a0)
+                bne.s   loc_51D30
+                addi.w  #2*6,d0
+
+loc_51D30:
+                bsr.w   sub_51D88
+                subq.b  #1,$20(a0)
+                bne.s   locret_51D50
+                bclr    #6,status(a0)
+                move.b  $25(a0),collision_flags(a0)
+                movea.w $44(a0),a1
+                move.b  #$AD,collision_flags(a1)
+
+locret_51D50:
+                rts
+; ---------------------------------------------------------------------------
+
+loc_51D52:
+                move.l  #Wait_Draw,(a0)
+                move.l  #loc_510DE,$34(a0)
+                jsr     BossDefeated_StopTimer(pc)
+                lea     (Child6_CreateBossExplosion).l,a2
+                jsr     (CreateChild1_Normal).l
+                bne.s   loc_51D78
+                move.b  #4,subtype(a1)
+
+loc_51D78:
+                tst.b   $30(a0)
+; Bug: this branch is inverted, freeing the player if they're _not_ being held
+                bne.s   loc_51D82
+                jsr     Restore_PlayerControl(pc)
+
+loc_51D82:
+                jmp     (SaveGame).l
+; End of function sub_51CDE
+
+; =============== S U B R O U T I N E =======================================
+
+sub_51D88:
+                lea     word_51D94(pc),a1
+                lea     word_51DA0(pc,d0.w),a2
+                jmp     CopyWordData_6(pc)
+; End of function sub_51D88
+
+; ---------------------------------------------------------------------------
+word_51D94:
+                dc.w    Normal_palette_line_2+$08, Normal_palette_line_2+$0E, Normal_palette_line_2+$10
+                dc.w    Normal_palette_line_2+$18, Normal_palette_line_2+$1A, Normal_palette_line_2+$1C
+word_51DA0:
+                dc.w    8,    $A,     4,  $644,  $422,     0
+                dc.w    $888,  $666,  $AAA,  $AAA,  $EEE,  $EEE
+
+; =============== S U B R O U T I N E =======================================
+
+Perform_Art_Scaling:
+                clr.w   (_unkF740).w
+                move.l  a0,-(sp)
+                jsr     (Init_ArtScaling).l
+                movea.l (sp)+,a0
+                move.l  a0,-(sp)
+                move.w  art_tile(a0),d0
+                jsr     (sub_22C90).l
+                movea.l (sp)+,a0
+                move.w  (_unkF740).w,d3
+                lsl.w   #4,d3
+                move.l  #Kos_decomp_buffer,d1
+                move.w  $3A(a0),d2
+                jmp     (Add_To_DMA_Queue).l
+; End of function Perform_Art_Scaling
+
+; =============== S U B R O U T I N E =======================================
+
+sub_51DEA:
+                move.w  x_vel(a0),d0
+                addi.w  #-$28,d0
+                cmpi.w  #-$80,d0
+                blt.s   loc_51DFC
+                move.w  d0,x_vel(a0)
+
+loc_51DFC:
+                move.w  y_vel(a0),d0
+                addi.w  #8,d0
+                cmpi.w  #$40,d0
+                bge.s   locret_51E0E
+                move.w  d0,y_vel(a0)
+
+locret_51E0E:
+                rts
+; End of function sub_51DEA
+
+; =============== S U B R O U T I N E =======================================
+
+sub_51E10:
+                bsr.w   sub_4B30A
+                move.w  $30(a0),d2
+                move.w  $34(a0),d3
+                moveq   #0,d0
+                move.b  $40(a0),d0
+                addq.w  #4,d0
+                move.l  #$100,d4
+                divu.w  d0,d4
+                sub.w   d4,d2
+                sub.w   d4,d3
+                move.w  d2,x_pos(a0)
+                move.w  d3,y_pos(a0)
+                rts
+; End of function sub_51E10
+
+; =============== S U B R O U T I N E =======================================
+
+sub_51E3A:
+                subq.w  #1,$1C(a0)
+                bpl.s   loc_51E62
+                moveq   #0,d0
+                move.b  anim_frame(a0),d0
+                addq.b  #1,d0
+                cmpi.b  #6,d0
+                bhi.s   loc_51E80
+                move.b  d0,anim_frame(a0)
+                add.w   d0,d0
+                move.w  word_51E86(pc,d0.w),$1C(a0)
+                add.w   d0,d0
+                move.l  off_51E94(pc,d0.w),$42(a0)
+
+loc_51E62:
+                subq.b  #1,$25(a0)
+                bpl.s   locret_51E7E
+                move.b  #4,$25(a0)
+                move.b  $40(a0),d0
+                addq.b  #1,d0
+                bmi.s   locret_51E7E
+                move.b  d0,$40(a0)
+                bsr.w   Perform_Art_Scaling
+
+locret_51E7E:
+                rts
+; ---------------------------------------------------------------------------
+
+loc_51E80:
+                jmp     (Go_Delete_Sprite).l
+; End of function sub_51E3A
+
+; ---------------------------------------------------------------------------
+word_51E86:
+                dc.w    $20
+                dc.w    $20
+                dc.w    $10
+                dc.w    8
+                dc.w    8
+                dc.w    8
+                dc.w    $200
+off_51E94:
+                dc.l    ArtScaled_LBZ2UnusedRobotnik
+                dc.l    ArtScaled_LBZ2UnusedRobotnik
+                dc.l    ArtScaled_LBZ2UnusedRobotnik+$1000
+                dc.l    ArtScaled_LBZ2UnusedRobotnik+$2000
+                dc.l    ArtScaled_LBZ2UnusedRobotnik+$3000
+                dc.l    ArtScaled_LBZ2UnusedRobotnik+$4000
+                dc.l    ArtScaled_LBZ2UnusedRobotnik+$5000
+
+; =============== S U B R O U T I N E =======================================
+
+sub_51EB0:
+                move.w  $3A(a0),d1
+                movea.l off_51EC6(pc,d1.w),a1
+                lea     (Normal_palette).w,a2
+                moveq   #bytesToLcnt($20),d0
+
+loc_51EBE:
+                move.l  (a1)+,(a2)+
+                dbf     d0,loc_51EBE
+                rts
+; End of function sub_51EB0
+
+; ---------------------------------------------------------------------------
+off_51EC6:
+                dc.l    Pal_SonicEndPose
+                dc.l    Pal_TailsEndPose
+                dc.l    Pal_SuperSonicEndPose
+                dc.l    Pal_SuperSonicEndPose
+
+; =============== S U B R O U T I N E =======================================
+
+Animate_ExternalPlayerSprite:
+                subq.b  #1,anim_frame_timer(a0)
+                bpl.s   locret_51F10
+                lea     (Player_1).w,a2
+                move.b  (a1),anim_frame_timer(a0)
+                moveq   #0,d0
+                move.b  anim_frame(a0),d0
+                addq.b  #2,d0
+                move.b  d0,anim_frame(a0)
+                move.b  1(a1,d0.w),d1
+                cmpi.b  #-1,d1
+                beq.s   loc_51F12
+                move.b  d1,mapping_frame(a2)
+                bclr    #0,render_flags(a2)
+                tst.b   2(a1,d0.w)
+                beq.s   locret_51F10
+                bset    #0,render_flags(a2)
+
+locret_51F10:
+                rts
+; ---------------------------------------------------------------------------
+
+loc_51F12:
+                movea.l $34(a0),a1
+                jmp     (a1)
+; End of function Animate_ExternalPlayerSprite

@@ -840,7 +840,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 31417,
+      "physical_lines": 19021,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "s3.s",
@@ -9651,6 +9651,311 @@
       ]
     },
     {
+      "path": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "owner": "objects/bosses/cnz/end_boss/s3",
+      "responsibility": "Carnival Night end-boss battle state, attacks and coordinated child actors.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 656,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 3186,
+        "last_line": 3837,
+        "sha256": "2e948460377ec1b8836d582c46243cdcb9adf5ebe20914f144f04ac45a38109a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_4C688",
+          "kind": "terminal-tail",
+          "reason": "The complete final debris actor ends in a drawing-service tail call and contains no original independent return boundary.",
+          "origin_first_line": 3827,
+          "origin_terminal_line": 3837,
+          "origin_end_line": 3837
+        }
+      ],
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 311184,
+          "end": 313010
+        },
+        {
+          "profile": "s3-eu",
+          "start": 311184,
+          "end": 313010
+        },
+        {
+          "profile": "s3-jp",
+          "start": 311184,
+          "end": 313010
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2408336,
+          "end": 2410162
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
+      "owner": "objects/bosses/cnz/end_boss/s3",
+      "responsibility": "Carnival Night end-boss movement, collision, attack and child positioning helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 207,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 3838,
+        "last_line": 4041,
+        "sha256": "ebc1df9b12e6001a9cbb61cf526c82bd97bb9eca9753014044e315614455e896"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 313010,
+          "end": 313434
+        },
+        {
+          "profile": "s3-eu",
+          "start": 313010,
+          "end": 313434
+        },
+        {
+          "profile": "s3-jp",
+          "start": 313010,
+          "end": 313434
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2410162,
+          "end": 2410586
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/cnz/end_boss/s3/object_catalog.s",
+      "owner": "objects/bosses/cnz/end_boss/s3",
+      "responsibility": "Carnival Night end-boss object attributes, child records, animation and palette resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 102,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 4042,
+        "last_line": 4140,
+        "sha256": "ec27510bba19607527d4be9157a15e851852218b5125b60278dd389e0557e9b2"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 313434,
+          "end": 313662
+        },
+        {
+          "profile": "s3-eu",
+          "start": 313434,
+          "end": 313662
+        },
+        {
+          "profile": "s3-jp",
+          "start": 313434,
+          "end": 313662
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2410586,
+          "end": 2410814
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/cnz/miniboss/s3/coil_and_sparks.s",
+      "owner": "objects/bosses/cnz/miniboss/s3",
+      "responsibility": "Carnival Night miniboss coil, timed sparks, bounce effect and debris actors.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 173,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 2690,
+        "last_line": 2859,
+        "sha256": "5e9ffb6ae7da9ff2dc7d9690b2dd8a30d2f74e6d1e6abf2c4a57c14a36a9e837"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 309820,
+          "end": 310338
+        },
+        {
+          "profile": "s3-eu",
+          "start": 309820,
+          "end": 310338
+        },
+        {
+          "profile": "s3-jp",
+          "start": 309820,
+          "end": 310338
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2406972,
+          "end": 2407490
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/cnz/miniboss/s3/main_and_top.s",
+      "owner": "objects/bosses/cnz/miniboss/s3",
+      "responsibility": "Carnival Night miniboss battle controller, top actor and block explosion state.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 406,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 2287,
+        "last_line": 2689,
+        "sha256": "9faff23095d8527c506421707c6aacb67881f263c9bc6096e10ee03176c4f00e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 308648,
+          "end": 309820
+        },
+        {
+          "profile": "s3-eu",
+          "start": 308648,
+          "end": 309820
+        },
+        {
+          "profile": "s3-jp",
+          "start": 308648,
+          "end": 309820
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2405800,
+          "end": 2406972
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/cnz/miniboss/s3/motion_and_collision.s",
+      "owner": "objects/bosses/cnz/miniboss/s3",
+      "responsibility": "Carnival Night miniboss swing, collision, defeat, palette and player response helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 244,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 2860,
+        "last_line": 3100,
+        "sha256": "e2e9077fefdd3ae8f9aa73628b4f54ee05696ed8e217771401c3534430938176"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 310338,
+          "end": 310912
+        },
+        {
+          "profile": "s3-eu",
+          "start": 310338,
+          "end": 310912
+        },
+        {
+          "profile": "s3-jp",
+          "start": 310338,
+          "end": 310912
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2407490,
+          "end": 2408064
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/cnz/miniboss/s3/object_catalog.s",
+      "owner": "objects/bosses/cnz/miniboss/s3",
+      "responsibility": "Carnival Night miniboss collision ranges, object attributes, child records, animation and palette resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 88,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 3101,
+        "last_line": 3185,
+        "sha256": "fc0d918d8928d852bdfa84595be6142eb933e50ad35be8b273325ae07dccd195"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 310912,
+          "end": 311184
+        },
+        {
+          "profile": "s3-eu",
+          "start": 310912,
+          "end": 311184
+        },
+        {
+          "profile": "s3-jp",
+          "start": 310912,
+          "end": 311184
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2408064,
+          "end": 2408336
+        }
+      ]
+    },
+    {
       "path": "src/objects/bosses/common/s3/robotnik_heads.s",
       "owner": "objects/bosses/common/s3",
       "responsibility": "Shared Robotnik head actors, expression variants and boss-scene display states.",
@@ -9732,6 +10037,216 @@
           "component": "s3-us",
           "start": 2384000,
           "end": 2384962
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/fbz/miniboss/s3/battle_and_attacks.s",
+      "owner": "objects/bosses/fbz/miniboss/s3",
+      "responsibility": "Flying Battery miniboss battle state, attacks and coordinated child actors.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 807,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 4141,
+        "last_line": 4944,
+        "sha256": "23969dd6accb30e1a7ef7bfc389b83ab12e517cb9ba3d8b3e5b5364bb3309849"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-family",
+        "reason": "The complete battle and attached-child state graph retains its local dispatch and frame sequences below 900 physical lines; utilities and object data have separate owners.",
+        "proof_target": "check-source-layout"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 313662,
+          "end": 315832
+        },
+        {
+          "profile": "s3-eu",
+          "start": 313662,
+          "end": 315832
+        },
+        {
+          "profile": "s3-jp",
+          "start": 313662,
+          "end": 315832
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2410814,
+          "end": 2412984
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/fbz/miniboss/s3/motion_helpers.s",
+      "owner": "objects/bosses/fbz/miniboss/s3",
+      "responsibility": "Flying Battery miniboss motion, collision, hit response and child positioning helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 355,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 4945,
+        "last_line": 5296,
+        "sha256": "603e2240f5b5d7e43e4e90ed560d3775874ee04488b4d6afab0556582a0f2f36"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 315832,
+          "end": 316520
+        },
+        {
+          "profile": "s3-eu",
+          "start": 315832,
+          "end": 316520
+        },
+        {
+          "profile": "s3-jp",
+          "start": 315832,
+          "end": 316520
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2412984,
+          "end": 2413672
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/fbz/miniboss/s3/object_catalog.s",
+      "owner": "objects/bosses/fbz/miniboss/s3",
+      "responsibility": "Flying Battery miniboss object attributes, child records and palette resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 90,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 5297,
+        "last_line": 5383,
+        "sha256": "1daa8ad32cd4741e5aa234eb58694bbafb1ddcf9fc197fb031836c1c31f74f17"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 316520,
+          "end": 316760
+        },
+        {
+          "profile": "s3-eu",
+          "start": 316520,
+          "end": 316760
+        },
+        {
+          "profile": "s3-jp",
+          "start": 316520,
+          "end": 316760
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2413672,
+          "end": 2413912
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/fbz/s3/act2_subboss.s",
+      "owner": "objects/bosses/fbz/s3",
+      "responsibility": "Flying Battery act-two subboss lifecycle, battle state, coordinated actors and resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 591,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 5384,
+        "last_line": 5971,
+        "sha256": "21446e1b1ced563644b20d663048fef9630c21314088ba23f703195f86814f0e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 316760,
+          "end": 318368
+        },
+        {
+          "profile": "s3-eu",
+          "start": 316760,
+          "end": 318368
+        },
+        {
+          "profile": "s3-jp",
+          "start": 316760,
+          "end": 318368
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2413912,
+          "end": 2415520
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/fbz/s3/end_boss.s",
+      "owner": "objects/bosses/fbz/s3",
+      "responsibility": "Flying Battery end-boss lifecycle, attacks, child actors, helpers and private resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 791,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 5972,
+        "last_line": 6759,
+        "sha256": "cd99acfe5a75082407a9864c0ef4d81edb9024d2b58f7557794cc6bba656a7b0"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-family",
+        "reason": "One complete named boss family keeps its battle state, coordinated actors, shared helpers and private object records together below 900 physical lines.",
+        "proof_target": "check-source-layout"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 318368,
+          "end": 320382
+        },
+        {
+          "profile": "s3-eu",
+          "start": 318368,
+          "end": 320382
+        },
+        {
+          "profile": "s3-jp",
+          "start": 318368,
+          "end": 320382
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2415520,
+          "end": 2417534
         }
       ]
     },
@@ -10107,6 +10622,801 @@
           "component": "s3-us",
           "start": 2392330,
           "end": 2392818
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/icz/s3/end_boss.s",
+      "owner": "objects/bosses/icz/s3",
+      "responsibility": "IceCap end-boss lifecycle, attacks, child actors, helpers and private resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 780,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 7625,
+        "last_line": 8401,
+        "sha256": "f0f1f1dee07194f47a2002715ddeee71c29e113e860e1dd1931852813559b57a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-family",
+        "reason": "One complete named boss family keeps its battle state, coordinated actors, shared helpers and private object records together below 900 physical lines.",
+        "proof_target": "check-source-layout"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 322766,
+          "end": 324724
+        },
+        {
+          "profile": "s3-eu",
+          "start": 322766,
+          "end": 324724
+        },
+        {
+          "profile": "s3-jp",
+          "start": 322766,
+          "end": 324724
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2419918,
+          "end": 2421876
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/icz/s3/miniboss.s",
+      "owner": "objects/bosses/icz/s3",
+      "responsibility": "IceCap miniboss lifecycle, attacks, child actors, helpers and private resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 854,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 6760,
+        "last_line": 7610,
+        "sha256": "3d63cc9da29c55e71cb0a9beba6d2f44d069ee5a6fa1349e75b5ab4f03b4a552"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-family",
+        "reason": "One complete named boss family keeps its battle state, coordinated actors, shared helpers and private object records together below 900 physical lines.",
+        "proof_target": "check-source-layout"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 320382,
+          "end": 322530
+        },
+        {
+          "profile": "s3-eu",
+          "start": 320382,
+          "end": 322530
+        },
+        {
+          "profile": "s3-jp",
+          "start": 320382,
+          "end": 322530
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2417534,
+          "end": 2419682
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/icz/s3/miniboss_palette_script.s",
+      "owner": "objects/bosses/icz/s3",
+      "responsibility": "IceCap miniboss palette script pointers, header, colour frames and script terminator.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 17,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 7611,
+        "last_line": 7624,
+        "sha256": "86baea86a862321786b96bf624f43dbb42a9d11072725ad87fc26fcc5bc212b6"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 322530,
+          "end": 322766
+        },
+        {
+          "profile": "s3-eu",
+          "start": 322530,
+          "end": 322766
+        },
+        {
+          "profile": "s3-jp",
+          "start": 322530,
+          "end": 322766
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2419682,
+          "end": 2419918
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "owner": "objects/bosses/lbz/final_boss_1/s3",
+      "responsibility": "Launch Base first final boss battle state, attacks and coordinated child actors.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 605,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 8932,
+        "last_line": 9533,
+        "sha256": "4f89bae61dede2d866bf5d719069171da043ef2980a424385a94fc2bf0a35f16"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 326060,
+          "end": 327646
+        },
+        {
+          "profile": "s3-eu",
+          "start": 326060,
+          "end": 327646
+        },
+        {
+          "profile": "s3-jp",
+          "start": 326060,
+          "end": 327646
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2423212,
+          "end": 2424798
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "owner": "objects/bosses/lbz/final_boss_1/s3",
+      "responsibility": "Launch Base first final boss motion, collision, hit response and child positioning helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 294,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 9534,
+        "last_line": 9824,
+        "sha256": "ee3b917737f33632c990fdb97e133f1e16073d38b6a0b573e1ee5d0e2ee6cd8b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 327646,
+          "end": 328356
+        },
+        {
+          "profile": "s3-eu",
+          "start": 327646,
+          "end": 328356
+        },
+        {
+          "profile": "s3-jp",
+          "start": 327646,
+          "end": 328356
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2424798,
+          "end": 2425508
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "owner": "objects/bosses/lbz/final_boss_1/s3",
+      "responsibility": "Launch Base first final boss object attributes, child records, animation and palette resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 147,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 9825,
+        "last_line": 9968,
+        "sha256": "54fca0077f3d7cafcf4600589a1883f34bee90ac1cf151a8cbafd86020bf3ad1"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 328356,
+          "end": 328718
+        },
+        {
+          "profile": "s3-eu",
+          "start": 328356,
+          "end": 328718
+        },
+        {
+          "profile": "s3-jp",
+          "start": 328356,
+          "end": 328718
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2425508,
+          "end": 2425870
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "owner": "objects/bosses/lbz/final_boss_2/s3",
+      "responsibility": "Launch Base second final boss attachments, arms, circular motion, attack actors and detached effects.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 427,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 11308,
+        "last_line": 11731,
+        "sha256": "8014b54605bd23d5e113390a42ca5b3cebb01cf2f06f926a19ebe6d5d8e63614"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 332238,
+          "end": 333476
+        },
+        {
+          "profile": "s3-eu",
+          "start": 332238,
+          "end": 333476
+        },
+        {
+          "profile": "s3-jp",
+          "start": 332238,
+          "end": 333476
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2429390,
+          "end": 2430628
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "owner": "objects/bosses/lbz/final_boss_2/s3",
+      "responsibility": "Launch Base second final boss initialization, battle state, player interaction and defeat control.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 507,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 10804,
+        "last_line": 11307,
+        "sha256": "3cfee8261cba08f55dc77d3e3e27122d79480defb05ad07fe64147ed33df7c05"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 330922,
+          "end": 332238
+        },
+        {
+          "profile": "s3-eu",
+          "start": 330922,
+          "end": 332238
+        },
+        {
+          "profile": "s3-jp",
+          "start": 330922,
+          "end": 332238
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2428074,
+          "end": 2429390
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "owner": "objects/bosses/lbz/final_boss_2/s3",
+      "responsibility": "Launch Base second final boss defeat, ending pose actors, palette transition and ending handoff.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 397,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 11732,
+        "last_line": 12125,
+        "sha256": "023894d711bbff69fa8564efb37ee6d5df48ccb92e8f75bf9587beab4509eeaa"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 333476,
+          "end": 334668
+        },
+        {
+          "profile": "s3-eu",
+          "start": 333476,
+          "end": 334668
+        },
+        {
+          "profile": "s3-jp",
+          "start": 333476,
+          "end": 334668
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2430628,
+          "end": 2431820
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lbz/final_boss_2/s3/motion_and_ending_helpers.s",
+      "owner": "objects/bosses/lbz/final_boss_2/s3",
+      "responsibility": "Launch Base final battle and ending motion, collision, art scaling and external player-sprite animation helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 356,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 12157,
+        "last_line": 12509,
+        "sha256": "e633335d9f9a7726174b1b7c5066a3351fd3a18a8d4d3772d0b73c9eb7990529"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 334792,
+          "end": 335640
+        },
+        {
+          "profile": "s3-eu",
+          "start": 334792,
+          "end": 335640
+        },
+        {
+          "profile": "s3-jp",
+          "start": 334792,
+          "end": 335640
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2431944,
+          "end": 2432792
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lbz/final_boss_2/s3/object_and_ending_catalog.s",
+      "owner": "objects/bosses/lbz/final_boss_2/s3",
+      "responsibility": "Launch Base second final boss and unused Robotnik attributes, child records, ending poses, palettes and fade catalogs.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 238,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 12510,
+        "last_line": 12744,
+        "sha256": "5149eb940bd4c08a62d95aded1562aef8399c52fbcd1f779ddafe6c6438b165a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 335640,
+          "end": 336618
+        },
+        {
+          "profile": "s3-eu",
+          "start": 335640,
+          "end": 336618
+        },
+        {
+          "profile": "s3-jp",
+          "start": 335640,
+          "end": 336618
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2432792,
+          "end": 2433770
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lbz/s3/end_boss.s",
+      "owner": "objects/bosses/lbz/s3",
+      "responsibility": "Launch Base end-boss lifecycle, attacks, child actors, helpers and private resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 838,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 9969,
+        "last_line": 10803,
+        "sha256": "91707f2694be8d948defc230e7d70efbde557ad28594257cc54a31f81167afc8"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-family",
+        "reason": "One complete named boss family keeps its battle state, coordinated actors, shared helpers and private object records together below 900 physical lines.",
+        "proof_target": "check-source-layout"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 328718,
+          "end": 330922
+        },
+        {
+          "profile": "s3-eu",
+          "start": 328718,
+          "end": 330922
+        },
+        {
+          "profile": "s3-jp",
+          "start": 328718,
+          "end": 330922
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2425870,
+          "end": 2428074
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lbz/s3/miniboss.s",
+      "owner": "objects/bosses/lbz/s3",
+      "responsibility": "Launch Base miniboss lifecycle, attacks, child actors, helpers and private resources.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 533,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 8402,
+        "last_line": 8931,
+        "sha256": "003aaece3abde012de528e88e11c777186a4a4e65e1a63df731f3de620e4abdf"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 324724,
+          "end": 326060
+        },
+        {
+          "profile": "s3-eu",
+          "start": 324724,
+          "end": 326060
+        },
+        {
+          "profile": "s3-jp",
+          "start": 324724,
+          "end": 326060
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2421876,
+          "end": 2423212
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/lbz/s3/unused_robotnik.s",
+      "owner": "objects/bosses/lbz/s3",
+      "responsibility": "Preserved unused Launch Base Robotnik actor initialization and state.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 35,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 12126,
+        "last_line": 12156,
+        "sha256": "d3fe2fdb3a85e928b2c2965e18a5a9f202d4e606cc9616f331a71e1147fbc061"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_LBZ2UnusedRobotnik",
+          "kind": "terminal-tail",
+          "reason": "The complete preserved unused actor ends in a drawing-service tail call and contains no original independent return boundary.",
+          "origin_first_line": 12128,
+          "origin_terminal_line": 12156,
+          "origin_end_line": 12156
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 334668,
+          "end": 334792
+        },
+        {
+          "profile": "s3-eu",
+          "start": 334668,
+          "end": 334792
+        },
+        {
+          "profile": "s3-jp",
+          "start": 334668,
+          "end": 334792
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2431820,
+          "end": 2431944
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/mgz/end_boss/s3/attachments.s",
+      "owner": "objects/bosses/mgz/end_boss/s3",
+      "responsibility": "Marble Garden end-boss attached actors, parent synchronization, movement and animation state.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 406,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 732,
+        "last_line": 1134,
+        "sha256": "c3a153a8d07778c95cf280ef78e983034a38b84fc2d9681bf85fc1fe5edf39d7"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 304636,
+          "end": 305798
+        },
+        {
+          "profile": "s3-eu",
+          "start": 304636,
+          "end": 305798
+        },
+        {
+          "profile": "s3-jp",
+          "start": 304636,
+          "end": 305798
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2401788,
+          "end": 2402950
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/mgz/end_boss/s3/battle_control.s",
+      "owner": "objects/bosses/mgz/end_boss/s3",
+      "responsibility": "Marble Garden end-boss Sonic or Knuckles battle controllers, progression and defeat state.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 417,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 318,
+        "last_line": 731,
+        "sha256": "82c55a8af8443d5402c54cf67f31a2c142c26890fd74039d983eedeba2aa0798"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 303352,
+          "end": 304636
+        },
+        {
+          "profile": "s3-eu",
+          "start": 303352,
+          "end": 304636
+        },
+        {
+          "profile": "s3-jp",
+          "start": 303352,
+          "end": 304636
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2400504,
+          "end": 2401788
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/mgz/end_boss/s3/motion_helpers.s",
+      "owner": "objects/bosses/mgz/end_boss/s3",
+      "responsibility": "Marble Garden end-boss child motion, collision, palette adjustment, scaling and private geometry helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 519,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 1495,
+        "last_line": 2010,
+        "sha256": "8f70082148d7337c5bd060fe882e6cfc4ee94b25f66e8177baf5a35a31fdbc51"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 306842,
+          "end": 308100
+        },
+        {
+          "profile": "s3-eu",
+          "start": 306842,
+          "end": 308100
+        },
+        {
+          "profile": "s3-jp",
+          "start": 306842,
+          "end": 308100
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2403994,
+          "end": 2405252
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/mgz/end_boss/s3/object_catalog.s",
+      "owner": "objects/bosses/mgz/end_boss/s3",
+      "responsibility": "Marble Garden end-boss object attributes, child creation records, animation and palette resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 279,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 2011,
+        "last_line": 2286,
+        "sha256": "db4f31bc74d8a867204af9d331afd1d389574519092eed006054163c350f245b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 308100,
+          "end": 308648
+        },
+        {
+          "profile": "s3-eu",
+          "start": 308100,
+          "end": 308648
+        },
+        {
+          "profile": "s3-jp",
+          "start": 308100,
+          "end": 308648
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2405252,
+          "end": 2405800
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bosses/mgz/end_boss/s3/projectiles_and_defeat.s",
+      "owner": "objects/bosses/mgz/end_boss/s3",
+      "responsibility": "Marble Garden end-boss projectiles, detached effects, debris and defeat palette transition.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 363,
+      "origin": {
+        "commit": "995400f4b92884b1e428dc4a5225824813b45712",
+        "path": "s3.s",
+        "first_line": 1135,
+        "last_line": 1494,
+        "sha256": "dd9c4b3a77eb51ca799f28cd3bb06138a4169281d4f9d8a52cbb6b1980651ef9"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 305798,
+          "end": 306842
+        },
+        {
+          "profile": "s3-eu",
+          "start": 305798,
+          "end": 306842
+        },
+        {
+          "profile": "s3-jp",
+          "start": 305798,
+          "end": 306842
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2402950,
+          "end": 2403994
         }
       ]
     },

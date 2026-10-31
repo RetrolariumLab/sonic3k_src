@@ -5,8 +5,8 @@ responsibility, physical line count and source range at the preservation
 baseline. Owned data lives under `src/objects`, `src/rendering`, `src/ui`,
 `src/game` and `src/system/debug`. Engine-specific code remains separate.
 
-This registry is intentionally incomplete during extraction: 713 data units and
-711 sibling executable units have owners. The 60 remaining entry, driver, memory
+This registry is intentionally incomplete during extraction: 720 data units and
+735 sibling executable units have owners. The 60 remaining entry, driver, memory
 and macro units still await complete semantic extraction. Run
 `make source-layout-inventory` for that distinction. `make check-source-layout`
 rejects pending entries and cannot certify this intermediate tree as 2.0.
@@ -43,3 +43,11 @@ with historical source ranges. The checker requires a terminal instruction and
 allows only checked data after it. Relocation may place its unreachable probe
 after that complete tail; normal assembly emits no bytes for the comments. An
 existing annotated closure takes precedence over a derived EOF data boundary.
+
+Permitted emitting data macros have a separate definition contract in
+`config/reconstruction/data_macros.json`. The checker scans every source unit,
+requires the reviewed definition hashes and rejects executable instructions,
+unknown emitting operations, duplicate definitions and unbounded encoding
+contexts even if a definition hash is changed. Palette-script file calls also
+require literal word-sized frame counts and a manifest-owned binary resource.
+This check precedes data-ledger acceptance and needs no ROM payloads.

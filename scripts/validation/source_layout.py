@@ -8,25 +8,9 @@ from scripts.build.project import ROOT, atomic, image_records, load, profiles, s
 from scripts.build.relocation import source_names
 from scripts.validation.numeric_operands import code_part
 from scripts.validation.cohorts import INSTRUCTIONS, TERMINALS, statements
+from scripts.validation.data_macros import DATA_MACROS, check_data_macros
 
-DATA_OPS = frozenset(
-    (
-        "dc.b",
-        "dc.w",
-        "dc.l",
-        "even",
-        "dbglistobj",
-        "palptr",
-        "watertransheader",
-        "levselstr",
-        "zoneanimstart",
-        "zoneanimdecl",
-        "zoneanimend",
-        "macro",
-        "endm",
-        "equ",
-    )
-)
+DATA_OPS = frozenset(("dc.b", "dc.w", "dc.l", "even", "macro", "endm", "equ")) | DATA_MACROS
 
 
 def check_ledger(text, source_includes=(), binary_includes=()):
@@ -56,6 +40,13 @@ def check_ledger(text, source_includes=(), binary_includes=()):
             if op == "include":
                 dependencies.append(target[1])
             continue
+        if op == "palscriptfile":
+            item = re.fullmatch(r'palscriptfile\s+(\$[0-9A-Fa-f]+|[0-9]+)\s*,\s*"([^"\r\n]+)"', code, re.I)
+            if not item:
+                raise ValueError("Palette script file needs a literal frame count and manifest asset")
+            frames = int(item[1][1:], 16) if item[1].startswith("$") else int(item[1])
+            if not 1 <= frames <= 65536 or item[2] not in binary_includes:
+                raise ValueError("Palette script file has invalid frames or no checked asset owner")
         if op not in DATA_OPS:
             raise ValueError("A data ledger contains executable or unknown syntax: " + op)
         depth += (op == "macro") - (op == "endm")
@@ -235,13 +226,15 @@ def check(inventory=False, built=False):
     paths = [r["path"] for r in rows]
     if len(paths) != len(set(paths)) or set(paths) != set(source_names()):
         raise ValueError("Source ownership registry omits or duplicates files")
+    texts = {row["path"]: (ROOT / row["path"]).read_text(encoding="utf-8") for row in rows}
+    macro_count = check_data_macros(texts, load("config/reconstruction/data_macros.json"))
     source_includes = {r["path"] for r in rows if r["status"] == "owned" and r["role"] == "data"}
     assets = load("assets/manifest.json")
     binary_includes = {assets["output"] + "/" + r["path"] for r in assets["assets"]}
     dependencies = {}
     accepted = 0
     for row in rows:
-        text = (ROOT / row["path"]).read_text(encoding="utf-8")
+        text = texts[row["path"]]
         accepted += validate_entry(row, text, inventory, source_includes, binary_includes)
         if row["path"] in source_includes:
             dependencies[row["path"]] = check_ledger(text, source_includes, binary_includes)
@@ -251,7 +244,12 @@ def check(inventory=False, built=False):
         raise ValueError("Semantic source layout is incomplete")
     if built:
         check_ranges(rows)
-    report = {"complete": not pending and registry["state"] == "complete", "owned": accepted, "pending": pending}
+    report = {
+        "complete": not pending and registry["state"] == "complete",
+        "owned": accepted,
+        "pending": pending,
+        "data_macro_definitions": macro_count,
+    }
     atomic(ROOT / "build/source_layout.json", (json.dumps(report, indent=2) + "\n").encode())
     print(
         ("[INCOMPLETE] " if pending else "[OK] ") + str(accepted) + " owned source files; " + str(pending) + " pending"
