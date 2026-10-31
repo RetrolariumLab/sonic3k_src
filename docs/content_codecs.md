@@ -207,3 +207,18 @@ in the content workspace. All 626 encoded owners are hashed before the complete
 five-profile container rebuild. Contract checks and synthetic edit tests need no
 ROM inputs; actual byte and container checks require the private extracted
 assets and preservation builds.
+
+## Composing inline source owners
+
+source_fragments combines independently validated content regions against one
+immutable copy of each complete source file. Each patch names its family owner,
+physical line interval and original span hash. All intervals and destinations
+must pass before any file is written; overlapping families, stale originals and
+unknown source paths are rejected. Patches are applied together in reverse
+original-line order, so adding lines to one encoded region cannot displace or
+erase another family. Every byte outside the registered intervals is retained.
+
+The palette workflow exposes prepared patches as well as its standalone round
+trip. Additional inline content families use the same composer and contribute
+their own semantic validation before source composition. Each final owner has a
+single output hash and the report retains separate encoded-span identities.

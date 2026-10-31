@@ -4,7 +4,7 @@ import hashlib
 from pathlib import Path
 import re
 
-from scripts.authoring import palette_scripts
+from scripts.authoring import palette_scripts, source_fragments
 from scripts.authoring.palette_content import PaletteCatalog
 from scripts.build.project import ROOT, atomic, image_records, load, profiles, source_fingerprint, source_names
 from scripts.validation.data_macros import body_statement, definition_blocks
@@ -198,10 +198,10 @@ def bind(result, sources):
     return locations
 
 
-def roundtrip(workspace):
+def prepare(workspace):
     result, sources = catalog()
     locations = bind(result, sources)
-    replacement, evidence = {}, []
+    patches, evidence = [], []
     for row in result.rows():
         key = (row["path"], row["scope"])
         text = sources[key]["text"]
@@ -230,7 +230,16 @@ def roundtrip(workspace):
             if rendered is not None and source != rendered:
                 raise ValueError("Palette source encoding differs between preservation views")
             rendered = source
-        replacement.setdefault(row["path"], []).append((row["first_line"], row["last_line"], rendered))
+        patches.append(
+            {
+                "path": row["path"],
+                "owner": "palette:" + row["scope"],
+                "first_line": row["first_line"],
+                "last_line": row["last_line"],
+                "original_sha256": hashlib.sha256(text.encode()).hexdigest(),
+                "source": rendered,
+            }
+        )
         evidence.append(
             {
                 "path": row["path"],
@@ -240,30 +249,28 @@ def roundtrip(workspace):
                 "byte_exact": True,
             }
         )
-    encoded = {}
-    for name, spans in replacement.items():
-        lines = (ROOT / name).read_bytes().decode().splitlines(keepends=True)
-        for first, last, source in sorted(spans, reverse=True):
-            lines[first - 1 : last] = [source]
-        encoded[name] = "".join(lines).encode()
-    destination_root = workspace.resolve()
-    if not destination_root.is_relative_to((ROOT / "build/authoring").resolve()):
-        raise ValueError("Palette source workspace leaves ignored authoring storage")
-    for name, data in encoded.items():
-        destination = (destination_root / name).resolve()
-        if not destination.is_relative_to(destination_root / "src"):
-            raise ValueError("Palette source output leaves its checked workspace")
-        atomic(destination, data)
+    return patches, evidence
+
+
+def roundtrip(workspace):
+    patches, evidence = prepare(workspace)
+    originals = {name: (ROOT / name).read_bytes() for name in {item["path"] for item in patches}}
+    composed = source_fragments.write(workspace, originals, patches)
     report = {
         "complete": True,
         "groups": len(evidence),
         "initializers": sum(item["initializers"] for item in evidence),
-        "source_files": len(encoded),
+        "source_files": composed["source_files"],
         "artifacts": evidence,
-        "outputs": {name: hashlib.sha256(data).hexdigest() for name, data in encoded.items()},
+        "outputs": composed["outputs"],
+        "fragments": composed["fragments"],
     }
     print(
-        "[OK] Palette scripts: " + str(len(evidence)) + " groups in " + str(len(encoded)) + " encoded source files",
+        "[OK] Palette scripts: "
+        + str(len(evidence))
+        + " groups in "
+        + str(composed["source_files"])
+        + " encoded source files",
         flush=True,
     )
     return report
