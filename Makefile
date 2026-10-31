@@ -115,3 +115,5 @@ check-driver-audio:
 
 check-driver-audio-storage:
 	$(PYTHON) -m scripts.run authoring.driver_payloads check --catalog-only
+
+include mk/authoring.mk
