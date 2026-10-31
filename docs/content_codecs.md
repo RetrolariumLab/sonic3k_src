@@ -69,3 +69,52 @@ Make test discovers normal package tests under tests/authoring. Fixtures are
 synthetic. They cover field semantics, edits, malformed records, capacities and
 ABI mismatches. Complete original-resource and rebuilt-container checks remain
 the next integration step.
+
+## Immutable write allocations
+
+The registry in config/authoring/data_formats.json covers every primary asset
+and every derived driver payload. Format and compression are independent;
+extensions do not determine either one. Profiles and address spaces are checked
+against active AS includes, not against the image used to extract a shared
+resource.
+
+The current authoring policy is preservation-fixed-footprint. Encoded slots come
+from the asset manifest or driver payload recipe. Decoded dimensions also remain
+fixed. This deliberately does not offer expanded or relocated assets. An edited
+compressed stream may use fewer bytes and receives zero padding to retain its
+original slot; overflow is rejected. Zero-edit output preserves the original
+stream and its complete tail.
+
+ContentCatalog binds a decoded model to an immutable artifact contract and an
+explicit target profile. The caller must decode again for another profile. The
+DPCM codebook must match its own catalog identity. S&K lock-on rejects S3
+collision indices above 255, and chunk references must fit the 768-block RAM
+table. SMPS corpus descriptors must keep their exact manifest-owned bank offsets
+and capacities. A complete corpus is validated before output is returned. All
+checks finish before the write API creates any output, and the write API accepts
+only workspaces inside ignored build storage.
+
+Two original driver containers are extraction inputs, not editable opaque
+resources. Their complete decoded bytes must equal the fresh virtual AS table
+output, and their packed bytes must equal the fresh source-built image slice.
+They remain explicitly registered and are included in the full check.
+
+## Complete content commands
+
+Make check-content-contract works without ROMs. Make roundtrip-formats first
+builds every preservation profile and requires the pinned Core backend. It runs
+every modeled resource and every applicable profile, forces compression
+content-equivalence checks, checks all closed SMPS bank corpora and rebuilds
+both source-owned driver inputs. The complete encoded inputs are saved only
+under ignored build/authoring.
+
+Make check-content-zero-edit then copies the retained assembly into that
+workspace and builds all five preservation containers from those encoded inputs.
+Every output must match its original ROM, including both composite halves.
+Reports bind assembly, authoring tooling and registry identities. These content
+checks do not replace the full preservation/runtime gate or the remaining source
+ownership work.
+
+Core scratch cleanup can leave a directory in ignored build storage when a
+Windows process still holds a temporary file. Execution, encoding, output
+reading and unexpected cleanup failures remain fatal.

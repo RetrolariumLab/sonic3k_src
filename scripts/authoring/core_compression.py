@@ -1,5 +1,6 @@
 """Build the pinned public Core in ignored storage and use its C++ compression CLI."""
 
+from contextlib import contextmanager
 import io
 import json
 import os
@@ -127,12 +128,28 @@ def _limit(value):
         raise ValueError("Compression output capacity must be a nonnegative integer")
 
 
+@contextmanager
+def _workspace(scratch):
+    root = Path(tempfile.mkdtemp(prefix="codec-", dir=scratch)).resolve()
+    if not root.is_relative_to(scratch.resolve()):
+        raise ValueError("Core workspace leaves its declared scratch root")
+    try:
+        yield root
+    finally:
+        try:
+            shutil.rmtree(root)
+        except OSError as error:
+            # A Windows scanner may still hold the child's temporary file.
+            # Keep that ignored scratch directory; never hide codec I/O failures.
+            if not isinstance(error, PermissionError) and getattr(error, "winerror", None) != 145:
+                raise
+
+
 def _call(family, operation, data, reference=None):
     executable = tool()
     scratch = ROOT / "build" / "authoring" / "core"
     scratch.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix="codec-", dir=scratch) as folder:
-        root = Path(folder).resolve()
+    with _workspace(scratch) as root:
         assert root.is_relative_to(scratch.resolve())
         source, output = root / "input.bin", root / "output.bin"
         source.write_bytes(data)
