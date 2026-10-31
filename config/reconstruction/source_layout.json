@@ -60,7 +60,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 2130,
+      "physical_lines": 802,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "s3.s",
@@ -90,7 +90,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 3303,
+      "physical_lines": 1040,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -4573,6 +4573,46 @@
       "range_kind": "canonical-normal-build"
     },
     {
+      "path": "src/game/cutscenes/s3/surfboard_resource_catalog.s",
+      "owner": "game/cutscenes/s3",
+      "responsibility": "Angel Island intro sprites, surfboard and splash graphics resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 12,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "s3.s",
+        "first_line": 844,
+        "last_line": 852,
+        "sha256": "33019471dab7c5f8099bb81a98695df99613c0fff8a2866e62f2ff5a7dc4ce88"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1343904,
+          "end": 1346850
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1343904,
+          "end": 1346850
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1343904,
+          "end": 1346850
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3441056,
+          "end": 3444002
+        }
+      ]
+    },
+    {
       "path": "src/game/demo/s3/input_resource_catalog.s",
       "owner": "game/demo/s3",
       "responsibility": "The three original attract-mode demo input streams.",
@@ -4609,6 +4649,36 @@
           "component": "s3-us",
           "start": 2905636,
           "end": 2911396
+        }
+      ]
+    },
+    {
+      "path": "src/game/demo/sk/input_resource_catalog.s",
+      "owner": "game/demo/sk",
+      "responsibility": "Mushroom Hill, Flying Battery, Sandopolis and special-stage attract demo input streams.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 15,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "sonic3k.s",
+        "first_line": 1186,
+        "last_line": 1197,
+        "sha256": "f459ae146e76e6bc5725803a23b556d27a8afcb26a017964087c9522a7a45ed4"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 1440786,
+          "end": 1441244
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1440786,
+          "end": 1441244
         }
       ]
     },
@@ -5229,6 +5299,46 @@
           "component": "s3-us",
           "start": 2437530,
           "end": 2437738
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/s3/graphics_resource_catalog.s",
+      "owner": "game/level/s3",
+      "responsibility": "Complete zone, competition and bonus block, tile and chunk resource bindings and original empty bonus aliases.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 249,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "s3.s",
+        "first_line": 1882,
+        "last_line": 2127,
+        "sha256": "1f54a8f1a3440445c143b20ea1af4d13871ac5349951a1491b223dad560f87d6"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1718090,
+          "end": 2096928
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1718090,
+          "end": 2096928
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1718090,
+          "end": 2096928
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3815242,
+          "end": 4194080
         }
       ]
     },
@@ -6003,6 +6113,36 @@
       ]
     },
     {
+      "path": "src/game/level/sk/character_start_records.s",
+      "owner": "game/level/sk",
+      "responsibility": "Original character speed parameters and separate Sonic/Tails and Knuckles start-location records.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 106,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "sonic3k.s",
+        "first_line": 1878,
+        "last_line": 1980,
+        "sha256": "7d7aabdb7beafef7588e9ef79b31a7aec91e4d9e88d1b737da5de53db5c4252a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 1981440,
+          "end": 1981848
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1981440,
+          "end": 1981848
+        }
+      ]
+    },
+    {
       "path": "src/game/level/sk/collision_and_oscillation.s",
       "owner": "game/level/sk",
       "responsibility": "Level collision data initialization, deterministic object oscillators and ring animation updates.",
@@ -6073,6 +6213,36 @@
       ]
     },
     {
+      "path": "src/game/level/sk/early_zone_placements.s",
+      "owner": "game/level/sk",
+      "responsibility": "Original early-zone object and ring placement resources with their physical terminators.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 231,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "sonic3k.s",
+        "first_line": 2187,
+        "last_line": 2414,
+        "sha256": "d32bb17bf5c1b862cb9d7feb15d9e7fb9d3921df57e8b58a1a72d6717a310d30"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 1983700,
+          "end": 2039008
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1983700,
+          "end": 2039008
+        }
+      ]
+    },
+    {
       "path": "src/game/level/sk/environment_loading.s",
       "owner": "game/level/sk",
       "responsibility": "Per-level descriptor loading, water applicability and underwater palette selection.",
@@ -6138,6 +6308,66 @@
       ]
     },
     {
+      "path": "src/game/level/sk/expansion_tunnel_paths.s",
+      "owner": "game/level/sk",
+      "responsibility": "Additional automatic tunnel paths for the expansion zones.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 102,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "sonic3k.s",
+        "first_line": 2879,
+        "last_line": 2977,
+        "sha256": "c3324a363e206f13b24c81e04a121c23f3e97060cd6917b4a4ebafc221009b51"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 2059484,
+          "end": 2059850
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 2059484,
+          "end": 2059850
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/sk/fbz_mhz_soz_placements.s",
+      "owner": "game/level/sk",
+      "responsibility": "Flying Battery, Mushroom Hill and Sandopolis object and ring placements with physical list terminators.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 73,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "sonic3k.s",
+        "first_line": 2809,
+        "last_line": 2878,
+        "sha256": "e57218fb77069c6ac7282f1b62e9e44fac7da6a073330b7e2680535f23173d94"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 2040464,
+          "end": 2059484
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 2040464,
+          "end": 2059484
+        }
+      ]
+    },
+    {
       "path": "src/game/level/sk/gradual_bounds.s",
       "owner": "game/level/sk",
       "responsibility": "Gradual camera bound changes and their four object child descriptors.",
@@ -6173,6 +6403,66 @@
       ]
     },
     {
+      "path": "src/game/level/sk/graphics_resource_catalog.s",
+      "owner": "game/level/sk",
+      "responsibility": "Complete zone, custom scene and bonus block, tile and chunk resource bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 227,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "sonic3k.s",
+        "first_line": 1654,
+        "last_line": 1877,
+        "sha256": "c84d29dca72e49892417d43e8e2d0ecc67c2ef252234209ab453a213ccc23585"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 1655808,
+          "end": 1981440
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1655808,
+          "end": 1981440
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/sk/late_zone_and_bonus_placements.s",
+      "owner": "game/level/sk",
+      "responsibility": "Late-zone, competition, bonus and boss-room object and ring placements with original empty slots.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 309,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "sonic3k.s",
+        "first_line": 2978,
+        "last_line": 3283,
+        "sha256": "f9e1de29e5a702c1bf261471d1ad6891648f15ce9ca32262d54f7c9fa3f0729e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 2059850,
+          "end": 2084650
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 2059850,
+          "end": 2084650
+        }
+      ]
+    },
+    {
       "path": "src/game/level/sk/layout_catalog.s",
       "owner": "game/level/sk",
       "responsibility": "Zone layout pointer table and complete extracted level layout bindings.",
@@ -6199,6 +6489,36 @@
           "component": "sk",
           "start": 644544,
           "end": 689964
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/sk/legacy_tunnel_paths.s",
+      "owner": "game/level/sk",
+      "responsibility": "Complete inherited automatic tunnel paths used by the earlier zones.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 397,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "sonic3k.s",
+        "first_line": 2415,
+        "last_line": 2808,
+        "sha256": "af31d7707d19e80d292bf7e69038a3c692885ad11780405cbabe0f817a0d4526"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 2039008,
+          "end": 2040464
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 2039008,
+          "end": 2040464
         }
       ]
     },
@@ -6264,6 +6584,36 @@
           "component": "sk",
           "start": 24498,
           "end": 26550
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/sk/placement_pointers.s",
+      "owner": "game/level/sk",
+      "responsibility": "Zone object, ring and automatic tunnel pointer tables.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 134,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "sonic3k.s",
+        "first_line": 1981,
+        "last_line": 2111,
+        "sha256": "d93fda053baeab0fe34ab2f4ae5e48860f9315fcec13f350dc5f676baa39e87b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 1981848,
+          "end": 1982360
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1981848,
+          "end": 1982360
         }
       ]
     },
@@ -6504,6 +6854,36 @@
           "component": "sk",
           "start": 320348,
           "end": 321368
+        }
+      ]
+    },
+    {
+      "path": "src/game/level/sk/scripted_path_resources.s",
+      "owner": "game/level/sk",
+      "responsibility": "Flying Battery snake-platform, Sandopolis rock-ride and Death Egg tunnel scripted paths.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 62,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "sonic3k.s",
+        "first_line": 2112,
+        "last_line": 2170,
+        "sha256": "1a825618f12b284300714d52a506df7eb8dd5fd18077ad6a6f0c6a1e5948f108"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 1982360,
+          "end": 1982584
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1982360,
+          "end": 1982584
         }
       ]
     },
@@ -10818,6 +11198,186 @@
       ]
     },
     {
+      "path": "src/game/player/s3/effect_art_resources.s",
+      "owner": "game/player/s3",
+      "responsibility": "Player invincibility, dust, stars, shields and competition dash-dust art bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 32,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "s3.s",
+        "first_line": 853,
+        "last_line": 881,
+        "sha256": "ae7a173ed1e1505c5df19164573d0d010237920b2959d6d8454e6ab6cd0f492e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1346850,
+          "end": 1373856
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1346850,
+          "end": 1373856
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1346850,
+          "end": 1373856
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3444002,
+          "end": 3471008
+        }
+      ]
+    },
+    {
+      "path": "src/game/player/s3/graphics_resource_catalog.s",
+      "owner": "game/player/s3",
+      "responsibility": "Player art and complete Sonic/Tails mapping and DPLC resource bindings, with physical post-audio alignment.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 38,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "s3.s",
+        "first_line": 789,
+        "last_line": 823,
+        "sha256": "08fcbbdd4dc7322b07c482190a7029c824f9889460583978d240046132993e2a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1047977,
+          "end": 1330816
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1047977,
+          "end": 1330816
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1047977,
+          "end": 1330816
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3145129,
+          "end": 3427968
+        }
+      ]
+    },
+    {
+      "path": "src/game/player/s3/snowboard_resource_catalog.s",
+      "owner": "game/player/s3",
+      "responsibility": "Icecap snowboard slopes, Sonic and board art, mappings and DPLC resource bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 23,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "s3.s",
+        "first_line": 824,
+        "last_line": 843,
+        "sha256": "911ea34199db4ce0e5073c3a5dcae87e383c0be95b33955efacd8931ecbd007b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1330816,
+          "end": 1343904
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1330816,
+          "end": 1343904
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1330816,
+          "end": 1343904
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3427968,
+          "end": 3441056
+        }
+      ]
+    },
+    {
+      "path": "src/game/player/sk/effect_art_resources.s",
+      "owner": "game/player/sk",
+      "responsibility": "Player invincibility, dust, stars and elemental shield art resource bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 29,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "sonic3k.s",
+        "first_line": 1560,
+        "last_line": 1585,
+        "sha256": "f1fcb8e084c4da69aa46813c66ae5f9b5e92531b9d651f30fddda8531513f6a9"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 1614340,
+          "end": 1641156
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1614340,
+          "end": 1641156
+        }
+      ]
+    },
+    {
+      "path": "src/game/player/sk/graphics_resource_catalog.s",
+      "owner": "game/player/sk",
+      "responsibility": "Player art and complete Sonic/Tails/Knuckles mapping and DPLC resource bindings, with physical post-audio alignment.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 38,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "sonic3k.s",
+        "first_line": 1006,
+        "last_line": 1040,
+        "sha256": "9db41f5089e81b3aee5c7811b62aaecf11fea1255e864f8aa3ca9153d0ffb17d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 1047977,
+          "end": 1362214
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1047977,
+          "end": 1362214
+        }
+      ]
+    },
+    {
       "path": "src/game/special_stage/s3/layout_catalog.s",
       "owner": "game/special_stage/s3",
       "responsibility": "Eight Sonic 3 special-stage layouts and the original following physical alignment.",
@@ -11646,6 +12206,66 @@
       ],
       "applicability": "emitted",
       "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/game/special_stage/sk/layout_catalog.s",
+      "owner": "game/special_stage/sk",
+      "responsibility": "The two compressed Sonic and Knuckles special-stage layout sets.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 9,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "sonic3k.s",
+        "first_line": 3284,
+        "last_line": 3289,
+        "sha256": "47edb3c0c3d6ca27c41de7debbbc69fd23ec3c4d184233ba81008a360673c5d5"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 2084650,
+          "end": 2094106
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 2084650,
+          "end": 2094106
+        }
+      ]
+    },
+    {
+      "path": "src/game/special_stage/sk/layout_pointer_catalog.s",
+      "owner": "game/special_stage/sk",
+      "responsibility": "Compressed special-stage layout pointers and private slot-bonus layout records.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 19,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "sonic3k.s",
+        "first_line": 2171,
+        "last_line": 2186,
+        "sha256": "e945a56e91ca7f851353b4a1f1239f34e797179727a98faa5ebdcf3bea6d5fc8"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 1982584,
+          "end": 1983700
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1982584,
+          "end": 1983700
+        }
+      ]
     },
     {
       "path": "src/game/special_stage/sk/mode_and_display.s",
@@ -18539,6 +19159,36 @@
           "component": "sk",
           "start": 510280,
           "end": 510492
+        }
+      ]
+    },
+    {
+      "path": "src/objects/checkpoint/sk/star_art_resources.s",
+      "owner": "objects/checkpoint/sk",
+      "responsibility": "The original three star-post star graphics streams, retaining the documented original size defect.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 19,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "sonic3k.s",
+        "first_line": 1517,
+        "last_line": 1532,
+        "sha256": "9b8394d5826429c2492721798c446f7765fc0bd7a09721157c01fee9942308cf"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 1604490,
+          "end": 1604784
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1604490,
+          "end": 1604784
         }
       ]
     },
@@ -65809,6 +66459,86 @@
       ]
     },
     {
+      "path": "src/rendering/s3/actor_art_resource_catalog.s",
+      "owner": "rendering/s3",
+      "responsibility": "Main-zone and competition actor art, bosses, props, cutscenes and ending art resource bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 363,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "s3.s",
+        "first_line": 1385,
+        "last_line": 1744,
+        "sha256": "b0de952e685e73d87882dc5e3ab1942fadc6d37a9f63665d3f869d6679ec2e79"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1461234,
+          "end": 1681286
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1461234,
+          "end": 1681286
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1461234,
+          "end": 1681286
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3558386,
+          "end": 3778438
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/s3/actor_rendering_resource_catalog.s",
+      "owner": "rendering/s3",
+      "responsibility": "Actor mappings and DPLC bindings, boss motion lookup data and complete boss palette scripts.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 345,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "s3.s",
+        "first_line": 1043,
+        "last_line": 1384,
+        "sha256": "55ed44e5903c94702b0d28f100181498fe060c3ab501e1236ae7d07dc7428d8a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1441880,
+          "end": 1461234
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1441880,
+          "end": 1461234
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1441880,
+          "end": 1461234
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3539032,
+          "end": 3558386
+        }
+      ]
+    },
+    {
       "path": "src/rendering/s3/animal_pattern_lists.s",
       "owner": "rendering/s3",
       "responsibility": "Zone-specific animal graphics loading records, separate from their indexed dispatch table and loader.",
@@ -65885,6 +66615,46 @@
           "component": "s3-us",
           "start": 2239492,
           "end": 2241390
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/s3/common_actor_art_resources.s",
+      "owner": "rendering/s3",
+      "responsibility": "Common world actors, HUD, life icons, animals and shared effects art resource bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 96,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "s3.s",
+        "first_line": 950,
+        "last_line": 1042,
+        "sha256": "8f29bd76f4807783fed1d6ab7774971c4b47184829df654a1d8de4ed176b8749"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1427712,
+          "end": 1441880
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1427712,
+          "end": 1441880
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1427712,
+          "end": 1441880
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3524864,
+          "end": 3539032
         }
       ]
     },
@@ -66834,6 +67604,66 @@
       ]
     },
     {
+      "path": "src/rendering/sk/actor_art_resource_catalog.s",
+      "owner": "rendering/sk",
+      "responsibility": "Ending, enemy, miniboss and main-boss graphics resource bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 243,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "sonic3k.s",
+        "first_line": 1198,
+        "last_line": 1437,
+        "sha256": "bbcf8fb532c62ce6ec5ecb7702a28976f880805f83116bd37c0d56d01e38210d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 1441244,
+          "end": 1592732
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1441244,
+          "end": 1592732
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/sk/actor_rendering_resource_catalog.s",
+      "owner": "rendering/sk",
+      "responsibility": "Actor mappings and DPLC bindings with boss motion angle lookup data.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 82,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "sonic3k.s",
+        "first_line": 1438,
+        "last_line": 1516,
+        "sha256": "73a5b3e49a7d74f9749fb43562f1a7dd064e023bc8191b8cffd4049e88c7d413"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 1592732,
+          "end": 1604490
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1592732,
+          "end": 1604490
+        }
+      ]
+    },
+    {
       "path": "src/rendering/sk/animal_pattern_lists.s",
       "owner": "rendering/sk",
       "responsibility": "Zone-specific animal graphics load records used by the indexed completion loader.",
@@ -66890,6 +67720,36 @@
           "component": "sk",
           "start": 148990,
           "end": 150888
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/sk/common_actor_art_resources.s",
+      "owner": "rendering/sk",
+      "responsibility": "Common world actors, HUD, life icons, animals and shared effects art resource bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 71,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "sonic3k.s",
+        "first_line": 1586,
+        "last_line": 1653,
+        "sha256": "47fac62884835ce9c9856597fc29bd7e7f6c5d5edfc52391fa3cfff946a225e1"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 1641156,
+          "end": 1655808
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1641156,
+          "end": 1655808
         }
       ]
     },
@@ -67400,6 +68260,36 @@
           "component": "sk",
           "start": 747968,
           "end": 828896
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/sk/zone_prop_art_resources.s",
+      "owner": "rendering/sk",
+      "responsibility": "Zone props, scenery, bonus-stage graphics and special scene art resource bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 90,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "sonic3k.s",
+        "first_line": 1041,
+        "last_line": 1127,
+        "sha256": "e4aef665f49ccfaa83a85957a02be0411d966f9a6065e9087447ebd1ba3bcea4"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 1362214,
+          "end": 1419124
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1362214,
+          "end": 1419124
         }
       ]
     },
@@ -70978,6 +71868,116 @@
       ]
     },
     {
+      "path": "src/ui/blue_sphere/sk/title_resource_catalog.s",
+      "owner": "ui/blue_sphere/sk",
+      "responsibility": "Blue Sphere title foreground/background, character sprites, lettering and logos.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 30,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "sonic3k.s",
+        "first_line": 1533,
+        "last_line": 1559,
+        "sha256": "cc820f115b5d3ecd0cd4c6a96e64489148cab1efb3e3f6b68a91106e4255c0ca"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 1604784,
+          "end": 1614340
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1604784,
+          "end": 1614340
+        }
+      ]
+    },
+    {
+      "path": "src/ui/s3/results_and_title_card_resources.s",
+      "owner": "ui/s3",
+      "responsibility": "Results lettering, special-stage results and stage title-card art resource bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 73,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "s3.s",
+        "first_line": 1745,
+        "last_line": 1814,
+        "sha256": "2e03c48b09907477ea9efb553f7e5149c02348dddf445a3f965710908174835b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1681286,
+          "end": 1692258
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1681286,
+          "end": 1692258
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1681286,
+          "end": 1692258
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3778438,
+          "end": 3789410
+        }
+      ]
+    },
+    {
+      "path": "src/ui/s3/save_and_competition_menu_resources.s",
+      "owner": "ui/s3",
+      "responsibility": "Save-screen and competition-menu palette, art, frame and text resource bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 70,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "s3.s",
+        "first_line": 1815,
+        "last_line": 1881,
+        "sha256": "59b8834a22c0a3523c6decedc741f4a2cd0aebf62610ab818b156c6c9eeee737"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1692258,
+          "end": 1718090
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1692258,
+          "end": 1718090
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1692258,
+          "end": 1718090
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3789410,
+          "end": 3815242
+        }
+      ]
+    },
+    {
       "path": "src/ui/s3/title_and_menu_art_catalog.s",
       "owner": "ui/s3",
       "responsibility": "Splash/drowning sprite, competition options, menu and title graphics resource bindings.",
@@ -71014,6 +72014,46 @@
           "component": "s3-us",
           "start": 2892416,
           "end": 2905636
+        }
+      ]
+    },
+    {
+      "path": "src/ui/s3/title_scene_resources.s",
+      "owner": "ui/s3",
+      "responsibility": "Sonic 3 title scene frame maps, banner and character graphics resources.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 71,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "s3.s",
+        "first_line": 882,
+        "last_line": 949,
+        "sha256": "f195d8f0a02f054391d64b87c12ebdcc514de7b40cdcd7284765cc766402e3ef"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1373856,
+          "end": 1427712
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1373856,
+          "end": 1427712
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1373856,
+          "end": 1427712
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3471008,
+          "end": 3524864
         }
       ]
     },
@@ -72521,6 +73561,36 @@
           "component": "sk",
           "start": 878576,
           "end": 881614
+        }
+      ]
+    },
+    {
+      "path": "src/ui/sk/save_results_and_title_card_resources.s",
+      "owner": "ui/sk",
+      "responsibility": "Save screen, special-stage results and stage title-card art resource bindings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 61,
+      "origin": {
+        "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
+        "path": "sonic3k.s",
+        "first_line": 1128,
+        "last_line": 1185,
+        "sha256": "f5c8c27d4b13e31d02c6ce7ff26652368676170d2756eae6207060fc70590c18"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 1419124,
+          "end": 1440786
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1419124,
+          "end": 1440786
         }
       ]
     },
