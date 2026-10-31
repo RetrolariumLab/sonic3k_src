@@ -72,3 +72,18 @@ Independent AS include ranges must have identical start and end addresses for
 every applicable profile. Unknown roles and unchecked address spaces are
 rejected; include wiring cannot claim executable ownership without an actual
 return or terminal procedure.
+
+## Historical preservation comparison
+
+Make check-source-preservation builds the pinned pre-layout preservation
+baseline in a detached checkout under ignored build/provenance. The baseline's
+own tooling discovers its normal code entries and original annotated procedure
+boundaries. Current normal entries must retain every name and address, and the
+original procedure multiset must remain unchanged. Added terminal annotations
+must not absorb any earlier independent return boundary. The check rejects the
+current commit as its own reference and verifies the historical revision is an
+ancestor, so a new empty comparison cannot silently replace the accepted base.
+
+The historical checkout uses the same verified private inputs and builds all
+five original containers. This supplements byte identity and relocation/runtime
+checks; it does not replace either. Cached historical source must remain clean.

@@ -117,3 +117,8 @@ check-driver-audio-storage:
 	$(PYTHON) -m scripts.run authoring.driver_payloads check --catalog-only
 
 include mk/authoring.mk
+
+.PHONY: check-source-preservation
+
+check-source-preservation:
+	$(PYTHON) -m scripts.run validation.preservation
