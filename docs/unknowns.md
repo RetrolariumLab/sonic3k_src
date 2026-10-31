@@ -7,8 +7,12 @@ recorded by the commands in [verification](verification.md).
 - **Meaning of inherited labels.** Many `sub_*`, `loc_*`, `word_*` and `byte_*`
   names retain address-based spelling. Semantic source ownership does not prove
   their individual meanings. The label registry records no speculative renames.
-- **Runtime reach.** The 165-case matrix checks finite attract paths and nine
-  RAM cells. It does not establish exhaustive gameplay or hardware equivalence.
+- **Runtime reach.** The 165-case short-attract matrix remains mandatory. Forty
+  extended comparisons add longer attract, character, Competition, special-stage
+  and own-cartridge SRAM reload routes on preservation and g0 images. Finite RAM
+  observations do not establish exhaustive gameplay, pixel output or hardware
+  equivalence. Full ending sequences remain outside the reached-state contract;
+  neither a selected final zone nor a fabricated completed save proves them.
 - **Host coverage.** Full runtime is supported only by the pinned Windows MAME
   host. Portable headless tests do not certify other runtime platforms.
 - **HPZ shared state.** The alternate palette initializer is also copied as a

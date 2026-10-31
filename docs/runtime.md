@@ -71,3 +71,39 @@ through the same process handle, preventing a reused PID from redirecting it to
 a foreign process. Leftovers fail the run even when they are cleaned. Failure
 and timeout paths apply the same ownership rules; unrelated processes remain
 untouched. The runtime evidence signature also binds these runner sources.
+
+## Extended controller routes and cartridge saves
+
+`make golden-extended` captures twenty profile/route pairs from verified
+original images. `make trace-extended` compares the same routes against
+preservation builds and relocation variant `g0`, giving forty additional cases.
+The existing five preservation and 160 relocated short-attract checks remain
+mandatory. These extended checks run serially inside the complete preservation
+gate.
+
+`config/runtime/extended_scenarios.json` owns controller movies, applicable
+profiles, source-derived RAM views and ordered reached-state predicates. Each
+route also requires observed progress at multiple checkpoints. Coverage includes
+long attract sequences across several zones, both players in Competition,
+Knuckles selection, an interactive special stage and Tails save creation and
+reload. Regions use their own console machine and their own original goldens.
+All original capture identities are recorded in
+`scenarios/extended/provenance.json`.
+
+A save test first creates a slot through the game's ordinary controller
+interface and exits MAME normally. The runner reads only that invocation's
+bounded cartridge NVRAM. It then clears all emulator state, starts another
+process and explicitly seeds only that case's cartridge file. Required
+observations prove the character was restored at boot and can be started without
+selecting the character again. Every preservation and relocated writer produces
+its own seed; its bytes must match the original writer's hash. No personal save,
+RAM injection, state file, cartridge patch or soft reset is used. Standalone S&K
+has no save-slot reload case.
+
+The extended report binds the exact profile/route/variant product, current
+source, scenario definitions, original goldens, emulator contract, relocation
+manifest, image hashes, logs and SRAM chain. Missing routes, unordered screen
+visits, stationary progress observations and stale evidence fail acceptance.
+This remains finite RAM coverage: it does not prove pixel output, full-game
+completion or every ending. Extended relocation uses one declared cohort
+variant; all 32 variants retain the complete short-attract comparison.

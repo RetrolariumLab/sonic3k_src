@@ -1,0 +1,7 @@
+# retrolarium movie 1
+platform megadrive
+source mame
+title long-lockon
+frames 24000
+---
+24000 00 00

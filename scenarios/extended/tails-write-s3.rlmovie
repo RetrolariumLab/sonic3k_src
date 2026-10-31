@@ -1,0 +1,15 @@
+# retrolarium movie 1
+platform megadrive
+source mame
+title tails-write-s3
+frames 2000
+---
+600 00 00
+1 80 00
+399 00 00
+1 01 00
+3 00 00
+1 01 00
+95 00 00
+1 80 00
+899 00 00

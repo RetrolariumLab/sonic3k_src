@@ -89,8 +89,8 @@
     },
     {
       "path": "docs/runtime.md",
-      "decision": "kept",
-      "reason": "Describe per-invocation clean emulator state, bounded deletion and creation-identity-bound descendant cleanup without affecting foreign processes."
+      "decision": "reworked",
+      "reason": "Explain bounded own-cartridge SRAM transfer, ordered controller-only route checks and explicit extended versus complete short-attract relocation coverage."
     },
     {
       "path": "docs/source_layout.md",

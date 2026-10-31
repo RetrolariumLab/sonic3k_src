@@ -1,0 +1,11 @@
+# retrolarium movie 1
+platform megadrive
+source mame
+title tails-reload-lockon
+frames 2000
+---
+600 00 00
+1 80 00
+499 00 00
+1 80 00
+899 00 00

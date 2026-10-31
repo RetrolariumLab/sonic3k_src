@@ -1,0 +1,663 @@
+{
+  "schema_version": 1,
+  "relocated_variant": "g0",
+  "cells": {
+    "act": {
+      "symbol": "Current_act",
+      "length": 1
+    },
+    "competition": {
+      "symbol": "Competition_mode",
+      "length": 2
+    },
+    "competition_menu": {
+      "symbol": "Competition_menu_selection",
+      "length": 1
+    },
+    "competition_zone": {
+      "symbol": "Competition_menu_zone",
+      "length": 1
+    },
+    "dataselect_entry": {
+      "symbol": "Dataselect_entry",
+      "length": 1
+    },
+    "demo": {
+      "symbol": "Demo_mode_flag",
+      "length": 2
+    },
+    "frame_counter": {
+      "symbol": "Level_frame_counter",
+      "length": 2
+    },
+    "level_option": {
+      "symbol": "Level_select_option",
+      "length": 2
+    },
+    "level_select": {
+      "symbol": "Level_select_flag",
+      "length": 2
+    },
+    "mode": {
+      "symbol": "Game_mode",
+      "length": 1
+    },
+    "player2_x": {
+      "symbol": "Player_2",
+      "offset_symbol": "x_pos",
+      "length": 2
+    },
+    "player_mode": {
+      "symbol": "Player_mode",
+      "length": 2
+    },
+    "player_option": {
+      "symbol": "Player_option",
+      "length": 2
+    },
+    "player_x": {
+      "symbol": "Player_1",
+      "offset_symbol": "x_pos",
+      "length": 2
+    },
+    "player_y": {
+      "symbol": "Player_1",
+      "offset_symbol": "y_pos",
+      "length": 2
+    },
+    "save_character": {
+      "symbol": "Saved_data",
+      "offset": 2,
+      "length": 1
+    },
+    "save_pointer": {
+      "symbol": "Save_pointer",
+      "length": 4
+    },
+    "special_stage": {
+      "symbol": "Current_special_stage",
+      "length": 1
+    },
+    "special_x": {
+      "symbol": "Special_stage_X_pos",
+      "length": 2
+    },
+    "special_y": {
+      "symbol": "Special_stage_Y_pos",
+      "length": 2
+    },
+    "spheres": {
+      "symbol": "Special_stage_spheres_left",
+      "length": 2
+    },
+    "velocity": {
+      "symbol": "Special_stage_velocity",
+      "length": 2
+    },
+    "zone": {
+      "symbol": "Current_zone",
+      "length": 1
+    }
+  },
+  "cases": [
+    {
+      "id": "long-s3",
+      "profiles": ["s3-us", "s3-eu", "s3-jp"],
+      "movie": "scenarios/extended/long-s3.rlmovie",
+      "frames": 15000,
+      "step": 30,
+      "cells": ["mode", "zone", "act", "player_mode", "demo", "frame_counter", "player_x", "player_y"],
+      "states": [
+        {
+          "mode": 8,
+          "zone": 0,
+          "demo": 1
+        },
+        {
+          "mode": 8,
+          "zone": 1,
+          "demo": 1
+        },
+        {
+          "mode": 8,
+          "zone": 2,
+          "demo": 1
+        }
+      ],
+      "progress": [
+        {
+          "where": {
+            "mode": 8,
+            "zone": 0
+          },
+          "cell": "frame_counter",
+          "distinct": 2
+        },
+        {
+          "where": {
+            "mode": 8,
+            "zone": 1
+          },
+          "cell": "frame_counter",
+          "distinct": 2
+        },
+        {
+          "where": {
+            "mode": 8,
+            "zone": 2
+          },
+          "cell": "frame_counter",
+          "distinct": 2
+        }
+      ]
+    },
+    {
+      "id": "long-sk",
+      "profiles": ["sk"],
+      "movie": "scenarios/extended/long-sk.rlmovie",
+      "frames": 18000,
+      "step": 30,
+      "cells": [
+        "mode",
+        "zone",
+        "act",
+        "player_mode",
+        "demo",
+        "frame_counter",
+        "player_x",
+        "player_y",
+        "special_x",
+        "special_y",
+        "spheres"
+      ],
+      "states": [
+        {
+          "mode": 8,
+          "zone": 7,
+          "player_mode": 3
+        },
+        {
+          "mode": 8,
+          "zone": 4,
+          "player_mode": 1
+        },
+        {
+          "mode": 8,
+          "zone": 8,
+          "player_mode": 1
+        },
+        {
+          "mode": 52,
+          "demo": 1
+        }
+      ],
+      "progress": [
+        {
+          "where": {
+            "mode": 8,
+            "zone": 7
+          },
+          "cell": "frame_counter",
+          "distinct": 2
+        },
+        {
+          "where": {
+            "mode": 8,
+            "zone": 4
+          },
+          "cell": "frame_counter",
+          "distinct": 2
+        },
+        {
+          "where": {
+            "mode": 8,
+            "zone": 8
+          },
+          "cell": "frame_counter",
+          "distinct": 2
+        },
+        {
+          "where": {
+            "mode": 52
+          },
+          "cell": "special_x",
+          "distinct": 2
+        }
+      ]
+    },
+    {
+      "id": "long-lockon",
+      "profiles": ["s3k"],
+      "movie": "scenarios/extended/long-lockon.rlmovie",
+      "frames": 24000,
+      "step": 30,
+      "cells": [
+        "mode",
+        "zone",
+        "act",
+        "player_mode",
+        "demo",
+        "frame_counter",
+        "player_x",
+        "player_y",
+        "special_x",
+        "special_y",
+        "spheres"
+      ],
+      "states": [
+        {
+          "mode": 8,
+          "zone": 0,
+          "demo": 1
+        },
+        {
+          "mode": 8,
+          "zone": 1,
+          "demo": 1
+        },
+        {
+          "mode": 8,
+          "zone": 2,
+          "demo": 1
+        },
+        {
+          "mode": 8,
+          "zone": 4,
+          "demo": 1
+        },
+        {
+          "mode": 8,
+          "zone": 8,
+          "demo": 1
+        },
+        {
+          "mode": 52,
+          "demo": 1
+        }
+      ],
+      "progress": [
+        {
+          "where": {
+            "mode": 8,
+            "zone": 0
+          },
+          "cell": "frame_counter",
+          "distinct": 2
+        },
+        {
+          "where": {
+            "mode": 8,
+            "zone": 1
+          },
+          "cell": "frame_counter",
+          "distinct": 2
+        },
+        {
+          "where": {
+            "mode": 8,
+            "zone": 2
+          },
+          "cell": "frame_counter",
+          "distinct": 2
+        },
+        {
+          "where": {
+            "mode": 8,
+            "zone": 4
+          },
+          "cell": "frame_counter",
+          "distinct": 2
+        },
+        {
+          "where": {
+            "mode": 8,
+            "zone": 8
+          },
+          "cell": "frame_counter",
+          "distinct": 2
+        },
+        {
+          "where": {
+            "mode": 52
+          },
+          "cell": "special_x",
+          "distinct": 2
+        }
+      ]
+    },
+    {
+      "id": "competition",
+      "profiles": ["s3-us", "s3-eu", "s3-jp", "s3k"],
+      "movie": "scenarios/extended/competition.rlmovie",
+      "frames": 3600,
+      "step": 30,
+      "cells": [
+        "mode",
+        "zone",
+        "act",
+        "player_mode",
+        "demo",
+        "frame_counter",
+        "player_x",
+        "player_y",
+        "competition",
+        "competition_menu",
+        "competition_zone",
+        "player2_x"
+      ],
+      "states": [
+        {
+          "mode": 56
+        },
+        {
+          "mode": 60
+        },
+        {
+          "mode": 12,
+          "competition": 1
+        }
+      ],
+      "progress": [
+        {
+          "where": {
+            "mode": 12,
+            "competition": 1
+          },
+          "cell": "player_x",
+          "distinct": 2
+        },
+        {
+          "where": {
+            "mode": 12,
+            "competition": 1
+          },
+          "cell": "player2_x",
+          "distinct": 2
+        }
+      ]
+    },
+    {
+      "id": "knuckles-sk",
+      "profiles": ["sk"],
+      "movie": "scenarios/extended/knuckles-sk.rlmovie",
+      "frames": 3000,
+      "step": 30,
+      "cells": ["mode", "zone", "act", "player_mode", "demo", "frame_counter", "player_x", "player_y"],
+      "states": [
+        {
+          "mode": 12,
+          "zone": 7,
+          "player_mode": 3
+        }
+      ],
+      "progress": [
+        {
+          "where": {
+            "mode": 12,
+            "player_mode": 3
+          },
+          "cell": "player_x",
+          "distinct": 2
+        }
+      ]
+    },
+    {
+      "id": "knuckles-lockon",
+      "profiles": ["s3k"],
+      "movie": "scenarios/extended/knuckles-lockon.rlmovie",
+      "frames": 3600,
+      "step": 30,
+      "cells": ["mode", "zone", "act", "player_mode", "demo", "frame_counter", "player_x", "player_y"],
+      "states": [
+        {
+          "mode": 76
+        },
+        {
+          "mode": 12,
+          "zone": 0,
+          "player_mode": 3
+        }
+      ],
+      "progress": [
+        {
+          "where": {
+            "mode": 12,
+            "player_mode": 3
+          },
+          "cell": "frame_counter",
+          "distinct": 2
+        }
+      ]
+    },
+    {
+      "id": "tails-write-s3",
+      "profiles": ["s3-us", "s3-eu", "s3-jp"],
+      "movie": "scenarios/extended/tails-write-s3.rlmovie",
+      "frames": 2000,
+      "step": 30,
+      "cells": [
+        "mode",
+        "zone",
+        "act",
+        "player_mode",
+        "demo",
+        "frame_counter",
+        "player_x",
+        "player_y",
+        "player_option",
+        "dataselect_entry",
+        "save_character",
+        "save_pointer"
+      ],
+      "states": [
+        {
+          "mode": 76,
+          "save_character": 0
+        },
+        {
+          "mode": 12,
+          "player_mode": 2,
+          "save_character": 2
+        }
+      ],
+      "progress": [
+        {
+          "where": {
+            "mode": 12,
+            "player_mode": 2
+          },
+          "cell": "frame_counter",
+          "distinct": 2
+        }
+      ],
+      "save_nvram": true
+    },
+    {
+      "id": "tails-write-lockon",
+      "profiles": ["s3k"],
+      "movie": "scenarios/extended/tails-write-lockon.rlmovie",
+      "frames": 2000,
+      "step": 30,
+      "cells": [
+        "mode",
+        "zone",
+        "act",
+        "player_mode",
+        "demo",
+        "frame_counter",
+        "player_x",
+        "player_y",
+        "player_option",
+        "dataselect_entry",
+        "save_character",
+        "save_pointer"
+      ],
+      "states": [
+        {
+          "mode": 76,
+          "save_character": 0
+        },
+        {
+          "mode": 12,
+          "player_mode": 2,
+          "save_character": 32
+        }
+      ],
+      "progress": [
+        {
+          "where": {
+            "mode": 12,
+            "player_mode": 2
+          },
+          "cell": "frame_counter",
+          "distinct": 2
+        }
+      ],
+      "save_nvram": true
+    },
+    {
+      "id": "tails-reload-s3",
+      "profiles": ["s3-us", "s3-eu", "s3-jp"],
+      "movie": "scenarios/extended/tails-reload-s3.rlmovie",
+      "frames": 2000,
+      "step": 30,
+      "cells": [
+        "mode",
+        "zone",
+        "act",
+        "player_mode",
+        "demo",
+        "frame_counter",
+        "player_x",
+        "player_y",
+        "player_option",
+        "dataselect_entry",
+        "save_character",
+        "save_pointer"
+      ],
+      "states": [
+        {
+          "mode": 4,
+          "save_character": 2
+        },
+        {
+          "mode": 76,
+          "save_character": 2
+        },
+        {
+          "mode": 12,
+          "player_mode": 2,
+          "save_character": 2
+        }
+      ],
+      "progress": [
+        {
+          "where": {
+            "mode": 12,
+            "player_mode": 2
+          },
+          "cell": "frame_counter",
+          "distinct": 2
+        }
+      ],
+      "seed": "tails-write-s3"
+    },
+    {
+      "id": "tails-reload-lockon",
+      "profiles": ["s3k"],
+      "movie": "scenarios/extended/tails-reload-lockon.rlmovie",
+      "frames": 2000,
+      "step": 30,
+      "cells": [
+        "mode",
+        "zone",
+        "act",
+        "player_mode",
+        "demo",
+        "frame_counter",
+        "player_x",
+        "player_y",
+        "player_option",
+        "dataselect_entry",
+        "save_character",
+        "save_pointer"
+      ],
+      "states": [
+        {
+          "mode": 4,
+          "save_character": 32
+        },
+        {
+          "mode": 76,
+          "save_character": 32
+        },
+        {
+          "mode": 12,
+          "player_mode": 2,
+          "save_character": 32
+        }
+      ],
+      "progress": [
+        {
+          "where": {
+            "mode": 12,
+            "player_mode": 2
+          },
+          "cell": "frame_counter",
+          "distinct": 2
+        }
+      ],
+      "seed": "tails-write-lockon"
+    },
+    {
+      "id": "special-s3",
+      "profiles": ["s3-us"],
+      "movie": "scenarios/extended/special-s3.rlmovie",
+      "frames": 3600,
+      "step": 30,
+      "cells": [
+        "mode",
+        "zone",
+        "act",
+        "player_mode",
+        "demo",
+        "frame_counter",
+        "player_x",
+        "player_y",
+        "level_select",
+        "level_option",
+        "special_stage",
+        "special_x",
+        "special_y",
+        "spheres",
+        "velocity"
+      ],
+      "states": [
+        {
+          "mode": 40,
+          "level_select": 257
+        },
+        {
+          "mode": 52,
+          "spheres": 102,
+          "velocity": 4096
+        },
+        {
+          "mode": 72
+        },
+        {
+          "mode": 12
+        }
+      ],
+      "progress": [
+        {
+          "where": {
+            "mode": 52
+          },
+          "cell": "special_x",
+          "distinct": 2
+        }
+      ]
+    }
+  ]
+}

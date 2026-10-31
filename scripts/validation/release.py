@@ -44,7 +44,7 @@ STAGES = (
             "check-relocated",
         ),
     ),
-    ("runtime", ("verify-emulator", "trace", "trace-relocated")),
+    ("runtime", ("verify-emulator", "trace", "trace-relocated", "trace-extended")),
     ("publication-audit", ("release-audit",)),
 )
 
@@ -68,6 +68,9 @@ def validate_profiles(manifest, images):
 
 
 def audit_runtime(matrix):
+    from scripts.runtime.extended import audit as audit_extended
+
+    audit_extended(matrix)
     contract, entries = scenarios()
     by_profile = {r["profile"]: r for r in entries}
     signature = runtime_signature()

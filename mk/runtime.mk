@@ -11,3 +11,11 @@ trace:
 
 trace-relocated:
 	$(PYTHON) -m scripts.run runtime.runner matrix
+
+.PHONY: golden-extended trace-extended
+
+golden-extended:
+	$(PYTHON) -m scripts.run runtime.extended golden
+
+trace-extended:
+	$(PYTHON) -m scripts.run runtime.extended check

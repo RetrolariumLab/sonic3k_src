@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 70
+    "commit_count": 71
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -467,9 +467,15 @@
       "commits": ["eb7abf61f63feba234ad0f7ae43ad1969e5e6332"]
     },
     {
-      "id": "current-release-stage",
+      "id": "change-ed755595ff43",
       "kind": "source",
-      "summary": "Normalize source basenames and processor suffixes, group declarations by their semantic owners and preserve all assembly tokens, source origins and include order.",
+      "summary": "Normalize source filenames around semantic owners and processor roles",
+      "commits": ["ed755595ff434265dcd1534c8caa16bb082f35cc"]
+    },
+    {
+      "id": "current-release-stage",
+      "kind": "tooling",
+      "summary": "Compare extended original-input controller routes, require ordered reached states and active progress, and verify real cartridge SRAM reload across isolated emulator processes.",
       "commits": ["release-commit"]
     }
   ],
@@ -658,7 +664,10 @@
     "profiles": ["s3-us", "s3-eu", "s3-jp", "sk", "s3k"],
     "relocated_variants": "config/reconstruction/relocation.json",
     "pixels_compared": false,
-    "limitation": "Finite input-free attract coverage: nine RAM cells at seven checkpoints, not exhaustive gameplay."
+    "limitation": "Finite exact RAM coverage: all-profile short attract across all 32 relocation variants plus longer attract, characters, competition, special-stage and own-SRAM reload routes on preservation and g0 images; not exhaustive gameplay or ending coverage.",
+    "extended_manifest": "config/runtime/extended_scenarios.json",
+    "extended_original_pairs": 20,
+    "extended_comparisons": 40
   },
   "toolchain": {
     "manifest": "config/toolchain.json",

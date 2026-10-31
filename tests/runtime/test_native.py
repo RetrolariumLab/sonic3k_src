@@ -72,6 +72,45 @@ class IsolatedMovieTests(unittest.TestCase):
             native.reset_emulator(outside)
         self.assertEqual(outside.read_text(), "untouched")
 
+    def test_explicit_cartridge_seed_survives_only_its_own_run(self):
+        check = self.root / "case.json"
+        check.write_text('{"machine":"genesis"}')
+        args = ["check", check, "--rom", self.root / "tails.bin", "--mame", self.mame]
+        proc = Mock(pid=10)
+        proc.wait.return_value = 0
+        from contextlib import ExitStack
+
+        with patch.object(
+            native,
+            "load",
+            side_effect=lambda name: (
+                {"machine": "genesis"} if name == "case.json" else {"busy_timeout_seconds": 0, "run_timeout_seconds": 1}
+            ),
+        ):
+            with ExitStack() as stack:
+                for item in self.invoke(proc, [[], []])[1:]:
+                    stack.enter_context(item)
+                native.run_movie(args, self.root / "build/runtime/seed.log", nvram=b"owned SRAM")
+            self.assertEqual(native.read_nvram(args), b"owned SRAM")
+        native.reset_emulator(self.mame)
+        self.assertFalse((self.stage / "nvram").exists())
+
+    def test_invalid_seed_does_not_discard_previous_state_or_launch(self):
+        prior = self.stage / "prior.cfg"
+        prior.write_text("untouched")
+        with patch.object(native, "wait_idle"), patch.object(native.subprocess, "Popen") as launch:
+            for data in (b"", b"x" * 131073, "path-to-personal-SRAM"):
+                with self.assertRaisesRegex(ValueError, "bounded cartridge"):
+                    native.run_movie(["check", "--mame", self.mame], self.root / "test.log", nvram=data)
+            self.assertEqual(prior.read_text(), "untouched")
+            launch.assert_not_called()
+        with patch.object(native, "load", return_value={"machine": "../outside"}):
+            with self.assertRaisesRegex(ValueError, "Invalid machine"):
+                native.nvram_path(["check", self.root / "case.json", "--rom", self.root / "tails.bin"])
+        with patch.object(native, "load", return_value={"machine": "genesis"}):
+            with self.assertRaisesRegex(ValueError, "Invalid machine"):
+                native.nvram_path(["check", self.root / "case.json", "--rom", self.root / "../escape name.bin"])
+
     def invoke(self, proc, rows):
         return [
             patch.object(native, "load", return_value={"busy_timeout_seconds": 0, "run_timeout_seconds": 1}),

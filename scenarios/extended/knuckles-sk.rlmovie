@@ -1,0 +1,13 @@
+# retrolarium movie 1
+platform megadrive
+source mame
+title knuckles-sk
+frames 3000
+---
+900 00 00
+1 02 00
+99 00 00
+1 80 00
+399 00 00
+600 08 00
+1000 00 00
