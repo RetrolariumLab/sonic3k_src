@@ -900,7 +900,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 74750,
+      "physical_lines": 67933,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -13393,6 +13393,321 @@
       ]
     },
     {
+      "path": "src/objects/cutscenes/hpz/sk/aftermath_and_player_guidance.s",
+      "owner": "objects/cutscenes/hpz/sk",
+      "responsibility": "Hidden Palace encounter aftermath, ship theft sequence and scripted player guidance through the scene.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 472,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 4172,
+        "last_line": 4640,
+        "sha256": "d4435f0422de79a28207a635b88018b006911ca9b2eb8a5893cde446c4248a99"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 411874,
+          "end": 413320
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 411874,
+          "end": 413320
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/hpz/sk/crane.s",
+      "owner": "objects/cutscenes/hpz/sk",
+      "responsibility": "Hidden Palace crane or linked child movement, indexed geometry, animation and synchronized state.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 269,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 5049,
+        "last_line": 5313,
+        "sha256": "c2edb788c23fac372a2b8a6cc6daca9ae413cc0dbb6d18e164a0f889c315267b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_65360",
+          "kind": "terminal-tail",
+          "reason": "Close the complete linked crane movement and animation program, including its indexed private geometry and terminal branch back to the shared motion state.",
+          "origin_first_line": 5051,
+          "origin_terminal_line": 5313,
+          "origin_end_line": 5313
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 414560,
+          "end": 415154
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 414560,
+          "end": 415154
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/hpz/sk/effects.s",
+      "owner": "objects/cutscenes/hpz/sk",
+      "responsibility": "Hidden Palace transient effects, fragments, timed motion and chain child construction.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 177,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 4875,
+        "last_line": 5048,
+        "sha256": "3332ca6a9c0f3aa8172a04b408b5e6bf7a2afd38f29fe32e53a3760a4f186a8b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 414090,
+          "end": 414560
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 414090,
+          "end": 414560
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/hpz/sk/encounter.s",
+      "owner": "objects/cutscenes/hpz/sk",
+      "responsibility": "Hidden Palace Knuckles encounter setup, combat movement, attack and defeat transition state program.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 568,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 3156,
+        "last_line": 3719,
+        "sha256": "2eaff8cd954324ecc79890b93d1a5a6dc1fe55e87ecca5277d12e87480a424a7"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_6429E",
+          "kind": "terminal-tail",
+          "reason": "Keep the final encounter defeat and dizzy-pose transition tails together after the original independent fight returns.",
+          "origin_first_line": 3654,
+          "origin_terminal_line": 3719,
+          "origin_end_line": 3719
+        }
+      ],
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 408828,
+          "end": 410506
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 408828,
+          "end": 410506
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/hpz/sk/platforms.s",
+      "owner": "objects/cutscenes/hpz/sk",
+      "responsibility": "Hidden Palace scene platforms, collisions, displacement and timed display callbacks.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 83,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 5314,
+        "last_line": 5393,
+        "sha256": "7103318489c2315e61aad0334c6f4d243342e836e3e53498578e53fad31021c6"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 415154,
+          "end": 415400
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 415154,
+          "end": 415400
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/hpz/sk/recovery.s",
+      "owner": "objects/cutscenes/hpz/sk",
+      "responsibility": "Hidden Palace post-encounter Knuckles movement, ship-scene setup and recovery progression.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 456,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 3720,
+        "last_line": 4171,
+        "sha256": "b7797da5cbb8ac279fb420d71a9029dbb62f1a82f448e808be1713cb281bf92d"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_6438A",
+          "kind": "terminal-tail",
+          "reason": "Close the complete post-encounter recovery and ship-scene transition program; all its conditional returns remain one physically inseparable original cohort.",
+          "origin_first_line": 3722,
+          "origin_terminal_line": 4171,
+          "origin_end_line": 4171
+        }
+      ],
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 410506,
+          "end": 411874
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 410506,
+          "end": 411874
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/hpz/sk/ship.s",
+      "owner": "objects/cutscenes/hpz/sk",
+      "responsibility": "Hidden Palace ship actor state, synchronized motion and interaction callbacks.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 121,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 4641,
+        "last_line": 4757,
+        "sha256": "426f1ebf9892b163eb50bab0cf5e80b61327d2d71ec017e2fadc43efe8bd641e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_64E88",
+          "kind": "terminal-tail",
+          "reason": "Close the complete ship controller and scene synchronization callbacks, which have only unconditional terminal dispatch.",
+          "origin_first_line": 4643,
+          "origin_terminal_line": 4757,
+          "origin_end_line": 4757
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 413320,
+          "end": 413742
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 413320,
+          "end": 413742
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/hpz/sk/ship_attachments.s",
+      "owner": "objects/cutscenes/hpz/sk",
+      "responsibility": "Hidden Palace ship and crane child attachments, parent-relative offsets and movement responses.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 121,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 4758,
+        "last_line": 4874,
+        "sha256": "1493fbd45a5ad3f1cdd6cb6822fd07b1fbdc0799dd487d931ef41e1155eacfed"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_6502E",
+          "kind": "terminal-tail",
+          "reason": "Close the complete family of ship attachments and adjusted child drawing callbacks with no original independent return boundaries.",
+          "origin_first_line": 4760,
+          "origin_terminal_line": 4874,
+          "origin_end_line": 4874
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 413742,
+          "end": 414090
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 413742,
+          "end": 414090
+        }
+      ]
+    },
+    {
       "path": "src/objects/cutscenes/knuckles/s3/angel_island.s",
       "owner": "objects/cutscenes/knuckles/s3",
       "responsibility": "Knuckles cutscene dispatch and Angel Island act-one and act-two scene programs.",
@@ -13629,6 +13944,566 @@
           "component": "s3-us",
           "start": 2380956,
           "end": 2381300
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/sk/angel_island.s",
+      "owner": "objects/cutscenes/sk",
+      "responsibility": "Knuckles cutscene dispatch and Angel Island act-one and act-two encounters.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 328,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 484,
+        "last_line": 807,
+        "sha256": "f5387b92fc002209c5d8c3aea5c88ed81936f1e612cda4706cd7571fc8ed4e87"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_620AA",
+          "kind": "terminal-tail",
+          "reason": "Keep the final conditional landing, motion and parent-attached solid callbacks together after all earlier independent encounter return points.",
+          "origin_first_line": 771,
+          "origin_terminal_line": 807,
+          "origin_end_line": 807
+        }
+      ],
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 400716,
+          "end": 401682
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 400716,
+          "end": 401682
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/sk/animation_and_patterns.s",
+      "owner": "objects/cutscenes/sk",
+      "responsibility": "Knuckles cutscene DPLC pointer records and raw animation or script streams.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 328,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 6948,
+        "last_line": 7272,
+        "sha256": "e17b67b18e162085d170fb339c0adfbcaea9947d72e11bb319dbf778cbd22d5c"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 419434,
+          "end": 420114
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 419434,
+          "end": 420114
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/sk/buttons.s",
+      "owner": "objects/cutscenes/sk",
+      "responsibility": "Generic cutscene button and Carnival Night water-level cork or switch actors.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 171,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 5812,
+        "last_line": 5979,
+        "sha256": "28fd2458639a659a02f2d555372ee8141dd21be076d959e5e49cb8ae263e8231"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 416724,
+          "end": 417238
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 416724,
+          "end": 417238
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/sk/carnival_encounters.s",
+      "owner": "objects/cutscenes/sk",
+      "responsibility": "Carnival Night Knuckles encounters and their local transition helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 334,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 935,
+        "last_line": 1264,
+        "sha256": "992c795b639d9c0993d5f1818013bbf5b849d2bd990ce16e6429654657fae88b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_6261A",
+          "kind": "terminal-tail",
+          "reason": "Close the final input-controlled Carnival Night exit callback, including its conditional return and deletion tail.",
+          "origin_first_line": 1252,
+          "origin_terminal_line": 1264,
+          "origin_end_line": 1264
+        }
+      ],
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 402078,
+          "end": 403008
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 402078,
+          "end": 403008
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/sk/graphics_and_palettes.s",
+      "owner": "objects/cutscenes/sk",
+      "responsibility": "Knuckles cutscene mappings, DPLC includes, palette records and scene art descriptors.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 56,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 7273,
+        "last_line": 7325,
+        "sha256": "01b08e77af1b231471ea7fe3d355a4b1874abfcdb9d87fc0e78b5e6bd17d3cb8"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 420114,
+          "end": 423026
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 420114,
+          "end": 423026
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/sk/hydrocity.s",
+      "owner": "objects/cutscenes/sk",
+      "responsibility": "Hydrocity Knuckles cutscene, deletion callback and private children.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 130,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 808,
+        "last_line": 934,
+        "sha256": "95df8ad34accaa1ebeec7aab4562ae4dc840a8fe625a7ee523c9efb0ac0905df"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 401682,
+          "end": 402078
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 401682,
+          "end": 402078
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/sk/launch_base.s",
+      "owner": "objects/cutscenes/sk",
+      "responsibility": "Launch Base Knuckles encounters in both acts and their local transition helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 396,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 1265,
+        "last_line": 1656,
+        "sha256": "abb87434027e4b2b8ee035db9a420bda84c2086930ca6a9fe4ab4aa290435aad"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_629A8",
+          "kind": "terminal-tail",
+          "reason": "Keep the final Launch Base water, moving scene children and private velocity data together after the last original independent return.",
+          "origin_first_line": 1560,
+          "origin_terminal_line": 1656,
+          "origin_end_line": 1656
+        }
+      ],
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 403008,
+          "end": 404162
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 403008,
+          "end": 404162
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/sk/launch_base_pillar.s",
+      "owner": "objects/cutscenes/sk",
+      "responsibility": "Knuckles cutscene pillar actor and private mapping.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 28,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 1657,
+        "last_line": 1680,
+        "sha256": "001d6736c9405ed2923e41d54ad4748baad1e557b045f0c6d81fcd6c7b7aa9b4"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_LBZKnuxPillar",
+          "kind": "terminal-tail",
+          "reason": "Close the complete pillar actor and its private mapping after the unconditional display tail.",
+          "origin_first_line": 1659,
+          "origin_terminal_line": 1677,
+          "origin_end_line": 1680
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 404162,
+          "end": 404282
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 404162,
+          "end": 404282
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/sk/lava_reef.s",
+      "owner": "objects/cutscenes/sk",
+      "responsibility": "Lava Reef Knuckles encounter, boulder interaction and scene progression.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 209,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 2950,
+        "last_line": 3155,
+        "sha256": "275948994ac012854c1f4934b740c2fb3ce44121e06586391edcb273b310f34e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 408170,
+          "end": 408828
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 408170,
+          "end": 408828
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/sk/movement_and_collision.s",
+      "owner": "objects/cutscenes/sk",
+      "responsibility": "Shared Knuckles cutscene motion, collision, animation and scene-relative adjustment helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 265,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 5980,
+        "last_line": 6241,
+        "sha256": "d350c47eb71b4a4986d8affb8685a5b96ca1f92d575113620c8a853c9d8e196b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 417238,
+          "end": 417876
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 417238,
+          "end": 417876
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/sk/mushroom_hill_act1.s",
+      "owner": "objects/cutscenes/sk",
+      "responsibility": "Mushroom Hill first-act Knuckles encounter, switch actor and attached scene objects.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 487,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 1681,
+        "last_line": 2164,
+        "sha256": "92f7a23555d7c1cf852db0949b9ae651e9e07c0ea08c8509986915b5a7dcd96a"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 404282,
+          "end": 405728
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 404282,
+          "end": 405728
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/sk/mushroom_hill_act2.s",
+      "owner": "objects/cutscenes/sk",
+      "responsibility": "Mushroom Hill second-act Knuckles encounter, motion and scene transition helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 284,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 2165,
+        "last_line": 2445,
+        "sha256": "83da0dcb3a4594293c6167d66e9102fe475eaeb3fef68220a44c1411d2a26c4f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 405728,
+          "end": 406598
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 405728,
+          "end": 406598
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/sk/object_catalog.s",
+      "owner": "objects/cutscenes/sk",
+      "responsibility": "Knuckles cutscene tracking slots, object attributes and child construction records.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 307,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 6644,
+        "last_line": 6947,
+        "sha256": "bfadc7d2b032d2c374b8e242dcbd57f5cb5208579b93438db90cc3d08692f384"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 418746,
+          "end": 419434
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 418746,
+          "end": 419434
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/sk/opening.s",
+      "owner": "objects/cutscenes/sk",
+      "responsibility": "Standalone Knuckles opening sequence, skip input and startup scene actors.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 508,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 2446,
+        "last_line": 2949,
+        "sha256": "7fee537d818aab149b6cbb78cf90583b55dc7a58ab76f7aa742714f6c2fc56c2"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_63694",
+          "kind": "terminal-tail",
+          "reason": "Close the opening scene child actor programs, indexed private records and final swing or deletion callbacks after the last original independent return.",
+          "origin_first_line": 2637,
+          "origin_terminal_line": 2949,
+          "origin_end_line": 2949
+        }
+      ],
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 406598,
+          "end": 408170
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 406598,
+          "end": 408170
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/sk/sky_sanctuary.s",
+      "owner": "objects/cutscenes/sk",
+      "responsibility": "Sky Sanctuary Knuckles encounter, tired actor and scene button program.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 394,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 5421,
+        "last_line": 5811,
+        "sha256": "a254077d578deb2173e40a3b4fbd3ce3aa64b740b7ed04b1e844da494dae6818"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 415450,
+          "end": 416724
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 415450,
+          "end": 416724
+        }
+      ]
+    },
+    {
+      "path": "src/objects/cutscenes/sk/state_and_patterns.s",
+      "owner": "objects/cutscenes/sk",
+      "responsibility": "Shared Knuckles cutscene state selection, graphics patterns, angle helpers and child positioning.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 405,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 6242,
+        "last_line": 6643,
+        "sha256": "cd5f71c9626af5d7b46a7496ed366bbd87c455c1aa76892950b58916075e24bb"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 417876,
+          "end": 418746
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 417876,
+          "end": 418746
         }
       ]
     },
@@ -55438,6 +56313,41 @@
           "component": "sk",
           "start": 15088,
           "end": 15914
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/palettes/sk/hidden_palace_control.s",
+      "owner": "rendering/palettes/sk",
+      "responsibility": "Hidden Palace scene palette selection, transfer and private palette pointer index.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 30,
+      "origin": {
+        "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
+        "path": "sonic3k.s",
+        "first_line": 5394,
+        "last_line": 5420,
+        "sha256": "d0d1042e3abca86f64bb8f2f1c4fe91d393c5755a8a53613f4e740172e652e68"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 415400,
+          "end": 415450
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 415400,
+          "end": 415450
         }
       ]
     },

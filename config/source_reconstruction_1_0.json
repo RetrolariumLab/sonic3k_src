@@ -670,6 +670,12 @@
       "commits": ["168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd"]
     },
     {
+      "id": "change-685ff61c714d",
+      "kind": "source_or_tooling",
+      "summary": "Own S&K ending actors, Gumball and special-stage entry",
+      "commits": ["685ff61c714d63ac4759d95513e2a3c2d4726221"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",
