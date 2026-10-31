@@ -97,11 +97,10 @@ child constructors may also supply a zero pointer and a movement-only callback.
 The constructor packet is 22 bytes: four longwords, signed X/Y offset bytes and
 two velocity words, after the shared count-minus-one word.
 
-Additional palette-cycle formats still need their source editing contracts
-before complete content acceptance. The registered program corpora are
-byte-checked independently in every active base profile and in their composite
-views; this does not replace that remaining format work or the full release
-gate.
+The alternate indexed palette cycles use their own checked contract; see
+[indexed palette rotation](indexed_palettes.md). All these families are composed
+together before encoded-container verification. Content checks do not replace
+the full release gate.
 
 Indexed lookups stop at their declared allocation or explicit alignment, not at
 an opcode byte. `RawAni_90BCA` contains two three-frame sections separated by

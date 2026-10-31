@@ -16,6 +16,7 @@ from scripts.authoring import (
     format_codecs,
     smps_storage,
     palette_workflow,
+    palette_indexed_workflow,
     raw_workflow,
     source_fragments,
 )
@@ -159,7 +160,8 @@ def roundtrip():
     report["assembly_content"] = assembly_workflow.roundtrip(workspace)
     palette_patches, palette_evidence = palette_workflow.prepare(workspace)
     raw_patches, raw_evidence = raw_workflow.prepare(workspace)
-    patches = palette_patches + raw_patches
+    indexed_patches, indexed_evidence = palette_indexed_workflow.prepare(workspace)
+    patches = palette_patches + raw_patches + indexed_patches
     originals = {name: (ROOT / name).read_bytes() for name in {p["path"] for p in patches}}
     report["source_fragments"] = source_fragments.write(workspace, originals, patches)
     report["palette_content"] = {
@@ -173,6 +175,11 @@ def roundtrip():
         "source_entries": sum(len(r["members"]) for r in raw_evidence),
         "source_files": len({r["path"] for r in raw_evidence}),
         "artifacts": raw_evidence,
+    }
+    report["indexed_palette_content"] = {
+        "groups": len(indexed_evidence),
+        "source_files": len({r["path"] for r in indexed_evidence}),
+        "artifacts": indexed_evidence,
     }
     print(
         "[OK] Composed palette/raw source spans: "
@@ -247,6 +254,8 @@ def zero_edit():
         "palette_source_files": report["palette_content"]["source_files"],
         "raw_groups": report["raw_content"]["groups"],
         "raw_source_entries": report["raw_content"]["source_entries"],
+        "indexed_palette_groups": report["indexed_palette_content"]["groups"],
+        "indexed_palette_source_files": report["indexed_palette_content"]["source_files"],
         "raw_source_files": report["raw_content"]["source_files"],
         "workspace_source_sha256": report["workspace_source_sha256"],
         "profiles": {key: hashlib.sha256(path.read_bytes()).hexdigest() for key, path in outputs.items()},
@@ -265,6 +274,7 @@ def main(argv=None):
         source_catalog = assembly_workflow.catalog()
         palette_catalog, palette_sources = palette_workflow.catalog()
         raw_catalog, raw_sources = raw_workflow.catalog()
+        indexed_catalog, indexed_sources = palette_indexed_workflow.catalog()
         print(
             "[OK] Complete immutable content registry: "
             + str(len(catalog.rows()))
@@ -274,7 +284,9 @@ def main(argv=None):
             + str(len(palette_catalog.rows()))
             + " palette groups and "
             + str(len(raw_catalog.rows()))
-            + " registered raw groups"
+            + " registered raw groups and "
+            + str(len(indexed_catalog.rows()))
+            + " indexed palette groups"
         )
     elif args.command == "roundtrip":
         roundtrip()

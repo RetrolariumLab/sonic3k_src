@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "scope": "preservation-fixed-footprint",
+  "groups": [
+    {
+      "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "symbol": "off_7DD5A",
+      "first_line": 501,
+      "last_line": 538,
+      "scope": "off_7DD5A",
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 74,
+      "declarations_sha256": "39f80e322cc9fb1a3ee55d3bbbc06e4f9eaa0ec86c081c713ddf645dfd832972",
+      "palette_count": 7,
+      "step_count": 12,
+      "color_count": 2,
+      "ram_state_copy": false
+    },
+    {
+      "path": "src/objects/zones/hpz/sk/emerald_resources.s",
+      "symbol": "off_914CE",
+      "first_line": 44,
+      "last_line": 82,
+      "scope": "off_914CE",
+      "profiles": ["s3k", "sk"],
+      "capacity_bytes": 74,
+      "declarations_sha256": "b44e6b97e49cabe03c00f2c29d7ec30ca77c54f8dd423878a19cd7ab6f050845",
+      "palette_count": 7,
+      "step_count": 12,
+      "color_count": 2,
+      "ram_state_copy": true
+    }
+  ],
+  "consumer_sources": [
+    {
+      "path": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "sha256": "6d287389099aaeb3f178c747a8803da09f5a279f00cd64c99e7b7515a89f44b4"
+    },
+    {
+      "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "sha256": "6076352c8c804721c8a44e5651637bbeb4c80d6ca7134ade17d2131929db24d2"
+    },
+    {
+      "path": "src/objects/ending/sk/master_emerald.s",
+      "sha256": "a22c49190199cd446a0dafec8f08efc34d6e5f6ccf55bf5cc0fae1eed9135cac"
+    },
+    {
+      "path": "src/objects/ending/sk/pose_and_plane_scene.s",
+      "sha256": "f58675798206d9c8bdaa6b7748a9d48e4f058df959c3e4ce8164a6d6091935af"
+    },
+    {
+      "path": "src/objects/interface/blue_sphere/sk/mecha_and_emerald_widgets.s",
+      "sha256": "8828b944d1bd72c4bfebaf51e635cf9616c30cbd057b55a430d8e8c25382e464"
+    },
+    {
+      "path": "src/objects/zones/hpz/sk/emerald_resources.s",
+      "sha256": "759dcc6aaa7b3448d46141fe86415e7cf82dbe9f7a0247cd72c690c13f10dc60"
+    },
+    {
+      "path": "src/objects/zones/hpz/sk/master_emerald.s",
+      "sha256": "3feaf8cd7c64c7543274151822ef8bf56a1e94bfb44cb1eea0d6c7befde74cbc"
+    },
+    {
+      "path": "src/rendering/palettes/sk/rotation_script.s",
+      "sha256": "74bce6589c6de1f97b971a9d117b1d7f0cdc7f4c6dea9ac9c0e0326bfd1931b2"
+    }
+  ],
+  "consumer_bindings": [
+    {
+      "path": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "call_line": 187,
+      "header": "off_7DD5A",
+      "destinations": [
+        {
+          "symbol": "Normal_palette_line_3",
+          "byte_offset": 28
+        }
+      ]
+    },
+    {
+      "path": "src/objects/interface/blue_sphere/sk/mecha_and_emerald_widgets.s",
+      "call_line": 59,
+      "header": "off_7DD5A",
+      "destinations": [
+        {
+          "symbol": "Normal_palette_line_4",
+          "byte_offset": 28
+        }
+      ]
+    },
+    {
+      "path": "src/objects/ending/sk/pose_and_plane_scene.s",
+      "call_line": 419,
+      "header": "off_7DD5A",
+      "destinations": [
+        {
+          "symbol": "Normal_palette_line_3",
+          "byte_offset": 28
+        }
+      ]
+    },
+    {
+      "path": "src/objects/ending/sk/master_emerald.s",
+      "call_line": 114,
+      "header": "off_7DD5A",
+      "destinations": [
+        {
+          "symbol": "Normal_palette_line_3",
+          "byte_offset": 28
+        },
+        {
+          "symbol": "Normal_palette_line_2",
+          "byte_offset": 28
+        }
+      ]
+    },
+    {
+      "path": "src/objects/zones/hpz/sk/master_emerald.s",
+      "call_line": 47,
+      "header": "off_914CE",
+      "destinations": [
+        {
+          "symbol": "Normal_palette_line_4",
+          "byte_offset": 2
+        }
+      ]
+    }
+  ]
+}
