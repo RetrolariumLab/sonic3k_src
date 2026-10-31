@@ -900,7 +900,7 @@
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
       "role": "pending",
       "status": "pending",
-      "physical_lines": 78939,
+      "physical_lines": 74750,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "sonic3k.s",
@@ -6631,6 +6631,36 @@
       ]
     },
     {
+      "path": "src/game/modes/ending/sk/graphics_and_palettes.s",
+      "owner": "game/modes/ending/sk",
+      "responsibility": "Ending mappings, scene palettes and the Super Tails palette rotation script.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 74,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 3426,
+        "last_line": 3496,
+        "sha256": "855a55904699d8455669d1fc3d76c7403871b75b34155b40352867bcd9a4dc4c"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 393942,
+          "end": 396374
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 393942,
+          "end": 396374
+        }
+      ]
+    },
+    {
       "path": "src/game/modes/ending/sk/lockon_closing_credits.s",
       "owner": "game/modes/ending/sk",
       "responsibility": "Closing credit text stream, relative offset index and display positions for Sonic 3 & Knuckles.",
@@ -9557,6 +9587,146 @@
           "component": "sk",
           "start": 37394,
           "end": 37956
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bonus/gumball/sk/machine.s",
+      "owner": "objects/bonus/gumball/sk",
+      "responsibility": "Gumball machine controller, item mechanism and bonus-stage completion state.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 238,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 3497,
+        "last_line": 3731,
+        "sha256": "1f44c9f8eb78d058773c63e7df73e17f757c8dd2e916555088ff7e57f3094f59"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 396374,
+          "end": 397102
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 396374,
+          "end": 397102
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "owner": "objects/bonus/gumball/sk",
+      "responsibility": "Gumball machine item motion, collision, spawning and state helpers.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 424,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 3772,
+        "last_line": 4192,
+        "sha256": "6bd1c98dfcb6a4cfb6236a178e2c6b8f49c0b20bb9d27a6542ff32b824b4b272"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 397204,
+          "end": 398220
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 397204,
+          "end": 398220
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "owner": "objects/bonus/gumball/sk",
+      "responsibility": "Gumball object attributes, construction records, raw animations and mappings.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 108,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 4193,
+        "last_line": 4297,
+        "sha256": "d33ddce2624507f18ca86eb5e50fa9b075e01f77709232f81b03faf15ab5769e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 398220,
+          "end": 398954
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 398220,
+          "end": 398954
+        }
+      ]
+    },
+    {
+      "path": "src/objects/bonus/gumball/sk/triangle_bumper.s",
+      "owner": "objects/bonus/gumball/sk",
+      "responsibility": "Gumball triangle bumper collision response, animation and score interaction.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 44,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 3732,
+        "last_line": 3771,
+        "sha256": "2e51dfc0d2d38be1fc426a1b89ba28d8e29313ad523ed1edfd16376fb613e6eb"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "Obj_GumballTriangleBumper",
+          "kind": "terminal-tail",
+          "reason": "Close the complete triangle bumper callback family, which ends through unconditional draw dispatch and has no original independent return boundary.",
+          "origin_first_line": 3734,
+          "origin_terminal_line": 3771,
+          "origin_end_line": 3771
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 397102,
+          "end": 397204
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 397102,
+          "end": 397204
         }
       ]
     },
@@ -14015,6 +14185,146 @@
       ]
     },
     {
+      "path": "src/objects/ending/sk/character_poses.s",
+      "owner": "objects/ending/sk",
+      "responsibility": "Ending Sonic, Tails and Knuckles pose actors, attached display elements and private placement offsets.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 206,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 1931,
+        "last_line": 2133,
+        "sha256": "16c12efdd4bba7543a79b51e4d2196bc267391c5e28eadb86ecf7b55f1a6524e"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 389916,
+          "end": 390502
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 389916,
+          "end": 390502
+        }
+      ]
+    },
+    {
+      "path": "src/objects/ending/sk/child_motion.s",
+      "owner": "objects/ending/sk",
+      "responsibility": "Ending child movement, parent-relative positioning and indexed character attachment offsets.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 102,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 3109,
+        "last_line": 3207,
+        "sha256": "384aece871d9c04aab0af39952b12eac0424b647fd319ed9e3ef6c865b20dc93"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 393216,
+          "end": 393410
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 393216,
+          "end": 393410
+        }
+      ]
+    },
+    {
+      "path": "src/objects/ending/sk/cloud_field.s",
+      "owner": "objects/ending/sk",
+      "responsibility": "Ending cloud generator, seeded velocity or position selection and individual cloud movement.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 157,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 2462,
+        "last_line": 2615,
+        "sha256": "e5246bf5cb60e6617a7d17a891d5129fbcd49d107acea4fd6cfa6497ae393033"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 391500,
+          "end": 391886
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 391500,
+          "end": 391886
+        }
+      ]
+    },
+    {
+      "path": "src/objects/ending/sk/eggman_and_egg_robo_eyecatch.s",
+      "owner": "objects/ending/sk",
+      "responsibility": "Eggman and EggRobo ending eyecatch state machines, attached effects and palette or graphics preparation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 152,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 2134,
+        "last_line": 2282,
+        "sha256": "98b371621e337f916cd992f1a4c13c03a386daed5be0f0bc6207d0c9e5327629"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 390502,
+          "end": 390942
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 390502,
+          "end": 390942
+        }
+      ]
+    },
+    {
       "path": "src/objects/ending/sk/master_emerald.s",
       "owner": "objects/ending/sk",
       "responsibility": "Ending Master Emerald actor state, movement and scene transitions.",
@@ -14046,6 +14356,71 @@
           "component": "sk",
           "start": 384608,
           "end": 385006
+        }
+      ]
+    },
+    {
+      "path": "src/objects/ending/sk/mecha_sonic_eyecatch.s",
+      "owner": "objects/ending/sk",
+      "responsibility": "Mecha Sonic ending eyecatch, palette rotation, animation, launch and exit input.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 140,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 2283,
+        "last_line": 2419,
+        "sha256": "1587237097500f3669d6af895dfa1e4bc3a4a2907678189a65873c3874d7e499"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 390942,
+          "end": 391366
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 390942,
+          "end": 391366
+        }
+      ]
+    },
+    {
+      "path": "src/objects/ending/sk/object_catalog.s",
+      "owner": "objects/ending/sk",
+      "responsibility": "Ending object attributes, child creation records and raw animation streams.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 221,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 3208,
+        "last_line": 3425,
+        "sha256": "4153b96d37542e11cb1976efb009042ea4fa22ee9310857a57edc4aece2f4738"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 393410,
+          "end": 393942
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 393410,
+          "end": 393942
         }
       ]
     },
@@ -14085,6 +14460,221 @@
       ]
     },
     {
+      "path": "src/objects/ending/sk/plane_attachment.s",
+      "owner": "objects/ending/sk",
+      "responsibility": "Player-dependent plane attachment mapping, parent priority and adjusted child drawing.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 53,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 1209,
+        "last_line": 1258,
+        "sha256": "5b543adb24a5c1b6276b03eb01450c53994904d69bb6bff547e3177748a83aec"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 387890,
+          "end": 388038
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 387890,
+          "end": 388038
+        }
+      ]
+    },
+    {
+      "path": "src/objects/ending/sk/pose_and_plane_scene.s",
+      "owner": "objects/ending/sk",
+      "responsibility": "Ending player poses, rescued animals, plane sequence and final camera or palette transition.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 664,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 460,
+        "last_line": 1120,
+        "sha256": "76cdb4be968f8b7a74d93324e31f4cdf1cd9cdd0e67e3440d29a722252ebfce9"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 385418,
+          "end": 387666
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 385418,
+          "end": 387666
+        }
+      ]
+    },
+    {
+      "path": "src/objects/ending/sk/result_banners.s",
+      "owner": "objects/ending/sk",
+      "responsibility": "Ending logo and result banner actors, placement records and input-controlled return to title.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 135,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 1799,
+        "last_line": 1930,
+        "sha256": "2425121480bb524fc641804f097d9957677ee1603c9b6402c56b186516267682"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 389548,
+          "end": 389916
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 389548,
+          "end": 389916
+        }
+      ]
+    },
+    {
+      "path": "src/objects/ending/sk/result_emerald.s",
+      "owner": "objects/ending/sk",
+      "responsibility": "Result Master Emerald display, private placement, palette fade and graphics load.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 46,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 2420,
+        "last_line": 2461,
+        "sha256": "70ecb81c54cd8e04c428e49118014b689d88094971e7921ce1d1ec2038141264"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_5F8C6",
+          "kind": "terminal-tail",
+          "reason": "The complete result emerald display contains only terminal graphics or drawing jumps and retains its private indexed placement record.",
+          "origin_first_line": 2422,
+          "origin_terminal_line": 2461,
+          "origin_end_line": 2461
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 391366,
+          "end": 391500
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 391366,
+          "end": 391500
+        }
+      ]
+    },
+    {
+      "path": "src/objects/ending/sk/result_selector.s",
+      "owner": "objects/ending/sk",
+      "responsibility": "Select ending result programs by product, character and emerald state, then sequence the palette fade.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 217,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 1585,
+        "last_line": 1798,
+        "sha256": "c8d6f9a6e71bc227ff9504cd1ef248952986136697acae3d03419405a4118f2f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 388968,
+          "end": 389548
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 388968,
+          "end": 389548
+        }
+      ]
+    },
+    {
+      "path": "src/objects/ending/sk/scene_companion.s",
+      "owner": "objects/ending/sk",
+      "responsibility": "Ending companion actor states, parent-relative motion, pose progression and child cleanup.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 91,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 1121,
+        "last_line": 1208,
+        "sha256": "eb13050d687e6f0627facc17bea8eaddb22cade46cf71b2709617314517ee66b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 387666,
+          "end": 387890
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 387666,
+          "end": 387890
+        }
+      ]
+    },
+    {
       "path": "src/objects/ending/sk/scene_controller.s",
       "owner": "objects/ending/sk",
       "responsibility": "Ending scene coordination, player character state, completion progression and retained legacy credits return entry.",
@@ -14111,6 +14701,116 @@
           "component": "sk",
           "start": 383080,
           "end": 384608
+        }
+      ]
+    },
+    {
+      "path": "src/objects/ending/sk/scenery_and_creatures.s",
+      "owner": "objects/ending/sk",
+      "responsibility": "Ending scenery, island-lift and animal child actors with scene-relative drawing or cleanup.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 330,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 1259,
+        "last_line": 1584,
+        "sha256": "9bdb7e4435c2e2e9f231848c7cbd6b8ca8d6ec20b5d961bf52e8340398fa85fc"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_5EF5C",
+          "kind": "terminal-tail",
+          "reason": "Close the final animate-and-draw callback after all earlier independent scenery and creature returns.",
+          "origin_first_line": 1582,
+          "origin_terminal_line": 1584,
+          "origin_end_line": 1584
+        }
+      ],
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 388038,
+          "end": 388968
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 388038,
+          "end": 388968
+        }
+      ]
+    },
+    {
+      "path": "src/objects/ending/sk/sprite_and_pattern_helpers.s",
+      "owner": "objects/ending/sk",
+      "responsibility": "Create ending or continue scene sprites, apply scene position, load Knuckles pose patterns and initialize child animation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 207,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 2905,
+        "last_line": 3108,
+        "sha256": "39650bfd764f26f0e954693106e8de2918682edb963780e11d2c4327bdc4838b"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 392734,
+          "end": 393216
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 392734,
+          "end": 393216
+        }
+      ]
+    },
+    {
+      "path": "src/objects/ending/sk/super_character_transition.s",
+      "owner": "objects/ending/sk",
+      "responsibility": "Prepare or revert the super character ending state and coordinate the related palette transition.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 165,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 2743,
+        "last_line": 2904,
+        "sha256": "11b1a2534aa07c31daca5041fe35fc45a5d0bd25539e30119a37e951ceefd890"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 392334,
+          "end": 392734
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 392334,
+          "end": 392734
         }
       ]
     },
@@ -15206,6 +15906,41 @@
           "component": "s3-us",
           "start": 2451796,
           "end": 2452510
+        }
+      ]
+    },
+    {
+      "path": "src/objects/interface/blue_sphere/sk/difficulty_banner_portrait.s",
+      "owner": "objects/interface/blue_sphere/sk",
+      "responsibility": "Blue Sphere difficulty banner, Knuckles wordmark and animated Eggman portrait shared with ending presentation.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 58,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 2616,
+        "last_line": 2670,
+        "sha256": "2f986cb5b8ad65651b45f865c8fd47bc8c515a3bd080e6eab45ba5d128013d65"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 391886,
+          "end": 392096
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 391886,
+          "end": 392096
         }
       ]
     },
@@ -43296,6 +44031,66 @@
       ]
     },
     {
+      "path": "src/objects/special_stage/sk/entry_ring.s",
+      "owner": "objects/special_stage/sk",
+      "responsibility": "Special-stage entry ring and flash state machines, player interaction, transition checks and private pattern or animation records.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 307,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 4298,
+        "last_line": 4601,
+        "sha256": "6f790bcf396ff243f323abda04201765a50bc1dd0101ae4c2fe83a93549892ea"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 398954,
+          "end": 399840
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 398954,
+          "end": 399840
+        }
+      ]
+    },
+    {
+      "path": "src/objects/special_stage/sk/entry_ring_resources.s",
+      "owner": "objects/special_stage/sk",
+      "responsibility": "Special-stage entry ring and flash mappings, DPLC resources and palette scripts.",
+      "role": "data",
+      "status": "owned",
+      "physical_lines": 74,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 4602,
+        "last_line": 4672,
+        "sha256": "4477abebf5344fb663e9905ffa5b95cc6c2a3bdf7b16a65c939dfa0a2a138c63"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 399840,
+          "end": 400716
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 399840,
+          "end": 400716
+        }
+      ]
+    },
+    {
       "path": "src/objects/terrain/icz/s3/breakable_ice.s",
       "owner": "objects/terrain/icz/s3",
       "responsibility": "IceCap breakable wall and ice-block behavior, collision helpers and private construction data.",
@@ -54568,6 +55363,51 @@
           "component": "s3-us",
           "start": 2106314,
           "end": 2107674
+        }
+      ]
+    },
+    {
+      "path": "src/rendering/palettes/sk/ending_pose_effects.s",
+      "owner": "rendering/palettes/sk",
+      "responsibility": "Ending Super Knuckles pose palette cycle and timed palette fade callbacks.",
+      "role": "code",
+      "status": "owned",
+      "physical_lines": 76,
+      "origin": {
+        "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
+        "path": "sonic3k.s",
+        "first_line": 2671,
+        "last_line": 2742,
+        "sha256": "583373adecd36c4097575cc9c432955e9b243a9d98f3525adc88608839f0398f"
+      },
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build",
+      "added_annotations": [
+        {
+          "name": "loc_5FC62",
+          "kind": "terminal-tail",
+          "reason": "Keep the final conditional palette-fade loop and deletion tail together without absorbing earlier palette callbacks.",
+          "origin_first_line": 2729,
+          "origin_terminal_line": 2742,
+          "origin_end_line": 2742
+        }
+      ],
+      "size_exception": {
+        "kind": "cohesive-subsystem",
+        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
+        "proof_target": "verify-all"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 392096,
+          "end": 392334
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 392096,
+          "end": 392334
         }
       ]
     },

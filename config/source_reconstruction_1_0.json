@@ -664,6 +664,12 @@
       "commits": ["3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e"]
     },
     {
+      "id": "change-168ed4a9d5c6",
+      "kind": "source_or_tooling",
+      "summary": "Own S&K ending screens, credits and continue scenes",
+      "commits": ["168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",
