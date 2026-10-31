@@ -75,3 +75,19 @@ class ReleaseGateTests(unittest.TestCase):
         value["profiles"].clear()
         with self.assertRaises(ValueError):
             validate_profiles(value, images)
+
+
+class PreservationLayerStatusTests(unittest.TestCase):
+    def test_inactive_preservation_layer_uses_the_validated_active_candidate(self):
+        from scripts.validation.release import validate_preservation_status
+
+        validate_preservation_status("development", "source-reconstruction-2.0")
+        for status in ("tag-ready", "tagged"):
+            validate_preservation_status(status, "source-reconstruction-1.0")
+        for status, active in (
+            ("development", "source-reconstruction-1.0"),
+            ("development", "other"),
+            ("candidate", "source-reconstruction-2.0"),
+        ):
+            with self.subTest(status=status, active=active), self.assertRaises(ValueError):
+                validate_preservation_status(status, active)

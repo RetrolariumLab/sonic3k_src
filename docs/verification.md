@@ -72,3 +72,9 @@ final audit, then checks current artifacts again. The resulting preservation and
 `build/release/source-2-reaudit.json`. They preserve the primary completed
 aggregate and both accepted audit files. An in-progress aggregate still uses the
 final audit stage's ordinary report; post-tag checks remain a separate mode.
+
+A ready 2.0 candidate retains the 1.0 preservation manifest as a component. That
+inactive component may keep its development status while all preservation
+requirements remain mandatory. The tag audit validates the active 2.0 identity
+and its exact accepted 1.0 predecessor. An active development 1.0 release is
+still rejected; changing an inactive status cannot bypass active tag checks.

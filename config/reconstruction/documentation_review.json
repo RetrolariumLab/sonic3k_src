@@ -125,7 +125,7 @@
     {
       "path": "docs/verification.md",
       "decision": "reworked",
-      "reason": "Describe exact completed pre-tag re-audits without overwriting accepted reports, separate post-tag tag identity checks and current real-edit evidence."
+      "reason": "Distinguish the inactive preservation component from the validated active release candidate, retain exact completed pre/post-tag audits and current real-edit evidence."
     }
   ]
 }

@@ -158,6 +158,15 @@ def check_metadata():
     return manifest
 
 
+def validate_preservation_status(status, active_tag):
+    """The inactive 1.0 layer may develop while the validated 2.0 candidate is ready."""
+    if status in ("tag-ready", "tagged"):
+        return
+    if status == "development" and active_tag == "source-reconstruction-2.0":
+        return
+    raise ValueError("Preservation status is incompatible with the active release identity")
+
+
 def audit(post_tag=False, *, reaudit=False):
     if post_tag and reaudit:
         raise ValueError("Post-tag and completed pre-tag re-audits use distinct reports")
@@ -169,8 +178,7 @@ def audit(post_tag=False, *, reaudit=False):
         or manifest["release_kind"] != "preservation"
     ):
         raise ValueError("Invalid preservation release identity")
-    if manifest["status"] not in ("tag-ready", "tagged"):
-        raise ValueError("Unknown preservation release status")
+    validate_preservation_status(manifest["status"], tags["tag"])
     if set(manifest["requirements"]) != REQUIREMENTS:
         raise ValueError("Release requirements are incomplete or unknown")
     if any(r["status"] != "satisfied" for r in manifest["requirements"].values()):

@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 75
+    "commit_count": 76
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -497,9 +497,15 @@
       "commits": ["3e3a0325543796f0910a0d30d68e9142b4002f01"]
     },
     {
+      "id": "change-cf18ef8bc68a",
+      "kind": "tooling",
+      "summary": "Keep controller movie bytes identical across Windows and Git checkouts",
+      "commits": ["cf18ef8bc68a275b3732805088da510fea09868e"]
+    },
+    {
       "id": "current-release-stage",
       "kind": "tooling",
-      "summary": "Keep controller movie bytes canonical across Windows working trees and Git checkouts, validate them through the pinned official text contract and bind original provenance to unchanged LF controller records.",
+      "summary": "Validate preservation-layer status against the already verified active release identity, retaining an inactive development manifest under a ready 2.0 candidate without weakening active 1.0 or annotated-tag checks.",
       "commits": ["release-commit"]
     }
   ],
