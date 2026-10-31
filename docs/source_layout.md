@@ -51,3 +51,12 @@ unknown emitting operations, duplicate definitions and unbounded encoding
 contexts even if a definition hash is changed. Palette-script file calls also
 require literal word-sized frame counts and a manifest-owned binary resource.
 This check precedes data-ledger acceptance and needs no ROM payloads.
+
+The emitter contract also covers the complete alignment-helper dependency graph.
+The checker understands nested assembler iteration blocks, rejects unchecked
+primitive overrides and requires an acyclic reviewed helper closure. Data
+ledgers may request only bounded literal power-of-two alignment or argument-free
+`even`; implementation helpers such as `org` and `cnop` remain unavailable
+there. Debug-list calls require a literal owned data-source include and
+participate in the same cycle checks as ordinary data includes. PLC pointer
+declarations use compile-time labels and data words only.

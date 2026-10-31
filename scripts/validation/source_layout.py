@@ -8,9 +8,9 @@ from scripts.build.project import ROOT, atomic, image_records, load, profiles, s
 from scripts.build.relocation import source_names
 from scripts.validation.numeric_operands import code_part
 from scripts.validation.cohorts import INSTRUCTIONS, TERMINALS, statements
-from scripts.validation.data_macros import DATA_MACROS, check_data_macros
+from scripts.validation.data_macros import DATA_MACROS, HEADER as MACRO_HEADER, check_data_macros
 
-DATA_OPS = frozenset(("dc.b", "dc.w", "dc.l", "even", "macro", "endm", "equ")) | DATA_MACROS
+DATA_OPS = frozenset(("dc.b", "dc.w", "dc.l", "even", "align", "macro", "endm", "equ", "label")) | DATA_MACROS
 
 
 def check_ledger(text, source_includes=(), binary_includes=()):
@@ -18,11 +18,19 @@ def check_ledger(text, source_includes=(), binary_includes=()):
     depth = 0
     state_depth = 0
     for line in text.splitlines():
-        code = re.sub(r"^[A-Za-z_.][A-Za-z_0-9.]*:\s*", "", code_part(line).strip())
+        raw = code_part(line).strip()
+        macro = MACRO_HEADER.match(raw)
+        code = re.sub(r"^[A-Za-z_.][A-Za-z_0-9.]*:\s*", "", raw)
+        if macro:
+            if macro[1].lower() not in DATA_MACROS:
+                raise ValueError("Data ledger defines an implementation-only or unknown macro")
+            code = "macro"
         if not code:
             continue
         parts = code.split(None, 1)
         op = parts[0].lower()
+        if op == "macro" and not macro:
+            raise ValueError("Data macro definition needs a named canonical header")
         if op in ("save", "restore", "codepage"):
             if op == "codepage":
                 if not state_depth or len(parts) != 2 or parts[1] != "LEVELSELECT":
@@ -40,6 +48,21 @@ def check_ledger(text, source_includes=(), binary_includes=()):
             if op == "include":
                 dependencies.append(target[1])
             continue
+        if op == "even":
+            if code.lower() != "even":
+                raise ValueError("Even alignment takes no data arguments")
+        if op == "align":
+            item = re.fullmatch(r"align\s+(\$[0-9A-Fa-f]+|[0-9]+)", code, re.I)
+            if not item:
+                raise ValueError("Data alignment needs a bounded literal power of two")
+            value = int(item[1][1:], 16) if item[1].startswith("$") else int(item[1])
+            if not 2 <= value <= 0x8000 or value & (value - 1):
+                raise ValueError("Data alignment leaves its bounded power-of-two domain")
+        if op == "dbglistinclude":
+            item = re.fullmatch(r'dbglistinclude\s+"([^"\r\n]+)"', code, re.I)
+            if not item or item[1] not in source_includes:
+                raise ValueError("Debug list needs a literal checked data-source owner")
+            dependencies.append(item[1])
         if op == "palscriptfile":
             item = re.fullmatch(r'palscriptfile\s+(\$[0-9A-Fa-f]+|[0-9]+)\s*,\s*"([^"\r\n]+)"', code, re.I)
             if not item:
