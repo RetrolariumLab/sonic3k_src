@@ -40,34 +40,550 @@
       }
     },
     {
-      "path": "s3.s",
-      "owner": "pending/engine",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 802,
+      "path": "src/audio/banks/s3/dac_bank_1.s",
+      "owner": "audio/s3",
+      "responsibility": "Original dac bank 1 allocation and checked private ROM resources",
+      "role": "composition",
+      "status": "owned",
+      "address_space": "cartridge-rom",
+      "physical_lines": 29,
       "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
+        "commit": "7662a8b7f55ace09326add7897ae8b3db36c3f5d",
         "path": "s3.s",
-        "first_line": 1,
-        "last_line": 117921,
-        "sha256": "a793291d6b4b15707954de649b4e19eadc65598e95796491336506fe7f9a182f"
-      }
+        "first_line": 530,
+        "last_line": 555,
+        "sha256": "6acfea973e94288c81f364a85bc90ef8a3ad658bdeb335884c4699058367b3c8"
+      },
+      "composition_contract": {
+        "kind": "bank",
+        "alignment": "start",
+        "start_symbol": "DacBank1",
+        "end_symbol": null,
+        "profiles": ["s3-us", "s3-eu", "s3-jp"]
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 917164,
+          "end": 942080
+        },
+        {
+          "profile": "s3-eu",
+          "start": 917164,
+          "end": 942080
+        },
+        {
+          "profile": "s3-jp",
+          "start": 917164,
+          "end": 942080
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3014316,
+          "end": 3039232
+        }
+      ],
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build"
     },
     {
-      "path": "sonic3k.s",
-      "owner": "pending/engine",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 1040,
+      "path": "src/audio/banks/s3/dac_bank_2.s",
+      "owner": "audio/s3",
+      "responsibility": "Original dac bank 2 allocation and checked private ROM resources",
+      "role": "composition",
+      "status": "owned",
+      "address_space": "cartridge-rom",
+      "physical_lines": 27,
       "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
+        "commit": "7662a8b7f55ace09326add7897ae8b3db36c3f5d",
+        "path": "s3.s",
+        "first_line": 558,
+        "last_line": 581,
+        "sha256": "5a6dc13fe1576213c991ce13ddc78c79c716b5006fe9f677590b0ab33e75691a"
+      },
+      "composition_contract": {
+        "kind": "bank",
+        "alignment": "start",
+        "start_symbol": "DacBank2",
+        "end_symbol": null,
+        "profiles": ["s3-us", "s3-eu", "s3-jp"]
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 949059,
+          "end": 982264
+        },
+        {
+          "profile": "s3-eu",
+          "start": 949059,
+          "end": 982264
+        },
+        {
+          "profile": "s3-jp",
+          "start": 949059,
+          "end": 982264
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3046211,
+          "end": 3079416
+        }
+      ],
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/audio/banks/s3/dac_bank_3.s",
+      "owner": "audio/s3",
+      "responsibility": "Original dac bank 3 allocation and checked private ROM resources",
+      "role": "composition",
+      "status": "owned",
+      "address_space": "cartridge-rom",
+      "physical_lines": 30,
+      "origin": {
+        "commit": "7662a8b7f55ace09326add7897ae8b3db36c3f5d",
+        "path": "s3.s",
+        "first_line": 582,
+        "last_line": 608,
+        "sha256": "228f2fd1ce55550cf1a5de9971d298d8e4092d38fe767f8f7fb4738853bb9c70"
+      },
+      "composition_contract": {
+        "kind": "bank",
+        "alignment": "start",
+        "start_symbol": "DacBank3",
+        "end_symbol": null,
+        "profiles": ["s3-us", "s3-eu", "s3-jp"]
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 982264,
+          "end": 1015594
+        },
+        {
+          "profile": "s3-eu",
+          "start": 982264,
+          "end": 1015594
+        },
+        {
+          "profile": "s3-jp",
+          "start": 982264,
+          "end": 1015594
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3079416,
+          "end": 3112746
+        }
+      ],
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/audio/banks/s3/effect_bank.s",
+      "owner": "audio/s3",
+      "responsibility": "Original effect bank allocation and checked private ROM resources",
+      "role": "composition",
+      "status": "owned",
+      "address_space": "cartridge-rom",
+      "physical_lines": 183,
+      "origin": {
+        "commit": "7662a8b7f55ace09326add7897ae8b3db36c3f5d",
+        "path": "s3.s",
+        "first_line": 609,
+        "last_line": 788,
+        "sha256": "66c2a95cdcd2726c58c51e35559e94a50b8d237e490d239eabfcb545cf5e55cd"
+      },
+      "composition_contract": {
+        "kind": "bank",
+        "alignment": "start",
+        "start_symbol": "SndBank",
+        "end_symbol": null,
+        "profiles": ["s3-us", "s3-eu", "s3-jp"]
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1015594,
+          "end": 1047977
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1015594,
+          "end": 1047977
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1015594,
+          "end": 1047977
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3112746,
+          "end": 3145129
+        }
+      ],
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/audio/banks/s3/music_bank_1.s",
+      "owner": "audio/s3",
+      "responsibility": "Original music bank 1 allocation and checked private ROM resources",
+      "role": "composition",
+      "status": "owned",
+      "address_space": "cartridge-rom",
+      "physical_lines": 23,
+      "origin": {
+        "commit": "7662a8b7f55ace09326add7897ae8b3db36c3f5d",
+        "path": "s3.s",
+        "first_line": 442,
+        "last_line": 460,
+        "sha256": "8491931c6c29de984a770d6ccf0f1730110a331be06677950bd81a3acba22cdc"
+      },
+      "composition_contract": {
+        "kind": "bank",
+        "alignment": "end",
+        "start_symbol": "Snd_Bank1_Start",
+        "end_symbol": "Snd_Bank1_End",
+        "profiles": ["s3-us", "s3-eu", "s3-jp"]
+      },
+      "size_exception": {
+        "kind": "include-order",
+        "reason": "This structural owner contains only the checked include order or fixed-boundary template, without executable fragments.",
+        "proof_target": "check-composition"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 814244,
+          "end": 819187
+        },
+        {
+          "profile": "s3-eu",
+          "start": 814244,
+          "end": 819187
+        },
+        {
+          "profile": "s3-jp",
+          "start": 814244,
+          "end": 819187
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2911396,
+          "end": 2916339
+        }
+      ],
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/audio/banks/s3/music_bank_2.s",
+      "owner": "audio/s3",
+      "responsibility": "Original music bank 2 allocation and checked private ROM resources",
+      "role": "composition",
+      "status": "owned",
+      "address_space": "cartridge-rom",
+      "physical_lines": 21,
+      "origin": {
+        "commit": "7662a8b7f55ace09326add7897ae8b3db36c3f5d",
+        "path": "s3.s",
+        "first_line": 461,
+        "last_line": 478,
+        "sha256": "5a655cf2dfca7ccfd62bc695267b4b9ce9774459843739a65b479fc04ec4b55a"
+      },
+      "composition_contract": {
+        "kind": "bank",
+        "alignment": "start",
+        "start_symbol": "Snd_Bank2_Start",
+        "end_symbol": null,
+        "profiles": ["s3-us", "s3-eu", "s3-jp"]
+      },
+      "size_exception": {
+        "kind": "include-order",
+        "reason": "This structural owner contains only the checked include order or fixed-boundary template, without executable fragments.",
+        "proof_target": "check-composition"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 819187,
+          "end": 851923
+        },
+        {
+          "profile": "s3-eu",
+          "start": 819187,
+          "end": 851923
+        },
+        {
+          "profile": "s3-jp",
+          "start": 819187,
+          "end": 851923
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2916339,
+          "end": 2949075
+        }
+      ],
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/audio/banks/s3/music_bank_3.s",
+      "owner": "audio/s3",
+      "responsibility": "Original music bank 3 allocation and checked private ROM resources",
+      "role": "composition",
+      "status": "owned",
+      "address_space": "cartridge-rom",
+      "physical_lines": 29,
+      "origin": {
+        "commit": "7662a8b7f55ace09326add7897ae8b3db36c3f5d",
+        "path": "s3.s",
+        "first_line": 479,
+        "last_line": 504,
+        "sha256": "430ec4a0f5995cc2f339afdf4b2c8b9f406d5697408db43e73c799d536f709cd"
+      },
+      "composition_contract": {
+        "kind": "bank",
+        "alignment": "start",
+        "start_symbol": "Snd_Bank3_Start",
+        "end_symbol": null,
+        "profiles": ["s3-us", "s3-eu", "s3-jp"]
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 851923,
+          "end": 884676
+        },
+        {
+          "profile": "s3-eu",
+          "start": 851923,
+          "end": 884676
+        },
+        {
+          "profile": "s3-jp",
+          "start": 851923,
+          "end": 884676
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2949075,
+          "end": 2981828
+        }
+      ],
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/audio/banks/s3/music_bank_4.s",
+      "owner": "audio/s3",
+      "responsibility": "Original music bank 4 allocation and checked private ROM resources",
+      "role": "composition",
+      "status": "owned",
+      "address_space": "cartridge-rom",
+      "physical_lines": 28,
+      "origin": {
+        "commit": "7662a8b7f55ace09326add7897ae8b3db36c3f5d",
+        "path": "s3.s",
+        "first_line": 505,
+        "last_line": 529,
+        "sha256": "748f3b103831cb44286744867a43a2c14bc4b67239a810801a80a49a168e742d"
+      },
+      "composition_contract": {
+        "kind": "bank",
+        "alignment": "start",
+        "start_symbol": "Snd_Bank4_Start",
+        "end_symbol": null,
+        "profiles": ["s3-us", "s3-eu", "s3-jp"]
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 884676,
+          "end": 917164
+        },
+        {
+          "profile": "s3-eu",
+          "start": 884676,
+          "end": 917164
+        },
+        {
+          "profile": "s3-jp",
+          "start": 884676,
+          "end": 917164
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2981828,
+          "end": 3014316
+        }
+      ],
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/audio/banks/sk/dac_bank.s",
+      "owner": "audio/sk",
+      "responsibility": "Original dac bank allocation and checked private ROM resources",
+      "role": "composition",
+      "status": "owned",
+      "address_space": "cartridge-rom",
+      "physical_lines": 31,
+      "origin": {
+        "commit": "7662a8b7f55ace09326add7897ae8b3db36c3f5d",
         "path": "sonic3k.s",
-        "first_line": 1,
-        "last_line": 201113,
-        "sha256": "826460637347fb4a0219941cd59dfd96bc0d00860ccc46193aba77f37250bd38"
-      }
+        "first_line": 796,
+        "last_line": 823,
+        "sha256": "bb2720eac93cc0d3d7308fa66685d994c345178fffc30e023db5e2bd59184e08"
+      },
+      "composition_contract": {
+        "kind": "bank",
+        "alignment": "start",
+        "start_symbol": "DacBank1",
+        "end_symbol": null,
+        "profiles": ["sk"]
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 982849,
+          "end": 1010016
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 982849,
+          "end": 1010016
+        }
+      ],
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/audio/banks/sk/effect_bank.s",
+      "owner": "audio/sk",
+      "responsibility": "Original effect bank allocation and checked private ROM resources",
+      "role": "composition",
+      "status": "owned",
+      "address_space": "cartridge-rom",
+      "physical_lines": 183,
+      "origin": {
+        "commit": "7662a8b7f55ace09326add7897ae8b3db36c3f5d",
+        "path": "sonic3k.s",
+        "first_line": 826,
+        "last_line": 1005,
+        "sha256": "15efb1fd8bbd271831391f2abfb88b781df5a68eff6f2da0fa8175fd31f6aa01"
+      },
+      "composition_contract": {
+        "kind": "bank",
+        "alignment": "start",
+        "start_symbol": "SndBank",
+        "end_symbol": null,
+        "profiles": ["sk"]
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 1015280,
+          "end": 1047977
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1015280,
+          "end": 1047977
+        }
+      ],
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/audio/banks/sk/music_bank_1.s",
+      "owner": "audio/sk",
+      "responsibility": "Original music bank 1 allocation and checked private ROM resources",
+      "role": "composition",
+      "status": "owned",
+      "address_space": "cartridge-rom",
+      "physical_lines": 30,
+      "origin": {
+        "commit": "7662a8b7f55ace09326add7897ae8b3db36c3f5d",
+        "path": "sonic3k.s",
+        "first_line": 742,
+        "last_line": 767,
+        "sha256": "1eef2fd80d1bae69bdb7ff092dcdc65cb62397c38143d22203f7f4468e53c098"
+      },
+      "composition_contract": {
+        "kind": "bank",
+        "alignment": "end",
+        "start_symbol": "Snd_Bank1_Start",
+        "end_symbol": "Snd_Bank1_End",
+        "profiles": ["sk"]
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 934068,
+          "end": 950271
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 934068,
+          "end": 950271
+        }
+      ],
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/audio/banks/sk/music_bank_2.s",
+      "owner": "audio/sk",
+      "responsibility": "Original music bank 2 allocation and checked private ROM resources",
+      "role": "composition",
+      "status": "owned",
+      "address_space": "cartridge-rom",
+      "physical_lines": 31,
+      "origin": {
+        "commit": "7662a8b7f55ace09326add7897ae8b3db36c3f5d",
+        "path": "sonic3k.s",
+        "first_line": 768,
+        "last_line": 795,
+        "sha256": "720ecd062205204461f1a39885ded48fce3704437e4012ef95995630d72c7685"
+      },
+      "composition_contract": {
+        "kind": "bank",
+        "alignment": "start",
+        "start_symbol": "Snd_Bank2_Start",
+        "end_symbol": null,
+        "profiles": ["sk"]
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 950271,
+          "end": 982849
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 950271,
+          "end": 982849
+        }
+      ],
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build"
     },
     {
       "path": "src/audio/dac/s3/sample_9c.inc",
@@ -69587,6 +70103,313 @@
           "end": 164532
         }
       ]
+    },
+    {
+      "path": "src/revisions/s3.s",
+      "owner": "revisions/s3",
+      "responsibility": "Official sibling engine assembly root and canonical owner order",
+      "role": "composition",
+      "status": "owned",
+      "address_space": "assembly-order",
+      "physical_lines": 17,
+      "origin": {
+        "commit": "7662a8b7f55ace09326add7897ae8b3db36c3f5d",
+        "path": "s3.s",
+        "first_line": 1,
+        "last_line": 802,
+        "sha256": "00bc29f7a8b2293eb32b8d083c250b6bfdbae4d04eb743996ae34656256c783c"
+      },
+      "composition_contract": {
+        "kind": "entry",
+        "profiles": ["s3-us", "s3-eu", "s3-jp"]
+      },
+      "size_exception": {
+        "kind": "profile-entry",
+        "reason": "This structural owner contains only the checked include order or fixed-boundary template, without executable fragments.",
+        "proof_target": "check-composition"
+      }
+    },
+    {
+      "path": "src/revisions/s3/cartridge_tail.s",
+      "owner": "revisions/s3",
+      "responsibility": "Original fixed cartridge boundary and preserved product padding",
+      "role": "composition",
+      "status": "owned",
+      "address_space": "cartridge-rom",
+      "physical_lines": 6,
+      "origin": {
+        "commit": "7662a8b7f55ace09326add7897ae8b3db36c3f5d",
+        "path": "s3.s",
+        "first_line": 800,
+        "last_line": 801,
+        "sha256": "5f3121d2880dd5bd1f8a5d08535c75299e2969188c63a9655c45b46e79f3d318"
+      },
+      "composition_contract": {
+        "kind": "tail",
+        "product": "s3",
+        "profiles": ["s3-us", "s3-eu", "s3-jp"]
+      },
+      "size_exception": {
+        "kind": "fixed-address-tail",
+        "reason": "This structural owner contains only the checked include order or fixed-boundary template, without executable fragments.",
+        "proof_target": "check-composition"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 2096928,
+          "end": 2097152
+        },
+        {
+          "profile": "s3-eu",
+          "start": 2096928,
+          "end": 2097152
+        },
+        {
+          "profile": "s3-jp",
+          "start": 2096928,
+          "end": 2097152
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 4194080,
+          "end": 4194304
+        }
+      ],
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/revisions/s3/engine_order.s",
+      "owner": "revisions/s3",
+      "responsibility": "Canonical sibling engine subsystem and resource include order before sound banks",
+      "role": "composition",
+      "status": "owned",
+      "address_space": "cartridge-rom",
+      "physical_lines": 444,
+      "origin": {
+        "commit": "7662a8b7f55ace09326add7897ae8b3db36c3f5d",
+        "path": "s3.s",
+        "first_line": 2,
+        "last_line": 441,
+        "sha256": "b5bd9147077d96db9523deee4411fe38f92fc1b503fcf9621c1fbf2b53d6fa27"
+      },
+      "composition_contract": {
+        "kind": "order",
+        "profiles": ["s3-us", "s3-eu", "s3-jp"]
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 0,
+          "end": 814244
+        },
+        {
+          "profile": "s3-eu",
+          "start": 0,
+          "end": 814244
+        },
+        {
+          "profile": "s3-jp",
+          "start": 0,
+          "end": 814244
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 2097152,
+          "end": 2911396
+        }
+      ],
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/revisions/s3/graphics_order.s",
+      "owner": "revisions/s3",
+      "responsibility": "Canonical graphics and remaining level resources after audio storage",
+      "role": "composition",
+      "status": "owned",
+      "address_space": "cartridge-rom",
+      "physical_lines": 15,
+      "origin": {
+        "commit": "7662a8b7f55ace09326add7897ae8b3db36c3f5d",
+        "path": "s3.s",
+        "first_line": 789,
+        "last_line": 799,
+        "sha256": "b3c962f8ec26af430300a8607a6b73c8898216a0c83d304d0e12fa6835f9ce59"
+      },
+      "composition_contract": {
+        "kind": "order",
+        "profiles": ["s3-us", "s3-eu", "s3-jp"]
+      },
+      "size_exception": {
+        "kind": "include-order",
+        "reason": "This structural owner contains only the checked include order or fixed-boundary template, without executable fragments.",
+        "proof_target": "check-composition"
+      },
+      "rom_ranges": [
+        {
+          "profile": "s3-us",
+          "start": 1047977,
+          "end": 2096928
+        },
+        {
+          "profile": "s3-eu",
+          "start": 1047977,
+          "end": 2096928
+        },
+        {
+          "profile": "s3-jp",
+          "start": 1047977,
+          "end": 2096928
+        },
+        {
+          "profile": "s3k",
+          "component": "s3-us",
+          "start": 3145129,
+          "end": 4194080
+        }
+      ],
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/revisions/sk.s",
+      "owner": "revisions/sk",
+      "responsibility": "Official sibling engine assembly root and canonical owner order",
+      "role": "composition",
+      "status": "owned",
+      "address_space": "assembly-order",
+      "physical_lines": 14,
+      "origin": {
+        "commit": "7662a8b7f55ace09326add7897ae8b3db36c3f5d",
+        "path": "sonic3k.s",
+        "first_line": 1,
+        "last_line": 1040,
+        "sha256": "01bf462c9228740ca6d83b215ac466493fbcdd009bf0709724ff89a4bacca493"
+      },
+      "composition_contract": {
+        "kind": "entry",
+        "profiles": ["sk"]
+      },
+      "size_exception": {
+        "kind": "profile-entry",
+        "reason": "This structural owner contains only the checked include order or fixed-boundary template, without executable fragments.",
+        "proof_target": "check-composition"
+      }
+    },
+    {
+      "path": "src/revisions/sk/cartridge_tail.s",
+      "owner": "revisions/sk",
+      "responsibility": "Original fixed cartridge boundary and preserved product padding",
+      "role": "composition",
+      "status": "owned",
+      "address_space": "cartridge-rom",
+      "physical_lines": 14,
+      "origin": {
+        "commit": "7662a8b7f55ace09326add7897ae8b3db36c3f5d",
+        "path": "sonic3k.s",
+        "first_line": 1027,
+        "last_line": 1037,
+        "sha256": "492ca4436ce4c3c607be318546240091d19aa31f2fcc8fb9a1ace8071b5dab08"
+      },
+      "composition_contract": {
+        "kind": "tail",
+        "product": "sk",
+        "profiles": ["sk"]
+      },
+      "size_exception": {
+        "kind": "fixed-address-tail",
+        "reason": "This structural owner contains only the checked include order or fixed-boundary template, without executable fragments.",
+        "proof_target": "check-composition"
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 2094106,
+          "end": 2097152
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 2094106,
+          "end": 2097152
+        }
+      ],
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/revisions/sk/engine_order.s",
+      "owner": "revisions/sk",
+      "responsibility": "Canonical sibling engine subsystem and resource include order before sound banks",
+      "role": "composition",
+      "status": "owned",
+      "address_space": "cartridge-rom",
+      "physical_lines": 744,
+      "origin": {
+        "commit": "7662a8b7f55ace09326add7897ae8b3db36c3f5d",
+        "path": "sonic3k.s",
+        "first_line": 2,
+        "last_line": 741,
+        "sha256": "8207b8e18d302d8543faf30374b8bf92256fad3f55dff19e8b64d810c47f0189"
+      },
+      "composition_contract": {
+        "kind": "order",
+        "profiles": ["sk"]
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 0,
+          "end": 934068
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 0,
+          "end": 934068
+        }
+      ],
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build"
+    },
+    {
+      "path": "src/revisions/sk/graphics_order.s",
+      "owner": "revisions/sk",
+      "responsibility": "Canonical graphics and remaining level resources after audio storage",
+      "role": "composition",
+      "status": "owned",
+      "address_space": "cartridge-rom",
+      "physical_lines": 25,
+      "origin": {
+        "commit": "7662a8b7f55ace09326add7897ae8b3db36c3f5d",
+        "path": "sonic3k.s",
+        "first_line": 1006,
+        "last_line": 1026,
+        "sha256": "7f148549bfde9f1677c4e0ffe9eeede3ae57bf84f292ab328a28e8d4cffb70d2"
+      },
+      "composition_contract": {
+        "kind": "order",
+        "profiles": ["sk"]
+      },
+      "rom_ranges": [
+        {
+          "profile": "sk",
+          "start": 1047977,
+          "end": 2094106
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 1047977,
+          "end": 2094106
+        }
+      ],
+      "applicability": "emitted",
+      "range_kind": "canonical-normal-build"
     },
     {
       "path": "src/system/assembly/compiler_setup.s",

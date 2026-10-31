@@ -10,7 +10,7 @@ from scripts.validation.numeric_operands import code_part
 from scripts.validation.cohorts import INSTRUCTIONS, TERMINALS, collect_file, statements
 from scripts.validation.definitions import check_definitions, check_nonemitting_range, named_declaration
 from scripts.validation.data_macros import DATA_MACROS, HEADER as MACRO_HEADER, check_data_macros
-from scripts.validation import memory_layout
+from scripts.validation import memory_layout, composition_sources
 
 DATA_OPS = (
     frozenset(("dc.b", "dc.w", "dc.l", "even", "align", "align0", "cnop", "cnop0", "macro", "endm", "equ", "label"))
@@ -161,7 +161,7 @@ def check_added_annotations(row, text, source_includes=(), binary_includes=()):
         check_ledger("".join(lines[instructions[-1]["line"] : ends[0] - 1]), source_includes, binary_includes)
 
 
-def validate_entry(row, text, inventory=False, source_includes=(), binary_includes=()):
+def validate_entry(row, text, inventory=False, source_includes=(), binary_includes=(), source_owners=None):
     lines = len(text.splitlines())
     if not row.get("owner") or not row.get("responsibility") or row.get("physical_lines") != lines:
         raise ValueError("Missing ownership or stale physical line count: " + row["path"])
@@ -181,7 +181,13 @@ def validate_entry(row, text, inventory=False, source_includes=(), binary_includ
         raise ValueError("Owned source is outside src")
     if re.fullmatch(r"(?:code|routine|room_part|part)_[0-9a-f]+", row["path"].rsplit("/", 1)[-1].split(".")[0], re.I):
         raise ValueError("Source module has only an address or page number")
-    if row["role"] == "memory":
+    if row["role"] == "composition":
+        contract = row.get("composition_contract", {})
+        expected_space = "assembly-order" if contract.get("kind") == "entry" else "cartridge-rom"
+        if row.get("address_space") != expected_space or source_owners is None:
+            raise ValueError("Structural source needs its checked composition domain")
+        composition_sources.check(text, contract, source_owners, binary_includes)
+    elif row["role"] == "memory":
         if row.get("address_space") != "declarations":
             raise ValueError("Memory ownership needs its non-emitting declaration domain")
         memory_layout.declarations(text, row.get("memory_contract", {}))
@@ -203,7 +209,12 @@ def validate_entry(row, text, inventory=False, source_includes=(), binary_includ
     if (
         lines < 25
         and row["role"] != "data"
-        and exception.get("kind") not in ("vectors", "profile-entry", "fixed-address-tail")
+        and exception.get("kind")
+        not in (
+            ("vectors", "profile-entry", "fixed-address-tail", "include-order")
+            if row["role"] == "composition"
+            else ("vectors", "profile-entry", "fixed-address-tail")
+        )
     ):
         raise ValueError("Tiny executable module needs a structural contract")
     if row["role"] == "code":
@@ -279,6 +290,7 @@ def check_ranges(rows):
         if sorted(row.get("rom_ranges", []), key=order) != sorted(actual[path], key=order):
             raise ValueError("Source data range differs from independent AS output: " + path)
     memory_layout.check_built(rows)
+    composition_sources.check_built(rows)
 
 
 def check(inventory=False, built=False):
@@ -302,13 +314,22 @@ def check(inventory=False, built=False):
     )
     binary_includes.update(assets["output"] + "/" + r["path"] for r in derived)
     dependencies = {}
+    structural = {}
+    owners = {row["path"]: row for row in rows}
+    if any(row["role"] == "composition" for row in rows):
+        composition_sources.check_macros(texts, load("config/reconstruction/bank_macros.json"))
     accepted = 0
     for row in rows:
         text = texts[row["path"]]
-        accepted += validate_entry(row, text, inventory, source_includes, binary_includes)
+        accepted += validate_entry(row, text, inventory, source_includes, binary_includes, source_owners=owners)
+        if row["role"] == "composition":
+            structural[row["path"]] = composition_sources.check(
+                text, row["composition_contract"], owners, binary_includes
+            )
         if row["path"] in source_includes:
             dependencies[row["path"]] = check_ledger(text, source_includes, binary_includes)
     check_data_graph(dependencies)
+    composition_sources.check_order_graph(structural)
     pending = len(rows) - accepted
     if not inventory and (registry["state"] != "complete" or pending):
         raise ValueError("Semantic source layout is incomplete")

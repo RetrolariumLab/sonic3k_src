@@ -130,3 +130,11 @@ check-memory-contract:
 
 check-memory-layout:
 	$(PYTHON) -m scripts.run validation.memory_layout --built
+
+.PHONY: check-composition-contract check-composition
+
+check-composition-contract:
+	$(PYTHON) -m scripts.run validation.composition_sources
+
+check-composition:
+	$(PYTHON) -m scripts.run validation.composition_sources --built

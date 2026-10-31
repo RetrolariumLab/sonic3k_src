@@ -5,12 +5,11 @@ responsibility, physical line count and source range at the preservation
 baseline. Owned data lives under `src/objects`, `src/rendering`, `src/ui`,
 `src/game` and `src/system/debug`. Engine-specific code remains separate.
 
-This registry is intentionally incomplete during extraction: 886 data units and
-1043 sibling executable units and 5 definition libraries have owners. The 6
-remaining entry, driver, memory and macro units still await complete semantic
-extraction. Run `make source-layout-inventory` for that distinction.
-`make check-source-layout` rejects pending entries and cannot certify this
-intermediate tree as 2.0.
+This registry is intentionally incomplete during extraction: 886 data owners,
+1043 sibling executable owners, 5 definition libraries, 9 checked memory modules
+and 20 structural composition modules. The 2 remaining driver and external-ABI
+containers still await complete semantic ownership. The inventory keeps that
+distinction explicit; a complete source layout cannot accept pending entries.
 
 Every owned cartridge unit has independently checked normal-build ROM ranges,
 including the applicable component and offset in the lock-on image. After an
@@ -115,3 +114,25 @@ every physical cartridge byte exactly once. It reconciles both virtual Z80
 segments with their physical containers, bounded reservations, product padding
 and header patches. The CPU identifier alone never selects an address space.
 This prevents an allegedly non-emitting allocation from hiding cartridge data.
+
+## Revision composition and sound-bank owners
+
+The profile roots in src/revisions select one sibling engine's canonical order.
+Their source-order modules contain only checked includes; they have no synthetic
+return instructions or hidden executable ownership. Private music, effects and
+DAC inputs live in separate original bank owners under src/audio/banks. Fixed
+cartridge tails keep the original product padding and physical boundary.
+
+Composition contracts distinguish include order, profile entry, fixed tail and
+bank allocation. A bank includes checked data owners and extracted resources.
+The canonical entry order places the Z80 driver at its original separate
+physical reservation and virtual contexts. Its reviewed compile-time helper
+closure is pinned separately and rejects executable helper syntax. The DAC setup
+helper's sole recursion supplies a nonempty default parameter and terminates on
+that second invocation.
+
+Make check-composition-contract checks these structural declarations. Make
+check-composition also checks current AS ranges, applicable profiles, 32-KiB
+window boundaries, aligned starts and the end-aligned initial bank reservation.
+Entry contracts must match the revision profile configuration; tail templates
+must finish at the original 2-MiB boundary.
