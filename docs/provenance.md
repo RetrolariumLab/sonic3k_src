@@ -71,6 +71,11 @@ events remain under their subsystem owners; the second-cartridge interface
 continues to use the independently checked fixed lock-on symbol declarations.
 Normal-build listings and all accepted image identities confirm this exclusion.
 
+The Z80 driver bug-fix option is also specialized to its original disabled
+branch. Conditions that distinguish the accepted Sonic 3 and Sonic & Knuckles
+driver versions remain explicit. The optional fixed driver can be recovered from
+the pinned upstream source; it is outside the preservation profiles.
+
 ## Licensing boundaries
 
 Upstream has a disclaimer, retained in README, but grants no license to its
