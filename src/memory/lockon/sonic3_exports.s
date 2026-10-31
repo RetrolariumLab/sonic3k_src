@@ -1,3 +1,9 @@
+; Owner: memory/lockon
+; Responsibility: Complete fixed second-cartridge Sonic 3 address, size and DAC metadata declarations
+; Source provenance and ranges: config/reconstruction/source_layout.json
+
+                padding off
+                phase   $200000
 LockOnROM_Start:        ds.b    $11
 S3_Level_Solid_Data     EQU     $260000
 byte_200011:            ds.b    $AC
@@ -688,3 +694,4 @@ EMZ_128x128_Kos:                ds.b    $710
 Gumball_16x16_Kos:              ds.b    $420
 Gumball_8x8_KosM:               ds.b    $D52
 Gumball_128x128_Kos:            ds.b    $480
+                dephase

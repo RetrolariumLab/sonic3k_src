@@ -88,3 +88,30 @@ class MemoryLayoutTests(unittest.TestCase):
         self.assertEqual(result, {"Field": 0xFFFF0010, "Ref_Checksum_String": "'init'"})
         with self.assertRaises(ValueError):
             codec._domain("Field", "'init'", "ram")
+
+    def test_external_cartridge_has_an_exact_nonemitting_two_mib_cursor(self):
+        helper = (
+            "DACDECLARE macro dataSize,sampleRate\n .sample_rate: equ sampleRate\n"
+            " .size: equ dataSize\n ds.b dataSize\n endm\n"
+        )
+        text = (
+            "padding off\nphase $200000\nStart: ds.b $10\n"
+            + helper
+            + "Sample: DACDECLARE $20,13332\nTail: ds.b $1FFFD0\ndephase"
+        )
+        model = codec.declarations(text, contract("external", ["$200000"]))
+        self.assertEqual(model["external_bytes"], 0x200000)
+        self.assertEqual([row["external_offset"] for row in model["fields"]], [0, 16, 48])
+        for altered in (
+            text.replace("$1FFFD0", "$1FFFD1"),
+            text.replace("$1FFFD0", "$1FFFCF"),
+            text.replace("ds.b dataSize", "dc.b dataSize"),
+            text.replace("$20,13332", "$20,999999"),
+            text.replace("phase $200000", "phase $200001"),
+        ):
+            with self.subTest(text=altered), self.assertRaises(ValueError):
+                codec.declarations(altered, contract("external", ["$200000"]))
+        codec._domain("External", 0x200000, "external")
+        codec._domain("External_end", 0x400000, "external")
+        with self.assertRaises(ValueError):
+            codec._domain("External", 0x400001, "external")

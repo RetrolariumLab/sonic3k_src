@@ -6,10 +6,11 @@ baseline. Owned data lives under `src/objects`, `src/rendering`, `src/ui`,
 `src/game` and `src/system/debug`. Engine-specific code remains separate.
 
 This registry is intentionally incomplete during extraction: 886 data owners,
-1043 sibling executable owners, 5 definition libraries, 9 checked memory modules
-and 20 structural composition modules. The 2 remaining driver and external-ABI
-containers still await complete semantic ownership. The inventory keeps that
-distinction explicit; a complete source layout cannot accept pending entries.
+1043 sibling executable owners, 5 definition libraries, 10 checked memory
+modules and 20 structural composition modules. The 2 remaining driver and
+external-ABI containers still await complete semantic ownership. The inventory
+keeps that distinction explicit; a complete source layout cannot accept pending
+entries.
 
 Every owned cartridge unit has independently checked normal-build ROM ranges,
 including the applicable component and offset in the lock-on image. After an
@@ -136,3 +137,17 @@ check-composition also checks current AS ranges, applicable profiles, 32-KiB
 window boundaries, aligned starts and the end-aligned initial bank reservation.
 Entry contracts must match the revision profile configuration; tail templates
 must finish at the original 2-MiB boundary.
+
+## Second-cartridge declaration window
+
+The original lock-on map is owned by src/memory/lockon/sonic3_exports.s. Its
+non-emitting phase starts at the caller's existing 0x200000 cursor and describes
+exactly the two-MiB second cartridge. An independent byte cursor accounts for
+every literal reservation and bounded DAC metadata declaration; all 675 address
+fields must match that cursor and the historical build.
+
+Its single DACDECLARE helper can only declare sample rate, size and an
+uninitialized byte reservation. Initialized data, other macro bodies, missing
+space, overflow and a different bus base are rejected. The existing lock-on gate
+still compares every export with actual Sonic 3 source plus 0x200000 in all
+three regional builds. This adds no second-cartridge Sonic 2 runtime profile.

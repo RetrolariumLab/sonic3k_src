@@ -13,7 +13,7 @@ from scripts.validation.object_contexts import DriverSlot, validate
 from scripts.validation.symbols import parse_declaration_symbols
 
 LABEL = re.compile(r"^([A-Za-z_.][A-Za-z_0-9.]*):\s*")
-PHASE_KINDS = {"ram", "sram", "overlay", "enumerations"}
+PHASE_KINDS = {"ram", "sram", "overlay", "enumerations", "external"}
 KINDS = PHASE_KINDS | {"offsets", "hardware", "cursor"}
 PRIMITIVES = {"ds", "ds.b", "ds.w", "ds.l", "phase", "dephase", "enum", "padding"}
 
@@ -31,9 +31,28 @@ def declarations(text, contract):
         or type(contract["rewind"]) is not bool
     ):
         raise ValueError("Invalid memory phase or cursor contract")
+    scan = text.splitlines()
+    if contract["kind"] == "external":
+        blocks = definition_blocks(text)
+        expected = [
+            "dacdeclaremacro datasize,samplerate",
+            ".sample_rate:equ samplerate",
+            ".size:equ datasize",
+            "ds.b datasize",
+            "endm",
+        ]
+        expected = [re.sub(r"\s+", "", line).lower() for line in expected]
+        if len(blocks) != 1 or blocks[0][0] != "dacdeclare":
+            raise ValueError("External ABI requires its single non-emitting DAC declaration helper")
+        name, first, last, body = blocks[0]
+        actual = [re.sub(r"\s+", "", code_part(line)).lower() for line in body.splitlines() if code_part(line).strip()]
+        if actual != expected:
+            raise ValueError("External DAC declaration helper has unchecked or emitting syntax")
+        scan[first:last] = [""] * (last - first)
+    external_bytes = 0
     phase, phases, names, fields, rewinds, guard = None, [], set(), [], 0, 0
     started = False
-    for line in text.splitlines():
+    for line in scan:
         raw = code_part(line).strip()
         if not raw:
             continue
@@ -62,12 +81,24 @@ def declarations(text, contract):
             if not name.startswith("."):
                 names.add(name)
                 if phase is not None and _compact(named[2]) == "*":
-                    fields.append({"name": name, "phase": phase})
+                    fields.append(
+                        {
+                            "name": name,
+                            "phase": phase,
+                            **({"external_offset": external_bytes} if contract["kind"] == "external" else {}),
+                        }
+                    )
             continue
         if name and not name.startswith("."):
             names.add(name)
             if phase is not None:
-                fields.append({"name": name, "phase": phase})
+                fields.append(
+                    {
+                        "name": name,
+                        "phase": phase,
+                        **({"external_offset": external_bytes} if contract["kind"] == "external" else {}),
+                    }
+                )
         if not body:
             if name is None:
                 raise ValueError("Empty unnamed memory declaration")
@@ -86,6 +117,23 @@ def declarations(text, contract):
                 raise ValueError("Memory reservation needs one uninitialized expression inside a phase")
             if contract["kind"] == "sram" and op != "ds.w":
                 raise ValueError("Odd-byte SRAM declarations require word strides")
+            if contract["kind"] == "external":
+                if op != "ds.b" or not re.fullmatch(r"(?:\$[0-9A-Fa-f]+|[0-9]+)", args):
+                    raise ValueError("External ABI reservations require literal byte counts")
+                external_bytes += int(args[1:], 16) if args.startswith("$") else int(args)
+                if external_bytes > 0x200000:
+                    raise ValueError("External ABI exceeds the second cartridge window")
+        elif op == "dacdeclare" and contract["kind"] == "external" and phase is not None and name:
+            arguments = re.fullmatch(r"(\$[0-9A-Fa-f]+|[0-9]+)\s*,\s*([0-9]+)", args)
+            if not arguments:
+                raise ValueError("External DAC allocation requires literal size and sample rate")
+            size = int(arguments[1][1:], 16) if arguments[1].startswith("$") else int(arguments[1])
+            rate = int(arguments[2])
+            if not 0 < size <= 0x200000 or not 0 < rate <= 96000:
+                raise ValueError("External DAC metadata exceeds its bounded ABI")
+            external_bytes += size
+            if external_bytes > 0x200000:
+                raise ValueError("External ABI exceeds the second cartridge window")
         elif op == "enum":
             if phase is not None or contract["kind"] != "offsets":
                 raise ValueError("Offset enumeration used outside its declaration domain")
@@ -112,7 +160,11 @@ def declarations(text, contract):
         raise ValueError("SRAM starts at the fixed odd cartridge address")
     if contract["kind"] == "ram" and phases != ["$FFFF0000"]:
         raise ValueError("68000 RAM starts at the fixed high memory address")
-    return {"symbols": sorted(names), "fields": fields, "phases": phases}
+    if contract["kind"] == "external" and phases != ["$200000"]:
+        raise ValueError("External ABI starts at the fixed second-cartridge base")
+    if contract["kind"] == "external" and external_bytes != 0x200000:
+        raise ValueError("External ABI must describe the complete two-MiB second cartridge")
+    return {"symbols": sorted(names), "fields": fields, "phases": phases, "external_bytes": external_bytes}
 
 
 def check_primitives(texts):
@@ -132,6 +184,9 @@ def _domain(name, value, kind):
     elif kind in ("ram", "overlay"):
         if not 0xFF0000 <= address <= 0xFFFFFF and not (endpoint and value == 0):
             raise ValueError("RAM symbol leaves the fixed 64-KiB memory domain")
+    elif kind == "external":
+        if not 0x200000 <= value <= 0x400000:
+            raise ValueError("External declaration leaves the second-cartridge bus window")
     elif kind == "enumerations":
         if not 0 <= value <= 256 or (value == 256 and not endpoint):
             raise ValueError("Sound identifier exceeds its byte domain")
@@ -191,6 +246,8 @@ def check_built(rows):
                     raise ValueError("Historical memory ABI symbol changed: " + key + " " + name)
             for field in model["fields"]:
                 _domain(field["name"], symbols[field["name"]], row["memory_contract"]["kind"])
+                if "external_offset" in field and symbols[field["name"]] != 0x200000 + field["external_offset"]:
+                    raise ValueError("AS external allocation differs from its independent byte cursor")
             counts[key] = counts.get(key, 0) + len(model["symbols"])
     for row in selected:
         if active[row["path"]] != set(row["memory_contract"]["profiles"]):

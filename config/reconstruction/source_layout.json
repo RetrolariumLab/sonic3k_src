@@ -10,21 +10,6 @@
   },
   "files": [
     {
-      "path": "Lockon S3/LockOn Pointers.s",
-      "owner": "pending/engine",
-      "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
-      "role": "pending",
-      "status": "pending",
-      "physical_lines": 690,
-      "origin": {
-        "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
-        "path": "Lockon S3/LockOn Pointers.s",
-        "first_line": 1,
-        "last_line": 690,
-        "sha256": "daeefffd46438e9f713e538eef3803e2ee29ba00ec4fe2673a5de1670b671f06"
-      }
-    },
-    {
       "path": "Sound/Z80 Sound Driver.s",
       "owner": "pending/audio",
       "responsibility": "Pending semantic extraction; this entry is not accepted as a 2.0 module.",
@@ -13077,6 +13062,28 @@
           "end": 37956
         }
       ]
+    },
+    {
+      "path": "src/memory/lockon/sonic3_exports.s",
+      "owner": "memory/lockon",
+      "responsibility": "Complete fixed second-cartridge Sonic 3 address, size and DAC metadata declarations",
+      "role": "memory",
+      "status": "owned",
+      "address_space": "declarations",
+      "physical_lines": 697,
+      "origin": {
+        "commit": "d2e1c72c270435dca63d63a2a32f58f0af33e70d",
+        "path": "Lockon S3/LockOn Pointers.s",
+        "first_line": 1,
+        "last_line": 690,
+        "sha256": "daeefffd46438e9f713e538eef3803e2ee29ba00ec4fe2673a5de1670b671f06"
+      },
+      "memory_contract": {
+        "kind": "external",
+        "phases": ["$200000"],
+        "rewind": false,
+        "profiles": ["sk"]
+      }
     },
     {
       "path": "src/memory/s3/overrides.s",

@@ -3,7 +3,7 @@
   "schema_version": 1,
   "assembly": {
     "dialect": "asl",
-    "paths": ["Sound", "Lockon S3", "src"]
+    "paths": ["Sound", "src"]
   },
   "text": {
     "json": "valid"

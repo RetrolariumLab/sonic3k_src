@@ -10,5 +10,5 @@
                 include "src/audio/banks/sk/effect_bank.s"
                 include "src/revisions/sk/graphics_order.s"
                 include "src/revisions/sk/cartridge_tail.s"
-                include "Lockon S3/LockOn Pointers.s"
+                include "src/memory/lockon/sonic3_exports.s"
                 END
