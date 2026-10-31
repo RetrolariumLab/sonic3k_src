@@ -8,45 +8,10 @@ The original buildable disassembly, labeling and formatting credit is Stealth
 (2006). Subsequent upstream attribution in the source is retained. IDA license
 banners and an original machine-local file path were removed.
 
-## Public upstream contributor names
+## Contributors
 
-- Clownacy
-- Fred Bronze
-- unknown
-- Vinny
-- Filter
-- Natsumi
-- flamewing
-- MainMemory
-- Tiddles
-- David Korth
-- Francis Gagné
-- BenoitRen
-- TheBlad768
-- lavagaming1
-- FourHawk
-- RobiWanKenobi
-- Malachi
-- ollie-ollie-tech-deck
-- yilisharcs
-- InfernoGear
-- Lave sIime
-- PikaNoob
-- RappyPhan
-- Alex Oxorn
-- Brainulator9
-- Christopher Trumbour
-- Harry Palmer
-- Lave siime
-- MDTravis
-- Sean Brackeen
-- Selbi182
-- ThatCesarMan
-- kirisamemofo
-- notaz
-- snkenjoi
-- vinegar97
-- vladikcomper
+The complete [contributor credits](../CONTRIBUTORS.md) retain all 37 public
+upstream names, their historical aliases and the original Stealth credit.
 
 ## Import exclusions
 

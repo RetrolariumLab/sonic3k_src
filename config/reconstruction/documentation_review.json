@@ -8,6 +8,16 @@
       "reason": "Keep contributor input, source and validation rules together."
     },
     {
+      "path": "CONTRIBUTORS.md",
+      "decision": "added",
+      "reason": "Centralize all 37 public upstream names without changing historical aliases, retain Stealth's original credit and identify the reconstruction maintainer."
+    },
+    {
+      "path": "README.md",
+      "decision": "reworked",
+      "reason": "Link the canonical contributor list, make fork identity explicit and distinguish current complete acceptance from the retained historical baseline."
+    },
+    {
       "path": "docs/architecture.md",
       "decision": "reworked",
       "reason": "Retain engine and data ownership; align test-package ownership with the public tool packages."
@@ -40,7 +50,7 @@
     {
       "path": "docs/index.md",
       "decision": "reworked",
-      "reason": "Retain the reader journey and replace pending candidate claims with actual clean-clone acceptance, inherited preservation boundaries and reproducible pinned-tool setup."
+      "reason": "Link the canonical contributor list, make fork identity explicit and distinguish current complete acceptance from the retained historical baseline."
     },
     {
       "path": "docs/indexed_palettes.md",
@@ -65,7 +75,7 @@
     {
       "path": "docs/provenance.md",
       "decision": "reworked",
-      "reason": "Remove the obsolete claim that unused FM score encoders are required; reflect their deletion, the exact current source inventory and private audio ownership."
+      "reason": "Link the canonical contributor list, make fork identity explicit and distinguish current complete acceptance from the retained historical baseline."
     },
     {
       "path": "docs/raw_animations.md",
@@ -116,11 +126,6 @@
       "path": "docs/verification.md",
       "decision": "reworked",
       "reason": "Describe exact completed pre-tag re-audits without overwriting accepted reports, separate post-tag tag identity checks and current real-edit evidence."
-    },
-    {
-      "path": "README.md",
-      "decision": "reworked",
-      "reason": "Remove the obsolete claim that unused FM score encoders are required; reflect their deletion, the exact current source inventory and private audio ownership."
     }
   ]
 }

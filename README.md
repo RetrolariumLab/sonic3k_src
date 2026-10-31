@@ -1,22 +1,26 @@
-# Sonic 3 / Sonic & Knuckles preservation source
+# Sonic the Hedgehog 3 / Sonic & Knuckles (SMD) Source Reconstruction
 
-Buildable, ROM-free reconstruction of the Sonic Retro disassembly. It preserves
-Sonic 3 USA, Europe and Japan, Sonic & Knuckles, and the Sonic 3 & Knuckles
-lock-on composition. Sonic 3 and S&K remain separate sibling engines. No game
-images, extracted binary assets or compiler executables are distributed.
+This is a buildable source reconstruction fork of
+[Sonic Retro's Sonic 3 / Sonic & Knuckles disassembly](https://github.com/sonicretro/skdisasm).
+It preserves Sonic 3 USA, Europe and Japan, Sonic & Knuckles, and the Sonic 3 &
+Knuckles lock-on composition. Sonic 3 and S&K remain separate sibling engines.
+No game images, extracted binary assets or compiler executables are distributed.
+See [contributors](CONTRIBUTORS.md) and [source provenance](docs/provenance.md).
 
 ## Status
 
 All five preservation images build byte for byte from verified private ROM
-inputs. Direct original-image attract checks cover all five profiles, and the
-675-label S3 second-cartridge ABI is checked independently for each S3 region.
-The complete Source Reconstruction 1.0 gate passed from a clean clone, including
-ROM-extracted SMPS storage, all-profile relocation and runtime. The 1.0 manifest
-records the accepted commit and source binding; the tag remains a maintainer
-action. The Source Reconstruction 2.0 baseline adds complete semantic source
-ownership and headless content contracts. Its complete aggregate passed from a
-clean clone: 341 tests, all 165 runtime cases and all five images rebuilt from
-encoded resources. Tags and publication remain maintainer actions.
+inputs. The 675-label S3 second-cartridge ABI is checked independently for each
+region. Runtime acceptance requires 165 short-attract comparisons and forty
+extended comparisons covering longer attract, characters, Competition, special
+stage and cartridge save reload. The complete Source Reconstruction 2.0 gate
+also checks all semantic source owners and rebuilds all five images from encoded
+resources, then proves two bounded nonzero palette edits in actual rebuilt ROMs.
+
+The release manifests retain historical clean-clone acceptance as provenance.
+Every changed candidate must regenerate the complete Source 1.0 and 2.0
+evidence; an old report cannot certify a changed checkout. Tags and publication
+remain maintainer actions, separate from these checks.
 
 ## Quick start
 

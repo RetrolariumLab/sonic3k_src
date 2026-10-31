@@ -88,8 +88,14 @@
     "runtime_coverage": {
       "status": "satisfied",
       "evidence": {
-        "targets": ["trace", "trace-relocated"],
-        "files": ["config/runtime/scenarios.json", "config/runtime/emulator.json", "docs/runtime.md"]
+        "targets": ["trace", "trace-relocated", "trace-extended"],
+        "files": [
+          "config/runtime/scenarios.json",
+          "config/runtime/emulator.json",
+          "docs/runtime.md",
+          "config/runtime/extended_scenarios.json",
+          "scenarios/extended/provenance.json"
+        ]
       },
       "note": "The preservation controls passed complete clean-clone acceptance at the recorded baseline; current semantic work requires fresh aggregate evidence."
     },
@@ -321,22 +327,23 @@
     "private_inputs_tracked": false
   },
   "required_documents": [
-    "README.md",
     "CONTRIBUTING.md",
-    "docs/index.md",
-    "docs/build.md",
+    "CONTRIBUTORS.md",
+    "README.md",
     "docs/architecture.md",
-    "docs/memory_map.md",
-    "docs/revisions.md",
-    "docs/verification.md",
-    "docs/runtime.md",
+    "docs/audio_storage.md",
+    "docs/build.md",
+    "docs/index.md",
     "docs/lockon_abi.md",
+    "docs/memory_map.md",
     "docs/numeric_operands.md",
-    "docs/unknowns.md",
     "docs/provenance.md",
-    "docs/source_reconstruction_1_0.md",
     "docs/relocation.md",
-    "docs/audio_storage.md"
+    "docs/revisions.md",
+    "docs/runtime.md",
+    "docs/source_reconstruction_1_0.md",
+    "docs/unknowns.md",
+    "docs/verification.md"
   ],
   "release_commands": [
     "lint",

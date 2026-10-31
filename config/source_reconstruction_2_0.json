@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 73
+    "commit_count": 74
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -485,9 +485,15 @@
       "commits": ["c18a4a8ceb0fa2311481ed470ca7b531bfe20cc2"]
     },
     {
-      "id": "current-release-stage",
+      "id": "change-2d59442d2369",
       "kind": "tooling",
-      "summary": "Allow exact completed pre-tag aggregates to be audited again while preserving accepted primary reports and retaining separate post-tag identity checks.",
+      "summary": "Preserve accepted reports when rechecking completed release candidates",
+      "commits": ["2d59442d2369ac0b20ca183ec048e5e7c57d506d"]
+    },
+    {
+      "id": "current-release-stage",
+      "kind": "documentation",
+      "summary": "Present the reconstruction fork and complete original contributor credits, reconcile current acceptance commands and retain all historical provenance and rights boundaries.",
       "commits": ["release-commit"]
     }
   ],
@@ -752,10 +758,17 @@
   ],
   "provenance": {
     "private_inputs_tracked": false,
-    "references": ["docs/provenance.md", "config/reconstruction/label_renames.json", "assets/manifest.json"]
+    "references": [
+      "docs/provenance.md",
+      "config/reconstruction/label_renames.json",
+      "assets/manifest.json",
+      "CONTRIBUTORS.md"
+    ]
   },
   "required_documents": [
     "CONTRIBUTING.md",
+    "CONTRIBUTORS.md",
+    "README.md",
     "docs/architecture.md",
     "docs/architecture_decisions.md",
     "docs/audio_storage.md",
@@ -777,8 +790,7 @@
     "docs/source_reconstruction_1_0.md",
     "docs/source_reconstruction_2_0.md",
     "docs/unknowns.md",
-    "docs/verification.md",
-    "README.md"
+    "docs/verification.md"
   ],
   "label_registry": "config/reconstruction/label_renames.json",
   "documentation_review": "config/reconstruction/documentation_review.json",

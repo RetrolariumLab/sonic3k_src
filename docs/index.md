@@ -49,3 +49,6 @@
 
 - [2.0 baseline gate](source_reconstruction_2_0.md): scope and aggregate
   evidence.
+
+The [contributor credits](../CONTRIBUTORS.md) identify the reconstruction
+maintainer and preserve the complete pinned upstream name list.
