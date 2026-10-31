@@ -118,3 +118,51 @@ ownership work.
 Core scratch cleanup can leave a directory in ignored build storage when a
 Windows process still holds a temporary file. Execution, encoding, output
 reading and unexpected cleanup failures remain fatal.
+
+## Retained assembler content
+
+The main format catalog links config/authoring/assembly_formats.json. This
+source-owned catalog covers all 502 mapping, 39 DPLC and 72 animation files.
+Their original labels and pointer expressions remain assembler source; binary
+extraction recipes do not duplicate these resources. The fixed allocation lists
+every semantic block and padding byte, including mixed mapping/DPLC tables,
+unnamed frames, aliases inside pieces and stored but inactive pieces.
+
+assembly_data parses only labels, byte/word declarations, bounded integer and
+symbol sums/differences, and even alignment. assembly_content exposes typed
+models and renders edited literals while retaining every structural expression
+and label offset. It rejects growth, unknown syntax, retargeted structural
+references, a different original declaration identity and packets from another
+profile or lock-on component before producing source output. Cross-file frame
+references must enter a registered semantic resource, and an external table base
+must match the actual outer source alias.
+
+Mappings use either the S3/S&K word count with six-byte pieces or the retained
+Sonic 1 byte count with five-byte pieces. Models expose signed X/Y coordinates,
+tile dimensions, VDP tile attributes and reserved size bits. The count remains
+separate from stored pieces so original inactive records survive a round trip.
+Player DPLC uses a high length nibble and direct count; ordinary-object DPLC
+uses a low length nibble and count minus one. Transfers expose source tiles and
+tile counts; the primitive encoder accepts explicit source-art and
+destination-tile limits and rejects active transfers crossing them. Catalog
+edits also retain the original table allocation and the hardware VRAM tile
+ceiling. This is a fixed footprint source workflow; it does not relocate art or
+infer new runtime code.
+
+Animation models declare the actual consumer ABI per sequence. Object animations
+have a shared delay and negative control bytes; player animations allow frame
+IDs through 0xFB and use signed timing selectors for specialized runtime modes.
+Irregular animations store frame/delay pairs. Some HCZ and Sky Sanctuary tables
+mix the shared and per-frame forms. Rewind, animation change, restart, routine
+advance, offscreen movement and no-progress commands remain distinct. The model
+preserves fallthrough fragments, repeated unused commands and the skipped second
+byte after an irregular routine-advance command. It reproduces the original
+interpreter behavior, including the S3 irregular-restart quirk.
+
+The complete round-trip command checks every applicable profile and both lock-on
+component views against actual AS includes, labels and image bytes. It creates
+encoded assembly source in the same ignored workspace as encoded binary assets.
+The container command checks all resulting source hashes and builds all five ROM
+profiles from that workspace; it never overwrites encoded source with the
+original files. The current source fingerprint and tooling fingerprint bind
+every report to the checked inputs.

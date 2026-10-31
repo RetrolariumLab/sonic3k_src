@@ -8,7 +8,14 @@ from pathlib import Path
 import subprocess
 import tempfile
 
-from scripts.authoring import content_profiles, core_compression, driver_inputs, format_codecs, smps_storage
+from scripts.authoring import (
+    assembly_workflow,
+    content_profiles,
+    core_compression,
+    driver_inputs,
+    format_codecs,
+    smps_storage,
+)
 from scripts.authoring.content_contract import ContentCatalog
 from scripts.authoring.driver_payloads import resolve_contract
 from scripts.build.pipeline import build_selected
@@ -146,6 +153,15 @@ def roundtrip():
         if not destination.is_relative_to(workspace / "data"):
             raise ValueError("Encoded resource leaves its workspace")
         atomic(destination, data)
+    report["assembly_content"] = assembly_workflow.roundtrip(workspace)
+    source_outputs = dict(report["assembly_content"]["outputs"])
+    for name in source_names():
+        if name not in source_outputs:
+            payload = (ROOT / name).read_bytes()
+            atomic(workspace / name, payload)
+            source_outputs[name] = hashlib.sha256(payload).hexdigest()
+    report["source_outputs"] = source_outputs
+    report["workspace_source_sha256"] = source_fingerprint(workspace)
     report["source_input_paths"] = sorted(rebuilt_seeds)
     report["outputs"] = {name: hashlib.sha256(data).hexdigest() for name, data in sorted(results.items())}
     report["profile_use_count"] = sum(len(row["profiles"]) for row in catalog.rows())
@@ -175,10 +191,13 @@ def zero_edit():
         data = (workspace / "data" / name).read_bytes()
         if hashlib.sha256(data).hexdigest() != expected:
             raise ValueError("Encoded workspace resource changed after its round trip")
-    for name in source_names():
-        atomic(workspace / name, (ROOT / name).read_bytes())
-    if source_fingerprint(workspace) != report["source_sha256"]:
-        raise ValueError("Zero-edit workspace source differs from the checked source")
+    if set(report["source_outputs"]) != set(source_names()):
+        raise ValueError("Encoded workspace omits a checked source owner")
+    for name, expected in report["source_outputs"].items():
+        if hashlib.sha256((workspace / name).read_bytes()).hexdigest() != expected:
+            raise ValueError("Encoded semantic source changed after its round trip")
+    if source_fingerprint(workspace) != report["workspace_source_sha256"]:
+        raise ValueError("Zero-edit source differs from the encoded semantic workspace")
     outputs = build_selected(
         list(profiles()), source_root=workspace, output_root=workspace / "rebuilt/images", verify=True
     )
@@ -191,6 +210,8 @@ def zero_edit():
         "tooling_sha256": report["tooling_sha256"],
         "roundtrip_workspace": report["workspace"],
         "all_registered_inputs": len(assets),
+        "assembly_resources": report["assembly_content"]["resources"],
+        "workspace_source_sha256": report["workspace_source_sha256"],
         "profiles": {key: hashlib.sha256(path.read_bytes()).hexdigest() for key, path in outputs.items()},
     }
     _save("zero-edit-containers.json", result)
@@ -204,7 +225,14 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if args.command == "check-contract":
         catalog, assets = load_catalog()
-        print("[OK] Complete immutable content registry: " + str(len(catalog.rows())) + " inputs")
+        source_catalog = assembly_workflow.catalog()
+        print(
+            "[OK] Complete immutable content registry: "
+            + str(len(catalog.rows()))
+            + " inputs and "
+            + str(len(source_catalog.rows()))
+            + " source resources"
+        )
     elif args.command == "roundtrip":
         roundtrip()
     else:

@@ -27863,5 +27863,6 @@
       "profiles": ["s3k", "sk"],
       "address_spaces": ["cartridge-rom"]
     }
-  ]
+  ],
+  "assembly_catalog": "config/authoring/assembly_formats.json"
 }
