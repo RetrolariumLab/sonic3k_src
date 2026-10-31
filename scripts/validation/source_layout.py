@@ -7,7 +7,8 @@ import re
 from scripts.build.project import ROOT, atomic, image_records, load, profiles, source_fingerprint
 from scripts.build.relocation import source_names
 from scripts.validation.numeric_operands import code_part
-from scripts.validation.cohorts import INSTRUCTIONS, TERMINALS, statements
+from scripts.validation.cohorts import INSTRUCTIONS, TERMINALS, collect_file, statements
+from scripts.validation.definitions import check_definitions, check_nonemitting_range, named_declaration
 from scripts.validation.data_macros import DATA_MACROS, HEADER as MACRO_HEADER, check_data_macros
 
 DATA_OPS = frozenset(("dc.b", "dc.w", "dc.l", "even", "align", "macro", "endm", "equ", "label")) | DATA_MACROS
@@ -20,7 +21,7 @@ def check_ledger(text, source_includes=(), binary_includes=()):
     for line in text.splitlines():
         raw = code_part(line).strip()
         macro = MACRO_HEADER.match(raw)
-        code = re.sub(r"^[A-Za-z_.][A-Za-z_0-9.]*:\s*", "", raw)
+        code = named_declaration(raw) or re.sub(r"^[A-Za-z_.][A-Za-z_0-9.]*:\s*", "", raw)
         if macro:
             if macro[1].lower() not in DATA_MACROS:
                 raise ValueError("Data ledger defines an implementation-only or unknown macro")
@@ -161,6 +162,12 @@ def validate_entry(row, text, inventory=False, source_includes=(), binary_includ
         raise ValueError("Owned source is outside src")
     if re.fullmatch(r"(?:code|routine|room_part|part)_[0-9a-f]+", row["path"].rsplit("/", 1)[-1].split(".")[0], re.I):
         raise ValueError("Source module has only an address or page number")
+    if row["role"] not in ("code", "data", "definitions"):
+        raise ValueError("Unknown source ownership role")
+    if row.get("address_space", "cartridge-rom") != "cartridge-rom":
+        raise ValueError("Unsupported source address space requires an explicit checked contract")
+    if row["role"] == "definitions":
+        check_definitions(text)
     if row["role"] == "data":
         check_ledger(text, source_includes, binary_includes)
     check_added_annotations(row, text, source_includes, binary_includes)
@@ -175,6 +182,10 @@ def validate_entry(row, text, inventory=False, source_includes=(), binary_includ
         and exception.get("kind") not in ("vectors", "profile-entry", "fixed-address-tail")
     ):
         raise ValueError("Tiny executable module needs a structural contract")
+    if row["role"] == "code":
+        document = collect_file(row["path"], text)
+        if not document["returns"] and not document["procedures"]:
+            raise ValueError("Executable ownership needs a real return or terminal procedure")
     return True
 
 
@@ -219,6 +230,8 @@ def check_ranges(rows):
         for item in parse_include_ranges(listing, set(owned)):
             if item["end"] > images[key]["size"]:
                 raise ValueError("Source data leaves its preservation image")
+            if owned[item["path"]]["role"] == "definitions":
+                check_nonemitting_range(item["start"], item["end"])
             actual[item["path"]].append({"profile": key, "start": item["start"], "end": item["end"]})
     for key, profile in registry.items():
         if "compose" not in profile:

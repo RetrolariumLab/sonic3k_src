@@ -730,6 +730,12 @@
       "commits": ["f51c89f7506f5fa6ac53724aac62d016c2f45fd7"]
     },
     {
+      "id": "change-f124bbdc4be7",
+      "kind": "source_or_tooling",
+      "summary": "Remove the unused lock-on screen-event reference",
+      "commits": ["f124bbdc4be73cba9df0ae49f5c6871e33e1ca8f"]
+    },
+    {
       "id": "current-source-stage",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",

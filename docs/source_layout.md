@@ -60,3 +60,12 @@ ledgers may request only bounded literal power-of-two alignment or argument-free
 there. Debug-list calls require a literal owned data-source include and
 participate in the same cycle checks as ordinary data includes. PLC pointer
 declarations use compile-time labels and data words only.
+
+Definition libraries have their own role. Their top level accepts only named
+constants/functions, the explicit compiler setup options, balanced known text
+encoding contexts and complete macro definitions. Instructions and data may
+occur inside a macro body, but cannot execute when the library is included.
+Independent AS include ranges must have identical start and end addresses for
+every applicable profile. Unknown roles and unchecked address spaces are
+rejected; include wiring cannot claim executable ownership without an actual
+return or terminal procedure.

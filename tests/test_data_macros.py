@@ -106,7 +106,7 @@ class EmitterClosureTests(unittest.TestCase):
             check_data_macros(sources, contract)
 
     def test_primitive_overrides_cannot_bypass_the_reviewed_closure(self):
-        for name in ("dc.b", "binclude", "include", "db", "set", "error", "if"):
+        for name in ("dc.b", "binclude", "include", "db", "set", "error", "if", "function", "charset", "page"):
             sources, contract = fixture()
             sources["src/macros.s"] += name + ":macro\n jsr Target\n endm\n"
             with self.subTest(name=name), self.assertRaisesRegex(ValueError, "Unchecked override"):
