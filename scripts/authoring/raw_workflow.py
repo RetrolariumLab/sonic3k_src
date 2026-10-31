@@ -39,7 +39,13 @@ def catalog():
     if load("config/authoring/data_formats.json").get("raw_catalog") != CATALOG:
         raise ValueError("Main format registry does not own the raw source catalog")
     result = RawCatalog(load(CATALOG), profiles())
-    sources, names = {}, set(source_names())
+    sources, names, declared = {}, set(source_names()), set()
+    for item in result.consumer_sources:
+        if (
+            item["path"] not in names
+            or hashlib.sha256((ROOT / item["path"]).read_bytes()).hexdigest() != item["sha256"]
+        ):
+            raise ValueError("Raw consumer source changed; its ABI selection needs review")
     for row in result.rows():
         if row["path"] not in names:
             raise ValueError("Raw span has no preservation source owner")
@@ -51,13 +57,19 @@ def catalog():
         if dependencies(records, row["scope"]) != set(row["external_symbols"]):
             raise ValueError("Raw dependencies differ from their exact symbol contract")
         sources[(row["path"], row["symbol"])] = text
+        current = row["scope"]
+        for record in records:
+            if "label" in record:
+                declared.add((row["path"], raw_source.qualify(record["label"], current)))
+                if not record["label"].startswith("."):
+                    current = record["label"]
     # Every explicitly named raw stream is registered, including custom readers.
     named = {
         (name, match[1])
         for name in names
         for match in re.finditer(r"^(AniRaw_[A-Za-z_0-9]+):", (ROOT / name).read_text(), re.M)
     }
-    if not named <= set(sources):
+    if not named <= declared:
         raise ValueError("Raw catalog omits an explicitly named source stream")
     return result, sources
 
@@ -153,6 +165,8 @@ def prepare(workspace):
                 "symbol": row["symbol"],
                 "bindings": locations[key],
                 "entries": row["entries"],
+                "members": row.get("members", [row["symbol"]]),
+                "stored_markers": row.get("stored_markers", []),
                 "nodes": len(packet["model"]["nodes"]),
                 "byte_exact": True,
             }

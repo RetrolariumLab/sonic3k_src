@@ -1,6 +1,7 @@
 """Explicit ABIs for the retained raw sprite animation interpreters."""
 
 from scripts.authoring.graphics import _bytes, _integer
+from scripts.authoring import raw_special
 
 ABIS = frozenset(
     (
@@ -17,6 +18,10 @@ ABIS = frozenset(
         "external-player-sk",
         "external-player-s3",
         "sentinel",
+        "counted",
+        "delta-frames",
+        "negative-sentinel",
+        "paired-lanes",
     )
 )
 COMMANDS = {0xFC: "restart", 0xF8: "jump", 0xF4: "custom-routine"}
@@ -32,6 +37,8 @@ def _mode(abi):
 
 
 def decode(data, *, abi):
+    if abi in raw_special.ABIS:
+        return raw_special.decode(data, abi=abi)
     pairs, extended, flip = _mode(abi)
     raw = _bytes(data)
     if not raw or len(raw) > 65536:
@@ -109,6 +116,8 @@ def decode(data, *, abi):
 
 
 def encode(model, *, target_abi):
+    if target_abi in raw_special.ABIS:
+        return raw_special.encode(model, target_abi=target_abi)
     pairs, extended, flip = _mode(target_abi)
     if set(model) != {"abi", "header", "tokens"} or model["abi"] != target_abi:
         raise ValueError("Raw animation model differs from its target interpreter")

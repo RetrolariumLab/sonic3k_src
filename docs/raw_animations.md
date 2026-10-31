@@ -1,19 +1,22 @@
 # Raw sprite animation source
 
 The registered source catalog is `config/authoring/raw_formats.json`, linked
-from the main content registry. It currently covers all 72 explicitly named
-`AniRaw_*` declarations and 158 source spans supplied by adjacent static
-NoSST/external-player calls. Twenty-one spans belong to both sets: there are 209
-distinct groups in 79 source files. This is a checked subset, not a claim that
-every object-state or pointer-table flow has been classified.
+from the main content registry. It covers 638 named source entries in 136 closed
+allocation groups across 135 source files. These include all 72 `AniRaw_*`
+declarations, direct NoSST inputs, object-state assignments, pointer-table
+targets, complex-child inputs and dedicated particle readers. The catalog pins
+275 consumer source owners so reader changes require ABI review. Directly
+indexed `RawAni_*` frame tables remain a separate unfinished contract; this
+catalog does not claim that every inline animation table is already covered.
 
 `RawCatalog` exposes profile-bound decode/encode packets. A packet binds the
 source declaration tree, scoped entry symbol, byte capacity, exact external
-symbol dependencies, entry offsets and interpreter ABIs. Only frame values, flip
-fields and counter values can change. Labels, command types, signed jump
-displacements, stored entry boundaries, byte lengths and alignment remain fixed.
-Cross-profile, cross-component and cross-ABI packet reuse fails before workspace
-writes. These are preservation allocations, not a relocating linker.
+symbol dependencies, entry offsets, interpreter ABIs and the consumer source
+identities. Only frame values, flip fields and counter values can change.
+Labels, command types, signed jump displacements, stored entry boundaries, byte
+lengths and alignment remain fixed. Cross-profile, cross-component and cross-ABI
+packet reuse fails before workspace writes. These are preservation allocations,
+not a relocating linker.
 
 ## Interpreter families
 
@@ -74,12 +77,24 @@ one parent source file without overwriting each other's generated text. The
 actual combined encoded source tree then builds every preservation container; no
 original source file replaces a generated source owner during that check.
 
-## Remaining coverage
+## Consumer selection and remaining coverage
 
-Static object-state assignments and indirect pointer-table paths beyond the
-registered named/direct subset remain under review. Several scripts change
-interpreters between states or exit before their stored terminator, and some F8
-targets cross global declaration boundaries. These need closed allocation and
-consumer-state contracts before their source edit packets are registered. A
-pointer in object field 30 alone is not sufficient evidence of raw animation:
-that field is also used for collapse timers and other object-specific data.
+State numbers index the original routine tables. The interpreter is often in an
+earlier source block, so the next physical call is not evidence of the ABI. For
+example, Techno Squeek's state 6 uses the Y-flip pair reader, while state 2 uses
+the X-flip pair reader. Mecha Sonic's state 3E uses the X-flip pair reader, and
+Hidden Palace state 2 uses the extended fixed-delay reader. Regression tests pin
+these selections independently of byte-pattern compatibility.
+
+The raw pointer field is reused by other object types. Collapse timing arrays,
+collision rectangles, slope data, executable callbacks and camera accumulators
+are not animation programs and are not passed through this catalog. Complex
+child constructors may also supply a zero pointer and a movement-only callback.
+The constructor packet is 22 bytes: four longwords, signed X/Y offset bytes and
+two velocity words, after the shared count-minus-one word.
+
+Directly indexed `RawAni_*` frame lookups and additional palette-cycle formats
+still need their own source editing contracts before complete content
+acceptance. The registered program corpora are byte-checked independently in
+every active base profile and in their composite views; this does not replace
+that remaining format work or the full release gate.

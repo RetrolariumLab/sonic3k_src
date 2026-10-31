@@ -2,7 +2,7 @@
 
 from copy import deepcopy
 from scripts.authoring.graphics import _bytes, _integer
-from scripts.authoring import raw_animations as linear
+from scripts.authoring import raw_animations as linear, raw_special
 
 
 def _entries(entries, size):
@@ -29,7 +29,26 @@ def _padding(padding, size):
     return sorted(values)
 
 
+def _stored(items, size):
+    if not isinstance(items, (list, tuple)) or len(items) > size:
+        raise ValueError("Stored markers need a bounded explicit record list")
+    result, seen = [], set()
+    for item in items:
+        if not isinstance(item, dict) or set(item) != {"offset", "value", "purpose"}:
+            raise ValueError("Unknown stored marker fields")
+        offset = _integer(item["offset"], size, "Stored marker offset")
+        value = _integer(item["value"], 256, "Stored marker byte")
+        if offset in seen or value < 128 or item["purpose"] not in ("unread-terminal-marker", "unread-cycle-marker"):
+            raise ValueError("Stored marker is duplicated or lacks a known control-storage role")
+        seen.add(offset)
+        result.append(dict(item))
+    return sorted(result, key=lambda item: item["offset"])
+
+
 def node(data, start, abi):
+    if abi in raw_special.ABIS:
+        end = start + raw_special.length(data, start, abi)
+        return {"offset": start, "abi": abi, "model": linear.decode(data[start:end], abi=abi), "target": None}
     pairs, extended, flip = linear._mode(abi)
     header = (
         2
@@ -94,12 +113,13 @@ def node(data, start, abi):
     return {"offset": start, "abi": abi, "model": model, "target": target}
 
 
-def decode(data, entries, padding=()):
+def decode(data, entries, padding=(), stored=()):
     raw = _bytes(data)
     if not 0 < len(raw) <= 65536:
         raise ValueError("Raw graph allocation is empty or overlong")
     entries = _entries(entries, len(raw))
     padding = _padding(padding, len(raw))
+    stored = _stored(stored, len(raw))
     pending, seen, nodes = list(entries), set(), []
     while pending:
         start, abi = pending.pop()
@@ -117,6 +137,7 @@ def decode(data, entries, padding=()):
         "size": len(raw),
         "entries": [list(x) for x in entries],
         "padding": padding,
+        "stored": stored,
         "nodes": sorted(nodes, key=lambda x: (x["offset"], x["abi"])),
     }
     if _encode(model) != raw:
@@ -125,13 +146,14 @@ def decode(data, entries, padding=()):
 
 
 def _encode(model):
-    if not isinstance(model, dict) or set(model) != {"size", "entries", "padding", "nodes"}:
+    if not isinstance(model, dict) or set(model) != {"size", "entries", "padding", "stored", "nodes"}:
         raise ValueError("Raw graph model fields differ from the format")
     size = _integer(model["size"], 65537, "Raw graph allocation")
     if not size:
         raise ValueError("Raw graph allocation is empty")
     _entries(model["entries"], size)
     padding = _padding(model["padding"], size)
+    stored = _stored(model["stored"], size)
     if not isinstance(model["nodes"], list) or not 0 < len(model["nodes"]) <= 4096:
         raise ValueError("Raw graph node count exceeds its capacity")
     output = [None] * size
@@ -146,6 +168,8 @@ def _encode(model):
 
     for offset in padding:
         put(offset, b"\0")
+    for item in stored:
+        put(item["offset"], bytes((item["value"],)))
     seen = set()
     for item in model["nodes"]:
         if not isinstance(item, dict) or set(item) != {"offset", "abi", "model", "target"}:
@@ -163,7 +187,7 @@ def _encode(model):
 
 def encode(model):
     result = _encode(model)
-    if decode(result, model["entries"], model["padding"]) != model:
+    if decode(result, model["entries"], model["padding"], model["stored"]) != model:
         raise ValueError("Raw graph edits change its declared topology or node boundaries")
     return result
 

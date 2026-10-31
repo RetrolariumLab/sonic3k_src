@@ -228,14 +228,14 @@ def render(records):
     return "\n".join(lines) + "\n"
 
 
-def encode_graph_source(original, model, *, entries, scope, base, external):
+def encode_graph_source(original, model, *, entries, scope, base, external, stored=()):
     """Re-encode semantic byte fields while keeping every label and control edge."""
     from copy import deepcopy
     from scripts.authoring import raw_graph
 
     records = parse(original)
     data, labels, padding = assemble(records, scope=scope, base=base, external=external)
-    prior = raw_graph.decode(data, entries, padding)
+    prior = raw_graph.decode(data, entries, padding, stored)
     if raw_graph.structure(prior) != raw_graph.structure(model):
         raise ValueError("Raw source edits cannot change the original control or layout shape")
     encoded = raw_graph.encode(model)

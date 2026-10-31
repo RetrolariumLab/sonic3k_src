@@ -170,6 +170,7 @@ def roundtrip():
     }
     report["raw_content"] = {
         "groups": len(raw_evidence),
+        "source_entries": sum(len(r["members"]) for r in raw_evidence),
         "source_files": len({r["path"] for r in raw_evidence}),
         "artifacts": raw_evidence,
     }
@@ -245,6 +246,7 @@ def zero_edit():
         "palette_initializers": report["palette_content"]["initializers"],
         "palette_source_files": report["palette_content"]["source_files"],
         "raw_groups": report["raw_content"]["groups"],
+        "raw_source_entries": report["raw_content"]["source_entries"],
         "raw_source_files": report["raw_content"]["source_files"],
         "workspace_source_sha256": report["workspace_source_sha256"],
         "profiles": {key: hashlib.sha256(path.read_bytes()).hexdigest() for key, path in outputs.items()},

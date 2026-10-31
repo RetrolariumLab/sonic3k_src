@@ -10,18 +10,34 @@ from scripts.authoring.assembly_content import digest, _path
 class RawCatalog:
     def __init__(self, registry, profiles):
         if (
-            set(registry) != {"schema_version", "scope", "coverage", "groups"}
+            set(registry) - {"consumer_sources"} != {"schema_version", "scope", "coverage", "groups"}
             or registry["schema_version"] != 1
             or registry["scope"] != "preservation-fixed-footprint"
-            or registry["coverage"] != "named-and-direct-static-consumers"
+            or registry["coverage"] not in ("named-and-direct-static-consumers", "registered-consumer-corpora")
         ):
             raise ValueError("Unknown raw source catalog")
         self._profiles, self._rows = deepcopy(profiles), {}
+        self.consumer_sources = deepcopy(registry.get("consumer_sources", []))
+        if not isinstance(self.consumer_sources, list) or len(self.consumer_sources) > 4096:
+            raise ValueError("Raw consumer-source proof exceeds its capacity")
+        seen = set()
+        for item in self.consumer_sources:
+            if not isinstance(item, dict) or set(item) != {"path", "sha256"}:
+                raise ValueError("Unknown raw consumer source identity fields")
+            _path(item["path"])
+            if (
+                item["path"] in seen
+                or not isinstance(item["sha256"], str)
+                or not re.fullmatch(r"[0-9a-f]{64}", item["sha256"])
+            ):
+                raise ValueError("Raw consumer source identity is duplicated or malformed")
+            seen.add(item["path"])
+
         if not isinstance(registry["groups"], list) or not 0 < len(registry["groups"]) <= 4096:
             raise ValueError("Raw catalog group capacity exceeded")
         for original in registry["groups"]:
             row = deepcopy(original)
-            if set(row) != {
+            if set(row) - {"stored_markers", "members"} != {
                 "path",
                 "symbol",
                 "scope",
@@ -35,6 +51,16 @@ class RawCatalog:
             }:
                 raise ValueError("Raw group fields differ from the source span contract")
             _path(row["path"])
+            members = row.get("members", [row["symbol"]])
+            if (
+                not isinstance(members, list)
+                or not members
+                or len(members) > 4096
+                or len(set(members)) != len(members)
+                or row["symbol"] not in members
+                or any(not isinstance(n, str) or not raw_source.NAME.fullmatch(n) or n.startswith(".") for n in members)
+            ):
+                raise ValueError("Raw corpus members must be unique qualified source symbols")
             for key in ("symbol", "scope"):
                 if not isinstance(row[key], str) or not raw_source.NAME.fullmatch(row[key]) or row[key].startswith("."):
                     raise ValueError("Raw context needs a qualified source symbol")
@@ -55,6 +81,7 @@ class RawCatalog:
             ):
                 raise ValueError("Raw declaration identity is malformed")
             raw_graph._entries(row["entries"], row["capacity_bytes"])
+            raw_graph._stored(row.get("stored_markers", []), row["capacity_bytes"])
             if (
                 not isinstance(row["external_symbols"], list)
                 or len(set(row["external_symbols"])) != len(row["external_symbols"])
@@ -97,6 +124,14 @@ class RawCatalog:
         records = raw_source.parse(text)
         if digest(records) != row["declarations_sha256"]:
             raise ValueError("Raw source differs from its immutable declaration identity")
+        current, names = row["scope"], set()
+        for record in records:
+            if "label" in record:
+                names.add(raw_source.qualify(record["label"], current))
+                if not record["label"].startswith("."):
+                    current = record["label"]
+        if not set(row.get("members", [row["symbol"]])) <= names:
+            raise ValueError("Raw corpus omits a declared source member")
         return records
 
     def _context(self, row, base, symbols):
@@ -108,7 +143,7 @@ class RawCatalog:
             or any(type(v) is not int or not 0 <= v <= 0xFFFFFFFF for v in symbols.values())
         ):
             raise ValueError("Raw context differs from its exact symbol dependencies")
-        return digest([row, base, symbols])
+        return digest([row, self.consumer_sources, base, symbols])
 
     def decode(self, path, symbol, profile, text, *, base, symbols, component=None):
         row = self._select(path, symbol, profile, component)
@@ -124,7 +159,7 @@ class RawCatalog:
             "profile": profile,
             "component": component,
             "contract": digest([token, profile, component]),
-            "model": raw_graph.decode(raw, row["entries"], padding),
+            "model": raw_graph.decode(raw, row["entries"], padding, row.get("stored_markers", [])),
         }
 
     def encode(self, packet, *, target_profile, original, base, symbols, component=None):
@@ -147,7 +182,13 @@ class RawCatalog:
             raise ValueError("Raw model belongs to another profile, source or consumer ABI")
         self.source(row, original)
         text, raw = raw_source.encode_graph_source(
-            original, packet["model"], entries=row["entries"], scope=row["scope"], base=base, external=symbols
+            original,
+            packet["model"],
+            entries=row["entries"],
+            scope=row["scope"],
+            base=base,
+            external=symbols,
+            stored=row.get("stored_markers", []),
         )
         if len(raw) != row["capacity_bytes"]:
             raise ValueError("Raw edit changes its fixed byte allocation")
