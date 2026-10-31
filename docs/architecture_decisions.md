@@ -54,6 +54,15 @@ writing any file. Content workspaces already contain their encoded resources.
 Real-AS synthetic tests verify nested edits in emitted object bytes and reject
 missing source or binary inputs even when originals exist in another tree.
 
+## Partition probes by physical order
+
+The relocation policy already owns each engine's source emission order. Probe
+partitioning uses that sequence and retains every physical cohort exactly once.
+Alphabetical subsystem paths are unrelated to cartridge distance and can
+concentrate guards inside a nearly exhausted PC-relative word span. The matrix
+keeps 32 groups and the original PC-relative instructions; region-order
+conflicts or unowned executable sources fail before generating a probe.
+
 ## Keep evidence reproducible
 
 The complete 1.0 gate runs first in 2.0. Structural tests work without ROMs;

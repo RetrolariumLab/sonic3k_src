@@ -31,10 +31,14 @@ The accepted preservation baseline has 7152 return sites and 2559 imported
 annotations. Semantic owners also record explicitly checked terminal
 annotations; the current source determines its physical boundaries. These are
 derived counts, not acceptance constants. The matrix partitions every boundary
-once over the 32 groups in `config/reconstruction/relocation.json`. Each
-selected terminal gets an unreachable duplicate `rts`/`rte`; a pure tail-jump
-terminal gets an unreachable return guard. Procedure-owned trailing data stays
-inside its cohort.
+once over the 32 groups in `config/reconstruction/relocation.json`. The
+partition follows each engine's canonical emission order, not alphabetical
+source paths. Regional views share that order; contradictory or missing owners
+are rejected. This keeps a semantic file split from concentrating extra guards
+inside a nearly full signed 16-bit PC-relative span. The original addressing
+modes stay unchanged. Each selected terminal gets an unreachable duplicate
+`rts`/`rte`; a pure tail-jump terminal gets an unreachable return guard.
+Procedure-owned trailing data stays inside its cohort.
 
 An additional unreachable return before `ErrorTrap`, immediately after the fixed
 header, moves the initial engine code too. In S&K `ErrorTrap` deliberately falls

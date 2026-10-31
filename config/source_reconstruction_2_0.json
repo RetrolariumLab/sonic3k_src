@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 63
+    "commit_count": 64
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -425,9 +425,15 @@
       "commits": ["6929f90fa7532bd16c0eee48ca6f26a67e0c7b1e"]
     },
     {
+      "id": "change-d4c90fdbe08e",
+      "kind": "tooling",
+      "summary": "Assemble generated source without preservation-tree fallback",
+      "commits": ["d4c90fdbe08e1b49e86fb269c7c2d5ec5395b491"]
+    },
+    {
       "id": "current-release-stage",
       "kind": "validation_and_documentation",
-      "summary": "Isolate actual generated AS source and binary inputs, exercise nested edits with real AS and require fresh relocation and content evidence.",
+      "summary": "Partition the same 32 relocation groups in canonical emission order, preserving original PC-relative addressing and every physical cohort.",
       "commits": ["release-commit"]
     }
   ],

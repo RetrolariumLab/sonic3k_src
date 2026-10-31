@@ -36,6 +36,28 @@ def digest(value):
     return hashlib.sha256(encoded(value)).hexdigest()
 
 
+def canonical_documents(documents, engines):
+    """Partition physical emission order independently of semantic file names."""
+    by_path = {row["path"]: row for row in documents}
+    if len(by_path) != len(documents):
+        raise ValueError("Duplicate discovered relocation source")
+    order, rank = [], {}
+    for engine in engines.values():
+        previous = -1
+        for name in engine["sources"]:
+            if name not in by_path:
+                raise ValueError("Engine order names an undiscovered code source")
+            if name not in rank:
+                rank[name] = len(order)
+                order.append(name)
+            if rank[name] <= previous:
+                raise ValueError("Conflicting or duplicated canonical engine source order")
+            previous = rank[name]
+    if set(order) != set(by_path):
+        raise ValueError("Discovered code source has no canonical engine owner")
+    return [by_path[name] for name in order]
+
+
 def derive(policy):
     names = source_names()
     # Discover all returns independently of the configured list. New executable
@@ -49,7 +71,7 @@ def derive(policy):
                 discovered.append(data)
     if {d["path"] for d in discovered} != set(policy["code_sources"]):
         raise ValueError("Relocation code-source registry is incomplete or stale")
-    documents = sorted(discovered, key=lambda d: d["path"])
+    documents = canonical_documents(discovered, policy["engines"])
     points = [dict(point, path=document["path"]) for document in documents for point in document["points"]]
     if not points or policy["groups"] < 1 or policy["groups"] > len(points):
         raise ValueError("Invalid relocation partition")

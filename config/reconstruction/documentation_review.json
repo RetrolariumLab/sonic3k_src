@@ -15,7 +15,7 @@
     {
       "path": "docs/architecture_decisions.md",
       "decision": "reworked",
-      "reason": "Retain the cohesive topic and state the single-root AS contract, hash-bound private input staging and real-AS edit regression evidence."
+      "reason": "Keep source-isolation controls and explain physical-order probe partitioning without changing original PC-relative instructions or matrix coverage."
     },
     {
       "path": "docs/audio_storage.md",
@@ -75,7 +75,7 @@
     {
       "path": "docs/relocation.md",
       "decision": "reworked",
-      "reason": "Retain the cohesive topic and state the single-root AS contract, hash-bound private input staging and real-AS edit regression evidence."
+      "reason": "Keep source-isolation controls and explain physical-order probe partitioning without changing original PC-relative instructions or matrix coverage."
     },
     {
       "path": "docs/resolved_unknowns.md",
