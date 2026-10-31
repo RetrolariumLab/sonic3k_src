@@ -27,7 +27,7 @@ external-editor project or automatic asset allocator.
 
 Inline families prepare immutable span patches. One composer validates every
 interval before writing complete owners, preventing families in a shared file
-from overwriting each other's edits. All 1980 source owners enter the encoded
+from overwriting each other's edits. All 1979 source owners enter the encoded
 workspace; the actual workspace builds all five images.
 
 ## Keep executable contexts explicit

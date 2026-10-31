@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 65
+    "commit_count": 66
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -437,9 +437,15 @@
       "commits": ["db6f44c1dcca0c0a0df421bda6af969f6ef5a47f"]
     },
     {
-      "id": "current-release-stage",
+      "id": "change-22f5ca0a4959",
       "kind": "documentation",
-      "summary": "Record complete clean-clone acceptance and align release-ready documentation and metadata without changing assembly, inputs or gate behavior.",
+      "summary": "Record clean-clone acceptance for the Source 2.0 baseline",
+      "commits": ["22f5ca0a4959343032314ceb3b4a71e57275274a"]
+    },
+    {
+      "id": "current-release-stage",
+      "kind": "source",
+      "summary": "Remove the unused transitional FM score-encoder library and enforce absence of SMPS2ASM macros in the current source tree.",
       "commits": ["release-commit"]
     }
   ],
@@ -665,12 +671,6 @@
       "origin": "Private original dumps supplied by the user"
     },
     {
-      "component": "fm_voice_macro_helpers",
-      "license_id_or_status": "licensed",
-      "origin": "Flamewing, based on S1SMPS2ASM 1.1 by Marc Gordon; permission notice retained in src/audio/shared/fm_instrument_macros.s",
-      "redistribution": "allowed_under_retained_notice"
-    },
-    {
       "component": "retrolarium_kit",
       "category": "external_tool",
       "origin": "https://github.com/Retrolarium/retrolarium-kit",
@@ -771,7 +771,7 @@
   ],
   "semantic_source": {
     "manifest": "config/reconstruction/source_layout.json",
-    "owned_units": 1980,
+    "owned_units": 1979,
     "pending_units": 0
   },
   "authoring": {

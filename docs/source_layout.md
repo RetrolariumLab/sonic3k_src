@@ -5,8 +5,8 @@ responsibility, physical line count and source range at the preservation
 baseline. Owned data lives under `src/objects`, `src/rendering`, `src/ui`,
 `src/game` and `src/system/debug`. Engine-specific code remains separate.
 
-The registry has 1980 owned units: 886 data owners, 1043 sibling executable
-owners, 5 definition libraries, 10 checked memory modules, 20 structural
+The registry has 1979 owned units: 886 data owners, 1043 sibling executable
+owners, 4 definition libraries, 10 checked memory modules, 20 structural
 composition modules and 16 typed Z80 driver owners. No source unit remains
 pending. Source-layout acceptance also requires the built range, historical ABI
 and physical object coverage checks.

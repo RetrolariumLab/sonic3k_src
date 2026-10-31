@@ -41,6 +41,6 @@ checks public structure without ROMs. See the
 
 The 2.0 baseline passed the full aggregate from a clean clone. Its manifest
 records the accepted commit and source/tooling identities. The successful run
-included all 1980 source owners, the complete runtime matrix and all five
+included all 1979 source owners, the complete runtime matrix and all five
 containers assembled from the actual encoded resource tree. Generated reports
 remain local and every changed release candidate must run the full gate again.

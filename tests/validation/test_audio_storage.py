@@ -3,7 +3,7 @@
 import copy
 import unittest
 
-from scripts.validation.audio_storage import resolve_catalog, validate_write
+from scripts.validation.audio_storage import resolve_catalog, validate_write, validate_no_score_macros
 
 
 class AudioStorageTests(unittest.TestCase):
@@ -32,6 +32,13 @@ class AudioStorageTests(unittest.TestCase):
                 {"id": "sk/a", "asset": "Sound/SMPS/sk/a.bin", "base_symbol": "Song"},
             ],
         }
+
+    def test_unused_score_encoder_macros_are_rejected_without_any_payload(self):
+        for name in ("smpsVcFeedback", "smpsVcTotalLevel", "smpsDcb", "smpsNotZ80"):
+            text = name + " macro value\n dc.b value\n endm\n"
+            with self.subTest(name=name), self.assertRaisesRegex(ValueError, "Score encoder macro"):
+                validate_no_score_macros(text, "src/audio/shared/helpers.s")
+        validate_no_score_macros("UpdateTrack:\n ret\n", "src/audio/driver/track.s")
 
     def test_shared_regional_storage_and_composite_owners_are_explicit(self):
         streams = resolve_catalog(self.policy, self.assets, self.registry)

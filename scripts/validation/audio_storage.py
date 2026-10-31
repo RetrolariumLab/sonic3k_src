@@ -8,6 +8,7 @@ import subprocess
 from scripts.build.project import ROOT, image_records, load, profiles, source_fingerprint
 from scripts.validation.numeric_operands import code_part
 from scripts.validation.audio_source import validate_audio_source
+from scripts.validation.data_macros import definition_blocks
 from scripts.validation.symbols import parse_symbols
 
 
@@ -85,6 +86,12 @@ def validate_write(stream, target_profile, target_abi, payload):
         raise ValueError("SMPS write exceeds its declared allocation or bank")
 
 
+def validate_no_score_macros(text, path):
+    """Current source needs driver code and extracted payloads, not score encoders."""
+    if any(name.startswith("smps") for name, _, _, _ in definition_blocks(text)):
+        raise ValueError("Score encoder macro remains in current source: " + path)
+
+
 def check(built=False):
     assets = {r["path"]: r for r in load("assets/manifest.json")["assets"]}
     registry = profiles()
@@ -104,6 +111,7 @@ def check(built=False):
             raise ValueError("Legacy score assembly remains in the final source")
         text = (ROOT / name).read_text(encoding="utf-8")
         validate_audio_source(text, name)
+        validate_no_score_macros(text, name)
         for line in text.splitlines():
             for path in re.findall(r'\bbinclude\s+"data/(Sound/SMPS/[^\"]+)"', code_part(line), re.I):
                 includes[path] += 1

@@ -2,8 +2,9 @@
 
 Music, effects, instruments and envelopes are private ROM-derived inputs. The
 initial import excludes score source and inline instrument/envelope values. The
-complete score macro library is absent. Executable drivers, symbolic pointer
-tables and generic licensed instrument helpers remain source-owned.
+complete score macro library is absent. Executable drivers and symbolic pointer
+tables remain source-owned. No SMPS2ASM score or instrument-encoder macros
+remain in the current tree.
 
 The asset manifest extracts music/effect streams and both original driver table
 containers. The driver payload recipe splits checked decoded slices, retaining

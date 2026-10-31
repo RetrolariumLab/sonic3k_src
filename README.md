@@ -15,7 +15,7 @@ ROM-extracted SMPS storage, all-profile relocation and runtime. The 1.0 manifest
 records the accepted commit and source binding; the tag remains a maintainer
 action. The Source Reconstruction 2.0 baseline adds complete semantic source
 ownership and headless content contracts. Its complete aggregate passed from a
-clean clone: 340 tests, all 165 runtime cases and all five images rebuilt from
+clean clone: 341 tests, all 165 runtime cases and all five images rebuilt from
 encoded resources. Tags and publication remain maintainer actions.
 
 ## Quick start

@@ -63,6 +63,6 @@ release result.
 Music and SFX are ROM-extracted SMPS3/SMPS4 streams under `data/Sound/SMPS/`.
 The audio catalog owns ABI applicability, while the asset manifest owns storage
 identity. `make check-audio-storage` is ROM-less; `make check-audio-binding`
-compares storage symbols and dialects with a verified AS build. Generic FM
-helpers required by the executable drivers retain their permission notice; no
-score assembly or full score macro library remains in the final tree.
+compares storage symbols and dialects with a verified AS build. No score
+assembly or SMPS2ASM encoder macro library remains in the final tree; the
+executable drivers consume the extracted instrument and envelope payloads.

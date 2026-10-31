@@ -66,7 +66,6 @@
           "docs/architecture.md",
           "src/audio/driver/cartridge_container.s",
           "config/audio_streams.json",
-          "src/audio/shared/fm_instrument_macros.s",
           "config/audio_driver_payloads.json",
           "scripts/authoring/driver_payloads.py",
           "scripts/validation/audio_source.py"
@@ -278,12 +277,6 @@
       "license_id_or_status": "private_user_supplied",
       "redistribution": "not_permitted",
       "origin": "Private original dumps supplied by the user"
-    },
-    {
-      "component": "fm_voice_macro_helpers",
-      "license_id_or_status": "licensed",
-      "origin": "Flamewing, based on S1SMPS2ASM 1.1 by Marc Gordon; permission notice retained in src/audio/shared/fm_instrument_macros.s",
-      "redistribution": "allowed_under_retained_notice"
     },
     {
       "component": "retrolarium_kit",

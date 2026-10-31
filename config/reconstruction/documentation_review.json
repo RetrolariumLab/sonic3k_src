@@ -15,17 +15,17 @@
     {
       "path": "docs/architecture_decisions.md",
       "decision": "reworked",
-      "reason": "Keep source-isolation controls and explain physical-order probe partitioning without changing original PC-relative instructions or matrix coverage."
+      "reason": "Remove the obsolete claim that unused FM score encoders are required; reflect their deletion, the exact current source inventory and private audio ownership."
     },
     {
       "path": "docs/audio_storage.md",
       "decision": "reworked",
-      "reason": "Keep private storage boundary and link the implemented semantic audio models."
+      "reason": "Remove the obsolete claim that unused FM score encoders are required; reflect their deletion, the exact current source inventory and private audio ownership."
     },
     {
       "path": "docs/build.md",
       "decision": "reworked",
-      "reason": "Retain the reader journey and replace pending candidate claims with actual clean-clone acceptance, inherited preservation boundaries and reproducible pinned-tool setup."
+      "reason": "Remove the obsolete claim that unused FM score encoders are required; reflect their deletion, the exact current source inventory and private audio ownership."
     },
     {
       "path": "docs/content_codecs.md",
@@ -65,7 +65,7 @@
     {
       "path": "docs/provenance.md",
       "decision": "reworked",
-      "reason": "Retain attribution and rights; correct clean-import audio policy and link canonical labels."
+      "reason": "Remove the obsolete claim that unused FM score encoders are required; reflect their deletion, the exact current source inventory and private audio ownership."
     },
     {
       "path": "docs/raw_animations.md",
@@ -79,8 +79,8 @@
     },
     {
       "path": "docs/resolved_unknowns.md",
-      "decision": "added",
-      "reason": "Separate established workflow decisions from remaining interpretation limits."
+      "decision": "reworked",
+      "reason": "Keep established workflow resolutions and update the exact current inventory after retiring the unused score-encoder library."
     },
     {
       "path": "docs/revisions.md",
@@ -94,8 +94,8 @@
     },
     {
       "path": "docs/source_layout.md",
-      "decision": "kept",
-      "reason": "Keep this cohesive subsystem reference; commands, constraints and evidence boundaries agree with current implementation."
+      "decision": "reworked",
+      "reason": "Remove the obsolete claim that unused FM score encoders are required; reflect their deletion, the exact current source inventory and private audio ownership."
     },
     {
       "path": "docs/source_reconstruction_1_0.md",
@@ -115,12 +115,12 @@
     {
       "path": "docs/verification.md",
       "decision": "reworked",
-      "reason": "Retain the reader journey and replace pending candidate claims with actual clean-clone acceptance, inherited preservation boundaries and reproducible pinned-tool setup."
+      "reason": "Remove the obsolete claim that unused FM score encoders are required; reflect their deletion, the exact current source inventory and private audio ownership."
     },
     {
       "path": "README.md",
       "decision": "reworked",
-      "reason": "Retain the reader journey and replace pending candidate claims with actual clean-clone acceptance, inherited preservation boundaries and reproducible pinned-tool setup."
+      "reason": "Remove the obsolete claim that unused FM score encoders are required; reflect their deletion, the exact current source inventory and private audio ownership."
     }
   ]
 }

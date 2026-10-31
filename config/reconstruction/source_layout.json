@@ -3167,57 +3167,6 @@
       ]
     },
     {
-      "path": "src/audio/shared/fm_instrument_macros.s",
-      "owner": "audio/shared",
-      "responsibility": "Licensed driver-local FM instrument parameter and voice record definition helpers.",
-      "role": "definitions",
-      "status": "owned",
-      "physical_lines": 200,
-      "origin": {
-        "commit": "36ebf5ff592b0d5d65187aaebf0fb05558bba588",
-        "path": "Sound/FM_Voice_Macros.s",
-        "first_line": 1,
-        "last_line": 197,
-        "sha256": "ec469d726b001d69ac41bae8abc18e9d46390ec7947c40c3f309cebe3ac54c23"
-      },
-      "applicability": "emitted",
-      "range_kind": "canonical-normal-build",
-      "rom_ranges": [
-        {
-          "profile": "s3-us",
-          "start": 0,
-          "end": 0
-        },
-        {
-          "profile": "s3-eu",
-          "start": 0,
-          "end": 0
-        },
-        {
-          "profile": "s3-jp",
-          "start": 0,
-          "end": 0
-        },
-        {
-          "profile": "sk",
-          "start": 0,
-          "end": 0
-        },
-        {
-          "profile": "s3k",
-          "component": "s3-us",
-          "start": 2097152,
-          "end": 2097152
-        },
-        {
-          "profile": "s3k",
-          "component": "sk",
-          "start": 0,
-          "end": 0
-        }
-      ]
-    },
-    {
       "path": "src/audio/sk/level_music_playlist.s",
       "owner": "audio/sk",
       "responsibility": "Product-specific zone and act music identifier lookup table.",
@@ -72808,7 +72757,7 @@
       "responsibility": "Cartridge vectors and header, hardware startup, cartridge validation and initial game-mode dispatch.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 698,
+      "physical_lines": 694,
       "origin": {
         "commit": "311352b95436c810fb897541f11a169c69104fe0",
         "path": "s3.s",
@@ -73023,7 +72972,7 @@
       "responsibility": "Cartridge vectors and header, hardware startup, cartridge validation and initial game-mode dispatch.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 508,
+      "physical_lines": 497,
       "origin": {
         "commit": "311352b95436c810fb897541f11a169c69104fe0",
         "path": "sonic3k.s",
@@ -74938,6 +74887,14 @@
           "end": 878576
         }
       ]
+    }
+  ],
+  "retired_sources": [
+    {
+      "path": "src/audio/shared/fm_instrument_macros.s",
+      "reason": "All fifteen licensed score-encoder macros and conversion constants have no remaining caller after private FM/envelope extraction.",
+      "emitted_bytes": 0,
+      "removed_includes": ["src/system/s3/bootstrap.s", "src/system/sk/bootstrap.s"]
     }
   ]
 }

@@ -21,19 +21,8 @@
                 include "src/memory/shared/sound_ids.s"
                 include "src/memory/shared/assembly_cursor.s"
 ; ---------------------------------------------------------------------------
-; FM voice macros required by the executable Z80 driver
-SonicDriverVer: equ     4                               ; Tell SMPS2ASM that we are targeting Sonic & Knuckles' sound driver
-                include "src/audio/shared/fm_instrument_macros.s"
+SonicDriverVer: equ     4                               ; Original product-specific Z80 driver ABI
 ; ---------------------------------------------------------------------------
-; Assembly options:
-
-; 'Sonic3_Complete' is set via build scripts to 0 or 1
-; If 1, includes all required Sonic 3 data in order to assemble a smaller version of S3K (with all redundancies removed)
-
-; If 1, strips all unnecessary padding
-
-; If 1, fixes multiple bugs within the game
-
 Size_of_Snd_driver_guess:   equ     $E00
 Size_of_Snd_driver2_guess:  equ     $690
 ; Approximate size of compressed sound driver. Change when appropriate

@@ -22,11 +22,7 @@
                 include "src/memory/shared/assembly_cursor.s"
                 include "src/memory/s3/overrides.s"
 ; ---------------------------------------------------------------------------
-; FM voice macros required by the executable Z80 driver
-SonicDriverVer: equ     3                               ; Tell SMPS2ASM that we are targeting Sonic 3's sound driver
-                include "src/audio/shared/fm_instrument_macros.s"
-
-; If 1, fixes multiple bugs within the game
+SonicDriverVer: equ     3                               ; Original product-specific Z80 driver ABI
 
 Size_of_Snd_driver_guess:   equ     $1300
 Size_of_Snd_driver2_guess:  equ     $843
