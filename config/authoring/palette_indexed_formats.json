@@ -34,7 +34,7 @@
   "consumer_sources": [
     {
       "path": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
-      "sha256": "6d287389099aaeb3f178c747a8803da09f5a279f00cd64c99e7b7515a89f44b4"
+      "sha256": "021978cf1c177fe0b0a5c9f18c044bd49c17785ac7df5cc99c49588c31ddf950"
     },
     {
       "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
@@ -46,7 +46,7 @@
     },
     {
       "path": "src/objects/ending/sk/plane_scene.s",
-      "sha256": "f58675798206d9c8bdaa6b7748a9d48e4f058df959c3e4ce8164a6d6091935af"
+      "sha256": "b0b2bb5cd194a55cdf214e618cdd55c592f6158f0f397525ff8ffc54de6a9fb7"
     },
     {
       "path": "src/objects/interface/blue_sphere/sk/difficulty_widgets.s",
@@ -62,7 +62,7 @@
     },
     {
       "path": "src/rendering/palettes/sk/rotation_script.s",
-      "sha256": "74bce6589c6de1f97b971a9d117b1d7f0cdc7f4c6dea9ac9c0e0326bfd1931b2"
+      "sha256": "3f455a079dd4c00291e55ea059b4e7fb7931bfbe17a524cc217cd9c9d64ffb29"
     }
   ],
   "consumer_bindings": [

@@ -789,9 +789,15 @@
       "commits": ["01b6986221af41e6bd73d3c1a0436e6c105bb950"]
     },
     {
-      "id": "current-migration-history",
+      "id": "change-dd76824743d7",
       "kind": "tooling",
       "summary": "Record the separate semantic-label and formatting revisions, retain the accepted predecessor, and register the formatting-only revision for blame.",
+      "commits": ["dd76824743d7e0001ecb78de87331d67170e29f2"]
+    },
+    {
+      "id": "current-consumer-bindings",
+      "kind": "tooling",
+      "summary": "Rebind 210 current raw and indexed-palette consumer source hashes after independently proving exact registered symbol renames, unchanged ABI selections and all 235 byte-identical resource declaration spans.",
       "commits": ["release-commit"]
     }
   ],
