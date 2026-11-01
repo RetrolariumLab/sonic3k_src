@@ -53,8 +53,8 @@ loc_8E1E2:
                 jsr     (Play_SFX).l
 
 loc_8E1FA:
-                bsr.w   sub_8E37C
-                bsr.w   sub_8E2D4
+                bsr.w   PushBothPlayersWithCluckoidBreath
+                bsr.w   EmitCluckoidBreathParticleOnVblankPhase
 
 loc_8E202:
                 lea     byte_8E418(pc),a1
@@ -86,7 +86,7 @@ loc_8E236:
                 lea     ObjDat3_8E3F6(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #loc_8E250,(a0)
-                bsr.w   sub_8E2EA
+                bsr.w   InitializeCluckoidBreathParticleFromSpawnTables
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -127,7 +127,7 @@ loc_8E294:
                 move.w  #2,$34(a0)
 
 loc_8E2A6:
-                jsr     (sub_3DC3A).l
+                jsr     (AnimateMhzPollenByHorizontalDirection).l
                 jsr     (MoveSprite2).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -146,17 +146,17 @@ loc_8E2CE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8E2D4:
+EmitCluckoidBreathParticleOnVblankPhase:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #7,d0
                 bne.w   locret_8E234
                 lea     ChildObjDat_8E40A(pc),a2
                 jmp     (CreateChild6_Simple).l
-; End of function sub_8E2D4
+; End of function EmitCluckoidBreathParticleOnVblankPhase
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8E2EA:
+InitializeCluckoidBreathParticleFromSpawnTables:
                 jsr     (Random_Number).l
                 movea.w parent3(a0),a1
                 move.w  d0,d1
@@ -201,7 +201,7 @@ loc_8E34A:
 loc_8E35C:
                 addq.w  #4,sp
                 jmp     (Delete_Current_Sprite).l
-; End of function sub_8E2EA
+; End of function InitializeCluckoidBreathParticleFromSpawnTables
 
 ; ---------------------------------------------------------------------------
 word_8E364:
@@ -214,15 +214,15 @@ off_8E374:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8E37C:
+PushBothPlayersWithCluckoidBreath:
                 lea     (Player_1).w,a1
-                bsr.w   sub_8E388
+                bsr.w   PushPlayerAwayInCluckoidBreath
                 lea     (Player_2).w,a1
-; End of function sub_8E37C
+; End of function PushBothPlayersWithCluckoidBreath
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8E388:
+PushPlayerAwayInCluckoidBreath:
                 cmpi.b  #8,anim(a1)
                 beq.s   locret_8E3D6
                 tst.b   spin_dash_flag(a1)
@@ -256,7 +256,7 @@ loc_8E3D2:
 
 locret_8E3D6:
                 rts
-; End of function sub_8E388
+; End of function PushPlayerAwayInCluckoidBreath
 
 ; ---------------------------------------------------------------------------
 ObjSlot_Cluckoid:

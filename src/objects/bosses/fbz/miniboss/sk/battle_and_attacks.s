@@ -10,8 +10,8 @@ Obj_FBZMiniboss:
                 move.b  routine(a0),d0
                 move.w  FBZMiniboss_Index(pc,d0.w),d1
                 jsr     FBZMiniboss_Index(pc,d1.w)
-                bsr.w   sub_6F786
-                bsr.w   sub_6F994
+                bsr.w   SolidifyFBZMinibossBodyAndReleasedCapsule
+                bsr.w   ProcessFBZMinibossArmSelfHitAndDefeat
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 FBZMiniboss_Index:
@@ -99,7 +99,7 @@ loc_6EF76:
 loc_6EF88:
                 subq.w  #1,$2E(a0)
                 bmi.s   loc_6EF98
-                bsr.w   sub_6F786
+                bsr.w   SolidifyFBZMinibossBodyAndReleasedCapsule
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -125,7 +125,7 @@ loc_6EFDA:
                 move.b  routine(a0),d0
                 move.w  off_6EFF2(pc,d0.w),d1
                 jsr     off_6EFF2(pc,d1.w)
-                bsr.w   sub_6F796
+                bsr.w   SolidifyFBZMinibossTopButton
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 off_6EFF2:
@@ -169,7 +169,7 @@ loc_6F04A:
 ; ---------------------------------------------------------------------------
 
 loc_6F056:
-                bsr.w   sub_6F796
+                bsr.w   SolidifyFBZMinibossTopButton
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
@@ -298,7 +298,7 @@ loc_6F178:
                 move.b  routine(a0),d0
                 move.w  off_6F190(pc,d0.w),d1
                 jsr     off_6F190(pc,d1.w)
-                bsr.w   sub_6FA14
+                bsr.w   EnterFBZMinibossArmParentDefeatWait
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 off_6F190:
@@ -392,7 +392,7 @@ locret_6F29C:
 ; ---------------------------------------------------------------------------
 
 loc_6F29E:
-                bsr.w   sub_6F7F2
+                bsr.w   OscillateFBZMinibossArmAngle
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
@@ -441,7 +441,7 @@ loc_6F318:
 loc_6F338:
                 btst    #3,$38(a0)
                 bne.s   loc_6F344
-                bra.w   sub_6F830
+                bra.w   ExtendFBZMinibossArmToSideAngle
 ; ---------------------------------------------------------------------------
 
 loc_6F344:
@@ -505,7 +505,7 @@ loc_6F3DE:
                 move.b  routine(a0),d0
                 move.w  off_6F3F6(pc,d0.w),d1
                 jsr     off_6F3F6(pc,d1.w)
-                bsr.w   sub_6FA14
+                bsr.w   EnterFBZMinibossArmParentDefeatWait
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 off_6F3F6:
@@ -563,7 +563,7 @@ loc_6F46A:
 loc_6F47E:
                 move.b  #4,routine(a0)
                 bset    #3,$38(a0)
-                bsr.w   sub_6F7D2
+                bsr.w   SetFBZMinibossLinkDeploymentVelocity
                 move.w  #$F,$2E(a0)
                 move.l  #loc_6F4CC,$34(a0)
                 movea.w parent3(a0),a1
@@ -630,7 +630,7 @@ loc_6F54A:
 ; ---------------------------------------------------------------------------
 
 loc_6F554:
-                bsr.w   sub_6F7F2
+                bsr.w   OscillateFBZMinibossArmAngle
                 move.w  $3E(a0),d2
                 jsr     (MoveSprite_CircularSimple).l
                 movea.w parent3(a0),a1
@@ -663,7 +663,7 @@ locret_6F5B6:
 ; ---------------------------------------------------------------------------
 
 loc_6F5B8:
-                bsr.w   sub_6F830
+                bsr.w   ExtendFBZMinibossArmToSideAngle
                 beq.s   loc_6F5D6
                 move.b  #$E,routine(a0)
                 cmpi.b  #$A,subtype(a0)
@@ -703,7 +703,7 @@ loc_6F618:
 
 loc_6F620:
                 move.b  #$14,d4
-                bsr.w   sub_6F85A
+                bsr.w   FoldFBZMinibossLinksForBodyStrike
                 move.w  $3E(a0),d2
                 jmp     (MoveSprite_CircularSimple).l
 ; ---------------------------------------------------------------------------
@@ -725,7 +725,7 @@ loc_6F64E:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
                 bne.w   loc_6F504
-                bsr.w   sub_6F8C8
+                bsr.w   ReturnFBZMinibossArmToRestAngle
                 beq.s   loc_6F674
                 cmpi.b  #$A,subtype(a0)
                 bne.s   loc_6F674
@@ -738,7 +738,7 @@ loc_6F674:
 ; ---------------------------------------------------------------------------
 
 loc_6F67E:
-                bsr.w   sub_6F8F2
+                bsr.w   RaiseFBZMinibossArmToVerticalAngle
                 beq.s   loc_6F69C
                 move.b  #$1A,routine(a0)
                 cmpi.b  #$A,subtype(a0)
@@ -772,7 +772,7 @@ loc_6F6BC:
 loc_6F6E4:
                 cmpi.b  #$A,subtype(a0)
                 beq.s   loc_6F6F6
-                bsr.w   sub_6F93A
+                bsr.w   InterpolateFBZMinibossPunchLinkBetweenEndpoints
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
@@ -814,7 +814,7 @@ loc_6F74C:
                 move.b  #1,mapping_frame(a0)
 
 loc_6F764:
-                bsr.w   sub_6F786
+                bsr.w   SolidifyFBZMinibossBodyAndReleasedCapsule
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0

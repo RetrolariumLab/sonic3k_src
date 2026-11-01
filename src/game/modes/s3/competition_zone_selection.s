@@ -16,7 +16,7 @@ Competition_LevelSelect:
                 move.w  #$8B00,(a6)
                 move.w  #$8C89,(a6)
                 move.w  #$9011,(a6)
-                jsr     sub_B512(pc)
+                jsr     Menu_FillPlaneAWithPriorityBlankTiles(pc)
                 clearRAM Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
                 clearRAM Object_RAM,(Kos_decomp_buffer-Object_RAM)
                 clr.w   (DMA_queue).w
@@ -50,11 +50,11 @@ Competition_LevelSelect:
                 jsr     (Eni_Decomp).l
                 lea     VRAMDatList_CompetitionLevelSelect(pc),a0
                 jsr     Copy_Listed_Data_To_VRAM(pc)
-                jsr     sub_9E18(pc)
+                jsr     S3CompClampSelectedZoneToVisibleScrollRow(pc)
                 mulu.w  #$48,d0
                 move.w  d0,(V_scroll_value).w
-                jsr     sub_9E6C(pc)
-                jsr     sub_9E9C(pc)
+                jsr     S3CompClearCharacterSelectAreasAtZoneWindowRow(pc)
+                jsr     S3CompDrawFiveZoneBestTimesInMenuOrder(pc)
                 lea     (ArtKos_S3MenuBG).l,a0          ; Decompress source
                 lea     (RAM_start).l,a1                ; Decompress destination/Transfer source
                 movea.w #tiles_to_bytes(ArtTile_S3MenuBG),a2  ; Transfer destination
@@ -124,7 +124,7 @@ loc_9BF4:
                 jsr     (Init_SpriteTable).l
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
-                jsr     sub_B596(pc)
+                jsr     Menu_UpdateBothCharacterDepthGroups(pc)
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
                 lea     (Dynamic_object_RAM+(object_size*9)).w,a0
@@ -146,7 +146,7 @@ loc_9C5C:
                 jsr     (Wait_VSync).l
                 addq.w  #1,(Level_frame_counter).w
                 jsr     (Process_Sprites).l
-                jsr     sub_B596(pc)
+                jsr     Menu_UpdateBothCharacterDepthGroups(pc)
                 jsr     (Render_Sprites).l
                 move.b  (Events_bg+$12).w,d0
                 beq.s   loc_9C88
@@ -257,7 +257,7 @@ loc_9D5C:
                 move.b  (Competition_menu_zone).w,d0
                 move.b  Comp_ZoneList(pc,d0.w),(Current_zone_and_act).w
                 clr.b   (Current_act).w
-                jsr     sub_B5EC(pc)
+                jsr     S3CompInitializeRoundLivesScoresTimersAndFlags(pc)
                 move.b  #GameMode_Level,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
@@ -327,7 +327,7 @@ loc_9E10:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_9E18:
+S3CompClampSelectedZoneToVisibleScrollRow:
                 moveq   #0,d0
                 move.b  (Competition_menu_zone).w,d0
                 subq.w  #1,d0
@@ -341,7 +341,7 @@ loc_9E24:
 
 locret_9E2C:
                 rts
-; End of function sub_9E18
+; End of function S3CompClampSelectedZoneToVisibleScrollRow
 
 ; ---------------------------------------------------------------------------
 
@@ -366,8 +366,8 @@ loc_9E56:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_9E6C:
-                bsr.s   sub_9E18
+S3CompClearCharacterSelectAreasAtZoneWindowRow:
+                bsr.s   S3CompClampSelectedZoneToVisibleScrollRow
                 mulu.w  #$48,d0
                 addi.w  #$20,d0
                 lsl.w   #4,d0
@@ -375,10 +375,10 @@ sub_9E6C:
                 move.w  d0,d7
                 tst.b   (Game_mode).w
                 bmi.s   loc_9E94
-                jsr     sub_B534(pc)
+                jsr     Menu_ClearNineByEightTileArea(pc)
                 move.w  d7,d0
                 addi.w  #$600,d0
-                jmp     sub_B534(pc)
+                jmp     Menu_ClearNineByEightTileArea(pc)
 ; ---------------------------------------------------------------------------
 ; unused
                 rts
@@ -386,31 +386,31 @@ sub_9E6C:
 
 loc_9E94:
                 addi.w  #$300,d0
-                jmp     sub_B534(pc)
-; End of function sub_9E6C
+                jmp     Menu_ClearNineByEightTileArea(pc)
+; End of function S3CompClearCharacterSelectAreasAtZoneWindowRow
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_9E9C:
+S3CompDrawFiveZoneBestTimesInMenuOrder:
                 move.w  #VRAM_Plane_A_Name_Table+$2D2,d7
                 move.l  (Competition_saved_data).w,d6
-                bsr.s   sub_9ECC
+                bsr.s   S3CompFormatAndUploadMinuteSecondHundredthTime
                 addi.w  #$480,d7
                 move.l  (Competition_saved_data+$10).w,d6
-                bsr.s   sub_9ECC
+                bsr.s   S3CompFormatAndUploadMinuteSecondHundredthTime
                 addi.w  #$480,d7
                 move.l  (Competition_saved_data+$30).w,d6
-                bsr.s   sub_9ECC
+                bsr.s   S3CompFormatAndUploadMinuteSecondHundredthTime
                 addi.w  #$480,d7
                 move.l  (Competition_saved_data+$20).w,d6
-                bsr.s   sub_9ECC
+                bsr.s   S3CompFormatAndUploadMinuteSecondHundredthTime
                 addi.w  #$480,d7
                 move.l  (Competition_saved_data+$40).w,d6
-; End of function sub_9E9C
+; End of function S3CompDrawFiveZoneBestTimesInMenuOrder
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_9ECC:
+S3CompFormatAndUploadMinuteSecondHundredthTime:
                 moveq   #0,d5
                 lsl.l   #8,d6
                 moveq   #2,d3
@@ -426,17 +426,17 @@ loc_9ED2:
                 lea     (Plane_buffer).w,a1
                 lea     MapUnc_CompetitionNumbers(pc),a2
                 moveq   #0,d0
-                bsr.s   sub_9F26
+                bsr.s   S3CompAppendNextTimeDigitWithFirstZeroBlankFlag
                 st      d0
-                bsr.s   sub_9F26
+                bsr.s   S3CompAppendNextTimeDigitWithFirstZeroBlankFlag
                 moveq   #$A,d1
-                bsr.s   sub_9F38
-                bsr.s   sub_9F26
-                bsr.s   sub_9F26
+                bsr.s   S3CompAppendTwoRowNumericGlyphColumn
+                bsr.s   S3CompAppendNextTimeDigitWithFirstZeroBlankFlag
+                bsr.s   S3CompAppendNextTimeDigitWithFirstZeroBlankFlag
                 moveq   #$B,d1
-                bsr.s   sub_9F38
-                bsr.s   sub_9F26
-                bsr.s   sub_9F26
+                bsr.s   S3CompAppendTwoRowNumericGlyphColumn
+                bsr.s   S3CompAppendNextTimeDigitWithFirstZeroBlankFlag
+                bsr.s   S3CompAppendNextTimeDigitWithFirstZeroBlankFlag
                 lea     (Plane_buffer).w,a1
 
 loc_9F0A:
@@ -451,40 +451,40 @@ loc_9F0A:
                 moveq   #8-1,d1
                 moveq   #2-1,d2
                 jmp     (Plane_Map_To_VRAM).l
-; End of function sub_9ECC
+; End of function S3CompFormatAndUploadMinuteSecondHundredthTime
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_9F26:
+S3CompAppendNextTimeDigitWithFirstZeroBlankFlag:
                 rol.l   #4,d5
                 move.w  d5,d1
                 andi.w  #$F,d1
-                bne.s   sub_9F38
+                bne.s   S3CompAppendTwoRowNumericGlyphColumn
                 tst.w   d0
-                bne.s   sub_9F38
+                bne.s   S3CompAppendTwoRowNumericGlyphColumn
                 moveq   #$C,d1
                 st      d0
-; End of function sub_9F26
+; End of function S3CompAppendNextTimeDigitWithFirstZeroBlankFlag
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_9F38:
+S3CompAppendTwoRowNumericGlyphColumn:
                 add.w   d1,d1
                 add.w   d1,d1
                 move.w  (a2,d1.w),(a1)+
                 move.w  2(a2,d1.w),$E(a1)
                 rts
-; End of function sub_9F38
+; End of function S3CompAppendTwoRowNumericGlyphColumn
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_9F48:
+S3CompConvertTimerFrameByteToHundredths:
                 lea     (byte_373E4).l,a1
                 moveq   #0,d0
                 move.b  d6,d0
                 move.b  (a1,d0.w),d6
                 rts
-; End of function sub_9F48
+; End of function S3CompConvertTimerFrameByteToHundredths
 
 ; ---------------------------------------------------------------------------
 VRAMDatList_CompetitionLevelSelect:

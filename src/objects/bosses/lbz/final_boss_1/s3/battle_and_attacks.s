@@ -8,7 +8,7 @@ Obj_LBZFinalBoss1:
                 move.b  routine(a0),d0
                 move.w  LBZFinalBoss1_Index(pc,d0.w),d1
                 jsr     LBZFinalBoss1_Index(pc,d1.w)
-                bsr.w   sub_500DA
+                bsr.w   HandleLBZFinalBoss1HitSectionDropOrDefeat
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 LBZFinalBoss1_Index:
@@ -263,7 +263,7 @@ loc_4FC30:
 
 loc_4FC4E:
                 jsr     Refresh_ChildPositionAdjusted(pc)
-                bsr.w   sub_501FA
+                bsr.w   BreakOrSuspendLBZFinalBoss1BodySection
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
@@ -304,7 +304,7 @@ loc_4FC98:
 
 loc_4FCBC:
                 jsr     Refresh_ChildPositionAdjusted(pc)
-                bsr.w   sub_501FA
+                bsr.w   BreakOrSuspendLBZFinalBoss1BodySection
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
@@ -313,7 +313,7 @@ loc_4FCC8:
                 jsr     SetUp_ObjAttributes3(pc)
                 move.l  #loc_4FCE0,(a0)
                 move.w  #$60,$2E(a0)
-                bsr.w   sub_5025A
+                bsr.w   SeedLBZFinalBoss1SectionDebrisFrameAndVelocity
 
 loc_4FCE0:
                 jsr     (MoveSprite).l
@@ -374,7 +374,7 @@ loc_4FD52:
                 move.b  #8,$39(a0)
 
 loc_4FD76:
-                bsr.w   sub_4FFDE
+                bsr.w   AdvanceLBZFinalBoss1CannonTurnCycle
                 moveq   #4,d0
                 jmp     Child_Draw_Sprite_FlickerMove(pc)
 ; ---------------------------------------------------------------------------
@@ -469,7 +469,7 @@ loc_4FE6A:
                 lea     ChildObjDat_5039A(pc),a2
                 jsr     CreateChild1_Normal(pc)
                 move.l  #byte_503DB,$30(a1)
-                bsr.w   sub_500C4
+                bsr.w   RandomizeLBZFinalBoss1LaserTrailOffset
                 bra.w   loc_4FE9E
 ; ---------------------------------------------------------------------------
 
@@ -477,7 +477,7 @@ loc_4FE8A:
                 lea     ChildObjDat_5039A(pc),a2
                 jsr     CreateChild1_Normal(pc)
                 move.l  #byte_503E1,$30(a1)
-                bsr.w   sub_500C4
+                bsr.w   RandomizeLBZFinalBoss1LaserTrailOffset
 
 loc_4FE9E:
                 jsr     (MoveSprite2).l

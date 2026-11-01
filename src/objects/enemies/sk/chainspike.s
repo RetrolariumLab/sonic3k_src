@@ -39,7 +39,7 @@ loc_91C80:
 ; ---------------------------------------------------------------------------
 
 loc_91C9A:
-                jsr     (sub_91E7E).l
+                jsr     (InterruptChainspikeForNearbyPlayerAttack).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
@@ -53,7 +53,7 @@ loc_91CA6:
 ; ---------------------------------------------------------------------------
 
 loc_91CC2:
-                jsr     (sub_91E7E).l
+                jsr     (InterruptChainspikeForNearbyPlayerAttack).l
                 move.w  x_vel(a0),d0
                 moveq   #$C,d2
                 move.w  $40(a0),d1
@@ -175,7 +175,7 @@ loc_91DE2:
                 move.w  y_pos(a0),d0
                 add.w   y_vel(a0),d0
                 move.w  d0,y_pos(a0)
-                bsr.w   sub_91EB0
+                bsr.w   SelectChainspikeExtensionFrameByDistance
                 cmp.w   $3A(a0),d0
                 beq.s   loc_91E22
                 btst    #1,render_flags(a0)
@@ -230,7 +230,7 @@ loc_91E72:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_91E7E:
+InterruptChainspikeForNearbyPlayerAttack:
                 jsr     (Find_SonicTails).l
                 cmpi.w  #$10,d2
                 bhs.s   locret_91EAE
@@ -243,11 +243,11 @@ sub_91E7E:
 
 locret_91EAE:
                 rts
-; End of function sub_91E7E
+; End of function InterruptChainspikeForNearbyPlayerAttack
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_91EB0:
+SelectChainspikeExtensionFrameByDistance:
                 move.w  $3A(a0),d1
                 sub.w   d0,d1
                 bpl.s   loc_91EBA
@@ -268,7 +268,7 @@ loc_91EC0:
 loc_91ECC:
                 move.b  RawAni_91ED4(pc,d4.w),mapping_frame(a0)
                 rts
-; End of function sub_91EB0
+; End of function SelectChainspikeExtensionFrameByDistance
 
 ; ---------------------------------------------------------------------------
 RawAni_91ED4:

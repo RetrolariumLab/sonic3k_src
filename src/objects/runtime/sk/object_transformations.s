@@ -11,7 +11,7 @@ Perform_Art_Scaling:
                 movea.l (sp)+,a0
                 move.l  a0,-(sp)
                 move.w  art_tile(a0),d0
-                jsr     (sub_2468A).l
+                jsr     (TryBuildObjectScaledArt).l
                 movea.l (sp)+,a0
                 move.w  (_unkF740).w,d3
                 lsl.w   #4,d3
@@ -22,7 +22,7 @@ Perform_Art_Scaling:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_86180:
+IntegrateScaledObjectCenter:
                 move.w  x_vel(a0),d0
                 ext.l   d0
                 lsl.l   #8,d0
@@ -32,11 +32,11 @@ sub_86180:
                 lsl.l   #8,d0
                 add.l   d0,$34(a0)
                 rts
-; End of function sub_86180
+; End of function IntegrateScaledObjectCenter
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8619A:
+SetScaledObjectOriginFromCenter:
                 move.w  $30(a0),d2
                 move.w  $34(a0),d3
                 moveq   #0,d0
@@ -49,7 +49,7 @@ sub_8619A:
                 move.w  d2,x_pos(a0)
                 move.w  d3,y_pos(a0)
                 rts
-; End of function sub_8619A
+; End of function SetScaledObjectOriginFromCenter
 
 ; ---------------------------------------------------------------------------
 
@@ -62,7 +62,7 @@ loc_861C0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_861D0:
+SetVelocityTowardPointByDominantAxis:
                 sub.w   x_pos(a0),d0
                 smi     d2
                 bpl.s   loc_861DA
@@ -121,4 +121,4 @@ loc_8621A:
                 move.w  #$100,d1
                 lsl.w   d5,d1
                 bra.s   loc_861FE
-; End of function sub_861D0
+; End of function SetVelocityTowardPointByDominantAxis

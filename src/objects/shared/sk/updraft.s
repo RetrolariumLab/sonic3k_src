@@ -15,14 +15,14 @@ Obj_Updraft:
 loc_3FBAC:
                 moveq   #0,d2
                 lea     (Player_1).w,a1
-                bsr.w   sub_3FBC4
+                bsr.w   ApplyUpdraftToPlayerOrMushroomParachute
                 lea     (Player_2).w,a1
-                bsr.w   sub_3FBC4
+                bsr.w   ApplyUpdraftToPlayerOrMushroomParachute
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3FBC4:
+ApplyUpdraftToPlayerOrMushroomParachute:
                 cmpi.b  #4,routine(a1)
                 bhs.w   locret_3FC74
                 move.w  x_pos(a1),d0
@@ -113,4 +113,4 @@ loc_3FCC6:
                 move.w  #1,ground_vel(a1)
                 move.b  #$F,anim(a1)
                 rts
-; End of function sub_3FBC4
+; End of function ApplyUpdraftToPlayerOrMushroomParachute

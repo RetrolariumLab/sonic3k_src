@@ -63,19 +63,19 @@ loc_1EDC6:
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1).w,d1
                 moveq   #0,d2
-                bsr.s   sub_1EDEC
+                bsr.s   UpdatePlayerOnHczVerticalBreakableBar
                 addq.w  #1,a2
                 lea     (Player_2).w,a1
                 move.w  (Ctrl_2).w,d1
                 moveq   #1,d2
-                bsr.s   sub_1EDEC
+                bsr.s   UpdatePlayerOnHczVerticalBreakableBar
                 tst.b   $3A(a0)
                 bne.w   loc_1EEEC
                 bra.w   Sprite_OnScreen_Test
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1EDEC:
+UpdatePlayerOnHczVerticalBreakableBar:
                 tst.b   (a2)
                 beq.s   loc_1EE4E
                 move.w  y_pos(a0),d0
@@ -167,7 +167,7 @@ loc_1EEBC:
 
 locret_1EEEA:
                 rts
-; End of function sub_1EDEC
+; End of function UpdatePlayerOnHczVerticalBreakableBar
 
 ; ---------------------------------------------------------------------------
 
@@ -194,7 +194,7 @@ loc_1EF04:
                 move.b  height_pixels(a0),d1
                 lsr.w   #2,d1
                 subq.w  #1,d1
-                bsr.w   sub_1F188
+                bsr.w   SplitHczBreakableBarIntoPieces
 
 loc_1EF3E:
                 tst.b   $3F(a0)
@@ -226,19 +226,19 @@ loc_1EF7A:
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1).w,d1
                 moveq   #0,d2
-                bsr.s   sub_1EFA0
+                bsr.s   UpdatePlayerOnHczHorizontalBreakableBar
                 addq.w  #1,a2
                 lea     (Player_2).w,a1
                 move.w  (Ctrl_2).w,d1
                 moveq   #1,d2
-                bsr.s   sub_1EFA0
+                bsr.s   UpdatePlayerOnHczHorizontalBreakableBar
                 tst.b   $3A(a0)
                 bne.w   loc_1F09A
                 bra.w   Sprite_OnScreen_Test
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1EFA0:
+UpdatePlayerOnHczHorizontalBreakableBar:
                 tst.b   (a2)
                 beq.s   loc_1F002
                 move.w  x_pos(a0),d0
@@ -329,7 +329,7 @@ loc_1F070:
 
 locret_1F098:
                 rts
-; End of function sub_1EFA0
+; End of function UpdatePlayerOnHczHorizontalBreakableBar
 
 ; ---------------------------------------------------------------------------
 
@@ -356,7 +356,7 @@ loc_1F0B2:
                 move.b  width_pixels(a0),d1
                 lsr.w   #2,d1
                 subq.w  #1,d1
-                bsr.w   sub_1F188
+                bsr.w   SplitHczBreakableBarIntoPieces
                 bra.w   loc_1EF3E
 ; ---------------------------------------------------------------------------
 byte_1F0F0:
@@ -400,7 +400,7 @@ word_1F148:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1F188:
+SplitHczBreakableBarIntoPieces:
                 move.w  x_pos(a0),d2
                 move.w  y_pos(a0),d3
                 move.w  priority(a0),d4
@@ -437,4 +437,4 @@ loc_1F1A0:
 loc_1F1FA:
                 moveq   #signextendB(sfx_Collapse),d0
                 jmp     (Play_SFX).l
-; End of function sub_1F188
+; End of function SplitHczBreakableBarIntoPieces

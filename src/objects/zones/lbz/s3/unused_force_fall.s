@@ -24,14 +24,14 @@ loc_284B4:
                 sub.w   $2E(a0),d3
                 add.w   $2E(a0),d4
                 lea     (Player_1).w,a1
-                bsr.s   sub_284E2
+                bsr.s   ForcePlayerFallInLbzUnusedRegion
                 lea     (Player_2).w,a1
-                bsr.s   sub_284E2
+                bsr.s   ForcePlayerFallInLbzUnusedRegion
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_284E2:
+ForcePlayerFallInLbzUnusedRegion:
                 move.w  x_pos(a1),d0
                 cmp.w   d1,d0
                 blo.s   locret_28532
@@ -55,4 +55,4 @@ sub_284E2:
 
 locret_28532:
                 rts
-; End of function sub_284E2
+; End of function ForcePlayerFallInLbzUnusedRegion

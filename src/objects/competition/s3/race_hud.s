@@ -91,13 +91,13 @@ loc_37328:
 
 loc_37342:
                 move.l  -1(a3),d6
-                jsr     (sub_9F48).l
+                jsr     (S3CompConvertTimerFrameByteToHundredths).l
                 cmpi.w  #5,d1
                 bhs.s   loc_37362
                 lsl.w   #2,d1
                 move.l  d6,(a6,d1.w)
                 move.l  $14(a6),d5
-                jsr     sub_36508(pc)
+                jsr     CompetitionGoalS3AddPackedMinuteSecondCentisecondTimes(pc)
                 move.l  d6,(a5)
 
 loc_37362:

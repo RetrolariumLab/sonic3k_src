@@ -9,7 +9,7 @@ Obj_Madmole:
                 move.b  routine(a0),d0
                 move.w  Madmole_Index(pc,d0.w),d1
                 jsr     Madmole_Index(pc,d1.w)
-                bsr.w   sub_8D876
+                bsr.w   ResolveMadmoleBaseSolidRectangle
                 jmp     (Sprite_CheckDelete).l
 ; ---------------------------------------------------------------------------
 Madmole_Index:
@@ -82,7 +82,7 @@ loc_8D620:
                 move.w  #$1F,$2E(a0)
 
 loc_8D636:
-                bsr.w   sub_8D886
+                bsr.w   FaceMadmoleBodyTowardNearestPlayer
                 jsr     (MoveSprite2).l
                 subq.w  #1,$2E(a0)
                 bmi.s   loc_8D648
@@ -96,7 +96,7 @@ loc_8D648:
 ; ---------------------------------------------------------------------------
 
 loc_8D656:
-                bsr.w   sub_8D886
+                bsr.w   FaceMadmoleBodyTowardNearestPlayer
                 subq.w  #1,$2E(a0)
                 bmi.s   loc_8D662
                 rts
@@ -193,13 +193,13 @@ loc_8D746:
 ; ---------------------------------------------------------------------------
 
 loc_8D768:
-                bsr.w   sub_8D8E6
+                bsr.w   KnockBackPlayerFromMadmoleFastAttack
                 jsr     (MoveSprite2).l
                 jmp     (Animate_Raw).l
 ; ---------------------------------------------------------------------------
 
 loc_8D778:
-                bsr.w   sub_8D94A
+                bsr.w   CapturePlayerWithMadmoleBouncingAttack
                 jsr     (MoveSprite_LightGravity).l
                 tst.w   y_vel(a0)
                 bmi.s   loc_8D78E
@@ -299,17 +299,17 @@ loc_8D85E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8D876:
+ResolveMadmoleBaseSolidRectangle:
                 moveq   #$1F,d1
                 moveq   #4,d2
                 moveq   #5,d3
                 move.w  x_pos(a0),d4
                 jmp     (SolidObjectFull).l
-; End of function sub_8D876
+; End of function ResolveMadmoleBaseSolidRectangle
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8D886:
+FaceMadmoleBodyTowardNearestPlayer:
                 jsr     (Find_SonicTails).l
                 bclr    #0,render_flags(a0)
                 tst.w   d0
@@ -318,7 +318,7 @@ sub_8D886:
 
 locret_8D89C:
                 rts
-; End of function sub_8D886
+; End of function FaceMadmoleBodyTowardNearestPlayer
 
 ; ---------------------------------------------------------------------------
 
@@ -351,7 +351,7 @@ word_8D8DE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8D8E6:
+KnockBackPlayerFromMadmoleFastAttack:
                 move.b  collision_property(a0),d0
                 beq.w   locret_8D942
                 clr.b   collision_property(a0)
@@ -378,7 +378,7 @@ sub_8D8E6:
 
 locret_8D942:
                 rts
-; End of function sub_8D8E6
+; End of function KnockBackPlayerFromMadmoleFastAttack
 
 ; ---------------------------------------------------------------------------
 word_8D944:
@@ -388,7 +388,7 @@ word_8D944:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8D94A:
+CapturePlayerWithMadmoleBouncingAttack:
                 move.b  collision_property(a0),d0
                 beq.w   locret_8D9A6
                 clr.b   collision_property(a0)
@@ -413,7 +413,7 @@ sub_8D94A:
 
 locret_8D9A6:
                 rts
-; End of function sub_8D94A
+; End of function CapturePlayerWithMadmoleBouncingAttack
 
 ; ---------------------------------------------------------------------------
 ObjDat_Madmole:

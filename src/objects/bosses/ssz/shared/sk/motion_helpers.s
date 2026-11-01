@@ -4,23 +4,23 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7D150:
+StopPlayerOneAllThreeVelocitiesForSSZScene:
                 lea     (Player_1).w,a1
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)
                 clr.w   ground_vel(a1)
                 rts
-; End of function sub_7D150
+; End of function StopPlayerOneAllThreeVelocitiesForSSZScene
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7D162:
+SeedSSZSuperMechaEightWayProjectileVelocity:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 add.w   d0,d0
                 move.l  word_7D172(pc,d0.w),x_vel(a0)   ; and y_vel
                 rts
-; End of function sub_7D162
+; End of function SeedSSZSuperMechaEightWayProjectileVelocity
 
 ; ---------------------------------------------------------------------------
 word_7D172:
@@ -35,14 +35,14 @@ word_7D172:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7D192:
+SelectSSZMechaLaserAnimationAndCompletionBySubtype:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lea     off_7D1A6(pc,d0.w),a1
                 move.l  (a1)+,$30(a0)
                 move.l  (a1)+,$34(a0)
                 rts
-; End of function sub_7D192
+; End of function SelectSSZMechaLaserAnimationAndCompletionBySubtype
 
 ; ---------------------------------------------------------------------------
 off_7D1A6:
@@ -53,8 +53,8 @@ off_7D1A6:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7D1B6:
-                bsr.w   sub_7D1EA
+TestSSZPlayerRegionAgainstSelectedAttackList:
+                bsr.w   ClassifySSZPlayerHorizontalRegionWithCollapsedRightBins
                 moveq   #0,d0
                 move.b  child_dx(a0),d0
                 lsl.w   #2,d0
@@ -69,7 +69,7 @@ loc_7D1C6:
 
 locret_7D1D0:
                 rts
-; End of function sub_7D1B6
+; End of function TestSSZPlayerRegionAgainstSelectedAttackList
 
 ; ---------------------------------------------------------------------------
 byte_7D1D2:
@@ -101,7 +101,7 @@ byte_7D1D2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7D1EA:
+ClassifySSZPlayerHorizontalRegionWithCollapsedRightBins:
                 move.w  (Player_1+x_pos).w,d0
                 sub.w   (Camera_min_X_pos).w,d0
                 move.w  d0,d1
@@ -125,7 +125,7 @@ loc_7D204:
 
 locret_7D214:
                 rts
-; End of function sub_7D1EA
+; End of function ClassifySSZPlayerHorizontalRegionWithCollapsedRightBins
 
 ; ---------------------------------------------------------------------------
 
@@ -150,7 +150,7 @@ loc_7D234:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7D236:
+SelectSSZMechaRollingTrailOffsetsAndQueuePriority:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 add.w   d0,d0
@@ -158,7 +158,7 @@ sub_7D236:
                 move.w  (a1)+,child_dx(a0)              ; and child_dy
                 move.w  (a1)+,priority(a0)
                 rts
-; End of function sub_7D236
+; End of function SelectSSZMechaRollingTrailOffsetsAndQueuePriority
 
 ; ---------------------------------------------------------------------------
 byte_7D24C:
@@ -175,7 +175,7 @@ byte_7D24C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7D260:
+SelectSSZMechaCollisionProxyFromParentFrame:
                 lea     byte_7D280(pc),a1
                 movea.w parent3(a0),a2
                 moveq   #0,d0
@@ -186,7 +186,7 @@ sub_7D260:
                 move.b  (a1)+,collision_flags(a0)
                 move.b  (a1)+,mapping_frame(a0)
                 rts
-; End of function sub_7D260
+; End of function SelectSSZMechaCollisionProxyFromParentFrame
 
 ; ---------------------------------------------------------------------------
 byte_7D280:
@@ -216,7 +216,7 @@ byte_7D280:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7D2D8:
+SelectSSZMechaCollisionFromFrameOutsideHitRecovery:
                 btst    #6,status(a0)
                 bne.s   locret_7D2FA
                 moveq   #0,d0
@@ -231,7 +231,7 @@ loc_7D2F6:
 
 locret_7D2FA:
                 rts
-; End of function sub_7D2D8
+; End of function SelectSSZMechaCollisionFromFrameOutsideHitRecovery
 
 ; ---------------------------------------------------------------------------
 byte_7D2FC:
@@ -261,7 +261,7 @@ byte_7D2FC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7D312:
+HandleSSZMechaHitFlashOrTailDeathCallback:
                 tst.b   collision_flags(a0)
                 bne.s   locret_7D356
                 move.b  collision_property(a0),d0
@@ -281,7 +281,7 @@ loc_7D338:
                 addi.w  #2*4,d0
 
 loc_7D346:
-                bsr.w   sub_7D3BE
+                bsr.w   CopySSZMechaFiveColorPaletteAtByteOffset
                 subq.b  #1,$20(a0)
                 bne.s   locret_7D356
                 bclr    #6,status(a0)
@@ -292,11 +292,11 @@ locret_7D356:
 
 loc_7D358:
                 jmp     (a4)
-; End of function sub_7D312
+; End of function HandleSSZMechaHitFlashOrTailDeathCallback
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7D35A:
+BeginSSZMechaScoredDefeatIntoPostBattleScene:
                 move.l  #loc_7B81A,(a0)
                 clr.b   routine(a0)
                 move.l  #loc_7B858,$34(a0)
@@ -313,13 +313,13 @@ sub_7D35A:
 
 locret_7D39C:
                 rts
-; End of function sub_7D35A
+; End of function BeginSSZMechaScoredDefeatIntoPostBattleScene
 
 ; ---------------------------------------------------------------------------
 
 loc_7D39E:
                 bset    #7,$38(a0)
-                bsr.s   sub_7D35A
+                bsr.s   BeginSSZMechaScoredDefeatIntoPostBattleScene
                 move.w  (Camera_X_pos).w,d0
                 move.w  d0,(Camera_min_X_pos).w
                 move.w  d0,(Camera_max_X_pos).w
@@ -328,11 +328,11 @@ loc_7D39E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7D3BE:
+CopySSZMechaFiveColorPaletteAtByteOffset:
                 lea     word_7D3CC(pc),a1
                 lea     word_7D3D6(pc,d0.w),a2
                 jmp     (CopyWordData_5).l
-; End of function sub_7D3BE
+; End of function CopySSZMechaFiveColorPaletteAtByteOffset
 
 ; ---------------------------------------------------------------------------
 word_7D3CC:

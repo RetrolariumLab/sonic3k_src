@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_65DD6:
+CutsceneSpawnKnucklesMusicFadeTransition:
                 jsr     (AllocateObject).l
                 bne.s   locret_65DEA
                 move.l  #Obj_Song_Fade_Transition,(a1)
@@ -12,21 +12,21 @@ sub_65DD6:
 
 locret_65DEA:
                 rts
-; End of function sub_65DD6
+; End of function CutsceneSpawnKnucklesMusicFadeTransition
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_65DEC:
+CutsceneKnucklesSolidThinWrapper:
                 move.w  #$1B,d1
                 move.w  #4,d2
                 move.w  #5,d3
                 move.w  x_pos(a0),d4
                 jmp     (SolidObjectFull).l
-; End of function sub_65DEC
+; End of function CutsceneKnucklesSolidThinWrapper
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_65E02:
+OpeningAnimalChooseBoundedRandomBounceVelocity:
                 jsr     (Random_Number).l
                 andi.w  #$1FF,d0
                 addi.w  #$100,d0
@@ -52,31 +52,31 @@ loc_65E3E:
 loc_65E46:
                 move.w  d1,x_vel(a0)
                 rts
-; End of function sub_65E02
+; End of function OpeningAnimalChooseBoundedRandomBounceVelocity
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_65E4C:
+CutsceneKnucklesSolidTallWrapper:
                 move.w  #$1B,d1
                 move.w  #$20,d2
                 move.w  #$20,d3
                 move.w  x_pos(a0),d4
                 jmp     (SolidObjectFull).l
-; End of function sub_65E4C
+; End of function CutsceneKnucklesSolidTallWrapper
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_65E62:
+MHZBlowerApplyPlayerPoseToP1AndExistingP2:
                 lea     (Player_1).w,a1
-                bsr.w   sub_65E72
+                bsr.w   MHZBlowerSetSelectedPlayerForcedFlipFrames
                 lea     (Player_2).w,a1
                 tst.l   (a1)
                 beq.s   locret_65EAE
-; End of function sub_65E62
+; End of function MHZBlowerApplyPlayerPoseToP1AndExistingP2
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_65E72:
+MHZBlowerSetSelectedPlayerForcedFlipFrames:
                 move.b  #5,anim(a1)
                 cmpi.b  #$C,anim_frame(a0)
                 blo.s   locret_65EAE
@@ -95,7 +95,7 @@ loc_65E9E:
 
 locret_65EAE:
                 rts
-; End of function sub_65E72
+; End of function MHZBlowerSetSelectedPlayerForcedFlipFrames
 
 ; ---------------------------------------------------------------------------
 RawAni_65EB0:
@@ -104,7 +104,7 @@ RawAni_65EB0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_65EB4:
+MHZBlowerEmitLeafOnReloadedTimer:
                 subq.w  #1,$2E(a0)
                 bpl.s   locret_65ED2
                 move.w  $3E(a0),$2E(a0)
@@ -115,11 +115,11 @@ sub_65EB4:
 
 locret_65ED2:
                 rts
-; End of function sub_65EB4
+; End of function MHZBlowerEmitLeafOnReloadedTimer
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_65ED4:
+LRZRollingSceneCycleOwnerRenderFlips:
                 subq.b  #1,anim_frame_timer(a0)
                 bpl.s   locret_65EFC
                 move.b  #4,anim_frame_timer(a0)
@@ -134,33 +134,33 @@ sub_65ED4:
 
 locret_65EFC:
                 rts
-; End of function sub_65ED4
+; End of function LRZRollingSceneCycleOwnerRenderFlips
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_65EFE:
+LRZRollingSceneCaptureAndOrbitBothPlayers:
                 lea     (Player_1).w,a1
                 moveq   #0,d2
                 moveq   #$3C,d3
                 moveq   #signextendB($8D),d4
-                bsr.w   sub_65F84
+                bsr.w   LRZRollingSceneCapturePlayerAndSeedOrbitAngle
                 lea     (Player_2).w,a1
                 moveq   #1,d2
                 moveq   #$3D,d3
                 moveq   #signextendB($8A),d4
-                bsr.w   sub_65F84
+                bsr.w   LRZRollingSceneCapturePlayerAndSeedOrbitAngle
                 lea     (Player_1).w,a1
                 moveq   #0,d2
                 moveq   #$3C,d3
-                bsr.w   sub_65F2E
+                bsr.w   LRZRollingSceneOrbitOneCapturedPlayer
                 lea     (Player_2).w,a1
                 moveq   #1,d2
                 moveq   #$3D,d3
-; End of function sub_65EFE
+; End of function LRZRollingSceneCaptureAndOrbitBothPlayers
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_65F2E:
+LRZRollingSceneOrbitOneCapturedPlayer:
                 btst    d2,$38(a0)
                 beq.w   locret_65FD4
                 subq.b  #1,anim_frame_timer(a1)
@@ -187,11 +187,11 @@ loc_65F5C:
                 move.w  d2,x_pos(a1)
                 move.w  d3,y_pos(a1)
                 rts
-; End of function sub_65F2E
+; End of function LRZRollingSceneOrbitOneCapturedPlayer
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_65F84:
+LRZRollingSceneCapturePlayerAndSeedOrbitAngle:
                 btst    d2,$38(a0)
                 bne.s   locret_65FD4
                 lea     word_65FD6(pc),a2
@@ -211,13 +211,13 @@ sub_65F84:
                 movea.l (sp)+,a1
                 movea.l a1,a2
                 movea.l a0,a1
-                jsr     (sub_8622C).l
+                jsr     (GetApproximateObjectBearing).l
                 move.w  (sp)+,d3
                 move.b  d0,(a0,d3.w)
 
 locret_65FD4:
                 rts
-; End of function sub_65F84
+; End of function LRZRollingSceneCapturePlayerAndSeedOrbitAngle
 
 ; ---------------------------------------------------------------------------
 word_65FD6:
@@ -225,7 +225,7 @@ word_65FD6:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_65FDE:
+SSZKnucklesReactToCrouchingP1OnRight:
                 btst    #3,$38(a0)
                 bne.w   locret_6206C
                 lea     (Player_1).w,a1
@@ -243,7 +243,7 @@ sub_65FDE:
                 bne.w   locret_6206C
                 lea     byte_6672A(pc),a1
                 jmp     (Set_Raw_Animation).l
-; End of function sub_65FDE
+; End of function SSZKnucklesReactToCrouchingP1OnRight
 
 ; =============== S U B R O U T I N E =======================================
 

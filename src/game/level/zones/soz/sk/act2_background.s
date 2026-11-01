@@ -5,7 +5,7 @@
 ; ---------------------------------------------------------------------------
 
 SOZ2_BackgroundInit:
-                jsr     sub_5697E(pc)
+                jsr     ClearSoz2EntranceBackgroundChunkStrip(pc)
                 moveq   #$10,d0
                 cmpi.w  #$2980,(Player_1+x_pos).w
                 blo.s   loc_56278
@@ -13,7 +13,7 @@ SOZ2_BackgroundInit:
 
 loc_56278:
                 move.w  d0,(Events_routine_bg).w
-                jsr     sub_566D2(pc)
+                jsr     SetSoz2HalfSpeedBackgroundCoordinates(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 moveq   #0,d1
                 jsr     (Refresh_PlaneFull).l
@@ -56,8 +56,8 @@ SOZ2_BackgroundEvent_Index:
 loc_562D0:
                 cmpi.w  #8,(Events_routine_fg).w
                 blo.s   locret_562FE
-                jsr     sub_5697E(pc)
-                jsr     sub_566D2(pc)
+                jsr     ClearSoz2EntranceBackgroundChunkStrip(pc)
+                jsr     SetSoz2HalfSpeedBackgroundCoordinates(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 addi.w  #$E0,d0
                 and.w   (Camera_Y_pos_mask).w,d0
@@ -72,7 +72,7 @@ locret_562FE:
 ; ---------------------------------------------------------------------------
 
 loc_56300:
-                jsr     sub_566D2(pc)
+                jsr     SetSoz2HalfSpeedBackgroundCoordinates(pc)
 
 loc_56304:
                 moveq   #0,d1
@@ -122,7 +122,7 @@ loc_56366:
                 addq.w  #4,(Events_routine_bg).w
 
 loc_563A6:
-                jsr     sub_5699A(pc)
+                jsr     IsPlayerInSoz2RisingSandExitWindow(pc)
                 beq.s   loc_563B6
                 move.w  #$18,(Events_routine_bg).w
                 bra.w   loc_56484
@@ -131,7 +131,7 @@ loc_563A6:
 loc_563B6:
                 tst.w   (Events_fg_5).w
                 bne.s   loc_563D8
-                jsr     sub_566D2(pc)
+                jsr     SetSoz2HalfSpeedBackgroundCoordinates(pc)
 
 loc_563C0:
                 lea     (Camera_Y_pos_BG_copy).w,a6
@@ -155,7 +155,7 @@ loc_563D8:
 loc_563F6:
                 swap    d0
                 move.l  d0,(_unkEE9C).w
-                jsr     sub_566E8(pc)
+                jsr     AlignSoz2RisingSandBackgroundCamera(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 subi.w  #$10,(Camera_Y_pos_BG_rounded).w
                 move.w  #$10,(Special_events_routine).w
@@ -165,7 +165,7 @@ loc_563F6:
 ; ---------------------------------------------------------------------------
 
 loc_5641C:
-                jsr     sub_5699A(pc)
+                jsr     IsPlayerInSoz2RisingSandExitWindow(pc)
                 beq.s   loc_5642A
                 move.w  #$18,(Events_routine_bg).w
                 bra.s   loc_56484
@@ -179,7 +179,7 @@ loc_5642A:
                 clr.w   (Special_events_routine).w
 
 loc_5643C:
-                jsr     sub_566E8(pc)
+                jsr     AlignSoz2RisingSandBackgroundCamera(pc)
 
 loc_56440:
                 jsr     (DrawBGAsYouMove).l
@@ -193,14 +193,14 @@ loc_56450:
                 addq.w  #4,(Events_routine_bg).w
 
 loc_5645E:
-                jsr     sub_5699A(pc)
+                jsr     IsPlayerInSoz2RisingSandExitWindow(pc)
                 bne.s   loc_56484
                 cmpi.w  #$A00,(_unkEE9C).w
                 blo.s   loc_56470
                 clr.w   (Special_events_routine).w
 
 loc_56470:
-                jsr     sub_566E8(pc)
+                jsr     AlignSoz2RisingSandBackgroundCamera(pc)
 
 loc_56474:
                 jsr     (DrawBGAsYouMove).l
@@ -211,7 +211,7 @@ loc_56474:
 loc_56484:
                 move.w  (Camera_X_pos_BG_copy).w,(Events_bg+$02).w
                 move.w  (Camera_Y_pos_BG_copy).w,(Events_bg+$04).w
-                jsr     sub_566D2(pc)
+                jsr     SetSoz2HalfSpeedBackgroundCoordinates(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 move.w  #$1F0,(Draw_delayed_position).w
                 move.w  #$1F,(Draw_delayed_rowcount).w
@@ -223,7 +223,7 @@ loc_56484:
 ; ---------------------------------------------------------------------------
 
 loc_564B8:
-                jsr     sub_566D2(pc)
+                jsr     SetSoz2HalfSpeedBackgroundCoordinates(pc)
 
 loc_564BC:
                 move.w  (Camera_Y_pos_BG_copy).w,d1
@@ -242,7 +242,7 @@ loc_564D4:
                 bhs.s   loc_56510
 
 loc_564E4:
-                jsr     sub_566D2(pc)
+                jsr     SetSoz2HalfSpeedBackgroundCoordinates(pc)
 
 loc_564E8:
                 lea     (Camera_Y_pos_BG_copy).w,a6
@@ -283,7 +283,7 @@ loc_5652A:
 loc_56540:
                 move.l  d1,(a1)+
                 dbf     d2,loc_56540
-                jsr     sub_56706(pc)
+                jsr     UpdateSoz2BossPlaneBandAnimation(pc)
                 lea     (HScroll_table).w,a1
                 moveq   #$D-1,d0
 
@@ -311,7 +311,7 @@ loc_56550:
                 move.b  d0,(Palette_cycle_counters+$00).w
                 move.w  #0,(Palette_cycle_counters+$08).w
                 move.b  #$7F,(Anim_Counters).w
-                jsr     sub_56A12(pc)
+                jsr     SpawnSoz2BossBandCollisionProxies(pc)
                 addq.w  #4,(Events_routine_bg).w
                 bra.s   loc_565F4
 ; ---------------------------------------------------------------------------
@@ -332,7 +332,7 @@ loc_565DE:
                 move.b  #$7F,(Anim_Counters).w
                 tst.w   (Events_fg_5).w
                 bmi.s   loc_5661A
-                jsr     sub_56706(pc)
+                jsr     UpdateSoz2BossPlaneBandAnimation(pc)
 
 loc_565F4:
                 lea     SOZ2_BGDrawArray(pc),a4
@@ -350,7 +350,7 @@ loc_5661A:
                 move.w  (Camera_X_pos_BG_copy).w,d0
                 subi.w  #$100,d0
                 move.w  d0,(Events_bg+$02).w
-                jsr     sub_56964(pc)
+                jsr     SetSoz2PostBossBackgroundCoordinates(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 addi.w  #$E0,d0
                 and.w   (Camera_Y_pos_mask).w,d0
@@ -371,7 +371,7 @@ loc_5661A:
 loc_56676:
                 tst.b   (Kos_modules_left).w
                 bne.s   loc_566BC
-                jsr     sub_56964(pc)
+                jsr     SetSoz2PostBossBackgroundCoordinates(pc)
                 move.w  #$200,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 jsr     (Draw_PlaneVertBottomUp).l
@@ -384,7 +384,7 @@ loc_56676:
 ; ---------------------------------------------------------------------------
 
 loc_566A4:
-                jsr     sub_56964(pc)
+                jsr     SetSoz2PostBossBackgroundCoordinates(pc)
 
 loc_566A8:
                 lea     (Camera_Y_pos_BG_copy).w,a6
@@ -404,7 +404,7 @@ loc_566C6:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_566D2:
+SetSoz2HalfSpeedBackgroundCoordinates:
                 move.w  (Camera_Y_pos_copy).w,d0
                 asr.w   #1,d0
                 move.w  d0,(Camera_Y_pos_BG_copy).w
@@ -412,11 +412,11 @@ sub_566D2:
                 asr.w   #1,d0
                 move.w  d0,(Camera_X_pos_BG_copy).w
                 rts
-; End of function sub_566D2
+; End of function SetSoz2HalfSpeedBackgroundCoordinates
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_566E8:
+AlignSoz2RisingSandBackgroundCamera:
                 move.w  (Camera_Y_pos_copy).w,d0
                 addi.w  #$2E0,d0
                 add.w   (_unkEE9C).w,d0
@@ -425,11 +425,11 @@ sub_566E8:
                 subi.w  #$1930,d0
                 move.w  d0,(Camera_X_pos_BG_copy).w
                 rts
-; End of function sub_566E8
+; End of function AlignSoz2RisingSandBackgroundCamera
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56706:
+UpdateSoz2BossPlaneBandAnimation:
                 move.w  (Camera_Y_pos_copy).w,d0
                 subi.w  #$250,d0
                 move.w  #$6D8,d1
@@ -700,11 +700,11 @@ loc_5694E:
                 dbf     d1,loc_5694E
                 movea.l (sp)+,a0
                 rts
-; End of function sub_56706
+; End of function UpdateSoz2BossPlaneBandAnimation
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56964:
+SetSoz2PostBossBackgroundCoordinates:
                 move.w  (Camera_Y_pos_copy).w,d0
                 asr.w   #1,d0
                 move.w  d0,(Camera_Y_pos_BG_copy).w
@@ -713,11 +713,11 @@ sub_56964:
                 addi.w  #$200,d0
                 move.w  d0,(Camera_X_pos_BG_copy).w
                 rts
-; End of function sub_56964
+; End of function SetSoz2PostBossBackgroundCoordinates
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5697E:
+ClearSoz2EntranceBackgroundChunkStrip:
                 movea.w $38(a3),a5
                 movea.w $3C(a3),a6
                 lea     $17(a5),a5
@@ -729,11 +729,11 @@ loc_56990:
                 clr.b   (a6)+
                 dbf     d0,loc_56990
                 rts
-; End of function sub_5697E
+; End of function ClearSoz2EntranceBackgroundChunkStrip
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5699A:
+IsPlayerInSoz2RisingSandExitWindow:
                 cmpi.w  #$2A00,(Player_1+x_pos).w
                 blo.s   loc_569B6
                 move.w  (Player_1+y_pos).w,d0
@@ -748,7 +748,7 @@ sub_5699A:
 loc_569B6:
                 moveq   #0,d0
                 rts
-; End of function sub_5699A
+; End of function IsPlayerInSoz2RisingSandExitWindow
 
 ; ---------------------------------------------------------------------------
 
@@ -784,7 +784,7 @@ loc_56A0C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56A12:
+SpawnSoz2BossBandCollisionProxies:
                 jsr     (AllocateObject).l
                 bne.s   locret_56A32
                 move.l  #loc_56A34,d1
@@ -798,7 +798,7 @@ loc_56A22:
 
 locret_56A32:
                 rts
-; End of function sub_56A12
+; End of function SpawnSoz2BossBandCollisionProxies
 
 ; ---------------------------------------------------------------------------
 

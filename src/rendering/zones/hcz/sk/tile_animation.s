@@ -142,7 +142,7 @@ AniHCZ_FixLowerBG:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_279D4:
+AniHCZ1_InitWaterlineTiles:
                 lea     (AniPLC_HCZ1).l,a2
                 lea     (Anim_Counters+4).w,a3
                 move.w  (Events_bg+$10).w,d1
@@ -184,7 +184,7 @@ loc_27A2C:
                 move.w  #tiles_to_bytes($300),d2
                 move.w  #$C0,d3
                 jmp     (Add_To_DMA_Queue).l
-; End of function sub_279D4
+; End of function AniHCZ1_InitWaterlineTiles
 
 ; ---------------------------------------------------------------------------
 

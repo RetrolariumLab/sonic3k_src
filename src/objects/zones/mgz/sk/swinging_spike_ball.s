@@ -63,7 +63,7 @@ loc_341B2:
 
 loc_341BC:
                 movea.w $3C(a0),a1
-                bsr.w   sub_3424A
+                bsr.w   PositionHorizontalSwingingSpikeChain
                 move.b  $34(a0),d2
                 move.b  $36(a0),d0
                 add.b   d0,$34(a0)
@@ -85,7 +85,7 @@ loc_341F0:
 
 loc_341FA:
                 movea.w $3C(a0),a1
-                bsr.w   sub_342A6
+                bsr.w   PositionVerticalSwingingSpikeChain
                 move.b  $34(a0),d2
                 bpl.s   loc_34210
                 addi.w  #$10,$36(a0)
@@ -118,7 +118,7 @@ loc_34244:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3424A:
+PositionHorizontalSwingingSpikeChain:
                 move.w  #$200,priority(a0)
                 move.b  #0,mapping_frame(a1)
                 move.w  #5,mainspr_childsprites(a1)
@@ -150,11 +150,11 @@ loc_3428A:
                 add.w   d3,d5
                 move.w  d5,x_pos(a0)
                 rts
-; End of function sub_3424A
+; End of function PositionHorizontalSwingingSpikeChain
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_342A6:
+PositionVerticalSwingingSpikeChain:
                 move.w  #$200,priority(a0)
                 move.b  #0,mapping_frame(a1)
                 move.w  #5,mainspr_childsprites(a1)
@@ -186,4 +186,4 @@ loc_342E6:
                 add.w   d3,d5
                 move.w  d5,y_pos(a0)
                 rts
-; End of function sub_342A6
+; End of function PositionVerticalSwingingSpikeChain

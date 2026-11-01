@@ -162,25 +162,25 @@ Adjust_AIZ1Chunks2:
                 move.l  (a5)+,(a1)+
                 move.l  (a5),(a1)
                 lea     ((RAM_start+$4C70)&$FFFFFF).l,a1
-                bsr.s   sub_4FAD8
+                bsr.s   FillEightAiz1ChunkWordsWithBlock4B
                 lea     ((RAM_start+$4CF0)&$FFFFFF).l,a1
-                bsr.s   sub_4FAD8
+                bsr.s   FillEightAiz1ChunkWordsWithBlock4B
                 lea     ((RAM_start+$4D70)&$FFFFFF).l,a1
-                bsr.s   sub_4FAD8
+                bsr.s   FillEightAiz1ChunkWordsWithBlock4B
                 lea     ((RAM_start+$52F0)&$FFFFFF).l,a1
-                bsr.s   sub_4FAD8
+                bsr.s   FillEightAiz1ChunkWordsWithBlock4B
                 lea     ((RAM_start+$4980)&$FFFFFF).l,a1
-                bsr.s   sub_4FAD8
+                bsr.s   FillEightAiz1ChunkWordsWithBlock4B
                 lea     ((RAM_start+$4D80)&$FFFFFF).l,a1
-                bsr.s   sub_4FAD8
+                bsr.s   FillEightAiz1ChunkWordsWithBlock4B
                 lea     ((RAM_start+$3420)&$FFFFFF).l,a1
-                bsr.s   sub_4FAD8
+                bsr.s   FillEightAiz1ChunkWordsWithBlock4B
                 move.w  #$402,(a1)+
                 moveq   #6-1,d1
-                bsr.s   sub_4FADA
+                bsr.s   FillAiz1ChunkWordsWithBlock4B
                 move.w  #2,(a1)
                 lea     ((RAM_start+$3FA0)&$FFFFFF).l,a1
-                bsr.s   sub_4FAD8
+                bsr.s   FillEightAiz1ChunkWordsWithBlock4B
                 addq.w  #4,a1
                 move.w  #$C,(a1)+
                 move.w  #$406,(a1)+
@@ -190,30 +190,30 @@ Adjust_AIZ1Chunks2:
                 lea     ((RAM_start+$5820)&$FFFFFF).l,a1
                 move.w  #$40B,(a1)+
                 moveq   #6-1,d1
-                bsr.s   sub_4FADA
+                bsr.s   FillAiz1ChunkWordsWithBlock4B
                 addq.w  #6,a1
                 move.w  #$C,(a1)+
                 move.w  #$406,(a1)+
                 moveq   #2-1,d1
-                bra.s   sub_4FADA
+                bra.s   FillAiz1ChunkWordsWithBlock4B
 ; End of function Adjust_AIZ1Chunks2
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4FAD8:
+FillEightAiz1ChunkWordsWithBlock4B:
                 moveq   #8-1,d1
-; End of function sub_4FAD8
+; End of function FillEightAiz1ChunkWordsWithBlock4B
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4FADA:
+FillAiz1ChunkWordsWithBlock4B:
                 moveq   #$4B,d0
 
 loc_4FADC:
                 move.w  d0,(a1)+
                 dbf     d1,loc_4FADC
                 rts
-; End of function sub_4FADA
+; End of function FillAiz1ChunkWordsWithBlock4B
 
 ; ---------------------------------------------------------------------------
 word_4FAE4:
@@ -500,14 +500,14 @@ Adjust_AIZ2Layout:
                 move.w  #$5B,((RAM_start+$1020)&$FFFFFF).l  ; Only do this if playing as Knuckles
                 lea     ((RAM_start+$3420)&$FFFFFF).l,a1
                 moveq   #8-1,d1
-                bsr.s   sub_4FF00
+                bsr.s   FillAiz2ChunkWordsWithBlock5B
                 move.w  #$CAE,(a1)+
                 moveq   #6-1,d1
-                bsr.s   sub_4FF00
+                bsr.s   FillAiz2ChunkWordsWithBlock5B
                 move.w  #$8AE,(a1)
                 lea     ((RAM_start+$3FA0)&$FFFFFF).l,a1
                 moveq   #8-1,d1
-                bsr.s   sub_4FF00
+                bsr.s   FillAiz2ChunkWordsWithBlock5B
                 addq.w  #4,a1
                 move.w  #$4B6,(a1)+
                 move.w  #$4CC,(a1)+
@@ -516,7 +516,7 @@ Adjust_AIZ2Layout:
                 move.w  #$4B7,2(a1)
                 lea     ((RAM_start+$5822)&$FFFFFF).l,a1
                 moveq   #6-1,d1
-                bsr.s   sub_4FF00
+                bsr.s   FillAiz2ChunkWordsWithBlock5B
                 addq.w  #6,a1
                 move.w  #$4B6,(a1)+
                 move.w  #$4CC,(a1)+
@@ -529,32 +529,32 @@ loc_4FECC:
                 move.b  $7F(a1),$63(a5)
                 movea.w (Level_layout_main+$0A).w,a1
                 movea.w (Level_layout_main+$1E).w,a5
-                bsr.s   sub_4FEF6
+                bsr.s   CopyFourAiz2LayoutChunkIndices
                 movea.w (Level_layout_main+$0E).w,a1
                 movea.w (Level_layout_main+$22).w,a5
-                bsr.s   sub_4FEF6
+                bsr.s   CopyFourAiz2LayoutChunkIndices
                 movea.w (Level_layout_main+$12).w,a1
                 movea.w (Level_layout_main+$26).w,a5
 ; End of function Adjust_AIZ2Layout
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4FEF6:
+CopyFourAiz2LayoutChunkIndices:
                 moveq   #4-1,d0
 
                 .loop:
                 move.b  (a1)+,(a5)+
                 dbf     d0,.loop
                 rts
-; End of function sub_4FEF6
+; End of function CopyFourAiz2LayoutChunkIndices
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4FF00:
+FillAiz2ChunkWordsWithBlock5B:
                 moveq   #$5B,d0
 
                 .loop:
                 move.w  d0,(a1)+
                 dbf     d1,.loop
                 rts
-; End of function sub_4FF00
+; End of function FillAiz2ChunkWordsWithBlock5B

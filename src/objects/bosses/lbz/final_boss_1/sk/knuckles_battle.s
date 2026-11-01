@@ -7,7 +7,7 @@ Obj_LBZFinalBossKnux:
                 lea     word_72FEA(pc),a1
                 jsr     (Check_CameraInRange).l
                 move.b  #mus_EndBoss,boss_saved_mus(a0)
-                jsr     (sub_85D6A).l
+                jsr     (BeginBossCameraTransitionSaveBoundsAndFadeMusic).l
                 move.l  #loc_73046,(a0)
                 move.l  #loc_7304C,$34(a0)
                 clr.b   (_unkFAA2).w
@@ -17,10 +17,10 @@ Obj_LBZFinalBossKnux:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7302E:
+QueueLBZFinalBossExtraShipAndExplosionGraphics:
                 lea     PLC_LBZFinalBoss_Extra(pc),a1
                 jmp     (Load_PLC_Raw).l
-; End of function sub_7302E
+; End of function QueueLBZFinalBossExtraShipAndExplosionGraphics
 
 ; ---------------------------------------------------------------------------
 PLC_LBZFinalBoss_Extra: plrlistheader
@@ -71,7 +71,7 @@ loc_7308E:
 
 loc_730B0:
                 jsr     (Refresh_ChildPositionAdjusted).l
-                bsr.w   sub_7361E
+                bsr.w   BreakOrSuspendLBZFinalBoss1BodySection
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -112,7 +112,7 @@ loc_73100:
 
 loc_73128:
                 jsr     (Refresh_ChildPositionAdjusted).l
-                bsr.w   sub_7361E
+                bsr.w   BreakOrSuspendLBZFinalBoss1BodySection
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -121,7 +121,7 @@ loc_73138:
                 jsr     (SetUp_ObjAttributes3).l
                 move.l  #loc_73152,(a0)
                 move.w  #$60,$2E(a0)
-                bsr.w   sub_73682
+                bsr.w   SeedLBZFinalBoss1SectionDebrisFrameAndVelocity
 
 loc_73152:
                 jsr     (MoveSprite).l
@@ -182,7 +182,7 @@ loc_731CE:
                 move.b  #8,$39(a0)
 
 loc_731F4:
-                bsr.w   sub_733FC
+                bsr.w   AdvanceLBZFinalBoss1CannonTurnCycle
                 moveq   #4,d0
                 jmp     (Child_Draw_Sprite_FlickerMove).l
 ; ---------------------------------------------------------------------------
@@ -277,7 +277,7 @@ loc_732F6:
                 lea     ChildObjDat_737D2(pc),a2
                 jsr     (CreateChild1_Normal).l
                 move.l  #byte_73851,$30(a1)
-                bsr.w   sub_734E4
+                bsr.w   RandomizeLBZFinalBoss1LaserTrailOffset
                 bra.w   loc_7332E
 ; ---------------------------------------------------------------------------
 
@@ -285,7 +285,7 @@ loc_73318:
                 lea     ChildObjDat_737D2(pc),a2
                 jsr     (CreateChild1_Normal).l
                 move.l  #byte_73857,$30(a1)
-                bsr.w   sub_734E4
+                bsr.w   RandomizeLBZFinalBoss1LaserTrailOffset
 
 loc_7332E:
                 jsr     (MoveSprite2).l
@@ -353,7 +353,7 @@ loc_733E2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_733FC:
+AdvanceLBZFinalBoss1CannonTurnCycle:
                 moveq   #0,d0
                 move.b  $39(a0),d0
                 subq.w  #1,$2E(a0)
@@ -420,7 +420,7 @@ loc_73484:
                 add.w   d1,d2
                 move.w  d2,y_pos(a0)
                 rts
-; End of function sub_733FC
+; End of function AdvanceLBZFinalBoss1CannonTurnCycle
 
 ; ---------------------------------------------------------------------------
 byte_734AA:
@@ -465,18 +465,18 @@ byte_734CE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_734E4:
+RandomizeLBZFinalBoss1LaserTrailOffset:
                 jsr     (Random_Number).l
                 swap    d0
                 andi.b  #7,d0
                 addi.b  #$18,d0
                 move.b  d0,child_dx(a1)
                 rts
-; End of function sub_734E4
+; End of function RandomizeLBZFinalBoss1LaserTrailOffset
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_734FA:
+HandleLBZFinalBoss1HitSectionDropOrDefeat:
                 tst.b   collision_flags(a0)
                 bne.w   locret_735B4
                 tst.b   collision_property(a0)
@@ -521,7 +521,7 @@ loc_73584:
                 addi.w  #2*2,d0
 
 loc_73592:
-                bsr.w   sub_73604
+                bsr.w   CopyLBZFinalBoss1TwoColorPalette
                 subq.b  #1,$20(a0)
                 bne.s   locret_735B4
                 move.b  $3A(a0),routine(a0)
@@ -553,15 +553,15 @@ loc_735B6:
 loc_735FC:
                 move.l  #loc_73054,(a0)
                 rts
-; End of function sub_734FA
+; End of function HandleLBZFinalBoss1HitSectionDropOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_73604:
+CopyLBZFinalBoss1TwoColorPalette:
                 lea     word_73612(pc),a1
                 lea     word_73616(pc,d0.w),a2
                 jmp     (CopyWordData_2).l
-; End of function sub_73604
+; End of function CopyLBZFinalBoss1TwoColorPalette
 
 ; ---------------------------------------------------------------------------
 word_73612:
@@ -572,7 +572,7 @@ word_73616:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7361E:
+BreakOrSuspendLBZFinalBoss1BodySection:
                 movea.w parent3(a0),a1
                 move.w  $3C(a0),d0
                 btst    d0,$38(a1)
@@ -600,11 +600,11 @@ loc_73672:
 
 locret_73680:
                 rts
-; End of function sub_7361E
+; End of function BreakOrSuspendLBZFinalBoss1BodySection
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_73682:
+SeedLBZFinalBoss1SectionDebrisFrameAndVelocity:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,d1
@@ -617,7 +617,7 @@ sub_73682:
                 move.w  (a1)+,x_vel(a0)
                 move.w  (a1)+,y_vel(a0)
                 rts
-; End of function sub_73682
+; End of function SeedLBZFinalBoss1SectionDebrisFrameAndVelocity
 
 ; ---------------------------------------------------------------------------
 word_736AA:

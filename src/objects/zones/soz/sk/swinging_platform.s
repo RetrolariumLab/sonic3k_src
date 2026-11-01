@@ -49,7 +49,7 @@ loc_414E6:
 
 loc_414FE:
                 move.w  x_pos(a0),-(sp)
-                bsr.w   sub_4154C
+                bsr.w   PositionSozSwingPlatformAndChain
                 move.w  #$20,d1
                 move.w  #$11,d3
                 move.w  (sp)+,d4
@@ -75,14 +75,14 @@ loc_4153C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4154C:
+PositionSozSwingPlatformAndChain:
                 moveq   #0,d0
                 moveq   #0,d1
                 move.b  (Oscillating_table+$1A).w,d0
                 addi.b  #$80,d0
                 tst.b   subtype(a0)
                 beq.s   loc_41562
-                bsr.w   sub_41636
+                bsr.w   AdvanceRiderDrivenSozSwingAngle
 
 loc_41562:
                 cmp.b   $36(a0),d0
@@ -165,11 +165,11 @@ loc_41630:
 
 locret_41634:
                 rts
-; End of function sub_4154C
+; End of function PositionSozSwingPlatformAndChain
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_41636:
+AdvanceRiderDrivenSozSwingAngle:
                 tst.w   $34(a0)
                 beq.s   loc_4164C
                 btst    #3,status(a0)
@@ -222,7 +222,7 @@ loc_416B2:
 loc_416C0:
                 move.b  angle(a0),d0
                 rts
-; End of function sub_41636
+; End of function AdvanceRiderDrivenSozSwingAngle
 
 ; ---------------------------------------------------------------------------
 Map_SOZSwingingPlatform:

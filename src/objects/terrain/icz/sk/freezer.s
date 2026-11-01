@@ -46,7 +46,7 @@ loc_8A6AA:
                 subq.w  #1,$2E(a0)
                 bpl.s   loc_8A6C2
                 move.w  #1,$2E(a0)
-                bsr.w   sub_8A708
+                bsr.w   SpawnIczFreezerFrostPuff
 
 loc_8A6C2:
                 jmp     Sprite_CheckDeleteTouch(pc)
@@ -83,7 +83,7 @@ loc_8A704:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8A708:
+SpawnIczFreezerFrostPuff:
                 lea     ChildObjDat_8AAC2(pc),a2
                 btst    #1,render_flags(a0)
                 beq.s   loc_8A718
@@ -91,7 +91,7 @@ sub_8A708:
 
 loc_8A718:
                 jmp     CreateChild1_Normal(pc)
-; End of function sub_8A708
+; End of function SpawnIczFreezerFrostPuff
 
 ; ---------------------------------------------------------------------------
 
@@ -105,7 +105,7 @@ locret_8A72A:
 ; ---------------------------------------------------------------------------
 
 loc_8A72C:
-                bsr.w   sub_8A916
+                bsr.w   AdvanceIczFreezerPuffEnvelopeAndJitter
                 jsr     Refresh_ChildPosition(pc)
                 subq.b  #1,$3A(a0)
                 bpl.w   locret_8A72A
@@ -139,7 +139,7 @@ loc_8A778:
                 btst    #1,$38(a1)
                 beq.s   loc_8A78C
                 lea     word_8AA30(pc),a1
-                bra.w   sub_8A9C6
+                bra.w   CapturePlayersInsideIczFreezerZone
 ; ---------------------------------------------------------------------------
 
 loc_8A78C:
@@ -152,7 +152,7 @@ loc_8A78C:
 loc_8A7A2:
                 jsr     Obj_Wait(pc)
                 lea     word_8AA30(pc),a1
-                bra.w   sub_8A9C6
+                bra.w   CapturePlayersInsideIczFreezerZone
 ; ---------------------------------------------------------------------------
 
 loc_8A7AE:
@@ -229,7 +229,7 @@ loc_8A870:
                 move.w  d1,y_pos(a1)
                 subq.w  #1,$2E(a0)
                 bmi.s   loc_8A88A
-                bsr.w   sub_8AA38
+                bsr.w   TryRescueIczFrozenPlayerWithPartner
                 bne.s   loc_8A8BA
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -281,7 +281,7 @@ loc_8A902:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8A916:
+AdvanceIczFreezerPuffEnvelopeAndJitter:
                 subq.w  #1,$2E(a0)
                 bpl.s   locret_8A96E
                 move.w  #2,$2E(a0)
@@ -320,7 +320,7 @@ loc_8A970:
                 jsr     (Delete_Current_Sprite).l
                 addq.w  #4,sp
                 rts
-; End of function sub_8A916
+; End of function AdvanceIczFreezerPuffEnvelopeAndJitter
 
 ; ---------------------------------------------------------------------------
 byte_8A97A:
@@ -365,25 +365,25 @@ byte_8A97A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8A9C6:
+CapturePlayersInsideIczFreezerZone:
                 jsr     Check_PlayerInRange(pc)
                 tst.l   d0
                 beq.s   locret_8AA2E
                 tst.w   d0
                 beq.s   loc_8A9D8
                 movea.w d0,a4
-                bsr.w   sub_8A9E0
+                bsr.w   FreezeEligiblePlayerInIczShell
 
 loc_8A9D8:
                 swap    d0
                 tst.w   d0
                 beq.s   locret_8AA2E
                 movea.w d0,a4
-; End of function sub_8A9C6
+; End of function CapturePlayersInsideIczFreezerZone
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8A9E0:
+FreezeEligiblePlayerInIczShell:
                 tst.b   object_control(a4)
                 bne.s   locret_8AA2E
                 btst    #Status_Invincible,status_secondary(a4)
@@ -407,7 +407,7 @@ sub_8A9E0:
 
 locret_8AA2E:
                 rts
-; End of function sub_8A9E0
+; End of function FreezeEligiblePlayerInIczShell
 
 ; ---------------------------------------------------------------------------
 word_8AA30:
@@ -415,7 +415,7 @@ word_8AA30:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8AA38:
+TryRescueIczFrozenPlayerWithPartner:
                 lea     (Player_1).w,a3
                 cmpa.w  $44(a0),a3
                 bne.s   loc_8AA46
@@ -459,7 +459,7 @@ locret_8AA88:
 loc_8AA8A:
                 moveq   #0,d0
                 rts
-; End of function sub_8AA38
+; End of function TryRescueIczFrozenPlayerWithPartner
 
 ; ---------------------------------------------------------------------------
 word_8AA8E:

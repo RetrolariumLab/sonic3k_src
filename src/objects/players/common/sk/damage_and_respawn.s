@@ -28,15 +28,15 @@ loc_122F2:
                 and.w   d0,y_pos(a0)
 
 loc_12302:
-                bsr.w   sub_12318
+                bsr.w   PlayerSKResolveCommonHurtLandingOrDeathPlane
                 bsr.w   Player_LevelBound
                 bsr.w   Sonic_RecordPos
-                bsr.w   sub_125E0
+                bsr.w   PlayerSKAnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_12318:
+PlayerSKResolveCommonHurtLandingOrDeathPlane:
                 tst.b   (Disable_death_plane).w
                 bne.s   loc_12344
                 tst.b   (Reverse_gravity_flag).w
@@ -78,7 +78,7 @@ locret_12388:
 
 loc_1238A:
                 jmp     (Kill_Character).l
-; End of function sub_12318
+; End of function PlayerSKResolveCommonHurtLandingOrDeathPlane
 
 ; ---------------------------------------------------------------------------
 
@@ -93,15 +93,15 @@ loc_12390:
 ; ---------------------------------------------------------------------------
 
 loc_123AA:
-                bsr.w   sub_123C2
+                bsr.w   PlayerSKFinishDeathWithFollowerResetRestartOrCompetitionRespawn
                 jsr     (MoveSprite_TestGravity).l
                 bsr.w   Sonic_RecordPos
-                bsr.w   sub_125E0
+                bsr.w   PlayerSKAnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_123C2:
+PlayerSKFinishDeathWithFollowerResetRestartOrCompetitionRespawn:
                 cmpa.w  #Player_1,a0
                 bne.s   loc_123D4
                 move.w  (Camera_Y_pos).w,d0
@@ -141,7 +141,7 @@ loc_12410:
                 cmpi.w  #2,(Player_mode).w
                 beq.s   loc_12432
                 move.b  #2,routine(a0)
-                bra.w   sub_13ECA
+                bra.w   TailsSKResetCPUFollowerToOffscreenCatchUp
 ; ---------------------------------------------------------------------------
 
 loc_12432:
@@ -228,7 +228,7 @@ loc_1252A:
                 move.w  (a1)+,Acceleration-Max_speed(a4)
                 move.w  (a1)+,Deceleration-Max_speed(a4)
                 rts
-; End of function sub_123C2
+; End of function PlayerSKFinishDeathWithFollowerResetRestartOrCompetitionRespawn
 
 ; ---------------------------------------------------------------------------
 
@@ -251,7 +251,7 @@ loc_12590:
                 move.b  #2,routine(a0)
 
 loc_125A2:
-                bsr.w   sub_125E0
+                bsr.w   PlayerSKAnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -269,12 +269,12 @@ loc_125C6:
                 jsr     (MoveSprite_TestGravity2).l
                 addi.w  #$10,y_vel(a0)
                 bsr.w   Sonic_RecordPos
-                bsr.w   sub_125E0
+                bsr.w   PlayerSKAnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_125E0:
+PlayerSKAnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns:
                 tst.w   (Competition_mode).w
                 bne.s   loc_125F8
                 bsr.s   Animate_Sonic
@@ -289,4 +289,4 @@ loc_125F4:
 loc_125F8:
                 bsr.w   Animate_SonicKnuckles_2P
                 bra.w   SonicKnuckles2P_Load_PLC
-; End of function sub_125E0
+; End of function PlayerSKAnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns

@@ -77,7 +77,7 @@ loc_47180:
                 ori.b   #$48,$38(a0)
                 move.l  #loc_471E2,$34(a0)
                 clr.b   collision_flags(a0)
-                bsr.w   sub_47AEA
+                bsr.w   ResetAIZBossHitFlashPalette
                 bclr    #0,render_flags(a0)
                 cmpi.w  #8,angle(a0)
                 bhs.s   loc_471B8
@@ -113,7 +113,7 @@ loc_471E2:
 loc_4720C:
                 lea     byte_47C09(pc),a1
                 jsr     (Animate_RawNoSSTMultiDelay).l
-                bra.w   sub_47A20
+                bra.w   HandleAIZBossHitFlashOrDefeat
 ; ---------------------------------------------------------------------------
 
 loc_4721A:
@@ -134,7 +134,7 @@ loc_47248:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 jsr     (Obj_Wait).l
-                bra.w   sub_47A20
+                bra.w   HandleAIZBossHitFlashOrDefeat
 ; ---------------------------------------------------------------------------
 
 loc_4725E:
@@ -169,7 +169,7 @@ loc_472AE:
 ; ---------------------------------------------------------------------------
 
 loc_472C2:
-                bsr.w   sub_47A20
+                bsr.w   HandleAIZBossHitFlashOrDefeat
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
@@ -179,7 +179,7 @@ loc_472CC:
                 jsr     (Play_SFX).l
                 move.l  #loc_472FC,$34(a0)
                 clr.b   collision_flags(a0)
-                bsr.w   sub_47AEA
+                bsr.w   ResetAIZBossHitFlashPalette
                 lea     ChildObjDat_47B84(pc),a2
                 jsr     (CreateChild1_Normal).l
                 move.b  #2,subtype(a1)

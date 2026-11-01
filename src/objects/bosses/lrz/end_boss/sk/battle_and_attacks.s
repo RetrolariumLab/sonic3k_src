@@ -41,7 +41,7 @@ loc_797FA:
                 move.b  routine(a0),d0
                 move.w  off_79812(pc,d0.w),d1
                 jsr     off_79812(pc,d1.w)
-                bsr.w   sub_79F58
+                bsr.w   ConsumeLRZEndBossSelfHitLatchAndHandleDefeat
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 off_79812:
@@ -105,7 +105,7 @@ locret_798B6:
 
 loc_798B8:
                 addq.w  #1,(_unkFA84).w
-                bsr.w   sub_79F30
+                bsr.w   MatchLRZLavaRiderHeightFromWorldXSample
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
@@ -134,7 +134,7 @@ loc_798FA:
 ; ---------------------------------------------------------------------------
 
 loc_7990A:
-                bsr.w   sub_79F30
+                bsr.w   MatchLRZLavaRiderHeightFromWorldXSample
                 tst.w   (Events_bg+$0A).w
                 bne.w   locret_797F8
                 move.b  #8,routine(a0)
@@ -249,7 +249,7 @@ loc_79A54:
 
 loc_79A68:
                 move.w  d0,x_pos(a0)
-                bsr.w   sub_79A8E
+                bsr.w   SpawnLRZEndBossStreamPlatformAndRememberSlot
 
 loc_79A70:
                 tst.b   (_unkFAA3).w
@@ -266,7 +266,7 @@ loc_79A86:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_79A8E:
+SpawnLRZEndBossStreamPlatformAndRememberSlot:
                 jsr     (AllocateObject).l
                 bne.s   locret_79AA6
                 move.l  #loc_79E5A,(a1)
@@ -275,7 +275,7 @@ sub_79A8E:
 
 locret_79AA6:
                 rts
-; End of function sub_79A8E
+; End of function SpawnLRZEndBossStreamPlatformAndRememberSlot
 
 ; ---------------------------------------------------------------------------
 
@@ -290,7 +290,7 @@ loc_79AAE:
                 move.w  #-$800,y_vel(a0)
 
 loc_79AC4:
-                bsr.w   sub_79EB6
+                bsr.w   DeleteLRZEndBossProjectileOnParentDeathAndAbortUpdate
                 tst.w   y_vel(a0)
                 bmi.s   loc_79B02
                 move.l  #loc_79B22,(a0)
@@ -323,7 +323,7 @@ loc_79B16:
 ; ---------------------------------------------------------------------------
 
 loc_79B22:
-                bsr.w   sub_79EB6
+                bsr.w   DeleteLRZEndBossProjectileOnParentDeathAndAbortUpdate
                 jsr     (MoveSprite_LightGravity).l
                 movea.w $44(a0),a1
                 moveq   #0,d0
@@ -341,16 +341,16 @@ loc_79B4A:
                 clr.w   y_vel(a0)
 
 loc_79B54:
-                bsr.w   sub_79EB6
+                bsr.w   DeleteLRZEndBossProjectileOnParentDeathAndAbortUpdate
                 tst.b   (_unkFAA3).w
                 bne.s   loc_79B66
                 tst.b   render_flags(a0)
                 bpl.w   loc_79AA8
 
 loc_79B66:
-                bsr.w   sub_79F14
+                bsr.w   SetLRZLavaRiderHorizontalStreamVelocity
                 jsr     (MoveSprite2).l
-                bsr.w   sub_79F30
+                bsr.w   MatchLRZLavaRiderHeightFromWorldXSample
                 bsr.w   loc_79EC4
                 jmp     (Sprite_CheckDeleteTouch).l
 ; ---------------------------------------------------------------------------

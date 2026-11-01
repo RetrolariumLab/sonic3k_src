@@ -11,7 +11,7 @@ AnimateTiles_NULL3:
 Animate_Init:
                 cmpi.w  #$100,(Current_zone_and_act).w
                 bne.s   loc_278C4
-                bsr.w   sub_26D0E
+                bsr.w   AniHCZ1_InitWaterlineTiles
 
 loc_278C4:
                 cmpi.w  #$101,(Current_zone_and_act).w
@@ -39,7 +39,7 @@ loc_27910:
 loc_2791E:
                 cmpi.w  #$601,(Current_zone_and_act).w
                 bne.s   loc_27930
-                bsr.w   sub_273B4
+                bsr.w   AniLBZ2_InitWaterlineTiles
                 move.b  #$10,(Anim_Counters+1).w
 
 loc_27930:

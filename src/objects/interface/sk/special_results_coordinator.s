@@ -43,7 +43,7 @@ loc_2E3DA:
                 lea     next_object(a0),a1
                 lea     ObjDat2_2E834(pc),a2
                 moveq   #$13-1,d1
-                jsr     sub_2E802(pc)
+                jsr     SpecialResultsSeedContiguousElementsFromTwelveByteRecords(pc)
                 move.w  (Special_stage_ring_count).w,d0
                 mulu.w  #10,d0
                 move.w  d0,(Ring_bonus_countdown).w
@@ -217,7 +217,7 @@ loc_2E5C0:
                 lea     (Dynamic_object_RAM+(object_size*44)).w,a1
                 lea     ObjDat2_2E918(pc),a2
                 moveq   #6-1,d1
-                jsr     sub_2E802(pc)
+                jsr     SpecialResultsSeedContiguousElementsFromTwelveByteRecords(pc)
                 move.w  #4*60,$2E(a0)
                 addq.b  #2,routine(a0)
 
@@ -243,7 +243,7 @@ loc_2E5F4:
                 lea     (Dynamic_object_RAM+(object_size*44)).w,a1
                 lea     ObjDat2_2E960(pc),a2
                 moveq   #3-1,d1
-                jsr     sub_2E802(pc)
+                jsr     SpecialResultsSeedContiguousElementsFromTwelveByteRecords(pc)
                 move.w  #4*60,$2E(a0)
                 move.b  #$A,routine(a0)
 
@@ -431,14 +431,14 @@ loc_2E7E6:
                 lea     (Dynamic_object_RAM+(object_size*61)).w,a1
                 lea     ObjDat2_2E984(pc),a2
                 moveq   #7-1,d1
-                jsr     sub_2E802(pc)
+                jsr     SpecialResultsSeedContiguousElementsFromTwelveByteRecords(pc)
                 move.w  #6*60,$2E(a0)
                 move.b  #$A,routine(a0)
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2E802:
+SpecialResultsSeedContiguousElementsFromTwelveByteRecords:
                 move.l  (a2)+,(a1)
                 move.w  (a2)+,$46(a1)
                 move.w  (a2)+,x_pos(a1)
@@ -449,6 +449,6 @@ sub_2E802:
                 move.l  #Map_Results,mappings(a1)
                 move.w  a0,parent2(a1)
                 lea     next_object(a1),a1
-                dbf     d1,sub_2E802
+                dbf     d1,SpecialResultsSeedContiguousElementsFromTwelveByteRecords
                 rts
-; End of function sub_2E802
+; End of function SpecialResultsSeedContiguousElementsFromTwelveByteRecords

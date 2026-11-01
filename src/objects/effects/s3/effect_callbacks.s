@@ -26,7 +26,7 @@ loc_542CA:
                 moveq   #$40-1,d0
 
 loc_542DE:
-                bsr.w   sub_542F0
+                bsr.w   EffectColorS3RaiseOneColorTowardWhite
                 dbf     d0,loc_542DE
                 subq.b  #1,$39(a0)
                 bmi.w   Go_Delete_Sprite
@@ -34,7 +34,7 @@ loc_542DE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_542F0:
+EffectColorS3RaiseOneColorTowardWhite:
                 moveq   #$E,d2
                 move.b  (a1),d3
                 and.b   d2,d3
@@ -62,7 +62,7 @@ loc_5431C:
                 or.b    d3,d4
                 move.b  d4,(a1)+
                 rts
-; End of function sub_542F0
+; End of function EffectColorS3RaiseOneColorTowardWhite
 
 ; ---------------------------------------------------------------------------
 
@@ -80,7 +80,7 @@ loc_54334:
                 moveq   #$40-1,d0
 
 loc_5434C:
-                bsr.w   sub_5435E
+                bsr.w   EffectColorS3LowerOneColorTowardTarget
                 dbf     d0,loc_5434C
                 subq.b  #1,$39(a0)
                 bmi.w   Go_Delete_Sprite
@@ -88,7 +88,7 @@ loc_5434C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5435E:
+EffectColorS3LowerOneColorTowardTarget:
                 move.b  (a2)+,d2
                 andi.b  #$E,d2
                 move.b  (a1),d3
@@ -120,4 +120,4 @@ loc_54396:
                 or.b    d4,d5
                 move.b  d5,(a1)+
                 rts
-; End of function sub_5435E
+; End of function EffectColorS3LowerOneColorTowardTarget

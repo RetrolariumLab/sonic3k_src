@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5FC8E:
+EndingPrepareSuperSonicVisualState:
                 clr.b   (Player_1+anim).w
                 move.w  #$24,(Palette_frame).w
                 move.b  #1,(Super_Sonic_Knux_flag).w
@@ -14,32 +14,32 @@ loc_5FC9E:
                 move.b  #0,(Palette_timer).w
                 move.l  #Map_SuperSonic,(Player_1+mappings).w
                 rts
-; End of function sub_5FC8E
+; End of function EndingPrepareSuperSonicVisualState
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5FCB4:
+EndingPrepareSuperTailsPaletteState:
                 move.b  #-1,(Super_palette_status).w
                 move.w  #0,(Palette_frame).w
                 move.b  #0,(Palette_frame_Tails).w
                 move.b  #1,(Super_Tails_flag).w
                 rts
-; End of function sub_5FCB4
+; End of function EndingPrepareSuperTailsPaletteState
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5FCCE:
+EndingAndDDZPrepareHyperSonicVisualState:
                 move.b  #-1,(Super_Sonic_Knux_flag).w
                 move.w  #0,(Palette_frame).w
                 bra.s   loc_5FC9E
-; End of function sub_5FCCE
+; End of function EndingAndDDZPrepareHyperSonicVisualState
 
 ; ---------------------------------------------------------------------------
 
 loc_5FCDC:
                 move.l  #loc_5FCEC,(a0)
                 lea     PalSPtr_EndingSuperTails(pc),a1
-                jsr     (sub_7C678).l
+                jsr     (InstallSingleGlobalPaletteRotationScript).l
 
 loc_5FCEC:
                 btst    #3,(_unkFAB8).w
@@ -105,13 +105,13 @@ loc_5FD82:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5FD88:
+EndingSetP1PoseFrameByPlayerModeAndLoadArt:
                 lea     (Player_1).w,a1
                 move.w  (Player_mode).w,d0
                 andi.w  #3,d0
                 move.b  byte_5FDA0(pc,d0.w),mapping_frame(a1)
                 jmp     (Player_Load_PLC).l
-; End of function sub_5FD88
+; End of function EndingSetP1PoseFrameByPlayerModeAndLoadArt
 
 ; ---------------------------------------------------------------------------
 byte_5FDA0:
@@ -123,7 +123,7 @@ byte_5FDA0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5FDA4:
+EndingSpawnLineTwoPaletteFadeAndStoreHandle:
                 jsr     (AllocateObject).l
                 bne.s   locret_5FDD2
                 move.w  a1,$44(a0)
@@ -137,7 +137,7 @@ sub_5FDA4:
 
 locret_5FDD2:
                 rts
-; End of function sub_5FDA4
+; End of function EndingSpawnLineTwoPaletteFadeAndStoreHandle
 
 ; ---------------------------------------------------------------------------
 

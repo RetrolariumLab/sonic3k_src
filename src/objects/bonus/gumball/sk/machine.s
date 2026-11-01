@@ -28,7 +28,7 @@ loc_60CA8:
                 jsr     (CreateChild1_Normal).l
 
 loc_60CB8:
-                bsr.w   sub_6126C
+                bsr.w   GumballSKRecomputeDropTargetFromLeadingEmptyBumperPairsAndDescend
                 lea     word_60D16(pc),a1
                 jsr     (Check_PlayerInRange).l
                 tst.w   d0
@@ -67,7 +67,7 @@ word_60D16:
 ; ---------------------------------------------------------------------------
 
 loc_60D1E:
-                bsr.w   sub_6126C
+                bsr.w   GumballSKRecomputeDropTargetFromLeadingEmptyBumperPairsAndDescend
                 lea     byte_61450(pc),a1
                 jsr     (Animate_RawNoSST).l
                 jmp     (Draw_Sprite).l
@@ -80,7 +80,7 @@ loc_60D32:
 ; ---------------------------------------------------------------------------
 
 loc_60D40:
-                bsr.w   sub_6126C
+                bsr.w   GumballSKRecomputeDropTargetFromLeadingEmptyBumperPairsAndDescend
                 btst    #1,$38(a0)
                 bne.s   loc_60D52
                 move.l  #loc_60CB8,(a0)
@@ -102,7 +102,7 @@ loc_60D7E:
                 btst    #1,$38(a0)
                 bne.s   loc_60D96
                 lea     (SolidObjectFull).l,a1
-                bsr.w   sub_61314
+                bsr.w   GumballSKCallPlatformSolidRoutineWithFixedDimensions
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -131,7 +131,7 @@ loc_60DAC:
                 btst    #p1_standing_bit,status(a0)
                 beq.s   loc_60DFC
                 bset    #5,$38(a0)
-                jsr     (sub_22F98).l
+                jsr     (LaunchPlayerFromUpSpring).l
 
 loc_60DFC:
                 movem.l (sp)+,d1-d4
@@ -140,7 +140,7 @@ loc_60DFC:
                 jsr     SolidObjectFull2_1P
                 btst    #p2_standing_bit,status(a0)
                 beq.s   loc_60E1A
-                jsr     (sub_22F98).l
+                jsr     (LaunchPlayerFromUpSpring).l
 
 loc_60E1A:
                 lea     (Ani_Spring).l,a1
@@ -199,7 +199,7 @@ loc_60EBA:
                 lea     ObjDat3_613E0(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #loc_60ECE,(a0)
-                bsr.w   sub_612A8
+                bsr.w   GumballSKSelectWeightedDropAndLimitLifeRollPerMachine
 
 loc_60ECE:
                 move.w  y_vel(a0),d0
@@ -222,7 +222,7 @@ loc_60EFC:
                 addi.w  #$10,d0
                 cmp.w   y_pos(a0),d0
                 bhi.s   loc_60F0E
-                jsr     (sub_610E0).l
+                jsr     (GumballSKCheckNearbyPlayersAndDispatchItemReward).l
                 bne.s   loc_60F28
 
 loc_60F0E:

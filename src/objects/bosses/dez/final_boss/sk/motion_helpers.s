@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_80E2C:
+UpdateDEZEscapeShipHitFlashAndDefeatWait:
                 tst.b   collision_flags(a0)
                 bne.s   locret_80EA2
                 move.b  collision_property(a0),d0
@@ -34,7 +34,7 @@ loc_80E70:
                 addi.w  #2*2,d0
 
 loc_80E7E:
-                bsr.w   sub_80ED6
+                bsr.w   CopyDEZEscapeShipThreePaletteWordsAtByteOffset
                 subq.b  #1,$20(a0)
                 bne.s   locret_80EA2
                 bclr    #6,status(a0)
@@ -60,15 +60,15 @@ loc_80ECC:
                 moveq   #100,d0
                 jsr     (HUD_AddToScore).l
                 rts
-; End of function sub_80E2C
+; End of function UpdateDEZEscapeShipHitFlashAndDefeatWait
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_80ED6:
+CopyDEZEscapeShipThreePaletteWordsAtByteOffset:
                 lea     word_80EE2(pc),a1
                 lea     word_80EE8(pc,d0.w),a2
                 jmp     CopyWordData_3(pc)
-; End of function sub_80ED6
+; End of function CopyDEZEscapeShipThreePaletteWordsAtByteOffset
 
 ; ---------------------------------------------------------------------------
 word_80EE2:
@@ -79,7 +79,7 @@ word_80EE8:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_80EF4:
+TrySpawnDEZEscapeFallingDebrisEverySixteenTicks:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #$F,d0
                 bne.s   locret_80F0C
@@ -89,11 +89,11 @@ sub_80EF4:
 
 locret_80F0C:
                 rts
-; End of function sub_80EF4
+; End of function TrySpawnDEZEscapeFallingDebrisEverySixteenTicks
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_80F0E:
+AccelerateDEZEscapeCameraAndLockHorizontalLimits:
                 move.l  (_unkFA84).w,d0
                 addi.l  #$1000,d0
                 cmpi.l  #$40000,d0
@@ -108,11 +108,11 @@ loc_80F24:
                 move.w  d1,(Camera_min_X_pos).w
                 move.w  d1,(Camera_max_X_pos).w
                 rts
-; End of function sub_80F0E
+; End of function AccelerateDEZEscapeCameraAndLockHorizontalLimits
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_80F3A:
+BeginDEZFinalWorldDefeatAndAbortCurrentState:
                 btst    #7,status(a0)
                 beq.s   locret_80F9C
                 move.l  #loc_80102,(a0)
@@ -142,7 +142,7 @@ loc_80F90:
 
 locret_80F9C:
                 rts
-; End of function sub_80F3A
+; End of function BeginDEZFinalWorldDefeatAndAbortCurrentState
 
 ; ---------------------------------------------------------------------------
 PLC_DEZ3_Boss:  plrlistheader
@@ -151,7 +151,7 @@ PLC_DEZ3_Boss_End:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_80FA6:
+HurtPlayersInsideDEZFinalBeamActiveFrame:
                 cmpi.b  #$1E,mapping_frame(a0)
                 bne.s   locret_80FF0
                 lea     word_80FF2(pc),a1
@@ -182,7 +182,7 @@ loc_80FD6:
 
 locret_80FF0:
                 rts
-; End of function sub_80FA6
+; End of function HurtPlayersInsideDEZFinalBeamActiveFrame
 
 ; ---------------------------------------------------------------------------
 word_80FF2:
@@ -190,7 +190,7 @@ word_80FF2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_80FFA:
+TrySpawnDEZFinalChargeParticleEveryFourTicks:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #3,d0
                 bne.s   locret_8100C
@@ -199,22 +199,22 @@ sub_80FFA:
 
 locret_8100C:
                 rts
-; End of function sub_80FFA
+; End of function TrySpawnDEZFinalChargeParticleEveryFourTicks
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8100E:
+LockDEZFinalCameraBoundsAheadOfWorldAndNudgeCamera:
                 move.w  x_pos(a0),d0
                 addi.w  #$40,d0
                 move.w  d0,(Camera_min_X_pos).w
                 move.w  d0,(Camera_max_X_pos).w
                 addq.w  #1,(Camera_X_pos).w
                 rts
-; End of function sub_8100E
+; End of function LockDEZFinalCameraBoundsAheadOfWorldAndNudgeCamera
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_81024:
+PositionDEZFinalChildFromParentWordOffsets:
                 movea.w parent3(a0),a1
                 move.w  $42(a0),d0
                 move.w  x_pos(a1),d1
@@ -225,11 +225,11 @@ sub_81024:
                 add.w   d0,d1
                 move.w  d1,y_pos(a0)
                 rts
-; End of function sub_81024
+; End of function PositionDEZFinalChildFromParentWordOffsets
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_81046:
+TrySpawnDEZFinalFireballOnEnabledInterval:
                 btst    #2,$38(a0)
                 bne.s   locret_8106C
                 subq.w  #1,$1C(a0)
@@ -242,11 +242,11 @@ sub_81046:
 
 locret_8106C:
                 rts
-; End of function sub_81046
+; End of function TrySpawnDEZFinalFireballOnEnabledInterval
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8106E:
+CloneDEZPrimaryFireballIntoAnimatedFlameSegment:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.s   locret_8109E
                 move.l  #loc_80A3A,(a1)
@@ -259,7 +259,7 @@ sub_8106E:
 
 locret_8109E:
                 rts
-; End of function sub_8106E
+; End of function CloneDEZPrimaryFireballIntoAnimatedFlameSegment
 
 ; ---------------------------------------------------------------------------
 
@@ -281,12 +281,12 @@ loc_810D0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_810D6:
+ContinueDEZArmSegmentFlashOrSharedDestruction:
                 move.b  collision_property(a0),d0
                 beq.s   loc_81140
                 tst.b   $20(a0)
                 beq.s   locret_810F8
-                bsr.w   sub_8117A
+                bsr.w   SetDEZArmSegmentFlashFrameFromParent
                 subq.b  #1,$20(a0)
                 bne.s   locret_810F8
                 bclr    #6,status(a0)
@@ -294,13 +294,13 @@ sub_810D6:
 
 locret_810F8:
                 rts
-; End of function sub_810D6
+; End of function ContinueDEZArmSegmentFlashOrSharedDestruction
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_810FA:
+RecognizeDEZArmSegmentHitAtImpactFrame:
                 cmpi.b  #4,mapping_frame(a0)
-                bne.s   sub_810D6
+                bne.s   ContinueDEZArmSegmentFlashOrSharedDestruction
                 tst.b   collision_flags(a0)
                 bne.s   locret_8113E
                 move.b  collision_property(a0),d0
@@ -313,7 +313,7 @@ sub_810FA:
                 bset    #6,status(a0)
 
 loc_81128:
-                bsr.w   sub_8117A
+                bsr.w   SetDEZArmSegmentFlashFrameFromParent
                 subq.b  #1,$20(a0)
                 bne.s   locret_8113E
                 bclr    #6,status(a0)
@@ -339,11 +339,11 @@ loc_81168:
                 movea.w parent3(a0),a1
                 bset    d0,$3A(a1)
                 rts
-; End of function sub_810FA
+; End of function RecognizeDEZArmSegmentHitAtImpactFrame
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8117A:
+SetDEZArmSegmentFlashFrameFromParent:
                 movea.w parent3(a0),a1
                 move.b  mapping_frame(a1),d0
                 btst    #0,$20(a0)
@@ -356,11 +356,11 @@ loc_81190:
                 addi.b  #$13,d0
                 move.b  d0,mapping_frame(a0)
                 rts
-; End of function sub_8117A
+; End of function SetDEZArmSegmentFlashFrameFromParent
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8119A:
+UpdateDEZFinalHeadHitFlashBounceAndWorldDefeat:
                 tst.b   collision_flags(a0)
                 bne.s   locret_81204
                 tst.b   collision_property(a0)
@@ -389,7 +389,7 @@ loc_811DA:
                 addi.w  #2*5,d0
 
 loc_811EE:
-                bsr.w   sub_81230
+                bsr.w   CopyDEZFinalHeadFivePaletteWordsAtByteOffset
                 subq.b  #1,$20(a0)
                 bne.s   locret_81204
                 bclr    #6,status(a0)
@@ -410,15 +410,15 @@ loc_81220:
                 movea.w parent3(a0),a1
                 bset    #7,status(a1)
                 jmp     (BossDefeated_StopTimer).l
-; End of function sub_8119A
+; End of function UpdateDEZFinalHeadHitFlashBounceAndWorldDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_81230:
+CopyDEZFinalHeadFivePaletteWordsAtByteOffset:
                 lea     word_8123E(pc),a1
                 lea     word_81248(pc,d0.w),a2
                 jmp     (CopyWordData_5).l
-; End of function sub_81230
+; End of function CopyDEZFinalHeadFivePaletteWordsAtByteOffset
 
 ; ---------------------------------------------------------------------------
 word_8123E:
@@ -429,7 +429,7 @@ word_81248:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8125C:
+ContinueInactiveDEZFinalHeadPaletteFlashOrDefeat:
                 tst.b   collision_property(a0)
                 beq.s   loc_81206
                 tst.b   $20(a0)
@@ -440,11 +440,11 @@ sub_8125C:
                 addi.w  #2*5,d0
 
 loc_81276:
-                bsr.s   sub_81230
+                bsr.s   CopyDEZFinalHeadFivePaletteWordsAtByteOffset
                 subq.b  #1,$20(a0)
                 bne.s   locret_81284
                 bclr    #6,status(a0)
 
 locret_81284:
                 rts
-; End of function sub_8125C
+; End of function ContinueInactiveDEZFinalHeadPaletteFlashOrDefeat

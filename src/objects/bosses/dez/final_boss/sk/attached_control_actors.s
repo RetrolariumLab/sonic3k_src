@@ -43,7 +43,7 @@ loc_804F0:
 loc_80512:
                 tst.b   (_unkFAA9).w
                 bne.s   loc_8051C
-                bra.w   sub_8125C
+                bra.w   ContinueInactiveDEZFinalHeadPaletteFlashOrDefeat
 ; ---------------------------------------------------------------------------
 
 loc_8051C:
@@ -52,8 +52,8 @@ loc_8051C:
 loc_80522:
                 tst.b   (_unkFAA9).w
                 bmi.s   loc_80536
-                bsr.w   sub_8125C
-                bsr.w   sub_81024
+                bsr.w   ContinueInactiveDEZFinalHeadPaletteFlashOrDefeat
+                bsr.w   PositionDEZFinalChildFromParentWordOffsets
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -64,8 +64,8 @@ loc_80536:
 loc_80542:
                 tst.b   (_unkFAA9).w
                 bpl.s   loc_8055C
-                bsr.w   sub_81024
-                bsr.w   sub_8119A
+                bsr.w   PositionDEZFinalChildFromParentWordOffsets
+                bsr.w   UpdateDEZFinalHeadHitFlashBounceAndWorldDefeat
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -76,8 +76,8 @@ loc_8055C:
 loc_80562:
                 tst.b   (_unkFAA9).w
                 beq.s   loc_80576
-                bsr.w   sub_81024
-                bsr.w   sub_8125C
+                bsr.w   PositionDEZFinalChildFromParentWordOffsets
+                bsr.w   ContinueInactiveDEZFinalHeadPaletteFlashOrDefeat
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -89,7 +89,7 @@ loc_80576:
 
 loc_80584:
                 clr.w   (Events_bg+$10).w
-                bsr.w   sub_81024
+                bsr.w   PositionDEZFinalChildFromParentWordOffsets
                 jmp     Child_Draw_Sprite2(pc)
 ; ---------------------------------------------------------------------------
 
@@ -103,7 +103,7 @@ loc_80590:
 loc_805AE:
                 tst.b   collision_flags(a0)
                 beq.s   loc_805C2
-                bsr.w   sub_81024
+                bsr.w   PositionDEZFinalChildFromParentWordOffsets
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     Child_CheckParent(pc)
 ; ---------------------------------------------------------------------------
@@ -156,14 +156,14 @@ loc_80634:
                 move.w  a0,$3A(a1)
 
 loc_80672:
-                bsr.w   sub_81024
+                bsr.w   PositionDEZFinalChildFromParentWordOffsets
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
 loc_8067A:
                 btst    #2,$38(a0)
                 beq.s   loc_8068A
-                bsr.w   sub_81024
+                bsr.w   PositionDEZFinalChildFromParentWordOffsets
                 jmp     Child_CheckParent(pc)
 ; ---------------------------------------------------------------------------
 
@@ -188,5 +188,5 @@ loc_806A6:
                 jsr     (Go_Delete_Sprite).l
 
 loc_806D2:
-                bsr.w   sub_81024
+                bsr.w   PositionDEZFinalChildFromParentWordOffsets
                 jmp     Child_Draw_Sprite(pc)

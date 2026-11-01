@@ -28,7 +28,7 @@ loc_245FC:
                 move.l  #loc_2461A,(a0)
 
 loc_2461A:
-                bsr.s   sub_24666
+                bsr.s   MoveHczSnakeBlockAlongSquare
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -57,7 +57,7 @@ loc_24660:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_24666:
+MoveHczSnakeBlockAlongSquare:
                 move.b  $40(a0),d0
                 bpl.s   loc_24690
                 add.b   d0,angle(a0)
@@ -130,4 +130,4 @@ loc_24706:
                 add.w   $30(a0),d2
                 move.w  d2,x_pos(a0)
                 rts
-; End of function sub_24666
+; End of function MoveHczSnakeBlockAlongSquare

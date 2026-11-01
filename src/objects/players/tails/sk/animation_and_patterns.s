@@ -33,7 +33,7 @@ loc_1588A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_158B0:
+TailsSKStepNormalAnimationFrameBytecode:
                 moveq   #0,d1
                 move.b  anim_frame(a0),d1
                 move.b  1(a1,d1.w),d0
@@ -73,7 +73,7 @@ loc_158EE:
 
 locret_158F8:
                 rts
-; End of function sub_158B0
+; End of function TailsSKStepNormalAnimationFrameBytecode
 
 ; ---------------------------------------------------------------------------
 
@@ -190,7 +190,7 @@ loc_15A00:
 loc_15A0A:
                 lsr.w   #8,d2
                 move.b  d2,anim_frame_timer(a0)
-                bra.w   sub_158B0
+                bra.w   TailsSKStepNormalAnimationFrameBytecode
 ; ---------------------------------------------------------------------------
 
 loc_15A14:
@@ -209,7 +209,7 @@ loc_15A2C:
                 lsr.w   #6,d2
                 move.b  d2,anim_frame_timer(a0)
                 lea     (AniTails04).l,a1
-                bra.w   sub_158B0
+                bra.w   TailsSKStepNormalAnimationFrameBytecode
 ; ---------------------------------------------------------------------------
 
 loc_15A3C:
@@ -253,7 +253,7 @@ loc_15A92:
                 move.b  d0,d3
                 lea     (AniTails_Tail03).l,a1
                 move.b  #3,anim_frame_timer(a0)
-                bsr.w   sub_158B0
+                bsr.w   TailsSKStepNormalAnimationFrameBytecode
                 add.b   d3,mapping_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------

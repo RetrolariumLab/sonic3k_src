@@ -547,13 +547,13 @@ locret_517D4:
 MGZ2_ModifyChunk:
                 lea     (MGZ2_ChunkReplaceArray).l,a1
                 lea     ((RAM_start+$5880)&$FFFFFF).l,a5
-                bsr.s   sub_517EA
+                bsr.s   WriteNextMgz2QuakeChunkFrame
                 lea     ((RAM_start+$7500)&$FFFFFF).l,a5
 ; End of function MGZ2_ModifyChunk
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_517EA:
+WriteNextMgz2QuakeChunkFrame:
                 lea     (MGZ2_QuakeChunks).l,a4
                 adda.w  (a1,d0.w),a4
                 moveq   #8-1,d1
@@ -567,4 +567,4 @@ loc_517F6:
                 addq.w  #2,d0
                 move.w  d0,(Events_bg+$06).w
                 rts
-; End of function sub_517EA
+; End of function WriteNextMgz2QuakeChunkFrame

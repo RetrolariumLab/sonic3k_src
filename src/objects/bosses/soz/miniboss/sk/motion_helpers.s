@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_770EA:
+SelectSOZMinibossLayerAcrossWorldXBoundary:
                 bset    #7,art_tile(a0)
                 move.w  $3C(a0),d0
                 cmpi.w  #$4200,x_pos(a0)
@@ -15,11 +15,11 @@ sub_770EA:
 loc_77106:
                 move.w  d0,priority(a0)
                 rts
-; End of function sub_770EA
+; End of function SelectSOZMinibossLayerAcrossWorldXBoundary
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7710C:
+SyncSOZMinibossPartFromRootPoseAndSubtype:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  off_7716E(pc,d0.w),d1
@@ -54,7 +54,7 @@ loc_77158:
                 add.w   d3,d1
                 move.w  d1,y_pos(a0)
                 rts
-; End of function sub_7710C
+; End of function SyncSOZMinibossPartFromRootPoseAndSubtype
 
 ; ---------------------------------------------------------------------------
 off_7716E:
@@ -158,7 +158,7 @@ byte_77296:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_772BE:
+ApplySOZMinibossPoseDisplacementFromAnimationCursor:
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 adda.w  d0,a1
@@ -174,7 +174,7 @@ loc_772D4:
                 ext.w   d0
                 add.w   d0,y_pos(a0)
                 rts
-; End of function sub_772BE
+; End of function ApplySOZMinibossPoseDisplacementFromAnimationCursor
 
 ; ---------------------------------------------------------------------------
 byte_772E2:
@@ -192,7 +192,7 @@ byte_772E2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_772F6:
+HandleSOZMinibossArmedKnockbackOrSinkDefeat:
                 cmpi.w  #$A10,y_pos(a0)
                 bhs.s   loc_77364
                 btst    #6,status(a0)
@@ -240,4 +240,4 @@ loc_77364:
 
 locret_773AA:
                 rts
-; End of function sub_772F6
+; End of function HandleSOZMinibossArmedKnockbackOrSinkDefeat

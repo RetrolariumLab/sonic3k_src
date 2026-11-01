@@ -35,11 +35,11 @@ loc_48B16:
                 lea     (Player_1).w,a1
                 move.w  d6,d2
                 move.w  #$14,d3
-                bsr.s   sub_48B40
+                bsr.s   ResetFreePlayerForDezGravitySwitch
                 lea     (Player_2).w,a1
                 move.w  d6,d2
                 move.w  #$28,d3
-                bsr.s   sub_48B40
+                bsr.s   ResetFreePlayerForDezGravitySwitch
                 moveq   #signextendB(sfx_Transporter),d0
                 jsr     (Play_SFX).l
 
@@ -48,7 +48,7 @@ loc_48B3A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_48B40:
+ResetFreePlayerForDezGravitySwitch:
                 tst.b   object_control(a1)
                 bne.s   locret_48B7C
                 moveq   #0,d1
@@ -68,7 +68,7 @@ sub_48B40:
 
 locret_48B7C:
                 rts
-; End of function sub_48B40
+; End of function ResetFreePlayerForDezGravitySwitch
 
 ; ---------------------------------------------------------------------------
 

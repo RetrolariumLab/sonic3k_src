@@ -6,7 +6,7 @@
 
 Obj_LBZFlameThrower:
                 movea.l a0,a1
-                bsr.s   sub_263AA
+                bsr.s   InitializeLbzFlamethrowerVisuals
                 move.l  #loc_263DC,(a0)
 
 loc_263DC:
@@ -17,7 +17,7 @@ loc_263DC:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   loc_2643C
                 move.l  #Obj_AutoSpin460,(a1)
-                bsr.s   sub_263AA
+                bsr.s   InitializeLbzFlamethrowerVisuals
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.b  status(a0),status(a1)

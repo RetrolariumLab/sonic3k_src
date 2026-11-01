@@ -180,7 +180,7 @@ loc_8AEA4:
                 move.l  #loc_8AEB2,(a0)
 
 loc_8AEB2:
-                bsr.w   sub_8B080
+                bsr.w   UpdateIczSwingLedgeCollisionAndRiderImpulse
                 jmp     Child_Draw_Sprite2(pc)
 ; ---------------------------------------------------------------------------
 
@@ -191,7 +191,7 @@ loc_8AEBA:
                 move.l  #loc_8AEB2,(a0)
 
 loc_8AECC:
-                bsr.w   sub_8B054
+                bsr.w   RefreshAndCollideIczSwingMainLedge
                 jmp     Child_Draw_Sprite2(pc)
 ; ---------------------------------------------------------------------------
 
@@ -201,7 +201,7 @@ loc_8AED4:
                 move.l  #loc_8AEE2,(a0)
 
 loc_8AEE2:
-                bsr.w   sub_8B06A
+                bsr.w   RefreshAndCollideIczSwingSideLedge
                 jmp     Child_Draw_Sprite2(pc)
 ; ---------------------------------------------------------------------------
 
@@ -228,8 +228,8 @@ loc_8AF22:
                 move.b  #8,mapping_frame(a0)
 
 loc_8AF32:
-                bsr.w   sub_8B114
-                bsr.w   sub_8AFA2
+                bsr.w   SpawnIczSwingChainDebrisWhenPlatformDetaches
+                bsr.w   BuildIczSwingChainIntermediateSpritePositions
                 jmp     Child_Draw_Sprite2(pc)
 ; ---------------------------------------------------------------------------
 
@@ -282,7 +282,7 @@ loc_8AF9E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8AFA2:
+BuildIczSwingChainIntermediateSpritePositions:
                 movea.w parent3(a0),a1
                 lea     sub2_x_pos(a0),a2
                 move.w  x_pos(a0),d0
@@ -307,7 +307,7 @@ loc_8AFC6:
                 addq.w  #2,d5
                 dbf     d6,loc_8AFC6
                 rts
-; End of function sub_8AFA2
+; End of function BuildIczSwingChainIntermediateSpritePositions
 
 ; ---------------------------------------------------------------------------
 off_8AFE0:
@@ -395,7 +395,7 @@ locret_8B052:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8B054:
+RefreshAndCollideIczSwingMainLedge:
                 move.w  x_pos(a0),-(sp)
                 jsr     Refresh_ChildPosition(pc)
                 moveq   #$2B,d1
@@ -403,11 +403,11 @@ sub_8B054:
                 moveq   #8,d3
                 move.w  (sp)+,d4
                 jmp     (SolidObjectFull).l
-; End of function sub_8B054
+; End of function RefreshAndCollideIczSwingMainLedge
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8B06A:
+RefreshAndCollideIczSwingSideLedge:
                 move.w  x_pos(a0),-(sp)
                 jsr     Refresh_ChildPositionAdjusted(pc)
                 moveq   #$F,d1
@@ -415,13 +415,13 @@ sub_8B06A:
                 moveq   #8,d3
                 move.w  (sp)+,d4
                 jmp     (SolidObjectFull).l
-; End of function sub_8B06A
+; End of function RefreshAndCollideIczSwingSideLedge
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8B080:
+UpdateIczSwingLedgeCollisionAndRiderImpulse:
                 move.b  status(a0),$39(a0)
-                bsr.s   sub_8B054
+                bsr.s   RefreshAndCollideIczSwingMainLedge
                 move.b  $39(a0),d0
                 move.b  status(a0),d1
                 andi.b  #standing_mask,d1
@@ -429,18 +429,18 @@ sub_8B080:
                 movea.w parent3(a0),a2
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d2
-                bsr.w   sub_8B0B0
+                bsr.w   StartIczPlatformSwingFromRiderHorizontalSpeed
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d2
-                bsr.w   sub_8B0B0
+                bsr.w   StartIczPlatformSwingFromRiderHorizontalSpeed
 
 locret_8B0AE:
                 rts
-; End of function sub_8B080
+; End of function UpdateIczSwingLedgeCollisionAndRiderImpulse
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8B0B0:
+StartIczPlatformSwingFromRiderHorizontalSpeed:
                 btst    d2,d1
                 beq.s   locret_8B0AE
                 move.w  x_vel(a1),d3
@@ -487,11 +487,11 @@ loc_8B102:
 
 locret_8B112:
                 rts
-; End of function sub_8B0B0
+; End of function StartIczPlatformSwingFromRiderHorizontalSpeed
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8B114:
+SpawnIczSwingChainDebrisWhenPlatformDetaches:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
                 beq.s   locret_8B112
@@ -500,7 +500,7 @@ sub_8B114:
                 lea     ChildObjDat_8B178(pc),a2
                 jsr     CreateChild6_Simple(pc)
                 jmp     Go_Delete_Sprite_2(pc)
-; End of function sub_8B114
+; End of function SpawnIczSwingChainDebrisWhenPlatformDetaches
 
 ; ---------------------------------------------------------------------------
 ObjDat_ICZSwingingPlatform:

@@ -14,7 +14,7 @@ Obj_SStage_9212:
                 move.w  #-$800,$36(a0)
                 move.w  #-$20,$38(a0)
                 move.b  #$FF,$3A(a0)
-                bsr.w   sub_93E2
+                bsr.w   SStage_ClearTailsInputHistory
                 jsr     (AllocateObjectAfterCurrent_SpecialStage).l
                 bne.w   loc_9274
                 move.l  #Obj_SStage_9444,(a1)
@@ -54,7 +54,7 @@ loc_92A0:
 
 loc_92C4:
                 move.b  (a1,d0.w),mapping_frame(a0)
-                bsr.w   sub_9402
+                bsr.w   SStage_RecordTailsTileHistory
                 cmpi.b  #5,$44(a0)
                 bne.s   loc_9304
                 tst.b   (Special_stage_clear_routine).w
@@ -70,7 +70,7 @@ loc_92C4:
                 jsr     (Play_SFX).l
 
 loc_9304:
-                bsr.w   sub_937C
+                bsr.w   SStage_GetTailsJumpInput
                 andi.w  #button_A_mask|button_B_mask|button_C_mask,d0
                 beq.s   loc_932A
                 tst.b   (Special_stage_jumping_P2).w
@@ -101,7 +101,7 @@ loc_9344:
                 move.w  d0,$36(a0)
 
 loc_935E:
-                bsr.w   sub_953E
+                bsr.w   SStage_ProjectCharacterCoordinates
                 jsr     (Draw_Sprite).l
                 lea     (PLC_SStageTails).l,a2
                 move.l  #ArtUnc_SStageTails,d6
@@ -110,7 +110,7 @@ loc_935E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_937C:
+SStage_GetTailsJumpInput:
                 move.w  (Pos_table_index).w,d0
                 lea     (Pos_table).w,a1
                 lea     (a1,d0.w),a1
@@ -148,11 +148,11 @@ loc_93B6:
 
 locret_93E0:
                 rts
-; End of function sub_937C
+; End of function SStage_GetTailsJumpInput
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_93E2:
+SStage_ClearTailsInputHistory:
                 lea     (Pos_table).w,a2
                 move.w  #bytesToLcnt($100),d0
 
@@ -162,11 +162,11 @@ loc_93EA:
                 move.w  #0,(Pos_table_index).w
                 move.w  #0,(Tails_CPU_idle_timer).w
                 rts
-; End of function sub_93E2
+; End of function SStage_ClearTailsInputHistory
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_9402:
+SStage_RecordTailsTileHistory:
                 lea     (SStage_layout_buffer+$100).w,a1
                 move.w  (Special_stage_X_pos).w,d0
                 addi.w  #$80,d0
@@ -185,4 +185,4 @@ sub_9402:
                 move.b  3(a2),2(a2)
                 move.b  (a1),3(a2)
                 rts
-; End of function sub_9402
+; End of function SStage_RecordTailsTileHistory

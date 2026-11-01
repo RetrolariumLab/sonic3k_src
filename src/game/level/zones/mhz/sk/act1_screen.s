@@ -7,7 +7,7 @@
 MHZ1_ScreenInit:
                 clr.w   (Events_bg+$16).w
                 clr.b   (_unkF7C1).w
-                jsr     sub_54B80(pc)
+                jsr     SelectMhz1CameraLeftLimit(pc)
                 tst.w   (SK_alone_flag).w
                 beq.s   loc_54B18
                 move.b  (Last_star_post_hit).w,d0
@@ -49,7 +49,7 @@ MHZ1_ScreenEvent:
                 bne.s   loc_54B7C
                 tst.w   (Events_bg+$16).w
                 bne.s   loc_54B7C
-                jsr     sub_54B80(pc)
+                jsr     SelectMhz1CameraLeftLimit(pc)
                 move.w  #$AA0,d0
                 cmpi.w  #$4100,(Player_1+x_pos).w
                 blo.s   loc_54B40
@@ -78,7 +78,7 @@ loc_54B7C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54B80:
+SelectMhz1CameraLeftLimit:
                 move.w  #$680,d0
                 tst.w   (SK_alone_flag).w
                 bne.s   loc_54B98
@@ -94,7 +94,7 @@ loc_54B98:
 
 locret_54BA2:
                 rts
-; End of function sub_54B80
+; End of function SelectMhz1CameraLeftLimit
 
 ; ---------------------------------------------------------------------------
 
@@ -129,7 +129,7 @@ MHZ1_BackgroundEvent:
                 moveq   #0,d1
                 sub.w   d0,(Player_1+x_pos).w
                 sub.w   d0,(Player_2+x_pos).w
-                jsr     sub_54CF4(pc)
+                jsr     OffsetMhzActTransitionObjectsAndRetireScenery(pc)
                 sub.w   d0,(Camera_X_pos).w
                 sub.w   d0,(Camera_X_pos_copy).w
                 move.w  (Camera_X_pos_copy).w,(Events_fg_0).w
@@ -214,7 +214,7 @@ loc_54CEE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54CF4:
+OffsetMhzActTransitionObjectsAndRetireScenery:
                 lea     (Dynamic_object_RAM+object_size).w,a1
                 moveq   #((Breathing_bubbles)-(Dynamic_object_RAM+object_size))/object_size-1,d2
 
@@ -239,4 +239,4 @@ loc_54D26:
                 lea     next_object(a1),a1
                 dbf     d2,loc_54CFA
                 rts
-; End of function sub_54CF4
+; End of function OffsetMhzActTransitionObjectsAndRetireScenery

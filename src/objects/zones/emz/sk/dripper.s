@@ -57,9 +57,9 @@ loc_3818E:
                 asr     y_vel(a0)
                 asr     y_vel(a0)
                 move.b  #2,mapping_frame(a0)
-                bsr.s   sub_381F2
-                bsr.s   sub_381F2
-                bsr.s   sub_381F2
+                bsr.s   SpawnEmzDripperSplashDroplet
+                bsr.s   SpawnEmzDripperSplashDroplet
+                bsr.s   SpawnEmzDripperSplashDroplet
 
 loc_381C8:
                 cmpi.w  #-$100,(Camera_min_Y_pos).w
@@ -80,7 +80,7 @@ loc_381EC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_381F2:
+SpawnEmzDripperSplashDroplet:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   locret_38232
                 moveq   #subtype,d0
@@ -103,7 +103,7 @@ loc_381FE:
 
 locret_38232:
                 rts
-; End of function sub_381F2
+; End of function SpawnEmzDripperSplashDroplet
 
 ; ---------------------------------------------------------------------------
 

@@ -62,18 +62,18 @@ loc_45142:
                 lea     (Player_1).w,a1
                 lea     $38(a0),a2
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_45170
+                bsr.s   UpdateSszCloudPlayerCompressionBounceAndSpin
                 lea     (Player_2).w,a1
                 lea     $40(a0),a2
                 moveq   #p2_standing_bit,d6
-                bsr.s   sub_45170
+                bsr.s   UpdateSszCloudPlayerCompressionBounceAndSpin
                 lea     Ani_SSZBouncyCloud(pc),a1
                 jsr     (Animate_Sprite).l
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_45170:
+UpdateSszCloudPlayerCompressionBounceAndSpin:
                 moveq   #$20,d1
                 moveq   #$10,d2
                 moveq   #0,d3
@@ -213,7 +213,7 @@ loc_452D6:
 
 locret_452D8:
                 rts
-; End of function sub_45170
+; End of function UpdateSszCloudPlayerCompressionBounceAndSpin
 
 ; ---------------------------------------------------------------------------
 
@@ -257,16 +257,16 @@ loc_45336:
 loc_4534C:
                 jsr     (MoveSprite2).l
                 lea     x_vel(a0),a1
-                bsr.s   sub_45364
+                bsr.s   DampSszCloudParticleVelocity
                 lea     y_vel(a0),a1
-                bsr.s   sub_45364
+                bsr.s   DampSszCloudParticleVelocity
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_45364:
+DampSszCloudParticleVelocity:
                 move.w  (a1),d0
                 asr.w   #2,d0
                 sub.w   d0,(a1)
                 rts
-; End of function sub_45364
+; End of function DampSszCloudParticleVelocity

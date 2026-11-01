@@ -23,12 +23,12 @@ loc_1754E:
                 bne.s   loc_17580
                 btst    #button_left,(Ctrl_1_held_logical).w
                 beq.s   loc_17574
-                bsr.w   sub_1763A
+                bsr.w   KnucklesSKApplyRollingLeftInput
 
 loc_17574:
                 btst    #button_right,(Ctrl_1_held_logical).w
                 beq.s   loc_17580
-                bsr.w   sub_1765E
+                bsr.w   KnucklesSKApplyRollingRightInput
 
 loc_17580:
                 move.w  ground_vel(a0),d0
@@ -116,7 +116,7 @@ loc_17632:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1763A:
+KnucklesSKApplyRollingLeftInput:
                 move.w  ground_vel(a0),d0
                 beq.s   loc_17642
                 bpl.s   loc_17650
@@ -135,11 +135,11 @@ loc_17650:
 loc_17658:
                 move.w  d0,ground_vel(a0)
                 rts
-; End of function sub_1763A
+; End of function KnucklesSKApplyRollingLeftInput
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1765E:
+KnucklesSKApplyRollingRightInput:
                 move.w  ground_vel(a0),d0
                 bmi.s   loc_17672
                 bclr    #Status_Facing,status(a0)
@@ -155,7 +155,7 @@ loc_17672:
 loc_1767A:
                 move.w  d0,ground_vel(a0)
                 rts
-; End of function sub_1765E
+; End of function KnucklesSKApplyRollingRightInput
 
 ; =============== S U B R O U T I N E =======================================
 

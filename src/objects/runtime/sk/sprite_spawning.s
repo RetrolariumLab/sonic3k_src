@@ -79,7 +79,7 @@ loc_1B720:
 loc_1B742:
                 cmp.w   (a0),d6
                 bls.s   loc_1B74C
-                jsr     sub_1BA0C(pc)
+                jsr     CreateObjectFromLayoutRecord(pc)
                 beq.s   loc_1B742
 
 loc_1B74C:
@@ -387,14 +387,14 @@ loc_1B9FA:
 ; ---------------------------------------------------------------------------
 ; unused
                 bset    #7,(a3)
-                beq.s   sub_1BA0C
+                beq.s   CreateObjectFromLayoutRecord
                 addq.w  #6,a0
                 moveq   #0,d1
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1BA0C:
+CreateObjectFromLayoutRecord:
                 move.w  (a0)+,x_pos(a1)
                 move.w  (a0)+,d1
                 move.w  d1,d2
@@ -510,7 +510,7 @@ loc_1BAE6:
 
 locret_1BAF0:
                 rts
-; End of function sub_1BA0C
+; End of function CreateObjectFromLayoutRecord
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -19,7 +19,7 @@ DEZ3_Boss_Index:
                 dc.w    loc_7FE96-DEZ3_Boss_Index
                 dc.w    loc_7FEE2-DEZ3_Boss_Index
                 dc.w    loc_7FEF6-DEZ3_Boss_Index
-                dc.w    sub_7FF3E-DEZ3_Boss_Index
+                dc.w    StepDEZFinalWorldHalfSineHopAndImpactPhase-DEZ3_Boss_Index
                 dc.w    loc_7FFD2-DEZ3_Boss_Index
                 dc.w    loc_8001C-DEZ3_Boss_Index
                 dc.w    loc_80058-DEZ3_Boss_Index
@@ -50,14 +50,14 @@ loc_7FDE2:
                 lea     (Player_1).w,a1
                 move.w  #$30,x_pos(a1)
                 move.w  #$CD,y_pos(a1)
-                bsr.w   sub_7FE06
+                bsr.w   SetDEZFinalIntroPlayerRunControl
                 lea     (Player_2).w,a1
                 move.w  #$10,x_pos(a1)
                 move.w  #$CD,y_pos(a1)
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7FE06:
+SetDEZFinalIntroPlayerRunControl:
                 move.b  #$81,object_control(a1)
                 move.b  #0,anim(a1)
                 move.w  #$600,x_vel(a1)
@@ -68,12 +68,12 @@ sub_7FE06:
 
 locret_7FE2A:
                 rts
-; End of function sub_7FE06
+; End of function SetDEZFinalIntroPlayerRunControl
 
 ; ---------------------------------------------------------------------------
 
 loc_7FE2C:
-                bsr.w   sub_7FE5C
+                bsr.w   AdvanceBothDEZIntroPlayersSixPixels
                 move.w  (Camera_X_pos).w,d1
                 addi.w  #$98,d1
                 cmp.w   d1,d0
@@ -90,40 +90,40 @@ locret_7FE5A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7FE5C:
+AdvanceBothDEZIntroPlayersSixPixels:
                 lea     (Player_2).w,a1
-                bsr.w   sub_7FE68
+                bsr.w   AdvanceDEZIntroPlayerSixPixels
                 lea     (Player_1).w,a1
-; End of function sub_7FE5C
+; End of function AdvanceBothDEZIntroPlayersSixPixels
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7FE68:
+AdvanceDEZIntroPlayerSixPixels:
                 move.w  x_pos(a1),d0
                 addq.w  #6,d0
                 move.w  d0,x_pos(a1)
                 rts
-; End of function sub_7FE68
+; End of function AdvanceDEZIntroPlayerSixPixels
 
 ; ---------------------------------------------------------------------------
 
 loc_7FE74:
-                bsr.s   sub_7FE5C
+                bsr.s   AdvanceBothDEZIntroPlayersSixPixels
                 cmpi.w  #$360,d0
                 blo.s   locret_7FE94
                 move.b  #6,routine(a0)
-                bsr.w   sub_7FE8A
+                bsr.w   StopDEZIntroPlayerAndSetWaitingAnimation
                 lea     (Player_2).w,a1
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7FE8A:
+StopDEZIntroPlayerAndSetWaitingAnimation:
                 jsr     Stop_Object(pc)
                 move.b  #5,anim(a1)
 
 locret_7FE94:
                 rts
-; End of function sub_7FE8A
+; End of function StopDEZIntroPlayerAndSetWaitingAnimation
 
 ; ---------------------------------------------------------------------------
 
@@ -186,7 +186,7 @@ locret_7FF3C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7FF3E:
+StepDEZFinalWorldHalfSineHopAndImpactPhase:
                 move.w  $40(a0),d0
                 add.w   d0,x_pos(a0)
                 move.b  angle(a0),d0
@@ -211,7 +211,7 @@ loc_7FF6A:
                 moveq   #0,d0
                 move.b  $30(a0),d0
                 jmp     loc_7FF8E(pc,d0.w)
-; End of function sub_7FF3E
+; End of function StepDEZFinalWorldHalfSineHopAndImpactPhase
 
 ; ---------------------------------------------------------------------------
 
@@ -348,17 +348,17 @@ loc_800D0:
 ; ---------------------------------------------------------------------------
 
 loc_800DE:
-                bsr.w   sub_80F3A
-                bsr.w   sub_81046
-                bsr.w   sub_7FF3E
-                bra.w   sub_8100E
+                bsr.w   BeginDEZFinalWorldDefeatAndAbortCurrentState
+                bsr.w   TrySpawnDEZFinalFireballOnEnabledInterval
+                bsr.w   StepDEZFinalWorldHalfSineHopAndImpactPhase
+                bra.w   LockDEZFinalCameraBoundsAheadOfWorldAndNudgeCamera
 ; ---------------------------------------------------------------------------
 
 loc_800EE:
-                bsr.w   sub_80F3A
-                bsr.w   sub_81046
+                bsr.w   BeginDEZFinalWorldDefeatAndAbortCurrentState
+                bsr.w   TrySpawnDEZFinalFireballOnEnabledInterval
                 addq.w  #1,x_pos(a0)
-                bsr.w   sub_8100E
+                bsr.w   LockDEZFinalCameraBoundsAheadOfWorldAndNudgeCamera
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 

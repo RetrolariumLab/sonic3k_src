@@ -38,10 +38,10 @@ loc_4825E:
 Obj_DEZTunnelLauncher_Main:
                 lea     $30(a0),a4
                 lea     (Player_1).w,a1
-                bsr.w   sub_48370
+                bsr.w   CapturePlayerForDezLightTunnel
                 lea     $38(a0),a4
                 lea     (Player_2).w,a1
-                bsr.w   sub_48370
+                bsr.w   CapturePlayerForDezLightTunnel
                 tst.w   $2E(a0)
                 beq.w   loc_48316
                 subq.b  #1,$2E(a0)
@@ -122,7 +122,7 @@ dezTunnel_waypointsLeft:    equ     2
 dezTunnel_angle:            equ     3
 dezTunnel_currentWaypoint:  equ     4
 
-sub_48370:
+CapturePlayerForDezLightTunnel:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addq.w  #8,d0
@@ -175,7 +175,7 @@ loc_48410:
 
 locret_48422:
                 rts
-; End of function sub_48370
+; End of function CapturePlayerForDezLightTunnel
 
 ; ---------------------------------------------------------------------------
 Map_DEZTunnelLauncher:

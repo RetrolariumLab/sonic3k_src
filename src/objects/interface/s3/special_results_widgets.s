@@ -54,7 +54,7 @@ loc_2D76C:
 loc_2D776:
                 tst.w   (Special_stage_spheres_left).w
                 bne.w   loc_2D89E
-                jsr     sub_2D8A4(pc)
+                jsr     SpecialResultsS3SelectCharacterNameOffsetAndFrame(pc)
                 add.w   d0,x_pos(a0)
                 add.w   d0,$46(a0)
                 add.b   d1,mapping_frame(a0)
@@ -72,7 +72,7 @@ loc_2D7A2:
 loc_2D7AC:
                 tst.w   (Special_stage_spheres_left).w
                 bne.w   loc_2D89E
-                jsr     sub_2D8A4(pc)
+                jsr     SpecialResultsS3SelectCharacterNameOffsetAndFrame(pc)
                 sub.w   d0,x_pos(a0)
                 sub.w   d0,$46(a0)
                 cmpi.b  #7,(Chaos_emerald_count+1).w
@@ -105,7 +105,7 @@ loc_2D800:
                 bne.w   loc_2D89E
                 cmpi.b  #7,(Chaos_emerald_count+1).w
                 blo.w   loc_2D89E
-                jsr     sub_2D8A4(pc)
+                jsr     SpecialResultsS3SelectCharacterNameOffsetAndFrame(pc)
                 sub.w   d0,x_pos(a0)
                 sub.w   d0,$46(a0)
                 lea     (loc_2D710).l,a1
@@ -169,7 +169,7 @@ loc_2D89E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2D8A4:
+SpecialResultsS3SelectCharacterNameOffsetAndFrame:
                 moveq   #0,d0
                 moveq   #0,d1
                 cmpi.w  #1,(Player_mode).w
@@ -187,4 +187,4 @@ sub_2D8A4:
 
                 .return:
                 rts
-; End of function sub_2D8A4
+; End of function SpecialResultsS3SelectCharacterNameOffsetAndFrame

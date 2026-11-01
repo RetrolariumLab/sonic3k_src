@@ -54,7 +54,7 @@ loc_8ABB0:
 loc_8ABC2:
                 move.w  (Player_1+x_vel).w,-(sp)
                 move.w  (Player_2+x_vel).w,-(sp)
-                bsr.w   sub_8AC70
+                bsr.w   CollideIczColumnSegmentAsSolidRectangle
                 move.l  (sp)+,d0
                 moveq   #p1_pushing_bit,d1
                 cmpi.b  #3,mapping_frame(a0)
@@ -62,11 +62,11 @@ loc_8ABC2:
                 tst.b   subtype(a0)
                 bne.s   loc_8ABF4
                 lea     (Player_1).w,a1
-                bsr.w   sub_8AC80
+                bsr.w   BreakIczColumnSegmentForFastRollingPlayer
                 lea     (Player_2).w,a1
                 swap    d0
                 addq.b  #p2_pushing_bit-p1_pushing_bit,d1
-                bsr.w   sub_8AC80
+                bsr.w   BreakIczColumnSegmentForFastRollingPlayer
 
 loc_8ABF4:
                 bra.w   loc_8ACCE
@@ -85,7 +85,7 @@ loc_8ABF8:
 ; ---------------------------------------------------------------------------
 
 loc_8AC1E:
-                bsr.w   sub_8AC70
+                bsr.w   CollideIczColumnSegmentAsSolidRectangle
                 jsr     Obj_Wait(pc)
                 bra.w   loc_8ACCE
 ; ---------------------------------------------------------------------------
@@ -99,7 +99,7 @@ loc_8AC2A:
 ; ---------------------------------------------------------------------------
 
 loc_8AC44:
-                bsr.w   sub_8AC70
+                bsr.w   CollideIczColumnSegmentAsSolidRectangle
                 addq.w  #4,y_pos(a0)
                 jsr     Obj_Wait(pc)
                 bra.w   loc_8ACCE
@@ -115,17 +115,17 @@ loc_8AC54:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8AC70:
+CollideIczColumnSegmentAsSolidRectangle:
                 moveq   #$2B,d1
                 moveq   #$10,d2
                 moveq   #$10,d3
                 move.w  x_pos(a0),d4
                 jmp     (SolidObjectFull).l
-; End of function sub_8AC70
+; End of function CollideIczColumnSegmentAsSolidRectangle
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8AC80:
+BreakIczColumnSegmentForFastRollingPlayer:
                 btst    d1,status(a0)
                 beq.s   locret_8ACCC
                 move.w  d0,d3
@@ -153,7 +153,7 @@ loc_8AC8E:
 
 locret_8ACCC:
                 rts
-; End of function sub_8AC80
+; End of function BreakIczColumnSegmentForFastRollingPlayer
 
 ; ---------------------------------------------------------------------------
 

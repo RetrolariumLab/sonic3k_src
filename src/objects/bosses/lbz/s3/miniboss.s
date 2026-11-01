@@ -8,7 +8,7 @@ Obj_LBZMiniboss:
                 move.b  routine(a0),d0
                 move.w  LBZMiniboss_Index(pc,d0.w),d1
                 jsr     LBZMiniboss_Index(pc,d1.w)
-                bsr.w   sub_4F84C
+                bsr.w   HandleLBZMinibossHitRiseArmLossOrDefeat
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 LBZMiniboss_Index:
@@ -228,7 +228,7 @@ loc_4F682:
 
 loc_4F68E:
                 move.b  #4,routine(a0)
-                bsr.w   sub_4F818
+                bsr.w   SetLBZMinibossArmActivationDelay
                 move.l  #loc_4F6CA,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
@@ -249,7 +249,7 @@ loc_4F6C0:
 ; ---------------------------------------------------------------------------
 
 loc_4F6CA:
-                bsr.w   sub_4F832
+                bsr.w   SetLBZMinibossArmRotationDelay
                 move.l  #loc_4F73A,$34(a0)
                 tst.b   subtype(a0)
                 beq.s   loc_4F6F4
@@ -369,12 +369,12 @@ byte_4F812:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4F818:
+SetLBZMinibossArmActivationDelay:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  word_4F826(pc,d0.w),$2E(a0)
                 rts
-; End of function sub_4F818
+; End of function SetLBZMinibossArmActivationDelay
 
 ; ---------------------------------------------------------------------------
 word_4F826:
@@ -387,12 +387,12 @@ word_4F826:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4F832:
+SetLBZMinibossArmRotationDelay:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  word_4F840(pc,d0.w),$2E(a0)
                 rts
-; End of function sub_4F832
+; End of function SetLBZMinibossArmRotationDelay
 
 ; ---------------------------------------------------------------------------
 word_4F840:
@@ -404,7 +404,7 @@ word_4F840:
                 dc.w    3
 ; ---------------------------------------------------------------------------
 
-sub_4F84C:
+HandleLBZMinibossHitRiseArmLossOrDefeat:
                 tst.b   collision_flags(a0)
                 bne.s   locret_4F8A2
                 tst.b   collision_property(a0)
@@ -462,7 +462,7 @@ loc_4F8E0:
                 bset    #7,status(a1)
 
 loc_4F8EE:
-                bsr.w   sub_4F902
+                bsr.w   DetachLBZMinibossArmSegmentWithGravity
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
@@ -473,7 +473,7 @@ loc_4F8F6:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4F902:
+DetachLBZMinibossArmSegmentWithGravity:
                 move.l  #loc_4F7AE,(a0)
                 clr.b   collision_flags(a0)
                 move.w  #$80,$2E(a0)
@@ -485,7 +485,7 @@ sub_4F902:
                 move.w  (a1)+,x_vel(a0)
                 move.w  (a1)+,y_vel(a0)
                 rts
-; End of function sub_4F902
+; End of function DetachLBZMinibossArmSegmentWithGravity
 
 ; ---------------------------------------------------------------------------
 word_4F930:

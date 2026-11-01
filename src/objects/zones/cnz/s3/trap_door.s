@@ -14,9 +14,9 @@ Obj_CNZTrapDoor:
 
 loc_30D5C:
                 lea     (Player_1).w,a1
-                bsr.s   sub_30D8C
+                bsr.s   TriggerCnzTrapDoorFromBelow
                 lea     (Player_2).w,a1
-                bsr.s   sub_30D8C
+                bsr.s   TriggerCnzTrapDoorFromBelow
                 move.w  #$20,d1
                 move.w  #9,d3
                 move.w  x_pos(a0),d4
@@ -27,7 +27,7 @@ loc_30D5C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_30D8C:
+TriggerCnzTrapDoorFromBelow:
                 move.w  x_pos(a0),d0
                 sub.w   x_pos(a1),d0
                 addi.w  #$20,d0
@@ -44,7 +44,7 @@ sub_30D8C:
 
 locret_30DBE:
                 rts
-; End of function sub_30D8C
+; End of function TriggerCnzTrapDoorFromBelow
 
 ; ---------------------------------------------------------------------------
 Ani_CNZTrapDoor:

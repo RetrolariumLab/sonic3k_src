@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_75B6E:
+SyncMHZMinibossFrameCollisionProxy:
                 movea.w parent3(a0),a1
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
@@ -28,7 +28,7 @@ loc_75B90:
                 move.b  (a2)+,collision_flags(a0)
                 move.b  (a2)+,mapping_frame(a0)
                 rts
-; End of function sub_75B6E
+; End of function SyncMHZMinibossFrameCollisionProxy
 
 ; ---------------------------------------------------------------------------
 byte_75BAE:
@@ -58,7 +58,7 @@ byte_75BAE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_75C06:
+SeedMHZMinibossParticleMotionFromHeightAndRandom:
                 move.w  (Camera_Y_pos).w,d2
                 addi.w  #$E0,d2
                 sub.w   y_pos(a0),d2
@@ -82,7 +82,7 @@ loc_75C34:
                 addq.w  #8,d0
                 move.w  d0,$3E(a0)
                 rts
-; End of function sub_75C06
+; End of function SeedMHZMinibossParticleMotionFromHeightAndRandom
 
 ; ---------------------------------------------------------------------------
 word_75C4A:
@@ -121,7 +121,7 @@ word_75C4A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_75C8A:
+SelectMHZMinibossLinkedChildFramePriorityAndOffsets:
                 movea.w parent3(a0),a1
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
@@ -135,7 +135,7 @@ sub_75C8A:
                 lea     byte_75CF8(pc,d1.w),a2
                 move.w  (a2)+,child_dx(a0)              ; and child_dy
                 rts
-; End of function sub_75C8A
+; End of function SelectMHZMinibossLinkedChildFramePriorityAndOffsets
 
 ; ---------------------------------------------------------------------------
 RawAni_75CB6:
@@ -214,7 +214,7 @@ byte_75CF8:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_75D50:
+SelectMHZMinibossRootSpritePriorityFromFrame:
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
                 move.w  #$200,priority(a0)
@@ -224,7 +224,7 @@ sub_75D50:
 
 locret_75D68:
                 rts
-; End of function sub_75D50
+; End of function SelectMHZMinibossRootSpritePriorityFromFrame
 
 ; ---------------------------------------------------------------------------
 byte_75D6A:
@@ -254,7 +254,7 @@ byte_75D6A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_75D80:
+HandleMHZMinibossFourColorHitOrDefeat:
                 tst.b   collision_flags(a0)
                 bne.s   locret_75DCA
                 move.b  collision_property(a0),d0
@@ -273,7 +273,7 @@ loc_75DA0:
                 addi.w  #2*4,d0
 
 loc_75DB4:
-                bsr.w   sub_75DF4
+                bsr.w   CopyMHZMinibossFourColorPalette
                 subq.b  #1,$20(a0)
                 bne.s   locret_75DCA
                 bclr    #6,status(a0)
@@ -293,15 +293,15 @@ loc_75DCC:
 
 loc_75DEE:
                 jmp     (BossDefeated_StopTimer).l
-; End of function sub_75D80
+; End of function HandleMHZMinibossFourColorHitOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_75DF4:
+CopyMHZMinibossFourColorPalette:
                 lea     word_75E02(pc),a1
                 lea     word_75E0A(pc,d0.w),a2
                 jmp     (CopyWordData_4).l
-; End of function sub_75DF4
+; End of function CopyMHZMinibossFourColorPalette
 
 ; ---------------------------------------------------------------------------
 word_75E02:

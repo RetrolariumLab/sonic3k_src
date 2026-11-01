@@ -71,13 +71,13 @@ loc_4121E:
                 andi.b  #$10,d0
                 beq.s   loc_41238
                 lea     (Player_1).w,a1
-                jsr     (sub_24280).l
+                jsr     (HurtPlayerFromSolidHazard).l
 
 loc_41238:
                 andi.b  #$20,d6
                 beq.s   loc_41248
                 lea     (Player_2).w,a1
-                jsr     (sub_24280).l
+                jsr     (HurtPlayerFromSolidHazard).l
 
 loc_41248:
                 bra.s   loc_41206
@@ -88,13 +88,13 @@ loc_4124A:
                 andi.b  #4,d0
                 beq.s   loc_4125C
                 lea     (Player_1).w,a1
-                jsr     (sub_24280).l
+                jsr     (HurtPlayerFromSolidHazard).l
 
 loc_4125C:
                 andi.b  #8,d6
                 beq.s   loc_4126C
                 lea     (Player_2).w,a1
-                jsr     (sub_24280).l
+                jsr     (HurtPlayerFromSolidHazard).l
 
 loc_4126C:
                 bra.s   loc_41206

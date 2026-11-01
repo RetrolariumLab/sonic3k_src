@@ -178,7 +178,7 @@ loc_513AC:
 
 loc_513BA:
                 move.b  #$9A,d0
-                bsr.w   sub_51BC8
+                bsr.w   LatchLBZFinalBoss2ChildTilePriorityAndCollision
                 jsr     Refresh_ChildPositionAdjusted(pc)
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
@@ -317,7 +317,7 @@ loc_5155A:
                 subq.b  #1,$39(a0)
                 bpl.s   loc_5156C
                 move.b  #3,$39(a0)
-                jsr     (sub_52850).l
+                jsr     (BossExplosionS3SpawnAtMaskedRandomOffset).l
 
 loc_5156C:
                 jsr     (MoveSprite2).l

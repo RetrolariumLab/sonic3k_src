@@ -147,7 +147,7 @@ loc_8E7B2:
                 move.b  #$87,collision_flags(a0)
 
 loc_8E7D0:
-                bsr.w   sub_8E982
+                bsr.w   InitializeSkorpTailLinkRestAngle
 
 loc_8E7D4:
                 jsr     (Change_FlipXUseParent).l
@@ -156,7 +156,7 @@ loc_8E7D4:
                 movea.w $44(a0),a1
                 btst    #1,$38(a1)
                 bne.s   loc_8E80E
-                bsr.w   sub_8EA1C
+                bsr.w   OscillateSkorpTailLinkRestAngle
                 moveq   #5,d2
                 jmp     (MoveSprite_CircularSimpleCheckFlip).l
 ; ---------------------------------------------------------------------------
@@ -233,7 +233,7 @@ loc_8E88C:
                 move.b  #$C,routine(a0)
                 move.w  #$F,$2E(a0)
                 move.l  #loc_8E8CA,$34(a0)
-                bsr.w   sub_8E9A4
+                bsr.w   SetSkorpTailLinkLungeVelocityTowardSnapshot
                 move.b  #$80,d0
 
 loc_8E8B2:
@@ -316,13 +316,13 @@ loc_8E966:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8E982:
+InitializeSkorpTailLinkRestAngle:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lsr.b   #1,d0
                 move.b  byte_8E992(pc,d0.w),$3C(a0)
                 rts
-; End of function sub_8E982
+; End of function InitializeSkorpTailLinkRestAngle
 
 ; ---------------------------------------------------------------------------
 byte_8E992:
@@ -337,7 +337,7 @@ byte_8E992:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8E9A4:
+SetSkorpTailLinkLungeVelocityTowardSnapshot:
                 movea.w $44(a0),a1
                 move.w  $3E(a1),d0
                 sub.w   x_pos(a0),d0
@@ -357,7 +357,7 @@ loc_8E9C4:
                 move.b  subtype(a0),d4
                 move.w  off_8E9D2(pc,d4.w),d4
                 jmp     off_8E9D2(pc,d4.w)
-; End of function sub_8E9A4
+; End of function SetSkorpTailLinkLungeVelocityTowardSnapshot
 
 ; ---------------------------------------------------------------------------
 off_8E9D2:
@@ -412,7 +412,7 @@ loc_8EA16:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8EA1C:
+OscillateSkorpTailLinkRestAngle:
                 subq.b  #1,$3B(a0)
                 bpl.s   loc_8EA2E
                 move.b  #$10,$3B(a0)
@@ -431,7 +431,7 @@ loc_8EA42:
 
 locret_8EA46:
                 rts
-; End of function sub_8EA1C
+; End of function OscillateSkorpTailLinkRestAngle
 
 ; ---------------------------------------------------------------------------
 ObjDat_Skorp:

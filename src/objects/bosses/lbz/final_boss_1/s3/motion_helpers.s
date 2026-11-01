@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4FFDE:
+AdvanceLBZFinalBoss1CannonTurnCycle:
                 moveq   #0,d0
                 move.b  $39(a0),d0
                 subq.w  #1,$2E(a0)
@@ -71,7 +71,7 @@ loc_50064:
                 add.w   d1,d2
                 move.w  d2,y_pos(a0)
                 rts
-; End of function sub_4FFDE
+; End of function AdvanceLBZFinalBoss1CannonTurnCycle
 
 ; ---------------------------------------------------------------------------
 byte_5008A:
@@ -116,18 +116,18 @@ byte_500AE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_500C4:
+RandomizeLBZFinalBoss1LaserTrailOffset:
                 jsr     (Random_Number).l
                 swap    d0
                 andi.b  #7,d0
                 addi.b  #$18,d0
                 move.b  d0,child_dx(a1)
                 rts
-; End of function sub_500C4
+; End of function RandomizeLBZFinalBoss1LaserTrailOffset
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_500DA:
+HandleLBZFinalBoss1HitSectionDropOrDefeat:
                 tst.b   collision_flags(a0)
                 bne.w   locret_50192
                 tst.b   collision_property(a0)
@@ -172,7 +172,7 @@ loc_50162:
                 addi.w  #2*2,d0
 
 loc_50170:
-                bsr.w   sub_501E2
+                bsr.w   CopyLBZFinalBoss1TwoColorPalette
                 subq.b  #1,$20(a0)
                 bne.s   locret_50192
                 move.b  $3A(a0),routine(a0)
@@ -205,15 +205,15 @@ loc_501D4:
                 move.l  #loc_4FB4C,(a0)
                 lea     ChildObjDat_5031E(pc),a2
                 jmp     CreateChild1_Normal(pc)
-; End of function sub_500DA
+; End of function HandleLBZFinalBoss1HitSectionDropOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_501E2:
+CopyLBZFinalBoss1TwoColorPalette:
                 lea     word_501EE(pc),a1
                 lea     word_501F2(pc,d0.w),a2
                 jmp     CopyWordData_2(pc)
-; End of function sub_501E2
+; End of function CopyLBZFinalBoss1TwoColorPalette
 
 ; ---------------------------------------------------------------------------
 word_501EE:
@@ -224,7 +224,7 @@ word_501F2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_501FA:
+BreakOrSuspendLBZFinalBoss1BodySection:
                 movea.w parent3(a0),a1
                 move.w  $3C(a0),d0
                 btst    d0,$38(a1)
@@ -252,11 +252,11 @@ loc_5024A:
 
 locret_50258:
                 rts
-; End of function sub_501FA
+; End of function BreakOrSuspendLBZFinalBoss1BodySection
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5025A:
+SeedLBZFinalBoss1SectionDebrisFrameAndVelocity:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,d1
@@ -269,7 +269,7 @@ sub_5025A:
                 move.w  (a1)+,x_vel(a0)
                 move.w  (a1)+,y_vel(a0)
                 rts
-; End of function sub_5025A
+; End of function SeedLBZFinalBoss1SectionDebrisFrameAndVelocity
 
 ; ---------------------------------------------------------------------------
 word_50282:

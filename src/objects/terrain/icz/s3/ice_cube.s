@@ -19,12 +19,12 @@ loc_58B3C:
                 moveq   #$10,d3
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull).l
-                bsr.w   sub_58B62
+                bsr.w   BreakIczIceCubeUnderRollingRider
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_58B62:
+BreakIczIceCubeUnderRollingRider:
                 move.b  status(a0),d0
                 btst    #p1_standing_bit,d0
                 beq.s   loc_58B78
@@ -57,7 +57,7 @@ loc_58B8A:
 
 locret_58BD0:
                 rts
-; End of function sub_58B62
+; End of function BreakIczIceCubeUnderRollingRider
 
 ; ---------------------------------------------------------------------------
 

@@ -42,7 +42,7 @@ loc_26164:
                 bhs.w   loc_261B8
                 move.w  d0,-(sp)
                 lea     $38(a0),a2
-                bsr.w   sub_261F2
+                bsr.w   ApplyLbzLauncherContactCharge
                 move.w  (sp)+,d0
 
 loc_261B8:
@@ -60,14 +60,14 @@ loc_261B8:
                 cmp.w   d3,d4
                 bhs.w   loc_261EC
                 lea     $3A(a0),a2
-                bsr.w   sub_261F2
+                bsr.w   ApplyLbzLauncherContactCharge
 
 loc_261EC:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_261F2:
+ApplyLbzLauncherContactCharge:
                 tst.w   (a2)
                 bne.s   loc_26220
                 move.l  a1,-(sp)
@@ -127,7 +127,7 @@ loc_26276:
 loc_26294:
                 moveq   #signextendB(sfx_Spring),d0
                 jmp     (Play_SFX).l
-; End of function sub_261F2
+; End of function ApplyLbzLauncherContactCharge
 
 ; ---------------------------------------------------------------------------
 
@@ -150,7 +150,7 @@ loc_262EC:
                 move.w  $36(a0),d0
                 move.w  off_26302(pc,d0.w),d1
                 jsr     off_26302(pc,d1.w)
-                bsr.w   sub_26338
+                bsr.w   PositionLbzLauncherArmSprites
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 off_26302:
@@ -181,7 +181,7 @@ locret_26336:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_26338:
+PositionLbzLauncherArmSprites:
                 move.b  $40(a0),d0
                 btst    #0,render_flags(a0)
                 beq.s   loc_2634A
@@ -229,11 +229,11 @@ loc_26376:
 
 locret_263A8:
                 rts
-; End of function sub_26338
+; End of function PositionLbzLauncherArmSprites
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_263AA:
+InitializeLbzFlamethrowerVisuals:
                 move.l  #Map_LBZFlameThrower,mappings(a1)
                 move.w  #make_art_tile(ArtTile_LBZMisc-$17,2,0),art_tile(a1)
                 move.b  #$10,width_pixels(a1)
@@ -241,4 +241,4 @@ sub_263AA:
                 ori.b   #4,render_flags(a1)
                 move.w  #$200,priority(a1)
                 rts
-; End of function sub_263AA
+; End of function InitializeLbzFlamethrowerVisuals

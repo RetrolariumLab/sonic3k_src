@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51BC8:
+LatchLBZFinalBoss2ChildTilePriorityAndCollision:
                 movea.w parent3(a0),a1
                 btst    #7,art_tile(a1)
                 beq.s   locret_51BE0
@@ -14,7 +14,7 @@ sub_51BC8:
 
 locret_51BE0:
                 rts
-; End of function sub_51BC8
+; End of function LatchLBZFinalBoss2ChildTilePriorityAndCollision
 
 ; ---------------------------------------------------------------------------
 ; unused
@@ -97,7 +97,7 @@ loc_51C9C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51CB4:
+ReverseLBZFinalBoss2AtCameraRelativeBounds:
                 move.w  (Camera_X_pos).w,d0
                 tst.w   x_vel(a0)
                 bmi.s   loc_51CCA
@@ -118,11 +118,11 @@ loc_51CD2:
 
 locret_51CDC:
                 rts
-; End of function sub_51CB4
+; End of function ReverseLBZFinalBoss2AtCameraRelativeBounds
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51CDE:
+HandleLBZFinalBoss2SixColorHitOrDefeat:
                 cmpi.b  #8,routine(a0)
                 blo.s   locret_51D50
                 tst.b   collision_flags(a0)
@@ -150,7 +150,7 @@ loc_51D1C:
                 addi.w  #2*6,d0
 
 loc_51D30:
-                bsr.w   sub_51D88
+                bsr.w   CopyLBZFinalBoss2SixColorPalette
                 subq.b  #1,$20(a0)
                 bne.s   locret_51D50
                 bclr    #6,status(a0)
@@ -179,15 +179,15 @@ loc_51D78:
 
 loc_51D82:
                 jmp     (SaveGame).l
-; End of function sub_51CDE
+; End of function HandleLBZFinalBoss2SixColorHitOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51D88:
+CopyLBZFinalBoss2SixColorPalette:
                 lea     word_51D94(pc),a1
                 lea     word_51DA0(pc,d0.w),a2
                 jmp     CopyWordData_6(pc)
-; End of function sub_51D88
+; End of function CopyLBZFinalBoss2SixColorPalette
 
 ; ---------------------------------------------------------------------------
 word_51D94:
@@ -206,7 +206,7 @@ Perform_Art_Scaling:
                 movea.l (sp)+,a0
                 move.l  a0,-(sp)
                 move.w  art_tile(a0),d0
-                jsr     (sub_22C90).l
+                jsr     (TryBuildObjectScaledArt).l
                 movea.l (sp)+,a0
                 move.w  (_unkF740).w,d3
                 lsl.w   #4,d3
@@ -217,7 +217,7 @@ Perform_Art_Scaling:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51DEA:
+AdjustLBZUnusedRobotnikVelocityWithinLimits:
                 move.w  x_vel(a0),d0
                 addi.w  #-$28,d0
                 cmpi.w  #-$80,d0
@@ -233,12 +233,12 @@ loc_51DFC:
 
 locret_51E0E:
                 rts
-; End of function sub_51DEA
+; End of function AdjustLBZUnusedRobotnikVelocityWithinLimits
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51E10:
-                bsr.w   sub_4B30A
+IntegrateAndProjectLBZUnusedScaledRobotnik:
+                bsr.w   IntegrateScaledActorPositionAccumulators
                 move.w  $30(a0),d2
                 move.w  $34(a0),d3
                 moveq   #0,d0
@@ -251,11 +251,11 @@ sub_51E10:
                 move.w  d2,x_pos(a0)
                 move.w  d3,y_pos(a0)
                 rts
-; End of function sub_51E10
+; End of function IntegrateAndProjectLBZUnusedScaledRobotnik
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51E3A:
+AdvanceLBZUnusedRobotnikArtFramesAndScale:
                 subq.w  #1,$1C(a0)
                 bpl.s   loc_51E62
                 moveq   #0,d0
@@ -285,7 +285,7 @@ locret_51E7E:
 
 loc_51E80:
                 jmp     (Go_Delete_Sprite).l
-; End of function sub_51E3A
+; End of function AdvanceLBZUnusedRobotnikArtFramesAndScale
 
 ; ---------------------------------------------------------------------------
 word_51E86:
@@ -307,7 +307,7 @@ off_51E94:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_51EB0:
+LoadLBZEndingPosePaletteLine:
                 move.w  $3A(a0),d1
                 movea.l off_51EC6(pc,d1.w),a1
                 lea     (Normal_palette).w,a2
@@ -317,7 +317,7 @@ loc_51EBE:
                 move.l  (a1)+,(a2)+
                 dbf     d0,loc_51EBE
                 rts
-; End of function sub_51EB0
+; End of function LoadLBZEndingPosePaletteLine
 
 ; ---------------------------------------------------------------------------
 off_51EC6:

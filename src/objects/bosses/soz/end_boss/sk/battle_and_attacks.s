@@ -96,7 +96,7 @@ word_77766:
 
 loc_77772:
                 jsr     (MoveSprite2).l
-                bsr.w   sub_7808C
+                bsr.w   UpdateSOZEndBossSineBobFromAngleStep
                 subq.w  #1,$2E(a0)
                 bpl.s   locret_7778E
                 move.b  #8,routine(a0)
@@ -107,9 +107,9 @@ locret_7778E:
 ; ---------------------------------------------------------------------------
 
 loc_77790:
-                bsr.w   sub_7806C
+                bsr.w   TickSOZEndBossChargeAttackSpawnTimer
                 jsr     (MoveSprite2).l
-                bsr.w   sub_7808C
+                bsr.w   UpdateSOZEndBossSineBobFromAngleStep
                 move.w  $3C(a0),d0
                 add.w   $40(a0),d0
                 move.w  d0,$3C(a0)
@@ -126,11 +126,11 @@ locret_777CA:
 ; ---------------------------------------------------------------------------
 
 loc_777CC:
-                bsr.w   sub_7806C
+                bsr.w   TickSOZEndBossChargeAttackSpawnTimer
                 subq.w  #1,$2E(a0)
                 bpl.s   locret_777EE
                 move.b  #8,routine(a0)
-                bsr.w   sub_78038
+                bsr.w   ReloadSOZEndBossMotionProfileAtTurnBounds
                 neg.b   $3E(a0)
                 neg.w   $40(a0)
                 move.w  $32(a0),$2E(a0)
@@ -149,7 +149,7 @@ loc_777FA:
                 move.b  $42(a0),routine(a0)
                 clr.b   collision_flags(a0)
                 moveq   #0,d0
-                bra.w   sub_7825E
+                bra.w   CopySOZEndBossFirstThreeOfFivePaletteColors
 ; ---------------------------------------------------------------------------
 
 loc_7780A:
@@ -512,7 +512,7 @@ loc_77C32:
                 moveq   #$C,d3
                 move.w  (sp)+,d4
                 jsr     (SolidObjectFull).l
-                bsr.w   sub_7815A
+                bsr.w   ProcessSOZEndBossArmContactsWhileRootAlive
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
                 bne.s   loc_77C7A
@@ -555,7 +555,7 @@ loc_77CC6:
                 moveq   #$28,d3
                 move.w  (sp)+,d4
                 jsr     (SolidObjectFull2).l
-                bsr.w   sub_780AC
+                bsr.w   ProcessSOZEndBossUpperBodyContactsForBothPlayers
 
 loc_77CF2:
                 movea.w parent3(a0),a1
@@ -597,7 +597,7 @@ loc_77D2C:
                 moveq   #$30,d3
                 move.w  (sp)+,d4
                 jsr     (SolidObjectFull2).l
-                bsr.w   sub_78120
+                bsr.w   ProcessSOZEndBossLowerBodyContactsForBothPlayers
                 bra.s   loc_77CF2
 ; ---------------------------------------------------------------------------
 
@@ -701,7 +701,7 @@ loc_77E7C:
                 lea     word_782DE(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
                 move.l  #loc_77E90,(a0)
-                bsr.w   sub_7819A
+                bsr.w   SeedSOZEndBossChargeParticleOffsetAndStagger
 
 loc_77E90:
                 subq.w  #1,$2E(a0)

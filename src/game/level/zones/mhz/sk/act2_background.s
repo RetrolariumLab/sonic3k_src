@@ -11,7 +11,7 @@ MHZ2_BackgroundInit:
                 cmpi.w  #$500,(Player_1+y_pos).w
                 bhs.s   loc_55198
                 move.w  #8,(Events_routine_bg).w
-                jsr     sub_554B8(pc)
+                jsr     BuildMhz2ChaseBackgroundCoordinates(pc)
                 bra.s   loc_5519C
 ; ---------------------------------------------------------------------------
 
@@ -62,7 +62,7 @@ loc_551EE:
                 blo.s   loc_5521E
                 cmpi.w  #$500,(Player_1+y_pos).w
                 bhs.s   loc_5521E
-                jsr     sub_554B8(pc)
+                jsr     BuildMhz2ChaseBackgroundCoordinates(pc)
                 jsr     Reset_TileOffsetPositionEff(pc)
                 addi.w  #$E0,d0
                 and.w   (Camera_Y_pos_mask).w,d0
@@ -85,7 +85,7 @@ loc_55222:
 ; ---------------------------------------------------------------------------
 
 loc_55236:
-                jsr     sub_554B8(pc)
+                jsr     BuildMhz2ChaseBackgroundCoordinates(pc)
 
 loc_5523A:
                 moveq   #0,d1
@@ -140,7 +140,7 @@ loc_5529C:
 ; ---------------------------------------------------------------------------
 
 loc_552E0:
-                jsr     sub_554B8(pc)
+                jsr     BuildMhz2ChaseBackgroundCoordinates(pc)
 
 loc_552E4:
                 lea     (Camera_Y_pos_BG_copy).w,a6
@@ -273,13 +273,13 @@ loc_5545A:
                 addq.w  #4,(Events_routine_bg).w
 
 loc_55486:
-                jsr     sub_554B8(pc)
+                jsr     BuildMhz2ChaseBackgroundCoordinates(pc)
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
                 moveq   #0,d1
                 moveq   #$20,d6
                 jsr     Draw_TileRow(pc)
-                jsr     sub_5550C(pc)
+                jsr     ComposeMhz2ShipAndBossPerspectiveScroll(pc)
                 cmpi.w  #$10,(Events_routine_fg).w
                 bne.s   loc_554B4
                 move.w  (_unkEE9C).w,(V_scroll_value).w
@@ -291,7 +291,7 @@ loc_554B4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_554B8:
+BuildMhz2ChaseBackgroundCoordinates:
                 move.w  (Camera_Y_pos_copy).w,d0
                 subi.w  #$280,d0
                 swap    d0
@@ -325,11 +325,11 @@ sub_554B8:
                 swap    d0
                 move.w  d0,(Events_bg+$12).w
                 rts
-; End of function sub_554B8
+; End of function BuildMhz2ChaseBackgroundCoordinates
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5550C:
+ComposeMhz2ShipAndBossPerspectiveScroll:
                 jsr     PlainDeformation(pc)
                 cmpi.w  #$10,(Events_routine_fg).w
                 bne.s   loc_55534
@@ -448,7 +448,7 @@ loc_55602:
 
 locret_5560A:
                 rts
-; End of function sub_5550C
+; End of function ComposeMhz2ShipAndBossPerspectiveScroll
 
 ; ---------------------------------------------------------------------------
 
@@ -509,13 +509,13 @@ loc_5569E:
                 move.w  d0,(Camera_min_X_pos).w
                 move.w  d0,d1
                 lea     (Player_1).w,a1
-                bsr.s   sub_556B8
+                bsr.s   ClampPlayerToMhz2ChaseWindow
                 move.w  d1,d0
                 lea     (Player_2).w,a1
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_556B8:
+ClampPlayerToMhz2ChaseWindow:
                 cmpi.b  #5,anim(a1)
                 bne.s   loc_556C4
                 clr.b   anim(a1)
@@ -540,7 +540,7 @@ loc_556E8:
 
 locret_556F6:
                 rts
-; End of function sub_556B8
+; End of function ClampPlayerToMhz2ChaseWindow
 
 ; ---------------------------------------------------------------------------
 

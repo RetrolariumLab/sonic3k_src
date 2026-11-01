@@ -55,10 +55,10 @@ Obj_HCZTwistingLoop:
 loc_3909C:
                 lea     (Player_1).w,a1
                 lea     $34(a0),a4
-                bsr.s   sub_390C2
+                bsr.s   UpdatePlayerOnHczTwistingLoop
                 lea     (Player_2).w,a1
                 lea     $3A(a0),a4
-                bsr.s   sub_390C2
+                bsr.s   UpdatePlayerOnHczTwistingLoop
                 move.b  $34(a0),d0
                 add.b   $3A(a0),d0
                 beq.s   loc_390BC
@@ -70,14 +70,14 @@ loc_390BC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_390C2:
+UpdatePlayerOnHczTwistingLoop:
                 moveq   #0,d0
                 move.b  (a4),d0
                 move.w  off_390F2(pc,d0.w),d0
                 jsr     off_390F2(pc,d0.w)
                 tst.b   (a4)
                 beq.s   locret_390F0
-                bsr.w   sub_39208
+                bsr.w   UpdateHczTwistingLoopPlayerVelocity
                 moveq   #0,d0
                 move.w  2(a4),d0
                 divu.w  #$60,d0
@@ -88,7 +88,7 @@ sub_390C2:
 
 locret_390F0:
                 rts
-; End of function sub_390C2
+; End of function UpdatePlayerOnHczTwistingLoop
 
 ; ---------------------------------------------------------------------------
 off_390F2:
@@ -181,7 +181,7 @@ loc_39198:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_39208:
+UpdateHczTwistingLoopPlayerVelocity:
                 move.b  angle(a1),d0
                 jsr     (GetSineCosine).l
                 muls.w  ground_vel(a1),d1
@@ -217,7 +217,7 @@ loc_39256:
 
 locret_3925A:
                 rts
-; End of function sub_39208
+; End of function UpdateHczTwistingLoopPlayerVelocity
 
 ; ---------------------------------------------------------------------------
 
@@ -230,7 +230,7 @@ loc_3925C:
                 move.b  #0,(a4)
                 move.b  #0,object_control(a1)
                 move.b  #$70,angle(a1)
-                bra.w   sub_39208
+                bra.w   UpdateHczTwistingLoopPlayerVelocity
 ; ---------------------------------------------------------------------------
 
 loc_39280:
@@ -391,7 +391,7 @@ loc_3943A:
 loc_3945E:
                 lea     (Ani_SonicSnowboard).l,a1
                 jsr     (Animate_Sprite).l
-                jsr     (sub_3968E).l
+                jsr     (QueueIczSnowboardingSonicFrameArt).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_SonicSnowboard:
@@ -501,7 +501,7 @@ loc_395EA:
                 jsr     (Play_SFX).l
 
 loc_395F2:
-                jsr     (sub_3968E).l
+                jsr     (QueueIczSnowboardingSonicFrameArt).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -539,7 +539,7 @@ loc_39658:
                 jsr     (Play_SFX).l
 
 loc_3966A:
-                jsr     (sub_3968E).l
+                jsr     (QueueIczSnowboardingSonicFrameArt).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -548,16 +548,16 @@ loc_39676:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3967C:
+QueueIczSnowboardFrameArt:
                 move.w  #tiles_to_bytes(ArtTile_Snowboard),d4
                 move.l  #ArtUnc_Snowboard,d6
                 lea     (DPLC_Snowboard).l,a2
                 bra.s   loc_3969E
-; End of function sub_3967C
+; End of function QueueIczSnowboardFrameArt
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3968E:
+QueueIczSnowboardingSonicFrameArt:
                 move.w  #tiles_to_bytes(ArtTile_Player_1),d4
                 move.l  #ArtUnc_SonicSnowboard,d6
                 lea     (DPLC_SonicSnowboard).l,a2
@@ -592,4 +592,4 @@ loc_396BA:
 
 locret_396E2:
                 rts
-; End of function sub_3968E
+; End of function QueueIczSnowboardingSonicFrameArt

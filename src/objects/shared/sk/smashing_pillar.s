@@ -88,13 +88,13 @@ loc_29314:
                 andi.b  #4,d0
                 beq.s   loc_29324
                 lea     (Player_1).w,a1
-                bsr.w   sub_24280
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_29324:
                 andi.b  #8,d6
                 beq.s   loc_29332
                 lea     (Player_2).w,a1
-                bsr.w   sub_24280
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_29332:
                 jmp     (Sprite_OnScreen_Test).l

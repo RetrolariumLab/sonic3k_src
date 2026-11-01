@@ -176,7 +176,7 @@ loc_624A8:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_624AE:
+CNZCutsceneSKCopyTwoPaletteLines:
                 lea     (Normal_palette_line_3).w,a2
                 moveq   #bytesToLcnt($40),d0
 
@@ -186,7 +186,7 @@ loc_624B4:
 
 locret_624BA:
                 rts
-; End of function sub_624AE
+; End of function CNZCutsceneSKCopyTwoPaletteLines
 
 ; ---------------------------------------------------------------------------
 
@@ -194,7 +194,7 @@ loc_624BC:
                 tst.b   subtype(a0)
                 beq.s   loc_624CA
                 lea     (Pal_CNZ+$20).l,a1
-                bsr.s   sub_624AE
+                bsr.s   CNZCutsceneSKCopyTwoPaletteLines
 
 loc_624CA:
                 jmp     (Delete_Current_Sprite).l
@@ -241,7 +241,7 @@ loc_62528:
                 clr.w   (Ctrl_1_logical).w
                 st      (Ctrl_1_locked).w
                 move.b  #$80,(Player_1+object_control).w
-                bsr.w   sub_65DD6
+                bsr.w   CutsceneSpawnKnucklesMusicFadeTransition
                 lea     Pal_CutsceneKnux(pc),a1
                 jmp     (PalLoad_Line1).l
 ; ---------------------------------------------------------------------------

@@ -65,7 +65,7 @@ loc_1FFDC:
 
 loc_1FFF4:
                 move.l  #loc_1FC16,(a0)
-                bsr.w   sub_2011E
+                bsr.w   ShatterRockWithDefaultVelocities
                 bra.w   loc_1FC16
 ; ---------------------------------------------------------------------------
 
@@ -92,16 +92,16 @@ loc_20036:
                 lea     (Player_1).w,a1
                 cmpi.b  #2,character_id(a1)
                 bne.s   loc_20030
-                bsr.s   sub_20056
+                bsr.s   BouncePlayerAfterKnucklesRockTopBreak
                 btst    #p2_standing_bit,status(a0)
                 beq.s   loc_20088
                 lea     (Player_2).w,a1
-                bsr.s   sub_20056
+                bsr.s   BouncePlayerAfterKnucklesRockTopBreak
                 bra.w   loc_20088
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_20056:
+BouncePlayerAfterKnucklesRockTopBreak:
                 bset    #Status_Roll,status(a1)
                 move.b  #$E,y_radius(a1)
                 move.b  #7,x_radius(a1)
@@ -111,7 +111,7 @@ sub_20056:
                 bclr    #Status_OnObj,status(a1)
                 move.b  #2,routine(a1)
                 rts
-; End of function sub_20056
+; End of function BouncePlayerAfterKnucklesRockTopBreak
 
 ; ---------------------------------------------------------------------------
 
@@ -119,12 +119,12 @@ loc_20088:
                 move.w  $38(a0),(Chain_bonus_counter).w
                 andi.b  #$E7,status(a0)
                 move.l  #loc_1FC16,(a0)
-                bsr.w   sub_2011E
+                bsr.w   ShatterRockWithDefaultVelocities
                 bra.w   loc_1FC16
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_200A2:
+UpdatePlayersPushingRockLeft:
                 move.b  status(a0),d3
                 andi.b  #pushing_mask,d3
                 beq.w   locret_200CA
@@ -132,19 +132,19 @@ sub_200A2:
                 lea     (Player_1).w,a1
                 move.b  $3A(a0),d0
                 moveq   #p1_pushing_bit,d6
-                bsr.s   sub_200CC
+                bsr.s   StepPushableRockLeftForPlayer
                 lea     (Player_2).w,a1
                 move.b  $3B(a0),d0
                 moveq   #p2_pushing_bit,d6
-                bsr.s   sub_200CC
+                bsr.s   StepPushableRockLeftForPlayer
 
 locret_200CA:
                 rts
-; End of function sub_200A2
+; End of function UpdatePlayersPushingRockLeft
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_200CC:
+StepPushableRockLeftForPlayer:
                 btst    d6,d3
                 beq.s   locret_2011C
                 cmp.w   x_pos(a1),d2
@@ -172,11 +172,11 @@ sub_200CC:
 
 locret_2011C:
                 rts
-; End of function sub_200CC
+; End of function StepPushableRockLeftForPlayer
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2011E:
+ShatterRockWithDefaultVelocities:
                 cmpi.b  #9,(Current_zone).w
                 beq.w   loc_201C4
                 moveq   #0,d0
@@ -184,11 +184,11 @@ sub_2011E:
                 add.w   d0,d0
                 lea     (off_202E4).l,a4
                 adda.w  (a4,d0.w),a4
-; End of function sub_2011E
+; End of function ShatterRockWithDefaultVelocities
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2013A:
+SpawnRockFragments:
                 lea     (off_2026E).l,a3
                 adda.w  (a3,d0.w),a3
                 move.w  (a3)+,d1
@@ -239,7 +239,7 @@ loc_201B8:
 loc_201BC:
                 moveq   #signextendB(sfx_Collapse),d0
                 jmp     (Play_SFX).l
-; End of function sub_2013A
+; End of function SpawnRockFragments
 
 ; ---------------------------------------------------------------------------
 
@@ -254,7 +254,7 @@ loc_201C4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_201DE:
+SpawnLavaReefRockFragments:
                 lea     (off_2026E).l,a3
                 adda.w  (a3,d0.w),a3
                 move.w  (a3)+,d1
@@ -303,7 +303,7 @@ loc_20206:
 loc_20266:
                 moveq   #signextendB(sfx_Collapse),d0
                 jmp     (Play_SFX).l
-; End of function sub_201DE
+; End of function SpawnLavaReefRockFragments
 
 ; ---------------------------------------------------------------------------
 off_2026E:

@@ -9,7 +9,7 @@ Obj_AIZHollowTree:
                 move.l  #loc_1D3D0,(a0)
 
 loc_1D3D0:
-                bsr.w   sub_1D436
+                bsr.w   UpdatePlayersInAizHollowTree
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
                 bne.s   loc_1D430
@@ -51,21 +51,21 @@ loc_1D430:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1D436:
+UpdatePlayersInAizHollowTree:
                 lea     (Player_1).w,a1
                 lea     $30(a0),a2
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_1D44C
+                bsr.s   UpdatePlayerInAizHollowTree
                 lea     (Player_2).w,a1
                 lea     $34(a0),a2
 ; Bug: if player 1 was riding the object, then d6 may have become dirty from
 ; a call to Perform_Player_DPLC, causing player 2 to behave erratically
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
-; End of function sub_1D436
+; End of function UpdatePlayersInAizHollowTree
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1D44C:
+UpdatePlayerInAizHollowTree:
                 btst    d6,status(a0)
                 bne.w   loc_1D4DA
                 btst    #Status_InAir,status(a1)
@@ -163,7 +163,7 @@ loc_1D57C:
                 movea.l (sp)+,a1
                 move.l  (sp)+,d6
                 bra.s   AIZTree_FallOff
-; End of function sub_1D44C
+; End of function UpdatePlayerInAizHollowTree
 
 ; ---------------------------------------------------------------------------
 ; unused

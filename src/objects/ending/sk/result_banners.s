@@ -8,7 +8,7 @@ loc_5F1AC:
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #loc_5F1F6,(a0)
                 lea     word_5F1EA(pc),a1
-                bsr.w   sub_5FF1C
+                bsr.w   EndingPlaceBannerBlackenPaletteAndSpawnWhiteFlashRestore
                 lea     (Pal_EndingSKLogo).l,a1
                 lea     (Target_palette_line_2).w,a2
                 moveq   #bytesToLcnt($20),d6
@@ -45,7 +45,7 @@ loc_5F20A:
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #loc_5F1F6,(a0)
                 lea     word_5F260(pc),a1
-                bsr.w   sub_5FF1C
+                bsr.w   EndingPlaceBannerBlackenPaletteAndSpawnWhiteFlashRestore
                 lea     (Pal_EndingS3KLogo).l,a1
                 lea     (Target_palette_line_2).w,a2
                 moveq   #bytesToLcnt($20),d6
@@ -86,7 +86,7 @@ loc_5F26C:
 
 loc_5F294:
                 lea     word_5F2E2(pc),a1
-                bsr.w   sub_5FF1C
+                bsr.w   EndingPlaceBannerBlackenPaletteAndSpawnWhiteFlashRestore
                 lea     (Pal_EndingS3KLogo).l,a1
                 lea     (Target_palette_line_2).w,a2
                 moveq   #bytesToLcnt($20),d6

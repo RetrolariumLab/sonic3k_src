@@ -16,19 +16,19 @@ loc_33C86:
                 lea     $30(a0),a2
                 moveq   #p1_standing_bit,d6
                 move.w  (Ctrl_1_logical).w,d5
-                bsr.s   sub_33CAC
+                bsr.s   UpdatePlayerInMgzTwistingLoop
                 lea     (Player_2).w,a1
                 lea     $36(a0),a2
 ; Bug: if player 1 was riding the object, then d6 may have become dirty from
 ; a call to Perform_Player_DPLC, causing player 2 to behave erratically
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
                 move.w  (Ctrl_2_logical).w,d5
-                bsr.s   sub_33CAC
+                bsr.s   UpdatePlayerInMgzTwistingLoop
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_33CAC:
+UpdatePlayerInMgzTwistingLoop:
                 btst    d6,status(a0)
                 bne.w   loc_33D8A
                 tst.b   4(a2)
@@ -78,7 +78,7 @@ loc_33CE6:
                 move.w  (a2),d0
                 sub.w   y_pos(a0),d0
                 move.w  d0,(a2)
-                bsr.w   sub_33C34
+                bsr.w   AttachPlayerToScriptedRideObject
                 move.b  #$C0,angle(a1)
                 bclr    #0,render_flags(a1)
                 move.b  #$80,5(a2)
@@ -258,7 +258,7 @@ loc_33F4A:
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 jmp     (Perform_Player_DPLC).l
-; End of function sub_33CAC
+; End of function UpdatePlayerInMgzTwistingLoop
 
 ; ---------------------------------------------------------------------------
 ; unused

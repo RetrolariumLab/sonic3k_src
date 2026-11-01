@@ -584,10 +584,10 @@ LevelSelect_DrawSoundNumber:
 LevelSelect_DrawContinued:
                 move.b  d0,d2
                 lsr.b   #4,d0
-                bsr.s   sub_8028
+                bsr.s   LevelSelectSKWriteOneHexNibbleTile
                 move.b  d2,d0
 
-sub_8028:
+LevelSelectSKWriteOneHexNibbleTile:
                 andi.w  #$F,d0
                 cmpi.b  #$A,d0
                 blo.s   loc_8036

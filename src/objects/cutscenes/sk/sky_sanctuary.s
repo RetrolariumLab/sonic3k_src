@@ -185,7 +185,7 @@ loc_658F2:
 ; ---------------------------------------------------------------------------
 
 loc_6594A:
-                bsr.w   sub_65FDE
+                bsr.w   SSZKnucklesReactToCrouchingP1OnRight
                 jsr     (Animate_RawMultiDelay).l
                 move.w  (Camera_X_pos).w,d0
                 subi.w  #$80,d0
@@ -269,7 +269,7 @@ locret_65A48:
 ; ---------------------------------------------------------------------------
 
 loc_65A4A:
-                bsr.w   sub_66054
+                bsr.w   SSZSmallDeathEggEmitParticleEveryThirtyTwoVints
                 jsr     (MoveSprite_SSZBGAdjust).l
                 jsr     (Draw_Sprite).l
                 move.w  (Camera_Y_pos).w,d0

@@ -16,7 +16,7 @@ Competition_Menu:
                 move.w  #$8B00,(a6)
                 move.w  #$8C81,(a6)
                 move.w  #$9011,(a6)
-                jsr     sub_B512(pc)
+                jsr     Menu_FillPlaneAWithPriorityBlankTiles(pc)
                 clearRAM Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
                 clearRAM Object_RAM,(Kos_decomp_buffer-Object_RAM)
                 clr.w   (DMA_queue).w

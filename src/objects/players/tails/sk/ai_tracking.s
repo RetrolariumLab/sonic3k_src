@@ -44,7 +44,7 @@ loc_13A10:
                 bne.w   loc_13AF4
                 cmpi.w  #0,(Current_zone_and_act).w
                 bne.s   loc_13A32
-                bsr.w   sub_13ECA
+                bsr.w   TailsSKResetCPUFollowerToOffscreenCatchUp
                 move.w  #$A,(Tails_CPU_routine).w
                 move.b  #$83,object_control(a0)
                 rts
@@ -71,7 +71,7 @@ loc_13A5A:
 loc_13A74:
                 cmpi.w  #$500,(Current_zone_and_act).w
                 bne.s   loc_13A8E
-                bsr.w   sub_13ECA
+                bsr.w   TailsSKResetCPUFollowerToOffscreenCatchUp
                 move.w  #$A,(Tails_CPU_routine).w
                 move.b  #$83,object_control(a0)
                 rts
@@ -96,7 +96,7 @@ loc_13AB4:
                 beq.w   loc_13B12
                 cmpi.w  #$A00,(Current_zone_and_act).w
                 bne.s   loc_13AE2
-                bsr.w   sub_13ECA
+                bsr.w   TailsSKResetCPUFollowerToOffscreenCatchUp
                 move.w  #$A,(Tails_CPU_routine).w
                 move.b  #$83,object_control(a0)
                 rts
@@ -319,7 +319,7 @@ loc_13D4A:
 ; ---------------------------------------------------------------------------
 
 loc_13D78:
-                bsr.w   sub_13EFC
+                bsr.w   TailsSKWatchCPUOffscreenTimeoutAndInteractionCode
                 tst.w   (Tails_CPU_idle_timer).w
                 bne.w   loc_13EBE
                 tst.b   object_control(a0)

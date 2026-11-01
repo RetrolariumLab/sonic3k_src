@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_47916:
+AdvanceAIZBossAttackAttachmentPose:
                 move.w  angle(a0),d0
                 moveq   #0,d1
                 eori.w  #$C,d0
@@ -24,7 +24,7 @@ loc_4792C:
                 addq.b  #4,d2
                 move.b  d2,$39(a0)
                 rts
-; End of function sub_47916
+; End of function AdvanceAIZBossAttackAttachmentPose
 
 ; ---------------------------------------------------------------------------
 byte_4794C:
@@ -119,7 +119,7 @@ word_47A10:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_47A20:
+HandleAIZBossHitFlashOrDefeat:
                 tst.b   collision_flags(a0)
                 bne.s   locret_47A72
                 tst.b   collision_property(a0)
@@ -138,7 +138,7 @@ loc_47A40:
                 addi.w  #2*7,d0
 
 loc_47A54:
-                bsr.w   sub_47A9A
+                bsr.w   CopyAIZBossSevenPaletteColors
                 subq.b  #1,$20(a0)
                 bne.s   locret_47A72
                 bclr    #6,status(a0)
@@ -157,11 +157,11 @@ loc_47A74:
                 move.b  #0,mapping_frame(a0)
                 move.l  #loc_47360,$34(a0)
                 jmp     (BossDefeated_StopTimer).l
-; End of function sub_47A20
+; End of function HandleAIZBossHitFlashOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_47A9A:
+CopyAIZBossSevenPaletteColors:
                 lea     word_47AC0(pc),a1
                 lea     word_47ACE(pc,d0.w),a2
                 rept    7
@@ -169,7 +169,7 @@ sub_47A9A:
                 move.w  (a2)+,(a3)+
                 endm
                 rts
-; End of function sub_47A9A
+; End of function CopyAIZBossSevenPaletteColors
 
 ; ---------------------------------------------------------------------------
 word_47AC0:
@@ -181,17 +181,17 @@ word_47ACE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_47AEA:
+ResetAIZBossHitFlashPalette:
                 moveq   #0,d0
-                bsr.s   sub_47A9A
+                bsr.s   CopyAIZBossSevenPaletteColors
                 bclr    #6,status(a0)
                 clr.b   $20(a0)
                 rts
-; End of function sub_47AEA
+; End of function ResetAIZBossHitFlashPalette
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_47AFA:
+StartAIZBossAttachmentDelayedBreakaway:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
                 bne.s   loc_47B08
@@ -205,4 +205,4 @@ loc_47B08:
                 move.w  #$1F,$2E(a0)
                 move.l  #loc_47584,$34(a0)
                 rts
-; End of function sub_47AFA
+; End of function StartAIZBossAttachmentDelayedBreakaway

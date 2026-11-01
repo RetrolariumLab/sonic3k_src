@@ -22,7 +22,7 @@ KosArt_To_VDP:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B512:
+Menu_FillPlaneAWithPriorityBlankTiles:
                 move.l  #$80008000,d0
                 move.w  #bytesToLcnt($2000),d1
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table,VRAM,WRITE),(VDP_control_port).l
@@ -32,27 +32,27 @@ sub_B512:
                 move.l  d0,(a6)
                 dbf     d1,.loop
                 rts
-; End of function sub_B512
+; End of function Menu_FillPlaneAWithPriorityBlankTiles
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B534:
+Menu_ClearNineByEightTileArea:
                 moveq   #8-1,d2
                 lea     (VDP_data_port).l,a6
                 moveq   #0,d1
 
                 .loop:
                 move.w  d0,d3
-                bsr.s   sub_B550
+                bsr.s   Menu_WriteNineTileWords
                 addi.w  #$80,d0
                 andi.w  #$DFFF,d0
                 dbf     d2,.loop
                 rts
-; End of function sub_B534
+; End of function Menu_ClearNineByEightTileArea
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B550:
+Menu_WriteNineTileWords:
                 swap    d3
                 clr.w   d3
                 swap    d3
@@ -67,7 +67,7 @@ sub_B550:
                 move.l  d1,(a6)
                 move.w  d1,(a6)
                 rts
-; End of function sub_B550
+; End of function Menu_WriteNineTileWords
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -93,19 +93,19 @@ Copy_Listed_Data_To_VRAM:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B596:
+Menu_UpdateBothCharacterDepthGroups:
                 lea     (Dynamic_object_RAM).w,a0
-                bsr.s   sub_B5A0
+                bsr.s   Menu_SetCharacterGroupDepthPriorities
                 lea     (Dynamic_object_RAM+(object_size*5)).w,a0
-; End of function sub_B596
+; End of function Menu_UpdateBothCharacterDepthGroups
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B5A0:
+Menu_SetCharacterGroupDepthPriorities:
                 lea     next_object(a0),a1
                 lea     next_object(a1),a2
-                bsr.s   sub_B5D2
-                bsr.s   sub_B5D2
+                bsr.s   Menu_CompareSwapCharacterDepths
+                bsr.s   Menu_CompareSwapCharacterDepths
                 move.w  #$80,priority(a0)
                 move.w  #$100,priority(a1)
                 move.w  #$180,priority(a2)
@@ -113,11 +113,11 @@ sub_B5A0:
                 bclr    #7,art_tile(a1)
                 bclr    #7,art_tile(a2)
                 rts
-; End of function sub_B5A0
+; End of function Menu_SetCharacterGroupDepthPriorities
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B5D2:
+Menu_CompareSwapCharacterDepths:
                 move.w  y_pos(a0),d0
                 cmp.w   y_pos(a1),d0
                 bgt.s   loc_B5DE
@@ -131,4 +131,4 @@ loc_B5DE:
 
 locret_B5EA:
                 rts
-; End of function sub_B5D2
+; End of function Menu_CompareSwapCharacterDepths

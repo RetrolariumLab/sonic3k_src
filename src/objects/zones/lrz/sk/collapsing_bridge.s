@@ -71,15 +71,15 @@ loc_39CE8:
                 bne.s   locret_39D3C
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_39D1A
+                bsr.s   ReleasePlayerFromCollapsedLrzBridge
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
-                bsr.s   sub_39D1A
+                bsr.s   ReleasePlayerFromCollapsedLrzBridge
                 jmp     (Delete_Current_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_39D1A:
+ReleasePlayerFromCollapsedLrzBridge:
                 btst    d6,status(a0)
                 beq.s   locret_39D3C
                 bclr    d6,status(a0)
@@ -90,7 +90,7 @@ sub_39D1A:
 
 locret_39D3C:
                 rts
-; End of function sub_39D1A
+; End of function ReleasePlayerFromCollapsedLrzBridge
 
 ; ---------------------------------------------------------------------------
 

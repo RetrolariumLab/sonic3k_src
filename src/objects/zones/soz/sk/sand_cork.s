@@ -25,7 +25,7 @@ Obj_SOZSandCork:
                 subi.w  #$90,d3
 
 loc_41D12:
-                bsr.w   sub_41E1A
+                bsr.w   CreateSozSandColumnSection
                 subi.w  #$100,d3
                 subi.w  #$100,d5
                 bhi.s   loc_41D12
@@ -42,20 +42,20 @@ loc_41D32:
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
                 beq.s   loc_41D48
-                bsr.s   sub_41D5C
+                bsr.s   BreakSozSandCorkFromRollingContact
 
 loc_41D48:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
                 beq.s   loc_41D56
-                bsr.s   sub_41D5C
+                bsr.s   BreakSozSandCorkFromRollingContact
 
 loc_41D56:
                 jmp     (Sprite_CheckDeleteTouch3).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_41D5C:
+BreakSozSandCorkFromRollingContact:
                 cmpi.b  #2,anim(a1)
                 bne.w   locret_41DF2
                 neg.w   x_vel(a1)
@@ -68,7 +68,7 @@ sub_41D5C:
                 subi.w  #$90,d3
 
 loc_41D82:
-                bsr.w   sub_41E1A
+                bsr.w   CreateSozSandColumnSection
                 subi.w  #$100,d3
                 subi.w  #$100,d5
                 bcc.s   loc_41D82
@@ -103,7 +103,7 @@ loc_41DE6:
 
 locret_41DF2:
                 rts
-; End of function sub_41D5C
+; End of function BreakSozSandCorkFromRollingContact
 
 ; ---------------------------------------------------------------------------
 
@@ -124,7 +124,7 @@ loc_41E14:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_41E1A:
+CreateSozSandColumnSection:
                 jsr     (AllocateObject).l
                 bne.w   locret_41E68
                 move.l  #loc_41E6A,(a1)
@@ -142,7 +142,7 @@ sub_41E1A:
 
 locret_41E68:
                 rts
-; End of function sub_41E1A
+; End of function CreateSozSandColumnSection
 
 ; ---------------------------------------------------------------------------
 

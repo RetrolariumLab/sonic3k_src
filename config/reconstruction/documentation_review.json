@@ -60,7 +60,7 @@
     {
       "path": "docs/lockon_abi.md",
       "decision": "reworked",
-      "reason": "Keep independent export proof and update the source declaration path."
+      "reason": "Record reviewed physical/profile-scoped procedure renames while retaining historical provenance,byte preservation,ABI and runtime interpretation limits."
     },
     {
       "path": "docs/memory_map.md",
@@ -75,7 +75,7 @@
     {
       "path": "docs/provenance.md",
       "decision": "reworked",
-      "reason": "Link the canonical contributor list, make fork identity explicit and distinguish current complete acceptance from the retained historical baseline."
+      "reason": "Record reviewed physical/profile-scoped procedure renames while retaining historical provenance,byte preservation,ABI and runtime interpretation limits."
     },
     {
       "path": "docs/raw_animations.md",
@@ -105,7 +105,7 @@
     {
       "path": "docs/source_layout.md",
       "decision": "reworked",
-      "reason": "Describe concise owner-based basenames, declaration-kind subdirectories and processor-oriented suffixes while preserving original symbol spellings, historical origins and physical include order."
+      "reason": "Record reviewed physical/profile-scoped procedure renames while retaining historical provenance,byte preservation,ABI and runtime interpretation limits."
     },
     {
       "path": "docs/source_reconstruction_1_0.md",
@@ -120,7 +120,7 @@
     {
       "path": "docs/unknowns.md",
       "decision": "reworked",
-      "reason": "Retain the reader journey and replace pending candidate claims with actual clean-clone acceptance, inherited preservation boundaries and reproducible pinned-tool setup."
+      "reason": "Record reviewed physical/profile-scoped procedure renames while retaining historical provenance,byte preservation,ABI and runtime interpretation limits."
     },
     {
       "path": "docs/verification.md",

@@ -77,7 +77,7 @@ loc_1AAFA:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1AAFC:
+ExecuteObjectSlotRange:
                 move.l  (a0),d0
                 beq.s   loc_1AB04
                 movea.l d0,a1
@@ -85,25 +85,25 @@ sub_1AAFC:
 
 loc_1AB04:
                 lea     next_object(a0),a0
-                dbf     d7,sub_1AAFC
+                dbf     d7,ExecuteObjectSlotRange
 
 locret_1AB0C:
                 rts
-; End of function sub_1AAFC
+; End of function ExecuteObjectSlotRange
 
 ; ---------------------------------------------------------------------------
 
 loc_1AB0E:                                              ; this is broken?
                 moveq   #((Dynamic_object_RAM+object_size)-Object_RAM)/object_size-1,d7
-                bsr.s   sub_1AAFC
+                bsr.s   ExecuteObjectSlotRange
                 moveq   #((Level_object_RAM+object_size)-(Dynamic_object_RAM+object_size))/object_size-1,d7
-                bsr.s   sub_1AB1A
+                bsr.s   QueueVisibleObjectSlotRange
                 moveq   #(Object_RAM_end-(Level_object_RAM+object_size))/object_size-1,d7
-                bra.s   sub_1AAFC
+                bra.s   ExecuteObjectSlotRange
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1AB1A:
+QueueVisibleObjectSlotRange:
                 move.l  (a0),d0
                 beq.s   loc_1AB28
                 tst.b   render_flags(a0)
@@ -112,9 +112,9 @@ sub_1AB1A:
 
 loc_1AB28:
                 lea     next_object(a0),a0
-                dbf     d7,sub_1AB1A
+                dbf     d7,QueueVisibleObjectSlotRange
                 rts
-; End of function sub_1AB1A
+; End of function QueueVisibleObjectSlotRange
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to make an object move and fall downward increasingly fast

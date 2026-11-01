@@ -12,7 +12,7 @@ Obj_HCZEndBoss:
 loc_6AEC6:
                 jsr     (Check_CameraInRange).l
                 move.b  #mus_EndBoss,boss_saved_mus(a0)
-                jsr     (sub_85D6A).l
+                jsr     (BeginBossCameraTransitionSaveBoundsAndFadeMusic).l
                 move.l  #loc_6AEFE,(a0)
                 move.l  #loc_6AF04,$34(a0)
                 moveq   #PLCID_6C,d0
@@ -38,7 +38,7 @@ loc_6AF0C:
                 move.b  routine(a0),d0
                 move.w  off_6AF24(pc,d0.w),d1
                 jsr     off_6AF24(pc,d1.w)
-                bsr.w   sub_6BBC4
+                bsr.w   HandleHCZEndBossThreeColorHitFlashOrDefeat
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 off_6AF24:
@@ -320,7 +320,7 @@ loc_6B26E:
                 move.w  #$C,d3
                 move.w  (sp)+,d4
                 jsr     (SolidObjectTop).l
-                bsr.w   sub_6BC42
+                bsr.w   StartHCZBossColumnDescentAfterRootDeath
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 off_6B29E:
@@ -366,7 +366,7 @@ loc_6B2F8:
 loc_6B31E:
                 jsr     (MoveSprite2).l
                 jsr     (Animate_Raw).l
-                bra.w   sub_6BC8A
+                bra.w   UpdateHCZBossColumnHeightAndCheckCallback
 ; ---------------------------------------------------------------------------
 
 loc_6B32E:
@@ -396,7 +396,7 @@ locret_6B374:
                 rts
 ; ---------------------------------------------------------------------------
 ; unused
-                bra.w   sub_6BC8A
+                bra.w   UpdateHCZBossColumnHeightAndCheckCallback
 ; ---------------------------------------------------------------------------
 
 loc_6B37A:
@@ -426,5 +426,5 @@ loc_6B3BC:
 loc_6B3C8:
                 jsr     (MoveSprite2).l
                 jsr     (Animate_Raw).l
-                bsr.w   sub_6BC8A
+                bsr.w   UpdateHCZBossColumnHeightAndCheckCallback
                 jmp     (Draw_Sprite).l

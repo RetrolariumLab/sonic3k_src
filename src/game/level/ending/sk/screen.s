@@ -20,7 +20,7 @@ loc_5AAB0:
                 clr.l   (_unkEE98).w
                 clr.l   (_unkEE9C).w
                 move.w  #$2B4,(Events_bg+$02).w
-                jsr     sub_5B11C(pc)
+                jsr     SKEndingLoadSkyAndSSZColorsIntoTargetPalettes(pc)
                 jsr     (Reset_TileOffsetPositionActual).l
                 jmp     (Refresh_PlaneFull).l
 ; ---------------------------------------------------------------------------
@@ -67,7 +67,7 @@ loc_5AB36:
                 beq.w   loc_5AEE4
                 clr.w   (Events_fg_4).w
                 move.w  (_unkEE98).w,(Events_bg+$00).w
-                jsr     sub_5AEEA(pc)
+                jsr     SKEndingPublishSceneRelativeForegroundCamera(pc)
                 jsr     (Reset_TileOffsetPositionActual).l
                 addq.w  #4,(Events_routine_fg).w
                 bra.s   loc_5AB62
@@ -76,7 +76,7 @@ loc_5AB36:
 loc_5AB58:
                 tst.w   (Events_fg_4).w
                 bne.s   loc_5AB66
-                jsr     sub_5AEEA(pc)
+                jsr     SKEndingPublishSceneRelativeForegroundCamera(pc)
 
 loc_5AB62:
                 bra.w   loc_5AEE4
@@ -87,7 +87,7 @@ loc_5AB66:
                 addq.w  #4,(Events_routine_fg).w
 
 loc_5AB6E:
-                jsr     sub_5AEEA(pc)
+                jsr     SKEndingPublishSceneRelativeForegroundCamera(pc)
                 cmpi.b  #7,(Chaos_emerald_count).w
                 blo.s   loc_5AB96
                 moveq   #0,d0
@@ -114,7 +114,7 @@ loc_5AB96:
 ; ---------------------------------------------------------------------------
 
 loc_5ABBC:
-                jsr     sub_5AEEA(pc)
+                jsr     SKEndingPublishSceneRelativeForegroundCamera(pc)
 
 loc_5ABC0:
                 move.l  a0,-(sp)
@@ -279,7 +279,7 @@ loc_5AE0A:
 loc_5AE36:
                 move.l  (a1)+,(a5)+
                 dbf     d0,loc_5AE36
-                jsr     sub_5B11C(pc)
+                jsr     SKEndingLoadSkyAndSSZColorsIntoTargetPalettes(pc)
                 movem.l (sp)+,d7-a0/a2-a3
                 move.l  #$2000000,d0
                 move.l  d0,(Camera_X_pos).w
@@ -324,7 +324,7 @@ loc_5AEA8:
 
 loc_5AED4:
                 movem.l d7-a0/a2-a3,-(sp)
-                jsr     (sub_5B18E).l
+                jsr     (SKEndingDispatchCreditsInitDelayScrollAndFinish).l
                 movem.l (sp)+,d7-a0/a2-a3
                 rts
 ; ---------------------------------------------------------------------------
@@ -334,7 +334,7 @@ loc_5AEE4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5AEEA:
+SKEndingPublishSceneRelativeForegroundCamera:
                 move.w  (_unkEE98).w,d0
                 sub.w   (Events_bg+$00).w,d0
                 addi.w  #$140,d0
@@ -343,4 +343,4 @@ sub_5AEEA:
                 sub.w   (Events_bg+$02).w,d0
                 move.w  d0,(Camera_Y_pos_copy).w
                 rts
-; End of function sub_5AEEA
+; End of function SKEndingPublishSceneRelativeForegroundCamera

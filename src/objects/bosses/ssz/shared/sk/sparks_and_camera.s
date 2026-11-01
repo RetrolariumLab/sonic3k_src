@@ -49,7 +49,7 @@ loc_7C9BA:
                 move.l  #loc_7C9C8,(a0)
 
 loc_7C9C8:
-                bsr.w   sub_7D260
+                bsr.w   SelectSSZMechaCollisionProxyFromParentFrame
                 jsr     Refresh_ChildPositionAdjusted(pc)
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
@@ -68,7 +68,7 @@ loc_7C9E8:
 ; ---------------------------------------------------------------------------
 
 loc_7C9F6:
-                bsr.w   sub_7D150
+                bsr.w   StopPlayerOneAllThreeVelocitiesForSSZScene
                 move.w  (Camera_X_pos).w,d0
                 move.w  x_vel(a0),d1
                 move.w  (Camera_max_X_pos).w,d2

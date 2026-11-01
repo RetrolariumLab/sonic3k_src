@@ -4,23 +4,23 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4D1B8:
+SolidifyFBZMinibossBodyAndReleasedCapsule:
                 moveq   #$23,d1
                 moveq   #$20,d2
                 moveq   #$1C,d3
                 move.w  x_pos(a0),d4
                 jmp     (SolidObjectFull).l
-; End of function sub_4D1B8
+; End of function SolidifyFBZMinibossBodyAndReleasedCapsule
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4D1C8:
+SolidifyFBZMinibossTopButton:
                 moveq   #$13,d1
                 moveq   #$10,d2
                 moveq   #8,d3
                 move.w  x_pos(a0),d4
                 jmp     (SolidObjectFull).l
-; End of function sub_4D1C8
+; End of function SolidifyFBZMinibossTopButton
 
 ; ---------------------------------------------------------------------------
 
@@ -45,14 +45,14 @@ word_4D1F8:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4D204:
+SetFBZMinibossLinkDeploymentVelocity:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  word_4D218-2(pc,d0.w),d0
                 move.w  d0,x_vel(a0)
                 move.w  d0,y_vel(a0)
                 rts
-; End of function sub_4D204
+; End of function SetFBZMinibossLinkDeploymentVelocity
 
 ; ---------------------------------------------------------------------------
 word_4D218:
@@ -65,7 +65,7 @@ word_4D218:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4D224:
+OscillateFBZMinibossArmAngle:
                 move.b  $3C(a0),d0
                 moveq   #0,d1
                 btst    #0,render_flags(a0)
@@ -95,7 +95,7 @@ loc_4D252:
                 add.b   d2,d0
                 move.b  d0,$3C(a0)
                 rts
-; End of function sub_4D224
+; End of function OscillateFBZMinibossArmAngle
 
 ; ---------------------------------------------------------------------------
 byte_4D25E:
@@ -107,7 +107,7 @@ byte_4D25E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4D262:
+ExtendFBZMinibossArmToSideAngle:
                 btst    #0,render_flags(a0)
                 bne.s   loc_4D27C
                 addq.b  #2,$3C(a0)
@@ -129,11 +129,11 @@ loc_4D27C:
 loc_4D288:
                 moveq   #0,d0
                 rts
-; End of function sub_4D262
+; End of function ExtendFBZMinibossArmToSideAngle
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4D28C:
+FoldFBZMinibossLinksForBodyStrike:
                 move.b  $3C(a0),d0
                 moveq   #0,d1
                 move.b  subtype(a0),d1
@@ -170,7 +170,7 @@ loc_4D2C4:
 loc_4D2EA:
                 move.b  d0,$3C(a0)
                 rts
-; End of function sub_4D28C
+; End of function FoldFBZMinibossLinksForBodyStrike
 
 ; ---------------------------------------------------------------------------
 byte_4D2F0:
@@ -181,7 +181,7 @@ byte_4D2F5:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4D2FA:
+ReturnFBZMinibossArmToRestAngle:
                 btst    #0,render_flags(a0)
                 bne.s   loc_4D314
                 addq.b  #2,$3C(a0)
@@ -203,11 +203,11 @@ loc_4D314:
 loc_4D320:
                 moveq   #0,d0
                 rts
-; End of function sub_4D2FA
+; End of function ReturnFBZMinibossArmToRestAngle
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4D324:
+RaiseFBZMinibossArmToVerticalAngle:
                 btst    #0,render_flags(a0)
                 bne.s   loc_4D33E
                 subq.b  #2,$3C(a0)
@@ -229,7 +229,7 @@ loc_4D33E:
 loc_4D34A:
                 moveq   #0,d0
                 rts
-; End of function sub_4D324
+; End of function RaiseFBZMinibossArmToVerticalAngle
 
 ; ---------------------------------------------------------------------------
 
@@ -246,7 +246,7 @@ loc_4D34E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4D36C:
+InterpolateFBZMinibossPunchLinkBetweenEndpoints:
                 movea.w $32(a0),a1
                 movea.w $30(a0),a2
                 moveq   #0,d2
@@ -289,11 +289,11 @@ loc_4D3BE:
                 add.w   d0,d3
                 move.w  d3,y_pos(a0)
                 rts
-; End of function sub_4D36C
+; End of function InterpolateFBZMinibossPunchLinkBetweenEndpoints
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4D3C6:
+ProcessFBZMinibossArmSelfHitAndDefeat:
                 btst    #6,$3A(a0)
                 beq.s   locret_4D40C
                 tst.b   $20(a0)
@@ -329,7 +329,7 @@ loc_4D40E:
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     CreateChild1_Normal(pc)
                 jmp     BossDefeated_StopTimer(pc)
-; End of function sub_4D3C6
+; End of function ProcessFBZMinibossArmSelfHitAndDefeat
 
 ; ---------------------------------------------------------------------------
 word_4D430:
@@ -340,7 +340,7 @@ word_4D438:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4D448:
+EnterFBZMinibossArmParentDefeatWait:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
                 bne.s   loc_4D456
@@ -352,4 +352,4 @@ loc_4D456:
                 bset    #7,status(a0)
                 clr.b   collision_flags(a0)
                 rts
-; End of function sub_4D448
+; End of function EnterFBZMinibossArmParentDefeatWait

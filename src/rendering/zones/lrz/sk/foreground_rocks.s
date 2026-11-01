@@ -102,7 +102,7 @@ loc_1CB5C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1CB68:
+RenderLRZForegroundRockPieces:
                 movea.l (LRZ_rocks_addr_front).w,a0
                 move.l  (LRZ_rocks_addr_back).w,d2
                 sub.l   a0,d2
@@ -142,7 +142,7 @@ loc_1CBB6:
 
 locret_1CBBC:
                 rts
-; End of function sub_1CB68
+; End of function RenderLRZForegroundRockPieces
 
 ; ---------------------------------------------------------------------------
 LRZ_Rock_SpriteData:

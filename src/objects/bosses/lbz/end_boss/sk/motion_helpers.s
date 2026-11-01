@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_73FCE:
+MoveAndSolidifyLBZEndBossTopPlatform:
                 move.w  x_pos(a0),-(sp)
                 jsr     (a2)
                 moveq   #$12,d1
@@ -12,11 +12,11 @@ sub_73FCE:
                 moveq   #7,d3
                 move.w  (sp)+,d4
                 jmp     (SolidObjectTop).l
-; End of function sub_73FCE
+; End of function MoveAndSolidifyLBZEndBossTopPlatform
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_73FE2:
+HandleLBZEndBossSingleColorHitOrEscape:
                 tst.l   (a0)
                 beq.s   locret_74038
                 tst.b   collision_flags(a0)
@@ -69,7 +69,7 @@ loc_74086:
                 move.w  #$3AB8,(Camera_stored_max_X_pos).w
                 lea     (Child6_IncLevX).l,a2
                 jmp     (CreateChild6_Simple).l
-; End of function sub_73FE2
+; End of function HandleLBZEndBossSingleColorHitOrEscape
 
 ; ---------------------------------------------------------------------------
 

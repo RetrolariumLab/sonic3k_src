@@ -246,7 +246,7 @@ Check_PlayerInRange:
                 add.w   (a1)+,d4
                 move.w  d4,d6
                 add.w   (a1)+,d6
-                bsr.w   sub_8592C
+                bsr.w   StorePlayerPointerIfInsideRect
                 swap    d0
                 lea     (Player_1).w,a2
                 move.w  x_pos(a2),d1
@@ -255,7 +255,7 @@ Check_PlayerInRange:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8592C:
+StorePlayerPointerIfInsideRect:
                 cmp.w   d3,d1
                 blo.s   locret_8593E
                 cmp.w   d5,d1
@@ -268,7 +268,7 @@ sub_8592C:
 
 locret_8593E:
                 rts
-; End of function sub_8592C
+; End of function StorePlayerPointerIfInsideRect
 
 ; =============== S U B R O U T I N E =======================================
 

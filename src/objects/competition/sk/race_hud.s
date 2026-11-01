@@ -91,13 +91,13 @@ loc_37D96:
 
 loc_37DB0:
                 move.l  -1(a3),d6
-                jsr     (sub_B0E4).l
+                jsr     (SKCompConvertTimerFrameByteToHundredths).l
                 cmpi.w  #5,d1
                 bhs.s   loc_37DD0
                 lsl.w   #2,d1
                 move.l  d6,(a6,d1.w)
                 move.l  $14(a6),d5
-                jsr     sub_36F76(pc)
+                jsr     CompetitionGoalSKAddPackedMinuteSecondCentisecondTimes(pc)
                 move.l  d6,(a5)
 
 loc_37DD0:

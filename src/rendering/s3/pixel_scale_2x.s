@@ -15,7 +15,7 @@ Scale_2x:
                 addq.w  #1,d3
                 lsl.w   #6,d3
                 swap    d3
-                bsr.w   sub_436DE
+                bsr.w   Scale2x_ExpandSpriteTileGroup
                 btst    #1,d0
                 beq.w   locret_432D8
                 btst    #1,d1
@@ -28,7 +28,7 @@ loc_436DC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_436DE:
+Scale2x_ExpandSpriteTileGroup:
                 movea.l a2,a4
                 swap    d2
                 lea     (a2,d2.w),a3
@@ -79,7 +79,7 @@ loc_43726:
 
 locret_43756:
                 rts
-; End of function sub_436DE
+; End of function Scale2x_ExpandSpriteTileGroup
 
 ; =============== S U B R O U T I N E =======================================
 

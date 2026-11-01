@@ -19,12 +19,12 @@ Tails_RollSpeed:
                 bne.s   loc_15936
                 btst    #button_left,(Ctrl_2_held_logical).w
                 beq.s   loc_1592A
-                bsr.w   sub_159E0
+                bsr.w   TailsS3ApplyRollingLeftInput
 
 loc_1592A:
                 btst    #button_right,(Ctrl_2_held_logical).w
                 beq.s   loc_15936
-                bsr.w   sub_15A04
+                bsr.w   TailsS3ApplyRollingRightInput
 
 loc_15936:
                 move.w  ground_vel(a0),d0
@@ -102,7 +102,7 @@ loc_159D8:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_159E0:
+TailsS3ApplyRollingLeftInput:
                 move.w  ground_vel(a0),d0
                 beq.s   loc_159E8
                 bpl.s   loc_159F6
@@ -121,11 +121,11 @@ loc_159F6:
 loc_159FE:
                 move.w  d0,ground_vel(a0)
                 rts
-; End of function sub_159E0
+; End of function TailsS3ApplyRollingLeftInput
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_15A04:
+TailsS3ApplyRollingRightInput:
                 move.w  ground_vel(a0),d0
                 bmi.s   loc_15A18
                 bclr    #Status_Facing,status(a0)
@@ -141,7 +141,7 @@ loc_15A18:
 loc_15A20:
                 move.w  d0,ground_vel(a0)
                 rts
-; End of function sub_15A04
+; End of function TailsS3ApplyRollingRightInput
 
 ; =============== S U B R O U T I N E =======================================
 

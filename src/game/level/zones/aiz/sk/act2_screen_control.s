@@ -362,13 +362,13 @@ loc_502FA:
                 move.w  d0,(Camera_max_X_pos).w         ; Set all the camera/start positions
                 move.w  d0,d1
                 lea     (Player_1).w,a1
-                bsr.s   sub_50318
+                bsr.s   ClampPlayerToAiz2ShipScrollWindow
                 move.w  d1,d0
                 lea     (Player_2).w,a1
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_50318:
+ClampPlayerToAiz2ShipScrollWindow:
                 cmpi.b  #5,anim(a1)
                 bne.s   loc_50324
                 clr.b   anim(a1)                        ; If Sonic is standing, set him to the running animation
@@ -390,4 +390,4 @@ loc_5033A:
 
 locret_50348:
                 rts
-; End of function sub_50318
+; End of function ClampPlayerToAiz2ShipScrollWindow

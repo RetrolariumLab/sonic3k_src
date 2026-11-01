@@ -59,7 +59,7 @@ loc_435D6:
 
 loc_435E0:
                 movea.w $3C(a0),a1
-                bsr.w   sub_43604
+                bsr.w   PositionLrzSwingingSpikeChain
                 move.b  $34(a0),d2
                 move.b  $36(a0),d0
                 add.b   d0,$34(a0)
@@ -72,7 +72,7 @@ loc_435FE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_43604:
+PositionLrzSwingingSpikeChain:
                 move.b  $34(a0),d0
                 jsr     (GetSineCosine).l
                 move.w  $46(a0),d2
@@ -113,7 +113,7 @@ loc_43636:
                 move.w  d5,x_pos(a0)
                 move.w  d4,y_pos(a0)
                 rts
-; End of function sub_43604
+; End of function PositionLrzSwingingSpikeChain
 
 ; ---------------------------------------------------------------------------
 Map_LRZSwingingSpikeBall:

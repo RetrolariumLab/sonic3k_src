@@ -38,7 +38,7 @@ loc_63134:
                 move.l  #loc_63182,$34(a0)
                 move.w  (Camera_min_X_pos).w,(Camera_stored_min_X_pos).w
                 move.w  (word_630DC).l,(_unkFAB4).w
-                bsr.w   sub_65DD6
+                bsr.w   CutsceneSpawnKnucklesMusicFadeTransition
                 st      (Events_bg+$16).w
                 lea     Pal_CutsceneKnux(pc),a1
                 jsr     (PalLoad_Line1).l
@@ -102,28 +102,28 @@ loc_631E0:
                 clr.w   $2E(a0)
                 move.b  #1,$39(a0)
                 lea     (Player_1).w,a1
-                bsr.w   sub_6320E
+                bsr.w   MHZBlowerLockAndStopSelectedPlayer
                 lea     (Player_2).w,a1
                 tst.l   (a1)
                 beq.s   locret_631DE
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6320E:
+MHZBlowerLockAndStopSelectedPlayer:
                 move.b  #$81,object_control(a1)
                 move.b  #5,anim(a1)
                 jmp     (Stop_Object).l
-; End of function sub_6320E
+; End of function MHZBlowerLockAndStopSelectedPlayer
 
 ; ---------------------------------------------------------------------------
 
 loc_63220:
-                bsr.w   sub_65E62
+                bsr.w   MHZBlowerApplyPlayerPoseToP1AndExistingP2
                 cmpi.b  #8,anim_frame(a0)
                 blo.s   loc_63238
                 moveq   #signextendB(sfx_LeafBlower),d0
                 jsr     (Play_SFX_Continuous).l
-                bsr.w   sub_65EB4
+                bsr.w   MHZBlowerEmitLeafOnReloadedTimer
 
 loc_63238:
                 lea     byte_666F6(pc),a1
@@ -167,7 +167,7 @@ loc_63294:
 loc_632AE:
                 tst.b   render_flags(a0)
                 bpl.w   loc_62422
-                bra.w   sub_65EB4
+                bra.w   MHZBlowerEmitLeafOnReloadedTimer
 ; ---------------------------------------------------------------------------
 ; unused
                 lea     (Pal_MHZ2).l,a1

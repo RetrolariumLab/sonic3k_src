@@ -25,20 +25,20 @@ loc_25CF0:
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
                 beq.s   loc_25D18
-                bsr.s   sub_25D2C
+                bsr.s   ActivateLbzExplodingTrigger
 
 loc_25D18:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
                 beq.s   loc_25D26
-                bsr.s   sub_25D2C
+                bsr.s   ActivateLbzExplodingTrigger
 
 loc_25D26:
                 jmp     (Sprite_CheckDeleteTouch3).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_25D2C:
+ActivateLbzExplodingTrigger:
                 cmpi.b  #2,anim(a1)
                 bne.s   locret_25D52
                 neg.w   x_vel(a1)
@@ -51,4 +51,4 @@ sub_25D2C:
 
 locret_25D52:
                 rts
-; End of function sub_25D2C
+; End of function ActivateLbzExplodingTrigger

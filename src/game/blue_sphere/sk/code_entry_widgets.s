@@ -64,7 +64,7 @@ loc_4D36A:
 loc_4D37E:
                 andi.l  #$7FFFFFF,(a2)
                 moveq   #1,d6
-                bsr.w   sub_4D5A0
+                bsr.w   BlueSphereComputeWordXorSingleShiftCheckValue
                 move.w  d4,d0
                 andi.w  #$3F,d0
                 tst.b   (Blue_spheres_progress_flag).w
@@ -99,7 +99,7 @@ loc_4D3DC:
                 move.b  (Ctrl_1_pressed).w,d0
                 cmpi.b  #button_start_mask,d0
                 bne.s   loc_4D3EA
-                bsr.w   sub_4D488
+                bsr.w   BlueSphereValidateEnteredCodeAndRestoreLevelStageSelection
 
 loc_4D3EA:
                 movea.l a0,a1
@@ -160,7 +160,7 @@ loc_4D482:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4D488:
+BlueSphereValidateEnteredCodeAndRestoreLevelStageSelection:
                 bsr.w   loc_4D268
                 eori.w  #$55,d0
                 move.w  d0,d2
@@ -184,7 +184,7 @@ loc_4D4C2:
                 move.l  d1,(Stat_table).w
                 lea     (Stat_table).w,a2
                 moveq   #1,d6
-                bsr.w   sub_4D5A0
+                bsr.w   BlueSphereComputeWordXorSingleShiftCheckValue
                 andi.w  #$7FF,d4
                 cmp.w   d4,d3
                 bne.w   loc_4D58A
@@ -244,7 +244,7 @@ loc_4D4FC:
                 swap    d2
                 move.b  d2,(a2)+
                 lea     (Normal_palette).w,a2
-                bsr.w   sub_4CB1A
+                bsr.w   BlueSphereCopyProgressSelectedFullPalette
                 moveq   #signextendB(sfx_Starpost),d0
                 jsr     (Play_SFX).l
                 andi.b  #$7F,(Blue_spheres_menu_flag).w
@@ -258,11 +258,11 @@ loc_4D58A:
                 andi.b  #$7F,(Blue_spheres_menu_flag).w
                 move.b  #1,(Blue_spheres_option).w
                 rts
-; End of function sub_4D488
+; End of function BlueSphereValidateEnteredCodeAndRestoreLevelStageSelection
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4D5A0:
+BlueSphereComputeWordXorSingleShiftCheckValue:
                 moveq   #0,d4
 
 loc_4D5A2:
@@ -275,12 +275,12 @@ loc_4D5A2:
 loc_4D5AE:
                 dbf     d6,loc_4D5A2
                 rts
-; End of function sub_4D5A0
+; End of function BlueSphereComputeWordXorSingleShiftCheckValue
 
 ; ---------------------------------------------------------------------------
 
 loc_4D5B4:
-                bsr.s   sub_4D5C2
+                bsr.s   BlueSphereInitializeNumericSpriteMappingsArtAndBounds
                 move.l  #loc_4D5BC,(a0)
 
 loc_4D5BC:
@@ -288,19 +288,19 @@ loc_4D5BC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4D5C2:
+BlueSphereInitializeNumericSpriteMappingsArtAndBounds:
                 move.l  #Map_BlueSpheresNum,mappings(a0)
                 move.w  #make_art_tile(ArtTile_BlueSphere_Misc,0,1),art_tile(a0)
                 move.w  #$80,priority(a0)
                 move.b  #8,width_pixels(a0)
                 move.b  #8,height_pixels(a0)
                 rts
-; End of function sub_4D5C2
+; End of function BlueSphereInitializeNumericSpriteMappingsArtAndBounds
 
 ; ---------------------------------------------------------------------------
 
 loc_4D5E4:
-                bsr.s   sub_4D5C2
+                bsr.s   BlueSphereInitializeNumericSpriteMappingsArtAndBounds
                 move.l  #loc_4D5EC,(a0)
 
 loc_4D5EC:
@@ -314,7 +314,7 @@ loc_4D5F4:
 ; ---------------------------------------------------------------------------
 
 loc_4D5FA:
-                bsr.s   sub_4D5C2
+                bsr.s   BlueSphereInitializeNumericSpriteMappingsArtAndBounds
                 move.l  #loc_4D602,(a0)
 
 loc_4D602:

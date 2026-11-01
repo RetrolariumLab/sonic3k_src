@@ -6,7 +6,7 @@
 Obj_AIZRideVine:
                 movea.l a0,a1
                 move.l  #loc_20168,(a1)
-                bsr.w   sub_20140
+                bsr.w   InitializeAizRideVineSprite
                 move.b  #$21,mapping_frame(a1)
                 move.w  x_pos(a0),d2
                 move.w  y_pos(a0),d3
@@ -35,7 +35,7 @@ loc_200F8:
 
 loc_20110:
                 movea.l a1,a2
-                bsr.s   sub_20140
+                bsr.s   InitializeAizRideVineSprite
                 move.w  d2,x_pos(a1)
                 move.w  d3,y_pos(a1)
                 addi.w  #$10,d3
@@ -51,7 +51,7 @@ loc_2013E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_20140:
+InitializeAizRideVineSprite:
                 move.b  #4,render_flags(a1)
                 move.b  #8,width_pixels(a1)
                 move.b  #8,height_pixels(a1)
@@ -59,7 +59,7 @@ sub_20140:
                 move.l  #Map_AIZRideVine,mappings(a1)
                 move.w  #make_art_tile(ArtTile_AIZSwingVine,0,0),art_tile(a1)
                 rts
-; End of function sub_20140
+; End of function InitializeAizRideVineSprite
 
 ; ---------------------------------------------------------------------------
 
@@ -322,12 +322,12 @@ loc_20454:
                 addq.b  #4,d0
                 lsr.b   #3,d0
                 move.b  d0,mapping_frame(a0)
-                bsr.w   sub_20480
+                bsr.w   PositionAizRideVineLink
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_20480:
+PositionAizRideVineLink:
                 movea.w $3C(a0),a1
                 move.b  angle(a1),d0
                 addq.b  #4,d0
@@ -343,14 +343,14 @@ sub_20480:
                 add.w   y_pos(a1),d1
                 move.w  d1,y_pos(a0)
                 rts
-; End of function sub_20480
+; End of function PositionAizRideVineLink
 
 ; ---------------------------------------------------------------------------
 
 Obj_AIZRideVineHandle:
                 move.w  x_pos(a0),d4
                 move.w  y_pos(a0),d5
-                bsr.w   sub_20480
+                bsr.w   PositionAizRideVineLink
                 cmp.w   x_pos(a0),d4
                 beq.s   loc_204CA
                 move.w  d4,$42(a0)
@@ -364,11 +364,11 @@ loc_204D4:
                 lea     $32(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d0
-                bsr.s   sub_20502
+                bsr.s   UpdatePlayerOnAizVineHandle
                 lea     (Player_2).w,a1
                 addq.w  #1,a2
                 move.w  (Ctrl_2_logical).w,d0
-                bsr.s   sub_20502
+                bsr.s   UpdatePlayerOnAizVineHandle
                 tst.w   $32(a0)
                 beq.s   loc_204FA
                 tst.w   $30(a0)
@@ -383,7 +383,7 @@ locret_20500:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_20502:
+UpdatePlayerOnAizVineHandle:
                 tst.b   (a2)
                 beq.w   loc_206DE
                 bmi.w   loc_205BC
@@ -450,7 +450,7 @@ loc_205CE:
                 clr.b   (a2)
                 move.b  #$3C,2(a2)
                 rts
-; End of function sub_20502
+; End of function UpdatePlayerOnAizVineHandle
 
 ; ---------------------------------------------------------------------------
 

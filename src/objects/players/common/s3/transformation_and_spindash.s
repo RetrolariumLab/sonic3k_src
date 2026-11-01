@@ -77,7 +77,7 @@ loc_12B6E:
                 bsr.w   Player_AnglePos
                 tst.b   (Background_collision_flag).w
                 beq.s   locret_12B9A
-                bsr.w   sub_10BA2
+                bsr.w   CheckPlayerBodyFloorClearance
                 tst.w   d1
                 bmi.w   Kill_Character
                 movem.l a4-a6,-(sp)
@@ -191,7 +191,7 @@ loc_12C9E:
                 bsr.w   Player_AnglePos
                 tst.b   (Background_collision_flag).w
                 beq.s   locret_12CCA
-                bsr.w   sub_10BA2
+                bsr.w   CheckPlayerBodyFloorClearance
                 tst.w   d1
                 bmi.w   Kill_Character
                 movem.l a4-a6,-(sp)

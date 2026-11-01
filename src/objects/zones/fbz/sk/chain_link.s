@@ -81,16 +81,16 @@ loc_3A894:
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d0
-                bsr.w   sub_3A8B8
+                bsr.w   UpdatePlayerHangingFromFbzVerticalChain
                 lea     (Player_2).w,a1
                 addq.w  #1,a2
                 move.w  (Ctrl_2_logical).w,d0
-                bsr.w   sub_3A8B8
+                bsr.w   UpdatePlayerHangingFromFbzVerticalChain
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3A8B8:
+UpdatePlayerHangingFromFbzVerticalChain:
                 tst.b   (a2)
                 beq.w   loc_3A9A6
                 tst.b   render_flags(a1)
@@ -221,17 +221,17 @@ loc_3AA5A:
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d0
-                bsr.w   sub_3AA7E
+                bsr.w   UpdatePlayerTraversingFbzHorizontalChain
                 lea     (Player_2).w,a1
                 addq.w  #1,a2
                 move.w  (Ctrl_2_logical).w,d0
-                bsr.w   sub_3AA7E
+                bsr.w   UpdatePlayerTraversingFbzHorizontalChain
                 jmp     (Delete_Sprite_If_Not_In_Range).l
-; End of function sub_3A8B8
+; End of function UpdatePlayerHangingFromFbzVerticalChain
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3AA7E:
+UpdatePlayerTraversingFbzHorizontalChain:
                 tst.b   (a2)
                 beq.w   loc_3AC86
                 tst.b   render_flags(a1)
@@ -354,7 +354,7 @@ loc_3AC06:
                 add.w   d1,x_pos(a1)
                 subq.b  #1,4(a2)
                 bne.s   loc_3AC26
-                bsr.s   sub_3AC48
+                bsr.s   ReleaseFbzChainPlayerAtOneWayEndpoint
                 move.b  #0,6(a2)
                 bchg    #2,8(a2)
                 andi.w  #(button_left_mask|button_right_mask)<<8,d0
@@ -367,7 +367,7 @@ loc_3AC26:
                 jsr     (Perform_Player_DPLC).l
                 movea.l (sp)+,a2
                 rts
-; End of function sub_3AA7E
+; End of function UpdatePlayerTraversingFbzHorizontalChain
 
 ; ---------------------------------------------------------------------------
 RawAni_3AC38:
@@ -378,7 +378,7 @@ byte_3AC40:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3AC48:
+ReleaseFbzChainPlayerAtOneWayEndpoint:
                 btst    #6,subtype(a0)
                 beq.s   locret_3AC84
                 move.w  $3E(a0),d2
@@ -404,7 +404,7 @@ loc_3AC70:
 
 locret_3AC84:
                 rts
-; End of function sub_3AC48
+; End of function ReleaseFbzChainPlayerAtOneWayEndpoint
 
 ; ---------------------------------------------------------------------------
 

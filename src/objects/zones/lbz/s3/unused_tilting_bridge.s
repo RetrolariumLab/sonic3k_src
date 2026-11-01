@@ -54,19 +54,19 @@ loc_262C2:
                 move.w  d2,d3
                 addq.w  #1,d3
                 move.w  x_pos(a0),d4
-                bsr.w   sub_2636C
+                bsr.w   CollidePlayersWithLbzUnusedTiltingBridge
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
 loc_262DC:
                 movea.w $3C(a0),a1
                 move.b  $42(a1),$42(a0)
-                bsr.w   sub_262F0
+                bsr.w   PositionLbzUnusedTiltingBridgePieces
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_262F0:
+PositionLbzUnusedTiltingBridgePieces:
                 move.b  $42(a0),d0
                 jsr     (GetSineCosine).l
                 move.w  y_pos(a0),d2
@@ -119,27 +119,27 @@ loc_2634C:
                 addq.w  #2,a2
                 dbf     d6,loc_2634C
                 rts
-; End of function sub_262F0
+; End of function PositionLbzUnusedTiltingBridgePieces
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2636C:
+CollidePlayersWithLbzUnusedTiltingBridge:
 ; Bug: probably meant to be $30(a0)
                 lea     (Vectors+$30).w,a2
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 movem.l d1-d3,-(sp)
-                bsr.s   sub_2638A
+                bsr.s   CollidePlayerWithLbzUnusedTiltingBridge
                 movem.l (sp)+,d1-d3
 ; Bug: probably meant to be $34(a0)
                 lea     (Vectors+$34).w,a2
                 lea     (Player_2).w,a1
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
-; End of function sub_2636C
+; End of function CollidePlayersWithLbzUnusedTiltingBridge
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2638A:
+CollidePlayerWithLbzUnusedTiltingBridge:
                 btst    d6,status(a0)
                 beq.w   loc_26448
                 move.w  ground_vel(a1),d0
@@ -177,14 +177,14 @@ loc_263D0:
 ; ---------------------------------------------------------------------------
 
 loc_263E4:
-                bsr.w   sub_263EC
+                bsr.w   ProjectPlayerOnLbzUnusedTiltingBridge
                 moveq   #0,d4
                 rts
-; End of function sub_2638A
+; End of function CollidePlayerWithLbzUnusedTiltingBridge
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_263EC:
+ProjectPlayerOnLbzUnusedTiltingBridge:
                 move.w  d3,d5
                 move.b  $42(a0),d0
                 jsr     (GetSineCosine).l
@@ -219,7 +219,7 @@ loc_2641E:
                 move.w  d2,y_pos(a1)
                 move.w  d3,x_pos(a1)
                 rts
-; End of function sub_263EC
+; End of function ProjectPlayerOnLbzUnusedTiltingBridge
 
 ; ---------------------------------------------------------------------------
 
@@ -278,7 +278,7 @@ loc_264C4:
                 swap    d0
                 sub.w   d0,(a2)
                 move.w  d5,d3
-                bsr.w   sub_263EC
+                bsr.w   ProjectPlayerOnLbzUnusedTiltingBridge
                 jmp     (RideObject_SetRide).l
 ; ---------------------------------------------------------------------------
 

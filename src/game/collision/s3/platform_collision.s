@@ -189,7 +189,7 @@ loc_1C0B4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1C0BE:
+TryLandPlayerOnPlatformSpan:
                 tst.w   y_vel(a1)
                 bmi.w   locret_1C17A
                 move.w  x_pos(a1),d0
@@ -233,7 +233,7 @@ loc_1C100:
                 add.w   d0,d2
                 addq.w  #3,d2
                 move.w  d2,y_pos(a1)
-; End of function sub_1C0BE
+; End of function TryLandPlayerOnPlatformSpan
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -16,16 +16,16 @@ loc_2B9D2:
                 lea     (Player_1).w,a1
                 lea     (_unkF7B0+2).w,a2
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_2B9F0
+                bsr.s   UpdatePlayerOnLbzRollingDrum
                 lea     (Player_2).w,a1
                 lea     (_unkF7B0+3).w,a2
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
-                bsr.s   sub_2B9F0
+                bsr.s   UpdatePlayerOnLbzRollingDrum
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2B9F0:
+UpdatePlayerOnLbzRollingDrum:
                 btst    d6,status(a0)
                 bne.w   loc_2BA76
                 move.w  x_pos(a1),d0
@@ -134,4 +134,4 @@ loc_2BB0E:
 
 locret_2BB1E:
                 rts
-; End of function sub_2B9F0
+; End of function UpdatePlayerOnLbzRollingDrum

@@ -99,7 +99,7 @@ loc_5969E:
                 move.w  #-8,$44(a0)
 
 loc_596D6:
-                bsr.w   sub_59718
+                bsr.w   RunStarPointerSpikeCallbackWhenCollisionCleared
                 moveq   #4,d2
                 jsr     MoveSprite_CircularSimple(pc)
                 jmp     Child_DrawTouch_Sprite(pc)
@@ -110,7 +110,7 @@ loc_596E4:
                 movea.l $30(a0),a1
                 move.w  $44(a0),d3
                 jsr     (a1)
-                bsr.w   sub_59718
+                bsr.w   RunStarPointerSpikeCallbackWhenCollisionCleared
                 jmp     Sprite_CheckDeleteTouchXY(pc)
 ; ---------------------------------------------------------------------------
 
@@ -127,7 +127,7 @@ loc_5970C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59718:
+RunStarPointerSpikeCallbackWhenCollisionCleared:
                 tst.b   collision_flags(a0)
                 bne.s   locret_59724
                 movea.l $34(a0),a1
@@ -135,7 +135,7 @@ sub_59718:
 
 locret_59724:
                 rts
-; End of function sub_59718
+; End of function RunStarPointerSpikeCallbackWhenCollisionCleared
 
 ; ---------------------------------------------------------------------------
 ObjDat_StarPointer:

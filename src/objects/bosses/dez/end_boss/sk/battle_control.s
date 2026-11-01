@@ -10,7 +10,7 @@ Obj_DEZEndBoss:
                 move.l  #loc_7F0D2,$34(a0)
                 lea     word_7F0C6(pc),a1
                 move.b  #mus_EndBoss,boss_saved_mus(a0)
-                jsr     sub_85D6A(pc)
+                jsr     BeginBossCameraTransitionSaveBoundsAndFadeMusic(pc)
                 clr.b   (_unkFAB8).w
                 moveq   #PLCID_76,d0
                 jsr     (Load_PLC).l
@@ -44,7 +44,7 @@ loc_7F0DA:
                 move.b  routine(a0),d0
                 move.w  off_7F102(pc,d0.w),d1
                 jsr     off_7F102(pc,d1.w)
-                bsr.w   sub_7FB92
+                bsr.w   ConsumeDEZEndBossReturnedCapsuleHitLatch
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #$3F,d0
                 bne.s   loc_7F0FE
@@ -103,7 +103,7 @@ loc_7F166:
 loc_7F182:
                 jsr     Swing_UpAndDown(pc)
                 jsr     (MoveSprite2).l
-                bsr.w   sub_7FA60
+                bsr.w   ReverseDEZEndBossAtInclusiveWorldXBounds
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
@@ -128,7 +128,7 @@ loc_7F1C4:
 loc_7F1CC:
                 jsr     Swing_UpAndDown(pc)
                 jsr     (MoveSprite2).l
-                bsr.w   sub_7FA60
+                bsr.w   ReverseDEZEndBossAtInclusiveWorldXBounds
                 jmp     Animate_Raw(pc)
 ; ---------------------------------------------------------------------------
 
@@ -258,7 +258,7 @@ loc_7F344:
 
 loc_7F352:
                 movea.w parent3(a0),a1
-                jsr     sub_8622C(pc)
+                jsr     GetApproximateObjectBearing(pc)
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
                 beq.s   loc_7F37C
@@ -276,8 +276,8 @@ loc_7F37C:
                 move.b  d0,$3C(a0)
                 lea     (byte_7FD28).l,a2
                 jsr     MoveSprite_AtAngleLookup(pc)
-                bsr.w   sub_7FA7E
-                bsr.w   sub_7FACC
+                bsr.w   LaunchPlayerFromDEZBossBumperContact
+                bsr.w   SelectDEZBossBumperFrameAndFlipFromAngle
                 moveq   #8,d0
                 jmp     Child_DrawTouch_Sprite_FlickerMove(pc)
 ; ---------------------------------------------------------------------------
@@ -330,13 +330,13 @@ loc_7F40A:
                 move.w  x_pos(a1),x_pos(a0)
 
 loc_7F414:
-                bsr.w   sub_7F8A0
+                bsr.w   MoveDEZBossCapsuleWithPreintegratedReversibleGravity
                 tst.w   y_vel(a0)
                 bpl.s   loc_7F430
                 jsr     (ObjCheckCeilingDist).l
                 tst.w   d1
                 bpl.s   loc_7F43E
-                bsr.w   sub_7F45A
+                bsr.w   LandDEZBossCapsuleAgainstCeiling
                 bra.w   loc_7F43E
 ; ---------------------------------------------------------------------------
 
@@ -344,29 +344,29 @@ loc_7F430:
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
                 bpl.s   loc_7F43E
-                bsr.w   sub_7F472
+                bsr.w   LandDEZBossCapsuleAgainstFloor
 
 loc_7F43E:
                 movea.w parent3(a0),a1
                 btst    #7,status(a0)
-                bne.s   sub_7F4AC
+                bne.s   ScheduleDEZBossCapsuleExplosionThenDelete
                 btst    #0,(V_int_run_count+3).w
                 bne.w   locret_7F0D8
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7F45A:
+LandDEZBossCapsuleAgainstCeiling:
                 sub.w   d1,y_pos(a0)
                 move.b  #0,routine(a0)
                 move.b  #$C6,collision_flags(a0)
                 st      $3A(a0)
                 bra.w   loc_7F486
-; End of function sub_7F45A
+; End of function LandDEZBossCapsuleAgainstCeiling
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7F472:
+LandDEZBossCapsuleAgainstFloor:
                 add.w   d1,y_pos(a0)
                 move.b  #2,routine(a0)
                 move.b  #$C6,collision_flags(a0)
@@ -385,11 +385,11 @@ loc_7F4A2:
                 move.w  d1,x_vel(a0)
                 clr.w   y_vel(a0)
                 rts
-; End of function sub_7F472
+; End of function LandDEZBossCapsuleAgainstFloor
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7F4AC:
+ScheduleDEZBossCapsuleExplosionThenDelete:
                 move.l  #Go_Delete_Sprite,$34(a0)
                 bra.w   loc_7F4C0
-; End of function sub_7F4AC
+; End of function ScheduleDEZBossCapsuleExplosionThenDelete

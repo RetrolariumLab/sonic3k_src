@@ -29,10 +29,10 @@ loc_29386:
                 move.w  $32(a0),$30(a0)
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   loc_293CA
-                bsr.s   sub_293D0
+                bsr.s   InitializeLbzGateLaserSegment
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   loc_293CA
-                bsr.s   sub_293D0
+                bsr.s   InitializeLbzGateLaserSegment
                 move.w  #$80,priority(a1)
                 move.b  #2,mapping_frame(a1)
                 move.b  #$98,collision_flags(a1)
@@ -45,7 +45,7 @@ loc_293CA:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_293D0:
+InitializeLbzGateLaserSegment:
                 move.l  #loc_2941C,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
@@ -58,7 +58,7 @@ sub_293D0:
                 move.b  #1,mapping_frame(a1)
                 move.w  #$180,priority(a1)
                 rts
-; End of function sub_293D0
+; End of function InitializeLbzGateLaserSegment
 
 ; ---------------------------------------------------------------------------
 

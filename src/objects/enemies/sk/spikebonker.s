@@ -186,7 +186,7 @@ loc_91BC0:
 
 loc_91BD4:
                 move.b  $3C(a0),d0
-                bsr.w   sub_91BFA
+                bsr.w   SelectSpikebonkerBallFrameByAngle
                 move.w  #$200,priority(a0)
                 addi.b  #$40,d0
                 bpl.s   loc_91BEE
@@ -198,7 +198,7 @@ loc_91BEE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_91BFA:
+SelectSpikebonkerBallFrameByAngle:
                 moveq   #0,d1
 
 loc_91BFC:
@@ -212,7 +212,7 @@ loc_91BFC:
 loc_91C08:
                 move.b  (a1),mapping_frame(a0)
                 rts
-; End of function sub_91BFA
+; End of function SelectSpikebonkerBallFrameByAngle
 
 ; ---------------------------------------------------------------------------
 byte_91C0E:

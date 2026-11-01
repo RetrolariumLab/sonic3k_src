@@ -9,7 +9,7 @@ Obj_DEZEnergyBridge:
                 move.b  #$40,width_pixels(a0)
                 move.b  #8,height_pixels(a0)
                 bset    #7,status(a0)
-                bsr.s   sub_47DDE
+                bsr.s   InitializeDezEnergyBridgeTiming
                 sub.w   d1,d0
                 bcc.s   loc_47E5C
                 neg.w   d0
@@ -42,10 +42,10 @@ loc_47E8C:
                 bne.s   loc_47EAA
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_47EE8
+                bsr.s   DetachPlayerFromExpiredDezEnergyBridge
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
-                bsr.s   sub_47EE8
+                bsr.s   DetachPlayerFromExpiredDezEnergyBridge
                 move.l  #loc_47E62,(a0)
                 bra.s   loc_47EBE
 ; ---------------------------------------------------------------------------
@@ -74,7 +74,7 @@ loc_47EE2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_47EE8:
+DetachPlayerFromExpiredDezEnergyBridge:
                 bclr    d6,status(a0)
                 beq.s   locret_47EFA
                 bclr    #Status_OnObj,status(a1)
@@ -82,7 +82,7 @@ sub_47EE8:
 
 locret_47EFA:
                 rts
-; End of function sub_47EE8
+; End of function DetachPlayerFromExpiredDezEnergyBridge
 
 ; ---------------------------------------------------------------------------
 
@@ -90,7 +90,7 @@ Obj_DEZEnergyBridgeCurved:
                 move.l  #Map_DEZEnergyBridgeCurved,mappings(a0)
                 move.b  #$50,width_pixels(a0)
                 move.b  #$30,height_pixels(a0)
-                bsr.w   sub_47DDE
+                bsr.w   InitializeDezEnergyBridgeTiming
                 sub.w   d1,d0
                 bcc.s   loc_47F26
                 neg.w   d0
@@ -126,10 +126,10 @@ loc_47F56:
 loc_47F62:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_47F9C
+                bsr.s   SelectPlayerCollisionLayerForDezCurvedBridge
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
-                bsr.s   sub_47F9C
+                bsr.s   SelectPlayerCollisionLayerForDezCurvedBridge
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #3,d0
                 move.b  d0,mapping_frame(a0)
@@ -146,7 +146,7 @@ loc_47F96:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_47F9C:
+SelectPlayerCollisionLayerForDezCurvedBridge:
                 tst.w   $34(a0)
                 beq.s   loc_47FD8
                 move.w  x_pos(a1),d0
@@ -178,7 +178,7 @@ loc_47FEA:
 
 locret_47FF6:
                 rts
-; End of function sub_47F9C
+; End of function SelectPlayerCollisionLayerForDezCurvedBridge
 
 ; ---------------------------------------------------------------------------
 Map_DEZEnergyBridge:

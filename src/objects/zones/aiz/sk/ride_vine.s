@@ -6,7 +6,7 @@
 Obj_AIZRideVine:
                 movea.l a0,a1
                 move.l  #loc_21D28,(a1)
-                bsr.w   sub_21D00
+                bsr.w   InitializeAizRideVineSprite
                 move.b  #$21,mapping_frame(a1)
                 move.w  x_pos(a0),d2
                 move.w  y_pos(a0),d3
@@ -35,7 +35,7 @@ loc_21CB8:
 
 loc_21CD0:
                 movea.l a1,a2
-                bsr.s   sub_21D00
+                bsr.s   InitializeAizRideVineSprite
                 move.w  d2,x_pos(a1)
                 move.w  d3,y_pos(a1)
                 addi.w  #$10,d3
@@ -51,7 +51,7 @@ loc_21CFE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_21D00:
+InitializeAizRideVineSprite:
                 move.b  #4,render_flags(a1)
                 move.b  #8,width_pixels(a1)
                 move.b  #8,height_pixels(a1)
@@ -59,7 +59,7 @@ sub_21D00:
                 move.l  #Map_AIZMHZRideVine,mappings(a1)
                 move.w  #make_art_tile(ArtTile_AIZSwingVine,0,0),art_tile(a1)
                 rts
-; End of function sub_21D00
+; End of function InitializeAizRideVineSprite
 
 ; ---------------------------------------------------------------------------
 
@@ -322,12 +322,12 @@ loc_22014:
                 addq.b  #4,d0
                 lsr.b   #3,d0
                 move.b  d0,mapping_frame(a0)
-                bsr.w   sub_22040
+                bsr.w   PositionAizRideVineLink
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_22040:
+PositionAizRideVineLink:
                 movea.w $3C(a0),a1
                 move.b  angle(a1),d0
                 addq.b  #4,d0
@@ -343,14 +343,14 @@ sub_22040:
                 add.w   y_pos(a1),d1
                 move.w  d1,y_pos(a0)
                 rts
-; End of function sub_22040
+; End of function PositionAizRideVineLink
 
 ; ---------------------------------------------------------------------------
 
 Obj_AIZRideVineHandle:
                 move.w  x_pos(a0),d4
                 move.w  y_pos(a0),d5
-                bsr.w   sub_22040
+                bsr.w   PositionAizRideVineLink
                 cmp.w   x_pos(a0),d4
                 beq.s   loc_2208A
                 move.w  d4,$42(a0)
@@ -364,11 +364,11 @@ loc_22094:
                 lea     $32(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d0
-                bsr.s   sub_220C2
+                bsr.s   UpdatePlayerOnAizVineHandle
                 lea     (Player_2).w,a1
                 addq.w  #1,a2
                 move.w  (Ctrl_2_logical).w,d0
-                bsr.s   sub_220C2
+                bsr.s   UpdatePlayerOnAizVineHandle
                 tst.w   $32(a0)
                 beq.s   loc_220BA
                 tst.w   $30(a0)
@@ -383,7 +383,7 @@ locret_220C0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_220C2:
+UpdatePlayerOnAizVineHandle:
                 tst.b   (a2)
                 beq.w   loc_222F4
                 bmi.w   loc_2217E
@@ -451,11 +451,11 @@ loc_22190:
                 clr.b   (a2)
                 move.b  #$3C,2(a2)
                 rts
-; End of function sub_220C2
+; End of function UpdatePlayerOnAizVineHandle
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2219E:
+CheckAizVineLevelSelectSequence:
                 cmpa.w  #Player_1,a1
                 bne.s   locret_221E0
                 tst.b   d0
@@ -485,7 +485,7 @@ loc_221DA:
 
 locret_221E0:
                 rts
-; End of function sub_2219E
+; End of function CheckAizVineLevelSelectSequence
 
 ; ---------------------------------------------------------------------------
 byte_221E2:
@@ -505,7 +505,7 @@ byte_221E2:
 loc_221EC:
                 tst.w   $30(a0)
                 bne.s   loc_22258
-                bsr.s   sub_2219E
+                bsr.s   CheckAizVineLevelSelectSequence
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 addi.w  #$14,y_pos(a1)

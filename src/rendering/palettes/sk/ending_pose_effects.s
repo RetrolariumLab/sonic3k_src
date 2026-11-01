@@ -43,7 +43,7 @@ loc_5FC2A:
                 moveq   #$F-1,d0
 
 loc_5FC3C:
-                jsr     (sub_85EB4).l
+                jsr     (EffectColorSKRaiseOneColorTowardWhite).l
                 dbf     d0,loc_5FC3C
                 subq.b  #1,$39(a0)
                 bmi.s   loc_5FC4E
@@ -68,7 +68,7 @@ loc_5FC62:
                 moveq   #$F-1,d0
 
 loc_5FC78:
-                jsr     (sub_85F2A).l
+                jsr     (EffectColorSKLowerOneColorTowardTarget).l
                 dbf     d0,loc_5FC78
                 subq.b  #1,$39(a0)
                 bpl.s   locret_5FC4C

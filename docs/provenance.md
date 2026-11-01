@@ -70,6 +70,16 @@ above.
 ## Label provenance
 
 The canonical
-[label rename registry](../config/reconstruction/label_renames.json) records the
-retained upstream spellings. Address-based names are preserved when their
-meaning is uncertain; path ownership does not establish a new label meaning.
+[label rename registry](../config/reconstruction/label_renames.json) maps all
+1571 reviewed address-named procedures to source-derived meaningful names. Each
+record retains its original spelling, physical source identity, compilation
+profiles and concrete purpose. The three repeated spellings remain separate
+definitions in separate engines. Local labels and unrelated data labels retain
+their existing spellings.
+
+The registry is bound to the exact pre-migration Git source and must cover every
+original physical definition. Current declarations and references are checked
+against that scope. Historical preservation compares registered names as a
+profile-specific view; original addresses, procedure counts and return
+boundaries must still match. Original baseline evidence is not redefined by a
+candidate build. Semantic naming does not claim new runtime coverage.

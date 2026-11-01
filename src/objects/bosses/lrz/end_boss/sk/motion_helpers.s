@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_79EB6:
+DeleteLRZEndBossProjectileOnParentDeathAndAbortUpdate:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
                 bne.s   loc_79EE6
@@ -32,14 +32,14 @@ loc_79EFA:
                 jsr     (Play_SFX).l
                 addq.w  #4,sp
                 rts
-; End of function sub_79EB6
+; End of function DeleteLRZEndBossProjectileOnParentDeathAndAbortUpdate
 
 ; ---------------------------------------------------------------------------
 word_79F0C:
                 dc.w    -$30,   $60,  -$30,   $60
 ; =============== S U B R O U T I N E =======================================
 
-sub_79F14:
+SetLRZLavaRiderHorizontalStreamVelocity:
                 move.w  (Events_bg+$0A).w,d0
                 move.w  (_unkFA84).w,d1
                 lsr.w   #2,d1
@@ -52,11 +52,11 @@ sub_79F14:
 loc_79F2A:
                 move.w  d0,x_vel(a0)
                 rts
-; End of function sub_79F14
+; End of function SetLRZLavaRiderHorizontalStreamVelocity
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_79F30:
+MatchLRZLavaRiderHeightFromWorldXSample:
                 move.w  x_pos(a0),d0
                 subi.w  #$9E0,d0
                 lsr.w   #1,d0
@@ -69,11 +69,11 @@ sub_79F30:
                 add.w   angle(a0),d1
                 move.w  d1,y_pos(a0)
                 rts
-; End of function sub_79F30
+; End of function MatchLRZLavaRiderHeightFromWorldXSample
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_79F58:
+ConsumeLRZEndBossSelfHitLatchAndHandleDefeat:
                 btst    #6,status(a0)
                 beq.s   locret_79F98
                 tst.b   $20(a0)
@@ -91,7 +91,7 @@ loc_79F7A:
                 addi.w  #2*4,d0
 
 loc_79F88:
-                bsr.w   sub_79FD8
+                bsr.w   CopyLRZEndBossFourColorPalette
                 subq.b  #1,$20(a0)
                 bne.s   locret_79F98
                 bclr    #6,status(a0)
@@ -116,15 +116,15 @@ loc_79FC6:
                 jsr     (BossDefeated_StopTimer).l
                 move.w  #$7F,$2E(a0)
                 rts
-; End of function sub_79F58
+; End of function ConsumeLRZEndBossSelfHitLatchAndHandleDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_79FD8:
+CopyLRZEndBossFourColorPalette:
                 lea     word_79FE6(pc),a1
                 lea     word_79FEE(pc,d0.w),a2
                 jmp     (CopyWordData_4).l
-; End of function sub_79FD8
+; End of function CopyLRZEndBossFourColorPalette
 
 ; ---------------------------------------------------------------------------
 word_79FE6:
@@ -135,7 +135,7 @@ word_79FEE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_79FFE:
+ShatterLRZBossPlatformNearBossAndAbortUpdate:
                 movea.w (_unkFAA4).w,a1
                 tst.w   (a1)
                 beq.w   locret_797F8
@@ -150,7 +150,7 @@ sub_79FFE:
                 jsr     (Play_SFX).l
                 addq.w  #4,sp
                 rts
-; End of function sub_79FFE
+; End of function ShatterLRZBossPlatformNearBossAndAbortUpdate
 
 ; ---------------------------------------------------------------------------
 word_7A038:
@@ -158,7 +158,7 @@ word_7A038:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7A040:
+IsLRZPlatformOriginInsideCameraViewport:
                 move.w  x_pos(a0),d0
                 sub.w   (Camera_X_pos).w,d0
                 cmpi.w  #$140,d0
@@ -174,11 +174,11 @@ sub_7A040:
 loc_7A060:
                 moveq   #0,d0
                 rts
-; End of function sub_7A040
+; End of function IsLRZPlatformOriginInsideCameraViewport
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7A064:
+MoveLRZPlatformAndResolveTopSolidRiders:
                 move.w  x_pos(a0),-(sp)
                 jsr     (MoveSprite2).l
                 moveq   #$23,d1
@@ -186,11 +186,11 @@ sub_7A064:
                 moveq   #$D,d3
                 move.w  (sp)+,d4
                 jmp     (SolidObjectTop).l
-; End of function sub_7A064
+; End of function MoveLRZPlatformAndResolveTopSolidRiders
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7A07C:
+SeedLRZBossPlatformTenDebrisPieces:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,d1
@@ -211,7 +211,7 @@ sub_7A07C:
                 add.w   d1,d1
                 move.l  word_7A0D8(pc,d1.w),x_vel(a0)   ; and y_vel
                 rts
-; End of function sub_7A07C
+; End of function SeedLRZBossPlatformTenDebrisPieces
 
 ; ---------------------------------------------------------------------------
 RawAni_7A0BA:

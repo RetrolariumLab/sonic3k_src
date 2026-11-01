@@ -40,7 +40,7 @@ loc_5F74E:
 loc_5F78E:
                 move.l  (a1)+,(a2)+
                 dbf     d6,loc_5F78E
-                bsr.w   sub_5FDA4
+                bsr.w   EndingSpawnLineTwoPaletteFadeAndStoreHandle
                 lea     (ChildObjDat_7D48C).l,a2
                 jsr     (CreateChild6_Simple).l
                 bne.s   loc_5F7AC

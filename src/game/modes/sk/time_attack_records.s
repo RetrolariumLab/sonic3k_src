@@ -16,9 +16,9 @@ TimeAttack_Records:
                 move.w  #$8B00,(a6)
                 move.w  #$8C89,(a6)
                 move.w  #$9011,(a6)
-                jsr     sub_C02A(pc)
+                jsr     Menu_FillPlaneAWithPriorityBlankTiles(pc)
                 move.w  #VRAM_Plane_A_Name_Table+$1AA,d0
-                jsr     sub_C04C(pc)
+                jsr     Menu_ClearNineByEightTileArea(pc)
                 clearRAM Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
                 clearRAM Object_RAM,(Kos_decomp_buffer-Object_RAM)
                 clr.w   (DMA_queue).w
@@ -44,7 +44,7 @@ TimeAttack_Records:
                 moveq   #13-1,d1
                 moveq   #2-1,d2
                 jsr     (Plane_Map_To_VRAM).l
-                jsr     sub_BEB2(pc)
+                jsr     SKCompDrawSixLapTimesAndThreeSavedTopRecords(pc)
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Competition_Text),VRAM,WRITE),(VDP_control_port).l
                 lea     (ArtNem_ContinueDigits).l,a0
                 jsr     (Nem_Decomp).l
@@ -142,13 +142,13 @@ loc_BE56:
                 btst    #3,(Level_frame_counter+1).w
                 bne.s   loc_BE7E
                 lea     (Plane_buffer+$20).w,a1
-                jsr     sub_B0A6(pc)
+                jsr     CompetitionMenuUploadEightByTwoTileBlock(pc)
                 bra.s   loc_BE86
 ; ---------------------------------------------------------------------------
 
 loc_BE7E:
                 move.l  (_unkEE98).w,d6
-                jsr     sub_B066(pc)
+                jsr     SKCompFormatAndUploadMinuteSecondHundredthTime(pc)
 
 loc_BE86:
                 tst.w   (Events_bg+$16).w
@@ -172,7 +172,7 @@ loc_BEA4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_BEB2:
+SKCompDrawSixLapTimesAndThreeSavedTopRecords:
                 lea     ((RAM_start+$7828)&$FFFFFF).l,a0
                 move.w  #VRAM_Plane_A_Name_Table+$15A,d7
                 moveq   #6-1,d0
@@ -185,16 +185,16 @@ sub_BEB2:
                 adda.w  d0,a0
                 move.w  #VRAM_Plane_A_Name_Table+$95A,d7
                 move.l  (a0)+,d6
-                jsr     sub_B066(pc)
+                jsr     SKCompFormatAndUploadMinuteSecondHundredthTime(pc)
                 addi.w  #$180,d7
                 move.l  (a0)+,d6
-                jsr     sub_B066(pc)
+                jsr     SKCompFormatAndUploadMinuteSecondHundredthTime(pc)
                 addi.w  #$180,d7
                 move.l  (a0)+,d6
-                jsr     sub_B066(pc)
+                jsr     SKCompFormatAndUploadMinuteSecondHundredthTime(pc)
                 clr.w   (_unkEEA0).w
                 rts
-; End of function sub_BEB2
+; End of function SKCompDrawSixLapTimesAndThreeSavedTopRecords
 
 ; ---------------------------------------------------------------------------
 

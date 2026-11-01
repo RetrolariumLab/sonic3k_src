@@ -254,7 +254,7 @@ loc_63720:
                 tst.w   d1
                 bpl.s   loc_6374A
                 add.w   d1,y_pos(a0)
-                bsr.w   sub_65E02
+                bsr.w   OpeningAnimalChooseBoundedRandomBounceVelocity
 
 loc_6374A:
                 jmp     (Draw_Sprite).l
@@ -269,7 +269,7 @@ loc_63750:
                 tst.w   d1
                 bpl.s   loc_63774
                 add.w   d1,y_pos(a0)
-                bsr.w   sub_65E02
+                bsr.w   OpeningAnimalChooseBoundedRandomBounceVelocity
 
 loc_63774:
                 subq.b  #1,anim_frame_timer(a0)
@@ -491,7 +491,7 @@ loc_63A16:
                 jsr     (Swing_Setup1).l
 
 loc_63A3A:
-                jsr     (sub_91988).l
+                jsr     (SetEggRoboFrameFromVblankParity).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -503,6 +503,6 @@ loc_63A46:
 loc_63A52:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
-                jsr     (sub_91988).l
+                jsr     (SetEggRoboFrameFromVblankParity).l
                 jmp     (Sprite_CheckDelete).l
 ; End of function loc_63694

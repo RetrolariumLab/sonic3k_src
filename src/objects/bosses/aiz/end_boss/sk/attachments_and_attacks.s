@@ -12,7 +12,7 @@ loc_69622:
                 jsr     off_6964E(pc,d1.w)
                 btst    #6,$38(a0)
                 bne.w   locret_69366
-                bsr.w   sub_69CA4
+                bsr.w   StartAIZBossAttachmentDelayedBreakaway
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 off_6964E:
@@ -166,7 +166,7 @@ loc_697BA:
                 subq.w  #1,$2E(a0)
                 bpl.s   locret_697D6
                 move.w  #3,$2E(a0)
-                bsr.w   sub_69AD8
+                bsr.w   AdvanceAIZBossAttackAttachmentPose
                 subq.b  #1,anim_frame(a0)
                 bpl.s   locret_697D6
                 movea.l $34(a0),a1

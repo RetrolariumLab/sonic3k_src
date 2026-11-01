@@ -8,7 +8,7 @@ Obj_FBZEndBoss:
                 move.b  routine(a0),d0
                 move.w  FBZEndBoss_Index(pc,d0.w),d1
                 jsr     FBZEndBoss_Index(pc,d1.w)
-                bsr.w   sub_4E200
+                bsr.w   HandleFBZEndBossFourColorHitOrDefeat
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 FBZEndBoss_Index:
@@ -78,7 +78,7 @@ loc_4DC56:
 ; ---------------------------------------------------------------------------
 
 loc_4DC6A:
-                bsr.w   sub_4E19C
+                bsr.w   CenterFBZEndBossXBetweenSupports
                 jsr     Find_SonicTails(pc)
                 btst    #1,$38(a0)
                 bne.s   locret_4DCB6
@@ -118,7 +118,7 @@ loc_4DCDA:
                 add.b   d0,$3C(a0)
                 lea     (FBZEndBoss_CircleLookup1).l,a2
                 jsr     MoveSprite_AngleYLookup(pc)
-                bsr.w   sub_4E1B8
+                bsr.w   SetFBZEndBossBodyDepthFromPhase
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
@@ -134,7 +134,7 @@ loc_4DCFE:
                 add.b   d0,$3C(a0)
                 lea     (FBZEndBoss_CircleLookup1).l,a2
                 jsr     MoveSprite_AngleYLookup(pc)
-                bsr.w   sub_4E1B8
+                bsr.w   SetFBZEndBossBodyDepthFromPhase
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -329,7 +329,7 @@ loc_4DF20:
                 move.b  $3C(a1),$3C(a0)
                 lea     (FBZEndBoss_CircleLookup2).l,a2
                 jsr     MoveSprite_AngleYLookup(pc)
-                bsr.w   sub_4E1EA
+                bsr.w   SetFBZEndBossHingeDepthFromPhase
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
@@ -416,7 +416,7 @@ loc_4E006:
 ; ---------------------------------------------------------------------------
 
 loc_4E00E:
-                bsr.w   sub_4E104
+                bsr.w   InitializeFBZEndBossFlameColumnPart
                 move.l  #Obj_Wait,(a0)
                 move.l  #loc_4E022,$34(a0)
                 rts
@@ -468,7 +468,7 @@ loc_4E082:
                 moveq   #$10,d3
                 moveq   #0,d4
                 move.b  subtype(a0),d4
-                bsr.w   sub_4E0D8
+                bsr.w   PositionFBZEndBossConnectorAxisByQuarter
                 move.w  y_pos(a1),d0
                 move.b  child_dy(a0),d1
                 ext.w   d1
@@ -476,7 +476,7 @@ loc_4E082:
                 move.w  y_pos(a2),d2
                 sub.w   d2,d1
                 moveq   #$14,d3
-                bsr.w   sub_4E0D8
+                bsr.w   PositionFBZEndBossConnectorAxisByQuarter
                 tst.b   $3C(a2)
                 beq.s   locret_4E0CE
                 bmi.s   locret_4E0CE
@@ -493,10 +493,10 @@ word_4E0D0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4E0D8:
+PositionFBZEndBossConnectorAxisByQuarter:
                 move.w  off_4E0E0(pc,d4.w),d5
                 jmp     off_4E0E0(pc,d5.w)
-; End of function sub_4E0D8
+; End of function PositionFBZEndBossConnectorAxisByQuarter
 
 ; ---------------------------------------------------------------------------
 off_4E0E0:
@@ -529,7 +529,7 @@ loc_4E0FC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4E104:
+InitializeFBZEndBossFlameColumnPart:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  word_4E130(pc,d0.w),$2E(a0)
@@ -540,7 +540,7 @@ sub_4E104:
                 jsr     SetUp_ObjAttributes(pc)
                 bset    #4,shield_reaction(a0)
                 jmp     Refresh_ChildPosition(pc)
-; End of function sub_4E104
+; End of function InitializeFBZEndBossFlameColumnPart
 
 ; ---------------------------------------------------------------------------
 word_4E130:
@@ -586,7 +586,7 @@ off_4E178:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4E19C:
+CenterFBZEndBossXBetweenSupports:
                 movea.w $44(a0),a1
                 movea.w parent3(a0),a2
                 move.w  x_pos(a1),d0
@@ -596,11 +596,11 @@ sub_4E19C:
                 add.w   d1,d0
                 move.w  d0,x_pos(a0)
                 rts
-; End of function sub_4E19C
+; End of function CenterFBZEndBossXBetweenSupports
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4E1B8:
+SetFBZEndBossBodyDepthFromPhase:
                 tst.b   $3C(a0)
                 beq.s   loc_4E1DC
                 bmi.s   loc_4E1CE
@@ -619,22 +619,22 @@ loc_4E1DC:
                 bset    #7,art_tile(a0)
                 move.w  #$380,priority(a0)
                 rts
-; End of function sub_4E1B8
+; End of function SetFBZEndBossBodyDepthFromPhase
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4E1EA:
+SetFBZEndBossHingeDepthFromPhase:
                 tst.b   $3C(a0)
                 beq.s   loc_4E1DC
                 bmi.s   loc_4E1CE
                 bset    #7,art_tile(a0)
                 move.w  #$280,priority(a0)
                 rts
-; End of function sub_4E1EA
+; End of function SetFBZEndBossHingeDepthFromPhase
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4E200:
+HandleFBZEndBossFourColorHitOrDefeat:
                 tst.l   (a0)
                 beq.s   locret_4E254
                 tst.b   collision_flags(a0)
@@ -670,7 +670,7 @@ locret_4E254:
 loc_4E256:
                 move.l  #loc_4DCFE,(a0)
                 jmp     BossDefeated_StopTimer(pc)
-; End of function sub_4E200
+; End of function HandleFBZEndBossFourColorHitOrDefeat
 
 ; ---------------------------------------------------------------------------
 word_4E260:

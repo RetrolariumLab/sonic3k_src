@@ -17,7 +17,7 @@ Load_Rings_Index:
 
 loc_E8BE:
                 addq.b  #2,(Rings_manager_routine).w
-                bsr.w   sub_EB1A
+                bsr.w   LevelRingsSKResetStatusSelectLayoutAndCountPerfectRings
                 cmpi.b  #$14,(Current_zone).w
                 beq.s   loc_E904
                 movea.l (Ring_start_addr_ROM).w,a1
@@ -87,7 +87,7 @@ loc_E936:
 ; ---------------------------------------------------------------------------
 
 loc_E942:
-                bsr.s   sub_E994
+                bsr.s   AdvanceQueuedRingConsumptionSparkles
                 movea.l (Ring_start_addr_ROM).w,a1
                 movea.w (Ring_start_addr_RAM).w,a2
                 move.w  (Camera_X_pos).w,d4
@@ -141,7 +141,7 @@ loc_E988:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_E994:
+AdvanceQueuedRingConsumptionSparkles:
                 lea     (Ring_consumption_table).w,a2
                 move.w  (a2)+,d1
                 subq.w  #1,d1
@@ -166,12 +166,12 @@ loc_E9C4:
 
 locret_E9C8:
                 rts
-; End of function sub_E994
+; End of function AdvanceQueuedRingConsumptionSparkles
 
 ; ---------------------------------------------------------------------------
 
 loc_E9CA:
-                bsr.s   sub_E994
+                bsr.s   AdvanceQueuedRingConsumptionSparkles
                 movea.l (Ring_start_addr_ROM).w,a1
                 movea.w (Ring_start_addr_RAM).w,a2
                 move.w  (Camera_Y_pos).w,d4
@@ -295,7 +295,7 @@ loc_EABE:
 
 loc_EAC6:
                 move.w  #$604,(a4)
-                bsr.s   sub_EAE6
+                bsr.s   LevelRingsSKCountPerfectPickupAndGiveP1Ring
                 lea     (Ring_consumption_list).w,a3
 
 loc_EAD0:
@@ -316,10 +316,10 @@ locret_EAE4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_EAE6:
+LevelRingsSKCountPerfectPickupAndGiveP1Ring:
                 subq.w  #1,(Perfect_rings_left).w
                 jmp     (GiveRing).l
-; End of function sub_EAE6
+; End of function LevelRingsSKCountPerfectPickupAndGiveP1Ring
 
 ; ---------------------------------------------------------------------------
 
@@ -341,7 +341,7 @@ loc_EB16:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_EB1A:
+LevelRingsSKResetStatusSelectLayoutAndCountPerfectRings:
                 moveq   #0,d0
                 tst.b   (Respawn_table_keep).w
                 bne.s   loc_EB30
@@ -389,4 +389,4 @@ loc_EB7A:
                 move.w  d5,(Perfect_rings_left).w
                 move.w  #0,(Perfect_rings_flag).w
                 rts
-; End of function sub_EB1A
+; End of function LevelRingsSKResetStatusSelectLayoutAndCountPerfectRings

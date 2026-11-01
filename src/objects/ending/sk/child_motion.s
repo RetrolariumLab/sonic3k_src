@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_60000:
+EndingBobYFromSavedBaseAndByteSinePhase:
                 move.b  $3C(a0),d0
                 addq.b  #4,d0
                 move.b  d0,$3C(a0)
@@ -14,24 +14,24 @@ sub_60000:
                 add.w   d0,d1
                 move.w  d1,y_pos(a0)
                 rts
-; End of function sub_60000
+; End of function EndingBobYFromSavedBaseAndByteSinePhase
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6001E:
+EndingInitializeGentleVerticalSwing:
                 move.w  #$80,d0
                 move.w  d0,$3E(a0)
                 move.w  d0,y_vel(a0)
                 move.w  #8,$40(a0)
                 bclr    #0,$38(a0)
                 rts
-; End of function sub_6001E
+; End of function EndingInitializeGentleVerticalSwing
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_60038:
+EndingTornadoPositionTwoSubSpritesAndCycleTheirFrames:
                 lea     byte_6006E(pc),a1
-                jsr     (sub_86458).l
+                jsr     (SKPositionMultiSpriteChildrenFromSignedBytePairs).l
                 moveq   #0,d0
                 move.b  $44(a0),d0
                 addq.b  #1,d0
@@ -50,7 +50,7 @@ loc_60052:
 loc_60068:
                 move.b  d0,$23(a0)
                 rts
-; End of function sub_60038
+; End of function EndingTornadoPositionTwoSubSpritesAndCycleTheirFrames
 
 ; ---------------------------------------------------------------------------
 byte_6006E:
@@ -68,7 +68,7 @@ byte_60072:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6008A:
+EndingAttachmentSelectOffsetsFromParentPose:
                 movea.w parent3(a0),a1
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
@@ -84,7 +84,7 @@ loc_600A8:
                 move.w  (a2)+,d0
                 move.w  d0,child_dx(a0)                 ; and child_dy
                 rts
-; End of function sub_6008A
+; End of function EndingAttachmentSelectOffsetsFromParentPose
 
 ; ---------------------------------------------------------------------------
 off_600B0:

@@ -6,7 +6,7 @@
 DEZ3_ScreenInit:
                 clr.w   (Events_bg+$10).w
                 st      (Events_bg+$12).w
-                jsr     sub_5A79E(pc)
+                jsr     QueueChangedDez3LaserArtWindow(pc)
                 move.w  (a3),d0
                 move.w  d0,$10(a3)
                 move.w  d0,$12(a3)
@@ -51,7 +51,7 @@ loc_5A442:
                 move.w  d0,(Camera_X_pos).w
                 move.w  d0,(Camera_X_pos_copy).w
                 move.w  d0,(Events_bg+$16).w
-                jsr     sub_5A508(pc)
+                jsr     PrepareDez3EnvironmentPlaneScroll(pc)
                 jsr     (Reset_TileOffsetPositionActual).l
                 lea     (HScroll_table).w,a1
                 clr.l   (a1)+
@@ -94,7 +94,7 @@ loc_5A4C0:
                 addq.w  #4,(Events_routine_fg).w
 
 loc_5A4C4:
-                jsr     sub_5A508(pc)
+                jsr     PrepareDez3EnvironmentPlaneScroll(pc)
                 lea     DEZ3_BGDrawArray(pc),a4
                 lea     (HScroll_table).w,a6
                 moveq   #2,d5
@@ -120,7 +120,7 @@ locret_5A506:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5A508:
+PrepareDez3EnvironmentPlaneScroll:
                 moveq   #$20,d0
                 add.w   (Screen_shake_offset).w,d0
                 move.w  d0,(Camera_Y_pos_copy).w
@@ -129,7 +129,7 @@ sub_5A508:
                 andi.w  #$1FF,d0
                 move.w  d0,(HScroll_table+$004).w
                 rts
-; End of function sub_5A508
+; End of function PrepareDez3EnvironmentPlaneScroll
 
 ; ---------------------------------------------------------------------------
 DEZ3_BGDrawArray:
@@ -139,7 +139,7 @@ DEZ3_BGDrawArray:
 DEZ3_BackgroundInit:
                 lea     (Level_layout_main).w,a3
                 move.w  #VRAM_Plane_A_Name_Table,d7
-                jsr     sub_5A76C(pc)
+                jsr     ComputeDez3BossPlaneScroll(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 jsr     (Refresh_PlaneFull).l
                 bra.w   loc_5A734
@@ -148,7 +148,7 @@ DEZ3_BackgroundInit:
 DEZ3_BackgroundEvent:
                 lea     (Level_layout_main).w,a3
                 move.w  #VRAM_Plane_A_Name_Table,d7
-                jsr     sub_5A76C(pc)
+                jsr     ComputeDez3BossPlaneScroll(pc)
                 move.w  (Events_routine_bg).w,d0
                 jmp     DEZ3_BackgroundEvent_Index(pc,d0.w)
 ; ---------------------------------------------------------------------------
@@ -250,7 +250,7 @@ loc_5A662:
 loc_5A676:
                 tst.w   (Events_bg+$00).w
                 beq.w   loc_5A6FE
-                jsr     sub_5A79E(pc)
+                jsr     QueueChangedDez3LaserArtWindow(pc)
                 tst.w   (Events_fg_5).w
                 beq.w   loc_5A72E
                 clr.w   (Events_fg_5).w
@@ -347,7 +347,7 @@ loc_5A74E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5A76C:
+ComputeDez3BossPlaneScroll:
                 move.w  (Camera_X_pos_BG_copy).w,(_unkEE8E).w
                 tst.w   (Events_bg+$00).w
                 bne.s   loc_5A77C
@@ -367,11 +367,11 @@ loc_5A788:
                 addi.w  #$180,d0
                 move.w  d0,(Camera_Y_pos_BG_copy).w
                 rts
-; End of function sub_5A76C
+; End of function ComputeDez3BossPlaneScroll
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5A79E:
+QueueChangedDez3LaserArtWindow:
                 moveq   #0,d1
                 move.w  (Events_bg+$10).w,d1
                 cmp.w   (Events_bg+$12).w,d1
@@ -386,7 +386,7 @@ sub_5A79E:
 
 locret_5A7C6:
                 rts
-; End of function sub_5A79E
+; End of function QueueChangedDez3LaserArtWindow
 
 ; ---------------------------------------------------------------------------
 

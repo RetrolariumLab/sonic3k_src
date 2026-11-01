@@ -518,7 +518,7 @@ loc_10320:
                 moveq   #signextendB(sfx_Death),d0
                 cmpi.l  #Obj_Spikes,(a2)
                 blo.s   loc_10346
-                cmpi.l  #sub_24280,(a2)
+                cmpi.l  #HurtPlayerFromSolidHazard,(a2)
                 bhs.s   loc_10346
                 moveq   #signextendB(sfx_SpikeHit),d0
 
@@ -532,7 +532,7 @@ loc_10350:
                 moveq   #signextendB(sfx_Death),d0
                 cmpi.l  #Obj_Spikes,(a2)
                 blo.s   loc_10364
-                cmpi.l  #sub_24280,(a2)
+                cmpi.l  #HurtPlayerFromSolidHazard,(a2)
                 bhs.s   loc_10364
                 moveq   #signextendB(sfx_SpikeHit),d0
 

@@ -8,7 +8,7 @@ loc_80160:
                 move.b  routine(a0),d0
                 move.w  off_8017A(pc,d0.w),d1
                 jsr     off_8017A(pc,d1.w)
-                jsr     (sub_80E2C).l
+                jsr     (UpdateDEZEscapeShipHitFlashAndDefeatWait).l
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 off_8017A:
@@ -56,7 +56,7 @@ loc_801D8:
 ; ---------------------------------------------------------------------------
 
 loc_80208:
-                bsr.w   sub_80F0E
+                bsr.w   AccelerateDEZEscapeCameraAndLockHorizontalLimits
                 jsr     Swing_UpAndDown(pc)
                 jsr     (MoveSprite2).l
                 move.w  (Camera_X_pos).w,d0
@@ -73,7 +73,7 @@ locret_8023C:
 ; ---------------------------------------------------------------------------
 
 loc_8023E:
-                bsr.w   sub_80EF4
+                bsr.w   TrySpawnDEZEscapeFallingDebrisEverySixteenTicks
                 jsr     Swing_UpAndDown(pc)
                 jsr     (MoveSprite2).l
                 jmp     Obj_Wait(pc)
@@ -87,8 +87,8 @@ loc_80250:
 ; ---------------------------------------------------------------------------
 
 loc_80264:
-                bsr.w   sub_80F0E
-                bsr.w   sub_80EF4
+                bsr.w   AccelerateDEZEscapeCameraAndLockHorizontalLimits
+                bsr.w   TrySpawnDEZEscapeFallingDebrisEverySixteenTicks
                 jsr     Swing_UpAndDown(pc)
                 move.w  x_vel(a0),d0
                 cmpi.w  #$280,d0

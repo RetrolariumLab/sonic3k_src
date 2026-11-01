@@ -37,7 +37,7 @@ loc_371A8:
                 jsr     (Play_SFX).l
 
 loc_371AE:
-                bsr.s   sub_371BE
+                bsr.s   CompetitionSKUpdateNeonRaceStartFinishAndProgression
                 tst.w   (Events_bg+$14).w
                 bne.s   locret_371BC
                 jmp     (Draw_Sprite).l
@@ -48,7 +48,7 @@ locret_371BC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_371BE:
+CompetitionSKUpdateNeonRaceStartFinishAndProgression:
                 move.b  $3A(a0),d0
                 bne.s   loc_371F4
                 tst.b   (Ctrl_1_locked).w
@@ -103,7 +103,7 @@ loc_37232:
 
 loc_37256:
                 move.b  #$80,(Update_HUD_timer).w
-                jsr     sub_37430(pc)
+                jsr     CompetitionSKInsertP1TimeAttackTopThreeAndSave(pc)
                 moveq   #signextendB(sfx_Goal),d0
                 jsr     (Play_SFX).l
                 move.b  (Competition_total_laps).w,d0
@@ -117,7 +117,7 @@ loc_37256:
 ; ---------------------------------------------------------------------------
 
 loc_3728C:
-                bsr.w   sub_37406
+                bsr.w   CompetitionSKSpawnNeonLateFinisherDisplay
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -134,7 +134,7 @@ loc_37292:
 
 loc_372BC:
                 move.b  #$80,(Update_HUD_timer_P2).w
-                bsr.w   sub_37406
+                bsr.w   CompetitionSKSpawnNeonLateFinisherDisplay
                 moveq   #signextendB(sfx_Goal),d0
                 jsr     (Play_SFX).l
 
@@ -264,11 +264,11 @@ loc_373D4:
 
 locret_37404:
                 rts
-; End of function sub_371BE
+; End of function CompetitionSKUpdateNeonRaceStartFinishAndProgression
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_37406:
+CompetitionSKSpawnNeonLateFinisherDisplay:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   locret_3742E
                 move.l  #loc_3713A,(a1)
@@ -279,11 +279,11 @@ sub_37406:
 
 locret_3742E:
                 rts
-; End of function sub_37406
+; End of function CompetitionSKSpawnNeonLateFinisherDisplay
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_37430:
+CompetitionSKInsertP1TimeAttackTopThreeAndSave:
                 tst.b   (Competition_type).w
                 bpl.w   locret_374B6
                 moveq   #0,d0
@@ -328,7 +328,7 @@ loc_374B0:
 
 locret_374B6:
                 rts
-; End of function sub_37430
+; End of function CompetitionSKInsertP1TimeAttackTopThreeAndSave
 
 ; ---------------------------------------------------------------------------
 

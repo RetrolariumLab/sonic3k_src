@@ -7,7 +7,7 @@ loc_6CDE8:
                 lea     word_6D78E(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.l  #loc_6CE04,(a0)
-                bsr.w   sub_6D36E
+                bsr.w   InitializeMGZBossStaggeredTrailVelocityAndDelay
                 move.l  #loc_6CE1E,$34(a0)
 
 loc_6CE04:
@@ -95,7 +95,7 @@ loc_6CEF0:
                 btst    #5,$38(a1)
                 bne.s   loc_6CF12
                 lea     byte_6D2D2(pc),a2
-                bsr.w   sub_6D2A4
+                bsr.w   SelectMGZBossPoseChildOffsetsAndFrame
                 jsr     (Refresh_ChildPositionAdjusted).l
                 moveq   #$14,d0
                 jmp     (Child_Draw_Sprite2_FlickerMove).l
@@ -133,7 +133,7 @@ loc_6CF62:
                 btst    #5,$38(a1)
                 bne.s   loc_6CF98
                 lea     byte_6D2E6(pc),a2
-                bsr.w   sub_6D2A4
+                bsr.w   SelectMGZBossPoseChildOffsetsAndFrame
                 jsr     (Refresh_ChildPositionAdjusted).l
                 movea.w $44(a0),a1
                 btst    #7,status(a1)
@@ -194,7 +194,7 @@ loc_6CFF4:
                 move.b  #4,$40(a0)
                 move.l  #ArtScaled_MGZEndBoss,$42(a0)
                 move.b  #1,$3E(a0)
-                bsr.w   sub_6D6CC
+                bsr.w   SelectMGZBossScaledFlybyAndNextEntryPattern
                 moveq   #6,d0
                 move.w  ground_vel(a0),d1
                 beq.s   loc_6D058
@@ -236,7 +236,7 @@ loc_6D09E:
                 move.w  d0,y_vel(a0)
 
 loc_6D0A2:
-                jsr     (sub_86180).l
+                jsr     (IntegrateScaledObjectCenter).l
                 move.w  $30(a0),d2
                 move.w  $34(a0),d3
                 moveq   #0,d0
@@ -344,7 +344,7 @@ loc_6D1BE:
                 lea     ObjDat3_6D7A8(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #loc_6D1D2,(a0)
-                bsr.w   sub_6D1DE
+                bsr.w   RandomizeMGZBossCollapseDebrisFrameAndVelocity
 
 loc_6D1D2:
                 jsr     (MoveSprite_LightGravity).l
@@ -352,7 +352,7 @@ loc_6D1D2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6D1DE:
+RandomizeMGZBossCollapseDebrisFrameAndVelocity:
                 jsr     (Random_Number).l
                 move.w  d0,d1
                 andi.w  #3,d0
@@ -379,7 +379,7 @@ loc_6D21E:
 
 locret_6D222:
                 rts
-; End of function sub_6D1DE
+; End of function RandomizeMGZBossCollapseDebrisFrameAndVelocity
 
 ; ---------------------------------------------------------------------------
 RawAni_6D224:

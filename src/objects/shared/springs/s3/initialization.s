@@ -30,7 +30,7 @@ Spring_Index:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_21426:
+InitCompetitionRetractingSpring:
                 move.l  #Map_Spring,mappings(a0)
                 move.w  #make_art_tile(ArtTile_SpikesSprings+$10,0,0),art_tile(a0)
                 ori.b   #4,render_flags(a0)
@@ -46,7 +46,7 @@ sub_21426:
                 jsr     off_21472(pc,d0.w)
                 move.w  #-$800,$30(a0)
                 rts
-; End of function sub_21426
+; End of function InitCompetitionRetractingSpring
 
 ; ---------------------------------------------------------------------------
 off_21472:

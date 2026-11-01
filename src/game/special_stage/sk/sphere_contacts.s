@@ -9,7 +9,7 @@ Pal_SStage_Emeralds:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_9D5E:
+SStage_UpdateBackgroundScroll:
                 move.w  (Special_stage_X_pos).w,d0
                 sub.w   (Special_stage_prev_X_pos).w,d0
                 btst    #6,(Special_stage_angle).w
@@ -32,7 +32,7 @@ loc_9D7E:
                 move.w  (Special_stage_X_pos).w,(Special_stage_prev_X_pos).w
                 move.w  (Special_stage_Y_pos).w,(Special_stage_prev_Y_pos).w
                 rts
-; End of function sub_9D5E
+; End of function SStage_UpdateBackgroundScroll
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -167,7 +167,7 @@ loc_9E9C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_9EA0:
+SStage_CountInitialBlueSpheres:
                 lea     (SStage_layout_buffer+$100).w,a3
                 moveq   #0,d1
                 move.w  #$400-1,d0
@@ -181,7 +181,7 @@ loc_9EB2:
                 dbf     d0,loc_9EAA
                 move.w  d1,(Special_stage_spheres_left).w
                 rts
-; End of function sub_9EA0
+; End of function SStage_CountInitialBlueSpheres
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -599,7 +599,7 @@ MapPtr_A10A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_A188:
+SStage_RotateHorizontalVertical:
                 swap    d0
                 move.w  d1,d3
                 move.w  d2,d4
@@ -619,11 +619,11 @@ sub_A188:
                 swap    d2
                 swap    d0
                 rts
-; End of function sub_A188
+; End of function SStage_RotateHorizontalVertical
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_A1B2:
+SStage_RotateDepthHorizontal:
                 swap    d2
                 move.w  d0,d3
                 move.w  d1,d4
@@ -643,11 +643,11 @@ sub_A1B2:
                 swap    d1
                 swap    d2
                 rts
-; End of function sub_A1B2
+; End of function SStage_RotateDepthHorizontal
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_A1DC:
+SStage_RotateDepthHeight:
                 swap    d1
                 move.w  d0,d3
                 move.w  d2,d4
@@ -667,11 +667,11 @@ sub_A1DC:
                 swap    d2
                 swap    d1
                 rts
-; End of function sub_A1DC
+; End of function SStage_RotateDepthHeight
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_A206:
+SStage_ApplyProjectionViewTilt:
                 swap    d1
                 move.w  d0,d3
                 move.w  d2,d4
@@ -691,11 +691,11 @@ sub_A206:
                 swap    d2
                 swap    d1
                 rts
-; End of function sub_A206
+; End of function SStage_ApplyProjectionViewTilt
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_A230:
+GetSineCosineQ14:
                 add.w   d0,d0
                 addi.w  #$80,d0
                 andi.w  #$1FE,d0
@@ -704,7 +704,7 @@ sub_A230:
                 andi.w  #$1FE,d0
                 move.w  ScalarTable2(pc,d0.w),d0
                 rts
-; End of function sub_A230
+; End of function GetSineCosineQ14
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -43,13 +43,13 @@ loc_54CAE:
 
 loc_54CC0:
                 lea     loc_54D8E(pc),a3
-                bsr.w   sub_54EA0
+                bsr.w   TriggerRhinobotChargeForPlayerAhead
                 lea     loc_54D70(pc),a3
-                bsr.w   sub_54EC6
+                bsr.w   FollowRhinobotFloorOrAbortState
                 move.w  $40(a0),d0
                 add.w   d0,x_vel(a0)
                 jsr     (MoveSprite2).l
-                bsr.w   sub_54DF4
+                bsr.w   DispatchRhinobotVelocityMilestone
                 bra.w   loc_54E18
 ; ---------------------------------------------------------------------------
 
@@ -59,7 +59,7 @@ loc_54CE6:
 
 loc_54CEA:
                 lea     loc_54DE4(pc),a3
-                bsr.w   sub_54EC6
+                bsr.w   FollowRhinobotFloorOrAbortState
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
@@ -157,7 +157,7 @@ loc_54DE4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54DF4:
+DispatchRhinobotVelocityMilestone:
                 move.w  x_vel(a0),d0
                 beq.s   loc_54E12
                 btst    #2,$38(a0)
@@ -176,7 +176,7 @@ loc_54E0A:
 loc_54E12:
                 movea.l $34(a0),a1
                 jmp     (a1)
-; End of function sub_54DF4
+; End of function DispatchRhinobotVelocityMilestone
 
 ; ---------------------------------------------------------------------------
 
@@ -238,7 +238,7 @@ locret_54E9E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54EA0:
+TriggerRhinobotChargeForPlayerAhead:
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$20,d3
                 bhi.s   locret_54EBE
@@ -260,11 +260,11 @@ loc_54EC0:
                 jsr     (a3)
                 addq.w  #4,sp
                 rts
-; End of function sub_54EA0
+; End of function TriggerRhinobotChargeForPlayerAhead
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54EC6:
+FollowRhinobotFloorOrAbortState:
                 moveq   #4,d0
                 btst    #3,$38(a0)
                 bne.s   loc_54ED2
@@ -288,7 +288,7 @@ loc_54EF4:
                 jsr     (a3)
                 addq.w  #4,sp
                 rts
-; End of function sub_54EC6
+; End of function FollowRhinobotFloorOrAbortState
 
 ; ---------------------------------------------------------------------------
 ObjSlot_Rhinobot:

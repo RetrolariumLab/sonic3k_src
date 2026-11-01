@@ -6,7 +6,7 @@
 Obj_MHZSwingVine:
                 movea.l a0,a1
                 move.l  #loc_2267E,(a1)
-                bsr.w   sub_22656
+                bsr.w   InitializeMhzSwingVineSprite
                 move.b  #$23,mapping_frame(a1)
                 move.w  x_pos(a0),d2
                 move.w  y_pos(a0),d3
@@ -28,7 +28,7 @@ loc_22608:
 
 loc_2261A:
                 movea.l a1,a2
-                bsr.s   sub_22656
+                bsr.s   InitializeMhzSwingVineSprite
                 move.w  d2,x_pos(a1)
                 move.w  d3,y_pos(a1)
                 addi.w  #$10,d3
@@ -46,7 +46,7 @@ loc_22654:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_22656:
+InitializeMhzSwingVineSprite:
                 move.b  #4,render_flags(a1)
                 move.b  #8,width_pixels(a1)
                 move.b  #8,height_pixels(a1)
@@ -54,7 +54,7 @@ sub_22656:
                 move.l  #Map_AIZMHZRideVine,mappings(a1)
                 move.w  #make_art_tile(ArtTile_MHZMisc+$10E,0,0),art_tile(a1)
                 rts
-; End of function sub_22656
+; End of function InitializeMhzSwingVineSprite
 
 ; ---------------------------------------------------------------------------
 
@@ -242,7 +242,7 @@ loc_2286C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_22898:
+PositionMhzSwingVineEndFromPreviousLink:
                 movea.w $3C(a0),a1
                 move.b  angle(a1),d0
                 addq.b  #4,d0
@@ -258,14 +258,14 @@ sub_22898:
                 add.w   y_pos(a1),d1
                 move.w  d1,y_pos(a0)
                 rts
-; End of function sub_22898
+; End of function PositionMhzSwingVineEndFromPreviousLink
 
 ; ---------------------------------------------------------------------------
 
 loc_228CC:
                 move.w  x_pos(a0),d4
                 move.w  y_pos(a0),d5
-                bsr.w   sub_22898
+                bsr.w   PositionMhzSwingVineEndFromPreviousLink
                 cmp.w   x_pos(a0),d4
                 beq.s   loc_228E2
                 move.w  d4,$42(a0)

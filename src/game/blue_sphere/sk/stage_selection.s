@@ -31,7 +31,7 @@ loc_4CEC8:
                 lea     aGetBlueSpheres(pc),a1
                 move.w  #$100,d2
                 move.w  #make_art_tile(ArtTile_BlueSphere_TitleText,0,0),d6
-                jsr     (sub_5B318).l
+                jsr     (SKCreditsBuildAndUploadVariableWidthTwoRowText).l
                 move    #$2300,sr
 
 loc_4CEF8:
@@ -173,7 +173,7 @@ loc_4D0B0:
                 swap    d1
                 lsr.l   #2,d1
                 andi.l  #$FFFFFFF,d1
-                bsr.w   sub_4D0F6
+                bsr.w   BlueSphereSetFixedWidthNineDigitWidget
                 move.b  #1,mapping_frame(a0)
                 bra.s   loc_4D0F0
 ; ---------------------------------------------------------------------------
@@ -186,7 +186,7 @@ loc_4D0DA:
                 move.l  (Blue_spheres_current_level).w,d1
                 addq.l  #1,d1
                 andi.l  #$7FFFFFF,d1
-                bsr.w   sub_4D13A
+                bsr.w   BlueSphereSetCenteredSuppressedNineDigitWidget
                 move.b  #0,mapping_frame(a0)
 
 loc_4D0F0:
@@ -194,7 +194,7 @@ loc_4D0F0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4D0F6:
+BlueSphereSetFixedWidthNineDigitWidget:
                 andi.l  #$FFFFFFF,d1
                 movea.l a0,a1
                 lea     next_object(a1),a1
@@ -227,11 +227,11 @@ loc_4D12A:
                 addq.w  #8,d2
                 dbf     d1,loc_4D12A
                 rts
-; End of function sub_4D0F6
+; End of function BlueSphereSetFixedWidthNineDigitWidget
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4D13A:
+BlueSphereSetCenteredSuppressedNineDigitWidget:
                 andi.l  #$7FFFFFF,d1
                 movea.l a0,a1
                 lea     next_object(a1),a1
@@ -288,11 +288,11 @@ loc_4D19A:
                 move.w  d2,x_pos(a1)
                 dbf     d4,loc_4D19A
                 rts
-; End of function sub_4D13A
+; End of function BlueSphereSetCenteredSuppressedNineDigitWidget
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4D1AA:
+BlueSphereSetCenteredTwoDigitDifficultyWidget:
                 andi.l  #$FF,d1
                 movea.l a0,a1
                 lea     next_object(a1),a1
@@ -349,7 +349,7 @@ loc_4D208:
                 move.w  d2,x_pos(a1)
                 dbf     d4,loc_4D208
                 rts
-; End of function sub_4D1AA
+; End of function BlueSphereSetCenteredTwoDigitDifficultyWidget
 
 ; ---------------------------------------------------------------------------
                 dc.l    1000000000

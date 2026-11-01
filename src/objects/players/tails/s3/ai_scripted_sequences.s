@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_14B58:
+TailsS3ResetCPUFollowerToOffscreenCatchUp:
                 move.w  #0,(Tails_CPU_idle_timer).w
                 move.w  #0,(Tails_CPU_flight_timer).w
                 move.w  #2,(Tails_CPU_routine).w
@@ -14,11 +14,11 @@ sub_14B58:
                 move.w  #0,y_pos(a0)
                 move.b  #0,double_jump_flag(a0)
                 rts
-; End of function sub_14B58
+; End of function TailsS3ResetCPUFollowerToOffscreenCatchUp
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_14B8A:
+TailsS3WatchCPUOffscreenTimeoutAndInteractionCode:
                 tst.b   render_flags(a0)
                 bmi.s   loc_14BB6
                 btst    #Status_OnObj,status(a0)
@@ -35,7 +35,7 @@ loc_14BA6:
                 blo.s   loc_14BBC
 
 loc_14BB2:
-                bra.w   sub_14B58
+                bra.w   TailsS3ResetCPUFollowerToOffscreenCatchUp
 ; ---------------------------------------------------------------------------
 
 loc_14BB6:
@@ -45,12 +45,12 @@ loc_14BBC:
                 movea.w interact(a0),a3
                 move.w  (a3),(Tails_CPU_interact).w
                 rts
-; End of function sub_14B8A
+; End of function TailsS3WatchCPUOffscreenTimeoutAndInteractionCode
 
 ; ---------------------------------------------------------------------------
 
 loc_14BC6:
-                bsr.w   sub_14B8A
+                bsr.w   TailsS3WatchCPUOffscreenTimeoutAndInteractionCode
                 tst.w   (Tails_CPU_idle_timer).w
                 bne.w   locret_14C44
                 tst.w   move_lock(a0)
@@ -109,7 +109,7 @@ loc_14C48:
                 move.w  #0,y_vel(a0)
                 move.w  #0,ground_vel(a0)
                 lea     (Player_1).w,a1
-                bsr.w   sub_15202
+                bsr.w   TailsS3InitializeCarriedPlayerAttachment
                 move.b  #1,(Flying_carrying_Sonic_flag).w
                 move.w  #$E,(Tails_CPU_routine).w
 
@@ -184,7 +184,7 @@ loc_14D54:
                 move.w  #0,y_vel(a0)
                 move.w  #0,ground_vel(a0)
                 lea     (Player_1).w,a1
-                bsr.w   sub_15202
+                bsr.w   TailsS3InitializeCarriedPlayerAttachment
                 move.b  #1,(Flying_carrying_Sonic_flag).w
                 move.w  #$16,(Tails_CPU_routine).w
 

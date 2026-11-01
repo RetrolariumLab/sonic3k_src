@@ -9,7 +9,7 @@ Obj_Tunnelbot:
                 move.b  routine(a0),d0
                 move.w  Tunnelbot_Index(pc,d0.w),d1
                 jsr     Tunnelbot_Index(pc,d1.w)
-                bsr.w   sub_5682E
+                bsr.w   HandleMGZTunnelbotHitFlashOrDefeat
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 Tunnelbot_Index:
@@ -92,7 +92,7 @@ loc_5632C:
                 bne.s   loc_56342
                 moveq   #signextendB(sfx_Rumble2),d0
                 jsr     (Play_SFX).l
-                bsr.w   sub_567FE
+                bsr.w   SpawnMGZTremorDebrisAtRandomScreenX
 
 loc_56342:
                 jmp     Obj_Wait(pc)
@@ -111,7 +111,7 @@ Obj_MGZMiniboss:
                 move.b  routine(a0),d0
                 move.w  MGZMiniboss_Index(pc,d0.w),d1
                 jsr     MGZMiniboss_Index(pc,d1.w)
-                bsr.w   sub_5682E
+                bsr.w   HandleMGZTunnelbotHitFlashOrDefeat
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 MGZMiniboss_Index:
@@ -234,7 +234,7 @@ loc_564E6:
                 bne.s   loc_564FC
                 moveq   #signextendB(sfx_Rumble2),d0
                 jsr     (Play_SFX).l
-                bsr.w   sub_567FE
+                bsr.w   SpawnMGZTremorDebrisAtRandomScreenX
 
 loc_564FC:
                 jmp     Obj_Wait(pc)
@@ -372,7 +372,7 @@ loc_56672:
                 btst    #4,$38(a0)
                 bne.w   loc_5670E
                 move.w  x_pos(a0),-(sp)
-                bsr.w   sub_56742
+                bsr.w   UpdateMGZMinibossSpireMotionState
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -394,7 +394,7 @@ loc_56672:
                 sub.w   y_pos(a0),d0
                 addi.w  #$28,d0
                 bmi.s   loc_566CE
-                jsr     (sub_228EC).l
+                jsr     (HurtPlayerFromSolidHazard).l
 
 loc_566CE:
                 andi.b  #2,d6
@@ -405,7 +405,7 @@ loc_566CE:
                 sub.w   y_pos(a0),d0
                 addi.w  #$28,d0
                 bmi.s   loc_566F2
-                jsr     (sub_228EC).l
+                jsr     (HurtPlayerFromSolidHazard).l
 
 loc_566F2:
                 subq.b  #1,anim_frame_timer(a0)
@@ -440,12 +440,12 @@ RawAni_5673C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56742:
+UpdateMGZMinibossSpireMotionState:
                 moveq   #0,d0
                 move.b  routine(a0),d0
                 move.w  off_56750(pc,d0.w),d1
                 jmp     off_56750(pc,d1.w)
-; End of function sub_56742
+; End of function UpdateMGZMinibossSpireMotionState
 
 ; ---------------------------------------------------------------------------
 off_56750:
@@ -513,7 +513,7 @@ loc_567E4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_567FE:
+SpawnMGZTremorDebrisAtRandomScreenX:
                 lea     ChildObjDat_568F8(pc),a2
                 jsr     CreateChild1_Normal(pc)
                 bne.s   locret_5682C
@@ -529,11 +529,11 @@ sub_567FE:
 
 locret_5682C:
                 rts
-; End of function sub_567FE
+; End of function SpawnMGZTremorDebrisAtRandomScreenX
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5682E:
+HandleMGZTunnelbotHitFlashOrDefeat:
                 tst.b   collision_flags(a0)
                 bne.s   locret_5687E
                 tst.b   collision_property(a0)
@@ -571,7 +571,7 @@ loc_56880:
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild1_Normal).l
                 jmp     BossDefeated_StopTimer(pc)
-; End of function sub_5682E
+; End of function HandleMGZTunnelbotHitFlashOrDefeat
 
 ; ---------------------------------------------------------------------------
 word_568A2:

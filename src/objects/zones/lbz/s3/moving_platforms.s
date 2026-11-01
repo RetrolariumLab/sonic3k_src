@@ -162,7 +162,7 @@ Platform_Horizontal64:
                 move.w  #64,d1
                 moveq   #0,d0
                 move.b  (Oscillating_table+$0A).w,d0
-                bra.s   sub_23ED4
+                bra.s   PositionLbzPlatformHorizontalOscillation
 ; ---------------------------------------------------------------------------
 
 Platform_Horizontal128:
@@ -172,7 +172,7 @@ Platform_Horizontal128:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_23ED4:
+PositionLbzPlatformHorizontalOscillation:
                 btst    #0,status(a0)
                 beq.s   loc_23EE0
                 neg.w   d0
@@ -183,7 +183,7 @@ loc_23EE0:
                 add.w   d0,d1
                 move.w  d1,x_pos(a0)
                 rts
-; End of function sub_23ED4
+; End of function PositionLbzPlatformHorizontalOscillation
 
 ; ---------------------------------------------------------------------------
 
@@ -216,7 +216,7 @@ Platform_DiagonalUp:
                 move.w  #128,d1
                 moveq   #0,d0
                 move.b  (Oscillating_table+$1E).w,d0
-                bsr.s   sub_23ED4
+                bsr.s   PositionLbzPlatformHorizontalOscillation
                 move.w  #64,d1
                 moveq   #0,d0
                 move.b  (Oscillating_table+$1E).w,d0
@@ -230,7 +230,7 @@ Platform_DiagonalDown:
                 move.b  (Oscillating_table+$1E).w,d0
                 neg.w   d0
                 add.w   d1,d0
-                bsr.s   sub_23ED4
+                bsr.s   PositionLbzPlatformHorizontalOscillation
                 move.w  #64,d1
                 moveq   #0,d0
                 move.b  (Oscillating_table+$1E).w,d0
@@ -344,13 +344,13 @@ Platform_Falling:
                 bclr    #p1_standing_bit,status(a0)
                 beq.s   loc_24042
                 lea     (Player_1).w,a1
-                bsr.s   sub_2408A
+                bsr.s   ReleasePlayerFromLbzFallingPlatform
 
 loc_24042:
                 bclr    #p2_standing_bit,status(a0)
                 beq.s   loc_24050
                 lea     (Player_2).w,a1
-                bsr.s   sub_2408A
+                bsr.s   ReleasePlayerFromLbzFallingPlatform
 
 loc_24050:
                 move.l  #Obj_FallingPlatformIntangible,(a0)
@@ -375,13 +375,13 @@ locret_24088:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2408A:
+ReleasePlayerFromLbzFallingPlatform:
                 bset    #Status_InAir,status(a1)
                 bclr    #Status_OnObj,status(a1)
                 move.b  #2,routine(a1)
                 move.w  y_vel(a0),y_vel(a1)
                 rts
-; End of function sub_2408A
+; End of function ReleasePlayerFromLbzFallingPlatform
 
 ; ---------------------------------------------------------------------------
 
@@ -442,7 +442,7 @@ loc_2412C:
                 beq.s   loc_2414C
                 move.l  a0,-(sp)
                 lea     (Player_1).w,a0
-                jsr     (sub_10BA2).l
+                jsr     (CheckPlayerBodyFloorClearance).l
                 tst.w   d1
                 bpl.s   loc_2414A
                 jsr     (Kill_Character).l
@@ -455,7 +455,7 @@ loc_2414C:
                 beq.s   locret_2416C
                 move.l  a0,-(sp)
                 lea     (Player_2).w,a0
-                jsr     (sub_10BA2).l
+                jsr     (CheckPlayerBodyFloorClearance).l
                 tst.w   d1
                 bpl.s   loc_2416A
                 jsr     (Kill_Character).l

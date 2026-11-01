@@ -16,11 +16,11 @@ Competition_PlayerSelect:
                 move.w  #$8B00,(a6)
                 move.w  #$8C89,(a6)
                 move.w  #$9011,(a6)
-                jsr     sub_C02A(pc)
+                jsr     Menu_FillPlaneAWithPriorityBlankTiles(pc)
                 move.w  #VRAM_Plane_A_Name_Table+$220,d0
-                jsr     sub_C04C(pc)
+                jsr     Menu_ClearNineByEightTileArea(pc)
                 move.w  #VRAM_Plane_A_Name_Table+$820,d0
-                jsr     sub_C04C(pc)
+                jsr     Menu_ClearNineByEightTileArea(pc)
                 clearRAM Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
                 clearRAM Object_RAM,(Kos_decomp_buffer-Object_RAM)
                 clr.w   (DMA_queue).w
@@ -97,7 +97,7 @@ loc_B406:
                 jsr     (Init_SpriteTable).l
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
-                jsr     sub_C0AE(pc)
+                jsr     Menu_UpdateBothCharacterDepthGroups(pc)
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
                 moveq   #signextendB(mus_CompetitionMenu),d0
@@ -114,7 +114,7 @@ loc_B4A8:
                 jsr     (Wait_VSync).l
                 addq.w  #1,(Level_frame_counter).w
                 jsr     (Process_Sprites).l
-                jsr     sub_C0AE(pc)
+                jsr     Menu_UpdateBothCharacterDepthGroups(pc)
                 jsr     (Render_Sprites).l
                 move.b  (Events_bg+$12).w,d0
                 beq.s   loc_B4D4
@@ -132,7 +132,7 @@ loc_B4E0:
                 tst.w   d0
                 bne.s   loc_B4A8
                 move.w  #$E00,(Current_zone_and_act).w
-                jsr     sub_C104(pc)
+                jsr     SKCompInitializeRoundLivesScoresTimersAndFlags(pc)
                 move.b  #GameMode_Level,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------

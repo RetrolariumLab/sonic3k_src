@@ -98,7 +98,7 @@ loc_15384:
                 bsr.w   Tails_SlopeRepel
                 tst.b   (Background_collision_flag).w
                 beq.s   locret_153CE
-                bsr.w   sub_10BA2
+                bsr.w   CheckPlayerBodyFloorClearance
                 tst.w   d1
                 bmi.w   Kill_Character
                 movem.l a4-a6,-(sp)

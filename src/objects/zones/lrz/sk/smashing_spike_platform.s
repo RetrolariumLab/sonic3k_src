@@ -102,13 +102,13 @@ loc_43222:
                 andi.b  #4,d0
                 beq.s   loc_43234
                 lea     (Player_1).w,a1
-                jsr     (sub_24280).l
+                jsr     (HurtPlayerFromSolidHazard).l
 
 loc_43234:
                 andi.b  #8,d6
                 beq.s   loc_43244
                 lea     (Player_2).w,a1
-                jsr     (sub_24280).l
+                jsr     (HurtPlayerFromSolidHazard).l
 
 loc_43244:
                 jmp     (Sprite_OnScreen_Test).l

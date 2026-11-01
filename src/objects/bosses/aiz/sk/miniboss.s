@@ -53,7 +53,7 @@ loc_68A88:
 loc_68A94:
                 move.l  #loc_68ACC,$34(a0)
                 move.b  #6,routine(a0)
-                bsr.w   sub_6859C
+                bsr.w   StartAIZMinibossDescentAndMusic
                 lea     ChildObjDat_6905C(pc),a2
                 jsr     (CreateChild1_Normal).l
                 lea     ChildObjDat_69086(pc),a2
@@ -252,7 +252,7 @@ off_68CC6:
 ; ---------------------------------------------------------------------------
 
 loc_68CD0:
-                bsr.w   sub_6885A
+                bsr.w   InitializeAIZMinibossRisingMissile
                 movea.w parent3(a0),a1
                 cmpi.l  #loc_6872C,(a1)
                 bne.s   loc_68CE4
@@ -281,7 +281,7 @@ loc_68D1C:
                 move.b  #6,routine(a0)
                 move.l  #loc_68D48,$34(a0)
                 bset    #1,render_flags(a0)
-                bsr.w   sub_68ED4
+                bsr.w   PrepareAIZMinibossMissileDescentWithBarrelDelay
                 move.w  (Camera_Y_pos).w,d0
                 subi.w  #$20,d0
                 move.w  d0,y_pos(a0)
@@ -457,13 +457,13 @@ word_68ECE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_68ED4:
+PrepareAIZMinibossMissileDescentWithBarrelDelay:
                 movea.w parent3(a0),a1
                 moveq   #0,d0
                 move.b  subtype(a1),d0
                 move.w  word_68F28(pc,d0.w),$2E(a0)
 
-sub_68EE4:
+SelectAIZMinibossMissileDescentLane:
                 lsr.w   #1,d0
                 move.b  $39(a1),d1
                 addq.b  #4,d1
@@ -485,7 +485,7 @@ loc_68F0E:
                 move.w  d0,x_pos(a0)
                 move.w  #$400,y_vel(a0)
                 rts
-; End of function sub_68ED4
+; End of function PrepareAIZMinibossMissileDescentWithBarrelDelay
 
 ; ---------------------------------------------------------------------------
 word_68F28:

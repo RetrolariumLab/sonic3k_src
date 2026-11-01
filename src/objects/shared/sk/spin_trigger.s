@@ -64,11 +64,11 @@ loc_1E896:
                 move.w  x_pos(a0),d1
                 lea     $34(a0),a2
                 lea     (Player_1).w,a1
-                bsr.s   sub_1E8C6
+                bsr.s   UpdateAutoRollOnXCrossing
                 lea     (Player_2).w,a1
                 cmpi.w  #4,(Tails_CPU_routine).w
                 beq.w   loc_1E8BA
-                bsr.s   sub_1E8C6
+                bsr.s   UpdateAutoRollOnXCrossing
 
 loc_1E8BA:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
@@ -79,7 +79,7 @@ loc_1E8C0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1E8C6:
+UpdateAutoRollOnXCrossing:
                 tst.b   (a2)+
                 bne.s   loc_1E944
                 cmp.w   x_pos(a1),d1
@@ -180,7 +180,7 @@ loc_1E9C0:
                 moveq   #signextendB(sfx_Roll),d0
                 jsr     (Play_SFX).l
                 rts
-; End of function sub_1E8C6
+; End of function UpdateAutoRollOnXCrossing
 
 ; ---------------------------------------------------------------------------
 
@@ -190,11 +190,11 @@ loc_1E9E6:
                 move.w  y_pos(a0),d1
                 lea     $34(a0),a2
                 lea     (Player_1).w,a1
-                bsr.s   sub_1EA14
+                bsr.s   UpdateAutoRollOnYCrossing
                 lea     (Player_2).w,a1
                 cmpi.w  #4,(Tails_CPU_routine).w
                 beq.s   loc_1EA08
-                bsr.s   sub_1EA14
+                bsr.s   UpdateAutoRollOnYCrossing
 
 loc_1EA08:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
@@ -205,7 +205,7 @@ loc_1EA0E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1EA14:
+UpdateAutoRollOnYCrossing:
                 tst.b   (a2)+
                 bne.w   loc_1EAB0
                 cmp.w   y_pos(a1),d1
@@ -301,4 +301,4 @@ loc_1EB22:
 
 locret_1EB30:
                 rts
-; End of function sub_1EA14
+; End of function UpdateAutoRollOnYCrossing

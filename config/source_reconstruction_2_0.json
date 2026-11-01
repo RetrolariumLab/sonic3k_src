@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 77
+    "commit_count": 78
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -509,9 +509,15 @@
       "commits": ["aa8cfd9bed103b6e19570f28d686834cd668ec8d"]
     },
     {
-      "id": "current-release-stage",
+      "id": "change-33196ab81daf",
       "kind": "tooling",
       "summary": "Distinguish foreign emulators started during a movie from owned leftovers, retain exact owned cleanup and preserve the runner's original failure.",
+      "commits": ["33196ab81daf915fbf5639edffee06bc6721b112"]
+    },
+    {
+      "id": "current-semantic-label-migration",
+      "kind": "source_or_tooling",
+      "summary": "Rename all 1571 address-named procedures and their scoped references from the reviewed semantic catalog; validate the complete registry and mapped historical addresses and boundaries.",
       "commits": ["release-commit"]
     }
   ],

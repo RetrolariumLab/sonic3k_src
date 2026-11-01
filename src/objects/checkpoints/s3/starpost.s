@@ -44,12 +44,12 @@ loc_2C488:
                 bne.w   loc_2C56E
                 lea     (Player_1).w,a3
                 move.b  (Last_star_post_hit).w,d1
-                bsr.s   sub_2C49E
+                bsr.s   StarpostS3ActivateNewPostForP1AndSaveCheckpoint
                 bra.w   loc_2C56E
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2C49E:
+StarpostS3ActivateNewPostForP1AndSaveCheckpoint:
                 andi.b  #$7F,d1
                 move.b  subtype(a0),d2
                 andi.b  #$7F,d2
@@ -85,11 +85,11 @@ sub_2C49E:
                 move.w  a0,$3E(a1)
                 cmpi.w  #50,(Ring_count).w
                 blo.s   loc_2C546
-                bsr.w   sub_2C83E
+                bsr.w   StarpostS3SpawnBonusEntryStarQuartet
 
 loc_2C546:
                 move.b  #1,anim(a0)
-                bsr.w   sub_2C5DA
+                bsr.w   StarpostS3SavePostCoordinatesAndFullLevelSnapshot
                 move.b  #4,routine(a0)
                 movea.w respawn_addr(a0),a2
                 bset    #0,(a2)
@@ -105,7 +105,7 @@ loc_2C560:
 
 locret_2C56C:
                 rts
-; End of function sub_2C49E
+; End of function StarpostS3ActivateNewPostForP1AndSaveCheckpoint
 
 ; ---------------------------------------------------------------------------
 
@@ -145,11 +145,11 @@ loc_2C5A4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2C5DA:
+StarpostS3SavePostCoordinatesAndFullLevelSnapshot:
                 move.b  subtype(a0),(Last_star_post_hit).w
                 move.w  x_pos(a0),(Saved_X_pos).w
                 move.w  y_pos(a0),(Saved_Y_pos).w
-; End of function sub_2C5DA
+; End of function StarpostS3SavePostCoordinatesAndFullLevelSnapshot
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -268,7 +268,7 @@ Map_StarpostStars:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2C83E:
+StarpostS3SpawnBonusEntryStarQuartet:
                 moveq   #4-1,d1
                 moveq   #0,d2
 
@@ -298,7 +298,7 @@ loc_2C842:
 
 locret_2C8AC:
                 rts
-; End of function sub_2C83E
+; End of function StarpostS3SpawnBonusEntryStarQuartet
 
 ; ---------------------------------------------------------------------------
 

@@ -10,7 +10,7 @@ Obj_LBZEndBoss:
                 move.b  routine(a0),d0
                 move.w  LBZEndBoss_Index(pc,d0.w),d1
                 jsr     LBZEndBoss_Index(pc,d1.w)
-                bsr.w   sub_50A7A
+                bsr.w   HandleLBZEndBossSingleColorHitOrEscape
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 LBZEndBoss_Index:
@@ -346,7 +346,7 @@ loc_507AC:
                 move.w  off_507CA(pc,d0.w),d1
                 jsr     off_507CA(pc,d1.w)
                 lea     locret_504DA(pc),a2
-                bsr.w   sub_50A66
+                bsr.w   MoveAndSolidifyLBZEndBossTopPlatform
                 bra.w   loc_50B26
 ; ---------------------------------------------------------------------------
 off_507CA:
@@ -418,7 +418,7 @@ loc_50840:
 
 loc_5084E:
                 lea     loc_5085A(pc),a2
-                bsr.w   sub_50A66
+                bsr.w   MoveAndSolidifyLBZEndBossTopPlatform
                 bra.w   loc_50B26
 ; ---------------------------------------------------------------------------
 
@@ -628,7 +628,7 @@ word_50A46:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_50A66:
+MoveAndSolidifyLBZEndBossTopPlatform:
                 move.w  x_pos(a0),-(sp)
                 jsr     (a2)
                 moveq   #$12,d1
@@ -636,11 +636,11 @@ sub_50A66:
                 moveq   #7,d3
                 move.w  (sp)+,d4
                 jmp     (SolidObjectTop).l
-; End of function sub_50A66
+; End of function MoveAndSolidifyLBZEndBossTopPlatform
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_50A7A:
+HandleLBZEndBossSingleColorHitOrEscape:
                 tst.l   (a0)
                 beq.s   locret_50AD0
                 tst.b   collision_flags(a0)
@@ -692,7 +692,7 @@ loc_50B18:
                 move.w  #$3AB8,(Camera_stored_max_X_pos).w
                 lea     Child6_IncLevX(pc),a2
                 jmp     CreateChild6_Simple(pc)
-; End of function sub_50A7A
+; End of function HandleLBZEndBossSingleColorHitOrEscape
 
 ; ---------------------------------------------------------------------------
 

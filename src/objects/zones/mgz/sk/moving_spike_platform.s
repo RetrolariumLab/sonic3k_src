@@ -66,7 +66,7 @@ loc_34764:
                 sub.w   y_pos(a0),d0
                 addi.w  #$28,d0
                 bmi.s   loc_347BC
-                jsr     (sub_24280).l
+                jsr     (HurtPlayerFromSolidHazard).l
 
 loc_347BC:
                 andi.b  #2,d6
@@ -77,7 +77,7 @@ loc_347BC:
                 sub.w   y_pos(a0),d0
                 addi.w  #$28,d0
                 bmi.s   loc_347E0
-                jsr     (sub_24280).l
+                jsr     (HurtPlayerFromSolidHazard).l
 
 loc_347E0:
                 subq.b  #1,anim_frame_timer(a0)

@@ -92,7 +92,7 @@ loc_692A0:
                 ori.b   #$48,$38(a0)
                 move.l  #loc_69302,$34(a0)
                 clr.b   collision_flags(a0)
-                bsr.w   sub_69C94
+                bsr.w   ResetAIZBossHitFlashPalette
                 bclr    #0,render_flags(a0)
                 cmpi.w  #8,angle(a0)
                 bhs.s   loc_692D8
@@ -128,7 +128,7 @@ loc_69302:
 loc_6932C:
                 lea     byte_69DB3(pc),a1
                 jsr     (Animate_RawNoSSTMultiDelay).l
-                bra.w   sub_69BE2
+                bra.w   HandleAIZBossHitFlashOrDefeat
 ; ---------------------------------------------------------------------------
 
 loc_6933A:
@@ -149,7 +149,7 @@ loc_69368:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 jsr     (Obj_Wait).l
-                bra.w   sub_69BE2
+                bra.w   HandleAIZBossHitFlashOrDefeat
 ; ---------------------------------------------------------------------------
 
 loc_6937E:
@@ -190,7 +190,7 @@ loc_693DC:
 ; ---------------------------------------------------------------------------
 
 loc_693F0:
-                bsr.w   sub_69BE2
+                bsr.w   HandleAIZBossHitFlashOrDefeat
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
@@ -200,7 +200,7 @@ loc_693FA:
                 jsr     (Play_SFX).l
                 move.l  #loc_6942A,$34(a0)
                 clr.b   collision_flags(a0)
-                bsr.w   sub_69C94
+                bsr.w   ResetAIZBossHitFlashPalette
                 lea     ChildObjDat_69D2E(pc),a2
                 jsr     (CreateChild1_Normal).l
                 move.b  #2,subtype(a1)

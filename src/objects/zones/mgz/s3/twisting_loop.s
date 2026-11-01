@@ -16,7 +16,7 @@ loc_32ED2:
                 lea     $30(a0),a2
                 moveq   #p1_standing_bit,d6
                 move.w  (Ctrl_1_logical).w,d5
-                bsr.s   sub_32EFE
+                bsr.s   UpdatePlayerInMgzTwistingLoop
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 ; unused
@@ -24,12 +24,12 @@ loc_32ED2:
                 lea     $36(a0),a2
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
                 move.w  (Ctrl_2_logical).w,d5
-                bsr.s   sub_32EFE
+                bsr.s   UpdatePlayerInMgzTwistingLoop
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_32EFE:
+UpdatePlayerInMgzTwistingLoop:
                 btst    d6,status(a0)
                 bne.w   loc_32FD6
                 tst.b   4(a2)
@@ -79,7 +79,7 @@ loc_32F38:
                 move.w  (a2),d0
                 sub.w   y_pos(a0),d0
                 move.w  d0,(a2)
-                bsr.w   sub_32E68
+                bsr.w   AttachPlayerToScriptedRideObject
                 move.b  #$C0,angle(a1)
                 bclr    #0,render_flags(a1)
                 move.b  #$80,5(a2)
@@ -258,7 +258,7 @@ loc_33196:
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 jmp     (Perform_Player_DPLC).l
-; End of function sub_32EFE
+; End of function UpdatePlayerInMgzTwistingLoop
 
 ; ---------------------------------------------------------------------------
 ; unused

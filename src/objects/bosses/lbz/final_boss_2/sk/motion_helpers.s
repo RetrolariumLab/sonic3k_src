@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_74EBC:
+LatchLBZFinalBoss2ChildTilePriorityAndCollision:
                 movea.w parent3(a0),a1
                 btst    #7,art_tile(a1)
                 beq.s   locret_74ED4
@@ -14,7 +14,7 @@ sub_74EBC:
 
 locret_74ED4:
                 rts
-; End of function sub_74EBC
+; End of function LatchLBZFinalBoss2ChildTilePriorityAndCollision
 
 ; ---------------------------------------------------------------------------
 ; unused
@@ -97,7 +97,7 @@ loc_74F90:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_74FA8:
+ReverseLBZFinalBoss2AtCameraRelativeBounds:
                 move.w  (Camera_X_pos).w,d0
                 tst.w   x_vel(a0)
                 bmi.s   loc_74FBE
@@ -118,11 +118,11 @@ loc_74FC6:
 
 locret_74FD0:
                 rts
-; End of function sub_74FA8
+; End of function ReverseLBZFinalBoss2AtCameraRelativeBounds
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_74FD2:
+HandleLBZFinalBoss2SixColorHitOrDefeat:
                 cmpi.b  #8,routine(a0)
                 blo.s   locret_75044
                 tst.b   collision_flags(a0)
@@ -150,7 +150,7 @@ loc_75010:
                 addi.w  #2*6,d0
 
 loc_75024:
-                bsr.w   sub_75084
+                bsr.w   CopyLBZFinalBoss2SixColorPalette
                 subq.b  #1,$20(a0)
                 bne.s   locret_75044
                 bclr    #6,status(a0)
@@ -180,15 +180,15 @@ loc_7506E:
 loc_7507A:
                 lea     ChildObjDat_75186(pc),a2
                 jmp     (CreateChild1_Normal).l
-; End of function sub_74FD2
+; End of function HandleLBZFinalBoss2SixColorHitOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_75084:
+CopyLBZFinalBoss2SixColorPalette:
                 lea     word_75092(pc),a1
                 lea     word_7509E(pc,d0.w),a2
                 jmp     (CopyWordData_6).l
-; End of function sub_75084
+; End of function CopyLBZFinalBoss2SixColorPalette
 
 ; ---------------------------------------------------------------------------
 word_75092:

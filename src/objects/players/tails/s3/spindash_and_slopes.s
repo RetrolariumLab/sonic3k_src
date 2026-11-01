@@ -27,7 +27,7 @@ loc_15D22:
                 bsr.w   Player_AnglePos
                 tst.b   (Background_collision_flag).w
                 beq.s   locret_15D4E
-                bsr.w   sub_10BA2
+                bsr.w   CheckPlayerBodyFloorClearance
                 tst.w   d1
                 bmi.w   Kill_Character
                 movem.l a4-a6,-(sp)
@@ -126,7 +126,7 @@ loc_15E36:
                 bsr.w   Player_AnglePos
                 tst.b   (Background_collision_flag).w
                 beq.s   locret_15E62
-                bsr.w   sub_10BA2
+                bsr.w   CheckPlayerBodyFloorClearance
                 tst.w   d1
                 bmi.w   Kill_Character
                 movem.l a4-a6,-(sp)

@@ -20,14 +20,14 @@ loc_4783C:
 
 loc_47842:
                 lea     (Player_1).w,a1
-                bsr.s   sub_47854
+                bsr.s   CarryGroundedPlayerOnDezBelt
                 lea     (Player_2).w,a1
-                bsr.s   sub_47854
+                bsr.s   CarryGroundedPlayerOnDezBelt
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_47854:
+CarryGroundedPlayerOnDezBelt:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   $32(a0),d0
@@ -50,4 +50,4 @@ loc_4788C:
 
 locret_47890:
                 rts
-; End of function sub_47854
+; End of function CarryGroundedPlayerOnDezBelt

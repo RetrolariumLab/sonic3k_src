@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7E6D4:
+RestoreDEZMinibossPlatformIdleHandlerBySide:
                 move.l  #loc_7E566,(a0)
                 tst.b   subtype(a0)
                 beq.s   locret_7E6E6
@@ -15,7 +15,7 @@ locret_7E6E6:
 ; ---------------------------------------------------------------------------
 
 loc_7E6E8:
-                bsr.w   sub_7EBC2
+                bsr.w   AccelerateDEZPlatformSharedAngularStepAndAdvancePhase
                 move.b  $3A(a0),d0
                 addq.b  #1,d0
                 cmpi.b  #$60,d0
@@ -36,17 +36,17 @@ loc_7E710:
                 move.l  #loc_7E724,(a0)
 
 loc_7E71C:
-                bsr.w   sub_7EBC2
+                bsr.w   AccelerateDEZPlatformSharedAngularStepAndAdvancePhase
                 bra.w   loc_7EC52
 ; ---------------------------------------------------------------------------
 
 loc_7E724:
-                bsr.w   sub_7EBC2
+                bsr.w   AccelerateDEZPlatformSharedAngularStepAndAdvancePhase
                 move.b  $3A(a0),d0
                 subq.b  #1,d0
                 cmpi.b  #$40,d0
                 bhi.s   loc_7E742
-                bsr.s   sub_7E6D4
+                bsr.s   RestoreDEZMinibossPlatformIdleHandlerBySide
                 movea.w parent3(a0),a1
                 bclr    #7,$38(a1)
                 moveq   #$40,d0
@@ -54,7 +54,7 @@ loc_7E724:
 loc_7E742:
                 move.b  d0,$3A(a0)
                 bra.w   loc_7EC52
-; End of function sub_7E6D4
+; End of function RestoreDEZMinibossPlatformIdleHandlerBySide
 
 ; ---------------------------------------------------------------------------
 
@@ -94,7 +94,7 @@ loc_7E786:
                 move.w  d0,$44(a1)
 
 loc_7E79C:
-                bsr.w   sub_7ED6C
+                bsr.w   TrackDEZMinibossEyeTowardPlayerOne
                 movea.w parent3(a0),a1
                 cmpi.l  #loc_7DE6E,(a1)
                 beq.s   loc_7E7AE
@@ -105,8 +105,8 @@ loc_7E7AE:
                 move.b  #4,routine(a0)
 
 loc_7E7B4:
-                bsr.w   sub_7ED6C
-                bsr.w   sub_7EDD0
+                bsr.w   TrackDEZMinibossEyeTowardPlayerOne
+                bsr.w   AdvanceDEZMinibossEyeHitAndIncrementRootCounter
                 movea.w parent3(a0),a1
                 btst    #6,status(a1)
                 bne.s   loc_7E7CE
@@ -119,7 +119,7 @@ loc_7E7CE:
 ; ---------------------------------------------------------------------------
 
 loc_7E7D6:
-                bsr.w   sub_7ED6C
+                bsr.w   TrackDEZMinibossEyeTowardPlayerOne
                 movea.w parent3(a0),a1
                 btst    #6,status(a1)
                 beq.s   loc_7E7E8
@@ -135,8 +135,8 @@ loc_7E7E8:
 ; ---------------------------------------------------------------------------
 
 loc_7E800:
-                bsr.w   sub_7ED6C
-                bsr.w   sub_7EDD0
+                bsr.w   TrackDEZMinibossEyeTowardPlayerOne
+                bsr.w   AdvanceDEZMinibossEyeHitAndIncrementRootCounter
                 jmp     (Add_SpriteToCollisionResponseList).l
 ; ---------------------------------------------------------------------------
 
@@ -144,10 +144,10 @@ loc_7E80E:
                 lea     word_7EF58(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
                 move.l  #loc_7E820,(a0)
-                bsr.w   sub_7ED54
+                bsr.w   SeedDEZMinibossEightOrbitHazardPhases
 
 loc_7E820:
-                bsr.w   sub_7EB76
+                bsr.w   SetDEZOrbitHazardCollisionFromParentStatusSix
                 addq.b  #4,$3C(a0)
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
@@ -218,7 +218,7 @@ byte_7E8C2:
 ; ---------------------------------------------------------------------------
 
 loc_7E8E2:
-                bsr.w   sub_7EB76
+                bsr.w   SetDEZOrbitHazardCollisionFromParentStatusSix
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
                 bpl.s   loc_7E8F6
@@ -356,7 +356,7 @@ loc_7EA3C:
                 jsr     (Play_SFX).l
 
 loc_7EA5E:
-                bsr.w   sub_7EB34
+                bsr.w   HurtBothPlayersInsideDEZMinibossBeamRange
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
@@ -393,7 +393,7 @@ loc_7EA9A:
 loc_7EAB6:
                 lea     word_7EF64(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
-                bsr.w   sub_7ECF4
+                bsr.w   SeedDEZMinibossRandomFlickerDebris
                 move.l  #loc_7EAC8,(a0)
 
 loc_7EAC8:

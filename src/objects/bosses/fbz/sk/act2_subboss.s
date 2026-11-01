@@ -10,7 +10,7 @@ Obj_FBZ2Subboss:
                 move.b  routine(a0),d0
                 move.w  FBZ2Subboss_Index(pc,d0.w),d1
                 jsr     FBZ2Subboss_Index(pc,d1.w)
-                bsr.w   sub_70330
+                bsr.w   FlashAndResetFBZAct2SubbossHitState
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 FBZ2Subboss_Index:
@@ -111,7 +111,7 @@ loc_6FE3A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6FE54:
+SetFBZAct2SubbossChaseVelocity:
                 lea     (Player_1).w,a1
                 jsr     (Find_OtherObject).l
                 move.w  #$100,d1
@@ -122,7 +122,7 @@ sub_6FE54:
 loc_6FE68:
                 move.w  d1,x_vel(a0)
                 rts
-; End of function sub_6FE54
+; End of function SetFBZAct2SubbossChaseVelocity
 
 ; ---------------------------------------------------------------------------
 
@@ -154,7 +154,7 @@ loc_6FEB2:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #$1F,d0
                 bne.s   loc_6FEC6
-                bsr.s   sub_6FE54
+                bsr.s   SetFBZAct2SubbossChaseVelocity
 
 loc_6FEC6:
                 move.w  #$100,d0
@@ -535,7 +535,7 @@ word_70320:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_70330:
+FlashAndResetFBZAct2SubbossHitState:
                 tst.b   collision_flags(a0)
                 bne.s   locret_70360
                 tst.b   $20(a0)
@@ -545,7 +545,7 @@ sub_70330:
                 jsr     (Play_SFX).l
 
 loc_7034A:
-                bsr.w   sub_70362
+                bsr.w   CopyFBZAct2SubbossFlashPalette
                 subq.b  #1,$20(a0)
                 bne.s   locret_70360
                 move.b  $25(a0),collision_flags(a0)
@@ -553,11 +553,11 @@ loc_7034A:
 
 locret_70360:
                 rts
-; End of function sub_70330
+; End of function FlashAndResetFBZAct2SubbossHitState
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_70362:
+CopyFBZAct2SubbossFlashPalette:
                 moveq   #0,d0
                 btst    #0,$20(a0)
                 bne.s   loc_70376
@@ -569,7 +569,7 @@ loc_70376:
                 lea     word_70384(pc),a1
                 lea     word_7038A(pc,d0.w),a2
                 jmp     (CopyWordData_3).l
-; End of function sub_70362
+; End of function CopyFBZAct2SubbossFlashPalette
 
 ; ---------------------------------------------------------------------------
 word_70384:

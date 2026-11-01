@@ -101,7 +101,7 @@ loc_24074:
 ; ---------------------------------------------------------------------------
 
 loc_24090:
-                bsr.w   sub_242B6
+                bsr.w   UpdateSpikePosition
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -118,13 +118,13 @@ loc_24090:
                 andi.b  #p1_standing,d0
                 beq.s   loc_240CA
                 lea     (Player_1).w,a1
-                bsr.w   sub_24280
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_240CA:
                 andi.b  #p2_standing,d6
                 beq.s   loc_240D8
                 lea     (Player_2).w,a1
-                bsr.w   sub_24280
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_240D8:
                 move.w  $30(a0),d0
@@ -132,7 +132,7 @@ loc_240D8:
 ; ---------------------------------------------------------------------------
 
 loc_240E2:
-                bsr.w   sub_242B6
+                bsr.w   UpdateSpikePosition
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -149,14 +149,14 @@ loc_240E2:
                 andi.b  #1,d0
                 beq.s   loc_24120
                 lea     (Player_1).w,a1
-                bsr.w   sub_24280
+                bsr.w   HurtPlayerFromSolidHazard
                 bclr    #p1_pushing_bit,status(a0)
 
 loc_24120:
                 andi.b  #2,d6
                 beq.s   loc_24134
                 lea     (Player_2).w,a1
-                bsr.w   sub_24280
+                bsr.w   HurtPlayerFromSolidHazard
                 bclr    #p2_pushing_bit,status(a0)
 
 loc_24134:
@@ -165,7 +165,7 @@ loc_24134:
 ; ---------------------------------------------------------------------------
 
 loc_2413E:
-                bsr.w   sub_242B6
+                bsr.w   UpdateSpikePosition
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -182,13 +182,13 @@ loc_2413E:
                 andi.b  #4,d0
                 beq.s   loc_24176
                 lea     (Player_1).w,a1
-                bsr.w   sub_24280
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_24176:
                 andi.b  #8,d6
                 beq.s   loc_24184
                 lea     (Player_2).w,a1
-                bsr.w   sub_24280
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_24184:
                 move.w  $30(a0),d0
@@ -196,7 +196,7 @@ loc_24184:
 ; ---------------------------------------------------------------------------
 
 loc_2418E:
-                bsr.w   sub_243BA
+                bsr.w   UpdateCompetitionSpikePosition
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #7,d1
@@ -213,20 +213,20 @@ loc_2418E:
                 andi.b  #p1_standing,d0
                 beq.s   loc_241C8
                 lea     (Player_1).w,a1
-                bsr.w   sub_24280
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_241C8:
                 andi.b  #p2_standing,d6
                 beq.s   loc_241D6
                 lea     (Player_2).w,a1
-                bsr.w   sub_24280
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_241D6:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
 loc_241DC:
-                bsr.w   sub_243BA
+                bsr.w   UpdateCompetitionSpikePosition
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #7,d1
@@ -243,14 +243,14 @@ loc_241DC:
                 andi.b  #1,d0
                 beq.s   loc_2421A
                 lea     (Player_1).w,a1
-                bsr.w   sub_24280
+                bsr.w   HurtPlayerFromSolidHazard
                 bclr    #p1_pushing_bit,status(a0)
 
 loc_2421A:
                 andi.b  #2,d6
                 beq.s   loc_2422E
                 lea     (Player_2).w,a1
-                bsr.w   sub_24280
+                bsr.w   HurtPlayerFromSolidHazard
                 bclr    #p2_pushing_bit,status(a0)
 
 loc_2422E:
@@ -258,7 +258,7 @@ loc_2422E:
 ; ---------------------------------------------------------------------------
 
 loc_24234:
-                bsr.w   sub_243BA
+                bsr.w   UpdateCompetitionSpikePosition
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #7,d1
@@ -275,20 +275,20 @@ loc_24234:
                 andi.b  #4,d0
                 beq.s   loc_2426C
                 lea     (Player_1).w,a1
-                bsr.w   sub_24280
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_2426C:
                 andi.b  #8,d6
                 beq.s   loc_2427A
                 lea     (Player_2).w,a1
-                bsr.w   sub_24280
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_2427A:
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_24280:
+HurtPlayerFromSolidHazard:
                 btst    #Status_Invincible,status_secondary(a1)
                 bne.s   locret_242B4
                 tst.b   invulnerability_timer(a1)
@@ -308,16 +308,16 @@ sub_24280:
 
 locret_242B4:
                 rts
-; End of function sub_24280
+; End of function HurtPlayerFromSolidHazard
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_242B6:
+UpdateSpikePosition:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  off_242C4(pc,d0.w),d1
                 jmp     off_242C4(pc,d1.w)
-; End of function sub_242B6
+; End of function UpdateSpikePosition
 
 ; ---------------------------------------------------------------------------
 off_242C4:
@@ -332,7 +332,7 @@ locret_242CC:
 ; ---------------------------------------------------------------------------
 
 loc_242CE:
-                bsr.w   sub_242F6
+                bsr.w   UpdateSpikeTravel
                 moveq   #0,d0
                 move.b  $34(a0),d0
                 add.w   $32(a0),d0
@@ -341,7 +341,7 @@ loc_242CE:
 ; ---------------------------------------------------------------------------
 
 loc_242E2:
-                bsr.w   sub_242F6
+                bsr.w   UpdateSpikeTravel
                 moveq   #0,d0
                 move.b  $34(a0),d0
                 add.w   $30(a0),d0
@@ -350,7 +350,7 @@ loc_242E2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_242F6:
+UpdateSpikeTravel:
                 tst.w   $38(a0)
                 beq.s   loc_24312
                 subq.w  #1,$38(a0)
@@ -383,7 +383,7 @@ loc_24334:
 
 locret_24354:
                 rts
-; End of function sub_242F6
+; End of function UpdateSpikeTravel
 
 ; ---------------------------------------------------------------------------
 
@@ -395,11 +395,11 @@ loc_24356:
                 lea     (Player_1).w,a1
                 move.b  $3E(a0),d0
                 moveq   #5,d6
-                bsr.s   sub_2438A
+                bsr.s   StepPushableSpikesRightForPlayer
                 lea     (Player_2).w,a1
                 move.b  $3F(a0),d0
                 moveq   #6,d6
-                bsr.s   sub_2438A
+                bsr.s   StepPushableSpikesRightForPlayer
 
 loc_2437C:
                 move.b  (Player_1+status).w,$3E(a0)
@@ -408,7 +408,7 @@ loc_2437C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2438A:
+StepPushableSpikesRightForPlayer:
                 btst    d6,d3
                 beq.s   locret_243B8
                 cmp.w   x_pos(a1),d2
@@ -426,16 +426,16 @@ sub_2438A:
 
 locret_243B8:
                 rts
-; End of function sub_2438A
+; End of function StepPushableSpikesRightForPlayer
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_243BA:
+UpdateCompetitionSpikePosition:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  word_243C8(pc,d0.w),d1
                 jmp     word_243C8(pc,d1.w)
-; End of function sub_243BA
+; End of function UpdateCompetitionSpikePosition
 
 ; ---------------------------------------------------------------------------
 word_243C8:
@@ -445,7 +445,7 @@ word_243C8:
 ; ---------------------------------------------------------------------------
 
 loc_243CE:
-                bsr.w   sub_243F6
+                bsr.w   UpdateCompetitionSpikeTravel
                 moveq   #0,d0
                 move.b  $34(a0),d0
                 add.w   $32(a0),d0
@@ -454,7 +454,7 @@ loc_243CE:
 ; ---------------------------------------------------------------------------
 
 loc_243E2:
-                bsr.w   sub_243F6
+                bsr.w   UpdateCompetitionSpikeTravel
                 moveq   #0,d0
                 move.b  $34(a0),d0
                 add.w   $30(a0),d0
@@ -463,7 +463,7 @@ loc_243E2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_243F6:
+UpdateCompetitionSpikeTravel:
                 tst.w   $38(a0)
                 beq.s   loc_24412
                 subq.w  #1,$38(a0)
@@ -496,7 +496,7 @@ loc_24434:
 
 locret_24454:
                 rts
-; End of function sub_243F6
+; End of function UpdateCompetitionSpikeTravel
 
 ; ---------------------------------------------------------------------------
 Map_Spikes:

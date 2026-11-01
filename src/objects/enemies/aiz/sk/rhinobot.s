@@ -43,13 +43,13 @@ loc_86EB2:
 
 loc_86EC4:
                 lea     loc_86F92(pc),a3
-                bsr.w   sub_870A4
+                bsr.w   TriggerRhinobotChargeForPlayerAhead
                 lea     loc_86F74(pc),a3
-                bsr.w   sub_870CA
+                bsr.w   FollowRhinobotFloorOrAbortState
                 move.w  $40(a0),d0
                 add.w   d0,x_vel(a0)
                 jsr     (MoveSprite2).l
-                bsr.w   sub_86FF8
+                bsr.w   DispatchRhinobotVelocityMilestone
                 bra.w   loc_8701C
 ; ---------------------------------------------------------------------------
 
@@ -59,7 +59,7 @@ loc_86EEA:
 
 loc_86EEE:
                 lea     loc_86FE8(pc),a3
-                bsr.w   sub_870CA
+                bsr.w   FollowRhinobotFloorOrAbortState
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
@@ -157,7 +157,7 @@ loc_86FE8:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_86FF8:
+DispatchRhinobotVelocityMilestone:
                 move.w  x_vel(a0),d0
                 beq.s   loc_87016
                 btst    #2,$38(a0)
@@ -176,7 +176,7 @@ loc_8700E:
 loc_87016:
                 movea.l $34(a0),a1
                 jmp     (a1)
-; End of function sub_86FF8
+; End of function DispatchRhinobotVelocityMilestone
 
 ; ---------------------------------------------------------------------------
 
@@ -238,7 +238,7 @@ locret_870A2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_870A4:
+TriggerRhinobotChargeForPlayerAhead:
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$20,d3
                 bhi.s   locret_870C2
@@ -260,11 +260,11 @@ loc_870C4:
                 jsr     (a3)
                 addq.w  #4,sp
                 rts
-; End of function sub_870A4
+; End of function TriggerRhinobotChargeForPlayerAhead
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_870CA:
+FollowRhinobotFloorOrAbortState:
                 moveq   #4,d0
                 btst    #3,$38(a0)
                 bne.s   loc_870D6
@@ -288,7 +288,7 @@ loc_870F8:
                 jsr     (a3)
                 addq.w  #4,sp
                 rts
-; End of function sub_870CA
+; End of function FollowRhinobotFloorOrAbortState
 
 ; ---------------------------------------------------------------------------
 ObjSlot_Rhinobot:

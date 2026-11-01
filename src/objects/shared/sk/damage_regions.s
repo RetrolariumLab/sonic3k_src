@@ -60,13 +60,13 @@ loc_1F45E:
                 andi.b  #p1_standing,d0
                 beq.s   loc_1F494
                 lea     (Player_1).w,a1
-                bsr.w   sub_1F58C
+                bsr.w   HurtPlayerUnlessInvisibleHazardImmunityMatches
 
 loc_1F494:
                 andi.b  #p2_standing,d6
                 beq.s   loc_1F4A2
                 lea     (Player_2).w,a1
-                bsr.w   sub_1F58C
+                bsr.w   HurtPlayerUnlessInvisibleHazardImmunityMatches
 
 loc_1F4A2:
                 move.w  x_pos(a0),d0
@@ -100,13 +100,13 @@ loc_1F4C4:
                 andi.b  #1,d0
                 beq.s   loc_1F4F8
                 lea     (Player_1).w,a1
-                bsr.w   sub_1F58C
+                bsr.w   HurtPlayerUnlessInvisibleHazardImmunityMatches
 
 loc_1F4F8:
                 andi.b  #2,d6
                 beq.s   loc_1F506
                 lea     (Player_2).w,a1
-                bsr.w   sub_1F58C
+                bsr.w   HurtPlayerUnlessInvisibleHazardImmunityMatches
 
 loc_1F506:
                 move.w  x_pos(a0),d0
@@ -140,13 +140,13 @@ loc_1F528:
                 andi.b  #4,d0
                 beq.s   loc_1F55C
                 lea     (Player_1).w,a1
-                bsr.w   sub_1F58C
+                bsr.w   HurtPlayerUnlessInvisibleHazardImmunityMatches
 
 loc_1F55C:
                 andi.b  #8,d6
                 beq.s   loc_1F56A
                 lea     (Player_2).w,a1
-                bsr.w   sub_1F58C
+                bsr.w   HurtPlayerUnlessInvisibleHazardImmunityMatches
 
 loc_1F56A:
                 move.w  x_pos(a0),d0
@@ -164,16 +164,16 @@ locret_1F58A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1F58C:
+HurtPlayerUnlessInvisibleHazardImmunityMatches:
                 move.b  shield_reaction(a0),d0
                 andi.b  #$73,d0
                 and.b   shield_reaction(a1),d0
                 bne.s   locret_1F59E
-                bsr.w   sub_24280
+                bsr.w   HurtPlayerFromSolidHazard
 
 locret_1F59E:
                 rts
-; End of function sub_1F58C
+; End of function HurtPlayerUnlessInvisibleHazardImmunityMatches
 
 ; ---------------------------------------------------------------------------
 
@@ -226,13 +226,13 @@ loc_1F606:
                 andi.b  #p1_standing,d0
                 beq.s   loc_1F63C
                 lea     (Player_1).w,a1
-                bsr.w   sub_1F734
+                bsr.w   KillPlayerFromInvisibleHazard
 
 loc_1F63C:
                 andi.b  #p2_standing,d6
                 beq.s   loc_1F64A
                 lea     (Player_2).w,a1
-                bsr.w   sub_1F734
+                bsr.w   KillPlayerFromInvisibleHazard
 
 loc_1F64A:
                 move.w  x_pos(a0),d0
@@ -266,13 +266,13 @@ loc_1F66C:
                 andi.b  #1,d0
                 beq.s   loc_1F6A0
                 lea     (Player_1).w,a1
-                bsr.w   sub_1F734
+                bsr.w   KillPlayerFromInvisibleHazard
 
 loc_1F6A0:
                 andi.b  #2,d6
                 beq.s   loc_1F6AE
                 lea     (Player_2).w,a1
-                bsr.w   sub_1F734
+                bsr.w   KillPlayerFromInvisibleHazard
 
 loc_1F6AE:
                 move.w  x_pos(a0),d0
@@ -306,13 +306,13 @@ loc_1F6D0:
                 andi.b  #4,d0
                 beq.s   loc_1F704
                 lea     (Player_1).w,a1
-                bsr.w   sub_1F734
+                bsr.w   KillPlayerFromInvisibleHazard
 
 loc_1F704:
                 andi.b  #8,d6
                 beq.s   loc_1F712
                 lea     (Player_2).w,a1
-                bsr.w   sub_1F734
+                bsr.w   KillPlayerFromInvisibleHazard
 
 loc_1F712:
                 move.w  x_pos(a0),d0
@@ -330,7 +330,7 @@ locret_1F732:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1F734:
+KillPlayerFromInvisibleHazard:
                 move.w  d6,-(sp)
                 move.l  a0,-(sp)
                 movea.l a1,a0
@@ -338,4 +338,4 @@ sub_1F734:
                 movea.l (sp)+,a0
                 move.w  (sp)+,d6
                 rts
-; End of function sub_1F734
+; End of function KillPlayerFromInvisibleHazard

@@ -126,13 +126,13 @@ loc_7A800:
                 bset    #0,render_flags(a0)
 
 loc_7A84A:
-                bsr.w   sub_7AC06
+                bsr.w   ApplySSZMTZHitOrbReleaseAndPlayerHurtPolicy
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7A85A:
+ApplySSZMTZBossFourPixelSineBob:
                 move.b  $1D(a0),d0
                 jsr     (GetSineCosine).l
                 asr.w   #6,d0
@@ -140,7 +140,7 @@ sub_7A85A:
                 move.w  d0,y_pos(a0)
                 addq.b  #4,$1D(a0)
                 rts
-; End of function sub_7A85A
+; End of function ApplySSZMTZBossFourPixelSineBob
 
 ; ---------------------------------------------------------------------------
 
@@ -173,10 +173,10 @@ loc_7A8AE:
 
 loc_7A8DA:
                 move.w  (SSZ_MTZ_boss_X_pos).w,x_pos(a0)
-                bsr.w   sub_7A85A
+                bsr.w   ApplySSZMTZBossFourPixelSineBob
 
 loc_7A8E4:
-                bsr.w   sub_7AC06
+                bsr.w   ApplySSZMTZHitOrbReleaseAndPlayerHurtPolicy
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -395,7 +395,7 @@ loc_7AB04:
                 move.w  #0,(SSZ_MTZ_boss_X_vel).w
 
 loc_7AB12:
-                bsr.w   sub_7AB56
+                bsr.w   TickSSZMTZBossLaserPairBurst
                 bra.w   loc_7A8DA
 ; ---------------------------------------------------------------------------
 
@@ -415,5 +415,5 @@ loc_7AB3A:
                 move.b  #0,$32(a0)
 
 loc_7AB4E:
-                bsr.w   sub_7AB56
+                bsr.w   TickSSZMTZBossLaserPairBurst
                 bra.w   loc_7A8DA

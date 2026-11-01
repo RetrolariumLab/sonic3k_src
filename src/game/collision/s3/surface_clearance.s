@@ -38,7 +38,7 @@ CheckRightCeilingDist:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_10D76:
+ProbeRightWallAtBodyExtents:
                 move.w  y_pos(a0),d2
                 move.w  x_pos(a0),d3
                 moveq   #0,d0
@@ -69,7 +69,7 @@ sub_10D76:
                 move.w  (sp)+,d0
                 move.b  #-$40,d2
                 bra.w   loc_10B3E
-; End of function sub_10D76
+; End of function ProbeRightWallAtBodyExtents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -160,7 +160,7 @@ Sonic_CheckCeiling:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_10EB6:
+ProbeCeilingWithInsetHorizontalRadius:
                 move.w  y_pos(a0),d2
                 move.w  x_pos(a0),d3
                 moveq   #0,d0
@@ -195,7 +195,7 @@ sub_10EB6:
                 move.w  (sp)+,d0
                 move.b  #$80,d2
                 bra.w   loc_10B3E
-; End of function sub_10EB6
+; End of function ProbeCeilingWithInsetHorizontalRadius
 
 ; ---------------------------------------------------------------------------
 
@@ -289,7 +289,7 @@ CheckLeftCeilingDist:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1100E:
+ProbeLeftWallAtBodyExtents:
                 move.w  y_pos(a0),d2
                 move.w  x_pos(a0),d3
                 moveq   #0,d0
@@ -322,7 +322,7 @@ sub_1100E:
                 move.w  (sp)+,d0
                 move.b  #$40,d2
                 bra.w   loc_10B3E
-; End of function sub_1100E
+; End of function ProbeLeftWallAtBodyExtents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -358,7 +358,7 @@ loc_110A4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_110C8:
+ProbeLeftWallUsingYRadius:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
                 beq.s   loc_110DC
@@ -384,7 +384,7 @@ loc_110DC:
 
 locret_11116:
                 rts
-; End of function sub_110C8
+; End of function ProbeLeftWallUsingYRadius
 
 ; =============== S U B R O U T I N E =======================================
 

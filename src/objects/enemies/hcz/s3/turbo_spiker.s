@@ -213,7 +213,7 @@ loc_55BA6:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
                 bne.s   loc_55BCA
-                bsr.w   sub_55BCE
+                bsr.w   SpawnTurboSpikerTrailPuffOnVblankPhase
                 bchg    #0,$38(a0)
                 beq.w   locret_55A72
                 jmp     (Draw_Sprite).l
@@ -224,7 +224,7 @@ loc_55BCA:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_55BCE:
+SpawnTurboSpikerTrailPuffOnVblankPhase:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #3,d0
                 bne.s   locret_55BFE
@@ -242,7 +242,7 @@ sub_55BCE:
 
 locret_55BFE:
                 rts
-; End of function sub_55BCE
+; End of function SpawnTurboSpikerTrailPuffOnVblankPhase
 
 ; ---------------------------------------------------------------------------
 

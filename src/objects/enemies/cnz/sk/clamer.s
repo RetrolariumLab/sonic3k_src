@@ -104,7 +104,7 @@ loc_890AA:
                 bsr.w   Check_PlayerCollision
                 beq.s   loc_890C4
                 move.l  #loc_890C8,(a0)
-                bsr.w   sub_890D8
+                bsr.w   LaunchPlayerFromClamerContactTrigger
                 movea.w parent3(a0),a1
                 bset    #0,$38(a1)
 
@@ -124,7 +124,7 @@ loc_890D0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_890D8:
+LaunchPlayerFromClamerContactTrigger:
                 move.w  #$800,d0
                 bclr    #Status_Facing,status(a1)
                 btst    #0,render_flags(a0)
@@ -144,7 +144,7 @@ loc_890F2:
                 moveq   #signextendB(sfx_Spring),d0
                 jsr     (Play_SFX).l
                 rts
-; End of function sub_890D8
+; End of function LaunchPlayerFromClamerContactTrigger
 
 ; ---------------------------------------------------------------------------
 ObjSlot_Clamer:

@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_78038:
+ReloadSOZEndBossMotionProfileAtTurnBounds:
                 tst.b   $3C(a0)
                 bpl.s   locret_7805E
                 tst.w   x_vel(a0)
@@ -21,7 +21,7 @@ loc_78054:
 
 locret_7805E:
                 rts
-; End of function sub_78038
+; End of function ReloadSOZEndBossMotionProfileAtTurnBounds
 
 ; ---------------------------------------------------------------------------
 word_78060:
@@ -29,7 +29,7 @@ word_78060:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7806C:
+TickSOZEndBossChargeAttackSpawnTimer:
                 subq.w  #1,(_unkFA82).w
                 bpl.w   locret_77AF6
                 move.w  #$200,(_unkFA82).w
@@ -37,11 +37,11 @@ sub_7806C:
                 jsr     (Play_SFX).l
                 lea     ChildObjDat_7832C(pc),a2
                 jmp     (CreateChild1_Normal).l
-; End of function sub_7806C
+; End of function TickSOZEndBossChargeAttackSpawnTimer
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7808C:
+UpdateSOZEndBossSineBobFromAngleStep:
                 move.b  angle(a0),d0
                 sub.b   $3E(a0),d0
                 move.b  d0,angle(a0)
@@ -51,22 +51,22 @@ sub_7808C:
                 add.w   d0,d1
                 move.w  d1,y_pos(a0)
                 rts
-; End of function sub_7808C
+; End of function UpdateSOZEndBossSineBobFromAngleStep
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_780AC:
+ProcessSOZEndBossUpperBodyContactsForBothPlayers:
                 swap    d6
                 moveq   #0,d0
                 lea     (Player_1).w,a1
-                bsr.w   sub_780BE
+                bsr.w   OpenSOZEndBossEyeOrHurtUpperBodyContactPlayer
                 moveq   #1,d0
                 lea     (Player_2).w,a1
-; End of function sub_780AC
+; End of function ProcessSOZEndBossUpperBodyContactsForBothPlayers
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_780BE:
+OpenSOZEndBossEyeOrHurtUpperBodyContactPlayer:
                 btst    d0,d6
                 beq.s   locret_78118
                 move.w  x_pos(a0),d0
@@ -95,25 +95,25 @@ locret_78118:
 ; ---------------------------------------------------------------------------
 
 loc_7811A:
-                jmp     (sub_24280).l
-; End of function sub_780BE
+                jmp     (HurtPlayerFromSolidHazard).l
+; End of function OpenSOZEndBossEyeOrHurtUpperBodyContactPlayer
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_78120:
+ProcessSOZEndBossLowerBodyContactsForBothPlayers:
                 swap    d6
                 moveq   #0,d0
                 moveq   #p1_standing_bit,d1
                 lea     (Player_1).w,a1
-                bsr.w   sub_78136
+                bsr.w   DetachOrHurtSOZEndBossLowerBodyContactPlayer
                 moveq   #1,d0
                 moveq   #p2_standing_bit,d1
                 lea     (Player_2).w,a1
-; End of function sub_78120
+; End of function ProcessSOZEndBossLowerBodyContactsForBothPlayers
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_78136:
+DetachOrHurtSOZEndBossLowerBodyContactPlayer:
                 btst    d0,d6
                 bne.s   loc_78140
                 bclr    d1,status(a0)
@@ -124,29 +124,29 @@ loc_78140:
                 tst.b   invulnerability_timer(a1)
                 bne.s   locret_78158
                 andi.b  #$9F,status(a0)
-                jsr     (sub_24280).l
+                jsr     (HurtPlayerFromSolidHazard).l
 
 locret_78158:
                 rts
-; End of function sub_78136
+; End of function DetachOrHurtSOZEndBossLowerBodyContactPlayer
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7815A:
+ProcessSOZEndBossArmContactsWhileRootAlive:
                 movea.w $44(a0),a1
                 btst    #7,status(a1)
                 bne.s   locret_78198
                 swap    d6
                 moveq   #0,d0
                 lea     (Player_1).w,a1
-                bsr.w   sub_78178
+                bsr.w   HurtSOZEndBossArmContactPlayerOnLeftSide
                 moveq   #1,d0
                 lea     (Player_2).w,a1
-; End of function sub_7815A
+; End of function ProcessSOZEndBossArmContactsWhileRootAlive
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_78178:
+HurtSOZEndBossArmContactPlayerOnLeftSide:
                 btst    d0,d6
                 beq.s   locret_78198
                 tst.b   $34(a1)
@@ -155,15 +155,15 @@ sub_78178:
                 sub.w   x_pos(a1),d0
                 bcs.s   locret_78198
                 andi.b  #$9F,status(a0)
-                jsr     (sub_24280).l
+                jsr     (HurtPlayerFromSolidHazard).l
 
 locret_78198:
                 rts
-; End of function sub_78178
+; End of function HurtSOZEndBossArmContactPlayerOnLeftSide
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7819A:
+SeedSOZEndBossChargeParticleOffsetAndStagger:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lea     byte_781BC(pc,d0.w),a1
@@ -174,7 +174,7 @@ sub_7819A:
                 lsl.w   #2,d0
                 move.w  d0,$2E(a0)
                 rts
-; End of function sub_7819A
+; End of function SeedSOZEndBossChargeParticleOffsetAndStagger
 
 ; ---------------------------------------------------------------------------
 byte_781BC:
@@ -220,7 +220,7 @@ loc_7820A:
                 addi.w  #2*5,d0
 
 loc_78218:
-                bsr.w   sub_7825E
+                bsr.w   CopySOZEndBossFirstThreeOfFivePaletteColors
                 subq.b  #1,$20(a0)
                 bne.s   locret_7822E
                 bclr    #6,status(a0)
@@ -242,12 +242,12 @@ loc_78230:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7825E:
+CopySOZEndBossFirstThreeOfFivePaletteColors:
                 lea     word_7826C(pc),a1
                 lea     word_78276(pc,d0.w),a2
 ; Bug: this should go to CopyWordData_5
                 jmp     (CopyWordData_3).l
-; End of function sub_7825E
+; End of function CopySOZEndBossFirstThreeOfFivePaletteColors
 
 ; ---------------------------------------------------------------------------
 word_7826C:

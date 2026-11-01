@@ -136,7 +136,7 @@ loc_76CE:
                 move.l  (a1)+,$7C(a2)
                 move.l  $10(a1),$50(a2)
                 move.w  $14(a1),$54(a2)
-                bsr.w   sub_8CDC
+                bsr.w   SStage_CountInitialBlueSpheres
                 bsr.w   Load_SSSprite_Mappings
                 clr.b   (Level_started_flag).w
                 move.b  #$FF,(Special_stage_sphere_HUD_flag).w
@@ -161,7 +161,7 @@ loc_7770:
                 bsr.w   Touch_SSSprites
                 jsr     (Render_Sprites).l
                 jsr     Draw_SSSprites(pc)
-                bsr.w   sub_8B9A
+                bsr.w   SStage_UpdateBackgroundScroll
                 move.b  #1,(Special_stage_fade_timer).w
                 move.b  #VInt_ID_1C,(V_int_routine).w
                 bsr.w   Wait_VSync
@@ -185,8 +185,8 @@ loc_77D2:
                 bsr.w   Touch_SSSprites
                 jsr     (Render_Sprites).l
                 jsr     Draw_SSSprites(pc)
-                bsr.w   sub_8B9A
-                bsr.w   sub_89E2
+                bsr.w   SStage_UpdateBackgroundScroll
+                bsr.w   SStage_UpdateClearSequence
                 bsr.w   Process_Nem_Queue_Init
                 jsr     (Process_Kos_Module_Queue).l
                 cmpi.b  #GameMode_SpecialStage3,(Game_mode).w
@@ -208,8 +208,8 @@ loc_7838:
                 bsr.w   Touch_SSSprites
                 jsr     (Render_Sprites).l
                 jsr     Draw_SSSprites(pc)
-                bsr.w   sub_8B9A
-                bsr.w   sub_89E2
+                bsr.w   SStage_UpdateBackgroundScroll
+                bsr.w   SStage_UpdateClearSequence
                 bsr.w   Process_Nem_Queue_Init
                 jsr     (Process_Kos_Module_Queue).l
                 subq.w  #1,(Pal_fade_delay).w

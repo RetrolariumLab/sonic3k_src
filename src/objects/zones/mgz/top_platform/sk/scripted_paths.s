@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_35666:
+TryEnterTopPlatformScriptedSinePath:
                 tst.w   (Debug_placement_mode).w
                 bne.s   locret_356C8
                 tst.b   $34(a0)
@@ -140,7 +140,7 @@ loc_35770:
 loc_3577E:
                 move.w  d0,$3A(a0)
                 rts
-; End of function sub_35666
+; End of function TryEnterTopPlatformScriptedSinePath
 
 ; ---------------------------------------------------------------------------
 word_35784:     dc.w    7-1
@@ -162,7 +162,7 @@ word_357F6:     dc.w    7-1
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_35868:
+UpdateTopPlatformScriptedSinePath:
                 cmpi.b  #2,$35(a0)
                 beq.s   loc_358E0
                 subq.b  #1,$3A(a0)
@@ -271,7 +271,7 @@ loc_3595E:
 
 locret_35962:
                 rts
-; End of function sub_35868
+; End of function UpdateTopPlatformScriptedSinePath
 
 ; ---------------------------------------------------------------------------
 Map_MGZTopPlatform:

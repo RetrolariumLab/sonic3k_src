@@ -8,26 +8,26 @@ Obj_LRZCorkscrew:
                 move.l  #loc_4225A,(a0)
 
 loc_4225A:
-                bsr.s   sub_42262
+                bsr.s   UpdatePlayersOnLrzCorkscrew
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_42262:
+UpdatePlayersOnLrzCorkscrew:
                 lea     (Player_1).w,a1
                 lea     $30(a0),a2
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_42278
+                bsr.s   UpdatePlayerOnLrzCorkscrew
                 lea     (Player_2).w,a1
                 lea     $34(a0),a2
 ; Bug: if player 1 was riding the object, then d6 may have become dirty from
 ; a call to Perform_Player_DPLC, causing player 2 to behave erratically
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
-; End of function sub_42262
+; End of function UpdatePlayersOnLrzCorkscrew
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_42278:
+UpdatePlayerOnLrzCorkscrew:
                 btst    d6,status(a0)
                 bne.w   loc_42362
                 move.w  x_pos(a1),d0
@@ -173,7 +173,7 @@ loc_42438:
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 jmp     (Perform_Player_DPLC).l
-; End of function sub_42278
+; End of function UpdatePlayerOnLrzCorkscrew
 
 ; ---------------------------------------------------------------------------
 RawAni_4247E:

@@ -206,11 +206,11 @@ loc_107F6:
 ; ---------------------------------------------------------------------------
 
 loc_10844:
-                bsr.w   sub_1094C
+                bsr.w   SonicSKHandleCompetitionSpindashAndAbortGroundStep
                 bsr.w   Sonic_Jump
                 bsr.w   Player_SlopeResist
                 bsr.w   Sonic_Move
-                bsr.w   sub_108E6
+                bsr.w   SonicSKTryCompetitionRollFromDown
                 jsr     (MoveSprite2).l
 
 loc_1085E:
@@ -268,7 +268,7 @@ loc_108D4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_108E6:
+SonicSKTryCompetitionRollFromDown:
                 tst.b   status_secondary(a0)
                 bmi.s   locret_1090C
                 move.w  ground_vel(a0),d0
@@ -308,11 +308,11 @@ loc_10918:
 
 locret_1094A:
                 rts
-; End of function sub_108E6
+; End of function SonicSKTryCompetitionRollFromDown
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1094C:
+SonicSKHandleCompetitionSpindashAndAbortGroundStep:
                 tst.b   spin_dash_flag(a0)
                 bne.s   loc_10998
                 cmpi.b  #8,anim(a0)
@@ -430,6 +430,6 @@ loc_10A8C:
 loc_10A8E:
                 bsr.w   Player_AnglePos
                 rts
-; End of function sub_1094C
+; End of function SonicSKHandleCompetitionSpindashAndAbortGroundStep
 
 ; ---------------------------------------------------------------------------

@@ -31,13 +31,13 @@ loc_3CB8A:
                 lea     (Player_1).w,a1
                 bclr    #p1_standing_bit,status(a0)
                 beq.s   loc_3CB98
-                bsr.s   sub_3CBCE
+                bsr.s   LaunchPlayerFromFbzSpringSurface
 
 loc_3CB98:
                 lea     (Player_2).w,a1
                 bclr    #p2_standing_bit,status(a0)
                 beq.s   loc_3CBA6
-                bsr.s   sub_3CBCE
+                bsr.s   LaunchPlayerFromFbzSpringSurface
 
 loc_3CBA6:
                 move.w  #$1B,d1
@@ -51,7 +51,7 @@ loc_3CBA6:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3CBCE:
+LaunchPlayerFromFbzSpringSurface:
                 move.w  #-$1000,y_vel(a1)
                 move.b  subtype(a0),d0
                 btst    #1,d0
@@ -85,7 +85,7 @@ loc_3CC34:
 loc_3CC44:
                 moveq   #signextendB(sfx_Spring),d0
                 jmp     (Play_SFX).l
-; End of function sub_3CBCE
+; End of function LaunchPlayerFromFbzSpringSurface
 
 ; ---------------------------------------------------------------------------
 Ani_FBZTrapSpring:

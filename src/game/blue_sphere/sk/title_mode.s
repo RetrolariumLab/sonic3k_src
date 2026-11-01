@@ -8,10 +8,10 @@ BlueSpheresTitle:
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
                 jsr     (Pal_FadeToBlack).l
-                bsr.w   sub_4C8E4
-                bsr.w   sub_4CCA6
+                bsr.w   BlueSphereResetSceneVideoQueuesAndRuntimeMemory
+                bsr.w   BlueSphereClassifyLockonSerialAndInitializeLevelSelection
                 lea     (Target_palette).w,a2
-                bsr.w   sub_4CB1A
+                bsr.w   BlueSphereCopyProgressSelectedFullPalette
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_BlueSphere_TitleText),VRAM,WRITE),(VDP_control_port).l
                 lea     (ArtNem_CreditsText).l,a0
                 jsr     (Nem_Decomp).l
@@ -63,7 +63,7 @@ BlueSpheresTitle:
 loc_4CA8C:
                 move.w  #$100,d2
                 move.w  #make_art_tile(ArtTile_BlueSphere_TitleText,0,0),d6
-                jsr     (sub_5B318).l
+                jsr     (SKCreditsBuildAndUploadVariableWidthTwoRowText).l
                 tst.b   (Blue_spheres_mode).w
                 bne.s   loc_4CAA8
                 move.l  #$FFF0FFF8,(V_scroll_value).w
@@ -85,7 +85,7 @@ loc_4CAE8:
                 move.b  #VInt_ID_1A,(V_int_routine).w
                 jsr     (Process_Kos_Queue).l
                 jsr     (Wait_VSync).l
-                bsr.w   sub_4CC96
+                bsr.w   BlueSphereScrollFirstSixtyFourForegroundLinesLeftTwo
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
                 jsr     (Process_Kos_Module_Queue).l
@@ -95,7 +95,7 @@ loc_4CAE8:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4CB1A:
+BlueSphereCopyProgressSelectedFullPalette:
                 lea     (Pal_SpheresTitle_2).l,a1
                 tst.b   (Blue_spheres_progress_flag).w
                 bne.s   loc_4CB2C
@@ -108,7 +108,7 @@ loc_4CB2E:
                 move.w  (a1)+,(a2)+
                 dbf     d0,loc_4CB2E
                 rts
-; End of function sub_4CB1A
+; End of function BlueSphereCopyProgressSelectedFullPalette
 
 ; ---------------------------------------------------------------------------
 Pal_SpheresTitle_1:
@@ -126,7 +126,7 @@ aGetBlueSpheres:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4CC96:
+BlueSphereScrollFirstSixtyFourForegroundLinesLeftTwo:
                 lea     (H_scroll_buffer).w,a1
                 moveq   #$40-1,d1
 
@@ -135,11 +135,11 @@ sub_4CC96:
                 addq.w  #4,a1
                 dbf     d1,.loop
                 rts
-; End of function sub_4CC96
+; End of function BlueSphereScrollFirstSixtyFourForegroundLinesLeftTwo
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4CCA6:
+BlueSphereClassifyLockonSerialAndInitializeLevelSelection:
                 lea     (BlueSpheresSerialsText).l,a1
                 moveq   #4-1,d1
 
@@ -161,7 +161,7 @@ loc_4CCC0:
                 dbf     d1,loc_4CCAE
                 move.b  #0,(Blue_spheres_mode).w
                 move.b  #-1,(Blue_spheres_progress_flag).w
-                bsr.s   sub_4CD18
+                bsr.s   BlueSphereDeriveTwentySevenBitLevelFromLockonHeader
 
 locret_4CCDA:
                 rts
@@ -175,7 +175,7 @@ loc_4CCDC:
                 move.l  #0,(Blue_spheres_current_level).w
                 move.l  #$10203,(Blue_spheres_current_stage).w
                 rts
-; End of function sub_4CCA6
+; End of function BlueSphereClassifyLockonSerialAndInitializeLevelSelection
 
 ; ---------------------------------------------------------------------------
 BlueSpheresSerialsText:
@@ -185,7 +185,7 @@ BlueSpheresSerialsText:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4CD18:
+BlueSphereDeriveTwentySevenBitLevelFromLockonHeader:
                 lea     (LockonSerialNumber).l,a1
                 moveq   #$B-1,d1
 
@@ -321,7 +321,7 @@ loc_4CDE6:
                 swap    d2
                 move.b  d2,(a2)+
                 rts
-; End of function sub_4CD18
+; End of function BlueSphereDeriveTwentySevenBitLevelFromLockonHeader
 
 ; ---------------------------------------------------------------------------
 BlueSpheresMonthText:

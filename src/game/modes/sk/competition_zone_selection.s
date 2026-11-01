@@ -16,7 +16,7 @@ Competition_LevelSelect:
                 move.w  #$8B00,(a6)
                 move.w  #$8C89,(a6)
                 move.w  #$9011,(a6)
-                jsr     sub_C02A(pc)
+                jsr     Menu_FillPlaneAWithPriorityBlankTiles(pc)
                 clearRAM Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
                 clearRAM Object_RAM,(Kos_decomp_buffer-Object_RAM)
                 clr.w   (DMA_queue).w
@@ -50,11 +50,11 @@ Competition_LevelSelect:
                 jsr     (Eni_Decomp).l
                 lea     VRAMDatList_CompetitionLevelSelect(pc),a0
                 jsr     Copy_Listed_Data_To_VRAM(pc)
-                jsr     sub_AFB2(pc)
+                jsr     SKCompClampSelectedZoneToVisibleScrollRow(pc)
                 mulu.w  #$48,d0
                 move.w  d0,(V_scroll_value).w
-                jsr     sub_B006(pc)
-                jsr     sub_B036(pc)
+                jsr     SKCompClearCharacterSelectAreasAtZoneWindowRow(pc)
+                jsr     SKCompDrawFiveZoneBestTimesInMenuOrder(pc)
                 lea     (ArtKos_S3MenuBG).l,a0          ; Decompress source
                 lea     (RAM_start).l,a1                ; Decompress destination/Transfer source
                 movea.w #tiles_to_bytes(ArtTile_S3MenuBG),a2  ; Transfer destination
@@ -124,7 +124,7 @@ loc_AD8A:
                 jsr     (Init_SpriteTable).l
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
-                jsr     sub_C0AE(pc)
+                jsr     Menu_UpdateBothCharacterDepthGroups(pc)
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
                 lea     (Dynamic_object_RAM+(object_size*9)).w,a0
@@ -146,7 +146,7 @@ loc_ADF2:
                 jsr     (Wait_VSync).l
                 addq.w  #1,(Level_frame_counter).w
                 jsr     (Process_Sprites).l
-                jsr     sub_C0AE(pc)
+                jsr     Menu_UpdateBothCharacterDepthGroups(pc)
                 jsr     (Render_Sprites).l
                 move.b  (Events_bg+$12).w,d0
                 beq.s   loc_AE1E
@@ -257,7 +257,7 @@ loc_AEF2:
                 move.b  (Competition_menu_zone).w,d0
                 move.b  Comp_ZoneList(pc,d0.w),(Current_zone).w
                 clr.b   (Current_act).w
-                jsr     sub_C104(pc)
+                jsr     SKCompInitializeRoundLivesScoresTimersAndFlags(pc)
                 move.b  #GameMode_Level,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
@@ -327,7 +327,7 @@ loc_AFAA:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_AFB2:
+SKCompClampSelectedZoneToVisibleScrollRow:
                 moveq   #0,d0
                 move.b  (Competition_menu_zone).w,d0
                 subq.w  #1,d0
@@ -341,7 +341,7 @@ loc_AFBE:
 
 locret_AFC6:
                 rts
-; End of function sub_AFB2
+; End of function SKCompClampSelectedZoneToVisibleScrollRow
 
 ; ---------------------------------------------------------------------------
 
@@ -366,8 +366,8 @@ loc_AFF0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B006:
-                bsr.s   sub_AFB2
+SKCompClearCharacterSelectAreasAtZoneWindowRow:
+                bsr.s   SKCompClampSelectedZoneToVisibleScrollRow
                 mulu.w  #$48,d0
                 addi.w  #$20,d0
                 lsl.w   #4,d0
@@ -375,10 +375,10 @@ sub_B006:
                 move.w  d0,d7
                 tst.b   (Game_mode).w
                 bmi.s   loc_B02E
-                jsr     sub_C04C(pc)
+                jsr     Menu_ClearNineByEightTileArea(pc)
                 move.w  d7,d0
                 addi.w  #$600,d0
-                jmp     sub_C04C(pc)
+                jmp     Menu_ClearNineByEightTileArea(pc)
 ; ---------------------------------------------------------------------------
 ; unused
                 rts
@@ -386,31 +386,31 @@ sub_B006:
 
 loc_B02E:
                 addi.w  #$300,d0
-                jmp     sub_C04C(pc)
-; End of function sub_B006
+                jmp     Menu_ClearNineByEightTileArea(pc)
+; End of function SKCompClearCharacterSelectAreasAtZoneWindowRow
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B036:
+SKCompDrawFiveZoneBestTimesInMenuOrder:
                 move.w  #VRAM_Plane_A_Name_Table+$2D2,d7
                 move.l  (Competition_saved_data).w,d6
-                bsr.s   sub_B066
+                bsr.s   SKCompFormatAndUploadMinuteSecondHundredthTime
                 addi.w  #$480,d7
                 move.l  (Competition_saved_data+$10).w,d6
-                bsr.s   sub_B066
+                bsr.s   SKCompFormatAndUploadMinuteSecondHundredthTime
                 addi.w  #$480,d7
                 move.l  (Competition_saved_data+$30).w,d6
-                bsr.s   sub_B066
+                bsr.s   SKCompFormatAndUploadMinuteSecondHundredthTime
                 addi.w  #$480,d7
                 move.l  (Competition_saved_data+$20).w,d6
-                bsr.s   sub_B066
+                bsr.s   SKCompFormatAndUploadMinuteSecondHundredthTime
                 addi.w  #$480,d7
                 move.l  (Competition_saved_data+$40).w,d6
-; End of function sub_B036
+; End of function SKCompDrawFiveZoneBestTimesInMenuOrder
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B066:
+SKCompFormatAndUploadMinuteSecondHundredthTime:
                 moveq   #0,d5
                 lsl.l   #8,d6
                 moveq   #2,d3
@@ -426,20 +426,20 @@ loc_B06C:
                 lea     (Plane_buffer).w,a1
                 lea     (MapUnc_CompetitionNumbers).l,a2
                 moveq   #0,d0
-                bsr.s   sub_B0C2
+                bsr.s   SKCompAppendNextTimeDigitWithFirstZeroBlankFlag
                 st      d0
-                bsr.s   sub_B0C2
+                bsr.s   SKCompAppendNextTimeDigitWithFirstZeroBlankFlag
                 moveq   #$A,d1
-                bsr.s   sub_B0D4
-                bsr.s   sub_B0C2
-                bsr.s   sub_B0C2
+                bsr.s   SKCompAppendTwoRowNumericGlyphColumn
+                bsr.s   SKCompAppendNextTimeDigitWithFirstZeroBlankFlag
+                bsr.s   SKCompAppendNextTimeDigitWithFirstZeroBlankFlag
                 moveq   #$B,d1
-                bsr.s   sub_B0D4
-                bsr.s   sub_B0C2
-                bsr.s   sub_B0C2
+                bsr.s   SKCompAppendTwoRowNumericGlyphColumn
+                bsr.s   SKCompAppendNextTimeDigitWithFirstZeroBlankFlag
+                bsr.s   SKCompAppendNextTimeDigitWithFirstZeroBlankFlag
                 lea     (Plane_buffer).w,a1
 
-sub_B0A6:
+CompetitionMenuUploadEightByTwoTileBlock:
                 move.w  d7,d0
                 swap    d0
                 clr.w   d0
@@ -451,40 +451,40 @@ sub_B0A6:
                 moveq   #8-1,d1
                 moveq   #2-1,d2
                 jmp     (Plane_Map_To_VRAM).l
-; End of function sub_B066
+; End of function SKCompFormatAndUploadMinuteSecondHundredthTime
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B0C2:
+SKCompAppendNextTimeDigitWithFirstZeroBlankFlag:
                 rol.l   #4,d5
                 move.w  d5,d1
                 andi.w  #$F,d1
-                bne.s   sub_B0D4
+                bne.s   SKCompAppendTwoRowNumericGlyphColumn
                 tst.w   d0
-                bne.s   sub_B0D4
+                bne.s   SKCompAppendTwoRowNumericGlyphColumn
                 moveq   #$C,d1
                 st      d0
-; End of function sub_B0C2
+; End of function SKCompAppendNextTimeDigitWithFirstZeroBlankFlag
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B0D4:
+SKCompAppendTwoRowNumericGlyphColumn:
                 add.w   d1,d1
                 add.w   d1,d1
                 move.w  (a2,d1.w),(a1)+
                 move.w  2(a2,d1.w),$E(a1)
                 rts
-; End of function sub_B0D4
+; End of function SKCompAppendTwoRowNumericGlyphColumn
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B0E4:
+SKCompConvertTimerFrameByteToHundredths:
                 lea     (byte_37E52).l,a1
                 moveq   #0,d0
                 move.b  d6,d0
                 move.b  (a1,d0.w),d6
                 rts
-; End of function sub_B0E4
+; End of function SKCompConvertTimerFrameByteToHundredths
 
 ; ---------------------------------------------------------------------------
 VRAMDatList_CompetitionLevelSelect:

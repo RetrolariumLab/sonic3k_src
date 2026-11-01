@@ -47,7 +47,7 @@ loc_4364A:
                 move.w  (a2)+,d4
                 bclr    #$A,d4
                 beq.s   loc_43656
-                bsr.w   sub_43664
+                bsr.w   SegaScreen_RepeatStreakTileWord
 
 loc_43656:
                 move.w  d4,(a6)
@@ -58,14 +58,14 @@ loc_43656:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_43664:
+SegaScreen_RepeatStreakTileWord:
                 moveq   #bytesToWcnt($52),d5
 
 loc_43666:
                 move.w  d4,(a6)
                 dbf     d5,loc_43666
                 rts
-; End of function sub_43664
+; End of function SegaScreen_RepeatStreakTileWord
 
 ; ---------------------------------------------------------------------------
 ObjB1_Streak_fade_to_right:

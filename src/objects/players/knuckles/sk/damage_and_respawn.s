@@ -39,7 +39,7 @@ loc_1799C:
                 bset    #Status_Push,(Gliding_collision_flags).w
 
 loc_179B4:
-                bsr.w   sub_11FD6
+                bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
                 tst.w   d1
                 bpl.s   locret_179D8
                 tst.b   (Reverse_gravity_flag).w
@@ -65,7 +65,7 @@ loc_179DA:
                 bset    #Status_Push,(Gliding_collision_flags).w
 
 loc_179F2:
-                bsr.w   sub_11FEE
+                bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
                 tst.w   d1
                 bpl.s   loc_17A36
                 neg.w   d1
@@ -100,7 +100,7 @@ locret_17A34:
 loc_17A36:
                 tst.w   y_vel(a0)
                 bmi.s   locret_17A60
-                bsr.w   sub_11FD6
+                bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
                 tst.w   d1
                 bpl.s   locret_17A60
                 tst.b   (Reverse_gravity_flag).w
@@ -134,7 +134,7 @@ loc_17A7A:
                 bset    #Status_Push,(Gliding_collision_flags).w
 
 loc_17A94:
-                bsr.w   sub_11FEE
+                bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
                 tst.w   d1
                 bpl.s   locret_17AAE
                 tst.b   (Reverse_gravity_flag).w
@@ -158,7 +158,7 @@ loc_17AB0:
                 bset    #Status_Push,(Gliding_collision_flags).w
 
 loc_17ACA:
-                bsr.w   sub_11FEE
+                bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
                 tst.w   d1
                 bpl.s   loc_17AEC
                 tst.b   (Reverse_gravity_flag).w
@@ -178,7 +178,7 @@ locret_17AEA:
 loc_17AEC:
                 tst.w   y_vel(a0)
                 bmi.s   locret_17B16
-                bsr.w   sub_11FD6
+                bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
                 tst.w   d1
                 bpl.s   locret_17B16
                 tst.b   (Reverse_gravity_flag).w
@@ -276,15 +276,15 @@ loc_17BEA:
                 and.w   d0,y_pos(a0)
 
 loc_17BFA:
-                bsr.w   sub_17C10
+                bsr.w   ResolveKnucklesHurtLandingOrDeathPlane
                 bsr.w   Player_LevelBound
                 bsr.w   Sonic_RecordPos
-                bsr.w   sub_17D1E
+                bsr.w   AnimateKnucklesApplyGravityFlipAndQueuePatterns
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_17C10:
+ResolveKnucklesHurtLandingOrDeathPlane:
                 tst.b   (Disable_death_plane).w
                 bne.s   loc_17C3C
                 tst.b   (Reverse_gravity_flag).w
@@ -326,7 +326,7 @@ locret_17C80:
 
 loc_17C82:
                 jmp     (Kill_Character).l
-; End of function sub_17C10
+; End of function ResolveKnucklesHurtLandingOrDeathPlane
 
 ; ---------------------------------------------------------------------------
 
@@ -341,10 +341,10 @@ loc_17C88:
 ; ---------------------------------------------------------------------------
 
 loc_17CA2:
-                bsr.w   sub_123C2
+                bsr.w   PlayerSKFinishDeathWithFollowerResetRestartOrCompetitionRespawn
                 jsr     (MoveSprite_TestGravity).l
                 bsr.w   Sonic_RecordPos
-                bsr.w   sub_17D1E
+                bsr.w   AnimateKnucklesApplyGravityFlipAndQueuePatterns
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -367,7 +367,7 @@ loc_17CCE:
                 move.b  #2,routine(a0)
 
 loc_17CE0:
-                bsr.w   sub_17D1E
+                bsr.w   AnimateKnucklesApplyGravityFlipAndQueuePatterns
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -385,12 +385,12 @@ loc_17D04:
                 jsr     (MoveSprite_TestGravity2).l
                 addi.w  #$10,y_vel(a0)
                 bsr.w   Sonic_RecordPos
-                bsr.w   sub_17D1E
+                bsr.w   AnimateKnucklesApplyGravityFlipAndQueuePatterns
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_17D1E:
+AnimateKnucklesApplyGravityFlipAndQueuePatterns:
                 bsr.s   Animate_Knuckles
                 tst.b   (Reverse_gravity_flag).w
                 beq.s   loc_17D2C
@@ -398,4 +398,4 @@ sub_17D1E:
 
 loc_17D2C:
                 bra.w   Knuckles_Load_PLC
-; End of function sub_17D1E
+; End of function AnimateKnucklesApplyGravityFlipAndQueuePatterns

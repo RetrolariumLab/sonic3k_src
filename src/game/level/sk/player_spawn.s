@@ -313,14 +313,14 @@ loc_6B76:
                 move.b  d0,(SStage_scalar_result_0+2).w
                 move.w  d0,(SStage_scalar_result_0).w
                 move.l  #Obj_Sonic_RotatingSlotBonus,(Player_1).w
-                jsr     (sub_4B6AA).l
+                jsr     (SlotsInitializePaddedLayoutDescriptorsAndCage).l
                 st      (Deform_lock).w
                 rts
 ; ---------------------------------------------------------------------------
 
 loc_6B94:
                 move.b  (P1_character).w,d0
-                bsr.s   sub_6BD8
+                bsr.s   SKCompSelectTailsOrFallbackSonicPlayerHandler
                 move.l  d1,(Player_1).w
                 move.b  (P1_character).w,(Player_1+character_id).w
                 move.w  (Player_1+x_pos).w,(Player_2+x_pos).w
@@ -329,7 +329,7 @@ loc_6B94:
                 tst.b   (Not_ghost_flag).w
                 beq.s   loc_6BD6
                 move.b  (P2_character).w,d0
-                bsr.s   sub_6BD8
+                bsr.s   SKCompSelectTailsOrFallbackSonicPlayerHandler
                 move.l  d1,(Player_2).w
                 move.b  (P2_character).w,(Player_2+character_id).w
                 move.l  #Obj_DashDust2P,(Dust_P2).w
@@ -340,7 +340,7 @@ loc_6BD6:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6BD8:
+SKCompSelectTailsOrFallbackSonicPlayerHandler:
                 tst.b   d0
                 bne.s   loc_6BE2
                 move.l  #Obj_Sonic2P,d1
@@ -355,7 +355,7 @@ loc_6BE2:
 loc_6BEE:
                 move.l  #Obj_Sonic2P,d1
                 rts
-; End of function sub_6BD8
+; End of function SKCompSelectTailsOrFallbackSonicPlayerHandler
 
 ; ---------------------------------------------------------------------------
 

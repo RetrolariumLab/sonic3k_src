@@ -61,7 +61,7 @@ loc_8392:
                 move.w  #$A0,$30(a0)
                 move.w  #$70,$32(a0)
                 move.b  #-1,$3A(a0)
-                bsr.w   sub_8434
+                bsr.w   SStage_ProjectCharacterCoordinates
                 move.l  #loc_83D6,(a0)
                 rts
 ; ---------------------------------------------------------------------------
@@ -87,7 +87,7 @@ Map_SStageShadow:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8402:
+SStage_UpdateProjectionRotationCoefficients:
                 move.w  (SStage_scalar_index_2).w,d0
                 lea     (SStage_scalar_result_2).w,a1
                 bsr.w   GetScalars2
@@ -101,20 +101,20 @@ sub_8402:
                 lea     (SStage_scalar_result_3).w,a1
                 bsr.w   GetScalars2
                 rts
-; End of function sub_8402
+; End of function SStage_UpdateProjectionRotationCoefficients
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8434:
+SStage_ProjectCharacterCoordinates:
                 move.w  $34(a0),d1
                 move.w  $36(a0),d2
                 move.w  $38(a0),d0
-                bsr.w   sub_8FE4
-                bsr.w   sub_8FBA
-                bsr.w   sub_8F90
+                bsr.w   SStage_RotateDepthHeight
+                bsr.w   SStage_RotateDepthHorizontal
+                bsr.w   SStage_RotateHorizontalVertical
                 addi.w  #$100,d0
                 addi.w  #$980,d2
-                bsr.w   sub_900E
+                bsr.w   SStage_ApplyProjectionViewTilt
                 ext.l   d1
                 lsl.l   #8,d1
                 divs.w  d0,d1
@@ -126,11 +126,11 @@ sub_8434:
                 add.w   $32(a0),d2
                 move.w  d2,y_pos(a0)
                 rts
-; End of function sub_8434
+; End of function SStage_ProjectCharacterCoordinates
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8476:
+SStage_UpdatePlayerGridMotion:
                 tst.b   (Special_stage_fade_timer).w
                 beq.s   loc_84A4
                 cmpi.b  #$61,(Special_stage_fade_timer).w
@@ -275,15 +275,15 @@ loc_85D4:
                 bmi.s   locret_85FC
                 tst.b   (Special_stage_clear_routine).w
                 bne.s   locret_85FC
-                bsr.s   sub_85FE
+                bsr.s   SStage_HandlePlayerGridCell
 
 locret_85FC:
                 rts
-; End of function sub_8476
+; End of function SStage_UpdatePlayerGridMotion
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_85FE:
+SStage_HandlePlayerGridCell:
                 lea     (Level_layout_header).w,a1
                 move.w  (Special_stage_X_pos).w,d0
                 addi.w  #$80,d0
@@ -396,4 +396,4 @@ loc_8726:
 
 locret_872E:
                 rts
-; End of function sub_85FE
+; End of function SStage_HandlePlayerGridCell

@@ -99,7 +99,7 @@ Knux_Stand_Path:
                 bsr.w   Player_SlopeRepel
                 tst.b   (Background_collision_flag).w
                 beq.s   locret_1684A
-                bsr.w   sub_F846
+                bsr.w   CheckPlayerBodyFloorClearance
                 tst.w   d1
                 bmi.w   Kill_Character
                 movem.l a4-a6,-(sp)

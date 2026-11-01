@@ -71,16 +71,16 @@ loc_27C9E:
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1).w,d0
-                bsr.w   sub_27CC2
+                bsr.w   UpdatePlayerOnLbzLoweringGrapple
                 lea     (Player_2).w,a1
                 addq.w  #1,a2
                 move.w  (Ctrl_2).w,d0
-                bsr.w   sub_27CC2
+                bsr.w   UpdatePlayerOnLbzLoweringGrapple
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_27CC2:
+UpdatePlayerOnLbzLoweringGrapple:
                 tst.b   (a2)
                 beq.w   loc_27D3A
                 tst.b   render_flags(a1)
@@ -162,7 +162,7 @@ loc_27D48:
 
 locret_27DBA:
                 rts
-; End of function sub_27CC2
+; End of function UpdatePlayerOnLbzLoweringGrapple
 
 ; ---------------------------------------------------------------------------
 Map_LBZLoweringGrapple:

@@ -53,17 +53,17 @@ loc_45E2E:
                 lea     (Ctrl_1_logical).w,a2
                 lea     $2E(a0),a3
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_45E6E
+                bsr.s   UpdatePlayerOnSszRotatingPost
                 lea     (Player_2).w,a1
                 lea     (Ctrl_2_logical).w,a2
                 lea     $30(a0),a3
                 moveq   #p2_standing_bit,d6
-                bsr.s   sub_45E6E
+                bsr.s   UpdatePlayerOnSszRotatingPost
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_45E6E:
+UpdatePlayerOnSszRotatingPost:
                 tst.b   (a3)
                 bne.s   loc_45E82
                 btst    d6,status(a0)
@@ -293,4 +293,4 @@ loc_460A6:
                 move.b  (a2),d0
                 move.b  d0,mapping_frame(a1)
                 jmp     (Perform_Player_DPLC).l
-; End of function sub_45E6E
+; End of function UpdatePlayerOnSszRotatingPost

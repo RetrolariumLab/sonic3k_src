@@ -16,7 +16,7 @@ Load_Rings_Index:
 
 loc_F604:
                 addq.b  #2,(Rings_manager_routine).w
-                bsr.w   sub_F7C0
+                bsr.w   LevelRingsS3ResetStatusSelectLayoutAndCountPerfectRings
                 movea.l (Ring_start_addr_ROM).w,a1
                 lea     (Ring_status_table).w,a2
                 move.w  (Camera_X_pos).w,d4
@@ -196,7 +196,7 @@ loc_F764:
 
 loc_F76C:
                 move.w  #$604,(a4)
-                bsr.s   sub_F78C
+                bsr.s   LevelRingsS3CountPerfectPickupAndGiveP1Ring
                 lea     (Ring_consumption_table+2).w,a3
 
 loc_F776:
@@ -217,10 +217,10 @@ locret_F78A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_F78C:
+LevelRingsS3CountPerfectPickupAndGiveP1Ring:
                 subq.w  #1,(Perfect_rings_left).w
                 jmp     (GiveRing).l
-; End of function sub_F78C
+; End of function LevelRingsS3CountPerfectPickupAndGiveP1Ring
 
 ; ---------------------------------------------------------------------------
 
@@ -242,7 +242,7 @@ loc_F7BC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_F7C0:
+LevelRingsS3ResetStatusSelectLayoutAndCountPerfectRings:
                 moveq   #0,d0
                 tst.b   (Respawn_table_keep).w
                 bne.s   loc_F7D6
@@ -280,4 +280,4 @@ loc_F80A:
                 move.w  d5,(Perfect_rings_left).w
                 move.w  #0,(Perfect_rings_flag).w
                 rts
-; End of function sub_F7C0
+; End of function LevelRingsS3ResetStatusSelectLayoutAndCountPerfectRings

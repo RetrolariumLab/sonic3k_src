@@ -410,14 +410,14 @@ loc_25E8E:
                 lea     $3C(a0),a2
                 lea     (Player_1).w,a1
                 move.w  #-$300,d0
-                bsr.s   sub_25EB6
+                bsr.s   FlingPlayerFromLbzCupElevator
                 lea     $3D(a0),a2
                 lea     (Player_2).w,a1
                 move.w  #-$400,d0
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_25EB6:
+FlingPlayerFromLbzCupElevator:
                 move.b  #$12,2(a2)
                 tst.b   (a2)
                 beq.s   locret_25F00
@@ -438,7 +438,7 @@ loc_25EF4:
 
 locret_25F00:
                 rts
-; End of function sub_25EB6
+; End of function FlingPlayerFromLbzCupElevator
 
 ; ---------------------------------------------------------------------------
 

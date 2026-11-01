@@ -56,18 +56,18 @@ loc_45006:
                 add.w   $12(a0),d1
                 move.w  x_pos(a0),d4
                 move.w  d1,x_pos(a0)
-                bsr.s   sub_45026
+                bsr.s   UpdateSszCutsceneBridgeSolidAndPieces
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
 loc_4501A:
                 move.w  x_pos(a0),d4
-                bsr.s   sub_45026
+                bsr.s   UpdateSszCutsceneBridgeSolidAndPieces
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_45026:
+UpdateSszCutsceneBridgeSolidAndPieces:
                 moveq   #$60,d1
                 moveq   #$10,d2
                 moveq   #9,d3
@@ -84,7 +84,7 @@ loc_45040:
                 addi.w  #$40,d0
                 dbf     d1,loc_45040
                 rts
-; End of function sub_45026
+; End of function UpdateSszCutsceneBridgeSolidAndPieces
 
 ; ---------------------------------------------------------------------------
 

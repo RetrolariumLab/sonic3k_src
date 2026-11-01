@@ -51,7 +51,7 @@ loc_4A6CE:
                 move.w  2(a2,d1.w),d0
                 add.w   $36(a0),d0
                 move.w  d0,$3A(a0)
-                bsr.w   sub_4A818
+                bsr.w   AimLrzChainedPlatformAtWaypoint
                 move.l  #loc_4A74A,(a0)
                 bra.w   loc_4A74A
 ; ---------------------------------------------------------------------------
@@ -93,7 +93,7 @@ loc_4A744:
 
 loc_4A74A:
                 move.w  x_pos(a0),-(sp)
-                bsr.w   sub_4A7BA
+                bsr.w   AdvanceLrzChainedPlatformPath
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -110,13 +110,13 @@ loc_4A74A:
                 andi.b  #4,d0
                 beq.s   loc_4A788
                 lea     (Player_1).w,a1
-                jsr     (sub_24280).l
+                jsr     (HurtPlayerFromSolidHazard).l
 
 loc_4A788:
                 andi.b  #8,d6
                 beq.s   loc_4A798
                 lea     (Player_2).w,a1
-                jsr     (sub_24280).l
+                jsr     (HurtPlayerFromSolidHazard).l
 
 loc_4A798:
                 tst.b   render_flags(a0)
@@ -133,7 +133,7 @@ loc_4A7B0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4A7BA:
+AdvanceLrzChainedPlatformPath:
                 move.w  x_pos(a0),d0
                 cmp.w   $38(a0),d0
                 bne.s   loc_4A810
@@ -161,16 +161,16 @@ loc_4A7EC:
                 move.w  2(a1,d1.w),d0
                 add.w   $36(a0),d0
                 move.w  d0,$3A(a0)
-                bsr.w   sub_4A818
+                bsr.w   AimLrzChainedPlatformAtWaypoint
 
 loc_4A810:
                 jsr     (MoveSprite2).l
                 rts
-; End of function sub_4A7BA
+; End of function AdvanceLrzChainedPlatformPath
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4A818:
+AimLrzChainedPlatformAtWaypoint:
                 moveq   #0,d0
                 move.w  #-$100,d2
                 move.w  x_pos(a0),d0
@@ -224,7 +224,7 @@ loc_4A87C:
                 move.w  d1,$16(a0)
                 clr.w   $12(a0)
                 rts
-; End of function sub_4A818
+; End of function AimLrzChainedPlatformAtWaypoint
 
 ; ---------------------------------------------------------------------------
 off_4A890:

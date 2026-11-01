@@ -54,9 +54,9 @@ loc_6C9C6:
 
 loc_6C9CC:
                 lea     byte_6D24A(pc),a2
-                bsr.w   sub_6D228
+                bsr.w   SelectMGZBossAttachmentFrameAndDepthFromParentAngle
                 lea     byte_6D284(pc),a2
-                bsr.w   sub_6D26A
+                bsr.w   SelectMGZBossAttachmentOffsetsFromParentAngle
                 jmp     (Refresh_ChildPositionAdjusted).l
 ; ---------------------------------------------------------------------------
 
@@ -101,11 +101,11 @@ loc_6CA2E:
                 btst    #3,$38(a1)
                 bne.s   loc_6CA58
                 lea     byte_6D25A(pc),a2
-                bsr.w   sub_6D228
+                bsr.w   SelectMGZBossAttachmentFrameAndDepthFromParentAngle
 
 loc_6CA4A:
                 lea     byte_6D294(pc),a2
-                bsr.w   sub_6D26A
+                bsr.w   SelectMGZBossAttachmentOffsetsFromParentAngle
                 jmp     (Refresh_ChildPositionAdjusted).l
 ; ---------------------------------------------------------------------------
 
@@ -138,7 +138,7 @@ loc_6CA9A:
                 move.b  #8,routine(a0)
                 move.w  #$27,$2E(a0)
                 move.l  #loc_6CB4A,$34(a0)
-                bsr.w   sub_6D334
+                bsr.w   SetMGZBossIndexedAngleVelocity
                 bclr    #5,$38(a0)
                 lea     ChildObjDat_6D7FA(pc),a2
                 jmp     (CreateChild1_Normal).l
@@ -149,7 +149,7 @@ loc_6CACA:
                 move.w  #$37,$2E(a0)
                 move.l  #loc_6CBB2,$34(a0)
                 bclr    #2,$38(a0)
-                bsr.w   sub_6D42E
+                bsr.w   LaunchMGZBossUpperDrillPassAndRecordPlan
                 lea     ChildObjDat_6D812(pc),a2
                 jsr     (CreateChild1_Normal).l
                 moveq   #signextendB(sfx_Collapse),d0
@@ -226,7 +226,7 @@ loc_6CBCE:
                 move.b  #8,routine(a0)
                 move.w  #$2F,$2E(a0)
                 move.l  #loc_6CC0E,$34(a0)
-                bsr.w   sub_6D4DC
+                bsr.w   LaunchMGZBossLowerDrillPassFromUpperPlan
                 lea     ChildObjDat_6D812(pc),a2
                 jsr     (CreateChild1_Normal).l
                 bne.s   loc_6CBF8
@@ -357,7 +357,7 @@ loc_6CD42:
                 move.w  a2,$44(a0)
                 move.w  angle(a1),angle(a0)
                 move.w  subtype(a1),subtype(a0)
-                bsr.w   sub_6D334
+                bsr.w   SetMGZBossIndexedAngleVelocity
                 bra.w   loc_6D6A6
 ; ---------------------------------------------------------------------------
 

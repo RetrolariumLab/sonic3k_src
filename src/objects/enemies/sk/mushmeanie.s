@@ -9,7 +9,7 @@ Obj_Mushmeanie:
                 move.b  routine(a0),d0
                 move.w  Mushmeanie_Index(pc,d0.w),d1
                 jsr     Mushmeanie_Index(pc,d1.w)
-                bsr.w   sub_8DC6E
+                bsr.w   HandleMushmeanieCapHitAndDefeat
                 jmp     (Sprite_CheckDeleteTouch).l
 ; ---------------------------------------------------------------------------
 Mushmeanie_Index:
@@ -148,7 +148,7 @@ loc_8DC62:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8DC6E:
+HandleMushmeanieCapHitAndDefeat:
                 tst.b   $20(a0)
                 beq.s   loc_8DC80
                 subq.b  #1,$20(a0)
@@ -182,7 +182,7 @@ locret_8DCC2:
 
 loc_8DCC4:
                 jmp     (EnemyDefeated).l
-; End of function sub_8DC6E
+; End of function HandleMushmeanieCapHitAndDefeat
 
 ; ---------------------------------------------------------------------------
 ObjDat_Mushmeanie:

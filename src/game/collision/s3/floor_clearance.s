@@ -126,7 +126,7 @@ locret_10B82:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_10B84:
+ProbeFloorWithXRadiusOffset:
                 move.b  x_radius(a0),d0
                 ext.w   d0
                 add.w   d0,d2
@@ -136,11 +136,11 @@ sub_10B84:
                 bsr.w   FindFloor
                 move.b  #0,d2
                 bra.s   loc_10B76
-; End of function sub_10B84
+; End of function ProbeFloorWithXRadiusOffset
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_10BA2:
+CheckPlayerBodyFloorClearance:
                 move.w  x_pos(a0),d3
                 move.w  y_pos(a0),d2
                 subq.w  #4,d2
@@ -165,7 +165,7 @@ loc_10BC0:
 
 locret_10BEE:
                 rts
-; End of function sub_10BA2
+; End of function CheckPlayerBodyFloorClearance
 
 ; =============== S U B R O U T I N E =======================================
 

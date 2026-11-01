@@ -310,7 +310,7 @@ loc_2CB1E:
 ; ---------------------------------------------------------------------------
 
 loc_2CB24:
-                bsr.w   sub_2CCD2
+                bsr.w   GetAnimalActivationXDifference
                 bcc.s   loc_2CB40
                 move.w  $32(a0),x_vel(a0)
                 move.w  $34(a0),y_vel(a0)
@@ -323,14 +323,14 @@ loc_2CB40:
 ; ---------------------------------------------------------------------------
 
 loc_2CB44:
-                bsr.w   sub_2CCD2
+                bsr.w   GetAnimalActivationXDifference
                 bpl.s   loc_2CB7C
                 clr.w   x_vel(a0)
                 clr.w   $32(a0)
                 jsr     (MoveSprite2).l
                 addi.w  #$18,y_vel(a0)
-                bsr.w   sub_2CC92
-                bsr.w   sub_2CCBA
+                bsr.w   BounceAnimalOnFloorAndSelectFrame
+                bsr.w   SetAnimalFlipFromPlayerSide
                 subq.b  #1,anim_frame_timer(a0)
                 bpl.s   loc_2CB7C
                 move.b  #1,anim_frame_timer(a0)
@@ -342,7 +342,7 @@ loc_2CB7C:
 ; ---------------------------------------------------------------------------
 
 loc_2CB80:
-                bsr.w   sub_2CCD2
+                bsr.w   GetAnimalActivationXDifference
                 bpl.s   loc_2CBD8
                 move.w  $32(a0),x_vel(a0)
                 move.w  $34(a0),y_vel(a0)
@@ -373,20 +373,20 @@ loc_2CBD8:
 ; ---------------------------------------------------------------------------
 
 loc_2CBDC:
-                bsr.w   sub_2CCD2
+                bsr.w   GetAnimalActivationXDifference
                 bpl.s   loc_2CBF8
                 clr.w   x_vel(a0)
                 clr.w   $32(a0)
                 jsr     (MoveSprite).l
-                bsr.w   sub_2CC92
-                bsr.w   sub_2CCBA
+                bsr.w   BounceAnimalOnFloorAndSelectFrame
+                bsr.w   SetAnimalFlipFromPlayerSide
 
 loc_2CBF8:
                 bra.w   loc_2CAE4
 ; ---------------------------------------------------------------------------
 
 loc_2CBFC:
-                bsr.w   sub_2CCD2
+                bsr.w   GetAnimalActivationXDifference
                 bpl.s   loc_2CC38
                 jsr     (MoveSprite).l
                 move.b  #1,mapping_frame(a0)
@@ -406,7 +406,7 @@ loc_2CC38:
 ; ---------------------------------------------------------------------------
 
 loc_2CC3C:
-                bsr.w   sub_2CCD2
+                bsr.w   GetAnimalActivationXDifference
                 bpl.s   loc_2CC8E
                 jsr     (MoveSprite2).l
                 addi.w  #$18,y_vel(a0)
@@ -436,7 +436,7 @@ loc_2CC8E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2CC92:
+BounceAnimalOnFloorAndSelectFrame:
                 move.b  #1,mapping_frame(a0)
                 tst.w   y_vel(a0)
                 bmi.s   locret_2CCB8
@@ -449,11 +449,11 @@ sub_2CC92:
 
 locret_2CCB8:
                 rts
-; End of function sub_2CC92
+; End of function BounceAnimalOnFloorAndSelectFrame
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2CCBA:
+SetAnimalFlipFromPlayerSide:
                 bset    #0,render_flags(a0)
                 move.w  x_pos(a0),d0
                 sub.w   (Player_1+x_pos).w,d0
@@ -462,16 +462,16 @@ sub_2CCBA:
 
 locret_2CCD0:
                 rts
-; End of function sub_2CCBA
+; End of function SetAnimalFlipFromPlayerSide
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2CCD2:
+GetAnimalActivationXDifference:
                 move.w  (Player_1+x_pos).w,d0
                 sub.w   x_pos(a0),d0
                 subi.w  #$B8,d0
                 rts
-; End of function sub_2CCD2
+; End of function GetAnimalActivationXDifference
 
 ; ---------------------------------------------------------------------------
 
@@ -507,8 +507,8 @@ loc_2CD3C:
                 move.l  #Map_Animals1,mappings(a0)
                 move.w  #make_art_tile(ArtTile_BlueSphere_Difficulty+$141,1,0),art_tile(a0)
                 lea     word_2CD5E(pc),a1
-                bsr.w   sub_2CE76
-                jmp     (sub_6001E).l
+                bsr.w   InitDifficultyAnimalPositionAndDelay
+                jmp     (EndingInitializeGentleVerticalSwing).l
 ; ---------------------------------------------------------------------------
 word_2CD5E:
                 dc.w    $C0,   $A0
@@ -523,12 +523,12 @@ loc_2CD6E:
                 move.l  #loc_2CD84,(a0)
 
 loc_2CD7A:
-                bsr.w   sub_2CEA2
+                bsr.w   AnimateDifficultyChickenFrames
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
 loc_2CD84:
-                bsr.w   sub_2CEA2
+                bsr.w   AnimateDifficultyChickenFrames
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 jmp     (Draw_Sprite).l
@@ -550,7 +550,7 @@ loc_2CDB0:
                 move.w  #make_art_tile(ArtTile_BlueSphere_Difficulty+$14F,1,0),art_tile(a0)
                 bset    #0,render_flags(a0)
                 lea     word_2CDDA(pc),a1
-                bsr.w   sub_2CE76
+                bsr.w   InitDifficultyAnimalPositionAndDelay
                 move.w  y_pos(a0),$3A(a0)
                 rts
 ; ---------------------------------------------------------------------------
@@ -596,7 +596,7 @@ loc_2CE42:
                 move.l  #Map_Animals5,mappings(a0)
                 move.w  #make_art_tile(ArtTile_BlueSphere_Difficulty+$161,1,0),art_tile(a0)
                 lea     word_2CE66(pc),a1
-                bsr.w   sub_2CE76
+                bsr.w   InitDifficultyAnimalPositionAndDelay
                 move.w  y_pos(a0),$3A(a0)
                 rts
 ; ---------------------------------------------------------------------------
@@ -608,7 +608,7 @@ word_2CE66:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2CE76:
+InitDifficultyAnimalPositionAndDelay:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 add.w   d0,d0
@@ -621,11 +621,11 @@ sub_2CE76:
                 move.b  #$10,height_pixels(a0)
                 move.w  #$200,priority(a0)
                 rts
-; End of function sub_2CE76
+; End of function InitDifficultyAnimalPositionAndDelay
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2CEA2:
+AnimateDifficultyChickenFrames:
                 subq.b  #1,anim_frame_timer(a0)
                 bpl.s   locret_2CEB8
                 move.b  #2,anim_frame_timer(a0)
@@ -634,7 +634,7 @@ sub_2CEA2:
 
 locret_2CEB8:
                 rts
-; End of function sub_2CEA2
+; End of function AnimateDifficultyChickenFrames
 
 ; ---------------------------------------------------------------------------
 Map_Animals1:

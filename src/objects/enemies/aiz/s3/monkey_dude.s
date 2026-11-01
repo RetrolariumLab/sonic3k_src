@@ -136,7 +136,7 @@ loc_550A0:
 ; ---------------------------------------------------------------------------
 
 loc_550C8:
-                bsr.w   sub_552FC
+                bsr.w   FollowMonkeyArmPivotYFromBodyPose
                 moveq   #0,d0
                 move.b  routine(a0),d0
                 move.w  off_550DE(pc,d0.w),d1
@@ -175,7 +175,7 @@ loc_55112:
                 move.b  #2,routine(a0)
 
 loc_55118:
-                bsr.w   sub_55434
+                bsr.w   RandomizeMonkeyArmIdleStepAndWait
                 move.l  #loc_5516C,$34(a0)
 
 locret_55124:
@@ -183,14 +183,14 @@ locret_55124:
 ; ---------------------------------------------------------------------------
 
 loc_55126:
-                bsr.w   sub_55320
+                bsr.w   TestMonkeyDudePlayerInThrowDirection
                 beq.s   loc_55170
 
 loc_5512C:
                 btst    #3,$38(a0)
                 beq.s   loc_5514A
                 move.b  $41(a0),d1
-                bsr.w   sub_5533C
+                bsr.w   AdvanceMonkeyArmAngleByByteStep
                 subi.b  #$20,d0
                 cmpi.b  #$60,d0
                 bhs.s   loc_5515C
@@ -199,7 +199,7 @@ loc_5512C:
 
 loc_5514A:
                 move.b  $41(a0),d1
-                bsr.w   sub_5533C
+                bsr.w   AdvanceMonkeyArmAngleByByteStep
                 subi.b  #$80,d0
                 cmpi.b  #$60,d0
                 blo.s   loc_55168
@@ -207,14 +207,14 @@ loc_5514A:
 loc_5515C:
                 neg.w   $40(a0)
                 move.b  $41(a0),d1
-                bsr.w   sub_5533C
+                bsr.w   AdvanceMonkeyArmAngleByByteStep
 
 loc_55168:
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
 loc_5516C:
-                bra.w   sub_55434
+                bra.w   RandomizeMonkeyArmIdleStepAndWait
 ; ---------------------------------------------------------------------------
 
 loc_55170:
@@ -227,7 +227,7 @@ loc_5517E:
                 btst    #3,$38(a0)
                 beq.s   loc_55194
                 moveq   #4,d1
-                bsr.w   sub_5533C
+                bsr.w   AdvanceMonkeyArmAngleByByteStep
                 cmpi.b  #-$40,d0
                 bhs.s   loc_551A2
                 rts
@@ -235,7 +235,7 @@ loc_5517E:
 
 loc_55194:
                 moveq   #-4,d1
-                bsr.w   sub_5533C
+                bsr.w   AdvanceMonkeyArmAngleByByteStep
                 cmpi.b  #$40,d0
                 bls.s   loc_551A2
                 rts
@@ -251,7 +251,7 @@ loc_551B0:
                 btst    #3,$38(a0)
                 beq.s   loc_551C6
                 moveq   #-8,d1
-                bsr.w   sub_5533C
+                bsr.w   AdvanceMonkeyArmAngleByByteStep
                 moveq   #$60,d1
                 cmp.b   d1,d0
                 bls.s   loc_551D4
@@ -260,7 +260,7 @@ loc_551B0:
 
 loc_551C6:
                 moveq   #8,d1
-                bsr.w   sub_5533C
+                bsr.w   AdvanceMonkeyArmAngleByByteStep
                 moveq   #-$60,d1
                 cmp.b   d1,d0
                 bhs.s   loc_551D4
@@ -278,7 +278,7 @@ loc_551E6:
                 btst    #3,$38(a0)
                 bne.s   loc_551FC
                 moveq   #-2,d1
-                bsr.w   sub_5533C
+                bsr.w   AdvanceMonkeyArmAngleByByteStep
                 moveq   #-$80,d1
                 cmp.b   d1,d0
                 bls.s   loc_5520A
@@ -287,7 +287,7 @@ loc_551E6:
 
 loc_551FC:
                 moveq   #2,d1
-                bsr.w   sub_5533C
+                bsr.w   AdvanceMonkeyArmAngleByByteStep
                 moveq   #-$80,d1
                 cmp.b   d1,d0
                 bhs.s   loc_5520A
@@ -301,7 +301,7 @@ loc_5520A:
 ; ---------------------------------------------------------------------------
 
 loc_55218:
-                bsr.w   sub_55314
+                bsr.w   CopyMonkeyArmLinkParentPriority
                 moveq   #0,d0
                 move.b  routine(a0),d0
                 move.w  off_5522E(pc,d0.w),d1
@@ -316,7 +316,7 @@ off_5522E:
 
 loc_55234:
                 moveq   #2,d1
-                bsr.w   sub_55366
+                bsr.w   ActivateMonkeyArmLinkWhenPredecessorSignals
 
 loc_5523A:
                 bra.w   loc_55348
@@ -324,12 +324,12 @@ loc_5523A:
 
 loc_5523E:
                 moveq   #4,d1
-                bsr.w   sub_5538E
+                bsr.w   AdvanceMonkeyArmLinkWhenPredecessorFlagClears
                 bra.w   loc_55348
 ; ---------------------------------------------------------------------------
 
 loc_55248:
-                bsr.w   sub_55314
+                bsr.w   CopyMonkeyArmLinkParentPriority
                 moveq   #0,d0
                 move.b  routine(a0),d0
                 move.w  off_5525E(pc,d0.w),d1
@@ -344,16 +344,16 @@ off_5525E:
 
 loc_55264:
                 moveq   #2,d1
-                bsr.w   sub_55366
+                bsr.w   ActivateMonkeyArmLinkWhenPredecessorSignals
 
 loc_5526A:
                 bra.w   loc_55348
 ; ---------------------------------------------------------------------------
 
 loc_5526E:
-                bsr.w   sub_553B0
+                bsr.w   TryThrowMonkeyDudeProjectileAtArmPhase
                 moveq   #4,d1
-                bsr.w   sub_5538E
+                bsr.w   AdvanceMonkeyArmLinkWhenPredecessorFlagClears
                 bra.w   loc_55348
 ; ---------------------------------------------------------------------------
 
@@ -402,7 +402,7 @@ locret_552FA:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_552FC:
+FollowMonkeyArmPivotYFromBodyPose:
                 movea.w parent3(a0),a1
                 move.w  y_pos(a1),d0
                 subq.w  #2,d0
@@ -413,19 +413,19 @@ sub_552FC:
 loc_5530E:
                 move.w  d0,y_pos(a0)
                 rts
-; End of function sub_552FC
+; End of function FollowMonkeyArmPivotYFromBodyPose
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_55314:
+CopyMonkeyArmLinkParentPriority:
                 movea.w parent3(a0),a1
                 move.w  priority(a1),priority(a0)
                 rts
-; End of function sub_55314
+; End of function CopyMonkeyArmLinkParentPriority
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_55320:
+TestMonkeyDudePlayerInThrowDirection:
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$80,d2
                 bhs.s   loc_55338
@@ -441,16 +441,16 @@ loc_55334:
 loc_55338:
                 moveq   #1,d4
                 rts
-; End of function sub_55320
+; End of function TestMonkeyDudePlayerInThrowDirection
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5533C:
+AdvanceMonkeyArmAngleByByteStep:
                 move.b  $3C(a0),d0
                 add.b   d1,d0
                 move.b  d0,$3C(a0)
                 rts
-; End of function sub_5533C
+; End of function AdvanceMonkeyArmAngleByByteStep
 
 ; ---------------------------------------------------------------------------
 
@@ -468,7 +468,7 @@ loc_5535E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_55366:
+ActivateMonkeyArmLinkWhenPredecessorSignals:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
                 beq.s   locret_5538C
@@ -481,11 +481,11 @@ sub_55366:
 
 locret_5538C:
                 rts
-; End of function sub_55366
+; End of function ActivateMonkeyArmLinkWhenPredecessorSignals
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5538E:
+AdvanceMonkeyArmLinkWhenPredecessorFlagClears:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
                 bne.s   locret_553AE
@@ -497,11 +497,11 @@ sub_5538E:
 
 locret_553AE:
                 rts
-; End of function sub_5538E
+; End of function AdvanceMonkeyArmLinkWhenPredecessorFlagClears
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_553B0:
+TryThrowMonkeyDudeProjectileAtArmPhase:
                 btst    #3,$38(a0)
                 beq.s   loc_553DC
                 btst    #0,$38(a0)
@@ -540,11 +540,11 @@ loc_55406:
                 beq.s   locret_553DA
                 neg.w   x_vel(a1)
                 rts
-; End of function sub_553B0
+; End of function TryThrowMonkeyDudeProjectileAtArmPhase
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_55434:
+RandomizeMonkeyArmIdleStepAndWait:
                 jsr     (Random_Number).l
                 move.w  (RNG_seed).w,d0
                 moveq   #1,d1
@@ -557,7 +557,7 @@ loc_55448:
                 andi.w  #$3C,d0
                 move.w  d0,$2E(a0)
                 rts
-; End of function sub_55434
+; End of function RandomizeMonkeyArmIdleStepAndWait
 
 ; ---------------------------------------------------------------------------
 ObjDat_MonkeyDude:

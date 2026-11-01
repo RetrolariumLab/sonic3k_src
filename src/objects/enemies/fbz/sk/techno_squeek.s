@@ -358,7 +358,7 @@ loc_89C14:
                 bset    #0,(a2)
 
 loc_89C34:
-                bsr.w   sub_89DAC
+                bsr.w   DispatchFbzEggPrisonContentsBySubtype
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l
                 bne.s   loc_89C4C
@@ -369,7 +369,7 @@ loc_89C4C:
                 jsr     CreateChild1_Normal(pc)
 
 loc_89C54:
-                bsr.w   sub_89D9C
+                bsr.w   CollideFbzEggPrisonAsSolidRectangle
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
@@ -391,7 +391,7 @@ Obj_FBZSpringPlunger:
                 lea     ObjDat_FBZSpringPlunger(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.b  #5,mapping_frame(a0)
-                jsr     (sub_86A3E).l
+                jsr     (CapsuleSKResolveGroundButtonAndSpringPlungerSolid).l
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
                 beq.s   loc_89CDE
@@ -401,7 +401,7 @@ Obj_FBZSpringPlunger:
                 move.b  #$C,mapping_frame(a0)
                 lea     (Player_1).w,a1
                 move.w  #-$A00,d0
-                jsr     (sub_8635E).l
+                jsr     (LaunchPlayerWithSpringVelocity).l
 
 loc_89CC4:
                 btst    #p2_standing_bit,d0
@@ -409,7 +409,7 @@ loc_89CC4:
                 move.b  #$C,mapping_frame(a0)
                 lea     (Player_2).w,a1
                 move.w  #-$A00,d0
-                jsr     (sub_8635E).l
+                jsr     (LaunchPlayerWithSpringVelocity).l
 
 loc_89CDE:
                 jmp     Sprite_CheckDelete(pc)
@@ -420,7 +420,7 @@ loc_89CE2:
                 jsr     (SetUp_ObjAttributes3).l
                 move.l  #loc_89D02,(a0)
                 move.b  #8,y_radius(a0)
-                bsr.w   sub_89DEE
+                bsr.w   InitializeFbzCapsuleAnimalLaunchAndSpecies
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -470,30 +470,30 @@ loc_89D78:
                 lea     word_89E90(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.l  #Obj_FlickerMove,(a0)
-                jsr     (sub_86A64).l
+                jsr     (CapsuleSKSelectFragmentFrameFromSubtype).l
                 moveq   #4,d0
                 jsr     (Set_IndexedVelocity).l
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_89D9C:
+CollideFbzEggPrisonAsSolidRectangle:
                 moveq   #$2B,d1
                 moveq   #$18,d2
                 moveq   #$18,d3
                 move.w  x_pos(a0),d4
                 jmp     (SolidObjectFull).l
-; End of function sub_89D9C
+; End of function CollideFbzEggPrisonAsSolidRectangle
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_89DAC:
+DispatchFbzEggPrisonContentsBySubtype:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 add.w   d0,d0
                 move.w  off_89DBC(pc,d0.w),d0
                 jmp     off_89DBC(pc,d0.w)
-; End of function sub_89DAC
+; End of function DispatchFbzEggPrisonContentsBySubtype
 
 ; ---------------------------------------------------------------------------
 off_89DBC:
@@ -523,7 +523,7 @@ loc_89DDE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_89DEE:
+InitializeFbzCapsuleAnimalLaunchAndSpecies:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,d1
@@ -563,7 +563,7 @@ loc_89E54:
 
 locret_89E6A:
                 rts
-; End of function sub_89DEE
+; End of function InitializeFbzCapsuleAnimalLaunchAndSpecies
 
 ; ---------------------------------------------------------------------------
 word_89E6C:

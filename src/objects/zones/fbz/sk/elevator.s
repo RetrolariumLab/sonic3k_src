@@ -46,7 +46,7 @@ loc_3CA9E:
                 move.w  #$10,d2
                 move.w  x_pos(a0),d4
                 lea     (byte_3CAD0).l,a2
-                jsr     (sub_1DD0E).l
+                jsr     (CollidePlayersWithHeightProfileSolid).l
                 tst.w   y_vel(a0)
                 bmi.s   loc_3CACA
                 jsr     (CheckPlayerReleaseFromObj).l

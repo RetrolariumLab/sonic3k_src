@@ -133,7 +133,7 @@ loc_151B0:
                 bne.s   locret_15200
                 tst.b   spin_dash_flag(a1)
                 bne.s   locret_15200
-                bsr.s   sub_15202
+                bsr.s   TailsS3InitializeCarriedPlayerAttachment
                 moveq   #signextendB(sfx_Grab),d0
                 jsr     (Play_SFX).l
                 move.b  #1,(a2)
@@ -144,7 +144,7 @@ locret_15200:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_15202:
+TailsS3InitializeCarriedPlayerAttachment:
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)
                 clr.w   ground_vel(a1)
@@ -170,6 +170,6 @@ sub_15202:
                 move.w  y_vel(a0),(_unkF74C).w
                 move.w  y_vel(a0),y_vel(a1)
                 rts
-; End of function sub_15202
+; End of function TailsS3InitializeCarriedPlayerAttachment
 
 ; =============== S U B R O U T I N E =======================================

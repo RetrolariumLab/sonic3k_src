@@ -8,7 +8,7 @@ loc_491E8:
                 move.b  routine(a0),d0
                 move.w  off_49200(pc,d0.w),d1
                 jsr     off_49200(pc,d1.w)
-                bsr.w   sub_49AB2
+                bsr.w   MarkHCZBossVortexDetachedWhenColumnDies
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
 off_49200:
@@ -25,9 +25,9 @@ loc_49206:
 ; ---------------------------------------------------------------------------
 
 loc_4921A:
-                bsr.w   sub_4981E
-                bsr.w   sub_497E8
-                bsr.w   sub_49752
+                bsr.w   CaptureBothPlayersInHCZBossVortex
+                bsr.w   PullBothPlayersTowardHCZBossVortex
+                bsr.w   SynchronizeHCZBossVortexHeightVisual
                 jsr     (Animate_Raw).l
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
@@ -42,7 +42,7 @@ loc_4923A:
 ; ---------------------------------------------------------------------------
 
 loc_4924A:
-                bsr.w   sub_49752
+                bsr.w   SynchronizeHCZBossVortexHeightVisual
                 move.w  x_vel(a1),x_vel(a0)
                 jsr     (MoveSprite2).l
                 jmp     (Animate_Raw).l
@@ -90,7 +90,7 @@ loc_492CE:
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #Obj_Wait,(a0)
                 move.l  #loc_492FC,$34(a0)
-                bsr.w   sub_497A8
+                bsr.w   ConfigureHCZBossGeyserLayerFromSubtype
                 tst.b   subtype(a0)
                 bne.w   locret_48D3A
                 lea     ChildObjDat_49C0C(pc),a2
@@ -104,7 +104,7 @@ loc_492FC:
 ; ---------------------------------------------------------------------------
 
 loc_4930C:
-                bsr.w   sub_49982
+                bsr.w   ApplyHCZBossGeyserToBothPlayers
                 jmp     (AnimateRaw_DrawTouch).l
 ; ---------------------------------------------------------------------------
 
@@ -138,7 +138,7 @@ off_49366:
 
 loc_49376:
                 movea.w parent3(a0),a3
-                bsr.w   sub_499DC
+                bsr.w   AccelerateHCZBossBubbleTowardParentX
                 jsr     (Animate_Raw).l
                 jsr     (Obj_Wait).l
                 jmp     (Child_Draw_Sprite2).l
@@ -155,7 +155,7 @@ loc_493A2:
                 movea.w parent3(a0),a3
                 btst    #3,$38(a3)
                 bne.s   loc_493B8
-                bsr.w   sub_499DC
+                bsr.w   AccelerateHCZBossBubbleTowardParentX
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
 
@@ -187,7 +187,7 @@ loc_493F0:
                 lea     word_49B7A(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.b  #8,y_radius(a0)
-                bsr.w   sub_4972C
+                bsr.w   SetHCZBossBombStackPriority
                 jmp     (Refresh_ChildPositionAdjusted).l
 ; ---------------------------------------------------------------------------
 
@@ -228,7 +228,7 @@ loc_49462:
                 subq.b  #2,subtype(a0)
                 move.w  #7,$2E(a0)
                 move.l  #loc_4949E,$34(a0)
-                bsr.w   sub_4972C
+                bsr.w   SetHCZBossBombStackPriority
                 bra.w   loc_49740
 ; ---------------------------------------------------------------------------
 
@@ -394,7 +394,7 @@ loc_4961C:
                 move.w  a1,$44(a0)
 
 loc_49664:
-                jsr     (sub_49AF4).l
+                jsr     (SpawnS3HCZExitGeyserEightDebrisPieces).l
                 move.l  #loc_49674,(a0)
                 st      (Palette_cycle_counters+$00).w
 
@@ -412,7 +412,7 @@ loc_49674:
                 move.w  #$5F,$2E(a0)
 
 loc_496A4:
-                bsr.w   sub_496F4
+                bsr.w   CaptureAndLiftSecondaryPlayerWithS3HCZExitGeyser
                 move.l  a0,-(sp)
                 jsr     (AnPal_HCZ1).l
                 movea.l (sp)+,a0
@@ -424,7 +424,7 @@ loc_496B8:
                 move.b  #$1A,anim(a1)
                 subq.w  #6,y_pos(a0)
                 subq.w  #6,(Player_1+y_pos).w
-                bsr.w   sub_496F4
+                bsr.w   CaptureAndLiftSecondaryPlayerWithS3HCZExitGeyser
                 subq.w  #1,$2E(a0)
                 bmi.s   loc_496E4
                 move.l  a0,-(sp)

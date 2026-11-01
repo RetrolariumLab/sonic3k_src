@@ -12,7 +12,7 @@ loc_47486:
                 jsr     off_474B2(pc,d1.w)
                 btst    #6,$38(a0)
                 bne.w   locret_47246
-                bsr.w   sub_47AFA
+                bsr.w   StartAIZBossAttachmentDelayedBreakaway
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 off_474B2:
@@ -165,7 +165,7 @@ loc_47618:
                 subq.w  #1,$2E(a0)
                 bpl.s   locret_47634
                 move.w  #3,$2E(a0)
-                bsr.w   sub_47916
+                bsr.w   AdvanceAIZBossAttackAttachmentPose
                 subq.b  #1,anim_frame(a0)
                 bpl.s   locret_47634
                 movea.l $34(a0),a1

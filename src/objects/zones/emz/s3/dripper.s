@@ -57,9 +57,9 @@ loc_37720:
                 asr     y_vel(a0)
                 asr     y_vel(a0)
                 move.b  #2,mapping_frame(a0)
-                bsr.s   sub_37784
-                bsr.s   sub_37784
-                bsr.s   sub_37784
+                bsr.s   SpawnEmzDripperSplashDroplet
+                bsr.s   SpawnEmzDripperSplashDroplet
+                bsr.s   SpawnEmzDripperSplashDroplet
 
 loc_3775A:
                 cmpi.w  #-$100,(Camera_min_Y_pos).w
@@ -80,7 +80,7 @@ loc_3777E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_37784:
+SpawnEmzDripperSplashDroplet:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   locret_377C4
                 moveq   #subtype,d0
@@ -103,7 +103,7 @@ loc_37790:
 
 locret_377C4:
                 rts
-; End of function sub_37784
+; End of function SpawnEmzDripperSplashDroplet
 
 ; ---------------------------------------------------------------------------
 

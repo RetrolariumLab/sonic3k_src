@@ -5,9 +5,9 @@
 
 Obj_TwistedRamp:
                 lea     (Player_1).w,a1
-                bsr.s   sub_24D9A
+                bsr.s   LaunchPlayerFromTwistedRamp
                 lea     (Player_2).w,a1
-                bsr.s   sub_24D9A
+                bsr.s   LaunchPlayerFromTwistedRamp
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
@@ -27,7 +27,7 @@ loc_24D94:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_24D9A:
+LaunchPlayerFromTwistedRamp:
                 btst    #Status_InAir,status(a1)
                 bne.w   locret_24E32
                 move.w  x_pos(a1),d0
@@ -70,4 +70,4 @@ loc_24DFC:
 
 locret_24E32:
                 rts
-; End of function sub_24D9A
+; End of function LaunchPlayerFromTwistedRamp

@@ -52,7 +52,7 @@ loc_DB92:
                 move.w  (a1)+,d4
                 subq.w  #1,d4
                 bmi.s   locret_DBB2
-                jmp     (sub_1AF6C).l
+                jmp     (RenderMappingPieces).l
 ; ---------------------------------------------------------------------------
 
 locret_DBB2:
@@ -323,7 +323,7 @@ HUD_Debug:
                 move.w  (Camera_X_pos).w,d1
                 swap    d1
                 move.w  (Player_1+x_pos).w,d1
-                bsr.s   sub_DF1C
+                bsr.s   HUD_WriteDebugCoordinatePair
                 move.w  (Camera_Y_pos).w,d1
                 swap    d1
                 move.w  (Player_1+y_pos).w,d1
@@ -331,7 +331,7 @@ HUD_Debug:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_DF1C:
+HUD_WriteDebugCoordinatePair:
                 moveq   #8-1,d6
                 lea     (ArtUnc_DebugDigits).l,a1
 
@@ -352,7 +352,7 @@ loc_DF36:
                 swap    d1
                 dbf     d6,loc_DF24
                 rts
-; End of function sub_DF1C
+; End of function HUD_WriteDebugCoordinatePair
 
 ; ---------------------------------------------------------------------------
 ; unused

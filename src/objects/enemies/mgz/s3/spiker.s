@@ -6,7 +6,7 @@
 Obj_Spiker:
                 jsr     (Obj_WaitOffscreen).l
                 moveq   #$A,d0
-                bsr.w   sub_56B8C
+                bsr.w   ConsumeSpikerSpringRequestAndSaveRoutine
                 moveq   #0,d0
                 move.b  routine(a0),d0
                 move.w  Spiker_Index(pc,d0.w),d1
@@ -219,7 +219,7 @@ loc_56B12:
 ; ---------------------------------------------------------------------------
 
 loc_56B1A:
-                bsr.w   sub_56B64
+                bsr.w   PrimeSpikerSpringContactPlayer
                 move.b  #4,routine(a0)
                 clr.b   collision_flags(a0)
                 move.w  #$10,$2E(a0)
@@ -243,7 +243,7 @@ loc_56B56:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56B64:
+PrimeSpikerSpringContactPlayer:
                 clr.w   y_vel(a1)
                 bset    #Status_InAir,status(a1)
                 addq.w  #6,y_pos(a1)
@@ -253,11 +253,11 @@ sub_56B64:
                 moveq   #signextendB(sfx_Spring),d0
                 jsr     (Play_SFX).l
                 rts
-; End of function sub_56B64
+; End of function PrimeSpikerSpringContactPlayer
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56B8C:
+ConsumeSpikerSpringRequestAndSaveRoutine:
                 btst    #3,$38(a0)
                 bne.s   loc_56B96
                 rts
@@ -271,7 +271,7 @@ loc_56B96:
                 move.b  d0,routine(a0)
                 move.l  #loc_56A2C,$34(a0)
                 rts
-; End of function sub_56B8C
+; End of function ConsumeSpikerSpringRequestAndSaveRoutine
 
 ; ---------------------------------------------------------------------------
 ObjDat_Spiker:

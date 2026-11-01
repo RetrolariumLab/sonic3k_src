@@ -14,12 +14,12 @@ Knux_InputAcceleration_Path:
                 bne.w   loc_1731C
                 btst    #button_left,(Ctrl_1_held_logical).w
                 beq.s   loc_17168
-                bsr.w   sub_17428
+                bsr.w   KnucklesSKApplyGroundLeftInput
 
 loc_17168:
                 btst    #button_right,(Ctrl_1_held_logical).w
                 beq.s   loc_17174
-                bsr.w   sub_174B4
+                bsr.w   KnucklesSKApplyGroundRightInput
 
 loc_17174:
                 move.b  angle(a0),d0
@@ -235,7 +235,7 @@ loc_173B0:
                 move.b  angle(a0),d0
                 add.b   d1,d0
                 move.w  d0,-(sp)
-                bsr.w   sub_F61C
+                bsr.w   ProbeNextSurfaceWithFixedLookahead
                 move.w  (sp)+,d0
                 tst.w   d1
                 bpl.s   locret_17426
@@ -287,7 +287,7 @@ locret_17426:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_17428:
+KnucklesSKApplyGroundLeftInput:
                 move.w  ground_vel(a0),d0
                 beq.s   loc_17430
                 bpl.s   loc_17462
@@ -346,11 +346,11 @@ loc_1746A:
 
 locret_174B2:
                 rts
-; End of function sub_17428
+; End of function KnucklesSKApplyGroundLeftInput
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_174B4:
+KnucklesSKApplyGroundRightInput:
                 move.w  ground_vel(a0),d0
                 bmi.s   loc_174E8
                 bclr    #Status_Facing,status(a0)
@@ -404,4 +404,4 @@ loc_174F0:
 
 locret_17538:
                 rts
-; End of function sub_174B4
+; End of function KnucklesSKApplyGroundRightInput

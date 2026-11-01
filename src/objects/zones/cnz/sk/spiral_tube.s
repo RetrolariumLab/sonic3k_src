@@ -6,10 +6,10 @@
 Obj_CNZSpiralTube:
                 lea     (Player_1).w,a1
                 lea     $30(a0),a4
-                bsr.s   sub_330EE
+                bsr.s   UpdatePlayerInCnzSpiralTube
                 lea     (Player_2).w,a1
                 lea     $3A(a0),a4
-                bsr.s   sub_330EE
+                bsr.s   UpdatePlayerInCnzSpiralTube
                 move.b  $30(a0),d0
                 add.b   $3A(a0),d0
                 beq.s   loc_330E8
@@ -21,12 +21,12 @@ loc_330E8:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_330EE:
+UpdatePlayerInCnzSpiralTube:
                 moveq   #0,d0
                 move.b  (a4),d0
                 move.w  off_330FA(pc,d0.w),d0
                 jmp     off_330FA(pc,d0.w)
-; End of function sub_330EE
+; End of function UpdatePlayerInCnzSpiralTube
 
 ; ---------------------------------------------------------------------------
 off_330FA:
@@ -123,7 +123,7 @@ loc_331CA:
 
 loc_33202:
                 add.b   subtype(a0),d0
-                bsr.w   sub_33272
+                bsr.w   InitializeCnzSpiralExitRoute
                 addq.b  #2,(a4)
 
 locret_3320C:
@@ -172,7 +172,7 @@ loc_33260:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_33272:
+InitializeCnzSpiralExitRoute:
                 andi.w  #$F,d0
                 add.w   d0,d0
                 lea     (off_33320).l,a2
@@ -255,7 +255,7 @@ loc_3330C:
 loc_3331A:
                 move.w  d0,2(a4)
                 rts
-; End of function sub_33272
+; End of function InitializeCnzSpiralExitRoute
 
 ; ---------------------------------------------------------------------------
 off_33320:

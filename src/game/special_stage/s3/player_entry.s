@@ -145,7 +145,7 @@ loc_7F6C:
                 move.w  #0,$34(a0)
                 move.w  #$F800,$36(a0)
                 move.w  #0,$38(a0)
-                bsr.w   sub_8402
+                bsr.w   SStage_UpdateProjectionRotationCoefficients
                 move.b  #$FF,$3A(a0)
                 move.l  #loc_7F9A,(a0)
 
@@ -166,7 +166,7 @@ loc_7F9A:
                 jsr     (Change_Music_Tempo).l
 
 loc_7FCE:
-                bsr.w   sub_8476
+                bsr.w   SStage_UpdatePlayerGridMotion
                 moveq   #$C,d0
                 move.w  (Special_stage_velocity).w,d1
                 beq.s   loc_7FF8
@@ -239,8 +239,8 @@ loc_8088:
                 move.w  d0,$36(a0)
 
 loc_80A2:
-                bsr.w   sub_8402
-                bsr.w   sub_8434
+                bsr.w   SStage_UpdateProjectionRotationCoefficients
+                bsr.w   SStage_ProjectCharacterCoordinates
                 jsr     (Draw_Sprite).l
                 lea     (PLC_SStageSonic).l,a2
                 move.l  #ArtUnc_SStageSonic,d6

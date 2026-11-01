@@ -69,13 +69,13 @@ loc_464D0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_464F2:
+StartAIZMinibossDescentAndMusic:
                 move.w  #$100,y_vel(a0)
                 move.w  #$AF,$2E(a0)
                 moveq   #signextendB(mus_Miniboss),d0
                 jsr     (Play_Music).l
                 rts
-; End of function sub_464F2
+; End of function StartAIZMinibossDescentAndMusic
 
 ; ---------------------------------------------------------------------------
 
@@ -318,14 +318,14 @@ loc_46794:
                 jmp     off_467A2(pc,d1.w)
 ; ---------------------------------------------------------------------------
 off_467A2:
-                dc.w    sub_467AA-off_467A2
+                dc.w    InitializeAIZMinibossRisingMissile-off_467A2
                 dc.w    loc_467DE-off_467A2
                 dc.w    loc_464CA-off_467A2
                 dc.w    loc_467DE-off_467A2
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_467AA:
+InitializeAIZMinibossRisingMissile:
                 lea     word_46F40(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
                 moveq   #signextendB(sfx_Projectile),d0
@@ -335,7 +335,7 @@ sub_467AA:
                 move.w  #-$400,y_vel(a0)
                 move.w  #$60,$2E(a0)
                 jmp     (Draw_Sprite).l
-; End of function sub_467AA
+; End of function InitializeAIZMinibossRisingMissile
 
 ; ---------------------------------------------------------------------------
 
@@ -377,13 +377,13 @@ Obj_AIZMiniboss_Flame:
                 jmp     AIZMiniboss_Flame_Index(pc,d1.w)
 ; ---------------------------------------------------------------------------
 AIZMiniboss_Flame_Index:
-                dc.w    sub_4685E-AIZMiniboss_Flame_Index
+                dc.w    InitializeAIZMinibossStaggeredFlame-AIZMiniboss_Flame_Index
                 dc.w    loc_464CA-AIZMiniboss_Flame_Index
                 dc.w    loc_468A6-AIZMiniboss_Flame_Index
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4685E:
+InitializeAIZMinibossStaggeredFlame:
                 lea     ObjDat_AIZMiniboss_Flame(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 bset    #4,shield_reaction(a0)
@@ -423,7 +423,7 @@ loc_468B2:
                 bne.w   locret_464C8
                 lea     ChildObjDat_46FE6(pc),a2
                 jmp     (CreateChild1_Normal).l
-; End of function sub_4685E
+; End of function InitializeAIZMinibossStaggeredFlame
 
 ; ---------------------------------------------------------------------------
 
@@ -440,7 +440,7 @@ off_468F8:
 ; ---------------------------------------------------------------------------
 
 loc_468FC:
-                bsr.w   sub_4685E
+                bsr.w   InitializeAIZMinibossStaggeredFlame
                 move.w  #$100,priority(a0)
                 move.l  #byte_47085,$30(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)

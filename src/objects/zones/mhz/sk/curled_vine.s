@@ -124,7 +124,7 @@ loc_3E952:
                 moveq   #8,d3
                 move.w  x_pos(a0),d4
                 movea.l a1,a2
-                bsr.w   sub_3E9AC
+                bsr.w   CheckPlayersOnMhzCurledVine
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
@@ -150,21 +150,21 @@ loc_3E9A6:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3E9AC:
+CheckPlayersOnMhzCurledVine:
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 moveq   #$37,d5
                 movem.l d1-d4,-(sp)
-                bsr.s   sub_3E9C6
+                bsr.s   CheckPlayerOnMhzCurledVineSegments
                 movem.l (sp)+,d1-d4
                 lea     (Player_1).w,a1
                 subq.b  #p2_standing_bit-p1_standing_bit,d6
                 moveq   #$36,d5
-; End of function sub_3E9AC
+; End of function CheckPlayersOnMhzCurledVine
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3E9C6:
+CheckPlayerOnMhzCurledVineSegments:
                 btst    d6,status(a0)
                 beq.s   loc_3EA1E
                 btst    #Status_InAir,status(a1)
@@ -223,7 +223,7 @@ loc_3EA1E:
 
 locret_3EA4A:
                 rts
-; End of function sub_3E9C6
+; End of function CheckPlayerOnMhzCurledVineSegments
 
 ; ---------------------------------------------------------------------------
 Map_MHZCurledVine:

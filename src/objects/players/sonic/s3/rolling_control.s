@@ -18,12 +18,12 @@ Sonic_RollSpeed:
                 bne.s   loc_125CE
                 btst    #button_left,(Ctrl_1_held_logical).w
                 beq.s   loc_125C2
-                bsr.w   sub_12678
+                bsr.w   SonicS3ApplyRollingLeftInput
 
 loc_125C2:
                 btst    #button_right,(Ctrl_1_held_logical).w
                 beq.s   loc_125CE
-                bsr.w   sub_1269C
+                bsr.w   SonicS3ApplyRollingRightInput
 
 loc_125CE:
                 move.w  ground_vel(a0),d0
@@ -101,7 +101,7 @@ loc_12670:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_12678:
+SonicS3ApplyRollingLeftInput:
                 move.w  ground_vel(a0),d0
                 beq.s   loc_12680
                 bpl.s   loc_1268E
@@ -120,11 +120,11 @@ loc_1268E:
 loc_12696:
                 move.w  d0,ground_vel(a0)
                 rts
-; End of function sub_12678
+; End of function SonicS3ApplyRollingLeftInput
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1269C:
+SonicS3ApplyRollingRightInput:
                 move.w  ground_vel(a0),d0
                 bmi.s   loc_126B0
                 bclr    #Status_Facing,status(a0)
@@ -140,7 +140,7 @@ loc_126B0:
 loc_126B8:
                 move.w  d0,ground_vel(a0)
                 rts
-; End of function sub_1269C
+; End of function SonicS3ApplyRollingRightInput
 
 ; ---------------------------------------------------------------------------
 ; Subroutine for moving Sonic left or right when he's in the air

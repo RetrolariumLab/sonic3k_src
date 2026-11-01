@@ -8,19 +8,19 @@ Obj_MHZ_Pollen_Spawner:
                 bhs.s   locret_3DA22
                 lea     $2E(a0),a3
                 lea     (Player_1).w,a2
-                bsr.s   sub_3DA24
+                bsr.s   EmitMhzPollenFromPlayerMotion
                 lea     (Player_2).w,a2
                 tst.b   render_flags(a2)
                 bpl.s   locret_3DA22
                 lea     $30(a0),a3
-                bsr.s   sub_3DA24
+                bsr.s   EmitMhzPollenFromPlayerMotion
 
 locret_3DA22:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3DA24:
+EmitMhzPollenFromPlayerMotion:
                 cmpi.b  #$C,top_solid_bit(a2)
                 bne.s   locret_3DA22
                 btst    #Status_InAir,status(a2)
@@ -46,7 +46,7 @@ loc_3DA60:
                 blo.s   locret_3DAC2
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.s   locret_3DAC2
-                bsr.w   sub_3DB68
+                bsr.w   SelectMhzPollenOrLeafGraphics
                 ori.b   #4,render_flags(a1)
                 move.w  #0,priority(a1)
                 move.b  #4,width_pixels(a1)
@@ -83,7 +83,7 @@ loc_3DACA:
 loc_3DAD6:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.s   loc_3DB4A
-                bsr.w   sub_3DB68
+                bsr.w   SelectMhzPollenOrLeafGraphics
                 ori.b   #4,render_flags(a1)
                 move.w  #0,priority(a1)
                 move.b  #4,width_pixels(a1)
@@ -113,7 +113,7 @@ loc_3DAD6:
 loc_3DB4A:
                 dbf     d6,loc_3DAD6
                 rts
-; End of function sub_3DA24
+; End of function EmitMhzPollenFromPlayerMotion
 
 ; ---------------------------------------------------------------------------
 word_3DB50:
@@ -126,7 +126,7 @@ word_3DB50:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3DB68:
+SelectMhzPollenOrLeafGraphics:
                 tst.b   (_unkF7C1).w
                 bne.s   loc_3DB7E
                 move.l  #Map_MHZPollen,mappings(a1)
@@ -149,7 +149,7 @@ loc_3DBA0:
                 move.l  #Map_MHZPollen,mappings(a1)
                 move.w  #make_art_tile(ArtTile_MHZMisc+$1C,3,1),art_tile(a1)
                 rts
-; End of function sub_3DB68
+; End of function SelectMhzPollenOrLeafGraphics
 
 ; ---------------------------------------------------------------------------
 byte_3DBB0:
@@ -168,7 +168,7 @@ Obj_MHZ_Pollen:
                 move.b  (Level_frame_counter+1).w,angle(a0)
 
 loc_3DBD8:
-                bsr.s   sub_3DC3A
+                bsr.s   AnimateMhzPollenByHorizontalDirection
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -186,7 +186,7 @@ loc_3DBE0:
                 subq.b  #1,(MHZ_pollen_counter).w
 
 loc_3DC10:
-                bsr.s   sub_3DC3A
+                bsr.s   AnimateMhzPollenByHorizontalDirection
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
@@ -200,12 +200,12 @@ loc_3DC18:
                 move.l  #loc_3DBE0,(a0)
 
 loc_3DC32:
-                bsr.s   sub_3DC3A
+                bsr.s   AnimateMhzPollenByHorizontalDirection
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3DC3A:
+AnimateMhzPollenByHorizontalDirection:
                 subq.b  #1,anim_frame_timer(a0)
                 bpl.s   locret_3DC5A
                 move.b  #7,anim_frame_timer(a0)
@@ -217,7 +217,7 @@ sub_3DC3A:
 
 locret_3DC5A:
                 rts
-; End of function sub_3DC3A
+; End of function AnimateMhzPollenByHorizontalDirection
 
 ; ---------------------------------------------------------------------------
 Map_MHZPollen:

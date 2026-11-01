@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7AF5A:
+SelectSSZMTZOrbFrameAndQueuePriorityFromDepth:
                 move.w  $3A(a0),d0
                 bmi.s   loc_7AF82
                 cmpi.w  #$C,d0
@@ -32,7 +32,7 @@ loc_7AF96:
                 move.b  #2,mapping_frame(a0)
                 move.w  #$380,priority(a0)
                 rts
-; End of function sub_7AF5A
+; End of function SelectSSZMTZOrbFrameAndQueuePriorityFromDepth
 
 ; ---------------------------------------------------------------------------
 
@@ -59,10 +59,10 @@ loc_7AFD0:
                 move.w  #$42C,$38(a0)
                 move.b  #1,$32(a0)
                 addq.b  #2,routine(a0)
-                bsr.w   sub_7B0A8
+                bsr.w   FaceDetachedSSZMTZOrbTowardPlayerOneOnLanding
 
 loc_7AFF8:
-                bsr.w   sub_7B0C2
+                bsr.w   ConsumeDetachedSSZMTZOrbContactOrBossDefeat
 
 loc_7AFFC:
                 lea     Ani_SSZMTZOrbs(pc),a1
@@ -89,7 +89,7 @@ loc_7B02A:
                 move.b  #$DA,collision_flags(a0)
 
 loc_7B03C:
-                bsr.w   sub_7B0C2
+                bsr.w   ConsumeDetachedSSZMTZOrbContactOrBossDefeat
                 cmpi.b  #8,mapping_frame(a0)
                 bne.s   loc_7AFFC
                 move.b  $32(a0),d0
@@ -118,14 +118,14 @@ loc_7B080:
 
 loc_7B08C:
                 move.w  #$42C,y_pos(a0)
-                bsr.w   sub_7B0A8
+                bsr.w   FaceDetachedSSZMTZOrbTowardPlayerOneOnLanding
                 move.b  #1,$32(a0)
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7B0A8:
+FaceDetachedSSZMTZOrbTowardPlayerOneOnLanding:
                 move.w  (Player_1+x_pos).w,d0
                 sub.w   x_pos(a0),d0
                 bpl.s   loc_7B0BA
@@ -136,11 +136,11 @@ sub_7B0A8:
 loc_7B0BA:
                 bset    #0,render_flags(a0)
                 rts
-; End of function sub_7B0A8
+; End of function FaceDetachedSSZMTZOrbTowardPlayerOneOnLanding
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7B0C2:
+ConsumeDetachedSSZMTZOrbContactOrBossDefeat:
                 moveq   #0,d0
                 move.b  collision_property(a0),d0
                 bne.s   loc_7B0D2
@@ -166,7 +166,7 @@ loc_7B0F6:
                 move.b  #6,anim(a0)
                 move.b  #8,routine(a0)
                 rts
-; End of function sub_7B0C2
+; End of function ConsumeDetachedSSZMTZOrbContactOrBossDefeat
 
 ; ---------------------------------------------------------------------------
 word_7B10E:
@@ -217,7 +217,7 @@ Boss_MoveObject:
 ; ---------------------------------------------------------------------------
 
 loc_7B168:
-                bsr.w   sub_7B17A
+                bsr.w   DecodeLegacySSZMTZPackedAnimationSlots
 
 loc_7B16C:
                 moveq   #0,d6
@@ -228,7 +228,7 @@ loc_7B16C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7B17A:
+DecodeLegacySSZMTZPackedAnimationSlots:
                 movea.l a4,a1
                 moveq   #0,d0
                 moveq   #0,d1
@@ -276,7 +276,7 @@ loc_7B1CC:
                 move.b  d0,-1(a2)
                 move.b  d5,-2(a2)
                 adda.w  #next_subspr,a3
-                dbf     d6,sub_7B17A
+                dbf     d6,DecodeLegacySSZMTZPackedAnimationSlots
 
 locret_7B1E0:
                 rts
@@ -316,4 +316,4 @@ loc_7B20A:
 
 locret_7B21A:
                 rts
-; End of function sub_7B17A
+; End of function DecodeLegacySSZMTZPackedAnimationSlots

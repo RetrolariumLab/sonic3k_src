@@ -77,7 +77,7 @@ loc_1D712:
                 jsr     (SolidObjectFull).l
                 btst    #1,subtype(a0)
                 beq.s   loc_1D75A
-                bsr.w   sub_1DAD2
+                bsr.w   UpdatePlayersPushingRockLeft
 
 loc_1D75A:
                 btst    #0,subtype(a0)
@@ -108,10 +108,10 @@ loc_1D782:
 loc_1D798:
                 lea     (Player_1).w,a1
                 move.b  $32(a0),d0
-                bsr.s   sub_1D7C8
+                bsr.s   ReleaseRockRiderWithConditionalBounce
                 lea     (Player_2).w,a1
                 move.b  $33(a0),d0
-                bsr.s   sub_1D7C8
+                bsr.s   ReleaseRockRiderWithConditionalBounce
                 bra.w   loc_1D818
 ; ---------------------------------------------------------------------------
 
@@ -122,19 +122,19 @@ loc_1D7B0:
                 cmpi.b  #2,$32(a0)
                 bne.s   loc_1D76C
                 lea     (Player_1).w,a1
-                bsr.s   sub_1D7CE
+                bsr.s   BouncePlayerAfterRockTopBreak
                 bra.s   loc_1D818
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1D7C8:
+ReleaseRockRiderWithConditionalBounce:
                 cmpi.b  #2,d0
                 bne.s   loc_1D7EC
-; End of function sub_1D7C8
+; End of function ReleaseRockRiderWithConditionalBounce
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1D7CE:
+BouncePlayerAfterRockTopBreak:
                 bset    #Status_Roll,status(a1)
                 move.b  #$E,y_radius(a1)
                 move.b  #7,x_radius(a1)
@@ -146,7 +146,7 @@ loc_1D7EC:
                 bclr    #Status_OnObj,status(a1)
                 move.b  #2,routine(a1)
                 rts
-; End of function sub_1D7CE
+; End of function BouncePlayerAfterRockTopBreak
 
 ; ---------------------------------------------------------------------------
 
@@ -156,7 +156,7 @@ loc_1D800:
                 cmpi.b  #2,$33(a0)
                 bne.w   loc_1D76C
                 lea     (Player_2).w,a1
-                bsr.s   sub_1D7CE
+                bsr.s   BouncePlayerAfterRockTopBreak
 
 loc_1D818:
                 move.w  $38(a0),(Chain_bonus_counter).w
@@ -164,7 +164,7 @@ loc_1D818:
                 tst.w   (Competition_mode).w
                 bne.w   loc_1D874
                 move.l  #loc_1D836,(a0)
-                bsr.w   sub_1DB4E
+                bsr.w   ShatterRockWithDefaultVelocities
 
 loc_1D836:
                 subq.b  #1,anim_frame_timer(a0)
@@ -192,10 +192,10 @@ loc_1D86E:
 ; ---------------------------------------------------------------------------
 
 loc_1D874:
-                bsr.s   sub_1D8A0
+                bsr.s   CloneCompetitionRockForRespawn
                 move.b  #3,mapping_frame(a0)
                 move.l  #loc_1D886,(a0)
-                bsr.w   sub_1DB4E
+                bsr.w   ShatterRockWithDefaultVelocities
 
 loc_1D886:
                 jsr     (MoveSprite2).l
@@ -206,7 +206,7 @@ loc_1D886:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1D8A0:
+CloneCompetitionRockForRespawn:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   locret_1D8C8
                 moveq   #$48,d0
@@ -222,7 +222,7 @@ loc_1D8AC:
 
 locret_1D8C8:
                 rts
-; End of function sub_1D8A0
+; End of function CloneCompetitionRockForRespawn
 
 ; ---------------------------------------------------------------------------
 
@@ -299,7 +299,7 @@ loc_1D974:
 
 loc_1D97A:
                 bclr    #p1_pushing_bit,status(a0)
-                bsr.w   sub_1DA08
+                bsr.w   BreakRockFromSideImpact
                 btst    #p2_pushing_bit,status(a0)
                 beq.s   loc_1D910
                 lea     (Player_2).w,a1
@@ -346,8 +346,8 @@ loc_1DA02:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1DA08:
-                bsr.w   sub_1DAA8
+BreakRockFromSideImpact:
+                bsr.w   DetachPlayersStandingOnRock
                 tst.w   (Competition_mode).w
                 bne.s   loc_1DA58
                 move.w  d1,x_vel(a1)
@@ -366,7 +366,7 @@ loc_1DA36:
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
                 add.w   d0,d0
-                bsr.w   sub_1DB60
+                bsr.w   SpawnRockFragments
                 bra.w   loc_1D836
 ; ---------------------------------------------------------------------------
 
@@ -383,19 +383,19 @@ loc_1DA58:
 loc_1DA7C:
                 move.w  x_vel(a1),ground_vel(a1)
                 bclr    #Status_Push,status(a1)
-                bsr.w   sub_1D8A0
+                bsr.w   CloneCompetitionRockForRespawn
                 move.l  #loc_1D886,(a0)
                 move.b  #3,mapping_frame(a0)
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
                 add.w   d0,d0
-                bsr.w   sub_1DB60
+                bsr.w   SpawnRockFragments
                 bra.w   loc_1D886
-; End of function sub_1DA08
+; End of function BreakRockFromSideImpact
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1DAA8:
+DetachPlayersStandingOnRock:
                 bclr    #p1_standing_bit,status(a0)
                 beq.s   loc_1DABC
                 bset    #Status_InAir,(Player_1+status).w
@@ -409,11 +409,11 @@ loc_1DABC:
 
 locret_1DAD0:
                 rts
-; End of function sub_1DAA8
+; End of function DetachPlayersStandingOnRock
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1DAD2:
+UpdatePlayersPushingRockLeft:
                 move.b  status(a0),d3
                 andi.b  #pushing_mask,d3
                 beq.w   locret_1DAFA
@@ -421,19 +421,19 @@ sub_1DAD2:
                 lea     (Player_1).w,a1
                 move.b  $3A(a0),d0
                 moveq   #p1_pushing_bit,d6
-                bsr.s   sub_1DAFC
+                bsr.s   StepPushableRockLeftForPlayer
                 lea     (Player_2).w,a1
                 move.b  $3B(a0),d0
                 moveq   #p2_pushing_bit,d6
-                bsr.s   sub_1DAFC
+                bsr.s   StepPushableRockLeftForPlayer
 
 locret_1DAFA:
                 rts
-; End of function sub_1DAD2
+; End of function UpdatePlayersPushingRockLeft
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1DAFC:
+StepPushableRockLeftForPlayer:
                 btst    d6,d3
                 beq.s   locret_1DB4C
                 cmp.w   x_pos(a1),d2
@@ -461,21 +461,21 @@ sub_1DAFC:
 
 locret_1DB4C:
                 rts
-; End of function sub_1DAFC
+; End of function StepPushableRockLeftForPlayer
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1DB4E:
+ShatterRockWithDefaultVelocities:
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
                 add.w   d0,d0
                 lea     (off_1DC28).l,a4
                 adda.w  (a4,d0.w),a4
-; End of function sub_1DB4E
+; End of function ShatterRockWithDefaultVelocities
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1DB60:
+SpawnRockFragments:
                 lea     (off_1DBEA).l,a3
                 adda.w  (a3,d0.w),a3
                 move.w  (a3)+,d1
@@ -526,7 +526,7 @@ loc_1DBDE:
 loc_1DBE2:
                 moveq   #signextendB(sfx_Collapse),d0
                 jmp     (Play_SFX).l
-; End of function sub_1DB60
+; End of function SpawnRockFragments
 
 ; ---------------------------------------------------------------------------
 off_1DBEA:

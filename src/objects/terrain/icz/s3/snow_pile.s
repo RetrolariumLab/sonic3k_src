@@ -22,13 +22,13 @@ loc_58D06:
                 beq.s   loc_58D24
                 tst.w   d0
                 beq.s   loc_58D1A
-                bsr.w   sub_58D30
+                bsr.w   ApplyIczSnowPileDragOrBreak
 
 loc_58D1A:
                 swap    d0
                 tst.w   d0
                 beq.s   loc_58D24
-                bsr.w   sub_58D30
+                bsr.w   ApplyIczSnowPileDragOrBreak
 
 loc_58D24:
                 jmp     Sprite_CheckDeleteTouch(pc)
@@ -38,7 +38,7 @@ word_58D28:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_58D30:
+ApplyIczSnowPileDragOrBreak:
                 movea.w d0,a3
                 move.w  d0,$44(a0)
                 cmpi.b  #9,anim(a3)
@@ -69,7 +69,7 @@ loc_58D5E:
 
 locret_58D72:
                 rts
-; End of function sub_58D30
+; End of function ApplyIczSnowPileDragOrBreak
 
 ; ---------------------------------------------------------------------------
 
@@ -229,7 +229,7 @@ loc_58F00:
                 jsr     SetUp_ObjAttributes2(pc)
                 move.l  #loc_58F1E,(a0)
                 move.l  #loc_58F28,$34(a0)
-                bsr.w   sub_58F38
+                bsr.w   InitializeIczSnowFragmentLaunchFromPlayerFacing
                 jsr     Refresh_ChildPositionAdjusted(pc)
 
 loc_58F1E:
@@ -248,7 +248,7 @@ loc_58F30:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_58F38:
+InitializeIczSnowFragmentLaunchFromPlayerFacing:
                 movea.w parent3(a0),a1
                 move.w  $44(a1),d0
                 beq.s   locret_58F72
@@ -267,7 +267,7 @@ sub_58F38:
 
 locret_58F72:
                 rts
-; End of function sub_58F38
+; End of function InitializeIczSnowFragmentLaunchFromPlayerFacing
 
 ; ---------------------------------------------------------------------------
 word_58F74:

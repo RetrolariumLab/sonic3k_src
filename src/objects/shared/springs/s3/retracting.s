@@ -23,7 +23,7 @@ loc_22092:
                 move.l  #loc_22098,(a0)
 
 loc_22098:
-                bsr.w   sub_22146
+                bsr.w   UpdateRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
                 add.w   $34(a0),d0
@@ -35,7 +35,7 @@ loc_220AE:
                 move.l  #loc_220B4,(a0)
 
 loc_220B4:
-                bsr.w   sub_22146
+                bsr.w   UpdateRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
                 add.w   $32(a0),d0
@@ -47,7 +47,7 @@ loc_220CA:
                 move.l  #loc_220D0,(a0)
 
 loc_220D0:
-                bsr.w   sub_22146
+                bsr.w   UpdateRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
                 add.w   $34(a0),d0
@@ -59,7 +59,7 @@ loc_220E6:
                 move.l  #loc_220EC,(a0)
 
 loc_220EC:
-                bsr.w   sub_22146
+                bsr.w   UpdateRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
                 move.w  d0,d1
@@ -79,7 +79,7 @@ loc_22116:
                 move.l  #loc_2211C,(a0)
 
 loc_2211C:
-                bsr.w   sub_22146
+                bsr.w   UpdateRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
                 move.w  d0,d1
@@ -96,7 +96,7 @@ loc_22132:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_22146:
+UpdateRetractingSpringTravel:
                 tst.w   $3A(a0)
                 beq.s   loc_22162
                 subq.w  #1,$3A(a0)
@@ -129,7 +129,7 @@ loc_22184:
 
 locret_221A4:
                 rts
-; End of function sub_22146
+; End of function UpdateRetractingSpringTravel
 
 ; ---------------------------------------------------------------------------
 byte_221A6:
@@ -213,7 +213,7 @@ loc_2227C:
                 move.w  a1,$3E(a0)
 
 loc_2229C:
-                bsr.w   sub_21426
+                bsr.w   InitCompetitionRetractingSpring
 
 loc_222A0:
                 move.b  subtype(a0),d0
@@ -237,7 +237,7 @@ loc_222C2:
                 move.l  #loc_222C8,(a0)
 
 loc_222C8:
-                bsr.w   sub_2236A
+                bsr.w   UpdateCompetitionRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
                 add.w   $34(a0),d0
@@ -249,7 +249,7 @@ loc_222DE:
                 move.l  #loc_222E4,(a0)
 
 loc_222E4:
-                bsr.w   sub_2236A
+                bsr.w   UpdateCompetitionRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
                 add.w   $32(a0),d0
@@ -261,7 +261,7 @@ loc_222FA:
                 move.l  #loc_22300,(a0)
 
 loc_22300:
-                bsr.w   sub_2236A
+                bsr.w   UpdateCompetitionRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
                 add.w   $34(a0),d0
@@ -273,7 +273,7 @@ loc_22316:
                 move.l  #loc_2231C,(a0)
 
 loc_2231C:
-                bsr.w   sub_2236A
+                bsr.w   UpdateCompetitionRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
                 add.w   $34(a0),d0
@@ -285,7 +285,7 @@ loc_22332:
                 move.l  #loc_22338,(a0)
 
 loc_22338:
-                bsr.w   sub_2236A
+                bsr.w   UpdateCompetitionRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
                 add.w   $32(a0),d0
@@ -297,7 +297,7 @@ loc_2234E:
                 move.l  #loc_22354,(a0)
 
 loc_22354:
-                bsr.w   sub_2236A
+                bsr.w   UpdateCompetitionRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
                 add.w   $32(a0),d0
@@ -306,7 +306,7 @@ loc_22354:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2236A:
+UpdateCompetitionRetractingSpringTravel:
                 tst.b   subtype(a0)
                 bmi.s   loc_223D0
                 tst.w   $3A(a0)
@@ -455,7 +455,7 @@ loc_2252A:
 
 locret_2255C:
                 rts
-; End of function sub_2236A
+; End of function UpdateCompetitionRetractingSpringTravel
 
 ; ---------------------------------------------------------------------------
 

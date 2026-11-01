@@ -63,7 +63,7 @@ loc_47A14:
                 jsr     (Play_SFX).l
 
 loc_47A38:
-                bsr.w   sub_47A88
+                bsr.w   CarryPlayersOnDezConveyorPad
                 move.b  status(a0),d0
                 move.b  $30(a0),d1
                 move.b  d0,$30(a0)
@@ -89,17 +89,17 @@ loc_47A58:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_47A88:
+CarryPlayersOnDezConveyorPad:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_47A96
+                bsr.s   CarryStandingPlayerOnDezConveyorPad
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
-; End of function sub_47A88
+; End of function CarryPlayersOnDezConveyorPad
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_47A96:
+CarryStandingPlayerOnDezConveyorPad:
                 btst    d6,status(a0)
                 beq.s   locret_47AB2
                 moveq   #2,d0
@@ -117,13 +117,13 @@ loc_47AAE:
 
 locret_47AB2:
                 rts
-; End of function sub_47A96
+; End of function CarryStandingPlayerOnDezConveyorPad
 
 ; ---------------------------------------------------------------------------
 
 loc_47AB4:
                 move.w  x_pos(a0),-(sp)
-                bsr.w   sub_47B58
+                bsr.w   UpdateDezConveyorPadFloorMotion
                 moveq   #1,d0
                 tst.b   anim(a0)
                 beq.s   loc_47AC6
@@ -181,7 +181,7 @@ loc_47B52:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_47B58:
+UpdateDezConveyorPadFloorMotion:
                 move.w  $36(a0),d0
                 bne.s   loc_47B7C
                 move.w  $34(a0),d0
@@ -244,7 +244,7 @@ loc_47BD8:
 
 locret_47BF2:
                 rts
-; End of function sub_47B58
+; End of function UpdateDezConveyorPadFloorMotion
 
 ; ---------------------------------------------------------------------------
 Ani_DEZConveyorPad:
@@ -260,7 +260,7 @@ word_47DD6:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_47DDE:
+InitializeDezEnergyBridgeTiming:
                 move.w  #make_art_tile(ArtTile_DEZMisc+$B2,1,0),art_tile(a0)
                 ori.b   #4,render_flags(a0)
                 move.w  #$300,priority(a0)
@@ -284,4 +284,4 @@ sub_47DDE:
                 add.w   $30(a0),d0
                 and.w   $32(a0),d0
                 rts
-; End of function sub_47DDE
+; End of function InitializeDezEnergyBridgeTiming

@@ -28,11 +28,11 @@ SSZ2_BGDeformArray:
 
 SSZ2_BackgroundInit:
                 clr.l   (_unkEE9C).w
-                jsr     sub_58D3E(pc)
+                jsr     BuildSsz2EndingStageScrollTables(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 moveq   #0,d1
                 jsr     (Refresh_PlaneFull).l
-                jmp     sub_58FBC(pc)
+                jmp     ComposeSsz2EndingScrollBuffersByStage(pc)
 ; ---------------------------------------------------------------------------
 
 SSZ2_BackgroundEvent:
@@ -46,18 +46,18 @@ SSZ2_BackgroundEvent_Index:
                 lea     (Level_layout_main).w,a3
 
 loc_58D1E:
-                jsr     sub_58D3E(pc)
+                jsr     BuildSsz2EndingStageScrollTables(pc)
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
                 moveq   #0,d1
                 moveq   #$20,d6
                 jsr     (Draw_TileRow).l
-                jsr     sub_58FBC(pc)
+                jsr     ComposeSsz2EndingScrollBuffersByStage(pc)
                 jmp     (ShakeScreen_Setup).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_58D3E:
+BuildSsz2EndingStageScrollTables:
                 tst.w   (Events_routine_bg).w
                 beq.s   loc_58D6E
 
@@ -323,11 +323,11 @@ loc_58F6A:
                 neg.w   d0
                 move.w  d0,-6(a1)
                 rts
-; End of function sub_58D3E
+; End of function BuildSsz2EndingStageScrollTables
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_58FBC:
+ComposeSsz2EndingScrollBuffersByStage:
                 tst.w   (Events_routine_bg).w
                 beq.s   loc_58FD0
                 lea     SSZ2_BGDeformArray(pc),a4
@@ -407,7 +407,7 @@ loc_5906A:
                 lea     SSZ2_DeformArray(pc),a4
                 lea     (HScroll_table+$004).w,a5
                 jmp     (ApplyFGDeformation).l
-; End of function sub_58FBC
+; End of function ComposeSsz2EndingScrollBuffersByStage
 
 ; ---------------------------------------------------------------------------
 
@@ -599,7 +599,7 @@ Map_KnuxEndingIslandMask:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5928C:
+CycleSsz2EndingWaterPalette:
                 tst.b   (Palette_cycle_counters+$00).w
                 bne.s   locret_592BC
                 subq.w  #1,(Palette_cycle_counter1).w
@@ -618,7 +618,7 @@ loc_592AC:
 
 locret_592BC:
                 rts
-; End of function sub_5928C
+; End of function CycleSsz2EndingWaterPalette
 
 ; ---------------------------------------------------------------------------
 Pal_EndingWater:
@@ -627,7 +627,7 @@ Pal_EndingWater:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_592EE:
+CycleSsz2EmeraldEndingAccentPalette:
                 tst.b   (Palette_cycle_counters+$00).w
                 bne.s   locret_59318
                 subq.w  #1,(Palette_cycle_counter1).w
@@ -645,7 +645,7 @@ loc_5930E:
 
 locret_59318:
                 rts
-; End of function sub_592EE
+; End of function CycleSsz2EmeraldEndingAccentPalette
 
 ; ---------------------------------------------------------------------------
 word_5931A:

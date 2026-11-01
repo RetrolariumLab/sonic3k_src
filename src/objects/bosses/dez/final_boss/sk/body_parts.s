@@ -45,7 +45,7 @@ loc_80730:
                 jsr     Run_PalRotationScript(pc)
 
 loc_8073A:
-                bsr.w   sub_81024
+                bsr.w   PositionDEZFinalChildFromParentWordOffsets
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
                 bne.w   loc_810D0
@@ -111,10 +111,10 @@ loc_807BC:
                 jsr     (Play_SFX).l
 
 loc_807EE:
-                bsr.w   sub_80FFA
+                bsr.w   TrySpawnDEZFinalChargeParticleEveryFourTicks
                 lea     byte_8135A(pc),a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
-                bsr.w   sub_81024
+                bsr.w   PositionDEZFinalChildFromParentWordOffsets
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
@@ -129,7 +129,7 @@ loc_80810:
                 bmi.s   loc_8083C
                 cmpi.w  #$28,$2E(a0)
                 blo.s   loc_80822
-                bsr.w   sub_80FFA
+                bsr.w   TrySpawnDEZFinalChargeParticleEveryFourTicks
 
 loc_80822:
                 move.b  #$1A,mapping_frame(a0)
@@ -138,7 +138,7 @@ loc_80822:
                 move.b  #$1F,mapping_frame(a0)
 
 loc_80834:
-                bsr.w   sub_81024
+                bsr.w   PositionDEZFinalChildFromParentWordOffsets
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
@@ -161,8 +161,8 @@ loc_8086C:
                 move.w  d0,(Events_bg+$10).w
 
 loc_8087C:
-                bsr.w   sub_80FA6
-                bsr.w   sub_81024
+                bsr.w   HurtPlayersInsideDEZFinalBeamActiveFrame
+                bsr.w   PositionDEZFinalChildFromParentWordOffsets
                 jmp     Child_CheckParent(pc)
 ; ---------------------------------------------------------------------------
 

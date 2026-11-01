@@ -69,7 +69,7 @@ loc_86358:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8635E:
+LaunchPlayerWithSpringVelocity:
                 move.w  d0,y_vel(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    #Status_OnObj,status(a1)
@@ -79,21 +79,21 @@ sub_8635E:
                 move.b  #2,routine(a1)
                 moveq   #signextendB(sfx_Spring),d0
                 jmp     (Play_SFX).l
-; End of function sub_8635E
+; End of function LaunchPlayerWithSpringVelocity
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8638A:
+FacePlayersTowardObject:
                 lea     (Player_1).w,a1
-                bsr.w   sub_8639C
+                bsr.w   FacePlayerTowardObject
                 lea     (Player_2).w,a1
                 tst.b   render_flags(a1)
                 bpl.s   locret_863BE
-; End of function sub_8638A
+; End of function FacePlayersTowardObject
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8639C:
+FacePlayerTowardObject:
                 move.w  x_pos(a0),d0
                 bclr    #0,render_flags(a1)
                 bclr    #Status_Facing,status(a1)
@@ -104,7 +104,7 @@ sub_8639C:
 
 locret_863BE:
                 rts
-; End of function sub_8639C
+; End of function FacePlayerTowardObject
 
 ; ---------------------------------------------------------------------------
 

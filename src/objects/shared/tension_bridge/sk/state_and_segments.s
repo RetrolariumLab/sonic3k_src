@@ -46,7 +46,7 @@ loc_386F0:
                 sub.w   d0,d3
                 swap    d1
                 move.w  #8,d1
-                bsr.s   sub_38756
+                bsr.s   CreateTensionBridgeSpriteBank
                 move.w  $30(a1),d0
                 subq.w  #8,d0
                 move.w  d0,x_pos(a1)
@@ -55,7 +55,7 @@ loc_386F0:
                 subq.w  #8,d1
                 bls.s   loc_38752
                 move.w  d1,d4
-                bsr.s   sub_38756
+                bsr.s   CreateTensionBridgeSpriteBank
                 move.l  a1,$34(a0)
                 move.w  d4,d0
                 add.w   d0,d0
@@ -69,7 +69,7 @@ loc_38752:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_38756:
+CreateTensionBridgeSpriteBank:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.s   locret_387B4
                 move.l  #loc_3887C,(a1)
@@ -95,7 +95,7 @@ loc_387A4:
 
 locret_387B4:
                 rts
-; End of function sub_38756
+; End of function CreateTensionBridgeSpriteBank
 
 ; ---------------------------------------------------------------------------
 
@@ -142,7 +142,7 @@ loc_38812:
                 addq.b  #4,$3E(a0)
 
 loc_3881E:
-                bsr.w   sub_38CC2
+                bsr.w   BendTensionBridgeSegments
 
 loc_38822:
                 moveq   #0,d1
@@ -153,7 +153,7 @@ loc_38822:
                 add.w   d2,d2
                 moveq   #8,d3
                 move.w  x_pos(a0),d4
-                bsr.w   sub_38A88
+                bsr.w   CollidePlayersWithTensionBridge
 
 loc_3883A:
                 move.w  x_pos(a0),d0
@@ -216,7 +216,7 @@ loc_388B4:
                 addq.b  #4,$3E(a0)
 
 loc_388C0:
-                bsr.w   sub_38CC2
+                bsr.w   BendTensionBridgeSegments
 
 loc_388C4:
                 moveq   #0,d1
@@ -227,8 +227,8 @@ loc_388C4:
                 add.w   d2,d2
                 moveq   #8,d3
                 move.w  x_pos(a0),d4
-                bsr.w   sub_38A88
-                bsr.w   sub_38C12
+                bsr.w   CollidePlayersWithTensionBridge
+                bsr.w   AnimateTensionBridgeSegmentsUnderMovingRiders
                 bra.w   loc_3883A
 ; ---------------------------------------------------------------------------
 
@@ -274,7 +274,7 @@ loc_38940:
 ; ---------------------------------------------------------------------------
 
 loc_38946:
-                bsr.w   sub_38D74
+                bsr.w   BendSlopedTensionBridgeSegments
                 move.l  #loc_38950,(a0)
 
 loc_38950:
@@ -294,7 +294,7 @@ loc_38966:
                 move.w  d1,d2
                 addq.w  #8,d1
                 add.w   d2,d2
-                bsr.w   sub_38BD8
+                bsr.w   CacheTensionBridgeRiderSegments
                 move.b  status(a0),d0
                 andi.b  #p2_standing,d0
                 beq.s   loc_38998
@@ -315,7 +315,7 @@ loc_38998:
                 addq.b  #4,$3E(a0)
 
 loc_389A4:
-                bsr.w   sub_38D74
+                bsr.w   BendSlopedTensionBridgeSegments
 
 loc_389A8:
                 moveq   #0,d1
@@ -326,18 +326,18 @@ loc_389A8:
                 add.w   d2,d2
                 moveq   #8,d3
                 move.w  x_pos(a0),d4
-                bsr.w   sub_38B2A
-                bsr.w   sub_38C12
+                bsr.w   CollidePlayersWithSlopedTensionBridge
+                bsr.w   AnimateTensionBridgeSegmentsUnderMovingRiders
                 bra.w   loc_3883A
 ; ---------------------------------------------------------------------------
 
 loc_389C8:
                 movea.l $30(a0),a3
-                bsr.s   sub_389DE
+                bsr.s   CollapseTensionBridgeSpriteBank
                 cmpi.b  #8,subtype(a0)
                 bls.s   locret_389DC
                 movea.l $34(a0),a3
-                bsr.s   sub_389DE
+                bsr.s   CollapseTensionBridgeSpriteBank
 
 locret_389DC:
                 rts

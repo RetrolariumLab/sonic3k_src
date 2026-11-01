@@ -78,7 +78,7 @@ loc_455F8:
                 move.w  $16(a0),d0
                 add.w   $1A(a0),d0
                 move.w  d0,y_pos(a0)
-                jsr     sub_45866(pc)
+                jsr     CycleSszHpzTeleporterPalettePair(pc)
                 tst.b   subtype(a0)
                 bne.s   loc_45616
                 tst.b   (Events_bg+$04).w
@@ -151,7 +151,7 @@ loc_456EE:
 ; ---------------------------------------------------------------------------
 
 loc_456F4:
-                jsr     sub_45856(pc)
+                jsr     UpdateSszHpzTeleporterSurfaceAndPalette(pc)
                 lea     (Player_1).w,a1
                 movea.w $3C(a0),a2
                 cmpi.b  #8,$46(a2)
@@ -220,7 +220,7 @@ loc_457B8:
 ; ---------------------------------------------------------------------------
 
 loc_457BE:
-                jsr     sub_45856(pc)
+                jsr     UpdateSszHpzTeleporterSurfaceAndPalette(pc)
                 lea     (Player_1).w,a1
                 tst.b   $2D(a0)
                 bne.s   loc_45804
@@ -249,7 +249,7 @@ loc_45816:
 ; ---------------------------------------------------------------------------
 
 loc_4581C:
-                jsr     sub_45856(pc)
+                jsr     UpdateSszHpzTeleporterSurfaceAndPalette(pc)
                 lea     (Player_1).w,a1
                 move.l  #$20000,d0
                 move.l  #$800,d1
@@ -268,16 +268,16 @@ locret_45854:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_45856:
+UpdateSszHpzTeleporterSurfaceAndPalette:
                 moveq   #$23,d1
                 lea     byte_466E8(pc),a2
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectTopSloped2).l
-; End of function sub_45856
+; End of function UpdateSszHpzTeleporterSurfaceAndPalette
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_45866:
+CycleSszHpzTeleporterPalettePair:
                 tst.b   $39(a0)
                 beq.s   loc_45872
                 subq.b  #1,$39(a0)
@@ -312,4 +312,4 @@ loc_458A6:
 
 locret_458B2:
                 rts
-; End of function sub_45866
+; End of function CycleSszHpzTeleporterPalettePair

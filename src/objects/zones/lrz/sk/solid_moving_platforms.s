@@ -113,7 +113,7 @@ loc_2591A:
 
 loc_25924:
                 move.w  #$5F,d2
-                bsr.s   sub_25974
+                bsr.s   AdvanceLrzPlatformAcceleratedOffset
                 subi.w  #$60,d0
                 add.w   $30(a0),d0
                 move.w  d0,x_pos(a0)
@@ -122,7 +122,7 @@ loc_25924:
 
 loc_25938:
                 move.w  #$5F,d2
-                bsr.s   sub_25974
+                bsr.s   AdvanceLrzPlatformAcceleratedOffset
                 subi.w  #$60,d0
                 add.w   $34(a0),d0
                 move.w  d0,y_pos(a0)
@@ -131,7 +131,7 @@ loc_25938:
 
 loc_2594C:
                 move.w  #$7F,d2
-                bsr.s   sub_25974
+                bsr.s   AdvanceLrzPlatformAcceleratedOffset
                 subi.w  #$80,d0
                 add.w   $30(a0),d0
                 move.w  d0,x_pos(a0)
@@ -140,7 +140,7 @@ loc_2594C:
 
 loc_25960:
                 move.w  #$7F,d2
-                bsr.s   sub_25974
+                bsr.s   AdvanceLrzPlatformAcceleratedOffset
                 subi.w  #$80,d0
                 add.w   $34(a0),d0
                 move.w  d0,y_pos(a0)
@@ -148,7 +148,7 @@ loc_25960:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_25974:
+AdvanceLrzPlatformAcceleratedOffset:
                 tst.b   $3C(a0)
                 bne.s   loc_25996
                 move.w  $40(a0),d1
@@ -180,7 +180,7 @@ loc_259B0:
 
 locret_259C2:
                 rts
-; End of function sub_25974
+; End of function AdvanceLrzPlatformAcceleratedOffset
 
 ; ---------------------------------------------------------------------------
 Map_LRZSolidMovingPlatforms:

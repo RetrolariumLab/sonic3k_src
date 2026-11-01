@@ -64,14 +64,14 @@ loc_1C4F4:
                 move.w  x_pos(a0),d1
                 lea     $34(a0),a2
                 lea     (Player_1).w,a1
-                bsr.s   sub_1C518
+                bsr.s   UpdateAutoRollOnXCrossing
                 lea     (Player_2).w,a1
                 cmpi.w  #4,(Tails_CPU_routine).w
                 beq.w   loc_1C5BC
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1C518:
+UpdateAutoRollOnXCrossing:
                 tst.b   (a2)+
                 bne.s   loc_1C56E
                 cmp.w   x_pos(a1),d1
@@ -154,7 +154,7 @@ loc_1C5D4:
                 moveq   #signextendB(sfx_Roll),d0
                 jsr     (Play_SFX).l
                 rts
-; End of function sub_1C518
+; End of function UpdateAutoRollOnXCrossing
 
 ; ---------------------------------------------------------------------------
 
@@ -164,14 +164,14 @@ loc_1C5FA:
                 move.w  y_pos(a0),d1
                 lea     $34(a0),a2
                 lea     (Player_1).w,a1
-                bsr.s   sub_1C61E
+                bsr.s   UpdateAutoRollOnYCrossing
                 lea     (Player_2).w,a1
                 cmpi.w  #4,(Tails_CPU_routine).w
                 beq.w   loc_1C6F2
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1C61E:
+UpdateAutoRollOnYCrossing:
                 tst.b   (a2)+
                 bne.s   loc_1C694
                 cmp.w   y_pos(a1),d1
@@ -249,4 +249,4 @@ loc_1C6F2:
                 tst.w   (Debug_mode_flag).w
                 beq.w   Delete_Sprite_If_Not_In_Range
                 jmp     (Sprite_OnScreen_Test).l
-; End of function sub_1C61E
+; End of function UpdateAutoRollOnYCrossing

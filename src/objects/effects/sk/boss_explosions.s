@@ -93,7 +93,7 @@ loc_83E7E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_83E84:
+BossExplosionSKSpawnAtMaskedRandomOffset:
                 lea     Child6_MakeBossExplosion1(pc),a2
                 jsr     CreateChild6_Simple(pc)
                 bne.w   locret_83EC0
@@ -120,7 +120,7 @@ loc_83E90:
 
 locret_83EC0:
                 rts
-; End of function sub_83E84
+; End of function BossExplosionSKSpawnAtMaskedRandomOffset
 
 ; ---------------------------------------------------------------------------
 

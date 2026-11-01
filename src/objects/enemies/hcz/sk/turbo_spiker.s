@@ -213,7 +213,7 @@ loc_87DC0:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
                 bne.s   loc_87DE4
-                bsr.w   sub_87DE8
+                bsr.w   SpawnTurboSpikerTrailPuffOnVblankPhase
                 bchg    #0,$38(a0)
                 beq.w   locret_87C8C
                 jmp     (Draw_Sprite).l
@@ -224,7 +224,7 @@ loc_87DE4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_87DE8:
+SpawnTurboSpikerTrailPuffOnVblankPhase:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #3,d0
                 bne.s   locret_87E18
@@ -242,7 +242,7 @@ sub_87DE8:
 
 locret_87E18:
                 rts
-; End of function sub_87DE8
+; End of function SpawnTurboSpikerTrailPuffOnVblankPhase
 
 ; ---------------------------------------------------------------------------
 

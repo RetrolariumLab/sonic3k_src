@@ -265,12 +265,12 @@ loc_1D7FC:
                 move.l  a1,mappings(a0)
 
 loc_1D81A:
-                bsr.s   sub_1D820
+                bsr.s   MonitorIconSKMoveToApexAndDispatchReward
                 bra.w   Draw_Sprite
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1D820:
+MonitorIconSKMoveToApexAndDispatchReward:
                 btst    #1,render_flags(a0)
                 bne.s   loc_1D83C
                 tst.w   y_vel(a0)
@@ -303,7 +303,7 @@ loc_1D86C:
                 add.w   d0,d0
                 move.w  off_1D87C(pc,d0.w),d0
                 jmp     off_1D87C(pc,d0.w)
-; End of function sub_1D820
+; End of function MonitorIconSKMoveToApexAndDispatchReward
 
 ; ---------------------------------------------------------------------------
 off_1D87C:
@@ -321,7 +321,7 @@ off_1D87C:
 
 Monitor_Give_Eggman:
                 addq.w  #1,(a2)
-                jmp     (sub_24280).l
+                jmp     (HurtPlayerFromSolidHazard).l
 ; ---------------------------------------------------------------------------
 
 Monitor_Give_1up:

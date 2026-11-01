@@ -31,13 +31,13 @@ loc_907A8:
                 move.l  #loc_908DE,(a0)
                 move.w  #make_art_tile(ArtTile_HPZGrayEmerald,0,1),art_tile(a0)
                 bset    #0,$38(a0)
-                bsr.w   sub_9084E
-                bsr.w   sub_90832
+                bsr.w   PlaceHpzSuperEmeraldAtDisplaySlot
+                bsr.w   SetHpzSuperEmeraldSpritePriority
                 btst    #7,$38(a0)
                 beq.s   loc_907D8
                 move.l  #loc_90880,(a0)
                 move.b  d0,mapping_frame(a0)
-                bsr.w   sub_907FA
+                bsr.w   SelectHpzSuperEmeraldArtPalette
 
 loc_907D8:
                 jmp     (Draw_Sprite).l
@@ -46,14 +46,14 @@ loc_907D8:
 loc_907DE:
                 move.b  d0,mapping_frame(a0)
                 move.l  #loc_9089E,(a0)
-                bsr.w   sub_9084E
-                bsr.w   sub_90832
-                bsr.w   sub_907FA
+                bsr.w   PlaceHpzSuperEmeraldAtDisplaySlot
+                bsr.w   SetHpzSuperEmeraldSpritePriority
+                bsr.w   SelectHpzSuperEmeraldArtPalette
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_907FA:
+SelectHpzSuperEmeraldArtPalette:
                 move.w  d0,d1
                 lsl.w   #2,d1
                 cmpi.w  #3,(Player_mode).w
@@ -65,7 +65,7 @@ loc_90808:
                 move.w  d0,art_tile(a0)
                 move.w  d0,$3A(a0)
                 rts
-; End of function sub_907FA
+; End of function SelectHpzSuperEmeraldArtPalette
 
 ; ---------------------------------------------------------------------------
 word_90816:
@@ -86,12 +86,12 @@ word_90816:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_90832:
+SetHpzSuperEmeraldSpritePriority:
                 move.w  d0,d1
                 add.w   d1,d1
                 move.w  word_9083E(pc,d1.w),priority(a0)
                 rts
-; End of function sub_90832
+; End of function SetHpzSuperEmeraldSpritePriority
 
 ; ---------------------------------------------------------------------------
 word_9083E:
@@ -106,14 +106,14 @@ word_9083E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_9084E:
+PlaceHpzSuperEmeraldAtDisplaySlot:
                 move.w  d0,d1
                 lsl.w   #2,d1
                 lea     word_90860(pc,d1.w),a1
                 move.w  (a1)+,x_pos(a0)
                 move.w  (a1)+,y_pos(a0)
                 rts
-; End of function sub_9084E
+; End of function PlaceHpzSuperEmeraldAtDisplaySlot
 
 ; ---------------------------------------------------------------------------
 word_90860:

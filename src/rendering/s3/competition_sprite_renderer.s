@@ -83,7 +83,7 @@ loc_198F6:
 
 loc_1991C:
                 move.w  art_tile(a0),d5
-                jsr     sub_195CE(pc)
+                jsr     RenderMappingPieces(pc)
 
 loc_19924:
                 subq.b  #2,(a5)
@@ -187,7 +187,7 @@ loc_199F2:
 
 loc_19A1C:
                 move.w  art_tile(a0),d5
-                jsr     sub_195CE(pc)
+                jsr     RenderMappingPieces(pc)
 
 loc_19A24:
                 subq.b  #2,1(a5)
@@ -253,7 +253,7 @@ loc_19A4E:
                 subq.w  #1,d4
                 bmi.s   loc_19ACC
                 move.w  d6,d3
-                jsr     sub_196D2(pc)
+                jsr     RenderMappingPiecesClipped(pc)
                 move.w  d3,d6
                 tst.w   d7
                 bmi.w   loc_19924
@@ -283,7 +283,7 @@ loc_19ADA:
                 subq.w  #1,d4
                 bmi.s   loc_19B10
                 move.w  d6,-(sp)
-                jsr     sub_196D2(pc)
+                jsr     RenderMappingPiecesClipped(pc)
                 move.w  (sp)+,d6
 
 loc_19B10:
@@ -332,7 +332,7 @@ loc_19B1A:
                 subq.w  #1,d4
                 bmi.s   loc_19B98
                 move.w  d6,d3
-                jsr     sub_196D2(pc)
+                jsr     RenderMappingPiecesClipped(pc)
                 move.w  d3,d6
                 tst.w   d7
                 bmi.w   loc_19A24
@@ -363,7 +363,7 @@ loc_19BA6:
                 subq.w  #1,d4
                 bmi.s   loc_19BE0
                 move.w  d6,-(sp)
-                jsr     sub_196D2(pc)
+                jsr     RenderMappingPiecesClipped(pc)
                 move.w  (sp)+,d6
 
 loc_19BE0:

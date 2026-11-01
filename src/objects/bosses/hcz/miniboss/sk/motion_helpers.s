@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6A916:
+AccelerateHCZVortexActorTowardCenterX:
                 move.w  x_pos(a0),d0
                 move.w  x_vel(a0),d1
                 move.w  #$100,d2
@@ -23,11 +23,11 @@ loc_6A92C:
 loc_6A93A:
                 move.w  d1,x_vel(a0)
                 rts
-; End of function sub_6A916
+; End of function AccelerateHCZVortexActorTowardCenterX
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6A940:
+SetHCZVortexLaunchVelocityFromOffset:
                 add.w   d0,d0
                 smi     d2
                 bpl.s   loc_6A948
@@ -48,11 +48,11 @@ loc_6A952:
 loc_6A95A:
                 move.w  d3,x_vel(a0)
                 rts
-; End of function sub_6A940
+; End of function SetHCZVortexLaunchVelocityFromOffset
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6A960:
+SwitchHCZVortexToParentDefeatState:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
                 beq.w   locret_69F78
@@ -65,16 +65,16 @@ sub_6A960:
 loc_6A986:
                 move.w  $42(a0),d0
                 beq.s   loc_6A990
-                bsr.w   sub_6A996
+                bsr.w   ReleaseHCZVortexControlledPlayer
 
 loc_6A990:
                 move.w  $44(a0),d0
                 beq.s   locret_6A9A8
-; End of function sub_6A960
+; End of function SwitchHCZVortexToParentDefeatState
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6A996:
+ReleaseHCZVortexControlledPlayer:
                 movea.w d0,a2
                 bset    #Status_InAir,status(a2)
                 clr.b   object_control(a2)
@@ -82,22 +82,22 @@ sub_6A996:
 
 locret_6A9A8:
                 rts
-; End of function sub_6A996
+; End of function ReleaseHCZVortexControlledPlayer
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6A9AA:
+MoveHCZVortexParticleAroundParent:
                 movea.l a0,a1
                 movea.l a0,a2
                 movea.l a3,a0
-                bsr.w   sub_6AA30
+                bsr.w   ApplyHCZVortexOrbitToSubject
                 movea.l a1,a0
                 rts
-; End of function sub_6A9AA
+; End of function MoveHCZVortexParticleAroundParent
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6A9B8:
+CapturePlayersInHCZMinibossVortex:
                 clr.l   $42(a0)
                 move.w  y_pos(a0),d0
                 subi.w  #$20,d0
@@ -105,10 +105,10 @@ sub_6A9B8:
                 cmp.w   y_pos(a2),d0
                 bhi.s   loc_6A9E0
                 move.w  a2,$42(a0)
-                bsr.w   sub_6AA30
+                bsr.w   ApplyHCZVortexOrbitToSubject
                 tst.b   object_control(a2)
                 bne.s   loc_6A9E0
-                bsr.w   sub_6AA00
+                bsr.w   InitializeHCZVortexPlayerControl
 
 loc_6A9E0:
                 lea     (Player_2).w,a2
@@ -117,14 +117,14 @@ loc_6A9E0:
                 cmpi.b  #6,routine(a2)
                 bhs.s   locret_6AA22
                 move.w  a2,$44(a0)
-                bsr.w   sub_6AA30
+                bsr.w   ApplyHCZVortexOrbitToSubject
                 tst.b   object_control(a2)
                 bne.s   locret_6AA22
-; End of function sub_6A9B8
+; End of function CapturePlayersInHCZMinibossVortex
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6AA00:
+InitializeHCZVortexPlayerControl:
                 bset    #Status_InAir,status(a2)
                 move.b  #1,object_control(a2)
                 move.b  #$F,anim(a2)
@@ -135,7 +135,7 @@ sub_6AA00:
 
 locret_6AA22:
                 rts
-; End of function sub_6AA00
+; End of function InitializeHCZVortexPlayerControl
 
 ; ---------------------------------------------------------------------------
 ; unused
@@ -148,7 +148,7 @@ locret_6AA22:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6AA30:
+ApplyHCZVortexOrbitToSubject:
                 move.w  x_pos(a2),d0
                 move.w  x_vel(a2),d1
                 move.w  #$40,d2
@@ -202,32 +202,32 @@ loc_6AA9A:
 
 locret_6AA9E:
                 rts
-; End of function sub_6AA30
+; End of function ApplyHCZVortexOrbitToSubject
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6AAA0:
+TriggerHCZBossSplashIfSubmerged:
                 btst    #7,$38(a0)
                 bne.w   locret_69F78
                 move.w  y_pos(a0),d0
                 cmp.w   (Water_level).w,d0
                 blo.w   locret_69F78
-; End of function sub_6AAA0
+; End of function TriggerHCZBossSplashIfSubmerged
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6AAB6:
+CreateHCZBossSurfaceSplash:
                 bset    #7,$38(a0)
                 moveq   #signextendB(sfx_Splash),d0
                 jsr     (Play_SFX).l
                 clr.w   (Slotted_object_bits).w
                 lea     ChildObjDat_6AD7E(pc),a2
                 jmp     (CreateChild1_Normal).l
-; End of function sub_6AAB6
+; End of function CreateHCZBossSurfaceSplash
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6AAD2:
+SelectHCZBossDiveLaneAndRepeatCount:
                 move.b  $3A(a0),d0
                 addq.b  #2,$3A(a0)
                 andi.w  #$E,d0
@@ -249,7 +249,7 @@ loc_6AAF6:
                 move.w  d1,x_pos(a0)
                 move.b  (a1)+,$39(a0)
                 rts
-; End of function sub_6AAD2
+; End of function SelectHCZBossDiveLaneAndRepeatCount
 
 ; ---------------------------------------------------------------------------
 byte_6AB0A:
@@ -265,12 +265,12 @@ byte_6AB0A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6AB1A:
+UpdateHCZMinibossRocketTwistPose:
                 move.b  $40(a0),d2
                 add.b   d2,$3C(a0)
-                bsr.w   sub_6AB60
+                bsr.w   PositionHCZMinibossRocketTwistX
                 add.b   d2,$3D(a0)
-                bsr.w   sub_6AB94
+                bsr.w   PositionHCZMinibossRocketTwistY
                 moveq   #0,d0
                 move.b  $3D(a0),d0
                 lsr.w   #4,d0
@@ -282,7 +282,7 @@ sub_6AB1A:
 
 locret_6AB4E:
                 rts
-; End of function sub_6AB1A
+; End of function UpdateHCZMinibossRocketTwistPose
 
 ; ---------------------------------------------------------------------------
 byte_6AB50:
@@ -306,19 +306,19 @@ byte_6AB50:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6AB60:
+PositionHCZMinibossRocketTwistX:
                 moveq   #0,d0
                 move.b  $3C(a0),d0
-                bsr.w   sub_6AB76
+                bsr.w   LookupHCZMinibossRocketTwistOffset
                 move.w  x_pos(a2),d0
                 add.w   d1,d0
                 move.w  d0,x_pos(a0)
                 rts
-; End of function sub_6AB60
+; End of function PositionHCZMinibossRocketTwistX
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6AB76:
+LookupHCZMinibossRocketTwistOffset:
                 cmpi.b  #$80,d0
                 blo.s   loc_6AB82
                 moveq   #-1,d1
@@ -331,23 +331,23 @@ loc_6AB82:
                 ext.w   d1
                 movea.w parent3(a0),a2
                 rts
-; End of function sub_6AB76
+; End of function LookupHCZMinibossRocketTwistOffset
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6AB94:
+PositionHCZMinibossRocketTwistY:
                 moveq   #0,d0
                 move.b  $3D(a0),d0
-                bsr.s   sub_6AB76
+                bsr.s   LookupHCZMinibossRocketTwistOffset
                 move.w  y_pos(a2),d0
                 add.w   d1,d0
                 move.w  d0,y_pos(a0)
                 rts
-; End of function sub_6AB94
+; End of function PositionHCZMinibossRocketTwistY
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6ABA8:
+FollowHCZMinibossRocketTipPose:
                 movea.w parent3(a0),a2
                 moveq   #0,d0
                 move.b  $3D(a2),d0
@@ -374,7 +374,7 @@ loc_6ABD6:
                 lsr.w   #1,d0
                 move.b  byte_6AC38(pc,d0.w),mapping_frame(a0)
                 rts
-; End of function sub_6ABA8
+; End of function FollowHCZMinibossRocketTipPose
 
 ; ---------------------------------------------------------------------------
 word_6ABF8:
@@ -424,7 +424,7 @@ byte_6AC38:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6AC48:
+HandleHCZMinibossHitFlashOrDefeat:
                 tst.b   collision_flags(a0)
                 bne.s   locret_6ACA4
                 tst.b   collision_property(a0)
@@ -463,7 +463,7 @@ loc_6ACA6:
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild1_Normal).l
                 jmp     (BossDefeated_StopTimer).l
-; End of function sub_6AC48
+; End of function HandleHCZMinibossHitFlashOrDefeat
 
 ; ---------------------------------------------------------------------------
 word_6ACC6:

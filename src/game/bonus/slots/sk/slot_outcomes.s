@@ -54,7 +54,7 @@ loc_4C41A:
 ; ---------------------------------------------------------------------------
 
 loc_4C462:
-                bsr.w   sub_4C6D6
+                bsr.w   SlotsAdvanceOneReelAndQueueChangedStripArt
                 tst.b   1(a4)
                 beq.s   loc_4C46E
                 rts
@@ -133,7 +133,7 @@ loc_4C4F8:
 ; ---------------------------------------------------------------------------
 
 loc_4C540:
-                bsr.w   sub_4C6D6
+                bsr.w   SlotsAdvanceOneReelAndQueueChangedStripArt
                 tst.b   1(a4)
                 beq.s   loc_4C54C
                 rts
@@ -153,7 +153,7 @@ loc_4C54C:
 ; ---------------------------------------------------------------------------
 
 loc_4C576:
-                bsr.w   sub_4C6D6
+                bsr.w   SlotsAdvanceOneReelAndQueueChangedStripArt
                 cmpi.b  #$C,9(a4)
                 bne.s   loc_4C594
                 cmpi.b  #$C,$D(a4)
@@ -185,7 +185,7 @@ loc_4C5B4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4C5C4:
+SlotsGetSelectedPackedSymbolAndNormalizeSevenToFive:
                 move.w  4(a4),d1
                 move.b  3(a4),d0
                 beq.s   loc_4C5D0
@@ -201,11 +201,11 @@ loc_4C5D0:
 loc_4C5DC:
                 subq.b  #2,d1
                 rts
-; End of function sub_4C5C4
+; End of function SlotsGetSelectedPackedSymbolAndNormalizeSevenToFive
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4C5E0:
+SlotsReplaceSelectedOutcomeNibbleAndMaskSymbolBits:
                 move.w  #$FFF0,d2
                 andi.w  #$F,d1
                 move.b  3(a4),d0
@@ -218,7 +218,7 @@ loc_4C5F2:
                 or.w    d1,4(a4)
                 andi.w  #$777,4(a4)
                 rts
-; End of function sub_4C5E0
+; End of function SlotsReplaceSelectedOutcomeNibbleAndMaskSymbolBits
 
 ; ---------------------------------------------------------------------------
 
@@ -237,7 +237,7 @@ loc_4C610:
 ; ---------------------------------------------------------------------------
 
 loc_4C61A:
-                bsr.s   sub_4C5C4
+                bsr.s   SlotsGetSelectedPackedSymbolAndNormalizeSevenToFive
                 move.w  (a1),d0
                 subi.w  #$A0,d0
                 lsr.w   #8,d0
@@ -255,7 +255,7 @@ loc_4C632:
 ; ---------------------------------------------------------------------------
 
 loc_4C63E:
-                bsr.s   sub_4C5C4
+                bsr.s   SlotsGetSelectedPackedSymbolAndNormalizeSevenToFive
                 move.w  (a1),d0
                 addi.w  #$F0,d0
                 andi.w  #$700,d0
@@ -294,7 +294,7 @@ loc_4C67C:
                 lsr.w   #8,d0
                 andi.w  #7,d0
                 move.b  (a3,d0.w),d1
-                bsr.w   sub_4C5E0
+                bsr.w   SlotsReplaceSelectedOutcomeNibbleAndMaskSymbolBits
                 move.b  #-8,2(a1)
                 addq.b  #4,3(a1)
                 rts
@@ -321,13 +321,13 @@ loc_4C6BC:
                 clr.w   $C(a4)
                 clr.w   $10(a4)
                 clr.b   1(a4)
-                bsr.w   sub_4C7A2
+                bsr.w   SlotsEvaluateTripleWildcardOrSymbolSixPayout
                 move.b  #$18,(a4)
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4C6D6:
+SlotsAdvanceOneReelAndQueueChangedStripArt:
                 moveq   #0,d0
                 move.b  3(a4),d0
                 lea     6(a4),a1
@@ -336,7 +336,7 @@ sub_4C6D6:
                 adda.w  d0,a3
                 adda.w  d0,a3
                 jmp     loc_4C6F0(pc,d0.w)
-; End of function sub_4C6D6
+; End of function SlotsAdvanceOneReelAndQueueChangedStripArt
 
 ; ---------------------------------------------------------------------------
 
@@ -375,7 +375,7 @@ loc_4C71A:
 ; ---------------------------------------------------------------------------
 
 loc_4C734:
-                bsr.w   sub_4C77C
+                bsr.w   SlotsResolveSymbolStripRowArtPointer
                 lea     (Chunk_table+$7C00).l,a1
                 move.w  #$20-1,d1
 
@@ -388,7 +388,7 @@ loc_4C742:
                 bne.s   loc_4C766
                 addi.w  #$100,d3
                 andi.w  #$700,d3
-                bsr.w   sub_4C77C
+                bsr.w   SlotsResolveSymbolStripRowArtPointer
 
 loc_4C766:
                 dbf     d1,loc_4C742
@@ -399,7 +399,7 @@ loc_4C766:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4C77C:
+SlotsResolveSymbolStripRowArtPointer:
                 move.w  d3,d0
                 lsr.w   #8,d0
                 andi.w  #7,d0
@@ -413,11 +413,11 @@ sub_4C77C:
                 lsr.w   #1,d0
                 adda.w  d0,a2
                 rts
-; End of function sub_4C77C
+; End of function SlotsResolveSymbolStripRowArtPointer
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4C7A2:
+SlotsEvaluateTripleWildcardOrSymbolSixPayout:
                 move.b  5(a4),d2
                 move.b  d2,d3
                 andi.w  #$F0,d2
@@ -435,7 +435,7 @@ loc_4C7BC:
 
 loc_4C7C4:
                 jmp     loc_4C7C8(pc,d0.w)
-; End of function sub_4C7A2
+; End of function SlotsEvaluateTripleWildcardOrSymbolSixPayout
 
 ; ---------------------------------------------------------------------------
 
@@ -447,7 +447,7 @@ loc_4C7C8:
                 bra.w   loc_4C7E0
 ; ---------------------------------------------------------------------------
                 move.w  d2,d0
-                bsr.w   sub_4C88E
+                bsr.w   SlotsLookupSignedBasePayoutBySymbol
                 move.w  d0,4(a4)
                 rts
 ; ---------------------------------------------------------------------------
@@ -456,8 +456,8 @@ loc_4C7E0:
                 cmpi.b  #0,d3
                 bne.s   loc_4C7F6
                 move.w  d2,d0
-                bsr.w   sub_4C88E
-                bsr.w   sub_4C89C
+                bsr.w   SlotsLookupSignedBasePayoutBySymbol
+                bsr.w   SlotsMultiplySignedPayoutBy4
                 move.w  d0,4(a4)
                 rts
 ; ---------------------------------------------------------------------------
@@ -466,8 +466,8 @@ loc_4C7F6:
                 cmpi.b  #0,d2
                 bne.w   loc_4C838
                 move.w  d3,d0
-                bsr.w   sub_4C88E
-                bsr.w   sub_4C8A0
+                bsr.w   SlotsLookupSignedBasePayoutBySymbol
+                bsr.w   SlotsMultiplySignedPayoutBy2
                 move.w  d0,4(a4)
                 rts
 ; ---------------------------------------------------------------------------
@@ -476,8 +476,8 @@ loc_4C80E:
                 cmpi.b  #0,d2
                 bne.s   loc_4C822
                 move.w  d3,d0
-                bsr.s   sub_4C88E
-                bsr.w   sub_4C89C
+                bsr.s   SlotsLookupSignedBasePayoutBySymbol
+                bsr.w   SlotsMultiplySignedPayoutBy4
                 move.w  d0,4(a4)
                 rts
 ; ---------------------------------------------------------------------------
@@ -486,8 +486,8 @@ loc_4C822:
                 cmpi.b  #0,d3
                 bne.w   loc_4C838
                 move.w  d2,d0
-                bsr.s   sub_4C88E
-                bsr.w   sub_4C8A0
+                bsr.s   SlotsLookupSignedBasePayoutBySymbol
+                bsr.w   SlotsMultiplySignedPayoutBy2
                 move.w  d0,4(a4)
                 rts
 ; ---------------------------------------------------------------------------
@@ -498,8 +498,8 @@ loc_4C838:
                 cmpi.b  #0,4(a4)
                 bne.s   loc_4C852
                 move.w  d2,d0
-                bsr.s   sub_4C88E
-                bsr.w   sub_4C8A0
+                bsr.s   SlotsLookupSignedBasePayoutBySymbol
+                bsr.w   SlotsMultiplySignedPayoutBy2
                 move.w  d0,4(a4)
                 rts
 ; ---------------------------------------------------------------------------
@@ -509,8 +509,8 @@ loc_4C852:
                 bne.s   loc_4C86C
                 move.b  4(a4),d0
                 andi.w  #$F,d0
-                bsr.s   sub_4C88E
-                bsr.w   sub_4C89C
+                bsr.s   SlotsLookupSignedBasePayoutBySymbol
+                bsr.w   SlotsMultiplySignedPayoutBy4
                 move.w  d0,4(a4)
                 rts
 ; ---------------------------------------------------------------------------
@@ -537,26 +537,26 @@ loc_4C88A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4C88E:
+SlotsLookupSignedBasePayoutBySymbol:
                 add.w   d0,d0
                 lea     (word_4C8A4).l,a2
                 move.w  (a2,d0.w),d0
                 rts
-; End of function sub_4C88E
+; End of function SlotsLookupSignedBasePayoutBySymbol
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4C89C:
+SlotsMultiplySignedPayoutBy4:
                 asl.w   #2,d0
                 rts
-; End of function sub_4C89C
+; End of function SlotsMultiplySignedPayoutBy4
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4C8A0:
+SlotsMultiplySignedPayoutBy2:
                 add.w   d0,d0
                 rts
-; End of function sub_4C8A0
+; End of function SlotsMultiplySignedPayoutBy2
 
 ; ---------------------------------------------------------------------------
 word_4C8A4:
@@ -586,7 +586,7 @@ byte_4C8DC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4C8E4:
+BlueSphereResetSceneVideoQueuesAndRuntimeMemory:
                 clr.w   (Kos_decomp_queue_count).w
                 clearRAM Kos_decomp_stored_registers,(Kos_decomp_module_end-Kos_decomp_stored_registers)
                 jsr     (Clear_Nem_Queue).l
@@ -611,4 +611,4 @@ sub_4C8E4:
                 clr.w   (DMA_queue).w
                 move.l  #DMA_queue,(DMA_queue_slot).w
                 rts
-; End of function sub_4C8E4
+; End of function BlueSphereResetSceneVideoQueuesAndRuntimeMemory

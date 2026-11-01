@@ -104,7 +104,7 @@ loc_56E68:
                 bsr.w   Check_PlayerCollision
                 beq.s   loc_56E78
                 move.l  #loc_56E7C,(a0)
-                bsr.w   sub_56E8C
+                bsr.w   LaunchPlayerFromClamerContactTrigger
 
 loc_56E78:
                 jmp     Child_DrawTouch_Sprite(pc)
@@ -122,7 +122,7 @@ loc_56E84:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56E8C:
+LaunchPlayerFromClamerContactTrigger:
                 move.w  #$800,d0
                 bclr    #Status_Facing,status(a1)
                 btst    #0,render_flags(a0)
@@ -142,7 +142,7 @@ loc_56EA6:
                 moveq   #signextendB(sfx_Spring),d0
                 jsr     (Play_SFX).l
                 rts
-; End of function sub_56E8C
+; End of function LaunchPlayerFromClamerContactTrigger
 
 ; ---------------------------------------------------------------------------
 ObjSlot_Clamer:

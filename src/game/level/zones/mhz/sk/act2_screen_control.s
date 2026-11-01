@@ -131,7 +131,7 @@ loc_54E70:
                 move.w  d0,(Camera_target_max_Y_pos).w
 
 loc_54E7E:
-                bsr.w   sub_55008
+                bsr.w   SwitchMhz2RegionPalettes
                 jmp     DrawTilesAsYouMove(pc)
 ; ---------------------------------------------------------------------------
 
@@ -153,7 +153,7 @@ loc_54E9C:
                 move.w  #$80,d0
                 move.w  d0,(_unkEEA2).w
                 move.w  d0,(_unkEE9C).w
-                jsr     sub_54F8C(pc)
+                jsr     UpdateMhz2ShipScrollCarryAndPropellers(pc)
                 lea     (HScroll_table).w,a1
                 move.w  (a1)+,d0
                 andi.w  #$FFF0,d0
@@ -202,7 +202,7 @@ locret_54F62:
 ; ---------------------------------------------------------------------------
 
 loc_54F64:
-                jsr     sub_54F8C(pc)
+                jsr     UpdateMhz2ShipScrollCarryAndPropellers(pc)
                 lea     MHZ2_BGDrawArray3(pc),a4
                 lea     (HScroll_table).w,a6
                 moveq   #2,d5
@@ -216,7 +216,7 @@ loc_54F64:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54F8C:
+UpdateMhz2ShipScrollCarryAndPropellers:
                 move.w  (Camera_X_pos_copy).w,d0
                 move.w  d0,(HScroll_table+$008).w
                 addi.w  #$1E0,d0
@@ -245,13 +245,13 @@ loc_54FD4:
                 addi.w  #$158,d1
                 lea     (HScroll_table+$00C).w,a1
                 move.w  #$46B8,d2
-                bsr.s   sub_54FEC
+                bsr.s   PositionMhz2ShipPropellerFromScroll
                 move.w  #$45B8,d2
-; End of function sub_54F8C
+; End of function UpdateMhz2ShipScrollCarryAndPropellers
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54FEC:
+PositionMhz2ShipPropellerFromScroll:
                 move.w  (a1)+,d3
                 beq.s   locret_55006
                 movea.w d3,a5
@@ -264,11 +264,11 @@ sub_54FEC:
 
 locret_55006:
                 rts
-; End of function sub_54FEC
+; End of function PositionMhz2ShipPropellerFromScroll
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_55008:
+SwitchMhz2RegionPalettes:
                 lea     word_5513E(pc),a1
                 move.w  (Player_1+x_pos).w,d0
                 move.w  (Player_1+y_pos).w,d1
@@ -295,7 +295,7 @@ loc_5502C:
 
 loc_55038:
                 jmp     loc_5503C(pc,d2.w)
-; End of function sub_55008
+; End of function SwitchMhz2RegionPalettes
 
 ; ---------------------------------------------------------------------------
 

@@ -67,7 +67,7 @@ loc_456C0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_456C6:
+SpawnKnucklesCutsceneMusicTransition:
                 jsr     (AllocateObject).l
                 bne.s   locret_456DA
                 move.l  #Obj_Song_Fade_Transition,(a1)
@@ -75,7 +75,7 @@ sub_456C6:
 
 locret_456DA:
                 rts
-; End of function sub_456C6
+; End of function SpawnKnucklesCutsceneMusicTransition
 
 ; ---------------------------------------------------------------------------
 ObjSlot_CutsceneKnux:

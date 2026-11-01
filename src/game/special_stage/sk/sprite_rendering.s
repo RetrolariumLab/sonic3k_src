@@ -300,7 +300,7 @@ loc_9B56:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_9B62:
+SStage_UpdateClearSequence:
                 move.b  (Special_stage_clear_routine).w,d1
                 beq.w   locret_9D1C
                 subq.b  #1,d1
@@ -456,4 +456,4 @@ loc_9D14:
 
 locret_9D1C:
                 rts
-; End of function sub_9B62
+; End of function SStage_UpdateClearSequence

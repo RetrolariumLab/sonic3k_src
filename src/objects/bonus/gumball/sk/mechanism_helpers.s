@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_60F94:
+GumballSKLaunchFromTriangleAndConsumeBumperCell:
                 move.w  #-$300,d0
                 move.w  #-$600,y_vel(a1)
                 bset    #Status_Facing,status(a1)
@@ -30,7 +30,7 @@ loc_60FB4:
                 moveq   #signextendB(sfx_Spring),d0
                 jsr     (Play_SFX).l
                 rts
-; End of function sub_60F94
+; End of function GumballSKLaunchFromTriangleAndConsumeBumperCell
 
 ; ---------------------------------------------------------------------------
 
@@ -38,7 +38,7 @@ loc_60FFE:
                 lea     ObjDat3_6138C(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #loc_61012,(a0)
-                bsr.w   sub_61362
+                bsr.w   GumballSKSelectAttachedDecorationFrameAndOptionalMaskChild
 
 loc_61012:
                 jsr     (Refresh_ChildPosition).l
@@ -49,7 +49,7 @@ loc_6101E:
                 lea     ObjDat3_613D4(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #loc_61032,(a0)
-                bsr.w   sub_61320
+                bsr.w   GumballSKOffsetDebrisAndSeedSubtypeDelay
 
 loc_61032:
                 subq.b  #1,$2E(a0)
@@ -108,7 +108,7 @@ loc_610C6:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_610E0:
+GumballSKCheckNearbyPlayersAndDispatchItemReward:
                 lea     word_610F0(pc),a1
                 jsr     (Check_PlayerInRange).l
                 tst.l   d0
@@ -132,7 +132,7 @@ loc_61100:
 
 locret_6110C:
                 rts
-; End of function sub_610E0
+; End of function GumballSKCheckNearbyPlayersAndDispatchItemReward
 
 ; ---------------------------------------------------------------------------
 off_6110E:
@@ -176,14 +176,14 @@ loc_6115C:
                 move.l  d0,-(sp)
                 tst.w   d0
                 beq.s   loc_61164
-                bsr.s   sub_61176
+                bsr.s   GumballSKRepelPlayerFromRoundItemWithHighCounterByteJitter
 
 loc_61164:
                 move.l  (sp)+,d0
                 swap    d0
                 tst.w   d0
                 beq.s   loc_6116E
-                bsr.s   sub_61176
+                bsr.s   GumballSKRepelPlayerFromRoundItemWithHighCounterByteJitter
 
 loc_6116E:
                 clr.b   collision_property(a0)
@@ -192,7 +192,7 @@ loc_6116E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_61176:
+GumballSKRepelPlayerFromRoundItemWithHighCounterByteJitter:
                 movea.w d0,a1
                 move.w  x_pos(a0),d1
                 move.w  y_pos(a0),d2
@@ -216,7 +216,7 @@ sub_61176:
                 move.b  #1,anim(a0)
                 moveq   #signextendB(sfx_SmallBumpers),d0
                 jmp     (Play_SFX).l
-; End of function sub_61176
+; End of function GumballSKRepelPlayerFromRoundItemWithHighCounterByteJitter
 
 ; ---------------------------------------------------------------------------
 
@@ -227,7 +227,7 @@ loc_611D6:
                 andi.b  #$8E,status_secondary(a1)
                 bset    #Status_Shield,status_secondary(a1)
                 moveq   #Status_FireShield,d0
-                bsr.w   sub_61254
+                bsr.w   GumballSKSetLiveShieldTypeAndReplaceSavedTypeBits
                 moveq   #signextendB(sfx_FireShield),d0
                 jmp     (Play_Music).l
 ; ---------------------------------------------------------------------------
@@ -239,7 +239,7 @@ loc_61200:
                 andi.b  #$8E,status_secondary(a1)
                 bset    #Status_Shield,status_secondary(a1)
                 moveq   #Status_BublShield,d0
-                bsr.w   sub_61254
+                bsr.w   GumballSKSetLiveShieldTypeAndReplaceSavedTypeBits
                 moveq   #signextendB(sfx_BubbleShield),d0
                 jmp     (Play_Music).l
 ; ---------------------------------------------------------------------------
@@ -251,19 +251,19 @@ loc_6122A:
                 andi.b  #$8E,status_secondary(a1)
                 bset    #Status_Shield,status_secondary(a1)
                 moveq   #Status_LtngShield,d0
-                bsr.w   sub_61254
+                bsr.w   GumballSKSetLiveShieldTypeAndReplaceSavedTypeBits
                 moveq   #signextendB(sfx_LightningShield),d0
                 jmp     (Play_Music).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_61254:
+GumballSKSetLiveShieldTypeAndReplaceSavedTypeBits:
                 bset    d0,status_secondary(a1)
                 lea     (Saved_status_secondary).w,a2
                 andi.b  #$8F,(a2)
                 bset    d0,(a2)
                 rts
-; End of function sub_61254
+; End of function GumballSKSetLiveShieldTypeAndReplaceSavedTypeBits
 
 ; ---------------------------------------------------------------------------
 
@@ -273,7 +273,7 @@ loc_61264:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6126C:
+GumballSKRecomputeDropTargetFromLeadingEmptyBumperPairsAndDescend:
                 bclr    #0,$38(a0)
                 beq.s   loc_61294
                 lea     ((RAM_start+$2000)&$FFFFFF).l,a1
@@ -301,11 +301,11 @@ loc_61294:
 
 locret_612A6:
                 rts
-; End of function sub_6126C
+; End of function GumballSKRecomputeDropTargetFromLeadingEmptyBumperPairsAndDescend
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_612A8:
+GumballSKSelectWeightedDropAndLimitLifeRollPerMachine:
                 jsr     (Random_Number).l
                 andi.w  #$F,d0
                 bne.s   loc_612C2
@@ -325,7 +325,7 @@ loc_612D6:
                 lsl.w   #2,d0
                 move.l  off_612F0(pc,d0.w),$30(a0)
                 rts
-; End of function sub_612A8
+; End of function GumballSKSelectWeightedDropAndLimitLifeRollPerMachine
 
 ; ---------------------------------------------------------------------------
 byte_612E0:
@@ -359,17 +359,17 @@ off_612F0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_61314:
+GumballSKCallPlatformSolidRoutineWithFixedDimensions:
                 moveq   #$4B,d1
                 moveq   #$10,d2
                 moveq   #$11,d3
                 move.w  x_pos(a0),d4
                 jmp     (a1)
-; End of function sub_61314
+; End of function GumballSKCallPlatformSolidRoutineWithFixedDimensions
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_61320:
+GumballSKOffsetDebrisAndSeedSubtypeDelay:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.b  d0,$2E(a0)
@@ -382,7 +382,7 @@ sub_61320:
                 ext.w   d0
                 add.w   d0,y_pos(a0)
                 rts
-; End of function sub_61320
+; End of function GumballSKOffsetDebrisAndSeedSubtypeDelay
 
 ; ---------------------------------------------------------------------------
 byte_61342:
@@ -406,7 +406,7 @@ byte_61342:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_61362:
+GumballSKSelectAttachedDecorationFrameAndOptionalMaskChild:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 subi.w  #6,d0
@@ -417,7 +417,7 @@ sub_61362:
                 bne.w   locret_60EB8
                 lea     ChildObjDat_6144A(pc),a2
                 jmp     (CreateChild6_Simple).l
-; End of function sub_61362
+; End of function GumballSKSelectAttachedDecorationFrameAndOptionalMaskChild
 
 ; ---------------------------------------------------------------------------
 RawAni_61388:

@@ -54,7 +54,7 @@ loc_61DBE:
                 move.b  #8,mapping_frame(a0)
                 move.w  #$1400,x_pos(a0)
                 move.w  #$440,y_pos(a0)
-                bsr.w   sub_65DD6
+                bsr.w   CutsceneSpawnKnucklesMusicFadeTransition
                 lea     ChildObjDat_6659A(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
@@ -217,7 +217,7 @@ loc_61FC2:
                 move.w  #$4B8E,x_pos(a0)
                 move.w  #$17D,y_pos(a0)
                 bset    #0,render_flags(a0)
-                bsr.w   sub_65DD6
+                bsr.w   CutsceneSpawnKnucklesMusicFadeTransition
                 move.w  #(2*60)-1,$2E(a0)
                 move.l  #loc_6201A,$34(a0)
                 lea     Pal_CutsceneKnux(pc),a1

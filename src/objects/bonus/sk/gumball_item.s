@@ -26,7 +26,7 @@ loc_4A2F4:
 loc_4A312:
                 tst.b   collision_property(a0)
                 beq.s   loc_4A31A
-                bsr.s   sub_4A362
+                bsr.s   PachinkoGumballConsumeBothQueuedPlayerContacts
 
 loc_4A31A:
                 move.w  y_pos(a0),d0
@@ -51,7 +51,7 @@ loc_4A346:
 loc_4A34C:
                 tst.b   collision_property(a0)
                 beq.s   loc_4A354
-                bsr.s   sub_4A362
+                bsr.s   PachinkoGumballConsumeBothQueuedPlayerContacts
 
 loc_4A354:
                 jsr     (MoveSprite2).l
@@ -60,26 +60,26 @@ loc_4A354:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4A362:
+PachinkoGumballConsumeBothQueuedPlayerContacts:
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
                 beq.s   loc_4A370
-                bsr.s   sub_4A384
+                bsr.s   PachinkoGumballScheduleDeleteAndApplySubtypeReward
 
 loc_4A370:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
                 beq.s   loc_4A37E
-                bsr.s   sub_4A384
+                bsr.s   PachinkoGumballScheduleDeleteAndApplySubtypeReward
 
 loc_4A37E:
                 clr.b   collision_property(a0)
                 rts
-; End of function sub_4A362
+; End of function PachinkoGumballConsumeBothQueuedPlayerContacts
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4A384:
+PachinkoGumballScheduleDeleteAndApplySubtypeReward:
                 move.l  #Delete_Current_Sprite,(a0)
                 moveq   #0,d1
                 moveq   #1,d2
@@ -108,7 +108,7 @@ loc_4A3B6:
                 move.b  (a1,d0.w),d0
                 add.w   d0,(Saved_ring_count).w
                 jmp     (AddRings).l
-; End of function sub_4A384
+; End of function PachinkoGumballScheduleDeleteAndApplySubtypeReward
 
 ; ---------------------------------------------------------------------------
 Map_PachinkoFItem:

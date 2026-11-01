@@ -20,7 +20,7 @@ loc_85994:
                 adda.w  d0,a4                           ; skip to palette data
                 move.w  (a4),d1                         ; load the first entry to d1
                 bpl.s   loc_859B0                       ; if positive, it is a normal entry
-                bsr.w   sub_859CE                       ; this is a command
+                bsr.w   PalRotation_DispatchControlCommand                       ; this is a command
 
 loc_859B0:
                 moveq   #0,d2
@@ -43,7 +43,7 @@ loc_859CA:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_859CE:
+PalRotation_DispatchControlCommand:
                 move.b  3(a2),d2                        ; load additional parameter to d2
                 beq.s   loc_859FC
                 neg.w   d1
@@ -71,7 +71,7 @@ loc_859FC:
 
 locret_85A00:
                 rts
-; End of function sub_859CE
+; End of function PalRotation_DispatchControlCommand
 
 ; ---------------------------------------------------------------------------
 

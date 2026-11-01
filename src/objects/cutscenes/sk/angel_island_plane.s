@@ -9,7 +9,7 @@ Obj_AIZPlaneIntro:
                 move.w  AIZPlaneIntro_Index(pc,d0.w),d1
                 jsr     AIZPlaneIntro_Index(pc,d1.w)
                 jsr     (Sonic_Load_PLC).l
-                bsr.w   sub_67A08
+                bsr.w   AdvanceAizPlaneIntroScrollOrPlayer
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 AIZPlaneIntro_Index:
@@ -141,7 +141,7 @@ loc_67614:
 ; ---------------------------------------------------------------------------
 
 loc_67624:
-                bsr.w   sub_679B8
+                bsr.w   AnimateAizPlaneIntroSuperAppearance
                 jsr     (Obj_Wait).l
                 move.w  x_pos(a0),d0
                 addq.w  #4,d0
@@ -158,7 +158,7 @@ loc_67640:
 ; ---------------------------------------------------------------------------
 
 loc_6764E:
-                bsr.w   sub_679B8
+                bsr.w   AnimateAizPlaneIntroSuperAppearance
                 jsr     (Obj_Wait).l
                 subq.w  #1,$3A(a0)
                 bpl.w   locret_67512
@@ -169,7 +169,7 @@ loc_6764E:
 ; ---------------------------------------------------------------------------
 
 loc_67674:
-                bsr.w   sub_679B8
+                bsr.w   AnimateAizPlaneIntroSuperAppearance
                 jsr     (Obj_Wait).l
                 move.w  x_pos(a0),d0
                 subi.w  #4,d0
@@ -188,7 +188,7 @@ loc_67692:
 ; ---------------------------------------------------------------------------
 
 loc_676AC:
-                bsr.w   sub_679B8
+                bsr.w   AnimateAizPlaneIntroSuperAppearance
                 jsr     (Obj_Wait).l
                 subq.w  #1,$3A(a0)
                 bpl.w   locret_67512
@@ -197,7 +197,7 @@ loc_676AC:
 ; ---------------------------------------------------------------------------
 
 loc_676C6:
-                bsr.w   sub_679B8
+                bsr.w   AnimateAizPlaneIntroSuperAppearance
                 cmpi.w  #$918,(Player_1+x_pos).w
                 bhs.s   loc_676D8
                 jmp     (Obj_Wait).l
@@ -210,7 +210,7 @@ loc_676D8:
 ; ---------------------------------------------------------------------------
 
 loc_676E8:
-                bsr.w   sub_679B8
+                bsr.w   AnimateAizPlaneIntroSuperAppearance
                 cmpi.w  #$1240,(Player_1+x_pos).w
                 bhs.s   loc_676F6
                 rts
@@ -223,7 +223,7 @@ loc_676F6:
 ; ---------------------------------------------------------------------------
 
 loc_67704:
-                bsr.w   sub_679B8
+                bsr.w   AnimateAizPlaneIntroSuperAppearance
                 cmpi.w  #$13D0,(Player_1+x_pos).w
                 bhs.s   loc_67712
                 rts
@@ -427,7 +427,7 @@ loc_67996:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_679B8:
+AnimateAizPlaneIntroSuperAppearance:
                 move.b  #1,(Super_Sonic_Knux_flag).w
                 move.b  #$21,mapping_frame(a0)
                 btst    #1,(V_int_run_count+3).w
@@ -453,11 +453,11 @@ loc_679FA:
 
 locret_67A06:
                 rts
-; End of function sub_679B8
+; End of function AnimateAizPlaneIntroSuperAppearance
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_67A08:
+AdvanceAizPlaneIntroScrollOrPlayer:
                 move.w  $40(a0),d1
                 move.w  (Events_fg_1).w,d0
                 bpl.s   loc_67A1A
@@ -469,7 +469,7 @@ sub_67A08:
 loc_67A1A:
                 add.w   d1,(Player_1+x_pos).w
                 rts
-; End of function sub_67A08
+; End of function AdvanceAizPlaneIntroScrollOrPlayer
 
 ; ---------------------------------------------------------------------------
 

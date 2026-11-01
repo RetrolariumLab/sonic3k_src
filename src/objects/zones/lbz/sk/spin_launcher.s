@@ -29,10 +29,10 @@ loc_28E02:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 movem.l d1-d4,-(sp)
-                jsr     (sub_1DD24).l
+                jsr     (CollidePlayerWithHeightProfileSolid).l
                 cmpi.w  #-2,d4
                 bne.s   loc_28E1A
-                bsr.s   sub_28E76
+                bsr.s   BouncePlayerFromLbzSpinLauncherUnderside
 
 loc_28E1A:
                 movem.l (sp)+,d1-d4
@@ -48,10 +48,10 @@ loc_28E1E:
 loc_28E28:
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
-                jsr     (sub_1DD24).l
+                jsr     (CollidePlayerWithHeightProfileSolid).l
                 cmpi.w  #-2,d4
                 bne.s   loc_28E3C
-                bsr.s   sub_28E76
+                bsr.s   BouncePlayerFromLbzSpinLauncherUnderside
 
 loc_28E3C:
                 move.b  status(a0),d6
@@ -63,7 +63,7 @@ loc_28E3C:
                 lea     $2E(a0),a4
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
-                bsr.w   sub_28F40
+                bsr.w   EjectStandingPlayerFromLbzSpinLauncher
 
 loc_28E5C:
                 andi.b  #p2_standing,d6
@@ -71,14 +71,14 @@ loc_28E5C:
                 lea     $2F(a0),a4
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
-                bsr.w   sub_28F40
+                bsr.w   EjectStandingPlayerFromLbzSpinLauncher
 
 loc_28E70:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_28E76:
+BouncePlayerFromLbzSpinLauncherUnderside:
                 btst    #0,status(a0)
                 bne.s   loc_28EDE
                 move.w  x_pos(a1),d0
@@ -127,11 +127,11 @@ loc_28EDE:
                 move.b  #2,anim(a1)
                 move.b  #$10,(a4)
                 rts
-; End of function sub_28E76
+; End of function BouncePlayerFromLbzSpinLauncherUnderside
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_28F40:
+EjectStandingPlayerFromLbzSpinLauncher:
                 btst    #0,status(a0)
                 bne.s   loc_28F9C
                 move.w  x_pos(a1),d0
@@ -174,7 +174,7 @@ loc_28F9C:
                 bclr    d6,status(a0)
                 move.b  #$20,(a4)
                 rts
-; End of function sub_28F40
+; End of function EjectStandingPlayerFromLbzSpinLauncher
 
 ; ---------------------------------------------------------------------------
 byte_28FF4:

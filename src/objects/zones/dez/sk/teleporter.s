@@ -6,20 +6,20 @@
 Obj_DEZTeleporter:
                 lea     (Player_1).w,a1
                 lea     $30(a0),a4
-                bsr.s   sub_48C30
+                bsr.s   UpdatePlayerInDezTeleporter
                 lea     (Player_2).w,a1
                 lea     $3A(a0),a4
-                bsr.s   sub_48C30
+                bsr.s   UpdatePlayerInDezTeleporter
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_48C30:
+UpdatePlayerInDezTeleporter:
                 moveq   #0,d0
                 move.b  (a4),d0
                 move.w  off_48C3C(pc,d0.w),d0
                 jmp     off_48C3C(pc,d0.w)
-; End of function sub_48C30
+; End of function UpdatePlayerInDezTeleporter
 
 ; ---------------------------------------------------------------------------
 off_48C3C:

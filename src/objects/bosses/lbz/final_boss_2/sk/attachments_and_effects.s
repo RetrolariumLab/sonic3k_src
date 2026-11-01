@@ -178,7 +178,7 @@ loc_74BC0:
 
 loc_74BD0:
                 move.b  #$9A,d0
-                bsr.w   sub_74EBC
+                bsr.w   LatchLBZFinalBoss2ChildTilePriorityAndCollision
                 jsr     (Refresh_ChildPositionAdjusted).l
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)

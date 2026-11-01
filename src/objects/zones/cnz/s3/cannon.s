@@ -20,12 +20,12 @@ Obj_CNZCannon:
                 move.l  #loc_307B2,(a0)
 
 loc_307B2:
-                bsr.s   sub_307EC
+                bsr.s   UpdateCnzCannonAimAndMuzzleEffects
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 move.w  (Ctrl_1_logical).w,d1
-                bsr.w   sub_308B4
+                bsr.w   UpdatePlayerInCnzCannon
                 addq.w  #1,a2
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
@@ -35,13 +35,13 @@ loc_307B2:
                 move.b  #0,(a2)
 
 loc_307DE:
-                bsr.w   sub_308B4
-                bsr.w   sub_309D8
+                bsr.w   UpdatePlayerInCnzCannon
+                bsr.w   QueueCnzCannonBarrelPatterns
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_307EC:
+UpdateCnzCannonAimAndMuzzleEffects:
                 move.w  $34(a0),d0
                 bne.s   loc_30804
                 move.w  #$10,d1
@@ -112,11 +112,11 @@ loc_3088E:
 
 locret_308B2:
                 rts
-; End of function sub_307EC
+; End of function UpdateCnzCannonAimAndMuzzleEffects
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_308B4:
+UpdatePlayerInCnzCannon:
                 move.b  (a2),d0
                 bne.s   loc_3090C
                 bclr    d6,status(a0)
@@ -209,11 +209,11 @@ loc_309C6:
 
 locret_309D6:
                 rts
-; End of function sub_308B4
+; End of function UpdatePlayerInCnzCannon
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_309D8:
+QueueCnzCannonBarrelPatterns:
                 tst.b   render_flags(a0)
                 bpl.s   locret_30A30
                 moveq   #0,d0
@@ -247,7 +247,7 @@ loc_30A04:
 
 locret_30A30:
                 rts
-; End of function sub_309D8
+; End of function QueueCnzCannonBarrelPatterns
 
 ; ---------------------------------------------------------------------------
 Map_CNZCannon:

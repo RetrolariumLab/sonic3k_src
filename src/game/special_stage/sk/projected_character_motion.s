@@ -75,7 +75,7 @@ word_94FC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_950C:
+SStage_UpdateProjectionRotationCoefficients:
                 move.w  (SStage_scalar_index_2).w,d0
                 lea     (SStage_scalar_result_2).w,a1
                 bsr.w   GetScalars2
@@ -89,20 +89,20 @@ sub_950C:
                 lea     (SStage_scalar_result_3).w,a1
                 bsr.w   GetScalars2
                 rts
-; End of function sub_950C
+; End of function SStage_UpdateProjectionRotationCoefficients
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_953E:
+SStage_ProjectCharacterCoordinates:
                 move.w  $34(a0),d1
                 move.w  $36(a0),d2
                 move.w  $38(a0),d0
-                bsr.w   sub_A1DC
-                bsr.w   sub_A1B2
-                bsr.w   sub_A188
+                bsr.w   SStage_RotateDepthHeight
+                bsr.w   SStage_RotateDepthHorizontal
+                bsr.w   SStage_RotateHorizontalVertical
                 addi.w  #$100,d0
                 addi.w  #$980,d2
-                bsr.w   sub_A206
+                bsr.w   SStage_ApplyProjectionViewTilt
                 ext.l   d1
                 lsl.l   #8,d1
                 divs.w  d0,d1
@@ -114,11 +114,11 @@ sub_953E:
                 add.w   $32(a0),d2
                 move.w  d2,y_pos(a0)
                 rts
-; End of function sub_953E
+; End of function SStage_ProjectCharacterCoordinates
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_9580:
+SStage_UpdatePlayerGridMotion:
                 tst.b   (Special_stage_fade_timer).w
                 beq.s   loc_95AE
                 cmpi.b  #$61,(Special_stage_fade_timer).w
@@ -282,15 +282,15 @@ loc_9704:
                 bmi.s   locret_972C
                 tst.b   (Special_stage_clear_routine).w
                 bne.s   locret_972C
-                bsr.s   sub_972E
+                bsr.s   SStage_HandlePlayerGridCell
 
 locret_972C:
                 rts
-; End of function sub_9580
+; End of function SStage_UpdatePlayerGridMotion
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_972E:
+SStage_HandlePlayerGridCell:
                 lea     (SStage_layout_buffer+$100).w,a1
                 move.w  (Special_stage_X_pos).w,d0
                 addi.w  #$80,d0
@@ -428,4 +428,4 @@ loc_98A6:
 
 locret_98AE:
                 rts
-; End of function sub_972E
+; End of function SStage_HandlePlayerGridCell

@@ -14,7 +14,7 @@ Obj_SStage_8148:
                 move.w  #-$800,$36(a0)
                 move.w  #-$20,$38(a0)
                 move.b  #$FF,$3A(a0)
-                bsr.w   sub_82CE
+                bsr.w   SStage_ClearTailsInputHistory
                 jsr     (AllocateObjectAfterCurrent_SpecialStage).l
                 bne.w   loc_81AA
                 move.l  #Obj_SStage_82EE,(a1)
@@ -54,7 +54,7 @@ loc_81D6:
 
 loc_81FA:
                 move.b  (a1,d0.w),mapping_frame(a0)
-                bsr.w   sub_8272
+                bsr.w   SStage_GetTailsJumpInput
                 andi.w  #button_A_mask|button_B_mask|button_C_mask,d0
                 beq.s   loc_8226
                 tst.b   (Special_stage_jumping_P2).w
@@ -81,7 +81,7 @@ loc_823A:
                 swap    d0
                 addi.w  #-$800,d0
                 move.w  d0,$36(a0)
-                bsr.w   sub_8434
+                bsr.w   SStage_ProjectCharacterCoordinates
                 jsr     (Draw_Sprite).l
                 lea     (PLC_SStageTails).l,a2
                 move.l  #ArtUnc_SStageTails,d6
@@ -90,7 +90,7 @@ loc_823A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8272:
+SStage_GetTailsJumpInput:
                 move.w  (Pos_table_index).w,d0
                 lea     (Pos_table).w,a1
                 lea     (a1,d0.w),a1
@@ -125,11 +125,11 @@ loc_82AC:
 
 locret_82CC:
                 rts
-; End of function sub_8272
+; End of function SStage_GetTailsJumpInput
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_82CE:
+SStage_ClearTailsInputHistory:
                 lea     (Pos_table).w,a2
                 move.w  #bytesToLcnt(Pos_table_end-Pos_table),d0
 
@@ -139,4 +139,4 @@ loc_82D6:
                 move.w  #0,(Pos_table_index).w
                 move.w  #0,(Tails_CPU_idle_timer).w
                 rts
-; End of function sub_82CE
+; End of function SStage_ClearTailsInputHistory

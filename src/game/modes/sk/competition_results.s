@@ -16,11 +16,11 @@ Competition_Results:
                 move.w  #$8B00,(a6)
                 move.w  #$8C89,(a6)
                 move.w  #$9011,(a6)
-                jsr     sub_C02A(pc)
+                jsr     Menu_FillPlaneAWithPriorityBlankTiles(pc)
                 move.w  #VRAM_Plane_A_Name_Table+$1AA,d0
-                jsr     sub_C04C(pc)
+                jsr     Menu_ClearNineByEightTileArea(pc)
                 move.w  #VRAM_Plane_A_Name_Table+$82A,d0
-                jsr     sub_C04C(pc)
+                jsr     Menu_ClearNineByEightTileArea(pc)
                 clearRAM Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
                 clearRAM Object_RAM,(Kos_decomp_buffer-Object_RAM)
                 clr.w   (DMA_queue).w
@@ -39,7 +39,7 @@ Competition_Results:
                 jsr     (Eni_Decomp).l
                 lea     VRAMDatList_BBAC(pc),a0
                 jsr     Copy_Listed_Data_To_VRAM(pc)
-                jsr     sub_BA04(pc)
+                jsr     SKCompBuildFiveRaceResultsTotalsWinsAndBlinkMap(pc)
                 lea     (ArtKos_S3MenuBG).l,a0          ; Decompress source
                 lea     (RAM_start).l,a1                ; Decompress destination/Transfer source
                 movea.w #tiles_to_bytes(ArtTile_S3MenuBG),a2  ; Transfer destination
@@ -117,13 +117,13 @@ loc_B922:
                 btst    #3,(Level_frame_counter+1).w
                 bne.s   loc_B94A
                 lea     (Plane_buffer+$20).w,a1
-                jsr     sub_B0A6(pc)
+                jsr     CompetitionMenuUploadEightByTwoTileBlock(pc)
                 bra.s   loc_B952
 ; ---------------------------------------------------------------------------
 
 loc_B94A:
                 move.l  (_unkEE98).w,d6
-                jsr     sub_B066(pc)
+                jsr     SKCompFormatAndUploadMinuteSecondHundredthTime(pc)
 
 loc_B952:
                 tst.w   (Events_bg+$16).w
@@ -210,19 +210,19 @@ loc_B9EC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_BA04:
+SKCompBuildFiveRaceResultsTotalsWinsAndBlinkMap:
                 lea     ((RAM_start+$7800)&$FFFFFF).l,a0
                 move.w  #$C15A,d7
-                jsr     sub_BAEE(pc)
+                jsr     SKCompDrawFiveSequentialTimeRows(pc)
                 move.w  #$C7DA,d7
-                jsr     sub_BAEE(pc)
+                jsr     SKCompDrawFiveSequentialTimeRows(pc)
                 lea     ((RAM_start+$7800)&$FFFFFF).l,a0
-                jsr     sub_BB04(pc)
+                jsr     SKCompSumFiveBinaryMinuteSecondHundredthTimes(pc)
                 move.w  #$C65A,d7
                 move.l  d6,(_unkEE98).w
                 move.w  d7,(_unkEEA0).w
-                jsr     sub_B066(pc)
-                jsr     sub_BB04(pc)
+                jsr     SKCompFormatAndUploadMinuteSecondHundredthTime(pc)
+                jsr     SKCompSumFiveBinaryMinuteSecondHundredthTimes(pc)
                 move.w  #$CCDA,d7
                 cmp.l   (_unkEE98).w,d6
                 bhi.s   loc_BA52
@@ -236,7 +236,7 @@ loc_BA4A:
                 move.w  d7,(_unkEEA0).w
 
 loc_BA52:
-                jsr     sub_B066(pc)
+                jsr     SKCompFormatAndUploadMinuteSecondHundredthTime(pc)
                 clr.w   (_unkEEA2).w
                 lea     ((RAM_start+$7800)&$FFFFFF).l,a0
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table+$148,VRAM,WRITE),d5
@@ -277,7 +277,7 @@ loc_BA9A:
                 move.w  (_unkEEA0).w,d7
                 beq.s   locret_BAEC
                 move.l  (_unkEE98).w,d6
-                jsr     sub_B066(pc)
+                jsr     SKCompFormatAndUploadMinuteSecondHundredthTime(pc)
                 lea     (Plane_buffer).w,a0
                 lea     $20(a0),a1
                 moveq   #$10-1,d0
@@ -291,26 +291,26 @@ loc_BADC:
 
 locret_BAEC:
                 rts
-; End of function sub_BA04
+; End of function SKCompBuildFiveRaceResultsTotalsWinsAndBlinkMap
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_BAEE:
+SKCompDrawFiveSequentialTimeRows:
                 moveq   #5-1,d0
 
 loc_BAF0:
                 move.w  d0,-(sp)
                 move.l  (a0)+,d6
-                jsr     sub_B066(pc)
+                jsr     SKCompFormatAndUploadMinuteSecondHundredthTime(pc)
                 addi.w  #$100,d7
                 move.w  (sp)+,d0
                 dbf     d0,loc_BAF0
                 rts
-; End of function sub_BAEE
+; End of function SKCompDrawFiveSequentialTimeRows
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_BB04:
+SKCompSumFiveBinaryMinuteSecondHundredthTimes:
                 clr.l   (_unkEF40_1).w
                 moveq   #5-1,d7
 
@@ -342,7 +342,7 @@ loc_BB40:
                 dbf     d7,loc_BB0A
                 move.l  (_unkEF40_1).w,d6
                 rts
-; End of function sub_BB04
+; End of function SKCompSumFiveBinaryMinuteSecondHundredthTimes
 
 ; ---------------------------------------------------------------------------
 ObjDat_BB4A:

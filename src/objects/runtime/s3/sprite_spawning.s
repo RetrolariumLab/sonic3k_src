@@ -56,7 +56,7 @@ loc_19D44:
 loc_19D5C:
                 cmp.w   (a0),d6
                 bls.s   loc_19D66
-                jsr     sub_19FDC(pc)
+                jsr     CreateObjectFromLayoutRecord(pc)
                 beq.s   loc_19D5C
 
 loc_19D66:
@@ -336,14 +336,14 @@ loc_19FCA:
 ; ---------------------------------------------------------------------------
 ; unused
                 bset    #7,(a3)
-                beq.s   sub_19FDC
+                beq.s   CreateObjectFromLayoutRecord
                 addq.w  #6,a0
                 moveq   #0,d1
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_19FDC:
+CreateObjectFromLayoutRecord:
                 move.w  (a0)+,x_pos(a1)
                 move.w  (a0)+,d1
                 move.w  d1,d2
@@ -459,7 +459,7 @@ loc_1A0B6:
 
 locret_1A0C0:
                 rts
-; End of function sub_19FDC
+; End of function CreateObjectFromLayoutRecord
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -99,7 +99,7 @@ loc_1AF08:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1AF14:
+RenderLRZForegroundRockPieces:
                 movea.l (LRZ_rocks_addr_front).w,a0
                 move.l  (LRZ_rocks_addr_back).w,d2
                 sub.l   a0,d2
@@ -139,7 +139,7 @@ loc_1AF62:
 
 locret_1AF68:
                 rts
-; End of function sub_1AF14
+; End of function RenderLRZForegroundRockPieces
 
 ; ---------------------------------------------------------------------------
 LRZ_Rock_SpriteData:

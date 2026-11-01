@@ -74,9 +74,9 @@ loc_1CD8A:
                 move.w  x_pos(a0),d1
                 lea     $34(a0),a2
                 lea     (Player_1).w,a1
-                bsr.s   sub_1CDDA
+                bsr.s   SwitchPlayerPathOnXCrossing
                 lea     (Player_2).w,a1
-                bsr.s   sub_1CDDA
+                bsr.s   SwitchPlayerPathOnXCrossing
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
@@ -88,18 +88,18 @@ loc_1CDB2:
                 move.w  x_pos(a0),d1
                 lea     $34(a0),a2
                 lea     (Player_1).w,a1
-                bsr.s   sub_1CDDA
+                bsr.s   SwitchPlayerPathOnXCrossing
                 lea     (Player_2).w,a1
-                bsr.s   sub_1CDDA
+                bsr.s   SwitchPlayerPathOnXCrossing
                 lea     (Breathing_bubbles).w,a1
                 tst.w   (Debug_mode_flag).w
-                beq.w   sub_1CDDA
-                bsr.s   sub_1CDDA
+                beq.w   SwitchPlayerPathOnXCrossing
+                bsr.s   SwitchPlayerPathOnXCrossing
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1CDDA:
+SwitchPlayerPathOnXCrossing:
                 tst.b   (a2)+
                 bne.w   loc_1CE6C
                 cmp.w   x_pos(a1),d1
@@ -191,7 +191,7 @@ loc_1CEDE:
 
 locret_1CEF0:
                 rts
-; End of function sub_1CDDA
+; End of function SwitchPlayerPathOnXCrossing
 
 ; ---------------------------------------------------------------------------
 
@@ -201,9 +201,9 @@ loc_1CEF2:
                 move.w  y_pos(a0),d1
                 lea     $34(a0),a2
                 lea     (Player_1).w,a1
-                bsr.s   sub_1CF42
+                bsr.s   SwitchPlayerPathOnYCrossing
                 lea     (Player_2).w,a1
-                bsr.s   sub_1CF42
+                bsr.s   SwitchPlayerPathOnYCrossing
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
@@ -215,18 +215,18 @@ loc_1CF1A:
                 move.w  y_pos(a0),d1
                 lea     $34(a0),a2
                 lea     (Player_1).w,a1
-                bsr.s   sub_1CF42
+                bsr.s   SwitchPlayerPathOnYCrossing
                 lea     (Player_2).w,a1
-                bsr.s   sub_1CF42
+                bsr.s   SwitchPlayerPathOnYCrossing
                 lea     (Breathing_bubbles).w,a1
                 tst.w   (Debug_mode_flag).w
-                beq.w   sub_1CF42
-                bsr.s   sub_1CF42
+                beq.w   SwitchPlayerPathOnYCrossing
+                bsr.s   SwitchPlayerPathOnYCrossing
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1CF42:
+SwitchPlayerPathOnYCrossing:
                 tst.b   (a2)+
                 bne.w   loc_1CFD4
                 cmp.w   y_pos(a1),d1
@@ -318,7 +318,7 @@ loc_1D046:
 
 locret_1D058:
                 rts
-; End of function sub_1CF42
+; End of function SwitchPlayerPathOnYCrossing
 
 ; ---------------------------------------------------------------------------
 Map_PathSwap:

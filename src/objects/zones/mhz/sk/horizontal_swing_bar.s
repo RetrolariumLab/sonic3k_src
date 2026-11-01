@@ -17,17 +17,17 @@ loc_3ED46:
                 lea     $3A(a0),a3
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d1
-                bsr.s   sub_3ED6E
+                bsr.s   UpdatePlayerOnMhzHorizontalSwingBar
                 addq.w  #1,a2
                 lea     $3C(a0),a3
                 lea     (Player_2).w,a1
                 move.w  (Ctrl_2_logical).w,d1
-                bsr.s   sub_3ED6E
+                bsr.s   UpdatePlayerOnMhzHorizontalSwingBar
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3ED6E:
+UpdatePlayerOnMhzHorizontalSwingBar:
                 tst.b   (a2)
                 beq.w   loc_3EECE
                 tst.w   (Debug_placement_mode).w
@@ -68,7 +68,7 @@ loc_3EDE6:
                 beq.w   loc_3EE7A
                 cmpi.b  #5,4(a2)
                 beq.w   loc_3EEC2
-                bsr.w   sub_3EFBA
+                bsr.w   UpdateMhzHorizontalBarPlayerPose
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 move.l  a2,-(sp)
@@ -198,11 +198,11 @@ loc_3EF9C:
 
 locret_3EFB8:
                 rts
-; End of function sub_3ED6E
+; End of function UpdatePlayerOnMhzHorizontalSwingBar
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3EFBA:
+UpdateMhzHorizontalBarPlayerPose:
                 cmpi.w  #-$400,(a3)
                 ble.s   loc_3EFE6
                 cmpi.w  #$400,(a3)
@@ -248,7 +248,7 @@ loc_3EFF2:
                 add.w   y_pos(a0),d1
                 move.w  d1,y_pos(a1)
                 rts
-; End of function sub_3EFBA
+; End of function UpdateMhzHorizontalBarPlayerPose
 
 ; ---------------------------------------------------------------------------
 RawAni_3F01A:

@@ -771,9 +771,15 @@
       "commits": ["6d0135ff3ff1256ef1e5372e29e252ca7f027dfc"]
     },
     {
-      "id": "current-source-stage",
+      "id": "change-33196ab81daf",
       "kind": "source_or_tooling",
       "summary": "Continue preservation source and checks with private audio storage.",
+      "commits": ["33196ab81daf915fbf5639edffee06bc6721b112"]
+    },
+    {
+      "id": "current-semantic-label-migration",
+      "kind": "source_or_tooling",
+      "summary": "Rename all 1571 address-named procedures and their scoped references from the reviewed semantic catalog; validate the complete registry and mapped historical addresses and boundaries.",
       "commits": ["release-commit"]
     }
   ],

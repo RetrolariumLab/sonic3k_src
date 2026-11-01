@@ -53,10 +53,10 @@ loc_3BB34:
                 beq.s   loc_3BB6E
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_3BB86
+                bsr.s   ReleasePlayerFromFbzDisappearingPlatform
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
-                bsr.s   sub_3BB86
+                bsr.s   ReleasePlayerFromFbzDisappearingPlatform
                 tst.b   routine(a0)
                 beq.s   loc_3BB80
                 clr.b   routine(a0)
@@ -76,7 +76,7 @@ loc_3BB80:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3BB86:
+ReleasePlayerFromFbzDisappearingPlatform:
                 bclr    d6,status(a0)
                 beq.s   locret_3BB98
                 bclr    #Status_OnObj,status(a1)
@@ -84,7 +84,7 @@ sub_3BB86:
 
 locret_3BB98:
                 rts
-; End of function sub_3BB86
+; End of function ReleasePlayerFromFbzDisappearingPlatform
 
 ; ---------------------------------------------------------------------------
 Ani_FBZDisappearingPlatform:

@@ -73,7 +73,7 @@ loc_384AC:
 loc_384B2:
                 move.w  (Player_1+x_pos).w,x_pos(a0)
                 move.w  (Water_level).w,y_pos(a0)
-                bsr.s   sub_38534
+                bsr.s   UpdateHczWaterSkimmingPlayers
                 tst.b   status(a0)
                 beq.s   loc_384F8
                 move.b  (Level_frame_counter+1).w,d0
@@ -117,12 +117,12 @@ loc_3852E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_38534:
+UpdateHczWaterSkimmingPlayers:
                 lea     (Player_1).w,a1
                 lea     sub2_x_pos(a0),a2
                 moveq   #p1_standing_bit,d6
                 move.w  (Ctrl_1_logical).w,d5
-                bsr.s   sub_3857E
+                bsr.s   UpdatePlayerSkimmingHczWater
                 bclr    #0,render_flags(a0)
                 btst    #Status_Facing,status(a1)
                 beq.s   loc_38558
@@ -133,7 +133,7 @@ loc_38558:
                 lea     sub3_x_pos(a0),a2
                 moveq   #p2_standing_bit,d6
                 move.w  (Ctrl_2_logical).w,d5
-                bsr.s   sub_3857E
+                bsr.s   UpdatePlayerSkimmingHczWater
                 move.b  render_flags(a0),d0
                 add.b   status(a1),d0
                 andi.b  #1,d0
@@ -142,11 +142,11 @@ loc_38558:
 
 locret_3857C:
                 rts
-; End of function sub_38534
+; End of function UpdateHczWaterSkimmingPlayers
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3857E:
+UpdatePlayerSkimmingHczWater:
                 btst    d6,status(a0)
                 bne.s   loc_385D2
                 tst.w   y_vel(a1)
@@ -245,4 +245,4 @@ loc_38652:
                 move.b  #2,anim(a1)
                 bset    #Status_Roll,status(a1)
                 rts
-; End of function sub_3857E
+; End of function UpdatePlayerSkimmingHczWater

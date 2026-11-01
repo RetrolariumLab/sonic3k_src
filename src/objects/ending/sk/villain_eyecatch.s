@@ -18,7 +18,7 @@ loc_5F566:
 loc_5F59A:
                 move.l  (a1)+,(a2)+
                 dbf     d6,loc_5F59A
-                bsr.w   sub_5FDA4
+                bsr.w   EndingSpawnLineTwoPaletteFadeAndStoreHandle
                 lea     (ArtKosM_RobotnikSmug).l,a1
                 move.w  #tiles_to_bytes(ArtTile_Ending_EyecatchEggman),d2
                 jmp     (Queue_Kos_Module).l
@@ -58,7 +58,7 @@ loc_5F5DE:
 loc_5F60C:
                 move.l  (a1)+,(a2)+
                 dbf     d6,loc_5F60C
-                bsr.w   sub_5FDA4
+                bsr.w   EndingSpawnLineTwoPaletteFadeAndStoreHandle
                 lea     ChildObjDat_60220(pc),a2
                 jsr     (CreateChild1_Normal).l
                 jsr     (AllocateObject).l

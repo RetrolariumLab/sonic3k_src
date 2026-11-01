@@ -17,16 +17,16 @@ loc_33376:
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_33392
+                bsr.s   UpdatePlayerOnCnzFallingBarberPole
                 addq.w  #6,a2
                 lea     (Player_2).w,a1
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
-                bsr.s   sub_33392
+                bsr.s   UpdatePlayerOnCnzFallingBarberPole
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_33392:
+UpdatePlayerOnCnzFallingBarberPole:
                 btst    d6,status(a0)
                 bne.w   loc_334B6
                 btst    #Status_OnObj,status(a1)
@@ -69,7 +69,7 @@ loc_333F2:
                 move.w  #1,4(a2)
 
 loc_33418:
-                bsr.w   sub_337D8
+                bsr.w   AttachPlayerToCnzBarberPole
                 move.b  #$20,angle(a1)
                 move.b  #2,flip_type(a1)
 
@@ -117,7 +117,7 @@ loc_33472:
                 move.w  #1,4(a2)
 
 loc_334A4:
-                bsr.w   sub_337D8
+                bsr.w   AttachPlayerToCnzBarberPole
                 move.b  #$20,angle(a1)
                 move.b  #2,flip_type(a1)
 
@@ -221,7 +221,7 @@ loc_3355C:
 
 locret_335A6:
                 rts
-; End of function sub_33392
+; End of function UpdatePlayerOnCnzFallingBarberPole
 
 ; ---------------------------------------------------------------------------
 
@@ -229,16 +229,16 @@ loc_335A8:
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_335C4
+                bsr.s   UpdatePlayerOnCnzRisingBarberPole
                 addq.w  #6,a2
                 lea     (Player_2).w,a1
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
-                bsr.s   sub_335C4
+                bsr.s   UpdatePlayerOnCnzRisingBarberPole
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_335C4:
+UpdatePlayerOnCnzRisingBarberPole:
                 btst    d6,status(a0)
                 bne.w   loc_336E4
                 btst    #Status_OnObj,status(a1)
@@ -280,7 +280,7 @@ loc_33622:
                 move.w  #1,4(a2)
 
 loc_33648:
-                bsr.w   sub_337D8
+                bsr.w   AttachPlayerToCnzBarberPole
                 move.b  #$E0,angle(a1)
                 move.b  #3,flip_type(a1)
 
@@ -327,7 +327,7 @@ loc_336A0:
                 move.w  #1,4(a2)
 
 loc_336D2:
-                bsr.w   sub_337D8
+                bsr.w   AttachPlayerToCnzBarberPole
                 move.b  #$E0,angle(a1)
                 move.b  #3,flip_type(a1)
 
@@ -432,11 +432,11 @@ loc_33788:
 
 locret_337D6:
                 rts
-; End of function sub_335C4
+; End of function UpdatePlayerOnCnzRisingBarberPole
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_337D8:
+AttachPlayerToCnzBarberPole:
                 btst    #Status_OnObj,status(a1)
                 beq.s   loc_337E8
                 movea.w interact(a1),a3
@@ -470,4 +470,4 @@ loc_33824:
                 bclr    #Status_InAir,status(a1)
                 bset    d6,status(a0)
                 rts
-; End of function sub_337D8
+; End of function AttachPlayerToCnzBarberPole

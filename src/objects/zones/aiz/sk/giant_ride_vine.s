@@ -6,7 +6,7 @@
 Obj_AIZGiantRideVine:
                 movea.l a0,a1
                 move.l  #loc_22442,(a1)
-                bsr.w   sub_2241A
+                bsr.w   InitializeAizGiantVineSprite
                 move.b  #$21,mapping_frame(a1)
                 move.w  x_pos(a0),d2
                 move.w  y_pos(a0),d3
@@ -34,7 +34,7 @@ loc_223D2:
 
 loc_223EA:
                 movea.l a1,a2
-                bsr.s   sub_2241A
+                bsr.s   InitializeAizGiantVineSprite
                 move.w  d2,x_pos(a1)
                 move.w  d3,y_pos(a1)
                 addi.w  #$10,d3
@@ -50,7 +50,7 @@ loc_22418:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2241A:
+InitializeAizGiantVineSprite:
                 move.b  #4,render_flags(a1)
                 move.b  #8,width_pixels(a1)
                 move.b  #8,height_pixels(a1)
@@ -58,7 +58,7 @@ sub_2241A:
                 move.l  #Map_AIZMHZRideVine,mappings(a1)
                 move.w  #make_art_tile(ArtTile_AIZSwingVine,0,0),art_tile(a1)
                 rts
-; End of function sub_2241A
+; End of function InitializeAizGiantVineSprite
 
 ; ---------------------------------------------------------------------------
 
@@ -156,12 +156,12 @@ loc_2251E:
                 addq.b  #4,d0
                 lsr.b   #3,d0
                 move.b  d0,mapping_frame(a0)
-                bsr.w   sub_2254A
+                bsr.w   PositionAizGiantVineLink
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2254A:
+PositionAizGiantVineLink:
                 movea.w $3C(a0),a1
                 move.b  angle(a1),d0
                 addq.b  #4,d0
@@ -177,14 +177,14 @@ sub_2254A:
                 add.w   y_pos(a1),d1
                 move.w  d1,y_pos(a0)
                 rts
-; End of function sub_2254A
+; End of function PositionAizGiantVineLink
 
 ; ---------------------------------------------------------------------------
 
 loc_2257E:
                 move.w  x_pos(a0),d4
                 move.w  y_pos(a0),d5
-                bsr.w   sub_2254A
+                bsr.w   PositionAizGiantVineLink
                 cmp.w   x_pos(a0),d4
                 beq.s   loc_22594
                 move.w  d4,$42(a0)
@@ -198,11 +198,11 @@ loc_2259E:
                 lea     $32(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d0
-                bsr.w   sub_220C2
+                bsr.w   UpdatePlayerOnAizVineHandle
                 lea     (Player_2).w,a1
                 addq.w  #1,a2
                 move.w  (Ctrl_2_logical).w,d0
-                bsr.w   sub_220C2
+                bsr.w   UpdatePlayerOnAizVineHandle
                 tst.w   $32(a0)
                 beq.s   loc_225C8
                 tst.w   $30(a0)

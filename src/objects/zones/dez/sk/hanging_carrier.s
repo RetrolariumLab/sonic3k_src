@@ -26,11 +26,11 @@ loc_46FCE:
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d0
-                bsr.w   sub_4703E
+                bsr.w   UpdatePlayerOnDezHangingCarrier
                 lea     (Player_2).w,a1
                 addq.w  #1,a2
                 move.w  (Ctrl_2_logical).w,d0
-                bsr.w   sub_4703E
+                bsr.w   UpdatePlayerOnDezHangingCarrier
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
@@ -63,7 +63,7 @@ loc_4702C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4703E:
+UpdatePlayerOnDezHangingCarrier:
                 tst.b   (a2)
                 beq.w   loc_470F8
                 tst.b   render_flags(a1)
@@ -162,7 +162,7 @@ loc_47104:
 
 locret_4717C:
                 rts
-; End of function sub_4703E
+; End of function UpdatePlayerOnDezHangingCarrier
 
 ; ---------------------------------------------------------------------------
 Map_DEZHangCarrier:

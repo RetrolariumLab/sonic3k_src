@@ -51,7 +51,7 @@ loc_5726A:
                 dbne    d1,loc_5726A
 
 loc_5728E:
-                jsr     sub_5758A(pc)
+                jsr     PositionSsz1RoamingCloudSprites(pc)
                 jsr     (Reset_TileOffsetPositionActual).l
                 jmp     (Refresh_PlaneFull).l
 ; ---------------------------------------------------------------------------
@@ -74,8 +74,8 @@ SSZ1_ScreenEvent_Index:
 loc_572BA:
                 tst.b   (End_of_level_flag).w
                 bne.s   loc_572CE
-                jsr     sub_575EA(pc)
-                jsr     sub_5758A(pc)
+                jsr     ControlSsz1RouteAndReplicaBossCameraGates(pc)
+                jsr     PositionSsz1RoamingCloudSprites(pc)
                 jmp     (DrawTilesAsYouMove).l
 ; ---------------------------------------------------------------------------
 
@@ -95,7 +95,7 @@ loc_572EC:
                 clr.l   (a5)+
                 clr.l   $3C(a5)
                 dbf     d0,loc_572EC
-                jsr     sub_5750C(pc)
+                jsr     UpdateSsz1TenStripForegroundCollapse(pc)
                 lea     (HScroll_table+$80).w,a1
                 move.w  (Camera_Y_pos_mask).w,d0
                 moveq   #$A-1,d1
@@ -121,7 +121,7 @@ loc_57308:
 loc_57344:
                 tst.w   (Events_fg_4).w
                 bne.s   loc_57360
-                jsr     sub_5750C(pc)
+                jsr     UpdateSsz1TenStripForegroundCollapse(pc)
 
 loc_5734E:
                 lea     word_577B2(pc),a4
@@ -163,7 +163,7 @@ loc_57360:
 loc_573E4:
                 move.l  (a5)+,(a1)+
                 dbf     d0,loc_573E4
-                jsr     sub_574DC(pc)
+                jsr     UpdateSsz1EscapeForegroundCameraAndClouds(pc)
                 move.w  (_unkEEEA).w,d0
                 move.w  d0,d1
                 andi.w  #$FFF0,d0
@@ -218,7 +218,7 @@ loc_574A0:
 ; ---------------------------------------------------------------------------
 
 loc_574B0:
-                jsr     sub_574DC(pc)
+                jsr     UpdateSsz1EscapeForegroundCameraAndClouds(pc)
                 lea     (_unkEEEA).w,a6
                 lea     (_unkEEF2).w,a5
                 move.w  (_unkEEEE).w,d1
@@ -232,23 +232,23 @@ loc_574B0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_574DC:
+UpdateSsz1EscapeForegroundCameraAndClouds:
                 move.w  (Camera_X_pos_copy).w,(_unkEEEA).w
                 move.w  (Camera_Y_pos).w,d0
                 subi.w  #$110,d0
                 asr.w   #2,d0
                 move.w  d0,(_unkEEEE).w
                 cmpi.w  #$110,(Camera_Y_pos).w
-                bne.w   sub_5758A
+                bne.w   PositionSsz1RoamingCloudSprites
                 addi.l  #$6000,(_unkEEF6).w
                 move.w  (_unkEEF6).w,d0
                 add.w   d0,(_unkEEEE).w
-                bra.s   sub_5758A
-; End of function sub_574DC
+                bra.s   PositionSsz1RoamingCloudSprites
+; End of function UpdateSsz1EscapeForegroundCameraAndClouds
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5750C:
+UpdateSsz1TenStripForegroundCollapse:
                 lea     (HScroll_table+$80).w,a5
                 lea     $60(a5),a6
                 move.w  (Camera_Y_pos_copy).w,d0
@@ -293,14 +293,14 @@ loc_5754C:
                 sub.w   (a5,d0.w),d2
                 move.w  d2,$14(a1)
                 tst.w   d1
-                bne.s   sub_5758A
+                bne.s   PositionSsz1RoamingCloudSprites
                 st      (Events_fg_4+1).w
                 move.l  #Delete_Current_Sprite,(a1)
-; End of function sub_5750C
+; End of function UpdateSsz1TenStripForegroundCollapse
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5758A:
+PositionSsz1RoamingCloudSprites:
                 move.w  (Camera_Y_pos_copy).w,d0
                 move.w  (Screen_shake_offset).w,d3
                 sub.w   d3,d0
@@ -339,11 +339,11 @@ loc_575BA:
 loc_575E4:
                 dbf     d2,loc_575BA
                 rts
-; End of function sub_5758A
+; End of function PositionSsz1RoamingCloudSprites
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_575EA:
+ControlSsz1RouteAndReplicaBossCameraGates:
                 tst.b   (Events_bg+$06).w
                 bne.w   locret_57788
                 cmpi.w  #$19A0,(Camera_X_pos).w
@@ -493,7 +493,7 @@ loc_5777E:
 
 locret_57788:
                 rts
-; End of function sub_575EA
+; End of function ControlSsz1RouteAndReplicaBossCameraGates
 
 ; ---------------------------------------------------------------------------
 word_5778A:

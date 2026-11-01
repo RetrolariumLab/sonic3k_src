@@ -45,12 +45,12 @@ loc_597E4:
                 sub.w   (Events_bg+$00).w,d0
                 add.w   (Camera_X_pos_copy).w,d0
                 lea     (_unkEE98).w,a1
-                bsr.s   sub_59832
+                bsr.s   ApproachSlotsPlaneCoordinateByLimit
                 move.w  #$400,d0
                 sub.w   (Events_bg+$02).w,d0
                 add.w   (Camera_Y_pos_copy).w,d0
                 lea     (_unkEE9C).w,a1
-                bsr.s   sub_59832
+                bsr.s   ApproachSlotsPlaneCoordinateByLimit
                 lea     (_unkEE98).w,a6
                 lea     (_unkEEA0).w,a5
                 move.w  (_unkEE9C).w,d1
@@ -64,7 +64,7 @@ loc_597E4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59832:
+ApproachSlotsPlaneCoordinateByLimit:
                 sub.w   (a1),d0
                 smi     d2
                 bpl.s   loc_5983A
@@ -83,7 +83,7 @@ loc_59840:
 loc_59846:
                 add.w   d0,(a1)
                 rts
-; End of function sub_59832
+; End of function ApproachSlotsPlaneCoordinateByLimit
 
 ; ---------------------------------------------------------------------------
 
@@ -206,13 +206,13 @@ loc_59938:
                 move.w  $10(a5),d0
                 move.w  $12(a5),d6
                 movem.l d1/d5-d6/a5,-(sp)
-                jsr     (sub_4ECAA).l
+                jsr     (SetupExplicitTileRowDraw).l
                 movem.l (sp)+,d1/d5-d6/a5
                 tst.w   $E(a5)
                 beq.s   loc_59962
                 addi.w  #$10,d0
                 addi.w  #$100,d5
-                jsr     (sub_4ECAA).l
+                jsr     (SetupExplicitTileRowDraw).l
 
 loc_59962:
                 move.w  (sp)+,d6

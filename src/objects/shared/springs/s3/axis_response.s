@@ -14,7 +14,7 @@ Obj_Spring_Up:
                 bsr.w   SolidObjectFull2_1P
                 btst    #p1_standing_bit,status(a0)
                 beq.s   loc_215CE
-                bsr.s   sub_2164A
+                bsr.s   LaunchPlayerFromUpSpring
 
 loc_215CE:
                 movem.l (sp)+,d1-d4
@@ -23,7 +23,7 @@ loc_215CE:
                 bsr.w   SolidObjectFull2_1P
                 btst    #p2_standing_bit,status(a0)
                 beq.s   loc_215E6
-                bsr.s   sub_2164A
+                bsr.s   LaunchPlayerFromUpSpring
 
 loc_215E6:
                 lea     (Ani_Spring).l,a1
@@ -42,7 +42,7 @@ Obj_2PSpring_Up:
                 bsr.w   SolidObjectFull2_1P
                 btst    #p1_standing_bit,status(a0)
                 beq.s   loc_21620
-                bsr.s   sub_2164A
+                bsr.s   LaunchPlayerFromUpSpring
 
 loc_21620:
                 movem.l (sp)+,d1-d4
@@ -51,7 +51,7 @@ loc_21620:
                 bsr.w   SolidObjectFull2_1P
                 btst    #p2_standing_bit,status(a0)
                 beq.s   loc_21638
-                bsr.s   sub_2164A
+                bsr.s   LaunchPlayerFromUpSpring
 
 loc_21638:
                 lea     (Ani_Spring).l,a1
@@ -60,7 +60,7 @@ loc_21638:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2164A:
+LaunchPlayerFromUpSpring:
                 move.w  #1<<8,anim(a0)                  ; and prev_anim
                 addq.w  #8,y_pos(a1)
                 move.w  $30(a0),y_vel(a1)
@@ -108,7 +108,7 @@ loc_216DC:
 loc_216EE:
                 moveq   #signextendB(sfx_Spring),d0
                 jmp     (Play_SFX).l
-; End of function sub_2164A
+; End of function LaunchPlayerFromUpSpring
 
 ; ---------------------------------------------------------------------------
 
@@ -133,7 +133,7 @@ Obj_Spring_Horizontal:
 loc_2172E:
                 andi.b  #1,d1
                 bne.s   loc_21738
-                bsr.w   sub_21836
+                bsr.w   LaunchPlayerFromHorizontalSpring
 
 loc_21738:
                 movem.l (sp)+,d1-d4
@@ -152,10 +152,10 @@ loc_21738:
 loc_21760:
                 andi.b  #1,d1
                 bne.s   loc_2176A
-                bsr.w   sub_21836
+                bsr.w   LaunchPlayerFromHorizontalSpring
 
 loc_2176A:
-                bsr.w   sub_2190C
+                bsr.w   BoostGroundedPlayersNearHorizontalSpring
                 lea     (Ani_Spring).l,a1
                 jsr     (Animate_Sprite).l
                 move.w  $32(a0),d0
@@ -183,7 +183,7 @@ Obj_2PSpring_Horizontal:
 loc_217BC:
                 andi.b  #1,d1
                 bne.s   loc_217C4
-                bsr.s   sub_21806
+                bsr.s   LaunchPlayerFromSmallHorizontalSpring
 
 loc_217C4:
                 movem.l (sp)+,d1-d4
@@ -202,7 +202,7 @@ loc_217C4:
 loc_217EC:
                 andi.b  #1,d1
                 bne.s   loc_217F4
-                bsr.s   sub_21806
+                bsr.s   LaunchPlayerFromSmallHorizontalSpring
 
 loc_217F4:
                 lea     (Ani_Spring).l,a1
@@ -211,7 +211,7 @@ loc_217F4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_21806:
+LaunchPlayerFromSmallHorizontalSpring:
                 move.w  #3<<8,anim(a0)                  ; and prev_anim
                 move.w  $30(a0),x_vel(a1)
                 addq.w  #4,x_pos(a1)
@@ -224,11 +224,11 @@ sub_21806:
 
 loc_21834:
                 bra.s   loc_21864
-; End of function sub_21806
+; End of function LaunchPlayerFromSmallHorizontalSpring
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_21836:
+LaunchPlayerFromHorizontalSpring:
                 move.w  #3<<8,anim(a0)                  ; and prev_anim
                 move.w  $30(a0),x_vel(a1)
                 addq.w  #8,x_pos(a1)
@@ -288,11 +288,11 @@ loc_218F2:
                 bclr    #Status_Push,status(a1)
                 moveq   #signextendB(sfx_Spring),d0
                 jmp     (Play_SFX).l
-; End of function sub_21836
+; End of function LaunchPlayerFromHorizontalSpring
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2190C:
+BoostGroundedPlayersNearHorizontalSpring:
                 cmpi.b  #3,anim(a0)
                 beq.w   locret_219C4
                 move.w  x_pos(a0),d0
@@ -330,7 +330,7 @@ loc_21956:
                 cmp.w   d3,d4
                 bhs.w   loc_21982
                 move.w  d0,-(sp)
-                bsr.w   sub_21836
+                bsr.w   LaunchPlayerFromHorizontalSpring
                 move.w  (sp)+,d0
 
 loc_21982:
@@ -355,11 +355,11 @@ loc_2199C:
                 blo.w   locret_219C4
                 cmp.w   d3,d4
                 bhs.w   locret_219C4
-                bsr.w   sub_21836
+                bsr.w   LaunchPlayerFromHorizontalSpring
 
 locret_219C4:
                 rts
-; End of function sub_2190C
+; End of function BoostGroundedPlayersNearHorizontalSpring
 
 ; ---------------------------------------------------------------------------
 
@@ -374,7 +374,7 @@ Obj_Spring_Down:
                 bsr.w   SolidObjectFull2_1P
                 cmpi.w  #-2,d4
                 bne.s   loc_219EC
-                bsr.s   sub_21A6A
+                bsr.s   LaunchPlayerFromDownSpring
 
 loc_219EC:
                 movem.l (sp)+,d1-d4
@@ -383,7 +383,7 @@ loc_219EC:
                 bsr.w   SolidObjectFull2_1P
                 cmpi.w  #-2,d4
                 bne.s   loc_21A02
-                bsr.s   sub_21A6A
+                bsr.s   LaunchPlayerFromDownSpring
 
 loc_21A02:
                 lea     (Ani_Spring).l,a1
@@ -422,7 +422,7 @@ loc_21A58:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_21A6A:
+LaunchPlayerFromDownSpring:
                 subq.w  #8,y_pos(a1)
 
 loc_21A6E:
@@ -476,4 +476,4 @@ loc_21B00:
                 move.b  #2,routine(a1)
                 moveq   #signextendB(sfx_Spring),d0
                 jmp     (Play_SFX).l
-; End of function sub_21A6A
+; End of function LaunchPlayerFromDownSpring

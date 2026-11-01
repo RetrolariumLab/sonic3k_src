@@ -43,7 +43,7 @@ loc_418E4:
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull).l
                 moveq   #0,d4
-                bsr.w   sub_419C6
+                bsr.w   UpdatePlayerPushOrReturnForSozSwitch
                 move.w  $36(a0),d0
                 lsr.w   #2,d0
                 btst    #0,status(a0)
@@ -55,7 +55,7 @@ loc_41934:
                 move.w  d0,x_pos(a0)
                 tst.b   subtype(a0)
                 bpl.s   loc_41946
-                bsr.w   sub_41AA8
+                bsr.w   PressSozSwitchWithRegisteredRock
 
 loc_41946:
                 move.w  $36(a0),d1
@@ -100,7 +100,7 @@ loc_41996:
                 moveq   #0,d1
                 move.b  (a3),d1
                 move.w  d1,$36(a0)
-                bsr.w   sub_41A6C
+                bsr.w   ReturnSozPushSwitchProgress
                 move.w  $36(a0),d1
                 move.b  d1,(a3)
                 tst.w   $36(a0)
@@ -113,32 +113,32 @@ locret_419C4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_419C6:
+UpdatePlayerPushOrReturnForSozSwitch:
                 moveq   #0,d5
                 move.b  status(a0),d3
                 andi.b  #pushing_mask,d3
-                beq.w   sub_41A6C
+                beq.w   ReturnSozPushSwitchProgress
                 move.w  x_pos(a0),d2
                 lea     (Player_1).w,a1
                 move.b  $30(a0),d0
                 moveq   #p1_pushing_bit,d6
-                bsr.s   sub_419FA
+                bsr.s   ApplyPlayerPushToSozSwitch
                 tst.w   d5
                 bne.s   locret_419F8
                 lea     (Player_2).w,a1
                 move.b  $31(a0),d0
                 moveq   #p2_pushing_bit,d6
-                bsr.s   sub_419FA
+                bsr.s   ApplyPlayerPushToSozSwitch
                 tst.w   d5
-                beq.s   sub_41A6C
+                beq.s   ReturnSozPushSwitchProgress
 
 locret_419F8:
                 rts
-; End of function sub_419C6
+; End of function UpdatePlayerPushOrReturnForSozSwitch
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_419FA:
+ApplyPlayerPushToSozSwitch:
                 btst    d6,d3
                 beq.s   locret_41A6A
                 cmp.w   x_pos(a1),d2
@@ -180,11 +180,11 @@ loc_41A38:
 
 locret_41A6A:
                 rts
-; End of function sub_419FA
+; End of function ApplyPlayerPushToSozSwitch
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_41A6C:
+ReturnSozPushSwitchProgress:
                 move.b  subtype(a0),d0
                 andi.w  #$70,d0
                 bne.s   loc_41A82
@@ -211,11 +211,11 @@ loc_41AA4:
 
 locret_41AA6:
                 rts
-; End of function sub_41A6C
+; End of function ReturnSozPushSwitchProgress
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_41AA8:
+PressSozSwitchWithRegisteredRock:
                 move.w  (_unkF7C4).w,d0
                 beq.w   locret_41B54
                 movea.w d0,a2
@@ -282,7 +282,7 @@ loc_41B4E:
 
 locret_41B54:
                 rts
-; End of function sub_41AA8
+; End of function PressSozSwitchWithRegisteredRock
 
 ; ---------------------------------------------------------------------------
 Map_SOZPushSwitch:

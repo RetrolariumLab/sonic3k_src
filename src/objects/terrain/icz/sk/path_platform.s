@@ -19,7 +19,7 @@ Obj_ICZPathFollowPlatform_2:
                 btst    #7,status(a0)
                 bne.s   loc_89F64
                 jsr     (SolidObjectFull).l
-                bsr.w   sub_8A3C4
+                bsr.w   SetFastVerticalCameraForIczPlatformRider
 
 loc_89F64:
                 jmp     (Sprite_OnScreen_Test).l
@@ -142,7 +142,7 @@ loc_8A066:
                 ext.w   d3
                 asr.w   #1,d3
                 add.w   d3,d0
-                bsr.w   sub_8A35A
+                bsr.w   AcceptIczPlatformHorizontalVelocityInRange
 
 loc_8A07C:
                 tst.w   x_vel(a0)
@@ -164,7 +164,7 @@ loc_8A090:
 
 loc_8A09E:
                 move.b  #$A,routine(a0)
-                bsr.w   sub_8A386
+                bsr.w   SetIczPlatformDepartureYVelocityFromAngle
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -199,7 +199,7 @@ loc_8A0F4:
 ; ---------------------------------------------------------------------------
 
 loc_8A11C:
-                bsr.w   sub_8A36C
+                bsr.w   ApplyIczPlatformGravityWithinVelocityRange
                 jsr     (MoveSprite2).l
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1

@@ -8,7 +8,7 @@ loc_6B3DE:
                 move.b  routine(a0),d0
                 move.w  off_6B3F6(pc,d0.w),d1
                 jsr     off_6B3F6(pc,d1.w)
-                bsr.w   sub_6BC70
+                bsr.w   MarkHCZBossVortexDetachedWhenColumnDies
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
 off_6B3F6:
@@ -25,9 +25,9 @@ loc_6B3FC:
 ; ---------------------------------------------------------------------------
 
 loc_6B410:
-                bsr.w   sub_6B9E2
-                bsr.w   sub_6B9AC
-                bsr.w   sub_6B916
+                bsr.w   CaptureBothPlayersInHCZBossVortex
+                bsr.w   PullBothPlayersTowardHCZBossVortex
+                bsr.w   SynchronizeHCZBossVortexHeightVisual
                 jsr     (Animate_Raw).l
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
@@ -42,7 +42,7 @@ loc_6B430:
 ; ---------------------------------------------------------------------------
 
 loc_6B440:
-                bsr.w   sub_6B916
+                bsr.w   SynchronizeHCZBossVortexHeightVisual
                 move.w  x_vel(a1),x_vel(a0)
                 jsr     (MoveSprite2).l
                 jmp     (Animate_Raw).l
@@ -90,7 +90,7 @@ loc_6B4C4:
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #Obj_Wait,(a0)
                 move.l  #loc_6B4F2,$34(a0)
-                bsr.w   sub_6B96C
+                bsr.w   ConfigureHCZBossGeyserLayerFromSubtype
                 tst.b   subtype(a0)
                 bne.w   locret_6AF0A
                 lea     ChildObjDat_6BDCA(pc),a2
@@ -104,7 +104,7 @@ loc_6B4F2:
 ; ---------------------------------------------------------------------------
 
 loc_6B502:
-                bsr.w   sub_6BB40
+                bsr.w   ApplyHCZBossGeyserToBothPlayers
                 jmp     (AnimateRaw_DrawTouch).l
 ; ---------------------------------------------------------------------------
 
@@ -138,7 +138,7 @@ off_6B55C:
 
 loc_6B56C:
                 movea.w parent3(a0),a3
-                bsr.w   sub_6BB9A
+                bsr.w   AccelerateHCZBossBubbleTowardParentX
                 jsr     (Animate_Raw).l
                 jsr     (Obj_Wait).l
                 jmp     (Child_Draw_Sprite2).l
@@ -155,7 +155,7 @@ loc_6B598:
                 movea.w parent3(a0),a3
                 btst    #3,$38(a3)
                 bne.s   loc_6B5AE
-                bsr.w   sub_6BB9A
+                bsr.w   AccelerateHCZBossBubbleTowardParentX
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
 
@@ -187,7 +187,7 @@ loc_6B5E6:
                 lea     word_6BD38(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.b  #8,y_radius(a0)
-                bsr.w   sub_6B8F0
+                bsr.w   SetHCZBossBombStackPriority
                 jmp     (Refresh_ChildPositionAdjusted).l
 ; ---------------------------------------------------------------------------
 
@@ -228,7 +228,7 @@ loc_6B658:
                 subq.b  #2,subtype(a0)
                 move.w  #7,$2E(a0)
                 move.l  #loc_6B694,$34(a0)
-                bsr.w   sub_6B8F0
+                bsr.w   SetHCZBossBombStackPriority
                 bra.w   loc_6B904
 ; ---------------------------------------------------------------------------
 

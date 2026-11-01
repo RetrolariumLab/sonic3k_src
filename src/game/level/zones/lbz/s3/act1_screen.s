@@ -509,7 +509,7 @@ LBZ1BGE_DoTransition:
 
 loc_3E738:
                 movem.l d7-a0/a2-a3,-(sp)
-                jsr     (sub_273B4).l                   ; Start LBZ2 tile animation
+                jsr     (AniLBZ2_InitWaterlineTiles).l                   ; Start LBZ2 tile animation
                 movem.l (sp)+,d7-a0/a2-a3
                 clr.w   (Events_routine_bg).w
 

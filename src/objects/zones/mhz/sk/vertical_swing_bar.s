@@ -22,11 +22,11 @@ loc_3F08C:
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d1
-                bsr.s   sub_3F0D8
+                bsr.s   UpdatePlayerOnMhzVerticalSwingBar
                 addq.w  #1,a2
                 lea     (Player_2).w,a1
                 move.w  (Ctrl_2_logical).w,d1
-                bsr.s   sub_3F0D8
+                bsr.s   UpdatePlayerOnMhzVerticalSwingBar
                 tst.b   $30(a0)
                 beq.s   loc_3F0D2
                 move.b  #1,(Scroll_force_positions).w
@@ -38,7 +38,7 @@ loc_3F0D2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3F0D8:
+UpdatePlayerOnMhzVerticalSwingBar:
                 tst.b   (a2)
                 beq.w   loc_3F246
                 tst.w   (Debug_placement_mode).w
@@ -50,7 +50,7 @@ sub_3F0D8:
                 cmpi.b  #-8,4(a2)
                 beq.w   loc_3F1C8
                 addi.b  #8,4(a2)
-                bsr.s   sub_3F11C
+                bsr.s   PositionMhzVerticalBarPlayerPose
 
 loc_3F10A:
                 moveq   #0,d0
@@ -59,11 +59,11 @@ loc_3F10A:
                 jsr     (Perform_Player_DPLC).l
                 movea.l (sp)+,a2
                 rts
-; End of function sub_3F0D8
+; End of function UpdatePlayerOnMhzVerticalSwingBar
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3F11C:
+PositionMhzVerticalBarPlayerPose:
                 moveq   #0,d0
                 move.b  4(a2),d0
                 lsr.b   #4,d0
@@ -79,7 +79,7 @@ loc_3F13C:
                 add.w   x_pos(a0),d1
                 move.w  d1,x_pos(a1)
                 rts
-; End of function sub_3F11C
+; End of function PositionMhzVerticalBarPlayerPose
 
 ; ---------------------------------------------------------------------------
 RawAni_3F146:

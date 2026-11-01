@@ -125,7 +125,7 @@ loc_2A9A2:
                 add.w   d0,$38(a0)
 
 loc_2A9AA:
-                bsr.w   sub_2AA4E
+                bsr.w   PositionAizDrawbridgePieces
                 bra.s   loc_2A9CC
 ; ---------------------------------------------------------------------------
 
@@ -192,7 +192,7 @@ loc_2AA48:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2AA4E:
+PositionAizDrawbridgePieces:
                 tst.b   $36(a0)
                 beq.w   locret_2AAF0
                 moveq   #0,d0
@@ -254,7 +254,7 @@ loc_2AAC6:
 
 locret_2AAF0:
                 rts
-; End of function sub_2AA4E
+; End of function PositionAizDrawbridgePieces
 
 ; ---------------------------------------------------------------------------
 
@@ -305,19 +305,19 @@ loc_2AB60:
                 move.w  $3C(a0),d0
                 beq.s   loc_2AB6A
                 movea.w d0,a3
-                bsr.s   sub_2AB76
+                bsr.s   SplitAizDrawbridgeBankWithExplosions
 
 loc_2AB6A:
                 move.w  $3E(a0),d0
                 beq.s   locret_2AB74
                 movea.w d0,a3
-                bsr.s   sub_2AB76
+                bsr.s   SplitAizDrawbridgeBankWithExplosions
 
 locret_2AB74:
                 rts
 ; ---------------------------------------------------------------------------
 
-sub_2AB76:
+SplitAizDrawbridgeBankWithExplosions:
                 lea     (byte_2AC10).l,a4
                 lea     sub2_x_pos(a3),a2
                 move.w  mainspr_childsprites(a3),d6

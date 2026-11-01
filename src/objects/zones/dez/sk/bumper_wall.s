@@ -47,14 +47,14 @@ loc_497C2:
                 beq.s   loc_497F0
                 lea     (Player_1).w,a1
                 moveq   #p1_pushing_bit,d5
-                bsr.s   sub_49848
+                bsr.s   BouncePlayerFromDezBumperWall
 
 loc_497F0:
                 andi.w  #2,d6
                 beq.s   loc_497FE
                 lea     (Player_2).w,a1
                 moveq   #p2_pushing_bit,d5
-                bsr.s   sub_49848
+                bsr.s   BouncePlayerFromDezBumperWall
 
 loc_497FE:
                 jmp     (Sprite_OnScreen_Test).l
@@ -76,21 +76,21 @@ loc_49804:
                 beq.s   loc_49834
                 lea     (Player_1).w,a1
                 moveq   #p1_pushing_bit,d5
-                bsr.s   sub_49848
+                bsr.s   BouncePlayerFromDezBumperWall
 
 loc_49834:
                 andi.w  #2,d6
                 beq.s   loc_49842
                 lea     (Player_2).w,a1
                 moveq   #p2_pushing_bit,d5
-                bsr.s   sub_49848
+                bsr.s   BouncePlayerFromDezBumperWall
 
 loc_49842:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_49848:
+BouncePlayerFromDezBumperWall:
                 moveq   #signextendB(sfx_Bumper),d0
                 jsr     (Play_SFX).l
 
@@ -125,7 +125,7 @@ loc_498A2:
 
 locret_498C0:
                 rts
-; End of function sub_49848
+; End of function BouncePlayerFromDezBumperWall
 
 ; ---------------------------------------------------------------------------
 Map_DEZBumperWall:

@@ -51,13 +51,13 @@ loc_3211A:
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
                 beq.s   loc_32130
-                bsr.s   sub_32146
+                bsr.s   ReboundPlayerFromBumperAndAwardScore
 
 loc_32130:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
                 beq.s   loc_3213E
-                bsr.s   sub_32146
+                bsr.s   ReboundPlayerFromBumperAndAwardScore
 
 loc_3213E:
                 clr.b   collision_property(a0)
@@ -65,7 +65,7 @@ loc_3213E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_32146:
+ReboundPlayerFromBumperAndAwardScore:
                 move.w  x_pos(a0),d1
                 move.w  y_pos(a0),d2
                 sub.w   x_pos(a1),d1
@@ -108,7 +108,7 @@ loc_321B4:
 
 locret_321DE:
                 rts
-; End of function sub_32146
+; End of function ReboundPlayerFromBumperAndAwardScore
 
 ; ---------------------------------------------------------------------------
 
@@ -140,13 +140,13 @@ loc_3221C:
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
                 beq.s   loc_32232
-                bsr.s   sub_32248
+                bsr.s   ReboundPlayerFromCompetitionBumper
 
 loc_32232:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
                 beq.s   loc_32240
-                bsr.s   sub_32248
+                bsr.s   ReboundPlayerFromCompetitionBumper
 
 loc_32240:
                 clr.b   collision_property(a0)
@@ -154,7 +154,7 @@ loc_32240:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_32248:
+ReboundPlayerFromCompetitionBumper:
                 move.w  x_pos(a0),d1
                 move.w  y_pos(a0),d2
                 sub.w   x_pos(a1),d1
@@ -178,7 +178,7 @@ sub_32248:
                 moveq   #signextendB(sfx_SmallBumpers),d0
                 jsr     (Play_SFX).l
                 rts
-; End of function sub_32248
+; End of function ReboundPlayerFromCompetitionBumper
 
 ; ---------------------------------------------------------------------------
 

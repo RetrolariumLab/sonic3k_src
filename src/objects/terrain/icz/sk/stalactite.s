@@ -13,7 +13,7 @@ Obj_ICZStalagtite:
 ; ---------------------------------------------------------------------------
 
 loc_8B1AE:
-                bsr.w   sub_8B26A
+                bsr.w   CollideIczStalactiteAsSolidRectangle
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$70,d2
                 bhs.s   loc_8B1D0
@@ -60,7 +60,7 @@ loc_8B224:
 ; ---------------------------------------------------------------------------
 
 loc_8B228:
-                bsr.w   sub_8B26A
+                bsr.w   CollideIczStalactiteAsSolidRectangle
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
@@ -82,13 +82,13 @@ loc_8B256:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8B26A:
+CollideIczStalactiteAsSolidRectangle:
                 moveq   #$1B,d1
                 moveq   #$20,d2
                 moveq   #$20,d3
                 move.w  x_pos(a0),d4
                 jmp     (SolidObjectFull).l
-; End of function sub_8B26A
+; End of function CollideIczStalactiteAsSolidRectangle
 
 ; ---------------------------------------------------------------------------
 ObjDat_ICZStalagtite:

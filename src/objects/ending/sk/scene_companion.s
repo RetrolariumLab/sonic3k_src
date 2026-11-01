@@ -8,7 +8,7 @@ Obj_5EA52:
                 move.b  routine(a0),d0
                 move.w  off_5EA6A(pc,d0.w),d1
                 jsr     off_5EA6A(pc,d1.w)
-                bsr.w   sub_60038
+                bsr.w   EndingTornadoPositionTwoSubSpritesAndCycleTheirFrames
                 jmp     (Child_Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 off_5EA6A:
@@ -79,7 +79,7 @@ loc_5EB16:
                 btst    #0,(_unkFAB8).w
                 bne.s   loc_5EB26
                 addq.w  #2,x_pos(a0)
-                bra.w   sub_60000
+                bra.w   EndingBobYFromSavedBaseAndByteSinePhase
 ; ---------------------------------------------------------------------------
 
 loc_5EB26:
@@ -88,4 +88,4 @@ loc_5EB26:
 ; ---------------------------------------------------------------------------
 
 loc_5EB2E:
-                bra.w   sub_60000
+                bra.w   EndingBobYFromSavedBaseAndByteSinePhase

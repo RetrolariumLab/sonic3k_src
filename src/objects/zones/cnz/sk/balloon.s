@@ -26,13 +26,13 @@ loc_31754:
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
                 beq.s   loc_31768
-                bsr.s   sub_317AE
+                bsr.s   BouncePlayerFromCnzBalloon
 
 loc_31768:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
                 beq.s   loc_31776
-                bsr.s   sub_317AE
+                bsr.s   BouncePlayerFromCnzBalloon
 
 loc_31776:
                 lea     (Ani_CNZBalloon).l,a1
@@ -55,7 +55,7 @@ loc_3178E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_317AE:
+BouncePlayerFromCnzBalloon:
                 move.w  #-$700,y_vel(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    #Status_RollJump,status(a1)
@@ -71,10 +71,10 @@ sub_317AE:
                 tst.b   $34(a0)
                 bne.s   loc_31808
                 lea     (byte_3185A).l,a2
-                bsr.s   sub_3181E
-                bsr.s   sub_3181E
-                bsr.s   sub_3181E
-                bsr.s   sub_3181E
+                bsr.s   SpawnCnzBalloonAirBubble
+                bsr.s   SpawnCnzBalloonAirBubble
+                bsr.s   SpawnCnzBalloonAirBubble
+                bsr.s   SpawnCnzBalloonAirBubble
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
 
@@ -87,11 +87,11 @@ loc_31808:
 
 locret_3181C:
                 rts
-; End of function sub_317AE
+; End of function BouncePlayerFromCnzBalloon
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3181E:
+SpawnCnzBalloonAirBubble:
                 jsr     (AllocateObject).l
                 bne.s   locret_31858
                 move.l  #Obj_Bubbler,(a1)
@@ -109,7 +109,7 @@ sub_3181E:
 
 locret_31858:
                 rts
-; End of function sub_3181E
+; End of function SpawnCnzBalloonAirBubble
 
 ; ---------------------------------------------------------------------------
 byte_3185A:

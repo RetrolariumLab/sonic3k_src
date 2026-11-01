@@ -49,7 +49,7 @@ loc_57CAC:
 ; ---------------------------------------------------------------------------
 
 loc_57CD2:
-                jsr     (sub_45866).l
+                jsr     (CycleSszHpzTeleporterPalettePair).l
                 lea     (Player_1).w,a1
                 move.w  x_pos(a0),x_pos(a1)
                 tst.b   $2D(a0)
@@ -95,7 +95,7 @@ locret_57D62:
 ; ---------------------------------------------------------------------------
 
 Obj_57D64:
-                jsr     (sub_45866).l
+                jsr     (CycleSszHpzTeleporterPalettePair).l
                 lea     (Player_1).w,a1
                 move.l  #$20000,d0
                 move.l  #$800,d1
@@ -129,7 +129,7 @@ loc_57DB6:
 ; ---------------------------------------------------------------------------
 
 loc_57DC6:
-                jmp     (sub_45866).l
+                jmp     (CycleSszHpzTeleporterPalettePair).l
 ; ---------------------------------------------------------------------------
 
 Obj_57DCC:

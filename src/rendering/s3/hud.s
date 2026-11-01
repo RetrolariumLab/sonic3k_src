@@ -50,7 +50,7 @@ loc_E90E:
                 move.w  (a1)+,d4
                 subq.w  #1,d4
                 bmi.s   locret_E92E
-                jmp     (sub_195CE).l
+                jmp     (RenderMappingPieces).l
 ; ---------------------------------------------------------------------------
 
 locret_E92E:
@@ -319,7 +319,7 @@ HUD_Debug:
                 move.w  (Camera_X_pos).w,d1
                 swap    d1
                 move.w  (Player_1+x_pos).w,d1
-                bsr.s   sub_EC90
+                bsr.s   HUD_WriteDebugCoordinatePair
                 move.w  (Camera_Y_pos).w,d1
                 swap    d1
                 move.w  (Player_1+y_pos).w,d1
@@ -327,7 +327,7 @@ HUD_Debug:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_EC90:
+HUD_WriteDebugCoordinatePair:
                 moveq   #8-1,d6
                 lea     (ArtUnc_DebugDigits).l,a1
 
@@ -348,7 +348,7 @@ loc_ECAA:
                 swap    d1
                 dbf     d6,loc_EC98
                 rts
-; End of function sub_EC90
+; End of function HUD_WriteDebugCoordinatePair
 
 ; =============== S U B R O U T I N E =======================================
 

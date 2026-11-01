@@ -83,6 +83,6 @@ loc_75B58:
 ; ---------------------------------------------------------------------------
 
 loc_75B64:
-                bsr.w   sub_75B6E
+                bsr.w   SyncMHZMinibossFrameCollisionProxy
                 jmp     (Child_AddToTouchList).l
 ; End of function Obj_MHZMinibossTree

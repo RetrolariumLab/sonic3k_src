@@ -51,7 +51,7 @@ loc_38D94:
                 move.l  #loc_38DD0,(a0)
 
 loc_38DC4:
-                jsr     (sub_38C7A).l
+                jsr     (QueueIczSnowboardFrameArt).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -149,27 +149,27 @@ loc_38EE4:
 loc_38EF8:
                 btst    #Status_InAir,status(a2)
                 bne.s   locret_38F20
-                bsr.s   sub_38F22
-                bsr.s   sub_38F22
+                bsr.s   SpawnSnowboardSnowParticle
+                bsr.s   SpawnSnowboardSnowParticle
                 cmpi.b  #7,mapping_frame(a3)
                 beq.s   loc_38F14
                 cmpi.b  #8,mapping_frame(a3)
                 bne.s   locret_38F20
 
 loc_38F14:
-                bsr.s   sub_38F22
-                bsr.s   sub_38F22
-                bsr.s   sub_38F22
-                bsr.s   sub_38F22
-                bsr.s   sub_38F22
-                bsr.s   sub_38F22
+                bsr.s   SpawnSnowboardSnowParticle
+                bsr.s   SpawnSnowboardSnowParticle
+                bsr.s   SpawnSnowboardSnowParticle
+                bsr.s   SpawnSnowboardSnowParticle
+                bsr.s   SpawnSnowboardSnowParticle
+                bsr.s   SpawnSnowboardSnowParticle
 
 locret_38F20:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_38F22:
+SpawnSnowboardSnowParticle:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   locret_38FA2
                 move.l  #loc_38FA4,(a1)
@@ -199,7 +199,7 @@ sub_38F22:
 
 locret_38FA2:
                 rts
-; End of function sub_38F22
+; End of function SpawnSnowboardSnowParticle
 
 ; ---------------------------------------------------------------------------
 

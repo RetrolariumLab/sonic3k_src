@@ -43,19 +43,19 @@ loc_20594:
 loc_205A6:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                beq.s   sub_205B6
+                beq.s   CollideAndDisplayCollapsingPlatform
                 move.b  #1,$3A(a0)
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_205B6:
+CollideAndDisplayCollapsingPlatform:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 movea.l $3C(a0),a2
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectTopSloped2).l
                 bra.w   Sprite_OnScreen_Test
-; End of function sub_205B6
+; End of function CollideAndDisplayCollapsingPlatform
 
 ; ---------------------------------------------------------------------------
 
@@ -69,19 +69,19 @@ loc_205DA:
 ; ---------------------------------------------------------------------------
 
 loc_205DE:
-                bsr.w   sub_205B6
+                bsr.w   CollideAndDisplayCollapsingPlatform
                 subq.b  #1,$38(a0)
                 bne.s   locret_2061E
                 move.l  #loc_20620,(a0)
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_205FC
+                bsr.s   ReleasePlayerFromCollapsingPlatform
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_205FC:
+ReleasePlayerFromCollapsingPlatform:
                 btst    d6,status(a0)
                 beq.s   locret_2061E
                 bclr    d6,status(a0)
@@ -92,7 +92,7 @@ sub_205FC:
 
 locret_2061E:
                 rts
-; End of function sub_205FC
+; End of function ReleasePlayerFromCollapsingPlatform
 
 ; ---------------------------------------------------------------------------
 

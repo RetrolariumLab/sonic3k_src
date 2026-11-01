@@ -28,7 +28,7 @@ loc_363B4:
                 move.l  #loc_363D0,(a0)
 
 loc_363D0:
-                bsr.s   sub_3643C
+                bsr.s   CompetitionItemSKConsumePickupPlayerContacts
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 asl.w   #3,d1
@@ -65,37 +65,37 @@ loc_36418:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3643C:
+CompetitionItemSKConsumePickupPlayerContacts:
                 tst.b   collision_property(a0)
                 beq.s   locret_36462
                 lea     (Player_1).w,a2
                 bclr    #0,collision_property(a0)
                 beq.s   loc_36450
-                bsr.s   sub_36464
+                bsr.s   CompetitionItemSKDispatchCollectedEffectByAnimation
 
 loc_36450:
                 lea     (Player_2).w,a2
                 bclr    #1,collision_property(a0)
                 beq.s   loc_3645E
-                bsr.s   sub_36464
+                bsr.s   CompetitionItemSKDispatchCollectedEffectByAnimation
 
 loc_3645E:
                 clr.b   collision_property(a0)
 
 locret_36462:
                 rts
-; End of function sub_3643C
+; End of function CompetitionItemSKConsumePickupPlayerContacts
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_36464:
+CompetitionItemSKDispatchCollectedEffectByAnimation:
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 add.w   d0,d0
                 move.w  off_36476(pc,d0.w),d0
                 jsr     off_36476(pc,d0.w)
                 rts
-; End of function sub_36464
+; End of function CompetitionItemSKDispatchCollectedEffectByAnimation
 
 ; ---------------------------------------------------------------------------
 off_36476:
@@ -130,7 +130,7 @@ loc_364BE:
                 move.b  #0,collision_flags(a0)
                 move.l  #loc_36A1A,d1
                 moveq   #9,d2
-                bsr.w   sub_36A38
+                bsr.w   CompetitionItemSKClonePrefixWithHandlerAndAnimation
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -155,7 +155,7 @@ loc_36510:
                 move.b  #0,collision_flags(a0)
                 move.l  #loc_36A1A,d1
                 moveq   #9,d2
-                bsr.w   sub_36A38
+                bsr.w   CompetitionItemSKClonePrefixWithHandlerAndAnimation
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -210,7 +210,7 @@ loc_365CE:
                 move.b  #0,collision_flags(a0)
                 move.l  #loc_36A1A,d1
                 moveq   #9,d2
-                bsr.w   sub_36A38
+                bsr.w   CompetitionItemSKClonePrefixWithHandlerAndAnimation
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -219,7 +219,7 @@ loc_365E8:
                 move.b  #0,collision_flags(a0)
                 move.l  #loc_36A1A,d1
                 moveq   #8,d2
-                bsr.w   sub_36A38
+                bsr.w   CompetitionItemSKClonePrefixWithHandlerAndAnimation
                 cmpa.w  #Player_1,a2
                 bne.s   loc_3660C
                 jmp     (GiveRing).l
@@ -258,7 +258,7 @@ loc_36652:
                 clr.b   collision_property(a0)
                 move.l  #loc_366B6,d1
                 moveq   #5,d2
-                bsr.w   sub_36A38
+                bsr.w   CompetitionItemSKClonePrefixWithHandlerAndAnimation
                 bne.s   locret_36674
                 move.w  top_solid_bit(a2),top_solid_bit(a1)
 
@@ -272,7 +272,7 @@ loc_36676:
                 clr.b   collision_property(a0)
                 move.l  #loc_366BE,d1
                 moveq   #6,d2
-                bsr.w   sub_36A38
+                bsr.w   CompetitionItemSKClonePrefixWithHandlerAndAnimation
                 bne.s   locret_36698
                 move.w  top_solid_bit(a2),top_solid_bit(a1)
 
@@ -335,13 +335,13 @@ loc_3670C:
                 lea     (Player_1).w,a2
                 bclr    #0,collision_property(a0)
                 beq.s   loc_36720
-                bsr.s   sub_3675E
+                bsr.s   CompetitionItemSKApplyPlaneMatchedUpwardFlipLaunch
 
 loc_36720:
                 lea     (Player_2).w,a2
                 bclr    #1,collision_property(a0)
                 beq.s   loc_3672E
-                bsr.s   sub_3675E
+                bsr.s   CompetitionItemSKApplyPlaneMatchedUpwardFlipLaunch
 
 loc_3672E:
                 clr.b   collision_property(a0)
@@ -364,7 +364,7 @@ loc_36758:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3675E:
+CompetitionItemSKApplyPlaneMatchedUpwardFlipLaunch:
                 move.w  top_solid_bit(a2),d0
                 cmp.w   top_solid_bit(a0),d0
                 beq.s   loc_3676A
@@ -391,7 +391,7 @@ loc_3676A:
 loc_367BA:
                 moveq   #signextendB(sfx_SmallBumpers),d0
                 jmp     (Play_SFX).l
-; End of function sub_3675E
+; End of function CompetitionItemSKApplyPlaneMatchedUpwardFlipLaunch
 
 ; ---------------------------------------------------------------------------
 
@@ -401,13 +401,13 @@ loc_367C2:
                 lea     (Player_1).w,a2
                 bclr    #0,collision_property(a0)
                 beq.s   loc_367D6
-                bsr.s   sub_3684C
+                bsr.s   CompetitionItemSKBeginGroundedMomentumTrap
 
 loc_367D6:
                 lea     (Player_2).w,a2
                 bclr    #1,collision_property(a0)
                 beq.s   loc_367E4
-                bsr.s   sub_3684C
+                bsr.s   CompetitionItemSKBeginGroundedMomentumTrap
 
 loc_367E4:
                 clr.b   collision_property(a0)
@@ -450,7 +450,7 @@ loc_36840:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3684C:
+CompetitionItemSKBeginGroundedMomentumTrap:
                 move.w  top_solid_bit(a2),d0
                 cmp.w   top_solid_bit(a0),d0
                 bne.s   locret_368A8
@@ -482,7 +482,7 @@ loc_3688E:
 
 locret_368A8:
                 rts
-; End of function sub_3684C
+; End of function CompetitionItemSKBeginGroundedMomentumTrap
 
 ; ---------------------------------------------------------------------------
 
@@ -492,19 +492,19 @@ loc_368AA:
                 lea     (Player_1).w,a2
                 bclr    #0,collision_property(a0)
                 beq.s   loc_368BE
-                bsr.s   sub_36906
+                bsr.s   CompetitionItemSKExplodeRollingHazardAndAttemptPlayerHurt
 
 loc_368BE:
                 lea     (Player_2).w,a2
                 bclr    #1,collision_property(a0)
                 beq.s   loc_368CC
-                bsr.s   sub_36906
+                bsr.s   CompetitionItemSKExplodeRollingHazardAndAttemptPlayerHurt
 
 loc_368CC:
                 clr.b   collision_property(a0)
 
 loc_368D0:
-                bsr.w   sub_36926
+                bsr.w   CompetitionItemSKMoveRollingHazardOnTerrainOrInAir
                 move.b  angle(a0),d0
                 addi.b  #$10,d0
                 lsr.b   #5,d0
@@ -523,7 +523,7 @@ loc_368FA:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_36906:
+CompetitionItemSKExplodeRollingHazardAndAttemptPlayerHurt:
                 move.w  top_solid_bit(a2),d0
                 cmp.w   top_solid_bit(a0),d0
                 beq.s   loc_36912
@@ -534,12 +534,12 @@ loc_36912:
                 move.l  #loc_36A1A,(a0)
                 move.b  #$B,anim(a0)
                 movea.l a2,a1
-                jmp     (sub_24280).l
-; End of function sub_36906
+                jmp     (HurtPlayerFromSolidHazard).l
+; End of function CompetitionItemSKExplodeRollingHazardAndAttemptPlayerHurt
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_36926:
+CompetitionItemSKMoveRollingHazardOnTerrainOrInAir:
                 btst    #1,status(a0)
                 bne.s   loc_36990
                 move.b  angle(a0),d0
@@ -559,7 +559,7 @@ sub_36926:
                 jsr     (Player_AnglePos).l
                 move.b  angle(a0),d0
                 bne.s   locret_3698E
-                jsr     (sub_FDEC).l
+                jsr     (ProbeLeftWallUsingYRadius).l
                 tst.w   d1
                 bpl.s   locret_3698E
                 sub.w   d1,x_pos(a0)
@@ -613,7 +613,7 @@ loc_369F2:
 loc_369F6:
                 move.b  angle(a0),d0
                 bne.s   locret_36A18
-                jsr     (sub_FDEC).l
+                jsr     (ProbeLeftWallUsingYRadius).l
                 tst.w   d1
                 bpl.s   locret_36A18
                 sub.w   d1,x_pos(a0)
@@ -636,11 +636,11 @@ loc_36A1A:
 
 loc_36A32:
                 jmp     (Draw_Sprite).l
-; End of function sub_36926
+; End of function CompetitionItemSKMoveRollingHazardOnTerrainOrInAir
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_36A38:
+CompetitionItemSKClonePrefixWithHandlerAndAnimation:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   locret_36A56
                 moveq   #subtype,d0
@@ -655,7 +655,7 @@ loc_36A44:
 
 locret_36A56:
                 rts
-; End of function sub_36A38
+; End of function CompetitionItemSKClonePrefixWithHandlerAndAnimation
 
 ; ---------------------------------------------------------------------------
 Ani_2PItem:

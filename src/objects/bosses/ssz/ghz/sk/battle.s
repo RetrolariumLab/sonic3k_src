@@ -51,7 +51,7 @@ loc_7A29C:
                 move.b  routine(a0),d0
                 move.w  off_7A2B4(pc,d0.w),d1
                 jsr     off_7A2B4(pc,d1.w)
-                bsr.w   sub_7A5A0
+                bsr.w   HandleSSZGHZBossHitOrDefeatWithMisoffsetPalette
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 off_7A2B4:
@@ -198,7 +198,7 @@ loc_7A446:
                 jsr     (SetUp_ObjAttributes).l
                 move.b  #$1A,child_dy(a0)
                 move.b  #1,$3A(a0)
-                bra.w   sub_7A634
+                bra.w   SeedSSZGHZChainSegmentDropWaitBySubtype
 ; ---------------------------------------------------------------------------
 
 loc_7A460:
@@ -263,7 +263,7 @@ off_7A4E6:
 ; ---------------------------------------------------------------------------
 
 loc_7A4EC:
-                bsr.w   sub_7A634
+                bsr.w   SeedSSZGHZChainSegmentDropWaitBySubtype
                 move.b  #4,$3A(a0)
                 lea     ObjDat3_7A66C(pc),a1
                 jmp     (SetUp_ObjAttributes).l
@@ -297,7 +297,7 @@ off_7A53E:
 ; ---------------------------------------------------------------------------
 
 loc_7A544:
-                bsr.w   sub_7A634
+                bsr.w   SeedSSZGHZChainSegmentDropWaitBySubtype
                 move.b  #3,$3A(a0)
                 lea     ObjDat3_7A678(pc),a1
                 jmp     (SetUp_ObjAttributes).l
@@ -326,7 +326,7 @@ loc_7A59A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7A5A0:
+HandleSSZGHZBossHitOrDefeatWithMisoffsetPalette:
                 tst.b   collision_flags(a0)
                 bne.s   locret_7A5EA
                 move.b  collision_property(a0),d0
@@ -346,7 +346,7 @@ loc_7A5C6:
                 addi.w  #2*2,d0
 
 loc_7A5D4:
-                bsr.w   sub_7A614
+                bsr.w   CopySSZGHZThreeColorPaletteAtByteOffset
                 subq.b  #1,$20(a0)
                 bne.s   locret_7A5EA
                 bclr    #6,status(a0)
@@ -366,15 +366,15 @@ loc_7A5EC:
 
 loc_7A60E:
                 jmp     (BossDefeated).l
-; End of function sub_7A5A0
+; End of function HandleSSZGHZBossHitOrDefeatWithMisoffsetPalette
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7A614:
+CopySSZGHZThreeColorPaletteAtByteOffset:
                 lea     word_7A622(pc),a1
                 lea     word_7A628(pc,d0.w),a2
                 jmp     (CopyWordData_3).l
-; End of function sub_7A614
+; End of function CopySSZGHZThreeColorPaletteAtByteOffset
 
 ; ---------------------------------------------------------------------------
 word_7A622:
@@ -385,12 +385,12 @@ word_7A628:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7A634:
+SeedSSZGHZChainSegmentDropWaitBySubtype:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  word_7A642(pc,d0.w),$2E(a0)
                 rts
-; End of function sub_7A634
+; End of function SeedSSZGHZChainSegmentDropWaitBySubtype
 
 ; ---------------------------------------------------------------------------
 word_7A642:

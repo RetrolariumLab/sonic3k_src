@@ -33,16 +33,16 @@ loc_48EEC:
                 lea     (Player_1).w,a1
                 lea     (_unkF7B0+0).w,a2
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_48F12
+                bsr.s   UpdatePlayerInDezHorizontalGravityTube
                 lea     (Player_2).w,a1
                 lea     (_unkF7B0+1).w,a2
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
-                bsr.s   sub_48F12
+                bsr.s   UpdatePlayerInDezHorizontalGravityTube
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_48F12:
+UpdatePlayerInDezHorizontalGravityTube:
                 btst    d6,status(a0)
                 bne.w   loc_48FA4
                 move.w  x_pos(a1),d0
@@ -167,7 +167,7 @@ loc_49056:
 
 locret_49068:
                 rts
-; End of function sub_48F12
+; End of function UpdatePlayerInDezHorizontalGravityTube
 
 ; ---------------------------------------------------------------------------
 
@@ -178,18 +178,18 @@ loc_4906A:
                 lea     (Player_1).w,a1
                 lea     (_unkF7B0+0).w,a2
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_49090
+                bsr.s   UpdatePlayerInDezVerticalGravityTube
                 lea     (Player_2).w,a1
                 lea     (_unkF7B0+1).w,a2
 ; Bug: if player 1 was riding the object, then d6 may have become dirty from
 ; a call to Perform_Player_DPLC, causing player 2 to behave erratically
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
-                bsr.s   sub_49090
+                bsr.s   UpdatePlayerInDezVerticalGravityTube
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_49090:
+UpdatePlayerInDezVerticalGravityTube:
                 btst    d6,status(a0)
                 bne.w   loc_49142
                 move.w  x_pos(a1),d0
@@ -209,7 +209,7 @@ sub_49090:
                 tst.b   object_control(a1)
                 bmi.s   locret_49140
                 move.w  d0,-(sp)
-                jsr     (sub_33C34).l
+                jsr     (AttachPlayerToScriptedRideObject).l
                 move.w  (sp)+,d1
                 move.b  #-$40,angle(a1)
                 bclr    #0,render_flags(a1)
@@ -289,7 +289,7 @@ loc_491CE:
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 jmp     (Perform_Player_DPLC).l
-; End of function sub_49090
+; End of function UpdatePlayerInDezVerticalGravityTube
 
 ; ---------------------------------------------------------------------------
 RawAni_491DA:

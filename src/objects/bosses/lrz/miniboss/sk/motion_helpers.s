@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_78B38:
+CopyLRZMinibossPaletteLinesThreeAndFour:
                 lea     (Normal_palette_line_3).w,a2
                 moveq   #bytesToLcnt($40),d0
 
@@ -12,11 +12,11 @@ loc_78B3E:
                 move.l  (a1)+,(a2)+
                 dbf     d0,loc_78B3E
                 rts
-; End of function sub_78B38
+; End of function CopyLRZMinibossPaletteLinesThreeAndFour
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_78B46:
+ScheduleLRZMinibossArmSegmentDestructionBySide:
                 movea.w $44(a0),a1
                 moveq   #6,d0
                 btst    #0,render_flags(a0)
@@ -36,7 +36,7 @@ loc_78B56:
                 move.w  d1,$2E(a0)
                 move.l  #loc_78B86,$34(a0)
                 rts
-; End of function sub_78B46
+; End of function ScheduleLRZMinibossArmSegmentDestructionBySide
 
 ; ---------------------------------------------------------------------------
 
@@ -53,7 +53,7 @@ locret_78BA8:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_78BAA:
+SeedLRZMinibossArmProjectileVelocity:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lsl.w   #2,d0
@@ -65,7 +65,7 @@ sub_78BAA:
 
 locret_78BC8:
                 rts
-; End of function sub_78BAA
+; End of function SeedLRZMinibossArmProjectileVelocity
 
 ; ---------------------------------------------------------------------------
 word_78BCA:
@@ -75,17 +75,17 @@ word_78BCA:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_78BD6:
+SuspendLRZArmInitializationUntilCapturedContinuation:
                 move.l  (sp)+,$34(a0)
                 move.l  #Wait_Draw,(a0)
                 move.b  #$80,$3C(a0)
                 move.b  #1,$40(a0)
                 rts
-; End of function sub_78BD6
+; End of function SuspendLRZArmInitializationUntilCapturedContinuation
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_78BEE:
+PlaceLRZMinibossArmBaseAtCameraSide:
                 move.w  #$20,d0
                 btst    #0,render_flags(a0)
                 beq.s   loc_78BFE
@@ -98,11 +98,11 @@ loc_78BFE:
                 addi.w  #$1B8,d0
                 move.w  d0,y_pos(a0)
                 rts
-; End of function sub_78BEE
+; End of function PlaceLRZMinibossArmBaseAtCameraSide
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_78C14:
+HandleLRZMinibossRootHitOrDefeatWithMisoffsetFlash:
                 tst.b   collision_flags(a0)
                 bne.s   locret_78C5E
                 move.b  collision_property(a0),d0
@@ -122,7 +122,7 @@ loc_78C3A:
                 addi.w  #2*2,d0
 
 loc_78C48:
-                bsr.w   sub_78C98
+                bsr.w   CopyLRZMinibossSixColorPaletteAtByteOffset
                 subq.b  #1,$20(a0)
                 bne.s   locret_78C5E
                 bclr    #6,status(a0)
@@ -142,15 +142,15 @@ loc_78C60:
                 jsr     (CreateChild1_Normal).l
                 jsr     (Displace_PlayerOffObject).l
                 jmp     (BossDefeated_StopTimer).l
-; End of function sub_78C14
+; End of function HandleLRZMinibossRootHitOrDefeatWithMisoffsetFlash
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_78C98:
+CopyLRZMinibossSixColorPaletteAtByteOffset:
                 lea     word_78CA6(pc),a1
                 lea     word_78CB2(pc,d0.w),a2
                 jmp     (CopyWordData_6).l
-; End of function sub_78C98
+; End of function CopyLRZMinibossSixColorPaletteAtByteOffset
 
 ; ---------------------------------------------------------------------------
 word_78CA6:
@@ -162,7 +162,7 @@ word_78CB2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_78CCA:
+ContinueLRZMinibossRootFlashWhileRetracting:
                 tst.b   collision_property(a0)
                 beq.s   loc_78C60
                 tst.b   $20(a0)
@@ -174,18 +174,18 @@ sub_78CCA:
                 addi.w  #2*2,d0
 
 loc_78CE4:
-                bsr.s   sub_78C98
+                bsr.s   CopyLRZMinibossSixColorPaletteAtByteOffset
                 subq.b  #1,$20(a0)
                 bne.s   locret_78CF2
                 bclr    #6,status(a0)
 
 locret_78CF2:
                 rts
-; End of function sub_78CCA
+; End of function ContinueLRZMinibossRootFlashWhileRetracting
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_78CF4:
+HandleLRZMinibossTerminalArmHitAndSideDefeat:
                 tst.b   collision_flags(a0)
                 bne.s   locret_78D2A
                 move.b  collision_property(a0),d0
@@ -222,4 +222,4 @@ loc_78D40:
                 bne.s   locret_78D2A
                 move.w  #$1F,$2E(a1)
                 rts
-; End of function sub_78CF4
+; End of function HandleLRZMinibossTerminalArmHitAndSideDefeat

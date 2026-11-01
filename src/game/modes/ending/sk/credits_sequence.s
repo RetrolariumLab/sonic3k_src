@@ -4,11 +4,11 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5B18E:
+SKEndingDispatchCreditsInitDelayScrollAndFinish:
                 move.w  (_unkFA86).w,d0
                 move.w  off_5B19A(pc,d0.w),d0
                 jmp     off_5B19A(pc,d0.w)
-; End of function sub_5B18E
+; End of function SKEndingDispatchCreditsInitDelayScrollAndFinish
 
 ; ---------------------------------------------------------------------------
 off_5B19A:
@@ -32,7 +32,7 @@ loc_5B1A2:
                 move.b  #mus_CreditsK,subtype(a1)
 
 loc_5B1D2:
-                bsr.w   sub_5B514
+                bsr.w   SKCreditsSelectProductRegionCharacterCompletionScrollSpeedDelay
                 move.w  #$EEE,(Normal_palette+$2).w
                 move.w  #$EE,(Normal_palette_line_2+$2).w
                 lea     PLC_SKCredits(pc),a1
@@ -47,7 +47,7 @@ loc_5B1F4:
                 subq.w  #1,(_unkF660).w
                 bpl.s   locret_5B202
                 addq.w  #2,(_unkFA86).w
-                bsr.w   sub_5B42A
+                bsr.w   SKCreditsQueueProductCharacterCompletionPoseGraphics
 
 locret_5B202:
                 rts
@@ -67,7 +67,7 @@ loc_5B204:
                 addi.w  #$E00,d0
                 move.w  d0,d1
                 andi.w  #$F00,d1
-                bsr.w   sub_5B2D6
+                bsr.w   SKCreditsClearFortyColumnsAcrossTwoPlaneRows
                 moveq   #0,d2
                 tst.w   (SK_alone_flag).w
                 beq.s   loc_5B238
@@ -96,7 +96,7 @@ loc_5B238:
 
 loc_5B276:
                 andi.w  #$FFE,d2
-                bsr.w   sub_5B318
+                bsr.w   SKCreditsBuildAndUploadVariableWidthTwoRowText
                 addq.w  #2,(_unkFA84).w
 
 locret_5B282:
@@ -146,7 +146,7 @@ locret_5B2D4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5B2D6:
+SKCreditsClearFortyColumnsAcrossTwoPlaneRows:
                 move    #$2700,sr
                 lea     (VDP_data_port).l,a6
                 move.w  d1,d2
@@ -175,12 +175,12 @@ loc_5B306:
 
 locret_5B316:
                 rts
-; End of function sub_5B2D6
+; End of function SKCreditsClearFortyColumnsAcrossTwoPlaneRows
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5B318:
-                bsr.w   sub_5B36C
+SKCreditsBuildAndUploadVariableWidthTwoRowText:
+                bsr.w   SKCreditsBuildAsciiGlyphLineIntoTwoScratchRows
                 move    #$2700,sr
                 lea     (VDP_data_port).l,a6
                 addi.w  #VRAM_Plane_A_Name_Table,d2
@@ -209,11 +209,11 @@ loc_5B360:
                 dbf     d1,loc_5B360
                 move    #$2300,sr
                 rts
-; End of function sub_5B318
+; End of function SKCreditsBuildAndUploadVariableWidthTwoRowText
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5B36C:
+SKCreditsBuildAsciiGlyphLineIntoTwoScratchRows:
                 lea     (Chunk_table+$7000).l,a2
                 lea     (Chunk_table+$7080).l,a3
                 moveq   #0,d0
@@ -315,11 +315,11 @@ loc_5B420:
                 clr.w   (a2)+
                 clr.w   (a3)+
                 bra.w   loc_5B37A
-; End of function sub_5B36C
+; End of function SKCreditsBuildAsciiGlyphLineIntoTwoScratchRows
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5B42A:
+SKCreditsQueueProductCharacterCompletionPoseGraphics:
                 lea     (ArtKosM_ANDKnuckles).l,a1
                 move.w  #tiles_to_bytes(ArtTile_Ending_ANDKnuckles),d2
                 jsr     (Queue_Kos_Module).l
@@ -351,26 +351,26 @@ loc_5B468:
 loc_5B46C:
                 movea.l off_5B472(pc,d1.w),a2
                 jmp     (a2)
-; End of function sub_5B42A
+; End of function SKCreditsQueueProductCharacterCompletionPoseGraphics
 
 ; ---------------------------------------------------------------------------
 off_5B472:
                 dc.l    loc_5B4C4
                 dc.l    loc_5B4C4
                 dc.l    loc_5B4C4
-                dc.l    sub_5B4E8
-                dc.l    sub_5B4E8
+                dc.l    SKCreditsQueueSonicThreePoseBannerArt
+                dc.l    SKCreditsQueueSonicThreePoseBannerArt
                 dc.l    loc_5B4F8
-                dc.l    sub_5B4E8
-                dc.l    sub_5B4E8
+                dc.l    SKCreditsQueueSonicThreePoseBannerArt
+                dc.l    SKCreditsQueueSonicThreePoseBannerArt
                 dc.l    loc_5B4F8
-                dc.l    sub_5B4E8
-                dc.l    sub_5B4E8
+                dc.l    SKCreditsQueueSonicThreePoseBannerArt
+                dc.l    SKCreditsQueueSonicThreePoseBannerArt
                 dc.l    loc_5B4F8
                 dc.l    loc_5B4C4
                 dc.l    loc_5B4BA
                 dc.l    loc_5B4BA
-                dc.l    sub_5B4E8
+                dc.l    SKCreditsQueueSonicThreePoseBannerArt
                 dc.l    loc_5B4DE
                 dc.l    loc_5B4D4
 ; ---------------------------------------------------------------------------
@@ -395,15 +395,15 @@ loc_5B4DE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5B4E8:
+SKCreditsQueueSonicThreePoseBannerArt:
                 lea     (ArtKosM_S3PoseBanner).l,a1
                 move.w  #tiles_to_bytes(ArtTile_Ending_Logo),d2
                 jmp     (Queue_Kos_Module).l
-; End of function sub_5B4E8
+; End of function SKCreditsQueueSonicThreePoseBannerArt
 
 ; ---------------------------------------------------------------------------
 
 loc_5B4F8:
-                bsr.s   sub_5B4E8
+                bsr.s   SKCreditsQueueSonicThreePoseBannerArt
                 lea     PLC_S3EndingGraphics(pc),a1
                 jmp     (Load_PLC_Raw).l

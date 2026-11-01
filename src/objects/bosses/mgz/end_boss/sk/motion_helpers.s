@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6D228:
+SelectMGZBossAttachmentFrameAndDepthFromParentAngle:
                 movea.w parent3(a0),a1
                 move.w  angle(a1),d0
                 move.w  d0,angle(a0)
@@ -18,7 +18,7 @@ sub_6D228:
 
 locret_6D248:
                 rts
-; End of function sub_6D228
+; End of function SelectMGZBossAttachmentFrameAndDepthFromParentAngle
 
 ; ---------------------------------------------------------------------------
 byte_6D24A:
@@ -43,7 +43,7 @@ byte_6D25A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6D26A:
+SelectMGZBossAttachmentOffsetsFromParentAngle:
                 movea.w parent3(a0),a1
                 move.w  angle(a1),d0
                 move.w  d0,angle(a0)
@@ -51,7 +51,7 @@ sub_6D26A:
                 move.b  (a3)+,child_dx(a0)
                 move.b  (a3)+,child_dy(a0)
                 rts
-; End of function sub_6D26A
+; End of function SelectMGZBossAttachmentOffsetsFromParentAngle
 
 ; ---------------------------------------------------------------------------
 byte_6D284:
@@ -76,7 +76,7 @@ byte_6D294:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6D2A4:
+SelectMGZBossPoseChildOffsetsAndFrame:
                 movea.w parent3(a0),a1
                 moveq   #0,d0
                 move.b  $3A(a1),d0
@@ -92,7 +92,7 @@ sub_6D2A4:
 
 locret_6D2D0:
                 rts
-; End of function sub_6D2A4
+; End of function SelectMGZBossPoseChildOffsetsAndFrame
 
 ; ---------------------------------------------------------------------------
 byte_6D2D2:
@@ -140,7 +140,7 @@ off_6D314:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6D334:
+SetMGZBossIndexedAngleVelocity:
                 move.w  angle(a0),d0
                 add.w   d0,d0
                 move.l  word_6D34E(pc,d0.w),x_vel(a0)   ; and y_vel
@@ -150,7 +150,7 @@ sub_6D334:
 
                 .return:
                 rts
-; End of function sub_6D334
+; End of function SetMGZBossIndexedAngleVelocity
 
 ; ---------------------------------------------------------------------------
 word_6D34E:
@@ -165,7 +165,7 @@ word_6D34E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6D36E:
+InitializeMGZBossStaggeredTrailVelocityAndDelay:
                 movea.w parent3(a0),a1
                 move.w  angle(a1),d0
                 add.w   d0,d0
@@ -179,7 +179,7 @@ loc_6D38A:
                 move.b  subtype(a0),d0
                 move.w  word_6D398(pc,d0.w),$2E(a0)
                 rts
-; End of function sub_6D36E
+; End of function InitializeMGZBossStaggeredTrailVelocityAndDelay
 
 ; ---------------------------------------------------------------------------
 word_6D398:
@@ -233,7 +233,7 @@ word_6D406:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6D42E:
+LaunchMGZBossUpperDrillPassAndRecordPlan:
                 jsr     (Random_Number).l
                 andi.w  #$FF,d0
                 move.w  d0,d1
@@ -275,7 +275,7 @@ loc_6D45E:
 
 locret_6D4AA:
                 rts
-; End of function sub_6D42E
+; End of function LaunchMGZBossUpperDrillPassAndRecordPlan
 
 ; ---------------------------------------------------------------------------
 word_6D4AC:
@@ -292,7 +292,7 @@ off_6D4BC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6D4DC:
+LaunchMGZBossLowerDrillPassFromUpperPlan:
                 jsr     (Random_Number).l
                 andi.w  #$7F,d0
                 move.w  d0,d1
@@ -311,7 +311,7 @@ loc_6D508:
                 move.w  #$F8,d3
                 lea     (_unkFA8A).w,a2
                 bra.w   loc_6D45E
-; End of function sub_6D4DC
+; End of function LaunchMGZBossLowerDrillPassFromUpperPlan
 
 ; ---------------------------------------------------------------------------
 byte_6D516:
@@ -486,7 +486,7 @@ loc_6D6BC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6D6CC:
+SelectMGZBossScaledFlybyAndNextEntryPattern:
                 movea.w parent3(a0),a2
                 moveq   #0,d0
                 move.b  $39(a2),d0
@@ -499,7 +499,7 @@ sub_6D6CC:
                 move.w  (a1)+,y_vel(a0)
                 move.w  (a1)+,$3C(a0)
                 rts
-; End of function sub_6D6CC
+; End of function SelectMGZBossScaledFlybyAndNextEntryPattern
 
 ; ---------------------------------------------------------------------------
 word_6D6F8:

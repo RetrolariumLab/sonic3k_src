@@ -4,7 +4,7 @@
 ; ---------------------------------------------------------------------------
 
 loc_81492:
-                bsr.w   sub_82742
+                bsr.w   BeginDDZFlightFailureWhenSuperModeExpires
                 moveq   #0,d0
                 move.b  routine(a0),d0
                 move.w  off_81514(pc,d0.w),d1
@@ -14,13 +14,13 @@ loc_81492:
                 move.w  d1,(_unkFABC).w
                 eor.w   d1,d0
                 beq.s   loc_814B8
-                bsr.w   sub_8151C
+                bsr.w   HandleDDZFlightDebugModeTransition
 
 loc_814B8:
                 tst.w   d1
                 bne.s   locret_81512
-                bsr.w   sub_82920
-                bsr.w   sub_829D2
+                bsr.w   AdvanceDDZFlightCameraAndCarryControllerByScrollDelta
+                bsr.w   SyncDDZPlayerPositionAndApplyCameraDeadbands
                 btst    #1,(_unkFAB8).w
                 beq.s   locret_81512
                 move.l  #loc_816FC,(a0)
@@ -53,7 +53,7 @@ off_81514:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8151C:
+HandleDDZFlightDebugModeTransition:
                 tst.w   d1
                 bne.s   loc_81548
                 lea     (Player_1).w,a1
@@ -70,7 +70,7 @@ loc_81548:
                 clr.w   (Camera_min_X_pos).w
                 move.w  #$7FFF,(Camera_max_X_pos).w
                 rts
-; End of function sub_8151C
+; End of function HandleDDZFlightDebugModeTransition
 
 ; ---------------------------------------------------------------------------
 
@@ -167,7 +167,7 @@ loc_8167C:
 ; ---------------------------------------------------------------------------
 
 loc_816D2:
-                jsr     (sub_5FCCE).l
+                jsr     (EndingAndDDZPrepareHyperSonicVisualState).l
                 move.l  #Obj_HyperSonic_Stars,(Invincibility_stars).w
                 move.l  #Obj_HyperSonicKnux_Trail,(Super_stars).w
 
@@ -177,16 +177,16 @@ loc_816E8:
 ; ---------------------------------------------------------------------------
 
 loc_816F4:
-                bsr.w   sub_82772
-                bra.w   sub_828B2
+                bsr.w   ComputeDDZFlightInputImpulseDragAndHitResponse
+                bra.w   IntegrateDDZFlightWithinCameraRelativeWindows
 ; ---------------------------------------------------------------------------
 
 loc_816FC:
-                bsr.w   sub_82742
-                bsr.w   sub_82772
-                bsr.w   sub_828B2
-                bsr.w   sub_829A0
-                bsr.w   sub_829D2
+                bsr.w   BeginDDZFlightFailureWhenSuperModeExpires
+                bsr.w   ComputeDDZFlightInputImpulseDragAndHitResponse
+                bsr.w   IntegrateDDZFlightWithinCameraRelativeWindows
+                bsr.w   AdvanceDDZVirtualWorldScrollDuringBossStage
+                bsr.w   SyncDDZPlayerPositionAndApplyCameraDeadbands
                 btst    #0,(_unkFAB8).w
                 beq.s   locret_81724
                 move.l  #loc_81726,(a0)
@@ -221,21 +221,21 @@ loc_8174E:
                 sub.w   d1,x_pos(a0)
 
 loc_81770:
-                bsr.w   sub_82742
-                bsr.w   sub_82772
-                bsr.w   sub_828B2
+                bsr.w   BeginDDZFlightFailureWhenSuperModeExpires
+                bsr.w   ComputeDDZFlightInputImpulseDragAndHitResponse
+                bsr.w   IntegrateDDZFlightWithinCameraRelativeWindows
                 move.w  (_unkFABC).w,d0
                 move.w  (Debug_placement_mode).w,d1
                 move.w  d1,(_unkFABC).w
                 eor.w   d1,d0
                 beq.s   loc_81790
-                bsr.w   sub_8151C
+                bsr.w   HandleDDZFlightDebugModeTransition
 
 loc_81790:
                 tst.w   d1
                 bne.w   locret_82ABA
-                bsr.w   sub_82920
-                bra.w   sub_829D2
+                bsr.w   AdvanceDDZFlightCameraAndCarryControllerByScrollDelta
+                bra.w   SyncDDZPlayerPositionAndApplyCameraDeadbands
 ; ---------------------------------------------------------------------------
 
 loc_8179E:

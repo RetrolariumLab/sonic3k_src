@@ -40,7 +40,7 @@ loc_31F22:
 loc_31F64:
                 andi.b  #1,d1
                 bne.s   loc_31F6C
-                bsr.s   sub_31FA6
+                bsr.s   CompetitionS3LaunchFromTriangleWithSubtypeFlipAndPlane
 
 loc_31F6C:
                 movem.l (sp)+,d1-d4
@@ -60,14 +60,14 @@ loc_31F6C:
 loc_31F9C:
                 andi.b  #1,d1
                 bne.s   locret_31FA4
-                bsr.s   sub_31FA6
+                bsr.s   CompetitionS3LaunchFromTriangleWithSubtypeFlipAndPlane
 
 locret_31FA4:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_31FA6:
+CompetitionS3LaunchFromTriangleWithSubtypeFlipAndPlane:
                 cmpi.b  #4,routine(a1)
                 blo.s   loc_31FB0
                 rts
@@ -132,4 +132,4 @@ loc_32062:
                 bclr    #Status_RollJump,status(a1)
                 moveq   #signextendB(sfx_SmallBumpers),d0
                 jmp     (Play_SFX).l
-; End of function sub_31FA6
+; End of function CompetitionS3LaunchFromTriangleWithSubtypeFlipAndPlane

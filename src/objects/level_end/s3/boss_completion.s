@@ -3,7 +3,7 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 
 ; ---------------------------------------------------------------------------
-sub_5439C:
+GetS3LBZEndingCharacterVariant:
                 move.w  (Player_mode).w,d0
                 cmpi.w  #2,d0
                 beq.s   loc_543B2

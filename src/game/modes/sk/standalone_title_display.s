@@ -38,7 +38,7 @@ Copy_Map_Line_To_VRAM:
                 moveq   #$28-1,d3
                 lea     (VDP_data_port).l,a6
                 move    #$2700,sr
-                bsr.s   sub_5D42
+                bsr.s   SKTitleWriteOneMapRowToVDPFromCommand
                 move    #$2300,sr
 
 locret_5D22:
@@ -55,7 +55,7 @@ RAM_Map_Data_To_VDP:
                 .loop:
                 movea.l a1,a2
                 move.w  d1,d3
-                bsr.s   sub_5D42
+                bsr.s   SKTitleWriteOneMapRowToVDPFromCommand
                 movea.l a2,a1
                 addi.l  #$80<<16,d0
                 dbf     d2,.loop
@@ -64,14 +64,14 @@ RAM_Map_Data_To_VDP:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5D42:
+SKTitleWriteOneMapRowToVDPFromCommand:
                 move.l  d0,VDP_control_port-VDP_data_port(a6)
 
                 .loop:
                 move.w  (a1)+,(a6)
                 dbf     d3,.loop
                 rts
-; End of function sub_5D42
+; End of function SKTitleWriteOneMapRowToVDPFromCommand
 
 ; =============== S U B R O U T I N E =======================================
 

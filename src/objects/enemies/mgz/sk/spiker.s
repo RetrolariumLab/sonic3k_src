@@ -6,7 +6,7 @@
 Obj_Spiker:
                 jsr     (Obj_WaitOffscreen).l
                 moveq   #$A,d0
-                bsr.w   sub_88DCE
+                bsr.w   ConsumeSpikerSpringRequestAndSaveRoutine
                 moveq   #0,d0
                 move.b  routine(a0),d0
                 move.w  Spiker_Index(pc,d0.w),d1
@@ -219,7 +219,7 @@ loc_88D54:
 ; ---------------------------------------------------------------------------
 
 loc_88D5C:
-                bsr.w   sub_88DA6
+                bsr.w   PrimeSpikerSpringContactPlayer
                 move.b  #4,routine(a0)
                 clr.b   collision_flags(a0)
                 move.w  #$10,$2E(a0)
@@ -243,7 +243,7 @@ loc_88D98:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_88DA6:
+PrimeSpikerSpringContactPlayer:
                 clr.w   y_vel(a1)
                 bset    #Status_InAir,status(a1)
                 addq.w  #6,y_pos(a1)
@@ -253,11 +253,11 @@ sub_88DA6:
                 moveq   #signextendB(sfx_Spring),d0
                 jsr     (Play_SFX).l
                 rts
-; End of function sub_88DA6
+; End of function PrimeSpikerSpringContactPlayer
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_88DCE:
+ConsumeSpikerSpringRequestAndSaveRoutine:
                 btst    #3,$38(a0)
                 bne.s   loc_88DD8
                 rts
@@ -271,7 +271,7 @@ loc_88DD8:
                 move.b  d0,routine(a0)
                 move.l  #loc_88C6E,$34(a0)
                 rts
-; End of function sub_88DCE
+; End of function ConsumeSpikerSpringRequestAndSaveRoutine
 
 ; ---------------------------------------------------------------------------
 ObjDat_Spiker:

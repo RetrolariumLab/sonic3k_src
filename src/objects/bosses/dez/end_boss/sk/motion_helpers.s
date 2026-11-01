@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7F8A0:
+MoveDEZBossCapsuleWithPreintegratedReversibleGravity:
                 move.w  x_vel(a0),d0
                 ext.l   d0
                 lsl.l   #8,d0
@@ -22,11 +22,11 @@ loc_7F8BA:
                 lsl.l   #8,d0
                 add.l   d0,y_pos(a0)
                 rts
-; End of function sub_7F8A0
+; End of function MoveDEZBossCapsuleWithPreintegratedReversibleGravity
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7F8CA:
+DropDEZCapsuleWhenRestingSideMismatchesGravity:
                 tst.b   $3A(a0)
                 sne     d0
                 tst.b   (Reverse_gravity_flag).w
@@ -49,11 +49,11 @@ loc_7F8FA:
 
 locret_7F8FE:
                 rts
-; End of function sub_7F8CA
+; End of function DropDEZCapsuleWhenRestingSideMismatchesGravity
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7F900:
+HandleRestingDEZCapsulePlayerContactAndLaunch:
                 jsr     Check_PlayerCollision(pc)
                 beq.w   locret_7F9A6
                 cmpi.b  #2,anim(a1)
@@ -74,7 +74,7 @@ loc_7F926:
                 move.b  #2,anim(a1)
                 move.w  #-$300,y_vel(a1)
                 bset    #Status_InAir,status(a1)
-                bsr.w   sub_7F4AC
+                bsr.w   ScheduleDEZBossCapsuleExplosionThenDelete
                 adda.w  #8,sp
                 rts
 ; ---------------------------------------------------------------------------
@@ -111,11 +111,11 @@ loc_7F9A0:
 
 locret_7F9A6:
                 rts
-; End of function sub_7F900
+; End of function HandleRestingDEZCapsulePlayerContactAndLaunch
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7F9A8:
+HandleRollingDEZCapsulePlayerContact:
                 jsr     Check_PlayerCollision(pc)
                 beq.w   locret_7F9F6
                 cmpi.b  #2,anim(a1)
@@ -148,11 +148,11 @@ loc_7F9E8:
 
 locret_7F9F6:
                 rts
-; End of function sub_7F9A8
+; End of function HandleRollingDEZCapsulePlayerContact
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7F9F8:
+HandleFallingDEZCapsuleContactSuppressionAndAttack:
                 jsr     Check_PlayerCollision(pc)
                 beq.s   locret_7FA5E
                 tst.b   $39(a0)
@@ -191,16 +191,16 @@ loc_7FA46:
                 neg.w   x_vel(a1)
                 neg.w   y_vel(a1)
                 neg.w   ground_vel(a1)
-                bsr.w   sub_7F4AC
+                bsr.w   ScheduleDEZBossCapsuleExplosionThenDelete
                 adda.w  #8,sp
 
 locret_7FA5E:
                 rts
-; End of function sub_7F9F8
+; End of function HandleFallingDEZCapsuleContactSuppressionAndAttack
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7FA60:
+ReverseDEZEndBossAtInclusiveWorldXBounds:
                 move.w  x_pos(a0),d0
                 tst.w   x_vel(a0)
                 bmi.s   loc_7FA72
@@ -218,11 +218,11 @@ loc_7FA78:
 
 locret_7FA7C:
                 rts
-; End of function sub_7FA60
+; End of function ReverseDEZEndBossAtInclusiveWorldXBounds
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7FA7E:
+LaunchPlayerFromDEZBossBumperContact:
                 jsr     Check_PlayerCollision(pc)
                 beq.s   locret_7FACA
                 move.b  $3C(a0),d0
@@ -245,11 +245,11 @@ sub_7FA7E:
 
 locret_7FACA:
                 rts
-; End of function sub_7FA7E
+; End of function LaunchPlayerFromDEZBossBumperContact
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7FACC:
+SelectDEZBossBumperFrameAndFlipFromAngle:
                 moveq   #0,d0
                 move.b  $3C(a0),d0
                 bclr    #7,d0
@@ -279,7 +279,7 @@ loc_7FAF0:
 loc_7FB04:
                 move.b  d0,render_flags(a0)
                 rts
-; End of function sub_7FACC
+; End of function SelectDEZBossBumperFrameAndFlipFromAngle
 
 ; ---------------------------------------------------------------------------
 byte_7FB0A:
@@ -290,7 +290,7 @@ byte_7FB0A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7FB1A:
+SeedDEZCapsuleThreeFragmentFramesAndVelocity:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,d1
@@ -305,7 +305,7 @@ sub_7FB1A:
 
 locret_7FB40:
                 rts
-; End of function sub_7FB1A
+; End of function SeedDEZCapsuleThreeFragmentFramesAndVelocity
 
 ; ---------------------------------------------------------------------------
 word_7FB42:
@@ -315,7 +315,7 @@ word_7FB42:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7FB4E:
+DamageDEZEndBossFromCapsuleRangeAndDestroyCapsule:
                 movea.w parent3(a0),a1
                 btst    #6,status(a1)
                 bne.s   locret_7FB88
@@ -335,12 +335,12 @@ loc_7FB74:
                 bset    #6,status(a1)
 
 loc_7FB82:
-                bsr.w   sub_7F4B8
+                bsr.w   ScheduleDEZBossCapsuleExplosionThenThreeDebris
                 addq.w  #4,sp
 
 locret_7FB88:
                 rts
-; End of function sub_7FB4E
+; End of function DamageDEZEndBossFromCapsuleRangeAndDestroyCapsule
 
 ; ---------------------------------------------------------------------------
 word_7FB8A:
@@ -348,7 +348,7 @@ word_7FB8A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7FB92:
+ConsumeDEZEndBossReturnedCapsuleHitLatch:
                 tst.b   $42(a0)
                 beq.s   locret_7FBD4
                 tst.b   $20(a0)
@@ -366,7 +366,7 @@ loc_7FBB2:
                 addi.w  #2*6,d0
 
 loc_7FBC0:
-                bsr.w   sub_7FC0E
+                bsr.w   CopyDEZEndBossSixColorPalette
                 subq.b  #1,$20(a0)
                 bne.s   locret_7FBD4
                 bclr    #6,status(a0)
@@ -389,15 +389,15 @@ loc_7FBD6:
 
 loc_7FC0A:
                 jmp     BossDefeated_StopTimer(pc)
-; End of function sub_7FB92
+; End of function ConsumeDEZEndBossReturnedCapsuleHitLatch
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7FC0E:
+CopyDEZEndBossSixColorPalette:
                 lea     word_7FC1A(pc),a1
                 lea     word_7FC26(pc,d0.w),a2
                 jmp     CopyWordData_6(pc)
-; End of function sub_7FC0E
+; End of function CopyDEZEndBossSixColorPalette
 
 ; ---------------------------------------------------------------------------
 word_7FC1A:

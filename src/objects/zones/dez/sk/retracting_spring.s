@@ -78,7 +78,7 @@ loc_4813C:
                 jsr     (SolidObjectTop_1P).l
                 btst    #p1_standing_bit,status(a0)
                 beq.s   loc_4816E
-                jsr     (sub_22F98).l
+                jsr     (LaunchPlayerFromUpSpring).l
 
 loc_4816E:
                 movem.l (sp)+,d1-d4
@@ -87,7 +87,7 @@ loc_4816E:
                 jsr     (SolidObjectTop_1P).l
                 btst    #p2_standing_bit,status(a0)
                 beq.s   loc_4818C
-                jsr     (sub_22F98).l
+                jsr     (LaunchPlayerFromUpSpring).l
 
 loc_4818C:
                 lea     (Ani_DEZRetractingSpring).l,a1

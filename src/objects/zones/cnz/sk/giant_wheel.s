@@ -11,15 +11,15 @@ Obj_CNZGiantWheel:
 loc_328D0:
                 lea     $36(a0),a2
                 lea     (Player_1).w,a1
-                bsr.s   sub_328E8
+                bsr.s   ConstrainPlayerSpeedOnCnzGiantWheel
                 addq.w  #1,a2
                 lea     (Player_2).w,a1
-                bsr.s   sub_328E8
+                bsr.s   ConstrainPlayerSpeedOnCnzGiantWheel
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_328E8:
+ConstrainPlayerSpeedOnCnzGiantWheel:
                 moveq   #0,d2
                 move.b  $32(a0),d2
                 move.w  d2,d3
@@ -96,4 +96,4 @@ loc_32982:
 
 locret_3298E:
                 rts
-; End of function sub_328E8
+; End of function ConstrainPlayerSpeedOnCnzGiantWheel

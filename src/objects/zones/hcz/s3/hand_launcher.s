@@ -78,7 +78,7 @@ loc_2F730:
 ; ---------------------------------------------------------------------------
 
 loc_2F750:
-                bsr.w   sub_2F860
+                bsr.w   UpdatePlayersOnHczHand
                 bra.s   loc_2F762
 ; ---------------------------------------------------------------------------
 
@@ -102,7 +102,7 @@ loc_2F786:
                 tst.w   $36(a0)
                 beq.s   loc_2F796
                 subq.w  #1,$36(a0)
-                bsr.w   sub_2F860
+                bsr.w   UpdatePlayersOnHczHand
                 bra.s   loc_2F7D0
 ; ---------------------------------------------------------------------------
 
@@ -119,7 +119,7 @@ loc_2F796:
 loc_2F7B4:
                 cmpi.w  #$18,$30(a0)
                 bne.s   loc_2F7CC
-                bsr.w   sub_2F7FC
+                bsr.w   LaunchPlayersFromHczHand
                 move.b  #6,mapping_frame(a0)
                 move.w  #$200,priority(a0)
 
@@ -142,17 +142,17 @@ loc_2F7F6:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2F7FC:
+LaunchPlayersFromHczHand:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
-                bsr.w   sub_2F80C
+                bsr.w   LaunchPlayerFromHczHand
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
-; End of function sub_2F7FC
+; End of function LaunchPlayersFromHczHand
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2F80C:
+LaunchPlayerFromHczHand:
                 bclr    d6,$35(a0)
                 beq.s   loc_2F84C
                 move.w  #$1000,ground_vel(a1)
@@ -179,23 +179,23 @@ loc_2F84C:
 
 locret_2F85E:
                 rts
-; End of function sub_2F80C
+; End of function LaunchPlayerFromHczHand
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2F860:
+UpdatePlayersOnHczHand:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 move.b  (Ctrl_1_pressed_logical).w,d0
-                bsr.w   sub_2F878
+                bsr.w   UpdatePlayerOnHczHand
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 move.b  (Ctrl_2_pressed_logical).w,d0
-; End of function sub_2F860
+; End of function UpdatePlayersOnHczHand
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2F878:
+UpdatePlayerOnHczHand:
                 btst    d6,$35(a0)
                 beq.s   loc_2F8CE
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
@@ -267,7 +267,7 @@ loc_2F964:
 
 locret_2F96A:
                 rts
-; End of function sub_2F878
+; End of function UpdatePlayerOnHczHand
 
 ; ---------------------------------------------------------------------------
 

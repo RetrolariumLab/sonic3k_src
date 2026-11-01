@@ -76,12 +76,12 @@ loc_90A3A:
                 addq.w  #1,d2
                 dbf     d3,loc_90A26
                 lea     (Player_1).w,a1
-                bsr.w   sub_90A4C
+                bsr.w   PreparePlayerForHpzEmeraldConversion
                 lea     (Player_2).w,a1
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_90A4C:
+PreparePlayerForHpzEmeraldConversion:
                 move.b  #$83,object_control(a1)
                 bset    #7,art_tile(a1)
                 move.b  #0,mapping_frame(a1)
@@ -89,7 +89,7 @@ sub_90A4C:
                 move.w  #$1640,x_pos(a1)
                 move.w  #$3A3,y_pos(a1)
                 rts
-; End of function sub_90A4C
+; End of function PreparePlayerForHpzEmeraldConversion
 
 ; ---------------------------------------------------------------------------
 
@@ -189,12 +189,12 @@ loc_90B72:
                 add.w   d1,d1
                 lea     byte_90BBC(pc,d1.w),a2
                 lea     (Player_1).w,a1
-                bsr.w   sub_90B84
+                bsr.w   SetPlayerHpzEmeraldViewingPose
                 lea     (Player_2).w,a1
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_90B84:
+SetPlayerHpzEmeraldViewingPose:
                 bclr    #0,render_flags(a1)
                 bclr    #Status_Facing,status(a1)
                 tst.b   (a2)
@@ -211,7 +211,7 @@ loc_90BA0:
                 jsr     (Player_Load_PLC2).l
                 movea.l (sp)+,a2
                 rts
-; End of function sub_90B84
+; End of function SetPlayerHpzEmeraldViewingPose
 
 ; ---------------------------------------------------------------------------
 byte_90BBC:
@@ -363,7 +363,7 @@ loc_90D30:
                 bmi.s   loc_90D42
                 cmpi.w  #$20,$2E(a0)
                 bne.s   loc_90D20
-                bsr.w   sub_90E9A
+                bsr.w   ApplyHpzConversionBeamMidpoint
 
 loc_90D42:
                 move.l  #loc_90D52,(a0)
@@ -404,12 +404,12 @@ loc_90DA2:
                 bpl.s   locret_90DD6
                 move.l  #loc_90DDC,(a0)
                 lea     (Player_1).w,a1
-                bsr.w   sub_90DC0
+                bsr.w   SetPlayerHpzEmeraldRevealPose
                 lea     (Player_2).w,a1
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_90DC0:
+SetPlayerHpzEmeraldRevealPose:
                 moveq   #0,d0
                 move.b  character_id(a1),d0
                 move.b  byte_90DD8(pc,d0.w),mapping_frame(a1)
@@ -419,7 +419,7 @@ sub_90DC0:
 
 locret_90DD6:
                 rts
-; End of function sub_90DC0
+; End of function SetPlayerHpzEmeraldRevealPose
 
 ; ---------------------------------------------------------------------------
 byte_90DD8:
@@ -446,7 +446,7 @@ loc_90DFC:
                 move.l  #loc_90E1C,(a0)
                 bset    #7,render_flags(a0)
                 move.w  #$7F,$2E(a0)
-                bsr.w   sub_90F0A
+                bsr.w   InitializeHpzChaosEmeraldConversionParticle
 
 loc_90E1C:
                 move.w  $3A(a0),d0
@@ -501,17 +501,17 @@ loc_90E94:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_90E9A:
+ApplyHpzConversionBeamMidpoint:
                 cmpi.b  #7,subtype(a0)
                 bne.s   loc_90ED0
                 lea     (Player_1).w,a1
-                bsr.w   sub_90EAE
+                bsr.w   SetPlayerHpzBeamReactionPose
                 lea     (Player_2).w,a1
-; End of function sub_90E9A
+; End of function ApplyHpzConversionBeamMidpoint
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_90EAE:
+SetPlayerHpzBeamReactionPose:
                 moveq   #0,d0
                 move.b  character_id(a1),d0
                 cmpi.b  #1,d0
@@ -522,7 +522,7 @@ loc_90EBE:
                 move.b  RawAni_90F06(pc,d0.w),mapping_frame(a1)
                 move.b  #5,anim(a1)
                 jmp     (Player_Load_PLC2).l
-; End of function sub_90EAE
+; End of function SetPlayerHpzBeamReactionPose
 
 ; ---------------------------------------------------------------------------
 
@@ -548,7 +548,7 @@ RawAni_90F06:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_90F0A:
+InitializeHpzChaosEmeraldConversionParticle:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,d1
@@ -579,7 +579,7 @@ loc_90F54:
                 bset    d0,$27(a1)
                 addq.w  #4,sp
                 jmp     (Delete_Current_Sprite).l
-; End of function sub_90F0A
+; End of function InitializeHpzChaosEmeraldConversionParticle
 
 ; ---------------------------------------------------------------------------
 byte_90F64:

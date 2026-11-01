@@ -306,7 +306,7 @@ ICZ1_IntroDeform:
                 lea     (HScroll_table).w,a1
                 moveq   #0,d3
                 moveq   #5-1,d2                         ; First five deformation speeds are constant
-                bsr.s   sub_53996
+                bsr.s   WriteIcz1IntroAcceleratingScrollBands
                 add.l   d1,d0
                 move.l  d1,d2
                 asr.l   #1,d2
@@ -318,16 +318,16 @@ ICZ1_IntroDeform:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_53996:
+WriteIcz1IntroAcceleratingScrollBands:
                 swap    d0
                 move.w  d0,(a1)+
                 swap    d0
                 add.l   d1,d0
                 add.l   d3,d1
                 addi.l  #$800,d3
-                dbf     d2,sub_53996
+                dbf     d2,WriteIcz1IntroAcceleratingScrollBands
                 rts
-; End of function sub_53996
+; End of function WriteIcz1IntroAcceleratingScrollBands
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -44,7 +44,7 @@ loc_14722:
                 bne.w   loc_147A8
                 cmpi.w  #0,(Current_zone_and_act).w
                 bne.s   loc_14744
-                bsr.w   sub_14B58
+                bsr.w   TailsS3ResetCPUFollowerToOffscreenCatchUp
                 move.w  #$A,(Tails_CPU_routine).w
                 move.b  #$83,object_control(a0)
                 rts
@@ -69,7 +69,7 @@ loc_14744:
 loc_14786:
                 cmpi.w  #$500,(Current_zone_and_act).w
                 bne.s   loc_147A0
-                bsr.w   sub_14B58
+                bsr.w   TailsS3ResetCPUFollowerToOffscreenCatchUp
                 move.w  #$A,(Tails_CPU_routine).w
                 move.b  #$83,object_control(a0)
                 rts
@@ -279,7 +279,7 @@ loc_149E8:
 ; ---------------------------------------------------------------------------
 
 loc_14A16:
-                bsr.w   sub_14B8A
+                bsr.w   TailsS3WatchCPUOffscreenTimeoutAndInteractionCode
                 tst.w   (Tails_CPU_idle_timer).w
                 bne.w   loc_14B4C
                 tst.b   object_control(a0)

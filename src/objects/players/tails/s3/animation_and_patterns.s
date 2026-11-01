@@ -33,7 +33,7 @@ loc_16392:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_163B8:
+TailsS3StepNormalAnimationFrameBytecode:
                 moveq   #0,d1
                 move.b  anim_frame(a0),d1
                 move.b  1(a1,d1.w),d0
@@ -73,7 +73,7 @@ loc_163F6:
 
 locret_16400:
                 rts
-; End of function sub_163B8
+; End of function TailsS3StepNormalAnimationFrameBytecode
 
 ; ---------------------------------------------------------------------------
 
@@ -190,7 +190,7 @@ loc_16500:
                 andi.b  #1,d1
                 andi.b  #$FC,render_flags(a0)
                 or.b    d1,render_flags(a0)
-                bra.w   sub_163B8
+                bra.w   TailsS3StepNormalAnimationFrameBytecode
 ; ---------------------------------------------------------------------------
 
 loc_1651C:
@@ -213,7 +213,7 @@ loc_16534:
                 andi.b  #1,d1
                 andi.b  #$FC,render_flags(a0)
                 or.b    d1,render_flags(a0)
-                bra.w   sub_163B8
+                bra.w   TailsS3StepNormalAnimationFrameBytecode
 ; ---------------------------------------------------------------------------
 
 loc_16556:
@@ -245,7 +245,7 @@ loc_16580:
                 move.b  d0,d3
                 lea     (AniTails_Tail03).l,a1
                 move.b  #3,anim_frame_timer(a0)
-                bsr.w   sub_163B8
+                bsr.w   TailsS3StepNormalAnimationFrameBytecode
                 add.b   d3,mapping_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------

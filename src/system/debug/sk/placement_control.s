@@ -54,7 +54,7 @@ loc_92A6E:
                 move.b  #0,(Debug_object).w
 
 loc_92AA0:
-                bsr.w   sub_92C88
+                bsr.w   DebugMode_LoadSelectedObjectAppearance
                 move.b  #$C,(Debug_camera_delay).w
                 move.b  #1,(Debug_camera_speed).w
 
@@ -67,12 +67,12 @@ loc_92AB0:
                 lea     (DebugOffs).l,a2
                 adda.w  (a2,d0.w),a2
                 move.w  (a2)+,d6
-                bsr.w   sub_92AD4
+                bsr.w   DebugMode_HandlePlacementControls
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_92AD4:
+DebugMode_HandlePlacementControls:
                 moveq   #0,d4
                 move.w  #1,d1
                 move.b  (Ctrl_1_pressed).w,d4
@@ -163,7 +163,7 @@ loc_92B96:
                 move.b  #0,(Debug_object).w
 
 loc_92BAE:
-                bra.w   sub_92C88
+                bra.w   DebugMode_LoadSelectedObjectAppearance
 ; ---------------------------------------------------------------------------
 
 loc_92BB2:
@@ -206,17 +206,17 @@ loc_92C0C:
                 lea     (Player_1).w,a1
                 move.l  (Debug_saved_mappings).w,mappings(a1)
                 move.w  (Debug_saved_art_tile).w,art_tile(a1)
-                bsr.s   sub_92C54
+                bsr.s   DebugMode_ResetPlayerAfterPlacement
                 move.b  #$13,y_radius(a1)
                 move.b  #9,x_radius(a1)
 
 locret_92C52:
                 rts
-; End of function sub_92AD4
+; End of function DebugMode_HandlePlacementControls
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_92C54:
+DebugMode_ResetPlayerAfterPlacement:
 ; Bug: this tries to clear the player's variables using d0, but d0 becomes
 ; dirty after the HUD_DrawInitial call, which wasn't there in S3
 ; Miraculously, drawing the lives HUD sets d0 back to zero, but since that
@@ -233,11 +233,11 @@ sub_92C54:
                 ori.b   #1<<Status_InAir,status(a1)
                 move.b  #2,routine(a1)
                 rts
-; End of function sub_92C54
+; End of function DebugMode_ResetPlayerAfterPlacement
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_92C88:
+DebugMode_LoadSelectedObjectAppearance:
                 moveq   #0,d0
                 move.b  (Debug_object).w,d0
                 add.w   d0,d0
@@ -248,4 +248,4 @@ sub_92C88:
                 move.w  8(a2,d0.w),art_tile(a0)
                 move.b  (a2,d0.w),mapping_frame(a0)
                 rts
-; End of function sub_92C88
+; End of function DebugMode_LoadSelectedObjectAppearance

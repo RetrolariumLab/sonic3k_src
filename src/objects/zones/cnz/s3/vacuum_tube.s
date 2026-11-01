@@ -17,14 +17,14 @@ loc_310B6:
 
 loc_310BC:
                 lea     (Player_1).w,a1
-                bsr.w   sub_310D2
+                bsr.w   ApplyCnzHorizontalVacuumTubeToPlayer
                 lea     (Player_2).w,a1
-                bsr.w   sub_310D2
+                bsr.w   ApplyCnzHorizontalVacuumTubeToPlayer
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_310D2:
+ApplyCnzHorizontalVacuumTubeToPlayer:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 btst    #0,status(a0)
@@ -80,22 +80,22 @@ loc_31158:
 
 locret_31162:
                 rts
-; End of function sub_310D2
+; End of function ApplyCnzHorizontalVacuumTubeToPlayer
 
 ; ---------------------------------------------------------------------------
 
 loc_31164:
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
-                bsr.w   sub_31180
+                bsr.w   UpdatePlayerInCnzVerticalVacuumTube
                 addq.w  #1,a2
                 lea     (Player_2).w,a1
-                bsr.w   sub_31180
+                bsr.w   UpdatePlayerInCnzVerticalVacuumTube
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_31180:
+UpdatePlayerInCnzVerticalVacuumTube:
                 move.b  (a2),d0
                 bne.w   loc_3120C
                 move.w  x_pos(a1),d0
@@ -180,4 +180,4 @@ loc_31244:
 
 locret_31250:
                 rts
-; End of function sub_31180
+; End of function UpdatePlayerInCnzVerticalVacuumTube

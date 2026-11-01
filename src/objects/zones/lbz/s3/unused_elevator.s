@@ -74,7 +74,7 @@ locret_247E2:
 ; ---------------------------------------------------------------------------
 
 loc_247E4:
-                bsr.w   sub_2485A
+                bsr.w   StepLbzUnusedElevatorMidpointMotion
                 tst.w   y_vel(a0)
                 bne.s   locret_2480E
                 addq.w  #2,$36(a0)
@@ -106,7 +106,7 @@ locret_2482C:
 ; ---------------------------------------------------------------------------
 
 loc_2482E:
-                bsr.w   sub_2485A
+                bsr.w   StepLbzUnusedElevatorMidpointMotion
                 tst.w   y_vel(a0)
                 bne.s   locret_24858
                 clr.w   $36(a0)
@@ -125,7 +125,7 @@ locret_24858:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2485A:
+StepLbzUnusedElevatorMidpointMotion:
                 move.w  y_pos(a0),d2
                 moveq   #8,d1
                 tst.b   $34(a0)
@@ -181,7 +181,7 @@ loc_248DA:
 
 locret_248E8:
                 rts
-; End of function sub_2485A
+; End of function StepLbzUnusedElevatorMidpointMotion
 
 ; ---------------------------------------------------------------------------
 Map_LBZUnusedElevator:

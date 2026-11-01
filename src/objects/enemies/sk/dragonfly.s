@@ -110,7 +110,7 @@ loc_8DE66:
 ; ---------------------------------------------------------------------------
 
 loc_8DE74:
-                bsr.w   sub_8DF80
+                bsr.w   FollowDragonflyLinkPredecessorY
                 subq.w  #1,$2E(a0)
                 bmi.s   loc_8DE80
                 rts
@@ -122,7 +122,7 @@ loc_8DE80:
 ; ---------------------------------------------------------------------------
 
 loc_8DE8A:
-                bsr.w   sub_8DF80
+                bsr.w   FollowDragonflyLinkPredecessorY
                 jsr     (Swing_LeftAndRight).l
                 jsr     (MoveSprite2).l
                 movea.w parent3(a0),a1
@@ -215,7 +215,7 @@ byte_8DF78:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8DF80:
+FollowDragonflyLinkPredecessorY:
                 movea.w parent3(a0),a1
                 move.w  y_pos(a1),d0
                 move.b  child_dy(a0),d1
@@ -223,7 +223,7 @@ sub_8DF80:
                 add.w   d1,d0
                 move.w  d0,y_pos(a0)
                 rts
-; End of function sub_8DF80
+; End of function FollowDragonflyLinkPredecessorY
 
 ; ---------------------------------------------------------------------------
 ObjDat3_8DF96:

@@ -5,7 +5,7 @@
 ; ---------------------------------------------------------------------------
 
 Ending_BackgroundInit:
-                jsr     sub_5B092(pc)
+                jsr     SKEndingClampInitialBackgroundYAndBuildCloudBands(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 move.w  #$200,d1
                 jsr     (Refresh_PlaneFull).l
@@ -38,7 +38,7 @@ Ending_BackgroundEvent_Index:
 loc_5AF4E:
                 tst.w   (Events_fg_5).w
                 bne.s   loc_5AF5A
-                jsr     sub_5B092(pc)
+                jsr     SKEndingClampInitialBackgroundYAndBuildCloudBands(pc)
                 bra.s   loc_5AF88
 ; ---------------------------------------------------------------------------
 
@@ -51,14 +51,14 @@ loc_5AF5A:
 loc_5AF6A:
                 move.l  (a1)+,(a5)+
                 dbf     d0,loc_5AF6A
-                jsr     sub_5B116(pc)
+                jsr     SKEndingLoadSkyAndSSZColorsIntoNormalAndTargetPalettes(pc)
                 move.w  #$220,d0
                 move.w  d0,(_unkEE9C).w
                 move.w  d0,(Camera_Y_pos_BG_rounded).w
                 addq.w  #4,(Events_routine_bg).w
 
 loc_5AF84:
-                jsr     sub_5B0A8(pc)
+                jsr     SKEndingBuildExpandingBackgroundBandsFromSceneX(pc)
 
 loc_5AF88:
                 lea     (Camera_Y_pos_BG_copy).w,a6
@@ -74,10 +74,10 @@ loc_5AF88:
 loc_5AFAA:
                 lea     (HScroll_table+$004).w,a5
                 jsr     (ApplyDeformation).l
-                lea     sub_592EE(pc),a1
+                lea     CycleSsz2EmeraldEndingAccentPalette(pc),a1
                 tst.w   (Events_routine_bg).w
                 beq.s   loc_5AFC2
-                lea     sub_5928C(pc),a1
+                lea     CycleSsz2EndingWaterPalette(pc),a1
 
 loc_5AFC2:
                 jmp     (a1)
@@ -130,7 +130,7 @@ loc_5B03A:
                 move.b  #$1B,(a1)+
                 move.b  #$1A,(a1)+
                 move.b  #$1B,(a1)+
-                jsr     sub_5B0A8(pc)
+                jsr     SKEndingBuildExpandingBackgroundBandsFromSceneX(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 addi.w  #$E0,d0
                 and.w   (Camera_Y_pos_mask).w,d0
@@ -141,7 +141,7 @@ loc_5B03A:
 ; ---------------------------------------------------------------------------
 
 loc_5B072:
-                jsr     sub_5B0A8(pc)
+                jsr     SKEndingBuildExpandingBackgroundBandsFromSceneX(pc)
 
 loc_5B076:
                 move.w  #$200,d1
@@ -153,7 +153,7 @@ loc_5B076:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5B092:
+SKEndingClampInitialBackgroundYAndBuildCloudBands:
                 move.w  (_unkEE9C).w,d0
                 cmpi.w  #$120,d0
                 bls.s   loc_5B0A0
@@ -162,11 +162,11 @@ sub_5B092:
 loc_5B0A0:
                 move.w  d0,(Camera_Y_pos_BG_copy).w
                 jmp     loc_58D44(pc)
-; End of function sub_5B092
+; End of function SKEndingClampInitialBackgroundYAndBuildCloudBands
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5B0A8:
+SKEndingBuildExpandingBackgroundBandsFromSceneX:
                 move.w  (_unkEE9C).w,(Camera_Y_pos_BG_copy).w
                 move.w  (_unkEE98).w,d0
                 swap    d0
@@ -203,18 +203,18 @@ loc_5B0CC:
                 move.w  $28(a1),d0
                 move.w  d0,-6(a1)
                 rts
-; End of function sub_5B0A8
+; End of function SKEndingBuildExpandingBackgroundBandsFromSceneX
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5B116:
+SKEndingLoadSkyAndSSZColorsIntoNormalAndTargetPalettes:
                 lea     (Normal_palette_line_2).w,a6
                 bra.s   loc_5B120
-; End of function sub_5B116
+; End of function SKEndingLoadSkyAndSSZColorsIntoNormalAndTargetPalettes
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5B11C:
+SKEndingLoadSkyAndSSZColorsIntoTargetPalettes:
                 lea     (Target_palette_line_2).w,a6
 
 loc_5B120:
@@ -234,7 +234,7 @@ loc_5B13A:
                 move.l  (a1)+,(a6)+
                 dbf     d0,loc_5B13A
                 rts
-; End of function sub_5B11C
+; End of function SKEndingLoadSkyAndSSZColorsIntoTargetPalettes
 
 ; ---------------------------------------------------------------------------
 Ending_BGDeformArray1:

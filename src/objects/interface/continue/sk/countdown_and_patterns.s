@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5CAAE:
+ContinueDrawCountdownNibbleDigitsToPlaneA:
                 move.b  (_unkFA84).w,d0
                 move.b  d0,d1
                 andi.w  #$F0,d0
@@ -42,11 +42,11 @@ sub_5CAAE:
                 move.w  (a1)+,(a6)
                 move    #$2300,sr
                 rts
-; End of function sub_5CAAE
+; End of function ContinueDrawCountdownNibbleDigitsToPlaneA
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5CB1C:
+ContinueSeedAdditionalCountIconsInFixedSlots:
                 moveq   #0,d0
                 move.b  (Continue_count).w,d0
                 beq.s   loc_5CB2A
@@ -68,16 +68,16 @@ loc_5CB32:
                 addq.w  #2,d1
                 lea     next_object(a1),a1
                 bra.s   loc_5CB32
-; End of function sub_5CB1C
+; End of function ContinueSeedAdditionalCountIconsInFixedSlots
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5CB4A:
+ContinuePlaceIconFromAlternatingCenterOutTable:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  word_5CB58(pc,d0.w),x_pos(a0)
                 rts
-; End of function sub_5CB4A
+; End of function ContinuePlaceIconFromAlternatingCenterOutTable
 
 ; ---------------------------------------------------------------------------
 word_5CB58:
@@ -93,7 +93,7 @@ word_5CB58:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5CB6A:
+ContinueSelectCharacterFramePairAndOptionalTailsChild:
                 move.w  (Player_mode).w,d4
                 cmpi.b  #2,d4
                 bne.s   loc_5CB7E
@@ -104,7 +104,7 @@ loc_5CB7E:
                 lsl.w   #2,d4
                 move.l  off_5CB8E(pc,d4.w),$30(a0)
                 rts
-; End of function sub_5CB6A
+; End of function ContinueSelectCharacterFramePairAndOptionalTailsChild
 
 ; ---------------------------------------------------------------------------
 ChildObjDat_5CB88:

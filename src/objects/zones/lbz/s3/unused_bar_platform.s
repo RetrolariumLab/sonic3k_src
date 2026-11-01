@@ -30,24 +30,24 @@ loc_242B8:
                 move.w  x_pos(a1),x_pos(a0)
                 move.w  y_pos(a1),y_pos(a0)
                 sub.w   x_pos(a1),d4
-                bsr.s   sub_242D8
+                bsr.s   UpdatePlayersHangingFromLbzUnusedBar
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_242D8:
+UpdatePlayersHangingFromLbzUnusedBar:
                 lea     $33(a0),a2
                 lea     (Player_2).w,a1
                 move.w  (Ctrl_2).w,d0
-                bsr.s   sub_242F0
+                bsr.s   UpdatePlayerHangingFromLbzUnusedBar
                 lea     (Player_1).w,a1
                 subq.w  #1,a2
                 move.w  (Ctrl_1).w,d0
-; End of function sub_242D8
+; End of function UpdatePlayersHangingFromLbzUnusedBar
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_242F0:
+UpdatePlayerHangingFromLbzUnusedBar:
                 tst.b   (a2)
                 beq.w   loc_2436C
                 tst.b   render_flags(a1)
@@ -127,7 +127,7 @@ loc_2437A:
 
 locret_243DE:
                 rts
-; End of function sub_242F0
+; End of function UpdatePlayerHangingFromLbzUnusedBar
 
 ; ---------------------------------------------------------------------------
 Map_LBZUnusedBarPlatform:

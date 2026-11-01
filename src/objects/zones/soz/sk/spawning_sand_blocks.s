@@ -40,12 +40,12 @@ loc_402EE:
                 move.b  (Oscillating_table+$16).w,d0
                 add.w   $46(a0),d0
                 move.w  d0,y_pos(a0)
-                bsr.s   sub_40302
+                bsr.s   SpawnSozTimedSandBlock
                 bra.w   loc_403B0
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_40302:
+SpawnSozTimedSandBlock:
                 subq.w  #1,$36(a0)
                 bpl.s   locret_4036C
                 move.w  #$7F,$36(a0)
@@ -72,7 +72,7 @@ loc_40366:
 
 locret_4036C:
                 rts
-; End of function sub_40302
+; End of function SpawnSozTimedSandBlock
 
 ; ---------------------------------------------------------------------------
 

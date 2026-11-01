@@ -5,8 +5,8 @@
 ; =============== S U B R O U T I N E =======================================
 
 Slots_RenderLayout:
-                bsr.w   sub_4B4C4
-                bsr.w   sub_4B592
+                bsr.w   SlotsUpdateCellFramesFromRotationAndGlobalTimers
+                bsr.w   SlotsAdvanceAllTransientCellAnimations
                 lea     (Chunk_table+$7800).l,a1
                 move.b  (Stat_table).w,d0
                 andi.b  #$FC,d0
@@ -109,7 +109,7 @@ loc_4B428:
                 move.b  (a1)+,d1
                 subq.b  #1,d1
                 bmi.s   loc_4B47C
-                bsr.s   sub_4B490
+                bsr.s   SlotsAppendFiveByteMappingPiecesToHardwareSpriteTable
 
 loc_4B47C:
                 addq.w  #4,a4
@@ -122,7 +122,7 @@ loc_4B47C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4B490:
+SlotsAppendFiveByteMappingPiecesToHardwareSpriteTable:
                 cmpi.b  #$50,d5
                 beq.s   locret_4B4C2
                 move.b  (a1)+,d0
@@ -146,15 +146,15 @@ sub_4B490:
 
 loc_4B4BC:
                 move.w  d0,(a2)+
-                dbf     d1,sub_4B490
+                dbf     d1,SlotsAppendFiveByteMappingPiecesToHardwareSpriteTable
 
 locret_4B4C2:
                 rts
-; End of function sub_4B490
+; End of function SlotsAppendFiveByteMappingPiecesToHardwareSpriteTable
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4B4C4:
+SlotsUpdateCellFramesFromRotationAndGlobalTimers:
                 lea     (Chunk_table+$700C).l,a1
                 moveq   #0,d0
                 move.b  (Stat_table).w,d0
@@ -200,7 +200,7 @@ loc_4B526:
 loc_4B548:
                 move.b  (Slot_machine_peppermint_frame).w,$38(a1)
                 rts
-; End of function sub_4B4C4
+; End of function SlotsUpdateCellFramesFromRotationAndGlobalTimers
 
 ; ---------------------------------------------------------------------------
 ; unused
@@ -220,7 +220,7 @@ loc_4B566:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4B57C:
+SlotsFindFreeTransientCellAnimationRecord:
                 lea     (Chunk_table+$7400).l,a2
                 move.w  #$20-1,d0
 
@@ -232,11 +232,11 @@ loc_4B586:
 
 locret_4B590:
                 rts
-; End of function sub_4B57C
+; End of function SlotsFindFreeTransientCellAnimationRecord
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4B592:
+SlotsAdvanceAllTransientCellAnimations:
                 lea     (Chunk_table+$7400).l,a0
                 move.w  #$20-1,d7
 
@@ -252,7 +252,7 @@ loc_4B5AA:
                 addq.w  #8,a0
                 dbf     d7,loc_4B59C
                 rts
-; End of function sub_4B592
+; End of function SlotsAdvanceAllTransientCellAnimations
 
 ; ---------------------------------------------------------------------------
 off_4B5B2:
@@ -395,7 +395,7 @@ byte_4B688:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4B6AA:
+SlotsInitializePaddedLayoutDescriptorsAndCage:
                 lea     (RAM_start+$3000).l,a1
                 move.w  #bytesToLcnt($4000),d0
 
@@ -438,7 +438,7 @@ loc_4B70A:
 
 locret_4B720:
                 rts
-; End of function sub_4B6AA
+; End of function SlotsInitializePaddedLayoutDescriptorsAndCage
 
 ; ---------------------------------------------------------------------------
 SlotBonusMaps:

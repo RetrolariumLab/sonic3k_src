@@ -75,18 +75,18 @@ loc_3CD6E:
                 bpl.w   loc_3CD8E
                 subq.b  #4,$2E(a0)
                 andi.b  #$7F,$2E(a0)
-                bsr.w   sub_3CEC0
+                bsr.w   SpawnFbzFlamethrowerParticle
                 ori.b   #$80,$2E(a0)
-                bsr.w   sub_3CEC0
+                bsr.w   SpawnFbzFlamethrowerParticle
 
 loc_3CD8E:
-                bsr.w   sub_3CE7A
+                bsr.w   PositionFbzFlamethrowerRotatingNozzles
                 move.w  #$1B,d1
                 move.w  #8,d2
                 move.w  #9,d3
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull).l
-                bsr.s   sub_3CE1A
+                bsr.s   UpdateFbzFlamethrowerStandingCharge
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
@@ -113,7 +113,7 @@ loc_3CDEC:
                 tst.b   render_flags(a0)
                 bpl.w   loc_3CDFC
                 addq.b  #2,$2E(a0)
-                bsr.w   sub_3CEC0
+                bsr.w   SpawnFbzFlamethrowerParticle
 
 loc_3CDFC:
                 move.w  #$1B,d1
@@ -121,12 +121,12 @@ loc_3CDFC:
                 move.w  #9,d3
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull).l
-                bsr.s   sub_3CE1A
+                bsr.s   UpdateFbzFlamethrowerStandingCharge
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3CE1A:
+UpdateFbzFlamethrowerStandingCharge:
                 tst.b   subtype(a0)
                 bmi.s   locret_3CE42
                 move.b  status(a0),d0
@@ -154,21 +154,21 @@ loc_3CE52:
                 lea     (Player_1).w,a1
                 bclr    #p1_standing_bit,status(a0)
                 beq.s   loc_3CE68
-                bsr.w   sub_3CBCE
+                bsr.w   LaunchPlayerFromFbzSpringSurface
 
 loc_3CE68:
                 lea     (Player_2).w,a1
                 bclr    #p2_standing_bit,status(a0)
                 beq.s   locret_3CE78
-                bsr.w   sub_3CBCE
+                bsr.w   LaunchPlayerFromFbzSpringSurface
 
 locret_3CE78:
                 rts
-; End of function sub_3CE1A
+; End of function UpdateFbzFlamethrowerStandingCharge
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3CE7A:
+PositionFbzFlamethrowerRotatingNozzles:
                 move.b  $2E(a0),d0
                 jsr     (GetSineCosine).l
                 asr.w   #5,d1
@@ -191,11 +191,11 @@ loc_3CEB2:
                 move.b  #$10,sub2_mapframe-sub2_x_pos(a2)
                 move.b  #0,sub4_mapframe-sub2_x_pos(a2)
                 rts
-; End of function sub_3CE7A
+; End of function PositionFbzFlamethrowerRotatingNozzles
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3CEC0:
+SpawnFbzFlamethrowerParticle:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   locret_3CF4A
                 move.l  #loc_3CF90,(a1)
@@ -250,7 +250,7 @@ loc_3CF7C:
                 move.b  #4,anim_frame_timer(a1)
                 move.b  #$C,anim(a1)
                 rts
-; End of function sub_3CEC0
+; End of function SpawnFbzFlamethrowerParticle
 
 ; ---------------------------------------------------------------------------
 

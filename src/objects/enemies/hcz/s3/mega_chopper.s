@@ -34,7 +34,7 @@ locret_55D88:
 ; ---------------------------------------------------------------------------
 
 loc_55D8A:
-                bsr.w   sub_55F18
+                bsr.w   ResolveMegaChopperLatchedContactAndAttachment
                 jsr     Animate_Raw(pc)
                 jsr     Find_SonicTails(pc)
                 move.b  (V_int_run_count+3).w,d4
@@ -81,7 +81,7 @@ loc_55DF6:
 ; ---------------------------------------------------------------------------
 
 loc_55E02:
-                bsr.w   sub_55F18
+                bsr.w   ResolveMegaChopperLatchedContactAndAttachment
                 jsr     Animate_Raw(pc)
                 tst.w   y_vel(a0)
                 bmi.s   loc_55E30
@@ -156,7 +156,7 @@ loc_55EBA:
 loc_55ED8:
                 add.w   d1,d0
                 move.w  d0,y_pos(a0)
-                bsr.w   sub_55FEA
+                bsr.w   DrainGlobalRingFromAttachedMegaChopper
                 beq.w   locret_55D88
 
 loc_55EE6:
@@ -178,7 +178,7 @@ loc_55F0C:
                 rts
 ; ---------------------------------------------------------------------------
 
-sub_55F18:
+ResolveMegaChopperLatchedContactAndAttachment:
                 move.b  collision_property(a0),d0
                 beq.w   locret_55D88
                 clr.b   collision_property(a0)
@@ -245,7 +245,7 @@ loc_55FE2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_55FEA:
+DrainGlobalRingFromAttachedMegaChopper:
                 subq.w  #1,$2E(a0)
                 bpl.s   loc_56032
                 move.w  #60-1,$2E(a0)
@@ -289,7 +289,7 @@ loc_56044:
                 movea.l a2,a0
                 moveq   #1,d0
                 rts
-; End of function sub_55FEA
+; End of function DrainGlobalRingFromAttachedMegaChopper
 
 ; ---------------------------------------------------------------------------
 ObjDat_MegaChopper:

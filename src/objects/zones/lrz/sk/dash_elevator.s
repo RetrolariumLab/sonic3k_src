@@ -35,11 +35,11 @@ loc_42F78:
                 lea     $2E(a0),a2
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
-                bsr.w   sub_4301C
+                bsr.w   AccumulatePlayerDriveForLrzDashElevator
                 addq.w  #1,a2
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
-                bsr.w   sub_4301C
+                bsr.w   AccumulatePlayerDriveForLrzDashElevator
                 move.l  $30(a0),d0
                 swap    d5
                 asr.l   #3,d5
@@ -95,7 +95,7 @@ loc_43000:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4301C:
+AccumulatePlayerDriveForLrzDashElevator:
                 tst.b   (a2)
                 bne.s   loc_4303A
                 btst    d6,status(a0)
@@ -152,7 +152,7 @@ loc_43082:
 loc_43092:
                 add.w   d0,d5
                 rts
-; End of function sub_4301C
+; End of function AccumulatePlayerDriveForLrzDashElevator
 
 ; ---------------------------------------------------------------------------
 Map_LRZDashElevator:

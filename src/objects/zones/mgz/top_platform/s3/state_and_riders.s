@@ -25,12 +25,12 @@ loc_341EC:
                 lea     $40(a0),a4
                 move.w  (Ctrl_1_logical).w,d5
                 moveq   #p1_standing_bit,d6
-                bsr.w   sub_34484
+                bsr.w   UpdateTopPlatformRiderState
                 lea     (Player_2).w,a1
                 lea     $42(a0),a4
                 move.w  (Ctrl_2_logical).w,d5
                 moveq   #p2_standing_bit,d6
-                bsr.w   sub_34484
+                bsr.w   UpdateTopPlatformRiderState
                 tst.b   subtype(a0)
                 bne.w   loc_342FA
                 btst    #1,status(a0)
@@ -43,7 +43,7 @@ loc_34230:
                 jsr     (MoveSprite2).l
                 subi.w  #$13,y_pos(a0)
                 move.l  a1,-(sp)
-                jsr     (sub_347FC).l
+                jsr     (ResolveAirborneTopPlatformTerrain).l
                 movea.l (sp)+,a1
                 addi.w  #$13,y_pos(a0)
                 tst.b   $2D(a0)
@@ -84,7 +84,7 @@ loc_34296:
 loc_342A6:
                 tst.b   $35(a0)
                 beq.s   loc_342B6
-                bsr.w   sub_34DFA
+                bsr.w   UpdateTopPlatformScriptedSinePath
                 addq.w  #4,$24(a0)
                 bra.s   loc_342FA
 ; ---------------------------------------------------------------------------
@@ -98,11 +98,11 @@ loc_342B6:
                 muls.w  ground_vel(a0),d0
                 asr.l   #8,d0
                 move.w  d0,y_vel(a0)
-                bsr.s   sub_34354
+                bsr.s   LimitTopPlatformVelocityByPredictedTerrain
                 jsr     (MoveSprite2).l
                 tst.b   $2D(a0)
                 bne.s   loc_342E6
-                bsr.w   sub_34406
+                bsr.w   FollowFloorUnderTopPlatform
 
 loc_342E6:
                 addq.w  #4,$24(a0)
@@ -111,17 +111,17 @@ loc_342E6:
                 move.b  #0,$34(a0)
 
 loc_342F6:
-                bsr.w   sub_34BF8
+                bsr.w   TryEnterTopPlatformScriptedSinePath
 
 loc_342FA:
                 lea     (Player_1).w,a1
                 lea     $40(a0),a4
                 moveq   #p1_standing_bit,d6
-                bsr.w   sub_34794
+                bsr.w   AlignTopPlatformAndRiderAfterMovement
                 lea     (Player_2).w,a1
                 lea     $42(a0),a4
                 moveq   #p2_standing_bit,d6
-                bsr.w   sub_34794
+                bsr.w   AlignTopPlatformAndRiderAfterMovement
                 move.w  $24(a0),d0
                 asr.w   #3,d0
                 andi.w  #1,d0
@@ -145,7 +145,7 @@ loc_3434E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_34354:
+LimitTopPlatformVelocityByPredictedTerrain:
                 move.b  #$40,d1
                 tst.w   ground_vel(a0)
                 beq.s   locret_343CE
@@ -159,7 +159,7 @@ loc_34362:
                 move.b  #$13,y_radius(a0)
                 move.b  #$18,x_radius(a0)
                 subi.w  #$C,y_pos(a0)
-                jsr     (sub_10A10).l
+                jsr     (ProbeNextSurfaceWithBodyRadius).l
                 addi.w  #$C,y_pos(a0)
                 move.w  (sp)+,d0
                 tst.w   d1
@@ -207,11 +207,11 @@ loc_343D6:
 loc_34400:
                 add.w   d1,y_vel(a0)
                 rts
-; End of function sub_34354
+; End of function LimitTopPlatformVelocityByPredictedTerrain
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_34406:
+FollowFloorUnderTopPlatform:
                 move.b  #$C,y_radius(a0)
                 move.b  #$A,x_radius(a0)
                 moveq   #3,d0
@@ -267,16 +267,16 @@ loc_34470:
                 bclr    #5,status(a0)
                 move.b  #0,$34(a0)
                 rts
-; End of function sub_34406
+; End of function FollowFloorUnderTopPlatform
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_34484:
+UpdateTopPlatformRiderState:
                 moveq   #0,d0
                 move.b  (a4),d0
                 move.w  off_34490(pc,d0.w),d0
                 jmp     off_34490(pc,d0.w)
-; End of function sub_34484
+; End of function UpdateTopPlatformRiderState
 
 ; ---------------------------------------------------------------------------
 off_34490:
@@ -367,7 +367,7 @@ locret_34552:
 
 loc_34554:
                 cmpi.b  #4,routine(a1)
-                bhs.w   sub_3472C
+                bhs.w   AbandonTopPlatformAndReleaseRiders
                 tst.w   (Debug_placement_mode).w
                 bne.s   loc_3459C
                 move.w  d5,d0
@@ -388,7 +388,7 @@ loc_3459C:
                 bset    #Status_InAir,status(a1)
                 clr.b   (a4)
                 cmpa.w  #Player_1,a1
-                beq.w   sub_3472C
+                beq.w   AbandonTopPlatformAndReleaseRiders
 
 locret_345B8:
                 rts
@@ -420,7 +420,7 @@ loc_345EE:
                 move.w  d5,d3
                 cmpi.b  #$10,anim(a0)
                 beq.s   loc_34602
-                jsr     (sub_34A96).l
+                jsr     (ControlTopRiderGroundSpeed).l
 
 loc_34602:
                 jsr     (Player_LevelBound).l
@@ -529,7 +529,7 @@ locret_34720:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3472C:
+AbandonTopPlatformAndReleaseRiders:
                 move.l  #loc_3432A,(a0)
                 lea     (Player_1).w,a2
                 cmpi.b  #4,$40(a0)
@@ -560,11 +560,11 @@ loc_34786:
                 move.b  #6,$40(a0)
                 move.b  #6,$42(a0)
                 rts
-; End of function sub_3472C
+; End of function AbandonTopPlatformAndReleaseRiders
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_34794:
+AlignTopPlatformAndRiderAfterMovement:
                 btst    #Status_OnObj,status(a1)
                 bne.s   loc_347C4
                 cmpi.b  #4,(a4)
@@ -588,7 +588,7 @@ loc_347C4:
                 movea.w interact(a1),a2
                 cmpi.l  #loc_31D3E,(a2)
                 bne.s   loc_347DA
-                bsr.w   sub_3472C
+                bsr.w   AbandonTopPlatformAndReleaseRiders
 
 loc_347DA:
                 move.w  x_pos(a0),x_pos(a1)
@@ -602,4 +602,4 @@ loc_347DA:
 
 locret_347FA:
                 rts
-; End of function sub_34794
+; End of function AlignTopPlatformAndRiderAfterMovement

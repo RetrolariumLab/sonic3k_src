@@ -161,7 +161,7 @@ loc_880DC:
 loc_880FA:
                 add.w   d1,d0
                 move.w  d0,y_pos(a0)
-                bsr.w   sub_881FE
+                bsr.w   DrainGlobalRingFromAttachedMegaChopper
                 beq.w   locret_87FAA
 
 loc_88108:
@@ -247,7 +247,7 @@ loc_881F6:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_881FE:
+DrainGlobalRingFromAttachedMegaChopper:
                 subq.w  #1,$2E(a0)
                 bpl.s   loc_88246
                 move.w  #60-1,$2E(a0)
@@ -291,7 +291,7 @@ loc_88258:
                 movea.l a2,a0
                 moveq   #1,d0
                 rts
-; End of function sub_881FE
+; End of function DrainGlobalRingFromAttachedMegaChopper
 
 ; ---------------------------------------------------------------------------
 ObjDat_MegaChopper:

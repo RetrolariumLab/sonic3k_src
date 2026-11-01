@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_70C72:
+PlayFBZEndBossHalfTurnSoundBeforeWaitEnds:
                 cmpi.w  #4,$2E(a0)
                 blo.s   locret_70C8C
                 move.b  $3C(a0),d0
@@ -15,7 +15,7 @@ sub_70C72:
 
 locret_70C8C:
                 rts
-; End of function sub_70C72
+; End of function PlayFBZEndBossHalfTurnSoundBeforeWaitEnds
 
 ; ---------------------------------------------------------------------------
 
@@ -31,7 +31,7 @@ loc_70C8E:
                 moveq   #$10,d3
                 moveq   #0,d4
                 move.b  subtype(a0),d4
-                bsr.w   sub_70CE4
+                bsr.w   PositionFBZEndBossConnectorAxisByQuarter
                 move.w  y_pos(a1),d0
                 move.b  child_dy(a0),d1
                 ext.w   d1
@@ -39,7 +39,7 @@ loc_70C8E:
                 move.w  y_pos(a2),d2
                 sub.w   d2,d1
                 moveq   #$14,d3
-                bsr.w   sub_70CE4
+                bsr.w   PositionFBZEndBossConnectorAxisByQuarter
                 tst.b   $3C(a2)
                 beq.s   locret_70CDA
                 bmi.s   locret_70CDA
@@ -56,10 +56,10 @@ word_70CDC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_70CE4:
+PositionFBZEndBossConnectorAxisByQuarter:
                 move.w  off_70CEC(pc,d4.w),d5
                 jmp     off_70CEC(pc,d5.w)
-; End of function sub_70CE4
+; End of function PositionFBZEndBossConnectorAxisByQuarter
 
 ; ---------------------------------------------------------------------------
 off_70CEC:
@@ -92,7 +92,7 @@ loc_70D08:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_70D10:
+InitializeFBZEndBossFlameColumnPart:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  word_70D40(pc,d0.w),$2E(a0)
@@ -103,7 +103,7 @@ sub_70D10:
                 jsr     (SetUp_ObjAttributes).l
                 bset    #4,shield_reaction(a0)
                 jmp     (Refresh_ChildPosition).l
-; End of function sub_70D10
+; End of function InitializeFBZEndBossFlameColumnPart
 
 ; ---------------------------------------------------------------------------
 word_70D40:
@@ -149,7 +149,7 @@ off_70D88:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_70DAC:
+CenterFBZEndBossXBetweenSupports:
                 movea.w $44(a0),a1
                 movea.w parent3(a0),a2
                 move.w  x_pos(a1),d0
@@ -159,11 +159,11 @@ sub_70DAC:
                 add.w   d1,d0
                 move.w  d0,x_pos(a0)
                 rts
-; End of function sub_70DAC
+; End of function CenterFBZEndBossXBetweenSupports
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_70DC8:
+SetFBZEndBossBodyDepthFromPhase:
                 tst.b   $3C(a0)
                 beq.s   loc_70DEC
                 bmi.s   loc_70DDE
@@ -182,22 +182,22 @@ loc_70DEC:
                 bset    #7,art_tile(a0)
                 move.w  #$300,priority(a0)
                 rts
-; End of function sub_70DC8
+; End of function SetFBZEndBossBodyDepthFromPhase
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_70DFA:
+SetFBZEndBossHingeDepthFromPhase:
                 tst.b   $3C(a0)
                 beq.s   loc_70DEC
                 bmi.s   loc_70DDE
                 bset    #7,art_tile(a0)
                 move.w  #$200,priority(a0)
                 rts
-; End of function sub_70DFA
+; End of function SetFBZEndBossHingeDepthFromPhase
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_70E10:
+HandleFBZEndBossFourColorHitOrDefeat:
                 tst.l   (a0)
                 beq.s   locret_70E66
                 tst.b   collision_flags(a0)
@@ -233,7 +233,7 @@ locret_70E66:
 loc_70E68:
                 move.l  #loc_707F6,(a0)
                 jmp     (BossDefeated_StopTimer).l
-; End of function sub_70E10
+; End of function HandleFBZEndBossFourColorHitOrDefeat
 
 ; ---------------------------------------------------------------------------
 word_70E74:

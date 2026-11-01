@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_69AD8:
+AdvanceAIZBossAttackAttachmentPose:
                 move.w  angle(a0),d0
                 moveq   #0,d1
                 eori.w  #$C,d0
@@ -24,7 +24,7 @@ loc_69AEE:
                 addq.b  #4,d2
                 move.b  d2,$39(a0)
                 rts
-; End of function sub_69AD8
+; End of function AdvanceAIZBossAttackAttachmentPose
 
 ; ---------------------------------------------------------------------------
 byte_69B0E:
@@ -119,7 +119,7 @@ word_69BD2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_69BE2:
+HandleAIZBossHitFlashOrDefeat:
                 tst.b   collision_flags(a0)
                 bne.s   locret_69C34
                 tst.b   collision_property(a0)
@@ -138,7 +138,7 @@ loc_69C02:
                 addi.w  #2*7,d0
 
 loc_69C16:
-                bsr.w   sub_69C5C
+                bsr.w   CopyAIZBossSevenPaletteColors
                 subq.b  #1,$20(a0)
                 bne.s   locret_69C34
                 bclr    #6,status(a0)
@@ -157,15 +157,15 @@ loc_69C36:
                 move.b  #0,mapping_frame(a0)
                 move.l  #loc_69482,$34(a0)
                 jmp     (BossDefeated_StopTimer).l
-; End of function sub_69BE2
+; End of function HandleAIZBossHitFlashOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_69C5C:
+CopyAIZBossSevenPaletteColors:
                 lea     word_69C6A(pc),a1
                 lea     word_69C78(pc,d0.w),a2
                 jmp     (CopyWordData_7).l
-; End of function sub_69C5C
+; End of function CopyAIZBossSevenPaletteColors
 
 ; ---------------------------------------------------------------------------
 word_69C6A:
@@ -177,17 +177,17 @@ word_69C78:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_69C94:
+ResetAIZBossHitFlashPalette:
                 moveq   #0,d0
-                bsr.s   sub_69C5C
+                bsr.s   CopyAIZBossSevenPaletteColors
                 bclr    #6,status(a0)
                 clr.b   $20(a0)
                 rts
-; End of function sub_69C94
+; End of function ResetAIZBossHitFlashPalette
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_69CA4:
+StartAIZBossAttachmentDelayedBreakaway:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
                 bne.s   loc_69CB2
@@ -201,4 +201,4 @@ loc_69CB2:
                 move.w  #$1F,$2E(a0)
                 move.l  #loc_69720,$34(a0)
                 rts
-; End of function sub_69CA4
+; End of function StartAIZBossAttachmentDelayedBreakaway

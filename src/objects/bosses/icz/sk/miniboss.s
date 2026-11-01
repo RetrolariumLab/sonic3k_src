@@ -14,7 +14,7 @@ Obj_ICZMiniboss:
 loc_71178:
                 jsr     (Check_CameraInRange).l
                 move.b  #mus_Miniboss,boss_saved_mus(a0)
-                jsr     (sub_85D6A).l
+                jsr     (BeginBossCameraTransitionSaveBoundsAndFadeMusic).l
                 move.l  #loc_711B0,(a0)
                 move.l  #loc_711B6,$34(a0)
                 moveq   #PLCID_5F,d0
@@ -43,7 +43,7 @@ loc_711BE:
                 move.b  routine(a0),d0
                 move.w  off_711D6(pc,d0.w),d1
                 jsr     off_711D6(pc,d1.w)
-                bsr.w   sub_718DA
+                bsr.w   HandleICZMinibossTwoColorHitOrDefeat
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 off_711D6:
@@ -134,7 +134,7 @@ loc_712C4:
 ; ---------------------------------------------------------------------------
 
 loc_712D6:
-                bsr.w   sub_7184E
+                bsr.w   SelectICZMinibossArcRepeatCount
 
 loc_712DA:
                 move.b  #$A,routine(a0)
@@ -369,7 +369,7 @@ loc_7152A:
 loc_7153A:
                 move.b  #6,routine(a0)
                 move.w  #$180,priority(a0)
-                bsr.w   sub_71740
+                bsr.w   SetICZMinibossOrbApproachVelocity
                 move.w  #$1F,$2E(a0)
                 move.l  #loc_71566,$34(a0)
                 rts
@@ -423,7 +423,7 @@ loc_715B4:
                 lea     (ICZMiniboss_OrbAngleLookup).l,a2
                 jsr     (MoveSprite_AtAngleLookup).l
                 moveq   #0,d0
-                bsr.w   sub_717B8
+                bsr.w   TiltAndDepthSortICZMinibossOrb
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
                 beq.s   loc_715F0
@@ -452,7 +452,7 @@ loc_71600:
                 lea     (ICZMiniboss_OrbAngleLookup).l,a2
                 jsr     (MoveSprite_AtAngleLookup).l
                 moveq   #0,d0
-                bra.w   sub_717B8
+                bra.w   TiltAndDepthSortICZMinibossOrb
 ; ---------------------------------------------------------------------------
 
 loc_71620:
@@ -565,7 +565,7 @@ word_71730:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_71740:
+SetICZMinibossOrbApproachVelocity:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lsl.w   #4,d0
@@ -597,7 +597,7 @@ sub_71740:
                 move.w  d2,x_vel(a0)
                 move.w  d3,y_vel(a0)
                 rts
-; End of function sub_71740
+; End of function SetICZMinibossOrbApproachVelocity
 
 ; ---------------------------------------------------------------------------
 
@@ -611,7 +611,7 @@ loc_7179E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_717B8:
+TiltAndDepthSortICZMinibossOrb:
                 jsr     (GetSineCosine).l
                 tst.w   d1
                 bpl.s   loc_717C4
@@ -675,17 +675,17 @@ loc_7183C:
 
 locret_7184C:
                 rts
-; End of function sub_717B8
+; End of function TiltAndDepthSortICZMinibossOrb
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7184E:
+SelectICZMinibossArcRepeatCount:
                 move.b  $3A(a0),d0
                 addq.b  #1,$3A(a0)
                 andi.w  #7,d0
                 move.b  byte_71862(pc,d0.w),$39(a0)
                 rts
-; End of function sub_7184E
+; End of function SelectICZMinibossArcRepeatCount
 
 ; ---------------------------------------------------------------------------
 byte_71862:
@@ -737,7 +737,7 @@ loc_718CA:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_718DA:
+HandleICZMinibossTwoColorHitOrDefeat:
                 tst.b   collision_flags(a0)
                 bne.s   locret_71924
                 tst.b   collision_property(a0)
@@ -756,7 +756,7 @@ loc_718FA:
                 addi.w  #2*2,d0
 
 loc_7190E:
-                bsr.w   sub_71946
+                bsr.w   CopyICZMinibossTwoColorPalette
                 subq.b  #1,$20(a0)
                 bne.s   locret_71924
                 bclr    #6,status(a0)
@@ -772,15 +772,15 @@ loc_71926:
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild1_Normal).l
                 jmp     (BossDefeated_StopTimer).l
-; End of function sub_718DA
+; End of function HandleICZMinibossTwoColorHitOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_71946:
+CopyICZMinibossTwoColorPalette:
                 lea     word_71954(pc),a1
                 lea     word_71958(pc,d0.w),a2
                 jmp     (CopyWordData_2).l
-; End of function sub_71946
+; End of function CopyICZMinibossTwoColorPalette
 
 ; ---------------------------------------------------------------------------
 word_71954:

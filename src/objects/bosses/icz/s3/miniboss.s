@@ -49,7 +49,7 @@ loc_4E402:
                 move.b  routine(a0),d0
                 move.w  off_4E418(pc,d0.w),d1
                 jsr     off_4E418(pc,d1.w)
-                bsr.w   sub_4EAC2
+                bsr.w   HandleICZMinibossTwoColorHitOrDefeat
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 off_4E418:
@@ -140,7 +140,7 @@ loc_4E4F8:
 ; ---------------------------------------------------------------------------
 
 loc_4E506:
-                bsr.w   sub_4EA3C
+                bsr.w   SelectICZMinibossArcRepeatCount
 
 loc_4E50A:
                 move.b  #$A,routine(a0)
@@ -371,7 +371,7 @@ loc_4E730:
 loc_4E73E:
                 move.b  #6,routine(a0)
                 move.w  #$180,priority(a0)
-                bsr.w   sub_4E932
+                bsr.w   SetICZMinibossOrbApproachVelocity
                 move.w  #$1F,$2E(a0)
                 move.l  #loc_4E768,$34(a0)
                 rts
@@ -425,7 +425,7 @@ loc_4E7B6:
                 lea     (ICZMiniboss_OrbAngleLookup).l,a2
                 jsr     MoveSprite_AtAngleLookup(pc)
                 moveq   #0,d0
-                bsr.w   sub_4E9A6
+                bsr.w   TiltAndDepthSortICZMinibossOrb
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
                 beq.s   loc_4E7F0
@@ -454,7 +454,7 @@ loc_4E800:
                 lea     (ICZMiniboss_OrbAngleLookup).l,a2
                 jsr     MoveSprite_AtAngleLookup(pc)
                 moveq   #0,d0
-                bra.w   sub_4E9A6
+                bra.w   TiltAndDepthSortICZMinibossOrb
 ; ---------------------------------------------------------------------------
 
 loc_4E81E:
@@ -565,7 +565,7 @@ word_4E922:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4E932:
+SetICZMinibossOrbApproachVelocity:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lsl.w   #4,d0
@@ -597,7 +597,7 @@ sub_4E932:
                 move.w  d2,x_vel(a0)
                 move.w  d3,y_vel(a0)
                 rts
-; End of function sub_4E932
+; End of function SetICZMinibossOrbApproachVelocity
 
 ; ---------------------------------------------------------------------------
 
@@ -611,7 +611,7 @@ loc_4E98E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4E9A6:
+TiltAndDepthSortICZMinibossOrb:
                 jsr     (GetSineCosine).l
                 tst.w   d1
                 bpl.s   loc_4E9B2
@@ -675,17 +675,17 @@ loc_4EA2A:
 
 locret_4EA3A:
                 rts
-; End of function sub_4E9A6
+; End of function TiltAndDepthSortICZMinibossOrb
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4EA3C:
+SelectICZMinibossArcRepeatCount:
                 move.b  $3A(a0),d0
                 addq.b  #1,$3A(a0)
                 andi.w  #7,d0
                 move.b  byte_4EA50(pc,d0.w),$39(a0)
                 rts
-; End of function sub_4EA3C
+; End of function SelectICZMinibossArcRepeatCount
 
 ; ---------------------------------------------------------------------------
 byte_4EA50:
@@ -735,7 +735,7 @@ loc_4EAB8:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4EAC2:
+HandleICZMinibossTwoColorHitOrDefeat:
                 tst.b   collision_flags(a0)
                 bne.s   locret_4EB0C
                 tst.b   collision_property(a0)
@@ -754,7 +754,7 @@ loc_4EAE2:
                 addi.w  #2*2,d0
 
 loc_4EAF6:
-                bsr.w   sub_4EB2A
+                bsr.w   CopyICZMinibossTwoColorPalette
                 subq.b  #1,$20(a0)
                 bne.s   locret_4EB0C
                 bclr    #6,status(a0)
@@ -770,11 +770,11 @@ loc_4EB0E:
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     CreateChild1_Normal(pc)
                 jmp     BossDefeated_StopTimer(pc)
-; End of function sub_4EAC2
+; End of function HandleICZMinibossTwoColorHitOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4EB2A:
+CopyICZMinibossTwoColorPalette:
                 lea     word_4EB3C(pc),a1
                 lea     word_4EB40(pc,d0.w),a2
                 rept    2
@@ -782,7 +782,7 @@ sub_4EB2A:
                 move.w  (a2)+,(a3)+
                 endm
                 rts
-; End of function sub_4EB2A
+; End of function CopyICZMinibossTwoColorPalette
 
 ; ---------------------------------------------------------------------------
 word_4EB3C:

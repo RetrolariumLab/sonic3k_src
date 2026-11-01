@@ -23,12 +23,12 @@ loc_1151C:
                 bne.s   loc_1154E
                 btst    #button_left,(Ctrl_1_logical).w
                 beq.s   loc_11542
-                bsr.w   sub_11608
+                bsr.w   SonicSKApplyRollingLeftInput
 
 loc_11542:
                 btst    #button_right,(Ctrl_1_logical).w
                 beq.s   loc_1154E
-                bsr.w   sub_1162C
+                bsr.w   SonicSKApplyRollingRightInput
 
 loc_1154E:
                 move.w  ground_vel(a0),d0
@@ -116,7 +116,7 @@ loc_11600:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_11608:
+SonicSKApplyRollingLeftInput:
                 move.w  ground_vel(a0),d0
                 beq.s   loc_11610
                 bpl.s   loc_1161E
@@ -135,11 +135,11 @@ loc_1161E:
 loc_11626:
                 move.w  d0,ground_vel(a0)
                 rts
-; End of function sub_11608
+; End of function SonicSKApplyRollingLeftInput
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1162C:
+SonicSKApplyRollingRightInput:
                 move.w  ground_vel(a0),d0
                 bmi.s   loc_11640
                 bclr    #Status_Facing,status(a0)
@@ -155,7 +155,7 @@ loc_11640:
 loc_11648:
                 move.w  d0,ground_vel(a0)
                 rts
-; End of function sub_1162C
+; End of function SonicSKApplyRollingRightInput
 
 ; ---------------------------------------------------------------------------
 ; Subroutine for moving Sonic left or right when he's in the air

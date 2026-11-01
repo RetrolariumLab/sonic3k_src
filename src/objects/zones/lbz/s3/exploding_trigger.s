@@ -24,20 +24,20 @@ loc_24944:
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
                 beq.s   loc_2496C
-                bsr.s   sub_24980
+                bsr.s   ActivateLbzExplodingTrigger
 
 loc_2496C:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
                 beq.s   loc_2497A
-                bsr.s   sub_24980
+                bsr.s   ActivateLbzExplodingTrigger
 
 loc_2497A:
                 jmp     (Sprite_CheckDeleteTouch3).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_24980:
+ActivateLbzExplodingTrigger:
                 cmpi.b  #2,anim(a1)
                 bne.s   locret_249A6
                 neg.w   x_vel(a1)
@@ -50,7 +50,7 @@ sub_24980:
 
 locret_249A6:
                 rts
-; End of function sub_24980
+; End of function ActivateLbzExplodingTrigger
 
 ; ---------------------------------------------------------------------------
 Map_LBZExplodingTrigger:

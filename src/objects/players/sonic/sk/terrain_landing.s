@@ -41,7 +41,7 @@ loc_11F44:
                 move.w  #0,x_vel(a0)                    ; stop Sonic since he hit a wall
 
 loc_11F56:
-                bsr.w   sub_11FD6
+                bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
                 tst.w   d1
                 bpl.s   locret_11FD4
                 move.b  y_vel(a0),d2
@@ -98,7 +98,7 @@ locret_11FD4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_11FD6:
+CheckSKPlayerGravityRelativeFloorAndNormalizeAngle:
                 tst.b   (Reverse_gravity_flag).w
                 beq.w   Sonic_CheckFloor
                 bsr.w   Sonic_CheckCeiling
@@ -106,11 +106,11 @@ sub_11FD6:
                 neg.b   d3
                 subi.b  #$40,d3
                 rts
-; End of function sub_11FD6
+; End of function CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_11FEE:
+CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle:
                 tst.b   (Reverse_gravity_flag).w
                 beq.w   Sonic_CheckCeiling
                 bsr.w   Sonic_CheckFloor
@@ -118,7 +118,7 @@ sub_11FEE:
                 neg.b   d3
                 subi.b  #$40,d3
                 rts
-; End of function sub_11FEE
+; End of function CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -139,7 +139,7 @@ Player_HitLeftWall:
                 move.w  y_vel(a0),ground_vel(a0)
 
 Player_HitCeiling:
-                bsr.w   sub_11FEE
+                bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
                 tst.w   d1
                 bpl.s   loc_12068                       ; branch if distance is positive (not inside ceiling)
                 neg.w   d1
@@ -177,7 +177,7 @@ loc_12068:
                 bmi.s   locret_1209C
 
 loc_12074:
-                bsr.w   sub_11FD6
+                bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
                 tst.w   d1
                 bpl.s   locret_1209C
                 tst.b   (Reverse_gravity_flag).w
@@ -210,7 +210,7 @@ loc_120B0:
                 move.w  #0,x_vel(a0)                    ; stop Sonic since he hit a wall
 
 loc_120C2:
-                bsr.w   sub_11FEE
+                bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
                 tst.w   d1
                 bpl.s   locret_12100
                 tst.b   (Reverse_gravity_flag).w
@@ -248,7 +248,7 @@ loc_12102:
                 move.w  y_vel(a0),ground_vel(a0)
 
 loc_1211A:
-                bsr.w   sub_11FEE
+                bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
                 tst.w   d1
                 bpl.s   loc_1213C
                 tst.b   (Reverse_gravity_flag).w
@@ -272,7 +272,7 @@ loc_1213C:
                 bmi.s   locret_12170
 
 loc_12148:
-                bsr.w   sub_11FD6
+                bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
                 tst.w   d1
                 bpl.s   locret_12170
                 tst.b   (Reverse_gravity_flag).w

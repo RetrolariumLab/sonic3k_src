@@ -49,7 +49,7 @@ loc_45022:
 
 loc_4502C:
                 move.b  #4,routine(a0)
-                bsr.w   sub_456C6
+                bsr.w   SpawnKnucklesCutsceneMusicTransition
                 move.w  #60-1,$2E(a0)
                 move.l  #loc_45046,$34(a0)
                 rts
@@ -135,13 +135,13 @@ loc_45136:
                 beq.s   loc_45162
                 movea.w parent3(a0),a2
                 bset    #3,$38(a2)
-                bsr.w   sub_45174
+                bsr.w   LBZCutsceneS3LockSelectedPlayerFacingRight
 
 loc_45162:
                 swap    d0
                 tst.w   d0
                 beq.s   locret_4516C
-                bsr.w   sub_45174
+                bsr.w   LBZCutsceneS3LockSelectedPlayerFacingRight
 
 locret_4516C:
                 rts
@@ -152,7 +152,7 @@ loc_4516E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_45174:
+LBZCutsceneS3LockSelectedPlayerFacingRight:
                 st      (_unkFAA9).w
                 movea.w d0,a1
                 cmpi.b  #6,routine(a1)
@@ -161,7 +161,7 @@ sub_45174:
                 bclr    #0,render_flags(a1)
                 bclr    #Status_Facing,status(a1)
                 rts
-; End of function sub_45174
+; End of function LBZCutsceneS3LockSelectedPlayerFacingRight
 
 ; ---------------------------------------------------------------------------
 word_45196:
@@ -230,7 +230,7 @@ loc_45242:
                 jsr     (SetUp_ObjAttributesSlotted).l
                 bset    #0,render_flags(a0)
                 move.b  #$20,mapping_frame(a0)
-                bsr.w   sub_456C6
+                bsr.w   SpawnKnucklesCutsceneMusicTransition
                 lea     Pal_CutsceneKnux(pc),a1
                 jsr     (PalLoad_Line1).l
                 lea     ChildObjDat_4574E(pc),a2

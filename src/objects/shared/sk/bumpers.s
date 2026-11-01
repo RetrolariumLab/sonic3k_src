@@ -57,7 +57,7 @@ loc_32E8C:
 loc_32EAA:
                 tst.b   collision_property(a0)
                 beq.s   loc_32EB4
-                bsr.w   sub_32F34
+                bsr.w   ReboundPlayersTouchingBumper
 
 loc_32EB4:
                 lea     (Ani_Bumper).l,a1
@@ -84,7 +84,7 @@ loc_32EEA:
 loc_32EF0:
                 tst.b   collision_property(a0)
                 beq.s   loc_32EF8
-                bsr.s   sub_32F34
+                bsr.s   ReboundPlayersTouchingBumper
 
 loc_32EF8:
                 lea     (Ani_Bumper).l,a1
@@ -109,26 +109,26 @@ loc_32F2E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_32F34:
+ReboundPlayersTouchingBumper:
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
                 beq.s   loc_32F42
-                bsr.s   sub_32F56
+                bsr.s   ReboundPlayerFromBumperAndAwardScore
 
 loc_32F42:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
                 beq.s   loc_32F50
-                bsr.s   sub_32F56
+                bsr.s   ReboundPlayerFromBumperAndAwardScore
 
 loc_32F50:
                 clr.b   collision_property(a0)
                 rts
-; End of function sub_32F34
+; End of function ReboundPlayersTouchingBumper
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_32F56:
+ReboundPlayerFromBumperAndAwardScore:
                 move.w  x_pos(a0),d1
                 move.w  y_pos(a0),d2
                 sub.w   x_pos(a1),d1
@@ -171,7 +171,7 @@ loc_32FC4:
 
 locret_32FEE:
                 rts
-; End of function sub_32F56
+; End of function ReboundPlayerFromBumperAndAwardScore
 
 ; ---------------------------------------------------------------------------
 
@@ -181,13 +181,13 @@ loc_32FF0:
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
                 beq.s   loc_33006
-                bsr.s   sub_3301C
+                bsr.s   ReboundPlayerFromCompetitionBumper
 
 loc_33006:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
                 beq.s   loc_33014
-                bsr.s   sub_3301C
+                bsr.s   ReboundPlayerFromCompetitionBumper
 
 loc_33014:
                 clr.b   collision_property(a0)
@@ -195,7 +195,7 @@ loc_33014:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3301C:
+ReboundPlayerFromCompetitionBumper:
                 move.w  x_pos(a0),d1
                 move.w  y_pos(a0),d2
                 sub.w   x_pos(a1),d1
@@ -219,7 +219,7 @@ sub_3301C:
                 moveq   #signextendB(sfx_SmallBumpers),d0
                 jsr     (Play_SFX).l
                 rts
-; End of function sub_3301C
+; End of function ReboundPlayerFromCompetitionBumper
 
 ; ---------------------------------------------------------------------------
 

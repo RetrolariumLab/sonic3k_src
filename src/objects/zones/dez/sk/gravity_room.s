@@ -7,11 +7,11 @@ Obj_DEZGravityRoom:
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d4
-                bsr.s   sub_4964A
+                bsr.s   UpdatePlayerInDezGravityRoom
                 lea     $31(a0),a2
                 lea     (Player_2).w,a1
                 move.w  (Ctrl_2_logical).w,d4
-                bsr.s   sub_4964A
+                bsr.s   UpdatePlayerInDezGravityRoom
                 move.w  x_pos(a0),d0
                 addi.w  #$400,d0
                 andi.w  #$FF80,d0
@@ -32,7 +32,7 @@ loc_49644:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4964A:
+UpdatePlayerInDezGravityRoom:
                 tst.b   (a2)
                 bne.s   loc_496A8
                 move.w  x_pos(a1),d0
@@ -142,4 +142,4 @@ loc_49730:
 
 locret_49764:
                 rts
-; End of function sub_4964A
+; End of function UpdatePlayerInDezGravityRoom

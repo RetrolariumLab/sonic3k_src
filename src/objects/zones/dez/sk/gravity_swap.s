@@ -18,12 +18,12 @@ loc_49214:
                 move.w  x_pos(a0),d1
                 lea     $32(a0),a2
                 lea     (Player_1).w,a1
-                bsr.s   sub_49228
+                bsr.s   SetDezGravityOnPlayerCrossing
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_49228:
+SetDezGravityOnPlayerCrossing:
                 tst.b   (a2)+
                 bne.w   loc_49270
                 cmp.w   x_pos(a1),d1
@@ -71,4 +71,4 @@ loc_49270:
                 beq.s   locret_4926E
                 move.b  #1,(Reverse_gravity_flag).w
                 rts
-; End of function sub_49228
+; End of function SetDezGravityOnPlayerCrossing

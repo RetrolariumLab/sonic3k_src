@@ -195,7 +195,7 @@ loc_3E472:
                 subq.w  #6,d0
                 add.w   y_pos(a3),d0
                 move.w  d0,y_pos(a0)
-                bsr.s   sub_3E4EC
+                bsr.s   UpdatePlayersOnMhzPulleyHandle
                 moveq   #$18,d1
                 tst.b   $3A(a0)
                 beq.s   loc_3E4AA
@@ -232,20 +232,20 @@ loc_3E4E2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3E4EC:
+UpdatePlayersOnMhzPulleyHandle:
                 movea.w parent3(a0),a3
                 lea     $31(a0),a2
                 lea     (Player_2).w,a1
                 move.w  (Ctrl_2_logical).w,d0
-                bsr.s   sub_3E508
+                bsr.s   UpdatePlayerOnMhzPulleyHandle
                 lea     (Player_1).w,a1
                 subq.w  #1,a2
                 move.w  (Ctrl_1_logical).w,d0
-; End of function sub_3E4EC
+; End of function UpdatePlayersOnMhzPulleyHandle
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3E508:
+UpdatePlayerOnMhzPulleyHandle:
                 tst.b   (a2)
                 beq.w   loc_3E682
                 tst.b   render_flags(a1)
@@ -290,11 +290,11 @@ loc_3E58A:
                 clr.b   (a2)
                 move.b  #$3C,2(a2)
                 rts
-; End of function sub_3E508
+; End of function UpdatePlayerOnMhzPulleyHandle
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3E598:
+RecognizeMhzPulleyCheatSequence:
                 cmpa.w  #Player_1,a1
                 bne.s   locret_3E5E6
                 tst.b   d0
@@ -331,7 +331,7 @@ loc_3E5E0:
 
 locret_3E5E6:
                 rts
-; End of function sub_3E598
+; End of function RecognizeMhzPulleyCheatSequence
 
 ; ---------------------------------------------------------------------------
 byte_3E5E8:
@@ -348,7 +348,7 @@ byte_3E5E8:
 ; ---------------------------------------------------------------------------
 
 loc_3E5F2:
-                bsr.s   sub_3E598
+                bsr.s   RecognizeMhzPulleyCheatSequence
                 btst    #button_left+8,d0
                 beq.s   loc_3E600
                 bset    #Status_Facing,status(a1)

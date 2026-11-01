@@ -18,7 +18,7 @@ SOZ1_BackgroundInit:
                 move.w  (a3),$1C(a3)
                 movea.w $18(a3),a1
                 move.b  #$FD,$D(a1)
-                jsr     sub_55D56(pc)
+                jsr     BuildSoz1DistantBackgroundBands(pc)
                 jsr     Reset_TileOffsetPositionEff(pc)
                 moveq   #0,d1
                 jsr     (Refresh_PlaneFull).l
@@ -50,7 +50,7 @@ loc_55A9A:
                 clr.w   (Events_fg_5).w
                 move.w  #-8,(_unkEE9C).w
                 st      (Screen_shake_flag).w
-                jsr     sub_55DB6(pc)
+                jsr     PositionSoz1PyramidBackgroundAndRumble(pc)
                 jsr     Reset_TileOffsetPositionEff(pc)
                 addi.w  #$E0,d0
                 and.w   (Camera_Y_pos_mask).w,d0
@@ -69,8 +69,8 @@ loc_55ACE:
 loc_55ADE:
                 move.w  d0,(Camera_max_Y_pos).w
                 move.w  d0,(Camera_target_max_Y_pos).w
-                jsr     sub_55E96(pc)
-                jsr     sub_55D56(pc)
+                jsr     TriggerSoz1PyramidCameraLock(pc)
+                jsr     BuildSoz1DistantBackgroundBands(pc)
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
                 moveq   #0,d1
@@ -80,7 +80,7 @@ loc_55ADE:
 ; ---------------------------------------------------------------------------
 
 loc_55B04:
-                jsr     sub_55DB6(pc)
+                jsr     PositionSoz1PyramidBackgroundAndRumble(pc)
 
 loc_55B08:
                 move.w  (Camera_X_pos_BG_copy).w,d1
@@ -126,12 +126,12 @@ loc_55B70:
                 bhs.s   loc_55BB4
 
 loc_55B9E:
-                jsr     sub_55D94(pc)
+                jsr     AdvanceSoz1PyramidRiseAndPositionBackground(pc)
 
 loc_55BA2:
                 jsr     (DrawBGAsYouMove).l
-                jsr     sub_55EBE(pc)
-                jsr     sub_55E4C(pc)
+                jsr     ApplySoz1PyramidDoorChunkRequest(pc)
+                jsr     ComposeSoz1PyramidPairedHeatScroll(pc)
                 jmp     ShakeScreen_Setup(pc)
 ; ---------------------------------------------------------------------------
 
@@ -163,10 +163,10 @@ loc_55BE0:
                 bmi.s   loc_55C10
 
 loc_55BFE:
-                jsr     sub_55D94(pc)
+                jsr     AdvanceSoz1PyramidRiseAndPositionBackground(pc)
                 jsr     (DrawBGAsYouMove).l
-                jsr     sub_55EBE(pc)
-                jmp     sub_55E4C(pc)
+                jsr     ApplySoz1PyramidDoorChunkRequest(pc)
+                jmp     ComposeSoz1PyramidPairedHeatScroll(pc)
 ; ---------------------------------------------------------------------------
 
 loc_55C10:
@@ -192,7 +192,7 @@ loc_55C32:
                 bmi.s   loc_55C4E
 
 loc_55C4A:
-                jmp     sub_55E4C(pc)
+                jmp     ComposeSoz1PyramidPairedHeatScroll(pc)
 ; ---------------------------------------------------------------------------
 
 loc_55C4E:
@@ -235,7 +235,7 @@ loc_55CC6:
                 moveq   #PalID_SOZ2,d0
                 jsr     (LoadPalette_Immediate).l
                 movem.l (sp)+,d7-a0/a2-a3
-                jsr     sub_55EFC(pc)
+                jsr     InitializeSoz2DarkTransitionPalettes(pc)
                 lea     (Normal_palette_line_3).w,a1
                 moveq   #bytesToLcnt($40),d0
 
@@ -274,7 +274,7 @@ locret_55D54:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_55D56:
+BuildSoz1DistantBackgroundBands:
                 move.w  (Camera_Y_pos_copy).w,d0
                 asr.w   #4,d0
                 move.w  d0,(Camera_Y_pos_BG_copy).w
@@ -301,25 +301,25 @@ loc_55D86:
                 add.l   d1,d0
                 dbf     d2,loc_55D86
                 rts
-; End of function sub_55D56
+; End of function BuildSoz1DistantBackgroundBands
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_55D94:
+AdvanceSoz1PyramidRiseAndPositionBackground:
                 tst.w   (Screen_shake_flag).w
-                bpl.s   sub_55DB6
+                bpl.s   PositionSoz1PyramidBackgroundAndRumble
                 move.w  (Level_frame_counter).w,d0
                 andi.w  #3,d0
-                beq.s   sub_55DB6
+                beq.s   PositionSoz1PyramidBackgroundAndRumble
                 addq.w  #1,(_unkEE9C).w
                 cmpi.w  #$280,(_unkEE9C).w
-                blt.s   sub_55DB6
+                blt.s   PositionSoz1PyramidBackgroundAndRumble
                 move.w  #8,(Screen_shake_flag).w
-; End of function sub_55D94
+; End of function AdvanceSoz1PyramidRiseAndPositionBackground
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_55DB6:
+PositionSoz1PyramidBackgroundAndRumble:
                 tst.w   (Screen_shake_flag).w
                 bpl.s   loc_55DD0
                 move.w  (Level_frame_counter).w,d0
@@ -339,7 +339,7 @@ loc_55DD0:
                 move.w  d0,(Camera_X_pos_BG_copy).w
                 move.w  d0,(Events_bg+$10).w
                 rts
-; End of function sub_55DB6
+; End of function PositionSoz1PyramidBackgroundAndRumble
 
 ; ---------------------------------------------------------------------------
 
@@ -374,7 +374,7 @@ loc_55DF2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_55E4C:
+ComposeSoz1PyramidPairedHeatScroll:
                 lea     (H_scroll_buffer).w,a1
                 lea     AIZ2_SOZ1_LRZ3_FGDeformDelta(pc),a6
                 move.w  (Camera_Y_pos_copy).w,d0
@@ -405,11 +405,11 @@ loc_55E78:
                 move.w  d4,(a1)+
                 dbf     d2,loc_55E78
                 rts
-; End of function sub_55E4C
+; End of function ComposeSoz1PyramidPairedHeatScroll
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_55E96:
+TriggerSoz1PyramidCameraLock:
                 move.w  (Camera_max_Y_pos).w,d0
                 cmpi.w  #$960,d0
                 bne.s   locret_55EBC
@@ -423,11 +423,11 @@ sub_55E96:
 
 locret_55EBC:
                 rts
-; End of function sub_55E96
+; End of function TriggerSoz1PyramidCameraLock
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_55EBE:
+ApplySoz1PyramidDoorChunkRequest:
                 move.w  (Events_bg+$00).w,d0
                 beq.s   locret_55EFA
                 clr.w   (Events_bg+$00).w
@@ -449,11 +449,11 @@ loc_55EE4:
 
 locret_55EFA:
                 rts
-; End of function sub_55EBE
+; End of function ApplySoz1PyramidDoorChunkRequest
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_55EFC:
+InitializeSoz2DarkTransitionPalettes:
                 lea     (Normal_palette_line_3+$2).w,a1
                 lea     (Target_palette_line_3+$2).w,a5
                 lea     word_560EA(pc),a6
@@ -478,7 +478,7 @@ loc_55F20:
                 move.w  #4,(Palette_cycle_counters+$06).w
                 move.w  #$D0,(Palette_cycle_counters+$02).w
                 rts
-; End of function sub_55EFC
+; End of function InitializeSoz2DarkTransitionPalettes
 
 ; ---------------------------------------------------------------------------
 
@@ -569,7 +569,7 @@ loc_56020:
 
 loc_56034:
                 moveq   #1,d0
-                bsr.s   sub_560A2
+                bsr.s   StepSoz1PyramidDoorWithJitter
                 cmpi.w  #$58,$2E(a0)
                 blo.s   loc_56050
                 move.w  #$58,$2E(a0)
@@ -600,7 +600,7 @@ loc_56070:
 
 loc_5607E:
                 moveq   #-1,d0
-                bsr.s   sub_560A2
+                bsr.s   StepSoz1PyramidDoorWithJitter
                 tst.w   $2E(a0)
                 bpl.s   loc_5609C
                 clr.w   $2E(a0)
@@ -613,7 +613,7 @@ loc_5609C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_560A2:
+StepSoz1PyramidDoorWithJitter:
                 move.w  (Level_frame_counter).w,d1
                 andi.w  #3,d1
                 bne.s   loc_560AE
@@ -632,7 +632,7 @@ loc_560AE:
                 add.w   $18(a0),d0
                 move.w  d0,x_pos(a0)
                 rts
-; End of function sub_560A2
+; End of function StepSoz1PyramidDoorWithJitter
 
 ; ---------------------------------------------------------------------------
 word_560DC:

@@ -94,19 +94,19 @@ loc_1BABA:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1BAC4:
+CollidePlayersWithHeightProfileSolid:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 movem.l d1-d4,-(sp)
-                bsr.s   sub_1BADA
+                bsr.s   CollidePlayerWithHeightProfileSolid
                 movem.l (sp)+,d1-d4
                 lea     (Player_2).w,a1
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
-; End of function sub_1BAC4
+; End of function CollidePlayersWithHeightProfileSolid
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1BADA:
+CollidePlayerWithHeightProfileSolid:
                 btst    d6,status(a0)
                 beq.w   loc_1BC84
                 move.w  d1,d2
@@ -136,7 +136,7 @@ loc_1BB12:
                 bset    d4,d6
                 moveq   #0,d4
                 rts
-; End of function sub_1BADA
+; End of function CollidePlayerWithHeightProfileSolid
 
 ; ---------------------------------------------------------------------------
 ; unused leftover from Sonic 2
@@ -144,14 +144,14 @@ loc_1BB12:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 movem.l d1-d4,-(sp)
-                bsr.s   sub_1BB3A
+                bsr.s   CollidePlayerWithDualHeightProfileSolid
                 movem.l (sp)+,d1-d4
                 lea     (Player_2).w,a1
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1BB3A:
+CollidePlayerWithDualHeightProfileSolid:
                 btst    d6,status(a0)
                 beq.w   loc_1BCDE
                 move.w  d1,d2
@@ -178,23 +178,23 @@ loc_1BB72:
                 bsr.w   SolidObjSloped4
                 moveq   #0,d4
                 rts
-; End of function sub_1BB3A
+; End of function CollidePlayerWithDualHeightProfileSolid
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1BB7C:
+CollidePlayersWithHeightProfileKeepAirState:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 movem.l d1-d4,-(sp)
-                bsr.s   sub_1BB92
+                bsr.s   CollidePlayerWithHeightProfileKeepAirState
                 movem.l (sp)+,d1-d4
                 lea     (Player_2).w,a1
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
-; End of function sub_1BB7C
+; End of function CollidePlayersWithHeightProfileKeepAirState
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1BB92:
+CollidePlayerWithHeightProfileKeepAirState:
                 btst    d6,status(a0)
                 beq.w   loc_1BC84
                 move.w  d1,d2
@@ -223,7 +223,7 @@ loc_1BBC4:
                 bset    d4,d6
                 moveq   #0,d4
                 rts
-; End of function sub_1BB92
+; End of function CollidePlayerWithHeightProfileKeepAirState
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -470,7 +470,7 @@ loc_1BDFA:
 ; ---------------------------------------------------------------------------
 
 loc_1BE20:
-                bsr.s   sub_1BE46
+                bsr.s   ClearPlayerPushingSolid
                 move.w  d6,d4
                 addi.b  #$D,d4
                 bset    d4,d6
@@ -484,13 +484,13 @@ loc_1BE2E:
                 btst    d4,status(a0)
                 beq.s   loc_1BE54
                 cmpi.b  #2,anim(a1)
-                beq.s   sub_1BE46
+                beq.s   ClearPlayerPushingSolid
                 move.w  #1,anim(a1)
 ; End of function SolidObjectFull_Offset_1P
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1BE46:
+ClearPlayerPushingSolid:
                 move.l  d6,d4
                 addq.b  #pushing_bit_delta,d4
                 bclr    d4,status(a0)
@@ -499,7 +499,7 @@ sub_1BE46:
 loc_1BE54:
                 moveq   #0,d4
                 rts
-; End of function sub_1BE46
+; End of function ClearPlayerPushingSolid
 
 ; ---------------------------------------------------------------------------
 

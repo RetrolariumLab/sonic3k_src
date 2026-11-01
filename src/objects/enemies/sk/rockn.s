@@ -130,7 +130,7 @@ loc_8EEDC:
                 jsr     (Check_PlayerInRange).l
                 tst.w   d0
                 beq.s   loc_8EEEE
-                bsr.w   sub_8EEF4
+                bsr.w   DefeatRocknForGroundedAttackingPlayer
 
 loc_8EEEE:
                 swap    d0
@@ -139,7 +139,7 @@ loc_8EEEE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8EEF4:
+DefeatRocknForGroundedAttackingPlayer:
                 movea.w d0,a1
                 jsr     (Check_PlayerAttack).l
                 beq.s   locret_8EF12
@@ -151,7 +151,7 @@ sub_8EEF4:
 
 locret_8EF12:
                 rts
-; End of function sub_8EEF4
+; End of function DefeatRocknForGroundedAttackingPlayer
 
 ; ---------------------------------------------------------------------------
 word_8EF14:

@@ -39,7 +39,7 @@ loc_75FD4:
                 jsr     off_75FF4(pc,d1.w)
                 move.w  (Level_repeat_offset).w,d0
                 sub.w   d0,x_pos(a0)
-                bsr.w   sub_76782
+                bsr.w   HandleMHZEndBossPairedHitFlashAndEscapeThreshold
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 off_75FF4:
@@ -262,7 +262,7 @@ loc_76270:
                 move.w  #(button_up_mask<<8)|button_up_mask,(Ctrl_1_logical).w
                 st      (Ctrl_2_locked).w
                 move.w  #(button_up_mask<<8)|button_up_mask,(Ctrl_2_logical).w
-                jsr     (sub_8638A).l
+                jsr     (FacePlayersTowardObject).l
                 move.w  #$1BF,$2E(a0)
                 move.w  #$55,(Events_fg_4).w
                 move.w  #$5000,(Camera_stored_max_X_pos).w
@@ -298,7 +298,7 @@ loc_76318:
 loc_76356:
                 moveq   #signextendB(sfx_RobotnikSiren),d0
                 jsr     (Play_SFX_Continuous).l
-                jsr     (sub_8638A).l
+                jsr     (FacePlayersTowardObject).l
                 moveq   #0,d1
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$80,d0
@@ -424,7 +424,7 @@ loc_764E0:
                 bset    #7,art_tile(a0)
 
 loc_764F8:
-                bsr.w   sub_7675C
+                bsr.w   SyncMHZEndBossOverlayPositionAndHorizontalFlip
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
 
@@ -432,10 +432,10 @@ loc_76502:
                 lea     ObjDat3_76934(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #loc_76516,(a0)
-                bsr.w   sub_7673E
+                bsr.w   SelectMHZEndBossOverlayLayerBySubtype
 
 loc_76516:
-                bsr.w   sub_7675C
+                bsr.w   SyncMHZEndBossOverlayPositionAndHorizontalFlip
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
 
@@ -532,7 +532,7 @@ loc_76636:
                 jsr     (SetUp_ObjAttributes3).l
                 move.l  #loc_76652,(a0)
                 move.l  #byte_769CE,$30(a0)
-                bsr.w   sub_76714
+                bsr.w   OffsetMHZWeatherMachineEffectBySubtype
 
 loc_76652:
                 jsr     (Animate_Raw).l

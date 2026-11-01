@@ -16,13 +16,13 @@ loc_7C66C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7C678:
+InstallSingleGlobalPaletteRotationScript:
                 lea     (Palette_rotation_data).w,a2
                 move.l  (a1)+,(a2)+
                 move.l  (a1)+,(a2)+
                 clr.w   (a2)
                 rts
-; End of function sub_7C678
+; End of function InstallSingleGlobalPaletteRotationScript
 
 ; ---------------------------------------------------------------------------
 
@@ -83,7 +83,7 @@ loc_7C726:
                 lea     ObjDat3_7D444(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.l  #loc_7C738,(a0)
-                bsr.w   sub_7D162
+                bsr.w   SeedSSZSuperMechaEightWayProjectileVelocity
 
 loc_7C738:
                 jsr     (MoveSprite2).l
@@ -94,7 +94,7 @@ loc_7C744:
                 lea     ObjDat3_7D438(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.l  #loc_7C756,(a0)
-                bsr.w   sub_7D192
+                bsr.w   SelectSSZMechaLaserAnimationAndCompletionBySubtype
 
 loc_7C756:
                 jsr     Animate_Raw(pc)
@@ -245,7 +245,7 @@ loc_7C902:
                 lea     ObjDat3_7D402(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.l  #loc_7C91C,(a0)
-                bsr.w   sub_7D236
+                bsr.w   SelectSSZMechaRollingTrailOffsetsAndQueuePriority
                 moveq   #signextendB(sfx_Roll),d0
                 jsr     (Play_SFX).l
 

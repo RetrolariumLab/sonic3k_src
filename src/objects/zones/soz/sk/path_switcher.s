@@ -64,9 +64,9 @@ loc_1D1BA:
                 move.w  x_pos(a0),d1
                 lea     $34(a0),a2
                 lea     (Player_1).w,a1
-                bsr.s   sub_1D1E2
+                bsr.s   ApplySozPathChangeOnXCrossing
                 lea     (Player_2).w,a1
-                bsr.s   sub_1D1E2
+                bsr.s   ApplySozPathChangeOnXCrossing
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
@@ -75,7 +75,7 @@ loc_1D1DC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1D1E2:
+ApplySozPathChangeOnXCrossing:
                 tst.b   (a2)+
                 bne.w   loc_1D2BE
                 cmp.w   x_pos(a1),d1
@@ -235,7 +235,7 @@ loc_1D37C:
 
 locret_1D38E:
                 rts
-; End of function sub_1D1E2
+; End of function ApplySozPathChangeOnXCrossing
 
 ; ---------------------------------------------------------------------------
 
@@ -245,9 +245,9 @@ loc_1D390:
                 move.w  y_pos(a0),d1
                 lea     $34(a0),a2
                 lea     (Player_1).w,a1
-                bsr.s   sub_1D3B8
+                bsr.s   ApplySozPathChangeOnYCrossing
                 lea     (Player_2).w,a1
-                bsr.s   sub_1D3B8
+                bsr.s   ApplySozPathChangeOnYCrossing
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
@@ -256,7 +256,7 @@ loc_1D3B2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1D3B8:
+ApplySozPathChangeOnYCrossing:
                 tst.b   (a2)+
                 bne.w   loc_1D494
                 cmp.w   y_pos(a1),d1
@@ -416,4 +416,4 @@ loc_1D552:
 
 locret_1D564:
                 rts
-; End of function sub_1D3B8
+; End of function ApplySozPathChangeOnYCrossing

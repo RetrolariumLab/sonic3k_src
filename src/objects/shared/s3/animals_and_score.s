@@ -299,7 +299,7 @@ loc_2C128:
 ; ---------------------------------------------------------------------------
 
 loc_2C12E:
-                bsr.w   sub_2C2DC
+                bsr.w   GetAnimalActivationXDifference
                 bcc.s   loc_2C14A
                 move.w  $32(a0),x_vel(a0)
                 move.w  $34(a0),y_vel(a0)
@@ -312,14 +312,14 @@ loc_2C14A:
 ; ---------------------------------------------------------------------------
 
 loc_2C14E:
-                bsr.w   sub_2C2DC
+                bsr.w   GetAnimalActivationXDifference
                 bpl.s   loc_2C186
                 clr.w   x_vel(a0)
                 clr.w   $32(a0)
                 jsr     (MoveSprite2).l
                 addi.w  #$18,y_vel(a0)
-                bsr.w   sub_2C29C
-                bsr.w   sub_2C2C4
+                bsr.w   BounceAnimalOnFloorAndSelectFrame
+                bsr.w   SetAnimalFlipFromPlayerSide
                 subq.b  #1,anim_frame_timer(a0)
                 bpl.s   loc_2C186
                 move.b  #1,anim_frame_timer(a0)
@@ -331,7 +331,7 @@ loc_2C186:
 ; ---------------------------------------------------------------------------
 
 loc_2C18A:
-                bsr.w   sub_2C2DC
+                bsr.w   GetAnimalActivationXDifference
                 bpl.s   loc_2C1E2
                 move.w  $32(a0),x_vel(a0)
                 move.w  $34(a0),y_vel(a0)
@@ -362,20 +362,20 @@ loc_2C1E2:
 ; ---------------------------------------------------------------------------
 
 loc_2C1E6:
-                bsr.w   sub_2C2DC
+                bsr.w   GetAnimalActivationXDifference
                 bpl.s   loc_2C202
                 clr.w   x_vel(a0)
                 clr.w   $32(a0)
                 jsr     (MoveSprite).l
-                bsr.w   sub_2C29C
-                bsr.w   sub_2C2C4
+                bsr.w   BounceAnimalOnFloorAndSelectFrame
+                bsr.w   SetAnimalFlipFromPlayerSide
 
 loc_2C202:
                 bra.w   loc_2C0EE
 ; ---------------------------------------------------------------------------
 
 loc_2C206:
-                bsr.w   sub_2C2DC
+                bsr.w   GetAnimalActivationXDifference
                 bpl.s   loc_2C242
                 jsr     (MoveSprite).l
                 move.b  #1,mapping_frame(a0)
@@ -395,7 +395,7 @@ loc_2C242:
 ; ---------------------------------------------------------------------------
 
 loc_2C246:
-                bsr.w   sub_2C2DC
+                bsr.w   GetAnimalActivationXDifference
                 bpl.s   loc_2C298
                 jsr     (MoveSprite2).l
                 addi.w  #$18,y_vel(a0)
@@ -425,7 +425,7 @@ loc_2C298:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2C29C:
+BounceAnimalOnFloorAndSelectFrame:
                 move.b  #1,mapping_frame(a0)
                 tst.w   y_vel(a0)
                 bmi.s   locret_2C2C2
@@ -438,11 +438,11 @@ sub_2C29C:
 
 locret_2C2C2:
                 rts
-; End of function sub_2C29C
+; End of function BounceAnimalOnFloorAndSelectFrame
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2C2C4:
+SetAnimalFlipFromPlayerSide:
                 bset    #0,render_flags(a0)
                 move.w  x_pos(a0),d0
                 sub.w   (Player_1+x_pos).w,d0
@@ -451,16 +451,16 @@ sub_2C2C4:
 
 locret_2C2DA:
                 rts
-; End of function sub_2C2C4
+; End of function SetAnimalFlipFromPlayerSide
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2C2DC:
+GetAnimalActivationXDifference:
                 move.w  (Player_1+x_pos).w,d0
                 sub.w   x_pos(a0),d0
                 subi.w  #$B8,d0
                 rts
-; End of function sub_2C2DC
+; End of function GetAnimalActivationXDifference
 
 ; ---------------------------------------------------------------------------
 

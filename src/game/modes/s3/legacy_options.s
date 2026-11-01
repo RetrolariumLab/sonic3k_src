@@ -264,13 +264,13 @@ OptionScreen_HexDumpSoundTest:
                 move.w  (Sound_test_sound).w,d1
                 move.b  d1,d2
                 lsr.b   #4,d1
-                bsr.s   sub_6828
+                bsr.s   S3LegacyOptionsAppendHexNibbleTilePreservingAttributes
                 move.b  d2,d1
 ; End of function OptionScreen_HexDumpSoundTest
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6828:
+S3LegacyOptionsAppendHexNibbleTilePreservingAttributes:
                 andi.w  #$F,d1
                 cmpi.b  #$A,d1
                 bcs.s   loc_6836
@@ -281,7 +281,7 @@ loc_6836:
                 move.b  d1,d0
                 move.w  d0,(a2)+
                 rts
-; End of function sub_6828
+; End of function S3LegacyOptionsAppendHexNibbleTilePreservingAttributes
 
 ; ---------------------------------------------------------------------------
 S2OptScrBoxData:

@@ -39,10 +39,10 @@ loc_41760:
 loc_41776:
                 lea     (Player_1).w,a1
                 move.b  $30(a0),d0
-                bsr.s   sub_417A6
+                bsr.s   ReleasePlayerFromBreakingSozSandRock
                 lea     (Player_2).w,a1
                 move.b  $31(a0),d0
-                bsr.s   sub_417A6
+                bsr.s   ReleasePlayerFromBreakingSozSandRock
                 bra.w   loc_417F6
 ; ---------------------------------------------------------------------------
 
@@ -53,19 +53,19 @@ loc_4178E:
                 cmpi.b  #2,$30(a0)
                 bne.s   loc_4175A
                 lea     (Player_1).w,a1
-                bsr.s   sub_417AC
+                bsr.s   ReboundRollingPlayerFromSozSandRock
                 bra.s   loc_417F6
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_417A6:
+ReleasePlayerFromBreakingSozSandRock:
                 cmpi.b  #2,d0
                 bne.s   loc_417CA
-; End of function sub_417A6
+; End of function ReleasePlayerFromBreakingSozSandRock
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_417AC:
+ReboundRollingPlayerFromSozSandRock:
                 bset    #Status_Roll,status(a1)
                 move.b  #$E,y_radius(a1)
                 move.b  #7,x_radius(a1)
@@ -77,7 +77,7 @@ loc_417CA:
                 bclr    #Status_OnObj,status(a1)
                 move.b  #2,routine(a1)
                 rts
-; End of function sub_417AC
+; End of function ReboundRollingPlayerFromSozSandRock
 
 ; ---------------------------------------------------------------------------
 
@@ -87,7 +87,7 @@ loc_417DE:
                 cmpi.b  #2,$31(a0)
                 bne.w   loc_4175A
                 lea     (Player_2).w,a1
-                bsr.s   sub_417AC
+                bsr.s   ReboundRollingPlayerFromSozSandRock
 
 loc_417F6:
                 andi.b  #$E7,status(a0)

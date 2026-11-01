@@ -181,7 +181,7 @@ loc_44E2C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_44E32:
+CNZCutsceneS3CopyTwoPaletteLines:
                 lea     (Normal_palette_line_3).w,a2
                 moveq   #bytesToLcnt($40),d0
 
@@ -191,7 +191,7 @@ loc_44E38:
 
 locret_44E3E:
                 rts
-; End of function sub_44E32
+; End of function CNZCutsceneS3CopyTwoPaletteLines
 
 ; ---------------------------------------------------------------------------
 
@@ -199,7 +199,7 @@ loc_44E40:
                 tst.b   subtype(a0)
                 beq.s   loc_44E4E
                 lea     (Pal_CNZ+$20).l,a1
-                bsr.s   sub_44E32
+                bsr.s   CNZCutsceneS3CopyTwoPaletteLines
 
 loc_44E4E:
                 jmp     (Delete_Current_Sprite).l
@@ -244,7 +244,7 @@ loc_44EA2:
                 clr.w   (Ctrl_1_logical).w
                 st      (Ctrl_1_locked).w
                 move.b  #$80,(Player_1+object_control).w
-                bsr.w   sub_456C6
+                bsr.w   SpawnKnucklesCutsceneMusicTransition
                 lea     Pal_CutsceneKnux(pc),a1
                 jmp     (PalLoad_Line1).l
 ; ---------------------------------------------------------------------------

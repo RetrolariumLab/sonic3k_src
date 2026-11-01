@@ -35,10 +35,10 @@ loc_57ECA:
                 addq.b  #4,routine(a0)
 
 loc_57EDC:
-                jsr     sub_57FC0(pc)
+                jsr     StepSsz1EscapeCameraDownward(pc)
                 cmpi.w  #$600,(Camera_Y_pos).w
                 blo.w   locret_57FBE
-                jsr     sub_57FE2(pc)
+                jsr     DriveSsz1EscapeJumpInputsForPlayers(pc)
                 cmpi.w  #$60C,(Camera_Y_pos).w
                 blo.w   locret_57FBE
                 lea     (HScroll_table+$E0).w,a1
@@ -55,8 +55,8 @@ loc_57F02:
 ; ---------------------------------------------------------------------------
 
 loc_57F18:
-                jsr     sub_57FC0(pc)
-                jsr     sub_57FE2(pc)
+                jsr     StepSsz1EscapeCameraDownward(pc)
+                jsr     DriveSsz1EscapeJumpInputsForPlayers(pc)
                 cmpi.w  #$640,(Camera_Y_pos).w
                 blo.w   locret_57FBE
                 move.w  #$10-1,$2E(a0)
@@ -78,7 +78,7 @@ loc_57F3E:
 loc_57F5E:
                 cmpi.w  #$5C0,(Camera_Y_pos).w
                 bhs.s   loc_57F7E
-                jsr     sub_58048(pc)
+                jsr     UpdateSsz1EscapeSpiralForPlayers(pc)
                 move.w  (Level_frame_counter).w,d0
                 addq.w  #8,d0
                 andi.w  #$F,d0
@@ -119,7 +119,7 @@ locret_57FBE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_57FC0:
+StepSsz1EscapeCameraDownward:
                 cmpi.w  #$618,(Camera_Y_pos).w
                 blo.s   loc_57FD2
                 btst    #0,(Level_frame_counter+1).w
@@ -137,25 +137,25 @@ loc_57FDC:
 
 locret_57FE0:
                 rts
-; End of function sub_57FC0
+; End of function StepSsz1EscapeCameraDownward
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_57FE2:
+DriveSsz1EscapeJumpInputsForPlayers:
                 lea     (Player_1).w,a1
                 lea     (Ctrl_1_logical).w,a2
                 lea     $30(a0),a3
-                bsr.s   sub_58002
+                bsr.s   DriveSsz1EscapeJumpInputAndHidePlayer
                 tst.w   (Player_mode).w
                 bne.s   locret_58046
                 lea     (Player_2).w,a1
                 lea     (Ctrl_2_logical).w,a2
                 lea     $31(a0),a3
-; End of function sub_57FE2
+; End of function DriveSsz1EscapeJumpInputsForPlayers
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_58002:
+DriveSsz1EscapeJumpInputAndHidePlayer:
                 tst.b   object_control(a1)
                 bne.s   locret_58046
                 tst.b   (a3)
@@ -187,11 +187,11 @@ loc_58044:
 
 locret_58046:
                 rts
-; End of function sub_58002
+; End of function DriveSsz1EscapeJumpInputAndHidePlayer
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_58048:
+UpdateSsz1EscapeSpiralForPlayers:
                 lea     (Player_1).w,a1
                 lea     $30(a0),a2
                 moveq   #0,d3
@@ -200,17 +200,17 @@ sub_58048:
                 moveq   #-1,d3
 
 loc_5805C:
-                bsr.s   sub_5806E
+                bsr.s   UpdateSsz1EscapeSpiralClimbAndLaunch
                 tst.w   (Player_mode).w
                 bne.s   locret_58046
                 lea     (Player_2).w,a1
                 lea     $32(a0),a2
                 moveq   #-1,d3
-; End of function sub_58048
+; End of function UpdateSsz1EscapeSpiralForPlayers
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5806E:
+UpdateSsz1EscapeSpiralClimbAndLaunch:
                 tst.w   4(a2)
                 bne.w   loc_58192
                 cmpi.w  #$910,(a2)
@@ -338,7 +338,7 @@ loc_581D2:
 
 locret_581F0:
                 rts
-; End of function sub_5806E
+; End of function UpdateSsz1EscapeSpiralClimbAndLaunch
 
 ; ---------------------------------------------------------------------------
 

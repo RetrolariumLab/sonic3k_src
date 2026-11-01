@@ -45,7 +45,7 @@ loc_5728A:
 ; ---------------------------------------------------------------------------
 
 loc_572B2:
-                bsr.w   sub_57414
+                bsr.w   SuspendBlasterGroundRoutineForCeilingRetreat
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$60,d2
                 bhs.s   loc_572CE
@@ -82,7 +82,7 @@ loc_57306:
 ; ---------------------------------------------------------------------------
 
 loc_5731C:
-                bsr.w   sub_57414
+                bsr.w   SuspendBlasterGroundRoutineForCeilingRetreat
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
@@ -107,7 +107,7 @@ loc_57344:
 ; ---------------------------------------------------------------------------
 
 loc_57362:
-                bsr.w   sub_57414
+                bsr.w   SuspendBlasterGroundRoutineForCeilingRetreat
                 lea     byte_574A4(pc),a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
                 tst.w   d2
@@ -181,7 +181,7 @@ loc_57402:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_57414:
+SuspendBlasterGroundRoutineForCeilingRetreat:
                 tst.b   $3C(a0)
                 beq.s   locret_57436
                 tst.b   (_unkFAA2).w
@@ -193,7 +193,7 @@ sub_57414:
 
 locret_57436:
                 rts
-; End of function sub_57414
+; End of function SuspendBlasterGroundRoutineForCeilingRetreat
 
 ; ---------------------------------------------------------------------------
 ObjDat_Blaster:

@@ -25,14 +25,14 @@ loc_3385E:
                 lea     $30(a0),a2
                 moveq   #p1_standing_bit,d6
                 move.w  (Ctrl_1_logical).w,d5
-                bsr.s   sub_338C4
+                bsr.s   UpdatePlayerOnCnzWireCage
                 lea     (Player_2).w,a1
                 lea     $34(a0),a2
 ; Bug: if player 1 was riding the object, then d6 may have become dirty from
 ; a call to Perform_Player_DPLC, causing player 2 to behave erratically
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
                 move.w  (Ctrl_2_logical).w,d5
-                bsr.s   sub_338C4
+                bsr.s   UpdatePlayerOnCnzWireCage
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #$3F,d0
                 bne.s   loc_338BE
@@ -57,7 +57,7 @@ loc_338BE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_338C4:
+UpdatePlayerOnCnzWireCage:
                 btst    d6,status(a0)
                 bne.w   loc_339A0
                 tst.b   1(a2)
@@ -109,7 +109,7 @@ loc_3394C:
                 bset    #0,object_control(a1)
 
 loc_33958:
-                bsr.w   sub_33C34
+                bsr.w   AttachPlayerToScriptedRideObject
                 move.b  #$80,(a2)
                 move.b  #-$40,angle(a1)
                 move.w  x_pos(a1),d0
@@ -333,7 +333,7 @@ loc_33BF4:
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 jmp     (Perform_Player_DPLC).l
-; End of function sub_338C4
+; End of function UpdatePlayerOnCnzWireCage
 
 ; ---------------------------------------------------------------------------
 ; unused
@@ -346,7 +346,7 @@ RawAni_33C1C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_33C34:
+AttachPlayerToScriptedRideObject:
                 btst    #Status_OnObj,status(a1)
                 beq.s   loc_33C44
                 movea.w interact(a1),a3
@@ -367,4 +367,4 @@ loc_33C62:
                 bclr    #Status_InAir,status(a1)
                 bset    d6,status(a0)
                 rts
-; End of function sub_33C34
+; End of function AttachPlayerToScriptedRideObject

@@ -72,7 +72,7 @@ loc_19420:
 
 loc_19446:
                 move.w  art_tile(a0),d5
-                jsr     sub_195CE(pc)
+                jsr     RenderMappingPieces(pc)
 
 Render_Sprites_NextObj:
                 subq.w  #2,(a5)                         ; decrement object count
@@ -83,7 +83,7 @@ Render_Sprites_NextLevel:
                 bne.s   loc_1946A
                 cmpi.w  #$900,(Current_zone_and_act).w  ; LRZ Act 1?
                 bne.s   loc_1946A
-                jsr     (sub_1AF14).l
+                jsr     (RenderLRZForegroundRockPieces).l
 
 loc_1946A:
                 lea     $80(a5),a5                      ; load next priority level
@@ -192,7 +192,7 @@ loc_19546:
                 subq.w  #1,d4
                 bmi.s   loc_1957E
                 move.w  d6,d3
-                jsr     sub_196D2(pc)
+                jsr     RenderMappingPiecesClipped(pc)
                 move.w  d3,d6
                 tst.w   d7
                 bmi.w   Render_Sprites_NextObj
@@ -225,7 +225,7 @@ loc_195A8:
                 subq.w  #1,d4
                 bmi.s   loc_195C4
                 move.w  d6,-(sp)
-                jsr     sub_196D2(pc)
+                jsr     RenderMappingPiecesClipped(pc)
                 move.w  (sp)+,d6
 
 loc_195C4:
@@ -236,7 +236,7 @@ loc_195C4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_195CE:
+RenderMappingPieces:
                 lsr.b   #1,d6
                 bcs.s   loc_19600
                 lsr.b   #1,d6
@@ -369,11 +369,11 @@ loc_196C8:
                 subq.w  #1,d7
                 dbmi    d4,loc_1969A
                 rts
-; End of function sub_195CE
+; End of function RenderMappingPieces
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_196D2:
+RenderMappingPiecesClipped:
                 lsr.b   #1,d6
                 bcs.s   loc_19724
                 lsr.b   #1,d6
@@ -566,4 +566,4 @@ loc_1984E:
                 addq.w  #4,a1
                 dbf     d4,loc_197FE
                 rts
-; End of function sub_196D2
+; End of function RenderMappingPiecesClipped

@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_66054:
+SSZSmallDeathEggEmitParticleEveryThirtyTwoVints:
                 move.b  (V_int_run_count+3).w,d0
                 andi.w  #$1F,d0
                 bne.w   locret_6206C
@@ -12,7 +12,7 @@ sub_66054:
                 jsr     (Play_SFX).l
                 lea     ChildObjDat_665F0(pc),a2
                 jmp     (CreateChild6_Simple).l
-; End of function sub_66054
+; End of function SSZSmallDeathEggEmitParticleEveryThirtyTwoVints
 
 ; ---------------------------------------------------------------------------
 
@@ -31,7 +31,7 @@ loc_6607E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_66094:
+HPZKnucklesFaceTargetFromSideWord:
                 bset    #0,render_flags(a0)
                 tst.w   d0
                 beq.s   locret_660A4
@@ -39,7 +39,7 @@ sub_66094:
 
 locret_660A4:
                 rts
-; End of function sub_66094
+; End of function HPZKnucklesFaceTargetFromSideWord
 
 ; ---------------------------------------------------------------------------
 
@@ -61,7 +61,7 @@ loc_660BE:
                 tst.w   d0
                 beq.s   loc_660DA
                 move.l  d0,-(sp)
-                bsr.w   sub_660E2
+                bsr.w   HPZKnucklesDispatchFrontAlignedOrOtherPlayerContact
                 move.l  (sp)+,d0
 
 loc_660DA:
@@ -71,7 +71,7 @@ loc_660DA:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_660E2:
+HPZKnucklesDispatchFrontAlignedOrOtherPlayerContact:
                 btst    #4,$38(a0)
                 bne.w   locret_6206C
                 movea.w d0,a1
@@ -120,7 +120,7 @@ loc_66146:
 ; unused
                 movea.l $C(a3),a4
                 jmp     (a4)
-; End of function sub_660E2
+; End of function HPZKnucklesDispatchFrontAlignedOrOtherPlayerContact
 
 ; ---------------------------------------------------------------------------
 word_66152:
@@ -128,7 +128,7 @@ word_66152:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6615A:
+HPZKnucklesStopHorizontalSpeedAtCameraMargins:
                 tst.w   x_vel(a0)
                 beq.s   locret_66188
                 bmi.s   loc_66176
@@ -149,7 +149,7 @@ loc_66176:
 
 locret_66188:
                 rts
-; End of function sub_6615A
+; End of function HPZKnucklesStopHorizontalSpeedAtCameraMargins
 
 ; ---------------------------------------------------------------------------
 
@@ -226,7 +226,7 @@ locret_66234:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_66236:
+HPZKnucklesDustQueueDPLCWhenFrameChanges:
                 move.l  #ArtUnc_DashDust,d6
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
@@ -259,11 +259,11 @@ loc_66262:
 
 locret_6628A:
                 rts
-; End of function sub_66236
+; End of function HPZKnucklesDustQueueDPLCWhenFrameChanges
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6628C:
+HPZCraneAdvanceAngularOscillationAndReverseStep:
                 move.b  $40(a0),d0
                 add.b   d0,$3C(a0)
                 subq.b  #1,$39(a0)
@@ -273,11 +273,11 @@ sub_6628C:
 
 locret_662A4:
                 rts
-; End of function sub_6628C
+; End of function HPZCraneAdvanceAngularOscillationAndReverseStep
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_662A6:
+HPZCraneSelectEightDirectionFrameFromPhase:
                 moveq   #0,d0
                 move.b  $3C(a0),d0
                 addi.b  #$10,d0
@@ -286,7 +286,7 @@ sub_662A6:
                 addi.b  #$13,d0
                 move.b  d0,mapping_frame(a0)
                 rts
-; End of function sub_662A6
+; End of function HPZCraneSelectEightDirectionFrameFromPhase
 
 ; ---------------------------------------------------------------------------
 
@@ -356,7 +356,7 @@ byte_66308:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_66348:
+HPZShipCountMovingHitPauseAndClearStatusBit:
                 btst    #6,status(a0)
                 beq.s   locret_66370
                 tst.b   $20(a0)
@@ -372,11 +372,11 @@ loc_66364:
 
 locret_66370:
                 rts
-; End of function sub_66348
+; End of function HPZShipCountMovingHitPauseAndClearStatusBit
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_66372:
+HPZShipFlashThreePaletteSlotsAndRestoreContactAfterHit:
                 tst.b   collision_flags(a0)
                 bne.s   locret_663B8
                 tst.b   $20(a0)
@@ -394,7 +394,7 @@ loc_66392:
                 addi.w  #2*2,d0
 
 loc_663A0:
-                jsr     (sub_7A614).l
+                jsr     (CopySSZGHZThreeColorPaletteAtByteOffset).l
                 subq.b  #1,$20(a0)
                 bne.s   locret_663B8
                 bclr    #6,status(a0)
@@ -402,4 +402,4 @@ loc_663A0:
 
 locret_663B8:
                 rts
-; End of function sub_66372
+; End of function HPZShipFlashThreePaletteSlotsAndRestoreContactAfterHit

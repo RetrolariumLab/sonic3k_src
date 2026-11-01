@@ -105,7 +105,7 @@ loc_56BD2:
 ; ---------------------------------------------------------------------------
 
 loc_56C28:
-                jsr     sub_56DCA(pc)
+                jsr     SwitchLrz1LavaBackgroundByPlayerRegion(pc)
                 jsr     LRZ1_Deform(pc)
 
 loc_56C30:
@@ -133,8 +133,8 @@ loc_56C68:
 ; ---------------------------------------------------------------------------
 
 loc_56C6E:
-                jsr     sub_56DCA(pc)
-                jsr     sub_56DAC(pc)
+                jsr     SwitchLrz1LavaBackgroundByPlayerRegion(pc)
+                jsr     PositionLrz1LavaBackground(pc)
 
 loc_56C76:
                 jsr     (DrawBGAsYouMove).l
@@ -248,7 +248,7 @@ loc_56D9E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56DAC:
+PositionLrz1LavaBackground:
                 move.w  (Camera_Y_pos_copy).w,d0
                 subi.w  #$788,d0
                 add.w   (_unkEE9C).w,d0
@@ -257,11 +257,11 @@ sub_56DAC:
                 subi.w  #$1500,d0
                 move.w  d0,(Camera_X_pos_BG_copy).w
                 rts
-; End of function sub_56DAC
+; End of function PositionLrz1LavaBackground
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_56DCA:
+SwitchLrz1LavaBackgroundByPlayerRegion:
                 lea     word_56F88(pc),a1
                 move.w  (Player_1+x_pos).w,d0
                 move.w  (Player_1+y_pos).w,d1
@@ -288,7 +288,7 @@ loc_56DEE:
 
 loc_56DFA:
                 jmp     loc_56DFE(pc,d2.w)
-; End of function sub_56DCA
+; End of function SwitchLrz1LavaBackgroundByPlayerRegion
 
 ; ---------------------------------------------------------------------------
 
@@ -349,7 +349,7 @@ loc_56E40:
                 move.l  #Obj_56EA0,(a1)
 
 loc_56E52:
-                jsr     sub_56DAC(pc)
+                jsr     PositionLrz1LavaBackground(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 addq.w  #4,(Events_routine_bg).w
                 addq.w  #4,sp
@@ -434,13 +434,13 @@ loc_56F0C:
                 lea     (Player_1).w,a1
                 btst    #Status_FireShield,status_secondary(a1)
                 bne.s   loc_56F54
-                jsr     (sub_24280).l
+                jsr     (HurtPlayerFromSolidHazard).l
 
 loc_56F54:
                 btst    #p2_standing_bit,status(a0)
                 beq.s   locret_56F66
                 lea     (Player_2).w,a1
-                jsr     (sub_24280).l
+                jsr     (HurtPlayerFromSolidHazard).l
 
 locret_56F66:
                 rts

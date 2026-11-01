@@ -73,14 +73,14 @@ loc_49FAE:
                 jsr     (Play_SFX).l
 
 loc_49FD6:
-                bsr.s   sub_49FE4
+                bsr.s   PachinkoEnergyTrapHoldPlayerAndReturnP1AfterCountdown
                 lea     (Player_2).w,a1
-                bsr.s   sub_49FE4
+                bsr.s   PachinkoEnergyTrapHoldPlayerAndReturnP1AfterCountdown
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_49FE4:
+PachinkoEnergyTrapHoldPlayerAndReturnP1AfterCountdown:
                 move.w  y_pos(a1),d0
                 cmpi.w  #-$20,d0
                 bge.s   loc_49FFC
@@ -124,7 +124,7 @@ loc_4A024:
 
 locret_4A078:
                 rts
-; End of function sub_49FE4
+; End of function PachinkoEnergyTrapHoldPlayerAndReturnP1AfterCountdown
 
 ; ---------------------------------------------------------------------------
 

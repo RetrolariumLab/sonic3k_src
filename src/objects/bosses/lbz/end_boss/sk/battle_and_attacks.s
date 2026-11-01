@@ -10,7 +10,7 @@ Obj_LBZEndBoss:
                 move.b  routine(a0),d0
                 move.w  LBZEndBoss_Index(pc,d0.w),d1
                 jsr     LBZEndBoss_Index(pc,d1.w)
-                bsr.w   sub_73FE2
+                bsr.w   HandleLBZEndBossSingleColorHitOrEscape
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 LBZEndBoss_Index:
@@ -30,7 +30,7 @@ loc_73906:
                 move.l  #loc_73960,$34(a0)
                 lea     word_738CE(pc),a1
                 move.b  #mus_EndBoss,boss_saved_mus(a0)
-                jsr     (sub_85D6A).l
+                jsr     (BeginBossCameraTransitionSaveBoundsAndFadeMusic).l
                 lea     ChildObjDat_7414C(pc),a2
                 jsr     (CreateChild1_Normal).l
                 moveq   #PLCID_77,d0
@@ -351,7 +351,7 @@ loc_73CB0:
                 move.w  off_73CCE(pc,d0.w),d1
                 jsr     off_73CCE(pc,d1.w)
                 lea     locret_7399C(pc),a2
-                bsr.w   sub_73FCE
+                bsr.w   MoveAndSolidifyLBZEndBossTopPlatform
                 bra.w   loc_74098
 ; ---------------------------------------------------------------------------
 off_73CCE:
@@ -423,7 +423,7 @@ loc_73D48:
 
 loc_73D56:
                 lea     loc_73D62(pc),a2
-                bsr.w   sub_73FCE
+                bsr.w   MoveAndSolidifyLBZEndBossTopPlatform
                 bra.w   loc_74098
 ; ---------------------------------------------------------------------------
 

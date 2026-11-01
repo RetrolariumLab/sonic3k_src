@@ -129,14 +129,14 @@ locret_6E198:
 
 CNZMinibossTop_CheckPlayerBounce:
                 lea     (Player_1).w,a1
-                bsr.w   sub_6E1A8
+                bsr.w   ReflectCNZMinibossTopForRisingRoller
                 bne.s   locret_6E20E
                 lea     (Player_2).w,a1
 ; End of function CNZMinibossTop_CheckPlayerBounce
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6E1A8:
+ReflectCNZMinibossTopForRisingRoller:
                 tst.w   y_vel(a1)
                 bpl.s   loc_6E210                       ; If player is moving downward, don't bother
                 cmpi.b  #2,anim(a1)
@@ -184,7 +184,7 @@ locret_6E20E:
 loc_6E210:
                 moveq   #0,d0
                 rts
-; End of function sub_6E1A8
+; End of function ReflectCNZMinibossTopForRisingRoller
 
 ; =============== S U B R O U T I N E =======================================
 

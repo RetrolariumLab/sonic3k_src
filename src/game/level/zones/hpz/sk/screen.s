@@ -59,13 +59,13 @@ HPZ_BackgroundInit:
 loc_5A1C2:
                 cmpi.w  #$EC0,(Player_1+x_pos).w
                 bhs.s   loc_5A1D0
-                jsr     sub_5A32C(pc)
+                jsr     BuildHpzLeftRegionParallax(pc)
                 bra.s   loc_5A1DA
 ; ---------------------------------------------------------------------------
 
 loc_5A1D0:
                 move.w  #8,(Events_routine_bg).w
-                jsr     sub_5A334(pc)
+                jsr     BuildHpzRightRegionParallax(pc)
 
 loc_5A1DA:
                 jsr     (Reset_TileOffsetPositionEff).l
@@ -100,7 +100,7 @@ HPZ_BackgroundEvent_Index:
 loc_5A224:
                 cmpi.w  #$EC0,(Player_1+x_pos).w
                 blo.s   loc_5A25E
-                jsr     sub_5A334(pc)
+                jsr     BuildHpzRightRegionParallax(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 lea     (HScroll_table).w,a1
                 move.w  (a1)+,(a1)
@@ -116,7 +116,7 @@ loc_5A224:
 ; ---------------------------------------------------------------------------
 
 loc_5A25E:
-                jsr     sub_5A32C(pc)
+                jsr     BuildHpzLeftRegionParallax(pc)
 
 loc_5A262:
                 lea     HPZ_BGDrawArray(pc),a4
@@ -131,7 +131,7 @@ loc_5A262:
 ; ---------------------------------------------------------------------------
 
 loc_5A288:
-                jsr     sub_5A334(pc)
+                jsr     BuildHpzRightRegionParallax(pc)
 
 loc_5A28C:
                 lea     HPZ_BGDrawArray(pc),a4
@@ -146,7 +146,7 @@ loc_5A28C:
 loc_5A2A6:
                 cmpi.w  #$EC0,(Player_1+x_pos).w
                 bhs.s   loc_5A2E0
-                jsr     sub_5A32C(pc)
+                jsr     BuildHpzLeftRegionParallax(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 lea     (HScroll_table).w,a1
                 move.w  (a1)+,(a1)
@@ -162,7 +162,7 @@ loc_5A2A6:
 ; ---------------------------------------------------------------------------
 
 loc_5A2E0:
-                jsr     sub_5A334(pc)
+                jsr     BuildHpzRightRegionParallax(pc)
 
 loc_5A2E4:
                 lea     HPZ_BGDrawArray(pc),a4
@@ -177,7 +177,7 @@ loc_5A2E4:
 ; ---------------------------------------------------------------------------
 
 loc_5A30A:
-                jsr     sub_5A32C(pc)
+                jsr     BuildHpzLeftRegionParallax(pc)
 
 loc_5A30E:
                 lea     HPZ_BGDrawArray(pc),a4
@@ -190,15 +190,15 @@ loc_5A30E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5A32C:
+BuildHpzLeftRegionParallax:
                 move.w  #$348,d2
                 moveq   #0,d3
                 bra.s   loc_5A33C
-; End of function sub_5A32C
+; End of function BuildHpzLeftRegionParallax
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5A334:
+BuildHpzRightRegionParallax:
                 move.w  #$E00,d2
                 move.w  #$700,d3
 
@@ -243,7 +243,7 @@ loc_5A388:
                 dbf     d1,loc_5A388
                 move.w  (HScroll_table+$01A).w,(HScroll_table+$004).w
                 rts
-; End of function sub_5A334
+; End of function BuildHpzRightRegionParallax
 
 ; ---------------------------------------------------------------------------
 HPZ_BGDrawArray:

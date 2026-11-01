@@ -52,7 +52,7 @@ loc_44B1A:
 
 loc_44B28:
                 move.b  #4,routine(a0)
-                bsr.w   sub_456C6
+                bsr.w   SpawnKnucklesCutsceneMusicTransition
                 move.w  #(3*60)-1,$2E(a0)
                 move.l  #loc_44B42,$34(a0)
                 rts

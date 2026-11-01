@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8622C:
+GetApproximateObjectBearing:
                 moveq   #0,d0
                 moveq   #0,d1
                 moveq   #0,d2
@@ -52,7 +52,7 @@ off_8626E:
 
 locret_8627E:
                 rts
-; End of function sub_8622C
+; End of function GetApproximateObjectBearing
 
 ; ---------------------------------------------------------------------------
 

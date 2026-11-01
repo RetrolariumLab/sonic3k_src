@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_76714:
+OffsetMHZWeatherMachineEffectBySubtype:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 add.w   d0,d0
@@ -14,7 +14,7 @@ sub_76714:
                 move.w  (a1)+,d0
                 add.w   d0,y_pos(a0)
                 rts
-; End of function sub_76714
+; End of function OffsetMHZWeatherMachineEffectBySubtype
 
 ; ---------------------------------------------------------------------------
 word_7672E:
@@ -25,7 +25,7 @@ word_7672E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7673E:
+SelectMHZEndBossOverlayLayerBySubtype:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 add.w   d0,d0
@@ -33,7 +33,7 @@ sub_7673E:
                 move.w  (a1)+,priority(a0)
                 move.b  (a1)+,mapping_frame(a0)
                 rts
-; End of function sub_7673E
+; End of function SelectMHZEndBossOverlayLayerBySubtype
 
 ; ---------------------------------------------------------------------------
 word_76754:
@@ -46,7 +46,7 @@ word_76754:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7675C:
+SyncMHZEndBossOverlayPositionAndHorizontalFlip:
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),x_pos(a0)
                 move.w  y_pos(a1),y_pos(a0)
@@ -57,11 +57,11 @@ sub_7675C:
 
 locret_76780:
                 rts
-; End of function sub_7675C
+; End of function SyncMHZEndBossOverlayPositionAndHorizontalFlip
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_76782:
+HandleMHZEndBossPairedHitFlashAndEscapeThreshold:
                 movea.w $44(a0),a4
                 move.b  collision_property(a0),d0
                 tst.b   collision_flags(a0)
@@ -103,7 +103,7 @@ loc_767E8:
                 addi.w  #2*5,d0
 
 loc_767F6:
-                bsr.w   sub_7686A
+                bsr.w   CopyMHZEndBossFiveColorPalette
                 subq.b  #1,$20(a0)
                 bne.s   locret_76820
                 bclr    #6,status(a0)
@@ -140,15 +140,15 @@ loc_76854:
 
 locret_76868:
                 rts
-; End of function sub_76782
+; End of function HandleMHZEndBossPairedHitFlashAndEscapeThreshold
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7686A:
+CopyMHZEndBossFiveColorPalette:
                 lea     word_76878(pc),a1
                 lea     word_76882(pc,d0.w),a2
                 jmp     (CopyWordData_5).l
-; End of function sub_7686A
+; End of function CopyMHZEndBossFiveColorPalette
 
 ; ---------------------------------------------------------------------------
 word_76878:

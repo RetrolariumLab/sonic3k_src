@@ -7,7 +7,7 @@ loc_4AA86:
                 lea     word_4B3A2(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.l  #loc_4AAA2,(a0)
-                bsr.w   sub_4AFE0
+                bsr.w   InitializeMGZBossStaggeredTrailVelocityAndDelay
                 move.l  #loc_4AABC,$34(a0)
 
 loc_4AAA2:
@@ -95,7 +95,7 @@ loc_4AB8E:
                 btst    #5,$38(a1)
                 bne.s   loc_4ABB0
                 lea     byte_4AF44(pc),a2
-                bsr.w   sub_4AF16
+                bsr.w   SelectMGZBossPoseChildOffsetsAndFrame
                 jsr     (Refresh_ChildPositionAdjusted).l
                 moveq   #$14,d0
                 jmp     (Child_Draw_Sprite2_FlickerMove).l
@@ -132,7 +132,7 @@ loc_4ABFA:
                 btst    #5,$38(a1)
                 bne.s   loc_4AC30
                 lea     byte_4AF58(pc),a2
-                bsr.w   sub_4AF16
+                bsr.w   SelectMGZBossPoseChildOffsetsAndFrame
                 jsr     (Refresh_ChildPositionAdjusted).l
                 movea.w $44(a0),a1
                 btst    #7,status(a1)
@@ -229,7 +229,7 @@ loc_4ACFC:
                 move.b  #4,$40(a0)
                 move.l  #ArtScaled_MGZEndBoss,$42(a0)
                 move.b  #1,$3E(a0)
-                bsr.w   sub_4B2C6
+                bsr.w   SelectMGZBossScaledFlybyAndNextEntryPattern
                 moveq   #6,d0
                 move.w  ground_vel(a0),d1
                 beq.s   loc_4AD60
@@ -271,7 +271,7 @@ loc_4ADA6:
                 move.w  d0,y_vel(a0)
 
 loc_4ADAA:
-                bsr.w   sub_4B30A
+                bsr.w   IntegrateScaledActorPositionAccumulators
                 move.w  $30(a0),d2
                 move.w  $34(a0),d3
                 moveq   #0,d0
@@ -300,7 +300,7 @@ loc_4ADF4:
                 movea.l (sp)+,a0
                 move.l  a0,-(sp)
                 move.w  art_tile(a0),d0
-                jsr     (sub_22C90).l
+                jsr     (TryBuildObjectScaledArt).l
                 movea.l (sp)+,a0
                 move.w  (_unkF740).w,d3
                 lsl.w   #4,d3

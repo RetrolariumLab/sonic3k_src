@@ -51,13 +51,13 @@ loc_1D0F6:
                 andi.b  #p1_standing,d0
                 beq.s   loc_1D12C
                 lea     (Player_1).w,a1
-                bsr.w   sub_228EC
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_1D12C:
                 andi.b  #p2_standing,d6
                 beq.s   loc_1D13A
                 lea     (Player_2).w,a1
-                bsr.w   sub_228EC
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_1D13A:
                 move.w  x_pos(a0),d0
@@ -91,13 +91,13 @@ loc_1D15C:
                 andi.b  #1,d0
                 beq.s   loc_1D190
                 lea     (Player_1).w,a1
-                bsr.w   sub_228EC
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_1D190:
                 andi.b  #2,d6
                 beq.s   loc_1D19E
                 lea     (Player_2).w,a1
-                bsr.w   sub_228EC
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_1D19E:
                 move.w  x_pos(a0),d0
@@ -131,13 +131,13 @@ loc_1D1C0:
                 andi.b  #4,d0
                 beq.s   loc_1D1F4
                 lea     (Player_1).w,a1
-                bsr.w   sub_228EC
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_1D1F4:
                 andi.b  #8,d6
                 beq.s   loc_1D202
                 lea     (Player_2).w,a1
-                bsr.w   sub_228EC
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_1D202:
                 move.w  x_pos(a0),d0
@@ -202,13 +202,13 @@ loc_1D284:
                 andi.b  #p1_standing,d0
                 beq.s   loc_1D2BA
                 lea     (Player_1).w,a1
-                bsr.w   sub_1D3B2
+                bsr.w   KillPlayerFromInvisibleHazard
 
 loc_1D2BA:
                 andi.b  #p2_standing,d6
                 beq.s   loc_1D2C8
                 lea     (Player_2).w,a1
-                bsr.w   sub_1D3B2
+                bsr.w   KillPlayerFromInvisibleHazard
 
 loc_1D2C8:
                 move.w  x_pos(a0),d0
@@ -242,13 +242,13 @@ loc_1D2EA:
                 andi.b  #1,d0
                 beq.s   loc_1D31E
                 lea     (Player_1).w,a1
-                bsr.w   sub_1D3B2
+                bsr.w   KillPlayerFromInvisibleHazard
 
 loc_1D31E:
                 andi.b  #2,d6
                 beq.s   loc_1D32C
                 lea     (Player_2).w,a1
-                bsr.w   sub_1D3B2
+                bsr.w   KillPlayerFromInvisibleHazard
 
 loc_1D32C:
                 move.w  x_pos(a0),d0
@@ -282,13 +282,13 @@ loc_1D34E:
                 andi.b  #4,d0
                 beq.s   loc_1D382
                 lea     (Player_1).w,a1
-                bsr.w   sub_1D3B2
+                bsr.w   KillPlayerFromInvisibleHazard
 
 loc_1D382:
                 andi.b  #8,d6
                 beq.s   loc_1D390
                 lea     (Player_2).w,a1
-                bsr.w   sub_1D3B2
+                bsr.w   KillPlayerFromInvisibleHazard
 
 loc_1D390:
                 move.w  x_pos(a0),d0
@@ -306,7 +306,7 @@ locret_1D3B0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1D3B2:
+KillPlayerFromInvisibleHazard:
                 move.w  d6,-(sp)
                 move.l  a0,-(sp)
                 movea.l a1,a0
@@ -314,4 +314,4 @@ sub_1D3B2:
                 movea.l (sp)+,a0
                 move.w  (sp)+,d6
                 rts
-; End of function sub_1D3B2
+; End of function KillPlayerFromInvisibleHazard

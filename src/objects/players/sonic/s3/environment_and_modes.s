@@ -109,7 +109,7 @@ Sonic_MdNormal:
                 bsr.w   Player_SlopeRepel
                 tst.b   (Background_collision_flag).w
                 beq.s   locret_1207C
-                bsr.w   sub_10BA2
+                bsr.w   CheckPlayerBodyFloorClearance
                 tst.w   d1
                 bmi.w   Kill_Character
                 movem.l a4-a6,-(sp)
@@ -156,7 +156,7 @@ loc_120B2:
                 bsr.w   Player_SlopeRepel
                 tst.b   (Background_collision_flag).w
                 beq.s   locret_120F0
-                bsr.w   sub_10BA2
+                bsr.w   CheckPlayerBodyFloorClearance
                 tst.w   d1
                 bmi.w   Kill_Character
                 movem.l a4-a6,-(sp)

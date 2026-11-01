@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_13ECA:
+TailsSKResetCPUFollowerToOffscreenCatchUp:
                 move.w  #0,(Tails_CPU_idle_timer).w
                 move.w  #0,(Tails_CPU_flight_timer).w
                 move.w  #2,(Tails_CPU_routine).w
@@ -14,11 +14,11 @@ sub_13ECA:
                 move.w  #0,y_pos(a0)
                 move.b  #0,double_jump_flag(a0)
                 rts
-; End of function sub_13ECA
+; End of function TailsSKResetCPUFollowerToOffscreenCatchUp
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_13EFC:
+TailsSKWatchCPUOffscreenTimeoutAndInteractionCode:
                 tst.b   render_flags(a0)
                 bmi.s   loc_13F28
                 btst    #Status_OnObj,status(a0)
@@ -35,7 +35,7 @@ loc_13F18:
                 blo.s   loc_13F2E
 
 loc_13F24:
-                bra.w   sub_13ECA
+                bra.w   TailsSKResetCPUFollowerToOffscreenCatchUp
 ; ---------------------------------------------------------------------------
 
 loc_13F28:
@@ -49,12 +49,12 @@ loc_13F2E:
 
 locret_13F3E:
                 rts
-; End of function sub_13EFC
+; End of function TailsSKWatchCPUOffscreenTimeoutAndInteractionCode
 
 ; ---------------------------------------------------------------------------
 
 loc_13F40:
-                bsr.w   sub_13EFC
+                bsr.w   TailsSKWatchCPUOffscreenTimeoutAndInteractionCode
                 tst.w   (Tails_CPU_idle_timer).w
                 bne.w   locret_13FBE
                 tst.w   move_lock(a0)
@@ -113,7 +113,7 @@ loc_13FC2:
                 move.w  #0,y_vel(a0)
                 move.w  #0,ground_vel(a0)
                 lea     (Player_1).w,a1
-                bsr.w   sub_1459E
+                bsr.w   TailsSKInitializeCarriedPlayerAttachment
                 move.b  #1,(Flying_carrying_Sonic_flag).w
                 move.w  #$E,(Tails_CPU_routine).w
 
@@ -190,7 +190,7 @@ loc_140CE:
                 move.w  #0,y_vel(a0)
                 move.w  #0,ground_vel(a0)
                 lea     (Player_1).w,a1
-                bsr.w   sub_1459E
+                bsr.w   TailsSKInitializeCarriedPlayerAttachment
                 move.b  #1,(Flying_carrying_Sonic_flag).w
                 move.w  #$16,(Tails_CPU_routine).w
 

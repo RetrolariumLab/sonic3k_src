@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6EBD8:
+SetCNZBossMagnetDepthFromPhase:
                 move.b  $3C(a0),d0
                 move.w  #$200,priority(a0)
                 addi.b  #$40,d0
@@ -13,11 +13,11 @@ sub_6EBD8:
 
 locret_6EBEE:
                 rts
-; End of function sub_6EBD8
+; End of function SetCNZBossMagnetDepthFromPhase
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6EBF0:
+SelectCNZBossMagnetPhaseFrame:
                 cmpi.b  #3,mapping_frame(a0)
                 beq.s   locret_6EC12
                 move.b  $3C(a0),d0
@@ -37,7 +37,7 @@ loc_6EC0E:
 
 locret_6EC12:
                 rts
-; End of function sub_6EBF0
+; End of function SelectCNZBossMagnetPhaseFrame
 
 ; ---------------------------------------------------------------------------
 byte_6EC14:
@@ -50,7 +50,7 @@ byte_6EC14:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6EC1E:
+DeleteCNZBossElectricEffectWhenParentEnds:
                 movea.w parent3(a0),a1
                 btst    #7,$38(a1)
                 bne.s   loc_6EC34
@@ -61,11 +61,11 @@ sub_6EC1E:
 
 loc_6EC34:
                 jmp     (Go_Delete_Sprite).l
-; End of function sub_6EC1E
+; End of function DeleteCNZBossElectricEffectWhenParentEnds
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6EC3A:
+PullBothPlayersWithCNZBossMagnet:
                 btst    #2,$38(a0)
                 bne.s   loc_6EC44
                 rts
@@ -73,13 +73,13 @@ sub_6EC3A:
 
 loc_6EC44:
                 lea     (Player_1).w,a1
-                bsr.w   sub_6EC50
+                bsr.w   DisplacePlayerTowardCNZBossMagnet
                 lea     (Player_2).w,a1
-; End of function sub_6EC3A
+; End of function PullBothPlayersWithCNZBossMagnet
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6EC50:
+DisplacePlayerTowardCNZBossMagnet:
                 move.w  x_pos(a0),d0
                 sub.w   x_pos(a1),d0
                 spl     d1
@@ -102,7 +102,7 @@ loc_6EC6C:
 loc_6EC78:
                 add.l   d2,x_pos(a1)
                 rts
-; End of function sub_6EC50
+; End of function DisplacePlayerTowardCNZBossMagnet
 
 ; ---------------------------------------------------------------------------
 dword_6EC7E:
@@ -117,7 +117,7 @@ dword_6EC7E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6EC9E:
+HandleCNZEndBossFourColorHitOrDefeat:
                 tst.l   (a0)
                 beq.s   locret_6ECF4
                 tst.b   collision_flags(a0)
@@ -154,7 +154,7 @@ loc_6ECF6:
                 move.l  #Wait_FadeToLevelMusic,(a0)
                 move.l  #loc_6E6C6,$34(a0)
                 jmp     (BossDefeated_StopTimer).l
-; End of function sub_6EC9E
+; End of function HandleCNZEndBossFourColorHitOrDefeat
 
 ; ---------------------------------------------------------------------------
 word_6ED0A:
@@ -165,7 +165,7 @@ word_6ED12:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6ED22:
+BreakCNZBossDroppedCoreWhenParentDefeats:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
                 beq.s   loc_6ED32
@@ -181,11 +181,11 @@ loc_6ED3C:
                 move.l  #Delete_Current_Sprite,(a0)
                 lea     ChildObjDat_6EDF2(pc),a2
                 jmp     (CreateChild1_Normal).l
-; End of function sub_6ED22
+; End of function BreakCNZBossDroppedCoreWhenParentDefeats
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6ED4C:
+DetachCNZBossMagnetAfterParentDefeat:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
                 beq.s   loc_6ED5C
@@ -204,4 +204,4 @@ loc_6ED66:
                 move.l  #Obj_FlickerMove,(a0)
                 moveq   #0,d0
                 jmp     (Set_IndexedVelocity).l
-; End of function sub_6ED4C
+; End of function DetachCNZBossMagnetAfterParentDefeat

@@ -384,7 +384,7 @@ loc_191A4:
                 beq.w   loc_19230
                 tst.b   anim(a0)
                 beq.s   loc_191B6
-                bsr.w   sub_19236
+                bsr.w   SuperStarBurstSKSpawnSixteenMirroredRadialParticles
 
 loc_191B6:
                 tst.b   $34(a0)
@@ -439,7 +439,7 @@ loc_19230:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_19236:
+SuperStarBurstSKSpawnSixteenMirroredRadialParticles:
                 move.b  #0,anim(a0)
                 lea     (Player_1).w,a2
                 moveq   #$10-1,d5
@@ -482,7 +482,7 @@ loc_192AE:
 
 locret_192BE:
                 rts
-; End of function sub_19236
+; End of function SuperStarBurstSKSpawnSixteenMirroredRadialParticles
 
 ; ---------------------------------------------------------------------------
 

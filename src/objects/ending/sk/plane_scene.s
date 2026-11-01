@@ -52,7 +52,7 @@ loc_5E1F0:
                 move.w  a1,$30(a2)
 
 loc_5E228:
-                bsr.w   sub_5FD88
+                bsr.w   EndingSetP1PoseFrameByPlayerModeAndLoadArt
                 lea     ChildObjDat_601BA(pc),a2
                 jsr     (CreateChild1_Normal).l
                 bne.s   loc_5E23E
@@ -297,7 +297,7 @@ loc_5E504:
                 lsl.w   #2,d0
                 move.w  d0,$2E(a0)
                 move.w  x_pos(a0),$3A(a0)
-                bra.w   sub_6001E
+                bra.w   EndingInitializeGentleVerticalSwing
 ; ---------------------------------------------------------------------------
 word_5E554:
                 dc.w    $170,   $B0
@@ -457,7 +457,7 @@ loc_5E70E:
                 lea     ChildObjDat_601BA(pc),a2
                 jsr     (CreateChild1_Normal).l
                 move.l  #AniRaw_60236,$30(a0)
-                bsr.w   sub_5FE82
+                bsr.w   EndingClearSceneMotionScratchAndClassifyEmeraldOutcome
                 tst.b   (_unkFA88).w
                 bmi.s   loc_5E7C0
                 move.b  #4,mapping_frame(a0)
@@ -557,7 +557,7 @@ loc_5E890:
                 addi.w  #$50,d0
                 move.w  d0,y_pos(a0)
                 move.w  #-$200,x_vel(a0)
-                bsr.w   sub_6001E
+                bsr.w   EndingInitializeGentleVerticalSwing
                 lea     AniRaw_60253(pc),a1
                 jsr     (Set_Raw_Animation).l
                 lea     ChildObjDat_601D8(pc),a2

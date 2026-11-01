@@ -340,7 +340,7 @@ Knuckles_Sliding:
                 bsr.w   Knux_DoLevelCollision_CheckRet
 
 ; Get distance from floor in 'd1', and angle of floor in 'd3'
-                bsr.w   sub_11FD6
+                bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
 
 ; If the distance from the floor is suddenly really high, then
 ; Knuckles must have slid off a ledge, so make him enter his falling
@@ -578,7 +578,7 @@ Knuckles_Wall_Climb:
                 move.w  y_pos(a0),d2
                 addi.w  #9,d2
                 move.w  x_pos(a0),d3
-                bsr.w   sub_F828
+                bsr.w   ProbeFloorWithXRadiusOffset
 
 ; Check if Knuckles has room below him
                 tst.w   d1
@@ -634,7 +634,7 @@ Knuckles_Wall_Climb:
                 move.w  y_pos(a0),d2
                 addq.w  #8,d2
                 move.w  x_pos(a0),d3
-                bsr.w   sub_F828
+                bsr.w   ProbeFloorWithXRadiusOffset
 
 ; Check if Knuckles has room above him
                 tst.w   d1
@@ -696,9 +696,9 @@ Knuckles_Wall_Climb:
                 move.w  y_pos(a0),d2
                 addi.w  #9,d2
                 move.w  x_pos(a0),d3
-                bsr.w   sub_F828
+                bsr.w   ProbeFloorWithXRadiusOffset
 
-; Bug: 'd1' has been overwritten by 'sub_F828', but the code
+; Bug: 'd1' has been overwritten by 'ProbeFloorWithXRadiusOffset', but the code
 ; after this needs it for updating Knuckles' animation. This
 ; bug is the reason why Knuckles resets to his first climbing
 ; frame when the player is not holding up or down

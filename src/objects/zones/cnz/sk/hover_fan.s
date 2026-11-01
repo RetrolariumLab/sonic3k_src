@@ -56,9 +56,9 @@ loc_31E24:
 loc_31E36:
                 moveq   #0,d6
                 lea     (Player_1).w,a1
-                bsr.w   sub_31E96
+                bsr.w   ApplyCnzHoverFanFieldToPlayer
                 lea     (Player_2).w,a1
-                bsr.w   sub_31E96
+                bsr.w   ApplyCnzHoverFanFieldToPlayer
                 tst.w   d6
                 beq.s   loc_31E5E
                 move.b  (Level_frame_counter+1).w,d0
@@ -75,9 +75,9 @@ loc_31E5E:
 loc_31E68:
                 moveq   #0,d6
                 lea     (Player_1).w,a1
-                bsr.w   sub_31E96
+                bsr.w   ApplyCnzHoverFanFieldToPlayer
                 lea     (Player_2).w,a1
-                bsr.w   sub_31E96
+                bsr.w   ApplyCnzHoverFanFieldToPlayer
                 tst.w   d6
                 beq.s   loc_31E90
                 move.b  (Level_frame_counter+1).w,d0
@@ -91,7 +91,7 @@ loc_31E90:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_31E96:
+ApplyCnzHoverFanFieldToPlayer:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   $32(a0),d0
@@ -135,4 +135,4 @@ loc_31EDE:
 
 locret_31F2E:
                 rts
-; End of function sub_31E96
+; End of function ApplyCnzHoverFanFieldToPlayer

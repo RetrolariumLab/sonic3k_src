@@ -69,7 +69,7 @@ loc_288D4:
                 move.b  (a2)+,mapping_frame(a1)
                 bne.s   loc_288F2
                 move.l  #Obj_TunnelExhaustHorz,(a1)
-                bsr.s   sub_2891C
+                bsr.s   ReduceNewHorizontalExhaustSpeed
 
 loc_288F2:
                 subq.w  #1,$30(a0)                      ; Continue doing this until timer runs out
@@ -99,7 +99,7 @@ word_28904:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2891C:
+ReduceNewHorizontalExhaustSpeed:
                 moveq   #0,d0                           ; Slow down exhaust trickle over time
                 move.w  $30(a0),d0
                 subi.w  #$3C,d0
@@ -112,7 +112,7 @@ sub_2891C:
 loc_28932:
                 add.w   d0,x_vel(a1)
                 rts
-; End of function sub_2891C
+; End of function ReduceNewHorizontalExhaustSpeed
 
 ; ---------------------------------------------------------------------------
 
@@ -301,20 +301,20 @@ loc_28B94:
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
                 beq.s   loc_28BAA
-                bsr.s   sub_28BBE
+                bsr.s   LaunchPlayerLeftFromExhaustJet
 
 loc_28BAA:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
                 beq.s   loc_28BB8
-                bsr.s   sub_28BBE
+                bsr.s   LaunchPlayerLeftFromExhaustJet
 
 loc_28BB8:
                 jmp     (Sprite_CheckDeleteTouch3).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_28BBE:
+LaunchPlayerLeftFromExhaustJet:
                 tst.b   object_control(a1)
                 bne.s   locret_28BFA
                 move.w  y_pos(a0),y_pos(a1)
@@ -330,7 +330,7 @@ sub_28BBE:
 
 locret_28BFA:
                 rts
-; End of function sub_28BBE
+; End of function LaunchPlayerLeftFromExhaustJet
 
 ; ---------------------------------------------------------------------------
 Map_TunnelExhaust:

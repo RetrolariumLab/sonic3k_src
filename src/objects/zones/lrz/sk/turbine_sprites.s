@@ -27,11 +27,11 @@ loc_442F2:
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d1
-                bsr.s   sub_44338
+                bsr.s   UpdatePlayerOnLrzTurbine
                 addq.w  #1,a2
                 lea     (Player_2).w,a1
                 move.w  (Ctrl_2_logical).w,d1
-                bsr.s   sub_44338
+                bsr.s   UpdatePlayerOnLrzTurbine
                 move.b  (Level_frame_counter+1).w,d0
                 lsr.b   #1,d0
                 andi.b  #3,d0
@@ -49,7 +49,7 @@ loc_44332:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_44338:
+UpdatePlayerOnLrzTurbine:
                 tst.b   (a2)
                 beq.w   loc_44434
                 tst.w   (Debug_placement_mode).w
@@ -58,7 +58,7 @@ sub_44338:
                 bhs.w   loc_4436E
                 andi.w  #button_A_mask|button_B_mask|button_C_mask,d1
                 bne.w   loc_443C4
-                bsr.w   sub_4450A
+                bsr.w   PositionPlayerOnLrzTurbinePhase
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 move.l  a2,-(sp)
@@ -179,7 +179,7 @@ loc_444B6:
                 move.b  #0,anim(a1)
                 move.b  #3,object_control(a1)
                 move.b  #1,(a2)
-                bsr.w   sub_4450A
+                bsr.w   PositionPlayerOnLrzTurbinePhase
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 move.l  a2,-(sp)
@@ -188,11 +188,11 @@ loc_444B6:
 
 locret_44508:
                 rts
-; End of function sub_44338
+; End of function UpdatePlayerOnLrzTurbine
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4450A:
+PositionPlayerOnLrzTurbinePhase:
                 moveq   #0,d0
                 move.b  4(a2),d0
                 lsr.b   #3,d0
@@ -214,7 +214,7 @@ loc_4454A:
                 addq.b  #4,d0
                 move.b  d0,4(a2)
                 rts
-; End of function sub_4450A
+; End of function PositionPlayerOnLrzTurbinePhase
 
 ; ---------------------------------------------------------------------------
 RawAni_44552:

@@ -14,14 +14,14 @@ Obj_CNZTriangleBumpers:
 
 loc_31C36:
                 lea     (Player_1).w,a1
-                bsr.s   sub_31C48
+                bsr.s   BouncePlayerFromCnzTriangleRegion
                 lea     (Player_2).w,a1
-                bsr.s   sub_31C48
+                bsr.s   BouncePlayerFromCnzTriangleRegion
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_31C48:
+BouncePlayerFromCnzTriangleRegion:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   $34(a0),d0
@@ -78,4 +78,4 @@ loc_31CEA:
                 bclr    #Status_Push,status(a1)
                 moveq   #signextendB(sfx_SmallBumpers),d0
                 jmp     (Play_SFX).l
-; End of function sub_31C48
+; End of function BouncePlayerFromCnzTriangleRegion

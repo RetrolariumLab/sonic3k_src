@@ -111,7 +111,7 @@ loc_2E104:
                 move.l  (a0),(a1)+
                 move.l  (a0)+,Target_palette-Normal_palette-4(a1)
                 dbf     d0,loc_2E104
-                jsr     sub_2E2C0(pc)
+                jsr     SStageResults_AdjustCharacterPalettes(pc)
                 tst.w   (SK_alone_flag).w
                 bne.w   loc_2E226
                 tst.b   (SK_special_stage_flag).w
@@ -127,7 +127,7 @@ loc_2E12C:
                 move.l  d1,Target_palette-Normal_palette(a1)
                 move.l  d1,(a1)+
                 dbf     d0,loc_2E12C
-                jsr     sub_2E2C0(pc)
+                jsr     SStageResults_AdjustCharacterPalettes(pc)
                 lea     (Pal_HPZIntro+$20).l,a0
                 lea     (Normal_palette_line_3).w,a1
                 moveq   #bytesToLcnt(Normal_palette_end-Normal_palette_line_3),d0
@@ -229,7 +229,7 @@ loc_2E2B0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2E2C0:
+SStageResults_AdjustCharacterPalettes:
                 cmpi.w  #3,(Player_mode).w
                 bne.s   loc_2E2F6
                 lea     (Normal_palette+$4).w,a0
@@ -259,7 +259,7 @@ loc_2E2F6:
 
 locret_2E30E:
                 rts
-; End of function sub_2E2C0
+; End of function SStageResults_AdjustCharacterPalettes
 
 ; ---------------------------------------------------------------------------
 PLC_SpecialResultsText: plrlistheader

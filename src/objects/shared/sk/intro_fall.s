@@ -13,19 +13,19 @@ Obj_LevelIntro_PlayerFallIntoGround:
                 move.w  d0,(Ctrl_2_logical).w
                 move.w  d0,(Ctrl_2).w
                 lea     (Player_1).w,a1
-                bsr.s   sub_42020
+                bsr.s   SetSozIntroPlayerControl
                 lea     (Player_2).w,a1
                 tst.l   (a1)
                 beq.s   locret_42026
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_42020:
+SetSozIntroPlayerControl:
                 move.b  #1,object_control(a1)
 
 locret_42026:
                 rts
-; End of function sub_42020
+; End of function SetSozIntroPlayerControl
 
 ; ---------------------------------------------------------------------------
 
@@ -35,11 +35,11 @@ loc_42028:
                 move.w  #0,(Ctrl_1_logical).w
                 move.w  #0,(Ctrl_2_logical).w
                 lea     (Player_1).w,a1
-                bsr.s   sub_42092
+                bsr.s   MoveSozIntroFallingPlayer
                 lea     (Player_2).w,a1
                 tst.l   (a1)
                 beq.s   loc_42050
-                bsr.s   sub_42092
+                bsr.s   MoveSozIntroFallingPlayer
 
 loc_42050:
                 lea     (Player_1).w,a2
@@ -71,14 +71,14 @@ loc_4208A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_42092:
+MoveSozIntroFallingPlayer:
                 move.w  y_vel(a1),d0
                 addi.w  #$38,y_vel(a1)
                 ext.l   d0
                 lsl.l   #8,d0
                 add.l   d0,y_pos(a1)
                 rts
-; End of function sub_42092
+; End of function MoveSozIntroFallingPlayer
 
 ; ---------------------------------------------------------------------------
 
@@ -96,14 +96,14 @@ loc_420A6:
 loc_420CA:
                 move.l  #loc_420FC,(a0)
                 lea     (Player_1).w,a1
-                bsr.s   sub_420DE
+                bsr.s   LaunchSozIntroPlayerFromSand
                 lea     (Player_2).w,a1
                 tst.l   (a1)
                 beq.s   locret_420FA
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_420DE:
+LaunchSozIntroPlayerFromSand:
                 move.w  #-$800,y_vel(a1)
                 bset    #Status_InAir,status(a1)
                 clr.b   jumping(a1)
@@ -112,7 +112,7 @@ sub_420DE:
 
 locret_420FA:
                 rts
-; End of function sub_420DE
+; End of function LaunchSozIntroPlayerFromSand
 
 ; ---------------------------------------------------------------------------
 
@@ -141,14 +141,14 @@ loc_4213C:
 ; ---------------------------------------------------------------------------
 
 loc_42156:
-                bsr.s   sub_42160
+                bsr.s   MoveSozIntroEscapePlayerWithGravity
                 lea     (Player_2).w,a2
                 tst.l   (a2)
                 beq.s   locret_4217E
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_42160:
+MoveSozIntroEscapePlayerWithGravity:
                 move.w  x_vel(a2),d0
                 ext.l   d0
                 lsl.l   #8,d0
@@ -161,7 +161,7 @@ sub_42160:
 
 locret_4217E:
                 rts
-; End of function sub_42160
+; End of function MoveSozIntroEscapePlayerWithGravity
 
 ; ---------------------------------------------------------------------------
 

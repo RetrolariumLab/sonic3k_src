@@ -8,6 +8,7 @@ import subprocess
 from scripts.build.make_interface import recipes
 from scripts.build.project import ROOT
 from scripts.validation.documentation import document_inventory, tracked
+from scripts.validation.label_renames import validate_registry
 
 MANIFEST = "config/source_reconstruction_2_0.json"
 REQUIREMENTS = frozenset(
@@ -185,14 +186,7 @@ def metadata(root=ROOT):
                 candidates.append(name)
     if candidates != [registry] or manifest.get("label_registry") != registry:
         raise ValueError("Label rename registry must have one canonical owner")
-    label_registry = read(root, registry)
-    if (
-        label_registry.get("schema_version") != 1
-        or label_registry.get("renames") != []
-        or not re.fullmatch(r"[0-9a-f]{40}", label_registry.get("upstream_commit", ""))
-        or not label_registry.get("note")
-    ):
-        raise ValueError("Invalid label rename registry or unreviewed label changes")
+    validate_registry(root, read(root, registry))
     if "../" + registry not in (root / "docs/provenance.md").read_text():
         raise ValueError("Provenance must link the canonical label registry")
     provenance = manifest.get("provenance", {})

@@ -26,8 +26,11 @@ unknown emitting macros and unbalanced data macros inside those files. Small
 data resources retain their named owner instead of being padded or combined
 solely to meet a size target.
 
-No code or data labels were renamed in this move. The mandatory
-`config/reconstruction/label_renames.json` records that empty migration.
+The ownership and filename moves retained existing symbol spellings. The later
+semantic naming migration is recorded separately in the mandatory
+`config/reconstruction/label_renames.json`: it maps 1571 physical procedures and
+their references while preserving the emitted bytes and original namespace
+separation. Historical source paths and procedure boundaries remain traceable.
 
 The final water-transition and enemy-art catalog sentinels share the addresses
 of the following demo-input and bubble-emitter entries. Their explicit
@@ -189,7 +192,8 @@ The `.s` suffix identifies 68000 code, structural composition and emitted
 content declarations. Shared definitions and memory declarations use `.inc`;
 typed Z80 driver modules use `.asm`. Supplemental official AS lint covers those
 `.asm` files through disposable `.s` copies. Source-layout checks enforce names,
-suffixes and ownership of every file below `src/`. AS symbols retain their
-existing spellings: filename normalization does not rename assembly labels.
+suffixes and ownership of every file below `src/`. Filename normalization does
+not rename assembly labels. Subsequent reviewed symbol changes have their own
+physical, profile-scoped entries in the canonical label rename registry.
 Historical source origins continue to name the exact files at their original
 commits. The historical entry and procedure comparison remains mandatory.

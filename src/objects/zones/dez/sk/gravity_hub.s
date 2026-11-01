@@ -8,16 +8,16 @@ Obj_DEZGravityHub:
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d1
-                bsr.s   sub_492D4
+                bsr.s   UpdatePlayerInDezGravityHub
                 lea     $32(a0),a2
                 lea     (Player_2).w,a1
                 move.w  (Ctrl_2_logical).w,d1
-                bsr.s   sub_492D4
+                bsr.s   UpdatePlayerInDezGravityHub
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_492D4:
+UpdatePlayerInDezGravityHub:
                 move.b  (a2),d0
                 bne.s   loc_49348
                 move.w  x_pos(a1),d0
@@ -153,4 +153,4 @@ loc_49430:
 loc_49456:
                 move.w  #0,(a2)
                 rts
-; End of function sub_492D4
+; End of function UpdatePlayerInDezGravityHub

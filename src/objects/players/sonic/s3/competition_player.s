@@ -206,11 +206,11 @@ loc_1190E:
 ; ---------------------------------------------------------------------------
 
 loc_1195C:
-                bsr.w   sub_11A64
+                bsr.w   SonicS3HandleCompetitionSpindashAndAbortGroundStep
                 bsr.w   Sonic_Jump
                 bsr.w   Player_SlopeResist
                 bsr.w   Sonic_Move
-                bsr.w   sub_119FE
+                bsr.w   SonicS3TryCompetitionRollFromDown
                 jsr     (MoveSprite2).l
 
 loc_11976:
@@ -268,7 +268,7 @@ loc_119EC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_119FE:
+SonicS3TryCompetitionRollFromDown:
                 tst.b   status_secondary(a0)
                 bmi.s   locret_11A24
                 move.w  ground_vel(a0),d0
@@ -308,11 +308,11 @@ loc_11A30:
 
 locret_11A62:
                 rts
-; End of function sub_119FE
+; End of function SonicS3TryCompetitionRollFromDown
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_11A64:
+SonicS3HandleCompetitionSpindashAndAbortGroundStep:
                 tst.b   spin_dash_flag(a0)
                 bne.s   loc_11AB0
                 cmpi.b  #8,anim(a0)
@@ -435,6 +435,6 @@ loc_11BB0:
 loc_11BB2:
                 bsr.w   Player_AnglePos
                 rts
-; End of function sub_11A64
+; End of function SonicS3HandleCompetitionSpindashAndAbortGroundStep
 
 ; ---------------------------------------------------------------------------

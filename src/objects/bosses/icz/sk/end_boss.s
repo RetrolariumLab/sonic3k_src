@@ -10,7 +10,7 @@ Obj_ICZEndBoss:
                 move.l  #loc_71C0E,$34(a0)
                 lea     word_71BC6(pc),a1
                 move.b  #mus_EndBoss,boss_saved_mus(a0)
-                jsr     (sub_85D6A).l
+                jsr     (BeginBossCameraTransitionSaveBoundsAndFadeMusic).l
                 moveq   #PLCID_70,d0
                 jsr     (Load_PLC).l
                 lea     Pal_ICZEndBoss(pc),a1
@@ -33,7 +33,7 @@ loc_71C16:
                 move.b  routine(a0),d0
                 move.w  off_71C2E(pc,d0.w),d1
                 jsr     off_71C2E(pc,d1.w)
-                bsr.w   sub_7225C
+                bsr.w   HandleICZEndBossHitPhaseTransitionOrDefeat
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 off_71C2E:
@@ -67,7 +67,7 @@ loc_71C78:
 
 loc_71C84:
                 move.w  #$7FFF,$44(a0)
-                bsr.w   sub_72120
+                bsr.w   InitializeICZEndBossVerticalBob
                 move.b  #4,routine(a0)
                 move.w  #$3F,$2E(a0)
                 move.l  #loc_71CEC,$34(a0)
@@ -115,7 +115,7 @@ loc_71D1E:
                 move.l  #loc_71D46,$34(a0)
                 moveq   #signextendB(sfx_FrostPuff),d0
                 jsr     (Play_SFX).l
-                bsr.w   sub_7213A
+                bsr.w   SelectICZEndBossFrostAttackMode
                 cmpi.w  #2,$26(a0)
                 bne.w   locret_71C14
                 lea     ChildObjDat_72352(pc),a2
@@ -419,7 +419,7 @@ loc_7205E:
                 cmpi.b  #8,anim_frame(a0)
                 bhi.s   loc_72084
                 lea     word_7208A(pc),a1
-                jsr     (sub_8A9C6).l
+                jsr     (CapturePlayersInsideIczFreezerZone).l
 
 loc_72084:
                 jmp     (Child_Draw_Sprite).l
@@ -436,7 +436,7 @@ loc_72092:
                 cmpi.b  #8,anim_frame(a0)
                 bhi.s   loc_720B8
                 lea     word_720BE(pc),a1
-                jsr     (sub_8A9C6).l
+                jsr     (CapturePlayersInsideIczFreezerZone).l
 
 loc_720B8:
                 jmp     (Child_Draw_Sprite).l
@@ -478,18 +478,18 @@ loc_720F2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_72120:
+InitializeICZEndBossVerticalBob:
                 move.w  #$C0,d0
                 move.w  d0,$3E(a0)
                 move.w  d0,y_vel(a0)
                 move.w  #$10,$40(a0)
                 bclr    #0,$38(a0)
                 rts
-; End of function sub_72120
+; End of function InitializeICZEndBossVerticalBob
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7213A:
+SelectICZEndBossFrostAttackMode:
                 bset    #1,$38(a0)
                 tst.b   $3B(a0)
                 bne.s   loc_72160
@@ -505,7 +505,7 @@ sub_7213A:
 loc_72160:
                 move.w  #2,$26(a0)
                 rts
-; End of function sub_7213A
+; End of function SelectICZEndBossFrostAttackMode
 
 ; ---------------------------------------------------------------------------
 
@@ -628,7 +628,7 @@ byte_7224E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7225C:
+HandleICZEndBossHitPhaseTransitionOrDefeat:
                 tst.b   collision_flags(a0)
                 bne.s   locret_722C4
                 move.b  collision_property(a0),d0
@@ -654,7 +654,7 @@ loc_72292:
                 addi.w  #2*2,d0
 
 loc_722A6:
-                bsr.w   sub_722EC
+                bsr.w   CopyICZEndBossTwoColorPalette
                 subq.b  #1,$20(a0)
                 bne.s   locret_722C4
                 bclr    #6,status(a0)
@@ -676,15 +676,15 @@ loc_722C6:
 
 loc_722E6:
                 jmp     (BossDefeated_StopTimer).l
-; End of function sub_7225C
+; End of function HandleICZEndBossHitPhaseTransitionOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_722EC:
+CopyICZEndBossTwoColorPalette:
                 lea     word_722FA(pc),a1
                 lea     word_722FE(pc,d0.w),a2
                 jmp     (CopyWordData_2).l
-; End of function sub_722EC
+; End of function CopyICZEndBossTwoColorPalette
 
 ; ---------------------------------------------------------------------------
 word_722FA:

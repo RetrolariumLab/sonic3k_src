@@ -7,8 +7,8 @@
 FindWall:
                 lea     (Find_Tile_FG).l,a5
                 tst.b   (Background_collision_flag).w
-                beq.s   sub_10846
-                bsr.s   sub_10846
+                beq.s   SampleWallDistanceWithNeighbor
+                bsr.s   SampleWallDistanceWithNeighbor
                 move.b  (a4),Primary_Angle_save-Primary_Angle(a4)
                 move.w  d1,-(sp)
                 move.w  a3,d0
@@ -25,7 +25,7 @@ loc_1080E:
 loc_10812:
                 sub.w   (Camera_Y_diff).w,d2
                 lea     (Find_Tile_BG).l,a5
-                bsr.s   sub_10846
+                bsr.s   SampleWallDistanceWithNeighbor
                 move.w  a3,d0
                 bpl.s   loc_10830
                 eori.w  #$F,d3
@@ -51,7 +51,7 @@ locret_10844:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_10846:
+SampleWallDistanceWithNeighbor:
                 jsr     (a5)
                 move.w  (a1),d0
                 move.w  d0,d4
@@ -62,7 +62,7 @@ sub_10846:
 
 loc_10856:
                 add.w   a3,d3
-                bsr.w   sub_108EA
+                bsr.w   SampleSingleBlockWallDistance
                 sub.w   a3,d3
                 addi.w  #$10,d1
                 rts
@@ -122,15 +122,15 @@ loc_108D0:
 
 loc_108DC:
                 sub.w   a3,d3
-                bsr.w   sub_108EA
+                bsr.w   SampleSingleBlockWallDistance
                 add.w   a3,d3
                 subi.w  #$10,d1
                 rts
-; End of function sub_10846
+; End of function SampleWallDistanceWithNeighbor
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_108EA:
+SampleSingleBlockWallDistance:
                 jsr     (a5)
                 move.w  (a1),d0
                 move.w  d0,d4
@@ -198,7 +198,7 @@ loc_1096E:
                 bpl.w   loc_108FA
                 not.w   d1
                 rts
-; End of function sub_108EA
+; End of function SampleSingleBlockWallDistance
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -208,9 +208,9 @@ ConvertCollisionArray:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_10980:
+ProbeNextSurfaceWithFixedLookahead:
                 tst.w   (Competition_mode).w
-                bne.w   sub_10A10
+                bne.w   ProbeNextSurfaceWithBodyRadius
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
                 beq.s   loc_1099C
@@ -267,11 +267,11 @@ loc_10A04:
                 cmpi.b  #$40,d0
                 beq.w   loc_11084
                 bra.w   loc_10DE4
-; End of function sub_10980
+; End of function ProbeNextSurfaceWithFixedLookahead
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_10A10:
+ProbeNextSurfaceWithBodyRadius:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
                 beq.s   loc_10A24
@@ -315,10 +315,10 @@ loc_10A6A:
 
 loc_10A6E:
                 andi.b  #$C0,d0
-                beq.w   sub_10B84
+                beq.w   ProbeFloorWithXRadiusOffset
                 cmpi.b  #$80,d0
                 beq.w   CheckCeilingDist_WithRadius
                 cmpi.b  #$40,d0
                 beq.w   loc_110A4
                 bra.w   loc_10E00
-; End of function sub_10A10
+; End of function ProbeNextSurfaceWithBodyRadius

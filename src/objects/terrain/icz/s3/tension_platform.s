@@ -13,8 +13,8 @@ Obj_ICZTensionPlatform:
 ; ---------------------------------------------------------------------------
 
 loc_5904E:
-                bsr.w   sub_590E8
-                bsr.w   sub_591B4
+                bsr.w   StepIczTensionPlatformSpringMotion
+                bsr.w   UpdateIczTensionPlatformContactsAndImpulses
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
@@ -29,16 +29,16 @@ loc_5905A:
 loc_59074:
                 bset    #6,render_flags(a0)
                 move.w  #2,mainspr_childsprites(a0)
-                bsr.w   sub_59092
+                bsr.w   InitializeIczTensionSideRopeSpritePositions
                 move.b  #8,mapping_frame(a0)
 
 loc_5908A:
-                bsr.w   sub_590C8
+                bsr.w   UpdateIczTensionSideRopeVerticalSpan
                 jmp     Child_Draw_Sprite(pc)
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59092:
+InitializeIczTensionSideRopeSpritePositions:
                 lea     sub2_x_pos(a0),a1
                 move.w  x_pos(a0),d0
                 move.w  y_pos(a0),d1
@@ -60,7 +60,7 @@ loc_590B2:
                 addq.w  #2,d2
                 dbf     d3,loc_590A2
                 rts
-; End of function sub_59092
+; End of function InitializeIczTensionSideRopeSpritePositions
 
 ; ---------------------------------------------------------------------------
 word_590C4:
@@ -68,7 +68,7 @@ word_590C4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_590C8:
+UpdateIczTensionSideRopeVerticalSpan:
                 movea.w parent3(a0),a1
                 lea     sub2_y_pos(a0),a2
                 move.w  y_pos(a0),d0
@@ -81,11 +81,11 @@ sub_590C8:
                 addq.w  #6,a2
                 move.w  d2,(a2)
                 rts
-; End of function sub_590C8
+; End of function UpdateIczTensionSideRopeVerticalSpan
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_590E8:
+StepIczTensionPlatformSpringMotion:
                 btst    #2,$38(a0)
                 beq.s   locret_5916E
                 move.w  #$80,d0
@@ -111,7 +111,7 @@ loc_59112:
                 bge.s   loc_59130
                 cmpi.w  #-$400,d2
                 bgt.s   loc_59142
-                bsr.w   sub_59170
+                bsr.w   LaunchIczTensionPlatformStandingPlayers
                 bra.w   loc_59142
 ; ---------------------------------------------------------------------------
 
@@ -147,28 +147,28 @@ loc_59158:
 
 locret_5916E:
                 rts
-; End of function sub_590E8
+; End of function StepIczTensionPlatformSpringMotion
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59170:
+LaunchIczTensionPlatformStandingPlayers:
                 move.b  $3A(a0),d3
                 andi.b  #standing_mask,d3
                 beq.s   locret_591B2
                 btst    #p1_standing_bit,d3
                 beq.s   loc_59188
                 lea     (Player_1).w,a1
-                bsr.w   sub_59192
+                bsr.w   LaunchPlayerFromIczTensionPlatform
 
 loc_59188:
                 btst    #p2_standing_bit,d3
                 beq.s   locret_591B2
                 lea     (Player_2).w,a1
-; End of function sub_59170
+; End of function LaunchIczTensionPlatformStandingPlayers
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59192:
+LaunchPlayerFromIczTensionPlatform:
                 move.w  d2,y_vel(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    #Status_OnObj,status(a1)
@@ -178,11 +178,11 @@ sub_59192:
 
 locret_591B2:
                 rts
-; End of function sub_59192
+; End of function LaunchPlayerFromIczTensionPlatform
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_591B4:
+UpdateIczTensionPlatformContactsAndImpulses:
                 move.b  status(a0),$3A(a0)
                 move.w  (Player_1+y_vel).w,-(sp)
                 move.w  (Player_2+y_vel).w,-(sp)
@@ -198,14 +198,14 @@ sub_591B4:
                 eor.b   d1,d2
                 andi.b  #standing_mask,d2
                 beq.s   locret_59214
-                bsr.w   sub_59236
+                bsr.w   SetIczTensionPlatformRestHeightFromRiderCount
                 bset    #2,$38(a0)
                 clr.b   $39(a0)
                 moveq   #p1_standing_bit,d4
                 btst    d4,d2
                 beq.s   loc_59204
                 lea     (Player_1).w,a1
-                bsr.w   sub_59216
+                bsr.w   TransferPlayerVerticalImpulseToIczTensionPlatform
 
 loc_59204:
                 moveq   #p2_standing_bit,d4
@@ -213,15 +213,15 @@ loc_59204:
                 beq.s   locret_59214
                 swap    d0
                 lea     (Player_2).w,a1
-                bsr.w   sub_59216
+                bsr.w   TransferPlayerVerticalImpulseToIczTensionPlatform
 
 locret_59214:
                 rts
-; End of function sub_591B4
+; End of function UpdateIczTensionPlatformContactsAndImpulses
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59216:
+TransferPlayerVerticalImpulseToIczTensionPlatform:
                 move.w  y_vel(a0),d5
                 btst    d4,d1
                 bne.s   loc_59228
@@ -237,11 +237,11 @@ loc_59228:
                 sub.w   d6,d5
                 move.w  d5,y_vel(a0)
                 rts
-; End of function sub_59216
+; End of function TransferPlayerVerticalImpulseToIczTensionPlatform
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59236:
+SetIczTensionPlatformRestHeightFromRiderCount:
                 moveq   #0,d5
                 btst    #3,d1
                 beq.s   loc_59240
@@ -257,7 +257,7 @@ loc_59248:
                 add.w   d5,d3
                 move.w  d3,$32(a0)
                 rts
-; End of function sub_59236
+; End of function SetIczTensionPlatformRestHeightFromRiderCount
 
 ; ---------------------------------------------------------------------------
 ObjDat_ICZTensionPlatform:

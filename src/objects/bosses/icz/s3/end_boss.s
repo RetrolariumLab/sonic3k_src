@@ -42,7 +42,7 @@ loc_4ED3C:
                 move.b  routine(a0),d0
                 move.w  off_4ED52(pc,d0.w),d1
                 jsr     off_4ED52(pc,d1.w)
-                bsr.w   sub_4F2F4
+                bsr.w   HandleICZEndBossHitPhaseTransitionOrDefeat
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 off_4ED52:
@@ -76,7 +76,7 @@ loc_4ED96:
 
 loc_4EDA0:
                 move.w  #$7FFF,$44(a0)
-                bsr.w   sub_4F1B8
+                bsr.w   InitializeICZEndBossVerticalBob
                 move.b  #4,routine(a0)
                 move.w  #$3F,$2E(a0)
                 move.l  #loc_4EDE4,$34(a0)
@@ -115,7 +115,7 @@ loc_4EE16:
                 move.l  #loc_4EE3C,$34(a0)
                 moveq   #signextendB(sfx_FrostPuff),d0
                 jsr     (Play_SFX).l
-                bsr.w   sub_4F1D2
+                bsr.w   SelectICZEndBossFrostAttackMode
                 cmpi.w  #2,$26(a0)
                 bne.w   locret_4ED3A
                 lea     ChildObjDat_4F3E6(pc),a2
@@ -409,7 +409,7 @@ loc_4F10A:
                 cmpi.b  #8,anim_frame(a0)
                 bhi.s   loc_4F12C
                 lea     word_4F130(pc),a1
-                jsr     (sub_5819C).l
+                jsr     (CapturePlayersInsideIczFreezerZone).l
 
 loc_4F12C:
                 jmp     Child_Draw_Sprite(pc)
@@ -426,7 +426,7 @@ loc_4F138:
                 cmpi.b  #8,anim_frame(a0)
                 bhi.s   loc_4F15A
                 lea     word_4F15E(pc),a1
-                jsr     (sub_5819C).l
+                jsr     (CapturePlayersInsideIczFreezerZone).l
 
 loc_4F15A:
                 jmp     Child_Draw_Sprite(pc)
@@ -468,18 +468,18 @@ loc_4F190:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4F1B8:
+InitializeICZEndBossVerticalBob:
                 move.w  #$C0,d0
                 move.w  d0,$3E(a0)
                 move.w  d0,y_vel(a0)
                 move.w  #$10,$40(a0)
                 bclr    #0,$38(a0)
                 rts
-; End of function sub_4F1B8
+; End of function InitializeICZEndBossVerticalBob
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4F1D2:
+SelectICZEndBossFrostAttackMode:
                 bset    #1,$38(a0)
                 tst.b   $3B(a0)
                 bne.s   loc_4F1F8
@@ -495,7 +495,7 @@ sub_4F1D2:
 loc_4F1F8:
                 move.w  #2,$26(a0)
                 rts
-; End of function sub_4F1D2
+; End of function SelectICZEndBossFrostAttackMode
 
 ; ---------------------------------------------------------------------------
 
@@ -618,7 +618,7 @@ byte_4F2E6:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4F2F4:
+HandleICZEndBossHitPhaseTransitionOrDefeat:
                 tst.b   collision_flags(a0)
                 bne.s   locret_4F35C
                 move.b  collision_property(a0),d0
@@ -644,7 +644,7 @@ loc_4F32A:
                 addi.w  #2*2,d0
 
 loc_4F33E:
-                bsr.w   sub_4F382
+                bsr.w   CopyICZEndBossTwoColorPalette
                 subq.b  #1,$20(a0)
                 bne.s   locret_4F35C
                 bclr    #6,status(a0)
@@ -666,15 +666,15 @@ loc_4F35E:
 
 loc_4F37E:
                 jmp     BossDefeated_StopTimer(pc)
-; End of function sub_4F2F4
+; End of function HandleICZEndBossHitPhaseTransitionOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4F382:
+CopyICZEndBossTwoColorPalette:
                 lea     word_4F38E(pc),a1
                 lea     word_4F392(pc,d0.w),a2
                 jmp     CopyWordData_2(pc)
-; End of function sub_4F382
+; End of function CopyICZEndBossTwoColorPalette
 
 ; ---------------------------------------------------------------------------
 word_4F38E:

@@ -210,12 +210,12 @@ loc_1B616:
                 move.l  a1,mappings(a0)
 
 loc_1B656:
-                bsr.s   sub_1B65C
+                bsr.s   MonitorIconS3MoveToApexAndDispatchReward
                 bra.w   Draw_Sprite
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1B65C:
+MonitorIconS3MoveToApexAndDispatchReward:
                 tst.w   y_vel(a0)
                 bpl.w   loc_1B670
                 bsr.w   MoveSprite2
@@ -238,7 +238,7 @@ loc_1B68C:
                 add.w   d0,d0
                 move.w  off_1B69C(pc,d0.w),d0
                 jmp     off_1B69C(pc,d0.w)
-; End of function sub_1B65C
+; End of function MonitorIconS3MoveToApexAndDispatchReward
 
 ; ---------------------------------------------------------------------------
 off_1B69C:
@@ -256,7 +256,7 @@ off_1B69C:
 
 Monitor_Give_Eggman:
                 addq.w  #1,(a2)
-                bra.w   sub_228EC
+                bra.w   HurtPlayerFromSolidHazard
 ; ---------------------------------------------------------------------------
 
 Monitor_Give_1up:

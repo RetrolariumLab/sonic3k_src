@@ -16,16 +16,16 @@ loc_4A408:
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d1
-                bsr.s   sub_4A428
+                bsr.s   PachinkoMagnetUpdatePlayerCaptureOscillationAndPhaseLaunch
                 addq.w  #1,a2
                 lea     (Player_2).w,a1
                 move.w  (Ctrl_2_logical).w,d1
-                bsr.s   sub_4A428
+                bsr.s   PachinkoMagnetUpdatePlayerCaptureOscillationAndPhaseLaunch
                 jmp     (loc_49B4E).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4A428:
+PachinkoMagnetUpdatePlayerCaptureOscillationAndPhaseLaunch:
                 tst.b   (a2)
                 beq.w   loc_4A53A
                 tst.w   (Debug_placement_mode).w
@@ -49,7 +49,7 @@ loc_4A464:
                 move.w  x_pos(a1),d1
                 move.w  y_pos(a1),d2
                 movem.l d1-d2,-(sp)
-                bsr.w   sub_4A5E0
+                bsr.w   PachinkoMagnetPositionCapturedPlayerOnOscillatingRadius
                 movem.l (sp)+,d1-d2
                 sub.w   x_pos(a1),d1
                 asl.w   #8,d1
@@ -161,15 +161,15 @@ loc_4A5AA:
                 move.b  #2,anim(a1)
                 move.b  #1,object_control(a1)
                 move.b  #1,(a2)
-                bsr.w   sub_4A5E0
+                bsr.w   PachinkoMagnetPositionCapturedPlayerOnOscillatingRadius
 
 locret_4A5DE:
                 rts
-; End of function sub_4A428
+; End of function PachinkoMagnetUpdatePlayerCaptureOscillationAndPhaseLaunch
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4A5E0:
+PachinkoMagnetPositionCapturedPlayerOnOscillatingRadius:
                 moveq   #0,d0
                 move.b  4(a2),d0
                 jsr     (GetSineCosine).l
@@ -201,4 +201,4 @@ loc_4A63C:
                 addq.b  #4,d0
                 move.b  d0,4(a2)
                 rts
-; End of function sub_4A5E0
+; End of function PachinkoMagnetPositionCapturedPlayerOnOscillatingRadius

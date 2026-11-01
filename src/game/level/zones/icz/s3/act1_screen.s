@@ -268,7 +268,7 @@ ICZ1_IntroDeform:
                 swap    d0
                 lea     (HScroll_table).w,a1
                 moveq   #5-1,d2                         ; First five deformation speeds are constant
-                bsr.s   sub_3DDF6
+                bsr.s   WriteIcz1IntroLinearScrollBands
                 add.l   d1,d0
                 move.l  d1,d2
                 asr.l   #1,d2
@@ -278,14 +278,14 @@ ICZ1_IntroDeform:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3DDF6:
+WriteIcz1IntroLinearScrollBands:
                 swap    d0
                 move.w  d0,(a1)+
                 swap    d0
                 add.l   d1,d0
-                dbf     d2,sub_3DDF6
+                dbf     d2,WriteIcz1IntroLinearScrollBands
                 rts
-; End of function sub_3DDF6
+; End of function WriteIcz1IntroLinearScrollBands
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -344,12 +344,12 @@ ICZ1_SetIntroPal:
                 tst.b   (Game_mode).w
                 bmi.s   loc_3DE92
                 lea     (Normal_palette_line_4+2).w,a1
-                bsr.s   sub_3DE96
+                bsr.s   WriteIcz1IntroPaletteColors
 
 loc_3DE92:
                 lea     (Target_palette_line_4+2).w,a1
 
-sub_3DE96:
+WriteIcz1IntroPaletteColors:
                 move.l  #$EEE0EEC,(a1)+
                 move.l  #$EEA0ECA,(a1)+
                 move.l  #$EC80EA6,(a1)+
@@ -367,12 +367,12 @@ ICZ1_SetIndoorPal:
                 tst.b   (Game_mode).w
                 bmi.s   loc_3DED2
                 lea     (Normal_palette_line_4+2).w,a1
-                bsr.s   sub_3DED6
+                bsr.s   WriteIcz1IndoorPaletteColors
 
 loc_3DED2:
                 lea     (Target_palette_line_4+2).w,a1
 
-sub_3DED6:
+WriteIcz1IndoorPaletteColors:
                 move.l  #$EC00E40,(a1)+
                 move.l  #$E040C00,(a1)+
                 move.l  #$6000200,(a1)+

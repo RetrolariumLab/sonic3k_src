@@ -56,7 +56,7 @@ loc_55878:
                 move.w  #$200,d0
                 moveq   #$10,d1
                 jsr     Chase_Object(pc)
-                bsr.w   sub_5596E
+                bsr.w   KeepChasingBuggernautAboveWaterSurface
                 jsr     (MoveSprite2).l
                 jsr     Animate_Raw(pc)
                 jmp     Obj_Wait(pc)
@@ -87,7 +87,7 @@ loc_558CC:
                 movea.w parent3(a0),a1
                 cmpi.l  #Obj_Buggernaut_2,(a1)
                 beq.s   loc_558E2
-                bsr.w   sub_5593C
+                bsr.w   ReparentBuggernautBabyToAvailableAdult
                 beq.s   loc_5590A
 
 loc_558E2:
@@ -100,7 +100,7 @@ loc_558F6:
                 move.w  #$200,d0
                 moveq   #$20,d1
                 jsr     Chase_Object(pc)
-                bsr.w   sub_5596E
+                bsr.w   KeepChasingBuggernautAboveWaterSurface
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
@@ -125,7 +125,7 @@ loc_55932:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5593C:
+ReparentBuggernautBabyToAvailableAdult:
                 lea     (Dynamic_object_RAM+object_size).w,a2
                 move.w  #((Breathing_bubbles)-(Dynamic_object_RAM+object_size))/object_size-1,d0
 
@@ -148,11 +148,11 @@ loc_55958:
                 move.b  d1,$39(a2)
                 move.w  a2,parent3(a0)
                 rts
-; End of function sub_5593C
+; End of function ReparentBuggernautBabyToAvailableAdult
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5596E:
+KeepChasingBuggernautAboveWaterSurface:
                 move.w  y_pos(a0),d0
                 move.w  (Water_level).w,d1
                 subi.w  #8,d1
@@ -162,7 +162,7 @@ sub_5596E:
 
 locret_55984:
                 rts
-; End of function sub_5596E
+; End of function KeepChasingBuggernautAboveWaterSurface
 
 ; ---------------------------------------------------------------------------
 ObjDat_Buggernaut:

@@ -38,15 +38,15 @@ loc_156F0:
                 and.w   d0,y_pos(a0)
 
 loc_15700:
-                bsr.w   sub_15716
+                bsr.w   TailsSKResolveHurtLandingOrDeathPlane
                 bsr.w   Tails_Check_Screen_Boundaries
                 bsr.w   Sonic_RecordPos
-                bsr.w   sub_15842
+                bsr.w   TailsSKAnimateRecoveryStateAndDispatchPatternLoader
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_15716:
+TailsSKResolveHurtLandingOrDeathPlane:
                 tst.b   (Disable_death_plane).w
                 bne.s   loc_15742
                 tst.b   (Reverse_gravity_flag).w
@@ -88,7 +88,7 @@ locret_15786:
 
 loc_15788:
                 jmp     (Kill_Character).l
-; End of function sub_15716
+; End of function TailsSKResolveHurtLandingOrDeathPlane
 
 ; ---------------------------------------------------------------------------
 
@@ -113,10 +113,10 @@ loc_157B0:
                 clr.w   (Flying_carrying_Sonic_flag).w
 
 loc_157C8:
-                bsr.w   sub_123C2
+                bsr.w   PlayerSKFinishDeathWithFollowerResetRestartOrCompetitionRespawn
                 jsr     (MoveSprite_TestGravity).l
                 bsr.w   Sonic_RecordPos
-                bsr.w   sub_15842
+                bsr.w   TailsSKAnimateRecoveryStateAndDispatchPatternLoader
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -139,7 +139,7 @@ loc_157F4:
                 move.b  #2,routine(a0)
 
 loc_15806:
-                bsr.w   sub_15842
+                bsr.w   TailsSKAnimateRecoveryStateAndDispatchPatternLoader
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -155,12 +155,12 @@ loc_15828:
                 jsr     (MoveSprite_TestGravity2).l
                 addi.w  #$10,y_vel(a0)
                 bsr.w   Sonic_RecordPos
-                bsr.w   sub_15842
+                bsr.w   TailsSKAnimateRecoveryStateAndDispatchPatternLoader
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_15842:
+TailsSKAnimateRecoveryStateAndDispatchPatternLoader:
                 tst.w   (Competition_mode).w
                 bne.s   loc_1585A
                 bsr.s   Animate_Tails
@@ -175,4 +175,4 @@ loc_15856:
 loc_1585A:
                 bsr.w   Animate_Tails2P
                 bra.w   Tails2P_Load_PLC
-; End of function sub_15842
+; End of function TailsSKAnimateRecoveryStateAndDispatchPatternLoader

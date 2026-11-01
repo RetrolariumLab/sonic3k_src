@@ -22,10 +22,10 @@ Obj_AutomaticTunnel:
 loc_2855A:
                 lea     (Player_1).w,a1
                 lea     $30(a0),a4
-                bsr.s   sub_28580
+                bsr.s   UpdateAutomaticTunnelForPlayer
                 lea     (Player_2).w,a1
                 lea     $3A(a0),a4
-                bsr.s   sub_28580
+                bsr.s   UpdateAutomaticTunnelForPlayer
                 move.b  $30(a0),d0
                 add.b   $3A(a0),d0
                 beq.s   loc_2857A                       ; As long as this object is attached to a character, do not destroy it
@@ -37,12 +37,12 @@ loc_2857A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_28580:
+UpdateAutomaticTunnelForPlayer:
                 moveq   #0,d0
                 move.b  (a4),d0
                 move.w  AutoTunnel_Index(pc,d0.w),d0
                 jmp     AutoTunnel_Index(pc,d0.w)
-; End of function sub_28580
+; End of function UpdateAutomaticTunnelForPlayer
 
 ; ---------------------------------------------------------------------------
 AutoTunnel_Index:

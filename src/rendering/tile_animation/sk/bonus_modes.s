@@ -197,7 +197,7 @@ word_285D6:
 ; ---------------------------------------------------------------------------
 
 loc_285EE:
-                bsr.s   sub_2863E
+                bsr.s   AniPachinko_CompositeRecoloredArtSlice
                 addq.b  #1,2(a4)
                 cmpi.b  #4,2(a4)
                 blo.s   loc_28624
@@ -235,7 +235,7 @@ byte_28632:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2863E:
+AniPachinko_CompositeRecoloredArtSlice:
                 lea     (Chunk_table+$7000).l,a3
                 moveq   #0,d0
                 move.b  2(a4),d0
@@ -316,4 +316,4 @@ loc_286DC:
                 addq.w  #1,a3
                 dbf     d2,loc_2869E
                 rts
-; End of function sub_2863E
+; End of function AniPachinko_CompositeRecoloredArtSlice

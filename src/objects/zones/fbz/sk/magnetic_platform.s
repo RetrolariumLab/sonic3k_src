@@ -102,7 +102,7 @@ loc_3B450:
                 move.l  #loc_3B3C0,(a0)
 
 loc_3B462:
-                bsr.w   sub_3B488
+                bsr.w   BuildFbzMagneticPlatformChainSprites
                 move.w  #$23,d1
                 move.w  #8,d2
                 move.w  #-9,d3
@@ -116,7 +116,7 @@ loc_3B482:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3B488:
+BuildFbzMagneticPlatformChainSprites:
                 movea.w $3C(a0),a1
                 lea     $20(a1),a2
                 move.w  y_pos(a0),d2
@@ -150,7 +150,7 @@ loc_3B4BA:
 
 locret_3B4DC:
                 rts
-; End of function sub_3B488
+; End of function BuildFbzMagneticPlatformChainSprites
 
 ; ---------------------------------------------------------------------------
 Map_FBZMagneticPlatform:

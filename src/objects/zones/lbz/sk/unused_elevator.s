@@ -73,7 +73,7 @@ locret_25BB6:
 ; ---------------------------------------------------------------------------
 
 loc_25BB8:
-                bsr.w   sub_25C2E
+                bsr.w   StepLbzUnusedElevatorMidpointMotion
                 tst.w   y_vel(a0)
                 bne.s   locret_25BE2
                 addq.w  #2,$36(a0)
@@ -105,7 +105,7 @@ locret_25C00:
 ; ---------------------------------------------------------------------------
 
 loc_25C02:
-                bsr.w   sub_25C2E
+                bsr.w   StepLbzUnusedElevatorMidpointMotion
                 tst.w   y_vel(a0)
                 bne.s   locret_25C2C
                 clr.w   $36(a0)
@@ -124,7 +124,7 @@ locret_25C2C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_25C2E:
+StepLbzUnusedElevatorMidpointMotion:
                 move.w  y_pos(a0),d2
                 moveq   #8,d1
                 tst.b   $34(a0)
@@ -180,4 +180,4 @@ loc_25CAE:
 
 locret_25CBC:
                 rts
-; End of function sub_25C2E
+; End of function StepLbzUnusedElevatorMidpointMotion

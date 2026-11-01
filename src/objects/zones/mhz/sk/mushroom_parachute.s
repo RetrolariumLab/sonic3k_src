@@ -22,7 +22,7 @@ loc_3F4FA:
                 move.l  #loc_3F500,(a0)
 
 loc_3F500:
-                bsr.w   sub_3F5AA
+                bsr.w   UpdatePlayersOnMhzMushroomParachute
                 tst.b   $30(a0)
                 beq.s   loc_3F516
                 move.l  #loc_3F51C,(a0)
@@ -33,10 +33,10 @@ loc_3F516:
 ; ---------------------------------------------------------------------------
 
 loc_3F51C:
-                bsr.w   sub_3F7E2
+                bsr.w   UpdateMhzMushroomParachuteHeadingAndSpeed
                 jsr     (MoveSprite2).l
-                bsr.w   sub_3F7AE
-                bsr.s   sub_3F5AA
+                bsr.w   ResolveMhzMushroomParachuteSideWalls
+                bsr.s   UpdatePlayersOnMhzMushroomParachute
                 move.w  x_vel(a0),$34(a0)
                 move.w  y_vel(a0),$36(a0)
                 tst.w   $30(a0)
@@ -63,7 +63,7 @@ loc_3F56C:
 ; ---------------------------------------------------------------------------
 
 loc_3F572:
-                bsr.w   sub_3F7E2
+                bsr.w   UpdateMhzMushroomParachuteHeadingAndSpeed
                 jsr     (MoveSprite2).l
                 tst.b   render_flags(a0)
                 bmi.s   loc_3F5A4
@@ -84,19 +84,19 @@ loc_3F5A4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3F5AA:
+UpdatePlayersOnMhzMushroomParachute:
                 lea     $31(a0),a2
                 lea     (Player_2).w,a1
                 move.w  (Ctrl_2_logical).w,d0
-                bsr.s   sub_3F5C2
+                bsr.s   UpdatePlayerOnMhzMushroomParachute
                 lea     (Player_1).w,a1
                 subq.w  #1,a2
                 move.w  (Ctrl_1_logical).w,d0
-; End of function sub_3F5AA
+; End of function UpdatePlayersOnMhzMushroomParachute
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3F5C2:
+UpdatePlayerOnMhzMushroomParachute:
                 tst.b   (a2)
                 beq.w   loc_3F6FE
                 tst.b   render_flags(a1)
@@ -240,11 +240,11 @@ loc_3F70C:
 
 locret_3F7AC:
                 rts
-; End of function sub_3F5C2
+; End of function UpdatePlayerOnMhzMushroomParachute
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3F7AE:
+ResolveMhzMushroomParachuteSideWalls:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$D,lrb_solid_bit(a0)
                 beq.s   loc_3F7C2
@@ -252,24 +252,24 @@ sub_3F7AE:
 
 loc_3F7C2:
                 moveq   #$D,d5
-                jsr     (sub_FD32).l
+                jsr     (ProbeLeftWallAtBodyExtents).l
                 tst.w   d1
                 bpl.s   loc_3F7D2
                 sub.w   d1,x_pos(a0)
 
 loc_3F7D2:
-                jsr     (sub_FA1A).l
+                jsr     (ProbeRightWallAtBodyExtents).l
                 tst.w   d1
                 bpl.s   locret_3F7E0
                 add.w   d1,x_pos(a0)
 
 locret_3F7E0:
                 rts
-; End of function sub_3F7AE
+; End of function ResolveMhzMushroomParachuteSideWalls
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3F7E2:
+UpdateMhzMushroomParachuteHeadingAndSpeed:
                 move.b  angle(a0),d0
                 tst.b   $30(a0)
                 beq.s   loc_3F818
@@ -323,7 +323,7 @@ loc_3F84A:
 
 locret_3F850:
                 rts
-; End of function sub_3F7E2
+; End of function UpdateMhzMushroomParachuteHeadingAndSpeed
 
 ; ---------------------------------------------------------------------------
 Map_MHZMushroomParachute:

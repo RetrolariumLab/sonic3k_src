@@ -118,7 +118,7 @@ loc_58B7C:
 
 loc_58B9E:
                 movem.l d7-a0/a2-a3,-(sp)
-                jsr     (sub_5B18E).l
+                jsr     (SKEndingDispatchCreditsInitDelayScrollAndFinish).l
                 movem.l (sp)+,d7-a0/a2-a3
                 cmpi.b  #7,(Super_emerald_count).w
                 bhs.s   loc_58BBC
@@ -126,7 +126,7 @@ loc_58B9E:
                 blo.s   loc_58C1A
 
 loc_58BBC:
-                jsr     sub_592EE(pc)
+                jsr     CycleSsz2EmeraldEndingAccentPalette(pc)
                 tst.w   (_unkFAAE).w
                 beq.w   locret_58C7E
                 move.w  #$14C0,d0
@@ -184,7 +184,7 @@ loc_58C42:
                 addq.w  #4,(Events_routine_fg).w
 
 loc_58C68:
-                jsr     sub_5928C(pc)
+                jsr     CycleSsz2EndingWaterPalette(pc)
                 lea     (Camera_Y_pos_copy).w,a6
                 lea     (Camera_Y_pos_rounded).w,a5
                 moveq   #0,d1

@@ -48,7 +48,7 @@ loc_4474C:
                 move.b  #8,mapping_frame(a0)
                 move.w  #$1400,x_pos(a0)
                 move.w  #$440,y_pos(a0)
-                bsr.w   sub_456C6
+                bsr.w   SpawnKnucklesCutsceneMusicTransition
                 lea     ChildObjDat_45756(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
@@ -211,7 +211,7 @@ loc_44950:
                 move.w  #$4B8E,x_pos(a0)
                 move.w  #$17D,y_pos(a0)
                 bset    #0,render_flags(a0)
-                bsr.w   sub_456C6
+                bsr.w   SpawnKnucklesCutsceneMusicTransition
                 move.w  #(2*60)-1,$2E(a0)
                 move.l  #loc_449A8,$34(a0)
                 lea     Pal_CutsceneKnux(pc),a1

@@ -50,7 +50,7 @@ loc_5B578:
                 move.b  #0,(Debug_object).w
 
 loc_5B5AA:
-                bsr.w   sub_5B764
+                bsr.w   DebugMode_LoadSelectedObjectAppearance
                 move.b  #$C,(Debug_camera_delay).w
                 move.b  #1,(Debug_camera_speed).w
 
@@ -63,12 +63,12 @@ loc_5B5BA:
                 lea     (DebugOffs).l,a2
                 adda.w  (a2,d0.w),a2
                 move.w  (a2)+,d6
-                bsr.w   sub_5B5DE
+                bsr.w   DebugMode_HandlePlacementControls
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5B5DE:
+DebugMode_HandlePlacementControls:
                 moveq   #0,d4
                 move.w  #1,d1
                 move.b  (Ctrl_1_pressed).w,d4
@@ -159,7 +159,7 @@ loc_5B6A0:
                 move.b  #0,(Debug_object).w
 
 loc_5B6B8:
-                bra.w   sub_5B764
+                bra.w   DebugMode_LoadSelectedObjectAppearance
 ; ---------------------------------------------------------------------------
 
 loc_5B6BC:
@@ -192,17 +192,17 @@ loc_5B708:
                 lea     (Player_1).w,a1
                 move.l  (Debug_saved_mappings).w,mappings(a1)
                 move.w  (Debug_saved_art_tile).w,art_tile(a1)
-                bsr.s   sub_5B736
+                bsr.s   DebugMode_ResetPlayerAfterPlacement
                 move.b  #$13,y_radius(a1)
                 move.b  #9,x_radius(a1)
 
 locret_5B734:
                 rts
-; End of function sub_5B5DE
+; End of function DebugMode_HandlePlacementControls
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5B736:
+DebugMode_ResetPlayerAfterPlacement:
                 move.b  d0,anim(a1)
                 move.w  d0,x_pos+2(a1)
                 move.w  d0,y_pos+2(a1)
@@ -214,11 +214,11 @@ sub_5B736:
                 move.b  #1<<Status_InAir,status(a1)
                 move.b  #2,routine(a1)
                 rts
-; End of function sub_5B736
+; End of function DebugMode_ResetPlayerAfterPlacement
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5B764:
+DebugMode_LoadSelectedObjectAppearance:
                 moveq   #0,d0
                 move.b  (Debug_object).w,d0
                 add.w   d0,d0
@@ -229,4 +229,4 @@ sub_5B764:
                 move.w  8(a2,d0.w),art_tile(a0)
                 move.b  (a2,d0.w),mapping_frame(a0)
                 rts
-; End of function sub_5B764
+; End of function DebugMode_LoadSelectedObjectAppearance

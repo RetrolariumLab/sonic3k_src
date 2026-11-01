@@ -104,7 +104,7 @@ loc_438CC:
 
 loc_438FA:
                 subi.w  #4,x_vel(a0)
-                bsr.w   sub_439EC
+                bsr.w   EmitLrzSpikeBallGroundDebris
                 bra.s   loc_43948
 ; ---------------------------------------------------------------------------
 
@@ -172,7 +172,7 @@ loc_439A4:
                 jsr     (Play_SFX).l
 
 loc_439BC:
-                bsr.w   sub_439EC
+                bsr.w   EmitLrzSpikeBallGroundDebris
                 subq.b  #1,anim_frame_timer(a0)
                 bpl.s   loc_439DE
                 move.b  #3,anim_frame_timer(a0)
@@ -188,7 +188,7 @@ loc_439DE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_439EC:
+EmitLrzSpikeBallGroundDebris:
                 move.w  (Level_frame_counter).w,d0
                 andi.w  #3,d0
                 bne.s   locret_43A6A
@@ -219,7 +219,7 @@ sub_439EC:
 
 locret_43A6A:
                 rts
-; End of function sub_439EC
+; End of function EmitLrzSpikeBallGroundDebris
 
 ; ---------------------------------------------------------------------------
 

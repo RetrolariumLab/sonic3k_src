@@ -28,17 +28,17 @@ loc_326B0:
                 move.l  #loc_326B6,(a0)
 
 loc_326B6:
-                bsr.s   sub_32712
+                bsr.s   UpdateHczSpinningColumnMotion
                 lea     $32(a0),a2
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 move.w  (Ctrl_1_logical).w,d5
-                bsr.w   sub_32784
+                bsr.w   UpdatePlayerOnHczSpinningColumn
                 addq.w  #4,a2
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 move.w  (Ctrl_2_logical).w,d5
-                bsr.w   sub_32784
+                bsr.w   UpdatePlayerOnHczSpinningColumn
                 move.w  #$1B,d1
                 move.w  #$20,d2
                 move.w  #$21,d3
@@ -57,11 +57,11 @@ loc_32708:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_32712:
+UpdateHczSpinningColumnMotion:
                 move.w  $3A(a0),d0
                 move.w  off_3271E(pc,d0.w),d0
                 jmp     off_3271E(pc,d0.w)
-; End of function sub_32712
+; End of function UpdateHczSpinningColumnMotion
 
 ; ---------------------------------------------------------------------------
 off_3271E:
@@ -121,7 +121,7 @@ loc_3277A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_32784:
+UpdatePlayerOnHczSpinningColumn:
                 move.b  (a2),d0
                 bne.s   loc_327FC
                 btst    d6,status(a0)
@@ -213,4 +213,4 @@ loc_328AC:
 loc_328BE:
                 move.b  #0,(a2)
                 rts
-; End of function sub_32784
+; End of function UpdatePlayerOnHczSpinningColumn

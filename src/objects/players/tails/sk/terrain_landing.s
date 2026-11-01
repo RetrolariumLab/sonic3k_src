@@ -37,7 +37,7 @@ loc_1541A:
                 move.w  #0,x_vel(a0)
 
 loc_1542C:
-                bsr.w   sub_11FD6
+                bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
                 tst.w   d1
                 bpl.s   locret_154AA
                 move.b  y_vel(a0),d2
@@ -101,7 +101,7 @@ loc_154AC:
                 move.w  y_vel(a0),ground_vel(a0)
 
 loc_154C4:
-                bsr.w   sub_11FEE
+                bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
                 tst.w   d1
                 bpl.s   loc_15502
                 neg.w   d1
@@ -139,7 +139,7 @@ loc_15502:
                 bmi.s   locret_15536
 
 loc_1550E:
-                bsr.w   sub_11FD6
+                bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
                 tst.w   d1
                 bpl.s   locret_15536
                 tst.b   (Reverse_gravity_flag).w
@@ -172,7 +172,7 @@ loc_1554A:
                 move.w  #0,x_vel(a0)
 
 loc_1555C:
-                bsr.w   sub_11FEE
+                bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
                 tst.w   d1
                 bpl.s   locret_1559A
                 tst.b   (Reverse_gravity_flag).w
@@ -210,7 +210,7 @@ loc_1559C:
                 move.w  y_vel(a0),ground_vel(a0)
 
 loc_155B4:
-                bsr.w   sub_11FEE
+                bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
                 tst.w   d1
                 bpl.s   loc_155D6
                 tst.b   (Reverse_gravity_flag).w
@@ -234,7 +234,7 @@ loc_155D6:
                 bmi.s   locret_1560A
 
 loc_155E2:
-                bsr.w   sub_11FD6
+                bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
                 tst.w   d1
                 bpl.s   locret_1560A
                 tst.b   (Reverse_gravity_flag).w

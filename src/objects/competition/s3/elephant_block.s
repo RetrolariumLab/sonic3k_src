@@ -33,7 +33,7 @@ loc_351FE:
                 move.l  #loc_35204,(a0)
 
 loc_35204:
-                bsr.w   sub_352B4
+                bsr.w   CompetitionS3OscillateElephantBlockExtensionFixedPoint
                 lea     sub2_x_pos(a0),a2
                 move.w  $30(a0),d0
                 move.b  $34(a0),d1
@@ -63,7 +63,7 @@ loc_3523E:
 ; ---------------------------------------------------------------------------
 
 loc_3525C:
-                bsr.w   sub_352B4
+                bsr.w   CompetitionS3OscillateElephantBlockExtensionFixedPoint
                 lea     sub2_x_pos(a0),a2
                 move.w  $30(a0),d0
                 move.b  $34(a0),d1
@@ -93,7 +93,7 @@ loc_35296:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_352B4:
+CompetitionS3OscillateElephantBlockExtensionFixedPoint:
                 tst.b   $3A(a0)
                 bne.s   loc_352D6
                 move.w  $38(a0),d0
@@ -115,7 +115,7 @@ loc_352D6:
 
 locret_352EA:
                 rts
-; End of function sub_352B4
+; End of function CompetitionS3OscillateElephantBlockExtensionFixedPoint
 
 ; ---------------------------------------------------------------------------
 Map_BPZElephantBlock:

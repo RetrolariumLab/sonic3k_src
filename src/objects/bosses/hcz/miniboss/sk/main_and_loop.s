@@ -75,7 +75,7 @@ Obj_HCZ_MinibossLoop:
                 move.b  routine(a0),d0
                 move.w  HCZ_MinibossLoop_Index(pc,d0.w),d1
                 jsr     HCZ_MinibossLoop_Index(pc,d1.w)
-                bsr.w   sub_6AC48
+                bsr.w   HandleHCZMinibossHitFlashOrDefeat
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 HCZ_MinibossLoop_Index:
@@ -139,7 +139,7 @@ loc_6A02C:
 ; ---------------------------------------------------------------------------
 
 loc_6A042:
-                bsr.w   sub_6AAD2
+                bsr.w   SelectHCZBossDiveLaneAndRepeatCount
 
 loc_6A046:
                 move.b  #$A,routine(a0)
@@ -159,7 +159,7 @@ loc_6A076:
                 move.w  y_pos(a0),d0
                 cmp.w   (Water_level).w,d0
                 blo.s   loc_6A08C
-                bsr.w   sub_6AAB6
+                bsr.w   CreateHCZBossSurfaceSplash
 
 loc_6A08C:
                 jsr     (MoveSprite2).l
@@ -199,7 +199,7 @@ loc_6A0F0:
 ; ---------------------------------------------------------------------------
 
 loc_6A0F8:
-                bsr.w   sub_6AAA0
+                bsr.w   TriggerHCZBossSplashIfSubmerged
                 jsr     (MoveSprite2).l
                 move.w  y_pos(a0),d0
                 cmp.w   $44(a0),d0
@@ -208,7 +208,7 @@ loc_6A0F8:
 ; ---------------------------------------------------------------------------
 
 loc_6A110:
-                bsr.w   sub_6AAA0
+                bsr.w   TriggerHCZBossSplashIfSubmerged
                 jsr     (MoveSprite2).l
                 move.w  $44(a0),d0
                 addi.w  #$108,d0

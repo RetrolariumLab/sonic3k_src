@@ -33,7 +33,7 @@ loc_57840:
                 blo.s   loc_5786A
 
 loc_57854:
-                jsr     sub_579F0(pc)
+                jsr     SetSsz1OrdinaryBackgroundAlignment(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 jsr     (Refresh_PlaneFull).l
                 jmp     (PlainDeformation).l
@@ -41,7 +41,7 @@ loc_57854:
 
 loc_5786A:
                 move.w  #8,(Events_routine_bg).w
-                jsr     sub_57A60(pc)
+                jsr     BuildSsz1MiddleAltitudeBackgroundParallax(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 move.w  #$1C00,d1
                 jsr     (Refresh_PlaneFull).l
@@ -74,7 +74,7 @@ loc_578AA:
                 bhs.s   loc_578EC
                 move.w  (Camera_X_pos_BG_copy).w,(Events_bg+$0C).w
                 move.w  (Camera_Y_pos_BG_copy).w,(Events_bg+$0E).w
-                jsr     sub_57A60(pc)
+                jsr     BuildSsz1MiddleAltitudeBackgroundParallax(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 addi.w  #$E0,d0
                 and.w   (Camera_Y_pos_mask).w,d0
@@ -85,7 +85,7 @@ loc_578AA:
 ; ---------------------------------------------------------------------------
 
 loc_578EC:
-                jsr     sub_579F0(pc)
+                jsr     SetSsz1OrdinaryBackgroundAlignment(pc)
 
 loc_578F0:
                 jsr     (DrawBGAsYouMove).l
@@ -119,7 +119,7 @@ loc_57932:
 ; ---------------------------------------------------------------------------
 
 loc_57942:
-                jsr     sub_57A60(pc)
+                jsr     BuildSsz1MiddleAltitudeBackgroundParallax(pc)
 
 loc_57946:
                 move.w  #$1C00,d1
@@ -140,7 +140,7 @@ loc_57960:
                 blo.s   loc_57996
 
 loc_57974:
-                jsr     sub_579F0(pc)
+                jsr     SetSsz1OrdinaryBackgroundAlignment(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 addi.w  #$E0,d0
                 and.w   (Camera_Y_pos_mask).w,d0
@@ -151,7 +151,7 @@ loc_57974:
 ; ---------------------------------------------------------------------------
 
 loc_57996:
-                jsr     sub_57A60(pc)
+                jsr     BuildSsz1MiddleAltitudeBackgroundParallax(pc)
 
 loc_5799A:
                 lea     (Camera_Y_pos_BG_copy).w,a6
@@ -173,7 +173,7 @@ loc_579C4:
 ; ---------------------------------------------------------------------------
 
 loc_579D2:
-                jsr     sub_579F0(pc)
+                jsr     SetSsz1OrdinaryBackgroundAlignment(pc)
 
 loc_579D6:
                 move.w  (Camera_X_pos_BG_copy).w,d1
@@ -185,13 +185,13 @@ loc_579D6:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_579F0:
+SetSsz1OrdinaryBackgroundAlignment:
                 tst.w   (Events_bg+$10).w
                 bne.s   loc_57A30
                 cmpi.w  #$1800,(Camera_X_pos).w
                 blo.s   loc_57A12
                 st      (Events_bg+$10).w
-                bsr.s   sub_579F0
+                bsr.s   SetSsz1OrdinaryBackgroundAlignment
                 move.w  (Camera_X_pos_BG_copy).w,d0
                 andi.w  #$FFF0,d0
                 move.w  d0,(Camera_X_pos_BG_rounded).w
@@ -213,7 +213,7 @@ loc_57A30:
                 cmpi.w  #$1800,(Camera_X_pos).w
                 bhs.s   loc_57A4C
                 clr.w   (Events_bg+$10).w
-                bsr.s   sub_579F0
+                bsr.s   SetSsz1OrdinaryBackgroundAlignment
                 move.w  (Camera_X_pos_BG_copy).w,d0
                 andi.w  #$FFF0,d0
                 move.w  d0,(Camera_X_pos_BG_rounded).w
@@ -226,11 +226,11 @@ loc_57A4C:
                 move.w  d0,(Camera_Y_pos_BG_copy).w
                 move.w  (Camera_X_pos_copy).w,(Camera_X_pos_BG_copy).w
                 rts
-; End of function sub_579F0
+; End of function SetSsz1OrdinaryBackgroundAlignment
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_57A60:
+BuildSsz1MiddleAltitudeBackgroundParallax:
                 move.w  (Camera_Y_pos_copy).w,d0
                 move.w  (_unkEE9C).w,d1
                 asr.w   #1,d1
@@ -323,7 +323,7 @@ sub_57A60:
                 swap    d0
                 move.w  d0,$28(a1)
                 rts
-; End of function sub_57A60
+; End of function BuildSsz1MiddleAltitudeBackgroundParallax
 
 ; ---------------------------------------------------------------------------
 

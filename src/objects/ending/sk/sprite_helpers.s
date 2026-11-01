@@ -21,7 +21,7 @@ Create_Continue_Sprite:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5FE48:
+EndingProjectSavedXYToSceneWindowAndFlagOutside:
                 bclr    #6,$38(a0)
                 move.w  $3A(a0),d0
                 sub.w   (_unkEE98).w,d0
@@ -41,11 +41,11 @@ loc_5FE7A:
 
 locret_5FE80:
                 rts
-; End of function sub_5FE48
+; End of function EndingProjectSavedXYToSceneWindowAndFlagOutside
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5FE82:
+EndingClearSceneMotionScratchAndClassifyEmeraldOutcome:
                 moveq   #0,d0
                 lea     (_unkFA82).w,a1
                 move.l  d0,(a1)+
@@ -61,7 +61,7 @@ sub_5FE82:
 loc_5FEA2:
                 move.b  d0,(_unkFA88).w
                 rts
-; End of function sub_5FE82
+; End of function EndingClearSceneMotionScratchAndClassifyEmeraldOutcome
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -102,7 +102,7 @@ KnucklesEnding_Load_PLC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5FEFE:
+EndingOffsetPoseByMaskedPlayerModePair:
                 move.w  (Player_mode).w,d0
                 andi.w  #3,d0
                 add.w   d0,d0
@@ -116,11 +116,11 @@ sub_5FEFE:
 
 locret_5FF1A:
                 rts
-; End of function sub_5FEFE
+; End of function EndingOffsetPoseByMaskedPlayerModePair
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5FF1C:
+EndingPlaceBannerBlackenPaletteAndSpawnWhiteFlashRestore:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 adda.w  d0,a1
@@ -143,7 +143,7 @@ loc_5FF3A:
 
 locret_5FF60:
                 rts
-; End of function sub_5FF1C
+; End of function EndingPlaceBannerBlackenPaletteAndSpawnWhiteFlashRestore
 
 ; ---------------------------------------------------------------------------
 
@@ -159,7 +159,7 @@ loc_5FF6E:
                 move.w  $3A(a0),d0
 
 loc_5FF82:
-                jsr     (sub_85EB4).l
+                jsr     (EffectColorSKRaiseOneColorTowardWhite).l
                 dbf     d0,loc_5FF82
                 subq.b  #1,$39(a0)
                 bmi.s   loc_5FF94
@@ -182,7 +182,7 @@ loc_5FFA6:
                 move.w  $3A(a0),d0
 
 loc_5FFBE:
-                jsr     (sub_85F2A).l
+                jsr     (EffectColorSKLowerOneColorTowardTarget).l
                 dbf     d0,loc_5FFBE
                 subq.b  #1,$39(a0)
                 bpl.s   locret_5FF92

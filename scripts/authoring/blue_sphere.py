@@ -71,7 +71,7 @@ def decode_code(code):
 
 
 def level_from_lockon_header(header, *, header_flag=False):
-    """Reproduce sub_4CD18 for a complete attached cartridge header.
+    """Reproduce BlueSphereDeriveTwentySevenBitLevelFromLockonHeader for a complete attached cartridge header.
 
     The caller supplies the result of the game's header test. Sonic 1 serial
     recognition is an earlier mode decision and does not call this seed path.

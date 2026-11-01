@@ -14,11 +14,11 @@ loc_3BF68:
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d1
-                bsr.s   sub_3BFA0
+                bsr.s   UpdatePlayerOnFbzSpinningPole
                 addq.w  #1,a2
                 lea     (Player_2).w,a1
                 move.w  (Ctrl_2_logical).w,d1
-                bsr.s   sub_3BFA0
+                bsr.s   UpdatePlayerOnFbzSpinningPole
                 tst.b   $30(a0)
                 beq.s   loc_3BF9A
                 move.b  #1,(Scroll_force_positions).w
@@ -30,7 +30,7 @@ loc_3BF9A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3BFA0:
+UpdatePlayerOnFbzSpinningPole:
                 tst.b   (a2)
                 beq.w   loc_3C0D0
                 tst.w   (Debug_placement_mode).w
@@ -60,7 +60,7 @@ loc_3BFEC:
                 andi.w  #$70,d0
                 bne.w   loc_3C068
                 addi.b  #8,4(a2)
-                bsr.s   sub_3C010
+                bsr.s   ProjectPlayerOnFbzSpinningPole
 
 loc_3BFFE:
                 moveq   #0,d0
@@ -69,11 +69,11 @@ loc_3BFFE:
                 jsr     (Perform_Player_DPLC).l
                 movea.l (sp)+,a2
                 rts
-; End of function sub_3BFA0
+; End of function UpdatePlayerOnFbzSpinningPole
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3C010:
+ProjectPlayerOnFbzSpinningPole:
                 andi.w  #drawing_mask,art_tile(a1)
                 moveq   #0,d0
                 move.b  4(a2),d0
@@ -94,7 +94,7 @@ loc_3C03E:
                 add.w   x_pos(a0),d1
                 move.w  d1,x_pos(a1)
                 rts
-; End of function sub_3C010
+; End of function ProjectPlayerOnFbzSpinningPole
 
 ; ---------------------------------------------------------------------------
 RawAni_3C048:
@@ -184,7 +184,7 @@ loc_3C16A:
                 andi.b  #$FD,render_flags(a1)
                 move.b  #-$20,4(a2)
                 move.b  #1,(a2)
-                bsr.w   sub_3C010
+                bsr.w   ProjectPlayerOnFbzSpinningPole
                 bra.w   loc_3BFFE
 ; ---------------------------------------------------------------------------
 

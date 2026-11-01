@@ -8,7 +8,7 @@ Obj_DEZ3_Boss_Fireball:
                 move.b  routine(a0),d0
                 move.w  DEZ3_Boss_Fireball_Index(pc,d0.w),d1
                 jsr     DEZ3_Boss_Fireball_Index(pc,d1.w)
-                bra.w   sub_81024
+                bra.w   PositionDEZFinalChildFromParentWordOffsets
 ; ---------------------------------------------------------------------------
 DEZ3_Boss_Fireball_Index:
                 dc.w    loc_80956-DEZ3_Boss_Fireball_Index
@@ -52,7 +52,7 @@ loc_809A6:
                 ext.w   d0
                 add.w   d0,$44(a0)
                 moveq   #0,d2
-                bra.w   sub_8106E
+                bra.w   CloneDEZPrimaryFireballIntoAnimatedFlameSegment
 ; ---------------------------------------------------------------------------
 
 loc_809CA:
@@ -60,9 +60,9 @@ loc_809CA:
                 move.w  #$CF,y_pos(a0)
                 clr.b   anim_frame(a0)
                 move.w  #2,$2E(a0)
-                bsr.w   sub_80A26
+                bsr.w   PositionDEZFinalAttackXFromParentOffsetOnly
                 moveq   #2,d2
-                bsr.w   sub_8106E
+                bsr.w   CloneDEZPrimaryFireballIntoAnimatedFlameSegment
                 addq.w  #4,sp
                 rts
 ; ---------------------------------------------------------------------------
@@ -75,7 +75,7 @@ byte_809EE:
 
 loc_809F4:
                 subq.w  #1,$2E(a0)
-                bpl.s   sub_80A26
+                bpl.s   PositionDEZFinalAttackXFromParentOffsetOnly
                 move.w  #2,$2E(a0)
                 addq.w  #8,$42(a0)
                 cmpi.w  #$300,$42(a0)
@@ -89,15 +89,15 @@ loc_809F4:
 
 loc_80A1E:
                 add.w   d0,y_pos(a0)
-                bsr.w   sub_8106E
+                bsr.w   CloneDEZPrimaryFireballIntoAnimatedFlameSegment
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_80A26:
+PositionDEZFinalAttackXFromParentOffsetOnly:
                 movea.w parent3(a0),a1
                 move.w  $42(a0),d0
                 move.w  x_pos(a1),d1
                 add.w   d0,d1
                 move.w  d1,x_pos(a0)
                 rts
-; End of function sub_80A26
+; End of function PositionDEZFinalAttackXFromParentOffsetOnly

@@ -154,16 +154,16 @@ DPZ_BackgroundEvent:
                 move.w  (Camera_X_pos_copy).w,d0
                 move.w  (Camera_X_pos_BG_copy).w,d1
                 moveq   #$1A,d2
-                bsr.s   sub_3A7BA
+                bsr.s   S3CompFillUniformForegroundBackgroundScrollLines
                 move.w  (Camera_X_pos_P2_copy).w,d0
                 move.w  (Camera_X_pos_P2_BG_copy).w,d1
                 moveq   #$1C,d2
-                bsr.s   sub_3A7BA
+                bsr.s   S3CompFillUniformForegroundBackgroundScrollLines
                 jmp     Update_VScrollValueP2(pc)
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3A7BA:
+S3CompFillUniformForegroundBackgroundScrollLines:
                 neg.w   d0
                 swap    d0
                 neg.w   d1
@@ -176,31 +176,31 @@ loc_3A7C2:
                 move.l  d0,(a1)+
                 dbf     d2,loc_3A7C2
                 rts
-; End of function sub_3A7BA
+; End of function S3CompFillUniformForegroundBackgroundScrollLines
 
 ; =============== S U B R O U T I N E =======================================
 
 ALZ_Deformation:
                 move.w  (Camera_Y_pos_copy).w,d0
-                bsr.s   sub_3A808
+                bsr.s   S3ALZMapCameraYToThreeQuarterBackground
                 move.w  d0,(Camera_Y_pos_BG_copy).w
                 move.w  (Camera_Y_pos_P2_copy).w,d0
-                bsr.s   sub_3A808
+                bsr.s   S3ALZMapCameraYToThreeQuarterBackground
                 move.w  d0,(Camera_Y_pos_P2_BG_copy).w
                 addq.w  #3,(Events_bg+$00).w
                 addi.l  #$1000,(Events_bg+$02).w
                 lea     AIZ2_ALZ_BGDeformDelta(pc),a4
                 lea     (HScroll_table).w,a1
                 move.w  (Events_fg_1).w,d0
-                bsr.s   sub_3A81E
+                bsr.s   S3ALZBuildBandParallaxAndAnimatedDeltaScrollTable
                 lea     (HScroll_table+$100).w,a1
                 move.w  (_unkEEBA).w,d0
-                bra.s   sub_3A81E
+                bra.s   S3ALZBuildBandParallaxAndAnimatedDeltaScrollTable
 ; End of function ALZ_Deformation
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3A808:
+S3ALZMapCameraYToThreeQuarterBackground:
                 subi.w  #$148,d0
                 swap    d0
                 clr.w   d0
@@ -210,11 +210,11 @@ sub_3A808:
                 swap    d0
                 addi.w  #$48,d0
                 rts
-; End of function sub_3A808
+; End of function S3ALZMapCameraYToThreeQuarterBackground
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3A81E:
+S3ALZBuildBandParallaxAndAnimatedDeltaScrollTable:
                 swap    d0
                 clr.w   d0
                 asr.l   #1,d0
@@ -266,37 +266,37 @@ loc_3A882:
                 move.w  d2,(a5)+
                 dbf     d1,loc_3A882
                 rts
-; End of function sub_3A81E
+; End of function S3ALZBuildBandParallaxAndAnimatedDeltaScrollTable
 
 ; =============== S U B R O U T I N E =======================================
 
 BPZ_Deformation:
                 move.w  (Camera_Y_pos_copy).w,d0
-                bsr.s   sub_3A8B6
+                bsr.s   S3BPZMapCameraYToHalfSpeedBackground
                 move.w  d0,(Camera_Y_pos_BG_copy).w
                 move.w  (Camera_Y_pos_P2_copy).w,d0
-                bsr.s   sub_3A8B6
+                bsr.s   S3BPZMapCameraYToHalfSpeedBackground
                 move.w  d0,(Camera_Y_pos_P2_BG_copy).w
                 lea     (HScroll_table+$00E).w,a1
                 move.w  (Events_fg_1).w,d0
-                bsr.s   sub_3A8C2
+                bsr.s   S3BPZBuildSevenReverseWrittenParallaxBands
                 lea     (HScroll_table+$10E).w,a1
                 move.w  (_unkEEBA).w,d0
-                bsr.s   sub_3A8C2
+                bsr.s   S3BPZBuildSevenReverseWrittenParallaxBands
 ; End of function BPZ_Deformation
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3A8B6:
+S3BPZMapCameraYToHalfSpeedBackground:
                 subi.w  #$2C8,d0
                 asr.w   #1,d0
                 addi.w  #$90,d0
                 rts
-; End of function sub_3A8B6
+; End of function S3BPZMapCameraYToHalfSpeedBackground
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3A8C2:
+S3BPZBuildSevenReverseWrittenParallaxBands:
                 swap    d0
                 clr.w   d0
                 asr.l   #1,d0
@@ -311,24 +311,24 @@ loc_3A8CE:
                 sub.l   d1,d0
                 dbf     d2,loc_3A8CE
                 rts
-; End of function sub_3A8C2
+; End of function S3BPZBuildSevenReverseWrittenParallaxBands
 
 ; =============== S U B R O U T I N E =======================================
 
 DPZ_Deformation:
                 move.w  (Camera_Y_pos_copy).w,d0
-                bsr.s   sub_3A912
+                bsr.s   S3DPZMapCameraYToSixteenthSpeedBackground
                 move.w  d0,(Camera_Y_pos_BG_copy).w
                 move.w  (Camera_Y_pos_P2_copy).w,d0
-                bsr.s   sub_3A912
+                bsr.s   S3DPZMapCameraYToSixteenthSpeedBackground
                 addi.w  #$80,d0
                 move.w  d0,(Camera_Y_pos_P2_BG_copy).w
                 move.w  (Events_fg_1).w,d0
-                bsr.s   sub_3A91C
+                bsr.s   S3DPZDeriveHalfAndEighthForegroundXOffsets
                 move.w  d0,(Camera_X_pos_BG_copy).w
                 move.w  d1,(Events_bg+$10).w
                 move.w  (_unkEEBA).w,d0
-                bsr.s   sub_3A91C
+                bsr.s   S3DPZDeriveHalfAndEighthForegroundXOffsets
                 move.w  d0,(Camera_X_pos_P2_BG_copy).w
                 move.w  d1,(Events_bg+$12).w
                 rts
@@ -336,42 +336,42 @@ DPZ_Deformation:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3A912:
+S3DPZMapCameraYToSixteenthSpeedBackground:
                 subi.w  #$148,d0
                 asr.w   #4,d0
                 addq.w  #8,d0
                 rts
-; End of function sub_3A912
+; End of function S3DPZMapCameraYToSixteenthSpeedBackground
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3A91C:
+S3DPZDeriveHalfAndEighthForegroundXOffsets:
                 asr.w   #1,d0
                 move.w  d0,d1
                 asr.w   #2,d1
                 rts
-; End of function sub_3A91C
+; End of function S3DPZDeriveHalfAndEighthForegroundXOffsets
 
 ; =============== S U B R O U T I N E =======================================
 
 CGZ_Deformation:
                 move.w  (Events_bg+$02).w,d0
-                bsr.s   sub_3A94C
+                bsr.s   S3CGZScaleNonnegativeLapHeightIntoBackgroundY
                 move.w  d0,(Camera_Y_pos_BG_copy).w
                 move.w  (Events_bg+$06).w,d0
-                bsr.s   sub_3A94C
+                bsr.s   S3CGZScaleNonnegativeLapHeightIntoBackgroundY
                 move.w  d0,(Camera_Y_pos_P2_BG_copy).w
                 lea     (HScroll_table+$00A).w,a1
                 move.w  (Events_fg_1).w,d0
-                bsr.s   sub_3A95C
+                bsr.s   S3CGZBuildFiveHorizontalParallaxBands
                 lea     (HScroll_table+$10A).w,a1
                 move.w  (_unkEEBA).w,d0
-                bsr.s   sub_3A95C
+                bsr.s   S3CGZBuildFiveHorizontalParallaxBands
 ; End of function CGZ_Deformation
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3A94C:
+S3CGZScaleNonnegativeLapHeightIntoBackgroundY:
                 bmi.s   loc_3A958
                 move.w  (Events_bg+$08).w,d1
                 mulu.w  d1,d0
@@ -382,11 +382,11 @@ sub_3A94C:
 loc_3A958:
                 moveq   #0,d0
                 rts
-; End of function sub_3A94C
+; End of function S3CGZScaleNonnegativeLapHeightIntoBackgroundY
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3A95C:
+S3CGZBuildFiveHorizontalParallaxBands:
                 swap    d0
                 clr.w   d0
                 asr.l   #1,d0
@@ -405,28 +405,28 @@ loc_3A968:
                 addi.w  #$100,d1
                 move.w  d1,-(a1)
                 rts
-; End of function sub_3A95C
+; End of function S3CGZBuildFiveHorizontalParallaxBands
 
 ; =============== S U B R O U T I N E =======================================
 
 EMZ_Deformation:
                 move.w  (Camera_Y_pos_copy).w,d0
-                bsr.s   sub_3A9A8
+                bsr.s   S3EMZMapCameraYToThreeQuarterBackground
                 move.w  d0,(Camera_Y_pos_BG_copy).w
                 move.w  (Camera_Y_pos_P2_copy).w,d0
-                bsr.s   sub_3A9A8
+                bsr.s   S3EMZMapCameraYToThreeQuarterBackground
                 move.w  d0,(Camera_Y_pos_P2_BG_copy).w
                 lea     (HScroll_table).w,a1
                 move.w  (Events_fg_1).w,d0
-                bsr.s   sub_3A9BE
+                bsr.s   S3EMZBuildTenLayerParallaxOffsets
                 lea     (HScroll_table+$100).w,a1
                 move.w  (_unkEEBA).w,d0
-                bsr.s   sub_3A9BE
+                bsr.s   S3EMZBuildTenLayerParallaxOffsets
 ; End of function EMZ_Deformation
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3A9A8:
+S3EMZMapCameraYToThreeQuarterBackground:
                 subi.w  #$148,d0
                 swap    d0
                 clr.w   d0
@@ -436,11 +436,11 @@ sub_3A9A8:
                 swap    d0
                 addi.w  #$48,d0
                 rts
-; End of function sub_3A9A8
+; End of function S3EMZMapCameraYToThreeQuarterBackground
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3A9BE:
+S3EMZBuildTenLayerParallaxOffsets:
                 swap    d0
                 clr.w   d0
                 asr.l   #3,d0
@@ -469,7 +469,7 @@ sub_3A9BE:
                 swap    d0
                 move.w  d0,2(a1)
                 rts
-; End of function sub_3A9BE
+; End of function S3EMZBuildTenLayerParallaxOffsets
 
 ; ---------------------------------------------------------------------------
 Comp_ScreenInitArray:

@@ -54,7 +54,7 @@ word_48194:
 ; ---------------------------------------------------------------------------
 
 loc_4819C:
-                bsr.w   sub_4895E
+                bsr.w   UpdateHCZMinibossRocketTwistPose
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
@@ -75,7 +75,7 @@ loc_481C2:
 ; ---------------------------------------------------------------------------
 
 loc_481CA:
-                bsr.w   sub_4895E
+                bsr.w   UpdateHCZMinibossRocketTwistPose
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
@@ -118,7 +118,7 @@ loc_4823E:
 ; ---------------------------------------------------------------------------
 
 loc_48254:
-                bsr.w   sub_4895E
+                bsr.w   UpdateHCZMinibossRocketTwistPose
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
                 bne.w   locret_47DC8
@@ -129,7 +129,7 @@ loc_48266:
 ; ---------------------------------------------------------------------------
 
 loc_4826E:
-                bsr.w   sub_4895E
+                bsr.w   UpdateHCZMinibossRocketTwistPose
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lsr.b   #1,d0
@@ -160,7 +160,7 @@ loc_482B0:
 ; ---------------------------------------------------------------------------
 
 loc_482C2:
-                bsr.w   sub_489EC
+                bsr.w   FollowHCZMinibossRocketTipPose
 
 loc_482C6:
                 movea.w parent3(a0),a1

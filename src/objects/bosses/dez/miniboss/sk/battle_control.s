@@ -7,7 +7,7 @@ Obj_DEZMiniboss:
                 lea     word_7DDA4(pc),a1
                 jsr     (Check_CameraInRange).l
                 move.b  #mus_Miniboss,boss_saved_mus(a0)
-                jsr     (sub_85D6A).l
+                jsr     (BeginBossCameraTransitionSaveBoundsAndFadeMusic).l
                 move.l  #loc_7DE28,(a0)
                 move.l  #loc_7DE2C,$34(a0)
                 lea     ObjDat_DEZMiniboss(pc),a1
@@ -252,7 +252,7 @@ loc_7E044:
                 move.w  y_pos(a0),$30(a0)
                 bclr    #5,$38(a0)
                 jsr     (AllocateObject).l
-                bne.s   sub_7E08C
+                bne.s   ResetDEZMinibossVerticalSwing
                 move.w  a0,parent3(a1)
                 move.l  #Obj_SpriteMask,(a1)
                 move.w  #$3740,x_pos(a1)
@@ -261,14 +261,14 @@ loc_7E044:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7E08C:
+ResetDEZMinibossVerticalSwing:
                 move.w  #$80,d0
                 move.w  d0,$3E(a0)
                 move.w  d0,y_vel(a0)
                 move.w  #8,$40(a0)
                 bclr    #0,$38(a0)
                 rts
-; End of function sub_7E08C
+; End of function ResetDEZMinibossVerticalSwing
 
 ; ---------------------------------------------------------------------------
 
@@ -280,7 +280,7 @@ loc_7E0A6:
                 jsr     (Play_SFX).l
 
 loc_7E0B8:
-                bsr.w   sub_7EE88
+                bsr.w   ReactToDEZMinibossSecondFormHitCountOrDefeat
                 moveq   #0,d0
                 move.b  routine(a0),d0
                 move.w  off_7E0CA(pc,d0.w),d1
@@ -298,22 +298,22 @@ off_7E0CA:
 loc_7E0D6:
                 jsr     Swing_UpAndDown(pc)
                 jsr     (MoveSprite2).l
-                bsr.w   sub_7EC64
-                bsr.w   sub_7EB8E
+                bsr.w   ReverseDEZMinibossHorizontalVelocityPastBounds
+                bsr.w   RetargetDEZMinibossPlatformAngularVelocityFromPlayer
                 btst    #1,$38(a0)
                 beq.s   loc_7E0F4
-                bsr.w   sub_7E0FA
+                bsr.w   EnterDEZMinibossPlatformExpansionReaction
 
 loc_7E0F4:
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7E0FA:
+EnterDEZMinibossPlatformExpansionReaction:
                 move.b  #2,routine(a0)
                 bset    #7,$38(a0)
                 rts
-; End of function sub_7E0FA
+; End of function EnterDEZMinibossPlatformExpansionReaction
 
 ; ---------------------------------------------------------------------------
 
@@ -321,8 +321,8 @@ loc_7E108:
                 jsr     Run_PalRotationScript(pc)
                 jsr     Swing_UpAndDown(pc)
                 jsr     (MoveSprite2).l
-                bsr.w   sub_7EC84
-                bsr.w   sub_7EB8E
+                bsr.w   SetDEZMinibossPlayerPursuitVelocityWithinBounds
+                bsr.w   RetargetDEZMinibossPlatformAngularVelocityFromPlayer
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -345,7 +345,7 @@ loc_7E13C:
 ; ---------------------------------------------------------------------------
 
 loc_7E15C:
-                bsr.s   sub_7E0FA
+                bsr.s   EnterDEZMinibossPlatformExpansionReaction
                 bclr    #3,$38(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -413,7 +413,7 @@ loc_7E1FC:
 
 loc_7E22E:
                 move.w  d1,x_vel(a0)
-                bsr.w   sub_7E08C
+                bsr.w   ResetDEZMinibossVerticalSwing
 
 loc_7E236:
                 jmp     (Draw_Sprite).l
@@ -560,7 +560,7 @@ loc_7E3CA:
                 bclr    #7,(Player_1+art_tile).w
 
 loc_7E3E8:
-                bra.w   sub_7EEEE
+                bra.w   AdvanceDEZPostBossPlayerTwelvePoseSpinAndPLC
 ; ---------------------------------------------------------------------------
 
 loc_7E3EC:
@@ -576,15 +576,15 @@ loc_7E3EC:
 
 loc_7E416:
                 subi.w  #$10,(Player_1+y_pos).w
-                bra.w   sub_7EEEE
+                bra.w   AdvanceDEZPostBossPlayerTwelvePoseSpinAndPLC
 ; ---------------------------------------------------------------------------
 
 loc_7E420:
-                bsr.w   sub_7EEEE
+                bsr.w   AdvanceDEZPostBossPlayerTwelvePoseSpinAndPLC
                 tst.w   y_vel(a0)
                 bmi.s   loc_7E44C
                 move.l  #loc_7E44C,(a0)
-                jsr     (sub_5FD88).l
+                jsr     (EndingSetP1PoseFrameByPlayerModeAndLoadArt).l
                 lea     (Player_1).w,a1
                 bclr    #0,render_flags(a1)
                 bclr    #Status_Facing,status(a1)
@@ -691,7 +691,7 @@ loc_7E566:
                 bne.s   loc_7E590
 
 loc_7E57A:
-                bsr.w   sub_7EBC2
+                bsr.w   AccelerateDEZPlatformSharedAngularStepAndAdvancePhase
                 bra.w   loc_7EBF2
 ; ---------------------------------------------------------------------------
 
@@ -710,7 +710,7 @@ loc_7E598:
                 movea.w parent3(a0),a1
                 btst    #7,$38(a1)
                 bne.s   loc_7E582
-                bsr.w   sub_7EBC2
+                bsr.w   AccelerateDEZPlatformSharedAngularStepAndAdvancePhase
                 movea.w parent3(a0),a1
                 move.b  $3C(a0),d0
                 tst.w   $3C(a1)
@@ -825,7 +825,7 @@ loc_7E6B6:
                 bne.w   loc_7E582
                 btst    #6,$38(a1)
                 beq.s   loc_7E6D0
-                bsr.w   sub_7E6D4
+                bsr.w   RestoreDEZMinibossPlatformIdleHandlerBySide
 
 loc_7E6D0:
                 bra.w   loc_7EBF2

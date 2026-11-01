@@ -150,7 +150,7 @@ Obj_CNZWaterLevelButton:
 ; ---------------------------------------------------------------------------
 
 loc_65D8C:
-                bsr.w   sub_65DEC
+                bsr.w   CutsceneKnucklesSolidThinWrapper
                 move.b  #0,mapping_frame(a0)
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0

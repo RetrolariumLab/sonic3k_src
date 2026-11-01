@@ -405,7 +405,7 @@ loc_5C972:
 Obj_Continue_EggRobo_5C9C4:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
-                jsr     (sub_91988).l
+                jsr     (SetEggRoboFrameFromVblankParity).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -435,10 +435,10 @@ loc_5CA36:
                 move.w  #$380,priority(a0)
                 move.b  #8,width_pixels(a0)
                 move.b  #8,height_pixels(a0)
-                bsr.w   sub_5CB4A
+                bsr.w   ContinuePlaceIconFromAlternatingCenterOutTable
                 move.w  #$D8,y_pos(a0)
                 move.l  #loc_5CA5C,(a0)
-                bsr.w   sub_5CB6A
+                bsr.w   ContinueSelectCharacterFramePairAndOptionalTailsChild
 
 loc_5CA5C:
                 moveq   #0,d0

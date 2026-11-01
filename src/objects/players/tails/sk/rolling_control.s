@@ -23,12 +23,12 @@ loc_14D46:
                 bne.s   loc_14D78
                 btst    #button_left,(Ctrl_2_held_logical).w
                 beq.s   loc_14D6C
-                bsr.w   sub_14E32
+                bsr.w   TailsSKApplyRollingLeftInput
 
 loc_14D6C:
                 btst    #button_right,(Ctrl_2_held_logical).w
                 beq.s   loc_14D78
-                bsr.w   sub_14E56
+                bsr.w   TailsSKApplyRollingRightInput
 
 loc_14D78:
                 move.w  ground_vel(a0),d0
@@ -116,7 +116,7 @@ loc_14E2A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_14E32:
+TailsSKApplyRollingLeftInput:
                 move.w  ground_vel(a0),d0
                 beq.s   loc_14E3A
                 bpl.s   loc_14E48
@@ -135,11 +135,11 @@ loc_14E48:
 loc_14E50:
                 move.w  d0,ground_vel(a0)
                 rts
-; End of function sub_14E32
+; End of function TailsSKApplyRollingLeftInput
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_14E56:
+TailsSKApplyRollingRightInput:
                 move.w  ground_vel(a0),d0
                 bmi.s   loc_14E6A
                 bclr    #Status_Facing,status(a0)
@@ -155,7 +155,7 @@ loc_14E6A:
 loc_14E72:
                 move.w  d0,ground_vel(a0)
                 rts
-; End of function sub_14E56
+; End of function TailsSKApplyRollingRightInput
 
 ; =============== S U B R O U T I N E =======================================
 

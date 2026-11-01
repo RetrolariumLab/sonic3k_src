@@ -12,7 +12,7 @@ Obj_LBZ1Robotnik:
                 move.b  routine(a0),d0
                 move.w  LBZ1Robotnik_Index(pc,d0.w),d1
                 jsr     LBZ1Robotnik_Index(pc,d1.w)
-                jsr     (sub_8D1FC).l
+                jsr     (UpdateLBZAct1RobotnikHitCooldown).l
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 LBZ1Robotnik_Index:
@@ -178,7 +178,7 @@ loc_8CD40:
 
 loc_8CD4C:
                 jsr     (MoveSprite2).l
-                jsr     (sub_8D1FC).l
+                jsr     (UpdateLBZAct1RobotnikHitCooldown).l
                 jmp     Sprite_CheckDeleteTouch2(pc)
 ; ---------------------------------------------------------------------------
 
@@ -202,7 +202,7 @@ loc_8CD92:
 ; ---------------------------------------------------------------------------
 
 loc_8CD98:
-                bsr.w   sub_8D116
+                bsr.w   ScheduleLBZMinibossMusicTransition
 
 loc_8CD9C:
                 bset    #3,$38(a0)
@@ -223,8 +223,8 @@ Obj_LBZMinibossBox:
                 move.w  #$3C00,(Camera_min_X_pos).w
                 lea     ChildObjDat_8D25C(pc),a2
                 jsr     (CreateChild3_NormalRepeated).l
-                bsr.w   sub_8D116
-                bra.w   sub_8D0EA
+                bsr.w   ScheduleLBZMinibossMusicTransition
+                bra.w   QueueLBZMinibossBoxAndExplosionGraphics
 ; ---------------------------------------------------------------------------
 
 loc_8CDEA:
@@ -401,7 +401,7 @@ Obj_LBZMinibossBoxKnux:
                 move.w  (a1)+,(Camera_target_max_Y_pos).w
                 move.w  (a1)+,(Camera_min_X_pos).w
                 move.w  (a1)+,(Camera_max_X_pos).w
-                bsr.w   sub_8D0EA
+                bsr.w   QueueLBZMinibossBoxAndExplosionGraphics
                 lea     ChildObjDat_8D26C(pc),a2
                 jsr     (CreateChild1_Normal).l
                 move.l  #loc_8CFB2,(a0)
@@ -475,7 +475,7 @@ loc_8D056:
                 move.l  #loc_8D082,$34(a0)
                 tst.b   subtype(a0)
                 bne.s   locret_8D080
-                bsr.w   sub_8D116
+                bsr.w   ScheduleLBZMinibossMusicTransition
 
 locret_8D080:
                 rts
@@ -512,7 +512,7 @@ word_8D0E0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8D0EA:
+QueueLBZMinibossBoxAndExplosionGraphics:
                 lea     (ArtKosM_LBZMiniboss).l,a1
                 move.w  #tiles_to_bytes(ArtTile_LBZMiniboss),d2
                 jsr     (Queue_Kos_Module).l
@@ -521,11 +521,11 @@ sub_8D0EA:
                 jsr     (Queue_Kos_Module).l
                 lea     (PLC_BossExplosion).l,a1
                 jmp     (Load_PLC_Raw).l
-; End of function sub_8D0EA
+; End of function QueueLBZMinibossBoxAndExplosionGraphics
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8D116:
+ScheduleLBZMinibossMusicTransition:
                 jsr     (AllocateObject).l
                 bne.s   locret_8D12A
                 move.l  #Obj_Song_Fade_Transition,(a1)
@@ -533,7 +533,7 @@ sub_8D116:
 
 locret_8D12A:
                 rts
-; End of function sub_8D116
+; End of function ScheduleLBZMinibossMusicTransition
 
 ; ---------------------------------------------------------------------------
 
@@ -607,7 +607,7 @@ byte_8D1D4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8D1FC:
+UpdateLBZAct1RobotnikHitCooldown:
                 tst.b   collision_flags(a0)
                 bne.s   locret_8D22E
                 tst.b   $20(a0)
@@ -625,7 +625,7 @@ loc_8D21C:
 
 locret_8D22E:
                 rts
-; End of function sub_8D1FC
+; End of function UpdateLBZAct1RobotnikHitCooldown
 
 ; ---------------------------------------------------------------------------
 ObjDat_LBZ1Robotnik:

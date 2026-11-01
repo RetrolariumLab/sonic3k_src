@@ -31,9 +31,9 @@ loc_46452:
 
 loc_46482:
                 lea     (Player_1).w,a1
-                jsr     sub_46514(pc)
+                jsr     CountPlayerInSszSpringExtensionArea(pc)
                 lea     (Player_2).w,a1
-                jsr     sub_46514(pc)
+                jsr     CountPlayerInSszSpringExtensionArea(pc)
                 move.b  mapping_frame(a0),d1
                 tst.w   d0
                 bne.s   loc_464AE
@@ -72,23 +72,23 @@ loc_464DA:
                 moveq   #$10,d2
                 lea     byte_468DC(pc),a2
                 move.w  x_pos(a0),d4
-                jsr     (sub_1DD0E).l
+                jsr     (CollidePlayersWithHeightProfileSolid).l
                 move.w  $12(a0),x_pos(a0)
                 swap    d6
                 move.w  d6,-(sp)
                 lea     (Player_1).w,a1
                 lea     $2E(a0),a2
-                bsr.s   sub_46536
+                bsr.s   AdvancePlayerSszRetractingSpringLaunch
                 move.w  (sp)+,d6
                 lsr.w   #1,d6
                 lea     (Player_2).w,a1
                 lea     $30(a0),a2
-                bsr.s   sub_46536
+                bsr.s   AdvancePlayerSszRetractingSpringLaunch
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_46514:
+CountPlayerInSszSpringExtensionArea:
                 tst.b   object_control(a1)
                 bne.s   locret_46534
                 cmp.w   y_pos(a1),d1
@@ -103,11 +103,11 @@ sub_46514:
 
 locret_46534:
                 rts
-; End of function sub_46514
+; End of function CountPlayerInSszSpringExtensionArea
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_46536:
+AdvancePlayerSszRetractingSpringLaunch:
                 move.b  (a2),d0
                 bne.s   loc_4656E
                 lsr.w   #1,d6
@@ -173,7 +173,7 @@ loc_465C6:
 
 locret_465D4:
                 rts
-; End of function sub_46536
+; End of function AdvancePlayerSszRetractingSpringLaunch
 
 ; =============== S U B R O U T I N E =======================================
 

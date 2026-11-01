@@ -49,7 +49,7 @@ loc_6A51E:
                 move.b  routine(a0),d0
                 move.w  off_6A536(pc,d0.w),d1
                 jsr     off_6A536(pc,d1.w)
-                bsr.w   sub_6A960
+                bsr.w   SwitchHCZVortexToParentDefeatState
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 off_6A536:
@@ -111,7 +111,7 @@ loc_6A5BC:
 ; ---------------------------------------------------------------------------
 
 loc_6A5D8:
-                bsr.w   sub_6A9B8
+                bsr.w   CapturePlayersInHCZMinibossVortex
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
                 beq.s   loc_6A5FA
@@ -183,7 +183,7 @@ off_6A6A8:
 
 loc_6A6B8:
                 movea.w parent3(a0),a3
-                bsr.w   sub_6A9AA
+                bsr.w   MoveHCZVortexParticleAroundParent
                 jsr     (Animate_Raw).l
                 jsr     (Obj_Wait).l
                 jmp     (Child_Draw_Sprite2).l
@@ -200,7 +200,7 @@ loc_6A6E4:
                 movea.w parent3(a0),a3
                 btst    #3,$38(a3)
                 bne.s   loc_6A6FA
-                bsr.w   sub_6A9AA
+                bsr.w   MoveHCZVortexParticleAroundParent
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
 
@@ -231,7 +231,7 @@ loc_6A710:
 
 loc_6A74E:
                 add.w   d0,x_pos(a0)
-                bsr.w   sub_6A940
+                bsr.w   SetHCZVortexLaunchVelocityFromOffset
                 lsl.w   #4,d0
                 move.w  d0,x_vel(a0)
                 andi.b  #1,d1
@@ -253,7 +253,7 @@ loc_6A74E:
 loc_6A79C:
                 tst.b   render_flags(a0)
                 bpl.s   loc_6A7BE
-                bsr.w   sub_6A916
+                bsr.w   AccelerateHCZVortexActorTowardCenterX
                 jsr     (MoveSprite2).l
                 jsr     (Animate_Raw).l
                 jsr     (Obj_Wait).l
@@ -299,7 +299,7 @@ loc_6A80C:
                 st      $3C(a0)
 
 loc_6A83E:
-                bsr.w   sub_6A940
+                bsr.w   SetHCZVortexLaunchVelocityFromOffset
                 move.w  #$200,y_vel(a0)
                 bset    #Status_InAir,status(a1)
                 move.b  #1,object_control(a1)
@@ -316,7 +316,7 @@ loc_6A86C:
 ; ---------------------------------------------------------------------------
 
 loc_6A872:
-                bsr.w   sub_6A916
+                bsr.w   AccelerateHCZVortexActorTowardCenterX
                 jsr     (MoveSprite2).l
                 movea.w $44(a0),a1
                 move.w  x_pos(a0),x_pos(a1)

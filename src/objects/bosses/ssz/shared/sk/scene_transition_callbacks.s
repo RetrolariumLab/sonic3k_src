@@ -9,7 +9,7 @@ loc_7D056:
 
 loc_7D062:
                 moveq   #2,d0
-                jsr     (sub_868F8).l
+                jsr     (CapsuleSKStartResultsWhenP1LandedAfterOpenWait).l
                 tst.b   routine(a0)
                 beq.s   locret_7D076
                 move.l  #loc_7D078,(a0)
@@ -40,7 +40,7 @@ loc_7D0A8:
                 moveq   #$40-1,d0
 
 loc_7D0BA:
-                jsr     (sub_85EB4).l
+                jsr     (EffectColorSKRaiseOneColorTowardWhite).l
                 dbf     d0,loc_7D0BA
                 subq.b  #1,$39(a0)
                 bmi.s   loc_7D0CC
@@ -65,7 +65,7 @@ loc_7D0E0:
                 moveq   #$40-1,d0
 
 loc_7D0F6:
-                jsr     (sub_85F2A).l
+                jsr     (EffectColorSKLowerOneColorTowardTarget).l
                 dbf     d0,loc_7D0F6
                 subq.b  #1,$39(a0)
                 bpl.s   locret_7D0CA

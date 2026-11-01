@@ -50,15 +50,15 @@ loc_494FC:
                 add.w   $44(a0),d1
                 move.w  d1,x_pos(a0)
                 lea     (Player_1).w,a1
-                bsr.w   sub_4952A
+                bsr.w   ApplyDezHoverMachineFieldToPlayer
                 lea     (Player_2).w,a1
-                bsr.w   sub_4952A
+                bsr.w   ApplyDezHoverMachineFieldToPlayer
                 move.w  $44(a0),d0
                 jmp     (Sprite_OnScreen_Test2).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4952A:
+ApplyDezHoverMachineFieldToPlayer:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$40,d0
@@ -111,7 +111,7 @@ loc_495B8:
 
 locret_495D6:
                 rts
-; End of function sub_4952A
+; End of function ApplyDezHoverMachineFieldToPlayer
 
 ; ---------------------------------------------------------------------------
 Map_DEZHoverMachine:

@@ -37,8 +37,8 @@ loc_233D6:
                 move.l  #Obj_EosianSphere,(a1)
 
 loc_233DC:
-                bsr.w   sub_23500
-                bsr.w   sub_23540
+                bsr.w   SphereTestS3InitializeFourRingPointSpriteAndCenter
+                bsr.w   SphereTestS3SkipQuarterTurnSamples
                 move.w  d2,d0
                 addi.w  #$10,d2
                 jsr     (GetSineCosine).l
@@ -57,8 +57,8 @@ loc_23412:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   loc_234E0
                 move.l  #Obj_EosianSphere,(a1)
-                bsr.w   sub_23500
-                bsr.w   sub_23540
+                bsr.w   SphereTestS3InitializeFourRingPointSpriteAndCenter
+                bsr.w   SphereTestS3SkipQuarterTurnSamples
                 move.w  d2,d0
                 addi.w  #$10,d2
                 jsr     (GetSineCosine).l
@@ -77,8 +77,8 @@ loc_23458:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   loc_234E0
                 move.l  #Obj_EosianSphere,(a1)
-                bsr.w   sub_23500
-                bsr.w   sub_23540
+                bsr.w   SphereTestS3InitializeFourRingPointSpriteAndCenter
+                bsr.w   SphereTestS3SkipQuarterTurnSamples
                 move.w  d2,d0
                 addi.w  #$10,d2
                 jsr     (GetSineCosine).l
@@ -97,8 +97,8 @@ loc_2349E:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   loc_234E0
                 move.l  #Obj_EosianSphere,(a1)
-                bsr.w   sub_23500
-                bsr.w   sub_23540
+                bsr.w   SphereTestS3InitializeFourRingPointSpriteAndCenter
+                bsr.w   SphereTestS3SkipQuarterTurnSamples
                 move.w  d2,d0
                 addi.w  #$10,d2
                 jsr     (GetSineCosine).l
@@ -125,7 +125,7 @@ loc_234EE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_23500:
+SphereTestS3InitializeFourRingPointSpriteAndCenter:
                 move.b  #4,render_flags(a1)
                 move.b  #$10,width_pixels(a1)
                 move.b  #$10,height_pixels(a1)
@@ -137,11 +137,11 @@ sub_23500:
                 move.w  y_pos(a0),y_pos(a1)
                 move.w  y_pos(a0),$32(a1)
                 rts
-; End of function sub_23500
+; End of function SphereTestS3InitializeFourRingPointSpriteAndCenter
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_23540:
+SphereTestS3SkipQuarterTurnSamples:
                 cmpi.w  #$40,d2
                 bne.s   loc_2354A
                 addi.w  #$10,d2
@@ -153,7 +153,7 @@ loc_2354A:
 
 locret_23554:
                 rts
-; End of function sub_23540
+; End of function SphereTestS3SkipQuarterTurnSamples
 
 ; ---------------------------------------------------------------------------
 
@@ -180,7 +180,7 @@ loc_23594:
                 move.l  #Obj_EosianSphere,(a1)
 
 loc_2359A:
-                bsr.w   sub_2366C
+                bsr.w   SphereTestS3InitializeThreeRingPointSpriteAndCenter
                 move.w  d2,d0
                 addi.w  #$10,d2
                 jsr     (GetSineCosine).l
@@ -199,7 +199,7 @@ loc_235CC:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   loc_2364C
                 move.l  #Obj_EosianSphere,(a1)
-                bsr.w   sub_2366C
+                bsr.w   SphereTestS3InitializeThreeRingPointSpriteAndCenter
                 move.w  d2,d0
                 addi.w  #$10,d2
                 jsr     (GetSineCosine).l
@@ -218,7 +218,7 @@ loc_2360E:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   loc_2364C
                 move.l  #Obj_EosianSphere,(a1)
-                bsr.w   sub_2366C
+                bsr.w   SphereTestS3InitializeThreeRingPointSpriteAndCenter
                 move.w  d2,d0
                 addi.w  #$10,d2
                 jsr     (GetSineCosine).l
@@ -245,7 +245,7 @@ loc_2365A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2366C:
+SphereTestS3InitializeThreeRingPointSpriteAndCenter:
                 move.b  #4,render_flags(a1)
                 move.b  #$10,width_pixels(a1)
                 move.b  #$10,height_pixels(a1)
@@ -257,7 +257,7 @@ sub_2366C:
                 move.w  y_pos(a0),y_pos(a1)
                 move.w  y_pos(a0),$32(a1)
                 rts
-; End of function sub_2366C
+; End of function SphereTestS3InitializeThreeRingPointSpriteAndCenter
 
 ; ---------------------------------------------------------------------------
 Pal_SphereTest:
@@ -374,14 +374,14 @@ loc_237C4:
                 move.w  $34(a0),d1
                 move.w  $36(a0),d2
                 move.w  $38(a0),d0
-                bsr.w   sub_2398E
-                bsr.w   sub_23964
+                bsr.w   SphereTestS3RotateYZUsingScalarPair0
+                bsr.w   SphereTestS3RotateXZUsingScalarPair1
                 add.w   (_unkE416).w,d0
                 cmpi.w  #$80,d0
                 blt.s   locret_2382A
-                bsr.w   sub_2393A
+                bsr.w   SphereTestS3RotateXYUsingScalarPair2
                 add.w   (_unkE414).w,d2
-                bsr.w   sub_2392C
+                bsr.w   SphereTestS3PerspectiveDivideXYByDepth
                 add.w   $30(a0),d1
                 move.w  d1,x_pos(a0)
                 add.w   $32(a0),d2
@@ -423,7 +423,7 @@ word_2382C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2392C:
+SphereTestS3PerspectiveDivideXYByDepth:
                 ext.l   d1
                 lsl.l   #8,d1
                 divs.w  d0,d1
@@ -431,11 +431,11 @@ sub_2392C:
                 lsl.l   #8,d2
                 divs.w  d0,d2
                 rts
-; End of function sub_2392C
+; End of function SphereTestS3PerspectiveDivideXYByDepth
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2393A:
+SphereTestS3RotateXYUsingScalarPair2:
                 swap    d0
                 move.w  d1,d3
                 move.w  d2,d4
@@ -455,11 +455,11 @@ sub_2393A:
                 swap    d2
                 swap    d0
                 rts
-; End of function sub_2393A
+; End of function SphereTestS3RotateXYUsingScalarPair2
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_23964:
+SphereTestS3RotateXZUsingScalarPair1:
                 swap    d2
                 move.w  d0,d3
                 move.w  d1,d4
@@ -479,11 +479,11 @@ sub_23964:
                 swap    d1
                 swap    d2
                 rts
-; End of function sub_23964
+; End of function SphereTestS3RotateXZUsingScalarPair1
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2398E:
+SphereTestS3RotateYZUsingScalarPair0:
                 swap    d1
                 move.w  d0,d3
                 move.w  d2,d4
@@ -503,7 +503,7 @@ sub_2398E:
                 swap    d2
                 swap    d1
                 rts
-; End of function sub_2398E
+; End of function SphereTestS3RotateYZUsingScalarPair0
 
 ; =============== S U B R O U T I N E =======================================
 

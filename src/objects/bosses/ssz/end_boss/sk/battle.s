@@ -8,9 +8,9 @@ Obj_SSZEndBoss:
                 move.b  routine(a0),d0
                 move.w  SSZEndBoss_Index(pc,d0.w),d1
                 jsr     SSZEndBoss_Index(pc,d1.w)
-                lea     sub_7D35A(pc),a4
-                bsr.w   sub_7D312
-                bsr.w   sub_7D2D8
+                lea     BeginSSZMechaScoredDefeatIntoPostBattleScene(pc),a4
+                bsr.w   HandleSSZMechaHitFlashOrTailDeathCallback
+                bsr.w   SelectSSZMechaCollisionFromFrameOutsideHitRecovery
                 lea     DPLCPtr_MechaSonic(pc),a2
                 jsr     (Perform_DPLC).l
                 jmp     (Draw_And_Touch_Sprite).l
@@ -520,7 +520,7 @@ loc_7B888:
                 lea     byte_7D5E4(pc),a1
                 jsr     (Set_Raw_Animation).l
                 lea     (word_7D842).l,a1
-                bsr.w   sub_7C678
+                bsr.w   InstallSingleGlobalPaletteRotationScript
                 lea     ChildObjDat_7D48C(pc),a2
                 jsr     (CreateChild6_Simple).l
                 moveq   #signextendB(sfx_MechaLand),d0
@@ -751,7 +751,7 @@ loc_7BB7C:
                 moveq   #signextendB(sfx_MechaLand),d0
                 jsr     (Play_SFX).l
                 lea     (word_7D9EA).l,a1
-                bsr.w   sub_7C678
+                bsr.w   InstallSingleGlobalPaletteRotationScript
                 lea     ChildObjDat_7D48C(pc),a2
                 jsr     (CreateChild6_Simple).l
                 bne.s   locret_7BBAA
@@ -792,7 +792,7 @@ loc_7BBE0:
                 clr.w   (H_scroll_frame_offset).w
                 clr.w   (Ctrl_1_logical).w
                 clr.b   (Ctrl_1_locked).w
-                bsr.w   sub_7D150
+                bsr.w   StopPlayerOneAllThreeVelocitiesForSSZScene
                 move.l  #Obj_SSZ2_Boss,(a0)
                 move.b  #8,collision_property(a0)
                 move.b  #$23,collision_flags(a0)
@@ -840,7 +840,7 @@ locret_7BCAE:
 ; ---------------------------------------------------------------------------
 
 loc_7BCB0:
-                bsr.w   sub_7BD30
+                bsr.w   TickSSZPostBossExplosionSoundBurst
                 movea.w $44(a0),a1
                 btst    #7,status(a1)
                 beq.w   locret_7B448
@@ -859,7 +859,7 @@ loc_7BCB0:
 ; ---------------------------------------------------------------------------
 
 loc_7BCFC:
-                bsr.w   sub_7BD30
+                bsr.w   TickSSZPostBossExplosionSoundBurst
                 subq.w  #1,$2E(a0)
                 bpl.w   locret_7B448
                 move.w  #3,(Player_mode).w
@@ -877,7 +877,7 @@ loc_7BD2A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7BD30:
+TickSSZPostBossExplosionSoundBurst:
                 subq.w  #1,$3A(a0)
                 bpl.s   locret_7BD4A
                 move.w  #$1F,$3A(a0)
@@ -888,4 +888,4 @@ sub_7BD30:
 
 locret_7BD4A:
                 rts
-; End of function sub_7BD30
+; End of function TickSSZPostBossExplosionSoundBurst

@@ -30,7 +30,7 @@ loc_15CF8:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_15D1E:
+TailsSKStepCompetitionAnimationFrameBytecode:
                 moveq   #0,d1
                 move.b  anim_frame(a0),d1
                 move.b  1(a1,d1.w),d0
@@ -70,7 +70,7 @@ loc_15D5C:
 
 locret_15D66:
                 rts
-; End of function sub_15D1E
+; End of function TailsSKStepCompetitionAnimationFrameBytecode
 
 ; ---------------------------------------------------------------------------
 
@@ -216,7 +216,7 @@ loc_15EB2:
                 andi.b  #1,d1
                 andi.b  #$FC,render_flags(a0)
                 or.b    d1,render_flags(a0)
-                bra.w   sub_15D1E
+                bra.w   TailsSKStepCompetitionAnimationFrameBytecode
 ; ---------------------------------------------------------------------------
 
 loc_15ECE:
@@ -239,7 +239,7 @@ loc_15EE6:
                 andi.b  #1,d1
                 andi.b  #$FC,render_flags(a0)
                 or.b    d1,render_flags(a0)
-                bra.w   sub_15D1E
+                bra.w   TailsSKStepCompetitionAnimationFrameBytecode
 ; ---------------------------------------------------------------------------
 
 loc_15F08:
@@ -273,7 +273,7 @@ loc_15F32:
                 add.b   d0,d3
                 lea     (AniTails2P_Tail03).l,a1
                 move.b  #3,anim_frame_timer(a0)
-                bsr.w   sub_15D1E
+                bsr.w   TailsSKStepCompetitionAnimationFrameBytecode
                 add.b   d3,mapping_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------

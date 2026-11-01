@@ -29,17 +29,17 @@ loc_4539E:
                 moveq   #$11,d1
 
 loc_453CE:
-                bsr.s   sub_453E6
+                bsr.s   UpdatePlayerHangingFromSszElevatorBar
                 lea     (Player_2).w,a1
                 lea     $39(a0),a2
                 move.w  (Ctrl_2_logical).w,d0
                 moveq   #$11,d1
-                bsr.s   sub_453E6
+                bsr.s   UpdatePlayerHangingFromSszElevatorBar
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_453E6:
+UpdatePlayerHangingFromSszElevatorBar:
                 tst.b   (a2)
                 bne.w   loc_4548A
                 tst.b   2(a2)
@@ -135,4 +135,4 @@ loc_454EA:
 
 locret_45526:
                 rts
-; End of function sub_453E6
+; End of function UpdatePlayerHangingFromSszElevatorBar

@@ -94,7 +94,7 @@ loc_8A344:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8A35A:
+AcceptIczPlatformHorizontalVelocityInRange:
                 cmpi.w  #-$C00,d0
                 blt.s   locret_8A36A
                 cmpi.w  #$C00,d0
@@ -103,11 +103,11 @@ sub_8A35A:
 
 locret_8A36A:
                 rts
-; End of function sub_8A35A
+; End of function AcceptIczPlatformHorizontalVelocityInRange
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8A36C:
+ApplyIczPlatformGravityWithinVelocityRange:
                 move.w  y_vel(a0),d0
                 addi.w  #$38,d0
                 cmpi.w  #-$C00,d0
@@ -118,11 +118,11 @@ sub_8A36C:
 
 locret_8A384:
                 rts
-; End of function sub_8A36C
+; End of function ApplyIczPlatformGravityWithinVelocityRange
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8A386:
+SetIczPlatformDepartureYVelocityFromAngle:
                 move.b  angle(a0),d3
                 lsr.b   #3,d3
                 andi.w  #$E,d3
@@ -133,7 +133,7 @@ sub_8A386:
 loc_8A398:
                 move.w  off_8A3A0(pc,d3.w),d0
                 jmp     off_8A3A0(pc,d0.w)
-; End of function sub_8A386
+; End of function SetIczPlatformDepartureYVelocityFromAngle
 
 ; ---------------------------------------------------------------------------
 off_8A3A0:
@@ -164,7 +164,7 @@ loc_8A3BE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8A3C4:
+SetFastVerticalCameraForIczPlatformRider:
                 clr.b   (Fast_V_scroll_flag).w
                 tst.w   x_vel(a0)
                 bne.s   loc_8A3D4
@@ -178,7 +178,7 @@ loc_8A3D4:
 
 locret_8A3E0:
                 rts
-; End of function sub_8A3C4
+; End of function SetFastVerticalCameraForIczPlatformRider
 
 ; ---------------------------------------------------------------------------
 ObjDat_ICZPathFollowPlatform:

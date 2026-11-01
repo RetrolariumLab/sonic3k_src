@@ -39,7 +39,7 @@ loc_48D3C:
                 move.b  routine(a0),d0
                 move.w  off_48D54(pc,d0.w),d1
                 jsr     off_48D54(pc,d1.w)
-                bsr.w   sub_49A06
+                bsr.w   HandleHCZEndBossThreeColorHitFlashOrDefeat
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 off_48D54:
@@ -303,7 +303,7 @@ loc_49078:
                 move.w  #$C,d3
                 move.w  (sp)+,d4
                 jsr     (SolidObjectTop).l
-                bsr.w   sub_49A84
+                bsr.w   StartHCZBossColumnDescentAfterRootDeath
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 off_490A8:
@@ -349,7 +349,7 @@ loc_49102:
 loc_49128:
                 jsr     (MoveSprite2).l
                 jsr     (Animate_Raw).l
-                bra.w   sub_49ACC
+                bra.w   UpdateHCZBossColumnHeightAndCheckCallback
 ; ---------------------------------------------------------------------------
 
 loc_49138:
@@ -379,7 +379,7 @@ locret_4917E:
                 rts
 ; ---------------------------------------------------------------------------
 ; unused
-                bra.w   sub_49ACC
+                bra.w   UpdateHCZBossColumnHeightAndCheckCallback
 ; ---------------------------------------------------------------------------
 
 loc_49184:
@@ -409,5 +409,5 @@ loc_491C6:
 loc_491D2:
                 jsr     (MoveSprite2).l
                 jsr     (Animate_Raw).l
-                bsr.w   sub_49ACC
+                bsr.w   UpdateHCZBossColumnHeightAndCheckCallback
                 jmp     (Draw_Sprite).l

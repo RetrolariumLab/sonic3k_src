@@ -26,16 +26,16 @@ loc_39F58:
                 lea     (Player_1).w,a1
                 lea     (_unkF7B0+0).w,a2
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_39F7E
+                bsr.s   UpdatePlayerOnFbzHorizontalWireCage
                 lea     (Player_2).w,a1
                 lea     (_unkF7B0+1).w,a2
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
-                bsr.s   sub_39F7E
+                bsr.s   UpdatePlayerOnFbzHorizontalWireCage
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_39F7E:
+UpdatePlayerOnFbzHorizontalWireCage:
                 btst    d6,status(a0)
                 bne.w   loc_3A01A
                 move.w  x_pos(a1),d0
@@ -145,7 +145,7 @@ loc_3A06E:
 
 locret_3A0AE:
                 rts
-; End of function sub_39F7E
+; End of function UpdatePlayerOnFbzHorizontalWireCage
 
 ; ---------------------------------------------------------------------------
 
@@ -156,18 +156,18 @@ loc_3A0B0:
                 lea     (Player_1).w,a1
                 lea     (_unkF7B0+0).w,a2
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_3A0D6
+                bsr.s   UpdatePlayerOnFbzVerticalWireCage
                 lea     (Player_2).w,a1
                 lea     (_unkF7B0+1).w,a2
 ; Bug: if player 1 was riding the object, then d6 may have become dirty from
 ; a call to Perform_Player_DPLC, causing player 2 to behave erratically
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
-                bsr.s   sub_3A0D6
+                bsr.s   UpdatePlayerOnFbzVerticalWireCage
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3A0D6:
+UpdatePlayerOnFbzVerticalWireCage:
                 btst    d6,status(a0)
                 bne.w   loc_3A18E
                 move.w  x_pos(a1),d0
@@ -192,7 +192,7 @@ sub_3A0D6:
                 blo.s   locret_3A18C
 
 loc_3A126:
-                bsr.w   sub_33C34
+                bsr.w   AttachPlayerToScriptedRideObject
                 move.b  #-$40,angle(a1)
                 bclr    #0,render_flags(a1)
                 bclr    #Status_Facing,status(a1)
@@ -268,7 +268,7 @@ loc_3A1E0:
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 jmp     (Perform_Player_DPLC).l
-; End of function sub_3A0D6
+; End of function UpdatePlayerOnFbzVerticalWireCage
 
 ; ---------------------------------------------------------------------------
 RawAni_3A220:
@@ -290,18 +290,18 @@ loc_3A252:
                 lea     (Player_1).w,a1
                 lea     $30(a0),a2
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_3A270
+                bsr.s   UpdatePlayerInFbzStationaryWireCage
                 lea     (Player_2).w,a1
                 lea     $38(a0),a2
 ; Bug: if player 1 was riding the object, then d6 may have become dirty from
 ; a call to Perform_Player_DPLC, causing player 2 to behave erratically
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
-                bsr.s   sub_3A270
+                bsr.s   UpdatePlayerInFbzStationaryWireCage
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3A270:
+UpdatePlayerInFbzStationaryWireCage:
                 btst    d6,status(a0)
                 bne.w   loc_3A314
                 btst    #Status_InAir,status(a1)
@@ -543,7 +543,7 @@ loc_3A52E:
                 move.b  d0,anim(a1)
                 move.b  mapping_frame(a1),d0
                 jmp     (Perform_Player_DPLC).l
-; End of function sub_3A270
+; End of function UpdatePlayerInFbzStationaryWireCage
 
 ; ---------------------------------------------------------------------------
 RawAni_3A548:

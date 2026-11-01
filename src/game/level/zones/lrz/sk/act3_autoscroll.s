@@ -335,7 +335,7 @@ loc_79346:
 loc_7935E:
                 addi.w  #-$40,y_vel(a0)
                 jsr     (MoveSprite2).l
-                bsr.w   sub_794F8
+                bsr.w   EmitLrz3RisingActorExhaust
                 jmp     (Sprite_CheckDeleteXY).l
 ; ---------------------------------------------------------------------------
 
@@ -445,12 +445,12 @@ loc_794DE:
                 lea     ObjDat3_7960E(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #Obj_FlickerMove,(a0)
-                bsr.w   sub_79516
+                bsr.w   InitializeLrz3PlatformDebrisPiece
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_794F8:
+EmitLrz3RisingActorExhaust:
                 tst.w   y_vel(a0)
                 bpl.w   locret_78FAC
                 move.b  (V_int_run_count+3).w,d0
@@ -458,11 +458,11 @@ sub_794F8:
                 bne.w   locret_78FAC
                 lea     ChildObjDat_7967E(pc),a2
                 jmp     (CreateChild1_Normal).l
-; End of function sub_794F8
+; End of function EmitLrz3RisingActorExhaust
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_79516:
+InitializeLrz3PlatformDebrisPiece:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,d1
@@ -483,7 +483,7 @@ sub_79516:
                 add.w   d1,d1
                 move.l  word_7958A(pc,d1.w),x_vel(a0)   ; and y_vel
                 rts
-; End of function sub_79516
+; End of function InitializeLrz3PlatformDebrisPiece
 
 ; ---------------------------------------------------------------------------
 byte_79554:

@@ -195,7 +195,7 @@ loc_85D48:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_85D6A:
+BeginBossCameraTransitionSaveBoundsAndFadeMusic:
                 move.b  #1,(Boss_flag).w
 
 loc_85D70:
@@ -213,4 +213,4 @@ loc_85D7E:
                 move.w  (a1)+,(_unkFAB4).w
                 move.w  (a1)+,(_unkFAB6).w
                 rts
-; End of function sub_85D6A
+; End of function BeginBossCameraTransitionSaveBoundsAndFadeMusic

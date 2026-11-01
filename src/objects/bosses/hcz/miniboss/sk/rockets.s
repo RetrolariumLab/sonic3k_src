@@ -54,7 +54,7 @@ word_6A344:
 ; ---------------------------------------------------------------------------
 
 loc_6A34C:
-                bsr.w   sub_6AB1A
+                bsr.w   UpdateHCZMinibossRocketTwistPose
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
@@ -75,7 +75,7 @@ loc_6A372:
 ; ---------------------------------------------------------------------------
 
 loc_6A37A:
-                bsr.w   sub_6AB1A
+                bsr.w   UpdateHCZMinibossRocketTwistPose
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
@@ -118,7 +118,7 @@ loc_6A3EE:
 ; ---------------------------------------------------------------------------
 
 loc_6A404:
-                bsr.w   sub_6AB1A
+                bsr.w   UpdateHCZMinibossRocketTwistPose
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
                 bne.w   locret_69F78
@@ -129,7 +129,7 @@ loc_6A416:
 ; ---------------------------------------------------------------------------
 
 loc_6A41E:
-                bsr.w   sub_6AB1A
+                bsr.w   UpdateHCZMinibossRocketTwistPose
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lsr.b   #1,d0
@@ -161,7 +161,7 @@ loc_6A460:
 ; ---------------------------------------------------------------------------
 
 loc_6A478:
-                bsr.w   sub_6ABA8
+                bsr.w   FollowHCZMinibossRocketTipPose
 
 loc_6A47C:
                 movea.w parent3(a0),a1

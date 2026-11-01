@@ -125,7 +125,7 @@ loc_2B2DA:
                 add.w   d0,$38(a0)
 
 loc_2B2E2:
-                bsr.w   sub_2B386
+                bsr.w   PositionAizDrawbridgePieces
                 bra.s   loc_2B304
 ; ---------------------------------------------------------------------------
 
@@ -192,7 +192,7 @@ loc_2B380:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2B386:
+PositionAizDrawbridgePieces:
                 tst.b   $36(a0)
                 beq.w   locret_2B428
                 moveq   #0,d0
@@ -254,7 +254,7 @@ loc_2B3FE:
 
 locret_2B428:
                 rts
-; End of function sub_2B386
+; End of function PositionAizDrawbridgePieces
 
 ; ---------------------------------------------------------------------------
 

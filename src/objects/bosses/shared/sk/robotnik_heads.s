@@ -29,7 +29,7 @@ Obj_RobotnikHeadInit:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_67B14:
+UseEggRoboHeadMappingsAnimationAndQueueArt:
                 move.l  #Map_EggRoboHead,mappings(a0)   ; If player is Knuckles, use EggRobo head
 
 loc_67B1C:
@@ -37,7 +37,7 @@ loc_67B1C:
                 lea     (ArtKosM_EggRoboHead).l,a1
                 move.w  #tiles_to_bytes(ArtTile_RobotnikShip),d2
                 jmp     (Queue_Kos_Module).l
-; End of function sub_67B14
+; End of function UseEggRoboHeadMappingsAnimationAndQueueArt
 
 ; ---------------------------------------------------------------------------
 
@@ -104,7 +104,7 @@ Obj_FBZRobotnikHeadInit:
                 move.w  parent3(a1),$44(a0)
                 cmpi.b  #2,(Player_1+character_id).w
                 bne.w   Obj_RobotnikHeadEnd
-                bra.w   sub_67B14
+                bra.w   UseEggRoboHeadMappingsAnimationAndQueueArt
 ; ---------------------------------------------------------------------------
 
 Obj_FBZRobotnikHeadMain:
@@ -159,7 +159,7 @@ Obj_RobotnikHead3Init:
                 move.l  #AniRaw_RobotnikHead,$30(a0)
                 cmpi.b  #2,(Player_1+character_id).w
                 bne.s   loc_67C76
-                bsr.w   sub_67B14
+                bsr.w   UseEggRoboHeadMappingsAnimationAndQueueArt
 
 loc_67C76:
                 movea.w parent3(a0),a1

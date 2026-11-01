@@ -10,7 +10,7 @@ Obj_LRZMiniboss:
                 move.l  #loc_78528,$34(a0)
                 lea     word_784E8(pc),a1
                 move.b  #mus_Miniboss,boss_saved_mus(a0)
-                jsr     (sub_85D6A).l
+                jsr     (BeginBossCameraTransitionSaveBoundsAndFadeMusic).l
                 lea     Pal_LRZMiniboss1(pc),a1
                 jmp     (PalLoad_Line1).l
 ; ---------------------------------------------------------------------------
@@ -22,7 +22,7 @@ loc_78522:
 loc_78528:
                 move.l  #loc_78538,(a0)
                 lea     Pal_LRZMiniboss2(pc),a1
-                bsr.w   sub_78B38
+                bsr.w   CopyLRZMinibossPaletteLinesThreeAndFour
 
 locret_78536:
                 rts
@@ -109,7 +109,7 @@ loc_78606:
 
 loc_78628:
                 jsr     (Animate_RawMultiDelay).l
-                bsr.w   sub_7867C
+                bsr.w   RetargetLRZMinibossHorizontalSpeedEverySixteenTicks
                 jsr     (MoveSprite2).l
                 move.w  (_unkFAB0).w,d0
                 cmp.w   y_pos(a0),d0
@@ -124,13 +124,13 @@ loc_78628:
 
 loc_78666:
                 jsr     (Swing_UpAndDown).l
-                bsr.w   sub_7867C
+                bsr.w   RetargetLRZMinibossHorizontalSpeedEverySixteenTicks
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7867C:
+RetargetLRZMinibossHorizontalSpeedEverySixteenTicks:
                 move.b  (V_int_run_count+3).w,d0
                 andi.w  #$F,d0
                 bne.s   locret_786A0
@@ -143,7 +143,7 @@ sub_7867C:
 
 locret_786A0:
                 rts
-; End of function sub_7867C
+; End of function RetargetLRZMinibossHorizontalSpeedEverySixteenTicks
 
 ; ---------------------------------------------------------------------------
 word_786A2:
@@ -189,7 +189,7 @@ loc_7871A:
                 moveq   #0,d3
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull).l
-                bsr.w   sub_78C14
+                bsr.w   HandleLRZMinibossRootHitOrDefeatWithMisoffsetFlash
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
@@ -209,13 +209,13 @@ loc_78768:
                 jsr     (Animate_RawMultiDelay).l
                 cmpi.b  #6,anim_frame(a0)
                 bhs.s   loc_78784
-                bsr.w   sub_78C14
+                bsr.w   HandleLRZMinibossRootHitOrDefeatWithMisoffsetFlash
                 jsr     (Add_SpriteToCollisionResponseList).l
                 bra.w   loc_7878C
 ; ---------------------------------------------------------------------------
 
 loc_78784:
-                bsr.w   sub_78CCA
+                bsr.w   ContinueLRZMinibossRootFlashWhileRetracting
                 clr.b   collision_flags(a0)
 
 loc_7878C:
@@ -293,7 +293,7 @@ loc_78838:
                 move.b  routine(a0),d0
                 move.w  off_78850(pc,d0.w),d1
                 jsr     off_78850(pc,d1.w)
-                bsr.w   sub_78B46
+                bsr.w   ScheduleLRZMinibossArmSegmentDestructionBySide
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 off_78850:
@@ -307,7 +307,7 @@ off_78850:
 loc_7885A:
                 lea     word_78D66(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                bsr.w   sub_78BEE
+                bsr.w   PlaceLRZMinibossArmBaseAtCameraSide
 
 loc_78868:
                 movea.w $44(a0),a1
@@ -355,7 +355,7 @@ loc_788CC:
 loc_788DE:
                 lea     word_78D66(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                bsr.w   sub_78BD6
+                bsr.w   SuspendLRZArmInitializationUntilCapturedContinuation
                 move.l  #loc_788F4,(a0)
                 rts
 ; ---------------------------------------------------------------------------
@@ -375,14 +375,14 @@ loc_7890C:
                 move.b  d0,$3C(a0)
                 moveq   #4,d2
                 jsr     (MoveSprite_CircularSimple).l
-                bsr.w   sub_78B46
+                bsr.w   ScheduleLRZMinibossArmSegmentDestructionBySide
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
 loc_78922:
                 lea     word_78D6C(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                bsr.w   sub_78BD6
+                bsr.w   SuspendLRZArmInitializationUntilCapturedContinuation
                 move.l  #loc_78946,(a0)
                 move.l  #byte_78E05,$30(a0)
                 move.b  #4,collision_property(a0)
@@ -405,7 +405,7 @@ loc_78966:
                 clr.b   $39(a0)
 
 loc_78976:
-                bra.w   sub_78B46
+                bra.w   ScheduleLRZMinibossArmSegmentDestructionBySide
 ; ---------------------------------------------------------------------------
 
 loc_7897A:
@@ -419,8 +419,8 @@ loc_7898C:
                 lea     (AngleLookup_2).l,a2
                 jsr     (MoveSprite_AtAngleLookup).l
                 jsr     (Obj_Wait).l
-                bsr.w   sub_78B46
-                bsr.w   sub_78CF4
+                bsr.w   ScheduleLRZMinibossArmSegmentDestructionBySide
+                bsr.w   HandleLRZMinibossTerminalArmHitAndSideDefeat
                 move.b  $20(a0),d0
                 beq.s   loc_789BE
                 btst    #0,d0
@@ -461,7 +461,7 @@ loc_78A02:
                 jsr     (SetUp_ObjAttributes3).l
                 move.l  #loc_78A1C,(a0)
                 bset    #3,$2B(a0)
-                bsr.w   sub_78BAA
+                bsr.w   SeedLRZMinibossArmProjectileVelocity
 
 loc_78A1C:
                 jsr     (MoveSprite2).l
@@ -549,5 +549,5 @@ loc_78B24:
                 move.l  (a1)+,(a2)+
                 dbf     d6,loc_78B24
                 lea     Pal_LRZMiniboss3(pc),a1
-                bsr.w   sub_78B38
+                bsr.w   CopyLRZMinibossPaletteLinesThreeAndFour
                 jmp     (Delete_Current_Sprite).l

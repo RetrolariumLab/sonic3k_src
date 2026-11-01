@@ -35,7 +35,7 @@ loc_59DE0:
 
 loc_59DFE:
                 move.w  d1,x_vel(a0)
-                bsr.w   sub_59E50
+                bsr.w   TestPrimaryPlayerGroundMotionForOrbinaut
                 beq.w   locret_59E6C
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
@@ -52,7 +52,7 @@ loc_59E10:
 
 loc_59E2C:
                 movea.w parent3(a0),a1
-                bsr.w   sub_59E50
+                bsr.w   TestPrimaryPlayerGroundMotionForOrbinaut
                 beq.s   loc_59E46
                 moveq   #8,d0
                 btst    #0,render_flags(a1)
@@ -69,7 +69,7 @@ loc_59E46:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59E50:
+TestPrimaryPlayerGroundMotionForOrbinaut:
                 lea     (Player_1).w,a2
                 btst    #Status_InAir,status(a2)
                 bne.s   loc_59E68
@@ -85,7 +85,7 @@ loc_59E68:
 
 locret_59E6C:
                 rts
-; End of function sub_59E50
+; End of function TestPrimaryPlayerGroundMotionForOrbinaut
 
 ; ---------------------------------------------------------------------------
 ObjDat_Orbinaut:

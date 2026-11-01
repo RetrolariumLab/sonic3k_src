@@ -14,7 +14,7 @@ Obj_Spring_Up:
                 bsr.w   SolidObjectFull2_1P
                 btst    #p1_standing_bit,status(a0)
                 beq.s   loc_22F1C
-                bsr.s   sub_22F98
+                bsr.s   LaunchPlayerFromUpSpring
 
 loc_22F1C:
                 movem.l (sp)+,d1-d4
@@ -23,7 +23,7 @@ loc_22F1C:
                 bsr.w   SolidObjectFull2_1P
                 btst    #p2_standing_bit,status(a0)
                 beq.s   loc_22F34
-                bsr.s   sub_22F98
+                bsr.s   LaunchPlayerFromUpSpring
 
 loc_22F34:
                 lea     (Ani_Spring).l,a1
@@ -42,7 +42,7 @@ Obj_2PSpring_Up:
                 bsr.w   SolidObjectFull2_1P
                 btst    #p1_standing_bit,status(a0)
                 beq.s   loc_22F6E
-                bsr.s   sub_22F98
+                bsr.s   LaunchPlayerFromUpSpring
 
 loc_22F6E:
                 movem.l (sp)+,d1-d4
@@ -51,7 +51,7 @@ loc_22F6E:
                 bsr.w   SolidObjectFull2_1P
                 btst    #p2_standing_bit,status(a0)
                 beq.s   loc_22F86
-                bsr.s   sub_22F98
+                bsr.s   LaunchPlayerFromUpSpring
 
 loc_22F86:
                 lea     (Ani_Spring).l,a1
@@ -60,7 +60,7 @@ loc_22F86:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_22F98:
+LaunchPlayerFromUpSpring:
                 move.w  #1<<8,anim(a0)                  ; and prev_anim
                 addq.w  #8,y_pos(a1)
                 tst.b   (Reverse_gravity_flag).w
@@ -113,7 +113,7 @@ loc_23036:
 loc_23048:
                 moveq   #signextendB(sfx_Spring),d0
                 jmp     (Play_SFX).l
-; End of function sub_22F98
+; End of function LaunchPlayerFromUpSpring
 
 ; ---------------------------------------------------------------------------
 
@@ -138,7 +138,7 @@ Obj_Spring_Horizontal:
 loc_23088:
                 andi.b  #1,d1
                 bne.s   loc_23092
-                bsr.w   sub_23190
+                bsr.w   LaunchPlayerFromHorizontalSpring
 
 loc_23092:
                 movem.l (sp)+,d1-d4
@@ -157,10 +157,10 @@ loc_23092:
 loc_230BA:
                 andi.b  #1,d1
                 bne.s   loc_230C4
-                bsr.w   sub_23190
+                bsr.w   LaunchPlayerFromHorizontalSpring
 
 loc_230C4:
-                bsr.w   sub_2326C
+                bsr.w   BoostGroundedPlayersNearHorizontalSpring
                 lea     (Ani_Spring).l,a1
                 jsr     (Animate_Sprite).l
                 move.w  $32(a0),d0
@@ -188,7 +188,7 @@ Obj_2PSpring_Horizontal:
 loc_23116:
                 andi.b  #1,d1
                 bne.s   loc_2311E
-                bsr.s   sub_23160
+                bsr.s   LaunchPlayerFromSmallHorizontalSpring
 
 loc_2311E:
                 movem.l (sp)+,d1-d4
@@ -207,7 +207,7 @@ loc_2311E:
 loc_23146:
                 andi.b  #1,d1
                 bne.s   loc_2314E
-                bsr.s   sub_23160
+                bsr.s   LaunchPlayerFromSmallHorizontalSpring
 
 loc_2314E:
                 lea     (Ani_Spring).l,a1
@@ -216,7 +216,7 @@ loc_2314E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_23160:
+LaunchPlayerFromSmallHorizontalSpring:
                 move.w  #3<<8,anim(a0)                  ; and prev_anim
                 move.w  $30(a0),x_vel(a1)
                 addq.w  #4,x_pos(a1)
@@ -229,11 +229,11 @@ sub_23160:
 
 loc_2318E:
                 bra.s   loc_231BE
-; End of function sub_23160
+; End of function LaunchPlayerFromSmallHorizontalSpring
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_23190:
+LaunchPlayerFromHorizontalSpring:
                 move.w  #3<<8,anim(a0)                  ; and prev_anim
                 move.w  $30(a0),x_vel(a1)
                 addq.w  #8,x_pos(a1)
@@ -294,11 +294,11 @@ loc_2324C:
                 move.b  #0,double_jump_flag(a1)
                 moveq   #signextendB(sfx_Spring),d0
                 jmp     (Play_SFX).l
-; End of function sub_23190
+; End of function LaunchPlayerFromHorizontalSpring
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2326C:
+BoostGroundedPlayersNearHorizontalSpring:
                 cmpi.b  #3,anim(a0)
                 beq.w   locret_23324
                 move.w  x_pos(a0),d0
@@ -336,7 +336,7 @@ loc_232B6:
                 cmp.w   d3,d4
                 bhs.w   loc_232E2
                 move.w  d0,-(sp)
-                bsr.w   sub_23190
+                bsr.w   LaunchPlayerFromHorizontalSpring
                 move.w  (sp)+,d0
 
 loc_232E2:
@@ -361,11 +361,11 @@ loc_232FC:
                 blo.w   locret_23324
                 cmp.w   d3,d4
                 bhs.w   locret_23324
-                bsr.w   sub_23190
+                bsr.w   LaunchPlayerFromHorizontalSpring
 
 locret_23324:
                 rts
-; End of function sub_2326C
+; End of function BoostGroundedPlayersNearHorizontalSpring
 
 ; ---------------------------------------------------------------------------
 
@@ -380,7 +380,7 @@ Obj_Spring_Down:
                 bsr.w   SolidObjectFull2_1P
                 cmpi.w  #-2,d4
                 bne.s   loc_2334C
-                bsr.s   sub_233CA
+                bsr.s   LaunchPlayerFromDownSpring
 
 loc_2334C:
                 movem.l (sp)+,d1-d4
@@ -389,7 +389,7 @@ loc_2334C:
                 bsr.w   SolidObjectFull2_1P
                 cmpi.w  #-2,d4
                 bne.s   loc_23362
-                bsr.s   sub_233CA
+                bsr.s   LaunchPlayerFromDownSpring
 
 loc_23362:
                 lea     (Ani_Spring).l,a1
@@ -428,7 +428,7 @@ loc_233B8:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_233CA:
+LaunchPlayerFromDownSpring:
                 subq.w  #8,y_pos(a1)
                 tst.b   (Reverse_gravity_flag).w
                 beq.s   loc_233DA
@@ -486,4 +486,4 @@ loc_2346C:
                 move.b  #0,double_jump_flag(a1)
                 moveq   #signextendB(sfx_Spring),d0
                 jmp     (Play_SFX).l
-; End of function sub_233CA
+; End of function LaunchPlayerFromDownSpring

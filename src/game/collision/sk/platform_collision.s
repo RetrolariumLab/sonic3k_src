@@ -202,14 +202,14 @@ loc_1E3A4:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 movem.l d1-d4,-(sp)
-                bsr.s   sub_1E3C4
+                bsr.s   CollidePlayerWithUnclaimedFlatPlatform
                 movem.l (sp)+,d1-d4
                 lea     (Player_2).w,a1
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1E3C4:
+CollidePlayerWithUnclaimedFlatPlatform:
                 btst    d6,status(a0)
                 bne.s   loc_1E3D6
                 btst    #Status_OnObj,status(a1)
@@ -244,11 +244,11 @@ loc_1E406:
                 bsr.w   MvSonicOnPtfm
                 moveq   #0,d4
                 rts
-; End of function sub_1E3C4
+; End of function CollidePlayerWithUnclaimedFlatPlatform
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1E410:
+TryLandPlayerOnPlatformSpan:
                 tst.w   y_vel(a1)
                 bmi.w   locret_1E4D4
                 move.w  x_pos(a1),d0
@@ -294,7 +294,7 @@ loc_1E45A:
                 add.w   d0,d2
                 addq.w  #3,d2
                 move.w  d2,y_pos(a1)
-; End of function sub_1E410
+; End of function TryLandPlayerOnPlatformSpan
 
 ; =============== S U B R O U T I N E =======================================
 

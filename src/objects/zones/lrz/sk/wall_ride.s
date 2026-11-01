@@ -8,26 +8,26 @@ Obj_LRZWallRide:
                 move.l  #loc_42556,(a0)
 
 loc_42556:
-                bsr.s   sub_4255E
+                bsr.s   UpdatePlayersOnLrzWallRide
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4255E:
+UpdatePlayersOnLrzWallRide:
                 lea     (Player_1).w,a1
                 lea     $30(a0),a2
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_42574
+                bsr.s   UpdatePlayerOnLrzWallRide
                 lea     (Player_2).w,a1
                 lea     $34(a0),a2
 ; Bug: if player 1 was riding the object, then d6 may have become dirty from
 ; a call to Perform_Player_DPLC, causing player 2 to behave erratically
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
-; End of function sub_4255E
+; End of function UpdatePlayersOnLrzWallRide
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_42574:
+UpdatePlayerOnLrzWallRide:
                 btst    d6,status(a0)
                 bne.w   loc_426B0
                 move.w  x_pos(a1),d0
@@ -53,7 +53,7 @@ sub_42574:
                 move.w  #$400,ground_vel(a1)
 
 loc_425CE:
-                bsr.s   sub_42636
+                bsr.s   AttachPlayerToLrzWallRide
                 move.l  #0,(a2)
                 bclr    #Status_Facing,status(a1)
                 andi.b  #$FC,render_flags(a1)
@@ -75,7 +75,7 @@ loc_425EA:
                 move.w  #-$400,ground_vel(a1)
 
 loc_42610:
-                bsr.s   sub_42636
+                bsr.s   AttachPlayerToLrzWallRide
                 move.l  #0,(a2)
                 neg.w   ground_vel(a1)
                 bset    #Status_Facing,status(a1)
@@ -83,11 +83,11 @@ loc_42610:
                 ori.b   #1,render_flags(a1)
                 move.b  #$43,object_control(a1)
                 rts
-; End of function sub_42574
+; End of function UpdatePlayerOnLrzWallRide
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_42636:
+AttachPlayerToLrzWallRide:
                 btst    #Status_OnObj,status(a1)
                 beq.s   loc_42646
                 movea.w interact(a1),a3
@@ -113,7 +113,7 @@ loc_42646:
                 move.b  #0,double_jump_flag(a1)
                 move.b  #0,anim(a1)
                 rts
-; End of function sub_42636
+; End of function AttachPlayerToLrzWallRide
 
 ; ---------------------------------------------------------------------------
 

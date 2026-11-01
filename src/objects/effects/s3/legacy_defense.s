@@ -113,12 +113,12 @@ loc_17638:
                 addq.w  #1,$38(a0)
                 lea     byte_17720(pc),a6
                 move.b  $34(a0),d6
-                jsr     sub_1770A(pc)
+                jsr     InvincibilityOrbitS3TranslateSignedOffsetPair(pc)
                 move.w  d2,(a2)+
                 move.w  d3,(a2)+
                 move.w  d5,(a2)+
                 addi.w  #$20,d6
-                jsr     sub_1770A(pc)
+                jsr     InvincibilityOrbitS3TranslateSignedOffsetPair(pc)
                 move.w  d2,(a2)+
                 move.w  d3,(a2)+
                 move.w  d5,(a2)+
@@ -170,13 +170,13 @@ loc_176C6:
                 addq.w  #1,$38(a0)
                 lea     byte_17720(pc),a6
                 move.b  $34(a0),d6
-                jsr     sub_1770A(pc)
+                jsr     InvincibilityOrbitS3TranslateSignedOffsetPair(pc)
                 move.w  d2,(a2)+
                 move.w  d3,(a2)+
                 move.w  d5,(a2)+
                 addi.w  #$20,d6
                 swap    d5
-                jsr     sub_1770A(pc)
+                jsr     InvincibilityOrbitS3TranslateSignedOffsetPair(pc)
                 move.w  d2,(a2)+
                 move.w  d3,(a2)+
                 move.w  d5,(a2)+
@@ -191,7 +191,7 @@ loc_17702:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1770A:
+InvincibilityOrbitS3TranslateSignedOffsetPair:
                 andi.w  #$3E,d6
                 move.b  (a6,d6.w),d2
                 move.b  1(a6,d6.w),d3
@@ -200,7 +200,7 @@ sub_1770A:
                 add.w   d0,d2
                 add.w   d1,d3
                 rts
-; End of function sub_1770A
+; End of function InvincibilityOrbitS3TranslateSignedOffsetPair
 
 ; ---------------------------------------------------------------------------
 byte_17720:

@@ -34,7 +34,7 @@ loc_7063A:
                 move.b  routine(a0),d0
                 move.w  FBZEndBoss_Index(pc,d0.w),d1
                 jsr     FBZEndBoss_Index(pc,d1.w)
-                bsr.w   sub_70E10
+                bsr.w   HandleFBZEndBossFourColorHitOrDefeat
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 FBZEndBoss_Index:
@@ -86,11 +86,11 @@ loc_706C2:
 ; ---------------------------------------------------------------------------
 
 loc_706E2:
-                bsr.w   sub_70C72
+                bsr.w   PlayFBZEndBossHalfTurnSoundBeforeWaitEnds
                 addq.b  #4,$3C(a0)
                 lea     (FBZEndBoss_CircleLookup1).l,a2
                 jsr     (MoveSprite_AngleYLookup).l
-                bsr.w   sub_70DC8
+                bsr.w   SetFBZEndBossBodyDepthFromPhase
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
@@ -103,7 +103,7 @@ loc_70700:
 ; ---------------------------------------------------------------------------
 
 loc_7071A:
-                bsr.w   sub_70DAC
+                bsr.w   CenterFBZEndBossXBetweenSupports
                 jsr     (Find_SonicTails).l
                 cmpi.b  #2,(Player_1+character_id).w
                 bne.s   loc_70736
@@ -162,12 +162,12 @@ loc_707BC:
                 bset    #1,$38(a0)
 
 loc_707CA:
-                bsr.w   sub_70C72
+                bsr.w   PlayFBZEndBossHalfTurnSoundBeforeWaitEnds
                 move.b  $40(a0),d0
                 add.b   d0,$3C(a0)
                 lea     (FBZEndBoss_CircleLookup1).l,a2
                 jsr     (MoveSprite_AngleYLookup).l
-                bsr.w   sub_70DC8
+                bsr.w   SetFBZEndBossBodyDepthFromPhase
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
@@ -183,7 +183,7 @@ loc_707F6:
                 add.b   d0,$3C(a0)
                 lea     (FBZEndBoss_CircleLookup1).l,a2
                 jsr     (MoveSprite_AngleYLookup).l
-                bsr.w   sub_70DC8
+                bsr.w   SetFBZEndBossBodyDepthFromPhase
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -400,7 +400,7 @@ loc_70A76:
                 move.w  x_pos(a1),x_pos(a0)
                 lea     (FBZEndBoss_CircleLookup2).l,a2
                 jsr     (MoveSprite_AngleYLookup).l
-                bsr.w   sub_70DFA
+                bsr.w   SetFBZEndBossHingeDepthFromPhase
                 moveq   #0,d0
                 jmp     (Child_Draw_Sprite2_FlickerMove).l
 ; ---------------------------------------------------------------------------
@@ -488,7 +488,7 @@ loc_70B80:
 ; ---------------------------------------------------------------------------
 
 loc_70B8C:
-                bsr.w   sub_70D10
+                bsr.w   InitializeFBZEndBossFlameColumnPart
                 move.l  #Obj_Wait,(a0)
                 move.l  #loc_70BA0,$34(a0)
                 rts

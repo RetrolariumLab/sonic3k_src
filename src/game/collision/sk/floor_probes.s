@@ -77,14 +77,14 @@ ChunkAddrArray:
 FindFloor:
                 lea     (Find_Tile_FG).l,a5
                 tst.b   (Background_collision_flag).w
-                beq.s   sub_F264
-                bsr.s   sub_F264
+                beq.s   SampleFloorDistanceWithNeighbor
+                bsr.s   SampleFloorDistanceWithNeighbor
                 move.b  (a4),Primary_Angle_save-Primary_Angle(a4)
                 move.w  d1,-(sp)
                 sub.w   (Camera_X_diff).w,d3
                 sub.w   (Camera_Y_diff).w,d2
                 lea     (Find_Tile_BG).l,a5
-                bsr.s   sub_F264
+                bsr.s   SampleFloorDistanceWithNeighbor
                 add.w   (Camera_X_diff).w,d3
                 add.w   (Camera_Y_diff).w,d2
                 move.w  (sp)+,d0
@@ -99,7 +99,7 @@ locret_F262:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_F264:
+SampleFloorDistanceWithNeighbor:
                 jsr     (a5)
                 move.w  (a1),d0
                 move.w  d0,d4
@@ -110,7 +110,7 @@ sub_F264:
 
 loc_F274:
                 add.w   a3,d2
-                bsr.w   sub_F30C
+                bsr.w   SampleSingleBlockFloorDistance
                 sub.w   a3,d2
                 addi.w  #$10,d1
                 rts
@@ -171,15 +171,15 @@ loc_F2F2:
 
 loc_F2FE:
                 sub.w   a3,d2
-                bsr.w   sub_F30C
+                bsr.w   SampleSingleBlockFloorDistance
                 add.w   a3,d2
                 subi.w  #$10,d1
                 rts
-; End of function sub_F264
+; End of function SampleFloorDistanceWithNeighbor
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_F30C:
+SampleSingleBlockFloorDistance:
                 jsr     (a5)
                 move.w  (a1),d0
                 move.w  d0,d4
@@ -248,21 +248,21 @@ loc_F394:
                 bpl.w   loc_F31C
                 not.w   d1
                 rts
-; End of function sub_F30C
+; End of function SampleSingleBlockFloorDistance
 
 ; ---------------------------------------------------------------------------
 ; loc_F3A4
 Ring_FindFloor:
                 lea     (Find_Tile_FG).l,a5
                 tst.b   (Background_collision_flag).w
-                beq.s   sub_F3DE
-                bsr.s   sub_F3DE
+                beq.s   SampleRingFloorDistance
+                bsr.s   SampleRingFloorDistance
                 move.b  (a4),Primary_Angle_save-Primary_Angle(a4)
                 move.w  d1,-(sp)
                 sub.w   (Camera_X_diff).w,d3
                 sub.w   (Camera_Y_diff).w,d2
                 lea     (Find_Tile_BG).l,a5
-                bsr.s   sub_F3DE
+                bsr.s   SampleRingFloorDistance
                 add.w   (Camera_X_diff).w,d3
                 add.w   (Camera_Y_diff).w,d2
                 move.w  (sp)+,d0
@@ -276,7 +276,7 @@ locret_F3DC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_F3DE:
+SampleRingFloorDistance:
                 jsr     (a5)
                 move.w  (a1),d0
                 move.w  d0,d4
@@ -345,8 +345,8 @@ loc_F464:
 
 loc_F470:
                 sub.w   a3,d2
-                bsr.w   sub_F30C
+                bsr.w   SampleSingleBlockFloorDistance
                 add.w   a3,d2
                 subi.w  #$10,d1
                 rts
-; End of function sub_F3DE
+; End of function SampleRingFloorDistance

@@ -256,7 +256,7 @@ loc_72664:
 
 loc_72674:
                 move.b  #4,routine(a0)
-                bsr.w   sub_7280C
+                bsr.w   SetLBZMinibossArmActivationDelay
                 move.l  #loc_726B2,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
@@ -277,7 +277,7 @@ loc_726A8:
 ; ---------------------------------------------------------------------------
 
 loc_726B2:
-                bsr.w   sub_72826
+                bsr.w   SetLBZMinibossArmRotationDelay
                 move.l  #loc_72726,$34(a0)
                 tst.b   subtype(a0)
                 beq.s   loc_726DC
@@ -397,12 +397,12 @@ byte_72806:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7280C:
+SetLBZMinibossArmActivationDelay:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  word_7281A(pc,d0.w),$2E(a0)
                 rts
-; End of function sub_7280C
+; End of function SetLBZMinibossArmActivationDelay
 
 ; ---------------------------------------------------------------------------
 word_7281A:
@@ -415,12 +415,12 @@ word_7281A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_72826:
+SetLBZMinibossArmRotationDelay:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  word_72834(pc,d0.w),$2E(a0)
                 rts
-; End of function sub_72826
+; End of function SetLBZMinibossArmRotationDelay
 
 ; ---------------------------------------------------------------------------
 word_72834:
@@ -496,7 +496,7 @@ loc_728EA:
                 bset    #7,status(a1)
 
 loc_728F8:
-                bsr.w   sub_72910
+                bsr.w   DetachLBZMinibossArmSegmentWithGravity
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -507,7 +507,7 @@ loc_72902:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_72910:
+DetachLBZMinibossArmSegmentWithGravity:
                 move.l  #loc_7279E,(a0)
                 clr.b   collision_flags(a0)
                 move.w  #$80,$2E(a0)
@@ -519,7 +519,7 @@ sub_72910:
                 move.w  (a1)+,x_vel(a0)
                 move.w  (a1)+,y_vel(a0)
                 rts
-; End of function sub_72910
+; End of function DetachLBZMinibossArmSegmentWithGravity
 
 ; ---------------------------------------------------------------------------
 word_7293E:

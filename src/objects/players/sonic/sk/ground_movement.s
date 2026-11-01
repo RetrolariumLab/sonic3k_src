@@ -18,12 +18,12 @@ Sonic_Move:
                 bne.w   loc_112EA
                 btst    #button_left,(Ctrl_1_held_logical).w  ; is left being pressed?
                 beq.s   Sonic_NotLeft                   ; if not, branch
-                bsr.w   sub_113F6
+                bsr.w   SonicSKApplyGroundLeftInput
 
 Sonic_NotLeft:
                 btst    #button_right,(Ctrl_1_held_logical).w  ; is right being pressed?
                 beq.s   Sonic_NotRight                  ; if not, branch
-                bsr.w   sub_11482
+                bsr.w   SonicSKApplyGroundRightInput
 
 Sonic_NotRight:
                 move.b  angle(a0),d0
@@ -313,7 +313,7 @@ loc_1137E:
                 move.b  angle(a0),d0
                 add.b   d1,d0
                 move.w  d0,-(sp)
-                bsr.w   sub_F61C
+                bsr.w   ProbeNextSurfaceWithFixedLookahead
                 move.w  (sp)+,d0
                 tst.w   d1
                 bpl.s   locret_113F4
@@ -365,7 +365,7 @@ locret_113F4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_113F6:
+SonicSKApplyGroundLeftInput:
                 move.w  ground_vel(a0),d0
                 beq.s   loc_113FE
                 bpl.s   loc_11430
@@ -424,11 +424,11 @@ loc_11438:
 
 locret_11480:
                 rts
-; End of function sub_113F6
+; End of function SonicSKApplyGroundLeftInput
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_11482:
+SonicSKApplyGroundRightInput:
                 move.w  ground_vel(a0),d0
                 bmi.s   loc_114B6
                 bclr    #Status_Facing,status(a0)
@@ -482,4 +482,4 @@ loc_114BE:
 
 locret_11506:
                 rts
-; End of function sub_11482
+; End of function SonicSKApplyGroundRightInput

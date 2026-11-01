@@ -14,7 +14,7 @@ Obj_CNZRisingPlatform:
                 move.l  #loc_31BD0,(a0)
 
 loc_31BD0:
-                bsr.s   sub_31C0A
+                bsr.s   UpdateCnzRisingPlatformMotion
 
 loc_31BD2:
                 move.w  #$30,d1
@@ -30,7 +30,7 @@ Ani_CNZRisingPlatform:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_31C0A:
+UpdateCnzRisingPlatformMotion:
                 move.b  $30(a0),d0
                 bne.s   loc_31C4C
                 move.b  status(a0),d0
@@ -80,4 +80,4 @@ loc_31C86:
                 move.b  #0,$30(a0)
                 moveq   #signextendB(sfx_BalloonPlatform),d0
                 jmp     (Play_SFX).l
-; End of function sub_31C0A
+; End of function UpdateCnzRisingPlatformMotion

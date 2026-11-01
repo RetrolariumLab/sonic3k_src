@@ -62,7 +62,7 @@ loc_33422:
 
 loc_3342C:
                 movea.w $3C(a0),a1
-                bsr.w   sub_334BA
+                bsr.w   PositionHorizontalSwingingSpikeChain
                 move.b  $34(a0),d2
                 move.b  $36(a0),d0
                 add.b   d0,$34(a0)
@@ -84,7 +84,7 @@ loc_33460:
 
 loc_3346A:
                 movea.w $3C(a0),a1
-                bsr.w   sub_33516
+                bsr.w   PositionVerticalSwingingSpikeChain
                 move.b  $34(a0),d2
                 bpl.s   loc_33480
                 addi.w  #$10,$36(a0)
@@ -117,7 +117,7 @@ loc_334B4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_334BA:
+PositionHorizontalSwingingSpikeChain:
                 move.w  #$200,priority(a0)
                 move.b  #0,mapping_frame(a1)
                 move.w  #5,mainspr_childsprites(a1)
@@ -149,11 +149,11 @@ loc_334FA:
                 add.w   d3,d5
                 move.w  d5,x_pos(a0)
                 rts
-; End of function sub_334BA
+; End of function PositionHorizontalSwingingSpikeChain
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_33516:
+PositionVerticalSwingingSpikeChain:
                 move.w  #$200,priority(a0)
                 move.b  #0,mapping_frame(a1)
                 move.w  #5,mainspr_childsprites(a1)
@@ -185,7 +185,7 @@ loc_33556:
                 add.w   d3,d5
                 move.w  d5,y_pos(a0)
                 rts
-; End of function sub_33516
+; End of function PositionVerticalSwingingSpikeChain
 
 ; ---------------------------------------------------------------------------
 Map_MGZSwingingSpikeBall:

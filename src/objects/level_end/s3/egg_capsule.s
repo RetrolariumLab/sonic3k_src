@@ -60,7 +60,7 @@ loc_5456A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54578:
+CapsuleS3OpenAndRequestFragmentsAnimalsExplosion:
                 cmpi.b  #2,(Current_zone).w
                 beq.s   loc_54584
                 st      (Ctrl_2_locked).w
@@ -78,13 +78,13 @@ loc_54584:
 
 locret_545B2:
                 rts
-; End of function sub_54578
+; End of function CapsuleS3OpenAndRequestFragmentsAnimalsExplosion
 
 ; ---------------------------------------------------------------------------
 
 loc_545B4:
                 move.b  #6,d0
-                bra.w   sub_5484E
+                bra.w   CapsuleS3StartResultsWhenP1LandedAfterOpenWait
 ; ---------------------------------------------------------------------------
 
 loc_545BC:
@@ -135,7 +135,7 @@ loc_5460E:
 
 loc_5462E:
                 move.w  a1,$44(a0)
-                bsr.w   sub_54578
+                bsr.w   CapsuleS3OpenAndRequestFragmentsAnimalsExplosion
 
 loc_54636:
                 jsr     Swing_UpAndDown(pc)
@@ -144,7 +144,7 @@ loc_54636:
 
 loc_54640:
                 move.b  #$C,d0
-                bsr.w   sub_5484E
+                bsr.w   CapsuleS3StartResultsWhenP1LandedAfterOpenWait
                 jsr     Swing_UpAndDown(pc)
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
@@ -157,7 +157,7 @@ loc_54652:
 
 loc_54660:
                 move.b  #$C,d0
-                bsr.w   sub_548DA
+                bsr.w   CapsuleS3StartResultsForVisibleTailsOrCarriedP1AfterWait
                 jsr     Swing_UpAndDown(pc)
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
@@ -169,7 +169,7 @@ loc_54672:
 ; ---------------------------------------------------------------------------
 
 loc_54680:
-                bsr.w   sub_5499E
+                bsr.w   CapsuleS3ResolveGroundButtonSolid
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
                 beq.s   loc_546A2
@@ -183,7 +183,7 @@ loc_546A2:
 ; ---------------------------------------------------------------------------
 
 loc_546A6:
-                bsr.w   sub_5499E
+                bsr.w   CapsuleS3ResolveGroundButtonSolid
                 jmp     Child_Draw_Sprite2(pc)
 ; ---------------------------------------------------------------------------
 
@@ -247,7 +247,7 @@ loc_5472C:
 
 loc_54742:
                 move.l  #Obj_FlickerMove,(a0)
-                bsr.w   sub_549AE
+                bsr.w   CapsuleS3SelectFragmentFrameFromSubtype
                 moveq   #4,d0
                 jsr     Set_IndexedVelocity(pc)
                 jmp     (Draw_Sprite).l
@@ -270,7 +270,7 @@ loc_54776:
                 jsr     SetUp_ObjAttributes3(pc)
                 move.l  #loc_54794,(a0)
                 move.b  #8,y_radius(a0)
-                bsr.w   sub_549C4
+                bsr.w   CapsuleS3InitializeFreedAnimalBounceSpeciesAndReleaseDelay
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -301,7 +301,7 @@ loc_547AA:
 
 loc_547D6:
                 move.w  d1,x_vel(a0)
-                bsr.w   sub_54A68
+                bsr.w   CapsuleS3SetFreedAnimalHorizontalFlipFromXVelocity
 
 loc_547DE:
                 moveq   #0,d0
@@ -333,9 +333,9 @@ loc_5480C:
                 move.w  #0,d3
                 move.w  #-$30,d4
                 sub.b   subtype(a0),d4
-                bsr.w   sub_54946
+                bsr.w   CapsuleS3AccelerateFreedAnimalTowardOffsetPlayerWithRetry
                 jsr     (MoveSprite2).l
-                bsr.w   sub_54A68
+                bsr.w   CapsuleS3SetFreedAnimalHorizontalFlipFromXVelocity
                 tst.b   (_unkFAA8).w
                 bne.s   loc_54846
                 move.l  #loc_54848,(a0)
@@ -351,7 +351,7 @@ loc_54848:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5484E:
+CapsuleS3StartResultsWhenP1LandedAfterOpenWait:
                 subq.w  #1,$2E(a0)
                 bpl.s   locret_54886
                 lea     (Player_1).w,a1
@@ -369,7 +369,7 @@ sub_5484E:
 
 locret_54886:
                 rts
-; End of function sub_5484E
+; End of function CapsuleS3StartResultsWhenP1LandedAfterOpenWait
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -398,7 +398,7 @@ loc_548A0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_548DA:
+CapsuleS3StartResultsForVisibleTailsOrCarriedP1AfterWait:
                 subq.w  #1,$2E(a0)
                 bpl.s   locret_5491A
                 lea     (Player_1).w,a1
@@ -423,7 +423,7 @@ loc_54918:
 
 locret_5491A:
                 rts
-; End of function sub_548DA
+; End of function CapsuleS3StartResultsForVisibleTailsOrCarriedP1AfterWait
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -441,7 +441,7 @@ Set_PlayerEndingPose:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54946:
+CapsuleS3AccelerateFreedAnimalTowardOffsetPlayerWithRetry:
                 move.w  d2,d5
                 move.w  x_pos(a1),d6
                 add.w   d3,d6
@@ -478,7 +478,7 @@ loc_54978:
 
 locret_5498C:
                 rts
-; End of function sub_54946
+; End of function CapsuleS3AccelerateFreedAnimalTowardOffsetPlayerWithRetry
 
 ; ---------------------------------------------------------------------------
 ; unused
@@ -490,7 +490,7 @@ locret_5498C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5499E:
+CapsuleS3ResolveGroundButtonSolid:
                 moveq   #8,d2
 
 loc_549A0:
@@ -498,17 +498,17 @@ loc_549A0:
                 moveq   #9,d3
                 move.w  x_pos(a0),d4
                 jmp     (SolidObjectFull).l
-; End of function sub_5499E
+; End of function CapsuleS3ResolveGroundButtonSolid
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_549AE:
+CapsuleS3SelectFragmentFrameFromSubtype:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lsr.w   #1,d0
                 move.b  byte_549BE(pc,d0.w),mapping_frame(a0)
                 rts
-; End of function sub_549AE
+; End of function CapsuleS3SelectFragmentFrameFromSubtype
 
 ; ---------------------------------------------------------------------------
 byte_549BE:
@@ -517,7 +517,7 @@ byte_549BE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_549C4:
+CapsuleS3InitializeFreedAnimalBounceSpeciesAndReleaseDelay:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,d1
@@ -563,9 +563,9 @@ loc_54A0A:
 
 loc_54A4E:
                 move.w  d1,x_vel(a0)
-                bsr.w   sub_54A68
+                bsr.w   CapsuleS3SetFreedAnimalHorizontalFlipFromXVelocity
                 rts
-; End of function sub_549C4
+; End of function CapsuleS3InitializeFreedAnimalBounceSpeciesAndReleaseDelay
 
 ; ---------------------------------------------------------------------------
 word_54A58:
@@ -578,7 +578,7 @@ word_54A60:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_54A68:
+CapsuleS3SetFreedAnimalHorizontalFlipFromXVelocity:
                 bclr    #0,render_flags(a0)
                 tst.w   x_vel(a0)
                 bpl.s   locret_54A7A
@@ -586,4 +586,4 @@ sub_54A68:
 
 locret_54A7A:
                 rts
-; End of function sub_54A68
+; End of function CapsuleS3SetFreedAnimalHorizontalFlipFromXVelocity

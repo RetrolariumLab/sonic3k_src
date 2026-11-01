@@ -178,11 +178,11 @@ off_1332E:
 ; ---------------------------------------------------------------------------
 
 loc_13336:
-                bsr.w   sub_13520
+                bsr.w   TailsSKHandleCompetitionSpindashAndAbortGroundStep
                 bsr.w   Tails_Jump
                 bsr.w   Player_SlopeResist
                 bsr.w   Tails_InputAcceleration_Path
-                bsr.w   sub_134BA
+                bsr.w   TailsSKTryCompetitionRollFromDown
                 jsr     (MoveSprite2).l
                 bsr.w   Player_AnglePos
                 bsr.w   Player_SlopeRepel
@@ -208,7 +208,7 @@ loc_1337C:
 ; ---------------------------------------------------------------------------
 
 loc_1338E:
-                bsr.w   sub_133AE
+                bsr.w   TailsSKUpdateCompetitionFlightFlapAndFatigue
                 bsr.w   Tails_InputAcceleration_Freespace
                 jsr     (MoveSprite2).l
                 bsr.w   Player_JumpAngle
@@ -219,7 +219,7 @@ loc_1338E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_133AE:
+TailsSKUpdateCompetitionFlightFlapAndFatigue:
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #1,d0
                 beq.s   loc_133C2
@@ -296,7 +296,7 @@ loc_13454:
 
 locret_13468:
                 rts
-; End of function sub_133AE
+; End of function TailsSKUpdateCompetitionFlightFlapAndFatigue
 
 ; ---------------------------------------------------------------------------
 
@@ -331,7 +331,7 @@ loc_134A8:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_134BA:
+TailsSKTryCompetitionRollFromDown:
                 tst.b   status_secondary(a0)
                 bmi.s   locret_134E0
                 move.w  ground_vel(a0),d0
@@ -371,11 +371,11 @@ loc_134EC:
 
 locret_1351E:
                 rts
-; End of function sub_134BA
+; End of function TailsSKTryCompetitionRollFromDown
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_13520:
+TailsSKHandleCompetitionSpindashAndAbortGroundStep:
                 tst.b   spin_dash_flag(a0)
                 bne.s   loc_13570
                 cmpi.b  #8,anim(a0)
@@ -484,6 +484,6 @@ loc_13654:
 loc_13656:
                 bsr.w   Player_AnglePos
                 rts
-; End of function sub_13520
+; End of function TailsSKHandleCompetitionSpindashAndAbortGroundStep
 
 ; ---------------------------------------------------------------------------

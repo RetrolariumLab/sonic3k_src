@@ -19,14 +19,14 @@ loc_40B48:
                 move.w  d1,d2
                 add.w   d2,d2
                 lea     (Player_1).w,a1
-                bsr.s   sub_40B62
+                bsr.s   ActivateSozRisingSandWallNearPlayer
                 lea     (Player_2).w,a1
-                bsr.s   sub_40B62
+                bsr.s   ActivateSozRisingSandWallNearPlayer
                 bra.w   loc_40C0E
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_40B62:
+ActivateSozRisingSandWallNearPlayer:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
@@ -56,7 +56,7 @@ sub_40B62:
 
 locret_40BC8:
                 rts
-; End of function sub_40B62
+; End of function ActivateSozRisingSandWallNearPlayer
 
 ; ---------------------------------------------------------------------------
 

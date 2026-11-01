@@ -24,7 +24,7 @@ loc_25D9C:
                 move.w  #$10,d2
                 move.w  x_pos(a0),d4
                 lea     (byte_25F0E).l,a2
-                jsr     (sub_1DD0E).l
+                jsr     (CollidePlayersWithHeightProfileSolid).l
                 swap    d6
                 andi.w  #$33,d6
                 beq.s   loc_25E22
@@ -79,13 +79,13 @@ loc_25E4A:
                 andi.w  #p1_standing,d0
                 beq.s   loc_25E66
                 lea     (Player_1).w,a1
-                bsr.s   sub_25EA6
+                bsr.s   ReboundPlayerFromActiveMgzDashTrigger
 
 loc_25E66:
                 andi.w  #p2_standing,d6
                 beq.s   loc_25E72
                 lea     (Player_2).w,a1
-                bsr.s   sub_25EA6
+                bsr.s   ReboundPlayerFromActiveMgzDashTrigger
 
 loc_25E72:
                 subq.b  #1,anim_frame_timer(a0)
@@ -110,7 +110,7 @@ loc_25EA0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_25EA6:
+ReboundPlayerFromActiveMgzDashTrigger:
                 move.w  x_pos(a0),d1
                 subi.w  #$10,d1
                 btst    #0,status(a0)
@@ -138,7 +138,7 @@ loc_25EBA:
                 moveq   #signextendB(sfx_SmallBumpers),d0
                 jsr     (Play_SFX).l
                 rts
-; End of function sub_25EA6
+; End of function ReboundPlayerFromActiveMgzDashTrigger
 
 ; ---------------------------------------------------------------------------
 byte_25F0E:

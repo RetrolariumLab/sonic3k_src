@@ -64,12 +64,12 @@ loc_2FE1E:
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d1
                 moveq   #0,d2
-                bsr.s   sub_2FE80
+                bsr.s   UpdatePlayerOnHczConveyorBelt
                 addq.w  #1,a2
                 lea     (Player_2).w,a1
                 move.w  (Ctrl_2_logical).w,d1
                 moveq   #1,d2
-                bsr.s   sub_2FE80
+                bsr.s   UpdatePlayerOnHczConveyorBelt
                 move.w  (Camera_X_pos_coarse_back).w,d1
                 move.w  $3C(a0),d0
                 andi.w  #$FF80,d0
@@ -98,7 +98,7 @@ loc_2FE7A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2FE80:
+UpdatePlayerOnHczConveyorBelt:
                 tst.b   (a2)
                 beq.w   loc_2FF7C
                 tst.w   (Debug_placement_mode).w
@@ -139,7 +139,7 @@ loc_2FEF0:
                 blo.s   loc_2FF2E
                 cmp.w   $42(a0),d0
                 bhs.s   loc_2FF2E
-                bsr.w   sub_300B4
+                bsr.w   PositionPlayerAroundHczConveyor
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 move.l  a2,-(sp)
@@ -262,11 +262,11 @@ loc_30030:
                 jsr     (Perform_Player_DPLC).l
                 movea.l (sp)+,a2
                 rts
-; End of function sub_2FE80
+; End of function UpdatePlayerOnHczConveyorBelt
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_300B4:
+PositionPlayerAroundHczConveyor:
                 tst.w   ground_vel(a1)
                 bne.s   loc_300DA
                 move.b  4(a2),d0
@@ -328,7 +328,7 @@ loc_30104:
                 add.w   y_pos(a0),d1
                 move.w  d1,y_pos(a1)
                 rts
-; End of function sub_300B4
+; End of function PositionPlayerAroundHczConveyor
 
 ; ---------------------------------------------------------------------------
 byte_3012C:

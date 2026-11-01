@@ -8,7 +8,7 @@ Obj_LBZFinalBoss2:
                 move.b  routine(a0),d0
                 move.w  LBZFinalBoss2_Index(pc,d0.w),d1
                 jsr     LBZFinalBoss2_Index(pc,d1.w)
-                jsr     (sub_74FD2).l
+                jsr     (HandleLBZFinalBoss2SixColorHitOrDefeat).l
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 LBZFinalBoss2_Index:
@@ -160,7 +160,7 @@ loc_7440C:
 loc_74412:
                 moveq   #$50,d1
                 move.w  #$F0,d2
-                bsr.w   sub_74FA8
+                bsr.w   ReverseLBZFinalBoss2AtCameraRelativeBounds
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
@@ -253,7 +253,7 @@ loc_744EA:
 loc_744FC:
                 moveq   #$30,d1
                 move.w  #$110,d2
-                bsr.w   sub_74FA8
+                bsr.w   ReverseLBZFinalBoss2AtCameraRelativeBounds
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
@@ -459,7 +459,7 @@ loc_7473A:
                 tst.b   (_unkFAA2).w
                 beq.w   locret_74374
                 move.l  #loc_74768,(a0)
-                jsr     sub_7302E(pc)
+                jsr     QueueLBZFinalBossExtraShipAndExplosionGraphics(pc)
                 bclr    #7,status(a0)
                 jsr     (Restore_PlayerControl).l
                 clr.w   (Ctrl_1_logical).w

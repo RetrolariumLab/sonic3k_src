@@ -43,7 +43,7 @@ loc_5A84E:
                 move.l  #loc_5AAAE,(a1)
 
 loc_5A8DE:
-                jsr     sub_5AACA(pc)
+                jsr     ForceLBZShipCarryFrameAndReloadPlayerGraphics(pc)
 
 loc_5A8E2:
                 jmp     Sprite_CheckDeleteTouch(pc)
@@ -63,9 +63,9 @@ loc_5A90C:
 
 loc_5A912:
                 jsr     (MoveSprite2).l
-                bsr.w   sub_5AA92
+                bsr.w   AttachPlayer1PositionToLBZRobotnikShip
                 jsr     (Obj_Wait).l
-                jsr     sub_5AACA(pc)
+                jsr     ForceLBZShipCarryFrameAndReloadPlayerGraphics(pc)
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
@@ -85,7 +85,7 @@ loc_5A93E:
 loc_5A94C:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
-                bsr.w   sub_5AA92
+                bsr.w   AttachPlayer1PositionToLBZRobotnikShip
                 movea.w (_unkFAA4).w,a1
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
@@ -97,7 +97,7 @@ loc_5A94C:
                 move.l  #loc_5A990,$34(a0)
 
 loc_5A988:
-                jsr     sub_5AACA(pc)
+                jsr     ForceLBZShipCarryFrameAndReloadPlayerGraphics(pc)
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
@@ -112,7 +112,7 @@ loc_5A990:
 
 loc_5A9AC:
                 jsr     (MoveSprite_LightGravity).l
-                bsr.w   sub_5AA92
+                bsr.w   AttachPlayer1PositionToLBZRobotnikShip
                 tst.w   y_vel(a0)
                 bmi.s   loc_5A9E4
                 move.w  y_pos(a0),d0
@@ -125,7 +125,7 @@ loc_5A9AC:
                 jsr     (Swing_Setup1).l
 
 loc_5A9E4:
-                jsr     sub_5AACA(pc)
+                jsr     ForceLBZShipCarryFrameAndReloadPlayerGraphics(pc)
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
@@ -147,7 +147,7 @@ loc_5AA0A:
 loc_5AA18:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
-                bsr.w   sub_5AA92
+                bsr.w   AttachPlayer1PositionToLBZRobotnikShip
                 cmpi.w  #$4440,x_pos(a0)
                 blo.s   loc_5AA78
                 move.l  #loc_5AA82,(a0)
@@ -166,7 +166,7 @@ loc_5AA18:
                 move.w  #$780,y_pos(a1)
 
 loc_5AA78:
-                jsr     sub_5AACA(pc)
+                jsr     ForceLBZShipCarryFrameAndReloadPlayerGraphics(pc)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -177,7 +177,7 @@ loc_5AA82:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5AA92:
+AttachPlayer1PositionToLBZRobotnikShip:
                 lea     (Player_1).w,a1
                 move.w  x_pos(a0),d0
                 subq.w  #4,d0
@@ -186,7 +186,7 @@ sub_5AA92:
                 subi.w  #$12,d0
                 move.w  d0,y_pos(a1)
                 rts
-; End of function sub_5AA92
+; End of function AttachPlayer1PositionToLBZRobotnikShip
 
 ; ---------------------------------------------------------------------------
 
@@ -208,7 +208,7 @@ loc_5AAC4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5AACA:
+ForceLBZShipCarryFrameAndReloadPlayerGraphics:
                 lea     (Player_1).w,a1
                 moveq   #0,d0
                 move.b  character_id(a1),d0
@@ -217,7 +217,7 @@ sub_5AACA:
                 movea.w word_5AAEA(pc,d0.w),a2
                 clr.b   (a2)
                 jmp     (Player_Load_PLC).l
-; End of function sub_5AACA
+; End of function ForceLBZShipCarryFrameAndReloadPlayerGraphics
 
 ; ---------------------------------------------------------------------------
 RawAni_5AAE8:

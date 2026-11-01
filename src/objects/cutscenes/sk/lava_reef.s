@@ -86,7 +86,7 @@ loc_63B40:
                 move.b  #$24,subtype(a1)
 
 loc_63B72:
-                bsr.w   sub_65DD6
+                bsr.w   CutsceneSpawnKnucklesMusicFadeTransition
                 jsr     (AllocateObject).l
                 bne.s   loc_63B84
                 move.l  #loc_63C3E,(a1)
@@ -173,8 +173,8 @@ loc_63C7A:
 loc_63C80:
                 moveq   #signextendB(sfx_PushBlock),d0
                 jsr     (Play_SFX_Continuous).l
-                bsr.w   sub_65ED4
-                bsr.w   sub_65EFE
+                bsr.w   LRZRollingSceneCycleOwnerRenderFlips
+                bsr.w   LRZRollingSceneCaptureAndOrbitBothPlayers
                 jsr     (MoveSprite2).l
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
@@ -188,8 +188,8 @@ loc_63CA6:
 loc_63CAC:
                 moveq   #signextendB(sfx_PushBlock),d0
                 jsr     (Play_SFX_Continuous).l
-                bsr.w   sub_65ED4
-                bsr.w   sub_65EFE
+                bsr.w   LRZRollingSceneCycleOwnerRenderFlips
+                bsr.w   LRZRollingSceneCaptureAndOrbitBothPlayers
                 jsr     (MoveSprite_LightGravity).l
                 tst.w   y_vel(a0)
                 bmi.s   loc_63CE6

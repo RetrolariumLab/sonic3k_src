@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_B5EC:
+S3CompInitializeRoundLivesScoresTimersAndFlags:
                 move.w  #1,(Competition_mode).w
                 bra.s   loc_B5F8
 ; ---------------------------------------------------------------------------
@@ -28,7 +28,7 @@ loc_B5F8:
                 move.l  #5000,(Next_extra_life_score).w
                 move.l  #5000,(Next_extra_life_score_P2).w
                 rts
-; End of function sub_B5EC
+; End of function S3CompInitializeRoundLivesScoresTimersAndFlags
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -126,25 +126,25 @@ loc_3498E:
                 move.b  #0,mapping_frame(a0)
 
 loc_34994:
-                bsr.w   sub_34B22
-                bsr.w   sub_349A2
+                bsr.w   BuildMgzPulleyRopeSegments
+                bsr.w   UpdatePlayersOnMgzPulley
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_349A2:
+UpdatePlayersOnMgzPulley:
                 lea     $38(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1).w,d0
-                bsr.s   sub_349BA
+                bsr.s   UpdatePlayerOnMgzPulley
                 addq.w  #1,a2
                 lea     (Player_2).w,a1
                 move.w  (Ctrl_2).w,d0
-; End of function sub_349A2
+; End of function UpdatePlayersOnMgzPulley
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_349BA:
+UpdatePlayerOnMgzPulley:
                 tst.b   (a2)
                 beq.w   loc_34A5A
                 tst.b   render_flags(a1)
@@ -263,11 +263,11 @@ loc_34B0E:
 
 locret_34B20:
                 rts
-; End of function sub_349BA
+; End of function UpdatePlayerOnMgzPulley
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_34B22:
+BuildMgzPulleyRopeSegments:
                 btst    #0,status(a0)
                 bne.s   loc_34B8C
                 movea.w $3E(a0),a1
@@ -347,7 +347,7 @@ loc_34BD2:
                 dbf     d1,loc_34BD2
                 move.w  #6,-2(a2)
                 rts
-; End of function sub_34B22
+; End of function BuildMgzPulleyRopeSegments
 
 ; ---------------------------------------------------------------------------
 

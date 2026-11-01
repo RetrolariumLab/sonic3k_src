@@ -224,7 +224,7 @@ loc_5452E:
 
 LBZ2BGE_PlatformDetach:
                 tst.w   (Special_V_int_routine).w
-                bne.s   sub_545DA                       ; Wait for window copy to finish
+                bne.s   AdvanceLbz2DeathEggFallingBackground                       ; Wait for window copy to finish
                 move.w  (Level_frame_counter).w,d0
                 andi.w  #3,d0
                 bne.s   loc_545AA
@@ -251,7 +251,7 @@ loc_545A4:
                 move.w  d0,(Events_bg+$16).w            ; Increment value
 
 loc_545AA:
-                bsr.s   sub_545DA
+                bsr.s   AdvanceLbz2DeathEggFallingBackground
                 move.w  (Camera_Y_pos_copy).w,(V_scroll_value).w
                 move.w  (Camera_Y_pos_BG_copy).w,(V_scroll_value_BG).w
                 move.w  (Events_bg+$16).w,d0
@@ -262,7 +262,7 @@ loc_545AA:
 
 LBZ2BGE_Falling:
                 tst.w   (Events_fg_5).w
-                beq.s   sub_545DA                       ; Continue Death Egg deformation until signal
+                beq.s   AdvanceLbz2DeathEggFallingBackground                       ; Continue Death Egg deformation until signal
                 st      (Scroll_lock).w                 ; Set flag so that camera doesn't follow Sonic
                 move.w  (Camera_Y_pos).w,(Camera_Y_pos_copy).w  ; Scroll screen upwards
                 subq.w  #2,(Camera_Y_pos).w
@@ -270,7 +270,7 @@ LBZ2BGE_Falling:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_545DA:
+AdvanceLbz2DeathEggFallingBackground:
                 jsr     LBZ2_EndFallingAccel(pc)
 
 loc_545DE:
@@ -285,4 +285,4 @@ loc_545DE:
                 lea     (HScroll_table).w,a5
                 jsr     ApplyDeformation(pc)
                 jmp     ShakeScreen_Setup(pc)
-; End of function sub_545DA
+; End of function AdvanceLbz2DeathEggFallingBackground

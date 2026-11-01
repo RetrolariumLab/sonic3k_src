@@ -31,7 +31,7 @@ loc_283F0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2840E:
+SpawnLbzAlarmFlybot:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.s   locret_28446
                 move.l  #Obj_Flybot767,(a1)
@@ -49,7 +49,7 @@ sub_2840E:
 
 locret_28446:
                 rts
-; End of function sub_2840E
+; End of function SpawnLbzAlarmFlybot
 
 ; ---------------------------------------------------------------------------
 
@@ -58,7 +58,7 @@ loc_28448:
                 beq.s   loc_2845A
                 cmpi.w  #$41,$30(a0)
                 bne.s   loc_2845A
-                bsr.s   sub_2840E
+                bsr.s   SpawnLbzAlarmFlybot
 
 loc_2845A:
                 move.w  $30(a0),d0

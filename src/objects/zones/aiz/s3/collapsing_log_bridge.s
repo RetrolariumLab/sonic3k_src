@@ -107,7 +107,7 @@ loc_2A538:
                 move.b  $37(a0),d3
                 move.l  #loc_2A638,(a0)
                 move.l  #loc_2A582,d4
-                bsr.w   sub_2A6C6
+                bsr.w   SplitAizCollapsingBridgeSprites
 
 loc_2A560:
                 moveq   #0,d1
@@ -149,7 +149,7 @@ loc_2A5AA:
                 move.b  $37(a0),d3
                 move.l  #loc_2A638,(a0)
                 move.l  #loc_2A5EA,d4
-                bsr.w   sub_2A6C6
+                bsr.w   SplitAizCollapsingBridgeSprites
 
 loc_2A5CE:
                 moveq   #0,d1
@@ -203,15 +203,15 @@ loc_2A644:
                 move.b  width_pixels(a0),d1
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_2A664
+                bsr.s   ReleasePlayerFromCollapsingAizLogSegment
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
-                bsr.s   sub_2A664
+                bsr.s   ReleasePlayerFromCollapsingAizLogSegment
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2A664:
+ReleasePlayerFromCollapsingAizLogSegment:
                 btst    d6,status(a0)
                 beq.s   locret_2A6C4
                 move.w  d1,d2
@@ -249,11 +249,11 @@ loc_2A6A8:
 
 locret_2A6C4:
                 rts
-; End of function sub_2A664
+; End of function ReleasePlayerFromCollapsingAizLogSegment
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2A6C6:
+SplitAizCollapsingBridgeSprites:
                 movea.w $3C(a0),a3
                 lea     sub2_x_pos(a3),a2
                 move.w  mainspr_childsprites(a3),d6
@@ -288,7 +288,7 @@ loc_2A724:
                 move.w  #0,sub2_y_pos(a3)
                 moveq   #signextendB(sfx_Collapse),d0
                 jmp     (Play_SFX).l
-; End of function sub_2A6C6
+; End of function SplitAizCollapsingBridgeSprites
 
 ; ---------------------------------------------------------------------------
 Map_AIZCollapsingLogBridge:

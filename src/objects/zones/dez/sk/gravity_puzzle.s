@@ -86,32 +86,32 @@ loc_499AC:
                 andi.w  #1,d0
                 beq.s   loc_499EC
                 lea     (Player_1).w,a1
-                bsr.s   sub_49A0E
+                bsr.s   MarkTouchedDezGravityPuzzlePanel
                 moveq   #p1_pushing_bit,d5
-                bsr.s   sub_49A02
+                bsr.s   BouncePlayerFromDezGravityPuzzle
 
 loc_499EC:
                 andi.w  #2,d6
                 beq.s   loc_499FC
-                bsr.s   sub_49A0E
+                bsr.s   MarkTouchedDezGravityPuzzlePanel
                 lea     (Player_2).w,a1
                 moveq   #p2_pushing_bit,d5
-                bsr.s   sub_49A02
+                bsr.s   BouncePlayerFromDezGravityPuzzle
 
 loc_499FC:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_49A02:
+BouncePlayerFromDezGravityPuzzle:
                 moveq   #signextendB(sfx_TunnelBooster),d0
                 jsr     (Play_SFX).l
                 bra.w   loc_49850
-; End of function sub_49A02
+; End of function BouncePlayerFromDezGravityPuzzle
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_49A0E:
+MarkTouchedDezGravityPuzzlePanel:
                 moveq   #0,d1
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
@@ -146,7 +146,7 @@ loc_49A34:
 
 locret_49A58:
                 rts
-; End of function sub_49A0E
+; End of function MarkTouchedDezGravityPuzzlePanel
 
 ; ---------------------------------------------------------------------------
 byte_49A5A:

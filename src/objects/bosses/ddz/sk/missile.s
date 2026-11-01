@@ -12,7 +12,7 @@ Obj_DDZMissile:
                 bne.s   loc_82014
                 move.l  #loc_82038,(a0)
                 move.w  #-$3FFA,$3C(a0)
-                bra.w   sub_82AA6
+                bra.w   QuantizeDDZMissileHeadingToEightDisplaySectors
 ; ---------------------------------------------------------------------------
 
 loc_82014:
@@ -41,7 +41,7 @@ loc_8204C:
                 move.w  (_unkFAAE).w,d0
                 sub.w   d0,x_pos(a0)
                 subq.w  #2,x_pos(a0)
-                bsr.w   sub_82B06
+                bsr.w   ResolveDDZMissileBossOrPlayerContactAndDisposal
                 jmp     Sprite_CheckDelete(pc)
 ; ---------------------------------------------------------------------------
 
@@ -53,7 +53,7 @@ loc_82060:
                 bpl.s   loc_8209A
                 move.l  #loc_8209E,(a0)
                 move.b  #$40,$3C(a0)
-                bsr.w   sub_82AA6
+                bsr.w   QuantizeDDZMissileHeadingToEightDisplaySectors
                 move.w  #$200,x_vel(a0)
                 move.w  #$B,$2E(a0)
                 move.l  #loc_820B6,$34(a0)
@@ -83,7 +83,7 @@ loc_820D0:
                 move.b  routine(a0),d0
                 move.w  off_820E8(pc,d0.w),d1
                 jsr     off_820E8(pc,d1.w)
-                bsr.w   sub_82B06
+                bsr.w   ResolveDDZMissileBossOrPlayerContactAndDisposal
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 off_820E8:
@@ -120,13 +120,13 @@ loc_82122:
 loc_8212E:
                 move.b  $40(a0),d0
                 add.b   d0,$3C(a0)
-                bsr.w   sub_82AA6
+                bsr.w   QuantizeDDZMissileHeadingToEightDisplaySectors
                 bra.w   loc_82ABC
 ; ---------------------------------------------------------------------------
 
 loc_8213E:
-                bsr.w   sub_82A82
-                bsr.w   sub_82AA6
+                bsr.w   TurnDDZHomingMissileTwoAngleUnitsTowardPlayer
+                bsr.w   QuantizeDDZMissileHeadingToEightDisplaySectors
                 bra.w   loc_82ABC
 ; ---------------------------------------------------------------------------
 
@@ -134,10 +134,10 @@ loc_8214A:
                 lea     word_831FC(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
                 move.l  #loc_8215C,(a0)
-                bsr.w   sub_82AD8
+                bsr.w   SetDDZMissileFlameFrameAndRearOffsetFromSector
 
 loc_8215C:
-                bsr.w   sub_82AD8
+                bsr.w   SetDDZMissileFlameFrameAndRearOffsetFromSector
 
 loc_82160:
                 jsr     Child_GetPriority(pc)

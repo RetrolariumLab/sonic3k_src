@@ -52,7 +52,7 @@ Obj_NormalExpControl:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_52850:
+BossExplosionS3SpawnAtMaskedRandomOffset:
                 moveq   #signextendB(sfx_Explode),d0
                 jsr     (Play_SFX).l
                 lea     Child1_MakeBossExplosion(pc),a2
@@ -148,7 +148,7 @@ loc_52916:
 
 locret_5293E:
                 rts
-; End of function sub_52850
+; End of function BossExplosionS3SpawnAtMaskedRandomOffset
 
 ; ---------------------------------------------------------------------------
 

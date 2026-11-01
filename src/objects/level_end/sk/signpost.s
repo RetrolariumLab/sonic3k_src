@@ -255,7 +255,7 @@ EndSign_CheckPlayerHit:
 
 ; Bug: After returning from the subroutine, the address of the characters in d0
 ; will be corrupted and the check will not work correctly
-                bsr.w   sub_83A70
+                bsr.w   EndSignSKApplyUpwardRollingPlayerHitAndScore
 
 loc_83A6A:
                 swap    d0                              ; Get Tails address
@@ -265,7 +265,7 @@ loc_83A6A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_83A70:
+EndSignSKApplyUpwardRollingPlayerHitAndScore:
                 movea.w d0,a1                           ; This can be done up to twice depending on who hit the signpost
                 cmpi.b  #2,anim(a1)
                 bne.s   locret_83ABC                    ; only go on if Player is currently jumping
@@ -295,7 +295,7 @@ loc_83AB8:
 
 locret_83ABC:
                 rts
-; End of function sub_83A70
+; End of function EndSignSKApplyUpwardRollingPlayerHitAndScore
 
 ; ---------------------------------------------------------------------------
 EndSign_Range:

@@ -7,25 +7,25 @@
 Get_DeformDrawPosVert:
                 move.w  (a4)+,d2
                 move.w  (a6),d0
-                bsr.s   sub_4EE8E
+                bsr.s   FindVerticalDeformationBand
                 addi.w  #$E0,d0
 ; End of function Get_DeformDrawPosVert
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4EE8E:
+FindVerticalDeformationBand:
                 cmp.w   d2,d0
                 bmi.s   loc_4EE98
                 add.w   (a4)+,d2
                 addq.w  #4,a5
-                bra.s   sub_4EE8E
+                bra.s   FindVerticalDeformationBand
 ; ---------------------------------------------------------------------------
 
 loc_4EE98:
                 move.w  (a5),d1
                 swap    d1
                 rts
-; End of function sub_4EE8E
+; End of function FindVerticalDeformationBand
 
 ; ---------------------------------------------------------------------------
 
@@ -112,25 +112,25 @@ locret_4EF3A:
 Get_XDeformRange:
                 move.w  (a4)+,d2
                 move.w  (a6),d0
-                bsr.s   sub_4EF46
+                bsr.s   FindHorizontalDeformationBand
                 addi.w  #$140,d0
 ; End of function Get_XDeformRange
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4EF46:
+FindHorizontalDeformationBand:
                 cmp.w   d2,d0
                 blo.s   loc_4EF50
                 add.w   (a4)+,d2
                 addq.w  #4,a5
-                bra.s   sub_4EF46
+                bra.s   FindHorizontalDeformationBand
 ; ---------------------------------------------------------------------------
 
 loc_4EF50:
                 move.w  (a5),d1
                 swap    d1
                 rts
-; End of function sub_4EF46
+; End of function FindHorizontalDeformationBand
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -188,15 +188,15 @@ loc_4EFB0:
 
 Draw_PlaneHorzRightToLeft:
                 movem.w d1-d2,-(sp)
-                bsr.s   sub_4EFCA
+                bsr.s   DrawPlaneRightToLeftStep
                 movem.w (sp)+,d1-d2
-                bpl.s   sub_4EFCA
+                bpl.s   DrawPlaneRightToLeftStep
                 rts
 ; End of function Draw_PlaneHorzRightToLeft
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4EFCA:
+DrawPlaneRightToLeftStep:
                 andi.w  #$FFF0,d2
                 move.w  d2,d3
                 addi.w  #$1F0,d3
@@ -213,21 +213,21 @@ loc_4EFEA:
                 subi.w  #$10,(Draw_delayed_position).w
                 subq.w  #1,(Draw_delayed_rowcount).w
                 rts
-; End of function sub_4EFCA
+; End of function DrawPlaneRightToLeftStep
 
 ; =============== S U B R O U T I N E =======================================
 
 Draw_PlaneHorzLeftToRight:
                 movem.w d1-d2,-(sp)
-                bsr.s   sub_4F004
+                bsr.s   DrawPlaneLeftToRightStep
                 movem.w (sp)+,d1-d2
-                bpl.s   sub_4F004
+                bpl.s   DrawPlaneLeftToRightStep
                 rts
 ; End of function Draw_PlaneHorzLeftToRight
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4F004:
+DrawPlaneLeftToRightStep:
                 andi.w  #$FFF0,d2
                 move.w  d2,d3
                 addi.w  #$1F0,d3
@@ -244,21 +244,21 @@ loc_4F024:
                 addi.w  #$10,(Draw_delayed_position).w
                 subq.w  #1,(Draw_delayed_rowcount).w
                 rts
-; End of function sub_4F004
+; End of function DrawPlaneLeftToRightStep
 
 ; =============== S U B R O U T I N E =======================================
 
 Draw_PlaneVertBottomUpComplex:
                 movem.l d1/a4-a5,-(sp)
-                bsr.s   sub_4F03E
+                bsr.s   DrawDeformedPlaneBottomUpStep
                 movem.l (sp)+,d1/a4-a5
-                bpl.s   sub_4F03E
+                bpl.s   DrawDeformedPlaneBottomUpStep
                 rts
 ; End of function Draw_PlaneVertBottomUpComplex
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4F03E:
+DrawDeformedPlaneBottomUpStep:
                 and.w   (Camera_Y_pos_mask).w,d1
                 move.w  d1,d2
                 addi.w  #$F0,d2
@@ -281,4 +281,4 @@ loc_4F066:
                 subi.w  #$10,(Draw_delayed_position).w
                 subq.w  #1,(Draw_delayed_rowcount).w
                 rts
-; End of function sub_4F03E
+; End of function DrawDeformedPlaneBottomUpStep

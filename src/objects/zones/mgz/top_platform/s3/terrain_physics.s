@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_347FC:
+ResolveAirborneTopPlatformTerrain:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
                 beq.s   loc_34810
@@ -25,14 +25,14 @@ loc_34810:
                 beq.w   loc_34A0C
                 move.b  #$C,y_radius(a0)
                 move.b  #$18,x_radius(a0)
-                jsr     (sub_1100E).l
+                jsr     (ProbeLeftWallAtBodyExtents).l
                 tst.w   d1
                 bpl.s   loc_34862
                 sub.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
 
 loc_34862:
-                jsr     (sub_10D76).l
+                jsr     (ProbeRightWallAtBodyExtents).l
                 tst.w   d1
                 bpl.s   loc_34876
                 add.w   d1,x_pos(a0)
@@ -94,7 +94,7 @@ locret_348FE:
 loc_34900:
                 move.b  #$C,y_radius(a0)
                 move.b  #$18,x_radius(a0)
-                jsr     (sub_1100E).l
+                jsr     (ProbeLeftWallAtBodyExtents).l
                 tst.w   d1
                 bpl.s   loc_34930
                 sub.w   d1,x_pos(a0)
@@ -107,7 +107,7 @@ loc_34900:
 loc_34930:
                 move.b  #$1F,y_radius(a0)
                 move.b  #$A,x_radius(a0)
-                jsr     (sub_10EB6).l
+                jsr     (ProbeCeilingWithInsetHorizontalRadius).l
                 tst.w   d1
                 bpl.s   loc_34958
                 sub.w   d1,y_pos(a0)
@@ -139,14 +139,14 @@ locret_34988:
 loc_3498A:
                 move.b  #$C,y_radius(a0)
                 move.b  #$18,x_radius(a0)
-                jsr     (sub_1100E).l
+                jsr     (ProbeLeftWallAtBodyExtents).l
                 tst.w   d1
                 bpl.s   loc_349AA
                 sub.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
 
 loc_349AA:
-                jsr     (sub_10D76).l
+                jsr     (ProbeRightWallAtBodyExtents).l
                 tst.w   d1
                 bpl.s   loc_349BE
                 add.w   d1,x_pos(a0)
@@ -155,7 +155,7 @@ loc_349AA:
 loc_349BE:
                 move.b  #$1F,y_radius(a0)
                 move.b  #$A,x_radius(a0)
-                jsr     (sub_10EB6).l
+                jsr     (ProbeCeilingWithInsetHorizontalRadius).l
                 tst.w   d1
                 bpl.s   locret_34A0A
                 sub.w   d1,y_pos(a0)
@@ -183,7 +183,7 @@ locret_34A0A:
 loc_34A0C:
                 move.b  #$C,y_radius(a0)
                 move.b  #$18,x_radius(a0)
-                jsr     (sub_10D76).l
+                jsr     (ProbeRightWallAtBodyExtents).l
                 tst.w   d1
                 bpl.s   loc_34A3C
                 add.w   d1,x_pos(a0)
@@ -196,7 +196,7 @@ loc_34A0C:
 loc_34A3C:
                 move.b  #$1F,y_radius(a0)
                 move.b  #$A,x_radius(a0)
-                jsr     (sub_10EB6).l
+                jsr     (ProbeCeilingWithInsetHorizontalRadius).l
                 tst.w   d1
                 bpl.s   loc_34A64
                 sub.w   d1,y_pos(a0)
@@ -223,22 +223,22 @@ loc_34A64:
 
 locret_34A94:
                 rts
-; End of function sub_347FC
+; End of function ResolveAirborneTopPlatformTerrain
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_34A96:
+ControlTopRiderGroundSpeed:
                 move.w  #$600,d6
                 move.w  #$C,d5
                 move.w  #$80,d4
                 btst    #$A,d3
                 beq.s   loc_34AAC
-                bsr.w   sub_34AEE
+                bsr.w   AccelerateTopRiderLeft
 
 loc_34AAC:
                 btst    #$B,d3
                 beq.s   loc_34AB6
-                bsr.w   sub_34B76
+                bsr.w   AccelerateTopRiderRight
 
 loc_34AB6:
                 move.w  d3,d0
@@ -268,11 +268,11 @@ loc_34AE0:
                 move.w  ground_vel(a0),x_vel(a0)
                 move.w  #0,y_vel(a0)
                 rts
-; End of function sub_34A96
+; End of function ControlTopRiderGroundSpeed
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_34AEE:
+AccelerateTopRiderLeft:
                 move.w  ground_vel(a0),d0
                 beq.s   loc_34AF6
                 bpl.s   loc_34B28
@@ -330,11 +330,11 @@ loc_34B30:
 
 locret_34B74:
                 rts
-; End of function sub_34AEE
+; End of function AccelerateTopRiderLeft
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_34B76:
+AccelerateTopRiderRight:
                 move.w  ground_vel(a0),d0
                 bmi.s   loc_34BAA
                 bclr    #0,status(a0)
@@ -387,4 +387,4 @@ loc_34BB2:
 
 locret_34BF6:
                 rts
-; End of function sub_34B76
+; End of function AccelerateTopRiderRight

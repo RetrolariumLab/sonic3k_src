@@ -5,7 +5,7 @@
 
 Obj_EggRobo:
                 jsr     (Obj_WaitOffscreen).l
-                bsr.w   sub_9185E
+                bsr.w   InitializeEggRoboVariantFromSubtype
                 movea.l (a0),a1
                 jmp     (a1)
 ; ---------------------------------------------------------------------------
@@ -31,8 +31,8 @@ loc_91548:
                 bpl.s   loc_91570
 
 loc_9155E:
-                jsr     (sub_86180).l
-                jsr     (sub_8619A).l
+                jsr     (IntegrateScaledObjectCenter).l
+                jsr     (SetScaledObjectOriginFromCenter).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -50,7 +50,7 @@ loc_91570:
 ; ---------------------------------------------------------------------------
 
 loc_9159A:
-                bsr.w   sub_91988
+                bsr.w   SetEggRoboFrameFromVblankParity
                 move.w  $30(a0),$32(a0)
                 move.w  y_pos(a0),$30(a0)
                 jsr     (Swing_UpAndDown).l
@@ -68,7 +68,7 @@ loc_915D8:
 ; ---------------------------------------------------------------------------
 
 loc_915DE:
-                bsr.w   sub_91988
+                bsr.w   SetEggRoboFrameFromVblankParity
                 btst    #1,$38(a0)
                 bne.s   loc_915F0
                 move.l  #loc_9159A,(a0)
@@ -106,7 +106,7 @@ loc_91648:
 ; ---------------------------------------------------------------------------
 
 loc_9164E:
-                bsr.w   sub_91988
+                bsr.w   SetEggRoboFrameFromVblankParity
                 addi.w  #-$10,y_vel(a0)
                 jsr     (MoveSprite2).l
                 move.w  y_vel(a0),d0
@@ -121,14 +121,14 @@ loc_91678:
 ; ---------------------------------------------------------------------------
 
 loc_9167E:
-                bsr.w   sub_91988
+                bsr.w   SetEggRoboFrameFromVblankParity
                 addi.w  #$20,y_vel(a0)
                 jsr     (MoveSprite2).l
                 move.w  y_vel(a0),d0
                 cmpi.w  #$100,d0
                 blt.s   loc_916A2
                 move.l  #loc_9159A,(a0)
-                bsr.w   sub_918E2
+                bsr.w   ResetEggRoboHoverSwing
 
 loc_916A2:
                 jmp     (Sprite_CheckDeleteTouch).l
@@ -176,7 +176,7 @@ loc_9170A:
 ; ---------------------------------------------------------------------------
 
 loc_91712:
-                bsr.w   sub_91930
+                bsr.w   FollowEggRoboGunUsingCachedParentY
                 btst    #1,$38(a1)
                 beq.s   loc_91734
                 move.l  #loc_9173A,(a0)
@@ -285,12 +285,12 @@ loc_9181C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_9185E:
+InitializeEggRoboVariantFromSubtype:
                 move.b  subtype(a0),d0
                 andi.w  #$F,d0
                 move.w  off_9186E(pc,d0.w),d0
                 jmp     off_9186E(pc,d0.w)
-; End of function sub_9185E
+; End of function InitializeEggRoboVariantFromSubtype
 
 ; ---------------------------------------------------------------------------
 off_9186E:
@@ -323,7 +323,7 @@ locret_918C2:
 ; ---------------------------------------------------------------------------
 
 loc_918C4:
-                bsr.w   sub_91914
+                bsr.w   RequireEggRoboAppearanceGroupBit
                 lea     ObjDat3_919A6(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #loc_9159A,(a0)
@@ -332,14 +332,14 @@ loc_918C4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_918E2:
+ResetEggRoboHoverSwing:
                 move.w  #$100,d0
                 move.w  d0,$3E(a0)
                 move.w  d0,y_vel(a0)
                 move.w  #8,$40(a0)
                 bclr    #0,$38(a0)
                 rts
-; End of function sub_918E2
+; End of function ResetEggRoboHoverSwing
 
 ; ---------------------------------------------------------------------------
 
@@ -352,7 +352,7 @@ loc_918FC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_91914:
+RequireEggRoboAppearanceGroupBit:
                 move.b  subtype(a0),d0
                 andi.w  #$F0,d0
                 lsr.w   #4,d0
@@ -361,11 +361,11 @@ sub_91914:
                 bne.w   locret_918C2
                 addq.w  #8,sp
                 jmp     (loc_85088).l
-; End of function sub_91914
+; End of function RequireEggRoboAppearanceGroupBit
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_91930:
+FollowEggRoboGunUsingCachedParentY:
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),d0
                 move.b  child_dx(a0),d1
@@ -396,11 +396,11 @@ loc_91980:
                 add.w   d1,d0
                 move.w  d0,y_pos(a0)
                 rts
-; End of function sub_91930
+; End of function FollowEggRoboGunUsingCachedParentY
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_91988:
+SetEggRoboFrameFromVblankParity:
                 moveq   #1,d0
                 btst    #0,(V_int_run_count+3).w
                 beq.s   loc_91994
@@ -409,7 +409,7 @@ sub_91988:
 loc_91994:
                 move.b  d0,mapping_frame(a0)
                 rts
-; End of function sub_91988
+; End of function SetEggRoboFrameFromVblankParity
 
 ; ---------------------------------------------------------------------------
 ObjDat3_9199A:

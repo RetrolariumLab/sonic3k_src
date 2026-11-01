@@ -278,7 +278,7 @@ loc_64C24:
 loc_64C5C:
                 lea     byte_6683A(pc),a1
                 jsr     (Animate_RawNoSST).l
-                bsr.w   sub_66236
+                bsr.w   HPZKnucklesDustQueueDPLCWhenFrameChanges
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 

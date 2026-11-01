@@ -152,14 +152,14 @@ loc_593EA:
 ; ---------------------------------------------------------------------------
 
 loc_59404:
-                bsr.w   sub_59520
+                bsr.w   ProbePenguinatorFloorAtNextHorizontalPosition
                 cmpi.w  #-2,d1
                 blt.w   loc_5938C
                 cmpi.w  #$C,d1
                 bge.s   loc_593A0
                 add.w   d1,y_pos(a0)
-                bsr.w   sub_59534
-                bsr.w   sub_5955A
+                bsr.w   SetPenguinatorSlidingPoseFromFloorAngle
+                bsr.w   EmitPenguinatorSkidSoundAndSnowdustByCountdown
                 jsr     (MoveSprite2).l
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
@@ -176,7 +176,7 @@ loc_5942C:
 ; ---------------------------------------------------------------------------
 
 loc_59452:
-                bsr.w   sub_59520
+                bsr.w   ProbePenguinatorFloorAtNextHorizontalPosition
                 cmpi.w  #-2,d1
                 blt.w   loc_5938C
                 cmpi.w  #$C,d1
@@ -199,7 +199,7 @@ loc_5948C:
                 add.w   $40(a0),d0
                 move.w  d0,x_vel(a0)
                 beq.s   loc_594B4
-                bsr.w   sub_59520
+                bsr.w   ProbePenguinatorFloorAtNextHorizontalPosition
                 cmpi.w  #-2,d1
                 blt.s   loc_594B4
                 cmpi.w  #$C,d1
@@ -250,18 +250,18 @@ loc_59512:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59520:
+ProbePenguinatorFloorAtNextHorizontalPosition:
                 move.w  x_vel(a0),d3
                 ext.l   d3
                 lsl.l   #8,d3
                 add.l   x_pos(a0),d3
                 swap    d3
                 jmp     (ObjCheckFloorDist2).l
-; End of function sub_59520
+; End of function ProbePenguinatorFloorAtNextHorizontalPosition
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59534:
+SetPenguinatorSlidingPoseFromFloorAngle:
                 moveq   #4,d0
                 tst.b   d3
                 beq.s   loc_59544
@@ -272,7 +272,7 @@ sub_59534:
 loc_59544:
                 move.b  d0,mapping_frame(a0)
                 rts
-; End of function sub_59534
+; End of function SetPenguinatorSlidingPoseFromFloorAngle
 
 ; ---------------------------------------------------------------------------
 RawAni_5954A:
@@ -281,7 +281,7 @@ RawAni_5954A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5955A:
+EmitPenguinatorSkidSoundAndSnowdustByCountdown:
                 move.w  $2E(a0),d0
                 andi.w  #3,d0
                 bne.s   locret_59502
@@ -289,7 +289,7 @@ sub_5955A:
                 jsr     (Play_SFX).l
                 lea     ChildObjDat_59592(pc),a2
                 jmp     CreateChild1_Normal(pc)
-; End of function sub_5955A
+; End of function EmitPenguinatorSkidSoundAndSnowdustByCountdown
 
 ; ---------------------------------------------------------------------------
 ObjSlot_Penguinator:

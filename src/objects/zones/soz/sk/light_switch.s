@@ -75,16 +75,16 @@ loc_40F2E:
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d0
-                bsr.w   sub_40F52
+                bsr.w   UpdatePlayerHangingFromSozLightSwitch
                 lea     (Player_2).w,a1
                 addq.w  #1,a2
                 move.w  (Ctrl_2_logical).w,d0
-                bsr.w   sub_40F52
+                bsr.w   UpdatePlayerHangingFromSozLightSwitch
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_40F52:
+UpdatePlayerHangingFromSozLightSwitch:
                 tst.b   (a2)
                 beq.w   loc_4100E
                 tst.b   render_flags(a1)
@@ -183,7 +183,7 @@ loc_4101C:
 
 locret_4108E:
                 rts
-; End of function sub_40F52
+; End of function UpdatePlayerHangingFromSozLightSwitch
 
 ; ---------------------------------------------------------------------------
 Map_SOZLightSwitch:

@@ -42,7 +42,7 @@ word_516EA:
 ; ---------------------------------------------------------------------------
 
 loc_516FA:
-                bsr.w   sub_5174A
+                bsr.w   FadeLBZEndingMusicOnceAtCameraYOffset
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #$F,d0
                 bne.s   loc_51730
@@ -69,7 +69,7 @@ loc_5173E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5174A:
+FadeLBZEndingMusicOnceAtCameraYOffset:
                 move.w  (Camera_Y_pos).w,d0
                 addi.w  #$80,d0
                 cmp.w   y_pos(a0),d0
@@ -80,7 +80,7 @@ sub_5174A:
 
 locret_51762:
                 rts
-; End of function sub_5174A
+; End of function FadeLBZEndingMusicOnceAtCameraYOffset
 
 ; ---------------------------------------------------------------------------
 
@@ -101,7 +101,7 @@ loc_5177E:
                 jsr     (Play_SFX).l
                 moveq   #signextendB(mus_Ending),d0
                 jsr     (Play_Music).l
-                jsr     sub_5439C(pc)
+                jsr     GetS3LBZEndingCharacterVariant(pc)
                 lsl.w   #2,d0
                 movea.l off_517AE(pc,d0.w),a1
                 move.w  #tiles_to_bytes(ArtTile_Ending_S3EndPose),d2
@@ -221,7 +221,7 @@ loc_518E8:
                 move.w  y_pos(a1),y_pos(a0)
                 movea.w (_unkFAA4).w,a1
                 move.l  #Go_Delete_Sprite,(a1)
-                jsr     sub_5439C(pc)
+                jsr     GetS3LBZEndingCharacterVariant(pc)
                 moveq   #0,d1
                 subq.w  #1,d0
                 beq.s   loc_51920
@@ -254,7 +254,7 @@ loc_5193C:
                 move.b  #0,mapping_frame(a0)
                 subi.w  #$10,y_pos(a0)
                 move.b  #0,(Player_1+mapping_frame).w
-                bsr.w   sub_51EB0
+                bsr.w   LoadLBZEndingPosePaletteLine
 
 loc_5195E:
                 subq.w  #1,$2E(a0)
@@ -280,7 +280,7 @@ loc_51994:
                 move.b  #2,mapping_frame(a0)
                 subi.w  #$10,y_pos(a0)
                 move.b  #0,(Player_1+mapping_frame).w
-                bsr.w   sub_51EB0
+                bsr.w   LoadLBZEndingPosePaletteLine
                 bra.s   loc_5195E
 ; ---------------------------------------------------------------------------
 
@@ -315,7 +315,7 @@ loc_51A06:
                 move.w  d0,y_pos(a0)
                 move.w  #-$800,x_vel(a0)
                 move.w  #-$400,y_vel(a0)
-                bra.w   sub_51EB0
+                bra.w   LoadLBZEndingPosePaletteLine
 ; ---------------------------------------------------------------------------
 
 loc_51A34:

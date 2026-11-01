@@ -87,7 +87,7 @@ loc_57B5A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_57B70:
+AcceptIczPlatformHorizontalVelocityInRange:
                 cmpi.w  #-$C00,d0
                 blt.s   locret_57B80
                 cmpi.w  #$C00,d0
@@ -96,11 +96,11 @@ sub_57B70:
 
 locret_57B80:
                 rts
-; End of function sub_57B70
+; End of function AcceptIczPlatformHorizontalVelocityInRange
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_57B82:
+ApplyIczPlatformGravityWithinVelocityRange:
                 move.w  y_vel(a0),d0
                 addi.w  #$38,d0
                 cmpi.w  #-$C00,d0
@@ -111,11 +111,11 @@ sub_57B82:
 
 locret_57B9A:
                 rts
-; End of function sub_57B82
+; End of function ApplyIczPlatformGravityWithinVelocityRange
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_57B9C:
+SetIczPlatformDepartureYVelocityFromAngle:
                 move.b  angle(a0),d3
                 lsr.b   #3,d3
                 andi.w  #$E,d3
@@ -126,7 +126,7 @@ sub_57B9C:
 loc_57BAE:
                 move.w  off_57BB6(pc,d3.w),d0
                 jmp     off_57BB6(pc,d0.w)
-; End of function sub_57B9C
+; End of function SetIczPlatformDepartureYVelocityFromAngle
 
 ; ---------------------------------------------------------------------------
 off_57BB6:
@@ -157,7 +157,7 @@ loc_57BD4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_57BDA:
+SetFastVerticalCameraForIczPlatformRider:
                 clr.b   (Fast_V_scroll_flag).w
                 btst    #p1_standing_bit,status(a0)
                 beq.s   locret_57BEA
@@ -165,7 +165,7 @@ sub_57BDA:
 
 locret_57BEA:
                 rts
-; End of function sub_57BDA
+; End of function SetFastVerticalCameraForIczPlatformRider
 
 ; ---------------------------------------------------------------------------
 ObjDat_ICZPathFollowPlatform:

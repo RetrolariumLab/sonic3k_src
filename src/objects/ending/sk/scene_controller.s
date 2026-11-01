@@ -46,7 +46,7 @@ loc_5D8BC:
                 jsr     (SetUp_ObjAttributes).l
                 bclr    #2,render_flags(a0)
                 move.b  #2,routine(a0)
-                bsr.w   sub_5FE82
+                bsr.w   EndingClearSceneMotionScratchAndClassifyEmeraldOutcome
                 st      (Scroll_lock).w
                 clr.b   (_unkFAB8).w
                 lea     (Player_1).w,a1
@@ -65,7 +65,7 @@ loc_5D8BC:
                 bne.s   loc_5D944
                 cmpi.w  #2,(Player_mode).w
                 bhs.w   loc_5D96A
-                bsr.w   sub_5FC8E
+                bsr.w   EndingPrepareSuperSonicVisualState
                 jsr     (AllocateObject).l
                 bne.s   loc_5D940
                 move.l  #Obj_Ending_RevertSuperSonic,(a1)
@@ -78,12 +78,12 @@ loc_5D944:
                 clr.b   (Player_1+anim).w
                 cmpi.w  #2,(Player_mode).w
                 bne.s   loc_5D958
-                bsr.w   sub_5FCB4
+                bsr.w   EndingPrepareSuperTailsPaletteState
                 bra.w   loc_5D96A
 ; ---------------------------------------------------------------------------
 
 loc_5D958:
-                bsr.w   sub_5FCCE
+                bsr.w   EndingAndDDZPrepareHyperSonicVisualState
 
 loc_5D95C:
                 move.l  #$EEE0EEE,d0
@@ -216,7 +216,7 @@ loc_5DACC:
 loc_5DB1C:
                 move.b  #5,anim(a1)
                 move.b  #$83,$2E(a1)
-                bsr.w   sub_5FD88
+                bsr.w   EndingSetP1PoseFrameByPlayerModeAndLoadArt
 
 loc_5DB2C:
                 subq.w  #1,$2E(a0)
@@ -234,13 +234,13 @@ loc_5DB38:
                 move.w  #(5*60)-1,$2E(a0)
 
 loc_5DB5C:
-                bra.w   sub_60000
+                bra.w   EndingBobYFromSavedBaseAndByteSinePhase
 ; ---------------------------------------------------------------------------
 
 loc_5DB60:
                 tst.w   (_unkFAA4).w
                 bne.s   loc_5DB6A
-                bra.w   sub_60000
+                bra.w   EndingBobYFromSavedBaseAndByteSinePhase
 ; ---------------------------------------------------------------------------
 
 loc_5DB6A:
@@ -264,7 +264,7 @@ loc_5DB76:
                 jsr     (Queue_Kos_Module).l
 
 loc_5DBB2:
-                bra.w   sub_60000
+                bra.w   EndingBobYFromSavedBaseAndByteSinePhase
 ; ---------------------------------------------------------------------------
 word_5DBB6:
                 dc.w    $69C,  $384
@@ -280,7 +280,7 @@ loc_5DBBE:
                 move.w  #(5*60)-1,$2E(a0)
 
 loc_5DBD8:
-                bra.w   sub_60000
+                bra.w   EndingBobYFromSavedBaseAndByteSinePhase
 ; ---------------------------------------------------------------------------
 
 loc_5DBDC:
@@ -291,7 +291,7 @@ loc_5DBDC:
                 move.w  #$8F,$2E(a0)
 
 loc_5DBF2:
-                bra.w   sub_60000
+                bra.w   EndingBobYFromSavedBaseAndByteSinePhase
 ; ---------------------------------------------------------------------------
 
 loc_5DBF6:
@@ -301,7 +301,7 @@ loc_5DBF6:
 
 loc_5DC02:
                 addq.w  #2,(_unkEE98).w
-                bsr.w   sub_60000
+                bsr.w   EndingBobYFromSavedBaseAndByteSinePhase
                 subq.w  #1,$2E(a0)
                 bpl.s   locret_5DC2A
                 move.b  #$14,routine(a0)
@@ -326,7 +326,7 @@ loc_5DC2C:
                 lea     (Player_1).w,a1
                 clr.b   mapping_frame(a1)
                 move.w  #$100,x_vel(a0)
-                bsr.w   sub_6001E
+                bsr.w   EndingInitializeGentleVerticalSwing
                 lea     ChildObjDat_601CA(pc),a2
                 jsr     (CreateChild6_Simple).l
                 lea     ChildObjDat_601D0(pc),a2

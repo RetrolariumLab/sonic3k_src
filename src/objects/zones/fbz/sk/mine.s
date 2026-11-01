@@ -14,14 +14,14 @@ Obj_FBZMine:
 
 loc_3C972:
                 lea     (Player_1).w,a1
-                bsr.s   sub_3C984
+                bsr.s   ArmFbzMineNearPlayer
                 lea     (Player_2).w,a1
-                bsr.s   sub_3C984
+                bsr.s   ArmFbzMineNearPlayer
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3C984:
+ArmFbzMineNearPlayer:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$10,d0
@@ -39,7 +39,7 @@ sub_3C984:
 
 locret_3C9BA:
                 rts
-; End of function sub_3C984
+; End of function ArmFbzMineNearPlayer
 
 ; ---------------------------------------------------------------------------
 

@@ -38,7 +38,7 @@ CheckRightCeilingDist:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_FA1A:
+ProbeRightWallAtBodyExtents:
                 move.w  y_pos(a0),d2
                 move.w  x_pos(a0),d3
                 moveq   #0,d0
@@ -69,7 +69,7 @@ sub_FA1A:
                 move.w  (sp)+,d0
                 move.b  #-$40,d2
                 bra.w   loc_F7E2
-; End of function sub_FA1A
+; End of function ProbeRightWallAtBodyExtents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -160,7 +160,7 @@ Sonic_CheckCeiling:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_FB5A:
+ProbeCeilingWithInsetHorizontalRadius:
                 move.w  y_pos(a0),d2
                 move.w  x_pos(a0),d3
                 moveq   #0,d0
@@ -195,7 +195,7 @@ sub_FB5A:
                 move.w  (sp)+,d0
                 move.b  #$80,d2
                 bra.w   loc_F7E2
-; End of function sub_FB5A
+; End of function ProbeCeilingWithInsetHorizontalRadius
 
 ; ---------------------------------------------------------------------------
 
@@ -341,7 +341,7 @@ CheckLeftCeilingDist:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_FD32:
+ProbeLeftWallAtBodyExtents:
                 move.w  y_pos(a0),d2
                 move.w  x_pos(a0),d3
                 moveq   #0,d0
@@ -374,7 +374,7 @@ sub_FD32:
                 move.w  (sp)+,d0
                 move.b  #$40,d2
                 bra.w   loc_F7E2
-; End of function sub_FD32
+; End of function ProbeLeftWallAtBodyExtents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -410,7 +410,7 @@ loc_FDC8:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_FDEC:
+ProbeLeftWallUsingYRadius:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
                 beq.s   loc_FE00
@@ -436,7 +436,7 @@ loc_FE00:
 
 locret_FE3A:
                 rts
-; End of function sub_FDEC
+; End of function ProbeLeftWallUsingYRadius
 
 ; =============== S U B R O U T I N E =======================================
 

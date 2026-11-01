@@ -160,10 +160,10 @@ loc_59C26:
                 move.l  d0,(a1)+
                 dbf     d1,loc_59C26
                 move.w  (a3),$7C(a3)
-                jsr     sub_59D82(pc)
+                jsr     PositionLrz3DistantBackground(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 jsr     (Refresh_PlaneFull).l
-                jmp     sub_59DDE(pc)
+                jmp     ApplyLrz3HeatRippleOrPlainScroll(pc)
 ; ---------------------------------------------------------------------------
 
 LRZ3_BackgroundEvent:
@@ -191,7 +191,7 @@ loc_59C60:
 ; ---------------------------------------------------------------------------
 
 loc_59C6E:
-                jsr     sub_59D82(pc)
+                jsr     PositionLrz3DistantBackground(pc)
 
 loc_59C72:
                 jsr     (DrawBGAsYouMove).l
@@ -201,7 +201,7 @@ loc_59C72:
                 move.w  (Events_bg+$06).w,(Camera_Y_pos_BG_copy).w
 
 loc_59C88:
-                jmp     sub_59DDE(pc)
+                jmp     ApplyLrz3HeatRippleOrPlainScroll(pc)
 ; ---------------------------------------------------------------------------
 
 loc_59C8C:
@@ -225,15 +225,15 @@ loc_59CBE:
 ; ---------------------------------------------------------------------------
 
 loc_59CCA:
-                jsr     sub_59DA2(pc)
+                jsr     PositionLrz3BossArenaBackground(pc)
                 jsr     (DrawBGAsYouMove).l
-                jmp     sub_59DDE(pc)
+                jmp     ApplyLrz3HeatRippleOrPlainScroll(pc)
 ; ---------------------------------------------------------------------------
 
 loc_59CD8:
                 move.w  (Camera_X_pos_BG_copy).w,(Events_bg+$04).w
                 move.w  (Camera_Y_pos_BG_copy).w,(Events_bg+$06).w
-                jsr     sub_59D82(pc)
+                jsr     PositionLrz3DistantBackground(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 and.w   (Camera_Y_pos_mask).w,d0
                 move.w  d0,(Draw_delayed_position).w
@@ -243,7 +243,7 @@ loc_59CD8:
 ; ---------------------------------------------------------------------------
 
 loc_59D02:
-                jsr     sub_59D82(pc)
+                jsr     PositionLrz3DistantBackground(pc)
 
 loc_59D06:
                 move.w  (Camera_X_pos_BG_copy).w,d1
@@ -262,13 +262,13 @@ loc_59D24:
                 beq.s   loc_59D66
 
 loc_59D30:
-                jsr     sub_59DBC(pc)
+                jsr     BuildLrz3ArenaColumnScroll(pc)
                 lea     word_5A106(pc),a4
                 lea     (HScroll_table).w,a5
                 moveq   #$F,d6
                 moveq   #$14,d5
                 jsr     (DrawTilesVDeform2).l
-                jsr     sub_59DDE(pc)
+                jsr     ApplyLrz3HeatRippleOrPlainScroll(pc)
                 lea     (Vscroll_buffer).w,a1
                 lea     (HScroll_table).w,a5
                 move.w  (Camera_Y_pos_copy).w,d0
@@ -289,13 +289,13 @@ loc_59D66:
                 addq.w  #4,(Events_routine_bg).w
 
 loc_59D74:
-                jsr     sub_59DA2(pc)
+                jsr     PositionLrz3BossArenaBackground(pc)
                 jsr     (DrawBGAsYouMove).l
-                jmp     sub_59DDE(pc)
+                jmp     ApplyLrz3HeatRippleOrPlainScroll(pc)
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59D82:
+PositionLrz3DistantBackground:
                 move.w  (Camera_Y_pos_copy).w,d0
                 asr.w   #4,d0
                 addi.w  #$10,d0
@@ -306,11 +306,11 @@ sub_59D82:
                 asr.w   #1,d0
                 move.w  d0,(Events_bg+$12).w
                 rts
-; End of function sub_59D82
+; End of function PositionLrz3DistantBackground
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59DA2:
+PositionLrz3BossArenaBackground:
                 move.w  (Camera_X_pos_copy).w,d0
                 subi.w  #$700,d0
                 move.w  d0,(Camera_X_pos_BG_copy).w
@@ -318,12 +318,12 @@ sub_59DA2:
                 subi.w  #$500,d0
                 move.w  d0,(Camera_Y_pos_BG_copy).w
                 rts
-; End of function sub_59DA2
+; End of function PositionLrz3BossArenaBackground
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59DBC:
-                bsr.s   sub_59DA2
+BuildLrz3ArenaColumnScroll:
+                bsr.s   PositionLrz3BossArenaBackground
                 lea     (HScroll_table).w,a1
                 lea     $113(a1),a5
                 moveq   #$30,d1
@@ -339,11 +339,11 @@ loc_59DCA:
                 addq.w  #8,a5
                 dbf     d2,loc_59DCA
                 rts
-; End of function sub_59DBC
+; End of function BuildLrz3ArenaColumnScroll
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59DDE:
+ApplyLrz3HeatRippleOrPlainScroll:
                 tst.b   (End_of_level_flag).w
                 bne.s   loc_59DF2
                 tst.b   (_unkFACD).w
@@ -385,7 +385,7 @@ loc_59E34:
                 move.w  d3,(a1)+
                 dbf     d2,loc_59E34
                 rts
-; End of function sub_59DDE
+; End of function ApplyLrz3HeatRippleOrPlainScroll
 
 ; ---------------------------------------------------------------------------
 
@@ -496,13 +496,13 @@ loc_59F3C:
                 move.w  d0,(Camera_max_X_pos).w
                 movem.w d0/d2,-(sp)
                 lea     (Player_1).w,a1
-                bsr.s   sub_59F82
+                bsr.s   ConstrainPlayerDuringLrz3Autoscroll
                 movem.w (sp)+,d0/d2
                 lea     (Player_2).w,a1
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59F82:
+ConstrainPlayerDuringLrz3Autoscroll:
                 cmpi.b  #5,anim(a1)
                 bne.s   loc_59F8E
                 clr.b   anim(a1)
@@ -532,7 +532,7 @@ loc_59FB4:
 
 locret_59FC2:
                 rts
-; End of function sub_59F82
+; End of function ConstrainPlayerDuringLrz3Autoscroll
 
 ; ---------------------------------------------------------------------------
 
@@ -650,7 +650,7 @@ loc_5A0AC:
                 bne.s   loc_5A0D6
                 tst.b   (_unkFACD).w
                 bne.s   loc_5A0D6
-                jsr     (sub_24280).l
+                jsr     (HurtPlayerFromSolidHazard).l
 
 loc_5A0D6:
                 move.l  (Events_bg+$14).w,d0
@@ -664,7 +664,7 @@ loc_5A0DE:
                 bne.s   loc_5A0FC
                 tst.b   (_unkFACD).w
                 bne.s   loc_5A0FC
-                jsr     (sub_24280).l
+                jsr     (HurtPlayerFromSolidHazard).l
 
 loc_5A0FC:
                 move.l  (Events_bg+$14).w,d0

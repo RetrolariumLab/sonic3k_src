@@ -93,7 +93,7 @@ Setup_TileColumnDraw:
                 add.w   d5,d5
                 adda.w  d5,a0
                 jsr     Get_LevelChunkColumn(pc)
-                bra.s   sub_4EA4A
+                bra.s   BuildTileColumnBlockWords
 ; ---------------------------------------------------------------------------
 
 loc_4E9FC:
@@ -114,7 +114,7 @@ loc_4E9FC:
                 add.w   d4,d4
                 adda.w  d4,a0
                 jsr     Get_LevelChunkColumn(pc)
-                bsr.s   sub_4EA4A
+                bsr.s   BuildTileColumnBlockWords
                 move.w  (sp)+,d6
                 move.w  d0,d5
                 asr.w   #2,d5
@@ -130,7 +130,7 @@ loc_4E9FC:
                 add.w   d5,d5
                 adda.w  d5,a0
 
-sub_4EA4A:
+BuildTileColumnBlockWords:
                 swap    d7
 
 loc_4EA4C:
@@ -421,7 +421,7 @@ loc_4EC8A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4ECAA:
+SetupExplicitTileRowDraw:
                 asr.w   #4,d1
                 move.w  d1,d2
                 asr.w   #3,d1
@@ -437,4 +437,4 @@ sub_4ECAA:
                 adda.w  d5,a0
                 jsr     Get_LevelAddrChunkRow(pc)
                 bra.w   loc_4EBF2
-; End of function sub_4ECAA
+; End of function SetupExplicitTileRowDraw

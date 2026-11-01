@@ -8,7 +8,7 @@ Obj_FBZ2Subboss:
                 move.b  routine(a0),d0
                 move.w  FBZ2Subboss_Index(pc,d0.w),d1
                 jsr     FBZ2Subboss_Index(pc,d1.w)
-                bsr.w   sub_4DA98
+                bsr.w   FlashAndResetFBZAct2SubbossHitState
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 FBZ2Subboss_Index:
@@ -47,7 +47,7 @@ loc_4D5D6:
                 jsr     Find_OtherObject(pc)
                 cmpi.w  #$18,d2
                 bhs.s   loc_4D5E8
-                bsr.w   sub_4D632
+                bsr.w   CreateFBZAct2SubbossSideBarriersOnce
 
 loc_4D5E8:
                 jmp     Obj_Wait(pc)
@@ -79,7 +79,7 @@ loc_4D618:
                 move.w  #$3F,$2E(a0)
                 move.l  #loc_4D64E,$34(a0)
 
-sub_4D632:
+CreateFBZAct2SubbossSideBarriersOnce:
                 bset    #7,$38(a0)
                 bne.w   locret_4D600
                 lea     ChildObjDat_4DB44(pc),a2
@@ -117,7 +117,7 @@ loc_4D67A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4D692:
+SetFBZAct2SubbossChaseVelocity:
                 lea     (Player_1).w,a1
                 jsr     (Find_OtherObject).l
                 move.w  #$100,d1
@@ -128,7 +128,7 @@ sub_4D692:
 loc_4D6A6:
                 move.w  d1,x_vel(a0)
                 rts
-; End of function sub_4D692
+; End of function SetFBZAct2SubbossChaseVelocity
 
 ; ---------------------------------------------------------------------------
 
@@ -146,7 +146,7 @@ loc_4D6C8:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #$1F,d0
                 bne.s   loc_4D6DC
-                bsr.s   sub_4D692
+                bsr.s   SetFBZAct2SubbossChaseVelocity
 
 loc_4D6DC:
                 move.w  #$100,d0
@@ -482,7 +482,7 @@ word_4DA88:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4DA98:
+FlashAndResetFBZAct2SubbossHitState:
                 tst.b   collision_flags(a0)
                 bne.s   locret_4DAE8
                 tst.b   $20(a0)
@@ -511,7 +511,7 @@ loc_4DAC4:
 
 locret_4DAE8:
                 rts
-; End of function sub_4DA98
+; End of function FlashAndResetFBZAct2SubbossHitState
 
 ; ---------------------------------------------------------------------------
 word_4DAEA:

@@ -74,8 +74,8 @@ loc_C5AA:
 ; ---------------------------------------------------------------------------
 
 loc_C5D4:
-                jsr     sub_C6EE(pc)
-                jsr     sub_C726(pc)
+                jsr     S3SaveEraseAdvanceMainIconBlinkSequence(pc)
+                jsr     S3SaveEraseCycleChildFramesEightThroughEleven(pc)
                 tst.w   (Player_2+object_control).w
                 bne.s   loc_C624
                 move.b  (Ctrl_1_pressed).w,d0
@@ -139,8 +139,8 @@ loc_C688:
 ; ---------------------------------------------------------------------------
 
 loc_C68C:
-                jsr     sub_C6EE(pc)
-                jsr     sub_C726(pc)
+                jsr     S3SaveEraseAdvanceMainIconBlinkSequence(pc)
+                jsr     S3SaveEraseCycleChildFramesEightThroughEleven(pc)
                 cmpi.b  #$B,sub2_mapframe(a0)
                 bne.s   loc_C6A6
                 move.b  #$C,sub2_mapframe(a0)
@@ -151,7 +151,7 @@ loc_C6A6:
 ; ---------------------------------------------------------------------------
 
 loc_C6AC:
-                jsr     sub_C6EE(pc)
+                jsr     S3SaveEraseAdvanceMainIconBlinkSequence(pc)
                 btst    #button_right,(Ctrl_1_pressed).w
                 bne.s   loc_C6DA
                 btst    #button_left,(Ctrl_1_pressed).w
@@ -175,7 +175,7 @@ loc_C6E8:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_C6EE:
+S3SaveEraseAdvanceMainIconBlinkSequence:
                 subq.b  #1,anim_frame_timer(a0)
                 bpl.s   locret_C714
                 move.b  #5,anim_frame_timer(a0)
@@ -195,7 +195,7 @@ loc_C710:
 
 locret_C714:
                 rts
-; End of function sub_C6EE
+; End of function S3SaveEraseAdvanceMainIconBlinkSequence
 
 ; ---------------------------------------------------------------------------
 byte_C716:
@@ -204,7 +204,7 @@ byte_C716:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_C726:
+S3SaveEraseCycleChildFramesEightThroughEleven:
                 subq.b  #1,$25(a0)
                 bpl.s   locret_C744
                 move.b  #3,$25(a0)
@@ -216,7 +216,7 @@ sub_C726:
 
 locret_C744:
                 rts
-; End of function sub_C726
+; End of function S3SaveEraseCycleChildFramesEightThroughEleven
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -257,9 +257,9 @@ loc_C78C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_C794:
+S3SaveWriteEncodedLabelTilesUntilNegativeTerminator:
                 lea     (VDP_data_port).l,a6
-                jsr     sub_BAF8(pc)
+                jsr     S3SaveConvertVRAMWordAddressToWriteCommand(pc)
                 move.l  d0,VDP_control_port-VDP_data_port(a6)
                 move.w  #make_art_tile(ArtTile_Save_Text-$10,1,1),d5
                 moveq   #0,d6
@@ -281,6 +281,6 @@ loc_C7B2:
 
 locret_C7BC:
                 rts
-; End of function sub_C794
+; End of function S3SaveWriteEncodedLabelTilesUntilNegativeTerminator
 
 ; ---------------------------------------------------------------------------

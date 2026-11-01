@@ -133,7 +133,7 @@ loc_27F2A:
 
 loc_27F5A:
                 addq.w  #2,a3
-                bsr.s   sub_27F66
+                bsr.s   AniLBZ2_UpdateWaterlineTiles
                 addq.w  #4,a3
                 bra.w   loc_286E8
 ; ---------------------------------------------------------------------------
@@ -143,7 +143,7 @@ loc_27F64:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_27F66:
+AniLBZ2_UpdateWaterlineTiles:
                 moveq   #0,d1
                 move.w  (Events_bg+$10).w,d1
                 cmp.w   (a3),d1
@@ -180,7 +180,7 @@ loc_27F9A:
                 tst.w   2(a3)
                 beq.s   locret_27FE2
                 move.w  #0,2(a3)
-                bsr.w   sub_28066
+                bsr.w   AniLBZ2_RestoreUpperBackground
 
 locret_27FE2:
                 rts
@@ -216,7 +216,7 @@ loc_28000:
                 tst.w   2(a3)
                 bmi.s   locret_28046
                 move.w  #-1,2(a3)
-                bsr.s   sub_28052
+                bsr.s   AniLBZ2_RestoreLowerBackground
 
 locret_28046:
                 rts
@@ -228,44 +228,44 @@ locret_28048:
 
 loc_2804A:
                 move.w  #1,2(a3)
-                bsr.s   sub_28066
-; End of function sub_27F66
+                bsr.s   AniLBZ2_RestoreUpperBackground
+; End of function AniLBZ2_UpdateWaterlineTiles
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_28052:
+AniLBZ2_RestoreLowerBackground:
                 move.l  #ArtUnc_AniLBZ2_LowerBG,d1
                 move.w  #tiles_to_bytes($2C3),d2
                 move.w  #$100,d3
                 jmp     (Add_To_DMA_Queue).l
-; End of function sub_28052
+; End of function AniLBZ2_RestoreLowerBackground
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_28066:
+AniLBZ2_RestoreUpperBackground:
                 move.l  #ArtUnc_AniLBZ2_UpperBG,d1
                 move.w  #tiles_to_bytes($2D3),d2
                 move.w  #$100,d3
                 jmp     (Add_To_DMA_Queue).l
-; End of function sub_28066
+; End of function AniLBZ2_RestoreUpperBackground
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2807A:
+AniLBZ2_InitWaterlineTiles:
                 lea     (Anim_Counters+4).w,a3
                 move.w  #1,2(a3)
                 move.w  (Events_bg+$10).w,d1
                 beq.s   loc_2804A
                 bpl.s   loc_280A6
-                bsr.s   sub_28066
+                bsr.s   AniLBZ2_RestoreUpperBackground
                 move.l  #ArtUnc_AniLBZ2_WaterlineBelow,d1
                 move.w  #tiles_to_bytes($2C3),d2
                 move.w  #$100,d3
                 jsr     (Add_To_DMA_Queue).l
-                bra.w   sub_27F66
+                bra.w   AniLBZ2_UpdateWaterlineTiles
 ; ---------------------------------------------------------------------------
 
 loc_280A6:
-                bsr.s   sub_28052
-                bra.w   sub_27F66
-; End of function sub_2807A
+                bsr.s   AniLBZ2_RestoreLowerBackground
+                bra.w   AniLBZ2_UpdateWaterlineTiles
+; End of function AniLBZ2_InitWaterlineTiles

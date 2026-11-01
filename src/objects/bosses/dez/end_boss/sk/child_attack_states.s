@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7F4B8:
+ScheduleDEZBossCapsuleExplosionThenThreeDebris:
                 move.l  #loc_7F4EE,$34(a0)
 
 loc_7F4C0:
@@ -19,7 +19,7 @@ loc_7F4D4:
                 subq.b  #1,$39(a1)
                 move.w  #7,$2E(a0)
                 jmp     (Draw_Sprite).l
-; End of function sub_7F4B8
+; End of function ScheduleDEZBossCapsuleExplosionThenThreeDebris
 
 ; ---------------------------------------------------------------------------
 
@@ -36,8 +36,8 @@ loc_7F4FA:
                 jsr     off_7F51E(pc,d1.w)
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.w   sub_7F4AC
-                bsr.w   sub_7FB4E
+                bne.w   ScheduleDEZBossCapsuleExplosionThenDelete
+                bsr.w   DamageDEZEndBossFromCapsuleRangeAndDestroyCapsule
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 off_7F51E:
@@ -49,8 +49,8 @@ off_7F51E:
 ; ---------------------------------------------------------------------------
 
 loc_7F528:
-                bsr.w   sub_7F900
-                bsr.w   sub_7F8CA
+                bsr.w   HandleRestingDEZCapsulePlayerContactAndLaunch
+                bsr.w   DropDEZCapsuleWhenRestingSideMismatchesGravity
                 subq.w  #1,$2E(a0)
                 bmi.s   loc_7F55A
                 rts
@@ -58,11 +58,11 @@ loc_7F528:
 
 loc_7F538:
                 jsr     (MoveSprite2).l
-                bsr.w   sub_7F9A8
-                bsr.w   sub_7FA60
+                bsr.w   HandleRollingDEZCapsulePlayerContact
+                bsr.w   ReverseDEZEndBossAtInclusiveWorldXBounds
                 lea     byte_7FCDE(pc),a1
                 jsr     Animate_RawNoSST(pc)
-                bsr.w   sub_7F8CA
+                bsr.w   DropDEZCapsuleWhenRestingSideMismatchesGravity
                 subq.w  #1,$2E(a0)
                 bpl.w   locret_7F0D8
 
@@ -73,10 +73,10 @@ loc_7F55A:
 ; ---------------------------------------------------------------------------
 
 loc_7F568:
-                jsr     (sub_7F8A0).l
+                jsr     (MoveDEZBossCapsuleWithPreintegratedReversibleGravity).l
 
 loc_7F56E:
-                bsr.w   sub_7F9F8
+                bsr.w   HandleFallingDEZCapsuleContactSuppressionAndAttack
                 tst.w   y_vel(a0)
                 bpl.s   loc_7F5A0
                 jsr     (ObjCheckCeilingDist).l
@@ -118,8 +118,8 @@ loc_7F5D2:
                 bchg    #1,render_flags(a0)
 
 loc_7F5DE:
-                jsr     (sub_7F8A0).l
-                bsr.w   sub_7FA60
+                jsr     (MoveDEZBossCapsuleWithPreintegratedReversibleGravity).l
+                bsr.w   ReverseDEZEndBossAtInclusiveWorldXBounds
                 move.w  #$80,d0
                 tst.w   x_vel(a0)
                 bpl.s   loc_7F5F4
@@ -133,7 +133,7 @@ loc_7F5F4:
 loc_7F5FC:
                 subq.w  #1,$2E(a0)
                 bpl.s   locret_7F608
-                bsr.w   sub_7F4B8
+                bsr.w   ScheduleDEZBossCapsuleExplosionThenThreeDebris
                 addq.w  #4,sp
 
 locret_7F608:
@@ -145,7 +145,7 @@ loc_7F60A:
                 jsr     SetUp_ObjAttributes3(pc)
                 move.l  #loc_7F62E,(a0)
                 jsr     Refresh_ChildPositionAdjusted(pc)
-                bsr.w   sub_7FB1A
+                bsr.w   SeedDEZCapsuleThreeFragmentFramesAndVelocity
                 movea.w parent3(a0),a1
                 movea.w parent3(a1),a1
                 move.w  a1,parent3(a0)
@@ -328,7 +328,7 @@ loc_7F81E:
                 subq.b  #1,$39(a0)
                 bpl.s   loc_7F830
                 move.b  #3,$39(a0)
-                jsr     (sub_83E84).l
+                jsr     (BossExplosionSKSpawnAtMaskedRandomOffset).l
 
 loc_7F830:
                 move.w  x_vel(a0),d0
@@ -364,7 +364,7 @@ loc_7F872:
                 subq.b  #1,$39(a0)
                 bpl.s   loc_7F884
                 move.b  #3,$39(a0)
-                jsr     (sub_83E84).l
+                jsr     (BossExplosionSKSpawnAtMaskedRandomOffset).l
 
 loc_7F884:
                 move.w  y_vel(a0),d0

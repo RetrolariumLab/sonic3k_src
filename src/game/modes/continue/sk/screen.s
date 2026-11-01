@@ -47,7 +47,7 @@ loc_5C3BC:
                 lea     aCONTINUE(pc),a1
                 move.w  #$292,d2
                 move.w  #make_art_tile(ArtTile_Continue_Text,0,1),d6
-                jsr     (sub_5B318).l
+                jsr     (SKCreditsBuildAndUploadVariableWidthTwoRowText).l
                 cmpi.w  #3,(Player_mode).w
                 beq.s   loc_5C3FE
                 tst.w   (SK_alone_flag).w
@@ -66,7 +66,7 @@ loc_5C3FE:
                 move.l  #loc_5C4D6,(a1)
                 move.w  a1,(_unkFAA4).w
                 move.l  #loc_5C9DC,(Dynamic_object_RAM+object_size).w
-                bsr.w   sub_5CB1C
+                bsr.w   ContinueSeedAdditionalCountIconsInFixedSlots
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
                 move.b  #VInt_ID_16,(V_int_routine).w
@@ -131,7 +131,7 @@ loc_5C4E6:
                 subq.b  #1,d0
                 bmi.s   loc_5C514
                 move.b  d0,(_unkFA84).w
-                bsr.w   sub_5CAAE
+                bsr.w   ContinueDrawCountdownNibbleDigitsToPlaneA
 
 locret_5C512:
                 rts

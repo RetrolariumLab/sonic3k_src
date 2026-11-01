@@ -67,7 +67,7 @@ loc_8C03E:
 loc_8C052:
                 move.b  #$1A,collision_flags(a0)
                 move.b  #$7F,collision_property(a0)
-                bsr.w   sub_8C23C
+                bsr.w   RetractSnaleBlasterForNearbyRollingPlayer
                 jsr     Animate_RawMultiDelay(pc)
                 tst.w   d2
                 beq.s   locret_8C088
@@ -265,7 +265,7 @@ loc_8C234:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8C23C:
+RetractSnaleBlasterForNearbyRollingPlayer:
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$30,d2
                 bhs.s   locret_8C254
@@ -283,7 +283,7 @@ loc_8C256:
                 move.b  #3,mapping_frame(a0)
                 addq.w  #4,sp
                 rts
-; End of function sub_8C23C
+; End of function RetractSnaleBlasterForNearbyRollingPlayer
 
 ; ---------------------------------------------------------------------------
 ObjDat_SnaleBlaster:

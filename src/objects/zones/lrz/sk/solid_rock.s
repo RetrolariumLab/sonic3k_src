@@ -81,7 +81,7 @@ loc_441A6:
                 bclr    #0,(a2)
 
 loc_441D2:
-                bsr.w   sub_441F2
+                bsr.w   AdvanceTriggeredLrzSolidRockMotion
 
 loc_441D6:
                 move.w  #$23,d1
@@ -93,7 +93,7 @@ loc_441D6:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_441F2:
+AdvanceTriggeredLrzSolidRockMotion:
                 move.w  #$60,d2
                 tst.b   $30(a0)
                 bne.s   loc_44220
@@ -153,7 +153,7 @@ loc_4427C:
                 add.w   $46(a0),d0
                 move.w  d0,y_pos(a0)
                 rts
-; End of function sub_441F2
+; End of function AdvanceTriggeredLrzSolidRockMotion
 
 ; ---------------------------------------------------------------------------
 Map_LRZSolidRock:

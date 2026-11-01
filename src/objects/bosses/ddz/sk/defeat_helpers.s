@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_82D72:
+CopyDDZBossTwelvePaletteWordsAtByteOffset:
                 lea     word_82D86(pc),a1
                 lea     word_82D9E(pc,d0.w),a2
                 moveq   #$C-1,d1
@@ -14,7 +14,7 @@ sub_82D72:
                 move.w  (a2)+,(a3)+
                 dbf     d1,.loop
                 rts
-; End of function sub_82D72
+; End of function CopyDDZBossTwelvePaletteWordsAtByteOffset
 
 ; ---------------------------------------------------------------------------
 word_82D86:
@@ -42,7 +42,7 @@ loc_82DCE:
                 move.b  #90,(Player_1+invulnerability_timer).w
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
-                bsr.w   sub_82C6A
+                bsr.w   ReduceDDZFlightScrollSpeedByThreeWithOnePixelFloor
                 move.w  (_unkFA8E).w,d0
                 beq.s   loc_82E14
                 movea.w d0,a1
@@ -55,7 +55,7 @@ loc_82E14:
                 addi.w  #2*$C,d0
 
 loc_82E22:
-                bsr.w   sub_82D72
+                bsr.w   CopyDDZBossTwelvePaletteWordsAtByteOffset
                 subq.b  #1,$20(a0)
 
 locret_82E2A:
@@ -94,11 +94,11 @@ word_82E92:
 ; ---------------------------------------------------------------------------
 
 loc_82E9A:
-                bsr.w   sub_82C86
+                bsr.w   PositionDDZAttachedActorFromParentWordOffsets
                 subq.w  #1,$2E(a0)
                 bpl.s   loc_82EEE
                 moveq   #$18,d0
-                bsr.w   sub_82D72
+                bsr.w   CopyDDZBossTwelvePaletteWordsAtByteOffset
                 moveq   #signextendB(sfx_MissileExplode),d0
                 jsr     (Play_SFX).l
                 move.w  #$1F,$2E(a0)
@@ -125,7 +125,7 @@ loc_82EEA:
 
 loc_82EEE:
                 moveq   #0,d0
-                bra.w   sub_82D72
+                bra.w   CopyDDZBossTwelvePaletteWordsAtByteOffset
 ; ---------------------------------------------------------------------------
 word_82EF4:
                 dc.w    $C0,   $38
@@ -141,7 +141,7 @@ word_82EF4:
 ; ---------------------------------------------------------------------------
 
 loc_82F1C:
-                bsr.w   sub_82C86
+                bsr.w   PositionDDZAttachedActorFromParentWordOffsets
                 subq.w  #1,$2E(a0)
                 bpl.s   locret_82F6A
                 move.w  #$1F,$2E(a0)
@@ -174,7 +174,7 @@ word_82F6C:
 ; ---------------------------------------------------------------------------
 
 loc_82F78:
-                bsr.w   sub_82C86
+                bsr.w   PositionDDZAttachedActorFromParentWordOffsets
                 moveq   #0,d0
                 move.b  $39(a0),d0
                 cmpi.b  #$30,d0
@@ -243,7 +243,7 @@ loc_83004:
 loc_8302A:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                beq.w   sub_82C86
+                beq.w   PositionDDZAttachedActorFromParentWordOffsets
 
 loc_83038:
                 jmp     (Delete_Current_Sprite).l
@@ -265,11 +265,11 @@ loc_83064:
                 move.b  #$E,subtype(a1)
 
 loc_83078:
-                bra.w   sub_82C86
+                bra.w   PositionDDZAttachedActorFromParentWordOffsets
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8307C:
+TrySpawnDDZBossFourShotPatternByPlayerHeight:
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$140,d0
                 cmp.w   x_pos(a0),d0
@@ -290,11 +290,11 @@ sub_8307C:
 loc_830B8:
                 lea     ChildObjDat_8328E(pc),a2
                 jmp     CreateChild6_Simple(pc)
-; End of function sub_8307C
+; End of function TrySpawnDDZBossFourShotPatternByPlayerHeight
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_830C0:
+StepDDZBossXFromRightInputAndFlightControllerSpeed:
                 movea.w (_unkFA8E).w,a1
                 move.b  x_vel(a1),d1
                 ext.w   d1
@@ -327,7 +327,7 @@ loc_83100:
 
 locret_83106:
                 rts
-; End of function sub_830C0
+; End of function StepDDZBossXFromRightInputAndFlightControllerSpeed
 
 ; ---------------------------------------------------------------------------
 
@@ -344,7 +344,7 @@ loc_8311A:
                 moveq   #$40-1,d0
 
 loc_8312E:
-                jsr     sub_85EB4(pc)
+                jsr     EffectColorSKRaiseOneColorTowardWhite(pc)
                 dbf     d0,loc_8312E
                 subq.b  #1,$39(a0)
                 bmi.s   loc_8313E
@@ -357,7 +357,7 @@ loc_8313E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_83146:
+ConfigureDDZAsteroidSizeRangeAndHorizontalDriftFromSubtype:
                 move.b  subtype(a0),d0
                 move.w  d0,d1
                 andi.w  #$F0,d0
@@ -373,7 +373,7 @@ sub_83146:
                 add.w   d1,d1
                 move.w  word_8317E(pc,d1.w),x_vel(a0)
                 rts
-; End of function sub_83146
+; End of function ConfigureDDZAsteroidSizeRangeAndHorizontalDriftFromSubtype
 
 ; ---------------------------------------------------------------------------
 word_8317E:

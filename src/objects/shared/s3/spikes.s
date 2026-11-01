@@ -89,7 +89,7 @@ loc_226E0:
 ; ---------------------------------------------------------------------------
 
 loc_226FC:
-                bsr.w   sub_22922
+                bsr.w   UpdateSpikePosition
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -106,13 +106,13 @@ loc_226FC:
                 andi.b  #p1_standing,d0
                 beq.s   loc_22736
                 lea     (Player_1).w,a1
-                bsr.w   sub_228EC
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_22736:
                 andi.b  #p2_standing,d6
                 beq.s   loc_22744
                 lea     (Player_2).w,a1
-                bsr.w   sub_228EC
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_22744:
                 move.w  $30(a0),d0
@@ -120,7 +120,7 @@ loc_22744:
 ; ---------------------------------------------------------------------------
 
 loc_2274E:
-                bsr.w   sub_22922
+                bsr.w   UpdateSpikePosition
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -137,14 +137,14 @@ loc_2274E:
                 andi.b  #1,d0
                 beq.s   loc_2278C
                 lea     (Player_1).w,a1
-                bsr.w   sub_228EC
+                bsr.w   HurtPlayerFromSolidHazard
                 bclr    #p1_pushing_bit,status(a0)
 
 loc_2278C:
                 andi.b  #2,d6
                 beq.s   loc_227A0
                 lea     (Player_2).w,a1
-                bsr.w   sub_228EC
+                bsr.w   HurtPlayerFromSolidHazard
                 bclr    #p2_pushing_bit,status(a0)
 
 loc_227A0:
@@ -153,7 +153,7 @@ loc_227A0:
 ; ---------------------------------------------------------------------------
 
 loc_227AA:
-                bsr.w   sub_22922
+                bsr.w   UpdateSpikePosition
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -170,13 +170,13 @@ loc_227AA:
                 andi.b  #4,d0
                 beq.s   loc_227E2
                 lea     (Player_1).w,a1
-                bsr.w   sub_228EC
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_227E2:
                 andi.b  #8,d6
                 beq.s   loc_227F0
                 lea     (Player_2).w,a1
-                bsr.w   sub_228EC
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_227F0:
                 move.w  $30(a0),d0
@@ -184,7 +184,7 @@ loc_227F0:
 ; ---------------------------------------------------------------------------
 
 loc_227FA:
-                bsr.w   sub_229C0
+                bsr.w   UpdateCompetitionSpikePosition
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #7,d1
@@ -201,20 +201,20 @@ loc_227FA:
                 andi.b  #p1_standing,d0
                 beq.s   loc_22834
                 lea     (Player_1).w,a1
-                bsr.w   sub_228EC
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_22834:
                 andi.b  #p2_standing,d6
                 beq.s   loc_22842
                 lea     (Player_2).w,a1
-                bsr.w   sub_228EC
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_22842:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
 loc_22848:
-                bsr.w   sub_229C0
+                bsr.w   UpdateCompetitionSpikePosition
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #7,d1
@@ -231,14 +231,14 @@ loc_22848:
                 andi.b  #1,d0
                 beq.s   loc_22886
                 lea     (Player_1).w,a1
-                bsr.w   sub_228EC
+                bsr.w   HurtPlayerFromSolidHazard
                 bclr    #p1_pushing_bit,status(a0)
 
 loc_22886:
                 andi.b  #2,d6
                 beq.s   loc_2289A
                 lea     (Player_2).w,a1
-                bsr.w   sub_228EC
+                bsr.w   HurtPlayerFromSolidHazard
                 bclr    #p2_pushing_bit,status(a0)
 
 loc_2289A:
@@ -246,7 +246,7 @@ loc_2289A:
 ; ---------------------------------------------------------------------------
 
 loc_228A0:
-                bsr.w   sub_229C0
+                bsr.w   UpdateCompetitionSpikePosition
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #7,d1
@@ -263,20 +263,20 @@ loc_228A0:
                 andi.b  #4,d0
                 beq.s   loc_228D8
                 lea     (Player_1).w,a1
-                bsr.w   sub_228EC
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_228D8:
                 andi.b  #8,d6
                 beq.s   loc_228E6
                 lea     (Player_2).w,a1
-                bsr.w   sub_228EC
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_228E6:
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_228EC:
+HurtPlayerFromSolidHazard:
                 btst    #Status_Invincible,status_secondary(a1)
                 bne.s   locret_22920
                 tst.b   invulnerability_timer(a1)
@@ -296,16 +296,16 @@ sub_228EC:
 
 locret_22920:
                 rts
-; End of function sub_228EC
+; End of function HurtPlayerFromSolidHazard
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_22922:
+UpdateSpikePosition:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  off_22930(pc,d0.w),d1
                 jmp     off_22930(pc,d1.w)
-; End of function sub_22922
+; End of function UpdateSpikePosition
 
 ; ---------------------------------------------------------------------------
 off_22930:
@@ -319,7 +319,7 @@ locret_22936:
 ; ---------------------------------------------------------------------------
 
 loc_22938:
-                bsr.w   sub_22960
+                bsr.w   UpdateSpikeTravel
                 moveq   #0,d0
                 move.b  $34(a0),d0
                 add.w   $32(a0),d0
@@ -328,7 +328,7 @@ loc_22938:
 ; ---------------------------------------------------------------------------
 
 loc_2294C:
-                bsr.w   sub_22960
+                bsr.w   UpdateSpikeTravel
                 moveq   #0,d0
                 move.b  $34(a0),d0
                 add.w   $30(a0),d0
@@ -337,7 +337,7 @@ loc_2294C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_22960:
+UpdateSpikeTravel:
                 tst.w   $38(a0)
                 beq.s   loc_2297C
                 subq.w  #1,$38(a0)
@@ -370,16 +370,16 @@ loc_2299E:
 
 locret_229BE:
                 rts
-; End of function sub_22960
+; End of function UpdateSpikeTravel
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_229C0:
+UpdateCompetitionSpikePosition:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  off_229CE(pc,d0.w),d1
                 jmp     off_229CE(pc,d1.w)
-; End of function sub_229C0
+; End of function UpdateCompetitionSpikePosition
 
 ; ---------------------------------------------------------------------------
 off_229CE:
@@ -389,7 +389,7 @@ off_229CE:
 ; ---------------------------------------------------------------------------
 
 loc_229D4:
-                bsr.w   sub_229FC
+                bsr.w   UpdateCompetitionSpikeTravel
                 moveq   #0,d0
                 move.b  $34(a0),d0
                 add.w   $32(a0),d0
@@ -398,7 +398,7 @@ loc_229D4:
 ; ---------------------------------------------------------------------------
 
 loc_229E8:
-                bsr.w   sub_229FC
+                bsr.w   UpdateCompetitionSpikeTravel
                 moveq   #0,d0
                 move.b  $34(a0),d0
                 add.w   $30(a0),d0
@@ -407,7 +407,7 @@ loc_229E8:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_229FC:
+UpdateCompetitionSpikeTravel:
                 tst.w   $38(a0)
                 beq.s   loc_22A18
                 subq.w  #1,$38(a0)
@@ -440,7 +440,7 @@ loc_22A3A:
 
 locret_22A5A:
                 rts
-; End of function sub_229FC
+; End of function UpdateCompetitionSpikeTravel
 
 ; ---------------------------------------------------------------------------
 Map_Spikes:

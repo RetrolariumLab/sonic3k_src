@@ -10,7 +10,7 @@ Obj_LBZ1Robotnik:
                 move.b  routine(a0),d0
                 move.w  LBZ1Robotnik_Index(pc,d0.w),d1
                 jsr     LBZ1Robotnik_Index(pc,d1.w)
-                jsr     (sub_5A7B4).l
+                jsr     (UpdateLBZAct1RobotnikHitCooldown).l
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 LBZ1Robotnik_Index:
@@ -171,7 +171,7 @@ loc_5A48E:
 
 loc_5A49A:
                 jsr     (MoveSprite2).l
-                jsr     (sub_5A7B4).l
+                jsr     (UpdateLBZAct1RobotnikHitCooldown).l
                 jmp     Sprite_CheckDeleteTouch2(pc)
 ; ---------------------------------------------------------------------------
 
@@ -456,7 +456,7 @@ byte_5A78C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5A7B4:
+UpdateLBZAct1RobotnikHitCooldown:
                 tst.b   collision_flags(a0)
                 bne.s   locret_5A7E6
                 tst.b   $20(a0)
@@ -474,7 +474,7 @@ loc_5A7D4:
 
 locret_5A7E6:
                 rts
-; End of function sub_5A7B4
+; End of function UpdateLBZAct1RobotnikHitCooldown
 
 ; ---------------------------------------------------------------------------
 ObjDat_LBZ1Robotnik:

@@ -26,15 +26,15 @@ loc_1623C:
                 and.w   d0,y_pos(a0)
 
 loc_1624C:
-                bsr.w   sub_16262
+                bsr.w   TailsS3ResolveHurtLandingOrDeathPlane
                 bsr.w   Tails_Check_Screen_Boundaries
                 bsr.w   Sonic_RecordPos
-                bsr.w   sub_16356
+                bsr.w   TailsS3AnimateRecoveryStateAndDispatchPatternLoader
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_16262:
+TailsS3ResolveHurtLandingOrDeathPlane:
                 tst.b   (Disable_death_plane).w
                 bne.s   loc_16278
                 move.w  (Camera_max_Y_pos).w,d0
@@ -65,7 +65,7 @@ locret_162BC:
 
 loc_162BE:
                 jmp     (Kill_Character).l
-; End of function sub_16262
+; End of function TailsS3ResolveHurtLandingOrDeathPlane
 
 ; ---------------------------------------------------------------------------
 
@@ -78,10 +78,10 @@ loc_162C4:
                 clr.w   (Flying_carrying_Sonic_flag).w
 
 loc_162DC:
-                bsr.w   sub_13230
+                bsr.w   PlayerS3FinishDeathWithFollowerResetRestartOrCompetitionRespawn
                 jsr     (MoveSprite).l
                 bsr.w   Sonic_RecordPos
-                bsr.w   sub_16356
+                bsr.w   TailsS3AnimateRecoveryStateAndDispatchPatternLoader
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -104,7 +104,7 @@ loc_16308:
                 move.b  #2,routine(a0)
 
 loc_1631A:
-                bsr.w   sub_16356
+                bsr.w   TailsS3AnimateRecoveryStateAndDispatchPatternLoader
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -120,12 +120,12 @@ loc_1633C:
                 jsr     (MoveSprite2).l
                 addi.w  #$10,y_vel(a0)
                 bsr.w   Sonic_RecordPos
-                bsr.w   sub_16356
+                bsr.w   TailsS3AnimateRecoveryStateAndDispatchPatternLoader
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_16356:
+TailsS3AnimateRecoveryStateAndDispatchPatternLoader:
                 tst.w   (Competition_mode).w
                 bne.s   loc_16362
                 bsr.s   Animate_Tails
@@ -135,4 +135,4 @@ sub_16356:
 loc_16362:
                 bsr.w   Animate_Tails2P
                 bra.w   Tails2P_Load_PLC
-; End of function sub_16356
+; End of function TailsS3AnimateRecoveryStateAndDispatchPatternLoader

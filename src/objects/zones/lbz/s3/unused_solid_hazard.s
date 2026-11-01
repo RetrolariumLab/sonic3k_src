@@ -41,7 +41,7 @@ loc_26966:
                 jsr     (SolidObjectFull2_1P).l
                 cmpi.w  #-2,d4
                 bne.s   loc_2698E
-                bsr.s   sub_269E0
+                bsr.s   KickLbzUnusedSolidHazardUpward
 
 loc_2698E:
                 movem.l (sp)+,d1-d4
@@ -50,7 +50,7 @@ loc_2698E:
                 jsr     (SolidObjectFull2_1P).l
                 cmpi.w  #-2,d4
                 bne.s   loc_269A6
-                bsr.s   sub_269E0
+                bsr.s   KickLbzUnusedSolidHazardUpward
 
 loc_269A6:
                 move.b  status(a0),d6
@@ -60,13 +60,13 @@ loc_269A6:
                 andi.b  #p1_standing,d0
                 beq.s   loc_269C0
                 lea     (Player_1).w,a1
-                bsr.w   sub_228EC
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_269C0:
                 andi.b  #p2_standing,d6
                 beq.s   loc_269CE
                 lea     (Player_2).w,a1
-                bsr.w   sub_228EC
+                bsr.w   HurtPlayerFromSolidHazard
 
 loc_269CE:
                 lea     (Ani_LBZUnusedSolidHurt).l,a1
@@ -75,11 +75,11 @@ loc_269CE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_269E0:
+KickLbzUnusedSolidHazardUpward:
                 move.w  #-$40,y_vel(a0)
                 move.b  #1,$2E(a0)
                 rts
-; End of function sub_269E0
+; End of function KickLbzUnusedSolidHazardUpward
 
 ; ---------------------------------------------------------------------------
 Ani_LBZUnusedSolidHurt:

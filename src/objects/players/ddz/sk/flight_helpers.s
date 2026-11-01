@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_82742:
+BeginDDZFlightFailureWhenSuperModeExpires:
                 btst    #7,$38(a0)
                 beq.s   locret_82750
                 tst.b   (Super_Sonic_Knux_flag).w
@@ -22,11 +22,11 @@ loc_82752:
                 move.b  #$81,object_control(a1)
                 move.b  #$1A,anim(a1)
                 rts
-; End of function sub_82742
+; End of function BeginDDZFlightFailureWhenSuperModeExpires
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_82772:
+ComputeDDZFlightInputImpulseDragAndHitResponse:
                 lea     (Player_1).w,a1
                 tst.b   invulnerability_timer(a1)
                 beq.s   loc_827A0
@@ -119,7 +119,7 @@ loc_82828:
                 move.w  d2,x_vel(a1)
                 move.w  d3,y_vel(a1)
                 rts
-; End of function sub_82772
+; End of function ComputeDDZFlightInputImpulseDragAndHitResponse
 
 ; ---------------------------------------------------------------------------
 word_82832:                                             ; neither A, B, nor C are pressed
@@ -159,7 +159,7 @@ word_82872:                                             ; either A, B, or C is p
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_828B2:
+IntegrateDDZFlightWithinCameraRelativeWindows:
                 tst.w   d2
                 beq.s   loc_828EE
                 move.l  x_pos(a0),d0
@@ -205,11 +205,11 @@ loc_828EE:
 
 locret_8291E:
                 rts
-; End of function sub_828B2
+; End of function IntegrateDDZFlightWithinCameraRelativeWindows
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_82920:
+AdvanceDDZFlightCameraAndCarryControllerByScrollDelta:
                 move.l  (_unkFA82).w,d0
                 add.l   (_unkFA8A).w,d0
                 move.l  #$60000,d2
@@ -256,11 +256,11 @@ loc_82964:
                 add.w   d1,d2
                 move.w  d2,x_pos(a0)
                 rts
-; End of function sub_82920
+; End of function AdvanceDDZFlightCameraAndCarryControllerByScrollDelta
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_829A0:
+AdvanceDDZVirtualWorldScrollDuringBossStage:
                 move.l  (_unkFA82).w,d0
                 add.l   (_unkFA8A).w,d0
                 cmpi.l  #$60000,d0
@@ -279,11 +279,11 @@ loc_829B4:
                 sub.w   d2,d1
                 move.w  d1,(_unkFA90).w
                 rts
-; End of function sub_829A0
+; End of function AdvanceDDZVirtualWorldScrollDuringBossStage
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_829D2:
+SyncDDZPlayerPositionAndApplyCameraDeadbands:
                 lea     (Player_1).w,a1
                 move.w  (Camera_X_pos).w,d0
                 move.w  d0,d1
@@ -360,4 +360,4 @@ loc_82A7A:
 
 locret_82A80:
                 rts
-; End of function sub_829D2
+; End of function SyncDDZPlayerPositionAndApplyCameraDeadbands

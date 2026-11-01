@@ -69,13 +69,13 @@ loc_38350:
                 lea     (Player_1).w,a2
                 bclr    #0,collision_property(a0)
                 beq.s   loc_38364
-                bsr.s   sub_38382
+                bsr.s   SplashWaterDropOnPlayerContact
 
 loc_38364:
                 lea     (Player_2).w,a2
                 bclr    #1,collision_property(a0)
                 beq.s   loc_38372
-                bsr.s   sub_38382
+                bsr.s   SplashWaterDropOnPlayerContact
 
 loc_38372:
                 clr.b   collision_property(a0)
@@ -86,7 +86,7 @@ loc_38376:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_38382:
+SplashWaterDropOnPlayerContact:
                 cmpi.b  #5,anim(a2)
                 bne.s   loc_38390
                 move.b  #0,prev_anim(a2)
@@ -97,7 +97,7 @@ loc_38390:
                 move.b  #0,collision_flags(a0)
                 move.b  #2,routine(a0)
                 rts
-; End of function sub_38382
+; End of function SplashWaterDropOnPlayerContact
 
 ; ---------------------------------------------------------------------------
 Ani_HCZWaterDrop:

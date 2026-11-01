@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_C104:
+SKCompInitializeRoundLivesScoresTimersAndFlags:
                 move.w  #1,(Competition_mode).w
                 bra.s   loc_C110
 ; ---------------------------------------------------------------------------
@@ -28,7 +28,7 @@ loc_C110:
                 move.l  #5000,(Next_extra_life_score).w
                 move.l  #5000,(Next_extra_life_score_P2).w
                 rts
-; End of function sub_C104
+; End of function SKCompInitializeRoundLivesScoresTimersAndFlags
 
 ; =============== S U B R O U T I N E =======================================
 

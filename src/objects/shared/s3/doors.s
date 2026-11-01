@@ -63,9 +63,9 @@ loc_2FB46:
                 addi.w  #$20,d5
                 move.b  #0,$38(a0)
                 lea     (Player_1).w,a1
-                bsr.s   sub_2FBCE
+                bsr.s   RequestVerticalDoorOpenForPlayer
                 lea     (Player_2).w,a1
-                bsr.s   sub_2FBCE
+                bsr.s   RequestVerticalDoorOpenForPlayer
                 tst.b   $38(a0)
                 beq.s   loc_2FB8A
                 cmpi.w  #$40,$30(a0)
@@ -105,7 +105,7 @@ loc_2FBAA:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2FBCE:
+RequestVerticalDoorOpenForPlayer:
                 move.w  x_pos(a1),d0
                 cmp.w   d2,d0
                 blt.w   locret_2FBFA
@@ -122,7 +122,7 @@ sub_2FBCE:
 
 locret_2FBFA:
                 rts
-; End of function sub_2FBCE
+; End of function RequestVerticalDoorOpenForPlayer
 
 ; ---------------------------------------------------------------------------
 Map_HCZCNZDoor:
@@ -185,9 +185,9 @@ loc_2FCBC:
                 addi.w  #$20,d5
                 move.b  #0,$38(a0)
                 lea     (Player_1).w,a1
-                bsr.s   sub_2FD34
+                bsr.s   RequestHorizontalDoorOpenForPlayer
                 lea     (Player_2).w,a1
-                bsr.s   sub_2FD34
+                bsr.s   RequestHorizontalDoorOpenForPlayer
                 tst.b   $38(a0)
                 beq.s   loc_2FCF0
                 cmpi.w  #$40,$30(a0)
@@ -225,7 +225,7 @@ loc_2FD10:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2FD34:
+RequestHorizontalDoorOpenForPlayer:
                 move.w  y_pos(a1),d0
                 cmp.w   d2,d0
                 blt.w   locret_2FD60
@@ -242,7 +242,7 @@ sub_2FD34:
 
 locret_2FD60:
                 rts
-; End of function sub_2FD34
+; End of function RequestHorizontalDoorOpenForPlayer
 
 ; ---------------------------------------------------------------------------
 Map_CNZDoorHorizontal:

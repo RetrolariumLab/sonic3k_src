@@ -291,12 +291,12 @@ ICZ2_SetOutdoorsPal:
                 tst.b   (Game_mode).w
                 bmi.s   loc_3E1B6
                 lea     (Normal_palette_line_4+2).w,a1
-                bsr.s   sub_3E1BA
+                bsr.s   WriteIcz2OutdoorPaletteColors
 
 loc_3E1B6:
                 lea     (Target_palette_line_4+2).w,a1
 
-sub_3E1BA:
+WriteIcz2OutdoorPaletteColors:
                 move.l  #$EEE0EEA,(a1)+
                 move.l  #$EC80EA4,(a1)+
                 move.l  #$C820C60,(a1)+
@@ -311,12 +311,12 @@ ICZ2_SetIndoorsPal:
                 tst.b   (Game_mode).w
                 bmi.s   loc_3E1E6
                 lea     (Normal_palette_line_4+2).w,a1
-                bsr.s   sub_3E1EA
+                bsr.s   WriteIcz2IndoorPaletteColors
 
 loc_3E1E6:
                 lea     (Target_palette_line_4+2).w,a1
 
-sub_3E1EA:
+WriteIcz2IndoorPaletteColors:
                 move.l  #$EE20E24,(a1)+
                 move.l  #$E040E02,(a1)+
                 move.l  #$4020200,(a1)+
@@ -332,12 +332,12 @@ ICZ2_SetICZ1Pal:
                 tst.b   (Game_mode).w
                 bmi.s   loc_3E21A
                 lea     (Normal_palette_line_4+2).w,a1
-                bsr.s   sub_3E21E
+                bsr.s   WriteIcz2Act1TransitionPaletteColors
 
 loc_3E21A:
                 lea     (Target_palette_line_4+2).w,a1
 
-sub_3E21E:
+WriteIcz2Act1TransitionPaletteColors:
                 move.l  #$EEC0CC6,(a1)+
                 move.l  #$C800C60,(a1)+
                 move.l  #$C400A40,(a1)+

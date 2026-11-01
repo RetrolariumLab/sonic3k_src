@@ -26,7 +26,7 @@ Obj_2PGoalMarker:
                 clr.l   (Timer_P2).w
                 clr.w   (Ring_count).w
                 clr.w   (Ring_count_P2).w
-                jsr     sub_364EC(pc)
+                jsr     CompetitionGoalS3ClearBothLapTimeBlocksAndRunRecords(pc)
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   loc_36276
                 move.l  #loc_37454,(a1)
@@ -67,13 +67,13 @@ loc_3627C:
                 lea     (Competition_lap_count_flag).w,a4
                 lea     (Timer).w,a5
                 lea     ((RAM_start+$7828)&$FFFFFF).l,a6
-                bsr.w   sub_3638E
+                bsr.w   CompetitionGoalS3TrackPlayerCrossingLapAndWrongWayRestart
                 lea     (Player_2).w,a1
                 lea     (Competition_current_lap_2P).w,a3
                 lea     (Competition_lap_count_flag_P2).w,a4
                 lea     (Timer_P2).w,a5
                 lea     ((RAM_start+$7840)&$FFFFFF).l,a6
-                bsr.w   sub_3638E
+                bsr.w   CompetitionGoalS3TrackPlayerCrossingLapAndWrongWayRestart
                 lea     (Ani_2PGoalMarker).l,a1
                 jsr     (Animate_Sprite).l
                 move.w  $36(a0),(Competition_lap_count).w
@@ -114,7 +114,7 @@ loc_36352:
                 clr.l   (Timer_P2).w
                 clr.b   (Ctrl_1_locked).w
                 clr.b   (Ctrl_2_locked).w
-                jsr     sub_364EC(pc)
+                jsr     CompetitionGoalS3ClearBothLapTimeBlocksAndRunRecords(pc)
                 clr.w   (Events_bg+$14).w
                 move.l  #loc_3627C,(a0)
 
@@ -125,7 +125,7 @@ loc_3637C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3638E:
+CompetitionGoalS3TrackPlayerCrossingLapAndWrongWayRestart:
                 tst.b   (a4)                            ; check the lap count flag
                 bne.w   loc_3648E                       ; if not equal to zero, branch
                 tst.b   (a2)+
@@ -165,7 +165,7 @@ loc_363D0:
                 lsl.w   #2,d0
                 move.l  (a6,d0.w),d5
                 move.l  $14(a6),d6
-                jsr     sub_36508(pc)
+                jsr     CompetitionGoalS3AddPackedMinuteSecondCentisecondTimes(pc)
                 move.l  d6,$14(a6)
                 clr.l   (a5)
 
@@ -176,7 +176,7 @@ loc_3640E:
                 bge.s   loc_3642A
                 move.w  $3A(a0),d0
                 andi.w  #$F,d0
-                bsr.w   sub_3653C
+                bsr.w   CompetitionGoalS3RearmOrbitingItemsFromLapSequence
                 addq.w  #2,$3A(a0)
 
 loc_3642A:
@@ -256,11 +256,11 @@ loc_364D4:
 
 locret_364EA:
                 rts
-; End of function sub_3638E
+; End of function CompetitionGoalS3TrackPlayerCrossingLapAndWrongWayRestart
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_364EC:
+CompetitionGoalS3ClearBothLapTimeBlocksAndRunRecords:
                 lea     ((RAM_start+$7828)&$FFFFFF).l,a1
                 moveq   #bytesToLcnt($30),d0
 
@@ -271,11 +271,11 @@ sub_364EC:
                 clr.l   (Competition_time_record_P2).w
                 st      (Competition_time_attack_new_top_record).w
                 rts
-; End of function sub_364EC
+; End of function CompetitionGoalS3ClearBothLapTimeBlocksAndRunRecords
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_36508:
+CompetitionGoalS3AddPackedMinuteSecondCentisecondTimes:
                 add.b   d5,d6
                 moveq   #0,d3
                 cmpi.b  #100,d6
@@ -302,11 +302,11 @@ loc_3652E:
                 swap    d5
                 swap    d6
                 rts
-; End of function sub_36508
+; End of function CompetitionGoalS3AddPackedMinuteSecondCentisecondTimes
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3653C:
+CompetitionGoalS3RearmOrbitingItemsFromLapSequence:
                 tst.b   (Competition_items).w
                 bne.s   locret_3656A
                 lea     (byte_3656C).l,a4
@@ -326,7 +326,7 @@ loc_36566:
 
 locret_3656A:
                 rts
-; End of function sub_3653C
+; End of function CompetitionGoalS3RearmOrbitingItemsFromLapSequence
 
 ; ---------------------------------------------------------------------------
 byte_3656C:

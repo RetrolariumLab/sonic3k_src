@@ -4,22 +4,22 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7EB34:
+HurtBothPlayersInsideDEZMinibossBeamRange:
                 lea     word_7EB6E(pc),a1
                 jsr     (Check_PlayerInRange).l
                 tst.w   d0
                 beq.s   loc_7EB46
-                bsr.w   sub_7EB4C
+                bsr.w   HurtDEZBeamRangePlayerUnlessProtectedOrOnObject
 
 loc_7EB46:
                 swap    d0
                 tst.w   d0
                 beq.s   locret_7EB6C
-; End of function sub_7EB34
+; End of function HurtBothPlayersInsideDEZMinibossBeamRange
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7EB4C:
+HurtDEZBeamRangePlayerUnlessProtectedOrOnObject:
                 movea.w d0,a1
                 tst.b   $34(a1)
                 bne.s   locret_7EB6C
@@ -33,7 +33,7 @@ sub_7EB4C:
 
 locret_7EB6C:
                 rts
-; End of function sub_7EB4C
+; End of function HurtDEZBeamRangePlayerUnlessProtectedOrOnObject
 
 ; ---------------------------------------------------------------------------
 word_7EB6E:
@@ -41,7 +41,7 @@ word_7EB6E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7EB76:
+SetDEZOrbitHazardCollisionFromParentStatusSix:
                 move.b  #$86,collision_flags(a0)
                 movea.w parent3(a0),a1
                 btst    #6,status(a1)
@@ -50,11 +50,11 @@ sub_7EB76:
 
 locret_7EB8C:
                 rts
-; End of function sub_7EB76
+; End of function SetDEZOrbitHazardCollisionFromParentStatusSix
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7EB8E:
+RetargetDEZMinibossPlatformAngularVelocityFromPlayer:
                 btst    #3,(Player_1+status).w
                 bne.s   loc_7EBBA
                 move.b  (V_int_run_count+3).w,d0
@@ -77,11 +77,11 @@ locret_7EBB8:
 loc_7EBBA:
                 move.w  $26(a0),$3C(a0)
                 rts
-; End of function sub_7EB8E
+; End of function RetargetDEZMinibossPlatformAngularVelocityFromPlayer
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7EBC2:
+AccelerateDEZPlatformSharedAngularStepAndAdvancePhase:
                 movea.w parent3(a0),a1
                 moveq   #8,d0
                 move.w  $3A(a1),d1
@@ -105,7 +105,7 @@ loc_7EBE8:
                 add.w   d1,$3C(a0)
                 move.w  d1,$3A(a1)
                 rts
-; End of function sub_7EBC2
+; End of function AccelerateDEZPlatformSharedAngularStepAndAdvancePhase
 
 ; ---------------------------------------------------------------------------
 
@@ -164,7 +164,7 @@ loc_7EC52:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7EC64:
+ReverseDEZMinibossHorizontalVelocityPastBounds:
                 move.w  x_pos(a0),d0
                 tst.w   x_vel(a0)
                 beq.s   locret_7EC82
@@ -183,11 +183,11 @@ loc_7EC7E:
 
 locret_7EC82:
                 rts
-; End of function sub_7EC64
+; End of function ReverseDEZMinibossHorizontalVelocityPastBounds
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7EC84:
+SetDEZMinibossPlayerPursuitVelocityWithinBounds:
                 move.w  x_pos(a0),d0
                 move.w  #-$80,d1
                 move.w  (Player_1+x_pos).w,d2
@@ -213,7 +213,7 @@ loc_7ECAC:
 
 locret_7ECB0:
                 rts
-; End of function sub_7EC84
+; End of function SetDEZMinibossPlayerPursuitVelocityWithinBounds
 
 ; ---------------------------------------------------------------------------
 ; unused
@@ -255,7 +255,7 @@ locret_7ECF2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7ECF4:
+SeedDEZMinibossRandomFlickerDebris:
                 jsr     (Random_Number).l
                 move.w  d0,d1
                 andi.w  #$C,d1
@@ -281,7 +281,7 @@ loc_7ED1C:
 loc_7ED3A:
                 add.w   d0,y_pos(a0)
                 rts
-; End of function sub_7ECF4
+; End of function SeedDEZMinibossRandomFlickerDebris
 
 ; ---------------------------------------------------------------------------
 word_7ED40:
@@ -298,13 +298,13 @@ byte_7ED50:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7ED54:
+SeedDEZMinibossEightOrbitHazardPhases:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lsr.w   #1,d0
                 move.b  byte_7ED64(pc,d0.w),$3C(a0)
                 rts
-; End of function sub_7ED54
+; End of function SeedDEZMinibossEightOrbitHazardPhases
 
 ; ---------------------------------------------------------------------------
 byte_7ED64:
@@ -316,7 +316,7 @@ byte_7ED64:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7ED6C:
+TrackDEZMinibossEyeTowardPlayerOne:
                 movea.w parent3(a0),a1
                 move.w  y_pos(a1),y_pos(a0)
                 move.w  (Player_1+x_pos).w,d0
@@ -347,7 +347,7 @@ loc_7EDAE:
                 move.w  d1,x_pos(a0)
                 move.b  (a2)+,mapping_frame(a0)
                 rts
-; End of function sub_7ED6C
+; End of function TrackDEZMinibossEyeTowardPlayerOne
 
 ; ---------------------------------------------------------------------------
 byte_7EDBA:
@@ -366,7 +366,7 @@ byte_7EDBA:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7EDD0:
+AdvanceDEZMinibossEyeHitAndIncrementRootCounter:
                 tst.b   collision_flags(a0)
                 bne.s   locret_7EE10
                 tst.b   $20(a0)
@@ -384,22 +384,22 @@ loc_7EDF2:
                 addi.w  #2*4,d0
 
 loc_7EE00:
-                bsr.w   sub_7EE12
+                bsr.w   CopyDEZMinibossEyeFourColorPalette
                 subq.b  #1,$20(a0)
                 bne.s   locret_7EE10
                 move.b  $25(a0),collision_flags(a0)
 
 locret_7EE10:
                 rts
-; End of function sub_7EDD0
+; End of function AdvanceDEZMinibossEyeHitAndIncrementRootCounter
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7EE12:
+CopyDEZMinibossEyeFourColorPalette:
                 lea     word_7EE1E(pc),a1
                 lea     word_7EE26(pc,d0.w),a2
                 jmp     CopyWordData_4(pc)
-; End of function sub_7EE12
+; End of function CopyDEZMinibossEyeFourColorPalette
 
 ; ---------------------------------------------------------------------------
 word_7EE1E:
@@ -439,7 +439,7 @@ locret_7EE86:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7EE88:
+ReactToDEZMinibossSecondFormHitCountOrDefeat:
                 move.b  collision_property(a0),d0
                 cmp.b   $42(a0),d0
                 bne.s   loc_7EE94
@@ -472,11 +472,11 @@ loc_7EECC:
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     CreateChild1_Normal(pc)
                 jmp     BossDefeated_StopTimer(pc)
-; End of function sub_7EE88
+; End of function ReactToDEZMinibossSecondFormHitCountOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7EEEE:
+AdvanceDEZPostBossPlayerTwelvePoseSpinAndPLC:
                 move.w  $3C(a0),d0
                 add.w   $1C(a0),d0
                 cmpi.w  #$C00,d0
@@ -495,7 +495,7 @@ loc_7EF00:
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 jmp     (Player_Load_PLC).l
-; End of function sub_7EEEE
+; End of function AdvanceDEZPostBossPlayerTwelvePoseSpinAndPLC
 
 ; ---------------------------------------------------------------------------
 byte_7EF2E:

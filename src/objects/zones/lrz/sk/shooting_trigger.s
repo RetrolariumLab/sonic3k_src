@@ -59,20 +59,20 @@ loc_42E84:
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
                 beq.s   loc_42EAC
-                bsr.s   sub_42EC0
+                bsr.s   ActivateLrzShootingTriggerFromRollingPlayer
 
 loc_42EAC:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
                 beq.s   loc_42EBA
-                bsr.s   sub_42EC0
+                bsr.s   ActivateLrzShootingTriggerFromRollingPlayer
 
 loc_42EBA:
                 jmp     (Sprite_CheckDeleteTouch3).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_42EC0:
+ActivateLrzShootingTriggerFromRollingPlayer:
                 cmpi.b  #2,anim(a1)
                 bne.s   locret_42EE6
                 neg.w   x_vel(a1)
@@ -85,7 +85,7 @@ sub_42EC0:
 
 locret_42EE6:
                 rts
-; End of function sub_42EC0
+; End of function ActivateLrzShootingTriggerFromRollingPlayer
 
 ; ---------------------------------------------------------------------------
 

@@ -191,7 +191,7 @@ loc_215EE:
 
 loc_215F4:
                 bclr    #p1_pushing_bit,status(a0)
-                bsr.s   sub_2165A
+                bsr.s   BreakWallFromSideImpact
                 btst    #p2_pushing_bit,status(a0)
                 beq.s   loc_215AC
                 lea     (Player_2).w,a1
@@ -222,7 +222,7 @@ loc_2164C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2165A:
+BreakWallFromSideImpact:
                 move.w  d1,x_vel(a1)
                 addq.w  #4,x_pos(a1)
                 movea.l $34(a0),a4
@@ -249,7 +249,7 @@ loc_21692:
 
 loc_216AA:
                 jmp     (Delete_Current_Sprite).l
-; End of function sub_2165A
+; End of function BreakWallFromSideImpact
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -325,7 +325,7 @@ loc_2172E:
                 move.w  x_vel(a1),ground_vel(a1)
                 bclr    #Status_Push,status(a1)
                 bclr    #p1_pushing_bit,status(a0)
-                bsr.s   sub_217EE
+                bsr.s   BreakWallAfterLatchedSideCollision
                 andi.b  #2,d6
                 beq.s   loc_217E8
                 lea     (Player_2).w,a1
@@ -348,14 +348,14 @@ loc_217BC:
                 move.w  x_vel(a1),ground_vel(a1)
                 bclr    #Status_Push,status(a1)
                 bclr    #p2_pushing_bit,status(a0)
-                bsr.s   sub_217EE
+                bsr.s   BreakWallAfterLatchedSideCollision
 
 loc_217E8:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_217EE:
+BreakWallAfterLatchedSideCollision:
                 movea.l $34(a0),a4
                 move.w  x_pos(a0),d0
                 cmp.w   x_pos(a1),d0
@@ -368,7 +368,7 @@ loc_21806:
                 addq.b  #1,mapping_frame(a0)
                 bsr.w   BreakObjectToPieces
                 bra.w   loc_21692
-; End of function sub_217EE
+; End of function BreakWallAfterLatchedSideCollision
 
 ; ---------------------------------------------------------------------------
 
@@ -409,7 +409,7 @@ loc_21862:
                 cmpi.b  #2,character_id(a1)
                 bne.s   loc_218B0
                 bclr    #p1_pushing_bit,status(a0)
-                bsr.s   sub_218CE
+                bsr.s   BreakWallFromKnucklesImpact
                 btst    #p2_pushing_bit,status(a0)
                 beq.s   loc_2185C
                 lea     (Player_2).w,a1
@@ -433,7 +433,7 @@ loc_218B0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_218CE:
+BreakWallFromKnucklesImpact:
                 move.w  d1,x_vel(a1)
                 addq.w  #4,x_pos(a1)
                 movea.l $34(a0),a4
@@ -462,7 +462,7 @@ loc_21928:
                 addq.b  #1,mapping_frame(a0)
                 bsr.w   BreakObjectToPieces
                 bra.w   loc_21692
-; End of function sub_218CE
+; End of function BreakWallFromKnucklesImpact
 
 ; ---------------------------------------------------------------------------
 word_2193A:

@@ -40,7 +40,7 @@ loc_32C92:
 loc_32CD4:
                 andi.b  #1,d1
                 bne.s   loc_32CDC
-                bsr.s   sub_32D16
+                bsr.s   CompetitionSKLaunchFromTriangleWithSubtypeFlipAndPlane
 
 loc_32CDC:
                 movem.l (sp)+,d1-d4
@@ -60,14 +60,14 @@ loc_32CDC:
 loc_32D0C:
                 andi.b  #1,d1
                 bne.s   locret_32D14
-                bsr.s   sub_32D16
+                bsr.s   CompetitionSKLaunchFromTriangleWithSubtypeFlipAndPlane
 
 locret_32D14:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_32D16:
+CompetitionSKLaunchFromTriangleWithSubtypeFlipAndPlane:
                 cmpi.b  #4,routine(a1)
                 blo.s   loc_32D20
                 rts
@@ -132,4 +132,4 @@ loc_32DD2:
                 bclr    #Status_RollJump,status(a1)
                 moveq   #signextendB(sfx_SmallBumpers),d0
                 jmp     (Play_SFX).l
-; End of function sub_32D16
+; End of function CompetitionSKLaunchFromTriangleWithSubtypeFlipAndPlane

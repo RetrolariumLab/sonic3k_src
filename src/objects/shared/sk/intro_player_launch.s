@@ -14,19 +14,19 @@ Obj_LevelIntro_PlayerLaunchFromGround:
                 move.w  d0,(Ctrl_2).w
                 move.b  #30,anim_frame_timer(a0)
                 lea     (Player_1).w,a1
-                bsr.s   sub_39A78
+                bsr.s   HoldPlayerForLbzGroundLaunchIntro
                 lea     (Player_2).w,a1
                 tst.l   (a1)
                 beq.s   locret_39A7E
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_39A78:
+HoldPlayerForLbzGroundLaunchIntro:
                 move.b  #3,object_control(a1)
 
 locret_39A7E:
                 rts
-; End of function sub_39A78
+; End of function HoldPlayerForLbzGroundLaunchIntro
 
 ; ---------------------------------------------------------------------------
 
@@ -43,14 +43,14 @@ loc_39A80:
 loc_39AA0:
                 move.l  #loc_39AD2,(a0)
                 lea     (Player_1).w,a1
-                bsr.s   sub_39AB4
+                bsr.s   LaunchLbzIntroPlayerUpward
                 lea     (Player_2).w,a1
                 tst.l   (a1)
                 beq.s   locret_39AD0
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_39AB4:
+LaunchLbzIntroPlayerUpward:
                 move.w  #-$B00,y_vel(a1)
                 bset    #Status_InAir,status(a1)
                 clr.b   jumping(a1)
@@ -59,7 +59,7 @@ sub_39AB4:
 
 locret_39AD0:
                 rts
-; End of function sub_39AB4
+; End of function LaunchLbzIntroPlayerUpward
 
 ; ---------------------------------------------------------------------------
 
@@ -90,14 +90,14 @@ loc_39B22:
 ; ---------------------------------------------------------------------------
 
 loc_39B3C:
-                bsr.s   sub_39B46
+                bsr.s   MoveLbzIntroPlayerWithGravity
                 lea     (Player_2).w,a2
                 tst.l   (a2)
                 beq.s   locret_39B64
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_39B46:
+MoveLbzIntroPlayerWithGravity:
                 move.w  x_vel(a2),d0
                 ext.l   d0
                 lsl.l   #8,d0
@@ -110,4 +110,4 @@ sub_39B46:
 
 locret_39B64:
                 rts
-; End of function sub_39B46
+; End of function MoveLbzIntroPlayerWithGravity

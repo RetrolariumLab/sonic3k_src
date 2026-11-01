@@ -26,7 +26,7 @@ Obj_2PGoalMarker:
                 clr.l   (Timer_P2).w
                 clr.w   (Ring_count).w
                 clr.w   (Ring_count_P2).w
-                jsr     sub_36F5A(pc)
+                jsr     CompetitionGoalSKClearBothLapTimeBlocksAndRunRecords(pc)
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   loc_36CE4
                 move.l  #loc_37EC2,(a1)
@@ -67,13 +67,13 @@ loc_36CEA:
                 lea     (Competition_lap_count_flag).w,a4
                 lea     (Timer).w,a5
                 lea     ((RAM_start+$7828)&$FFFFFF).l,a6
-                bsr.w   sub_36DFC
+                bsr.w   CompetitionGoalSKTrackPlayerCrossingLapAndWrongWayRestart
                 lea     (Player_2).w,a1
                 lea     (Competition_current_lap_2P).w,a3
                 lea     (Competition_lap_count_flag_P2).w,a4
                 lea     (Timer_P2).w,a5
                 lea     ((RAM_start+$7840)&$FFFFFF).l,a6
-                bsr.w   sub_36DFC
+                bsr.w   CompetitionGoalSKTrackPlayerCrossingLapAndWrongWayRestart
                 lea     (Ani_2PGoalMarker).l,a1
                 jsr     (Animate_Sprite).l
                 move.w  $36(a0),(Competition_lap_count).w
@@ -114,7 +114,7 @@ loc_36DC0:
                 clr.l   (Timer_P2).w
                 clr.b   (Ctrl_1_locked).w
                 clr.b   (Ctrl_2_locked).w
-                jsr     sub_36F5A(pc)
+                jsr     CompetitionGoalSKClearBothLapTimeBlocksAndRunRecords(pc)
                 clr.w   (Events_bg+$14).w
                 move.l  #loc_36CEA,(a0)
 
@@ -125,7 +125,7 @@ loc_36DEA:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_36DFC:
+CompetitionGoalSKTrackPlayerCrossingLapAndWrongWayRestart:
                 tst.b   (a4)
                 bne.w   loc_36EFC
                 tst.b   (a2)+
@@ -165,7 +165,7 @@ loc_36E3E:
                 lsl.w   #2,d0
                 move.l  (a6,d0.w),d5
                 move.l  $14(a6),d6
-                jsr     sub_36F76(pc)
+                jsr     CompetitionGoalSKAddPackedMinuteSecondCentisecondTimes(pc)
                 move.l  d6,$14(a6)
                 clr.l   (a5)
 
@@ -176,7 +176,7 @@ loc_36E7C:
                 bge.s   loc_36E98
                 move.w  $3A(a0),d0
                 andi.w  #$F,d0
-                bsr.w   sub_36FAA
+                bsr.w   CompetitionGoalSKRearmOrbitingItemsFromLapSequence
                 addq.w  #2,$3A(a0)
 
 loc_36E98:
@@ -256,11 +256,11 @@ loc_36F42:
 
 locret_36F58:
                 rts
-; End of function sub_36DFC
+; End of function CompetitionGoalSKTrackPlayerCrossingLapAndWrongWayRestart
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_36F5A:
+CompetitionGoalSKClearBothLapTimeBlocksAndRunRecords:
                 lea     ((RAM_start+$7828)&$FFFFFF).l,a1
                 moveq   #bytesToLcnt($30),d0
 
@@ -271,11 +271,11 @@ sub_36F5A:
                 clr.l   (Competition_time_record_P2).w
                 st      (Competition_time_attack_new_top_record).w
                 rts
-; End of function sub_36F5A
+; End of function CompetitionGoalSKClearBothLapTimeBlocksAndRunRecords
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_36F76:
+CompetitionGoalSKAddPackedMinuteSecondCentisecondTimes:
                 add.b   d5,d6
                 moveq   #0,d3
                 cmpi.b  #100,d6
@@ -302,11 +302,11 @@ loc_36F9C:
                 swap    d5
                 swap    d6
                 rts
-; End of function sub_36F76
+; End of function CompetitionGoalSKAddPackedMinuteSecondCentisecondTimes
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_36FAA:
+CompetitionGoalSKRearmOrbitingItemsFromLapSequence:
                 tst.b   (Competition_items).w
                 bne.s   locret_36FD8
                 lea     (byte_36FDA).l,a4
@@ -326,7 +326,7 @@ loc_36FD4:
 
 locret_36FD8:
                 rts
-; End of function sub_36FAA
+; End of function CompetitionGoalSKRearmOrbitingItemsFromLapSequence
 
 ; ---------------------------------------------------------------------------
 byte_36FDA:

@@ -19,7 +19,7 @@ loc_5957A:
 ; ---------------------------------------------------------------------------
 
 DDZ_ScreenEvent:
-                jsr     sub_59648(pc)
+                jsr     ComputeDdzBossRelativePlaneScroll(pc)
                 move.w  (Events_routine_fg).w,d4
                 jmp     DDZ_ScreenEvent_Index(pc,d4.w)
 ; ---------------------------------------------------------------------------
@@ -37,22 +37,22 @@ DDZ_ScreenEvent_Index:
 loc_595B0:
                 tst.w   (Events_bg+$00).w
                 beq.w   locret_59646
-                jsr     sub_59672(pc)
+                jsr     ResetDdzBossPlaneTileDrawAnchors(pc)
                 addq.w  #4,(Events_routine_fg).w
 
 loc_595C0:
                 cmpi.w  #$200,(Events_bg+$00).w
                 bne.s   loc_595D6
                 cmpi.w  #$400,d0
-                bhs.s   sub_59614
+                bhs.s   RestorePreviousDdzBossPlaneScroll
                 cmpi.w  #$220,d1
-                bhs.s   sub_59614
+                bhs.s   RestorePreviousDdzBossPlaneScroll
                 bra.s   loc_5961E
 ; ---------------------------------------------------------------------------
 
 loc_595D6:
-                jsr     sub_59672(pc)
-                bsr.s   sub_59614
+                jsr     ResetDdzBossPlaneTileDrawAnchors(pc)
+                bsr.s   RestorePreviousDdzBossPlaneScroll
                 move.w  #$F0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_fg).w
@@ -60,7 +60,7 @@ loc_595D6:
 ; ---------------------------------------------------------------------------
 
 loc_595EE:
-                bsr.s   sub_59614
+                bsr.s   RestorePreviousDdzBossPlaneScroll
 
 loc_595F0:
                 moveq   #0,d1
@@ -73,15 +73,15 @@ loc_595F0:
 
 loc_59602:
                 cmpi.w  #$400,d0
-                blo.s   sub_59614
+                blo.s   RestorePreviousDdzBossPlaneScroll
                 cmpi.w  #$800,d0
-                bhs.s   sub_59614
+                bhs.s   RestorePreviousDdzBossPlaneScroll
                 cmpi.w  #$220,d1
                 blo.s   loc_5961E
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59614:
+RestorePreviousDdzBossPlaneScroll:
                 move.w  d2,(_unkEE98).w
                 move.w  d3,(_unkEE9C).w
                 bra.s   locret_59646
@@ -102,11 +102,11 @@ loc_5961E:
 
 locret_59646:
                 rts
-; End of function sub_59614
+; End of function RestorePreviousDdzBossPlaneScroll
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59648:
+ComputeDdzBossRelativePlaneScroll:
                 move.w  (_unkEE98).w,d2
                 move.w  (_unkEE9C).w,d3
                 move.w  (Camera_X_pos_copy).w,d0
@@ -118,11 +118,11 @@ sub_59648:
                 addi.w  #$100,d1
                 move.w  d1,(_unkEE9C).w
                 rts
-; End of function sub_59648
+; End of function ComputeDdzBossRelativePlaneScroll
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_59672:
+ResetDdzBossPlaneTileDrawAnchors:
                 move.w  (_unkEE98).w,d5
                 move.w  d5,d4
                 andi.w  #$FFF0,d5
@@ -131,13 +131,13 @@ sub_59672:
                 and.w   (Camera_Y_pos_mask).w,d5
                 move.w  d5,(_unkEEA2).w
                 rts
-; End of function sub_59672
+; End of function ResetDdzBossPlaneTileDrawAnchors
 
 ; ---------------------------------------------------------------------------
 
 DDZ_BackgroundInit:
                 clr.w   (HScroll_table).w
-                jsr     sub_596EA(pc)
+                jsr     BuildDdzBackgroundParallaxBands(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 moveq   #0,d1
                 jsr     (Refresh_PlaneFull).l
@@ -145,7 +145,7 @@ DDZ_BackgroundInit:
 ; ---------------------------------------------------------------------------
 
 DDZ_BackgroundEvent:
-                jsr     sub_596EA(pc)
+                jsr     BuildDdzBackgroundParallaxBands(pc)
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
                 moveq   #0,d1
@@ -167,7 +167,7 @@ loc_596BC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_596EA:
+BuildDdzBackgroundParallaxBands:
                 move.w  (Camera_Y_pos_copy).w,d0
                 asr.w   #1,d0
                 move.w  d0,(Camera_Y_pos_BG_copy).w
@@ -187,7 +187,7 @@ loc_59708:
                 sub.l   d1,d0
                 dbf     d2,loc_59708
                 rts
-; End of function sub_596EA
+; End of function BuildDdzBackgroundParallaxBands
 
 ; ---------------------------------------------------------------------------
 DDZ_BGDeformArray:

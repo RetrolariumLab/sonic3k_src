@@ -56,7 +56,7 @@ loc_3F960:
 
 loc_3F966:
                 movea.w parent3(a0),a1
-                bsr.s   sub_3F996
+                bsr.s   UpdateMhzOpposedMushroomCompression
                 move.w  $34(a0),d0
                 neg.w   d0
                 add.w   $30(a0),d0
@@ -70,7 +70,7 @@ loc_3F966:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3F996:
+UpdateMhzOpposedMushroomCompression:
                 move.w  $36(a0),d2
                 tst.w   $32(a0)
                 bne.s   loc_3F9E0
@@ -127,14 +127,14 @@ loc_3F9FE:
 loc_3FA18:
                 lea     (Player_1).w,a2
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_3FA26
+                bsr.s   LaunchPlayerFromOppositeMhzMushroom
                 lea     (Player_2).w,a2
                 moveq   #p2_standing_bit,d6
-; End of function sub_3F996
+; End of function UpdateMhzOpposedMushroomCompression
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3FA26:
+LaunchPlayerFromOppositeMhzMushroom:
                 btst    d6,status(a1)
                 beq.s   locret_3F9FC
                 move.w  #-$E80,d1
@@ -145,7 +145,7 @@ sub_3FA26:
 loc_3FA3C:
                 move.w  d1,y_vel(a2)
                 bra.s   loc_3FA66
-; End of function sub_3FA26
+; End of function LaunchPlayerFromOppositeMhzMushroom
 
 ; ---------------------------------------------------------------------------
 
@@ -155,13 +155,13 @@ loc_3FA42:
                 clr.w   $32(a0)
                 lea     (Player_1).w,a2
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_3FA5A
+                bsr.s   LaunchPlayerFromMainMhzMushroom
                 lea     (Player_2).w,a2
                 moveq   #p2_standing_bit,d6
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3FA5A:
+LaunchPlayerFromMainMhzMushroom:
                 btst    d6,status(a0)
                 beq.s   locret_3F9FC
                 move.w  #-$D00,y_vel(a2)
@@ -175,7 +175,7 @@ loc_3FA66:
                 move.b  #2,routine(a2)
                 moveq   #signextendB(sfx_MushroomBounce),d0
                 jmp     (Play_SFX).l
-; End of function sub_3FA5A
+; End of function LaunchPlayerFromMainMhzMushroom
 
 ; ---------------------------------------------------------------------------
 

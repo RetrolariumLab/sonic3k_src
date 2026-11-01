@@ -23,7 +23,7 @@ loc_43B18:
 
 loc_43B3E:
                 lea     (Player_1).w,a1
-                bsr.w   sub_43B6E
+                bsr.w   GumballS3LaunchFromTriangleAndConsumeBumperCell
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ loc_43B4C:
 
 loc_43B5A:
                 lea     (Player_2).w,a1
-                bsr.w   sub_43B6E
+                bsr.w   GumballS3LaunchFromTriangleAndConsumeBumperCell
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -44,7 +44,7 @@ loc_43B68:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_43B6E:
+GumballS3LaunchFromTriangleAndConsumeBumperCell:
                 move.w  #-$300,d0
                 move.w  #-$600,y_vel(a1)
                 bset    #Status_Facing,status(a1)
@@ -70,7 +70,7 @@ loc_43B8E:
                 moveq   #signextendB(sfx_Spring),d0
                 jsr     (Play_SFX).l
                 rts
-; End of function sub_43B6E
+; End of function GumballS3LaunchFromTriangleAndConsumeBumperCell
 
 ; ---------------------------------------------------------------------------
 
@@ -78,7 +78,7 @@ loc_43BD8:
                 lea     ObjDat3_43F58(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #loc_43BEC,(a0)
-                bsr.w   sub_43F2E
+                bsr.w   GumballS3SelectAttachedDecorationFrameAndOptionalMaskChild
 
 loc_43BEC:
                 jsr     (Refresh_ChildPosition).l
@@ -89,7 +89,7 @@ loc_43BF8:
                 lea     ObjDat3_43FA0(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #loc_43C0C,(a0)
-                bsr.w   sub_43EEC
+                bsr.w   GumballS3OffsetDebrisAndSeedSubtypeDelay
 
 loc_43C0C:
                 subq.b  #1,$2E(a0)
@@ -145,7 +145,7 @@ loc_43C94:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_43CAE:
+GumballS3CheckNearbyPlayersAndDispatchItemReward:
                 lea     word_43CE4(pc),a1
                 jsr     (Check_PlayerInRange).l
                 tst.l   d0
@@ -160,7 +160,7 @@ sub_43CAE:
 
 locret_43CD0:
                 rts
-; End of function sub_43CAE
+; End of function GumballS3CheckNearbyPlayersAndDispatchItemReward
 
 ; ---------------------------------------------------------------------------
 off_43CD2:
@@ -206,14 +206,14 @@ loc_43D28:
                 move.l  d0,-(sp)
                 tst.w   d0
                 beq.s   loc_43D30
-                bsr.s   sub_43D42
+                bsr.s   GumballS3RepelPlayerFromRoundItemWithHighCounterByteJitter
 
 loc_43D30:
                 move.l  (sp)+,d0
                 swap    d0
                 tst.w   d0
                 beq.s   loc_43D3A
-                bsr.s   sub_43D42
+                bsr.s   GumballS3RepelPlayerFromRoundItemWithHighCounterByteJitter
 
 loc_43D3A:
                 clr.b   collision_property(a0)
@@ -222,7 +222,7 @@ loc_43D3A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_43D42:
+GumballS3RepelPlayerFromRoundItemWithHighCounterByteJitter:
                 movea.w d0,a1
                 move.w  x_pos(a0),d1
                 move.w  y_pos(a0),d2
@@ -246,7 +246,7 @@ sub_43D42:
                 move.b  #1,anim(a0)
                 moveq   #signextendB(sfx_SmallBumpers),d0
                 jmp     (Play_SFX).l
-; End of function sub_43D42
+; End of function GumballS3RepelPlayerFromRoundItemWithHighCounterByteJitter
 
 ; ---------------------------------------------------------------------------
 
@@ -257,7 +257,7 @@ loc_43DA2:
                 andi.b  #$8E,status_secondary(a1)
                 bset    #Status_Shield,status_secondary(a1)
                 moveq   #Status_FireShield,d0
-                bsr.w   sub_43E20
+                bsr.w   GumballS3SetLiveShieldTypeAndReplaceSavedTypeBits
                 moveq   #signextendB(sfx_FireShield),d0
                 jmp     (Play_Music).l
 ; ---------------------------------------------------------------------------
@@ -269,7 +269,7 @@ loc_43DCC:
                 andi.b  #$8E,status_secondary(a1)
                 bset    #Status_Shield,status_secondary(a1)
                 moveq   #Status_BublShield,d0
-                bsr.w   sub_43E20
+                bsr.w   GumballS3SetLiveShieldTypeAndReplaceSavedTypeBits
                 moveq   #signextendB(sfx_BubbleShield),d0
                 jmp     (Play_Music).l
 ; ---------------------------------------------------------------------------
@@ -281,19 +281,19 @@ loc_43DF6:
                 andi.b  #$8E,status_secondary(a1)
                 bset    #Status_Shield,status_secondary(a1)
                 moveq   #Status_LtngShield,d0
-                bsr.w   sub_43E20
+                bsr.w   GumballS3SetLiveShieldTypeAndReplaceSavedTypeBits
                 moveq   #signextendB(sfx_LightningShield),d0
                 jmp     (Play_Music).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_43E20:
+GumballS3SetLiveShieldTypeAndReplaceSavedTypeBits:
                 bset    d0,status_secondary(a1)
                 lea     (Saved_status_secondary).w,a2
                 andi.b  #$8F,(a2)
                 bset    d0,(a2)
                 rts
-; End of function sub_43E20
+; End of function GumballS3SetLiveShieldTypeAndReplaceSavedTypeBits
 
 ; ---------------------------------------------------------------------------
 
@@ -303,7 +303,7 @@ loc_43E30:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_43E38:
+GumballS3RecomputeDropTargetFromLeadingEmptyBumperPairsAndDescend:
                 bclr    #0,$38(a0)
                 beq.s   loc_43E60
                 lea     ((RAM_start+$2000)&$FFFFFF).l,a1
@@ -331,11 +331,11 @@ loc_43E60:
 
 locret_43E72:
                 rts
-; End of function sub_43E38
+; End of function GumballS3RecomputeDropTargetFromLeadingEmptyBumperPairsAndDescend
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_43E74:
+GumballS3SelectWeightedDropAndLimitLifeRollPerMachine:
                 jsr     (Random_Number).l
                 andi.w  #$F,d0
                 bne.s   loc_43E8E
@@ -355,7 +355,7 @@ loc_43EA2:
                 lsl.w   #2,d0
                 move.l  off_43EBC(pc,d0.w),$30(a0)
                 rts
-; End of function sub_43E74
+; End of function GumballS3SelectWeightedDropAndLimitLifeRollPerMachine
 
 ; ---------------------------------------------------------------------------
 byte_43EAC:
@@ -389,17 +389,17 @@ off_43EBC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_43EE0:
+GumballS3CallPlatformSolidRoutineWithFixedDimensions:
                 moveq   #$4B,d1
                 moveq   #$10,d2
                 moveq   #$11,d3
                 move.w  x_pos(a0),d4
                 jmp     (a1)
-; End of function sub_43EE0
+; End of function GumballS3CallPlatformSolidRoutineWithFixedDimensions
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_43EEC:
+GumballS3OffsetDebrisAndSeedSubtypeDelay:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.b  d0,$2E(a0)
@@ -412,7 +412,7 @@ sub_43EEC:
                 ext.w   d0
                 add.w   d0,y_pos(a0)
                 rts
-; End of function sub_43EEC
+; End of function GumballS3OffsetDebrisAndSeedSubtypeDelay
 
 ; ---------------------------------------------------------------------------
 byte_43F0E:
@@ -436,7 +436,7 @@ byte_43F0E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_43F2E:
+GumballS3SelectAttachedDecorationFrameAndOptionalMaskChild:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 subi.w  #6,d0
@@ -447,7 +447,7 @@ sub_43F2E:
                 bne.w   locret_43A92
                 lea     ChildObjDat_44016(pc),a2
                 jmp     (CreateChild6_Simple).l
-; End of function sub_43F2E
+; End of function GumballS3SelectAttachedDecorationFrameAndOptionalMaskChild
 
 ; ---------------------------------------------------------------------------
 RawAni_43F54:

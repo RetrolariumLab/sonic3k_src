@@ -9,7 +9,7 @@ loc_5F31C:
                 bclr    #2,render_flags(a0)
                 move.l  #loc_5F376,(a0)
                 lea     byte_5F36E(pc),a1
-                bsr.w   sub_5FEFE
+                bsr.w   EndingOffsetPoseByMaskedPlayerModePair
                 lea     (Pal_SonicTails).l,a1
                 lea     (Target_palette).w,a2
                 moveq   #bytesToLcnt($20),d6
@@ -59,7 +59,7 @@ loc_5F3AA:
                 bclr    #2,render_flags(a0)
                 move.l  #loc_5F3DA,(a0)
                 lea     byte_5F3D2(pc),a1
-                bsr.w   sub_5FEFE
+                bsr.w   EndingOffsetPoseByMaskedPlayerModePair
                 lea     ChildObjDat_60204(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
@@ -95,7 +95,7 @@ loc_5F410:
                 bclr    #2,render_flags(a0)
                 move.l  #loc_5F46A,(a0)
                 lea     byte_5F462(pc),a1
-                bsr.w   sub_5FEFE
+                bsr.w   EndingOffsetPoseByMaskedPlayerModePair
                 lea     (Pal_EndingEyecatchKnuckles).l,a1
                 lea     (Target_palette_line_3).w,a2
                 moveq   #bytesToLcnt($20),d6

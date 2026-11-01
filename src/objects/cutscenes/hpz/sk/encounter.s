@@ -21,7 +21,7 @@ loc_63D1A:
                 beq.w   CutsceneKnux_Delete
                 lea     word_63CEC(pc),a1
                 jsr     (Check_CameraInRange).l
-                jsr     (sub_85D6A).l
+                jsr     (BeginBossCameraTransitionSaveBoundsAndFadeMusic).l
                 jsr     (AllocateObject).l
                 bne.s   loc_63D5C
                 move.l  #loc_85CA4,(a1)
@@ -156,7 +156,7 @@ loc_63E7C:
 
 loc_63EA0:
                 jsr     (Find_SonicTails).l
-                bsr.w   sub_66094
+                bsr.w   HPZKnucklesFaceTargetFromSideWord
                 cmpi.w  #$40,d3
                 bhs.w   locret_6206C
                 cmpi.w  #$30,d2
@@ -176,7 +176,7 @@ loc_63EBE:
 loc_63EDA:
                 jsr     (Animate_RawCheckResult).l
                 jsr     (Find_SonicTails).l
-                bsr.w   sub_66094
+                bsr.w   HPZKnucklesFaceTargetFromSideWord
                 cmpi.w  #$10,d3
                 bhs.s   loc_63F00
                 cmpi.w  #$20,d2
@@ -206,7 +206,7 @@ loc_63F20:
 ; ---------------------------------------------------------------------------
 
 loc_63F3C:
-                jsr     (sub_6615A).l
+                jsr     (HPZKnucklesStopHorizontalSpeedAtCameraMargins).l
                 move.w  x_vel(a0),d0
                 beq.s   loc_63F58
                 move.w  $40(a0),d1
@@ -316,7 +316,7 @@ off_64056:
 loc_64066:
                 move.b  #8,routine(a0)
                 jsr     (Find_SonicTails).l
-                bsr.w   sub_66094
+                bsr.w   HPZKnucklesFaceTargetFromSideWord
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
                 move.l  #loc_6401C,$34(a0)
@@ -325,7 +325,7 @@ loc_64066:
 ; ---------------------------------------------------------------------------
 
 loc_64090:
-                jsr     (sub_6615A).l
+                jsr     (HPZKnucklesStopHorizontalSpeedAtCameraMargins).l
                 jsr     (MoveSprite2).l
                 tst.w   x_vel(a0)
                 beq.w   loc_64132
@@ -394,7 +394,7 @@ loc_64132:
 loc_6414C:
                 jsr     (Animate_RawCheckResult).l
                 jsr     (Find_SonicTails).l
-                bsr.w   sub_66094
+                bsr.w   HPZKnucklesFaceTargetFromSideWord
                 lea     off_63F10(pc),a3
                 bra.w   loc_660BE
 ; ---------------------------------------------------------------------------
@@ -433,7 +433,7 @@ loc_641BC:
 loc_641C4:
                 move.b  #$12,routine(a0)
                 jsr     (Find_SonicTails).l
-                bsr.w   sub_66094
+                bsr.w   HPZKnucklesFaceTargetFromSideWord
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
                 move.w  #60-1,$2E(a0)
@@ -443,7 +443,7 @@ loc_641C4:
 
 loc_641EC:
                 jsr     (Animate_RawCheckResult).l
-                jsr     (sub_6615A).l
+                jsr     (HPZKnucklesStopHorizontalSpeedAtCameraMargins).l
                 tst.w   x_vel(a0)
                 bne.s   loc_6420C
                 bchg    #0,render_flags(a0)
@@ -479,7 +479,7 @@ loc_64242:
 
 loc_64258:
                 jsr     (Animate_RawCheckResult).l
-                jsr     (sub_6615A).l
+                jsr     (HPZKnucklesStopHorizontalSpeedAtCameraMargins).l
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
                 bmi.w   locret_6206C
@@ -523,7 +523,7 @@ loc_642BC:
 ; ---------------------------------------------------------------------------
 
 loc_642F0:
-                jsr     (sub_6615A).l
+                jsr     (HPZKnucklesStopHorizontalSpeedAtCameraMargins).l
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
                 bmi.w   locret_6206C

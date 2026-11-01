@@ -99,10 +99,10 @@ loc_29782:
 loc_29798:
                 lea     (Player_1).w,a1
                 move.b  $34(a0),d0
-                bsr.s   sub_297C8
+                bsr.s   ReleaseCorkRiderWithConditionalBounce
                 lea     (Player_2).w,a1
                 move.b  $36(a0),d0
-                bsr.s   sub_297C8
+                bsr.s   ReleaseCorkRiderWithConditionalBounce
                 bra.w   loc_29818
 ; ---------------------------------------------------------------------------
 
@@ -113,19 +113,19 @@ loc_297B0:
                 cmpi.b  #2,$34(a0)
                 bne.s   loc_2977C
                 lea     (Player_1).w,a1
-                bsr.s   sub_297CE
+                bsr.s   BouncePlayerFromBrokenCorkFloor
                 bra.s   loc_29818
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_297C8:
+ReleaseCorkRiderWithConditionalBounce:
                 cmpi.b  #2,d0
                 bne.s   loc_297EC
-; End of function sub_297C8
+; End of function ReleaseCorkRiderWithConditionalBounce
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_297CE:
+BouncePlayerFromBrokenCorkFloor:
                 bset    #Status_Roll,status(a1)
                 move.b  #$E,y_radius(a1)
                 move.b  #7,x_radius(a1)
@@ -137,7 +137,7 @@ loc_297EC:
                 bclr    #Status_OnObj,status(a1)
                 move.b  #2,routine(a1)
                 rts
-; End of function sub_297CE
+; End of function BouncePlayerFromBrokenCorkFloor
 
 ; ---------------------------------------------------------------------------
 
@@ -147,7 +147,7 @@ loc_29800:
                 cmpi.b  #2,$36(a0)
                 bne.w   loc_2977C
                 lea     (Player_2).w,a1
-                bsr.s   sub_297CE
+                bsr.s   BouncePlayerFromBrokenCorkFloor
 
 loc_29818:
                 move.w  $38(a0),(Chain_bonus_counter).w
@@ -245,7 +245,7 @@ loc_29914:
                 moveq   #0,d2
                 move.b  height_pixels(a0),d2
                 move.w  x_pos(a0),d4
-                jsr     (sub_1BB7C).l
+                jsr     (CollidePlayersWithHeightProfileKeepAirState).l
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
                 bne.s   loc_29956
@@ -283,10 +283,10 @@ loc_29994:
 loc_299A2:
                 lea     (Player_1).w,a1
                 move.b  $34(a0),d0
-                bsr.s   sub_299F0
+                bsr.s   ReleaseIczCorkRiderWithConditionalRoll
                 lea     (Player_2).w,a1
                 move.b  $36(a0),d0
-                bsr.s   sub_299F0
+                bsr.s   ReleaseIczCorkRiderWithConditionalRoll
                 bra.w   loc_29A56
 ; ---------------------------------------------------------------------------
 
@@ -309,19 +309,19 @@ loc_299D8:
 
 loc_299E8:
                 lea     (Player_1).w,a1
-                bsr.s   sub_299F6
+                bsr.s   ReleasePlayerFromIczCorkFloor
                 bra.s   loc_29A56
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_299F0:
+ReleaseIczCorkRiderWithConditionalRoll:
                 cmpi.b  #2,d0
                 bne.s   loc_29A0E
-; End of function sub_299F0
+; End of function ReleaseIczCorkRiderWithConditionalRoll
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_299F6:
+ReleasePlayerFromIczCorkFloor:
                 bset    #Status_Roll,status(a1)
                 move.b  #$E,y_radius(a1)
                 move.b  #7,x_radius(a1)
@@ -332,7 +332,7 @@ loc_29A0E:
                 bclr    #Status_OnObj,status(a1)
                 move.b  #2,routine(a1)
                 rts
-; End of function sub_299F6
+; End of function ReleasePlayerFromIczCorkFloor
 
 ; ---------------------------------------------------------------------------
 
@@ -354,7 +354,7 @@ loc_29A40:
 
 loc_29A50:
                 lea     (Player_2).w,a1
-                bsr.s   sub_299F6
+                bsr.s   ReleasePlayerFromIczCorkFloor
 
 loc_29A56:
                 move.w  $38(a0),(Chain_bonus_counter).w

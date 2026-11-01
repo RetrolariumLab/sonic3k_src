@@ -99,7 +99,7 @@ loc_8BF06:
                 move.w  #-8,$44(a0)
 
 loc_8BF3E:
-                bsr.w   sub_8BF80
+                bsr.w   RunStarPointerSpikeCallbackWhenCollisionCleared
                 moveq   #4,d2
                 jsr     MoveSprite_CircularSimple(pc)
                 jmp     Child_DrawTouch_Sprite(pc)
@@ -110,7 +110,7 @@ loc_8BF4C:
                 movea.l $30(a0),a1
                 move.w  $44(a0),d3
                 jsr     (a1)
-                bsr.w   sub_8BF80
+                bsr.w   RunStarPointerSpikeCallbackWhenCollisionCleared
                 jmp     Sprite_CheckDeleteTouchXY(pc)
 ; ---------------------------------------------------------------------------
 
@@ -127,7 +127,7 @@ loc_8BF74:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8BF80:
+RunStarPointerSpikeCallbackWhenCollisionCleared:
                 tst.b   collision_flags(a0)
                 bne.s   locret_8BF8C
                 movea.l $34(a0),a1
@@ -135,7 +135,7 @@ sub_8BF80:
 
 locret_8BF8C:
                 rts
-; End of function sub_8BF80
+; End of function RunStarPointerSpikeCallbackWhenCollisionCleared
 
 ; ---------------------------------------------------------------------------
 ObjDat_StarPointer:

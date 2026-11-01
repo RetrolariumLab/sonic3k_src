@@ -4,12 +4,12 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6B8F0:
+SetHCZBossBombStackPriority:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  word_6B8FE(pc,d0.w),priority(a0)
                 rts
-; End of function sub_6B8F0
+; End of function SetHCZBossBombStackPriority
 
 ; ---------------------------------------------------------------------------
 word_6B8FE:
@@ -30,7 +30,7 @@ word_6B912:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6B916:
+SynchronizeHCZBossVortexHeightVisual:
                 movea.w parent3(a0),a1
                 moveq   #0,d0
                 move.b  $39(a1),d0
@@ -48,7 +48,7 @@ sub_6B916:
 
 locret_6B946:
                 rts
-; End of function sub_6B916
+; End of function SynchronizeHCZBossVortexHeightVisual
 
 ; ---------------------------------------------------------------------------
 byte_6B948:
@@ -75,7 +75,7 @@ off_6B954:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6B96C:
+ConfigureHCZBossGeyserLayerFromSubtype:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,$2E(a0)
@@ -86,7 +86,7 @@ sub_6B96C:
                 add.w   d0,d0
                 move.l  off_6B998(pc,d0.w),$30(a0)
                 rts
-; End of function sub_6B96C
+; End of function ConfigureHCZBossGeyserLayerFromSubtype
 
 ; ---------------------------------------------------------------------------
 word_6B98E:
@@ -104,19 +104,19 @@ off_6B998:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6B9AC:
+PullBothPlayersTowardHCZBossVortex:
                 move.w  x_pos(a0),d0
                 move.w  (Water_level).w,d1
                 addq.w  #8,d1
                 move.l  #$20000,d2
                 lea     (Player_1).w,a1
-                bsr.w   sub_6B9C8
+                bsr.w   PullDeepPlayerWithHCZVortexDisplacement
                 lea     (Player_2).w,a1
-; End of function sub_6B9AC
+; End of function PullBothPlayersTowardHCZBossVortex
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6B9C8:
+PullDeepPlayerWithHCZVortexDisplacement:
                 tst.b   object_control(a1)
                 bne.s   locret_6B9E0
                 cmp.w   y_pos(a1),d1
@@ -130,11 +130,11 @@ loc_6B9DC:
 
 locret_6B9E0:
                 rts
-; End of function sub_6B9C8
+; End of function PullDeepPlayerWithHCZVortexDisplacement
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6B9E2:
+CaptureBothPlayersInHCZBossVortex:
                 movea.w parent3(a0),a1
                 moveq   #0,d0
                 move.b  $39(a1),d0
@@ -143,17 +143,17 @@ sub_6B9E2:
                 lea     (a1,d0.w),a1
                 moveq   #$42,d4
                 lea     (Player_1).w,a2
-                bsr.w   sub_6BA06
+                bsr.w   CaptureAndLiftPlayerInHCZBossVortex
                 moveq   #$43,d4
                 lea     (Player_2).w,a2
-; End of function sub_6B9E2
+; End of function CaptureBothPlayersInHCZBossVortex
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6BA06:
+CaptureAndLiftPlayerInHCZBossVortex:
                 movea.w parent3(a0),a3
                 btst    #7,status(a3)
-                bne.w   sub_6BB02
+                bne.w   ReleasePlayerFromHCZBossVortex
                 cmpi.b  #6,routine(a2)
                 bhs.w   loc_6BAB2
                 tst.b   invulnerability_timer(a2)
@@ -180,22 +180,22 @@ loc_6BA32:
                 bhs.w   locret_6BB00
                 tst.b   object_control(a2)
                 bne.s   loc_6BA6C
-                bsr.w   sub_6BADA
+                bsr.w   InitializeHCZBossVortexPlayerCapture
 
 loc_6BA6C:
                 move.w  y_pos(a0),d0
                 move.w  y_pos(a2),d2
                 add.w   (a1)+,d0
                 cmp.w   d0,d2
-                blo.w   sub_6BB02
+                blo.w   ReleasePlayerFromHCZBossVortex
                 move.w  x_pos(a2),d0
                 move.w  x_vel(a2),d1
                 move.w  #$80,d2
                 sub.w   x_pos(a0),d0
                 cmpi.w  #-$12,d0
-                ble.s   sub_6BB02
+                ble.s   ReleasePlayerFromHCZBossVortex
                 cmpi.w  #$12,d0
-                bge.s   sub_6BB02
+                bge.s   ReleasePlayerFromHCZBossVortex
                 tst.w   d0
                 bmi.s   loc_6BA9E
                 neg.w   d2
@@ -215,7 +215,7 @@ loc_6BAB2:
                 clr.b   (a0,d4.w)
                 clr.b   object_control(a2)
                 rts
-; End of function sub_6BA06
+; End of function CaptureAndLiftPlayerInHCZBossVortex
 
 ; ---------------------------------------------------------------------------
 word_6BAC2:
@@ -228,7 +228,7 @@ word_6BAC2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6BADA:
+InitializeHCZBossVortexPlayerCapture:
                 st      (a0,d4.w)
                 bset    #Status_InAir,status(a2)
                 move.b  #1,object_control(a2)
@@ -240,18 +240,18 @@ sub_6BADA:
 
 locret_6BB00:
                 rts
-; End of function sub_6BADA
+; End of function InitializeHCZBossVortexPlayerCapture
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6BB02:
+ReleasePlayerFromHCZBossVortex:
                 clr.b   (a0,d4.w)
                 bset    #Status_InAir,status(a2)
                 clr.b   object_control(a2)
                 move.b  #2,anim(a2)
                 move.w  #-$200,y_vel(a2)
                 rts
-; End of function sub_6BB02
+; End of function ReleasePlayerFromHCZBossVortex
 
 ; ---------------------------------------------------------------------------
 
@@ -260,33 +260,33 @@ loc_6BB1E:
                 beq.s   loc_6BB2E
                 clr.b   $42(a0)
                 lea     (Player_1).w,a2
-                bsr.s   sub_6BB02
+                bsr.s   ReleasePlayerFromHCZBossVortex
 
 loc_6BB2E:
                 tst.b   $43(a0)
                 beq.s   locret_6BB3E
                 clr.b   $43(a0)
                 lea     (Player_2).w,a2
-                bsr.s   sub_6BB02
+                bsr.s   ReleasePlayerFromHCZBossVortex
 
 locret_6BB3E:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6BB40:
+ApplyHCZBossGeyserToBothPlayers:
                 cmpi.b  #$30,anim_frame(a0)
                 bhs.s   locret_6BB90
                 lea     word_6BB92(pc),a1
                 lea     (Player_1).w,a2
-                bsr.w   sub_6BB5C
+                bsr.w   LaunchPlayerInsideHCZBossGeyserRectangle
                 lea     word_6BB92(pc),a1
                 lea     (Player_2).w,a2
-; End of function sub_6BB40
+; End of function ApplyHCZBossGeyserToBothPlayers
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6BB5C:
+LaunchPlayerInsideHCZBossGeyserRectangle:
                 tst.b   object_control(a2)
                 bne.s   locret_6BB90
                 move.w  x_pos(a0),d0
@@ -309,7 +309,7 @@ sub_6BB5C:
 
 locret_6BB90:
                 rts
-; End of function sub_6BB5C
+; End of function LaunchPlayerInsideHCZBossGeyserRectangle
 
 ; ---------------------------------------------------------------------------
 word_6BB92:
@@ -318,7 +318,7 @@ word_6BB92:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6BB9A:
+AccelerateHCZBossBubbleTowardParentX:
                 movea.w parent3(a0),a1
                 move.w  x_pos(a0),d0
                 move.w  x_vel(a0),d1
@@ -335,11 +335,11 @@ loc_6BBB4:
                 lsl.l   #8,d1
                 add.l   d1,x_pos(a0)
                 rts
-; End of function sub_6BB9A
+; End of function AccelerateHCZBossBubbleTowardParentX
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6BBC4:
+HandleHCZEndBossThreeColorHitFlashOrDefeat:
                 tst.l   (a0)
                 beq.s   locret_6BC1A
                 tst.b   collision_flags(a0)
@@ -376,7 +376,7 @@ loc_6BC1C:
                 move.l  #Wait_FadeToLevelMusic,(a0)
                 move.l  #loc_6B0B0,$34(a0)
                 jmp     (BossDefeated_StopTimer).l
-; End of function sub_6BBC4
+; End of function HandleHCZEndBossThreeColorHitFlashOrDefeat
 
 ; ---------------------------------------------------------------------------
 word_6BC30:
@@ -387,7 +387,7 @@ word_6BC36:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6BC42:
+StartHCZBossColumnDescentAfterRootDeath:
                 movea.w $44(a0),a1
                 btst    #7,status(a1)
                 beq.s   locret_6BC6E
@@ -399,11 +399,11 @@ sub_6BC42:
 
 locret_6BC6E:
                 rts
-; End of function sub_6BC42
+; End of function StartHCZBossColumnDescentAfterRootDeath
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6BC70:
+MarkHCZBossVortexDetachedWhenColumnDies:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
                 beq.s   locret_6BC88
@@ -412,11 +412,11 @@ sub_6BC70:
 
 locret_6BC88:
                 rts
-; End of function sub_6BC70
+; End of function MarkHCZBossVortexDetachedWhenColumnDies
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_6BC8A:
+UpdateHCZBossColumnHeightAndCheckCallback:
                 move.w  $3A(a0),d0
                 sub.w   y_pos(a0),d0
                 bcs.s   loc_6BCAC
@@ -435,7 +435,7 @@ locret_6BCAA:
 loc_6BCAC:
                 movea.l $34(a0),a2
                 jmp     (a2)
-; End of function sub_6BC8A
+; End of function UpdateHCZBossColumnHeightAndCheckCallback
 
 ; ---------------------------------------------------------------------------
 

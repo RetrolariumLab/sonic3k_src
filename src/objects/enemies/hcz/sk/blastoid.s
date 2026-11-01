@@ -9,7 +9,7 @@ Obj_Blastoid:
                 move.b  routine(a0),d0
                 move.w  Blastoid_Index(pc,d0.w),d1
                 jsr     Blastoid_Index(pc,d1.w)
-                bsr.w   sub_879A8
+                bsr.w   ResolveBlastoidContactAndLevelTrigger
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 Blastoid_Index:
@@ -60,7 +60,7 @@ loc_879A0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_879A8:
+ResolveBlastoidContactAndLevelTrigger:
                 jsr     Check_PlayerCollision(pc)
                 beq.w   locret_87974
                 jsr     Check_PlayerAttack(pc)
@@ -78,7 +78,7 @@ loc_879C4:
                 st      (a3,d0.w)
                 jsr     EnemyDefeated(pc)
                 jmp     (Draw_Sprite).l
-; End of function sub_879A8
+; End of function ResolveBlastoidContactAndLevelTrigger
 
 ; ---------------------------------------------------------------------------
 ObjDat_Blastoid:

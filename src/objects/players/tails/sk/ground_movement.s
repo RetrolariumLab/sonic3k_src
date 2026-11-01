@@ -14,12 +14,12 @@ Tails_InputAcceleration_Path:
                 bne.w   loc_14B14
                 btst    #button_left,(Ctrl_2_held_logical).w
                 beq.s   loc_14A0A
-                bsr.w   sub_14C20
+                bsr.w   TailsSKApplyGroundLeftInput
 
 loc_14A0A:
                 btst    #button_right,(Ctrl_2_logical).w
                 beq.s   loc_14A16
-                bsr.w   sub_14CAC
+                bsr.w   TailsSKApplyGroundRightInput
 
 loc_14A16:
                 move.b  angle(a0),d0
@@ -192,7 +192,7 @@ loc_14BA8:
                 move.b  angle(a0),d0
                 add.b   d1,d0
                 move.w  d0,-(sp)
-                bsr.w   sub_F61C
+                bsr.w   ProbeNextSurfaceWithFixedLookahead
                 move.w  (sp)+,d0
                 tst.w   d1
                 bpl.s   locret_14C1E
@@ -244,7 +244,7 @@ locret_14C1E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_14C20:
+TailsSKApplyGroundLeftInput:
                 move.w  ground_vel(a0),d0
                 beq.s   loc_14C28
                 bpl.s   loc_14C5A
@@ -303,11 +303,11 @@ loc_14C62:
 
 locret_14CAA:
                 rts
-; End of function sub_14C20
+; End of function TailsSKApplyGroundLeftInput
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_14CAC:
+TailsSKApplyGroundRightInput:
                 move.w  ground_vel(a0),d0
                 bmi.s   loc_14CE0
                 bclr    #Status_Facing,status(a0)
@@ -361,4 +361,4 @@ loc_14CE8:
 
 locret_14D30:
                 rts
-; End of function sub_14CAC
+; End of function TailsSKApplyGroundRightInput

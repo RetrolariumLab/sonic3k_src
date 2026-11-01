@@ -27,7 +27,7 @@ HPZS_ScreenEvent:
 ; ---------------------------------------------------------------------------
 
 HPZS_BackgroundInit:
-                jsr     sub_5A334(pc)
+                jsr     BuildHpzRightRegionParallax(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 lea     (HScroll_table).w,a1
                 move.w  (a1)+,(a1)
@@ -43,7 +43,7 @@ HPZS_BackgroundInit:
 ; ---------------------------------------------------------------------------
 
 HPZS_BackgroundEvent:
-                jsr     sub_5A334(pc)
+                jsr     BuildHpzRightRegionParallax(pc)
                 lea     HPZ_BGDrawArray(pc),a4
                 lea     (HScroll_table).w,a5
                 moveq   #$20,d6

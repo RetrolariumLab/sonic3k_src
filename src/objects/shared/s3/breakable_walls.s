@@ -148,7 +148,7 @@ loc_1F8CA:
 
 loc_1F8D0:
                 bclr    #p1_pushing_bit,status(a0)
-                bsr.s   sub_1F936
+                bsr.s   BreakWallFromSideImpact
                 btst    #p2_pushing_bit,status(a0)
                 beq.s   loc_1F888
                 lea     (Player_2).w,a1
@@ -179,7 +179,7 @@ loc_1F928:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1F936:
+BreakWallFromSideImpact:
                 move.w  d1,x_vel(a1)
                 addq.w  #4,x_pos(a1)
                 movea.l $34(a0),a4
@@ -206,7 +206,7 @@ loc_1F96E:
 
 loc_1F986:
                 jmp     (Delete_Current_Sprite).l
-; End of function sub_1F936
+; End of function BreakWallFromSideImpact
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -277,7 +277,7 @@ loc_1FA02:
                 move.w  x_vel(a1),ground_vel(a1)
                 bclr    #Status_Push,status(a1)
                 bclr    #p1_pushing_bit,status(a0)
-                bsr.s   sub_1FAC2
+                bsr.s   BreakWallAfterLatchedSideCollision
                 andi.b  #2,d6
                 beq.s   loc_1FABC
                 lea     (Player_2).w,a1
@@ -300,14 +300,14 @@ loc_1FA90:
                 move.w  x_vel(a1),ground_vel(a1)
                 bclr    #Status_Push,status(a1)
                 bclr    #p2_pushing_bit,status(a0)
-                bsr.s   sub_1FAC2
+                bsr.s   BreakWallAfterLatchedSideCollision
 
 loc_1FABC:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1FAC2:
+BreakWallAfterLatchedSideCollision:
                 movea.l $34(a0),a4
                 move.w  x_pos(a0),d0
                 cmp.w   x_pos(a1),d0
@@ -320,7 +320,7 @@ loc_1FADA:
                 addq.b  #1,mapping_frame(a0)
                 bsr.w   BreakObjectToPieces
                 bra.w   loc_1F96E
-; End of function sub_1FAC2
+; End of function BreakWallAfterLatchedSideCollision
 
 ; ---------------------------------------------------------------------------
 
@@ -360,7 +360,7 @@ loc_1FB38:
                 cmpi.b  #2,character_id(a1)
                 bne.s   loc_1FB86
                 bclr    #p1_pushing_bit,status(a0)
-                bsr.s   sub_1FBA4
+                bsr.s   BreakWallFromKnucklesImpact
                 btst    #p2_pushing_bit,status(a0)
                 beq.s   loc_1FB32
                 lea     (Player_2).w,a1
@@ -384,7 +384,7 @@ loc_1FB86:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1FBA4:
+BreakWallFromKnucklesImpact:
                 move.w  d1,x_vel(a1)
                 addq.w  #4,x_pos(a1)
                 movea.l $34(a0),a4
@@ -401,7 +401,7 @@ loc_1FBC4:
                 addq.b  #1,mapping_frame(a0)
                 bsr.w   BreakObjectToPieces
                 bra.w   loc_1F96E
-; End of function sub_1FBA4
+; End of function BreakWallFromKnucklesImpact
 
 ; ---------------------------------------------------------------------------
 word_1FBE2:

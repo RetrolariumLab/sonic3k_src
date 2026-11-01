@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_5B514:
+SKCreditsSelectProductRegionCharacterCompletionScrollSpeedDelay:
                 moveq   #0,d1
                 tst.w   (SK_alone_flag).w
                 bne.s   loc_5B520
@@ -43,4 +43,4 @@ loc_5B54A:
                 lea     CreditsText_ScrollDelay(pc),a1
                 move.w  (a1,d1.w),(_unkF660).w
                 rts
-; End of function sub_5B514
+; End of function SKCreditsSelectProductRegionCharacterCompletionScrollSpeedDelay

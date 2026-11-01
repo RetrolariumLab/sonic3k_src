@@ -7,8 +7,8 @@
 FindWall:
                 lea     (Find_Tile_FG).l,a5
                 tst.b   (Background_collision_flag).w
-                beq.s   sub_F4DC
-                bsr.s   sub_F4DC
+                beq.s   SampleWallDistanceWithNeighbor
+                bsr.s   SampleWallDistanceWithNeighbor
                 move.b  (a4),Primary_Angle_save-Primary_Angle(a4)
                 move.w  d1,-(sp)
                 move.w  a3,d0
@@ -25,7 +25,7 @@ loc_F4A4:
 loc_F4A8:
                 sub.w   (Camera_Y_diff).w,d2
                 lea     (Find_Tile_BG).l,a5
-                bsr.s   sub_F4DC
+                bsr.s   SampleWallDistanceWithNeighbor
                 move.w  a3,d0
                 bpl.s   loc_F4C6
                 eori.w  #$F,d3
@@ -51,7 +51,7 @@ locret_F4DA:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_F4DC:
+SampleWallDistanceWithNeighbor:
                 jsr     (a5)
                 move.w  (a1),d0
                 move.w  d0,d4
@@ -62,7 +62,7 @@ sub_F4DC:
 
 loc_F4EC:
                 add.w   a3,d3
-                bsr.w   sub_F584
+                bsr.w   SampleSingleBlockWallDistance
                 sub.w   a3,d3
                 addi.w  #$10,d1
                 rts
@@ -123,15 +123,15 @@ loc_F56A:
 
 loc_F576:
                 sub.w   a3,d3
-                bsr.w   sub_F584
+                bsr.w   SampleSingleBlockWallDistance
                 add.w   a3,d3
                 subi.w  #$10,d1
                 rts
-; End of function sub_F4DC
+; End of function SampleWallDistanceWithNeighbor
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_F584:
+SampleSingleBlockWallDistance:
                 jsr     (a5)
                 move.w  (a1),d0
                 move.w  d0,d4
@@ -200,13 +200,13 @@ loc_F60C:
                 bpl.w   loc_F594
                 not.w   d1
                 rts
-; End of function sub_F584
+; End of function SampleSingleBlockWallDistance
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_F61C:
+ProbeNextSurfaceWithFixedLookahead:
                 tst.w   (Competition_mode).w
-                bne.w   sub_F6B4
+                bne.w   ProbeNextSurfaceWithBodyRadius
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
                 beq.s   loc_F638
@@ -268,11 +268,11 @@ loc_F6A8:
                 cmpi.b  #$40,d0
                 beq.w   loc_FDA8
                 bra.w   loc_FA88
-; End of function sub_F61C
+; End of function ProbeNextSurfaceWithFixedLookahead
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_F6B4:
+ProbeNextSurfaceWithBodyRadius:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
                 beq.s   loc_F6C8
@@ -316,10 +316,10 @@ loc_F70E:
 
 loc_F712:
                 andi.b  #$C0,d0
-                beq.w   sub_F828
+                beq.w   ProbeFloorWithXRadiusOffset
                 cmpi.b  #$80,d0
                 beq.w   CheckCeilingDist_WithRadius
                 cmpi.b  #$40,d0
                 beq.w   loc_FDC8
                 bra.w   loc_FAA4
-; End of function sub_F6B4
+; End of function ProbeNextSurfaceWithBodyRadius

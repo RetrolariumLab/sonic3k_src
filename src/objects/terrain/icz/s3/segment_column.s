@@ -38,7 +38,7 @@ loc_5836E:
                 bne.s   loc_583B0
                 move.w  (Player_1+x_vel).w,-(sp)
                 move.w  (Player_2+x_vel).w,-(sp)
-                bsr.w   sub_58428
+                bsr.w   CollideIczColumnSegmentAsSolidRectangle
                 move.l  (sp)+,d0
                 moveq   #p1_pushing_bit,d1
                 cmpi.b  #3,mapping_frame(a0)
@@ -46,11 +46,11 @@ loc_5836E:
                 tst.b   subtype(a0)
                 bne.s   loc_583AC
                 lea     (Player_1).w,a1
-                bsr.w   sub_58438
+                bsr.w   BreakIczColumnSegmentForFastRollingPlayer
                 lea     (Player_2).w,a1
                 swap    d0
                 addq.b  #p2_pushing_bit-p1_pushing_bit,d1
-                bsr.w   sub_58438
+                bsr.w   BreakIczColumnSegmentForFastRollingPlayer
 
 loc_583AC:
                 bra.w   loc_58486
@@ -69,7 +69,7 @@ loc_583B0:
 ; ---------------------------------------------------------------------------
 
 loc_583D6:
-                bsr.w   sub_58428
+                bsr.w   CollideIczColumnSegmentAsSolidRectangle
                 jsr     Obj_Wait(pc)
                 bra.w   loc_58486
 ; ---------------------------------------------------------------------------
@@ -83,7 +83,7 @@ loc_583E2:
 ; ---------------------------------------------------------------------------
 
 loc_583FC:
-                bsr.w   sub_58428
+                bsr.w   CollideIczColumnSegmentAsSolidRectangle
                 addq.w  #4,y_pos(a0)
                 jsr     Obj_Wait(pc)
                 bra.w   loc_58486
@@ -99,17 +99,17 @@ loc_5840C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_58428:
+CollideIczColumnSegmentAsSolidRectangle:
                 moveq   #$2B,d1
                 moveq   #$10,d2
                 moveq   #$10,d3
                 move.w  x_pos(a0),d4
                 jmp     (SolidObjectFull).l
-; End of function sub_58428
+; End of function CollideIczColumnSegmentAsSolidRectangle
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_58438:
+BreakIczColumnSegmentForFastRollingPlayer:
                 btst    d1,status(a0)
                 beq.s   locret_58484
                 move.w  d0,d3
@@ -137,7 +137,7 @@ loc_58446:
 
 locret_58484:
                 rts
-; End of function sub_58438
+; End of function BreakIczColumnSegmentForFastRollingPlayer
 
 ; ---------------------------------------------------------------------------
 

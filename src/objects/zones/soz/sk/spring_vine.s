@@ -52,8 +52,8 @@ loc_40840:
                 move.l  #loc_40852,(a0)
 
 loc_40852:
-                bsr.s   sub_40878
-                bsr.w   sub_40A08
+                bsr.s   UpdateSozVineRiderDeflectionAndRecoil
+                bsr.w   BuildSozVineSlopeAndSegmentHeights
                 move.w  #$30,d1
                 lea     ((RAM_start+$8F00)&$FFFFFF).l,a2
                 move.w  x_pos(a0),d4
@@ -66,17 +66,17 @@ loc_40872:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_40878:
+UpdateSozVineRiderDeflectionAndRecoil:
                 moveq   #0,d4
                 move.w  $30(a0),d5
                 lea     $35(a0),a2
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
-                bsr.w   sub_4093E
+                bsr.w   TrackSozVineRiderCrossingAndLaunch
                 subq.w  #1,a2
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
-                bsr.w   sub_4093E
+                bsr.w   TrackSozVineRiderCrossingAndLaunch
                 move.w  d5,$30(a0)
                 tst.b   $36(a0)
                 bne.s   loc_408B6
@@ -103,7 +103,7 @@ loc_408B6:
                 move.b  d0,$36(a0)
                 move.b  d0,$23(a0)
                 rts
-; End of function sub_40878
+; End of function UpdateSozVineRiderDeflectionAndRecoil
 
 ; ---------------------------------------------------------------------------
 word_408D4:
@@ -163,7 +163,7 @@ word_408D4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4093E:
+TrackSozVineRiderCrossingAndLaunch:
                 btst    d6,status(a0)
                 bne.s   loc_4094A
                 move.b  #0,(a2)
@@ -242,11 +242,11 @@ loc_409DE:
                 move.b  #0,double_jump_flag(a1)
                 moveq   #signextendB(sfx_Spring),d0
                 jmp     (Play_SFX).l
-; End of function sub_4093E
+; End of function TrackSozVineRiderCrossingAndLaunch
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_40A08:
+BuildSozVineSlopeAndSegmentHeights:
                 move.w  $30(a0),d5
                 beq.w   locret_40AA8
                 lea     (byte_40AAA).l,a1
@@ -317,7 +317,7 @@ loc_40A94:
 
 locret_40AA8:
                 rts
-; End of function sub_40A08
+; End of function BuildSozVineSlopeAndSegmentHeights
 
 ; ---------------------------------------------------------------------------
 byte_40AAA:

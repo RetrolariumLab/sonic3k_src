@@ -22,7 +22,7 @@ loc_8FD6A:
                 add.w   d1,d0
                 move.w  d0,(a1)+
                 move.w  #0,(a1)+
-                bsr.w   sub_8FF72
+                bsr.w   SpawnAndTrackToxomisterCore
 
 loc_8FD76:
                 movea.w $44(a0),a1
@@ -33,19 +33,19 @@ loc_8FD76:
                 move.l  #loc_8FDB0,$34(a0)
 
 loc_8FD96:
-                bsr.w   sub_8FF5A
+                bsr.w   FaceToxomisterOnEighthVblankPhase
                 jmp     (Sprite_CheckDeleteTouch).l
 ; ---------------------------------------------------------------------------
 
 loc_8FDA0:
-                bsr.w   sub_8FF5A
+                bsr.w   FaceToxomisterOnEighthVblankPhase
                 jsr     (Obj_Wait).l
                 jmp     (Sprite_CheckDeleteTouch).l
 ; ---------------------------------------------------------------------------
 
 loc_8FDB0:
                 move.l  #loc_8FD76,(a0)
-                bra.w   sub_8FF72
+                bra.w   SpawnAndTrackToxomisterCore
 ; ---------------------------------------------------------------------------
 
 loc_8FDBA:
@@ -75,7 +75,7 @@ loc_8FDD8:
 ; ---------------------------------------------------------------------------
 
 loc_8FE06:
-                bsr.w   sub_8FF8C
+                bsr.w   AttachToxomisterCoreToContactingPlayer
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
@@ -89,7 +89,7 @@ locret_8FE24:
 ; ---------------------------------------------------------------------------
 
 loc_8FE26:
-                bsr.w   sub_8FF8C
+                bsr.w   AttachToxomisterCoreToContactingPlayer
                 jsr     (MoveSprite2).l
                 jmp     (ObjHitFloor_DoRoutine).l
 ; ---------------------------------------------------------------------------
@@ -111,8 +111,8 @@ loc_8FE50:
                 movea.w $44(a0),a1
                 move.w  x_pos(a1),x_pos(a0)
                 move.w  y_pos(a1),y_pos(a0)
-                bsr.w   sub_8FFE0
-                jsr     (sub_881FE).l
+                bsr.w   ApplyToxomisterAttachedVelocityDrag
+                jsr     (DrainGlobalRingFromAttachedMegaChopper).l
                 beq.w   locret_8FE24
 
 loc_8FE82:
@@ -187,17 +187,17 @@ loc_8FF42:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8FF5A:
+FaceToxomisterOnEighthVblankPhase:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #7,d0
                 bne.w   locret_8FE24
                 jsr     (Find_SonicTails).l
                 jmp     (Change_FlipX).l
-; End of function sub_8FF5A
+; End of function FaceToxomisterOnEighthVblankPhase
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8FF72:
+SpawnAndTrackToxomisterCore:
                 moveq   #signextendB(sfx_EnemyBreath),d0
                 jsr     (Play_SFX).l
                 lea     ChildObjDat_90040(pc),a2
@@ -207,11 +207,11 @@ sub_8FF72:
 
 locret_8FF8A:
                 rts
-; End of function sub_8FF72
+; End of function SpawnAndTrackToxomisterCore
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8FF8C:
+AttachToxomisterCoreToContactingPlayer:
                 move.b  collision_property(a0),d0
                 beq.w   locret_8FE24
                 clr.b   collision_property(a0)
@@ -230,7 +230,7 @@ sub_8FF8C:
                 move.b  #8,routine(a0)
                 move.w  #60-1,$2E(a0)
                 rts
-; End of function sub_8FF8C
+; End of function AttachToxomisterCoreToContactingPlayer
 
 ; ---------------------------------------------------------------------------
 word_8FFD4:
@@ -240,7 +240,7 @@ word_8FFD4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8FFE0:
+ApplyToxomisterAttachedVelocityDrag:
                 move.w  x_vel(a1),d0
                 asr.w   #3,d0
                 sub.w   d0,x_vel(a1)
@@ -254,7 +254,7 @@ loc_8FFF6:
                 asr.w   #3,d1
                 sub.w   d1,(a1,d0.w)
                 rts
-; End of function sub_8FFE0
+; End of function ApplyToxomisterAttachedVelocityDrag
 
 ; ---------------------------------------------------------------------------
 

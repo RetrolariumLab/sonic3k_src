@@ -43,16 +43,16 @@ loc_3FD28:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 move.w  (Ctrl_1_logical).w,d5
-                bsr.s   sub_3FD4E
+                bsr.s   UpdatePlayerInSozVerticalSandFlow
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 move.w  (Ctrl_2_logical).w,d5
-                bsr.s   sub_3FD4E
+                bsr.s   UpdatePlayerInSozVerticalSandFlow
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3FD4E:
+UpdatePlayerInSozVerticalSandFlow:
                 btst    d6,status(a0)
                 bne.s   loc_3FDD0
                 move.w  x_pos(a1),d0
@@ -133,7 +133,7 @@ loc_3FE2A:
 
 locret_3FE42:
                 rts
-; End of function sub_3FD4E
+; End of function UpdatePlayerInSozVerticalSandFlow
 
 ; ---------------------------------------------------------------------------
 
@@ -144,17 +144,17 @@ loc_3FE44:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 move.w  (Ctrl_1_logical).w,d5
-                bsr.s   sub_3FE70
+                bsr.s   UpdatePlayerOnSozHorizontalSandFlow
                 addq.w  #1,a2
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 move.w  (Ctrl_2_logical).w,d5
-                bsr.s   sub_3FE70
+                bsr.s   UpdatePlayerOnSozHorizontalSandFlow
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3FE70:
+UpdatePlayerOnSozHorizontalSandFlow:
                 tst.b   (a2)
                 beq.s   loc_3FE78
                 subq.b  #1,(a2)
@@ -244,7 +244,7 @@ loc_3FF60:
 loc_3FF7A:
                 add.l   d0,x_pos(a1)
                 rts
-; End of function sub_3FE70
+; End of function UpdatePlayerOnSozHorizontalSandFlow
 
 ; ---------------------------------------------------------------------------
 
@@ -365,16 +365,16 @@ loc_400CA:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 move.w  (Ctrl_1_logical).w,d5
-                bsr.s   sub_400F0
+                bsr.s   UpdatePlayerOnJumpableSozSandSurface
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 move.w  (Ctrl_2_logical).w,d5
-                bsr.s   sub_400F0
+                bsr.s   UpdatePlayerOnJumpableSozSandSurface
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_400F0:
+UpdatePlayerOnJumpableSozSandSurface:
                 btst    d6,status(a0)
                 bne.w   loc_401AC
                 move.w  x_pos(a1),d0
@@ -489,4 +489,4 @@ loc_40256:
 
 locret_40274:
                 rts
-; End of function sub_400F0
+; End of function UpdatePlayerOnJumpableSozSandSurface

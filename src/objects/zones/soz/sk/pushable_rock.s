@@ -41,7 +41,7 @@ loc_405AA:
                 move.w  #$D,d3
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull).l
-                bsr.w   sub_406B4
+                bsr.w   UpdatePlayerPushingSozRock
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
@@ -137,7 +137,7 @@ loc_406AE:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_406B4:
+UpdatePlayerPushingSozRock:
                 moveq   #0,d5
                 move.b  status(a0),d3
                 andi.b  #pushing_mask,d3
@@ -146,21 +146,21 @@ sub_406B4:
                 lea     (Player_1).w,a1
                 move.b  $30(a0),d0
                 moveq   #p1_pushing_bit,d6
-                bsr.s   sub_406E4
+                bsr.s   ApplyDelayedPlayerPushToSozRock
                 tst.w   d5
                 bne.s   locret_406E2
                 lea     (Player_2).w,a1
                 move.b  $31(a0),d0
                 moveq   #p2_pushing_bit,d6
-                bsr.s   sub_406E4
+                bsr.s   ApplyDelayedPlayerPushToSozRock
 
 locret_406E2:
                 rts
-; End of function sub_406B4
+; End of function UpdatePlayerPushingSozRock
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_406E4:
+ApplyDelayedPlayerPushToSozRock:
                 btst    d6,d3
                 beq.s   locret_4075C
                 cmp.w   x_pos(a1),d2
@@ -172,7 +172,7 @@ sub_406E4:
                 move.w  #4,$32(a0)
                 subq.w  #1,x_pos(a0)
                 subq.w  #1,x_pos(a1)
-                bsr.s   sub_4076E
+                bsr.s   PlaySozRockPushSound
                 move.w  x_pos(a0),d3
                 addi.w  #$10,d3
                 jsr     (ObjCheckFloorDist2).l
@@ -193,7 +193,7 @@ loc_40726:
                 move.w  #4,$32(a0)
                 addq.w  #1,x_pos(a0)
                 addq.w  #1,x_pos(a1)
-                bsr.s   sub_4076E
+                bsr.s   PlaySozRockPushSound
                 move.w  x_pos(a0),d3
                 subi.w  #$10,d3
                 jsr     (ObjCheckFloorDist2).l
@@ -211,14 +211,14 @@ loc_4075E:
                 move.l  #loc_405D8,(a0)
                 moveq   #1,d5
                 rts
-; End of function sub_406E4
+; End of function ApplyDelayedPlayerPushToSozRock
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4076E:
+PlaySozRockPushSound:
                 moveq   #signextendB(sfx_PushBlock),d0
                 jmp     (Play_SFX).l
-; End of function sub_4076E
+; End of function PlaySozRockPushSound
 
 ; ---------------------------------------------------------------------------
 Map_SOZPushableRock:

@@ -70,7 +70,7 @@ loc_2E0F8:
                 move.w  d0,x_pos(a0)
                 tst.b   $2E(a0)
                 beq.s   loc_2E12A
-                bsr.w   sub_2E2BE
+                bsr.w   CheckPlayersForHczAirBubble
                 cmpi.b  #6,routine(a0)
                 beq.s   loc_2E142
 
@@ -231,13 +231,13 @@ byte_2E2AC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2E2BE:
+CheckPlayersForHczAirBubble:
                 lea     (Player_1).w,a1
-                bsr.s   sub_2E2C8
+                bsr.s   LetPlayerBreatheHczAirBubble
                 lea     (Player_2).w,a1
-; End of function sub_2E2BE
+; End of function CheckPlayersForHczAirBubble
 
-sub_2E2C8:
+LetPlayerBreatheHczAirBubble:
                 tst.b   object_control(a1)
                 bmi.w   locret_2E392
                 move.w  x_pos(a1),d0
@@ -799,7 +799,7 @@ loc_2ED00:
                 jsr     (Random_Number).l
                 move.w  d0,d1
                 move.w  d0,d2
-                bsr.s   sub_2ED6A
+                bsr.s   InitializeHczGeyserDroplet
                 addi.w  #$10,x_pos(a1)
                 andi.w  #$F,d1
                 lsl.w   #6,d1
@@ -808,7 +808,7 @@ loc_2ED00:
                 move.w  d0,d2
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   loc_2ED64
-                bsr.s   sub_2ED6A
+                bsr.s   InitializeHczGeyserDroplet
                 subi.w  #$10,x_pos(a1)
                 neg.w   d1
                 move.w  d1,x_vel(a1)
@@ -819,7 +819,7 @@ loc_2ED64:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2ED6A:
+InitializeHczGeyserDroplet:
                 move.l  #loc_2EA6E,(a1)
                 move.l  mappings(a0),mappings(a1)
                 move.b  #$84,render_flags(a1)
@@ -838,7 +838,7 @@ sub_2ED6A:
 loc_2EDB4:
                 move.b  d2,anim(a1)
                 rts
-; End of function sub_2ED6A
+; End of function InitializeHczGeyserDroplet
 
 ; ---------------------------------------------------------------------------
 

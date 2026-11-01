@@ -83,8 +83,8 @@ loc_D7C0:
 ; ---------------------------------------------------------------------------
 
 loc_D7EA:
-                jsr     sub_D912(pc)
-                jsr     sub_D94A(pc)
+                jsr     SKSaveEraseAdvanceMainIconBlinkSequence(pc)
+                jsr     SKSaveEraseCycleChildFramesEightThroughEleven(pc)
                 tst.w   (Player_2+object_control).w
                 bne.s   loc_D83C
                 move.b  (Ctrl_1_pressed).w,d0
@@ -148,8 +148,8 @@ loc_D8A0:
 ; ---------------------------------------------------------------------------
 
 loc_D8A4:
-                jsr     sub_D912(pc)
-                jsr     sub_D94A(pc)
+                jsr     SKSaveEraseAdvanceMainIconBlinkSequence(pc)
+                jsr     SKSaveEraseCycleChildFramesEightThroughEleven(pc)
                 cmpi.b  #$B,sub2_mapframe(a0)
                 bne.s   loc_D8BE
                 move.b  #$C,sub2_mapframe(a0)
@@ -160,7 +160,7 @@ loc_D8BE:
 ; ---------------------------------------------------------------------------
 
 loc_D8C4:
-                jsr     sub_D912(pc)
+                jsr     SKSaveEraseAdvanceMainIconBlinkSequence(pc)
                 btst    #button_right,(Ctrl_1_pressed).w
                 bne.s   loc_D8FE
                 btst    #button_left,(Ctrl_1_pressed).w
@@ -186,7 +186,7 @@ loc_D90C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_D912:
+SKSaveEraseAdvanceMainIconBlinkSequence:
                 subq.b  #1,anim_frame_timer(a0)
                 bpl.s   locret_D938
                 move.b  #5,anim_frame_timer(a0)
@@ -206,7 +206,7 @@ loc_D934:
 
 locret_D938:
                 rts
-; End of function sub_D912
+; End of function SKSaveEraseAdvanceMainIconBlinkSequence
 
 ; ---------------------------------------------------------------------------
 byte_D93A:
@@ -215,7 +215,7 @@ byte_D93A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_D94A:
+SKSaveEraseCycleChildFramesEightThroughEleven:
                 subq.b  #1,$25(a0)
                 bpl.s   locret_D968
                 move.b  #3,$25(a0)
@@ -227,7 +227,7 @@ sub_D94A:
 
 locret_D968:
                 rts
-; End of function sub_D94A
+; End of function SKSaveEraseCycleChildFramesEightThroughEleven
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -295,9 +295,9 @@ loc_D9EC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_D9F4:
+SKSaveWriteEncodedLabelTilesUntilNegativeTerminator:
                 lea     (VDP_data_port).l,a6
-                jsr     sub_C87E(pc)
+                jsr     SKSaveConvertVRAMWordAddressToWriteCommand(pc)
                 move.l  d0,VDP_control_port-VDP_data_port(a6)
                 move.w  #make_art_tile(ArtTile_Save_Text-$10,1,1),d5
                 moveq   #0,d6
@@ -319,11 +319,11 @@ loc_DA12:
 
 locret_DA1C:
                 rts
-; End of function sub_D9F4
+; End of function SKSaveWriteEncodedLabelTilesUntilNegativeTerminator
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_DA1E:
+SKSaveDecodeSevenTwoBitEmeraldStatesAndCounts:
                 clr.b   (Emeralds_converted_flag).w
                 moveq   #0,d1
                 moveq   #0,d2
@@ -348,11 +348,11 @@ loc_DA3E:
 loc_DA48:
                 dbf     d3,loc_DA28
                 rts
-; End of function sub_DA1E
+; End of function SKSaveDecodeSevenTwoBitEmeraldStatesAndCounts
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_DA4E:
+SKSaveMapProgressIndexToZoneActWithKnucklesSSZ2Exception:
                 cmpi.w  #3,$34(a0)
                 bne.s   loc_DA62
                 cmpi.b  #$B,d0
@@ -368,7 +368,7 @@ loc_DA62:
 
 locret_DA6C:
                 rts
-; End of function sub_DA4E
+; End of function SKSaveMapProgressIndexToZoneActWithKnucklesSSZ2Exception
 
 ; ---------------------------------------------------------------------------
 LevelList_DA6E:

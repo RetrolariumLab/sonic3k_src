@@ -10,8 +10,8 @@ Obj_SSZ2_Boss:
                 move.w  SSZ2_Boss_Index(pc,d0.w),d1
                 jsr     SSZ2_Boss_Index(pc,d1.w)
                 lea     loc_7D39E(pc),a4
-                bsr.w   sub_7D312
-                bsr.w   sub_7D2D8
+                bsr.w   HandleSSZMechaHitFlashOrTailDeathCallback
+                bsr.w   SelectSSZMechaCollisionFromFrameOutsideHitRecovery
                 lea     DPLCPtr_MechaSonic(pc),a2
                 jsr     (Perform_DPLC).l
                 jmp     (Draw_And_Touch_Sprite).l
@@ -106,7 +106,7 @@ loc_7BE4E:
                 clr.b   $39(a0)
                 bclr    #1,$38(a0)
                 lea     word_7DA60(pc),a1
-                bsr.w   sub_7C678
+                bsr.w   InstallSingleGlobalPaletteRotationScript
                 move.w  #$3F,$2E(a0)
                 move.l  #loc_7BEA8,$34(a0)
                 lea     (Normal_palette).w,a1
@@ -262,7 +262,7 @@ loc_7C008:
 ; ---------------------------------------------------------------------------
 
 loc_7C018:
-                bsr.w   sub_7D1EA
+                bsr.w   ClassifySSZPlayerHorizontalRegionWithCollapsedRightBins
                 move.b  d2,child_dy(a0)
                 move.w  x_pos(a0),d0
                 cmp.w   (_unkFA88).w,d0
@@ -294,7 +294,7 @@ loc_7C062:
 ; ---------------------------------------------------------------------------
 
 loc_7C06E:
-                bsr.w   sub_7D1B6
+                bsr.w   TestSSZPlayerRegionAgainstSelectedAttackList
                 beq.s   loc_7C0B6
                 move.b  #$12,routine(a0)
                 move.w  #$1F,$2E(a0)
@@ -308,7 +308,7 @@ loc_7C06E:
                 move.w  (Camera_Y_pos).w,d1
                 addi.w  #$B0,d1
                 moveq   #3,d5
-                jsr     (sub_861D0).l
+                jsr     (SetVelocityTowardPointByDominantAxis).l
                 lea     byte_7D52A(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
@@ -563,7 +563,7 @@ loc_7C3CA:
                 move.l  #loc_7C410,$34(a0)
                 bclr    #7,$38(a0)
                 lea     (word_7DB66).l,a1
-                bsr.w   sub_7C678
+                bsr.w   InstallSingleGlobalPaletteRotationScript
                 lea     byte_7D508(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
@@ -745,7 +745,7 @@ loc_7C604:
                 move.w  d0,x_vel(a0)
                 move.l  #loc_7C654,(Palette_rotation_custom).w
                 lea     (word_7DC7E).l,a1
-                bra.w   sub_7C678
+                bra.w   InstallSingleGlobalPaletteRotationScript
 ; ---------------------------------------------------------------------------
 
 loc_7C61A:

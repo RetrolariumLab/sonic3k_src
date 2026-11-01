@@ -50,7 +50,7 @@ loc_47422:
 
 loc_47440:
                 move.w  x_pos(a0),-(sp)
-                bsr.w   sub_4748E
+                bsr.w   PositionDezLiftPadAndArmSegments
                 move.w  #$18,d1
                 move.w  #9,d3
                 move.w  (sp)+,d4
@@ -76,10 +76,10 @@ loc_4747E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4748E:
+PositionDezLiftPadAndArmSegments:
                 moveq   #0,d0
                 moveq   #0,d1
-                bsr.w   sub_4757A
+                bsr.w   AdvanceDezLiftPadAngularMotion
                 cmp.b   $36(a0),d0
                 beq.w   locret_47578
                 move.b  d0,$36(a0)
@@ -165,11 +165,11 @@ loc_47574:
 
 locret_47578:
                 rts
-; End of function sub_4748E
+; End of function PositionDezLiftPadAndArmSegments
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4757A:
+AdvanceDezLiftPadAngularMotion:
                 tst.w   $34(a0)
                 beq.s   loc_47592
                 btst    #p1_standing_bit,status(a0)
@@ -224,7 +224,7 @@ loc_47600:
 loc_4760E:
                 move.b  angle(a0),d0
                 rts
-; End of function sub_4757A
+; End of function AdvanceDezLiftPadAngularMotion
 
 ; ---------------------------------------------------------------------------
 Map_DEZLiftPad:

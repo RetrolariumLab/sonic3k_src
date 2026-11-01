@@ -12,19 +12,19 @@ Obj_Spring_UpDiag:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 movem.l d1-d4,-(sp)
-                bsr.w   sub_1DD24
+                bsr.w   CollidePlayerWithHeightProfileSolid
                 btst    #p1_standing_bit,status(a0)
                 beq.s   loc_234B8
-                bsr.s   sub_234E6
+                bsr.s   LaunchPlayerFromUpDiagonalSpring
 
 loc_234B8:
                 movem.l (sp)+,d1-d4
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
-                bsr.w   sub_1DD24
+                bsr.w   CollidePlayerWithHeightProfileSolid
                 btst    #p2_standing_bit,status(a0)
                 beq.s   loc_234D0
-                bsr.s   sub_234E6
+                bsr.s   LaunchPlayerFromUpDiagonalSpring
 
 loc_234D0:
                 lea     (Ani_Spring).l,a1
@@ -34,7 +34,7 @@ loc_234D0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_234E6:
+LaunchPlayerFromUpDiagonalSpring:
                 btst    #0,status(a0)
                 bne.s   loc_234FC
                 move.w  x_pos(a0),d0
@@ -105,7 +105,7 @@ loc_235B8:
 loc_235CA:
                 moveq   #signextendB(sfx_Spring),d0
                 jmp     (Play_SFX).l
-; End of function sub_234E6
+; End of function LaunchPlayerFromUpDiagonalSpring
 
 ; ---------------------------------------------------------------------------
 
@@ -117,19 +117,19 @@ Obj_Spring_DownDiag:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 movem.l d1-d4,-(sp)
-                bsr.w   sub_1DD24
+                bsr.w   CollidePlayerWithHeightProfileSolid
                 cmpi.w  #-2,d4
                 bne.s   loc_235F8
-                bsr.s   sub_23624
+                bsr.s   LaunchPlayerFromDownDiagonalSpring
 
 loc_235F8:
                 movem.l (sp)+,d1-d4
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
-                bsr.w   sub_1DD24
+                bsr.w   CollidePlayerWithHeightProfileSolid
                 cmpi.w  #-2,d4
                 bne.s   loc_2360E
-                bsr.s   sub_23624
+                bsr.s   LaunchPlayerFromDownDiagonalSpring
 
 loc_2360E:
                 lea     (Ani_Spring).l,a1
@@ -139,7 +139,7 @@ loc_2360E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_23624:
+LaunchPlayerFromDownDiagonalSpring:
                 move.w  #5<<8,anim(a0)                  ; and prev_anim
                 move.w  $30(a0),y_vel(a1)
                 neg.w   y_vel(a1)
@@ -192,7 +192,7 @@ loc_236D0:
 loc_236E2:
                 moveq   #signextendB(sfx_Spring),d0
                 jmp     (Play_SFX).l
-; End of function sub_23624
+; End of function LaunchPlayerFromDownDiagonalSpring
 
 ; ---------------------------------------------------------------------------
 byte_236EA:

@@ -23,7 +23,7 @@ LRZ3Platform_Index:
 ; ---------------------------------------------------------------------------
 
 loc_79C72:
-                bsr.w   sub_7A040
+                bsr.w   IsLRZPlatformOriginInsideCameraViewport
                 beq.w   locret_797F8
                 move.l  #loc_79C9E,(a0)
                 lea     ChildObjDat_7A1B0(pc),a2
@@ -42,7 +42,7 @@ loc_79C9E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_79CB4:
+SpawnLRZRisingPlatformWithPlacementSubtypeAndLifetime:
                 lea     ChildObjDat_7A1B0(pc),a2
                 jsr     (CreateChild6_Simple).l
                 bne.s   locret_79CCC
@@ -51,14 +51,14 @@ sub_79CB4:
 
 locret_79CCC:
                 rts
-; End of function sub_79CB4
+; End of function SpawnLRZRisingPlatformWithPlacementSubtypeAndLifetime
 
 ; ---------------------------------------------------------------------------
 
 loc_79CCE:
-                bsr.w   sub_7A040
+                bsr.w   IsLRZPlatformOriginInsideCameraViewport
                 beq.w   locret_797F8
-                bsr.s   sub_79CB4
+                bsr.s   SpawnLRZRisingPlatformWithPlacementSubtypeAndLifetime
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -68,7 +68,7 @@ loc_79CDE:
                 move.l  #loc_79CEE,(a0)
 
 loc_79CEE:
-                bsr.w   sub_7A064
+                bsr.w   MoveLRZPlatformAndResolveTopSolidRiders
                 jmp     (Sprite_CheckDelete).l
 ; ---------------------------------------------------------------------------
 
@@ -98,7 +98,7 @@ loc_79D28:
 loc_79D44:
                 subq.w  #1,$3A(a0)
                 bmi.s   loc_79D52
-                bsr.w   sub_7A064
+                bsr.w   MoveLRZPlatformAndResolveTopSolidRiders
                 bra.w   loc_79D82
 ; ---------------------------------------------------------------------------
 
@@ -110,7 +110,7 @@ loc_79D52:
                 jsr     (CreateChild6_Simple).l
 
 loc_79D6E:
-                bsr.w   sub_7A064
+                bsr.w   MoveLRZPlatformAndResolveTopSolidRiders
                 move.b  subtype(a0),d0
                 cmpi.b  #1,d0
                 beq.s   loc_79DB0
@@ -145,7 +145,7 @@ loc_79DB6:
 ; ---------------------------------------------------------------------------
 
 loc_79DC2:
-                bsr.w   sub_7A064
+                bsr.w   MoveLRZPlatformAndResolveTopSolidRiders
                 cmpi.w  #$612,y_pos(a0)
                 blo.s   loc_79DAA
                 move.l  #loc_79DEA,(a0)
@@ -156,16 +156,16 @@ loc_79DC2:
 ; ---------------------------------------------------------------------------
 
 loc_79DEA:
-                bsr.w   sub_79FFE
+                bsr.w   ShatterLRZBossPlatformNearBossAndAbortUpdate
                 tst.b   (_unkFAA3).w
                 bne.s   loc_79DFC
                 tst.b   render_flags(a0)
                 bpl.w   loc_79DB6
 
 loc_79DFC:
-                bsr.w   sub_79F14
-                bsr.w   sub_7A064
-                bsr.w   sub_79F30
+                bsr.w   SetLRZLavaRiderHorizontalStreamVelocity
+                bsr.w   MoveLRZPlatformAndResolveTopSolidRiders
+                bsr.w   MatchLRZLavaRiderHeightFromWorldXSample
                 jmp     (Sprite_CheckDelete).l
 ; ---------------------------------------------------------------------------
 ; unused
@@ -188,7 +188,7 @@ loc_79E34:
                 clr.w   y_vel(a0)
 
 loc_79E50:
-                bsr.w   sub_7A064
+                bsr.w   MoveLRZPlatformAndResolveTopSolidRiders
                 jmp     (Sprite_CheckDelete).l
 ; ---------------------------------------------------------------------------
 
@@ -218,5 +218,5 @@ loc_79E9C:
                 lea     ObjDat3_7960E(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #Obj_FlickerMove,(a0)
-                bsr.w   sub_7A07C
+                bsr.w   SeedLRZBossPlatformTenDebrisPieces
                 jmp     (Draw_Sprite).l

@@ -65,7 +65,7 @@ loc_621AE:
 
 loc_621BC:
                 move.b  #4,routine(a0)
-                bsr.w   sub_65DD6
+                bsr.w   CutsceneSpawnKnucklesMusicFadeTransition
                 move.w  #(3*60)-1,$2E(a0)
                 move.l  #loc_621D6,$34(a0)
                 rts

@@ -77,12 +77,12 @@ loc_2A084:
 
 loc_2A08A:
                 movea.w $3C(a0),a3
-                bsr.w   sub_2A0B2
+                bsr.w   AdvanceAizFlippingBridgeFrames
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 movea.l $32(a0),a2
                 move.w  x_pos(a0),d4
-                jsr     (sub_2A226).l
+                jsr     (CollidePlayersWithAizFlippingBridge).l
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
@@ -91,7 +91,7 @@ loc_2A0AC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2A0B2:
+AdvanceAizFlippingBridgeFrames:
                 subq.b  #1,anim_frame_timer(a0)
                 bpl.s   locret_2A0FC
                 move.b  $25(a0),anim_frame_timer(a0)
@@ -143,7 +143,7 @@ loc_2A104:
 
 locret_2A124:
                 rts
-; End of function sub_2A0B2
+; End of function AdvanceAizFlippingBridgeFrames
 
 ; ---------------------------------------------------------------------------
 word_2A126:
@@ -216,19 +216,19 @@ word_2A1A6:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2A226:
+CollidePlayersWithAizFlippingBridge:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 movem.l d1-d4,-(sp)
-                bsr.s   sub_2A23C
+                bsr.s   CollidePlayerWithAizFlippingBridge
                 movem.l (sp)+,d1-d4
                 lea     (Player_2).w,a1
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
-; End of function sub_2A226
+; End of function CollidePlayersWithAizFlippingBridge
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2A23C:
+CollidePlayerWithAizFlippingBridge:
                 btst    d6,status(a0)
                 beq.s   loc_2A292
                 move.w  d1,d2
@@ -316,7 +316,7 @@ loc_2A2B6:
 
 locret_2A30E:
                 rts
-; End of function sub_2A23C
+; End of function CollidePlayerWithAizFlippingBridge
 
 ; ---------------------------------------------------------------------------
 Map_AIZFlippingBridge:

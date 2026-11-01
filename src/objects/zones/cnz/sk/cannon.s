@@ -20,12 +20,12 @@ Obj_CNZCannon:
                 move.l  #loc_318F2,(a0)
 
 loc_318F2:
-                bsr.s   sub_3192C
+                bsr.s   UpdateCnzCannonAimAndMuzzleEffects
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 move.w  (Ctrl_1_logical).w,d1
-                bsr.w   sub_319F4
+                bsr.w   UpdatePlayerInCnzCannon
                 addq.w  #1,a2
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
@@ -35,13 +35,13 @@ loc_318F2:
                 move.b  #0,(a2)
 
 loc_3191E:
-                bsr.w   sub_319F4
-                bsr.w   sub_31B18
+                bsr.w   UpdatePlayerInCnzCannon
+                bsr.w   QueueCnzCannonBarrelPatterns
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3192C:
+UpdateCnzCannonAimAndMuzzleEffects:
                 move.w  $34(a0),d0
                 bne.s   loc_31944
                 move.w  #$10,d1
@@ -112,11 +112,11 @@ loc_319CE:
 
 locret_319F2:
                 rts
-; End of function sub_3192C
+; End of function UpdateCnzCannonAimAndMuzzleEffects
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_319F4:
+UpdatePlayerInCnzCannon:
                 move.b  (a2),d0
                 bne.s   loc_31A4C
                 bclr    d6,status(a0)
@@ -209,11 +209,11 @@ loc_31B06:
 
 locret_31B16:
                 rts
-; End of function sub_319F4
+; End of function UpdatePlayerInCnzCannon
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_31B18:
+QueueCnzCannonBarrelPatterns:
                 tst.b   render_flags(a0)
                 bpl.s   locret_31B70
                 moveq   #0,d0
@@ -247,7 +247,7 @@ loc_31B44:
 
 locret_31B70:
                 rts
-; End of function sub_31B18
+; End of function QueueCnzCannonBarrelPatterns
 
 ; ---------------------------------------------------------------------------
 DPLC_CNZCannon:

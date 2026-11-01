@@ -90,9 +90,9 @@ loc_2F080:
 
 loc_2F0A0:
                 lea     (Player_1).w,a1
-                bsr.w   sub_2F15C
+                bsr.w   ApplyHczFanFieldToPlayer
                 lea     (Player_2).w,a1
-                bsr.w   sub_2F15C
+                bsr.w   ApplyHczFanFieldToPlayer
                 subq.b  #1,anim_frame_timer(a0)
                 bpl.w   loc_2F0D0
                 move.b  #0,anim_frame_timer(a0)
@@ -142,7 +142,7 @@ loc_2F152:
                 jmp     (Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
 
-sub_2F15C:
+ApplyHczFanFieldToPlayer:
                 cmpi.b  #4,routine(a1)
                 bhs.w   locret_2F1FA
                 move.w  x_pos(a1),d0
@@ -363,9 +363,9 @@ loc_2F51C:
 
 loc_2F560:
                 lea     (Player_1).w,a1
-                bsr.w   sub_2F588
+                bsr.w   ApplyCgzFanFieldToPlayer
                 lea     (Player_2).w,a1
-                bsr.w   sub_2F588
+                bsr.w   ApplyCgzFanFieldToPlayer
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #3,mapping_frame(a0)
                 blo.s   loc_2F582
@@ -376,7 +376,7 @@ loc_2F582:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2F588:
+ApplyCgzFanFieldToPlayer:
                 cmpi.b  #4,routine(a1)
                 bhs.w   locret_2F61E
                 tst.b   object_control(a1)
@@ -419,7 +419,7 @@ loc_2F5D0:
 
 locret_2F61E:
                 rts
-; End of function sub_2F588
+; End of function ApplyCgzFanFieldToPlayer
 
 ; ---------------------------------------------------------------------------
 Map_CGZFan:

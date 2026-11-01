@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7AB56:
+TickSSZMTZBossLaserPairBurst:
                 subi.w  #1,(SSZ_MTZ_boss_laser_timer).w
                 bne.s   locret_7AB7E
                 tst.b   $31(a0)
@@ -17,7 +17,7 @@ sub_7AB56:
 
 locret_7AB7E:
                 rts
-; End of function sub_7AB56
+; End of function TickSSZMTZBossLaserPairBurst
 
 ; ---------------------------------------------------------------------------
 ChildObjDat_7AB80:
@@ -74,8 +74,8 @@ ObjDat3_7ABFA:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7AC06:
-                bsr.w   sub_7ACF2
+ApplySSZMTZHitOrbReleaseAndPlayerHurtPolicy:
+                bsr.w   HandleSSZMTZBossHitOrDefeatUsingSharedHitterTimer
                 cmpi.b  #$1F,$1C(a0)
                 bne.s   loc_7AC4A
                 st      $39(a0)
@@ -111,7 +111,7 @@ loc_7AC5A:
 
 locret_7AC78:
                 rts
-; End of function sub_7AC06
+; End of function ApplySSZMTZHitOrbReleaseAndPlayerHurtPolicy
 
 ; ---------------------------------------------------------------------------
 
@@ -157,7 +157,7 @@ loc_7ACC0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7ACF2:
+HandleSSZMTZBossHitOrDefeatUsingSharedHitterTimer:
                 cmpi.b  #$10,$26(a0)
                 bhs.s   locret_7AD38
                 tst.b   collision_property(a0)
@@ -178,7 +178,7 @@ loc_7AD1A:
                 addi.w  #2*2,d0
 
 loc_7AD28:
-                bsr.w   sub_7AD6A
+                bsr.w   CopySSZMTZThreeColorPaletteAtByteOffset
                 subq.b  #1,$1C(a0)
                 bne.s   locret_7AD38
                 move.b  #$F,collision_flags(a0)
@@ -199,15 +199,15 @@ loc_7AD3A:
 
 loc_7AD64:
                 jmp     (BossDefeated).l
-; End of function sub_7ACF2
+; End of function HandleSSZMTZBossHitOrDefeatUsingSharedHitterTimer
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7AD6A:
+CopySSZMTZThreeColorPaletteAtByteOffset:
                 lea     word_7AD78(pc),a1
                 lea     word_7AD7E(pc,d0.w),a2
                 jmp     (CopyWordData_3).l
-; End of function sub_7AD6A
+; End of function CopySSZMTZThreeColorPaletteAtByteOffset
 
 ; ---------------------------------------------------------------------------
 word_7AD78:
@@ -310,14 +310,14 @@ loc_7AE98:
                 move.w  d1,x_vel(a0)
 
 loc_7AE9C:
-                bsr.w   sub_7AEB0
-                bsr.w   sub_7AF5A
+                bsr.w   ProjectSSZMTZOrbPositionDepthAndFoldPhase
+                bsr.w   SelectSSZMTZOrbFrameAndQueuePriorityFromDepth
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_7AEB0:
+ProjectSSZMTZOrbPositionDepthAndFoldPhase:
                 move.b  $2F(a0),d0
                 jsr     (GetSineCosine).l
                 move.w  d0,d3
@@ -383,4 +383,4 @@ loc_7AF4C:
 
 locret_7AF58:
                 rts
-; End of function sub_7AEB0
+; End of function ProjectSSZMTZOrbPositionDepthAndFoldPhase

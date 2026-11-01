@@ -358,9 +358,9 @@ loc_309CC:
 
 loc_30A10:
                 lea     (Player_1).w,a1
-                bsr.w   sub_30A38
+                bsr.w   ApplyCgzFanFieldToPlayer
                 lea     (Player_2).w,a1
-                bsr.w   sub_30A38
+                bsr.w   ApplyCgzFanFieldToPlayer
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #3,mapping_frame(a0)
                 blo.s   loc_30A32
@@ -371,7 +371,7 @@ loc_30A32:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_30A38:
+ApplyCgzFanFieldToPlayer:
                 cmpi.b  #4,routine(a1)
                 bhs.w   locret_30ACE
                 tst.b   object_control(a1)
@@ -414,4 +414,4 @@ loc_30A80:
 
 locret_30ACE:
                 rts
-; End of function sub_30A38
+; End of function ApplyCgzFanFieldToPlayer

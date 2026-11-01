@@ -34,8 +34,9 @@ table. Retaining this fixed compatibility table does not add a Sonic 2 profile.
 
 Absolute RAM operands retain their original positive 24-bit long encoding
 through `(RAM_start+offset)&$FFFFFF`. The erroneous absolute vector-area reads
-in `sub_2636C` and its S&K counterpart remain `Vectors+$30` and `Vectors+$34`;
-replacing them with object-relative fields would change preserved behavior.
+in `CollidePlayersWithLbzUnusedTiltingBridge` and its S&K counterpart remain
+`Vectors+$30` and `Vectors+$34`; replacing them with object-relative fields
+would change preserved behavior.
 
 The preserved attract-ring bug also reads `Vectors+$30`; the Blue Sphere menu
 bug tests `Vectors` itself. These are reads of the original vector-area bytes.

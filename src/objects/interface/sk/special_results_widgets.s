@@ -27,7 +27,7 @@ loc_2E9F6:
                 move.w  #make_art_tile($000,1,0),art_tile(a0)
 
 loc_2EA10:
-                jsr     sub_2EC80(pc)
+                jsr     SpecialResultsSKSelectCharacterNameOffsetAndFrame(pc)
                 add.w   d0,x_pos(a0)
                 add.w   d0,$46(a0)
                 bra.s   loc_2EA4A
@@ -46,7 +46,7 @@ loc_2EA1E:
 ; ---------------------------------------------------------------------------
 
 loc_2EA3E:
-                jsr     sub_2EC80(pc)
+                jsr     SpecialResultsSKSelectCharacterNameOffsetAndFrame(pc)
                 sub.w   d0,x_pos(a0)
                 sub.w   d0,$46(a0)
 
@@ -106,21 +106,21 @@ locret_2EAC6:
 loc_2EAC8:
                 tst.w   (Special_stage_spheres_left).w
                 beq.w   loc_2EC7A
-                jsr     sub_2ECBC(pc)
+                jsr     SpecialResultsApplyOrdinaryEmeraldBaseArtWord(pc)
                 bra.w   loc_2EA50
 ; ---------------------------------------------------------------------------
 
 loc_2EAD8:
                 tst.w   (Special_stage_spheres_left).w
                 bne.w   loc_2EC7A
-                jsr     sub_2ECA8(pc)
+                jsr     SpecialResultsSelectChaosOrSuperCountByte(pc)
                 cmpi.b  #7,(a1)
                 blo.s   loc_2EAF6
                 subi.w  #$10,x_pos(a0)
                 subi.w  #$10,$46(a0)
 
 loc_2EAF6:
-                jsr     sub_2EC80(pc)
+                jsr     SpecialResultsSKSelectCharacterNameOffsetAndFrame(pc)
                 add.w   d0,x_pos(a0)
                 add.w   d0,$46(a0)
                 add.b   d1,mapping_frame(a0)
@@ -138,11 +138,11 @@ loc_2EAF6:
 loc_2EB30:
                 tst.w   (Special_stage_spheres_left).w
                 bne.w   loc_2EC7A
-                jsr     sub_2ECBC(pc)
-                jsr     sub_2EC80(pc)
+                jsr     SpecialResultsApplyOrdinaryEmeraldBaseArtWord(pc)
+                jsr     SpecialResultsSKSelectCharacterNameOffsetAndFrame(pc)
                 sub.w   d0,x_pos(a0)
                 sub.w   d0,$46(a0)
-                jsr     sub_2ECA8(pc)
+                jsr     SpecialResultsSelectChaosOrSuperCountByte(pc)
                 cmpi.b  #7,(a1)
                 blo.w   loc_2EA4A
                 subi.w  #$10,x_pos(a0)
@@ -153,7 +153,7 @@ loc_2EB30:
 loc_2EB64:
                 tst.w   (Special_stage_spheres_left).w
                 bne.w   loc_2EC7A
-                jsr     sub_2ECBC(pc)
+                jsr     SpecialResultsApplyOrdinaryEmeraldBaseArtWord(pc)
                 tst.w   (SK_alone_flag).w
                 bne.s   loc_2EB7C
                 tst.b   (SK_special_stage_flag).w
@@ -179,11 +179,11 @@ loc_2EB98:
 loc_2EBA4:
                 tst.w   (Special_stage_spheres_left).w
                 bne.w   loc_2EC7A
-                jsr     sub_2ECBC(pc)
-                jsr     sub_2ECA8(pc)
+                jsr     SpecialResultsApplyOrdinaryEmeraldBaseArtWord(pc)
+                jsr     SpecialResultsSelectChaosOrSuperCountByte(pc)
                 cmpi.b  #7,(a1)
                 blo.w   loc_2EC7A
-                jsr     sub_2EC80(pc)
+                jsr     SpecialResultsSKSelectCharacterNameOffsetAndFrame(pc)
                 sub.w   d0,x_pos(a0)
                 sub.w   d0,$46(a0)
                 bra.w   loc_2EA4A
@@ -192,8 +192,8 @@ loc_2EBA4:
 loc_2EBCC:
                 tst.w   (Special_stage_spheres_left).w
                 bne.w   loc_2EC7A
-                jsr     sub_2ECBC(pc)
-                jsr     sub_2ECA8(pc)
+                jsr     SpecialResultsApplyOrdinaryEmeraldBaseArtWord(pc)
+                jsr     SpecialResultsSelectChaosOrSuperCountByte(pc)
                 cmpi.b  #7,(a1)
                 blo.w   loc_2EC7A
                 bra.w   loc_2EA50
@@ -273,7 +273,7 @@ loc_2EC7A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2EC80:
+SpecialResultsSKSelectCharacterNameOffsetAndFrame:
                 moveq   #0,d0
                 moveq   #0,d1
                 cmpi.w  #1,(Player_mode).w
@@ -291,11 +291,11 @@ sub_2EC80:
 
                 .return:
                 rts
-; End of function sub_2EC80
+; End of function SpecialResultsSKSelectCharacterNameOffsetAndFrame
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2ECA8:
+SpecialResultsSelectChaosOrSuperCountByte:
                 lea     (Chaos_emerald_count).w,a1
                 tst.w   (SK_alone_flag).w
                 bne.s   .return
@@ -305,11 +305,11 @@ sub_2ECA8:
 
                 .return:
                 rts
-; End of function sub_2ECA8
+; End of function SpecialResultsSelectChaosOrSuperCountByte
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2ECBC:
+SpecialResultsApplyOrdinaryEmeraldBaseArtWord:
                 tst.w   (SK_alone_flag).w
                 bne.s   loc_2ECC8
                 tst.b   (SK_special_stage_flag).w
@@ -320,7 +320,7 @@ loc_2ECC8:
 
 locret_2ECCE:
                 rts
-; End of function sub_2ECBC
+; End of function SpecialResultsApplyOrdinaryEmeraldBaseArtWord
 
 ; ---------------------------------------------------------------------------
 

@@ -58,8 +58,8 @@ loc_2562A:
                 move.l  #loc_25630,(a0)
 
 loc_25630:
-                bsr.w   sub_258F2
-                bsr.w   sub_25758
+                bsr.w   UpdateLbzRideGrappleSwingAndChain
+                bsr.w   UpdatePlayersOnLbzRideGrapple
                 tst.w   $30(a0)
                 beq.s   loc_2564C
                 cmpi.w  #$28,$3A(a0)
@@ -123,7 +123,7 @@ loc_256D4:
                 cmp.w   d1,d0
                 bhi.s   loc_256F2
                 move.w  d1,x_pos(a0)
-                bsr.s   sub_25718
+                bsr.s   ReleaseLbzRideGrapplePlayersAtEndpoint
                 tst.w   x_vel(a0)
                 bpl.s   loc_256F2
                 move.w  #0,x_vel(a0)
@@ -133,31 +133,31 @@ loc_256F2:
                 cmp.w   d1,d0
                 blo.s   loc_2570C
                 move.w  d1,x_pos(a0)
-                bsr.s   sub_25718
+                bsr.s   ReleaseLbzRideGrapplePlayersAtEndpoint
                 tst.w   x_vel(a0)
                 bmi.s   loc_2570C
                 move.w  #0,x_vel(a0)
 
 loc_2570C:
-                bsr.w   sub_258F2
-                bsr.w   sub_25758
+                bsr.w   UpdateLbzRideGrappleSwingAndChain
+                bsr.w   UpdatePlayersOnLbzRideGrapple
                 bra.w   loc_2564C
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_25718:
+ReleaseLbzRideGrapplePlayersAtEndpoint:
                 tst.b   subtype(a0)
                 bmi.s   locret_25750
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
-                bsr.s   sub_2572E
+                bsr.s   ReleasePlayerFromLbzRideGrappleEndpoint
                 lea     (Player_2).w,a1
                 addq.w  #1,a2
-; End of function sub_25718
+; End of function ReleaseLbzRideGrapplePlayersAtEndpoint
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2572E:
+ReleasePlayerFromLbzRideGrappleEndpoint:
                 tst.b   (a2)
                 beq.s   locret_25750
                 move.w  x_vel(a0),x_vel(a1)
@@ -169,7 +169,7 @@ sub_2572E:
 
 locret_25750:
                 rts
-; End of function sub_2572E
+; End of function ReleasePlayerFromLbzRideGrappleEndpoint
 
 ; ---------------------------------------------------------------------------
 
@@ -178,20 +178,20 @@ loc_25752:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_25758:
+UpdatePlayersOnLbzRideGrapple:
                 movea.w $3C(a0),a3
                 lea     $31(a0),a2
                 lea     (Player_2).w,a1
                 move.w  (Ctrl_2).w,d0
-                bsr.s   sub_25774
+                bsr.s   UpdatePlayerOnLbzRideGrapple
                 lea     (Player_1).w,a1
                 subq.w  #1,a2
                 move.w  (Ctrl_1).w,d0
-; End of function sub_25758
+; End of function UpdatePlayersOnLbzRideGrapple
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_25774:
+UpdatePlayerOnLbzRideGrapple:
                 tst.b   (a2)
                 beq.w   loc_25868
                 tst.b   render_flags(a1)
@@ -308,11 +308,11 @@ loc_25876:
 
 locret_258F0:
                 rts
-; End of function sub_25774
+; End of function UpdatePlayerOnLbzRideGrapple
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_258F2:
+UpdateLbzRideGrappleSwingAndChain:
                 tst.w   $30(a0)
                 beq.s   loc_25906
                 move.w  $3A(a0),d2
@@ -415,7 +415,7 @@ loc_259D0:
                 move.w  $36(a1),x_pos(a1)
                 move.w  $38(a1),y_pos(a1)
                 rts
-; End of function sub_258F2
+; End of function UpdateLbzRideGrappleSwingAndChain
 
 ; ---------------------------------------------------------------------------
 Map_LBZRideGrapple:

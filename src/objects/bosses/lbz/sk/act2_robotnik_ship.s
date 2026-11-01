@@ -37,7 +37,7 @@ loc_8D2B6:
                 jsr     (CreateChild6_Simple).l
                 lea     (Child1_MakeRoboShipFlame).l,a2
                 jsr     (CreateChild1_Normal).l
-                jsr     sub_8D53E(pc)
+                jsr     ForceLBZShipCarryFrameAndReloadPlayerGraphics(pc)
 
 loc_8D33E:
                 jmp     (Sprite_CheckDeleteTouch).l
@@ -57,9 +57,9 @@ loc_8D36A:
 
 loc_8D370:
                 jsr     (MoveSprite2).l
-                bsr.w   sub_8D506
+                bsr.w   AttachPlayer1PositionToLBZRobotnikShip
                 jsr     (Obj_Wait).l
-                jsr     sub_8D53E(pc)
+                jsr     ForceLBZShipCarryFrameAndReloadPlayerGraphics(pc)
                 jmp     (Sprite_CheckDeleteTouch).l
 ; ---------------------------------------------------------------------------
 
@@ -79,7 +79,7 @@ loc_8D39E:
 loc_8D3AC:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
-                bsr.w   sub_8D506
+                bsr.w   AttachPlayer1PositionToLBZRobotnikShip
                 movea.w (_unkFAA4).w,a1
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
@@ -91,7 +91,7 @@ loc_8D3AC:
                 move.l  #loc_8D3F2,$34(a0)
 
 loc_8D3E8:
-                jsr     sub_8D53E(pc)
+                jsr     ForceLBZShipCarryFrameAndReloadPlayerGraphics(pc)
                 jmp     (Sprite_CheckDeleteTouch).l
 ; ---------------------------------------------------------------------------
 
@@ -106,7 +106,7 @@ loc_8D3F2:
 
 loc_8D40E:
                 jsr     (MoveSprite_LightGravity).l
-                bsr.w   sub_8D506
+                bsr.w   AttachPlayer1PositionToLBZRobotnikShip
                 tst.w   y_vel(a0)
                 bmi.s   loc_8D446
                 move.w  y_pos(a0),d0
@@ -119,7 +119,7 @@ loc_8D40E:
                 jsr     (Swing_Setup1).l
 
 loc_8D446:
-                jsr     sub_8D53E(pc)
+                jsr     ForceLBZShipCarryFrameAndReloadPlayerGraphics(pc)
                 jmp     (Sprite_CheckDeleteTouch).l
 ; ---------------------------------------------------------------------------
 
@@ -143,7 +143,7 @@ locret_8D47A:
 loc_8D47C:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
-                bsr.w   sub_8D506
+                bsr.w   AttachPlayer1PositionToLBZRobotnikShip
                 cmpi.w  #$4440,x_pos(a0)
                 blo.s   loc_8D4C2
                 move.l  #loc_8D4CC,(a0)
@@ -157,7 +157,7 @@ loc_8D47C:
                 clr.b   jumping(a1)
 
 loc_8D4C2:
-                jsr     sub_8D53E(pc)
+                jsr     ForceLBZShipCarryFrameAndReloadPlayerGraphics(pc)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -179,7 +179,7 @@ loc_8D4E4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8D506:
+AttachPlayer1PositionToLBZRobotnikShip:
                 lea     (Player_1).w,a1
                 move.w  x_pos(a0),d0
                 subq.w  #4,d0
@@ -188,7 +188,7 @@ sub_8D506:
                 subi.w  #$12,d0
                 move.w  d0,y_pos(a1)
                 rts
-; End of function sub_8D506
+; End of function AttachPlayer1PositionToLBZRobotnikShip
 
 ; ---------------------------------------------------------------------------
 
@@ -210,7 +210,7 @@ loc_8D538:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8D53E:
+ForceLBZShipCarryFrameAndReloadPlayerGraphics:
                 lea     (Player_1).w,a1
                 moveq   #0,d0
                 move.b  character_id(a1),d0
@@ -219,7 +219,7 @@ sub_8D53E:
                 movea.w word_8D55E(pc,d0.w),a2
                 clr.b   (a2)
                 jmp     (Player_Load_PLC).l
-; End of function sub_8D53E
+; End of function ForceLBZShipCarryFrameAndReloadPlayerGraphics
 
 ; ---------------------------------------------------------------------------
 RawAni_8D55C:

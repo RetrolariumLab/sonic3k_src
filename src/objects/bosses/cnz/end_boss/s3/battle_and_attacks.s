@@ -42,8 +42,8 @@ loc_4C002:
                 move.b  routine(a0),d0
                 move.w  off_4C01C(pc,d0.w),d1
                 jsr     off_4C01C(pc,d1.w)
-                bsr.w   sub_4C714
-                bsr.w   sub_4C778
+                bsr.w   PullBothPlayersWithCNZBossMagnet
+                bsr.w   HandleCNZEndBossFourColorHitOrDefeat
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 off_4C01C:
@@ -318,7 +318,7 @@ loc_4C33C:
                 move.b  routine(a0),d0
                 move.w  off_4C352(pc,d0.w),d1
                 jsr     off_4C352(pc,d1.w)
-                bsr.w   sub_4C7FC
+                bsr.w   BreakCNZBossDroppedCoreWhenParentDefeats
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 off_4C352:
@@ -444,9 +444,9 @@ loc_4C45C:
                 jsr     off_4C484(pc,d1.w)
                 lea     (CNZEndBossMagnet_AngleX).l,a1
                 jsr     MoveSprite_AngleXLookupOffset(pc)
-                bsr.w   sub_4C6B2
-                bsr.w   sub_4C6CA
-                bsr.w   sub_4C824
+                bsr.w   SetCNZBossMagnetDepthFromPhase
+                bsr.w   SelectCNZBossMagnetPhaseFrame
+                bsr.w   DetachCNZBossMagnetAfterParentDefeat
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 off_4C484:
@@ -588,12 +588,12 @@ loc_4C5C6:
                 btst    #1,subtype(a0)
                 beq.s   loc_4C5F6
                 move.l  #loc_4C5F6,(a0)
-                bra.w   sub_4C6F8
+                bra.w   DeleteCNZBossElectricEffectWhenParentEnds
 ; ---------------------------------------------------------------------------
 
 loc_4C5F6:
                 move.l  #loc_4C600,(a0)
-                bra.w   sub_4C6F8
+                bra.w   DeleteCNZBossElectricEffectWhenParentEnds
 ; ---------------------------------------------------------------------------
 
 loc_4C600:
@@ -601,7 +601,7 @@ loc_4C600:
                 jsr     (Play_SFX_Continuous).l
                 jsr     Refresh_ChildPosition(pc)
                 jsr     Animate_Raw(pc)
-                bsr.w   sub_4C6F8
+                bsr.w   DeleteCNZBossElectricEffectWhenParentEnds
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
@@ -624,7 +624,7 @@ loc_4C618:
                 beq.s   loc_4C666
                 move.l  #byte_4C911,$30(a0)
                 move.l  #loc_4C66E,(a0)
-                bra.w   sub_4C6F8
+                bra.w   DeleteCNZBossElectricEffectWhenParentEnds
 ; ---------------------------------------------------------------------------
 
 loc_4C666:
@@ -632,13 +632,13 @@ loc_4C666:
 
 loc_4C66E:
                 move.l  #loc_4C678,(a0)
-                bra.w   sub_4C6F8
+                bra.w   DeleteCNZBossElectricEffectWhenParentEnds
 ; ---------------------------------------------------------------------------
 
 loc_4C678:
                 jsr     Refresh_ChildPosition(pc)
                 jsr     Animate_RawMultiDelay(pc)
-                bsr.w   sub_4C6F8
+                bsr.w   DeleteCNZBossElectricEffectWhenParentEnds
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 

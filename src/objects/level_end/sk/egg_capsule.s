@@ -62,7 +62,7 @@ loc_865D0:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_865DE:
+CapsuleSKOpenAndRequestFragmentsAnimalsExplosion:
                 cmpi.b  #2,(Current_zone).w
                 beq.s   loc_865EA
                 st      (Ctrl_2_locked).w
@@ -81,13 +81,13 @@ loc_865EA:
 
 locret_8661C:
                 rts
-; End of function sub_865DE
+; End of function CapsuleSKOpenAndRequestFragmentsAnimalsExplosion
 
 ; ---------------------------------------------------------------------------
 
 loc_8661E:
                 move.b  #6,d0
-                bra.w   sub_868F8
+                bra.w   CapsuleSKStartResultsWhenP1LandedAfterOpenWait
 ; ---------------------------------------------------------------------------
 
 loc_86626:
@@ -135,7 +135,7 @@ loc_86678:
                 move.b  (Current_zone).w,d0
                 move.b  byte_866A2(pc,d0.w),routine(a0)
                 move.w  a1,$44(a0)
-                bsr.w   sub_865DE
+                bsr.w   CapsuleSKOpenAndRequestFragmentsAnimalsExplosion
 
 loc_86698:
                 jsr     Swing_UpAndDown(pc)
@@ -171,7 +171,7 @@ byte_866A2:
 
 loc_866BA:
                 move.b  #$C,d0
-                bsr.w   sub_868F8
+                bsr.w   CapsuleSKStartResultsWhenP1LandedAfterOpenWait
                 jsr     Swing_UpAndDown(pc)
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
@@ -184,14 +184,14 @@ loc_866CC:
 
 loc_866DA:
                 move.b  #$C,d0
-                bsr.w   sub_86984
+                bsr.w   CapsuleSKStartResultsForVisibleTailsOrCarriedP1AfterWait
                 jsr     Swing_UpAndDown(pc)
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
 loc_866EC:
                 move.b  #$12,d0
-                bsr.w   sub_868F8
+                bsr.w   CapsuleSKStartResultsWhenP1LandedAfterOpenWait
 
 loc_866F4:
                 jsr     Swing_UpAndDown(pc)
@@ -220,7 +220,7 @@ loc_8671C:
 ; ---------------------------------------------------------------------------
 
 loc_8672A:
-                jsr     (sub_86A3E).l
+                jsr     (CapsuleSKResolveGroundButtonAndSpringPlungerSolid).l
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
                 beq.s   loc_86750
@@ -234,7 +234,7 @@ loc_86750:
 ; ---------------------------------------------------------------------------
 
 loc_86754:
-                bsr.w   sub_86A3E
+                bsr.w   CapsuleSKResolveGroundButtonAndSpringPlungerSolid
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
@@ -247,7 +247,7 @@ loc_8675C:
 
 loc_86770:
                 jsr     Refresh_ChildPosition(pc)
-                bsr.w   sub_86A54
+                bsr.w   CapsuleSKResolveInvertedButtonSolid
                 lea     word_867C2(pc),a1
                 jsr     Check_PlayerInRange(pc)
                 tst.l   d0
@@ -283,7 +283,7 @@ word_867C2:
 
 loc_867CA:
                 jsr     Refresh_ChildPosition(pc)
-                bsr.w   sub_86A54
+                bsr.w   CapsuleSKResolveInvertedButtonSolid
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
@@ -296,7 +296,7 @@ loc_867D6:
 
 loc_867EC:
                 move.l  #Obj_FlickerMove,(a0)
-                bsr.w   sub_86A64
+                bsr.w   CapsuleSKSelectFragmentFrameFromSubtype
                 moveq   #4,d0
                 jsr     Set_IndexedVelocity(pc)
                 jmp     (Draw_Sprite).l
@@ -319,7 +319,7 @@ loc_86820:
                 jsr     SetUp_ObjAttributes3(pc)
                 move.l  #loc_8683E,(a0)
                 move.b  #8,y_radius(a0)
-                bsr.w   sub_86A7A
+                bsr.w   CapsuleSKInitializeFreedAnimalBounceSpeciesAndReleaseDelay
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -350,7 +350,7 @@ loc_86854:
 
 loc_86880:
                 move.w  d1,x_vel(a0)
-                bsr.w   sub_86B1E
+                bsr.w   CapsuleSKSetFreedAnimalHorizontalFlipFromXVelocity
 
 loc_86888:
                 moveq   #0,d0
@@ -382,9 +382,9 @@ loc_868B6:
                 move.w  #0,d3
                 move.w  #-$30,d4
                 sub.b   subtype(a0),d4
-                bsr.w   sub_869F6
+                bsr.w   CapsuleSKAccelerateFreedAnimalTowardOffsetPlayerWithRetry
                 jsr     (MoveSprite2).l
-                bsr.w   sub_86B1E
+                bsr.w   CapsuleSKSetFreedAnimalHorizontalFlipFromXVelocity
                 tst.b   (_unkFAA8).w
                 bne.s   loc_868F0
                 move.l  #loc_868F2,(a0)
@@ -400,7 +400,7 @@ loc_868F2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_868F8:
+CapsuleSKStartResultsWhenP1LandedAfterOpenWait:
                 subq.w  #1,$2E(a0)
                 bpl.s   locret_86930
                 lea     (Player_1).w,a1
@@ -418,7 +418,7 @@ sub_868F8:
 
 locret_86930:
                 rts
-; End of function sub_868F8
+; End of function CapsuleSKStartResultsWhenP1LandedAfterOpenWait
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -447,7 +447,7 @@ loc_8694A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_86984:
+CapsuleSKStartResultsForVisibleTailsOrCarriedP1AfterWait:
                 subq.w  #1,$2E(a0)
                 bpl.s   locret_869C4
                 lea     (Player_1).w,a1
@@ -472,7 +472,7 @@ loc_869C2:
 
 locret_869C4:
                 rts
-; End of function sub_86984
+; End of function CapsuleSKStartResultsForVisibleTailsOrCarriedP1AfterWait
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -491,7 +491,7 @@ Set_PlayerEndingPose:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_869F6:
+CapsuleSKAccelerateFreedAnimalTowardOffsetPlayerWithRetry:
                 move.w  d2,d5
                 move.w  x_pos(a1),d6
                 add.w   d3,d6
@@ -528,37 +528,37 @@ loc_86A28:
 
 locret_86A3C:
                 rts
-; End of function sub_869F6
+; End of function CapsuleSKAccelerateFreedAnimalTowardOffsetPlayerWithRetry
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_86A3E:
+CapsuleSKResolveGroundButtonAndSpringPlungerSolid:
                 move.w  #$1B,d1
                 move.w  #4,d2
                 move.w  #6,d3
                 move.w  x_pos(a0),d4
                 jmp     (SolidObjectFull).l
-; End of function sub_86A3E
+; End of function CapsuleSKResolveGroundButtonAndSpringPlungerSolid
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_86A54:
+CapsuleSKResolveInvertedButtonSolid:
                 moveq   #5,d2
                 moveq   #$1B,d1
                 moveq   #9,d3
                 move.w  x_pos(a0),d4
                 jmp     (SolidObjectFull).l
-; End of function sub_86A54
+; End of function CapsuleSKResolveInvertedButtonSolid
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_86A64:
+CapsuleSKSelectFragmentFrameFromSubtype:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lsr.w   #1,d0
                 move.b  byte_86A74(pc,d0.w),mapping_frame(a0)
                 rts
-; End of function sub_86A64
+; End of function CapsuleSKSelectFragmentFrameFromSubtype
 
 ; ---------------------------------------------------------------------------
 byte_86A74:
@@ -567,7 +567,7 @@ byte_86A74:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_86A7A:
+CapsuleSKInitializeFreedAnimalBounceSpeciesAndReleaseDelay:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,d1
@@ -613,9 +613,9 @@ loc_86AC0:
 
 loc_86B04:
                 move.w  d1,x_vel(a0)
-                bsr.w   sub_86B1E
+                bsr.w   CapsuleSKSetFreedAnimalHorizontalFlipFromXVelocity
                 rts
-; End of function sub_86A7A
+; End of function CapsuleSKInitializeFreedAnimalBounceSpeciesAndReleaseDelay
 
 ; ---------------------------------------------------------------------------
 word_86B0E:
@@ -628,7 +628,7 @@ word_86B16:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_86B1E:
+CapsuleSKSetFreedAnimalHorizontalFlipFromXVelocity:
                 bclr    #0,render_flags(a0)
                 tst.w   x_vel(a0)
                 bpl.s   locret_86B30
@@ -636,4 +636,4 @@ sub_86B1E:
 
 locret_86B30:
                 rts
-; End of function sub_86B1E
+; End of function CapsuleSKSetFreedAnimalHorizontalFlipFromXVelocity

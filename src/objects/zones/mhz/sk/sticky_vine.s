@@ -77,8 +77,8 @@ loc_3EB26:
 loc_3EB3C:
                 move.l  x_pos(a1),d0
                 move.l  y_pos(a1),d1
-                bsr.w   sub_3EC2A
-                bsr.w   sub_3EC66
+                bsr.w   LayOutMhzStickyVineSegments
+                bsr.w   ApplyMhzStickyVinePullToPlayer
                 bra.w   loc_3EBF8
 ; ---------------------------------------------------------------------------
 
@@ -86,7 +86,7 @@ loc_3EB50:
                 movea.l $2E(a0),a1
                 move.l  $30(a0),d0
                 move.l  $34(a0),d1
-                bsr.w   sub_3EC2A
+                bsr.w   LayOutMhzStickyVineSegments
                 move.w  $30(a0),d0
                 sub.w   x_pos(a0),d0
                 beq.s   loc_3EB7A
@@ -169,7 +169,7 @@ loc_3EC1A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3EC2A:
+LayOutMhzStickyVineSegments:
                 movea.w parent3(a0),a2
                 move.l  x_pos(a0),d2
                 move.l  y_pos(a0),d3
@@ -198,11 +198,11 @@ loc_3EC4E:
                 dbf     d6,loc_3EC4A
                 movem.l (sp)+,d1-d2
                 rts
-; End of function sub_3EC2A
+; End of function LayOutMhzStickyVineSegments
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3EC66:
+ApplyMhzStickyVinePullToPlayer:
                 swap    d1
                 swap    d2
                 move.w  d1,d3
@@ -269,7 +269,7 @@ loc_3ECCC:
 loc_3ED02:
                 bclr    #Status_Push,status(a1)
                 rts
-; End of function sub_3EC66
+; End of function ApplyMhzStickyVinePullToPlayer
 
 ; ---------------------------------------------------------------------------
 

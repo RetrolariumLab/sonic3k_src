@@ -6,7 +6,7 @@
 Obj_SOZRapelWire:
                 movea.l a0,a1
                 move.l  #loc_4AA80,(a1)
-                bsr.w   sub_4AA46
+                bsr.w   InitializeSozRappelWirePieceDisplay
                 move.b  #$20,mapping_frame(a1)
                 move.w  x_pos(a0),d2
                 move.w  y_pos(a0),d3
@@ -36,7 +36,7 @@ loc_4A9FA:
 
 loc_4AA16:
                 movea.l a1,a2
-                bsr.s   sub_4AA46
+                bsr.s   InitializeSozRappelWirePieceDisplay
                 move.w  d2,x_pos(a1)
                 move.w  d3,y_pos(a1)
                 addi.w  #$10,d3
@@ -52,7 +52,7 @@ loc_4AA44:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4AA46:
+InitializeSozRappelWirePieceDisplay:
                 move.b  #4,render_flags(a1)
                 move.b  #$10,width_pixels(a1)
                 move.b  #$10,height_pixels(a1)
@@ -63,7 +63,7 @@ sub_4AA46:
                 move.w  x_pos(a0),$3E(a1)
                 move.w  y_pos(a0),$40(a1)
                 rts
-; End of function sub_4AA46
+; End of function InitializeSozRappelWirePieceDisplay
 
 ; ---------------------------------------------------------------------------
 
@@ -356,7 +356,7 @@ loc_4AD7A:
                 addi.b  #$80,d0
 
 loc_4AD9A:
-                jsr     (sub_A230).l
+                jsr     (GetSineCosineQ14).l
                 muls.w  #$20,d0
                 move.w  $32(a0),d2
                 divs.w  d2,d0
@@ -364,7 +364,7 @@ loc_4AD9A:
                 move.w  d0,d1
                 asr.w   #4,d1
                 jsr     (GetArcTan).l
-                jsr     (sub_A230).l
+                jsr     (GetSineCosineQ14).l
                 asr.w   #2,d0
                 move.w  d0,y_vel(a0)
                 moveq   #0,d0
@@ -433,7 +433,7 @@ locret_4AE4E:
 loc_4AE50:
                 movea.w parent(a0),a1
                 move.b  mapping_frame(a1),mapping_frame(a0)
-                bsr.w   sub_4AEE0
+                bsr.w   PositionSozRappelPieceFromPreviousLink
                 cmpi.w  #$D,$34(a0)
                 bne.s   loc_4AE7C
                 movea.w parent3(a0),a2
@@ -441,7 +441,7 @@ loc_4AE50:
                 bne.s   loc_4AE7C
                 cmpi.b  #-$7A,$27(a2)
                 blo.s   loc_4AE7C
-                bsr.s   sub_4AE92
+                bsr.s   BendSozRappelWireSegmentDirection
 
 loc_4AE7C:
                 move.w  y_pos(a0),d0
@@ -456,7 +456,7 @@ locret_4AE90:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4AE92:
+BendSozRappelWireSegmentDirection:
                 move.b  $27(a2),d0
                 btst    #0,status(a2)
                 beq.s   loc_4AEA2
@@ -467,7 +467,7 @@ loc_4AEA2:
                 muls.w  #$3C,d0
                 asr.w   #8,d0
                 addi.w  #$40,d0
-                jsr     (sub_A230).l
+                jsr     (GetSineCosineQ14).l
                 asr.w   #2,d1
                 move.w  d1,x_vel(a0)
                 asr.w   #2,d0
@@ -480,11 +480,11 @@ loc_4AEA2:
                 lsr.b   #3,d0
                 move.b  d0,mapping_frame(a0)
                 rts
-; End of function sub_4AE92
+; End of function BendSozRappelWireSegmentDirection
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4AEE0:
+PositionSozRappelPieceFromPreviousLink:
                 move.w  x_vel(a1),d0
                 move.w  d0,x_vel(a0)
                 ext.l   d0
@@ -498,7 +498,7 @@ sub_4AEE0:
                 add.l   y_pos(a1),d1
                 move.l  d1,y_pos(a0)
                 rts
-; End of function sub_4AEE0
+; End of function PositionSozRappelPieceFromPreviousLink
 
 ; ---------------------------------------------------------------------------
 
@@ -506,7 +506,7 @@ loc_4AF0A:
                 move.w  x_pos(a0),d4
                 move.w  y_pos(a0),d5
                 movea.w parent(a0),a1
-                bsr.w   sub_4AEE0
+                bsr.w   PositionSozRappelPieceFromPreviousLink
                 cmp.w   x_pos(a0),d4
                 beq.s   loc_4AF24
                 move.w  d4,$3E(a0)
@@ -521,11 +521,11 @@ loc_4AF2E:
                 lea     $38(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d0
-                bsr.s   sub_4AF80
+                bsr.s   UpdateSozRappelEndpointPlayerAttachment
                 lea     (Player_2).w,a1
                 addq.w  #1,a2
                 move.w  (Ctrl_2_logical).w,d0
-                bsr.s   sub_4AF80
+                bsr.s   UpdateSozRappelEndpointPlayerAttachment
                 move.b  #$21,mapping_frame(a0)
                 cmpi.w  #3,$2E(a3)
                 bne.s   loc_4AF6A
@@ -544,7 +544,7 @@ RawAni_4AF70:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_4AF80:
+UpdateSozRappelEndpointPlayerAttachment:
                 tst.b   (a2)
                 beq.w   loc_4B130
                 bmi.w   loc_4B02A
@@ -718,7 +718,7 @@ loc_4B13E:
 
 locret_4B1CE:
                 rts
-; End of function sub_4AF80
+; End of function UpdateSozRappelEndpointPlayerAttachment
 
 ; ---------------------------------------------------------------------------
 Map_SOZRapelWire:

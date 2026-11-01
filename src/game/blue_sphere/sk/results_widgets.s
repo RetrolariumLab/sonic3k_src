@@ -16,7 +16,7 @@ loc_4DF04:
                 lea     aPerfect(pc),a1
                 move.w  #$49A,d2
                 move.w  #make_art_tile(ArtTile_BlueSphere_TitleText,0,1),d6
-                jsr     (sub_5B318).l
+                jsr     (SKCreditsBuildAndUploadVariableWidthTwoRowText).l
                 move    #$2300,sr
                 moveq   #signextendB(sfx_Continue),d0
                 jsr     (Play_SFX).l
@@ -180,7 +180,7 @@ loc_4E116:
                 moveq   #0,d1
                 move.b  (Blue_spheres_difficulty).w,d1
                 addq.b  #1,d1
-                bsr.w   sub_4D1AA
+                bsr.w   BlueSphereSetCenteredTwoDigitDifficultyWidget
                 subq.w  #1,$30(a0)
                 bpl.s   loc_4E146
                 move.w  #$1D,$30(a0)

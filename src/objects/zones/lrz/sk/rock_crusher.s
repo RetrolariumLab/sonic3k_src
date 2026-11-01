@@ -66,7 +66,7 @@ loc_901D0:
                 move.b  routine(a0),d0
                 move.w  off_901EA(pc,d0.w),d1
                 jsr     off_901EA(pc,d1.w)
-                jsr     (sub_905A8).l
+                jsr     (UpdateLrzCrusherHitFlash).l
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 off_901EA:
@@ -224,7 +224,7 @@ loc_9039A:
                 cmpi.b  #8,subtype(a0)
                 blo.s   loc_903BA
                 move.b  #-1,collision_property(a0)
-                bsr.w   sub_905A8
+                bsr.w   UpdateLrzCrusherHitFlash
 
 loc_903BA:
                 moveq   #0,d0
@@ -402,7 +402,7 @@ loc_90592:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_905A8:
+UpdateLrzCrusherHitFlash:
                 tst.b   collision_flags(a0)
                 bne.s   locret_905E6
                 tst.b   $20(a0)
@@ -419,22 +419,22 @@ loc_905C8:
                 addi.w  #2*3,d0
 
 loc_905D6:
-                bsr.w   sub_905E8
+                bsr.w   WriteLrzCrusherHitPalette
                 subq.b  #1,$20(a0)
                 bne.s   locret_905E6
                 move.b  $25(a0),collision_flags(a0)
 
 locret_905E6:
                 rts
-; End of function sub_905A8
+; End of function UpdateLrzCrusherHitFlash
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_905E8:
+WriteLrzCrusherHitPalette:
                 lea     word_905F6(pc),a1
                 lea     word_905FC(pc,d0.w),a2
                 jmp     (CopyWordData_3).l
-; End of function sub_905E8
+; End of function WriteLrzCrusherHitPalette
 
 ; ---------------------------------------------------------------------------
 word_905F6:

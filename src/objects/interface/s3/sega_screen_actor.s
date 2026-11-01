@@ -133,7 +133,7 @@ SonicOnSegaScr_MidWipe:
 
 loc_4327E:
                 lea     byte_433F4(pc),a1
-                bsr.w   sub_433A6
+                bsr.w   SegaS3StepTimedPaletteFrameCopy
                 bne.s   loc_4328A
                 rts
 ; ---------------------------------------------------------------------------
@@ -189,7 +189,7 @@ SonicOnSegaScr_EndWipe:
 
 loc_43322:
                 lea     byte_4346A(pc),a1
-                bsr.w   sub_433A6
+                bsr.w   SegaS3StepTimedPaletteFrameCopy
                 bne.s   loc_4332E
                 rts
 ; ---------------------------------------------------------------------------
@@ -256,7 +256,7 @@ loc_4339A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_433A6:
+SegaS3StepTimedPaletteFrameCopy:
                 subq.b  #1,$30(a0)
                 bne.s   loc_433EC
                 moveq   #0,d0
@@ -303,7 +303,7 @@ loc_433EC:
 loc_433F0:
                 moveq   #1,d0
                 rts
-; End of function sub_433A6
+; End of function SegaS3StepTimedPaletteFrameCopy
 
 ; ---------------------------------------------------------------------------
 byte_433F4:

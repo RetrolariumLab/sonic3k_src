@@ -54,9 +54,9 @@ loc_4A67A:
 
 loc_4A680:
                 lea     byte_4AEBC(pc),a2
-                bsr.w   sub_4AE9A
+                bsr.w   SelectMGZBossAttachmentFrameAndDepthFromParentAngle
                 lea     byte_4AEF6(pc),a2
-                bsr.w   sub_4AEDC
+                bsr.w   SelectMGZBossAttachmentOffsetsFromParentAngle
                 jmp     (Refresh_ChildPositionAdjusted).l
 ; ---------------------------------------------------------------------------
 
@@ -101,11 +101,11 @@ loc_4A6E2:
                 btst    #3,$38(a1)
                 bne.s   loc_4A70C
                 lea     byte_4AECC(pc),a2
-                bsr.w   sub_4AE9A
+                bsr.w   SelectMGZBossAttachmentFrameAndDepthFromParentAngle
 
 loc_4A6FE:
                 lea     byte_4AF06(pc),a2
-                bsr.w   sub_4AEDC
+                bsr.w   SelectMGZBossAttachmentOffsetsFromParentAngle
                 jmp     (Refresh_ChildPositionAdjusted).l
 ; ---------------------------------------------------------------------------
 
@@ -138,7 +138,7 @@ loc_4A74E:
                 move.b  #8,routine(a0)
                 move.w  #$27,$2E(a0)
                 move.l  #loc_4A7EC,$34(a0)
-                bsr.w   sub_4AFA6
+                bsr.w   SetMGZBossIndexedAngleVelocity
                 bclr    #5,$38(a0)
                 lea     ChildObjDat_4B40E(pc),a2
                 jmp     (CreateChild1_Normal).l
@@ -149,7 +149,7 @@ loc_4A77E:
                 move.w  #$2F,$2E(a0)
                 move.l  #loc_4A854,$34(a0)
                 bclr    #2,$38(a0)
-                bsr.w   sub_4B0A0
+                bsr.w   LaunchMGZBossUpperDrillPassAndRecordPlan
                 lea     ChildObjDat_4B426(pc),a2
                 jsr     (CreateChild1_Normal).l
 
@@ -222,7 +222,7 @@ loc_4A870:
                 move.b  #8,routine(a0)
                 move.w  #$2F,$2E(a0)
                 move.l  #loc_4A89E,$34(a0)
-                bsr.w   sub_4B146
+                bsr.w   LaunchMGZBossLowerDrillPassFromUpperPlan
                 lea     ChildObjDat_4B426(pc),a2
                 jsr     (CreateChild1_Normal).l
                 bne.s   loc_4A89A
@@ -348,7 +348,7 @@ loc_4A9CC:
                 move.w  a2,$44(a0)
                 move.w  angle(a1),angle(a0)
                 move.w  subtype(a1),subtype(a0)
-                bsr.w   sub_4AFA6
+                bsr.w   SetMGZBossIndexedAngleVelocity
                 bra.w   loc_4B2A0
 ; ---------------------------------------------------------------------------
 

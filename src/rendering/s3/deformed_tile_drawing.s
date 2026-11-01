@@ -7,25 +7,25 @@
 Get_DeformDrawPosVert:
                 move.w  (a4)+,d2
                 move.w  (a6),d0
-                bsr.s   sub_39D0E
+                bsr.s   FindVerticalDeformationBand
                 addi.w  #$E0,d0
 ; End of function Get_DeformDrawPosVert
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_39D0E:
+FindVerticalDeformationBand:
                 cmp.w   d2,d0
                 bmi.s   loc_39D18
                 add.w   (a4)+,d2
                 addq.w  #4,a5
-                bra.s   sub_39D0E
+                bra.s   FindVerticalDeformationBand
 ; ---------------------------------------------------------------------------
 
 loc_39D18:
                 move.w  (a5),d1
                 swap    d1
                 rts
-; End of function sub_39D0E
+; End of function FindVerticalDeformationBand
 
 ; ---------------------------------------------------------------------------
 
@@ -112,25 +112,25 @@ locret_39DBA:
 Get_XDeformRange:
                 move.w  (a4)+,d2
                 move.w  (a6),d0
-                bsr.s   sub_39DC6
+                bsr.s   FindHorizontalDeformationBand
                 addi.w  #$140,d0
 ; End of function Get_XDeformRange
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_39DC6:
+FindHorizontalDeformationBand:
                 cmp.w   d2,d0
                 blo.s   loc_39DD0
                 add.w   (a4)+,d2
                 addq.w  #4,a5
-                bra.s   sub_39DC6
+                bra.s   FindHorizontalDeformationBand
 ; ---------------------------------------------------------------------------
 
 loc_39DD0:
                 move.w  (a5),d1
                 swap    d1
                 rts
-; End of function sub_39DC6
+; End of function FindHorizontalDeformationBand
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -167,15 +167,15 @@ loc_39E04:
 
 Draw_PlaneVertBottomUpComplex:
                 movem.l d1/a4-a5,-(sp)
-                bsr.s   sub_39E1E
+                bsr.s   DrawDeformedPlaneBottomUpStep
                 movem.l (sp)+,d1/a4-a5
-                bpl.s   sub_39E1E
+                bpl.s   DrawDeformedPlaneBottomUpStep
                 rts
 ; End of function Draw_PlaneVertBottomUpComplex
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_39E1E:
+DrawDeformedPlaneBottomUpStep:
                 and.w   (Camera_Y_pos_mask).w,d1
                 move.w  d1,d2
                 addi.w  #$F0,d2
@@ -198,4 +198,4 @@ loc_39E46:
                 subi.w  #$10,(Draw_delayed_position).w
                 subq.w  #1,(Draw_delayed_rowcount).w
                 rts
-; End of function sub_39E1E
+; End of function DrawDeformedPlaneBottomUpStep

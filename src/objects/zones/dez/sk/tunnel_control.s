@@ -20,13 +20,13 @@ loc_484E2:
 Obj_DEZTunnelControl_Main:
                 lea     (Player_1).w,a1
                 lea     $30(a0),a4
-                bsr.s   sub_48518
+                bsr.s   AdvanceDezLightTunnelActor
                 lea     (Player_2).w,a1
                 lea     $38(a0),a4
-                bsr.s   sub_48518
+                bsr.s   AdvanceDezLightTunnelActor
                 movea.w objoff_2E(a0),a1
                 lea     $40(a0),a4
-                bsr.s   sub_48518
+                bsr.s   AdvanceDezLightTunnelActor
                 move.b  $30(a0),d0
                 add.b   $38(a0),d0
                 beq.s   loc_48512
@@ -38,12 +38,12 @@ loc_48512:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_48518:
+AdvanceDezLightTunnelActor:
                 moveq   #0,d0
                 move.b  dezTunnel_routine(a4),d0
                 move.w  off_48524(pc,d0.w),d0
                 jmp     off_48524(pc,d0.w)
-; End of function sub_48518
+; End of function AdvanceDezLightTunnelActor
 
 ; ---------------------------------------------------------------------------
 off_48524:

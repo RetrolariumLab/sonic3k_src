@@ -48,7 +48,7 @@ loc_34028:
 loc_3403A:
                 move.w  x_pos(a0),-(sp)
                 movea.w $3C(a0),a1
-                bsr.w   sub_34074
+                bsr.w   PositionMgzSwingingPlatformAndChain
                 move.b  $36(a0),d0
                 add.b   d0,$34(a0)
                 moveq   #0,d1
@@ -67,7 +67,7 @@ loc_3406E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_34074:
+PositionMgzSwingingPlatformAndChain:
                 move.b  $34(a0),d0
                 jsr     (GetSineCosine).l
                 move.w  $32(a0),d2
@@ -102,4 +102,4 @@ loc_3409C:
                 move.w  d5,x_pos(a0)
                 move.w  d4,y_pos(a0)
                 rts
-; End of function sub_34074
+; End of function PositionMgzSwingingPlatformAndChain

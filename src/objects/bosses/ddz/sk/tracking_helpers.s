@@ -4,13 +4,13 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_82A82:
+TurnDDZHomingMissileTwoAngleUnitsTowardPlayer:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #3,d0
                 beq.s   locret_82AA4
                 movea.l a0,a1
                 lea     (Player_1).w,a2
-                jsr     sub_8622C(pc)
+                jsr     GetApproximateObjectBearing(pc)
                 moveq   #2,d1
                 sub.b   $3C(a0),d0
                 bpl.s   loc_82AA0
@@ -21,11 +21,11 @@ loc_82AA0:
 
 locret_82AA4:
                 rts
-; End of function sub_82A82
+; End of function TurnDDZHomingMissileTwoAngleUnitsTowardPlayer
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_82AA6:
+QuantizeDDZMissileHeadingToEightDisplaySectors:
                 move.b  $3C(a0),d0
                 addi.b  #$10,d0
                 lsr.b   #5,d0
@@ -35,7 +35,7 @@ sub_82AA6:
 
 locret_82ABA:
                 rts
-; End of function sub_82AA6
+; End of function QuantizeDDZMissileHeadingToEightDisplaySectors
 
 ; ---------------------------------------------------------------------------
 
@@ -50,7 +50,7 @@ loc_82ABC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_82AD8:
+SetDDZMissileFlameFrameAndRearOffsetFromSector:
                 movea.w parent3(a0),a1
                 moveq   #0,d0
                 move.b  $3D(a1),d0
@@ -59,7 +59,7 @@ sub_82AD8:
                 add.w   d0,d0
                 move.w  byte_82AF6(pc,d0.w),child_dx(a0)  ; and child_dy
                 rts
-; End of function sub_82AD8
+; End of function SetDDZMissileFlameFrameAndRearOffsetFromSector
 
 ; ---------------------------------------------------------------------------
 byte_82AF6:
@@ -75,7 +75,7 @@ byte_82AF6:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_82B06:
+ResolveDDZMissileBossOrPlayerContactAndDisposal:
                 tst.b   (Super_Sonic_Knux_flag).w
                 beq.s   locret_82B60
                 tst.b   render_flags(a0)
@@ -142,7 +142,7 @@ loc_82B84:
 loc_82BAC:
                 bset    #7,status(a0)
                 rts
-; End of function sub_82B06
+; End of function ResolveDDZMissileBossOrPlayerContactAndDisposal
 
 ; ---------------------------------------------------------------------------
 word_82BB4:
@@ -165,7 +165,7 @@ word_82BDC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_82BE4:
+ResolveDDZTurretShotPlayerContactOrParentDeath:
                 tst.b   (Super_Sonic_Knux_flag).w
                 beq.s   locret_82C1E
                 movea.w parent3(a0),a1
@@ -186,7 +186,7 @@ loc_82C18:
 
 locret_82C1E:
                 rts
-; End of function sub_82BE4
+; End of function ResolveDDZTurretShotPlayerContactOrParentDeath
 
 ; ---------------------------------------------------------------------------
 word_82C20:
@@ -194,7 +194,7 @@ word_82C20:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_82C28:
+ResolveDDZHeavyProjectileContactAndReduceFlightSpeed:
                 tst.b   (Super_Sonic_Knux_flag).w
                 beq.s   locret_82C4E
                 lea     (Player_1).w,a1
@@ -213,9 +213,9 @@ locret_82C4E:
 loc_82C50:
                 lea     (Player_1).w,a1
                 move.b  #90-1,invulnerability_timer(a1)
-                bsr.w   sub_82C6A
+                bsr.w   ReduceDDZFlightScrollSpeedByThreeWithOnePixelFloor
                 bra.w   loc_82B84
-; End of function sub_82C28
+; End of function ResolveDDZHeavyProjectileContactAndReduceFlightSpeed
 
 ; ---------------------------------------------------------------------------
 word_82C62:
@@ -223,7 +223,7 @@ word_82C62:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_82C6A:
+ReduceDDZFlightScrollSpeedByThreeWithOnePixelFloor:
                 move.l  (_unkFA82).w,d0
                 move.l  #$10000,d1
                 subi.l  #$30000,d0
@@ -234,11 +234,11 @@ sub_82C6A:
 loc_82C80:
                 move.l  d0,(_unkFA82).w
                 rts
-; End of function sub_82C6A
+; End of function ReduceDDZFlightScrollSpeedByThreeWithOnePixelFloor
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_82C86:
+PositionDDZAttachedActorFromParentWordOffsets:
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),d0
                 move.w  y_pos(a1),d1
@@ -247,17 +247,17 @@ sub_82C86:
                 move.w  d0,x_pos(a0)
                 move.w  d1,$14(a0)
                 rts
-; End of function sub_82C86
+; End of function PositionDDZAttachedActorFromParentWordOffsets
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_82CA4:
+SetDDZTurretShotVelocityFromParentEightWayIndex:
                 movea.w parent3(a0),a1
                 move.w  angle(a1),d0
                 add.w   d0,d0
                 move.l  word_82CB6(pc,d0.w),x_vel(a0)   ; and y_vel
                 rts
-; End of function sub_82CA4
+; End of function SetDDZTurretShotVelocityFromParentEightWayIndex
 
 ; ---------------------------------------------------------------------------
 word_82CB6:
@@ -272,7 +272,7 @@ word_82CB6:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_82CD6:
+PositionDDZTurretWithEightWayMuzzleNudge:
                 move.w  angle(a0),d0
                 lea     byte_82D08(pc,d0.w),a1
                 movea.w parent3(a0),a2
@@ -289,7 +289,7 @@ sub_82CD6:
                 add.w   d1,d2
                 move.w  d2,y_pos(a0)
                 rts
-; End of function sub_82CD6
+; End of function PositionDDZTurretWithEightWayMuzzleNudge
 
 ; ---------------------------------------------------------------------------
 byte_82D08:
@@ -324,7 +324,7 @@ loc_82D3E:
                 addi.w  #2*$C,d0
 
 loc_82D4C:
-                bsr.w   sub_82D72
+                bsr.w   CopyDDZBossTwelvePaletteWordsAtByteOffset
                 subq.b  #1,$20(a0)
                 bne.s   locret_82D5A
                 clr.b   collision_flags(a0)

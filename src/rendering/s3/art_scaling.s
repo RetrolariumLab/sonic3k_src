@@ -62,7 +62,7 @@ word_22C50:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_22C90:
+TryBuildObjectScaledArt:
                 moveq   #0,d1
                 move.b  $40(a0),d1
                 cmpi.b  #$1C,d1
@@ -84,7 +84,7 @@ loc_22CA0:
                 move.w  d0,art_tile(a0)
                 lsl.w   #5,d2
                 adda.w  d2,a2
-                bsr.s   sub_22CE0
+                bsr.s   ScaleArt_ResampleObjectFrame
                 movem.l (sp)+,d1/d5-a0/a2/a4
                 add.w   d1,(_unkF740).w
                 rts
@@ -96,11 +96,11 @@ loc_22CA0:
 loc_22CD8:
                 bclr    #7,render_flags(a0)
                 rts
-; End of function sub_22C90
+; End of function TryBuildObjectScaledArt
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_22CE0:
+ScaleArt_ResampleObjectFrame:
                 moveq   #0,d0
                 move.b  $40(a0),d0                      ; Scale factor
                 moveq   #0,d1
@@ -166,7 +166,7 @@ loc_22D66:
 
 loc_22D76:
                 swap    d6
-                jsr     sub_22E08(pc)
+                jsr     ScaleArt_WriteMaskedTailPixels(pc)
                 swap    d6
 
 loc_22D7E:
@@ -210,7 +210,7 @@ loc_22DA2:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_22E08:
+ScaleArt_WriteMaskedTailPixels:
                 rept    4
                 move.b  (a1,d2.w),d0
                 add.w   d5,d3
@@ -235,7 +235,7 @@ loc_22E2C:
                 endm
                 lea     $7C(a4),a4
                 rts
-; End of function sub_22E08
+; End of function ScaleArt_WriteMaskedTailPixels
 
 ; ---------------------------------------------------------------------------
 

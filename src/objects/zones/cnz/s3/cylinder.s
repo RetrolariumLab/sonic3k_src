@@ -49,17 +49,17 @@ loc_312D8:
                 move.l  #loc_312E2,(a0)
 
 loc_312E2:
-                bsr.s   sub_3133C
+                bsr.s   UpdateCnzCylinderMotion
                 lea     $32(a0),a2
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 move.w  (Ctrl_1_logical).w,d5
-                bsr.w   sub_3161A
+                bsr.w   UpdatePlayerOnCnzCylinder
                 addq.w  #4,a2
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 move.w  (Ctrl_2_logical).w,d5
-                bsr.w   sub_3161A
+                bsr.w   UpdatePlayerOnCnzCylinder
                 move.w  #$2B,d1
                 move.w  #$20,d2
                 move.w  #$21,d3
@@ -77,11 +77,11 @@ loc_31332:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3133C:
+UpdateCnzCylinderMotion:
                 move.w  $3A(a0),d0
                 move.w  off_31348(pc,d0.w),d0
                 jmp     off_31348(pc,d0.w)
-; End of function sub_3133C
+; End of function UpdateCnzCylinderMotion
 
 ; ---------------------------------------------------------------------------
 off_31348:
@@ -375,7 +375,7 @@ loc_31604:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3161A:
+UpdatePlayerOnCnzCylinder:
                 move.b  (a2),d0
                 bne.s   loc_31692
                 btst    d6,status(a0)
@@ -488,7 +488,7 @@ loc_3176A:                                              ; Used by LBZ cup elevat
                 jsr     (Perform_Player_DPLC).l
                 movea.l (sp)+,a2
                 rts
-; End of function sub_3161A
+; End of function UpdatePlayerOnCnzCylinder
 
 ; ---------------------------------------------------------------------------
 PlayerTwistFrames:

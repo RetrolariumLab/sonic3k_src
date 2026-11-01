@@ -14,12 +14,12 @@ Tails_InputAcceleration_Path:
                 bne.w   loc_156FE
                 btst    #button_left,(Ctrl_2_held_logical).w
                 beq.s   loc_15616
-                bsr.w   sub_157E6
+                bsr.w   TailsS3ApplyGroundLeftInput
 
 loc_15616:
                 btst    #button_right,(Ctrl_2_held_logical).w
                 beq.s   loc_15622
-                bsr.w   sub_15872
+                bsr.w   TailsS3ApplyGroundRightInput
 
 loc_15622:
                 move.b  angle(a0),d0
@@ -163,7 +163,7 @@ loc_1577C:
                 move.b  angle(a0),d0
                 add.b   d1,d0
                 move.w  d0,-(sp)
-                bsr.w   sub_10980
+                bsr.w   ProbeNextSurfaceWithFixedLookahead
                 move.w  (sp)+,d0
                 tst.w   d1
                 bpl.s   locret_157E4
@@ -208,7 +208,7 @@ locret_157E4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_157E6:
+TailsS3ApplyGroundLeftInput:
                 move.w  ground_vel(a0),d0
                 beq.s   loc_157EE
                 bpl.s   loc_15820
@@ -267,11 +267,11 @@ loc_15828:
 
 locret_15870:
                 rts
-; End of function sub_157E6
+; End of function TailsS3ApplyGroundLeftInput
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_15872:
+TailsS3ApplyGroundRightInput:
                 move.w  ground_vel(a0),d0
                 bmi.s   loc_158A6
                 bclr    #Status_Facing,status(a0)
@@ -325,4 +325,4 @@ loc_158AE:
 
 locret_158F6:
                 rts
-; End of function sub_15872
+; End of function TailsS3ApplyGroundRightInput

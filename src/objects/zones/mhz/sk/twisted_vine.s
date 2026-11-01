@@ -17,15 +17,15 @@ loc_3DCB4:
 loc_3DCBA:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_3DCD0
+                bsr.s   UpdatePlayerOnMhzTwistedVine
                 lea     (Player_2).w,a1
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
-                bsr.s   sub_3DCD0
+                bsr.s   UpdatePlayerOnMhzTwistedVine
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3DCD0:
+UpdatePlayerOnMhzTwistedVine:
                 btst    d6,status(a0)
                 bne.w   loc_3DD9E
                 btst    #Status_InAir,status(a1)
@@ -149,22 +149,22 @@ loc_3DE36:
                 move.w  d1,y_pos(a1)
                 move.b  d2,flip_angle(a1)
                 rts
-; End of function sub_3DCD0
+; End of function UpdatePlayerOnMhzTwistedVine
 
 ; ---------------------------------------------------------------------------
 
 loc_3DE6A:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_3DE80
+                bsr.s   UpdatePlayerOnMhzInvertedTwistedVine
                 lea     (Player_2).w,a1
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
-                bsr.s   sub_3DE80
+                bsr.s   UpdatePlayerOnMhzInvertedTwistedVine
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3DE80:
+UpdatePlayerOnMhzInvertedTwistedVine:
                 btst    d6,status(a0)
                 bne.w   loc_3DF48
                 btst    #Status_InAir,status(a1)
@@ -289,4 +289,4 @@ loc_3DFE2:
                 neg.b   d2
                 move.b  d2,flip_angle(a1)
                 rts
-; End of function sub_3DE80
+; End of function UpdatePlayerOnMhzInvertedTwistedVine

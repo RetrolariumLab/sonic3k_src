@@ -16,11 +16,11 @@ Competition_Results:
                 move.w  #$8B00,(a6)
                 move.w  #$8C89,(a6)
                 move.w  #$9011,(a6)
-                jsr     sub_B512(pc)
+                jsr     Menu_FillPlaneAWithPriorityBlankTiles(pc)
                 move.w  #VRAM_Plane_A_Name_Table+$1AA,d0
-                jsr     sub_B534(pc)
+                jsr     Menu_ClearNineByEightTileArea(pc)
                 move.w  #VRAM_Plane_A_Name_Table+$82A,d0
-                jsr     sub_B534(pc)
+                jsr     Menu_ClearNineByEightTileArea(pc)
                 clearRAM Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
                 clearRAM Object_RAM,(Kos_decomp_buffer-Object_RAM)
                 clr.w   (DMA_queue).w
@@ -39,7 +39,7 @@ Competition_Results:
                 jsr     (Eni_Decomp).l
                 lea     VRAMDatList_AE06(pc),a0
                 jsr     Copy_Listed_Data_To_VRAM(pc)
-                jsr     sub_AC44(pc)
+                jsr     S3CompBuildFiveRaceResultsTotalsWinsAndBlinkMap(pc)
                 lea     (ArtKos_S3MenuBG).l,a0          ; Decompress source
                 lea     (RAM_start).l,a1                ; Decompress destination/Transfer source
                 movea.w #tiles_to_bytes(ArtTile_S3MenuBG),a2  ; Transfer destination
@@ -123,7 +123,7 @@ loc_AB62:
 
 loc_AB8A:
                 move.l  (_unkEE98).w,d6
-                jsr     sub_9ECC(pc)
+                jsr     S3CompFormatAndUploadMinuteSecondHundredthTime(pc)
 
 loc_AB92:
                 tst.w   (Events_bg+$16).w
@@ -210,19 +210,19 @@ loc_AC2C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_AC44:
+S3CompBuildFiveRaceResultsTotalsWinsAndBlinkMap:
                 lea     ((RAM_start+$7800)&$FFFFFF).l,a0
                 move.w  #$C15A,d7
-                jsr     sub_AD28(pc)
+                jsr     S3CompDrawFiveSequentialTimeRows(pc)
                 move.w  #$C7DA,d7
-                jsr     sub_AD28(pc)
+                jsr     S3CompDrawFiveSequentialTimeRows(pc)
                 lea     ((RAM_start+$7800)&$FFFFFF).l,a0
-                jsr     sub_AD3E(pc)
+                jsr     S3CompSumFiveBinaryMinuteSecondHundredthTimes(pc)
                 move.w  #$C65A,d7
                 move.l  d6,(_unkEE98).w
                 move.w  d7,(_unkEEA0).w
-                jsr     sub_9ECC(pc)
-                jsr     sub_AD3E(pc)
+                jsr     S3CompFormatAndUploadMinuteSecondHundredthTime(pc)
+                jsr     S3CompSumFiveBinaryMinuteSecondHundredthTimes(pc)
                 move.w  #$CCDA,d7
                 cmp.l   (_unkEE98).w,d6
                 bhi.s   loc_AC92
@@ -236,7 +236,7 @@ loc_AC8A:
                 move.w  d7,(_unkEEA0).w
 
 loc_AC92:
-                jsr     sub_9ECC(pc)
+                jsr     S3CompFormatAndUploadMinuteSecondHundredthTime(pc)
                 clr.w   (_unkEEA2).w
                 lea     ((RAM_start+$7800)&$FFFFFF).l,a0
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table+$148,VRAM,WRITE),d5
@@ -277,7 +277,7 @@ loc_ACD4:
                 move.w  (_unkEEA0).w,d7
                 beq.s   locret_AD26
                 move.l  (_unkEE98).w,d6
-                jsr     sub_9ECC(pc)
+                jsr     S3CompFormatAndUploadMinuteSecondHundredthTime(pc)
                 lea     (Plane_buffer).w,a0
                 lea     $20(a0),a1
                 moveq   #$10-1,d0
@@ -291,26 +291,26 @@ loc_AD16:
 
 locret_AD26:
                 rts
-; End of function sub_AC44
+; End of function S3CompBuildFiveRaceResultsTotalsWinsAndBlinkMap
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_AD28:
+S3CompDrawFiveSequentialTimeRows:
                 moveq   #5-1,d0
 
 loc_AD2A:
                 move.w  d0,-(sp)
                 move.l  (a0)+,d6
-                jsr     sub_9ECC(pc)
+                jsr     S3CompFormatAndUploadMinuteSecondHundredthTime(pc)
                 addi.w  #$100,d7
                 move.w  (sp)+,d0
                 dbf     d0,loc_AD2A
                 rts
-; End of function sub_AD28
+; End of function S3CompDrawFiveSequentialTimeRows
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_AD3E:
+S3CompSumFiveBinaryMinuteSecondHundredthTimes:
                 clr.l   (_unkEF40_1).w
                 moveq   #5-1,d7
 
@@ -342,7 +342,7 @@ loc_AD7A:
                 dbf     d7,loc_AD44
                 move.l  (_unkEF40_1).w,d6
                 rts
-; End of function sub_AD3E
+; End of function S3CompSumFiveBinaryMinuteSecondHundredthTimes
 
 ; ---------------------------------------------------------------------------
 Pal_CompetitionResults:

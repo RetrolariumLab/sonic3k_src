@@ -43,19 +43,19 @@ loc_1DEB2:
 loc_1DEC4:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                beq.s   sub_1DED4
+                beq.s   CollideAndDisplayCollapsingPlatform
                 move.b  #1,$3A(a0)
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1DED4:
+CollideAndDisplayCollapsingPlatform:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 movea.l $3C(a0),a2
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectTopSloped2).l
                 bra.w   Sprite_OnScreen_Test
-; End of function sub_1DED4
+; End of function CollideAndDisplayCollapsingPlatform
 
 ; ---------------------------------------------------------------------------
 
@@ -69,18 +69,18 @@ loc_1DEEC:
 ; ---------------------------------------------------------------------------
 
 loc_1DF00:
-                bsr.w   sub_1DED4
+                bsr.w   CollideAndDisplayCollapsingPlatform
                 subq.b  #1,$38(a0)
                 bne.s   locret_1DF3A
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_1DF18
+                bsr.s   ReleasePlayerFromCollapsingPlatform
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1DF18:
+ReleasePlayerFromCollapsingPlatform:
                 btst    d6,status(a0)
                 beq.s   locret_1DF3A
                 bclr    d6,status(a0)
@@ -91,7 +91,7 @@ sub_1DF18:
 
 locret_1DF3A:
                 rts
-; End of function sub_1DF18
+; End of function ReleasePlayerFromCollapsingPlatform
 
 ; ---------------------------------------------------------------------------
 

@@ -51,7 +51,7 @@ loc_82A6:
                 move.l  #vdpComm(tiles_to_bytes($000),VRAM,WRITE),(VDP_control_port).l
                 lea     (ArtNem_SStageLayout).l,a0
                 bsr.w   Nem_Decomp
-                bsr.w   sub_85B0
+                bsr.w   SStage_LoadLayoutAndPalette
                 lea     (RAM_start+$5500).l,a1
                 lea     (MapEni_SStageLayout).l,a0
                 move.w  #make_art_tile($000,0,0),d0
@@ -110,7 +110,7 @@ loc_82A6:
                 lea     (SStageKos_PerspectiveMaps).l,a0
                 lea     (RAM_start).l,a1
                 bsr.w   Kos_Decomp
-                bsr.w   sub_9EA0
+                bsr.w   SStage_CountInitialBlueSpheres
                 bsr.w   Load_SSSprite_Mappings
                 clr.b   (Level_started_flag).w
                 move.b  #$FF,(Special_stage_sphere_HUD_flag).w
@@ -138,7 +138,7 @@ loc_8454:
                 bsr.w   Touch_SSSprites
                 jsr     (Render_Sprites).l
                 jsr     Draw_SSSprites(pc)
-                bsr.w   sub_9D5E
+                bsr.w   SStage_UpdateBackgroundScroll
                 move.b  #1,(Special_stage_fade_timer).w
                 move.b  #VInt_ID_1C,(V_int_routine).w
                 bsr.w   Wait_VSync
@@ -166,8 +166,8 @@ loc_84C2:
                 jsr     (Render_Sprites).l
                 jsr     Draw_SSSprites(pc)
                 bsr.w   Draw_SSShadows
-                bsr.w   sub_9D5E
-                bsr.w   sub_9B62
+                bsr.w   SStage_UpdateBackgroundScroll
+                bsr.w   SStage_UpdateClearSequence
                 bsr.w   Process_Nem_Queue_Init
                 jsr     (Process_Kos_Module_Queue).l
                 tst.w   (Demo_mode_flag).w
@@ -198,8 +198,8 @@ loc_853E:
                 bsr.w   Touch_SSSprites
                 jsr     (Render_Sprites).l
                 jsr     Draw_SSSprites(pc)
-                bsr.w   sub_9D5E
-                bsr.w   sub_9B62
+                bsr.w   SStage_UpdateBackgroundScroll
+                bsr.w   SStage_UpdateClearSequence
                 bsr.w   Process_Nem_Queue_Init
                 jsr     (Process_Kos_Module_Queue).l
                 subq.w  #1,(Pal_fade_delay).w
@@ -224,7 +224,7 @@ SSLayoutOffs_RAM:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_85B0:
+SStage_LoadLayoutAndPalette:
                 tst.b   (Blue_spheres_stage_flag).w
                 bne.w   loc_86C8
                 lea     (SSCompressedLayoutPtrs).l,a0
@@ -406,7 +406,7 @@ loc_8798:
                 move.l  $10(a1),$50(a2)
                 move.w  $14(a1),$54(a2)
                 rts
-; End of function sub_85B0
+; End of function SStage_LoadLayoutAndPalette
 
 ; ---------------------------------------------------------------------------
 word_87BA:

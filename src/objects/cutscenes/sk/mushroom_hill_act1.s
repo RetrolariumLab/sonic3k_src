@@ -170,7 +170,7 @@ loc_62D04:
                 st      (Ctrl_1_locked).w
                 clr.w   (Ctrl_1_logical).w
                 jsr     (Stop_Object).l
-                bra.w   sub_65DD6
+                bra.w   CutsceneSpawnKnucklesMusicFadeTransition
 ; ---------------------------------------------------------------------------
 
 loc_62D2C:
@@ -341,7 +341,7 @@ loc_62EFC:
 ; ---------------------------------------------------------------------------
 
 loc_62F0A:
-                bsr.w   sub_65DEC
+                bsr.w   CutsceneKnucklesSolidThinWrapper
                 move.b  status(a0),d1
                 andi.b  #standing_mask,d1
                 beq.s   loc_62F46
@@ -362,7 +362,7 @@ loc_62F46:
 
 loc_62F4C:
                 bclr    #1,$38(a0)
-                bsr.w   sub_65DEC
+                bsr.w   CutsceneKnucklesSolidThinWrapper
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
                 bne.s   loc_62F6C
@@ -433,7 +433,7 @@ loc_6303C:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
                 bne.s   loc_63078
-                jsr     (sub_65E4C).l
+                jsr     (CutsceneKnucklesSolidTallWrapper).l
                 lea     (Player_1).w,a1
                 jsr     (Find_OtherObject).l
                 tst.b   (_unkFAA9).w
@@ -468,7 +468,7 @@ loc_63094:
 
 loc_630A6:
                 jsr     (MoveSprite2).l
-                jsr     (sub_65E4C).l
+                jsr     (CutsceneKnucklesSolidTallWrapper).l
                 jsr     (Obj_Wait).l
                 jmp     (Child_Draw_Sprite).l
 ; ---------------------------------------------------------------------------

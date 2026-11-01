@@ -26,7 +26,7 @@ loc_85E74:
                 moveq   #$40-1,d0
 
 loc_85E86:
-                bsr.w   sub_85EB4
+                bsr.w   EffectColorSKRaiseOneColorTowardWhite
                 dbf     d0,loc_85E86
                 subq.b  #1,$39(a0)
                 bmi.s   loc_85E96
@@ -49,7 +49,7 @@ loc_85EAA:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_85EB4:
+EffectColorSKRaiseOneColorTowardWhite:
                 moveq   #$E,d2
                 move.b  (a1),d3
                 and.b   d2,d3
@@ -77,7 +77,7 @@ loc_85EE0:
                 or.b    d3,d4
                 move.b  d4,(a1)+
                 rts
-; End of function sub_85EB4
+; End of function EffectColorSKRaiseOneColorTowardWhite
 
 ; ---------------------------------------------------------------------------
 
@@ -95,7 +95,7 @@ loc_85EF8:
                 moveq   #$40-1,d0
 
 loc_85F10:
-                bsr.w   sub_85F2A
+                bsr.w   EffectColorSKLowerOneColorTowardTarget
                 dbf     d0,loc_85F10
                 subq.b  #1,$39(a0)
                 bpl.w   locret_8405E
@@ -104,7 +104,7 @@ loc_85F10:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_85F2A:
+EffectColorSKLowerOneColorTowardTarget:
                 move.b  (a2)+,d2
                 andi.b  #$E,d2
                 move.b  (a1),d3
@@ -136,7 +136,7 @@ loc_85F62:
                 or.b    d4,d5
                 move.b  d5,(a1)+
                 rts
-; End of function sub_85F2A
+; End of function EffectColorSKLowerOneColorTowardTarget
 
 ; ---------------------------------------------------------------------------
 loc_85F68:                                              ; used in S3, unused in S3&K

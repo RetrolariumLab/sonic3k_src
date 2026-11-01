@@ -209,7 +209,7 @@ loc_45AD0:
 ; ---------------------------------------------------------------------------
 
 loc_45AD6:
-                jsr     sub_45866(pc)
+                jsr     CycleSszHpzTeleporterPalettePair(pc)
                 tst.b   routine(a0)
                 beq.s   loc_45B16
                 jsr     (AllocateObjectAfterCurrent).l
@@ -229,7 +229,7 @@ loc_45B16:
 ; ---------------------------------------------------------------------------
 
 loc_45B1C:
-                jsr     sub_45866(pc)
+                jsr     CycleSszHpzTeleporterPalettePair(pc)
                 movea.w (_unkFAA4).w,a1
                 movea.w $3C(a0),a2
                 cmpi.b  #8,$46(a2)
@@ -270,7 +270,7 @@ loc_45B84:
 ; ---------------------------------------------------------------------------
 
 loc_45B8A:
-                jsr     sub_45866(pc)
+                jsr     CycleSszHpzTeleporterPalettePair(pc)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -322,7 +322,7 @@ loc_45C0C:
                 lea     $30(a0),a4
                 lea     1(a4),a5
                 moveq   #0,d6
-                bsr.s   sub_45C8E
+                bsr.s   AdvanceHpzDeparturePlayerScript
                 tst.w   (Player_mode).w
                 bne.s   loc_45C42
                 lea     (Player_2).w,a1
@@ -331,7 +331,7 @@ loc_45C0C:
                 lea     $31(a0),a4
                 lea     -1(a4),a5
                 moveq   #1,d6
-                bsr.s   sub_45C8E
+                bsr.s   AdvanceHpzDeparturePlayerScript
 
 loc_45C42:
                 move.b  subtype(a0),d0
@@ -368,7 +368,7 @@ locret_45C8C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_45C8E:
+AdvanceHpzDeparturePlayerScript:
                 move.b  (a4),d0
                 bmi.w   locret_45DAC
                 bne.s   loc_45CC0
@@ -484,4 +484,4 @@ loc_45D8A:
 
 locret_45DAC:
                 rts
-; End of function sub_45C8E
+; End of function AdvanceHpzDeparturePlayerScript

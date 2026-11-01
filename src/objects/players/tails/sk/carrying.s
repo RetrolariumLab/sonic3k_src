@@ -148,7 +148,7 @@ loc_1456C:
                 bne.s   locret_1459C
                 tst.b   spin_dash_flag(a1)
                 bne.s   locret_1459C
-                bsr.s   sub_1459E
+                bsr.s   TailsSKInitializeCarriedPlayerAttachment
                 moveq   #signextendB(sfx_Grab),d0
                 jsr     (Play_SFX).l
                 move.b  #1,(a2)
@@ -159,7 +159,7 @@ locret_1459C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1459E:
+TailsSKInitializeCarriedPlayerAttachment:
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)
                 clr.w   ground_vel(a1)
@@ -191,6 +191,6 @@ sub_1459E:
 
 locret_14630:
                 rts
-; End of function sub_1459E
+; End of function TailsSKInitializeCarriedPlayerAttachment
 
 ; =============== S U B R O U T I N E =======================================

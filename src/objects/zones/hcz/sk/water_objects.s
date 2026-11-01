@@ -70,7 +70,7 @@ loc_2F9E2:
                 move.w  d0,x_pos(a0)
                 tst.b   $2E(a0)
                 beq.s   loc_2FA14
-                bsr.w   sub_2FBA8
+                bsr.w   CheckPlayersForHczAirBubble
                 cmpi.b  #6,routine(a0)
                 beq.s   loc_2FA2C
 
@@ -231,11 +231,11 @@ byte_2FB96:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2FBA8:
+CheckPlayersForHczAirBubble:
                 lea     (Player_1).w,a1
                 bsr.s   loc_2FBB2
                 lea     (Player_2).w,a1
-; End of function sub_2FBA8
+; End of function CheckPlayersForHczAirBubble
 
 loc_2FBB2:
                 tst.b   object_control(a1)
@@ -794,7 +794,7 @@ loc_30470:
                 jsr     (Random_Number).l
                 move.w  d0,d1
                 move.w  d0,d2
-                bsr.s   sub_304DA
+                bsr.s   InitializeHczGeyserDroplet
                 addi.w  #$10,x_pos(a1)
                 andi.w  #$F,d1
                 lsl.w   #6,d1
@@ -803,7 +803,7 @@ loc_30470:
                 move.w  d0,d2
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   loc_304D4
-                bsr.s   sub_304DA
+                bsr.s   InitializeHczGeyserDroplet
                 subi.w  #$10,x_pos(a1)
                 neg.w   d1
                 move.w  d1,x_vel(a1)
@@ -814,7 +814,7 @@ loc_304D4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_304DA:
+InitializeHczGeyserDroplet:
                 move.l  #loc_301DE,(a1)
                 move.l  mappings(a0),mappings(a1)
                 move.b  #$84,render_flags(a1)
@@ -833,7 +833,7 @@ sub_304DA:
 loc_30524:
                 move.b  d2,anim(a1)
                 rts
-; End of function sub_304DA
+; End of function InitializeHczGeyserDroplet
 
 ; ---------------------------------------------------------------------------
 

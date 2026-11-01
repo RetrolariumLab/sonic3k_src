@@ -17,7 +17,7 @@ loc_53EEE:
                 lea     (a2,d0.w),a4                    ; copy script address to a4 and skip to palette data
                 move.w  (a4),d1                         ; load the first entry to d1
                 bpl.s   loc_53F0A                       ; if positive, it is a normal entry
-                bsr.w   sub_53F26                       ; this is a command
+                bsr.w   PalRotation_DispatchControlCommand                       ; this is a command
 
 loc_53F0A:
                 moveq   #0,d2
@@ -39,7 +39,7 @@ loc_53F22:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_53F26:
+PalRotation_DispatchControlCommand:
                 move.b  3(a2),d2                        ; load additional parameter to d2
                 bne.s   loc_53F34
                 moveq   #4,d0                           ; Start from the beginning of the rotation
@@ -52,7 +52,7 @@ locret_53F32:
 loc_53F34:
                 neg.w   d1
                 jmp     .table-8(pc,d1.w)
-; End of function sub_53F26
+; End of function PalRotation_DispatchControlCommand
 
 ; ---------------------------------------------------------------------------
 

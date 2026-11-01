@@ -38,10 +38,10 @@ loc_3B998:
 loc_3B9AC:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
-                bsr.s   sub_3B9D8
+                bsr.s   UpdatePlayerOnFbzDezFloorLauncher
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
-                bsr.s   sub_3B9D8
+                bsr.s   UpdatePlayerOnFbzDezFloorLauncher
                 move.w  #$10,d1
                 move.w  #3,d3
                 move.w  x_pos(a0),d4
@@ -51,7 +51,7 @@ loc_3B9AC:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_3B9D8:
+UpdatePlayerOnFbzDezFloorLauncher:
                 btst    d6,status(a0)
                 beq.s   locret_3BA48
                 moveq   #4,d0
@@ -88,7 +88,7 @@ loc_3BA1E:
 
 locret_3BA48:
                 rts
-; End of function sub_3B9D8
+; End of function UpdatePlayerOnFbzDezFloorLauncher
 
 ; ---------------------------------------------------------------------------
 

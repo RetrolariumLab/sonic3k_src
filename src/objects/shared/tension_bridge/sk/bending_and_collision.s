@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_389DE:
+CollapseTensionBridgeSpriteBank:
                 lea     (byte_38A78).l,a4
                 lea     sub2_x_pos(a3),a2
                 move.w  mainspr_childsprites(a3),d6
@@ -46,7 +46,7 @@ loc_38A64:
                 move.w  #0,sub2_y_pos(a3)
                 moveq   #signextendB(sfx_BridgeCollapse),d0
                 jmp     (Play_SFX).l
-; End of function sub_389DE
+; End of function CollapseTensionBridgeSpriteBank
 
 ; ---------------------------------------------------------------------------
 byte_38A78:
@@ -55,21 +55,21 @@ byte_38A78:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_38A88:
+CollidePlayersWithTensionBridge:
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 moveq   #$3B,d5
                 movem.l d1-d4,-(sp)
-                bsr.s   sub_38AA2
+                bsr.s   CollidePlayerWithTensionBridge
                 movem.l (sp)+,d1-d4
                 lea     (Player_1).w,a1
                 subq.b  #p2_standing_bit-p1_standing_bit,d6
                 moveq   #$3F,d5
-; End of function sub_38A88
+; End of function CollidePlayersWithTensionBridge
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_38AA2:
+CollidePlayerWithTensionBridge:
                 btst    d6,status(a0)
                 beq.s   loc_38B06
                 btst    #Status_InAir,status(a1)
@@ -115,7 +115,7 @@ loc_38AE8:
 
 loc_38B06:
                 move.w  d1,-(sp)
-                jsr     (sub_1E410).l
+                jsr     (TryLandPlayerOnPlatformSpan).l
                 move.w  (sp)+,d1
                 btst    d6,status(a0)
                 beq.s   locret_38B28
@@ -128,25 +128,25 @@ loc_38B06:
 
 locret_38B28:
                 rts
-; End of function sub_38AA2
+; End of function CollidePlayerWithTensionBridge
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_38B2A:
+CollidePlayersWithSlopedTensionBridge:
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 moveq   #$3B,d5
                 movem.l d1-d4,-(sp)
-                bsr.s   sub_38B44
+                bsr.s   CollidePlayerWithSlopedTensionBridge
                 movem.l (sp)+,d1-d4
                 lea     (Player_1).w,a1
                 subq.b  #p2_standing_bit-p1_standing_bit,d6
                 moveq   #$3F,d5
-; End of function sub_38B2A
+; End of function CollidePlayersWithSlopedTensionBridge
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_38B44:
+CollidePlayerWithSlopedTensionBridge:
                 btst    d6,status(a0)
                 beq.s   loc_38BA4
                 btst    #Status_InAir,status(a1)
@@ -190,13 +190,13 @@ loc_38B86:
 ; ---------------------------------------------------------------------------
 
 loc_38BA4:
-                bsr.s   sub_38BA8
+                bsr.s   TryLandPlayerOnSlopedTensionBridge
                 rts
-; End of function sub_38B44
+; End of function CollidePlayerWithSlopedTensionBridge
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_38BA8:
+TryLandPlayerOnSlopedTensionBridge:
                 tst.w   y_vel(a1)
                 bmi.s   locret_38BD6
                 move.w  x_pos(a1),d0
@@ -218,23 +218,23 @@ sub_38BA8:
 
 locret_38BD6:
                 rts
-; End of function sub_38BA8
+; End of function TryLandPlayerOnSlopedTensionBridge
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_38BD8:
+CacheTensionBridgeRiderSegments:
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 moveq   #$3B,d5
-                bsr.s   sub_38BEA
+                bsr.s   CacheTensionBridgeRiderSegment
                 lea     (Player_1).w,a1
                 subq.b  #p2_standing_bit-p1_standing_bit,d6
                 moveq   #$3F,d5
-; End of function sub_38BD8
+; End of function CacheTensionBridgeRiderSegments
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_38BEA:
+CacheTensionBridgeRiderSegment:
                 btst    d6,status(a0)
                 beq.s   locret_38C10
                 btst    #Status_InAir,status(a1)
@@ -251,11 +251,11 @@ sub_38BEA:
 
 locret_38C10:
                 rts
-; End of function sub_38BEA
+; End of function CacheTensionBridgeRiderSegment
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_38C12:
+AnimateTensionBridgeSegmentsUnderMovingRiders:
                 movea.l $30(a0),a1
                 lea     sub2_mapframe(a1),a1
                 movea.l $34(a0),a2
@@ -268,7 +268,7 @@ sub_38C12:
                 tst.w   (Player_1+x_vel).w
                 beq.s   loc_38C3E
                 move.b  $3F(a0),d0
-                bsr.w   sub_38C8E
+                bsr.w   StartTensionBridgeSegmentAnimation
 
 loc_38C3E:
                 move.b  status(a0),d0
@@ -277,7 +277,7 @@ loc_38C3E:
                 tst.w   (Player_2+x_vel).w
                 beq.s   loc_38C56
                 move.b  $3B(a0),d0
-                bsr.w   sub_38C8E
+                bsr.w   StartTensionBridgeSegmentAnimation
 
 loc_38C56:
                 movea.l $30(a0),a1
@@ -305,11 +305,11 @@ loc_38C7A:
 loc_38C88:
                 dbf     d1,loc_38C6A
                 rts
-; End of function sub_38C12
+; End of function AnimateTensionBridgeSegmentsUnderMovingRiders
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_38C8E:
+StartTensionBridgeSegmentAnimation:
                 cmpi.b  #8,d0
                 bhs.s   loc_38CAA
                 move.w  d0,d1
@@ -336,11 +336,11 @@ loc_38CAA:
 
 locret_38CC0:
                 rts
-; End of function sub_38C8E
+; End of function StartTensionBridgeSegmentAnimation
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_38CC2:
+BendTensionBridgeSegments:
                 move.b  $3E(a0),d0
                 jsr     (GetSineCosine).l
                 move.w  d0,d4
@@ -414,11 +414,11 @@ loc_38D6E:
 
 locret_38D72:
                 rts
-; End of function sub_38CC2
+; End of function BendTensionBridgeSegments
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_38D74:
+BendSlopedTensionBridgeSegments:
                 move.b  $3E(a0),d0
                 jsr     (GetSineCosine).l
                 move.w  d0,d4
@@ -495,7 +495,7 @@ loc_38E24:
 
 locret_38E28:
                 rts
-; End of function sub_38D74
+; End of function BendSlopedTensionBridgeSegments
 
 ; ---------------------------------------------------------------------------
 byte_38E2A:

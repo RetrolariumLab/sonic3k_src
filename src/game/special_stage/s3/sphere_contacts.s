@@ -9,7 +9,7 @@ Pal_SStage_Emeralds:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8B9A:
+SStage_UpdateBackgroundScroll:
                 move.w  (Special_stage_X_pos).w,d0
                 sub.w   (Special_stage_prev_X_pos).w,d0
                 btst    #6,(Special_stage_angle).w
@@ -32,7 +32,7 @@ loc_8BBA:
                 move.w  (Special_stage_X_pos).w,(Special_stage_prev_X_pos).w
                 move.w  (Special_stage_Y_pos).w,(Special_stage_prev_Y_pos).w
                 rts
-; End of function sub_8B9A
+; End of function SStage_UpdateBackgroundScroll
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -167,7 +167,7 @@ loc_8CD8:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8CDC:
+SStage_CountInitialBlueSpheres:
                 lea     (Level_layout_header).w,a3
                 moveq   #0,d1
                 move.w  #$400-1,d0
@@ -181,7 +181,7 @@ loc_8CEE:
                 dbf     d0,loc_8CE6
                 move.w  d1,(Special_stage_spheres_left).w
                 rts
-; End of function sub_8CDC
+; End of function SStage_CountInitialBlueSpheres
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -576,7 +576,7 @@ MapPtr_8F1A_end:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8F90:
+SStage_RotateHorizontalVertical:
                 swap    d0
                 move.w  d1,d3
                 move.w  d2,d4
@@ -596,11 +596,11 @@ sub_8F90:
                 swap    d2
                 swap    d0
                 rts
-; End of function sub_8F90
+; End of function SStage_RotateHorizontalVertical
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8FBA:
+SStage_RotateDepthHorizontal:
                 swap    d2
                 move.w  d0,d3
                 move.w  d1,d4
@@ -620,11 +620,11 @@ sub_8FBA:
                 swap    d1
                 swap    d2
                 rts
-; End of function sub_8FBA
+; End of function SStage_RotateDepthHorizontal
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_8FE4:
+SStage_RotateDepthHeight:
                 swap    d1
                 move.w  d0,d3
                 move.w  d2,d4
@@ -644,11 +644,11 @@ sub_8FE4:
                 swap    d2
                 swap    d1
                 rts
-; End of function sub_8FE4
+; End of function SStage_RotateDepthHeight
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_900E:
+SStage_ApplyProjectionViewTilt:
                 swap    d1
                 move.w  d0,d3
                 move.w  d2,d4
@@ -668,7 +668,7 @@ sub_900E:
                 swap    d2
                 swap    d1
                 rts
-; End of function sub_900E
+; End of function SStage_ApplyProjectionViewTilt
 
 ; =============== S U B R O U T I N E =======================================
 

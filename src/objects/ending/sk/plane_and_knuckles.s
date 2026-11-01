@@ -15,7 +15,7 @@ Obj_5DFEE:
                 move.w  #$220,x_pos(a0)
                 move.w  #$B0,y_pos(a0)
                 move.w  #-$100,x_vel(a0)
-                bsr.w   sub_6001E
+                bsr.w   EndingInitializeGentleVerticalSwing
                 moveq   #signextendB(mus_CreditsK),d0
                 jsr     (Play_Music).l
                 lea     ChildObjDat_601CA(pc),a2

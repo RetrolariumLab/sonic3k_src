@@ -188,19 +188,19 @@ loc_462C2:
                 lea     (Ctrl_1_logical).w,a2
                 lea     $30(a0),a3
                 moveq   #p1_standing_bit,d5
-                bsr.s   sub_46324
+                bsr.s   UpdatePlayerOnSszSwingingCarrier
                 move.w  (sp)+,d6
                 lsr.w   #1,d6
                 lea     (Player_2).w,a1
                 lea     (Ctrl_2_logical).w,a2
                 lea     $32(a0),a3
                 moveq   #p2_standing_bit,d5
-                bsr.s   sub_46324
+                bsr.s   UpdatePlayerOnSszSwingingCarrier
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_46324:
+UpdatePlayerOnSszSwingingCarrier:
                 tst.b   (a3)
                 bne.s   loc_4639A
                 tst.b   object_control(a1)
@@ -211,7 +211,7 @@ sub_46324:
                 bne.s   loc_4634A
                 andi.w  #5,d6
                 beq.s   locret_46348
-                jsr     (sub_24280).l
+                jsr     (HurtPlayerFromSolidHazard).l
 
 locret_46348:
                 rts
@@ -282,4 +282,4 @@ loc_463FC:
 
 locret_46424:
                 rts
-; End of function sub_46324
+; End of function UpdatePlayerOnSszSwingingCarrier
