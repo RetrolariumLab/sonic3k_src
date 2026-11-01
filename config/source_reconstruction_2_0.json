@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 78
+    "commit_count": 80
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -515,9 +515,21 @@
       "commits": ["33196ab81daf915fbf5639edffee06bc6721b112"]
     },
     {
-      "id": "current-semantic-label-migration",
+      "id": "change-1fcf2f072fcb",
       "kind": "source_or_tooling",
       "summary": "Rename all 1571 address-named procedures and their scoped references from the reviewed semantic catalog; validate the complete registry and mapped historical addresses and boundaries.",
+      "commits": ["1fcf2f072fcb304354f7abb8ce6fab0d9116a244"]
+    },
+    {
+      "id": "change-01b6986221af",
+      "kind": "formatting",
+      "summary": "Apply the mandatory assembler formatter to eight trailing-comment gaps in six renamed source files without changing any tokens.",
+      "commits": ["01b6986221af41e6bd73d3c1a0436e6c105bb950"]
+    },
+    {
+      "id": "current-migration-history",
+      "kind": "tooling",
+      "summary": "Record the separate semantic-label and formatting revisions, retain the accepted predecessor, and register the formatting-only revision for blame.",
       "commits": ["release-commit"]
     }
   ],
