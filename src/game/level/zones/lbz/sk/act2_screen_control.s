@@ -224,7 +224,7 @@ loc_5452E:
 
 LBZ2BGE_PlatformDetach:
                 tst.w   (Special_V_int_routine).w
-                bne.s   AdvanceLbz2DeathEggFallingBackground                       ; Wait for window copy to finish
+                bne.s   AdvanceLbz2DeathEggFallingBackground  ; Wait for window copy to finish
                 move.w  (Level_frame_counter).w,d0
                 andi.w  #3,d0
                 bne.s   loc_545AA
@@ -262,7 +262,7 @@ loc_545AA:
 
 LBZ2BGE_Falling:
                 tst.w   (Events_fg_5).w
-                beq.s   AdvanceLbz2DeathEggFallingBackground                       ; Continue Death Egg deformation until signal
+                beq.s   AdvanceLbz2DeathEggFallingBackground  ; Continue Death Egg deformation until signal
                 st      (Scroll_lock).w                 ; Set flag so that camera doesn't follow Sonic
                 move.w  (Camera_Y_pos).w,(Camera_Y_pos_copy).w  ; Scroll screen upwards
                 subq.w  #2,(Camera_Y_pos).w

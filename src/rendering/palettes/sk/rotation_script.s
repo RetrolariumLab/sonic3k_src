@@ -20,7 +20,7 @@ loc_85994:
                 adda.w  d0,a4                           ; skip to palette data
                 move.w  (a4),d1                         ; load the first entry to d1
                 bpl.s   loc_859B0                       ; if positive, it is a normal entry
-                bsr.w   PalRotation_DispatchControlCommand                       ; this is a command
+                bsr.w   PalRotation_DispatchControlCommand  ; this is a command
 
 loc_859B0:
                 moveq   #0,d2

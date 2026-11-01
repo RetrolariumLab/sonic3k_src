@@ -17,7 +17,7 @@ loc_53EEE:
                 lea     (a2,d0.w),a4                    ; copy script address to a4 and skip to palette data
                 move.w  (a4),d1                         ; load the first entry to d1
                 bpl.s   loc_53F0A                       ; if positive, it is a normal entry
-                bsr.w   PalRotation_DispatchControlCommand                       ; this is a command
+                bsr.w   PalRotation_DispatchControlCommand  ; this is a command
 
 loc_53F0A:
                 moveq   #0,d2
