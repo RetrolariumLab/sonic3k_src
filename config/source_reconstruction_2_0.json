@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 81
+    "commit_count": 82
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -533,9 +533,15 @@
       "commits": ["dd76824743d7e0001ecb78de87331d67170e29f2"]
     },
     {
-      "id": "current-consumer-bindings",
+      "id": "change-6005f6cc6bbb",
       "kind": "tooling",
       "summary": "Rebind 210 current raw and indexed-palette consumer source hashes after independently proving exact registered symbol renames, unchanged ABI selections and all 235 byte-identical resource declaration spans.",
+      "commits": ["6005f6cc6bbb83995aed07030ed01ebcbd00cf8f"]
+    },
+    {
+      "id": "current-incremental-label-registry",
+      "kind": "tooling",
+      "summary": "Validate the immutable35470-label subsystem partition and partially applied semantic mapping shards while preserving the completed1571-procedure registry.",
       "commits": ["release-commit"]
     }
   ],

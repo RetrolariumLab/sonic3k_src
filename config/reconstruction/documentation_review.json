@@ -75,7 +75,7 @@
     {
       "path": "docs/provenance.md",
       "decision": "reworked",
-      "reason": "Record reviewed physical/profile-scoped procedure renames while retaining historical provenance,byte preservation,ABI and runtime interpretation limits."
+      "reason": "Explain the canonical incremental semantic-label continuation, immutable physical subsystem scope and preservation of completed procedure naming evidence."
     },
     {
       "path": "docs/raw_animations.md",

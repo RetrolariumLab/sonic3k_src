@@ -12576,5 +12576,6 @@
       "profiles": ["sk"],
       "meaning": "Load the debug cursor mapping, art tile and frame from the selected zone-catalog entry."
     }
-  ]
+  ],
+  "continuation": "config/reconstruction/semantic_labels.json"
 }

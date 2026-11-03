@@ -11,6 +11,7 @@ import subprocess
 import tarfile
 
 from scripts.build.project import ROOT
+from scripts.validation.semantic_labels import INDEX, profile_maps as semantic_maps, validate as validate_semantics
 
 REGISTRY = "config/reconstruction/label_renames.json"
 POLICY = "config/reconstruction/relocation.json"
@@ -153,6 +154,10 @@ def validate_registry(root=ROOT, registry=None):
         actual_definitions[key] != [path] for key, path in expected_definitions.items()
     ):
         raise ValueError("Renamed definitions are missing, duplicated or in the wrong source")
+    if value.get("continuation") is not None or (root / INDEX).exists():
+        if value.get("continuation") != INDEX:
+            raise ValueError("Semantic continuation must belong to the canonical label registry")
+        value = {**value, "semantic_migration": validate_semantics(root)}
     return value
 
 
@@ -164,4 +169,10 @@ def profile_maps(registry):
             if row["old"] in result[profile]:
                 raise ValueError("Original spelling is ambiguous in one compilation namespace")
             result[profile][row["old"]] = row["new"]
+    if "semantic_migration" in registry:
+        for profile, mappings in semantic_maps(registry["semantic_migration"]).items():
+            for old, new in mappings.items():
+                if old in result[profile] and result[profile][old] != new:
+                    raise ValueError("Semantic continuation conflicts with the completed procedure migration")
+                result[profile][old] = new
     return dict(result)
