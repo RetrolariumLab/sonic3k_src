@@ -92,3 +92,10 @@ mappings. Pending definitions retain their original names, and original physical
 identities remain stable when explanatory comments are inserted. This optional
 naming migration preserves the completed 1571-procedure record and does not
 change the original byte, address, scope or runtime acceptance requirements.
+
+Each subsystem also retains a frozen digest of its reviewed destination names.
+Applied shards record exact symbol edits by code-line and token ordinal, so
+inserted explanations do not invalidate the original physical identities.
+Reversing only these registered edits must recover the baseline code tokens,
+including all instructions, constants and string literals. Historical driver
+statement checks use this exact source view and retain their original contracts.

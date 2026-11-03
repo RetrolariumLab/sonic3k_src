@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 82
+    "commit_count": 83
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -539,9 +539,15 @@
       "commits": ["6005f6cc6bbb83995aed07030ed01ebcbd00cf8f"]
     },
     {
-      "id": "current-incremental-label-registry",
+      "id": "change-6f4587ab040e",
       "kind": "tooling",
       "summary": "Validate the immutable35470-label subsystem partition and partially applied semantic mapping shards while preserving the completed1571-procedure registry.",
+      "commits": ["6f4587ab040e4cae0eca368849b76184deebcac5"]
+    },
+    {
+      "id": "current-reversible-semantic-tokens",
+      "kind": "tooling",
+      "summary": "Bind reviewed destination names and exact symbol-token edits; restore historical source views without admitting instruction, literal or context changes.",
       "commits": ["release-commit"]
     }
   ],

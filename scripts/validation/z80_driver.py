@@ -234,6 +234,10 @@ def check_module(text, contract):
 
 
 def check_sources(rows):
+    from scripts.validation.label_renames import validate_registry
+    from scripts.validation.semantic_labels import original_view
+
+    migration = validate_registry().get("semantic_migration")
     registry = load("config/reconstruction/z80_driver.json")
     if (
         registry["schema_version"] != 1
@@ -273,7 +277,8 @@ def check_sources(rows):
             raise ValueError("Z80 owner has no matching kind or assembly namespace")
         text = (ROOT / path).read_text()
         evidence[path] = check_module(text, contract)
-        body = lines(text)[1 if module["kind"] == "memory" else 2 :]
+        historical_text = original_view(path, text, migration) if migration else text
+        body = lines(historical_text)[1 if module["kind"] == "memory" else 2 :]
         preserve_statements("".join(original[first - 1 : last]), "\n".join(body), path)
     projected.extend(original[next_line - 1 :])
     row = selected[registry["wrapper"]]
@@ -282,7 +287,10 @@ def check_sources(rows):
         or row["address_space"] != "driver-container"
     ):
         raise ValueError("Driver wrapper has no explicit physical/virtual contract")
-    preserve_statements("".join(projected), (ROOT / registry["wrapper"]).read_text(), registry["wrapper"])
+    wrapper = (ROOT / registry["wrapper"]).read_text()
+    if migration:
+        wrapper = original_view(registry["wrapper"], wrapper, migration)
+    preserve_statements("".join(projected), wrapper, registry["wrapper"])
     return registry, evidence
 
 

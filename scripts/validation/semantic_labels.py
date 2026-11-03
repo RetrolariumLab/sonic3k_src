@@ -12,6 +12,7 @@ import tarfile
 
 from scripts.build.project import ROOT
 from scripts.validation.numeric_operands import code_part
+from scripts.validation.semantic_label_edits import apply_edits, code_fingerprint
 
 INDEX = "config/reconstruction/semantic_labels.json"
 SHARDS = "config/reconstruction/semantic_labels"
@@ -57,6 +58,12 @@ def scope_hash(identities):
     return hashlib.sha256("\n".join(sorted(identities)).encode()).hexdigest()
 
 
+def destination_hash(rows):
+    return scope_hash(
+        row["source"] + ":" + str(row["original_line"]) + ":" + row["old"] + "\0" + row["new"] for row in rows
+    )
+
+
 def read(root, name):
     path = (root / name).resolve()
     if not path.is_relative_to(root.resolve()) or not path.is_file():
@@ -65,22 +72,30 @@ def read(root, name):
 
 
 @lru_cache(maxsize=4)
-def historical_source(root, revision):
+def historical_texts(root, revision):
     if not re.fullmatch(r"[0-9a-f]{40}", revision):
         raise ValueError("Semantic labels require a full historical Git identity")
     subprocess.run(["git", "merge-base", "--is-ancestor", revision, "HEAD"], cwd=root, check=True, capture_output=True)
     payload = subprocess.check_output(["git", "archive", "--format=tar", revision, "src"], cwd=root)
-    sources, targets = {}, {}
+    sources = {}
     with tarfile.open(fileobj=io.BytesIO(payload), mode="r:") as archive:
         for member in archive:
             if not member.isfile() or Path(member.name).suffix.lower() not in (".s", ".inc", ".asm"):
                 continue
-            rows = declarations(archive.extractfile(member).read().decode("utf-8"))
-            sources[member.name] = rows
-            for row in rows:
-                if inherited(row["name"]):
-                    identity = member.name + ":" + str(row["line"]) + ":" + row["name"]
-                    targets[identity] = {"source": member.name, **row}
+            sources[member.name] = archive.extractfile(member).read().decode("utf-8")
+    return sources
+
+
+@lru_cache(maxsize=4)
+def historical_source(root, revision):
+    sources, targets = {}, {}
+    for name, text in historical_texts(root, revision).items():
+        rows = declarations(text)
+        sources[name] = rows
+        for row in rows:
+            if inherited(row["name"]):
+                identity = name + ":" + str(row["line"]) + ":" + row["name"]
+                targets[identity] = {"source": name, **row}
     if not targets:
         raise ValueError("Semantic baseline has no inherited physical labels")
     return sources, targets
@@ -109,7 +124,8 @@ def validate(root=ROOT, index=None):
     for identity, row in targets.items():
         by_path[row["source"]].add(identity)
     seen_ids, seen_files, seen_packets, shard_names = set(), set(), set(), set()
-    profiles, mappings = {}, {}
+    profiles, mappings, transforms = {}, {}, {}
+    edited_coordinates = set()
     applied_count = 0
     for packet in value["packets"]:
         key = packet.get("id", "")
@@ -123,6 +139,8 @@ def validate(root=ROOT, index=None):
         shard = SHARDS + "/" + key + ".json"
         if packet.get("registry") != shard or not isinstance(packet.get("sources"), list) or not packet["sources"]:
             raise ValueError("Subsystem registry must have one owned shard and source list")
+        if not re.fullmatch(r"[0-9a-f]{64}", packet.get("destination_sha256", "")):
+            raise ValueError("Subsystem lacks its frozen reviewed destination binding")
         owned = set()
         for source in packet["sources"]:
             path, applicable = source.get("path"), source.get("profiles")
@@ -183,6 +201,49 @@ def validate(root=ROOT, index=None):
             }
         if actual != owned:
             raise ValueError("Applied subsystem has missing physical mappings")
+        if destination_hash(document["mappings"]) != packet["destination_sha256"]:
+            raise ValueError("Applied subsystem changed its reviewed semantic destinations")
+        if not isinstance(document.get("source_edits"), list) or not document["source_edits"]:
+            raise ValueError("Applied subsystem lacks its exact source-token edits")
+        transforms[key] = []
+        seen_consumers = set()
+        for consumer in document["source_edits"]:
+            path = consumer.get("source")
+            if (
+                path not in sources
+                or path in seen_consumers
+                or not isinstance(consumer.get("tokens"), list)
+                or not consumer["tokens"]
+            ):
+                raise ValueError("Invalid or duplicate semantic edit consumer")
+            seen_consumers.add(path)
+            explicit = []
+            for entry in consumer["tokens"]:
+                if not isinstance(entry, list) or len(entry) != 4:
+                    raise ValueError("Semantic edit needs code-line, token, mapping index and size suffix")
+                line, token, mapping, suffix = entry
+                if (
+                    type(line) is not int
+                    or type(token) is not int
+                    or type(mapping) is not int
+                    or not 0 <= mapping < len(document["mappings"])
+                    or suffix not in ("", ".b", ".w", ".l", ".B", ".W", ".L")
+                ):
+                    raise ValueError("Invalid semantic source-token edit")
+                coordinate = path, line, token
+                if coordinate in edited_coordinates:
+                    raise ValueError("Semantic source-token edits overlap")
+                edited_coordinates.add(coordinate)
+                selected = document["mappings"][mapping]
+                explicit.append(
+                    {
+                        "code_line": line,
+                        "token": token,
+                        "old": selected["old"] + suffix,
+                        "new": selected["new"] + suffix,
+                    }
+                )
+            transforms[key].append({"source": path, "edits": explicit})
         applied_count += len(actual)
     if seen_ids != set(targets) or seen_files != set(by_path):
         raise ValueError("Subsystem partition omits historical source or physical targets")
@@ -195,6 +256,20 @@ def validate(root=ROOT, index=None):
         raise ValueError("Semantic migration progress is stale")
     if (value["state"] == "complete") != (applied_count == len(targets)):
         raise ValueError("Semantic completion disagrees with applied physical scope")
+    order = value.get("applied_order")
+    if not isinstance(order, list) or len(order) != len(set(order)) or set(order) != set(transforms):
+        raise ValueError("Semantic edit order omits or duplicates an applied subsystem")
+    views = defaultdict(list)
+    for key in order:
+        for consumer in transforms[key]:
+            views[consumer["source"]].append(consumer["edits"])
+    result = {
+        "index": value,
+        "source_views": dict(views),
+        "target_count": len(targets),
+        "applied_targets": applied_count,
+    }
+    originals = historical_texts(str(root), value["baseline_commit"])
 
     # Physical declaration order survives inserted comments. Do not bind current
     # locations to old line numbers or accept a renamed pending definition.
@@ -204,7 +279,8 @@ def validate(root=ROOT, index=None):
         source = (root / path).resolve()
         if not source.is_relative_to(root) or not source.is_file():
             raise ValueError("Missing or escaping semantic source: " + path)
-        current = declarations(source.read_text(encoding="utf-8"))
+        text = source.read_text(encoding="utf-8")
+        current = declarations(text)
         if len(current) != len(original):
             raise ValueError("Semantic migration added or removed declarations: " + path)
         scope = ""
@@ -221,11 +297,21 @@ def validate(root=ROOT, index=None):
                 candidates[profile, qualified.lower()].add((path, after["line"]))
             if mapping:
                 records.append({**mapping, "qualified_new": qualified, "current_line": after["line"]})
+        restored = original_view(path, text, result)
+        if restored != originals[path] and code_fingerprint(restored) != code_fingerprint(originals[path]):
+            raise ValueError("Unregistered code, literal or context change in semantic source: " + path)
     for row in records:
         for profile in row["profiles"]:
             if len(candidates[profile, row["qualified_new"].lower()]) != 1:
                 raise ValueError("Semantic destination collides in its compilation scope")
-    return {"index": value, "mappings": records, "target_count": len(targets), "applied_targets": applied_count}
+    return {**result, "mappings": records}
+
+
+def original_view(path, text, result):
+    """Reverse only registered tokens; retain a strict historical statement view."""
+    for edits in reversed(result["source_views"].get(path, [])):
+        text = apply_edits(text, [{**row, "old": row["new"], "new": row["old"]} for row in edits])
+    return text
 
 
 def profile_maps(result):

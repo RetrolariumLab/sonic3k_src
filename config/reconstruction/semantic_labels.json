@@ -34,7 +34,8 @@
           "path": "src/audio/sk/level_music_transition.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "f621dd858512d2b1fa0250b0c54670f2f84a903f745aec3716aa89b59786859b"
     },
     {
       "id": "02-system",
@@ -71,7 +72,8 @@
           "path": "src/system/s3/video_interrupts.s",
           "profiles": ["s3-eu", "s3-jp", "s3-us"]
         }
-      ]
+      ],
+      "destination_sha256": "6f023c9fc39fe687b3a34ff39e71d86a41967f5c5d21acacacffa5b3e99cd646"
     },
     {
       "id": "03-object-runtime",
@@ -228,7 +230,8 @@
           "path": "src/objects/runtime/sk/visibility_and_culling.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "016b61a251c046f04eb01ccb377f85abe4125b28b64d032b7c4a1d4637a0cc20"
     },
     {
       "id": "04-collision",
@@ -301,7 +304,8 @@
           "path": "src/game/collision/sk/wall_probes.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "3a33742f7a10d9cf8e01e61b23fbd084ddffebbc9a71cfd3b3d6990c10ca76f3"
     },
     {
       "id": "05-player-common",
@@ -362,7 +366,8 @@
           "path": "src/objects/shared/bubbles/mappings/bubbler.s",
           "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"]
         }
-      ]
+      ],
+      "destination_sha256": "03d8a48a2d6b10a66efb0222445dc6ba8a1ed7785eee86077a7fae37677f5df4"
     },
     {
       "id": "06-player-sonic",
@@ -491,7 +496,8 @@
           "path": "src/objects/shared/sonic/mappings/surfboarding.s",
           "profiles": ["s3-eu", "s3-jp", "s3-us"]
         }
-      ]
+      ],
+      "destination_sha256": "c36f8987d41b2b4d6e9cbe1f490201a2f33a313f5129facac77c1f0d8117ac66"
     },
     {
       "id": "07-player-tails",
@@ -672,7 +678,8 @@
           "path": "src/objects/shared/tails/mappings/tails.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "e16dfba0f0610aaae15f687bccecc066c6b19bd289638e953295584b8e495bf0"
     },
     {
       "id": "08-player-knuckles",
@@ -737,7 +744,8 @@
           "path": "src/objects/shared/knuckles/mappings/sstage_knuckles.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "4927f637f2f6e32374f15c1346926eb67be206fd44364c11a6ffc07dd3ace3ee"
     },
     {
       "id": "09-object-motion",
@@ -918,7 +926,8 @@
           "path": "src/objects/shared/tension_bridge/sk/state_and_segments.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "cfce512de252c6e7b8ae7662ca0b18d5062cc91e3519f4d08280032d6501450b"
     },
     {
       "id": "10-object-solids",
@@ -1011,7 +1020,8 @@
           "path": "src/objects/shared/sk/smashing_pillar.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "2913842ca7207c8f63f186cae7d028aaeaab0866ae5cd168ef06e3f66272215f"
     },
     {
       "id": "11-object-hazards",
@@ -1084,7 +1094,8 @@
           "path": "src/objects/shared/sk/water_drop.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "8856d28bf4b364b7b35fb322d7c984e817c595edb444831c280c0f1b23089618"
     },
     {
       "id": "12-collectibles",
@@ -1177,7 +1188,8 @@
           "path": "src/objects/shared/starpost/mappings/stars.s",
           "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"]
         }
-      ]
+      ],
+      "destination_sha256": "bc4615969af7c27f6855607d14af7c05d8be170ab0e51eb1bf9e913c5c6ae2fc"
     },
     {
       "id": "13-effects",
@@ -1366,7 +1378,8 @@
           "path": "src/objects/shared/sk/animals_and_score.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "c7789136cffd0eec54c166dc1f50966f35a84821f4e5b8b4947ae665e668178c"
     },
     {
       "id": "14-level-results",
@@ -1479,7 +1492,8 @@
           "path": "src/rendering/sk/hud.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "9e6a55ca43b682d4989b74d42f478c6c6af89a394e7f638539772fad1eab7dd9"
     },
     {
       "id": "15-world-sprites",
@@ -1540,7 +1554,8 @@
           "path": "src/objects/shared/world/still_sprites/mappings/s3.s",
           "profiles": ["s3-eu", "s3-jp", "s3-us"]
         }
-      ]
+      ],
+      "destination_sha256": "f956ba6f79df6564c11660dc8d02fb876964d49f6db6616024a720d58abb2b24"
     },
     {
       "id": "16-sprite-rendering",
@@ -1585,7 +1600,8 @@
           "path": "src/rendering/sk/normal_sprite_renderer.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "d813da71ece651852469a18cbb738913a136aafd4cb4a79730a88b347d1290fe"
     },
     {
       "id": "17-tile-rendering",
@@ -1678,7 +1694,8 @@
           "path": "src/rendering/tile_animation/sk/script_player.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "73028a99b2f3a572b93e1803c15f672d28fd6f907f3982d329ac379dc55bc5bb"
     },
     {
       "id": "18-palettes",
@@ -1739,7 +1756,8 @@
           "path": "src/rendering/palettes/sk/zone_cycles.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "75177f7abd7ff79149d6dac674346664ad31a0e60713a03949fd6fded22994dc"
     },
     {
       "id": "19-compression",
@@ -1764,7 +1782,8 @@
           "path": "src/rendering/compression/s3/nemesis_queue.s",
           "profiles": ["s3-eu", "s3-jp", "s3-us"]
         }
-      ]
+      ],
+      "destination_sha256": "cf0bc319f47e60564ecdff05edfc2d4af9bc950620c0ba5b42d9a7a45c321d9f"
     },
     {
       "id": "20-level-lifecycle",
@@ -1829,7 +1848,8 @@
           "path": "src/game/modes/s3/pause.s",
           "profiles": ["s3-eu", "s3-jp", "s3-us"]
         }
-      ]
+      ],
+      "destination_sha256": "2aefc182c808e4d513dcd47c48184770e55c9c3bf346bf2870c5309d605c808b"
     },
     {
       "id": "21-camera",
@@ -1878,7 +1898,8 @@
           "path": "src/game/level/sk/scroll_events.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "12d544164162c125c256cda03ccbeaab69ed96eb69689a09dfeaf3f6aa7ecaa1"
     },
     {
       "id": "22-level-environment",
@@ -1935,7 +1956,8 @@
           "path": "src/game/level/sk/water_tunnel_motion.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "459a79a2984e755ab6035d7ba83aa92a2e52e33656191672211b2e20db6cf45f"
     },
     {
       "id": "23-zone-aiz",
@@ -2240,7 +2262,8 @@
           "path": "src/rendering/zones/aiz/sk/tile_animation.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "7a238e551000340a3edff37633014653e3ca7e4da4a674071898c86ce97640ec"
     },
     {
       "id": "24-zone-hcz",
@@ -2541,7 +2564,8 @@
           "path": "src/rendering/zones/hcz/sk/tile_animation.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "d1fd08824bafd74e0316b29f26167d4c3652007708ee7cfe887db692716c6245"
     },
     {
       "id": "25-zone-mgz",
@@ -2770,7 +2794,8 @@
           "path": "src/objects/zones/mgz/top_platform/sk/terrain_physics.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "462c60cdc011cced7d03737844cd2f815df7740fee398615f308cb23f0f76f60"
     },
     {
       "id": "26-zone-cnz",
@@ -2999,7 +3024,8 @@
           "path": "src/objects/zones/cnz/sk/wire_cage.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "65e0c8d98e6757877e976efb21701c8e57f25270507a23187da3f20fd6f6f127"
     },
     {
       "id": "27-zone-fbz",
@@ -3280,7 +3306,8 @@
           "path": "src/objects/zones/fbz/sk/wire_cages.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "bb8d399fe1a84dd76a89b1303732a7f408cacc61a337e9c05428a16450ae6276"
     },
     {
       "id": "28-zone-icz",
@@ -3489,7 +3516,8 @@
           "path": "src/rendering/zones/icz/sk/tile_animation.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "ee52ae2802eec89bf58d5d1983283fa10912c6353e1ce665f2a4541344ad7ded"
     },
     {
       "id": "29-zone-lbz",
@@ -3830,7 +3858,8 @@
           "path": "src/rendering/zones/lbz/sk/tile_animation.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "609e2fc5223fea4e2d86bd1eb31d40f7a00e40995a550efd50ed66ab8c925d27"
     },
     {
       "id": "30-zone-mhz",
@@ -3979,7 +4008,8 @@
           "path": "src/rendering/zones/mhz/sk/tile_animation.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "c59362760afdc42c4b923f7f90a8e933dfe5eb222daa89cb59fb3eb3f0eb762a"
     },
     {
       "id": "31-zone-soz",
@@ -4148,7 +4178,8 @@
           "path": "src/rendering/zones/soz/sk/tile_animation.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "eded1a425cea20a848741e52b56442e7d5ec112c2d585b90b5916197251870f5"
     },
     {
       "id": "32-zone-lrz",
@@ -4421,7 +4452,8 @@
           "path": "src/rendering/zones/lrz/sk/tile_animation.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "3731b26c3abb8d24d9fee374c5fabe38ae64cbd50c7c815f5f518c46d729384f"
     },
     {
       "id": "33-zone-ssz",
@@ -4558,7 +4590,8 @@
           "path": "src/objects/zones/ssz/sk/teleporter_beam.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "ba7b999472594b4dbc08d16dbccc5531c1d90719b3e858b1bb0ef1ac7f64ac23"
     },
     {
       "id": "34-zone-dez",
@@ -4751,7 +4784,8 @@
           "path": "src/objects/zones/dez/sk/tunnel_launcher.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "b9ccc615c52b0d2a0938c5973ad339dacc0b836748c547cab948bd5d4e69800c"
     },
     {
       "id": "35-zone-hpz",
@@ -4800,7 +4834,8 @@
           "path": "src/objects/zones/hpz/sk/super_emerald.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "de51e8af229acd83a77ea68f148200071cf72ced5d8e22f21588440094d887d1"
     },
     {
       "id": "35b-enemies-sk",
@@ -4965,7 +5000,8 @@
           "path": "src/objects/shared/toxomister/mappings/toxomister.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "e8dc30ab584888f7a2ce10fa9ee6574e9c36bdd84d823ff7bd2f6b3a683c8c7a"
     },
     {
       "id": "36-boss-aiz",
@@ -5042,7 +5078,8 @@
           "path": "src/objects/shared/zones/aiz/miniboss/mappings/small.s",
           "profiles": ["s3-eu", "s3-jp", "s3-us"]
         }
-      ]
+      ],
+      "destination_sha256": "56244ebbefffca7ac5789105eaa1bbfd513a7e5cad9be4c91c38cd5446fa9b55"
     },
     {
       "id": "37-boss-hcz",
@@ -5139,7 +5176,8 @@
           "path": "src/objects/shared/zones/hcz/miniboss/mappings/splash.s",
           "profiles": ["s3-eu", "s3-jp", "s3-us"]
         }
-      ]
+      ],
+      "destination_sha256": "1c6bf9fb0c8c9a33fb8214449e0eb8c8c56ef6553aacce61b94f5310052e458d"
     },
     {
       "id": "38-boss-mgz",
@@ -5228,7 +5266,8 @@
           "path": "src/objects/shared/zones/mgz/miniboss/mappings/spires.s",
           "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"]
         }
-      ]
+      ],
+      "destination_sha256": "d423e7cb66adbe74da48caa02695400a66d35e9a5b159a65b57e915c4e20250d"
     },
     {
       "id": "39-boss-cnz",
@@ -5297,7 +5336,8 @@
           "path": "src/objects/shared/zones/cnz/mappings/miniboss.s",
           "profiles": ["s3-eu", "s3-jp", "s3-us"]
         }
-      ]
+      ],
+      "destination_sha256": "16273d0e68caa82190b3952b4f3317b950f3214b9ba3dcde1f48094b24cba463"
     },
     {
       "id": "40-boss-fbz",
@@ -5386,7 +5426,8 @@
           "path": "src/objects/shared/zones/fbz/mappings/miniboss.s",
           "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"]
         }
-      ]
+      ],
+      "destination_sha256": "ea36920357a9ba79ec20cadb76fc42bd90f506b3440ac101de12453c20b17f15"
     },
     {
       "id": "41-boss-icz",
@@ -5427,7 +5468,8 @@
           "path": "src/objects/shared/zones/icz/mappings/miniboss.s",
           "profiles": ["s3-eu", "s3-jp", "s3-us"]
         }
-      ]
+      ],
+      "destination_sha256": "6057f81faad28c1fad5cc8b3906c23faca75147a69202cffb290bdd3732de897"
     },
     {
       "id": "42-boss-lbz-main",
@@ -5492,7 +5534,8 @@
           "path": "src/objects/shared/zones/lbz/miniboss/mappings/box.s",
           "profiles": ["s3-eu", "s3-jp", "s3-us"]
         }
-      ]
+      ],
+      "destination_sha256": "63201de777256bce567a3681e5753327a9c459136b42a12db355e5749b16e4ea"
     },
     {
       "id": "43-boss-lbz-final-1",
@@ -5529,7 +5572,8 @@
           "path": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
           "profiles": ["s3-eu", "s3-jp", "s3-us"]
         }
-      ]
+      ],
+      "destination_sha256": "b729e437585658486f02f283eec08359c2c1799b601bb21d78e7d8b430d76b8e"
     },
     {
       "id": "44-boss-lbz-final-2",
@@ -5578,7 +5622,8 @@
           "path": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
           "profiles": ["s3-eu", "s3-jp", "s3-us"]
         }
-      ]
+      ],
+      "destination_sha256": "5a13437c82bcab1bab42e959265a88840b128212255be80e635e828916ecec19"
     },
     {
       "id": "45-boss-mhz",
@@ -5639,7 +5684,8 @@
           "path": "src/objects/shared/zones/mhz/miniboss/mappings/tree.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "611d3ba813083a57809f222d0a0098e28c7b3eb2dd151cfa6b71301fd6c75ac5"
     },
     {
       "id": "46-boss-soz",
@@ -5688,7 +5734,8 @@
           "path": "src/objects/shared/zones/soz/miniboss/mappings/landing_dust.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "9615b08798b1f1931978a7830319734132b868d0bb233fa59cdf12fe810ec8f8"
     },
     {
       "id": "47-boss-lrz",
@@ -5733,7 +5780,8 @@
           "path": "src/objects/shared/zones/lrz/mappings/miniboss.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "97fa35fcef20af6d34109ec3dc6612eaf449f3195984fff2ba76c3876843321a"
     },
     {
       "id": "48-boss-ssz-mecha",
@@ -5810,7 +5858,8 @@
           "path": "src/objects/shared/zones/ssz/mappings/mtz_orbs.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "6e50181796ac17a8634e125d37e88e18d70752ffbab80b5909ad76f78ffb7363"
     },
     {
       "id": "49-boss-ssz-knuckles",
@@ -5831,7 +5880,8 @@
           "path": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "7e8057f817dcc0e6f6d62303a6c34eaca5eafc0bbd600a0f9f9ba540e105b336"
     },
     {
       "id": "50-boss-dez-mini",
@@ -5860,7 +5910,8 @@
           "path": "src/objects/shared/zones/dez/mappings/miniboss.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "cf922fbc81af6a5c197c26d88b9361c4badce4778bc76f2e04c76f3a11c908f5"
     },
     {
       "id": "51-boss-dez-end",
@@ -5889,7 +5940,8 @@
           "path": "src/objects/shared/zones/dez/mappings/end_boss.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "dd0c4040ae3cd0ff0ccdd23a31687cf6ff30986c015932550e3b45b97100452f"
     },
     {
       "id": "52-boss-dez-final",
@@ -5942,7 +5994,8 @@
           "path": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "c2239da2091b7e1bd7dea95757944a65fd390d39be43641c1c2bd564e0ab63bb"
     },
     {
       "id": "53-boss-ddz",
@@ -5991,7 +6044,8 @@
           "path": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "8653e90521df1dedcbdae0d71362a6bc8dcff4234b55244769ff105116897512"
     },
     {
       "id": "54-boss-common",
@@ -6044,7 +6098,8 @@
           "path": "src/objects/shared/robotnik/mappings/ship_pieces.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "d4678d2d5e2e6134809b0ffa349f7cd021f38a55803e4ae05c4fa1d52a3c6f65"
     },
     {
       "id": "55-title",
@@ -6165,7 +6220,8 @@
           "path": "src/ui/shared/title/mappings/sk_tm.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "36d8084b2757b144dbf6db32636b41f0da05d7139aaad2ec3bf9b87b59711af9"
     },
     {
       "id": "56-save",
@@ -6234,7 +6290,8 @@
           "path": "src/ui/shared/save_menu/mappings/save_screen_general.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "0fe7ad3fcbdad21fb6bb0b135e6345e8d3e3431b67d2a4c04b2733898b0d4081"
     },
     {
       "id": "57-continue",
@@ -6275,7 +6332,8 @@
           "path": "src/ui/shared/continue/mappings/player_sprites_s3.s",
           "profiles": ["s3-eu", "s3-jp", "s3-us"]
         }
-      ]
+      ],
+      "destination_sha256": "1e1fb18891b7a59b369d2cdb6eec82160e6c8765cf7974780b9fa29c045a46d5"
     },
     {
       "id": "58-competition-ui",
@@ -6340,7 +6398,8 @@
           "path": "src/ui/shared/competition_menu/mappings/competition_select.s",
           "profiles": ["s3-eu", "s3-jp", "s3-us"]
         }
-      ]
+      ],
+      "destination_sha256": "cd5755fc855610b58e9693ee6d11fc2b235c741891a439f6983b8a37609aac22"
     },
     {
       "id": "59-competition-race",
@@ -6529,7 +6588,8 @@
           "path": "src/objects/zones/emz/sk/dripper.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "b1b71584954d865e47aad12f4c6af6d923e7cb13d4dcb3bee9dd0f2ea6195b8f"
     },
     {
       "id": "60-special-stage",
@@ -6686,7 +6746,8 @@
           "path": "src/objects/special_stage/sk/entry_ring.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "ec7756d6bd8e2cffcd88861729a5f0289b4716cd3e7a6227e2372bebbf05d4a0"
     },
     {
       "id": "61-blue-sphere",
@@ -6767,7 +6828,8 @@
           "path": "src/objects/interface/blue_sphere/sk/difficulty_widgets.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "198f1cfda7a134a04dc14daf2205b77939cd4b9ee9f48336b02a84ba64d063cd"
     },
     {
       "id": "62-bonus-gumball",
@@ -6796,7 +6858,8 @@
           "path": "src/objects/shared/zones/gumball/mappings/bonus.s",
           "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"]
         }
-      ]
+      ],
+      "destination_sha256": "100f37bbb5ba43a7ca28318af65cfef0eaed8e307b9c10febc43d2db2d138d8c"
     },
     {
       "id": "63-bonus-pachinko",
@@ -6877,7 +6940,8 @@
           "path": "src/objects/shared/zones/pachinko/mappings/triangle_bumper.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "a05bae0458658b0b21264ae82203425ac3f0a8020f5734e292a0d223ed7948a8"
     },
     {
       "id": "64-bonus-slots",
@@ -6950,7 +7014,8 @@
           "path": "src/objects/shared/zones/slots/mappings/spike.s",
           "profiles": ["sk"]
         }
-      ]
+      ],
+      "destination_sha256": "92916a5c7f93ec4ce21c3a44b3fa61ae40c1859b3fcdf30dc423aac755291815"
     },
     {
       "id": "65-cutscenes",
@@ -7147,7 +7212,8 @@
           "path": "src/objects/shared/zones/lbz/mappings/knuckles_pillar.s",
           "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"]
         }
-      ]
+      ],
+      "destination_sha256": "6c111444056376854f1fdd0371d76ffc1dce7017eb0281b51ae63d15b7e8113f"
     },
     {
       "id": "66-ending",
@@ -7324,7 +7390,8 @@
           "path": "src/ui/shared/ending/mappings/sonic_tails_s3.s",
           "profiles": ["s3-eu", "s3-jp", "s3-us"]
         }
-      ]
+      ],
+      "destination_sha256": "bcc142840510b17e81711e6db0b843da0364e374eab3845172ca7a1a07d08e17"
     },
     {
       "id": "67-memory",
@@ -7345,7 +7412,9 @@
           "path": "src/memory/shared/ram.inc",
           "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"]
         }
-      ]
+      ],
+      "destination_sha256": "2a8b468be40711f1f8204721cd11259cc0427de1e0a5921cb45e223f8e266457"
     }
-  ]
+  ],
+  "applied_order": []
 }

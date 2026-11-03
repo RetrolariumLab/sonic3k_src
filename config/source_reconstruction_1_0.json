@@ -801,9 +801,15 @@
       "commits": ["6005f6cc6bbb83995aed07030ed01ebcbd00cf8f"]
     },
     {
-      "id": "current-incremental-label-registry",
+      "id": "change-6f4587ab040e",
       "kind": "tooling",
       "summary": "Validate the immutable35470-label subsystem partition and partially applied semantic mapping shards while preserving the completed1571-procedure registry.",
+      "commits": ["6f4587ab040e4cae0eca368849b76184deebcac5"]
+    },
+    {
+      "id": "current-reversible-semantic-tokens",
+      "kind": "tooling",
+      "summary": "Bind reviewed destination names and exact symbol-token edits; restore historical source views without admitting instruction, literal or context changes.",
       "commits": ["release-commit"]
     }
   ],

@@ -11,12 +11,15 @@ from scripts.build.project import ROOT
 from scripts.validation.semantic_labels import (
     INDEX,
     SHARDS,
+    destination_hash,
     historical_source,
     inherited,
+    original_view,
     profile_maps,
     scope_hash,
     validate,
 )
+from scripts.validation.semantic_label_edits import code_lines
 
 
 class IncrementalLabelTests(unittest.TestCase):
@@ -68,11 +71,21 @@ class IncrementalLabelTests(unittest.TestCase):
             "scope_sha256": scope_hash(cls.targets),
             "state": "in-progress",
             "applied_targets": 0,
+            "applied_order": [],
             "packets": [],
         }
         for index, path in enumerate(cls.original, 1):
             ids = [identity for identity, row in cls.targets.items() if row["source"] == path]
             key = str(index) + "-fixture"
+            destinations = [
+                {
+                    "source": path,
+                    "original_line": cls.targets[identity]["line"],
+                    "old": cls.targets[identity]["name"],
+                    "new": cls.proposed(cls.targets[identity]["name"]),
+                }
+                for identity in ids
+            ]
             cls.example["packets"].append(
                 {
                     "id": key,
@@ -81,8 +94,13 @@ class IncrementalLabelTests(unittest.TestCase):
                     "sources": [{"path": path, "profiles": ["s3-us" if index == 1 else "sk"]}],
                     "target_count": len(ids),
                     "scope_sha256": scope_hash(ids),
+                    "destination_sha256": destination_hash(destinations),
                 }
             )
+
+    @staticmethod
+    def proposed(name):
+        return ".RetryLoop" if name.startswith(".") else "ReadFixture" if name == "loc_100" else "ReturnFixture"
 
     def setUp(self):
         self.index = copy.deepcopy(self.example)
@@ -101,7 +119,7 @@ class IncrementalLabelTests(unittest.TestCase):
             if target["source"] != path:
                 continue
             name = target["name"]
-            new = ".RetryLoop" if name.startswith(".") else "ReadFixture" if name == "loc_100" else "ReturnFixture"
+            new = self.proposed(name)
             rows.append(
                 {
                     "source": path,
@@ -113,15 +131,25 @@ class IncrementalLabelTests(unittest.TestCase):
                 }
             )
         document = {"schema_version": 1, "packet": packet["id"], "mappings": rows}
-        (self.root / packet["registry"]).write_text(json.dumps(document), encoding="utf-8")
         text = (
             self.original[path]
             .replace("._1", ".RetryLoop")
             .replace("locret_110:", "ReturnFixture:")
             .replace("loc_100:", "ReadFixture:")
         )
+        edits = []
+        for code_line, ((_, before), (_, after)) in enumerate(
+            zip(code_lines(self.original[path]), code_lines(text)), 1
+        ):
+            for token, (old, new) in enumerate(zip(before, after)):
+                if old.text != new.text:
+                    mapping = next(i for i, r in enumerate(rows) if (r["old"], r["new"]) == (old.text, new.text))
+                    edits.append([code_line, token, mapping, ""])
+        document["source_edits"] = [{"source": path, "tokens": edits}]
+        self.write_document(document, number)
         (self.root / path).write_text("; Explain the retained fixture branch.\n" + text, encoding="utf-8")
         packet["state"] = "applied"
+        self.index["applied_order"].append(packet["id"])
         self.index["applied_targets"] += len(rows)
         if self.index["applied_targets"] == self.index["target_count"]:
             self.index["state"] = "complete"
@@ -195,6 +223,7 @@ class IncrementalLabelTests(unittest.TestCase):
             row["new"] = new
             self.write_document(changed)
             if new == ".Existing":
+                self.index["packets"][0]["destination_sha256"] = destination_hash(changed["mappings"])
                 name = row["source"]
                 text = (self.root / name).read_text().replace(".RetryLoop", ".Existing", 1)
                 (self.root / name).write_text(text, encoding="utf-8")
@@ -234,6 +263,47 @@ class IncrementalLabelTests(unittest.TestCase):
             self.assertFalse(inherited(name), name)
         for name in ("Frame_1234", "locret_1234", "loc_FACE", "._100", "_unkEF44_1", "_tempFF88"):
             self.assertTrue(inherited(name), name)
+
+    def test_original_view_restores_every_registered_reference(self):
+        self.apply()
+        result = validate(self.root, self.index)
+        path = self.index["packets"][0]["sources"][0]["path"]
+        self.assertEqual(
+            original_view(path, (self.root / path).read_text(), result),
+            "; Explain the retained fixture branch.\n" + self.original[path],
+        )
+
+    def test_unregistered_code_literals_and_context_changes_fail(self):
+        path = self.index["packets"][0]["sources"][0]["path"]
+        for old, new in ((" rts", " nop"), ('"loc_100"', '"ReadFixture"'), ("bra.s", "bra.w")):
+            (self.root / path).write_text(self.original[path].replace(old, new), encoding="utf-8")
+            with self.subTest(old=old), self.assertRaisesRegex(ValueError, "Unregistered code"):
+                validate(self.root, self.index)
+
+    def test_destinations_cannot_drift_from_the_reviewed_catalog(self):
+        document = self.apply()
+        document["mappings"][0]["new"] = "OtherMeaning"
+        self.write_document(document)
+        with self.assertRaisesRegex(ValueError, "reviewed semantic destinations"):
+            validate(self.root, self.index)
+
+    def test_missing_and_overlapping_source_tokens_fail(self):
+        document = self.apply()
+        for mode in ("missing", "overlapping"):
+            changed = copy.deepcopy(document)
+            if mode == "missing":
+                changed["source_edits"][0]["tokens"].pop()
+            else:
+                changed["source_edits"][0]["tokens"].append(copy.deepcopy(changed["source_edits"][0]["tokens"][0]))
+            self.write_document(changed)
+            with self.subTest(mode=mode), self.assertRaises(ValueError):
+                validate(self.root, self.index)
+
+    def test_applied_source_order_must_account_for_every_subsystem(self):
+        self.apply()
+        self.index["applied_order"] = []
+        with self.assertRaisesRegex(ValueError, "edit order"):
+            validate(self.root, self.index)
 
 
 if __name__ == "__main__":
