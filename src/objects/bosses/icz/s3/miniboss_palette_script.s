@@ -1,7 +1,7 @@
 ; Owner: objects/bosses/icz/s3
 ; Responsibility: IceCap miniboss palette script pointers, header, colour frames and script terminator
 ; Source provenance and ranges: config/reconstruction/source_layout.json
-word_4EBE2:     palscriptptr .header, .data
+ICZMiniS3_DefeatPaletteScript:  palscriptptr .header, .data
                 dc.w    0
                 .header: palscripthdr Normal_palette_line_4+$02, 10, 2-1
                 .data:  palscriptdata 8, $EEC, $CC6, $C80, $C60, $C40, $A40, $820, $620, $200, $600

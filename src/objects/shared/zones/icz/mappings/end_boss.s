@@ -1,90 +1,90 @@
 ; Data owner: objects/shared/zones/icz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_ICZEndBoss_:
-                dc.w    Frame_362CE6-Map_ICZEndBoss_
-                dc.w    Frame_362D06-Map_ICZEndBoss_
-                dc.w    Frame_362D14-Map_ICZEndBoss_
-                dc.w    Frame_362D2E-Map_ICZEndBoss_
-                dc.w    Frame_362D3C-Map_ICZEndBoss_
-                dc.w    Frame_362D4A-Map_ICZEndBoss_
-                dc.w    Frame_362D52-Map_ICZEndBoss_
-                dc.w    Frame_362D5A-Map_ICZEndBoss_
-                dc.w    Frame_362D62-Map_ICZEndBoss_
-                dc.w    Frame_362D6A-Map_ICZEndBoss_
-                dc.w    Frame_362D72-Map_ICZEndBoss_
-                dc.w    Frame_362D7A-Map_ICZEndBoss_
-                dc.w    Frame_362D82-Map_ICZEndBoss_
-                dc.w    Frame_362D8A-Map_ICZEndBoss_
-                dc.w    Frame_362D92-Map_ICZEndBoss_
-                dc.w    Frame_362D9A-Map_ICZEndBoss_
-                dc.w    Frame_362DA2-Map_ICZEndBoss_
-                dc.w    Frame_362DAA-Map_ICZEndBoss_
-                dc.w    Frame_362DB2-Map_ICZEndBoss_
-                dc.w    Frame_362DBA-Map_ICZEndBoss_
-                dc.w    Frame_362DC2-Map_ICZEndBoss_
-                dc.w    Frame_362DCA-Map_ICZEndBoss_
-                dc.w    Frame_362DD2-Map_ICZEndBoss_
-                dc.w    Frame_362DDA-Map_ICZEndBoss_
-                dc.w    Frame_362DE2-Map_ICZEndBoss_
-Frame_362CE6:   dc.w    5
+                dc.w    ICZEndBossS3_MapFrame00-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame01-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame02-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame03-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame04-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame05-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame06-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame07-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame08-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame09-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame0A-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame0B-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame0C-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame0D-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame0E-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame0F-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame10-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame11-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame12-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame13-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame14-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame15-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame16-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame17-Map_ICZEndBoss_
+                dc.w    ICZEndBossS3_MapFrame18-Map_ICZEndBoss_
+ICZEndBossS3_MapFrame00:    dc.w    5
                 dc.b    $F4,  $F,   0,   0, $FF, $DC
                 dc.b    $F4,  $F,   0, $10, $FF, $FC
                 dc.b    $14,  $C,   0, $20, $FF, $EC
                 dc.b    $14,   0,   0, $24,   0,  $C
                 dc.b    $1C,   0,   0, $25, $FF, $FC
-Frame_362D06:   dc.w    2
+ICZEndBossS3_MapFrame01:    dc.w    2
                 dc.b    $EC,   7,   0, $26, $FF, $F8
                 dc.b    $C,   4,   0, $2E, $FF, $F8
-Frame_362D14:   dc.w    4
+ICZEndBossS3_MapFrame02:    dc.w    4
                 dc.b    $D4,   3,   0, $30, $FF, $F8
                 dc.b    $D4,   3,   8, $30,   0,   0
                 dc.b    $F4,  $A,   0, $34, $FF, $E8
                 dc.b    $F4,  $A,   8, $34,   0,   0
-Frame_362D2E:   dc.w    2
+ICZEndBossS3_MapFrame03:    dc.w    2
                 dc.b    $F8,   1,   0, $3D, $FF, $EC
                 dc.b    $F8,  $D,   0, $3F, $FF, $F4
-Frame_362D3C:   dc.w    2
+ICZEndBossS3_MapFrame04:    dc.w    2
                 dc.b    $F8,   1,   0, $3D, $FF, $EC
                 dc.b    $F8,  $D,   0, $47, $FF, $F4
-Frame_362D4A:   dc.w    1
+ICZEndBossS3_MapFrame05:    dc.w    1
                 dc.b    $F8,   5,   0, $4F, $FF, $F8
-Frame_362D52:   dc.w    1
+ICZEndBossS3_MapFrame06:    dc.w    1
                 dc.b    $F4,  $A,   0, $53, $FF, $F4
-Frame_362D5A:   dc.w    1
+ICZEndBossS3_MapFrame07:    dc.w    1
                 dc.b    $F4,  $A,   0, $5C, $FF, $F4
-Frame_362D62:   dc.w    1
+ICZEndBossS3_MapFrame08:    dc.w    1
                 dc.b    $F4,  $A,   0, $65, $FF, $F4
-Frame_362D6A:   dc.w    1
+ICZEndBossS3_MapFrame09:    dc.w    1
                 dc.b    $F4,  $A,   0, $6E, $FF, $F4
-Frame_362D72:   dc.w    1
+ICZEndBossS3_MapFrame0A:    dc.w    1
                 dc.b    $F8,   9,   0, $77, $FF, $F4
-Frame_362D7A:   dc.w    1
+ICZEndBossS3_MapFrame0B:    dc.w    1
                 dc.b    $F0,  $F,   0, $7D, $FF, $F0
-Frame_362D82:   dc.w    1
+ICZEndBossS3_MapFrame0C:    dc.w    1
                 dc.b    $F0,  $F,   0, $8D, $FF, $F0
-Frame_362D8A:   dc.w    1
+ICZEndBossS3_MapFrame0D:    dc.w    1
                 dc.b    $F0,  $F,   0, $9D, $FF, $F0
-Frame_362D92:   dc.w    1
+ICZEndBossS3_MapFrame0E:    dc.w    1
                 dc.b    $F0,  $F,   0, $AD, $FF, $F0
-Frame_362D9A:   dc.w    1
+ICZEndBossS3_MapFrame0F:    dc.w    1
                 dc.b    $F0,  $F,   0, $BD, $FF, $F0
-Frame_362DA2:   dc.w    1
+ICZEndBossS3_MapFrame10:    dc.w    1
                 dc.b    $FC,   0,   0, $CD, $FF, $FC
-Frame_362DAA:   dc.w    1
+ICZEndBossS3_MapFrame11:    dc.w    1
                 dc.b    $F8,   5,   0, $CE, $FF, $F8
-Frame_362DB2:   dc.w    1
+ICZEndBossS3_MapFrame12:    dc.w    1
                 dc.b    $F8,   5,   0, $D2, $FF, $F8
-Frame_362DBA:   dc.w    1
+ICZEndBossS3_MapFrame13:    dc.w    1
                 dc.b    $F8,   5,   0, $D6, $FF, $F8
-Frame_362DC2:   dc.w    1
+ICZEndBossS3_MapFrame14:    dc.w    1
                 dc.b    $F8,   5,   0, $DA, $FF, $F8
-Frame_362DCA:   dc.w    1
+ICZEndBossS3_MapFrame15:    dc.w    1
                 dc.b    $F8,   5,   0, $DE, $FF, $F8
-Frame_362DD2:   dc.w    1
+ICZEndBossS3_MapFrame16:    dc.w    1
                 dc.b    $F0,  $F,   0,   0, $FF, $F0
-Frame_362DDA:   dc.w    1
+ICZEndBossS3_MapFrame17:    dc.w    1
                 dc.b    $F0,  $F,   0, $10, $FF, $F0
-Frame_362DE2:   dc.w    3
+ICZEndBossS3_MapFrame18:    dc.w    3
                 dc.b    $F8,  $C,   0, $20, $FF, $EC
                 dc.b    $F8,   0,   0, $24,   0,  $C
                 dc.b    0,   0,   0, $25, $FF, $FC

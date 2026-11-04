@@ -17140,7 +17140,7 @@
       "responsibility": "IceCap end-boss lifecycle, attacks, child actors, helpers and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 781,
+      "physical_lines": 784,
       "origin": {
         "commit": "995400f4b92884b1e428dc4a5225824813b45712",
         "path": "s3.s",
@@ -17185,7 +17185,7 @@
       "responsibility": "IceCap miniboss lifecycle, attacks, child actors, helpers and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 854,
+      "physical_lines": 857,
       "origin": {
         "commit": "995400f4b92884b1e428dc4a5225824813b45712",
         "path": "s3.s",
@@ -17270,7 +17270,7 @@
       "responsibility": "IceCap end-boss lifecycle, attacks, child actors, helpers and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 791,
+      "physical_lines": 795,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
@@ -17305,7 +17305,7 @@
       "responsibility": "IceCap miniboss lifecycle, attacks, child actors, helpers and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 852,
+      "physical_lines": 855,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
@@ -17340,7 +17340,7 @@
       "responsibility": "IceCap miniboss palette script pointers, header, colour frames and script terminator.",
       "role": "data",
       "status": "owned",
-      "physical_lines": 79,
+      "physical_lines": 81,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",

@@ -5,10 +5,10 @@
 
 Obj_ICZMiniboss:
                 cmpi.w  #$501,(Apparent_zone_and_act).w
-                beq.s   loc_4E3E6
-                lea     word_4E3EC(pc),a1
+                beq.s   ICZMiniS3_DeleteForAct0501
+                lea     ICZMiniS3_ArenaCameraTriggerBounds(pc),a1
                 jsr     (Check_CameraInRange).l
-                move.l  #loc_4E3F4,(a0)
+                move.l  #ICZMiniS3_TickArenaTransition,(a0)
                 move.b  #1,(Boss_flag).w
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
@@ -19,91 +19,92 @@ Obj_ICZMiniboss:
                 move.w  #$2B8,(Camera_target_max_Y_pos).w
                 move.w  #$6F0,$1C(a0)
                 move.w  #$6F0,(Camera_max_X_pos).w
-                move.l  #loc_4E3FA,$34(a0)
+                move.l  #ICZMiniS3_InstallBattleDispatcher,$34(a0)
                 moveq   #PLCID_5F,d0
                 jsr     (Load_PLC).l
                 lea     Pal_ICZMiniboss(pc),a1
                 jmp     PalLoad_Line1(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4E3E6:
+ICZMiniS3_DeleteForAct0501:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
-word_4E3EC:
+ICZMiniS3_ArenaCameraTriggerBounds:
                 dc.w    0,  $380,  $690,  $6F0
 ; ---------------------------------------------------------------------------
 
-loc_4E3F4:
+ICZMiniS3_TickArenaTransition:
                 jmp     (S3EndCamera_TickMusicDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_4E3FA:
-                move.l  #loc_4E402,(a0)
+ICZMiniS3_InstallBattleDispatcher:
+                move.l  #ICZMiniS3_BattleDispatchHitAndDraw,(a0)
 
-locret_4E400:
+ICZMiniS3_SharedReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4E402:
+ICZMiniS3_BattleDispatchHitAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_4E418(pc,d0.w),d1
-                jsr     off_4E418(pc,d1.w)
+                move.w  ICZMiniS3_BattleStateOffsets(pc,d0.w),d1
+                jsr     ICZMiniS3_BattleStateOffsets(pc,d1.w)
                 bsr.w   HandleICZMinibossTwoColorHitOrDefeat
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
-off_4E418:
-                dc.w    loc_4E42E-off_4E418
-                dc.w    loc_4E466-off_4E418
-                dc.w    loc_4E48C-off_4E418
-                dc.w    loc_4E4B6-off_4E418
-                dc.w    loc_4E4F8-off_4E418
-                dc.w    loc_4E530-off_4E418
-                dc.w    loc_4E4B6-off_4E418
-                dc.w    loc_4E582-off_4E418
-                dc.w    loc_4E5AC-off_4E418
-                dc.w    loc_4E5CC-off_4E418
-                dc.w    loc_4E466-off_4E418
+ICZMiniS3_BattleStateOffsets:
+                dc.w    ICZMiniS3_InitBodyOrbAndTrim-ICZMiniS3_BattleStateOffsets
+                dc.w    ICZMiniS3_MoveAndTickTransit-ICZMiniS3_BattleStateOffsets
+                dc.w    ICZMiniS3_TickPaletteStartWait-ICZMiniS3_BattleStateOffsets
+                dc.w    ICZMiniS3_RunPaletteAndTickWait-ICZMiniS3_BattleStateOffsets
+                dc.w    ICZMiniS3_DescendRunPaletteAndWait-ICZMiniS3_BattleStateOffsets
+                dc.w    ICZMiniS3_RunPaletteAndMoveArc-ICZMiniS3_BattleStateOffsets
+                dc.w    ICZMiniS3_RunPaletteAndTickWait-ICZMiniS3_BattleStateOffsets
+                dc.w    ICZMiniS3_RunPaletteAndPollOrbRelease-ICZMiniS3_BattleStateOffsets
+                dc.w    ICZMiniS3_RunPaletteUntilCallback-ICZMiniS3_BattleStateOffsets
+                dc.w    ICZMiniS3_TickPostReleaseCooldown-ICZMiniS3_BattleStateOffsets
+                dc.w    ICZMiniS3_MoveAndTickTransit-ICZMiniS3_BattleStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_4E42E:
-                lea     ObjDat3_4EB48(pc),a1
+ICZMiniS3_InitBodyOrbAndTrim:
+                lea     ICZMiniS3_BodyAttributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.b  #6,collision_property(a0)
                 move.w  #$200,$3E(a0)
                 move.w  #$80,y_vel(a0)
                 move.w  #$BF,$2E(a0)
-                move.l  #loc_4E470,$34(a0)
-                lea     ChildObjDat_4EB92(pc),a2
+                move.l  #ICZMiniS3_RequestTrimSeparation,$34(a0)
+                lea     ICZMinibossS3_Root_EightSimpleOrbRecord(pc),a2
                 jsr     CreateChild6_Simple(pc)
-                lea     ChildObjDat_4EB6C(pc),a2
+                lea     ICZMinibossS3_Root_SixNormalTrimRecords(pc),a2
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4E466:
+ICZMiniS3_MoveAndTickTransit:
                 jsr     (MoveSprite2).l
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4E470:
+ICZMiniS3_RequestTrimSeparation:
                 move.b  #4,routine(a0)
                 bset    #3,$38(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_4E490,$34(a0)
+                move.l  #ICZMiniS3_BeginForwardPaletteWait,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4E48C:
+ICZMiniS3_TickPaletteStartWait:
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4E490:
+ICZMiniS3_BeginForwardPaletteWait:
                 move.b  #6,routine(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_4E4BE,$34(a0)
+                move.l  #ICZMiniS3_RequestOrbAssembly,$34(a0)
                 lea     (S3ICZMinibossPal_PulseAccel).l,a1
 
-loc_4E4AA:
+; Copy two longwords and clear the following word in palette rotation RAM
+ICZMiniS3_CopyPaletteScriptSlot:
                 lea     (Palette_rotation_data).w,a2
                 move.l  (a1)+,(a2)+
                 move.l  (a1)+,(a2)+
@@ -111,38 +112,38 @@ loc_4E4AA:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4E4B6:
+ICZMiniS3_RunPaletteAndTickWait:
                 jsr     Run_PalRotationScript(pc)
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4E4BE:
+ICZMiniS3_RequestOrbAssembly:
                 bset    #2,$38(a0)
                 move.w  #$7F,$2E(a0)
-                move.l  #loc_4E4DC,$34(a0)
+                move.l  #ICZMiniS3_BeginFastDescent,$34(a0)
                 moveq   #signextendB(sfx_TunnelBooster),d0
                 jsr     (Play_SFX).l
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4E4DC:
+ICZMiniS3_BeginFastDescent:
                 move.b  #8,routine(a0)
                 move.w  #$300,y_vel(a0)
                 move.w  #7,$2E(a0)
-                move.l  #loc_4E506,$34(a0)
+                move.l  #ICZMiniS3_LoadArcRepeatCount,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4E4F8:
+ICZMiniS3_DescendRunPaletteAndWait:
                 jsr     (MoveSprite2).l
                 jsr     Run_PalRotationScript(pc)
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4E506:
+ICZMiniS3_LoadArcRepeatCount:
                 bsr.w   SelectICZMinibossArcRepeatCount
 
-loc_4E50A:
+ICZMiniS3_ReverseXAndBeginArc:
                 move.b  #$A,routine(a0)
                 move.w  #$300,y_vel(a0)
                 neg.w   $3E(a0)
@@ -153,18 +154,18 @@ loc_4E50A:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4E530:
+ICZMiniS3_RunPaletteAndMoveArc:
                 jsr     Run_PalRotationScript(pc)
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_4E546
+                bmi.s   ICZMiniS3_BeginArcRepeatWait
                 addi.w  #-$10,y_vel(a0)
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_4E546:
+ICZMiniS3_BeginArcRepeatWait:
                 move.b  #$C,routine(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_4E564,$34(a0)
+                move.l  #ICZMiniS3_RepeatArcOrReleaseOrbs,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 ; unused
@@ -172,9 +173,9 @@ loc_4E546:
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4E564:
+ICZMiniS3_RepeatArcOrReleaseOrbs:
                 subq.b  #1,$39(a0)
-                bpl.s   loc_4E50A
+                bpl.s   ICZMiniS3_ReverseXAndBeginArc
                 move.b  #$E,routine(a0)
                 bset    #1,$38(a0)
                 cmpi.w  #$6F0+$A0,x_pos(a0)
@@ -182,72 +183,72 @@ loc_4E564:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4E582:
+ICZMiniS3_RunPaletteAndPollOrbRelease:
                 btst    #1,$38(a0)
-                beq.s   loc_4E58E
+                beq.s   ICZMiniS3_BeginReversePalette
                 jmp     Run_PalRotationScript(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4E58E:
+ICZMiniS3_BeginReversePalette:
                 move.b  #$10,routine(a0)
                 bclr    #2,$38(a0)
-                move.l  #loc_4E5B0,(Palette_rotation_custom).w
+                move.l  #ICZMiniS3_ResetPaletteAndBeginCooldown,(Palette_rotation_custom).w
                 lea     (S3ICZMinibossPal_PulseDecel).l,a1
-                bra.w   loc_4E4AA
+                bra.w   ICZMiniS3_CopyPaletteScriptSlot
 ; ---------------------------------------------------------------------------
 
-loc_4E5AC:
+ICZMiniS3_RunPaletteUntilCallback:
                 jmp     Run_PalRotationScript(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4E5B0:
+ICZMiniS3_ResetPaletteAndBeginCooldown:
                 move.b  #$12,routine(a0)
                 move.w  #$222,(Normal_palette_line_2+$14).w
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_4E5D0,$34(a0)
+                move.l  #ICZMiniS3_BeginVerticalReturn,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4E5CC:
+ICZMiniS3_TickPostReleaseCooldown:
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4E5D0:
+ICZMiniS3_BeginVerticalReturn:
                 move.b  #$14,routine(a0)
                 move.w  #-$100,y_vel(a0)
                 clr.w   x_vel(a0)
                 move.w  #$17,$2E(a0)
-                move.l  #loc_4E5F0,$34(a0)
+                move.l  #ICZMiniS3_HoldBeforePaletteRestart,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4E5F0:
+ICZMiniS3_HoldBeforePaletteRestart:
                 move.b  #4,routine(a0)
                 move.w  #$FF,$2E(a0)
-                move.l  #loc_4E490,$34(a0)
+                move.l  #ICZMiniS3_BeginForwardPaletteWait,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4E606:
+ICZMiniS3_StartSignAndStopSnow:
                 jsr     (Obj_EndSignControl).l
                 movea.w (_unkFAAE).w,a1
                 cmpi.l  #S3ICZSnowPile_UpdateCameraSnowEmitter,(a1)
-                bne.s   loc_4E61E
+                bne.s   ICZMiniS3_TryDefeatPaletteActor
                 bset    #5,$38(a1)
 
-loc_4E61E:
+ICZMiniS3_TryDefeatPaletteActor:
                 jsr     (AllocateObject).l
-                bne.s   loc_4E62C
-                move.l  #loc_4E634,(a1)
+                bne.s   ICZMiniS3_SpawnBreakupFragments
+                move.l  #ICZMiniS3_InitDefeatPaletteActor,(a1)
 
-loc_4E62C:
-                lea     ChildObjDat_4EB98(pc),a2
+ICZMiniS3_SpawnBreakupFragments:
+                lea     ICZMiniS3_DefeatFragmentChildren(pc),a2
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4E634:
-                move.l  #loc_4E654,(a0)
-                lea     (word_4EBE2).l,a1
+ICZMiniS3_InitDefeatPaletteActor:
+                move.l  #ICZMiniS3_DefeatPaletteActorUpdate,(a0)
+                lea     (ICZMiniS3_DefeatPaletteScript).l,a1
                 lea     (Palette_rotation_data).w,a2
                 move.l  (a1)+,(a2)+
                 move.l  (a1)+,(a2)+
@@ -256,46 +257,46 @@ loc_4E634:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4E654:
+ICZMiniS3_DefeatPaletteActorUpdate:
                 jmp     Run_PalRotationScript(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4E658:
+ICZMiniS3_TrimFollowDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_4E670(pc,d0.w),d1
-                jsr     off_4E670(pc,d1.w)
+                move.w  ICZMiniS3_TrimStateOffsets(pc,d0.w),d1
+                jsr     ICZMiniS3_TrimStateOffsets(pc,d1.w)
                 jsr     Refresh_ChildPosition(pc)
                 moveq   #0,d0
                 jmp     Child_Draw_Sprite2_FlickerMove(pc)
 ; ---------------------------------------------------------------------------
-off_4E670:
-                dc.w    loc_4E678-off_4E670
-                dc.w    loc_4E684-off_4E670
-                dc.w    loc_4E6A4-off_4E670
-                dc.w    locret_4E6C0-off_4E670
+ICZMiniS3_TrimStateOffsets:
+                dc.w    ICZMiniS3_InitTrimBySubtype-ICZMiniS3_TrimStateOffsets
+                dc.w    ICZMiniS3_TrimWaitForSeparation-ICZMiniS3_TrimStateOffsets
+                dc.w    ICZMiniS3_TrimApplyByteStepsAndWait-ICZMiniS3_TrimStateOffsets
+                dc.w    ICZMinibossS3_Trim_ReturnFromFinalIdle-ICZMiniS3_TrimStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_4E678:
-                lea     word_4EB54(pc),a1
+ICZMiniS3_InitTrimBySubtype:
+                lea     ICZMiniS3_TrimAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
-                bra.w   loc_4E8AA
+                bra.w   ICZMiniS3_TrimSelectSubtypeFrame
 ; ---------------------------------------------------------------------------
 
-loc_4E684:
+ICZMiniS3_TrimWaitForSeparation:
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                bne.s   loc_4E692
+                bne.s   ICZMiniS3_TrimBeginOffsetMotion
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4E692:
+ICZMiniS3_TrimBeginOffsetMotion:
                 move.b  #4,routine(a0)
-                move.l  #loc_4E6B8,$34(a0)
-                bra.w   loc_4E8C0
+                move.l  #ICZMinibossS3_Trim_SelectFinalOffsetIdle,$34(a0)
+                bra.w   ICZMiniS3_TrimLoadStepsAndWait
 ; ---------------------------------------------------------------------------
 
-loc_4E6A4:
+ICZMiniS3_TrimApplyByteStepsAndWait:
                 move.b  x_vel(a0),d0
                 add.b   d0,child_dx(a0)
                 move.b  x_vel+1(a0),d0
@@ -303,86 +304,86 @@ loc_4E6A4:
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4E6B8:
+ICZMinibossS3_Trim_SelectFinalOffsetIdle:
                 move.b  #6,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_4E6C0:
+ICZMinibossS3_Trim_ReturnFromFinalIdle:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4E6C2:
+ICZMiniS3_OrbDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_4E6D6(pc,d0.w),d1
-                jsr     off_4E6D6(pc,d1.w)
+                move.w  ICZMiniS3_OrbStateOffsets(pc,d0.w),d1
+                jsr     ICZMiniS3_OrbStateOffsets(pc,d1.w)
                 moveq   #0,d0
                 jmp     Child_DrawTouch_Sprite2_FlickerMove(pc)
 ; ---------------------------------------------------------------------------
-off_4E6D6:
-                dc.w    loc_4E6EE-off_4E6D6
-                dc.w    loc_4E6FA-off_4E6D6
-                dc.w    loc_4E724-off_4E6D6
-                dc.w    loc_4E75E-off_4E6D6
-                dc.w    loc_4E77E-off_4E6D6
-                dc.w    loc_4E796-off_4E6D6
-                dc.w    loc_4E7B6-off_4E6D6
-                dc.w    loc_4E800-off_4E6D6
-                dc.w    loc_4E75E-off_4E6D6
-                dc.w    loc_4E84C-off_4E6D6
-                dc.w    loc_4E75E-off_4E6D6
-                dc.w    locret_4E884-off_4E6D6
+ICZMiniS3_OrbStateOffsets:
+                dc.w    ICZMiniS3_InitOrbAtLowerBand-ICZMiniS3_OrbStateOffsets
+                dc.w    ICZMiniS3_OrbWaitForAssembly-ICZMiniS3_OrbStateOffsets
+                dc.w    ICZMiniS3_OrbApplyVIntJitter-ICZMiniS3_OrbStateOffsets
+                dc.w    ICZMiniS3_OrbMoveAndTickFlight-ICZMiniS3_OrbStateOffsets
+                dc.w    ICZMiniS3_OrbOrbitOrAlignForRelease-ICZMiniS3_OrbStateOffsets
+                dc.w    ICZMiniS3_OrbChooseReleaseTilt-ICZMiniS3_OrbStateOffsets
+                dc.w    ICZMiniS3_OrbOrbitAndCheckAck-ICZMiniS3_OrbStateOffsets
+                dc.w    ICZMiniS3_OrbWaitForDispersalPhase-ICZMiniS3_OrbStateOffsets
+                dc.w    ICZMiniS3_OrbMoveAndTickFlight-ICZMiniS3_OrbStateOffsets
+                dc.w    ICZMiniS3_OrbWaitBeforeDrop-ICZMiniS3_OrbStateOffsets
+                dc.w    ICZMiniS3_OrbMoveAndTickFlight-ICZMiniS3_OrbStateOffsets
+                dc.w    ICZMiniS3_OrbFinalIdle-ICZMiniS3_OrbStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_4E6EE:
-                lea     ObjDat3_4EB5A(pc),a1
+ICZMiniS3_InitOrbAtLowerBand:
+                lea     ICZMiniS3_OrbAttributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                bra.w   loc_4E8EC
+                bra.w   ICZMiniS3_OrbSetLowerSpawnBand
 ; ---------------------------------------------------------------------------
 
-loc_4E6FA:
+ICZMiniS3_OrbWaitForAssembly:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                bne.s   loc_4E708
+                bne.s   ICZMiniS3_OrbBeginJitteredRise
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4E708:
+ICZMiniS3_OrbBeginJitteredRise:
                 move.b  #4,routine(a0)
                 move.w  #-$40,y_vel(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_4E73E,$34(a0)
+                move.l  #ICZMiniS3_OrbBeginOrbitApproach,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4E724:
+ICZMiniS3_OrbApplyVIntJitter:
                 moveq   #1,d0
                 btst    #0,(V_int_run_count+3).w
-                beq.s   loc_4E730
+                beq.s   ICZMinibossS3_Orb_AddJitterMoveThenWait
                 neg.w   d0
 
-loc_4E730:
+ICZMinibossS3_Orb_AddJitterMoveThenWait:
                 add.w   d0,x_pos(a0)
                 jsr     (MoveSprite2).l
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4E73E:
+ICZMiniS3_OrbBeginOrbitApproach:
                 move.b  #6,routine(a0)
                 move.w  #$180,priority(a0)
                 bsr.w   SetICZMinibossOrbApproachVelocity
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_4E768,$34(a0)
+                move.l  #ICZMiniS3_OrbEnableCollisionAndOrbit,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4E75E:
+ICZMiniS3_OrbMoveAndTickFlight:
                 jsr     (MoveSprite2).l
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4E768:
+ICZMiniS3_OrbEnableCollisionAndOrbit:
                 move.b  #8,routine(a0)
                 move.b  #$8B,collision_flags(a0)
                 moveq   #signextendB(sfx_BossRotate),d0
@@ -390,37 +391,37 @@ loc_4E768:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4E77E:
+ICZMiniS3_OrbOrbitOrAlignForRelease:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                bne.s   loc_4E78E
-                bra.w   loc_4E98E
+                bne.s   ICZMiniS3_OrbBeginReleaseAlignment
+                bra.w   ICZMiniS3_OrbAdvanceTiltAndProject
 ; ---------------------------------------------------------------------------
 
-loc_4E78E:
+ICZMiniS3_OrbBeginReleaseAlignment:
                 move.b  #$A,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4E796:
+ICZMiniS3_OrbChooseReleaseTilt:
                 movea.w parent3(a0),a1
                 moveq   #0,d0
                 tst.b   $43(a1)
-                bne.s   loc_4E7A4
+                bne.s   ICZMiniS3_OrbWaitForReleaseTilt
                 moveq   #-$80,d0
 
-loc_4E7A4:
+ICZMiniS3_OrbWaitForReleaseTilt:
                 cmp.b   $3D(a0),d0
-                beq.s   loc_4E7AE
-                bra.w   loc_4E98E
+                beq.s   ICZMiniS3_OrbBeginReleaseOrbit
+                bra.w   ICZMiniS3_OrbAdvanceTiltAndProject
 ; ---------------------------------------------------------------------------
 
-loc_4E7AE:
+ICZMiniS3_OrbBeginReleaseOrbit:
                 move.b  #$C,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4E7B6:
+ICZMiniS3_OrbOrbitAndCheckAck:
                 addq.b  #4,$3C(a0)
                 lea     (ICZMiniboss_OrbAngleLookup).l,a2
                 jsr     MoveSprite_AtAngleLookup(pc)
@@ -428,28 +429,29 @@ loc_4E7B6:
                 bsr.w   TiltAndDepthSortICZMinibossOrb
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                beq.s   loc_4E7F0
+                beq.s   ICZMiniS3_OrbAckAndLoadDispersal
                 tst.b   subtype(a0)
-                bne.w   locret_4E400
+                bne.w   ICZMiniS3_SharedReturn
                 moveq   #0,d0
                 tst.b   $43(a1)
-                bne.s   loc_4E7E8
+                bne.s   ICZMiniS3_OrbZeroCheckReleasePhase
                 moveq   #-$80,d0
 
-loc_4E7E8:
+; Only orb zero clears the shared request when it reaches the phase for the selected side
+ICZMiniS3_OrbZeroCheckReleasePhase:
                 cmp.b   $3C(a0),d0
-                bne.w   locret_4E400
+                bne.w   ICZMiniS3_SharedReturn
 
-loc_4E7F0:
+ICZMiniS3_OrbAckAndLoadDispersal:
                 move.b  #$E,routine(a0)
                 bclr    #1,$38(a1)
-                bra.w   loc_4EA58
+                bra.w   ICZMiniS3_OrbChooseDispersalPlan
 ; ---------------------------------------------------------------------------
 
-loc_4E800:
+ICZMiniS3_OrbWaitForDispersalPhase:
                 move.b  $3C(a0),d0
                 cmp.b   $42(a0),d0
-                beq.s   loc_4E81E
+                beq.s   ICZMiniS3_OrbBeginDispersalFlight
                 addq.b  #4,$3C(a0)
                 lea     (ICZMiniboss_OrbAngleLookup).l,a2
                 jsr     MoveSprite_AtAngleLookup(pc)
@@ -457,47 +459,47 @@ loc_4E800:
                 bra.w   TiltAndDepthSortICZMinibossOrb
 ; ---------------------------------------------------------------------------
 
-loc_4E81E:
+ICZMiniS3_OrbBeginDispersalFlight:
                 move.b  #$10,routine(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_4E834,$34(a0)
+                move.l  #ICZMiniS3_OrbRandomizeUpperDropPoint,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4E834:
+ICZMiniS3_OrbRandomizeUpperDropPoint:
                 move.b  #$12,routine(a0)
                 move.w  #$7F,$2E(a0)
-                move.l  #loc_4E850,$34(a0)
-                bra.w   loc_4EAB8
+                move.l  #ICZMiniS3_OrbBeginVerticalDrop,$34(a0)
+                bra.w   ICZMiniS3_OrbSetUpperSpawnBand
 ; ---------------------------------------------------------------------------
 
-loc_4E84C:
+ICZMiniS3_OrbWaitBeforeDrop:
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4E850:
+ICZMiniS3_OrbBeginVerticalDrop:
                 move.b  #$14,routine(a0)
                 moveq   #signextendB(sfx_LevelProjectile),d0
                 jsr     (Play_SFX).l
                 move.w  #$400,y_vel(a0)
                 clr.w   x_vel(a0)
                 move.w  #$45,$2E(a0)
-                move.l  #loc_4E878,$34(a0)
+                move.l  #ICZMiniS3_OrbDisableAndRearmAssembly,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4E878:
+ICZMiniS3_OrbDisableAndRearmAssembly:
                 move.b  #2,routine(a0)
                 clr.b   collision_flags(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_4E884:
+ICZMiniS3_OrbFinalIdle:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4E886:
-                lea     word_4EB66(pc),a1
+ICZMiniS3_InitDefeatFragment:
+                lea     ICZMiniS3_FragmentAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
                 move.l  #Obj_FlickerMove,(a0)
                 moveq   #0,d0
@@ -509,38 +511,38 @@ loc_4E886:
                 jmp     Set_IndexedVelocity(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4E8AA:
+ICZMiniS3_TrimSelectSubtypeFrame:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lsr.w   #1,d0
-                move.b  RawAni_4E8BA(pc,d0.w),mapping_frame(a0)
+                move.b  ICZMiniS3_TrimFramesBySubtype(pc,d0.w),mapping_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------
-RawAni_4E8BA:
+ICZMiniS3_TrimFramesBySubtype:
                 dc.b    1,   9,   3,   2,  $A,   4
                 even
 ; ---------------------------------------------------------------------------
 
-loc_4E8C0:
+ICZMiniS3_TrimLoadStepsAndWait:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_4E8D4(pc,d0.w),x_vel(a0)
-                move.w  word_4E8E0(pc,d0.w),$2E(a0)
+                move.w  ICZMiniS3_TrimPackedOffsetSteps(pc,d0.w),x_vel(a0)
+                move.w  ICZMiniS3_TrimOffsetStepWaits(pc,d0.w),$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
-word_4E8D4:
+ICZMiniS3_TrimPackedOffsetSteps:
                 dc.w    -1,  $1FF,     1,    -1,  $1FF,     1
-word_4E8E0:
+ICZMiniS3_TrimOffsetStepWaits:
                 dc.w    2,     2,     3,     6,     6,     8
 ; ---------------------------------------------------------------------------
 
-loc_4E8EC:
+ICZMiniS3_OrbSetLowerSpawnBand:
                 move.w  #$2B8+$D8,y_pos(a0)
 
-loc_4E8F2:
+ICZMiniS3_OrbRandomizeLaneAndHeight:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_4E922(pc,d0.w),d2
+                move.w  ICZMiniS3_OrbLaneXOffsets(pc,d0.w),d2
                 jsr     (Random_Number).l
                 andi.w  #7,d0
                 subq.w  #3,d0
@@ -553,7 +555,7 @@ loc_4E8F2:
                 add.w   d0,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
-word_4E922:
+ICZMiniS3_OrbLaneXOffsets:
                 dc.w    -$20
                 dc.w    $20
                 dc.w    $60
@@ -601,7 +603,7 @@ SetICZMinibossOrbApproachVelocity:
 
 ; ---------------------------------------------------------------------------
 
-loc_4E98E:
+ICZMiniS3_OrbAdvanceTiltAndProject:
                 addq.b  #4,$3C(a0)
                 lea     (ICZMiniboss_OrbAngleLookup).l,a2
                 jsr     MoveSprite_AtAngleLookup(pc)
@@ -614,66 +616,67 @@ loc_4E98E:
 TiltAndDepthSortICZMinibossOrb:
                 jsr     (GetSineCosine).l
                 tst.w   d1
-                bpl.s   loc_4E9B2
+                bpl.s   ICZMiniS3_TiltGetYDistanceAndSide
                 neg.w   d1
 
-loc_4E9B2:
+ICZMiniS3_TiltGetYDistanceAndSide:
                 move.w  y_pos(a0),d2
                 move.w  y_pos(a1),d4
                 sub.w   d4,d2
                 scs     d3
-                bcc.s   loc_4E9C2
+                bcc.s   ICZMiniS3_TiltScaleYDistance
                 neg.w   d2
 
-loc_4E9C2:
+; Invert the projection sign for tilt angles in the middle half-turn
+ICZMiniS3_TiltScaleYDistance:
                 mulu.w  d1,d2
                 lsr.l   #8,d2
                 cmpi.b  #$40,$3D(a0)
-                blo.s   loc_4E9D8
+                blo.s   ICZMiniS3_TiltRestoreYOffsetSign
                 cmpi.b  #-$40,$3D(a0)
-                bhs.s   loc_4E9D8
+                bhs.s   ICZMiniS3_TiltRestoreYOffsetSign
                 not.b   d3
 
-loc_4E9D8:
+ICZMiniS3_TiltRestoreYOffsetSign:
                 tst.b   d3
-                beq.s   loc_4E9DE
+                beq.s   ICZMiniS3_TiltStoreYAndChooseSide
                 neg.w   d2
 
-loc_4E9DE:
+ICZMiniS3_TiltStoreYAndChooseSide:
                 add.w   d2,d4
                 move.w  d4,y_pos(a0)
                 move.b  $3D(a0),d0
                 spl     d3
                 cmpi.b  #$40,$3C(a0)
-                blo.s   loc_4E9FC
+                blo.s   ICZMiniS3_TiltChooseOrbFrame
                 cmpi.b  #-$40,$3C(a0)
-                bhs.s   loc_4E9FC
+                bhs.s   ICZMiniS3_TiltChooseOrbFrame
                 not.b   d3
 
-loc_4E9FC:
+ICZMiniS3_TiltChooseOrbFrame:
                 move.b  #6,mapping_frame(a0)
                 cmpi.b  #$20,d0
-                blo.s   loc_4EA2A
+                blo.s   ICZMiniS3_TiltChooseSpritePriority
                 cmpi.b  #$60,d0
-                blo.s   loc_4EA1A
+                blo.s   ICZMiniS3_TiltChooseSideFrame
                 cmpi.b  #-$60,d0
-                blo.s   loc_4EA2A
+                blo.s   ICZMiniS3_TiltChooseSpritePriority
                 cmpi.b  #-$20,d0
-                bhs.s   loc_4EA2A
+                bhs.s   ICZMiniS3_TiltChooseSpritePriority
 
-loc_4EA1A:
+ICZMiniS3_TiltChooseSideFrame:
                 move.b  #5,mapping_frame(a0)
                 tst.b   d3
-                bne.s   loc_4EA2A
+                bne.s   ICZMiniS3_TiltChooseSpritePriority
                 move.b  #8,mapping_frame(a0)
 
-loc_4EA2A:
+ICZMiniS3_TiltChooseSpritePriority:
                 move.w  #$180,priority(a0)
                 tst.b   d3
-                bne.s   locret_4EA3A
+                bne.s   ICZMiniS3_TiltProjectionReturn
                 move.w  #$300,priority(a0)
 
-locret_4EA3A:
+ICZMiniS3_TiltProjectionReturn:
                 rts
 ; End of function TiltAndDepthSortICZMinibossOrb
 
@@ -683,42 +686,42 @@ SelectICZMinibossArcRepeatCount:
                 move.b  $3A(a0),d0
                 addq.b  #1,$3A(a0)
                 andi.w  #7,d0
-                move.b  byte_4EA50(pc,d0.w),$39(a0)
+                move.b  ICZMiniS3_ArcRepeatCounts(pc,d0.w),$39(a0)
                 rts
 ; End of function SelectICZMinibossArcRepeatCount
 
 ; ---------------------------------------------------------------------------
-byte_4EA50:
+ICZMiniS3_ArcRepeatCounts:
                 dc.b    1,   0,   1,   1,   0,   1,   0,   0
                 even
 ; ---------------------------------------------------------------------------
 
-loc_4EA58:
+ICZMiniS3_OrbChooseDispersalPlan:
                 movea.w parent3(a0),a1
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,d1
                 lsr.w   #1,d1
                 tst.b   $43(a1)
-                bne.s   loc_4EA6E
+                bne.s   ICZMiniS3_OrbApplyDispersalPlan
                 addq.w  #8,d1
 
-loc_4EA6E:
-                move.b  byte_4EA88(pc,d1.w),$42(a0)
+ICZMiniS3_OrbApplyDispersalPlan:
+                move.b  ICZMiniS3_OrbDispersalPhaseBanks(pc,d1.w),$42(a0)
                 add.w   d0,d0
-                move.l  word_4EA98(pc,d0.w),x_vel(a0)   ; and y_vel
+                move.l  ICZMiniS3_OrbDispersalVelocities(pc,d0.w),x_vel(a0)  ; and y_vel
                 tst.b   $43(a1)
-                bne.s   locret_4EA86
+                bne.s   ICZMiniS3_OrbDispersalSetupReturn
                 neg.w   x_vel(a0)
 
-locret_4EA86:
+ICZMiniS3_OrbDispersalSetupReturn:
                 rts
 ; ---------------------------------------------------------------------------
-byte_4EA88:
+ICZMiniS3_OrbDispersalPhaseBanks:
                 dc.b    $60, $5C, $58, $54, $50, $4C, $48, $44
                 dc.b    $E0, $DC, $D8, $D4, $D0, $CC, $C8, $C4
                 even
-word_4EA98:
+ICZMiniS3_OrbDispersalVelocities:
                 dc.w    -$300, -$400
                 dc.w    -$200, -$400
                 dc.w    -$100, -$400
@@ -729,44 +732,44 @@ word_4EA98:
                 dc.w    $400, -$400
 ; ---------------------------------------------------------------------------
 
-loc_4EAB8:
+ICZMiniS3_OrbSetUpperSpawnBand:
                 move.w  #$2B8-$40,y_pos(a0)
-                bra.w   loc_4E8F2
+                bra.w   ICZMiniS3_OrbRandomizeLaneAndHeight
 
 ; =============== S U B R O U T I N E =======================================
 
 HandleICZMinibossTwoColorHitOrDefeat:
                 tst.b   collision_flags(a0)
-                bne.s   locret_4EB0C
+                bne.s   ICZMiniS3_HitUpdateReturn
                 tst.b   collision_property(a0)
-                beq.s   loc_4EB0E
+                beq.s   ICZMiniS3_BeginDefeatWaitAndExplosion
                 tst.b   $20(a0)
-                bne.s   loc_4EAE2
+                bne.s   ICZMiniS3_HitChooseFlashRow
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
 
-loc_4EAE2:
+ICZMiniS3_HitChooseFlashRow:
                 bset    #6,status(a0)
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_4EAF6
+                bne.s   ICZMiniS3_HitCopyColorsAndTick
                 addi.w  #2*2,d0
 
-loc_4EAF6:
+ICZMiniS3_HitCopyColorsAndTick:
                 bsr.w   CopyICZMinibossTwoColorPalette
                 subq.b  #1,$20(a0)
-                bne.s   locret_4EB0C
+                bne.s   ICZMiniS3_HitUpdateReturn
                 bclr    #6,status(a0)
                 move.b  $25(a0),collision_flags(a0)
 
-locret_4EB0C:
+ICZMiniS3_HitUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4EB0E:
+ICZMiniS3_BeginDefeatWaitAndExplosion:
                 move.l  #Wait_Draw,(a0)
-                move.l  #loc_4E606,$34(a0)
+                move.l  #ICZMiniS3_StartSignAndStopSnow,$34(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     CreateChild1_Normal(pc)
                 jmp     BossDefeated_StopTimer(pc)
@@ -775,8 +778,8 @@ loc_4EB0E:
 ; =============== S U B R O U T I N E =======================================
 
 CopyICZMinibossTwoColorPalette:
-                lea     word_4EB3C(pc),a1
-                lea     word_4EB40(pc,d0.w),a2
+                lea     ICZMiniS3_HitPaletteDestinations(pc),a1
+                lea     ICZMiniS3_HitPaletteColorRows(pc,d0.w),a2
                 rept    2
                 movea.w (a1)+,a3
                 move.w  (a2)+,(a3)+
@@ -785,53 +788,53 @@ CopyICZMinibossTwoColorPalette:
 ; End of function CopyICZMinibossTwoColorPalette
 
 ; ---------------------------------------------------------------------------
-word_4EB3C:
+ICZMiniS3_HitPaletteDestinations:
                 dc.w    Normal_palette_line_2+$14, Normal_palette_line_2+$16
-word_4EB40:
+ICZMiniS3_HitPaletteColorRows:
                 dc.w    $222,   $20
                 dc.w    $EEE,  $EEE
-ObjDat3_4EB48:
+ICZMiniS3_BodyAttributes:
                 dc.l    Map_ICZMiniboss
                 dc.w    make_art_tile(ArtTile_ICZMiniboss,1,1)
                 dc.w    $280
                 dc.b    $18, $18,   0,   6
-word_4EB54:
+ICZMiniS3_TrimAttributes:
                 dc.w    $280
                 dc.b    $10,  $C,   1,   0
-ObjDat3_4EB5A:
+ICZMiniS3_OrbAttributes:
                 dc.l    Map_ICZMiniboss
                 dc.w    make_art_tile(ArtTile_ICZMiniboss,2,0)
                 dc.w    $280
                 dc.b    $C,  $C,   6,   0
-word_4EB66:
+ICZMiniS3_FragmentAttributes:
                 dc.w    $180
                 dc.b    $C,  $C,  $B,   0
-ChildObjDat_4EB6C:
+ICZMinibossS3_Root_SixNormalTrimRecords:
                 dc.w    6-1
-                dc.l    loc_4E658
+                dc.l    ICZMiniS3_TrimFollowDispatchAndDraw
                 dc.b    -$E, -$B
-                dc.l    loc_4E658
+                dc.l    ICZMiniS3_TrimFollowDispatchAndDraw
                 dc.b    $E, -$B
-                dc.l    loc_4E658
+                dc.l    ICZMiniS3_TrimFollowDispatchAndDraw
                 dc.b    0, $12
-                dc.l    loc_4E658
+                dc.l    ICZMiniS3_TrimFollowDispatchAndDraw
                 dc.b    -$E, -$B
-                dc.l    loc_4E658
+                dc.l    ICZMiniS3_TrimFollowDispatchAndDraw
                 dc.b    $E, -$B
-                dc.l    loc_4E658
+                dc.l    ICZMiniS3_TrimFollowDispatchAndDraw
                 dc.b    0,  $E
-ChildObjDat_4EB92:
+ICZMinibossS3_Root_EightSimpleOrbRecord:
                 dc.w    8-1
-                dc.l    loc_4E6C2
-ChildObjDat_4EB98:
+                dc.l    ICZMiniS3_OrbDispatchAndDraw
+ICZMiniS3_DefeatFragmentChildren:
                 dc.w    4-1
-                dc.l    loc_4E886
+                dc.l    ICZMiniS3_InitDefeatFragment
                 dc.b    -$C, -$C
-                dc.l    loc_4E886
+                dc.l    ICZMiniS3_InitDefeatFragment
                 dc.b    $C, -$C
-                dc.l    loc_4E886
+                dc.l    ICZMiniS3_InitDefeatFragment
                 dc.b    -$C,  $C
-                dc.l    loc_4E886
+                dc.l    ICZMiniS3_InitDefeatFragment
                 dc.b    $C,  $C
                 dc.b    0
                 dc.b    3

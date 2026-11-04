@@ -99876,34 +99876,34 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 322
       },
-      "declarations_sha256": "3560d0fa0debafef3b4fbe002a2bbbf6602e8c270953bb3b5f155f61c0bcd0e6",
+      "declarations_sha256": "aae5b10e38da01c217baa6c6ab6d2ee5728f03d96bc665c7533745774eedbe32",
       "labels": {
         "Map_ICZEndBoss_": 0,
-        "Frame_362CE6": 50,
-        "Frame_362D06": 82,
-        "Frame_362D14": 96,
-        "Frame_362D2E": 122,
-        "Frame_362D3C": 136,
-        "Frame_362D4A": 150,
-        "Frame_362D52": 158,
-        "Frame_362D5A": 166,
-        "Frame_362D62": 174,
-        "Frame_362D6A": 182,
-        "Frame_362D72": 190,
-        "Frame_362D7A": 198,
-        "Frame_362D82": 206,
-        "Frame_362D8A": 214,
-        "Frame_362D92": 222,
-        "Frame_362D9A": 230,
-        "Frame_362DA2": 238,
-        "Frame_362DAA": 246,
-        "Frame_362DB2": 254,
-        "Frame_362DBA": 262,
-        "Frame_362DC2": 270,
-        "Frame_362DCA": 278,
-        "Frame_362DD2": 286,
-        "Frame_362DDA": 294,
-        "Frame_362DE2": 302
+        "ICZEndBossS3_MapFrame00": 50,
+        "ICZEndBossS3_MapFrame01": 82,
+        "ICZEndBossS3_MapFrame02": 96,
+        "ICZEndBossS3_MapFrame03": 122,
+        "ICZEndBossS3_MapFrame04": 136,
+        "ICZEndBossS3_MapFrame05": 150,
+        "ICZEndBossS3_MapFrame06": 158,
+        "ICZEndBossS3_MapFrame07": 166,
+        "ICZEndBossS3_MapFrame08": 174,
+        "ICZEndBossS3_MapFrame09": 182,
+        "ICZEndBossS3_MapFrame0A": 190,
+        "ICZEndBossS3_MapFrame0B": 198,
+        "ICZEndBossS3_MapFrame0C": 206,
+        "ICZEndBossS3_MapFrame0D": 214,
+        "ICZEndBossS3_MapFrame0E": 222,
+        "ICZEndBossS3_MapFrame0F": 230,
+        "ICZEndBossS3_MapFrame10": 238,
+        "ICZEndBossS3_MapFrame11": 246,
+        "ICZEndBossS3_MapFrame12": 254,
+        "ICZEndBossS3_MapFrame13": 262,
+        "ICZEndBossS3_MapFrame14": 270,
+        "ICZEndBossS3_MapFrame15": 278,
+        "ICZEndBossS3_MapFrame16": 286,
+        "ICZEndBossS3_MapFrame17": 294,
+        "ICZEndBossS3_MapFrame18": 302
       },
       "external_symbols": [],
       "blocks": [
@@ -99911,175 +99911,175 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362CE6",
+          "target": "ICZEndBossS3_MapFrame00",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362D06",
+          "target": "ICZEndBossS3_MapFrame01",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362D14",
+          "target": "ICZEndBossS3_MapFrame02",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362D2E",
+          "target": "ICZEndBossS3_MapFrame03",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362D3C",
+          "target": "ICZEndBossS3_MapFrame04",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362D4A",
+          "target": "ICZEndBossS3_MapFrame05",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362D52",
+          "target": "ICZEndBossS3_MapFrame06",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362D5A",
+          "target": "ICZEndBossS3_MapFrame07",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362D62",
+          "target": "ICZEndBossS3_MapFrame08",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362D6A",
+          "target": "ICZEndBossS3_MapFrame09",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362D72",
+          "target": "ICZEndBossS3_MapFrame0A",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362D7A",
+          "target": "ICZEndBossS3_MapFrame0B",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362D82",
+          "target": "ICZEndBossS3_MapFrame0C",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362D8A",
+          "target": "ICZEndBossS3_MapFrame0D",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362D92",
+          "target": "ICZEndBossS3_MapFrame0E",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362D9A",
+          "target": "ICZEndBossS3_MapFrame0F",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362DA2",
+          "target": "ICZEndBossS3_MapFrame10",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362DAA",
+          "target": "ICZEndBossS3_MapFrame11",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362DB2",
+          "target": "ICZEndBossS3_MapFrame12",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362DBA",
+          "target": "ICZEndBossS3_MapFrame13",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362DC2",
+          "target": "ICZEndBossS3_MapFrame14",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362DCA",
+          "target": "ICZEndBossS3_MapFrame15",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362DD2",
+          "target": "ICZEndBossS3_MapFrame16",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362DDA",
+          "target": "ICZEndBossS3_MapFrame17",
           "base": "Map_ICZEndBoss_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362DE2",
+          "target": "ICZEndBossS3_MapFrame18",
           "base": "Map_ICZEndBoss_"
         },
         {
@@ -100343,24 +100343,24 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 180
       },
-      "declarations_sha256": "9422dddf6dee288157a611fc8963fceeea6811d457940484794e2391ba02e8a2",
+      "declarations_sha256": "9b153f582996f6b340b3f275b76963a99bfecfd41e8ab75d6a9cea9d940c846a",
       "labels": {
         "Map_ICZMiniboss_": 0,
-        "Frame_363362": 30,
-        "Frame_36337C": 56,
-        "Frame_363384": 64,
-        "Frame_36338C": 72,
-        "Frame_36339A": 86,
-        "Frame_3633A8": 100,
-        "Frame_3633B0": 108,
-        "Frame_3633B8": 116,
-        "Frame_3633C0": 124,
-        "Frame_3633C8": 132,
-        "Frame_3633D0": 140,
-        "Frame_3633D8": 148,
-        "Frame_3633E0": 156,
-        "Frame_3633E8": 164,
-        "Frame_3633F0": 172
+        "ICZMinibossS3_MapFrame00": 30,
+        "ICZMinibossS3_MapFrame01": 56,
+        "ICZMinibossS3_MapFrame02": 64,
+        "ICZMinibossS3_MapFrame03": 72,
+        "ICZMinibossS3_MapFrame04": 86,
+        "ICZMinibossS3_MapFrame05": 100,
+        "ICZMinibossS3_MapFrame06": 108,
+        "ICZMinibossS3_MapFrame07": 116,
+        "ICZMinibossS3_MapFrame08": 124,
+        "ICZMinibossS3_MapFrame09": 132,
+        "ICZMinibossS3_MapFrame0A": 140,
+        "ICZMinibossS3_MapFrame0B": 148,
+        "ICZMinibossS3_MapFrame0C": 156,
+        "ICZMinibossS3_MapFrame0D": 164,
+        "ICZMinibossS3_MapFrame0E": 172
       },
       "external_symbols": [],
       "blocks": [
@@ -100368,105 +100368,105 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363362",
+          "target": "ICZMinibossS3_MapFrame00",
           "base": "Map_ICZMiniboss_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36337C",
+          "target": "ICZMinibossS3_MapFrame01",
           "base": "Map_ICZMiniboss_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363384",
+          "target": "ICZMinibossS3_MapFrame02",
           "base": "Map_ICZMiniboss_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36338C",
+          "target": "ICZMinibossS3_MapFrame03",
           "base": "Map_ICZMiniboss_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36339A",
+          "target": "ICZMinibossS3_MapFrame04",
           "base": "Map_ICZMiniboss_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3633A8",
+          "target": "ICZMinibossS3_MapFrame05",
           "base": "Map_ICZMiniboss_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3633B0",
+          "target": "ICZMinibossS3_MapFrame06",
           "base": "Map_ICZMiniboss_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3633B8",
+          "target": "ICZMinibossS3_MapFrame07",
           "base": "Map_ICZMiniboss_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3633C0",
+          "target": "ICZMinibossS3_MapFrame08",
           "base": "Map_ICZMiniboss_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3633C8",
+          "target": "ICZMinibossS3_MapFrame09",
           "base": "Map_ICZMiniboss_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3633D0",
+          "target": "ICZMinibossS3_MapFrame0A",
           "base": "Map_ICZMiniboss_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3633D8",
+          "target": "ICZMinibossS3_MapFrame0B",
           "base": "Map_ICZMiniboss_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3633E0",
+          "target": "ICZMinibossS3_MapFrame0C",
           "base": "Map_ICZMiniboss_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3633E8",
+          "target": "ICZMinibossS3_MapFrame0D",
           "base": "Map_ICZMiniboss_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3633F0",
+          "target": "ICZMinibossS3_MapFrame0E",
           "base": "Map_ICZMiniboss_"
         },
         {

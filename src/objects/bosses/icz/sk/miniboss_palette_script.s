@@ -1,7 +1,7 @@
 ; Owner: objects/bosses/icz/sk
 ; Responsibility: IceCap miniboss palette script pointers, header, colour frames and script terminator
 ; Source provenance and ranges: config/reconstruction/source_layout.json
-word_719FA:     palscriptptr .header, .data
+ICZMiniSK_DefeatPaletteScript:  palscriptptr .header, .data
                 dc.w    0
                 .header: palscripthdr Normal_palette_line_4+$02, 10, 2-1
                 .data:  palscriptdata 8, $EEC, $CC6, $C80, $C60, $C40, $A40, $820, $620, $200, $600
@@ -16,7 +16,8 @@ word_719FA:     palscriptptr .header, .data
                 palscriptdata 8, $EEE, $EEA, $EC8, $EA4, $C82, $C60, $C40, $E20, $A00, $E00
                 palscriptrun
 
-word_71AE6:     palscriptptr .header, .data
+; Five headers shorten the pause on the first color. The last repeats
+ICZMiniSK_AccelPaletteScript:   palscriptptr .header, .data
                 dc.w    0
                 .header: palscripthdr Normal_palette_line_2+$14, 1, 3-1
                 .data:  palscriptdata 8, $222
@@ -44,7 +45,8 @@ word_71AE6:     palscriptptr .header, .data
                 palscriptdata 1, $EE0
                 palscriptrept
 
-word_71B52:     palscriptptr .header, .data
+; Five headers lengthen the pause on the first color. The last runs the callback
+ICZMiniSK_DecelPaletteScript:   palscriptptr .header, .data
                 dc.w    0
                 .header: palscripthdr Normal_palette_line_2+$14, 1, 3-1
                 .data:  palscriptdata 2, $222
@@ -73,7 +75,7 @@ word_71B52:     palscriptptr .header, .data
                 palscriptrun
 
 ; ---------------------------------------------------------------------------
-word_71BBE:
+ICZMiniSK_EndBossCameraTriggerBounds:
                 dc.w    $2F8,  $6F8, $4340, $4490
-word_71BC6:
+ICZMiniSK_EndBossCameraTargetBounds:
                 dc.w    $5F8,  $5F8, $4390, $4390

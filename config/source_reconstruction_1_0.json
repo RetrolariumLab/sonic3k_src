@@ -1185,9 +1185,15 @@
       "commits": ["5ce72901232812164c50495733f491a99081e656"]
     },
     {
-      "id": "current-shorten-40-boss-fbz",
+      "id": "change-5a5b92a90670",
       "kind": "source_or_tooling",
       "summary": "Apply 657 reviewed short labels for boss fbz.",
+      "commits": ["5a5b92a9067096d80cd909fdf1ec8b83d5b8cf4b"]
+    },
+    {
+      "id": "current-shorten-41-boss-icz",
+      "kind": "source_or_tooling",
+      "summary": "Apply 405 reviewed short labels for boss icz.",
       "commits": ["release-commit"]
     }
   ],

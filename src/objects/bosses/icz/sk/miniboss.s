@@ -5,99 +5,100 @@
 
 Obj_ICZMiniboss:
                 cmpi.w  #$501,(Apparent_zone_and_act).w
-                beq.s   loc_711AA
+                beq.s   ICZMiniSK_DeleteForAct0501
                 lea     FBZBossSK_ICZMinibossDefaultCamera(pc),a1
                 tst.b   subtype(a0)
-                beq.s   loc_71178
+                beq.s   ICZMiniSK_BeginSubtypeArenaTransition
                 lea     FBZBossSK_ICZMinibossAlternateCamera(pc),a1
 
-loc_71178:
+ICZMiniSK_BeginSubtypeArenaTransition:
                 jsr     (Check_CameraInRange).l
                 move.b  #mus_Miniboss,boss_saved_mus(a0)
                 jsr     (Boss_BeginCameraTransition).l
-                move.l  #loc_711B0,(a0)
-                move.l  #loc_711B6,$34(a0)
+                move.l  #ICZMiniSK_TickArenaTransition,(a0)
+                move.l  #ICZMiniSK_InstallBattleDispatcher,$34(a0)
                 moveq   #PLCID_5F,d0
                 jsr     (Load_PLC).l
                 lea     Pal_ICZMiniboss(pc),a1
                 jmp     (PalLoad_Line1).l
 ; ---------------------------------------------------------------------------
 
-loc_711AA:
+ICZMiniSK_DeleteForAct0501:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_711B0:
+ICZMiniSK_TickArenaTransition:
                 jmp     (SKEndCamera_TickAndSaveMusic).l
 ; ---------------------------------------------------------------------------
 
-loc_711B6:
-                move.l  #loc_711BE,(a0)
+ICZMiniSK_InstallBattleDispatcher:
+                move.l  #ICZMiniSK_BattleDispatchHitAndDraw,(a0)
 
-locret_711BC:
+ICZMiniSK_SharedReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_711BE:
+ICZMiniSK_BattleDispatchHitAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_711D6(pc,d0.w),d1
-                jsr     off_711D6(pc,d1.w)
+                move.w  ICZMiniSK_BattleStateOffsets(pc,d0.w),d1
+                jsr     ICZMiniSK_BattleStateOffsets(pc,d1.w)
                 bsr.w   HandleICZMinibossTwoColorHitOrDefeat
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
-off_711D6:
-                dc.w    loc_711EC-off_711D6
-                dc.w    loc_7122A-off_711D6
-                dc.w    loc_71252-off_711D6
-                dc.w    loc_7127E-off_711D6
-                dc.w    loc_712C4-off_711D6
-                dc.w    loc_71300-off_711D6
-                dc.w    loc_7127E-off_711D6
-                dc.w    loc_7135E-off_711D6
-                dc.w    loc_7138A-off_711D6
-                dc.w    loc_713AC-off_711D6
-                dc.w    loc_7122A-off_711D6
+ICZMiniSK_BattleStateOffsets:
+                dc.w    ICZMiniSK_InitBodyOrbAndTrim-ICZMiniSK_BattleStateOffsets
+                dc.w    ICZMiniSK_MoveAndTickTransit-ICZMiniSK_BattleStateOffsets
+                dc.w    ICZMiniSK_TickPaletteStartWait-ICZMiniSK_BattleStateOffsets
+                dc.w    ICZMiniSK_RunPaletteAndTickWait-ICZMiniSK_BattleStateOffsets
+                dc.w    ICZMiniSK_DescendRunPaletteAndWait-ICZMiniSK_BattleStateOffsets
+                dc.w    ICZMiniSK_RunPaletteAndMoveArc-ICZMiniSK_BattleStateOffsets
+                dc.w    ICZMiniSK_RunPaletteAndTickWait-ICZMiniSK_BattleStateOffsets
+                dc.w    ICZMiniSK_RunPaletteAndPollOrbRelease-ICZMiniSK_BattleStateOffsets
+                dc.w    ICZMiniSK_RunPaletteUntilCallback-ICZMiniSK_BattleStateOffsets
+                dc.w    ICZMiniSK_TickPostReleaseCooldown-ICZMiniSK_BattleStateOffsets
+                dc.w    ICZMiniSK_MoveAndTickTransit-ICZMiniSK_BattleStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_711EC:
-                lea     ObjDat3_71960(pc),a1
+ICZMiniSK_InitBodyOrbAndTrim:
+                lea     ICZMiniSK_BodyAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.b  #6,collision_property(a0)
                 move.w  #$200,$3E(a0)
                 move.w  #$80,y_vel(a0)
                 move.w  #$BF,$2E(a0)
-                move.l  #loc_71236,$34(a0)
-                lea     ChildObjDat_719AA(pc),a2
+                move.l  #ICZMiniSK_RequestTrimSeparation,$34(a0)
+                lea     ICZMinibossSK_Root_EightSimpleOrbRecord(pc),a2
                 jsr     (CreateChild6_Simple).l
-                lea     ChildObjDat_71984(pc),a2
+                lea     ICZMinibossSK_Root_SixNormalTrimRecords(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_7122A:
+ICZMiniSK_MoveAndTickTransit:
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_71236:
+ICZMiniSK_RequestTrimSeparation:
                 move.b  #4,routine(a0)
                 bset    #3,$38(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_71258,$34(a0)
+                move.l  #ICZMiniSK_BeginForwardPaletteWait,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_71252:
+ICZMiniSK_TickPaletteStartWait:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_71258:
+ICZMiniSK_BeginForwardPaletteWait:
                 move.b  #6,routine(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_7128A,$34(a0)
-                lea     (word_71AE6).l,a1
+                move.l  #ICZMiniSK_RequestOrbAssembly,$34(a0)
+                lea     (ICZMiniSK_AccelPaletteScript).l,a1
 
-loc_71272:
+; Copy two longwords and clear the following word in palette rotation RAM
+ICZMiniSK_CopyPaletteScriptSlot:
                 lea     (Palette_rotation_data).w,a2
                 move.l  (a1)+,(a2)+
                 move.l  (a1)+,(a2)+
@@ -105,38 +106,38 @@ loc_71272:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7127E:
+ICZMiniSK_RunPaletteAndTickWait:
                 jsr     (Run_PalRotationScript).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_7128A:
+ICZMiniSK_RequestOrbAssembly:
                 bset    #2,$38(a0)
                 move.w  #$7F,$2E(a0)
-                move.l  #loc_712A8,$34(a0)
+                move.l  #ICZMiniSK_BeginFastDescent,$34(a0)
                 moveq   #signextendB(sfx_TunnelBooster),d0
                 jsr     (Play_SFX).l
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_712A8:
+ICZMiniSK_BeginFastDescent:
                 move.b  #8,routine(a0)
                 move.w  #$300,y_vel(a0)
                 move.w  #7,$2E(a0)
-                move.l  #loc_712D6,$34(a0)
+                move.l  #ICZMiniSK_LoadArcRepeatCount,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_712C4:
+ICZMiniSK_DescendRunPaletteAndWait:
                 jsr     (MoveSprite2).l
                 jsr     (Run_PalRotationScript).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_712D6:
+ICZMiniSK_LoadArcRepeatCount:
                 bsr.w   SelectICZMinibossArcRepeatCount
 
-loc_712DA:
+ICZMiniSK_ReverseXAndBeginArc:
                 move.b  #$A,routine(a0)
                 move.w  #$300,y_vel(a0)
                 neg.w   $3E(a0)
@@ -147,18 +148,18 @@ loc_712DA:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_71300:
+ICZMiniSK_RunPaletteAndMoveArc:
                 jsr     (Run_PalRotationScript).l
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_71318
+                bmi.s   ICZMiniSK_BeginArcRepeatWait
                 addi.w  #-$10,y_vel(a0)
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_71318:
+ICZMiniSK_BeginArcRepeatWait:
                 move.b  #$C,routine(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_7133A,$34(a0)
+                move.l  #ICZMiniSK_RepeatArcOrReleaseOrbs,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 ; unused
@@ -166,9 +167,9 @@ loc_71318:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_7133A:
+ICZMiniSK_RepeatArcOrReleaseOrbs:
                 subq.b  #1,$39(a0)
-                bpl.s   loc_712DA
+                bpl.s   ICZMiniSK_ReverseXAndBeginArc
                 move.b  #$E,routine(a0)
                 bset    #1,$38(a0)
                 move.w  (_unkFAB4).w,d0
@@ -178,74 +179,74 @@ loc_7133A:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7135E:
+ICZMiniSK_RunPaletteAndPollOrbRelease:
                 btst    #1,$38(a0)
-                beq.s   loc_7136C
+                beq.s   ICZMiniSK_BeginReversePalette
                 jmp     (Run_PalRotationScript).l
 ; ---------------------------------------------------------------------------
 
-loc_7136C:
+ICZMiniSK_BeginReversePalette:
                 move.b  #$10,routine(a0)
                 bclr    #2,$38(a0)
-                move.l  #loc_71390,(Palette_rotation_custom).w
-                lea     (word_71B52).l,a1
-                bra.w   loc_71272
+                move.l  #ICZMiniSK_ResetPaletteAndBeginCooldown,(Palette_rotation_custom).w
+                lea     (ICZMiniSK_DecelPaletteScript).l,a1
+                bra.w   ICZMiniSK_CopyPaletteScriptSlot
 ; ---------------------------------------------------------------------------
 
-loc_7138A:
+ICZMiniSK_RunPaletteUntilCallback:
                 jmp     (Run_PalRotationScript).l
 ; ---------------------------------------------------------------------------
 
-loc_71390:
+ICZMiniSK_ResetPaletteAndBeginCooldown:
                 move.b  #$12,routine(a0)
                 move.w  #$222,(Normal_palette_line_2+$14).w
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_713B2,$34(a0)
+                move.l  #ICZMiniSK_BeginVerticalReturn,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_713AC:
+ICZMiniSK_TickPostReleaseCooldown:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_713B2:
+ICZMiniSK_BeginVerticalReturn:
                 move.b  #$14,routine(a0)
                 move.w  #-$100,y_vel(a0)
                 clr.w   x_vel(a0)
                 move.w  #$17,$2E(a0)
-                move.l  #loc_713D2,$34(a0)
+                move.l  #ICZMiniSK_HoldBeforePaletteRestart,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_713D2:
+ICZMiniSK_HoldBeforePaletteRestart:
                 move.b  #4,routine(a0)
                 move.w  #$FF,$2E(a0)
-                move.l  #loc_71258,$34(a0)
+                move.l  #ICZMiniSK_BeginForwardPaletteWait,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_713E8:
+ICZMiniSK_StartSignAndStopSnow:
                 jsr     (Obj_EndSignControl).l
                 movea.w (_unkFAAE).w,a1
                 cmpi.l  #SKICZSnowPile_UpdateCameraSnowEmitter,(a1)
-                bne.s   loc_71400
+                bne.s   ICZMiniSK_TryDefeatPaletteActor
                 bset    #5,$38(a1)
 
-loc_71400:
+ICZMiniSK_TryDefeatPaletteActor:
                 cmpi.b  #2,(Player_1+character_id).w
-                beq.s   loc_71416
+                beq.s   ICZMiniSK_SpawnBreakupFragments
                 jsr     (AllocateObject).l
-                bne.s   loc_71416
-                move.l  #loc_71420,(a1)
+                bne.s   ICZMiniSK_SpawnBreakupFragments
+                move.l  #ICZMiniSK_InitDefeatPaletteActor,(a1)
 
-loc_71416:
-                lea     ChildObjDat_719B0(pc),a2
+ICZMiniSK_SpawnBreakupFragments:
+                lea     ICZMiniSK_DefeatFragmentChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_71420:
-                move.l  #loc_71440,(a0)
-                lea     (word_719FA).l,a1
+ICZMiniSK_InitDefeatPaletteActor:
+                move.l  #ICZMiniSK_DefeatPaletteActorUpdate,(a0)
+                lea     (ICZMiniSK_DefeatPaletteScript).l,a1
                 lea     (Palette_rotation_data).w,a2
                 move.l  (a1)+,(a2)+
                 move.l  (a1)+,(a2)+
@@ -254,46 +255,46 @@ loc_71420:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_71440:
+ICZMiniSK_DefeatPaletteActorUpdate:
                 jmp     (Run_PalRotationScript).l
 ; ---------------------------------------------------------------------------
 
-loc_71446:
+ICZMiniSK_TrimFollowDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_71462(pc,d0.w),d1
-                jsr     off_71462(pc,d1.w)
+                move.w  ICZMiniSK_TrimStateOffsets(pc,d0.w),d1
+                jsr     ICZMiniSK_TrimStateOffsets(pc,d1.w)
                 jsr     (Refresh_ChildPosition).l
                 moveq   #0,d0
                 jmp     (Child_Draw_Sprite2_FlickerMove).l
 ; ---------------------------------------------------------------------------
-off_71462:
-                dc.w    loc_7146A-off_71462
-                dc.w    loc_71478-off_71462
-                dc.w    loc_71498-off_71462
-                dc.w    locret_714B6-off_71462
+ICZMiniSK_TrimStateOffsets:
+                dc.w    ICZMiniSK_InitTrimBySubtype-ICZMiniSK_TrimStateOffsets
+                dc.w    ICZMiniSK_TrimWaitForSeparation-ICZMiniSK_TrimStateOffsets
+                dc.w    ICZMiniSK_TrimApplyByteStepsAndWait-ICZMiniSK_TrimStateOffsets
+                dc.w    ICZMinibossSK_Trim_ReturnFromFinalIdle-ICZMiniSK_TrimStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_7146A:
-                lea     word_7196C(pc),a1
+ICZMiniSK_InitTrimBySubtype:
+                lea     ICZMiniSK_TrimAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                bra.w   loc_716B2
+                bra.w   ICZMiniSK_TrimSelectSubtypeFrame
 ; ---------------------------------------------------------------------------
 
-loc_71478:
+ICZMiniSK_TrimWaitForSeparation:
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                bne.s   loc_71486
+                bne.s   ICZMiniSK_TrimBeginOffsetMotion
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_71486:
+ICZMiniSK_TrimBeginOffsetMotion:
                 move.b  #4,routine(a0)
-                move.l  #loc_714AE,$34(a0)
-                bra.w   loc_716C8
+                move.l  #ICZMinibossSK_Trim_SelectFinalOffsetIdle,$34(a0)
+                bra.w   ICZMiniSK_TrimLoadStepsAndWait
 ; ---------------------------------------------------------------------------
 
-loc_71498:
+ICZMiniSK_TrimApplyByteStepsAndWait:
                 move.b  x_vel(a0),d0
                 add.b   d0,child_dx(a0)
                 move.b  x_vel+1(a0),d0
@@ -301,86 +302,86 @@ loc_71498:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_714AE:
+ICZMinibossSK_Trim_SelectFinalOffsetIdle:
                 move.b  #6,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_714B6:
+ICZMinibossSK_Trim_ReturnFromFinalIdle:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_714B8:
+ICZMiniSK_OrbDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_714CE(pc,d0.w),d1
-                jsr     off_714CE(pc,d1.w)
+                move.w  ICZMiniSK_OrbStateOffsets(pc,d0.w),d1
+                jsr     ICZMiniSK_OrbStateOffsets(pc,d1.w)
                 moveq   #0,d0
                 jmp     (Child_DrawTouch_Sprite2_FlickerMove).l
 ; ---------------------------------------------------------------------------
-off_714CE:
-                dc.w    loc_714E6-off_714CE
-                dc.w    loc_714F4-off_714CE
-                dc.w    loc_7151E-off_714CE
-                dc.w    loc_7155A-off_714CE
-                dc.w    loc_7157C-off_714CE
-                dc.w    loc_71594-off_714CE
-                dc.w    loc_715B4-off_714CE
-                dc.w    loc_71600-off_714CE
-                dc.w    loc_7155A-off_714CE
-                dc.w    loc_7164E-off_714CE
-                dc.w    loc_7155A-off_714CE
-                dc.w    locret_71688-off_714CE
+ICZMiniSK_OrbStateOffsets:
+                dc.w    ICZMiniSK_InitOrbAtLowerBand-ICZMiniSK_OrbStateOffsets
+                dc.w    ICZMiniSK_OrbWaitForAssembly-ICZMiniSK_OrbStateOffsets
+                dc.w    ICZMiniSK_OrbApplyVIntJitter-ICZMiniSK_OrbStateOffsets
+                dc.w    ICZMiniSK_OrbMoveAndTickFlight-ICZMiniSK_OrbStateOffsets
+                dc.w    ICZMiniSK_OrbOrbitOrAlignForRelease-ICZMiniSK_OrbStateOffsets
+                dc.w    ICZMiniSK_OrbChooseReleaseTilt-ICZMiniSK_OrbStateOffsets
+                dc.w    ICZMiniSK_OrbOrbitAndCheckAck-ICZMiniSK_OrbStateOffsets
+                dc.w    ICZMiniSK_OrbWaitForDispersalPhase-ICZMiniSK_OrbStateOffsets
+                dc.w    ICZMiniSK_OrbMoveAndTickFlight-ICZMiniSK_OrbStateOffsets
+                dc.w    ICZMiniSK_OrbWaitBeforeDrop-ICZMiniSK_OrbStateOffsets
+                dc.w    ICZMiniSK_OrbMoveAndTickFlight-ICZMiniSK_OrbStateOffsets
+                dc.w    ICZMiniSK_OrbFinalIdle-ICZMiniSK_OrbStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_714E6:
-                lea     ObjDat3_71972(pc),a1
+ICZMiniSK_InitOrbAtLowerBand:
+                lea     ICZMiniSK_OrbAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                bra.w   loc_716F4
+                bra.w   ICZMiniSK_OrbSetLowerSpawnBand
 ; ---------------------------------------------------------------------------
 
-loc_714F4:
+ICZMiniSK_OrbWaitForAssembly:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                bne.s   loc_71502
+                bne.s   ICZMiniSK_OrbBeginJitteredRise
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_71502:
+ICZMiniSK_OrbBeginJitteredRise:
                 move.b  #4,routine(a0)
                 move.w  #-$40,y_vel(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_7153A,$34(a0)
+                move.l  #ICZMiniSK_OrbBeginOrbitApproach,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7151E:
+ICZMiniSK_OrbApplyVIntJitter:
                 moveq   #1,d0
                 btst    #0,(V_int_run_count+3).w
-                beq.s   loc_7152A
+                beq.s   ICZMinibossSK_Orb_AddJitterMoveThenWait
                 neg.w   d0
 
-loc_7152A:
+ICZMinibossSK_Orb_AddJitterMoveThenWait:
                 add.w   d0,x_pos(a0)
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_7153A:
+ICZMiniSK_OrbBeginOrbitApproach:
                 move.b  #6,routine(a0)
                 move.w  #$180,priority(a0)
                 bsr.w   SetICZMinibossOrbApproachVelocity
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_71566,$34(a0)
+                move.l  #ICZMiniSK_OrbEnableCollisionAndOrbit,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7155A:
+ICZMiniSK_OrbMoveAndTickFlight:
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_71566:
+ICZMiniSK_OrbEnableCollisionAndOrbit:
                 move.b  #8,routine(a0)
                 move.b  #$8B,collision_flags(a0)
                 moveq   #signextendB(sfx_BossRotate),d0
@@ -388,37 +389,37 @@ loc_71566:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7157C:
+ICZMiniSK_OrbOrbitOrAlignForRelease:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                bne.s   loc_7158C
-                bra.w   loc_7179E
+                bne.s   ICZMiniSK_OrbBeginReleaseAlignment
+                bra.w   ICZMiniSK_OrbAdvanceTiltAndProject
 ; ---------------------------------------------------------------------------
 
-loc_7158C:
+ICZMiniSK_OrbBeginReleaseAlignment:
                 move.b  #$A,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_71594:
+ICZMiniSK_OrbChooseReleaseTilt:
                 movea.w parent3(a0),a1
                 moveq   #0,d0
                 tst.b   $43(a1)
-                bne.s   loc_715A2
+                bne.s   ICZMiniSK_OrbWaitForReleaseTilt
                 moveq   #-$80,d0
 
-loc_715A2:
+ICZMiniSK_OrbWaitForReleaseTilt:
                 cmp.b   $3D(a0),d0
-                beq.s   loc_715AC
-                bra.w   loc_7179E
+                beq.s   ICZMiniSK_OrbBeginReleaseOrbit
+                bra.w   ICZMiniSK_OrbAdvanceTiltAndProject
 ; ---------------------------------------------------------------------------
 
-loc_715AC:
+ICZMiniSK_OrbBeginReleaseOrbit:
                 move.b  #$C,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_715B4:
+ICZMiniSK_OrbOrbitAndCheckAck:
                 addq.b  #4,$3C(a0)
                 lea     (ICZMiniboss_OrbAngleLookup).l,a2
                 jsr     (MoveSprite_AtAngleLookup).l
@@ -426,28 +427,29 @@ loc_715B4:
                 bsr.w   TiltAndDepthSortICZMinibossOrb
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                beq.s   loc_715F0
+                beq.s   ICZMiniSK_OrbAckAndLoadDispersal
                 tst.b   subtype(a0)
-                bne.w   locret_711BC
+                bne.w   ICZMiniSK_SharedReturn
                 moveq   #0,d0
                 tst.b   $43(a1)
-                bne.s   loc_715E8
+                bne.s   ICZMiniSK_OrbZeroCheckReleasePhase
                 moveq   #-$80,d0
 
-loc_715E8:
+; Only orb zero clears the shared request when it reaches the phase for the selected side
+ICZMiniSK_OrbZeroCheckReleasePhase:
                 cmp.b   $3C(a0),d0
-                bne.w   locret_711BC
+                bne.w   ICZMiniSK_SharedReturn
 
-loc_715F0:
+ICZMiniSK_OrbAckAndLoadDispersal:
                 move.b  #$E,routine(a0)
                 bclr    #1,$38(a1)
-                bra.w   loc_7186A
+                bra.w   ICZMiniSK_OrbChooseDispersalPlan
 ; ---------------------------------------------------------------------------
 
-loc_71600:
+ICZMiniSK_OrbWaitForDispersalPhase:
                 move.b  $3C(a0),d0
                 cmp.b   $42(a0),d0
-                beq.s   loc_71620
+                beq.s   ICZMiniSK_OrbBeginDispersalFlight
                 addq.b  #4,$3C(a0)
                 lea     (ICZMiniboss_OrbAngleLookup).l,a2
                 jsr     (MoveSprite_AtAngleLookup).l
@@ -455,47 +457,47 @@ loc_71600:
                 bra.w   TiltAndDepthSortICZMinibossOrb
 ; ---------------------------------------------------------------------------
 
-loc_71620:
+ICZMiniSK_OrbBeginDispersalFlight:
                 move.b  #$10,routine(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_71636,$34(a0)
+                move.l  #ICZMiniSK_OrbRandomizeUpperDropPoint,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_71636:
+ICZMiniSK_OrbRandomizeUpperDropPoint:
                 move.b  #$12,routine(a0)
                 move.w  #$7F,$2E(a0)
-                move.l  #loc_71654,$34(a0)
-                bra.w   loc_718CA
+                move.l  #ICZMiniSK_OrbBeginVerticalDrop,$34(a0)
+                bra.w   ICZMiniSK_OrbSetUpperSpawnBand
 ; ---------------------------------------------------------------------------
 
-loc_7164E:
+ICZMiniSK_OrbWaitBeforeDrop:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_71654:
+ICZMiniSK_OrbBeginVerticalDrop:
                 move.b  #$14,routine(a0)
                 moveq   #signextendB(sfx_LevelProjectile),d0
                 jsr     (Play_SFX).l
                 move.w  #$400,y_vel(a0)
                 clr.w   x_vel(a0)
                 move.w  #$45,$2E(a0)
-                move.l  #loc_7167C,$34(a0)
+                move.l  #ICZMiniSK_OrbDisableAndRearmAssembly,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7167C:
+ICZMiniSK_OrbDisableAndRearmAssembly:
                 move.b  #2,routine(a0)
                 clr.b   collision_flags(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_71688:
+ICZMiniSK_OrbFinalIdle:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7168A:
-                lea     word_7197E(pc),a1
+ICZMiniSK_InitDefeatFragment:
+                lea     ICZMiniSK_FragmentAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.l  #Obj_FlickerMove,(a0)
                 moveq   #0,d0
@@ -507,40 +509,40 @@ loc_7168A:
                 jmp     (Set_IndexedVelocity).l
 ; ---------------------------------------------------------------------------
 
-loc_716B2:
+ICZMiniSK_TrimSelectSubtypeFrame:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lsr.w   #1,d0
-                move.b  RawAni_716C2(pc,d0.w),mapping_frame(a0)
+                move.b  ICZMiniSK_TrimFramesBySubtype(pc,d0.w),mapping_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------
-RawAni_716C2:
+ICZMiniSK_TrimFramesBySubtype:
                 dc.b    1,   9,   3,   2,  $A,   4
                 even
 ; ---------------------------------------------------------------------------
 
-loc_716C8:
+ICZMiniSK_TrimLoadStepsAndWait:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_716DC(pc,d0.w),x_vel(a0)
-                move.w  word_716E8(pc,d0.w),$2E(a0)
+                move.w  ICZMiniSK_TrimPackedOffsetSteps(pc,d0.w),x_vel(a0)
+                move.w  ICZMiniSK_TrimOffsetStepWaits(pc,d0.w),$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
-word_716DC:
+ICZMiniSK_TrimPackedOffsetSteps:
                 dc.w    -1,  $1FF,     1,    -1,  $1FF,     1
-word_716E8:
+ICZMiniSK_TrimOffsetStepWaits:
                 dc.w    2,     2,     3,     6,     6,     8
 ; ---------------------------------------------------------------------------
 
-loc_716F4:
+ICZMiniSK_OrbSetLowerSpawnBand:
                 move.w  (_unkFAB0).w,d0
                 addi.w  #$D8,d0
                 move.w  d0,y_pos(a0)
 
-loc_71700:
+ICZMiniSK_OrbRandomizeLaneAndHeight:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_71730(pc,d0.w),d2
+                move.w  ICZMiniSK_OrbLaneXOffsets(pc,d0.w),d2
                 jsr     (Random_Number).l
                 andi.w  #7,d0
                 subq.w  #3,d0
@@ -553,7 +555,7 @@ loc_71700:
                 add.w   d0,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
-word_71730:
+ICZMiniSK_OrbLaneXOffsets:
                 dc.w    -$20
                 dc.w    $20
                 dc.w    $60
@@ -601,7 +603,7 @@ SetICZMinibossOrbApproachVelocity:
 
 ; ---------------------------------------------------------------------------
 
-loc_7179E:
+ICZMiniSK_OrbAdvanceTiltAndProject:
                 addq.b  #4,$3C(a0)
                 lea     (ICZMiniboss_OrbAngleLookup).l,a2
                 jsr     (MoveSprite_AtAngleLookup).l
@@ -614,66 +616,67 @@ loc_7179E:
 TiltAndDepthSortICZMinibossOrb:
                 jsr     (GetSineCosine).l
                 tst.w   d1
-                bpl.s   loc_717C4
+                bpl.s   ICZMiniSK_TiltGetYDistanceAndSide
                 neg.w   d1
 
-loc_717C4:
+ICZMiniSK_TiltGetYDistanceAndSide:
                 move.w  y_pos(a0),d2
                 move.w  y_pos(a1),d4
                 sub.w   d4,d2
                 scs     d3
-                bcc.s   loc_717D4
+                bcc.s   ICZMiniSK_TiltScaleYDistance
                 neg.w   d2
 
-loc_717D4:
+; Invert the projection sign for tilt angles in the middle half-turn
+ICZMiniSK_TiltScaleYDistance:
                 mulu.w  d1,d2
                 lsr.l   #8,d2
                 cmpi.b  #$40,$3D(a0)
-                blo.s   loc_717EA
+                blo.s   ICZMiniSK_TiltRestoreYOffsetSign
                 cmpi.b  #-$40,$3D(a0)
-                bhs.s   loc_717EA
+                bhs.s   ICZMiniSK_TiltRestoreYOffsetSign
                 not.b   d3
 
-loc_717EA:
+ICZMiniSK_TiltRestoreYOffsetSign:
                 tst.b   d3
-                beq.s   loc_717F0
+                beq.s   ICZMiniSK_TiltStoreYAndChooseSide
                 neg.w   d2
 
-loc_717F0:
+ICZMiniSK_TiltStoreYAndChooseSide:
                 add.w   d2,d4
                 move.w  d4,y_pos(a0)
                 move.b  $3D(a0),d0
                 spl     d3
                 cmpi.b  #$40,$3C(a0)
-                blo.s   loc_7180E
+                blo.s   ICZMiniSK_TiltChooseOrbFrame
                 cmpi.b  #-$40,$3C(a0)
-                bhs.s   loc_7180E
+                bhs.s   ICZMiniSK_TiltChooseOrbFrame
                 not.b   d3
 
-loc_7180E:
+ICZMiniSK_TiltChooseOrbFrame:
                 move.b  #6,mapping_frame(a0)
                 cmpi.b  #$20,d0
-                blo.s   loc_7183C
+                blo.s   ICZMiniSK_TiltChooseSpritePriority
                 cmpi.b  #$60,d0
-                blo.s   loc_7182C
+                blo.s   ICZMiniSK_TiltChooseSideFrame
                 cmpi.b  #-$60,d0
-                blo.s   loc_7183C
+                blo.s   ICZMiniSK_TiltChooseSpritePriority
                 cmpi.b  #-$20,d0
-                bhs.s   loc_7183C
+                bhs.s   ICZMiniSK_TiltChooseSpritePriority
 
-loc_7182C:
+ICZMiniSK_TiltChooseSideFrame:
                 move.b  #5,mapping_frame(a0)
                 tst.b   d3
-                bne.s   loc_7183C
+                bne.s   ICZMiniSK_TiltChooseSpritePriority
                 move.b  #8,mapping_frame(a0)
 
-loc_7183C:
+ICZMiniSK_TiltChooseSpritePriority:
                 move.w  #$180,priority(a0)
                 tst.b   d3
-                bne.s   locret_7184C
+                bne.s   ICZMiniSK_TiltProjectionReturn
                 move.w  #$300,priority(a0)
 
-locret_7184C:
+ICZMiniSK_TiltProjectionReturn:
                 rts
 ; End of function TiltAndDepthSortICZMinibossOrb
 
@@ -683,42 +686,42 @@ SelectICZMinibossArcRepeatCount:
                 move.b  $3A(a0),d0
                 addq.b  #1,$3A(a0)
                 andi.w  #7,d0
-                move.b  byte_71862(pc,d0.w),$39(a0)
+                move.b  ICZMiniSK_ArcRepeatCounts(pc,d0.w),$39(a0)
                 rts
 ; End of function SelectICZMinibossArcRepeatCount
 
 ; ---------------------------------------------------------------------------
-byte_71862:
+ICZMiniSK_ArcRepeatCounts:
                 dc.b    1,   0,   1,   1,   0,   1,   0,   0
                 even
 ; ---------------------------------------------------------------------------
 
-loc_7186A:
+ICZMiniSK_OrbChooseDispersalPlan:
                 movea.w parent3(a0),a1
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,d1
                 lsr.w   #1,d1
                 tst.b   $43(a1)
-                bne.s   loc_71880
+                bne.s   ICZMiniSK_OrbApplyDispersalPlan
                 addq.w  #8,d1
 
-loc_71880:
-                move.b  byte_7189A(pc,d1.w),$42(a0)
+ICZMiniSK_OrbApplyDispersalPlan:
+                move.b  ICZMiniSK_OrbDispersalPhaseBanks(pc,d1.w),$42(a0)
                 add.w   d0,d0
-                move.l  word_718AA(pc,d0.w),x_vel(a0)   ; and y_vel
+                move.l  ICZMiniSK_OrbDispersalVelocities(pc,d0.w),x_vel(a0)  ; and y_vel
                 tst.b   $43(a1)
-                bne.s   locret_71898
+                bne.s   ICZMiniSK_OrbDispersalSetupReturn
                 neg.w   x_vel(a0)
 
-locret_71898:
+ICZMiniSK_OrbDispersalSetupReturn:
                 rts
 ; ---------------------------------------------------------------------------
-byte_7189A:
+ICZMiniSK_OrbDispersalPhaseBanks:
                 dc.b    $60, $5C, $58, $54, $50, $4C, $48, $44
                 dc.b    $E0, $DC, $D8, $D4, $D0, $CC, $C8, $C4
                 even
-word_718AA:
+ICZMiniSK_OrbDispersalVelocities:
                 dc.w    -$300, -$400
                 dc.w    -$200, -$400
                 dc.w    -$100, -$400
@@ -729,46 +732,46 @@ word_718AA:
                 dc.w    $400, -$400
 ; ---------------------------------------------------------------------------
 
-loc_718CA:
+ICZMiniSK_OrbSetUpperSpawnBand:
                 move.w  (_unkFAB0).w,d0
                 subi.w  #$40,d0
                 move.w  d0,y_pos(a0)
-                bra.w   loc_71700
+                bra.w   ICZMiniSK_OrbRandomizeLaneAndHeight
 
 ; =============== S U B R O U T I N E =======================================
 
 HandleICZMinibossTwoColorHitOrDefeat:
                 tst.b   collision_flags(a0)
-                bne.s   locret_71924
+                bne.s   ICZMiniSK_HitUpdateReturn
                 tst.b   collision_property(a0)
-                beq.s   loc_71926
+                beq.s   ICZMiniSK_BeginDefeatWaitAndExplosion
                 tst.b   $20(a0)
-                bne.s   loc_718FA
+                bne.s   ICZMiniSK_HitChooseFlashRow
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
 
-loc_718FA:
+ICZMiniSK_HitChooseFlashRow:
                 bset    #6,status(a0)
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_7190E
+                bne.s   ICZMiniSK_HitCopyColorsAndTick
                 addi.w  #2*2,d0
 
-loc_7190E:
+ICZMiniSK_HitCopyColorsAndTick:
                 bsr.w   CopyICZMinibossTwoColorPalette
                 subq.b  #1,$20(a0)
-                bne.s   locret_71924
+                bne.s   ICZMiniSK_HitUpdateReturn
                 bclr    #6,status(a0)
                 move.b  $25(a0),collision_flags(a0)
 
-locret_71924:
+ICZMiniSK_HitUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_71926:
+ICZMiniSK_BeginDefeatWaitAndExplosion:
                 move.l  #Wait_FadeToLevelMusic,(a0)
-                move.l  #loc_713E8,$34(a0)
+                move.l  #ICZMiniSK_StartSignAndStopSnow,$34(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild1_Normal).l
                 jmp     (BossDefeated_StopTimer).l
@@ -777,59 +780,59 @@ loc_71926:
 ; =============== S U B R O U T I N E =======================================
 
 CopyICZMinibossTwoColorPalette:
-                lea     word_71954(pc),a1
-                lea     word_71958(pc,d0.w),a2
+                lea     ICZMiniSK_HitPaletteDestinations(pc),a1
+                lea     ICZMiniSK_HitPaletteColorRows(pc,d0.w),a2
                 jmp     (CopyWordData_2).l
 ; End of function CopyICZMinibossTwoColorPalette
 
 ; ---------------------------------------------------------------------------
-word_71954:
+ICZMiniSK_HitPaletteDestinations:
                 dc.w    Normal_palette_line_2+$14, Normal_palette_line_2+$16
-word_71958:
+ICZMiniSK_HitPaletteColorRows:
                 dc.w    $222,   $20
                 dc.w    $EEE,  $EEE
-ObjDat3_71960:
+ICZMiniSK_BodyAttributes:
                 dc.l    Map_ICZMiniboss
                 dc.w    make_art_tile(ArtTile_ICZMiniboss,1,1)
                 dc.w    $280
                 dc.b    $18, $18,   0,   6
-word_7196C:
+ICZMiniSK_TrimAttributes:
                 dc.w    $280
                 dc.b    $10,  $C,   1,   0
-ObjDat3_71972:
+ICZMiniSK_OrbAttributes:
                 dc.l    Map_ICZMiniboss
                 dc.w    make_art_tile(ArtTile_ICZMiniboss,2,0)
                 dc.w    $280
                 dc.b    $C,  $C,   6,   0
-word_7197E:
+ICZMiniSK_FragmentAttributes:
                 dc.w    $180
                 dc.b    $C,  $C,  $B,   0
-ChildObjDat_71984:
+ICZMinibossSK_Root_SixNormalTrimRecords:
                 dc.w    6-1
-                dc.l    loc_71446
+                dc.l    ICZMiniSK_TrimFollowDispatchAndDraw
                 dc.b    -$E, -$B
-                dc.l    loc_71446
+                dc.l    ICZMiniSK_TrimFollowDispatchAndDraw
                 dc.b    $E, -$B
-                dc.l    loc_71446
+                dc.l    ICZMiniSK_TrimFollowDispatchAndDraw
                 dc.b    0, $12
-                dc.l    loc_71446
+                dc.l    ICZMiniSK_TrimFollowDispatchAndDraw
                 dc.b    -$E, -$B
-                dc.l    loc_71446
+                dc.l    ICZMiniSK_TrimFollowDispatchAndDraw
                 dc.b    $E, -$B
-                dc.l    loc_71446
+                dc.l    ICZMiniSK_TrimFollowDispatchAndDraw
                 dc.b    0,  $E
-ChildObjDat_719AA:
+ICZMinibossSK_Root_EightSimpleOrbRecord:
                 dc.w    8-1
-                dc.l    loc_714B8
-ChildObjDat_719B0:
+                dc.l    ICZMiniSK_OrbDispatchAndDraw
+ICZMiniSK_DefeatFragmentChildren:
                 dc.w    4-1
-                dc.l    loc_7168A
+                dc.l    ICZMiniSK_InitDefeatFragment
                 dc.b    -$C, -$C
-                dc.l    loc_7168A
+                dc.l    ICZMiniSK_InitDefeatFragment
                 dc.b    $C, -$C
-                dc.l    loc_7168A
+                dc.l    ICZMiniSK_InitDefeatFragment
                 dc.b    -$C,  $C
-                dc.l    loc_7168A
+                dc.l    ICZMiniSK_InitDefeatFragment
                 dc.b    $C,  $C
                 dc.b    0
                 dc.b    3

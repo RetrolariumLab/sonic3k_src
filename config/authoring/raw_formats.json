@@ -285,19 +285,19 @@
     },
     {
       "path": "src/objects/bosses/icz/s3/end_boss.s",
-      "sha256": "af96c181d6794a5bd84c15c49dc9ce00709e78ba8dfc0dadef843099516d1fd6"
+      "sha256": "02e380e2eb1b4d7de5ee9a38d556feffcc571a8c6f7102450575887d53d5d36e"
     },
     {
       "path": "src/objects/bosses/icz/s3/miniboss.s",
-      "sha256": "ee8435c864eb41b44ac43e8aa6538d0b3c766e6b9afd0bd876bb5ffd9e0b2b50"
+      "sha256": "887b9ed3ca3df54f7f0f70feeeda02c02b445edbcdf8a0f62a44389715c5e04a"
     },
     {
       "path": "src/objects/bosses/icz/sk/end_boss.s",
-      "sha256": "16c6256d934396dd01a925aba391e5606d06e19baa73f70e5b597d8e1bf7defb"
+      "sha256": "95a742f18e5edb6c402162a4f71874bb22244ceda87c11b1995e210e98ed75a8"
     },
     {
       "path": "src/objects/bosses/icz/sk/miniboss.s",
-      "sha256": "d0cbce5a2018c041b79c44b2b39dbf1c90c15fcc4426078750b657a0e2b75a1d"
+      "sha256": "6cd104cae6fa8e3b572b2df688b4acd5ca08ec920f314e0563ae26af46528670"
     },
     {
       "path": "src/objects/bosses/lbz/end_boss/sk/battle_and_attacks.s",
@@ -2383,13 +2383,13 @@
     },
     {
       "path": "src/objects/bosses/icz/s3/end_boss.s",
-      "symbol": "byte_4F414",
-      "scope": "byte_4F414",
-      "first_line": 741,
-      "last_line": 768,
+      "symbol": "ICZBossS3_CloudFrames5To10Anim",
+      "scope": "ICZBossS3_CloudFrames5To10Anim",
+      "first_line": 744,
+      "last_line": 771,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 48,
-      "declarations_sha256": "bebe4471da680cf61bf9a68a7a70ba15007d8198706118379e780209514c245f",
+      "declarations_sha256": "26b2e430ab59afd283872cf1c35d877cff3568918236396b14e53df1c82f75a2",
       "entries": [
         [0, "pairs"],
         [15, "pairs"],
@@ -2397,32 +2397,32 @@
         [43, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_4F414", "byte_4F423", "byte_4F430"],
+      "members": ["ICZBossS3_CloudFrames5To10Anim", "ICZBossS3_CloudFrames11To15Anim", "ICZBossS3_CloudMode6Anim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/icz/s3/miniboss.s",
-      "symbol": "RawAni_4E8BA",
-      "scope": "RawAni_4E8BA",
-      "first_line": 519,
-      "last_line": 521,
+      "symbol": "ICZMiniS3_TrimFramesBySubtype",
+      "scope": "ICZMiniS3_TrimFramesBySubtype",
+      "first_line": 521,
+      "last_line": 523,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 6,
-      "declarations_sha256": "93be160bd6a8a6705686afa14af4ed9dfb5aebe4295d1652932d4bf184238f4a",
+      "declarations_sha256": "37b0e15e33a12b2d3db30b4a16d99eb5d3924f76c80886dc8a3d57c288db6f46",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_4E8BA"],
+      "members": ["ICZMiniS3_TrimFramesBySubtype"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/icz/sk/end_boss.s",
-      "symbol": "byte_72380",
-      "scope": "byte_72380",
-      "first_line": 751,
-      "last_line": 778,
+      "symbol": "ICZBossSK_CloudFrames5To10Anim",
+      "scope": "ICZBossSK_CloudFrames5To10Anim",
+      "first_line": 755,
+      "last_line": 782,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 48,
-      "declarations_sha256": "19bebd9d41072765ea60189dfa466fca1753129eaa1d35c9de958c043773a072",
+      "declarations_sha256": "b640c1cf6b3b081bdf16e4eacae326ef002840af7d0bff39a203ba9061fe7396",
       "entries": [
         [0, "pairs"],
         [15, "pairs"],
@@ -2430,21 +2430,21 @@
         [43, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_72380", "byte_7238F", "byte_7239C"],
+      "members": ["ICZBossSK_CloudFrames5To10Anim", "ICZBossSK_CloudFrames11To15Anim", "ICZBossSK_CloudMode6Anim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/icz/sk/miniboss.s",
-      "symbol": "RawAni_716C2",
-      "scope": "RawAni_716C2",
-      "first_line": 517,
-      "last_line": 519,
+      "symbol": "ICZMiniSK_TrimFramesBySubtype",
+      "scope": "ICZMiniSK_TrimFramesBySubtype",
+      "first_line": 519,
+      "last_line": 521,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 6,
-      "declarations_sha256": "f697d85e4ab16bbb402c0f96ec9f803975ba158b29303b3c967a4e0eb6f3aabe",
+      "declarations_sha256": "15522edc9bb9f8573230f1367e53febd877fdc0e670694c76e7c592a9cc0af5a",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_716C2"],
+      "members": ["ICZMiniSK_TrimFramesBySubtype"],
       "stored_markers": []
     },
     {

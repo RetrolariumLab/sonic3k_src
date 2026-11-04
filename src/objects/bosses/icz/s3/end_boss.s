@@ -4,9 +4,9 @@
 ; ---------------------------------------------------------------------------
 
 Obj_ICZEndBoss:
-                lea     word_4ED28(pc),a1
+                lea     ICZBossS3_ArenaActivationBounds(pc),a1
                 jsr     (Check_CameraInRange).l
-                move.l  #loc_4ED30,(a0)
+                move.l  #ICZBossS3_TickArenaTransition,(a0)
                 move.b  #1,(Boss_flag).w
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
@@ -16,116 +16,116 @@ Obj_ICZEndBoss:
                 move.w  #$5F8,(Camera_target_max_Y_pos).w
                 move.w  #$4390,$1C(a0)
                 move.w  #$4390,(Camera_max_X_pos).w
-                move.l  #loc_4ED34,$34(a0)
+                move.l  #ICZBossS3_InstallBattleDispatcher,$34(a0)
                 moveq   #PLCID_70,d0
                 jsr     (Load_PLC).l
                 lea     Pal_ICZEndBoss(pc),a1
                 jmp     PalLoad_Line1(pc)
 ; ---------------------------------------------------------------------------
-word_4ED28:
+ICZBossS3_ArenaActivationBounds:
                 dc.w    0,  $6C0, $4340, $4390
 ; ---------------------------------------------------------------------------
 
-loc_4ED30:
+ICZBossS3_TickArenaTransition:
                 jmp     S3EndCamera_TickMusicDelay(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4ED34:
-                move.l  #loc_4ED3C,(a0)
+ICZBossS3_InstallBattleDispatcher:
+                move.l  #ICZBossS3_BattleDispatchHitAndDraw,(a0)
 
-locret_4ED3A:
+ICZBossS3_SharedReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4ED3C:
+ICZBossS3_BattleDispatchHitAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_4ED52(pc,d0.w),d1
-                jsr     off_4ED52(pc,d1.w)
+                move.w  ICZEndBossS3_Root_FourStateOffsets(pc,d0.w),d1
+                jsr     ICZEndBossS3_Root_FourStateOffsets(pc,d1.w)
                 bsr.w   ICZBoss_HandleHitPhaseOrDefeat
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
-off_4ED52:
-                dc.w    loc_4ED5A-off_4ED52
-                dc.w    loc_4ED96-off_4ED52
-                dc.w    loc_4EDC0-off_4ED52
-                dc.w    loc_4EE5A-off_4ED52
+ICZEndBossS3_Root_FourStateOffsets:
+                dc.w    ICZBossS3_InitBodyAndTryShip-ICZEndBossS3_Root_FourStateOffsets
+                dc.w    ICZEndBossS3_Root_MoveEntranceThenWait-ICZEndBossS3_Root_FourStateOffsets
+                dc.w    ICZBossS3_BobAndTickTurn-ICZEndBossS3_Root_FourStateOffsets
+                dc.w    ICZBossS3_DescendDuringPhaseChange-ICZEndBossS3_Root_FourStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_4ED5A:
-                lea     ObjDat3_4F39A(pc),a1
+ICZBossS3_InitBodyAndTryShip:
+                lea     ICZEndBossS3_Root_FullBodyAttributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.b  #8,collision_property(a0)
                 move.w  #$80,y_vel(a0)
                 move.w  #$CF,$2E(a0)
-                move.l  #loc_4EDA0,$34(a0)
-                lea     (ChildObjDat_4F3CA).l,a2
+                move.l  #ICZBossS3_InitBobAndTurnCounter,$34(a0)
+                lea     (ICZBossS3_ShipChild).l,a2
                 jsr     CreateChild1_Normal(pc)
-                bne.s   loc_4ED8E
+                bne.s   ICZBossS3_SpawnBodyAttachments
                 move.b  #9,subtype(a1)
 
-loc_4ED8E:
-                lea     ChildObjDat_4F3D2(pc),a2
+ICZBossS3_SpawnBodyAttachments:
+                lea     ICZBossS3_BodyAttachmentChildren(pc),a2
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4ED96:
+ICZEndBossS3_Root_MoveEntranceThenWait:
                 jsr     (MoveSprite2).l
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4EDA0:
+ICZBossS3_InitBobAndTurnCounter:
                 move.w  #$7FFF,$44(a0)
                 bsr.w   InitializeICZEndBossVerticalBob
                 move.b  #4,routine(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_4EDE4,$34(a0)
+                move.l  #ICZBossS3_RequestExtensionAndWait,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4EDC0:
+ICZBossS3_BobAndTickTurn:
                 jsr     Swing_UpAndDown(pc)
                 subq.w  #1,$44(a0)
-                bpl.s   loc_4EDDA
+                bpl.s   ICZBossS3_MoveAndTickExtension
                 neg.w   x_vel(a0)
                 bchg    #0,render_flags(a0)
                 move.w  #$17F,$44(a0)
 
-loc_4EDDA:
+ICZBossS3_MoveAndTickExtension:
                 jsr     (MoveSprite2).l
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4EDE4:
+ICZBossS3_RequestExtensionAndWait:
                 bset    #2,$38(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_4EDFA,$34(a0)
+                move.l  #ICZBossS3_BeginLeftDriftAndAttackWait,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4EDFA:
+ICZBossS3_BeginLeftDriftAndAttackWait:
                 move.w  #$3F,$2E(a0)
                 move.w  #-$80,x_vel(a0)
                 move.w  #$17F,$44(a0)
-                move.l  #loc_4EE16,$34(a0)
+                move.l  #ICZBossS3_RequestFrostAndSpawnClouds,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4EE16:
-                move.l  #loc_4EE3C,$34(a0)
+ICZBossS3_RequestFrostAndSpawnClouds:
+                move.l  #ICZBossS3_ClearFrostAndRestartWait,$34(a0)
                 moveq   #signextendB(sfx_FrostPuff),d0
                 jsr     (Play_SFX).l
                 bsr.w   SelectICZEndBossFrostAttackMode
                 cmpi.w  #2,$26(a0)
-                bne.w   locret_4ED3A
-                lea     ChildObjDat_4F3E6(pc),a2
+                bne.w   ICZBossS3_SharedReturn
+                lea     ICZBossS3_Mode2CloudChildren(pc),a2
                 jmp     CreateChild6_Simple(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4EE3C:
+ICZBossS3_ClearFrostAndRestartWait:
                 bclr    #1,$38(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_4EE16,$34(a0)
+                move.l  #ICZBossS3_RequestFrostAndSpawnClouds,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 ; unused
@@ -133,48 +133,48 @@ loc_4EE3C:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4EE5A:
+ICZBossS3_DescendDuringPhaseChange:
                 subq.w  #1,$3C(a0)
-                bmi.s   loc_4EE6C
+                bmi.s   ICZBossS3_ResumeBobbing
                 addi.l  #$8000,y_pos(a0)
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4EE6C:
+ICZBossS3_ResumeBobbing:
                 move.b  #4,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4EE74:
+ICZBossS3_ReleasePartsAndSpawnDebris:
                 move.l  #Obj_Wait,(a0)
                 bclr    #7,render_flags(a0)
                 bset    #4,$38(a0)
                 move.w  #$7F,$2E(a0)
-                move.l  #loc_4EEA4,$34(a0)
+                move.l  #ICZBossS3_SignalCapsuleAndReleaseCamera,$34(a0)
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
-                lea     ChildObjDat_4F400(pc),a2
+                lea     ICZBossS3_DefeatFragmentChildren(pc),a2
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4EEA4:
-                move.l  #loc_4EECE,(a0)
+ICZBossS3_SignalCapsuleAndReleaseCamera:
+                move.l  #ICZBossS3_RestorePlayersAndExitBounds,(a0)
                 st      (_unkFAA8).w
                 clr.b   (Boss_flag).w
                 jsr     (Restore_LevelMusic).l
                 move.w  #$4390+$130,(Camera_stored_max_X_pos).w
                 jsr     (AllocateObject).l
-                bne.s   locret_4EECC
+                bne.s   ICZBossS3_DefeatCameraSpawnReturn
                 move.l  #Obj_IncLevEndXGradual,(a1)
 
-locret_4EECC:
+ICZBossS3_DefeatCameraSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4EECE:
+ICZBossS3_RestorePlayersAndExitBounds:
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
                 tst.b   (_unkFAA8).w
-                bne.w   locret_4ED3A
+                bne.w   ICZBossS3_SharedReturn
                 clr.b   (_unkFAA8).w
                 jsr     Restore_PlayerControl(pc)
                 lea     (Player_2).w,a1
@@ -186,57 +186,57 @@ loc_4EECE:
                 jmp     (Go_Delete_Sprite_2).l
 ; ---------------------------------------------------------------------------
 
-loc_4EF0A:
+ICZBossS3_UpperFollowDispatchAndDraw:
                 jsr     Refresh_ChildPositionAdjusted(pc)
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_4EF22(pc,d0.w),d1
-                jsr     off_4EF22(pc,d1.w)
+                move.w  ICZEndBossS3_Upper_ThreeStateOffsets(pc,d0.w),d1
+                jsr     ICZEndBossS3_Upper_ThreeStateOffsets(pc,d1.w)
                 moveq   #$C,d0
                 jmp     Child_Draw_Sprite_FlickerMove(pc)
 ; ---------------------------------------------------------------------------
-off_4EF22:
-                dc.w    loc_4EF28-off_4EF22
-                dc.w    loc_4EF30-off_4EF22
-                dc.w    loc_4EF58-off_4EF22
+ICZEndBossS3_Upper_ThreeStateOffsets:
+                dc.w    ICZBossS3_InitUpperAttachment-ICZEndBossS3_Upper_ThreeStateOffsets
+                dc.w    ICZEndBossS3_Upper_WaitForPhaseTwoByte-ICZEndBossS3_Upper_ThreeStateOffsets
+                dc.w    ICZBossS3_UpperTickEmissionWait-ICZEndBossS3_Upper_ThreeStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_4EF28:
-                lea     word_4F3A6(pc),a1
+ICZBossS3_InitUpperAttachment:
+                lea     ICZBossS3_UpperAttributes(pc),a1
                 jmp     SetUp_ObjAttributes3(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4EF30:
+ICZEndBossS3_Upper_WaitForPhaseTwoByte:
                 movea.w parent3(a0),a1
                 tst.b   $3B(a1)
-                bne.s   loc_4EF3C
+                bne.s   ICZBossS3_UpperBeginEmissionDelay
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4EF3C:
+ICZBossS3_UpperBeginEmissionDelay:
                 move.b  #4,routine(a0)
                 move.b  #4,mapping_frame(a0)
                 move.w  #$E,$2E(a0)
-                move.l  #loc_4EF5C,$34(a0)
+                move.l  #ICZBossS3_UpperSpawnModeSixClouds,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4EF58:
+ICZBossS3_UpperTickEmissionWait:
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4EF5C:
+ICZBossS3_UpperSpawnModeSixClouds:
                 move.w  #$17,$2E(a0)
                 move.w  #6,$26(a0)
-                lea     ChildObjDat_4F3F2(pc),a2
+                lea     ICZBossS3_Mode6CloudChildren(pc),a2
                 jmp     CreateChild6_Simple(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4EF70:
+ICZBossS3_CoverFollowAndCheckBreakaway:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_4EF96(pc,d0.w),d1
-                jsr     off_4EF96(pc,d1.w)
+                move.w  ICZBossS3_CoverStateOffsets(pc,d0.w),d1
+                jsr     ICZBossS3_CoverStateOffsets(pc,d1.w)
                 jsr     Refresh_ChildPosition(pc)
                 moveq   #0,d0
                 movea.w parent3(a0),a1
@@ -244,73 +244,73 @@ loc_4EF70:
                 bne.w   S3Child_StartFlickerAndDraw
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-off_4EF96:
-                dc.w    loc_4EFA0-off_4EF96
-                dc.w    loc_4EFA8-off_4EF96
-                dc.w    loc_4EFCC-off_4EF96
-                dc.w    loc_4EFDC-off_4EF96
-                dc.w    loc_4F000-off_4EF96
+ICZBossS3_CoverStateOffsets:
+                dc.w    ICZBossS3_InitCover-ICZBossS3_CoverStateOffsets
+                dc.w    ICZBossS3_CoverCheckExtension-ICZBossS3_CoverStateOffsets
+                dc.w    ICZBossS3_CoverStepOffsetAndWait-ICZBossS3_CoverStateOffsets
+                dc.w    ICZBossS3_CoverWaitForClose-ICZBossS3_CoverStateOffsets
+                dc.w    ICZBossS3_CoverStepClosingAndWait-ICZBossS3_CoverStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_4EFA0:
-                lea     word_4F3AC(pc),a1
+ICZBossS3_InitCover:
+                lea     ICZBossS3_CoverAttributes(pc),a1
                 jmp     SetUp_ObjAttributes3(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4EFA8:
+ICZBossS3_CoverCheckExtension:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                bne.s   loc_4EFB6
+                bne.s   ICZBossS3_CoverBeginOffsetMovement
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4EFB6:
+ICZBossS3_CoverBeginOffsetMovement:
                 move.b  #4,routine(a0)
                 move.w  #$24,$2E(a0)
-                move.l  #loc_4EFD4,$34(a0)
+                move.l  #ICZBossS3_CoverBeginOpenHold,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4EFCC:
+ICZBossS3_CoverStepOffsetAndWait:
                 addq.b  #1,$43(a0)
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4EFD4:
+ICZBossS3_CoverBeginOpenHold:
                 move.b  #6,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4EFDC:
+ICZBossS3_CoverWaitForClose:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                beq.s   loc_4EFEA
+                beq.s   ICZBossS3_CoverBeginClosing
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4EFEA:
+ICZBossS3_CoverBeginClosing:
                 move.b  #8,routine(a0)
                 move.w  #$24,$2E(a0)
-                move.l  #loc_4F008,$34(a0)
+                move.l  #ICZBossS3_RearmAttachmentEdgeWait,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4F000:
+ICZBossS3_CoverStepClosingAndWait:
                 subq.b  #1,$43(a0)
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4F008:
+ICZBossS3_RearmAttachmentEdgeWait:
                 move.b  #2,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4F010:
+ICZBossS3_PlatformFollowSolidAndDraw:
                 move.w  x_pos(a0),-(sp)
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_4F04E(pc,d0.w),d1
-                jsr     off_4F04E(pc,d1.w)
+                move.w  ICZBossS3_PlatformStateOffsets(pc,d0.w),d1
+                jsr     ICZBossS3_PlatformStateOffsets(pc,d1.w)
                 jsr     Refresh_ChildPosition(pc)
                 moveq   #$23,d1
                 moveq   #4,d2
@@ -320,141 +320,142 @@ loc_4F010:
                 moveq   #0,d0
                 movea.w parent3(a0),a1
                 tst.b   $3B(a1)
-                bne.s   loc_4F046
+                bne.s   ICZBossS3_PlatformReleaseRiders
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_4F046:
+ICZBossS3_PlatformReleaseRiders:
                 jsr     Displace_PlayerOffObject(pc)
                 jmp     S3Child_StartFlickerAndDraw(pc)
 ; ---------------------------------------------------------------------------
-off_4F04E:
-                dc.w    loc_4F058-off_4F04E
-                dc.w    loc_4F068-off_4F04E
-                dc.w    loc_4EFCC-off_4F04E
-                dc.w    loc_4F08C-off_4F04E
-                dc.w    loc_4F000-off_4F04E
+ICZBossS3_PlatformStateOffsets:
+                dc.w    ICZBossS3_InitPlatformAndTouchProxy-ICZBossS3_PlatformStateOffsets
+                dc.w    ICZBossS3_PlatformWaitForExtension-ICZBossS3_PlatformStateOffsets
+                dc.w    ICZBossS3_CoverStepOffsetAndWait-ICZBossS3_PlatformStateOffsets
+                dc.w    ICZBossS3_OpenPlatformTryFrostClouds-ICZBossS3_PlatformStateOffsets
+                dc.w    ICZBossS3_CoverStepClosingAndWait-ICZBossS3_PlatformStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_4F058:
-                lea     word_4F3B2(pc),a1
+ICZBossS3_InitPlatformAndTouchProxy:
+                lea     ICZBossS3_PlatformAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
-                lea     ChildObjDat_4F3F8(pc),a2
+                lea     ICZBossS3_PlatformTouchProxyChild(pc),a2
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
 
-loc_4F068:
+ICZBossS3_PlatformWaitForExtension:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                bne.s   loc_4F076
+                bne.s   ICZBossS3_PlatformBeginOffsetMovement
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4F076:
+ICZBossS3_PlatformBeginOffsetMovement:
                 move.b  #4,routine(a0)
                 move.w  #$42,$2E(a0)
-                move.l  #loc_4EFD4,$34(a0)
+                move.l  #ICZBossS3_CoverBeginOpenHold,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4F08C:
+ICZBossS3_OpenPlatformTryFrostClouds:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                beq.s   loc_4F0B8
+                beq.s   ICZBossS3_PlatformBeginClosing
                 btst    #1,$38(a1)
-                beq.s   locret_4F0B6
+                beq.s   ICZBossS3_PlatformUpdateReturn
                 move.w  $26(a1),d0
                 cmpi.w  #2,d0
-                beq.s   locret_4F0B6
+                beq.s   ICZBossS3_PlatformUpdateReturn
                 move.w  d0,$26(a0)
-                lea     ChildObjDat_4F3EC(pc),a2
+                lea     ICZBossS3_PlatformCloudChildren(pc),a2
                 jsr     CreateChild6_Simple(pc)
 
-locret_4F0B6:
+ICZBossS3_PlatformUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4F0B8:
+ICZBossS3_PlatformBeginClosing:
                 move.b  #8,routine(a0)
                 move.w  #$42,$2E(a0)
-                move.l  #loc_4F008,$34(a0)
+                move.l  #ICZBossS3_RearmAttachmentEdgeWait,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4F0CE:
-                lea     ObjDat3_4F3B8(pc),a1
+ICZBossS3_InitCloudAndDelay:
+                lea     ICZEndBossS3_Cloud_FullAttributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.l  #Obj_Wait,(a0)
-                move.l  #loc_4F0E8,$34(a0)
-                bra.w   loc_4F200
+                move.l  #ICZBossS3_CloudChooseFollowMode,$34(a0)
+                bra.w   ICZBossS3_CloudLoadModeResources
 ; ---------------------------------------------------------------------------
 
-loc_4F0E8:
+ICZBossS3_CloudChooseFollowMode:
                 movea.w parent3(a0),a1
-                move.l  #loc_4F10A,(a0)
+                move.l  #ICZBossS3_CloudFollowAndCheckCapture,(a0)
                 cmpi.w  #6,$26(a1)
-                bne.s   loc_4F100
-                move.l  #loc_4F138,(a0)
+                bne.s   ICZBossS3_CloudSetDeleteCallback
+                move.l  #ICZBossS3_CloudAdjustedFollowCapture,(a0)
 
-loc_4F100:
+ICZBossS3_CloudSetDeleteCallback:
                 move.l  #Go_Delete_Sprite,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4F10A:
+; Enable freezing while the animation cursor is between 4 and 8, inclusive
+ICZBossS3_CloudFollowAndCheckCapture:
                 jsr     Refresh_ChildPosition(pc)
                 jsr     Animate_RawMultiDelay(pc)
                 cmpi.b  #4,anim_frame(a0)
-                blo.s   loc_4F12C
+                blo.s   ICZBossS3_CloudFollowDraw
                 cmpi.b  #8,anim_frame(a0)
-                bhi.s   loc_4F12C
-                lea     word_4F130(pc),a1
+                bhi.s   ICZBossS3_CloudFollowDraw
+                lea     ICZBossS3_CloudFollowCaptureBounds(pc),a1
                 jsr     (CapturePlayersInsideIczFreezerZone).l
 
-loc_4F12C:
+ICZBossS3_CloudFollowDraw:
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
-word_4F130:
+ICZBossS3_CloudFollowCaptureBounds:
                 dc.w    -$18,   $30,  -$18,   $30
 ; ---------------------------------------------------------------------------
 
-loc_4F138:
+ICZBossS3_CloudAdjustedFollowCapture:
                 jsr     Refresh_ChildPositionAdjusted(pc)
                 jsr     Animate_RawMultiDelay(pc)
                 cmpi.b  #4,anim_frame(a0)
-                blo.s   loc_4F15A
+                blo.s   ICZBossS3_CloudAdjustedFollowDraw
                 cmpi.b  #8,anim_frame(a0)
-                bhi.s   loc_4F15A
-                lea     word_4F15E(pc),a1
+                bhi.s   ICZBossS3_CloudAdjustedFollowDraw
+                lea     ICZBossS3_CloudAdjustedCaptureBounds(pc),a1
                 jsr     (CapturePlayersInsideIczFreezerZone).l
 
-loc_4F15A:
+ICZBossS3_CloudAdjustedFollowDraw:
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
-word_4F15E:
+ICZBossS3_CloudAdjustedCaptureBounds:
                 dc.w    -$10,   $20,  -$10,   $20
 ; ---------------------------------------------------------------------------
 
-loc_4F166:
-                move.l  #loc_4F174,(a0)
+ICZBossS3_InitInvisibleTouchProxy:
+                move.l  #ICZBossS3_TouchProxyFollowAndSubmit,(a0)
                 move.b  #$9B,collision_flags(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4F174:
+ICZBossS3_TouchProxyFollowAndSubmit:
                 jsr     Refresh_ChildPosition(pc)
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_4F18A
+                bne.s   ICZBossS3_TouchProxyDeleteWithParent
                 jmp     (Add_SpriteToCollisionResponseList).l
 ; ---------------------------------------------------------------------------
 
-loc_4F18A:
+ICZBossS3_TouchProxyDeleteWithParent:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_4F190:
-                lea     word_4F3C4(pc),a1
+ICZBossS3_InitDefeatFragment:
+                lea     ICZBossS3_FragmentAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
                 jsr     Refresh_ChildPositionAdjusted(pc)
                 move.l  #Obj_FlickerMove,(a0)
@@ -482,81 +483,81 @@ InitializeICZEndBossVerticalBob:
 SelectICZEndBossFrostAttackMode:
                 bset    #1,$38(a0)
                 tst.b   $3B(a0)
-                bne.s   loc_4F1F8
+                bne.s   ICZBossS3_ForceDamagedFrostMode
                 move.b  $3A(a0),d0
                 andi.w  #$F,d0
-                lea     byte_4F464(pc),a1
+                lea     ICZBossS3_FrostModeCycle(pc),a1
                 move.b  (a1,d0.w),$27(a0)
                 addq.b  #1,d0
                 move.b  d0,$3A(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4F1F8:
+ICZBossS3_ForceDamagedFrostMode:
                 move.w  #2,$26(a0)
                 rts
 ; End of function SelectICZEndBossFrostAttackMode
 
 ; ---------------------------------------------------------------------------
 
-loc_4F200:
+ICZBossS3_CloudLoadModeResources:
                 movea.w parent3(a0),a1
                 move.w  $26(a1),d0
                 moveq   #0,d1
                 move.b  subtype(a0),d1
-                lea     word_4F28C(pc),a2
+                lea     ICZBossS3_CloudSpawnOffsetBanks(pc),a2
                 move.w  (a2,d0.w),d2
                 adda.w  d2,a2
                 move.w  (a2,d1.w),child_dx(a0)          ; and child_dy
-                lea     word_4F2C4(pc),a2
+                lea     ICZBossS3_CloudRenderFlagBanks(pc),a2
                 move.w  (a2,d0.w),d2
                 adda.w  d2,a2
                 move.b  (a2,d1.w),d2
                 or.b    d2,render_flags(a0)
-                lea     word_4F25A(pc),a2
+                lea     ICZBossS3_CloudDelayBankOffsets(pc),a2
                 move.w  (a2,d0.w),d2
                 adda.w  d2,a2
                 move.w  (a2,d1.w),$2E(a0)
                 cmpi.b  #6,d0
-                beq.s   loc_4F250
+                beq.s   ICZBossS3_CloudSelectModeSixAnim
                 add.w   d1,d1
-                move.l  off_4F270(pc,d1.w),$30(a0)
+                move.l  ICZBossS3_CloudAnimationPointers(pc,d1.w),$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4F250:
-                move.l  #byte_4F430,$30(a0)
+ICZBossS3_CloudSelectModeSixAnim:
+                move.l  #ICZBossS3_CloudMode6Anim,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
-word_4F25A:
-                dc.w    word_4F262-word_4F25A
-                dc.w    word_4F264-word_4F25A
-                dc.w    word_4F262-word_4F25A
-                dc.w    word_4F268-word_4F25A
-word_4F262:
+ICZBossS3_CloudDelayBankOffsets:
+                dc.w    ICZBossS3_CloudDelayStart17-ICZBossS3_CloudDelayBankOffsets
+                dc.w    ICZBossS3_CloudDelayStart14-ICZBossS3_CloudDelayBankOffsets
+                dc.w    ICZBossS3_CloudDelayStart17-ICZBossS3_CloudDelayBankOffsets
+                dc.w    ICZBossS3_CloudDelayStart8-ICZBossS3_CloudDelayBankOffsets
+ICZBossS3_CloudDelayStart17:
                 dc.w    $11
-word_4F264:
+ICZBossS3_CloudDelayStart14:
                 dc.w    $E
                 dc.w    $B
-word_4F268:
+ICZBossS3_CloudDelayStart8:
                 dc.w    8
                 dc.w    5
                 dc.w    2
                 dc.w    $FFFF
-off_4F270:
-                dc.l    byte_4F423
-                dc.l    byte_4F423
-                dc.l    byte_4F423
-                dc.l    byte_4F423
-                dc.l    byte_4F414
-                dc.l    byte_4F414
-                dc.l    byte_4F414
-word_4F28C:
-                dc.w    byte_4F294-word_4F28C
-                dc.w    byte_4F2A2-word_4F28C
-                dc.w    byte_4F2AE-word_4F28C
-                dc.w    byte_4F2BC-word_4F28C
-byte_4F294:
+ICZBossS3_CloudAnimationPointers:
+                dc.l    ICZBossS3_CloudFrames11To15Anim
+                dc.l    ICZBossS3_CloudFrames11To15Anim
+                dc.l    ICZBossS3_CloudFrames11To15Anim
+                dc.l    ICZBossS3_CloudFrames11To15Anim
+                dc.l    ICZBossS3_CloudFrames5To10Anim
+                dc.l    ICZBossS3_CloudFrames5To10Anim
+                dc.l    ICZBossS3_CloudFrames5To10Anim
+ICZBossS3_CloudSpawnOffsetBanks:
+                dc.w    ICZBossS3_CloudMode0SpawnOffsets-ICZBossS3_CloudSpawnOffsetBanks
+                dc.w    ICZBossS3_CloudMode2SpawnOffsets-ICZBossS3_CloudSpawnOffsetBanks
+                dc.w    ICZBossS3_CloudMode4SpawnOffsets-ICZBossS3_CloudSpawnOffsetBanks
+                dc.w    ICZBossS3_CloudMode6SpawnOffsets-ICZBossS3_CloudSpawnOffsetBanks
+ICZBossS3_CloudMode0SpawnOffsets:
                 dc.b    -$50, $14
                 dc.b    -$40, $14
                 dc.b    -$48,   4
@@ -564,14 +565,14 @@ byte_4F294:
                 dc.b    -$34,  $C
                 dc.b    -$24,   8
                 dc.b    -$1C,   4
-byte_4F2A2:
+ICZBossS3_CloudMode2SpawnOffsets:
                 dc.b    8, $40
                 dc.b    0, $3C
                 dc.b    -$10, $40
                 dc.b    -8, $3C
                 dc.b    -4, $34
                 dc.b    -4, $28
-byte_4F2AE:
+ICZBossS3_CloudMode4SpawnOffsets:
                 dc.b    $50, $14
                 dc.b    $40, $14
                 dc.b    $48,   4
@@ -579,34 +580,35 @@ byte_4F2AE:
                 dc.b    $34,  $C
                 dc.b    $24,   8
                 dc.b    $1C,   4
-byte_4F2BC:
+ICZBossS3_CloudMode6SpawnOffsets:
                 dc.b    $18,  -4
                 dc.b    $14,   0
                 dc.b    $10,  -8
                 dc.b    8,  -4
                 even
-word_4F2C4:
-                dc.w    byte_4F2CC-word_4F2C4
-                dc.w    byte_4F2DA-word_4F2C4
-                dc.w    byte_4F2E6-word_4F2C4
-                dc.w    byte_4F2D2-word_4F2C4
-byte_4F2CC:
+ICZBossS3_CloudRenderFlagBanks:
+                dc.w    ICZBossS3_CloudMode0RenderFlags-ICZBossS3_CloudRenderFlagBanks
+                dc.w    ICZBossS3_CloudMode2RenderFlags-ICZBossS3_CloudRenderFlagBanks
+                dc.w    ICZBossS3_CloudMode4RenderFlags-ICZBossS3_CloudRenderFlagBanks
+                dc.w    ICZBossS3_CloudMode6RenderFlags-ICZBossS3_CloudRenderFlagBanks
+ICZBossS3_CloudMode0RenderFlags:
                 dc.b    2,   0
                 dc.b    2,   0
                 dc.b    0,   0
-byte_4F2D2:
+; The all-zero records also finish the preceding mode-zero table
+ICZBossS3_CloudMode6RenderFlags:
                 dc.b    0,   0
                 dc.b    0,   0
                 dc.b    0,   0
                 dc.b    0,   0
-byte_4F2DA:
+ICZBossS3_CloudMode2RenderFlags:
                 dc.b    1,   0
                 dc.b    1,   0
                 dc.b    0,   0
                 dc.b    0,   0
                 dc.b    0,   0
                 dc.b    0,   0
-byte_4F2E6:
+ICZBossS3_CloudMode4RenderFlags:
                 dc.b    3,   0
                 dc.b    3,   0
                 dc.b    1,   0
@@ -621,124 +623,125 @@ byte_4F2E6:
 ; Enter the late phase on a new hit at two HP. Reenable collision only on the eligible body frame
 ICZBoss_HandleHitPhaseOrDefeat:
                 tst.b   collision_flags(a0)
-                bne.s   locret_4F35C
+                bne.s   ICZBossS3_HitUpdateReturn
                 move.b  collision_property(a0),d0
-                beq.s   loc_4F35E
+                beq.s   ICZBossS3_BeginDefeatAndSignalSnow
                 tst.b   $20(a0)
-                bne.s   loc_4F32A
+                bne.s   ICZBossS3_HitChooseFlashRow
                 cmpi.b  #2,d0
-                bne.s   loc_4F31C
+                bne.s   ICZBossS3_BeginHitFlash
                 st      $3B(a0)
                 move.b  #6,routine(a0)
                 move.w  #$7F,$3C(a0)
 
-loc_4F31C:
+ICZBossS3_BeginHitFlash:
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
 
-loc_4F32A:
+ICZBossS3_HitChooseFlashRow:
                 bset    #6,status(a0)
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_4F33E
+                bne.s   ICZBossS3_HitCopyColorsAndTick
                 addi.w  #2*2,d0
 
-loc_4F33E:
+; Restore collision after expiry only if the mapping frame is zero
+ICZBossS3_HitCopyColorsAndTick:
                 bsr.w   CopyICZEndBossTwoColorPalette
                 subq.b  #1,$20(a0)
-                bne.s   locret_4F35C
+                bne.s   ICZBossS3_HitUpdateReturn
                 bclr    #6,status(a0)
                 cmpi.b  #0,mapping_frame(a0)
-                bne.s   locret_4F35C
+                bne.s   ICZBossS3_HitUpdateReturn
                 move.b  $25(a0),collision_flags(a0)
 
-locret_4F35C:
+ICZBossS3_HitUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4F35E:
+ICZBossS3_BeginDefeatAndSignalSnow:
                 move.l  #Wait_Draw,(a0)
-                move.l  #loc_4EE74,$34(a0)
+                move.l  #ICZBossS3_ReleasePartsAndSpawnDebris,$34(a0)
                 movea.w (_unkFAAE).w,a1
                 cmpi.l  #S3ICZSnowPile_UpdateCameraSnowEmitter,(a1)
-                bne.s   loc_4F37E
+                bne.s   ICZBossS3_StopTimerAndAwardScore
                 bset    #5,$38(a1)
 
-loc_4F37E:
+ICZBossS3_StopTimerAndAwardScore:
                 jmp     BossDefeated_StopTimer(pc)
 ; End of function ICZBoss_HandleHitPhaseOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
 CopyICZEndBossTwoColorPalette:
-                lea     word_4F38E(pc),a1
-                lea     word_4F392(pc,d0.w),a2
+                lea     ICZBossS3_HitPaletteDestinations(pc),a1
+                lea     ICZBossS3_HitPaletteColorRows(pc,d0.w),a2
                 jmp     CopyWordData_2(pc)
 ; End of function CopyICZEndBossTwoColorPalette
 
 ; ---------------------------------------------------------------------------
-word_4F38E:
+ICZBossS3_HitPaletteDestinations:
                 dc.w    Normal_palette_line_2+$14, Normal_palette_line_2+$1C
-word_4F392:
+ICZBossS3_HitPaletteColorRows:
                 dc.w    $20,  $644
                 dc.w    $EEE,  $AAA
-ObjDat3_4F39A:
+ICZEndBossS3_Root_FullBodyAttributes:
                 dc.l    Map_ICZEndBoss
                 dc.w    make_art_tile(ArtTile_ICZEndBoss,1,1)
                 dc.w    $280
                 dc.b    $24, $24,   0,  $F
-word_4F3A6:
+ICZBossS3_UpperAttributes:
                 dc.w    $200
                 dc.b    $14,   8,   3,   0
-word_4F3AC:
+ICZBossS3_CoverAttributes:
                 dc.w    $280
                 dc.b    8,  $C,   1,   0
-word_4F3B2:
+ICZBossS3_PlatformAttributes:
                 dc.w    $280
                 dc.b    $18, $2C,   2,   0
-ObjDat3_4F3B8:
+ICZEndBossS3_Cloud_FullAttributes:
                 dc.l    Map_ICZEndBoss
                 dc.w    make_art_tile(ArtTile_ICZEndBoss,1,1)
                 dc.w    $80
                 dc.b    $10, $10,   5,   0
-word_4F3C4:
+ICZBossS3_FragmentAttributes:
                 dc.w    $180
                 dc.b    $14, $10,   0,   0
-ChildObjDat_4F3CA:
+ICZBossS3_ShipChild:
                 dc.w    1-1
                 dc.l    Obj_RobotnikShip4
                 dc.b    0,   0
-ChildObjDat_4F3D2:
+ICZBossS3_BodyAttachmentChildren:
                 dc.w    3-1
-                dc.l    loc_4EF0A
+                dc.l    ICZBossS3_UpperFollowDispatchAndDraw
                 dc.b    $18,   7
-                dc.l    loc_4EF70
+                dc.l    ICZBossS3_CoverFollowAndCheckBreakaway
                 dc.b    0,  $B
-                dc.l    loc_4F010
+                dc.l    ICZBossS3_PlatformFollowSolidAndDraw
                 dc.b    0, $2D
-ChildObjDat_4F3E6:
+ICZBossS3_Mode2CloudChildren:
                 dc.w    6-1
-                dc.l    loc_4F0CE
-ChildObjDat_4F3EC:
+                dc.l    ICZBossS3_InitCloudAndDelay
+ICZBossS3_PlatformCloudChildren:
                 dc.w    7-1
-                dc.l    loc_4F0CE
-ChildObjDat_4F3F2:
+                dc.l    ICZBossS3_InitCloudAndDelay
+ICZBossS3_Mode6CloudChildren:
                 dc.w    4-1
-                dc.l    loc_4F0CE
-ChildObjDat_4F3F8:
+                dc.l    ICZBossS3_InitCloudAndDelay
+ICZBossS3_PlatformTouchProxyChild:
                 dc.w    1-1
-                dc.l    loc_4F166
+                dc.l    ICZBossS3_InitInvisibleTouchProxy
                 dc.b    0,   8
-ChildObjDat_4F400:
+ICZBossS3_DefeatFragmentChildren:
                 dc.w    3-1
-                dc.l    loc_4F190
+                dc.l    ICZBossS3_InitDefeatFragment
                 dc.b    -$14,   4
-                dc.l    loc_4F190
+                dc.l    ICZBossS3_InitDefeatFragment
                 dc.b    $C,   4
-                dc.l    loc_4F190
+                dc.l    ICZBossS3_InitDefeatFragment
                 dc.b    0, $1C
-byte_4F414:
+ICZBossS3_CloudFrames5To10Anim:
                 dc.b    5,   1
                 dc.b    5,   1
                 dc.b    6,   1
@@ -747,7 +750,7 @@ byte_4F414:
                 dc.b    9,   4
                 dc.b    $A,   5
                 dc.b    $F4
-byte_4F423:
+ICZBossS3_CloudFrames11To15Anim:
                 dc.b    $B,   2
                 dc.b    $B,   2
                 dc.b    $C,   3
@@ -755,7 +758,7 @@ byte_4F423:
                 dc.b    $E,   5
                 dc.b    $F,   6
                 dc.b    $F4
-byte_4F430:
+ICZBossS3_CloudMode6Anim:
                 dc.b    $10,   1
                 dc.b    $10,   1
                 dc.b    $11,   1
@@ -769,7 +772,7 @@ byte_4F430:
 Pal_ICZEndBoss:
                 binclude "data/Levels/ICZ/Palettes/End Boss.bin"
                 even
-byte_4F464:
+ICZBossS3_FrostModeCycle:
                 dc.b    0,   2
                 dc.b    4,   2
                 dc.b    0,   2
