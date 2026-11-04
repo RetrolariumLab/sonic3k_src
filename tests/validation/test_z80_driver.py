@@ -6,6 +6,39 @@ from scripts.validation import z80_driver as codec
 
 
 class Z80DriverTests(unittest.TestCase):
+    def test_renamed_ram_and_code_keep_independent_historical_addresses(self):
+        self.assertEqual(
+            codec.compare_symbol_addresses(
+                {"StopTrackLatch": 0x1C15, "z80_stack": 0x2000},
+                {"ResumeDac", "Shared", "Inactive"},
+                {"StopTrackLatch": 0x1C15, "z80_stack": 0x2000, "ResumeDac": 0xBE9, "Shared": 7},
+                {"unk_1C15": 0x1C15, "z80_stack": 0x2000, "loc_BE9": 0xBE9, "Shared": 7},
+                {"unk_1C15": "StopTrackLatch", "loc_BE9": "ResumeDac", "loc_ABCD": "Inactive"},
+            ),
+            2,
+        )
+
+    def test_registered_names_cannot_hide_ram_drift_or_missing_historical_abi(self):
+        for current, historical in (
+            ({"StopTrackLatch": 0x1C16}, {"unk_1C15": 0x1C15}),
+            ({"StopTrackLatch": 0x1C15}, {"unk_1C15": 0x1C16}),
+            ({}, {"unk_1C15": 0x1C15}),
+            ({"StopTrackLatch": 0x1C15}, {"StopTrackLatch": 0x1C15}),
+        ):
+            with self.subTest(current=current, historical=historical), self.assertRaises(ValueError):
+                codec.compare_symbol_addresses(
+                    {"StopTrackLatch": 0x1C15}, set(), current, historical, {"unk_1C15": "StopTrackLatch"}
+                )
+
+    def test_renamed_code_entry_is_checked_instead_of_dropped_from_coverage(self):
+        for symbols in ({}, {"ResumeDac": 0xBEA}, {"loc_BE9": 0xBE9}):
+            with self.subTest(symbols=symbols), self.assertRaises(ValueError):
+                codec.compare_symbol_addresses({}, {"ResumeDac"}, symbols, {"loc_BE9": 0xBE9}, {"loc_BE9": "ResumeDac"})
+
+    def test_historical_symbol_projection_rejects_ambiguous_destinations(self):
+        with self.assertRaisesRegex(ValueError, "collide"):
+            codec.compare_symbol_addresses({}, set(), {}, {}, {"OldA": "New", "OldB": "New"})
+
     def test_real_ram_layout_has_independent_field_and_overlay_offsets(self):
         text = (ROOT / "src/audio/driver/ram_layout.asm").read_text()
         model = codec.ram_declarations(text)

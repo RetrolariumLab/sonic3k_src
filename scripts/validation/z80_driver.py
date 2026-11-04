@@ -294,11 +294,31 @@ def check_sources(rows):
     return registry, evidence
 
 
+def compare_symbol_addresses(ram_symbols, labels, symbols, historical, renames):
+    """Resolve current spellings through the validated profile's rename registry."""
+    originals = {}
+    for old, new in renames.items():
+        if new in originals:
+            raise ValueError("Registered Z80 historical names collide")
+        originals[new] = old
+    for name, expected in ram_symbols.items():
+        old = originals.get(name, name)
+        if symbols.get(name) != expected or historical.get(old) != expected:
+            raise ValueError("Z80 RAM field differs from its independent byte cursor or historical ABI: " + name)
+    active_labels = {name for name in labels if originals.get(name, name) in historical}
+    for name in active_labels:
+        if name not in symbols or symbols[name] != historical[originals.get(name, name)]:
+            raise ValueError("Historical Z80 code or table entry changed: " + name)
+    return len(active_labels)
+
+
 def check_built(rows):
     registry, evidence = check_sources(rows)
     from scripts.authoring.formats_workflow import tooling_fingerprint
+    from scripts.validation.label_renames import profile_maps, validate_registry
     from scripts.validation.source_layout import parse_include_ranges
 
+    mappings = profile_maps(validate_registry())
     witness = load("build/provenance/preservation-comparison.json")
     binding = load("build/source_binding.json")
     if (
@@ -341,18 +361,13 @@ def check_built(rows):
                 raise ValueError("Z80 owner leaves its explicit virtual window")
             if module["kind"] == "definitions" and item["start"] != item["end"]:
                 raise ValueError("Z80 helper definitions emit bytes")
-        for name, expected in ram_model["symbols"].items():
-            if symbols.get(name) != expected or witness["historical_symbols"][key].get(name) != expected:
-                raise ValueError("Z80 RAM field differs from its independent byte cursor or historical ABI: " + name)
-        # Conditional labels absent from this original product must remain absent.
-        original = witness["historical_symbols"][key]
-        active_labels = {name for name in labels if name in original}
-        for name in active_labels:
-            if name not in symbols or symbols[name] != original[name]:
-                raise ValueError("Historical Z80 code or table entry changed: " + key + " " + name)
+        # Keep the historical profile's observed scope, including renamed entries.
+        entries = compare_symbol_addresses(
+            ram_model["symbols"], labels, symbols, witness["historical_symbols"][key], mappings.get(key, {})
+        )
         profile_evidence[key] = {
             "ranges": ranges,
-            "historical_entry_symbols": len(active_labels),
+            "historical_entry_symbols": entries,
             "independent_ram_symbols": len(ram_model["symbols"]),
         }
     # Physical record coverage, both compression slots and final cartridge bytes
