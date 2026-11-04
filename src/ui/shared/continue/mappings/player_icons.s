@@ -1,32 +1,32 @@
 ; Data owner: ui/shared/continue
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_ContinueIcons_:
-                dc.w    word_5CD12-Map_ContinueIcons_
-                dc.w    word_5CD20-Map_ContinueIcons_
-                dc.w    word_5CD2E-Map_ContinueIcons_
-                dc.w    word_5CD36-Map_ContinueIcons_
-                dc.w    word_5CD3E-Map_ContinueIcons_
-                dc.w    word_5CD46-Map_ContinueIcons_
-                dc.w    word_5CD4E-Map_ContinueIcons_
-                dc.w    word_5CD56-Map_ContinueIcons_
-                dc.w    word_5CD5E-Map_ContinueIcons_
-word_5CD12:     dc.w    2
+                dc.w    ContinueCountIcon_SonicFirstPhasePieces-Map_ContinueIcons_
+                dc.w    ContinueCountIcon_SonicSecondPhasePieces-Map_ContinueIcons_
+                dc.w    ContinueCountIcon_TailsFirstPhasePieces-Map_ContinueIcons_
+                dc.w    ContinueCountIcon_TailsSecondPhasePieces-Map_ContinueIcons_
+                dc.w    ContinueCountIcon_TailsChildMap1-Map_ContinueIcons_
+                dc.w    ContinueCountIcon_TailsChildMap2-Map_ContinueIcons_
+                dc.w    ContinueCountIcon_TailsChildMap3-Map_ContinueIcons_
+                dc.w    ContinueCountIcon_KnucklesMap1-Map_ContinueIcons_
+                dc.w    ContinueCountIcon_KnucklesMap2-Map_ContinueIcons_
+ContinueCountIcon_SonicFirstPhasePieces:    dc.w    2
                 dc.b    $F4,   5,   0,   0, $FF, $F4
                 dc.b    4,   8,   0,   4, $FF, $F4
-word_5CD20:     dc.w    2
+ContinueCountIcon_SonicSecondPhasePieces:   dc.w    2
                 dc.b    $F4,   5,   0,   0, $FF, $F4
                 dc.b    4,   8,   0,   7, $FF, $F4
-word_5CD2E:     dc.w    1
+ContinueCountIcon_TailsFirstPhasePieces:    dc.w    1
                 dc.b    $F4,   6,   0,  $A, $FF, $F8
-word_5CD36:     dc.w    1
+ContinueCountIcon_TailsSecondPhasePieces:   dc.w    1
                 dc.b    $F4,   6,   0, $10, $FF, $F8
-word_5CD3E:     dc.w    1
+ContinueCountIcon_TailsChildMap1:   dc.w    1
                 dc.b    $FC,   5,   0, $16, $FF, $F2
-word_5CD46:     dc.w    1
+ContinueCountIcon_TailsChildMap2:   dc.w    1
                 dc.b    $FC,   5,   0, $1A, $FF, $F2
-word_5CD4E:     dc.w    1
+ContinueCountIcon_TailsChildMap3:   dc.w    1
                 dc.b    $FC,   5,   0, $1E, $FF, $F2
-word_5CD56:     dc.w    1
+ContinueCountIcon_KnucklesMap1: dc.w    1
                 dc.b    $F4,   6,   0, $22, $FF, $F8
-word_5CD5E:     dc.w    1
+ContinueCountIcon_KnucklesMap2: dc.w    1
                 dc.b    $F4,   6,   0, $28, $FF, $F8

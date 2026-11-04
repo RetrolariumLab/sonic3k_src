@@ -1,0 +1,1843 @@
+{
+  "schema_version": 1,
+  "packet": "57-continue",
+  "mappings": [
+    {
+      "source": "src/game/modes/continue/sk/screen.s",
+      "original_line": 44,
+      "old": "loc_5C3BC",
+      "new": "SKContinue_CopyPaletteAndSelectActors",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKContinueScene_CopyFullPaletteAndChooseInitialPlayerActors"
+    },
+    {
+      "source": "src/game/modes/continue/sk/screen.s",
+      "original_line": 59,
+      "old": "loc_5C3EE",
+      "new": "SKContinue_InstallSonicAndTails",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKContinueScene_InstallPairedSonicAndTailsActors"
+    },
+    {
+      "source": "src/game/modes/continue/sk/screen.s",
+      "original_line": 63,
+      "old": "loc_5C3FE",
+      "new": "SKContinue_InstallControllerAndFade",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKContinueScene_InstallContinueControllerIconsAndFadeIn"
+    },
+    {
+      "source": "src/game/modes/continue/sk/screen.s",
+      "original_line": 81,
+      "old": "loc_5C454",
+      "new": "SKContinue_RunUntilOutcome",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKContinueScene_RunContinueSceneUntilOutcomeSignal"
+    },
+    {
+      "source": "src/game/modes/continue/sk/screen.s",
+      "original_line": 96,
+      "old": "loc_5C48A",
+      "new": "SKContinue_ConsumeAndSaveStats",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKContinueScene_ConsumeContinueResetPlayerTotalsAndSave"
+    },
+    {
+      "source": "src/game/modes/continue/sk/screen.s",
+      "original_line": 113,
+      "old": "locret_5C4D4",
+      "new": "SKContinueScene_ReturnAfterContinueSave",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKContinueScene_ReturnAfterContinueSave"
+    },
+    {
+      "source": "src/game/modes/continue/sk/screen.s",
+      "original_line": 117,
+      "old": "loc_5C4D6",
+      "new": "SKContinue_InitCountdownAt10",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKContinueScene_InitializeCountdownStateAndTenValue"
+    },
+    {
+      "source": "src/game/modes/continue/sk/screen.s",
+      "original_line": 122,
+      "old": "loc_5C4E6",
+      "new": "SKContinue_CheckStartOrTick",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKContinueScene_CheckEitherStartOrAdvanceCountdownOnWordExpiry"
+    },
+    {
+      "source": "src/game/modes/continue/sk/screen.s",
+      "original_line": 136,
+      "old": "locret_5C512",
+      "new": "SKContinue_CountdownReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKContinueScene_ReturnDuringContinueCountdown"
+    },
+    {
+      "source": "src/game/modes/continue/sk/screen.s",
+      "original_line": 140,
+      "old": "loc_5C514",
+      "new": "SKContinue_SignalTimeout",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKContinueScene_SignalContinueTimeoutOutcomeTwo"
+    },
+    {
+      "source": "src/game/modes/continue/sk/screen.s",
+      "original_line": 145,
+      "old": "loc_5C51C",
+      "new": "SKContinue_LatchStartAndStopTimer",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKContinueScene_LatchStartRequestAndDisableCountdownHandler"
+    },
+    {
+      "source": "src/game/modes/continue/sk/screen.s",
+      "original_line": 149,
+      "old": "locret_5C528",
+      "new": "SKContinue_AcceptedControllerReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKContinueScene_WaitAsInertAcceptedStartController"
+    },
+    {
+      "source": "src/game/modes/s3/continue_resources.s",
+      "original_line": 8,
+      "old": "byte_3F834",
+      "new": "S3Continue_SonicCountIconFramePair",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3Continue_SonicCountIconFramePair"
+    },
+    {
+      "source": "src/game/modes/s3/continue_resources.s",
+      "original_line": 10,
+      "old": "byte_3F836",
+      "new": "S3Continue_TailsCountIconFramePair",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3Continue_TailsCountIconFramePair"
+    },
+    {
+      "source": "src/game/modes/s3/continue_resources.s",
+      "original_line": 12,
+      "old": "byte_3F838",
+      "new": "S3Continue_KnucklesCountIconFramePair",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3Continue_KnucklesCountIconFramePair"
+    },
+    {
+      "source": "src/game/modes/s3/continue_resources.s",
+      "original_line": 14,
+      "old": "byte_3F83A",
+      "new": "S3Continue_KnucklesDepartureAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3Continue_KnucklesCutsceneDepartureRawSequence"
+    },
+    {
+      "source": "src/game/modes/s3/continue_resources.s",
+      "original_line": 16,
+      "old": "byte_3F840",
+      "new": "ContinueTailsIconChild_RawAnimation",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Uniform-delay raw frame stream for the auxiliary Tails continue icon."
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 40,
+      "old": "loc_3F0F4",
+      "new": "S3Continue_CopyPaletteAndInstallActors",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_CopyContinuePaletteAndInstallFixedActors"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 64,
+      "old": "loc_3F168",
+      "new": "S3Continue_RunUntilOutcome",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_RunContinueObjectsUntilOutcomeByteNonzero"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 77,
+      "old": "loc_3F192",
+      "new": "S3Continue_RestoreStatsAndConsume",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_RestoreBothPlayersStatsAndConsumeOneContinue"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 92,
+      "old": "locret_3F1D2",
+      "new": "S3Continue_SetupOrIconReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_ReturnFromContinueSetupWaitOrIconCreation"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 96,
+      "old": "loc_3F1D4",
+      "new": "S3Continue_InitCountdownAt10",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_InitializeContinueCountdownController"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 101,
+      "old": "loc_3F1E4",
+      "new": "S3Continue_CheckStartOrTick",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_AcceptEitherStartBeforeCountdownDecrement"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 115,
+      "old": "locret_3F210",
+      "new": "S3Continue_CountdownReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_ReturnAfterCountdownWaitOrDigitWrite"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 119,
+      "old": "loc_3F212",
+      "new": "S3Continue_SignalTimeout",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_SignalContinueTimeoutOutcomeTwo"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 124,
+      "old": "loc_3F21A",
+      "new": "S3Continue_LatchStartAndStopTimer",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_LatchStartAndDisableFurtherControllerCountdown"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 128,
+      "old": "locret_3F226",
+      "new": "S3Continue_AcceptedControllerReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_ReturnFromLatchedContinueController"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 142,
+      "old": "loc_3F25A",
+      "new": "S3Continue_SonicWaitAndBlink",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_WaitForStartWhileBlinkingSonicContinuePose"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 151,
+      "old": "loc_3F27A",
+      "new": "S3Continue_SonicDrawWaiting",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_DrawWaitingSonicContinueActor"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 155,
+      "old": "loc_3F280",
+      "new": "S3Continue_SonicEnterStateDispatch",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_ActivateSonicContinueStateWrapperImmediately"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 158,
+      "old": "loc_3F286",
+      "new": "S3Continue_SonicDispatchAndDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_DispatchSonicContinueStateThenLoadPatternsAndDraw"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 166,
+      "old": "off_3F2A0",
+      "new": "S3Continue_SonicStateIndex",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3ContinueRuntime_SonicContinueFiveRelativeStateOffsets"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 174,
+      "old": "loc_3F2AA",
+      "new": "S3Continue_InitSonicExitMappings",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_InitializeSonicPlayerMappingsForContinueExit"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 184,
+      "old": "loc_3F2CE",
+      "new": "S3Continue_SonicStepFrameAndFlip",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_AdvanceSonicStartupFrameFlipPairsOnTimerUnderflow"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 201,
+      "old": "locret_3F304",
+      "new": "S3Continue_SonicFrameUpdateReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_ReturnAfterSonicStartupDelayOrPairSelection"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 205,
+      "old": "loc_3F306",
+      "new": "S3Continue_SonicBeginAnimatedHold",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_ArmSonicAnimatedHoldBeforeRun"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 212,
+      "old": "RawAni_3F320",
+      "new": "S3Continue_SonicFrameAndFlipPairs",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3ContinueRuntime_SonicStartupFrameAndHorizontalFlipPairs"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 221,
+      "old": "loc_3F32A",
+      "new": "S3Continue_SonicAnimateAndTickHold",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_AnimateSonicHoldAndAdvanceOnWordTimerUnderflow"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 228,
+      "old": "loc_3F338",
+      "new": "S3Continue_SonicSelectRun",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_SelectSonicRunStateForNextDispatch"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 233,
+      "old": "loc_3F340",
+      "new": "S3Continue_SonicRunToExit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_AnimateAndMoveSonicSixPixelsUntilExitThreshold"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 241,
+      "old": "loc_3F354",
+      "new": "S3Continue_SonicSelectFinished",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_SelectSonicFinishedStateWithoutAcceptingOutcome"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 246,
+      "old": "locret_3F35C",
+      "new": "S3Continue_SonicFinishedReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_ReturnFromFinishedSonicContinueState"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 260,
+      "old": "loc_3F390",
+      "new": "S3Continue_TailsWaitAndBlink",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_WaitForStartWhileBlinkingTailsContinuePose"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 269,
+      "old": "loc_3F3B0",
+      "new": "S3Continue_TailsDrawWaiting",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_DrawWaitingTailsContinueActor"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 273,
+      "old": "loc_3F3B6",
+      "new": "S3Continue_TailsInstallExitActors",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_ActivateTailsExitAndInstallFixedTailAndDustCallbacks"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 281,
+      "old": "loc_3F3D6",
+      "new": "S3Continue_TailsDispatchAndDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_DispatchTailsContinueStateThenLoadPatternsAndDraw"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 289,
+      "old": "off_3F3F0",
+      "new": "S3Continue_TailsStateIndex",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3ContinueRuntime_TailsContinueFourRelativeStateOffsets"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 296,
+      "old": "loc_3F3F8",
+      "new": "S3Continue_InitTailsMapAndDelay",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_InitializeTailsPlayerMappingsAndFirstDelay"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 308,
+      "old": "loc_3F428",
+      "new": "S3Continue_TailsWaitThenAnimate",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_WaitFirstTailsDelayThenEnterAnimatedDelaySameCall"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 316,
+      "old": "loc_3F448",
+      "new": "S3Continue_TailsTickDelayBeforeRun",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_CountTailsAnimatedDelayAndArmRunOnUnderflow"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 321,
+      "old": "loc_3F454",
+      "new": "S3Continue_TailsAnimateBeforeRun",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_TailAnimateTailsDuringPreRunDelay"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 325,
+      "old": "loc_3F45A",
+      "new": "S3Continue_TailsRunAndSignalAccept",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_MoveTailsSixPixelsAndSignalAcceptedContinue"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 331,
+      "old": "loc_3F46C",
+      "new": "S3Continue_TailsAnimateRun",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_TailAnimateTailsAfterRunStepAndOptionalOutcome"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 335,
+      "old": "loc_3F472",
+      "new": "S3Continue_FixTailFlagAndDeleteDust",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_ClearTailWorldCoordinateFlagAndDeleteDustActor"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 340,
+      "old": "loc_3F47E",
+      "new": "S3Continue_KnucklesDispatchAndDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_DispatchKnucklesContinueStateThenPerformDplcAndDraw"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 349,
+      "old": "off_3F49E",
+      "new": "S3Continue_KnucklesStateIndex",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3ContinueRuntime_KnucklesContinueFourRelativeStateOffsets"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 356,
+      "old": "loc_3F4A6",
+      "new": "S3Continue_InitKnucklesExitSprite",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_AcquireKnucklesGraphicsSlotAndInitializeContinuePosition"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 364,
+      "old": "loc_3F4CA",
+      "new": "S3Continue_KnucklesWaitForStart",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_WaitForControllerStartBeforeKnucklesRun"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 371,
+      "old": "loc_3F4D8",
+      "new": "S3Continue_KnucklesBeginRun",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_SelectKnucklesRunStateAndFallIntoMovement"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 374,
+      "old": "loc_3F4DE",
+      "new": "S3Continue_KnucklesRunToExit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_MoveKnucklesSixPixelsAndAnimateBelowExitThreshold"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 384,
+      "old": "loc_3F4F8",
+      "new": "S3Continue_KnucklesSelectFinished",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_SelectKnucklesFinishedStateAndReturn"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 387,
+      "old": "locret_3F4FE",
+      "new": "S3Continue_KnucklesFinishedReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_ReturnFromKnucklesFinishedState"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 391,
+      "old": "loc_3F500",
+      "new": "S3Continue_InitStaticEmblem",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_InitializeStaticContinueEmblem"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 402,
+      "old": "loc_3F538",
+      "new": "S3Continue_DrawStaticEmblem",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_DrawStaticContinueEmblem"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 406,
+      "old": "loc_3F53E",
+      "new": "S3Continue_InitRemainingIcon",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_InitializeRemainingContinueIconAndChooseCharacterFrames"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 417,
+      "old": "loc_3F572",
+      "new": "S3Continue_SelectBlinkPairOffset",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_SelectOneOfTwoIconFramesFromVintCounterBitFour"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 423,
+      "old": "loc_3F57E",
+      "new": "S3Continue_DrawSelectedIconFrame",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_ReadSelectedCharacterIconFrameAndDraw"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 429,
+      "old": "Obj_3F58E",
+      "new": "ContinueTailsIconChild_Initialize",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize the auxiliary animated child of a Tails continue icon."
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 437,
+      "old": "loc_3F5B4",
+      "new": "ContinueTailsIconChild_AnimateAndDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Animate and draw the Tails continue-icon auxiliary component."
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 474,
+      "old": "loc_3F60C",
+      "new": "S3Continue_ClampIconCountTo10",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_NormalizeZeroOrAboveTenContinuesToTen"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 478,
+      "old": "loc_3F612",
+      "new": "S3Continue_PrepFixedIconSlots",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_BindFixedRemainingIconSlotsAndEvenSubtypeCounter"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 482,
+      "old": "loc_3F618",
+      "new": "S3Continue_SeedCountMinusOneIcons",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_InstallCountMinusOneFixedIconsWithoutAllocation"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 502,
+      "old": "word_3F63E",
+      "new": "S3Continue_IconXPositions",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3ContinueRuntime_RemainingIconHorizontalPositionsByEvenSubtype"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 522,
+      "old": "loc_3F664",
+      "new": "S3Continue_SelectModeIconPair",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3ContinueRuntime_SelectIconFramePairUsingFullWordPlayerModeIndex"
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 529,
+      "old": "ChildObjDat_3F66E",
+      "new": "ContinueTailsIconChild_SimpleSpawnRecord",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "One simple-child spawn record for the Tails continue icon component."
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "original_line": 532,
+      "old": "off_3F674",
+      "new": "S3Continue_ModeIconPairPointers",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3ContinueRuntime_CharacterModeIconFramePairPointers"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 16,
+      "old": "loc_5C55C",
+      "new": "ContinueSonicPair_WaitAndBlink",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueSonicPair_WaitForStartAndSelectVintBlinkFrame"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 25,
+      "old": "loc_5C57C",
+      "new": "ContinueSonicPair_DrawWaiting",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueSonicPair_DrawBeforeStartTransition"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 29,
+      "old": "loc_5C582",
+      "new": "ContinueSonicPair_InstallStateDispatch",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueSonicPair_InstallNativeStateWrapper"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 32,
+      "old": "loc_5C588",
+      "new": "ContinueSonicPair_DispatchAndDraw",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueSonicPair_DispatchStateThenQueueNativeGraphicsAndDraw"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 40,
+      "old": "off_5C5A2",
+      "new": "ContinueSonicPair_StateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Actualliteraldata purpose: ContinueSonicPair_StateOffsets"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 48,
+      "old": "loc_5C5AC",
+      "new": "ContinueSonicPair_InitMapAndFrames",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueSonicPair_SelectNativeMapAndSeedFrameSequence"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 58,
+      "old": "loc_5C5D0",
+      "new": "ContinueSonicPair_StepFrameAndFlip",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueSonicPair_AdvanceManualFrameFlipOrBeginRun"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 75,
+      "old": "locret_5C606",
+      "new": "ContinueSonicPair_FrameUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueSonicPair_ReturnFromManualFrameStep"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 79,
+      "old": "loc_5C608",
+      "new": "ContinueSonicPair_SetRunAnimAndDelay",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueSonicPair_SelectRunAnimationAndDelay"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 86,
+      "old": "RawAni_5C622",
+      "new": "ContinueSonicPair_ManualFrameFlipPairs",
+      "profiles": ["sk"],
+      "meaning": "Actualliteraldata purpose: ContinueSonicPair_ManualFrameFlipPairs"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 95,
+      "old": "loc_5C62C",
+      "new": "ContinueSonicPair_AnimateAndTickDelay",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueSonicPair_AnimateUntilRunDelayExpires"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 102,
+      "old": "loc_5C63A",
+      "new": "ContinueSonicPair_SelectRun",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueSonicPair_SelectRightwardStepState"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 107,
+      "old": "loc_5C642",
+      "new": "ContinueSonicPair_RunToExit",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueSonicPair_AnimateAndStepRightUntilTerminal"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 115,
+      "old": "loc_5C656",
+      "new": "ContinueSonicPair_SelectFinished",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueSonicPair_SelectTerminalReturnState"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 120,
+      "old": "locret_5C65E",
+      "new": "ContinueSonicPair_TerminalStateReturn",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueSonicPair_TerminalStateReturn"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 140,
+      "old": "loc_5C684",
+      "new": "ContinueSonicSolo_InitWaitingSprite",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueSonicAlone_InitializeScreenSpriteAndWait"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 150,
+      "old": "loc_5C6B6",
+      "new": "ContinueSonicSolo_WaitForApproach",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueSonicAlone_WaitForControllerApproachFlag"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 158,
+      "old": "loc_5C6CC",
+      "new": "ContinueSonicSolo_SetExitPoseAndDelay",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueSonicAlone_SeedExitPoseAndShortDelay"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 165,
+      "old": "loc_5C6E0",
+      "new": "ContinueSonicSolo_TickDelayBeforeRun",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueSonicAlone_CountDelayThenSelectExitRun"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 171,
+      "old": "locret_5C6F2",
+      "new": "ContinueSonicSolo_RunDelayReturn",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueSonicAlone_ReturnAfterDelayDecision"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 175,
+      "old": "loc_5C6F4",
+      "new": "ContinueSonicSolo_RunAndAnimate",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueSonicAlone_StepRightAndAnimateSharedExitLoop"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 183,
+      "old": "loc_5C70A",
+      "new": "ContinueSonicSolo_StopAndSignalAccept",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueSonicAlone_StopRunAndSignalSceneSuccess"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 187,
+      "old": "locret_5C716",
+      "new": "ContinueSonicAlone_TerminalStateReturn",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueSonicAlone_TerminalStateReturn"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 201,
+      "old": "loc_5C74A",
+      "new": "ContinueTailsPair_WaitAndBlink",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueTailsPair_WaitForStartAndSelectVintBlinkFrame"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 210,
+      "old": "loc_5C76A",
+      "new": "ContinueTailsPair_DrawWaiting",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueTailsPair_DrawBeforeNativeTransition"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 214,
+      "old": "loc_5C770",
+      "new": "ContinueTailsPair_InstallExitActors",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueTailsPair_InstallNativeBodyTailAndOneShotFlagFix"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 222,
+      "old": "loc_5C790",
+      "new": "ContinueTailsPair_DispatchAndDraw",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueTailsPair_DispatchThenQueueNativeGraphicsAndDraw"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 230,
+      "old": "off_5C7AA",
+      "new": "ContinueTailsPair_StateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Actualliteraldata purpose: ContinueTailsPair_StateOffsets"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 237,
+      "old": "loc_5C7B2",
+      "new": "ContinueTailsPair_InitMapAndAnim",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueTailsPair_SeedNativeMapAndAdjacentAnimationFields"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 249,
+      "old": "loc_5C7E2",
+      "new": "ContinueTailsPair_WaitThenAnimate",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueTailsPair_CountInitialWaitThenEnterRunDelay"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 257,
+      "old": "loc_5C802",
+      "new": "ContinueTailsPair_TickDelayBeforeRun",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueTailsPair_CountRunDelayBeforeRightwardState"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 262,
+      "old": "loc_5C80E",
+      "new": "ContinueTailsPair_AnimateDuringRunDelay",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueTailsPair_AnimateDuringRunDelay"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 266,
+      "old": "loc_5C814",
+      "new": "ContinueTailsPair_RunAndSignalAccept",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueTailsPair_StepRightAndSignalWithoutStopping"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 272,
+      "old": "loc_5C826",
+      "new": "ContinueTailsPair_AnimateRun",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueTailsPair_AnimateAfterStepAndSuccessGate"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 276,
+      "old": "loc_5C82C",
+      "new": "ContinueTailsPair_FixFlagAndDeleteSlot",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueTailsPair_ClearTailWorldFlagAndDeleteFixupSlot"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 281,
+      "old": "loc_5C838",
+      "new": "ContinueKnuckles_SelectEntrance",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueKnuckles_SelectStandaloneOrSupportingEntrance"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 291,
+      "old": "loc_5C854",
+      "new": "ContinueKnuckles_InstallMiscSpriteInit",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueKnuckles_InstallMiscSpritePreparationCode"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 295,
+      "old": "loc_5C85A",
+      "new": "ContinueKnuckles_InitWaitingSprite",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueKnuckles_InitializeMiscSpriteBeforeStart"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 305,
+      "old": "loc_5C88C",
+      "new": "ContinueKnuckles_TriggerEggRobo",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueKnuckles_ReloadPrestartDelayAndTriggerEggRobo"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 313,
+      "old": "loc_5C8AC",
+      "new": "ContinueKnuckles_WaitThenInstallRun",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueKnuckles_CountDelayThenScheduleNativeWrapper"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 318,
+      "old": "loc_5C8B8",
+      "new": "ContinueKnuckles_AnimateMiscAndDraw",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueKnuckles_AnimateMiscFramesAndDraw"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 324,
+      "old": "loc_5C8C8",
+      "new": "ContinueKnuckles_DispatchAndQueueArt",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueKnuckles_DispatchThenQueuePrivateNativeGraphics"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 332,
+      "old": "off_5C8E2",
+      "new": "ContinueKnuckles_StateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Actualliteraldata purpose: ContinueKnuckles_StateOffsets"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 339,
+      "old": "loc_5C8EA",
+      "new": "ContinueKnuckles_InitNativeMappings",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueKnuckles_SelectNativeMapAndClearRawCursor"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 352,
+      "old": "loc_5C91E",
+      "new": "ContinueKnuckles_WaitForStart",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueKnuckles_WaitForControllerStartFlag"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 359,
+      "old": "loc_5C92C",
+      "new": "ContinueKnuckles_BeginRun",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueKnuckles_SelectRunAndFallThroughFirstStep"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 362,
+      "old": "loc_5C932",
+      "new": "ContinueKnuckles_RunAndReleaseSonic",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueKnuckles_StepRightAndReleaseSonicApproachGate"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 371,
+      "old": "loc_5C94C",
+      "new": "ContinueKnuckles_AnimateOrStop",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueKnuckles_AnimateExitLoopOrStopAtRightEdge"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 378,
+      "old": "loc_5C95C",
+      "new": "ContinueKnuckles_StopAndSignalSolo",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueKnuckles_StopAndSignalOnlyKnucklesMode"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 384,
+      "old": "locret_5C970",
+      "new": "ContinueKnuckles_TerminalStateReturn",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueKnuckles_TerminalStateReturn"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 388,
+      "old": "loc_5C972",
+      "new": "ContinueEggRobo_InitAndRequestArt",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueEggRobo_InitializeScreenActorAndRequestChildrenArt"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 405,
+      "old": "Obj_Continue_EggRobo_5C9C4",
+      "new": "ContinueEggRobo_SwingAnimateDraw",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueEggRobo_SwingMoveSelectParityFrameAndDraw"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 412,
+      "old": "loc_5C9DC",
+      "new": "ContinueDecoration_InitCenterSprite",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueDecoration_InitializeCentralFrameSeven"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 423,
+      "old": "loc_5CA14",
+      "new": "ContinueDecoration_DrawCenterSprite",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueDecoration_DrawStaticCentralSprite"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 427,
+      "old": "loc_5CA1A",
+      "new": "ContinueIcons_SelectMapAndPalette",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueIcons_SelectSharedMapAndModePalette"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 434,
+      "old": "loc_5CA36",
+      "new": "ContinueIcons_InitPositionAndPair",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueIcons_InitializePlacementAndCharacterPair"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 443,
+      "old": "loc_5CA5C",
+      "new": "ContinueIcons_SelectBlinkPairOffset",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueIcons_SelectPairOffsetFromVintBitFour"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 449,
+      "old": "loc_5CA68",
+      "new": "ContinueIcons_DrawSelectedFrame",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueIcons_ReadSelectedPairByteAndDraw"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 455,
+      "old": "Obj_5CA78",
+      "new": "ContinueTailsIconChild_Initialize",
+      "profiles": ["sk"],
+      "meaning": "Initialize the auxiliary animated child of a Tails continue icon."
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "original_line": 463,
+      "old": "loc_5CA9E",
+      "new": "ContinueTailsIconChild_AnimateAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Animate and draw the Tails continue-icon auxiliary component."
+    },
+    {
+      "source": "src/objects/interface/continue/sk/countdown_and_patterns.s",
+      "original_line": 56,
+      "old": "loc_5CB2A",
+      "new": "ContinueIcons_UseCount10",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueIcons_SubstituteTenForZeroOrOversizedCount"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/countdown_and_patterns.s",
+      "original_line": 59,
+      "old": "loc_5CB2C",
+      "new": "ContinueIcons_PrepFixedSlots",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueIcons_PrepareFixedExtraSlotsAndEvenSubtypes"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/countdown_and_patterns.s",
+      "original_line": 63,
+      "old": "loc_5CB32",
+      "new": "ContinueIcons_SeedCountMinusOne",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueIcons_PreDecrementAndSeedNextFixedIcon"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/countdown_and_patterns.s",
+      "original_line": 83,
+      "old": "word_5CB58",
+      "new": "ContinueIcons_AlternatingCenterOutXWords",
+      "profiles": ["sk"],
+      "meaning": "Actualliteraldata purpose: ContinueIcons_AlternatingCenterOutXWords"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/countdown_and_patterns.s",
+      "original_line": 103,
+      "old": "loc_5CB7E",
+      "new": "ContinueIcons_LoadPairAfterTailsChild",
+      "profiles": ["sk"],
+      "meaning": "ActualContinueactor/helperentry: ContinueIcons_LoadFramePairPointerAfterOptionalTailsChild"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/countdown_and_patterns.s",
+      "original_line": 110,
+      "old": "ChildObjDat_5CB88",
+      "new": "ContinueTailsIconChild_SimpleSpawnRecord",
+      "profiles": ["sk"],
+      "meaning": "One simple-child spawn record for the Tails continue icon component."
+    },
+    {
+      "source": "src/objects/interface/continue/sk/countdown_and_patterns.s",
+      "original_line": 113,
+      "old": "off_5CB8E",
+      "new": "ContinueIcons_CharacterFramePairPointers",
+      "profiles": ["sk"],
+      "meaning": "Actualliteraldata purpose: ContinueIcons_CharacterFramePairPointers"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/countdown_and_patterns.s",
+      "original_line": 121,
+      "old": "byte_5CBAE",
+      "new": "ContinueIcons_SonicFramePair",
+      "profiles": ["sk"],
+      "meaning": "Actualliteraldata purpose: ContinueIcons_SonicFramePair"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/countdown_and_patterns.s",
+      "original_line": 123,
+      "old": "byte_5CBB0",
+      "new": "ContinueIcons_TailsBodyFramePair",
+      "profiles": ["sk"],
+      "meaning": "Actualliteraldata purpose: ContinueIcons_TailsBodyFramePair"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/countdown_and_patterns.s",
+      "original_line": 125,
+      "old": "byte_5CBB2",
+      "new": "ContinueIcons_KnucklesFramePair",
+      "profiles": ["sk"],
+      "meaning": "Actualliteraldata purpose: ContinueIcons_KnucklesFramePair"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/countdown_and_patterns.s",
+      "original_line": 127,
+      "old": "byte_5CBB4",
+      "new": "ContinueExit_SonicKnucklesRawLoop",
+      "profiles": ["sk"],
+      "meaning": "Actualliteraldata purpose: ContinueExit_SharedSonicKnucklesEscapedRawLoop"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/countdown_and_patterns.s",
+      "original_line": 129,
+      "old": "byte_5CBBB",
+      "new": "ContinueTailsIconChild_RawAnimation",
+      "profiles": ["sk"],
+      "meaning": "Uniform-delay raw frame stream for the auxiliary Tails continue icon."
+    },
+    {
+      "source": "src/objects/interface/continue/sk/countdown_and_patterns.s",
+      "original_line": 131,
+      "old": "byte_5CBC0",
+      "new": "ContinueKnuckles_MiscOrdinaryRawWaitLoop",
+      "profiles": ["sk"],
+      "meaning": "Actualliteraldata purpose: ContinueKnuckles_MiscOrdinaryRawWaitLoop"
+    },
+    {
+      "source": "src/objects/interface/continue/sk/countdown_and_patterns.s",
+      "original_line": 133,
+      "old": "byte_5CBC5",
+      "new": "ContinueSonicAlone_EscapedRawWaitLoop",
+      "profiles": ["sk"],
+      "meaning": "Actualliteraldata purpose: ContinueSonicAlone_EscapedRawWaitLoop"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_icons.s",
+      "original_line": 13,
+      "old": "word_5CD12",
+      "new": "ContinueCountIcon_SonicFirstPhasePieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: ContinueCountIcon_SonicFirstPhasePieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_icons.s",
+      "original_line": 16,
+      "old": "word_5CD20",
+      "new": "ContinueCountIcon_SonicSecondPhasePieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: ContinueCountIcon_SonicSecondPhasePieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_icons.s",
+      "original_line": 19,
+      "old": "word_5CD2E",
+      "new": "ContinueCountIcon_TailsFirstPhasePieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: ContinueCountIcon_TailsFirstPhasePieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_icons.s",
+      "original_line": 21,
+      "old": "word_5CD36",
+      "new": "ContinueCountIcon_TailsSecondPhasePieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: ContinueCountIcon_TailsSecondPhasePieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_icons.s",
+      "original_line": 23,
+      "old": "word_5CD3E",
+      "new": "ContinueCountIcon_TailsChildMap1",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: ContinueCountIcon_TailsChildFirstCyclePieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_icons.s",
+      "original_line": 25,
+      "old": "word_5CD46",
+      "new": "ContinueCountIcon_TailsChildMap2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: ContinueCountIcon_TailsChildSecondCyclePieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_icons.s",
+      "original_line": 27,
+      "old": "word_5CD4E",
+      "new": "ContinueCountIcon_TailsChildMap3",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: ContinueCountIcon_TailsChildThirdCyclePieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_icons.s",
+      "original_line": 29,
+      "old": "word_5CD56",
+      "new": "ContinueCountIcon_KnucklesMap1",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: ContinueCountIcon_KnucklesFirstPhasePieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_icons.s",
+      "original_line": 31,
+      "old": "word_5CD5E",
+      "new": "ContinueCountIcon_KnucklesMap2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: ContinueCountIcon_KnucklesSecondPhasePieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_sprites.s",
+      "original_line": 12,
+      "old": "word_5CC5A",
+      "new": "SKContinueSprite_SonicWaitFirstPieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKContinueSprite_SonicWaitFirstPieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_sprites.s",
+      "original_line": 16,
+      "old": "word_5CC6E",
+      "new": "SKContinueSprite_SonicWaitSecondPieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKContinueSprite_SonicWaitSecondPieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_sprites.s",
+      "original_line": 20,
+      "old": "word_5CC82",
+      "new": "SKContinueSprite_KnucklesWaitMap1",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKContinueSprite_KnucklesWaitFirstCompositePieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_sprites.s",
+      "original_line": 25,
+      "old": "word_5CC9C",
+      "new": "SKContinueSprite_RetainedMap2",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKContinueSprite_RetainedMiddleCompositePieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_sprites.s",
+      "original_line": 30,
+      "old": "word_5CCB6",
+      "new": "SKContinueSprite_KnucklesWaitMap3",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKContinueSprite_KnucklesWaitLastCompositePieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_sprites.s",
+      "original_line": 35,
+      "old": "word_5CCD0",
+      "new": "SKContinueSprite_TailsWaitFirstPieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKContinueSprite_TailsWaitFirstPieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_sprites.s",
+      "original_line": 38,
+      "old": "word_5CCDE",
+      "new": "SKContinueSprite_TailsWaitSecondPieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKContinueSprite_TailsWaitSecondPieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_sprites.s",
+      "original_line": 42,
+      "old": "word_5CCF2",
+      "new": "SKContinueSprite_PairedDecorMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKContinueSprite_PairedTileDecorationPieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_sprites_s3.s",
+      "original_line": 12,
+      "old": "word_3F728",
+      "new": "S3ContinueSprite_SonicWaitFirstPieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3ContinueSprite_SonicWaitFirstPieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_sprites_s3.s",
+      "original_line": 16,
+      "old": "word_3F73C",
+      "new": "S3ContinueSprite_SonicWaitSecondPieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3ContinueSprite_SonicWaitSecondPieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_sprites_s3.s",
+      "original_line": 20,
+      "old": "word_3F750",
+      "new": "S3ContinueSprite_RetainedMap1",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3ContinueSprite_RetainedFirstCompositePieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_sprites_s3.s",
+      "original_line": 25,
+      "old": "word_3F76A",
+      "new": "S3ContinueSprite_RetainedMap2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3ContinueSprite_RetainedMiddleCompositePieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_sprites_s3.s",
+      "original_line": 30,
+      "old": "word_3F784",
+      "new": "S3ContinueSprite_RetainedMap3",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3ContinueSprite_RetainedLastCompositePieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_sprites_s3.s",
+      "original_line": 35,
+      "old": "word_3F79E",
+      "new": "S3ContinueSprite_TailsWaitFirstPieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3ContinueSprite_TailsWaitFirstPieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_sprites_s3.s",
+      "original_line": 38,
+      "old": "word_3F7AC",
+      "new": "S3ContinueSprite_TailsWaitSecondPieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3ContinueSprite_TailsWaitSecondPieces"
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_sprites_s3.s",
+      "original_line": 42,
+      "old": "word_3F7C0",
+      "new": "S3ContinueSprite_PairedDecorMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3ContinueSprite_PairedTileDecorationPieces"
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/game/modes/continue/sk/screen.s",
+      "tokens": [
+        [38, 0, 0, ""],
+        [40, 3, 0, ""],
+        [46, 1, 2, ""],
+        [48, 1, 1, ""],
+        [50, 1, 2, ""],
+        [51, 0, 1, ""],
+        [54, 0, 2, ""],
+        [55, 2, 111, ""],
+        [57, 2, 6, ""],
+        [59, 2, 128, ""],
+        [71, 0, 3, ""],
+        [79, 1, 3, ""],
+        [81, 1, 4, ""],
+        [84, 0, 4, ""],
+        [100, 0, 5, ""],
+        [102, 0, 6, ""],
+        [103, 2, 7, ""],
+        [106, 0, 7, ""],
+        [108, 1, 10, ""],
+        [110, 1, 10, ""],
+        [112, 1, 8, ""],
+        [116, 1, 9, ""],
+        [119, 0, 8, ""],
+        [121, 0, 9, ""],
+        [124, 0, 10, ""],
+        [125, 2, 11, ""],
+        [127, 0, 11, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/s3/continue_resources.s",
+      "tokens": [
+        [5, 0, 12, ""],
+        [7, 0, 13, ""],
+        [9, 0, 14, ""],
+        [11, 0, 15, ""],
+        [13, 0, 16, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "tokens": [
+        [33, 0, 17, ""],
+        [35, 3, 17, ""],
+        [40, 2, 54, ""],
+        [42, 2, 21, ""],
+        [44, 2, 62, ""],
+        [56, 0, 18, ""],
+        [62, 1, 18, ""],
+        [64, 1, 19, ""],
+        [67, 0, 19, ""],
+        [81, 0, 20, ""],
+        [83, 0, 21, ""],
+        [84, 2, 22, ""],
+        [87, 0, 22, ""],
+        [89, 1, 25, ""],
+        [91, 1, 25, ""],
+        [93, 1, 23, ""],
+        [97, 1, 24, ""],
+        [100, 0, 23, ""],
+        [102, 0, 24, ""],
+        [105, 0, 25, ""],
+        [106, 2, 26, ""],
+        [108, 0, 26, ""],
+        [118, 2, 27, ""],
+        [119, 0, 27, ""],
+        [122, 1, 29, ""],
+        [125, 1, 28, ""],
+        [127, 0, 28, ""],
+        [129, 0, 29, ""],
+        [130, 2, 30, ""],
+        [131, 0, 30, ""],
+        [134, 1, 31, ""],
+        [135, 1, 31, ""],
+        [138, 0, 31, ""],
+        [139, 1, 32, ""],
+        [139, 3, 31, ""],
+        [140, 1, 33, ""],
+        [140, 3, 31, ""],
+        [141, 1, 37, ""],
+        [141, 3, 31, ""],
+        [142, 1, 39, ""],
+        [142, 3, 31, ""],
+        [143, 1, 41, ""],
+        [143, 3, 31, ""],
+        [144, 0, 32, ""],
+        [152, 0, 33, ""],
+        [154, 1, 34, ""],
+        [160, 1, 35, ""],
+        [162, 1, 36, ""],
+        [166, 1, 34, ""],
+        [168, 0, 34, ""],
+        [170, 0, 35, ""],
+        [176, 0, 36, ""],
+        [183, 0, 37, ""],
+        [186, 1, 38, ""],
+        [188, 0, 38, ""],
+        [191, 0, 39, ""],
+        [195, 1, 40, ""],
+        [197, 0, 40, ""],
+        [200, 0, 41, ""],
+        [210, 2, 42, ""],
+        [211, 0, 42, ""],
+        [214, 1, 44, ""],
+        [217, 1, 43, ""],
+        [219, 0, 43, ""],
+        [221, 0, 44, ""],
+        [222, 2, 45, ""],
+        [227, 2, 53, ""],
+        [228, 0, 45, ""],
+        [231, 1, 46, ""],
+        [232, 1, 46, ""],
+        [235, 0, 46, ""],
+        [236, 1, 47, ""],
+        [236, 3, 46, ""],
+        [237, 1, 48, ""],
+        [237, 3, 46, ""],
+        [238, 1, 49, ""],
+        [238, 3, 46, ""],
+        [239, 1, 51, ""],
+        [239, 3, 46, ""],
+        [240, 0, 47, ""],
+        [250, 0, 48, ""],
+        [252, 1, 20, ""],
+        [257, 0, 49, ""],
+        [259, 1, 50, ""],
+        [261, 0, 50, ""],
+        [263, 0, 51, ""],
+        [266, 1, 52, ""],
+        [268, 0, 52, ""],
+        [270, 0, 53, ""],
+        [273, 0, 54, ""],
+        [276, 1, 55, ""],
+        [277, 1, 55, ""],
+        [281, 0, 55, ""],
+        [282, 1, 56, ""],
+        [282, 3, 55, ""],
+        [283, 1, 57, ""],
+        [283, 3, 55, ""],
+        [284, 1, 59, ""],
+        [284, 3, 55, ""],
+        [285, 1, 61, ""],
+        [285, 3, 55, ""],
+        [286, 0, 56, ""],
+        [293, 0, 57, ""],
+        [296, 1, 58, ""],
+        [298, 0, 58, ""],
+        [300, 0, 59, ""],
+        [305, 1, 60, ""],
+        [306, 1, 15, ""],
+        [308, 0, 60, ""],
+        [310, 0, 61, ""],
+        [312, 0, 62, ""],
+        [321, 2, 63, ""],
+        [322, 0, 63, ""],
+        [324, 0, 64, ""],
+        [332, 2, 65, ""],
+        [334, 0, 65, ""],
+        [337, 1, 66, ""],
+        [339, 0, 66, ""],
+        [343, 0, 67, ""],
+        [349, 2, 68, ""],
+        [350, 0, 68, ""],
+        [351, 1, 16, ""],
+        [376, 1, 69, ""],
+        [378, 1, 70, ""],
+        [379, 0, 69, ""],
+        [382, 0, 70, ""],
+        [385, 0, 71, ""],
+        [387, 1, 20, ""],
+        [388, 2, 64, ""],
+        [392, 1, 71, ""],
+        [396, 1, 72, ""],
+        [398, 0, 72, ""],
+        [411, 1, 73, ""],
+        [412, 1, 74, ""],
+        [414, 0, 73, ""],
+        [416, 1, 75, ""],
+        [418, 0, 74, ""],
+        [420, 1, 67, ""],
+        [421, 0, 75, ""],
+        [422, 1, 12, ""],
+        [423, 1, 12, ""],
+        [424, 1, 13, ""],
+        [425, 1, 14, ""]
+      ]
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "tokens": [
+        [9, 2, 76, ""],
+        [10, 0, 76, ""],
+        [13, 1, 78, ""],
+        [16, 1, 77, ""],
+        [18, 0, 77, ""],
+        [20, 0, 78, ""],
+        [21, 2, 79, ""],
+        [22, 0, 79, ""],
+        [25, 1, 80, ""],
+        [26, 1, 80, ""],
+        [29, 0, 80, ""],
+        [30, 1, 81, ""],
+        [30, 3, 80, ""],
+        [31, 1, 82, ""],
+        [31, 3, 80, ""],
+        [32, 1, 86, ""],
+        [32, 3, 80, ""],
+        [33, 1, 88, ""],
+        [33, 3, 80, ""],
+        [34, 1, 90, ""],
+        [34, 3, 80, ""],
+        [35, 0, 81, ""],
+        [43, 0, 82, ""],
+        [45, 1, 83, ""],
+        [51, 1, 84, ""],
+        [53, 1, 85, ""],
+        [57, 1, 83, ""],
+        [59, 0, 83, ""],
+        [61, 0, 84, ""],
+        [67, 0, 85, ""],
+        [74, 0, 86, ""],
+        [77, 1, 87, ""],
+        [79, 0, 87, ""],
+        [82, 0, 88, ""],
+        [86, 1, 89, ""],
+        [88, 0, 89, ""],
+        [91, 0, 90, ""],
+        [101, 1, 91, ""],
+        [102, 1, 92, ""],
+        [103, 1, 94, ""],
+        [104, 1, 96, ""],
+        [105, 1, 98, ""],
+        [106, 0, 91, ""],
+        [115, 0, 92, ""],
+        [118, 1, 93, ""],
+        [119, 1, 149, ""],
+        [121, 0, 93, ""],
+        [126, 0, 94, ""],
+        [128, 1, 95, ""],
+        [131, 0, 95, ""],
+        [133, 0, 96, ""],
+        [136, 1, 97, ""],
+        [137, 1, 146, ""],
+        [139, 0, 97, ""],
+        [142, 0, 98, ""],
+        [152, 2, 99, ""],
+        [153, 0, 99, ""],
+        [156, 1, 101, ""],
+        [159, 1, 100, ""],
+        [161, 0, 100, ""],
+        [163, 0, 101, ""],
+        [164, 2, 102, ""],
+        [169, 2, 110, ""],
+        [170, 0, 102, ""],
+        [173, 1, 103, ""],
+        [174, 1, 103, ""],
+        [177, 0, 103, ""],
+        [178, 1, 104, ""],
+        [178, 3, 103, ""],
+        [179, 1, 105, ""],
+        [179, 3, 103, ""],
+        [180, 1, 106, ""],
+        [180, 3, 103, ""],
+        [181, 1, 108, ""],
+        [181, 3, 103, ""],
+        [182, 0, 104, ""],
+        [192, 0, 105, ""],
+        [194, 1, 5, ""],
+        [199, 0, 106, ""],
+        [201, 1, 107, ""],
+        [203, 0, 107, ""],
+        [205, 0, 108, ""],
+        [208, 1, 109, ""],
+        [210, 0, 109, ""],
+        [212, 0, 110, ""],
+        [215, 0, 111, ""],
+        [217, 1, 112, ""],
+        [218, 1, 117, ""],
+        [223, 0, 112, ""],
+        [224, 1, 113, ""],
+        [226, 0, 113, ""],
+        [234, 2, 114, ""],
+        [235, 0, 114, ""],
+        [239, 1, 115, ""],
+        [240, 2, 115, ""],
+        [241, 2, 126, ""],
+        [242, 0, 115, ""],
+        [244, 1, 116, ""],
+        [245, 2, 117, ""],
+        [246, 0, 116, ""],
+        [247, 1, 148, ""],
+        [250, 0, 117, ""],
+        [253, 1, 118, ""],
+        [254, 1, 118, ""],
+        [257, 0, 118, ""],
+        [258, 1, 119, ""],
+        [258, 3, 118, ""],
+        [259, 1, 120, ""],
+        [259, 3, 118, ""],
+        [260, 1, 122, ""],
+        [260, 3, 118, ""],
+        [261, 1, 125, ""],
+        [261, 3, 118, ""],
+        [262, 0, 119, ""],
+        [273, 0, 120, ""],
+        [276, 1, 121, ""],
+        [278, 0, 121, ""],
+        [280, 0, 122, ""],
+        [286, 1, 123, ""],
+        [288, 0, 123, ""],
+        [290, 1, 124, ""],
+        [291, 1, 146, ""],
+        [293, 0, 124, ""],
+        [296, 1, 125, ""],
+        [298, 0, 125, ""],
+        [300, 0, 126, ""],
+        [305, 2, 127, ""],
+        [315, 0, 127, ""],
+        [320, 0, 128, ""],
+        [329, 2, 129, ""],
+        [330, 0, 129, ""],
+        [332, 0, 130, ""],
+        [336, 1, 131, ""],
+        [338, 0, 131, ""],
+        [344, 2, 132, ""],
+        [346, 0, 132, ""],
+        [349, 1, 133, ""],
+        [351, 0, 133, ""],
+        [355, 0, 134, ""],
+        [361, 2, 135, ""],
+        [362, 0, 135, ""],
+        [363, 1, 147, ""]
+      ]
+    },
+    {
+      "source": "src/objects/interface/continue/sk/countdown_and_patterns.s",
+      "tokens": [
+        [42, 1, 136, ""],
+        [44, 1, 137, ""],
+        [45, 0, 136, ""],
+        [47, 0, 137, ""],
+        [50, 0, 138, ""],
+        [52, 1, 5, ""],
+        [53, 2, 130, ""],
+        [57, 1, 138, ""],
+        [61, 1, 139, ""],
+        [63, 0, 139, ""],
+        [76, 1, 140, ""],
+        [77, 1, 141, ""],
+        [79, 0, 140, ""],
+        [81, 1, 142, ""],
+        [83, 0, 141, ""],
+        [85, 1, 134, ""],
+        [86, 0, 142, ""],
+        [87, 1, 143, ""],
+        [88, 1, 143, ""],
+        [89, 1, 144, ""],
+        [90, 1, 145, ""],
+        [94, 0, 143, ""],
+        [96, 0, 144, ""],
+        [98, 0, 145, ""],
+        [100, 0, 146, ""],
+        [102, 0, 147, ""],
+        [104, 0, 148, ""],
+        [106, 0, 149, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_icons.s",
+      "tokens": [
+        [2, 1, 150, ""],
+        [3, 1, 151, ""],
+        [4, 1, 152, ""],
+        [5, 1, 153, ""],
+        [6, 1, 154, ""],
+        [7, 1, 155, ""],
+        [8, 1, 156, ""],
+        [9, 1, 157, ""],
+        [10, 1, 158, ""],
+        [11, 0, 150, ""],
+        [14, 0, 151, ""],
+        [17, 0, 152, ""],
+        [19, 0, 153, ""],
+        [21, 0, 154, ""],
+        [23, 0, 155, ""],
+        [25, 0, 156, ""],
+        [27, 0, 157, ""],
+        [29, 0, 158, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_sprites.s",
+      "tokens": [
+        [2, 1, 159, ""],
+        [3, 1, 160, ""],
+        [4, 1, 161, ""],
+        [5, 1, 162, ""],
+        [6, 1, 163, ""],
+        [7, 1, 164, ""],
+        [8, 1, 165, ""],
+        [9, 1, 166, ""],
+        [10, 0, 159, ""],
+        [14, 0, 160, ""],
+        [18, 0, 161, ""],
+        [23, 0, 162, ""],
+        [28, 0, 163, ""],
+        [33, 0, 164, ""],
+        [36, 0, 165, ""],
+        [40, 0, 166, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/continue/mappings/player_sprites_s3.s",
+      "tokens": [
+        [2, 1, 167, ""],
+        [3, 1, 168, ""],
+        [4, 1, 169, ""],
+        [5, 1, 170, ""],
+        [6, 1, 171, ""],
+        [7, 1, 172, ""],
+        [8, 1, 173, ""],
+        [9, 1, 174, ""],
+        [10, 0, 167, ""],
+        [14, 0, 168, ""],
+        [18, 0, 169, ""],
+        [23, 0, 170, ""],
+        [28, 0, 171, ""],
+        [33, 0, 172, ""],
+        [36, 0, 173, ""],
+        [40, 0, 174, ""]
+      ]
+    }
+  ]
+}

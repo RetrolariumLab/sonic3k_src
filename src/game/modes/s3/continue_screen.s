@@ -37,18 +37,18 @@ ContinueScreen:
                 lea     (Target_palette).w,a2
                 moveq   #bytesToLcnt($80),d6
 
-loc_3F0F4:
+S3Continue_CopyPaletteAndInstallActors:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_3F0F4
+                dbf     d6,S3Continue_CopyPaletteAndInstallActors
                 lea     aCONTINUE(pc),a1
                 jsr     S3Credits_DrawPageAndQueueUpload(pc)
                 move.l  #Obj_Continue_SonicWTails,(Player_1).w
                 move.l  #Obj_Continue_TailsWSonic,(Player_2).w
-                move.l  #loc_3F47E,(Reserved_object_3).w
+                move.l  #S3Continue_KnucklesDispatchAndDraw,(Reserved_object_3).w
                 lea     (Dynamic_object_RAM).w,a1
-                move.l  #loc_3F1D4,(a1)
+                move.l  #S3Continue_InitCountdownAt10,(a1)
                 move.w  a1,(_unkFAA4).w
-                move.l  #loc_3F500,(Dynamic_object_RAM+object_size).w
+                move.l  #S3Continue_InitStaticEmblem,(Dynamic_object_RAM+object_size).w
                 bsr.w   S3Continue_InitRemainingLifeIcons
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
@@ -61,20 +61,20 @@ loc_3F0F4:
                 jsr     (Play_Music).l
                 jsr     (Pal_FadeFromBlack).l
 
-loc_3F168:
+S3Continue_RunUntilOutcome:
                 move.b  #VInt_ID_18,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
                 move.b  (_unkFAA9).w,d0
-                beq.s   loc_3F168
+                beq.s   S3Continue_RunUntilOutcome
                 subq.b  #1,d0
-                beq.s   loc_3F192
+                beq.s   S3Continue_RestoreStatsAndConsume
                 move.b  #GameMode_SegaScreen,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3F192:
+S3Continue_RestoreStatsAndConsume:
                 move.b  #GameMode_Level,(Game_mode).w
                 move.b  #3,(Life_count).w
                 move.b  #3,(Life_count_P2).w
@@ -89,43 +89,43 @@ loc_3F192:
                 move.l  #5000,(Next_extra_life_score_P2).w
                 subq.b  #1,(Continue_count).w
 
-locret_3F1D2:
+S3Continue_SetupOrIconReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3F1D4:
-                move.l  #loc_3F1E4,(a0)
+S3Continue_InitCountdownAt10:
+                move.l  #S3Continue_CheckStartOrTick,(a0)
                 clr.w   (_unkFA82).w
                 move.b  #$A,(_unkFA84).w
 
-loc_3F1E4:
+S3Continue_CheckStartOrTick:
                 btst    #button_start,(Ctrl_1_pressed).w
-                bne.s   loc_3F21A
+                bne.s   S3Continue_LatchStartAndStopTimer
                 btst    #button_start,(Ctrl_2_pressed).w
-                bne.s   loc_3F21A
+                bne.s   S3Continue_LatchStartAndStopTimer
                 subq.w  #1,(_unkFA82).w
-                bpl.s   locret_3F210
+                bpl.s   S3Continue_CountdownReturn
                 move.w  #60-1,(_unkFA82).w
                 move.b  (_unkFA84).w,d0
                 subq.b  #1,d0
-                bmi.s   loc_3F212
+                bmi.s   S3Continue_SignalTimeout
                 move.b  d0,(_unkFA84).w
                 bsr.w   S3Continue_DrawTimerAndQueueUpload
 
-locret_3F210:
+S3Continue_CountdownReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3F212:
+S3Continue_SignalTimeout:
                 move.b  #2,(_unkFAA9).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3F21A:
-                move.l  #locret_3F226,(a0)
+S3Continue_LatchStartAndStopTimer:
+                move.l  #S3Continue_AcceptedControllerReturn,(a0)
                 bset    #3,$38(a0)
 
-locret_3F226:
+S3Continue_AcceptedControllerReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -137,41 +137,41 @@ Obj_Continue_SonicWTails:
                 move.b  #$14,height_pixels(a0)
                 move.w  #$118,x_pos(a0)
                 move.w  #$120,y_pos(a0)
-                move.l  #loc_3F25A,(a0)
+                move.l  #S3Continue_SonicWaitAndBlink,(a0)
 
-loc_3F25A:
+S3Continue_SonicWaitAndBlink:
                 movea.w (_unkFAA4).w,a1
                 btst    #3,$38(a1)
-                bne.s   loc_3F280
+                bne.s   S3Continue_SonicEnterStateDispatch
                 move.b  #0,mapping_frame(a0)
                 btst    #4,(V_int_run_count+3).w
-                beq.s   loc_3F27A
+                beq.s   S3Continue_SonicDrawWaiting
                 move.b  #1,mapping_frame(a0)
 
-loc_3F27A:
+S3Continue_SonicDrawWaiting:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3F280:
-                move.l  #loc_3F286,(a0)
+S3Continue_SonicEnterStateDispatch:
+                move.l  #S3Continue_SonicDispatchAndDraw,(a0)
 
-loc_3F286:
+S3Continue_SonicDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_3F2A0(pc,d0.w),d1
-                jsr     off_3F2A0(pc,d1.w)
+                move.w  S3Continue_SonicStateIndex(pc,d0.w),d1
+                jsr     S3Continue_SonicStateIndex(pc,d1.w)
                 jsr     (Sonic_Load_PLC).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-off_3F2A0:
-                dc.w    loc_3F2AA-off_3F2A0
-                dc.w    loc_3F2CE-off_3F2A0
-                dc.w    loc_3F32A-off_3F2A0
-                dc.w    loc_3F340-off_3F2A0
-                dc.w    locret_3F35C-off_3F2A0
+S3Continue_SonicStateIndex:
+                dc.w    S3Continue_InitSonicExitMappings-S3Continue_SonicStateIndex
+                dc.w    S3Continue_SonicStepFrameAndFlip-S3Continue_SonicStateIndex
+                dc.w    S3Continue_SonicAnimateAndTickHold-S3Continue_SonicStateIndex
+                dc.w    S3Continue_SonicRunToExit-S3Continue_SonicStateIndex
+                dc.w    S3Continue_SonicFinishedReturn-S3Continue_SonicStateIndex
 ; ---------------------------------------------------------------------------
 
-loc_3F2AA:
+S3Continue_InitSonicExitMappings:
                 addq.b  #2,routine(a0)
                 move.l  #Map_Sonic,mappings(a0)
                 move.w  #make_art_tile(ArtTile_Player_1,0,0),art_tile(a0)
@@ -181,35 +181,35 @@ loc_3F2AA:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3F2CE:
+S3Continue_SonicStepFrameAndFlip:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_3F304
+                bpl.s   S3Continue_SonicFrameUpdateReturn
                 move.b  #6,anim_frame_timer(a0)
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 addq.w  #2,d0
                 cmpi.b  #$A,d0
-                bhs.s   loc_3F306
+                bhs.s   S3Continue_SonicBeginAnimatedHold
                 move.b  d0,anim_frame(a0)
-                lea     RawAni_3F320(pc,d0.w),a2
+                lea     S3Continue_SonicFrameAndFlipPairs(pc,d0.w),a2
                 move.b  (a2)+,mapping_frame(a0)
                 bclr    #0,render_flags(a0)
                 tst.b   (a2)
-                beq.s   locret_3F304
+                beq.s   S3Continue_SonicFrameUpdateReturn
                 bset    #0,render_flags(a0)
 
-locret_3F304:
+S3Continue_SonicFrameUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3F306:
+S3Continue_SonicBeginAnimatedHold:
                 move.b  #4,routine(a0)
                 move.w  #1,anim(a0)
                 move.w  #$600,ground_vel(a0)
                 move.w  #$F,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
-RawAni_3F320:
+S3Continue_SonicFrameAndFlipPairs:
                 dc.b    $5A,   1
                 dc.b    $59,   1
                 dc.b    $55,   0
@@ -218,32 +218,33 @@ RawAni_3F320:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_3F32A:
+S3Continue_SonicAnimateAndTickHold:
                 jsr     (Animate_Sonic).l
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_3F338
+                bmi.s   S3Continue_SonicSelectRun
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3F338:
+S3Continue_SonicSelectRun:
                 move.b  #6,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3F340:
+S3Continue_SonicRunToExit:
                 jsr     (Animate_Sonic).l
                 addq.w  #6,x_pos(a0)
                 cmpi.w  #$1E0,x_pos(a0)
-                bhs.s   loc_3F354
+                bhs.s   S3Continue_SonicSelectFinished
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3F354:
+; Tails publishes the accepted outcome for the pair
+S3Continue_SonicSelectFinished:
                 move.b  #8,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_3F35C:
+S3Continue_SonicFinishedReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -255,45 +256,45 @@ Obj_Continue_TailsWSonic:
                 move.b  #$14,height_pixels(a0)
                 move.w  #$12C,x_pos(a0)
                 move.w  #$120,y_pos(a0)
-                move.l  #loc_3F390,(a0)
+                move.l  #S3Continue_TailsWaitAndBlink,(a0)
 
-loc_3F390:
+S3Continue_TailsWaitAndBlink:
                 movea.w (_unkFAA4).w,a1
                 btst    #3,$38(a1)
-                bne.s   loc_3F3B6
+                bne.s   S3Continue_TailsInstallExitActors
                 move.b  #5,mapping_frame(a0)
                 btst    #5,(V_int_run_count+3).w
-                beq.s   loc_3F3B0
+                beq.s   S3Continue_TailsDrawWaiting
                 move.b  #6,mapping_frame(a0)
 
-loc_3F3B0:
+S3Continue_TailsDrawWaiting:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3F3B6:
-                move.l  #loc_3F3D6,(a0)
+S3Continue_TailsInstallExitActors:
+                move.l  #S3Continue_TailsDispatchAndDraw,(a0)
                 addq.w  #4,y_pos(a0)
                 lea     (Tails_tails).w,a1
                 move.l  #Obj_Tails_Tail,(a1)
                 move.w  a0,$30(a1)
-                move.l  #loc_3F472,(Dust).w
+                move.l  #S3Continue_FixTailFlagAndDeleteDust,(Dust).w
 
-loc_3F3D6:
+S3Continue_TailsDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_3F3F0(pc,d0.w),d1
-                jsr     off_3F3F0(pc,d1.w)
+                move.w  S3Continue_TailsStateIndex(pc,d0.w),d1
+                jsr     S3Continue_TailsStateIndex(pc,d1.w)
                 jsr     (Tails_Load_PLC).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-off_3F3F0:
-                dc.w    loc_3F3F8-off_3F3F0
-                dc.w    loc_3F428-off_3F3F0
-                dc.w    loc_3F448-off_3F3F0
-                dc.w    loc_3F45A-off_3F3F0
+S3Continue_TailsStateIndex:
+                dc.w    S3Continue_InitTailsMapAndDelay-S3Continue_TailsStateIndex
+                dc.w    S3Continue_TailsWaitThenAnimate-S3Continue_TailsStateIndex
+                dc.w    S3Continue_TailsTickDelayBeforeRun-S3Continue_TailsStateIndex
+                dc.w    S3Continue_TailsRunAndSignalAccept-S3Continue_TailsStateIndex
 ; ---------------------------------------------------------------------------
 
-loc_3F3F8:
+S3Continue_InitTailsMapAndDelay:
                 addq.b  #2,routine(a0)
                 move.l  #Map_Tails,mappings(a0)
                 move.w  #make_art_tile(ArtTile_Player_2,0,0),art_tile(a0)
@@ -305,55 +306,55 @@ loc_3F3F8:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3F428:
+S3Continue_TailsWaitThenAnimate:
                 subq.w  #1,$2E(a0)
-                bpl.w   locret_3F1D2
+                bpl.w   S3Continue_SetupOrIconReturn
                 move.b  #4,routine(a0)
                 move.b  #0,anim(a0)
                 move.w  #$600,ground_vel(a0)
                 move.w  #20-1,$2E(a0)
 
-loc_3F448:
+S3Continue_TailsTickDelayBeforeRun:
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_3F454
+                bpl.s   S3Continue_TailsAnimateBeforeRun
                 move.b  #6,routine(a0)
 
-loc_3F454:
+S3Continue_TailsAnimateBeforeRun:
                 jmp     (Animate_Tails).l
 ; ---------------------------------------------------------------------------
 
-loc_3F45A:
+S3Continue_TailsRunAndSignalAccept:
                 addq.w  #6,x_pos(a0)
                 cmpi.w  #$1E0,x_pos(a0)
-                blo.s   loc_3F46C
+                blo.s   S3Continue_TailsAnimateRun
                 move.b  #1,(_unkFAA9).w
 
-loc_3F46C:
+S3Continue_TailsAnimateRun:
                 jmp     (Animate_Tails).l
 ; ---------------------------------------------------------------------------
 
-loc_3F472:
+S3Continue_FixTailFlagAndDeleteDust:
                 bclr    #2,(Tails_tails+render_flags).w
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3F47E:
+S3Continue_KnucklesDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_3F49E(pc,d0.w),d1
-                jsr     off_3F49E(pc,d1.w)
+                move.w  S3Continue_KnucklesStateIndex(pc,d0.w),d1
+                jsr     S3Continue_KnucklesStateIndex(pc,d1.w)
                 lea     (DPLCPtr_CutsceneKnux).l,a2
                 jsr     (Perform_DPLC).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-off_3F49E:
-                dc.w    loc_3F4A6-off_3F49E
-                dc.w    loc_3F4CA-off_3F49E
-                dc.w    loc_3F4DE-off_3F49E
-                dc.w    locret_3F4FE-off_3F49E
+S3Continue_KnucklesStateIndex:
+                dc.w    S3Continue_InitKnucklesExitSprite-S3Continue_KnucklesStateIndex
+                dc.w    S3Continue_KnucklesWaitForStart-S3Continue_KnucklesStateIndex
+                dc.w    S3Continue_KnucklesRunToExit-S3Continue_KnucklesStateIndex
+                dc.w    S3Continue_KnucklesFinishedReturn-S3Continue_KnucklesStateIndex
 ; ---------------------------------------------------------------------------
 
-loc_3F4A6:
+S3Continue_InitKnucklesExitSprite:
                 lea     (ObjSlot_CutsceneKnux).l,a1
                 jsr     (SetUp_ObjAttributesSlotted).l
                 move.w  #make_art_tile(ArtTile_CutsceneKnux,3,0),art_tile(a0)
@@ -361,34 +362,34 @@ loc_3F4A6:
                 move.w  #$40,x_pos(a0)
                 move.w  #$120,y_pos(a0)
 
-loc_3F4CA:
+S3Continue_KnucklesWaitForStart:
                 movea.w (_unkFAA4).w,a1
                 btst    #3,$38(a1)
-                bne.s   loc_3F4D8
+                bne.s   S3Continue_KnucklesBeginRun
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3F4D8:
+S3Continue_KnucklesBeginRun:
                 move.b  #4,routine(a0)
 
-loc_3F4DE:
+S3Continue_KnucklesRunToExit:
                 move.w  x_pos(a0),d0
                 addq.w  #6,d0
                 move.w  d0,x_pos(a0)
                 cmpi.w  #$1E0,d0
-                bhs.s   loc_3F4F8
-                lea     byte_3F83A(pc),a1
+                bhs.s   S3Continue_KnucklesSelectFinished
+                lea     S3Continue_KnucklesDepartureAnim(pc),a1
                 jmp     (Animate_RawNoSST).l
 ; ---------------------------------------------------------------------------
 
-loc_3F4F8:
+S3Continue_KnucklesSelectFinished:
                 move.b  #6,routine(a0)
 
-locret_3F4FE:
+S3Continue_KnucklesFinishedReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3F500:
+S3Continue_InitStaticEmblem:
                 move.l  #Map_ContinueSprites,mappings(a0)
                 move.w  #make_art_tile(ArtTile_Continue_Misc,2,0),art_tile(a0)
                 move.w  #$280,priority(a0)
@@ -397,13 +398,13 @@ loc_3F500:
                 move.b  #8,height_pixels(a0)
                 move.w  #$120,x_pos(a0)
                 move.w  #$F5,y_pos(a0)
-                move.l  #loc_3F538,(a0)
+                move.l  #S3Continue_DrawStaticEmblem,(a0)
 
-loc_3F538:
+S3Continue_DrawStaticEmblem:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3F53E:
+S3Continue_InitRemainingIcon:
                 move.l  #Map_ContinueIcons,mappings(a0)
                 move.w  #make_art_tile(ArtTile_Continue_Icons,0,0),art_tile(a0)
                 move.w  #$280,priority(a0)
@@ -411,31 +412,31 @@ loc_3F53E:
                 move.b  #8,height_pixels(a0)
                 bsr.w   S3ContinuePositionIconByEvenSubtypeTable
                 move.w  #$D8,y_pos(a0)
-                move.l  #loc_3F572,(a0)
+                move.l  #S3Continue_SelectBlinkPairOffset,(a0)
                 bsr.w   S3Continue_SelectCharacterIcon
 
-loc_3F572:
+S3Continue_SelectBlinkPairOffset:
                 moveq   #0,d0
                 btst    #4,(V_int_run_count+3).w
-                beq.s   loc_3F57E
+                beq.s   S3Continue_DrawSelectedIconFrame
                 addq.w  #1,d0
 
-loc_3F57E:
+S3Continue_DrawSelectedIconFrame:
                 movea.l $30(a0),a1
                 move.b  (a1,d0.w),mapping_frame(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-Obj_3F58E:
+ContinueTailsIconChild_Initialize:
                 move.l  #Map_ContinueIcons,mappings(a0)
                 move.w  #make_art_tile(ArtTile_Continue_Icons,0,0),art_tile(a0)
                 move.w  #$280,priority(a0)
                 move.b  #8,width_pixels(a0)
                 move.b  #8,height_pixels(a0)
-                move.l  #loc_3F5B4,(a0)
+                move.l  #ContinueTailsIconChild_AnimateAndDraw,(a0)
 
-loc_3F5B4:
-                lea     byte_3F840(pc),a1
+ContinueTailsIconChild_AnimateAndDraw:
+                lea     ContinueTailsIconChild_RawAnimation(pc),a1
                 jsr     (Animate_RawNoSST).l
                 jmp     (Draw_Sprite).l
 
@@ -469,26 +470,26 @@ S3Continue_DrawTimerAndQueueUpload:
 S3Continue_InitRemainingLifeIcons:
                 moveq   #0,d0
                 move.b  (Continue_count).w,d0
-                beq.s   loc_3F60C
+                beq.s   S3Continue_ClampIconCountTo10
                 cmpi.b  #$A,d0
-                bls.s   loc_3F612
+                bls.s   S3Continue_PrepFixedIconSlots
 
-loc_3F60C:
+S3Continue_ClampIconCountTo10:
                 moveq   #$A,d0
                 move.b  d0,(Continue_count).w
 
-loc_3F612:
+S3Continue_PrepFixedIconSlots:
                 lea     (Dynamic_object_RAM+(object_size*2)).w,a1
                 moveq   #0,d1
 
-loc_3F618:
+S3Continue_SeedCountMinusOneIcons:
                 subq.b  #1,d0
-                beq.w   locret_3F1D2
-                move.l  #loc_3F53E,(a1)
+                beq.w   S3Continue_SetupOrIconReturn
+                move.l  #S3Continue_InitRemainingIcon,(a1)
                 move.b  d1,subtype(a1)
                 addq.w  #2,d1
                 lea     next_object(a1),a1
-                bra.s   loc_3F618
+                bra.s   S3Continue_SeedCountMinusOneIcons
 ; End of function S3Continue_InitRemainingLifeIcons
 
 ; =============== S U B R O U T I N E =======================================
@@ -496,12 +497,12 @@ loc_3F618:
 S3ContinuePositionIconByEvenSubtypeTable:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_3F63E(pc,d0.w),x_pos(a0)
+                move.w  S3Continue_IconXPositions(pc,d0.w),x_pos(a0)
                 rts
 ; End of function S3ContinuePositionIconByEvenSubtypeTable
 
 ; ---------------------------------------------------------------------------
-word_3F63E:
+S3Continue_IconXPositions:
                 dc.w    $120
                 dc.w    $138
                 dc.w    $108
@@ -518,25 +519,25 @@ word_3F63E:
 S3Continue_SelectCharacterIcon:
                 move.w  (Player_mode).w,d4
                 cmpi.b  #2,d4
-                bne.s   loc_3F664
-                lea     ChildObjDat_3F66E(pc),a2
+                bne.s   S3Continue_SelectModeIconPair
+                lea     ContinueTailsIconChild_SimpleSpawnRecord(pc),a2
                 jsr     (CreateChild6_Simple).l
 
-loc_3F664:
+S3Continue_SelectModeIconPair:
                 lsl.w   #2,d4
-                move.l  off_3F674(pc,d4.w),$30(a0)
+                move.l  S3Continue_ModeIconPairPointers(pc,d4.w),$30(a0)
                 rts
 ; End of function S3Continue_SelectCharacterIcon
 
 ; ---------------------------------------------------------------------------
-ChildObjDat_3F66E:
+ContinueTailsIconChild_SimpleSpawnRecord:
                 dc.w    1-1
-                dc.l    Obj_3F58E
-off_3F674:
-                dc.l    byte_3F834
-                dc.l    byte_3F834
-                dc.l    byte_3F836
-                dc.l    byte_3F838
+                dc.l    ContinueTailsIconChild_Initialize
+S3Continue_ModeIconPairPointers:
+                dc.l    S3Continue_SonicCountIconFramePair
+                dc.l    S3Continue_SonicCountIconFramePair
+                dc.l    S3Continue_TailsCountIconFramePair
+                dc.l    S3Continue_KnucklesCountIconFramePair
 aCONTINUE:
                 dc.w    0
                 dc.w    $292

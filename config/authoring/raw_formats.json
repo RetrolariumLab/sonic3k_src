@@ -21,11 +21,11 @@
     },
     {
       "path": "src/game/modes/s3/continue_resources.s",
-      "sha256": "a2f1e03043cf745e65bb9aabfa3bc8f1ebea541a84d58ff7ff4bfc10f7ce8685"
+      "sha256": "fd05daca2b743af9256138112fc3e5cabc1c352532346877b9ac110f806bfc4a"
     },
     {
       "path": "src/game/modes/s3/continue_screen.s",
-      "sha256": "682ad5ff198e2cee9cbcfa456b4c45ec0419eb4766c2b8023111219070ae092f"
+      "sha256": "26ce9d1d2f401daf29f819f4c507e5c9ae8c92151ca2ee43b377c2d0a6a14f5f"
     },
     {
       "path": "src/game/modes/s3/ending_credits.s",
@@ -901,11 +901,11 @@
     },
     {
       "path": "src/objects/interface/continue/sk/characters.s",
-      "sha256": "e11d78706e9cd78c2ba7991f3d9b783101bbd6504e95680566f685b82976180e"
+      "sha256": "382a83d6e8c2aa8169b1e3ebe405a16319ef8502f1283974ff1c2a4129d393d7"
     },
     {
       "path": "src/objects/interface/continue/sk/countdown_and_patterns.s",
-      "sha256": "c63e7dcd6bb85352266e95e24dea31278e338e9f9d9d93161c5c52bf26e7c3cc"
+      "sha256": "138dbe51fe71832570eabfe99980184297b3219277807cf2b6c921bafa99b4d7"
     },
     {
       "path": "src/objects/level_end/s3/capsule_resources.s",
@@ -1367,33 +1367,33 @@
     },
     {
       "path": "src/game/modes/s3/continue_resources.s",
-      "symbol": "byte_3F83A",
-      "scope": "byte_3F83A",
+      "symbol": "S3Continue_KnucklesDepartureAnim",
+      "scope": "S3Continue_KnucklesDepartureAnim",
       "first_line": 14,
       "last_line": 18,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 12,
-      "declarations_sha256": "2ca2eda96e7d0d35c2838f03386778a71eca110d50d8aea33016536887e971b4",
+      "declarations_sha256": "e713c37f9b2b025cf3f980799de58a33875c8eef662320d33285245612e9ebde",
       "entries": [
         [0, "fixed"],
         [6, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_3F83A", "byte_3F840"],
+      "members": ["S3Continue_KnucklesDepartureAnim", "ContinueTailsIconChild_RawAnimation"],
       "stored_markers": []
     },
     {
       "path": "src/game/modes/s3/continue_screen.s",
-      "symbol": "RawAni_3F320",
-      "scope": "RawAni_3F320",
+      "symbol": "S3Continue_SonicFrameAndFlipPairs",
+      "scope": "S3Continue_SonicFrameAndFlipPairs",
       "first_line": 212,
       "last_line": 218,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 10,
-      "declarations_sha256": "a51ef76137a61de7c60e0babc7e75f0a1845123c12ef54b6401fe7f2def9e00f",
+      "declarations_sha256": "45d926eab06b9e69b96f2cc8959058f1ae60638bfbc35df106993d30bac32f63",
       "entries": [[0, "frame-flip-index"]],
       "external_symbols": [],
-      "members": ["RawAni_3F320"],
+      "members": ["S3Continue_SonicFrameAndFlipPairs"],
       "stored_markers": []
     },
     {
@@ -4832,27 +4832,27 @@
     },
     {
       "path": "src/objects/interface/continue/sk/characters.s",
-      "symbol": "RawAni_5C622",
-      "scope": "RawAni_5C622",
+      "symbol": "ContinueSonicPair_ManualFrameFlipPairs",
+      "scope": "ContinueSonicPair_ManualFrameFlipPairs",
       "first_line": 86,
       "last_line": 92,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 10,
-      "declarations_sha256": "4816d5d19f36803fc835bb2f71c226a0edd079fa1d203d2ab40d84d9a1830e16",
+      "declarations_sha256": "4851359879f2bd7ba5be1452e5a99ca7c97da23a837f1bb7a0ea03a4095f3ada",
       "entries": [[0, "frame-flip-index"]],
       "external_symbols": [],
-      "members": ["RawAni_5C622"],
+      "members": ["ContinueSonicPair_ManualFrameFlipPairs"],
       "stored_markers": []
     },
     {
       "path": "src/objects/interface/continue/sk/countdown_and_patterns.s",
-      "symbol": "byte_5CBB4",
-      "scope": "byte_5CBB4",
+      "symbol": "ContinueExit_SonicKnucklesRawLoop",
+      "scope": "ContinueExit_SonicKnucklesRawLoop",
       "first_line": 130,
       "last_line": 138,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 22,
-      "declarations_sha256": "f9be8e12546989a564f2bef38aba6343a23509169bc52f51533d8d353d00eef4",
+      "declarations_sha256": "441a78ad294c9be818eb5563e0040a799bc5c759612ebef8dddee0c278f55bf7",
       "entries": [
         [0, "extended-fixed"],
         [7, "fixed"],
@@ -4860,7 +4860,12 @@
         [17, "extended-fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_5CBB4", "byte_5CBBB", "byte_5CBC0", "byte_5CBC5"],
+      "members": [
+        "ContinueExit_SonicKnucklesRawLoop",
+        "ContinueTailsIconChild_RawAnimation",
+        "ContinueKnuckles_MiscOrdinaryRawWaitLoop",
+        "ContinueSonicAlone_EscapedRawWaitLoop"
+      ],
       "stored_markers": []
     },
     {

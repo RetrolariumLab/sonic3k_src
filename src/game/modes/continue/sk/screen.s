@@ -41,31 +41,31 @@ ContinueScreen:
                 lea     (Target_palette).w,a2
                 moveq   #bytesToLcnt($80),d6
 
-loc_5C3BC:
+SKContinue_CopyPaletteAndSelectActors:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_5C3BC
+                dbf     d6,SKContinue_CopyPaletteAndSelectActors
                 lea     aCONTINUE(pc),a1
                 move.w  #$292,d2
                 move.w  #make_art_tile(ArtTile_Continue_Text,0,1),d6
                 jsr     (SKCredits_BuildAndUploadText).l
                 cmpi.w  #3,(Player_mode).w
-                beq.s   loc_5C3FE
+                beq.s   SKContinue_InstallControllerAndFade
                 tst.w   (SK_alone_flag).w
-                beq.s   loc_5C3EE
+                beq.s   SKContinue_InstallSonicAndTails
                 move.l  #Obj_Continue_SonicAlone,(Player_1).w
-                bra.w   loc_5C3FE
+                bra.w   SKContinue_InstallControllerAndFade
 ; ---------------------------------------------------------------------------
 
-loc_5C3EE:
+SKContinue_InstallSonicAndTails:
                 move.l  #Obj_Continue_SonicWTails,(Player_1).w
                 move.l  #Obj_Continue_TailsWSonic,(Player_2).w
 
-loc_5C3FE:
-                move.l  #loc_5C838,(Reserved_object_3).w
+SKContinue_InstallControllerAndFade:
+                move.l  #ContinueKnuckles_SelectEntrance,(Reserved_object_3).w
                 lea     (Dynamic_object_RAM).w,a1
-                move.l  #loc_5C4D6,(a1)
+                move.l  #SKContinue_InitCountdownAt10,(a1)
                 move.w  a1,(_unkFAA4).w
-                move.l  #loc_5C9DC,(Dynamic_object_RAM+object_size).w
+                move.l  #ContinueDecoration_InitCenterSprite,(Dynamic_object_RAM+object_size).w
                 bsr.w   Continue_InitExtraCountIcons
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
@@ -78,7 +78,7 @@ loc_5C3FE:
                 jsr     (Play_Music).l
                 jsr     (Pal_FadeFromBlack).l
 
-loc_5C454:
+SKContinue_RunUntilOutcome:
                 move.b  #VInt_ID_16,(V_int_routine).w
                 jsr     (Process_Kos_Queue).l
                 jsr     (Wait_VSync).l
@@ -86,14 +86,14 @@ loc_5C454:
                 jsr     (Render_Sprites).l
                 jsr     (Process_Kos_Module_Queue).l
                 move.b  (_unkFAA9).w,d0
-                beq.s   loc_5C454
+                beq.s   SKContinue_RunUntilOutcome
                 subq.b  #1,d0
-                beq.s   loc_5C48A
+                beq.s   SKContinue_ConsumeAndSaveStats
                 move.b  #GameMode_SegaScreen,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5C48A:
+SKContinue_ConsumeAndSaveStats:
                 move.b  #GameMode_Level,(Game_mode).w
                 move.b  #3,(Life_count).w
                 move.b  #3,(Life_count_P2).w
@@ -110,41 +110,41 @@ loc_5C48A:
                 st      (SRAM_mask_interrupts_flag).w
                 jsr     (SaveGame_LivesContinues).l
 
-locret_5C4D4:
+SKContinueScene_ReturnAfterContinueSave:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5C4D6:
-                move.l  #loc_5C4E6,(a0)
+SKContinue_InitCountdownAt10:
+                move.l  #SKContinue_CheckStartOrTick,(a0)
                 clr.w   (_unkFA82).w
                 move.b  #$A,(_unkFA84).w
 
-loc_5C4E6:
+SKContinue_CheckStartOrTick:
                 btst    #button_start,(Ctrl_1_pressed).w
-                bne.s   loc_5C51C
+                bne.s   SKContinue_LatchStartAndStopTimer
                 btst    #button_start,(Ctrl_2_pressed).w
-                bne.s   loc_5C51C
+                bne.s   SKContinue_LatchStartAndStopTimer
                 subq.w  #1,(_unkFA82).w
-                bpl.s   locret_5C512
+                bpl.s   SKContinue_CountdownReturn
                 move.w  #60-1,(_unkFA82).w
                 move.b  (_unkFA84).w,d0
                 subq.b  #1,d0
-                bmi.s   loc_5C514
+                bmi.s   SKContinue_SignalTimeout
                 move.b  d0,(_unkFA84).w
                 bsr.w   Continue_DrawCountdownToPlaneA
 
-locret_5C512:
+SKContinue_CountdownReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5C514:
+SKContinue_SignalTimeout:
                 move.b  #2,(_unkFAA9).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5C51C:
-                move.l  #locret_5C528,(a0)
+SKContinue_LatchStartAndStopTimer:
+                move.l  #SKContinue_AcceptedControllerReturn,(a0)
                 bset    #3,$38(a0)
 
-locret_5C528:
+SKContinue_AcceptedControllerReturn:
                 rts

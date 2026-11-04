@@ -5,15 +5,15 @@ Map_ContinueSprites:
                 include "src/ui/shared/continue/mappings/player_sprites_s3.s"
 Map_ContinueIcons:
                 include "src/ui/shared/continue/mappings/player_icons.s"
-byte_3F834:     dc.b    0
+S3Continue_SonicCountIconFramePair: dc.b    0
                 dc.b    1
-byte_3F836:     dc.b    2
+S3Continue_TailsCountIconFramePair: dc.b    2
                 dc.b    3
-byte_3F838:     dc.b    7
+S3Continue_KnucklesCountIconFramePair:  dc.b    7
                 dc.b    8
-byte_3F83A:
+S3Continue_KnucklesDepartureAnim:
                 dc.b    1, $12, $13, $14, $15, $FC
-byte_3F840:
+ContinueTailsIconChild_RawAnimation:
                 dc.b    8,   4,   5,   6, $FC
                 even
 ArtNem_ContinueSprites:

@@ -117556,18 +117556,18 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 102
       },
-      "declarations_sha256": "c65e1d53fd213be9ca039db267fbaf6a7495236905d2384f309353dcf6d57087",
+      "declarations_sha256": "c0321363973bc0cd76ab52ea4b7cd5b97327d3a38b796e26b3444da323251b1d",
       "labels": {
         "Map_ContinueIcons_": 0,
-        "word_5CD12": 18,
-        "word_5CD20": 32,
-        "word_5CD2E": 46,
-        "word_5CD36": 54,
-        "word_5CD3E": 62,
-        "word_5CD46": 70,
-        "word_5CD4E": 78,
-        "word_5CD56": 86,
-        "word_5CD5E": 94
+        "ContinueCountIcon_SonicFirstPhasePieces": 18,
+        "ContinueCountIcon_SonicSecondPhasePieces": 32,
+        "ContinueCountIcon_TailsFirstPhasePieces": 46,
+        "ContinueCountIcon_TailsSecondPhasePieces": 54,
+        "ContinueCountIcon_TailsChildMap1": 62,
+        "ContinueCountIcon_TailsChildMap2": 70,
+        "ContinueCountIcon_TailsChildMap3": 78,
+        "ContinueCountIcon_KnucklesMap1": 86,
+        "ContinueCountIcon_KnucklesMap2": 94
       },
       "external_symbols": [],
       "blocks": [
@@ -117575,63 +117575,63 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5CD12",
+          "target": "ContinueCountIcon_SonicFirstPhasePieces",
           "base": "Map_ContinueIcons_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5CD20",
+          "target": "ContinueCountIcon_SonicSecondPhasePieces",
           "base": "Map_ContinueIcons_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5CD2E",
+          "target": "ContinueCountIcon_TailsFirstPhasePieces",
           "base": "Map_ContinueIcons_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5CD36",
+          "target": "ContinueCountIcon_TailsSecondPhasePieces",
           "base": "Map_ContinueIcons_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5CD3E",
+          "target": "ContinueCountIcon_TailsChildMap1",
           "base": "Map_ContinueIcons_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5CD46",
+          "target": "ContinueCountIcon_TailsChildMap2",
           "base": "Map_ContinueIcons_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5CD4E",
+          "target": "ContinueCountIcon_TailsChildMap3",
           "base": "Map_ContinueIcons_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5CD56",
+          "target": "ContinueCountIcon_KnucklesMap1",
           "base": "Map_ContinueIcons_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5CD5E",
+          "target": "ContinueCountIcon_KnucklesMap2",
           "base": "Map_ContinueIcons_"
         },
         {
@@ -117690,17 +117690,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 182
       },
-      "declarations_sha256": "fab33b06af427a085c46561c389d90155d99f4235c955786e34c3058547bac07",
+      "declarations_sha256": "44da269cf1480076f5b59c12c06b655a99f484d42d4705314900067467a2f56f",
       "labels": {
         "Map_ContinueSprites_": 0,
-        "word_5CC5A": 16,
-        "word_5CC6E": 36,
-        "word_5CC82": 56,
-        "word_5CC9C": 82,
-        "word_5CCB6": 108,
-        "word_5CCD0": 134,
-        "word_5CCDE": 148,
-        "word_5CCF2": 168
+        "SKContinueSprite_SonicWaitFirstPieces": 16,
+        "SKContinueSprite_SonicWaitSecondPieces": 36,
+        "SKContinueSprite_KnucklesWaitMap1": 56,
+        "SKContinueSprite_RetainedMap2": 82,
+        "SKContinueSprite_KnucklesWaitMap3": 108,
+        "SKContinueSprite_TailsWaitFirstPieces": 134,
+        "SKContinueSprite_TailsWaitSecondPieces": 148,
+        "SKContinueSprite_PairedDecorMap": 168
       },
       "external_symbols": [],
       "blocks": [
@@ -117708,56 +117708,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5CC5A",
+          "target": "SKContinueSprite_SonicWaitFirstPieces",
           "base": "Map_ContinueSprites_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5CC6E",
+          "target": "SKContinueSprite_SonicWaitSecondPieces",
           "base": "Map_ContinueSprites_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5CC82",
+          "target": "SKContinueSprite_KnucklesWaitMap1",
           "base": "Map_ContinueSprites_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5CC9C",
+          "target": "SKContinueSprite_RetainedMap2",
           "base": "Map_ContinueSprites_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5CCB6",
+          "target": "SKContinueSprite_KnucklesWaitMap3",
           "base": "Map_ContinueSprites_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5CCD0",
+          "target": "SKContinueSprite_TailsWaitFirstPieces",
           "base": "Map_ContinueSprites_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5CCDE",
+          "target": "SKContinueSprite_TailsWaitSecondPieces",
           "base": "Map_ContinueSprites_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5CCF2",
+          "target": "SKContinueSprite_PairedDecorMap",
           "base": "Map_ContinueSprites_"
         },
         {
@@ -117811,17 +117811,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 182
       },
-      "declarations_sha256": "cc931eeb668c78f75320c8a2224566f304bad5b5d055684dce5d17a7391520f6",
+      "declarations_sha256": "37d7e2abd71320d848fb178576d0df88ce3b89779f3260b8b1069aa657d076d3",
       "labels": {
         "Map_ContinueSprites_": 0,
-        "word_3F728": 16,
-        "word_3F73C": 36,
-        "word_3F750": 56,
-        "word_3F76A": 82,
-        "word_3F784": 108,
-        "word_3F79E": 134,
-        "word_3F7AC": 148,
-        "word_3F7C0": 168
+        "S3ContinueSprite_SonicWaitFirstPieces": 16,
+        "S3ContinueSprite_SonicWaitSecondPieces": 36,
+        "S3ContinueSprite_RetainedMap1": 56,
+        "S3ContinueSprite_RetainedMap2": 82,
+        "S3ContinueSprite_RetainedMap3": 108,
+        "S3ContinueSprite_TailsWaitFirstPieces": 134,
+        "S3ContinueSprite_TailsWaitSecondPieces": 148,
+        "S3ContinueSprite_PairedDecorMap": 168
       },
       "external_symbols": [],
       "blocks": [
@@ -117829,56 +117829,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3F728",
+          "target": "S3ContinueSprite_SonicWaitFirstPieces",
           "base": "Map_ContinueSprites_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3F73C",
+          "target": "S3ContinueSprite_SonicWaitSecondPieces",
           "base": "Map_ContinueSprites_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3F750",
+          "target": "S3ContinueSprite_RetainedMap1",
           "base": "Map_ContinueSprites_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3F76A",
+          "target": "S3ContinueSprite_RetainedMap2",
           "base": "Map_ContinueSprites_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3F784",
+          "target": "S3ContinueSprite_RetainedMap3",
           "base": "Map_ContinueSprites_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3F79E",
+          "target": "S3ContinueSprite_TailsWaitFirstPieces",
           "base": "Map_ContinueSprites_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3F7AC",
+          "target": "S3ContinueSprite_TailsWaitSecondPieces",
           "base": "Map_ContinueSprites_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3F7C0",
+          "target": "S3ContinueSprite_PairedDecorMap",
           "base": "Map_ContinueSprites_"
         },
         {

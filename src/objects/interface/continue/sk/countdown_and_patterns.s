@@ -51,25 +51,25 @@ Continue_DrawCountdownToPlaneA:
 Continue_InitExtraCountIcons:
                 moveq   #0,d0
                 move.b  (Continue_count).w,d0
-                beq.s   loc_5CB2A
+                beq.s   ContinueIcons_UseCount10
                 cmpi.b  #$A,d0
-                bls.s   loc_5CB2C
+                bls.s   ContinueIcons_PrepFixedSlots
 
-loc_5CB2A:
+ContinueIcons_UseCount10:
                 moveq   #$A,d0
 
-loc_5CB2C:
+ContinueIcons_PrepFixedSlots:
                 lea     (Dynamic_object_RAM+(object_size*2)).w,a1
                 moveq   #0,d1
 
-loc_5CB32:
+ContinueIcons_SeedCountMinusOne:
                 subq.b  #1,d0
-                beq.w   locret_5C4D4
-                move.l  #loc_5CA1A,(a1)
+                beq.w   SKContinueScene_ReturnAfterContinueSave
+                move.l  #ContinueIcons_SelectMapAndPalette,(a1)
                 move.b  d1,subtype(a1)
                 addq.w  #2,d1
                 lea     next_object(a1),a1
-                bra.s   loc_5CB32
+                bra.s   ContinueIcons_SeedCountMinusOne
 ; End of function Continue_InitExtraCountIcons
 
 ; =============== S U B R O U T I N E =======================================
@@ -77,12 +77,12 @@ loc_5CB32:
 ContinueIcon_SetCenterOutX:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_5CB58(pc,d0.w),x_pos(a0)
+                move.w  ContinueIcons_AlternatingCenterOutXWords(pc,d0.w),x_pos(a0)
                 rts
 ; End of function ContinueIcon_SetCenterOutX
 
 ; ---------------------------------------------------------------------------
-word_5CB58:
+ContinueIcons_AlternatingCenterOutXWords:
                 dc.w    $120
                 dc.w    $138
                 dc.w    $108
@@ -99,41 +99,41 @@ word_5CB58:
 ContinueIcon_SelectCharacterFrames:
                 move.w  (Player_mode).w,d4
                 cmpi.b  #2,d4
-                bne.s   loc_5CB7E
-                lea     ChildObjDat_5CB88(pc),a2
+                bne.s   ContinueIcons_LoadPairAfterTailsChild
+                lea     ContinueTailsIconChild_SimpleSpawnRecord(pc),a2
                 jsr     (CreateChild6_Simple).l
 
-loc_5CB7E:
+ContinueIcons_LoadPairAfterTailsChild:
                 lsl.w   #2,d4
-                move.l  off_5CB8E(pc,d4.w),$30(a0)
+                move.l  ContinueIcons_CharacterFramePairPointers(pc,d4.w),$30(a0)
                 rts
 ; End of function ContinueIcon_SelectCharacterFrames
 
 ; ---------------------------------------------------------------------------
-ChildObjDat_5CB88:
+ContinueTailsIconChild_SimpleSpawnRecord:
                 dc.w    1-1
-                dc.l    Obj_5CA78
-off_5CB8E:
-                dc.l    byte_5CBAE
-                dc.l    byte_5CBAE
-                dc.l    byte_5CBB0
-                dc.l    byte_5CBB2
+                dc.l    ContinueTailsIconChild_Initialize
+ContinueIcons_CharacterFramePairPointers:
+                dc.l    ContinueIcons_SonicFramePair
+                dc.l    ContinueIcons_SonicFramePair
+                dc.l    ContinueIcons_TailsBodyFramePair
+                dc.l    ContinueIcons_KnucklesFramePair
 aCONTINUE:
                 dc.b    "C O N T I N U E",0
                 even
-byte_5CBAE:     dc.b    0
+ContinueIcons_SonicFramePair:   dc.b    0
                 dc.b    1
-byte_5CBB0:     dc.b    2
+ContinueIcons_TailsBodyFramePair:   dc.b    2
                 dc.b    3
-byte_5CBB2:     dc.b    7
+ContinueIcons_KnucklesFramePair:    dc.b    7
                 dc.b    8
-byte_5CBB4:
+ContinueExit_SonicKnucklesRawLoop:
                 dc.b    2, $21, $22, $23, $24, $FF, $FC
-byte_5CBBB:
+ContinueTailsIconChild_RawAnimation:
                 dc.b    8,   4,   5,   6, $FC
-byte_5CBC0:
+ContinueKnuckles_MiscOrdinaryRawWaitLoop:
                 dc.b    $B,   2,   2,   4, $FC
-byte_5CBC5:
+ContinueSonicAlone_EscapedRawWaitLoop:
                 dc.b    $B, $BD, $BE, $FF, $FC
                 even
 Pal_ContinueScreen:
