@@ -3,7 +3,7 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
 
-loc_37220:
+S3RaceHUD_InitP1TimeWidget:
                 move.l  #Map_2PTime_P1_RAM,mappings(a0)
                 move.w  #make_art_tile(ArtTile_2PTime,0,1),art_tile(a0)
                 move.w  #0,priority(a0)
@@ -16,12 +16,12 @@ loc_37220:
                 lea     (Map_2PTime_P1_RAM).l,a2
                 move.w  #bytesToWcnt(Map_2PTime_end-Map_2PTime),d0
 
-loc_37262:
+S3RaceHUD_CopyP1TimeMap:
                 move.w  (a1)+,(a2)+
-                dbf     d0,loc_37262
-                move.l  #loc_3726E,(a0)
+                dbf     d0,S3RaceHUD_CopyP1TimeMap
+                move.l  #S3RaceHUD_BindP1TimeUpdateFields,(a0)
 
-loc_3726E:
+S3RaceHUD_BindP1TimeUpdateFields:
                 lea     (Score).w,a1
                 lea     (Map_2PTime_P1_RAM+$A).l,a2
                 lea     (Timer_minute).w,a3
@@ -30,16 +30,16 @@ loc_3726E:
                 lea     (Update_HUD_timer).w,a4
                 lea     (Competition_time_record).w,a5
                 lea     ((RAM_start+$7828)&$FFFFFF).l,a6
-                bra.s   loc_3730E
+                bra.s   S3RaceHUD_GateTimeTickAndApplyCap
 ; ---------------------------------------------------------------------------
 
-loc_37292:
+S3RaceHUD_SkipP2TimeWidgetInGhostMode:
                 tst.b   (Not_ghost_flag).w
-                bne.s   loc_3729E
+                bne.s   S3RaceHUD_InitP2TimeWidget
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3729E:
+S3RaceHUD_InitP2TimeWidget:
                 move.l  #Map_2PTime_P2_RAM,mappings(a0)
                 move.w  #make_art_tile(ArtTile_2PTime,0,1),art_tile(a0)
                 move.w  #0,priority(a0)
@@ -52,12 +52,12 @@ loc_3729E:
                 lea     (Map_2PTime_P2_RAM).l,a2
                 move.w  #bytesToWcnt(Map_2PTime_end-Map_2PTime),d0
 
-loc_372E0:
+S3RaceHUD_CopyP2TimeMap:
                 move.w  (a1)+,(a2)+
-                dbf     d0,loc_372E0
-                move.l  #loc_372EC,(a0)
+                dbf     d0,S3RaceHUD_CopyP2TimeMap
+                move.l  #S3RaceHUD_BindP2TimeUpdateFields,(a0)
 
-loc_372EC:
+S3RaceHUD_BindP2TimeUpdateFields:
                 lea     (Score_P2).w,a1
                 lea     (Map_2PTime_P2_RAM+$A).l,a2
                 lea     (Timer_minute_P2).w,a3
@@ -67,42 +67,42 @@ loc_372EC:
                 lea     (Competition_time_record_P2).w,a5
                 lea     ((RAM_start+$7840)&$FFFFFF).l,a6
 
-loc_3730E:
+S3RaceHUD_GateTimeTickAndApplyCap:
                 tst.b   (a4)
-                beq.s   loc_37342
-                bmi.s   loc_37342
+                beq.s   S3RaceHUD_ConvertLapAndUpdateRecord
+                bmi.s   S3RaceHUD_ConvertLapAndUpdateRecord
                 cmpi.l  #(9<<16)|(59<<8)|99,(a5)
-                blo.s   loc_37328
+                blo.s   S3RaceHUD_TickTimerWith60FrameCarry
                 move.b  #$80,(a4)
                 move.l  #(9<<16)|(59<<8)|99,(a5)
-                bra.s   loc_37362
+                bra.s   S3RaceHUD_WriteMinutesAndPrepSeconds
 ; ---------------------------------------------------------------------------
 
-loc_37328:
+S3RaceHUD_TickTimerWith60FrameCarry:
                 addq.b  #1,-(a1)
                 cmpi.b  #60,(a1)
-                blo.s   loc_37342
+                blo.s   S3RaceHUD_ConvertLapAndUpdateRecord
                 move.b  #0,(a1)
                 addq.b  #1,-(a1)
                 cmpi.b  #60,(a1)
-                blo.s   loc_37342
+                blo.s   S3RaceHUD_ConvertLapAndUpdateRecord
                 move.b  #0,(a1)
                 addq.b  #1,-(a1)
 
-loc_37342:
+S3RaceHUD_ConvertLapAndUpdateRecord:
                 move.l  -1(a3),d6
                 jsr     (S3CompConvertTimerFrameByteToHundredths).l
                 cmpi.w  #5,d1
-                bhs.s   loc_37362
+                bhs.s   S3RaceHUD_WriteMinutesAndPrepSeconds
                 lsl.w   #2,d1
                 move.l  d6,(a6,d1.w)
                 move.l  $14(a6),d5
                 jsr     S3CompGoal_AddPackedTimes(pc)
                 move.l  d6,(a5)
 
-loc_37362:
+S3RaceHUD_WriteMinutesAndPrepSeconds:
                 addq.w  #1,a5
-                lea     word_373BC(pc),a1
+                lea     S3RaceHUD_DigitPieceTemplates(pc),a1
                 moveq   #0,d0
                 move.b  (a5)+,d0
                 lsl.w   #2,d0
@@ -112,14 +112,14 @@ loc_37362:
                 move.b  (a5)+,d0
                 moveq   #0,d2
 
-loc_3737A:
+S3RaceHUD_CountSecondsTens:
                 subi.w  #$A,d0
-                bcs.s   loc_37384
+                bcs.s   S3RaceHUD_WriteSecondsAndPrepFraction
                 addq.w  #4,d2
-                bra.s   loc_3737A
+                bra.s   S3RaceHUD_CountSecondsTens
 ; ---------------------------------------------------------------------------
 
-loc_37384:
+S3RaceHUD_WriteSecondsAndPrepFraction:
                 addi.w  #$A,d0
                 move.l  (a1,d2.w),(a2)+
                 addq.w  #2,a2
@@ -130,14 +130,14 @@ loc_37384:
                 move.b  (a5)+,d0
                 moveq   #0,d2
 
-loc_3739C:
+S3RaceHUD_CountHundredthsTens:
                 subi.w  #$A,d0
-                bcs.s   loc_373A6
+                bcs.s   S3RaceHUD_WriteHundredthsAndDraw
                 addq.w  #4,d2
-                bra.s   loc_3739C
+                bra.s   S3RaceHUD_CountHundredthsTens
 ; ---------------------------------------------------------------------------
 
-loc_373A6:
+S3RaceHUD_WriteHundredthsAndDraw:
                 addi.w  #$A,d0
                 move.l  (a1,d2.w),(a2)+
                 addq.w  #2,a2
@@ -145,7 +145,7 @@ loc_373A6:
                 move.l  (a1,d0.w),(a2)+
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-word_373BC:
+S3RaceHUD_DigitPieceTemplates:
                 dc.w    $F805,     8
                 dc.w    $F801,    $C
                 dc.w    $F805,    $E
@@ -156,13 +156,13 @@ word_373BC:
                 dc.w    $F805,   $22
                 dc.w    $F805,   $26
                 dc.w    $F805,   $2A
-byte_373E4:
+S3RaceHUD_FrameToHundredthsTable:
                 dc.b    0,   1,   3,   5,   6,   8,  $A,  $B,  $D,  $F, $10, $12, $14, $15, $17, $19, $1A, $1C, $1E, $1F
                 dc.b    $21, $23, $24, $26, $28, $29, $2B, $2D, $2E, $30, $32, $33, $35, $37, $38, $3A, $3C, $3D, $3F, $41
                 dc.b    $42, $44, $46, $47, $49, $4B, $4C, $4E, $50, $51, $53, $55, $56, $58, $5A, $5B, $5D, $5F, $60, $62
 Map_2PTime:
-                dc.w    word_37422-Map_2PTime
-word_37422:     dc.w    8
+                dc.w    S3RaceHUD_MutableTimeMapTemplate-Map_2PTime
+S3RaceHUD_MutableTimeMapTemplate:   dc.w    8
                 dc.b    $F8,  $D,   0,   0, $FF, $C0
                 dc.b    $F8,   5,   0,   8, $FF, $E8
                 dc.b    $F0,   0,   0, $2E, $FF, $F4
@@ -172,10 +172,10 @@ word_37422:     dc.w    8
                 dc.b    $F8,   5,   0,   8,   0, $1C
                 dc.b    $F8,   5,   0,   8,   0, $28
 Map_2PTime_end:
-; End of function loc_37220
+; End of function S3RaceHUD_InitP1TimeWidget
 ; ---------------------------------------------------------------------------
 
-loc_37454:
+S3RaceHUD_InitItemWidget:
                 move.l  #Map_2PItemIcon,mappings(a0)
                 move.w  #make_art_tile(ArtTile_2PLapNum+$50,0,1),art_tile(a0)
                 move.w  #0,priority(a0)
@@ -184,59 +184,59 @@ loc_37454:
                 move.w  #$120,x_pos(a0)
                 move.w  #$E0,y_pos(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_374A0
+                beq.s   S3RaceHUD_InstallP1ItemWidget
                 tst.b   (Not_ghost_flag).w
-                bne.s   loc_37492
+                bne.s   S3RaceHUD_InstallP2ItemWidget
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_37492:
+S3RaceHUD_InstallP2ItemWidget:
                 bset    #4,render_flags(a0)
-                move.l  #loc_374D4,(a0)
-                bra.s   loc_374D4
+                move.l  #S3RaceHUD_SelectP2RingItemFrame,(a0)
+                bra.s   S3RaceHUD_SelectP2RingItemFrame
 ; ---------------------------------------------------------------------------
 
-loc_374A0:
+S3RaceHUD_InstallP1ItemWidget:
                 bset    #3,render_flags(a0)
-                move.l  #loc_374AC,(a0)
+                move.l  #S3RaceHUD_SelectP1RingItemFrame,(a0)
 
-loc_374AC:
+S3RaceHUD_SelectP1RingItemFrame:
                 moveq   #0,d0
                 tst.w   (Ring_count).w
-                beq.s   loc_374B6
+                beq.s   S3RaceHUD_OverrideP1SpeedItemFrame
                 moveq   #3,d0
 
-loc_374B6:
+S3RaceHUD_OverrideP1SpeedItemFrame:
                 btst    #Status_SpeedShoes,(Player_1+status_secondary).w
-                beq.s   loc_374CA
+                beq.s   S3RaceHUD_StoreP1ItemFrameAndDraw
                 moveq   #1,d0
                 cmpi.w  #$C00,(Max_speed).w
-                beq.s   loc_374CA
+                beq.s   S3RaceHUD_StoreP1ItemFrameAndDraw
                 moveq   #2,d0
 
-loc_374CA:
+S3RaceHUD_StoreP1ItemFrameAndDraw:
                 move.b  d0,mapping_frame(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_374D4:
+S3RaceHUD_SelectP2RingItemFrame:
                 moveq   #0,d0
                 tst.w   (Ring_count_P2).w
-                beq.s   loc_374DE
+                beq.s   S3RaceHUD_OverrideP2SpeedItemFrame
                 moveq   #3,d0
 
-loc_374DE:
+S3RaceHUD_OverrideP2SpeedItemFrame:
                 btst    #2,(Player_2+status_secondary).w
-                beq.s   loc_374F2
+                beq.s   S3RaceHUD_StoreP2ItemFrameAndDraw
                 moveq   #1,d0
                 cmpi.w  #$C00,(Max_speed_P2).w
-                beq.s   loc_374F2
+                beq.s   S3RaceHUD_StoreP2ItemFrameAndDraw
                 moveq   #2,d0
 
-loc_374F2:
+S3RaceHUD_StoreP2ItemFrameAndDraw:
                 move.b  d0,mapping_frame(a0)
                 jmp     (Draw_Sprite).l
-; End of function loc_37454
+; End of function S3RaceHUD_InitItemWidget
 ; ---------------------------------------------------------------------------
 Map_2PItemIcon:
                 include "src/game/competition/shared/mappings/item_icon.s"
@@ -248,61 +248,61 @@ Map_2PItemIcon:
                 move.b  #4,width_pixels(a0)
                 move.b  #4,height_pixels(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_375D6
+                beq.s   S3RaceHUD_InitP1PositionWidget
                 tst.b   (Not_ghost_flag).w
-                bne.s   loc_375B0
+                bne.s   S3RaceHUD_InitP2PositionWidget
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_375B0:
+S3RaceHUD_InitP2PositionWidget:
                 move.w  #$90,x_pos(a0)
                 move.w  #$84,y_pos(a0)
                 move.w  (Player_2+x_pos).w,$30(a0)
                 bset    #4,render_flags(a0)
                 move.b  #2,mapping_frame(a0)
-                move.l  #loc_3764E,(a0)
-                bra.s   loc_3764E
+                move.l  #S3RaceHUD_ReadP2PositionAndAnchor,(a0)
+                bra.s   S3RaceHUD_ReadP2PositionAndAnchor
 ; ---------------------------------------------------------------------------
 
-loc_375D6:
+S3RaceHUD_InitP1PositionWidget:
                 move.w  #$90,x_pos(a0)
                 move.w  #$E8,y_pos(a0)
                 move.w  (Player_1+x_pos).w,$30(a0)
                 bset    #3,render_flags(a0)
                 move.b  #1,mapping_frame(a0)
-                move.l  #loc_375FA,(a0)
+                move.l  #S3RaceHUD_ReadP1PositionAndAnchor,(a0)
 
-loc_375FA:
+S3RaceHUD_ReadP1PositionAndAnchor:
                 move.w  (Player_1+x_pos).w,d0
                 move.w  (Saved_X_pos).w,d1
 
-loc_37602:
+S3RaceHUD_ResetPositionAccumulator:
                 tst.w   (Events_bg+$14).w
-                beq.s   loc_37612
+                beq.s   S3RaceHUD_ComputeWrappedPositionDelta
                 move.w  #0,$34(a0)
                 move.w  d1,$30(a0)
 
-loc_37612:
+S3RaceHUD_ComputeWrappedPositionDelta:
                 move.w  d0,d1
                 sub.w   $30(a0),d0
-                beq.s   loc_3763A
-                bcc.s   loc_37628
+                beq.s   S3RaceHUD_ProjectRaceDistanceAndDraw
+                bcc.s   S3RaceHUD_FoldPositiveHalfWrap
                 cmpi.w  #-$200,d0
-                bge.s   loc_37632
+                bge.s   S3RaceHUD_AccumulateDeltaAndStoreX
                 addi.w  #$400,d0
-                bra.s   loc_37632
+                bra.s   S3RaceHUD_AccumulateDeltaAndStoreX
 ; ---------------------------------------------------------------------------
 
-loc_37628:
+S3RaceHUD_FoldPositiveHalfWrap:
                 cmpi.w  #$200,d0
-                blt.s   loc_37632
+                blt.s   S3RaceHUD_AccumulateDeltaAndStoreX
                 subi.w  #$400,d0
 
-loc_37632:
+S3RaceHUD_AccumulateDeltaAndStoreX:
                 add.w   d0,$34(a0)
                 move.w  d1,$30(a0)
 
-loc_3763A:
+S3RaceHUD_ProjectRaceDistanceAndDraw:
                 move.w  $34(a0),d0
                 asr.w   #6,d0
                 addi.w  #$90,d0
@@ -310,11 +310,11 @@ loc_3763A:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3764E:
+S3RaceHUD_ReadP2PositionAndAnchor:
                 move.w  (Player_2+x_pos).w,d0
                 move.w  (Saved2_X_pos).w,d1
-                bra.s   loc_37602
+                bra.s   S3RaceHUD_ResetPositionAccumulator
 ; ---------------------------------------------------------------------------
 Map_2PPosition:
                 include "src/game/competition/shared/mappings/position_icons_unused.s"
-; End of function loc_375B0
+; End of function S3RaceHUD_InitP2PositionWidget

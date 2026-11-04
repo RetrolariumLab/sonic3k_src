@@ -13,8 +13,8 @@ Obj_CGZBladePlatform:
                 move.w  y_pos(a0),$32(a0)
                 bset    #7,status(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_35B10
-                move.l  #loc_35B90,(a1)
+                bne.w   SKCGZBlade_InstallPlatformUpdate
+                move.l  #SKCGZBlade_LeftBladeFollowAtYPlus8,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 subi.w  #$10,x_pos(a1)
@@ -22,8 +22,8 @@ Obj_CGZBladePlatform:
                 move.b  #$A6,collision_flags(a1)
                 move.w  a0,$3E(a1)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_35B10
-                move.l  #loc_35BA6,(a1)
+                bne.w   SKCGZBlade_InstallPlatformUpdate
+                move.l  #SKCGZBlade_RightBladeFollowAtYPlus16,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 addi.w  #$10,x_pos(a1)
@@ -31,36 +31,36 @@ Obj_CGZBladePlatform:
                 move.b  #$A6,collision_flags(a1)
                 move.w  a0,$3E(a1)
 
-loc_35B10:
-                move.l  #loc_35B16,(a0)
+SKCGZBlade_InstallPlatformUpdate:
+                move.l  #SKCGZBlade_UpdateSinkFromStandingMask,(a0)
 
-loc_35B16:
+SKCGZBlade_UpdateSinkFromStandingMask:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                beq.s   loc_35B42
+                beq.s   SKCGZBlade_RelaxSinkAndClampAtZero
                 move.w  #$80,d1
                 cmpi.b  #p1_standing|p2_standing,d0
-                bne.s   loc_35B2E
+                bne.s   SKCGZBlade_IncreaseAndClampSink
                 move.w  #$100,d1
 
-loc_35B2E:
+SKCGZBlade_IncreaseAndClampSink:
                 add.w   d1,$36(a0)
                 cmpi.w  #$8000,$36(a0)
-                blo.s   loc_35B40
+                blo.s   SKCGZBlade_JoinGeometryWithSink
                 move.w  #$8000,$36(a0)
 
-loc_35B40:
-                bra.s   loc_35B56
+SKCGZBlade_JoinGeometryWithSink:
+                bra.s   SKCGZBlade_ApplyWrappedSinkAndCollide
 ; ---------------------------------------------------------------------------
 
-loc_35B42:
+SKCGZBlade_RelaxSinkAndClampAtZero:
                 tst.w   $36(a0)
-                beq.s   loc_35B56
+                beq.s   SKCGZBlade_ApplyWrappedSinkAndCollide
                 subi.w  #$100,$36(a0)
-                bcc.s   loc_35B56
+                bcc.s   SKCGZBlade_ApplyWrappedSinkAndCollide
                 move.w  #0,$36(a0)
 
-loc_35B56:
+SKCGZBlade_ApplyWrappedSinkAndCollide:
                 move.w  $32(a0),d0
                 add.b   $36(a0),d0
                 move.w  d0,y_pos(a0)
@@ -78,14 +78,14 @@ loc_35B56:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_35B90:
+SKCGZBlade_LeftBladeFollowAtYPlus8:
                 movea.w $3E(a0),a1
                 move.w  y_pos(a1),y_pos(a0)
                 addi.w  #8,y_pos(a0)
                 jmp     (Add_SpriteToCollisionResponseList).l
 ; ---------------------------------------------------------------------------
 
-loc_35BA6:
+SKCGZBlade_RightBladeFollowAtYPlus16:
                 movea.w $3E(a0),a1
                 move.w  y_pos(a1),y_pos(a0)
                 addi.w  #$10,y_pos(a0)

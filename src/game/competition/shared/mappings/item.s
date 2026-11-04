@@ -1,98 +1,98 @@
 ; Data owner: game/competition/shared/2p_zone
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_2PItem_:
-                dc.w    word_36AE6-Map_2PItem_
-                dc.w    word_36AEE-Map_2PItem_
-                dc.w    word_36AF6-Map_2PItem_
-                dc.w    word_36AFE-Map_2PItem_
-                dc.w    word_36B06-Map_2PItem_
-                dc.w    word_36B0E-Map_2PItem_
-                dc.w    word_36B16-Map_2PItem_
-                dc.w    word_36B1E-Map_2PItem_
-                dc.w    word_36B26-Map_2PItem_
-                dc.w    word_36B2E-Map_2PItem_
-                dc.w    word_36B36-Map_2PItem_
-                dc.w    word_36B3E-Map_2PItem_
-                dc.w    word_36B46-Map_2PItem_
-                dc.w    word_36B4E-Map_2PItem_
-                dc.w    word_36B56-Map_2PItem_
-                dc.w    word_36B5E-Map_2PItem_
-                dc.w    word_36B66-Map_2PItem_
-                dc.w    word_36B6E-Map_2PItem_
-                dc.w    word_36B76-Map_2PItem_
-                dc.w    word_36B7E-Map_2PItem_
-                dc.w    word_36B86-Map_2PItem_
-                dc.w    word_36B8E-Map_2PItem_
-                dc.w    word_36B96-Map_2PItem_
-                dc.w    word_36B9E-Map_2PItem_
-                dc.w    word_36BA6-Map_2PItem_
-                dc.w    word_36BAE-Map_2PItem_
-                dc.w    word_36BB6-Map_2PItem_
-                dc.w    word_36BB8-Map_2PItem_
-                dc.w    word_36BC0-Map_2PItem_
-                dc.w    word_36BC8-Map_2PItem_
-                dc.w    word_36BD0-Map_2PItem_
-                dc.w    word_36BD8-Map_2PItem_
-word_36AE6:     dc.w    1
+                dc.w    CompetitionItem_SpeedIncreaseIconPieces-Map_2PItem_
+                dc.w    CompetitionItem_SpeedDecreaseIconPieces-Map_2PItem_
+                dc.w    CompItem_SwapIconMap-Map_2PItem_
+                dc.w    CompItem_RingIconMap1-Map_2PItem_
+                dc.w    CompItem_RingIconMap2-Map_2PItem_
+                dc.w    CompItem_RingIconNarrowMap-Map_2PItem_
+                dc.w    CompItem_MomentumTrapIconMap-Map_2PItem_
+                dc.w    CompItem_FlipLauncherIdleMap-Map_2PItem_
+                dc.w    CompItem_FlipLauncherContactMap-Map_2PItem_
+                dc.w    CompItem_RingEffectMap1-Map_2PItem_
+                dc.w    CompItem_RingEffectMap2-Map_2PItem_
+                dc.w    CompItem_RingEffectMap3-Map_2PItem_
+                dc.w    CompItem_RingEffectMap4-Map_2PItem_
+                dc.w    CompItem_SharedEffectMap1-Map_2PItem_
+                dc.w    CompItem_SharedEffectMap2-Map_2PItem_
+                dc.w    CompItem_SharedEffectMap3-Map_2PItem_
+                dc.w    CompItem_SharedEffectMap4-Map_2PItem_
+                dc.w    CompetitionItem_RollingHazardIdlePieces-Map_2PItem_
+                dc.w    CompItem_RetainedIconMap1-Map_2PItem_
+                dc.w    CompItem_RetainedIconMap2-Map_2PItem_
+                dc.w    CompItem_RetainedIconMap3-Map_2PItem_
+                dc.w    CompItem_RetainedIconMap4-Map_2PItem_
+                dc.w    CompItem_RetainedIconMap5-Map_2PItem_
+                dc.w    CompItem_RetainedIconMap6-Map_2PItem_
+                dc.w    CompItem_RetainedIconMap7-Map_2PItem_
+                dc.w    CompItem_RingIconFlippedMap-Map_2PItem_
+                dc.w    CompItem_EmptyAndSpentMap-Map_2PItem_
+                dc.w    CompItem_HazardEndMap1-Map_2PItem_
+                dc.w    CompItem_HazardEndMap2-Map_2PItem_
+                dc.w    CompItem_HazardEndMap3-Map_2PItem_
+                dc.w    CompItem_HazardEndMap4-Map_2PItem_
+                dc.w    CompItem_HazardEndMap5-Map_2PItem_
+CompetitionItem_SpeedIncreaseIconPieces:    dc.w    1
                 dc.b    $F8,   5,   0,   0, $FF, $F8
-word_36AEE:     dc.w    1
+CompetitionItem_SpeedDecreaseIconPieces:    dc.w    1
                 dc.b    $F8,   5,   0,   4, $FF, $F8
-word_36AF6:     dc.w    1
+CompItem_SwapIconMap:   dc.w    1
                 dc.b    $F8,   5,   0,   8, $FF, $F8
-word_36AFE:     dc.w    1
+CompItem_RingIconMap1:  dc.w    1
                 dc.b    $F8,   5, $60,  $C, $FF, $F8
-word_36B06:     dc.w    1
+CompItem_RingIconMap2:  dc.w    1
                 dc.b    $F8,   5, $60, $10, $FF, $F8
-word_36B0E:     dc.w    1
+CompItem_RingIconNarrowMap: dc.w    1
                 dc.b    $F8,   1, $60, $14, $FF, $FC
-word_36B16:     dc.w    1
+CompItem_MomentumTrapIconMap:   dc.w    1
                 dc.b    $F8,   5,   0, $16, $FF, $F8
-word_36B1E:     dc.w    1
+CompItem_FlipLauncherIdleMap:   dc.w    1
                 dc.b    $F8,   5,   0, $1A, $FF, $F8
-word_36B26:     dc.w    1
+CompItem_FlipLauncherContactMap:    dc.w    1
                 dc.b    $F8,   5,   0, $1E, $FF, $F8
-word_36B2E:     dc.w    1
+CompItem_RingEffectMap1:    dc.w    1
                 dc.b    $F8,   5, $60, $22, $FF, $F8
-word_36B36:     dc.w    1
+CompItem_RingEffectMap2:    dc.w    1
                 dc.b    $F8,   5, $78, $22, $FF, $F8
-word_36B3E:     dc.w    1
+CompItem_RingEffectMap3:    dc.w    1
                 dc.b    $F8,   5, $68, $22, $FF, $F8
-word_36B46:     dc.w    1
+CompItem_RingEffectMap4:    dc.w    1
                 dc.b    $F8,   5, $70, $22, $FF, $F8
-word_36B4E:     dc.w    1
+CompItem_SharedEffectMap1:  dc.w    1
                 dc.b    $F8,   5,   0, $26, $FF, $F8
-word_36B56:     dc.w    1
+CompItem_SharedEffectMap2:  dc.w    1
                 dc.b    $F8,   5, $18, $26, $FF, $F8
-word_36B5E:     dc.w    1
+CompItem_SharedEffectMap3:  dc.w    1
                 dc.b    $F8,   5,   8, $26, $FF, $F8
-word_36B66:     dc.w    1
+CompItem_SharedEffectMap4:  dc.w    1
                 dc.b    $F8,   5, $10, $26, $FF, $F8
-word_36B6E:     dc.w    1
+CompetitionItem_RollingHazardIdlePieces:    dc.w    1
                 dc.b    $F8,   5,   0, $2A, $FF, $F8
-word_36B76:     dc.w    1
+CompItem_RetainedIconMap1:  dc.w    1
                 dc.b    $F8,   5,   0, $36, $FF, $F8
-word_36B7E:     dc.w    1
+CompItem_RetainedIconMap2:  dc.w    1
                 dc.b    $F8,   5,   0, $2E, $FF, $F8
-word_36B86:     dc.w    1
+CompItem_RetainedIconMap3:  dc.w    1
                 dc.b    $F8,   5, $10, $32, $FF, $F8
-word_36B8E:     dc.w    1
+CompItem_RetainedIconMap4:  dc.w    1
                 dc.b    $F8,   5, $18, $2A, $FF, $F8
-word_36B96:     dc.w    1
+CompItem_RetainedIconMap5:  dc.w    1
                 dc.b    $F8,   5, $18, $36, $FF, $F8
-word_36B9E:     dc.w    1
+CompItem_RetainedIconMap6:  dc.w    1
                 dc.b    $F8,   5, $18, $2E, $FF, $F8
-word_36BA6:     dc.w    1
+CompItem_RetainedIconMap7:  dc.w    1
                 dc.b    $F8,   5,   8, $32, $FF, $F8
-word_36BAE:     dc.w    1
+CompItem_RingIconFlippedMap:    dc.w    1
                 dc.b    $F8,   5, $68, $10, $FF, $F8
-word_36BB6:     dc.w    0
-word_36BB8:     dc.w    1
+CompItem_EmptyAndSpentMap:  dc.w    0
+CompItem_HazardEndMap1:     dc.w    1
                 dc.b    $F8,   5,   3, $76, $FF, $F8
-word_36BC0:     dc.w    1
+CompItem_HazardEndMap2: dc.w    1
                 dc.b    $F8,   5,   3, $7A, $FF, $F8
-word_36BC8:     dc.w    1
+CompItem_HazardEndMap3: dc.w    1
                 dc.b    $F8,   5,   3, $7E, $FF, $F8
-word_36BD0:     dc.w    1
+CompItem_HazardEndMap4: dc.w    1
                 dc.b    $F8,   5,   3, $82, $FF, $F8
-word_36BD8:     dc.w    1
+CompItem_HazardEndMap5: dc.w    1
                 dc.b    $F8,   5,   3, $86, $FF, $F8

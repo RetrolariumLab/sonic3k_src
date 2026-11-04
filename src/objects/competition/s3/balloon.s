@@ -11,25 +11,25 @@ Obj_BPZBalloon:
                 move.b  #$10,width_pixels(a0)
                 move.b  #$10,height_pixels(a0)
                 move.b  #$D7,collision_flags(a0)
-                move.l  #loc_35344,(a0)
+                move.l  #S3BPZBalloon_BounceContactingPlayers,(a0)
 
-loc_35344:
+S3BPZBalloon_BounceContactingPlayers:
                 tst.b   collision_property(a0)
-                beq.w   loc_353DE
+                beq.w   S3BPZBalloon_RegisterCollisionFrames5To6
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
-                beq.s   loc_3535A
+                beq.s   S3BPZBalloon_CheckP2Contact
                 bsr.s   S3CompBalloon_BouncePlayer
 
-loc_3535A:
+S3BPZBalloon_CheckP2Contact:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
-                beq.s   loc_35368
+                beq.s   S3BPZBalloon_ClearContactAndAnimate
                 bsr.s   S3CompBalloon_BouncePlayer
 
-loc_35368:
+S3BPZBalloon_ClearContactAndAnimate:
                 clr.b   collision_property(a0)
-                bra.w   loc_353DE
+                bra.w   S3BPZBalloon_RegisterCollisionFrames5To6
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -43,13 +43,13 @@ S3CompBalloon_BouncePlayer:
                 move.b  d0,d1
                 subi.b  #$20,d1
                 cmpi.b  #$40,d1
-                bhs.s   loc_353A0
+                bhs.s   S3BPZBalloon_ApplyRadialBounce
                 move.w  #-$900,y_vel(a1)
                 move.b  #1,anim(a0)
-                bra.s   loc_353C0
+                bra.s   S3BPZBalloon_SetAirborneAndPlayBounce
 ; ---------------------------------------------------------------------------
 
-loc_353A0:
+S3BPZBalloon_ApplyRadialBounce:
                 jsr     (GetSineCosine).l
                 muls.w  #-$480,d1
                 asr.l   #8,d1
@@ -59,7 +59,7 @@ loc_353A0:
                 move.w  d0,y_vel(a1)
                 move.b  #2,anim(a0)
 
-loc_353C0:
+S3BPZBalloon_SetAirborneAndPlayBounce:
                 bset    #Status_InAir,status(a1)
                 bclr    #Status_RollJump,status(a1)
                 bclr    #Status_Push,status(a1)
@@ -70,16 +70,16 @@ loc_353C0:
 
 ; ---------------------------------------------------------------------------
 
-loc_353DE:
+S3BPZBalloon_RegisterCollisionFrames5To6:
                 lea     (Ani_BPZBalloon).l,a1
                 jsr     (Animate_Sprite).l
                 cmpi.b  #5,mapping_frame(a0)
-                blo.s   loc_35400
+                blo.s   S3BPZBalloon_QueueDraw
                 cmpi.b  #7,mapping_frame(a0)
-                bhs.s   loc_35400
+                bhs.s   S3BPZBalloon_QueueDraw
                 jsr     (Add_SpriteToCollisionResponseList).l
 
-loc_35400:
+S3BPZBalloon_QueueDraw:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_BPZBalloon:

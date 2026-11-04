@@ -28,38 +28,38 @@ Obj_2PGoalMarker:
                 clr.w   (Ring_count_P2).w
                 jsr     S3CompGoal_ClearLapAndRunTimes(pc)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_36276
-                move.l  #loc_37454,(a1)
+                bne.w   S3CompGoal_InstallGoalCrossingLoop
+                move.l  #S3RaceHUD_InitItemWidget,(a1)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_36276
-                move.l  #loc_37454,(a1)
+                bne.w   S3CompGoal_InstallGoalCrossingLoop
+                move.l  #S3RaceHUD_InitItemWidget,(a1)
                 move.b  #1,subtype(a1)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_36276
-                move.l  #loc_365CC,(a1)
+                bne.w   S3CompGoal_InstallGoalCrossingLoop
+                move.l  #S3CompGoal_InitLapDigitAndSelectView,(a1)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_36276
-                move.l  #loc_365CC,(a1)
+                bne.w   S3CompGoal_InstallGoalCrossingLoop
+                move.l  #S3CompGoal_InitLapDigitAndSelectView,(a1)
                 move.b  #1,subtype(a1)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_36276
-                move.l  #loc_366CC,(a1)
+                bne.w   S3CompGoal_InstallGoalCrossingLoop
+                move.l  #S3RaceNeon_InitRaceNeon,(a1)
                 move.w  #$120,x_pos(a1)
                 move.w  #$B8,y_pos(a1)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_36276
-                move.l  #loc_37220,(a1)
+                bne.w   S3CompGoal_InstallGoalCrossingLoop
+                move.l  #S3RaceHUD_InitP1TimeWidget,(a1)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_36276
-                move.l  #loc_37292,(a1)
+                bne.w   S3CompGoal_InstallGoalCrossingLoop
+                move.l  #S3RaceHUD_SkipP2TimeWidgetInGhostMode,(a1)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_36276
-                move.l  #locret_3780C,(a1)
+                bne.w   S3CompGoal_InstallGoalCrossingLoop
+                move.l  #S3CompetitionGoal_NoOpAuxiliaryHandler,(a1)
 
-loc_36276:
-                move.l  #loc_3627C,(a0)
+S3CompGoal_InstallGoalCrossingLoop:
+                move.l  #S3CompGoal_TrackPlayersAndPublishLaps,(a0)
 
-loc_3627C:
+S3CompGoal_TrackPlayersAndPublishLaps:
                 move.w  x_pos(a0),d1
                 lea     $34(a0),a2
                 lea     (Player_1).w,a1
@@ -80,9 +80,9 @@ loc_3627C:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_362D0:
+S3CompGoal_TickWrongWayWaitAndRestore:
                 subq.w  #1,$3C(a0)
-                bne.w   loc_3637C
+                bne.w   S3CompGoal_AnimateAndDrawWrongWayGoal
                 lea     (Player_1).w,a1
                 move.w  (Saved_X_pos).w,x_pos(a1)
                 move.w  (Saved_Y_pos).w,y_pos(a1)
@@ -94,7 +94,7 @@ loc_362D0:
                 move.b  #1<<Status_InAir,status(a1)
                 move.w  #0,move_lock(a1)
                 tst.b   (Not_ghost_flag).w
-                beq.s   loc_36352
+                beq.s   S3CompGoal_ResetClocksAndUnlock
                 lea     (Player_2).w,a1
                 move.w  (Saved2_X_pos).w,x_pos(a1)
                 move.w  (Saved2_Y_pos).w,y_pos(a1)
@@ -106,7 +106,7 @@ loc_362D0:
                 move.b  #1<<Status_InAir,status(a1)
                 move.w  #0,move_lock(a1)
 
-loc_36352:
+S3CompGoal_ResetClocksAndUnlock:
                 clr.w   (Competition_current_lap).w
                 clr.b   (Update_HUD_timer).w
                 clr.l   (Timer).w
@@ -116,9 +116,9 @@ loc_36352:
                 clr.b   (Ctrl_2_locked).w
                 jsr     S3CompGoal_ClearLapAndRunTimes(pc)
                 clr.w   (Events_bg+$14).w
-                move.l  #loc_3627C,(a0)
+                move.l  #S3CompGoal_TrackPlayersAndPublishLaps,(a0)
 
-loc_3637C:
+S3CompGoal_AnimateAndDrawWrongWayGoal:
                 lea     (Ani_2PGoalMarker).l,a1
                 jsr     (Animate_Sprite).l
                 jmp     (Draw_Sprite).l
@@ -128,11 +128,11 @@ loc_3637C:
 ; Update lap high-water and cumulative time, rearm items on new laps and restart on a pre-start wrong-way crossing
 S3CompGoal_TrackPlayerCrossing:
                 tst.b   (a4)                            ; check the lap count flag
-                bne.w   loc_3648E                       ; if not equal to zero, branch
+                bne.w   S3CompGoal_ConsumeRespawnAndAdjustLap  ; if not equal to zero, branch
                 tst.b   (a2)+
-                bne.w   loc_3649E
+                bne.w   S3CompGoal_CheckReverseCrossingAndY
                 cmp.w   x_pos(a1),d1
-                bhi.w   locret_364EA
+                bhi.w   S3CompGoal_ReverseCrossingReturn
                 move.b  #1,-1(a2)
                 move.w  y_pos(a0),d2
                 move.w  d2,d3
@@ -140,28 +140,28 @@ S3CompGoal_TrackPlayerCrossing:
                 addi.w  #$14,d3
                 move.w  y_pos(a1),d4
                 cmp.w   d2,d4
-                blt.w   locret_364EA
+                blt.w   S3CompGoal_ReverseCrossingReturn
                 cmp.w   d3,d4
-                bge.w   locret_364EA
+                bge.w   S3CompGoal_ReverseCrossingReturn
                 move.w  x_pos(a1),d2
                 sub.w   d1,d2
-                bcc.s   loc_363D0
+                bcc.s   S3CompGoal_GateForwardCrossing
                 neg.w   d2
 
-loc_363D0:
+S3CompGoal_GateForwardCrossing:
                 cmpi.w  #$20,d2
-                bhs.w   locret_364EA
+                bhs.w   S3CompGoal_ReverseCrossingReturn
                 cmpi.b  #$C,top_solid_bit(a1)
-                bne.s   locret_3642C
+                bne.s   S3CompGoal_ForwardCrossingReturn
                 move.b  (a3),d0
-                beq.s   loc_3642E
+                beq.s   S3CompGoal_GateStartOrBeginWrongWay
                 cmp.b   1(a2),d0
-                bls.s   loc_3642A
+                bls.s   S3CompGoal_IncrementCurrentLap
                 move.b  d0,1(a2)
                 subq.b  #1,d0
-                bmi.s   loc_3640E
+                bmi.s   S3CompGoal_RearmItemsBelowUpperBand
                 cmpi.b  #5,d0
-                bhs.s   loc_3640E
+                bhs.s   S3CompGoal_RearmItemsBelowUpperBand
                 ext.w   d0
                 lsl.w   #2,d0
                 move.l  (a6,d0.w),d5
@@ -170,67 +170,67 @@ loc_363D0:
                 move.l  d6,$14(a6)
                 clr.l   (a5)
 
-loc_3640E:
+S3CompGoal_RearmItemsBelowUpperBand:
                 sub.w   y_pos(a0),d4
                 neg.w   d4
                 cmpi.w  #$14,d4
-                bge.s   loc_3642A
+                bge.s   S3CompGoal_IncrementCurrentLap
                 move.w  $3A(a0),d0
                 andi.w  #$F,d0
                 bsr.w   S3CompGoal_RearmOrbitingItems
                 addq.w  #2,$3A(a0)
 
-loc_3642A:
+S3CompGoal_IncrementCurrentLap:
                 addq.b  #1,(a3)
 
-locret_3642C:
+S3CompGoal_ForwardCrossingReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3642E:
+S3CompGoal_GateStartOrBeginWrongWay:
                 tst.b   1(a2)
-                bne.s   loc_3642A
+                bne.s   S3CompGoal_IncrementCurrentLap
                 tst.b   (Update_HUD_timer).w
-                bne.s   loc_3642A
+                bne.s   S3CompGoal_IncrementCurrentLap
                 move.b  #1,(Ctrl_1_locked).w
                 move.b  #1,(Ctrl_2_locked).w
                 move.w  #0,(Ctrl_1_logical).w
                 move.w  #0,(Ctrl_2_logical).w
-                move.l  #loc_362D0,(a0)
+                move.l  #S3CompGoal_TickWrongWayWaitAndRestore,(a0)
                 move.w  #2*60,$3C(a0)
                 st      (Events_bg+$14).w
                 movea.l a1,a6
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   locret_3648C
-                move.l  #loc_36A4A,(a1)
+                bne.s   S3CompGoal_WrongWaySpawnReturn
+                move.l  #S3RaceNeon_InitWrongWayIndicator,(a1)
                 move.b  #8,render_flags(a1)
                 cmpa.w  #Player_1,a6
-                beq.s   loc_36484
+                beq.s   S3CompGoal_PlayWrongWaySound
                 eori.b  #$18,render_flags(a1)
 
-loc_36484:
+S3CompGoal_PlayWrongWaySound:
                 moveq   #signextendB(sfx_Error),d0
                 jmp     (Play_SFX).l
 ; ---------------------------------------------------------------------------
 
-locret_3648C:
+S3CompGoal_WrongWaySpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3648E:
+S3CompGoal_ConsumeRespawnAndAdjustLap:
                 clr.b   (a4)                            ; enable the lap count flag
                 move.b  #0,(a2)+
                 subq.b  #1,(a3)
-                bcc.s   locret_3649C
+                bcc.s   S3CompGoal_RespawnLapAdjustReturn
                 move.b  #0,(a3)
 
-locret_3649C:
+S3CompGoal_RespawnLapAdjustReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3649E:
+S3CompGoal_CheckReverseCrossingAndY:
                 cmp.w   x_pos(a1),d1
-                bls.w   locret_364EA
+                bls.w   S3CompGoal_ReverseCrossingReturn
                 move.b  #0,-1(a2)
                 move.w  y_pos(a0),d2
                 move.w  d2,d3
@@ -238,24 +238,24 @@ loc_3649E:
                 addi.w  #$14,d3
                 move.w  y_pos(a1),d4
                 cmp.w   d2,d4
-                blt.w   locret_364EA
+                blt.w   S3CompGoal_ReverseCrossingReturn
                 cmp.w   d3,d4
-                bge.w   locret_364EA
+                bge.w   S3CompGoal_ReverseCrossingReturn
                 move.w  x_pos(a1),d2
                 sub.w   d1,d2
-                bcc.s   loc_364D4
+                bcc.s   S3CompGoal_DecrementLapWithoutUnderflow
                 neg.w   d2
 
-loc_364D4:
+S3CompGoal_DecrementLapWithoutUnderflow:
                 cmpi.w  #$20,d2
-                bhs.s   locret_364EA
+                bhs.s   S3CompGoal_ReverseCrossingReturn
                 cmpi.b  #$C,top_solid_bit(a1)
-                bne.s   locret_364EA
+                bne.s   S3CompGoal_ReverseCrossingReturn
                 subq.b  #1,(a3)
-                bcc.s   locret_364EA
+                bcc.s   S3CompGoal_ReverseCrossingReturn
                 move.b  #0,(a3)
 
-locret_364EA:
+S3CompGoal_ReverseCrossingReturn:
                 rts
 ; End of function S3CompGoal_TrackPlayerCrossing
 
@@ -282,22 +282,22 @@ S3CompGoal_AddPackedTimes:
                 add.b   d5,d6
                 moveq   #0,d3
                 cmpi.b  #100,d6
-                blo.s   loc_36518
+                blo.s   S3CompGoal_AddPackedSecondsAndCarry
                 subi.b  #100,d6
                 moveq   #1,d3
 
-loc_36518:
+S3CompGoal_AddPackedSecondsAndCarry:
                 ror.l   #8,d5
                 ror.l   #8,d6
                 add.b   d3,d6
                 add.b   d5,d6
                 moveq   #0,d3
                 cmpi.b  #60,d6
-                blo.s   loc_3652E
+                blo.s   S3CompGoal_AddMinutesAndRestoreOrder
                 subi.b  #60,d6
                 moveq   #1,d3
 
-loc_3652E:
+S3CompGoal_AddMinutesAndRestoreOrder:
                 ror.l   #8,d5
                 ror.l   #8,d6
                 add.b   d3,d6
@@ -312,28 +312,28 @@ loc_3652E:
 ; Use the lap sequence to assign effect indices and touch flags. The slot scan advances before each test
 S3CompGoal_RearmOrbitingItems:
                 tst.b   (Competition_items).w
-                bne.s   locret_3656A
-                lea     (byte_3656C).l,a4
+                bne.s   S3CompGoal_ItemRearmReturn
+                lea     (S3CompGoal_OrbitingItemRearmAnims).l,a4
                 adda.w  d0,a4
                 lea     (Dynamic_object_RAM).w,a1
                 moveq   #(Dynamic_object_RAM_end-Dynamic_object_RAM)/object_size-1,d0
 
-loc_36550:
+S3CompGoal_ScanAndRearmOrbitingItem:
                 lea     next_object(a1),a1
-                cmpi.l  #loc_35962,(a1)
-                bne.s   loc_36566
+                cmpi.l  #S3CompItem_OrbitPickupUpdate,(a1)
+                bne.s   S3CompGoal_ContinueItemBankScan
                 move.b  (a4)+,anim(a1)
                 move.b  #$C7,collision_flags(a1)
 
-loc_36566:
-                dbf     d0,loc_36550
+S3CompGoal_ContinueItemBankScan:
+                dbf     d0,S3CompGoal_ScanAndRearmOrbitingItem
 
-locret_3656A:
+S3CompGoal_ItemRearmReturn:
                 rts
 ; End of function S3CompGoal_RearmOrbitingItems
 
 ; ---------------------------------------------------------------------------
-byte_3656C:
+S3CompGoal_OrbitingItemRearmAnims:
                 dc.b    0,   1,   2,   3,   4,   5,   6,   0,   1,   2,   3,   4,   5,   6,   2,   3,   0,   1,   2,   3
                 dc.b    4,   5,   6,   0
                 even
@@ -343,7 +343,7 @@ Map_2PGoalMarker:
                 include "src/game/competition/shared/mappings/goal_marker.s"
 ; ---------------------------------------------------------------------------
 
-loc_365CC:
+S3CompGoal_InitLapDigitAndSelectView:
                 move.l  #Map_2PLapNumbers,mappings(a0)
                 move.w  #make_art_tile(ArtTile_2PLapNum,0,1),art_tile(a0)
                 move.w  #0,priority(a0)
@@ -352,45 +352,45 @@ loc_365CC:
                 move.w  #$190,x_pos(a0)
                 move.w  #$98,y_pos(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_36618
+                beq.s   S3CompGoal_InstallP1LapDigitUpdate
                 tst.b   (Not_ghost_flag).w
-                bne.s   loc_3660A
+                bne.s   S3CompGoal_InstallP2LapDigitUpdate
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3660A:
+S3CompGoal_InstallP2LapDigitUpdate:
                 bset    #4,render_flags(a0)
-                move.l  #loc_36646,(a0)
-                bra.s   loc_36646
+                move.l  #S3CompGoal_ReadAndClampP2Lap,(a0)
+                bra.s   S3CompGoal_ReadAndClampP2Lap
 ; ---------------------------------------------------------------------------
 
-loc_36618:
+S3CompGoal_InstallP1LapDigitUpdate:
                 bset    #3,render_flags(a0)
-                move.l  #loc_36624,(a0)
+                move.l  #S3CompGoal_ReadAndClampP1Lap,(a0)
 
-loc_36624:
+S3CompGoal_ReadAndClampP1Lap:
                 move.b  (Competition_current_lap).w,d0
                 cmp.b   (Competition_total_laps).w,d0
-                ble.s   loc_36632
+                ble.s   S3CompGoal_DrawP1LapModulo10
                 move.b  (Competition_total_laps).w,d0
 
-loc_36632:
+S3CompGoal_DrawP1LapModulo10:
                 subi.b  #$A,d0
-                bcc.s   loc_36632
+                bcc.s   S3CompGoal_DrawP1LapModulo10
                 addi.b  #$A,d0
                 move.b  d0,mapping_frame(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_36646:
+S3CompGoal_ReadAndClampP2Lap:
                 move.b  (Competition_current_lap_2P).w,d0
                 cmp.b   (Competition_total_laps).w,d0
-                ble.s   loc_36654
+                ble.s   S3CompGoal_DrawP2LapModulo10
                 move.b  (Competition_total_laps).w,d0
 
-loc_36654:
+S3CompGoal_DrawP2LapModulo10:
                 subi.b  #$A,d0
-                bcc.s   loc_36654
+                bcc.s   S3CompGoal_DrawP2LapModulo10
                 addi.b  #$A,d0
                 move.b  d0,mapping_frame(a0)
                 jmp     (Draw_Sprite).l

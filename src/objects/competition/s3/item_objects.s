@@ -17,17 +17,17 @@ Obj_2PItem:
                 move.b  subtype(a0),angle(a0)
                 moveq   #1,d0
                 bclr    #0,status(a0)
-                beq.s   loc_35946
+                beq.s   S3CompItem_SetOrbitStepAndSpentState
                 neg.b   d0
 
-loc_35946:
+S3CompItem_SetOrbitStepAndSpentState:
                 move.b  d0,$27(a0)
                 move.b  #3,anim(a0)
                 move.b  #7,anim(a0)
                 move.b  #$C7,collision_flags(a0)
-                move.l  #loc_35962,(a0)
+                move.l  #S3CompItem_OrbitPickupUpdate,(a0)
 
-loc_35962:
+S3CompItem_OrbitPickupUpdate:
                 bsr.s   S3CompItem_ConsumePickupContacts
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
@@ -51,10 +51,10 @@ loc_35962:
                 asr.w   #8,d0
                 add.w   $32(a0),d0
                 cmpi.w  #-$100,(Camera_min_Y_pos).w
-                bne.s   loc_359AA
+                bne.s   S3CompItem_CommitOrbitYAndDraw
                 and.w   (Screen_Y_wrap_value).w,d0
 
-loc_359AA:
+S3CompItem_CommitOrbitYAndDraw:
                 move.w  d0,y_pos(a0)
                 move.b  $27(a0),d0
                 add.b   d0,angle(a0)
@@ -68,22 +68,22 @@ loc_359AA:
 ; Dispatch queued contact for Player 1 before Player 2
 S3CompItem_ConsumePickupContacts:
                 tst.b   collision_property(a0)
-                beq.s   locret_359F4
+                beq.s   S3CompItem_PickupContactReturn
                 lea     (Player_1).w,a2
                 bclr    #0,collision_property(a0)
-                beq.s   loc_359E2
+                beq.s   S3CompItem_CollectWithP2
                 bsr.s   S3CompItem_ApplyEffectFromAnim
 
-loc_359E2:
+S3CompItem_CollectWithP2:
                 lea     (Player_2).w,a2
                 bclr    #1,collision_property(a0)
-                beq.s   loc_359F0
+                beq.s   S3CompItem_ClearPickupContacts
                 bsr.s   S3CompItem_ApplyEffectFromAnim
 
-loc_359F0:
+S3CompItem_ClearPickupContacts:
                 clr.b   collision_property(a0)
 
-locret_359F4:
+S3CompItem_PickupContactReturn:
                 rts
 ; End of function S3CompItem_ConsumePickupContacts
 
@@ -94,74 +94,74 @@ S3CompItem_ApplyEffectFromAnim:
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 add.w   d0,d0
-                move.w  off_35A08(pc,d0.w),d0
-                jsr     off_35A08(pc,d0.w)
+                move.w  S3CompItem_CollectedEffectIndex(pc,d0.w),d0
+                jsr     S3CompItem_CollectedEffectIndex(pc,d0.w)
                 rts
 ; End of function S3CompItem_ApplyEffectFromAnim
 
 ; ---------------------------------------------------------------------------
-off_35A08:
-                dc.w    loc_35A18-off_35A08
-                dc.w    loc_35A6A-off_35A08
-                dc.w    loc_35ABC-off_35A08
-                dc.w    loc_35B7A-off_35A08
-                dc.w    loc_35BA4-off_35A08
-                dc.w    loc_35BE4-off_35A08
-                dc.w    loc_35C08-off_35A08
-                dc.w    locret_35C2C-off_35A08
+S3CompItem_CollectedEffectIndex:
+                dc.w    S3CompItem_ApplyTimedSpeedUp-S3CompItem_CollectedEffectIndex
+                dc.w    S3CompItem_ApplyTimedSlowdown-S3CompItem_CollectedEffectIndex
+                dc.w    S3CompItem_SwapStatusTimersAndSpeed-S3CompItem_CollectedEffectIndex
+                dc.w    S3CompItem_SpendPickupAndAwardRing-S3CompItem_CollectedEffectIndex
+                dc.w    S3CompItem_SpendRollingPickupAndGetSlot-S3CompItem_CollectedEffectIndex
+                dc.w    S3CompItem_SpendMomentumAndTryFallClone-S3CompItem_CollectedEffectIndex
+                dc.w    S3CompItem_SpendFlipAndTryFallClone-S3CompItem_CollectedEffectIndex
+                dc.w    S3CompItem_SpentPickupReturn-S3CompItem_CollectedEffectIndex
 ; ---------------------------------------------------------------------------
 
-loc_35A18:
+S3CompItem_ApplyTimedSpeedUp:
                 bset    #Status_SpeedShoes,status_secondary(a2)
                 move.b  #(10*60)/8,speed_shoes_timer(a2)
                 cmpa.w  #Player_1,a2
-                bne.s   loc_35A3E
+                bne.s   S3CompItem_StoreP2SpeedUp
                 move.w  #$C00,(Max_speed).w
                 move.w  #$18,(Acceleration).w
                 move.w  #$80,(Deceleration).w
-                bra.s   loc_35A50
+                bra.s   S3CompItem_SpendSpeedUpAndTryEffect
 ; ---------------------------------------------------------------------------
 
-loc_35A3E:
+S3CompItem_StoreP2SpeedUp:
                 move.w  #$C00,(Max_speed_P2).w
                 move.w  #$18,(Acceleration_P2).w
                 move.w  #$80,(Deceleration_P2).w
 
-loc_35A50:
+S3CompItem_SpendSpeedUpAndTryEffect:
                 move.b  #7,anim(a0)
                 move.b  #0,collision_flags(a0)
-                move.l  #loc_35FAC,d1
+                move.l  #S3CompItem_AnimateEffectOrDelete,d1
                 moveq   #9,d2
                 bsr.w   S3CompItem_TryCloneEffect
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_35A6A:
+S3CompItem_ApplyTimedSlowdown:
                 bset    #Status_SpeedShoes,status_secondary(a2)
                 move.b  #(10*60)/8,speed_shoes_timer(a2)
                 cmpa.w  #Player_1,a2
-                bne.s   loc_35A90
+                bne.s   S3CompItem_StoreP2Slowdown
                 move.w  #$300,(Max_speed).w
                 move.w  #8,(Acceleration).w
                 move.w  #$20,(Deceleration).w
-                bra.s   loc_35AA2
+                bra.s   S3CompItem_SpendSlowdownAndTryEffect
 ; ---------------------------------------------------------------------------
 
-loc_35A90:
+S3CompItem_StoreP2Slowdown:
                 move.w  #$300,(Max_speed_P2).w
                 move.w  #8,(Acceleration_P2).w
                 move.w  #$20,(Deceleration_P2).w
 
-loc_35AA2:
+S3CompItem_SpendSlowdownAndTryEffect:
                 move.b  #7,anim(a0)
                 move.b  #0,collision_flags(a0)
-                move.l  #loc_35FAC,d1
+                move.l  #S3CompItem_AnimateEffectOrDelete,d1
                 moveq   #9,d2
                 bsr.w   S3CompItem_TryCloneEffect
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_35ABC:
+S3CompItem_SwapStatusTimersAndSpeed:
                 lea     (Player_1).w,a2
                 lea     (Player_2).w,a3
                 move.b  status_secondary(a2),d0
@@ -195,43 +195,43 @@ loc_35ABC:
                 move.w  (a1)+,(Deceleration_P2).w
                 move.w  (sp)+,d0
                 btst    #Status_SpeedShoes,status_secondary(a2)
-                beq.s   loc_35B4C
+                beq.s   S3CompItem_RestoreOldP1SpeedToP2
                 move.w  d3,(Max_speed).w
                 move.w  d4,(Acceleration).w
                 move.w  d5,(Deceleration).w
 
-loc_35B4C:
+S3CompItem_RestoreOldP1SpeedToP2:
                 btst    #Status_SpeedShoes,status_secondary(a3)
-                beq.s   loc_35B60
+                beq.s   S3CompItem_SpendSwapAndTryEffect
                 move.w  d0,(Max_speed_P2).w
                 move.w  d1,(Acceleration_P2).w
                 move.w  d2,(Deceleration_P2).w
 
-loc_35B60:
+S3CompItem_SpendSwapAndTryEffect:
                 move.b  #7,anim(a0)
                 move.b  #0,collision_flags(a0)
-                move.l  #loc_35FAC,d1
+                move.l  #S3CompItem_AnimateEffectOrDelete,d1
                 moveq   #9,d2
                 bsr.w   S3CompItem_TryCloneEffect
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_35B7A:
+S3CompItem_SpendPickupAndAwardRing:
                 move.b  #7,anim(a0)
                 move.b  #0,collision_flags(a0)
-                move.l  #loc_35FAC,d1
+                move.l  #S3CompItem_AnimateEffectOrDelete,d1
                 moveq   #8,d2
                 bsr.w   S3CompItem_TryCloneEffect
                 cmpa.w  #Player_1,a2
-                bne.s   loc_35B9E
+                bne.s   S3CompItem_AwardRingToP2
                 jmp     (GiveRing).l
 ; ---------------------------------------------------------------------------
 
-loc_35B9E:
+S3CompItem_AwardRingToP2:
                 jmp     (GiveRing_Tails).l
 ; ---------------------------------------------------------------------------
 
-loc_35BA4:
+S3CompItem_SpendRollingPickupAndGetSlot:
                 move.b  #7,anim(a0)
                 clr.b   collision_flags(a0)
                 clr.b   collision_property(a0)
@@ -239,129 +239,130 @@ loc_35BA4:
                 tst.l   (a1)
                 moveq   #subtype,d0
 
-loc_35BBA:
+S3CompItem_SeedRollingHazardOnPlane:
                 move.w  (a0,d0.w),(a1,d0.w)
                 subq.w  #2,d0
-                bcc.s   loc_35BBA
-                move.l  #loc_35C2E,(a1)
+                bcc.s   S3CompItem_SeedRollingHazardOnPlane
+                move.l  #S3CompItem_InitLeftRollingHazardFall,(a1)
                 move.b  #4,anim(a1)
                 move.w  top_solid_bit(a2),top_solid_bit(a1)
                 tst.w   art_tile(a2)
-                bpl.s   locret_35BE2
+                bpl.s   S3CompItem_RollingHazardSpawnReturn
                 ori.w   #high_priority,art_tile(a1)
 
-locret_35BE2:
+S3CompItem_RollingHazardSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_35BE4:
+S3CompItem_SpendMomentumAndTryFallClone:
                 move.b  #7,anim(a0)
                 clr.b   collision_flags(a0)
                 clr.b   collision_property(a0)
-                move.l  #loc_35C48,d1
+                move.l  #S3CompItem_BeginMomentumTrapFall,d1
                 moveq   #5,d2
                 bsr.w   S3CompItem_TryCloneEffect
-                bne.s   locret_35C06
+                bne.s   S3CompItem_MomentumCloneReturn
                 move.w  top_solid_bit(a2),top_solid_bit(a1)
 
-locret_35C06:
+S3CompItem_MomentumCloneReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_35C08:
+S3CompItem_SpendFlipAndTryFallClone:
                 move.b  #7,anim(a0)
                 clr.b   collision_flags(a0)
                 clr.b   collision_property(a0)
-                move.l  #loc_35C50,d1
+                move.l  #S3CompItem_BeginFlipTrapFall,d1
                 moveq   #6,d2
                 bsr.w   S3CompItem_TryCloneEffect
-                bne.s   locret_35C2A
+                bne.s   S3CompItem_FlipCloneReturn
                 move.w  top_solid_bit(a2),top_solid_bit(a1)
 
-locret_35C2A:
+S3CompItem_FlipCloneReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_35C2C:
+S3CompItem_SpentPickupReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_35C2E:
+S3CompItem_InitLeftRollingHazardFall:
                 move.w  #-$400,ground_vel(a0)
                 move.b  #0,angle(a0)
                 move.b  #0,status(a0)
-                move.l  #loc_35E3C,d2
-                bra.s   loc_35C56
+                move.l  #S3CompItem_CheckRollingHazardContacts,d2
+                bra.s   S3CompItem_MoveFallAndCheckLanding
 ; ---------------------------------------------------------------------------
 
-loc_35C48:
-                move.l  #loc_35D54,d2
-                bra.s   loc_35C56
+S3CompItem_BeginMomentumTrapFall:
+                move.l  #S3CompItem_CheckMomentumTrapContacts,d2
+                bra.s   S3CompItem_MoveFallAndCheckLanding
 ; ---------------------------------------------------------------------------
 
-loc_35C50:
-                move.l  #loc_35C9E,d2
+S3CompItem_BeginFlipTrapFall:
+                move.l  #S3CompItem_CheckFlipTrapContacts,d2
 
-loc_35C56:
+; Install the landing handler only after the floor probe returns a negative gap
+S3CompItem_MoveFallAndCheckLanding:
                 move.l  d2,-(sp)
                 jsr     (MoveSprite).l
                 jsr     (ObjCheckFloorDist).l
                 move.l  (sp)+,d2
                 tst.w   d1
-                bpl.s   loc_35C76
+                bpl.s   S3CompItem_WrapFallingHazardY
                 add.w   d1,y_pos(a0)
                 move.l  d2,(a0)
                 move.b  #$C7,collision_flags(a0)
 
-loc_35C76:
+S3CompItem_WrapFallingHazardY:
                 cmpi.w  #-$100,(Camera_min_Y_pos).w
-                bne.s   loc_35C86
+                bne.s   S3CompItem_CullFallingHazardBelowCamera
                 move.w  (Screen_Y_wrap_value).w,d0
                 and.w   d0,y_pos(a0)
 
-loc_35C86:
+S3CompItem_CullFallingHazardBelowCamera:
                 move.w  (Camera_max_Y_pos).w,d0
                 addi.w  #$60,d0
                 cmp.w   y_pos(a0),d0
-                bge.s   loc_35C9A
+                bge.s   S3CompItem_AnimateFallingHazard
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_35C9A:
-                bra.w   loc_35FAC
+S3CompItem_AnimateFallingHazard:
+                bra.w   S3CompItem_AnimateEffectOrDelete
 ; ---------------------------------------------------------------------------
 
-loc_35C9E:
+S3CompItem_CheckFlipTrapContacts:
                 tst.b   collision_property(a0)
-                beq.s   loc_35CC4
+                beq.s   S3CompItem_AnimateFlipTrapOrDelete
                 lea     (Player_1).w,a2
                 bclr    #0,collision_property(a0)
-                beq.s   loc_35CB2
+                beq.s   S3CompItem_CheckP2FlipTrapContact
                 bsr.s   S3CompItem_TryUpwardFlipLaunch
 
-loc_35CB2:
+S3CompItem_CheckP2FlipTrapContact:
                 lea     (Player_2).w,a2
                 bclr    #1,collision_property(a0)
-                beq.s   loc_35CC0
+                beq.s   S3CompItem_ClearFlipTrapContacts
                 bsr.s   S3CompItem_TryUpwardFlipLaunch
 
-loc_35CC0:
+S3CompItem_ClearFlipTrapContacts:
                 clr.b   collision_property(a0)
 
-loc_35CC4:
+S3CompItem_AnimateFlipTrapOrDelete:
                 lea     (Ani_2PItem).l,a1
                 jsr     (Animate_Sprite).l
                 tst.b   routine(a0)
-                beq.s   loc_35CDC
+                beq.s   S3CompItem_QueueFlipTrapUnlessSpent
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_35CDC:
+S3CompItem_QueueFlipTrapUnlessSpent:
                 cmpi.b  #9,anim(a0)
-                beq.s   loc_35CEA
+                beq.s   CompetitionItemS3DrawSurvivingFlipTrap
                 jsr     (Add_SpriteToCollisionResponseList).l
 
-loc_35CEA:
+CompetitionItemS3DrawSurvivingFlipTrap:
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -370,11 +371,11 @@ loc_35CEA:
 S3CompItem_TryUpwardFlipLaunch:
                 move.w  top_solid_bit(a2),d0
                 cmp.w   top_solid_bit(a0),d0
-                beq.s   loc_35CFC
+                beq.s   S3CompItem_FlipLaunchOnMatchingPlane
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_35CFC:
+S3CompItem_FlipLaunchOnMatchingPlane:
                 move.b  #$A,anim(a0)
                 move.w  #-$A00,y_vel(a2)
                 bset    #Status_InAir,status(a2)
@@ -387,67 +388,67 @@ loc_35CFC:
                 move.b  #0,flips_remaining(a2)
                 move.b  #4,flip_speed(a2)
                 btst    #Status_Facing,status(a2)
-                beq.s   loc_35D4C
+                beq.s   S3CompItem_PlayFlipLaunchSound
                 neg.b   flip_angle(a2)
                 neg.w   ground_vel(a2)
 
-loc_35D4C:
+S3CompItem_PlayFlipLaunchSound:
                 moveq   #signextendB(sfx_SmallBumpers),d0
                 jmp     (Play_SFX).l
 ; End of function S3CompItem_TryUpwardFlipLaunch
 
 ; ---------------------------------------------------------------------------
 
-loc_35D54:
+S3CompItem_CheckMomentumTrapContacts:
                 tst.b   collision_property(a0)
-                beq.s   loc_35D7A
+                beq.s   S3CompItem_AnimateTrapAndBrakeNegative
                 lea     (Player_1).w,a2
                 bclr    #0,collision_property(a0)
-                beq.s   loc_35D68
+                beq.s   S3CompItem_CheckP2MomentumTrapContact
                 bsr.s   S3CompItem_TryGroundMomentumTrap
 
-loc_35D68:
+S3CompItem_CheckP2MomentumTrapContact:
                 lea     (Player_2).w,a2
                 bclr    #1,collision_property(a0)
-                beq.s   loc_35D76
+                beq.s   S3CompItem_ClearMomentumTrapContacts
                 bsr.s   S3CompItem_TryGroundMomentumTrap
 
-loc_35D76:
+S3CompItem_ClearMomentumTrapContacts:
                 clr.b   collision_property(a0)
 
-loc_35D7A:
+S3CompItem_AnimateTrapAndBrakeNegative:
                 lea     (Ani_2PItem).l,a1
                 jsr     (Animate_Sprite).l
                 tst.b   $3C(a0)
-                beq.s   loc_35DC6
+                beq.s   S3CompItem_DeleteFinishedMomentumTrap
                 movea.w $3E(a0),a1
                 subq.b  #1,$3C(a0)
-                beq.s   loc_35DBA
+                beq.s   S3CompItem_ReleaseMomentumTrapPlayer
                 move.w  #$20,d1
                 move.w  ground_vel(a1),d0
-                bpl.s   loc_35DAE
+                bpl.s   S3CompItem_BrakePositiveAndCheckBorrow
                 add.w   d1,ground_vel(a1)
-                bcc.s   loc_35DD2
+                bcc.s   S3CompItem_QueueMomentumTrapContact
                 move.w  #0,ground_vel(a1)
-                bra.s   loc_35DBA
+                bra.s   S3CompItem_ReleaseMomentumTrapPlayer
 ; ---------------------------------------------------------------------------
 
-loc_35DAE:
+S3CompItem_BrakePositiveAndCheckBorrow:
                 sub.w   d1,ground_vel(a1)
-                bcc.s   loc_35DD2
+                bcc.s   S3CompItem_QueueMomentumTrapContact
                 move.w  #0,ground_vel(a1)
 
-loc_35DBA:
+S3CompItem_ReleaseMomentumTrapPlayer:
                 move.w  #5,move_lock(a1)
                 andi.b  #$7F,status_secondary(a1)
 
-loc_35DC6:
+S3CompItem_DeleteFinishedMomentumTrap:
                 tst.b   routine(a0)
-                beq.s   loc_35DD2
+                beq.s   S3CompItem_QueueMomentumTrapContact
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_35DD2:
+S3CompItem_QueueMomentumTrapContact:
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 
@@ -457,57 +458,58 @@ loc_35DD2:
 S3CompItem_TryGroundMomentumTrap:
                 move.w  top_solid_bit(a2),d0
                 cmp.w   top_solid_bit(a0),d0
-                bne.s   locret_35E3A
+                bne.s   S3CompItem_MomentumActivationReturn
                 tst.b   status_secondary(a2)
-                bmi.s   locret_35E3A
+                bmi.s   S3CompItem_MomentumActivationReturn
                 btst    #Status_InAir,status(a2)
-                bne.s   locret_35E3A
+                bne.s   S3CompItem_MomentumActivationReturn
                 tst.w   ground_vel(a2)
-                beq.s   locret_35E3A
+                beq.s   S3CompItem_MomentumActivationReturn
                 move.b  #9,anim(a0)
                 move.b  #0,collision_flags(a0)
                 move.w  #$200,d1
                 move.w  ground_vel(a2),d0
-                bpl.s   loc_35E16
+                bpl.s   S3CompItem_BoostSmallMomentum
                 neg.w   d0
                 neg.w   d1
 
-loc_35E16:
+S3CompItem_BoostSmallMomentum:
                 cmpi.w  #$200,d0
-                bhs.s   loc_35E20
+                bhs.s   S3CompItem_DoubleMomentumAndLatch
                 add.w   d1,ground_vel(a2)
 
-loc_35E20:
+; Start the 60-frame hold after doubling the selected player's ground speed
+S3CompItem_DoubleMomentumAndLatch:
                 asl     ground_vel(a2)
                 move.b  #$1B,anim(a2)
                 ori.b   #$80,status_secondary(a2)
                 move.w  a2,$3E(a0)
                 move.b  #$3C,$3C(a0)
 
-locret_35E3A:
+S3CompItem_MomentumActivationReturn:
                 rts
 ; End of function S3CompItem_TryGroundMomentumTrap
 
 ; ---------------------------------------------------------------------------
 
-loc_35E3C:
+S3CompItem_CheckRollingHazardContacts:
                 tst.b   collision_property(a0)
-                beq.s   loc_35E62
+                beq.s   S3CompItem_MoveRollSelectFrameAndCull
                 lea     (Player_1).w,a2
                 bclr    #0,collision_property(a0)
-                beq.s   loc_35E50
+                beq.s   S3CompItem_CheckP2RollingContact
                 bsr.s   S3CompRollingItem_ExplodeOnHit
 
-loc_35E50:
+S3CompItem_CheckP2RollingContact:
                 lea     (Player_2).w,a2
                 bclr    #1,collision_property(a0)
-                beq.s   loc_35E5E
+                beq.s   S3CompItem_ClearRollingHazardContacts
                 bsr.s   S3CompRollingItem_ExplodeOnHit
 
-loc_35E5E:
+S3CompItem_ClearRollingHazardContacts:
                 clr.b   collision_property(a0)
 
-loc_35E62:
+S3CompItem_MoveRollSelectFrameAndCull:
                 bsr.w   S3CompRollingItem_UpdateMovement
                 move.b  angle(a0),d0
                 addi.b  #$10,d0
@@ -517,11 +519,11 @@ loc_35E62:
                 move.w  (Camera_max_Y_pos).w,d0
                 addi.w  #$60,d0
                 cmp.w   y_pos(a0),d0
-                bge.s   loc_35E8C
+                bge.s   S3CompItem_QueueRollingContactAndDraw
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_35E8C:
+S3CompItem_QueueRollingContactAndDraw:
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 
@@ -531,12 +533,12 @@ loc_35E8C:
 S3CompRollingItem_ExplodeOnHit:
                 move.w  top_solid_bit(a2),d0
                 cmp.w   top_solid_bit(a0),d0
-                beq.s   loc_35EA4
+                beq.s   S3CompItem_StartExplosionThenHurt
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_35EA4:
-                move.l  #loc_35FAC,(a0)
+S3CompItem_StartExplosionThenHurt:
+                move.l  #S3CompItem_AnimateEffectOrDelete,(a0)
                 move.b  #$B,anim(a0)
                 movea.l a2,a1
                 jmp     (HurtPlayerFromSolidHazard).l
@@ -547,7 +549,7 @@ loc_35EA4:
 ; Roll left on terrain or fall, wrap world coordinates and explode on left-wall penetration at a horizontal angle
 S3CompRollingItem_UpdateMovement:
                 btst    #1,status(a0)
-                bne.s   loc_35F22
+                bne.s   S3CompItem_AccelerateAirRollLeft
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 muls.w  ground_vel(a0),d1
@@ -564,25 +566,25 @@ S3CompRollingItem_UpdateMovement:
                 addi.w  #$400,x_pos(a0)
                 jsr     (Player_AnglePos).l
                 move.b  angle(a0),d0
-                bne.s   locret_35F20
+                bne.s   S3CompItem_GroundRollUpdateReturn
                 jsr     (ProbeLeftWallUsingYRadius).l
                 tst.w   d1
-                bpl.s   locret_35F20
+                bpl.s   S3CompItem_GroundRollUpdateReturn
                 sub.w   d1,x_pos(a0)
-                move.l  #loc_35FAC,(a0)
+                move.l  #S3CompItem_AnimateEffectOrDelete,(a0)
                 move.b  #$B,anim(a0)
 
-locret_35F20:
+S3CompItem_GroundRollUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_35F22:
+S3CompItem_AccelerateAirRollLeft:
                 subi.w  #$10,x_vel(a0)
                 cmpi.w  #-$400,x_vel(a0)
-                bgt.s   loc_35F36
+                bgt.s   S3CompItem_MoveAirRollAndLand
                 move.w  #-$400,x_vel(a0)
 
-loc_35F36:
+S3CompItem_MoveAirRollAndLand:
                 jsr     (MoveSprite).l
                 move.w  (Screen_Y_wrap_value).w,d0
                 and.w   d0,y_pos(a0)
@@ -591,56 +593,56 @@ loc_35F36:
                 addi.w  #$400,x_pos(a0)
                 jsr     (ChkFloorEdge).l
                 tst.w   d1
-                bpl.s   loc_35F6E
+                bpl.s   S3CompItem_RelaxAirRollAngle
                 add.w   d1,y_pos(a0)
                 bclr    #1,status(a0)
                 move.b  #0,angle(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_35F6E:
+S3CompItem_RelaxAirRollAngle:
                 move.b  angle(a0),d0
-                beq.s   loc_35F88
-                bpl.s   loc_35F7E
+                beq.s   S3CompItem_ProbeLeftWallAtZeroAngle
+                bpl.s   S3CompItem_ClampPositiveAngleAtZero
                 addq.b  #2,d0
-                bcc.s   loc_35F84
+                bcc.s   S3CompItem_StoreRelaxedAngle
                 moveq   #0,d0
-                bra.s   loc_35F84
+                bra.s   S3CompItem_StoreRelaxedAngle
 ; ---------------------------------------------------------------------------
 
-loc_35F7E:
+S3CompItem_ClampPositiveAngleAtZero:
                 subq.b  #2,d0
-                bcc.s   loc_35F84
+                bcc.s   S3CompItem_StoreRelaxedAngle
                 moveq   #0,d0
 
-loc_35F84:
+S3CompItem_StoreRelaxedAngle:
                 move.b  d0,angle(a0)
 
-loc_35F88:
+S3CompItem_ProbeLeftWallAtZeroAngle:
                 move.b  angle(a0),d0
-                bne.s   locret_35FAA
+                bne.s   S3CompItem_AirRollUpdateReturn
                 jsr     (ProbeLeftWallUsingYRadius).l
                 tst.w   d1
-                bpl.s   locret_35FAA
+                bpl.s   S3CompItem_AirRollUpdateReturn
                 sub.w   d1,x_pos(a0)
-                move.l  #loc_35FAC,(a0)
+                move.l  #S3CompItem_AnimateEffectOrDelete,(a0)
                 move.b  #$B,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_35FAA:
+S3CompItem_AirRollUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_35FAC:
+S3CompItem_AnimateEffectOrDelete:
                 lea     (Ani_2PItem).l,a1
                 jsr     (Animate_Sprite).l
                 tst.b   routine(a0)
-                beq.s   loc_35FC4
+                beq.s   S3CompItem_DrawActiveEffect
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_35FC4:
+S3CompItem_DrawActiveEffect:
                 jmp     (Draw_Sprite).l
 ; End of function S3CompRollingItem_UpdateMovement
 
@@ -649,18 +651,18 @@ loc_35FC4:
 ; Allocate after the current slot, copy the common object prefix and install the supplied handler and animation
 S3CompItem_TryCloneEffect:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   locret_35FE8
+                bne.w   S3CompItem_CloneStatusReturn
                 moveq   #subtype,d0
 
-loc_35FD6:
+S3CompItem_CopyClonePrefixAndSetAnim:
                 move.w  (a0,d0.w),(a1,d0.w)
                 subq.w  #2,d0
-                bcc.s   loc_35FD6
+                bcc.s   S3CompItem_CopyClonePrefixAndSetAnim
                 move.l  d1,(a1)
                 move.b  d2,anim(a1)
                 moveq   #0,d0
 
-locret_35FE8:
+S3CompItem_CloneStatusReturn:
                 rts
 ; End of function S3CompItem_TryCloneEffect
 

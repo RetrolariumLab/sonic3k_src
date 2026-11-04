@@ -11,69 +11,69 @@ Obj_DPZDisolvingSandBar:
                 move.b  #$20,width_pixels(a0)
                 move.b  #$10,height_pixels(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_35F7A
+                beq.s   SKDPZSandBar_InitDelayAndInstallUpdate
                 move.l  #Map_DPZDissolvingSandBar2,mappings(a0)
                 move.b  #$30,width_pixels(a0)
                 move.b  #$F,$3D(a0)
 
-loc_35F7A:
+SKDPZSandBar_InitDelayAndInstallUpdate:
                 move.b  $3D(a0),$3C(a0)
                 bset    #7,status(a0)
-                move.l  #loc_35F8C,(a0)
+                move.l  #SKDPZSandBar_LatchStandingDuringIdle,(a0)
 
-loc_35F8C:
+SKDPZSandBar_LatchStandingDuringIdle:
                 tst.b   anim(a0)
-                bne.s   loc_35FC6
+                bne.s   SKDPZSandBar_AnimateAndGetSurfaceOffset
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                beq.s   loc_35FA2
+                beq.s   SKDPZSandBar_TickDelayAndBeginDissolve
                 move.b  #1,$3A(a0)
 
-loc_35FA2:
+SKDPZSandBar_TickDelayAndBeginDissolve:
                 tst.b   $3A(a0)
-                beq.s   loc_35FC6
+                beq.s   SKDPZSandBar_AnimateAndGetSurfaceOffset
                 subq.b  #1,$3C(a0)
-                bpl.s   loc_35FC6
+                bpl.s   SKDPZSandBar_AnimateAndGetSurfaceOffset
                 tst.b   anim(a0)
-                bne.s   loc_35FC6
+                bne.s   SKDPZSandBar_AnimateAndGetSurfaceOffset
                 move.b  $3D(a0),$3C(a0)
                 move.b  #0,$3A(a0)
                 move.b  #1,anim(a0)
 
-loc_35FC6:
+SKDPZSandBar_AnimateAndGetSurfaceOffset:
                 lea     (Ani_DPZDissolvingSandBar).l,a1
                 jsr     (Animate_Sprite).l
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
-                move.b  byte_36026(pc,d0.w),d3
-                bne.s   loc_36010
+                move.b  SKDPZSandBar_SurfaceOffsetsByFrame(pc,d0.w),d3
+                bne.s   SKDPZSandBar_CollideAtFrameSurface
                 lea     (Player_1).w,a1
                 bclr    #p1_standing_bit,status(a0)
-                beq.s   loc_35FF6
+                beq.s   SKDPZSandBar_ReleaseUnsupportedP2
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
 
-loc_35FF6:
+SKDPZSandBar_ReleaseUnsupportedP2:
                 lea     (Player_2).w,a1
                 bclr    #p2_standing_bit,status(a0)
-                beq.s   loc_3600E
+                beq.s   SKDPZSandBar_DrawAfterReleasingRiders
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
 
-loc_3600E:
-                bra.s   loc_36020
+SKDPZSandBar_DrawAfterReleasingRiders:
+                bra.s   SKDPZSandBar_QueueSandBarDraw
 ; ---------------------------------------------------------------------------
 
-loc_36010:
+SKDPZSandBar_CollideAtFrameSurface:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectTop).l
 
-loc_36020:
+SKDPZSandBar_QueueSandBarDraw:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-byte_36026:
+SKDPZSandBar_SurfaceOffsetsByFrame:
                 dc.b    $11, $11, $11, $11, $10,  $F,  $E,  $D,  $C,  $B,  $A,   9,   8,   7,   6,   5,   4,   3,   2,   1
                 dc.b    0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
                 even

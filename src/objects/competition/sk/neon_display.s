@@ -3,47 +3,47 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
 
-loc_3713A:
+SKRaceNeon_InitRaceNeon:
                 move.l  #Map_2PNeonDisplay,mappings(a0)
                 move.w  #make_art_tile(ArtTile_2PLapNum+$56,0,1),art_tile(a0)
                 move.w  #0,priority(a0)
                 move.b  #$80,width_pixels(a0)
                 move.b  #$28,height_pixels(a0)
-                move.l  #loc_3716C,(a0)
+                move.l  #SKRaceNeon_AnimateAndGateCountdownSound,(a0)
                 tst.b   (Not_ghost_flag).w
-                bne.s   loc_3716C
+                bne.s   SKRaceNeon_AnimateAndGateCountdownSound
                 bset    #3,render_flags(a0)
 
-loc_3716C:
+SKRaceNeon_AnimateAndGateCountdownSound:
                 lea     (Ani_2PNeonDisplay).l,a1
                 jsr     (Animate_Sprite).l
                 cmpi.b  #1,anim(a0)
-                bne.s   loc_371AE
+                bne.s   SKRaceNeon_UpdateRaceAndCheckWrongWay
                 cmpi.b  #5,anim_frame_timer(a0)
-                bne.s   loc_371AE
+                bne.s   SKRaceNeon_UpdateRaceAndCheckWrongWay
                 moveq   #signextendB(sfx_LaunchReady),d0
                 move.b  anim_frame(a0),d1
                 cmpi.b  #1,d1
-                beq.s   loc_371A8
+                beq.s   SKRaceNeon_PlayCountdownSound
                 cmpi.b  #11,d1
-                beq.s   loc_371A8
+                beq.s   SKRaceNeon_PlayCountdownSound
                 cmpi.b  #21,d1
-                beq.s   loc_371A8
+                beq.s   SKRaceNeon_PlayCountdownSound
                 moveq   #signextendB(sfx_LaunchGo),d0
                 cmpi.b  #31,d1
-                bne.s   loc_371AE
+                bne.s   SKRaceNeon_UpdateRaceAndCheckWrongWay
 
-loc_371A8:
+SKRaceNeon_PlayCountdownSound:
                 jsr     (Play_SFX).l
 
-loc_371AE:
+SKRaceNeon_UpdateRaceAndCheckWrongWay:
                 bsr.s   SKCompNeon_UpdateRaceState
                 tst.w   (Events_bg+$14).w
-                bne.s   locret_371BC
+                bne.s   SKRaceNeon_SkipNeonDrawReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_371BC:
+SKRaceNeon_SkipNeonDrawReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -51,65 +51,65 @@ locret_371BC:
 ; Start timing at GO and advance or wait on the Grand Prix results. A secondary display can acknowledge late finishers
 SKCompNeon_UpdateRaceState:
                 move.b  $3A(a0),d0
-                bne.s   loc_371F4
+                bne.s   SKRaceNeon_DispatchRaceAndCheckTimeCap
                 tst.b   (Ctrl_1_locked).w
-                beq.s   loc_371D8
+                beq.s   SKRaceNeon_StartBothClocksAtFrame3
                 move.w  #1,anim(a0)
                 move.b  #$A,mapping_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_371D8:
+SKRaceNeon_StartBothClocksAtFrame3:
                 cmpi.b  #3,mapping_frame(a0)
-                bne.s   locret_371F2
+                bne.s   SKRaceNeon_RaceStartReturn
                 move.b  #1,(Update_HUD_timer).w
                 move.b  #1,(Update_HUD_timer_P2).w
                 move.b  #1,$3A(a0)
 
-locret_371F2:
+SKRaceNeon_RaceStartReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_371F4:
+SKRaceNeon_DispatchRaceAndCheckTimeCap:
                 subq.b  #1,d0
-                bne.w   loc_372D0
+                bne.w   SKRaceNeon_DispatchPostRaceAndWait
                 move.l  #(9<<16)|(59<<8)|99,d0
                 cmp.l   (Competition_time_record).w,d0
-                bls.s   loc_3720C
+                bls.s   SKRaceNeon_BeginTimeCapFinishWait
                 cmp.l   (Competition_time_record_P2).w,d0
-                bhi.s   loc_37218
+                bhi.s   SKRaceNeon_CheckP1FirstFinish
 
-loc_3720C:
+SKRaceNeon_BeginTimeCapFinishWait:
                 move.b  #2,$3A(a0)
                 move.w  #$78,(Events_bg+$16).w
 
-loc_37218:
+SKRaceNeon_CheckP1FirstFinish:
                 move.b  (Competition_total_laps).w,d0
                 cmp.b   (Competition_current_lap).w,d0
-                bhs.s   loc_37292
+                bhs.s   SKRaceNeon_CheckP2FirstFinish
                 move.b  #3,anim(a0)
                 tst.b   (Not_ghost_flag).w
-                beq.s   loc_37232
+                beq.s   SKRaceNeon_MarkP1FinishAndSetWait
                 addq.b  #1,anim(a0)
 
-loc_37232:
+SKRaceNeon_MarkP1FinishAndSetWait:
                 bset    #3,render_flags(a0)
                 move.b  #2,$3A(a0)
                 move.w  #$78,(Events_bg+$16).w
                 tst.b   (Not_ghost_flag).w
-                beq.s   loc_37256
+                beq.s   SKRaceNeon_StopP1ClockAndRecordTime
                 tst.b   (Competition_type).w
-                bne.s   loc_37256
+                bne.s   SKRaceNeon_StopP1ClockAndRecordTime
                 move.w  #$168,(Events_bg+$16).w
 
-loc_37256:
+SKRaceNeon_StopP1ClockAndRecordTime:
                 move.b  #$80,(Update_HUD_timer).w
                 jsr     SKCompTimeAttack_TrySaveP1Top3(pc)
                 moveq   #signextendB(sfx_Goal),d0
                 jsr     (Play_SFX).l
                 move.b  (Competition_total_laps).w,d0
                 cmp.b   (Competition_current_lap_2P).w,d0
-                bhs.s   loc_3728C
+                bhs.s   SKRaceNeon_TrySpawnP2LateFinisher
                 move.b  #6,anim(a0)
                 bclr    #3,render_flags(a0)
                 move.w  #$78,(Events_bg+$16).w
@@ -117,118 +117,120 @@ loc_37256:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3728C:
+SKRaceNeon_TrySpawnP2LateFinisher:
                 bsr.w   SKCompNeon_TrySpawnLateFinish
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_37292:
+SKRaceNeon_CheckP2FirstFinish:
                 cmp.b   (Competition_current_lap_2P).w,d0
-                bhs.s   locret_372CE
+                bhs.s   SKRaceNeon_P2FinishCheckReturn
                 move.b  #4,anim(a0)
                 bset    #4,render_flags(a0)
                 move.b  #2,$3A(a0)
                 move.w  #$78,(Events_bg+$16).w
                 tst.b   (Competition_type).w
-                bne.s   loc_372BC
+                bne.s   SKRaceNeon_StopP2ClockAndPlayGoal
                 move.w  #$168,(Events_bg+$16).w
 
-loc_372BC:
+SKRaceNeon_StopP2ClockAndPlayGoal:
                 move.b  #$80,(Update_HUD_timer_P2).w
                 bsr.w   SKCompNeon_TrySpawnLateFinish
                 moveq   #signextendB(sfx_Goal),d0
                 jsr     (Play_SFX).l
 
-locret_372CE:
+SKRaceNeon_P2FinishCheckReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_372D0:
+SKRaceNeon_DispatchPostRaceAndWait:
                 subq.b  #1,d0
-                bne.w   loc_373A4
+                bne.w   SKRaceNeon_CheckP1LateFinish
                 tst.b   (Competition_type).w
-                beq.s   loc_37308
+                beq.s   SKRaceNeon_SelectGPLapGate
                 tst.b   (Update_HUD_timer).w
-                bpl.s   locret_37306
+                bpl.s   SKRaceNeon_FinishWaitReturn
                 tst.b   (Not_ghost_flag).w
-                beq.s   loc_372EE
+                beq.s   SKRaceNeon_FinishWaitAndExitRace
                 tst.b   (Update_HUD_timer_P2).w
-                bpl.s   locret_37306
+                bpl.s   SKRaceNeon_FinishWaitReturn
 
-loc_372EE:
+SKRaceNeon_FinishWaitAndExitRace:
                 subq.w  #1,(Events_bg+$16).w
-                bpl.s   locret_37306
+                bpl.s   SKRaceNeon_FinishWaitReturn
                 move.b  #GameMode_CompetitionLevelSelect,(Game_mode).w
                 tst.b   (Competition_type).w
-                bpl.s   locret_37306
+                bpl.s   SKRaceNeon_FinishWaitReturn
                 move.b  #GameMode_TimeAttackRecords,(Game_mode).w
 
-locret_37306:
+SKRaceNeon_FinishWaitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_37308:
+; The original code checks the P1 timer flag again after loading the P2 lap
+SKRaceNeon_SelectGPLapGate:
                 move.b  (Competition_current_lap).w,d0
                 tst.b   (Update_HUD_timer).w
-                bpl.s   loc_3731C
+                bpl.s   SKRaceNeon_SkipGPWaitAtTotalLap
                 move.b  (Competition_current_lap_2P).w,d0
                 tst.b   (Update_HUD_timer).w
-                bmi.s   loc_37322
+                bmi.s   SKRaceNeon_TickGPWaitAndCommit
 
-loc_3731C:
+SKRaceNeon_SkipGPWaitAtTotalLap:
                 cmp.b   (Competition_total_laps).w,d0
-                beq.s   loc_37328
+                beq.s   SKRaceNeon_CheckGPTimeCapOrHold
 
-loc_37322:
+SKRaceNeon_TickGPWaitAndCommit:
                 subq.w  #1,(Events_bg+$16).w
-                bmi.s   loc_3733C
+                bmi.s   SKRaceNeon_StoreGPTimesAndCheckP1
 
-loc_37328:
+SKRaceNeon_CheckGPTimeCapOrHold:
                 cmpi.l  #(9<<16)|(59<<8)|99,(Competition_time_record).w
-                bhs.s   loc_3733C
+                bhs.s   SKRaceNeon_StoreGPTimesAndCheckP1
                 cmpi.l  #(9<<16)|(59<<8)|99,(Competition_time_record_P2).w
-                blo.s   locret_37398
+                blo.s   SKRaceNeon_GPFinishReturn
 
-loc_3733C:
+; Subtract the first competition zone ID before indexing the result-offset table, with no bounds check
+SKRaceNeon_StoreGPTimesAndCheckP1:
                 moveq   #0,d0
                 move.b  (Current_zone).w,d0
                 subi.b  #$E,d0
-                move.b  byte_3739F(pc,d0.w),d0
+                move.b  SKRaceNeon_GPResultOffsetTable(pc,d0.w),d0
                 lea     ((RAM_start+$7800)&$FFFFFF).l,a1
                 move.l  (Competition_time_record).w,(a1,d0.w)
                 move.l  (Competition_time_record_P2).w,$14(a1,d0.w)
                 tst.b   (Update_HUD_timer).w
-                bmi.s   loc_3736A
+                bmi.s   SKRaceNeon_MarkUnstoppedP2AtTimeCap
                 move.l  #(9<<16)|(59<<8)|99,(a1,d0.w)
 
-loc_3736A:
+SKRaceNeon_MarkUnstoppedP2AtTimeCap:
                 tst.b   (Update_HUD_timer_P2).w
-                bmi.s   loc_37378
+                bmi.s   SKRaceNeon_SelectNextGPZoneOrResults
                 move.l  #(9<<16)|(59<<8)|99,$14(a1,d0.w)
 
-loc_37378:
+SKRaceNeon_SelectNextGPZoneOrResults:
                 move.b  (Current_zone).w,d0
                 subi.b  #$E,d0
-                move.b  byte_3739A(pc,d0.w),d0
-                beq.s   loc_37392
+                move.b  SKRaceNeon_GPNextZoneTable(pc,d0.w),d0
+                beq.s   SKRaceNeon_OpenGrandPrixResults
                 move.b  d0,(Current_zone).w
                 move.b  #1,(Restart_level_flag).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_37392:
+SKRaceNeon_OpenGrandPrixResults:
                 move.b  #GameMode_CompetitionResults,(Game_mode).w
 
-locret_37398:
+SKRaceNeon_GPFinishReturn:
                 rts
 ; ---------------------------------------------------------------------------
-byte_3739A:
+SKRaceNeon_GPNextZoneTable:
                 dc.b    $F
                 dc.b    $11
                 dc.b    $12
                 dc.b    $10
                 dc.b    0
-byte_3739F:
+SKRaceNeon_GPResultOffsetTable:
                 dc.b    0
                 dc.b    4
                 dc.b    $C
@@ -237,12 +239,12 @@ byte_3739F:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_373A4:
+SKRaceNeon_CheckP1LateFinish:
                 move.b  (Competition_total_laps).w,d0
                 cmp.b   (Competition_current_lap).w,d0
-                bhs.s   loc_373D4
+                bhs.s   SKRaceNeon_CheckP2LateFinish
                 tst.b   (Update_HUD_timer).w
-                bmi.s   loc_373D4
+                bmi.s   SKRaceNeon_CheckP2LateFinish
                 move.b  #5,anim(a0)
                 bset    #3,render_flags(a0)
                 move.b  #$80,(Update_HUD_timer).w
@@ -250,12 +252,12 @@ loc_373A4:
                 moveq   #signextendB(sfx_Goal),d0
                 jsr     (Play_SFX).l
 
-loc_373D4:
+SKRaceNeon_CheckP2LateFinish:
                 move.b  (Competition_total_laps).w,d0
                 cmp.b   (Competition_current_lap_2P).w,d0
-                bhs.s   locret_37404
+                bhs.s   SKRaceNeon_LateFinishUpdateReturn
                 tst.b   (Update_HUD_timer_P2).w
-                bmi.s   locret_37404
+                bmi.s   SKRaceNeon_LateFinishUpdateReturn
                 move.b  #5,anim(a0)
                 bset    #4,render_flags(a0)
                 move.b  #$80,(Update_HUD_timer_P2).w
@@ -263,7 +265,7 @@ loc_373D4:
                 moveq   #signextendB(sfx_Goal),d0
                 jsr     (Play_SFX).l
 
-locret_37404:
+SKRaceNeon_LateFinishUpdateReturn:
                 rts
 ; End of function SKCompNeon_UpdateRaceState
 
@@ -271,14 +273,14 @@ locret_37404:
 
 SKCompNeon_TrySpawnLateFinish:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   locret_3742E
-                move.l  #loc_3713A,(a1)
+                bne.w   SKRaceNeon_LateFinisherSpawnReturn
+                move.l  #SKRaceNeon_InitRaceNeon,(a1)
                 move.w  #$120,x_pos(a1)
                 move.w  #$B8,y_pos(a1)
                 move.b  #2,anim(a1)
                 move.b  #3,$3A(a1)
 
-locret_3742E:
+SKRaceNeon_LateFinisherSpawnReturn:
                 rts
 ; End of function SKCompNeon_TrySpawnLateFinish
 
@@ -287,7 +289,7 @@ locret_3742E:
 ; Insert the time and selected character in the current zone's table when the competition type is negative
 SKCompTimeAttack_TrySaveP1Top3:
                 tst.b   (Competition_type).w
-                bpl.w   locret_374B6
+                bpl.w   SKRaceNeon_TimeRecordUpdateReturn
                 moveq   #0,d0
                 move.b  (Current_zone).w,d0
                 subi.w  #$E,d0
@@ -296,7 +298,7 @@ SKCompTimeAttack_TrySaveP1Top3:
                 adda.w  d0,a1
                 move.l  (Competition_time_record).w,d0
                 cmp.l   (a1),d0
-                bhs.s   loc_37476
+                bhs.s   SKRaceNeon_TrySecondTimeRecord
                 move.b  $D(a1),$E(a1)
                 move.b  $C(a1),$D(a1)
                 move.b  (P1_character).w,$C(a1)
@@ -304,37 +306,37 @@ SKCompTimeAttack_TrySaveP1Top3:
                 move.l  (a1),4(a1)
                 move.l  d0,(a1)
                 clr.b   (Competition_time_attack_new_top_record).w
-                bra.s   loc_374B0
+                bra.s   SKRaceNeon_SaveUpdatedTimeRecords
 ; ---------------------------------------------------------------------------
 
-loc_37476:
+SKRaceNeon_TrySecondTimeRecord:
                 cmp.l   4(a1),d0
-                bhs.s   loc_3749A
+                bhs.s   SKRaceNeon_TryThirdTimeRecord
                 move.b  $D(a1),$E(a1)
                 move.b  (P1_character).w,$D(a1)
                 move.l  4(a1),8(a1)
                 move.l  d0,4(a1)
                 move.b  #1,(Competition_time_attack_new_top_record).w
-                bra.s   loc_374B0
+                bra.s   SKRaceNeon_SaveUpdatedTimeRecords
 ; ---------------------------------------------------------------------------
 
-loc_3749A:
+SKRaceNeon_TryThirdTimeRecord:
                 cmp.l   8(a1),d0
-                bhs.s   locret_374B6
+                bhs.s   SKRaceNeon_TimeRecordUpdateReturn
                 move.b  (P1_character).w,$E(a1)
                 move.l  d0,8(a1)
                 move.b  #2,(Competition_time_attack_new_top_record).w
 
-loc_374B0:
+SKRaceNeon_SaveUpdatedTimeRecords:
                 jsr     (Write_SaveGeneral).l
 
-locret_374B6:
+SKRaceNeon_TimeRecordUpdateReturn:
                 rts
 ; End of function SKCompTimeAttack_TrySaveP1Top3
 
 ; ---------------------------------------------------------------------------
 
-loc_374B8:
+SKRaceNeon_InitWrongWayIndicator:
                 move.l  #Map_2PNeonDisplay,mappings(a0)
                 move.w  #make_art_tile(ArtTile_2PLapNum+$56,0,1),art_tile(a0)
                 move.w  #0,priority(a0)
@@ -343,15 +345,15 @@ loc_374B8:
                 move.w  #$120,x_pos(a0)
                 move.w  #$B8,y_pos(a0)
                 move.b  #7,anim(a0)
-                move.l  #loc_374F0,(a0)
+                move.l  #SKRaceNeon_DeleteWrongWayIndicator,(a0)
 
-loc_374F0:
+SKRaceNeon_DeleteWrongWayIndicator:
                 tst.w   (Events_bg+$14).w
-                bne.s   loc_374FC
+                bne.s   SKRaceNeon_AnimateAndDrawWrongWay
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_374FC:
+SKRaceNeon_AnimateAndDrawWrongWay:
                 lea     (Ani_2PNeonDisplay).l,a1
                 jsr     (Animate_Sprite).l
                 jmp     (Draw_Sprite).l

@@ -13,45 +13,45 @@ Obj_EMZDripper:
                 move.b  #4,x_radius(a0)
                 move.b  #4,y_radius(a0)
                 btst    #0,status(a0)
-                beq.s   loc_376DC
+                beq.s   S3EMZDripper_InstallEmitterUpdate
                 move.w  #make_art_tile(ArtTile_EMZMisc,2,1),art_tile(a0)
                 move.b  #3,mapping_frame(a0)
                 move.l  #Draw_Sprite,(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_376DC:
-                move.l  #loc_376E2,(a0)
+S3EMZDripper_InstallEmitterUpdate:
+                move.l  #S3EMZDripper_TrySpawnDropOnFramePhase,(a0)
 
-loc_376E2:
+S3EMZDripper_TrySpawnDropOnFramePhase:
                 move.b  (Level_frame_counter+1).w,d0
                 add.b   subtype(a0),d0
                 andi.b  #$7F,d0
-                bne.s   loc_3771A
+                bne.s   S3EMZDripper_DrawEmitterAfterAttempt
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_3771A
+                bne.w   S3EMZDripper_DrawEmitterAfterAttempt
                 moveq   #subtype,d0
 
-loc_376FC:
+S3EMZDripper_CopyPrefixIntoFallingChild:
                 move.w  (a0,d0.w),(a1,d0.w)
                 subq.w  #2,d0
-                bcc.s   loc_376FC
-                move.l  #loc_37720,(a1)
+                bcc.s   S3EMZDripper_CopyPrefixIntoFallingChild
+                move.l  #S3EMZDripper_MoveDropAndTrySplash,(a1)
                 move.w  #make_art_tile(ArtTile_EMZMisc,2,0),art_tile(a1)
                 move.b  #1,mapping_frame(a1)
                 moveq   #0,d0
 
-loc_3771A:
+S3EMZDripper_DrawEmitterAfterAttempt:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_37720:
+S3EMZDripper_MoveDropAndTrySplash:
                 jsr     (MoveSprite2).l
                 addi.w  #8,y_vel(a0)
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.s   loc_3775A
-                move.l  #loc_377C6,(a0)
+                bpl.s   S3EMZDripper_WrapDropYIfLooping
+                move.l  #S3EMZDripper_MoveSplashAndTickLifetime,(a0)
                 move.w  #$100,x_vel(a0)
                 neg.w   y_vel(a0)
                 asr     y_vel(a0)
@@ -61,34 +61,34 @@ loc_37720:
                 bsr.s   SpawnEmzDripperSplashDroplet
                 bsr.s   SpawnEmzDripperSplashDroplet
 
-loc_3775A:
+S3EMZDripper_WrapDropYIfLooping:
                 cmpi.w  #-$100,(Camera_min_Y_pos).w
-                bne.s   loc_3776A
+                bne.s   S3EMZDripper_CullOrDrawDrop
                 move.w  (Screen_Y_wrap_value).w,d0
                 and.w   d0,y_pos(a0)
 
-loc_3776A:
+S3EMZDripper_CullOrDrawDrop:
                 move.w  (Camera_max_Y_pos).w,d0
                 addi.w  #$60,d0
                 cmp.w   y_pos(a0),d0
-                bge.s   loc_3777E
+                bge.s   S3EMZDrop_DrawAfterVerticalBounds
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3777E:
+S3EMZDrop_DrawAfterVerticalBounds:
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
 SpawnEmzDripperSplashDroplet:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   locret_377C4
+                bne.w   S3EMZDripper_SplashSpawnReturn
                 moveq   #subtype,d0
 
-loc_37790:
+S3EMZDripper_CloneAndRandomizeSplash:
                 move.w  (a0,d0.w),(a1,d0.w)
                 subq.w  #2,d0
-                bcc.s   loc_37790
+                bcc.s   S3EMZDripper_CloneAndRandomizeSplash
                 jsr     (Random_Number).l
                 move.w  d0,d1
                 andi.w  #$1FF,d0
@@ -101,26 +101,27 @@ loc_37790:
                 subi.w  #$10,y_vel(a0)
                 moveq   #0,d0
 
-locret_377C4:
+S3EMZDripper_SplashSpawnReturn:
                 rts
 ; End of function SpawnEmzDripperSplashDroplet
 
 ; ---------------------------------------------------------------------------
 
-loc_377C6:
+; Delete on exact byte zero after the decrement
+S3EMZDripper_MoveSplashAndTickLifetime:
                 jsr     (MoveSprite2).l
                 addi.w  #8,y_vel(a0)
                 subq.b  #1,$3C(a0)
-                bne.s   loc_377DE
+                bne.s   S3EMZDripper_DrawLiveSplash
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_377DE:
+S3EMZDripper_DrawLiveSplash:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_EMZDripper:
                 include "src/objects/shared/zones/emz/mappings/dripper.s"
 ; ---------------------------------------------------------------------------
 
-locret_3780C:
+S3CompetitionGoal_NoOpAuxiliaryHandler:
                 rts

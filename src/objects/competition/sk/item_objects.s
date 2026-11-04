@@ -17,17 +17,17 @@ Obj_2PItem:
                 move.b  subtype(a0),angle(a0)
                 moveq   #1,d0
                 bclr    #0,status(a0)
-                beq.s   loc_363B4
+                beq.s   SKCompItem_SetOrbitStepAndSpentState
                 neg.b   d0
 
-loc_363B4:
+SKCompItem_SetOrbitStepAndSpentState:
                 move.b  d0,$27(a0)
                 move.b  #3,anim(a0)
                 move.b  #7,anim(a0)
                 move.b  #$C7,collision_flags(a0)
-                move.l  #loc_363D0,(a0)
+                move.l  #SKCompItem_OrbitPickupUpdate,(a0)
 
-loc_363D0:
+SKCompItem_OrbitPickupUpdate:
                 bsr.s   SKCompItem_ConsumePickupContacts
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
@@ -51,10 +51,10 @@ loc_363D0:
                 asr.w   #8,d0
                 add.w   $32(a0),d0
                 cmpi.w  #-$100,(Camera_min_Y_pos).w
-                bne.s   loc_36418
+                bne.s   SKCompItem_CommitOrbitYAndDraw
                 and.w   (Screen_Y_wrap_value).w,d0
 
-loc_36418:
+SKCompItem_CommitOrbitYAndDraw:
                 move.w  d0,y_pos(a0)
                 move.b  $27(a0),d0
                 add.b   d0,angle(a0)
@@ -68,22 +68,22 @@ loc_36418:
 ; Dispatch queued contact for Player 1 before Player 2
 SKCompItem_ConsumePickupContacts:
                 tst.b   collision_property(a0)
-                beq.s   locret_36462
+                beq.s   SKCompItem_PickupContactReturn
                 lea     (Player_1).w,a2
                 bclr    #0,collision_property(a0)
-                beq.s   loc_36450
+                beq.s   SKCompItem_CollectWithP2
                 bsr.s   SKCompItem_ApplyEffectFromAnim
 
-loc_36450:
+SKCompItem_CollectWithP2:
                 lea     (Player_2).w,a2
                 bclr    #1,collision_property(a0)
-                beq.s   loc_3645E
+                beq.s   SKCompItem_ClearPickupContacts
                 bsr.s   SKCompItem_ApplyEffectFromAnim
 
-loc_3645E:
+SKCompItem_ClearPickupContacts:
                 clr.b   collision_property(a0)
 
-locret_36462:
+SKCompItem_PickupContactReturn:
                 rts
 ; End of function SKCompItem_ConsumePickupContacts
 
@@ -94,74 +94,74 @@ SKCompItem_ApplyEffectFromAnim:
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 add.w   d0,d0
-                move.w  off_36476(pc,d0.w),d0
-                jsr     off_36476(pc,d0.w)
+                move.w  SKCompItem_CollectedEffectIndex(pc,d0.w),d0
+                jsr     SKCompItem_CollectedEffectIndex(pc,d0.w)
                 rts
 ; End of function SKCompItem_ApplyEffectFromAnim
 
 ; ---------------------------------------------------------------------------
-off_36476:
-                dc.w    loc_36486-off_36476
-                dc.w    loc_364D8-off_36476
-                dc.w    loc_3652A-off_36476
-                dc.w    loc_365E8-off_36476
-                dc.w    loc_36612-off_36476
-                dc.w    loc_36652-off_36476
-                dc.w    loc_36676-off_36476
-                dc.w    locret_3669A-off_36476
+SKCompItem_CollectedEffectIndex:
+                dc.w    SKCompItem_ApplyTimedSpeedUp-SKCompItem_CollectedEffectIndex
+                dc.w    SKCompItem_ApplyTimedSlowdown-SKCompItem_CollectedEffectIndex
+                dc.w    SKCompItem_SwapStatusTimersAndSpeed-SKCompItem_CollectedEffectIndex
+                dc.w    SKCompItem_SpendPickupAndAwardRing-SKCompItem_CollectedEffectIndex
+                dc.w    SKCompItem_SpendRollingPickupAndGetSlot-SKCompItem_CollectedEffectIndex
+                dc.w    SKCompItem_SpendMomentumAndTryFallClone-SKCompItem_CollectedEffectIndex
+                dc.w    SKCompItem_SpendFlipAndTryFallClone-SKCompItem_CollectedEffectIndex
+                dc.w    SKCompItem_SpentPickupReturn-SKCompItem_CollectedEffectIndex
 ; ---------------------------------------------------------------------------
 
-loc_36486:
+SKCompItem_ApplyTimedSpeedUp:
                 bset    #Status_SpeedShoes,status_secondary(a2)
                 move.b  #(10*60)/8,speed_shoes_timer(a2)
                 cmpa.w  #Player_1,a2
-                bne.s   loc_364AC
+                bne.s   SKCompItem_StoreP2SpeedUp
                 move.w  #$C00,(Max_speed).w
                 move.w  #$18,(Acceleration).w
                 move.w  #$80,(Deceleration).w
-                bra.s   loc_364BE
+                bra.s   SKCompItem_SpendSpeedUpAndTryEffect
 ; ---------------------------------------------------------------------------
 
-loc_364AC:
+SKCompItem_StoreP2SpeedUp:
                 move.w  #$C00,(Max_speed_P2).w
                 move.w  #$18,(Acceleration_P2).w
                 move.w  #$80,(Deceleration_P2).w
 
-loc_364BE:
+SKCompItem_SpendSpeedUpAndTryEffect:
                 move.b  #7,anim(a0)
                 move.b  #0,collision_flags(a0)
-                move.l  #loc_36A1A,d1
+                move.l  #SKCompItem_AnimateEffectOrDelete,d1
                 moveq   #9,d2
                 bsr.w   SKCompItem_TryCloneEffect
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_364D8:
+SKCompItem_ApplyTimedSlowdown:
                 bset    #Status_SpeedShoes,status_secondary(a2)
                 move.b  #(10*60)/8,speed_shoes_timer(a2)
                 cmpa.w  #Player_1,a2
-                bne.s   loc_364FE
+                bne.s   SKCompItem_StoreP2Slowdown
                 move.w  #$300,(Max_speed).w
                 move.w  #8,(Acceleration).w
                 move.w  #$20,(Deceleration).w
-                bra.s   loc_36510
+                bra.s   SKCompItem_SpendSlowdownAndTryEffect
 ; ---------------------------------------------------------------------------
 
-loc_364FE:
+SKCompItem_StoreP2Slowdown:
                 move.w  #$300,(Max_speed_P2).w
                 move.w  #8,(Acceleration_P2).w
                 move.w  #$20,(Deceleration_P2).w
 
-loc_36510:
+SKCompItem_SpendSlowdownAndTryEffect:
                 move.b  #7,anim(a0)
                 move.b  #0,collision_flags(a0)
-                move.l  #loc_36A1A,d1
+                move.l  #SKCompItem_AnimateEffectOrDelete,d1
                 moveq   #9,d2
                 bsr.w   SKCompItem_TryCloneEffect
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3652A:
+SKCompItem_SwapStatusTimersAndSpeed:
                 lea     (Player_1).w,a2
                 lea     (Player_2).w,a3
                 move.b  status_secondary(a2),d0
@@ -195,43 +195,43 @@ loc_3652A:
                 move.w  (a1)+,(Deceleration_P2).w
                 move.w  (sp)+,d0
                 btst    #Status_SpeedShoes,status_secondary(a2)
-                beq.s   loc_365BA
+                beq.s   SKCompItem_RestoreOldP1SpeedToP2
                 move.w  d3,(Max_speed).w
                 move.w  d4,(Acceleration).w
                 move.w  d5,(Deceleration).w
 
-loc_365BA:
+SKCompItem_RestoreOldP1SpeedToP2:
                 btst    #Status_SpeedShoes,status_secondary(a3)
-                beq.s   loc_365CE
+                beq.s   SKCompItem_SpendSwapAndTryEffect
                 move.w  d0,(Max_speed_P2).w
                 move.w  d1,(Acceleration_P2).w
                 move.w  d2,(Deceleration_P2).w
 
-loc_365CE:
+SKCompItem_SpendSwapAndTryEffect:
                 move.b  #7,anim(a0)
                 move.b  #0,collision_flags(a0)
-                move.l  #loc_36A1A,d1
+                move.l  #SKCompItem_AnimateEffectOrDelete,d1
                 moveq   #9,d2
                 bsr.w   SKCompItem_TryCloneEffect
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_365E8:
+SKCompItem_SpendPickupAndAwardRing:
                 move.b  #7,anim(a0)
                 move.b  #0,collision_flags(a0)
-                move.l  #loc_36A1A,d1
+                move.l  #SKCompItem_AnimateEffectOrDelete,d1
                 moveq   #8,d2
                 bsr.w   SKCompItem_TryCloneEffect
                 cmpa.w  #Player_1,a2
-                bne.s   loc_3660C
+                bne.s   SKCompItem_AwardRingToP2
                 jmp     (GiveRing).l
 ; ---------------------------------------------------------------------------
 
-loc_3660C:
+SKCompItem_AwardRingToP2:
                 jmp     (GiveRing_Tails).l
 ; ---------------------------------------------------------------------------
 
-loc_36612:
+SKCompItem_SpendRollingPickupAndGetSlot:
                 move.b  #7,anim(a0)
                 clr.b   collision_flags(a0)
                 clr.b   collision_property(a0)
@@ -239,129 +239,130 @@ loc_36612:
                 tst.l   (a1)
                 moveq   #subtype,d0
 
-loc_36628:
+SKCompItem_SeedRollingHazardOnPlane:
                 move.w  (a0,d0.w),(a1,d0.w)
                 subq.w  #2,d0
-                bcc.s   loc_36628
-                move.l  #loc_3669C,(a1)
+                bcc.s   SKCompItem_SeedRollingHazardOnPlane
+                move.l  #SKCompItem_InitLeftRollingHazardFall,(a1)
                 move.b  #4,anim(a1)
                 move.w  top_solid_bit(a2),top_solid_bit(a1)
                 tst.w   art_tile(a2)
-                bpl.s   locret_36650
+                bpl.s   SKCompItem_RollingHazardSpawnReturn
                 ori.w   #high_priority,art_tile(a1)
 
-locret_36650:
+SKCompItem_RollingHazardSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_36652:
+SKCompItem_SpendMomentumAndTryFallClone:
                 move.b  #7,anim(a0)
                 clr.b   collision_flags(a0)
                 clr.b   collision_property(a0)
-                move.l  #loc_366B6,d1
+                move.l  #SKCompItem_BeginMomentumTrapFall,d1
                 moveq   #5,d2
                 bsr.w   SKCompItem_TryCloneEffect
-                bne.s   locret_36674
+                bne.s   SKCompItem_MomentumCloneReturn
                 move.w  top_solid_bit(a2),top_solid_bit(a1)
 
-locret_36674:
+SKCompItem_MomentumCloneReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_36676:
+SKCompItem_SpendFlipAndTryFallClone:
                 move.b  #7,anim(a0)
                 clr.b   collision_flags(a0)
                 clr.b   collision_property(a0)
-                move.l  #loc_366BE,d1
+                move.l  #SKCompItem_BeginFlipTrapFall,d1
                 moveq   #6,d2
                 bsr.w   SKCompItem_TryCloneEffect
-                bne.s   locret_36698
+                bne.s   SKCompItem_FlipCloneReturn
                 move.w  top_solid_bit(a2),top_solid_bit(a1)
 
-locret_36698:
+SKCompItem_FlipCloneReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_3669A:
+SKCompItem_SpentPickupReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3669C:
+SKCompItem_InitLeftRollingHazardFall:
                 move.w  #-$400,ground_vel(a0)
                 move.b  #0,angle(a0)
                 move.b  #0,status(a0)
-                move.l  #loc_368AA,d2
-                bra.s   loc_366C4
+                move.l  #SKCompItem_CheckRollingHazardContacts,d2
+                bra.s   SKCompItem_MoveFallAndCheckLanding
 ; ---------------------------------------------------------------------------
 
-loc_366B6:
-                move.l  #loc_367C2,d2
-                bra.s   loc_366C4
+SKCompItem_BeginMomentumTrapFall:
+                move.l  #SKCompItem_CheckMomentumTrapContacts,d2
+                bra.s   SKCompItem_MoveFallAndCheckLanding
 ; ---------------------------------------------------------------------------
 
-loc_366BE:
-                move.l  #loc_3670C,d2
+SKCompItem_BeginFlipTrapFall:
+                move.l  #SKCompItem_CheckFlipTrapContacts,d2
 
-loc_366C4:
+; Install the landing handler only after the floor probe returns a negative gap
+SKCompItem_MoveFallAndCheckLanding:
                 move.l  d2,-(sp)
                 jsr     (MoveSprite).l
                 jsr     (ObjCheckFloorDist).l
                 move.l  (sp)+,d2
                 tst.w   d1
-                bpl.s   loc_366E4
+                bpl.s   SKCompItem_WrapFallingHazardY
                 add.w   d1,y_pos(a0)
                 move.l  d2,(a0)
                 move.b  #$C7,collision_flags(a0)
 
-loc_366E4:
+SKCompItem_WrapFallingHazardY:
                 cmpi.w  #-$100,(Camera_min_Y_pos).w
-                bne.s   loc_366F4
+                bne.s   SKCompItem_CullFallingHazardBelowCamera
                 move.w  (Screen_Y_wrap_value).w,d0
                 and.w   d0,y_pos(a0)
 
-loc_366F4:
+SKCompItem_CullFallingHazardBelowCamera:
                 move.w  (Camera_max_Y_pos).w,d0
                 addi.w  #$60,d0
                 cmp.w   y_pos(a0),d0
-                bge.s   loc_36708
+                bge.s   SKCompItem_AnimateFallingHazard
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_36708:
-                bra.w   loc_36A1A
+SKCompItem_AnimateFallingHazard:
+                bra.w   SKCompItem_AnimateEffectOrDelete
 ; ---------------------------------------------------------------------------
 
-loc_3670C:
+SKCompItem_CheckFlipTrapContacts:
                 tst.b   collision_property(a0)
-                beq.s   loc_36732
+                beq.s   SKCompItem_AnimateFlipTrapOrDelete
                 lea     (Player_1).w,a2
                 bclr    #0,collision_property(a0)
-                beq.s   loc_36720
+                beq.s   SKCompItem_CheckP2FlipTrapContact
                 bsr.s   SKCompItem_TryUpwardFlipLaunch
 
-loc_36720:
+SKCompItem_CheckP2FlipTrapContact:
                 lea     (Player_2).w,a2
                 bclr    #1,collision_property(a0)
-                beq.s   loc_3672E
+                beq.s   SKCompItem_ClearFlipTrapContacts
                 bsr.s   SKCompItem_TryUpwardFlipLaunch
 
-loc_3672E:
+SKCompItem_ClearFlipTrapContacts:
                 clr.b   collision_property(a0)
 
-loc_36732:
+SKCompItem_AnimateFlipTrapOrDelete:
                 lea     (Ani_2PItem).l,a1
                 jsr     (Animate_Sprite).l
                 tst.b   routine(a0)
-                beq.s   loc_3674A
+                beq.s   SKCompItem_QueueFlipTrapUnlessSpent
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3674A:
+SKCompItem_QueueFlipTrapUnlessSpent:
                 cmpi.b  #9,anim(a0)
-                beq.s   loc_36758
+                beq.s   CompetitionItemSKDrawSurvivingFlipTrap
                 jsr     (Add_SpriteToCollisionResponseList).l
 
-loc_36758:
+CompetitionItemSKDrawSurvivingFlipTrap:
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -370,11 +371,11 @@ loc_36758:
 SKCompItem_TryUpwardFlipLaunch:
                 move.w  top_solid_bit(a2),d0
                 cmp.w   top_solid_bit(a0),d0
-                beq.s   loc_3676A
+                beq.s   SKCompItem_FlipLaunchOnMatchingPlane
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3676A:
+SKCompItem_FlipLaunchOnMatchingPlane:
                 move.b  #$A,anim(a0)
                 move.w  #-$A00,y_vel(a2)
                 bset    #Status_InAir,status(a2)
@@ -387,67 +388,67 @@ loc_3676A:
                 move.b  #0,flips_remaining(a2)
                 move.b  #4,flip_speed(a2)
                 btst    #Status_Facing,status(a2)
-                beq.s   loc_367BA
+                beq.s   SKCompItem_PlayFlipLaunchSound
                 neg.b   flip_angle(a2)
                 neg.w   ground_vel(a2)
 
-loc_367BA:
+SKCompItem_PlayFlipLaunchSound:
                 moveq   #signextendB(sfx_SmallBumpers),d0
                 jmp     (Play_SFX).l
 ; End of function SKCompItem_TryUpwardFlipLaunch
 
 ; ---------------------------------------------------------------------------
 
-loc_367C2:
+SKCompItem_CheckMomentumTrapContacts:
                 tst.b   collision_property(a0)
-                beq.s   loc_367E8
+                beq.s   SKCompItem_AnimateTrapAndBrakeNegative
                 lea     (Player_1).w,a2
                 bclr    #0,collision_property(a0)
-                beq.s   loc_367D6
+                beq.s   SKCompItem_CheckP2MomentumTrapContact
                 bsr.s   SKCompItem_TryGroundMomentumTrap
 
-loc_367D6:
+SKCompItem_CheckP2MomentumTrapContact:
                 lea     (Player_2).w,a2
                 bclr    #1,collision_property(a0)
-                beq.s   loc_367E4
+                beq.s   SKCompItem_ClearMomentumTrapContacts
                 bsr.s   SKCompItem_TryGroundMomentumTrap
 
-loc_367E4:
+SKCompItem_ClearMomentumTrapContacts:
                 clr.b   collision_property(a0)
 
-loc_367E8:
+SKCompItem_AnimateTrapAndBrakeNegative:
                 lea     (Ani_2PItem).l,a1
                 jsr     (Animate_Sprite).l
                 tst.b   $3C(a0)
-                beq.s   loc_36834
+                beq.s   SKCompItem_DeleteFinishedMomentumTrap
                 movea.w $3E(a0),a1
                 subq.b  #1,$3C(a0)
-                beq.s   loc_36828
+                beq.s   SKCompItem_ReleaseMomentumTrapPlayer
                 move.w  #$20,d1
                 move.w  ground_vel(a1),d0
-                bpl.s   loc_3681C
+                bpl.s   SKCompItem_BrakePositiveAndCheckBorrow
                 add.w   d1,ground_vel(a1)
-                bcc.s   loc_36840
+                bcc.s   SKCompItem_QueueMomentumTrapContact
                 move.w  #0,ground_vel(a1)
-                bra.s   loc_36828
+                bra.s   SKCompItem_ReleaseMomentumTrapPlayer
 ; ---------------------------------------------------------------------------
 
-loc_3681C:
+SKCompItem_BrakePositiveAndCheckBorrow:
                 sub.w   d1,ground_vel(a1)
-                bcc.s   loc_36840
+                bcc.s   SKCompItem_QueueMomentumTrapContact
                 move.w  #0,ground_vel(a1)
 
-loc_36828:
+SKCompItem_ReleaseMomentumTrapPlayer:
                 move.w  #5,move_lock(a1)
                 andi.b  #$7F,status_secondary(a1)
 
-loc_36834:
+SKCompItem_DeleteFinishedMomentumTrap:
                 tst.b   routine(a0)
-                beq.s   loc_36840
+                beq.s   SKCompItem_QueueMomentumTrapContact
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_36840:
+SKCompItem_QueueMomentumTrapContact:
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 
@@ -457,57 +458,58 @@ loc_36840:
 SKCompItem_TryGroundMomentumTrap:
                 move.w  top_solid_bit(a2),d0
                 cmp.w   top_solid_bit(a0),d0
-                bne.s   locret_368A8
+                bne.s   SKCompItem_MomentumActivationReturn
                 tst.b   status_secondary(a2)
-                bmi.s   locret_368A8
+                bmi.s   SKCompItem_MomentumActivationReturn
                 btst    #Status_InAir,status(a2)
-                bne.s   locret_368A8
+                bne.s   SKCompItem_MomentumActivationReturn
                 tst.w   ground_vel(a2)
-                beq.s   locret_368A8
+                beq.s   SKCompItem_MomentumActivationReturn
                 move.b  #9,anim(a0)
                 move.b  #0,collision_flags(a0)
                 move.w  #$200,d1
                 move.w  ground_vel(a2),d0
-                bpl.s   loc_36884
+                bpl.s   SKCompItem_BoostSmallMomentum
                 neg.w   d0
                 neg.w   d1
 
-loc_36884:
+SKCompItem_BoostSmallMomentum:
                 cmpi.w  #$200,d0
-                bhs.s   loc_3688E
+                bhs.s   SKCompItem_DoubleMomentumAndLatch
                 add.w   d1,ground_vel(a2)
 
-loc_3688E:
+; Start the 60-frame hold after doubling the selected player's ground speed
+SKCompItem_DoubleMomentumAndLatch:
                 asl     ground_vel(a2)
                 move.b  #$1B,anim(a2)
                 ori.b   #$80,status_secondary(a2)
                 move.w  a2,$3E(a0)
                 move.b  #$3C,$3C(a0)
 
-locret_368A8:
+SKCompItem_MomentumActivationReturn:
                 rts
 ; End of function SKCompItem_TryGroundMomentumTrap
 
 ; ---------------------------------------------------------------------------
 
-loc_368AA:
+SKCompItem_CheckRollingHazardContacts:
                 tst.b   collision_property(a0)
-                beq.s   loc_368D0
+                beq.s   SKCompItem_MoveRollSelectFrameAndCull
                 lea     (Player_1).w,a2
                 bclr    #0,collision_property(a0)
-                beq.s   loc_368BE
+                beq.s   SKCompItem_CheckP2RollingContact
                 bsr.s   SKCompRollingItem_ExplodeOnHit
 
-loc_368BE:
+SKCompItem_CheckP2RollingContact:
                 lea     (Player_2).w,a2
                 bclr    #1,collision_property(a0)
-                beq.s   loc_368CC
+                beq.s   SKCompItem_ClearRollingHazardContacts
                 bsr.s   SKCompRollingItem_ExplodeOnHit
 
-loc_368CC:
+SKCompItem_ClearRollingHazardContacts:
                 clr.b   collision_property(a0)
 
-loc_368D0:
+SKCompItem_MoveRollSelectFrameAndCull:
                 bsr.w   SKCompRollingItem_UpdateMovement
                 move.b  angle(a0),d0
                 addi.b  #$10,d0
@@ -517,11 +519,11 @@ loc_368D0:
                 move.w  (Camera_max_Y_pos).w,d0
                 addi.w  #$60,d0
                 cmp.w   y_pos(a0),d0
-                bge.s   loc_368FA
+                bge.s   SKCompItem_QueueRollingContactAndDraw
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_368FA:
+SKCompItem_QueueRollingContactAndDraw:
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 
@@ -531,12 +533,12 @@ loc_368FA:
 SKCompRollingItem_ExplodeOnHit:
                 move.w  top_solid_bit(a2),d0
                 cmp.w   top_solid_bit(a0),d0
-                beq.s   loc_36912
+                beq.s   SKCompItem_StartExplosionThenHurt
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_36912:
-                move.l  #loc_36A1A,(a0)
+SKCompItem_StartExplosionThenHurt:
+                move.l  #SKCompItem_AnimateEffectOrDelete,(a0)
                 move.b  #$B,anim(a0)
                 movea.l a2,a1
                 jmp     (HurtPlayerFromSolidHazard).l
@@ -547,7 +549,7 @@ loc_36912:
 ; Roll left on terrain or fall, wrap world coordinates and explode on left-wall penetration at a horizontal angle
 SKCompRollingItem_UpdateMovement:
                 btst    #1,status(a0)
-                bne.s   loc_36990
+                bne.s   SKCompItem_AccelerateAirRollLeft
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 muls.w  ground_vel(a0),d1
@@ -564,25 +566,25 @@ SKCompRollingItem_UpdateMovement:
                 addi.w  #$400,x_pos(a0)
                 jsr     (Player_AnglePos).l
                 move.b  angle(a0),d0
-                bne.s   locret_3698E
+                bne.s   SKCompItem_GroundRollUpdateReturn
                 jsr     (ProbeLeftWallUsingYRadius).l
                 tst.w   d1
-                bpl.s   locret_3698E
+                bpl.s   SKCompItem_GroundRollUpdateReturn
                 sub.w   d1,x_pos(a0)
-                move.l  #loc_36A1A,(a0)
+                move.l  #SKCompItem_AnimateEffectOrDelete,(a0)
                 move.b  #$B,anim(a0)
 
-locret_3698E:
+SKCompItem_GroundRollUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_36990:
+SKCompItem_AccelerateAirRollLeft:
                 subi.w  #$10,x_vel(a0)
                 cmpi.w  #-$400,x_vel(a0)
-                bgt.s   loc_369A4
+                bgt.s   SKCompItem_MoveAirRollAndLand
                 move.w  #-$400,x_vel(a0)
 
-loc_369A4:
+SKCompItem_MoveAirRollAndLand:
                 jsr     (MoveSprite).l
                 move.w  (Screen_Y_wrap_value).w,d0
                 and.w   d0,y_pos(a0)
@@ -591,56 +593,56 @@ loc_369A4:
                 addi.w  #$400,x_pos(a0)
                 jsr     (ChkFloorEdge).l
                 tst.w   d1
-                bpl.s   loc_369DC
+                bpl.s   SKCompItem_RelaxAirRollAngle
                 add.w   d1,y_pos(a0)
                 bclr    #1,status(a0)
                 move.b  #0,angle(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_369DC:
+SKCompItem_RelaxAirRollAngle:
                 move.b  angle(a0),d0
-                beq.s   loc_369F6
-                bpl.s   loc_369EC
+                beq.s   SKCompItem_ProbeLeftWallAtZeroAngle
+                bpl.s   SKCompItem_ClampPositiveAngleAtZero
                 addq.b  #2,d0
-                bcc.s   loc_369F2
+                bcc.s   SKCompItem_StoreRelaxedAngle
                 moveq   #0,d0
-                bra.s   loc_369F2
+                bra.s   SKCompItem_StoreRelaxedAngle
 ; ---------------------------------------------------------------------------
 
-loc_369EC:
+SKCompItem_ClampPositiveAngleAtZero:
                 subq.b  #2,d0
-                bcc.s   loc_369F2
+                bcc.s   SKCompItem_StoreRelaxedAngle
                 moveq   #0,d0
 
-loc_369F2:
+SKCompItem_StoreRelaxedAngle:
                 move.b  d0,angle(a0)
 
-loc_369F6:
+SKCompItem_ProbeLeftWallAtZeroAngle:
                 move.b  angle(a0),d0
-                bne.s   locret_36A18
+                bne.s   SKCompItem_AirRollUpdateReturn
                 jsr     (ProbeLeftWallUsingYRadius).l
                 tst.w   d1
-                bpl.s   locret_36A18
+                bpl.s   SKCompItem_AirRollUpdateReturn
                 sub.w   d1,x_pos(a0)
-                move.l  #loc_36A1A,(a0)
+                move.l  #SKCompItem_AnimateEffectOrDelete,(a0)
                 move.b  #$B,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_36A18:
+SKCompItem_AirRollUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_36A1A:
+SKCompItem_AnimateEffectOrDelete:
                 lea     (Ani_2PItem).l,a1
                 jsr     (Animate_Sprite).l
                 tst.b   routine(a0)
-                beq.s   loc_36A32
+                beq.s   SKCompItem_DrawActiveEffect
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_36A32:
+SKCompItem_DrawActiveEffect:
                 jmp     (Draw_Sprite).l
 ; End of function SKCompRollingItem_UpdateMovement
 
@@ -649,18 +651,18 @@ loc_36A32:
 ; Allocate after the current slot, copy the common object prefix and install the supplied handler and animation
 SKCompItem_TryCloneEffect:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   locret_36A56
+                bne.w   SKCompItem_CloneStatusReturn
                 moveq   #subtype,d0
 
-loc_36A44:
+SKCompItem_CopyClonePrefixAndSetAnim:
                 move.w  (a0,d0.w),(a1,d0.w)
                 subq.w  #2,d0
-                bcc.s   loc_36A44
+                bcc.s   SKCompItem_CopyClonePrefixAndSetAnim
                 move.l  d1,(a1)
                 move.b  d2,anim(a1)
                 moveq   #0,d0
 
-locret_36A56:
+SKCompItem_CloneStatusReturn:
                 rts
 ; End of function SKCompItem_TryCloneEffect
 

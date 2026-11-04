@@ -111,26 +111,26 @@ Comp_BackgroundInit:
 ALZ_BackgroundEvent:
                 jsr     ALZ_Deformation(pc)
                 lea     ALZ_BGDeformArray(pc),a4
-                bra.s   loc_3A764
+                bra.s   S3CompScroll_DeformBothViewports
 ; ---------------------------------------------------------------------------
 
 BPZ_BackgroundEvent:
                 jsr     BPZ_Deformation(pc)
                 lea     BPZ_BGDeformArray(pc),a4
-                bra.s   loc_3A764
+                bra.s   S3CompScroll_DeformBothViewports
 ; ---------------------------------------------------------------------------
 
 CGZ_BackgroundEvent:
                 jsr     CGZ_Deformation(pc)
                 lea     CGZ_BGDeformArray(pc),a4
-                bra.s   loc_3A764
+                bra.s   S3CompScroll_DeformBothViewports
 ; ---------------------------------------------------------------------------
 
 EMZ_BackgroundEvent:
                 jsr     EMZ_Deformation(pc)
                 lea     EMZ_BGDeformArray(pc),a4
 
-loc_3A764:
+S3CompScroll_DeformBothViewports:
                 lea     (H_scroll_buffer).w,a1
                 movea.l a4,a6
                 lea     (HScroll_table).w,a5
@@ -170,12 +170,12 @@ S3Comp_FillUniformHScroll:
                 neg.w   d1
                 move.w  d1,d0
 
-loc_3A7C2:
+S3CompScroll_FillFourScrollPairs:
                 move.l  d0,(a1)+
                 move.l  d0,(a1)+
                 move.l  d0,(a1)+
                 move.l  d0,(a1)+
-                dbf     d2,loc_3A7C2
+                dbf     d2,S3CompScroll_FillFourScrollPairs
                 rts
 ; End of function S3Comp_FillUniformHScroll
 
@@ -229,13 +229,13 @@ S3ALZ_BuildBandsAndAnimatedScroll:
                 move.l  (Events_bg+$02).w,d3
                 moveq   #5,d4
 
-loc_3A83A:
+S3CompScroll_BuildReverseAnimatedBands:
                 add.l   d3,d1
                 swap    d1
                 move.w  d1,-(a5)
                 swap    d1
                 add.l   d2,d1
-                dbf     d4,loc_3A83A
+                dbf     d4,S3CompScroll_BuildReverseAnimatedBands
                 movem.w (a5),d1-d6
                 move.w  d2,(a5)+
                 move.w  d6,(a5)+
@@ -249,12 +249,12 @@ loc_3A83A:
                 asr.l   #1,d2
                 moveq   #2,d3
 
-loc_3A864:
+S3CompScroll_AppendLinearBandsAndPhase:
                 swap    d1
                 move.w  d1,(a5)+
                 swap    d1
                 add.l   d2,d1
-                dbf     d3,loc_3A864
+                dbf     d3,S3CompScroll_AppendLinearBandsAndPhase
                 move.w  (Events_bg+$00).w,d1
                 lsr.w   #3,d1
                 andi.w  #$3E,d1
@@ -262,11 +262,11 @@ loc_3A864:
                 swap    d0
                 moveq   #$3E,d1
 
-loc_3A882:
+S3CompScroll_Append63AnimatedDeltas:
                 move.w  (a6)+,d2
                 add.w   d0,d2
                 move.w  d2,(a5)+
-                dbf     d1,loc_3A882
+                dbf     d1,S3CompScroll_Append63AnimatedDeltas
                 rts
 ; End of function S3ALZ_BuildBandsAndAnimatedScroll
 
@@ -307,12 +307,12 @@ S3BPZ_BuildReverseParallaxBands:
                 asr.l   #3,d1
                 moveq   #6,d2
 
-loc_3A8CE:
+S3CompScroll_WriteBalloonParallaxBands:
                 swap    d0
                 move.w  d0,-(a1)
                 swap    d0
                 sub.l   d1,d0
-                dbf     d2,loc_3A8CE
+                dbf     d2,S3CompScroll_WriteBalloonParallaxBands
                 rts
 ; End of function S3BPZ_BuildReverseParallaxBands
 
@@ -377,14 +377,14 @@ CGZ_Deformation:
 
 ; Clamp negative progress to zero and scale positive height by the unsigned lap-derived fraction
 S3CGZ_ScaleLapHeightToBgY:
-                bmi.s   loc_3A958
+                bmi.s   S3CompScroll_ClampNegativeChromeLapY
                 move.w  (Events_bg+$08).w,d1
                 mulu.w  d1,d0
                 swap    d0
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3A958:
+S3CompScroll_ClampNegativeChromeLapY:
                 moveq   #0,d0
                 rts
 ; End of function S3CGZ_ScaleLapHeightToBgY
@@ -399,12 +399,12 @@ S3CGZBuildFiveHorizontalParallaxBands:
                 asr.l   #2,d1
                 moveq   #3,d2
 
-loc_3A968:
+S3CompScroll_WriteChromeParallaxBands:
                 swap    d0
                 move.w  d0,-(a1)
                 swap    d0
                 sub.l   d1,d0
-                dbf     d2,loc_3A968
+                dbf     d2,S3CompScroll_WriteChromeParallaxBands
                 asr.l   #2,d1
                 swap    d1
                 addi.w  #$100,d1

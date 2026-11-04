@@ -482,7 +482,7 @@ SKCompAppendTwoRowNumericGlyphColumn:
 ; =============== S U B R O U T I N E =======================================
 
 SKCompConvertTimerFrameByteToHundredths:
-                lea     (byte_37E52).l,a1
+                lea     (SKRaceHUD_FrameToHundredthsTable).l,a1
                 moveq   #0,d0
                 move.b  d6,d0
                 move.b  (a1,d0.w),d6

@@ -1,18 +1,18 @@
 ; Data owner: game/competition/shared/2p_zone
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_2PPosition_:
-                dc.w    word_380D0-Map_2PPosition_
-                dc.w    word_380D8-Map_2PPosition_
-                dc.w    word_380E0-Map_2PPosition_
-                dc.w    word_380E8-Map_2PPosition_
-                dc.w    word_380F0-Map_2PPosition_
-word_380D0:     dc.w    1
+                dc.w    RaceUnusedPos_InitialMap-Map_2PPosition_
+                dc.w    RaceUnusedPos_P1MarkerMap-Map_2PPosition_
+                dc.w    RaceUnusedPos_P2MarkerMap-Map_2PPosition_
+                dc.w    RaceUnusedPos_RetainedMap3-Map_2PPosition_
+                dc.w    RaceUnusedPos_RetainedMap4-Map_2PPosition_
+RaceUnusedPos_InitialMap:   dc.w    1
                 dc.b    $FC,   0,   0,   0, $FF, $FC
-word_380D8:     dc.w    1
+RaceUnusedPos_P1MarkerMap:  dc.w    1
                 dc.b    $FC,   0,   0,   1, $FF, $FC
-word_380E0:     dc.w    1
+RaceUnusedPos_P2MarkerMap:  dc.w    1
                 dc.b    $FC,   0,   0,   2, $FF, $FC
-word_380E8:     dc.w    1
+RaceUnusedPos_RetainedMap3: dc.w    1
                 dc.b    $FC,   0,   0,   3, $FF, $FC
-word_380F0:     dc.w    1
+RaceUnusedPos_RetainedMap4: dc.w    1
                 dc.b    $FC,   0,   0,   4, $FF, $FC

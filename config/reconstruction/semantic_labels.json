@@ -5,7 +5,7 @@
   "scope": "All35470 researched inherited address and numeric-local labels; completed1571 procedure migration remains independent.",
   "target_count": 35470,
   "scope_sha256": "6d32002c76db58fe4732f6fc7113c9b2d93f88b650fec5e995b26b2a5fe4f278",
-  "applied_targets": 31055,
+  "applied_targets": 31707,
   "packets": [
     {
       "id": "01-audio",
@@ -6403,7 +6403,7 @@
     },
     {
       "id": "59-competition-race",
-      "state": "pending",
+      "state": "applied",
       "target_count": 652,
       "scope_sha256": "d7b84fc3df91c9857c58edb5d68c049ec8d9cf901afbb594dcdce11032a42e43",
       "registry": "config/reconstruction/semantic_labels/59-competition-race.json",
@@ -6589,7 +6589,7 @@
           "profiles": ["sk"]
         }
       ],
-      "destination_sha256": "b1b71584954d865e47aad12f4c6af6d923e7cb13d4dcb3bee9dd0f2ea6195b8f"
+      "destination_sha256": "22db8c305e594cf631e489825f137b2de2db14de5ffc8028e72ef81b1cdd3b99"
     },
     {
       "id": "60-special-stage",
@@ -7475,6 +7475,7 @@
     "55-title",
     "56-save",
     "57-continue",
-    "58-competition-ui"
+    "58-competition-ui",
+    "59-competition-race"
   ]
 }

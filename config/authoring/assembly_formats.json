@@ -775,10 +775,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 8
       },
-      "declarations_sha256": "80246dc826cc5bfd9653d60fd71d9f80dc658c6668e6db8494274bcbeb4d8247",
+      "declarations_sha256": "c8fadd58e3ecdf3a773816c2e8c707721a115379dff1a2ed4d954a9e78d5d5fe",
       "labels": {
         "Ani_2PGoalMarker_": 0,
-        "byte_36FF4": 2
+        "CompGoal_MarkerLoopAnim": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -786,7 +786,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_36FF4",
+          "target": "CompGoal_MarkerLoopAnim",
           "base": "Ani_2PGoalMarker_"
         },
         {
@@ -806,21 +806,21 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 78
       },
-      "declarations_sha256": "a17388087babf9da8ebf3a089e41688416dd68eb3805a4bddcffdfbe12d7375b",
+      "declarations_sha256": "e22bb66321c7eda57b1744333519353b4b0af4c91e5192419531d64d79e3f405",
       "labels": {
         "Ani_2PItem_": 0,
-        "byte_36A70": 24,
-        "byte_36A73": 27,
-        "byte_36A76": 30,
-        "byte_36A79": 33,
-        "byte_36A7F": 39,
-        "byte_36A82": 42,
-        "byte_36A85": 45,
-        "byte_36A88": 48,
-        "byte_36A8B": 51,
-        "byte_36A91": 57,
-        "byte_36A9A": 66,
-        "byte_36A9F": 71
+        "CompetitionItem_AnimateSpeedIncreaseIcon": 24,
+        "CompetitionItem_AnimateSpeedDecreaseIcon": 27,
+        "CompItem_SwapIconAnim": 30,
+        "CompItem_RingIconAnim": 33,
+        "CompetitionItem_AnimateRollingHazardIdle": 39,
+        "CompItem_MomentumTrapIdleAnim": 42,
+        "CompItem_FlipLauncherIdleAnim": 45,
+        "CompetitionItem_AnimateEmptyPickupState": 48,
+        "CompItem_RingEffectAdvanceAnim": 51,
+        "CompItem_SharedEffectBlankBackstepAnim": 57,
+        "CompItem_LauncherContactEffectAnim": 66,
+        "CompItem_HazardEndAdvanceAnim": 71
       },
       "external_symbols": [],
       "blocks": [
@@ -828,84 +828,84 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_36A70",
+          "target": "CompetitionItem_AnimateSpeedIncreaseIcon",
           "base": "Ani_2PItem_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_36A73",
+          "target": "CompetitionItem_AnimateSpeedDecreaseIcon",
           "base": "Ani_2PItem_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_36A76",
+          "target": "CompItem_SwapIconAnim",
           "base": "Ani_2PItem_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_36A79",
+          "target": "CompItem_RingIconAnim",
           "base": "Ani_2PItem_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_36A7F",
+          "target": "CompetitionItem_AnimateRollingHazardIdle",
           "base": "Ani_2PItem_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_36A82",
+          "target": "CompItem_MomentumTrapIdleAnim",
           "base": "Ani_2PItem_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_36A85",
+          "target": "CompItem_FlipLauncherIdleAnim",
           "base": "Ani_2PItem_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_36A88",
+          "target": "CompetitionItem_AnimateEmptyPickupState",
           "base": "Ani_2PItem_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_36A8B",
+          "target": "CompItem_RingEffectAdvanceAnim",
           "base": "Ani_2PItem_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_36A91",
+          "target": "CompItem_SharedEffectBlankBackstepAnim",
           "base": "Ani_2PItem_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_36A9A",
+          "target": "CompItem_LauncherContactEffectAnim",
           "base": "Ani_2PItem_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_36A9F",
+          "target": "CompItem_HazardEndAdvanceAnim",
           "base": "Ani_2PItem_"
         },
         {
@@ -991,17 +991,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 236
       },
-      "declarations_sha256": "415c523ae1e78152e4ea16d2deb5acbf5042285b93b7fdb0ad83dcd1412f9967",
+      "declarations_sha256": "75affed1c51483a87a05abfc1b87a321e9f53242a5eac0177cafc517d617fa19",
       "labels": {
         "Ani_2PNeonDisplay_": 0,
-        "byte_3751E": 16,
-        "byte_37522": 20,
-        "byte_3754D": 63,
-        "byte_37550": 66,
-        "byte_37572": 100,
-        "byte_37594": 134,
-        "byte_375B6": 168,
-        "byte_375D8": 202
+        "RaceNeon_BlankBeforeCountdownAnim": 16,
+        "RaceNeon_CountdownAnim": 20,
+        "CompetitionNeon_AnimateEmptyIdle": 63,
+        "RaceNeon_FirstFinishAnim": 66,
+        "RaceNeon_AlternateFinishAnim": 100,
+        "RaceNeon_LateFinishAnim": 134,
+        "RaceNeon_BothFinishedAnim": 168,
+        "RaceNeon_TransitionOverlayAnim": 202
       },
       "external_symbols": [],
       "blocks": [
@@ -1009,56 +1009,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3751E",
+          "target": "RaceNeon_BlankBeforeCountdownAnim",
           "base": "Ani_2PNeonDisplay_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_37522",
+          "target": "RaceNeon_CountdownAnim",
           "base": "Ani_2PNeonDisplay_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3754D",
+          "target": "CompetitionNeon_AnimateEmptyIdle",
           "base": "Ani_2PNeonDisplay_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_37550",
+          "target": "RaceNeon_FirstFinishAnim",
           "base": "Ani_2PNeonDisplay_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_37572",
+          "target": "RaceNeon_AlternateFinishAnim",
           "base": "Ani_2PNeonDisplay_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_37594",
+          "target": "RaceNeon_LateFinishAnim",
           "base": "Ani_2PNeonDisplay_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_375B6",
+          "target": "RaceNeon_BothFinishedAnim",
           "base": "Ani_2PNeonDisplay_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_375D8",
+          "target": "RaceNeon_TransitionOverlayAnim",
           "base": "Ani_2PNeonDisplay_"
         },
         {
@@ -1120,11 +1120,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 20
       },
-      "declarations_sha256": "1aabc63b186d1e3f4925a1f520a117647e554b168ac71cdf48de0a41e431709f",
+      "declarations_sha256": "fc1ad1b0cc77ce5160505dccebca1cc1a66654ccb741914dc822a2a5442d2841",
       "labels": {
         "Map_2PBumper_": 0,
-        "Frame_2322F2": 4,
-        "Frame_2322FA": 12
+        "S3CompetitionBumperMapping_Frame00": 4,
+        "S3CompetitionBumperMapping_Frame01": 12
       },
       "external_symbols": [],
       "blocks": [
@@ -1132,14 +1132,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2322F2",
+          "target": "S3CompetitionBumperMapping_Frame00",
           "base": "Map_2PBumper_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2322FA",
+          "target": "S3CompetitionBumperMapping_Frame01",
           "base": "Map_2PBumper_"
         },
         {
@@ -1163,12 +1163,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 30
       },
-      "declarations_sha256": "961da85df6c2538efb6c18a890ad88bf89a57f566d4c91e3b0f302caa76a2667",
+      "declarations_sha256": "701c9ced3f7ada236bf266d685ba7e3cac032ff65a9b0d1eb1f53a79867c4cfe",
       "labels": {
         "Map_2PButton_": 0,
-        "Frame_22BD80": 6,
-        "Frame_22BD88": 14,
-        "Frame_22BD90": 22
+        "S3CompetitionButtonMapping_Frame00": 6,
+        "S3CompetitionButtonMapping_Frame01": 14,
+        "CompButton_DebugPreviewMap": 22
       },
       "external_symbols": [],
       "blocks": [
@@ -1176,21 +1176,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22BD80",
+          "target": "S3CompetitionButtonMapping_Frame00",
           "base": "Map_2PButton_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22BD88",
+          "target": "S3CompetitionButtonMapping_Frame01",
           "base": "Map_2PButton_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22BD90",
+          "target": "CompButton_DebugPreviewMap",
           "base": "Map_2PButton_"
         },
         {
@@ -1219,13 +1219,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 64
       },
-      "declarations_sha256": "781f2b02c529e65c4091c862bbae79308773a1b93d9d3936020eb7bd5bd44b8a",
+      "declarations_sha256": "905f7f8b58ce719394d3fe6f04eb9016088d34d344128ad6bf05b709beb32457",
       "labels": {
         "Map_2PGoalMarker_": 0,
-        "word_37002": 8,
-        "word_37010": 22,
-        "word_3701E": 36,
-        "word_3702C": 50
+        "CompetitionGoalMarker_FirstCyclePieces": 8,
+        "CompetitionGoalMarker_SecondCyclePieces": 22,
+        "CompetitionGoalMarker_ThirdCyclePieces": 36,
+        "CompetitionGoalMarker_FourthCyclePieces": 50
       },
       "external_symbols": [],
       "blocks": [
@@ -1233,28 +1233,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_37002",
+          "target": "CompetitionGoalMarker_FirstCyclePieces",
           "base": "Map_2PGoalMarker_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_37010",
+          "target": "CompetitionGoalMarker_SecondCyclePieces",
           "base": "Map_2PGoalMarker_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3701E",
+          "target": "CompetitionGoalMarker_ThirdCyclePieces",
           "base": "Map_2PGoalMarker_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3702C",
+          "target": "CompetitionGoalMarker_FourthCyclePieces",
           "base": "Map_2PGoalMarker_"
         },
         {
@@ -1288,41 +1288,41 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 314
       },
-      "declarations_sha256": "86834ddbd4634533ac87fff236b8d5a4f031d9eb4497bdec0d9a47756345b1a2",
+      "declarations_sha256": "ecdccc02555126ea8d016bca094454adf43f4a725edfdf91aa93c9563689c077",
       "labels": {
         "Map_2PItem_": 0,
-        "word_36AE6": 64,
-        "word_36AEE": 72,
-        "word_36AF6": 80,
-        "word_36AFE": 88,
-        "word_36B06": 96,
-        "word_36B0E": 104,
-        "word_36B16": 112,
-        "word_36B1E": 120,
-        "word_36B26": 128,
-        "word_36B2E": 136,
-        "word_36B36": 144,
-        "word_36B3E": 152,
-        "word_36B46": 160,
-        "word_36B4E": 168,
-        "word_36B56": 176,
-        "word_36B5E": 184,
-        "word_36B66": 192,
-        "word_36B6E": 200,
-        "word_36B76": 208,
-        "word_36B7E": 216,
-        "word_36B86": 224,
-        "word_36B8E": 232,
-        "word_36B96": 240,
-        "word_36B9E": 248,
-        "word_36BA6": 256,
-        "word_36BAE": 264,
-        "word_36BB6": 272,
-        "word_36BB8": 274,
-        "word_36BC0": 282,
-        "word_36BC8": 290,
-        "word_36BD0": 298,
-        "word_36BD8": 306
+        "CompetitionItem_SpeedIncreaseIconPieces": 64,
+        "CompetitionItem_SpeedDecreaseIconPieces": 72,
+        "CompItem_SwapIconMap": 80,
+        "CompItem_RingIconMap1": 88,
+        "CompItem_RingIconMap2": 96,
+        "CompItem_RingIconNarrowMap": 104,
+        "CompItem_MomentumTrapIconMap": 112,
+        "CompItem_FlipLauncherIdleMap": 120,
+        "CompItem_FlipLauncherContactMap": 128,
+        "CompItem_RingEffectMap1": 136,
+        "CompItem_RingEffectMap2": 144,
+        "CompItem_RingEffectMap3": 152,
+        "CompItem_RingEffectMap4": 160,
+        "CompItem_SharedEffectMap1": 168,
+        "CompItem_SharedEffectMap2": 176,
+        "CompItem_SharedEffectMap3": 184,
+        "CompItem_SharedEffectMap4": 192,
+        "CompetitionItem_RollingHazardIdlePieces": 200,
+        "CompItem_RetainedIconMap1": 208,
+        "CompItem_RetainedIconMap2": 216,
+        "CompItem_RetainedIconMap3": 224,
+        "CompItem_RetainedIconMap4": 232,
+        "CompItem_RetainedIconMap5": 240,
+        "CompItem_RetainedIconMap6": 248,
+        "CompItem_RetainedIconMap7": 256,
+        "CompItem_RingIconFlippedMap": 264,
+        "CompItem_EmptyAndSpentMap": 272,
+        "CompItem_HazardEndMap1": 274,
+        "CompItem_HazardEndMap2": 282,
+        "CompItem_HazardEndMap3": 290,
+        "CompItem_HazardEndMap4": 298,
+        "CompItem_HazardEndMap5": 306
       },
       "external_symbols": [],
       "blocks": [
@@ -1330,224 +1330,224 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36AE6",
+          "target": "CompetitionItem_SpeedIncreaseIconPieces",
           "base": "Map_2PItem_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36AEE",
+          "target": "CompetitionItem_SpeedDecreaseIconPieces",
           "base": "Map_2PItem_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36AF6",
+          "target": "CompItem_SwapIconMap",
           "base": "Map_2PItem_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36AFE",
+          "target": "CompItem_RingIconMap1",
           "base": "Map_2PItem_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36B06",
+          "target": "CompItem_RingIconMap2",
           "base": "Map_2PItem_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36B0E",
+          "target": "CompItem_RingIconNarrowMap",
           "base": "Map_2PItem_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36B16",
+          "target": "CompItem_MomentumTrapIconMap",
           "base": "Map_2PItem_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36B1E",
+          "target": "CompItem_FlipLauncherIdleMap",
           "base": "Map_2PItem_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36B26",
+          "target": "CompItem_FlipLauncherContactMap",
           "base": "Map_2PItem_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36B2E",
+          "target": "CompItem_RingEffectMap1",
           "base": "Map_2PItem_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36B36",
+          "target": "CompItem_RingEffectMap2",
           "base": "Map_2PItem_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36B3E",
+          "target": "CompItem_RingEffectMap3",
           "base": "Map_2PItem_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36B46",
+          "target": "CompItem_RingEffectMap4",
           "base": "Map_2PItem_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36B4E",
+          "target": "CompItem_SharedEffectMap1",
           "base": "Map_2PItem_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36B56",
+          "target": "CompItem_SharedEffectMap2",
           "base": "Map_2PItem_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36B5E",
+          "target": "CompItem_SharedEffectMap3",
           "base": "Map_2PItem_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36B66",
+          "target": "CompItem_SharedEffectMap4",
           "base": "Map_2PItem_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36B6E",
+          "target": "CompetitionItem_RollingHazardIdlePieces",
           "base": "Map_2PItem_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36B76",
+          "target": "CompItem_RetainedIconMap1",
           "base": "Map_2PItem_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36B7E",
+          "target": "CompItem_RetainedIconMap2",
           "base": "Map_2PItem_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36B86",
+          "target": "CompItem_RetainedIconMap3",
           "base": "Map_2PItem_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36B8E",
+          "target": "CompItem_RetainedIconMap4",
           "base": "Map_2PItem_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36B96",
+          "target": "CompItem_RetainedIconMap5",
           "base": "Map_2PItem_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36B9E",
+          "target": "CompItem_RetainedIconMap6",
           "base": "Map_2PItem_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36BA6",
+          "target": "CompItem_RetainedIconMap7",
           "base": "Map_2PItem_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36BAE",
+          "target": "CompItem_RingIconFlippedMap",
           "base": "Map_2PItem_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36BB6",
+          "target": "CompItem_EmptyAndSpentMap",
           "base": "Map_2PItem_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36BB8",
+          "target": "CompItem_HazardEndMap1",
           "base": "Map_2PItem_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36BC0",
+          "target": "CompItem_HazardEndMap2",
           "base": "Map_2PItem_"
         },
         {
           "offset": 58,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36BC8",
+          "target": "CompItem_HazardEndMap3",
           "base": "Map_2PItem_"
         },
         {
           "offset": 60,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36BD0",
+          "target": "CompItem_HazardEndMap4",
           "base": "Map_2PItem_"
         },
         {
           "offset": 62,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36BD8",
+          "target": "CompItem_HazardEndMap5",
           "base": "Map_2PItem_"
         },
         {
@@ -1721,13 +1721,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 130
       },
-      "declarations_sha256": "7adca2590f7a8e8d5dd0a1a10b4fedb530e7ca9d95a075d1f8bae14da0979f17",
+      "declarations_sha256": "fa6f55eed5acb3ad32ed686f5d6e2c1c7800e12772f845981f8ab2b245135ebb",
       "labels": {
         "Map_2PItemIcon_": 0,
-        "word_37F72": 8,
-        "word_37F8C": 34,
-        "word_37FAC": 66,
-        "word_37FCC": 98
+        "RaceItemHUD_EmptyBorderMap": 8,
+        "RaceItemHUD_SpeedUpMap": 34,
+        "RaceItemHUD_SlowdownMap": 66,
+        "RaceItemHUD_NonzeroRingsMap": 98
       },
       "external_symbols": [],
       "blocks": [
@@ -1735,28 +1735,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_37F72",
+          "target": "RaceItemHUD_EmptyBorderMap",
           "base": "Map_2PItemIcon_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_37F8C",
+          "target": "RaceItemHUD_SpeedUpMap",
           "base": "Map_2PItemIcon_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_37FAC",
+          "target": "RaceItemHUD_SlowdownMap",
           "base": "Map_2PItemIcon_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_37FCC",
+          "target": "RaceItemHUD_NonzeroRingsMap",
           "base": "Map_2PItemIcon_"
         },
         {
@@ -1790,19 +1790,19 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 100
       },
-      "declarations_sha256": "b21ef07faa4c464b3dee2b0b3a7a249603a0684cc3e60cd9677b6c5108cda04d",
+      "declarations_sha256": "818c35922683733915994e5930ebc946760faa8652e76d25a5128058aac6c7b6",
       "labels": {
         "Map_2PLapNumbers_": 0,
-        "word_370EA": 20,
-        "word_370F2": 28,
-        "word_370FA": 36,
-        "word_37102": 44,
-        "word_3710A": 52,
-        "word_37112": 60,
-        "word_3711A": 68,
-        "word_37122": 76,
-        "word_3712A": 84,
-        "word_37132": 92
+        "CompetitionLapDigit_ZeroPieces": 20,
+        "CompetitionLapDigit_OnePieces": 28,
+        "CompetitionLapDigit_TwoPieces": 36,
+        "CompetitionLapDigit_ThreePieces": 44,
+        "CompetitionLapDigit_FourPieces": 52,
+        "CompetitionLapDigit_FivePieces": 60,
+        "CompetitionLapDigit_SixPieces": 68,
+        "CompetitionLapDigit_SevenPieces": 76,
+        "CompetitionLapDigit_EightPieces": 84,
+        "CompetitionLapDigit_NinePieces": 92
       },
       "external_symbols": [],
       "blocks": [
@@ -1810,70 +1810,70 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_370EA",
+          "target": "CompetitionLapDigit_ZeroPieces",
           "base": "Map_2PLapNumbers_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_370F2",
+          "target": "CompetitionLapDigit_OnePieces",
           "base": "Map_2PLapNumbers_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_370FA",
+          "target": "CompetitionLapDigit_TwoPieces",
           "base": "Map_2PLapNumbers_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_37102",
+          "target": "CompetitionLapDigit_ThreePieces",
           "base": "Map_2PLapNumbers_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3710A",
+          "target": "CompetitionLapDigit_FourPieces",
           "base": "Map_2PLapNumbers_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_37112",
+          "target": "CompetitionLapDigit_FivePieces",
           "base": "Map_2PLapNumbers_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3711A",
+          "target": "CompetitionLapDigit_SixPieces",
           "base": "Map_2PLapNumbers_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_37122",
+          "target": "CompetitionLapDigit_SevenPieces",
           "base": "Map_2PLapNumbers_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3712A",
+          "target": "CompetitionLapDigit_EightPieces",
           "base": "Map_2PLapNumbers_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_37132",
+          "target": "CompetitionLapDigit_NinePieces",
           "base": "Map_2PLapNumbers_"
         },
         {
@@ -1937,28 +1937,28 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 1684
       },
-      "declarations_sha256": "a0fb4d11516d1fabf5abd3fe186cedff56ff402e6621de45621a7356aeea3a5b",
+      "declarations_sha256": "8ce64ac87cca190de2ab00d03929bea88c616c61248e8f266ecf5a1a815236bd",
       "labels": {
         "Map_2PNeonDisplay_": 0,
-        "word_37620": 38,
-        "word_3764C": 82,
-        "word_3767E": 132,
-        "word_37692": 152,
-        "word_376F4": 250,
-        "word_37798": 414,
-        "word_3780C": 530,
-        "word_3788C": 658,
-        "word_378D0": 726,
-        "word_37956": 860,
-        "word_37982": 904,
-        "word_379B4": 954,
-        "word_379C8": 974,
-        "word_37A2A": 1072,
-        "word_37ACE": 1236,
-        "word_37B42": 1352,
-        "word_37BC2": 1480,
-        "word_37C06": 1548,
-        "word_37C8C": 1682
+        "RaceNeon_Countdown1PrimaryMap": 38,
+        "RaceNeon_Countdown2PrimaryMap": 82,
+        "RaceNeon_Countdown3PrimaryMap": 132,
+        "CompetitionNeon_StartSignalPrimaryPieces": 152,
+        "RaceNeon_FirstFinishPrimaryMap": 250,
+        "RaceNeon_P2FinishPrimaryMap": 414,
+        "RaceNeon_LateFinishPrimaryMap": 530,
+        "RaceNeon_BothFinishedPrimaryMap": 658,
+        "RaceNeon_TransitionPrimaryMap": 726,
+        "RaceNeon_Countdown1AlternateMap": 860,
+        "RaceNeon_Countdown2AlternateMap": 904,
+        "RaceNeon_Countdown3AlternateMap": 954,
+        "RaceNeon_StartAlternateMap": 974,
+        "RaceNeon_FirstFinishAlternateMap": 1072,
+        "RaceNeon_P2FinishAlternateMap": 1236,
+        "RaceNeon_LateFinishAlternateMap": 1352,
+        "RaceNeon_BothFinishedAlternateMap": 1480,
+        "RaceNeon_TransitionAlternateMap": 1548,
+        "CompetitionNeon_EmptyDelayAndIdleFrame": 1682
       },
       "external_symbols": [],
       "blocks": [
@@ -1966,133 +1966,133 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_37620",
+          "target": "RaceNeon_Countdown1PrimaryMap",
           "base": "Map_2PNeonDisplay_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3764C",
+          "target": "RaceNeon_Countdown2PrimaryMap",
           "base": "Map_2PNeonDisplay_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3767E",
+          "target": "RaceNeon_Countdown3PrimaryMap",
           "base": "Map_2PNeonDisplay_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_37692",
+          "target": "CompetitionNeon_StartSignalPrimaryPieces",
           "base": "Map_2PNeonDisplay_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_376F4",
+          "target": "RaceNeon_FirstFinishPrimaryMap",
           "base": "Map_2PNeonDisplay_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_37798",
+          "target": "RaceNeon_P2FinishPrimaryMap",
           "base": "Map_2PNeonDisplay_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3780C",
+          "target": "RaceNeon_LateFinishPrimaryMap",
           "base": "Map_2PNeonDisplay_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3788C",
+          "target": "RaceNeon_BothFinishedPrimaryMap",
           "base": "Map_2PNeonDisplay_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_378D0",
+          "target": "RaceNeon_TransitionPrimaryMap",
           "base": "Map_2PNeonDisplay_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_37956",
+          "target": "RaceNeon_Countdown1AlternateMap",
           "base": "Map_2PNeonDisplay_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_37982",
+          "target": "RaceNeon_Countdown2AlternateMap",
           "base": "Map_2PNeonDisplay_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_379B4",
+          "target": "RaceNeon_Countdown3AlternateMap",
           "base": "Map_2PNeonDisplay_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_379C8",
+          "target": "RaceNeon_StartAlternateMap",
           "base": "Map_2PNeonDisplay_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_37A2A",
+          "target": "RaceNeon_FirstFinishAlternateMap",
           "base": "Map_2PNeonDisplay_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_37ACE",
+          "target": "RaceNeon_P2FinishAlternateMap",
           "base": "Map_2PNeonDisplay_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_37B42",
+          "target": "RaceNeon_LateFinishAlternateMap",
           "base": "Map_2PNeonDisplay_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_37BC2",
+          "target": "RaceNeon_BothFinishedAlternateMap",
           "base": "Map_2PNeonDisplay_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_37C06",
+          "target": "RaceNeon_TransitionAlternateMap",
           "base": "Map_2PNeonDisplay_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_37C8C",
+          "target": "CompetitionNeon_EmptyDelayAndIdleFrame",
           "base": "Map_2PNeonDisplay_"
         },
         {
@@ -2201,14 +2201,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 50
       },
-      "declarations_sha256": "493e8d8aa7648e499a83b38220eb8b8336b08c1bc66d128a995d5345dfcbbaa2",
+      "declarations_sha256": "e6e5b73c55a63ee3dbdfbe03b62da0c2d124682a5cd445ba98fc80a0942880ff",
       "labels": {
         "Map_2PPosition_": 0,
-        "word_380D0": 10,
-        "word_380D8": 18,
-        "word_380E0": 26,
-        "word_380E8": 34,
-        "word_380F0": 42
+        "RaceUnusedPos_InitialMap": 10,
+        "RaceUnusedPos_P1MarkerMap": 18,
+        "RaceUnusedPos_P2MarkerMap": 26,
+        "RaceUnusedPos_RetainedMap3": 34,
+        "RaceUnusedPos_RetainedMap4": 42
       },
       "external_symbols": [],
       "blocks": [
@@ -2216,35 +2216,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_380D0",
+          "target": "RaceUnusedPos_InitialMap",
           "base": "Map_2PPosition_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_380D8",
+          "target": "RaceUnusedPos_P1MarkerMap",
           "base": "Map_2PPosition_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_380E0",
+          "target": "RaceUnusedPos_P2MarkerMap",
           "base": "Map_2PPosition_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_380E8",
+          "target": "RaceUnusedPos_RetainedMap3",
           "base": "Map_2PPosition_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_380F0",
+          "target": "RaceUnusedPos_RetainedMap4",
           "base": "Map_2PPosition_"
         },
         {
@@ -2283,17 +2283,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 152
       },
-      "declarations_sha256": "3afb5b951865931dd930bce06e5f096db2182efb8dc490cfe208a6783e1c9152",
+      "declarations_sha256": "a9488133a45badf9d3eec2525f6b79becaf53f5c7f590512065bca6d67ae1196",
       "labels": {
         "Map_2PSpikes_": 0,
-        "word_24576": 16,
-        "word_2457E": 24,
-        "word_2458C": 38,
-        "word_245A0": 58,
-        "word_245BA": 84,
-        "word_245C2": 92,
-        "word_245D0": 106,
-        "word_245E4": 126
+        "SpikeMapping_CompetitionFrame00": 16,
+        "SpikeMapping_CompetitionFrame01": 24,
+        "SpikeMapping_CompetitionFrame02": 38,
+        "SpikeMapping_CompetitionFrame03": 58,
+        "SpikeMapping_CompetitionFrame04": 84,
+        "SpikeMapping_CompetitionFrame05": 92,
+        "SpikeMapping_CompetitionFrame06": 106,
+        "SpikeMapping_CompetitionFrame07": 126
       },
       "external_symbols": [],
       "blocks": [
@@ -2301,56 +2301,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_24576",
+          "target": "SpikeMapping_CompetitionFrame00",
           "base": "Map_2PSpikes_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2457E",
+          "target": "SpikeMapping_CompetitionFrame01",
           "base": "Map_2PSpikes_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2458C",
+          "target": "SpikeMapping_CompetitionFrame02",
           "base": "Map_2PSpikes_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_245A0",
+          "target": "SpikeMapping_CompetitionFrame03",
           "base": "Map_2PSpikes_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_245BA",
+          "target": "SpikeMapping_CompetitionFrame04",
           "base": "Map_2PSpikes_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_245C2",
+          "target": "SpikeMapping_CompetitionFrame05",
           "base": "Map_2PSpikes_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_245D0",
+          "target": "SpikeMapping_CompetitionFrame06",
           "base": "Map_2PSpikes_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_245E4",
+          "target": "SpikeMapping_CompetitionFrame07",
           "base": "Map_2PSpikes_"
         },
         {
@@ -84414,13 +84414,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 38
       },
-      "declarations_sha256": "a18fab24c5518f355d0f26619fb2f917216753de0103d595d81e8d32e88c32ab",
+      "declarations_sha256": "aa20f74c264ba50f63a7e91120ad04d2f1cc94d536d7db9c2d048424cc7292c3",
       "labels": {
         "Ani_BPZBalloon_": 0,
-        "byte_35E7C": 8,
-        "byte_35E8C": 24,
-        "byte_35E91": 29,
-        "byte_35E95": 33
+        "CommonBPZBalloon_IdleStandardAnimation": 8,
+        "BPZBalloon_UpperConeBounceAnim": 24,
+        "BPZBalloon_RadialBounceAnim": 29,
+        "BPZBalloon_RecoveryAnim": 33
       },
       "external_symbols": [],
       "blocks": [
@@ -84428,28 +84428,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_35E7C",
+          "target": "CommonBPZBalloon_IdleStandardAnimation",
           "base": "Ani_BPZBalloon_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_35E8C",
+          "target": "BPZBalloon_UpperConeBounceAnim",
           "base": "Ani_BPZBalloon_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_35E91",
+          "target": "BPZBalloon_RadialBounceAnim",
           "base": "Ani_BPZBalloon_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_35E95",
+          "target": "BPZBalloon_RecoveryAnim",
           "base": "Ani_BPZBalloon_"
         },
         {
@@ -84492,19 +84492,19 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 160
       },
-      "declarations_sha256": "3304efcaa7dc96f7b74634e345dfaa6c2605a46f889fe72a271e729b9c54def6",
+      "declarations_sha256": "fac046b45d9e6d24f3a0176eab9258480e0c37322c314936c86d6db07d3792a0",
       "labels": {
         "Map_BPZBalloon_": 0,
-        "word_35EAE": 20,
-        "word_35EBC": 34,
-        "word_35ECA": 48,
-        "word_35ED8": 62,
-        "word_35EE6": 76,
-        "word_35EF4": 90,
-        "word_35F02": 104,
-        "word_35F10": 118,
-        "word_35F1E": 132,
-        "word_35F32": 152
+        "CommonBPZBalloon_MapFrame00": 20,
+        "CommonBPZBalloon_MapFrame01": 34,
+        "CommonBPZBalloon_MapFrame02": 48,
+        "CommonBPZBalloon_MapFrame03": 62,
+        "CommonBPZBalloon_MapFrame04": 76,
+        "CommonBPZBalloon_MapFrame05": 90,
+        "CommonBPZBalloon_MapFrame06": 104,
+        "CommonBPZBalloon_MapFrame07": 118,
+        "CommonBPZBalloon_MapFrame08": 132,
+        "CommonBPZBalloon_MapFrame09": 152
       },
       "external_symbols": [],
       "blocks": [
@@ -84512,70 +84512,70 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_35EAE",
+          "target": "CommonBPZBalloon_MapFrame00",
           "base": "Map_BPZBalloon_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_35EBC",
+          "target": "CommonBPZBalloon_MapFrame01",
           "base": "Map_BPZBalloon_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_35ECA",
+          "target": "CommonBPZBalloon_MapFrame02",
           "base": "Map_BPZBalloon_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_35ED8",
+          "target": "CommonBPZBalloon_MapFrame03",
           "base": "Map_BPZBalloon_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_35EE6",
+          "target": "CommonBPZBalloon_MapFrame04",
           "base": "Map_BPZBalloon_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_35EF4",
+          "target": "CommonBPZBalloon_MapFrame05",
           "base": "Map_BPZBalloon_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_35F02",
+          "target": "CommonBPZBalloon_MapFrame06",
           "base": "Map_BPZBalloon_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_35F10",
+          "target": "CommonBPZBalloon_MapFrame07",
           "base": "Map_BPZBalloon_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_35F1E",
+          "target": "CommonBPZBalloon_MapFrame08",
           "base": "Map_BPZBalloon_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_35F32",
+          "target": "CommonBPZBalloon_MapFrame09",
           "base": "Map_BPZBalloon_"
         },
         {
@@ -84639,11 +84639,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 38
       },
-      "declarations_sha256": "b55ca19be3393f575070c3ad205d5f73724df61f025acff28c4e2cdc98ba02af",
+      "declarations_sha256": "3222c314bff5c98dad4a2c28f7376ec78ac8dac9627476fc471f7b5e31fc6466",
       "labels": {
         "Map_BPZElephantBlock_": 0,
-        "word_35D5E": 4,
-        "word_35D6C": 18
+        "BPZElephant_EmbeddedMapFrame0": 4,
+        "BPZElephant_EmbeddedMapFrame1": 18
       },
       "external_symbols": [],
       "blocks": [
@@ -84651,14 +84651,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_35D5E",
+          "target": "BPZElephant_EmbeddedMapFrame0",
           "base": "Map_BPZElephantBlock_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_35D6C",
+          "target": "BPZElephant_EmbeddedMapFrame1",
           "base": "Map_BPZElephantBlock_"
         },
         {
@@ -84682,11 +84682,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 60
       },
-      "declarations_sha256": "74e1af712ab0902ca0496918728c3a0d4859cee9e133375e924e5d6ff80de44d",
+      "declarations_sha256": "523bc8503a0250ffc90caf617a881a6cfa8586f874aea0b532f1fa84f0d0422b",
       "labels": {
         "Map_CGZBladePlatform_": 0,
-        "word_35BC4": 8,
-        "word_35BD2": 22
+        "CommonCGZBladePlatform_MapFrames00And02": 8,
+        "CommonCGZBladePlatform_MapFrames01And03": 22
       },
       "external_symbols": [],
       "blocks": [
@@ -84694,28 +84694,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_35BC4",
+          "target": "CommonCGZBladePlatform_MapFrames00And02",
           "base": "Map_CGZBladePlatform_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_35BD2",
+          "target": "CommonCGZBladePlatform_MapFrames01And03",
           "base": "Map_CGZBladePlatform_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_35BC4",
+          "target": "CommonCGZBladePlatform_MapFrames00And02",
           "base": "Map_CGZBladePlatform_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_35BD2",
+          "target": "CommonCGZBladePlatform_MapFrames01And03",
           "base": "Map_CGZBladePlatform_"
         },
         {
@@ -84739,12 +84739,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 48
       },
-      "declarations_sha256": "225d472682725a0e3d9458f43f26f3d20653dbe8f7c732e6fbb1aacfe5d67ee3",
+      "declarations_sha256": "ff2d63cd6ec441f8a15bfea989cf2730d37993c544e89df4e6c6c658a2f95916",
       "labels": {
         "Map_CGZFan_": 0,
-        "Frame_22F626": 6,
-        "Frame_22F634": 20,
-        "Frame_22F642": 34
+        "S3CGZFan_MapFrame00": 6,
+        "S3CGZFan_MapFrame01": 20,
+        "S3CGZFan_MapFrame02": 34
       },
       "external_symbols": [],
       "blocks": [
@@ -84752,21 +84752,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22F626",
+          "target": "S3CGZFan_MapFrame00",
           "base": "Map_CGZFan_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22F634",
+          "target": "S3CGZFan_MapFrame01",
           "base": "Map_CGZFan_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22F642",
+          "target": "S3CGZFan_MapFrame02",
           "base": "Map_CGZFan_"
         },
         {
@@ -90849,13 +90849,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 84
       },
-      "declarations_sha256": "949a5e2cda456470fe8a4d30eef64761366a4d7ad88774de3a058cf696fcf5fc",
+      "declarations_sha256": "7ecf1032484fd224e9f37b516f3876145ae365f84d2d7fdaa8018202d346674a",
       "labels": {
         "Ani_DPZDissolvingSandBar_": 0,
-        "byte_3604E": 8,
-        "byte_36054": 14,
-        "byte_3607B": 53,
-        "byte_3607F": 57
+        "CommonDPZSandBar_IdleStandardAnimation": 8,
+        "DPZSandBar_DissolveAnim": 14,
+        "DPZSandBar_AbsentHoldAnim": 53,
+        "DPZSandBar_RebuildAnim": 57
       },
       "external_symbols": [],
       "blocks": [
@@ -90863,28 +90863,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3604E",
+          "target": "CommonDPZSandBar_IdleStandardAnimation",
           "base": "Ani_DPZDissolvingSandBar_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_36054",
+          "target": "DPZSandBar_DissolveAnim",
           "base": "Ani_DPZDissolvingSandBar_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3607B",
+          "target": "DPZSandBar_AbsentHoldAnim",
           "base": "Ani_DPZDissolvingSandBar_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3607F",
+          "target": "DPZSandBar_RebuildAnim",
           "base": "Ani_DPZDissolvingSandBar_"
         },
         {
@@ -90922,11 +90922,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 20
       },
-      "declarations_sha256": "975cbbcab4d51ac1f1a99f8697cdfb51f02c50671db980b223dac6f10782be97",
+      "declarations_sha256": "037b7f2f6d960680cb7fafcb650112040559feedd4f0c7fcef83622b79a9f813",
       "labels": {
         "Map_DPZButton_": 0,
-        "word_36354": 4,
-        "word_3635C": 12
+        "CommonDPZButton_UnpressedMapFrame": 4,
+        "CommonDPZButton_PressedMapFrame": 12
       },
       "external_symbols": [],
       "blocks": [
@@ -90934,14 +90934,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36354",
+          "target": "CommonDPZButton_UnpressedMapFrame",
           "base": "Map_DPZButton_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3635C",
+          "target": "CommonDPZButton_PressedMapFrame",
           "base": "Map_DPZButton_"
         },
         {
@@ -90965,32 +90965,32 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 520
       },
-      "declarations_sha256": "e33f5f68adbb228b726678c1bf41d0a181fb100415da26ae90e788fa22973ef4",
+      "declarations_sha256": "696801cae891ebf2205d17092cb782cf4f6ad4ad406fe4c7fbe0018326c8ed63",
       "labels": {
         "Map_DPZDissolvingSandBar_": 0,
         "Map_DPZDissolvingSandBar2": 60,
         "Map_DPZDissolvingSandBar2_": 60,
-        "word_36110": 118,
-        "word_3611E": 132,
-        "word_3612C": 146,
-        "word_3613A": 160,
-        "word_36148": 174,
-        "word_36156": 188,
-        "word_36164": 202,
-        "word_36172": 216,
-        "word_36180": 230,
-        "word_3618E": 244,
-        "word_3619C": 258,
-        "word_361B6": 284,
-        "word_361D0": 310,
-        "word_361EA": 336,
-        "word_36204": 362,
-        "word_3621E": 388,
-        "word_36238": 414,
-        "word_36252": 440,
-        "word_3626C": 466,
-        "word_36286": 492,
-        "word_362A0": 518
+        "CommonDPZSandBar_StandardMapFrame00": 118,
+        "CommonDPZSandBar_StandardMapFrame01": 132,
+        "CommonDPZSandBar_StandardMapFrame02": 146,
+        "CommonDPZSandBar_StandardMapFrame03": 160,
+        "CommonDPZSandBar_StandardMapFrames04To07": 174,
+        "CommonDPZSandBar_StandardMapFrames08To0B": 188,
+        "CommonDPZSandBar_StandardMapFrames0CTo0F": 202,
+        "CommonDPZSandBar_StandardMapFrames10To13": 216,
+        "CommonDPZSandBar_StandardMapFrames14To17": 230,
+        "CommonDPZSandBar_StandardMapFrames18To1B": 244,
+        "CommonDPZSandBar_WideMapFrame00": 258,
+        "CommonDPZSandBar_WideMapFrame01": 284,
+        "CommonDPZSandBar_WideMapFrame02": 310,
+        "CommonDPZSandBar_WideMapFrame03": 336,
+        "CommonDPZSandBar_WideMapFrames04To07": 362,
+        "CommonDPZSandBar_WideMapFrames08To0B": 388,
+        "CommonDPZSandBar_WideMapFrames0CTo0F": 414,
+        "CommonDPZSandBar_WideMapFrames10To13": 440,
+        "CommonDPZSandBar_WideMapFrames14To17": 466,
+        "CommonDPZSandBar_WideMapFrames18To1B": 492,
+        "CommonDPZSandBar_BlankMapFrame": 518
       },
       "external_symbols": [],
       "blocks": [
@@ -90998,413 +90998,413 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36110",
+          "target": "CommonDPZSandBar_StandardMapFrame00",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3611E",
+          "target": "CommonDPZSandBar_StandardMapFrame01",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3612C",
+          "target": "CommonDPZSandBar_StandardMapFrame02",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3613A",
+          "target": "CommonDPZSandBar_StandardMapFrame03",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36148",
+          "target": "CommonDPZSandBar_StandardMapFrames04To07",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36148",
+          "target": "CommonDPZSandBar_StandardMapFrames04To07",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36148",
+          "target": "CommonDPZSandBar_StandardMapFrames04To07",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36148",
+          "target": "CommonDPZSandBar_StandardMapFrames04To07",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36156",
+          "target": "CommonDPZSandBar_StandardMapFrames08To0B",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36156",
+          "target": "CommonDPZSandBar_StandardMapFrames08To0B",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36156",
+          "target": "CommonDPZSandBar_StandardMapFrames08To0B",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36156",
+          "target": "CommonDPZSandBar_StandardMapFrames08To0B",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36164",
+          "target": "CommonDPZSandBar_StandardMapFrames0CTo0F",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36164",
+          "target": "CommonDPZSandBar_StandardMapFrames0CTo0F",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36164",
+          "target": "CommonDPZSandBar_StandardMapFrames0CTo0F",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36164",
+          "target": "CommonDPZSandBar_StandardMapFrames0CTo0F",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36172",
+          "target": "CommonDPZSandBar_StandardMapFrames10To13",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36172",
+          "target": "CommonDPZSandBar_StandardMapFrames10To13",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36172",
+          "target": "CommonDPZSandBar_StandardMapFrames10To13",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36172",
+          "target": "CommonDPZSandBar_StandardMapFrames10To13",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36180",
+          "target": "CommonDPZSandBar_StandardMapFrames14To17",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36180",
+          "target": "CommonDPZSandBar_StandardMapFrames14To17",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36180",
+          "target": "CommonDPZSandBar_StandardMapFrames14To17",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36180",
+          "target": "CommonDPZSandBar_StandardMapFrames14To17",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3618E",
+          "target": "CommonDPZSandBar_StandardMapFrames18To1B",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3618E",
+          "target": "CommonDPZSandBar_StandardMapFrames18To1B",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3618E",
+          "target": "CommonDPZSandBar_StandardMapFrames18To1B",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3618E",
+          "target": "CommonDPZSandBar_StandardMapFrames18To1B",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_362A0",
+          "target": "CommonDPZSandBar_BlankMapFrame",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 58,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3619C",
+          "target": "CommonDPZSandBar_WideMapFrame00",
           "base": "Map_DPZDissolvingSandBar_"
         },
         {
           "offset": 60,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3619C",
+          "target": "CommonDPZSandBar_WideMapFrame00",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 62,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_361B6",
+          "target": "CommonDPZSandBar_WideMapFrame01",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 64,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_361D0",
+          "target": "CommonDPZSandBar_WideMapFrame02",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 66,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_361EA",
+          "target": "CommonDPZSandBar_WideMapFrame03",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 68,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36204",
+          "target": "CommonDPZSandBar_WideMapFrames04To07",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 70,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36204",
+          "target": "CommonDPZSandBar_WideMapFrames04To07",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 72,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36204",
+          "target": "CommonDPZSandBar_WideMapFrames04To07",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 74,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36204",
+          "target": "CommonDPZSandBar_WideMapFrames04To07",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 76,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3621E",
+          "target": "CommonDPZSandBar_WideMapFrames08To0B",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 78,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3621E",
+          "target": "CommonDPZSandBar_WideMapFrames08To0B",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 80,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3621E",
+          "target": "CommonDPZSandBar_WideMapFrames08To0B",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 82,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3621E",
+          "target": "CommonDPZSandBar_WideMapFrames08To0B",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 84,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36238",
+          "target": "CommonDPZSandBar_WideMapFrames0CTo0F",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 86,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36238",
+          "target": "CommonDPZSandBar_WideMapFrames0CTo0F",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 88,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36238",
+          "target": "CommonDPZSandBar_WideMapFrames0CTo0F",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 90,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36238",
+          "target": "CommonDPZSandBar_WideMapFrames0CTo0F",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 92,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36252",
+          "target": "CommonDPZSandBar_WideMapFrames10To13",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 94,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36252",
+          "target": "CommonDPZSandBar_WideMapFrames10To13",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 96,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36252",
+          "target": "CommonDPZSandBar_WideMapFrames10To13",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 98,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36252",
+          "target": "CommonDPZSandBar_WideMapFrames10To13",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 100,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3626C",
+          "target": "CommonDPZSandBar_WideMapFrames14To17",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 102,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3626C",
+          "target": "CommonDPZSandBar_WideMapFrames14To17",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 104,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3626C",
+          "target": "CommonDPZSandBar_WideMapFrames14To17",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 106,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3626C",
+          "target": "CommonDPZSandBar_WideMapFrames14To17",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 108,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36286",
+          "target": "CommonDPZSandBar_WideMapFrames18To1B",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 110,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36286",
+          "target": "CommonDPZSandBar_WideMapFrames18To1B",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 112,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36286",
+          "target": "CommonDPZSandBar_WideMapFrames18To1B",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 114,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_36286",
+          "target": "CommonDPZSandBar_WideMapFrames18To1B",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
           "offset": 116,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_362A0",
+          "target": "CommonDPZSandBar_BlankMapFrame",
           "base": "Map_DPZDissolvingSandBar2_"
         },
         {
@@ -91523,13 +91523,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 40
       },
-      "declarations_sha256": "c9cc9d53cec20a9d130b2e43daf6f1ddd8d030c2a8ea95b17563d04560acc702",
+      "declarations_sha256": "cdaac6c7e856303ff53ca016713c7a8c6ff17fb0b8c2c0beb189c78b9313bb17",
       "labels": {
         "Map_EMZDripper_": 0,
-        "word_3825A": 8,
-        "word_38262": 16,
-        "word_3826A": 24,
-        "word_38272": 32
+        "EMZDripperMap_Frame00": 8,
+        "EMZDripperMap_Frame01": 16,
+        "EMZDripperMap_Frame02": 24,
+        "EMZDripperMap_Frame03": 32
       },
       "external_symbols": [],
       "blocks": [
@@ -91537,28 +91537,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3825A",
+          "target": "EMZDripperMap_Frame00",
           "base": "Map_EMZDripper_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_38262",
+          "target": "EMZDripperMap_Frame01",
           "base": "Map_EMZDripper_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3826A",
+          "target": "EMZDripperMap_Frame02",
           "base": "Map_EMZDripper_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_38272",
+          "target": "EMZDripperMap_Frame03",
           "base": "Map_EMZDripper_"
         },
         {
@@ -91592,13 +91592,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 48
       },
-      "declarations_sha256": "af57754a77c5534134dc6b87df502b4323c68f2971cc8fbc932c46cf86b47ede",
+      "declarations_sha256": "74f364968dcc9519d27f862d2e7944c173841ec459f0d693ba30761a5fc9e3df",
       "labels": {
         "Map_EMZRock_": 0,
-        "Frame_21DDFC": 16,
-        "Frame_21DE04": 24,
-        "Frame_21DE0C": 32,
-        "Frame_21DE14": 40
+        "S3EMZRockMap_Frame00": 16,
+        "S3EMZRockMap_Frame01_03_05": 24,
+        "S3EMZRockMap_Frame02_04_06": 32,
+        "S3EMZRockMap_Frame07": 40
       },
       "external_symbols": [],
       "blocks": [
@@ -91606,56 +91606,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21DDFC",
+          "target": "S3EMZRockMap_Frame00",
           "base": "Map_EMZRock_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21DE04",
+          "target": "S3EMZRockMap_Frame01_03_05",
           "base": "Map_EMZRock_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21DE0C",
+          "target": "S3EMZRockMap_Frame02_04_06",
           "base": "Map_EMZRock_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21DE04",
+          "target": "S3EMZRockMap_Frame01_03_05",
           "base": "Map_EMZRock_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21DE0C",
+          "target": "S3EMZRockMap_Frame02_04_06",
           "base": "Map_EMZRock_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21DE04",
+          "target": "S3EMZRockMap_Frame01_03_05",
           "base": "Map_EMZRock_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21DE0C",
+          "target": "S3EMZRockMap_Frame02_04_06",
           "base": "Map_EMZRock_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21DE14",
+          "target": "S3EMZRockMap_Frame07",
           "base": "Map_EMZRock_"
         },
         {

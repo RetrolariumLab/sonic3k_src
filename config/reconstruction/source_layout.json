@@ -20325,7 +20325,7 @@
       "responsibility": "Desert Palace button state, trigger behavior and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 59,
+      "physical_lines": 60,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "s3.s",
@@ -20520,7 +20520,7 @@
       "responsibility": "Competition item selection, collection, effects, object motion and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 671,
+      "physical_lines": 673,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "s3.s",
@@ -20560,7 +20560,7 @@
       "responsibility": "Competition neon display animation, start countdown, race state and finish presentation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 362,
+      "physical_lines": 364,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "s3.s",
@@ -20612,7 +20612,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_37220",
+          "name": "S3RaceHUD_InitP1TimeWidget",
           "kind": "terminal-tail",
           "reason": "The complete live time display ends with a draw-service tail call followed by its private mapping and digit lookup data.",
           "origin_first_line": 4676,
@@ -20620,7 +20620,7 @@
           "origin_end_line": 4844
         },
         {
-          "name": "loc_37454",
+          "name": "S3RaceHUD_InitItemWidget",
           "kind": "terminal-tail",
           "reason": "The complete item-icon state ends with an unconditional draw-service tail call before its mapping resources.",
           "origin_first_line": 4847,
@@ -20628,7 +20628,7 @@
           "origin_end_line": 4907
         },
         {
-          "name": "loc_375B0",
+          "name": "S3RaceHUD_InitP2PositionWidget",
           "kind": "terminal-tail",
           "reason": "The player-position display branches back to its shared update state and has only checked mapping data after that terminal branch.",
           "origin_first_line": 4925,
@@ -20791,7 +20791,7 @@
       "responsibility": "Desert Palace button state, trigger behavior and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 59,
+      "physical_lines": 60,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "sonic3k.s",
@@ -20946,7 +20946,7 @@
       "responsibility": "Competition item selection, collection, effects, object motion and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 671,
+      "physical_lines": 673,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "sonic3k.s",
@@ -20976,7 +20976,7 @@
       "responsibility": "Competition neon display animation, start countdown, race state and finish presentation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 362,
+      "physical_lines": 364,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "sonic3k.s",
@@ -21018,7 +21018,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_37C8E",
+          "name": "SKRaceHUD_InitP1TimeWidget",
           "kind": "terminal-tail",
           "reason": "The complete live time display ends with a draw-service tail call followed by its private mapping and digit lookup data.",
           "origin_first_line": 4689,
@@ -21026,7 +21026,7 @@
           "origin_end_line": 4857
         },
         {
-          "name": "loc_37EC2",
+          "name": "SKRaceHUD_InitItemWidget",
           "kind": "terminal-tail",
           "reason": "The complete item-icon state ends with an unconditional draw-service tail call before its mapping resources.",
           "origin_first_line": 4860,
@@ -21034,7 +21034,7 @@
           "origin_end_line": 4920
         },
         {
-          "name": "loc_3801E",
+          "name": "SKRaceHUD_InitP2PositionWidget",
           "kind": "terminal-tail",
           "reason": "The player-position display branches back to its shared update state and has only checked mapping data after that terminal branch.",
           "origin_first_line": 4938,
@@ -59126,7 +59126,7 @@
       "responsibility": "Endless Mine dripper timing, water-drop creation and sprite resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 126,
+      "physical_lines": 127,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "s3.s",
@@ -59171,7 +59171,7 @@
       "responsibility": "Endless Mine dripper timing, water-drop creation and sprite resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 126,
+      "physical_lines": 127,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "sonic3k.s",

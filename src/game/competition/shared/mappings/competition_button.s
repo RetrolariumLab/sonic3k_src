@@ -1,12 +1,12 @@
 ; Data owner: game/competition/shared/2p_zone
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_2PButton_:
-                dc.w    Frame_22BD80-Map_2PButton_
-                dc.w    Frame_22BD88-Map_2PButton_
-                dc.w    Frame_22BD90-Map_2PButton_
-Frame_22BD80:   dc.w    1
+                dc.w    S3CompetitionButtonMapping_Frame00-Map_2PButton_
+                dc.w    S3CompetitionButtonMapping_Frame01-Map_2PButton_
+                dc.w    CompButton_DebugPreviewMap-Map_2PButton_
+S3CompetitionButtonMapping_Frame00: dc.w    1
                 dc.b    $F8,  8,  0, $D,$FF,$F4
-Frame_22BD88:   dc.w    1
+S3CompetitionButtonMapping_Frame01: dc.w    1
                 dc.b    $F8,  8,  0,$10,$FF,$F4
-Frame_22BD90:   dc.w    1
+CompButton_DebugPreviewMap: dc.w    1
                 dc.b    $FC,  8,  0, $D,$FF,$F4

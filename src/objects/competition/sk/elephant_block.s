@@ -22,17 +22,17 @@ Obj_BPZElephantBlock:
                 move.w  d0,$38(a0)
                 bset    #7,status(a0)
                 btst    #0,status(a0)
-                beq.s   loc_35C6C
+                beq.s   SKBPZElephant_InstallLeftExtensionUpdate
                 move.w  d0,$34(a0)
                 move.b  #1,$3A(a0)
-                move.l  #loc_35CCA,(a0)
-                bra.w   loc_35CCA
+                move.l  #SKBPZElephant_OscillateAndBuildRightSide,(a0)
+                bra.w   SKBPZElephant_OscillateAndBuildRightSide
 ; ---------------------------------------------------------------------------
 
-loc_35C6C:
-                move.l  #loc_35C72,(a0)
+SKBPZElephant_InstallLeftExtensionUpdate:
+                move.l  #SKBPZElephant_OscillateAndBuildLeftSide,(a0)
 
-loc_35C72:
+SKBPZElephant_OscillateAndBuildLeftSide:
                 bsr.w   SKCompElephant_TickExtension
                 lea     sub2_x_pos(a0),a2
                 move.w  $30(a0),d0
@@ -48,10 +48,10 @@ loc_35C72:
                 move.b  d1,width_pixels(a0)
                 move.w  #0,4(a2)
                 cmpi.w  #$20,d1
-                blo.s   loc_35CAC
+                blo.s   SKBPZElephant_CollideAndDrawLeftSide
                 move.w  #1,4(a2)
 
-loc_35CAC:
+SKBPZElephant_CollideAndDrawLeftSide:
                 addi.w  #7,d1
                 moveq   #0,d2
                 move.b  height_pixels(a0),d2
@@ -62,7 +62,7 @@ loc_35CAC:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_35CCA:
+SKBPZElephant_OscillateAndBuildRightSide:
                 bsr.w   SKCompElephant_TickExtension
                 lea     sub2_x_pos(a0),a2
                 move.w  $30(a0),d0
@@ -78,10 +78,10 @@ loc_35CCA:
                 move.b  d1,width_pixels(a0)
                 move.w  #0,4(a2)
                 cmpi.w  #$20,d1
-                blo.s   loc_35D04
+                blo.s   SKBPZElephant_CollideAndDrawRightSide
                 move.w  #1,4(a2)
 
-loc_35D04:
+SKBPZElephant_CollideAndDrawRightSide:
                 addi.w  #7,d1
                 moveq   #0,d2
                 move.b  height_pixels(a0),d2
@@ -96,25 +96,25 @@ loc_35D04:
 ; Move by half a pixel per step and reverse at zero or the subtype-scaled maximum
 SKCompElephant_TickExtension:
                 tst.b   $3A(a0)
-                bne.s   loc_35D44
+                bne.s   SKBPZElephant_RetractAndReverseAtZero
                 move.w  $38(a0),d0
                 addi.w  #$80,$34(a0)
                 cmp.w   $34(a0),d0
-                bhi.s   loc_35D42
+                bhi.s   SKBPZElephant_ExtendOrClampReturn
                 move.w  d0,$34(a0)
                 move.b  #1,$3A(a0)
 
-loc_35D42:
-                bra.s   locret_35D58
+SKBPZElephant_ExtendOrClampReturn:
+                bra.s   SKBPZElephant_OscillatorReturn
 ; ---------------------------------------------------------------------------
 
-loc_35D44:
+SKBPZElephant_RetractAndReverseAtZero:
                 subi.w  #$80,$34(a0)
-                bhi.s   locret_35D58
+                bhi.s   SKBPZElephant_OscillatorReturn
                 move.w  #0,$34(a0)
                 move.b  #0,$3A(a0)
 
-locret_35D58:
+SKBPZElephant_OscillatorReturn:
                 rts
 ; End of function SKCompElephant_TickExtension
 

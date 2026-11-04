@@ -482,7 +482,7 @@ S3CompAppendTwoRowNumericGlyphColumn:
 ; =============== S U B R O U T I N E =======================================
 
 S3CompConvertTimerFrameByteToHundredths:
-                lea     (byte_373E4).l,a1
+                lea     (S3RaceHUD_FrameToHundredthsTable).l,a1
                 moveq   #0,d0
                 move.b  d6,d0
                 move.b  (a1,d0.w),d6

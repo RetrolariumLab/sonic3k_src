@@ -22,17 +22,17 @@ Obj_BPZElephantBlock:
                 move.w  d0,$38(a0)
                 bset    #7,status(a0)
                 btst    #0,status(a0)
-                beq.s   loc_351FE
+                beq.s   S3BPZElephant_InstallLeftExtensionUpdate
                 move.w  d0,$34(a0)
                 move.b  #1,$3A(a0)
-                move.l  #loc_3525C,(a0)
-                bra.w   loc_3525C
+                move.l  #S3BPZElephant_OscillateAndBuildRightSide,(a0)
+                bra.w   S3BPZElephant_OscillateAndBuildRightSide
 ; ---------------------------------------------------------------------------
 
-loc_351FE:
-                move.l  #loc_35204,(a0)
+S3BPZElephant_InstallLeftExtensionUpdate:
+                move.l  #S3BPZElephant_OscillateAndBuildLeftSide,(a0)
 
-loc_35204:
+S3BPZElephant_OscillateAndBuildLeftSide:
                 bsr.w   S3CompElephant_TickExtension
                 lea     sub2_x_pos(a0),a2
                 move.w  $30(a0),d0
@@ -48,10 +48,10 @@ loc_35204:
                 move.b  d1,width_pixels(a0)
                 move.w  #0,4(a2)
                 cmpi.w  #$20,d1
-                blo.s   loc_3523E
+                blo.s   S3BPZElephant_CollideAndDrawLeftSide
                 move.w  #1,4(a2)
 
-loc_3523E:
+S3BPZElephant_CollideAndDrawLeftSide:
                 addi.w  #7,d1
                 moveq   #0,d2
                 move.b  height_pixels(a0),d2
@@ -62,7 +62,7 @@ loc_3523E:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3525C:
+S3BPZElephant_OscillateAndBuildRightSide:
                 bsr.w   S3CompElephant_TickExtension
                 lea     sub2_x_pos(a0),a2
                 move.w  $30(a0),d0
@@ -78,10 +78,10 @@ loc_3525C:
                 move.b  d1,width_pixels(a0)
                 move.w  #0,4(a2)
                 cmpi.w  #$20,d1
-                blo.s   loc_35296
+                blo.s   S3BPZElephant_CollideAndDrawRightSide
                 move.w  #1,4(a2)
 
-loc_35296:
+S3BPZElephant_CollideAndDrawRightSide:
                 addi.w  #7,d1
                 moveq   #0,d2
                 move.b  height_pixels(a0),d2
@@ -96,25 +96,25 @@ loc_35296:
 ; Move by half a pixel per step and reverse at zero or the subtype-scaled maximum
 S3CompElephant_TickExtension:
                 tst.b   $3A(a0)
-                bne.s   loc_352D6
+                bne.s   S3BPZElephant_RetractAndReverseAtZero
                 move.w  $38(a0),d0
                 addi.w  #$80,$34(a0)
                 cmp.w   $34(a0),d0
-                bhi.s   loc_352D4
+                bhi.s   S3BPZElephant_ExtendOrClampReturn
                 move.w  d0,$34(a0)
                 move.b  #1,$3A(a0)
 
-loc_352D4:
-                bra.s   locret_352EA
+S3BPZElephant_ExtendOrClampReturn:
+                bra.s   S3BPZElephant_OscillatorReturn
 ; ---------------------------------------------------------------------------
 
-loc_352D6:
+S3BPZElephant_RetractAndReverseAtZero:
                 subi.w  #$80,$34(a0)
-                bhi.s   locret_352EA
+                bhi.s   S3BPZElephant_OscillatorReturn
                 move.w  #0,$34(a0)
                 move.b  #0,$3A(a0)
 
-locret_352EA:
+S3BPZElephant_OscillatorReturn:
                 rts
 ; End of function S3CompElephant_TickExtension
 

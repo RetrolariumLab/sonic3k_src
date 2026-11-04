@@ -1293,9 +1293,15 @@
       "commits": ["071eea7d747dbd4635f6dc41b76816d2e7c8984c"]
     },
     {
-      "id": "current-shorten-58-competition-ui",
+      "id": "change-001d8b688fc9",
       "kind": "source_or_tooling",
       "summary": "Apply 260 reviewed short labels for competition ui.",
+      "commits": ["001d8b688fc9422f7243854c153a3c4ccd950bd6"]
+    },
+    {
+      "id": "current-shorten-59-competition-race",
+      "kind": "source_or_tooling",
+      "summary": "Apply 558 reviewed short labels for competition race.",
       "commits": ["release-commit"]
     }
   ],

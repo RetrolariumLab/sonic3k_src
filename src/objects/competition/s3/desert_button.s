@@ -10,9 +10,9 @@ Obj_DPZButton:
                 move.w  #$280,priority(a0)
                 move.b  #$C,width_pixels(a0)
                 move.b  #8,height_pixels(a0)
-                move.l  #loc_35860,(a0)
+                move.l  #S3DPZButton_CollideAndSelectTrigger,(a0)
 
-loc_35860:
+S3DPZButton_CollideAndSelectTrigger:
                 move.w  #$C,d1
                 move.w  #2,d3
                 move.w  x_pos(a0),d4
@@ -26,32 +26,33 @@ loc_35860:
                 moveq   #0,d3
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                bne.s   loc_358A2
+                bne.s   S3DPZButton_TestWholeTriggerByte
                 bclr    d3,(a3)
                 move.l  #$2E000A,(a2)
-                bra.s   loc_358DC
+                bra.s   S3DPZButton_QueueButtonDraw
 ; ---------------------------------------------------------------------------
 
-loc_358A2:
+; The press sound checks all eight bits before setting the chosen trigger bit
+S3DPZButton_TestWholeTriggerByte:
                 tst.b   (a3)
-                bne.s   loc_358B4
+                bne.s   S3DPZButton_SetTriggerAndBlinkPalette
                 moveq   #signextendB(sfx_Switch),d0
                 jsr     (Play_SFX).l
                 move.b  #0,anim_frame_timer(a0)
 
-loc_358B4:
+S3DPZButton_SetTriggerAndBlinkPalette:
                 bset    d3,(a3)
                 move.b  #1,mapping_frame(a0)
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_358DC
+                bpl.s   S3DPZButton_QueueButtonDraw
                 move.b  #3,anim_frame_timer(a0)
                 move.w  (a2),d0
                 move.l  #$2E000A,(a2)
                 cmpi.w  #$2E,d0
-                bne.s   loc_358DC
+                bne.s   S3DPZButton_QueueButtonDraw
                 move.l  #$C2E0A0E,(a2)
 
-loc_358DC:
+S3DPZButton_QueueButtonDraw:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_DPZButton:
