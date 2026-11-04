@@ -148,17 +148,17 @@ SndDrvInit:
                 lea     (Z80_RAM).l,a1
                 move.w  #(Size_of_Snd_driver_guess+Size_of_Snd_driver2_guess+$BC)-1,d0  ; Preserve the original $BC extra bytes beyond the driver sections
 
-S3Device_CopySoundDriverAndRetainedExtraPaddingToZ80Ram:
+S3Device_CopyZ80Driver:
                 move.b  (a0)+,(a1)+
-                dbf     d0,S3Device_CopySoundDriverAndRetainedExtraPaddingToZ80Ram
+                dbf     d0,S3Device_CopyZ80Driver
 ; Load default variables
                 lea     (Z80_DefaultVariables).l,a0
                 lea     (Z80_RAM+zDataStart).l,a1
                 move.w  #Z80_DefaultVariables_end-Z80_DefaultVariables-1,d0
 
-S3Device_CopySixteenDefaultZ80VariableBytes:
+S3Device_CopyZ80Defaults:
                 move.b  (a0)+,(a1)+
-                dbf     d0,S3Device_CopySixteenDefaultZ80VariableBytes
+                dbf     d0,S3Device_CopyZ80Defaults
 ; Detect PAL region consoles
                 btst    #6,(Graphics_flags).w
                 beq.s   S3Device_PulseZ80ResetAndReleaseSoundBus
@@ -228,17 +228,17 @@ Play_SFX_Local:
 Play_SFX:
                 stopZ80
                 cmp.b   (Z80_RAM+zSFXNumber0).l,d0
-                beq.s   S3Device_ReleaseZ80BusAfterSfxRequestOrDuplicate
+                beq.s   S3Device_ReleaseSFXBus
                 tst.b   (Z80_RAM+zSFXNumber0).l
-                bne.s   S3Device_OverwriteSecondarySfxRequestWhenPrimaryOccupied
+                bne.s   S3Device_WriteSecondarySFX
                 move.b  d0,(Z80_RAM+zSFXNumber0).l
                 startZ80
                 rts
 
-S3Device_OverwriteSecondarySfxRequestWhenPrimaryOccupied:
+S3Device_WriteSecondarySFX:
                 move.b  d0,(Z80_RAM+zSFXNumber1).l
 
-S3Device_ReleaseZ80BusAfterSfxRequestOrDuplicate:
+S3Device_ReleaseSFXBus:
                 startZ80
 
 Play_SFX_Done:

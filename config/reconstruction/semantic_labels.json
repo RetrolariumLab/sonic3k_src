@@ -73,7 +73,7 @@
           "profiles": ["s3-eu", "s3-jp", "s3-us"]
         }
       ],
-      "destination_sha256": "6f023c9fc39fe687b3a34ff39e71d86a41967f5c5d21acacacffa5b3e99cd646"
+      "destination_sha256": "e701f5b350ad7d2417ffd2f1334c928b47d98cf077e9ec57a37b158e40631b5a"
     },
     {
       "id": "03-object-runtime",

@@ -88,10 +88,10 @@ ErrorTrap:
 EntryPoint:
                 lea     (System_stack).w,sp
                 tst.l   (HW_Port_1_Control-1).l
-                bne.s   S3Boot_ChooseSoftResetFromInheritedPortTestFlags
+                bne.s   S3Boot_CheckResetFlags
                 tst.w   (HW_Expansion_Control-1).l
 
-S3Boot_ChooseSoftResetFromInheritedPortTestFlags:
+S3Boot_CheckResetFlags:
                 bne.s   Init_SkipPowerOn                ; Uses Z from the port test that reached this entry
                 lea     SetupValues(pc),a5
                 movem.w (a5)+,d5-d7
@@ -545,11 +545,11 @@ Test_Checksum:
                 btst    #1,d1
                 bne.s   Test_Checksum
                 btst    #6,(HW_Expansion_Control).l
-                beq.s   S3Boot_RunRetainedChecksumSetupThenClearCrossResetState
+                beq.s   S3Boot_PrepareChecksum
                 cmpi.l  #Ref_Checksum_String,(Checksum_string).w
                 beq.w   Test_Checksum_Done
 
-S3Boot_RunRetainedChecksumSetupThenClearCrossResetState:
+S3Boot_PrepareChecksum:
                 movea.l #ErrorTrap,a0
                 movea.l #ROMEndLoc,a1
                 move.l  (a1),d0
@@ -576,9 +576,9 @@ ChecksumLoop:
                 moveq   #0,d7
                 move.w  #bytesToLcnt(CrossResetRAM_End-CrossResetRAM),d6
 
-S3Boot_ClearCrossResetLongwordsAndStampRegion:
+S3Boot_ClearCrossResetRAM:
                 move.l  d7,(a6)+
-                dbf     d6,S3Boot_ClearCrossResetLongwordsAndStampRegion  ; clear RAM from $FFFE00 to $FFFFFF
+                dbf     d6,S3Boot_ClearCrossResetRAM    ; clear RAM from $FFFE00 to $FFFFFF
                 move.b  (HW_Version).l,d0
                 andi.b  #$C0,d0
                 move.b  d0,(Graphics_flags).w
@@ -590,9 +590,9 @@ Test_Checksum_Done:
                 moveq   #0,d7
                 move.w  #bytesToLcnt(CrossResetRAM-RAM_start),d6
 
-S3Boot_ClearOrdinaryWorkRamThenInitializeDevicesAndSave:
+S3Boot_ClearWorkRAM:
                 move.l  d7,(a6)+
-                dbf     d6,S3Boot_ClearOrdinaryWorkRamThenInitializeDevicesAndSave
+                dbf     d6,S3Boot_ClearWorkRAM
                 bsr.w   Init_VDP
                 bsr.w   SndDrvInit
                 bsr.w   Init_Controllers

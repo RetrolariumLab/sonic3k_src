@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 94
+    "commit_count": 95
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -611,9 +611,15 @@
       "commits": ["a9150777b5da2b6e73ca1856a0984b2796113b01"]
     },
     {
-      "id": "current-anchor-semantic-label-comments",
+      "id": "change-bd1eb9fd98b2",
       "kind": "source_or_tooling",
       "summary": "Apply reviewed explanatory comments through verified code anchors and reject changes to assembly tokens.",
+      "commits": ["bd1eb9fd98b223249a23153dc2eb4ce7421ba657"]
+    },
+    {
+      "id": "current-shorten-02-system",
+      "kind": "source_or_tooling",
+      "summary": "Shorten 97 reset, device, math, interrupt and debug labels while preserving hardware and controller details in source comments.",
       "commits": ["release-commit"]
     }
   ],

@@ -24,10 +24,11 @@ Wait_VSync:
 
 Random_Number:
                 move.l  (RNG_seed).w,d1
-                bne.s   S3Math_AdvanceFortyOneFoldPseudoRandomSeed
+                bne.s   S3Math_AdvanceRandomSeed
                 move.l  #$2A6D365A,d1                   ; reset seed if needed
 
-S3Math_AdvanceFortyOneFoldPseudoRandomSeed:
+; Multiply the seed by 41 using shifts and adds
+S3Math_AdvanceRandomSeed:
                 move.l  d1,d0
                 asl.l   #2,d1
                 add.l   d0,d1
@@ -85,37 +86,37 @@ GetArcTan:
 
 S3Math_TakeUnsignedWordMagnitudeOfY:
                 tst.w   d4
-                bpl.s   S3Math_SelectShallowOrSteepArctangentRatio
+                bpl.s   S3Math_SelectArcTanOctant
                 neg.w   d4
 
-S3Math_SelectShallowOrSteepArctangentRatio:
+S3Math_SelectArcTanOctant:
                 cmp.w   d3,d4
-                bcc.s   S3Math_ComputeSteepOctantAngleFromReciprocalRatio
+                bcc.s   S3Math_ArcTanSteepOctant
                 lsl.l   #8,d4
                 divu.w  d3,d4
                 moveq   #0,d0
                 move.b  ArcTanTable(pc,d4.w),d0
-                bra.s   S3Math_ReflectArctangentForNegativeOriginalX
+                bra.s   S3Math_ReflectArcTanX
 
-S3Math_ComputeSteepOctantAngleFromReciprocalRatio:
+S3Math_ArcTanSteepOctant:
                 lsl.l   #8,d3
                 divu.w  d4,d3
                 moveq   #$40,d0
                 sub.b   ArcTanTable(pc,d3.w),d0         ; arctan(y/x) = 90 - arctan(x/y)
 
-S3Math_ReflectArctangentForNegativeOriginalX:
+S3Math_ReflectArcTanX:
                 tst.w   d1
-                bpl.s   S3Math_ReflectArctangentForNegativeOriginalY
+                bpl.s   S3Math_ReflectArcTanY
                 neg.w   d0
                 addi.w  #$80,d0                         ; place angle in appropriate quadrant
 
-S3Math_ReflectArctangentForNegativeOriginalY:
+S3Math_ReflectArcTanY:
                 tst.w   d2
-                bpl.s   S3Math_RestoreMagnitudeWorkRegistersAndReturnAngle
+                bpl.s   S3Math_ReturnArcTan
                 neg.w   d0
                 addi.w  #$100,d0                        ; place angle in appropriate quadrant
 
-S3Math_RestoreMagnitudeWorkRegistersAndReturnAngle:
+S3Math_ReturnArcTan:
                 movem.l (sp)+,d3-d4
                 rts
 ; ---------------------------------------------------------------------------

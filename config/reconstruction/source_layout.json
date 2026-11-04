@@ -22282,7 +22282,7 @@
       "responsibility": "Sphere test object setup, projected motion, sprite display and experimental sphere mappings.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 523,
+      "physical_lines": 532,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "s3.s",
@@ -70871,7 +70871,7 @@
       "responsibility": "Debug placement state, movement, object selection and player restoration callbacks.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 232,
+      "physical_lines": 236,
       "origin": {
         "commit": "8833ccd9229820266e103e4386e7dc75285a1913",
         "path": "s3.s",
@@ -72722,7 +72722,7 @@
       "responsibility": "Debug placement state, movement, object selection and player restoration callbacks.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 251,
+      "physical_lines": 257,
       "origin": {
         "commit": "8833ccd9229820266e103e4386e7dc75285a1913",
         "path": "sonic3k.s",
@@ -72887,7 +72887,7 @@
       "responsibility": "Frame synchronization, deterministic random numbers and angle/sine lookup primitives with their private lookup tables.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 133,
+      "physical_lines": 134,
       "origin": {
         "commit": "42e24a80354489c020e7a95fbec9fa4a42d7a296",
         "path": "s3.s",
@@ -72932,7 +72932,7 @@
       "responsibility": "Vertical interrupt scheduling, display update dispatch and the primary horizontal water interrupt handlers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 536,
+      "physical_lines": 537,
       "origin": {
         "commit": "311352b95436c810fb897541f11a169c69104fe0",
         "path": "s3.s",

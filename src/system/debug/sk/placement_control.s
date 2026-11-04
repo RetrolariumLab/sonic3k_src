@@ -13,32 +13,33 @@ DebugMode:
 
 ; ---------------------------------------------------------------------------
 DebugMode_Index:
-                dc.w    SKDebugPlacement_EnterPlacementAndConditionallySaveArt-DebugMode_Index
-                dc.w    SKDebugPlacement_ResolveDebugListRunControlsAndDraw-DebugMode_Index
+                dc.w    SKDebugPlacement_Enter-DebugMode_Index
+                dc.w    SKDebugPlacement_UpdateAndDraw-DebugMode_Index
 ; ---------------------------------------------------------------------------
 
-SKDebugPlacement_EnterPlacementAndConditionallySaveArt:
+; Always save mappings. Keep the saved art tile when the player routine is 6 or higher
+SKDebugPlacement_Enter:
                 addq.b  #2,(Debug_placement_routine).w
                 move.l  mappings(a0),(Debug_saved_mappings).w
                 cmpi.b  #6,routine(a0)
-                bhs.s   SKDebugPlacement_WrapVerticalCoordinatesAndResetUnderwaterState
+                bhs.s   SKDebugPlacement_WrapYAndResetWater
                 move.w  art_tile(a0),(Debug_saved_art_tile).w
 
-SKDebugPlacement_WrapVerticalCoordinatesAndResetUnderwaterState:
+SKDebugPlacement_WrapYAndResetWater:
                 move.w  (Screen_Y_wrap_value).w,d0
                 and.w   d0,(Player_1+y_pos).w
                 and.w   d0,(Camera_Y_pos).w
                 clr.b   (Scroll_lock).w
                 clr.w   (WindTunnel_flag).w
                 bclr    #Status_Underwater,status(a0)
-                beq.s   SKDebugPlacement_ClearPoseAndResolvePerActDebugList
+                beq.s   SKDebugPlacement_ClearPoseAndLoadActList
                 movea.l a0,a1
                 jsr     (Player_ResetAirTimer).l
                 move.w  #$600,(Max_speed).w
                 move.w  #$C,(Acceleration).w
                 move.w  #$80,(Deceleration).w
 
-SKDebugPlacement_ClearPoseAndResolvePerActDebugList:
+SKDebugPlacement_ClearPoseAndLoadActList:
                 move.b  #0,mapping_frame(a0)
                 move.b  #0,anim(a0)
                 moveq   #0,d0
@@ -50,15 +51,15 @@ SKDebugPlacement_ClearPoseAndResolvePerActDebugList:
                 adda.w  (a2,d0.w),a2
                 move.w  (a2)+,d6
                 cmp.b   (Debug_object).w,d6
-                bhi.s   SKDebugPlacement_LoadSelectedPreviewAndSeedMovementRepeat
+                bhi.s   SKDebugPlacement_LoadPreviewResetRepeat
                 move.b  #0,(Debug_object).w
 
-SKDebugPlacement_LoadSelectedPreviewAndSeedMovementRepeat:
+SKDebugPlacement_LoadPreviewResetRepeat:
                 bsr.w   DebugMode_LoadSelectedObjectAppearance
                 move.b  #$C,(Debug_camera_delay).w
                 move.b  #1,(Debug_camera_speed).w
 
-SKDebugPlacement_ResolveDebugListRunControlsAndDraw:
+SKDebugPlacement_UpdateAndDraw:
                 moveq   #0,d0
                 move.w  (Current_zone_and_act).w,d0
                 ror.b   #1,d0
@@ -77,27 +78,28 @@ DebugMode_HandlePlacementControls:
                 move.w  #1,d1
                 move.b  (Ctrl_1_pressed).w,d4
                 andi.w  #button_up_mask|button_down_mask|button_left_mask|button_right_mask,d4
-                bne.s   SKDebugPlacement_ReloadHeldDirectionsForMovementPulse
+                bne.s   SKDebugPlacement_ReadHeldDirections
                 move.b  (Ctrl_1_held).w,d0
                 andi.w  #button_up_mask|button_down_mask|button_left_mask|button_right_mask,d0
-                bne.s   SKDebugPlacement_DelayHeldMovementThenSaturateSpeedByte
+                bne.s   SKDebugPlacement_RepeatHeldMove
                 move.b  #$C,(Debug_camera_delay).w
                 move.b  #$F,(Debug_camera_speed).w
-                bra.w   SKDebugPlacement_SelectPreviousObjectWithHeldAAndFreshC
+                bra.w   SKDebugPlacement_PrevObjectOnHeldAAndC
 ; ---------------------------------------------------------------------------
 
-SKDebugPlacement_DelayHeldMovementThenSaturateSpeedByte:
+; Keep repeat speed at 255 when the byte wraps
+SKDebugPlacement_RepeatHeldMove:
                 subq.b  #1,(Debug_camera_delay).w
-                bne.s   SKDebugPlacement_ComputeFixedPointDebugStepAndApplyUpClamp
+                bne.s   SKDebugPlacement_CalcStepAndMoveUp
                 move.b  #1,(Debug_camera_delay).w
                 addq.b  #1,(Debug_camera_speed).w
-                bne.s   SKDebugPlacement_ReloadHeldDirectionsForMovementPulse
+                bne.s   SKDebugPlacement_ReadHeldDirections
                 move.b  #255,(Debug_camera_speed).w
 
-SKDebugPlacement_ReloadHeldDirectionsForMovementPulse:
+SKDebugPlacement_ReadHeldDirections:
                 move.b  (Ctrl_1_held).w,d4
 
-SKDebugPlacement_ComputeFixedPointDebugStepAndApplyUpClamp:
+SKDebugPlacement_CalcStepAndMoveUp:
                 moveq   #0,d1
                 move.b  (Debug_camera_speed).w,d1
                 addq.w  #1,d1
@@ -106,71 +108,75 @@ SKDebugPlacement_ComputeFixedPointDebugStepAndApplyUpClamp:
                 move.l  y_pos(a0),d2
                 move.l  x_pos(a0),d3
                 btst    #button_up,d4
-                beq.s   SKDebugPlacement_ApplyDownClampAtCameraMaximumPlusHeight
+                beq.s   SKDebugPlacement_MoveDownClamped
                 sub.l   d1,d2
                 moveq   #0,d0
                 move.w  (Camera_min_Y_pos).w,d0
                 swap    d0
                 cmp.l   d0,d2
-                bge.s   SKDebugPlacement_ApplyDownClampAtCameraMaximumPlusHeight
+                bge.s   SKDebugPlacement_MoveDownClamped
                 move.l  d0,d2
 
-SKDebugPlacement_ApplyDownClampAtCameraMaximumPlusHeight:
+; Clamp Y at the target camera limit plus $DF
+SKDebugPlacement_MoveDownClamped:
                 btst    #button_down,d4
-                beq.s   SKDebugPlacement_ApplyLeftAndClampUnsignedBorrowToZero
+                beq.s   SKDebugPlacement_MoveLeftClamped
                 add.l   d1,d2
                 moveq   #0,d0
                 move.w  (Camera_target_max_Y_pos).w,d0
                 addi.w  #$DF,d0
                 swap    d0
                 cmp.l   d0,d2
-                blt.s   SKDebugPlacement_ApplyLeftAndClampUnsignedBorrowToZero
+                blt.s   SKDebugPlacement_MoveLeftClamped
                 move.l  d0,d2
 
-SKDebugPlacement_ApplyLeftAndClampUnsignedBorrowToZero:
+; Clamp left movement to zero on unsigned borrow. Right movement has no upper clamp
+SKDebugPlacement_MoveLeftClamped:
                 btst    #button_left,d4
-                beq.s   SKDebugPlacement_ApplyRightWithoutHorizontalUpperClamp
+                beq.s   SKDebugPlacement_MoveRight
                 sub.l   d1,d3
-                bcc.s   SKDebugPlacement_ApplyRightWithoutHorizontalUpperClamp
+                bcc.s   SKDebugPlacement_MoveRight
                 moveq   #0,d3
 
-SKDebugPlacement_ApplyRightWithoutHorizontalUpperClamp:
+SKDebugPlacement_MoveRight:
                 btst    #button_right,d4
-                beq.s   SKDebugPlacement_StoreDebugFixedPointPosition
+                beq.s   SKDebugPlacement_StoreFixedPointPos
                 add.l   d1,d3
 
-SKDebugPlacement_StoreDebugFixedPointPosition:
+SKDebugPlacement_StoreFixedPointPos:
                 move.l  d2,y_pos(a0)
                 move.l  d3,x_pos(a0)
 
-SKDebugPlacement_SelectPreviousObjectWithHeldAAndFreshC:
+; Press C while holding A to select the previous object
+SKDebugPlacement_PrevObjectOnHeldAAndC:
                 btst    #button_A,(Ctrl_1_held).w
-                beq.s   SKDebugPlacement_SpawnSelectedObjectAndForceMonitorSubtypeNine
+                beq.s   SKDebugPlacement_TrySpawnOnC
                 btst    #button_C,(Ctrl_1_pressed).w
-                beq.s   SKDebugPlacement_SelectNextObjectOnFreshA
+                beq.s   SKDebugPlacement_NextObjectOnAPress
                 subq.b  #1,(Debug_object).w
-                bcc.s   SKDebugPlacement_TailReloadSelectedObjectPreview
+                bcc.s   SKDebugPlacement_ReloadPreview
                 add.b   d6,(Debug_object).w
-                bra.s   SKDebugPlacement_TailReloadSelectedObjectPreview
+                bra.s   SKDebugPlacement_ReloadPreview
 ; ---------------------------------------------------------------------------
 
-SKDebugPlacement_SelectNextObjectOnFreshA:
+SKDebugPlacement_NextObjectOnAPress:
                 btst    #button_A,(Ctrl_1_pressed).w
-                beq.s   SKDebugPlacement_SpawnSelectedObjectAndForceMonitorSubtypeNine
+                beq.s   SKDebugPlacement_TrySpawnOnC
                 addq.b  #1,(Debug_object).w
                 cmp.b   (Debug_object).w,d6
-                bhi.s   SKDebugPlacement_TailReloadSelectedObjectPreview
+                bhi.s   SKDebugPlacement_ReloadPreview
                 move.b  #0,(Debug_object).w
 
-SKDebugPlacement_TailReloadSelectedObjectPreview:
+SKDebugPlacement_ReloadPreview:
                 bra.w   DebugMode_LoadSelectedObjectAppearance
 ; ---------------------------------------------------------------------------
 
-SKDebugPlacement_SpawnSelectedObjectAndForceMonitorSubtypeNine:
+; Spawned monitors always receive subtype 9
+SKDebugPlacement_TrySpawnOnC:
                 btst    #button_C,(Ctrl_1_pressed).w
-                beq.s   SKDebugPlacement_LeavePlacementRedrawHudAndRestorePlayer
+                beq.s   SKDebugPlacement_TryExit
                 jsr     (AllocateObject).l
-                bne.s   SKDebugPlacement_LeavePlacementRedrawHudAndRestorePlayer
+                bne.s   SKDebugPlacement_TryExit
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.b  render_flags(a0),render_flags(a1)
@@ -186,16 +192,16 @@ SKDebugPlacement_SpawnSelectedObjectAndForceMonitorSubtypeNine:
                 move.l  (a2,d0.w),(a1)
                 move.b  #0,(a1)
                 cmpi.l  #Obj_Monitor,(a1)
-                bne.s   SKDebugPlacement_ReturnAfterDebugObjectSpawn
+                bne.s   SKDebugPlacement_SpawnReturn
                 move.b  #9,subtype(a1)
 
-SKDebugPlacement_ReturnAfterDebugObjectSpawn:
+SKDebugPlacement_SpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKDebugPlacement_LeavePlacementRedrawHudAndRestorePlayer:
+SKDebugPlacement_TryExit:
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   SKDebugPlacement_ReturnFromPlacementExitCheck
+                beq.s   SKDebugPlacement_ExitReturn
                 moveq   #0,d0
                 move.w  d0,(Debug_placement_mode).w
                 move    #$2700,sr
@@ -210,7 +216,7 @@ SKDebugPlacement_LeavePlacementRedrawHudAndRestorePlayer:
                 move.b  #$13,y_radius(a1)
                 move.b  #9,x_radius(a1)
 
-SKDebugPlacement_ReturnFromPlacementExitCheck:
+SKDebugPlacement_ExitReturn:
                 rts
 ; End of function DebugMode_HandlePlacementControls
 
