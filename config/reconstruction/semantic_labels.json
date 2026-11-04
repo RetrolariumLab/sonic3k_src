@@ -5,7 +5,7 @@
   "scope": "All35470 researched inherited address and numeric-local labels; completed1571 procedure migration remains independent.",
   "target_count": 35470,
   "scope_sha256": "6d32002c76db58fe4732f6fc7113c9b2d93f88b650fec5e995b26b2a5fe4f278",
-  "applied_targets": 10165,
+  "applied_targets": 10427,
   "packets": [
     {
       "id": "01-audio",
@@ -1853,7 +1853,7 @@
     },
     {
       "id": "21-camera",
-      "state": "pending",
+      "state": "applied",
       "target_count": 262,
       "scope_sha256": "951c96505da933a355fa9ec48747419dccebb9a222e44633fdb1f3acc6363484",
       "registry": "config/reconstruction/semantic_labels/21-camera.json",
@@ -1899,7 +1899,7 @@
           "profiles": ["sk"]
         }
       ],
-      "destination_sha256": "12d544164162c125c256cda03ccbeaab69ed96eb69689a09dfeaf3f6aa7ecaa1"
+      "destination_sha256": "790c8c0b42b296e93b9a4b9fd962f20ba04f9bf98bb9ce753b49f037d40a4b76"
     },
     {
       "id": "22-level-environment",
@@ -7436,6 +7436,7 @@
     "17-tile-rendering",
     "18-palettes",
     "19-compression",
-    "20-level-lifecycle"
+    "20-level-lifecycle",
+    "21-camera"
   ]
 }

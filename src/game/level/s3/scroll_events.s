@@ -52,17 +52,17 @@ Update_VScrollValueP2:
 
 SpecialEvents:
                 cmpi.b  #6,(Player_1+routine).w
-                bhs.s   locret_3A07E
+                bhs.s   S3Camera_SpecialEventReturn
                 move.w  (Special_events_routine).w,d0
                 movea.l SpecialEvents_Index(pc,d0.w),a0
                 jmp     (a0)
 ; ---------------------------------------------------------------------------
 SpecialEvents_Index:
-                dc.l    locret_3A07E
+                dc.l    S3Camera_SpecialEventReturn
                 dc.l    AIZ2_DoShipLoop
 ; ---------------------------------------------------------------------------
 
-locret_3A07E:
+S3Camera_SpecialEventReturn:
                 rts
 ; End of function SpecialEvents
 
@@ -72,23 +72,23 @@ Adjust_BGDuringLoop:
                 move.w  (a1),d1
                 move.w  d0,(a1)+
                 sub.w   d1,d0
-                bpl.s   loc_3A094
+                bpl.s   S3Camera_WrapPositiveLoopDelta
                 neg.w   d0
                 cmp.w   d2,d0
-                blo.s   loc_3A090
+                blo.s   S3Camera_SubtractBgLoopDelta
                 sub.w   d3,d0
 
-loc_3A090:
+S3Camera_SubtractBgLoopDelta:
                 sub.w   d0,(a1)+
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3A094:
+S3Camera_WrapPositiveLoopDelta:
                 cmp.w   d2,d0
-                blo.s   loc_3A09A
+                blo.s   S3Camera_AddBgLoopDelta
                 sub.w   d3,d0
 
-loc_3A09A:
+S3Camera_AddBgLoopDelta:
                 add.w   d0,(a1)+
                 rts
 ; End of function Adjust_BGDuringLoop
@@ -110,10 +110,10 @@ Get_BGActualEffectiveDiff:
 ShakeScreen_Setup:
                 move.w  (Screen_shake_offset).w,(Screen_shake_last_offset).w
                 cmpi.b  #6,(Player_1+routine).w
-                bhs.s   loc_3A0F2
+                bhs.s   S3Camera_ClearShake
                 move.w  (Screen_shake_flag).w,d0
-                beq.s   loc_3A0F2
-                bmi.s   loc_3A0E0
+                beq.s   S3Camera_ClearShake
+                bmi.s   S3Camera_PickContinuousShake
                 subq.w  #1,d0                           ; If EECC is positive, then it's a timed screen shake
                 move.w  d0,(Screen_shake_flag).w
                 move.b  ScreenShakeArray(pc,d0.w),d0
@@ -122,7 +122,7 @@ ShakeScreen_Setup:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3A0E0:
+S3Camera_PickContinuousShake:
                 move.w  (Level_frame_counter).w,d0      ; If EECC is negative, it's a constant screen shake
                 andi.w  #$3F,d0
                 move.b  ScreenShakeArray2(pc,d0.w),d0
@@ -130,7 +130,7 @@ loc_3A0E0:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3A0F2:
+S3Camera_ClearShake:
                 clr.w   (Screen_shake_offset).w
                 rts
 ; End of function ShakeScreen_Setup
@@ -141,17 +141,17 @@ Offset_ObjectsDuringTransition:
                 lea     (Dynamic_object_RAM+object_size).w,a1
                 moveq   #((Breathing_bubbles)-(Dynamic_object_RAM+object_size))/object_size-1,d2
 
-loc_3A0FE:
+S3Camera_TryOffsetWorldActor:
                 tst.l   (a1)
-                beq.s   loc_3A112
+                beq.s   S3Camera_NextTransitionActor
                 btst    #2,render_flags(a1)
-                beq.s   loc_3A112
+                beq.s   S3Camera_NextTransitionActor
                 sub.w   d0,x_pos(a1)
                 sub.w   d1,y_pos(a1)
 
-loc_3A112:
+S3Camera_NextTransitionActor:
                 lea     next_object(a1),a1
-                dbf     d2,loc_3A0FE
+                dbf     d2,S3Camera_TryOffsetWorldActor
                 rts
 ; End of function Offset_ObjectsDuringTransition
 

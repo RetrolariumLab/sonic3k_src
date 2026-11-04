@@ -6,27 +6,27 @@
 
 DeformBgLayer:
                 tst.b   (Deform_lock).w
-                beq.s   loc_1BFB8
+                beq.s   SKCamera_ClearDeltasAndPickView
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1BFB8:
+SKCamera_ClearDeltasAndPickView:
                 clr.w   (Camera_RAM).w
                 clr.w   (V_scroll_amount).w
                 clr.w   (H_scroll_amount_P2).w
                 clr.w   (V_scroll_amount_P2).w
                 tst.w   (Competition_mode).w
-                bne.w   loc_1C02C
+                bne.w   SKCamera_TryTrackCompP1
                 tst.b   (Scroll_lock).w
-                bne.s   loc_1C028
+                bne.s   SKCamera_RunSingleResizeEvents
                 lea     (Player_1).w,a0
                 tst.b   (Scroll_force_positions).w
-                beq.s   loc_1BFF0
+                beq.s   SKCamera_SetSingleViewport
                 move.b  #0,(Scroll_force_positions).w
                 move.w  #0,(H_scroll_frame_offset).w
                 lea     (Scroll_forced_X_pos-x_pos).w,a0  ; is now a player address
 
-loc_1BFF0:
+SKCamera_SetSingleViewport:
                 lea     (Camera_X_pos).w,a1
                 lea     (Camera_min_X_pos).w,a2
                 lea     (Camera_RAM).w,a4
@@ -38,19 +38,19 @@ loc_1BFF0:
                 lea     (V_scroll_amount).w,a4
                 move.w  (Distance_from_top).w,d3
                 cmpi.w  #2,(Player_mode).w
-                bne.s   loc_1C024
+                bne.s   SKCamera_TrackSingleY
                 move.w  (Distance_from_top_P2).w,d3
 
-loc_1C024:
+SKCamera_TrackSingleY:
                 bsr.w   MoveCameraY
 
-loc_1C028:
+SKCamera_RunSingleResizeEvents:
                 bra.w   Do_ResizeEvents
 ; ---------------------------------------------------------------------------
 
-loc_1C02C:
+SKCamera_TryTrackCompP1:
                 tst.b   (Scroll_lock).w
-                bne.s   loc_1C06E
+                bne.s   SKCamera_TryTrackCompP2
                 lea     (Player_1).w,a0
                 lea     (Camera_X_pos).w,a1
                 lea     (Camera_min_X_pos).w,a2
@@ -63,15 +63,15 @@ loc_1C02C:
                 lea     (V_scroll_amount).w,a4
                 move.w  (Distance_from_top).w,d3
                 cmpi.w  #2,(Player_mode).w
-                bne.s   loc_1C06A
+                bne.s   SKCamera_RunPrimarySplitVerticalCamera
                 move.w  (Distance_from_top_P2).w,d3
 
-loc_1C06A:
+SKCamera_RunPrimarySplitVerticalCamera:
                 bsr.w   MoveCameraY
 
-loc_1C06E:
+SKCamera_TryTrackCompP2:
                 tst.b   (Scroll_lock_P2).w
-                bne.s   loc_1C0A4
+                bne.s   SKCamera_RunCompResizeEvents
                 lea     (Player_2).w,a0
                 lea     (Camera_X_pos_P2).w,a1
                 lea     (Camera_min_X_pos_P2).w,a2
@@ -85,7 +85,7 @@ loc_1C06E:
                 move.w  (Distance_from_top_P2).w,d3
                 bsr.w   MoveCameraY
 
-loc_1C0A4:
+SKCamera_RunCompResizeEvents:
                 bra.w   Do_ResizeEvents
 ; End of function DeformBgLayer
 
@@ -94,9 +94,9 @@ loc_1C0A4:
 MoveCameraX:
                 move.w  (a1),d4
                 tst.b   (Teleport_active_flag).w
-                bne.s   locret_1C0E6
+                bne.s   SKCamera_TrackXReturn
                 move.w  (a5),d1
-                beq.s   loc_1C0D2
+                beq.s   SKCamera_ReadLiveActorX
                 subi.w  #$100,d1
                 move.w  d1,(a5)
                 moveq   #0,d1
@@ -107,49 +107,50 @@ MoveCameraX:
                 sub.b   d1,d0
                 move.w  (a6,d0.w),d0
                 andi.w  #$7FFF,d0
-                bra.s   loc_1C0D6
+                bra.s   SKCamera_CheckXDeadband
 ; ---------------------------------------------------------------------------
 
-loc_1C0D2:
+SKCamera_ReadLiveActorX:
                 move.w  x_pos(a0),d0
 
-loc_1C0D6:
+SKCamera_CheckXDeadband:
                 sub.w   (a1),d0
                 subi.w  #$90,d0
-                blt.s   loc_1C0E8
+                blt.s   SKCamera_LimitLeftStep24
                 subi.w  #$10,d0
-                bge.s   loc_1C0FC
+                bge.s   SKCamera_LimitRightStep24
                 clr.w   (a4)
 
-locret_1C0E6:
+SKCamera_TrackXReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1C0E8:
+SKCamera_LimitLeftStep24:
                 cmpi.w  #-$18,d0
-                bgt.s   loc_1C0F2
+                bgt.s   SKCamera_ClampCandidateMinX
                 move.w  #-$18,d0
 
-loc_1C0F2:
+SKCamera_ClampCandidateMinX:
                 add.w   (a1),d0
                 cmp.w   (a2),d0
-                bgt.s   loc_1C112
+                bgt.s   SKCamera_CommitXAndScrollDelta
                 move.w  (a2),d0
-                bra.s   loc_1C112
+                bra.s   SKCamera_CommitXAndScrollDelta
 ; ---------------------------------------------------------------------------
 
-loc_1C0FC:
+SKCamera_LimitRightStep24:
                 cmpi.w  #$18,d0
-                blo.s   loc_1C106
+                blo.s   SKCamera_ClampCandidateMaxX
                 move.w  #$18,d0
 
-loc_1C106:
+SKCamera_ClampCandidateMaxX:
                 add.w   (a1),d0
                 cmp.w   2(a2),d0
-                blt.s   loc_1C112
+                blt.s   SKCamera_CommitXAndScrollDelta
                 move.w  2(a2),d0
 
-loc_1C112:
+; Store the X displacement as a word with eight fractional bits
+SKCamera_CommitXAndScrollDelta:
                 move.w  d0,d1
                 sub.w   (a1),d1
                 asl.w   #8,d1
@@ -165,137 +166,137 @@ MoveCameraY:
                 move.w  y_pos(a0),d0
                 sub.w   (a1),d0
                 cmpi.w  #-$100,(Camera_min_Y_pos).w
-                bne.s   loc_1C132
+                bne.s   SKCamera_TryApplyRollYBias
                 and.w   (Screen_Y_wrap_value).w,d0
 
-loc_1C132:
+SKCamera_TryApplyRollYBias:
                 btst    #Status_Roll,status(a0)
-                beq.s   loc_1C13C
+                beq.s   SKCamera_PickYTargetDistance
                 subq.w  #5,d0
 
-loc_1C13C:
+SKCamera_PickYTargetDistance:
                 move.w  d3,d1
                 tst.w   (Competition_mode).w
-                beq.s   loc_1C146
+                beq.s   SKCamera_CheckAirborneYWindow
                 lsr.w   #1,d1
 
-loc_1C146:
+SKCamera_CheckAirborneYWindow:
                 btst    #Status_InAir,status(a0)
-                beq.s   loc_1C164
+                beq.s   SKCamera_CheckGroundedYDelta
                 addi.w  #$20,d0
                 sub.w   d1,d0
-                bcs.s   loc_1C1B0
+                bcs.s   SKCamera_UseYRate24
                 subi.w  #$40,d0
-                bcc.s   loc_1C1B0
+                bcc.s   SKCamera_UseYRate24
                 tst.b   (Camera_max_Y_pos_changing).w
-                bne.s   loc_1C1C2
-                bra.s   loc_1C16E
+                bne.s   SKCamera_RecheckChangedYLimit
+                bra.s   SKCamera_ClearYDeltaAndReturn
 ; ---------------------------------------------------------------------------
 
-loc_1C164:
+SKCamera_CheckGroundedYDelta:
                 sub.w   d1,d0
-                bne.s   loc_1C172
+                bne.s   SKCamera_PickYFollowRate
                 tst.b   (Camera_max_Y_pos_changing).w
-                bne.s   loc_1C1C2
+                bne.s   SKCamera_RecheckChangedYLimit
 
-loc_1C16E:
+SKCamera_ClearYDeltaAndReturn:
                 clr.w   (a4)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1C172:
+SKCamera_PickYFollowRate:
                 cmpi.w  #$60,d3
-                bne.s   loc_1C19E
+                bne.s   SKCamera_UseYRate2
                 tst.b   (Fast_V_scroll_flag).w
-                bne.s   loc_1C1B0
+                bne.s   SKCamera_UseYRate24
                 move.w  ground_vel(a0),d1
-                bpl.s   loc_1C186
+                bpl.s   SKCamera_PickYRate6Or24
                 neg.w   d1
 
-loc_1C186:
+SKCamera_PickYRate6Or24:
                 cmpi.w  #$800,d1
-                bhs.s   loc_1C1B0
+                bhs.s   SKCamera_UseYRate24
                 move.w  #$600,d1
                 cmpi.w  #6,d0
-                bgt.s   loc_1C1FA
+                bgt.s   SKCamera_StepCameraDown
                 cmpi.w  #-6,d0
-                blt.s   loc_1C1D8
-                bra.s   loc_1C1C8
+                blt.s   SKCamera_StepCameraUp
+                bra.s   SKCamera_MakeIntegerYCandidate
 ; ---------------------------------------------------------------------------
 
-loc_1C19E:
+SKCamera_UseYRate2:
                 move.w  #$200,d1
                 cmpi.w  #2,d0
-                bgt.s   loc_1C1FA
+                bgt.s   SKCamera_StepCameraDown
                 cmpi.w  #-2,d0
-                blt.s   loc_1C1D8
-                bra.s   loc_1C1C8
+                blt.s   SKCamera_StepCameraUp
+                bra.s   SKCamera_MakeIntegerYCandidate
 ; ---------------------------------------------------------------------------
 
-loc_1C1B0:
+SKCamera_UseYRate24:
                 move.w  #$1800,d1
                 cmpi.w  #$18,d0
-                bgt.s   loc_1C1FA
+                bgt.s   SKCamera_StepCameraDown
                 cmpi.w  #-$18,d0
-                blt.s   loc_1C1D8
-                bra.s   loc_1C1C8
+                blt.s   SKCamera_StepCameraUp
+                bra.s   SKCamera_MakeIntegerYCandidate
 ; ---------------------------------------------------------------------------
 
-loc_1C1C2:
+SKCamera_RecheckChangedYLimit:
                 moveq   #0,d0
                 move.b  d0,(Camera_max_Y_pos_changing).w
 
-loc_1C1C8:
+SKCamera_MakeIntegerYCandidate:
                 moveq   #0,d1
                 move.w  d0,d1
                 add.w   (a1),d1
                 tst.w   d0
-                bpl.w   loc_1C202
-                bra.w   loc_1C1E2
+                bpl.w   SKCamera_ClampOrWrapMaxY
+                bra.w   SKCamera_ClampOrWrapMinY
 ; ---------------------------------------------------------------------------
 
-loc_1C1D8:
+SKCamera_StepCameraUp:
                 neg.w   d1
                 ext.l   d1
                 asl.l   #8,d1
                 add.l   (a1),d1
                 swap    d1
 
-loc_1C1E2:
+SKCamera_ClampOrWrapMinY:
                 cmp.w   4(a2),d1
-                bgt.s   loc_1C21A
+                bgt.s   SKCamera_CommitYAndScrollDelta
                 cmpi.w  #-$100,d1
-                bgt.s   loc_1C1F4
+                bgt.s   SKCamera_ClampToMinY
                 and.w   (Screen_Y_wrap_value).w,d1
-                bra.s   loc_1C21A
+                bra.s   SKCamera_CommitYAndScrollDelta
 ; ---------------------------------------------------------------------------
 
-loc_1C1F4:
+SKCamera_ClampToMinY:
                 move.w  4(a2),d1
-                bra.s   loc_1C21A
+                bra.s   SKCamera_CommitYAndScrollDelta
 ; ---------------------------------------------------------------------------
 
-loc_1C1FA:
+SKCamera_StepCameraDown:
                 ext.l   d1
                 asl.l   #8,d1
                 add.l   (a1),d1
                 swap    d1
 
-loc_1C202:
+SKCamera_ClampOrWrapMaxY:
                 cmp.w   6(a2),d1
-                blt.s   loc_1C21A
+                blt.s   SKCamera_CommitYAndScrollDelta
                 move.w  (Screen_Y_wrap_value).w,d3
                 addq.w  #1,d3
                 sub.w   d3,d1
-                bcs.s   loc_1C216
+                bcs.s   SKCamera_ClampToMaxY
                 sub.w   d3,(a1)
-                bra.s   loc_1C21A
+                bra.s   SKCamera_CommitYAndScrollDelta
 ; ---------------------------------------------------------------------------
 
-loc_1C216:
+SKCamera_ClampToMaxY:
                 move.w  6(a2),d1
 
-loc_1C21A:
+SKCamera_CommitYAndScrollDelta:
                 move.w  (a1),d4
                 swap    d1
                 move.l  d1,d3
@@ -304,12 +305,12 @@ loc_1C21A:
                 move.w  d3,(a4)
                 move.l  d1,(a1)
                 tst.w   (Competition_mode).w
-                beq.s   locret_1C236
+                beq.s   SKCamera_TrackYReturn
                 swap    d1
                 and.w   (Screen_Y_wrap_value).w,d1
                 move.w  d1,(a1)
 
-locret_1C236:
+SKCamera_TrackYReturn:
                 rts
 ; End of function MoveCameraY
 
@@ -318,9 +319,9 @@ locret_1C236:
 MoveCameraX_2P:
                 move.w  (a1),d4
                 tst.b   (Teleport_active_flag).w
-                bne.s   locret_1C27C
+                bne.s   SKCamera_TrackCompXReturn
                 move.w  (a5),d1
-                beq.s   loc_1C262
+                beq.s   SKCamera_ReadLiveCompActorX
                 subi.w  #$100,d1
                 move.w  d1,(a5)
                 moveq   #0,d1
@@ -331,45 +332,46 @@ MoveCameraX_2P:
                 sub.b   d1,d0
                 move.w  (a6,d0.w),d0
                 andi.w  #$7FFF,d0
-                bra.s   loc_1C266
+                bra.s   SKCamera_CheckCompXDeadband
 ; ---------------------------------------------------------------------------
 
-loc_1C262:
+SKCamera_ReadLiveCompActorX:
                 move.w  x_pos(a0),d0
 
-loc_1C266:
+SKCamera_CheckCompXDeadband:
                 move.w  (Screen_X_wrap_value).w,d2
                 sub.w   (a1),d0
                 and.w   d2,d0
                 subi.w  #$90,d0
-                blt.s   loc_1C27E
+                blt.s   SKCamera_LimitCompLeftStep16
                 subi.w  #$10,d0
-                bge.s   loc_1C28C
+                bge.s   SKCamera_LimitCompRightStep16
                 clr.w   (a4)
 
-locret_1C27C:
+SKCamera_TrackCompXReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1C27E:
+SKCamera_LimitCompLeftStep16:
                 cmpi.w  #-$10,d0
-                bgt.s   loc_1C288
+                bgt.s   SKCamera_ApplyCompLeftStep
                 move.w  #-$10,d0
 
-loc_1C288:
+SKCamera_ApplyCompLeftStep:
                 add.w   (a1),d0
-                bra.s   loc_1C298
+                bra.s   SKCamera_CommitWrappedCompX
 ; ---------------------------------------------------------------------------
 
-loc_1C28C:
+SKCamera_LimitCompRightStep16:
                 cmpi.w  #$10,d0
-                blo.s   loc_1C296
+                blo.s   SKCamera_ApplyCompRightStep
                 move.w  #$10,d0
 
-loc_1C296:
+SKCamera_ApplyCompRightStep:
                 add.w   (a1),d0
 
-loc_1C298:
+; Compute the scroll delta before masking the camera position
+SKCamera_CommitWrappedCompX:
                 move.w  d0,d1
                 sub.w   (a1),d1
                 asl.w   #8,d1

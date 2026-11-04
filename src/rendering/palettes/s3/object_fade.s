@@ -16,7 +16,7 @@ S3PalObj_TickFadeInDelay:
 
 S3PalObj_TryNextFadeInPass:
                 subq.b  #1,$39(a0)
-                bmi.w   loc_531C2
+                bmi.w   S3Camera_DeleteCompletedActor
                 move.b  $2F(a0),$2E(a0)
                 lea     (Normal_palette_line_2).w,a1
                 lea     (Target_palette_line_2).w,a2

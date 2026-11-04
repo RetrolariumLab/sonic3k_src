@@ -1059,9 +1059,15 @@
       "commits": ["645c170d2f967ed7276206cd000dc512c4672279"]
     },
     {
-      "id": "current-shorten-20-level-lifecycle",
+      "id": "change-1d0bab4b7a11",
       "kind": "source_or_tooling",
       "summary": "Apply 63 reviewed short labels for level entry, demo input and player spawn.",
+      "commits": ["1d0bab4b7a1180c2352fb0b66c2fd3f2b7707474"]
+    },
+    {
+      "id": "current-shorten-21-camera",
+      "kind": "source_or_tooling",
+      "summary": "Apply 254 reviewed short labels for camera.",
       "commits": ["release-commit"]
     }
   ],

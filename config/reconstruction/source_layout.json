@@ -5563,7 +5563,7 @@
       "responsibility": "Initial level bounds selection and the product-specific level size catalog.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 176,
+      "physical_lines": 177,
       "origin": {
         "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
         "path": "s3.s",
@@ -5608,7 +5608,7 @@
       "responsibility": "Background deformation, horizontal and vertical camera tracking and two-player camera updates.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 374,
+      "physical_lines": 376,
       "origin": {
         "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
         "path": "s3.s",
@@ -5648,7 +5648,7 @@
       "responsibility": "Zone and act camera-bound event dispatch, character-specific limits and shared maximum-height adjustment.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 694,
+      "physical_lines": 697,
       "origin": {
         "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
         "path": "s3.s",
@@ -5988,7 +5988,7 @@
       "responsibility": "Gradual camera bound changes and their four object child descriptors.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 90,
+      "physical_lines": 91,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -6778,7 +6778,7 @@
       "responsibility": "Background deformation, horizontal and vertical camera tracking and two-player camera updates.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 381,
+      "physical_lines": 383,
       "origin": {
         "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
         "path": "sonic3k.s",
@@ -6808,7 +6808,7 @@
       "responsibility": "Zone and act camera-bound event dispatch, character-specific limits and shared maximum-height adjustment.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 779,
+      "physical_lines": 783,
       "origin": {
         "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
         "path": "sonic3k.s",

@@ -1,0 +1,2773 @@
+{
+  "schema_version": 1,
+  "packet": "21-camera",
+  "mappings": [
+    {
+      "source": "src/game/level/s3/bounds_catalog.s",
+      "original_line": 86,
+      "old": "loc_1A374",
+      "new": "S3Camera_PickStartPosition",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ChooseCheckpointOrCatalogStartPosition from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/bounds_catalog.s",
+      "original_line": 95,
+      "old": "loc_1A38C",
+      "new": "S3Camera_LoadStartAndIntro",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_LoadCatalogPlayerStartAndApplyFirstActIntroOverride from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/bounds_catalog.s",
+      "original_line": 122,
+      "old": "loc_1A3E6",
+      "new": "S3Camera_TryAltICZ1Start",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ApplyAlternateIceCapStartForModeAtLeastTwo from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/bounds_catalog.s",
+      "original_line": 147,
+      "old": "loc_1A43C",
+      "new": "S3Camera_AnchorInitialX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ConvertStartXToCameraAnchorWithZeroFloor from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/bounds_catalog.s",
+      "original_line": 152,
+      "old": "loc_1A444",
+      "new": "S3Camera_TryCapInitialX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ClampInitialCameraXMaximumOutsideCompetition from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/bounds_catalog.s",
+      "original_line": 160,
+      "old": "loc_1A454",
+      "new": "S3Camera_StoreXAndAnchorY",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_StoreBothInitialCameraXAndAnchorY from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/bounds_catalog.s",
+      "original_line": 167,
+      "old": "loc_1A464",
+      "new": "S3Camera_CapInitialY",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ClampInitialCameraYBySignedMaximum from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/bounds_catalog.s",
+      "original_line": 172,
+      "old": "loc_1A46E",
+      "new": "S3Camera_StoreBothInitialCameraYIntegers",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_StoreBothInitialCameraYIntegers from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 13,
+      "old": "loc_1A480",
+      "new": "S3Camera_ClearDeltasAndPickView",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ResetCameraDisplacementsAndChooseViewportTracking from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 37,
+      "old": "loc_1A4D6",
+      "new": "S3Camera_TrackSingleY",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_TrackNormalPrimaryVerticalCamera from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 40,
+      "old": "loc_1A4DA",
+      "new": "S3Camera_RunSingleResizeEvents",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_TailResizeAfterNormalCameraTrackingOrLock from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 44,
+      "old": "loc_1A4DE",
+      "new": "S3Camera_TryTrackCompP1",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_TrackCompetitionPrimaryViewportUnlessLocked from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 62,
+      "old": "loc_1A51C",
+      "new": "S3Camera_TrackCompP1Y",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_TrackCompetitionPrimaryVerticalCamera from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 65,
+      "old": "loc_1A520",
+      "new": "S3Camera_TryTrackCompP2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_TrackSecondaryCompetitionViewportUnlessLocked from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 81,
+      "old": "loc_1A556",
+      "new": "S3Camera_RunCompResizeEvents",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_TailResizeAfterBothCompetitionViewports from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 106,
+      "old": "loc_1A584",
+      "new": "S3Camera_ReadLiveActorX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_UseLiveActorXWhenHistoryDelayIsZero from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 109,
+      "old": "loc_1A588",
+      "new": "S3Camera_CheckXDeadband",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_TestNormalHorizontalCameraDeadband from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 117,
+      "old": "locret_1A598",
+      "new": "S3Camera_TrackXReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnNormalHorizontalCameraTracking from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 121,
+      "old": "loc_1A59A",
+      "new": "S3Camera_LimitLeftStep24",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_LimitNormalLeftCameraStepToTwentyFourPixels from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 126,
+      "old": "loc_1A5A4",
+      "new": "S3Camera_ClampCandidateMinX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ClampNormalLeftCandidateToSignedMinimumX from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 134,
+      "old": "loc_1A5AE",
+      "new": "S3Camera_LimitRightStep24",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_LimitNormalRightCameraStepToTwentyFourPixels from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 139,
+      "old": "loc_1A5B8",
+      "new": "S3Camera_ClampCandidateMaxX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ClampNormalRightCandidateToSignedMaximumX from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 145,
+      "old": "loc_1A5C4",
+      "new": "S3Camera_CommitXAndScrollDelta",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_CommitNormalCameraXAndEightFractionalBitDelta from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 164,
+      "old": "loc_1A5E4",
+      "new": "S3Camera_TryApplyRollYBias",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_SubtractRollingVerticalCameraBias from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 169,
+      "old": "loc_1A5EE",
+      "new": "S3Camera_PickYTargetDistance",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_HalveVerticalCameraTargetDistanceInCompetition from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 175,
+      "old": "loc_1A5F8",
+      "new": "S3Camera_CheckAirborneYWindow",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ChooseAirborneVerticalDeadbandOrGroundedTarget from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 188,
+      "old": "loc_1A616",
+      "new": "S3Camera_CheckGroundedYDelta",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_TestGroundedVerticalDeltaAndPendingBoundChange from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 194,
+      "old": "loc_1A620",
+      "new": "S3Camera_ClearYDeltaAndReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ClearVerticalCameraDisplacementAndReturn from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 199,
+      "old": "loc_1A624",
+      "new": "S3Camera_PickYFollowRate",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ChooseVerticalFollowSpeedFromTargetAndGroundSpeed from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 208,
+      "old": "loc_1A638",
+      "new": "S3Camera_PickYRate6Or24",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ChooseSixOrFastVerticalCameraRate from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 219,
+      "old": "loc_1A650",
+      "new": "S3Camera_UseYRate2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_UseTwoPixelVerticalFollowForAlternateTargetDistance from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 228,
+      "old": "loc_1A662",
+      "new": "S3Camera_UseYRate24",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_UseTwentyFourPixelFastVerticalFollow from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 237,
+      "old": "loc_1A674",
+      "new": "S3Camera_RecheckChangedYLimit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ConsumePendingVerticalLimitChangeWithoutTargetDelta from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 241,
+      "old": "loc_1A67A",
+      "new": "S3Camera_MakeIntegerYCandidate",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_BuildExactIntegerVerticalCandidateAndChooseClampSide from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 250,
+      "old": "loc_1A68A",
+      "new": "S3Camera_StepCameraUp",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_BuildNegativeFractionalVerticalStep from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 257,
+      "old": "loc_1A694",
+      "new": "S3Camera_ClampOrWrapMinY",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ClampOrWrapVerticalCandidateAtMinimum from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 266,
+      "old": "loc_1A6A6",
+      "new": "S3Camera_ClampToMinY",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReplaceVerticalCandidateIntegerWithMinimumY from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 271,
+      "old": "loc_1A6AC",
+      "new": "S3Camera_StepCameraDown",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_BuildPositiveFractionalVerticalStep from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 277,
+      "old": "loc_1A6B4",
+      "new": "S3Camera_ClampOrWrapMaxY",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ClampOrWrapVerticalCandidateAtMaximum from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 288,
+      "old": "loc_1A6C8",
+      "new": "S3Camera_ClampToMaxY",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReplaceVerticalCandidateIntegerWithMaximumY from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 291,
+      "old": "loc_1A6CC",
+      "new": "S3Camera_CommitYAndScrollDelta",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_CommitVerticalCameraLongAndRotateScrollDelta from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 305,
+      "old": "locret_1A6E8",
+      "new": "S3Camera_TrackYReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnVerticalCameraAfterCommitAndOptionalViewportMask from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 330,
+      "old": "loc_1A714",
+      "new": "S3Camera_ReadLiveCompActorX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_UseLiveActorXForCompetitionCamera from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 333,
+      "old": "loc_1A718",
+      "new": "S3Camera_CheckCompXDeadband",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_TestWrappedCompetitionHorizontalDeadband from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 343,
+      "old": "locret_1A72E",
+      "new": "S3Camera_TrackCompXReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnCompetitionHorizontalCameraTracking from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 347,
+      "old": "loc_1A730",
+      "new": "S3Camera_LimitCompLeftStep16",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_LimitCompetitionLeftStepToSixteenPixels from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 352,
+      "old": "loc_1A73A",
+      "new": "S3Camera_ApplyCompLeftStep",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_AddCompetitionLeftStepToCurrentCameraX from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 357,
+      "old": "loc_1A73E",
+      "new": "S3Camera_LimitCompRightStep16",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_LimitCompetitionRightStepToSixteenPixels from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 362,
+      "old": "loc_1A748",
+      "new": "S3Camera_ApplyCompRightStep",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_AddCompetitionRightStepToCurrentCameraX from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "original_line": 365,
+      "old": "loc_1A74A",
+      "new": "S3Camera_CommitWrappedCompX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_CommitCompetitionWrappedXAndPrewrapScrollDelta from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 29,
+      "old": "loc_1A876",
+      "new": "S3Bounds_LowerMaxY",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_StepCurrentMaximumYDownwardAndMarkChanging from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 33,
+      "old": "locret_1A880",
+      "new": "S3Bounds_StepMaxYReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnAfterMaximumYTargetEqualityOrStep from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 37,
+      "old": "loc_1A882",
+      "new": "S3Bounds_PickMaxYGrowthRate",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ChooseTwoOrEightPixelMaximumYExpansion from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 47,
+      "old": "loc_1A89C",
+      "new": "S3Bounds_RaiseMaxY",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_StepCurrentMaximumYUpwardAndMarkChanging from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 117,
+      "old": "loc_1A920",
+      "new": "S3Bounds_AIZ1_TryExitIntroPalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_AdvanceAizIntroPaletteAndPlcAtCameraThresholds from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 132,
+      "old": "loc_1A958",
+      "new": "S3Bounds_AIZ1_LoadIntroPalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_LoadAizPaletteResetTailsAiAndAdvanceResizePhase from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 138,
+      "old": "locret_1A96A",
+      "new": "S3Bounds_AIZ1_IntroPaletteReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnFromAizIntroThresholdOrPalettePhase from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 142,
+      "old": "loc_1A96C",
+      "new": "S3Bounds_AIZ1_TryQueueMainArt",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_LockAizMinimumXAndQueueMainArtAtIntroExit from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 161,
+      "old": "loc_1A9BE",
+      "new": "S3Bounds_AIZ1_SetIntroCheckpoint",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_InstallAizSyntheticCheckpointAndAdvanceMainArtPhase from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 171,
+      "old": "locret_1A9EA",
+      "new": "S3Bounds_AIZ1_MainArtReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnFromAizMainArtThresholdPhase from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 175,
+      "old": "loc_1A9EC",
+      "new": "S3Bounds_AIZ1_UpdateHeightAndPalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_SelectAizMaximumYAndWaterPaletteBeforeFlameArea from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 184,
+      "old": "loc_1AA10",
+      "new": "S3Bounds_AIZ1_TryRaiseMinY",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_RaiseAizMinimumYAtWaterPaletteBoundary from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 189,
+      "old": "loc_1AA1E",
+      "new": "S3Bounds_AIZ1_TryStartFlameLoad",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_AdvanceAizFlameLoadingPhaseAtCameraBoundary from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 198,
+      "old": "locret_1AA3E",
+      "new": "S3Bounds_AIZ1_PreFlameReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnFromAizWaterPaletteAndFlameThresholdPhase from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 202,
+      "old": "loc_1AA40",
+      "new": "S3Bounds_AIZ1_WaitForFlameArt",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_FollowAizMinimumXAndWaitForFlameArtQueue from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 217,
+      "old": "locret_1AA7A",
+      "new": "S3Bounds_AIZ1_FlameArtReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnFromAizFlameQueueWaitOrAdvance from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 221,
+      "old": "loc_1AA7C",
+      "new": "S3Bounds_AIZ1_FollowMinX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_KeepAizMinimumXAtCurrentCameraAfterIntroPhases from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 225,
+      "old": "word_1AA84",
+      "new": "S3Bounds_AIZ1_MaxYByX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual DATA S3Camera_AizFirstActTaggedMaximumYByCameraXThresholds from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 267,
+      "old": "locret_1AAF2",
+      "new": "S3Bounds_AIZ2_InitialHeightReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnAizSecondActInitialHeightPhase from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 279,
+      "old": "loc_1AB0C",
+      "new": "S3Bounds_AIZ2_TrySpawnUpperMiniboss",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_CommitAizSecondActUpperRouteHeightAndTryMiniboss from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 293,
+      "old": "loc_1AB42",
+      "new": "S3Bounds_AIZ2_AdvanceAfterSpawnTry",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_AdvanceAizSecondActMinibossPhaseRegardlessOfAllocation from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 296,
+      "old": "locret_1AB46",
+      "new": "S3Bounds_AIZ2_UpperArenaReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnAizSecondActUpperRouteHeightOrBossPhase from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 300,
+      "old": "loc_1AB48",
+      "new": "S3Bounds_AIZ2_PickLowerHeight",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_SelectAizSecondActLowerRouteHeightByCameraX from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 306,
+      "old": "loc_1AB58",
+      "new": "S3Bounds_AIZ2_TryExpandLowerRoute",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ChooseAizLowerRouteWaterAndHeightExpansion from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 315,
+      "old": "loc_1AB70",
+      "new": "S3Bounds_AIZ2_SetLowerHeight",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_CommitAizLowerRouteCurrentAndTargetHeight from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 328,
+      "old": "locret_1AB92",
+      "new": "S3Bounds_AIZ2_MidlevelHeightReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnAizSecondActMidlevelHeightThreshold from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 351,
+      "old": "locret_1ABE2",
+      "new": "S3Bounds_AIZ2_BombershipArtReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnAizSecondActBombershipResourcePhase from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 363,
+      "old": "locret_1ABFC",
+      "new": "S3Bounds_AIZ2_MinYLockReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnAizSecondActMinimumYThreshold from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 375,
+      "old": "locret_1AC16",
+      "new": "S3Bounds_AIZ2_MaxYLockReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnAizSecondActMaximumYLockThreshold from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 385,
+      "old": "locret_1AC28",
+      "new": "S3Bounds_AIZ2_ShipSignalReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnAizSecondActShipSignalThreshold from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 394,
+      "old": "locret_1AC36",
+      "new": "S3Bounds_AIZ2_FinalGateReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnAizSecondActFinalPhaseThreshold from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 414,
+      "old": "loc_1AC4E",
+      "new": "S3Bounds_HCZ1_TryLoadStartPalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ApplyHczFirstActDeepLeftPaletteAndAdvance from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 426,
+      "old": "locret_1AC72",
+      "new": "S3Bounds_HCZ1_StartPaletteReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnHczFirstActPaletteEntryPhase from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 430,
+      "old": "loc_1AC74",
+      "new": "S3Bounds_HCZ1_CheckPaletteRegion",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_RevertOrFinishHczFirstActCoordinatePalettePhase from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 439,
+      "old": "loc_1AC8A",
+      "new": "S3Bounds_HCZ1_TryFinishPalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_FinishHczPalettePhaseAfterRightAndLowerThresholds from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 446,
+      "old": "loc_1AC9E",
+      "new": "S3Bounds_HCZ1_RestoreStartColors",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_RestoreHczFirstActThreePaletteWords from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 452,
+      "old": "locret_1ACAE",
+      "new": "S3Camera_ReturnHczPaletteRestoreOrWait",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnHczPaletteRestoreOrWait from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 456,
+      "old": "locret_1ACB0",
+      "new": "S3Bounds_HCZ1_FinalReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnCompletedHczFirstActResizePhase from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 471,
+      "old": "loc_1ACC4",
+      "new": "S3Bounds_HCZ2_TrySignalForeground",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_SignalHczSecondActScreenPhaseAtCameraX from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 477,
+      "old": "locret_1ACD4",
+      "new": "S3Bounds_HCZ2_ForegroundReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnHczSecondActScreenSignalPhase from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 481,
+      "old": "locret_1ACD6",
+      "new": "S3Bounds_HCZ2_FinalReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnCompletedHczSecondActResizePhase from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 501,
+      "old": "loc_1ACEC",
+      "new": "S3Bounds_MGZ_TryLockArena",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_LockMgzArenaBoundsWhenCameraEntersBand from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 519,
+      "old": "locret_1AD28",
+      "new": "S3Camera_ReturnMgzArenaEntryGate",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnMgzArenaEntryGate from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 523,
+      "old": "loc_1AD2A",
+      "new": "S3Bounds_MGZ_PickSpawnOrRollback",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ChooseMgzArenaBossSpawnOrBoundsReversion from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 537,
+      "old": "loc_1AD5E",
+      "new": "S3Bounds_MGZ_AdvanceAfterSpawnTry",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_AdvanceMgzBossResizePhaseAfterSpawnAttempt from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 542,
+      "old": "loc_1AD64",
+      "new": "S3Bounds_MGZ_RestoreOpenBounds",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_RestoreMgzBroadBoundsAndPreviousResizePhase from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 551,
+      "old": "locret_1AD82",
+      "new": "S3Bounds_MGZ_ArenaWaitReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnMgzBossWaitOrBoundsReversion from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 555,
+      "old": "locret_1AD84",
+      "new": "S3Bounds_MGZ_FinalReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnCompletedMgzBossResizePhase from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 578,
+      "old": "loc_1AD9C",
+      "new": "S3Bounds_ICZ1_TrySignalFirstScene",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_SignalIceCapFirstActSceneAtCameraXY from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 586,
+      "old": "locret_1ADB4",
+      "new": "S3Bounds_ICZ1_FirstSceneReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnIceCapFirstActInitialSceneThreshold from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 590,
+      "old": "loc_1ADB6",
+      "new": "S3Bounds_ICZ1_TrySignalSecondScene",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_SignalIceCapFirstActSecondSceneAtCameraX from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 596,
+      "old": "locret_1ADC6",
+      "new": "S3Bounds_ICZ1_SecondSceneReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnIceCapFirstActSecondSceneThreshold from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 600,
+      "old": "locret_1ADC8",
+      "new": "S3Bounds_ICZ1_FinalReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnCompletedIceCapFirstActResizePhase from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 615,
+      "old": "loc_1ADDC",
+      "new": "S3Bounds_ICZ2_TryLockUpperRoute",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_SetIceCapSecondActMinimumXAfterUpperRouteGate from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 623,
+      "old": "locret_1ADF6",
+      "new": "S3Bounds_ICZ2_UpperRouteReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnIceCapSecondActMinimumXThreshold from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 627,
+      "old": "locret_1ADF8",
+      "new": "S3Bounds_ICZ2_FinalReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnCompletedIceCapSecondActResizePhase from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 646,
+      "old": "loc_1AE0E",
+      "new": "S3Bounds_LBZ2_TryQueueDeathEggArt",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_QueueLaunchBaseDeathEggTerrainAndArtAtCameraGate from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 665,
+      "old": "locret_1AE64",
+      "new": "S3Bounds_LBZ2_DeathEggQueueReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnLaunchBaseTerrainArtWaitOrSubmission from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 669,
+      "old": "locret_1AE66",
+      "new": "S3Bounds_LBZ2_FinalReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnCompletedLaunchBaseSecondActResizePhase from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 681,
+      "old": "loc_1AE6E",
+      "new": "S3Bounds_FindMaxYAtCameraX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ScanTaggedMaximumYRecordsUntilCameraXThreshold from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "original_line": 691,
+      "old": "loc_1AE82",
+      "new": "S3Bounds_StoreTargetMaxY",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_StoreSelectedTaggedOrUntaggedTargetMaximumY from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/gradual_bounds.s",
+      "original_line": 19,
+      "old": "loc_531BC",
+      "new": "S3Camera_LatchGrowingMaxX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ClampGrowingMaximumXAtStoredUnsignedTarget from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/gradual_bounds.s",
+      "original_line": 22,
+      "old": "loc_531C2",
+      "new": "S3Camera_DeleteCompletedActor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_TailDeleteCurrentActorFromBoundOrForeignFadeCompletion from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/gradual_bounds.s",
+      "original_line": 39,
+      "old": "loc_531EA",
+      "new": "S3Camera_LatchLowerMinX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ClampDecreasingMinimumXAtStoredSignedTarget from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/gradual_bounds.s",
+      "original_line": 57,
+      "old": "loc_53218",
+      "new": "S3Camera_LatchLowerMinY",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ClampDecreasingMinimumYAtStoredSignedTarget from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/gradual_bounds.s",
+      "original_line": 75,
+      "old": "loc_53246",
+      "new": "S3Camera_LatchGrowingMaxY",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ClampGrowingMaximumYOnlyAfterStrictSignedOvershoot from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/scroll_events.s",
+      "original_line": 65,
+      "old": "locret_3A07E",
+      "new": "S3Camera_SpecialEventReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ReturnFromInactiveOrBlockedSpecialEvent from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/scroll_events.s",
+      "original_line": 81,
+      "old": "loc_3A090",
+      "new": "S3Camera_SubtractBgLoopDelta",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_SubtractAdjustedNegativeLoopDeltaFromFollowingWord from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/scroll_events.s",
+      "original_line": 86,
+      "old": "loc_3A094",
+      "new": "S3Camera_WrapPositiveLoopDelta",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_AdjustPositiveLoopDeltaAcrossWrapThreshold from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/scroll_events.s",
+      "original_line": 91,
+      "old": "loc_3A09A",
+      "new": "S3Camera_AddBgLoopDelta",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_AddAdjustedPositiveLoopDeltaToFollowingWord from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/scroll_events.s",
+      "original_line": 125,
+      "old": "loc_3A0E0",
+      "new": "S3Camera_PickContinuousShake",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_SelectContinuousShakeByteFromFramePhase from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/scroll_events.s",
+      "original_line": 133,
+      "old": "loc_3A0F2",
+      "new": "S3Camera_ClearShake",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_ClearShakeOffsetForDeadPlayerOrInactiveFlag from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/scroll_events.s",
+      "original_line": 144,
+      "old": "loc_3A0FE",
+      "new": "S3Camera_TryOffsetWorldActor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_OffsetLiveWorldSpaceActorIntegersDuringTransition from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/s3/scroll_events.s",
+      "original_line": 152,
+      "old": "loc_3A112",
+      "new": "S3Camera_NextTransitionActor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual CODE S3Camera_AdvanceTransitionOffsetActorRange from exact source and native readers."
+    },
+    {
+      "source": "src/game/level/sk/bounds_catalog.s",
+      "original_line": 86,
+      "old": "loc_1BE46",
+      "new": "SKCamera_PickStartPosition",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ChooseCheckpointRestoreOrCharacterStart."
+    },
+    {
+      "source": "src/game/level/sk/bounds_catalog.s",
+      "original_line": 95,
+      "old": "loc_1BE5E",
+      "new": "SKCamera_PickStartTable",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_SelectNormalOrKnucklesStartRecordTable."
+    },
+    {
+      "source": "src/game/level/sk/bounds_catalog.s",
+      "original_line": 104,
+      "old": "loc_1BE7A",
+      "new": "SKCamera_StoreStartAndIntro",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_WriteStartCoordinatesAndApplyAizIntroOverride."
+    },
+    {
+      "source": "src/game/level/sk/bounds_catalog.s",
+      "original_line": 127,
+      "old": "loc_1BEC6",
+      "new": "SKCamera_TryICZ1TailsStart",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ApplyTailsOnlyIcecapOneStartAndCameraOverride."
+    },
+    {
+      "source": "src/game/level/sk/bounds_catalog.s",
+      "original_line": 153,
+      "old": "loc_1BF1E",
+      "new": "SKCamera_TryLockOnMHZ1Start",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_AdjustLockOnMushroomHillOneHorizontalStart."
+    },
+    {
+      "source": "src/game/level/sk/bounds_catalog.s",
+      "original_line": 166,
+      "old": "loc_1BF48",
+      "new": "SKCamera_PickSceneStartBias",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_SelectSceneDependentStartCameraBias."
+    },
+    {
+      "source": "src/game/level/sk/bounds_catalog.s",
+      "original_line": 176,
+      "old": "loc_1BF68",
+      "new": "SKCamera_TryKnuxSceneBias",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_GateLavaReefCarnivalCameraBiasByKnucklesMode."
+    },
+    {
+      "source": "src/game/level/sk/bounds_catalog.s",
+      "original_line": 180,
+      "old": "loc_1BF70",
+      "new": "SKCamera_AddSceneLead",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_AddSceneCameraLeadBiasBeforeCenterSubtraction."
+    },
+    {
+      "source": "src/game/level/sk/bounds_catalog.s",
+      "original_line": 184,
+      "old": "loc_1BF74",
+      "new": "SKCamera_AnchorInitialX",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_SubtractInitialHorizontalCameraCenterAndFloorOnBorrow."
+    },
+    {
+      "source": "src/game/level/sk/bounds_catalog.s",
+      "original_line": 189,
+      "old": "loc_1BF7C",
+      "new": "SKCamera_TryCapInitialX",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ClampInitialCameraXToMaximumOutsideCompetition."
+    },
+    {
+      "source": "src/game/level/sk/bounds_catalog.s",
+      "original_line": 197,
+      "old": "loc_1BF8C",
+      "new": "SKCamera_StoreXAndAnchorY",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_StoreBothCameraXWordsAndDeriveInitialCameraY."
+    },
+    {
+      "source": "src/game/level/sk/bounds_catalog.s",
+      "original_line": 204,
+      "old": "loc_1BF9C",
+      "new": "SKCamera_CapInitialY",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ClampInitialCameraYUsingSignedMaximumComparison."
+    },
+    {
+      "source": "src/game/level/sk/bounds_catalog.s",
+      "original_line": 209,
+      "old": "loc_1BFA6",
+      "new": "SKCamera_StoreBothCameraYIntegerWords",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_StoreBothCameraYIntegerWords."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 13,
+      "old": "loc_1BFB8",
+      "new": "SKCamera_ClearDeltasAndPickView",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ClearScrollDeltasAndChooseSingleOrSplitCameraUpdate."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 29,
+      "old": "loc_1BFF0",
+      "new": "SKCamera_SetSingleViewport",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_BindSingleCameraHistoryAndVerticalTargetDistance."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 44,
+      "old": "loc_1C024",
+      "new": "SKCamera_TrackSingleY",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_RunSingleVerticalCameraBeforeResizeEvents."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 47,
+      "old": "loc_1C028",
+      "new": "SKCamera_RunSingleResizeEvents",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_TailRunResizeEventsAfterSingleCameraOrScrollLock."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 51,
+      "old": "loc_1C02C",
+      "new": "SKCamera_TryTrackCompP1",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_TrackPrimarySplitScreenCameraUnlessLocked."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 69,
+      "old": "loc_1C06A",
+      "new": "SKCamera_RunPrimarySplitVerticalCamera",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_RunPrimarySplitVerticalCamera."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 72,
+      "old": "loc_1C06E",
+      "new": "SKCamera_TryTrackCompP2",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_TrackSecondarySplitScreenCameraUnlessLocked."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 88,
+      "old": "loc_1C0A4",
+      "new": "SKCamera_RunCompResizeEvents",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_TailRunSharedResizeAfterBothSplitCameras."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 113,
+      "old": "loc_1C0D2",
+      "new": "SKCamera_ReadLiveActorX",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReadLiveActorXWhenCameraHistoryDelayZero."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 116,
+      "old": "loc_1C0D6",
+      "new": "SKCamera_CheckXDeadband",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_TestNormalCameraHorizontalDeadBand."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 124,
+      "old": "locret_1C0E6",
+      "new": "SKCamera_TrackXReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnNormalHorizontalCameraTeleportOrDeadBand."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 128,
+      "old": "loc_1C0E8",
+      "new": "SKCamera_LimitLeftStep24",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_LimitNormalCameraLeftStepToTwentyFourPixels."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 133,
+      "old": "loc_1C0F2",
+      "new": "SKCamera_ClampCandidateMinX",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ClampNormalCameraLeftCandidateToSignedMinimum."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 141,
+      "old": "loc_1C0FC",
+      "new": "SKCamera_LimitRightStep24",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_LimitNormalCameraRightStepToTwentyFourPixels."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 146,
+      "old": "loc_1C106",
+      "new": "SKCamera_ClampCandidateMaxX",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ClampNormalCameraRightCandidateToSignedMaximum."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 152,
+      "old": "loc_1C112",
+      "new": "SKCamera_CommitXAndScrollDelta",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_CommitNormalCameraXAndEncodeWordScrollDelta."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 171,
+      "old": "loc_1C132",
+      "new": "SKCamera_TryApplyRollYBias",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ApplyRollingVerticalCameraOffset."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 176,
+      "old": "loc_1C13C",
+      "new": "SKCamera_PickYTargetDistance",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_HalveVerticalTargetDistanceInCompetition."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 182,
+      "old": "loc_1C146",
+      "new": "SKCamera_CheckAirborneYWindow",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ApplyAirborneVerticalCameraWindowAndChangingLimitGate."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 195,
+      "old": "loc_1C164",
+      "new": "SKCamera_CheckGroundedYDelta",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_TrackGroundedVerticalOffsetOrChangingBoundary."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 201,
+      "old": "loc_1C16E",
+      "new": "SKCamera_ClearYDeltaAndReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnVerticalDeadBandWithZeroScrollDelta."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 206,
+      "old": "loc_1C172",
+      "new": "SKCamera_PickYFollowRate",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ChooseVerticalRateFromOriginalDistanceAndGroundSpeed."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 215,
+      "old": "loc_1C186",
+      "new": "SKCamera_PickYRate6Or24",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_SelectSixOrTwentyFourPixelVerticalTracking."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 226,
+      "old": "loc_1C19E",
+      "new": "SKCamera_UseYRate2",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_SelectTwoPixelVerticalTrackingForNondefaultDistance."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 235,
+      "old": "loc_1C1B0",
+      "new": "SKCamera_UseYRate24",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_SelectTwentyFourPixelVerticalTracking."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 244,
+      "old": "loc_1C1C2",
+      "new": "SKCamera_RecheckChangedYLimit",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ConsumeMaximumYChangingFlagAndForceDirectRecheck."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 248,
+      "old": "loc_1C1C8",
+      "new": "SKCamera_MakeIntegerYCandidate",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_BuildDirectVerticalCameraCandidateWithZeroFraction."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 257,
+      "old": "loc_1C1D8",
+      "new": "SKCamera_StepCameraUp",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_IntegrateUpwardCameraVelocityIntoLongPosition."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 264,
+      "old": "loc_1C1E2",
+      "new": "SKCamera_ClampOrWrapMinY",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ClampOrWrapUpwardCameraCandidate."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 273,
+      "old": "loc_1C1F4",
+      "new": "SKCamera_ClampToMinY",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ClampUpwardCandidateToMinimumYWord."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 278,
+      "old": "loc_1C1FA",
+      "new": "SKCamera_StepCameraDown",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_IntegrateDownwardCameraVelocityIntoLongPosition."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 284,
+      "old": "loc_1C202",
+      "new": "SKCamera_ClampOrWrapMaxY",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ClampOrWrapDownwardCandidateUsingMaskPlusOne."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 295,
+      "old": "loc_1C216",
+      "new": "SKCamera_ClampToMaxY",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ClampDownwardCandidateToMaximumY."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 298,
+      "old": "loc_1C21A",
+      "new": "SKCamera_CommitYAndScrollDelta",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_CommitCameraYLongAndRotateEncodedScrollDelta."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 312,
+      "old": "locret_1C236",
+      "new": "SKCamera_TrackYReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnVerticalTrackingAfterOptionalCompetitionMask."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 337,
+      "old": "loc_1C262",
+      "new": "SKCamera_ReadLiveCompActorX",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReadLiveXForSplitCameraWithoutHistoryDelay."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 340,
+      "old": "loc_1C266",
+      "new": "SKCamera_CheckCompXDeadband",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ComputeWrappedHorizontalDeadBandForSplitCamera."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 350,
+      "old": "locret_1C27C",
+      "new": "SKCamera_TrackCompXReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnSplitHorizontalTeleportOrDeadBand."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 354,
+      "old": "loc_1C27E",
+      "new": "SKCamera_LimitCompLeftStep16",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_LimitSplitCameraLeftStepToSixteenPixels."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 359,
+      "old": "loc_1C288",
+      "new": "SKCamera_ApplyCompLeftStep",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_AddSplitLeftStepBeforeWrappedCommit."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 364,
+      "old": "loc_1C28C",
+      "new": "SKCamera_LimitCompRightStep16",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_LimitSplitCameraRightStepToSixteenPixels."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 369,
+      "old": "loc_1C296",
+      "new": "SKCamera_ApplyCompRightStep",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_AddSplitRightStepBeforeWrappedCommit."
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "original_line": 372,
+      "old": "loc_1C298",
+      "new": "SKCamera_CommitWrappedCompX",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_CommitWrappedSplitCameraXAfterUnwrappedDelta."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 29,
+      "old": "loc_1C3C4",
+      "new": "SKBounds_LowerMaxY",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_DecreaseCurrentMaximumYAndMarkLimitChanging."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 33,
+      "old": "locret_1C3CE",
+      "new": "SKBounds_StepMaxYReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnMaximumYEqualOrAfterDecreasingLimit."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 37,
+      "old": "loc_1C3D0",
+      "new": "SKBounds_PickMaxYGrowthRate",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ChooseTwoOrEightPixelMaximumYGrowthStep."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 47,
+      "old": "loc_1C3EA",
+      "new": "SKBounds_RaiseMaxY",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_IncreaseCurrentMaximumYAndMarkLimitChanging."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 117,
+      "old": "loc_1C46E",
+      "new": "SKBounds_AIZ1_TryExitIntroPalette",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_GateAizOneIntroPaletteAndFirstResourceTransition."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 132,
+      "old": "loc_1C4A6",
+      "new": "SKBounds_AIZ1_LoadIntroPalette",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_LoadAizPaletteAndKnucklesFourWordOverride."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 142,
+      "old": "loc_1C4C4",
+      "new": "SKBounds_AIZ1_ReleaseTailsAndAdvance",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReleaseTailsCpuAndAdvanceAizIntroState."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 146,
+      "old": "locret_1C4CE",
+      "new": "SKBounds_AIZ1_IntroPaletteReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnAizIntroThresholdWaitOrPaletteCompletion."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 150,
+      "old": "loc_1C4D0",
+      "new": "SKBounds_AIZ1_TryQueueMainArt",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_HoldAizIntroMinimumXAndGateMainLevelQueues."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 169,
+      "old": "loc_1C522",
+      "new": "SKBounds_AIZ1_SetIntroCheckpoint",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_SeedAizCheckpointAndQueueIntroContinuation."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 179,
+      "old": "locret_1C54E",
+      "new": "SKBounds_AIZ1_MainArtReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnAizMainResourceThresholdWaitOrCheckpointCompletion."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 183,
+      "old": "loc_1C550",
+      "new": "SKBounds_AIZ1_UpdateHeightAndPalette",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ApplyAizOneHeightTableAndFadeSensitiveColor."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 194,
+      "old": "loc_1C578",
+      "new": "SKBounds_AIZ1_TryOverrideColor",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_OverrideAizOneNormalColorAtLateHorizontalThreshold."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 199,
+      "old": "loc_1C586",
+      "new": "SKBounds_AIZ1_TryRaiseMinY",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_RaiseAizOneMinimumYAtLateHorizontalThreshold."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 204,
+      "old": "loc_1C594",
+      "new": "SKBounds_AIZ1_PickFlameEntryColor",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_SelectCharacterDependentAizOneExitColor."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 212,
+      "old": "loc_1C5AE",
+      "new": "SKBounds_AIZ1_StartFlameLoad",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_CommitAizOneExitColorLockAndPlcAdvance."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 219,
+      "old": "locret_1C5C4",
+      "new": "SKBounds_AIZ1_PreFlameReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnAizOneHeightAndExitColorState."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 223,
+      "old": "loc_1C5C6",
+      "new": "SKBounds_AIZ1_WaitForFlameArt",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_TrackAizOneHeightAndWaitForFlameModuleQueue."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 238,
+      "old": "locret_1C600",
+      "new": "SKBounds_AIZ1_FlameArtReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnAizOneFlameQueueWaitOrAdvance."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 242,
+      "old": "loc_1C602",
+      "new": "SKBounds_AIZ1_FollowMinX",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ContinuouslyPinAizOneFinalMinimumXToCamera."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 246,
+      "old": "word_1C60A",
+      "new": "SKBounds_AIZ1_MaxYByX",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed DATA SKCamera_AizOneImmediateMaximumYByInclusiveUpperXTable."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 279,
+      "old": "loc_1C64E",
+      "new": "SKBounds_AIZ2_PickResizeGraph",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ChooseAizTwoSonicOrKnucklesResizeGraph."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 286,
+      "old": "loc_1C660",
+      "new": "SKBounds_AIZ2_StartSonicResize",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_AdvanceIntoAizTwoSonicFirstHeightCheckNow."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 301,
+      "old": "locret_1C68E",
+      "new": "SKBounds_AIZ2_SonicInitialHeightReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnAizTwoSonicFirstHeightOrCheckpointSkip."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 311,
+      "old": "loc_1C6A0",
+      "new": "SKBounds_AIZ2_TrySpawnSonicMiniboss",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ApplyAizTwoSonicArenaHeightAndAttemptMinibossSpawn."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 325,
+      "old": "loc_1C6D6",
+      "new": "SKBounds_AIZ2_AdvanceSonicAfterSpawn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_AdvanceAizTwoSonicArenaStateEvenWithoutAllocatedBoss."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 328,
+      "old": "locret_1C6DA",
+      "new": "SKBounds_AIZ2_SonicArenaReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnAizTwoSonicArenaLimitAndSpawnAttempt."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 339,
+      "old": "locret_1C6F4",
+      "new": "SKBounds_AIZ2_SonicAfterBossReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnAizTwoSonicPostMinibossHeightState."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 362,
+      "old": "locret_1C744",
+      "new": "SKBounds_AIZ2_SonicBombershipReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnAizTwoSonicBombershipResourceGate."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 374,
+      "old": "locret_1C75E",
+      "new": "SKBounds_AIZ2_SonicMinYLockReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnAizTwoSonicMinimumYLockState."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 386,
+      "old": "locret_1C778",
+      "new": "SKBounds_AIZ2_SonicMaxYLockReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnAizTwoSonicMaximumYLockState."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 412,
+      "old": "locret_1C7B6",
+      "new": "SKBounds_AIZ2_KnuxInitialHeightReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnAizTwoKnucklesFirstHeightOrCheckpointSkip."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 422,
+      "old": "loc_1C7C8",
+      "new": "SKBounds_AIZ2_TrySpawnKnuxMiniboss",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ApplyAizTwoKnucklesArenaHeightAndAttemptMinibossSpawn."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 436,
+      "old": "loc_1C7FE",
+      "new": "SKBounds_AIZ2_AdvanceKnuxAfterSpawn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_SetKnucklesArenaWaterTargetAndAdvanceDespiteSpawnFailure."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 440,
+      "old": "locret_1C808",
+      "new": "SKBounds_AIZ2_KnuxArenaReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnAizTwoKnucklesArenaLimitAndSpawnAttempt."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 450,
+      "old": "locret_1C81C",
+      "new": "SKBounds_AIZ2_KnuxAfterBossReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnAizTwoKnucklesPostMinibossTargetHeightState."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 472,
+      "old": "locret_1C868",
+      "new": "SKBounds_AIZ2_KnuxBombershipReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnAizTwoKnucklesBombershipResourceGate."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 499,
+      "old": "loc_1C892",
+      "new": "SKBounds_HCZ1_TryLoadStartPalette",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ApplyHczOneLowerStartAreaPaletteAndAdvance."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 511,
+      "old": "locret_1C8B6",
+      "new": "SKBounds_HCZ1_StartPaletteReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnHczOneLowerStartPaletteGate."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 515,
+      "old": "loc_1C8B8",
+      "new": "SKBounds_HCZ1_CheckPaletteRegion",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ChooseHczOnePaletteRollbackOrExitRegionGate."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 524,
+      "old": "loc_1C8CE",
+      "new": "SKBounds_HCZ1_TryFinishPalette",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_GateHczOnePermanentPaletteRestoreByBothCoordinates."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 531,
+      "old": "loc_1C8E2",
+      "new": "SKBounds_HCZ1_RestoreStartColors",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_RestoreHczOneNormalPaletteAfterRollbackOrRegionExit."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 537,
+      "old": "locret_1C8F2",
+      "new": "SKBounds_HCZ1_PaletteRestoreReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnHczOnePaletteWaitOrRestoration."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 541,
+      "old": "locret_1C8F4",
+      "new": "SKCamera_ReturnHczOneTerminalResizeState",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnHczOneTerminalResizeState."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 556,
+      "old": "loc_1C908",
+      "new": "SKBounds_HCZ2_TrySignalForeground",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_SignalHczTwoForegroundEventAtCameraThreshold."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 562,
+      "old": "locret_1C918",
+      "new": "SKBounds_HCZ2_ForegroundReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnHczTwoForegroundThresholdWaitOrSignal."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 566,
+      "old": "locret_1C91A",
+      "new": "SKCamera_ReturnHczTwoTerminalResizeState",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnHczTwoTerminalResizeState."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 586,
+      "old": "loc_1C930",
+      "new": "SKBounds_MGZ_TryLockArena",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_LockMarbleGardenArenaBoundsFromSharedActGraph."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 604,
+      "old": "locret_1C96C",
+      "new": "SKBounds_MGZ_ArenaEntryReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnMarbleGardenArenaEntryGate."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 608,
+      "old": "loc_1C96E",
+      "new": "SKBounds_MGZ_PickSpawnOrRollback",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_GateMarbleGardenBossSpawnOrRollbackBounds."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 622,
+      "old": "loc_1C9A2",
+      "new": "SKBounds_MGZ_AdvanceAfterSpawnTry",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_AdvanceMarbleGardenArenaStateDespiteAllocationFailure."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 627,
+      "old": "loc_1C9A8",
+      "new": "SKBounds_MGZ_RestoreOpenBounds",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_RollbackMarbleGardenVerticalPairAndHorizontalMaximum."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 636,
+      "old": "locret_1C9C6",
+      "new": "SKBounds_MGZ_ArenaWaitReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnMarbleGardenArenaWaitOrRollback."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 640,
+      "old": "locret_1C9C8",
+      "new": "SKBounds_MGZ_FinalReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnMarbleGardenTerminalResizeState."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 663,
+      "old": "loc_1C9E0",
+      "new": "SKBounds_ICZ1_TrySignalFirstScene",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_SignalIcecapOneFirstForegroundEventByBothCoordinates."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 671,
+      "old": "locret_1C9F8",
+      "new": "SKBounds_ICZ1_FirstSceneReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnIcecapOneFirstForegroundGate."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 675,
+      "old": "loc_1C9FA",
+      "new": "SKBounds_ICZ1_TrySignalSecondScene",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_SignalIcecapOneSecondForegroundEventByX."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 681,
+      "old": "locret_1CA0A",
+      "new": "SKBounds_ICZ1_SecondSceneReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnIcecapOneSecondForegroundGate."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 685,
+      "old": "locret_1CA0C",
+      "new": "SKBounds_ICZ1_FinalReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnIcecapOneTerminalResizeState."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 700,
+      "old": "loc_1CA20",
+      "new": "SKBounds_ICZ2_TryLockUpperRoute",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_LockIcecapTwoMinimumXAboveVerticalThreshold."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 708,
+      "old": "locret_1CA3A",
+      "new": "SKCamera_ReturnIcecapTwoMinimumXGate",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnIcecapTwoMinimumXGate."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 712,
+      "old": "locret_1CA3C",
+      "new": "SKBounds_ICZ2_FinalReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnIcecapTwoTerminalResizeState."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 731,
+      "old": "loc_1CA52",
+      "new": "SKBounds_LBZ2_TryQueueDeathEggArt",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_AdvanceLaunchBaseTwoStateBeforeDeathEggResourceQueues."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 750,
+      "old": "locret_1CAA8",
+      "new": "SKBounds_LBZ2_DeathEggQueueReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnLaunchBaseTwoDeathEggQueueGate."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 754,
+      "old": "locret_1CAAA",
+      "new": "SKBounds_LBZ2_FinalReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnLaunchBaseTwoTerminalResizeState."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 766,
+      "old": "loc_1CAB2",
+      "new": "SKBounds_FindMaxYAtCameraX",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ScanHeightThresholdRecordsByUnsignedCameraX."
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "original_line": 776,
+      "old": "loc_1CAC6",
+      "new": "SKBounds_StoreTargetMaxY",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_WriteSelectedMaximumYTargetAndReturn."
+    },
+    {
+      "source": "src/game/level/sk/gradual_bounds.s",
+      "original_line": 19,
+      "old": "loc_84A6A",
+      "new": "SKCamera_LatchGrowingMaxX",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ClampGraduallyIncreasingMaximumXAndDeleteActor."
+    },
+    {
+      "source": "src/game/level/sk/gradual_bounds.s",
+      "original_line": 22,
+      "old": "loc_84A70",
+      "new": "SKCamera_DeleteCompletedActor",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_TailDeleteCompletedGradualBoundActor."
+    },
+    {
+      "source": "src/game/level/sk/gradual_bounds.s",
+      "original_line": 39,
+      "old": "loc_84A98",
+      "new": "SKCamera_LatchLowerMinX",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ClampGraduallyDecreasingMinimumXAndDeleteActor."
+    },
+    {
+      "source": "src/game/level/sk/gradual_bounds.s",
+      "original_line": 57,
+      "old": "loc_84AC6",
+      "new": "SKCamera_LatchLowerMinY",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ClampGraduallyDecreasingMinimumYAndDeleteActor."
+    },
+    {
+      "source": "src/game/level/sk/gradual_bounds.s",
+      "original_line": 75,
+      "old": "loc_84AF4",
+      "new": "SKCamera_LatchGrowingMaxY",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ClampGraduallyIncreasingMaximumYOnlyAfterStrictOvershoot."
+    },
+    {
+      "source": "src/game/level/sk/scroll_events.s",
+      "original_line": 69,
+      "old": "locret_4F366",
+      "new": "SKCamera_SpecialEventReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnNoSpecialEventOrDeadPrimaryPlayer."
+    },
+    {
+      "source": "src/game/level/sk/scroll_events.s",
+      "original_line": 85,
+      "old": "loc_4F378",
+      "new": "SKCamera_SubtractBgLoopDelta",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_SubtractNegativeLoopMagnitudeFromPairedBackgroundWord."
+    },
+    {
+      "source": "src/game/level/sk/scroll_events.s",
+      "original_line": 90,
+      "old": "loc_4F37C",
+      "new": "SKCamera_WrapPositiveLoopDelta",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_AdjustPositiveBackgroundLoopDeltaByOnePeriod."
+    },
+    {
+      "source": "src/game/level/sk/scroll_events.s",
+      "original_line": 95,
+      "old": "loc_4F382",
+      "new": "SKCamera_AddBgLoopDelta",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_AddAdjustedLoopDeltaToPairedBackgroundWord."
+    },
+    {
+      "source": "src/game/level/sk/scroll_events.s",
+      "original_line": 120,
+      "old": "loc_4F3A8",
+      "new": "SKCamera_SelectBirdSlotsToOffset",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_SelectFourSuperTailsBirdSlotsForTransitionOffset."
+    },
+    {
+      "source": "src/game/level/sk/scroll_events.s",
+      "original_line": 130,
+      "old": "loc_4F3B6",
+      "new": "SKCamera_TryOffsetWorldActor",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ShiftActiveWorldPositionedActorWordsDuringTransition."
+    },
+    {
+      "source": "src/game/level/sk/scroll_events.s",
+      "original_line": 138,
+      "old": "loc_4F3CA",
+      "new": "SKCamera_NextTransitionActor",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_AdvanceTransitionObjectScanWithoutResettingOffsets."
+    },
+    {
+      "source": "src/game/level/sk/scroll_events.s",
+      "original_line": 161,
+      "old": "loc_4F3FA",
+      "new": "SKCamera_PickContinuousShake",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_SelectConstantScreenShakeFromFrameCounterLowSixBits."
+    },
+    {
+      "source": "src/game/level/sk/scroll_events.s",
+      "original_line": 166,
+      "old": "loc_4F406",
+      "new": "SKCamera_StoreShake",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_CommitCurrentScreenShakeOffsetWord."
+    },
+    {
+      "source": "src/game/level/sk/scroll_events.s",
+      "original_line": 182,
+      "old": "locret_4F422",
+      "new": "SKCamera_GlideShakeReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCamera_ReturnBackgroundGlideShakeAfterOptionalCameraCopyXOffset."
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/game/level/s3/bounds_catalog.s",
+      "tokens": [
+        [27, 1, 0, ""],
+        [77, 0, 0, ""],
+        [79, 1, 1, ""],
+        [83, 1, 3, ""],
+        [84, 0, 1, ""],
+        [97, 1, 3, ""],
+        [99, 1, 2, ""],
+        [101, 1, 2, ""],
+        [110, 0, 2, ""],
+        [112, 1, 3, ""],
+        [114, 1, 3, ""],
+        [133, 0, 3, ""],
+        [135, 1, 4, ""],
+        [137, 0, 4, ""],
+        [139, 1, 5, ""],
+        [142, 1, 5, ""],
+        [144, 0, 5, ""],
+        [148, 1, 6, ""],
+        [150, 0, 6, ""],
+        [152, 1, 7, ""],
+        [154, 0, 7, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/s3/camera.s",
+      "tokens": [
+        [3, 1, 8, ""],
+        [5, 0, 8, ""],
+        [11, 1, 11, ""],
+        [13, 1, 10, ""],
+        [26, 1, 9, ""],
+        [28, 0, 9, ""],
+        [30, 0, 10, ""],
+        [32, 0, 11, ""],
+        [34, 1, 13, ""],
+        [47, 1, 12, ""],
+        [49, 0, 12, ""],
+        [51, 0, 13, ""],
+        [53, 1, 14, ""],
+        [66, 0, 14, ""],
+        [71, 1, 17, ""],
+        [73, 1, 15, ""],
+        [84, 1, 16, ""],
+        [85, 0, 15, ""],
+        [87, 0, 16, ""],
+        [90, 1, 18, ""],
+        [92, 1, 20, ""],
+        [94, 0, 17, ""],
+        [96, 0, 18, ""],
+        [98, 1, 19, ""],
+        [100, 0, 19, ""],
+        [103, 1, 22, ""],
+        [105, 1, 22, ""],
+        [106, 0, 20, ""],
+        [108, 1, 21, ""],
+        [110, 0, 21, ""],
+        [113, 1, 22, ""],
+        [115, 0, 22, ""],
+        [127, 1, 23, ""],
+        [129, 0, 23, ""],
+        [131, 1, 24, ""],
+        [133, 0, 24, ""],
+        [136, 1, 25, ""],
+        [138, 0, 25, ""],
+        [140, 1, 26, ""],
+        [143, 1, 31, ""],
+        [145, 1, 31, ""],
+        [147, 1, 32, ""],
+        [148, 1, 27, ""],
+        [149, 0, 26, ""],
+        [151, 1, 28, ""],
+        [153, 1, 32, ""],
+        [154, 0, 27, ""],
+        [157, 0, 28, ""],
+        [159, 1, 30, ""],
+        [161, 1, 31, ""],
+        [163, 1, 29, ""],
+        [165, 0, 29, ""],
+        [167, 1, 31, ""],
+        [170, 1, 37, ""],
+        [172, 1, 34, ""],
+        [173, 1, 33, ""],
+        [174, 0, 30, ""],
+        [177, 1, 37, ""],
+        [179, 1, 34, ""],
+        [180, 1, 33, ""],
+        [181, 0, 31, ""],
+        [184, 1, 37, ""],
+        [186, 1, 34, ""],
+        [187, 1, 33, ""],
+        [188, 0, 32, ""],
+        [191, 0, 33, ""],
+        [196, 1, 38, ""],
+        [197, 1, 35, ""],
+        [198, 0, 34, ""],
+        [204, 0, 35, ""],
+        [206, 1, 40, ""],
+        [208, 1, 36, ""],
+        [210, 1, 40, ""],
+        [211, 0, 36, ""],
+        [213, 1, 40, ""],
+        [214, 0, 37, ""],
+        [219, 0, 38, ""],
+        [221, 1, 40, ""],
+        [225, 1, 39, ""],
+        [227, 1, 40, ""],
+        [228, 0, 39, ""],
+        [230, 0, 40, ""],
+        [239, 1, 41, ""],
+        [243, 0, 41, ""],
+        [248, 1, 44, ""],
+        [250, 1, 42, ""],
+        [261, 1, 43, ""],
+        [262, 0, 42, ""],
+        [264, 0, 43, ""],
+        [269, 1, 45, ""],
+        [271, 1, 47, ""],
+        [273, 0, 44, ""],
+        [275, 0, 45, ""],
+        [277, 1, 46, ""],
+        [279, 0, 46, ""],
+        [281, 1, 49, ""],
+        [282, 0, 47, ""],
+        [284, 1, 48, ""],
+        [286, 0, 48, ""],
+        [288, 0, 49, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/s3/camera_bounds_events.s",
+      "tokens": [
+        [12, 1, 51, ""],
+        [13, 1, 52, ""],
+        [17, 1, 50, ""],
+        [20, 0, 50, ""],
+        [23, 0, 51, ""],
+        [25, 0, 52, ""],
+        [29, 1, 53, ""],
+        [31, 1, 53, ""],
+        [34, 0, 53, ""],
+        [93, 1, 54, ""],
+        [94, 1, 57, ""],
+        [95, 1, 60, ""],
+        [96, 1, 64, ""],
+        [97, 1, 66, ""],
+        [98, 0, 54, ""],
+        [101, 1, 56, ""],
+        [105, 1, 56, ""],
+        [107, 1, 55, ""],
+        [109, 1, 55, ""],
+        [112, 0, 55, ""],
+        [117, 0, 56, ""],
+        [119, 0, 57, ""],
+        [122, 1, 59, ""],
+        [124, 1, 58, ""],
+        [126, 1, 58, ""],
+        [137, 0, 58, ""],
+        [146, 0, 59, ""],
+        [148, 0, 60, ""],
+        [149, 2, 67, ""],
+        [154, 1, 61, ""],
+        [156, 0, 61, ""],
+        [158, 1, 62, ""],
+        [160, 0, 62, ""],
+        [162, 1, 63, ""],
+        [168, 0, 63, ""],
+        [170, 0, 64, ""],
+        [171, 2, 67, ""],
+        [175, 1, 65, ""],
+        [177, 1, 65, ""],
+        [184, 0, 65, ""],
+        [186, 0, 66, ""],
+        [189, 0, 67, ""],
+        [213, 1, 68, ""],
+        [219, 1, 68, ""],
+        [225, 0, 68, ""],
+        [229, 1, 72, ""],
+        [232, 1, 69, ""],
+        [234, 0, 69, ""],
+        [238, 1, 71, ""],
+        [241, 1, 70, ""],
+        [243, 1, 70, ""],
+        [247, 0, 70, ""],
+        [249, 0, 71, ""],
+        [251, 0, 72, ""],
+        [254, 1, 73, ""],
+        [256, 0, 73, ""],
+        [258, 1, 74, ""],
+        [263, 0, 74, ""],
+        [269, 1, 75, ""],
+        [273, 0, 75, ""],
+        [277, 1, 76, ""],
+        [279, 1, 76, ""],
+        [293, 0, 76, ""],
+        [297, 1, 77, ""],
+        [302, 0, 77, ""],
+        [306, 1, 78, ""],
+        [311, 0, 78, ""],
+        [315, 1, 79, ""],
+        [318, 0, 79, ""],
+        [322, 1, 80, ""],
+        [324, 0, 80, ""],
+        [334, 1, 81, ""],
+        [335, 1, 83, ""],
+        [336, 1, 87, ""],
+        [337, 0, 81, ""],
+        [339, 1, 82, ""],
+        [341, 1, 82, ""],
+        [347, 0, 82, ""],
+        [349, 0, 83, ""],
+        [351, 1, 84, ""],
+        [353, 1, 86, ""],
+        [355, 1, 85, ""],
+        [356, 0, 84, ""],
+        [358, 1, 86, ""],
+        [360, 1, 86, ""],
+        [362, 0, 85, ""],
+        [367, 0, 86, ""],
+        [369, 0, 87, ""],
+        [377, 1, 88, ""],
+        [378, 1, 90, ""],
+        [379, 0, 88, ""],
+        [381, 1, 89, ""],
+        [384, 0, 89, ""],
+        [386, 0, 90, ""],
+        [395, 1, 91, ""],
+        [396, 1, 93, ""],
+        [397, 1, 97, ""],
+        [398, 0, 91, ""],
+        [401, 1, 92, ""],
+        [403, 1, 92, ""],
+        [405, 1, 92, ""],
+        [415, 0, 92, ""],
+        [417, 0, 93, ""],
+        [419, 1, 95, ""],
+        [422, 1, 96, ""],
+        [426, 1, 94, ""],
+        [430, 0, 94, ""],
+        [433, 0, 95, ""],
+        [441, 0, 96, ""],
+        [443, 0, 97, ""],
+        [456, 1, 98, ""],
+        [457, 1, 100, ""],
+        [458, 1, 102, ""],
+        [459, 0, 98, ""],
+        [461, 1, 99, ""],
+        [463, 1, 99, ""],
+        [466, 0, 99, ""],
+        [468, 0, 100, ""],
+        [470, 1, 101, ""],
+        [473, 0, 101, ""],
+        [475, 0, 102, ""],
+        [483, 1, 103, ""],
+        [484, 1, 105, ""],
+        [485, 0, 103, ""],
+        [487, 1, 104, ""],
+        [489, 1, 104, ""],
+        [492, 0, 104, ""],
+        [494, 0, 105, ""],
+        [504, 1, 106, ""],
+        [505, 1, 108, ""],
+        [506, 0, 106, ""],
+        [508, 1, 107, ""],
+        [510, 1, 107, ""],
+        [524, 0, 107, ""],
+        [526, 0, 108, ""],
+        [532, 0, 109, ""],
+        [535, 1, 109, ""],
+        [538, 1, 110, ""],
+        [541, 0, 110, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/s3/gradual_bounds.s",
+      "tokens": [
+        [9, 1, 111, ""],
+        [12, 0, 111, ""],
+        [14, 0, 112, ""],
+        [24, 1, 113, ""],
+        [27, 0, 113, ""],
+        [38, 1, 114, ""],
+        [41, 0, 114, ""],
+        [52, 1, 115, ""],
+        [55, 0, 115, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/s3/scroll_events.s",
+      "tokens": [
+        [34, 1, 116, ""],
+        [39, 1, 116, ""],
+        [41, 0, 116, ""],
+        [47, 1, 118, ""],
+        [50, 1, 117, ""],
+        [52, 0, 117, ""],
+        [55, 0, 118, ""],
+        [57, 1, 119, ""],
+        [59, 0, 119, ""],
+        [73, 1, 121, ""],
+        [75, 1, 121, ""],
+        [76, 1, 120, ""],
+        [83, 0, 120, ""],
+        [89, 0, 121, ""],
+        [95, 0, 122, ""],
+        [97, 1, 123, ""],
+        [99, 1, 123, ""],
+        [102, 0, 123, ""],
+        [104, 3, 122, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/bounds_catalog.s",
+      "tokens": [
+        [27, 1, 124, ""],
+        [77, 0, 124, ""],
+        [79, 1, 125, ""],
+        [83, 1, 132, ""],
+        [84, 0, 125, ""],
+        [90, 1, 126, ""],
+        [92, 0, 126, ""],
+        [101, 1, 132, ""],
+        [103, 1, 127, ""],
+        [105, 1, 127, ""],
+        [114, 0, 127, ""],
+        [116, 1, 128, ""],
+        [118, 1, 128, ""],
+        [119, 1, 128, ""],
+        [138, 0, 128, ""],
+        [140, 1, 129, ""],
+        [142, 1, 129, ""],
+        [144, 1, 129, ""],
+        [150, 0, 129, ""],
+        [152, 1, 131, ""],
+        [154, 1, 131, ""],
+        [156, 1, 130, ""],
+        [158, 1, 132, ""],
+        [159, 0, 130, ""],
+        [161, 1, 132, ""],
+        [162, 0, 131, ""],
+        [164, 0, 132, ""],
+        [166, 1, 133, ""],
+        [168, 0, 133, ""],
+        [170, 1, 134, ""],
+        [173, 1, 134, ""],
+        [175, 0, 134, ""],
+        [179, 1, 135, ""],
+        [181, 0, 135, ""],
+        [183, 1, 136, ""],
+        [185, 0, 136, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/camera.s",
+      "tokens": [
+        [3, 1, 137, ""],
+        [5, 0, 137, ""],
+        [11, 1, 141, ""],
+        [13, 1, 140, ""],
+        [16, 1, 138, ""],
+        [20, 0, 138, ""],
+        [32, 1, 139, ""],
+        [34, 0, 139, ""],
+        [36, 0, 140, ""],
+        [38, 0, 141, ""],
+        [40, 1, 143, ""],
+        [53, 1, 142, ""],
+        [55, 0, 142, ""],
+        [57, 0, 143, ""],
+        [59, 1, 144, ""],
+        [72, 0, 144, ""],
+        [77, 1, 147, ""],
+        [79, 1, 145, ""],
+        [90, 1, 146, ""],
+        [91, 0, 145, ""],
+        [93, 0, 146, ""],
+        [96, 1, 148, ""],
+        [98, 1, 150, ""],
+        [100, 0, 147, ""],
+        [102, 0, 148, ""],
+        [104, 1, 149, ""],
+        [106, 0, 149, ""],
+        [109, 1, 152, ""],
+        [111, 1, 152, ""],
+        [112, 0, 150, ""],
+        [114, 1, 151, ""],
+        [116, 0, 151, ""],
+        [119, 1, 152, ""],
+        [121, 0, 152, ""],
+        [133, 1, 153, ""],
+        [135, 0, 153, ""],
+        [137, 1, 154, ""],
+        [139, 0, 154, ""],
+        [142, 1, 155, ""],
+        [144, 0, 155, ""],
+        [146, 1, 156, ""],
+        [149, 1, 161, ""],
+        [151, 1, 161, ""],
+        [153, 1, 162, ""],
+        [154, 1, 157, ""],
+        [155, 0, 156, ""],
+        [157, 1, 158, ""],
+        [159, 1, 162, ""],
+        [160, 0, 157, ""],
+        [163, 0, 158, ""],
+        [165, 1, 160, ""],
+        [167, 1, 161, ""],
+        [169, 1, 159, ""],
+        [171, 0, 159, ""],
+        [173, 1, 161, ""],
+        [176, 1, 167, ""],
+        [178, 1, 164, ""],
+        [179, 1, 163, ""],
+        [180, 0, 160, ""],
+        [183, 1, 167, ""],
+        [185, 1, 164, ""],
+        [186, 1, 163, ""],
+        [187, 0, 161, ""],
+        [190, 1, 167, ""],
+        [192, 1, 164, ""],
+        [193, 1, 163, ""],
+        [194, 0, 162, ""],
+        [197, 0, 163, ""],
+        [202, 1, 168, ""],
+        [203, 1, 165, ""],
+        [204, 0, 164, ""],
+        [210, 0, 165, ""],
+        [212, 1, 170, ""],
+        [214, 1, 166, ""],
+        [216, 1, 170, ""],
+        [217, 0, 166, ""],
+        [219, 1, 170, ""],
+        [220, 0, 167, ""],
+        [225, 0, 168, ""],
+        [227, 1, 170, ""],
+        [231, 1, 169, ""],
+        [233, 1, 170, ""],
+        [234, 0, 169, ""],
+        [236, 0, 170, ""],
+        [245, 1, 171, ""],
+        [249, 0, 171, ""],
+        [254, 1, 174, ""],
+        [256, 1, 172, ""],
+        [267, 1, 173, ""],
+        [268, 0, 172, ""],
+        [270, 0, 173, ""],
+        [275, 1, 175, ""],
+        [277, 1, 177, ""],
+        [279, 0, 174, ""],
+        [281, 0, 175, ""],
+        [283, 1, 176, ""],
+        [285, 0, 176, ""],
+        [287, 1, 179, ""],
+        [288, 0, 177, ""],
+        [290, 1, 178, ""],
+        [292, 0, 178, ""],
+        [294, 0, 179, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/camera_bounds_events.s",
+      "tokens": [
+        [12, 1, 181, ""],
+        [13, 1, 182, ""],
+        [17, 1, 180, ""],
+        [20, 0, 180, ""],
+        [23, 0, 181, ""],
+        [25, 0, 182, ""],
+        [29, 1, 183, ""],
+        [31, 1, 183, ""],
+        [34, 0, 183, ""],
+        [93, 1, 184, ""],
+        [94, 1, 188, ""],
+        [95, 1, 191, ""],
+        [96, 1, 197, ""],
+        [97, 1, 199, ""],
+        [98, 0, 184, ""],
+        [101, 1, 187, ""],
+        [105, 1, 187, ""],
+        [107, 1, 185, ""],
+        [109, 1, 185, ""],
+        [112, 0, 185, ""],
+        [116, 1, 186, ""],
+        [121, 0, 186, ""],
+        [124, 0, 187, ""],
+        [126, 0, 188, ""],
+        [129, 1, 190, ""],
+        [131, 1, 189, ""],
+        [133, 1, 189, ""],
+        [144, 0, 189, ""],
+        [153, 0, 190, ""],
+        [155, 0, 191, ""],
+        [156, 2, 200, ""],
+        [161, 1, 192, ""],
+        [163, 1, 192, ""],
+        [165, 0, 192, ""],
+        [167, 1, 193, ""],
+        [169, 0, 193, ""],
+        [171, 1, 194, ""],
+        [173, 0, 194, ""],
+        [175, 1, 196, ""],
+        [178, 1, 195, ""],
+        [180, 0, 195, ""],
+        [186, 0, 196, ""],
+        [188, 0, 197, ""],
+        [189, 2, 200, ""],
+        [193, 1, 198, ""],
+        [195, 1, 198, ""],
+        [202, 0, 198, ""],
+        [204, 0, 199, ""],
+        [207, 0, 200, ""],
+        [220, 1, 201, ""],
+        [235, 0, 201, ""],
+        [237, 1, 202, ""],
+        [240, 0, 202, ""],
+        [244, 1, 203, ""],
+        [250, 1, 203, ""],
+        [253, 0, 203, ""],
+        [258, 1, 204, ""],
+        [260, 0, 204, ""],
+        [264, 1, 206, ""],
+        [267, 1, 205, ""],
+        [269, 1, 205, ""],
+        [273, 0, 205, ""],
+        [275, 0, 206, ""],
+        [279, 1, 207, ""],
+        [283, 0, 207, ""],
+        [287, 1, 208, ""],
+        [289, 1, 208, ""],
+        [303, 0, 208, ""],
+        [307, 1, 209, ""],
+        [312, 0, 209, ""],
+        [316, 1, 210, ""],
+        [321, 0, 210, ""],
+        [332, 1, 211, ""],
+        [338, 1, 211, ""],
+        [341, 0, 211, ""],
+        [346, 1, 212, ""],
+        [348, 0, 212, ""],
+        [352, 1, 214, ""],
+        [355, 1, 213, ""],
+        [357, 1, 213, ""],
+        [361, 0, 213, ""],
+        [364, 0, 214, ""],
+        [368, 1, 215, ""],
+        [371, 0, 215, ""],
+        [375, 1, 216, ""],
+        [377, 1, 216, ""],
+        [390, 0, 216, ""],
+        [406, 1, 217, ""],
+        [407, 1, 219, ""],
+        [408, 1, 223, ""],
+        [409, 0, 217, ""],
+        [411, 1, 218, ""],
+        [413, 1, 218, ""],
+        [419, 0, 218, ""],
+        [421, 0, 219, ""],
+        [423, 1, 220, ""],
+        [425, 1, 222, ""],
+        [427, 1, 221, ""],
+        [428, 0, 220, ""],
+        [430, 1, 222, ""],
+        [432, 1, 222, ""],
+        [434, 0, 221, ""],
+        [439, 0, 222, ""],
+        [441, 0, 223, ""],
+        [449, 1, 224, ""],
+        [450, 1, 226, ""],
+        [451, 0, 224, ""],
+        [453, 1, 225, ""],
+        [456, 0, 225, ""],
+        [458, 0, 226, ""],
+        [467, 1, 227, ""],
+        [468, 1, 229, ""],
+        [469, 1, 233, ""],
+        [470, 0, 227, ""],
+        [473, 1, 228, ""],
+        [475, 1, 228, ""],
+        [477, 1, 228, ""],
+        [487, 0, 228, ""],
+        [489, 0, 229, ""],
+        [491, 1, 231, ""],
+        [494, 1, 232, ""],
+        [498, 1, 230, ""],
+        [502, 0, 230, ""],
+        [505, 0, 231, ""],
+        [513, 0, 232, ""],
+        [515, 0, 233, ""],
+        [528, 1, 234, ""],
+        [529, 1, 236, ""],
+        [530, 1, 238, ""],
+        [531, 0, 234, ""],
+        [533, 1, 235, ""],
+        [535, 1, 235, ""],
+        [538, 0, 235, ""],
+        [540, 0, 236, ""],
+        [542, 1, 237, ""],
+        [545, 0, 237, ""],
+        [547, 0, 238, ""],
+        [555, 1, 239, ""],
+        [556, 1, 241, ""],
+        [557, 0, 239, ""],
+        [559, 1, 240, ""],
+        [561, 1, 240, ""],
+        [564, 0, 240, ""],
+        [566, 0, 241, ""],
+        [576, 1, 242, ""],
+        [577, 1, 244, ""],
+        [578, 0, 242, ""],
+        [580, 1, 243, ""],
+        [582, 1, 243, ""],
+        [596, 0, 243, ""],
+        [598, 0, 244, ""],
+        [604, 0, 245, ""],
+        [607, 1, 245, ""],
+        [610, 1, 246, ""],
+        [613, 0, 246, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/gradual_bounds.s",
+      "tokens": [
+        [9, 1, 247, ""],
+        [12, 0, 247, ""],
+        [14, 0, 248, ""],
+        [24, 1, 249, ""],
+        [27, 0, 249, ""],
+        [38, 1, 250, ""],
+        [41, 0, 250, ""],
+        [52, 1, 251, ""],
+        [55, 0, 251, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/scroll_events.s",
+      "tokens": [
+        [34, 1, 252, ""],
+        [39, 1, 252, ""],
+        [45, 0, 252, ""],
+        [51, 1, 254, ""],
+        [54, 1, 253, ""],
+        [56, 0, 253, ""],
+        [59, 0, 254, ""],
+        [61, 1, 255, ""],
+        [63, 0, 255, ""],
+        [76, 1, 256, ""],
+        [78, 0, 256, ""],
+        [81, 1, 257, ""],
+        [85, 0, 257, ""],
+        [87, 1, 258, ""],
+        [89, 1, 258, ""],
+        [92, 0, 258, ""],
+        [94, 3, 257, ""],
+        [100, 1, 260, ""],
+        [102, 1, 260, ""],
+        [103, 1, 259, ""],
+        [108, 1, 260, ""],
+        [109, 0, 259, ""],
+        [113, 0, 260, ""],
+        [118, 1, 261, ""],
+        [124, 0, 261, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/palettes/s3/object_fade.s",
+      "tokens": [[11, 1, 112, ""]]
+    }
+  ]
+}

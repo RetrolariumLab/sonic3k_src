@@ -52,13 +52,13 @@ Update_VScrollValueP2:
 
 SpecialEvents:
                 cmpi.b  #6,(Player_1+routine).w
-                bhs.s   locret_4F366
+                bhs.s   SKCamera_SpecialEventReturn
                 move.w  (Special_events_routine).w,d0
                 movea.l SpecialEvents_Index(pc,d0.w),a0
                 jmp     (a0)
 ; ---------------------------------------------------------------------------
 SpecialEvents_Index:
-                dc.l    locret_4F366
+                dc.l    SKCamera_SpecialEventReturn
                 dc.l    AIZ2_DoShipLoop
                 dc.l    loc_54CB0
                 dc.l    loc_5560C
@@ -66,7 +66,7 @@ SpecialEvents_Index:
                 dc.l    loc_59E46
 ; ---------------------------------------------------------------------------
 
-locret_4F366:
+SKCamera_SpecialEventReturn:
                 rts
 ; End of function SpecialEvents
 
@@ -76,23 +76,23 @@ Adjust_BGDuringLoop:
                 move.w  (a1),d1
                 move.w  d0,(a1)+
                 sub.w   d1,d0
-                bpl.s   loc_4F37C
+                bpl.s   SKCamera_WrapPositiveLoopDelta
                 neg.w   d0
                 cmp.w   d2,d0
-                blo.s   loc_4F378
+                blo.s   SKCamera_SubtractBgLoopDelta
                 sub.w   d3,d0
 
-loc_4F378:
+SKCamera_SubtractBgLoopDelta:
                 sub.w   d0,(a1)+
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4F37C:
+SKCamera_WrapPositiveLoopDelta:
                 cmp.w   d2,d0
-                blo.s   loc_4F382
+                blo.s   SKCamera_AddBgLoopDelta
                 sub.w   d3,d0
 
-loc_4F382:
+SKCamera_AddBgLoopDelta:
                 add.w   d0,(a1)+
                 rts
 ; End of function Adjust_BGDuringLoop
@@ -113,31 +113,31 @@ Get_BGActualEffectiveDiff:
 
 Offset_SomeObjectsDuringTransition:
                 tst.b   (Super_Tails_flag).w
-                bne.s   loc_4F3A8
+                bne.s   SKCamera_SelectBirdSlotsToOffset
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4F3A8:
+SKCamera_SelectBirdSlotsToOffset:
                 lea     (Invincibility_stars).w,a1
                 moveq   #4-1,d2
-                bra.s   loc_4F3B6
+                bra.s   SKCamera_TryOffsetWorldActor
 ; ---------------------------------------------------------------------------
 
 Offset_ObjectsDuringTransition:
                 lea     (Dynamic_object_RAM+object_size).w,a1
                 moveq   #((Breathing_bubbles)-(Dynamic_object_RAM+object_size))/object_size-1,d2
 
-loc_4F3B6:
+SKCamera_TryOffsetWorldActor:
                 tst.l   (a1)
-                beq.s   loc_4F3CA
+                beq.s   SKCamera_NextTransitionActor
                 btst    #2,render_flags(a1)
-                beq.s   loc_4F3CA
+                beq.s   SKCamera_NextTransitionActor
                 sub.w   d0,x_pos(a1)
                 sub.w   d1,y_pos(a1)
 
-loc_4F3CA:
+SKCamera_NextTransitionActor:
                 lea     next_object(a1),a1
-                dbf     d2,loc_4F3B6
+                dbf     d2,SKCamera_TryOffsetWorldActor
                 rts
 ; End of function Offset_SomeObjectsDuringTransition
 
@@ -147,23 +147,23 @@ ShakeScreen_Setup:
                 move.w  (Screen_shake_offset).w,(Screen_shake_last_offset).w
                 moveq   #0,d1
                 cmpi.b  #6,(Player_1+routine).w
-                bhs.s   loc_4F406
+                bhs.s   SKCamera_StoreShake
                 move.w  (Screen_shake_flag).w,d0
-                beq.s   loc_4F406
-                bmi.s   loc_4F3FA
+                beq.s   SKCamera_StoreShake
+                bmi.s   SKCamera_PickContinuousShake
                 subq.w  #1,d0                           ; If EECC is positive, then it's a timed screen shake
                 move.w  d0,(Screen_shake_flag).w
                 move.b  ScreenShakeArray(pc,d0.w),d1
                 ext.w   d1
-                bra.s   loc_4F406
+                bra.s   SKCamera_StoreShake
 ; ---------------------------------------------------------------------------
 
-loc_4F3FA:
+SKCamera_PickContinuousShake:
                 move.w  (Level_frame_counter).w,d0      ; If EECC is negative, it's a constant screen shake
                 andi.w  #$3F,d0
                 move.b  ScreenShakeArray2(pc,d0.w),d1
 
-loc_4F406:
+SKCamera_StoreShake:
                 move.w  d1,(Screen_shake_offset).w
                 rts
 ; End of function ShakeScreen_Setup
@@ -172,14 +172,14 @@ loc_4F406:
 
 ShakeScreen_BG:
                 move.w  (Glide_screen_shake).w,d0
-                beq.s   locret_4F422
+                beq.s   SKCamera_GlideShakeReturn
                 subq.w  #1,d0
                 move.w  d0,(Glide_screen_shake).w
                 move.b  ScreenShakeArray(pc,d0.w),d0
                 ext.w   d0
                 add.w   d0,(Camera_X_pos_copy).w
 
-locret_4F422:
+SKCamera_GlideShakeReturn:
                 rts
 ; End of function ShakeScreen_BG
 

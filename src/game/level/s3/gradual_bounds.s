@@ -11,15 +11,16 @@ Obj_IncLevEndXGradual:
                 swap    d1
                 add.w   d1,d0
                 cmp.w   (Camera_stored_max_X_pos).w,d0
-                bhs.s   loc_531BC
+                bhs.s   S3Camera_LatchGrowingMaxX
                 move.w  d0,(Camera_max_X_pos).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_531BC:
+S3Camera_LatchGrowingMaxX:
                 move.w  (Camera_stored_max_X_pos).w,(Camera_max_X_pos).w
 
-loc_531C2:
+; The selected-color fade object also uses this deletion tail
+S3Camera_DeleteCompletedActor:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -31,12 +32,12 @@ Obj_DecLevStartXGradual:
                 swap    d1
                 sub.w   d1,d0
                 cmp.w   (Camera_stored_min_X_pos).w,d0
-                ble.s   loc_531EA
+                ble.s   S3Camera_LatchLowerMinX
                 move.w  d0,(Camera_min_X_pos).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_531EA:
+S3Camera_LatchLowerMinX:
                 move.w  (Camera_stored_min_X_pos).w,(Camera_min_X_pos).w
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -49,12 +50,12 @@ Obj_DecLevStartYGradual:
                 swap    d1
                 sub.w   d1,d0
                 cmp.w   (Camera_stored_min_Y_pos).w,d0
-                ble.s   loc_53218
+                ble.s   S3Camera_LatchLowerMinY
                 move.w  d0,(Camera_min_Y_pos).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_53218:
+S3Camera_LatchLowerMinY:
                 move.w  (Camera_stored_min_Y_pos).w,(Camera_min_Y_pos).w
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -67,12 +68,12 @@ Obj_IncLevEndYGradual:
                 swap    d1
                 add.w   d1,d0
                 cmp.w   (Camera_stored_max_Y_pos).w,d0
-                bgt.s   loc_53246
+                bgt.s   S3Camera_LatchGrowingMaxY
                 move.w  d0,(Camera_max_Y_pos).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_53246:
+S3Camera_LatchGrowingMaxY:
                 move.w  (Camera_stored_max_Y_pos).w,(Camera_max_Y_pos).w
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------

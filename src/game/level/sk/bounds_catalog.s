@@ -30,7 +30,7 @@ Get_LevelSizeStart:
                 move.w  #$60,(Distance_from_top_P2).w
                 move.w  #-1,(Screen_X_wrap_value).w
                 move.w  #-1,(Screen_Y_wrap_value).w
-                bra.w   loc_1BE46
+                bra.w   SKCamera_PickStartPosition
 ; ---------------------------------------------------------------------------
 LevelSizes:                                             ; xstart    xend  ystart    yend ; Level
                 dc.w    $1308,  $6000,      0,   $390   ; AIZ1
@@ -83,25 +83,25 @@ LevelSizes:                                             ; xstart    xend  ystart
                 dc.w    $1500,  $1640,   $320,   $320   ; Special Stage Arena (HPZ)
 ; ---------------------------------------------------------------------------
 
-loc_1BE46:
+SKCamera_PickStartPosition:
                 tst.b   (Last_star_post_hit).w
-                beq.s   loc_1BE5E
+                beq.s   SKCamera_PickStartTable
                 jsr     (Load_Starpost_Settings).l
                 move.w  (Player_1+x_pos).w,d1
                 move.w  (Player_1+y_pos).w,d0
-                bra.w   loc_1BF74
+                bra.w   SKCamera_AnchorInitialX
 ; ---------------------------------------------------------------------------
 
-loc_1BE5E:
+SKCamera_PickStartTable:
                 move.w  (Current_zone_and_act).w,d0
                 ror.b   #1,d0
                 lsr.w   #5,d0
                 lea     (Sonic_Start_Locations).l,a1
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_1BE7A
+                bne.s   SKCamera_StoreStartAndIntro
                 lea     (Knux_Start_Locations).l,a1
 
-loc_1BE7A:
+SKCamera_StoreStartAndIntro:
                 lea     (a1,d0.w),a1
                 moveq   #0,d1
                 move.w  (a1)+,d1
@@ -110,11 +110,11 @@ loc_1BE7A:
                 move.w  (a1),d0
                 move.w  d0,(Player_1+y_pos).w
                 tst.b   (Last_star_post_hit).w
-                bne.w   loc_1BF74
+                bne.w   SKCamera_AnchorInitialX
                 cmpi.w  #0,(Current_zone_and_act).w
-                bne.s   loc_1BEC6
+                bne.s   SKCamera_TryICZ1TailsStart
                 cmpi.w  #2,(Player_mode).w
-                bhs.s   loc_1BEC6
+                bhs.s   SKCamera_TryICZ1TailsStart
                 move.w  #$40,d1                         ; If in Angel Island Zone and playing as Sonic, the start position is overridden for the intro
                 move.w  d1,(Player_1+x_pos).w
                 move.w  #$420,d0
@@ -124,12 +124,12 @@ loc_1BE7A:
                 move.w  d1,(Camera_target_min_X_pos).w
                 move.w  d1,(Camera_min_X_pos_P2).w
 
-loc_1BEC6:
+SKCamera_TryICZ1TailsStart:
                 cmpi.w  #$500,(Current_zone_and_act).w
-                bne.s   loc_1BF1E
+                bne.s   SKCamera_TryLockOnMHZ1Start
                 cmpi.w  #2,(Player_mode).w
-                blo.s   loc_1BF1E
-                bne.s   loc_1BF1E
+                blo.s   SKCamera_TryLockOnMHZ1Start
+                bne.s   SKCamera_TryLockOnMHZ1Start
                 move.w  #$35A0,d1                       ; If in Ice Cap Act 1 and playing as Tails,
                 move.w  d1,(Camera_min_X_pos).w         ; we use a different start position and different level sizes
                 move.w  d1,(Camera_target_min_X_pos).w  ; to skip the snowboarding sequence
@@ -150,63 +150,63 @@ loc_1BEC6:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1BF1E:
+SKCamera_TryLockOnMHZ1Start:
                 cmpi.w  #$700,(Current_zone_and_act).w
-                bne.s   loc_1BF48
+                bne.s   SKCamera_PickSceneStartBias
                 cmpi.w  #3,(Player_mode).w
-                bhs.s   loc_1BF48
+                bhs.s   SKCamera_PickSceneStartBias
                 tst.w   (SK_alone_flag).w
-                bne.s   loc_1BF48
+                bne.s   SKCamera_PickSceneStartBias
                 move.w  #$C0,d2                         ; If playing as Sonic/Tails in MHZ 1 with Sonic 3 locked on, modify level size
                 move.w  d2,(Camera_min_X_pos).w
                 move.w  d2,(Camera_target_min_X_pos).w
                 move.w  d2,(Camera_min_X_pos_P2).w
                 move.w  #$160,d1
 
-loc_1BF48:
+SKCamera_PickSceneStartBias:
                 cmpi.w  #$1601,(Current_zone_and_act).w
-                beq.s   loc_1BF70
+                beq.s   SKCamera_AddSceneLead
                 cmpi.w  #$B00,(Current_zone_and_act).w
-                beq.s   loc_1BF70
+                beq.s   SKCamera_AddSceneLead
                 cmpi.w  #$900,(Current_zone_and_act).w
-                beq.s   loc_1BF68
+                beq.s   SKCamera_TryKnuxSceneBias
                 cmpi.w  #$300,(Current_zone_and_act).w
-                bne.s   loc_1BF74
+                bne.s   SKCamera_AnchorInitialX
 
-loc_1BF68:
+SKCamera_TryKnuxSceneBias:
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_1BF74
+                bne.s   SKCamera_AnchorInitialX
 
-loc_1BF70:
+SKCamera_AddSceneLead:
                 addi.w  #$B0,d1                         ; Only if in Hidden Palace, in Death Egg 1, in Lava Reef 1 as Knuckles, in Carnival Night 1 as Knuckles
         ; This is likely for level intros that start behind the camera
 
-loc_1BF74:
+SKCamera_AnchorInitialX:
                 subi.w  #$A0,d1
-                bcc.s   loc_1BF7C
+                bcc.s   SKCamera_TryCapInitialX
                 moveq   #0,d1
 
-loc_1BF7C:
+SKCamera_TryCapInitialX:
                 tst.w   (Competition_mode).w
-                bne.s   loc_1BF8C
+                bne.s   SKCamera_StoreXAndAnchorY
                 move.w  (Camera_max_X_pos).w,d2
                 cmp.w   d2,d1
-                blo.s   loc_1BF8C
+                blo.s   SKCamera_StoreXAndAnchorY
                 move.w  d2,d1
 
-loc_1BF8C:
+SKCamera_StoreXAndAnchorY:
                 move.w  d1,(Camera_X_pos).w
                 move.w  d1,(Camera_X_pos_P2).w
                 subi.w  #$60,d0
-                bcc.s   loc_1BF9C
+                bcc.s   SKCamera_CapInitialY
                 moveq   #0,d0
 
-loc_1BF9C:
+SKCamera_CapInitialY:
                 cmp.w   (Camera_max_Y_pos).w,d0
-                blt.s   loc_1BFA6
+                blt.s   SKCamera_StoreBothCameraYIntegerWords
                 move.w  (Camera_max_Y_pos).w,d0
 
-loc_1BFA6:
+SKCamera_StoreBothCameraYIntegerWords:
                 move.w  d0,(Camera_Y_pos).w
                 move.w  d0,(Camera_Y_pos_P2).w
                 rts

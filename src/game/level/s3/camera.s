@@ -6,19 +6,19 @@
 
 DeformBgLayer:
                 tst.b   (Deform_lock).w
-                beq.s   loc_1A480
+                beq.s   S3Camera_ClearDeltasAndPickView
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1A480:
+S3Camera_ClearDeltasAndPickView:
                 clr.w   (Camera_RAM).w
                 clr.w   (V_scroll_amount).w
                 clr.w   (H_scroll_amount_P2).w
                 clr.w   (V_scroll_amount_P2).w
                 tst.w   (Competition_mode).w
-                bne.w   loc_1A4DE
+                bne.w   S3Camera_TryTrackCompP1
                 tst.b   (Scroll_lock).w
-                bne.s   loc_1A4DA
+                bne.s   S3Camera_RunSingleResizeEvents
                 lea     (Player_1).w,a0
                 lea     (Camera_X_pos).w,a1
                 lea     (Camera_min_X_pos).w,a2
@@ -31,19 +31,19 @@ loc_1A480:
                 lea     (V_scroll_amount).w,a4
                 move.w  (Distance_from_top).w,d3
                 cmpi.w  #2,(Player_mode).w
-                bne.s   loc_1A4D6
+                bne.s   S3Camera_TrackSingleY
                 move.w  (Distance_from_top_P2).w,d3
 
-loc_1A4D6:
+S3Camera_TrackSingleY:
                 bsr.w   MoveCameraY
 
-loc_1A4DA:
+S3Camera_RunSingleResizeEvents:
                 bra.w   Do_ResizeEvents
 ; ---------------------------------------------------------------------------
 
-loc_1A4DE:
+S3Camera_TryTrackCompP1:
                 tst.b   (Scroll_lock).w
-                bne.s   loc_1A520
+                bne.s   S3Camera_TryTrackCompP2
                 lea     (Player_1).w,a0
                 lea     (Camera_X_pos).w,a1
                 lea     (Camera_min_X_pos).w,a2
@@ -56,15 +56,15 @@ loc_1A4DE:
                 lea     (V_scroll_amount).w,a4
                 move.w  (Distance_from_top).w,d3
                 cmpi.w  #2,(Player_mode).w
-                bne.s   loc_1A51C
+                bne.s   S3Camera_TrackCompP1Y
                 move.w  (Distance_from_top_P2).w,d3
 
-loc_1A51C:
+S3Camera_TrackCompP1Y:
                 bsr.w   MoveCameraY
 
-loc_1A520:
+S3Camera_TryTrackCompP2:
                 tst.b   (Scroll_lock_P2).w
-                bne.s   loc_1A556
+                bne.s   S3Camera_RunCompResizeEvents
                 lea     (Player_2).w,a0
                 lea     (Camera_X_pos_P2).w,a1
                 lea     (Camera_min_X_pos_P2).w,a2
@@ -78,7 +78,7 @@ loc_1A520:
                 move.w  (Distance_from_top_P2).w,d3
                 bsr.w   MoveCameraY
 
-loc_1A556:
+S3Camera_RunCompResizeEvents:
                 bra.w   Do_ResizeEvents
 ; End of function DeformBgLayer
 
@@ -87,9 +87,9 @@ loc_1A556:
 MoveCameraX:
                 move.w  (a1),d4
                 tst.b   (Teleport_active_flag).w
-                bne.s   locret_1A598
+                bne.s   S3Camera_TrackXReturn
                 move.w  (a5),d1
-                beq.s   loc_1A584
+                beq.s   S3Camera_ReadLiveActorX
                 subi.w  #$100,d1
                 move.w  d1,(a5)
                 moveq   #0,d1
@@ -100,49 +100,50 @@ MoveCameraX:
                 sub.b   d1,d0
                 move.w  (a6,d0.w),d0
                 andi.w  #$7FFF,d0
-                bra.s   loc_1A588
+                bra.s   S3Camera_CheckXDeadband
 ; ---------------------------------------------------------------------------
 
-loc_1A584:
+S3Camera_ReadLiveActorX:
                 move.w  x_pos(a0),d0
 
-loc_1A588:
+S3Camera_CheckXDeadband:
                 sub.w   (a1),d0
                 subi.w  #$90,d0
-                blt.s   loc_1A59A
+                blt.s   S3Camera_LimitLeftStep24
                 subi.w  #$10,d0
-                bge.s   loc_1A5AE
+                bge.s   S3Camera_LimitRightStep24
                 clr.w   (a4)
 
-locret_1A598:
+S3Camera_TrackXReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1A59A:
+S3Camera_LimitLeftStep24:
                 cmpi.w  #-$18,d0
-                bgt.s   loc_1A5A4
+                bgt.s   S3Camera_ClampCandidateMinX
                 move.w  #-$18,d0
 
-loc_1A5A4:
+S3Camera_ClampCandidateMinX:
                 add.w   (a1),d0
                 cmp.w   (a2),d0
-                bgt.s   loc_1A5C4
+                bgt.s   S3Camera_CommitXAndScrollDelta
                 move.w  (a2),d0
-                bra.s   loc_1A5C4
+                bra.s   S3Camera_CommitXAndScrollDelta
 ; ---------------------------------------------------------------------------
 
-loc_1A5AE:
+S3Camera_LimitRightStep24:
                 cmpi.w  #$18,d0
-                blo.s   loc_1A5B8
+                blo.s   S3Camera_ClampCandidateMaxX
                 move.w  #$18,d0
 
-loc_1A5B8:
+S3Camera_ClampCandidateMaxX:
                 add.w   (a1),d0
                 cmp.w   2(a2),d0
-                blt.s   loc_1A5C4
+                blt.s   S3Camera_CommitXAndScrollDelta
                 move.w  2(a2),d0
 
-loc_1A5C4:
+; Store the X displacement as a word with eight fractional bits
+S3Camera_CommitXAndScrollDelta:
                 move.w  d0,d1
                 sub.w   (a1),d1
                 asl.w   #8,d1
@@ -158,137 +159,137 @@ MoveCameraY:
                 move.w  y_pos(a0),d0
                 sub.w   (a1),d0
                 cmpi.w  #-$100,(Camera_min_Y_pos).w
-                bne.s   loc_1A5E4
+                bne.s   S3Camera_TryApplyRollYBias
                 and.w   (Screen_Y_wrap_value).w,d0
 
-loc_1A5E4:
+S3Camera_TryApplyRollYBias:
                 btst    #Status_Roll,status(a0)
-                beq.s   loc_1A5EE
+                beq.s   S3Camera_PickYTargetDistance
                 subq.w  #5,d0
 
-loc_1A5EE:
+S3Camera_PickYTargetDistance:
                 move.w  d3,d1
                 tst.w   (Competition_mode).w
-                beq.s   loc_1A5F8
+                beq.s   S3Camera_CheckAirborneYWindow
                 lsr.w   #1,d1
 
-loc_1A5F8:
+S3Camera_CheckAirborneYWindow:
                 btst    #Status_InAir,status(a0)
-                beq.s   loc_1A616
+                beq.s   S3Camera_CheckGroundedYDelta
                 addi.w  #$20,d0
                 sub.w   d1,d0
-                bcs.s   loc_1A662
+                bcs.s   S3Camera_UseYRate24
                 subi.w  #$40,d0
-                bcc.s   loc_1A662
+                bcc.s   S3Camera_UseYRate24
                 tst.b   (Camera_max_Y_pos_changing).w
-                bne.s   loc_1A674
-                bra.s   loc_1A620
+                bne.s   S3Camera_RecheckChangedYLimit
+                bra.s   S3Camera_ClearYDeltaAndReturn
 ; ---------------------------------------------------------------------------
 
-loc_1A616:
+S3Camera_CheckGroundedYDelta:
                 sub.w   d1,d0
-                bne.s   loc_1A624
+                bne.s   S3Camera_PickYFollowRate
                 tst.b   (Camera_max_Y_pos_changing).w
-                bne.s   loc_1A674
+                bne.s   S3Camera_RecheckChangedYLimit
 
-loc_1A620:
+S3Camera_ClearYDeltaAndReturn:
                 clr.w   (a4)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1A624:
+S3Camera_PickYFollowRate:
                 cmpi.w  #$60,d3
-                bne.s   loc_1A650
+                bne.s   S3Camera_UseYRate2
                 tst.b   (Fast_V_scroll_flag).w
-                bne.s   loc_1A662
+                bne.s   S3Camera_UseYRate24
                 move.w  ground_vel(a0),d1
-                bpl.s   loc_1A638
+                bpl.s   S3Camera_PickYRate6Or24
                 neg.w   d1
 
-loc_1A638:
+S3Camera_PickYRate6Or24:
                 cmpi.w  #$800,d1
-                bhs.s   loc_1A662
+                bhs.s   S3Camera_UseYRate24
                 move.w  #$600,d1
                 cmpi.w  #6,d0
-                bgt.s   loc_1A6AC
+                bgt.s   S3Camera_StepCameraDown
                 cmpi.w  #-6,d0
-                blt.s   loc_1A68A
-                bra.s   loc_1A67A
+                blt.s   S3Camera_StepCameraUp
+                bra.s   S3Camera_MakeIntegerYCandidate
 ; ---------------------------------------------------------------------------
 
-loc_1A650:
+S3Camera_UseYRate2:
                 move.w  #$200,d1
                 cmpi.w  #2,d0
-                bgt.s   loc_1A6AC
+                bgt.s   S3Camera_StepCameraDown
                 cmpi.w  #-2,d0
-                blt.s   loc_1A68A
-                bra.s   loc_1A67A
+                blt.s   S3Camera_StepCameraUp
+                bra.s   S3Camera_MakeIntegerYCandidate
 ; ---------------------------------------------------------------------------
 
-loc_1A662:
+S3Camera_UseYRate24:
                 move.w  #$1800,d1
                 cmpi.w  #$18,d0
-                bgt.s   loc_1A6AC
+                bgt.s   S3Camera_StepCameraDown
                 cmpi.w  #-$18,d0
-                blt.s   loc_1A68A
-                bra.s   loc_1A67A
+                blt.s   S3Camera_StepCameraUp
+                bra.s   S3Camera_MakeIntegerYCandidate
 ; ---------------------------------------------------------------------------
 
-loc_1A674:
+S3Camera_RecheckChangedYLimit:
                 moveq   #0,d0
                 move.b  d0,(Camera_max_Y_pos_changing).w
 
-loc_1A67A:
+S3Camera_MakeIntegerYCandidate:
                 moveq   #0,d1
                 move.w  d0,d1
                 add.w   (a1),d1
                 tst.w   d0
-                bpl.w   loc_1A6B4
-                bra.w   loc_1A694
+                bpl.w   S3Camera_ClampOrWrapMaxY
+                bra.w   S3Camera_ClampOrWrapMinY
 ; ---------------------------------------------------------------------------
 
-loc_1A68A:
+S3Camera_StepCameraUp:
                 neg.w   d1
                 ext.l   d1
                 asl.l   #8,d1
                 add.l   (a1),d1
                 swap    d1
 
-loc_1A694:
+S3Camera_ClampOrWrapMinY:
                 cmp.w   4(a2),d1
-                bgt.s   loc_1A6CC
+                bgt.s   S3Camera_CommitYAndScrollDelta
                 cmpi.w  #-$100,d1
-                bgt.s   loc_1A6A6
+                bgt.s   S3Camera_ClampToMinY
                 and.w   (Screen_Y_wrap_value).w,d1
-                bra.s   loc_1A6CC
+                bra.s   S3Camera_CommitYAndScrollDelta
 ; ---------------------------------------------------------------------------
 
-loc_1A6A6:
+S3Camera_ClampToMinY:
                 move.w  4(a2),d1
-                bra.s   loc_1A6CC
+                bra.s   S3Camera_CommitYAndScrollDelta
 ; ---------------------------------------------------------------------------
 
-loc_1A6AC:
+S3Camera_StepCameraDown:
                 ext.l   d1
                 asl.l   #8,d1
                 add.l   (a1),d1
                 swap    d1
 
-loc_1A6B4:
+S3Camera_ClampOrWrapMaxY:
                 cmp.w   6(a2),d1
-                blt.s   loc_1A6CC
+                blt.s   S3Camera_CommitYAndScrollDelta
                 move.w  (Screen_Y_wrap_value).w,d3
                 addq.w  #1,d3
                 sub.w   d3,d1
-                bcs.s   loc_1A6C8
+                bcs.s   S3Camera_ClampToMaxY
                 sub.w   d3,(a1)
-                bra.s   loc_1A6CC
+                bra.s   S3Camera_CommitYAndScrollDelta
 ; ---------------------------------------------------------------------------
 
-loc_1A6C8:
+S3Camera_ClampToMaxY:
                 move.w  6(a2),d1
 
-loc_1A6CC:
+S3Camera_CommitYAndScrollDelta:
                 move.w  (a1),d4
                 swap    d1
                 move.l  d1,d3
@@ -297,12 +298,12 @@ loc_1A6CC:
                 move.w  d3,(a4)
                 move.l  d1,(a1)
                 tst.w   (Competition_mode).w
-                beq.s   locret_1A6E8
+                beq.s   S3Camera_TrackYReturn
                 swap    d1
                 and.w   (Screen_Y_wrap_value).w,d1
                 move.w  d1,(a1)
 
-locret_1A6E8:
+S3Camera_TrackYReturn:
                 rts
 ; End of function MoveCameraY
 
@@ -311,9 +312,9 @@ locret_1A6E8:
 MoveCameraX_2P:
                 move.w  (a1),d4
                 tst.b   (Teleport_active_flag).w
-                bne.s   locret_1A72E
+                bne.s   S3Camera_TrackCompXReturn
                 move.w  (a5),d1
-                beq.s   loc_1A714
+                beq.s   S3Camera_ReadLiveCompActorX
                 subi.w  #$100,d1
                 move.w  d1,(a5)
                 moveq   #0,d1
@@ -324,45 +325,46 @@ MoveCameraX_2P:
                 sub.b   d1,d0
                 move.w  (a6,d0.w),d0
                 andi.w  #$7FFF,d0
-                bra.s   loc_1A718
+                bra.s   S3Camera_CheckCompXDeadband
 ; ---------------------------------------------------------------------------
 
-loc_1A714:
+S3Camera_ReadLiveCompActorX:
                 move.w  x_pos(a0),d0
 
-loc_1A718:
+S3Camera_CheckCompXDeadband:
                 move.w  (Screen_X_wrap_value).w,d2
                 sub.w   (a1),d0
                 and.w   d2,d0
                 subi.w  #$90,d0
-                blt.s   loc_1A730
+                blt.s   S3Camera_LimitCompLeftStep16
                 subi.w  #$10,d0
-                bge.s   loc_1A73E
+                bge.s   S3Camera_LimitCompRightStep16
                 clr.w   (a4)
 
-locret_1A72E:
+S3Camera_TrackCompXReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1A730:
+S3Camera_LimitCompLeftStep16:
                 cmpi.w  #-$10,d0
-                bgt.s   loc_1A73A
+                bgt.s   S3Camera_ApplyCompLeftStep
                 move.w  #-$10,d0
 
-loc_1A73A:
+S3Camera_ApplyCompLeftStep:
                 add.w   (a1),d0
-                bra.s   loc_1A74A
+                bra.s   S3Camera_CommitWrappedCompX
 ; ---------------------------------------------------------------------------
 
-loc_1A73E:
+S3Camera_LimitCompRightStep16:
                 cmpi.w  #$10,d0
-                blo.s   loc_1A748
+                blo.s   S3Camera_ApplyCompRightStep
                 move.w  #$10,d0
 
-loc_1A748:
+S3Camera_ApplyCompRightStep:
                 add.w   (a1),d0
 
-loc_1A74A:
+; Compute the scroll delta before masking the camera position
+S3Camera_CommitWrappedCompX:
                 move.w  d0,d1
                 sub.w   (a1),d1
                 asl.w   #8,d1

@@ -30,7 +30,7 @@ Get_LevelSizeStart:
                 move.w  #$60,(Distance_from_top_P2).w
                 move.w  #-1,(Screen_X_wrap_value).w
                 move.w  #-1,(Screen_Y_wrap_value).w
-                bra.w   loc_1A374
+                bra.w   S3Camera_PickStartPosition
 ; ---------------------------------------------------------------------------
 LevelSizes:                                             ; xstart    xend  ystart    yend ; Level
                 dc.w    $1308,  $6000,      0,   $390   ; AIZ1
@@ -83,16 +83,16 @@ LevelSizes:                                             ; xstart    xend  ystart
                 dc.w    0,  $6000,      0,  $1000       ; Special Stage Arena (HPZ)
 ; ---------------------------------------------------------------------------
 
-loc_1A374:
+S3Camera_PickStartPosition:
                 tst.b   (Last_star_post_hit).w
-                beq.s   loc_1A38C
+                beq.s   S3Camera_LoadStartAndIntro
                 jsr     (Load_Starpost_Settings).l
                 move.w  (Player_1+x_pos).w,d1
                 move.w  (Player_1+y_pos).w,d0
-                bra.w   loc_1A43C
+                bra.w   S3Camera_AnchorInitialX
 ; ---------------------------------------------------------------------------
 
-loc_1A38C:
+S3Camera_LoadStartAndIntro:
                 move.w  (Current_zone_and_act).w,d0
                 ror.b   #1,d0
                 lsr.w   #5,d0
@@ -105,11 +105,11 @@ loc_1A38C:
                 move.w  (a1),d0
                 move.w  d0,(Player_1+y_pos).w
                 tst.b   (Last_star_post_hit).w
-                bne.w   loc_1A43C
+                bne.w   S3Camera_AnchorInitialX
                 cmpi.w  #0,(Current_zone_and_act).w
-                bne.s   loc_1A3E6
+                bne.s   S3Camera_TryAltICZ1Start
                 cmpi.w  #2,(Player_mode).w
-                bhs.s   loc_1A3E6
+                bhs.s   S3Camera_TryAltICZ1Start
                 move.w  #$40,d1                         ; If in Angel Island Zone and playing as Sonic, the start position is overridden for the intro
                 move.w  d1,(Player_1+x_pos).w
                 move.w  #$420,d0
@@ -119,11 +119,12 @@ loc_1A38C:
                 move.w  d1,(Camera_target_min_X_pos).w
                 move.w  d1,(Camera_min_X_pos_P2).w
 
-loc_1A3E6:
+; Use the alternate start for player modes 2 and higher
+S3Camera_TryAltICZ1Start:
                 cmpi.w  #$500,(Current_zone_and_act).w
-                bne.s   loc_1A43C
+                bne.s   S3Camera_AnchorInitialX
                 cmpi.w  #2,(Player_mode).w
-                blo.s   loc_1A43C
+                blo.s   S3Camera_AnchorInitialX
                 move.w  #$35A0,d1                       ; If in Ice Cap Act 1 and playing as Tails,
                 move.w  d1,(Camera_min_X_pos).w         ; we use a different start position and different level sizes
                 move.w  d1,(Camera_target_min_X_pos).w  ; to skip the snowboarding sequence
@@ -144,32 +145,32 @@ loc_1A3E6:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1A43C:
+S3Camera_AnchorInitialX:
                 subi.w  #$A0,d1
-                bcc.s   loc_1A444
+                bcc.s   S3Camera_TryCapInitialX
                 moveq   #0,d1
 
-loc_1A444:
+S3Camera_TryCapInitialX:
                 tst.w   (Competition_mode).w
-                bne.s   loc_1A454
+                bne.s   S3Camera_StoreXAndAnchorY
                 move.w  (Camera_max_X_pos).w,d2
                 cmp.w   d2,d1
-                blo.s   loc_1A454
+                blo.s   S3Camera_StoreXAndAnchorY
                 move.w  d2,d1
 
-loc_1A454:
+S3Camera_StoreXAndAnchorY:
                 move.w  d1,(Camera_X_pos).w
                 move.w  d1,(Camera_X_pos_P2).w
                 subi.w  #$60,d0
-                bcc.s   loc_1A464
+                bcc.s   S3Camera_CapInitialY
                 moveq   #0,d0
 
-loc_1A464:
+S3Camera_CapInitialY:
                 cmp.w   (Camera_max_Y_pos).w,d0
-                blt.s   loc_1A46E
+                blt.s   S3Camera_StoreBothInitialCameraYIntegers
                 move.w  (Camera_max_Y_pos).w,d0
 
-loc_1A46E:
+S3Camera_StoreBothInitialCameraYIntegers:
                 move.w  d0,(Camera_Y_pos).w
                 move.w  d0,(Camera_Y_pos_P2).w
                 rts

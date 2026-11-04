@@ -11,15 +11,15 @@ Obj_IncLevEndXGradual:
                 swap    d1
                 add.w   d1,d0
                 cmp.w   (Camera_stored_max_X_pos).w,d0
-                bhs.s   loc_84A6A
+                bhs.s   SKCamera_LatchGrowingMaxX
                 move.w  d0,(Camera_max_X_pos).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_84A6A:
+SKCamera_LatchGrowingMaxX:
                 move.w  (Camera_stored_max_X_pos).w,(Camera_max_X_pos).w
 
-loc_84A70:                                              ; used in S3, unused in S&K
+SKCamera_DeleteCompletedActor:                          ; used in S3, unused in S&K
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -31,12 +31,12 @@ Obj_DecLevStartXGradual:
                 swap    d1
                 sub.w   d1,d0
                 cmp.w   (Camera_stored_min_X_pos).w,d0
-                ble.s   loc_84A98
+                ble.s   SKCamera_LatchLowerMinX
                 move.w  d0,(Camera_min_X_pos).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_84A98:
+SKCamera_LatchLowerMinX:
                 move.w  (Camera_stored_min_X_pos).w,(Camera_min_X_pos).w
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -49,12 +49,12 @@ Obj_DecLevStartYGradual:
                 swap    d1
                 sub.w   d1,d0
                 cmp.w   (Camera_stored_min_Y_pos).w,d0
-                ble.s   loc_84AC6
+                ble.s   SKCamera_LatchLowerMinY
                 move.w  d0,(Camera_min_Y_pos).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_84AC6:
+SKCamera_LatchLowerMinY:
                 move.w  (Camera_stored_min_Y_pos).w,(Camera_min_Y_pos).w
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -67,12 +67,12 @@ Obj_IncLevEndYGradual:
                 swap    d1
                 add.w   d1,d0
                 cmp.w   (Camera_stored_max_Y_pos).w,d0
-                bgt.s   loc_84AF4
+                bgt.s   SKCamera_LatchGrowingMaxY
                 move.w  d0,(Camera_max_Y_pos).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_84AF4:
+SKCamera_LatchGrowingMaxY:
                 move.w  (Camera_stored_max_Y_pos).w,(Camera_max_Y_pos).w
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
