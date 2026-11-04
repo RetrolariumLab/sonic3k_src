@@ -10,34 +10,36 @@ Find_SonicTails:
                 lea     (Player_1).w,a1
                 move.w  x_pos(a0),d2
                 sub.w   x_pos(a1),d2
-                bpl.s   S3Runtime_FindPlayers_MeasureSecondHorizontalSeparation
+                bpl.s   S3FindPlayers_MeasureP2X
                 neg.w   d2
                 addq.w  #2,d0
 
-S3Runtime_FindPlayers_MeasureSecondHorizontalSeparation:
+S3FindPlayers_MeasureP2X:
                 lea     (Player_2).w,a2
                 move.w  x_pos(a0),d3
                 sub.w   x_pos(a2),d3
-                bpl.s   S3Runtime_FindPlayers_ChooseUnsignedHorizontalMinimumWithP1Tie
+                bpl.s   S3FindPlayers_SelectNearestX
                 neg.w   d3
                 addq.w  #2,d1
 
-S3Runtime_FindPlayers_ChooseUnsignedHorizontalMinimumWithP1Tie:
+; Compare unsigned X distances and keep player 1 on a tie
+S3FindPlayers_SelectNearestX:
                 cmp.w   d3,d2
-                bls.s   S3Runtime_FindPlayers_MeasureSelectedVerticalSeparation
+                bls.s   S3FindPlayers_MeasureSelectedY
                 movea.l a2,a1
                 move.w  d1,d0
                 move.w  d3,d2
 
-S3Runtime_FindPlayers_MeasureSelectedVerticalSeparation:
+S3FindPlayers_MeasureSelectedY:
                 moveq   #0,d1
                 move.w  y_pos(a0),d3
                 sub.w   y_pos(a1),d3
-                bpl.s   S3Runtime_FindPlayers_ReturnSelectedHandleSidesAndWordMagnitudes
+                bpl.s   S3FindPlayers_Return
                 neg.w   d3
                 addq.w  #2,d1
 
-S3Runtime_FindPlayers_ReturnSelectedHandleSidesAndWordMagnitudes:
+; A1 selects the player. D0/D1 are side codes and D2/D3 are X/Y word distances
+S3FindPlayers_Return:
                 rts
 ; End of function Find_SonicTails
 
@@ -85,18 +87,18 @@ Find_OtherObject:
                 moveq   #0,d1                           ; d1 = 0 if other object is above calling object, 2 if below it
                 move.w  x_pos(a0),d2
                 sub.w   x_pos(a1),d2
-                bpl.s   S3Runtime_OtherTarget_MeasureVerticalSeparationAfterHorizontalSign
+                bpl.s   S3FindOther_MeasureY
                 neg.w   d2
                 addq.w  #2,d0
 
-S3Runtime_OtherTarget_MeasureVerticalSeparationAfterHorizontalSign:
+S3FindOther_MeasureY:
                 moveq   #0,d1
                 move.w  y_pos(a0),d3
                 sub.w   y_pos(a1),d3
-                bpl.s   S3Runtime_OtherTarget_ReturnSidesAndWordMagnitudes
+                bpl.s   S3FindOther_Return
                 neg.w   d3
                 addq.w  #2,d1
 
-S3Runtime_OtherTarget_ReturnSidesAndWordMagnitudes:
+S3FindOther_Return:
                 rts
 ; End of function Find_OtherObject

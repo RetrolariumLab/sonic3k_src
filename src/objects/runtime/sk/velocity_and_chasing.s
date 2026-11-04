@@ -66,99 +66,101 @@ Obj_VelocityIndex:
 Find_SonicTails8Way:
                 bsr.w   Find_SonicTails                 ; This routine seems bugged slightly. Shouldn't the first two cmpi instructions look at d3 and not d2?
                 cmp.w   d2,d3
-                beq.s   SKRuntimeVelocity_ClassifyEqualWordDistancesByTargetSideFlags
-                bhi.s   SKRuntimeVelocity_ComputeYDominantDistanceRatioAndChooseUpperSector
+                beq.s   SKAim8_ClassifyEqualDistances
+                bhi.s   SKAim8_ClassifyYDominant
                 swap    d3                              ; If Y distance is closer to object
                 clr.w   d3
                 divu.w  d2,d3
                 tst.w   d0
-                beq.s   SKRuntimeVelocity_ClassifyXDominantLeftTargetUsingRawXThreshold
+                beq.s   SKAim8_LeftXDominant
                 cmpi.w  #$8000,d2                       ; If Y was closer and Sonic is to right of object
-                blo.s   SKRuntimeVelocity_ReturnEightWaySelectorTwo
+                blo.s   SKAim8_ReturnSector2
                 tst.w   d0
-                beq.s   SKRuntimeVelocity_ReturnEightWaySelectorOne
-                bra.w   SKRuntimeVelocity_ReturnEightWaySelectorThree
+                beq.s   SKAim8_ReturnSector1
+                bra.w   SKAim8_ReturnSector3
 ; ---------------------------------------------------------------------------
 
-SKRuntimeVelocity_ClassifyXDominantLeftTargetUsingRawXThreshold:
+; Compare the original X distance in D2 to $8000
+SKAim8_LeftXDominant:
                 cmpi.w  #$8000,d2                       ; If Y was closer and Sonic is to left of object
-                blo.s   SKRuntimeVelocity_ReturnEightWaySelectorSix
+                blo.s   SKAim8_ReturnSector6
                 tst.w   d1
-                bne.s   SKRuntimeVelocity_ReturnEightWaySelectorFive
-                bra.w   SKRuntimeVelocity_ReturnEightWaySelectorSeven
+                bne.s   SKAim8_ReturnSector5
+                bra.w   SKAim8_ReturnSector7
 ; ---------------------------------------------------------------------------
 
-SKRuntimeVelocity_ComputeYDominantDistanceRatioAndChooseUpperSector:
+SKAim8_ClassifyYDominant:
                 swap    d2                              ; If X distance is closer to object
                 clr.w   d2
                 divu.w  d3,d2
                 tst.w   d1
-                bne.s   SKRuntimeVelocity_ChooseLowerSectorFromYDominantRatio
+                bne.s   SKAim8_ClassifyLowerYDominant
                 cmpi.w  #$8000,d2
-                blo.s   SKRuntimeVelocity_ReturnEightWaySelectorZero
+                blo.s   SKAim8_ReturnSector0
                 tst.w   d0
-                bne.s   SKRuntimeVelocity_ReturnEightWaySelectorOne
-                bra.w   SKRuntimeVelocity_ReturnEightWaySelectorSeven
+                bne.s   SKAim8_ReturnSector1
+                bra.w   SKAim8_ReturnSector7
 ; ---------------------------------------------------------------------------
 
-SKRuntimeVelocity_ChooseLowerSectorFromYDominantRatio:
+SKAim8_ClassifyLowerYDominant:
                 cmpi.w  #$8000,d2
-                blo.s   SKRuntimeVelocity_ReturnEightWaySelectorFour
+                blo.s   SKAim8_ReturnSector4
                 tst.w   d0
-                bne.s   SKRuntimeVelocity_ReturnEightWaySelectorThree
-                bra.w   SKRuntimeVelocity_ReturnEightWaySelectorFive
+                bne.s   SKAim8_ReturnSector3
+                bra.w   SKAim8_ReturnSector5
 ; ---------------------------------------------------------------------------
 
-SKRuntimeVelocity_ClassifyEqualWordDistancesByTargetSideFlags:
+SKAim8_ClassifyEqualDistances:
                 tst.w   d0                              ; If X and Y distance are identical
-                beq.s   SKRuntimeVelocity_ChooseLeftEqualDistanceSectorIncludingCoincidentTarget
+                beq.s   SKAim8_ClassifyEqualLeft
                 tst.w   d1
-                beq.s   SKRuntimeVelocity_ReturnEightWaySelectorOne
-                bra.w   SKRuntimeVelocity_ReturnEightWaySelectorThree
+                beq.s   SKAim8_ReturnSector1
+                bra.w   SKAim8_ReturnSector3
 ; ---------------------------------------------------------------------------
 
-SKRuntimeVelocity_ChooseLeftEqualDistanceSectorIncludingCoincidentTarget:
+; A coincident target follows this branch and selects sector 7
+SKAim8_ClassifyEqualLeft:
                 tst.w   d1
-                bne.s   SKRuntimeVelocity_ReturnEightWaySelectorFive
-                bra.w   SKRuntimeVelocity_ReturnEightWaySelectorSeven
+                bne.s   SKAim8_ReturnSector5
+                bra.w   SKAim8_ReturnSector7
 ; ---------------------------------------------------------------------------
 
-SKRuntimeVelocity_ReturnEightWaySelectorZero:
+SKAim8_ReturnSector0:
                 moveq   #0,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntimeVelocity_ReturnEightWaySelectorOne:
+SKAim8_ReturnSector1:
                 moveq   #1,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntimeVelocity_ReturnEightWaySelectorTwo:
+SKAim8_ReturnSector2:
                 moveq   #2,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntimeVelocity_ReturnEightWaySelectorThree:
+SKAim8_ReturnSector3:
                 moveq   #3,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntimeVelocity_ReturnEightWaySelectorFour:
+SKAim8_ReturnSector4:
                 moveq   #4,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntimeVelocity_ReturnEightWaySelectorFive:
+SKAim8_ReturnSector5:
                 moveq   #5,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntimeVelocity_ReturnEightWaySelectorSix:
+SKAim8_ReturnSector6:
                 moveq   #6,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntimeVelocity_ReturnEightWaySelectorSeven:
+SKAim8_ReturnSector7:
                 moveq   #7,d4
                 rts
 ; End of function Find_SonicTails8Way
@@ -170,11 +172,11 @@ Set_VelocityXTrackSonic:
                 bsr.w   Find_OtherObject
                 bclr    #0,render_flags(a0)
                 tst.w   d0
-                beq.s   SKRuntimeVelocity_CommitCallerSignedHorizontalSpeedWithPlayerSideFlip
+                beq.s   SKAimX_StoreSignedSpeed
                 neg.w   d4
                 bset    #0,render_flags(a0)
 
-SKRuntimeVelocity_CommitCallerSignedHorizontalSpeedWithPlayerSideFlip:
+SKAimX_StoreSignedSpeed:
                 move.w  d4,x_vel(a0)
                 rts
 ; End of function Set_VelocityXTrackSonic
@@ -188,42 +190,44 @@ Chase_Object:
                 move.w  x_pos(a0),d4
                 cmp.w   x_pos(a1),d4
                 seq     d5
-                beq.s   SKRuntimeVelocity_CompareYAfterHorizontalChaseAndPreserveXEqualityByte
-                bcs.s   SKRuntimeVelocity_AcceptOrRejectBothAxisChaseHorizontalCandidate
+                beq.s   SKChaseXY_CompareY
+                bcs.s   SKChaseXY_TryXSpeed
                 neg.w   d1
 
-SKRuntimeVelocity_AcceptOrRejectBothAxisChaseHorizontalCandidate:
+SKChaseXY_TryXSpeed:
                 move.w  x_vel(a0),d4
                 add.w   d1,d4
                 cmp.w   d2,d4
-                blt.s   SKRuntimeVelocity_CompareYAfterHorizontalChaseAndPreserveXEqualityByte
+                blt.s   SKChaseXY_CompareY
                 cmp.w   d0,d4
-                bgt.s   SKRuntimeVelocity_CompareYAfterHorizontalChaseAndPreserveXEqualityByte
+                bgt.s   SKChaseXY_CompareY
                 move.w  d4,x_vel(a0)
 
-SKRuntimeVelocity_CompareYAfterHorizontalChaseAndPreserveXEqualityByte:
+; Keep the X equality byte in D5 for the final stop test
+SKChaseXY_CompareY:
                 move.w  y_pos(a0),d4
                 cmp.w   y_pos(a1),d4
-                beq.s   SKRuntimeVelocity_ClearBothChaseVelocitiesOnlyWhenBothIntegerAxesMatch
-                bcs.s   SKRuntimeVelocity_AcceptOrRejectBothAxisChaseVerticalCandidate
+                beq.s   SKChaseXY_StopIfBothAxesMatch
+                bcs.s   SKChaseXY_TryYSpeed
                 neg.w   d3
 
-SKRuntimeVelocity_AcceptOrRejectBothAxisChaseVerticalCandidate:
+SKChaseXY_TryYSpeed:
                 move.w  y_vel(a0),d4
                 add.w   d3,d4
                 cmp.w   d2,d4
-                blt.s   SKRuntimeVelocity_ReturnBothAxisChaseWithoutUniformCompletionFlags
+                blt.s   SKChaseXY_Return
                 cmp.w   d0,d4
-                bgt.s   SKRuntimeVelocity_ReturnBothAxisChaseWithoutUniformCompletionFlags
+                bgt.s   SKChaseXY_Return
                 move.w  d4,y_vel(a0)
 
-SKRuntimeVelocity_ReturnBothAxisChaseWithoutUniformCompletionFlags:
+; CCR comes from the last comparison or velocity store on the active path
+SKChaseXY_Return:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntimeVelocity_ClearBothChaseVelocitiesOnlyWhenBothIntegerAxesMatch:
+SKChaseXY_StopIfBothAxesMatch:
                 tst.b   d5
-                beq.s   SKRuntimeVelocity_ReturnBothAxisChaseWithoutUniformCompletionFlags
+                beq.s   SKChaseXY_Return
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
                 rts
@@ -239,19 +243,20 @@ Chase_ObjectXOnly:
                 ext.w   d4
                 add.w   d4,d3
                 cmp.w   x_pos(a0),d3
-                bhs.s   SKRuntimeVelocity_AcceptOrRejectXOnlyOffsetChaseCandidate
+                bhs.s   SKChaseOffsetX_TrySpeed
                 neg.w   d1
 
-SKRuntimeVelocity_AcceptOrRejectXOnlyOffsetChaseCandidate:
+SKChaseOffsetX_TrySpeed:
                 move.w  x_vel(a0),d3
                 add.w   d1,d3
                 cmp.w   d2,d3
-                blt.s   SKRuntimeVelocity_ReturnXOnlyChaseWithNativeCandidateOrStoreFlags
+                blt.s   SKChaseOffsetX_Return
                 cmp.w   d0,d3
-                bgt.s   SKRuntimeVelocity_ReturnXOnlyChaseWithNativeCandidateOrStoreFlags
+                bgt.s   SKChaseOffsetX_Return
                 move.w  d3,x_vel(a0)
 
-SKRuntimeVelocity_ReturnXOnlyChaseWithNativeCandidateOrStoreFlags:
+; CCR comes from the limit comparison or accepted velocity store
+SKChaseOffsetX_Return:
                 rts
 ; End of function Chase_ObjectXOnly
 
@@ -265,19 +270,20 @@ Chase_ObjectYOnly:
                 ext.w   d4
                 add.w   d4,d3
                 cmp.w   y_pos(a0),d3
-                bhs.s   SKRuntimeVelocity_AcceptOrRejectYOnlyOffsetChaseCandidate
+                bhs.s   SKChaseOffsetY_TrySpeed
                 neg.w   d1
 
-SKRuntimeVelocity_AcceptOrRejectYOnlyOffsetChaseCandidate:
+SKChaseOffsetY_TrySpeed:
                 move.w  y_vel(a0),d3
                 add.w   d1,d3
                 cmp.w   d2,d3
-                blt.s   SKRuntimeVelocity_ReturnYOnlyChaseWithNativeCandidateOrStoreFlags
+                blt.s   SKChaseOffsetY_Return
                 cmp.w   d0,d3
-                bgt.s   SKRuntimeVelocity_ReturnYOnlyChaseWithNativeCandidateOrStoreFlags
+                bgt.s   SKChaseOffsetY_Return
                 move.w  d3,y_vel(a0)
 
-SKRuntimeVelocity_ReturnYOnlyChaseWithNativeCandidateOrStoreFlags:
+; CCR comes from the limit comparison or accepted velocity store
+SKChaseOffsetY_Return:
                 rts
 ; End of function Chase_ObjectYOnly
 
@@ -291,45 +297,46 @@ SKRuntimeVelocity_ReturnYOnlyChaseWithNativeCandidateOrStoreFlags:
                 add.w   d4,d6
                 cmp.w   x_pos(a0),d6
                 seq     d5
-                beq.s   SKRuntimeVelocity_CompareOffsetTargetYAndCarrySavedXEqualityByte
-                bcc.s   SKRuntimeVelocity_AcceptOrRejectOffsetBothAxisChaseXCandidate
+                beq.s   SKChaseOffsetXY_CompareY
+                bcc.s   SKChaseOffsetXY_TryXSpeed
                 neg.w   d1
 
-SKRuntimeVelocity_AcceptOrRejectOffsetBothAxisChaseXCandidate:
+SKChaseOffsetXY_TryXSpeed:
                 move.w  x_vel(a0),d4
                 add.w   d1,d4
                 cmp.w   d2,d4
-                blt.s   SKRuntimeVelocity_CompareOffsetTargetYAndCarrySavedXEqualityByte
+                blt.s   SKChaseOffsetXY_CompareY
                 cmp.w   d0,d4
-                bgt.s   SKRuntimeVelocity_CompareOffsetTargetYAndCarrySavedXEqualityByte
+                bgt.s   SKChaseOffsetXY_CompareY
                 move.w  d4,x_vel(a0)
 
-SKRuntimeVelocity_CompareOffsetTargetYAndCarrySavedXEqualityByte:
+SKChaseOffsetXY_CompareY:
                 move.w  y_pos(a1),d6
                 move.b  child_dy(a0),d4
                 ext.w   d4
                 add.w   d4,d6
                 cmp.w   y_pos(a0),d6
-                beq.s   SKRuntimeVelocity_ClearOffsetChaseVelocitiesOnlyWhenBothWordTargetsMatch
-                bcc.s   SKRuntimeVelocity_AcceptOrRejectOffsetBothAxisChaseYCandidate
+                beq.s   SKChaseOffsetXY_StopIfBothAxesMatch
+                bcc.s   SKChaseOffsetXY_TryYSpeed
                 neg.w   d3
 
-SKRuntimeVelocity_AcceptOrRejectOffsetBothAxisChaseYCandidate:
+SKChaseOffsetXY_TryYSpeed:
                 move.w  y_vel(a0),d4
                 add.w   d3,d4
                 cmp.w   d2,d4
-                blt.s   SKRuntimeVelocity_ReturnOffsetBothAxisChaseWithNativeFlags
+                blt.s   SKChaseOffsetXY_Return
                 cmp.w   d0,d4
-                bgt.s   SKRuntimeVelocity_ReturnOffsetBothAxisChaseWithNativeFlags
+                bgt.s   SKChaseOffsetXY_Return
                 move.w  d4,y_vel(a0)
 
-SKRuntimeVelocity_ReturnOffsetBothAxisChaseWithNativeFlags:
+; CCR comes from the last comparison or velocity store on the active path
+SKChaseOffsetXY_Return:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntimeVelocity_ClearOffsetChaseVelocitiesOnlyWhenBothWordTargetsMatch:
+SKChaseOffsetXY_StopIfBothAxesMatch:
                 tst.b   d5
-                beq.s   SKRuntimeVelocity_ReturnOffsetBothAxisChaseWithNativeFlags
+                beq.s   SKChaseOffsetXY_Return
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
                 rts

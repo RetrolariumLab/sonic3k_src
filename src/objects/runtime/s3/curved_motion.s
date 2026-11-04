@@ -141,10 +141,10 @@ MoveSprite_CircularLookup:
                 move.b  child_dx(a0),d4
                 ext.w   d4
                 btst    #0,render_flags(a0)
-                beq.s   S3RuntimeCurve_AddChildOffsetsAndDispatchCircularLookupQuadrant
+                beq.s   S3Curve_DispatchChildOrbit
                 neg.w   d4
 
-S3RuntimeCurve_AddChildOffsetsAndDispatchCircularLookupQuadrant:
+S3Curve_DispatchChildOrbit:
                 add.w   d4,d2
                 move.b  child_dy(a0),d4
                 ext.w   d4
@@ -155,10 +155,10 @@ S3RuntimeCurve_AddChildOffsetsAndDispatchCircularLookupQuadrant:
                 move.w  (a4,d1.w),d1
                 jsr     (a4,d1.w)
                 btst    #0,render_flags(a0)
-                beq.s   S3RuntimeCurve_CommitChildCircularLookupIntegerCoordinates
+                beq.s   S3Curve_StoreChildOrbitXYWord
                 neg.w   d5
 
-S3RuntimeCurve_CommitChildCircularLookupIntegerCoordinates:
+S3Curve_StoreChildOrbitXYWord:
                 add.w   d5,d2
                 add.w   d6,d3
                 move.w  d2,x_pos(a0)
@@ -189,33 +189,33 @@ MoveSprite_AngleYLookup:
 
 ; ---------------------------------------------------------------------------
 AngleY_LookupIndex:
-                dc.w    S3RuntimeCurve_SampleReversePositiveYForPhaseFirstQuarter-AngleY_LookupIndex
-                dc.w    S3RuntimeCurve_SampleForwardNegativeYForPhaseSecondQuarter-AngleY_LookupIndex
-                dc.w    S3RuntimeCurve_SampleReverseNegativeYForPhaseThirdQuarter-AngleY_LookupIndex
-                dc.w    S3RuntimeCurve_SampleForwardPositiveYForPhaseFourthQuarter-AngleY_LookupIndex
+                dc.w    S3Curve_OrbitQ1ReversePosY-AngleY_LookupIndex
+                dc.w    S3Curve_OrbitQ2ForwardNegY-AngleY_LookupIndex
+                dc.w    S3Curve_OrbitQ3ReverseNegY-AngleY_LookupIndex
+                dc.w    S3Curve_OrbitQ4ForwardPosY-AngleY_LookupIndex
 ; ---------------------------------------------------------------------------
 
-S3RuntimeCurve_SampleReversePositiveYForPhaseFirstQuarter:
+S3Curve_OrbitQ1ReversePosY:
                 moveq   #0,d1
                 move.b  (a3,d4.w),d1
                 rts
 ; ---------------------------------------------------------------------------
 
-S3RuntimeCurve_SampleForwardNegativeYForPhaseSecondQuarter:
+S3Curve_OrbitQ2ForwardNegY:
                 moveq   #0,d1
                 move.b  (a2,d0.w),d1
                 neg.w   d1
                 rts
 ; ---------------------------------------------------------------------------
 
-S3RuntimeCurve_SampleReverseNegativeYForPhaseThirdQuarter:
+S3Curve_OrbitQ3ReverseNegY:
                 moveq   #0,d1
                 move.b  (a3,d4.w),d1
                 neg.w   d1
                 rts
 ; ---------------------------------------------------------------------------
 
-S3RuntimeCurve_SampleForwardPositiveYForPhaseFourthQuarter:
+S3Curve_OrbitQ4ForwardPosY:
                 moveq   #0,d1
                 move.b  (a2,d0.w),d1
                 rts
@@ -234,41 +234,41 @@ MoveSprite_AngleXLookupOffset:
 
 ; ---------------------------------------------------------------------------
 AngleX_LookupIndex:
-                dc.w    S3RuntimeCurve_SampleForwardPositiveXForPhaseFirstQuarter-AngleX_LookupIndex
-                dc.w    S3RuntimeCurve_SampleReversePositiveXForPhaseSecondQuarter-AngleX_LookupIndex
-                dc.w    S3RuntimeCurve_SampleForwardNegativeXForPhaseThirdQuarter-AngleX_LookupIndex
-                dc.w    S3RuntimeCurve_SampleReverseNegativeXForPhaseFourthQuarter-AngleX_LookupIndex
+                dc.w    S3Curve_ParentQ1ForwardPosX-AngleX_LookupIndex
+                dc.w    S3Curve_ParentQ2ReversePosX-AngleX_LookupIndex
+                dc.w    S3Curve_ParentQ3ForwardNegX-AngleX_LookupIndex
+                dc.w    S3Curve_ParentQ4ReverseNegX-AngleX_LookupIndex
 ; ---------------------------------------------------------------------------
 
-S3RuntimeCurve_SampleForwardPositiveXForPhaseFirstQuarter:
+S3Curve_ParentQ1ForwardPosX:
                 move.b  (a1,d0.w),d1
-                bra.w   S3RuntimeCurve_BuildParentOffsetCoordinatesForSampledX
+                bra.w   S3Curve_BuildParentXYFromSampleX
 ; ---------------------------------------------------------------------------
 
-S3RuntimeCurve_SampleReversePositiveXForPhaseSecondQuarter:
+S3Curve_ParentQ2ReversePosX:
                 moveq   #$7F,d1
                 sub.w   d0,d1
                 move.b  (a1,d1.w),d1
-                bra.w   S3RuntimeCurve_BuildParentOffsetCoordinatesForSampledX
+                bra.w   S3Curve_BuildParentXYFromSampleX
 ; ---------------------------------------------------------------------------
 
-S3RuntimeCurve_SampleForwardNegativeXForPhaseThirdQuarter:
+S3Curve_ParentQ3ForwardNegX:
                 move.w  d0,d1
                 andi.w  #$3F,d1
                 move.b  (a1,d1.w),d1
                 neg.w   d1
-                bra.w   S3RuntimeCurve_BuildParentOffsetCoordinatesForSampledX
+                bra.w   S3Curve_BuildParentXYFromSampleX
 ; ---------------------------------------------------------------------------
 
-S3RuntimeCurve_SampleReverseNegativeXForPhaseFourthQuarter:
+S3Curve_ParentQ4ReverseNegX:
                 move.w  #$FF,d1
                 sub.w   d0,d1
                 move.b  (a1,d1.w),d1
                 neg.w   d1
-                bra.w   S3RuntimeCurve_BuildParentOffsetCoordinatesForSampledX
+                bra.w   S3Curve_BuildParentXYFromSampleX
 ; ---------------------------------------------------------------------------
 
-S3RuntimeCurve_BuildParentOffsetCoordinatesForSampledX:
+S3Curve_BuildParentXYFromSampleX:
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),d2
                 move.b  child_dx(a0),d3
@@ -288,45 +288,46 @@ S3RuntimeCurve_BuildParentOffsetCoordinatesForSampledX:
                 move.b  d0,d1
                 rol.b   #3,d1
                 andi.w  #6,d1
-                move.w  S3RuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets(pc,d1.w),d2
-                jmp     S3RuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets(pc,d2.w)
+                move.w  S3Curve_MixedYQuarterOffsets(pc,d1.w),d2
+                jmp     S3Curve_MixedYQuarterOffsets(pc,d2.w)
 ; ---------------------------------------------------------------------------
-S3RuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets:
-                dc.w    S3RuntimeCurve_SampleByteForwardPositiveYInMixedWidthLookup-S3RuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets
-                dc.w    S3RuntimeCurve_SampleWordReverseYInMixedWidthSecondQuarter-S3RuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets
-                dc.w    S3RuntimeCurve_SampleWordForwardNegativeYInMixedWidthThirdQuarter-S3RuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets
-                dc.w    S3RuntimeCurve_SampleWordReverseNegativeYInMixedWidthFourthQuarter-S3RuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets
+; These relative word offsets dispatch to one byte-read path and three word-read paths
+S3Curve_MixedYQuarterOffsets:
+                dc.w    S3Curve_MixedYQ1ForwardByte-S3Curve_MixedYQuarterOffsets
+                dc.w    S3Curve_MixedYQ2ReverseWord-S3Curve_MixedYQuarterOffsets
+                dc.w    S3Curve_MixedYQ3ForwardNegWord-S3Curve_MixedYQuarterOffsets
+                dc.w    S3Curve_MixedYQ4ReverseNegWord-S3Curve_MixedYQuarterOffsets
 ; ---------------------------------------------------------------------------
 
-S3RuntimeCurve_SampleByteForwardPositiveYInMixedWidthLookup:
+S3Curve_MixedYQ1ForwardByte:
                 move.b  (a1,d0.w),d1
-                bra.w   S3RuntimeCurve_CommitParentOffsetXAndMixedWidthSampledY
+                bra.w   S3Curve_StoreParentXYFromMixedY
 ; ---------------------------------------------------------------------------
 
-S3RuntimeCurve_SampleWordReverseYInMixedWidthSecondQuarter:
+S3Curve_MixedYQ2ReverseWord:
                 moveq   #$7F,d1
                 sub.w   d0,d1
                 move.w  (a1,d1.w),d1
-                bra.w   S3RuntimeCurve_CommitParentOffsetXAndMixedWidthSampledY
+                bra.w   S3Curve_StoreParentXYFromMixedY
 ; ---------------------------------------------------------------------------
 
-S3RuntimeCurve_SampleWordForwardNegativeYInMixedWidthThirdQuarter:
+S3Curve_MixedYQ3ForwardNegWord:
                 move.w  d0,d1
                 andi.w  #$3F,d1
                 move.w  (a1,d1.w),d1
                 neg.w   d1
-                bra.w   S3RuntimeCurve_CommitParentOffsetXAndMixedWidthSampledY
+                bra.w   S3Curve_StoreParentXYFromMixedY
 ; ---------------------------------------------------------------------------
 
-S3RuntimeCurve_SampleWordReverseNegativeYInMixedWidthFourthQuarter:
+S3Curve_MixedYQ4ReverseNegWord:
                 move.w  #$FF,d1
                 sub.w   d0,d1
                 move.w  (a1,d1.w),d1
                 neg.w   d1
-                bra.w   S3RuntimeCurve_CommitParentOffsetXAndMixedWidthSampledY
+                bra.w   S3Curve_StoreParentXYFromMixedY
 ; ---------------------------------------------------------------------------
 
-S3RuntimeCurve_CommitParentOffsetXAndMixedWidthSampledY:
+S3Curve_StoreParentXYFromMixedY:
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),d2
                 move.b  child_dx(a0),d3

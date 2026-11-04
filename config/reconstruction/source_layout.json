@@ -29964,7 +29964,7 @@
       "responsibility": "Light gravity and circular, angle and indexed coordinate motion with their inseparable lookup tables.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 342,
+      "physical_lines": 343,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -30189,7 +30189,7 @@
       "responsibility": "Enemy defeat scoring, controller shake, player collision or proximity, palette transfer and object displacement.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 184,
+      "physical_lines": 188,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -30324,7 +30324,7 @@
       "responsibility": "Vertical and horizontal oscillation and counted swing motion helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 90,
+      "physical_lines": 93,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -30369,7 +30369,7 @@
       "responsibility": "Nearest player or other-object selection and facing from position, velocity or parent flags.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 102,
+      "physical_lines": 104,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -30459,7 +30459,7 @@
       "responsibility": "Indexed velocity, eight-way player targeting, tracking and object chase helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 320,
+      "physical_lines": 327,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -30599,7 +30599,7 @@
       "responsibility": "Object-to-player angular targeting and angle calculation helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 94,
+      "physical_lines": 95,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -30734,7 +30734,7 @@
       "responsibility": "Gravity variants and circular or angle-indexed object motion with their private lookup tables.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 428,
+      "physical_lines": 429,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -30989,7 +30989,7 @@
       "responsibility": "Object defeat response, scoring, character-specific attack tests, player contact, range checks and displacement.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 306,
+      "physical_lines": 308,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -31089,7 +31089,7 @@
       "responsibility": "Vertical or horizontal oscillation and counted swing motion helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 90,
+      "physical_lines": 93,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -31124,7 +31124,7 @@
       "responsibility": "Nearest player or other-object selection and facing from position, velocity or parent flags.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 102,
+      "physical_lines": 104,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -31194,7 +31194,7 @@
       "responsibility": "Indexed velocity, eight-way player targeting, tracking and object chase helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 335,
+      "physical_lines": 342,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",

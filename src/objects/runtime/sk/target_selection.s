@@ -10,34 +10,36 @@ Find_SonicTails:
                 lea     (Player_1).w,a1
                 move.w  x_pos(a0),d2
                 sub.w   x_pos(a1),d2
-                bpl.s   SKRuntime_FindPlayers_MeasureSecondHorizontalSeparation
+                bpl.s   SKFindPlayers_MeasureP2X
                 neg.w   d2
                 addq.w  #2,d0
 
-SKRuntime_FindPlayers_MeasureSecondHorizontalSeparation:
+SKFindPlayers_MeasureP2X:
                 lea     (Player_2).w,a2
                 move.w  x_pos(a0),d3
                 sub.w   x_pos(a2),d3
-                bpl.s   SKRuntime_FindPlayers_ChooseUnsignedHorizontalMinimumWithP1Tie
+                bpl.s   SKFindPlayers_SelectNearestX
                 neg.w   d3
                 addq.w  #2,d1
 
-SKRuntime_FindPlayers_ChooseUnsignedHorizontalMinimumWithP1Tie:
+; Compare unsigned X distances and keep player 1 on a tie
+SKFindPlayers_SelectNearestX:
                 cmp.w   d3,d2
-                bls.s   SKRuntime_FindPlayers_MeasureSelectedVerticalSeparation
+                bls.s   SKFindPlayers_MeasureSelectedY
                 movea.l a2,a1
                 move.w  d1,d0
                 move.w  d3,d2
 
-SKRuntime_FindPlayers_MeasureSelectedVerticalSeparation:
+SKFindPlayers_MeasureSelectedY:
                 moveq   #0,d1
                 move.w  y_pos(a0),d3
                 sub.w   y_pos(a1),d3
-                bpl.s   SKRuntime_FindPlayers_ReturnSelectedHandleSidesAndWordMagnitudes
+                bpl.s   SKFindPlayers_Return
                 neg.w   d3
                 addq.w  #2,d1
 
-SKRuntime_FindPlayers_ReturnSelectedHandleSidesAndWordMagnitudes:
+; A1 selects the player. D0/D1 are side codes and D2/D3 are X/Y word distances
+SKFindPlayers_Return:
                 rts
 ; End of function Find_SonicTails
 
@@ -85,18 +87,18 @@ Find_OtherObject:
                 moveq   #0,d1                           ; d1 = 0 if other object is above calling object, 2 if below it
                 move.w  x_pos(a0),d2
                 sub.w   x_pos(a1),d2
-                bpl.s   SKRuntime_OtherTarget_MeasureVerticalSeparationAfterHorizontalSign
+                bpl.s   SKFindOther_MeasureY
                 neg.w   d2
                 addq.w  #2,d0
 
-SKRuntime_OtherTarget_MeasureVerticalSeparationAfterHorizontalSign:
+SKFindOther_MeasureY:
                 moveq   #0,d1
                 move.w  y_pos(a0),d3
                 sub.w   y_pos(a1),d3
-                bpl.s   SKRuntime_OtherTarget_ReturnSidesAndWordMagnitudes
+                bpl.s   SKFindOther_Return
                 neg.w   d3
                 addq.w  #2,d1
 
-SKRuntime_OtherTarget_ReturnSidesAndWordMagnitudes:
+SKFindOther_Return:
                 rts
 ; End of function Find_OtherObject

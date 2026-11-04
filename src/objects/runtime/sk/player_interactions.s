@@ -8,20 +8,20 @@ EnemyDefeated:
                 bsr.w   EnemyDefeat_Score
                 movea.w $44(a0),a1
                 tst.w   y_vel(a1)
-                bmi.s   SKRuntime_Defeat_HandleAlreadyUpwardPlayerVelocity
+                bmi.s   SKDefeat_SlowUpwardPlayer
                 move.w  y_pos(a1),d0
                 cmp.w   y_pos(a0),d0
-                bhs.s   SKRuntime_Defeat_HandleNonnegativePlayerNotAboveObject
+                bhs.s   SKDefeat_KickUpPlayerBelow
                 neg.w   y_vel(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntime_Defeat_HandleAlreadyUpwardPlayerVelocity:
+SKDefeat_SlowUpwardPlayer:
                 addi.w  #$100,y_vel(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntime_Defeat_HandleNonnegativePlayerNotAboveObject:
+SKDefeat_KickUpPlayerBelow:
                 subi.w  #$100,y_vel(a1)
                 rts
 ; End of function EnemyDefeated
@@ -35,18 +35,18 @@ EnemyDefeat_Score:
                 move.w  (Chain_bonus_counter).w,d0
                 addq.w  #2,(Chain_bonus_counter).w
                 cmpi.w  #6,d0
-                blo.s   SKRuntime_Defeat_SelectCappedOldChainScoreOffset
+                blo.s   SKDefeat_PickCappedChainScore
                 moveq   #6,d0
 
-SKRuntime_Defeat_SelectCappedOldChainScoreOffset:
+SKDefeat_PickCappedChainScore:
                 move.w  d0,$3E(a0)
-                move.w  SKRuntime_Defeat_ChainScoreUnitsByByteOffset(pc,d0.w),d0
+                move.w  SKDefeat_ChainScoreWords(pc,d0.w),d0
                 cmpi.w  #$20,(Chain_bonus_counter).w
-                blo.s   SKRuntime_Defeat_AwardGlobalScoreAndInstallExplosionForLaterDispatch
+                blo.s   SKDefeat_AwardScoreAndSetExplosion
                 move.w  #1000,d0                        ; 10000 points
                 move.w  #$A,$3E(a0)
 
-SKRuntime_Defeat_AwardGlobalScoreAndInstallExplosionForLaterDispatch:
+SKDefeat_AwardScoreAndSetExplosion:
                 movea.w a1,a3
                 jsr     (HUD_AddToScore).l
                 move.l  #Obj_Explosion,(a0)
@@ -55,7 +55,7 @@ SKRuntime_Defeat_AwardGlobalScoreAndInstallExplosionForLaterDispatch:
 ; End of function EnemyDefeat_Score
 
 ; ---------------------------------------------------------------------------
-SKRuntime_Defeat_ChainScoreUnitsByByteOffset:
+SKDefeat_ChainScoreWords:
                 dc.w    10                              ; 100 points
                 dc.w    20                              ; 200 points
                 dc.w    50                              ; 500 points
@@ -75,11 +75,11 @@ HurtCharacter_Directly:
 
 Check_PlayerAttack:
                 btst    #Status_Invincible,status_secondary(a1)
-                bne.s   SKRuntime_Attack_ReturnTrueForCommonOrCharacterSpecificAttack
+                bne.s   SKAttack_ReturnTrue
                 cmpi.b  #9,anim(a1)
-                beq.s   SKRuntime_Attack_ReturnTrueForCommonOrCharacterSpecificAttack
+                beq.s   SKAttack_ReturnTrue
                 cmpi.b  #2,anim(a1)
-                beq.s   SKRuntime_Attack_ReturnTrueForCommonOrCharacterSpecificAttack
+                beq.s   SKAttack_ReturnTrue
                 moveq   #0,d0
                 move.b  character_id(a1),d0
                 add.w   d0,d0
@@ -111,7 +111,7 @@ Check_TailsAttack:
                 cmpi.b  #$40,d0
                 bhs.s   Check_SonicAttack               ; If Tails is between 20-60 degrees off object (directly below), then he is attacking
 
-SKRuntime_Attack_ReturnTrueForCommonOrCharacterSpecificAttack:
+SKAttack_ReturnTrue:
                 moveq   #1,d0
                 rts
 ; End of function Check_PlayerAttack
@@ -120,34 +120,35 @@ SKRuntime_Attack_ReturnTrueForCommonOrCharacterSpecificAttack:
 
 Check_KnuxAttack:
                 cmpi.b  #1,double_jump_flag(a1)
-                beq.s   SKRuntime_Attack_ReturnTrueForCommonOrCharacterSpecificAttack
+                beq.s   SKAttack_ReturnTrue
                 cmpi.b  #3,double_jump_flag(a1)
-                beq.s   SKRuntime_Attack_ReturnTrueForCommonOrCharacterSpecificAttack  ; If Knux is gliding or sliding, then he's attacking
+                beq.s   SKAttack_ReturnTrue             ; If Knux is gliding or sliding, then he's attacking
                 bra.s   Check_SonicAttack
 
 ; =============== S U B R O U T I N E =======================================
 
 Check_LRControllerShake:
                 subq.b  #1,$3D(a0)
-                bpl.s   SKRuntime_Shake_CompareNonzeroPressedDirectionMasks
+                bpl.s   SKShake_TestNewDirectionPress
                 move.b  #5,$3C(a0)
                 move.b  #60,$3D(a0)
 
-SKRuntime_Shake_CompareNonzeroPressedDirectionMasks:
+SKShake_TestNewDirectionPress:
                 movea.w $3E(a0),a2
                 move.w  (a2),d0
                 andi.w  #$C,d0
-                beq.s   SKRuntime_Shake_ReturnCompletionThroughLowWordAndZeroFlag
+                beq.s   SKShake_Return
                 move.w  $3A(a0),d1
                 move.w  d0,$3A(a0)
                 andi.w  #$C,d1
                 eor.w   d1,d0
-                beq.s   SKRuntime_Shake_ReturnCompletionThroughLowWordAndZeroFlag
+                beq.s   SKShake_Return
                 subq.b  #1,$3C(a0)
-                bmi.s   SKRuntime_Shake_ReturnCompletionThroughLowWordAndZeroFlag
+                bmi.s   SKShake_Return
                 moveq   #0,d0
 
-SKRuntime_Shake_ReturnCompletionThroughLowWordAndZeroFlag:
+; Completion leaves a nonzero direction change in D0.w and clears Z
+SKShake_Return:
                 rts
 ; End of function Check_LRControllerShake
 
@@ -155,21 +156,21 @@ SKRuntime_Shake_ReturnCompletionThroughLowWordAndZeroFlag:
 
 Check_PlayerCollision:
                 move.b  collision_property(a0),d0
-                beq.s   SKRuntime_Contact_ReturnNoPropertyOrSelectedHandle
+                beq.s   SKContact_Return
                 clr.b   collision_property(a0)
                 andi.w  #3,d0
                 add.w   d0,d0
-                lea     SKRuntime_Contact_PlayerHandlesByPropertyLowBits(pc),a1
+                lea     SKContact_PropertyToPlayer(pc),a1
                 movea.w (a1,d0.w),a1
                 move.w  a1,$44(a0)
                 moveq   #1,d1
 
-SKRuntime_Contact_ReturnNoPropertyOrSelectedHandle:
+SKContact_Return:
                 rts
 ; End of function Check_PlayerCollision
 
 ; ---------------------------------------------------------------------------
-SKRuntime_Contact_PlayerHandlesByPropertyLowBits:
+SKContact_PropertyToPlayer:
                 dc.w    Player_1
                 dc.w    Player_1
                 dc.w    Player_2
@@ -182,23 +183,23 @@ Check_InTheirRange:
                 move.w  x_pos(a1),d1
                 add.w   (a2)+,d1
                 cmp.w   d1,d0
-                blt.s   SKRuntime_Rectangle_ReturnZeroOutsideOtherObjectsSignedSpan
+                blt.s   SKRect_OutsideOtherReturnZero
                 add.w   (a2)+,d1
                 cmp.w   d1,d0
-                bge.s   SKRuntime_Rectangle_ReturnZeroOutsideOtherObjectsSignedSpan
+                bge.s   SKRect_OutsideOtherReturnZero
                 move.w  y_pos(a0),d0
                 move.w  y_pos(a1),d1
                 add.w   (a2)+,d1
                 cmp.w   d1,d0
-                blt.s   SKRuntime_Rectangle_ReturnZeroOutsideOtherObjectsSignedSpan
+                blt.s   SKRect_OutsideOtherReturnZero
                 add.w   (a2)+,d1
                 cmp.w   d1,d0
-                bge.s   SKRuntime_Rectangle_ReturnZeroOutsideOtherObjectsSignedSpan
+                bge.s   SKRect_OutsideOtherReturnZero
                 moveq   #1,d0
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntime_Rectangle_ReturnZeroOutsideOtherObjectsSignedSpan:
+SKRect_OutsideOtherReturnZero:
                 moveq   #0,d0
                 rts
 ; End of function Check_InTheirRange
@@ -210,23 +211,23 @@ Check_InMyRange:
                 move.w  x_pos(a1),d1
                 add.w   (a2)+,d0
                 cmp.w   d0,d1
-                blt.s   SKRuntime_Rectangle_ReturnZeroOutsideOwnSignedSpan
+                blt.s   SKRect_OutsideOwnReturnZero
                 add.w   (a2)+,d0
                 cmp.w   d0,d1
-                bge.s   SKRuntime_Rectangle_ReturnZeroOutsideOwnSignedSpan
+                bge.s   SKRect_OutsideOwnReturnZero
                 move.w  y_pos(a0),d0
                 move.w  y_pos(a1),d1
                 add.w   (a2)+,d0
                 cmp.w   d0,d1
-                blt.s   SKRuntime_Rectangle_ReturnZeroOutsideOwnSignedSpan
+                blt.s   SKRect_OutsideOwnReturnZero
                 add.w   (a2)+,d0
                 cmp.w   d0,d1
-                bge.s   SKRuntime_Rectangle_ReturnZeroOutsideOwnSignedSpan
+                bge.s   SKRect_OutsideOwnReturnZero
                 moveq   #1,d0
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntime_Rectangle_ReturnZeroOutsideOwnSignedSpan:
+SKRect_OutsideOwnReturnZero:
                 moveq   #0,d0
                 rts
 ; End of function Check_InMyRange
@@ -257,16 +258,17 @@ Check_PlayerInRange:
 
 StorePlayerPointerIfInsideRect:
                 cmp.w   d3,d1
-                blo.s   SKRuntime_Rectangle_ReturnWithConditionalLowWordPointerStore
+                blo.s   SKRect_PlayerPointerReturn
                 cmp.w   d5,d1
-                bhs.s   SKRuntime_Rectangle_ReturnWithConditionalLowWordPointerStore
+                bhs.s   SKRect_PlayerPointerReturn
                 cmp.w   d4,d2
-                blo.s   SKRuntime_Rectangle_ReturnWithConditionalLowWordPointerStore
+                blo.s   SKRect_PlayerPointerReturn
                 cmp.w   d6,d2
-                bhs.s   SKRuntime_Rectangle_ReturnWithConditionalLowWordPointerStore
+                bhs.s   SKRect_PlayerPointerReturn
                 move.w  a2,d0
 
-SKRuntime_Rectangle_ReturnWithConditionalLowWordPointerStore:
+; An inside match writes the pointer to D0.w. An outside match preserves D0
+SKRect_PlayerPointerReturn:
                 rts
 ; End of function StorePlayerPointerIfInsideRect
 
@@ -287,20 +289,20 @@ PalLoad_Line1:
 Displace_PlayerOffObject:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                beq.s   SKRuntime_Displace_ReturnAfterConditionalStandingRelease
+                beq.s   SKDisplace_Return
                 bclr    #p1_standing_bit,status(a0)
-                beq.s   SKRuntime_Displace_ReleaseSecondStandingPlayerWithNativeFlagDifference
+                beq.s   SKDisplace_ReleaseP2IfStanding
                 lea     (Player_1).w,a1
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
 
-SKRuntime_Displace_ReleaseSecondStandingPlayerWithNativeFlagDifference:
+SKDisplace_ReleaseP2IfStanding:
                 bclr    #p2_standing_bit,status(a0)
-                beq.s   SKRuntime_Displace_ReturnAfterConditionalStandingRelease
+                beq.s   SKDisplace_Return
                 lea     (Player_2).w,a1
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
 
-SKRuntime_Displace_ReturnAfterConditionalStandingRelease:
+SKDisplace_Return:
                 rts
 ; End of function Displace_PlayerOffObject

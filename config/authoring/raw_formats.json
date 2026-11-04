@@ -957,7 +957,7 @@
     },
     {
       "path": "src/objects/runtime/s3/curved_motion.s",
-      "sha256": "360d632bd58fe9b9d58a2bd619dea2705e270039cc7958446af868270767491c"
+      "sha256": "2421d57b7ccd62ffafeb70e81b2b5984bf04fe3821c92fba1ea61cbeaf95f25d"
     },
     {
       "path": "src/objects/runtime/s3/deletion_and_tracking.s",
@@ -977,7 +977,7 @@
     },
     {
       "path": "src/objects/runtime/s3/player_interactions.s",
-      "sha256": "6192296ce7eb732acfe8ea1a6cc147a1793263e4f0781b4e078c4b770a983d0b"
+      "sha256": "3eefac27add14fcd315d0f9a5b1a587f143f85d00f31b6d6b92076a2590a2df6"
     },
     {
       "path": "src/objects/runtime/s3/raw_animation.s",
@@ -989,11 +989,11 @@
     },
     {
       "path": "src/objects/runtime/s3/swing_motion.s",
-      "sha256": "66e54b404819a40470d28da5a1eb795477e4d872ed4863d0e35ac5889328d018"
+      "sha256": "43a278cf3c9bdfc8a0ab7917838f9ae86c70bc40294c62bfd02a63e423fecc82"
     },
     {
       "path": "src/objects/runtime/s3/target_selection.s",
-      "sha256": "877d38b970f827649e588a101ef1a43ea50a3dadae0fb6d226f26c624e14e7f3"
+      "sha256": "a25620412aa7d82f5bea972cd605f0f5857296379f417223a6f4c521204e9693"
     },
     {
       "path": "src/objects/runtime/s3/display_helpers.s",
@@ -1001,7 +1001,7 @@
     },
     {
       "path": "src/objects/runtime/s3/velocity_and_chasing.s",
-      "sha256": "228632be641f75df969d80eb29bb299a9fc4b725e6f3bf549cd04ee5162aef4f"
+      "sha256": "ce7c19e86acf4af048b8ade53302e7e81f26cf0678bccc2d0668bb00a873255b"
     },
     {
       "path": "src/objects/runtime/s3/visibility_and_culling.s",
@@ -1013,7 +1013,7 @@
     },
     {
       "path": "src/objects/runtime/sk/angle_targeting.s",
-      "sha256": "bad944feb801571de589cf993a7a40aedd8cf33119c679de9d41d0fcf7841ce7"
+      "sha256": "a08a11a88eb3a48d2f4f02d228184d6323b0dd09abdf443550b024c85a390211"
     },
     {
       "path": "src/objects/runtime/sk/attributes_and_children.s",
@@ -1029,7 +1029,7 @@
     },
     {
       "path": "src/objects/runtime/sk/curved_motion.s",
-      "sha256": "a49fcdeb979e18ff59053001eb60f9883e484f93993fbf5b51c95cce912274a1"
+      "sha256": "a743d78a92d622db385ac117146ceb1e289e43dfe630f14b93d740d2591742d4"
     },
     {
       "path": "src/objects/runtime/sk/deletion_and_tracking.s",
@@ -1057,7 +1057,7 @@
     },
     {
       "path": "src/objects/runtime/sk/player_interactions.s",
-      "sha256": "25d6956c497eb3e8206a0ef6b2e819b5f3a02d5cfef18891b07e4ac755da696e"
+      "sha256": "5e8c4892d453fb1110caa5bc532f2fdd5202123c59bedf5529d99d1e64512cd1"
     },
     {
       "path": "src/objects/runtime/sk/raw_animation.s",
@@ -1069,11 +1069,11 @@
     },
     {
       "path": "src/objects/runtime/sk/swing_motion.s",
-      "sha256": "98d672fd35765a0edfa2452c885498cbabe92856053770ee73390ea61f44eef5"
+      "sha256": "11e66cbf796c05c4d6cb38bab11431441ce8316de082b99e8318dda1bcc21b19"
     },
     {
       "path": "src/objects/runtime/sk/target_selection.s",
-      "sha256": "18b67bb3888aecbddf152db31da2f034f9f415e1a3aa7c1ab33dc475c790c75d"
+      "sha256": "ee6163ac506cbd17c5cbeda02fc886112cfda9a6a2b41aea9f45461d19d32521"
     },
     {
       "path": "src/objects/runtime/sk/display_helpers.s",
@@ -1081,7 +1081,7 @@
     },
     {
       "path": "src/objects/runtime/sk/velocity_and_chasing.s",
-      "sha256": "43e38a19422251fa2070e77f41f02e57ac24470838e85916544e8a2a5c64d161"
+      "sha256": "99cd7266f4fc6b473d97e534c082a70a0d61dddb036378231123a58c4bb148e5"
     },
     {
       "path": "src/objects/runtime/sk/visibility_and_culling.s",

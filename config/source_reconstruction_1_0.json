@@ -891,9 +891,15 @@
       "commits": ["be07a676b27f7537d292165aaff0d4cca9fa0c1e"]
     },
     {
-      "id": "current-shorten-03b-runtime-animation",
+      "id": "change-3bbe17847946",
       "kind": "source_or_tooling",
       "summary": "Shorten 127 object dispatch, sprite queue and animation labels while documenting format-specific command and return details.",
+      "commits": ["3bbe1784794668cb91e52cdeaa1b76df258f0b05"]
+    },
+    {
+      "id": "current-shorten-03c-runtime-motion",
+      "kind": "source_or_tooling",
+      "summary": "Shorten 156 motion, targeting and player interaction labels while preserving their data widths, flags and per-engine behavior.",
       "commits": ["release-commit"]
     }
   ],

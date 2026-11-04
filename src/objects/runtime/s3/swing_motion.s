@@ -10,27 +10,28 @@ Swing_UpAndDown:
                 move.w  $3E(a0),d2                      ; Maximum acceleration before "swinging"
                 moveq   #0,d3
                 btst    #0,$38(a0)
-                bne.s   S3RuntimeSwing_ApplyDownwardSwingStepAndUndoUpperBoundaryCrossing
+                bne.s   S3Swing_StepDown
                 neg.w   d0                              ; Apply upward acceleration
                 add.w   d0,d1
                 neg.w   d2
                 cmp.w   d2,d1
-                bgt.s   S3RuntimeSwing_CommitVerticalSwingVelocityWithSeparateEventRegister
+                bgt.s   S3Swing_StoreYVel
                 bset    #0,$38(a0)
                 neg.w   d0
                 neg.w   d2
                 moveq   #1,d3
 
-S3RuntimeSwing_ApplyDownwardSwingStepAndUndoUpperBoundaryCrossing:
+S3Swing_StepDown:
                 add.w   d0,d1                           ; Apply downward acceleration
                 cmp.w   d2,d1
-                blt.s   S3RuntimeSwing_CommitVerticalSwingVelocityWithSeparateEventRegister
+                blt.s   S3Swing_StoreYVel
                 bclr    #0,$38(a0)
                 neg.w   d0
                 add.w   d0,d1
                 moveq   #1,d3
 
-S3RuntimeSwing_CommitVerticalSwingVelocityWithSeparateEventRegister:
+; D3 reports a turn at either limit
+S3Swing_StoreYVel:
                 move.w  d1,y_vel(a0)
                 rts
 ; End of function Swing_UpAndDown
@@ -43,27 +44,28 @@ Swing_LeftAndRight:
                 move.w  $3A(a0),d2
                 moveq   #0,d3
                 btst    #3,$38(a0)
-                bne.s   S3RuntimeSwing_ApplyPositiveHorizontalSwingStepAndUndoUpperCrossing
+                bne.s   S3Swing_StepRight
                 neg.w   d0
                 add.w   d0,d1
                 neg.w   d2
                 cmp.w   d2,d1
-                bgt.s   S3RuntimeSwing_CommitHorizontalSwingVelocityWithSeparateEventRegister
+                bgt.s   S3Swing_StoreXVel
                 bset    #3,$38(a0)
                 neg.w   d0
                 neg.w   d2
                 moveq   #1,d3
 
-S3RuntimeSwing_ApplyPositiveHorizontalSwingStepAndUndoUpperCrossing:
+S3Swing_StepRight:
                 add.w   d0,d1
                 cmp.w   d2,d1
-                blt.s   S3RuntimeSwing_CommitHorizontalSwingVelocityWithSeparateEventRegister
+                blt.s   S3Swing_StoreXVel
                 bclr    #3,$38(a0)
                 neg.w   d0
                 add.w   d0,d1
                 moveq   #1,d3
 
-S3RuntimeSwing_CommitHorizontalSwingVelocityWithSeparateEventRegister:
+; D3 reports a turn at either limit
+S3Swing_StoreXVel:
                 move.w  d1,x_vel(a0)
                 rts
 ; End of function Swing_LeftAndRight
@@ -73,18 +75,19 @@ S3RuntimeSwing_CommitHorizontalSwingVelocityWithSeparateEventRegister:
 Swing_UpAndDown_Count:
                 bsr.w   Swing_UpAndDown
                 tst.w   d3
-                beq.s   S3RuntimeSwing_ReturnCountedSwingNativeZeroOrCompletionCondition
+                beq.s   S3Swing_CountReturn
                 move.b  $39(a0),d2
                 subq.b  #1,d2
                 move.b  d2,$39(a0)
-                bmi.s   S3RuntimeSwing_ReturnCountedSwingCompletionForNegativeCounterByte
+                bmi.s   S3Swing_CountDone
                 moveq   #0,d0
                 rts
 ; ---------------------------------------------------------------------------
 
-S3RuntimeSwing_ReturnCountedSwingCompletionForNegativeCounterByte:
+S3Swing_CountDone:
                 moveq   #1,d0
 
-S3RuntimeSwing_ReturnCountedSwingNativeZeroOrCompletionCondition:
+; If the swing did not turn, return Z set from the D3 test
+S3Swing_CountReturn:
                 rts
 ; End of function Swing_UpAndDown_Count

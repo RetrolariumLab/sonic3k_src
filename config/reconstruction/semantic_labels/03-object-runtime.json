@@ -110,7 +110,7 @@
       "source": "src/objects/runtime/s3/curved_motion.s",
       "original_line": 147,
       "old": "loc_53448",
-      "new": "S3RuntimeCurve_AddChildOffsetsAndDispatchCircularLookupQuadrant",
+      "new": "S3Curve_DispatchChildOrbit",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeCurve_AddChildOffsetsAndDispatchCircularLookupQuadrant."
     },
@@ -118,7 +118,7 @@
       "source": "src/objects/runtime/s3/curved_motion.s",
       "original_line": 161,
       "old": "loc_5346C",
-      "new": "S3RuntimeCurve_CommitChildCircularLookupIntegerCoordinates",
+      "new": "S3Curve_StoreChildOrbitXYWord",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeCurve_CommitChildCircularLookupIntegerCoordinates."
     },
@@ -126,7 +126,7 @@
       "source": "src/objects/runtime/s3/curved_motion.s",
       "original_line": 198,
       "old": "loc_534B4",
-      "new": "S3RuntimeCurve_SampleReversePositiveYForPhaseFirstQuarter",
+      "new": "S3Curve_OrbitQ1ReversePosY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeCurve_SampleReversePositiveYForPhaseFirstQuarter."
     },
@@ -134,7 +134,7 @@
       "source": "src/objects/runtime/s3/curved_motion.s",
       "original_line": 204,
       "old": "loc_534BC",
-      "new": "S3RuntimeCurve_SampleForwardNegativeYForPhaseSecondQuarter",
+      "new": "S3Curve_OrbitQ2ForwardNegY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeCurve_SampleForwardNegativeYForPhaseSecondQuarter."
     },
@@ -142,7 +142,7 @@
       "source": "src/objects/runtime/s3/curved_motion.s",
       "original_line": 211,
       "old": "loc_534C6",
-      "new": "S3RuntimeCurve_SampleReverseNegativeYForPhaseThirdQuarter",
+      "new": "S3Curve_OrbitQ3ReverseNegY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeCurve_SampleReverseNegativeYForPhaseThirdQuarter."
     },
@@ -150,7 +150,7 @@
       "source": "src/objects/runtime/s3/curved_motion.s",
       "original_line": 218,
       "old": "loc_534D0",
-      "new": "S3RuntimeCurve_SampleForwardPositiveYForPhaseFourthQuarter",
+      "new": "S3Curve_OrbitQ4ForwardPosY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeCurve_SampleForwardPositiveYForPhaseFourthQuarter."
     },
@@ -158,7 +158,7 @@
       "source": "src/objects/runtime/s3/curved_motion.s",
       "original_line": 243,
       "old": "loc_534F6",
-      "new": "S3RuntimeCurve_SampleForwardPositiveXForPhaseFirstQuarter",
+      "new": "S3Curve_ParentQ1ForwardPosX",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeCurve_SampleForwardPositiveXForPhaseFirstQuarter."
     },
@@ -166,7 +166,7 @@
       "source": "src/objects/runtime/s3/curved_motion.s",
       "original_line": 248,
       "old": "loc_534FE",
-      "new": "S3RuntimeCurve_SampleReversePositiveXForPhaseSecondQuarter",
+      "new": "S3Curve_ParentQ2ReversePosX",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeCurve_SampleReversePositiveXForPhaseSecondQuarter."
     },
@@ -174,7 +174,7 @@
       "source": "src/objects/runtime/s3/curved_motion.s",
       "original_line": 255,
       "old": "loc_5350A",
-      "new": "S3RuntimeCurve_SampleForwardNegativeXForPhaseThirdQuarter",
+      "new": "S3Curve_ParentQ3ForwardNegX",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeCurve_SampleForwardNegativeXForPhaseThirdQuarter."
     },
@@ -182,7 +182,7 @@
       "source": "src/objects/runtime/s3/curved_motion.s",
       "original_line": 263,
       "old": "loc_5351A",
-      "new": "S3RuntimeCurve_SampleReverseNegativeXForPhaseFourthQuarter",
+      "new": "S3Curve_ParentQ4ReverseNegX",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeCurve_SampleReverseNegativeXForPhaseFourthQuarter."
     },
@@ -190,7 +190,7 @@
       "source": "src/objects/runtime/s3/curved_motion.s",
       "original_line": 271,
       "old": "loc_5352A",
-      "new": "S3RuntimeCurve_BuildParentOffsetCoordinatesForSampledX",
+      "new": "S3Curve_BuildParentXYFromSampleX",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeCurve_BuildParentOffsetCoordinatesForSampledX."
     },
@@ -198,7 +198,7 @@
       "source": "src/objects/runtime/s3/curved_motion.s",
       "original_line": 294,
       "old": "off_53568",
-      "new": "S3RuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets",
+      "new": "S3Curve_MixedYQuarterOffsets",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets."
     },
@@ -206,7 +206,7 @@
       "source": "src/objects/runtime/s3/curved_motion.s",
       "original_line": 301,
       "old": "loc_53570",
-      "new": "S3RuntimeCurve_SampleByteForwardPositiveYInMixedWidthLookup",
+      "new": "S3Curve_MixedYQ1ForwardByte",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeCurve_SampleByteForwardPositiveYInMixedWidthLookup."
     },
@@ -214,7 +214,7 @@
       "source": "src/objects/runtime/s3/curved_motion.s",
       "original_line": 306,
       "old": "loc_53578",
-      "new": "S3RuntimeCurve_SampleWordReverseYInMixedWidthSecondQuarter",
+      "new": "S3Curve_MixedYQ2ReverseWord",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeCurve_SampleWordReverseYInMixedWidthSecondQuarter."
     },
@@ -222,7 +222,7 @@
       "source": "src/objects/runtime/s3/curved_motion.s",
       "original_line": 313,
       "old": "loc_53584",
-      "new": "S3RuntimeCurve_SampleWordForwardNegativeYInMixedWidthThirdQuarter",
+      "new": "S3Curve_MixedYQ3ForwardNegWord",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeCurve_SampleWordForwardNegativeYInMixedWidthThirdQuarter."
     },
@@ -230,7 +230,7 @@
       "source": "src/objects/runtime/s3/curved_motion.s",
       "original_line": 321,
       "old": "loc_53594",
-      "new": "S3RuntimeCurve_SampleWordReverseNegativeYInMixedWidthFourthQuarter",
+      "new": "S3Curve_MixedYQ4ReverseNegWord",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeCurve_SampleWordReverseNegativeYInMixedWidthFourthQuarter."
     },
@@ -238,7 +238,7 @@
       "source": "src/objects/runtime/s3/curved_motion.s",
       "original_line": 329,
       "old": "loc_535A4",
-      "new": "S3RuntimeCurve_CommitParentOffsetXAndMixedWidthSampledY",
+      "new": "S3Curve_StoreParentXYFromMixedY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeCurve_CommitParentOffsetXAndMixedWidthSampledY."
     },
@@ -550,7 +550,7 @@
       "source": "src/objects/runtime/s3/player_interactions.s",
       "original_line": 16,
       "old": "loc_53D88",
-      "new": "S3Runtime_Defeat_SelectCappedOldChainScoreOffset",
+      "new": "S3Defeat_PickCappedChainScore",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actualruntimeflow: S3Runtime_Defeat_SelectCappedOldChainScoreOffset"
     },
@@ -558,7 +558,7 @@
       "source": "src/objects/runtime/s3/player_interactions.s",
       "original_line": 24,
       "old": "loc_53DA2",
-      "new": "S3Runtime_Defeat_AwardGlobalScoreAndInstallExplosionForLaterDispatch",
+      "new": "S3Defeat_AwardScoreAndSetExplosion",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actualruntimeflow: S3Runtime_Defeat_AwardGlobalScoreAndInstallExplosionForLaterDispatch"
     },
@@ -566,7 +566,7 @@
       "source": "src/objects/runtime/s3/player_interactions.s",
       "original_line": 38,
       "old": "loc_53DD0",
-      "new": "S3Runtime_Defeat_HandleAlreadyUpwardPlayerVelocity",
+      "new": "S3Defeat_DrawAfterUpwardHit",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actualruntimeflow: S3Runtime_Defeat_HandleAlreadyUpwardPlayerVelocity"
     },
@@ -574,7 +574,7 @@
       "source": "src/objects/runtime/s3/player_interactions.s",
       "original_line": 43,
       "old": "loc_53DDC",
-      "new": "S3Runtime_Defeat_HandleNonnegativePlayerNotAboveObject",
+      "new": "S3Defeat_DrawAfterHitFromBelow",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actualruntimeflow: S3Runtime_Defeat_HandleNonnegativePlayerNotAboveObject"
     },
@@ -582,7 +582,7 @@
       "source": "src/objects/runtime/s3/player_interactions.s",
       "original_line": 47,
       "old": "word_53DE8",
-      "new": "S3Runtime_Defeat_ChainScoreUnitsByByteOffset",
+      "new": "S3Defeat_ChainScoreWords",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "ActualprivateDATA: S3Runtime_Defeat_ChainScoreUnitsByByteOffset"
     },
@@ -590,7 +590,7 @@
       "source": "src/objects/runtime/s3/player_interactions.s",
       "original_line": 61,
       "old": "loc_53E02",
-      "new": "S3Runtime_Shake_CompareNonzeroPressedDirectionMasks",
+      "new": "S3Shake_TestNewDirectionPress",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actualruntimeflow: S3Runtime_Shake_CompareNonzeroPressedDirectionMasks"
     },
@@ -598,7 +598,7 @@
       "source": "src/objects/runtime/s3/player_interactions.s",
       "original_line": 75,
       "old": "locret_53E26",
-      "new": "S3Runtime_Shake_ReturnCompletionThroughLowWordAndZeroFlag",
+      "new": "S3Shake_Return",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actualruntimeflow: S3Runtime_Shake_ReturnCompletionThroughLowWordAndZeroFlag"
     },
@@ -606,7 +606,7 @@
       "source": "src/objects/runtime/s3/player_interactions.s",
       "original_line": 90,
       "old": "loc_53E40",
-      "new": "S3Runtime_Contact_SelectHandleAfterOptionalParentNotification",
+      "new": "S3Contact_SelectPlayerHandle",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actualruntimeflow: S3Runtime_Contact_SelectHandleAfterOptionalParentNotification"
     },
@@ -614,7 +614,7 @@
       "source": "src/objects/runtime/s3/player_interactions.s",
       "original_line": 97,
       "old": "locret_53E50",
-      "new": "S3Runtime_Contact_ReturnNoPropertyOrSelectedHandle",
+      "new": "S3Contact_Return",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actualruntimeflow: S3Runtime_Contact_ReturnNoPropertyOrSelectedHandle"
     },
@@ -622,7 +622,7 @@
       "source": "src/objects/runtime/s3/player_interactions.s",
       "original_line": 102,
       "old": "word_53E52",
-      "new": "S3Runtime_Contact_PlayerHandlesByPropertyLowBits",
+      "new": "S3Contact_PropertyToPlayer",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "ActualprivateDATA: S3Runtime_Contact_PlayerHandlesByPropertyLowBits"
     },
@@ -630,7 +630,7 @@
       "source": "src/objects/runtime/s3/player_interactions.s",
       "original_line": 142,
       "old": "locret_53E9E",
-      "new": "S3Runtime_Rectangle_ReturnWithConditionalLowWordPointerStore",
+      "new": "S3Rect_PlayerPointerReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actualruntimeflow: S3Runtime_Rectangle_ReturnWithConditionalLowWordPointerStore"
     },
@@ -638,7 +638,7 @@
       "source": "src/objects/runtime/s3/player_interactions.s",
       "original_line": 172,
       "old": "loc_53ED0",
-      "new": "S3Runtime_Displace_ReleaseSecondStandingPlayerWithNativeFlagDifference",
+      "new": "S3Displace_ReleaseP2IfStanding",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actualruntimeflow: S3Runtime_Displace_ReleaseSecondStandingPlayerWithNativeFlagDifference"
     },
@@ -646,7 +646,7 @@
       "source": "src/objects/runtime/s3/player_interactions.s",
       "original_line": 182,
       "old": "locret_53EE8",
-      "new": "S3Runtime_Displace_ReturnAfterConditionalStandingRelease",
+      "new": "S3Displace_Return",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actualruntimeflow: S3Runtime_Displace_ReturnAfterConditionalStandingRelease"
     },
@@ -1318,7 +1318,7 @@
       "source": "src/objects/runtime/s3/swing_motion.s",
       "original_line": 24,
       "old": "loc_52F90",
-      "new": "S3RuntimeSwing_ApplyDownwardSwingStepAndUndoUpperBoundaryCrossing",
+      "new": "S3Swing_StepDown",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSwing_ApplyDownwardSwingStepAndUndoUpperBoundaryCrossing."
     },
@@ -1326,7 +1326,7 @@
       "source": "src/objects/runtime/s3/swing_motion.s",
       "original_line": 33,
       "old": "loc_52FA2",
-      "new": "S3RuntimeSwing_CommitVerticalSwingVelocityWithSeparateEventRegister",
+      "new": "S3Swing_StoreYVel",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSwing_CommitVerticalSwingVelocityWithSeparateEventRegister."
     },
@@ -1334,7 +1334,7 @@
       "source": "src/objects/runtime/s3/swing_motion.s",
       "original_line": 57,
       "old": "loc_52FD4",
-      "new": "S3RuntimeSwing_ApplyPositiveHorizontalSwingStepAndUndoUpperCrossing",
+      "new": "S3Swing_StepRight",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSwing_ApplyPositiveHorizontalSwingStepAndUndoUpperCrossing."
     },
@@ -1342,7 +1342,7 @@
       "source": "src/objects/runtime/s3/swing_motion.s",
       "original_line": 66,
       "old": "loc_52FE6",
-      "new": "S3RuntimeSwing_CommitHorizontalSwingVelocityWithSeparateEventRegister",
+      "new": "S3Swing_StoreXVel",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSwing_CommitHorizontalSwingVelocityWithSeparateEventRegister."
     },
@@ -1350,7 +1350,7 @@
       "source": "src/objects/runtime/s3/swing_motion.s",
       "original_line": 85,
       "old": "loc_53004",
-      "new": "S3RuntimeSwing_ReturnCountedSwingCompletionForNegativeCounterByte",
+      "new": "S3Swing_CountDone",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSwing_ReturnCountedSwingCompletionForNegativeCounterByte."
     },
@@ -1358,7 +1358,7 @@
       "source": "src/objects/runtime/s3/swing_motion.s",
       "original_line": 88,
       "old": "locret_53006",
-      "new": "S3RuntimeSwing_ReturnCountedSwingNativeZeroOrCompletionCondition",
+      "new": "S3Swing_CountReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSwing_ReturnCountedSwingNativeZeroOrCompletionCondition."
     },
@@ -1366,7 +1366,7 @@
       "source": "src/objects/runtime/s3/target_selection.s",
       "original_line": 17,
       "old": "loc_53280",
-      "new": "S3Runtime_FindPlayers_MeasureSecondHorizontalSeparation",
+      "new": "S3FindPlayers_MeasureP2X",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actualruntimeflow: S3Runtime_FindPlayers_MeasureSecondHorizontalSeparation"
     },
@@ -1374,7 +1374,7 @@
       "source": "src/objects/runtime/s3/target_selection.s",
       "original_line": 25,
       "old": "loc_53292",
-      "new": "S3Runtime_FindPlayers_ChooseUnsignedHorizontalMinimumWithP1Tie",
+      "new": "S3FindPlayers_SelectNearestX",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actualruntimeflow: S3Runtime_FindPlayers_ChooseUnsignedHorizontalMinimumWithP1Tie"
     },
@@ -1382,7 +1382,7 @@
       "source": "src/objects/runtime/s3/target_selection.s",
       "original_line": 32,
       "old": "loc_5329C",
-      "new": "S3Runtime_FindPlayers_MeasureSelectedVerticalSeparation",
+      "new": "S3FindPlayers_MeasureSelectedY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actualruntimeflow: S3Runtime_FindPlayers_MeasureSelectedVerticalSeparation"
     },
@@ -1390,7 +1390,7 @@
       "source": "src/objects/runtime/s3/target_selection.s",
       "original_line": 40,
       "old": "locret_532AC",
-      "new": "S3Runtime_FindPlayers_ReturnSelectedHandleSidesAndWordMagnitudes",
+      "new": "S3FindPlayers_Return",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actualruntimeflow: S3Runtime_FindPlayers_ReturnSelectedHandleSidesAndWordMagnitudes"
     },
@@ -1398,7 +1398,7 @@
       "source": "src/objects/runtime/s3/target_selection.s",
       "original_line": 92,
       "old": "loc_53300",
-      "new": "S3Runtime_OtherTarget_MeasureVerticalSeparationAfterHorizontalSign",
+      "new": "S3FindOther_MeasureY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actualruntimeflow: S3Runtime_OtherTarget_MeasureVerticalSeparationAfterHorizontalSign"
     },
@@ -1406,7 +1406,7 @@
       "source": "src/objects/runtime/s3/target_selection.s",
       "original_line": 100,
       "old": "locret_53310",
-      "new": "S3Runtime_OtherTarget_ReturnSidesAndWordMagnitudes",
+      "new": "S3FindOther_Return",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actualruntimeflow: S3Runtime_OtherTarget_ReturnSidesAndWordMagnitudes"
     },
@@ -1414,7 +1414,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 68,
       "old": "loc_53A9C",
-      "new": "S3RuntimeVelocity_ClassifyXDominantLeftTargetUsingRawXThreshold",
+      "new": "S3Aim8_LeftXDominant",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_ClassifyXDominantLeftTargetUsingRawXThreshold."
     },
@@ -1422,7 +1422,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 76,
       "old": "loc_53AAA",
-      "new": "S3RuntimeVelocity_ComputeYDominantDistanceRatioAndChooseUpperSector",
+      "new": "S3Aim8_ClassifyYDominant",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_ComputeYDominantDistanceRatioAndChooseUpperSector."
     },
@@ -1430,7 +1430,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 89,
       "old": "loc_53AC2",
-      "new": "S3RuntimeVelocity_ChooseLowerSectorFromYDominantRatio",
+      "new": "S3Aim8_ClassifyLowerYDominant",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_ChooseLowerSectorFromYDominantRatio."
     },
@@ -1438,7 +1438,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 97,
       "old": "loc_53AD0",
-      "new": "S3RuntimeVelocity_ClassifyEqualWordDistancesByTargetSideFlags",
+      "new": "S3Aim8_ClassifyEqualDistances",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_ClassifyEqualWordDistancesByTargetSideFlags."
     },
@@ -1446,7 +1446,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 105,
       "old": "loc_53ADC",
-      "new": "S3RuntimeVelocity_ChooseLeftEqualDistanceSectorIncludingCoincidentTarget",
+      "new": "S3Aim8_ClassifyEqualLeft",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_ChooseLeftEqualDistanceSectorIncludingCoincidentTarget."
     },
@@ -1454,7 +1454,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 111,
       "old": "loc_53AE4",
-      "new": "S3RuntimeVelocity_ReturnEightWaySelectorZero",
+      "new": "S3Aim8_ReturnSector0",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_ReturnEightWaySelectorZero."
     },
@@ -1462,7 +1462,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 116,
       "old": "loc_53AE8",
-      "new": "S3RuntimeVelocity_ReturnEightWaySelectorOne",
+      "new": "S3Aim8_ReturnSector1",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_ReturnEightWaySelectorOne."
     },
@@ -1470,7 +1470,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 121,
       "old": "loc_53AEC",
-      "new": "S3RuntimeVelocity_ReturnEightWaySelectorTwo",
+      "new": "S3Aim8_ReturnSector2",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_ReturnEightWaySelectorTwo."
     },
@@ -1478,7 +1478,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 126,
       "old": "loc_53AF0",
-      "new": "S3RuntimeVelocity_ReturnEightWaySelectorThree",
+      "new": "S3Aim8_ReturnSector3",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_ReturnEightWaySelectorThree."
     },
@@ -1486,7 +1486,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 131,
       "old": "loc_53AF4",
-      "new": "S3RuntimeVelocity_ReturnEightWaySelectorFour",
+      "new": "S3Aim8_ReturnSector4",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_ReturnEightWaySelectorFour."
     },
@@ -1494,7 +1494,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 136,
       "old": "loc_53AF8",
-      "new": "S3RuntimeVelocity_ReturnEightWaySelectorFive",
+      "new": "S3Aim8_ReturnSector5",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_ReturnEightWaySelectorFive."
     },
@@ -1502,7 +1502,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 141,
       "old": "loc_53AFC",
-      "new": "S3RuntimeVelocity_ReturnEightWaySelectorSix",
+      "new": "S3Aim8_ReturnSector6",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_ReturnEightWaySelectorSix."
     },
@@ -1510,7 +1510,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 146,
       "old": "loc_53B00",
-      "new": "S3RuntimeVelocity_ReturnEightWaySelectorSeven",
+      "new": "S3Aim8_ReturnSector7",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_ReturnEightWaySelectorSeven."
     },
@@ -1518,7 +1518,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 162,
       "old": "loc_53B1E",
-      "new": "S3RuntimeVelocity_CommitCallerSignedHorizontalSpeedWithPlayerSideFlip",
+      "new": "S3AimX_StoreSignedSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_CommitCallerSignedHorizontalSpeedWithPlayerSideFlip."
     },
@@ -1526,7 +1526,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 180,
       "old": "loc_53B3A",
-      "new": "S3RuntimeVelocity_AcceptOrRejectBothAxisChaseHorizontalCandidate",
+      "new": "S3ChaseXY_TryXSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_AcceptOrRejectBothAxisChaseHorizontalCandidate."
     },
@@ -1534,7 +1534,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 189,
       "old": "loc_53B4C",
-      "new": "S3RuntimeVelocity_CompareYAfterHorizontalChaseAndPreserveXEqualityByte",
+      "new": "S3ChaseXY_CompareY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_CompareYAfterHorizontalChaseAndPreserveXEqualityByte."
     },
@@ -1542,7 +1542,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 196,
       "old": "loc_53B5A",
-      "new": "S3RuntimeVelocity_AcceptOrRejectBothAxisChaseVerticalCandidate",
+      "new": "S3ChaseXY_TryYSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_AcceptOrRejectBothAxisChaseVerticalCandidate."
     },
@@ -1550,7 +1550,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 205,
       "old": "locret_53B6C",
-      "new": "S3RuntimeVelocity_ReturnBothAxisChaseWithoutUniformCompletionFlags",
+      "new": "S3ChaseXY_Return",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_ReturnBothAxisChaseWithoutUniformCompletionFlags."
     },
@@ -1558,7 +1558,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 209,
       "old": "loc_53B6E",
-      "new": "S3RuntimeVelocity_ClearBothChaseVelocitiesOnlyWhenBothIntegerAxesMatch",
+      "new": "S3ChaseXY_StopIfBothAxesMatch",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_ClearBothChaseVelocitiesOnlyWhenBothIntegerAxesMatch."
     },
@@ -1566,7 +1566,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 230,
       "old": "loc_53B94",
-      "new": "S3RuntimeVelocity_AcceptOrRejectXOnlyOffsetChaseCandidate",
+      "new": "S3ChaseOffsetX_TrySpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_AcceptOrRejectXOnlyOffsetChaseCandidate."
     },
@@ -1574,7 +1574,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 239,
       "old": "locret_53BA6",
-      "new": "S3RuntimeVelocity_ReturnXOnlyChaseWithNativeCandidateOrStoreFlags",
+      "new": "S3ChaseOffsetX_Return",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_ReturnXOnlyChaseWithNativeCandidateOrStoreFlags."
     },
@@ -1582,7 +1582,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 256,
       "old": "loc_53BC0",
-      "new": "S3RuntimeVelocity_AcceptOrRejectYOnlyOffsetChaseCandidate",
+      "new": "S3ChaseOffsetY_TrySpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_AcceptOrRejectYOnlyOffsetChaseCandidate."
     },
@@ -1590,7 +1590,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 265,
       "old": "locret_53BD2",
-      "new": "S3RuntimeVelocity_ReturnYOnlyChaseWithNativeCandidateOrStoreFlags",
+      "new": "S3ChaseOffsetY_Return",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_ReturnYOnlyChaseWithNativeCandidateOrStoreFlags."
     },
@@ -1598,7 +1598,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 283,
       "old": "loc_53BF2",
-      "new": "S3RuntimeVelocity_AcceptOrRejectOffsetBothAxisChaseXCandidate",
+      "new": "S3ChaseOffsetXY_TryXSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_AcceptOrRejectOffsetBothAxisChaseXCandidate."
     },
@@ -1606,7 +1606,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 292,
       "old": "loc_53C04",
-      "new": "S3RuntimeVelocity_CompareOffsetTargetYAndCarrySavedXEqualityByte",
+      "new": "S3ChaseOffsetXY_CompareY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_CompareOffsetTargetYAndCarrySavedXEqualityByte."
     },
@@ -1614,7 +1614,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 302,
       "old": "loc_53C1A",
-      "new": "S3RuntimeVelocity_AcceptOrRejectOffsetBothAxisChaseYCandidate",
+      "new": "S3ChaseOffsetXY_TryYSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_AcceptOrRejectOffsetBothAxisChaseYCandidate."
     },
@@ -1622,7 +1622,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 311,
       "old": "locret_53C2C",
-      "new": "S3RuntimeVelocity_ReturnOffsetBothAxisChaseWithNativeFlags",
+      "new": "S3ChaseOffsetXY_Return",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_ReturnOffsetBothAxisChaseWithNativeFlags."
     },
@@ -1630,7 +1630,7 @@
       "source": "src/objects/runtime/s3/velocity_and_chasing.s",
       "original_line": 315,
       "old": "loc_53C2E",
-      "new": "S3RuntimeVelocity_ClearOffsetChaseVelocitiesOnlyWhenBothWordTargetsMatch",
+      "new": "S3ChaseOffsetXY_StopIfBothAxesMatch",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeVelocity_ClearOffsetChaseVelocitiesOnlyWhenBothWordTargetsMatch."
     },
@@ -1758,7 +1758,7 @@
       "source": "src/objects/runtime/sk/angle_targeting.s",
       "original_line": 20,
       "old": "loc_86248",
-      "new": "SKRuntime_Bearing_ExtractVerticalSignAfterHorizontalMagnitude",
+      "new": "SKBearing_GetDYAndSign",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Bearing_ExtractVerticalSignAfterHorizontalMagnitude"
     },
@@ -1766,7 +1766,7 @@
       "source": "src/objects/runtime/sk/angle_targeting.s",
       "original_line": 26,
       "old": "loc_86252",
-      "new": "SKRuntime_Bearing_OrderUnsignedMinorAndMajorAxisMagnitudes",
+      "new": "SKBearing_OrderAxisMagnitudes",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Bearing_OrderUnsignedMinorAndMajorAxisMagnitudes"
     },
@@ -1774,7 +1774,7 @@
       "source": "src/objects/runtime/sk/angle_targeting.s",
       "original_line": 32,
       "old": "loc_8625A",
-      "new": "SKRuntime_Bearing_DivideWordShiftedMinorAndDispatchQuadrant",
+      "new": "SKBearing_DivideAndSelectOctant",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Bearing_DivideWordShiftedMinorAndDispatchQuadrant"
     },
@@ -1782,7 +1782,7 @@
       "source": "src/objects/runtime/sk/angle_targeting.s",
       "original_line": 42,
       "old": "off_8626E",
-      "new": "SKRuntime_Bearing_QuadrantMajorAxisHandlerOffsets",
+      "new": "SKBearing_OctantOffsets",
       "profiles": ["sk"],
       "meaning": "ActualprivateDATA: SKRuntime_Bearing_QuadrantMajorAxisHandlerOffsets"
     },
@@ -1790,7 +1790,7 @@
       "source": "src/objects/runtime/sk/angle_targeting.s",
       "original_line": 53,
       "old": "locret_8627E",
-      "new": "SKRuntime_Bearing_ReturnZeroOrPositiveXYVerticalRatio",
+      "new": "SKBearing_PosXYVertReturn",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Bearing_ReturnZeroOrPositiveXYVerticalRatio"
     },
@@ -1798,7 +1798,7 @@
       "source": "src/objects/runtime/sk/angle_targeting.s",
       "original_line": 59,
       "old": "loc_86280",
-      "new": "SKRuntime_Bearing_ComplementPositiveXYHorizontalRatio",
+      "new": "SKBearing_PosXYHoriz",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Bearing_ComplementPositiveXYHorizontalRatio"
     },
@@ -1806,7 +1806,7 @@
       "source": "src/objects/runtime/sk/angle_targeting.s",
       "original_line": 65,
       "old": "loc_86288",
-      "new": "SKRuntime_Bearing_ComplementNegativeYVerticalRatio",
+      "new": "SKBearing_NegYVert",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Bearing_ComplementNegativeYVerticalRatio"
     },
@@ -1814,7 +1814,7 @@
       "source": "src/objects/runtime/sk/angle_targeting.s",
       "original_line": 71,
       "old": "loc_86290",
-      "new": "SKRuntime_Bearing_AddQuarterTurnForNegativeYHorizontalRatio",
+      "new": "SKBearing_NegYHoriz",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Bearing_AddQuarterTurnForNegativeYHorizontalRatio"
     },
@@ -1822,7 +1822,7 @@
       "source": "src/objects/runtime/sk/angle_targeting.s",
       "original_line": 76,
       "old": "loc_86296",
-      "new": "SKRuntime_Bearing_NegateNegativeXVerticalRatio",
+      "new": "SKBearing_NegXVert",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Bearing_NegateNegativeXVerticalRatio"
     },
@@ -1830,7 +1830,7 @@
       "source": "src/objects/runtime/sk/angle_targeting.s",
       "original_line": 81,
       "old": "loc_8629A",
-      "new": "SKRuntime_Bearing_AddThreeQuarterTurnForNegativeXHorizontalRatio",
+      "new": "SKBearing_NegXHoriz",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Bearing_AddThreeQuarterTurnForNegativeXHorizontalRatio"
     },
@@ -1838,7 +1838,7 @@
       "source": "src/objects/runtime/sk/angle_targeting.s",
       "original_line": 86,
       "old": "loc_862A0",
-      "new": "SKRuntime_Bearing_AddHalfTurnForNegativeXYVerticalRatio",
+      "new": "SKBearing_NegXYVert",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Bearing_AddHalfTurnForNegativeXYVerticalRatio"
     },
@@ -1846,7 +1846,7 @@
       "source": "src/objects/runtime/sk/angle_targeting.s",
       "original_line": 91,
       "old": "loc_862A6",
-      "new": "SKRuntime_Bearing_ComplementNegativeXYHorizontalRatio",
+      "new": "SKBearing_NegXYHoriz",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Bearing_ComplementNegativeXYHorizontalRatio"
     },
@@ -1942,7 +1942,7 @@
       "source": "src/objects/runtime/sk/curved_motion.s",
       "original_line": 105,
       "old": "loc_84C9E",
-      "new": "SKRuntimeCurve_CommitParentFlippedFullPrecisionSimpleCircularPosition",
+      "new": "SKCurve_StoreOrbitXYLong",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeCurve_CommitParentFlippedFullPrecisionSimpleCircularPosition."
     },
@@ -1950,7 +1950,7 @@
       "source": "src/objects/runtime/sk/curved_motion.s",
       "original_line": 229,
       "old": "loc_84DAA",
-      "new": "SKRuntimeCurve_AddChildOffsetsAndDispatchCircularLookupQuadrant",
+      "new": "SKCurve_DispatchChildOrbit",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeCurve_AddChildOffsetsAndDispatchCircularLookupQuadrant."
     },
@@ -1958,7 +1958,7 @@
       "source": "src/objects/runtime/sk/curved_motion.s",
       "original_line": 243,
       "old": "loc_84DCE",
-      "new": "SKRuntimeCurve_CommitChildCircularLookupIntegerCoordinates",
+      "new": "SKCurve_StoreChildOrbitXYWord",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeCurve_CommitChildCircularLookupIntegerCoordinates."
     },
@@ -1966,7 +1966,7 @@
       "source": "src/objects/runtime/sk/curved_motion.s",
       "original_line": 280,
       "old": "loc_84E16",
-      "new": "SKRuntimeCurve_SampleReversePositiveYForPhaseFirstQuarter",
+      "new": "SKCurve_OrbitQ1ReversePosY",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeCurve_SampleReversePositiveYForPhaseFirstQuarter."
     },
@@ -1974,7 +1974,7 @@
       "source": "src/objects/runtime/sk/curved_motion.s",
       "original_line": 286,
       "old": "loc_84E1E",
-      "new": "SKRuntimeCurve_SampleForwardNegativeYForPhaseSecondQuarter",
+      "new": "SKCurve_OrbitQ2ForwardNegY",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeCurve_SampleForwardNegativeYForPhaseSecondQuarter."
     },
@@ -1982,7 +1982,7 @@
       "source": "src/objects/runtime/sk/curved_motion.s",
       "original_line": 293,
       "old": "loc_84E28",
-      "new": "SKRuntimeCurve_SampleReverseNegativeYForPhaseThirdQuarter",
+      "new": "SKCurve_OrbitQ3ReverseNegY",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeCurve_SampleReverseNegativeYForPhaseThirdQuarter."
     },
@@ -1990,7 +1990,7 @@
       "source": "src/objects/runtime/sk/curved_motion.s",
       "original_line": 300,
       "old": "loc_84E32",
-      "new": "SKRuntimeCurve_SampleForwardPositiveYForPhaseFourthQuarter",
+      "new": "SKCurve_OrbitQ4ForwardPosY",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeCurve_SampleForwardPositiveYForPhaseFourthQuarter."
     },
@@ -1998,7 +1998,7 @@
       "source": "src/objects/runtime/sk/curved_motion.s",
       "original_line": 325,
       "old": "loc_84E58",
-      "new": "SKRuntimeCurve_SampleForwardPositiveXForPhaseFirstQuarter",
+      "new": "SKCurve_ParentQ1ForwardPosX",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeCurve_SampleForwardPositiveXForPhaseFirstQuarter."
     },
@@ -2006,7 +2006,7 @@
       "source": "src/objects/runtime/sk/curved_motion.s",
       "original_line": 330,
       "old": "loc_84E60",
-      "new": "SKRuntimeCurve_SampleReversePositiveXForPhaseSecondQuarter",
+      "new": "SKCurve_ParentQ2ReversePosX",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeCurve_SampleReversePositiveXForPhaseSecondQuarter."
     },
@@ -2014,7 +2014,7 @@
       "source": "src/objects/runtime/sk/curved_motion.s",
       "original_line": 337,
       "old": "loc_84E6C",
-      "new": "SKRuntimeCurve_SampleForwardNegativeXForPhaseThirdQuarter",
+      "new": "SKCurve_ParentQ3ForwardNegX",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeCurve_SampleForwardNegativeXForPhaseThirdQuarter."
     },
@@ -2022,7 +2022,7 @@
       "source": "src/objects/runtime/sk/curved_motion.s",
       "original_line": 345,
       "old": "loc_84E7C",
-      "new": "SKRuntimeCurve_SampleReverseNegativeXForPhaseFourthQuarter",
+      "new": "SKCurve_ParentQ4ReverseNegX",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeCurve_SampleReverseNegativeXForPhaseFourthQuarter."
     },
@@ -2030,7 +2030,7 @@
       "source": "src/objects/runtime/sk/curved_motion.s",
       "original_line": 353,
       "old": "loc_84E8C",
-      "new": "SKRuntimeCurve_BuildParentOffsetCoordinatesForSampledX",
+      "new": "SKCurve_BuildParentXYFromSampleX",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeCurve_BuildParentOffsetCoordinatesForSampledX."
     },
@@ -2038,7 +2038,7 @@
       "source": "src/objects/runtime/sk/curved_motion.s",
       "original_line": 363,
       "old": "loc_84EA6",
-      "new": "SKRuntimeCurve_CommitSampleMirroredByParentFacingToIntegerOffsetPosition",
+      "new": "SKCurve_StoreParentMirroredXYWord",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeCurve_CommitSampleMirroredByParentFacingToIntegerOffsetPosition."
     },
@@ -2046,7 +2046,7 @@
       "source": "src/objects/runtime/sk/curved_motion.s",
       "original_line": 381,
       "old": "off_84ED4",
-      "new": "SKRuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets",
+      "new": "SKCurve_MixedYQuarterOffsets",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets."
     },
@@ -2054,7 +2054,7 @@
       "source": "src/objects/runtime/sk/curved_motion.s",
       "original_line": 388,
       "old": "loc_84EDC",
-      "new": "SKRuntimeCurve_SampleByteForwardPositiveYInMixedWidthLookup",
+      "new": "SKCurve_MixedYQ1ForwardByte",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeCurve_SampleByteForwardPositiveYInMixedWidthLookup."
     },
@@ -2062,7 +2062,7 @@
       "source": "src/objects/runtime/sk/curved_motion.s",
       "original_line": 393,
       "old": "loc_84EE4",
-      "new": "SKRuntimeCurve_SampleWordReverseYInMixedWidthSecondQuarter",
+      "new": "SKCurve_MixedYQ2ReverseWord",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeCurve_SampleWordReverseYInMixedWidthSecondQuarter."
     },
@@ -2070,7 +2070,7 @@
       "source": "src/objects/runtime/sk/curved_motion.s",
       "original_line": 400,
       "old": "loc_84EF0",
-      "new": "SKRuntimeCurve_SampleWordForwardNegativeYInMixedWidthThirdQuarter",
+      "new": "SKCurve_MixedYQ3ForwardNegWord",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeCurve_SampleWordForwardNegativeYInMixedWidthThirdQuarter."
     },
@@ -2078,7 +2078,7 @@
       "source": "src/objects/runtime/sk/curved_motion.s",
       "original_line": 408,
       "old": "loc_84F00",
-      "new": "SKRuntimeCurve_SampleWordReverseNegativeYInMixedWidthFourthQuarter",
+      "new": "SKCurve_MixedYQ4ReverseNegWord",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeCurve_SampleWordReverseNegativeYInMixedWidthFourthQuarter."
     },
@@ -2086,7 +2086,7 @@
       "source": "src/objects/runtime/sk/curved_motion.s",
       "original_line": 415,
       "old": "loc_84F10",
-      "new": "SKRuntimeCurve_CommitParentOffsetXAndMixedWidthSampledY",
+      "new": "SKCurve_StoreParentXYFromMixedY",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeCurve_CommitParentOffsetXAndMixedWidthSampledY."
     },
@@ -2622,7 +2622,7 @@
       "source": "src/objects/runtime/sk/player_interactions.s",
       "original_line": 19,
       "old": "loc_85750",
-      "new": "SKRuntime_Defeat_HandleAlreadyUpwardPlayerVelocity",
+      "new": "SKDefeat_SlowUpwardPlayer",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Defeat_HandleAlreadyUpwardPlayerVelocity"
     },
@@ -2630,7 +2630,7 @@
       "source": "src/objects/runtime/sk/player_interactions.s",
       "original_line": 24,
       "old": "loc_85758",
-      "new": "SKRuntime_Defeat_HandleNonnegativePlayerNotAboveObject",
+      "new": "SKDefeat_KickUpPlayerBelow",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Defeat_HandleNonnegativePlayerNotAboveObject"
     },
@@ -2638,7 +2638,7 @@
       "source": "src/objects/runtime/sk/player_interactions.s",
       "original_line": 41,
       "old": "loc_8577C",
-      "new": "SKRuntime_Defeat_SelectCappedOldChainScoreOffset",
+      "new": "SKDefeat_PickCappedChainScore",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Defeat_SelectCappedOldChainScoreOffset"
     },
@@ -2646,7 +2646,7 @@
       "source": "src/objects/runtime/sk/player_interactions.s",
       "original_line": 49,
       "old": "loc_85796",
-      "new": "SKRuntime_Defeat_AwardGlobalScoreAndInstallExplosionForLaterDispatch",
+      "new": "SKDefeat_AwardScoreAndSetExplosion",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Defeat_AwardGlobalScoreAndInstallExplosionForLaterDispatch"
     },
@@ -2654,7 +2654,7 @@
       "source": "src/objects/runtime/sk/player_interactions.s",
       "original_line": 58,
       "old": "word_857AC",
-      "new": "SKRuntime_Defeat_ChainScoreUnitsByByteOffset",
+      "new": "SKDefeat_ChainScoreWords",
       "profiles": ["sk"],
       "meaning": "ActualprivateDATA: SKRuntime_Defeat_ChainScoreUnitsByByteOffset"
     },
@@ -2662,7 +2662,7 @@
       "source": "src/objects/runtime/sk/player_interactions.s",
       "original_line": 114,
       "old": "loc_85822",
-      "new": "SKRuntime_Attack_ReturnTrueForCommonOrCharacterSpecificAttack",
+      "new": "SKAttack_ReturnTrue",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Attack_ReturnTrueForCommonOrCharacterSpecificAttack"
     },
@@ -2670,7 +2670,7 @@
       "source": "src/objects/runtime/sk/player_interactions.s",
       "original_line": 136,
       "old": "loc_8584A",
-      "new": "SKRuntime_Shake_CompareNonzeroPressedDirectionMasks",
+      "new": "SKShake_TestNewDirectionPress",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Shake_CompareNonzeroPressedDirectionMasks"
     },
@@ -2678,7 +2678,7 @@
       "source": "src/objects/runtime/sk/player_interactions.s",
       "original_line": 150,
       "old": "locret_8586E",
-      "new": "SKRuntime_Shake_ReturnCompletionThroughLowWordAndZeroFlag",
+      "new": "SKShake_Return",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Shake_ReturnCompletionThroughLowWordAndZeroFlag"
     },
@@ -2686,7 +2686,7 @@
       "source": "src/objects/runtime/sk/player_interactions.s",
       "original_line": 167,
       "old": "locret_8588E",
-      "new": "SKRuntime_Contact_ReturnNoPropertyOrSelectedHandle",
+      "new": "SKContact_Return",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Contact_ReturnNoPropertyOrSelectedHandle"
     },
@@ -2694,7 +2694,7 @@
       "source": "src/objects/runtime/sk/player_interactions.s",
       "original_line": 172,
       "old": "word_85890",
-      "new": "SKRuntime_Contact_PlayerHandlesByPropertyLowBits",
+      "new": "SKContact_PropertyToPlayer",
       "profiles": ["sk"],
       "meaning": "ActualprivateDATA: SKRuntime_Contact_PlayerHandlesByPropertyLowBits"
     },
@@ -2702,7 +2702,7 @@
       "source": "src/objects/runtime/sk/player_interactions.s",
       "original_line": 201,
       "old": "loc_858C4",
-      "new": "SKRuntime_Rectangle_ReturnZeroOutsideOtherObjectsSignedSpan",
+      "new": "SKRect_OutsideOtherReturnZero",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Rectangle_ReturnZeroOutsideOtherObjectsSignedSpan"
     },
@@ -2710,7 +2710,7 @@
       "source": "src/objects/runtime/sk/player_interactions.s",
       "original_line": 229,
       "old": "loc_858F4",
-      "new": "SKRuntime_Rectangle_ReturnZeroOutsideOwnSignedSpan",
+      "new": "SKRect_OutsideOwnReturnZero",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Rectangle_ReturnZeroOutsideOwnSignedSpan"
     },
@@ -2718,7 +2718,7 @@
       "source": "src/objects/runtime/sk/player_interactions.s",
       "original_line": 269,
       "old": "locret_8593E",
-      "new": "SKRuntime_Rectangle_ReturnWithConditionalLowWordPointerStore",
+      "new": "SKRect_PlayerPointerReturn",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Rectangle_ReturnWithConditionalLowWordPointerStore"
     },
@@ -2726,7 +2726,7 @@
       "source": "src/objects/runtime/sk/player_interactions.s",
       "original_line": 297,
       "old": "loc_85970",
-      "new": "SKRuntime_Displace_ReleaseSecondStandingPlayerWithNativeFlagDifference",
+      "new": "SKDisplace_ReleaseP2IfStanding",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Displace_ReleaseSecondStandingPlayerWithNativeFlagDifference"
     },
@@ -2734,7 +2734,7 @@
       "source": "src/objects/runtime/sk/player_interactions.s",
       "original_line": 304,
       "old": "locret_85988",
-      "new": "SKRuntime_Displace_ReturnAfterConditionalStandingRelease",
+      "new": "SKDisplace_Return",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Displace_ReturnAfterConditionalStandingRelease"
     },
@@ -3654,7 +3654,7 @@
       "source": "src/objects/runtime/sk/swing_motion.s",
       "original_line": 24,
       "old": "loc_84812",
-      "new": "SKRuntimeSwing_ApplyDownwardSwingStepAndUndoUpperBoundaryCrossing",
+      "new": "SKSwing_StepDown",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSwing_ApplyDownwardSwingStepAndUndoUpperBoundaryCrossing."
     },
@@ -3662,7 +3662,7 @@
       "source": "src/objects/runtime/sk/swing_motion.s",
       "original_line": 33,
       "old": "loc_84824",
-      "new": "SKRuntimeSwing_CommitVerticalSwingVelocityWithSeparateEventRegister",
+      "new": "SKSwing_StoreYVel",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSwing_CommitVerticalSwingVelocityWithSeparateEventRegister."
     },
@@ -3670,7 +3670,7 @@
       "source": "src/objects/runtime/sk/swing_motion.s",
       "original_line": 57,
       "old": "loc_84856",
-      "new": "SKRuntimeSwing_ApplyPositiveHorizontalSwingStepAndUndoUpperCrossing",
+      "new": "SKSwing_StepRight",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSwing_ApplyPositiveHorizontalSwingStepAndUndoUpperCrossing."
     },
@@ -3678,7 +3678,7 @@
       "source": "src/objects/runtime/sk/swing_motion.s",
       "original_line": 66,
       "old": "loc_84868",
-      "new": "SKRuntimeSwing_CommitHorizontalSwingVelocityWithSeparateEventRegister",
+      "new": "SKSwing_StoreXVel",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSwing_CommitHorizontalSwingVelocityWithSeparateEventRegister."
     },
@@ -3686,7 +3686,7 @@
       "source": "src/objects/runtime/sk/swing_motion.s",
       "original_line": 85,
       "old": "loc_84886",
-      "new": "SKRuntimeSwing_ReturnCountedSwingCompletionForNegativeCounterByte",
+      "new": "SKSwing_CountDone",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSwing_ReturnCountedSwingCompletionForNegativeCounterByte."
     },
@@ -3694,7 +3694,7 @@
       "source": "src/objects/runtime/sk/swing_motion.s",
       "original_line": 88,
       "old": "locret_84888",
-      "new": "SKRuntimeSwing_ReturnCountedSwingNativeZeroOrCompletionCondition",
+      "new": "SKSwing_CountReturn",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSwing_ReturnCountedSwingNativeZeroOrCompletionCondition."
     },
@@ -3702,7 +3702,7 @@
       "source": "src/objects/runtime/sk/target_selection.s",
       "original_line": 17,
       "old": "loc_84B2E",
-      "new": "SKRuntime_FindPlayers_MeasureSecondHorizontalSeparation",
+      "new": "SKFindPlayers_MeasureP2X",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_FindPlayers_MeasureSecondHorizontalSeparation"
     },
@@ -3710,7 +3710,7 @@
       "source": "src/objects/runtime/sk/target_selection.s",
       "original_line": 25,
       "old": "loc_84B40",
-      "new": "SKRuntime_FindPlayers_ChooseUnsignedHorizontalMinimumWithP1Tie",
+      "new": "SKFindPlayers_SelectNearestX",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_FindPlayers_ChooseUnsignedHorizontalMinimumWithP1Tie"
     },
@@ -3718,7 +3718,7 @@
       "source": "src/objects/runtime/sk/target_selection.s",
       "original_line": 32,
       "old": "loc_84B4A",
-      "new": "SKRuntime_FindPlayers_MeasureSelectedVerticalSeparation",
+      "new": "SKFindPlayers_MeasureSelectedY",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_FindPlayers_MeasureSelectedVerticalSeparation"
     },
@@ -3726,7 +3726,7 @@
       "source": "src/objects/runtime/sk/target_selection.s",
       "original_line": 40,
       "old": "locret_84B5A",
-      "new": "SKRuntime_FindPlayers_ReturnSelectedHandleSidesAndWordMagnitudes",
+      "new": "SKFindPlayers_Return",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_FindPlayers_ReturnSelectedHandleSidesAndWordMagnitudes"
     },
@@ -3734,7 +3734,7 @@
       "source": "src/objects/runtime/sk/target_selection.s",
       "original_line": 92,
       "old": "loc_84BAE",
-      "new": "SKRuntime_OtherTarget_MeasureVerticalSeparationAfterHorizontalSign",
+      "new": "SKFindOther_MeasureY",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_OtherTarget_MeasureVerticalSeparationAfterHorizontalSign"
     },
@@ -3742,7 +3742,7 @@
       "source": "src/objects/runtime/sk/target_selection.s",
       "original_line": 100,
       "old": "locret_84BBE",
-      "new": "SKRuntime_OtherTarget_ReturnSidesAndWordMagnitudes",
+      "new": "SKFindOther_Return",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_OtherTarget_ReturnSidesAndWordMagnitudes"
     },
@@ -3750,7 +3750,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 83,
       "old": "loc_853AE",
-      "new": "SKRuntimeVelocity_ClassifyXDominantLeftTargetUsingRawXThreshold",
+      "new": "SKAim8_LeftXDominant",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_ClassifyXDominantLeftTargetUsingRawXThreshold."
     },
@@ -3758,7 +3758,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 91,
       "old": "loc_853BC",
-      "new": "SKRuntimeVelocity_ComputeYDominantDistanceRatioAndChooseUpperSector",
+      "new": "SKAim8_ClassifyYDominant",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_ComputeYDominantDistanceRatioAndChooseUpperSector."
     },
@@ -3766,7 +3766,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 104,
       "old": "loc_853D4",
-      "new": "SKRuntimeVelocity_ChooseLowerSectorFromYDominantRatio",
+      "new": "SKAim8_ClassifyLowerYDominant",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_ChooseLowerSectorFromYDominantRatio."
     },
@@ -3774,7 +3774,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 112,
       "old": "loc_853E2",
-      "new": "SKRuntimeVelocity_ClassifyEqualWordDistancesByTargetSideFlags",
+      "new": "SKAim8_ClassifyEqualDistances",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_ClassifyEqualWordDistancesByTargetSideFlags."
     },
@@ -3782,7 +3782,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 120,
       "old": "loc_853EE",
-      "new": "SKRuntimeVelocity_ChooseLeftEqualDistanceSectorIncludingCoincidentTarget",
+      "new": "SKAim8_ClassifyEqualLeft",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_ChooseLeftEqualDistanceSectorIncludingCoincidentTarget."
     },
@@ -3790,7 +3790,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 126,
       "old": "loc_853F6",
-      "new": "SKRuntimeVelocity_ReturnEightWaySelectorZero",
+      "new": "SKAim8_ReturnSector0",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_ReturnEightWaySelectorZero."
     },
@@ -3798,7 +3798,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 131,
       "old": "loc_853FA",
-      "new": "SKRuntimeVelocity_ReturnEightWaySelectorOne",
+      "new": "SKAim8_ReturnSector1",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_ReturnEightWaySelectorOne."
     },
@@ -3806,7 +3806,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 136,
       "old": "loc_853FE",
-      "new": "SKRuntimeVelocity_ReturnEightWaySelectorTwo",
+      "new": "SKAim8_ReturnSector2",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_ReturnEightWaySelectorTwo."
     },
@@ -3814,7 +3814,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 141,
       "old": "loc_85402",
-      "new": "SKRuntimeVelocity_ReturnEightWaySelectorThree",
+      "new": "SKAim8_ReturnSector3",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_ReturnEightWaySelectorThree."
     },
@@ -3822,7 +3822,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 146,
       "old": "loc_85406",
-      "new": "SKRuntimeVelocity_ReturnEightWaySelectorFour",
+      "new": "SKAim8_ReturnSector4",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_ReturnEightWaySelectorFour."
     },
@@ -3830,7 +3830,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 151,
       "old": "loc_8540A",
-      "new": "SKRuntimeVelocity_ReturnEightWaySelectorFive",
+      "new": "SKAim8_ReturnSector5",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_ReturnEightWaySelectorFive."
     },
@@ -3838,7 +3838,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 156,
       "old": "loc_8540E",
-      "new": "SKRuntimeVelocity_ReturnEightWaySelectorSix",
+      "new": "SKAim8_ReturnSector6",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_ReturnEightWaySelectorSix."
     },
@@ -3846,7 +3846,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 161,
       "old": "loc_85412",
-      "new": "SKRuntimeVelocity_ReturnEightWaySelectorSeven",
+      "new": "SKAim8_ReturnSector7",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_ReturnEightWaySelectorSeven."
     },
@@ -3854,7 +3854,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 177,
       "old": "loc_85430",
-      "new": "SKRuntimeVelocity_CommitCallerSignedHorizontalSpeedWithPlayerSideFlip",
+      "new": "SKAimX_StoreSignedSpeed",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_CommitCallerSignedHorizontalSpeedWithPlayerSideFlip."
     },
@@ -3862,7 +3862,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 195,
       "old": "loc_8544C",
-      "new": "SKRuntimeVelocity_AcceptOrRejectBothAxisChaseHorizontalCandidate",
+      "new": "SKChaseXY_TryXSpeed",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_AcceptOrRejectBothAxisChaseHorizontalCandidate."
     },
@@ -3870,7 +3870,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 204,
       "old": "loc_8545E",
-      "new": "SKRuntimeVelocity_CompareYAfterHorizontalChaseAndPreserveXEqualityByte",
+      "new": "SKChaseXY_CompareY",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_CompareYAfterHorizontalChaseAndPreserveXEqualityByte."
     },
@@ -3878,7 +3878,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 211,
       "old": "loc_8546C",
-      "new": "SKRuntimeVelocity_AcceptOrRejectBothAxisChaseVerticalCandidate",
+      "new": "SKChaseXY_TryYSpeed",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_AcceptOrRejectBothAxisChaseVerticalCandidate."
     },
@@ -3886,7 +3886,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 220,
       "old": "locret_8547E",
-      "new": "SKRuntimeVelocity_ReturnBothAxisChaseWithoutUniformCompletionFlags",
+      "new": "SKChaseXY_Return",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_ReturnBothAxisChaseWithoutUniformCompletionFlags."
     },
@@ -3894,7 +3894,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 224,
       "old": "loc_85480",
-      "new": "SKRuntimeVelocity_ClearBothChaseVelocitiesOnlyWhenBothIntegerAxesMatch",
+      "new": "SKChaseXY_StopIfBothAxesMatch",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_ClearBothChaseVelocitiesOnlyWhenBothIntegerAxesMatch."
     },
@@ -3902,7 +3902,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 245,
       "old": "loc_854A6",
-      "new": "SKRuntimeVelocity_AcceptOrRejectXOnlyOffsetChaseCandidate",
+      "new": "SKChaseOffsetX_TrySpeed",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_AcceptOrRejectXOnlyOffsetChaseCandidate."
     },
@@ -3910,7 +3910,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 254,
       "old": "locret_854B8",
-      "new": "SKRuntimeVelocity_ReturnXOnlyChaseWithNativeCandidateOrStoreFlags",
+      "new": "SKChaseOffsetX_Return",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_ReturnXOnlyChaseWithNativeCandidateOrStoreFlags."
     },
@@ -3918,7 +3918,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 271,
       "old": "loc_854D2",
-      "new": "SKRuntimeVelocity_AcceptOrRejectYOnlyOffsetChaseCandidate",
+      "new": "SKChaseOffsetY_TrySpeed",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_AcceptOrRejectYOnlyOffsetChaseCandidate."
     },
@@ -3926,7 +3926,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 280,
       "old": "locret_854E4",
-      "new": "SKRuntimeVelocity_ReturnYOnlyChaseWithNativeCandidateOrStoreFlags",
+      "new": "SKChaseOffsetY_Return",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_ReturnYOnlyChaseWithNativeCandidateOrStoreFlags."
     },
@@ -3934,7 +3934,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 298,
       "old": "loc_85504",
-      "new": "SKRuntimeVelocity_AcceptOrRejectOffsetBothAxisChaseXCandidate",
+      "new": "SKChaseOffsetXY_TryXSpeed",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_AcceptOrRejectOffsetBothAxisChaseXCandidate."
     },
@@ -3942,7 +3942,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 307,
       "old": "loc_85516",
-      "new": "SKRuntimeVelocity_CompareOffsetTargetYAndCarrySavedXEqualityByte",
+      "new": "SKChaseOffsetXY_CompareY",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_CompareOffsetTargetYAndCarrySavedXEqualityByte."
     },
@@ -3950,7 +3950,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 317,
       "old": "loc_8552C",
-      "new": "SKRuntimeVelocity_AcceptOrRejectOffsetBothAxisChaseYCandidate",
+      "new": "SKChaseOffsetXY_TryYSpeed",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_AcceptOrRejectOffsetBothAxisChaseYCandidate."
     },
@@ -3958,7 +3958,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 326,
       "old": "locret_8553E",
-      "new": "SKRuntimeVelocity_ReturnOffsetBothAxisChaseWithNativeFlags",
+      "new": "SKChaseOffsetXY_Return",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_ReturnOffsetBothAxisChaseWithNativeFlags."
     },
@@ -3966,7 +3966,7 @@
       "source": "src/objects/runtime/sk/velocity_and_chasing.s",
       "original_line": 330,
       "old": "loc_85540",
-      "new": "SKRuntimeVelocity_ClearOffsetChaseVelocitiesOnlyWhenBothWordTargetsMatch",
+      "new": "SKChaseOffsetXY_StopIfBothAxesMatch",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeVelocity_ClearOffsetChaseVelocitiesOnlyWhenBothWordTargetsMatch."
     },

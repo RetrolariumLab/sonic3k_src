@@ -51,99 +51,101 @@ Obj_VelocityIndex:
 Find_SonicTails8Way:
                 bsr.w   Find_SonicTails                 ; This routine seems bugged slightly. Shouldn't the first two cmpi instructions look at d3 and not d2?
                 cmp.w   d2,d3
-                beq.s   S3RuntimeVelocity_ClassifyEqualWordDistancesByTargetSideFlags
-                bhi.s   S3RuntimeVelocity_ComputeYDominantDistanceRatioAndChooseUpperSector
+                beq.s   S3Aim8_ClassifyEqualDistances
+                bhi.s   S3Aim8_ClassifyYDominant
                 swap    d3                              ; If Y distance is closer to object
                 clr.w   d3
                 divu.w  d2,d3
                 tst.w   d0
-                beq.s   S3RuntimeVelocity_ClassifyXDominantLeftTargetUsingRawXThreshold
+                beq.s   S3Aim8_LeftXDominant
                 cmpi.w  #$8000,d2                       ; If Y was closer and Sonic is to right of object
-                blo.s   S3RuntimeVelocity_ReturnEightWaySelectorTwo
+                blo.s   S3Aim8_ReturnSector2
                 tst.w   d0
-                beq.s   S3RuntimeVelocity_ReturnEightWaySelectorOne
-                bra.w   S3RuntimeVelocity_ReturnEightWaySelectorThree
+                beq.s   S3Aim8_ReturnSector1
+                bra.w   S3Aim8_ReturnSector3
 ; ---------------------------------------------------------------------------
 
-S3RuntimeVelocity_ClassifyXDominantLeftTargetUsingRawXThreshold:
+; Compare the original X distance in D2 to $8000
+S3Aim8_LeftXDominant:
                 cmpi.w  #$8000,d2                       ; If Y was closer and Sonic is to left of object
-                blo.s   S3RuntimeVelocity_ReturnEightWaySelectorSix
+                blo.s   S3Aim8_ReturnSector6
                 tst.w   d1
-                bne.s   S3RuntimeVelocity_ReturnEightWaySelectorFive
-                bra.w   S3RuntimeVelocity_ReturnEightWaySelectorSeven
+                bne.s   S3Aim8_ReturnSector5
+                bra.w   S3Aim8_ReturnSector7
 ; ---------------------------------------------------------------------------
 
-S3RuntimeVelocity_ComputeYDominantDistanceRatioAndChooseUpperSector:
+S3Aim8_ClassifyYDominant:
                 swap    d2                              ; If X distance is closer to object
                 clr.w   d2
                 divu.w  d3,d2
                 tst.w   d1
-                bne.s   S3RuntimeVelocity_ChooseLowerSectorFromYDominantRatio
+                bne.s   S3Aim8_ClassifyLowerYDominant
                 cmpi.w  #$8000,d2
-                blo.s   S3RuntimeVelocity_ReturnEightWaySelectorZero
+                blo.s   S3Aim8_ReturnSector0
                 tst.w   d0
-                bne.s   S3RuntimeVelocity_ReturnEightWaySelectorOne
-                bra.w   S3RuntimeVelocity_ReturnEightWaySelectorSeven
+                bne.s   S3Aim8_ReturnSector1
+                bra.w   S3Aim8_ReturnSector7
 ; ---------------------------------------------------------------------------
 
-S3RuntimeVelocity_ChooseLowerSectorFromYDominantRatio:
+S3Aim8_ClassifyLowerYDominant:
                 cmpi.w  #$8000,d2
-                blo.s   S3RuntimeVelocity_ReturnEightWaySelectorFour
+                blo.s   S3Aim8_ReturnSector4
                 tst.w   d0
-                bne.s   S3RuntimeVelocity_ReturnEightWaySelectorThree
-                bra.w   S3RuntimeVelocity_ReturnEightWaySelectorFive
+                bne.s   S3Aim8_ReturnSector3
+                bra.w   S3Aim8_ReturnSector5
 ; ---------------------------------------------------------------------------
 
-S3RuntimeVelocity_ClassifyEqualWordDistancesByTargetSideFlags:
+S3Aim8_ClassifyEqualDistances:
                 tst.w   d0                              ; If X and Y distance are identical
-                beq.s   S3RuntimeVelocity_ChooseLeftEqualDistanceSectorIncludingCoincidentTarget
+                beq.s   S3Aim8_ClassifyEqualLeft
                 tst.w   d1
-                beq.s   S3RuntimeVelocity_ReturnEightWaySelectorOne
-                bra.w   S3RuntimeVelocity_ReturnEightWaySelectorThree
+                beq.s   S3Aim8_ReturnSector1
+                bra.w   S3Aim8_ReturnSector3
 ; ---------------------------------------------------------------------------
 
-S3RuntimeVelocity_ChooseLeftEqualDistanceSectorIncludingCoincidentTarget:
+; A coincident target follows this branch and selects sector 7
+S3Aim8_ClassifyEqualLeft:
                 tst.w   d1
-                bne.s   S3RuntimeVelocity_ReturnEightWaySelectorFive
-                bra.w   S3RuntimeVelocity_ReturnEightWaySelectorSeven
+                bne.s   S3Aim8_ReturnSector5
+                bra.w   S3Aim8_ReturnSector7
 ; ---------------------------------------------------------------------------
 
-S3RuntimeVelocity_ReturnEightWaySelectorZero:
+S3Aim8_ReturnSector0:
                 moveq   #0,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-S3RuntimeVelocity_ReturnEightWaySelectorOne:
+S3Aim8_ReturnSector1:
                 moveq   #1,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-S3RuntimeVelocity_ReturnEightWaySelectorTwo:
+S3Aim8_ReturnSector2:
                 moveq   #2,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-S3RuntimeVelocity_ReturnEightWaySelectorThree:
+S3Aim8_ReturnSector3:
                 moveq   #3,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-S3RuntimeVelocity_ReturnEightWaySelectorFour:
+S3Aim8_ReturnSector4:
                 moveq   #4,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-S3RuntimeVelocity_ReturnEightWaySelectorFive:
+S3Aim8_ReturnSector5:
                 moveq   #5,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-S3RuntimeVelocity_ReturnEightWaySelectorSix:
+S3Aim8_ReturnSector6:
                 moveq   #6,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-S3RuntimeVelocity_ReturnEightWaySelectorSeven:
+S3Aim8_ReturnSector7:
                 moveq   #7,d4
                 rts
 ; End of function Find_SonicTails8Way
@@ -155,11 +157,11 @@ Set_VelocityXTrackSonic:
                 bsr.w   Find_OtherObject
                 bclr    #0,render_flags(a0)
                 tst.w   d0
-                beq.s   S3RuntimeVelocity_CommitCallerSignedHorizontalSpeedWithPlayerSideFlip
+                beq.s   S3AimX_StoreSignedSpeed
                 neg.w   d4
                 bset    #0,render_flags(a0)
 
-S3RuntimeVelocity_CommitCallerSignedHorizontalSpeedWithPlayerSideFlip:
+S3AimX_StoreSignedSpeed:
                 move.w  d4,x_vel(a0)
                 rts
 ; End of function Set_VelocityXTrackSonic
@@ -173,42 +175,44 @@ Chase_Object:
                 move.w  x_pos(a0),d4
                 cmp.w   x_pos(a1),d4
                 seq     d5
-                beq.s   S3RuntimeVelocity_CompareYAfterHorizontalChaseAndPreserveXEqualityByte
-                bcs.s   S3RuntimeVelocity_AcceptOrRejectBothAxisChaseHorizontalCandidate
+                beq.s   S3ChaseXY_CompareY
+                bcs.s   S3ChaseXY_TryXSpeed
                 neg.w   d1
 
-S3RuntimeVelocity_AcceptOrRejectBothAxisChaseHorizontalCandidate:
+S3ChaseXY_TryXSpeed:
                 move.w  x_vel(a0),d4
                 add.w   d1,d4
                 cmp.w   d2,d4
-                blt.s   S3RuntimeVelocity_CompareYAfterHorizontalChaseAndPreserveXEqualityByte
+                blt.s   S3ChaseXY_CompareY
                 cmp.w   d0,d4
-                bgt.s   S3RuntimeVelocity_CompareYAfterHorizontalChaseAndPreserveXEqualityByte
+                bgt.s   S3ChaseXY_CompareY
                 move.w  d4,x_vel(a0)
 
-S3RuntimeVelocity_CompareYAfterHorizontalChaseAndPreserveXEqualityByte:
+; Keep the X equality byte in D5 for the final stop test
+S3ChaseXY_CompareY:
                 move.w  y_pos(a0),d4
                 cmp.w   y_pos(a1),d4
-                beq.s   S3RuntimeVelocity_ClearBothChaseVelocitiesOnlyWhenBothIntegerAxesMatch
-                bcs.s   S3RuntimeVelocity_AcceptOrRejectBothAxisChaseVerticalCandidate
+                beq.s   S3ChaseXY_StopIfBothAxesMatch
+                bcs.s   S3ChaseXY_TryYSpeed
                 neg.w   d3
 
-S3RuntimeVelocity_AcceptOrRejectBothAxisChaseVerticalCandidate:
+S3ChaseXY_TryYSpeed:
                 move.w  y_vel(a0),d4
                 add.w   d3,d4
                 cmp.w   d2,d4
-                blt.s   S3RuntimeVelocity_ReturnBothAxisChaseWithoutUniformCompletionFlags
+                blt.s   S3ChaseXY_Return
                 cmp.w   d0,d4
-                bgt.s   S3RuntimeVelocity_ReturnBothAxisChaseWithoutUniformCompletionFlags
+                bgt.s   S3ChaseXY_Return
                 move.w  d4,y_vel(a0)
 
-S3RuntimeVelocity_ReturnBothAxisChaseWithoutUniformCompletionFlags:
+; CCR comes from the last comparison or velocity store on the active path
+S3ChaseXY_Return:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3RuntimeVelocity_ClearBothChaseVelocitiesOnlyWhenBothIntegerAxesMatch:
+S3ChaseXY_StopIfBothAxesMatch:
                 tst.b   d5
-                beq.s   S3RuntimeVelocity_ReturnBothAxisChaseWithoutUniformCompletionFlags
+                beq.s   S3ChaseXY_Return
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
                 rts
@@ -224,19 +228,20 @@ Chase_ObjectXOnly:
                 ext.w   d4
                 add.w   d4,d3
                 cmp.w   x_pos(a0),d3
-                bhs.s   S3RuntimeVelocity_AcceptOrRejectXOnlyOffsetChaseCandidate
+                bhs.s   S3ChaseOffsetX_TrySpeed
                 neg.w   d1
 
-S3RuntimeVelocity_AcceptOrRejectXOnlyOffsetChaseCandidate:
+S3ChaseOffsetX_TrySpeed:
                 move.w  x_vel(a0),d3
                 add.w   d1,d3
                 cmp.w   d2,d3
-                blt.s   S3RuntimeVelocity_ReturnXOnlyChaseWithNativeCandidateOrStoreFlags
+                blt.s   S3ChaseOffsetX_Return
                 cmp.w   d0,d3
-                bgt.s   S3RuntimeVelocity_ReturnXOnlyChaseWithNativeCandidateOrStoreFlags
+                bgt.s   S3ChaseOffsetX_Return
                 move.w  d3,x_vel(a0)
 
-S3RuntimeVelocity_ReturnXOnlyChaseWithNativeCandidateOrStoreFlags:
+; CCR comes from the limit comparison or accepted velocity store
+S3ChaseOffsetX_Return:
                 rts
 ; End of function Chase_ObjectXOnly
 
@@ -250,19 +255,20 @@ Chase_ObjectYOnly:
                 ext.w   d4
                 add.w   d4,d3
                 cmp.w   y_pos(a0),d3
-                bhs.s   S3RuntimeVelocity_AcceptOrRejectYOnlyOffsetChaseCandidate
+                bhs.s   S3ChaseOffsetY_TrySpeed
                 neg.w   d1
 
-S3RuntimeVelocity_AcceptOrRejectYOnlyOffsetChaseCandidate:
+S3ChaseOffsetY_TrySpeed:
                 move.w  y_vel(a0),d3
                 add.w   d1,d3
                 cmp.w   d2,d3
-                blt.s   S3RuntimeVelocity_ReturnYOnlyChaseWithNativeCandidateOrStoreFlags
+                blt.s   S3ChaseOffsetY_Return
                 cmp.w   d0,d3
-                bgt.s   S3RuntimeVelocity_ReturnYOnlyChaseWithNativeCandidateOrStoreFlags
+                bgt.s   S3ChaseOffsetY_Return
                 move.w  d3,y_vel(a0)
 
-S3RuntimeVelocity_ReturnYOnlyChaseWithNativeCandidateOrStoreFlags:
+; CCR comes from the limit comparison or accepted velocity store
+S3ChaseOffsetY_Return:
                 rts
 ; End of function Chase_ObjectYOnly
 
@@ -276,45 +282,46 @@ S3RuntimeVelocity_ReturnYOnlyChaseWithNativeCandidateOrStoreFlags:
                 add.w   d4,d6
                 cmp.w   x_pos(a0),d6
                 seq     d5
-                beq.s   S3RuntimeVelocity_CompareOffsetTargetYAndCarrySavedXEqualityByte
-                bcc.s   S3RuntimeVelocity_AcceptOrRejectOffsetBothAxisChaseXCandidate
+                beq.s   S3ChaseOffsetXY_CompareY
+                bcc.s   S3ChaseOffsetXY_TryXSpeed
                 neg.w   d1
 
-S3RuntimeVelocity_AcceptOrRejectOffsetBothAxisChaseXCandidate:
+S3ChaseOffsetXY_TryXSpeed:
                 move.w  x_vel(a0),d4
                 add.w   d1,d4
                 cmp.w   d2,d4
-                blt.s   S3RuntimeVelocity_CompareOffsetTargetYAndCarrySavedXEqualityByte
+                blt.s   S3ChaseOffsetXY_CompareY
                 cmp.w   d0,d4
-                bgt.s   S3RuntimeVelocity_CompareOffsetTargetYAndCarrySavedXEqualityByte
+                bgt.s   S3ChaseOffsetXY_CompareY
                 move.w  d4,x_vel(a0)
 
-S3RuntimeVelocity_CompareOffsetTargetYAndCarrySavedXEqualityByte:
+S3ChaseOffsetXY_CompareY:
                 move.w  y_pos(a1),d6
                 move.b  child_dy(a0),d4
                 ext.w   d4
                 add.w   d4,d6
                 cmp.w   y_pos(a0),d6
-                beq.s   S3RuntimeVelocity_ClearOffsetChaseVelocitiesOnlyWhenBothWordTargetsMatch
-                bcc.s   S3RuntimeVelocity_AcceptOrRejectOffsetBothAxisChaseYCandidate
+                beq.s   S3ChaseOffsetXY_StopIfBothAxesMatch
+                bcc.s   S3ChaseOffsetXY_TryYSpeed
                 neg.w   d3
 
-S3RuntimeVelocity_AcceptOrRejectOffsetBothAxisChaseYCandidate:
+S3ChaseOffsetXY_TryYSpeed:
                 move.w  y_vel(a0),d4
                 add.w   d3,d4
                 cmp.w   d2,d4
-                blt.s   S3RuntimeVelocity_ReturnOffsetBothAxisChaseWithNativeFlags
+                blt.s   S3ChaseOffsetXY_Return
                 cmp.w   d0,d4
-                bgt.s   S3RuntimeVelocity_ReturnOffsetBothAxisChaseWithNativeFlags
+                bgt.s   S3ChaseOffsetXY_Return
                 move.w  d4,y_vel(a0)
 
-S3RuntimeVelocity_ReturnOffsetBothAxisChaseWithNativeFlags:
+; CCR comes from the last comparison or velocity store on the active path
+S3ChaseOffsetXY_Return:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3RuntimeVelocity_ClearOffsetChaseVelocitiesOnlyWhenBothWordTargetsMatch:
+S3ChaseOffsetXY_StopIfBothAxesMatch:
                 tst.b   d5
-                beq.s   S3RuntimeVelocity_ReturnOffsetBothAxisChaseWithNativeFlags
+                beq.s   S3ChaseOffsetXY_Return
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
                 rts
