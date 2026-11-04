@@ -12,42 +12,42 @@ Obj_TunnelExhaustControl:
                 ori.b   #4,render_flags(a0)
                 move.w  #$180,priority(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_298CC
+                beq.s   SKExhaust_InitFiniteLifeAndDirection
                 move.l  #Obj_TunnelExContinuous,(a0)
                 bra.w   Obj_TunnelExContinuous
 ; ---------------------------------------------------------------------------
 
-loc_298CC:
+SKExhaust_InitFiniteLifeAndDirection:
                 move.w  #60,$30(a0)
                 tst.w   y_vel(a0)
-                beq.s   loc_298E2
-                bmi.s   loc_298F4
+                beq.s   SKExhaust_SelectDirectionFromXVel
+                bmi.s   SKExhaust_SelectActEmitter
                 move.w  #6,angle(a0)                    ; angle is 6 if moving downward, 0 if moving upward
-                bra.s   loc_298F4
+                bra.s   SKExhaust_SelectActEmitter
 ; ---------------------------------------------------------------------------
 
-loc_298E2:
+SKExhaust_SelectDirectionFromXVel:
                 move.w  #$C,angle(a0)                   ; If vertical movement is null
                 tst.w   x_vel(a0)
-                bmi.s   loc_298F4
+                bmi.s   SKExhaust_SelectActEmitter
                 move.w  #$12,angle(a0)                  ; angle is $C if X velocity is to the left, $12 if to the right
 
-loc_298F4:
+SKExhaust_SelectActEmitter:
                 tst.b   (Current_act).w
-                bne.s   loc_29904
+                bne.s   SKExhaust_InstallFiniteJet
                 move.l  #Obj_TunnelExSmoke,(a0)         ; If in act 1, just make smoke
                 bra.w   Obj_TunnelExSmoke
 ; ---------------------------------------------------------------------------
 
-loc_29904:
+SKExhaust_InstallFiniteJet:
                 move.l  #Obj_TunnelExhaustControlMain,(a0)  ; If in act 2
 
 Obj_TunnelExhaustControlMain:
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_29980
+                bpl.s   SKExhaust_TickFiniteEmitterLife
                 move.w  #4-1,$2E(a0)                    ; Make a new exhaust sprite every 4 frames
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_29980
+                bne.w   SKExhaust_TickFiniteEmitterLife
                 move.l  #Obj_TunnelExhaustUp,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
@@ -58,28 +58,28 @@ Obj_TunnelExhaustControlMain:
                 move.w  #$380,priority(a1)
                 move.w  angle(a0),d0
                 cmpi.w  #6,d0
-                bne.s   loc_29962
+                bne.s   SKExhaust_ApplyDirectionAndSelectJet
                 move.l  #Obj_TunnelExhaustDown,(a1)     ; If moving downward, change the object to use
 
-loc_29962:
-                lea     word_29992(pc,d0.w),a2
+SKExhaust_ApplyDirectionAndSelectJet:
+                lea     SKExhaust_DirectionRecords(pc,d0.w),a2
                 move.w  (a2)+,x_vel(a1)
                 move.w  (a2)+,y_vel(a1)
                 move.b  (a2)+,render_flags(a1)
                 move.b  (a2)+,mapping_frame(a1)
-                bne.s   loc_29980
+                bne.s   SKExhaust_TickFiniteEmitterLife
                 move.l  #Obj_TunnelExhaustHorz,(a1)
                 bsr.s   ReduceNewHorizontalExhaustSpeed
 
-loc_29980:
+SKExhaust_TickFiniteEmitterLife:
                 subq.w  #1,$30(a0)                      ; Continue doing this until timer runs out
-                bpl.s   loc_2998C
+                bpl.s   SKExhaust_CullFiniteEmitter
                 move.w  #$7FF0,x_pos(a0)
 
-loc_2998C:
+SKExhaust_CullFiniteEmitter:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
-word_29992:
+SKExhaust_DirectionRecords:
                 dc.w    0                               ; X velocity
                 dc.w    -$600                           ; Y velocity
                 dc.b    $86                             ; Flip value
@@ -106,10 +106,10 @@ ReduceNewHorizontalExhaustSpeed:
                 neg.w   d0
                 lsl.w   #4,d0
                 tst.w   x_vel(a1)
-                bmi.s   loc_299C0
+                bmi.s   SKExhaust_ApplyElapsedSpeedTaper
                 neg.w   d0
 
-loc_299C0:
+SKExhaust_ApplyElapsedSpeedTaper:
                 add.w   d0,x_vel(a1)
                 rts
 ; End of function ReduceNewHorizontalExhaustSpeed
@@ -119,63 +119,64 @@ loc_299C0:
 Obj_TunnelExhaustUp:
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #1,d0
-                bne.s   loc_299D6
+                bne.s   SKExhaust_MoveUpAndCheckCull
                 bchg    #0,render_flags(a0)             ; Change X flip every 2 frames
 
-loc_299D6:
+SKExhaust_MoveUpAndCheckCull:
                 jsr     (MoveSprite).l
                 tst.b   render_flags(a0)
-                bmi.s   loc_299EE                       ; If on-screen, branch
+                bmi.s   SKTunnelExhaust_CullAndDrawUpParticle  ; If on-screen, branch
                 tst.w   y_vel(a0)
-                bmi.s   loc_299EE                       ; If vertical velocity is going upwards, branch
+                bmi.s   SKTunnelExhaust_CullAndDrawUpParticle  ; If vertical velocity is going upwards, branch
                 move.w  #$7FF0,x_pos(a0)                ; Ensure that the object is definitely offscreen
 
-loc_299EE:
+SKTunnelExhaust_CullAndDrawUpParticle:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
 Obj_TunnelExhaustDown:
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #1,d0
-                bne.s   loc_29A04
+                bne.s   SKExhaust_MoveDownAndCheckCull
                 bchg    #0,render_flags(a0)             ; Change X flip every 2 frames
 
-loc_29A04:
+SKExhaust_MoveDownAndCheckCull:
                 jsr     (MoveSprite).l
                 tst.b   render_flags(a0)
-                bmi.s   loc_29A1E                       ; If on-screen, branch
+                bmi.s   SKTunnelExhaust_CullAndDrawDownParticle  ; If on-screen, branch
                 cmpi.w  #$C00,y_vel(a0)
-                blt.s   loc_29A1E                       ; If vertical velocity is less than $C00, branch
+                blt.s   SKTunnelExhaust_CullAndDrawDownParticle  ; If vertical velocity is less than $C00, branch
                 move.w  #$7FF0,x_pos(a0)
 
-loc_29A1E:
+SKTunnelExhaust_CullAndDrawDownParticle:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
 Obj_TunnelExhaustHorz:
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #1,d0
-                bne.s   loc_29A34
+                bne.s   SKExhaust_MoveHorizontalAndCheckCull
                 bchg    #1,render_flags(a0)
 
-loc_29A34:
+; When offscreen, move X to $7FF0 once falling speed reaches $600
+SKExhaust_MoveHorizontalAndCheckCull:
                 jsr     (MoveSprite).l
                 tst.b   render_flags(a0)
-                bmi.s   loc_29A4E
+                bmi.s   SKExhaust_DrawHorizontalIfVisible
                 cmpi.w  #$600,y_vel(a0)
-                blt.s   loc_29A4E
+                blt.s   SKExhaust_DrawHorizontalIfVisible
                 move.w  #$7FF0,x_pos(a0)
 
-loc_29A4E:
+SKExhaust_DrawHorizontalIfVisible:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
 Obj_TunnelExContinuous:
                 move.b  (Level_frame_counter+1).w,d0    ; This control object creates new sprites continuously
                 andi.b  #3,d0
-                bne.s   loc_29AB8
+                bne.s   SKExhaust_CullContinuousEmitter
                 jsr     (AllocateObjectAfterCurrent).l  ; Create a new sprite every four frames
-                bne.w   loc_29AB8
+                bne.w   SKExhaust_CullContinuousEmitter
                 move.l  #Obj_TunnelExhaustTimed,(a1)    ; This is a timed exhaust (the short waterfalls in LBZ2 for example)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
@@ -190,50 +191,50 @@ Obj_TunnelExContinuous:
                 move.b  #1,mapping_frame(a1)
                 move.w  #$C-1,$2E(a1)
 
-loc_29AB8:
+SKExhaust_CullContinuousEmitter:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
 Obj_TunnelExhaustTimed:
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_29AD0
+                bpl.s   SKExhaust_ToggleTimedXFlip
                 move.w  #$C-1,$2E(a0)
                 move.w  #$7FF0,x_pos(a0)
 
-loc_29AD0:
+SKExhaust_ToggleTimedXFlip:
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #1,d0
-                bne.s   loc_29AE0
+                bne.s   SKExhaust_MoveTimedAndMarkHidden
                 bchg    #0,render_flags(a0)
 
-loc_29AE0:
+SKExhaust_MoveTimedAndMarkHidden:
                 jsr     (MoveSprite).l
                 tst.b   render_flags(a0)
-                bmi.s   loc_29AF2
+                bmi.s   SKTunnelExhaust_CullAndDrawTimedParticle
                 move.w  #$7FF0,x_pos(a0)
 
-loc_29AF2:
+SKTunnelExhaust_CullAndDrawTimedParticle:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
 Obj_TunnelExSmoke:
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #3,d0
-                bne.s   loc_29B2A
+                bne.s   SKExhaust_TickSmokeEmitterLife
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_29B2A
+                bne.w   SKExhaust_TickSmokeEmitterLife
                 move.l  #Obj_FireShield_Dissipate,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.w  x_vel(a0),x_vel(a1)
                 move.w  y_vel(a0),y_vel(a1)
 
-loc_29B2A:
+SKExhaust_TickSmokeEmitterLife:
                 subq.w  #1,$30(a0)
-                bpl.s   loc_29B36
+                bpl.s   SKExhaust_CullSmokeEmitter
                 move.w  #$7FF0,x_pos(a0)
 
-loc_29B36:
+SKExhaust_CullSmokeEmitter:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 ; unused
@@ -244,17 +245,17 @@ loc_29B36:
                 ori.b   #4,render_flags(a0)
                 move.w  #$180,priority(a0)
                 move.w  #2*60,$30(a0)
-                move.l  #loc_29B6E,(a0)
+                move.l  #SKExhaust_UpdateUnusedLeftEmitter,(a0)
 
-loc_29B6E:
+SKExhaust_UpdateUnusedLeftEmitter:
                 tst.b   $32(a0)
-                bne.s   loc_29BE8
+                bne.s   SKExhaust_ToggleUnusedEmitterPhase
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_29BE8
+                bpl.s   SKExhaust_ToggleUnusedEmitterPhase
                 move.w  #4-1,$2E(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_29BE8
-                move.l  #loc_29C00,(a1)
+                bne.w   SKExhaust_ToggleUnusedEmitterPhase
+                move.l  #SKExhaust_ToggleUnusedJetYFlip,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.l  #Map_TunnelExhaust,mappings(a1)
@@ -273,53 +274,53 @@ loc_29B6E:
                 addi.w  #$10,x_pos(a1)
                 move.b  #$C6,collision_flags(a1)
 
-loc_29BE8:
+SKExhaust_ToggleUnusedEmitterPhase:
                 subq.w  #1,$30(a0)
-                bpl.s   loc_29BFA
+                bpl.s   SKExhaust_CullUnusedEmitter
                 move.w  #2*60,$30(a0)
                 eori.b  #$FF,$32(a0)
 
-loc_29BFA:
+SKExhaust_CullUnusedEmitter:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
-loc_29C00:
+SKExhaust_ToggleUnusedJetYFlip:
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #1,d0
-                bne.s   loc_29C10
+                bne.s   SKExhaust_MoveUnusedJetAndTickLife
                 bchg    #1,render_flags(a0)
 
-loc_29C10:
+SKExhaust_MoveUnusedJetAndTickLife:
                 jsr     (MoveSprite2).l
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_29C22
+                bpl.s   SKExhaust_ConsumeUnusedJetContacts
                 move.w  #$7FF0,x_pos(a0)
 
-loc_29C22:
+SKExhaust_ConsumeUnusedJetContacts:
                 move.b  collision_property(a0),d0
-                beq.w   loc_29C46
+                beq.w   SKExhaust_DrawAndRegisterUnusedJet
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
-                beq.s   loc_29C38
+                beq.s   SKExhaust_TryUnusedJetLaunchP2
                 bsr.s   LaunchPlayerLeftFromExhaustJet
 
-loc_29C38:
+SKExhaust_TryUnusedJetLaunchP2:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
-                beq.s   loc_29C46
+                beq.s   SKExhaust_DrawAndRegisterUnusedJet
                 bsr.s   LaunchPlayerLeftFromExhaustJet
 
-loc_29C46:
+SKExhaust_DrawAndRegisterUnusedJet:
                 jmp     (Sprite_CheckDeleteTouch3).l
 
 ; =============== S U B R O U T I N E =======================================
 
 LaunchPlayerLeftFromExhaustJet:
                 tst.b   object_control(a1)
-                bne.s   locret_29C88
+                bne.s   SKExhaust_UnusedJetLaunchReturn
                 move.w  y_pos(a0),y_pos(a1)
                 cmpi.w  #-$1000,x_vel(a1)
-                beq.s   locret_29C88
+                beq.s   SKExhaust_UnusedJetLaunchReturn
                 move.b  #$1A,anim(a1)
                 clr.b   jumping(a1)
                 move.w  #0,ground_vel(a1)
@@ -328,7 +329,7 @@ LaunchPlayerLeftFromExhaustJet:
                 bclr    #Status_Push,status(a1)
                 bset    #Status_InAir,status(a1)
 
-locret_29C88:
+SKExhaust_UnusedJetLaunchReturn:
                 rts
 ; End of function LaunchPlayerLeftFromExhaustJet
 

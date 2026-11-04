@@ -586,7 +586,7 @@ loc_347C4:
                 cmpi.b  #4,(a4)
                 blo.s   locret_347FA
                 movea.w interact(a1),a2
-                cmpi.l  #loc_31D3E,(a2)
+                cmpi.l  #S3SinkingMud_UpdateNormalP1Depth,(a2)
                 bne.s   loc_347DA
                 bsr.w   AbandonTopPlatformAndReleaseRiders
 

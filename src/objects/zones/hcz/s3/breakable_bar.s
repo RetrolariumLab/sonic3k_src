@@ -209,7 +209,7 @@ loc_1CB12:
 
 loc_1CB1E:
                 tst.b   render_flags(a0)
-                bpl.w   loc_1C778
+                bpl.w   S3LavaMarker_ClearMarkerLoadedBit
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 

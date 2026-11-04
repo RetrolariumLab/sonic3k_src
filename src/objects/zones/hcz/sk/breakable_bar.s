@@ -209,7 +209,7 @@ loc_1EF4A:
 
 loc_1EF56:
                 tst.b   render_flags(a0)
-                bpl.w   loc_1EBAA
+                bpl.w   SKLavaMarker_ClearMarkerLoadedBit
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 

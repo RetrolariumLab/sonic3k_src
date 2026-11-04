@@ -12,37 +12,37 @@ Obj_SinkingMud:
                 move.b  #$30,$38(a0)
                 move.b  #$30,$3A(a0)
                 bset    #7,status(a0)
-                move.l  #loc_31E1C,(a0)
+                move.l  #S3SinkingMud_UpdateCompP1Depth,(a0)
                 tst.w   (Competition_mode).w
-                bne.w   loc_31E1C
-                move.l  #loc_31D3E,(a0)
+                bne.w   S3SinkingMud_UpdateCompP1Depth
+                move.l  #S3SinkingMud_UpdateNormalP1Depth,(a0)
 
-loc_31D3E:
+S3SinkingMud_UpdateNormalP1Depth:
                 tst.w   (Debug_placement_mode).w
-                bne.w   loc_31DF2
+                bne.w   S3SinkingMud_CullNormalMudWithoutDrawing
                 lea     (Player_1).w,a1
                 btst    #p1_standing_bit,status(a0)
-                bne.s   loc_31D7A
+                bne.s   S3SinkingMud_DrainNormalP1OrKill
                 cmpi.b  #$30,$38(a0)
-                bhs.s   loc_31D5E
+                bhs.s   S3SinkingMud_CopyNormalP1Depth
                 addq.b  #2,$38(a0)
 
-loc_31D5E:
+S3SinkingMud_CopyNormalP1Depth:
                 btst    #Status_OnObj,status(a1)
-                beq.s   loc_31D84
+                beq.s   S3SinkingMud_CollideNormalP1AndCheckP2
                 movea.w interact(a1),a2
-                cmpi.l  #loc_31D3E,(a2)
-                bne.s   loc_31D84
+                cmpi.l  #S3SinkingMud_UpdateNormalP1Depth,(a2)
+                bne.s   S3SinkingMud_CollideNormalP1AndCheckP2
                 move.b  $38(a2),$38(a0)
-                bra.s   loc_31D84
+                bra.s   S3SinkingMud_CollideNormalP1AndCheckP2
 ; ---------------------------------------------------------------------------
 
-loc_31D7A:
+S3SinkingMud_DrainNormalP1OrKill:
                 tst.b   $38(a0)
-                beq.s   loc_31DF8
+                beq.s   S3SinkingMud_ResetNormalP1BeforeKill
                 subq.b  #1,$38(a0)
 
-loc_31D84:
+S3SinkingMud_CollideNormalP1AndCheckP2:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 moveq   #0,d3
@@ -52,27 +52,27 @@ loc_31D84:
                 jsr     (SolidObjectTop_1P).l
                 lea     (Player_2).w,a1
                 btst    #p2_standing_bit,status(a0)
-                bne.s   loc_31DD0
+                bne.s   S3SinkingMud_DrainNormalP2OrKill
                 cmpi.b  #$30,$3A(a0)
-                bhs.s   loc_31DB4
+                bhs.s   S3SinkingMud_CopyNormalP2Depth
                 addq.b  #2,$3A(a0)
 
-loc_31DB4:
+S3SinkingMud_CopyNormalP2Depth:
                 btst    #Status_OnObj,status(a1)
-                beq.s   loc_31DDA
+                beq.s   S3SinkingMud_CollideNormalP2
                 movea.w interact(a1),a2
-                cmpi.l  #loc_31D3E,(a2)
-                bne.s   loc_31DDA
+                cmpi.l  #S3SinkingMud_UpdateNormalP1Depth,(a2)
+                bne.s   S3SinkingMud_CollideNormalP2
                 move.b  $3A(a2),$3A(a0)
-                bra.s   loc_31DDA
+                bra.s   S3SinkingMud_CollideNormalP2
 ; ---------------------------------------------------------------------------
 
-loc_31DD0:
+S3SinkingMud_DrainNormalP2OrKill:
                 tst.b   $3A(a0)
-                beq.s   loc_31E00
+                beq.s   S3SinkingMud_ResetNormalP2BeforeKill
                 subq.b  #1,$3A(a0)
 
-loc_31DDA:
+S3SinkingMud_CollideNormalP2:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 moveq   #0,d3
@@ -81,19 +81,20 @@ loc_31DDA:
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectTop_1P).l
 
-loc_31DF2:
+S3SinkingMud_CullNormalMudWithoutDrawing:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
-loc_31DF8:
+S3SinkingMud_ResetNormalP1BeforeKill:
                 move.b  #$30,$38(a0)
-                bra.s   loc_31E06
+                bra.s   S3SinkingMud_KillNormalRider
 ; ---------------------------------------------------------------------------
 
-loc_31E00:
+S3SinkingMud_ResetNormalP2BeforeKill:
                 move.b  #$30,$3A(a0)
 
-loc_31E06:
+; The original code masks status with the complement of the incoming d1 byte
+S3SinkingMud_KillNormalRider:
                 not.b   d1
                 and.b   d1,status(a0)
                 move.l  a0,-(sp)
@@ -104,32 +105,33 @@ loc_31E06:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_31E1C:
+S3SinkingMud_UpdateCompP1Depth:
                 tst.w   (Debug_placement_mode).w
-                bne.w   locret_31ED4
+                bne.w   S3SinkingMud_CompUpdateReturn
                 lea     (Player_1).w,a1
                 btst    #p1_standing_bit,status(a0)
-                bne.s   loc_31E58
+                bne.s   S3SinkingMud_DrainCompP1OrKill
                 cmpi.b  #$30,$38(a0)
-                bhs.s   loc_31E3C
+                bhs.s   S3SinkingMud_CopyCompP1Depth
                 addq.b  #2,$38(a0)
 
-loc_31E3C:
+; Copy only from a contacted object running the normal mud handler
+S3SinkingMud_CopyCompP1Depth:
                 btst    #Status_OnObj,status(a1)
-                beq.s   loc_31E62
+                beq.s   S3SinkingMud_CollideCompP1AtHalfHeight
                 movea.w interact(a1),a2
-                cmpi.l  #loc_31D3E,(a2)
-                bne.s   loc_31E62
+                cmpi.l  #S3SinkingMud_UpdateNormalP1Depth,(a2)
+                bne.s   S3SinkingMud_CollideCompP1AtHalfHeight
                 move.b  $38(a2),$38(a0)
-                bra.s   loc_31E62
+                bra.s   S3SinkingMud_CollideCompP1AtHalfHeight
 ; ---------------------------------------------------------------------------
 
-loc_31E58:
+S3SinkingMud_DrainCompP1OrKill:
                 tst.b   $38(a0)
-                beq.s   loc_31ED6
+                beq.s   S3SinkingMud_ResetCompP1BeforeKill
                 subq.b  #1,$38(a0)
 
-loc_31E62:
+S3SinkingMud_CollideCompP1AtHalfHeight:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 moveq   #0,d3
@@ -140,27 +142,28 @@ loc_31E62:
                 jsr     (SolidObjectTop_1P).l
                 lea     (Player_2).w,a1
                 btst    #p2_standing_bit,status(a0)
-                bne.s   loc_31EB0
+                bne.s   S3SinkingMud_DrainCompP2OrKill
                 cmpi.b  #$30,$3A(a0)
-                bhs.s   loc_31E94
+                bhs.s   S3SinkingMud_CopyCompP2Depth
                 addq.b  #2,$3A(a0)
 
-loc_31E94:
+; Copy only from a contacted object running the normal mud handler
+S3SinkingMud_CopyCompP2Depth:
                 btst    #Status_OnObj,status(a1)
-                beq.s   loc_31EBA
+                beq.s   S3SinkingMud_CollideCompP2AtHalfHeight
                 movea.w interact(a1),a2
-                cmpi.l  #loc_31D3E,(a2)
-                bne.s   loc_31EBA
+                cmpi.l  #S3SinkingMud_UpdateNormalP1Depth,(a2)
+                bne.s   S3SinkingMud_CollideCompP2AtHalfHeight
                 move.b  $3A(a2),$3A(a0)
-                bra.s   loc_31EBA
+                bra.s   S3SinkingMud_CollideCompP2AtHalfHeight
 ; ---------------------------------------------------------------------------
 
-loc_31EB0:
+S3SinkingMud_DrainCompP2OrKill:
                 tst.b   $3A(a0)
-                beq.s   loc_31EDE
+                beq.s   S3SinkingMud_ResetCompP2BeforeKill
                 subq.b  #1,$3A(a0)
 
-loc_31EBA:
+S3SinkingMud_CollideCompP2AtHalfHeight:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 moveq   #0,d3
@@ -170,19 +173,20 @@ loc_31EBA:
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectTop_1P).l
 
-locret_31ED4:
+S3SinkingMud_CompUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_31ED6:
+S3SinkingMud_ResetCompP1BeforeKill:
                 move.b  #$30,$38(a0)
-                bra.s   loc_31EE4
+                bra.s   S3SinkingMud_KillCompRider
 ; ---------------------------------------------------------------------------
 
-loc_31EDE:
+S3SinkingMud_ResetCompP2BeforeKill:
                 move.b  #$30,$3A(a0)
 
-loc_31EE4:
+; The original code masks status with the complement of the incoming d1 byte
+S3SinkingMud_KillCompRider:
                 not.b   d1
                 and.b   d1,status(a0)
                 move.l  a0,-(sp)

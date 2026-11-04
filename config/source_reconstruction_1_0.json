@@ -999,9 +999,15 @@
       "commits": ["4bff11831c1ce1002648da1a5ce65c4b200d2661"]
     },
     {
-      "id": "current-shorten-10-object-solids",
+      "id": "change-9650eaee6cd2",
       "kind": "source_or_tooling",
       "summary": "Apply 270 reviewed short labels for object solids.",
+      "commits": ["9650eaee6cd2f25ac5010e30707fee01a2097825"]
+    },
+    {
+      "id": "current-shorten-11-object-hazards",
+      "kind": "source_or_tooling",
+      "summary": "Apply 224 reviewed short labels for object hazards.",
       "commits": ["release-commit"]
     }
   ],

@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 115
+    "commit_count": 116
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -737,9 +737,15 @@
       "commits": ["4bff11831c1ce1002648da1a5ce65c4b200d2661"]
     },
     {
-      "id": "current-shorten-10-object-solids",
+      "id": "change-9650eaee6cd2",
       "kind": "source_or_tooling",
       "summary": "Apply 270 reviewed short labels for object solids.",
+      "commits": ["9650eaee6cd2f25ac5010e30707fee01a2097825"]
+    },
+    {
+      "id": "current-shorten-11-object-hazards",
+      "kind": "source_or_tooling",
+      "summary": "Apply 224 reviewed short labels for object hazards.",
       "commits": ["release-commit"]
     }
   ],

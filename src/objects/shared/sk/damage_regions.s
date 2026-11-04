@@ -28,22 +28,22 @@ Obj_InvisibleHurtBlockHorizontal:
                 lsl.w   #3,d1
                 move.b  d1,height_pixels(a0)
                 btst    #0,status(a0)
-                beq.s   loc_1F448
-                move.l  #loc_1F4C4,(a0)
+                beq.s   SKHurtRegion_SelectTopOrUnderside
+                move.l  #SKHurtRegion_CheckSideContacts,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1F448:
+SKHurtRegion_SelectTopOrUnderside:
                 btst    #1,status(a0)
-                beq.s   loc_1F458
-                move.l  #loc_1F528,(a0)
+                beq.s   SKHurtRegion_InstallTopHandler
+                move.l  #SKHurtRegion_CheckUndersideContacts,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1F458:
-                move.l  #loc_1F45E,(a0)
+SKHurtRegion_InstallTopHandler:
+                move.l  #SKHurtRegion_CheckTopContacts,(a0)
 
-loc_1F45E:
+SKHurtRegion_CheckTopContacts:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -55,35 +55,35 @@ loc_1F45E:
                 bsr.w   SolidObjectFull2
                 move.b  status(a0),d6
                 andi.b  #standing_mask,d6
-                beq.s   loc_1F4A2
+                beq.s   SKHurtRegion_CullOrDebugDrawTop
                 move.b  d6,d0
                 andi.b  #p1_standing,d0
-                beq.s   loc_1F494
+                beq.s   SKHurtRegion_TryHurtTopP2
                 lea     (Player_1).w,a1
                 bsr.w   InvisibleHazard_TryHurtPlayer
 
-loc_1F494:
+SKHurtRegion_TryHurtTopP2:
                 andi.b  #p2_standing,d6
-                beq.s   loc_1F4A2
+                beq.s   SKHurtRegion_CullOrDebugDrawTop
                 lea     (Player_2).w,a1
                 bsr.w   InvisibleHazard_TryHurtPlayer
 
-loc_1F4A2:
+SKHurtRegion_CullOrDebugDrawTop:
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_1EBAA
+                bhi.w   SKLavaMarker_ClearMarkerLoadedBit
                 tst.w   (Debug_placement_mode).w
-                beq.s   locret_1F4C2
+                beq.s   SKHurtRegion_TopReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_1F4C2:
+SKHurtRegion_TopReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1F4C4:
+SKHurtRegion_CheckSideContacts:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -95,35 +95,35 @@ loc_1F4C4:
                 bsr.w   SolidObjectFull2
                 swap    d6
                 andi.w  #3,d6
-                beq.s   loc_1F506
+                beq.s   SKHurtRegion_CullOrDebugDrawSide
                 move.b  d6,d0
                 andi.b  #1,d0
-                beq.s   loc_1F4F8
+                beq.s   SKHurtRegion_TryHurtSideP2
                 lea     (Player_1).w,a1
                 bsr.w   InvisibleHazard_TryHurtPlayer
 
-loc_1F4F8:
+SKHurtRegion_TryHurtSideP2:
                 andi.b  #2,d6
-                beq.s   loc_1F506
+                beq.s   SKHurtRegion_CullOrDebugDrawSide
                 lea     (Player_2).w,a1
                 bsr.w   InvisibleHazard_TryHurtPlayer
 
-loc_1F506:
+SKHurtRegion_CullOrDebugDrawSide:
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_1EBAA
+                bhi.w   SKLavaMarker_ClearMarkerLoadedBit
                 tst.w   (Debug_placement_mode).w
-                beq.s   locret_1F526
+                beq.s   SKHurtRegion_SideReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_1F526:
+SKHurtRegion_SideReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1F528:
+SKHurtRegion_CheckUndersideContacts:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -135,31 +135,31 @@ loc_1F528:
                 bsr.w   SolidObjectFull2
                 swap    d6
                 andi.w  #$C,d6
-                beq.s   loc_1F56A
+                beq.s   SKHurtRegion_CullOrDebugDrawUnderside
                 move.b  d6,d0
                 andi.b  #4,d0
-                beq.s   loc_1F55C
+                beq.s   SKHurtRegion_TryHurtUndersideP2
                 lea     (Player_1).w,a1
                 bsr.w   InvisibleHazard_TryHurtPlayer
 
-loc_1F55C:
+SKHurtRegion_TryHurtUndersideP2:
                 andi.b  #8,d6
-                beq.s   loc_1F56A
+                beq.s   SKHurtRegion_CullOrDebugDrawUnderside
                 lea     (Player_2).w,a1
                 bsr.w   InvisibleHazard_TryHurtPlayer
 
-loc_1F56A:
+SKHurtRegion_CullOrDebugDrawUnderside:
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_1EBAA
+                bhi.w   SKLavaMarker_ClearMarkerLoadedBit
                 tst.w   (Debug_placement_mode).w
-                beq.s   locret_1F58A
+                beq.s   SKHurtRegion_UndersideReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_1F58A:
+SKHurtRegion_UndersideReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -169,10 +169,10 @@ InvisibleHazard_TryHurtPlayer:
                 move.b  shield_reaction(a0),d0
                 andi.b  #$73,d0
                 and.b   shield_reaction(a1),d0
-                bne.s   locret_1F59E
+                bne.s   SKHurtRegion_ImmunityReturn
                 bsr.w   HurtPlayerFromSolidHazard
 
-locret_1F59E:
+SKHurtRegion_ImmunityReturn:
                 rts
 ; End of function InvisibleHazard_TryHurtPlayer
 
@@ -195,22 +195,22 @@ Obj_InvisibleHurtBlockVertical:
                 lsl.w   #3,d1
                 move.b  d1,height_pixels(a0)
                 btst    #0,status(a0)
-                beq.s   loc_1F5F0
-                move.l  #loc_1F66C,(a0)
+                beq.s   SKKillRegion_SelectTopOrUnderside
+                move.l  #SKKillRegion_CheckSideContacts,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1F5F0:
+SKKillRegion_SelectTopOrUnderside:
                 btst    #1,status(a0)
-                beq.s   loc_1F600
-                move.l  #loc_1F6D0,(a0)
+                beq.s   SKKillRegion_InstallTopHandler
+                move.l  #SKKillRegion_CheckUndersideContacts,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1F600:
-                move.l  #loc_1F606,(a0)
+SKKillRegion_InstallTopHandler:
+                move.l  #SKKillRegion_CheckTopContacts,(a0)
 
-loc_1F606:
+SKKillRegion_CheckTopContacts:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -222,35 +222,35 @@ loc_1F606:
                 bsr.w   SolidObjectFull2
                 move.b  status(a0),d6
                 andi.b  #standing_mask,d6
-                beq.s   loc_1F64A
+                beq.s   SKKillRegion_CullOrDebugDrawTop
                 move.b  d6,d0
                 andi.b  #p1_standing,d0
-                beq.s   loc_1F63C
+                beq.s   SKKillRegion_TryKillTopP2
                 lea     (Player_1).w,a1
                 bsr.w   KillPlayerFromInvisibleHazard
 
-loc_1F63C:
+SKKillRegion_TryKillTopP2:
                 andi.b  #p2_standing,d6
-                beq.s   loc_1F64A
+                beq.s   SKKillRegion_CullOrDebugDrawTop
                 lea     (Player_2).w,a1
                 bsr.w   KillPlayerFromInvisibleHazard
 
-loc_1F64A:
+SKKillRegion_CullOrDebugDrawTop:
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_1EBAA
+                bhi.w   SKLavaMarker_ClearMarkerLoadedBit
                 tst.w   (Debug_placement_mode).w
-                beq.s   locret_1F66A
+                beq.s   SKKillRegion_TopReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_1F66A:
+SKKillRegion_TopReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1F66C:
+SKKillRegion_CheckSideContacts:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -262,35 +262,35 @@ loc_1F66C:
                 bsr.w   SolidObjectFull2
                 swap    d6
                 andi.w  #3,d6
-                beq.s   loc_1F6AE
+                beq.s   SKKillRegion_CullOrDebugDrawSide
                 move.b  d6,d0
                 andi.b  #1,d0
-                beq.s   loc_1F6A0
+                beq.s   SKKillRegion_TryKillSideP2
                 lea     (Player_1).w,a1
                 bsr.w   KillPlayerFromInvisibleHazard
 
-loc_1F6A0:
+SKKillRegion_TryKillSideP2:
                 andi.b  #2,d6
-                beq.s   loc_1F6AE
+                beq.s   SKKillRegion_CullOrDebugDrawSide
                 lea     (Player_2).w,a1
                 bsr.w   KillPlayerFromInvisibleHazard
 
-loc_1F6AE:
+SKKillRegion_CullOrDebugDrawSide:
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_1EBAA
+                bhi.w   SKLavaMarker_ClearMarkerLoadedBit
                 tst.w   (Debug_placement_mode).w
-                beq.s   locret_1F6CE
+                beq.s   SKKillRegion_SideReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_1F6CE:
+SKKillRegion_SideReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1F6D0:
+SKKillRegion_CheckUndersideContacts:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -302,31 +302,31 @@ loc_1F6D0:
                 bsr.w   SolidObjectFull2
                 swap    d6
                 andi.w  #$C,d6
-                beq.s   loc_1F712
+                beq.s   SKKillRegion_CullOrDebugDrawUnderside
                 move.b  d6,d0
                 andi.b  #4,d0
-                beq.s   loc_1F704
+                beq.s   SKKillRegion_TryKillUndersideP2
                 lea     (Player_1).w,a1
                 bsr.w   KillPlayerFromInvisibleHazard
 
-loc_1F704:
+SKKillRegion_TryKillUndersideP2:
                 andi.b  #8,d6
-                beq.s   loc_1F712
+                beq.s   SKKillRegion_CullOrDebugDrawUnderside
                 lea     (Player_2).w,a1
                 bsr.w   KillPlayerFromInvisibleHazard
 
-loc_1F712:
+SKKillRegion_CullOrDebugDrawUnderside:
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_1EBAA
+                bhi.w   SKLavaMarker_ClearMarkerLoadedBit
                 tst.w   (Debug_placement_mode).w
-                beq.s   locret_1F732
+                beq.s   SKKillRegion_UndersideReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_1F732:
+SKKillRegion_UndersideReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================

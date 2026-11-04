@@ -1,0 +1,3247 @@
+{
+  "schema_version": 1,
+  "packet": "11-object-hazards",
+  "mappings": [
+    {
+      "source": "src/objects/shared/level_misc/mappings/lava_marker_debug.s",
+      "original_line": 7,
+      "old": "word_1EBCA",
+      "new": "LegacyLavaMarkerMapping_DebugFrame00",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Define physical hazard mapping LegacyLavaMarkerMapping_DebugFrame00."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/lava_marker_debug.s",
+      "original_line": 12,
+      "old": "word_1EBE4",
+      "new": "LegacyLavaMarkerMapping_DebugFrame01",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Define physical hazard mapping LegacyLavaMarkerMapping_DebugFrame01."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/lava_marker_debug.s",
+      "original_line": 17,
+      "old": "word_1EBFE",
+      "new": "LegacyLavaMarkerMapping_DebugFrame02",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Define physical hazard mapping LegacyLavaMarkerMapping_DebugFrame02."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/lava_marker_s2.s",
+      "original_line": 7,
+      "old": "word_1EBC2",
+      "new": "LegacyLavaMarkerMapping_SharedBlank",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Define physical hazard mapping LegacyLavaMarkerMapping_SharedBlank."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/spikes.s",
+      "original_line": 12,
+      "old": "word_24466",
+      "new": "SpikeMapping_NormalFrame00",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Define physical hazard mapping SpikeMapping_NormalFrame00."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/spikes.s",
+      "original_line": 15,
+      "old": "word_24474",
+      "new": "SpikeMapping_NormalFrame01",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Define physical hazard mapping SpikeMapping_NormalFrame01."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/spikes.s",
+      "original_line": 20,
+      "old": "word_2448E",
+      "new": "SpikeMapping_NormalFrame02",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Define physical hazard mapping SpikeMapping_NormalFrame02."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/spikes.s",
+      "original_line": 27,
+      "old": "word_244B4",
+      "new": "SpikeMapping_NormalFrame03",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Define physical hazard mapping SpikeMapping_NormalFrame03."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/spikes.s",
+      "original_line": 36,
+      "old": "word_244E6",
+      "new": "SpikeMapping_NormalFrame04",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Define physical hazard mapping SpikeMapping_NormalFrame04."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/spikes.s",
+      "original_line": 39,
+      "old": "word_244F4",
+      "new": "SpikeMapping_NormalFrame05",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Define physical hazard mapping SpikeMapping_NormalFrame05."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/spikes.s",
+      "original_line": 44,
+      "old": "word_2450E",
+      "new": "SpikeMapping_NormalFrame06",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Define physical hazard mapping SpikeMapping_NormalFrame06."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/spikes.s",
+      "original_line": 51,
+      "old": "word_24534",
+      "new": "SpikeMapping_NormalFrame07",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Define physical hazard mapping SpikeMapping_NormalFrame07."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 27,
+      "old": "loc_1D0E0",
+      "new": "S3HurtRegion_SelectTopOrUnderside",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard SelectHorizontalUndersideOrStandingHandler."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 34,
+      "old": "loc_1D0F0",
+      "new": "S3HurtRegion_InstallTopHandler",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard InstallHorizontalStandingHandler."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 37,
+      "old": "loc_1D0F6",
+      "new": "S3HurtRegion_CheckTopContacts",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard UpdateHorizontalStandingHurtRegion."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 56,
+      "old": "loc_1D12C",
+      "new": "S3HurtRegion_TryHurtTopP2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard HurtHorizontalStandingPlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 62,
+      "old": "loc_1D13A",
+      "new": "S3HurtRegion_CullOrDebugDrawTop",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard CullOrDebugDrawHorizontalStandingRegion."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 73,
+      "old": "locret_1D15A",
+      "new": "S3HurtRegion_TopReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard ReturnWithoutDrawingHorizontalStandingRegion."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 77,
+      "old": "loc_1D15C",
+      "new": "S3HurtRegion_CheckSideContacts",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard UpdateHorizontalSideHurtRegion."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 96,
+      "old": "loc_1D190",
+      "new": "S3HurtRegion_TryHurtSideP2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard HurtHorizontalSideContactPlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 102,
+      "old": "loc_1D19E",
+      "new": "S3HurtRegion_CullOrDebugDrawSide",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard CullOrDebugDrawHorizontalSideRegion."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 113,
+      "old": "locret_1D1BE",
+      "new": "S3HurtRegion_SideReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard ReturnWithoutDrawingHorizontalSideRegion."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 117,
+      "old": "loc_1D1C0",
+      "new": "S3HurtRegion_CheckUndersideContacts",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard UpdateHorizontalUndersideHurtRegion."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 136,
+      "old": "loc_1D1F4",
+      "new": "S3HurtRegion_TryHurtUndersideP2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard HurtHorizontalUndersidePlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 142,
+      "old": "loc_1D202",
+      "new": "S3HurtRegion_CullOrDebugDrawUnderside",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard CullOrDebugDrawHorizontalUndersideRegion."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 153,
+      "old": "locret_1D222",
+      "new": "S3HurtRegion_UndersideReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard ReturnWithoutDrawingHorizontalUndersideRegion."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 178,
+      "old": "loc_1D26E",
+      "new": "S3KillRegion_SelectTopOrUnderside",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard SelectVerticalUndersideOrStandingHandler."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 185,
+      "old": "loc_1D27E",
+      "new": "S3KillRegion_InstallTopHandler",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard InstallVerticalStandingKillHandler."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 188,
+      "old": "loc_1D284",
+      "new": "S3KillRegion_CheckTopContacts",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard UpdateVerticalStandingKillRegion."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 207,
+      "old": "loc_1D2BA",
+      "new": "S3KillRegion_TryKillTopP2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard KillVerticalStandingPlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 213,
+      "old": "loc_1D2C8",
+      "new": "S3KillRegion_CullOrDebugDrawTop",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard CullOrDebugDrawVerticalStandingRegion."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 224,
+      "old": "locret_1D2E8",
+      "new": "S3KillRegion_TopReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard ReturnWithoutDrawingVerticalStandingRegion."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 228,
+      "old": "loc_1D2EA",
+      "new": "S3KillRegion_CheckSideContacts",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard UpdateVerticalSideKillRegion."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 247,
+      "old": "loc_1D31E",
+      "new": "S3KillRegion_TryKillSideP2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard KillVerticalSideContactPlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 253,
+      "old": "loc_1D32C",
+      "new": "S3KillRegion_CullOrDebugDrawSide",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard CullOrDebugDrawVerticalSideRegion."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 264,
+      "old": "locret_1D34C",
+      "new": "S3KillRegion_SideReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard ReturnWithoutDrawingVerticalSideRegion."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 268,
+      "old": "loc_1D34E",
+      "new": "S3KillRegion_CheckUndersideContacts",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard UpdateVerticalUndersideKillRegion."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 287,
+      "old": "loc_1D382",
+      "new": "S3KillRegion_TryKillUndersideP2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard KillVerticalUndersidePlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 293,
+      "old": "loc_1D390",
+      "new": "S3KillRegion_CullOrDebugDrawUnderside",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard CullOrDebugDrawVerticalUndersideRegion."
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "original_line": 304,
+      "old": "locret_1D3B0",
+      "new": "S3KillRegion_UndersideReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 invisiblehazard ReturnWithoutDrawingVerticalUndersideRegion."
+    },
+    {
+      "source": "src/objects/shared/s3/legacy_lava_markers.s",
+      "original_line": 6,
+      "old": "byte_1C700",
+      "new": "S3InvisibleShared_CollisionFlagBySubtype",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 legacy_lava_markers CollisionFlagBySubtype."
+    },
+    {
+      "source": "src/objects/shared/s3/legacy_lava_markers.s",
+      "original_line": 22,
+      "old": "loc_1C726",
+      "new": "S3LavaMarker_InitLegacyLavaMarker",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 legacy_lava_markers InitializeLegacyMarkerDisplayAndCallback."
+    },
+    {
+      "source": "src/objects/shared/s3/legacy_lava_markers.s",
+      "original_line": 31,
+      "old": "loc_1C750",
+      "new": "S3LavaMarker_CullLegacyMarkerOutsideComp",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 legacy_lava_markers CullNormalModeLegacyMarker."
+    },
+    {
+      "source": "src/objects/shared/s3/legacy_lava_markers.s",
+      "original_line": 40,
+      "old": "loc_1C76A",
+      "new": "S3LavaMarker_DrawMarkerDuringPlacement",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 legacy_lava_markers DrawLegacyMarkerOnlyDuringDebugPlacement."
+    },
+    {
+      "source": "src/objects/shared/s3/legacy_lava_markers.s",
+      "original_line": 45,
+      "old": "locret_1C776",
+      "new": "S3LavaMarker_MarkerReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 legacy_lava_markers ReturnFromLegacyMarkerUpdate."
+    },
+    {
+      "source": "src/objects/shared/s3/legacy_lava_markers.s",
+      "original_line": 49,
+      "old": "loc_1C778",
+      "new": "S3LavaMarker_ClearMarkerLoadedBit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 legacy_lava_markers ClearRespawnFlagBeforeSharedDeletion."
+    },
+    {
+      "source": "src/objects/shared/s3/legacy_lava_markers.s",
+      "original_line": 55,
+      "old": "loc_1C784",
+      "new": "S3LavaMarker_DeleteInvisibleActor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 legacy_lava_markers DeleteCurrentSharedInvisibleActor."
+    },
+    {
+      "source": "src/objects/shared/s3/sinking_mud.s",
+      "original_line": 20,
+      "old": "loc_31D3E",
+      "new": "S3SinkingMud_UpdateNormalP1Depth",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 sinking mud UpdateNormalPlayerOneSurfaceState."
+    },
+    {
+      "source": "src/objects/shared/s3/sinking_mud.s",
+      "original_line": 30,
+      "old": "loc_31D5E",
+      "new": "S3SinkingMud_CopyNormalP1Depth",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 sinking mud CopyNormalPlayerOneSurfaceFromInteractedMud."
+    },
+    {
+      "source": "src/objects/shared/s3/sinking_mud.s",
+      "original_line": 40,
+      "old": "loc_31D7A",
+      "new": "S3SinkingMud_DrainNormalP1OrKill",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 sinking mud DrainNormalPlayerOneSurfaceOrEnterDeath."
+    },
+    {
+      "source": "src/objects/shared/s3/sinking_mud.s",
+      "original_line": 45,
+      "old": "loc_31D84",
+      "new": "S3SinkingMud_CollideNormalP1AndCheckP2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 sinking mud CollideNormalPlayerOneThenUpdatePlayerTwoSurface."
+    },
+    {
+      "source": "src/objects/shared/s3/sinking_mud.s",
+      "original_line": 60,
+      "old": "loc_31DB4",
+      "new": "S3SinkingMud_CopyNormalP2Depth",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 sinking mud CopyNormalPlayerTwoSurfaceFromInteractedMud."
+    },
+    {
+      "source": "src/objects/shared/s3/sinking_mud.s",
+      "original_line": 70,
+      "old": "loc_31DD0",
+      "new": "S3SinkingMud_DrainNormalP2OrKill",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 sinking mud DrainNormalPlayerTwoSurfaceOrEnterDeath."
+    },
+    {
+      "source": "src/objects/shared/s3/sinking_mud.s",
+      "original_line": 75,
+      "old": "loc_31DDA",
+      "new": "S3SinkingMud_CollideNormalP2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 sinking mud CollideNormalPlayerTwoAtFullSurfaceHeight."
+    },
+    {
+      "source": "src/objects/shared/s3/sinking_mud.s",
+      "original_line": 84,
+      "old": "loc_31DF2",
+      "new": "S3SinkingMud_CullNormalMudWithoutDrawing",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 sinking mud CullNormalMudWithoutDrawing."
+    },
+    {
+      "source": "src/objects/shared/s3/sinking_mud.s",
+      "original_line": 88,
+      "old": "loc_31DF8",
+      "new": "S3SinkingMud_ResetNormalP1BeforeKill",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 sinking mud ResetNormalPlayerOneSurfaceBeforeKill."
+    },
+    {
+      "source": "src/objects/shared/s3/sinking_mud.s",
+      "original_line": 93,
+      "old": "loc_31E00",
+      "new": "S3SinkingMud_ResetNormalP2BeforeKill",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 sinking mud ResetNormalPlayerTwoSurfaceBeforeKill."
+    },
+    {
+      "source": "src/objects/shared/s3/sinking_mud.s",
+      "original_line": 96,
+      "old": "loc_31E06",
+      "new": "S3SinkingMud_KillNormalRider",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 sinking mud MaskStatusWithIncomingD1AndKillNormalRider."
+    },
+    {
+      "source": "src/objects/shared/s3/sinking_mud.s",
+      "original_line": 107,
+      "old": "loc_31E1C",
+      "new": "S3SinkingMud_UpdateCompP1Depth",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 sinking mud UpdateCompetitionPlayerOneSurfaceState."
+    },
+    {
+      "source": "src/objects/shared/s3/sinking_mud.s",
+      "original_line": 117,
+      "old": "loc_31E3C",
+      "new": "S3SinkingMud_CopyCompP1Depth",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 sinking mud CopyCompetitionPlayerOneSurfaceFromNormalMud."
+    },
+    {
+      "source": "src/objects/shared/s3/sinking_mud.s",
+      "original_line": 127,
+      "old": "loc_31E58",
+      "new": "S3SinkingMud_DrainCompP1OrKill",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 sinking mud DrainCompetitionPlayerOneSurfaceOrEnterDeath."
+    },
+    {
+      "source": "src/objects/shared/s3/sinking_mud.s",
+      "original_line": 132,
+      "old": "loc_31E62",
+      "new": "S3SinkingMud_CollideCompP1AtHalfHeight",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 sinking mud CollideCompetitionPlayerOneAtHalfHeight."
+    },
+    {
+      "source": "src/objects/shared/s3/sinking_mud.s",
+      "original_line": 148,
+      "old": "loc_31E94",
+      "new": "S3SinkingMud_CopyCompP2Depth",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 sinking mud CopyCompetitionPlayerTwoSurfaceFromNormalMud."
+    },
+    {
+      "source": "src/objects/shared/s3/sinking_mud.s",
+      "original_line": 158,
+      "old": "loc_31EB0",
+      "new": "S3SinkingMud_DrainCompP2OrKill",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 sinking mud DrainCompetitionPlayerTwoSurfaceOrEnterDeath."
+    },
+    {
+      "source": "src/objects/shared/s3/sinking_mud.s",
+      "original_line": 163,
+      "old": "loc_31EBA",
+      "new": "S3SinkingMud_CollideCompP2AtHalfHeight",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 sinking mud CollideCompetitionPlayerTwoAtHalfHeight."
+    },
+    {
+      "source": "src/objects/shared/s3/sinking_mud.s",
+      "original_line": 173,
+      "old": "locret_31ED4",
+      "new": "S3SinkingMud_CompUpdateReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 sinking mud ReturnFromCompetitionMudUpdate."
+    },
+    {
+      "source": "src/objects/shared/s3/sinking_mud.s",
+      "original_line": 177,
+      "old": "loc_31ED6",
+      "new": "S3SinkingMud_ResetCompP1BeforeKill",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 sinking mud ResetCompetitionPlayerOneSurfaceBeforeKill."
+    },
+    {
+      "source": "src/objects/shared/s3/sinking_mud.s",
+      "original_line": 182,
+      "old": "loc_31EDE",
+      "new": "S3SinkingMud_ResetCompP2BeforeKill",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 sinking mud ResetCompetitionPlayerTwoSurfaceBeforeKill."
+    },
+    {
+      "source": "src/objects/shared/s3/sinking_mud.s",
+      "original_line": 185,
+      "old": "loc_31EE4",
+      "new": "S3SinkingMud_KillCompRider",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 sinking mud MaskStatusWithIncomingD1AndKillCompetitionRider."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 5,
+      "old": "byte_22602",
+      "new": "S3Spikes_NormalSizePairs",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes NormalSizePairs."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 38,
+      "old": "loc_22666",
+      "new": "S3Spikes_SelectNormalDangerSide",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes SelectNormalDangerSide."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 43,
+      "old": "loc_22674",
+      "new": "S3Spikes_SaveNormalAnchorsAndMode",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes SaveNormalAnchorsAndMovementMode."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 52,
+      "old": "byte_22690",
+      "new": "S3Spikes_CompetitionSizePairs",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes CompetitionSizePairs."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 63,
+      "old": "loc_226A0",
+      "new": "S3Spikes_InitCompGeometryAndHandler",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes InitializeCompetitionGeometryAndHandler."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 76,
+      "old": "loc_226D2",
+      "new": "S3Spikes_CheckCompUndersideOverride",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes SelectCompetitionUndersideOverride."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 81,
+      "old": "loc_226E0",
+      "new": "S3Spikes_SaveCompAnchorsAndMode",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes SaveCompetitionAnchorsAndMovementMode."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 91,
+      "old": "loc_226FC",
+      "new": "S3Spikes_UpdateNormalStandingHazard",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes UpdateNormalStandingHazard."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 111,
+      "old": "loc_22736",
+      "new": "S3Spikes_HurtNormalStandingPlayerTwo",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes HurtNormalStandingPlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 117,
+      "old": "loc_22744",
+      "new": "S3Spikes_CullAndDrawNormalStandingHazard",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes CullAndDrawNormalStandingHazard."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 122,
+      "old": "loc_2274E",
+      "new": "S3Spikes_UpdateNormalSideContactHazard",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes UpdateNormalSideContactHazard."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 143,
+      "old": "loc_2278C",
+      "new": "S3Spikes_HurtNormalSideContactPlayerTwo",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes HurtNormalSideContactPlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 150,
+      "old": "loc_227A0",
+      "new": "S3Spikes_CullAndDrawNormalSideHazard",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes CullAndDrawNormalSideHazard."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 155,
+      "old": "loc_227AA",
+      "new": "S3Spikes_CheckNormalUnderside",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes UpdateNormalUndersideContactHazard."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 175,
+      "old": "loc_227E2",
+      "new": "S3Spikes_HurtNormalUndersidePlayerTwo",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes HurtNormalUndersidePlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 181,
+      "old": "loc_227F0",
+      "new": "S3Spikes_DrawNormalUndersideByAnchor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes CullAndDrawNormalUndersideHazard."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 186,
+      "old": "loc_227FA",
+      "new": "S3Spikes_UpdateCompetitionStandingHazard",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes UpdateCompetitionStandingHazard."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 206,
+      "old": "loc_22834",
+      "new": "S3Spikes_TryHurtCompStandingP2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes HurtCompetitionStandingPlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 212,
+      "old": "loc_22842",
+      "new": "S3Spikes_DrawCompetitionStandingHazard",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes DrawCompetitionStandingHazard."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 216,
+      "old": "loc_22848",
+      "new": "S3Spikes_CheckCompSideContacts",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes UpdateCompetitionSideContactHazard."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 237,
+      "old": "loc_22886",
+      "new": "S3Spikes_TryHurtCompSideP2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes HurtCompetitionSideContactPlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 244,
+      "old": "loc_2289A",
+      "new": "S3Spikes_DrawCompetitionSideHazard",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes DrawCompetitionSideHazard."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 248,
+      "old": "loc_228A0",
+      "new": "S3Spikes_CheckCompUndersideContacts",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes UpdateCompetitionUndersideContactHazard."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 268,
+      "old": "loc_228D8",
+      "new": "S3Spikes_TryHurtCompUnderP2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes HurtCompetitionUndersidePlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 274,
+      "old": "loc_228E6",
+      "new": "S3Spikes_DrawCompetitionUndersideHazard",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes DrawCompetitionUndersideHazard."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 297,
+      "old": "locret_22920",
+      "new": "S3Spikes_HazardDamageReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes ReturnFromGuardedSolidHazardDamage."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 311,
+      "old": "off_22930",
+      "new": "S3Spikes_NormalMovementOffsets",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes NormalMovementOffsets."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 317,
+      "old": "locret_22936",
+      "new": "S3Spikes_ReturnFromStationaryMovement",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes ReturnFromStationaryMovement."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 321,
+      "old": "loc_22938",
+      "new": "S3Spikes_ApplyNormalVerticalTravel",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes ApplyNormalVerticalTravel."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 330,
+      "old": "loc_2294C",
+      "new": "S3Spikes_ApplyNormalHorizontalTravel",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes ApplyNormalHorizontalTravel."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 352,
+      "old": "loc_2297C",
+      "new": "S3Spikes_AdvanceNormalTravelOrRetract",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes AdvanceNormalTravelOrRetract."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 363,
+      "old": "loc_2299E",
+      "new": "S3Spikes_ExtendNormalAndPause",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes ExtendNormalTravelAndPauseAtThirtyTwo."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 371,
+      "old": "locret_229BE",
+      "new": "S3Spikes_ReturnFromNormalTravelUpdate",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes ReturnFromNormalTravelUpdate."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 385,
+      "old": "off_229CE",
+      "new": "S3Spikes_CompetitionMovementOffsets",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes CompetitionMovementOffsets."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 391,
+      "old": "loc_229D4",
+      "new": "S3Spikes_ApplyCompetitionVerticalTravel",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes ApplyCompetitionVerticalTravel."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 400,
+      "old": "loc_229E8",
+      "new": "S3Spikes_MoveCompSpikesX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes ApplyCompetitionHorizontalTravel."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 422,
+      "old": "loc_22A18",
+      "new": "S3Spikes_TickCompTravel",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes AdvanceCompetitionTravelOrRetract."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 433,
+      "old": "loc_22A3A",
+      "new": "S3Spikes_ExtendCompAndPause",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes ExtendCompetitionTravelAndPauseAtTwentyFour."
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "original_line": 441,
+      "old": "locret_22A5A",
+      "new": "S3Spikes_CompTravelReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 shared spikes ReturnFromCompetitionTravelUpdate."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 20,
+      "old": "loc_2883E",
+      "new": "S3Exhaust_InitFiniteLifeAndDirection",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust InitializeFiniteEmitterLifetimeAndDirection."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 29,
+      "old": "loc_28854",
+      "new": "S3Exhaust_SelectDirectionFromXVel",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust SelectHorizontalDirectionFromInheritedXVelocity."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 35,
+      "old": "loc_28866",
+      "new": "S3Exhaust_SelectActEmitter",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust SelectSmokeOrFiniteJetByCurrentAct."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 42,
+      "old": "loc_28876",
+      "new": "S3Exhaust_InstallFiniteJet",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust InstallFiniteJetController."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 64,
+      "old": "loc_288D4",
+      "new": "S3Exhaust_ApplyDirectionAndSelectJet",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust ApplyDirectionRecordAndSelectHorizontalParticle."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 74,
+      "old": "loc_288F2",
+      "new": "S3Exhaust_TickFiniteEmitterLife",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust CountFiniteEmitterLifeAfterSpawnAttempt."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 79,
+      "old": "loc_288FE",
+      "new": "S3Exhaust_CullFiniteEmitter",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust CullFiniteEmitterWithoutDrawing."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 82,
+      "old": "word_28904",
+      "new": "S3Exhaust_DirectionRecords",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust DirectionVelocityRenderFrameRecords."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 112,
+      "old": "loc_28932",
+      "new": "S3Exhaust_ApplyElapsedSpeedTaper",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust ApplyElapsedLifetimeHorizontalSpeedTaper."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 125,
+      "old": "loc_28948",
+      "new": "S3Exhaust_MoveUpAndCheckCull",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust MoveUpParticleThenCheckVisibilityAndVelocity."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 133,
+      "old": "loc_28960",
+      "new": "S3TunnelExhaust_CullAndDrawUpParticle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust CullAndDrawUpParticle."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 143,
+      "old": "loc_28976",
+      "new": "S3Exhaust_MoveDownAndCheckCull",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust MoveDownParticleThenCheckVelocityThreshold."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 151,
+      "old": "loc_28990",
+      "new": "S3TunnelExhaust_CullAndDrawDownParticle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust CullAndDrawDownParticle."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 161,
+      "old": "loc_289A6",
+      "new": "S3Exhaust_MoveHorizontalAndCheckCull",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust MoveHorizontalParticleThenCheckFallThreshold."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 169,
+      "old": "loc_289C0",
+      "new": "S3Exhaust_DrawHorizontalIfVisible",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust CullAndDrawHorizontalParticle."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 193,
+      "old": "loc_28A2A",
+      "new": "S3Exhaust_CullContinuousEmitter",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust CullContinuousDownwardEmitter."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 203,
+      "old": "loc_28A42",
+      "new": "S3Exhaust_ToggleTimedXFlip",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust ToggleTimedParticleXFlipAfterLifeTick."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 209,
+      "old": "loc_28A52",
+      "new": "S3Exhaust_MoveTimedAndMarkHidden",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust MoveTimedParticleAndMarkIfPreviouslyInvisible."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 215,
+      "old": "loc_28A64",
+      "new": "S3TunnelExhaust_CullAndDrawTimedParticle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust CullAndDrawTimedParticle."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 231,
+      "old": "loc_28A9C",
+      "new": "S3Exhaust_TickSmokeEmitterLife",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust CountSmokeEmitterLifetimeAfterGlobalSpawnPhase."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 236,
+      "old": "loc_28AA8",
+      "new": "S3Exhaust_CullSmokeEmitter",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust CullSmokeEmitterWithoutDrawing."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 249,
+      "old": "loc_28AE0",
+      "new": "S3Exhaust_UpdateUnusedLeftEmitter",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust UpdateStoredUnusedLeftJetEmitter."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 276,
+      "old": "loc_28B5A",
+      "new": "S3Exhaust_ToggleUnusedEmitterPhase",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust ToggleStoredJetEmissionPhaseOnLifetimeUnderflow."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 282,
+      "old": "loc_28B6C",
+      "new": "S3Exhaust_CullUnusedEmitter",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust CullStoredUnusedJetEmitter."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 286,
+      "old": "loc_28B72",
+      "new": "S3Exhaust_ToggleUnusedJetYFlip",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust ToggleStoredLeftJetVerticalFlip."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 292,
+      "old": "loc_28B82",
+      "new": "S3Exhaust_MoveUnusedJetAndTickLife",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust MoveStoredLeftJetAndCountDistanceLifetime."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 298,
+      "old": "loc_28B94",
+      "new": "S3Exhaust_ConsumeUnusedJetContacts",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust ConsumeStoredJetPlayerContactBits."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 306,
+      "old": "loc_28BAA",
+      "new": "S3Exhaust_TryUnusedJetLaunchP2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust TryLaunchPlayerTwoFromStoredJet."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 312,
+      "old": "loc_28BB8",
+      "new": "S3Exhaust_DrawAndRegisterUnusedJet",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust RegisterStoredJetTouchAndRangeDraw."
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "original_line": 331,
+      "old": "locret_28BFA",
+      "new": "S3Exhaust_UnusedJetLaunchReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3 tunnel exhaust ReturnFromStoredJetPlayerLaunch."
+    },
+    {
+      "source": "src/objects/shared/s3/water_drop.s",
+      "original_line": 18,
+      "old": "loc_3784C",
+      "new": "S3WaterDrop_TickDelayAndTryEmit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3WaterDrop_CountEmissionDelayAndCloneVisibleEmitter."
+    },
+    {
+      "source": "src/objects/shared/s3/water_drop.s",
+      "original_line": 31,
+      "old": "loc_37870",
+      "new": "S3WaterDrop_CopyEmitterPrefix",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3WaterDrop_CopyEmitterPrefixIntoAllocatedDrop."
+    },
+    {
+      "source": "src/objects/shared/s3/water_drop.s",
+      "original_line": 39,
+      "old": "loc_37888",
+      "new": "S3WaterDrop_CullAndDrawWaterDropEmitter",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3WaterDrop_CullAndDrawWaterDropEmitter."
+    },
+    {
+      "source": "src/objects/shared/s3/water_drop.s",
+      "original_line": 43,
+      "old": "loc_3788E",
+      "new": "S3WaterDrop_MoveAndCheckFloorImpact",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3WaterDrop_MoveAnimatedDropAndDetectFloorImpact."
+    },
+    {
+      "source": "src/objects/shared/s3/water_drop.s",
+      "original_line": 58,
+      "old": "loc_378C8",
+      "new": "S3WaterDrop_AnimateOrDeleteAtRoutine4",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3WaterDrop_AnimateDropAndDeleteAtRoutineFour."
+    },
+    {
+      "source": "src/objects/shared/s3/water_drop.s",
+      "original_line": 66,
+      "old": "loc_378E2",
+      "new": "S3WaterDrop_ConsumeP1Contact",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3WaterDrop_ConsumePlayerOneSpecialContact."
+    },
+    {
+      "source": "src/objects/shared/s3/water_drop.s",
+      "original_line": 74,
+      "old": "loc_378F6",
+      "new": "S3WaterDrop_ConsumeP2Contact",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3WaterDrop_ConsumePlayerTwoSpecialContact."
+    },
+    {
+      "source": "src/objects/shared/s3/water_drop.s",
+      "original_line": 80,
+      "old": "loc_37904",
+      "new": "S3WaterDrop_ClearDropContacts",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3WaterDrop_ClearAllAccumulatedDropContactBits."
+    },
+    {
+      "source": "src/objects/shared/s3/water_drop.s",
+      "original_line": 83,
+      "old": "loc_37908",
+      "new": "S3WaterDrop_QueueDropForTouchAndDrawing",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3WaterDrop_QueueDropForTouchAndDrawing."
+    },
+    {
+      "source": "src/objects/shared/s3/water_drop.s",
+      "original_line": 94,
+      "old": "loc_37922",
+      "new": "S3WaterDrop_BeginSplashAndDisableColl",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe S3WaterDrop_EnterContactSplashAndDisableDropCollision."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 36,
+      "old": "loc_1F448",
+      "new": "SKHurtRegion_SelectTopOrUnderside",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard SelectHorizontalUndersideOrStandingHandler."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 43,
+      "old": "loc_1F458",
+      "new": "SKHurtRegion_InstallTopHandler",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard InstallHorizontalStandingHandler."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 46,
+      "old": "loc_1F45E",
+      "new": "SKHurtRegion_CheckTopContacts",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard UpdateHorizontalStandingHurtRegion."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 65,
+      "old": "loc_1F494",
+      "new": "SKHurtRegion_TryHurtTopP2",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard HurtHorizontalStandingPlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 71,
+      "old": "loc_1F4A2",
+      "new": "SKHurtRegion_CullOrDebugDrawTop",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard CullOrDebugDrawHorizontalStandingRegion."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 82,
+      "old": "locret_1F4C2",
+      "new": "SKHurtRegion_TopReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard ReturnWithoutDrawingHorizontalStandingRegion."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 86,
+      "old": "loc_1F4C4",
+      "new": "SKHurtRegion_CheckSideContacts",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard UpdateHorizontalSideHurtRegion."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 105,
+      "old": "loc_1F4F8",
+      "new": "SKHurtRegion_TryHurtSideP2",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard HurtHorizontalSideContactPlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 111,
+      "old": "loc_1F506",
+      "new": "SKHurtRegion_CullOrDebugDrawSide",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard CullOrDebugDrawHorizontalSideRegion."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 122,
+      "old": "locret_1F526",
+      "new": "SKHurtRegion_SideReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard ReturnWithoutDrawingHorizontalSideRegion."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 126,
+      "old": "loc_1F528",
+      "new": "SKHurtRegion_CheckUndersideContacts",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard UpdateHorizontalUndersideHurtRegion."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 145,
+      "old": "loc_1F55C",
+      "new": "SKHurtRegion_TryHurtUndersideP2",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard HurtHorizontalUndersidePlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 151,
+      "old": "loc_1F56A",
+      "new": "SKHurtRegion_CullOrDebugDrawUnderside",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard CullOrDebugDrawHorizontalUndersideRegion."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 162,
+      "old": "locret_1F58A",
+      "new": "SKHurtRegion_UndersideReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard ReturnWithoutDrawingHorizontalUndersideRegion."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 174,
+      "old": "locret_1F59E",
+      "new": "SKHurtRegion_ImmunityReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard ReturnFromHorizontalHazardImmunityCheck."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 202,
+      "old": "loc_1F5F0",
+      "new": "SKKillRegion_SelectTopOrUnderside",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard SelectVerticalUndersideOrStandingHandler."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 209,
+      "old": "loc_1F600",
+      "new": "SKKillRegion_InstallTopHandler",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard InstallVerticalStandingKillHandler."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 212,
+      "old": "loc_1F606",
+      "new": "SKKillRegion_CheckTopContacts",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard UpdateVerticalStandingKillRegion."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 231,
+      "old": "loc_1F63C",
+      "new": "SKKillRegion_TryKillTopP2",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard KillVerticalStandingPlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 237,
+      "old": "loc_1F64A",
+      "new": "SKKillRegion_CullOrDebugDrawTop",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard CullOrDebugDrawVerticalStandingRegion."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 248,
+      "old": "locret_1F66A",
+      "new": "SKKillRegion_TopReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard ReturnWithoutDrawingVerticalStandingRegion."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 252,
+      "old": "loc_1F66C",
+      "new": "SKKillRegion_CheckSideContacts",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard UpdateVerticalSideKillRegion."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 271,
+      "old": "loc_1F6A0",
+      "new": "SKKillRegion_TryKillSideP2",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard KillVerticalSideContactPlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 277,
+      "old": "loc_1F6AE",
+      "new": "SKKillRegion_CullOrDebugDrawSide",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard CullOrDebugDrawVerticalSideRegion."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 288,
+      "old": "locret_1F6CE",
+      "new": "SKKillRegion_SideReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard ReturnWithoutDrawingVerticalSideRegion."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 292,
+      "old": "loc_1F6D0",
+      "new": "SKKillRegion_CheckUndersideContacts",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard UpdateVerticalUndersideKillRegion."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 311,
+      "old": "loc_1F704",
+      "new": "SKKillRegion_TryKillUndersideP2",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard KillVerticalUndersidePlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 317,
+      "old": "loc_1F712",
+      "new": "SKKillRegion_CullOrDebugDrawUnderside",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard CullOrDebugDrawVerticalUndersideRegion."
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "original_line": 328,
+      "old": "locret_1F732",
+      "new": "SKKillRegion_UndersideReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe SK invisiblehazard ReturnWithoutDrawingVerticalUndersideRegion."
+    },
+    {
+      "source": "src/objects/shared/sk/legacy_lava_markers.s",
+      "original_line": 6,
+      "old": "byte_1EB32",
+      "new": "SKInvisibleShared_CollisionFlagBySubtype",
+      "profiles": ["sk"],
+      "meaning": "Describe SK legacy_lava_markers CollisionFlagBySubtype."
+    },
+    {
+      "source": "src/objects/shared/sk/legacy_lava_markers.s",
+      "original_line": 22,
+      "old": "loc_1EB58",
+      "new": "SKLavaMarker_InitLegacyLavaMarker",
+      "profiles": ["sk"],
+      "meaning": "Describe SK legacy_lava_markers InitializeLegacyMarkerDisplayAndCallback."
+    },
+    {
+      "source": "src/objects/shared/sk/legacy_lava_markers.s",
+      "original_line": 31,
+      "old": "loc_1EB82",
+      "new": "SKLavaMarker_CullLegacyMarkerOutsideComp",
+      "profiles": ["sk"],
+      "meaning": "Describe SK legacy_lava_markers CullNormalModeLegacyMarker."
+    },
+    {
+      "source": "src/objects/shared/sk/legacy_lava_markers.s",
+      "original_line": 40,
+      "old": "loc_1EB9C",
+      "new": "SKLavaMarker_DrawMarkerDuringPlacement",
+      "profiles": ["sk"],
+      "meaning": "Describe SK legacy_lava_markers DrawLegacyMarkerOnlyDuringDebugPlacement."
+    },
+    {
+      "source": "src/objects/shared/sk/legacy_lava_markers.s",
+      "original_line": 45,
+      "old": "locret_1EBA8",
+      "new": "SKLavaMarker_MarkerReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe SK legacy_lava_markers ReturnFromLegacyMarkerUpdate."
+    },
+    {
+      "source": "src/objects/shared/sk/legacy_lava_markers.s",
+      "original_line": 49,
+      "old": "loc_1EBAA",
+      "new": "SKLavaMarker_ClearMarkerLoadedBit",
+      "profiles": ["sk"],
+      "meaning": "Describe SK legacy_lava_markers ClearRespawnFlagBeforeSharedDeletion."
+    },
+    {
+      "source": "src/objects/shared/sk/legacy_lava_markers.s",
+      "original_line": 55,
+      "old": "loc_1EBB6",
+      "new": "SKLavaMarker_DeleteInvisibleActor",
+      "profiles": ["sk"],
+      "meaning": "Describe SK legacy_lava_markers DeleteCurrentSharedInvisibleActor."
+    },
+    {
+      "source": "src/objects/shared/sk/sinking_mud.s",
+      "original_line": 20,
+      "old": "loc_32AAE",
+      "new": "SKSinkingMud_UpdateNormalP1Depth",
+      "profiles": ["sk"],
+      "meaning": "Describe SK sinking mud UpdateNormalPlayerOneSurfaceState."
+    },
+    {
+      "source": "src/objects/shared/sk/sinking_mud.s",
+      "original_line": 30,
+      "old": "loc_32ACE",
+      "new": "SKSinkingMud_CopyNormalP1Depth",
+      "profiles": ["sk"],
+      "meaning": "Describe SK sinking mud CopyNormalPlayerOneSurfaceFromInteractedMud."
+    },
+    {
+      "source": "src/objects/shared/sk/sinking_mud.s",
+      "original_line": 40,
+      "old": "loc_32AEA",
+      "new": "SKSinkingMud_DrainNormalP1OrKill",
+      "profiles": ["sk"],
+      "meaning": "Describe SK sinking mud DrainNormalPlayerOneSurfaceOrEnterDeath."
+    },
+    {
+      "source": "src/objects/shared/sk/sinking_mud.s",
+      "original_line": 45,
+      "old": "loc_32AF4",
+      "new": "SKSinkingMud_CollideNormalP1AndCheckP2",
+      "profiles": ["sk"],
+      "meaning": "Describe SK sinking mud CollideNormalPlayerOneThenUpdatePlayerTwoSurface."
+    },
+    {
+      "source": "src/objects/shared/sk/sinking_mud.s",
+      "original_line": 60,
+      "old": "loc_32B24",
+      "new": "SKSinkingMud_CopyNormalP2Depth",
+      "profiles": ["sk"],
+      "meaning": "Describe SK sinking mud CopyNormalPlayerTwoSurfaceFromInteractedMud."
+    },
+    {
+      "source": "src/objects/shared/sk/sinking_mud.s",
+      "original_line": 70,
+      "old": "loc_32B40",
+      "new": "SKSinkingMud_DrainNormalP2OrKill",
+      "profiles": ["sk"],
+      "meaning": "Describe SK sinking mud DrainNormalPlayerTwoSurfaceOrEnterDeath."
+    },
+    {
+      "source": "src/objects/shared/sk/sinking_mud.s",
+      "original_line": 75,
+      "old": "loc_32B4A",
+      "new": "SKSinkingMud_CollideNormalP2",
+      "profiles": ["sk"],
+      "meaning": "Describe SK sinking mud CollideNormalPlayerTwoAtFullSurfaceHeight."
+    },
+    {
+      "source": "src/objects/shared/sk/sinking_mud.s",
+      "original_line": 84,
+      "old": "loc_32B62",
+      "new": "SKSinkingMud_CullNormalMudWithoutDrawing",
+      "profiles": ["sk"],
+      "meaning": "Describe SK sinking mud CullNormalMudWithoutDrawing."
+    },
+    {
+      "source": "src/objects/shared/sk/sinking_mud.s",
+      "original_line": 88,
+      "old": "loc_32B68",
+      "new": "SKSinkingMud_ResetNormalP1BeforeKill",
+      "profiles": ["sk"],
+      "meaning": "Describe SK sinking mud ResetNormalPlayerOneSurfaceBeforeKill."
+    },
+    {
+      "source": "src/objects/shared/sk/sinking_mud.s",
+      "original_line": 93,
+      "old": "loc_32B70",
+      "new": "SKSinkingMud_ResetNormalP2BeforeKill",
+      "profiles": ["sk"],
+      "meaning": "Describe SK sinking mud ResetNormalPlayerTwoSurfaceBeforeKill."
+    },
+    {
+      "source": "src/objects/shared/sk/sinking_mud.s",
+      "original_line": 96,
+      "old": "loc_32B76",
+      "new": "SKSinkingMud_KillNormalRider",
+      "profiles": ["sk"],
+      "meaning": "Describe SK sinking mud MaskStatusWithIncomingD1AndKillNormalRider."
+    },
+    {
+      "source": "src/objects/shared/sk/sinking_mud.s",
+      "original_line": 107,
+      "old": "loc_32B8C",
+      "new": "SKSinkingMud_UpdateCompP1Depth",
+      "profiles": ["sk"],
+      "meaning": "Describe SK sinking mud UpdateCompetitionPlayerOneSurfaceState."
+    },
+    {
+      "source": "src/objects/shared/sk/sinking_mud.s",
+      "original_line": 117,
+      "old": "loc_32BAC",
+      "new": "SKSinkingMud_CopyCompP1Depth",
+      "profiles": ["sk"],
+      "meaning": "Describe SK sinking mud CopyCompetitionPlayerOneSurfaceFromNormalMud."
+    },
+    {
+      "source": "src/objects/shared/sk/sinking_mud.s",
+      "original_line": 127,
+      "old": "loc_32BC8",
+      "new": "SKSinkingMud_DrainCompP1OrKill",
+      "profiles": ["sk"],
+      "meaning": "Describe SK sinking mud DrainCompetitionPlayerOneSurfaceOrEnterDeath."
+    },
+    {
+      "source": "src/objects/shared/sk/sinking_mud.s",
+      "original_line": 132,
+      "old": "loc_32BD2",
+      "new": "SKSinkingMud_CollideCompP1AtHalfHeight",
+      "profiles": ["sk"],
+      "meaning": "Describe SK sinking mud CollideCompetitionPlayerOneAtHalfHeight."
+    },
+    {
+      "source": "src/objects/shared/sk/sinking_mud.s",
+      "original_line": 148,
+      "old": "loc_32C04",
+      "new": "SKSinkingMud_CopyCompP2Depth",
+      "profiles": ["sk"],
+      "meaning": "Describe SK sinking mud CopyCompetitionPlayerTwoSurfaceFromNormalMud."
+    },
+    {
+      "source": "src/objects/shared/sk/sinking_mud.s",
+      "original_line": 158,
+      "old": "loc_32C20",
+      "new": "SKSinkingMud_DrainCompP2OrKill",
+      "profiles": ["sk"],
+      "meaning": "Describe SK sinking mud DrainCompetitionPlayerTwoSurfaceOrEnterDeath."
+    },
+    {
+      "source": "src/objects/shared/sk/sinking_mud.s",
+      "original_line": 163,
+      "old": "loc_32C2A",
+      "new": "SKSinkingMud_CollideCompP2AtHalfHeight",
+      "profiles": ["sk"],
+      "meaning": "Describe SK sinking mud CollideCompetitionPlayerTwoAtHalfHeight."
+    },
+    {
+      "source": "src/objects/shared/sk/sinking_mud.s",
+      "original_line": 173,
+      "old": "locret_32C44",
+      "new": "SKSinkingMud_CompUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe SK sinking mud ReturnFromCompetitionMudUpdate."
+    },
+    {
+      "source": "src/objects/shared/sk/sinking_mud.s",
+      "original_line": 177,
+      "old": "loc_32C46",
+      "new": "SKSinkingMud_ResetCompP1BeforeKill",
+      "profiles": ["sk"],
+      "meaning": "Describe SK sinking mud ResetCompetitionPlayerOneSurfaceBeforeKill."
+    },
+    {
+      "source": "src/objects/shared/sk/sinking_mud.s",
+      "original_line": 182,
+      "old": "loc_32C4E",
+      "new": "SKSinkingMud_ResetCompP2BeforeKill",
+      "profiles": ["sk"],
+      "meaning": "Describe SK sinking mud ResetCompetitionPlayerTwoSurfaceBeforeKill."
+    },
+    {
+      "source": "src/objects/shared/sk/sinking_mud.s",
+      "original_line": 185,
+      "old": "loc_32C54",
+      "new": "SKSinkingMud_KillCompRider",
+      "profiles": ["sk"],
+      "meaning": "Describe SK sinking mud MaskStatusWithIncomingD1AndKillCompetitionRider."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 5,
+      "old": "byte_23F74",
+      "new": "SKSpikes_NormalSizePairs",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes NormalSizePairs."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 35,
+      "old": "loc_23FD0",
+      "new": "SKSpikes_SelectNormalFrameAndSideHandler",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes SelectNormalFrameAndSideHandler."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 43,
+      "old": "loc_23FE8",
+      "new": "SKSpikes_SelectNormalDangerSide",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes SelectNormalDangerSide."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 49,
+      "old": "loc_23FF6",
+      "new": "SKSpikes_TestGravityAdjustedDangerSide",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes TestGravityAdjustedDangerSide."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 54,
+      "old": "loc_24002",
+      "new": "SKSpikes_SaveNormalAnchorsAndMode",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes SaveNormalAnchorsAndMovementMode."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 64,
+      "old": "byte_24024",
+      "new": "SKSpikes_CompetitionSizePairs",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes CompetitionSizePairs."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 75,
+      "old": "loc_24034",
+      "new": "SKSpikes_InitCompGeometryAndHandler",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes InitializeCompetitionGeometryAndHandler."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 88,
+      "old": "loc_24066",
+      "new": "SKSpikes_CheckCompUndersideOverride",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes SelectCompetitionUndersideOverride."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 93,
+      "old": "loc_24074",
+      "new": "SKSpikes_SaveCompAnchorsAndMode",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes SaveCompetitionAnchorsAndMovementMode."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 103,
+      "old": "loc_24090",
+      "new": "SKSpikes_UpdateNormalStandingHazard",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes UpdateNormalStandingHazard."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 123,
+      "old": "loc_240CA",
+      "new": "SKSpikes_HurtNormalStandingPlayerTwo",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes HurtNormalStandingPlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 129,
+      "old": "loc_240D8",
+      "new": "SKSpikes_CullAndDrawNormalStandingHazard",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes CullAndDrawNormalStandingHazard."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 134,
+      "old": "loc_240E2",
+      "new": "SKSpikes_UpdateNormalSideContactHazard",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes UpdateNormalSideContactHazard."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 155,
+      "old": "loc_24120",
+      "new": "SKSpikes_HurtNormalSideContactPlayerTwo",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes HurtNormalSideContactPlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 162,
+      "old": "loc_24134",
+      "new": "SKSpikes_CullAndDrawNormalSideHazard",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes CullAndDrawNormalSideHazard."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 167,
+      "old": "loc_2413E",
+      "new": "SKSpikes_CheckNormalUnderside",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes UpdateNormalUndersideContactHazard."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 187,
+      "old": "loc_24176",
+      "new": "SKSpikes_HurtNormalUndersidePlayerTwo",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes HurtNormalUndersidePlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 193,
+      "old": "loc_24184",
+      "new": "SKSpikes_DrawNormalUndersideByAnchor",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes CullAndDrawNormalUndersideHazard."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 198,
+      "old": "loc_2418E",
+      "new": "SKSpikes_UpdateCompetitionStandingHazard",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes UpdateCompetitionStandingHazard."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 218,
+      "old": "loc_241C8",
+      "new": "SKSpikes_TryHurtCompStandingP2",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes HurtCompetitionStandingPlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 224,
+      "old": "loc_241D6",
+      "new": "SKSpikes_DrawCompetitionStandingHazard",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes DrawCompetitionStandingHazard."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 228,
+      "old": "loc_241DC",
+      "new": "SKSpikes_CheckCompSideContacts",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes UpdateCompetitionSideContactHazard."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 249,
+      "old": "loc_2421A",
+      "new": "SKSpikes_TryHurtCompSideP2",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes HurtCompetitionSideContactPlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 256,
+      "old": "loc_2422E",
+      "new": "SKSpikes_DrawCompetitionSideHazard",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes DrawCompetitionSideHazard."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 260,
+      "old": "loc_24234",
+      "new": "SKSpikes_CheckCompUndersideContacts",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes UpdateCompetitionUndersideContactHazard."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 280,
+      "old": "loc_2426C",
+      "new": "SKSpikes_TryHurtCompUnderP2",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes HurtCompetitionUndersidePlayerTwo."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 286,
+      "old": "loc_2427A",
+      "new": "SKSpikes_DrawCompetitionUndersideHazard",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes DrawCompetitionUndersideHazard."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 309,
+      "old": "locret_242B4",
+      "new": "SKSpikes_HazardDamageReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes ReturnFromGuardedSolidHazardDamage."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 323,
+      "old": "off_242C4",
+      "new": "SKSpikes_NormalMovementOffsets",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes NormalMovementOffsets."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 330,
+      "old": "locret_242CC",
+      "new": "SKSpikes_ReturnFromStationaryMovement",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes ReturnFromStationaryMovement."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 334,
+      "old": "loc_242CE",
+      "new": "SKSpikes_ApplyNormalVerticalTravel",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes ApplyNormalVerticalTravel."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 343,
+      "old": "loc_242E2",
+      "new": "SKSpikes_ApplyNormalHorizontalTravel",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes ApplyNormalHorizontalTravel."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 365,
+      "old": "loc_24312",
+      "new": "SKSpikes_AdvanceNormalTravelOrRetract",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes AdvanceNormalTravelOrRetract."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 376,
+      "old": "loc_24334",
+      "new": "SKSpikes_ExtendNormalAndPause",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes ExtendNormalTravelAndPauseAtThirtyTwo."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 384,
+      "old": "locret_24354",
+      "new": "SKSpikes_ReturnFromNormalTravelUpdate",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes ReturnFromNormalTravelUpdate."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 390,
+      "old": "loc_24356",
+      "new": "SKSpikes_CheckCachedRightPush",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes UpdatePushRightFromStoredPlayerStates."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 404,
+      "old": "loc_2437C",
+      "new": "SKSpikes_CachePlayerStatusesForPushRight",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes CachePlayerStatusesForPushRight."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 427,
+      "old": "locret_243B8",
+      "new": "SKSpikes_PushRightReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes ReturnFromConditionalPushRightStep."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 441,
+      "old": "word_243C8",
+      "new": "SKSpikes_CompetitionMovementOffsets",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes CompetitionMovementOffsets."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 447,
+      "old": "loc_243CE",
+      "new": "SKSpikes_ApplyCompetitionVerticalTravel",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes ApplyCompetitionVerticalTravel."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 456,
+      "old": "loc_243E2",
+      "new": "SKSpikes_MoveCompSpikesX",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes ApplyCompetitionHorizontalTravel."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 478,
+      "old": "loc_24412",
+      "new": "SKSpikes_TickCompTravel",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes AdvanceCompetitionTravelOrRetract."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 489,
+      "old": "loc_24434",
+      "new": "SKSpikes_ExtendCompAndPause",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes ExtendCompetitionTravelAndPauseAtTwentyFour."
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "original_line": 497,
+      "old": "locret_24454",
+      "new": "SKSpikes_CompTravelReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe SK shared spikes ReturnFromCompetitionTravelUpdate."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 20,
+      "old": "loc_298CC",
+      "new": "SKExhaust_InitFiniteLifeAndDirection",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust InitializeFiniteEmitterLifetimeAndDirection."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 29,
+      "old": "loc_298E2",
+      "new": "SKExhaust_SelectDirectionFromXVel",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust SelectHorizontalDirectionFromInheritedXVelocity."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 35,
+      "old": "loc_298F4",
+      "new": "SKExhaust_SelectActEmitter",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust SelectSmokeOrFiniteJetByCurrentAct."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 42,
+      "old": "loc_29904",
+      "new": "SKExhaust_InstallFiniteJet",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust InstallFiniteJetController."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 64,
+      "old": "loc_29962",
+      "new": "SKExhaust_ApplyDirectionAndSelectJet",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust ApplyDirectionRecordAndSelectHorizontalParticle."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 74,
+      "old": "loc_29980",
+      "new": "SKExhaust_TickFiniteEmitterLife",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust CountFiniteEmitterLifeAfterSpawnAttempt."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 79,
+      "old": "loc_2998C",
+      "new": "SKExhaust_CullFiniteEmitter",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust CullFiniteEmitterWithoutDrawing."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 82,
+      "old": "word_29992",
+      "new": "SKExhaust_DirectionRecords",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust DirectionVelocityRenderFrameRecords."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 112,
+      "old": "loc_299C0",
+      "new": "SKExhaust_ApplyElapsedSpeedTaper",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust ApplyElapsedLifetimeHorizontalSpeedTaper."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 125,
+      "old": "loc_299D6",
+      "new": "SKExhaust_MoveUpAndCheckCull",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust MoveUpParticleThenCheckVisibilityAndVelocity."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 133,
+      "old": "loc_299EE",
+      "new": "SKTunnelExhaust_CullAndDrawUpParticle",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust CullAndDrawUpParticle."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 143,
+      "old": "loc_29A04",
+      "new": "SKExhaust_MoveDownAndCheckCull",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust MoveDownParticleThenCheckVelocityThreshold."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 151,
+      "old": "loc_29A1E",
+      "new": "SKTunnelExhaust_CullAndDrawDownParticle",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust CullAndDrawDownParticle."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 161,
+      "old": "loc_29A34",
+      "new": "SKExhaust_MoveHorizontalAndCheckCull",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust MoveHorizontalParticleThenCheckFallThreshold."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 169,
+      "old": "loc_29A4E",
+      "new": "SKExhaust_DrawHorizontalIfVisible",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust CullAndDrawHorizontalParticle."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 193,
+      "old": "loc_29AB8",
+      "new": "SKExhaust_CullContinuousEmitter",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust CullContinuousDownwardEmitter."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 203,
+      "old": "loc_29AD0",
+      "new": "SKExhaust_ToggleTimedXFlip",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust ToggleTimedParticleXFlipAfterLifeTick."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 209,
+      "old": "loc_29AE0",
+      "new": "SKExhaust_MoveTimedAndMarkHidden",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust MoveTimedParticleAndMarkIfPreviouslyInvisible."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 215,
+      "old": "loc_29AF2",
+      "new": "SKTunnelExhaust_CullAndDrawTimedParticle",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust CullAndDrawTimedParticle."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 231,
+      "old": "loc_29B2A",
+      "new": "SKExhaust_TickSmokeEmitterLife",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust CountSmokeEmitterLifetimeAfterGlobalSpawnPhase."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 236,
+      "old": "loc_29B36",
+      "new": "SKExhaust_CullSmokeEmitter",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust CullSmokeEmitterWithoutDrawing."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 249,
+      "old": "loc_29B6E",
+      "new": "SKExhaust_UpdateUnusedLeftEmitter",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust UpdateStoredUnusedLeftJetEmitter."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 276,
+      "old": "loc_29BE8",
+      "new": "SKExhaust_ToggleUnusedEmitterPhase",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust ToggleStoredJetEmissionPhaseOnLifetimeUnderflow."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 282,
+      "old": "loc_29BFA",
+      "new": "SKExhaust_CullUnusedEmitter",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust CullStoredUnusedJetEmitter."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 286,
+      "old": "loc_29C00",
+      "new": "SKExhaust_ToggleUnusedJetYFlip",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust ToggleStoredLeftJetVerticalFlip."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 292,
+      "old": "loc_29C10",
+      "new": "SKExhaust_MoveUnusedJetAndTickLife",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust MoveStoredLeftJetAndCountDistanceLifetime."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 298,
+      "old": "loc_29C22",
+      "new": "SKExhaust_ConsumeUnusedJetContacts",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust ConsumeStoredJetPlayerContactBits."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 306,
+      "old": "loc_29C38",
+      "new": "SKExhaust_TryUnusedJetLaunchP2",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust TryLaunchPlayerTwoFromStoredJet."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 312,
+      "old": "loc_29C46",
+      "new": "SKExhaust_DrawAndRegisterUnusedJet",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust RegisterStoredJetTouchAndRangeDraw."
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "original_line": 331,
+      "old": "locret_29C88",
+      "new": "SKExhaust_UnusedJetLaunchReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe SK tunnel exhaust ReturnFromStoredJetPlayerLaunch."
+    },
+    {
+      "source": "src/objects/shared/sk/updraft.s",
+      "original_line": 15,
+      "old": "loc_3FBAC",
+      "new": "SKUpdraft_UpdateBothPlayersAndCull",
+      "profiles": ["sk"],
+      "meaning": "Describe SKUpdraft_UpdateBothPlayersAndCullInvisibleUpdraft."
+    },
+    {
+      "source": "src/objects/shared/sk/updraft.s",
+      "original_line": 48,
+      "old": "loc_3FC0E",
+      "new": "SKUpdraft_LiftAndClearJump",
+      "profiles": ["sk"],
+      "meaning": "Describe SKUpdraft_LiftFreePlayerAndClearJumpActions."
+    },
+    {
+      "source": "src/objects/shared/sk/updraft.s",
+      "original_line": 64,
+      "old": "loc_3FC4A",
+      "new": "SKUpdraft_SelectTumbleOrFloat",
+      "profiles": ["sk"],
+      "meaning": "Describe SKUpdraft_SelectSignedSubtypePlayerTumbleMode."
+    },
+    {
+      "source": "src/objects/shared/sk/updraft.s",
+      "original_line": 75,
+      "old": "locret_3FC74",
+      "new": "SKUpdraft_ApplyReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe SKUpdraft_ReturnFromRejectedOrCompletedUpdraftAttempt."
+    },
+    {
+      "source": "src/objects/shared/sk/updraft.s",
+      "original_line": 79,
+      "old": "loc_3FC76",
+      "new": "SKUpdraft_CheckParachuteHandler",
+      "profiles": ["sk"],
+      "meaning": "Describe SKUpdraft_RequireInteractedMushroomFlightCallback."
+    },
+    {
+      "source": "src/objects/shared/sk/updraft.s",
+      "original_line": 86,
+      "old": "loc_3FC8A",
+      "new": "SKUpdraft_TestConfiguredMushroomLiftBand",
+      "profiles": ["sk"],
+      "meaning": "Describe SKUpdraft_TestConfiguredMushroomLiftBand."
+    },
+    {
+      "source": "src/objects/shared/sk/updraft.s",
+      "original_line": 100,
+      "old": "loc_3FCAE",
+      "new": "SKUpdraft_LiftRiderAndFirstHost",
+      "profiles": ["sk"],
+      "meaning": "Describe SKUpdraft_LiftControlledRiderAndFirstAdmittedHost."
+    },
+    {
+      "source": "src/objects/shared/sk/updraft.s",
+      "original_line": 112,
+      "old": "loc_3FCC6",
+      "new": "SKUpdraft_SetFloatingAnim",
+      "profiles": ["sk"],
+      "meaning": "Describe SKUpdraft_ApplyNegativeSubtypeFloatingAnimation."
+    },
+    {
+      "source": "src/objects/shared/sk/water_drop.s",
+      "original_line": 18,
+      "old": "loc_382BA",
+      "new": "SKWaterDrop_TickDelayAndTryEmit",
+      "profiles": ["sk"],
+      "meaning": "Describe SKWaterDrop_CountEmissionDelayAndCloneVisibleEmitter."
+    },
+    {
+      "source": "src/objects/shared/sk/water_drop.s",
+      "original_line": 31,
+      "old": "loc_382DE",
+      "new": "SKWaterDrop_CopyEmitterPrefix",
+      "profiles": ["sk"],
+      "meaning": "Describe SKWaterDrop_CopyEmitterPrefixIntoAllocatedDrop."
+    },
+    {
+      "source": "src/objects/shared/sk/water_drop.s",
+      "original_line": 39,
+      "old": "loc_382F6",
+      "new": "SKWaterDrop_CullAndDrawWaterDropEmitter",
+      "profiles": ["sk"],
+      "meaning": "Describe SKWaterDrop_CullAndDrawWaterDropEmitter."
+    },
+    {
+      "source": "src/objects/shared/sk/water_drop.s",
+      "original_line": 43,
+      "old": "loc_382FC",
+      "new": "SKWaterDrop_MoveAndCheckFloorImpact",
+      "profiles": ["sk"],
+      "meaning": "Describe SKWaterDrop_MoveAnimatedDropAndDetectFloorImpact."
+    },
+    {
+      "source": "src/objects/shared/sk/water_drop.s",
+      "original_line": 58,
+      "old": "loc_38336",
+      "new": "SKWaterDrop_AnimateOrDeleteAtRoutine4",
+      "profiles": ["sk"],
+      "meaning": "Describe SKWaterDrop_AnimateDropAndDeleteAtRoutineFour."
+    },
+    {
+      "source": "src/objects/shared/sk/water_drop.s",
+      "original_line": 66,
+      "old": "loc_38350",
+      "new": "SKWaterDrop_ConsumeP1Contact",
+      "profiles": ["sk"],
+      "meaning": "Describe SKWaterDrop_ConsumePlayerOneSpecialContact."
+    },
+    {
+      "source": "src/objects/shared/sk/water_drop.s",
+      "original_line": 74,
+      "old": "loc_38364",
+      "new": "SKWaterDrop_ConsumeP2Contact",
+      "profiles": ["sk"],
+      "meaning": "Describe SKWaterDrop_ConsumePlayerTwoSpecialContact."
+    },
+    {
+      "source": "src/objects/shared/sk/water_drop.s",
+      "original_line": 80,
+      "old": "loc_38372",
+      "new": "SKWaterDrop_ClearDropContacts",
+      "profiles": ["sk"],
+      "meaning": "Describe SKWaterDrop_ClearAllAccumulatedDropContactBits."
+    },
+    {
+      "source": "src/objects/shared/sk/water_drop.s",
+      "original_line": 83,
+      "old": "loc_38376",
+      "new": "SKWaterDrop_QueueDropForTouchAndDrawing",
+      "profiles": ["sk"],
+      "meaning": "Describe SKWaterDrop_QueueDropForTouchAndDrawing."
+    },
+    {
+      "source": "src/objects/shared/sk/water_drop.s",
+      "original_line": 94,
+      "old": "loc_38390",
+      "new": "SKWaterDrop_BeginSplashAndDisableColl",
+      "profiles": ["sk"],
+      "meaning": "Describe SKWaterDrop_EnterContactSplashAndDisableDropCollision."
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/objects/shared/level_misc/mappings/lava_marker_debug.s",
+      "tokens": [
+        [2, 1, 0, ""],
+        [3, 1, 1, ""],
+        [4, 1, 2, ""],
+        [5, 0, 0, ""],
+        [10, 0, 1, ""],
+        [15, 0, 2, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/lava_marker_s2.s",
+      "tokens": [
+        [2, 1, 3, ""],
+        [3, 1, 3, ""],
+        [4, 1, 3, ""],
+        [5, 0, 3, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/spikes.s",
+      "tokens": [
+        [2, 1, 4, ""],
+        [3, 1, 5, ""],
+        [4, 1, 6, ""],
+        [5, 1, 7, ""],
+        [6, 1, 8, ""],
+        [7, 1, 9, ""],
+        [8, 1, 10, ""],
+        [9, 1, 11, ""],
+        [10, 0, 4, ""],
+        [13, 0, 5, ""],
+        [18, 0, 6, ""],
+        [25, 0, 7, ""],
+        [34, 0, 8, ""],
+        [37, 0, 9, ""],
+        [42, 0, 10, ""],
+        [49, 0, 11, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/s3/damage_regions.s",
+      "tokens": [
+        [17, 1, 12, ""],
+        [18, 2, 18, ""],
+        [20, 0, 12, ""],
+        [22, 1, 13, ""],
+        [23, 2, 22, ""],
+        [25, 0, 13, ""],
+        [26, 2, 14, ""],
+        [27, 0, 14, ""],
+        [39, 1, 16, ""],
+        [42, 1, 15, ""],
+        [45, 0, 15, ""],
+        [47, 1, 16, ""],
+        [50, 0, 16, ""],
+        [55, 1, 45, ""],
+        [57, 1, 17, ""],
+        [59, 0, 17, ""],
+        [61, 0, 18, ""],
+        [73, 1, 20, ""],
+        [76, 1, 19, ""],
+        [79, 0, 19, ""],
+        [81, 1, 20, ""],
+        [84, 0, 20, ""],
+        [89, 1, 45, ""],
+        [91, 1, 21, ""],
+        [93, 0, 21, ""],
+        [95, 0, 22, ""],
+        [107, 1, 24, ""],
+        [110, 1, 23, ""],
+        [113, 0, 23, ""],
+        [115, 1, 24, ""],
+        [118, 0, 24, ""],
+        [123, 1, 45, ""],
+        [125, 1, 25, ""],
+        [127, 0, 25, ""],
+        [145, 1, 26, ""],
+        [146, 2, 32, ""],
+        [148, 0, 26, ""],
+        [150, 1, 27, ""],
+        [151, 2, 36, ""],
+        [153, 0, 27, ""],
+        [154, 2, 28, ""],
+        [155, 0, 28, ""],
+        [167, 1, 30, ""],
+        [170, 1, 29, ""],
+        [173, 0, 29, ""],
+        [175, 1, 30, ""],
+        [178, 0, 30, ""],
+        [183, 1, 45, ""],
+        [185, 1, 31, ""],
+        [187, 0, 31, ""],
+        [189, 0, 32, ""],
+        [201, 1, 34, ""],
+        [204, 1, 33, ""],
+        [207, 0, 33, ""],
+        [209, 1, 34, ""],
+        [212, 0, 34, ""],
+        [217, 1, 45, ""],
+        [219, 1, 35, ""],
+        [221, 0, 35, ""],
+        [223, 0, 36, ""],
+        [235, 1, 38, ""],
+        [238, 1, 37, ""],
+        [241, 0, 37, ""],
+        [243, 1, 38, ""],
+        [246, 0, 38, ""],
+        [251, 1, 45, ""],
+        [253, 1, 39, ""],
+        [255, 0, 39, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/s3/invisible_solids.s",
+      "tokens": [[36, 1, 45, ""]]
+    },
+    {
+      "source": "src/objects/shared/s3/legacy_lava_markers.s",
+      "tokens": [
+        [1, 0, 40, ""],
+        [9, 1, 40, ""],
+        [12, 1, 41, ""],
+        [14, 0, 41, ""],
+        [21, 2, 42, ""],
+        [22, 0, 42, ""],
+        [24, 1, 43, ""],
+        [29, 1, 45, ""],
+        [30, 0, 43, ""],
+        [32, 1, 44, ""],
+        [34, 0, 44, ""],
+        [36, 0, 45, ""],
+        [38, 1, 46, ""],
+        [41, 0, 46, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/s3/sinking_mud.s",
+      "tokens": [
+        [9, 2, 58, ""],
+        [11, 1, 58, ""],
+        [12, 2, 47, ""],
+        [13, 0, 47, ""],
+        [15, 1, 54, ""],
+        [18, 1, 49, ""],
+        [20, 1, 48, ""],
+        [22, 0, 48, ""],
+        [24, 1, 50, ""],
+        [26, 2, 47, ""],
+        [27, 1, 50, ""],
+        [29, 1, 50, ""],
+        [30, 0, 49, ""],
+        [32, 1, 55, ""],
+        [34, 0, 50, ""],
+        [44, 1, 52, ""],
+        [46, 1, 51, ""],
+        [48, 0, 51, ""],
+        [50, 1, 53, ""],
+        [52, 2, 47, ""],
+        [53, 1, 53, ""],
+        [55, 1, 53, ""],
+        [56, 0, 52, ""],
+        [58, 1, 56, ""],
+        [60, 0, 53, ""],
+        [68, 0, 54, ""],
+        [70, 0, 55, ""],
+        [72, 1, 57, ""],
+        [73, 0, 56, ""],
+        [75, 0, 57, ""],
+        [84, 0, 58, ""],
+        [86, 1, 65, ""],
+        [89, 1, 60, ""],
+        [91, 1, 59, ""],
+        [93, 0, 59, ""],
+        [95, 1, 61, ""],
+        [97, 2, 47, ""],
+        [98, 1, 61, ""],
+        [100, 1, 61, ""],
+        [101, 0, 60, ""],
+        [103, 1, 66, ""],
+        [105, 0, 61, ""],
+        [116, 1, 63, ""],
+        [118, 1, 62, ""],
+        [120, 0, 62, ""],
+        [122, 1, 64, ""],
+        [124, 2, 47, ""],
+        [125, 1, 64, ""],
+        [127, 1, 64, ""],
+        [128, 0, 63, ""],
+        [130, 1, 67, ""],
+        [132, 0, 64, ""],
+        [141, 0, 65, ""],
+        [143, 0, 66, ""],
+        [145, 1, 68, ""],
+        [146, 0, 67, ""],
+        [148, 0, 68, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/s3/spikes.s",
+      "tokens": [
+        [1, 0, 69, ""],
+        [18, 1, 73, ""],
+        [19, 1, 69, ""],
+        [22, 2, 76, ""],
+        [28, 1, 70, ""],
+        [29, 2, 79, ""],
+        [31, 0, 70, ""],
+        [33, 1, 71, ""],
+        [34, 2, 82, ""],
+        [35, 0, 71, ""],
+        [43, 0, 72, ""],
+        [52, 0, 73, ""],
+        [53, 1, 72, ""],
+        [56, 2, 85, ""],
+        [62, 1, 74, ""],
+        [63, 2, 88, ""],
+        [64, 0, 74, ""],
+        [66, 1, 75, ""],
+        [67, 2, 91, ""],
+        [68, 0, 75, ""],
+        [76, 0, 76, ""],
+        [89, 1, 78, ""],
+        [92, 1, 77, ""],
+        [95, 0, 77, ""],
+        [97, 1, 78, ""],
+        [100, 0, 78, ""],
+        [103, 0, 79, ""],
+        [116, 1, 81, ""],
+        [119, 1, 80, ""],
+        [123, 0, 80, ""],
+        [125, 1, 81, ""],
+        [129, 0, 81, ""],
+        [132, 0, 82, ""],
+        [145, 1, 84, ""],
+        [148, 1, 83, ""],
+        [151, 0, 83, ""],
+        [153, 1, 84, ""],
+        [156, 0, 84, ""],
+        [159, 0, 85, ""],
+        [172, 1, 87, ""],
+        [175, 1, 86, ""],
+        [178, 0, 86, ""],
+        [180, 1, 87, ""],
+        [183, 0, 87, ""],
+        [185, 0, 88, ""],
+        [198, 1, 90, ""],
+        [201, 1, 89, ""],
+        [205, 0, 89, ""],
+        [207, 1, 90, ""],
+        [211, 0, 90, ""],
+        [213, 0, 91, ""],
+        [226, 1, 93, ""],
+        [229, 1, 92, ""],
+        [232, 0, 92, ""],
+        [234, 1, 93, ""],
+        [237, 0, 93, ""],
+        [241, 1, 94, ""],
+        [243, 1, 94, ""],
+        [245, 1, 94, ""],
+        [256, 0, 94, ""],
+        [261, 1, 95, ""],
+        [262, 1, 95, ""],
+        [263, 0, 95, ""],
+        [264, 1, 96, ""],
+        [264, 3, 95, ""],
+        [265, 1, 97, ""],
+        [265, 3, 95, ""],
+        [266, 1, 98, ""],
+        [266, 3, 95, ""],
+        [267, 0, 96, ""],
+        [269, 0, 97, ""],
+        [276, 0, 98, ""],
+        [285, 1, 99, ""],
+        [287, 1, 101, ""],
+        [289, 1, 101, ""],
+        [292, 1, 101, ""],
+        [293, 0, 99, ""],
+        [295, 1, 100, ""],
+        [297, 1, 101, ""],
+        [301, 1, 101, ""],
+        [302, 0, 100, ""],
+        [305, 1, 101, ""],
+        [309, 0, 101, ""],
+        [314, 1, 102, ""],
+        [315, 1, 102, ""],
+        [316, 0, 102, ""],
+        [317, 1, 96, ""],
+        [317, 3, 102, ""],
+        [318, 1, 103, ""],
+        [318, 3, 102, ""],
+        [319, 1, 104, ""],
+        [319, 3, 102, ""],
+        [320, 0, 103, ""],
+        [327, 0, 104, ""],
+        [336, 1, 105, ""],
+        [338, 1, 107, ""],
+        [340, 1, 107, ""],
+        [343, 1, 107, ""],
+        [344, 0, 105, ""],
+        [346, 1, 106, ""],
+        [348, 1, 107, ""],
+        [352, 1, 107, ""],
+        [353, 0, 106, ""],
+        [356, 1, 107, ""],
+        [360, 0, 107, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/s3/tunnel_exhaust.s",
+      "tokens": [
+        [9, 1, 108, ""],
+        [12, 0, 108, ""],
+        [15, 1, 109, ""],
+        [16, 1, 110, ""],
+        [18, 1, 110, ""],
+        [19, 0, 109, ""],
+        [22, 1, 110, ""],
+        [24, 0, 110, ""],
+        [26, 1, 111, ""],
+        [29, 0, 111, ""],
+        [33, 1, 113, ""],
+        [36, 1, 113, ""],
+        [47, 1, 112, ""],
+        [49, 0, 112, ""],
+        [50, 1, 115, ""],
+        [55, 1, 113, ""],
+        [58, 0, 113, ""],
+        [60, 1, 114, ""],
+        [62, 0, 114, ""],
+        [64, 0, 115, ""],
+        [88, 1, 116, ""],
+        [90, 0, 116, ""],
+        [96, 1, 117, ""],
+        [98, 0, 117, ""],
+        [101, 1, 118, ""],
+        [103, 1, 118, ""],
+        [105, 0, 118, ""],
+        [110, 1, 119, ""],
+        [112, 0, 119, ""],
+        [115, 1, 120, ""],
+        [117, 1, 120, ""],
+        [119, 0, 120, ""],
+        [124, 1, 121, ""],
+        [126, 0, 121, ""],
+        [129, 1, 122, ""],
+        [131, 1, 122, ""],
+        [133, 0, 122, ""],
+        [138, 1, 123, ""],
+        [140, 1, 123, ""],
+        [154, 0, 123, ""],
+        [158, 1, 124, ""],
+        [161, 0, 124, ""],
+        [164, 1, 125, ""],
+        [166, 0, 125, ""],
+        [169, 1, 126, ""],
+        [171, 0, 126, ""],
+        [176, 1, 127, ""],
+        [178, 1, 127, ""],
+        [184, 0, 127, ""],
+        [186, 1, 128, ""],
+        [188, 0, 128, ""],
+        [197, 2, 129, ""],
+        [198, 0, 129, ""],
+        [200, 1, 130, ""],
+        [202, 1, 130, ""],
+        [205, 1, 130, ""],
+        [206, 2, 132, ""],
+        [224, 0, 130, ""],
+        [226, 1, 131, ""],
+        [229, 0, 131, ""],
+        [231, 0, 132, ""],
+        [234, 1, 133, ""],
+        [236, 0, 133, ""],
+        [239, 1, 134, ""],
+        [241, 0, 134, ""],
+        [243, 1, 136, ""],
+        [246, 1, 135, ""],
+        [248, 0, 135, ""],
+        [251, 1, 136, ""],
+        [253, 0, 136, ""],
+        [257, 1, 137, ""],
+        [260, 1, 137, ""],
+        [268, 0, 137, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/s3/water_drop.s",
+      "tokens": [
+        [11, 2, 138, ""],
+        [12, 0, 138, ""],
+        [14, 1, 140, ""],
+        [20, 1, 140, ""],
+        [22, 1, 140, ""],
+        [24, 0, 139, ""],
+        [27, 1, 139, ""],
+        [28, 2, 141, ""],
+        [31, 0, 140, ""],
+        [33, 0, 141, ""],
+        [35, 1, 142, ""],
+        [40, 1, 142, ""],
+        [44, 2, 142, ""],
+        [47, 0, 142, ""],
+        [51, 1, 143, ""],
+        [53, 0, 143, ""],
+        [55, 1, 146, ""],
+        [58, 1, 144, ""],
+        [60, 0, 144, ""],
+        [63, 1, 145, ""],
+        [65, 0, 145, ""],
+        [67, 0, 146, ""],
+        [72, 1, 147, ""],
+        [74, 0, 147, ""],
+        [76, 2, 142, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/sk/damage_regions.s",
+      "tokens": [
+        [23, 1, 148, ""],
+        [24, 2, 154, ""],
+        [26, 0, 148, ""],
+        [28, 1, 149, ""],
+        [29, 2, 158, ""],
+        [31, 0, 149, ""],
+        [32, 2, 150, ""],
+        [33, 0, 150, ""],
+        [45, 1, 152, ""],
+        [48, 1, 151, ""],
+        [51, 0, 151, ""],
+        [53, 1, 152, ""],
+        [56, 0, 152, ""],
+        [61, 1, 182, ""],
+        [63, 1, 153, ""],
+        [65, 0, 153, ""],
+        [67, 0, 154, ""],
+        [79, 1, 156, ""],
+        [82, 1, 155, ""],
+        [85, 0, 155, ""],
+        [87, 1, 156, ""],
+        [90, 0, 156, ""],
+        [95, 1, 182, ""],
+        [97, 1, 157, ""],
+        [99, 0, 157, ""],
+        [101, 0, 158, ""],
+        [113, 1, 160, ""],
+        [116, 1, 159, ""],
+        [119, 0, 159, ""],
+        [121, 1, 160, ""],
+        [124, 0, 160, ""],
+        [129, 1, 182, ""],
+        [131, 1, 161, ""],
+        [133, 0, 161, ""],
+        [139, 1, 162, ""],
+        [141, 0, 162, ""],
+        [160, 1, 163, ""],
+        [161, 2, 169, ""],
+        [163, 0, 163, ""],
+        [165, 1, 164, ""],
+        [166, 2, 173, ""],
+        [168, 0, 164, ""],
+        [169, 2, 165, ""],
+        [170, 0, 165, ""],
+        [182, 1, 167, ""],
+        [185, 1, 166, ""],
+        [188, 0, 166, ""],
+        [190, 1, 167, ""],
+        [193, 0, 167, ""],
+        [198, 1, 182, ""],
+        [200, 1, 168, ""],
+        [202, 0, 168, ""],
+        [204, 0, 169, ""],
+        [216, 1, 171, ""],
+        [219, 1, 170, ""],
+        [222, 0, 170, ""],
+        [224, 1, 171, ""],
+        [227, 0, 171, ""],
+        [232, 1, 182, ""],
+        [234, 1, 172, ""],
+        [236, 0, 172, ""],
+        [238, 0, 173, ""],
+        [250, 1, 175, ""],
+        [253, 1, 174, ""],
+        [256, 0, 174, ""],
+        [258, 1, 175, ""],
+        [261, 0, 175, ""],
+        [266, 1, 182, ""],
+        [268, 1, 176, ""],
+        [270, 0, 176, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/sk/invisible_solids.s",
+      "tokens": [[37, 1, 182, ""]]
+    },
+    {
+      "source": "src/objects/shared/sk/legacy_lava_markers.s",
+      "tokens": [
+        [1, 0, 177, ""],
+        [9, 1, 177, ""],
+        [12, 1, 178, ""],
+        [14, 0, 178, ""],
+        [21, 2, 179, ""],
+        [22, 0, 179, ""],
+        [24, 1, 180, ""],
+        [29, 1, 182, ""],
+        [30, 0, 180, ""],
+        [32, 1, 181, ""],
+        [34, 0, 181, ""],
+        [36, 0, 182, ""],
+        [38, 1, 183, ""],
+        [41, 0, 183, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/sk/sinking_mud.s",
+      "tokens": [
+        [9, 2, 195, ""],
+        [11, 1, 195, ""],
+        [12, 2, 184, ""],
+        [13, 0, 184, ""],
+        [15, 1, 191, ""],
+        [18, 1, 186, ""],
+        [20, 1, 185, ""],
+        [22, 0, 185, ""],
+        [24, 1, 187, ""],
+        [26, 2, 184, ""],
+        [27, 1, 187, ""],
+        [29, 1, 187, ""],
+        [30, 0, 186, ""],
+        [32, 1, 192, ""],
+        [34, 0, 187, ""],
+        [44, 1, 189, ""],
+        [46, 1, 188, ""],
+        [48, 0, 188, ""],
+        [50, 1, 190, ""],
+        [52, 2, 184, ""],
+        [53, 1, 190, ""],
+        [55, 1, 190, ""],
+        [56, 0, 189, ""],
+        [58, 1, 193, ""],
+        [60, 0, 190, ""],
+        [68, 0, 191, ""],
+        [70, 0, 192, ""],
+        [72, 1, 194, ""],
+        [73, 0, 193, ""],
+        [75, 0, 194, ""],
+        [84, 0, 195, ""],
+        [86, 1, 202, ""],
+        [89, 1, 197, ""],
+        [91, 1, 196, ""],
+        [93, 0, 196, ""],
+        [95, 1, 198, ""],
+        [97, 2, 184, ""],
+        [98, 1, 198, ""],
+        [100, 1, 198, ""],
+        [101, 0, 197, ""],
+        [103, 1, 203, ""],
+        [105, 0, 198, ""],
+        [116, 1, 200, ""],
+        [118, 1, 199, ""],
+        [120, 0, 199, ""],
+        [122, 1, 201, ""],
+        [124, 2, 184, ""],
+        [125, 1, 201, ""],
+        [127, 1, 201, ""],
+        [128, 0, 200, ""],
+        [130, 1, 204, ""],
+        [132, 0, 201, ""],
+        [141, 0, 202, ""],
+        [143, 0, 203, ""],
+        [145, 1, 205, ""],
+        [146, 0, 204, ""],
+        [148, 0, 205, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/sk/spikes.s",
+      "tokens": [
+        [1, 0, 206, ""],
+        [18, 1, 212, ""],
+        [19, 1, 206, ""],
+        [22, 2, 215, ""],
+        [26, 1, 207, ""],
+        [28, 0, 207, ""],
+        [32, 1, 208, ""],
+        [33, 2, 218, ""],
+        [35, 0, 208, ""],
+        [38, 1, 209, ""],
+        [40, 0, 209, ""],
+        [42, 1, 210, ""],
+        [43, 2, 221, ""],
+        [44, 0, 210, ""],
+        [53, 0, 211, ""],
+        [62, 0, 212, ""],
+        [63, 1, 211, ""],
+        [66, 2, 224, ""],
+        [72, 1, 213, ""],
+        [73, 2, 227, ""],
+        [74, 0, 213, ""],
+        [76, 1, 214, ""],
+        [77, 2, 230, ""],
+        [78, 0, 214, ""],
+        [86, 0, 215, ""],
+        [99, 1, 217, ""],
+        [102, 1, 216, ""],
+        [105, 0, 216, ""],
+        [107, 1, 217, ""],
+        [110, 0, 217, ""],
+        [113, 0, 218, ""],
+        [126, 1, 220, ""],
+        [129, 1, 219, ""],
+        [133, 0, 219, ""],
+        [135, 1, 220, ""],
+        [139, 0, 220, ""],
+        [142, 0, 221, ""],
+        [155, 1, 223, ""],
+        [158, 1, 222, ""],
+        [161, 0, 222, ""],
+        [163, 1, 223, ""],
+        [166, 0, 223, ""],
+        [169, 0, 224, ""],
+        [182, 1, 226, ""],
+        [185, 1, 225, ""],
+        [188, 0, 225, ""],
+        [190, 1, 226, ""],
+        [193, 0, 226, ""],
+        [195, 0, 227, ""],
+        [208, 1, 229, ""],
+        [211, 1, 228, ""],
+        [215, 0, 228, ""],
+        [217, 1, 229, ""],
+        [221, 0, 229, ""],
+        [223, 0, 230, ""],
+        [236, 1, 232, ""],
+        [239, 1, 231, ""],
+        [242, 0, 231, ""],
+        [244, 1, 232, ""],
+        [247, 0, 232, ""],
+        [251, 1, 233, ""],
+        [253, 1, 233, ""],
+        [255, 1, 233, ""],
+        [266, 0, 233, ""],
+        [271, 1, 234, ""],
+        [272, 1, 234, ""],
+        [273, 0, 234, ""],
+        [274, 1, 235, ""],
+        [274, 3, 234, ""],
+        [275, 1, 236, ""],
+        [275, 3, 234, ""],
+        [276, 1, 237, ""],
+        [276, 3, 234, ""],
+        [277, 1, 241, ""],
+        [277, 3, 234, ""],
+        [278, 0, 235, ""],
+        [280, 0, 236, ""],
+        [287, 0, 237, ""],
+        [296, 1, 238, ""],
+        [298, 1, 240, ""],
+        [300, 1, 240, ""],
+        [303, 1, 240, ""],
+        [304, 0, 238, ""],
+        [306, 1, 239, ""],
+        [308, 1, 240, ""],
+        [312, 1, 240, ""],
+        [313, 0, 239, ""],
+        [316, 1, 240, ""],
+        [320, 0, 240, ""],
+        [322, 0, 241, ""],
+        [325, 1, 242, ""],
+        [335, 0, 242, ""],
+        [341, 1, 243, ""],
+        [343, 1, 243, ""],
+        [345, 1, 243, ""],
+        [347, 1, 243, ""],
+        [350, 1, 243, ""],
+        [354, 0, 243, ""],
+        [359, 1, 244, ""],
+        [360, 1, 244, ""],
+        [361, 0, 244, ""],
+        [362, 1, 235, ""],
+        [362, 3, 244, ""],
+        [363, 1, 245, ""],
+        [363, 3, 244, ""],
+        [364, 1, 246, ""],
+        [364, 3, 244, ""],
+        [365, 0, 245, ""],
+        [372, 0, 246, ""],
+        [381, 1, 247, ""],
+        [383, 1, 249, ""],
+        [385, 1, 249, ""],
+        [388, 1, 249, ""],
+        [389, 0, 247, ""],
+        [391, 1, 248, ""],
+        [393, 1, 249, ""],
+        [397, 1, 249, ""],
+        [398, 0, 248, ""],
+        [401, 1, 249, ""],
+        [405, 0, 249, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/sk/tunnel_exhaust.s",
+      "tokens": [
+        [9, 1, 250, ""],
+        [12, 0, 250, ""],
+        [15, 1, 251, ""],
+        [16, 1, 252, ""],
+        [18, 1, 252, ""],
+        [19, 0, 251, ""],
+        [22, 1, 252, ""],
+        [24, 0, 252, ""],
+        [26, 1, 253, ""],
+        [29, 0, 253, ""],
+        [33, 1, 255, ""],
+        [36, 1, 255, ""],
+        [47, 1, 254, ""],
+        [49, 0, 254, ""],
+        [50, 1, 257, ""],
+        [55, 1, 255, ""],
+        [58, 0, 255, ""],
+        [60, 1, 256, ""],
+        [62, 0, 256, ""],
+        [64, 0, 257, ""],
+        [88, 1, 258, ""],
+        [90, 0, 258, ""],
+        [96, 1, 259, ""],
+        [98, 0, 259, ""],
+        [101, 1, 260, ""],
+        [103, 1, 260, ""],
+        [105, 0, 260, ""],
+        [110, 1, 261, ""],
+        [112, 0, 261, ""],
+        [115, 1, 262, ""],
+        [117, 1, 262, ""],
+        [119, 0, 262, ""],
+        [124, 1, 263, ""],
+        [126, 0, 263, ""],
+        [129, 1, 264, ""],
+        [131, 1, 264, ""],
+        [133, 0, 264, ""],
+        [138, 1, 265, ""],
+        [140, 1, 265, ""],
+        [154, 0, 265, ""],
+        [158, 1, 266, ""],
+        [161, 0, 266, ""],
+        [164, 1, 267, ""],
+        [166, 0, 267, ""],
+        [169, 1, 268, ""],
+        [171, 0, 268, ""],
+        [176, 1, 269, ""],
+        [178, 1, 269, ""],
+        [184, 0, 269, ""],
+        [186, 1, 270, ""],
+        [188, 0, 270, ""],
+        [197, 2, 271, ""],
+        [198, 0, 271, ""],
+        [200, 1, 272, ""],
+        [202, 1, 272, ""],
+        [205, 1, 272, ""],
+        [206, 2, 274, ""],
+        [224, 0, 272, ""],
+        [226, 1, 273, ""],
+        [229, 0, 273, ""],
+        [231, 0, 274, ""],
+        [234, 1, 275, ""],
+        [236, 0, 275, ""],
+        [239, 1, 276, ""],
+        [241, 0, 276, ""],
+        [243, 1, 278, ""],
+        [246, 1, 277, ""],
+        [248, 0, 277, ""],
+        [251, 1, 278, ""],
+        [253, 0, 278, ""],
+        [257, 1, 279, ""],
+        [260, 1, 279, ""],
+        [268, 0, 279, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/sk/updraft.s",
+      "tokens": [
+        [8, 2, 280, ""],
+        [9, 0, 280, ""],
+        [18, 1, 283, ""],
+        [23, 1, 283, ""],
+        [25, 1, 284, ""],
+        [31, 1, 283, ""],
+        [33, 1, 283, ""],
+        [35, 1, 281, ""],
+        [38, 0, 281, ""],
+        [50, 1, 282, ""],
+        [53, 0, 282, ""],
+        [55, 1, 287, ""],
+        [58, 1, 283, ""],
+        [63, 0, 283, ""],
+        [65, 0, 284, ""],
+        [68, 1, 285, ""],
+        [70, 1, 283, ""],
+        [71, 0, 285, ""],
+        [77, 1, 283, ""],
+        [79, 1, 283, ""],
+        [81, 1, 286, ""],
+        [84, 0, 286, ""],
+        [90, 1, 283, ""],
+        [94, 0, 287, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/sk/water_drop.s",
+      "tokens": [
+        [11, 2, 288, ""],
+        [12, 0, 288, ""],
+        [14, 1, 290, ""],
+        [20, 1, 290, ""],
+        [22, 1, 290, ""],
+        [24, 0, 289, ""],
+        [27, 1, 289, ""],
+        [28, 2, 291, ""],
+        [31, 0, 290, ""],
+        [33, 0, 291, ""],
+        [35, 1, 292, ""],
+        [40, 1, 292, ""],
+        [44, 2, 292, ""],
+        [47, 0, 292, ""],
+        [51, 1, 293, ""],
+        [53, 0, 293, ""],
+        [55, 1, 296, ""],
+        [58, 1, 294, ""],
+        [60, 0, 294, ""],
+        [63, 1, 295, ""],
+        [65, 0, 295, ""],
+        [67, 0, 296, ""],
+        [72, 1, 297, ""],
+        [74, 0, 297, ""],
+        [76, 2, 292, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/hcz/s3/breakable_bar.s",
+      "tokens": [[179, 1, 45, ""]]
+    },
+    {
+      "source": "src/objects/zones/hcz/sk/breakable_bar.s",
+      "tokens": [[179, 1, 182, ""]]
+    },
+    {
+      "source": "src/objects/zones/mgz/top_platform/s3/state_and_riders.s",
+      "tokens": [[479, 2, 47, ""]]
+    },
+    {
+      "source": "src/objects/zones/mgz/top_platform/sk/state_and_riders.s",
+      "tokens": [[481, 2, 184, ""]]
+    }
+  ]
+}

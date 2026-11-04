@@ -42,7 +42,7 @@ SKInvisibleSolid_CollideCullAndDrawDebug:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_1EBAA
+                bhi.w   SKLavaMarker_ClearMarkerLoadedBit
                 tst.w   (Debug_placement_mode).w
                 beq.s   SKInvisibleSolid_NoDebugDrawReturn
                 jmp     (Draw_Sprite).l

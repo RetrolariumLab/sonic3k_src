@@ -3,7 +3,7 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 
 ; ---------------------------------------------------------------------------
-byte_1C700:
+S3InvisibleShared_CollisionFlagBySubtype:
                 dc.b    $96
                 dc.b    $94
                 dc.b    $95
@@ -13,46 +13,46 @@ byte_1C700:
 Obj_S2LavaMarker:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.b  byte_1C700(pc,d0.w),collision_flags(a0)
+                move.b  S3InvisibleShared_CollisionFlagBySubtype(pc,d0.w),collision_flags(a0)
                 move.l  #Map_S2LavaMarker,mappings(a0)
                 tst.w   (Debug_placement_mode).w
-                beq.s   loc_1C726
+                beq.s   S3LavaMarker_InitLegacyLavaMarker
                 move.l  #Map_S2LavaMarkerDebug,mappings(a0)
 
-loc_1C726:
+S3LavaMarker_InitLegacyLavaMarker:
                 move.w  #make_art_tile(ArtTile_Ring,0,1),art_tile(a0)
                 move.b  #$84,render_flags(a0)
                 move.b  #$80,width_pixels(a0)
                 move.b  #$80,height_pixels(a0)
                 move.w  #$200,priority(a0)
                 move.b  subtype(a0),mapping_frame(a0)
-                move.l  #loc_1C750,(a0)
+                move.l  #S3LavaMarker_CullLegacyMarkerOutsideComp,(a0)
 
-loc_1C750:
+S3LavaMarker_CullLegacyMarkerOutsideComp:
                 tst.w   (Competition_mode).w
-                bne.s   loc_1C76A
+                bne.s   S3LavaMarker_DrawMarkerDuringPlacement
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_1C778
+                bhi.w   S3LavaMarker_ClearMarkerLoadedBit
 
-loc_1C76A:
+S3LavaMarker_DrawMarkerDuringPlacement:
                 tst.w   (Debug_placement_mode).w
-                beq.s   locret_1C776
+                beq.s   S3LavaMarker_MarkerReturn
                 jsr     (Draw_Sprite).l
 
-locret_1C776:
+S3LavaMarker_MarkerReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1C778:
+S3LavaMarker_ClearMarkerLoadedBit:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_1C784
+                beq.s   S3LavaMarker_DeleteInvisibleActor
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_1C784:
+S3LavaMarker_DeleteInvisibleActor:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_S2LavaMarker:

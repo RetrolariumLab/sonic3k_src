@@ -588,7 +588,7 @@ loc_35232:
                 cmpi.b  #4,(a4)
                 blo.s   locret_35268
                 movea.w interact(a1),a2
-                cmpi.l  #loc_32AAE,(a2)
+                cmpi.l  #SKSinkingMud_UpdateNormalP1Depth,(a2)
                 bne.s   loc_35248
                 bsr.w   AbandonTopPlatformAndReleaseRiders
 

@@ -37131,7 +37131,7 @@
       "responsibility": "Sinking mud contact, player depth control and movement response.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 193,
+      "physical_lines": 197,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "s3.s",
@@ -37231,7 +37231,7 @@
       "responsibility": "Spike orientation, movement, player collision and damage responses with competition variants and mappings.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 449,
+      "physical_lines": 451,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "s3.s",
@@ -37316,7 +37316,7 @@
       "responsibility": "Tunnel exhaust control, directional vents, timed emission and smoke sprite motion.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 337,
+      "physical_lines": 338,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "s3.s",
@@ -39119,7 +39119,7 @@
       "responsibility": "Sinking mud contact, player depth control and movement response.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 193,
+      "physical_lines": 197,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "sonic3k.s",
@@ -39199,7 +39199,7 @@
       "responsibility": "Spike orientation, movement, player collision and damage responses with competition variants and mappings.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 505,
+      "physical_lines": 507,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "sonic3k.s",
@@ -39259,7 +39259,7 @@
       "responsibility": "Tunnel exhaust control, directional vents, timed emission and smoke sprite motion.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 337,
+      "physical_lines": 338,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "sonic3k.s",
@@ -39324,7 +39324,7 @@
       "responsibility": "Updraft player contact, lift control and movement response.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 116,
+      "physical_lines": 118,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",

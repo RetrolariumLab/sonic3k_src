@@ -22354,10 +22354,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 8
       },
-      "declarations_sha256": "ab81e53f1e2773f52c8735911d3a1d2767b0633e86c91ea2ad0dbc54610f1496",
+      "declarations_sha256": "041c5ab6b7d0754c69dfca5792d4e21141ecc4f1c15bbb8f1295436988ed2b0b",
       "labels": {
         "Map_S2LavaMarker_": 0,
-        "word_1EBC2": 6
+        "LegacyLavaMarkerMapping_SharedBlank": 6
       },
       "external_symbols": [],
       "blocks": [
@@ -22365,21 +22365,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1EBC2",
+          "target": "LegacyLavaMarkerMapping_SharedBlank",
           "base": "Map_S2LavaMarker_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1EBC2",
+          "target": "LegacyLavaMarkerMapping_SharedBlank",
           "base": "Map_S2LavaMarker_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1EBC2",
+          "target": "LegacyLavaMarkerMapping_SharedBlank",
           "base": "Map_S2LavaMarker_"
         },
         {
@@ -22398,12 +22398,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 84
       },
-      "declarations_sha256": "68d07453fc0dae4bc457bde818d73878ace8999fdae0eed31d10af5bc31f8f42",
+      "declarations_sha256": "f05132fca32edd9782ee0d64102debf047cad006848f7cc0d5a96a71b0051dfb",
       "labels": {
         "Map_S2LavaMarkerDebug_": 0,
-        "word_1EBCA": 6,
-        "word_1EBE4": 32,
-        "word_1EBFE": 58
+        "LegacyLavaMarkerMapping_DebugFrame00": 6,
+        "LegacyLavaMarkerMapping_DebugFrame01": 32,
+        "LegacyLavaMarkerMapping_DebugFrame02": 58
       },
       "external_symbols": [],
       "blocks": [
@@ -22411,21 +22411,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1EBCA",
+          "target": "LegacyLavaMarkerMapping_DebugFrame00",
           "base": "Map_S2LavaMarkerDebug_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1EBE4",
+          "target": "LegacyLavaMarkerMapping_DebugFrame01",
           "base": "Map_S2LavaMarkerDebug_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1EBFE",
+          "target": "LegacyLavaMarkerMapping_DebugFrame02",
           "base": "Map_S2LavaMarkerDebug_"
         },
         {
@@ -22846,17 +22846,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 272
       },
-      "declarations_sha256": "f8bc401bc0c5d955f848e1db636dda670d58ef6fa3904cedebb0349b3410b819",
+      "declarations_sha256": "5283217f7dc538ec083a811cdc3c33fadb61f8039202877fc5a1892f8f2d6d57",
       "labels": {
         "Map_Spikes_": 0,
-        "word_24466": 16,
-        "word_24474": 30,
-        "word_2448E": 56,
-        "word_244B4": 94,
-        "word_244E6": 144,
-        "word_244F4": 158,
-        "word_2450E": 184,
-        "word_24534": 222
+        "SpikeMapping_NormalFrame00": 16,
+        "SpikeMapping_NormalFrame01": 30,
+        "SpikeMapping_NormalFrame02": 56,
+        "SpikeMapping_NormalFrame03": 94,
+        "SpikeMapping_NormalFrame04": 144,
+        "SpikeMapping_NormalFrame05": 158,
+        "SpikeMapping_NormalFrame06": 184,
+        "SpikeMapping_NormalFrame07": 222
       },
       "external_symbols": [],
       "blocks": [
@@ -22864,56 +22864,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_24466",
+          "target": "SpikeMapping_NormalFrame00",
           "base": "Map_Spikes_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_24474",
+          "target": "SpikeMapping_NormalFrame01",
           "base": "Map_Spikes_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2448E",
+          "target": "SpikeMapping_NormalFrame02",
           "base": "Map_Spikes_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_244B4",
+          "target": "SpikeMapping_NormalFrame03",
           "base": "Map_Spikes_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_244E6",
+          "target": "SpikeMapping_NormalFrame04",
           "base": "Map_Spikes_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_244F4",
+          "target": "SpikeMapping_NormalFrame05",
           "base": "Map_Spikes_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2450E",
+          "target": "SpikeMapping_NormalFrame06",
           "base": "Map_Spikes_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_24534",
+          "target": "SpikeMapping_NormalFrame07",
           "base": "Map_Spikes_"
         },
         {

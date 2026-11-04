@@ -41,7 +41,7 @@ S3InvisibleSolid_CollideCullAndDrawDebug:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_1C778
+                bhi.w   S3LavaMarker_ClearMarkerLoadedBit
                 tst.w   (Debug_placement_mode).w
                 beq.s   S3InvisibleSolid_NoDebugDrawReturn
                 jmp     (Draw_Sprite).l
