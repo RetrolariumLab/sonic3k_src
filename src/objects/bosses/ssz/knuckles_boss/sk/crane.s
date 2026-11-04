@@ -4,7 +4,7 @@
 ; ---------------------------------------------------------------------------
 
 Obj_KnuxFinalBossCrane:
-                move.l  #loc_7CA3A,(a0)
+                move.l  #SSZCrane_WaitForPlayerAirborne,(a0)
                 move.w  (Camera_min_X_pos).w,(Camera_max_X_pos).w
                 lea     PLC_KnuxFinalBossCrane(pc),a1
                 jmp     (Load_PLC_Raw).l
@@ -14,21 +14,21 @@ PLC_KnuxFinalBossCrane: plrlistheader
 PLC_KnuxFinalBossCrane_End:
 ; ---------------------------------------------------------------------------
 
-loc_7CA3A:
+SSZCrane_WaitForPlayerAirborne:
                 lea     (Player_1).w,a1
                 btst    #Status_InAir,status(a1)
                 beq.w   SSZMechaBattleAndChildren_SharedReturn
-                move.l  #loc_7CAAA,(a0)
+                move.l  #SSZCrane_MoveLeftToDeployClaw,(a0)
                 lea     (ObjDat3_664EE).l,a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.w  #-$80,x_vel(a0)
                 jsr     (Swing_Setup1).l
                 jsr     (AllocateObject).l
-                bne.s   loc_7CA78
+                bne.s   SSZCrane_SpawnAttachmentsAndLoadArt
                 move.l  #Obj_Song_Fade_Transition,(a1)
                 move.b  #mus_EndBoss,subtype(a1)
 
-loc_7CA78:
+SSZCrane_SpawnAttachmentsAndLoadArt:
                 lea     (Child1_MakeRoboHead4).l,a2
                 jsr     CreateChild1_Normal(pc)
                 lea     SSZCraneGrabber_NormalChildRecord(pc),a2
@@ -41,130 +41,131 @@ loc_7CA78:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7CAAA:
+SSZCrane_MoveLeftToDeployClaw:
                 jsr     Swing_UpAndDown(pc)
                 jsr     (MoveSprite2).l
                 cmpi.w  #$120,x_pos(a0)
-                bhs.s   loc_7CACC
-                move.l  #loc_7CAD2,(a0)
+                bhs.s   SSZKnucklesCraneShip_DrawEntryMotion
+                move.l  #SSZCrane_CheckClawLowered,(a0)
                 clr.w   x_vel(a0)
                 bset    #0,(_unkFAB8).w
 
-loc_7CACC:
+SSZKnucklesCraneShip_DrawEntryMotion:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7CAD2:
+SSZCrane_CheckClawLowered:
                 btst    #1,(_unkFAB8).w
-                beq.s   loc_7CAE6
-                move.l  #loc_7CAE6,(a0)
+                beq.s   SSZCrane_CheckPlayerCaptured
+                move.l  #SSZCrane_CheckPlayerCaptured,(a0)
                 move.w  #-$80,x_vel(a0)
 
-loc_7CAE6:
+SSZCrane_CheckPlayerCaptured:
                 btst    #2,(_unkFAB8).w
-                beq.s   loc_7CAF8
-                move.l  #loc_7CAF8,(a0)
+                beq.s   SSZCrane_CheckClawRetracted
+                move.l  #SSZCrane_CheckClawRetracted,(a0)
                 clr.w   x_vel(a0)
 
-loc_7CAF8:
+SSZCrane_CheckClawRetracted:
                 btst    #3,(_unkFAB8).w
-                beq.s   loc_7CB18
-                move.l  #loc_7CB28,(a0)
+                beq.s   SSZCrane_BobMoveAndDraw
+                move.l  #SSZCrane_ReturnRightAndDelayBoss,(a0)
                 move.w  #$80,x_vel(a0)
                 bset    #0,render_flags(a0)
                 bclr    #0,(Player_1+render_flags).w
 
-loc_7CB18:
+SSZCrane_BobMoveAndDraw:
                 jsr     Swing_UpAndDown(pc)
                 jsr     (MoveSprite2).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7CB28:
+SSZCrane_ReturnRightAndDelayBoss:
                 jsr     Swing_UpAndDown(pc)
                 jsr     (MoveSprite2).l
                 cmpi.w  #$120,x_pos(a0)
-                blo.s   loc_7CB5E
-                move.l  #loc_7CB64,(a0)
+                blo.s   SSZKnucklesCraneShip_DrawReturningMotion
+                move.l  #SSZCrane_TickBossSpawnDelay,(a0)
                 clr.w   x_vel(a0)
                 move.w  #60-1,$2E(a0)
                 jsr     (AllocateObject).l
-                bne.s   loc_7CB5E
+                bne.s   SSZKnucklesCraneShip_DrawReturningMotion
                 move.l  #Obj_Song_Fade_Transition,(a1)
                 move.b  #mus_FinalBoss,subtype(a1)
 
-loc_7CB5E:
+SSZKnucklesCraneShip_DrawReturningMotion:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7CB64:
+SSZCrane_TickBossSpawnDelay:
                 subq.w  #1,$2E(a0)
-                bne.s   loc_7CB94
-                move.l  #loc_7CBA4,(a0)
+                bne.s   SSZCrane_BobAndDrawDuringBossDelay
+                move.l  #SSZCrane_CheckPlayerReleaseRange,(a0)
                 st      (Scroll_lock).w
                 jsr     (AllocateObject).l
-                bne.s   loc_7CB82
+                bne.s   SSZCrane_TryBossAtCameraGate
                 move.l  #SSZCraneSceneCamera_AdvanceTowardFixedX,(a1)
 
-loc_7CB82:
+SSZCrane_TryBossAtCameraGate:
                 jsr     (AllocateObject).l
-                bne.s   loc_7CB90
+                bne.s   SSZCrane_StoreBossHandle
                 move.l  #Obj_SSZEndBoss,(a1)
 
-loc_7CB90:
+; Preserve the original path that stores the returned handle without a separate allocation check
+SSZCrane_StoreBossHandle:
                 move.w  a1,(_unkFAA4).w
 
-loc_7CB94:
+SSZCrane_BobAndDrawDuringBossDelay:
                 jsr     Swing_UpAndDown(pc)
                 jsr     (MoveSprite2).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7CBA4:
+SSZCrane_CheckPlayerReleaseRange:
                 movea.w (_unkFAA4).w,a1
-                lea     word_7CC16(pc),a2
+                lea     SSZCrane_PlayerReleaseBounds(pc),a2
                 jsr     (Check_InMyRange).l
-                beq.s   loc_7CBCE
-                move.l  #loc_7CBCE,(a0)
+                beq.s   SSZCrane_MoveAndCheckBreakupRange
+                move.l  #SSZCrane_MoveAndCheckBreakupRange,(a0)
                 jsr     (AllocateObject).l
-                bne.s   loc_7CBC8
-                move.l  #loc_7CC3A,(a1)
+                bne.s   SSZCrane_SignalPlayerRelease
+                move.l  #SSZCrane_InitPlayerTransfer,(a1)
 
-loc_7CBC8:
+SSZCrane_SignalPlayerRelease:
                 bset    #5,(_unkFAB8).w
 
-loc_7CBCE:
+SSZCrane_MoveAndCheckBreakupRange:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 movea.w (_unkFAA4).w,a1
-                lea     word_7CC1E(pc),a2
+                lea     SSZCrane_ShipBreakupBounds(pc),a2
                 jsr     (Check_InMyRange).l
-                beq.s   loc_7CC10
+                beq.s   SSZCrane_DrawAfterRangeChecks
                 move.l  #Wait_Draw,(a0)
                 move.w  #$80,priority(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_7CC26,$34(a0)
+                move.l  #SSZCrane_BreakShipAndDelete,$34(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l
 
-loc_7CC10:
+SSZCrane_DrawAfterRangeChecks:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-word_7CC16:
+SSZCrane_PlayerReleaseBounds:
                 dc.w    -$20,   $40,     0,   $78
-word_7CC1E:
+SSZCrane_ShipBreakupBounds:
                 dc.w    -$20,   $40,     0,   $30
 ; ---------------------------------------------------------------------------
 
-loc_7CC26:
+SSZCrane_BreakShipAndDelete:
                 lea     SSZCraneShipFragments_SimpleChildRecord(pc),a2
                 jsr     CreateChild6_Simple(pc)
                 ori.b   #$30,$38(a0)
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7CC3A:
-                move.l  #loc_7CC68,(a0)
+SSZCrane_InitPlayerTransfer:
+                move.l  #SSZCrane_TransferMoveToRightBound,(a0)
                 lea     (Player_1).w,a1
                 move.w  x_pos(a1),x_pos(a0)
                 move.w  y_pos(a1),y_pos(a0)
@@ -173,7 +174,7 @@ loc_7CC3A:
                 move.w  #$80,y_vel(a0)
                 jsr     (Player_Load_PLC).l
 
-loc_7CC68:
+SSZCrane_TransferMoveToRightBound:
                 jsr     (MoveSprite2).l
                 lea     (Player_1).w,a1
                 move.w  x_pos(a0),x_pos(a1)
@@ -181,7 +182,7 @@ loc_7CC68:
                 move.w  x_pos(a0),d0
                 cmp.w   (_unkFAB6).w,d0
                 blo.w   SSZMechaBattleAndChildren_SharedReturn
-                move.l  #loc_7CCB0,(a0)
+                move.l  #SSZCrane_TransferTickPoseChange,(a0)
                 move.w  #6,$2E(a0)
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
@@ -190,14 +191,14 @@ loc_7CC68:
                 jmp     (Player_Load_PLC).l
 ; ---------------------------------------------------------------------------
 
-loc_7CCB0:
+SSZCrane_TransferTickPoseChange:
                 subq.w  #1,$2E(a0)
-                bne.s   loc_7CCC6
+                bne.s   SSZCrane_TransferFallAndRelease
                 lea     (Player_1).w,a1
                 move.b  #$CB,mapping_frame(a1)
                 jsr     (Player_Load_PLC).l
 
-loc_7CCC6:
+SSZCrane_TransferFallAndRelease:
                 jsr     (MoveSprite).l
                 lea     (Player_1).w,a1
                 move.w  x_pos(a0),x_pos(a1)
@@ -212,32 +213,32 @@ loc_7CCC6:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7CCFE:
+SSZCrane_InitClawAndDetails:
                 lea     (ObjDat3_664FA).l,a1
                 jsr     (SetUp_ObjAttributes).l
                 move.w  #0,priority(a0)
-                move.l  #loc_7CD22,(a0)
+                move.l  #SSZCrane_ClawFollowUntilDeploy,(a0)
                 lea     (ChildObjDat_66610).l,a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_7CD22:
+SSZCrane_ClawFollowUntilDeploy:
                 btst    #0,(_unkFAB8).w
-                bne.s   loc_7CD36
+                bne.s   SSZCrane_ClawSaveBaseline
                 jsr     (Refresh_ChildPositionAdjusted).l
                 jmp     (Child_Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7CD36:
-                move.l  #loc_7CD42,(a0)
+SSZCrane_ClawSaveBaseline:
+                move.l  #SSZCrane_ClawLowerTowardPlayer,(a0)
                 move.b  child_dy(a0),$3A(a0)
 
-loc_7CD42:
+SSZCrane_ClawLowerTowardPlayer:
                 lea     (Player_1).w,a1
                 move.w  y_pos(a1),d0
                 subi.w  #$10,d0
                 cmp.w   y_pos(a0),d0
-                bls.s   loc_7CD76
+                bls.s   SSZCrane_ClawSignalLowered
                 move.b  y_vel(a0),d0
                 addi.b  #1,d0
                 move.b  d0,y_vel(a0)
@@ -248,11 +249,11 @@ loc_7CD42:
                 jmp     (Child_Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7CD76:
-                move.l  #loc_7CD82,(a0)
+SSZCrane_ClawSignalLowered:
+                move.l  #SSZCrane_ClawCalcLengthToPlayer,(a0)
                 bset    #1,(_unkFAB8).w
 
-loc_7CD82:
+SSZCrane_ClawCalcLengthToPlayer:
                 move.b  $3A(a0),d0
                 ext.w   d0
                 movea.w parent3(a0),a1
@@ -262,30 +263,30 @@ loc_7CD82:
                 move.w  y_pos(a1),d2
                 subi.w  #$10,d2
                 sub.w   d1,d2
-                bpl.s   loc_7CDA4
+                bpl.s   SSZCrane_ClawStoreLengthAndClamp
                 moveq   #0,d2
 
-loc_7CDA4:
+SSZCrane_ClawStoreLengthAndClamp:
                 move.b  d2,y_vel(a0)
                 add.b   d2,d0
-                bpl.s   loc_7CDB0
+                bpl.s   SSZCrane_ClawCheckCaptureXRange
                 move.b  #$7F,d0
 
-loc_7CDB0:
+SSZCrane_ClawCheckCaptureXRange:
                 move.b  d0,child_dy(a0)
                 move.w  x_pos(a0),d0
                 cmpi.w  #8,d0
-                bls.s   loc_7CDD2
+                bls.s   SSZCrane_ClawCaptureAndRetract
                 move.w  x_pos(a1),d1
                 subi.w  #$C,d0
                 cmp.w   d0,d1
-                blo.s   loc_7CE12
+                blo.s   SSZCrane_ClawTrackAndDraw
                 addi.w  #$18,d0
                 cmp.w   d0,d1
-                bhs.s   loc_7CE12
+                bhs.s   SSZCrane_ClawTrackAndDraw
 
-loc_7CDD2:
-                move.l  #loc_7CE1E,(a0)
+SSZCrane_ClawCaptureAndRetract:
+                move.l  #SSZCrane_ClawRetractToBase,(a0)
                 bset    #2,(_unkFAB8).w
                 move.b  #2,mapping_frame(a0)
                 move.b  #$83,object_control(a1)
@@ -298,40 +299,40 @@ loc_7CDD2:
                 moveq   #signextendB(sfx_Grab),d0
                 jsr     (Play_SFX).l
 
-loc_7CE12:
+SSZCrane_ClawTrackAndDraw:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 jmp     (Child_Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7CE1E:
+SSZCrane_ClawRetractToBase:
                 move.b  y_vel(a0),d0
                 subq.b  #1,d0
-                bpl.s   loc_7CE34
-                move.l  #loc_7CE42,(a0)
+                bpl.s   SSZCrane_ClawStoreRetractedOffset
+                move.l  #SSZCrane_ClawFollowAndCarryPlayer,(a0)
                 bset    #3,(_unkFAB8).w
                 moveq   #0,d0
 
-loc_7CE34:
+SSZCrane_ClawStoreRetractedOffset:
                 move.b  d0,y_vel(a0)
                 move.b  $3A(a0),d1
                 add.b   d0,d1
                 move.b  d1,child_dy(a0)
 
-loc_7CE42:
+SSZCrane_ClawFollowAndCarryPlayer:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 btst    #5,(_unkFAB8).w
-                bne.s   loc_7CE66
+                bne.s   SSZCrane_ClawDraw
                 lea     (Player_1).w,a1
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),d0
                 addi.w  #$16,d0
                 move.w  d0,y_pos(a1)
 
-loc_7CE66:
+SSZCrane_ClawDraw:
                 jmp     (Child_Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7CE6C:
+SSZCrane_InitShipDebris:
                 lea     SSZCraneShipFragment_Attributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #Obj_FlickerMove,(a0)
@@ -343,18 +344,18 @@ loc_7CE6C:
                 jmp     (Set_IndexedVelocity).l
 ; ---------------------------------------------------------------------------
 
-loc_7CE90:
+SSZCrane_InitFinalDebris:
                 lea     SSZMechaDefeatFragment_Attributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_7CF02,(a0)
+                move.l  #SSZCrane_FinalDebrisFlickerUntilExit,(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                lea     byte_7CEE2(pc,d0.w),a1
+                lea     SSZCrane_FinalDebrisPositionOffsets(pc,d0.w),a1
                 move.b  (a1)+,d1
                 ext.w   d1
                 movea.w parent3(a0),a2
                 btst    #0,render_flags(a2)
-                beq.s   loc_7CEC2
+                beq.s   SSZCrane_FinalDebrisSetMotionAndFrame
 
 ; Bug: should be d1
 ; Otherwise, Mecha Sonic's pieces will be positioned incorrectly
@@ -362,7 +363,7 @@ loc_7CE90:
                 neg.w   d2
                 bset    #0,render_flags(a0)
 
-loc_7CEC2:
+SSZCrane_FinalDebrisSetMotionAndFrame:
                 add.w   d1,x_pos(a0)
                 move.b  (a1)+,d2
                 ext.w   d2
@@ -375,7 +376,7 @@ loc_7CEC2:
                 move.b  d0,mapping_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------
-byte_7CEE2:
+SSZCrane_FinalDebrisPositionOffsets:
                 dc.b    -$14,-$24
                 dc.b    -$C,-$28
                 dc.b    -$C,-$18
@@ -395,20 +396,20 @@ byte_7CEE2:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_7CF02:
+SSZCrane_FinalDebrisFlickerUntilExit:
                 tst.b   (_unkFAA2).w
-                bne.s   loc_7CF0E
+                bne.s   SSZMechaFinalDebris_DeleteForSceneExit
                 jmp     (Obj_FlickerMove).l
 ; ---------------------------------------------------------------------------
 
-loc_7CF0E:
+SSZMechaFinalDebris_DeleteForSceneExit:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7CF14:
+SSZCrane_InitFinalExplosionEmitter:
                 move.b  subtype(a0),d0
                 subq.b  #2,d0
-                bpl.s   loc_7CF4E
+                bpl.s   SSZCrane_InitSideEmitterMotion
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$A0,d0
                 move.w  d0,x_pos(a0)
@@ -417,33 +418,33 @@ loc_7CF14:
                 move.w  d0,y_pos(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l
-                bne.s   loc_7CF48
+                bne.s   SSZCrane_DeleteCenterEmitter
                 move.b  #$C,subtype(a1)
 
-loc_7CF48:
+SSZCrane_DeleteCenterEmitter:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7CF4E:
-                move.l  #loc_7CF7C,(a0)
+SSZCrane_InitSideEmitterMotion:
+                move.l  #SSZCrane_MoveEmitterUntilOffscreen,(a0)
                 addi.w  #$30,y_pos(a0)
                 moveq   #2,d1
                 tst.b   d0
-                bne.s   loc_7CF62
+                bne.s   SSZCrane_SetStepAndTryController
                 neg.w   d1
 
-loc_7CF62:
+SSZCrane_SetStepAndTryController:
                 move.w  d1,x_vel(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l
-                bne.s   locret_7CF7A
+                bne.s   SSZCrane_SideEmitterSpawnReturn
                 move.b  #$1E,subtype(a1)
 
-locret_7CF7A:
+SSZCrane_SideEmitterSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7CF7C:
+SSZCrane_MoveEmitterUntilOffscreen:
                 move.w  x_vel(a0),d0
                 move.w  x_pos(a0),d1
                 add.w   d0,d1
@@ -451,8 +452,8 @@ loc_7CF7C:
                 move.w  (Camera_X_pos).w,d0
                 subi.w  #$10,d0
                 cmp.w   d0,d1
-                blo.w   loc_7C8F8
+                blo.w   SSZMechaChildren_DeleteCurrent
                 addi.w  #$160,d0
                 cmp.w   d0,d1
-                bhi.w   loc_7C8F8
+                bhi.w   SSZMechaChildren_DeleteCurrent
                 rts

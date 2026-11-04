@@ -1,0 +1,1803 @@
+{
+  "schema_version": 1,
+  "packet": "49-boss-ssz-knuckles",
+  "mappings": [
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 58,
+      "old": "loc_7BDBE",
+      "new": "SSZKnucklesMecha_UpdateTransformation",
+      "profiles": ["sk"],
+      "meaning": "Shared palette/raw transformation state."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 66,
+      "old": "loc_7BDD8",
+      "new": "SSZKnucklesMecha_BeginRisePreparation",
+      "profiles": ["sk"],
+      "meaning": "Install second transformation script and rise callback."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 74,
+      "old": "loc_7BDF6",
+      "new": "SSZKnucklesMecha_LaunchRise",
+      "profiles": ["sk"],
+      "meaning": "Raw callback starts vertical rise."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 82,
+      "old": "loc_7BE0E",
+      "new": "SSZKnucklesMecha_RiseToSavedHeight",
+      "profiles": ["sk"],
+      "meaning": "Move upward under light gravity until saved height reached."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 91,
+      "old": "loc_7BE26",
+      "new": "SSZKnuxMecha_ClampRiseAndTransform",
+      "profiles": ["sk"],
+      "meaning": "Clamp initial rise and install next raw callback."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 99,
+      "old": "loc_7BE42",
+      "new": "SSZKnuxMecha_AnimateTransformation",
+      "profiles": ["sk"],
+      "meaning": "Update palette and raw script in transformation state6."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 104,
+      "old": "loc_7BE4E",
+      "new": "SSZKnuxMecha_BeginSuperPaletteDelay",
+      "profiles": ["sk"],
+      "meaning": "Initialize super attack palette,delay and optional flash."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 116,
+      "old": "loc_7BE7E",
+      "new": "SSZKnuxMecha_SavePaletteAndTryFlash",
+      "profiles": ["sk"],
+      "meaning": "Snapshot full palette and attempt transformation flash controller."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 123,
+      "old": "loc_7BE92",
+      "new": "SSZKnucklesMecha_PlaySuperTransformSound",
+      "profiles": ["sk"],
+      "meaning": "Play transformation sound after optional flash allocation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 129,
+      "old": "loc_7BE9C",
+      "new": "SSZKnuxMecha_RunPaletteAndWaitAttack",
+      "profiles": ["sk"],
+      "meaning": "Rotate palette during initial super attack delay."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 134,
+      "old": "loc_7BEA8",
+      "new": "SSZKnuxMecha_ChooseAttackByHealth",
+      "profiles": ["sk"],
+      "meaning": "Choose normal dash sequence or low-hitpoint hover behavior."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 138,
+      "old": "loc_7BEB0",
+      "new": "SSZKnuxMecha_ChooseOppositeDashEdge",
+      "profiles": ["sk"],
+      "meaning": "Select edge target based on current side of arena midpoint."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 147,
+      "old": "loc_7BECE",
+      "new": "SSZKnucklesMecha_StoreDashTarget",
+      "profiles": ["sk"],
+      "meaning": "Store selected dash destination in actor scratch."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 150,
+      "old": "loc_7BED2",
+      "new": "SSZKnucklesMecha_BeginAcceleratingDash",
+      "profiles": ["sk"],
+      "meaning": "Initialize super Mecha horizontal accelerating dash."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 159,
+      "old": "loc_7BEEE",
+      "new": "SSZKnuxMecha_BeginDashAnimAndEffect",
+      "profiles": ["sk"],
+      "meaning": "Install dash animation and parent phase effect."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 168,
+      "old": "loc_7BF0C",
+      "new": "SSZKnucklesMecha_ChooseLowHitpointHover",
+      "profiles": ["sk"],
+      "meaning": "Choose hover behavior for two or fewer remaining hits."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 176,
+      "old": "loc_7BF28",
+      "new": "SSZKnuxMecha_AccelerateDashToSpeed",
+      "profiles": ["sk"],
+      "meaning": "Accelerate horizontal dash until signed speed reaches magnitude800hex."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 189,
+      "old": "loc_7BF52",
+      "new": "SSZKnucklesMecha_SelectDashCruiseState",
+      "profiles": ["sk"],
+      "meaning": "Switch from acceleration to dash cruise."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 194,
+      "old": "loc_7BF5A",
+      "new": "SSZKnucklesMecha_CruiseTowardDashTarget",
+      "profiles": ["sk"],
+      "meaning": "Move dash and start braking inside56pixels of target."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 206,
+      "old": "loc_7BF7C",
+      "new": "SSZKnuxMecha_CheckLeftDashTarget",
+      "profiles": ["sk"],
+      "meaning": "Check unsigned distance for negative-velocity dash."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 214,
+      "old": "loc_7BF8C",
+      "new": "SSZKnucklesMecha_BeginDashBraking",
+      "profiles": ["sk"],
+      "meaning": "Reverse acceleration and install flip-capable braking animation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 221,
+      "old": "loc_7BFA0",
+      "new": "SSZKnuxMecha_BrakeAndCheckCrossing",
+      "profiles": ["sk"],
+      "meaning": "Brake horizontal dash and test target in current velocity direction."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 235,
+      "old": "loc_7BFCC",
+      "new": "SSZKnuxMecha_CheckLeftBrakeTarget",
+      "profiles": ["sk"],
+      "meaning": "Complete braking when target is at or right of negative-velocity actor."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 241,
+      "old": "loc_7BFD4",
+      "new": "SSZKnuxMecha_FinishDashAndSetWait",
+      "profiles": ["sk"],
+      "meaning": "Clear dash effect flag and choose next timed decision."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 253,
+      "old": "loc_7BFFE",
+      "new": "SSZKnuxMecha_RepeatOppositeDash",
+      "profiles": ["sk"],
+      "meaning": "Install callback to select another edge dash."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 258,
+      "old": "loc_7C008",
+      "new": "SSZKnuxMecha_WaitBeforeRegionAttack",
+      "profiles": ["sk"],
+      "meaning": "Install delay and region attack selector after retargeted dash."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 264,
+      "old": "loc_7C018",
+      "new": "SSZKnuxMecha_ClassifyPlayerForDash",
+      "profiles": ["sk"],
+      "meaning": "Classify player region after repeated edge dashes."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 272,
+      "old": "loc_7C02C",
+      "new": "SSZKnuxMecha_ChooseRegionDashTarget",
+      "profiles": ["sk"],
+      "meaning": "Choose retargeted dash based on player side and region."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 283,
+      "old": "byte_7C050",
+      "new": "SSZKnuxMecha_AttackIndicesByRegion",
+      "profiles": ["sk"],
+      "meaning": "Six one-based region mappings to attack-list row numbers."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 286,
+      "old": "word_7C056",
+      "new": "SSZKnuxMecha_TargetPointersByRegion",
+      "profiles": ["sk"],
+      "meaning": "Six WORD RAM addresses selecting dash target coordinates by region."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 291,
+      "old": "loc_7C062",
+      "new": "SSZKnuxMecha_RunPaletteAndWaitDash",
+      "profiles": ["sk"],
+      "meaning": "Rotate palette and execute dash decision when timer underflows."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 296,
+      "old": "loc_7C06E",
+      "new": "SSZKnuxMecha_ChooseRegionDiveOrAttack",
+      "profiles": ["sk"],
+      "meaning": "Choose targeted dive when player region matches selected list."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 316,
+      "old": "loc_7C0B6",
+      "new": "SSZKnucklesMecha_ChooseRandomDiveOrHover",
+      "profiles": ["sk"],
+      "meaning": "Random fallback when player is outside selected region list."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 329,
+      "old": "loc_7C0E0",
+      "new": "SSZKnuxMecha_BeginAcceleratingDiveFx",
+      "profiles": ["sk"],
+      "meaning": "Install acceleration,animation and child for random dive."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 340,
+      "old": "loc_7C104",
+      "new": "SSZKnuxMecha_BeginHoverEntryAnim",
+      "profiles": ["sk"],
+      "meaning": "Initialize random hover-entry branch."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 348,
+      "old": "loc_7C11C",
+      "new": "SSZKnucklesMecha_RotateAnimateAndWait",
+      "profiles": ["sk"],
+      "meaning": "Shared animated wait for targeted dive launch and post-impact pause."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 354,
+      "old": "loc_7C12E",
+      "new": "SSZKnuxMecha_BeginTargetedDive",
+      "profiles": ["sk"],
+      "meaning": "Timed callback starts targeted dive floor-contact phase."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 361,
+      "old": "loc_7C144",
+      "new": "SSZKnuxMecha_MoveDiveAndProbeFloor",
+      "profiles": ["sk"],
+      "meaning": "Shared velocity-only floor callback state."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 368,
+      "old": "loc_7C15C",
+      "new": "SSZKnuxMecha_BeginDiveImpactPause",
+      "profiles": ["sk"],
+      "meaning": "Floor callback starts impact wait."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 377,
+      "old": "loc_7C17A",
+      "new": "SSZKnuxMecha_BeginVerticalDiveReturn",
+      "profiles": ["sk"],
+      "meaning": "Timed impact callback launches upward return."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 384,
+      "old": "loc_7C18C",
+      "new": "SSZKnuxMecha_RiseToSavedDiveHeight",
+      "profiles": ["sk"],
+      "meaning": "Move upward at constant velocity to saved phase height."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 394,
+      "old": "loc_7C1AA",
+      "new": "SSZKnuxMecha_ChooseFacingReturnAnim",
+      "profiles": ["sk"],
+      "meaning": "Prepare return callback and facing relative to arena midpoint."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 403,
+      "old": "loc_7C1CE",
+      "new": "SSZKnucklesMecha_InstallReturnAnimation",
+      "profiles": ["sk"],
+      "meaning": "Install raw script that returns from dive to edge attacks."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 408,
+      "old": "loc_7C1D8",
+      "new": "SSZKnuxMecha_AnimateReturnAndPalette",
+      "profiles": ["sk"],
+      "meaning": "Run return animation until its raw callback."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 413,
+      "old": "loc_7C1E4",
+      "new": "SSZKnuxMecha_ResetDashAndChooseEdge",
+      "profiles": ["sk"],
+      "meaning": "Reset dash decision scratch and select new edge attack."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 419,
+      "old": "loc_7C1F2",
+      "new": "SSZKnucklesMecha_AccelerateDiagonalDive",
+      "profiles": ["sk"],
+      "meaning": "Accelerate random dive horizontally and downward."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 433,
+      "old": "loc_7C22C",
+      "new": "SSZKnuxMecha_MoveAcceleratingDive",
+      "profiles": ["sk"],
+      "meaning": "Integrate diagonal dive after acceleration and threshold check."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 437,
+      "old": "loc_7C232",
+      "new": "SSZKnuxMecha_BeginDiveYBraking",
+      "profiles": ["sk"],
+      "meaning": "Floor callback selects vertical deceleration phase."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 446,
+      "old": "loc_7C250",
+      "new": "SSZKnuxMecha_BrakeDiveAndProbeFloor",
+      "profiles": ["sk"],
+      "meaning": "Reduce downward speed then test floor again."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 456,
+      "old": "loc_7C274",
+      "new": "SSZKnuxMecha_BeginDiveXBraking",
+      "profiles": ["sk"],
+      "meaning": "Second floor callback starts horizontal braking raw animation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 470,
+      "old": "loc_7C2A4",
+      "new": "SSZKnuxMecha_BrakeDiveHorizontally",
+      "profiles": ["sk"],
+      "meaning": "Animate and reduce/reverse horizontal motion after dive."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 478,
+      "old": "loc_7C2BE",
+      "new": "SSZKnuxMecha_BeginDiveReturnJumpPrep",
+      "profiles": ["sk"],
+      "meaning": "Raw callback prepares jump animation after diagonal dive."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 486,
+      "old": "loc_7C2DC",
+      "new": "SSZKnuxMecha_AnimateJumpPrepAndPalette",
+      "profiles": ["sk"],
+      "meaning": "Animate post-dive jump preparation until rawcallback."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 491,
+      "old": "loc_7C2E8",
+      "new": "SSZKnucklesMecha_LaunchHighReturnJump",
+      "profiles": ["sk"],
+      "meaning": "Raw callback launches high upward return jump."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 499,
+      "old": "loc_7C302",
+      "new": "SSZKnucklesMecha_UpdateHighReturnJump",
+      "profiles": ["sk"],
+      "meaning": "Animate/integrate return jump and compare saved phase height."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 509,
+      "old": "loc_7C320",
+      "new": "SSZKnuxMecha_ClampReturnJumpAndReset",
+      "profiles": ["sk"],
+      "meaning": "Clamp high return jump at saved height and restart dash decisions."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 514,
+      "old": "loc_7C328",
+      "new": "SSZKnuxMecha_EnterHoverWithGravity",
+      "profiles": ["sk"],
+      "meaning": "Run hover-entry animation with custom downward acceleration."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 524,
+      "old": "loc_7C346",
+      "new": "SSZKnucklesMecha_SelectHoverLaserState",
+      "profiles": ["sk"],
+      "meaning": "Select hovering laser wait state."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 527,
+      "old": "loc_7C34C",
+      "new": "SSZKnuxMecha_InitHoverLaserTiming",
+      "profiles": ["sk"],
+      "meaning": "Shared hover swing and repeated laser timing setup."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 539,
+      "old": "loc_7C37A",
+      "new": "SSZKnuxMecha_HoverFaceAndWait",
+      "profiles": ["sk"],
+      "meaning": "Shared hovering wait with nearest-player facing."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 548,
+      "old": "loc_7C39E",
+      "new": "SSZKnuxMecha_TryLaserAndCountVolleys",
+      "profiles": ["sk"],
+      "meaning": "Timed callback attempts laser then advances volley count."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 560,
+      "old": "loc_7C3CA",
+      "new": "SSZKnuxMecha_BeginPaletteRevertAndFall",
+      "profiles": ["sk"],
+      "meaning": "After volley delay switch palette and falling animation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 571,
+      "old": "loc_7C3F8",
+      "new": "SSZKnuxMecha_FallToFloorWithGravity",
+      "profiles": ["sk"],
+      "meaning": "Animate and fall with normal38hex gravity to floor callback."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 578,
+      "old": "loc_7C410",
+      "new": "SSZKnuxMecha_BeginNormalLandingAnim",
+      "profiles": ["sk"],
+      "meaning": "Floor callback selects landing animation after palette return."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 587,
+      "old": "loc_7C430",
+      "new": "SSZKnucklesMecha_AnimateNormalLanding",
+      "profiles": ["sk"],
+      "meaning": "Run landing rawscript until rolling setup callback."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 591,
+      "old": "loc_7C436",
+      "new": "SSZKnuxMecha_BeginFloorRoll",
+      "profiles": ["sk"],
+      "meaning": "Raw callback prepares rolling floor contact."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 600,
+      "old": "loc_7C458",
+      "new": "SSZKnuxMecha_UpdateFloorRoll",
+      "profiles": ["sk"],
+      "meaning": "Animate/integrate light gravity then invoke floor callback."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 606,
+      "old": "loc_7C46A",
+      "new": "SSZKnuxMecha_AimRollAtArenaTarget",
+      "profiles": ["sk"],
+      "meaning": "Floor callback launches rolling motion toward saved targetFAB6."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 618,
+      "old": "loc_7C494",
+      "new": "SSZKnucklesMecha_StoreRollingVelocity",
+      "profiles": ["sk"],
+      "meaning": "Store selected rolling xvelocity and stop verticalvelocity."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 624,
+      "old": "loc_7C49E",
+      "new": "SSZKnucklesMecha_RollUntilTargetCrossing",
+      "profiles": ["sk"],
+      "meaning": "Roll horizontally until crossing saved arena targetFAB6."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 635,
+      "old": "loc_7C4BC",
+      "new": "SSZKnucklesMecha_TestLeftwardRollTarget",
+      "profiles": ["sk"],
+      "meaning": "Test leftward rolling crossing using unsignedcoordinatecomparison."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 641,
+      "old": "loc_7C4C4",
+      "new": "SSZKnuxMecha_ClampRollAndJump",
+      "profiles": ["sk"],
+      "meaning": "Finish rolling and launch small verticaljump."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 650,
+      "old": "loc_7C4E0",
+      "new": "SSZKnuxMecha_UpdateSmallJump",
+      "profiles": ["sk"],
+      "meaning": "Update smalljump using original unusual floor-distance branch."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 659,
+      "old": "loc_7C4F8",
+      "new": "SSZKnuxMecha_ApplyFloorDistanceAndLand",
+      "profiles": ["sk"],
+      "meaning": "Apply nonnegative floor distance and prepare next jump script."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 669,
+      "old": "loc_7C51C",
+      "new": "SSZKnucklesMecha_AnimateSmallJumpLanding",
+      "profiles": ["sk"],
+      "meaning": "Run landing rawscript until next jump callback."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 673,
+      "old": "loc_7C522",
+      "new": "SSZKnuxMecha_BeginTransformReturnJump",
+      "profiles": ["sk"],
+      "meaning": "Raw callback launches next lightgravity jump and chooses facing script."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 684,
+      "old": "loc_7C54E",
+      "new": "SSZKnuxMecha_ChooseFlippedReturnAnim",
+      "profiles": ["sk"],
+      "meaning": "Choose alternate jump script for previously set flipbit."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 690,
+      "old": "loc_7C55E",
+      "new": "SSZKnuxMecha_UpdateTransformReturnJump",
+      "profiles": ["sk"],
+      "meaning": "Animate/lightgravity jump and floorcheck onlywhile descending."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 698,
+      "old": "loc_7C578",
+      "new": "SSZKnuxMecha_LandAndRestartTransform",
+      "profiles": ["sk"],
+      "meaning": "Floor callback restarts transformation cycle."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 708,
+      "old": "loc_7C59A",
+      "new": "SSZKnuxMecha_HoverTrackUntilBurst",
+      "profiles": ["sk"],
+      "meaning": "Hover and track nearest player until burst timer or swing-count event."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 722,
+      "old": "loc_7C5CA",
+      "new": "SSZKnuxMecha_ChooseFacingHoverDrift",
+      "profiles": ["sk"],
+      "meaning": "Choose hover drift or turn based on relativeplayerdirection."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 729,
+      "old": "loc_7C5D4",
+      "new": "SSZKnucklesMecha_BeginHoverFacingTurn",
+      "profiles": ["sk"],
+      "meaning": "Install flip-capable hover turn script."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 736,
+      "old": "loc_7C5EA",
+      "new": "SSZKnucklesMecha_BeginHoverPaletteShift",
+      "profiles": ["sk"],
+      "meaning": "Start palette-only subphase after counted swing reversal."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 744,
+      "old": "loc_7C604",
+      "new": "SSZKnuxMecha_InstallHoverPaletteShift",
+      "profiles": ["sk"],
+      "meaning": "Store horizontaldrift and install palette-completion statecallback."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 751,
+      "old": "loc_7C61A",
+      "new": "SSZKnuxMecha_BeginRadialBurstAnim",
+      "profiles": ["sk"],
+      "meaning": "When hovertimer expires start radialburst callbackscript."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 758,
+      "old": "loc_7C630",
+      "new": "SSZKnuxMecha_AnimateHoverFacingTurn",
+      "profiles": ["sk"],
+      "meaning": "Run palette/flipraw and maintain hover movement during turn."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 765,
+      "old": "loc_7C646",
+      "new": "SSZKnuxMecha_ResumeHoverAfterTurn",
+      "profiles": ["sk"],
+      "meaning": "Raw callback returns to main hovering state."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 770,
+      "old": "loc_7C64E",
+      "new": "SSZKnucklesMecha_RunPaletteOnlyShift",
+      "profiles": ["sk"],
+      "meaning": "Run palette script while waitingforitsglobalcallback."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "original_line": 774,
+      "old": "loc_7C654",
+      "new": "SSZKnuxMecha_FallAfterPaletteShift",
+      "profiles": ["sk"],
+      "meaning": "Palette callback selects lightgravity falling state."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 17,
+      "old": "loc_7CA3A",
+      "new": "SSZCrane_WaitForPlayerAirborne",
+      "profiles": ["sk"],
+      "meaning": "Wait for airborne Player1 before initializing the crane ship."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 31,
+      "old": "loc_7CA78",
+      "new": "SSZCrane_SpawnAttachmentsAndLoadArt",
+      "profiles": ["sk"],
+      "meaning": "Attempt ship head,claw and flame attachments then queue crane art."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 44,
+      "old": "loc_7CAAA",
+      "new": "SSZCrane_MoveLeftToDeployClaw",
+      "profiles": ["sk"],
+      "meaning": "Bob and move crane ship left until its deployment threshold."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 53,
+      "old": "loc_7CACC",
+      "new": "SSZKnucklesCraneShip_DrawEntryMotion",
+      "profiles": ["sk"],
+      "meaning": "Draw crane ship after leftward entry threshold check."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 57,
+      "old": "loc_7CAD2",
+      "new": "SSZCrane_CheckClawLowered",
+      "profiles": ["sk"],
+      "meaning": "Check claw lowering-complete signal before moving ship left."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 63,
+      "old": "loc_7CAE6",
+      "new": "SSZCrane_CheckPlayerCaptured",
+      "profiles": ["sk"],
+      "meaning": "Check capture signal before stopping horizontal ship motion."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 69,
+      "old": "loc_7CAF8",
+      "new": "SSZCrane_CheckClawRetracted",
+      "profiles": ["sk"],
+      "meaning": "Check retraction signal before returning crane ship right."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 77,
+      "old": "loc_7CB18",
+      "new": "SSZCrane_BobMoveAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Shared motion/draw tail for crane signal entries."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 83,
+      "old": "loc_7CB28",
+      "new": "SSZCrane_ReturnRightAndDelayBoss",
+      "profiles": ["sk"],
+      "meaning": "Bob right to fixed threshold then begin boss appearance delay."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 96,
+      "old": "loc_7CB5E",
+      "new": "SSZKnucklesCraneShip_DrawReturningMotion",
+      "profiles": ["sk"],
+      "meaning": "Draw crane ship before or after boss delay selection."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 100,
+      "old": "loc_7CB64",
+      "new": "SSZCrane_TickBossSpawnDelay",
+      "profiles": ["sk"],
+      "meaning": "Count down to camera and Mecha allocation using exact zero trigger."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 109,
+      "old": "loc_7CB82",
+      "new": "SSZCrane_TryBossAtCameraGate",
+      "profiles": ["sk"],
+      "meaning": "Attempt Mecha boss independently of camera allocation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 114,
+      "old": "loc_7CB90",
+      "new": "SSZCrane_StoreBossHandle",
+      "profiles": ["sk"],
+      "meaning": "Store returned A1 as shared Mecha handle even after allocation failure."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 117,
+      "old": "loc_7CB94",
+      "new": "SSZCrane_BobAndDrawDuringBossDelay",
+      "profiles": ["sk"],
+      "meaning": "Shared crane motion tail during and after boss countdown."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 123,
+      "old": "loc_7CBA4",
+      "new": "SSZCrane_CheckPlayerReleaseRange",
+      "profiles": ["sk"],
+      "meaning": "Check Mecha entry into wider ship-relative range before releasing player."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 133,
+      "old": "loc_7CBC8",
+      "new": "SSZCrane_SignalPlayerRelease",
+      "profiles": ["sk"],
+      "meaning": "Signal claw to stop positioning Player1 after transfer attempt."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 136,
+      "old": "loc_7CBCE",
+      "new": "SSZCrane_MoveAndCheckBreakupRange",
+      "profiles": ["sk"],
+      "meaning": "Bob ship and check Mecha against narrower destruction trigger."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 150,
+      "old": "loc_7CC10",
+      "new": "SSZCrane_DrawAfterRangeChecks",
+      "profiles": ["sk"],
+      "meaning": "Draw crane after release/destruction range checks."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 153,
+      "old": "word_7CC16",
+      "new": "SSZCrane_PlayerReleaseBounds",
+      "profiles": ["sk"],
+      "meaning": "Four WORD offset/extent fields for wider Mecha range trigger."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 155,
+      "old": "word_7CC1E",
+      "new": "SSZCrane_ShipBreakupBounds",
+      "profiles": ["sk"],
+      "meaning": "Four WORD offset/extent fields for narrow Mecha range trigger."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 159,
+      "old": "loc_7CC26",
+      "new": "SSZCrane_BreakShipAndDelete",
+      "profiles": ["sk"],
+      "meaning": "Create ship debris after destruction delay and schedule crane ship deletion."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 166,
+      "old": "loc_7CC3A",
+      "new": "SSZCrane_InitPlayerTransfer",
+      "profiles": ["sk"],
+      "meaning": "Initialize invisible player transfer helper from current Player1 position."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 176,
+      "old": "loc_7CC68",
+      "new": "SSZCrane_TransferMoveToRightBound",
+      "profiles": ["sk"],
+      "meaning": "Move transfer helper and mirror its position into Player1."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 193,
+      "old": "loc_7CCB0",
+      "new": "SSZCrane_TransferTickPoseChange",
+      "profiles": ["sk"],
+      "meaning": "Change player frame once transfer fall counter reaches zero."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 200,
+      "old": "loc_7CCC6",
+      "new": "SSZCrane_TransferFallAndRelease",
+      "profiles": ["sk"],
+      "meaning": "Fall transfer helper and release Player1 on penetrating floor contact."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 215,
+      "old": "loc_7CCFE",
+      "new": "SSZCrane_InitClawAndDetails",
+      "profiles": ["sk"],
+      "meaning": "Initialize crane claw and shared HPZ display details."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 224,
+      "old": "loc_7CD22",
+      "new": "SSZCrane_ClawFollowUntilDeploy",
+      "profiles": ["sk"],
+      "meaning": "Follow ship until deployment signal starts lowering."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 231,
+      "old": "loc_7CD36",
+      "new": "SSZCrane_ClawSaveBaseline",
+      "profiles": ["sk"],
+      "meaning": "Save claw baseline vertical offset and install lowering state."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 235,
+      "old": "loc_7CD42",
+      "new": "SSZCrane_ClawLowerTowardPlayer",
+      "profiles": ["sk"],
+      "meaning": "Lower claw until it reaches Player1 minus16pixels."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 251,
+      "old": "loc_7CD76",
+      "new": "SSZCrane_ClawSignalLowered",
+      "profiles": ["sk"],
+      "meaning": "Signal ship to move after initial claw lowering."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 255,
+      "old": "loc_7CD82",
+      "new": "SSZCrane_ClawCalcLengthToPlayer",
+      "profiles": ["sk"],
+      "meaning": "Track vertical player offset relative to ship and saved claw baseline."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 268,
+      "old": "loc_7CDA4",
+      "new": "SSZCrane_ClawStoreLengthAndClamp",
+      "profiles": ["sk"],
+      "meaning": "Store BYTE claw length and limit negative wrapped display offset."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 274,
+      "old": "loc_7CDB0",
+      "new": "SSZCrane_ClawCheckCaptureXRange",
+      "profiles": ["sk"],
+      "meaning": "Store claw offset and test player horizontal capture."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 287,
+      "old": "loc_7CDD2",
+      "new": "SSZCrane_ClawCaptureAndRetract",
+      "profiles": ["sk"],
+      "meaning": "Capture Player1 and notify ship to stop before retraction."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 301,
+      "old": "loc_7CE12",
+      "new": "SSZCrane_ClawTrackAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Refresh claw and draw during tracking or newly selected capture."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 306,
+      "old": "loc_7CE1E",
+      "new": "SSZCrane_ClawRetractToBase",
+      "profiles": ["sk"],
+      "meaning": "Retract BYTE claw length one unit per update."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 314,
+      "old": "loc_7CE34",
+      "new": "SSZCrane_ClawStoreRetractedOffset",
+      "profiles": ["sk"],
+      "meaning": "Store retracted BYTE length and parent-relative offset."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 320,
+      "old": "loc_7CE42",
+      "new": "SSZCrane_ClawFollowAndCarryPlayer",
+      "profiles": ["sk"],
+      "meaning": "Follow crane ship and mirror held Player1 until release signal."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 330,
+      "old": "loc_7CE66",
+      "new": "SSZCrane_ClawDraw",
+      "profiles": ["sk"],
+      "meaning": "Draw crane claw with normal parent lifetime check."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 334,
+      "old": "loc_7CE6C",
+      "new": "SSZCrane_InitShipDebris",
+      "profiles": ["sk"],
+      "meaning": "Initialize one of four exploding ship fragments."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 346,
+      "old": "loc_7CE90",
+      "new": "SSZCrane_InitFinalDebris",
+      "profiles": ["sk"],
+      "meaning": "Initialize one of16Mecha fragments with offset-derived velocities."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 365,
+      "old": "loc_7CEC2",
+      "new": "SSZCrane_FinalDebrisSetMotionAndFrame",
+      "profiles": ["sk"],
+      "meaning": "Apply Mecha debris placement and velocity from unmirrored offsets."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 378,
+      "old": "byte_7CEE2",
+      "new": "SSZCrane_FinalDebrisPositionOffsets",
+      "profiles": ["sk"],
+      "meaning": "Sixteen signedXYBYTEpairs for Mecha final fragments."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 398,
+      "old": "loc_7CF02",
+      "new": "SSZCrane_FinalDebrisFlickerUntilExit",
+      "profiles": ["sk"],
+      "meaning": "Move/flicker Mecha debris until shared scene exit signal."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 404,
+      "old": "loc_7CF0E",
+      "new": "SSZMechaFinalDebris_DeleteForSceneExit",
+      "profiles": ["sk"],
+      "meaning": "Delete Mecha debris on final scene exit signal."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 408,
+      "old": "loc_7CF14",
+      "new": "SSZCrane_InitFinalExplosionEmitter",
+      "profiles": ["sk"],
+      "meaning": "Initialize central or side final explosion emitters."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 423,
+      "old": "loc_7CF48",
+      "new": "SSZCrane_DeleteCenterEmitter",
+      "profiles": ["sk"],
+      "meaning": "Delete central final explosion emitter after independent child attempt."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 427,
+      "old": "loc_7CF4E",
+      "new": "SSZCrane_InitSideEmitterMotion",
+      "profiles": ["sk"],
+      "meaning": "Initialize side explosion emitter with integer-pixel motion."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 435,
+      "old": "loc_7CF62",
+      "new": "SSZCrane_SetStepAndTryController",
+      "profiles": ["sk"],
+      "meaning": "Store side emitter step and attempt long explosion controller."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 442,
+      "old": "locret_7CF7A",
+      "new": "SSZCrane_SideEmitterSpawnReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after side emitter child controller allocation attempt."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "original_line": 446,
+      "old": "loc_7CF7C",
+      "new": "SSZCrane_MoveEmitterUntilOffscreen",
+      "profiles": ["sk"],
+      "meaning": "Move side emitter in integerpixels until outside camera window."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 6,
+      "old": "loc_7C65C",
+      "new": "SSZKnuxMecha_FallToReturnPaletteGate",
+      "profiles": ["sk"],
+      "meaning": "Fall under light gravity before return palette phase."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 13,
+      "old": "loc_7C66C",
+      "new": "SSZSuperMecha_BeginReturnPaletteScript",
+      "profiles": ["sk"],
+      "meaning": "Select upward-return state and install its palette rotation script."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 29,
+      "old": "loc_7C684",
+      "new": "SSZKnuxMecha_RunPaletteAndUpdateDamage",
+      "profiles": ["sk"],
+      "meaning": "Run return palette script and update phase damage flag."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 36,
+      "old": "loc_7C6A0",
+      "new": "SSZKnuxMecha_LimitUpwardAcceleration",
+      "profiles": ["sk"],
+      "meaning": "Accelerate Mecha upward with the original signed limit test."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 43,
+      "old": "loc_7C6B2",
+      "new": "SSZSuperMecha_MoveAndTestReturnHeight",
+      "profiles": ["sk"],
+      "meaning": "Move Mecha and test stored hover height."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 51,
+      "old": "loc_7C6C4",
+      "new": "SSZSuperMecha_ClampHeightAndResumeHover",
+      "profiles": ["sk"],
+      "meaning": "Clamp returning Mecha to saved height and resume hover."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 64,
+      "old": "loc_7C6F0",
+      "new": "SSZKnuxMecha_AnimateAndEmitRadialBurst",
+      "profiles": ["sk"],
+      "meaning": "Run callback attack animation and emit radial burst at cursor8."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 76,
+      "old": "loc_7C718",
+      "new": "SSZKnuxMecha_ResumeHoverAfterBurst",
+      "profiles": ["sk"],
+      "meaning": "Raw callback resuming timed hover after burst animation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 82,
+      "old": "loc_7C726",
+      "new": "SSZSuperMechaRadialProjectile_Initialize",
+      "profiles": ["sk"],
+      "meaning": "Initialize an eight-way Super Mecha projectile."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 88,
+      "old": "loc_7C738",
+      "new": "SSZKnuxMecha_RadialShotMoveAndCull",
+      "profiles": ["sk"],
+      "meaning": "Move radial projectile without gravity and handle touch/offscreen."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 93,
+      "old": "loc_7C744",
+      "new": "SSZKnuxMecha_InitLaserAnimAndCallback",
+      "profiles": ["sk"],
+      "meaning": "Initialize attached Mecha laser preparation actor."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 99,
+      "old": "loc_7C756",
+      "new": "SSZKnuxMecha_LaserChargeFollowAndTouch",
+      "profiles": ["sk"],
+      "meaning": "Animate attached Mecha laser with parent-relative collision draw."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 105,
+      "old": "loc_7C764",
+      "new": "SSZMechaLaser_LaunchTowardPlayer",
+      "profiles": ["sk"],
+      "meaning": "Completion callback launches Mecha laser toward Player1."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 113,
+      "old": "loc_7C77A",
+      "new": "SSZKnuxMecha_LaserAnimateFlightAndCull",
+      "profiles": ["sk"],
+      "meaning": "Animate and move launched laser."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 120,
+      "old": "loc_7C78E",
+      "new": "SSZMechaActiveEffect_Initialize",
+      "profiles": ["sk"],
+      "meaning": "Initialize parent-following active phase effect."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 125,
+      "old": "loc_7C79C",
+      "new": "SSZKnuxMecha_ActiveEffectFollowAndEmit",
+      "profiles": ["sk"],
+      "meaning": "Animate active phase effect and attempt particles at parent frame12hex."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 140,
+      "old": "loc_7C7D4",
+      "new": "SSZKnuxMecha_InitRandomActiveParticle",
+      "profiles": ["sk"],
+      "meaning": "Initialize short-lived phase particle with random XY jitter."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 154,
+      "old": "loc_7C80A",
+      "new": "SSZKnuxMecha_ActiveParticleAnimate",
+      "profiles": ["sk"],
+      "meaning": "Animate phase particle through its raw delete callback."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 160,
+      "old": "loc_7C818",
+      "new": "SSZKnuxMecha_InitEmeraldAndPalette",
+      "profiles": ["sk"],
+      "meaning": "Initialize Master Emerald beside the Mecha boss scene."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 174,
+      "old": "loc_7C846",
+      "new": "SSZKnuxMecha_EmeraldCheckCollected",
+      "profiles": ["sk"],
+      "meaning": "Check seven collected-emerald status bytes for value3."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 180,
+      "old": "locret_7C854",
+      "new": "SSZKnuxMecha_EmeraldPaletteInitReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from Master Emerald palette eligibility check."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 184,
+      "old": "loc_7C856",
+      "new": "SSZKnuxMecha_EmeraldCycleAndUpdateFrame",
+      "profiles": ["sk"],
+      "meaning": "Cycle Master Emerald colors then use shared frame/lifetime updater."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 189,
+      "old": "loc_7C864",
+      "new": "SSZKnuxMecha_EmeraldSetFrameFromScene",
+      "profiles": ["sk"],
+      "meaning": "Select Master Emerald frame from global Mecha scene bit."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 195,
+      "old": "loc_7C878",
+      "new": "SSZKnuxMecha_EmeraldDrawOrDelete",
+      "profiles": ["sk"],
+      "meaning": "Draw Master Emerald until scene exit byte is nonzero."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 201,
+      "old": "loc_7C886",
+      "new": "SSZKnuxMecha_InitSignalCoordMode",
+      "profiles": ["sk"],
+      "meaning": "Initialize Mecha child effect that releases parent wait flag."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 209,
+      "old": "loc_7C8A0",
+      "new": "SSZKnuxMecha_SignalSetAnimAndCallback",
+      "profiles": ["sk"],
+      "meaning": "Install raw signal animation and parent-release callback."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 215,
+      "old": "loc_7C8BA",
+      "new": "SSZMechaSignalEffect_AnimateAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Run signal child frame-delay raw animation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 220,
+      "old": "loc_7C8C4",
+      "new": "SSZKnuxMecha_SignalClearParentWait",
+      "profiles": ["sk"],
+      "meaning": "Raw callback clears parent wait bit6 and begins pose-bound following."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 227,
+      "old": "loc_7C8D6",
+      "new": "SSZKnuxMecha_SignalFollowOnFrame14",
+      "profiles": ["sk"],
+      "meaning": "Keep signal effect attached only while parent frame isEhex."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 237,
+      "old": "loc_7C8F8",
+      "new": "SSZMechaChildren_DeleteCurrent",
+      "profiles": ["sk"],
+      "meaning": "Shared immediate deletion tail for Mecha phase children and sparks."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 241,
+      "old": "loc_7C8FE",
+      "new": "SSZKnuxMecha_InitSecondRollTrail",
+      "profiles": ["sk"],
+      "meaning": "Initialize alternate pair of Mecha rolling trail entries."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 244,
+      "old": "loc_7C902",
+      "new": "SSZMechaRollingTrail_Initialize",
+      "profiles": ["sk"],
+      "meaning": "Initialize Mecha rolling trail with subtype-selected placement/priority."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 252,
+      "old": "loc_7C91C",
+      "new": "SSZKnuxMecha_RollTrailFollowAndAnimate",
+      "profiles": ["sk"],
+      "meaning": "Animate rolling trail while parent remains in rolling phase."
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "original_line": 264,
+      "old": "loc_7C942",
+      "new": "SSZKnuxMecha_DeleteRollTrail",
+      "profiles": ["sk"],
+      "meaning": "Delete rolling trail after parent death or rolling flag ends."
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "tokens": [
+        [534, 2, 158, ""],
+        [642, 1, 1, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "tokens": [
+        [13, 1, 0, ""],
+        [14, 1, 0, ""],
+        [15, 1, 3, ""],
+        [16, 1, 5, ""],
+        [17, 1, 9, ""],
+        [18, 1, 16, ""],
+        [19, 1, 18, ""],
+        [20, 1, 21, ""],
+        [21, 1, 30, ""],
+        [22, 1, 35, ""],
+        [23, 1, 37, ""],
+        [24, 1, 35, ""],
+        [25, 1, 40, ""],
+        [26, 1, 43, ""],
+        [27, 1, 45, ""],
+        [28, 1, 37, ""],
+        [29, 1, 48, ""],
+        [30, 1, 50, ""],
+        [31, 1, 52, ""],
+        [32, 1, 54, ""],
+        [33, 1, 56, ""],
+        [34, 1, 59, ""],
+        [35, 1, 59, ""],
+        [36, 1, 62, ""],
+        [37, 1, 64, ""],
+        [38, 1, 66, ""],
+        [39, 1, 69, ""],
+        [40, 1, 72, ""],
+        [41, 1, 74, ""],
+        [42, 1, 77, ""],
+        [43, 1, 79, ""],
+        [44, 1, 85, ""],
+        [45, 1, 87, ""],
+        [46, 1, 140, ""],
+        [47, 1, 142, ""],
+        [48, 1, 146, ""],
+        [49, 0, 0, ""],
+        [55, 0, 1, ""],
+        [58, 2, 2, ""],
+        [61, 0, 2, ""],
+        [67, 0, 3, ""],
+        [72, 1, 4, ""],
+        [74, 0, 4, ""],
+        [77, 2, 6, ""],
+        [80, 0, 5, ""],
+        [83, 0, 6, ""],
+        [90, 2, 10, ""],
+        [94, 0, 7, ""],
+        [96, 3, 7, ""],
+        [98, 1, 8, ""],
+        [100, 0, 8, ""],
+        [104, 0, 9, ""],
+        [107, 0, 10, ""],
+        [109, 1, 15, ""],
+        [110, 0, 11, ""],
+        [115, 1, 12, ""],
+        [118, 0, 12, ""],
+        [120, 0, 13, ""],
+        [126, 1, 14, ""],
+        [128, 0, 14, ""],
+        [135, 0, 15, ""],
+        [140, 1, 58, ""],
+        [141, 0, 16, ""],
+        [148, 1, 17, ""],
+        [150, 1, 17, ""],
+        [152, 0, 17, ""],
+        [155, 0, 18, ""],
+        [159, 1, 19, ""],
+        [163, 1, 20, ""],
+        [165, 0, 19, ""],
+        [169, 1, 20, ""],
+        [171, 0, 20, ""],
+        [176, 0, 21, ""],
+        [184, 1, 22, ""],
+        [186, 1, 23, ""],
+        [188, 0, 22, ""],
+        [190, 1, 23, ""],
+        [192, 0, 23, ""],
+        [196, 1, 25, ""],
+        [202, 1, 26, ""],
+        [203, 0, 24, ""],
+        [204, 2, 11, ""],
+        [206, 0, 25, ""],
+        [208, 2, 31, ""],
+        [210, 0, 26, ""],
+        [215, 1, 27, ""],
+        [217, 0, 27, ""],
+        [219, 1, 24, ""],
+        [221, 2, 13, ""],
+        [222, 1, 28, ""],
+        [224, 1, 29, ""],
+        [227, 0, 28, ""],
+        [230, 0, 29, ""],
+        [233, 0, 30, ""],
+        [236, 0, 31, ""],
+        [238, 1, 32, ""],
+        [241, 2, 36, ""],
+        [254, 0, 32, ""],
+        [257, 1, 34, ""],
+        [264, 1, 33, ""],
+        [266, 0, 33, ""],
+        [275, 0, 34, ""],
+        [281, 0, 35, ""],
+        [285, 0, 36, ""],
+        [288, 2, 38, ""],
+        [290, 0, 37, ""],
+        [295, 0, 38, ""],
+        [298, 2, 39, ""],
+        [302, 0, 39, ""],
+        [307, 0, 40, ""],
+        [313, 1, 41, ""],
+        [315, 0, 41, ""],
+        [317, 2, 44, ""],
+        [321, 1, 42, ""],
+        [323, 0, 42, ""],
+        [326, 0, 43, ""],
+        [329, 0, 44, ""],
+        [332, 1, 11, ""],
+        [333, 0, 45, ""],
+        [342, 1, 46, ""],
+        [345, 2, 47, ""],
+        [346, 0, 46, ""],
+        [348, 0, 47, ""],
+        [351, 2, 49, ""],
+        [355, 0, 48, ""],
+        [363, 0, 49, ""],
+        [370, 2, 51, ""],
+        [375, 0, 50, ""],
+        [381, 0, 51, ""],
+        [384, 2, 53, ""],
+        [387, 0, 52, ""],
+        [390, 0, 53, ""],
+        [396, 0, 54, ""],
+        [402, 1, 55, ""],
+        [404, 0, 55, ""],
+        [406, 1, 44, ""],
+        [407, 0, 56, ""],
+        [413, 1, 57, ""],
+        [415, 0, 57, ""],
+        [417, 0, 58, ""],
+        [425, 2, 60, ""],
+        [427, 0, 59, ""],
+        [434, 0, 60, ""],
+        [442, 2, 61, ""],
+        [444, 0, 61, ""],
+        [447, 2, 63, ""],
+        [453, 0, 62, ""],
+        [458, 0, 63, ""],
+        [460, 2, 65, ""],
+        [465, 0, 64, ""],
+        [467, 0, 65, ""],
+        [471, 2, 67, ""],
+        [474, 0, 66, ""],
+        [478, 0, 67, ""],
+        [486, 1, 68, ""],
+        [489, 0, 68, ""],
+        [493, 0, 69, ""],
+        [498, 1, 70, ""],
+        [500, 1, 71, ""],
+        [502, 0, 70, ""],
+        [504, 1, 71, ""],
+        [506, 0, 71, ""],
+        [513, 0, 72, ""],
+        [518, 1, 73, ""],
+        [520, 0, 73, ""],
+        [523, 2, 75, ""],
+        [528, 0, 74, ""],
+        [530, 0, 75, ""],
+        [534, 2, 78, ""],
+        [536, 1, 76, ""],
+        [539, 0, 76, ""],
+        [543, 0, 77, ""],
+        [549, 0, 78, ""],
+        [551, 2, 1, ""],
+        [557, 0, 79, ""],
+        [560, 1, 84, ""],
+        [562, 1, 82, ""],
+        [567, 1, 80, ""],
+        [570, 0, 80, ""],
+        [572, 1, 81, ""],
+        [575, 0, 81, ""],
+        [577, 2, 86, ""],
+        [580, 0, 82, ""],
+        [585, 1, 83, ""],
+        [587, 0, 83, ""],
+        [589, 2, 88, ""],
+        [592, 0, 84, ""],
+        [594, 2, 147, ""],
+        [597, 0, 85, ""],
+        [602, 0, 86, ""],
+        [605, 0, 87, ""],
+        [607, 0, 88, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "tokens": [
+        [2, 2, 89, ""],
+        [9, 0, 89, ""],
+        [13, 2, 91, ""],
+        [19, 1, 90, ""],
+        [22, 0, 90, ""],
+        [33, 0, 91, ""],
+        [37, 1, 92, ""],
+        [38, 2, 93, ""],
+        [41, 0, 92, ""],
+        [43, 0, 93, ""],
+        [45, 1, 94, ""],
+        [46, 2, 94, ""],
+        [48, 0, 94, ""],
+        [50, 1, 95, ""],
+        [51, 2, 95, ""],
+        [53, 0, 95, ""],
+        [55, 1, 96, ""],
+        [56, 2, 97, ""],
+        [60, 0, 96, ""],
+        [64, 0, 97, ""],
+        [68, 1, 98, ""],
+        [69, 2, 99, ""],
+        [73, 1, 98, ""],
+        [76, 0, 98, ""],
+        [78, 0, 99, ""],
+        [80, 1, 102, ""],
+        [81, 2, 103, ""],
+        [84, 1, 100, ""],
+        [86, 0, 100, ""],
+        [88, 1, 101, ""],
+        [90, 0, 101, ""],
+        [92, 0, 102, ""],
+        [96, 0, 103, ""],
+        [98, 1, 107, ""],
+        [100, 1, 105, ""],
+        [101, 2, 105, ""],
+        [103, 1, 104, ""],
+        [104, 2, 110, ""],
+        [105, 0, 104, ""],
+        [107, 0, 105, ""],
+        [111, 1, 108, ""],
+        [113, 1, 106, ""],
+        [117, 2, 109, ""],
+        [120, 0, 106, ""],
+        [122, 0, 107, ""],
+        [124, 0, 108, ""],
+        [126, 0, 109, ""],
+        [131, 0, 110, ""],
+        [132, 2, 111, ""],
+        [140, 0, 111, ""],
+        [148, 2, 112, ""],
+        [155, 0, 112, ""],
+        [157, 1, 113, ""],
+        [161, 0, 113, ""],
+        [174, 0, 114, ""],
+        [178, 2, 115, ""],
+        [181, 0, 115, ""],
+        [183, 1, 116, ""],
+        [186, 0, 116, ""],
+        [187, 2, 117, ""],
+        [189, 0, 117, ""],
+        [194, 1, 118, ""],
+        [203, 0, 118, ""],
+        [204, 2, 119, ""],
+        [206, 0, 119, ""],
+        [216, 1, 120, ""],
+        [218, 0, 120, ""],
+        [221, 1, 121, ""],
+        [223, 0, 121, ""],
+        [227, 1, 122, ""],
+        [231, 1, 123, ""],
+        [234, 1, 123, ""],
+        [235, 0, 122, ""],
+        [236, 2, 124, ""],
+        [248, 0, 123, ""],
+        [251, 0, 124, ""],
+        [254, 1, 125, ""],
+        [255, 2, 126, ""],
+        [258, 0, 125, ""],
+        [263, 0, 126, ""],
+        [266, 1, 127, ""],
+        [272, 0, 127, ""],
+        [274, 0, 128, ""],
+        [284, 0, 129, ""],
+        [287, 2, 132, ""],
+        [290, 1, 131, ""],
+        [295, 1, 130, ""],
+        [298, 0, 130, ""],
+        [310, 0, 131, ""],
+        [328, 0, 132, ""],
+        [330, 1, 133, ""],
+        [332, 0, 133, ""],
+        [334, 0, 134, ""],
+        [337, 1, 136, ""],
+        [346, 1, 135, ""],
+        [348, 0, 135, ""],
+        [350, 0, 136, ""],
+        [351, 2, 139, ""],
+        [355, 1, 137, ""],
+        [357, 0, 137, ""],
+        [361, 1, 138, ""],
+        [363, 0, 138, ""],
+        [365, 0, 139, ""],
+        [373, 1, 169, ""],
+        [376, 1, 169, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "tokens": [
+        [1, 0, 140, ""],
+        [4, 1, 141, ""],
+        [6, 0, 141, ""],
+        [15, 0, 142, ""],
+        [19, 1, 143, ""],
+        [21, 0, 143, ""],
+        [25, 1, 144, ""],
+        [27, 0, 144, ""],
+        [31, 1, 145, ""],
+        [33, 0, 145, ""],
+        [44, 0, 146, ""],
+        [54, 0, 147, ""],
+        [58, 0, 148, ""],
+        [61, 2, 149, ""],
+        [63, 0, 149, ""],
+        [66, 0, 150, ""],
+        [69, 2, 151, ""],
+        [71, 0, 151, ""],
+        [75, 0, 152, ""],
+        [76, 2, 153, ""],
+        [81, 0, 153, ""],
+        [86, 0, 154, ""],
+        [89, 2, 155, ""],
+        [90, 0, 155, ""],
+        [96, 1, 169, ""],
+        [103, 0, 156, ""],
+        [106, 2, 157, ""],
+        [116, 0, 157, ""],
+        [120, 0, 158, ""],
+        [129, 2, 162, ""],
+        [133, 0, 159, ""],
+        [135, 1, 160, ""],
+        [136, 3, 159, ""],
+        [137, 2, 161, ""],
+        [138, 0, 160, ""],
+        [140, 0, 161, ""],
+        [144, 0, 162, ""],
+        [147, 1, 163, ""],
+        [149, 0, 163, ""],
+        [151, 1, 169, ""],
+        [153, 0, 164, ""],
+        [158, 1, 165, ""],
+        [160, 0, 165, ""],
+        [161, 2, 166, ""],
+        [163, 2, 167, ""],
+        [165, 0, 166, ""],
+        [168, 0, 167, ""],
+        [169, 2, 168, ""],
+        [173, 0, 168, ""],
+        [179, 1, 169, ""],
+        [181, 0, 169, ""],
+        [183, 0, 170, ""],
+        [185, 0, 171, ""],
+        [188, 2, 172, ""],
+        [192, 0, 172, ""],
+        [198, 1, 173, ""],
+        [200, 1, 173, ""],
+        [202, 0, 173, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "tokens": [[31, 1, 152, ""]]
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "tokens": [
+        [64, 1, 171, ""],
+        [67, 1, 171, ""],
+        [70, 1, 170, ""],
+        [76, 1, 164, ""],
+        [80, 1, 154, ""],
+        [84, 1, 156, ""],
+        [87, 1, 148, ""],
+        [90, 1, 150, ""],
+        [93, 1, 158, ""],
+        [96, 1, 114, ""],
+        [100, 1, 128, ""],
+        [103, 1, 129, ""],
+        [106, 1, 134, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/sparks_and_camera.s",
+      "tokens": [[11, 1, 169, ""]]
+    }
+  ]
+}

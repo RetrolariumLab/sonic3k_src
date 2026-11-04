@@ -47,7 +47,7 @@ SSZMechaLaser_SelectAnimAndCallback:
 ; ---------------------------------------------------------------------------
 SSZMecha_LaserScriptsAndCallbacks:
                 dc.l    SSZMecha_AimedLaserPrepAnim
-                dc.l    loc_7C764
+                dc.l    SSZMechaLaser_LaunchTowardPlayer
                 dc.l    SSZMecha_StationaryLaserDeleteAnim
                 dc.l    Go_Delete_Sprite
 

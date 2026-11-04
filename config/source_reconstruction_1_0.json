@@ -1233,9 +1233,15 @@
       "commits": ["75fe1695635cb2bf1a7428349c0198bce13510b1"]
     },
     {
-      "id": "current-shorten-48-boss-ssz-mecha",
+      "id": "change-62ddd28eb722",
       "kind": "source_or_tooling",
       "summary": "Apply 235 reviewed short labels for boss ssz mecha.",
+      "commits": ["62ddd28eb722143536358ec9d9206c59aee54d51"]
+    },
+    {
+      "id": "current-shorten-49-boss-ssz-knuckles",
+      "kind": "source_or_tooling",
+      "summary": "Apply 136 reviewed short labels for boss ssz knuckles.",
       "commits": ["release-commit"]
     }
   ],

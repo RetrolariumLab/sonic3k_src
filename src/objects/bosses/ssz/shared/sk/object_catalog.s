@@ -64,49 +64,49 @@ SSZMechaCollisionProxy_SimpleChildRecord:
                 dc.l    SSZMechaCollisionProxy_Initialize
 SSZMecha_RollTrailFirstPairChildren:
                 dc.w    1
-                dc.l    loc_7C902
+                dc.l    SSZMechaRollingTrail_Initialize
 SSZMecha_RollTrailSingleChild:
                 dc.w    1-1
-                dc.l    loc_7C902
+                dc.l    SSZMechaRollingTrail_Initialize
 SSZMecha_RollTrailSecondPairChildren:
                 dc.w    2-1
-                dc.l    loc_7C8FE
+                dc.l    SSZKnuxMecha_InitSecondRollTrail
 SSZMechaSparks_SimpleChildRecord:
                 dc.w    1-1
                 dc.l    Obj_MechaSonic_Sparks
 SSZMechaSignalEffect_NormalChildRecord:
                 dc.w    1-1
-                dc.l    loc_7C886
+                dc.l    SSZKnuxMecha_InitSignalCoordMode
                 dc.b    -4,  $C
 SSZMechaActiveEffect_NormalChildRecord:
                 dc.w    1-1
-                dc.l    loc_7C78E
+                dc.l    SSZMechaActiveEffect_Initialize
                 dc.b    $14,  -4
 SSZMechaActiveParticle_SimpleChildRecord:
                 dc.w    1-1
-                dc.l    loc_7C7D4
+                dc.l    SSZKnuxMecha_InitRandomActiveParticle
 SSZMecha_RadialBurstChild:
                 dc.w    8-1
-                dc.l    loc_7C726
+                dc.l    SSZSuperMechaRadialProjectile_Initialize
 SSZMechaLaser_NormalChildRecord:
                 dc.w    1-1
-                dc.l    loc_7C744
+                dc.l    SSZKnuxMecha_InitLaserAnimAndCallback
                 dc.b    -7,  -8
                 dc.w    1-1
-                dc.l    loc_7C818
+                dc.l    SSZKnuxMecha_InitEmeraldAndPalette
 SSZCraneGrabber_NormalChildRecord:
                 dc.w    1-1
-                dc.l    loc_7CCFE
+                dc.l    SSZCrane_InitClawAndDetails
                 dc.b    0, $23
 SSZCraneShipFragments_SimpleChildRecord:
                 dc.w    4-1
-                dc.l    loc_7CE6C
+                dc.l    SSZCrane_InitShipDebris
 SSZMecha_DefeatFragmentChild:
                 dc.w    $10-1
-                dc.l    loc_7CE90
+                dc.l    SSZCrane_InitFinalDebris
 SSZMecha_FinalExplosionEmitterChild:
                 dc.w    3-1
-                dc.l    loc_7CF14
+                dc.l    SSZCrane_InitFinalExplosionEmitter
 DPLCPtr_MechaSonic:
                 dc.l    ArtUnc_MechaSonic
                 dc.l    DPLC_MechaSonic

@@ -501,19 +501,19 @@
     },
     {
       "path": "src/objects/bosses/ssz/end_boss/sk/battle.s",
-      "sha256": "51970d9b50ab2d4fcce6d31da48f97f28257e6b649903369f946d31a83091381"
+      "sha256": "c679d34df9f1ba40bc301365cbb62033fb3727d643d35e50108739566b647d0e"
     },
     {
       "path": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
-      "sha256": "3ac1e41b57d9929a0b4156a51fc19d9144faed59b0635a5c5fade01bd02f57ba"
+      "sha256": "9fb4ebdfed6d1f46a8fba73baf8337d405f9583eb32e54ec2b9ca9b90cddce6f"
     },
     {
       "path": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
-      "sha256": "a3cf0afd29e51a7a3de2e8ab2953cd806f5ded5858a5ba9e2eb23c0b81ceebeb"
+      "sha256": "f3f965c11b405675bf4182084d0787344ec7a4a6ac4f0b6de1cf809177f07429"
     },
     {
       "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
-      "sha256": "464c75e0958758717d9a7f0a3368d00765b76f6f53c9e7bf7ef0b38798c64b13"
+      "sha256": "9a8fc760fceb710dc2e9028d718bf2f6e37b376622552503b831620a90479281"
     },
     {
       "path": "src/objects/cutscenes/hpz/sk/aftermath.s",

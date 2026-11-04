@@ -34,11 +34,11 @@
   "consumer_sources": [
     {
       "path": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
-      "sha256": "a3cf0afd29e51a7a3de2e8ab2953cd806f5ded5858a5ba9e2eb23c0b81ceebeb"
+      "sha256": "f3f965c11b405675bf4182084d0787344ec7a4a6ac4f0b6de1cf809177f07429"
     },
     {
       "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
-      "sha256": "464c75e0958758717d9a7f0a3368d00765b76f6f53c9e7bf7ef0b38798c64b13"
+      "sha256": "9a8fc760fceb710dc2e9028d718bf2f6e37b376622552503b831620a90479281"
     },
     {
       "path": "src/objects/ending/sk/master_emerald.s",
@@ -68,7 +68,7 @@
   "consumer_bindings": [
     {
       "path": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
-      "call_line": 187,
+      "call_line": 188,
       "header": "SSZMasterEmeraldColorCycle_IndexedScript",
       "destinations": [
         {

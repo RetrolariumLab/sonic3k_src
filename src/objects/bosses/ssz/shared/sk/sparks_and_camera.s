@@ -14,7 +14,7 @@ Obj_MechaSonic_Sparks:
 SSZMechaSparks_WaitForPaletteTrigger:
                 movea.w parent3(a0),a1
                 btst    #6,$38(a1)
-                bne.w   loc_7C8F8
+                bne.w   SSZMechaChildren_DeleteCurrent
                 cmpi.w  #$E88,(Normal_palette_line_2+$12).w
                 bne.w   SSZMechaBattleAndChildren_SharedReturn
                 moveq   #signextendB(sfx_MechaSpark),d0

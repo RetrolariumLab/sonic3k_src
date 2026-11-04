@@ -665,7 +665,7 @@ SSZMecha_BeginDashAndOpenCamera:
                 clr.w   y_vel(a0)
                 jsr     (AllocateObject).l
                 bne.s   SSZMecha_TryCameraAdvanceActor
-                move.l  #loc_7C818,(a1)
+                move.l  #SSZKnuxMecha_InitEmeraldAndPalette,(a1)
                 move.w  a1,$44(a0)
 
 SSZMecha_TryCameraAdvanceActor:
@@ -797,7 +797,7 @@ SSZMecha_ForceApproachAndStartBattle:
                 move.l  #Obj_SSZ2_Boss,(a0)
                 move.b  #8,collision_property(a0)
                 move.b  #$23,collision_flags(a0)
-                bra.w   loc_7BDD8
+                bra.w   SSZKnucklesMecha_BeginRisePreparation
 ; ---------------------------------------------------------------------------
 
 SSZMechaFinalDefeat_HoldAndDraw:

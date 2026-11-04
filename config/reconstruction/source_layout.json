@@ -19755,7 +19755,7 @@
       "responsibility": "Knuckles Sky Sanctuary Mecha Sonic battle controller, super phase, attacks and coordinated progression.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 776,
+      "physical_lines": 777,
       "origin": {
         "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
         "path": "sonic3k.s",
@@ -19790,7 +19790,7 @@
       "responsibility": "Knuckles final-boss crane actor, linked children, platform interaction and scene motion.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 458,
+      "physical_lines": 459,
       "origin": {
         "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
         "path": "sonic3k.s",
@@ -19820,7 +19820,7 @@
       "responsibility": "Knuckles Mecha Sonic phase transitions, child motion and private movement or response helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 265,
+      "physical_lines": 266,
       "origin": {
         "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
         "path": "sonic3k.s",
