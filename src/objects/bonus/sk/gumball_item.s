@@ -4,59 +4,60 @@
 ; ---------------------------------------------------------------------------
 
 Obj_GumballItem:
-                move.l  #loc_4A312,(a0)
+                move.l  #PachinkoGumball_ConsumeContactsAndDraw,(a0)
 
-loc_4A2CC:
+PachinkoGumball_InitSubtypeMapping:
                 move.l  #Map_PachinkoFItem,mappings(a0)
                 move.w  #make_art_tile(ArtTile_PachinkoMain+$AB,3,0),art_tile(a0)
                 move.b  subtype(a0),d0
-                beq.s   loc_4A2F4
+                beq.s   PachinkoGumball_SetStationaryContact
                 move.l  #Map_GumballBonus,mappings(a0)
                 move.w  #make_art_tile(ArtTile_PachinkoGumballs,0,0),art_tile(a0)
                 addq.b  #7,d0
                 move.b  d0,mapping_frame(a0)
 
-loc_4A2F4:
+PachinkoGumball_SetStationaryContact:
                 ori.b   #4,render_flags(a0)
                 move.b  #$10,width_pixels(a0)
                 move.b  #$10,height_pixels(a0)
                 move.w  #$200,priority(a0)
                 move.b  #$D7,collision_flags(a0)
 
-loc_4A312:
+; A scheduled deletion does not skip the current cull and draw path
+PachinkoGumball_ConsumeContactsAndDraw:
                 tst.b   collision_property(a0)
-                beq.s   loc_4A31A
+                beq.s   PachinkoGumball_CullBeforeContactDraw
                 bsr.s   PachinkoGumball_ConsumeBothContacts
 
-loc_4A31A:
+PachinkoGumball_CullBeforeContactDraw:
                 move.w  y_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_Y_pos_coarse_back).w,d0
                 cmpi.w  #$200,d0
-                bhi.w   loc_4A33A
+                bhi.w   PachinkoGumball_ReleaseRespawnOnCull
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_4A33A:
+PachinkoGumball_ReleaseRespawnOnCull:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_4A346
+                beq.s   PachinkoGumball_DeleteAfterCull
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_4A346:
+PachinkoGumball_DeleteAfterCull:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_4A34C:
+PachinkoGumball_ConsumeBeforeMove:
                 tst.b   collision_property(a0)
-                beq.s   loc_4A354
+                beq.s   PachinkoGumball_MoveThenAccelerateUp
                 bsr.s   PachinkoGumball_ConsumeBothContacts
 
-loc_4A354:
+PachinkoGumball_MoveThenAccelerateUp:
                 jsr     (MoveSprite2).l
                 subi.w  #4,y_vel(a0)
-                bra.s   loc_4A31A
+                bra.s   PachinkoGumball_CullBeforeContactDraw
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -64,16 +65,16 @@ loc_4A354:
 PachinkoGumball_ConsumeBothContacts:
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
-                beq.s   loc_4A370
+                beq.s   PachinkoGumball_CheckSecondContact
                 bsr.s   PachinkoGumball_DeleteAndApplyReward
 
-loc_4A370:
+PachinkoGumball_CheckSecondContact:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
-                beq.s   loc_4A37E
+                beq.s   PachinkoGumball_ClearContactBits
                 bsr.s   PachinkoGumball_DeleteAndApplyReward
 
-loc_4A37E:
+PachinkoGumball_ClearContactBits:
                 clr.b   collision_property(a0)
                 rts
 ; End of function PachinkoGumball_ConsumeBothContacts
@@ -87,23 +88,23 @@ PachinkoGumball_DeleteAndApplyReward:
                 moveq   #1,d2
                 move.b  subtype(a0),d1
                 cmpi.b  #3,d1
-                beq.s   loc_4A3B6
+                beq.s   PachinkoGumball_AwardRingsByYBand
                 cmpi.b  #2,d1
-                beq.s   loc_4A3AC
+                beq.s   PachinkoGumball_PlayBumperForType0Or2
                 subq.w  #1,d1
-                bcs.s   loc_4A3AC
+                bcs.s   PachinkoGumball_PlayBumperForType0Or2
                 moveq   #0,d0
                 move.w  a1,d0
                 jmp     (SKGumball_DispatchRewardType).l
 ; ---------------------------------------------------------------------------
 
-loc_4A3AC:
+PachinkoGumball_PlayBumperForType0Or2:
                 moveq   #signextendB(sfx_SmallBumpers),d0
                 jsr     (Play_SFX).l
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4A3B6:
+PachinkoGumball_AwardRingsByYBand:
                 move.b  y_pos(a0),d0
                 andi.w  #$F,d0
                 lea     (SKPachinko_HighYBandRingAwardBytes).l,a1

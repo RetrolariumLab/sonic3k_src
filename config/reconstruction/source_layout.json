@@ -4013,7 +4013,7 @@
       "responsibility": "Rotating slot bonus layout rendering, transformed tile lookup, collision and private mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 498,
+      "physical_lines": 499,
       "origin": {
         "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
         "path": "sonic3k.s",
@@ -4043,7 +4043,7 @@
       "responsibility": "Rotating slot bonus Sonic lifecycle, movement, collision, gravity and cage sprite resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 903,
+      "physical_lines": 906,
       "origin": {
         "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
         "path": "sonic3k.s",
@@ -4078,7 +4078,7 @@
       "responsibility": "Rotating slot option cycling, outcome state, player awards, effects and shared helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 619,
+      "physical_lines": 620,
       "origin": {
         "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
         "path": "sonic3k.s",
@@ -9568,7 +9568,7 @@
       "responsibility": "Rotating slot bonus screen setup, progression events and background control.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 259,
+      "physical_lines": 260,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -13970,7 +13970,7 @@
       "responsibility": "Gumball triangle bumpers, player collision, bounce response and shared bonus resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 565,
+      "physical_lines": 567,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "s3.s",
@@ -14010,7 +14010,7 @@
       "responsibility": "Gumball bonus machine state, dispensers, item creation and sprite motion.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 239,
+      "physical_lines": 241,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "s3.s",
@@ -14095,7 +14095,7 @@
       "responsibility": "Gumball item collection, effect selection, player response and sprite resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 117,
+      "physical_lines": 118,
       "origin": {
         "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
         "path": "sonic3k.s",

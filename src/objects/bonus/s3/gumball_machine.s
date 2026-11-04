@@ -7,7 +7,7 @@
 Obj_GumballMachine:
                 lea     ObjDat_GumballMachine(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_43892,(a0)
+                move.l  #S3Gumball_DescendAndCheckActivation,(a0)
                 move.w  a0,(_unkFAA4).w
                 subi.w  #$100,y_pos(a0)
                 move.w  y_pos(a0),$3A(a0)
@@ -22,105 +22,105 @@ Obj_GumballMachine:
                 moveq   #-1,d0
                 moveq   #bytesToLcnt($24),d1
 
-loc_43882:
+S3Gumball_InitBumpersAndPlatformGate:
                 move.l  d0,(a1)+
-                dbf     d1,loc_43882
-                lea     ChildObjDat_43FC4(pc),a2
+                dbf     d1,S3Gumball_InitBumpersAndPlatformGate
+                lea     S3Gumball_MachineChildRecords(pc),a2
                 jsr     (CreateChild1_Normal).l
 
-loc_43892:
+S3Gumball_DescendAndCheckActivation:
                 bsr.w   S3GumballMachine_UpdateDescent
-                lea     word_438F0(pc),a1
+                lea     S3Gumball_MachineActivationBounds(pc),a1
                 jsr     (Check_PlayerInRange).l
                 tst.w   d0
-                bne.s   loc_438AA
+                bne.s   S3Gumball_LatchActivationAndSelectFlip
                 swap    d0
                 tst.w   d0
-                beq.s   loc_438EA
+                beq.s   S3Gumball_DrawIdleMachine
 
-loc_438AA:
-                move.l  #loc_438F8,(a0)
-                move.l  #loc_4390C,$34(a0)
+S3Gumball_LatchActivationAndSelectFlip:
+                move.l  #S3Gumball_AnimateActivationAndDescend,(a0)
+                move.l  #S3Gumball_SetMechanismActive,$34(a0)
                 bset    #1,$38(a0)
                 movea.w d0,a1
                 move.w  x_pos(a0),d0
                 cmp.w   x_pos(a1),d0
                 scs     d1
                 tst.w   y_vel(a1)
-                bmi.s   loc_438D2
+                bmi.s   S3Gumball_StoreMachineFlip
                 not.b   d1
 
-loc_438D2:
+S3Gumball_StoreMachineFlip:
                 bclr    #0,render_flags(a0)
                 tst.b   d1
-                beq.s   loc_438E2
+                beq.s   S3Gumball_RequestMachineTabSoundAndDraw
                 bset    #0,render_flags(a0)
 
-loc_438E2:
+S3Gumball_RequestMachineTabSoundAndDraw:
                 moveq   #signextendB(sfx_GumballTab),d0
                 jsr     (Play_SFX).l
 
-loc_438EA:
+S3Gumball_DrawIdleMachine:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-word_438F0:
+S3Gumball_MachineActivationBounds:
                 dc.w    -$24,   $48,    -8,   $10
 ; ---------------------------------------------------------------------------
 
-loc_438F8:
+S3Gumball_AnimateActivationAndDescend:
                 bsr.w   S3GumballMachine_UpdateDescent
-                lea     byte_4401C(pc),a1
+                lea     S3Gumball_MachineActivationAnim(pc),a1
                 jsr     (Animate_RawNoSST).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_4390C:
-                move.l  #loc_4391A,(a0)
+S3Gumball_SetMechanismActive:
+                move.l  #S3Gumball_DescendUntilMechanismUnlocks,(a0)
                 bset    #3,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4391A:
+S3Gumball_DescendUntilMechanismUnlocks:
                 bsr.w   S3GumballMachine_UpdateDescent
                 btst    #1,$38(a0)
-                bne.s   loc_4392C
-                move.l  #loc_43892,(a0)
+                bne.s   S3Gumball_DrawActiveMachine
+                move.l  #S3Gumball_DescendAndCheckActivation,(a0)
 
-loc_4392C:
+S3Gumball_DrawActiveMachine:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_43932:
-                lea     ObjDat3_43F64(pc),a1
+S3Gumball_InitPlatformAndFourSprings:
+                lea     S3Gumball_RefillablePlatformAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.w  #$100,x_pos(a0)
                 move.w  #$310,y_pos(a0)
-                lea     word_43FF0(pc),a2
+                lea     S3Gumball_PlatformSpringChildRecords(pc),a2
                 jsr     (CreateChild1_Normal).l
-                move.l  #loc_43958,(a0)
+                move.l  #S3Gumball_CollideAndDrawLivePlatform,(a0)
 
-loc_43958:
+S3Gumball_CollideAndDrawLivePlatform:
                 btst    #1,$38(a0)
-                bne.s   loc_43970
+                bne.s   S3Gumball_SpawnDebrisAndRetirePlatform
                 lea     (SolidObjectFull).l,a1
                 bsr.w   S3GumballPlatform_CallSolidity
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_43970:
+S3Gumball_SpawnDebrisAndRetirePlatform:
                 clr.b   ((RAM_start+$2022)&$FFFFFF).l
-                lea     ChildObjDat_4400A(pc),a2
+                lea     S3Gumball_PlatformDebrisChildRecords(pc),a2
                 jsr     (CreateChild6_Simple).l
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_43986:
-                lea     ObjDat3_43F94(pc),a1
+S3Gumball_InitAndCheckSpringP1:
+                lea     S3Gumball_FiniteUpSpringFullAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.w  #-$1000,$30(a0)
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                bne.s   loc_43A10
+                bne.s   S3Gumball_StartFallingSpringAndFlagRoot
                 move.w  #$1B,d1
                 move.w  #8,d2
                 move.w  #$10,d3
@@ -130,110 +130,112 @@ loc_43986:
                 movem.l d1-d4,-(sp)
                 jsr     (SolidObjectFull2_1P).l
                 btst    #p1_standing_bit,status(a0)
-                beq.s   loc_439D6
+                beq.s   S3Gumball_CheckSpringP2
                 bset    #5,$38(a0)
                 jsr     (LaunchPlayerFromUpSpring).l
 
-loc_439D6:
+S3Gumball_CheckSpringP2:
                 movem.l (sp)+,d1-d4
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 jsr     (SolidObjectFull2_1P).l
                 btst    #p2_standing_bit,status(a0)
-                beq.s   loc_439F4
+                beq.s   S3Gumball_AnimateSpringAndCheckRetire
                 jsr     (LaunchPlayerFromUpSpring).l
 
-loc_439F4:
+; Only the P1 launch sets the latch that can retire the platform
+S3Gumball_AnimateSpringAndCheckRetire:
                 lea     (Ani_Spring).l,a1
                 jsr     (Animate_Sprite).l
                 btst    #5,$38(a0)
-                beq.s   loc_43A20
+                beq.s   S3Gumball_DrawPlatformSpring
                 cmpi.b  #1,prev_anim(a0)
-                bne.s   loc_43A20
+                bne.s   S3Gumball_DrawPlatformSpring
 
-loc_43A10:
+S3Gumball_StartFallingSpringAndFlagRoot:
                 move.l  #MoveChkDel,(a0)
                 movea.w parent3(a0),a1
                 bset    #1,$38(a1)
 
-loc_43A20:
+S3Gumball_DrawPlatformSpring:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_43A26:
-                lea     ObjDat3_43F88(pc),a1
+S3Gumball_InitMechanismBody:
+                lea     S3Gumball_MechanismBodyAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_43A36,(a0)
+                move.l  #S3Gumball_BeginBodyCycleAndTryItem,(a0)
 
-loc_43A36:
+S3Gumball_BeginBodyCycleAndTryItem:
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                beq.s   loc_43A5A
-                move.l  #loc_43A66,(a0)
-                move.l  #loc_43A7C,$34(a0)
-                lea     ChildObjDat_44010(pc),a2
+                beq.s   S3Gumball_FollowRootAndDrawBody
+                move.l  #S3Gumball_AnimateBodyCycleAndDraw,(a0)
+                move.l  #S3Gumball_ResetBodyAndUnlockRoot,$34(a0)
+                lea     S3Gumball_OneSimpleDispensedRewardChild(pc),a2
                 jsr     (CreateChild6_Simple).l
 
-loc_43A5A:
+S3Gumball_FollowRootAndDrawBody:
                 jsr     (Refresh_ChildPosition).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_43A66:
-                lea     byte_44027(pc),a1
+S3Gumball_AnimateBodyCycleAndDraw:
+                lea     S3Gumball_BodyCycleCallbackAnim(pc),a1
                 jsr     (Animate_RawNoSSTMultiDelay).l
                 jsr     (Refresh_ChildPosition).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_43A7C:
-                move.l  #loc_43A36,(a0)
+S3Gumball_ResetBodyAndUnlockRoot:
+                move.l  #S3Gumball_BeginBodyCycleAndTryItem,(a0)
                 movea.w parent3(a0),a1
                 bclr    #1,$38(a1)
                 bclr    #3,$38(a1)
 
-locret_43A92:
+S3Gumball_BodyCallbackReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_43A94:
-                lea     ObjDat3_43FAC(pc),a1
+S3Gumball_InitWeightedRewardItem:
+                lea     S3Gumball_RewardItemAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_43AA8,(a0)
+                move.l  #S3Gumball_IncreaseItemYSpeedTo200,(a0)
                 bsr.w   S3GumballMachine_ChooseDrop
 
-loc_43AA8:
+; Reject the candidate above $200 using an unsigned comparison
+S3Gumball_IncreaseItemYSpeedTo200:
                 move.w  y_vel(a0),d0
                 addi.w  #$10,d0
                 cmpi.w  #$200,d0
-                bhi.s   loc_43ABA
+                bhi.s   S3Gumball_MoveItemAndClampToBodyFloor
                 move.w  d0,y_vel(a0)
 
-loc_43ABA:
+S3Gumball_MoveItemAndClampToBodyFloor:
                 jsr     (MoveSprite2).l
                 movea.w parent3(a0),a1
                 move.w  y_pos(a1),d0
                 cmp.w   y_pos(a0),d0
-                bls.s   loc_43AD6
+                bls.s   S3Gumball_CheckRewardBelowBody
                 move.w  d0,y_pos(a0)
-                bra.w   loc_43AE8
+                bra.w   S3Gumball_CullOrAnimateRewardItem
 ; ---------------------------------------------------------------------------
 
-loc_43AD6:
+S3Gumball_CheckRewardBelowBody:
                 addi.w  #$10,d0
                 cmp.w   y_pos(a0),d0
-                bhi.s   loc_43AE8
+                bhi.s   S3Gumball_CullOrAnimateRewardItem
                 jsr     (S3Gumball_TryRewardNearbyPlayer).l
-                bne.s   loc_43B02
+                bne.s   S3Gumball_DeleteRewardItem
 
-loc_43AE8:
+S3Gumball_CullOrAnimateRewardItem:
                 move.w  (Camera_Y_pos).w,d0
                 addi.w  #$240,d0
                 cmp.w   y_pos(a0),d0
-                blo.s   loc_43B02
+                blo.s   S3Gumball_DeleteRewardItem
                 jsr     (Animate_Raw).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_43B02:
+S3Gumball_DeleteRewardItem:
                 jmp     (Delete_Current_Sprite).l

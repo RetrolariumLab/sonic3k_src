@@ -22,7 +22,7 @@ PachinkoItem_ArmSelectionAfterContact:
 PachinkoItem_AnimateAndCullVertically:
                 lea     (Ani_PachinkoItemOrb).l,a1
                 jsr     (Animate_Sprite).l
-                bra.w   loc_4A31A
+                bra.w   PachinkoGumball_CullBeforeContactDraw
 ; ---------------------------------------------------------------------------
 
 PachinkoItem_SelectRewardWhenQuiet:
@@ -39,15 +39,15 @@ PachinkoItem_SelectRewardWhenQuiet:
                 add.w   d1,d0
                 lea     (SKPachinko_WeightedItemSubtypeBytes).l,a1
                 move.b  (a1,d0.w),subtype(a0)
-                move.l  #loc_4A34C,(a0)
-                bra.w   loc_4A2CC
+                move.l  #PachinkoGumball_ConsumeBeforeMove,(a0)
+                bra.w   PachinkoGumball_InitSubtypeMapping
 ; ---------------------------------------------------------------------------
 
 PachinkoItem_ClearContactAndDelayPick:
                 clr.b   collision_property(a0)
                 lea     (Ani_PachinkoItemOrb).l,a1
                 jsr     (Animate_Sprite).l
-                bra.w   loc_4A31A
+                bra.w   PachinkoGumball_CullBeforeContactDraw
 ; ---------------------------------------------------------------------------
 Ani_PachinkoItemOrb:
                 include "src/objects/shared/zones/pachinko/animations/item_orb.s"

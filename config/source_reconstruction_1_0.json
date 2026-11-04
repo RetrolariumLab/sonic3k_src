@@ -1323,9 +1323,15 @@
       "commits": ["2eabb9d6581c6992e9ff509fc32a06cf5ba91fe5"]
     },
     {
-      "id": "current-shorten-63-bonus-pachinko",
+      "id": "change-d96b4c516b5a",
       "kind": "source_or_tooling",
       "summary": "Apply 62 reviewed short labels for bonus pachinko.",
+      "commits": ["d96b4c516b5acf82d645d62c3ef370c527221789"]
+    },
+    {
+      "id": "current-shorten-64-bonus-slots",
+      "kind": "source_or_tooling",
+      "summary": "Apply 300 reviewed short labels for bonus slots.",
       "commits": ["release-commit"]
     }
   ],

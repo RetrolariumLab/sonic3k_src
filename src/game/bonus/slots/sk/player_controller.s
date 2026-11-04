@@ -6,18 +6,18 @@
 Obj_Sonic_RotatingSlotBonus:
                 move.w  (Ctrl_1).w,(Ctrl_1_logical).w
                 tst.w   (Debug_placement_mode).w
-                beq.s   loc_4B96E
+                beq.s   SlotsPlayer_DispatchRoutineByByteOffset
                 jsr     (DebugMode).l
                 bra.w   Slots_CenterCameraPastInset
 ; ---------------------------------------------------------------------------
 
-loc_4B96E:
+SlotsPlayer_DispatchRoutineByByteOffset:
                 moveq   #0,d0
                 move.b  routine(a0),d0
                 move.w  Obj_Sonic_RotatingSlotBonus_Index(pc,d0.w),d1
                 jsr     Obj_Sonic_RotatingSlotBonus_Index(pc,d1.w)
 
-loc_4B97C:
+SlotsPlayer_RollLoadArtCenterAndDraw:
                 move.b  #2,anim(a0)
                 bsr.s   SlotsAnimateSelectedPlayerCharacter
                 lea     (Player_1).w,a1
@@ -31,44 +31,44 @@ loc_4B97C:
 
 SlotsAnimateSelectedPlayerCharacter:
                 move.b  character_id(a0),d0
-                bne.s   loc_4B9AA
+                bne.s   SlotsPlayer_SelectTailsAnimator
                 jmp     (Animate_Sonic).l
 ; ---------------------------------------------------------------------------
 
-loc_4B9AA:
+SlotsPlayer_SelectTailsAnimator:
                 cmpi.b  #1,d0
-                bne.s   loc_4B9B6
+                bne.s   SlotsPlayer_SelectKnucklesAnimator
                 jmp     (Animate_Tails).l
 ; ---------------------------------------------------------------------------
 
-loc_4B9B6:
+SlotsPlayer_SelectKnucklesAnimator:
                 jmp     (Animate_Knuckles).l
 ; End of function SlotsAnimateSelectedPlayerCharacter
 
 ; ---------------------------------------------------------------------------
 Obj_Sonic_RotatingSlotBonus_Index:
-                dc.w    loc_4B9CE-Obj_Sonic_RotatingSlotBonus_Index
-                dc.w    loc_4BA4E-Obj_Sonic_RotatingSlotBonus_Index
-                dc.w    loc_4BC1E-Obj_Sonic_RotatingSlotBonus_Index
-off_4B9C2:
+                dc.w    SlotsPlayer_InitRadiiAndClampMode-Obj_Sonic_RotatingSlotBonus_Index
+                dc.w    SlotsPlayer_CheckDebugPlacementOnB-Obj_Sonic_RotatingSlotBonus_Index
+                dc.w    SlotsPlayer_AccelerateExitSpin-Obj_Sonic_RotatingSlotBonus_Index
+SlotsPlayer_CharacterMapPointers:
                 dc.l    Map_Sonic
                 dc.l    Map_Tails
                 dc.l    Map_Knuckles
 ; ---------------------------------------------------------------------------
 
-loc_4B9CE:
+SlotsPlayer_InitRadiiAndClampMode:
                 addq.b  #2,routine(a0)
                 move.b  #$E,y_radius(a0)
                 move.b  #7,x_radius(a0)
                 move.w  (Player_mode).w,d0
                 subq.w  #1,d0
-                bcc.s   loc_4B9E8
+                bcc.s   SlotsPlayer_InstallMapAndAirRollState
                 moveq   #0,d0
 
-loc_4B9E8:
+SlotsPlayer_InstallMapAndAirRollState:
                 move.b  d0,character_id(a0)
                 lsl.w   #2,d0
-                move.l  off_4B9C2(pc,d0.w),mappings(a0)
+                move.l  SlotsPlayer_CharacterMapPointers(pc,d0.w),mappings(a0)
                 move.w  #make_art_tile(ArtTile_Player_1,0,0),art_tile(a0)
                 move.b  #4,render_flags(a0)
                 move.w  #$100,priority(a0)
@@ -76,52 +76,52 @@ loc_4B9E8:
                 bset    #Status_Roll,status(a0)
                 bset    #Status_InAir,status(a0)
                 cmpi.w  #2,(Player_mode).w
-                bne.s   loc_4BA32
+                bne.s   SlotsPlayer_ResetSpinAndRestoreRings
                 move.w  #make_art_tile(ArtTile_Player_2,0,0),art_tile(a0)
                 move.l  #Obj_Tails_Tail,(Tails_tails).w
                 move.w  a0,(Tails_tails+$30).w
 
-loc_4BA32:
+SlotsPlayer_ResetSpinAndRestoreRings:
                 clr.w   (Stat_table).w
                 move.w  #$40,(SStage_scalar_index_1).w
                 move.w  (Saved_ring_count).w,(Ring_count).w
                 move.b  (Saved_extra_life_flags).w,(Extra_life_flags).w
                 move.b  #1,(Update_HUD_ring_count).w
 
-loc_4BA4E:
+SlotsPlayer_CheckDebugPlacementOnB:
                 tst.w   (Debug_mode_flag).w
-                beq.s   loc_4BA62
+                beq.s   SlotsPlayer_ClearCellAndDispatchMotion
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   loc_4BA62
+                beq.s   SlotsPlayer_ClearCellAndDispatchMotion
                 move.w  #1,(Debug_placement_mode).w
 
-loc_4BA62:
+SlotsPlayer_ClearCellAndDispatchMotion:
                 move.b  #0,$30(a0)
                 tst.b   object_control(a0)
-                bne.s   loc_4BA80
+                bne.s   SlotsPlayer_AdvanceControlledRotation16x
                 moveq   #0,d0
                 move.b  status(a0),d0
                 andi.w  #2,d0
-                move.w  off_4BA90(pc,d0.w),d1
-                jmp     off_4BA90(pc,d1.w)
+                move.w  SlotsPlayer_GroundAndAirMotionOffsets(pc,d0.w),d1
+                jmp     SlotsPlayer_GroundAndAirMotionOffsets(pc,d1.w)
 ; ---------------------------------------------------------------------------
 
-loc_4BA80:
+SlotsPlayer_AdvanceControlledRotation16x:
                 move.w  (SStage_scalar_index_1).w,d0
                 asl.w   #4,d0
                 add.w   (Stat_table).w,d0
                 move.w  d0,(Stat_table).w
                 rts
 ; ---------------------------------------------------------------------------
-off_4BA90:
-                dc.w    loc_4BA94-off_4BA90
-                dc.w    loc_4BA98-off_4BA90
+SlotsPlayer_GroundAndAirMotionOffsets:
+                dc.w    SlotsPlayer_TryJumpThenMove-SlotsPlayer_GroundAndAirMotionOffsets
+                dc.w    SlotsPlayer_ApplyForcesAndIntegrate-SlotsPlayer_GroundAndAirMotionOffsets
 ; ---------------------------------------------------------------------------
 
-loc_4BA94:
+SlotsPlayer_TryJumpThenMove:
                 bsr.w   Slots_TryJumpAgainstGravity
 
-loc_4BA98:
+SlotsPlayer_ApplyForcesAndIntegrate:
                 bsr.w   Slots_TryTangentialInputStep
                 bsr.w   Slots_IntegrateGravityAndProbeAxes
                 bsr.w   Slots_TryCollectCenterRing
@@ -137,39 +137,39 @@ loc_4BA98:
 ; Apply inertia and friction along the nearest cardinal tangent. A solid probe rolls back the entire position step
 Slots_TryTangentialInputStep:
                 btst    #button_left,(Ctrl_1_logical).w
-                beq.s   loc_4BAC8
+                beq.s   SlotsPlayer_ApplyRightInput
                 bsr.w   SlotsAccelerateLeftGroundInertia
 
-loc_4BAC8:
+SlotsPlayer_ApplyRightInput:
                 btst    #button_right,(Ctrl_1_logical).w
-                beq.s   loc_4BAD4
+                beq.s   SlotsPlayer_ApplyNoInputFriction
                 bsr.w   SlotsAccelerateRightGroundInertia
 
-loc_4BAD4:
+SlotsPlayer_ApplyNoInputFriction:
                 move.b  (Ctrl_1_logical).w,d0
                 andi.b  #button_left_mask|button_right_mask,d0
-                bne.s   loc_4BB04
+                bne.s   SlotsPlayer_StepTangentAndUndoBlocked
                 move.w  ground_vel(a0),d0
-                beq.s   loc_4BB04
-                bmi.s   loc_4BAF6
+                beq.s   SlotsPlayer_StepTangentAndUndoBlocked
+                bmi.s   SlotsPlayer_ApplyNegativeFriction
                 subi.w  #$C,d0
-                bcc.s   loc_4BAF0
+                bcc.s   SlotsPlayer_StorePositiveFrictionResult
                 move.w  #0,d0
 
-loc_4BAF0:
+SlotsPlayer_StorePositiveFrictionResult:
                 move.w  d0,ground_vel(a0)
-                bra.s   loc_4BB04
+                bra.s   SlotsPlayer_StepTangentAndUndoBlocked
 ; ---------------------------------------------------------------------------
 
-loc_4BAF6:
+SlotsPlayer_ApplyNegativeFriction:
                 addi.w  #$C,d0
-                bcc.s   loc_4BB00
+                bcc.s   SlotsPlayer_StoreNegativeFrictionResult
                 move.w  #0,d0
 
-loc_4BB00:
+SlotsPlayer_StoreNegativeFrictionResult:
                 move.w  d0,ground_vel(a0)
 
-loc_4BB04:
+SlotsPlayer_StepTangentAndUndoBlocked:
                 move.b  (Stat_table).w,d0
                 addi.b  #$20,d0
                 andi.b  #$C0,d0
@@ -183,7 +183,7 @@ loc_4BB04:
                 move.l  y_pos(a0),d2
                 move.l  x_pos(a0),d3
                 bsr.w   Slots_ProbeFourCandidateCells
-                beq.s   loc_4BB4E
+                beq.s   SlotsPlayer_RestoreClearTangentDeltas
                 movem.l (sp)+,d0-d1
                 sub.l   d1,x_pos(a0)
                 sub.l   d0,y_pos(a0)
@@ -191,7 +191,7 @@ loc_4BB04:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4BB4E:
+SlotsPlayer_RestoreClearTangentDeltas:
                 movem.l (sp)+,d0-d1
                 rts
 ; End of function Slots_TryTangentialInputStep
@@ -201,26 +201,26 @@ loc_4BB4E:
 SlotsAccelerateLeftGroundInertia:
                 bset    #Status_Facing,status(a0)
                 move.w  ground_vel(a0),d0
-                beq.s   loc_4BB62
-                bpl.s   loc_4BB76
+                beq.s   SlotsPlayer_AccelerateLeftWithinLimit
+                bpl.s   SlotsPlayer_BrakeRightwardInertia
 
-loc_4BB62:
+SlotsPlayer_AccelerateLeftWithinLimit:
                 subi.w  #$C,d0
                 cmpi.w  #-$800,d0
-                bgt.s   loc_4BB70
+                bgt.s   SlotsPlayer_StoreLeftAcceleration
                 move.w  #-$800,d0
 
-loc_4BB70:
+SlotsPlayer_StoreLeftAcceleration:
                 move.w  d0,ground_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4BB76:
+SlotsPlayer_BrakeRightwardInertia:
                 subi.w  #$40,d0
-                bcc.s   loc_4BB7E
+                bcc.s   SlotsPlayer_StoreUnclampedLeftBrake
                 nop
 
-loc_4BB7E:
+SlotsPlayer_StoreUnclampedLeftBrake:
                 move.w  d0,ground_vel(a0)
                 rts
 ; End of function SlotsAccelerateLeftGroundInertia
@@ -230,26 +230,26 @@ loc_4BB7E:
 SlotsAccelerateRightGroundInertia:
                 bclr    #Status_Facing,status(a0)
                 move.w  ground_vel(a0),d0
-                bmi.s   loc_4BBA4
+                bmi.s   SlotsPlayer_BrakeLeftwardInertia
                 addi.w  #$C,d0
                 cmpi.w  #$800,d0
-                blt.s   loc_4BB9E
+                blt.s   SlotsPlayer_StoreRightAcceleration
                 move.w  #$800,d0
 
-loc_4BB9E:
+SlotsPlayer_StoreRightAcceleration:
                 move.w  d0,ground_vel(a0)
-                bra.s   locret_4BBB0
+                bra.s   SlotsPlayer_RightAccelerationReturn
 ; ---------------------------------------------------------------------------
 
-loc_4BBA4:
+SlotsPlayer_BrakeLeftwardInertia:
                 addi.w  #$40,d0
-                bcc.s   loc_4BBAC
+                bcc.s   SlotsPlayer_StoreUnclampedRightBrake
                 nop
 
-loc_4BBAC:
+SlotsPlayer_StoreUnclampedRightBrake:
                 move.w  d0,ground_vel(a0)
 
-locret_4BBB0:
+SlotsPlayer_RightAccelerationReturn:
                 rts
 ; End of function SlotsAccelerateRightGroundInertia
 
@@ -259,7 +259,7 @@ locret_4BBB0:
 Slots_TryJumpAgainstGravity:
                 move.b  (Ctrl_1_pressed_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.s   locret_4BBF2
+                beq.s   SlotsPlayer_JumpCheckReturn
                 move.b  (Stat_table).w,d0
                 andi.b  #$FC,d0
                 neg.b   d0
@@ -275,7 +275,7 @@ Slots_TryJumpAgainstGravity:
                 moveq   #signextendB(sfx_Jump),d0
                 jsr     (Play_SFX).l
 
-locret_4BBF2:
+SlotsPlayer_JumpCheckReturn:
                 rts
 ; End of function Slots_TryJumpAgainstGravity
 
@@ -287,55 +287,56 @@ Slots_CenterCameraPastInset:
                 move.w  x_pos(a0),d3
                 move.w  (Camera_X_pos).w,d0
                 subi.w  #$A0,d3
-                bcs.s   loc_4BC0C
+                bcs.s   SlotsPlayer_CenterCameraYAboveInset
                 sub.w   d3,d0
                 sub.w   d0,(Camera_X_pos).w
 
-loc_4BC0C:
+SlotsPlayer_CenterCameraYAboveInset:
                 move.w  (Camera_Y_pos).w,d0
                 subi.w  #$70,d2
-                bcs.s   locret_4BC1C
+                bcs.s   SlotsPlayer_CameraCenteringReturn
                 sub.w   d2,d0
                 sub.w   d0,(Camera_Y_pos).w
 
-locret_4BC1C:
+SlotsPlayer_CameraCenteringReturn:
                 rts
 ; End of function Slots_CenterCameraPastInset
 
 ; ---------------------------------------------------------------------------
 
-loc_4BC1E:
+; Start the fade when the updated speed equals $1800
+SlotsPlayer_AccelerateExitSpin:
                 addi.w  #$40,(SStage_scalar_index_1).w
                 cmpi.w  #$1800,(SStage_scalar_index_1).w
-                bne.s   loc_4BC46
+                bne.s   SlotsPlayer_AdvanceExitRotation
                 move.w  #$40-1,(Palette_fade_info).w
                 clr.w   (Pal_fade_delay).w
-                move.l  #loc_4BC54,(a0)
+                move.l  #SlotsPlayer_TickExitFade,(a0)
                 move.w  #60,$38(a0)
                 st      (Palette_cycle_counters+$00).w
 
-loc_4BC46:
+SlotsPlayer_AdvanceExitRotation:
                 move.w  (Stat_table).w,d0
                 add.w   (SStage_scalar_index_1).w,d0
                 move.w  d0,(Stat_table).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4BC54:
+SlotsPlayer_TickExitFade:
                 subq.w  #1,(Pal_fade_delay).w
-                bpl.s   loc_4BC6A
+                bpl.s   SlotsPlayer_SpinAndRestoreSceneAtZero
                 move.w  #2,(Pal_fade_delay).w
                 move.l  a0,-(sp)
                 jsr     (Pal_ToBlack).l
                 movea.l (sp)+,a0
 
-loc_4BC6A:
+SlotsPlayer_SpinAndRestoreSceneAtZero:
                 addi.w  #$40,(SStage_scalar_index_1).w
                 move.w  (Stat_table).w,d0
                 add.w   (SStage_scalar_index_1).w,d0
                 move.w  d0,(Stat_table).w
                 subq.w  #1,$38(a0)
-                bne.s   loc_4BCAC
+                bne.s   SlotsPlayer_DrawDuringExitFade
                 move.w  (Saved_zone_and_act).w,(Current_zone_and_act).w
                 move.w  (Saved_apparent_zone_and_act).w,(Apparent_zone_and_act).w
                 move.b  (Saved_last_star_post_hit).w,(Last_star_post_hit).w
@@ -344,8 +345,8 @@ loc_4BC6A:
                 move.w  (Ring_count).w,(Saved_ring_count).w
                 move.b  (Extra_life_flags).w,(Saved_extra_life_flags).w
 
-loc_4BCAC:
-                bra.w   loc_4B97C
+SlotsPlayer_DrawDuringExitFade:
+                bra.w   SlotsPlayer_RollLoadArtCenterAndDraw
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -368,7 +369,7 @@ Slots_IntegrateGravityAndProbeAxes:
                 add.l   d4,d1
                 add.l   d0,d3
                 bsr.w   Slots_ProbeFourCandidateCells
-                beq.s   loc_4BD10
+                beq.s   SlotsPlayer_ProbeYAndGroundIfBlocked
                 sub.l   d0,d3
                 moveq   #0,d0
                 move.w  d0,x_vel(a0)
@@ -376,24 +377,24 @@ Slots_IntegrateGravityAndProbeAxes:
                 move.b  #4,$3A(a0)
                 add.l   d1,d2
                 bsr.w   Slots_ProbeFourCandidateCells
-                beq.s   loc_4BD2C
+                beq.s   SlotsPlayer_ConvertDeltasToWordVelocity
                 sub.l   d1,d2
                 moveq   #0,d1
                 move.w  d1,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4BD10:
+SlotsPlayer_ProbeYAndGroundIfBlocked:
                 add.l   d1,d2
                 bsr.w   Slots_ProbeFourCandidateCells
-                beq.s   loc_4BD3A
+                beq.s   SlotsPlayer_StoreFreeAxisAndTickGrace
                 sub.l   d1,d2
                 moveq   #0,d1
                 move.w  d1,y_vel(a0)
                 bclr    #Status_InAir,status(a0)
                 move.b  #4,$3A(a0)
 
-loc_4BD2C:
+SlotsPlayer_ConvertDeltasToWordVelocity:
                 asr.l   #8,d0
                 asr.l   #8,d1
                 move.w  d0,x_vel(a0)
@@ -401,18 +402,18 @@ loc_4BD2C:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4BD3A:
+SlotsPlayer_StoreFreeAxisAndTickGrace:
                 asr.l   #8,d0
                 asr.l   #8,d1
                 move.w  d0,x_vel(a0)
                 move.w  d1,y_vel(a0)
                 tst.b   $3A(a0)
-                bne.s   loc_4BD54
+                bne.s   SlotsPlayer_TickAirGrace
                 bset    #Status_InAir,status(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4BD54:
+SlotsPlayer_TickAirGrace:
                 subq.b  #1,$3A(a0)
                 rts
 ; End of function Slots_IntegrateGravityAndProbeAxes
@@ -455,25 +456,25 @@ Slots_ProbeFourCandidateCells:
 
 ; Accumulate solidity and latch interactive cell types 1 through 6
 Slots_ClassifyCellAndLatchContact:
-                beq.s   locret_4BDB0
+                beq.s   SlotsPlayer_NonblockingCellReturn
                 cmpi.b  #8,d4
-                beq.s   locret_4BDB0
+                beq.s   SlotsPlayer_NonblockingCellReturn
                 cmpi.b  #$10,d4
-                blo.s   loc_4BDB2
+                blo.s   SlotsPlayer_LatchInteractiveSolidCell
 
-locret_4BDB0:
+SlotsPlayer_NonblockingCellReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4BDB2:
+SlotsPlayer_LatchInteractiveSolidCell:
                 cmpi.b  #7,d4
-                beq.s   loc_4BDC6
+                beq.s   SlotsPlayer_MarkSolidProbe
                 cmpi.b  #9,d4
-                bhs.s   loc_4BDC6
+                bhs.s   SlotsPlayer_MarkSolidProbe
                 move.b  d4,$30(a0)
                 move.l  a1,$32(a0)
 
-loc_4BDC6:
+SlotsPlayer_MarkSolidProbe:
                 moveq   #-1,d5
                 rts
 ; End of function Slots_ClassifyCellAndLatchContact
@@ -495,35 +496,35 @@ Slots_TryCollectCenterRing:
                 divu.w  #$18,d4
                 adda.w  d4,a1
                 move.b  (a1),d4
-                bne.s   loc_4BDFC
+                bne.s   SlotsPlayer_TryRingRemovalAnim
                 moveq   #0,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4BDFC:
+SlotsPlayer_TryRingRemovalAnim:
                 cmpi.b  #8,d4
-                bne.s   loc_4BE36
+                bne.s   SlotsPlayer_CenterNonRingReturnMinusOne
                 bsr.w   Slots_FindFreeCellAnimRecord
-                bne.s   loc_4BE10
+                bne.s   SlotsPlayer_AwardRingAndCheckContinue
                 move.b  #1,(a2)
                 move.l  a1,4(a2)
 
-loc_4BE10:
+SlotsPlayer_AwardRingAndCheckContinue:
                 jsr     (GiveRing).l
                 cmpi.w  #50,(Ring_count).w
-                blo.s   loc_4BE32
+                blo.s   SlotsPlayer_CenterEmptyOrRingReturnZero
                 bset    #0,(Extra_life_flags).w
-                bne.s   loc_4BE32
+                bne.s   SlotsPlayer_CenterEmptyOrRingReturnZero
                 addq.b  #1,(Continue_count).w
                 moveq   #signextendB(sfx_Continue),d0
                 jsr     (Play_Music).l
 
-loc_4BE32:
+SlotsPlayer_CenterEmptyOrRingReturnZero:
                 moveq   #0,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4BE36:
+SlotsPlayer_CenterNonRingReturnMinusOne:
                 moveq   #-1,d4
                 rts
 ; End of function Slots_TryCollectCenterRing
@@ -532,23 +533,23 @@ loc_4BE36:
 
 Slots_ApplyLatchedCellEffect:
                 move.b  $30(a0),d0
-                bne.s   loc_4BE5A
+                bne.s   SlotsPlayer_RepelFromBumperAndTryAnim
                 subq.b  #1,$36(a0)
-                bpl.s   loc_4BE4C
+                bpl.s   SlotsPlayer_TickReverseCooldownIfClear
                 move.b  #0,$36(a0)
 
-loc_4BE4C:
+SlotsPlayer_TickReverseCooldownIfClear:
                 subq.b  #1,$37(a0)
-                bpl.s   locret_4BE58
+                bpl.s   SlotsPlayer_ReturnNoContactCooldownWork
                 move.b  #0,$37(a0)
 
-locret_4BE58:
+SlotsPlayer_ReturnNoContactCooldownWork:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4BE5A:
+SlotsPlayer_RepelFromBumperAndTryAnim:
                 cmpi.b  #5,d0
-                bne.s   loc_4BED0
+                bne.s   SlotsPlayer_StartExitAtGoalCell
                 move.l  $32(a0),d1
                 subi.l  #-$CFFF,d1
                 move.w  d1,d2
@@ -571,58 +572,58 @@ loc_4BE5A:
                 move.w  d0,y_vel(a0)
                 bset    #Status_InAir,status(a0)
                 bsr.w   Slots_FindFreeCellAnimRecord
-                bne.s   loc_4BEC8
+                bne.s   SlotsPlayer_PlayBumperSound
                 move.b  #2,(a2)
                 move.l  $32(a0),d0
                 subq.l  #1,d0
                 move.l  d0,4(a2)
 
-loc_4BEC8:
+SlotsPlayer_PlayBumperSound:
                 moveq   #signextendB(sfx_Bumper),d0
                 jmp     (Play_SFX).l
 ; ---------------------------------------------------------------------------
 
-loc_4BED0:
+SlotsPlayer_StartExitAtGoalCell:
                 cmpi.b  #4,d0
-                bne.s   loc_4BEE4
+                bne.s   SlotsPlayer_CheckReverseCellCooldown
                 addq.b  #2,routine(a0)
                 moveq   #signextendB(sfx_Goal),d0
                 jsr     (Play_SFX).l
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4BEE4:
+SlotsPlayer_CheckReverseCellCooldown:
                 cmpi.b  #6,d0
-                bne.s   loc_4BF18
+                bne.s   SlotsPlayer_SelectWallCellCycle
                 tst.b   $37(a0)
-                bne.w   locret_4BF60
+                bne.w   SlotsPlayer_CellContactReturn
                 move.b  #$1E,$37(a0)
                 bsr.w   Slots_FindFreeCellAnimRecord
-                bne.s   loc_4BF0C
+                bne.s   SlotsPlayer_ReverseRotationSpeed
                 move.b  #4,(a2)
                 move.l  $32(a0),d0
                 subq.l  #1,d0
                 move.l  d0,4(a2)
 
-loc_4BF0C:
+SlotsPlayer_ReverseRotationSpeed:
                 neg.w   (SStage_scalar_index_1).w
                 moveq   #signextendB(sfx_LaunchGo),d0
                 jmp     (Play_SFX).l
 ; ---------------------------------------------------------------------------
 
-loc_4BF18:
+SlotsPlayer_SelectWallCellCycle:
                 cmpi.b  #1,d0
-                beq.s   loc_4BF30
+                beq.s   SlotsPlayer_TryAllocateWallCycle
                 cmpi.b  #2,d0
-                beq.s   loc_4BF30
+                beq.s   SlotsPlayer_TryAllocateWallCycle
                 cmpi.b  #3,d0
-                beq.s   loc_4BF30
+                beq.s   SlotsPlayer_TryAllocateWallCycle
                 cmpi.b  #4,d0
-                bne.s   locret_4BF60
+                bne.s   SlotsPlayer_CellContactReturn
 
-loc_4BF30:
+SlotsPlayer_TryAllocateWallCycle:
                 bsr.w   Slots_FindFreeCellAnimRecord
-                bne.s   loc_4BF58
+                bne.s   SlotsPlayer_PlayWallFeedbackSound
                 move.b  #3,(a2)
                 movea.l $32(a0),a1
                 subq.l  #1,a1
@@ -630,25 +631,26 @@ loc_4BF30:
                 move.b  (a1),d0
                 addq.b  #1,d0
                 cmpi.b  #4,d0
-                bls.s   loc_4BF54
+                bls.s   SlotsPlayer_PackWallTypeIntoPointer
                 clr.b   d0
                 move.b  #4,d0
 
-loc_4BF54:
+SlotsPlayer_PackWallTypeIntoPointer:
                 move.b  d0,4(a2)
 
-loc_4BF58:
+; Play the sound even if the transient queue has no free record
+SlotsPlayer_PlayWallFeedbackSound:
                 moveq   #signextendB(sfx_Flipper),d0
                 jmp     (Play_SFX).l
 ; ---------------------------------------------------------------------------
 
-locret_4BF60:
+SlotsPlayer_CellContactReturn:
                 rts
 ; End of function Slots_ApplyLatchedCellEffect
 
 ; ---------------------------------------------------------------------------
 
-loc_4BF62:
+SlotsPlayer_InitCageAtCenter:
                 move.w  #$460,x_pos(a0)
                 move.w  #$430,y_pos(a0)
                 move.l  #Map_SlotBonusCage,mappings(a0)
@@ -657,9 +659,9 @@ loc_4BF62:
                 move.b  #$18,width_pixels(a0)
                 move.b  #$10,height_pixels(a0)
                 move.w  #$80,priority(a0)
-                move.l  #loc_4BF9A,(a0)
+                move.l  #SlotsPlayer_RotateCageAndDispatchCapture,(a0)
 
-loc_4BF9A:
+SlotsPlayer_RotateCageAndDispatchCapture:
                 move.b  (Stat_table).w,d0
                 andi.b  #$FC,d0
                 jsr     (GetSineCosine).l
@@ -688,14 +690,14 @@ loc_4BF9A:
                 lea     (Player_1).w,a1
                 bsr.w   Slots_DispatchCageState
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_4C012
+                bpl.s   SlotsPlayer_CageUpdateReturn
                 move.b  #1,anim_frame_timer(a0)
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #6,mapping_frame(a0)
-                blo.s   locret_4C012
+                blo.s   SlotsPlayer_CageUpdateReturn
                 move.b  #0,mapping_frame(a0)
 
-locret_4C012:
+SlotsPlayer_CageUpdateReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -703,33 +705,33 @@ locret_4C012:
 ; The cage states capture the player, spawn the outcome, release in alignment and wait through cooldown
 Slots_DispatchCageState:
                 move.w  (a2),d0
-                move.w  off_4C01E(pc,d0.w),d0
-                jmp     off_4C01E(pc,d0.w)
+                move.w  SlotsPlayer_CageStateOffsets(pc,d0.w),d0
+                jmp     SlotsPlayer_CageStateOffsets(pc,d0.w)
 ; End of function Slots_DispatchCageState
 
 ; ---------------------------------------------------------------------------
-off_4C01E:
-                dc.w    loc_4C026-off_4C01E
-                dc.w    loc_4C21C-off_4C01E
-                dc.w    loc_4C250-off_4C01E
-                dc.w    loc_4C292-off_4C01E
+SlotsPlayer_CageStateOffsets:
+                dc.w    SlotsPlayer_TryCapturePlayerInCage-SlotsPlayer_CageStateOffsets
+                dc.w    SlotsPlayer_RefreshPlayerAndWaitOutcome-SlotsPlayer_CageStateOffsets
+                dc.w    SlotsPlayer_ReleaseAtQuarterTurn-SlotsPlayer_CageStateOffsets
+                dc.w    SlotsPlayer_TickCageRecaptureCooldown-SlotsPlayer_CageStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_4C026:
+SlotsPlayer_TryCapturePlayerInCage:
                 tst.b   object_control(a1)
-                bne.s   locret_4C0A8
+                bne.s   SlotsPlayer_CageCaptureReturn
                 tst.w   (SStage_scalar_result_0).w
-                bne.s   locret_4C0A8
+                bne.s   SlotsPlayer_CageCaptureReturn
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$18,d0
                 cmpi.w  #$30,d0
-                bhs.s   locret_4C0A8
+                bhs.s   SlotsPlayer_CageCaptureReturn
                 move.w  y_pos(a1),d0
                 sub.w   y_pos(a0),d0
                 addi.w  #$18,d0
                 cmpi.w  #$30,d0
-                bhs.s   locret_4C0A8
+                bhs.s   SlotsPlayer_CageCaptureReturn
                 move.w  #$460,x_pos(a1)
                 move.w  #$430,y_pos(a1)
                 move.w  #0,x_vel(a1)
@@ -741,32 +743,32 @@ loc_4C026:
                 move.w  a1,$42(a0)
                 move.b  #1,(Palette_cycle_counters+$00).w
                 cmpi.b  #$18,(SStage_scalar_result_0+2).w
-                bne.s   locret_4C0A8
+                bne.s   SlotsPlayer_CageCaptureReturn
                 move.b  #8,(SStage_scalar_result_0+2).w
                 clr.w   $32(a0)
                 move.w  #-1,(SStage_scalar_result_0).w
                 move.w  #-1,$2E(a0)
 
-locret_4C0A8:
+SlotsPlayer_CageCaptureReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C0AA:
+SlotsPlayer_ChooseSignedPayoutPath:
                 move.w  (SStage_scalar_result_1+2).w,d0
-                bpl.w   loc_4C172
+                bpl.w   SlotsPlayer_TryOddPhaseRingSpawn
                 tst.w   $2E(a0)
-                bpl.s   loc_4C0BE
+                bpl.s   SlotsPlayer_TryOddPhaseSpikeSpawn
                 move.w  #$64,$2E(a0)
 
-loc_4C0BE:
+SlotsPlayer_TryOddPhaseSpikeSpawn:
                 tst.w   $2E(a0)
-                beq.w   loc_4C164
+                beq.w   SlotsPlayer_WaitForSpikeChildren
                 btst    #0,(Level_frame_counter+1).w
-                beq.w   loc_4C16C
+                beq.w   SlotsPlayer_TickSpikePayoutWait
                 cmpi.w  #$10,$30(a0)
-                bhs.w   loc_4C16C
+                bhs.w   SlotsPlayer_TickSpikePayoutWait
                 jsr     (AllocateObject).l
-                bne.w   loc_4C16C
+                bne.w   SlotsPlayer_TickSpikePayoutWait
                 move.l  #Obj_SlotSpike,(a1)
                 move.l  #Map_SlotSpike,mappings(a1)
                 move.w  #make_art_tile(ArtTile_SlotsBlocks+$155,1,0),art_tile(a1)
@@ -794,23 +796,24 @@ loc_4C0BE:
                 addq.w  #1,$30(a0)
                 subq.w  #1,$2E(a0)
 
-loc_4C164:
+SlotsPlayer_WaitForSpikeChildren:
                 tst.w   $30(a0)
-                beq.w   loc_4C23E
+                beq.w   SlotsPlayer_BeginCageRelease
 
-loc_4C16C:
+SlotsPlayer_TickSpikePayoutWait:
                 addq.w  #1,(SStage_scalar_index_2).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C172:
-                beq.w   loc_4C214
+; The branch on entry uses Z from the signed payout word loaded by the caller path
+SlotsPlayer_TryOddPhaseRingSpawn:
+                beq.w   SlotsPlayer_WaitForRingsAndRelease
                 btst    #0,(Level_frame_counter+1).w
-                beq.w   locret_4C21A
+                beq.w   SlotsPlayer_RingPayoutUpdateReturn
                 cmpi.w  #$10,$30(a0)
-                bhs.w   locret_4C21A
+                bhs.w   SlotsPlayer_RingPayoutUpdateReturn
                 jsr     (AllocateObject).l
-                bne.w   locret_4C21A
+                bne.w   SlotsPlayer_RingPayoutUpdateReturn
                 move.l  #Obj_SlotRing,(a1)
                 move.l  #Map_Ring,mappings(a1)
                 move.w  #make_art_tile(ArtTile_Ring,1,0),art_tile(a1)
@@ -838,29 +841,29 @@ loc_4C172:
                 addq.w  #1,$30(a0)
                 subq.w  #1,(SStage_scalar_result_1+2).w
 
-loc_4C214:
+SlotsPlayer_WaitForRingsAndRelease:
                 tst.w   $30(a0)
-                beq.s   loc_4C23E
+                beq.s   SlotsPlayer_BeginCageRelease
 
-locret_4C21A:
+SlotsPlayer_RingPayoutUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C21C:
+SlotsPlayer_RefreshPlayerAndWaitOutcome:
                 move.w  a1,$42(a0)
                 cmpi.b  #$18,(SStage_scalar_result_0+2).w
-                beq.w   loc_4C0AA
+                beq.w   SlotsPlayer_ChooseSignedPayoutPath
                 move.b  (V_int_run_count+3).w,d0
                 andi.w  #$F,d0
-                bne.s   locret_4C23C
+                bne.s   SlotsPlayer_CageOutcomeWaitReturn
                 moveq   #signextendB(sfx_SlotMachine),d0
                 jsr     (Play_SFX).l
 
-locret_4C23C:
+SlotsPlayer_CageOutcomeWaitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C23E:
+SlotsPlayer_BeginCageRelease:
                 move.w  #0,$30(a0)
                 addq.w  #2,(a2)+
                 move.w  #8,(a2)
@@ -868,10 +871,10 @@ loc_4C23E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C250:
+SlotsPlayer_ReleaseAtQuarterTurn:
                 move.b  (Stat_table).w,d0
                 andi.w  #$3C,d0
-                bne.s   locret_4C290
+                bne.s   SlotsPlayer_CageReleaseReturn
                 move.b  (Stat_table).w,d0
                 andi.b  #$FC,d0
                 jsr     (GetSineCosine).l
@@ -886,17 +889,17 @@ loc_4C250:
                 addq.w  #2,(a2)+
                 move.w  #8,(a2)
 
-locret_4C290:
+SlotsPlayer_CageReleaseReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C292:
+SlotsPlayer_TickCageRecaptureCooldown:
                 subq.w  #1,2(a2)
-                bpl.s   locret_4C29E
+                bpl.s   SlotsPlayer_CageCooldownReturn
                 clr.w   (a2)
                 clr.w   (SStage_scalar_result_0).w
 
-locret_4C29E:
+SlotsPlayer_CageCooldownReturn:
                 rts
 ; ---------------------------------------------------------------------------
 Map_SlotBonusCage:

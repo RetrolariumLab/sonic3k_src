@@ -1,0 +1,3696 @@
+{
+  "schema_version": 1,
+  "packet": "64-bonus-slots",
+  "mappings": [
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 32,
+      "old": "loc_4B3A6",
+      "new": "SlotsLayout_TransformSampleRow",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_TransformOneOfSixteenLayoutSampleRows."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 47,
+      "old": "loc_4B3C8",
+      "new": "SlotsLayout_Store16CoordinatePairs",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_WriteSixteenTransformedCoordinatePairs."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 79,
+      "old": "loc_4B424",
+      "new": "SlotsLayout_Begin16CellRow",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_BeginSixteenCellLayoutRenderRow."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 82,
+      "old": "loc_4B428",
+      "new": "SlotsLayout_FilterCellAndFindMapping",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_FilterCellAndResolvePrivateByteCountMapping."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 114,
+      "old": "loc_4B47C",
+      "new": "SlotsLayout_AdvanceSamplesAndStoreCount",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_AdvanceCellSamplesRowsAndPublishSpriteCount."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 147,
+      "old": "loc_4B4BC",
+      "new": "SlotsLayout_StoreNonzeroWrappedX",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_StoreNonzeroWrappedSpriteXAndContinuePieceLoop."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 151,
+      "old": "locret_4B4C2",
+      "new": "SlotsLayout_EmitPieceLoopReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_ReturnAfterPieceLoopOrExactEightySpriteCount."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 165,
+      "old": "loc_4B4D8",
+      "new": "SlotsLayout_SetColoredCellFrames",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_WriteRotationFrameForThreeColoredCellDescriptors."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 172,
+      "old": "loc_4B4E8",
+      "new": "SlotsLayout_SetTemporaryWallFrames",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_WriteRotationFrameForThreeTemporaryWallDescriptors."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 185,
+      "old": "loc_4B514",
+      "new": "SlotsLayout_AdvanceGoalFrameModulo6",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_AdvanceGlobalGoalFrameWithSixFrameWrap."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 191,
+      "old": "loc_4B526",
+      "new": "SlotsLayout_SetGoalAndRingFrames",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_PublishGoalAndRingFramesThenTickPeppermintTimer."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 200,
+      "old": "loc_4B548",
+      "new": "SlotsLayout_SetPeppermintFrame",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_PublishPeppermintFrameAndReturn."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 213,
+      "old": "loc_4B566",
+      "new": "SlotsLayout_SetRetainedRingSpillFrames",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_PublishRetainedRingSpillFrameToFourDescriptorOffsets."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 227,
+      "old": "loc_4B586",
+      "new": "SlotsLayout_ScanFreeTransientRecord",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_ScanThirtyTwoTransientRecordsByTypeByte."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 233,
+      "old": "locret_4B590",
+      "new": "SlotsLayout_TransientSlotSearchReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_ReturnTransientRecordProbeWithNativeFlags."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 243,
+      "old": "loc_4B59C",
+      "new": "SlotsLayout_DispatchActiveTransient",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_DispatchNonzeroTransientTypeThroughLongHandlerTable."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 251,
+      "old": "loc_4B5AA",
+      "new": "SlotsLayout_AdvanceTransientScan",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_AdvanceTransientRecordScanThroughAllThirtyTwoSlots."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 258,
+      "old": "off_4B5B2",
+      "new": "SlotsLayout_TransientHandlerPointers",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed DATA SlotsLayout_TransientTypeOneThroughFourLongHandlers."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 265,
+      "old": "loc_4B5C2",
+      "new": "SlotsLayout_TickRingRemoval",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_TickRingRemovalCellSequenceAndClearRecordAtZero."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 279,
+      "old": "locret_4B5EA",
+      "new": "SlotsLayout_RingRemovalReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_ReturnRingCellAnimationAfterHoldOrNonterminalWrite."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 282,
+      "old": "byte_4B5EC",
+      "new": "SlotsLayout_RingRemovalCellTypes",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed DATA SlotsLayout_RingRemovalCellTypesTenThroughThirteenThenZero."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 287,
+      "old": "loc_4B5F2",
+      "new": "SlotsLayout_TickBumperAndRestoreCell",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_TickBumperCellSequenceAndRestoreTypeFiveAtZero."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 303,
+      "old": "loc_4B61E",
+      "new": "SlotsLayout_WriteBumperCellType",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_WriteNonterminalBumperAnimationCellType."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 306,
+      "old": "locret_4B620",
+      "new": "SlotsLayout_BumperCellUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_ReturnBumperAnimationHoldOrCellWrite."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 309,
+      "old": "byte_4B622",
+      "new": "SlotsLayout_BumperCellTypes",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed DATA SlotsLayout_BumperCellTypesTenElevenThenRestoreSentinel."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 314,
+      "old": "loc_4B626",
+      "new": "SlotsLayout_TickReverseAndRestoreCell",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_TickReverseCellSequenceAndRestoreTypeSix."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 330,
+      "old": "loc_4B652",
+      "new": "SlotsLayout_WriteReverseCellType",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_WriteNonterminalReverseCellAnimationType."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 333,
+      "old": "locret_4B654",
+      "new": "SlotsLayout_ReverseCellUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_ReturnReverseCellAnimationHoldOrWrite."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 336,
+      "old": "byte_4B656",
+      "new": "SlotsLayout_ReverseCellTypes",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed DATA SlotsLayout_ReverseCellTypesTwelveSixTwelveThenSentinel."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 341,
+      "old": "loc_4B65A",
+      "new": "SlotsLayout_TickWallAndRestoreCell",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_TickWallCycleAndRestorePointerHighByteCellTag."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 356,
+      "old": "locret_4B686",
+      "new": "SlotsLayout_WallCellUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_ReturnWallCellAnimationAfterHoldWriteOrRestoration."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 359,
+      "old": "byte_4B688",
+      "new": "SlotsLayout_WallCycleCellTypes",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed DATA SlotsLayout_RepeatedWallCellCycleWithZeroTerminatorAndRetainedTail."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 402,
+      "old": "loc_4B6B4",
+      "new": "SlotsLayout_ClearPadded16KLayout",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_ClearSixteenKilobytePaddedCellLayoutRegion."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 411,
+      "old": "loc_4B6D0",
+      "new": "SlotsLayout_Begin32ByteLayoutRow",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_BeginThirtyTwoByteSourceLayoutRowCopy."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 414,
+      "old": "loc_4B6D2",
+      "new": "SlotsLayout_CopyCellsWithPaddedStride",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_CopyLayoutCellsIntoPaddedStrideAndAdvanceRows."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 423,
+      "old": "loc_4B6EE",
+      "new": "SlotsLayout_Expand19RenderDescriptors",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_ExpandNineteenPackedMapArtRecordsIntoRuntimeDescriptors."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 432,
+      "old": "loc_4B70A",
+      "new": "SlotsLayout_ClearTransientsAndTryCage",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_ClearTransientRecordsThenAttemptOneCageActor."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "original_line": 439,
+      "old": "locret_4B720",
+      "new": "SlotsLayout_LayoutInitReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsLayout_ReturnLayoutInitializationAfterCageAttempt."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 14,
+      "old": "loc_4B96E",
+      "new": "SlotsPlayer_DispatchRoutineByByteOffset",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_DispatchPlayerRoutineByRawByteOffset."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 20,
+      "old": "loc_4B97C",
+      "new": "SlotsPlayer_RollLoadArtCenterAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ForceRollingAnimationLoadPrimaryPatternsCenterCameraAndDraw."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 38,
+      "old": "loc_4B9AA",
+      "new": "SlotsPlayer_SelectTailsAnimator",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_SelectTailsAnimationForCharacterByteOne."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 44,
+      "old": "loc_4B9B6",
+      "new": "SlotsPlayer_SelectKnucklesAnimator",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_DelegateOtherNonzeroCharacterToKnucklesAnimator."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 53,
+      "old": "off_4B9C2",
+      "new": "SlotsPlayer_CharacterMapPointers",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed DATA SlotsPlayer_ThreeCharacterMappingLongPointers."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 59,
+      "old": "loc_4B9CE",
+      "new": "SlotsPlayer_InitRadiiAndClampMode",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_InitializePlayerRadiiAndClampOnlyModeSubtractionBorrow."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 68,
+      "old": "loc_4B9E8",
+      "new": "SlotsPlayer_InstallMapAndAirRollState",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_InstallSelectedMapAndCommonRollingAirState."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 84,
+      "old": "loc_4BA32",
+      "new": "SlotsPlayer_ResetSpinAndRestoreRings",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ResetRotationSpeedAndRestoreSavedRingsBeforeMovement."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 91,
+      "old": "loc_4BA4E",
+      "new": "SlotsPlayer_CheckDebugPlacementOnB",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_EnableDebugPlacementOnDebugFlagAndNewBPress."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 98,
+      "old": "loc_4BA62",
+      "new": "SlotsPlayer_ClearCellAndDispatchMotion",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ClearLatchedCellAndDispatchMotionOrControlledRotation."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 109,
+      "old": "loc_4BA80",
+      "new": "SlotsPlayer_AdvanceControlledRotation16x",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_AdvanceRotationSixteenTimesSpeedWhilePlayerControlled."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 116,
+      "old": "off_4BA90",
+      "new": "SlotsPlayer_GroundAndAirMotionOffsets",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed DATA SlotsPlayer_GroundAndAirMotionRelativeWordEntries."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 121,
+      "old": "loc_4BA94",
+      "new": "SlotsPlayer_TryJumpThenMove",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_TryNewButtonJumpThenFallThroughSharedMotion."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 124,
+      "old": "loc_4BA98",
+      "new": "SlotsPlayer_ApplyForcesAndIntegrate",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ApplyInputGravityCollectionContactThenIntegrateAndRotate."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 142,
+      "old": "loc_4BAC8",
+      "new": "SlotsPlayer_ApplyRightInput",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ApplyRightInputAfterOptionalLeftAcceleration."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 147,
+      "old": "loc_4BAD4",
+      "new": "SlotsPlayer_ApplyNoInputFriction",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ApplyNoInputGroundInertiaFriction."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 158,
+      "old": "loc_4BAF0",
+      "new": "SlotsPlayer_StorePositiveFrictionResult",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_StoreNonnegativeFrictionResultAndContinueTangentStep."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 163,
+      "old": "loc_4BAF6",
+      "new": "SlotsPlayer_ApplyNegativeFriction",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ApplyNegativeInertiaFrictionWithCarryZeroClamp."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 168,
+      "old": "loc_4BB00",
+      "new": "SlotsPlayer_StoreNegativeFrictionResult",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_StoreNegativeFrictionResultBeforeTangentProbe."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 171,
+      "old": "loc_4BB04",
+      "new": "SlotsPlayer_StepTangentAndUndoBlocked",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_IntegrateQuantizedTangentAndRollbackBlockedPositionStep."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 193,
+      "old": "loc_4BB4E",
+      "new": "SlotsPlayer_RestoreClearTangentDeltas",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_RestoreTangentDeltasAfterClearCandidateProbe."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 206,
+      "old": "loc_4BB62",
+      "new": "SlotsPlayer_AccelerateLeftWithinLimit",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_AccelerateLeftFromZeroOrNegativeWithSignedLimit."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 212,
+      "old": "loc_4BB70",
+      "new": "SlotsPlayer_StoreLeftAcceleration",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_StoreLeftAccelerationResultAndReturn."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 217,
+      "old": "loc_4BB76",
+      "new": "SlotsPlayer_BrakeRightwardInertia",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_BrakePositiveInertiaLeftBySixtyFour."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 222,
+      "old": "loc_4BB7E",
+      "new": "SlotsPlayer_StoreUnclampedLeftBrake",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_StoreLeftOppositionBrakingWithoutClamp."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 238,
+      "old": "loc_4BB9E",
+      "new": "SlotsPlayer_StoreRightAcceleration",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_StoreRightAccelerationAtOrBelowPositiveLimit."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 243,
+      "old": "loc_4BBA4",
+      "new": "SlotsPlayer_BrakeLeftwardInertia",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_BrakeNegativeInertiaRightBySixtyFour."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 248,
+      "old": "loc_4BBAC",
+      "new": "SlotsPlayer_StoreUnclampedRightBrake",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_StoreRightOppositionBrakingWithoutClamp."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 251,
+      "old": "locret_4BBB0",
+      "new": "SlotsPlayer_RightAccelerationReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ReturnRightAccelerationOrOppositionBraking."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 276,
+      "old": "locret_4BBF2",
+      "new": "SlotsPlayer_JumpCheckReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ReturnAfterAbsentJumpOrAssignedJumpVelocities."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 291,
+      "old": "loc_4BC0C",
+      "new": "SlotsPlayer_CenterCameraYAboveInset",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_CenterCameraYOnlyIfCoordinateReachesInset."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 298,
+      "old": "locret_4BC1C",
+      "new": "SlotsPlayer_CameraCenteringReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ReturnCameraCenteringAfterYBorrowOrWrite."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 304,
+      "old": "loc_4BC1E",
+      "new": "SlotsPlayer_AccelerateExitSpin",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_AccelerateExitRotationAndBeginFadeAtExactSpeed."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 314,
+      "old": "loc_4BC46",
+      "new": "SlotsPlayer_AdvanceExitRotation",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_AddCurrentExitSpeedToRotationAndReturn."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 321,
+      "old": "loc_4BC54",
+      "new": "SlotsPlayer_TickExitFade",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_TickFadeCadenceWithSavedActorPointer."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 329,
+      "old": "loc_4BC6A",
+      "new": "SlotsPlayer_SpinAndRestoreSceneAtZero",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ContinueExitSpinAndRestoreSavedSceneAtExactCountdownZero."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 344,
+      "old": "loc_4BCAC",
+      "new": "SlotsPlayer_DrawDuringExitFade",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_RejoinCommonAnimationAndDrawAfterExitFade."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 382,
+      "old": "loc_4BD10",
+      "new": "SlotsPlayer_ProbeYAndGroundIfBlocked",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ProbeYAfterClearXAndGroundOnBlockedY."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 392,
+      "old": "loc_4BD2C",
+      "new": "SlotsPlayer_ConvertDeltasToWordVelocity",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ConvertAcceptedGravityDeltasBackToWordVelocities."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 400,
+      "old": "loc_4BD3A",
+      "new": "SlotsPlayer_StoreFreeAxisAndTickGrace",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_StoreFreeAxisVelocitiesAndManageAirGrace."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 411,
+      "old": "loc_4BD54",
+      "new": "SlotsPlayer_TickAirGrace",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_DecrementNonzeroAirGraceByteAndReturn."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 458,
+      "old": "locret_4BDB0",
+      "new": "SlotsPlayer_NonblockingCellReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ReturnForEmptyRingOrNonblockingHighCell."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 462,
+      "old": "loc_4BDB2",
+      "new": "SlotsPlayer_LatchInteractiveSolidCell",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_LatchInteractiveSolidExceptCellsSevenAndNinePlus."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 470,
+      "old": "loc_4BDC6",
+      "new": "SlotsPlayer_MarkSolidProbe",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_MarkProbeAccumulatorSolidAndReturn."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 496,
+      "old": "loc_4BDFC",
+      "new": "SlotsPlayer_TryRingRemovalAnim",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_RecognizeCenterRingAndAttemptRemovalAnimation."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 504,
+      "old": "loc_4BE10",
+      "new": "SlotsPlayer_AwardRingAndCheckContinue",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_AwardRingAndGrantContinueOnceAtFiftyRingThreshold."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 514,
+      "old": "loc_4BE32",
+      "new": "SlotsPlayer_CenterEmptyOrRingReturnZero",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ReturnCenterEmptyOrRingHandledResultZero."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 519,
+      "old": "loc_4BE36",
+      "new": "SlotsPlayer_CenterNonRingReturnMinusOne",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ReturnCenterNonRingResultMinusOne."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 533,
+      "old": "loc_4BE4C",
+      "new": "SlotsPlayer_TickReverseCooldownIfClear",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_TickReverseCooldownOnlyOnNoLatchedContact."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 538,
+      "old": "locret_4BE58",
+      "new": "SlotsPlayer_ReturnNoContactCooldownWork",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ReturnNoContactCooldownWork."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 542,
+      "old": "loc_4BE5A",
+      "new": "SlotsPlayer_RepelFromBumperAndTryAnim",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_RepelFromLatchedBumperCellAndAttemptCellFeedback."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 573,
+      "old": "loc_4BEC8",
+      "new": "SlotsPlayer_PlayBumperSound",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_RequestBumperSoundAfterImpulseAndAnimationAttempt."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 578,
+      "old": "loc_4BED0",
+      "new": "SlotsPlayer_StartExitAtGoalCell",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_TriggerGoalExitRoutineForCellFour."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 587,
+      "old": "loc_4BEE4",
+      "new": "SlotsPlayer_CheckReverseCellCooldown",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_GateReverseCellByPrivateByteCooldown."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 600,
+      "old": "loc_4BF0C",
+      "new": "SlotsPlayer_ReverseRotationSpeed",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_NegateRotationSpeedAfterReverseContact."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 606,
+      "old": "loc_4BF18",
+      "new": "SlotsPlayer_SelectWallCellCycle",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_SelectWallCycleFeedbackForCellsOneThroughFour."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 616,
+      "old": "loc_4BF30",
+      "new": "SlotsPlayer_TryAllocateWallCycle",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_AllocateWallCycleWithReplacementTypeInPointerHighByte."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 630,
+      "old": "loc_4BF54",
+      "new": "SlotsPlayer_PackWallTypeIntoPointer",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_StoreWallReplacementTypeAsHighPointerTag."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 633,
+      "old": "loc_4BF58",
+      "new": "SlotsPlayer_PlayWallFeedbackSound",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_RequestWallFeedbackSoundRegardlessRecordAvailability."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 638,
+      "old": "locret_4BF60",
+      "new": "SlotsPlayer_CellContactReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ReturnIgnoredOrCooldownBlockedContact."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 644,
+      "old": "loc_4BF62",
+      "new": "SlotsPlayer_InitCageAtCenter",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_InitializeCageControllerAtNominalCenter."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 655,
+      "old": "loc_4BF9A",
+      "new": "SlotsPlayer_RotateCageAndDispatchCapture",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_RotateCageCenterAboutPlayerPublishBackgroundAndDispatchCapture."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 691,
+      "old": "locret_4C012",
+      "new": "SlotsPlayer_CageUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ReturnCageControllerAfterFrameTimerOrWrap."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 703,
+      "old": "off_4C01E",
+      "new": "SlotsPlayer_CageStateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed DATA SlotsPlayer_CageStateZeroTwoFourSixRelativeWordEntries."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 710,
+      "old": "loc_4C026",
+      "new": "SlotsPlayer_TryCapturePlayerInCage",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_CaptureUncontrolledPlayerInsideCageWhenGlobalReady."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 742,
+      "old": "locret_4C0A8",
+      "new": "SlotsPlayer_CageCaptureReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ReturnFailedCaptureOrNewlyLatchedCageState."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 746,
+      "old": "loc_4C0AA",
+      "new": "SlotsPlayer_ChooseSignedPayoutPath",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_BranchOnSignedPayoutWordAndInitializeSpikeQuotaIfNegative."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 753,
+      "old": "loc_4C0BE",
+      "new": "SlotsPlayer_TryOddPhaseSpikeSpawn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_AttemptOddPhaseSpikeSpawnSubjectToQuotaAndActiveLimit."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 789,
+      "old": "loc_4C164",
+      "new": "SlotsPlayer_WaitForSpikeChildren",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_WaitForAllSpikeChildrenBeforeStartingCageRelease."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 793,
+      "old": "loc_4C16C",
+      "new": "SlotsPlayer_TickSpikePayoutWait",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_IncrementSecondaryScalarDuringSpikePayoutWait."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 798,
+      "old": "loc_4C172",
+      "new": "SlotsPlayer_TryOddPhaseRingSpawn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_UseInheritedPayoutZeroFlagOrAttemptOddPhaseRingSpawn."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 833,
+      "old": "loc_4C214",
+      "new": "SlotsPlayer_WaitForRingsAndRelease",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_BeginReleaseOnlyAfterRingPayoutAndActiveChildrenDrain."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 837,
+      "old": "locret_4C21A",
+      "new": "SlotsPlayer_RingPayoutUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ReturnRingSpawnGateFailureOrActiveDrainWait."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 841,
+      "old": "loc_4C21C",
+      "new": "SlotsPlayer_RefreshPlayerAndWaitOutcome",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_RefreshCapturedPlayerHandleAndWaitForOutcomePhase."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 851,
+      "old": "locret_4C23C",
+      "new": "SlotsPlayer_CageOutcomeWaitReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ReturnCageOutcomeWaitOrRequestedPeriodicSound."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 855,
+      "old": "loc_4C23E",
+      "new": "SlotsPlayer_BeginCageRelease",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_AdvanceCageToReleaseAndClearPaletteCycleFlag."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 863,
+      "old": "loc_4C250",
+      "new": "SlotsPlayer_ReleaseAtQuarterTurn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ReleaseCapturedPlayerAtRotationQuarterBoundary."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 881,
+      "old": "locret_4C290",
+      "new": "SlotsPlayer_CageReleaseReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ReturnCageReleaseGateOrCompletedLaunch."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 885,
+      "old": "loc_4C292",
+      "new": "SlotsPlayer_TickCageRecaptureCooldown",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_CountDownCageRecaptureCooldownThenClearGlobalReadyLock."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "original_line": 891,
+      "old": "locret_4C29E",
+      "new": "SlotsPlayer_CageCooldownReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsPlayer_ReturnCageCooldownHoldOrUnlockedState."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 32,
+      "old": "loc_4C416",
+      "new": "SlotsOutcome_PrepareOptionScratchClear",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_InitializeOptionScratchWordClearLoop."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 36,
+      "old": "loc_4C41A",
+      "new": "SlotsOutcome_ClearScratchAndSeedReels",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_ClearEighteenOptionBytesThenSeedThreeReelPositions."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 56,
+      "old": "loc_4C462",
+      "new": "SlotsOutcome_AdvanceStartupReels",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_AdvanceStartupReelsUntilFullReelPassCounterZero."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 63,
+      "old": "loc_4C46E",
+      "new": "SlotsOutcome_EnterIdleAndClearSpeeds",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_EnterIdlePhaseAndZeroThreeSpeedStateWords."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 71,
+      "old": "loc_4C480",
+      "new": "SlotsOutcome_SeedSpinAndChooseOutcome",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_SeedSpinSpeedsChooseWeightedOutcomeAndAdvancePhase."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 98,
+      "old": "loc_4C4DC",
+      "new": "SlotsOutcome_ScanWeightedBuckets",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_SubtractWeightedBucketWidthsUntilByteBorrow."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 105,
+      "old": "loc_4C4E4",
+      "new": "SlotsOutcome_CopyWeightedSymbols",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_CopyWeightedPackedSymbolsUnlessFallbackWeightIsMinusOne."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 113,
+      "old": "loc_4C4F8",
+      "new": "SlotsOutcome_SelectRandomMappedSymbols",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_ChooseThreeMappedSymbolsFromRotatedMixedRandomWord."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 135,
+      "old": "loc_4C540",
+      "new": "SlotsOutcome_SpinUntilTwoPasses",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_AdvanceSpinUntilTwoPassCounterCompletes."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 142,
+      "old": "loc_4C54C",
+      "new": "SlotsOutcome_SpeedUpAndBeginStopPhase",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_IncreaseReelSpeedsSetRandomPassDelayAndEnterStopPhase."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 155,
+      "old": "loc_4C576",
+      "new": "SlotsOutcome_AdvanceReelAndCheckAllStop",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_AdvanceOneReelAndEvaluateWhenAllThreeStopStatesEqualTwelve."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 164,
+      "old": "loc_4C594",
+      "new": "SlotsOutcome_DispatchSelectedReelStop",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_DispatchStopSubstateForCurrentReelSelector."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 177,
+      "old": "loc_4C5B4",
+      "new": "SlotsOutcome_ReelStopSubstateBranches",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_ExecuteFourStopSubstateBranchSlots."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 194,
+      "old": "loc_4C5D0",
+      "new": "SlotsOutcome_ExtractTargetSymbol",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_ExtractSelectedPackedSymbolAndKeepZeroThroughSix."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 201,
+      "old": "loc_4C5DC",
+      "new": "SlotsOutcome_MapSymbol7To5",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_NormalizeExtractedSevenToFive."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 216,
+      "old": "loc_4C5F2",
+      "new": "SlotsOutcome_ReplaceAndMaskOutcomeNibble",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_ReplaceSelectedOutcomeNibbleThenClearEachNibbleBitThree."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 225,
+      "old": "loc_4C602",
+      "new": "SlotsOutcome_WaitFirstReelForPassBorrow",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_WaitFirstSelectedReelForNegativePassCounter."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 233,
+      "old": "loc_4C610",
+      "new": "SlotsOutcome_WaitForPreviousReelState",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_StartLaterReelStopWhenPreviousStateSignedAtLeastEight."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 239,
+      "old": "loc_4C61A",
+      "new": "SlotsOutcome_WaitForTargetStripSymbol",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_WaitUntilCurrentStripSymbolMatchesSelectedPackedTarget."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 251,
+      "old": "loc_4C632",
+      "new": "SlotsOutcome_StartReelBrakeAt96",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_EnterReelBrakingStateWithSpeedNinetySix."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 257,
+      "old": "loc_4C63E",
+      "new": "SlotsOutcome_CheckStripSymbolAndBrake",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_CompareAdvancedStripSymbolAndReduceStoppingSpeed."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 270,
+      "old": "loc_4C662",
+      "new": "SlotsOutcome_CheckFineBrakeSpeed",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_GateFineBrakingBySignedSpeedGreaterThanTwentyFour."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 276,
+      "old": "loc_4C66C",
+      "new": "SlotsOutcome_CheckFineBrakePosition",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_AllowFineBrakingOnlyInLowHalfOfReelPositionByte."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 282,
+      "old": "loc_4C676",
+      "new": "SlotsOutcome_ReduceReelSpeedBy2",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_SubtractTwoFromReelSpeedAndReturn."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 287,
+      "old": "loc_4C67C",
+      "new": "SlotsOutcome_SnapReelAndSetOutcomeNibble",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_SnapReelToPreboundaryAndReplaceFinalOutcomeNibble."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 303,
+      "old": "loc_4C6A8",
+      "new": "SlotsOutcome_WaitForReelAlignment",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_WaitForAlignedReelPositionLowByteToReachZero."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 309,
+      "old": "loc_4C6B0",
+      "new": "SlotsOutcome_StopAlignedReel",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_StopAlignedReelAndAdvanceSubstateToTwelve."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 315,
+      "old": "locret_4C6BA",
+      "new": "SlotsOutcome_ReelStopReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_ReturnFinishedReelStopSubstate."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 319,
+      "old": "loc_4C6BC",
+      "new": "SlotsOutcome_StopAllAndEvaluatePayout",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_StopAllReelSpeedStateWordsEvaluatePayoutAndIdle."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 343,
+      "old": "loc_4C6F0",
+      "new": "SlotsOutcome_SelectReelAndCountPass",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_ExecuteThreeReelSelectionSlotsAndCountCompletedPass."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 354,
+      "old": "loc_4C706",
+      "new": "SlotsOutcome_SelectFirstReelStrip",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_SelectFirstReelVramStripAndAdvanceSelector."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 360,
+      "old": "loc_4C712",
+      "new": "SlotsOutcome_SelectSecondReelStrip",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_SelectSecondReelVramStripAndAdvanceSelector."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 364,
+      "old": "loc_4C71A",
+      "new": "SlotsOutcome_StepReelAndCheckRowChange",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_AdvanceSelectedReelBySignedSpeedAndDetectEightUnitRowChange."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 377,
+      "old": "loc_4C734",
+      "new": "SlotsOutcome_ResolveChangedStripRow",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_ResolveChangedStripRowAndPrepareThirtyTwoLongCopies."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 382,
+      "old": "loc_4C742",
+      "new": "SlotsOutcome_CopyStripBands",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_CopyFourStripBandsAndAdvanceSourceAtSymbolBoundary."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 393,
+      "old": "loc_4C766",
+      "new": "SlotsOutcome_QueueStripVRAMUpload",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_CompleteStripCopyAndQueueTwoHundredHexBytesToVram."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 431,
+      "old": "loc_4C7BC",
+      "new": "SlotsOutcome_AddSecondMatchFlag",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_AccumulateSecondMatchFlagAgainstFirstSymbolByte."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 436,
+      "old": "loc_4C7C4",
+      "new": "SlotsOutcome_JumpToPayoutCase",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_JumpIntoExecutablePayoutMatchBranchGroup."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 442,
+      "old": "loc_4C7C8",
+      "new": "SlotsOutcome_PayoutMatchBranches",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_DispatchMatchCasesOrLookupTripleBasePayoutInline."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 455,
+      "old": "loc_4C7E0",
+      "new": "SlotsOutcome_CheckFirstLastZeroPair",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_HandleFirstLastEqualityWhenMatchingValueIsZero."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 465,
+      "old": "loc_4C7F6",
+      "new": "SlotsOutcome_DoubleFirstLastIfMiddleZero",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_DoubleFirstLastPairOnlyWhenOtherSymbolIsZero."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 475,
+      "old": "loc_4C80E",
+      "new": "SlotsOutcome_CheckFirstMiddleZeroPair",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_HandleFirstMiddleEqualityWhenMatchingValueIsZero."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 485,
+      "old": "loc_4C822",
+      "new": "SlotsOutcome_DoubleFirstMiddleIfLastZero",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_DoubleFirstMiddlePairOnlyWhenLastSymbolZero."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 495,
+      "old": "loc_4C838",
+      "new": "SlotsOutcome_CheckMiddleLastPair",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_RecognizeMiddleLastPairWithFirstZeroOrPairZero."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 507,
+      "old": "loc_4C852",
+      "new": "SlotsOutcome_QuadrupleFirstWithTwoZeros",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_QuadrupleFirstSymbolWhenOtherTwoSymbolsAreZero."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 518,
+      "old": "loc_4C86C",
+      "new": "SlotsOutcome_BeginFallbackSymbol6Count",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_InitializeFallbackTwoPerSymbolSixCount."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 525,
+      "old": "loc_4C87A",
+      "new": "SlotsOutcome_AddTwoForMiddleSymbol6",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_AddTwoForMiddleSymbolSixInFallback."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 530,
+      "old": "loc_4C882",
+      "new": "SlotsOutcome_AddTwoForLastSymbol6",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_AddTwoForLastSymbolSixInFallback."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 535,
+      "old": "loc_4C88A",
+      "new": "SlotsOutcome_StoreFallbackAndLookupBase",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SlotsOutcome_StoreFallbackCountThenFallThroughBasePayoutLookup."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 562,
+      "old": "word_4C8A4",
+      "new": "SlotsOutcome_SignedBasePayouts",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed DATA SlotsOutcome_EightSignedBasePayoutWordsBySymbolIndex."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 571,
+      "old": "byte_4C8B4",
+      "new": "SlotsOutcome_WeightedSymbolTriplets",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed DATA SlotsOutcome_WeightedPackedOutcomeTripletsAndRandomFallbackMarker."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 580,
+      "old": "byte_4C8CC",
+      "new": "SlotsOutcome_FirstReelSymbolStrip",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed DATA SlotsOutcome_FirstEightSymbolStripAndRandomSymbolBytes."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 582,
+      "old": "byte_4C8D4",
+      "new": "SlotsOutcome_SecondReelSymbolStrip",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed DATA SlotsOutcome_SecondEightSymbolStripAndRandomSymbolBytes."
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "original_line": 584,
+      "old": "byte_4C8DC",
+      "new": "SlotsOutcome_ThirdReelSymbolStrip",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed DATA SlotsOutcome_ThirdEightSymbolStripAndRandomSymbolBytes."
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 25,
+      "old": "loc_597AA",
+      "new": "SlotsScreen_InitPrivateForegroundPos",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_SeedPrivateForegroundCoordinatesFromFourHundredMinusCenterOffsets"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 42,
+      "old": "loc_597E4",
+      "new": "SlotsScreen_ApproachFGCenterAndDrawEdges",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_ApproachBothPrivateCoordinatesByAtMostTwentyHexAndDrawEdges"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 73,
+      "old": "loc_5983A",
+      "new": "SlotsScreen_LimitAbsoluteCoordDelta",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_CapAbsoluteNativeWordCoordinateDifferenceToIncomingLimit"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 78,
+      "old": "loc_59840",
+      "new": "SlotsScreen_RestoreCoordDeltaSign",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_RestoreCoordinateStepSignFromSavedDifferenceFlag"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 83,
+      "old": "loc_59846",
+      "new": "SlotsScreen_ApplyLimitedCoordStep",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_ApplyLimitedSignedStepToSelectedPrivateCoordinate"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 94,
+      "old": "loc_59850",
+      "new": "SlotsScreen_ClearScrollAndRefreshBG",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_ClearFiveHundredTwelveScrollWorkspaceBytesThenRefreshStaticBackground"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 110,
+      "old": "loc_59876",
+      "new": "SlotsScreen_AccelerateVerticalDrift",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_AccelerateVerticalDriftAndClampSignedLongStepToPlusMinus8000"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 119,
+      "old": "loc_5988A",
+      "new": "SlotsScreen_SelectSignedDriftLimit",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_SelectSignedVerticalDriftLimitAfterOverflowSideGate"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 122,
+      "old": "loc_5988C",
+      "new": "SlotsScreen_IntegrateBGYAndInitCommands",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_IntegrateWrappedBackgroundYAndInitializeSecondaryPlaneCommandBuffer"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 134,
+      "old": "loc_598B4",
+      "new": "SlotsScreen_IntegrateBandPhase",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_IntegrateOneBandPhaseWithCarryAndPeriodWrapDetection"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 145,
+      "old": "loc_598C6",
+      "new": "SlotsScreen_WrapBandPhaseAtPeriod",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_WrapBandIntegerPhaseOnlyWhenAtLeastItsPeriodWord"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 151,
+      "old": "loc_598CE",
+      "new": "SlotsScreen_MarkBandPhaseWrapped",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_LatchBandPhaseWrapInHighByteOfPendingWord"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 154,
+      "old": "loc_598D2",
+      "new": "SlotsScreen_ThrottleBandAnimation",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_ThrottleTexturedBandAnimationAfterEarlierFrameCommit"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 160,
+      "old": "loc_598E0",
+      "new": "SlotsScreen_TickBandTimerOrWrap",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_DecrementBandTimerAndAdvanceFrameOnExpiryOrPendingWrap"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 168,
+      "old": "loc_598EE",
+      "new": "SlotsScreen_ReloadBandTimer",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_ReloadExpiredBandTimerFromDescriptorWord"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 171,
+      "old": "loc_598F4",
+      "new": "SlotsScreen_AdvanceBandFrameAndWrap",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_AdvanceBandFrameAndWrapAtDescriptorFrameCount"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 178,
+      "old": "loc_59902",
+      "new": "SlotsScreen_StoreBandFrameAndPickUpdate",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_CommitFrameClearPendingAndChooseScrollOffsetOrTileUpload"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 189,
+      "old": "loc_5991A",
+      "new": "SlotsScreen_OffsetDestinationOnOddFrame",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_ApplyDescriptorDestinationDeltaForOddBandAnimationFrames"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 194,
+      "old": "loc_59926",
+      "new": "SlotsScreen_PrepFramePeriodProduct",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_PrepareFrameTimesPeriodSourceXByRepeatedWordAddition"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 201,
+      "old": "loc_59932",
+      "new": "SlotsScreen_AddPeriodPerSourceFrame",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_AccumulateOnePeriodForEachBandSourceFrame"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 205,
+      "old": "loc_59938",
+      "new": "SlotsScreen_AppendBandTileRowCommands",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_AppendOneOrTwoExplicitDestinationTileRowCommands"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 217,
+      "old": "loc_59962",
+      "new": "SlotsScreen_AdvanceDescriptorAndState",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_RestoreLoopRegistersAdvanceTwentyByteDescriptorAndTwelveByteState"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 227,
+      "old": "loc_5997C",
+      "new": "SlotsScreen_WriteAndDuplicateBandScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_ExportEightBandScrollSumsAndDuplicateIntoSecondEightWords"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 235,
+      "old": "loc_59990",
+      "new": "SlotsScreen_Compose224ScrollRows",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSlotsEvents_Compose224RowsWithPrivateForegroundScrollAndDiscardCallbackReturn"
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "original_line": 251,
+      "old": "word_599DE",
+      "new": "SlotsScreen_BandMotionAndTileRecords",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSlotsEvents_EightTwentyByteBandMotionAnimationAndTileUploadRecords"
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 11,
+      "old": "loc_43B18",
+      "new": "S3Gumball_GateTriangleOnCooldown",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_GateTriangleContactBySignedGlobalCooldown."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 24,
+      "old": "loc_43B3E",
+      "new": "S3Gumball_LaunchP1AndDeleteTriangle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_LaunchPrimaryFromTriangleThenDeleteBumper."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 30,
+      "old": "loc_43B4C",
+      "new": "S3Gumball_CheckTriangleP2Contact",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_TestSecondaryTriangleContactAfterPrimaryMiss."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 36,
+      "old": "loc_43B5A",
+      "new": "S3Gumball_LaunchP2AndDeleteTriangle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_LaunchSecondaryFromTriangleThenDeleteBumper."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 42,
+      "old": "loc_43B68",
+      "new": "S3Gumball_DrawTriangleWithoutConsumption",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_DrawTriangleWithoutConsumption."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 56,
+      "old": "loc_43B8E",
+      "new": "S3Gumball_LaunchAndConsumeTriangleCell",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_CommitTriangleLaunchConsumeCellAndRequestMachineDescent."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 77,
+      "old": "loc_43BD8",
+      "new": "S3Gumball_InitDecorationAndMaybeMask",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_InitializeAttachedDecorationAndOptionalMask."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 83,
+      "old": "loc_43BEC",
+      "new": "S3Gumball_FollowRootAndDrawDecoration",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_FollowMachineAndDrawAttachedDecoration."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 88,
+      "old": "loc_43BF8",
+      "new": "S3Gumball_InitDebrisAndSetDelay",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_InitializePlatformDebrisAndSubtypeDelay."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 94,
+      "old": "loc_43C0C",
+      "new": "S3Gumball_TickDelayAndStartDebrisFall",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_DecrementDebrisByteDelayAndScheduleMotionOnNegative."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 99,
+      "old": "loc_43C18",
+      "new": "S3Gumball_DrawPlatformDebris",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_DrawDebrisBeforeFutureMovementHandler."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 103,
+      "old": "loc_43C1E",
+      "new": "S3Gumball_InitExitMonitor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_PlaceExitMonitorBelowInitialMachinePosition."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 107,
+      "old": "loc_43C2A",
+      "new": "S3Gumball_TickCooldownAndCheckExit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_TickCooldownAndPrioritizePrimaryBonusExitOverSecondaryDeletion."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 120,
+      "old": "loc_43C50",
+      "new": "S3Gumball_SaveP1AndRequestLevelRestart",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_SavePrimaryBonusExitStateAndRequestLevelRestart."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 130,
+      "old": "word_43C7C",
+      "new": "S3Gumball_ExitMonitorBounds",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_ExitMonitorContactRectangleWords."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 134,
+      "old": "loc_43C84",
+      "new": "S3Gumball_InitMaskChildFrame23",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_InitializeMaskChildWithGumballFrameTwentyThree."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 139,
+      "old": "loc_43C94",
+      "new": "S3Gumball_SetMaskFlagAndFollowParent",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_RequestSpriteMaskAndCopyDecorationIntegerPosition."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 161,
+      "old": "locret_43CD0",
+      "new": "S3Gumball_RewardDispatchReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_ReturnRewardDispatchWithNativeConsumeFlags."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 166,
+      "old": "off_43CD2",
+      "new": "S3Gumball_RewardHandlerOffsets",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_RewardHandlerRelativeWordSlotsZeroThroughEight."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 176,
+      "old": "word_43CE4",
+      "new": "S3Gumball_RewardContactBounds",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_DroppedItemNearbyPlayerRectangleWords."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 180,
+      "old": "loc_43CEC",
+      "new": "S3Gumball_AwardLifeWithoutCap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_AwardPrimaryExtraLifeWithoutSaturation."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 187,
+      "old": "loc_43CFC",
+      "new": "S3Gumball_TryRefillIfPlatformMissing",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_AttemptPlatformRefillOnlyWhenGlobalGateClear."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 195,
+      "old": "locret_43D18",
+      "new": "S3Gumball_RefillOrNoopRewardReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_ReturnNoOpRewardOrSuccessfulRefill."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 199,
+      "old": "loc_43D1A",
+      "new": "S3Gumball_AddSavedAndLiveRings",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_AddTwentySavedRingsAndTenLivePrimaryRings."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 205,
+      "old": "loc_43D28",
+      "new": "S3Gumball_RepelLowWordContact",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_RepelPrimaryWhenNearbyThenPreserveHandlePairForSecondary."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 211,
+      "old": "loc_43D30",
+      "new": "S3Gumball_RepelHighWordContact",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_RestoreHandlePairAndRepelSecondaryWhenNearby."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 218,
+      "old": "loc_43D3A",
+      "new": "S3Gumball_ClearRoundItemContacts",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_ClearRoundItemPropertyAndReturnRetentionResult."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 253,
+      "old": "loc_43DA2",
+      "new": "S3Gumball_GiveFireShieldToP1",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_GrantPrimaryFireShieldAndReplaceSavedTypeBits."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 265,
+      "old": "loc_43DCC",
+      "new": "S3Gumball_GiveBubbleShieldToP1",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_GrantPrimaryBubbleShieldAndReplaceSavedTypeBits."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 277,
+      "old": "loc_43DF6",
+      "new": "S3Gumball_GiveLightningShieldToP1",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_GrantPrimaryLightningShieldAndReplaceSavedTypeBits."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 300,
+      "old": "loc_43E30",
+      "new": "S3Gumball_SetSavedStatusBit7",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_SetSavedStatusHighBitInUnweightedRewardSlotEight."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 313,
+      "old": "loc_43E4A",
+      "new": "S3Gumball_ScanLeadingEmptyBumperPairs",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_CountLeadingEmptyWordPairsForMachineDropTarget."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 319,
+      "old": "loc_43E56",
+      "new": "S3Gumball_SetTargetYFromEmptyPairs",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_StoreDropTargetFromInitialBaselineAndEmptyPairCount."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 324,
+      "old": "loc_43E60",
+      "new": "S3Gumball_DescendFourTowardTarget",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_DescendMachineByFourUntilUnsignedTargetReached."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 332,
+      "old": "locret_43E72",
+      "new": "S3Gumball_MachineDescentReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_ReturnFromConditionalMachineDescent."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 347,
+      "old": "loc_43E8E",
+      "new": "S3Gumball_SetWeightedRewardAndCollision",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_MapRandomNibbleToTypeAndArmRoundCollisionFlag."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 354,
+      "old": "loc_43EA2",
+      "new": "S3Gumball_SelectRewardRawAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_SelectDroppedItemRawStreamByTypeLongPointer."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 361,
+      "old": "byte_43EAC",
+      "new": "S3Gumball_WeightedRewardTypeTable",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_WeightedItemTypeBytesForSixteenRandomNibbles."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 379,
+      "old": "off_43EBC",
+      "new": "S3Gumball_RewardRawAnimPointers",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_DroppedItemRawAnimationLongPointersByRewardSlot."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 418,
+      "old": "byte_43F0E",
+      "new": "S3Gumball_DebrisOffsetPairs",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_SixteenDebrisSignedByteOffsetPairs."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 453,
+      "old": "RawAni_43F54",
+      "new": "S3Gumball_DecorationFramesBySubtype",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_DecorationFrameLookupForRootChildSubtypesSixThroughTwelve."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 455,
+      "old": "ObjDat3_43F58",
+      "new": "S3Gumball_DecorationAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_AttachedDecorationFullAttributes."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 460,
+      "old": "ObjDat3_43F64",
+      "new": "S3Gumball_RefillablePlatformAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_RefillablePlatformFullAttributes."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 465,
+      "old": "ObjDat3_43F70",
+      "new": "S3Gumball_TriangleBumperFullAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_TriangleBumperFullAttributes."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 475,
+      "old": "ObjDat3_43F88",
+      "new": "S3Gumball_MechanismBodyAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_DispenserMechanismFullAttributes."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 480,
+      "old": "ObjDat3_43F94",
+      "new": "S3Gumball_FiniteUpSpringFullAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_FiniteUpSpringFullAttributes."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 485,
+      "old": "ObjDat3_43FA0",
+      "new": "S3Gumball_PlatformDebrisFullAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_PlatformDebrisFullAttributes."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 490,
+      "old": "ObjDat3_43FAC",
+      "new": "S3Gumball_RewardItemAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_DroppedRewardItemFullAttributes."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 495,
+      "old": "ObjDat3_43FB8",
+      "new": "S3Gumball_SpriteMaskAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_DecorationMaskChildFullAttributes."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 500,
+      "old": "ChildObjDat_43FC4",
+      "new": "S3Gumball_MachineChildRecords",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_MachineSevenNormalChildrenWithOffsets."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 516,
+      "old": "word_43FF0",
+      "new": "S3Gumball_PlatformSpringChildRecords",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_PlatformFourNormalSpringChildrenWithOffsets."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 526,
+      "old": "ChildObjDat_4400A",
+      "new": "S3Gumball_PlatformDebrisChildRecords",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_SixteenSimplePlatformDebrisChildren."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 529,
+      "old": "ChildObjDat_44010",
+      "new": "S3Gumball_OneSimpleDispensedRewardChild",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_OneSimpleDispensedRewardChild."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 532,
+      "old": "ChildObjDat_44016",
+      "new": "S3Gumball_SpriteMaskChildRecord",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_OneSimpleMaskChildForSelectedDecoration."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 535,
+      "old": "byte_4401C",
+      "new": "S3Gumball_MachineActivationAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_MachineTabOrdinaryRawStreamWithCallbackAndRetainedTail."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 538,
+      "old": "byte_44027",
+      "new": "S3Gumball_BodyCycleCallbackAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_DispenserPerFrameDelayRawStreamWithReleaseCallback."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 540,
+      "old": "byte_44032",
+      "new": "S3Gumball_ExtraLifeRewardAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_ExtraLifeRewardItemOrdinaryRawIdle."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 542,
+      "old": "byte_44036",
+      "new": "S3Gumball_PlatformRefillAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_PlatformRefillRewardItemOrdinaryRawIdle."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 544,
+      "old": "byte_4403A",
+      "new": "S3Gumball_RingRewardItemOrdinaryRawIdle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_RingRewardItemOrdinaryRawIdle."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 546,
+      "old": "byte_4403E",
+      "new": "S3Gumball_NoopConsumedRewardAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_NoOpConsumedRewardItemOrdinaryRawIdle."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 548,
+      "old": "byte_44042",
+      "new": "S3Gumball_PersistentRoundRewardAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_RetainedRoundRepelItemOrdinaryRawIdle."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 550,
+      "old": "byte_44046",
+      "new": "S3Gumball_FireShieldRewardAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_FireShieldRewardItemOrdinaryRawIdle."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 552,
+      "old": "byte_4404A",
+      "new": "S3Gumball_BubbleShieldRewardAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_BubbleShieldRewardItemOrdinaryRawIdle."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 554,
+      "old": "byte_4404E",
+      "new": "S3Gumball_LightningShieldRewardAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_LightningShieldRewardItemOrdinaryRawIdle."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "original_line": 556,
+      "old": "byte_44052",
+      "new": "S3Gumball_SavedStatusBit7RewardAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_SavedHighStatusRewardSlotEightAlternatingRawFrames."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 25,
+      "old": "loc_43882",
+      "new": "S3Gumball_InitBumpersAndPlatformGate",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_FillBumperCellsCooldownAndPlatformGateWithOnes."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 31,
+      "old": "loc_43892",
+      "new": "S3Gumball_DescendAndCheckActivation",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_UpdateIdleMachineDescentAndChoosePrimaryBeforeSecondaryContact."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 41,
+      "old": "loc_438AA",
+      "new": "S3Gumball_LatchActivationAndSelectFlip",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_LatchMachineCycleAndChooseTabFacingFromPlayerMotion."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 53,
+      "old": "loc_438D2",
+      "new": "S3Gumball_StoreMachineFlip",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_ApplyMachineTabFacingFromComputedByte."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 59,
+      "old": "loc_438E2",
+      "new": "S3Gumball_RequestMachineTabSoundAndDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_RequestMachineTabSoundAndDraw."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 63,
+      "old": "loc_438EA",
+      "new": "S3Gumball_DrawIdleMachine",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_DrawMachineAfterIdleOrTabContact."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 66,
+      "old": "word_438F0",
+      "new": "S3Gumball_MachineActivationBounds",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_MachineTabContactRectangleWords."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 70,
+      "old": "loc_438F8",
+      "new": "S3Gumball_AnimateActivationAndDescend",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_AnimateBusyMachineTabAndContinueDescent."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 77,
+      "old": "loc_4390C",
+      "new": "S3Gumball_SetMechanismActive",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_MarkDispenseRequestedAndEnterBusyWait."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 83,
+      "old": "loc_4391A",
+      "new": "S3Gumball_DescendUntilMechanismUnlocks",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_ContinueDescentUntilMechanismClearsBusyLatch."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 89,
+      "old": "loc_4392C",
+      "new": "S3Gumball_DrawActiveMachine",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_DrawMachineDuringOrAfterBusyWait."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 93,
+      "old": "loc_43932",
+      "new": "S3Gumball_InitPlatformAndFourSprings",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_InitializeFixedRefillablePlatformAndAttemptFourSprings."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 102,
+      "old": "loc_43958",
+      "new": "S3Gumball_CollideAndDrawLivePlatform",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_KeepPlatformSolidUntilItsPrivateRemovalFlag."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 110,
+      "old": "loc_43970",
+      "new": "S3Gumball_SpawnDebrisAndRetirePlatform",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_ReleasePlatformGateAttemptDebrisAndScheduleDeletion."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 117,
+      "old": "loc_43986",
+      "new": "S3Gumball_InitAndCheckSpringP1",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_UpdateFiniteSpringWithRepeatedAttributesAndPrimaryArming."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 137,
+      "old": "loc_439D6",
+      "new": "S3Gumball_CheckSpringP2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_RestoreSpringDimensionsAndLaunchSecondaryWithoutArming."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 146,
+      "old": "loc_439F4",
+      "new": "S3Gumball_AnimateSpringAndCheckRetire",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_AnimateSpringAndDetachWhenPrimaryArmedAnimationSelected."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 154,
+      "old": "loc_43A10",
+      "new": "S3Gumball_StartFallingSpringAndFlagRoot",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_DetachFiniteSpringAndFlagItsPlatformForRemoval."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 159,
+      "old": "loc_43A20",
+      "new": "S3Gumball_DrawPlatformSpring",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_DrawSpringAfterSolidAnimationOrDetachment."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 163,
+      "old": "loc_43A26",
+      "new": "S3Gumball_InitMechanismBody",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_InitializeDispenserMechanismChild."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 168,
+      "old": "loc_43A36",
+      "new": "S3Gumball_BeginBodyCycleAndTryItem",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_PollParentDispenseFlagAndAttemptOneItem."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 177,
+      "old": "loc_43A5A",
+      "new": "S3Gumball_FollowRootAndDrawBody",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_FollowRootAndDrawDispenserMechanism."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 182,
+      "old": "loc_43A66",
+      "new": "S3Gumball_AnimateBodyCycleAndDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_AnimateDispenserWithPerFrameDelaysThenFollowAndDraw."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 189,
+      "old": "loc_43A7C",
+      "new": "S3Gumball_ResetBodyAndUnlockRoot",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_ReturnDispenserToPollingAndClearRootCycleFlags."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 195,
+      "old": "locret_43A92",
+      "new": "S3Gumball_BodyCallbackReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_ReturnFromMechanismCallbackOrSharedNoAction."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 199,
+      "old": "loc_43A94",
+      "new": "S3Gumball_InitWeightedRewardItem",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_InitializeDroppedItemAndSelectWeightedReward."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 205,
+      "old": "loc_43AA8",
+      "new": "S3Gumball_IncreaseItemYSpeedTo200",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_AdvanceDropItemVerticalVelocityOnlyInsideUnsignedCap."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 212,
+      "old": "loc_43ABA",
+      "new": "S3Gumball_MoveItemAndClampToBodyFloor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_MoveDropItemAndClampItBelowParentIntegerY."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 222,
+      "old": "loc_43AD6",
+      "new": "S3Gumball_CheckRewardBelowBody",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_ProbeRewardOnlyAfterSixteenPixelsBelowMechanism."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 229,
+      "old": "loc_43AE8",
+      "new": "S3Gumball_CullOrAnimateRewardItem",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_CullDroppedItemBelowCameraThenAnimateAndDraw."
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "original_line": 238,
+      "old": "loc_43B02",
+      "new": "S3Gumball_DeleteRewardItem",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3Gumball_DeleteDroppedItemAfterConsumedRewardOrVerticalCull."
+    },
+    {
+      "source": "src/objects/bonus/sk/gumball_item.s",
+      "original_line": 9,
+      "old": "loc_4A2CC",
+      "new": "PachinkoGumball_InitSubtypeMapping",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Gumball_InitializeSubtypeMappingWithoutReplacingInstalledCode"
+    },
+    {
+      "source": "src/objects/bonus/sk/gumball_item.s",
+      "original_line": 19,
+      "old": "loc_4A2F4",
+      "new": "PachinkoGumball_SetStationaryContact",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Gumball_SetContactAttributesThenRunStationaryTail"
+    },
+    {
+      "source": "src/objects/bonus/sk/gumball_item.s",
+      "original_line": 26,
+      "old": "loc_4A312",
+      "new": "PachinkoGumball_ConsumeContactsAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Gumball_ConsumeContactsThenCullAndDrawDespiteScheduledDelete"
+    },
+    {
+      "source": "src/objects/bonus/sk/gumball_item.s",
+      "original_line": 31,
+      "old": "loc_4A31A",
+      "new": "PachinkoGumball_CullBeforeContactDraw",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Gumball_VerticalCullBeforeContactRegistrationAndDraw"
+    },
+    {
+      "source": "src/objects/bonus/sk/gumball_item.s",
+      "original_line": 41,
+      "old": "loc_4A33A",
+      "new": "PachinkoGumball_ReleaseRespawnOnCull",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Gumball_ReleaseRespawnWhenVerticalWindowFails"
+    },
+    {
+      "source": "src/objects/bonus/sk/gumball_item.s",
+      "original_line": 47,
+      "old": "loc_4A346",
+      "new": "PachinkoGumball_DeleteAfterCull",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Gumball_ClearActorImmediatelyAfterVerticalCull"
+    },
+    {
+      "source": "src/objects/bonus/sk/gumball_item.s",
+      "original_line": 51,
+      "old": "loc_4A34C",
+      "new": "PachinkoGumball_ConsumeBeforeMove",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Gumball_FloatingHandlerConsumesBeforeMotion"
+    },
+    {
+      "source": "src/objects/bonus/sk/gumball_item.s",
+      "original_line": 56,
+      "old": "loc_4A354",
+      "new": "PachinkoGumball_MoveThenAccelerateUp",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Gumball_MoveOldVelocityThenApplyUpwardAcceleration"
+    },
+    {
+      "source": "src/objects/bonus/sk/gumball_item.s",
+      "original_line": 69,
+      "old": "loc_4A370",
+      "new": "PachinkoGumball_CheckSecondContact",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Gumball_AttemptSecondContactAfterFirstCallbackReturns"
+    },
+    {
+      "source": "src/objects/bonus/sk/gumball_item.s",
+      "original_line": 75,
+      "old": "loc_4A37E",
+      "new": "PachinkoGumball_ClearContactBits",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Gumball_ClearRemainingContactBitsAndReturn"
+    },
+    {
+      "source": "src/objects/bonus/sk/gumball_item.s",
+      "original_line": 98,
+      "old": "loc_4A3AC",
+      "new": "PachinkoGumball_PlayBumperForType0Or2",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Gumball_RequestBumperSoundForSubtypeZeroOrTwo"
+    },
+    {
+      "source": "src/objects/bonus/sk/gumball_item.s",
+      "original_line": 104,
+      "old": "loc_4A3B6",
+      "new": "PachinkoGumball_AwardRingsByYBand",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Gumball_AwardGlobalRingsFromHighYBandTable"
+    },
+    {
+      "source": "src/objects/bonus/slots/sk/spike.s",
+      "original_line": 33,
+      "old": "loc_4C3CA",
+      "new": "SlotsSpike_DebitRingIfNonzero",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_SlotsSpike_DeductOneLiveRingOnlyWhenNonzero"
+    },
+    {
+      "source": "src/objects/bonus/slots/sk/spike.s",
+      "original_line": 39,
+      "old": "loc_4C3DA",
+      "new": "SlotsSpike_DeleteAfterRingCheck",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_SlotsSpike_DeleteAfterCountAndOptionalRingDebit"
+    },
+    {
+      "source": "src/objects/bonus/slots/sk/spike.s",
+      "original_line": 43,
+      "old": "loc_4C3E0",
+      "new": "SlotsSpike_DrawLiveSpike",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_SlotsSpike_DrawWhileExactZeroLifetimeNotReached"
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/bonus_cage_unused.s",
+      "original_line": 10,
+      "old": "word_4C2AC",
+      "new": "SlotsCageMap_Frame00",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsCageMap_Frame00 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/bonus_cage_unused.s",
+      "original_line": 19,
+      "old": "word_4C2DE",
+      "new": "SlotsCageMap_Frame02",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsCageMap_Frame02 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/bonus_cage_unused.s",
+      "original_line": 28,
+      "old": "word_4C310",
+      "new": "SlotsCageMap_Frame04",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsCageMap_Frame04 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/bonus_cage_unused.s",
+      "original_line": 37,
+      "old": "word_4C342",
+      "new": "SlotsCageMap_Frame01_03_05",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsCageMap_Frame01_03_05 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/bumper.s",
+      "original_line": 7,
+      "old": "byte_4B882",
+      "new": "SlotsGridBumperMap_Frame00",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridBumperMap_Frame00 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/bumper.s",
+      "original_line": 9,
+      "old": "byte_4B888",
+      "new": "SlotsGridBumperMap_Frame01",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridBumperMap_Frame01 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/bumper.s",
+      "original_line": 11,
+      "old": "byte_4B88E",
+      "new": "SlotsGridBumperMap_Frame02",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridBumperMap_Frame02 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/colored_wall.s",
+      "original_line": 20,
+      "old": "byte_4B8F8",
+      "new": "SlotsGridRotatingWallMap_Frame00",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRotatingWallMap_Frame00 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/colored_wall.s",
+      "original_line": 22,
+      "old": "byte_4B8FE",
+      "new": "SlotsGridRotatingWallMap_Frame01",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRotatingWallMap_Frame01 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/colored_wall.s",
+      "original_line": 24,
+      "old": "byte_4B904",
+      "new": "SlotsGridRotatingWallMap_Frame02",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRotatingWallMap_Frame02 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/colored_wall.s",
+      "original_line": 26,
+      "old": "byte_4B90A",
+      "new": "SlotsGridRotatingWallMap_Frame03",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRotatingWallMap_Frame03 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/colored_wall.s",
+      "original_line": 28,
+      "old": "byte_4B910",
+      "new": "SlotsGridRotatingWallMap_Frame04",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRotatingWallMap_Frame04 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/colored_wall.s",
+      "original_line": 30,
+      "old": "byte_4B916",
+      "new": "SlotsGridRotatingWallMap_Frame05",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRotatingWallMap_Frame05 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/colored_wall.s",
+      "original_line": 32,
+      "old": "byte_4B91C",
+      "new": "SlotsGridRotatingWallMap_Frame06",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRotatingWallMap_Frame06 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/colored_wall.s",
+      "original_line": 34,
+      "old": "byte_4B922",
+      "new": "SlotsGridRotatingWallMap_Frame07",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRotatingWallMap_Frame07 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/colored_wall.s",
+      "original_line": 36,
+      "old": "byte_4B928",
+      "new": "SlotsGridRotatingWallMap_Frame08",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRotatingWallMap_Frame08 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/colored_wall.s",
+      "original_line": 38,
+      "old": "byte_4B92E",
+      "new": "SlotsGridRotatingWallMap_Frame09",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRotatingWallMap_Frame09 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/colored_wall.s",
+      "original_line": 40,
+      "old": "byte_4B934",
+      "new": "SlotsGridRotatingWallMap_Frame0A",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRotatingWallMap_Frame0A from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/colored_wall.s",
+      "original_line": 42,
+      "old": "byte_4B93A",
+      "new": "SlotsGridRotatingWallMap_Frame0B",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRotatingWallMap_Frame0B from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/colored_wall.s",
+      "original_line": 44,
+      "old": "byte_4B940",
+      "new": "SlotsGridRotatingWallMap_Frame0C",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRotatingWallMap_Frame0C from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/colored_wall.s",
+      "original_line": 46,
+      "old": "byte_4B946",
+      "new": "SlotsGridRotatingWallMap_Frame0D",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRotatingWallMap_Frame0D from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/colored_wall.s",
+      "original_line": 48,
+      "old": "byte_4B94C",
+      "new": "SlotsGridRotatingWallMap_Frame0E",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRotatingWallMap_Frame0E from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/colored_wall.s",
+      "original_line": 50,
+      "old": "byte_4B952",
+      "new": "SlotsGridRotatingWallMap_Frame0F",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRotatingWallMap_Frame0F from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/goal.s",
+      "original_line": 7,
+      "old": "byte_4B86A",
+      "new": "SlotsGridGoalMap_Frame00",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridGoalMap_Frame00 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/goal.s",
+      "original_line": 9,
+      "old": "byte_4B870",
+      "new": "SlotsGridGoalMap_Frame01",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridGoalMap_Frame01 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/goal.s",
+      "original_line": 11,
+      "old": "byte_4B876",
+      "new": "SlotsGridGoalMap_Frame02",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridGoalMap_Frame02 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/r_peppermint.s",
+      "original_line": 8,
+      "old": "byte_4B84C",
+      "new": "SlotsGridReverseAndPeppermintMap_Frame00",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridReverseAndPeppermintMap_Frame00 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/r_peppermint.s",
+      "original_line": 10,
+      "old": "byte_4B852",
+      "new": "SlotsGridReverseAndPeppermintMap_Frame01",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridReverseAndPeppermintMap_Frame01 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/r_peppermint.s",
+      "original_line": 12,
+      "old": "byte_4B858",
+      "new": "SlotsGridReverseAndPeppermintMap_Frame02",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridReverseAndPeppermintMap_Frame02 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/r_peppermint.s",
+      "original_line": 14,
+      "old": "byte_4B85E",
+      "new": "SlotsGridReverseAndPeppermintMap_Frame03",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridReverseAndPeppermintMap_Frame03 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/ring.s",
+      "original_line": 13,
+      "old": "byte_4B8A6",
+      "new": "SlotsGridRingMap_Frame00",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRingMap_Frame00 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/ring.s",
+      "original_line": 15,
+      "old": "byte_4B8AC",
+      "new": "SlotsGridRingMap_Frame01",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRingMap_Frame01 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/ring.s",
+      "original_line": 17,
+      "old": "byte_4B8B2",
+      "new": "SlotsGridRingMap_Frame02",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRingMap_Frame02 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/ring.s",
+      "original_line": 19,
+      "old": "byte_4B8B8",
+      "new": "SlotsGridRingMap_Frame03",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRingMap_Frame03 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/ring.s",
+      "original_line": 21,
+      "old": "byte_4B8BE",
+      "new": "SlotsGridRingMap_Frame04",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRingMap_Frame04 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/ring.s",
+      "original_line": 23,
+      "old": "byte_4B8C4",
+      "new": "SlotsGridRingMap_Frame05",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRingMap_Frame05 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/ring.s",
+      "original_line": 25,
+      "old": "byte_4B8CA",
+      "new": "SlotsGridRingMap_Frame06",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRingMap_Frame06 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/ring.s",
+      "original_line": 27,
+      "old": "byte_4B8D0",
+      "new": "SlotsGridRingMap_Frame07",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRingMap_Frame07 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/ring.s",
+      "original_line": 29,
+      "old": "byte_4B8D6",
+      "new": "SlotsGridRingMap_Frame08",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridRingMap_Frame08 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/slot.s",
+      "original_line": 10,
+      "old": "byte_4B7A0",
+      "new": "SlotsGridSlotMap_Frame00",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridSlotMap_Frame00 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/slot.s",
+      "original_line": 19,
+      "old": "byte_4B7C9",
+      "new": "SlotsGridSlotMap_Frame02",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridSlotMap_Frame02 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/slot.s",
+      "original_line": 28,
+      "old": "byte_4B7F2",
+      "new": "SlotsGridSlotMap_Frame04",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridSlotMap_Frame04 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/slot.s",
+      "original_line": 37,
+      "old": "byte_4B81B",
+      "new": "SlotsGridSlotMap_Frame01_03_05",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsGridSlotMap_Frame01_03_05 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/spike.s",
+      "original_line": 5,
+      "old": "word_4C3E8",
+      "new": "SlotsPayoutSpikeMap_Frame00",
+      "profiles": ["sk"],
+      "meaning": "Establish SlotsPayoutSpikeMap_Frame00 from literal native mapping/script and actual readers."
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/game/bonus/slots/sk/layout_rendering.s",
+      "tokens": [
+        [25, 0, 0, ""],
+        [39, 0, 1, ""],
+        [48, 3, 1, ""],
+        [51, 3, 0, ""],
+        [70, 0, 2, ""],
+        [72, 0, 3, ""],
+        [75, 1, 4, ""],
+        [77, 1, 4, ""],
+        [81, 1, 4, ""],
+        [83, 1, 4, ""],
+        [87, 1, 4, ""],
+        [89, 1, 4, ""],
+        [101, 1, 4, ""],
+        [103, 0, 4, ""],
+        [105, 3, 3, ""],
+        [107, 3, 2, ""],
+        [112, 1, 6, ""],
+        [129, 1, 5, ""],
+        [131, 0, 5, ""],
+        [134, 0, 6, ""],
+        [143, 0, 7, ""],
+        [146, 3, 7, ""],
+        [149, 0, 8, ""],
+        [152, 3, 8, ""],
+        [155, 1, 10, ""],
+        [159, 1, 9, ""],
+        [161, 0, 9, ""],
+        [164, 1, 10, ""],
+        [166, 0, 10, ""],
+        [170, 1, 11, ""],
+        [174, 0, 11, ""],
+        [178, 1, 12, ""],
+        [182, 0, 12, ""],
+        [192, 0, 13, ""],
+        [194, 1, 14, ""],
+        [196, 3, 13, ""],
+        [197, 0, 14, ""],
+        [202, 0, 15, ""],
+        [205, 1, 16, ""],
+        [207, 1, 17, ""],
+        [209, 0, 16, ""],
+        [211, 3, 15, ""],
+        [213, 0, 17, ""],
+        [214, 1, 18, ""],
+        [215, 1, 21, ""],
+        [216, 1, 29, ""],
+        [217, 1, 25, ""],
+        [218, 0, 18, ""],
+        [220, 1, 19, ""],
+        [226, 1, 20, ""],
+        [228, 1, 19, ""],
+        [231, 0, 19, ""],
+        [233, 0, 20, ""],
+        [236, 0, 21, ""],
+        [238, 1, 23, ""],
+        [244, 1, 24, ""],
+        [245, 1, 22, ""],
+        [250, 0, 22, ""],
+        [252, 0, 23, ""],
+        [254, 0, 24, ""],
+        [257, 0, 25, ""],
+        [259, 1, 27, ""],
+        [265, 1, 28, ""],
+        [266, 1, 26, ""],
+        [271, 0, 26, ""],
+        [273, 0, 27, ""],
+        [275, 0, 28, ""],
+        [278, 0, 29, ""],
+        [280, 1, 30, ""],
+        [286, 1, 31, ""],
+        [288, 1, 30, ""],
+        [292, 0, 30, ""],
+        [294, 0, 31, ""],
+        [333, 0, 32, ""],
+        [335, 3, 32, ""],
+        [341, 0, 33, ""],
+        [343, 0, 34, ""],
+        [345, 3, 34, ""],
+        [347, 3, 33, ""],
+        [351, 0, 35, ""],
+        [356, 3, 35, ""],
+        [359, 0, 36, ""],
+        [361, 3, 36, ""],
+        [363, 1, 37, ""],
+        [364, 2, 98, ""],
+        [365, 0, 37, ""]
+      ]
+    },
+    {
+      "source": "src/game/bonus/slots/sk/player_controller.s",
+      "tokens": [
+        [4, 1, 38, ""],
+        [7, 0, 38, ""],
+        [12, 0, 39, ""],
+        [23, 1, 40, ""],
+        [25, 0, 40, ""],
+        [27, 1, 41, ""],
+        [29, 0, 41, ""],
+        [32, 1, 43, ""],
+        [33, 1, 46, ""],
+        [34, 1, 70, ""],
+        [35, 0, 42, ""],
+        [39, 0, 43, ""],
+        [45, 1, 44, ""],
+        [47, 0, 44, ""],
+        [50, 1, 42, ""],
+        [58, 1, 45, ""],
+        [62, 0, 45, ""],
+        [68, 0, 46, ""],
+        [70, 1, 47, ""],
+        [72, 1, 47, ""],
+        [74, 0, 47, ""],
+        [77, 1, 48, ""],
+        [81, 1, 49, ""],
+        [82, 1, 49, ""],
+        [83, 0, 48, ""],
+        [89, 0, 49, ""],
+        [90, 1, 50, ""],
+        [90, 3, 49, ""],
+        [91, 1, 51, ""],
+        [91, 3, 49, ""],
+        [92, 0, 50, ""],
+        [94, 0, 51, ""],
+        [106, 1, 52, ""],
+        [108, 0, 52, ""],
+        [110, 1, 53, ""],
+        [112, 0, 53, ""],
+        [115, 1, 57, ""],
+        [117, 1, 57, ""],
+        [118, 1, 55, ""],
+        [120, 1, 54, ""],
+        [122, 0, 54, ""],
+        [124, 1, 57, ""],
+        [125, 0, 55, ""],
+        [127, 1, 56, ""],
+        [129, 0, 56, ""],
+        [131, 0, 57, ""],
+        [145, 1, 58, ""],
+        [151, 0, 58, ""],
+        [157, 1, 59, ""],
+        [158, 1, 61, ""],
+        [159, 0, 59, ""],
+        [162, 1, 60, ""],
+        [164, 0, 60, ""],
+        [167, 0, 61, ""],
+        [169, 1, 62, ""],
+        [171, 0, 62, ""],
+        [177, 1, 64, ""],
+        [180, 1, 63, ""],
+        [182, 0, 63, ""],
+        [184, 1, 66, ""],
+        [185, 0, 64, ""],
+        [187, 1, 65, ""],
+        [189, 0, 65, ""],
+        [191, 0, 66, ""],
+        [196, 1, 67, ""],
+        [211, 0, 67, ""],
+        [218, 1, 68, ""],
+        [221, 0, 68, ""],
+        [224, 1, 69, ""],
+        [227, 0, 69, ""],
+        [229, 0, 70, ""],
+        [232, 1, 71, ""],
+        [235, 2, 72, ""],
+        [238, 0, 71, ""],
+        [243, 0, 72, ""],
+        [245, 1, 73, ""],
+        [250, 0, 73, ""],
+        [256, 1, 74, ""],
+        [264, 0, 74, ""],
+        [265, 1, 39, ""],
+        [284, 1, 75, ""],
+        [292, 1, 76, ""],
+        [297, 0, 75, ""],
+        [300, 1, 77, ""],
+        [306, 0, 76, ""],
+        [312, 0, 77, ""],
+        [318, 1, 78, ""],
+        [321, 0, 78, ""],
+        [354, 1, 79, ""],
+        [356, 1, 79, ""],
+        [358, 1, 80, ""],
+        [359, 0, 79, ""],
+        [361, 0, 80, ""],
+        [363, 1, 81, ""],
+        [365, 1, 81, ""],
+        [368, 0, 81, ""],
+        [385, 1, 82, ""],
+        [388, 0, 82, ""],
+        [390, 1, 85, ""],
+        [392, 1, 83, ""],
+        [395, 0, 83, ""],
+        [398, 1, 84, ""],
+        [400, 1, 84, ""],
+        [404, 0, 84, ""],
+        [407, 0, 85, ""],
+        [412, 1, 88, ""],
+        [414, 1, 86, ""],
+        [416, 0, 86, ""],
+        [418, 1, 87, ""],
+        [420, 0, 87, ""],
+        [422, 0, 88, ""],
+        [424, 1, 90, ""],
+        [447, 1, 89, ""],
+        [452, 0, 89, ""],
+        [455, 0, 90, ""],
+        [457, 1, 91, ""],
+        [462, 0, 91, ""],
+        [464, 1, 93, ""],
+        [466, 1, 97, ""],
+        [469, 1, 92, ""],
+        [474, 0, 92, ""],
+        [478, 0, 93, ""],
+        [480, 1, 94, ""],
+        [482, 1, 94, ""],
+        [484, 1, 94, ""],
+        [486, 1, 97, ""],
+        [487, 0, 94, ""],
+        [489, 1, 96, ""],
+        [497, 1, 95, ""],
+        [500, 0, 95, ""],
+        [502, 0, 96, ""],
+        [505, 0, 97, ""],
+        [507, 0, 98, ""],
+        [516, 2, 99, ""],
+        [517, 0, 99, ""],
+        [546, 1, 100, ""],
+        [550, 1, 100, ""],
+        [552, 0, 100, ""],
+        [556, 1, 101, ""],
+        [557, 1, 101, ""],
+        [558, 0, 101, ""],
+        [559, 1, 102, ""],
+        [559, 3, 101, ""],
+        [560, 1, 111, ""],
+        [560, 3, 101, ""],
+        [561, 1, 114, ""],
+        [561, 3, 101, ""],
+        [562, 1, 116, ""],
+        [562, 3, 101, ""],
+        [563, 0, 102, ""],
+        [565, 1, 103, ""],
+        [567, 1, 103, ""],
+        [572, 1, 103, ""],
+        [577, 1, 103, ""],
+        [589, 1, 103, ""],
+        [594, 0, 103, ""],
+        [596, 0, 104, ""],
+        [598, 1, 108, ""],
+        [600, 1, 105, ""],
+        [602, 0, 105, ""],
+        [604, 1, 106, ""],
+        [606, 1, 107, ""],
+        [608, 1, 107, ""],
+        [610, 1, 107, ""],
+        [637, 0, 106, ""],
+        [639, 1, 113, ""],
+        [640, 0, 107, ""],
+        [643, 0, 108, ""],
+        [644, 1, 109, ""],
+        [646, 1, 110, ""],
+        [648, 1, 110, ""],
+        [650, 1, 110, ""],
+        [677, 0, 109, ""],
+        [679, 1, 113, ""],
+        [680, 0, 110, ""],
+        [682, 0, 111, ""],
+        [685, 1, 104, ""],
+        [688, 1, 112, ""],
+        [691, 0, 112, ""],
+        [693, 0, 113, ""],
+        [699, 0, 114, ""],
+        [702, 1, 115, ""],
+        [716, 0, 115, ""],
+        [718, 0, 116, ""],
+        [720, 1, 117, ""],
+        [723, 0, 117, ""]
+      ]
+    },
+    {
+      "source": "src/game/bonus/slots/sk/slot_outcomes.s",
+      "tokens": [
+        [7, 1, 118, ""],
+        [8, 1, 120, ""],
+        [9, 1, 122, ""],
+        [10, 1, 126, ""],
+        [11, 1, 128, ""],
+        [12, 1, 146, ""],
+        [14, 0, 118, ""],
+        [17, 0, 119, ""],
+        [19, 3, 119, ""],
+        [35, 0, 120, ""],
+        [38, 1, 121, ""],
+        [40, 0, 121, ""],
+        [46, 0, 122, ""],
+        [71, 2, 168, ""],
+        [72, 0, 123, ""],
+        [74, 1, 124, ""],
+        [76, 1, 123, ""],
+        [77, 0, 124, ""],
+        [79, 1, 125, ""],
+        [83, 0, 125, ""],
+        [89, 2, 169, ""],
+        [94, 2, 170, ""],
+        [99, 2, 171, ""],
+        [103, 0, 126, ""],
+        [106, 1, 127, ""],
+        [108, 0, 127, ""],
+        [119, 0, 128, ""],
+        [122, 1, 129, ""],
+        [124, 1, 129, ""],
+        [126, 1, 146, ""],
+        [127, 0, 129, ""],
+        [132, 2, 169, ""],
+        [137, 1, 130, ""],
+        [138, 0, 130, ""],
+        [139, 1, 134, ""],
+        [140, 1, 138, ""],
+        [141, 1, 143, ""],
+        [142, 1, 145, ""],
+        [146, 1, 131, ""],
+        [148, 0, 131, ""],
+        [151, 1, 132, ""],
+        [153, 0, 132, ""],
+        [160, 1, 133, ""],
+        [163, 0, 133, ""],
+        [168, 0, 134, ""],
+        [170, 1, 135, ""],
+        [172, 1, 136, ""],
+        [174, 0, 135, ""],
+        [176, 1, 136, ""],
+        [178, 0, 136, ""],
+        [186, 1, 137, ""],
+        [188, 0, 137, ""],
+        [192, 0, 138, ""],
+        [200, 1, 142, ""],
+        [202, 1, 139, ""],
+        [204, 0, 139, ""],
+        [206, 1, 140, ""],
+        [208, 0, 140, ""],
+        [210, 1, 141, ""],
+        [212, 0, 141, ""],
+        [215, 0, 142, ""],
+        [229, 0, 143, ""],
+        [231, 1, 144, ""],
+        [233, 0, 144, ""],
+        [237, 0, 145, ""],
+        [239, 0, 146, ""],
+        [252, 2, 169, ""],
+        [255, 1, 147, ""],
+        [256, 0, 147, ""],
+        [257, 1, 148, ""],
+        [258, 1, 149, ""],
+        [262, 1, 150, ""],
+        [263, 0, 148, ""],
+        [266, 1, 150, ""],
+        [267, 0, 149, ""],
+        [270, 0, 150, ""],
+        [279, 1, 151, ""],
+        [281, 0, 151, ""],
+        [285, 0, 152, ""],
+        [291, 1, 153, ""],
+        [295, 0, 153, ""],
+        [296, 3, 152, ""],
+        [323, 1, 154, ""],
+        [325, 0, 154, ""],
+        [327, 1, 155, ""],
+        [329, 0, 155, ""],
+        [330, 1, 156, ""],
+        [331, 0, 156, ""],
+        [332, 1, 161, ""],
+        [333, 1, 159, ""],
+        [334, 1, 157, ""],
+        [339, 0, 157, ""],
+        [341, 1, 158, ""],
+        [347, 0, 158, ""],
+        [349, 1, 161, ""],
+        [355, 0, 159, ""],
+        [357, 1, 160, ""],
+        [363, 0, 160, ""],
+        [365, 1, 161, ""],
+        [371, 0, 161, ""],
+        [373, 1, 163, ""],
+        [375, 1, 162, ""],
+        [381, 0, 162, ""],
+        [383, 1, 163, ""],
+        [390, 0, 163, ""],
+        [394, 1, 164, ""],
+        [396, 0, 164, ""],
+        [398, 1, 165, ""],
+        [400, 0, 165, ""],
+        [402, 1, 166, ""],
+        [404, 0, 166, ""],
+        [408, 2, 167, ""],
+        [417, 0, 167, ""],
+        [426, 0, 168, ""],
+        [435, 0, 169, ""],
+        [437, 0, 170, ""],
+        [439, 0, 171, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "tokens": [
+        [10, 1, 172, ""],
+        [11, 1, 173, ""],
+        [12, 0, 172, ""],
+        [27, 0, 173, ""],
+        [52, 1, 174, ""],
+        [54, 0, 174, ""],
+        [56, 1, 175, ""],
+        [58, 0, 175, ""],
+        [60, 1, 176, ""],
+        [62, 0, 176, ""],
+        [68, 0, 177, ""],
+        [70, 3, 177, ""],
+        [75, 1, 195, ""],
+        [79, 1, 178, ""],
+        [81, 0, 178, ""],
+        [85, 1, 179, ""],
+        [88, 1, 180, ""],
+        [89, 0, 179, ""],
+        [91, 0, 180, ""],
+        [99, 1, 196, ""],
+        [102, 0, 181, ""],
+        [108, 1, 182, ""],
+        [110, 1, 183, ""],
+        [111, 0, 182, ""],
+        [114, 1, 184, ""],
+        [116, 0, 183, ""],
+        [118, 0, 184, ""],
+        [120, 1, 185, ""],
+        [122, 1, 193, ""],
+        [123, 0, 185, ""],
+        [125, 1, 186, ""],
+        [127, 1, 193, ""],
+        [128, 1, 187, ""],
+        [129, 0, 186, ""],
+        [131, 0, 187, ""],
+        [135, 1, 188, ""],
+        [137, 0, 188, ""],
+        [142, 1, 189, ""],
+        [145, 1, 193, ""],
+        [146, 0, 189, ""],
+        [148, 1, 190, ""],
+        [150, 0, 190, ""],
+        [155, 1, 192, ""],
+        [156, 0, 191, ""],
+        [158, 3, 191, ""],
+        [159, 0, 192, ""],
+        [166, 1, 193, ""],
+        [170, 0, 193, ""],
+        [175, 3, 181, ""],
+        [179, 0, 194, ""],
+        [185, 3, 194, ""],
+        [186, 0, 195, ""],
+        [201, 0, 196, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/item_orb.s",
+      "tokens": [
+        [18, 1, 296, ""],
+        [33, 2, 299, ""],
+        [34, 1, 293, ""],
+        [39, 1, 296, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "tokens": [
+        [2, 1, 240, ""],
+        [4, 2, 197, ""],
+        [5, 0, 197, ""],
+        [7, 1, 201, ""],
+        [14, 1, 198, ""],
+        [16, 1, 199, ""],
+        [17, 0, 198, ""],
+        [21, 0, 199, ""],
+        [23, 1, 200, ""],
+        [25, 1, 201, ""],
+        [26, 0, 200, ""],
+        [30, 0, 201, ""],
+        [37, 1, 202, ""],
+        [40, 0, 202, ""],
+        [57, 0, 203, ""],
+        [58, 1, 238, ""],
+        [60, 2, 204, ""],
+        [62, 0, 204, ""],
+        [65, 0, 205, ""],
+        [66, 1, 243, ""],
+        [68, 2, 206, ""],
+        [70, 0, 206, ""],
+        [72, 1, 207, ""],
+        [74, 0, 207, ""],
+        [76, 0, 208, ""],
+        [78, 2, 209, ""],
+        [79, 0, 209, ""],
+        [81, 1, 211, ""],
+        [84, 1, 210, ""],
+        [87, 1, 286, ""],
+        [90, 0, 210, ""],
+        [99, 0, 211, ""],
+        [101, 0, 212, ""],
+        [102, 1, 245, ""],
+        [104, 2, 213, ""],
+        [105, 0, 213, ""],
+        [112, 1, 216, ""],
+        [115, 1, 214, ""],
+        [120, 1, 215, ""],
+        [121, 1, 215, ""],
+        [123, 0, 214, ""],
+        [125, 0, 215, ""],
+        [126, 1, 217, ""],
+        [126, 3, 215, ""],
+        [127, 1, 218, ""],
+        [127, 3, 215, ""],
+        [128, 1, 220, ""],
+        [128, 3, 215, ""],
+        [129, 1, 219, ""],
+        [129, 3, 215, ""],
+        [130, 1, 221, ""],
+        [130, 3, 215, ""],
+        [131, 1, 224, ""],
+        [131, 3, 215, ""],
+        [132, 1, 225, ""],
+        [132, 3, 215, ""],
+        [133, 1, 226, ""],
+        [133, 3, 215, ""],
+        [134, 1, 227, ""],
+        [134, 3, 215, ""],
+        [135, 0, 216, ""],
+        [137, 0, 217, ""],
+        [142, 0, 218, ""],
+        [144, 1, 214, ""],
+        [146, 1, 214, ""],
+        [147, 2, 273, ""],
+        [149, 0, 219, ""],
+        [151, 0, 220, ""],
+        [155, 0, 221, ""],
+        [158, 1, 222, ""],
+        [160, 0, 222, ""],
+        [164, 1, 223, ""],
+        [166, 0, 223, ""],
+        [194, 0, 224, ""],
+        [204, 0, 225, ""],
+        [214, 0, 226, ""],
+        [230, 0, 227, ""],
+        [235, 1, 230, ""],
+        [239, 0, 228, ""],
+        [241, 1, 229, ""],
+        [243, 3, 228, ""],
+        [244, 0, 229, ""],
+        [248, 0, 230, ""],
+        [252, 1, 231, ""],
+        [255, 0, 231, ""],
+        [260, 1, 232, ""],
+        [263, 1, 232, ""],
+        [265, 0, 232, ""],
+        [266, 1, 234, ""],
+        [269, 1, 233, ""],
+        [271, 0, 233, ""],
+        [273, 1, 235, ""],
+        [275, 0, 234, ""],
+        [293, 0, 235, ""],
+        [294, 1, 253, ""],
+        [295, 1, 254, ""],
+        [296, 1, 255, ""],
+        [297, 1, 256, ""],
+        [298, 1, 257, ""],
+        [299, 1, 258, ""],
+        [300, 1, 259, ""],
+        [301, 1, 260, ""],
+        [302, 1, 261, ""],
+        [313, 1, 236, ""],
+        [322, 0, 236, ""],
+        [345, 1, 237, ""],
+        [348, 1, 286, ""],
+        [349, 1, 250, ""],
+        [351, 0, 237, ""],
+        [353, 0, 238, ""],
+        [358, 0, 239, ""],
+        [363, 0, 240, ""],
+        [373, 0, 241, ""],
+        [378, 0, 242, ""],
+        [383, 0, 243, ""],
+        [388, 0, 244, ""],
+        [393, 0, 245, ""],
+        [398, 0, 246, ""],
+        [400, 1, 273, ""],
+        [402, 1, 281, ""],
+        [404, 1, 208, ""],
+        [406, 1, 203, ""],
+        [408, 1, 203, ""],
+        [410, 1, 203, ""],
+        [412, 1, 203, ""],
+        [414, 0, 247, ""],
+        [416, 1, 276, ""],
+        [418, 1, 276, ""],
+        [420, 1, 276, ""],
+        [422, 1, 276, ""],
+        [424, 0, 248, ""],
+        [426, 1, 205, ""],
+        [427, 0, 249, ""],
+        [429, 1, 287, ""],
+        [430, 0, 250, ""],
+        [432, 1, 212, ""],
+        [433, 0, 251, ""],
+        [436, 0, 252, ""],
+        [438, 0, 253, ""],
+        [440, 0, 254, ""],
+        [442, 0, 255, ""],
+        [444, 0, 256, ""],
+        [446, 0, 257, ""],
+        [448, 0, 258, ""],
+        [450, 0, 259, ""],
+        [452, 0, 260, ""],
+        [454, 0, 261, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "tokens": [
+        [4, 2, 263, ""],
+        [18, 0, 262, ""],
+        [20, 3, 262, ""],
+        [21, 1, 246, ""],
+        [23, 0, 263, ""],
+        [25, 1, 268, ""],
+        [28, 1, 264, ""],
+        [31, 1, 267, ""],
+        [32, 0, 264, ""],
+        [33, 2, 269, ""],
+        [34, 2, 270, ""],
+        [41, 1, 265, ""],
+        [43, 0, 265, ""],
+        [46, 1, 266, ""],
+        [48, 0, 266, ""],
+        [51, 0, 267, ""],
+        [53, 0, 268, ""],
+        [55, 0, 269, ""],
+        [57, 1, 251, ""],
+        [60, 0, 270, ""],
+        [61, 2, 271, ""],
+        [64, 0, 271, ""],
+        [67, 1, 272, ""],
+        [68, 2, 263, ""],
+        [69, 0, 272, ""],
+        [71, 0, 273, ""],
+        [72, 1, 239, ""],
+        [76, 1, 247, ""],
+        [78, 2, 274, ""],
+        [79, 0, 274, ""],
+        [81, 1, 275, ""],
+        [85, 0, 275, ""],
+        [87, 1, 248, ""],
+        [90, 0, 276, ""],
+        [91, 1, 242, ""],
+        [96, 1, 279, ""],
+        [106, 1, 277, ""],
+        [109, 0, 277, ""],
+        [115, 1, 278, ""],
+        [117, 0, 278, ""],
+        [121, 1, 280, ""],
+        [123, 1, 280, ""],
+        [124, 0, 279, ""],
+        [128, 0, 280, ""],
+        [130, 0, 281, ""],
+        [131, 1, 241, ""],
+        [133, 2, 282, ""],
+        [134, 0, 282, ""],
+        [137, 1, 283, ""],
+        [138, 2, 284, ""],
+        [139, 2, 285, ""],
+        [140, 1, 249, ""],
+        [142, 0, 283, ""],
+        [145, 0, 284, ""],
+        [146, 1, 252, ""],
+        [150, 0, 285, ""],
+        [151, 2, 282, ""],
+        [155, 0, 286, ""],
+        [157, 0, 287, ""],
+        [158, 1, 244, ""],
+        [160, 2, 288, ""],
+        [162, 0, 288, ""],
+        [166, 1, 289, ""],
+        [168, 0, 289, ""],
+        [173, 1, 290, ""],
+        [175, 1, 291, ""],
+        [176, 0, 290, ""],
+        [179, 1, 291, ""],
+        [181, 1, 292, ""],
+        [182, 0, 291, ""],
+        [186, 1, 292, ""],
+        [189, 0, 292, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bonus/sk/gumball_item.s",
+      "tokens": [
+        [2, 2, 295, ""],
+        [3, 0, 293, ""],
+        [7, 1, 294, ""],
+        [12, 0, 294, ""],
+        [18, 0, 295, ""],
+        [20, 1, 296, ""],
+        [22, 0, 296, ""],
+        [27, 1, 297, ""],
+        [30, 0, 297, ""],
+        [32, 1, 298, ""],
+        [35, 0, 298, ""],
+        [37, 0, 299, ""],
+        [39, 1, 300, ""],
+        [41, 0, 300, ""],
+        [44, 1, 296, ""],
+        [48, 1, 301, ""],
+        [50, 0, 301, ""],
+        [53, 1, 302, ""],
+        [55, 0, 302, ""],
+        [64, 1, 304, ""],
+        [66, 1, 303, ""],
+        [68, 1, 303, ""],
+        [72, 0, 303, ""],
+        [76, 0, 304, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bonus/slots/sk/spike.s",
+      "tokens": [
+        [19, 1, 307, ""],
+        [23, 1, 305, ""],
+        [27, 0, 305, ""],
+        [29, 1, 306, ""],
+        [32, 0, 306, ""],
+        [34, 0, 307, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/bonus_cage_unused.s",
+      "tokens": [
+        [2, 1, 308, ""],
+        [3, 1, 311, ""],
+        [4, 1, 309, ""],
+        [5, 1, 311, ""],
+        [6, 1, 310, ""],
+        [7, 1, 311, ""],
+        [8, 0, 308, ""],
+        [17, 0, 309, ""],
+        [26, 0, 310, ""],
+        [35, 0, 311, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/bumper.s",
+      "tokens": [
+        [2, 1, 312, ""],
+        [3, 1, 313, ""],
+        [4, 1, 314, ""],
+        [5, 0, 312, ""],
+        [7, 0, 313, ""],
+        [9, 0, 314, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/colored_wall.s",
+      "tokens": [
+        [2, 1, 315, ""],
+        [3, 1, 316, ""],
+        [4, 1, 317, ""],
+        [5, 1, 318, ""],
+        [6, 1, 319, ""],
+        [7, 1, 320, ""],
+        [8, 1, 321, ""],
+        [9, 1, 322, ""],
+        [10, 1, 323, ""],
+        [11, 1, 324, ""],
+        [12, 1, 325, ""],
+        [13, 1, 326, ""],
+        [14, 1, 327, ""],
+        [15, 1, 328, ""],
+        [16, 1, 329, ""],
+        [17, 1, 330, ""],
+        [18, 0, 315, ""],
+        [20, 0, 316, ""],
+        [22, 0, 317, ""],
+        [24, 0, 318, ""],
+        [26, 0, 319, ""],
+        [28, 0, 320, ""],
+        [30, 0, 321, ""],
+        [32, 0, 322, ""],
+        [34, 0, 323, ""],
+        [36, 0, 324, ""],
+        [38, 0, 325, ""],
+        [40, 0, 326, ""],
+        [42, 0, 327, ""],
+        [44, 0, 328, ""],
+        [46, 0, 329, ""],
+        [48, 0, 330, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/goal.s",
+      "tokens": [
+        [2, 1, 331, ""],
+        [3, 1, 332, ""],
+        [4, 1, 333, ""],
+        [5, 0, 331, ""],
+        [7, 0, 332, ""],
+        [9, 0, 333, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/r_peppermint.s",
+      "tokens": [
+        [2, 1, 334, ""],
+        [3, 1, 335, ""],
+        [4, 1, 336, ""],
+        [5, 1, 337, ""],
+        [6, 0, 334, ""],
+        [8, 0, 335, ""],
+        [10, 0, 336, ""],
+        [12, 0, 337, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/ring.s",
+      "tokens": [
+        [2, 1, 338, ""],
+        [3, 1, 339, ""],
+        [4, 1, 340, ""],
+        [5, 1, 341, ""],
+        [6, 1, 342, ""],
+        [7, 1, 343, ""],
+        [8, 1, 344, ""],
+        [9, 1, 345, ""],
+        [10, 1, 346, ""],
+        [11, 0, 338, ""],
+        [13, 0, 339, ""],
+        [15, 0, 340, ""],
+        [17, 0, 341, ""],
+        [19, 0, 342, ""],
+        [21, 0, 343, ""],
+        [23, 0, 344, ""],
+        [25, 0, 345, ""],
+        [27, 0, 346, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/slot.s",
+      "tokens": [
+        [2, 1, 347, ""],
+        [3, 1, 350, ""],
+        [4, 1, 348, ""],
+        [5, 1, 350, ""],
+        [6, 1, 349, ""],
+        [7, 1, 350, ""],
+        [8, 0, 347, ""],
+        [17, 0, 348, ""],
+        [26, 0, 349, ""],
+        [35, 0, 350, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/slots/mappings/spike.s",
+      "tokens": [
+        [2, 1, 351, ""],
+        [3, 0, 351, ""]
+      ]
+    }
+  ]
+}

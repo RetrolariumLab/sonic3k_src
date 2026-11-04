@@ -4,42 +4,42 @@
 ; ---------------------------------------------------------------------------
 
 Obj_GumballTriangleBumper:
-                lea     ObjDat3_43F70(pc),a1
+                lea     S3Gumball_TriangleBumperFullAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_43B18,(a0)
+                move.l  #S3Gumball_GateTriangleOnCooldown,(a0)
 
-loc_43B18:
+S3Gumball_GateTriangleOnCooldown:
                 tst.w   ((RAM_start+$2020)&$FFFFFF).l
-                bpl.s   loc_43B68
+                bpl.s   S3Gumball_DrawTriangleWithoutConsumption
                 moveq   #$D,d1
                 moveq   #8,d2
                 moveq   #$11,d3
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull).l
                 btst    #$10,d6
-                bne.s   loc_43B3E
+                bne.s   S3Gumball_LaunchP1AndDeleteTriangle
                 btst    #p1_standing_bit,status(a0)
-                beq.s   loc_43B4C
+                beq.s   S3Gumball_CheckTriangleP2Contact
 
-loc_43B3E:
+S3Gumball_LaunchP1AndDeleteTriangle:
                 lea     (Player_1).w,a1
                 bsr.w   S3GumballTriangle_LaunchAndClear
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_43B4C:
+S3Gumball_CheckTriangleP2Contact:
                 btst    #$11,d6
-                bne.s   loc_43B5A
+                bne.s   S3Gumball_LaunchP2AndDeleteTriangle
                 btst    #p2_standing_bit,status(a0)
-                beq.s   loc_43B68
+                beq.s   S3Gumball_DrawTriangleWithoutConsumption
 
-loc_43B5A:
+S3Gumball_LaunchP2AndDeleteTriangle:
                 lea     (Player_2).w,a1
                 bsr.w   S3GumballTriangle_LaunchAndClear
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_43B68:
+S3Gumball_DrawTriangleWithoutConsumption:
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -50,11 +50,11 @@ S3GumballTriangle_LaunchAndClear:
                 move.w  #-$600,y_vel(a1)
                 bset    #Status_Facing,status(a1)
                 btst    #0,render_flags(a0)
-                bne.s   loc_43B8E
+                bne.s   S3Gumball_LaunchAndConsumeTriangleCell
                 bclr    #Status_Facing,status(a1)
                 neg.w   d0
 
-loc_43B8E:
+S3Gumball_LaunchAndConsumeTriangleCell:
                 move.w  d0,x_vel(a1)
                 move.w  d0,ground_vel(a1)
                 bset    #Status_InAir,status(a1)
@@ -75,50 +75,50 @@ loc_43B8E:
 
 ; ---------------------------------------------------------------------------
 
-loc_43BD8:
-                lea     ObjDat3_43F58(pc),a1
+S3Gumball_InitDecorationAndMaybeMask:
+                lea     S3Gumball_DecorationAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_43BEC,(a0)
+                move.l  #S3Gumball_FollowRootAndDrawDecoration,(a0)
                 bsr.w   S3GumballDecor_SelectFrameAndMask
 
-loc_43BEC:
+S3Gumball_FollowRootAndDrawDecoration:
                 jsr     (Refresh_ChildPosition).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_43BF8:
-                lea     ObjDat3_43FA0(pc),a1
+S3Gumball_InitDebrisAndSetDelay:
+                lea     S3Gumball_PlatformDebrisFullAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_43C0C,(a0)
+                move.l  #S3Gumball_TickDelayAndStartDebrisFall,(a0)
                 bsr.w   GumballS3OffsetDebrisAndSeedSubtypeDelay
 
-loc_43C0C:
+S3Gumball_TickDelayAndStartDebrisFall:
                 subq.b  #1,$2E(a0)
-                bpl.s   loc_43C18
+                bpl.s   S3Gumball_DrawPlatformDebris
                 move.l  #MoveChkDel,(a0)
 
-loc_43C18:
+S3Gumball_DrawPlatformDebris:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_43C1E:
+S3Gumball_InitExitMonitor:
                 addi.w  #$2A0,y_pos(a0)
-                move.l  #loc_43C2A,(a0)
+                move.l  #S3Gumball_TickCooldownAndCheckExit,(a0)
 
-loc_43C2A:
+S3Gumball_TickCooldownAndCheckExit:
                 subq.w  #1,((RAM_start+$2020)&$FFFFFF).l
-                lea     word_43C7C(pc),a1
+                lea     S3Gumball_ExitMonitorBounds(pc),a1
                 jsr     (Check_PlayerInRange).l
                 tst.w   d0
-                bne.s   loc_43C50
+                bne.s   S3Gumball_SaveP1AndRequestLevelRestart
                 swap    d0
                 tst.w   d0
-                beq.w   locret_43A92
+                beq.w   S3Gumball_BodyCallbackReturn
                 lea     (Player_2).w,a1
                 jmp     (Delete_Referenced_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_43C50:
+S3Gumball_SaveP1AndRequestLevelRestart:
                 move.w  (Saved_zone_and_act).w,(Current_zone_and_act).w
                 move.w  (Saved_apparent_zone_and_act).w,(Apparent_zone_and_act).w
                 move.b  (Saved_last_star_post_hit).w,(Last_star_post_hit).w
@@ -128,16 +128,16 @@ loc_43C50:
                 move.b  (Extra_life_flags).w,(Saved_extra_life_flags).w
                 rts
 ; ---------------------------------------------------------------------------
-word_43C7C:
+S3Gumball_ExitMonitorBounds:
                 dc.w    -$100,  $200,  -$10,   $40
 ; ---------------------------------------------------------------------------
 
-loc_43C84:
-                lea     ObjDat3_43FB8(pc),a1
+S3Gumball_InitMaskChildFrame23:
+                lea     S3Gumball_SpriteMaskAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_43C94,(a0)
+                move.l  #S3Gumball_SetMaskFlagAndFollowParent,(a0)
 
-loc_43C94:
+S3Gumball_SetMaskFlagAndFollowParent:
                 st      (Spritemask_flag).w
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),x_pos(a0)
@@ -148,76 +148,77 @@ loc_43C94:
 
 ; Check both players, dispatch one subtype effect and return Z when the item should remain
 S3Gumball_TryRewardNearbyPlayer:
-                lea     word_43CE4(pc),a1
+                lea     S3Gumball_RewardContactBounds(pc),a1
                 jsr     (Check_PlayerInRange).l
                 tst.l   d0
-                beq.s   locret_43CD0
+                beq.s   S3Gumball_RewardDispatchReturn
                 moveq   #0,d1
                 moveq   #1,d2
                 move.b  subtype(a0),d1
                 add.w   d1,d1
-                move.w  off_43CD2(pc,d1.w),d1
-                jsr     off_43CD2(pc,d1.w)
+                move.w  S3Gumball_RewardHandlerOffsets(pc,d1.w),d1
+                jsr     S3Gumball_RewardHandlerOffsets(pc,d1.w)
                 tst.w   d2
 
-locret_43CD0:
+S3Gumball_RewardDispatchReturn:
                 rts
 ; End of function S3Gumball_TryRewardNearbyPlayer
 
 ; ---------------------------------------------------------------------------
-off_43CD2:
-                dc.w    loc_43CEC-off_43CD2
-                dc.w    loc_43CFC-off_43CD2
-                dc.w    loc_43D1A-off_43CD2
-                dc.w    locret_43D18-off_43CD2
-                dc.w    loc_43D28-off_43CD2
-                dc.w    loc_43DA2-off_43CD2
-                dc.w    loc_43DCC-off_43CD2
-                dc.w    loc_43DF6-off_43CD2
-                dc.w    loc_43E30-off_43CD2
-word_43CE4:
+S3Gumball_RewardHandlerOffsets:
+                dc.w    S3Gumball_AwardLifeWithoutCap-S3Gumball_RewardHandlerOffsets
+                dc.w    S3Gumball_TryRefillIfPlatformMissing-S3Gumball_RewardHandlerOffsets
+                dc.w    S3Gumball_AddSavedAndLiveRings-S3Gumball_RewardHandlerOffsets
+                dc.w    S3Gumball_RefillOrNoopRewardReturn-S3Gumball_RewardHandlerOffsets
+                dc.w    S3Gumball_RepelLowWordContact-S3Gumball_RewardHandlerOffsets
+                dc.w    S3Gumball_GiveFireShieldToP1-S3Gumball_RewardHandlerOffsets
+                dc.w    S3Gumball_GiveBubbleShieldToP1-S3Gumball_RewardHandlerOffsets
+                dc.w    S3Gumball_GiveLightningShieldToP1-S3Gumball_RewardHandlerOffsets
+                dc.w    S3Gumball_SetSavedStatusBit7-S3Gumball_RewardHandlerOffsets
+S3Gumball_RewardContactBounds:
                 dc.w    -$18,   $30,  -$18,   $30
 ; ---------------------------------------------------------------------------
 
-loc_43CEC:
+S3Gumball_AwardLifeWithoutCap:
                 addq.b  #1,(Life_count).w
                 addq.b  #1,(Update_HUD_life_count).w
                 moveq   #signextendB(mus_ExtraLife),d0
                 jmp     (Play_Music).l
 ; ---------------------------------------------------------------------------
 
-loc_43CFC:
+S3Gumball_TryRefillIfPlatformMissing:
                 tst.b   ((RAM_start+$2022)&$FFFFFF).l
-                bne.s   locret_43CD0
+                bne.s   S3Gumball_RewardDispatchReturn
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   locret_43CD0
-                move.l  #loc_43932,(a1)
+                bne.s   S3Gumball_RewardDispatchReturn
+                move.l  #S3Gumball_InitPlatformAndFourSprings,(a1)
                 st      ((RAM_start+$2022)&$FFFFFF).l
 
-locret_43D18:
+S3Gumball_RefillOrNoopRewardReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_43D1A:
+; Add 20 to the saved ring count and 10 to the live count
+S3Gumball_AddSavedAndLiveRings:
                 addi.w  #20,(Saved_ring_count).w
                 moveq   #10,d0
                 jmp     (AddRings).l
 ; ---------------------------------------------------------------------------
 
-loc_43D28:
+S3Gumball_RepelLowWordContact:
                 move.l  d0,-(sp)
                 tst.w   d0
-                beq.s   loc_43D30
+                beq.s   S3Gumball_RepelHighWordContact
                 bsr.s   S3GumballRound_RepelPlayer
 
-loc_43D30:
+S3Gumball_RepelHighWordContact:
                 move.l  (sp)+,d0
                 swap    d0
                 tst.w   d0
-                beq.s   loc_43D3A
+                beq.s   S3Gumball_ClearRoundItemContacts
                 bsr.s   S3GumballRound_RepelPlayer
 
-loc_43D3A:
+S3Gumball_ClearRoundItemContacts:
                 clr.b   collision_property(a0)
                 moveq   #0,d2
                 rts
@@ -253,7 +254,7 @@ S3GumballRound_RepelPlayer:
 
 ; ---------------------------------------------------------------------------
 
-loc_43DA2:
+S3Gumball_GiveFireShieldToP1:
                 lea     (Player_1).w,a1
                 move.l  #Obj_FireShield,(Shield).w
                 move.w  a1,(Shield+parent).w
@@ -265,7 +266,7 @@ loc_43DA2:
                 jmp     (Play_Music).l
 ; ---------------------------------------------------------------------------
 
-loc_43DCC:
+S3Gumball_GiveBubbleShieldToP1:
                 lea     (Player_1).w,a1
                 move.l  #Obj_BubbleShield,(Shield).w
                 move.w  a1,(Shield+parent).w
@@ -277,7 +278,7 @@ loc_43DCC:
                 jmp     (Play_Music).l
 ; ---------------------------------------------------------------------------
 
-loc_43DF6:
+S3Gumball_GiveLightningShieldToP1:
                 lea     (Player_1).w,a1
                 move.l  #Obj_LightningShield,(Shield).w
                 move.w  a1,(Shield+parent).w
@@ -301,7 +302,8 @@ S3Gumball_SetLiveAndSavedShield:
 
 ; ---------------------------------------------------------------------------
 
-loc_43E30:
+; The weighted item table does not select this reward slot
+S3Gumball_SetSavedStatusBit7:
                 bset    #7,(Saved_status_secondary).w
                 rts
 
@@ -310,31 +312,31 @@ loc_43E30:
 ; When flagged, count leading empty occupancy words to choose the target. Move down four pixels per update
 S3GumballMachine_UpdateDescent:
                 bclr    #0,$38(a0)
-                beq.s   loc_43E60
+                beq.s   S3Gumball_DescendFourTowardTarget
                 lea     ((RAM_start+$2000)&$FFFFFF).l,a1
                 moveq   #0,d0
                 moveq   #$E-1,d1
 
-loc_43E4A:
+S3Gumball_ScanLeadingEmptyBumperPairs:
                 tst.w   (a1)+
-                bne.s   loc_43E56
+                bne.s   S3Gumball_SetTargetYFromEmptyPairs
                 addi.w  #$20,d0
-                dbf     d1,loc_43E4A
+                dbf     d1,S3Gumball_ScanLeadingEmptyBumperPairs
 
-loc_43E56:
+S3Gumball_SetTargetYFromEmptyPairs:
                 move.w  $3A(a0),d1
                 add.w   d0,d1
                 move.w  d1,$3C(a0)
 
-loc_43E60:
+S3Gumball_DescendFourTowardTarget:
                 move.w  $3C(a0),d1
                 move.w  y_pos(a0),d2
                 cmp.w   d1,d2
-                bhs.s   locret_43E72
+                bhs.s   S3Gumball_MachineDescentReturn
                 addq.w  #4,d2
                 move.w  d2,y_pos(a0)
 
-locret_43E72:
+S3Gumball_MachineDescentReturn:
                 rts
 ; End of function S3GumballMachine_UpdateDescent
 
@@ -344,27 +346,27 @@ locret_43E72:
 S3GumballMachine_ChooseDrop:
                 jsr     (Random_Number).l
                 andi.w  #$F,d0
-                bne.s   loc_43E8E
+                bne.s   S3Gumball_SetWeightedRewardAndCollision
                 movea.w parent3(a0),a1
                 bset    #7,$38(a1)
-                beq.s   loc_43E8E
+                beq.s   S3Gumball_SetWeightedRewardAndCollision
                 moveq   #3,d0
 
-loc_43E8E:
-                move.b  byte_43EAC(pc,d0.w),d0
+S3Gumball_SetWeightedRewardAndCollision:
+                move.b  S3Gumball_WeightedRewardTypeTable(pc,d0.w),d0
                 move.b  d0,subtype(a0)
                 cmpi.b  #4,d0
-                bne.s   loc_43EA2
+                bne.s   S3Gumball_SelectRewardRawAnim
                 move.b  #$D7,collision_flags(a0)
 
-loc_43EA2:
+S3Gumball_SelectRewardRawAnim:
                 lsl.w   #2,d0
-                move.l  off_43EBC(pc,d0.w),$30(a0)
+                move.l  S3Gumball_RewardRawAnimPointers(pc,d0.w),$30(a0)
                 rts
 ; End of function S3GumballMachine_ChooseDrop
 
 ; ---------------------------------------------------------------------------
-byte_43EAC:
+S3Gumball_WeightedRewardTypeTable:
                 dc.b    0
                 dc.b    3
                 dc.b    1
@@ -382,16 +384,16 @@ byte_43EAC:
                 dc.b    7
                 dc.b    2
                 even
-off_43EBC:
-                dc.l    byte_44032
-                dc.l    byte_44036
-                dc.l    byte_4403A
-                dc.l    byte_4403E
-                dc.l    byte_44042
-                dc.l    byte_44046
-                dc.l    byte_4404A
-                dc.l    byte_4404E
-                dc.l    byte_44052
+S3Gumball_RewardRawAnimPointers:
+                dc.l    S3Gumball_ExtraLifeRewardAnim
+                dc.l    S3Gumball_PlatformRefillAnim
+                dc.l    S3Gumball_RingRewardItemOrdinaryRawIdle
+                dc.l    S3Gumball_NoopConsumedRewardAnim
+                dc.l    S3Gumball_PersistentRoundRewardAnim
+                dc.l    S3Gumball_FireShieldRewardAnim
+                dc.l    S3Gumball_BubbleShieldRewardAnim
+                dc.l    S3Gumball_LightningShieldRewardAnim
+                dc.l    S3Gumball_SavedStatusBit7RewardAnim
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -410,7 +412,7 @@ GumballS3OffsetDebrisAndSeedSubtypeDelay:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.b  d0,$2E(a0)
-                lea     byte_43F0E(pc,d0.w),a1
+                lea     S3Gumball_DebrisOffsetPairs(pc,d0.w),a1
                 move.b  (a1)+,d0
                 ext.w   d0
                 add.w   d0,x_pos(a0)
@@ -422,7 +424,7 @@ GumballS3OffsetDebrisAndSeedSubtypeDelay:
 ; End of function GumballS3OffsetDebrisAndSeedSubtypeDelay
 
 ; ---------------------------------------------------------------------------
-byte_43F0E:
+S3Gumball_DebrisOffsetPairs:
                 dc.b    -8,   8
                 dc.b    8,   8
                 dc.b    -8,  -8
@@ -449,28 +451,28 @@ S3GumballDecor_SelectFrameAndMask:
                 move.b  subtype(a0),d0
                 subi.w  #6,d0
                 lsr.w   #1,d0
-                move.b  RawAni_43F54(pc,d0.w),d0
+                move.b  S3Gumball_DecorationFramesBySubtype(pc,d0.w),d0
                 move.b  d0,mapping_frame(a0)
                 cmpi.b  #$16,d0
-                bne.w   locret_43A92
-                lea     ChildObjDat_44016(pc),a2
+                bne.w   S3Gumball_BodyCallbackReturn
+                lea     S3Gumball_SpriteMaskChildRecord(pc),a2
                 jmp     (CreateChild6_Simple).l
 ; End of function S3GumballDecor_SelectFrameAndMask
 
 ; ---------------------------------------------------------------------------
-RawAni_43F54:
+S3Gumball_DecorationFramesBySubtype:
                 dc.b    0,   1,   0, $16
-ObjDat3_43F58:
+S3Gumball_DecorationAttributes:
                 dc.l    Map_GumballBonus
                 dc.w    make_art_tile(ArtTile_BonusStage,0,0)
                 dc.w    $200
                 dc.b    $10, $20,   0,   0
-ObjDat3_43F64:
+S3Gumball_RefillablePlatformAttributes:
                 dc.l    Map_GumballBonus
                 dc.w    make_art_tile(ArtTile_BonusStage,1,1)
                 dc.w    $100
                 dc.b    $40, $10, $13,   0
-ObjDat3_43F70:
+S3Gumball_TriangleBumperFullAttributes:
                 dc.l    Map_GumballBonus
                 dc.w    make_art_tile(ArtTile_BonusStage,1,1)
                 dc.w    $100
@@ -480,86 +482,86 @@ ObjDat_GumballMachine:
                 dc.w    make_art_tile(ArtTile_BonusStage,1,1)
                 dc.w    $100
                 dc.b    $18, $18,   5,   0
-ObjDat3_43F88:
+S3Gumball_MechanismBodyAttributes:
                 dc.l    Map_GumballBonus
                 dc.w    make_art_tile(ArtTile_BonusStage,1,1)
                 dc.w    $100
                 dc.b    $14, $14,   2,   0
-ObjDat3_43F94:
+S3Gumball_FiniteUpSpringFullAttributes:
                 dc.l    Map_Spring
                 dc.w    make_art_tile(ArtTile_SpikesSprings+$10,0,0)
                 dc.w    $100
                 dc.b    $10, $10,   0,   0
-ObjDat3_43FA0:
+S3Gumball_PlatformDebrisFullAttributes:
                 dc.l    Map_GumballBonus
                 dc.w    make_art_tile(ArtTile_BonusStage,1,1)
                 dc.w    $100
                 dc.b    8,   8, $15,   0
-ObjDat3_43FAC:
+S3Gumball_RewardItemAttributes:
                 dc.l    Map_GumballBonus
                 dc.w    make_art_tile(ArtTile_BonusStage,0,1)
                 dc.w    $100
                 dc.b    8,   8,   8,   0
-ObjDat3_43FB8:
+S3Gumball_SpriteMaskAttributes:
                 dc.l    Map_GumballBonus
                 dc.w    make_art_tile($000,0,0)
                 dc.w    $180
                 dc.b    4, $10, $17,   0
-ChildObjDat_43FC4:
+S3Gumball_MachineChildRecords:
                 dc.w    7-1
-                dc.l    loc_43932
+                dc.l    S3Gumball_InitPlatformAndFourSprings
                 dc.b    0,   0
-                dc.l    loc_43A26
+                dc.l    S3Gumball_InitMechanismBody
                 dc.b    0, $24
-                dc.l    loc_43C1E
+                dc.l    S3Gumball_InitExitMonitor
                 dc.b    0,   0
-                dc.l    loc_43BD8
+                dc.l    S3Gumball_InitDecorationAndMaybeMask
                 dc.b    -$38,-$2C
-                dc.l    loc_43BD8
+                dc.l    S3Gumball_InitDecorationAndMaybeMask
                 dc.b    0,-$2C
-                dc.l    loc_43BD8
+                dc.l    S3Gumball_InitDecorationAndMaybeMask
                 dc.b    $38,-$2C
-                dc.l    loc_43BD8
+                dc.l    S3Gumball_InitDecorationAndMaybeMask
                 dc.b    0,-$28
-word_43FF0:
+S3Gumball_PlatformSpringChildRecords:
                 dc.w    4-1
-                dc.l    loc_43986
+                dc.l    S3Gumball_InitAndCheckSpringP1
                 dc.b    -$30,-$18
-                dc.l    loc_43986
+                dc.l    S3Gumball_InitAndCheckSpringP1
                 dc.b    -$10,-$18
-                dc.l    loc_43986
+                dc.l    S3Gumball_InitAndCheckSpringP1
                 dc.b    $10,-$18
-                dc.l    loc_43986
+                dc.l    S3Gumball_InitAndCheckSpringP1
                 dc.b    $30,-$18
-ChildObjDat_4400A:
+S3Gumball_PlatformDebrisChildRecords:
                 dc.w    $10-1
-                dc.l    loc_43BF8
-ChildObjDat_44010:
+                dc.l    S3Gumball_InitDebrisAndSetDelay
+S3Gumball_OneSimpleDispensedRewardChild:
                 dc.w    1-1
-                dc.l    loc_43A94
-ChildObjDat_44016:
+                dc.l    S3Gumball_InitWeightedRewardItem
+S3Gumball_SpriteMaskChildRecord:
                 dc.w    1-1
-                dc.l    loc_43C84
-byte_4401C:
+                dc.l    S3Gumball_InitMaskChildFrame23
+S3Gumball_MachineActivationAnim:
                 dc.b    3,   5,   6,   7, $14,   5, $F4
                 dc.b    $7F,   5,   5, $FC
-byte_44027:
+S3Gumball_BodyCycleCallbackAnim:
                 dc.b    2,   3,   3,   3,   4,  $F,   3,   3,   2,   3, $F4
-byte_44032:
+S3Gumball_ExtraLifeRewardAnim:
                 dc.b    $7F,   8,   8, $FC
-byte_44036:
+S3Gumball_PlatformRefillAnim:
                 dc.b    $7F,   9,   9, $FC
-byte_4403A:
+S3Gumball_RingRewardItemOrdinaryRawIdle:
                 dc.b    $7F,  $A,  $A, $FC
-byte_4403E:
+S3Gumball_NoopConsumedRewardAnim:
                 dc.b    $7F,  $B,  $B, $FC
-byte_44042:
+S3Gumball_PersistentRoundRewardAnim:
                 dc.b    $7F,  $C,  $C, $FC
-byte_44046:
+S3Gumball_FireShieldRewardAnim:
                 dc.b    $7F,  $D,  $D, $FC
-byte_4404A:
+S3Gumball_BubbleShieldRewardAnim:
                 dc.b    $7F,  $E,  $E, $FC
-byte_4404E:
+S3Gumball_LightningShieldRewardAnim:
                 dc.b    $7F,  $F,  $F, $FC
-byte_44052:
+S3Gumball_SavedStatusBit7RewardAnim:
                 dc.b    1, $10, $11, $FC

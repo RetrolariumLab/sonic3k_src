@@ -53,11 +53,11 @@
     },
     {
       "path": "src/objects/bonus/s3/gumball_bumpers.s",
-      "sha256": "a53d78b191150b5005fc0ae63716acaf37cc8a76eba892e437b69e488da6a842"
+      "sha256": "cf9a3d2caf16b138d35be88ce9edb9db8da4d27abf8defee5066f82919ed52c3"
     },
     {
       "path": "src/objects/bonus/s3/gumball_machine.s",
-      "sha256": "c0bed58af8a54decc610590f0252de4917ed307bead1813ff183d4b5fdd887b3"
+      "sha256": "15ec7b63364b1057d076a86f613d82812031b10b1733823bef54581b93ac1871"
     },
     {
       "path": "src/objects/bosses/aiz/end_boss/s3/attachments_and_attacks.s",
@@ -1495,27 +1495,27 @@
     },
     {
       "path": "src/objects/bonus/s3/gumball_bumpers.s",
-      "symbol": "RawAni_43F54",
-      "scope": "RawAni_43F54",
-      "first_line": 461,
-      "last_line": 462,
+      "symbol": "S3Gumball_DecorationFramesBySubtype",
+      "scope": "S3Gumball_DecorationFramesBySubtype",
+      "first_line": 463,
+      "last_line": 464,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 4,
-      "declarations_sha256": "0b043b634c83986669ed851b60cca32b851b89e3e4cf57130ad998f0b0b531b5",
+      "declarations_sha256": "7112dad977c36980c3ee1225cc20b884116869c260b30525760bd5e53df55872",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_43F54"],
+      "members": ["S3Gumball_DecorationFramesBySubtype"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bonus/s3/gumball_bumpers.s",
-      "symbol": "byte_4401C",
-      "scope": "byte_4401C",
-      "first_line": 543,
-      "last_line": 565,
+      "symbol": "S3Gumball_MachineActivationAnim",
+      "scope": "S3Gumball_MachineActivationAnim",
+      "first_line": 545,
+      "last_line": 567,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 58,
-      "declarations_sha256": "79f7d9b257b3a9b929b0fba2be61d0d96d7891961c4ada81abb8d04d41d2e36b",
+      "declarations_sha256": "2693cd83ff926be06c04778aaa49e76397a7f79538b585985fc35ba55e625313",
       "entries": [
         [0, "fixed"],
         [7, "fixed"],
@@ -1532,17 +1532,17 @@
       ],
       "external_symbols": [],
       "members": [
-        "byte_4401C",
-        "byte_44027",
-        "byte_44032",
-        "byte_44036",
-        "byte_4403A",
-        "byte_4403E",
-        "byte_44042",
-        "byte_44046",
-        "byte_4404A",
-        "byte_4404E",
-        "byte_44052"
+        "S3Gumball_MachineActivationAnim",
+        "S3Gumball_BodyCycleCallbackAnim",
+        "S3Gumball_ExtraLifeRewardAnim",
+        "S3Gumball_PlatformRefillAnim",
+        "S3Gumball_RingRewardItemOrdinaryRawIdle",
+        "S3Gumball_NoopConsumedRewardAnim",
+        "S3Gumball_PersistentRoundRewardAnim",
+        "S3Gumball_FireShieldRewardAnim",
+        "S3Gumball_BubbleShieldRewardAnim",
+        "S3Gumball_LightningShieldRewardAnim",
+        "S3Gumball_SavedStatusBit7RewardAnim"
       ],
       "stored_markers": []
     },

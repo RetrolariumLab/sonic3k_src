@@ -112485,13 +112485,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 212
       },
-      "declarations_sha256": "6c61a25e1c08fd0de66a7ca758e47afc75e72cdbcbe8a775555b55048acf8982",
+      "declarations_sha256": "4ab2d930cf37f7a31fe8b0c5df38aa3f65bdf24f86a218097425dc0b4fdd80d9",
       "labels": {
         "Map_SlotBonusCage_": 0,
-        "word_4C2AC": 12,
-        "word_4C2DE": 62,
-        "word_4C310": 112,
-        "word_4C342": 162
+        "SlotsCageMap_Frame00": 12,
+        "SlotsCageMap_Frame02": 62,
+        "SlotsCageMap_Frame04": 112,
+        "SlotsCageMap_Frame01_03_05": 162
       },
       "external_symbols": [],
       "blocks": [
@@ -112499,42 +112499,42 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4C2AC",
+          "target": "SlotsCageMap_Frame00",
           "base": "Map_SlotBonusCage_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4C342",
+          "target": "SlotsCageMap_Frame01_03_05",
           "base": "Map_SlotBonusCage_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4C2DE",
+          "target": "SlotsCageMap_Frame02",
           "base": "Map_SlotBonusCage_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4C342",
+          "target": "SlotsCageMap_Frame01_03_05",
           "base": "Map_SlotBonusCage_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4C310",
+          "target": "SlotsCageMap_Frame04",
           "base": "Map_SlotBonusCage_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4C342",
+          "target": "SlotsCageMap_Frame01_03_05",
           "base": "Map_SlotBonusCage_"
         },
         {
@@ -112568,12 +112568,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 24
       },
-      "declarations_sha256": "6e3aad3734f63a4fb2a934160074248578405060db815de4854ae1337067a9df",
+      "declarations_sha256": "82c0a8d2e00d96b40d9ca7a1bdcc9cad17c32b43ec296fd3766499bc07ea1fec",
       "labels": {
         "Map_SB_Bumper_": 0,
-        "byte_4B882": 6,
-        "byte_4B888": 12,
-        "byte_4B88E": 18
+        "SlotsGridBumperMap_Frame00": 6,
+        "SlotsGridBumperMap_Frame01": 12,
+        "SlotsGridBumperMap_Frame02": 18
       },
       "external_symbols": [],
       "blocks": [
@@ -112581,21 +112581,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B882",
+          "target": "SlotsGridBumperMap_Frame00",
           "base": "Map_SB_Bumper_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B888",
+          "target": "SlotsGridBumperMap_Frame01",
           "base": "Map_SB_Bumper_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B88E",
+          "target": "SlotsGridBumperMap_Frame02",
           "base": "Map_SB_Bumper_"
         },
         {
@@ -112624,25 +112624,25 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 128
       },
-      "declarations_sha256": "684746fcf328cab1c7533b02b91bec365d41240e6f1105dba566fdee77800c7c",
+      "declarations_sha256": "d250ad17b235978bf92c2db94f5cf1e805b1012b69f406e12457067ee7b50e34",
       "labels": {
         "Map_SB_ColoredWall_": 0,
-        "byte_4B8F8": 32,
-        "byte_4B8FE": 38,
-        "byte_4B904": 44,
-        "byte_4B90A": 50,
-        "byte_4B910": 56,
-        "byte_4B916": 62,
-        "byte_4B91C": 68,
-        "byte_4B922": 74,
-        "byte_4B928": 80,
-        "byte_4B92E": 86,
-        "byte_4B934": 92,
-        "byte_4B93A": 98,
-        "byte_4B940": 104,
-        "byte_4B946": 110,
-        "byte_4B94C": 116,
-        "byte_4B952": 122
+        "SlotsGridRotatingWallMap_Frame00": 32,
+        "SlotsGridRotatingWallMap_Frame01": 38,
+        "SlotsGridRotatingWallMap_Frame02": 44,
+        "SlotsGridRotatingWallMap_Frame03": 50,
+        "SlotsGridRotatingWallMap_Frame04": 56,
+        "SlotsGridRotatingWallMap_Frame05": 62,
+        "SlotsGridRotatingWallMap_Frame06": 68,
+        "SlotsGridRotatingWallMap_Frame07": 74,
+        "SlotsGridRotatingWallMap_Frame08": 80,
+        "SlotsGridRotatingWallMap_Frame09": 86,
+        "SlotsGridRotatingWallMap_Frame0A": 92,
+        "SlotsGridRotatingWallMap_Frame0B": 98,
+        "SlotsGridRotatingWallMap_Frame0C": 104,
+        "SlotsGridRotatingWallMap_Frame0D": 110,
+        "SlotsGridRotatingWallMap_Frame0E": 116,
+        "SlotsGridRotatingWallMap_Frame0F": 122
       },
       "external_symbols": [],
       "blocks": [
@@ -112650,112 +112650,112 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B8F8",
+          "target": "SlotsGridRotatingWallMap_Frame00",
           "base": "Map_SB_ColoredWall_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B8FE",
+          "target": "SlotsGridRotatingWallMap_Frame01",
           "base": "Map_SB_ColoredWall_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B904",
+          "target": "SlotsGridRotatingWallMap_Frame02",
           "base": "Map_SB_ColoredWall_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B90A",
+          "target": "SlotsGridRotatingWallMap_Frame03",
           "base": "Map_SB_ColoredWall_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B910",
+          "target": "SlotsGridRotatingWallMap_Frame04",
           "base": "Map_SB_ColoredWall_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B916",
+          "target": "SlotsGridRotatingWallMap_Frame05",
           "base": "Map_SB_ColoredWall_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B91C",
+          "target": "SlotsGridRotatingWallMap_Frame06",
           "base": "Map_SB_ColoredWall_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B922",
+          "target": "SlotsGridRotatingWallMap_Frame07",
           "base": "Map_SB_ColoredWall_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B928",
+          "target": "SlotsGridRotatingWallMap_Frame08",
           "base": "Map_SB_ColoredWall_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B92E",
+          "target": "SlotsGridRotatingWallMap_Frame09",
           "base": "Map_SB_ColoredWall_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B934",
+          "target": "SlotsGridRotatingWallMap_Frame0A",
           "base": "Map_SB_ColoredWall_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B93A",
+          "target": "SlotsGridRotatingWallMap_Frame0B",
           "base": "Map_SB_ColoredWall_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B940",
+          "target": "SlotsGridRotatingWallMap_Frame0C",
           "base": "Map_SB_ColoredWall_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B946",
+          "target": "SlotsGridRotatingWallMap_Frame0D",
           "base": "Map_SB_ColoredWall_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B94C",
+          "target": "SlotsGridRotatingWallMap_Frame0E",
           "base": "Map_SB_ColoredWall_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B952",
+          "target": "SlotsGridRotatingWallMap_Frame0F",
           "base": "Map_SB_ColoredWall_"
         },
         {
@@ -112849,12 +112849,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 24
       },
-      "declarations_sha256": "278dc8f5cd74597598dc63e4319c329fbea7dcf7fa13f6df1be0020c6d978623",
+      "declarations_sha256": "2abc8ea8af15ff333ee5994001a342d4bf1357577e7c6f78aea681b9ddddc6c9",
       "labels": {
         "Map_SB_Goal_": 0,
-        "byte_4B86A": 6,
-        "byte_4B870": 12,
-        "byte_4B876": 18
+        "SlotsGridGoalMap_Frame00": 6,
+        "SlotsGridGoalMap_Frame01": 12,
+        "SlotsGridGoalMap_Frame02": 18
       },
       "external_symbols": [],
       "blocks": [
@@ -112862,21 +112862,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B86A",
+          "target": "SlotsGridGoalMap_Frame00",
           "base": "Map_SB_Goal_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B870",
+          "target": "SlotsGridGoalMap_Frame01",
           "base": "Map_SB_Goal_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B876",
+          "target": "SlotsGridGoalMap_Frame02",
           "base": "Map_SB_Goal_"
         },
         {
@@ -112905,13 +112905,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 32
       },
-      "declarations_sha256": "d82a9f139c41887f949940c566112d731fa0c00c4955e8c647b1b7b6505a682a",
+      "declarations_sha256": "e65a60264455e222de37d42882fa4080a929d03e773dda70c052af9e9923fbf9",
       "labels": {
         "Map_SB_R_and_Peppermint_": 0,
-        "byte_4B84C": 8,
-        "byte_4B852": 14,
-        "byte_4B858": 20,
-        "byte_4B85E": 26
+        "SlotsGridReverseAndPeppermintMap_Frame00": 8,
+        "SlotsGridReverseAndPeppermintMap_Frame01": 14,
+        "SlotsGridReverseAndPeppermintMap_Frame02": 20,
+        "SlotsGridReverseAndPeppermintMap_Frame03": 26
       },
       "external_symbols": [],
       "blocks": [
@@ -112919,28 +112919,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B84C",
+          "target": "SlotsGridReverseAndPeppermintMap_Frame00",
           "base": "Map_SB_R_and_Peppermint_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B852",
+          "target": "SlotsGridReverseAndPeppermintMap_Frame01",
           "base": "Map_SB_R_and_Peppermint_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B858",
+          "target": "SlotsGridReverseAndPeppermintMap_Frame02",
           "base": "Map_SB_R_and_Peppermint_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B85E",
+          "target": "SlotsGridReverseAndPeppermintMap_Frame03",
           "base": "Map_SB_R_and_Peppermint_"
         },
         {
@@ -112974,18 +112974,18 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 68
       },
-      "declarations_sha256": "88061ee4f1207dc72400535ebf4e469d92fd2b91afe6fe25136da54286a3d662",
+      "declarations_sha256": "fa35048957356b928d3eda1fb49a75febe4cbad9f6dc7741081b10342ee3c225",
       "labels": {
         "Map_SB_Ring_": 0,
-        "byte_4B8A6": 18,
-        "byte_4B8AC": 24,
-        "byte_4B8B2": 30,
-        "byte_4B8B8": 36,
-        "byte_4B8BE": 42,
-        "byte_4B8C4": 48,
-        "byte_4B8CA": 54,
-        "byte_4B8D0": 60,
-        "byte_4B8D6": 66
+        "SlotsGridRingMap_Frame00": 18,
+        "SlotsGridRingMap_Frame01": 24,
+        "SlotsGridRingMap_Frame02": 30,
+        "SlotsGridRingMap_Frame03": 36,
+        "SlotsGridRingMap_Frame04": 42,
+        "SlotsGridRingMap_Frame05": 48,
+        "SlotsGridRingMap_Frame06": 54,
+        "SlotsGridRingMap_Frame07": 60,
+        "SlotsGridRingMap_Frame08": 66
       },
       "external_symbols": [],
       "blocks": [
@@ -112993,63 +112993,63 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B8A6",
+          "target": "SlotsGridRingMap_Frame00",
           "base": "Map_SB_Ring_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B8AC",
+          "target": "SlotsGridRingMap_Frame01",
           "base": "Map_SB_Ring_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B8B2",
+          "target": "SlotsGridRingMap_Frame02",
           "base": "Map_SB_Ring_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B8B8",
+          "target": "SlotsGridRingMap_Frame03",
           "base": "Map_SB_Ring_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B8BE",
+          "target": "SlotsGridRingMap_Frame04",
           "base": "Map_SB_Ring_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B8C4",
+          "target": "SlotsGridRingMap_Frame05",
           "base": "Map_SB_Ring_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B8CA",
+          "target": "SlotsGridRingMap_Frame06",
           "base": "Map_SB_Ring_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B8D0",
+          "target": "SlotsGridRingMap_Frame07",
           "base": "Map_SB_Ring_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B8D6",
+          "target": "SlotsGridRingMap_Frame08",
           "base": "Map_SB_Ring_"
         },
         {
@@ -113113,13 +113113,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 176
       },
-      "declarations_sha256": "387a89ea30a3aa408466c75a2ac1f7cc1f0506a18c5cf2fd6b74d2cc30a7d4b0",
+      "declarations_sha256": "2e17d8d05cf614ec06e1e3fb1dc726eb61501fa754aded982e3a38b901082eda",
       "labels": {
         "Map_SB_Slot_": 0,
-        "byte_4B7A0": 12,
-        "byte_4B7C9": 53,
-        "byte_4B7F2": 94,
-        "byte_4B81B": 135
+        "SlotsGridSlotMap_Frame00": 12,
+        "SlotsGridSlotMap_Frame02": 53,
+        "SlotsGridSlotMap_Frame04": 94,
+        "SlotsGridSlotMap_Frame01_03_05": 135
       },
       "external_symbols": [],
       "blocks": [
@@ -113127,42 +113127,42 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B7A0",
+          "target": "SlotsGridSlotMap_Frame00",
           "base": "Map_SB_Slot_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B81B",
+          "target": "SlotsGridSlotMap_Frame01_03_05",
           "base": "Map_SB_Slot_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B7C9",
+          "target": "SlotsGridSlotMap_Frame02",
           "base": "Map_SB_Slot_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B81B",
+          "target": "SlotsGridSlotMap_Frame01_03_05",
           "base": "Map_SB_Slot_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B7F2",
+          "target": "SlotsGridSlotMap_Frame04",
           "base": "Map_SB_Slot_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B81B",
+          "target": "SlotsGridSlotMap_Frame01_03_05",
           "base": "Map_SB_Slot_"
         },
         {
@@ -113196,10 +113196,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 10
       },
-      "declarations_sha256": "8866d5a5681682018a65b0979ac4be0079045f58b3db28efef674e63f857cd29",
+      "declarations_sha256": "3f966907ab7641914525875b491595158b39a429cd5f7c1e84159de878eaae2d",
       "labels": {
         "Map_SlotSpike_": 0,
-        "word_4C3E8": 2
+        "SlotsPayoutSpikeMap_Frame00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -113207,7 +113207,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4C3E8",
+          "target": "SlotsPayoutSpikeMap_Frame00",
           "base": "Map_SlotSpike_"
         },
         {

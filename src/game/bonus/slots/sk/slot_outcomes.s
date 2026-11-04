@@ -14,28 +14,28 @@ Slots_CycleOptions:
 ; ---------------------------------------------------------------------------
 
 Slots_CycleOptions_Index:
-                bra.w   loc_4C416
+                bra.w   SlotsOutcome_PrepareOptionScratchClear
 ; ---------------------------------------------------------------------------
-                bra.w   loc_4C462
+                bra.w   SlotsOutcome_AdvanceStartupReels
 ; ---------------------------------------------------------------------------
-                bra.w   loc_4C480
+                bra.w   SlotsOutcome_SeedSpinAndChooseOutcome
 ; ---------------------------------------------------------------------------
-                bra.w   loc_4C540
+                bra.w   SlotsOutcome_SpinUntilTwoPasses
 ; ---------------------------------------------------------------------------
-                bra.w   loc_4C576
+                bra.w   SlotsOutcome_AdvanceReelAndCheckAllStop
 ; ---------------------------------------------------------------------------
-                bra.w   loc_4C6BC
+                bra.w   SlotsOutcome_StopAllAndEvaluatePayout
 ; ---------------------------------------------------------------------------
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C416:
+SlotsOutcome_PrepareOptionScratchClear:
                 movea.l a4,a1
                 moveq   #8,d0
 
-loc_4C41A:
+SlotsOutcome_ClearScratchAndSeedReels:
                 clr.w   (a1)+
-                dbf     d0,loc_4C41A
+                dbf     d0,SlotsOutcome_ClearScratchAndSeedReels
                 move.b  (V_int_run_count+3).w,d0
                 move.b  d0,6(a4)
                 ror.b   #3,d0
@@ -53,14 +53,14 @@ loc_4C41A:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C462:
+SlotsOutcome_AdvanceStartupReels:
                 bsr.w   Slots_AdvanceReelAndQueueArt
                 tst.b   1(a4)
-                beq.s   loc_4C46E
+                beq.s   SlotsOutcome_EnterIdleAndClearSpeeds
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C46E:
+SlotsOutcome_EnterIdleAndClearSpeeds:
                 move.b  #$18,(a4)
                 clr.w   8(a4)
                 clr.w   $C(a4)
@@ -68,7 +68,7 @@ loc_4C46E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C480:
+SlotsOutcome_SeedSpinAndChooseOutcome:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #7,d0
                 subq.b  #4,d0
@@ -93,53 +93,54 @@ loc_4C480:
                 addq.b  #4,(a4)
                 move.b  (V_int_run_count+3).w,d0
                 ror.b   #3,d0
-                lea     (byte_4C8B4).l,a2
+                lea     (SlotsOutcome_WeightedSymbolTriplets).l,a2
 
-loc_4C4DC:
+SlotsOutcome_ScanWeightedBuckets:
                 sub.b   (a2),d0
-                bcs.s   loc_4C4E4
+                bcs.s   SlotsOutcome_CopyWeightedSymbols
                 addq.w  #3,a2
-                bra.s   loc_4C4DC
+                bra.s   SlotsOutcome_ScanWeightedBuckets
 ; ---------------------------------------------------------------------------
 
-loc_4C4E4:
+; A weight byte of -1 selects the random symbol path
+SlotsOutcome_CopyWeightedSymbols:
                 cmpi.b  #-1,(a2)
-                beq.s   loc_4C4F8
+                beq.s   SlotsOutcome_SelectRandomMappedSymbols
                 move.b  1(a2),4(a4)
                 move.b  2(a2),5(a4)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C4F8:
+SlotsOutcome_SelectRandomMappedSymbols:
                 jsr     (Random_Number).l
                 add.w   (V_int_run_count+2).w,d0
                 ror.w   #4,d0
                 move.w  d0,d1
                 andi.w  #7,d1
-                lea     (byte_4C8CC).l,a1
+                lea     (SlotsOutcome_FirstReelSymbolStrip).l,a1
                 move.b  (a1,d1.w),4(a4)
                 lsr.w   #3,d0
                 move.b  d0,d1
                 andi.w  #7,d1
-                lea     (byte_4C8D4).l,a1
+                lea     (SlotsOutcome_SecondReelSymbolStrip).l,a1
                 move.b  (a1,d1.w),d2
                 lsl.b   #4,d2
                 lsr.w   #3,d0
                 andi.w  #7,d0
-                lea     (byte_4C8DC).l,a1
+                lea     (SlotsOutcome_ThirdReelSymbolStrip).l,a1
                 or.b    (a1,d0.w),d2
                 move.b  d2,5(a4)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C540:
+SlotsOutcome_SpinUntilTwoPasses:
                 bsr.w   Slots_AdvanceReelAndQueueArt
                 tst.b   1(a4)
-                beq.s   loc_4C54C
+                beq.s   SlotsOutcome_SpeedUpAndBeginStopPhase
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C54C:
+SlotsOutcome_SpeedUpAndBeginStopPhase:
                 addi.b  #$30,8(a4)
                 addi.b  #$30,$C(a4)
                 addi.b  #$30,$10(a4)
@@ -152,36 +153,36 @@ loc_4C54C:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C576:
+SlotsOutcome_AdvanceReelAndCheckAllStop:
                 bsr.w   Slots_AdvanceReelAndQueueArt
                 cmpi.b  #$C,9(a4)
-                bne.s   loc_4C594
+                bne.s   SlotsOutcome_DispatchSelectedReelStop
                 cmpi.b  #$C,$D(a4)
-                bne.s   loc_4C594
+                bne.s   SlotsOutcome_DispatchSelectedReelStop
                 cmpi.b  #$C,$11(a4)
-                beq.w   loc_4C6BC
+                beq.w   SlotsOutcome_StopAllAndEvaluatePayout
 
-loc_4C594:
+SlotsOutcome_DispatchSelectedReelStop:
                 moveq   #0,d0
                 move.b  3(a4),d0
                 lea     6(a4),a1
                 adda.w  d0,a1
-                lea     (byte_4C8CC).l,a3
+                lea     (SlotsOutcome_FirstReelSymbolStrip).l,a3
                 add.w   d0,d0
                 adda.w  d0,a3
                 moveq   #0,d0
                 move.b  3(a1),d0
-                jmp     loc_4C5B4(pc,d0.w)
+                jmp     SlotsOutcome_ReelStopSubstateBranches(pc,d0.w)
 ; ---------------------------------------------------------------------------
 
-loc_4C5B4:
-                bra.w   loc_4C602
+SlotsOutcome_ReelStopSubstateBranches:
+                bra.w   SlotsOutcome_WaitFirstReelForPassBorrow
 ; ---------------------------------------------------------------------------
-                bra.w   loc_4C63E
+                bra.w   SlotsOutcome_CheckStripSymbolAndBrake
 ; ---------------------------------------------------------------------------
-                bra.w   loc_4C6A8
+                bra.w   SlotsOutcome_WaitForReelAlignment
 ; ---------------------------------------------------------------------------
-                bra.w   locret_4C6BA
+                bra.w   SlotsOutcome_ReelStopReturn
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -189,17 +190,17 @@ loc_4C5B4:
 Slots_GetSelectedReelSymbol:
                 move.w  4(a4),d1
                 move.b  3(a4),d0
-                beq.s   loc_4C5D0
+                beq.s   SlotsOutcome_ExtractTargetSymbol
                 lsr.w   d0,d1
 
-loc_4C5D0:
+SlotsOutcome_ExtractTargetSymbol:
                 andi.w  #7,d1
                 cmpi.b  #6,d1
-                bgt.s   loc_4C5DC
+                bgt.s   SlotsOutcome_MapSymbol7To5
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C5DC:
+SlotsOutcome_MapSymbol7To5:
                 subq.b  #2,d1
                 rts
 ; End of function Slots_GetSelectedReelSymbol
@@ -211,11 +212,11 @@ Slots_SetSelectedReelSymbol:
                 move.w  #$FFF0,d2
                 andi.w  #$F,d1
                 move.b  3(a4),d0
-                beq.s   loc_4C5F2
+                beq.s   SlotsOutcome_ReplaceAndMaskOutcomeNibble
                 lsl.w   d0,d1
                 rol.w   d0,d2
 
-loc_4C5F2:
+SlotsOutcome_ReplaceAndMaskOutcomeNibble:
                 and.w   d2,4(a4)
                 or.w    d1,4(a4)
                 andi.w  #$777,4(a4)
@@ -224,21 +225,21 @@ loc_4C5F2:
 
 ; ---------------------------------------------------------------------------
 
-loc_4C602:
+SlotsOutcome_WaitFirstReelForPassBorrow:
                 tst.b   3(a4)
-                bne.s   loc_4C610
+                bne.s   SlotsOutcome_WaitForPreviousReelState
                 tst.b   1(a4)
-                bmi.s   loc_4C61A
+                bmi.s   SlotsOutcome_WaitForTargetStripSymbol
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C610:
+SlotsOutcome_WaitForPreviousReelState:
                 cmpi.b  #8,-1(a1)
-                bge.s   loc_4C61A
+                bge.s   SlotsOutcome_WaitForTargetStripSymbol
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C61A:
+SlotsOutcome_WaitForTargetStripSymbol:
                 bsr.s   Slots_GetSelectedReelSymbol
                 move.w  (a1),d0
                 subi.w  #$A0,d0
@@ -246,17 +247,17 @@ loc_4C61A:
                 andi.w  #7,d0
                 move.b  (a3,d0.w),d0
                 cmp.b   d1,d0
-                beq.s   loc_4C632
+                beq.s   SlotsOutcome_StartReelBrakeAt96
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C632:
+SlotsOutcome_StartReelBrakeAt96:
                 addq.b  #4,3(a1)
                 move.b  #$60,2(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C63E:
+SlotsOutcome_CheckStripSymbolAndBrake:
                 bsr.s   Slots_GetSelectedReelSymbol
                 move.w  (a1),d0
                 addi.w  #$F0,d0
@@ -264,29 +265,29 @@ loc_4C63E:
                 lsr.w   #8,d0
                 move.b  (a3,d0.w),d0
                 cmp.b   d0,d1
-                beq.s   loc_4C67C
+                beq.s   SlotsOutcome_SnapReelAndSetOutcomeNibble
                 cmpi.b  #$20,2(a1)
-                bls.s   loc_4C662
+                bls.s   SlotsOutcome_CheckFineBrakeSpeed
                 subi.b  #$C,2(a1)
 
-loc_4C662:
+SlotsOutcome_CheckFineBrakeSpeed:
                 cmpi.b  #$18,2(a1)
-                bgt.s   loc_4C66C
+                bgt.s   SlotsOutcome_CheckFineBrakePosition
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C66C:
+SlotsOutcome_CheckFineBrakePosition:
                 cmpi.b  #$80,1(a1)
-                bls.s   loc_4C676
+                bls.s   SlotsOutcome_ReduceReelSpeedBy2
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C676:
+SlotsOutcome_ReduceReelSpeedBy2:
                 subq.b  #2,2(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C67C:
+SlotsOutcome_SnapReelAndSetOutcomeNibble:
                 move.w  (a1),d0
                 addi.w  #$80,d0
                 move.w  d0,d1
@@ -302,23 +303,23 @@ loc_4C67C:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C6A8:
+SlotsOutcome_WaitForReelAlignment:
                 tst.b   1(a1)
-                beq.s   loc_4C6B0
+                beq.s   SlotsOutcome_StopAlignedReel
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C6B0:
+SlotsOutcome_StopAlignedReel:
                 clr.b   2(a1)
                 addq.b  #4,3(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_4C6BA:
+SlotsOutcome_ReelStopReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C6BC:
+SlotsOutcome_StopAllAndEvaluatePayout:
                 clr.w   8(a4)
                 clr.w   $C(a4)
                 clr.w   $10(a4)
@@ -335,36 +336,36 @@ Slots_AdvanceReelAndQueueArt:
                 move.b  3(a4),d0
                 lea     6(a4),a1
                 adda.w  d0,a1
-                lea     (byte_4C8CC).l,a3
+                lea     (SlotsOutcome_FirstReelSymbolStrip).l,a3
                 adda.w  d0,a3
                 adda.w  d0,a3
-                jmp     loc_4C6F0(pc,d0.w)
+                jmp     SlotsOutcome_SelectReelAndCountPass(pc,d0.w)
 ; End of function Slots_AdvanceReelAndQueueArt
 
 ; ---------------------------------------------------------------------------
 
-loc_4C6F0:
-                bra.w   loc_4C706
+SlotsOutcome_SelectReelAndCountPass:
+                bra.w   SlotsOutcome_SelectFirstReelStrip
 ; ---------------------------------------------------------------------------
-                bra.w   loc_4C712
+                bra.w   SlotsOutcome_SelectSecondReelStrip
 ; ---------------------------------------------------------------------------
                 clr.b   3(a4)
                 subq.b  #1,1(a4)
                 move.w  #$4400,d2
-                bra.s   loc_4C71A
+                bra.s   SlotsOutcome_StepReelAndCheckRowChange
 ; ---------------------------------------------------------------------------
 
-loc_4C706:
+SlotsOutcome_SelectFirstReelStrip:
                 addq.b  #4,3(a4)
                 move.w  #$4000,d2
-                bra.w   loc_4C71A
+                bra.w   SlotsOutcome_StepReelAndCheckRowChange
 ; ---------------------------------------------------------------------------
 
-loc_4C712:
+SlotsOutcome_SelectSecondReelStrip:
                 addq.b  #4,3(a4)
                 move.w  #$4200,d2
 
-loc_4C71A:
+SlotsOutcome_StepReelAndCheckRowChange:
                 move.w  (a1),d0
                 move.b  2(a1),d1
                 ext.w   d1
@@ -373,28 +374,28 @@ loc_4C71A:
                 andi.w  #$7F8,d0
                 andi.w  #$7F8,d3
                 cmp.w   d0,d3
-                bne.s   loc_4C734
+                bne.s   SlotsOutcome_ResolveChangedStripRow
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C734:
+SlotsOutcome_ResolveChangedStripRow:
                 bsr.w   SlotsResolveSymbolStripRowArtPointer
                 lea     (Chunk_table+$7C00).l,a1
                 move.w  #$20-1,d1
 
-loc_4C742:
+SlotsOutcome_CopyStripBands:
                 move.l  $80(a2),$80(a1)
                 move.l  $100(a2),$100(a1)
                 move.l  $180(a2),$180(a1)
                 move.l  (a2)+,(a1)+
                 addq.b  #8,d3
-                bne.s   loc_4C766
+                bne.s   SlotsOutcome_QueueStripVRAMUpload
                 addi.w  #$100,d3
                 andi.w  #$700,d3
                 bsr.w   SlotsResolveSymbolStripRowArtPointer
 
-loc_4C766:
-                dbf     d1,loc_4C742
+SlotsOutcome_QueueStripVRAMUpload:
+                dbf     d1,SlotsOutcome_CopyStripBands
                 move.l  #(Chunk_table+$7C00)&$FFFFFF,d1
                 move.w  #$100,d3
                 jsr     (Add_To_DMA_Queue).l
@@ -429,26 +430,26 @@ Slots_EvaluateReelPayout:
                 andi.w  #$F,d3
                 moveq   #0,d0
                 cmp.b   4(a4),d2
-                bne.s   loc_4C7BC
+                bne.s   SlotsOutcome_AddSecondMatchFlag
                 addq.w  #4,d0
 
-loc_4C7BC:
+SlotsOutcome_AddSecondMatchFlag:
                 cmp.b   4(a4),d3
-                bne.s   loc_4C7C4
+                bne.s   SlotsOutcome_JumpToPayoutCase
                 addq.w  #8,d0
 
-loc_4C7C4:
-                jmp     loc_4C7C8(pc,d0.w)
+SlotsOutcome_JumpToPayoutCase:
+                jmp     SlotsOutcome_PayoutMatchBranches(pc,d0.w)
 ; End of function Slots_EvaluateReelPayout
 
 ; ---------------------------------------------------------------------------
 
-loc_4C7C8:
-                bra.w   loc_4C838
+SlotsOutcome_PayoutMatchBranches:
+                bra.w   SlotsOutcome_CheckMiddleLastPair
 ; ---------------------------------------------------------------------------
-                bra.w   loc_4C80E
+                bra.w   SlotsOutcome_CheckFirstMiddleZeroPair
 ; ---------------------------------------------------------------------------
-                bra.w   loc_4C7E0
+                bra.w   SlotsOutcome_CheckFirstLastZeroPair
 ; ---------------------------------------------------------------------------
                 move.w  d2,d0
                 bsr.w   SlotsLookupSignedBasePayoutBySymbol
@@ -456,9 +457,9 @@ loc_4C7C8:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C7E0:
+SlotsOutcome_CheckFirstLastZeroPair:
                 cmpi.b  #0,d3
-                bne.s   loc_4C7F6
+                bne.s   SlotsOutcome_DoubleFirstLastIfMiddleZero
                 move.w  d2,d0
                 bsr.w   SlotsLookupSignedBasePayoutBySymbol
                 bsr.w   SlotsMultiplySignedPayoutBy4
@@ -466,9 +467,9 @@ loc_4C7E0:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C7F6:
+SlotsOutcome_DoubleFirstLastIfMiddleZero:
                 cmpi.b  #0,d2
-                bne.w   loc_4C838
+                bne.w   SlotsOutcome_CheckMiddleLastPair
                 move.w  d3,d0
                 bsr.w   SlotsLookupSignedBasePayoutBySymbol
                 bsr.w   SlotsMultiplySignedPayoutBy2
@@ -476,9 +477,9 @@ loc_4C7F6:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C80E:
+SlotsOutcome_CheckFirstMiddleZeroPair:
                 cmpi.b  #0,d2
-                bne.s   loc_4C822
+                bne.s   SlotsOutcome_DoubleFirstMiddleIfLastZero
                 move.w  d3,d0
                 bsr.s   SlotsLookupSignedBasePayoutBySymbol
                 bsr.w   SlotsMultiplySignedPayoutBy4
@@ -486,9 +487,9 @@ loc_4C80E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C822:
+SlotsOutcome_DoubleFirstMiddleIfLastZero:
                 cmpi.b  #0,d3
-                bne.w   loc_4C838
+                bne.w   SlotsOutcome_CheckMiddleLastPair
                 move.w  d2,d0
                 bsr.s   SlotsLookupSignedBasePayoutBySymbol
                 bsr.w   SlotsMultiplySignedPayoutBy2
@@ -496,11 +497,11 @@ loc_4C822:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C838:
+SlotsOutcome_CheckMiddleLastPair:
                 cmp.b   d2,d3
-                bne.s   loc_4C86C
+                bne.s   SlotsOutcome_BeginFallbackSymbol6Count
                 cmpi.b  #0,4(a4)
-                bne.s   loc_4C852
+                bne.s   SlotsOutcome_QuadrupleFirstWithTwoZeros
                 move.w  d2,d0
                 bsr.s   SlotsLookupSignedBasePayoutBySymbol
                 bsr.w   SlotsMultiplySignedPayoutBy2
@@ -508,9 +509,9 @@ loc_4C838:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C852:
+SlotsOutcome_QuadrupleFirstWithTwoZeros:
                 cmpi.b  #0,d2
-                bne.s   loc_4C86C
+                bne.s   SlotsOutcome_BeginFallbackSymbol6Count
                 move.b  4(a4),d0
                 andi.w  #$F,d0
                 bsr.s   SlotsLookupSignedBasePayoutBySymbol
@@ -519,31 +520,31 @@ loc_4C852:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C86C:
+SlotsOutcome_BeginFallbackSymbol6Count:
                 moveq   #2,d1
                 moveq   #0,d0
                 cmpi.b  #6,4(a4)
-                bne.s   loc_4C87A
+                bne.s   SlotsOutcome_AddTwoForMiddleSymbol6
                 add.w   d1,d0
 
-loc_4C87A:
+SlotsOutcome_AddTwoForMiddleSymbol6:
                 cmpi.b  #6,d2
-                bne.s   loc_4C882
+                bne.s   SlotsOutcome_AddTwoForLastSymbol6
                 add.w   d1,d0
 
-loc_4C882:
+SlotsOutcome_AddTwoForLastSymbol6:
                 cmpi.b  #6,d3
-                bne.s   loc_4C88A
+                bne.s   SlotsOutcome_StoreFallbackAndLookupBase
                 add.w   d1,d0
 
-loc_4C88A:
+SlotsOutcome_StoreFallbackAndLookupBase:
                 move.w  d0,4(a4)
 
 ; =============== S U B R O U T I N E =======================================
 
 SlotsLookupSignedBasePayoutBySymbol:
                 add.w   d0,d0
-                lea     (word_4C8A4).l,a2
+                lea     (SlotsOutcome_SignedBasePayouts).l,a2
                 move.w  (a2,d0.w),d0
                 rts
 ; End of function SlotsLookupSignedBasePayoutBySymbol
@@ -563,7 +564,7 @@ SlotsMultiplySignedPayoutBy2:
 ; End of function SlotsMultiplySignedPayoutBy2
 
 ; ---------------------------------------------------------------------------
-word_4C8A4:
+SlotsOutcome_SignedBasePayouts:
                 dc.w    100
                 dc.w    30
                 dc.w    20
@@ -572,7 +573,7 @@ word_4C8A4:
                 dc.w    10
                 dc.w    8
                 dc.w    200
-byte_4C8B4:
+SlotsOutcome_WeightedSymbolTriplets:
                 dc.b    4,   0,   0
                 dc.b    9,   1, $11
                 dc.b    4,   3, $33
@@ -581,11 +582,11 @@ byte_4C8B4:
                 dc.b    $F,   5, $55
                 dc.b    $F,   6, $66
                 dc.b    $FF,  $F, $FF
-byte_4C8CC:
+SlotsOutcome_FirstReelSymbolStrip:
                 dc.b    0,   1,   2,   5,   4,   6,   5,   3
-byte_4C8D4:
+SlotsOutcome_SecondReelSymbolStrip:
                 dc.b    0,   1,   2,   5,   4,   6,   1,   3
-byte_4C8DC:
+SlotsOutcome_ThirdReelSymbolStrip:
                 dc.b    0,   1,   2,   5,   4,   6,   3,   5
 
 ; =============== S U B R O U T I N E =======================================
