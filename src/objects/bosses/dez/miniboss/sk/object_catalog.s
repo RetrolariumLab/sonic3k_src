@@ -6,82 +6,82 @@ ObjDat_DEZMiniboss:
                 dc.w    make_art_tile(ArtTile_DEZMiniboss,1,1)
                 dc.w    $280
                 dc.b    $20, $20,   0,   0
-word_7EF52:
+DEZMinibossEye_PartialAttributes:
                 dc.w    $200
                 dc.b    $C,  $C,   2, $17
-word_7EF58:
+DEZMinibossOrbitHazard_PartialAttributes:
                 dc.w    $180
                 dc.b    $10, $10, $15, $86
-word_7EF5E:
+DEZMini_RadialShotAttributes:
                 dc.w    $100
                 dc.b    4,   4, $15, $98
-word_7EF64:
+DEZMini_RandomDebrisAttributes:
                 dc.w    $80
                 dc.b    8,   8, $12,   0
-word_7EF6A:
+DEZMini_DelayedSideDebrisAttributes:
                 dc.w    $180
                 dc.b    $10, $18, $11,   0
-word_7EF70:
+DEZMini_OrbitPlatformAttributes:
                 dc.w    $300
                 dc.b    $18, $10,   1,   0
-word_7EF76:
+DEZMini_PlatformContactAttributes:
                 dc.w    $280
                 dc.b    $18,   4,  $B, $9E
-word_7EF7C:
+DEZMini_BeamControllerAttributes:
                 dc.w    $380
                 dc.b    $10, $80,   6,   0
-word_7EF82:
+DEZMini_BeamSideDetailAttributes:
                 dc.w    $300
                 dc.b    8,   4,   8,   0
-word_7EF88:
+DEZMini_DefeatFragmentAttributes:
                 dc.w    $100
                 dc.b    $10, $14, $23,   0
-ChildObjDat_7EF8E:
+DEZMinibossEye_NormalChildRecord:
                 dc.w    1-1
-                dc.l    loc_7E768
+                dc.l    DEZMinibossEye_DispatchAndDrawOrFlicker
                 dc.b    0,  -4
-ChildObjDat_7EF96:
+DEZMini_OrbitHazardChild:
                 dc.w    8-1
-                dc.l    loc_7E80E
-ChildObjDat_7EF9C:
+                dc.l    DEZMinibossOrbitHazard_Initialize
+DEZMini_RadialShotChild:
                 dc.w    8-1
-                dc.l    loc_7E916
-ChildObjDat_7EFA2:
+                dc.l    DEZMini_InitRadialShot
+DEZMini_RandomDebrisChild:
                 dc.w    1-1
-                dc.l    loc_7EAB6
-ChildObjDat_7EFA8:
+                dc.l    DEZMini_InitRandomDebris
+DEZMini_DelayedSideDebrisChildren:
                 dc.w    2-1
-                dc.l    loc_7EACC
+                dc.l    DEZMini_InitDelayedSideDebris
                 dc.b    -$28,   0
-                dc.l    loc_7EACC
+                dc.l    DEZMini_InitDelayedSideDebris
                 dc.b    $28,   0
-ChildObjDat_7EFB6:
+DEZMini_OrbitPlatformChildren:
                 dc.w    1
-                dc.l    loc_7E4CE
-ChildObjDat_7EFBC:
+                dc.l    DEZMini_InitPlatformSeparation
+DEZMini_PlatformContactChild:
                 dc.w    1-1
-                dc.l    loc_7E74A
+                dc.l    DEZMinibossPlatformContact_Initialize
                 dc.b    0,   4
-ChildObj_7EFC4:
+DEZMini_BeamControllerChild:
                 dc.w    1-1
-                dc.l    loc_7E97E
+                dc.l    DEZMinibossBeam_InitializeExtension
                 dc.b    0, $1E
-ChildObjDat_7EFCC:
+DEZMini_BeamSideDetailChild:
                 dc.w    2-1
-                dc.l    loc_7EA6C
-ChildObjDat_7EFD2:
+                dc.l    DEZMini_InitBeamEndAndSide
+DEZMini_DefeatFragmentChildren:
                 dc.w    4-1
-                dc.l    loc_7EB0E
+                dc.l    DEZMini_InitDefeatFragment
                 dc.b    -$10,   0
-                dc.l    loc_7EB0E
+                dc.l    DEZMini_InitDefeatFragment
                 dc.b    $10,   0
-                dc.l    loc_7EB0E
+                dc.l    DEZMini_InitDefeatFragment
                 dc.b    -$C, $18
-                dc.l    loc_7EB0E
+                dc.l    DEZMini_InitDefeatFragment
                 dc.b    $C, $18
-byte_7EFEC:
+DEZMini_PlatformContactAnim:
                 dc.b    1,  $B,  $C,  $D,  $E,  $F, $10, $FC
-byte_7EFF4:
+DEZMini_BeamSideDetailAnim:
                 dc.b    0,   8,   7,   9,   7,  $A,   7, $FC
                 even
 Pal_DEZMiniboss1:
@@ -90,7 +90,7 @@ Pal_DEZMiniboss1:
 Pal_DEZMiniboss2:
                 binclude "data/Levels/DEZ/Palettes/Miniboss 2.bin"
                 even
-word_7F03C:     palscriptptr .header, .data
+DEZMini_FormTwoHitPaletteScript:    palscriptptr .header, .data
                 dc.w    0
                 .header: palscripthdr Normal_palette_line_2+$16, 3, 11-1
                 .data:  palscriptdata 8, $66A, $448, $226

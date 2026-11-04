@@ -273,12 +273,12 @@
     },
     {
       "path": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
-      "scope": "word_7F03C",
+      "scope": "DEZMini_FormTwoHitPaletteScript",
       "first_line": 93,
       "last_line": 100,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 48,
-      "declarations_sha256": "50cf1638fbd110f9e26938ea26e6534be6f0a24d36b7bfe2b5826424168d0778",
+      "declarations_sha256": "ba9b49c30aeb04adbd952a35cc47e89807ebb2b379c178ef588e7daa580c6ccf",
       "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
       "file_frames": []
     },

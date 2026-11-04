@@ -1,133 +1,133 @@
 ; Data owner: objects/shared/zones/dez
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_DEZMiniboss_:
-                dc.w    word_185008-Map_DEZMiniboss_
-                dc.w    word_18502E-Map_DEZMiniboss_
-                dc.w    word_18503C-Map_DEZMiniboss_
-                dc.w    word_185050-Map_DEZMiniboss_
-                dc.w    word_185064-Map_DEZMiniboss_
-                dc.w    word_185078-Map_DEZMiniboss_
-                dc.w    word_18508C-Map_DEZMiniboss_
-                dc.w    word_18509A-Map_DEZMiniboss_
-                dc.w    word_18509C-Map_DEZMiniboss_
-                dc.w    word_1850A4-Map_DEZMiniboss_
-                dc.w    word_1850AC-Map_DEZMiniboss_
-                dc.w    word_1850B4-Map_DEZMiniboss_
-                dc.w    word_1850C2-Map_DEZMiniboss_
-                dc.w    word_1850D0-Map_DEZMiniboss_
-                dc.w    word_1850DE-Map_DEZMiniboss_
-                dc.w    word_1850EC-Map_DEZMiniboss_
-                dc.w    word_1850FA-Map_DEZMiniboss_
-                dc.w    word_185108-Map_DEZMiniboss_
-                dc.w    word_185116-Map_DEZMiniboss_
-                dc.w    word_18511E-Map_DEZMiniboss_
-                dc.w    word_185126-Map_DEZMiniboss_
-                dc.w    word_18512E-Map_DEZMiniboss_
-                dc.w    word_185136-Map_DEZMiniboss_
-                dc.w    word_18513E-Map_DEZMiniboss_
-                dc.w    word_185146-Map_DEZMiniboss_
-                dc.w    word_18514E-Map_DEZMiniboss_
-                dc.w    word_185156-Map_DEZMiniboss_
-                dc.w    word_18515E-Map_DEZMiniboss_
-                dc.w    word_185178-Map_DEZMiniboss_
-                dc.w    word_18519E-Map_DEZMiniboss_
-                dc.w    word_1851D0-Map_DEZMiniboss_
-                dc.w    word_18520E-Map_DEZMiniboss_
-                dc.w    word_185258-Map_DEZMiniboss_
-                dc.w    word_1852AE-Map_DEZMiniboss_
-                dc.w    word_185310-Map_DEZMiniboss_
-                dc.w    word_18537E-Map_DEZMiniboss_
-                dc.w    word_18538C-Map_DEZMiniboss_
-                dc.w    word_18539A-Map_DEZMiniboss_
-                dc.w    word_1853A2-Map_DEZMiniboss_
-word_185008:    dc.w    6
+                dc.w    DEZMiniboss_MapFrame00-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame01-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame02-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame03-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame04-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame05-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame06-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame07-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame08-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame09-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame0A-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame0B-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame0C-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame0D-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame0E-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame0F-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame10-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame11-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame12-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame13-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame14-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame15-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame16-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame17-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame18-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame19-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame1A-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame1B-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame1C-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame1D-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame1E-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame1F-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame20-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame21-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame22-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame23-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame24-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame25-Map_DEZMiniboss_
+                dc.w    DEZMiniboss_MapFrame26-Map_DEZMiniboss_
+DEZMiniboss_MapFrame00: dc.w    6
                 dc.b    $E8,   4,   0,   0, $FF, $F0
                 dc.b    $F0,  $F,   0,   2, $FF, $E0
                 dc.b    $10,   9,   0, $12, $FF, $E8
                 dc.b    $E8,   4,   8,   0,   0,   0
                 dc.b    $F0,  $F,   8,   2,   0,   0
                 dc.b    $10,   9,   8, $12,   0,   0
-word_18502E:    dc.w    2
+DEZMiniboss_MapFrame01: dc.w    2
                 dc.b    $F4,  $A,   0, $18, $FF, $E8
                 dc.b    $F4,  $A,   8, $18,   0,   0
-word_18503C:    dc.w    3
+DEZMiniboss_MapFrame02: dc.w    3
                 dc.b    $F7,   0,   0, $2E, $FF, $FC
                 dc.b    $F8,   5,   0, $2A, $FF, $F8
                 dc.b    $F4,  $A,   0, $21, $FF, $F4
-word_185050:    dc.w    3
+DEZMiniboss_MapFrame03: dc.w    3
                 dc.b    $F7,   0,   0, $2E, $FF, $FC
                 dc.b    $F8,   5,   0, $2A, $FF, $F9
                 dc.b    $F4,  $A,   0, $21, $FF, $F4
-word_185064:    dc.w    3
+DEZMiniboss_MapFrame04: dc.w    3
                 dc.b    $F7,   0,   0, $2E, $FF, $FC
                 dc.b    $F8,   5,   0, $2A, $FF, $FA
                 dc.b    $F4,  $A,   0, $21, $FF, $F4
-word_185078:    dc.w    3
+DEZMiniboss_MapFrame05: dc.w    3
                 dc.b    $F7,   0,   0, $2E, $FF, $FC
                 dc.b    $F8,   5,   0, $2A, $FF, $FB
                 dc.b    $F4,  $A,   0, $21, $FF, $F4
-word_18508C:    dc.w    2
+DEZMiniboss_MapFrame06: dc.w    2
                 dc.b    $FC,   4,   0, $2F, $FF, $F0
                 dc.b    $FC,   4,   8, $2F,   0,   0
-word_18509A:    dc.w    0
-word_18509C:    dc.w    1
+DEZMiniboss_MapFrame07: dc.w    0
+DEZMiniboss_MapFrame08: dc.w    1
                 dc.b    $FC,   4,   0, $35, $FF, $F8
-word_1850A4:    dc.w    1
+DEZMiniboss_MapFrame09: dc.w    1
                 dc.b    $FC,   4,   0, $37, $FF, $F8
-word_1850AC:    dc.w    1
+DEZMiniboss_MapFrame0A: dc.w    1
                 dc.b    $FC,   4,   0, $39, $FF, $F8
-word_1850B4:    dc.w    2
+DEZMiniboss_MapFrame0B: dc.w    2
                 dc.b    $E8,   8,   0, $3B, $FF, $E8
                 dc.b    $E8,   8,   0, $3E,   0,   0
-word_1850C2:    dc.w    2
+DEZMiniboss_MapFrame0C: dc.w    2
                 dc.b    $E8,   8,   0, $41, $FF, $E8
                 dc.b    $E8,   8,   0, $44,   0,   0
-word_1850D0:    dc.w    2
+DEZMiniboss_MapFrame0D: dc.w    2
                 dc.b    $E8,   8,   0, $47, $FF, $E8
                 dc.b    $E8,   8,   0, $4A,   0,   0
-word_1850DE:    dc.w    2
+DEZMiniboss_MapFrame0E: dc.w    2
                 dc.b    $E8,   8,   0, $4D, $FF, $E8
                 dc.b    $E8,   8,   0, $50,   0,   0
-word_1850EC:    dc.w    2
+DEZMiniboss_MapFrame0F: dc.w    2
                 dc.b    $E8,   8,   0, $53, $FF, $E8
                 dc.b    $E8,   8,   0, $56,   0,   0
-word_1850FA:    dc.w    2
+DEZMiniboss_MapFrame10: dc.w    2
                 dc.b    $E8,   8,   0, $59, $FF, $E8
                 dc.b    $E8,   8,   0, $5C,   0,   0
-word_185108:    dc.w    2
+DEZMiniboss_MapFrame11: dc.w    2
                 dc.b    $E8,  $E,   0, $5F, $FF, $F0
                 dc.b    0,  $E,   0, $6B, $FF, $F0
-word_185116:    dc.w    1
+DEZMiniboss_MapFrame12: dc.w    1
                 dc.b    $FC,   4,   0, $77, $FF, $F8
-word_18511E:    dc.w    1
+DEZMiniboss_MapFrame13: dc.w    1
                 dc.b    $FC,   0,   0, $79, $FF, $FC
-word_185126:    dc.w    1
+DEZMiniboss_MapFrame14: dc.w    1
                 dc.b    $F8,   5,   0, $7A, $FF, $F8
-word_18512E:    dc.w    1
+DEZMiniboss_MapFrame15: dc.w    1
                 dc.b    $F0,  $F,   0, $7E, $FF, $F0
-word_185136:    dc.w    1
+DEZMiniboss_MapFrame16: dc.w    1
                 dc.b    $F0,  $F,   0, $8E, $FF, $F0
-word_18513E:    dc.w    1
+DEZMiniboss_MapFrame17: dc.w    1
                 dc.b    $F0,  $F,   0, $9E, $FF, $F0
-word_185146:    dc.w    1
+DEZMiniboss_MapFrame18: dc.w    1
                 dc.b    $FC,   0,   0, $AE, $FF, $FC
-word_18514E:    dc.w    1
+DEZMiniboss_MapFrame19: dc.w    1
                 dc.b    $FC,   0,   0, $AF, $FF, $FC
-word_185156:    dc.w    1
+DEZMiniboss_MapFrame1A: dc.w    1
                 dc.b    $FC,   0,   0, $B0, $FF, $FC
-word_18515E:    dc.w    4
+DEZMiniboss_MapFrame1B: dc.w    4
                 dc.b    $F8,   5,   0, $31, $FF, $F0
                 dc.b    $F8,   5,   8, $31,   0,   0
                 dc.b    8,   4,   0, $2F, $FF, $F0
                 dc.b    8,   4,   8, $2F,   0,   0
-word_185178:    dc.w    6
+DEZMiniboss_MapFrame1C: dc.w    6
                 dc.b    $F0,   5,   0, $31, $FF, $F0
                 dc.b    $F0,   5,   8, $31,   0,   0
                 dc.b    0,   5,   0, $31, $FF, $F0
                 dc.b    0,   5,   8, $31,   0,   0
                 dc.b    $10,   4,   0, $2F, $FF, $F0
                 dc.b    $10,   4,   8, $2F,   0,   0
-word_18519E:    dc.w    8
+DEZMiniboss_MapFrame1D: dc.w    8
                 dc.b    $E8,   5,   0, $31, $FF, $F0
                 dc.b    $E8,   5,   8, $31,   0,   0
                 dc.b    $F8,   5,   0, $31, $FF, $F0
@@ -136,7 +136,7 @@ word_18519E:    dc.w    8
                 dc.b    8,   5,   8, $31,   0,   0
                 dc.b    $18,   4,   0, $2F, $FF, $F0
                 dc.b    $18,   4,   8, $2F,   0,   0
-word_1851D0:    dc.w    $A
+DEZMiniboss_MapFrame1E: dc.w    $A
                 dc.b    $E0,   5,   0, $31, $FF, $F0
                 dc.b    $E0,   5,   8, $31,   0,   0
                 dc.b    $F0,   5,   0, $31, $FF, $F0
@@ -147,7 +147,7 @@ word_1851D0:    dc.w    $A
                 dc.b    $10,   5,   8, $31,   0,   0
                 dc.b    $20,   4,   0, $2F, $FF, $F0
                 dc.b    $20,   4,   8, $2F,   0,   0
-word_18520E:    dc.w    $C
+DEZMiniboss_MapFrame1F: dc.w    $C
                 dc.b    $D8,   5,   0, $31, $FF, $F0
                 dc.b    $D8,   5,   8, $31,   0,   0
                 dc.b    $E8,   5,   0, $31, $FF, $F0
@@ -160,7 +160,7 @@ word_18520E:    dc.w    $C
                 dc.b    $18,   5,   8, $31,   0,   0
                 dc.b    $28,   4,   0, $2F, $FF, $F0
                 dc.b    $28,   4,   8, $2F,   0,   0
-word_185258:    dc.w    $E
+DEZMiniboss_MapFrame20: dc.w    $E
                 dc.b    $D0,   5,   0, $31, $FF, $F0
                 dc.b    $D0,   5,   8, $31,   0,   0
                 dc.b    $E0,   5,   0, $31, $FF, $F0
@@ -175,7 +175,7 @@ word_185258:    dc.w    $E
                 dc.b    $20,   5,   8, $31,   0,   0
                 dc.b    $30,   4,   0, $2F, $FF, $F0
                 dc.b    $30,   4,   8, $2F,   0,   0
-word_1852AE:    dc.w    $10
+DEZMiniboss_MapFrame21: dc.w    $10
                 dc.b    $C8,   5,   0, $31, $FF, $F0
                 dc.b    $C8,   5,   8, $31,   0,   0
                 dc.b    $D8,   5,   0, $31, $FF, $F0
@@ -192,7 +192,7 @@ word_1852AE:    dc.w    $10
                 dc.b    $28,   5,   8, $31,   0,   0
                 dc.b    $38,   4,   0, $2F, $FF, $F0
                 dc.b    $38,   4,   8, $2F,   0,   0
-word_185310:    dc.w    $12
+DEZMiniboss_MapFrame22: dc.w    $12
                 dc.b    $C0,   5,   0, $31, $FF, $F0
                 dc.b    $C0,   5,   8, $31,   0,   0
                 dc.b    $D0,   5,   0, $31, $FF, $F0
@@ -211,13 +211,13 @@ word_185310:    dc.w    $12
                 dc.b    $30,   5,   8, $31,   0,   0
                 dc.b    $40,   4,   0, $2F, $FF, $F0
                 dc.b    $40,   4,   8, $2F,   0,   0
-word_18537E:    dc.w    2
+DEZMiniboss_MapFrame23: dc.w    2
                 dc.b    $E8,   4,   0,   0,   0,   0
                 dc.b    $F0,  $F,   0,   2, $FF, $F0
-word_18538C:    dc.w    2
+DEZMiniboss_MapFrame24: dc.w    2
                 dc.b    $E8,   4,   8,   0, $FF, $F0
                 dc.b    $F0,  $F,   8,   2, $FF, $F0
-word_18539A:    dc.w    1
+DEZMiniboss_MapFrame25: dc.w    1
                 dc.b    $F8,   9,   0, $12, $FF, $F4
-word_1853A2:    dc.w    1
+DEZMiniboss_MapFrame26: dc.w    1
                 dc.b    $F8,   9,   8, $12, $FF, $F4

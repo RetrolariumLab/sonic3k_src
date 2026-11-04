@@ -1,0 +1,2878 @@
+{
+  "schema_version": 1,
+  "packet": "50-boss-dez-mini",
+  "mappings": [
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 33,
+      "old": "loc_7DE28",
+      "new": "DEZMiniboss_RunInitialCameraTransition",
+      "profiles": ["sk"],
+      "meaning": "Run the saved-camera arena and music transition before battle entry."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 37,
+      "old": "loc_7DE2C",
+      "new": "DEZMini_FinishCameraAndWidenBounds",
+      "profiles": ["sk"],
+      "meaning": "Finish initial arena lock and widen working motion bounds."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 43,
+      "old": "locret_7DE44",
+      "new": "DEZMinibossAndScene_SharedReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from DEZ miniboss and related post-battle waits."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 47,
+      "old": "loc_7DE46",
+      "new": "DEZMini_AdvanceInitialHazardY",
+      "profiles": ["sk"],
+      "meaning": "Advance the initial signed hazard-row vertical offset until it wraps nonnegative."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 53,
+      "old": "loc_7DE4E",
+      "new": "DEZMini_InstallFormOneDispatcher",
+      "profiles": ["sk"],
+      "meaning": "Install the first-form cycle dispatcher after initial offset entry."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 56,
+      "old": "loc_7DE54",
+      "new": "DEZMinibossFirstForm_ResetCycleDelay",
+      "profiles": ["sk"],
+      "meaning": "Reset the repeating hazard geometry cycle to its initial delay."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 64,
+      "old": "loc_7DE6E",
+      "new": "DEZMini_FormOneDispatchSoundAndHit",
+      "profiles": ["sk"],
+      "meaning": "Dispatch eight first-form states, gate ambient sound and check eye hit count."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 75,
+      "old": "loc_7DE8E",
+      "new": "DEZMini_FormOneCheckHitsAfterCycle",
+      "profiles": ["sk"],
+      "meaning": "Apply the first-form root hit-count transition after cycle and sound work."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 78,
+      "old": "off_7DE92",
+      "new": "DEZMinibossFirstForm_CycleStateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Eight relative WORD entries for first-form hazard geometry cycling."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 89,
+      "old": "loc_7DEA2",
+      "new": "DEZMini_FormOneTickCycleWait",
+      "profiles": ["sk"],
+      "meaning": "Shared timed wait state for four cycle pauses."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 93,
+      "old": "loc_7DEA6",
+      "new": "DEZMini_BeginHazardYBounces",
+      "profiles": ["sk"],
+      "meaning": "Begin the accelerated vertical-offset bounce phase."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 102,
+      "old": "loc_7DEC6",
+      "new": "DEZMini_UpdateHazardYBounce",
+      "profiles": ["sk"],
+      "meaning": "Accelerate and reflect the hazard-row vertical offset."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 116,
+      "old": "loc_7DEEC",
+      "new": "DEZMini_StoreHazardYOffsetAndStep",
+      "profiles": ["sk"],
+      "meaning": "Commit vertical geometry offset and its accelerated step."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 122,
+      "old": "loc_7DEF6",
+      "new": "DEZMini_PauseBeforeRadialExpansion",
+      "profiles": ["sk"],
+      "meaning": "Install a 160-update pause before radial expansion."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 129,
+      "old": "loc_7DF0C",
+      "new": "DEZMini_BeginRadialExpansion",
+      "profiles": ["sk"],
+      "meaning": "Timed callback selects radial expansion state."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 134,
+      "old": "loc_7DF14",
+      "new": "DEZMini_IncreaseRadialAmplitude",
+      "profiles": ["sk"],
+      "meaning": "Grow the high BYTE of first-form radial amplitude without storing a negative candidate."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 142,
+      "old": "loc_7DF22",
+      "new": "DEZMini_HoldExpandedAmplitude",
+      "profiles": ["sk"],
+      "meaning": "Pause after first-form radial expansion reaches its signed-byte threshold."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 149,
+      "old": "loc_7DF38",
+      "new": "DEZMini_BeginRadialContraction",
+      "profiles": ["sk"],
+      "meaning": "Timed callback selects radial contraction."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 154,
+      "old": "loc_7DF40",
+      "new": "DEZMini_DecreaseRadialAmplitude",
+      "profiles": ["sk"],
+      "meaning": "Shrink the first-form amplitude BYTE toward0x40."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 163,
+      "old": "loc_7DF52",
+      "new": "DEZMini_ClampAmplitudeAndWait",
+      "profiles": ["sk"],
+      "meaning": "Clamp radial amplitude to0x40 and install the next long pause."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 171,
+      "old": "loc_7DF6E",
+      "new": "DEZMini_BeginHazardYReturn",
+      "profiles": ["sk"],
+      "meaning": "Timed callback begins the vertical-offset return phase."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 178,
+      "old": "loc_7DF84",
+      "new": "DEZMini_LowerHazardYOffset",
+      "profiles": ["sk"],
+      "meaning": "Step the signed high BYTE vertical offset while the cycle reset timer runs."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 183,
+      "old": "loc_7DF8C",
+      "new": "DEZMinibossTransform_DispatchState",
+      "profiles": ["sk"],
+      "meaning": "Tail-dispatch the four first-to-second-form transformation states."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 189,
+      "old": "off_7DF9A",
+      "new": "DEZMinibossTransform_StateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Four relative WORD entries for miniboss transformation."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 196,
+      "old": "loc_7DFA2",
+      "new": "DEZMini_TransformTryDebris",
+      "profiles": ["sk"],
+      "meaning": "Attempt one random fragment every eighth VInt during transformation hold."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 203,
+      "old": "loc_7DFB4",
+      "new": "DEZMini_TransformTickDebrisWait",
+      "profiles": ["sk"],
+      "meaning": "Continue transformation wait independently of debris allocation."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 207,
+      "old": "loc_7DFB8",
+      "new": "DEZMini_SignalForegroundAndSpawnShells",
+      "profiles": ["sk"],
+      "meaning": "Begin the shell-separation presentation after the initial transformation wait."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 217,
+      "old": "loc_7DFDE",
+      "new": "DEZMini_BeginTransformDiagonalMove",
+      "profiles": ["sk"],
+      "meaning": "Move the transforming body diagonally for the next timed state."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 227,
+      "old": "loc_7E006",
+      "new": "DEZMini_TransformMoveWaitAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Integrate transformation motion before its timer/draw tail."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 230,
+      "old": "loc_7E00C",
+      "new": "DEZMinibossTransform_WaitAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Shared transformation timer and draw tail."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 235,
+      "old": "loc_7E016",
+      "new": "DEZMini_SpawnLinkedPlatforms",
+      "profiles": ["sk"],
+      "meaning": "Attempt a two-member platform chain before activating second form."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 246,
+      "old": "loc_7E044",
+      "new": "DEZMini_InitFormTwoHoverAndMask",
+      "profiles": ["sk"],
+      "meaning": "Activate second-form hit count, hover state and optional sprite mask."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 275,
+      "old": "loc_7E0A6",
+      "new": "DEZMini_FormTwoSoundAndDispatch",
+      "profiles": ["sk"],
+      "meaning": "Gate second-form hover sound before hit reaction and state dispatch."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 282,
+      "old": "loc_7E0B8",
+      "new": "DEZMini_FormTwoCheckHitAndDispatch",
+      "profiles": ["sk"],
+      "meaning": "Apply second-form hit/defeat reaction before tail-dispatching the current routine."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 289,
+      "old": "off_7E0CA",
+      "new": "DEZMinibossSecondForm_StateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Six relative WORD entries for hover, expansion reaction and jump cycle."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 298,
+      "old": "loc_7E0D6",
+      "new": "DEZMini_HoverAndRetargetPlatforms",
+      "profiles": ["sk"],
+      "meaning": "Move idle second form, reverse at bounds and retarget platform angular velocity."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 307,
+      "old": "loc_7E0F4",
+      "new": "DEZMinibossSecondForm_DrawIdleHover",
+      "profiles": ["sk"],
+      "meaning": "Draw second form after idle motion and optional reaction selection."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 320,
+      "old": "loc_7E108",
+      "new": "DEZMini_RunPalettePursueAndRetarget",
+      "profiles": ["sk"],
+      "meaning": "Run the hit palette script while pursuing Player1 and retargeting platforms."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 329,
+      "old": "loc_7E124",
+      "new": "DEZMini_BeginPlatformAlignment",
+      "profiles": ["sk"],
+      "meaning": "Palette custom callback stops pursuit and requests platform alignment."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 337,
+      "old": "loc_7E13C",
+      "new": "DEZMini_HoverUntilPlatformsAlign",
+      "profiles": ["sk"],
+      "meaning": "Hover while waiting for platform alignment or another hit reaction."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 347,
+      "old": "loc_7E15C",
+      "new": "DEZMini_RestartPlatformExpansion",
+      "profiles": ["sk"],
+      "meaning": "Restart expansion reaction when another hit arrives during alignment wait."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 353,
+      "old": "loc_7E16A",
+      "new": "DEZMini_LaunchJumpAndSignalPlatforms",
+      "profiles": ["sk"],
+      "meaning": "Launch root jump after platforms clear the alignment request."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 361,
+      "old": "loc_7E186",
+      "new": "DEZMinibossSecondForm_AscendOrReactToHit",
+      "profiles": ["sk"],
+      "meaning": "Advance upward jump until velocity turns nonnegative or a hit request is present."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 369,
+      "old": "loc_7E1A0",
+      "new": "DEZMini_BeginPlatformCatchWait",
+      "profiles": ["sk"],
+      "meaning": "Select platform catch-signal wait after ascent or a hit request."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 372,
+      "old": "loc_7E1A6",
+      "new": "DEZMinibossSecondForm_DrawAfterAscent",
+      "profiles": ["sk"],
+      "meaning": "Draw after root ascent and optional wait-state selection."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 376,
+      "old": "loc_7E1AC",
+      "new": "DEZMini_WaitForCatchRelease",
+      "profiles": ["sk"],
+      "meaning": "Wait for platform to clear root jump bit2, then set return motion/angular state."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 388,
+      "old": "loc_7E1DE",
+      "new": "DEZMinibossSecondForm_DrawCatchWait",
+      "profiles": ["sk"],
+      "meaning": "Draw root while catch signal is pending or after return selection."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 392,
+      "old": "loc_7E1E4",
+      "new": "DEZMini_RequestFastPlatformExpansion",
+      "profiles": ["sk"],
+      "meaning": "Select faster platform expansion when return begins with pending hit."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 399,
+      "old": "loc_7E1FC",
+      "new": "DEZMini_DescendToSavedHoverY",
+      "profiles": ["sk"],
+      "meaning": "Move root downward to its saved second-form hover height."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 414,
+      "old": "loc_7E22E",
+      "new": "DEZMini_ResumePursuitAndHover",
+      "profiles": ["sk"],
+      "meaning": "Store post-return horizontal pursuit direction and reset hover swing."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 418,
+      "old": "loc_7E236",
+      "new": "DEZMinibossSecondForm_DrawReturnDescent",
+      "profiles": ["sk"],
+      "meaning": "Draw second form during return descent or after hover reset."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 422,
+      "old": "loc_7E23C",
+      "new": "DEZMini_TryPostBossPlayerScene",
+      "profiles": ["sk"],
+      "meaning": "Begin shared end-sign flow and attempt an independent post-boss player controller."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 427,
+      "old": "loc_7E24A",
+      "new": "DEZMini_SignalMaskAndStartEndSign",
+      "profiles": ["sk"],
+      "meaning": "Signal root attachments and start ordinary sign flow after optional scene allocation."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 434,
+      "old": "loc_7E25C",
+      "new": "DEZMini_WaitForEndFlagSet",
+      "profiles": ["sk"],
+      "meaning": "Wait until shared end-level-in-effect byte becomes nonzero."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 439,
+      "old": "loc_7E26A",
+      "new": "DEZMini_WaitForEndFlagClear",
+      "profiles": ["sk"],
+      "meaning": "Wait for shared end-level byte to clear before synthetic player control."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 448,
+      "old": "loc_7E28A",
+      "new": "DEZMini_ChoosePlayerApproachSide",
+      "profiles": ["sk"],
+      "meaning": "Select leftward versus rightward synthetic approach from initial player X."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 453,
+      "old": "loc_7E298",
+      "new": "DEZMini_WalkPlayerTowardCenter",
+      "profiles": ["sk"],
+      "meaning": "Drive Player1 toward X0x140 from the selected side."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 466,
+      "old": "loc_7E2C0",
+      "new": "DEZMini_SetRightAndJumpInput",
+      "profiles": ["sk"],
+      "meaning": "Write held and pressed right, plus the already-selected optional A input."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 472,
+      "old": "loc_7E2CA",
+      "new": "DEZMini_CheckLeftwardArrival",
+      "profiles": ["sk"],
+      "meaning": "Test center arrival while approaching from the right side."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 480,
+      "old": "loc_7E2DE",
+      "new": "DEZMini_SetLeftAndJumpInput",
+      "profiles": ["sk"],
+      "meaning": "Write held and pressed left, plus any selected pushing jump input."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 486,
+      "old": "loc_7E2E8",
+      "new": "DEZMini_CenterPlayerAndTryExplosions",
+      "profiles": ["sk"],
+      "meaning": "Clamp Player1 to center and begin the camera-opening scene delay."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 499,
+      "old": "loc_7E320",
+      "new": "DEZMini_TrySecondExplosionController",
+      "profiles": ["sk"],
+      "meaning": "Attempt the second scene explosion controller independently of the first."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 507,
+      "old": "locret_7E340",
+      "new": "DEZMini_ExplosionSpawnReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after both independent post-boss explosion allocations."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 511,
+      "old": "loc_7E342",
+      "new": "DEZMini_WaitThenOpenCameraY",
+      "profiles": ["sk"],
+      "meaning": "Wait32 updates then start vertical camera expansion."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 521,
+      "old": "loc_7E366",
+      "new": "DEZMini_TryCameraMaxYExpansion",
+      "profiles": ["sk"],
+      "meaning": "Set distant maximum camera Y and attempt gradual expansion actor."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 527,
+      "old": "loc_7E37A",
+      "new": "DEZMini_PlayCameraOpeningRumble",
+      "profiles": ["sk"],
+      "meaning": "Play rumble after independent camera-bound actor attempts."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 531,
+      "old": "locret_7E382",
+      "new": "DEZMini_CameraOpeningDelayReturn",
+      "profiles": ["sk"],
+      "meaning": "Return while camera-opening delay runs or after its setup."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 535,
+      "old": "loc_7E384",
+      "new": "DEZMini_WaitGroundedAtSceneHeight",
+      "profiles": ["sk"],
+      "meaning": "Wait for Player1 at or below Y0x360 and not airborne."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 550,
+      "old": "locret_7E3C8",
+      "new": "DEZMini_GroundingGateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return before the grounded-height gate passes or after player spin setup."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 554,
+      "old": "loc_7E3CA",
+      "new": "DEZMini_AcceleratePlayerSpin",
+      "profiles": ["sk"],
+      "meaning": "Accelerate the twelve-pose player spin to an exact step threshold."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 562,
+      "old": "loc_7E3E8",
+      "new": "DEZMini_AdvancePlayerSpin",
+      "profiles": ["sk"],
+      "meaning": "Advance player spin after acceleration and optional state transition."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 566,
+      "old": "loc_7E3EC",
+      "new": "DEZMini_WaitAndPreparePlayerLaunch",
+      "profiles": ["sk"],
+      "meaning": "Lift the spinning player while waiting to launch the controller proxy."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 577,
+      "old": "loc_7E416",
+      "new": "DEZMini_LiftPlayerAndSpin",
+      "profiles": ["sk"],
+      "meaning": "Lift Player1 sixteen pixels and advance its spin/art."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 582,
+      "old": "loc_7E420",
+      "new": "DEZMini_SpinInFlightToApex",
+      "profiles": ["sk"],
+      "meaning": "Continue spin during proxy flight until its pre-integration Y velocity is nonnegative."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 593,
+      "old": "loc_7E44C",
+      "new": "DEZMini_MovePlayerFlightAndLand",
+      "profiles": ["sk"],
+      "meaning": "Integrate proxy gravity and choose the player-mode-specific landing height."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 602,
+      "old": "loc_7E468",
+      "new": "DEZMini_ClampLandingAndTryTitleCard",
+      "profiles": ["sk"],
+      "meaning": "Clamp proxy to landing Y and attempt act-transition title card."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 613,
+      "old": "loc_7E490",
+      "new": "DEZMini_SyncPlayerToSceneProxy",
+      "profiles": ["sk"],
+      "meaning": "Mirror invisible controller integer position into Player1."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 620,
+      "old": "loc_7E4A2",
+      "new": "DEZMini_WaitBeforeControlRestore",
+      "profiles": ["sk"],
+      "meaning": "Wait120 updates after landing before restoring palette and both input locks."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 627,
+      "old": "loc_7E4B6",
+      "new": "DEZMini_RestorePaletteAndControls",
+      "profiles": ["sk"],
+      "meaning": "Restore palette line2, release player control and finish the scene helper."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 636,
+      "old": "loc_7E4CE",
+      "new": "DEZMini_InitPlatformSeparation",
+      "profiles": ["sk"],
+      "meaning": "Initialize one member of the linked platform pair and its contact attachment."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 649,
+      "old": "loc_7E4F8",
+      "new": "DEZMini_SetPlatformSeparationMotion",
+      "profiles": ["sk"],
+      "meaning": "Store platform separation parameters and attempt its contact child."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 658,
+      "old": "loc_7E51C",
+      "new": "DEZMini_MoveDuringSeparationWait",
+      "profiles": ["sk"],
+      "meaning": "Move platform outward before separation countdown and solid drawing."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 664,
+      "old": "loc_7E52A",
+      "new": "DEZMini_InstallPlatformSideHandler",
+      "profiles": ["sk"],
+      "meaning": "Select platform side handler and replace the second member previous-child parent with root."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 673,
+      "old": "locret_7E54A",
+      "new": "DEZMini_PlatformLinkInitReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after platform updater and root/sibling linkage setup."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 677,
+      "old": "loc_7E54C",
+      "new": "DEZMini_LinkedPlatformCheckCatch",
+      "profiles": ["sk"],
+      "meaning": "Handle linked platform idle state and consume its one-shot alignment signal."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 686,
+      "old": "loc_7E566",
+      "new": "DEZMini_CheckExpansionAndAlignment",
+      "profiles": ["sk"],
+      "meaning": "Check controller platform root requests before advancing angular motion."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 693,
+      "old": "loc_7E57A",
+      "new": "DEZMini_AdvanceOrbitAndProject",
+      "profiles": ["sk"],
+      "meaning": "Advance shared angular step and platform phase, then project the platform."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 698,
+      "old": "loc_7E582",
+      "new": "DEZMinibossPlatform_BeginRadialExpansion",
+      "profiles": ["sk"],
+      "meaning": "Install platform radial-expansion updater from root bit7 request."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 704,
+      "old": "loc_7E590",
+      "new": "DEZMini_BeginAlignmentSearch",
+      "profiles": ["sk"],
+      "meaning": "Install alignment phase-window search for the controller platform."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 709,
+      "old": "loc_7E598",
+      "new": "DEZMini_SeekPhaseWindow",
+      "profiles": ["sk"],
+      "meaning": "Advance platform phase until it enters a target-step-dependent alignment window."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 724,
+      "old": "loc_7E5C4",
+      "new": "DEZMini_CheckNegativeStepWindow",
+      "profiles": ["sk"],
+      "meaning": "Test the controller phase window for negative target angular step."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 729,
+      "old": "loc_7E5CE",
+      "new": "DEZMini_BeginAlignmentBraking",
+      "profiles": ["sk"],
+      "meaning": "Install manual alignment braking once the phase window is reached."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 732,
+      "old": "loc_7E5D4",
+      "new": "DEZMini_ProjectAlignmentPhase",
+      "profiles": ["sk"],
+      "meaning": "Project and draw/solid-check platform after alignment-window work."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 736,
+      "old": "loc_7E5D8",
+      "new": "DEZMini_BrakeTowardQuarterTurn",
+      "profiles": ["sk"],
+      "meaning": "Adjust shared angular step and platform phase toward exact0x4000 alignment."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 753,
+      "old": "loc_7E606",
+      "new": "DEZMini_BrakeNegativeAlignmentStep",
+      "profiles": ["sk"],
+      "meaning": "Apply the negative-target counterpart of manual alignment braking."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 761,
+      "old": "loc_7E616",
+      "new": "DEZMini_StoreAlignmentStep",
+      "profiles": ["sk"],
+      "meaning": "Commit unclamped phase and shared step during alignment braking."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 767,
+      "old": "loc_7E622",
+      "new": "DEZMini_ClampPhaseAndSignalLink",
+      "profiles": ["sk"],
+      "meaning": "Clamp controller phase and complete the root/sibling alignment handshake."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 775,
+      "old": "loc_7E63E",
+      "new": "DEZMini_StopAndWaitForBossJump",
+      "profiles": ["sk"],
+      "meaning": "Stop platform horizontal velocity and wait for the root jump request."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 781,
+      "old": "loc_7E64C",
+      "new": "DEZMini_CheckJumpBeforeCatchWait",
+      "profiles": ["sk"],
+      "meaning": "Wait for root bit2 before starting platform catch delay."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 788,
+      "old": "loc_7E664",
+      "new": "DEZMini_DrawWhileAwaitingJump",
+      "profiles": ["sk"],
+      "meaning": "Apply solid-top and draw handling during root jump wait."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 792,
+      "old": "loc_7E668",
+      "new": "DEZMini_TickBeforeCatchLaunch",
+      "profiles": ["sk"],
+      "meaning": "Wait eight platform updates before launching its upward catch motion."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 798,
+      "old": "loc_7E67A",
+      "new": "DEZMinibossPlatform_DrawDuringCatchDelay",
+      "profiles": ["sk"],
+      "meaning": "Apply solid-top/draw after catch-delay processing."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 802,
+      "old": "loc_7E67E",
+      "new": "DEZMini_RiseToBossCatchHeight",
+      "profiles": ["sk"],
+      "meaning": "Integrate upward platform catch motion with pre-integration gravity."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 813,
+      "old": "loc_7E6A2",
+      "new": "DEZMini_ClampCatchAndClearJump",
+      "profiles": ["sk"],
+      "meaning": "Clamp platform to root catch height and release the root jump wait."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 818,
+      "old": "loc_7E6B2",
+      "new": "DEZMini_DrawAfterCatchMove",
+      "profiles": ["sk"],
+      "meaning": "Apply solid-top/draw after catch motion or clamp."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 822,
+      "old": "loc_7E6B6",
+      "new": "DEZMini_WaitBossReturnOrExpansion",
+      "profiles": ["sk"],
+      "meaning": "Wait after platform catch for radial expansion or idle-handler restoration."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "original_line": 830,
+      "old": "loc_7E6D0",
+      "new": "DEZMini_ProjectPlatformDuringHold",
+      "profiles": ["sk"],
+      "meaning": "Project platform while holding after catch and optional idle restoration."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 13,
+      "old": "locret_7E6E6",
+      "new": "DEZMini_PlatformIdleRestoreReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after restoring the subtype-selected platform idle handler."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 17,
+      "old": "loc_7E6E8",
+      "new": "DEZMini_GrowPlatformOrbitRadius",
+      "profiles": ["sk"],
+      "meaning": "Grow the platform circular radius during the shared expansion attack."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 27,
+      "old": "loc_7E700",
+      "new": "DEZMini_HoldExpandedRadius",
+      "profiles": ["sk"],
+      "meaning": "Start a64-update expanded-radius hold."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 33,
+      "old": "loc_7E710",
+      "new": "DEZMini_WaitBeforeRadiusShrink",
+      "profiles": ["sk"],
+      "meaning": "Wait for expanded-platform timer underflow before shrinking."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 38,
+      "old": "loc_7E71C",
+      "new": "DEZMini_AdvanceAngleDuringHold",
+      "profiles": ["sk"],
+      "meaning": "Advance platform angular movement during expanded hold and its final transition."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 43,
+      "old": "loc_7E724",
+      "new": "DEZMini_ShrinkRadiusAndClearRequest",
+      "profiles": ["sk"],
+      "meaning": "Shrink radius back to high byte40hex and restore platform idle behavior."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 54,
+      "old": "loc_7E742",
+      "new": "DEZMini_StoreRadiusAndProject",
+      "profiles": ["sk"],
+      "meaning": "Store shrinking radius high byte and perform platform geometry/solid handling."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 61,
+      "old": "loc_7E74A",
+      "new": "DEZMinibossPlatformContact_Initialize",
+      "profiles": ["sk"],
+      "meaning": "Initialize the animated contact child attached below a miniboss platform."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 66,
+      "old": "loc_7E758",
+      "new": "DEZMini_PlatformContactFollowDraw",
+      "profiles": ["sk"],
+      "meaning": "Animate and follow platform contact detail with the original parent-state collision policy."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 73,
+      "old": "loc_7E768",
+      "new": "DEZMinibossEye_DispatchAndDrawOrFlicker",
+      "profiles": ["sk"],
+      "meaning": "Dispatch five eye states and apply parent-death flicker movement afterward."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 81,
+      "old": "off_7E77C",
+      "new": "DEZMinibossEye_StateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Five relative WORD eye state offsets."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 89,
+      "old": "loc_7E786",
+      "new": "DEZMini_InitEyeAndStoreParentWord",
+      "profiles": ["sk"],
+      "meaning": "Initialize the eye and preserve its original parent scratch write."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 96,
+      "old": "loc_7E79C",
+      "new": "DEZMini_TrackEyeUntilBossActive",
+      "profiles": ["sk"],
+      "meaning": "Track Player1 while waiting for the root to enter its active first-form handler."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 104,
+      "old": "loc_7E7AE",
+      "new": "DEZMini_EnableFormOneEyeHits",
+      "profiles": ["sk"],
+      "meaning": "Select first-form eye hit handling after the root-handler identity test."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 107,
+      "old": "loc_7E7B4",
+      "new": "DEZMini_EyeTrackAndCheckFormOne",
+      "profiles": ["sk"],
+      "meaning": "Track the eye and count contacts until the root form-transition status is set."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 116,
+      "old": "loc_7E7CE",
+      "new": "DEZMini_EyeWaitDuringTransition",
+      "profiles": ["sk"],
+      "meaning": "Switch the eye to waiting while parent statusbit6 is set."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 121,
+      "old": "loc_7E7D6",
+      "new": "DEZMini_EyeTrackUntilTransitionEnds",
+      "profiles": ["sk"],
+      "meaning": "Keep tracking while waiting for the root form-transition status to clear."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 129,
+      "old": "loc_7E7E8",
+      "new": "DEZMini_EnableFormTwoEyeHits",
+      "profiles": ["sk"],
+      "meaning": "Prepare second-form eye collision and animation fields."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 137,
+      "old": "loc_7E800",
+      "new": "DEZMini_EyeTrackAndTouch",
+      "profiles": ["sk"],
+      "meaning": "Run second-form eye tracking, contact counter and touch registration."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 143,
+      "old": "loc_7E80E",
+      "new": "DEZMinibossOrbitHazard_Initialize",
+      "profiles": ["sk"],
+      "meaning": "Initialize one of eight phased orbit hazards around the miniboss root."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 149,
+      "old": "loc_7E820",
+      "new": "DEZMini_OrbitHazardStepOrLaunch",
+      "profiles": ["sk"],
+      "meaning": "Advance an orbit hazard and either project its display or consume a parent launch request."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 174,
+      "old": "loc_7E870",
+      "new": "DEZMini_OrbitHazardChooseDepth",
+      "profiles": ["sk"],
+      "meaning": "Choose hazard frame, art high-priority bit, queue priority and center visibility."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 188,
+      "old": "loc_7E898",
+      "new": "DEZMini_OrbitHazardTouchDraw",
+      "profiles": ["sk"],
+      "meaning": "Draw orbit hazard and register its current collision response."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 192,
+      "old": "loc_7E89C",
+      "new": "DEZMini_OrbitHazardBeginLaunch",
+      "profiles": ["sk"],
+      "meaning": "Consume one root launch request and start upward hazard flight."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 201,
+      "old": "byte_7E8C2",
+      "new": "DEZMini_OrbitHazardDepthRows",
+      "profiles": ["sk"],
+      "meaning": "Eight four-byte appearance rows for folded orbit phase."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 220,
+      "old": "loc_7E8E2",
+      "new": "DEZMinibossOrbitHazard_FlyUntilApex",
+      "profiles": ["sk"],
+      "meaning": "Move launched hazard upward under normal gravity until vertical speed becomes nonnegative."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 228,
+      "old": "loc_7E8F6",
+      "new": "DEZMini_TryHazardApexExplosion",
+      "profiles": ["sk"],
+      "meaning": "Attempt an explosion controller when launched hazard reaches its apex."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 234,
+      "old": "loc_7E908",
+      "new": "DEZMini_SpawnRadialShotsAndDelete",
+      "profiles": ["sk"],
+      "meaning": "Attempt eight radial hazard fragments and schedule original hazard deletion."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 240,
+      "old": "loc_7E916",
+      "new": "DEZMini_InitRadialShot",
+      "profiles": ["sk"],
+      "meaning": "Initialize one of eight radial fragments from the launched hazard."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 254,
+      "old": "byte_7E942",
+      "new": "DEZMini_RadialShotFrameFlips",
+      "profiles": ["sk"],
+      "meaning": "Eight frame/render-flags BYTE pairs indexed by even fragment subtype."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 263,
+      "old": "word_7E952",
+      "new": "DEZMinibossRadialFragment_VelocityPairs",
+      "profiles": ["sk"],
+      "meaning": "Eight WORD XY velocity pairs for hazard fragmentation."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 274,
+      "old": "loc_7E972",
+      "new": "DEZMini_RadialShotMoveAndCull",
+      "profiles": ["sk"],
+      "meaning": "Move radial fragment without gravity and handle collision/offscreen lifetime."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 279,
+      "old": "loc_7E97E",
+      "new": "DEZMinibossBeam_InitializeExtension",
+      "profiles": ["sk"],
+      "meaning": "Initialize beam actor created by the second-form hit reaction."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 284,
+      "old": "loc_7E98C",
+      "new": "DEZMinibossBeam_ExtendOffsetOnEvenFrames",
+      "profiles": ["sk"],
+      "meaning": "Extend beam offset on even VInt updates before its activation delay."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 300,
+      "old": "loc_7E9CA",
+      "new": "DEZMinibossBeam_DrawDuringExtension",
+      "profiles": ["sk"],
+      "meaning": "Draw extending beam after even-frame offset update."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 304,
+      "old": "loc_7E9D0",
+      "new": "DEZMini_BeamCheckLifeDuringGrowth",
+      "profiles": ["sk"],
+      "meaning": "Schedule beam deletion when parent dies during extension."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 308,
+      "old": "loc_7E9D4",
+      "new": "DEZMinibossBeam_WaitWithEvenFrameDisplay",
+      "profiles": ["sk"],
+      "meaning": "Wait64updates before beam frame growth while preserving parent lifetime and parity display."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 319,
+      "old": "loc_7E9F8",
+      "new": "DEZMini_BeamCheckLifeDuringDelay",
+      "profiles": ["sk"],
+      "meaning": "Schedule beam deletion when parent dies during activation delay."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 323,
+      "old": "loc_7E9FC",
+      "new": "DEZMinibossBeam_BeginFrameGrowth",
+      "profiles": ["sk"],
+      "meaning": "Timed callback starts frame growth and adjusts beam parent offset."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 331,
+      "old": "loc_7EA12",
+      "new": "DEZMini_BeamGrowAndSpawnEnds",
+      "profiles": ["sk"],
+      "meaning": "Advance growing beam frames and attempt endpoint details at final frame."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 341,
+      "old": "loc_7EA30",
+      "new": "DEZMinibossBeam_MoveGrowingOffsetAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Advance beam offset and refresh/draw after every growth frame."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 347,
+      "old": "loc_7EA3C",
+      "new": "DEZMinibossBeam_UpdateActiveOrDelete",
+      "profiles": ["sk"],
+      "meaning": "Keep active beam while root beam flag is set."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 358,
+      "old": "loc_7EA5E",
+      "new": "DEZMini_BeamHurtAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Apply beam range damage to eligible players and draw."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 363,
+      "old": "loc_7EA66",
+      "new": "DEZMini_DeleteBeamWhenFlagClears",
+      "profiles": ["sk"],
+      "meaning": "Schedule beam deletion when root no longer requests active beam."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 367,
+      "old": "loc_7EA6C",
+      "new": "DEZMini_InitBeamEndAndSide",
+      "profiles": ["sk"],
+      "meaning": "Initialize one of two animated beam-end details."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 380,
+      "old": "loc_7EA96",
+      "new": "DEZMini_StoreBeamEndXOffset",
+      "profiles": ["sk"],
+      "meaning": "Store endpoint side offset before first animation/follow update."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 383,
+      "old": "loc_7EA9A",
+      "new": "DEZMini_BeamEndFollowAndAnimate",
+      "profiles": ["sk"],
+      "meaning": "Animate endpoint and follow only parent horizontal position."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 393,
+      "old": "loc_7EAB6",
+      "new": "DEZMini_InitRandomDebris",
+      "profiles": ["sk"],
+      "meaning": "Initialize random first-form transition debris."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 399,
+      "old": "loc_7EAC8",
+      "new": "DEZMini_RandomDebrisFlicker",
+      "profiles": ["sk"],
+      "meaning": "Run normal gravity, coarse camera culling and alternate-update debris drawing."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 403,
+      "old": "loc_7EACC",
+      "new": "DEZMini_InitDelayedSideDebris",
+      "profiles": ["sk"],
+      "meaning": "Initialize one of two side pieces before delayed flicker movement."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 414,
+      "old": "loc_7EAF2",
+      "new": "DEZMini_StoreSideDebrisMotion",
+      "profiles": ["sk"],
+      "meaning": "Store chosen side velocity and64-update delay."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 418,
+      "old": "loc_7EAFC",
+      "new": "DEZMini_SideDebrisTickDelay",
+      "profiles": ["sk"],
+      "meaning": "Wait stationary before switching side debris to gravity/flicker movement."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 423,
+      "old": "loc_7EB08",
+      "new": "DEZMinibossSideDebris_DrawDuringDelay",
+      "profiles": ["sk"],
+      "meaning": "Draw delayed side piece without moving it."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "original_line": 427,
+      "old": "loc_7EB0E",
+      "new": "DEZMini_InitDefeatFragment",
+      "profiles": ["sk"],
+      "meaning": "Initialize one of four final miniboss pieces with subtype-selected frame and indexed velocity."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 14,
+      "old": "loc_7EB46",
+      "new": "DEZMini_BeamCheckPackedP2",
+      "profiles": ["sk"],
+      "meaning": "Check the second player pointer returned in the packed range result."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 34,
+      "old": "locret_7EB6C",
+      "new": "DEZMini_BeamPlayerCheckReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after a missing, protected or processed beam-range player."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 39,
+      "old": "word_7EB6E",
+      "new": "DEZMini_BeamContactBounds",
+      "profiles": ["sk"],
+      "meaning": "Rectangle origin offsets and extents for beam damage checks."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 51,
+      "old": "locret_7EB8C",
+      "new": "DEZMini_OrbitHazardTouchReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after assigning orbit hazard collision from parent recovery status."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 70,
+      "old": "loc_7EBB4",
+      "new": "DEZMini_StoreTargetOrbitStep",
+      "profiles": ["sk"],
+      "meaning": "Store the selected signed platform angular target."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 73,
+      "old": "locret_7EBB8",
+      "new": "DEZMini_OrbitRetargetReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after an angular target write or an untimed-update skip."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 77,
+      "old": "loc_7EBBA",
+      "new": "DEZMini_UseBaseStepWithRider",
+      "profiles": ["sk"],
+      "meaning": "Use the base angular step immediately while Player1 status bit 3 is set."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 97,
+      "old": "loc_7EBDE",
+      "new": "DEZMini_EaseTowardNegativeStep",
+      "profiles": ["sk"],
+      "meaning": "Decrease shared angular velocity toward a negative target."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 104,
+      "old": "loc_7EBE8",
+      "new": "DEZMini_AdvancePhaseAndShareStep",
+      "profiles": ["sk"],
+      "meaning": "Advance this platform angle and store the updated shared angular step."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 112,
+      "old": "loc_7EBF2",
+      "new": "DEZMini_SyncPlatformOrbitPhase",
+      "profiles": ["sk"],
+      "meaning": "Share the primary platform phase or derive its opposite by subtype."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 120,
+      "old": "loc_7EC06",
+      "new": "DEZPlatforms_SelectOppositeSharedPhase",
+      "profiles": ["sk"],
+      "meaning": "Set the nonzero-subtype platform angle half a revolution from its parent byte."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 125,
+      "old": "loc_7EC12",
+      "new": "DEZMini_PlaceFixedOrbitPlatform",
+      "profiles": ["sk"],
+      "meaning": "Position a platform on the fixed circle and preserve its previous X for solidity."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 134,
+      "old": "loc_7EC24",
+      "new": "DEZMini_PlatformCheckParentAndSolid",
+      "profiles": ["sk"],
+      "meaning": "Run platform solidity and draw while the parent remains alive."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 142,
+      "old": "loc_7EC3C",
+      "new": "DEZMini_PlatformBreakAndRelease",
+      "profiles": ["sk"],
+      "meaning": "Release standing players and convert a dead-parent platform to debris."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 148,
+      "old": "loc_7EC46",
+      "new": "DEZMini_ResolvePlatformTopSolid",
+      "profiles": ["sk"],
+      "meaning": "Prepare the top-solid draw tail without repositioning the platform."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 156,
+      "old": "loc_7EC52",
+      "new": "DEZMini_PlaceVariableOrbitPlatform",
+      "profiles": ["sk"],
+      "meaning": "Position a platform using its WORD radius and handle top solidity."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 177,
+      "old": "loc_7EC78",
+      "new": "DEZMini_TestLeftOvershoot",
+      "profiles": ["sk"],
+      "meaning": "Reverse negative horizontal motion only after passing the left boundary."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 181,
+      "old": "loc_7EC7E",
+      "new": "DEZMini_ReverseXAtArenaBound",
+      "profiles": ["sk"],
+      "meaning": "Reverse the existing horizontal velocity after strict boundary overshoot."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 184,
+      "old": "locret_7EC82",
+      "new": "DEZMini_ArenaReversalReturn",
+      "profiles": ["sk"],
+      "meaning": "Return with horizontal velocity retained or reversed."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 198,
+      "old": "loc_7EC96",
+      "new": "DEZMini_SetPursuitDirection",
+      "profiles": ["sk"],
+      "meaning": "Store the selected Player1 pursuit speed and stop at an inclusive boundary."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 207,
+      "old": "loc_7ECA6",
+      "new": "DEZMini_CheckLeftPursuitLimit",
+      "profiles": ["sk"],
+      "meaning": "Stop negative pursuit motion at or beyond the left boundary."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 211,
+      "old": "loc_7ECAC",
+      "new": "DEZMini_StopPursuitX",
+      "profiles": ["sk"],
+      "meaning": "Stop pursuit velocity at the selected inclusive arena boundary."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 214,
+      "old": "locret_7ECB0",
+      "new": "DEZMini_PursuitBoundReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after choosing or suppressing bounded pursuit speed."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 229,
+      "old": "loc_7ECC8",
+      "new": "DEZMini_LegacyCheckLeftLimit",
+      "profiles": ["sk"],
+      "meaning": "Test the left limit in a preserved unused two-axis stop helper."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 233,
+      "old": "loc_7ECCE",
+      "new": "DEZMini_LegacyStopX",
+      "profiles": ["sk"],
+      "meaning": "Clear horizontal velocity before the unused helper checks vertical bounds."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 236,
+      "old": "loc_7ECD2",
+      "new": "DEZMini_LegacyCheckYDirection",
+      "profiles": ["sk"],
+      "meaning": "Check vertical direction and the bottom limit in the preserved stop helper."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 246,
+      "old": "loc_7ECE8",
+      "new": "DEZMini_LegacyCheckTopLimit",
+      "profiles": ["sk"],
+      "meaning": "Stop negative vertical motion at or above the stored top limit."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 250,
+      "old": "loc_7ECEE",
+      "new": "DEZMini_LegacyStopY",
+      "profiles": ["sk"],
+      "meaning": "Clear vertical velocity at an inclusive top or bottom bound."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 253,
+      "old": "locret_7ECF2",
+      "new": "DEZMini_LegacyBoundsReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from the preserved unused two-axis boundary checks."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 270,
+      "old": "loc_7ED1C",
+      "new": "DEZMini_DebrisSetXAndRandomFrame",
+      "profiles": ["sk"],
+      "meaning": "Apply the chosen X jitter and select debris frame from the other random half."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 281,
+      "old": "loc_7ED3A",
+      "new": "DEZMinibossDebris_ApplySelectedYJitter",
+      "profiles": ["sk"],
+      "meaning": "Apply the selected signed random Y offset to debris."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 287,
+      "old": "word_7ED40",
+      "new": "DEZMinibossDebris_InitialVelocityPairs",
+      "profiles": ["sk"],
+      "meaning": "Four WORD X/Y launch velocity pairs for random flickering debris."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 292,
+      "old": "byte_7ED50",
+      "new": "DEZMinibossDebris_FramesByRandomHighBits",
+      "profiles": ["sk"],
+      "meaning": "Four debris mapping frame selections indexed by random high-word low bits."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 310,
+      "old": "byte_7ED64",
+      "new": "DEZMini_OrbitHazardInitialPhases",
+      "profiles": ["sk"],
+      "meaning": "Eight phase seeds for the orbit hazard children."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 329,
+      "old": "loc_7ED86",
+      "new": "DEZMini_EyeClampPlayerDistance",
+      "profiles": ["sk"],
+      "meaning": "Clamp the eye tracking distance before selecting an offset/frame row."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 334,
+      "old": "loc_7ED90",
+      "new": "DEZMini_EyeChooseTrackingPose",
+      "profiles": ["sk"],
+      "meaning": "Select a distance-dependent eye offset/frame and apply its player-side flip."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 345,
+      "old": "loc_7EDAE",
+      "new": "DEZMinibossEye_StoreTrackedXAndFrame",
+      "profiles": ["sk"],
+      "meaning": "Store eye X relative to its parent and the selected mapping frame."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 353,
+      "old": "byte_7EDBA",
+      "new": "DEZMini_EyeTrackingRows",
+      "profiles": ["sk"],
+      "meaning": "Eleven BYTE offset/frame pairs used by horizontal eye tracking."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 380,
+      "old": "loc_7EDF2",
+      "new": "DEZMini_EyeChooseFlashRow",
+      "profiles": ["sk"],
+      "meaning": "Select one of two four-color eye flash groups by recovery parity."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 386,
+      "old": "loc_7EE00",
+      "new": "DEZMini_EyeCopyColorsAndTick",
+      "profiles": ["sk"],
+      "meaning": "Copy selected eye hit colors and finish recovery at exact zero."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 392,
+      "old": "locret_7EE10",
+      "new": "DEZMini_EyeRecoveryReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from eye hit handling after active collision, countdown or restoration."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 405,
+      "old": "word_7EE1E",
+      "new": "DEZMini_EyePaletteDestinations",
+      "profiles": ["sk"],
+      "meaning": "Four WORD destination addresses for the eye hit palette."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 407,
+      "old": "word_7EE26",
+      "new": "DEZMinibossEyeHit_SourceColorGroups",
+      "profiles": ["sk"],
+      "meaning": "Two four-WORD source groups for alternating eye flash colors."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 412,
+      "old": "loc_7EE36",
+      "new": "DEZMini_FormOneCheckHitCount",
+      "profiles": ["sk"],
+      "meaning": "Detect changes to first-form root hit count after its state update."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 419,
+      "old": "loc_7EE42",
+      "new": "DEZMini_FormOneRecordHitOrDefeat",
+      "profiles": ["sk"],
+      "meaning": "Record a new first-form hit and start the eight-hit transition when needed."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 431,
+      "old": "loc_7EE74",
+      "new": "DEZMini_FormOneTryExplosion",
+      "profiles": ["sk"],
+      "meaning": "Attempt one first-form transition explosion controller."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 437,
+      "old": "locret_7EE86",
+      "new": "DEZMini_FormOneHitUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from first-form hit handling or one explosion allocation attempt."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 447,
+      "old": "locret_7EE92",
+      "new": "DEZMini_FormTwoHitUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return when second-form hit count is unchanged or its reaction is already flagged."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 451,
+      "old": "loc_7EE94",
+      "new": "DEZMini_FormTwoRecordHitAndFlash",
+      "profiles": ["sk"],
+      "meaning": "Record changed second-form hit count and choose reaction or defeat."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 468,
+      "old": "loc_7EECC",
+      "new": "DEZMini_FormTwoBeginScoredDefeat",
+      "profiles": ["sk"],
+      "meaning": "Install second-form defeat wait and attempt its explosion controller."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 486,
+      "old": "loc_7EF00",
+      "new": "DEZMini_PlayerSpinSetPoseAndLoadArt",
+      "profiles": ["sk"],
+      "meaning": "Store the twelve-pose angle and update Player1 frame, flip and patterns."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 501,
+      "old": "byte_7EF2E",
+      "new": "DEZPostBossPlayerSpin_MappingFrames",
+      "profiles": ["sk"],
+      "meaning": "Twelve Player1 mapping frames for the post-boss spin."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "original_line": 503,
+      "old": "byte_7EF3A",
+      "new": "DEZPostBossPlayerSpin_RenderFlipBits",
+      "profiles": ["sk"],
+      "meaning": "Twelve render flip bit values paired with post-boss spin frames."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "original_line": 9,
+      "old": "word_7EF52",
+      "new": "DEZMinibossEye_PartialAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte partial priority/bounds/frame/collision attributes for Eye collision/display child."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "original_line": 12,
+      "old": "word_7EF58",
+      "new": "DEZMinibossOrbitHazard_PartialAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte partial priority/bounds/frame/collision attributes for First-form orbit hazard."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "original_line": 15,
+      "old": "word_7EF5E",
+      "new": "DEZMini_RadialShotAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte partial priority/bounds/frame/collision attributes for Eight-way projectile released when an orbit hazard breaks."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "original_line": 18,
+      "old": "word_7EF64",
+      "new": "DEZMini_RandomDebrisAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte partial priority/bounds/frame/collision attributes for Random flickering transition debris."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "original_line": 21,
+      "old": "word_7EF6A",
+      "new": "DEZMini_DelayedSideDebrisAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte partial priority/bounds/frame/collision attributes for Delayed pair of side debris actors."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "original_line": 24,
+      "old": "word_7EF70",
+      "new": "DEZMini_OrbitPlatformAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte partial priority/bounds/frame/collision attributes for Second-form linked orbit platform."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "original_line": 27,
+      "old": "word_7EF76",
+      "new": "DEZMini_PlatformContactAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte partial priority/bounds/frame/collision attributes for Animated contact child attached to a platform."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "original_line": 30,
+      "old": "word_7EF7C",
+      "new": "DEZMini_BeamControllerAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte partial priority/bounds/frame/collision attributes for Extending beam display/controller created during second-form hit reaction."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "original_line": 33,
+      "old": "word_7EF82",
+      "new": "DEZMini_BeamSideDetailAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte partial priority/bounds/frame/collision attributes for Pair of animated side details created by the active beam."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "original_line": 36,
+      "old": "word_7EF88",
+      "new": "DEZMini_DefeatFragmentAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte partial priority/bounds/frame/collision attributes for Four final breakup fragments."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "original_line": 39,
+      "old": "ChildObjDat_7EF8E",
+      "new": "DEZMinibossEye_NormalChildRecord",
+      "profiles": ["sk"],
+      "meaning": "One normal child record for the root eye."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "original_line": 43,
+      "old": "ChildObjDat_7EF96",
+      "new": "DEZMini_OrbitHazardChild",
+      "profiles": ["sk"],
+      "meaning": "Eight repeated simple children for the first-form orbit hazards."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "original_line": 46,
+      "old": "ChildObjDat_7EF9C",
+      "new": "DEZMini_RadialShotChild",
+      "profiles": ["sk"],
+      "meaning": "Eight simple projectiles created when launched orbit hazard reaches its apex."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "original_line": 49,
+      "old": "ChildObjDat_7EFA2",
+      "new": "DEZMini_RandomDebrisChild",
+      "profiles": ["sk"],
+      "meaning": "One simple random debris child used during first-form transformation delay."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "original_line": 52,
+      "old": "ChildObjDat_7EFA8",
+      "new": "DEZMini_DelayedSideDebrisChildren",
+      "profiles": ["sk"],
+      "meaning": "Two normal side-debris records for the transformation stage."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "original_line": 58,
+      "old": "ChildObjDat_7EFB6",
+      "new": "DEZMini_OrbitPlatformChildren",
+      "profiles": ["sk"],
+      "meaning": "Two linked repeated-tree children for second-form platforms."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "original_line": 61,
+      "old": "ChildObjDat_7EFBC",
+      "new": "DEZMini_PlatformContactChild",
+      "profiles": ["sk"],
+      "meaning": "One normal animated contact child per orbit platform."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "original_line": 65,
+      "old": "ChildObj_7EFC4",
+      "new": "DEZMini_BeamControllerChild",
+      "profiles": ["sk"],
+      "meaning": "One normal beam controller created on second-form hit reaction."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "original_line": 69,
+      "old": "ChildObjDat_7EFCC",
+      "new": "DEZMini_BeamSideDetailChild",
+      "profiles": ["sk"],
+      "meaning": "Two simple side-detail children created after beam frame extension."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "original_line": 72,
+      "old": "ChildObjDat_7EFD2",
+      "new": "DEZMini_DefeatFragmentChildren",
+      "profiles": ["sk"],
+      "meaning": "Four normal breakup fragment records for defeated root."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "original_line": 82,
+      "old": "byte_7EFEC",
+      "new": "DEZMini_PlatformContactAnim",
+      "profiles": ["sk"],
+      "meaning": "Uniform-delay frame loop for the platform attached contact child."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "original_line": 84,
+      "old": "byte_7EFF4",
+      "new": "DEZMini_BeamSideDetailAnim",
+      "profiles": ["sk"],
+      "meaning": "Uniform-delay frame loop for the beam side details."
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "original_line": 93,
+      "old": "word_7F03C",
+      "new": "DEZMini_FormTwoHitPaletteScript",
+      "profiles": ["sk"],
+      "meaning": "Three-color hit-reaction palette script whose custom callback resumes second-form motion."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 43,
+      "old": "word_185008",
+      "new": "DEZMiniboss_MapFrame00",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 00 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 50,
+      "old": "word_18502E",
+      "new": "DEZMiniboss_MapFrame01",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 01 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 53,
+      "old": "word_18503C",
+      "new": "DEZMiniboss_MapFrame02",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 02 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 57,
+      "old": "word_185050",
+      "new": "DEZMiniboss_MapFrame03",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 03 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 61,
+      "old": "word_185064",
+      "new": "DEZMiniboss_MapFrame04",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 04 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 65,
+      "old": "word_185078",
+      "new": "DEZMiniboss_MapFrame05",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 05 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 69,
+      "old": "word_18508C",
+      "new": "DEZMiniboss_MapFrame06",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 06 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 72,
+      "old": "word_18509A",
+      "new": "DEZMiniboss_MapFrame07",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 07 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 73,
+      "old": "word_18509C",
+      "new": "DEZMiniboss_MapFrame08",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 08 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 75,
+      "old": "word_1850A4",
+      "new": "DEZMiniboss_MapFrame09",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 09 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 77,
+      "old": "word_1850AC",
+      "new": "DEZMiniboss_MapFrame0A",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 0A hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 79,
+      "old": "word_1850B4",
+      "new": "DEZMiniboss_MapFrame0B",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 0B hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 82,
+      "old": "word_1850C2",
+      "new": "DEZMiniboss_MapFrame0C",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 0C hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 85,
+      "old": "word_1850D0",
+      "new": "DEZMiniboss_MapFrame0D",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 0D hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 88,
+      "old": "word_1850DE",
+      "new": "DEZMiniboss_MapFrame0E",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 0E hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 91,
+      "old": "word_1850EC",
+      "new": "DEZMiniboss_MapFrame0F",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 0F hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 94,
+      "old": "word_1850FA",
+      "new": "DEZMiniboss_MapFrame10",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 10 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 97,
+      "old": "word_185108",
+      "new": "DEZMiniboss_MapFrame11",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 11 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 100,
+      "old": "word_185116",
+      "new": "DEZMiniboss_MapFrame12",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 12 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 102,
+      "old": "word_18511E",
+      "new": "DEZMiniboss_MapFrame13",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 13 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 104,
+      "old": "word_185126",
+      "new": "DEZMiniboss_MapFrame14",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 14 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 106,
+      "old": "word_18512E",
+      "new": "DEZMiniboss_MapFrame15",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 15 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 108,
+      "old": "word_185136",
+      "new": "DEZMiniboss_MapFrame16",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 16 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 110,
+      "old": "word_18513E",
+      "new": "DEZMiniboss_MapFrame17",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 17 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 112,
+      "old": "word_185146",
+      "new": "DEZMiniboss_MapFrame18",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 18 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 114,
+      "old": "word_18514E",
+      "new": "DEZMiniboss_MapFrame19",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 19 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 116,
+      "old": "word_185156",
+      "new": "DEZMiniboss_MapFrame1A",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 1A hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 118,
+      "old": "word_18515E",
+      "new": "DEZMiniboss_MapFrame1B",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 1B hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 123,
+      "old": "word_185178",
+      "new": "DEZMiniboss_MapFrame1C",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 1C hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 130,
+      "old": "word_18519E",
+      "new": "DEZMiniboss_MapFrame1D",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 1D hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 139,
+      "old": "word_1851D0",
+      "new": "DEZMiniboss_MapFrame1E",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 1E hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 150,
+      "old": "word_18520E",
+      "new": "DEZMiniboss_MapFrame1F",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 1F hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 163,
+      "old": "word_185258",
+      "new": "DEZMiniboss_MapFrame20",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 20 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 178,
+      "old": "word_1852AE",
+      "new": "DEZMiniboss_MapFrame21",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 21 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 195,
+      "old": "word_185310",
+      "new": "DEZMiniboss_MapFrame22",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 22 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 214,
+      "old": "word_18537E",
+      "new": "DEZMiniboss_MapFrame23",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 23 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 217,
+      "old": "word_18538C",
+      "new": "DEZMiniboss_MapFrame24",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 24 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 220,
+      "old": "word_18539A",
+      "new": "DEZMiniboss_MapFrame25",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 25 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "original_line": 222,
+      "old": "word_1853A2",
+      "new": "DEZMiniboss_MapFrame26",
+      "profiles": ["sk"],
+      "meaning": "DEZMiniboss sprite mapping frame at verified table index 26 hex."
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "tokens": [
+        [6, 2, 0, ""],
+        [7, 2, 1, ""],
+        [15, 1, 224, ""],
+        [17, 1, 225, ""],
+        [26, 0, 0, ""],
+        [28, 0, 1, ""],
+        [29, 2, 3, ""],
+        [33, 0, 2, ""],
+        [35, 0, 3, ""],
+        [37, 1, 4, ""],
+        [39, 0, 4, ""],
+        [40, 2, 6, ""],
+        [41, 0, 5, ""],
+        [45, 2, 10, ""],
+        [47, 0, 6, ""],
+        [50, 1, 8, ""],
+        [51, 1, 8, ""],
+        [54, 1, 7, ""],
+        [57, 0, 7, ""],
+        [58, 1, 204, ""],
+        [59, 0, 8, ""],
+        [60, 1, 9, ""],
+        [60, 3, 8, ""],
+        [61, 1, 11, ""],
+        [61, 3, 8, ""],
+        [62, 1, 9, ""],
+        [62, 3, 8, ""],
+        [63, 1, 15, ""],
+        [63, 3, 8, ""],
+        [64, 1, 9, ""],
+        [64, 3, 8, ""],
+        [65, 1, 18, ""],
+        [65, 3, 8, ""],
+        [66, 1, 9, ""],
+        [66, 3, 8, ""],
+        [67, 1, 21, ""],
+        [67, 3, 8, ""],
+        [68, 0, 9, ""],
+        [70, 0, 10, ""],
+        [73, 2, 13, ""],
+        [77, 0, 11, ""],
+        [83, 1, 12, ""],
+        [88, 1, 12, ""],
+        [89, 1, 13, ""],
+        [90, 0, 12, ""],
+        [94, 0, 13, ""],
+        [97, 2, 14, ""],
+        [99, 0, 14, ""],
+        [102, 0, 15, ""],
+        [105, 1, 16, ""],
+        [108, 0, 16, ""],
+        [111, 2, 17, ""],
+        [113, 0, 17, ""],
+        [116, 0, 18, ""],
+        [120, 1, 19, ""],
+        [123, 0, 19, ""],
+        [127, 2, 20, ""],
+        [129, 0, 20, ""],
+        [132, 2, 5, ""],
+        [134, 0, 21, ""],
+        [137, 0, 22, ""],
+        [140, 1, 23, ""],
+        [141, 1, 23, ""],
+        [142, 0, 23, ""],
+        [143, 1, 24, ""],
+        [143, 3, 23, ""],
+        [144, 1, 29, ""],
+        [144, 3, 23, ""],
+        [145, 1, 28, ""],
+        [145, 3, 23, ""],
+        [146, 1, 29, ""],
+        [146, 3, 23, ""],
+        [147, 0, 24, ""],
+        [150, 1, 25, ""],
+        [151, 1, 227, ""],
+        [153, 0, 25, ""],
+        [155, 0, 26, ""],
+        [158, 2, 27, ""],
+        [160, 1, 228, ""],
+        [163, 0, 27, ""],
+        [169, 2, 30, ""],
+        [171, 0, 28, ""],
+        [173, 0, 29, ""],
+        [176, 0, 30, ""],
+        [179, 2, 31, ""],
+        [183, 1, 229, ""],
+        [185, 0, 31, ""],
+        [186, 2, 32, ""],
+        [207, 0, 32, ""],
+        [210, 1, 33, ""],
+        [213, 0, 33, ""],
+        [217, 1, 34, ""],
+        [218, 1, 34, ""],
+        [219, 0, 34, ""],
+        [220, 1, 35, ""],
+        [220, 3, 34, ""],
+        [221, 1, 37, ""],
+        [221, 3, 34, ""],
+        [222, 1, 39, ""],
+        [222, 3, 34, ""],
+        [223, 1, 42, ""],
+        [223, 3, 34, ""],
+        [224, 1, 45, ""],
+        [224, 3, 34, ""],
+        [225, 1, 48, ""],
+        [225, 3, 34, ""],
+        [226, 0, 35, ""],
+        [232, 1, 36, ""],
+        [234, 0, 36, ""],
+        [240, 0, 37, ""],
+        [247, 0, 38, ""],
+        [253, 0, 39, ""],
+        [257, 1, 40, ""],
+        [259, 1, 41, ""],
+        [261, 0, 40, ""],
+        [265, 0, 41, ""],
+        [271, 0, 42, ""],
+        [273, 1, 43, ""],
+        [277, 1, 44, ""],
+        [278, 0, 43, ""],
+        [280, 0, 44, ""],
+        [282, 0, 45, ""],
+        [284, 1, 46, ""],
+        [289, 1, 47, ""],
+        [293, 0, 46, ""],
+        [295, 0, 47, ""],
+        [300, 0, 48, ""],
+        [304, 1, 50, ""],
+        [312, 1, 49, ""],
+        [314, 0, 49, ""],
+        [317, 0, 50, ""],
+        [319, 0, 51, ""],
+        [321, 1, 52, ""],
+        [322, 2, 53, ""],
+        [323, 0, 52, ""],
+        [325, 1, 233, ""],
+        [328, 0, 53, ""],
+        [330, 1, 2, ""],
+        [331, 2, 54, ""],
+        [332, 0, 54, ""],
+        [334, 1, 2, ""],
+        [335, 2, 56, ""],
+        [338, 1, 55, ""],
+        [340, 0, 55, ""],
+        [342, 1, 56, ""],
+        [344, 0, 56, ""],
+        [349, 1, 58, ""],
+        [351, 1, 60, ""],
+        [354, 1, 57, ""],
+        [356, 0, 57, ""],
+        [360, 0, 58, ""],
+        [362, 1, 60, ""],
+        [365, 1, 59, ""],
+        [367, 0, 59, ""],
+        [371, 0, 60, ""],
+        [373, 2, 63, ""],
+        [378, 1, 61, ""],
+        [383, 0, 61, ""],
+        [385, 1, 62, ""],
+        [390, 0, 62, ""],
+        [392, 0, 63, ""],
+        [394, 1, 66, ""],
+        [395, 2, 67, ""],
+        [399, 1, 64, ""],
+        [401, 0, 64, ""],
+        [404, 1, 65, ""],
+        [406, 0, 65, ""],
+        [409, 0, 66, ""],
+        [411, 0, 67, ""],
+        [414, 1, 68, ""],
+        [416, 1, 68, ""],
+        [417, 2, 69, ""],
+        [425, 0, 68, ""],
+        [427, 0, 69, ""],
+        [430, 1, 70, ""],
+        [431, 2, 71, ""],
+        [434, 0, 70, ""],
+        [436, 0, 71, ""],
+        [438, 1, 72, ""],
+        [439, 2, 73, ""],
+        [446, 0, 72, ""],
+        [449, 0, 73, ""],
+        [452, 1, 74, ""],
+        [453, 2, 74, ""],
+        [459, 0, 74, ""],
+        [462, 1, 76, ""],
+        [465, 1, 75, ""],
+        [467, 0, 75, ""],
+        [469, 1, 76, ""],
+        [471, 2, 77, ""],
+        [474, 1, 76, ""],
+        [477, 0, 76, ""],
+        [482, 0, 77, ""],
+        [484, 1, 2, ""],
+        [488, 0, 78, ""],
+        [490, 3, 78, ""],
+        [495, 0, 79, ""],
+        [496, 1, 219, ""],
+        [504, 1, 80, ""],
+        [507, 0, 80, ""],
+        [511, 2, 82, ""],
+        [512, 2, 81, ""],
+        [513, 1, 230, ""],
+        [515, 0, 81, ""],
+        [518, 1, 175, ""],
+        [519, 0, 82, ""],
+        [520, 2, 85, ""],
+        [522, 1, 83, ""],
+        [523, 2, 84, ""],
+        [527, 0, 83, ""],
+        [529, 0, 84, ""],
+        [532, 1, 87, ""],
+        [534, 1, 97, ""],
+        [535, 1, 170, ""],
+        [536, 0, 85, ""],
+        [539, 1, 87, ""],
+        [541, 1, 88, ""],
+        [542, 0, 86, ""],
+        [544, 1, 170, ""],
+        [545, 0, 87, ""],
+        [546, 2, 108, ""],
+        [548, 1, 86, ""],
+        [549, 0, 88, ""],
+        [550, 2, 89, ""],
+        [551, 1, 86, ""],
+        [552, 0, 89, ""],
+        [555, 1, 87, ""],
+        [560, 1, 90, ""],
+        [563, 1, 91, ""],
+        [564, 1, 92, ""],
+        [565, 0, 90, ""],
+        [568, 1, 92, ""],
+        [569, 0, 91, ""],
+        [570, 2, 93, ""],
+        [571, 0, 92, ""],
+        [572, 1, 170, ""],
+        [573, 0, 93, ""],
+        [577, 1, 87, ""],
+        [580, 1, 94, ""],
+        [584, 1, 95, ""],
+        [586, 1, 96, ""],
+        [587, 1, 95, ""],
+        [588, 0, 94, ""],
+        [592, 1, 95, ""],
+        [594, 1, 96, ""],
+        [595, 0, 95, ""],
+        [598, 1, 170, ""],
+        [599, 0, 96, ""],
+        [606, 0, 97, ""],
+        [607, 2, 98, ""],
+        [609, 1, 170, ""],
+        [610, 0, 98, ""],
+        [613, 1, 99, ""],
+        [614, 2, 100, ""],
+        [616, 0, 99, ""],
+        [617, 1, 175, ""],
+        [618, 0, 100, ""],
+        [620, 1, 101, ""],
+        [621, 2, 102, ""],
+        [623, 0, 101, ""],
+        [624, 1, 175, ""],
+        [625, 0, 102, ""],
+        [632, 1, 103, ""],
+        [634, 1, 104, ""],
+        [635, 0, 103, ""],
+        [637, 2, 105, ""],
+        [639, 0, 104, ""],
+        [640, 1, 175, ""],
+        [641, 0, 105, ""],
+        [644, 1, 87, ""],
+        [646, 1, 106, ""],
+        [648, 0, 106, ""],
+        [649, 1, 170, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "tokens": [
+        [2, 2, 85, ""],
+        [4, 1, 107, ""],
+        [5, 2, 84, ""],
+        [6, 0, 107, ""],
+        [8, 0, 108, ""],
+        [13, 1, 109, ""],
+        [15, 1, 176, ""],
+        [16, 0, 109, ""],
+        [17, 2, 110, ""],
+        [19, 1, 176, ""],
+        [20, 0, 110, ""],
+        [22, 1, 111, ""],
+        [23, 2, 112, ""],
+        [24, 0, 111, ""],
+        [26, 1, 176, ""],
+        [27, 0, 112, ""],
+        [32, 1, 113, ""],
+        [37, 0, 113, ""],
+        [39, 1, 176, ""],
+        [40, 0, 114, ""],
+        [41, 1, 220, ""],
+        [43, 2, 115, ""],
+        [44, 0, 115, ""],
+        [45, 1, 234, ""],
+        [49, 0, 116, ""],
+        [52, 1, 117, ""],
+        [53, 1, 117, ""],
+        [56, 0, 117, ""],
+        [57, 1, 118, ""],
+        [57, 3, 117, ""],
+        [58, 1, 119, ""],
+        [58, 3, 117, ""],
+        [59, 1, 121, ""],
+        [59, 3, 117, ""],
+        [60, 1, 123, ""],
+        [60, 3, 117, ""],
+        [61, 1, 125, ""],
+        [61, 3, 117, ""],
+        [62, 0, 118, ""],
+        [63, 1, 214, ""],
+        [68, 0, 119, ""],
+        [71, 2, 6, ""],
+        [72, 1, 120, ""],
+        [74, 0, 120, ""],
+        [76, 0, 121, ""],
+        [81, 1, 122, ""],
+        [83, 0, 122, ""],
+        [86, 0, 123, ""],
+        [90, 1, 124, ""],
+        [92, 0, 124, ""],
+        [98, 0, 125, ""],
+        [102, 0, 126, ""],
+        [103, 1, 215, ""],
+        [105, 2, 127, ""],
+        [107, 0, 127, ""],
+        [112, 1, 130, ""],
+        [129, 1, 128, ""],
+        [131, 0, 128, ""],
+        [134, 1, 131, ""],
+        [141, 1, 129, ""],
+        [143, 1, 2, ""],
+        [144, 0, 129, ""],
+        [146, 0, 130, ""],
+        [148, 2, 132, ""],
+        [154, 0, 131, ""],
+        [171, 0, 132, ""],
+        [175, 1, 133, ""],
+        [177, 0, 133, ""],
+        [180, 1, 134, ""],
+        [182, 0, 134, ""],
+        [183, 1, 226, ""],
+        [186, 0, 135, ""],
+        [187, 1, 216, ""],
+        [189, 2, 138, ""],
+        [192, 1, 136, ""],
+        [197, 1, 137, ""],
+        [199, 0, 136, ""],
+        [208, 0, 137, ""],
+        [217, 0, 138, ""],
+        [220, 0, 139, ""],
+        [221, 1, 221, ""],
+        [223, 2, 140, ""],
+        [224, 0, 140, ""],
+        [228, 1, 142, ""],
+        [230, 1, 2, ""],
+        [235, 1, 141, ""],
+        [236, 2, 143, ""],
+        [238, 2, 145, ""],
+        [239, 0, 141, ""],
+        [241, 0, 142, ""],
+        [243, 0, 143, ""],
+        [248, 1, 144, ""],
+        [250, 1, 2, ""],
+        [252, 0, 144, ""],
+        [254, 0, 145, ""],
+        [255, 2, 146, ""],
+        [260, 0, 146, ""],
+        [265, 1, 147, ""],
+        [266, 2, 148, ""],
+        [267, 1, 232, ""],
+        [269, 0, 147, ""],
+        [273, 0, 148, ""],
+        [276, 1, 150, ""],
+        [280, 1, 149, ""],
+        [283, 0, 149, ""],
+        [286, 0, 150, ""],
+        [288, 0, 151, ""],
+        [289, 1, 222, ""],
+        [291, 2, 153, ""],
+        [297, 1, 152, ""],
+        [300, 0, 152, ""],
+        [302, 0, 153, ""],
+        [303, 1, 235, ""],
+        [310, 0, 154, ""],
+        [311, 1, 217, ""],
+        [314, 2, 155, ""],
+        [315, 0, 155, ""],
+        [317, 0, 156, ""],
+        [318, 1, 218, ""],
+        [320, 2, 158, ""],
+        [324, 1, 157, ""],
+        [327, 0, 157, ""],
+        [330, 0, 158, ""],
+        [332, 1, 159, ""],
+        [334, 0, 159, ""],
+        [336, 0, 160, ""],
+        [337, 1, 223, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "tokens": [
+        [2, 1, 163, ""],
+        [5, 1, 161, ""],
+        [7, 0, 161, ""],
+        [10, 1, 162, ""],
+        [14, 1, 162, ""],
+        [16, 1, 162, ""],
+        [18, 1, 162, ""],
+        [22, 0, 162, ""],
+        [24, 0, 163, ""],
+        [30, 1, 164, ""],
+        [32, 0, 164, ""],
+        [36, 1, 167, ""],
+        [39, 1, 166, ""],
+        [44, 1, 165, ""],
+        [46, 0, 165, ""],
+        [48, 0, 166, ""],
+        [50, 0, 167, ""],
+        [58, 1, 168, ""],
+        [61, 1, 169, ""],
+        [63, 1, 169, ""],
+        [64, 0, 168, ""],
+        [68, 1, 169, ""],
+        [70, 0, 169, ""],
+        [74, 0, 170, ""],
+        [77, 1, 171, ""],
+        [79, 1, 172, ""],
+        [80, 0, 171, ""],
+        [84, 0, 172, ""],
+        [92, 0, 173, ""],
+        [95, 1, 174, ""],
+        [98, 0, 174, ""],
+        [102, 0, 175, ""],
+        [107, 1, 173, ""],
+        [108, 0, 176, ""],
+        [115, 1, 173, ""],
+        [119, 1, 179, ""],
+        [120, 1, 177, ""],
+        [122, 1, 178, ""],
+        [124, 0, 177, ""],
+        [126, 1, 179, ""],
+        [127, 0, 178, ""],
+        [129, 0, 179, ""],
+        [136, 1, 180, ""],
+        [138, 0, 180, ""],
+        [140, 1, 183, ""],
+        [141, 1, 181, ""],
+        [143, 1, 182, ""],
+        [145, 0, 181, ""],
+        [147, 1, 183, ""],
+        [148, 0, 182, ""],
+        [150, 0, 183, ""],
+        [154, 1, 186, ""],
+        [155, 1, 184, ""],
+        [157, 1, 185, ""],
+        [158, 1, 186, ""],
+        [159, 0, 184, ""],
+        [161, 1, 186, ""],
+        [162, 0, 185, ""],
+        [164, 0, 186, ""],
+        [167, 1, 189, ""],
+        [168, 1, 187, ""],
+        [170, 1, 188, ""],
+        [171, 1, 189, ""],
+        [172, 0, 187, ""],
+        [174, 1, 189, ""],
+        [175, 0, 188, ""],
+        [177, 0, 189, ""],
+        [183, 1, 192, ""],
+        [186, 1, 190, ""],
+        [190, 0, 190, ""],
+        [195, 1, 193, ""],
+        [198, 1, 191, ""],
+        [200, 0, 191, ""],
+        [203, 0, 192, ""],
+        [208, 0, 193, ""],
+        [218, 1, 194, ""],
+        [220, 0, 194, ""],
+        [233, 1, 195, ""],
+        [235, 0, 195, ""],
+        [237, 1, 196, ""],
+        [239, 0, 196, ""],
+        [242, 1, 198, ""],
+        [246, 1, 197, ""],
+        [249, 0, 197, ""],
+        [254, 0, 198, ""],
+        [269, 1, 201, ""],
+        [271, 1, 199, ""],
+        [277, 0, 199, ""],
+        [280, 1, 200, ""],
+        [282, 0, 200, ""],
+        [285, 1, 201, ""],
+        [287, 0, 201, ""],
+        [290, 1, 202, ""],
+        [291, 1, 203, ""],
+        [293, 0, 202, ""],
+        [295, 0, 203, ""],
+        [298, 0, 204, ""],
+        [301, 1, 205, ""],
+        [303, 0, 205, ""],
+        [307, 1, 207, ""],
+        [308, 2, 22, ""],
+        [311, 2, 26, ""],
+        [313, 1, 206, ""],
+        [314, 0, 206, ""],
+        [317, 1, 207, ""],
+        [319, 0, 207, ""],
+        [324, 1, 209, ""],
+        [325, 0, 208, ""],
+        [327, 0, 209, ""],
+        [330, 1, 210, ""],
+        [332, 2, 236, ""],
+        [337, 2, 38, ""],
+        [339, 1, 208, ""],
+        [340, 1, 231, ""],
+        [342, 0, 210, ""],
+        [345, 2, 51, ""],
+        [353, 1, 211, ""],
+        [355, 0, 211, ""],
+        [360, 1, 212, ""],
+        [362, 1, 213, ""],
+        [367, 0, 212, ""],
+        [369, 0, 213, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
+      "tokens": [
+        [6, 0, 214, ""],
+        [9, 0, 215, ""],
+        [12, 0, 216, ""],
+        [15, 0, 217, ""],
+        [18, 0, 218, ""],
+        [21, 0, 219, ""],
+        [24, 0, 220, ""],
+        [27, 0, 221, ""],
+        [30, 0, 222, ""],
+        [33, 0, 223, ""],
+        [36, 0, 224, ""],
+        [38, 1, 116, ""],
+        [40, 0, 225, ""],
+        [42, 1, 126, ""],
+        [43, 0, 226, ""],
+        [45, 1, 135, ""],
+        [46, 0, 227, ""],
+        [48, 1, 154, ""],
+        [49, 0, 228, ""],
+        [51, 1, 156, ""],
+        [53, 1, 156, ""],
+        [55, 0, 229, ""],
+        [57, 1, 79, ""],
+        [58, 0, 230, ""],
+        [60, 1, 114, ""],
+        [62, 0, 231, ""],
+        [64, 1, 139, ""],
+        [66, 0, 232, ""],
+        [68, 1, 151, ""],
+        [69, 0, 233, ""],
+        [71, 1, 160, ""],
+        [73, 1, 160, ""],
+        [75, 1, 160, ""],
+        [77, 1, 160, ""],
+        [79, 0, 234, ""],
+        [81, 0, 235, ""],
+        [90, 0, 236, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/miniboss.s",
+      "tokens": [
+        [2, 1, 237, ""],
+        [3, 1, 238, ""],
+        [4, 1, 239, ""],
+        [5, 1, 240, ""],
+        [6, 1, 241, ""],
+        [7, 1, 242, ""],
+        [8, 1, 243, ""],
+        [9, 1, 244, ""],
+        [10, 1, 245, ""],
+        [11, 1, 246, ""],
+        [12, 1, 247, ""],
+        [13, 1, 248, ""],
+        [14, 1, 249, ""],
+        [15, 1, 250, ""],
+        [16, 1, 251, ""],
+        [17, 1, 252, ""],
+        [18, 1, 253, ""],
+        [19, 1, 254, ""],
+        [20, 1, 255, ""],
+        [21, 1, 256, ""],
+        [22, 1, 257, ""],
+        [23, 1, 258, ""],
+        [24, 1, 259, ""],
+        [25, 1, 260, ""],
+        [26, 1, 261, ""],
+        [27, 1, 262, ""],
+        [28, 1, 263, ""],
+        [29, 1, 264, ""],
+        [30, 1, 265, ""],
+        [31, 1, 266, ""],
+        [32, 1, 267, ""],
+        [33, 1, 268, ""],
+        [34, 1, 269, ""],
+        [35, 1, 270, ""],
+        [36, 1, 271, ""],
+        [37, 1, 272, ""],
+        [38, 1, 273, ""],
+        [39, 1, 274, ""],
+        [40, 1, 275, ""],
+        [41, 0, 237, ""],
+        [48, 0, 238, ""],
+        [51, 0, 239, ""],
+        [55, 0, 240, ""],
+        [59, 0, 241, ""],
+        [63, 0, 242, ""],
+        [67, 0, 243, ""],
+        [70, 0, 244, ""],
+        [71, 0, 245, ""],
+        [73, 0, 246, ""],
+        [75, 0, 247, ""],
+        [77, 0, 248, ""],
+        [80, 0, 249, ""],
+        [83, 0, 250, ""],
+        [86, 0, 251, ""],
+        [89, 0, 252, ""],
+        [92, 0, 253, ""],
+        [95, 0, 254, ""],
+        [98, 0, 255, ""],
+        [100, 0, 256, ""],
+        [102, 0, 257, ""],
+        [104, 0, 258, ""],
+        [106, 0, 259, ""],
+        [108, 0, 260, ""],
+        [110, 0, 261, ""],
+        [112, 0, 262, ""],
+        [114, 0, 263, ""],
+        [116, 0, 264, ""],
+        [121, 0, 265, ""],
+        [128, 0, 266, ""],
+        [137, 0, 267, ""],
+        [148, 0, 268, ""],
+        [161, 0, 269, ""],
+        [176, 0, 270, ""],
+        [193, 0, 271, ""],
+        [212, 0, 272, ""],
+        [215, 0, 273, ""],
+        [218, 0, 274, ""],
+        [220, 0, 275, ""]
+      ]
+    }
+  ]
+}

@@ -8,8 +8,8 @@ Obj_DEZMiniboss:
                 jsr     (Check_CameraInRange).l
                 move.b  #mus_Miniboss,boss_saved_mus(a0)
                 jsr     (Boss_BeginCameraTransition).l
-                move.l  #loc_7DE28,(a0)
-                move.l  #loc_7DE2C,$34(a0)
+                move.l  #DEZMiniboss_RunInitialCameraTransition,(a0)
+                move.l  #DEZMini_FinishCameraAndWidenBounds,$34(a0)
                 lea     ObjDat_DEZMiniboss(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 clr.b   routine(a0)
@@ -17,9 +17,9 @@ Obj_DEZMiniboss:
                 clr.b   $42(a0)
                 move.w  #$4000,$3A(a0)
                 move.w  #$8000,$3C(a0)
-                lea     ChildObjDat_7EF8E(pc),a2
+                lea     DEZMinibossEye_NormalChildRecord(pc),a2
                 jsr     CreateChild1_Normal(pc)
-                lea     ChildObjDat_7EF96(pc),a2
+                lea     DEZMini_OrbitHazardChild(pc),a2
                 jsr     CreateChild6_Simple(pc)
                 moveq   #PLCID_7B,d0
                 jsr     (Load_PLC).l
@@ -30,221 +30,221 @@ Obj_DEZMiniboss:
                 jmp     PalLoad_Line1(pc)
 ; ---------------------------------------------------------------------------
 
-loc_7DE28:
+DEZMiniboss_RunInitialCameraTransition:
                 jmp     SKEndCamera_TickAndSaveMusic(pc)
 ; ---------------------------------------------------------------------------
 
-loc_7DE2C:
-                move.l  #loc_7DE46,(a0)
+DEZMini_FinishCameraAndWidenBounds:
+                move.l  #DEZMini_AdvanceInitialHazardY,(a0)
                 addi.w  #$E0,(_unkFAB2).w
                 addi.w  #$40,(_unkFAB4).w
                 addi.w  #$100,(_unkFAB6).w
 
-locret_7DE44:
+DEZMinibossAndScene_SharedReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7DE46:
+DEZMini_AdvanceInitialHazardY:
                 addq.b  #4,$3C(a0)
-                bpl.s   loc_7DE4E
+                bpl.s   DEZMini_InstallFormOneDispatcher
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7DE4E:
-                move.l  #loc_7DE6E,(a0)
+DEZMini_InstallFormOneDispatcher:
+                move.l  #DEZMini_FormOneDispatchSoundAndHit,(a0)
 
-loc_7DE54:
+DEZMinibossFirstForm_ResetCycleDelay:
                 move.b  #0,routine(a0)
                 clr.w   $3C(a0)
                 move.w  #$7F,$2E(a0)
-                move.l  #loc_7DEA6,$34(a0)
+                move.l  #DEZMini_BeginHazardYBounces,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7DE6E:
+DEZMini_FormOneDispatchSoundAndHit:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_7DE92(pc,d0.w),d1
-                jsr     off_7DE92(pc,d1.w)
+                move.w  DEZMinibossFirstForm_CycleStateOffsets(pc,d0.w),d1
+                jsr     DEZMinibossFirstForm_CycleStateOffsets(pc,d1.w)
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #$1F,d0
-                bne.s   loc_7DE8E
+                bne.s   DEZMini_FormOneCheckHitsAfterCycle
                 moveq   #signextendB(sfx_GravityTunnel),d0
                 jsr     (Play_SFX).l
 
-loc_7DE8E:
-                bra.w   loc_7EE36
+DEZMini_FormOneCheckHitsAfterCycle:
+                bra.w   DEZMini_FormOneCheckHitCount
 ; ---------------------------------------------------------------------------
-off_7DE92:
-                dc.w    loc_7DEA2-off_7DE92
-                dc.w    loc_7DEC6-off_7DE92
-                dc.w    loc_7DEA2-off_7DE92
-                dc.w    loc_7DF14-off_7DE92
-                dc.w    loc_7DEA2-off_7DE92
-                dc.w    loc_7DF40-off_7DE92
-                dc.w    loc_7DEA2-off_7DE92
-                dc.w    loc_7DF84-off_7DE92
+DEZMinibossFirstForm_CycleStateOffsets:
+                dc.w    DEZMini_FormOneTickCycleWait-DEZMinibossFirstForm_CycleStateOffsets
+                dc.w    DEZMini_UpdateHazardYBounce-DEZMinibossFirstForm_CycleStateOffsets
+                dc.w    DEZMini_FormOneTickCycleWait-DEZMinibossFirstForm_CycleStateOffsets
+                dc.w    DEZMini_IncreaseRadialAmplitude-DEZMinibossFirstForm_CycleStateOffsets
+                dc.w    DEZMini_FormOneTickCycleWait-DEZMinibossFirstForm_CycleStateOffsets
+                dc.w    DEZMini_DecreaseRadialAmplitude-DEZMinibossFirstForm_CycleStateOffsets
+                dc.w    DEZMini_FormOneTickCycleWait-DEZMinibossFirstForm_CycleStateOffsets
+                dc.w    DEZMini_LowerHazardYOffset-DEZMinibossFirstForm_CycleStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_7DEA2:
+DEZMini_FormOneTickCycleWait:
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_7DEA6:
+DEZMini_BeginHazardYBounces:
                 move.b  #2,routine(a0)
                 move.w  #$F,$2E(a0)
-                move.l  #loc_7DEF6,$34(a0)
+                move.l  #DEZMini_PauseBeforeRadialExpansion,$34(a0)
                 move.b  #2,$39(a0)
                 clr.w   $40(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7DEC6:
+DEZMini_UpdateHazardYBounce:
                 move.w  $40(a0),d0
                 move.w  $3C(a0),d1
                 addi.w  #$20,d0
                 add.w   d0,d1
                 cmpi.w  #$7000,d1
-                blo.s   loc_7DEEC
+                blo.s   DEZMini_StoreHazardYOffsetAndStep
                 move.w  #$7000,d1
                 lsr.w   #1,d0
                 neg.w   d0
                 subq.b  #1,$39(a0)
-                bpl.s   loc_7DEEC
-                bsr.w   loc_7DEF6
+                bpl.s   DEZMini_StoreHazardYOffsetAndStep
+                bsr.w   DEZMini_PauseBeforeRadialExpansion
 
-loc_7DEEC:
+DEZMini_StoreHazardYOffsetAndStep:
                 move.w  d0,$40(a0)
                 move.w  d1,$3C(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7DEF6:
+DEZMini_PauseBeforeRadialExpansion:
                 move.b  #4,routine(a0)
                 move.w  #$9F,$2E(a0)
-                move.l  #loc_7DF0C,$34(a0)
+                move.l  #DEZMini_BeginRadialExpansion,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7DF0C:
+DEZMini_BeginRadialExpansion:
                 move.b  #6,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7DF14:
+DEZMini_IncreaseRadialAmplitude:
                 move.b  $3A(a0),d0
                 addq.b  #2,d0
-                bmi.s   loc_7DF22
+                bmi.s   DEZMini_HoldExpandedAmplitude
                 move.b  d0,$3A(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7DF22:
+DEZMini_HoldExpandedAmplitude:
                 move.b  #8,routine(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_7DF38,$34(a0)
+                move.l  #DEZMini_BeginRadialContraction,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7DF38:
+DEZMini_BeginRadialContraction:
                 move.b  #$A,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7DF40:
+DEZMini_DecreaseRadialAmplitude:
                 move.b  $3A(a0),d0
                 subq.b  #4,d0
                 cmpi.b  #$40,d0
-                bls.s   loc_7DF52
+                bls.s   DEZMini_ClampAmplitudeAndWait
                 move.b  d0,$3A(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7DF52:
+DEZMini_ClampAmplitudeAndWait:
                 move.b  #$40,$3A(a0)
                 move.b  #$C,routine(a0)
                 move.w  #$9F,$2E(a0)
-                move.l  #loc_7DF6E,$34(a0)
+                move.l  #DEZMini_BeginHazardYReturn,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7DF6E:
+DEZMini_BeginHazardYReturn:
                 move.b  #$E,routine(a0)
                 move.w  #$1B,$2E(a0)
-                move.l  #loc_7DE54,$34(a0)
+                move.l  #DEZMinibossFirstForm_ResetCycleDelay,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7DF84:
+DEZMini_LowerHazardYOffset:
                 subq.b  #4,$3C(a0)
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_7DF8C:
+DEZMinibossTransform_DispatchState:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_7DF9A(pc,d0.w),d1
-                jmp     off_7DF9A(pc,d1.w)
+                move.w  DEZMinibossTransform_StateOffsets(pc,d0.w),d1
+                jmp     DEZMinibossTransform_StateOffsets(pc,d1.w)
 ; ---------------------------------------------------------------------------
-off_7DF9A:
-                dc.w    loc_7DFA2-off_7DF9A
-                dc.w    loc_7E00C-off_7DF9A
-                dc.w    loc_7E006-off_7DF9A
-                dc.w    loc_7E00C-off_7DF9A
+DEZMinibossTransform_StateOffsets:
+                dc.w    DEZMini_TransformTryDebris-DEZMinibossTransform_StateOffsets
+                dc.w    DEZMinibossTransform_WaitAndDraw-DEZMinibossTransform_StateOffsets
+                dc.w    DEZMini_TransformMoveWaitAndDraw-DEZMinibossTransform_StateOffsets
+                dc.w    DEZMinibossTransform_WaitAndDraw-DEZMinibossTransform_StateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_7DFA2:
+DEZMini_TransformTryDebris:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #7,d0
-                bne.s   loc_7DFB4
-                lea     ChildObjDat_7EFA2(pc),a2
+                bne.s   DEZMini_TransformTickDebrisWait
+                lea     DEZMini_RandomDebrisChild(pc),a2
                 jsr     CreateChild6_Simple(pc)
 
-loc_7DFB4:
+DEZMini_TransformTickDebrisWait:
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_7DFB8:
+DEZMini_SignalForegroundAndSpawnShells:
                 move.b  #2,routine(a0)
                 move.w  #$5F,$2E(a0)
-                move.l  #loc_7DFDE,$34(a0)
+                move.l  #DEZMini_BeginTransformDiagonalMove,$34(a0)
                 st      (Events_fg_4).w
-                lea     ChildObjDat_7EFA8(pc),a2
+                lea     DEZMini_DelayedSideDebrisChildren(pc),a2
                 jsr     CreateChild1_Normal(pc)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7DFDE:
+DEZMini_BeginTransformDiagonalMove:
                 move.b  #4,routine(a0)
                 bset    #5,$38(a0)
                 move.w  #-$80,x_vel(a0)
                 move.w  #$40,y_vel(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_7E016,$34(a0)
+                move.l  #DEZMini_SpawnLinkedPlatforms,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7E006:
+DEZMini_TransformMoveWaitAndDraw:
                 jsr     (MoveSprite2).l
 
-loc_7E00C:
+DEZMinibossTransform_WaitAndDraw:
                 jsr     Obj_Wait(pc)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7E016:
+DEZMini_SpawnLinkedPlatforms:
                 move.b  #6,routine(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_7E044,$34(a0)
+                move.l  #DEZMini_InitFormTwoHoverAndMask,$34(a0)
                 move.w  #0,$3A(a0)
                 move.w  #$200,$3C(a0)
                 move.w  #$100,$26(a0)
-                lea     ChildObjDat_7EFB6(pc),a2
+                lea     DEZMini_OrbitPlatformChildren(pc),a2
                 jmp     CreateChild8_TreeListRepeated(pc)
 ; ---------------------------------------------------------------------------
 
-loc_7E044:
-                move.l  #loc_7E0A6,(a0)
+DEZMini_InitFormTwoHoverAndMask:
+                move.l  #DEZMini_FormTwoSoundAndDispatch,(a0)
                 clr.b   routine(a0)
                 bclr    #6,status(a0)
                 clr.b   collision_property(a0)
@@ -272,39 +272,39 @@ ResetDEZMinibossVerticalSwing:
 
 ; ---------------------------------------------------------------------------
 
-loc_7E0A6:
+DEZMini_FormTwoSoundAndDispatch:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #$3F,d0
-                bne.s   loc_7E0B8
+                bne.s   DEZMini_FormTwoCheckHitAndDispatch
                 moveq   #signextendB(sfx_WaveHover),d0
                 jsr     (Play_SFX).l
 
-loc_7E0B8:
+DEZMini_FormTwoCheckHitAndDispatch:
                 bsr.w   DEZMiniForm2_ReactToHitOrDefeat
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_7E0CA(pc,d0.w),d1
-                jmp     off_7E0CA(pc,d1.w)
+                move.w  DEZMinibossSecondForm_StateOffsets(pc,d0.w),d1
+                jmp     DEZMinibossSecondForm_StateOffsets(pc,d1.w)
 ; ---------------------------------------------------------------------------
-off_7E0CA:
-                dc.w    loc_7E0D6-off_7E0CA
-                dc.w    loc_7E108-off_7E0CA
-                dc.w    loc_7E13C-off_7E0CA
-                dc.w    loc_7E186-off_7E0CA
-                dc.w    loc_7E1AC-off_7E0CA
-                dc.w    loc_7E1FC-off_7E0CA
+DEZMinibossSecondForm_StateOffsets:
+                dc.w    DEZMini_HoverAndRetargetPlatforms-DEZMinibossSecondForm_StateOffsets
+                dc.w    DEZMini_RunPalettePursueAndRetarget-DEZMinibossSecondForm_StateOffsets
+                dc.w    DEZMini_HoverUntilPlatformsAlign-DEZMinibossSecondForm_StateOffsets
+                dc.w    DEZMinibossSecondForm_AscendOrReactToHit-DEZMinibossSecondForm_StateOffsets
+                dc.w    DEZMini_WaitForCatchRelease-DEZMinibossSecondForm_StateOffsets
+                dc.w    DEZMini_DescendToSavedHoverY-DEZMinibossSecondForm_StateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_7E0D6:
+DEZMini_HoverAndRetargetPlatforms:
                 jsr     Swing_UpAndDown(pc)
                 jsr     (MoveSprite2).l
                 bsr.w   DEZMini_ReversePastArenaXBounds
                 bsr.w   DEZMini_RetargetPlatformSpin
                 btst    #1,$38(a0)
-                beq.s   loc_7E0F4
+                beq.s   DEZMinibossSecondForm_DrawIdleHover
                 bsr.w   DEZMini_BeginPlatformExpansion
 
-loc_7E0F4:
+DEZMinibossSecondForm_DrawIdleHover:
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -317,7 +317,7 @@ DEZMini_BeginPlatformExpansion:
 
 ; ---------------------------------------------------------------------------
 
-loc_7E108:
+DEZMini_RunPalettePursueAndRetarget:
                 jsr     Run_PalRotationScript(pc)
                 jsr     Swing_UpAndDown(pc)
                 jsr     (MoveSprite2).l
@@ -326,7 +326,7 @@ loc_7E108:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7E124:
+DEZMini_BeginPlatformAlignment:
                 move.b  #4,routine(a0)
                 clr.w   x_vel(a0)
                 bclr    #1,$38(a0)
@@ -334,23 +334,23 @@ loc_7E124:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7E13C:
+DEZMini_HoverUntilPlatformsAlign:
                 jsr     Swing_UpAndDown(pc)
                 jsr     (MoveSprite2).l
                 btst    #1,$38(a0)
-                bne.s   loc_7E15C
+                bne.s   DEZMini_RestartPlatformExpansion
                 btst    #3,$38(a0)
-                beq.s   loc_7E16A
+                beq.s   DEZMini_LaunchJumpAndSignalPlatforms
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7E15C:
+DEZMini_RestartPlatformExpansion:
                 bsr.s   DEZMini_BeginPlatformExpansion
                 bclr    #3,$38(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7E16A:
+DEZMini_LaunchJumpAndSignalPlatforms:
                 move.b  #6,routine(a0)
                 clr.w   x_vel(a0)
                 move.w  #-$400,y_vel(a0)
@@ -358,49 +358,49 @@ loc_7E16A:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7E186:
+DEZMinibossSecondForm_AscendOrReactToHit:
                 btst    #1,$38(a0)
-                bne.s   loc_7E1A0
+                bne.s   DEZMini_BeginPlatformCatchWait
                 addi.w  #$20,y_vel(a0)
                 jsr     (MoveSprite2).l
                 tst.w   y_vel(a0)
-                bmi.s   loc_7E1A6
+                bmi.s   DEZMinibossSecondForm_DrawAfterAscent
 
-loc_7E1A0:
+DEZMini_BeginPlatformCatchWait:
                 move.b  #8,routine(a0)
 
-loc_7E1A6:
+DEZMinibossSecondForm_DrawAfterAscent:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7E1AC:
+DEZMini_WaitForCatchRelease:
                 btst    #2,$38(a0)
-                bne.s   loc_7E1DE
+                bne.s   DEZMinibossSecondForm_DrawCatchWait
                 move.b  #$A,routine(a0)
                 move.w  #$100,y_vel(a0)
                 clr.w   $3A(a0)
                 btst    #1,$38(a0)
-                bne.s   loc_7E1E4
+                bne.s   DEZMini_RequestFastPlatformExpansion
                 bset    #6,$38(a0)
                 move.w  #$100,$26(a0)
                 move.w  #$100,$3C(a0)
 
-loc_7E1DE:
+DEZMinibossSecondForm_DrawCatchWait:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7E1E4:
+DEZMini_RequestFastPlatformExpansion:
                 bset    #7,$38(a0)
                 move.w  #$800,$26(a0)
                 move.w  #$800,$3C(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7E1FC:
+DEZMini_DescendToSavedHoverY:
                 jsr     (MoveSprite2).l
                 move.w  $30(a0),d0
                 cmp.w   y_pos(a0),d0
-                bhi.s   loc_7E236
+                bhi.s   DEZMinibossSecondForm_DrawReturnDescent
                 move.w  d0,y_pos(a0)
                 move.b  #0,routine(a0)
                 bclr    #6,$38(a0)
@@ -408,137 +408,137 @@ loc_7E1FC:
                 jsr     Find_OtherObject(pc)
                 move.w  #-$80,d1
                 tst.w   d0
-                beq.s   loc_7E22E
+                beq.s   DEZMini_ResumePursuitAndHover
                 neg.w   d1
 
-loc_7E22E:
+DEZMini_ResumePursuitAndHover:
                 move.w  d1,x_vel(a0)
                 bsr.w   ResetDEZMinibossVerticalSwing
 
-loc_7E236:
+DEZMinibossSecondForm_DrawReturnDescent:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7E23C:
+DEZMini_TryPostBossPlayerScene:
                 jsr     (AllocateObject).l
-                bne.s   loc_7E24A
-                move.l  #loc_7E25C,(a1)
+                bne.s   DEZMini_SignalMaskAndStartEndSign
+                move.l  #DEZMini_WaitForEndFlagSet,(a1)
 
-loc_7E24A:
+DEZMini_SignalMaskAndStartEndSign:
                 bset    #5,$38(a0)
-                lea     ChildObjDat_7EFD2(pc),a2
+                lea     DEZMini_DefeatFragmentChildren(pc),a2
                 jsr     CreateChild1_Normal(pc)
                 jmp     Obj_EndSignControl(pc)
 ; ---------------------------------------------------------------------------
 
-loc_7E25C:
+DEZMini_WaitForEndFlagSet:
                 tst.b   (_unkFAA8).w
-                beq.w   locret_7DE44
-                move.l  #loc_7E26A,(a0)
+                beq.w   DEZMinibossAndScene_SharedReturn
+                move.l  #DEZMini_WaitForEndFlagClear,(a0)
 
-loc_7E26A:
+DEZMini_WaitForEndFlagClear:
                 tst.b   (_unkFAA8).w
-                bne.w   locret_7DE44
-                move.l  #loc_7E298,(a0)
+                bne.w   DEZMinibossAndScene_SharedReturn
+                move.l  #DEZMini_WalkPlayerTowardCenter,(a0)
                 st      (Ctrl_1_locked).w
                 jsr     (AllocateObject).l
-                bne.s   loc_7E28A
+                bne.s   DEZMini_ChoosePlayerApproachSide
                 move.l  #SKInput_LockP2IfActive,(a1)
 
-loc_7E28A:
+DEZMini_ChoosePlayerApproachSide:
                 cmpi.w  #$140,(Player_1+x_pos).w
-                blo.s   loc_7E298
+                blo.s   DEZMini_WalkPlayerTowardCenter
                 bset    #3,$38(a0)
 
-loc_7E298:
+DEZMini_WalkPlayerTowardCenter:
                 lea     (Player_1).w,a1
                 move.w  #$140,d0
                 tst.w   x_vel(a0)
                 btst    #3,$38(a0)
-                bne.s   loc_7E2CA
+                bne.s   DEZMini_CheckLeftwardArrival
                 cmp.w   x_pos(a1),d0
-                bls.s   loc_7E2E8
+                bls.s   DEZMini_CenterPlayerAndTryExplosions
                 moveq   #0,d1
                 btst    #Status_Push,status(a1)
-                beq.s   loc_7E2C0
+                beq.s   DEZMini_SetRightAndJumpInput
                 ori.w   #(button_A_mask<<8)|button_A_mask,d1
 
-loc_7E2C0:
+DEZMini_SetRightAndJumpInput:
                 ori.w   #(button_right_mask<<8)|button_right_mask,d1
                 move.w  d1,(Ctrl_1_logical).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7E2CA:
+DEZMini_CheckLeftwardArrival:
                 cmp.w   x_pos(a1),d0
-                bhs.s   loc_7E2E8
+                bhs.s   DEZMini_CenterPlayerAndTryExplosions
                 moveq   #0,d1
                 btst    #Status_Push,status(a1)
-                beq.s   loc_7E2DE
+                beq.s   DEZMini_SetLeftAndJumpInput
                 ori.w   #(button_A_mask<<8)|button_A_mask,d1
 
-loc_7E2DE:
+DEZMini_SetLeftAndJumpInput:
                 ori.w   #(button_left_mask<<8)|button_left_mask,d1
                 move.w  d1,(Ctrl_1_logical).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7E2E8:
+DEZMini_CenterPlayerAndTryExplosions:
                 move.w  d0,x_pos(a1)
-                move.l  #loc_7E342,(a0)
+                move.l  #DEZMini_WaitThenOpenCameraY,(a0)
                 jsr     Stop_Object(pc)
                 clr.w   (Ctrl_1_logical).w
                 move.w  #$1F,$2E(a0)
                 jsr     (AllocateObject).l
-                bne.s   loc_7E320
+                bne.s   DEZMini_TrySecondExplosionController
                 move.l  #Obj_CreateBossExplosion,(a1)
                 move.w  #$100,x_pos(a1)
                 move.w  #$760,y_pos(a1)
                 move.b  #$14,subtype(a1)
 
-loc_7E320:
+DEZMini_TrySecondExplosionController:
                 jsr     (AllocateObject).l
-                bne.s   locret_7E340
+                bne.s   DEZMini_ExplosionSpawnReturn
                 move.l  #Obj_CreateBossExplosion,(a1)
                 move.w  #$180,x_pos(a1)
                 move.w  #$760,y_pos(a1)
                 move.b  #$14,subtype(a1)
 
-locret_7E340:
+DEZMini_ExplosionSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7E342:
+DEZMini_WaitThenOpenCameraY:
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_7E382
-                move.l  #loc_7E384,(a0)
+                bpl.s   DEZMini_CameraOpeningDelayReturn
+                move.l  #DEZMini_WaitGroundedAtSceneHeight,(a0)
                 st      (Events_fg_4).w
                 move.w  #0,(Camera_stored_min_Y_pos).w
                 jsr     (AllocateObject).l
-                bne.s   loc_7E366
+                bne.s   DEZMini_TryCameraMaxYExpansion
                 move.l  #Obj_DecLevStartYGradual,(a1)
 
-loc_7E366:
+DEZMini_TryCameraMaxYExpansion:
                 move.w  #$2000,(Camera_stored_max_Y_pos).w
                 jsr     (AllocateObject).l
-                bne.s   loc_7E37A
+                bne.s   DEZMini_PlayCameraOpeningRumble
                 move.l  #Obj_IncLevEndYGradual,(a1)
 
-loc_7E37A:
+DEZMini_PlayCameraOpeningRumble:
                 moveq   #signextendB(sfx_BigRumble),d0
                 jsr     (Play_SFX).l
 
-locret_7E382:
+DEZMini_CameraOpeningDelayReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7E384:
+DEZMini_WaitGroundedAtSceneHeight:
                 lea     (Player_1).w,a1
                 cmpi.w  #$360,y_pos(a1)
-                blo.s   locret_7E3C8
+                blo.s   DEZMini_GroundingGateReturn
                 btst    #1,status(a1)
-                bne.s   locret_7E3C8
-                move.l  #loc_7E3CA,(a0)
+                bne.s   DEZMini_GroundingGateReturn
+                move.l  #DEZMini_AcceleratePlayerSpin,(a0)
                 move.b  #$83,object_control(a1)
                 move.b  #0,anim(a1)
                 jsr     (Stop_Object).l
@@ -547,26 +547,26 @@ loc_7E384:
                 bclr    #Status_Facing,status(a1)
                 bclr    #0,render_flags(a1)
 
-locret_7E3C8:
+DEZMini_GroundingGateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7E3CA:
+DEZMini_AcceleratePlayerSpin:
                 addq.w  #8,$1C(a0)
                 cmpi.w  #$300,$1C(a0)
-                bne.s   loc_7E3E8
-                move.l  #loc_7E3EC,(a0)
+                bne.s   DEZMini_AdvancePlayerSpin
+                move.l  #DEZMini_WaitAndPreparePlayerLaunch,(a0)
                 move.w  #$24,$2E(a0)
                 bclr    #7,(Player_1+art_tile).w
 
-loc_7E3E8:
+DEZMini_AdvancePlayerSpin:
                 bra.w   DEZPostBoss_AdvancePlayerSpin
 ; ---------------------------------------------------------------------------
 
-loc_7E3EC:
+DEZMini_WaitAndPreparePlayerLaunch:
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_7E416
-                move.l  #loc_7E420,(a0)
+                bpl.s   DEZMini_LiftPlayerAndSpin
+                move.l  #DEZMini_SpinInFlightToApex,(a0)
                 move.w  #-$1000,y_vel(a0)
                 lea     (Player_1).w,a1
                 move.w  x_pos(a1),x_pos(a0)
@@ -574,67 +574,67 @@ loc_7E3EC:
                 moveq   #signextendB(sfx_SuperTransform),d0
                 jsr     (Play_SFX).l
 
-loc_7E416:
+DEZMini_LiftPlayerAndSpin:
                 subi.w  #$10,(Player_1+y_pos).w
                 bra.w   DEZPostBoss_AdvancePlayerSpin
 ; ---------------------------------------------------------------------------
 
-loc_7E420:
+DEZMini_SpinInFlightToApex:
                 bsr.w   DEZPostBoss_AdvancePlayerSpin
                 tst.w   y_vel(a0)
-                bmi.s   loc_7E44C
-                move.l  #loc_7E44C,(a0)
+                bmi.s   DEZMini_MovePlayerFlightAndLand
+                move.l  #DEZMini_MovePlayerFlightAndLand,(a0)
                 jsr     (Ending_SetP1PoseAndLoadArt).l
                 lea     (Player_1).w,a1
                 bclr    #0,render_flags(a1)
                 bclr    #Status_Facing,status(a1)
                 move.w  #5<<8,anim(a1)                  ; and prev_anim
 
-loc_7E44C:
+DEZMini_MovePlayerFlightAndLand:
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
-                bmi.s   loc_7E490
+                bmi.s   DEZMini_SyncPlayerToSceneProxy
                 move.w  #$3AC,d0
                 cmpi.w  #2,(Player_mode).w
-                bne.s   loc_7E468
+                bne.s   DEZMini_ClampLandingAndTryTitleCard
                 move.w  #$3B0,d0
 
-loc_7E468:
+DEZMini_ClampLandingAndTryTitleCard:
                 cmp.w   y_pos(a0),d0
-                bhi.s   loc_7E490
+                bhi.s   DEZMini_SyncPlayerToSceneProxy
                 move.w  d0,y_pos(a0)
-                move.l  #loc_7E4A2,(a0)
+                move.l  #DEZMini_WaitBeforeControlRestore,(a0)
                 move.w  #(2*60)-1,$2E(a0)
                 jsr     (AllocateObject).l
-                bne.s   loc_7E490
+                bne.s   DEZMini_SyncPlayerToSceneProxy
                 move.l  #Obj_TitleCard,(a1)
                 st      $3E(a1)
 
-loc_7E490:
+DEZMini_SyncPlayerToSceneProxy:
                 lea     (Player_1).w,a1
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7E4A2:
+DEZMini_WaitBeforeControlRestore:
                 subq.w  #1,$2E(a0)
-                bpl.w   locret_7DE44
+                bpl.w   DEZMinibossAndScene_SharedReturn
                 lea     (Pal_DEZMiniboss2).l,a1
                 lea     (Normal_palette_line_2).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_7E4B6:
+DEZMini_RestorePaletteAndControls:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_7E4B6
+                dbf     d6,DEZMini_RestorePaletteAndControls
                 clr.b   (Player_1+object_control).w
                 clr.b   (Ctrl_1_locked).w
                 clr.b   (Ctrl_2_locked).w
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7E4CE:
-                lea     word_7EF70(pc),a1
+DEZMini_InitPlatformSeparation:
+                lea     DEZMini_OrbitPlatformAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
                 addi.w  #$C,y_pos(a0)
                 move.b  #0,child_dx(a0)
@@ -642,129 +642,130 @@ loc_7E4CE:
                 move.w  #-$200,d0
                 moveq   #-$40,d1
                 tst.b   subtype(a0)
-                beq.s   loc_7E4F8
+                beq.s   DEZMini_SetPlatformSeparationMotion
                 neg.w   d0
                 moveq   #$40,d1
 
-loc_7E4F8:
+DEZMini_SetPlatformSeparationMotion:
                 move.w  d0,x_vel(a0)
                 move.b  d1,$3C(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_7E52A,$34(a0)
-                move.l  #loc_7E51C,(a0)
-                lea     ChildObjDat_7EFBC(pc),a2
+                move.l  #DEZMini_InstallPlatformSideHandler,$34(a0)
+                move.l  #DEZMini_MoveDuringSeparationWait,(a0)
+                lea     DEZMini_PlatformContactChild(pc),a2
                 jsr     CreateChild1_Normal(pc)
 
-loc_7E51C:
+DEZMini_MoveDuringSeparationWait:
                 jsr     (MoveSprite2).l
                 jsr     Obj_Wait(pc)
-                bra.w   loc_7EC46
+                bra.w   DEZMini_ResolvePlatformTopSolid
 ; ---------------------------------------------------------------------------
 
-loc_7E52A:
-                move.l  #loc_7E566,(a0)
+DEZMini_InstallPlatformSideHandler:
+                move.l  #DEZMini_CheckExpansionAndAlignment,(a0)
                 tst.b   subtype(a0)
-                beq.s   locret_7E54A
-                move.l  #loc_7E54C,(a0)
+                beq.s   DEZMini_PlatformLinkInitReturn
+                move.l  #DEZMini_LinkedPlatformCheckCatch,(a0)
                 movea.w parent3(a0),a1
                 move.w  a0,$44(a1)
                 move.w  $44(a0),parent3(a0)
 
-locret_7E54A:
+DEZMini_PlatformLinkInitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7E54C:
+DEZMini_LinkedPlatformCheckCatch:
                 movea.w parent3(a0),a1
                 btst    #7,$38(a1)
-                bne.s   loc_7E582
+                bne.s   DEZMinibossPlatform_BeginRadialExpansion
                 bclr    #3,$38(a0)
-                bne.w   loc_7E63E
-                bra.w   loc_7EBF2
+                bne.w   DEZMini_StopAndWaitForBossJump
+                bra.w   DEZMini_SyncPlatformOrbitPhase
 ; ---------------------------------------------------------------------------
 
-loc_7E566:
+DEZMini_CheckExpansionAndAlignment:
                 movea.w parent3(a0),a1
                 btst    #7,$38(a1)
-                bne.s   loc_7E582
+                bne.s   DEZMinibossPlatform_BeginRadialExpansion
                 btst    #3,$38(a1)
-                bne.s   loc_7E590
+                bne.s   DEZMini_BeginAlignmentSearch
 
-loc_7E57A:
+DEZMini_AdvanceOrbitAndProject:
                 bsr.w   DEZMiniPlatform_AccelAndStepAngle
-                bra.w   loc_7EBF2
+                bra.w   DEZMini_SyncPlatformOrbitPhase
 ; ---------------------------------------------------------------------------
 
-loc_7E582:
-                move.l  #loc_7E6E8,(a0)
+DEZMinibossPlatform_BeginRadialExpansion:
+                move.l  #DEZMini_GrowPlatformOrbitRadius,(a0)
                 move.w  #$4000,$3A(a0)
-                bra.s   loc_7E57A
+                bra.s   DEZMini_AdvanceOrbitAndProject
 ; ---------------------------------------------------------------------------
 
-loc_7E590:
-                move.l  #loc_7E598,(a0)
-                bra.s   loc_7E57A
+DEZMini_BeginAlignmentSearch:
+                move.l  #DEZMini_SeekPhaseWindow,(a0)
+                bra.s   DEZMini_AdvanceOrbitAndProject
 ; ---------------------------------------------------------------------------
 
-loc_7E598:
+DEZMini_SeekPhaseWindow:
                 movea.w parent3(a0),a1
                 btst    #7,$38(a1)
-                bne.s   loc_7E582
+                bne.s   DEZMinibossPlatform_BeginRadialExpansion
                 bsr.w   DEZMiniPlatform_AccelAndStepAngle
                 movea.w parent3(a0),a1
                 move.b  $3C(a0),d0
                 tst.w   $3C(a1)
-                bmi.s   loc_7E5C4
+                bmi.s   DEZMini_CheckNegativeStepWindow
                 subi.b  #$40,d0
                 cmpi.b  #$10,d0
-                bls.s   loc_7E5CE
-                bra.w   loc_7E5D4
+                bls.s   DEZMini_BeginAlignmentBraking
+                bra.w   DEZMini_ProjectAlignmentPhase
 ; ---------------------------------------------------------------------------
 
-loc_7E5C4:
+DEZMini_CheckNegativeStepWindow:
                 subi.b  #$30,d0
                 cmpi.b  #$10,d0
-                bhi.s   loc_7E5D4
+                bhi.s   DEZMini_ProjectAlignmentPhase
 
-loc_7E5CE:
-                move.l  #loc_7E5D8,(a0)
+DEZMini_BeginAlignmentBraking:
+                move.l  #DEZMini_BrakeTowardQuarterTurn,(a0)
 
-loc_7E5D4:
-                bra.w   loc_7EBF2
+DEZMini_ProjectAlignmentPhase:
+                bra.w   DEZMini_SyncPlatformOrbitPhase
 ; ---------------------------------------------------------------------------
 
-loc_7E5D8:
+DEZMini_BrakeTowardQuarterTurn:
                 movea.w parent3(a0),a1
                 move.w  $3C(a0),d0
                 btst    #7,$38(a1)
-                bne.s   loc_7E582
+                bne.s   DEZMinibossPlatform_BeginRadialExpansion
                 move.w  $3A(a1),d1
                 move.w  $3C(a1),d2
-                bmi.s   loc_7E606
+                bmi.s   DEZMini_BrakeNegativeAlignmentStep
                 subi.w  #$100,d1
                 add.w   d1,d0
                 tst.w   d1
-                bpl.s   loc_7E616
+                bpl.s   DEZMini_StoreAlignmentStep
                 cmpi.w  #$4000,d0
-                blo.s   loc_7E622
-                bra.w   loc_7E616
+                blo.s   DEZMini_ClampPhaseAndSignalLink
+                bra.w   DEZMini_StoreAlignmentStep
 ; ---------------------------------------------------------------------------
 
-loc_7E606:
+DEZMini_BrakeNegativeAlignmentStep:
                 addi.w  #$100,d1
                 add.w   d1,d0
                 tst.w   d1
-                bmi.s   loc_7E616
+                bmi.s   DEZMini_StoreAlignmentStep
                 cmpi.w  #$4000,d0
-                bhi.s   loc_7E622
+                bhi.s   DEZMini_ClampPhaseAndSignalLink
 
-loc_7E616:
+DEZMini_StoreAlignmentStep:
                 move.w  d0,$3C(a0)
                 move.w  d1,$3A(a1)
-                bra.w   loc_7EBF2
+                bra.w   DEZMini_SyncPlatformOrbitPhase
 ; ---------------------------------------------------------------------------
 
-loc_7E622:
+; Set phase $4000 and notify the linked platform that alignment is complete
+DEZMini_ClampPhaseAndSignalLink:
                 move.w  #$4000,d0
                 move.w  d0,$3C(a0)
                 move.w  d1,$3A(a1)
@@ -772,60 +773,60 @@ loc_7E622:
                 movea.w $44(a0),a2
                 bset    #3,$38(a2)
 
-loc_7E63E:
-                move.l  #loc_7E64C,(a0)
+DEZMini_StopAndWaitForBossJump:
+                move.l  #DEZMini_CheckJumpBeforeCatchWait,(a0)
                 clr.w   x_vel(a0)
-                bra.w   loc_7EBF2
+                bra.w   DEZMini_SyncPlatformOrbitPhase
 ; ---------------------------------------------------------------------------
 
-loc_7E64C:
+DEZMini_CheckJumpBeforeCatchWait:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                beq.s   loc_7E664
-                move.l  #loc_7E668,(a0)
+                beq.s   DEZMini_DrawWhileAwaitingJump
+                move.l  #DEZMini_TickBeforeCatchLaunch,(a0)
                 move.w  #7,$2E(a0)
 
-loc_7E664:
-                bra.w   loc_7EC46
+DEZMini_DrawWhileAwaitingJump:
+                bra.w   DEZMini_ResolvePlatformTopSolid
 ; ---------------------------------------------------------------------------
 
-loc_7E668:
+DEZMini_TickBeforeCatchLaunch:
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_7E67A
-                move.l  #loc_7E67E,(a0)
+                bpl.s   DEZMinibossPlatform_DrawDuringCatchDelay
+                move.l  #DEZMini_RiseToBossCatchHeight,(a0)
                 move.w  #-$400,y_vel(a0)
 
-loc_7E67A:
-                bra.w   loc_7EC46
+DEZMinibossPlatform_DrawDuringCatchDelay:
+                bra.w   DEZMini_ResolvePlatformTopSolid
 ; ---------------------------------------------------------------------------
 
-loc_7E67E:
+DEZMini_RiseToBossCatchHeight:
                 addi.w  #$20,y_vel(a0)
                 jsr     (MoveSprite2).l
                 movea.w parent3(a0),a1
                 move.w  y_pos(a1),d0
                 addi.w  #$C,d0
                 tst.w   y_vel(a0)
-                bpl.s   loc_7E6A2
+                bpl.s   DEZMini_ClampCatchAndClearJump
                 cmp.w   y_pos(a0),d0
-                blo.s   loc_7E6B2
+                blo.s   DEZMini_DrawAfterCatchMove
 
-loc_7E6A2:
+DEZMini_ClampCatchAndClearJump:
                 move.w  d0,y_pos(a0)
-                move.l  #loc_7E6B6,(a0)
+                move.l  #DEZMini_WaitBossReturnOrExpansion,(a0)
                 bclr    #2,$38(a1)
 
-loc_7E6B2:
-                bra.w   loc_7EC46
+DEZMini_DrawAfterCatchMove:
+                bra.w   DEZMini_ResolvePlatformTopSolid
 ; ---------------------------------------------------------------------------
 
-loc_7E6B6:
+DEZMini_WaitBossReturnOrExpansion:
                 movea.w parent3(a0),a1
                 btst    #7,$38(a1)
-                bne.w   loc_7E582
+                bne.w   DEZMinibossPlatform_BeginRadialExpansion
                 btst    #6,$38(a1)
-                beq.s   loc_7E6D0
+                beq.s   DEZMini_ProjectPlatformDuringHold
                 bsr.w   DEZMiniPlatform_RestoreIdleBySide
 
-loc_7E6D0:
-                bra.w   loc_7EBF2
+DEZMini_ProjectPlatformDuringHold:
+                bra.w   DEZMini_SyncPlatformOrbitPhase

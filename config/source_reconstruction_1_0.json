@@ -1239,9 +1239,15 @@
       "commits": ["62ddd28eb722143536358ec9d9206c59aee54d51"]
     },
     {
-      "id": "current-shorten-49-boss-ssz-knuckles",
+      "id": "change-410765b50087",
       "kind": "source_or_tooling",
       "summary": "Apply 136 reviewed short labels for boss ssz knuckles.",
+      "commits": ["410765b500879e56ea07318cf38affc6c38c424a"]
+    },
+    {
+      "id": "current-shorten-50-boss-dez-mini",
+      "kind": "source_or_tooling",
+      "summary": "Apply 197 reviewed short labels for boss dez mini.",
       "commits": ["release-commit"]
     }
   ],
