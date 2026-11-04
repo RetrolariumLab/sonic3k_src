@@ -29,15 +29,15 @@ S3Recovery_WrapHurtYIfEnabled:
                 and.w   d0,y_pos(a0)
 
 S3Recovery_ResolveHurtAndDraw:
-                bsr.w   PlayerS3ResolveCommonHurtLandingOrDeathPlane
+                bsr.w   S3Player_ResolveHurtLandingOrKill
                 bsr.w   Player_LevelBound
                 bsr.w   Sonic_RecordPos
-                bsr.w   PlayerS3AnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns
+                bsr.w   S3Player_AnimateRecoveryAndLoadArt
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-PlayerS3ResolveCommonHurtLandingOrDeathPlane:
+S3Player_ResolveHurtLandingOrKill:
                 tst.b   (Disable_death_plane).w
                 bne.s   S3Recovery_CheckHurtLandingAndReset
                 move.w  (Camera_max_Y_pos).w,d0
@@ -68,7 +68,7 @@ S3Recovery_HurtLandingReturn:
 
 S3Recovery_KillAtHurtDeathPlane:
                 jmp     (Kill_Character).l
-; End of function PlayerS3ResolveCommonHurtLandingOrDeathPlane
+; End of function S3Player_ResolveHurtLandingOrKill
 
 ; ---------------------------------------------------------------------------
 
@@ -83,15 +83,16 @@ S3Recovery_DeathState6:
 ; ---------------------------------------------------------------------------
 
 S3Recovery_ResolveDeathAndDraw:
-                bsr.w   PlayerS3FinishDeathWithFollowerResetRestartOrCompetitionRespawn
+                bsr.w   S3Player_FinishDeath
                 jsr     (MoveSprite).l
                 bsr.w   Sonic_RecordPos
-                bsr.w   PlayerS3AnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns
+                bsr.w   S3Player_AnimateRecoveryAndLoadArt
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-PlayerS3FinishDeathWithFollowerResetRestartOrCompetitionRespawn:
+; After the camera threshold, select follower catch-up, normal life and restart handling, or the saved competition spawn
+S3Player_FinishDeath:
                 cmpa.w  #Player_1,a0
                 bne.s   S3Recovery_LockP2ScrollAndReadCameraY
                 move.w  (Camera_Y_pos).w,d0
@@ -121,7 +122,7 @@ S3Recovery_TestNormalDeathDepth:
                 cmpi.w  #2,(Player_mode).w
                 beq.s   S3Recovery_ChargeLifeAndPrepRestart
                 move.b  #2,routine(a0)
-                bra.w   TailsS3ResetCPUFollowerToOffscreenCatchUp
+                bra.w   S3TailsCPU_BeginOffscreenCatchUp
 ; ---------------------------------------------------------------------------
 
 S3Recovery_ChargeLifeAndPrepRestart:
@@ -208,7 +209,7 @@ S3Recovery_ResetCompMotionAndSpeeds:
                 move.w  (a1)+,Acceleration-Max_speed(a4)
                 move.w  (a1)+,Deceleration-Max_speed(a4)
                 rts
-; End of function PlayerS3FinishDeathWithFollowerResetRestartOrCompetitionRespawn
+; End of function S3Player_FinishDeath
 
 ; ---------------------------------------------------------------------------
 
@@ -233,7 +234,7 @@ S3Recovery_ScrollWaitStateA:
                 move.b  #2,routine(a0)
 
 S3Recovery_DrawScrollWaitFrame:
-                bsr.w   PlayerS3AnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns
+                bsr.w   S3Player_AnimateRecoveryAndLoadArt
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -251,12 +252,13 @@ S3Recovery_MoveDrowningAndDraw:
                 jsr     (MoveSprite2).l
                 addi.w  #$10,y_vel(a0)
                 bsr.w   Sonic_RecordPos
-                bsr.w   PlayerS3AnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns
+                bsr.w   S3Player_AnimateRecoveryAndLoadArt
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-PlayerS3AnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns:
+; Dispatch to the competition animation and pattern loader when enabled
+S3Player_AnimateRecoveryAndLoadArt:
                 tst.w   (Competition_mode).w
                 bne.s   S3Recovery_AnimateCompAndLoadPatterns
                 bsr.s   Animate_Sonic
@@ -266,4 +268,4 @@ PlayerS3AnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns:
 S3Recovery_AnimateCompAndLoadPatterns:
                 bsr.w   Animate_SonicKnuckles_2P
                 bra.w   SonicKnuckles2P_Load_PLC
-; End of function PlayerS3AnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns
+; End of function S3Player_AnimateRecoveryAndLoadArt

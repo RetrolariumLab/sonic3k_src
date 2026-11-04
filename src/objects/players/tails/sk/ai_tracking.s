@@ -44,7 +44,7 @@ SKTailsAI_InitFromCheckpointOrStage:
                 bne.w   SKTailsAI_ResetMotionBeforeFollow
                 cmpi.w  #0,(Current_zone_and_act).w
                 bne.s   SKTailsAI_SelectEarlyStageStart
-                bsr.w   TailsSKResetCPUFollowerToOffscreenCatchUp
+                bsr.w   SKTailsCPU_BeginOffscreenCatchUp
                 move.w  #$A,(Tails_CPU_routine).w
                 move.b  #$83,object_control(a0)
                 rts
@@ -71,7 +71,7 @@ SKTailsAI_StartStageCarry:
 SKTailsAI_TryOffscreenStageStart:
                 cmpi.w  #$500,(Current_zone_and_act).w
                 bne.s   SKTailsAI_SelectLaterStageStart
-                bsr.w   TailsSKResetCPUFollowerToOffscreenCatchUp
+                bsr.w   SKTailsCPU_BeginOffscreenCatchUp
                 move.w  #$A,(Tails_CPU_routine).w
                 move.b  #$83,object_control(a0)
                 rts
@@ -96,7 +96,7 @@ SKTailsAI_SelectLateStageStart:
                 beq.w   SKTailsAI_StartFollowWithOwnControl
                 cmpi.w  #$A00,(Current_zone_and_act).w
                 bne.s   SKTailsAI_ChooseLateStageControl
-                bsr.w   TailsSKResetCPUFollowerToOffscreenCatchUp
+                bsr.w   SKTailsCPU_BeginOffscreenCatchUp
                 move.w  #$A,(Tails_CPU_routine).w
                 move.b  #$83,object_control(a0)
                 rts
@@ -321,7 +321,7 @@ SKTailsAI_CheckLeaderRoutineForFlight:
 ; ---------------------------------------------------------------------------
 
 SKTailsAI_CheckFollowInputEligibility:
-                bsr.w   TailsSKWatchCPUOffscreenTimeoutAndInteractionCode
+                bsr.w   SKTailsCPU_CheckCatchUpTriggers
                 tst.w   (Tails_CPU_idle_timer).w
                 bne.w   SKTailsAI_TickManualOverride
                 tst.b   object_control(a0)

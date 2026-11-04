@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-TailsSKResetCPUFollowerToOffscreenCatchUp:
+; Reset the AI timers and park Tails outside the playfield for flying catch-up
+SKTailsCPU_BeginOffscreenCatchUp:
                 move.w  #0,(Tails_CPU_idle_timer).w
                 move.w  #0,(Tails_CPU_flight_timer).w
                 move.w  #2,(Tails_CPU_routine).w
@@ -14,11 +15,12 @@ TailsSKResetCPUFollowerToOffscreenCatchUp:
                 move.w  #0,y_pos(a0)
                 move.b  #0,double_jump_flag(a0)
                 rts
-; End of function TailsSKResetCPUFollowerToOffscreenCatchUp
+; End of function SKTailsCPU_BeginOffscreenCatchUp
 
 ; =============== S U B R O U T I N E =======================================
 
-TailsSKWatchCPUOffscreenTimeoutAndInteractionCode:
+; Check the offscreen timeout and the standing object's code signature. Retain this engine's interaction snapshot
+SKTailsCPU_CheckCatchUpTriggers:
                 tst.b   render_flags(a0)
                 bmi.s   SKTailsScript_ClearTimeoutWhenVisible
                 btst    #Status_OnObj,status(a0)
@@ -35,7 +37,7 @@ SKTailsScript_TickOffscreenTimeout:
                 blo.s   SKTailsScript_ReadInteractCodeWord
 
 SKTailsScript_ResetToOffscreenCatchUp:
-                bra.w   TailsSKResetCPUFollowerToOffscreenCatchUp
+                bra.w   SKTailsCPU_BeginOffscreenCatchUp
 ; ---------------------------------------------------------------------------
 
 SKTailsScript_ClearTimeoutWhenVisible:
@@ -49,12 +51,12 @@ SKTailsScript_ReadInteractCodeWord:
 
 SKTailsScript_InteractSampleReturn:
                 rts
-; End of function TailsSKWatchCPUOffscreenTimeoutAndInteractionCode
+; End of function SKTailsCPU_CheckCatchUpTriggers
 
 ; ---------------------------------------------------------------------------
 
 SKTailsScript_CheckIdleSpinDash:
-                bsr.w   TailsSKWatchCPUOffscreenTimeoutAndInteractionCode
+                bsr.w   SKTailsCPU_CheckCatchUpTriggers
                 tst.w   (Tails_CPU_idle_timer).w
                 bne.w   SKTailsScript_IdleSpinDashReturn
                 tst.w   move_lock(a0)

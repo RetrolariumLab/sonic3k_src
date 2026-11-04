@@ -963,9 +963,15 @@
       "commits": ["6dd8c3fff22cdb0a74b880ce71eed6deac2e4926"]
     },
     {
-      "id": "current-shorten-L02-world",
+      "id": "change-b40718f4aa26",
       "kind": "source_or_tooling",
       "summary": "Shorten 93 earlier level, object and terrain procedure names with exact source bindings.",
+      "commits": ["b40718f4aa26df2a4151aea0a78771bd2b5a4c56"]
+    },
+    {
+      "id": "current-shorten-L03-player",
+      "kind": "source_or_tooling",
+      "summary": "Shorten 33 earlier player and collision entry points and document their recovery contracts.",
       "commits": ["release-commit"]
     }
   ],

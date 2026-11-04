@@ -210,7 +210,7 @@ SKSonicComp_CheckExtendedIdle:
 ; ---------------------------------------------------------------------------
 
 SKSonicComp_RunGroundMovement:
-                bsr.w   SonicSKHandleCompetitionSpindashAndAbortGroundStep
+                bsr.w   SKSonicComp_RunSpinDash
                 bsr.w   Sonic_Jump
                 bsr.w   Player_SlopeResist
                 bsr.w   Sonic_Move
@@ -317,7 +317,8 @@ SKSonicComp_InitRollReturn:
 
 ; =============== S U B R O U T I N E =======================================
 
-SonicSKHandleCompetitionSpindashAndAbortGroundStep:
+; On the active charge and release paths, discard the ground update return address
+SKSonicComp_RunSpinDash:
                 tst.b   spin_dash_flag(a0)
                 bne.s   SKSonicComp_ReleaseOrKeepCharging
                 cmpi.b  #8,anim(a0)
@@ -436,6 +437,6 @@ SKSonicComp_ReduceCameraDistanceBy2:
 SKSonicComp_AttachAfterSpinDash:
                 bsr.w   Player_AnglePos
                 rts
-; End of function SonicSKHandleCompetitionSpindashAndAbortGroundStep
+; End of function SKSonicComp_RunSpinDash
 
 ; ---------------------------------------------------------------------------

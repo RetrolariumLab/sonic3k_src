@@ -380,7 +380,7 @@
       "source": "src/game/collision/s3/solid_rectangles.s",
       "original_line": 185,
       "old": "sub_1BB7C",
-      "new": "CollidePlayersWithHeightProfileKeepAirState",
+      "new": "HeightProfile_CollideBothKeepAir",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Process both players against a full solid with a sampled height profile, preserving the release worker's distinct airborne-state policy."
     },
@@ -388,7 +388,7 @@
       "source": "src/game/collision/s3/solid_rectangles.s",
       "original_line": 197,
       "old": "sub_1BB92",
-      "new": "CollidePlayerWithHeightProfileKeepAirState",
+      "new": "HeightProfile_CollideOneKeepAir",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Maintain one rider or acquire full collision against a solid described by half-resolution height bytes. Preserve InAir on rider release."
     },
@@ -548,7 +548,7 @@
       "source": "src/game/collision/sk/solid_rectangles.s",
       "original_line": 185,
       "old": "sub_1DDC6",
-      "new": "CollidePlayersWithHeightProfileKeepAirState",
+      "new": "HeightProfile_CollideBothKeepAir",
       "profiles": ["sk"],
       "meaning": "Process both players against a full solid with a sampled height profile, preserving the release worker's distinct airborne-state policy."
     },
@@ -556,7 +556,7 @@
       "source": "src/game/collision/sk/solid_rectangles.s",
       "original_line": 197,
       "old": "sub_1DDDC",
-      "new": "CollidePlayerWithHeightProfileKeepAirState",
+      "new": "HeightProfile_CollideOneKeepAir",
       "profiles": ["sk"],
       "meaning": "Maintain one rider or acquire full collision against a solid described by half-resolution height bytes. Preserve InAir on rider release."
     },
@@ -7116,7 +7116,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 39,
       "old": "sub_1319C",
-      "new": "PlayerS3ResolveCommonHurtLandingOrDeathPlane",
+      "new": "S3Player_ResolveHurtLandingOrKill",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Resolve the common Sonic hurt-state terrain landing into normal control, or delegate death-plane crossing to Kill_Character."
     },
@@ -7124,7 +7124,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 93,
       "old": "sub_13230",
-      "new": "PlayerS3FinishDeathWithFollowerResetRestartOrCompetitionRespawn",
+      "new": "S3Player_FinishDeath",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Wait for the dead character to pass the camera threshold, then select companion catch-up, ordinary life/restart/text handling, or saved-position competition respawn."
     },
@@ -7132,7 +7132,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 255,
       "old": "sub_13438",
-      "new": "PlayerS3AnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns",
+      "new": "S3Player_AnimateRecoveryAndLoadArt",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Dispatch common recovery-state animation and pattern loading to normal Sonic or competition Sonic/Knuckles services, with normal SK reverse-gravity orientation."
     },
@@ -7140,7 +7140,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 39,
       "old": "sub_12318",
-      "new": "PlayerSKResolveCommonHurtLandingOrDeathPlane",
+      "new": "SKPlayer_ResolveHurtLandingOrKill",
       "profiles": ["sk"],
       "meaning": "Resolve the common Sonic hurt-state terrain landing into normal control, or delegate death-plane crossing to Kill_Character."
     },
@@ -7148,7 +7148,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 104,
       "old": "sub_123C2",
-      "new": "PlayerSKFinishDeathWithFollowerResetRestartOrCompetitionRespawn",
+      "new": "SKPlayer_FinishDeath",
       "profiles": ["sk"],
       "meaning": "Wait for the dead character to pass the camera threshold, then select companion catch-up, ordinary life/restart/text handling, or saved-position competition respawn."
     },
@@ -7156,7 +7156,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 277,
       "old": "sub_125E0",
-      "new": "PlayerSKAnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns",
+      "new": "SKPlayer_AnimateRecoveryAndLoadArt",
       "profiles": ["sk"],
       "meaning": "Dispatch common recovery-state animation and pattern loading to normal Sonic or competition Sonic/Knuckles services, with normal SK reverse-gravity orientation."
     },
@@ -7172,7 +7172,7 @@
       "source": "src/objects/players/ddz/sk/flight_helpers.s",
       "original_line": 7,
       "old": "sub_82742",
-      "new": "BeginDDZFlightFailureWhenSuperModeExpires",
+      "new": "DDZFlight_TryFailAfterSuperExpires",
       "profiles": ["sk"],
       "meaning": "Replace the flight controller with falling failure behavior once an already-transformed flight loses Super mode."
     },
@@ -7180,7 +7180,7 @@
       "source": "src/objects/players/ddz/sk/flight_helpers.s",
       "original_line": 29,
       "old": "sub_82772",
-      "new": "ComputeDDZFlightInputImpulseDragAndHitResponse",
+      "new": "DDZFlight_ComputeInputAndHitVel",
       "profiles": ["sk"],
       "meaning": "Compute P1 flight velocity from controller inertia, held direction, newly pressed action-button impulses and hit-response timer; return matching velocity WORDs for bounded controller integration."
     },
@@ -7188,7 +7188,7 @@
       "source": "src/objects/players/ddz/sk/flight_helpers.s",
       "original_line": 162,
       "old": "sub_828B2",
-      "new": "IntegrateDDZFlightWithinCameraRelativeWindows",
+      "new": "DDZFlight_IntegrateWithinView",
       "profiles": ["sk"],
       "meaning": "Apply computed8.8 flight velocity to controller16.16 positions only when candidate integer coordinates stay inside camera-relative windows, recording right-edge pressure for scroll boost."
     },
@@ -7196,7 +7196,7 @@
       "source": "src/objects/players/ddz/sk/flight_helpers.s",
       "original_line": 212,
       "old": "sub_82920",
-      "new": "AdvanceDDZFlightCameraAndCarryControllerByScrollDelta",
+      "new": "DDZFlight_AdvanceCameraAndCarry",
       "profiles": ["sk"],
       "meaning": "Advance the actual DDZ flight camera using accumulated speed/acceleration and conditional right-edge impulse boost, update horizontal limits, and carry controller X by the integer scroll delta."
     },
@@ -7204,7 +7204,7 @@
       "source": "src/objects/players/ddz/sk/flight_helpers.s",
       "original_line": 263,
       "old": "sub_829A0",
-      "new": "AdvanceDDZVirtualWorldScrollDuringBossStage",
+      "new": "DDZBoss_AdvanceVirtualScroll",
       "profiles": ["sk"],
       "meaning": "Advance a separate16.16 world-scroll accumulator during the stationary-camera boss stage and expose its integer delta to world actors."
     },
@@ -7212,7 +7212,7 @@
       "source": "src/objects/players/ddz/sk/flight_helpers.s",
       "original_line": 286,
       "old": "sub_829D2",
-      "new": "SyncDDZPlayerPositionAndApplyCameraDeadbands",
+      "new": "DDZFlight_SyncPlayerAndTrackCamera",
       "profiles": ["sk"],
       "meaning": "Copy controller integer XY to P1 and, when enabled, shift camera to keep that position inside horizontal/vertical deadbands constrained by camera limits."
     },
@@ -7228,7 +7228,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 393,
       "old": "sub_17D1E",
-      "new": "AnimateKnucklesApplyGravityFlipAndQueuePatterns",
+      "new": "Knux_AnimateRecoveryAndLoadArt",
       "profiles": ["sk"],
       "meaning": "Update Knuckles animation, apply reverse-gravity vertical render orientation and tail-call its dynamic pattern loader in hurt/death/transition states."
     },
@@ -7276,7 +7276,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 315,
       "old": "sub_11A64",
-      "new": "SonicS3HandleCompetitionSpindashAndAbortGroundStep",
+      "new": "S3SonicComp_RunSpinDash",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Start, charge or release a competition-player spindash, assigning launch speed/camera delay while bypassing the rest of the grounded movement state."
     },
@@ -7324,7 +7324,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 315,
       "old": "sub_1094C",
-      "new": "SonicSKHandleCompetitionSpindashAndAbortGroundStep",
+      "new": "SKSonicComp_RunSpinDash",
       "profiles": ["sk"],
       "meaning": "Start, charge or release a competition-player spindash, assigning launch speed/camera delay while bypassing the rest of the grounded movement state."
     },
@@ -7364,7 +7364,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 101,
       "old": "sub_11FD6",
-      "new": "CheckSKPlayerGravityRelativeFloorAndNormalizeAngle",
+      "new": "SKPlayer_ProbeGravityFloor",
       "profiles": ["sk"],
       "meaning": "Query the surface below the player in its current gravity direction, returning distances and an angle normalized into gravity-relative floor orientation."
     },
@@ -7372,7 +7372,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 113,
       "old": "sub_11FEE",
-      "new": "CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle",
+      "new": "SKPlayer_ProbeGravityCeiling",
       "profiles": ["sk"],
       "meaning": "Query the surface above the player relative to current gravity and normalize its returned angle for the common ceiling-contact logic."
     },
@@ -7380,7 +7380,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 7,
       "old": "sub_14B58",
-      "new": "TailsS3ResetCPUFollowerToOffscreenCatchUp",
+      "new": "S3TailsCPU_BeginOffscreenCatchUp",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Reset companion AI timers and place Tails out of the playfield, ready for the flying catch-up AI state."
     },
@@ -7388,7 +7388,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 21,
       "old": "sub_14B8A",
-      "new": "TailsS3WatchCPUOffscreenTimeoutAndInteractionCode",
+      "new": "S3TailsCPU_CheckCatchUpTriggers",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Detect a prolonged offscreen companion or changed standing-object code signature and request flying catch-up reset, retaining an engine-specific interaction snapshot."
     },
@@ -7412,7 +7412,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 222,
       "old": "sub_14104",
-      "new": "TailsS3UpdateCompetitionFlightFlapAndFatigue",
+      "new": "S3TailsComp_UpdateFlight",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Update Tails competition flight stamina, flap pulse state and vertical velocity, enforce the upper camera margin and request flying/tired sound."
     },
@@ -7428,7 +7428,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 378,
       "old": "sub_14276",
-      "new": "TailsS3HandleCompetitionSpindashAndAbortGroundStep",
+      "new": "S3TailsComp_RunSpinDash",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Start, maintain or release Tails competition spindash with launch speed and per-slot camera delay, skipping the remaining grounded movement state."
     },
@@ -7444,7 +7444,7 @@
       "source": "src/objects/players/tails/s3/damage_and_respawn.s",
       "original_line": 128,
       "old": "sub_16356",
-      "new": "TailsS3AnimateRecoveryStateAndDispatchPatternLoader",
+      "new": "S3Tails_AnimateRecoveryAndLoadArt",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Animate Tails in hurt/death/transition states with normal versus competition scripts and matching pattern loader, including normal SK reverse-gravity flip."
     },
@@ -7484,7 +7484,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 33,
       "old": "sub_167FA",
-      "new": "TailsS3StepCompetitionAnimationFrameBytecode",
+      "new": "S3TailsComp_StepAnimBytecode",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Consume one frame or loop/rewind/animation-change bytecode token from the selected competition Tails body/tail sequence."
     },
@@ -7492,7 +7492,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 7,
       "old": "sub_13ECA",
-      "new": "TailsSKResetCPUFollowerToOffscreenCatchUp",
+      "new": "SKTailsCPU_BeginOffscreenCatchUp",
       "profiles": ["sk"],
       "meaning": "Reset companion AI timers and place Tails out of the playfield, ready for the flying catch-up AI state."
     },
@@ -7500,7 +7500,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 21,
       "old": "sub_13EFC",
-      "new": "TailsSKWatchCPUOffscreenTimeoutAndInteractionCode",
+      "new": "SKTailsCPU_CheckCatchUpTriggers",
       "profiles": ["sk"],
       "meaning": "Detect a prolonged offscreen companion or changed standing-object code signature and request flying catch-up reset, retaining an engine-specific interaction snapshot."
     },
@@ -7524,7 +7524,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 222,
       "old": "sub_133AE",
-      "new": "TailsSKUpdateCompetitionFlightFlapAndFatigue",
+      "new": "SKTailsComp_UpdateFlight",
       "profiles": ["sk"],
       "meaning": "Update Tails competition flight stamina, flap pulse state and vertical velocity, enforce the upper camera margin and request flying/tired sound."
     },
@@ -7540,7 +7540,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 378,
       "old": "sub_13520",
-      "new": "TailsSKHandleCompetitionSpindashAndAbortGroundStep",
+      "new": "SKTailsComp_RunSpinDash",
       "profiles": ["sk"],
       "meaning": "Start, maintain or release Tails competition spindash with launch speed and per-slot camera delay, skipping the remaining grounded movement state."
     },
@@ -7556,7 +7556,7 @@
       "source": "src/objects/players/tails/sk/damage_and_respawn.s",
       "original_line": 163,
       "old": "sub_15842",
-      "new": "TailsSKAnimateRecoveryStateAndDispatchPatternLoader",
+      "new": "SKTails_AnimateRecoveryAndLoadArt",
       "profiles": ["sk"],
       "meaning": "Animate Tails in hurt/death/transition states with normal versus competition scripts and matching pattern loader, including normal SK reverse-gravity flip."
     },
@@ -7596,7 +7596,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 33,
       "old": "sub_15D1E",
-      "new": "TailsSKStepCompetitionAnimationFrameBytecode",
+      "new": "SKTailsComp_StepAnimBytecode",
       "profiles": ["sk"],
       "meaning": "Consume one frame or loop/rewind/animation-change bytecode token from the selected competition Tails body/tail sequence."
     },

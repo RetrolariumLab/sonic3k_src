@@ -29,7 +29,7 @@ S3TailsRecovery_ResolveHurtAndDraw:
                 bsr.w   TailsS3ResolveHurtLandingOrDeathPlane
                 bsr.w   Tails_Check_Screen_Boundaries
                 bsr.w   Sonic_RecordPos
-                bsr.w   TailsS3AnimateRecoveryStateAndDispatchPatternLoader
+                bsr.w   S3Tails_AnimateRecoveryAndLoadArt
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -78,10 +78,10 @@ S3TailsRecovery_ReleaseRiderOnDeath:
                 clr.w   (Flying_carrying_Sonic_flag).w
 
 S3TailsRecovery_ResolveDeathAndDraw:
-                bsr.w   PlayerS3FinishDeathWithFollowerResetRestartOrCompetitionRespawn
+                bsr.w   S3Player_FinishDeath
                 jsr     (MoveSprite).l
                 bsr.w   Sonic_RecordPos
-                bsr.w   TailsS3AnimateRecoveryStateAndDispatchPatternLoader
+                bsr.w   S3Tails_AnimateRecoveryAndLoadArt
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -105,7 +105,7 @@ S3TailsRecovery_CheckP2ScrollSettled:
                 move.b  #2,routine(a0)
 
 S3TailsRecovery_DrawScrollWaitFrame:
-                bsr.w   TailsS3AnimateRecoveryStateAndDispatchPatternLoader
+                bsr.w   S3Tails_AnimateRecoveryAndLoadArt
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -121,12 +121,13 @@ S3TailsRecovery_MoveDrowningAndDraw:
                 jsr     (MoveSprite2).l
                 addi.w  #$10,y_vel(a0)
                 bsr.w   Sonic_RecordPos
-                bsr.w   TailsS3AnimateRecoveryStateAndDispatchPatternLoader
+                bsr.w   S3Tails_AnimateRecoveryAndLoadArt
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-TailsS3AnimateRecoveryStateAndDispatchPatternLoader:
+; Dispatch to the competition animation and pattern loader when enabled
+S3Tails_AnimateRecoveryAndLoadArt:
                 tst.w   (Competition_mode).w
                 bne.s   S3TailsRecovery_AnimateCompAndLoadArt
                 bsr.s   Animate_Tails
@@ -136,4 +137,4 @@ TailsS3AnimateRecoveryStateAndDispatchPatternLoader:
 S3TailsRecovery_AnimateCompAndLoadArt:
                 bsr.w   Animate_Tails2P
                 bra.w   Tails2P_Load_PLC
-; End of function TailsS3AnimateRecoveryStateAndDispatchPatternLoader
+; End of function S3Tails_AnimateRecoveryAndLoadArt

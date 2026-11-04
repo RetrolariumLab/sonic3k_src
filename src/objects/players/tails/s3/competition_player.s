@@ -181,7 +181,7 @@ S3TailsComp_MovementModeOffsets:
 ; ---------------------------------------------------------------------------
 
 S3TailsComp_RunGroundMovement:
-                bsr.w   TailsS3HandleCompetitionSpindashAndAbortGroundStep
+                bsr.w   S3TailsComp_RunSpinDash
                 bsr.w   Tails_Jump
                 bsr.w   Tails_SlopeResist
                 bsr.w   Tails_InputAcceleration_Path
@@ -211,7 +211,7 @@ S3TailsComp_ResolveAirTerrain:
 ; ---------------------------------------------------------------------------
 
 S3TailsComp_RunFlightMovement:
-                bsr.w   TailsS3UpdateCompetitionFlightFlapAndFatigue
+                bsr.w   S3TailsComp_UpdateFlight
                 bsr.w   Tails_InputAcceleration_Freespace
                 jsr     (MoveSprite2).l
                 bsr.w   Tails_JumpAngle
@@ -222,7 +222,8 @@ S3TailsComp_RunFlightMovement:
 
 ; =============== S U B R O U T I N E =======================================
 
-TailsS3UpdateCompetitionFlightFlapAndFatigue:
+; Update stamina, flap state and Y speed, cap ascent at the camera margin and play the normal or tired sound
+S3TailsComp_UpdateFlight:
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #1,d0
                 beq.s   S3TailsComp_TickFlap
@@ -300,7 +301,7 @@ S3TailsComp_TryFlightSoundEvery16:
 
 S3TailsComp_FlightSoundReturn:
                 rts
-; End of function TailsS3UpdateCompetitionFlightFlapAndFatigue
+; End of function S3TailsComp_UpdateFlight
 
 ; ---------------------------------------------------------------------------
 
@@ -379,7 +380,8 @@ S3TailsComp_InitRollReturn:
 
 ; =============== S U B R O U T I N E =======================================
 
-TailsS3HandleCompetitionSpindashAndAbortGroundStep:
+; Charging or release can skip the rest of the ground update. Launch uses the camera delay for this player slot
+S3TailsComp_RunSpinDash:
                 tst.b   spin_dash_flag(a0)
                 bne.s   S3TailsComp_ReleaseOrKeepCharging
                 cmpi.b  #8,anim(a0)
@@ -489,6 +491,6 @@ S3TailsComp_ReduceCameraDistanceBy2:
 S3TailsComp_AttachAfterSpinDash:
                 bsr.w   Player_AnglePos
                 rts
-; End of function TailsS3HandleCompetitionSpindashAndAbortGroundStep
+; End of function S3TailsComp_RunSpinDash
 
 ; ---------------------------------------------------------------------------

@@ -4188,7 +4188,7 @@
       "responsibility": "Rectangular solid-platform collision variants, offsets and player attachment motion.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 623,
+      "physical_lines": 624,
       "origin": {
         "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
         "path": "s3.s",
@@ -4493,7 +4493,7 @@
       "responsibility": "Rectangular solid-platform collision variants, offsets and player attachment motion.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 690,
+      "physical_lines": 691,
       "origin": {
         "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
         "path": "sonic3k.s",
@@ -27209,7 +27209,7 @@
       "responsibility": "Existing shared player hurt, death, speed restoration, restart and animation dispatch state.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 269,
+      "physical_lines": 271,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "s3.s",
@@ -27409,7 +27409,7 @@
       "responsibility": "Existing shared player hurt, death, speed restoration, restart and animation dispatch state.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 297,
+      "physical_lines": 299,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "sonic3k.s",
@@ -27549,7 +27549,7 @@
       "responsibility": "Doomsday player motion, ring or state updates, camera synchronization and controller helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 363,
+      "physical_lines": 369,
       "origin": {
         "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
         "path": "sonic3k.s",
@@ -27614,7 +27614,7 @@
       "responsibility": "Knuckles hurt, death, recovery, restart and collision response states.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 405,
+      "physical_lines": 406,
       "origin": {
         "commit": "82531d7389a6c4d2dad09fdb6c482c351281095b",
         "path": "sonic3k.s",
@@ -27924,7 +27924,7 @@
       "responsibility": "Competition Sonic object dispatch, player initialization and shared two-player movement helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 446,
+      "physical_lines": 447,
       "origin": {
         "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
         "path": "s3.s",
@@ -28244,7 +28244,7 @@
       "responsibility": "Competition Sonic object dispatch, player initialization and shared two-player movement helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 441,
+      "physical_lines": 442,
       "origin": {
         "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
         "path": "sonic3k.s",
@@ -28434,7 +28434,7 @@
       "responsibility": "Sonic or Knuckles terrain collision, landing attachment and bubble shield bounce response.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 403,
+      "physical_lines": 405,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "sonic3k.s",
@@ -28464,7 +28464,7 @@
       "responsibility": "Follower reset and interaction helpers, idle spindash and level-scripted flight or carrying sequences.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 422,
+      "physical_lines": 424,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "s3.s",
@@ -28669,7 +28669,7 @@
       "responsibility": "Competition Tails object dispatch, active control, flying and two-player movement helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 494,
+      "physical_lines": 496,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "s3.s",
@@ -28709,7 +28709,7 @@
       "responsibility": "Tails hurt, death, restart and recovery animation dispatch.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 139,
+      "physical_lines": 140,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "s3.s",
@@ -29109,7 +29109,7 @@
       "responsibility": "Follower reset and interaction helpers, idle spindash and level-scripted flight or carrying sequences.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 428,
+      "physical_lines": 430,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "sonic3k.s",
@@ -29264,7 +29264,7 @@
       "responsibility": "Competition Tails object dispatch, active control, flying and two-player movement helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 494,
+      "physical_lines": 496,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "sonic3k.s",
@@ -29294,7 +29294,7 @@
       "responsibility": "Tails hurt, death, restart and recovery animation dispatch.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 179,
+      "physical_lines": 180,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "sonic3k.s",

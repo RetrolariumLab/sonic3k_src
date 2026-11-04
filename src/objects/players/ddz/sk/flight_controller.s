@@ -4,7 +4,7 @@
 ; ---------------------------------------------------------------------------
 
 loc_81492:
-                bsr.w   BeginDDZFlightFailureWhenSuperModeExpires
+                bsr.w   DDZFlight_TryFailAfterSuperExpires
                 moveq   #0,d0
                 move.b  routine(a0),d0
                 move.w  off_81514(pc,d0.w),d1
@@ -19,8 +19,8 @@ loc_81492:
 loc_814B8:
                 tst.w   d1
                 bne.s   locret_81512
-                bsr.w   AdvanceDDZFlightCameraAndCarryControllerByScrollDelta
-                bsr.w   SyncDDZPlayerPositionAndApplyCameraDeadbands
+                bsr.w   DDZFlight_AdvanceCameraAndCarry
+                bsr.w   DDZFlight_SyncPlayerAndTrackCamera
                 btst    #1,(_unkFAB8).w
                 beq.s   locret_81512
                 move.l  #loc_816FC,(a0)
@@ -177,16 +177,16 @@ loc_816E8:
 ; ---------------------------------------------------------------------------
 
 loc_816F4:
-                bsr.w   ComputeDDZFlightInputImpulseDragAndHitResponse
-                bra.w   IntegrateDDZFlightWithinCameraRelativeWindows
+                bsr.w   DDZFlight_ComputeInputAndHitVel
+                bra.w   DDZFlight_IntegrateWithinView
 ; ---------------------------------------------------------------------------
 
 loc_816FC:
-                bsr.w   BeginDDZFlightFailureWhenSuperModeExpires
-                bsr.w   ComputeDDZFlightInputImpulseDragAndHitResponse
-                bsr.w   IntegrateDDZFlightWithinCameraRelativeWindows
-                bsr.w   AdvanceDDZVirtualWorldScrollDuringBossStage
-                bsr.w   SyncDDZPlayerPositionAndApplyCameraDeadbands
+                bsr.w   DDZFlight_TryFailAfterSuperExpires
+                bsr.w   DDZFlight_ComputeInputAndHitVel
+                bsr.w   DDZFlight_IntegrateWithinView
+                bsr.w   DDZBoss_AdvanceVirtualScroll
+                bsr.w   DDZFlight_SyncPlayerAndTrackCamera
                 btst    #0,(_unkFAB8).w
                 beq.s   locret_81724
                 move.l  #loc_81726,(a0)
@@ -221,9 +221,9 @@ loc_8174E:
                 sub.w   d1,x_pos(a0)
 
 loc_81770:
-                bsr.w   BeginDDZFlightFailureWhenSuperModeExpires
-                bsr.w   ComputeDDZFlightInputImpulseDragAndHitResponse
-                bsr.w   IntegrateDDZFlightWithinCameraRelativeWindows
+                bsr.w   DDZFlight_TryFailAfterSuperExpires
+                bsr.w   DDZFlight_ComputeInputAndHitVel
+                bsr.w   DDZFlight_IntegrateWithinView
                 move.w  (_unkFABC).w,d0
                 move.w  (Debug_placement_mode).w,d1
                 move.w  d1,(_unkFABC).w
@@ -234,8 +234,8 @@ loc_81770:
 loc_81790:
                 tst.w   d1
                 bne.w   locret_82ABA
-                bsr.w   AdvanceDDZFlightCameraAndCarryControllerByScrollDelta
-                bra.w   SyncDDZPlayerPositionAndApplyCameraDeadbands
+                bsr.w   DDZFlight_AdvanceCameraAndCarry
+                bra.w   DDZFlight_SyncPlayerAndTrackCamera
 ; ---------------------------------------------------------------------------
 
 loc_8179E:

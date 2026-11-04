@@ -41,7 +41,7 @@ SKTailsRecovery_ResolveHurtAndDraw:
                 bsr.w   TailsSKResolveHurtLandingOrDeathPlane
                 bsr.w   Tails_Check_Screen_Boundaries
                 bsr.w   Sonic_RecordPos
-                bsr.w   TailsSKAnimateRecoveryStateAndDispatchPatternLoader
+                bsr.w   SKTails_AnimateRecoveryAndLoadArt
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -113,10 +113,10 @@ SKTailsRecovery_ReleaseRiderOnDeath:
                 clr.w   (Flying_carrying_Sonic_flag).w
 
 SKTailsRecovery_ResolveDeathAndDraw:
-                bsr.w   PlayerSKFinishDeathWithFollowerResetRestartOrCompetitionRespawn
+                bsr.w   SKPlayer_FinishDeath
                 jsr     (MoveSprite_TestGravity).l
                 bsr.w   Sonic_RecordPos
-                bsr.w   TailsSKAnimateRecoveryStateAndDispatchPatternLoader
+                bsr.w   SKTails_AnimateRecoveryAndLoadArt
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -140,7 +140,7 @@ SKTailsRecovery_CheckP2ScrollSettled:
                 move.b  #2,routine(a0)
 
 SKTailsRecovery_DrawScrollWaitFrame:
-                bsr.w   TailsSKAnimateRecoveryStateAndDispatchPatternLoader
+                bsr.w   SKTails_AnimateRecoveryAndLoadArt
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -156,12 +156,13 @@ SKTailsRecovery_MoveDrowningAndDraw:
                 jsr     (MoveSprite_TestGravity2).l
                 addi.w  #$10,y_vel(a0)
                 bsr.w   Sonic_RecordPos
-                bsr.w   TailsSKAnimateRecoveryStateAndDispatchPatternLoader
+                bsr.w   SKTails_AnimateRecoveryAndLoadArt
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-TailsSKAnimateRecoveryStateAndDispatchPatternLoader:
+; Dispatch to the competition animation and pattern loader when enabled. Normal mode mirrors the vertical render flag under reverse gravity
+SKTails_AnimateRecoveryAndLoadArt:
                 tst.w   (Competition_mode).w
                 bne.s   SKTailsRecovery_AnimateCompAndLoadArt
                 bsr.s   Animate_Tails
@@ -176,4 +177,4 @@ SKTailsRecovery_LoadRecoveryPatterns:
 SKTailsRecovery_AnimateCompAndLoadArt:
                 bsr.w   Animate_Tails2P
                 bra.w   Tails2P_Load_PLC
-; End of function TailsSKAnimateRecoveryStateAndDispatchPatternLoader
+; End of function SKTails_AnimateRecoveryAndLoadArt

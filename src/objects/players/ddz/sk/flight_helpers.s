@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-BeginDDZFlightFailureWhenSuperModeExpires:
+; Require the controller's transformed latch before switching to the falling failure state
+DDZFlight_TryFailAfterSuperExpires:
                 btst    #7,$38(a0)
                 beq.s   locret_82750
                 tst.b   (Super_Sonic_Knux_flag).w
@@ -22,11 +23,12 @@ loc_82752:
                 move.b  #$81,object_control(a1)
                 move.b  #$1A,anim(a1)
                 rts
-; End of function BeginDDZFlightFailureWhenSuperModeExpires
+; End of function DDZFlight_TryFailAfterSuperExpires
 
 ; =============== S U B R O U T I N E =======================================
 
-ComputeDDZFlightInputImpulseDragAndHitResponse:
+; Combine held input, new button impulses, drag and hit response. Publish velocity to Player 1 and return it in d2.w and d3.w
+DDZFlight_ComputeInputAndHitVel:
                 lea     (Player_1).w,a1
                 tst.b   invulnerability_timer(a1)
                 beq.s   loc_827A0
@@ -119,7 +121,7 @@ loc_82828:
                 move.w  d2,x_vel(a1)
                 move.w  d3,y_vel(a1)
                 rts
-; End of function ComputeDDZFlightInputImpulseDragAndHitResponse
+; End of function DDZFlight_ComputeInputAndHitVel
 
 ; ---------------------------------------------------------------------------
 word_82832:                                             ; neither A, B, nor C are pressed
@@ -159,7 +161,8 @@ word_82872:                                             ; either A, B, or C is p
 
 ; =============== S U B R O U T I N E =======================================
 
-IntegrateDDZFlightWithinCameraRelativeWindows:
+; Integrate 8.8 velocity into 16.16 position within camera-relative windows. Record pressure at the right edge for scroll boost
+DDZFlight_IntegrateWithinView:
                 tst.w   d2
                 beq.s   loc_828EE
                 move.l  x_pos(a0),d0
@@ -205,11 +208,12 @@ loc_828EE:
 
 locret_8291E:
                 rts
-; End of function IntegrateDDZFlightWithinCameraRelativeWindows
+; End of function DDZFlight_IntegrateWithinView
 
 ; =============== S U B R O U T I N E =======================================
 
-AdvanceDDZFlightCameraAndCarryControllerByScrollDelta:
+; Apply accumulated scroll speed and right-edge boost, update X limits and carry the controller by the integer camera delta
+DDZFlight_AdvanceCameraAndCarry:
                 move.l  (_unkFA82).w,d0
                 add.l   (_unkFA8A).w,d0
                 move.l  #$60000,d2
@@ -256,11 +260,12 @@ loc_82964:
                 add.w   d1,d2
                 move.w  d2,x_pos(a0)
                 rts
-; End of function AdvanceDDZFlightCameraAndCarryControllerByScrollDelta
+; End of function DDZFlight_AdvanceCameraAndCarry
 
 ; =============== S U B R O U T I N E =======================================
 
-AdvanceDDZVirtualWorldScrollDuringBossStage:
+; Keep the actual camera fixed and publish the integer delta from a separate 16.16 world accumulator
+DDZBoss_AdvanceVirtualScroll:
                 move.l  (_unkFA82).w,d0
                 add.l   (_unkFA8A).w,d0
                 cmpi.l  #$60000,d0
@@ -279,11 +284,12 @@ loc_829B4:
                 sub.w   d2,d1
                 move.w  d1,(_unkFA90).w
                 rts
-; End of function AdvanceDDZVirtualWorldScrollDuringBossStage
+; End of function DDZBoss_AdvanceVirtualScroll
 
 ; =============== S U B R O U T I N E =======================================
 
-SyncDDZPlayerPositionAndApplyCameraDeadbands:
+; Copy controller coordinates to Player 1. When tracking is enabled, apply the camera deadbands within both axis limits
+DDZFlight_SyncPlayerAndTrackCamera:
                 lea     (Player_1).w,a1
                 move.w  (Camera_X_pos).w,d0
                 move.w  d0,d1
@@ -360,4 +366,4 @@ loc_82A7A:
 
 locret_82A80:
                 rts
-; End of function SyncDDZPlayerPositionAndApplyCameraDeadbands
+; End of function DDZFlight_SyncPlayerAndTrackCamera

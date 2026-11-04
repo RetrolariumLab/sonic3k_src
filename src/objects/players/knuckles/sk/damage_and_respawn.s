@@ -39,7 +39,7 @@ SKKnuxGlideHit_CheckDefaultRightWall:
                 bset    #Status_Push,(Gliding_collision_flags).w
 
 SKKnuxGlideHit_ProbeDefaultFloor:
-                bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
+                bsr.w   SKPlayer_ProbeGravityFloor
                 tst.w   d1
                 bpl.s   SKKnuxGlideHit_DefaultFloorReturn
                 tst.b   (Reverse_gravity_flag).w
@@ -66,7 +66,7 @@ SKKnuxGlideHit_CheckLeftSectorWall:
                 bset    #Status_Push,(Gliding_collision_flags).w
 
 SKKnuxGlideHit_CheckLeftSectorCeiling:
-                bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
+                bsr.w   SKPlayer_ProbeGravityCeiling
                 tst.w   d1
                 bpl.s   SKKnuxGlideHit_TryLeftSectorFloor
                 neg.w   d1
@@ -102,7 +102,7 @@ SKKnuxGlideHit_DeepCeilingWallReturn:
 SKKnuxGlideHit_TryLeftSectorFloor:
                 tst.w   y_vel(a0)
                 bmi.s   SKKnuxGlideHit_LeftFloorReturn
-                bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
+                bsr.w   SKPlayer_ProbeGravityFloor
                 tst.w   d1
                 bpl.s   SKKnuxGlideHit_LeftFloorReturn
                 tst.b   (Reverse_gravity_flag).w
@@ -136,7 +136,7 @@ SKKnuxGlideHit_CheckUpwardRightWall:
                 bset    #Status_Push,(Gliding_collision_flags).w
 
 SKKnuxGlideHit_ProbeUpwardSectorCeiling:
-                bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
+                bsr.w   SKPlayer_ProbeGravityCeiling
                 tst.w   d1
                 bpl.s   SKKnuxGlideHit_UpwardCeilingReturn
                 tst.b   (Reverse_gravity_flag).w
@@ -160,7 +160,7 @@ SKKnuxGlideHit_CheckRightSectorWall:
                 bset    #Status_Push,(Gliding_collision_flags).w
 
 SKKnuxGlideHit_CheckRightSectorCeiling:
-                bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
+                bsr.w   SKPlayer_ProbeGravityCeiling
                 tst.w   d1
                 bpl.s   SKKnuxGlideHit_TryRightSectorFloor
                 tst.b   (Reverse_gravity_flag).w
@@ -180,7 +180,7 @@ SKKnuxGlideHit_RightCeilingReturn:
 SKKnuxGlideHit_TryRightSectorFloor:
                 tst.w   y_vel(a0)
                 bmi.s   SKKnuxGlideHit_RightFloorReturn
-                bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
+                bsr.w   SKPlayer_ProbeGravityFloor
                 tst.w   d1
                 bpl.s   SKKnuxGlideHit_RightFloorReturn
                 tst.b   (Reverse_gravity_flag).w
@@ -281,7 +281,7 @@ SKKnuxRecovery_ResolveHurtAndDraw:
                 bsr.w   ResolveKnucklesHurtLandingOrDeathPlane
                 bsr.w   Player_LevelBound
                 bsr.w   Sonic_RecordPos
-                bsr.w   AnimateKnucklesApplyGravityFlipAndQueuePatterns
+                bsr.w   Knux_AnimateRecoveryAndLoadArt
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -344,10 +344,10 @@ SKKnuxRecovery_CheckDeathDebugEntry:
 ; ---------------------------------------------------------------------------
 
 SKKnuxRecovery_ResolveDeathAndDraw:
-                bsr.w   PlayerSKFinishDeathWithFollowerResetRestartOrCompetitionRespawn
+                bsr.w   SKPlayer_FinishDeath
                 jsr     (MoveSprite_TestGravity).l
                 bsr.w   Sonic_RecordPos
-                bsr.w   AnimateKnucklesApplyGravityFlipAndQueuePatterns
+                bsr.w   Knux_AnimateRecoveryAndLoadArt
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -371,7 +371,7 @@ SKKnuxRecovery_CheckP1ScrollSettled:
                 move.b  #2,routine(a0)
 
 SKKnuxRecovery_DrawScrollWaitFrame:
-                bsr.w   AnimateKnucklesApplyGravityFlipAndQueuePatterns
+                bsr.w   Knux_AnimateRecoveryAndLoadArt
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -389,12 +389,13 @@ SKKnuxRecovery_MoveDrowningAndDraw:
                 jsr     (MoveSprite_TestGravity2).l
                 addi.w  #$10,y_vel(a0)
                 bsr.w   Sonic_RecordPos
-                bsr.w   AnimateKnucklesApplyGravityFlipAndQueuePatterns
+                bsr.w   Knux_AnimateRecoveryAndLoadArt
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-AnimateKnucklesApplyGravityFlipAndQueuePatterns:
+; Mirror vertical rendering after animation when gravity is reversed. Tail-call the normal pattern loader
+Knux_AnimateRecoveryAndLoadArt:
                 bsr.s   Animate_Knuckles
                 tst.b   (Reverse_gravity_flag).w
                 beq.s   SKKnuxRecovery_LoadRecoveryPatterns
@@ -402,4 +403,4 @@ AnimateKnucklesApplyGravityFlipAndQueuePatterns:
 
 SKKnuxRecovery_LoadRecoveryPatterns:
                 bra.w   Knuckles_Load_PLC
-; End of function AnimateKnucklesApplyGravityFlipAndQueuePatterns
+; End of function Knux_AnimateRecoveryAndLoadArt

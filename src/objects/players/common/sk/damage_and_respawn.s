@@ -29,15 +29,15 @@ SKRecovery_WrapHurtYIfEnabled:
                 and.w   d0,y_pos(a0)
 
 SKRecovery_ResolveHurtAndDraw:
-                bsr.w   PlayerSKResolveCommonHurtLandingOrDeathPlane
+                bsr.w   SKPlayer_ResolveHurtLandingOrKill
                 bsr.w   Player_LevelBound
                 bsr.w   Sonic_RecordPos
-                bsr.w   PlayerSKAnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns
+                bsr.w   SKPlayer_AnimateRecoveryAndLoadArt
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-PlayerSKResolveCommonHurtLandingOrDeathPlane:
+SKPlayer_ResolveHurtLandingOrKill:
                 tst.b   (Disable_death_plane).w
                 bne.s   SKRecovery_CheckHurtLandingAndReset
                 tst.b   (Reverse_gravity_flag).w
@@ -80,7 +80,7 @@ SKRecovery_HurtLandingReturn:
 
 SKRecovery_KillAtHurtDeathPlane:
                 jmp     (Kill_Character).l
-; End of function PlayerSKResolveCommonHurtLandingOrDeathPlane
+; End of function SKPlayer_ResolveHurtLandingOrKill
 
 ; ---------------------------------------------------------------------------
 
@@ -95,15 +95,16 @@ SKRecovery_DeathState6:
 ; ---------------------------------------------------------------------------
 
 SKRecovery_ResolveDeathAndDraw:
-                bsr.w   PlayerSKFinishDeathWithFollowerResetRestartOrCompetitionRespawn
+                bsr.w   SKPlayer_FinishDeath
                 jsr     (MoveSprite_TestGravity).l
                 bsr.w   Sonic_RecordPos
-                bsr.w   PlayerSKAnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns
+                bsr.w   SKPlayer_AnimateRecoveryAndLoadArt
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-PlayerSKFinishDeathWithFollowerResetRestartOrCompetitionRespawn:
+; After the camera threshold, select follower catch-up, normal life and restart handling, or the saved competition spawn
+SKPlayer_FinishDeath:
                 cmpa.w  #Player_1,a0
                 bne.s   SKRecovery_LockP2ScrollAndReadCameraY
                 move.w  (Camera_Y_pos).w,d0
@@ -144,7 +145,7 @@ SKRecovery_DispatchDeathOutcome:
                 cmpi.w  #2,(Player_mode).w
                 beq.s   SKRecovery_ChargeLifeAndPrepRestart
                 move.b  #2,routine(a0)
-                bra.w   TailsSKResetCPUFollowerToOffscreenCatchUp
+                bra.w   SKTailsCPU_BeginOffscreenCatchUp
 ; ---------------------------------------------------------------------------
 
 SKRecovery_ChargeLifeAndPrepRestart:
@@ -231,7 +232,7 @@ SKRecovery_ResetCompMotionAndSpeeds:
                 move.w  (a1)+,Acceleration-Max_speed(a4)
                 move.w  (a1)+,Deceleration-Max_speed(a4)
                 rts
-; End of function PlayerSKFinishDeathWithFollowerResetRestartOrCompetitionRespawn
+; End of function SKPlayer_FinishDeath
 
 ; ---------------------------------------------------------------------------
 
@@ -256,7 +257,7 @@ SKRecovery_ScrollWaitStateA:
                 move.b  #2,routine(a0)
 
 SKRecovery_DrawScrollWaitFrame:
-                bsr.w   PlayerSKAnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns
+                bsr.w   SKPlayer_AnimateRecoveryAndLoadArt
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -274,12 +275,13 @@ SKRecovery_MoveDrowningAndDraw:
                 jsr     (MoveSprite_TestGravity2).l
                 addi.w  #$10,y_vel(a0)
                 bsr.w   Sonic_RecordPos
-                bsr.w   PlayerSKAnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns
+                bsr.w   SKPlayer_AnimateRecoveryAndLoadArt
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-PlayerSKAnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns:
+; Dispatch to the competition animation and pattern loader when enabled. Normal mode mirrors the vertical render flag under reverse gravity
+SKPlayer_AnimateRecoveryAndLoadArt:
                 tst.w   (Competition_mode).w
                 bne.s   SKRecovery_AnimateCompAndLoadPatterns
                 bsr.s   Animate_Sonic
@@ -294,4 +296,4 @@ SKRecovery_LoadRecoverySonicPatterns:
 SKRecovery_AnimateCompAndLoadPatterns:
                 bsr.w   Animate_SonicKnuckles_2P
                 bra.w   SonicKnuckles2P_Load_PLC
-; End of function PlayerSKAnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns
+; End of function SKPlayer_AnimateRecoveryAndLoadArt

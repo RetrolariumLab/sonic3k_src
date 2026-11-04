@@ -245,7 +245,7 @@ loc_29914:
                 moveq   #0,d2
                 move.b  height_pixels(a0),d2
                 move.w  x_pos(a0),d4
-                jsr     (CollidePlayersWithHeightProfileKeepAirState).l
+                jsr     (HeightProfile_CollideBothKeepAir).l
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
                 bne.s   loc_29956

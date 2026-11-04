@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-TailsS3ResetCPUFollowerToOffscreenCatchUp:
+; Reset the AI timers and park Tails outside the playfield for flying catch-up
+S3TailsCPU_BeginOffscreenCatchUp:
                 move.w  #0,(Tails_CPU_idle_timer).w
                 move.w  #0,(Tails_CPU_flight_timer).w
                 move.w  #2,(Tails_CPU_routine).w
@@ -14,11 +15,12 @@ TailsS3ResetCPUFollowerToOffscreenCatchUp:
                 move.w  #0,y_pos(a0)
                 move.b  #0,double_jump_flag(a0)
                 rts
-; End of function TailsS3ResetCPUFollowerToOffscreenCatchUp
+; End of function S3TailsCPU_BeginOffscreenCatchUp
 
 ; =============== S U B R O U T I N E =======================================
 
-TailsS3WatchCPUOffscreenTimeoutAndInteractionCode:
+; Check the offscreen timeout and the standing object's code signature. Retain this engine's interaction snapshot
+S3TailsCPU_CheckCatchUpTriggers:
                 tst.b   render_flags(a0)
                 bmi.s   S3TailsScript_ClearTimeoutWhenVisible
                 btst    #Status_OnObj,status(a0)
@@ -35,7 +37,7 @@ S3TailsScript_TickOffscreenTimeout:
                 blo.s   S3TailsScript_ReadInteractCodeWord
 
 S3TailsScript_ResetToOffscreenCatchUp:
-                bra.w   TailsS3ResetCPUFollowerToOffscreenCatchUp
+                bra.w   S3TailsCPU_BeginOffscreenCatchUp
 ; ---------------------------------------------------------------------------
 
 S3TailsScript_ClearTimeoutWhenVisible:
@@ -45,12 +47,12 @@ S3TailsScript_ReadInteractCodeWord:
                 movea.w interact(a0),a3
                 move.w  (a3),(Tails_CPU_interact).w
                 rts
-; End of function TailsS3WatchCPUOffscreenTimeoutAndInteractionCode
+; End of function S3TailsCPU_CheckCatchUpTriggers
 
 ; ---------------------------------------------------------------------------
 
 S3TailsScript_CheckIdleSpinDash:
-                bsr.w   TailsS3WatchCPUOffscreenTimeoutAndInteractionCode
+                bsr.w   S3TailsCPU_CheckCatchUpTriggers
                 tst.w   (Tails_CPU_idle_timer).w
                 bne.w   S3TailsScript_IdleSpinDashReturn
                 tst.w   move_lock(a0)

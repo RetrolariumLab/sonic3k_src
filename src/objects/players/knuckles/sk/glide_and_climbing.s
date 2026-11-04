@@ -341,7 +341,7 @@ Knuckles_Sliding:
                 bsr.w   Knux_DoLevelCollision_CheckRet
 
 ; Get distance from floor in 'd1', and angle of floor in 'd3'
-                bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
+                bsr.w   SKPlayer_ProbeGravityFloor
 
 ; If the distance from the floor is suddenly really high, then
 ; Knuckles must have slid off a ledge, so make him enter his falling

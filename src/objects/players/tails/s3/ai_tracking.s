@@ -44,7 +44,7 @@ S3TailsAI_InitFromCheckpointOrStage:
                 bne.w   S3TailsAI_ResetMotionBeforeFollow
                 cmpi.w  #0,(Current_zone_and_act).w
                 bne.s   S3TailsAI_SelectEarlyStageStart
-                bsr.w   TailsS3ResetCPUFollowerToOffscreenCatchUp
+                bsr.w   S3TailsCPU_BeginOffscreenCatchUp
                 move.w  #$A,(Tails_CPU_routine).w
                 move.b  #$83,object_control(a0)
                 rts
@@ -69,7 +69,7 @@ S3TailsAI_SelectEarlyStageStart:
 S3TailsAI_TryOffscreenStageStart:
                 cmpi.w  #$500,(Current_zone_and_act).w
                 bne.s   S3TailsAI_SelectLaterStageStart
-                bsr.w   TailsS3ResetCPUFollowerToOffscreenCatchUp
+                bsr.w   S3TailsCPU_BeginOffscreenCatchUp
                 move.w  #$A,(Tails_CPU_routine).w
                 move.b  #$83,object_control(a0)
                 rts
@@ -281,7 +281,7 @@ S3TailsAI_CheckLeaderRoutineForFlight:
 ; ---------------------------------------------------------------------------
 
 S3TailsAI_CheckFollowInputEligibility:
-                bsr.w   TailsS3WatchCPUOffscreenTimeoutAndInteractionCode
+                bsr.w   S3TailsCPU_CheckCatchUpTriggers
                 tst.w   (Tails_CPU_idle_timer).w
                 bne.w   S3TailsAI_TickManualOverride
                 tst.b   object_control(a0)

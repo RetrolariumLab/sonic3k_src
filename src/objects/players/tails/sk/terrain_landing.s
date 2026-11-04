@@ -38,7 +38,7 @@ SKTailsLand_CheckDefaultRightWall:
 
 ; Add eight to the high Y speed byte and negate it before the signed penetration and sensor comparisons
 SKTailsLand_TestDefaultFloorDepth:
-                bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
+                bsr.w   SKPlayer_ProbeGravityFloor
                 tst.w   d1
                 bpl.s   SKTailsLand_DefaultFloorReturn
                 move.b  y_vel(a0),d2
@@ -102,7 +102,7 @@ SKTailsLand_CheckLeftSectorWall:
                 move.w  y_vel(a0),ground_vel(a0)
 
 SKTailsLand_CheckLeftSectorCeiling:
-                bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
+                bsr.w   SKPlayer_ProbeGravityCeiling
                 tst.w   d1
                 bpl.s   SKTailsLand_CheckLeftFloorEligibility
                 neg.w   d1
@@ -141,7 +141,7 @@ SKTailsLand_CheckLeftFloorEligibility:
                 bmi.s   SKTailsLand_LeftFloorReturn
 
 SKTailsLand_ProbeLeftFloor:
-                bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
+                bsr.w   SKPlayer_ProbeGravityFloor
                 tst.w   d1
                 bpl.s   SKTailsLand_LeftFloorReturn
                 tst.b   (Reverse_gravity_flag).w
@@ -174,7 +174,7 @@ SKTailsLand_CheckCeilingSectorRightWall:
                 move.w  #0,x_vel(a0)
 
 SKTailsLand_ProbeCeilingAndResolve:
-                bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
+                bsr.w   SKPlayer_ProbeGravityCeiling
                 tst.w   d1
                 bpl.s   SKTailsLand_CeilingSectorReturn
                 tst.b   (Reverse_gravity_flag).w
@@ -212,7 +212,7 @@ SKTailsLand_CheckRightSectorWall:
                 move.w  y_vel(a0),ground_vel(a0)
 
 SKTailsLand_ResolveRightSectorCeiling:
-                bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
+                bsr.w   SKPlayer_ProbeGravityCeiling
                 tst.w   d1
                 bpl.s   SKTailsLand_CheckRightFloorEligibility
                 tst.b   (Reverse_gravity_flag).w
@@ -236,7 +236,7 @@ SKTailsLand_CheckRightFloorEligibility:
                 bmi.s   SKTailsLand_RightFloorReturn
 
 SKTailsLand_ProbeRightFloor:
-                bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
+                bsr.w   SKPlayer_ProbeGravityFloor
                 tst.w   d1
                 bpl.s   SKTailsLand_RightFloorReturn
                 tst.b   (Reverse_gravity_flag).w

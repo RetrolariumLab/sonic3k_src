@@ -30,7 +30,7 @@ S3TailsTail_CompDispatchHeader:
 
 ; =============== S U B R O U T I N E =======================================
 
-TailsS3StepCompetitionAnimationFrameBytecode:
+S3TailsComp_StepAnimBytecode:
                 moveq   #0,d1
                 move.b  anim_frame(a0),d1
                 move.b  1(a1,d1.w),d0
@@ -70,7 +70,7 @@ S3TailsTail_CompTestChangeFD:
 
 S3TailsTail_CompCommandReturn:
                 rts
-; End of function TailsS3StepCompetitionAnimationFrameBytecode
+; End of function S3TailsComp_StepAnimBytecode
 
 ; ---------------------------------------------------------------------------
 
@@ -217,7 +217,7 @@ S3TailsTail_CompReloadRollAndRead:
                 andi.b  #1,d1
                 andi.b  #$FC,render_flags(a0)
                 or.b    d1,render_flags(a0)
-                bra.w   TailsS3StepCompetitionAnimationFrameBytecode
+                bra.w   S3TailsComp_StepAnimBytecode
 ; ---------------------------------------------------------------------------
 
 S3TailsTail_CompTickPushFrames:
@@ -240,7 +240,7 @@ S3TailsTail_CompReloadPushAndRead:
                 andi.b  #1,d1
                 andi.b  #$FC,render_flags(a0)
                 or.b    d1,render_flags(a0)
-                bra.w   TailsS3StepCompetitionAnimationFrameBytecode
+                bra.w   S3TailsComp_StepAnimBytecode
 ; ---------------------------------------------------------------------------
 
 S3TailsTail_CompGetTailAngleFromSpeed:
@@ -275,7 +275,7 @@ S3TailsTail_CompStepDirectionalTail:
                 add.b   d0,d3
                 lea     (AniTails2P_Tail03).l,a1
                 move.b  #3,anim_frame_timer(a0)
-                bsr.w   TailsS3StepCompetitionAnimationFrameBytecode
+                bsr.w   S3TailsComp_StepAnimBytecode
                 add.b   d3,mapping_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------

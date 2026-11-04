@@ -42,7 +42,7 @@ SKSonicLand_CheckDefaultRightWall:
 
 ; Add eight to the high Y speed byte and negate it before the signed penetration and sensor comparisons
 SKSonicLand_TestDefaultFloorDepth:
-                bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
+                bsr.w   SKPlayer_ProbeGravityFloor
                 tst.w   d1
                 bpl.s   SKSonicLand_DefaultFloorReturn
                 move.b  y_vel(a0),d2
@@ -100,7 +100,8 @@ SKSonicLand_DefaultFloorReturn:
 
 ; =============== S U B R O U T I N E =======================================
 
-CheckSKPlayerGravityRelativeFloorAndNormalizeAngle:
+; Reverse gravity probes the physical ceiling and converts d3.b to -d3-$80
+SKPlayer_ProbeGravityFloor:
                 tst.b   (Reverse_gravity_flag).w
                 beq.w   Sonic_CheckFloor
                 bsr.w   Sonic_CheckCeiling
@@ -108,11 +109,12 @@ CheckSKPlayerGravityRelativeFloorAndNormalizeAngle:
                 neg.b   d3
                 subi.b  #$40,d3
                 rts
-; End of function CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
+; End of function SKPlayer_ProbeGravityFloor
 
 ; =============== S U B R O U T I N E =======================================
 
-CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle:
+; Reverse gravity probes the physical floor and converts d3.b to -d3-$80
+SKPlayer_ProbeGravityCeiling:
                 tst.b   (Reverse_gravity_flag).w
                 beq.w   Sonic_CheckCeiling
                 bsr.w   Sonic_CheckFloor
@@ -120,7 +122,7 @@ CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle:
                 neg.b   d3
                 subi.b  #$40,d3
                 rts
-; End of function CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
+; End of function SKPlayer_ProbeGravityCeiling
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -141,7 +143,7 @@ Player_HitLeftWall:
                 move.w  y_vel(a0),ground_vel(a0)
 
 Player_HitCeiling:
-                bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
+                bsr.w   SKPlayer_ProbeGravityCeiling
                 tst.w   d1
                 bpl.s   SKSonicLand_CheckLeftFloorEligibility  ; branch if distance is positive (not inside ceiling)
                 neg.w   d1
@@ -180,7 +182,7 @@ SKSonicLand_CheckLeftFloorEligibility:
                 bmi.s   SKSonicLand_LeftFloorReturn
 
 SKSonicLand_ProbeLeftFloor:
-                bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
+                bsr.w   SKPlayer_ProbeGravityFloor
                 tst.w   d1
                 bpl.s   SKSonicLand_LeftFloorReturn
                 tst.b   (Reverse_gravity_flag).w
@@ -213,7 +215,7 @@ SKSonicLand_CheckCeilingSectorRightWall:
                 move.w  #0,x_vel(a0)                    ; stop Sonic since he hit a wall
 
 SKSonicLand_ProbeCeilingAndResolve:
-                bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
+                bsr.w   SKPlayer_ProbeGravityCeiling
                 tst.w   d1
                 bpl.s   SKSonicLand_CeilingSectorReturn
                 tst.b   (Reverse_gravity_flag).w
@@ -251,7 +253,7 @@ SKSonicLand_CheckRightSectorWall:
                 move.w  y_vel(a0),ground_vel(a0)
 
 SKSonicLand_ResolveRightSectorCeiling:
-                bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
+                bsr.w   SKPlayer_ProbeGravityCeiling
                 tst.w   d1
                 bpl.s   SKSonicLand_CheckRightFloorEligibility
                 tst.b   (Reverse_gravity_flag).w
@@ -275,7 +277,7 @@ SKSonicLand_CheckRightFloorEligibility:
                 bmi.s   SKSonicLand_RightFloorReturn
 
 SKSonicLand_ProbeRightFloor:
-                bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
+                bsr.w   SKPlayer_ProbeGravityFloor
                 tst.w   d1
                 bpl.s   SKSonicLand_RightFloorReturn
                 tst.b   (Reverse_gravity_flag).w

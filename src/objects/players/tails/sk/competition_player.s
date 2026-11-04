@@ -181,7 +181,7 @@ SKTailsComp_MovementModeOffsets:
 ; ---------------------------------------------------------------------------
 
 SKTailsComp_RunGroundMovement:
-                bsr.w   TailsSKHandleCompetitionSpindashAndAbortGroundStep
+                bsr.w   SKTailsComp_RunSpinDash
                 bsr.w   Tails_Jump
                 bsr.w   Player_SlopeResist
                 bsr.w   Tails_InputAcceleration_Path
@@ -211,7 +211,7 @@ SKTailsComp_ResolveAirTerrain:
 ; ---------------------------------------------------------------------------
 
 SKTailsComp_RunFlightMovement:
-                bsr.w   TailsSKUpdateCompetitionFlightFlapAndFatigue
+                bsr.w   SKTailsComp_UpdateFlight
                 bsr.w   Tails_InputAcceleration_Freespace
                 jsr     (MoveSprite2).l
                 bsr.w   Player_JumpAngle
@@ -222,7 +222,8 @@ SKTailsComp_RunFlightMovement:
 
 ; =============== S U B R O U T I N E =======================================
 
-TailsSKUpdateCompetitionFlightFlapAndFatigue:
+; Update stamina, flap state and Y speed, cap ascent at the camera margin and play the normal or tired sound
+SKTailsComp_UpdateFlight:
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #1,d0
                 beq.s   SKTailsComp_TickFlap
@@ -300,7 +301,7 @@ SKTailsComp_TryFlightSoundEvery16:
 
 SKTailsComp_FlightSoundReturn:
                 rts
-; End of function TailsSKUpdateCompetitionFlightFlapAndFatigue
+; End of function SKTailsComp_UpdateFlight
 
 ; ---------------------------------------------------------------------------
 
@@ -379,7 +380,8 @@ SKTailsComp_InitRollReturn:
 
 ; =============== S U B R O U T I N E =======================================
 
-TailsSKHandleCompetitionSpindashAndAbortGroundStep:
+; Charging or release can skip the rest of the ground update. Launch uses the camera delay for this player slot
+SKTailsComp_RunSpinDash:
                 tst.b   spin_dash_flag(a0)
                 bne.s   SKTailsComp_ReleaseOrKeepCharging
                 cmpi.b  #8,anim(a0)
@@ -489,6 +491,6 @@ SKTailsComp_ReduceCameraDistanceBy2:
 SKTailsComp_AttachAfterSpinDash:
                 bsr.w   Player_AnglePos
                 rts
-; End of function TailsSKHandleCompetitionSpindashAndAbortGroundStep
+; End of function SKTailsComp_RunSpinDash
 
 ; ---------------------------------------------------------------------------

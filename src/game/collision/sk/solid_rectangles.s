@@ -182,19 +182,20 @@ SKCollision_CarryDualHeightProfileRider:
 
 ; =============== S U B R O U T I N E =======================================
 
-CollidePlayersWithHeightProfileKeepAirState:
+HeightProfile_CollideBothKeepAir:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 movem.l d1-d4,-(sp)
-                bsr.s   CollidePlayerWithHeightProfileKeepAirState
+                bsr.s   HeightProfile_CollideOneKeepAir
                 movem.l (sp)+,d1-d4
                 lea     (Player_2).w,a1
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
-; End of function CollidePlayersWithHeightProfileKeepAirState
+; End of function HeightProfile_CollideBothKeepAir
 
 ; =============== S U B R O U T I N E =======================================
 
-CollidePlayerWithHeightProfileKeepAirState:
+; Use half-resolution height bytes. Release a rider by clearing its standing flags and preserving InAir
+HeightProfile_CollideOneKeepAir:
                 btst    d6,status(a0)
                 beq.w   SKSolidHalf_CheckNewContact
                 move.w  d1,d2
@@ -223,7 +224,7 @@ SKSolidKeepAir_CarryAndMarkTop:
                 bset    d4,d6
                 moveq   #0,d4
                 rts
-; End of function CollidePlayerWithHeightProfileKeepAirState
+; End of function HeightProfile_CollideOneKeepAir
 
 ; =============== S U B R O U T I N E =======================================
 

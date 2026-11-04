@@ -210,7 +210,7 @@ S3SonicComp_CheckExtendedIdle:
 ; ---------------------------------------------------------------------------
 
 S3SonicComp_RunGroundMovement:
-                bsr.w   SonicS3HandleCompetitionSpindashAndAbortGroundStep
+                bsr.w   S3SonicComp_RunSpinDash
                 bsr.w   Sonic_Jump
                 bsr.w   Player_SlopeResist
                 bsr.w   Sonic_Move
@@ -317,7 +317,8 @@ S3SonicComp_InitRollReturn:
 
 ; =============== S U B R O U T I N E =======================================
 
-SonicS3HandleCompetitionSpindashAndAbortGroundStep:
+; On the active charge and release paths, discard the ground update return address
+S3SonicComp_RunSpinDash:
                 tst.b   spin_dash_flag(a0)
                 bne.s   S3SonicComp_ReleaseOrKeepCharging
                 cmpi.b  #8,anim(a0)
@@ -441,6 +442,6 @@ S3SonicComp_ReduceCameraDistanceBy2:
 S3SonicComp_AttachAfterSpinDash:
                 bsr.w   Player_AnglePos
                 rts
-; End of function SonicS3HandleCompetitionSpindashAndAbortGroundStep
+; End of function S3SonicComp_RunSpinDash
 
 ; ---------------------------------------------------------------------------
