@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 114
+    "commit_count": 115
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -731,9 +731,15 @@
       "commits": ["72c7fdf84204668dd31e7e9239de4194581facfa"]
     },
     {
-      "id": "current-shorten-09-object-motion",
+      "id": "change-4bff11831c1c",
       "kind": "source_or_tooling",
       "summary": "Apply 481 reviewed short labels for object motion.",
+      "commits": ["4bff11831c1ce1002648da1a5ce65c4b200d2661"]
+    },
+    {
+      "id": "current-shorten-10-object-solids",
+      "kind": "source_or_tooling",
+      "summary": "Apply 270 reviewed short labels for object solids.",
       "commits": ["release-commit"]
     }
   ],

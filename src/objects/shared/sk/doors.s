@@ -2,7 +2,7 @@
 ; Responsibility: Shared door movement, trigger control, collision and zone mapping variants
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
-byte_30E18:
+SKDoor_VerticalSubtypeAttributes:
                 dc.b    $10, $20
                 dc.w    make_art_tile(ArtTile_HCZMisc+$A,2,0)
                 dc.b    8, $20
@@ -14,11 +14,11 @@ byte_30E18:
 Obj_Door:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                bmi.w   loc_30FD2
+                bmi.w   SKDoor_InitializeHorizontalDoorAndWindow
                 move.b  d0,mapping_frame(a0)
                 add.w   d0,d0
                 add.w   d0,d0
-                lea     byte_30E18(pc,d0.w),a1
+                lea     SKDoor_VerticalSubtypeAttributes(pc,d0.w),a1
                 move.b  (a1)+,width_pixels(a0)
                 move.b  (a1)+,height_pixels(a0)
                 move.w  (a1)+,art_tile(a0)
@@ -31,34 +31,34 @@ Obj_Door:
                 subi.w  #$200,d2
                 addi.w  #$18,d3
                 btst    #0,status(a0)
-                beq.s   loc_30E7E
+                beq.s   SKDoor_InitVerticalApproach
                 subi.w  #-$1E8,d2
                 addi.w  #$1E8,d3
 
-loc_30E7E:
+SKDoor_InitVerticalApproach:
                 move.w  d2,$34(a0)
                 move.w  d3,$36(a0)
-                move.l  #loc_30E8C,(a0)
+                move.l  #SKDoor_CheckVerticalNearSide,(a0)
 
-loc_30E8C:
+SKDoor_CheckVerticalNearSide:
                 btst    #0,status(a0)
-                bne.s   loc_30EA8
+                bne.s   SKDoor_CheckVerticalFlippedSide
                 move.w  $34(a0),d2
                 move.w  x_pos(a0),d3
                 tst.b   $38(a0)
-                beq.s   loc_30EBA
+                beq.s   SKDoor_CheckVerticalRequestsAndStep
                 move.w  $36(a0),d3
-                bra.s   loc_30EBA
+                bra.s   SKDoor_CheckVerticalRequestsAndStep
 ; ---------------------------------------------------------------------------
 
-loc_30EA8:
+SKDoor_CheckVerticalFlippedSide:
                 move.w  x_pos(a0),d2
                 move.w  $36(a0),d3
                 tst.b   $38(a0)
-                beq.s   loc_30EBA
+                beq.s   SKDoor_CheckVerticalRequestsAndStep
                 move.w  $34(a0),d2
 
-loc_30EBA:
+SKDoor_CheckVerticalRequestsAndStep:
                 move.w  $32(a0),d4
                 move.w  d4,d5
                 subi.w  #$20,d4
@@ -69,41 +69,41 @@ loc_30EBA:
                 lea     (Player_2).w,a1
                 bsr.s   RequestVerticalDoorOpenForPlayer
                 tst.b   $38(a0)
-                beq.s   loc_30F0A
+                beq.s   SKDoor_CloseVerticalDoorAndSoundAtZero
                 cmpi.w  #$40,$30(a0)
-                beq.s   loc_30F34
+                beq.s   SKDoor_CollideAndDrawVertical
                 addq.w  #8,$30(a0)
                 cmpi.w  #$40,$30(a0)
-                bne.s   loc_30F28
+                bne.s   SKDoor_ApplyVerticalDoorDisplacement
                 moveq   #signextendB(sfx_FanLatch),d0
                 cmpi.b  #$B,(Current_zone).w            ; are we on DEZ?
-                bne.s   loc_30F02                       ; if not, branch
+                bne.s   SKDoor_PlayVerticalOpenEndpointSound  ; if not, branch
                 moveq   #signextendB(sfx_FanLatch),d0   ; this check and sfx selection is not really necessary?
 
-loc_30F02:
+SKDoor_PlayVerticalOpenEndpointSound:
                 jsr     (Play_SFX).l
-                bra.s   loc_30F28
+                bra.s   SKDoor_ApplyVerticalDoorDisplacement
 ; ---------------------------------------------------------------------------
 
-loc_30F0A:
+SKDoor_CloseVerticalDoorAndSoundAtZero:
                 tst.w   $30(a0)
-                beq.s   loc_30F34
+                beq.s   SKDoor_CollideAndDrawVertical
                 subq.w  #8,$30(a0)
-                bne.s   loc_30F28
+                bne.s   SKDoor_ApplyVerticalDoorDisplacement
                 moveq   #signextendB(sfx_FanLatch),d0
                 cmpi.b  #$B,(Current_zone).w            ; are we on DEZ?
-                bne.s   loc_30F22                       ; if not, branch
+                bne.s   SKDoor_PlayVerticalCloseEndpointSound  ; if not, branch
                 moveq   #signextendB(sfx_FanLatch),d0   ; this check and sfx selection is not really necessary?
 
-loc_30F22:
+SKDoor_PlayVerticalCloseEndpointSound:
                 jsr     (Play_SFX).l
 
-loc_30F28:
+SKDoor_ApplyVerticalDoorDisplacement:
                 move.w  $32(a0),d0
                 sub.w   $30(a0),d0
                 move.w  d0,y_pos(a0)
 
-loc_30F34:
+SKDoor_CollideAndDrawVertical:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -120,19 +120,19 @@ loc_30F34:
 RequestVerticalDoorOpenForPlayer:
                 move.w  x_pos(a1),d0
                 cmp.w   d2,d0
-                blt.w   locret_30F84
+                blt.w   SKDoor_ReturnFromVerticalPlayerRequest
                 cmp.w   d3,d0
-                bhs.w   locret_30F84
+                bhs.w   SKDoor_ReturnFromVerticalPlayerRequest
                 move.w  y_pos(a1),d0
                 cmp.w   d4,d0
-                blo.w   locret_30F84
+                blo.w   SKDoor_ReturnFromVerticalPlayerRequest
                 cmp.w   d5,d0
-                bhs.w   locret_30F84
+                bhs.w   SKDoor_ReturnFromVerticalPlayerRequest
                 tst.b   object_control(a1)
-                bmi.s   locret_30F84
+                bmi.s   SKDoor_ReturnFromVerticalPlayerRequest
                 move.b  #1,$38(a0)
 
-locret_30F84:
+SKDoor_ReturnFromVerticalPlayerRequest:
                 rts
 ; End of function RequestVerticalDoorOpenForPlayer
 
@@ -140,17 +140,17 @@ locret_30F84:
 Map_HCZCNZDEZDoor:
                 include "src/objects/shared/zones/hcz/mappings/cnz_dez_door.s"
 ; ---------------------------------------------------------------------------
-byte_30FCE:
+SKDoor_HorizontalSubtypeAttributes:
                 dc.b    $20,   8
                 dc.w    make_art_tile(ArtTile_CNZMisc+$C5,2,0)
 ; ---------------------------------------------------------------------------
 
-loc_30FD2:
+SKDoor_InitializeHorizontalDoorAndWindow:
                 andi.w  #$7F,d0
                 move.b  d0,mapping_frame(a0)
                 add.w   d0,d0
                 add.w   d0,d0
-                lea     byte_30FCE(pc,d0.w),a1
+                lea     SKDoor_HorizontalSubtypeAttributes(pc,d0.w),a1
                 move.b  (a1)+,width_pixels(a0)
                 move.b  (a1)+,height_pixels(a0)
                 move.w  (a1)+,art_tile(a0)
@@ -163,34 +163,34 @@ loc_30FD2:
                 subi.w  #$100,d2
                 addi.w  #$18,d3
                 btst    #1,status(a0)
-                beq.s   loc_31026
+                beq.s   SKDoor_InitHorizontalApproach
                 subi.w  #-$E8,d2
                 addi.w  #$E8,d3
 
-loc_31026:
+SKDoor_InitHorizontalApproach:
                 move.w  d2,$34(a0)
                 move.w  d3,$36(a0)
-                move.l  #loc_31034,(a0)
+                move.l  #SKDoor_CheckHorizontalNearSide,(a0)
 
-loc_31034:
+SKDoor_CheckHorizontalNearSide:
                 btst    #1,status(a0)
-                bne.s   loc_31050
+                bne.s   SKDoor_CheckHorizontalFlippedSide
                 move.w  $34(a0),d2
                 move.w  y_pos(a0),d3
                 tst.b   $38(a0)
-                beq.s   loc_31062
+                beq.s   SKDoor_CheckHorizontalRequestsAndStep
                 move.w  $36(a0),d3
-                bra.s   loc_31062
+                bra.s   SKDoor_CheckHorizontalRequestsAndStep
 ; ---------------------------------------------------------------------------
 
-loc_31050:
+SKDoor_CheckHorizontalFlippedSide:
                 move.w  y_pos(a0),d2
                 move.w  $36(a0),d3
                 tst.b   $38(a0)
-                beq.s   loc_31062
+                beq.s   SKDoor_CheckHorizontalRequestsAndStep
                 move.w  $34(a0),d2
 
-loc_31062:
+SKDoor_CheckHorizontalRequestsAndStep:
                 move.w  $32(a0),d4
                 move.w  d4,d5
                 subi.w  #$20,d4
@@ -201,29 +201,29 @@ loc_31062:
                 lea     (Player_2).w,a1
                 bsr.s   RequestHorizontalDoorOpenForPlayer
                 tst.b   $38(a0)
-                beq.s   loc_31096
+                beq.s   SKDoor_CloseHorizontalDoorOffset
                 cmpi.w  #$40,$30(a0)
-                beq.s   loc_310B6
+                beq.s   SKDoor_CollideAndDrawHorizontal
                 addq.w  #8,$30(a0)
-                bra.s   loc_310A0
+                bra.s   SKDoor_ChooseHorizontalTravelSign
 ; ---------------------------------------------------------------------------
 
-loc_31096:
+SKDoor_CloseHorizontalDoorOffset:
                 tst.w   $30(a0)
-                beq.s   loc_310B6
+                beq.s   SKDoor_CollideAndDrawHorizontal
                 subq.w  #8,$30(a0)
 
-loc_310A0:
+SKDoor_ChooseHorizontalTravelSign:
                 move.w  $30(a0),d0
                 btst    #0,status(a0)
-                beq.s   loc_310AE
+                beq.s   SKDoor_ApplySignedHorizontalDoorOffset
                 neg.w   d0
 
-loc_310AE:
+SKDoor_ApplySignedHorizontalDoorOffset:
                 add.w   $32(a0),d0
                 move.w  d0,x_pos(a0)
 
-loc_310B6:
+SKDoor_CollideAndDrawHorizontal:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -240,19 +240,19 @@ loc_310B6:
 RequestHorizontalDoorOpenForPlayer:
                 move.w  y_pos(a1),d0
                 cmp.w   d2,d0
-                blt.w   locret_31106
+                blt.w   SKDoor_ReturnFromHorizontalPlayerRequest
                 cmp.w   d3,d0
-                bhs.w   locret_31106
+                bhs.w   SKDoor_ReturnFromHorizontalPlayerRequest
                 move.w  x_pos(a1),d0
                 cmp.w   d4,d0
-                blo.w   locret_31106
+                blo.w   SKDoor_ReturnFromHorizontalPlayerRequest
                 cmp.w   d5,d0
-                bhs.w   locret_31106
+                bhs.w   SKDoor_ReturnFromHorizontalPlayerRequest
                 tst.b   object_control(a1)
-                bmi.s   locret_31106
+                bmi.s   SKDoor_ReturnFromHorizontalPlayerRequest
                 move.b  #1,$38(a0)
 
-locret_31106:
+SKDoor_ReturnFromHorizontalPlayerRequest:
                 rts
 ; End of function RequestHorizontalDoorOpenForPlayer
 

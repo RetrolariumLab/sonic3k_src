@@ -2,7 +2,7 @@
 ; Responsibility: Shared rock initialization, active state and character contact or release logic
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
-byte_1F9D0:
+SKRock_RockShapeSizePairs:
                 dc.b    $18, $27
                 dc.b    $18, $17
                 dc.b    $18,  $F
@@ -21,8 +21,8 @@ Obj_AIZLRZEMZRock:
                 andi.b  #7,d0
                 move.b  d0,mapping_frame(a0)
                 add.w   d0,d0
-                move.b  byte_1F9D0(pc,d0.w),width_pixels(a0)
-                move.b  byte_1F9D0+1(pc,d0.w),d1
+                move.b  SKRock_RockShapeSizePairs(pc,d0.w),width_pixels(a0)
+                move.b  SKRock_RockShapeSizePairs+1(pc,d0.w),d1
                 move.b  d1,height_pixels(a0)
                 move.b  d1,y_radius(a0)
                 move.l  #Map_AIZRock,mappings(a0)
@@ -32,58 +32,59 @@ Obj_AIZLRZEMZRock:
                 move.w  x_pos(a0),$2E(a0)
                 move.w  #$40,child_dx(a0)
                 cmpi.w  #1,(Current_zone_and_act).w
-                bne.s   loc_1FA42
+                bne.s   SKRock_SelectEndlessMineMapOverride
                 move.l  #Map_AIZRock2,mappings(a0)
                 move.w  #make_art_tile(ArtTile_AIZMisc2,2,0),art_tile(a0)
 
-loc_1FA42:
+SKRock_SelectEndlessMineMapOverride:
                 cmpi.w  #$1200,(Current_zone_and_act).w
-                bne.s   loc_1FA5E
+                bne.s   SKRock_SelectLRZWholeRockMap
                 move.l  #Map_EMZRock,mappings(a0)
                 move.w  #make_art_tile(ArtTile_EMZMisc,3,1),art_tile(a0)
                 move.b  #0,mapping_frame(a0)
 
-loc_1FA5E:
+SKRock_SelectLRZWholeRockMap:
                 cmpi.b  #9,(Current_zone).w
-                bne.s   loc_1FA8C
+                bne.s   SKRock_SelectKnucklesTopBreakNibbleF
                 move.l  #Map_LRZBreakableRock,mappings(a0)
                 move.w  #make_art_tile($0D3,2,0),art_tile(a0)
                 addq.b  #4,mapping_frame(a0)
                 tst.b   (Current_act).w
-                beq.s   loc_1FA8C
+                beq.s   SKRock_SelectKnucklesTopBreakNibbleF
                 move.l  #Map_LRZBreakableRock2,mappings(a0)
                 move.w  #make_art_tile(ArtTile_LRZ2Misc,3,0),art_tile(a0)
 
-loc_1FA8C:
+SKRock_SelectKnucklesTopBreakNibbleF:
                 andi.w  #$F,d2
                 cmpi.w  #$F,d2
-                bne.s   loc_1FAA0
-                move.l  #loc_20002,(a0)
-                bra.w   loc_20002
+                bne.s   SKRock_SelectOrdinaryOrSideBreakMode
+                move.l  #SKRock_UpdateP1KnucklesStandingBreakRock,(a0)
+                bra.w   SKRock_UpdateP1KnucklesStandingBreakRock
 ; ---------------------------------------------------------------------------
 
-loc_1FAA0:
-                move.l  #loc_1FAF2,(a0)
+SKRock_SelectOrdinaryOrSideBreakMode:
+                move.l  #SKRock_CachePlayersAndCollideRock,(a0)
                 btst    #2,subtype(a0)
-                beq.s   loc_1FAB8
-                move.l  #loc_1FD08,(a0)
-                bra.w   loc_1FD08
+                beq.s   SKRock_CheckVerticalBreak
+                move.l  #SKRock_UpdateSideBreakRockCollision,(a0)
+                bra.w   SKRock_UpdateSideBreakRockCollision
 ; ---------------------------------------------------------------------------
 
-loc_1FAB8:
+; Subtype bit 3 selects the vertical-impact handler
+SKRock_CheckVerticalBreak:
                 btst    #3,subtype(a0)
-                beq.s   loc_1FACA
-                move.l  #loc_1FF48,(a0)
-                bra.w   loc_1FF48
+                beq.s   SKRock_RestoreSavedLeftPushDisplacement
+                move.l  #SKRock_UpdateVerticalResponseBreakRock,(a0)
+                bra.w   SKRock_UpdateVerticalResponseBreakRock
 ; ---------------------------------------------------------------------------
 
-loc_1FACA:
+SKRock_RestoreSavedLeftPushDisplacement:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_1FAF2
+                beq.s   SKRock_CachePlayersAndCollideRock
                 movea.w d0,a2
                 move.b  (a2),d0
                 andi.w  #$7F,d0
-                beq.s   loc_1FAF2
+                beq.s   SKRock_CachePlayersAndCollideRock
                 sub.w   d0,x_pos(a0)
                 neg.w   d0
                 addi.w  #$40,d0
@@ -91,7 +92,7 @@ loc_1FACA:
                 jsr     (ObjCheckFloorDist).l
                 add.w   d1,y_pos(a0)
 
-loc_1FAF2:
+SKRock_CachePlayersAndCollideRock:
                 move.w  (Chain_bonus_counter).w,$38(a0)
                 move.b  (Player_1+anim).w,$32(a0)
                 move.b  (Player_2+anim).w,$33(a0)
@@ -107,60 +108,61 @@ loc_1FAF2:
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull).l
                 btst    #1,subtype(a0)
-                beq.s   loc_1FB3A
+                beq.s   SKRock_GateTopBreakBySubtypeAndStanding
                 bsr.w   UpdatePlayersPushingRockLeft
 
-loc_1FB3A:
+SKRock_GateTopBreakBySubtypeAndStanding:
                 btst    #0,subtype(a0)
-                beq.s   loc_1FB4C
+                beq.s   SKRock_DrawByAnchorOutsideComp
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                bne.s   loc_1FB62
+                bne.s   SKRock_CheckRollWithBothRiders
 
-loc_1FB4C:
+SKRock_DrawByAnchorOutsideComp:
                 tst.w   (Competition_mode).w
-                bne.s   loc_1FB5C
+                bne.s   SKRock_DrawCompetitionRockDirectly
                 move.w  $2E(a0),d0
                 jmp     (Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
 
-loc_1FB5C:
+SKRock_DrawCompetitionRockDirectly:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_1FB62:
+; When both standing bits are set, require the cached rolling animation from at least one rider
+SKRock_CheckRollWithBothRiders:
                 cmpi.b  #$18,d0
-                bne.s   loc_1FB90
+                bne.s   SKRock_CheckSingleFirstPlayerTopBreak
                 cmpi.b  #2,$32(a0)
-                beq.s   loc_1FB78
+                beq.s   SKRock_ReleaseBothTopRiders
                 cmpi.b  #2,$33(a0)
-                bne.s   loc_1FB4C
+                bne.s   SKRock_DrawByAnchorOutsideComp
 
-loc_1FB78:
+SKRock_ReleaseBothTopRiders:
                 lea     (Player_1).w,a1
                 move.b  $32(a0),d0
                 bsr.s   ReleaseRockRiderWithConditionalBounce
                 lea     (Player_2).w,a1
                 move.b  $33(a0),d0
                 bsr.s   ReleaseRockRiderWithConditionalBounce
-                bra.w   loc_1FBF8
+                bra.w   SKRock_RestoreChainAndShatterTop
 ; ---------------------------------------------------------------------------
 
-loc_1FB90:
+SKRock_CheckSingleFirstPlayerTopBreak:
                 move.b  d0,d1
                 andi.b  #8,d1
-                beq.s   loc_1FBE0
+                beq.s   SKRock_CheckSingleSecondPlayerTopBreak
                 cmpi.b  #2,$32(a0)
-                bne.s   loc_1FB4C
+                bne.s   SKRock_DrawByAnchorOutsideComp
                 lea     (Player_1).w,a1
                 bsr.s   BouncePlayerAfterRockTopBreak
-                bra.s   loc_1FBF8
+                bra.s   SKRock_RestoreChainAndShatterTop
 
 ; =============== S U B R O U T I N E =======================================
 
 ReleaseRockRiderWithConditionalBounce:
                 cmpi.b  #2,d0
-                bne.s   loc_1FBCC
+                bne.s   SKRock_FinishRockRiderAirborneRelease
 ; End of function ReleaseRockRiderWithConditionalBounce
 
 ; =============== S U B R O U T I N E =======================================
@@ -172,7 +174,7 @@ BouncePlayerAfterRockTopBreak:
                 move.b  #2,anim(a1)
                 move.w  #-$300,y_vel(a1)
 
-loc_1FBCC:
+SKRock_FinishRockRiderAirborneRelease:
                 bset    #Status_InAir,status(a1)
                 bclr    #Status_OnObj,status(a1)
                 move.b  #2,routine(a1)
@@ -181,58 +183,58 @@ loc_1FBCC:
 
 ; ---------------------------------------------------------------------------
 
-loc_1FBE0:
+SKRock_CheckSingleSecondPlayerTopBreak:
                 andi.b  #$10,d0
-                beq.w   loc_1FB4C
+                beq.w   SKRock_DrawByAnchorOutsideComp
                 cmpi.b  #2,$33(a0)
-                bne.w   loc_1FB4C
+                bne.w   SKRock_DrawByAnchorOutsideComp
                 lea     (Player_2).w,a1
                 bsr.s   BouncePlayerAfterRockTopBreak
 
-loc_1FBF8:
+SKRock_RestoreChainAndShatterTop:
                 move.w  $38(a0),(Chain_bonus_counter).w
                 andi.b  #$E7,status(a0)
                 tst.w   (Competition_mode).w
-                bne.w   loc_1FC9C
-                move.l  #loc_1FC16,(a0)
+                bne.w   SKRock_CloneCompetitionRockThenShatter
+                move.l  #SKRock_DispatchRockDebrisAnimationByZone,(a0)
                 bsr.w   ShatterRockWithDefaultVelocities
 
-loc_1FC16:
+SKRock_DispatchRockDebrisAnimationByZone:
                 cmpi.b  #9,(Current_zone).w
-                beq.s   loc_1FC60
-                move.l  #loc_1FC24,(a0)
+                beq.s   SKRock_InstallLRZDebrisGroupAnimation
+                move.l  #SKRock_TickOrdinaryRockDebrisFrameCycle,(a0)
 
-loc_1FC24:
+SKRock_TickOrdinaryRockDebrisFrameCycle:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_1FC42
+                bpl.s   SKRock_MoveDebrisAndApplyGravity
                 move.b  #2,anim_frame_timer(a0)
                 move.b  mapping_frame(a0),d0
                 addq.b  #1,d0
                 cmpi.b  #7,d0
-                blo.s   loc_1FC3E
+                blo.s   SKRock_StoreOrdinaryDebrisAnimationFrame
                 moveq   #3,d0
 
-loc_1FC3E:
+SKRock_StoreOrdinaryDebrisAnimationFrame:
                 move.b  d0,mapping_frame(a0)
 
-loc_1FC42:
+SKRock_MoveDebrisAndApplyGravity:
                 jsr     (MoveSprite2).l
                 addi.w  #$18,y_vel(a0)
                 tst.b   render_flags(a0)
-                bpl.s   loc_1FC5A
+                bpl.s   SKRock_DeleteOffscreenDebris
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_1FC5A:
+SKRock_DeleteOffscreenDebris:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_1FC60:
-                move.l  #loc_1FC66,(a0)
+SKRock_InstallLRZDebrisGroupAnimation:
+                move.l  #SKRock_TickLRZDebrisFourFrameGroup,(a0)
 
-loc_1FC66:
+SKRock_TickLRZDebrisFourFrameGroup:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_1FC84
+                bpl.s   SKRock_MoveLRZDebrisAndAddGravity
                 move.b  #7,anim_frame_timer(a0)
                 move.b  mapping_frame(a0),d0
                 addq.b  #1,d0
@@ -240,60 +242,60 @@ loc_1FC66:
                 add.b   $3C(a0),d0
                 move.b  d0,mapping_frame(a0)
 
-loc_1FC84:
+SKRock_MoveLRZDebrisAndAddGravity:
                 jsr     (MoveSprite2).l
                 addi.w  #$18,y_vel(a0)
                 tst.b   render_flags(a0)
-                bpl.s   loc_1FC5A
+                bpl.s   SKRock_DeleteOffscreenDebris
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_1FC9C:
+SKRock_CloneCompetitionRockThenShatter:
                 bsr.s   CloneCompetitionRockForRespawn
                 move.b  #3,mapping_frame(a0)
-                move.l  #loc_1FCAE,(a0)
+                move.l  #SKRock_MoveStaticFrameCompDebris,(a0)
                 bsr.w   ShatterRockWithDefaultVelocities
 
-loc_1FCAE:
+SKRock_MoveStaticFrameCompDebris:
                 jsr     (MoveSprite2).l
                 addi.w  #$18,y_vel(a0)
                 tst.b   render_flags(a0)
-                bpl.w   loc_1FC5A
+                bpl.w   SKRock_DeleteOffscreenDebris
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
 CloneCompetitionRockForRespawn:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   locret_1FCF0
+                bne.w   SKRock_ReturnFromCompetitionCloneAttempt
                 moveq   #$48,d0
 
-loc_1FCD4:
+SKRock_CopyEntireCompetitionRockSlot:
                 move.w  (a0,d0.w),(a1,d0.w)
                 subq.w  #2,d0
-                bcc.s   loc_1FCD4
+                bcc.s   SKRock_CopyEntireCompetitionRockSlot
                 move.l  (a0),$44(a1)
-                move.l  #loc_1FCF2,(a1)
+                move.l  #SKRock_WaitForCompCloneOffscreen,(a1)
                 move.b  #7,mapping_frame(a1)
                 moveq   #0,d0
 
-locret_1FCF0:
+SKRock_ReturnFromCompetitionCloneAttempt:
                 rts
 ; End of function CloneCompetitionRockForRespawn
 
 ; ---------------------------------------------------------------------------
 
-loc_1FCF2:
+SKRock_WaitForCompCloneOffscreen:
                 tst.b   render_flags(a0)
-                bmi.s   loc_1FD02
+                bmi.s   SKRock_DrawCompetitionRespawnClone
                 move.l  $44(a0),(a0)
                 move.b  #0,mapping_frame(a0)
 
-loc_1FD02:
+SKRock_DrawCompetitionRespawnClone:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_1FD08:
+SKRock_UpdateSideBreakRockCollision:
                 move.w  (Player_1+x_vel).w,$30(a0)
                 move.w  (Player_2+x_vel).w,$36(a0)
                 moveq   #0,d1
@@ -307,98 +309,100 @@ loc_1FD08:
                 bsr.w   SolidObjectFull
                 swap    d6
                 andi.w  #3,d6
-                bne.s   loc_1FD4E
+                bne.s   SKRock_CheckFirstPlayerSideRockContact
 
-loc_1FD38:
+SKRock_DrawSideBreakRockByMode:
                 tst.w   (Competition_mode).w
-                bne.s   loc_1FD48
+                bne.s   SKRock_DrawCompetitionSideBreakRock
                 move.w  $2E(a0),d0
                 jmp     (Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
 
-loc_1FD48:
+SKRock_DrawCompetitionSideBreakRock:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_1FD4E:
+SKRock_CheckFirstPlayerSideRockContact:
                 lea     (Player_1).w,a1
                 move.w  $30(a0),d1
                 move.w  d6,d0
                 andi.w  #1,d0
-                beq.w   loc_1FDEA
+                beq.w   SKRock_CheckP2SideBreak
                 tst.b   subtype(a0)
-                bpl.s   loc_1FD72
+                bpl.s   SKRock_CheckFirstUnrestrictedRockImpact
                 cmpi.b  #2,character_id(a1)
-                beq.s   loc_1FDA4
-                bra.w   loc_1FDEA
+                beq.s   SKRock_BreakFromP1AndRestoreP2
+                bra.w   SKRock_CheckP2SideBreak
 ; ---------------------------------------------------------------------------
 
-loc_1FD72:
+SKRock_CheckFirstUnrestrictedRockImpact:
                 tst.b   (Super_Sonic_Knux_flag).w
-                bne.s   loc_1FDA4
+                bne.s   SKRock_BreakFromP1AndRestoreP2
                 cmpi.b  #2,character_id(a1)
-                beq.s   loc_1FDA4
+                beq.s   SKRock_BreakFromP1AndRestoreP2
                 btst    #Status_FireShield,status_secondary(a1)
-                bne.s   loc_1FD90
+                bne.s   SKRock_RequireFirstRockBreakerRolling
                 btst    #p1_pushing_bit,status(a0)
-                beq.s   loc_1FDEA
+                beq.s   SKRock_CheckP2SideBreak
 
-loc_1FD90:
+SKRock_RequireFirstRockBreakerRolling:
                 cmpi.b  #2,anim(a1)
-                bne.s   loc_1FDEA
+                bne.s   SKRock_CheckP2SideBreak
                 move.w  d1,d0
-                bpl.s   loc_1FD9E
+                bpl.s   SKRock_CheckP1BreakSpeed
                 neg.w   d0
 
-loc_1FD9E:
+; Require an unsigned speed magnitude of at least $480
+SKRock_CheckP1BreakSpeed:
                 cmpi.w  #$480,d0
-                blo.s   loc_1FDEA
+                blo.s   SKRock_CheckP2SideBreak
 
-loc_1FDA4:
+SKRock_BreakFromP1AndRestoreP2:
                 bclr    #p1_pushing_bit,status(a0)
                 bsr.w   BreakRockFromSideImpact
                 btst    #p2_pushing_bit,status(a0)
-                beq.w   loc_1FD38
+                beq.w   SKRock_DrawSideBreakRockByMode
                 lea     (Player_2).w,a1
                 cmpi.b  #2,character_id(a1)
-                beq.s   loc_1FDCE
+                beq.s   SKRock_RestoreP2AfterBreak
                 cmpi.b  #2,anim(a1)
-                bne.w   loc_1FD38
+                bne.w   SKRock_DrawSideBreakRockByMode
 
-loc_1FDCE:
+SKRock_RestoreP2AfterBreak:
                 move.w  $36(a0),x_vel(a1)
                 move.w  x_vel(a1),ground_vel(a1)
                 bclr    #p2_pushing_bit,status(a0)
                 bclr    #Status_Push,status(a1)
-                bra.w   loc_1FD38
+                bra.w   SKRock_DrawSideBreakRockByMode
 ; ---------------------------------------------------------------------------
 
-loc_1FDEA:
+SKRock_CheckP2SideBreak:
                 lea     (Player_2).w,a1
                 move.w  $36(a0),d1
                 btst    #p2_pushing_bit,status(a0)
-                beq.w   loc_1FD38
+                beq.w   SKRock_DrawSideBreakRockByMode
                 tst.b   subtype(a0)
-                bpl.s   loc_1FE0E
+                bpl.s   SKRock_CheckSecondUnrestrictedRockImpact
                 cmpi.b  #2,character_id(a1)
-                beq.s   loc_1FE2E
-                bra.w   loc_1FD38
+                beq.s   SKRock_ClearP2PushAndBreak
+                bra.w   SKRock_DrawSideBreakRockByMode
 ; ---------------------------------------------------------------------------
 
-loc_1FE0E:
+SKRock_CheckSecondUnrestrictedRockImpact:
                 cmpi.b  #2,character_id(a1)
-                beq.s   loc_1FE2E
+                beq.s   SKRock_ClearP2PushAndBreak
                 cmpi.b  #2,anim(a1)
-                bne.w   loc_1FD38
+                bne.w   SKRock_DrawSideBreakRockByMode
                 move.w  d1,d0
-                bpl.s   loc_1FE26
+                bpl.s   SKRock_CheckP2BreakSpeed
                 neg.w   d0
 
-loc_1FE26:
+; Require an unsigned speed magnitude of at least $480
+SKRock_CheckP2BreakSpeed:
                 cmpi.w  #$480,d0
-                blo.w   loc_1FD38
+                blo.w   SKRock_DrawSideBreakRockByMode
 
-loc_1FE2E:
+SKRock_ClearP2PushAndBreak:
                 bclr    #p2_pushing_bit,status(a0)
 
 ; =============== S U B R O U T I N E =======================================
@@ -406,86 +410,86 @@ loc_1FE2E:
 BreakRockFromSideImpact:
                 bsr.w   DetachPlayersStandingOnRock
                 tst.w   (Competition_mode).w
-                bne.w   loc_1FECE
+                bne.w   SKRock_SelectCompFragmentVel
                 move.w  d1,x_vel(a1)
                 addq.w  #4,x_pos(a1)
-                lea     (word_202F4).l,a4
+                lea     (SKRock_ShapeZeroAndPrimarySideVelocities).l,a4
                 move.w  x_pos(a0),d0
                 cmp.w   x_pos(a1),d0
-                blo.s   loc_1FE64
+                blo.s   SKRock_FinishOrdinaryRockSideImpact
                 subi.w  #8,x_pos(a1)
-                lea     (word_20314).l,a4
+                lea     (SKRock_AlternatePositiveSideVelocities).l,a4
 
-loc_1FE64:
+SKRock_FinishOrdinaryRockSideImpact:
                 move.w  x_vel(a1),ground_vel(a1)
                 bclr    #Status_Push,status(a1)
                 cmpi.b  #2,character_id(a1)
-                bne.s   loc_1FE9E
+                bne.s   SKRock_SelectSideImpactLRZEmitter
                 cmpi.b  #1,double_jump_flag(a1)
-                bne.s   loc_1FE9E
+                bne.s   SKRock_SelectSideImpactLRZEmitter
                 move.b  #2,double_jump_flag(a1)
                 move.b  #$21,anim(a1)
                 bclr    #Status_Facing,status(a1)
                 tst.w   x_vel(a1)
-                bpl.s   loc_1FE9E
+                bpl.s   SKRock_SelectSideImpactLRZEmitter
                 bset    #Status_Facing,status(a1)
 
-loc_1FE9E:
+SKRock_SelectSideImpactLRZEmitter:
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
                 cmpi.b  #9,(Current_zone).w
-                bne.s   loc_1FEBE
+                bne.s   SKRock_SpawnDefaultSideFragments
                 subq.b  #4,d0
-                move.l  #loc_1FC66,(a0)
+                move.l  #SKRock_TickLRZDebrisFourFrameGroup,(a0)
                 add.w   d0,d0
                 bsr.w   SpawnLavaReefRockFragments
-                bra.w   loc_1FC66
+                bra.w   SKRock_TickLRZDebrisFourFrameGroup
 ; ---------------------------------------------------------------------------
 
-loc_1FEBE:
-                move.l  #loc_1FC16,(a0)
+SKRock_SpawnDefaultSideFragments:
+                move.l  #SKRock_DispatchRockDebrisAnimationByZone,(a0)
                 add.w   d0,d0
                 bsr.w   SpawnRockFragments
-                bra.w   loc_1FC16
+                bra.w   SKRock_DispatchRockDebrisAnimationByZone
 ; ---------------------------------------------------------------------------
 
-loc_1FECE:
+SKRock_SelectCompFragmentVel:
                 move.w  d1,x_vel(a1)
                 addq.w  #4,x_pos(a1)
-                lea     (word_20370).l,a4
+                lea     (SKRock_CompFragmentLeftVel).l,a4
                 move.w  x_pos(a0),d0
                 cmp.w   x_pos(a1),d0
-                blo.s   loc_1FEF2
+                blo.s   SKRock_CloneAndSpawnCompFragments
                 subi.w  #8,x_pos(a1)
-                lea     (word_20388).l,a4
+                lea     (SKRock_CompFragmentRightVel).l,a4
 
-loc_1FEF2:
+SKRock_CloneAndSpawnCompFragments:
                 move.w  x_vel(a1),ground_vel(a1)
                 bclr    #Status_Push,status(a1)
                 bsr.w   CloneCompetitionRockForRespawn
-                move.l  #loc_1FCAE,(a0)
+                move.l  #SKRock_MoveStaticFrameCompDebris,(a0)
                 move.b  #3,mapping_frame(a0)
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
                 add.w   d0,d0
                 bsr.w   SpawnRockFragments
-                bra.w   loc_1FCAE
+                bra.w   SKRock_MoveStaticFrameCompDebris
 ; End of function BreakRockFromSideImpact
 
 ; =============== S U B R O U T I N E =======================================
 
 DetachPlayersStandingOnRock:
                 bclr    #p1_standing_bit,status(a0)
-                beq.s   loc_1FF32
+                beq.s   SKRock_DetachSecondRockTopRider
                 bset    #Status_InAir,(Player_1+status).w
                 bclr    #Status_OnObj,(Player_1+status).w
 
-loc_1FF32:
+SKRock_DetachSecondRockTopRider:
                 bclr    #p2_standing_bit,status(a0)
-                beq.s   locret_1FF46
+                beq.s   SKRock_ReturnFromRockTopRiderDetach
                 bset    #Status_InAir,(Player_2+status).w
                 bclr    #Status_OnObj,(Player_2+status).w
 
-locret_1FF46:
+SKRock_ReturnFromRockTopRiderDetach:
                 rts
 ; End of function DetachPlayersStandingOnRock

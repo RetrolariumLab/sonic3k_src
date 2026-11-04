@@ -2,7 +2,7 @@
 ; Responsibility: Shared door movement, trigger control, collision and zone mapping variants
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
-byte_2FAA8:
+S3Door_VerticalSubtypeAttributes:
                 dc.b    $10, $20
                 dc.w    make_art_tile(ArtTile_HCZMisc+$A,2,0)
                 dc.b    8, $20
@@ -12,11 +12,11 @@ byte_2FAA8:
 Obj_Door:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                bmi.w   loc_2FC2C
+                bmi.w   S3Door_InitializeHorizontalDoorAndWindow
                 move.b  d0,mapping_frame(a0)
                 add.w   d0,d0
                 add.w   d0,d0
-                lea     byte_2FAA8(pc,d0.w),a1
+                lea     S3Door_VerticalSubtypeAttributes(pc,d0.w),a1
                 move.b  (a1)+,width_pixels(a0)
                 move.b  (a1)+,height_pixels(a0)
                 move.w  (a1)+,art_tile(a0)
@@ -29,34 +29,34 @@ Obj_Door:
                 subi.w  #$200,d2
                 addi.w  #$18,d3
                 btst    #0,status(a0)
-                beq.s   loc_2FB0A
+                beq.s   S3Door_InitVerticalApproach
                 subi.w  #-$1E8,d2
                 addi.w  #$1E8,d3
 
-loc_2FB0A:
+S3Door_InitVerticalApproach:
                 move.w  d2,$34(a0)
                 move.w  d3,$36(a0)
-                move.l  #loc_2FB18,(a0)
+                move.l  #S3Door_CheckVerticalNearSide,(a0)
 
-loc_2FB18:
+S3Door_CheckVerticalNearSide:
                 btst    #0,status(a0)
-                bne.s   loc_2FB34
+                bne.s   S3Door_CheckVerticalFlippedSide
                 move.w  $34(a0),d2
                 move.w  x_pos(a0),d3
                 tst.b   $38(a0)
-                beq.s   loc_2FB46
+                beq.s   S3Door_CheckVerticalRequestsAndStep
                 move.w  $36(a0),d3
-                bra.s   loc_2FB46
+                bra.s   S3Door_CheckVerticalRequestsAndStep
 ; ---------------------------------------------------------------------------
 
-loc_2FB34:
+S3Door_CheckVerticalFlippedSide:
                 move.w  x_pos(a0),d2
                 move.w  $36(a0),d3
                 tst.b   $38(a0)
-                beq.s   loc_2FB46
+                beq.s   S3Door_CheckVerticalRequestsAndStep
                 move.w  $34(a0),d2
 
-loc_2FB46:
+S3Door_CheckVerticalRequestsAndStep:
                 move.w  $32(a0),d4
                 move.w  d4,d5
                 subi.w  #$20,d4
@@ -67,31 +67,31 @@ loc_2FB46:
                 lea     (Player_2).w,a1
                 bsr.s   RequestVerticalDoorOpenForPlayer
                 tst.b   $38(a0)
-                beq.s   loc_2FB8A
+                beq.s   S3Door_CloseVerticalDoorAndSoundAtZero
                 cmpi.w  #$40,$30(a0)
-                beq.s   loc_2FBAA
+                beq.s   S3Door_CollideAndDrawVertical
                 addq.w  #8,$30(a0)
                 cmpi.w  #$40,$30(a0)
-                bne.s   loc_2FB9E
+                bne.s   S3Door_ApplyVerticalDoorDisplacement
                 moveq   #signextendB(sfx_FanLatch),d0
                 jsr     (Play_SFX).l
-                bra.s   loc_2FB9E
+                bra.s   S3Door_ApplyVerticalDoorDisplacement
 ; ---------------------------------------------------------------------------
 
-loc_2FB8A:
+S3Door_CloseVerticalDoorAndSoundAtZero:
                 tst.w   $30(a0)
-                beq.s   loc_2FBAA
+                beq.s   S3Door_CollideAndDrawVertical
                 subq.w  #8,$30(a0)
-                bne.s   loc_2FB9E
+                bne.s   S3Door_ApplyVerticalDoorDisplacement
                 moveq   #signextendB(sfx_FanLatch),d0
                 jsr     (Play_SFX).l
 
-loc_2FB9E:
+S3Door_ApplyVerticalDoorDisplacement:
                 move.w  $32(a0),d0
                 sub.w   $30(a0),d0
                 move.w  d0,y_pos(a0)
 
-loc_2FBAA:
+S3Door_CollideAndDrawVertical:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -108,19 +108,19 @@ loc_2FBAA:
 RequestVerticalDoorOpenForPlayer:
                 move.w  x_pos(a1),d0
                 cmp.w   d2,d0
-                blt.w   locret_2FBFA
+                blt.w   S3Door_ReturnFromVerticalPlayerRequest
                 cmp.w   d3,d0
-                bhs.w   locret_2FBFA
+                bhs.w   S3Door_ReturnFromVerticalPlayerRequest
                 move.w  y_pos(a1),d0
                 cmp.w   d4,d0
-                blo.w   locret_2FBFA
+                blo.w   S3Door_ReturnFromVerticalPlayerRequest
                 cmp.w   d5,d0
-                bhs.w   locret_2FBFA
+                bhs.w   S3Door_ReturnFromVerticalPlayerRequest
                 tst.b   object_control(a1)
-                bmi.s   locret_2FBFA
+                bmi.s   S3Door_ReturnFromVerticalPlayerRequest
                 move.b  #1,$38(a0)
 
-locret_2FBFA:
+S3Door_ReturnFromVerticalPlayerRequest:
                 rts
 ; End of function RequestVerticalDoorOpenForPlayer
 
@@ -128,17 +128,17 @@ locret_2FBFA:
 Map_HCZCNZDoor:
                 include "src/objects/shared/zones/hcz/mappings/cnz_door_s3.s"
 ; ---------------------------------------------------------------------------
-byte_2FC28:
+S3Door_HorizontalSubtypeAttributes:
                 dc.b    $20,   8
                 dc.w    make_art_tile(ArtTile_CNZMisc+$C5,2,0)
 ; ---------------------------------------------------------------------------
 
-loc_2FC2C:
+S3Door_InitializeHorizontalDoorAndWindow:
                 andi.w  #$7F,d0
                 move.b  d0,mapping_frame(a0)
                 add.w   d0,d0
                 add.w   d0,d0
-                lea     byte_2FC28(pc,d0.w),a1
+                lea     S3Door_HorizontalSubtypeAttributes(pc,d0.w),a1
                 move.b  (a1)+,width_pixels(a0)
                 move.b  (a1)+,height_pixels(a0)
                 move.w  (a1)+,art_tile(a0)
@@ -151,34 +151,34 @@ loc_2FC2C:
                 subi.w  #$100,d2
                 addi.w  #$18,d3
                 btst    #1,status(a0)
-                beq.s   loc_2FC80
+                beq.s   S3Door_InitHorizontalApproach
                 subi.w  #-$E8,d2
                 addi.w  #$E8,d3
 
-loc_2FC80:
+S3Door_InitHorizontalApproach:
                 move.w  d2,$34(a0)
                 move.w  d3,$36(a0)
-                move.l  #loc_2FC8E,(a0)
+                move.l  #S3Door_CheckHorizontalNearSide,(a0)
 
-loc_2FC8E:
+S3Door_CheckHorizontalNearSide:
                 btst    #1,status(a0)
-                bne.s   loc_2FCAA
+                bne.s   S3Door_CheckHorizontalFlippedSide
                 move.w  $34(a0),d2
                 move.w  y_pos(a0),d3
                 tst.b   $38(a0)
-                beq.s   loc_2FCBC
+                beq.s   S3Door_CheckHorizontalRequestsAndStep
                 move.w  $36(a0),d3
-                bra.s   loc_2FCBC
+                bra.s   S3Door_CheckHorizontalRequestsAndStep
 ; ---------------------------------------------------------------------------
 
-loc_2FCAA:
+S3Door_CheckHorizontalFlippedSide:
                 move.w  y_pos(a0),d2
                 move.w  $36(a0),d3
                 tst.b   $38(a0)
-                beq.s   loc_2FCBC
+                beq.s   S3Door_CheckHorizontalRequestsAndStep
                 move.w  $34(a0),d2
 
-loc_2FCBC:
+S3Door_CheckHorizontalRequestsAndStep:
                 move.w  $32(a0),d4
                 move.w  d4,d5
                 subi.w  #$20,d4
@@ -189,29 +189,29 @@ loc_2FCBC:
                 lea     (Player_2).w,a1
                 bsr.s   RequestHorizontalDoorOpenForPlayer
                 tst.b   $38(a0)
-                beq.s   loc_2FCF0
+                beq.s   S3Door_CloseHorizontalDoorOffset
                 cmpi.w  #$40,$30(a0)
-                beq.s   loc_2FD10
+                beq.s   S3Door_CollideAndDrawHorizontal
                 addq.w  #8,$30(a0)
-                bra.s   loc_2FCFA
+                bra.s   S3Door_ChooseHorizontalTravelSign
 ; ---------------------------------------------------------------------------
 
-loc_2FCF0:
+S3Door_CloseHorizontalDoorOffset:
                 tst.w   $30(a0)
-                beq.s   loc_2FD10
+                beq.s   S3Door_CollideAndDrawHorizontal
                 subq.w  #8,$30(a0)
 
-loc_2FCFA:
+S3Door_ChooseHorizontalTravelSign:
                 move.w  $30(a0),d0
                 btst    #0,status(a0)
-                beq.s   loc_2FD08
+                beq.s   S3Door_ApplySignedHorizontalDoorOffset
                 neg.w   d0
 
-loc_2FD08:
+S3Door_ApplySignedHorizontalDoorOffset:
                 add.w   $32(a0),d0
                 move.w  d0,x_pos(a0)
 
-loc_2FD10:
+S3Door_CollideAndDrawHorizontal:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -228,19 +228,19 @@ loc_2FD10:
 RequestHorizontalDoorOpenForPlayer:
                 move.w  y_pos(a1),d0
                 cmp.w   d2,d0
-                blt.w   locret_2FD60
+                blt.w   S3Door_ReturnFromHorizontalPlayerRequest
                 cmp.w   d3,d0
-                bhs.w   locret_2FD60
+                bhs.w   S3Door_ReturnFromHorizontalPlayerRequest
                 move.w  x_pos(a1),d0
                 cmp.w   d4,d0
-                blo.w   locret_2FD60
+                blo.w   S3Door_ReturnFromHorizontalPlayerRequest
                 cmp.w   d5,d0
-                bhs.w   locret_2FD60
+                bhs.w   S3Door_ReturnFromHorizontalPlayerRequest
                 tst.b   object_control(a1)
-                bmi.s   locret_2FD60
+                bmi.s   S3Door_ReturnFromHorizontalPlayerRequest
                 move.b  #1,$38(a0)
 
-locret_2FD60:
+S3Door_ReturnFromHorizontalPlayerRequest:
                 rts
 ; End of function RequestHorizontalDoorOpenForPlayer
 

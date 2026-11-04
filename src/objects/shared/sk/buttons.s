@@ -6,52 +6,52 @@
 
 Obj_Button:
                 tst.w   (Competition_mode).w
-                bne.w   loc_2C696
+                bne.w   SKButton_InitializeCompetitionButton
                 move.l  #Map_Button,mappings(a0)
                 move.w  #make_art_tile(ArtTile_GrayButton,0,0),art_tile(a0)
                 cmpi.b  #1,(Current_zone).w
-                bne.s   loc_2C544
+                bne.s   SKButton_SelectCNZMappingOverride
                 move.l  #Map_HCZButton,mappings(a0)
                 move.w  #make_art_tile(ArtTile_HCZButton,1,0),art_tile(a0)
 
-loc_2C544:
+SKButton_SelectCNZMappingOverride:
                 cmpi.b  #3,(Current_zone).w
-                bne.s   loc_2C55A
+                bne.s   SKButton_SelectFBZArtOnlyOverride
                 move.l  #Map_CNZButton,mappings(a0)
                 move.w  #make_art_tile(ArtTile_CNZMisc+$C9,2,0),art_tile(a0)
 
-loc_2C55A:
+SKButton_SelectFBZArtOnlyOverride:
                 cmpi.b  #4,(Current_zone).w
-                bne.s   loc_2C568
+                bne.s   SKButton_SelectLRZMappingAndActArt
                 move.w  #make_art_tile(ArtTile_FBZButton,0,0),art_tile(a0)
 
-loc_2C568:
+SKButton_SelectLRZMappingAndActArt:
                 cmpi.b  #9,(Current_zone).w
-                bne.s   loc_2C58A
+                bne.s   SKButton_InitNormalGeometry
                 move.l  #Map_LRZButton,mappings(a0)
                 move.w  #make_art_tile(ArtTile_LRZMisc,3,0),art_tile(a0)
                 tst.b   (Current_act).w
-                beq.s   loc_2C58A
+                beq.s   SKButton_InitNormalGeometry
                 move.w  #make_art_tile(ArtTile_LRZ2Misc+$1C,1,0),art_tile(a0)
 
-loc_2C58A:
+SKButton_InitNormalGeometry:
                 move.b  #4,render_flags(a0)
                 move.b  #$10,width_pixels(a0)
                 move.b  #8,height_pixels(a0)
                 move.w  #$200,priority(a0)
                 addq.w  #4,y_pos(a0)
                 btst    #5,subtype(a0)
-                beq.s   loc_2C5B8
-                move.l  #loc_2C62C,(a0)
-                bra.w   loc_2C62C
+                beq.s   SKButton_InstallNormalFullSolidHandler
+                move.l  #SKButton_UpdateNormalTopOnlyButton,(a0)
+                bra.w   SKButton_UpdateNormalTopOnlyButton
 ; ---------------------------------------------------------------------------
 
-loc_2C5B8:
-                move.l  #loc_2C5BE,(a0)
+SKButton_InstallNormalFullSolidHandler:
+                move.l  #SKButton_UpdateNormalFullSolidButton,(a0)
 
-loc_2C5BE:
+SKButton_UpdateNormalFullSolidButton:
                 tst.b   render_flags(a0)
-                bpl.s   loc_2C626
+                bpl.s   SKButton_DrawFullSolidIfVisible
                 move.w  #$1B,d1
                 move.w  #4,d2
                 move.w  #5,d3
@@ -64,36 +64,37 @@ loc_2C5BE:
                 lea     (a3,d0.w),a3
                 moveq   #0,d3
                 btst    #6,subtype(a0)
-                beq.s   loc_2C5FC
+                beq.s   SKButton_UpdateFullSolidPress
                 moveq   #7,d3
 
-loc_2C5FC:
+SKButton_UpdateFullSolidPress:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                bne.s   loc_2C612
+                bne.s   SKButton_TryFullSolidPressSound
                 btst    #4,subtype(a0)
-                bne.s   loc_2C626
+                bne.s   SKButton_DrawFullSolidIfVisible
                 bclr    d3,(a3)
-                bra.s   loc_2C626
+                bra.s   SKButton_DrawFullSolidIfVisible
 ; ---------------------------------------------------------------------------
 
-loc_2C612:
+; Play the press sound only when the entire trigger byte is zero
+SKButton_TryFullSolidPressSound:
                 tst.b   (a3)
-                bne.s   loc_2C61E
+                bne.s   SKButton_SetFullSolidTriggerAndFrame
                 moveq   #signextendB(sfx_Switch),d0
                 jsr     (Play_SFX).l
 
-loc_2C61E:
+SKButton_SetFullSolidTriggerAndFrame:
                 bset    d3,(a3)
                 move.b  #1,mapping_frame(a0)
 
-loc_2C626:
+SKButton_DrawFullSolidIfVisible:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_2C62C:
+SKButton_UpdateNormalTopOnlyButton:
                 tst.b   render_flags(a0)
-                bpl.s   loc_2C690
+                bpl.s   SKButton_CullAndDrawNormalTopOnlyButton
                 move.w  #$10,d1
                 move.w  #6,d3
                 move.w  x_pos(a0),d4
@@ -105,43 +106,44 @@ loc_2C62C:
                 lea     (a3,d0.w),a3
                 moveq   #0,d3
                 btst    #6,subtype(a0)
-                beq.s   loc_2C666
+                beq.s   SKButton_UpdateTopOnlyPress
                 moveq   #7,d3
 
-loc_2C666:
+SKButton_UpdateTopOnlyPress:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                bne.s   loc_2C67C
+                bne.s   SKButton_TryTopOnlyPressSound
                 btst    #4,subtype(a0)
-                bne.s   loc_2C690
+                bne.s   SKButton_CullAndDrawNormalTopOnlyButton
                 bclr    d3,(a3)
-                bra.s   loc_2C690
+                bra.s   SKButton_CullAndDrawNormalTopOnlyButton
 ; ---------------------------------------------------------------------------
 
-loc_2C67C:
+; Play the press sound only when the entire trigger byte is zero
+SKButton_TryTopOnlyPressSound:
                 tst.b   (a3)
-                bne.s   loc_2C688
+                bne.s   SKButton_SetTopOnlyTriggerAndFrame
                 moveq   #signextendB(sfx_Switch),d0
                 jsr     (Play_SFX).l
 
-loc_2C688:
+SKButton_SetTopOnlyTriggerAndFrame:
                 bset    d3,(a3)
                 move.b  #1,mapping_frame(a0)
 
-loc_2C690:
+SKButton_CullAndDrawNormalTopOnlyButton:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_2C696:
+SKButton_InitializeCompetitionButton:
                 move.l  #Map_2PButton,mappings(a0)
                 move.w  #make_art_tile(ArtTile_2PArt_1,0,0),art_tile(a0)
                 move.b  #4,render_flags(a0)
                 move.b  #$C,width_pixels(a0)
                 move.w  #$200,priority(a0)
                 addq.w  #4,y_pos(a0)
-                move.l  #loc_2C6C0,(a0)
+                move.l  #SKButton_UpdateCompetitionButton,(a0)
 
-loc_2C6C0:
+SKButton_UpdateCompetitionButton:
                 move.w  #$13,d1
                 move.w  #4,d2
                 move.w  #5,d3
@@ -155,24 +157,25 @@ loc_2C6C0:
                 moveq   #0,d3
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                bne.s   loc_2C704
+                bne.s   SKButton_TryCompPressSound
                 btst    #4,subtype(a0)
-                bne.s   loc_2C718
+                bne.s   SKButton_DrawCompetitionButton
                 bclr    d3,(a3)
-                bra.s   loc_2C718
+                bra.s   SKButton_DrawCompetitionButton
 ; ---------------------------------------------------------------------------
 
-loc_2C704:
+; Play the press sound only when the entire trigger byte is zero
+SKButton_TryCompPressSound:
                 tst.b   (a3)
-                bne.s   loc_2C710
+                bne.s   SKButton_SetCompTriggerAndFrame
                 moveq   #signextendB(sfx_Switch),d0
                 jsr     (Play_SFX).l
 
-loc_2C710:
+SKButton_SetCompTriggerAndFrame:
                 bset    d3,(a3)
                 move.b  #1,mapping_frame(a0)
 
-loc_2C718:
+SKButton_DrawCompetitionButton:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_Button:

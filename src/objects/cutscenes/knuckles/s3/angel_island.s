@@ -181,9 +181,9 @@ loc_448FE:
 ; ---------------------------------------------------------------------------
 
 loc_44910:
-                lea     (word_29AF0).l,a4
+                lea     (S3Cork_AIZCorkVelocityPairs).l,a4
                 addq.b  #1,mapping_frame(a0)
-                move.l  #loc_29838,(a0)
+                move.l  #S3Cork_MoveFragmentAndApplyGravity,(a0)
                 jmp     (BreakObjectToPieces).l
 ; ---------------------------------------------------------------------------
 

@@ -10,34 +10,34 @@ Obj_CorkFloor:
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
                 move.b  #$10,width_pixels(a0)
                 move.b  #$28,height_pixels(a0)
-                move.l  #word_2A8B0,$3C(a0)
+                move.l  #SKCork_AIZCorkVelocityPairs,$3C(a0)
                 cmpi.w  #1,(Current_zone_and_act).w
-                bne.s   loc_2A41A
+                bne.s   SKCork_SelectCNZCorkResources
                 move.l  #Map_AIZCorkFloor2,mappings(a0)
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
                 move.b  #$2C,height_pixels(a0)
 
-loc_2A41A:
+SKCork_SelectCNZCorkResources:
                 cmpi.b  #3,(Current_zone).w
-                bne.s   loc_2A444
+                bne.s   SKCork_SelectFBZCorkResources
                 move.l  #Map_CNZCorkFloor,mappings(a0)
                 move.w  #make_art_tile(ArtTile_CNZPlatform,2,0),art_tile(a0)
                 move.b  #$20,width_pixels(a0)
                 move.b  #$20,height_pixels(a0)
-                move.l  #word_2A8E0,$3C(a0)
+                move.l  #SKCork_CNZLBZCorkVelocityPairs,$3C(a0)
 
-loc_2A444:
+SKCork_SelectFBZCorkResources:
                 cmpi.b  #4,(Current_zone).w
-                bne.s   loc_2A46E
+                bne.s   SKCork_SelectICZProfileOrFlatCork
                 move.l  #Map_FBZCorkFloor,mappings(a0)
                 move.w  #make_art_tile(ArtTile_FBZMisc+$C1,1,0),art_tile(a0)
                 move.b  #$10,width_pixels(a0)
                 move.b  #$10,height_pixels(a0)
-                move.l  #word_2A884,$3C(a0)
+                move.l  #SKCork_ICZFlatAndFBZVelocityPairs,$3C(a0)
 
-loc_2A46E:
+SKCork_SelectICZProfileOrFlatCork:
                 cmpi.b  #5,(Current_zone).w
-                bne.s   loc_2A4C2
+                bne.s   SKCork_SelectLBZCorkResources
                 move.l  #Map_ICZCorkFloor,mappings(a0)
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
                 move.b  #$10,width_pixels(a0)
@@ -47,36 +47,36 @@ loc_2A46E:
                 andi.b  #$F,d0
                 move.b  d0,mapping_frame(a0)
                 andi.b  #$10,d1
-                bne.s   loc_2A4AE
-                move.l  #loc_2A6D4,(a0)
-                bra.w   loc_2A6D4
+                bne.s   SKCork_SelectICZSmallFlatCorkResources
+                move.l  #SKCork_CheckICZProfileAndLayers,(a0)
+                bra.w   SKCork_CheckICZProfileAndLayers
 ; ---------------------------------------------------------------------------
 
-loc_2A4AE:
-                move.l  #word_2A884,$3C(a0)
+SKCork_SelectICZSmallFlatCorkResources:
+                move.l  #SKCork_ICZFlatAndFBZVelocityPairs,$3C(a0)
                 move.w  #make_art_tile(ArtTile_ICZMisc1,2,0),art_tile(a0)
                 move.b  #$10,height_pixels(a0)
 
-loc_2A4C2:
+SKCork_SelectLBZCorkResources:
                 cmpi.b  #6,(Current_zone).w
-                bne.s   loc_2A4EC
+                bne.s   SKCork_SelectVerticalOrRollingCorkMode
                 move.l  #Map_LBZCorkFloor,mappings(a0)
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
                 move.b  #$20,width_pixels(a0)
                 move.b  #$20,height_pixels(a0)
-                move.l  #word_2A8E0,$3C(a0)
+                move.l  #SKCork_CNZLBZCorkVelocityPairs,$3C(a0)
 
-loc_2A4EC:
+SKCork_SelectVerticalOrRollingCorkMode:
                 tst.b   subtype(a0)
-                bne.s   loc_2A4FC
-                move.l  #loc_2A618,(a0)
-                bra.w   loc_2A618
+                bne.s   SKCork_InstallRollingCorkTopBreakHandler
+                move.l  #SKCork_UpdateVerticalResponseBreakCork,(a0)
+                bra.w   SKCork_UpdateVerticalResponseBreakCork
 ; ---------------------------------------------------------------------------
 
-loc_2A4FC:
-                move.l  #loc_2A502,(a0)
+SKCork_InstallRollingCorkTopBreakHandler:
+                move.l  #SKCork_CachePlayersAndCheckTopBreak,(a0)
 
-loc_2A502:
+SKCork_CachePlayersAndCheckTopBreak:
                 move.w  (Chain_bonus_counter).w,$38(a0)
                 move.b  (Player_1+anim).w,$34(a0)
                 move.b  (Player_2+anim).w,$36(a0)
@@ -91,45 +91,46 @@ loc_2A502:
                 jsr     (SolidObjectFull).l
                 move.b  status(a0),d0
                 andi.w  #standing_mask,d0
-                bne.s   loc_2A542
+                bne.s   SKCork_CheckRollWithBothRiders
 
-loc_2A53C:
+SKCork_DrawUnbrokenRollingCorkInRange:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_2A542:
+; If both standing bits are set, require a cached rolling animation from at least one rider
+SKCork_CheckRollWithBothRiders:
                 cmpi.b  #p1_standing|p2_standing,d0
-                bne.s   loc_2A570
+                bne.s   SKCork_CheckFirstSingleCorkRiderRolling
                 cmpi.b  #2,$34(a0)
-                beq.s   loc_2A558
+                beq.s   SKCork_ReleaseBothRiders
                 cmpi.b  #2,$36(a0)
-                bne.s   loc_2A53C
+                bne.s   SKCork_DrawUnbrokenRollingCorkInRange
 
-loc_2A558:
+SKCork_ReleaseBothRiders:
                 lea     (Player_1).w,a1
                 move.b  $34(a0),d0
                 bsr.s   ReleaseCorkRiderWithConditionalBounce
                 lea     (Player_2).w,a1
                 move.b  $36(a0),d0
                 bsr.s   ReleaseCorkRiderWithConditionalBounce
-                bra.w   loc_2A5D8
+                bra.w   SKCork_RestoreChainAndShatterRollingCork
 ; ---------------------------------------------------------------------------
 
-loc_2A570:
+SKCork_CheckFirstSingleCorkRiderRolling:
                 move.b  d0,d1
                 andi.b  #8,d1
-                beq.s   loc_2A5C0
+                beq.s   SKCork_CheckSecondSingleCorkRiderRolling
                 cmpi.b  #2,$34(a0)
-                bne.s   loc_2A53C
+                bne.s   SKCork_DrawUnbrokenRollingCorkInRange
                 lea     (Player_1).w,a1
                 bsr.s   BouncePlayerFromBrokenCorkFloor
-                bra.s   loc_2A5D8
+                bra.s   SKCork_RestoreChainAndShatterRollingCork
 
 ; =============== S U B R O U T I N E =======================================
 
 ReleaseCorkRiderWithConditionalBounce:
                 cmpi.b  #2,d0
-                bne.s   loc_2A5AC
+                bne.s   SKCork_FinishGenericCorkAirborneRelease
 ; End of function ReleaseCorkRiderWithConditionalBounce
 
 ; =============== S U B R O U T I N E =======================================
@@ -141,7 +142,7 @@ BouncePlayerFromBrokenCorkFloor:
                 move.b  #2,anim(a1)
                 move.w  #-$300,y_vel(a1)
 
-loc_2A5AC:
+SKCork_FinishGenericCorkAirborneRelease:
                 bset    #Status_InAir,status(a1)
                 bclr    #Status_OnObj,status(a1)
                 move.b  #2,routine(a1)
@@ -150,35 +151,35 @@ loc_2A5AC:
 
 ; ---------------------------------------------------------------------------
 
-loc_2A5C0:
+SKCork_CheckSecondSingleCorkRiderRolling:
                 andi.b  #$10,d0
-                beq.w   loc_2A53C
+                beq.w   SKCork_DrawUnbrokenRollingCorkInRange
                 cmpi.b  #2,$36(a0)
-                bne.w   loc_2A53C
+                bne.w   SKCork_DrawUnbrokenRollingCorkInRange
                 lea     (Player_2).w,a1
                 bsr.s   BouncePlayerFromBrokenCorkFloor
 
-loc_2A5D8:
+SKCork_RestoreChainAndShatterRollingCork:
                 move.w  $38(a0),(Chain_bonus_counter).w
                 andi.b  #$E7,status(a0)
                 movea.l $3C(a0),a4
                 addq.b  #1,mapping_frame(a0)
-                move.l  #loc_2A5F8,(a0)
+                move.l  #SKCork_MoveFragmentAndApplyGravity,(a0)
                 jsr     (BreakObjectToPieces).l
 
-loc_2A5F8:
+SKCork_MoveFragmentAndApplyGravity:
                 jsr     (MoveSprite2).l
                 addi.w  #$18,y_vel(a0)
                 tst.b   render_flags(a0)
-                bpl.w   loc_2A612
+                bpl.w   SKCork_DeleteOffscreenFragment
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2A612:
+SKCork_DeleteOffscreenFragment:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2A618:
+SKCork_UpdateVerticalResponseBreakCork:
                 move.w  (Player_1+y_vel).w,$30(a0)
                 move.w  (Player_2+y_vel).w,$32(a0)
                 moveq   #0,d1
@@ -192,62 +193,62 @@ loc_2A618:
                 jsr     (SolidObjectFull).l
                 swap    d6
                 andi.w  #4|8,d6
-                bne.s   loc_2A650
+                bne.s   SKCork_RestoreP1ImpactYVel
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_2A650:
+SKCork_RestoreP1ImpactYVel:
                 move.b  d6,d0
                 andi.b  #4,d0
-                beq.s   loc_2A674
+                beq.s   SKCork_RestoreP2ImpactYVel
                 lea     (Player_1).w,a1
                 move.w  $30(a0),y_vel(a1)
                 andi.b  #8,d6
-                beq.s   loc_2A68C
+                beq.s   SKCork_DetachP1BeforeVerticalBreak
                 lea     (Player_2).w,a1
                 move.w  $32(a0),y_vel(a1)
-                bra.s   loc_2A68C
+                bra.s   SKCork_DetachP1BeforeVerticalBreak
 ; ---------------------------------------------------------------------------
 
-loc_2A674:
+SKCork_RestoreP2ImpactYVel:
                 andi.b  #8,d6
-                beq.s   loc_2A686
+                beq.s   SKCork_DrawVerticalCork
                 lea     (Player_2).w,a1
                 move.w  $32(a0),y_vel(a1)
-                bra.s   loc_2A68C
+                bra.s   SKCork_DetachP1BeforeVerticalBreak
 ; ---------------------------------------------------------------------------
 
-loc_2A686:
+SKCork_DrawVerticalCork:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_2A68C:
+SKCork_DetachP1BeforeVerticalBreak:
                 btst    #p1_standing_bit,status(a0)
-                beq.s   loc_2A6A4
+                beq.s   SKCork_DetachP2BeforeVerticalBreak
                 lea     (Player_1).w,a1
                 bset    #Status_InAir,status(a1)
                 bclr    #Status_OnObj,status(a1)
 
-loc_2A6A4:
+SKCork_DetachP2BeforeVerticalBreak:
                 btst    #p2_standing_bit,status(a0)
-                beq.s   loc_2A6BC
+                beq.s   SKCork_ShatterVerticalResponseCork
                 lea     (Player_2).w,a1
                 bset    #Status_InAir,status(a1)
                 bclr    #Status_OnObj,status(a1)
 
-loc_2A6BC:
+SKCork_ShatterVerticalResponseCork:
                 movea.l $3C(a0),a4
                 addq.b  #1,mapping_frame(a0)
-                move.l  #loc_2A5F8,(a0)
+                move.l  #SKCork_MoveFragmentAndApplyGravity,(a0)
                 jsr     (BreakObjectToPieces).l
-                bra.w   loc_2A5F8
+                bra.w   SKCork_MoveFragmentAndApplyGravity
 ; ---------------------------------------------------------------------------
 
-loc_2A6D4:
+SKCork_CheckICZProfileAndLayers:
                 move.w  (Chain_bonus_counter).w,$38(a0)
                 move.b  (Player_1+anim).w,$34(a0)
                 move.b  (Player_2+anim).w,$36(a0)
-                lea     (byte_2A894).l,a2
+                lea     (SKCork_ICZCorkSignedHeightProfile).l,a2
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -257,75 +258,75 @@ loc_2A6D4:
                 jsr     (HeightProfile_CollideBothKeepAir).l
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                bne.s   loc_2A716
+                bne.s   SKCork_CheckBothICZCorkRidersEligibility
 
-loc_2A710:
+SKCork_DrawUnbrokenICZProfileCork:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_2A716:
+SKCork_CheckBothICZCorkRidersEligibility:
                 cmpi.b  #p1_standing|p2_standing,d0
-                bne.s   loc_2A77A
+                bne.s   SKCork_CheckSingleICZRiderP1
                 cmpi.b  #2,$34(a0)
-                bne.s   loc_2A732
+                bne.s   SKCork_ResetP1ICZLayersAndTryP2
                 tst.b   subtype(a0)
-                bmi.s   loc_2A762
+                bmi.s   SKCork_ReleaseBothICZRiders
                 cmpi.b  #$E,(Player_1+top_solid_bit).w
-                beq.s   loc_2A762
+                beq.s   SKCork_ReleaseBothICZRiders
 
-loc_2A732:
+SKCork_ResetP1ICZLayersAndTryP2:
                 move.b  #$C,(Player_1+top_solid_bit).w
                 move.b  #$D,(Player_1+lrb_solid_bit).w
                 cmpi.b  #2,$36(a0)
-                bne.s   loc_2A754
+                bne.s   SKCork_ResetP2ICZLayers
                 tst.b   subtype(a0)
-                bmi.s   loc_2A762
+                bmi.s   SKCork_ReleaseBothICZRiders
                 cmpi.b  #$E,(Player_2+top_solid_bit).w
-                beq.s   loc_2A762
+                beq.s   SKCork_ReleaseBothICZRiders
 
-loc_2A754:
+SKCork_ResetP2ICZLayers:
                 move.b  #$C,(Player_2+top_solid_bit).w
                 move.b  #$D,(Player_2+lrb_solid_bit).w
-                bra.s   loc_2A710
+                bra.s   SKCork_DrawUnbrokenICZProfileCork
 ; ---------------------------------------------------------------------------
 
-loc_2A762:
+SKCork_ReleaseBothICZRiders:
                 lea     (Player_1).w,a1
                 move.b  $34(a0),d0
                 bsr.s   ReleaseIczCorkRiderWithConditionalRoll
                 lea     (Player_2).w,a1
                 move.b  $36(a0),d0
                 bsr.s   ReleaseIczCorkRiderWithConditionalRoll
-                bra.w   loc_2A816
+                bra.w   SKCork_ShatterICZFromFrameVel
 ; ---------------------------------------------------------------------------
 
-loc_2A77A:
+SKCork_CheckSingleICZRiderP1:
                 move.b  d0,d1
                 andi.b  #8,d1
-                beq.s   loc_2A7E2
+                beq.s   SKCork_CheckSingleICZRiderP2
                 cmpi.b  #2,$34(a0)
-                bne.s   loc_2A798
+                bne.s   SKCork_ResetFirstSingleICZRiderLayers
                 tst.b   subtype(a0)
-                bmi.s   loc_2A7A8
+                bmi.s   SKCork_ReleaseFirstEligibleICZCorkRider
                 cmpi.b  #$E,(Player_1+top_solid_bit).w
-                beq.s   loc_2A7A8
+                beq.s   SKCork_ReleaseFirstEligibleICZCorkRider
 
-loc_2A798:
+SKCork_ResetFirstSingleICZRiderLayers:
                 move.b  #$C,(Player_1+top_solid_bit).w
                 move.b  #$D,(Player_1+lrb_solid_bit).w
-                bra.w   loc_2A710
+                bra.w   SKCork_DrawUnbrokenICZProfileCork
 ; ---------------------------------------------------------------------------
 
-loc_2A7A8:
+SKCork_ReleaseFirstEligibleICZCorkRider:
                 lea     (Player_1).w,a1
                 bsr.s   ReleasePlayerFromIczCorkFloor
-                bra.s   loc_2A816
+                bra.s   SKCork_ShatterICZFromFrameVel
 
 ; =============== S U B R O U T I N E =======================================
 
 ReleaseIczCorkRiderWithConditionalRoll:
                 cmpi.b  #2,d0
-                bne.s   loc_2A7CE
+                bne.s   SKCork_FinishICZCorkAirborneRelease
 ; End of function ReleaseIczCorkRiderWithConditionalRoll
 
 ; =============== S U B R O U T I N E =======================================
@@ -336,7 +337,7 @@ ReleasePlayerFromIczCorkFloor:
                 move.b  #7,x_radius(a1)
                 move.b  #2,anim(a1)
 
-loc_2A7CE:
+SKCork_FinishICZCorkAirborneRelease:
                 bset    #Status_InAir,status(a1)
                 bclr    #Status_OnObj,status(a1)
                 move.b  #2,routine(a1)
@@ -345,30 +346,30 @@ loc_2A7CE:
 
 ; ---------------------------------------------------------------------------
 
-loc_2A7E2:
+SKCork_CheckSingleICZRiderP2:
                 andi.b  #$10,d0
-                beq.w   loc_2A710
+                beq.w   SKCork_DrawUnbrokenICZProfileCork
                 cmpi.b  #2,$36(a0)
-                bne.s   loc_2A800
+                bne.s   SKCork_ResetSecondSingleICZRiderLayers
                 tst.b   subtype(a0)
-                bmi.s   loc_2A810
+                bmi.s   SKCork_ReleaseSecondEligibleICZCorkRider
                 cmpi.b  #$E,(Player_2+top_solid_bit).w
-                beq.s   loc_2A810
+                beq.s   SKCork_ReleaseSecondEligibleICZCorkRider
 
-loc_2A800:
+SKCork_ResetSecondSingleICZRiderLayers:
                 move.b  #$C,(Player_2+top_solid_bit).w
                 move.b  #$D,(Player_2+lrb_solid_bit).w
-                bra.w   loc_2A710
+                bra.w   SKCork_DrawUnbrokenICZProfileCork
 ; ---------------------------------------------------------------------------
 
-loc_2A810:
+SKCork_ReleaseSecondEligibleICZCorkRider:
                 lea     (Player_2).w,a1
                 bsr.s   ReleasePlayerFromIczCorkFloor
 
-loc_2A816:
+SKCork_ShatterICZFromFrameVel:
                 move.w  $38(a0),(Chain_bonus_counter).w
                 andi.b  #$E7,status(a0)
-                lea     (word_2A84C).l,a4
+                lea     (SKCork_ICZFrameShiftedVelocityPairs).l,a4
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
                 addq.b  #1,mapping_frame(a0)
@@ -376,11 +377,11 @@ loc_2A816:
                 add.w   d0,d0
                 add.w   d0,d0
                 lea     (a4,d0.w),a4
-                move.l  #loc_2A5F8,(a0)
+                move.l  #SKCork_MoveFragmentAndApplyGravity,(a0)
                 jsr     (BreakObjectToPieces).l
-                bra.w   loc_2A5F8
+                bra.w   SKCork_MoveFragmentAndApplyGravity
 ; ---------------------------------------------------------------------------
-word_2A84C:
+SKCork_ICZFrameShiftedVelocityPairs:
                 dc.w    -$140, -$A00
                 dc.w    $140, -$A00
                 dc.w    -$120, -$900
@@ -395,12 +396,12 @@ word_2A84C:
                 dc.w    $A0, -$580
                 dc.w    -$80, -$500
                 dc.w    $80, -$500
-word_2A884:
+SKCork_ICZFlatAndFBZVelocityPairs:
                 dc.w    -$200, -$200
                 dc.w    $200, -$200
                 dc.w    -$100, -$100
                 dc.w    $100, -$100
-byte_2A894:
+SKCork_ICZCorkSignedHeightProfile:
                 dc.b    $23, $23
                 dc.b    $22, $22
                 dc.b    $21, $21
@@ -415,7 +416,7 @@ byte_2A894:
                 dc.b    $15, $15
                 dc.b    $14, $14
                 dc.b    $13, $13
-word_2A8B0:
+SKCork_AIZCorkVelocityPairs:
                 dc.w    -$100, -$200
                 dc.w    $100, -$200
                 dc.w    -$E0, -$1C0
@@ -428,7 +429,7 @@ word_2A8B0:
                 dc.w    $80, -$100
                 dc.w    -$60,  -$C0
                 dc.w    $60,  -$C0
-word_2A8E0:
+SKCork_CNZLBZCorkVelocityPairs:
                 dc.w    -$400, -$400
                 dc.w    -$200, -$400
                 dc.w    $200, -$400

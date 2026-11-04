@@ -125,7 +125,7 @@ Obj_CNZWaterLevelCorkFloor:
 
 loc_65D46:
                 movea.w $44(a0),a1
-                cmpi.l  #loc_2A5F8,(a1)
+                cmpi.l  #SKCork_MoveFragmentAndApplyGravity,(a1)
                 beq.s   loc_65D58
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------

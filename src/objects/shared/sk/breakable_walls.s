@@ -6,136 +6,136 @@
 Obj_BreakableWall:
                 move.b  #4,render_flags(a0)
                 move.w  #$280,priority(a0)
-                move.l  #loc_21568,(a0)
+                move.l  #SKWall_UpdateNormalCollision,(a0)
                 move.b  subtype(a0),d0
-                bpl.s   loc_21340
+                bpl.s   SKWall_InitializeAIZOrHCZWallResources
                 tst.b   (Level_trigger_array).w
-                beq.s   loc_21340
+                beq.s   SKWall_InitializeAIZOrHCZWallResources
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_21340:
+SKWall_InitializeAIZOrHCZWallResources:
                 andi.b  #$F,d0
                 move.b  d0,mapping_frame(a0)
                 move.l  #Map_AIZBreakableWall,mappings(a0)
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
                 move.b  #$10,width_pixels(a0)
                 move.b  #$28,height_pixels(a0)
-                move.l  #word_2193A,$34(a0)
-                move.l  #word_2196A,$38(a0)
+                move.l  #SKWall_AIZTallSOZRightVel,$34(a0)
+                move.l  #SKWall_AIZTallSOZLeftVel,$38(a0)
                 cmpi.b  #1,(Current_zone).w
-                bne.s   loc_213D6
+                bne.s   SKWall_SelectMGZWallAndRestrictedBitFour
                 move.l  #Map_HCZBreakableWall,mappings(a0)
                 move.w  #make_art_tile($001,3,0),art_tile(a0)
                 move.b  #$10,width_pixels(a0)
                 move.b  #$20,height_pixels(a0)
-                move.l  #word_2199A,$34(a0)
-                move.l  #word_219BA,$38(a0)
+                move.l  #SKWall_HCZLBZFragmentRightVel,$34(a0)
+                move.l  #SKWall_HCZLBZFragmentLeftVel,$38(a0)
                 cmpi.b  #2,mapping_frame(a0)
-                bne.s   loc_213D6
+                bne.s   SKWall_SelectMGZWallAndRestrictedBitFour
                 move.w  #make_art_tile(ArtTile_HCZ2KnuxWall,2,0),art_tile(a0)
                 move.b  #$18,width_pixels(a0)
                 move.b  #$20,height_pixels(a0)
-                move.l  #word_2199A,$34(a0)
-                move.l  #word_219BA,$38(a0)
-                move.l  #loc_21818,(a0)
+                move.l  #SKWall_HCZLBZFragmentRightVel,$34(a0)
+                move.l  #SKWall_HCZLBZFragmentLeftVel,$38(a0)
+                move.l  #SKWall_UpdateRestrictedCollision,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_213D6:
+SKWall_SelectMGZWallAndRestrictedBitFour:
                 cmpi.b  #2,(Current_zone).w
-                bne.s   loc_21428
+                bne.s   SKWall_TryCNZRestrictedWall
                 move.l  #Map_MGZBreakableWall,mappings(a0)
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
                 move.b  #$20,width_pixels(a0)
                 move.b  #$28,height_pixels(a0)
-                move.l  #word_21A2A,$34(a0)
-                move.l  #word_219DA,$38(a0)
+                move.l  #SKWall_MGZPrimaryNegativeXVelocities,$34(a0)
+                move.l  #SKWall_MGZAlternatePositiveXVelocities,$38(a0)
                 btst    #4,subtype(a0)
-                beq.s   loc_21418
-                move.l  #loc_21818,(a0)
+                beq.s   SKWall_SelectMGZLatchedCollisionFrame
+                move.l  #SKWall_UpdateRestrictedCollision,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_21418:
+SKWall_SelectMGZLatchedCollisionFrame:
                 cmpi.b  #2,mapping_frame(a0)
-                bne.s   loc_21428
-                move.l  #loc_2172E,(a0)
+                bne.s   SKWall_TryCNZRestrictedWall
+                move.l  #SKWall_UpdateLatchedSideCollisionWall,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_21428:
+SKWall_TryCNZRestrictedWall:
                 cmpi.b  #3,(Current_zone).w
-                bne.s   loc_2146A
+                bne.s   SKWall_SelectLBZRestrictedWall
                 move.l  #Map_CNZSOZBreakableWall,mappings(a0)
                 move.w  #make_art_tile(ArtTile_CNZMisc+$CF,2,0),art_tile(a0)
                 move.b  #$10,width_pixels(a0)
                 move.b  #$20,height_pixels(a0)
-                move.l  #word_21A7A,$34(a0)
-                move.l  #word_21A9A,$38(a0)
+                move.l  #SKWall_CNZMHZSOZLRZRightVel,$34(a0)
+                move.l  #SKWall_CNZMHZSOZLRZLeftVel,$38(a0)
                 cmpi.b  #2,mapping_frame(a0)
-                bne.s   loc_2146A
-                move.l  #loc_21818,(a0)
+                bne.s   SKWall_SelectLBZRestrictedWall
+                move.l  #SKWall_UpdateRestrictedCollision,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2146A:
+SKWall_SelectLBZRestrictedWall:
                 cmpi.b  #6,(Current_zone).w
-                bne.s   loc_214A4
+                bne.s   SKWall_SelectMHZRestrictedWall
                 move.l  #Map_LBZBreakableWall,mappings(a0)
                 move.w  #make_art_tile(ArtTile_LBZ2Misc,1,0),art_tile(a0)
                 move.b  #$10,width_pixels(a0)
                 move.b  #$20,height_pixels(a0)
-                move.l  #word_2199A,$34(a0)
-                move.l  #word_219BA,$38(a0)
-                move.l  #loc_21818,(a0)
+                move.l  #SKWall_HCZLBZFragmentRightVel,$34(a0)
+                move.l  #SKWall_HCZLBZFragmentLeftVel,$38(a0)
+                move.l  #SKWall_UpdateRestrictedCollision,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_214A4:
+SKWall_SelectMHZRestrictedWall:
                 cmpi.b  #7,(Current_zone).w
-                bne.s   loc_214DE
+                bne.s   SKWall_SelectSOZRestrictedAndTallWall
                 move.l  #Map_MHZBreakableWall,mappings(a0)
                 move.w  #make_art_tile(ArtTile_MHZMisc+$4,2,0),art_tile(a0)
                 move.b  #$10,width_pixels(a0)
                 move.b  #$20,height_pixels(a0)
-                move.l  #word_21A7A,$34(a0)
-                move.l  #word_21A9A,$38(a0)
-                move.l  #loc_21818,(a0)
+                move.l  #SKWall_CNZMHZSOZLRZRightVel,$34(a0)
+                move.l  #SKWall_CNZMHZSOZLRZLeftVel,$38(a0)
+                move.l  #SKWall_UpdateRestrictedCollision,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_214DE:
+SKWall_SelectSOZRestrictedAndTallWall:
                 cmpi.b  #8,(Current_zone).w
-                bne.s   loc_21536
+                bne.s   SKWall_SelectLRZOrdinaryWall
                 move.l  #Map_CNZSOZBreakableWall,mappings(a0)
                 move.w  #make_art_tile(ArtTile_SOZMisc+$C3,2,0),art_tile(a0)
                 move.b  #$10,width_pixels(a0)
                 move.b  #$20,height_pixels(a0)
-                move.l  #word_21A7A,$34(a0)
-                move.l  #word_21A9A,$38(a0)
-                move.l  #loc_21818,(a0)
+                move.l  #SKWall_CNZMHZSOZLRZRightVel,$34(a0)
+                move.l  #SKWall_CNZMHZSOZLRZLeftVel,$38(a0)
+                move.l  #SKWall_UpdateRestrictedCollision,(a0)
                 cmpi.b  #4,mapping_frame(a0)
-                bne.s   locret_21534
+                bne.s   SKWall_ReturnAfterSOZWallSetup
                 move.b  #$30,height_pixels(a0)
-                move.l  #word_2193A,$34(a0)
-                move.l  #word_2196A,$38(a0)
+                move.l  #SKWall_AIZTallSOZRightVel,$34(a0)
+                move.l  #SKWall_AIZTallSOZLeftVel,$38(a0)
 
-locret_21534:
+SKWall_ReturnAfterSOZWallSetup:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_21536:
+SKWall_SelectLRZOrdinaryWall:
                 cmpi.b  #9,(Current_zone).w
-                bne.s   loc_21568
+                bne.s   SKWall_UpdateNormalCollision
                 move.l  #Map_LRZBreakableWall,mappings(a0)
                 move.w  #make_art_tile(ArtTile_LRZ2Misc,3,0),art_tile(a0)
                 move.b  #$10,width_pixels(a0)
                 move.b  #$20,height_pixels(a0)
-                move.l  #word_21A7A,$34(a0)
-                move.l  #word_21A9A,$38(a0)
+                move.l  #SKWall_CNZMHZSOZLRZRightVel,$34(a0)
+                move.l  #SKWall_CNZMHZSOZLRZLeftVel,$38(a0)
 
-loc_21568:
+SKWall_UpdateNormalCollision:
                 move.w  (Player_1+x_vel).w,$30(a0)
                 move.w  (Player_2+x_vel).w,$32(a0)
                 moveq   #0,d1
@@ -148,76 +148,78 @@ loc_21568:
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull).l
                 tst.b   subtype(a0)
-                bpl.s   loc_215A4
+                bpl.s   SKWall_FilterOrdinaryWallSideContacts
                 tst.b   (Level_trigger_array).w
-                beq.s   loc_215AC
+                beq.s   SKWall_DrawOrdinaryWallInRange
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_215A4:
+SKWall_FilterOrdinaryWallSideContacts:
                 swap    d6
                 andi.w  #3,d6
-                bne.s   loc_215B2
+                bne.s   SKWall_CheckNormalBreakP1
 
-loc_215AC:
+SKWall_DrawOrdinaryWallInRange:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_215B2:
+SKWall_CheckNormalBreakP1:
                 lea     (Player_1).w,a1
                 move.w  $30(a0),d1
                 move.w  d6,d0
                 andi.w  #1,d0
-                beq.s   loc_2162A
+                beq.s   SKWall_CheckNormalBreakP2
                 tst.b   (Super_Sonic_Knux_flag).w
-                bne.s   loc_215F4
+                bne.s   SKWall_BreakFromP1AndRestoreP2
                 cmpi.b  #2,character_id(a1)
-                beq.s   loc_215F4
+                beq.s   SKWall_BreakFromP1AndRestoreP2
                 btst    #Status_FireShield,status_secondary(a1)
-                bne.s   loc_215E0
+                bne.s   SKWall_CheckP1RollAndGetSpeed
                 btst    #p1_pushing_bit,status(a0)
-                beq.s   loc_2162A
+                beq.s   SKWall_CheckNormalBreakP2
 
-loc_215E0:
+SKWall_CheckP1RollAndGetSpeed:
                 cmpi.b  #2,anim(a1)
-                bne.s   loc_2162A
+                bne.s   SKWall_CheckNormalBreakP2
                 move.w  d1,d0
-                bpl.s   loc_215EE
+                bpl.s   SKWall_CheckP1BreakSpeed
                 neg.w   d0
 
-loc_215EE:
+; Require an unsigned speed magnitude of at least $480
+SKWall_CheckP1BreakSpeed:
                 cmpi.w  #$480,d0
-                blo.s   loc_2162A
+                blo.s   SKWall_CheckNormalBreakP2
 
-loc_215F4:
+SKWall_BreakFromP1AndRestoreP2:
                 bclr    #p1_pushing_bit,status(a0)
                 bsr.s   BreakWallFromSideImpact
                 btst    #p2_pushing_bit,status(a0)
-                beq.s   loc_215AC
+                beq.s   SKWall_DrawOrdinaryWallInRange
                 lea     (Player_2).w,a1
                 cmpi.b  #2,anim(a1)
-                bne.s   loc_215AC
+                bne.s   SKWall_DrawOrdinaryWallInRange
                 move.w  $32(a0),x_vel(a1)
                 move.w  x_vel(a1),ground_vel(a1)
                 bclr    #p2_pushing_bit,status(a0)
                 bclr    #Status_Push,status(a1)
-                bra.s   loc_215AC
+                bra.s   SKWall_DrawOrdinaryWallInRange
 ; ---------------------------------------------------------------------------
 
-loc_2162A:
+SKWall_CheckNormalBreakP2:
                 lea     (Player_2).w,a1
                 move.w  $32(a0),d1
                 btst    #p2_pushing_bit,status(a0)
-                beq.w   loc_215AC
+                beq.w   SKWall_DrawOrdinaryWallInRange
                 cmpi.b  #2,anim(a1)
-                bne.w   loc_215AC
+                bne.w   SKWall_DrawOrdinaryWallInRange
                 move.w  d1,d0
-                bpl.s   loc_2164C
+                bpl.s   SKWall_CheckP2SpeedAndBreak
                 neg.w   d0
 
-loc_2164C:
+; Require an unsigned speed magnitude of at least $480, then clear the pushing latch
+SKWall_CheckP2SpeedAndBreak:
                 cmpi.w  #$480,d0
-                blo.w   loc_215AC
+                blo.w   SKWall_DrawOrdinaryWallInRange
                 bclr    #p2_pushing_bit,status(a0)
 
 ; =============== S U B R O U T I N E =======================================
@@ -228,26 +230,26 @@ BreakWallFromSideImpact:
                 movea.l $34(a0),a4
                 move.w  x_pos(a0),d0
                 cmp.w   x_pos(a1),d0
-                blo.s   loc_2167A
+                blo.s   SKWall_FinishImpactAndSpawnFragments
                 subi.w  #8,x_pos(a1)
                 movea.l $38(a0),a4
 
-loc_2167A:
+SKWall_FinishImpactAndSpawnFragments:
                 move.w  x_vel(a1),ground_vel(a1)
                 bclr    #Status_Push,status(a1)         ; set Sonic as not pushing an object
-                move.l  #loc_21692,(a0)
+                move.l  #SKWall_MoveWallFragmentAndApplyGravity,(a0)
                 addq.b  #1,mapping_frame(a0)
                 bsr.s   BreakObjectToPieces
 
-loc_21692:
+SKWall_MoveWallFragmentAndApplyGravity:
                 jsr     (MoveSprite2).l
                 addi.w  #$70,y_vel(a0)                  ; make obj fall
                 tst.b   render_flags(a0)
-                bpl.s   loc_216AA
+                bpl.s   SKWall_DeleteOffscreenFragment
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_216AA:
+SKWall_DeleteOffscreenFragment:
                 jmp     (Delete_Current_Sprite).l
 ; End of function BreakWallFromSideImpact
 
@@ -275,7 +277,7 @@ BreakObjectToPieces2:
 ; loc_216E2:
 BreakObjectToPieces_Loop:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   locret_2172C
+                bne.s   SKWall_ReturnFromFragmentAllocation
                 addq.w  #6,a3                           ; add to mappings
 
 ; loc_216EC:
@@ -294,13 +296,13 @@ BreakObjectToPieces_InitObject:
                 move.w  (a4)+,y_vel(a1)
                 dbf     d1,BreakObjectToPieces_Loop
 
-locret_2172C:
+SKWall_ReturnFromFragmentAllocation:
                 rts
 ; End of function BreakObjectToPieces
 
 ; ---------------------------------------------------------------------------
 
-loc_2172E:
+SKWall_UpdateLatchedSideCollisionWall:
                 move.w  (Player_1+x_vel).w,$30(a0)
                 move.w  (Player_2+x_vel).w,$32(a0)
                 moveq   #0,d1
@@ -314,43 +316,43 @@ loc_2172E:
                 jsr     (SolidObjectFull).l
                 swap    d6
                 andi.b  #3,d6
-                beq.w   loc_217E8
+                beq.w   SKWall_DrawLatchedWallInRange
                 move.b  d6,d0
                 andi.b  #1,d0
-                beq.s   loc_217BC
+                beq.s   SKWall_CheckP2LatchedSideHit
                 lea     (Player_1).w,a1
                 bclr    #6,$37(a1)
-                beq.s   loc_217BC
+                beq.s   SKWall_CheckP2LatchedSideHit
                 move.w  $30(a0),x_vel(a1)
                 move.w  x_vel(a1),ground_vel(a1)
                 bclr    #Status_Push,status(a1)
                 bclr    #p1_pushing_bit,status(a0)
                 bsr.s   BreakWallAfterLatchedSideCollision
                 andi.b  #2,d6
-                beq.s   loc_217E8
+                beq.s   SKWall_DrawLatchedWallInRange
                 lea     (Player_2).w,a1
                 bclr    #6,$37(a1)
-                beq.s   loc_217E8
+                beq.s   SKWall_DrawLatchedWallInRange
                 move.w  $32(a0),x_vel(a1)
                 move.w  x_vel(a1),ground_vel(a1)
                 bclr    #Status_Push,status(a1)
                 bclr    #p2_pushing_bit,status(a0)
-                bra.s   loc_217E8
+                bra.s   SKWall_DrawLatchedWallInRange
 ; ---------------------------------------------------------------------------
 
-loc_217BC:
+SKWall_CheckP2LatchedSideHit:
                 andi.b  #2,d6
-                beq.s   loc_217E8
+                beq.s   SKWall_DrawLatchedWallInRange
                 lea     (Player_2).w,a1
                 bclr    #6,$37(a1)
-                beq.s   loc_217E8
+                beq.s   SKWall_DrawLatchedWallInRange
                 move.w  $32(a0),x_vel(a1)
                 move.w  x_vel(a1),ground_vel(a1)
                 bclr    #Status_Push,status(a1)
                 bclr    #p2_pushing_bit,status(a0)
                 bsr.s   BreakWallAfterLatchedSideCollision
 
-loc_217E8:
+SKWall_DrawLatchedWallInRange:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -359,20 +361,20 @@ BreakWallAfterLatchedSideCollision:
                 movea.l $34(a0),a4
                 move.w  x_pos(a0),d0
                 cmp.w   x_pos(a1),d0
-                blo.s   loc_21806
+                blo.s   SKWall_StartLatchedWallFragmentation
                 subi.w  #8,x_pos(a1)
                 movea.l $38(a0),a4
 
-loc_21806:
-                move.l  #loc_21692,(a0)
+SKWall_StartLatchedWallFragmentation:
+                move.l  #SKWall_MoveWallFragmentAndApplyGravity,(a0)
                 addq.b  #1,mapping_frame(a0)
                 bsr.w   BreakObjectToPieces
-                bra.w   loc_21692
+                bra.w   SKWall_MoveWallFragmentAndApplyGravity
 ; End of function BreakWallAfterLatchedSideCollision
 
 ; ---------------------------------------------------------------------------
 
-loc_21818:
+SKWall_UpdateRestrictedCollision:
                 move.w  (Player_1+x_vel).w,$30(a0)
                 move.w  (Player_2+x_vel).w,$32(a0)
                 moveq   #0,d1
@@ -385,50 +387,50 @@ loc_21818:
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull).l
                 tst.b   subtype(a0)
-                bpl.s   loc_21854
+                bpl.s   SKWall_FilterCharacterRestrictedContacts
                 tst.b   (Level_trigger_array).w
-                beq.s   loc_2185C
+                beq.s   SKWall_DrawRestrictedWallInRange
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_21854:
+SKWall_FilterCharacterRestrictedContacts:
                 swap    d6
                 andi.w  #3,d6
-                bne.s   loc_21862
+                bne.s   SKWall_CheckRestrictedBreakP1
 
-loc_2185C:
+SKWall_DrawRestrictedWallInRange:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_21862:
+SKWall_CheckRestrictedBreakP1:
                 lea     (Player_1).w,a1
                 move.w  $30(a0),d1
                 move.w  d6,d0
                 andi.w  #1,d0
-                beq.s   loc_218B0
+                beq.s   SKWall_CheckRestrictedBreakP2
                 cmpi.b  #2,character_id(a1)
-                bne.s   loc_218B0
+                bne.s   SKWall_CheckRestrictedBreakP2
                 bclr    #p1_pushing_bit,status(a0)
                 bsr.s   BreakWallFromKnucklesImpact
                 btst    #p2_pushing_bit,status(a0)
-                beq.s   loc_2185C
+                beq.s   SKWall_DrawRestrictedWallInRange
                 lea     (Player_2).w,a1
                 cmpi.b  #2,character_id(a1)
-                bne.s   loc_2185C
+                bne.s   SKWall_DrawRestrictedWallInRange
                 move.w  $32(a0),x_vel(a1)
                 move.w  x_vel(a1),ground_vel(a1)
                 bclr    #p2_pushing_bit,status(a0)
                 bclr    #Status_Push,status(a1)
-                bra.s   loc_2185C
+                bra.s   SKWall_DrawRestrictedWallInRange
 ; ---------------------------------------------------------------------------
 
-loc_218B0:
+SKWall_CheckRestrictedBreakP2:
                 lea     (Player_2).w,a1
                 move.w  $32(a0),d1
                 btst    #p2_pushing_bit,status(a0)
-                beq.s   loc_2185C
+                beq.s   SKWall_DrawRestrictedWallInRange
                 cmpi.b  #2,character_id(a1)
-                bne.s   loc_2185C
+                bne.s   SKWall_DrawRestrictedWallInRange
                 bclr    #p2_pushing_bit,status(a0)
 
 ; =============== S U B R O U T I N E =======================================
@@ -439,33 +441,33 @@ BreakWallFromKnucklesImpact:
                 movea.l $34(a0),a4
                 move.w  x_pos(a0),d0
                 cmp.w   x_pos(a1),d0
-                blo.s   loc_218EE
+                blo.s   SKWall_FinalizeKnucklesImpact
                 subi.w  #8,x_pos(a1)
                 movea.l $38(a0),a4
 
-loc_218EE:
+SKWall_FinalizeKnucklesImpact:
                 move.w  x_vel(a1),ground_vel(a1)
                 bclr    #Status_Push,status(a1)
                 cmpi.b  #2,character_id(a1)
-                bne.s   loc_21928
+                bne.s   SKWall_SpawnKnuxBreakFragments
                 cmpi.b  #1,double_jump_flag(a1)
-                bne.s   loc_21928
+                bne.s   SKWall_SpawnKnuxBreakFragments
                 move.b  #2,double_jump_flag(a1)
                 move.b  #$21,anim(a1)
                 bclr    #Status_Facing,status(a1)
                 tst.w   x_vel(a1)
-                bpl.s   loc_21928
+                bpl.s   SKWall_SpawnKnuxBreakFragments
                 bset    #Status_Facing,status(a1)
 
-loc_21928:
-                move.l  #loc_21692,(a0)
+SKWall_SpawnKnuxBreakFragments:
+                move.l  #SKWall_MoveWallFragmentAndApplyGravity,(a0)
                 addq.b  #1,mapping_frame(a0)
                 bsr.w   BreakObjectToPieces
-                bra.w   loc_21692
+                bra.w   SKWall_MoveWallFragmentAndApplyGravity
 ; End of function BreakWallFromKnucklesImpact
 
 ; ---------------------------------------------------------------------------
-word_2193A:
+SKWall_AIZTallSOZRightVel:
                 dc.w    $400, -$500
                 dc.w    $600, -$600
                 dc.w    $600, -$100
@@ -478,7 +480,7 @@ word_2193A:
                 dc.w    $600,  $600
                 dc.w    $300,  $600
                 dc.w    $500,  $700
-word_2196A:
+SKWall_AIZTallSOZLeftVel:
                 dc.w    -$600, -$600
                 dc.w    -$400, -$500
                 dc.w    -$800, -$200
@@ -491,7 +493,7 @@ word_2196A:
                 dc.w    -$400,  $500
                 dc.w    -$500,  $700
                 dc.w    -$300,  $600
-word_2199A:
+SKWall_HCZLBZFragmentRightVel:
                 dc.w    $400, -$500
                 dc.w    $600, -$600
                 dc.w    $600, -$100
@@ -500,7 +502,7 @@ word_2199A:
                 dc.w    $800,  $200
                 dc.w    $400,  $500
                 dc.w    $600,  $600
-word_219BA:
+SKWall_HCZLBZFragmentLeftVel:
                 dc.w    -$600, -$600
                 dc.w    -$400, -$500
                 dc.w    -$800, -$200
@@ -509,7 +511,7 @@ word_219BA:
                 dc.w    -$600,  $100
                 dc.w    -$600,  $600
                 dc.w    -$400,  $500
-word_219DA:
+SKWall_MGZAlternatePositiveXVelocities:
                 dc.w    $400, -$500
                 dc.w    $500, -$580
                 dc.w    $600, -$600
@@ -530,7 +532,7 @@ word_219DA:
                 dc.w    $500,  $580
                 dc.w    $600,  $600
                 dc.w    $700,  $680
-word_21A2A:
+SKWall_MGZPrimaryNegativeXVelocities:
                 dc.w    -$700, -$680
                 dc.w    -$600, -$600
                 dc.w    -$500, -$580
@@ -551,7 +553,7 @@ word_21A2A:
                 dc.w    -$600,  $600
                 dc.w    -$500,  $580
                 dc.w    -$400,  $500
-word_21A7A:
+SKWall_CNZMHZSOZLRZRightVel:
                 dc.w    $400, -$500
                 dc.w    $600, -$600
                 dc.w    $600, -$100
@@ -560,7 +562,7 @@ word_21A7A:
                 dc.w    $800,  $200
                 dc.w    $400,  $500
                 dc.w    $600,  $600
-word_21A9A:
+SKWall_CNZMHZSOZLRZLeftVel:
                 dc.w    -$600, -$600
                 dc.w    -$400, -$500
                 dc.w    -$800, -$200

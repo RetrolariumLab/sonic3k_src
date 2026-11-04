@@ -187,9 +187,9 @@ loc_61F70:
 ; ---------------------------------------------------------------------------
 
 loc_61F82:
-                lea     (word_2A8B0).l,a4
+                lea     (SKCork_AIZCorkVelocityPairs).l,a4
                 addq.b  #1,mapping_frame(a0)
-                move.l  #loc_2A5F8,(a0)
+                move.l  #SKCork_MoveFragmentAndApplyGravity,(a0)
                 jmp     (BreakObjectToPieces).l
 ; ---------------------------------------------------------------------------
 

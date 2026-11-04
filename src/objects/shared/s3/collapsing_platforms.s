@@ -7,40 +7,40 @@ Obj_CollapsingPlatform:
                 move.l  #Map_AIZCollapsingPlatform,mappings(a0)
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
                 cmpi.w  #1,(Current_zone_and_act).w
-                bne.s   loc_1DE40
+                bne.s   S3Collapse_SelectDelayAndSlopeData
                 move.l  #Map_AIZCollapsingPlatform2,mappings(a0)
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
 
-loc_1DE40:
-                move.l  #byte_1E49C,$30(a0)
-                move.l  #byte_1E658,$3C(a0)
+S3Collapse_SelectDelayAndSlopeData:
+                move.l  #S3Collapse_AIZPlatformFragmentDelays,$30(a0)
+                move.l  #S3Collapse_AIZPlatformSignedSlopeHeights,$3C(a0)
                 move.b  #$3C,width_pixels(a0)
                 move.b  #$20,height_pixels(a0)
                 cmpi.b  #5,(Current_zone).w
-                bne.s   loc_1DE8E
+                bne.s   S3Collapse_InitPlatformDelayAndHandler
                 move.l  #Map_ICZCollapsingBridge,mappings(a0)
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
-                move.l  #byte_1E4BA,$30(a0)
-                move.l  #byte_1E698,$3C(a0)
+                move.l  #S3Collapse_ICZPlatformFragmentDelays,$30(a0)
+                move.l  #S3Collapse_ICZPlatformSignedSlopeHeights,$3C(a0)
                 move.b  #$30,width_pixels(a0)
                 move.b  #$30,height_pixels(a0)
 
-loc_1DE8E:
+S3Collapse_InitPlatformDelayAndHandler:
                 ori.b   #4,render_flags(a0)
                 move.w  #$280,priority(a0)
                 move.b  #7,$38(a0)
                 move.b  subtype(a0),mapping_frame(a0)
                 ori.b   #$80,status(a0)
-                move.l  #loc_1DEB2,(a0)
+                move.l  #S3Collapse_TickIntactPlatformDelay,(a0)
 
-loc_1DEB2:
+S3Collapse_TickIntactPlatformDelay:
                 tst.b   $3A(a0)
-                beq.s   loc_1DEC4
+                beq.s   S3Collapse_LatchPlatformRiders
                 tst.b   $38(a0)
                 beq.w   ObjPlatformCollapse_CreateFragments
                 subq.b  #1,$38(a0)
 
-loc_1DEC4:
+S3Collapse_LatchPlatformRiders:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
                 beq.s   CollideAndDisplayCollapsingPlatform
@@ -59,19 +59,19 @@ CollideAndDisplayCollapsingPlatform:
 
 ; ---------------------------------------------------------------------------
 
-loc_1DEEC:
+S3Collapse_WaitOrFall:
                 tst.b   $38(a0)
-                beq.s   loc_1DF3C
+                beq.s   S3Collapse_MoveThenCullFragment
                 tst.b   $3A(a0)
-                bne.s   loc_1DF00
+                bne.s   S3Collapse_WaitSolidFragmentAndRelease
                 subq.b  #1,$38(a0)
                 bra.w   Draw_Sprite
 ; ---------------------------------------------------------------------------
 
-loc_1DF00:
+S3Collapse_WaitSolidFragmentAndRelease:
                 bsr.w   CollideAndDisplayCollapsingPlatform
                 subq.b  #1,$38(a0)
-                bne.s   locret_1DF3A
+                bne.s   S3Collapse_RiderReleaseReturn
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 bsr.s   ReleasePlayerFromCollapsingPlatform
@@ -82,20 +82,20 @@ loc_1DF00:
 
 ReleasePlayerFromCollapsingPlatform:
                 btst    d6,status(a0)
-                beq.s   locret_1DF3A
+                beq.s   S3Collapse_RiderReleaseReturn
                 bclr    d6,status(a0)
                 bclr    #Status_OnObj,status(a1)
                 bclr    #Status_Push,status(a1)
                 bset    #Status_InAir,status(a1)
                 move.b  #1,prev_anim(a1)
 
-locret_1DF3A:
+S3Collapse_RiderReleaseReturn:
                 rts
 ; End of function ReleasePlayerFromCollapsingPlatform
 
 ; ---------------------------------------------------------------------------
 
-loc_1DF3C:
+S3Collapse_MoveThenCullFragment:
                 bsr.w   MoveSprite
                 tst.b   render_flags(a0)
                 bpl.w   Delete_Current_Sprite
@@ -103,53 +103,53 @@ loc_1DF3C:
 ; ---------------------------------------------------------------------------
 
 Obj_CollapsingBridge:
-                move.l  #loc_1E150,(a0)
+                move.l  #S3Collapse_TickStandingTriggeredBridge,(a0)
                 ori.b   #4,render_flags(a0)
                 move.w  #$280,priority(a0)
                 cmpi.b  #6,(Current_zone).w
-                bne.s   loc_1DFD4
+                bne.s   S3Collapse_TryHCZBridgeSetup
                 move.b  subtype(a0),d0
                 andi.w  #$3F,d0
                 add.w   d0,d0
                 add.w   d0,d0
                 addq.w  #8,d0
-                bcc.s   loc_1DF7A
+                bcc.s   S3Collapse_SetLBZDelayAndShape
                 move.b  #-1,d0
 
-loc_1DF7A:
+S3Collapse_SetLBZDelayAndShape:
                 move.b  d0,$38(a0)
                 btst    #6,subtype(a0)
-                bne.s   loc_1DFB2
+                bne.s   S3Collapse_InitializeLBZLedgeResources
                 move.l  #Map_LBZCollapsingBridge,mappings(a0)
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
                 move.b  #$40,width_pixels(a0)
                 move.b  #$10,height_pixels(a0)
                 move.l  #LBZBridgeCollapse_TimerArray,$30(a0)
                 move.l  #LBZBridgeCollapse_TimerFlipArray,$34(a0)
-                bra.s   loc_1DFD4
+                bra.s   S3Collapse_TryHCZBridgeSetup
 ; ---------------------------------------------------------------------------
 
-loc_1DFB2:
+S3Collapse_InitializeLBZLedgeResources:
                 move.l  #Map_LBZCollapsingLedge,mappings(a0)
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
                 move.b  #$20,width_pixels(a0)
                 move.b  #$30,height_pixels(a0)
                 move.l  #LBZLedgeCollapse_TimerArray,$30(a0)
 
-loc_1DFD4:
+S3Collapse_TryHCZBridgeSetup:
                 cmpi.b  #1,(Current_zone).w
-                bne.w   loc_1E06E
+                bne.w   S3Collapse_TryMGZBridgeOrSuperBreak
                 move.l  #Map_HCZCollapsingBridge,mappings(a0)
                 move.w  #make_art_tile($001,2,1),art_tile(a0)
                 move.b  subtype(a0),d0
-                bpl.s   loc_1E006
+                bpl.s   S3Collapse_DecodeHCZShapeAndDelays
                 move.b  d0,d1
                 andi.b  #$F,d1
                 move.b  d1,$40(a0)
-                move.l  #loc_1E2E8,(a0)
+                move.l  #S3Collapse_TickTriggerArmedBridge,(a0)
                 andi.b  #$70,d0
 
-loc_1E006:
+S3Collapse_DecodeHCZShapeAndDelays:
                 move.b  d0,d1
                 andi.w  #$F,d0
                 lsl.w   #4,d0
@@ -157,32 +157,32 @@ loc_1E006:
                 move.b  d0,$38(a0)
                 andi.w  #$F0,d1
                 lsr.w   #2,d1
-                lea     byte_1E03E(pc,d1.w),a1
+                lea     S3Collapse_HCZShapeAttributes(pc,d1.w),a1
                 move.b  (a1)+,width_pixels(a0)
                 move.b  (a1)+,height_pixels(a0)
                 move.b  (a1)+,mapping_frame(a0)
                 move.b  (a1)+,subtype(a0)
                 add.w   d1,d1
-                lea     off_1E04E(pc,d1.w),a1
+                lea     S3Collapse_HCZShapeDelayPointerPairs(pc,d1.w),a1
                 move.l  (a1)+,$30(a0)
                 move.l  (a1)+,$34(a0)
-                bra.s   loc_1E06E
+                bra.s   S3Collapse_TryMGZBridgeOrSuperBreak
 ; ---------------------------------------------------------------------------
-byte_1E03E:
+S3Collapse_HCZShapeAttributes:
                 dc.b    $40, $10, 0, $80
                 dc.b    $50, $10, 3, $80
                 dc.b    $40, $10, 6,   0
                 dc.b    $50, $20, 9, $80
-off_1E04E:
-                dc.l    byte_1E508, byte_1E518
-                dc.l    byte_1E528, byte_1E53C
-                dc.l    byte_1E550, byte_1E550
-                dc.l    byte_1E55F, byte_1E577
+S3Collapse_HCZShapeDelayPointerPairs:
+                dc.l    S3Collapse_HCZFirstShapeForwardDelays, S3Collapse_HCZFirstShapeReverseDelays
+                dc.l    S3Collapse_HCZSecondShapeForwardDelays, S3Collapse_HCZSecondShapeReverseDelays
+                dc.l    S3Collapse_HCZShape3SharedDelays, S3Collapse_HCZShape3SharedDelays
+                dc.l    S3Collapse_HCZFourthShapeForwardDelays, S3Collapse_HCZFourthShapeReverseDelays
 ; ---------------------------------------------------------------------------
 
-loc_1E06E:
+S3Collapse_TryMGZBridgeOrSuperBreak:
                 cmpi.b  #2,(Current_zone).w
-                bne.s   loc_1E0F0
+                bne.s   S3Collapse_TryICZBridgeAndTrigger
                 move.l  #Map_MGZCollapsingBridge,mappings(a0)
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
                 move.b  subtype(a0),d0
@@ -193,42 +193,42 @@ loc_1E06E:
                 move.b  d0,$38(a0)
                 andi.w  #$F0,d1
                 lsr.w   #2,d1
-                lea     byte_1E0CC(pc,d1.w),a1
+                lea     S3Collapse_MGZShapeAttributes(pc,d1.w),a1
                 move.b  (a1)+,width_pixels(a0)
                 move.b  (a1)+,height_pixels(a0)
                 move.b  (a1)+,mapping_frame(a0)
                 move.b  (a1)+,subtype(a0)
                 add.w   d1,d1
-                lea     off_1E0D8(pc,d1.w),a1
+                lea     S3Collapse_MGZShapeDelayPointerPairs(pc,d1.w),a1
                 move.l  (a1)+,$30(a0)
                 move.l  (a1)+,$34(a0)
                 cmpi.w  #$10,d1
-                bne.s   loc_1E0F0
-                move.l  #loc_1E1C2,(a0)
+                bne.s   S3Collapse_TryICZBridgeAndTrigger
+                move.l  #S3Collapse_CheckMGZSuperBreakRider,(a0)
                 rts
 ; ---------------------------------------------------------------------------
-byte_1E0CC:
+S3Collapse_MGZShapeAttributes:
                 dc.b    $40, $20,   0, $80
                 dc.b    $30, $20,   3, $80
                 dc.b    $40, $20,   6, $80
-off_1E0D8:
-                dc.l    byte_1E58F, byte_1E5AF
-                dc.l    byte_1E5CF, byte_1E5E7
-                dc.l    byte_1E58F, byte_1E5AF
+S3Collapse_MGZShapeDelayPointerPairs:
+                dc.l    S3Collapse_MGZWideForwardDelays, S3Collapse_MGZWideReverseDelays
+                dc.l    S3Collapse_MGZNarrowForwardDelays, S3Collapse_MGZNarrowReverseDelays
+                dc.l    S3Collapse_MGZWideForwardDelays, S3Collapse_MGZWideReverseDelays
 ; ---------------------------------------------------------------------------
 
-loc_1E0F0:
+S3Collapse_TryICZBridgeAndTrigger:
                 cmpi.b  #5,(Current_zone).w
-                bne.s   loc_1E150
+                bne.s   S3Collapse_TickStandingTriggeredBridge
                 move.b  subtype(a0),d0
-                bpl.s   loc_1E112
+                bpl.s   S3Collapse_InitICZBridgeDelayAndMap
                 move.b  d0,d1
                 andi.b  #$F,d1
                 move.b  d1,$40(a0)
-                move.l  #loc_1E2E8,(a0)
+                move.l  #S3Collapse_TickTriggerArmedBridge,(a0)
                 andi.b  #$70,d0
 
-loc_1E112:
+S3Collapse_InitICZBridgeDelayAndMap:
                 move.b  d0,d1
                 andi.w  #$F,d0
                 lsl.w   #4,d0
@@ -238,47 +238,47 @@ loc_1E112:
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
                 move.b  #$50,width_pixels(a0)
                 move.b  #$38,height_pixels(a0)
-                move.l  #byte_1E5FF,$30(a0)
-                move.l  #byte_1E62B,$34(a0)
+                move.l  #S3Collapse_ICZBridgeForwardDelays,$30(a0)
+                move.l  #S3Collapse_ICZBridgeReverseDelays,$34(a0)
                 move.b  #3,mapping_frame(a0)
 
-loc_1E150:
+S3Collapse_TickStandingTriggeredBridge:
                 tst.b   $3A(a0)
-                beq.s   loc_1E19A
+                beq.s   S3Collapse_LatchBridgeRiders
                 tst.b   $38(a0)
-                bne.s   loc_1E196
+                bne.s   S3Collapse_DecrementArmedBridgeCounter
                 movea.l $30(a0),a4
                 tst.b   subtype(a0)                     ; does this object have a subtype?
-                bpl.s   loc_1E192                       ; if yes, branch to here
+                bpl.s   S3Collapse_StartBridgeStaticSmash  ; if yes, branch to here
                 move.b  status(a0),d0                   ; if bit 7 of subtype set, collapse platform in direction dependent on player position
                 andi.b  #standing_mask,d0
-                beq.s   loc_1E192
+                beq.s   S3Collapse_StartBridgeStaticSmash
                 move.w  (Player_1+x_pos).w,d1
                 andi.b  #8,d0
-                bne.s   loc_1E17E
+                bne.s   S3Collapse_ReverseBridgeByRiderSide
                 move.w  (Player_2+x_pos).w,d1
 
-loc_1E17E:
+S3Collapse_ReverseBridgeByRiderSide:
                 cmp.w   x_pos(a0),d1                    ; compare object x pos with player's x pos (Sonic, Tails)
-                bhs.s   loc_1E192                       ; if it's higher than player's x pos (x coordinates), then branch
+                bhs.s   S3Collapse_StartBridgeStaticSmash  ; if it's higher than player's x pos (x coordinates), then branch
                 movea.l $34(a0),a4                      ; if it's less, get pointer to a4
                 bchg    #0,status(a0)                   ; reverse status (flipping for this case)
                 addq.b  #1,mapping_frame(a0)            ; add 1 to mapping frame
 
-loc_1E192:
+S3Collapse_StartBridgeStaticSmash:
                 bra.w   CollapsingPtfmHandlePlayerAndSmash
 ; ---------------------------------------------------------------------------
 
-loc_1E196:
+S3Collapse_DecrementArmedBridgeCounter:
                 subq.b  #1,$38(a0)
 
-loc_1E19A:
+S3Collapse_LatchBridgeRiders:
                 move.b  status(a0),d0                   ; Check if player is standing on platform
                 andi.b  #standing_mask,d0
-                beq.s   loc_1E1AA
+                beq.s   S3Collapse_CollideAndDrawFlatBridge
                 move.b  #1,$3A(a0)                      ; Turn on collapsing timer
 
-loc_1E1AA:
+S3Collapse_CollideAndDrawFlatBridge:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 move.w  #$10,d3
@@ -287,7 +287,7 @@ loc_1E1AA:
                 bra.w   Sprite_OnScreen_Test
 ; ---------------------------------------------------------------------------
 
-loc_1E1C2:
+S3Collapse_CheckMGZSuperBreakRider:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 move.w  #$10,d3
@@ -295,58 +295,58 @@ loc_1E1C2:
                 jsr     (SolidObjectTop).l
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                beq.s   loc_1E244
+                beq.s   S3Collapse_DrawUnbrokenMGZSpecialBridge
                 move.b  (Player_1+status_tertiary).w,d1
                 andi.b  #8,d0
-                bne.s   loc_1E1EE
+                bne.s   S3Collapse_ReleaseP1ForSuperBreak
                 move.b  (Player_2+status_tertiary).w,d1
 
-loc_1E1EE:
+S3Collapse_ReleaseP1ForSuperBreak:
                 tst.b   d1
-                bpl.s   loc_1E244
+                bpl.s   S3Collapse_DrawUnbrokenMGZSpecialBridge
                 bclr    #p1_standing_bit,status(a0)
-                beq.s   loc_1E204
+                beq.s   S3Collapse_ReleaseP2ForSuperBreak
                 lea     (Player_1).w,a1
                 bclr    #Status_OnObj,status(a1)
 
-loc_1E204:
+S3Collapse_ReleaseP2ForSuperBreak:
                 bclr    #p2_standing_bit,status(a0)
-                beq.s   loc_1E216
+                beq.s   S3Collapse_SpawnMGZSuperBreakFragments
                 lea     (Player_2).w,a1
                 bclr    #Status_OnObj,status(a1)
 
-loc_1E216:
-                lea     (word_1E268).l,a4
+S3Collapse_SpawnMGZSuperBreakFragments:
+                lea     (S3Collapse_MGZSuperBreakVelocityPairs).l,a4
                 addq.b  #1,mapping_frame(a0)
                 move.w  #$80,priority(a0)
-                move.l  #loc_1E248,(a0)
+                move.l  #S3Collapse_MoveSuperBreakFragment,(a0)
                 jsr     (BreakObjectToPieces).l
                 move.w  respawn_addr(a0),d0             ; was obj spawned by layout?
-                beq.s   loc_1E242                       ; if not, branch to function
+                beq.s   S3Collapse_ContinueCurrentSuperBreakFall  ; if not, branch to function
                 movea.w d0,a1                           ; if yes, get addr of respawn_table
                 bclr    #7,(a1)                         ; set as unloaded
                 clr.w   respawn_addr(a0)                ; clear that addr
 
-loc_1E242:
-                bra.s   loc_1E248
+S3Collapse_ContinueCurrentSuperBreakFall:
+                bra.s   S3Collapse_MoveSuperBreakFragment
 ; ---------------------------------------------------------------------------
 
-loc_1E244:
+S3Collapse_DrawUnbrokenMGZSpecialBridge:
                 bra.w   Sprite_OnScreen_Test
 ; ---------------------------------------------------------------------------
 
-loc_1E248:
+S3Collapse_MoveSuperBreakFragment:
                 jsr     (MoveSprite2).l
                 addi.w  #$18,y_vel(a0)                  ; make object fall
                 tst.b   render_flags(a0)                ; is sprite on screen?
-                bpl.w   loc_1E262                       ; no delete
+                bpl.w   S3Collapse_DeleteHiddenSuperFragment  ; no delete
                 jmp     (Draw_Sprite).l                 ; if yes, then display
 ; ---------------------------------------------------------------------------
 
-loc_1E262:
+S3Collapse_DeleteHiddenSuperFragment:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
-word_1E268:
+S3Collapse_MGZSuperBreakVelocityPairs:
                 dc.w    -$400, -$A00
                 dc.w    -$300, -$A00
                 dc.w    -$200, -$A00
@@ -381,48 +381,49 @@ word_1E268:
                 dc.w    $340, -$700
 ; ---------------------------------------------------------------------------
 
-loc_1E2E8:
+S3Collapse_TickTriggerArmedBridge:
                 tst.b   $3A(a0)
-                beq.s   loc_1E332
+                beq.s   S3Collapse_PollBridgeTrigger
                 tst.b   $38(a0)
-                bne.s   loc_1E32E
+                bne.s   S3Collapse_TickTriggeredBridgeDelay
                 movea.l $30(a0),a4
                 tst.b   subtype(a0)
-                bpl.s   loc_1E32A
+                bpl.s   S3Collapse_StartTriggeredStaticSmash
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                beq.s   loc_1E32A
+                beq.s   S3Collapse_StartTriggeredStaticSmash
                 move.w  (Player_1+x_pos).w,d1
                 andi.b  #8,d0
-                bne.s   loc_1E316
+                bne.s   S3Collapse_ReverseTriggerBridgeBySide
                 move.w  (Player_2+x_pos).w,d1
 
-loc_1E316:
+S3Collapse_ReverseTriggerBridgeBySide:
                 cmp.w   x_pos(a0),d1
-                bhs.s   loc_1E32A
+                bhs.s   S3Collapse_StartTriggeredStaticSmash
                 movea.l $34(a0),a4
                 bchg    #0,status(a0)
                 addq.b  #1,mapping_frame(a0)
 
-loc_1E32A:
+S3Collapse_StartTriggeredStaticSmash:
                 bra.w   CollapsingPtfmHandlePlayerAndSmash
 ; ---------------------------------------------------------------------------
 
-loc_1E32E:
+S3Collapse_TickTriggeredBridgeDelay:
                 subq.b  #1,$38(a0)
 
-loc_1E332:
+; On a trigger, detach the respawn link so later culling cannot reset the original placement
+S3Collapse_PollBridgeTrigger:
                 move.b  $40(a0),d0
                 andi.w  #$F,d0
                 lea     (Level_trigger_array).w,a3
                 lea     (a3,d0.w),a3
                 tst.b   (a3)
-                beq.s   loc_1E350
+                beq.s   S3Collapse_RunTriggerBridgeCollisionTail
                 move.b  #1,$3A(a0)
                 clr.w   respawn_addr(a0)
 
-loc_1E350:
-                bra.w   loc_1E1AA
+S3Collapse_RunTriggerBridgeCollisionTail:
+                bra.w   S3Collapse_CollideAndDrawFlatBridge
 ; ---------------------------------------------------------------------------
 
 Obj_PlatformCollapseWait:
@@ -437,11 +438,11 @@ Obj_PlatformCollapseWait:
 Obj_PlatformCollapseFall:
                 jsr     (MoveSprite).l
                 tst.b   render_flags(a0)                ; is obj on screen?
-                bpl.s   loc_1E37E                       ; if not, delete
+                bpl.s   S3Collapse_DeleteFallingBridgeFragment  ; if not, delete
                 jmp     (Draw_Sprite).l                 ; if yes, display
 ; ---------------------------------------------------------------------------
 
-loc_1E37E:
+S3Collapse_DeleteFallingBridgeFragment:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -463,37 +464,37 @@ Obj_PlatformCollapseWaitHandlePlayer:
 
 Check_CollapsePlayerRelease:
                 btst    d6,status(a0)
-                beq.s   locret_1E400
+                beq.s   S3Collapse_ReturnFromBridgeRiderRelease
                 move.w  d1,d2
                 add.w   d2,d2
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_1E3E4
+                bne.s   S3Collapse_ReleaseRiderAfterStripLoss
                 move.w  x_pos(a1),d0                    ; gets player's range from object
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_1E3E4
+                bmi.s   S3Collapse_ReleaseRiderAfterStripLoss
                 cmp.w   d2,d0
-                bhs.s   loc_1E3E4
+                bhs.s   S3Collapse_ReleaseRiderAfterStripLoss
                 btst    #0,status(a0)
-                beq.s   loc_1E3D8
+                beq.s   S3Collapse_CheckRiderStripDelay
                 neg.w   d0
                 add.w   d2,d0
 
-loc_1E3D8:
+S3Collapse_CheckRiderStripDelay:
                 lsr.w   #4,d0
                 move.b  (a2),d2
                 sub.b   (a2,d0.w),d2
                 cmp.b   d2,d3
-                bhi.s   locret_1E400
+                bhi.s   S3Collapse_ReturnFromBridgeRiderRelease
 
-loc_1E3E4:
+S3Collapse_ReleaseRiderAfterStripLoss:
                 bclr    d6,status(a0)
                 bclr    #Status_OnObj,status(a1)
                 bclr    #Status_Push,status(a1)
                 bset    #Status_InAir,status(a1)
                 move.b  #1,prev_anim(a1)
 
-locret_1E400:
+S3Collapse_ReturnFromBridgeRiderRelease:
                 rts
 ; End of function Check_CollapsePlayerRelease
 
@@ -506,7 +507,7 @@ CollapsingPtfmHandlePlayerAndSmash:
 ; ---------------------------------------------------------------------------
 
 ObjPlatformCollapse_CreateFragments:
-                move.l  #loc_1DEEC,(a0)
+                move.l  #S3Collapse_WaitOrFall,(a0)
                 addq.b  #2,mapping_frame(a0)
                 movea.l $30(a0),a4
 
@@ -555,10 +556,10 @@ FragmentsDrawAndPlaySfx:
                 moveq   #signextendB(sfx_Collapse),d0
                 jmp     (Play_SFX).l
 ; ---------------------------------------------------------------------------
-byte_1E49C:
+S3Collapse_AIZPlatformFragmentDelays:
                 dc.b    $30, $2C, $28, $24, $20, $1C, $2E, $2A, $26, $22, $1E, $1A, $2C, $28, $24, $20, $1C, $18, $2A, $26
                 dc.b    $22, $1E, $1A, $16, $28, $24, $20, $1C, $18, $14
-byte_1E4BA:
+S3Collapse_ICZPlatformFragmentDelays:
                 dc.b    $30, $2C, $28, $24, $20, $1C, $2E, $2A, $26, $22, $1E, $1A, $2C, $28, $24, $20, $1C, $18, $2A, $26
                 dc.b    $22, $1E, $1A, $16, $28, $24, $20, $1C, $18, $14, $12, $10
 LBZBridgeCollapse_TimerArray:
@@ -567,48 +568,48 @@ LBZBridgeCollapse_TimerFlipArray:
                 dc.b    $20,   4,   8,  $C, $10, $14, $18, $1C,   2,   6,  $A,  $E, $12, $16, $1A, $1E
 LBZLedgeCollapse_TimerArray:
                 dc.b    $20, $18, $10,   8, $1E, $16,  $E,   6, $1C, $14,  $C,   4, $1A, $12
-byte_1E508:
+S3Collapse_HCZFirstShapeForwardDelays:
                 dc.b    $20, $1C, $18, $14, $10,  $C,   8,   4, $1E, $1A, $16, $12,  $E,  $A,   6,   2
-byte_1E518:
+S3Collapse_HCZFirstShapeReverseDelays:
                 dc.b    $20,   4,   8,  $C, $10, $14, $18, $1C,   2,   6,  $A,  $E, $12, $16, $1A, $1E
-byte_1E528:
+S3Collapse_HCZSecondShapeForwardDelays:
                 dc.b    $28, $24, $20, $1C, $18, $14, $10,  $C,   8,   4, $26, $22, $1E, $1A, $16, $12,  $E,  $A,   6,   2
-byte_1E53C:
+S3Collapse_HCZSecondShapeReverseDelays:
                 dc.b    $28,   4,   8,  $C, $10, $14, $18, $1C, $20, $24,   2,   6,  $A,  $E, $12, $16, $1A, $1E, $22, $26
-byte_1E550:
+S3Collapse_HCZShape3SharedDelays:
                 dc.b    $1C,   4,   8,  $C, $10, $14, $18,   2,   6,  $A,  $E, $12, $16, $1A, $1E
-byte_1E55F:
+S3Collapse_HCZFourthShapeForwardDelays:
                 dc.b    $30, $2A, $24, $1E, $18, $12,  $C,   6, $2E, $28, $22, $1C, $16, $10,  $A,   4, $2C, $26, $20, $1A
                 dc.b    $14,  $E,   8,   2
-byte_1E577:
+S3Collapse_HCZFourthShapeReverseDelays:
                 dc.b    $30,   6,  $C, $12, $18, $1E, $24, $2A,   4,  $A, $10, $16, $1C, $22, $28, $2E,   2,   8,  $E, $14
                 dc.b    $1A, $20, $26, $2C
-byte_1E58F:
+S3Collapse_MGZWideForwardDelays:
                 dc.b    $40, $38, $30, $28, $20, $18, $10,   8, $3E, $36, $2E, $26, $1E, $16,  $E,   6, $3C, $34, $2C, $24
                 dc.b    $1C, $14,  $C,   4, $3A, $32, $2A, $22, $1A, $12,  $A,   2
-byte_1E5AF:
+S3Collapse_MGZWideReverseDelays:
                 dc.b    $40,   8, $10, $18, $20, $28, $30, $38,   6,  $E, $16, $1E, $26, $2E, $36, $3E,   4,  $C, $14, $1C
                 dc.b    $24, $2C, $34, $3C,   2,  $A, $12, $1A, $22, $2A, $32, $3A
-byte_1E5CF:
+S3Collapse_MGZNarrowForwardDelays:
                 dc.b    $30, $28, $20, $18, $10,   8, $2E, $26, $1E, $16,  $E,   6, $2C, $24, $1C, $14,  $C,   4, $2A, $22
                 dc.b    $1A, $12,  $A,   2
-byte_1E5E7:
+S3Collapse_MGZNarrowReverseDelays:
                 dc.b    $30,   8, $10, $18, $20, $28,   6,  $E, $16, $1E, $26, $2E,   4,  $C, $14, $1C, $24, $2C,   2,  $A
                 dc.b    $12, $1A, $22, $2A
-byte_1E5FF:
+S3Collapse_ICZBridgeForwardDelays:
                 dc.b    $28, $24, $20, $1C, $18, $14, $10,  $C,   8,   4, $27, $23, $1F, $1B, $17, $13,  $F,  $B,   7,   3
                 dc.b    $26, $22, $1E, $1A, $16, $12,  $E,  $A,   6,   2, $25, $21, $1D, $19, $15, $11,  $D,   9,   5,   1
                 dc.b    4,   3,   2,   1
-byte_1E62B:
+S3Collapse_ICZBridgeReverseDelays:
                 dc.b    $28,   4,   8,  $C, $10, $14, $18, $1C, $20, $24,   3,   7,  $B,  $F, $13, $17, $1B, $1F, $23, $27
                 dc.b    2,   6,  $A,  $E, $12, $16, $1A, $1E, $22, $26,   1,   5,   9,  $D, $11, $15, $19, $1D, $21, $25
                 dc.b    1,   2,   3,   4,   0
-byte_1E658:
+S3Collapse_AIZPlatformSignedSlopeHeights:
                 dc.b    $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F
                 dc.b    $1F, $1F, $1E, $1E, $1D, $1D, $1C, $1C, $1B, $1B, $1A, $1A, $19, $19, $18, $18, $17, $17, $16, $16
                 dc.b    $15, $15, $14, $14, $13, $13, $12, $12, $11, $11, $10, $10,  $F,  $F,  $E,  $E,  $E,  $E,  $E,  $E
                 dc.b    $E,  $E,  $E,  $E
-byte_1E698:
+S3Collapse_ICZPlatformSignedSlopeHeights:
                 dc.b    $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $2F, $2F, $2F, $2F, $2F, $2F, $2F, $2F
                 dc.b    $2F, $2F, $2F, $2F, $2E, $2E, $2E, $2E, $2E, $2E, $2E, $2E, $2D, $2D, $2D, $2D, $2D, $2D, $2D, $2D
                 dc.b    $2D, $2D, $2D, $2D, $2D, $2C, $2B, $2A

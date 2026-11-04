@@ -541,7 +541,7 @@
     },
     {
       "path": "src/objects/cutscenes/knuckles/s3/angel_island.s",
-      "sha256": "f4cb0d9613928601a514fa49507d80e7398756a6354ff35e93cd0983e6d2e8c8"
+      "sha256": "a2b7f8ebe032a010aadfaa4173cd6b7569ebb3aeae04264af410bdb1f1b6dfcb"
     },
     {
       "path": "src/objects/cutscenes/knuckles/s3/carnival_night.s",
@@ -557,7 +557,7 @@
     },
     {
       "path": "src/objects/cutscenes/sk/angel_island.s",
-      "sha256": "423df44b2e49adad4f939de231cfe2cdb6ce3696d4fe1c5f7e089c3702d5cf90"
+      "sha256": "c955602fae41ec0308f17fb9699c69099c11d73200f624356221cc947b302fdd"
     },
     {
       "path": "src/objects/cutscenes/sk/angel_island_plane.s",
@@ -1093,11 +1093,11 @@
     },
     {
       "path": "src/objects/shared/s3/collapsing_platforms.s",
-      "sha256": "ab79fe9fa0f9f605205e78f42b240cf0af171c4da5d4932345c33fbeaa5de26c"
+      "sha256": "6446f606f92f742f2345a091cbdc2a75cfc5041a04aa57da0e1375def68e4686"
     },
     {
       "path": "src/objects/shared/sk/collapsing_platforms.s",
-      "sha256": "2b0c1d67bbf33fb82fe4caf24fe5edefffe5903cef5f2e1aee91f1197430a543"
+      "sha256": "5df787cb4c5ed1061ad4f9430442f66e7168facb037a79783c54afc3e09b2447"
     },
     {
       "path": "src/objects/special_stage/s3/entry_ring.s",
@@ -1189,7 +1189,7 @@
     },
     {
       "path": "src/objects/zones/cnz/s3/water_level_controls.s",
-      "sha256": "9fffea6bf72e7c01682116fbdee1963fab0ee4be53e1186dc861ea4095b53fc3"
+      "sha256": "55f291605ac83c8c932332c6c0358a01fa8129c2137860c0b92d3c1255e12a17"
     },
     {
       "path": "src/objects/zones/cnz/s3/wire_cage.s",

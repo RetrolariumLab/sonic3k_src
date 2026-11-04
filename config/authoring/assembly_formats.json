@@ -6054,12 +6054,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 42
       },
-      "declarations_sha256": "9bce52a7c792d82313a121d6ea9bc7a44016f2f5f88f55b9e03d26017d6d9118",
+      "declarations_sha256": "0025d8b01c125762dd5d7d0c339b5968f1b34d506991d00b905581362ff77c0a",
       "labels": {
         "Map_Button_": 0,
-        "word_2C724": 6,
-        "word_2C732": 20,
-        "word_2C73A": 28
+        "SharedButtonMapping_Frame00": 6,
+        "SharedButtonMapping_Frame01": 20,
+        "SharedButtonMapping_DebugPreviewFrame02": 28
       },
       "external_symbols": [],
       "blocks": [
@@ -6067,21 +6067,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2C724",
+          "target": "SharedButtonMapping_Frame00",
           "base": "Map_Button_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2C732",
+          "target": "SharedButtonMapping_Frame01",
           "base": "Map_Button_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2C73A",
+          "target": "SharedButtonMapping_DebugPreviewFrame02",
           "base": "Map_Button_"
         },
         {
@@ -22298,12 +22298,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 84
       },
-      "declarations_sha256": "18d9cb4e8c2a86ca5c459cac3158c5d9c3c417822d9fcceb6fac6ba414e60612",
+      "declarations_sha256": "6fd1776cdc26c1bc94f67a52525c39fa82256a0bc51efa10ab6c287d016afc7c",
       "labels": {
         "Map_InvisibleBlock_": 0,
-        "word_1ECCC": 6,
-        "word_1ECE6": 32,
-        "word_1ED00": 58
+        "InvisibleBlockMapping_Frame00": 6,
+        "InvisibleBlockMapping_Frame01": 32,
+        "InvisibleBlockMapping_Frame02": 58
       },
       "external_symbols": [],
       "blocks": [
@@ -22311,21 +22311,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1ECCC",
+          "target": "InvisibleBlockMapping_Frame00",
           "base": "Map_InvisibleBlock_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1ECE6",
+          "target": "InvisibleBlockMapping_Frame01",
           "base": "Map_InvisibleBlock_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1ED00",
+          "target": "InvisibleBlockMapping_Frame02",
           "base": "Map_InvisibleBlock_"
         },
         {

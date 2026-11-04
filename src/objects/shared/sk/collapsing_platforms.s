@@ -7,40 +7,40 @@ Obj_CollapsingPlatform:
                 move.l  #Map_AIZCollapsingPlatform,mappings(a0)
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
                 cmpi.w  #1,(Current_zone_and_act).w
-                bne.s   loc_20522
+                bne.s   SKCollapse_SelectDelayAndSlopeData
                 move.l  #Map_AIZCollapsingPlatform2,mappings(a0)
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
 
-loc_20522:
-                move.l  #byte_20CB6,$30(a0)
-                move.l  #byte_20E9E,$3C(a0)
+SKCollapse_SelectDelayAndSlopeData:
+                move.l  #SKCollapse_AIZPlatformFragmentDelays,$30(a0)
+                move.l  #SKCollapse_AIZPlatformSignedSlopeHeights,$3C(a0)
                 move.b  #$3C,width_pixels(a0)
                 move.b  #$20,height_pixels(a0)
                 cmpi.b  #5,(Current_zone).w
-                bne.s   loc_20570
+                bne.s   SKCollapse_InitPlatformDelayAndHandler
                 move.l  #Map_ICZCollapsingBridge,mappings(a0)
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
-                move.l  #byte_20CD4,$30(a0)
-                move.l  #byte_20EDE,$3C(a0)
+                move.l  #SKCollapse_ICZPlatformFragmentDelays,$30(a0)
+                move.l  #SKCollapse_ICZPlatformSignedSlopeHeights,$3C(a0)
                 move.b  #$30,width_pixels(a0)
                 move.b  #$30,height_pixels(a0)
 
-loc_20570:
+SKCollapse_InitPlatformDelayAndHandler:
                 ori.b   #4,render_flags(a0)
                 move.w  #$280,priority(a0)
                 move.b  #7,$38(a0)
                 move.b  subtype(a0),mapping_frame(a0)
                 ori.b   #$80,status(a0)
-                move.l  #loc_20594,(a0)
+                move.l  #SKCollapse_TickIntactPlatformDelay,(a0)
 
-loc_20594:
+SKCollapse_TickIntactPlatformDelay:
                 tst.b   $3A(a0)
-                beq.s   loc_205A6
+                beq.s   SKCollapse_LatchPlatformRiders
                 tst.b   $38(a0)
                 beq.w   ObjPlatformCollapse_CreateFragments
                 subq.b  #1,$38(a0)
 
-loc_205A6:
+SKCollapse_LatchPlatformRiders:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
                 beq.s   CollideAndDisplayCollapsingPlatform
@@ -59,20 +59,20 @@ CollideAndDisplayCollapsingPlatform:
 
 ; ---------------------------------------------------------------------------
 
-loc_205CE:
+SKCollapse_WaitNonSolidPlatformFragment:
                 subq.b  #1,$38(a0)
-                bne.s   loc_205DA
-                move.l  #loc_20620,(a0)
+                bne.s   SKCollapse_DrawWaitingPlatformFragment
+                move.l  #SKCollapse_CullThenMoveFragment,(a0)
 
-loc_205DA:
+SKCollapse_DrawWaitingPlatformFragment:
                 bra.w   Draw_Sprite
 ; ---------------------------------------------------------------------------
 
-loc_205DE:
+SKCollapse_WaitSolidFragmentAndRelease:
                 bsr.w   CollideAndDisplayCollapsingPlatform
                 subq.b  #1,$38(a0)
-                bne.s   locret_2061E
-                move.l  #loc_20620,(a0)
+                bne.s   SKCollapse_RiderReleaseReturn
+                move.l  #SKCollapse_CullThenMoveFragment,(a0)
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 bsr.s   ReleasePlayerFromCollapsingPlatform
@@ -83,20 +83,20 @@ loc_205DE:
 
 ReleasePlayerFromCollapsingPlatform:
                 btst    d6,status(a0)
-                beq.s   locret_2061E
+                beq.s   SKCollapse_RiderReleaseReturn
                 bclr    d6,status(a0)
                 bclr    #Status_OnObj,status(a1)
                 bclr    #Status_Push,status(a1)
                 bset    #Status_InAir,status(a1)
                 move.b  #1,prev_anim(a1)
 
-locret_2061E:
+SKCollapse_RiderReleaseReturn:
                 rts
 ; End of function ReleasePlayerFromCollapsingPlatform
 
 ; ---------------------------------------------------------------------------
 
-loc_20620:
+SKCollapse_CullThenMoveFragment:
                 tst.b   render_flags(a0)
                 bpl.w   Delete_Current_Sprite
                 bsr.w   MoveSprite
@@ -104,53 +104,53 @@ loc_20620:
 ; ---------------------------------------------------------------------------
 
 Obj_CollapsingBridge:
-                move.l  #loc_2095E,(a0)
+                move.l  #SKCollapse_TickStandingTriggeredBridge,(a0)
                 ori.b   #4,render_flags(a0)
                 move.w  #$280,priority(a0)
                 cmpi.b  #6,(Current_zone).w
-                bne.s   loc_206B8
+                bne.s   SKCollapse_TryHCZBridgeSetup
                 move.b  subtype(a0),d0
                 andi.w  #$3F,d0
                 add.w   d0,d0
                 add.w   d0,d0
                 addq.w  #8,d0
-                bcc.s   loc_2065E
+                bcc.s   SKCollapse_SetLBZDelayAndShape
                 move.b  #-1,d0
 
-loc_2065E:
+SKCollapse_SetLBZDelayAndShape:
                 move.b  d0,$38(a0)
                 btst    #6,subtype(a0)
-                bne.s   loc_20696
+                bne.s   SKCollapse_InitializeLBZLedgeResources
                 move.l  #Map_LBZCollapsingBridge,mappings(a0)
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
                 move.b  #$40,width_pixels(a0)
                 move.b  #$10,height_pixels(a0)
                 move.l  #LBZBridgeCollapse_TimerArray,$30(a0)
                 move.l  #LBZBridgeCollapse_TimerFlipArray,$34(a0)
-                bra.s   loc_206B8
+                bra.s   SKCollapse_TryHCZBridgeSetup
 ; ---------------------------------------------------------------------------
 
-loc_20696:
+SKCollapse_InitializeLBZLedgeResources:
                 move.l  #Map_LBZCollapsingLedge,mappings(a0)
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
                 move.b  #$20,width_pixels(a0)
                 move.b  #$30,height_pixels(a0)
                 move.l  #LBZLedgeCollapse_TimerArray,$30(a0)
 
-loc_206B8:
+SKCollapse_TryHCZBridgeSetup:
                 cmpi.b  #1,(Current_zone).w
-                bne.w   loc_20752
+                bne.w   SKCollapse_TryMGZBridgeOrSuperBreak
                 move.l  #Map_HCZCollapsingBridge,mappings(a0)
                 move.w  #make_art_tile($001,2,1),art_tile(a0)
                 move.b  subtype(a0),d0
-                bpl.s   loc_206EA
+                bpl.s   SKCollapse_DecodeHCZShapeAndDelays
                 move.b  d0,d1
                 andi.b  #$F,d1
                 move.b  d1,$40(a0)
-                move.l  #loc_20AF6,(a0)
+                move.l  #SKCollapse_TickTriggerArmedBridge,(a0)
                 andi.b  #$70,d0
 
-loc_206EA:
+SKCollapse_DecodeHCZShapeAndDelays:
                 move.b  d0,d1
                 andi.w  #$F,d0
                 lsl.w   #4,d0
@@ -158,32 +158,32 @@ loc_206EA:
                 move.b  d0,$38(a0)
                 andi.w  #$F0,d1
                 lsr.w   #2,d1
-                lea     byte_20722(pc,d1.w),a1
+                lea     SKCollapse_HCZShapeAttributes(pc,d1.w),a1
                 move.b  (a1)+,width_pixels(a0)
                 move.b  (a1)+,height_pixels(a0)
                 move.b  (a1)+,mapping_frame(a0)
                 move.b  (a1)+,subtype(a0)
                 add.w   d1,d1
-                lea     off_20732(pc,d1.w),a1
+                lea     SKCollapse_HCZShapeDelayPointerPairs(pc,d1.w),a1
                 move.l  (a1)+,$30(a0)
                 move.l  (a1)+,$34(a0)
-                bra.s   loc_20752
+                bra.s   SKCollapse_TryMGZBridgeOrSuperBreak
 ; ---------------------------------------------------------------------------
-byte_20722:
+SKCollapse_HCZShapeAttributes:
                 dc.b    $40, $10, 0, $80
                 dc.b    $50, $10, 3, $80
                 dc.b    $40, $10, 6,   0
                 dc.b    $50, $20, 9, $80
-off_20732:
-                dc.l    byte_20D22, byte_20D32
-                dc.l    byte_20D42, byte_20D56
-                dc.l    byte_20D6A, byte_20D6A
-                dc.l    byte_20D79, byte_20D91
+SKCollapse_HCZShapeDelayPointerPairs:
+                dc.l    SKCollapse_HCZFirstShapeForwardDelays, SKCollapse_HCZFirstShapeReverseDelays
+                dc.l    SKCollapse_HCZSecondShapeForwardDelays, SKCollapse_HCZSecondShapeReverseDelays
+                dc.l    SKCollapse_HCZShape3SharedDelays, SKCollapse_HCZShape3SharedDelays
+                dc.l    SKCollapse_HCZFourthShapeForwardDelays, SKCollapse_HCZFourthShapeReverseDelays
 ; ---------------------------------------------------------------------------
 
-loc_20752:
+SKCollapse_TryMGZBridgeOrSuperBreak:
                 cmpi.b  #2,(Current_zone).w
-                bne.s   loc_207D4
+                bne.s   SKCollapse_TryICZBridgeAndTrigger
                 move.l  #Map_MGZCollapsingBridge,mappings(a0)
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
                 move.b  subtype(a0),d0
@@ -194,42 +194,42 @@ loc_20752:
                 move.b  d0,$38(a0)
                 andi.w  #$F0,d1
                 lsr.w   #2,d1
-                lea     byte_207B0(pc,d1.w),a1
+                lea     SKCollapse_MGZShapeAttributes(pc,d1.w),a1
                 move.b  (a1)+,width_pixels(a0)
                 move.b  (a1)+,height_pixels(a0)
                 move.b  (a1)+,mapping_frame(a0)
                 move.b  (a1)+,subtype(a0)
                 add.w   d1,d1
-                lea     off_207BC(pc,d1.w),a1
+                lea     SKCollapse_MGZShapeDelayPointerPairs(pc,d1.w),a1
                 move.l  (a1)+,$30(a0)
                 move.l  (a1)+,$34(a0)
                 cmpi.w  #$10,d1
-                bne.s   loc_207D4
-                move.l  #loc_209D0,(a0)
+                bne.s   SKCollapse_TryICZBridgeAndTrigger
+                move.l  #SKCollapse_CheckMGZSuperBreakRider,(a0)
                 rts
 ; ---------------------------------------------------------------------------
-byte_207B0:
+SKCollapse_MGZShapeAttributes:
                 dc.b    $40, $20,   0, $80
                 dc.b    $30, $20,   3, $80
                 dc.b    $40, $20,   6, $80
-off_207BC:
-                dc.l    byte_20DA9, byte_20DC9
-                dc.l    byte_20DE9, byte_20E01
-                dc.l    byte_20DA9, byte_20DC9
+SKCollapse_MGZShapeDelayPointerPairs:
+                dc.l    SKCollapse_MGZWideAndFBZForwardDelays, SKCollapse_MGZWideAndFBZReverseDelays
+                dc.l    SKCollapse_MGZNarrowForwardDelays, SKCollapse_MGZNarrowReverseDelays
+                dc.l    SKCollapse_MGZWideAndFBZForwardDelays, SKCollapse_MGZWideAndFBZReverseDelays
 ; ---------------------------------------------------------------------------
 
-loc_207D4:
+SKCollapse_TryICZBridgeAndTrigger:
                 cmpi.b  #5,(Current_zone).w
-                bne.s   loc_20834
+                bne.s   SKCollapse_SelectHPZBridgeResources
                 move.b  subtype(a0),d0
-                bpl.s   loc_207F6
+                bpl.s   SKCollapse_InitICZBridgeDelayAndMap
                 move.b  d0,d1
                 andi.b  #$F,d1
                 move.b  d1,$40(a0)
-                move.l  #loc_20AF6,(a0)
+                move.l  #SKCollapse_TickTriggerArmedBridge,(a0)
                 andi.b  #$70,d0
 
-loc_207F6:
+SKCollapse_InitICZBridgeDelayAndMap:
                 move.b  d0,d1
                 andi.w  #$F,d0
                 lsl.w   #4,d0
@@ -239,25 +239,25 @@ loc_207F6:
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
                 move.b  #$50,width_pixels(a0)
                 move.b  #$38,height_pixels(a0)
-                move.l  #byte_20E19,$30(a0)
-                move.l  #byte_20E45,$34(a0)
+                move.l  #SKCollapse_ICZBridgeForwardDelays,$30(a0)
+                move.l  #SKCollapse_ICZBridgeReverseDelays,$34(a0)
                 move.b  #3,mapping_frame(a0)
 
-loc_20834:
+SKCollapse_SelectHPZBridgeResources:
                 cmpi.b  #$16,(Current_zone).w
-                bne.s   loc_2084C
+                bne.s   SKCollapse_SelectLRZBridgeResources
                 move.l  #Map_HPZCollapsingBridge,mappings(a0)
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
-                bra.s   loc_20862
+                bra.s   SKCollapse_DecodeHPZLRZBridge
 ; ---------------------------------------------------------------------------
 
-loc_2084C:
+SKCollapse_SelectLRZBridgeResources:
                 cmpi.b  #9,(Current_zone).w
-                bne.s   loc_208A6
+                bne.s   SKCollapse_SelectFBZBridgeAttributes
                 move.l  #Map_LRZCollapsingPlatform,mappings(a0)
                 move.w  #make_art_tile($090,2,0),art_tile(a0)
 
-loc_20862:
+SKCollapse_DecodeHPZLRZBridge:
                 move.b  subtype(a0),d0
                 move.b  d0,d1
                 andi.w  #$F,d0
@@ -266,25 +266,25 @@ loc_20862:
                 move.b  d0,$38(a0)
                 andi.w  #$70,d1
                 lsr.w   #2,d1
-                lea     byte_2089A(pc,d1.w),a1
+                lea     SKCollapse_HPZLRZShapeAttributes(pc,d1.w),a1
                 move.b  (a1)+,width_pixels(a0)
                 move.b  (a1)+,height_pixels(a0)
                 move.b  (a1)+,mapping_frame(a0)
                 add.w   d1,d1
-                lea     off_2089E(pc,d1.w),a1
+                lea     SKCollapse_HPZLRZDelayPointerPair(pc,d1.w),a1
                 move.l  (a1)+,$30(a0)
                 move.l  (a1)+,$34(a0)
-                bra.s   loc_208A6
+                bra.s   SKCollapse_SelectFBZBridgeAttributes
 ; ---------------------------------------------------------------------------
-byte_2089A:
+SKCollapse_HPZLRZShapeAttributes:
                 dc.b    $20, $18,   0, $80
-off_2089E:
-                dc.l    byte_20E85, byte_20E91
+SKCollapse_HPZLRZDelayPointerPair:
+                dc.l    SKCollapse_HPZLRZForwardFragmentDelays, SKCollapse_HPZLRZReverseFragmentDelays
 ; ---------------------------------------------------------------------------
 
-loc_208A6:
+SKCollapse_SelectFBZBridgeAttributes:
                 cmpi.b  #4,(Current_zone).w             ; is this FBZ?
-                bne.s   loc_20904                       ; if not, branch
+                bne.s   SKCollapse_SelectSOZBridgeAttributes  ; if not, branch
                 move.l  #Map_FBZCollapsingBridge,mappings(a0)
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
                 move.b  subtype(a0),d0
@@ -301,21 +301,21 @@ loc_208A6:
                 move.b  (a1)+,mapping_frame(a0)
                 move.b  (a1)+,subtype(a0)
                 add.w   d1,d1
-                lea     off_208FC(pc,d1.w),a1
+                lea     SKCollapse_FBZWideDelayPointerPair(pc,d1.w),a1
                 move.l  (a1)+,$30(a0)
                 move.l  (a1)+,$34(a0)
-                bra.s   loc_20904
+                bra.s   SKCollapse_SelectSOZBridgeAttributes
 ; ---------------------------------------------------------------------------
 FBZBridgeSpriteAttribute:
 ; width, height, frame, subtype
                 dc.b    $40, $20,   0, $80
-off_208FC:
-                dc.l    byte_20DA9, byte_20DC9
+SKCollapse_FBZWideDelayPointerPair:
+                dc.l    SKCollapse_MGZWideAndFBZForwardDelays, SKCollapse_MGZWideAndFBZReverseDelays
 ; ---------------------------------------------------------------------------
 
-loc_20904:
+SKCollapse_SelectSOZBridgeAttributes:
                 cmpi.b  #8,(Current_zone).w             ; is this zone 8?
-                bne.s   loc_2095E                       ; if not branch
+                bne.s   SKCollapse_TickStandingTriggeredBridge  ; if not branch
                 move.l  #Map_SOZCollapsingBridge,mappings(a0)  ; if yes, set its sprite properties
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
                 move.b  subtype(a0),d0
@@ -326,59 +326,59 @@ loc_20904:
                 move.b  d0,$38(a0)                      ; copy the amount we got into $38 (custom variable)
                 andi.w  #$70,d1
                 lsr.w   #2,d1
-                lea     byte_20952(pc,d1.w),a1
+                lea     SKCollapse_SOZShapeAttributes(pc,d1.w),a1
                 move.b  (a1)+,width_pixels(a0)          ; get width
                 move.b  (a1)+,height_pixels(a0)
                 move.b  (a1)+,mapping_frame(a0)
                 add.w   d1,d1                           ; multiply by 2
-                lea     off_20956(pc,d1.w),a1
+                lea     SKCollapse_SOZDelayPointerPair(pc,d1.w),a1
                 move.l  (a1)+,$30(a0)
                 move.l  (a1)+,$34(a0)
-                bra.s   loc_2095E
+                bra.s   SKCollapse_TickStandingTriggeredBridge
 ; ---------------------------------------------------------------------------
-byte_20952:
+SKCollapse_SOZShapeAttributes:
                 dc.b    $20, $30,   0, $80
-off_20956:
-                dc.l    byte_20E71, byte_20E7B
+SKCollapse_SOZDelayPointerPair:
+                dc.l    SKCollapse_SOZForwardFragmentDelays, SKCollapse_SOZReverseFragmentDelays
 ; ---------------------------------------------------------------------------
 
-loc_2095E:
+SKCollapse_TickStandingTriggeredBridge:
                 tst.b   $3A(a0)
-                beq.s   loc_209A8
+                beq.s   SKCollapse_LatchBridgeRiders
                 tst.b   $38(a0)
-                bne.s   loc_209A4
+                bne.s   SKCollapse_DecrementArmedBridgeCounter
                 movea.l $30(a0),a4
                 tst.b   subtype(a0)                     ; does this object have a subtype?
-                bpl.s   loc_209A0                       ; if yes, branch to here
+                bpl.s   SKCollapse_StartBridgeStaticSmash  ; if yes, branch to here
                 move.b  status(a0),d0                   ; if bit 7 of subtype set, collapse platform in direction dependent on player position
                 andi.b  #standing_mask,d0
-                beq.s   loc_209A0
+                beq.s   SKCollapse_StartBridgeStaticSmash
                 move.w  (Player_1+x_pos).w,d1
                 andi.b  #8,d0
-                bne.s   loc_2098C
+                bne.s   SKCollapse_ReverseBridgeByRiderSide
                 move.w  (Player_2+x_pos).w,d1
 
-loc_2098C:
+SKCollapse_ReverseBridgeByRiderSide:
                 cmp.w   x_pos(a0),d1                    ; compare object x pos with player's x pos (Sonic, Tails, Knuckles)
-                bhs.s   loc_209A0                       ; if it's higher than player's x pos (x coordinates), then branch
+                bhs.s   SKCollapse_StartBridgeStaticSmash  ; if it's higher than player's x pos (x coordinates), then branch
                 movea.l $34(a0),a4                      ; if it's less, get pointer to a4
                 bchg    #0,status(a0)                   ; reverse status (flipping for this case)
                 addq.b  #1,mapping_frame(a0)            ; add 1 to mapping frame
 
-loc_209A0:
+SKCollapse_StartBridgeStaticSmash:
                 bra.w   CollapsingPtfmHandlePlayerAndSmash
 ; ---------------------------------------------------------------------------
 
-loc_209A4:
+SKCollapse_DecrementArmedBridgeCounter:
                 subq.b  #1,$38(a0)
 
-loc_209A8:
+SKCollapse_LatchBridgeRiders:
                 move.b  status(a0),d0                   ; Check if player is standing on platform
                 andi.b  #standing_mask,d0
-                beq.s   loc_209B8
+                beq.s   SKCollapse_CollideAndDrawFlatBridge
                 move.b  #1,$3A(a0)                      ; Turn on collapsing timer
 
-loc_209B8:
+SKCollapse_CollideAndDrawFlatBridge:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 move.w  #$10,d3
@@ -387,7 +387,7 @@ loc_209B8:
                 bra.w   Sprite_OnScreen_Test
 ; ---------------------------------------------------------------------------
 
-loc_209D0:
+SKCollapse_CheckMGZSuperBreakRider:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 move.w  #$10,d3
@@ -395,58 +395,58 @@ loc_209D0:
                 jsr     (SolidObjectTop).l
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                beq.s   loc_20A52
+                beq.s   SKCollapse_DrawUnbrokenMGZSpecialBridge
                 move.b  (Player_1+status_tertiary).w,d1
                 andi.b  #8,d0
-                bne.s   loc_209FC
+                bne.s   SKCollapse_ReleaseP1ForSuperBreak
                 move.b  (Player_2+status_tertiary).w,d1
 
-loc_209FC:
+SKCollapse_ReleaseP1ForSuperBreak:
                 tst.b   d1
-                bpl.s   loc_20A52
+                bpl.s   SKCollapse_DrawUnbrokenMGZSpecialBridge
                 bclr    #p1_standing_bit,status(a0)
-                beq.s   loc_20A12
+                beq.s   SKCollapse_ReleaseP2ForSuperBreak
                 lea     (Player_1).w,a1
                 bclr    #Status_OnObj,status(a1)
 
-loc_20A12:
+SKCollapse_ReleaseP2ForSuperBreak:
                 bclr    #p2_standing_bit,status(a0)
-                beq.s   loc_20A24
+                beq.s   SKCollapse_SpawnMGZSuperBreakFragments
                 lea     (Player_2).w,a1
                 bclr    #Status_OnObj,status(a1)
 
-loc_20A24:
-                lea     (word_20A76).l,a4
+SKCollapse_SpawnMGZSuperBreakFragments:
+                lea     (SKCollapse_MGZSuperBreakVelocityPairs).l,a4
                 addq.b  #1,mapping_frame(a0)
                 move.w  #$80,priority(a0)
-                move.l  #loc_20A56,(a0)
+                move.l  #SKCollapse_MoveSuperBreakFragment,(a0)
                 jsr     (BreakObjectToPieces).l
                 move.w  respawn_addr(a0),d0             ; was obj spawned by layout?
-                beq.s   loc_20A50                       ; if not, branch to function
+                beq.s   SKCollapse_ContinueCurrentSuperBreakFall  ; if not, branch to function
                 movea.w d0,a1                           ; if yes, get addr of respawn_table
                 bclr    #7,(a1)                         ; set as unloaded
                 clr.w   respawn_addr(a0)                ; clear that addr
 
-loc_20A50:
-                bra.s   loc_20A56
+SKCollapse_ContinueCurrentSuperBreakFall:
+                bra.s   SKCollapse_MoveSuperBreakFragment
 ; ---------------------------------------------------------------------------
 
-loc_20A52:
+SKCollapse_DrawUnbrokenMGZSpecialBridge:
                 bra.w   Sprite_OnScreen_Test
 ; ---------------------------------------------------------------------------
 
-loc_20A56:
+SKCollapse_MoveSuperBreakFragment:
                 jsr     (MoveSprite2).l
                 addi.w  #$18,y_vel(a0)                  ; make object fall
                 tst.b   render_flags(a0)                ; is sprite on screen?
-                bpl.w   loc_20A70                       ; no delete
+                bpl.w   SKCollapse_DeleteHiddenSuperFragment  ; no delete
                 jmp     (Draw_Sprite).l                 ; if yes, then display
 ; ---------------------------------------------------------------------------
 
-loc_20A70:
+SKCollapse_DeleteHiddenSuperFragment:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
-word_20A76:
+SKCollapse_MGZSuperBreakVelocityPairs:
                 dc.w    -$400, -$A00
                 dc.w    -$300, -$A00
                 dc.w    -$200, -$A00
@@ -481,76 +481,77 @@ word_20A76:
                 dc.w    $340, -$700
 ; ---------------------------------------------------------------------------
 
-loc_20AF6:
+SKCollapse_TickTriggerArmedBridge:
                 tst.b   $3A(a0)
-                beq.s   loc_20B40
+                beq.s   SKCollapse_PollBridgeTrigger
                 tst.b   $38(a0)
-                bne.s   loc_20B3C
+                bne.s   SKCollapse_TickTriggeredBridgeDelay
                 movea.l $30(a0),a4
                 tst.b   subtype(a0)
-                bpl.s   loc_20B38
+                bpl.s   SKCollapse_StartTriggeredStaticSmash
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                beq.s   loc_20B38
+                beq.s   SKCollapse_StartTriggeredStaticSmash
                 move.w  (Player_1+x_pos).w,d1
                 andi.b  #8,d0
-                bne.s   loc_20B24
+                bne.s   SKCollapse_ReverseTriggerBridgeBySide
                 move.w  (Player_2+x_pos).w,d1
 
-loc_20B24:
+SKCollapse_ReverseTriggerBridgeBySide:
                 cmp.w   x_pos(a0),d1
-                bhs.s   loc_20B38
+                bhs.s   SKCollapse_StartTriggeredStaticSmash
                 movea.l $34(a0),a4
                 bchg    #0,status(a0)
                 addq.b  #1,mapping_frame(a0)
 
-loc_20B38:
+SKCollapse_StartTriggeredStaticSmash:
                 bra.w   CollapsingPtfmHandlePlayerAndSmash
 ; ---------------------------------------------------------------------------
 
-loc_20B3C:
+SKCollapse_TickTriggeredBridgeDelay:
                 subq.b  #1,$38(a0)
 
-loc_20B40:
+; On a trigger, detach the respawn link so later culling cannot reset the original placement
+SKCollapse_PollBridgeTrigger:
                 move.b  $40(a0),d0
                 andi.w  #$F,d0
                 lea     (Level_trigger_array).w,a3
                 lea     (a3,d0.w),a3
                 tst.b   (a3)
-                beq.s   loc_20B5E
+                beq.s   SKCollapse_RunTriggerBridgeCollisionTail
                 move.b  #1,$3A(a0)
                 clr.w   respawn_addr(a0)
 
-loc_20B5E:
-                bra.w   loc_209B8
+SKCollapse_RunTriggerBridgeCollisionTail:
+                bra.w   SKCollapse_CollideAndDrawFlatBridge
 ; ---------------------------------------------------------------------------
 
 Obj_PlatformCollapseWait:
                 subq.b  #1,$38(a0)
-                bne.s   loc_20B6E
+                bne.s   SKCollapse_DrawWaitingBridgeFragment
                 move.l  #Obj_PlatformCollapseFall,(a0)
 
-loc_20B6E:
+SKCollapse_DrawWaitingBridgeFragment:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
 Obj_PlatformCollapseFall:
                 tst.b   render_flags(a0)                ; is obj on screen?
-                bpl.s   loc_20B86                       ; if not, delete
+                bpl.s   SKCollapse_DeleteFallingBridgeFragment  ; if not, delete
                 jsr     (MoveSprite).l                  ; if yes, move sprite and display
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_20B86:
+SKCollapse_DeleteFallingBridgeFragment:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
 Obj_PlatformCollapseWaitHandlePlayer:
                 subq.b  #1,$38(a0)
-                bne.s   loc_20B98
+                bne.s   SKCollapse_CheckWaitingRidersAndDraw
                 move.l  #Obj_PlatformCollapseFall,(a0)
 
-loc_20B98:
+SKCollapse_CheckWaitingRidersAndDraw:
                 move.b  $38(a0),d3
                 movea.l $30(a0),a2
                 moveq   #0,d1
@@ -567,37 +568,37 @@ loc_20B98:
 
 Check_CollapsePlayerRelease:
                 btst    d6,status(a0)
-                beq.s   locret_20C10
+                beq.s   SKCollapse_ReturnFromBridgeRiderRelease
                 move.w  d1,d2
                 add.w   d2,d2
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_20BF4
+                bne.s   SKCollapse_ReleaseRiderAfterStripLoss
                 move.w  x_pos(a1),d0                    ; gets player's range from object
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_20BF4
+                bmi.s   SKCollapse_ReleaseRiderAfterStripLoss
                 cmp.w   d2,d0
-                bhs.s   loc_20BF4
+                bhs.s   SKCollapse_ReleaseRiderAfterStripLoss
                 btst    #0,status(a0)
-                beq.s   loc_20BE8
+                beq.s   SKCollapse_CheckRiderStripDelay
                 neg.w   d0
                 add.w   d2,d0
 
-loc_20BE8:
+SKCollapse_CheckRiderStripDelay:
                 lsr.w   #4,d0
                 move.b  (a2),d2
                 sub.b   (a2,d0.w),d2
                 cmp.b   d2,d3
-                bhi.s   locret_20C10
+                bhi.s   SKCollapse_ReturnFromBridgeRiderRelease
 
-loc_20BF4:
+SKCollapse_ReleaseRiderAfterStripLoss:
                 bclr    d6,status(a0)
                 bclr    #Status_OnObj,status(a1)
                 bclr    #Status_Push,status(a1)
                 bset    #Status_InAir,status(a1)
                 move.b  #1,prev_anim(a1)
 
-locret_20C10:
+SKCollapse_ReturnFromBridgeRiderRelease:
                 rts
 ; End of function Check_CollapsePlayerRelease
 
@@ -611,8 +612,8 @@ CollapsingPtfmHandlePlayerAndSmash:
 ; ---------------------------------------------------------------------------
 
 ObjPlatformCollapse_CreateFragments:
-                move.l  #loc_205DE,(a0)
-                move.l  #loc_205CE,d4
+                move.l  #SKCollapse_WaitSolidFragmentAndRelease,(a0)
+                move.l  #SKCollapse_WaitNonSolidPlatformFragment,d4
                 addq.b  #2,mapping_frame(a0)
                 movea.l $30(a0),a4
 
@@ -660,10 +661,10 @@ FragmentsDrawAndPlaySfx:
                 moveq   #signextendB(sfx_Collapse),d0
                 jmp     (Play_SFX).l
 ; ---------------------------------------------------------------------------
-byte_20CB6:
+SKCollapse_AIZPlatformFragmentDelays:
                 dc.b    $30, $2C, $28, $24, $20, $1C, $2E, $2A, $26, $22, $1E, $1A, $2C, $28, $24, $20, $1C, $18, $2A, $26
                 dc.b    $22, $1E, $1A, $16, $28, $24, $20, $1C, $18, $14
-byte_20CD4:
+SKCollapse_ICZPlatformFragmentDelays:
                 dc.b    $30, $2C, $28, $24, $20, $1C, $2E, $2A, $26, $22, $1E, $1A, $2C, $28, $24, $20, $1C, $18, $2A, $26
                 dc.b    $22, $1E, $1A, $16, $28, $24, $20, $1C, $18, $14, $12, $10
 LBZBridgeCollapse_TimerArray:
@@ -672,56 +673,56 @@ LBZBridgeCollapse_TimerFlipArray:
                 dc.b    $20,   4,   8,  $C, $10, $14, $18, $1C,   2,   6,  $A,  $E, $12, $16, $1A, $1E
 LBZLedgeCollapse_TimerArray:
                 dc.b    $20, $18, $10,   8, $1E, $16,  $E,   6, $1C, $14,  $C,   4, $1A, $12
-byte_20D22:
+SKCollapse_HCZFirstShapeForwardDelays:
                 dc.b    $20, $1C, $18, $14, $10,  $C,   8,   4, $1E, $1A, $16, $12,  $E,  $A,   6,   2
-byte_20D32:
+SKCollapse_HCZFirstShapeReverseDelays:
                 dc.b    $20,   4,   8,  $C, $10, $14, $18, $1C,   2,   6,  $A,  $E, $12, $16, $1A, $1E
-byte_20D42:
+SKCollapse_HCZSecondShapeForwardDelays:
                 dc.b    $28, $24, $20, $1C, $18, $14, $10,  $C,   8,   4, $26, $22, $1E, $1A, $16, $12,  $E,  $A,   6,   2
-byte_20D56:
+SKCollapse_HCZSecondShapeReverseDelays:
                 dc.b    $28,   4,   8,  $C, $10, $14, $18, $1C, $20, $24,   2,   6,  $A,  $E, $12, $16, $1A, $1E, $22, $26
-byte_20D6A:
+SKCollapse_HCZShape3SharedDelays:
                 dc.b    $1C,   4,   8,  $C, $10, $14, $18,   2,   6,  $A,  $E, $12, $16, $1A, $1E
-byte_20D79:
+SKCollapse_HCZFourthShapeForwardDelays:
                 dc.b    $30, $2A, $24, $1E, $18, $12,  $C,   6, $2E, $28, $22, $1C, $16, $10,  $A,   4, $2C, $26, $20, $1A
                 dc.b    $14,  $E,   8,   2
-byte_20D91:
+SKCollapse_HCZFourthShapeReverseDelays:
                 dc.b    $30,   6,  $C, $12, $18, $1E, $24, $2A,   4,  $A, $10, $16, $1C, $22, $28, $2E,   2,   8,  $E, $14
                 dc.b    $1A, $20, $26, $2C
-byte_20DA9:
+SKCollapse_MGZWideAndFBZForwardDelays:
                 dc.b    $40, $38, $30, $28, $20, $18, $10,   8, $3E, $36, $2E, $26, $1E, $16,  $E,   6, $3C, $34, $2C, $24
                 dc.b    $1C, $14,  $C,   4, $3A, $32, $2A, $22, $1A, $12,  $A,   2
-byte_20DC9:
+SKCollapse_MGZWideAndFBZReverseDelays:
                 dc.b    $40,   8, $10, $18, $20, $28, $30, $38,   6,  $E, $16, $1E, $26, $2E, $36, $3E,   4,  $C, $14, $1C
                 dc.b    $24, $2C, $34, $3C,   2,  $A, $12, $1A, $22, $2A, $32, $3A
-byte_20DE9:
+SKCollapse_MGZNarrowForwardDelays:
                 dc.b    $30, $28, $20, $18, $10,   8, $2E, $26, $1E, $16,  $E,   6, $2C, $24, $1C, $14,  $C,   4, $2A, $22
                 dc.b    $1A, $12,  $A,   2
-byte_20E01:
+SKCollapse_MGZNarrowReverseDelays:
                 dc.b    $30,   8, $10, $18, $20, $28,   6,  $E, $16, $1E, $26, $2E,   4,  $C, $14, $1C, $24, $2C,   2,  $A
                 dc.b    $12, $1A, $22, $2A
-byte_20E19:
+SKCollapse_ICZBridgeForwardDelays:
                 dc.b    $28, $24, $20, $1C, $18, $14, $10,  $C,   8,   4, $27, $23, $1F, $1B, $17, $13,  $F,  $B,   7,   3
                 dc.b    $26, $22, $1E, $1A, $16, $12,  $E,  $A,   6,   2, $25, $21, $1D, $19, $15, $11,  $D,   9,   5,   1
                 dc.b    4,   3,   2,   1
-byte_20E45:
+SKCollapse_ICZBridgeReverseDelays:
                 dc.b    $28,   4,   8,  $C, $10, $14, $18, $1C, $20, $24,   3,   7,  $B,  $F, $13, $17, $1B, $1F, $23, $27
                 dc.b    2,   6,  $A,  $E, $12, $16, $1A, $1E, $22, $26,   1,   5,   9,  $D, $11, $15, $19, $1D, $21, $25
                 dc.b    1,   2,   3,   4
-byte_20E71:
+SKCollapse_SOZForwardFragmentDelays:
                 dc.b    $20, $18, $10,   8, $1E, $16, $1C, $14, $1A, $12
-byte_20E7B:
+SKCollapse_SOZReverseFragmentDelays:
                 dc.b    $20,   8, $10, $18,   6,  $E,   4,  $C,   2,  $A
-byte_20E85:
+SKCollapse_HPZLRZForwardFragmentDelays:
                 dc.b    $18, $12,  $C,   6, $16, $10,  $A,   4, $14,  $E,   8,   2
-byte_20E91:
+SKCollapse_HPZLRZReverseFragmentDelays:
                 dc.b    $18,   6,  $C, $12,   4,  $A, $10, $16,   2,   8,  $E, $14,   0
-byte_20E9E:
+SKCollapse_AIZPlatformSignedSlopeHeights:
                 dc.b    $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F, $1F
                 dc.b    $1F, $1F, $1E, $1E, $1D, $1D, $1C, $1C, $1B, $1B, $1A, $1A, $19, $19, $18, $18, $17, $17, $16, $16
                 dc.b    $15, $15, $14, $14, $13, $13, $12, $12, $11, $11, $10, $10,  $F,  $F,  $E,  $E,  $E,  $E,  $E,  $E
                 dc.b    $E,  $E,  $E,  $E
-byte_20EDE:
+SKCollapse_ICZPlatformSignedSlopeHeights:
                 dc.b    $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $30, $2F, $2F, $2F, $2F, $2F, $2F, $2F, $2F
                 dc.b    $2F, $2F, $2F, $2F, $2E, $2E, $2E, $2E, $2E, $2E, $2E, $2E, $2D, $2D, $2D, $2D, $2D, $2D, $2D, $2D
                 dc.b    $2D, $2D, $2D, $2D, $2D, $2C, $2B, $2A

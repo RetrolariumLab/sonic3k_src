@@ -2,7 +2,7 @@
 ; Responsibility: Shared floating platform movement and riding with Marble Garden, Hydrocity and Angel Island mappings
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
-byte_254FA:
+SKFloatPlatform_ShapeRecords:
                 dc.b    $20, $20,   0
                 even
                 dc.b    $18,  $C,   0
@@ -13,36 +13,36 @@ byte_254FA:
 
 Obj_FloatingPlatform:
                 cmpi.w  #0,(Current_zone_and_act).w
-                bne.s   loc_2551C
+                bne.s   SKFloatPlatform_TryAIZ2Art
                 move.l  #Map_AIZFloatingPlatform,mappings(a0)
                 move.w  #make_art_tile(ArtTile_AIZFloatingPlatform,2,0),art_tile(a0)
 
-loc_2551C:
+SKFloatPlatform_TryAIZ2Art:
                 cmpi.w  #1,(Current_zone_and_act).w
-                bne.s   loc_25532
+                bne.s   SKFloatPlatform_TryHCZArt
                 move.l  #Map_AIZFloatingPlatform,mappings(a0)
                 move.w  #make_art_tile(ArtTile_AIZ2FloatingPlatform,2,0),art_tile(a0)
 
-loc_25532:
+SKFloatPlatform_TryHCZArt:
                 cmpi.b  #1,(Current_zone).w
-                bne.s   loc_25548
+                bne.s   SKFloatPlatform_TryMGZArt
                 move.l  #Map_HCZFloatingPlatform,mappings(a0)
                 move.w  #make_art_tile(ArtTile_HCZMisc+$53,2,0),art_tile(a0)
 
-loc_25548:
+SKFloatPlatform_TryMGZArt:
                 cmpi.b  #2,(Current_zone).w
-                bne.s   loc_2555E
+                bne.s   SKFloatPlatform_InitShapeAndAnchors
                 move.l  #Map_MGZFloatingPlatform,mappings(a0)
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
 
-loc_2555E:
+SKFloatPlatform_InitShapeAndAnchors:
                 move.b  #4,render_flags(a0)
                 move.w  #$180,priority(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lsr.w   #2,d0
                 andi.w  #$1C,d0
-                lea     byte_254FA(pc,d0.w),a2
+                lea     SKFloatPlatform_ShapeRecords(pc,d0.w),a2
                 move.b  (a2)+,width_pixels(a0)
                 move.b  (a2)+,height_pixels(a0)
                 move.b  (a2)+,mapping_frame(a0)
@@ -56,30 +56,32 @@ loc_2555E:
                 move.b  subtype(a0),d0
                 andi.w  #$F,d0
                 subq.w  #8,d0
-                bcs.s   loc_255E0
+                bcs.s   SKFloatPlatform_StoreMotionOffset
                 cmpi.w  #4,d0
-                bhs.s   loc_255D4
+                bhs.s   SKFloatPlatform_WidenCullWindow
                 lsl.w   #2,d0
                 lea     (Oscillating_table+$2C).w,a2
                 lea     (a2,d0.w),a2
                 tst.w   (a2)
-                bpl.s   loc_255E0
+                bpl.s   SKFloatPlatform_StoreMotionOffset
                 bchg    #0,$2E(a0)
-                bra.s   loc_255E0
+                bra.s   SKFloatPlatform_StoreMotionOffset
 ; ---------------------------------------------------------------------------
 
-loc_255D4:
+; Set range $380 and move the saved X anchor by $100 for the wide motion selectors
+SKFloatPlatform_WidenCullWindow:
                 move.w  #$380,$42(a0)
                 addi.w  #$100,$44(a0)
 
-loc_255E0:
+SKFloatPlatform_StoreMotionOffset:
                 move.b  subtype(a0),d0
                 andi.b  #$F,d0
                 add.b   d0,d0
                 move.b  d0,subtype(a0)
-                move.l  #loc_255F4,(a0)
+                move.l  #SKFloatPlatform_MoveAndCarryRiders,(a0)
 
-loc_255F4:
+; Pass the old X to top collision after movement. The previous render sign gates rider handling
+SKFloatPlatform_MoveAndCarryRiders:
                 move.w  x_pos(a0),-(sp)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
@@ -88,7 +90,7 @@ loc_255F4:
                 jsr     (a1,d1.w)
                 move.w  (sp)+,d4
                 tst.b   render_flags(a0)
-                bpl.s   loc_25628
+                bpl.s   SKFloatPlatform_CullByAnchorX
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 moveq   #0,d3
@@ -96,22 +98,22 @@ loc_255F4:
                 addq.w  #1,d3
                 jsr     (SolidObjectTop).l
 
-loc_25628:
+SKFloatPlatform_CullByAnchorX:
                 move.w  $44(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmp.w   $42(a0),d0
-                bhi.w   loc_25642
+                bhi.w   SKFloatPlatform_ClearLoadedBit
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_25642:
+SKFloatPlatform_ClearLoadedBit:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_2564E
+                beq.s   SKFloatPlatform_DeleteOutsideRange
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_2564E:
+SKFloatPlatform_DeleteOutsideRange:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_MGZFloatingPlatform:

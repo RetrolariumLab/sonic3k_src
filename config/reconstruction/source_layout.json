@@ -36516,7 +36516,7 @@
       "responsibility": "Shared Angel Island, Lava Reef and Endless Mine rock states, player breakage, fragments and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 628,
+      "physical_lines": 631,
       "origin": {
         "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
         "path": "s3.s",
@@ -36556,7 +36556,7 @@
       "responsibility": "Breakable wall contact, player response, fracture geometry and fragment creation with zone-specific mappings.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 516,
+      "physical_lines": 518,
       "origin": {
         "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
         "path": "s3.s",
@@ -36641,7 +36641,7 @@
       "responsibility": "Shared button collision, trigger state and zone or competition mapping variants.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 172,
+      "physical_lines": 175,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "s3.s",
@@ -36696,7 +36696,7 @@
       "responsibility": "Collapsing platforms and bridges, player release, fragment creation, collapse timing and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 628,
+      "physical_lines": 629,
       "origin": {
         "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
         "path": "s3.s",
@@ -36736,7 +36736,7 @@
       "responsibility": "Shared breakable cork floors, player contact, fracture response and zone mapping variants.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 438,
+      "physical_lines": 439,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "s3.s",
@@ -36901,7 +36901,7 @@
       "responsibility": "Shared floating platform movement and riding with Marble Garden, Hydrocity and Angel Island mappings.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 123,
+      "physical_lines": 125,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "s3.s",
@@ -38529,7 +38529,7 @@
       "responsibility": "Shared rock initialization, active state and character contact or release logic.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 491,
+      "physical_lines": 495,
       "origin": {
         "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
         "path": "sonic3k.s",
@@ -38559,7 +38559,7 @@
       "responsibility": "Breakable wall contact, player response, fracture geometry and fragment creation with zone-specific mappings.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 577,
+      "physical_lines": 579,
       "origin": {
         "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
         "path": "sonic3k.s",
@@ -38624,7 +38624,7 @@
       "responsibility": "Shared button collision, trigger state and zone or competition mapping variants.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 182,
+      "physical_lines": 185,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "sonic3k.s",
@@ -38669,7 +38669,7 @@
       "responsibility": "Collapsing platforms and bridges, player release, fragment creation, collapse timing and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 735,
+      "physical_lines": 736,
       "origin": {
         "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
         "path": "sonic3k.s",
@@ -38704,7 +38704,7 @@
       "responsibility": "Shared breakable cork floors, player contact, fracture response and zone mapping variants.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 447,
+      "physical_lines": 448,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "sonic3k.s",
@@ -38829,7 +38829,7 @@
       "responsibility": "Shared floating platform movement and riding with Marble Garden, Hydrocity and Angel Island mappings.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 123,
+      "physical_lines": 125,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "sonic3k.s",

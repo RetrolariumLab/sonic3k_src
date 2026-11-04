@@ -16,7 +16,7 @@ Obj_CNZWaterLevelCorkFloor:
 
 loc_45624:
                 movea.w $44(a0),a1
-                cmpi.l  #loc_29838,(a1)
+                cmpi.l  #S3Cork_MoveFragmentAndApplyGravity,(a1)
                 beq.s   loc_45636
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------

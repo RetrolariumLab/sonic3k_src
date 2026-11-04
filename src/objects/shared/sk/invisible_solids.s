@@ -20,15 +20,15 @@ Obj_InvisibleBlock:
                 lsl.w   #3,d1
                 move.b  d1,height_pixels(a0)
                 tst.w   (Competition_mode).w
-                beq.s   loc_1EC66
-                move.l  #loc_1ECAA,(a0)
-                bra.s   loc_1ECAA
+                beq.s   SKInvisibleSolid_InstallNormalHandler
+                move.l  #SKInvisibleSolid_CollideCompInvisible,(a0)
+                bra.s   SKInvisibleSolid_CollideCompInvisible
 ; ---------------------------------------------------------------------------
 
-loc_1EC66:
-                move.l  #loc_1EC6C,(a0)
+SKInvisibleSolid_InstallNormalHandler:
+                move.l  #SKInvisibleSolid_CollideCullAndDrawDebug,(a0)
 
-loc_1EC6C:
+SKInvisibleSolid_CollideCullAndDrawDebug:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -44,15 +44,15 @@ loc_1EC6C:
                 cmpi.w  #$280,d0
                 bhi.w   loc_1EBAA
                 tst.w   (Debug_placement_mode).w
-                beq.s   locret_1ECA8
+                beq.s   SKInvisibleSolid_NoDebugDrawReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_1ECA8:
+SKInvisibleSolid_NoDebugDrawReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1ECAA:
+SKInvisibleSolid_CollideCompInvisible:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1

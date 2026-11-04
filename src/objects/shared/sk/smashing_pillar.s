@@ -11,25 +11,25 @@ Obj_MGZLBZSmashingPillar:
                 move.b  #$10,height_pixels(a0)
                 move.w  #$80,priority(a0)
                 cmpi.b  #2,(Current_zone).w
-                bne.s   loc_2925E
+                bne.s   SKSmashingPillar_InitDropOriginAndTravel
                 move.l  #Map_MGZSmashingPillar,mappings(a0)
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
                 move.b  #$20,width_pixels(a0)
                 move.b  #$28,height_pixels(a0)
                 move.w  #$280,priority(a0)
 
-loc_2925E:
+SKSmashingPillar_InitDropOriginAndTravel:
                 move.b  #4,render_flags(a0)
                 move.w  y_pos(a0),$30(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lsl.w   #3,d0
                 move.w  d0,$38(a0)
-                move.l  #loc_2927C,(a0)
+                move.l  #SKSmashingPillar_TickDropOrRetract,(a0)
 
-loc_2927C:
+SKSmashingPillar_TickDropOrRetract:
                 tst.b   $32(a0)
-                bne.s   loc_292C8
+                bne.s   SKSmashingPillar_RetractOnePixel
                 move.w  y_vel(a0),d0
                 addi.w  #$80,y_vel(a0)
                 ext.l   d0
@@ -37,34 +37,34 @@ loc_2927C:
                 add.l   d0,$34(a0)
                 move.w  $34(a0),d2
                 cmp.w   $38(a0),d2
-                blo.s   loc_292DC
+                blo.s   SKSmashingPillar_SetPosAndCheckContacts
                 clr.w   y_vel(a0)
                 move.w  $38(a0),$34(a0)
                 move.b  #1,$32(a0)
                 tst.b   render_flags(a0)
-                bpl.s   loc_292DC
+                bpl.s   SKSmashingPillar_SetPosAndCheckContacts
                 moveq   #signextendB(sfx_Crash),d0
                 cmpi.b  #2,(Current_zone).w
-                beq.s   loc_292C0
+                beq.s   SKSmashingPillar_PlayImpactAndCollide
                 moveq   #signextendB(sfx_MechaLand),d0
 
-loc_292C0:
+SKSmashingPillar_PlayImpactAndCollide:
                 jsr     (Play_SFX).l
-                bra.s   loc_292DC
+                bra.s   SKSmashingPillar_SetPosAndCheckContacts
 ; ---------------------------------------------------------------------------
 
-loc_292C8:
+SKSmashingPillar_RetractOnePixel:
                 move.w  $34(a0),d2
-                beq.s   loc_292D6
+                beq.s   SKSmashingPillar_EndRetractAtOrigin
                 subq.w  #1,d2
                 move.w  d2,$34(a0)
-                bra.s   loc_292DC
+                bra.s   SKSmashingPillar_SetPosAndCheckContacts
 ; ---------------------------------------------------------------------------
 
-loc_292D6:
+SKSmashingPillar_EndRetractAtOrigin:
                 move.b  #0,$32(a0)
 
-loc_292DC:
+SKSmashingPillar_SetPosAndCheckContacts:
                 move.w  $30(a0),d0
                 add.w   $34(a0),d0
                 move.w  d0,y_pos(a0)
@@ -79,23 +79,23 @@ loc_292DC:
                 jsr     (SolidObjectFull).l
                 swap    d6
                 andi.w  #4|8,d6
-                bne.s   loc_29314
+                bne.s   SKSmashingPillar_TryHurtP1UnderPillar
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_29314:
+SKSmashingPillar_TryHurtP1UnderPillar:
                 move.b  d6,d0
                 andi.b  #4,d0
-                beq.s   loc_29324
+                beq.s   SKSmashingPillar_TryHurtP2UnderPillar
                 lea     (Player_1).w,a1
                 bsr.w   HurtPlayerFromSolidHazard
 
-loc_29324:
+SKSmashingPillar_TryHurtP2UnderPillar:
                 andi.b  #8,d6
-                beq.s   loc_29332
+                beq.s   SKSmashingPillar_CullAndDraw
                 lea     (Player_2).w,a1
                 bsr.w   HurtPlayerFromSolidHazard
 
-loc_29332:
+SKSmashingPillar_CullAndDraw:
                 jmp     (Sprite_OnScreen_Test).l
 ; End of function Obj_MGZLBZSmashingPillar

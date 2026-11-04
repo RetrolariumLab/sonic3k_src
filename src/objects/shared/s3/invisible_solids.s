@@ -19,15 +19,15 @@ Obj_InvisibleBlock:
                 lsl.w   #3,d1
                 move.b  d1,height_pixels(a0)
                 tst.w   (Competition_mode).w
-                beq.s   loc_1C82E
-                move.l  #loc_1C872,(a0)
-                bra.s   loc_1C872
+                beq.s   S3InvisibleSolid_InstallNormalHandler
+                move.l  #S3InvisibleSolid_CollideCompInvisible,(a0)
+                bra.s   S3InvisibleSolid_CollideCompInvisible
 ; ---------------------------------------------------------------------------
 
-loc_1C82E:
-                move.l  #loc_1C834,(a0)
+S3InvisibleSolid_InstallNormalHandler:
+                move.l  #S3InvisibleSolid_CollideCullAndDrawDebug,(a0)
 
-loc_1C834:
+S3InvisibleSolid_CollideCullAndDrawDebug:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -43,15 +43,15 @@ loc_1C834:
                 cmpi.w  #$280,d0
                 bhi.w   loc_1C778
                 tst.w   (Debug_placement_mode).w
-                beq.s   locret_1C870
+                beq.s   S3InvisibleSolid_NoDebugDrawReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_1C870:
+S3InvisibleSolid_NoDebugDrawReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1C872:
+S3InvisibleSolid_CollideCompInvisible:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
