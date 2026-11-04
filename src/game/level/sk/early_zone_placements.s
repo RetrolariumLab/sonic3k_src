@@ -73,7 +73,7 @@ FBZ1_Rings:
 FBZ2_Rings:
                 binclude "data/Levels/FBZ/Ring Pos/2.bin"
                 even
-word_1EE2D4:
+SKLevel_FBZSnakePlatformPath00:
                 dc.w    $10F1
                 dc.w    $118C
                 dc.w    $118C
@@ -82,7 +82,7 @@ word_1EE2D4:
                 dc.w    $770
                 dc.w    $FFFF
                 dc.w    $3C
-word_1EE2E4:
+SKLevel_FBZSnakePlatformPath01:
                 dc.w    $1174
                 dc.w    $120F
                 dc.w    $1174
@@ -91,7 +91,7 @@ word_1EE2E4:
                 dc.w    $7F0
                 dc.w    $FFFF
                 dc.w    $3C
-word_1EE2F4:
+SKLevel_FBZSnakePlatformPath02:
                 dc.w    $C56
                 dc.w    $D64
                 dc.w    $D64
@@ -106,7 +106,7 @@ word_1EE2F4:
                 dc.w    $420
                 dc.w    $FFFF
                 dc.w    0
-word_1EE310:
+SKLevel_FBZSnakePlatformPath03:
                 dc.w    $B64
                 dc.w    $CE3
                 dc.w    $C1A
@@ -123,7 +123,7 @@ word_1EE310:
                 dc.w    $317
                 dc.w    $FFFF
                 dc.w    0
-word_1EE330:
+SKLevel_FBZSnakePlatformPath04:
                 dc.w    $B64
                 dc.w    $CE3
                 dc.w    $C1B
@@ -140,7 +140,7 @@ word_1EE330:
                 dc.w    $3C8
                 dc.w    $FFFF
                 dc.w    0
-word_1EE350:
+SKLevel_FBZSnakePlatformPath05:
                 dc.w    $C56
                 dc.w    $D64
                 dc.w    $C56
@@ -155,7 +155,7 @@ word_1EE350:
                 dc.w    $510
                 dc.w    $FFFF
                 dc.w    0
-word_1EE36C:
+SKLevel_FBZSnakePlatformPath06:
                 dc.w    $1D79
                 dc.w    $1EEB
                 dc.w    $1EEB
@@ -178,7 +178,7 @@ word_1EE36C:
                 dc.w    $213
                 dc.w    $FFFF
                 dc.w    0
-word_1EE398:
+SKLevel_FBZSnakePlatformPath07:
                 dc.w    $1D79
                 dc.w    $1EEB
                 dc.w    $1E82

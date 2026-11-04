@@ -6153,7 +6153,7 @@
       "responsibility": "Level initialization, gameplay loop and product-specific attract/demo mode transitions.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 480,
+      "physical_lines": 481,
       "origin": {
         "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
         "path": "s3.s",
@@ -6908,7 +6908,7 @@
       "responsibility": "Attract recording selection and recorded player-input playback.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 83,
+      "physical_lines": 84,
       "origin": {
         "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
         "path": "sonic3k.s",
@@ -7288,7 +7288,7 @@
       "responsibility": "Level initialization, gameplay loop and product-specific attract/demo mode transitions.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 580,
+      "physical_lines": 581,
       "origin": {
         "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
         "path": "sonic3k.s",
@@ -7348,7 +7348,7 @@
       "responsibility": "Active-character loading, level-owned HUD and power-up creation, and player spawn setup.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 371,
+      "physical_lines": 372,
       "origin": {
         "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
         "path": "sonic3k.s",

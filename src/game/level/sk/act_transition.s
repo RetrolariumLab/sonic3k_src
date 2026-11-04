@@ -45,10 +45,10 @@ Child1_Act2LevelSize:
                 move.b  (a1)+,d0
                 lsl.w   #4,d0
                 tst.b   (a1)+
-                beq.s   loc_85E0E
+                beq.s   SKLevel_CreateBoundsMover
                 addq.w  #8,d1
 
-loc_85E0E:
+SKLevel_CreateBoundsMover:
                 add.w   d1,d0
                 lea     (LevelSizes).l,a1
                 lea     (a1,d0.w),a1

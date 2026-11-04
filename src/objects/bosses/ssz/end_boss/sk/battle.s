@@ -559,7 +559,7 @@ loc_7B916:
                 move.w  #$BF,$2E(a0)
                 jsr     (AllocateObject).l
                 bne.s   loc_7B934
-                move.l  #loc_8642E,(a1)
+                move.l  #SKLevel_InitializeScreenShakeRumbleActor,(a1)
 
 loc_7B934:
                 lea     ChildObjDat_7D4D0(pc),a2

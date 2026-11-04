@@ -4,71 +4,71 @@
 Level:
                 bset    #7,(Game_mode).w                ; Set bit 7 of F600 is indicate that we're loading the level
                 tst.w   (Demo_mode_flag).w              ; Are we on an ending demo? (Sonic 1 leftover)
-                bmi.s   loc_5FC4                        ; If so, branch (Sonic 1 leftover)
+                bmi.s   SKLevel_ResetDecodersAndPickFade  ; If so, branch (Sonic 1 leftover)
                 moveq   #signextendB(cmd_FadeOut),d0    ; If a demo
                 bsr.w   Play_SFX
 
-loc_5FC4:
+SKLevel_ResetDecodersAndPickFade:
                 clr.w   (Ending_running_flag).w
                 clr.w   (Kos_decomp_queue_count).w
                 clearRAM Kos_decomp_stored_registers,(Kos_decomp_module_end-Kos_decomp_stored_registers)  ; Clear the KosM bytes
                 bsr.w   Clear_Nem_Queue                 ; Clear PLCs
                 cmpi.w  #$D01,(Current_zone_and_act).w
-                beq.s   loc_5FFC
+                beq.s   SKLevel_FadePreviousLevelToWhite
                 tst.b   (Respawn_table_keep).w
-                beq.s   loc_5FF6
+                beq.s   SKLevel_FadePreviousLevelToBlack
                 cmpi.w  #$1701,(Current_zone_and_act).w
-                beq.s   loc_5FFC
+                beq.s   SKLevel_FadePreviousLevelToWhite
 
-loc_5FF6:
+SKLevel_FadePreviousLevelToBlack:
                 bsr.w   Pal_FadeToBlack                 ; If any normal level
-                bra.s   loc_6000
+                bra.s   SKLevel_ResetDisplayAndStarPosts
 ; ---------------------------------------------------------------------------
 
-loc_5FFC:
+SKLevel_FadePreviousLevelToWhite:
                 bsr.w   Pal_FadeToWhite                 ; If level being loaded is the special stage arena or an ending
 
-loc_6000:
+SKLevel_ResetDisplayAndStarPosts:
                 tst.w   (Demo_mode_flag).w              ; Are we on an ending demo? (Sonic 1 leftover)
-                bmi.w   loc_60DE                        ; If so, branch (Sonic 1 leftover)
+                bmi.w   SKLevel_ClearLevelRAMAndInitializeVideo  ; If so, branch (Sonic 1 leftover)
                 move    #$2700,sr
                 bsr.w   Clear_DisplayData               ; Clear the screen
                 move    #$2300,sr
                 moveq   #0,d0
                 move.w  d0,(Level_frame_counter).w
                 tst.b   (Last_star_post_hit).w
-                beq.s   loc_6040                        ; If no starpost was set, branch
+                beq.s   SKLevel_ChooseInitialResourceLookupID  ; If no starpost was set, branch
                 tst.b   (Special_bonus_entry_flag).w
-                bne.s   loc_6034                        ; Otherwise, ensure that the proper level ID is set to account for levels that use multiple ones in an act
+                bne.s   SKLevel_RestoreBonusReturnZoneIDs  ; Otherwise, ensure that the proper level ID is set to account for levels that use multiple ones in an act
                 move.w  (Saved_zone_and_act).w,(Current_zone_and_act).w
                 move.w  (Saved_apparent_zone_and_act).w,(Apparent_zone_and_act).w
-                bra.s   loc_6040
+                bra.s   SKLevel_ChooseInitialResourceLookupID
 ; ---------------------------------------------------------------------------
 
-loc_6034:
+SKLevel_RestoreBonusReturnZoneIDs:
                 move.w  (Saved2_zone_and_act).w,(Current_zone_and_act).w
                 move.w  (Saved2_apparent_zone_and_act).w,(Apparent_zone_and_act).w
 
-loc_6040:
+SKLevel_ChooseInitialResourceLookupID:
                 move.w  (Current_zone_and_act).w,d0
 
 ; Useless code. Player_mode has not been set yet, and level $D00 has the same PLCs as level 0
-                bne.s   loc_6058
+                bne.s   SKLevel_SkipFBZ2InitialPLCAtExactPostSix
                 cmpi.w  #2,(Player_mode).w              ; If level is Angel Island 1
-                bhs.s   loc_6054
+                bhs.s   SKLevel_UseAIZPostIntroInitialLookup
                 tst.b   (Last_star_post_hit).w          ; If character is Sonic
-                beq.s   loc_6058                        ; And no lamppost is set
+                beq.s   SKLevel_SkipFBZ2InitialPLCAtExactPostSix  ; And no lamppost is set
 
-loc_6054:
+SKLevel_UseAIZPostIntroInitialLookup:
                 move.w  #$D00,d0                        ; Set the level ID to skip the intro
 
-loc_6058:
+SKLevel_SkipFBZ2InitialPLCAtExactPostSix:
                 cmpi.w  #$401,(Current_zone_and_act).w  ; If level is Flying Battery 2
-                bne.s   loc_6068
+                bne.s   SKLevel_LoadInitialDescriptorPLC
                 cmpi.b  #6,(Last_star_post_hit).w       ; ...and lamppost is 6 or above (the one before the rising floor at the end)
-                beq.s   loc_6088                        ; ...don't bother loading level PLCs
+                beq.s   SKLevel_LoadCharacterAndChooseIntroArt  ; ...don't bother loading level PLCs
 
-loc_6068:
+SKLevel_LoadInitialDescriptorPLC:
                 ror.b   #1,d0
                 lsr.w   #4,d0
                 andi.w  #$1F8,d0
@@ -78,43 +78,43 @@ loc_6068:
                 lea     (LevelLoadBlock).l,a2
                 moveq   #0,d0
                 move.b  (a2,d1.w),d0                    ; Get the first PLC number for the level
-                beq.s   loc_6088
+                beq.s   SKLevel_LoadCharacterAndChooseIntroArt
                 bsr.w   Load_PLC
 
-loc_6088:
+SKLevel_LoadCharacterAndChooseIntroArt:
                 bsr.w   LevelLoad_ActiveCharacter
                 tst.b   (Last_star_post_hit).w
-                bne.w   loc_60B4
+                bne.w   SKLevel_ChooseRegularCharacterPLC
                 cmpi.w  #0,(Current_zone_and_act).w
-                bne.s   loc_60B4
+                bne.s   SKLevel_ChooseRegularCharacterPLC
                 cmpi.w  #2,(Player_mode).w
-                bhs.s   loc_60B4
+                bhs.s   SKLevel_ChooseRegularCharacterPLC
                 moveq   #PLCID_01,d0                    ; If in AIZ intro
                 jsr     (Load_PLC_2).l
                 moveq   #PLCID_0A,d0
                 bsr.w   Load_PLC                        ; Load the AIZ Intro graphics
-                bra.s   loc_60DE
+                bra.s   SKLevel_ClearLevelRAMAndInitializeVideo
 ; ---------------------------------------------------------------------------
 
-loc_60B4:
+SKLevel_ChooseRegularCharacterPLC:
                 moveq   #PLCID_06,d0
                 tst.w   (Competition_mode).w
-                bne.s   loc_60DA
+                bne.s   SKLevel_SubmitChosenCharacterPLC
                 moveq   #PLCID_05,d0
                 cmpi.w  #3,(Player_mode).w
-                beq.s   loc_60DA
+                beq.s   SKLevel_SubmitChosenCharacterPLC
                 moveq   #PLCID_01,d0
                 cmpi.w  #2,(Player_mode).w
-                bne.s   loc_60DA
+                bne.s   SKLevel_SubmitChosenCharacterPLC
                 moveq   #PLCID_07,d0
                 tst.b   (Graphics_flags).w
-                bmi.s   loc_60DA
+                bmi.s   SKLevel_SubmitChosenCharacterPLC
                 moveq   #PLCID_52,d0
 
-loc_60DA:
+SKLevel_SubmitChosenCharacterPLC:
                 bsr.w   Load_PLC
 
-loc_60DE:
+SKLevel_ClearLevelRAMAndInitializeVideo:
                 clearRAM Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
                 clearRAM Object_RAM,(Kos_decomp_buffer-Object_RAM)
                 clearRAM Lag_frame_count,(Nem_decomp_queue-Lag_frame_count)
@@ -133,15 +133,15 @@ loc_60DE:
                 move.w  #$8720,(a6)
                 move.w  #$8C81,(a6)
                 tst.b   (Debug_cheat_flag).w
-                beq.s   loc_6182
+                beq.s   SKLevel_ConfigureCompHInt
                 btst    #button_A,(Ctrl_1).w
-                beq.s   loc_6182
+                beq.s   SKLevel_ConfigureCompHInt
                 move.b  #1,(Debug_mode_flag).w
 
-loc_6182:
+SKLevel_ConfigureCompHInt:
                 move.w  #$8AFF,(H_int_counter_command).w
                 tst.w   (Competition_mode).w
-                beq.s   loc_61BE
+                beq.s   SKLevel_ResetDmaAndPickPalette
                 move.w  #$4EF9,(H_int_jump).w
                 move.l  #HInt,(H_int_addr).w
                 move.w  #$8014,(a6)
@@ -150,29 +150,29 @@ loc_6182:
                 move.w  #$8A6B,(H_int_counter_command).w
                 move.w  #$9003,(a6)
                 cmpi.b  #$F,(Current_zone).w
-                bne.s   loc_61BE
+                bne.s   SKLevel_ResetDmaAndPickPalette
                 move.w  #$9011,(a6)
 
-loc_61BE:
+SKLevel_ResetDmaAndPickPalette:
                 move.w  (H_int_counter_command).w,(a6)
                 clr.w   (DMA_queue).w
                 move.l  #DMA_queue,(DMA_queue_slot).w
                 moveq   #PalID_SonicTails,d0
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_61DA
+                bne.s   SKLevel_LoadPaletteAndCheckWater
                 moveq   #PalID_Knuckles,d0
 
-loc_61DA:
+SKLevel_LoadPaletteAndCheckWater:
                 bsr.w   LoadPalette_Immediate
                 bsr.w   CheckLevelForWater
                 clearRAM Water_palette_line_2,(Water_palette_end-Water_palette_line_2)
                 tst.b   (Water_flag).w
-                beq.s   loc_61FC
+                beq.s   SKLevel_PickMusicAndAIZOverride
                 move.w  #$8014,(a6)
 
-loc_61FC:
+SKLevel_PickMusicAndAIZOverride:
                 tst.w   (Demo_mode_flag).w              ; Are we on an ending demo? (Sonic 1 leftover)
-                bmi.w   loc_6310                        ; If so, branch (Sonic 1 leftover)
+                bmi.w   SKLevel_InitGeometryAndResources  ; If so, branch (Sonic 1 leftover)
                 moveq   #0,d0
                 move.w  (Current_zone_and_act).w,d0
                 ror.b   #1,d0
@@ -180,43 +180,43 @@ loc_61FC:
                 lea     (LevelMusic_Playlist).l,a1
                 move.b  (a1,d0.w),d0
                 cmpi.w  #1,(Current_zone_and_act).w
-                bne.s   loc_622A
+                bne.s   SKLevel_TryKnuxMHZIntroMusic
                 cmpi.b  #3,(Last_star_post_hit).w
-                bne.s   loc_622A
+                bne.s   SKLevel_TryKnuxMHZIntroMusic
                 moveq   #signextendB(mus_AIZ1),d0
 
-loc_622A:
+SKLevel_TryKnuxMHZIntroMusic:
                 cmpi.w  #$700,(Current_zone_and_act).w
-                bne.s   loc_6248
+                bne.s   SKLevel_PlayMusicAndCheckTitle
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_6248
+                bne.s   SKLevel_PlayMusicAndCheckTitle
                 tst.w   (SK_alone_flag).w
-                beq.s   loc_6248
+                beq.s   SKLevel_PlayMusicAndCheckTitle
                 tst.b   (Last_star_post_hit).w
-                bne.s   loc_6248
+                bne.s   SKLevel_PlayMusicAndCheckTitle
                 moveq   #signextendB(mus_Knuckles),d0
 
-loc_6248:
+SKLevel_PlayMusicAndCheckTitle:
                 move.w  d0,(Current_music).w
                 bsr.w   Play_Music
                 tst.w   (Current_zone_and_act).w
-                bne.s   loc_6268
+                bne.s   SKLevel_TryLoadKnuxIntroAnimals
                 cmpi.w  #2,(Player_mode).w
-                bhs.s   loc_62B6
+                bhs.s   SKLevel_TryCreateTitleCard
                 tst.b   (Last_star_post_hit).w
-                beq.w   loc_62FE
-                bra.s   loc_62B6
+                beq.w   SKLevel_ClearActThreeAndUploadInitialHUD
+                bra.s   SKLevel_TryCreateTitleCard
 ; ---------------------------------------------------------------------------
 
-loc_6268:
+SKLevel_TryLoadKnuxIntroAnimals:
                 cmpi.w  #$700,(Current_zone_and_act).w
-                bne.s   loc_62B6
+                bne.s   SKLevel_TryCreateTitleCard
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_62B6
+                bne.s   SKLevel_TryCreateTitleCard
                 tst.w   (SK_alone_flag).w
-                beq.s   loc_62B6
+                beq.s   SKLevel_TryCreateTitleCard
                 tst.b   (Last_star_post_hit).w
-                bne.s   loc_62B6
+                bne.s   SKLevel_TryCreateTitleCard
                 move    #$2700,sr
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Animals1),VRAM,WRITE),(VDP_control_port).l
                 lea     (ArtNem_Squirrel).l,a0
@@ -224,17 +224,17 @@ loc_6268:
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Animals2),VRAM,WRITE),(VDP_control_port).l
                 lea     (ArtNem_Chicken).l,a0
                 jsr     (Nem_Decomp).l
-                bra.s   loc_62FE
+                bra.s   SKLevel_ClearActThreeAndUploadInitialHUD
 ; ---------------------------------------------------------------------------
 
-loc_62B6:
+SKLevel_TryCreateTitleCard:
                 cmpi.w  #$1701,(Current_zone_and_act).w
-                beq.s   loc_62FE
+                beq.s   SKLevel_ClearActThreeAndUploadInitialHUD
                 tst.b   (Act3_flag).w
-                bne.s   loc_62FE
+                bne.s   SKLevel_ClearActThreeAndUploadInitialHUD
                 move.l  #Obj_TitleCard,(Dynamic_object_RAM+(object_size*5)).w
 
-loc_62CC:
+SKLevel_WaitForTitleCardAndNemQueue:
                 move.b  #VInt_ID_C,(V_int_routine).w
                 jsr     (Process_Kos_Queue).l
                 bsr.w   Wait_VSync
@@ -243,17 +243,17 @@ loc_62CC:
                 bsr.w   Process_Nem_Queue_Init
                 jsr     (Process_Kos_Module_Queue).l
                 tst.w   (Dynamic_object_RAM+(object_size*5)+objoff_48).w
-                bne.s   loc_62CC
+                bne.s   SKLevel_WaitForTitleCardAndNemQueue
                 tst.l   (Nem_decomp_queue).w
-                bne.s   loc_62CC
+                bne.s   SKLevel_WaitForTitleCardAndNemQueue
 
-loc_62FE:
+SKLevel_ClearActThreeAndUploadInitialHUD:
                 clr.b   (Act3_flag).w
                 move    #$2700,sr
                 jsr     (HUD_DrawInitial).l
                 move    #$2300,sr
 
-loc_6310:
+SKLevel_InitGeometryAndResources:
                 moveq   #PalID_SonicTails,d0
                 bsr.w   LoadPalette
                 jsr     (Get_LevelSizeStart).l
@@ -275,26 +275,26 @@ loc_6310:
                 move.b  #1,(Ctrl_2_locked).w
                 move.b  #0,(Level_started_flag).w
                 tst.b   (Water_flag).w
-                beq.s   loc_63A4
+                beq.s   SKLevel_InstallMHZPollenSpawner
                 cmpi.b  #1,(Current_zone).w
-                beq.s   loc_638E
+                beq.s   SKLevel_InstallHCZWaterSplashActors
                 cmpi.b  #1,(Current_zone).w
-                bne.s   loc_63A4
+                bne.s   SKLevel_InstallMHZPollenSpawner
 
-loc_638E:
+SKLevel_InstallHCZWaterSplashActors:
                 move.l  #Obj_HCZWaveSplash,(Wave_Splash).w
                 move.l  #Obj_HCZWaterSplash,(Dynamic_object_RAM+(object_size*2)).w
                 move.b  #1,(Dynamic_object_RAM+(object_size*2)+subtype).w
 
-loc_63A4:
+SKLevel_InstallMHZPollenSpawner:
                 cmpi.b  #7,(Current_zone).w
-                bne.s   loc_63B4
+                bne.s   SKLevel_ResetFreshRunState
                 move.l  #Obj_MHZ_Pollen_Spawner,(Dynamic_object_RAM+object_size).w
 
-loc_63B4:
+SKLevel_ResetFreshRunState:
                 moveq   #0,d0
                 tst.b   (Last_star_post_hit).w
-                bne.s   loc_6404
+                bne.s   SKLevel_ResetTransientStateAndStartHUD
                 move.w  d0,(Ring_count).w
                 move.l  d0,(Timer).w
                 move.b  d0,(Extra_life_flags).w
@@ -302,23 +302,23 @@ loc_63B4:
                 move.l  d0,(Timer_P2).w
                 move.b  d0,(Saved_status_secondary).w
                 cmpi.w  #$1600,(Current_zone_and_act).w
-                beq.s   loc_6400
+                beq.s   SKLevel_ClearRespawnRetention
                 cmpi.w  #$1700,(Current_zone_and_act).w
-                beq.s   loc_6400
+                beq.s   SKLevel_ClearRespawnRetention
                 cmpi.w  #$1701,(Current_zone_and_act).w
-                beq.s   loc_6404
+                beq.s   SKLevel_ResetTransientStateAndStartHUD
                 cmpi.b  #$16,(Current_zone).w
-                bhs.s   loc_63FC
+                bhs.s   SKLevel_ClearSecondarySavedShield
                 cmpi.b  #$13,(Current_zone).w
-                bhs.s   loc_6404
+                bhs.s   SKLevel_ResetTransientStateAndStartHUD
 
-loc_63FC:
+SKLevel_ClearSecondarySavedShield:
                 move.b  d0,(Saved2_status_secondary).w
 
-loc_6400:
+SKLevel_ClearRespawnRetention:
                 move.b  d0,(Respawn_table_keep).w
 
-loc_6404:
+SKLevel_ResetTransientStateAndStartHUD:
                 move.b  d0,(Time_over_flag).w
                 move.w  d0,(Debug_placement_mode).w
                 move.w  d0,(Restart_level_flag).w
@@ -337,15 +337,15 @@ loc_6404:
                 move.b  #1,(Update_HUD_timer).w
                 move.b  #1,(Level_started_flag).w
                 cmpi.w  #$D01,(Current_zone_and_act).w
-                beq.s   loc_6460
+                beq.s   SKLevel_DisableArenaTimer
                 cmpi.w  #$1701,(Current_zone_and_act).w
-                bne.s   loc_6468
+                bne.s   SKLevel_PrimeActorsAndUnlock
 
-loc_6460:
+SKLevel_DisableArenaTimer:
                 clr.b   (Update_HUD_timer).w
                 clr.b   (Level_started_flag).w
 
-loc_6468:
+SKLevel_PrimeActorsAndUnlock:
                 bsr.w   SpawnLevelMainSprites
                 jsr     (Load_Sprites).l
                 jsr     (Load_Rings).l
@@ -360,18 +360,18 @@ loc_6468:
                 move.b  #0,(Ctrl_2_locked).w
                 jsr     GetDemoPtr(pc)
                 tst.w   (Competition_mode).w
-                bne.w   loc_663A
+                bne.w   SKLevel_ChooseCompetitionExtraStepRate
                 tst.w   (Current_zone_and_act).w
-                bne.s   loc_64CE
+                bne.s   SKLevel_LoadAnimalsForRegularZone
                 tst.b   (Last_star_post_hit).w
-                beq.s   loc_64DC
+                beq.s   SKLevel_StartFadeAndSeedInput
 
-loc_64CE:
+SKLevel_LoadAnimalsForRegularZone:
                 cmpi.b  #$E,(Current_zone).w
-                bhs.s   loc_64DC
+                bhs.s   SKLevel_StartFadeAndSeedInput
                 jsr     (PLCLoad_AnimalsAndExplosion).l
 
-loc_64DC:
+SKLevel_StartFadeAndSeedInput:
                 move.w  #$2030-1,(Palette_fade_info).w
                 jsr     (Pal_FillBlack).l
                 move.w  #$16,(Palette_fade_timer).w
@@ -424,28 +424,28 @@ Level_NotSlots:
 
 DemoMode:
                 tst.w   (Restart_level_flag).w
-                bne.s   loc_65D0
+                bne.s   SKLevel_ResolveExpiredRegularDemoMode
                 tst.w   (Demo_timer).w
-                beq.s   loc_65D0
+                beq.s   SKLevel_ResolveExpiredRegularDemoMode
                 cmpi.b  #GameMode_Demo,(Game_mode).w
                 beq.w   LevelLoop
                 move.b  #GameMode_SegaScreen,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_65D0:
+SKLevel_ResolveExpiredRegularDemoMode:
                 cmpi.b  #GameMode_Demo,(Game_mode).w
-                bne.s   loc_65E0
+                bne.s   SKLevel_InitializeRegularExitFade
                 move.b  #GameMode_SegaScreen,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_65E0:
+SKLevel_InitializeRegularExitFade:
                 move.w  #60,(Demo_timer).w
                 move.w  #$40-1,(Palette_fade_info).w
                 clr.w   (Pal_fade_delay).w
 
-loc_65F0:
+SKLevel_RunRegularExitFadeFrame:
                 move.b  #VInt_ID_8,(V_int_routine).w
                 bsr.w   Wait_VSync
                 bsr.w   Demo_PlayRecord
@@ -456,48 +456,49 @@ loc_65F0:
                 jsr     (Load_Sprites).l
                 jsr     (Process_Kos_Module_Queue).l
                 subq.w  #1,(Pal_fade_delay).w
-                bpl.s   loc_6632
+                bpl.s   SKLevel_TestRegularExitFadeTimer
                 move.w  #2,(Pal_fade_delay).w
                 bsr.w   Pal_ToBlack
 
-loc_6632:
+SKLevel_TestRegularExitFadeTimer:
                 tst.w   (Demo_timer).w
-                bne.s   loc_65F0
+                bne.s   SKLevel_RunRegularExitFadeFrame
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_663A:
+SKLevel_ChooseCompetitionExtraStepRate:
                 move.w  #0,(_unkFF7E).w
                 tst.b   (Debug_cheat_flag).w
-                beq.s   loc_665A
+                beq.s   SKLevel_InitCompFadeAndFraction
                 move.b  (_unkFF7C).w,d0
                 cmpi.b  #$A0,d0
-                bne.s   loc_665A
+                bne.s   SKLevel_InitCompFadeAndFraction
                 move.w  (Sound_test_sound).w,d0
                 lsl.w   #8,d0
                 move.w  d0,(_unkFF7E).w
 
-loc_665A:
+SKLevel_InitCompFadeAndFraction:
                 move.w  #$40-1,(Palette_fade_info).w
                 jsr     (Pal_FillBlack).l
                 move.w  #$16,(Palette_fade_timer).w
                 move.w  #0,(_unkFF7C).w
                 bclr    #7,(Game_mode).w
 
-loc_6678:
+SKLevel_BeginCompetitionVideoFrame:
                 bsr.w   Pause_Game
                 move.b  #VInt_ID_8,(V_int_routine).w
                 jsr     (Process_Kos_Queue).l
                 bsr.w   Wait_VSync
                 addq.w  #1,(Level_frame_counter).w
                 move.w  #4,-(sp)
-                bra.s   loc_66DA
+                bra.s   SKLevel_RunCompetitionSimulationStep
 ; ---------------------------------------------------------------------------
 
-loc_6696:
+; Carry from the fractional accumulator admits another simulation step
+SKLevel_TryCompExtraStep:
                 move.w  (_unkFF7E).w,d0
                 add.w   d0,(_unkFF7C).w
-                bcc.s   loc_66EA
+                bcc.s   SKLevel_FinishCompStepsAndRender
                 bsr.w   Pause_Game
                 move.w  #$100,(Z80_bus_request).l       ; stop the Z80
                 bsr.w   Poll_Controllers
@@ -506,20 +507,20 @@ loc_6696:
                 move.l  #DMA_queue,(DMA_queue_slot).w
                 lea     (Sprite_table_input).w,a5
 
-loc_66CA:
+SKLevel_ClearCompSpriteBuckets:
                 move.w  #0,(a5)
                 lea     $80(a5),a5
                 cmpa.l  #Sprite_table_input_end,a5
-                blo.s   loc_66CA
+                blo.s   SKLevel_ClearCompSpriteBuckets
 
-loc_66DA:
+SKLevel_RunCompetitionSimulationStep:
                 bsr.w   Demo_PlayRecord
                 jsr     (Process_Sprites).l
                 jsr     (DeformBgLayer).l
 
-loc_66EA:
+SKLevel_FinishCompStepsAndRender:
                 subq.w  #1,(sp)
-                bne.s   loc_6696
+                bne.s   SKLevel_TryCompExtraStep
                 addq.w  #2,sp
                 tst.w   (Restart_level_flag).w
                 bne.w   Level
@@ -530,36 +531,36 @@ loc_66EA:
                 bsr.w   Process_Nem_Queue_Init
                 jsr     (Process_Kos_Module_Queue).l
                 cmpi.b  #GameMode_Demo,(Game_mode).w
-                beq.s   loc_672E
+                beq.s   SKLevel_TestCompetitionDemoContinuation
                 cmpi.b  #GameMode_Level,(Game_mode).w
-                beq.w   loc_6678
+                beq.w   SKLevel_BeginCompetitionVideoFrame
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_672E:
+SKLevel_TestCompetitionDemoContinuation:
                 tst.w   (Restart_level_flag).w
-                bne.s   loc_674C
+                bne.s   SKLevel_HandleExpiredCompDemo
                 tst.w   (Demo_timer).w
-                beq.s   loc_674C
+                beq.s   SKLevel_HandleExpiredCompDemo
                 cmpi.b  #GameMode_Demo,(Game_mode).w
-                beq.w   loc_6678
+                beq.w   SKLevel_BeginCompetitionVideoFrame
                 move.b  #GameMode_SegaScreen,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_674C:
+SKLevel_HandleExpiredCompDemo:
                 cmpi.b  #GameMode_Demo,(Game_mode).w
-                bne.s   loc_675C
+                bne.s   SKLevel_InitializeCompetitionExitFade
                 move.b  #GameMode_SegaScreen,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_675C:
+SKLevel_InitializeCompetitionExitFade:
                 move.w  #60,(Demo_timer).w
                 move.w  #$40-1,(Palette_fade_info).w
                 clr.w   (Pal_fade_delay).w
 
-loc_676C:
+SKLevel_RunCompetitionExitFadeFrame:
                 move.b  #VInt_ID_8,(V_int_routine).w
                 bsr.w   Wait_VSync
                 bsr.w   Demo_PlayRecord
@@ -570,11 +571,11 @@ loc_676C:
                 jsr     (Load_Sprites).l
                 jsr     (Process_Kos_Module_Queue).l
                 subq.w  #1,(Pal_fade_delay).w
-                bpl.s   loc_67AE
+                bpl.s   SKLevel_TestCompetitionExitFadeTimer
                 move.w  #2,(Pal_fade_delay).w
                 bsr.w   Pal_ToBlack
 
-loc_67AE:
+SKLevel_TestCompetitionExitFadeTimer:
                 tst.w   (Demo_timer).w
-                bne.s   loc_676C
+                bne.s   SKLevel_RunCompetitionExitFadeFrame
                 rts

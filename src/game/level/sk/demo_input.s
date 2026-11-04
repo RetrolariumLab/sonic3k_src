@@ -28,22 +28,22 @@ DemoPtrs:
 
 Demo_PlayRecord:
                 tst.w   (Demo_mode_flag).w
-                bne.s   loc_761E
+                bne.s   SKLevel_CancelDemoFromPlayerOneStart
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_761E:
+SKLevel_CancelDemoFromPlayerOneStart:
                 move.b  (Ctrl_1_pressed).w,d0
                 andi.b  #button_start_mask,d0
-                beq.s   loc_762E
+                beq.s   SKLevel_ChooseRawOrRunLengthDemoDecoder
                 move.b  #GameMode_TitleScreen,(Game_mode).w
 
-loc_762E:
+SKLevel_ChooseRawOrRunLengthDemoDecoder:
                 movea.l (Demo_data_addr).w,a0
                 cmpi.b  #4,(Current_zone).w
-                beq.s   loc_765E
+                beq.s   SKDemo_ReadRunButtons
                 cmpi.b  #7,(Current_zone).w
-                bhs.s   loc_765E
+                bhs.s   SKDemo_ReadRunButtons
                 move.b  (Demo_start_button).w,d1
                 andi.b  #button_start_mask,d1
                 or.b    -1(a0),d1
@@ -51,17 +51,18 @@ loc_762E:
                 andi.b  #button_start_mask,d0
                 sne     (Demo_start_button).w
                 or.b    (a0)+,d0
-                bra.s   loc_768C
+                bra.s   SKDemo_StoreInputAndCursor
 ; ---------------------------------------------------------------------------
 
-loc_765E:
+; Read the current buttons before ticking the counter or advancing to the next run
+SKDemo_ReadRunButtons:
                 move.b  (a0),d2
                 subq.b  #1,(Demo_hold_counter).w
-                bcc.s   loc_766E
+                bcc.s   SKDemo_MergePhysicalStart
                 addq.w  #2,a0
                 move.b  -1(a0),(Demo_hold_counter).w
 
-loc_766E:
+SKDemo_MergePhysicalStart:
                 move.b  (Demo_start_button).w,d1
                 andi.b  #button_start_mask,d1
                 or.b    (Demo_hold_buttons).w,d1
@@ -71,7 +72,7 @@ loc_766E:
                 sne     (Demo_start_button).w
                 or.b    d2,d0
 
-loc_768C:
+SKDemo_StoreInputAndCursor:
                 move.b  d0,(Ctrl_1).w
                 eor.b   d0,d1
                 and.b   d0,d1

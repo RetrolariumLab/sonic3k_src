@@ -460,7 +460,7 @@ loc_70262:
                 move.w  #$1F,$2E(a0)
                 jsr     (AllocateObject).l
                 bne.s   loc_7027E
-                move.l  #loc_8642E,(a1)
+                move.l  #SKLevel_InitializeScreenShakeRumbleActor,(a1)
 
 loc_7027E:
                 lea     (Child6_CreateBossExplosion).l,a2

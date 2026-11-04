@@ -4,49 +4,49 @@
 Level:
                 bset    #7,(Game_mode).w                ; Set bit 7 of F600 is indicate that we're loading the level
                 tst.w   (Demo_mode_flag).w              ; Are we on an ending demo? (Sonic 1 leftover)
-                bmi.s   loc_46C2                        ; If so, branch (Sonic 1 leftover)
+                bmi.s   S3Level_ResetDecodersAndFade    ; If so, branch (Sonic 1 leftover)
                 moveq   #signextendB(cmd_FadeOut),d0    ; If a demo
                 bsr.w   Play_SFX
 
-loc_46C2:
+S3Level_ResetDecodersAndFade:
                 clr.w   (Kos_decomp_queue_count).w
                 clearRAM Kos_decomp_stored_registers,(Kos_decomp_module_end-Kos_decomp_stored_registers)  ; Clear the KosM bytes
                 bsr.w   Clear_Nem_Queue                 ; Clear PLCs
                 bsr.w   Pal_FadeToBlack
                 tst.w   (Demo_mode_flag).w              ; Are we on an ending demo? (Sonic 1 leftover)
-                bmi.w   loc_479A                        ; If so, branch (Sonic 1 leftover)
+                bmi.w   S3Level_ClearLevelRAMAndInitializeVideo  ; If so, branch (Sonic 1 leftover)
                 move    #$2700,sr
                 bsr.w   Clear_DisplayData               ; Clear the screen
                 move    #$2300,sr
                 moveq   #0,d0
                 move.w  d0,(Level_frame_counter).w
                 tst.b   (Last_star_post_hit).w
-                beq.s   loc_471E                        ; If no starpost was set, branch
+                beq.s   S3Level_ChooseInitialResourceLookupID  ; If no starpost was set, branch
                 tst.b   (Special_bonus_entry_flag).w
-                bne.s   loc_4712                        ; Otherwise, ensure that the proper level ID is set to account for levels that use multiple ones in an act
+                bne.s   S3Level_RestoreBonusReturnZoneIDs  ; Otherwise, ensure that the proper level ID is set to account for levels that use multiple ones in an act
                 move.w  (Saved_zone_and_act).w,(Current_zone_and_act).w
                 move.w  (Saved_apparent_zone_and_act).w,(Apparent_zone_and_act).w
-                bra.s   loc_471E
+                bra.s   S3Level_ChooseInitialResourceLookupID
 ; ---------------------------------------------------------------------------
 
-loc_4712:
+S3Level_RestoreBonusReturnZoneIDs:
                 move.w  (Saved2_zone_and_act).w,(Current_zone_and_act).w
                 move.w  (Saved2_apparent_zone_and_act).w,(Apparent_zone_and_act).w
 
-loc_471E:
+S3Level_ChooseInitialResourceLookupID:
                 move.w  (Current_zone_and_act).w,d0
 
 ; Useless code. Player_mode has not been set yet, and level $D00 has the same PLCs as level 0
-                bne.s   loc_4736
+                bne.s   S3Level_LoadInitialDescriptorPLC
                 cmpi.w  #2,(Player_mode).w              ; If level is Angel Island 1
-                beq.s   loc_4732
+                beq.s   S3Level_UseAIZPostIntroInitialLookup
                 tst.b   (Last_star_post_hit).w          ; If character is Sonic
-                beq.s   loc_4736                        ; And no starpost is set
+                beq.s   S3Level_LoadInitialDescriptorPLC  ; And no starpost is set
 
-loc_4732:
+S3Level_UseAIZPostIntroInitialLookup:
                 move.w  #$D00,d0                        ; Set the level ID to skip the intro
 
-loc_4736:
+S3Level_LoadInitialDescriptorPLC:
                 ror.b   #1,d0
                 lsr.w   #4,d0
                 andi.w  #$1F8,d0
@@ -56,37 +56,37 @@ loc_4736:
                 lea     (LevelLoadBlock).l,a2
                 moveq   #0,d0
                 move.b  (a2,d1.w),d0                    ; Get the first PLC number for the level
-                beq.s   loc_4756
+                beq.s   S3Level_LoadCharacterAndChooseIntroArt
                 bsr.w   Load_PLC
 
-loc_4756:
+S3Level_LoadCharacterAndChooseIntroArt:
                 bsr.w   LevelLoad_ActiveCharacter
                 tst.b   (Last_star_post_hit).w
-                bne.w   loc_4782
+                bne.w   S3Level_ChooseRegularCharacterPLC
                 cmpi.w  #0,(Current_zone_and_act).w
-                bne.s   loc_4782
+                bne.s   S3Level_ChooseRegularCharacterPLC
                 cmpi.w  #2,(Player_mode).w
-                beq.s   loc_4782
+                beq.s   S3Level_ChooseRegularCharacterPLC
                 moveq   #PLCID_01,d0                    ; If in AIZ intro
                 jsr     (Load_PLC_2).l
                 moveq   #PLCID_0A,d0
                 bsr.w   Load_PLC                        ; Load the AIZ Intro graphics
-                bra.s   loc_479A
+                bra.s   S3Level_ClearLevelRAMAndInitializeVideo
 ; ---------------------------------------------------------------------------
 
-loc_4782:
+S3Level_ChooseRegularCharacterPLC:
                 moveq   #PLCID_06,d0
                 tst.w   (Competition_mode).w
-                bne.s   loc_4796
+                bne.s   S3Level_SubmitChosenCharacterPLC
                 moveq   #PLCID_01,d0
                 cmpi.w  #2,(Player_mode).w
-                bne.s   loc_4796
+                bne.s   S3Level_SubmitChosenCharacterPLC
                 moveq   #PLCID_07,d0
 
-loc_4796:
+S3Level_SubmitChosenCharacterPLC:
                 bsr.w   Load_PLC
 
-loc_479A:
+S3Level_ClearLevelRAMAndInitializeVideo:
                 clearRAM Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
                 clearRAM Object_RAM,(Kos_decomp_buffer-Object_RAM)
                 clearRAM Lag_frame_count,(Nem_decomp_queue-Lag_frame_count)
@@ -105,20 +105,20 @@ loc_479A:
                 move.w  #$8720,(a6)
                 move.w  #$8C81,(a6)
                 tst.b   (Debug_cheat_flag).w
-                beq.s   loc_484A
+                beq.s   S3Level_ConfigureCompHInt
                 btst    #button_C,(Ctrl_1_held).w
-                beq.s   loc_483C
+                beq.s   S3Level_EnableDebugFromHeldA
                 move.w  #$8C89,(a6)
 
-loc_483C:
+S3Level_EnableDebugFromHeldA:
                 btst    #button_A,(Ctrl_1_held).w
-                beq.s   loc_484A
+                beq.s   S3Level_ConfigureCompHInt
                 move.b  #1,(Debug_mode_flag).w
 
-loc_484A:
+S3Level_ConfigureCompHInt:
                 move.w  #$8AFF,(H_int_counter_command).w
                 tst.w   (Competition_mode).w
-                beq.s   loc_4886
+                beq.s   S3Level_ResetDMAAndLoadImmediatePalette
                 move.w  #$4EF9,(H_int_jump).w
                 move.l  #HInt,(H_int_addr).w
                 move.w  #$8014,(a6)
@@ -127,10 +127,10 @@ loc_484A:
                 move.w  #$8A6B,(H_int_counter_command).w
                 move.w  #$9003,(a6)
                 cmpi.b  #$F,(Current_zone).w
-                bne.s   loc_4886
+                bne.s   S3Level_ResetDMAAndLoadImmediatePalette
                 move.w  #$9011,(a6)
 
-loc_4886:
+S3Level_ResetDMAAndLoadImmediatePalette:
                 move.w  (H_int_counter_command).w,(a6)
                 clr.w   (DMA_queue).w
                 move.l  #DMA_queue,(DMA_queue_slot).w
@@ -139,12 +139,12 @@ loc_4886:
                 bsr.w   CheckLevelForWater
                 clearRAM Water_palette_line_2,(Water_palette_end-Water_palette_line_2)
                 tst.b   (Water_flag).w
-                beq.s   loc_48BA
+                beq.s   S3Level_SelectLevelMusicAndTitleCard
                 move.w  #$8014,(a6)
 
-loc_48BA:
+S3Level_SelectLevelMusicAndTitleCard:
                 tst.w   (Demo_mode_flag).w              ; Are we on an ending demo? (Sonic 1 leftover)
-                bmi.w   loc_4942                        ; If so, branch (Sonic 1 leftover)
+                bmi.w   S3Level_InitGeometryAndResources  ; If so, branch (Sonic 1 leftover)
                 moveq   #0,d0
                 move.w  (Current_zone_and_act).w,d0
                 ror.b   #1,d0
@@ -154,18 +154,18 @@ loc_48BA:
                 move.w  d0,(Current_music).w
                 bsr.w   Play_Music
                 tst.w   (Current_zone_and_act).w
-                bne.s   loc_48F2
+                bne.s   S3Level_CreateTitleCardForSupportedZone
                 cmpi.w  #2,(Player_mode).w
-                beq.s   loc_48F2
+                beq.s   S3Level_CreateTitleCardForSupportedZone
                 tst.b   (Last_star_post_hit).w
-                beq.s   loc_4934
+                beq.s   S3Level_UploadInitialHud
 
-loc_48F2:
+S3Level_CreateTitleCardForSupportedZone:
                 cmpi.b  #$15,(Current_zone).w
-                bhi.s   loc_4934
+                bhi.s   S3Level_UploadInitialHud
                 move.l  #Obj_TitleCard,(Dynamic_object_RAM+(object_size*5)).w
 
-loc_4902:
+S3Level_WaitForTitleCardAndNemQueue:
                 move.b  #VInt_ID_C,(V_int_routine).w
                 jsr     (Process_Kos_Queue).l
                 bsr.w   Wait_VSync
@@ -174,16 +174,16 @@ loc_4902:
                 bsr.w   Process_Nem_Queue_Init
                 jsr     (Process_Kos_Module_Queue).l
                 tst.w   (Dynamic_object_RAM+(object_size*5)+objoff_48).w
-                bne.s   loc_4902
+                bne.s   S3Level_WaitForTitleCardAndNemQueue
                 tst.l   (Nem_decomp_queue).w
-                bne.s   loc_4902
+                bne.s   S3Level_WaitForTitleCardAndNemQueue
 
-loc_4934:
+S3Level_UploadInitialHud:
                 move    #$2700,sr
                 jsr     (HUD_DrawInitial).l
                 move    #$2300,sr
 
-loc_4942:
+S3Level_InitGeometryAndResources:
                 moveq   #PalID_SonicTails,d0
                 bsr.w   LoadPalette
                 jsr     (Get_LevelSizeStart).l
@@ -206,21 +206,21 @@ loc_4942:
                 move.b  #1,(Ctrl_2_locked).w
                 move.b  #0,(Level_started_flag).w
                 tst.b   (Water_flag).w
-                beq.s   loc_49DC
+                beq.s   S3Level_ResetFreshRunState
                 cmpi.b  #1,(Current_zone).w             ; Is current zone Hydrocity?
-                beq.s   loc_49C6                        ; If so, branch
+                beq.s   S3Level_InstallHCZWaterSplashActors  ; If so, branch
                 cmpi.b  #1,(Current_zone).w             ; Is current zone Hydrocity?
-                bne.s   loc_49DC                        ; If not, branch
+                bne.s   S3Level_ResetFreshRunState      ; If not, branch
 
-loc_49C6:
+S3Level_InstallHCZWaterSplashActors:
                 move.l  #Obj_HCZWaveSplash,(Wave_Splash).w
                 move.l  #Obj_HCZWaterSplash,(Dynamic_object_RAM+(object_size*2)).w
                 move.b  #1,(Dynamic_object_RAM+(object_size*2)+subtype).w
 
-loc_49DC:
+S3Level_ResetFreshRunState:
                 moveq   #0,d0
                 tst.b   (Last_star_post_hit).w
-                bne.s   loc_4A0C
+                bne.s   S3Level_ResetTransientStateAndPrimeLevel
                 move.w  d0,(Ring_count).w
                 move.l  d0,(Timer).w
                 move.b  d0,(Extra_life_flags).w
@@ -229,10 +229,10 @@ loc_49DC:
                 move.b  d0,(Saved2_status_secondary).w
                 move.b  d0,(Saved_status_secondary).w
                 cmpi.b  #$13,(Current_zone).w
-                bhs.s   loc_4A0C
+                bhs.s   S3Level_ResetTransientStateAndPrimeLevel
                 move.b  d0,(Respawn_table_keep).w
 
-loc_4A0C:
+S3Level_ResetTransientStateAndPrimeLevel:
                 move.b  d0,(Time_over_flag).w
                 move.w  d0,(Debug_placement_mode).w
                 move.w  d0,(Restart_level_flag).w
@@ -259,31 +259,31 @@ loc_4A0C:
                 jsr     (Animate_Tiles).l
                 move.w  #1800,(Demo_timer).w
                 tst.w   (Demo_mode_flag).w
-                bpl.s   loc_4AA2
+                bpl.s   S3Level_UnlockAndPickLoop
                 move.w  #540,(Demo_timer).w
                 cmpi.w  #4,(Ending_demo_number).w
-                bne.s   loc_4AA2
+                bne.s   S3Level_UnlockAndPickLoop
                 move.w  #510,(Demo_timer).w
 
-loc_4AA2:
+S3Level_UnlockAndPickLoop:
                 bsr.w   LoadWaterPalette
                 clearRAM Water_palette_line_2,(Water_palette_end-Water_palette_line_2)
                 move.b  #0,(Ctrl_1_locked).w
                 move.b  #0,(Ctrl_2_locked).w
                 jsr     GetDemoPtr(pc)
                 tst.w   (Competition_mode).w
-                bne.w   loc_4C1C
+                bne.w   S3Level_ChooseCompetitionExtraStepRate
                 tst.w   (Current_zone_and_act).w
-                bne.s   loc_4ADA
+                bne.s   S3Level_LoadAnimalsForRegularZone
                 tst.b   (Last_star_post_hit).w
-                beq.s   loc_4AE8
+                beq.s   S3Level_StartRegularFadeInAndGameplay
 
-loc_4ADA:
+S3Level_LoadAnimalsForRegularZone:
                 cmpi.b  #$E,(Current_zone).w
-                bhs.s   loc_4AE8
+                bhs.s   S3Level_StartRegularFadeInAndGameplay
                 jsr     (PLCLoad_AnimalsAndExplosion).l
 
-loc_4AE8:
+S3Level_StartRegularFadeInAndGameplay:
                 move.w  #$2030-1,(Palette_fade_info).w
                 jsr     (Pal_FillBlack).l
                 move.w  #$16,(Palette_fade_timer).w
@@ -324,28 +324,28 @@ LevelLoop:
 
 DemoMode:
                 tst.w   (Restart_level_flag).w
-                bne.s   loc_4BB2
+                bne.s   S3Level_ResolveExpiredRegularDemoMode
                 tst.w   (Demo_timer).w
-                beq.s   loc_4BB2
+                beq.s   S3Level_ResolveExpiredRegularDemoMode
                 cmpi.b  #GameMode_Demo,(Game_mode).w
                 beq.w   LevelLoop
                 move.b  #GameMode_SegaScreen,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4BB2:
+S3Level_ResolveExpiredRegularDemoMode:
                 cmpi.b  #GameMode_Demo,(Game_mode).w
-                bne.s   loc_4BC2
+                bne.s   S3Level_InitializeRegularExitFade
                 move.b  #GameMode_SegaScreen,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4BC2:
+S3Level_InitializeRegularExitFade:
                 move.w  #60,(Demo_timer).w
                 move.w  #$40-1,(Palette_fade_info).w
                 clr.w   (Pal_fade_delay).w
 
-loc_4BD2:
+S3Level_RunRegularExitFadeFrame:
                 move.b  #VInt_ID_8,(V_int_routine).w
                 bsr.w   Wait_VSync
                 bsr.w   Demo_PlayRecord
@@ -356,48 +356,49 @@ loc_4BD2:
                 jsr     (Load_Sprites).l
                 jsr     (Process_Kos_Module_Queue).l
                 subq.w  #1,(Pal_fade_delay).w
-                bpl.s   loc_4C14
+                bpl.s   S3Level_TestRegularExitFadeTimer
                 move.w  #2,(Pal_fade_delay).w
                 bsr.w   Pal_ToBlack
 
-loc_4C14:
+S3Level_TestRegularExitFadeTimer:
                 tst.w   (Demo_timer).w
-                bne.s   loc_4BD2
+                bne.s   S3Level_RunRegularExitFadeFrame
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4C1C:
+S3Level_ChooseCompetitionExtraStepRate:
                 move.w  #0,(_unkFF7E).w
                 tst.b   (Debug_cheat_flag).w
-                beq.s   loc_4C3C
+                beq.s   S3Level_InitCompFadeAndFraction
                 move.b  (_unkFF7C).w,d0
                 cmpi.b  #$A0,d0
-                bne.s   loc_4C3C
+                bne.s   S3Level_InitCompFadeAndFraction
                 move.w  (Sound_test_sound).w,d0
                 lsl.w   #8,d0
                 move.w  d0,(_unkFF7E).w
 
-loc_4C3C:
+S3Level_InitCompFadeAndFraction:
                 move.w  #$40-1,(Palette_fade_info).w
                 jsr     (Pal_FillBlack).l
                 move.w  #$16,(Palette_fade_timer).w
                 move.w  #0,(_unkFF7C).w
                 bclr    #7,(Game_mode).w
 
-loc_4C5A:
+S3Level_BeginCompetitionVideoFrame:
                 bsr.w   Pause_Game
                 move.b  #VInt_ID_8,(V_int_routine).w
                 jsr     (Process_Kos_Queue).l
                 bsr.w   Wait_VSync
                 addq.w  #1,(Level_frame_counter).w
                 move.w  #4,-(sp)
-                bra.s   loc_4CBC
+                bra.s   S3Level_RunCompetitionSimulationStep
 ; ---------------------------------------------------------------------------
 
-loc_4C78:
+; Carry from the fractional accumulator admits another simulation step
+S3Level_TryCompExtraStep:
                 move.w  (_unkFF7E).w,d0
                 add.w   d0,(_unkFF7C).w
-                bcc.s   loc_4CCC
+                bcc.s   S3Level_FinishCompStepsAndRender
                 bsr.w   Pause_Game
                 move.w  #$100,(Z80_bus_request).l       ; stop the Z80
                 bsr.w   Poll_Controllers
@@ -406,20 +407,20 @@ loc_4C78:
                 move.l  #DMA_queue,(DMA_queue_slot).w
                 lea     (Sprite_table_input).w,a5
 
-loc_4CAC:
+S3Level_ClearCompSpriteBuckets:
                 move.w  #0,(a5)
                 lea     $80(a5),a5
                 cmpa.l  #Sprite_table_input_end,a5
-                blo.s   loc_4CAC
+                blo.s   S3Level_ClearCompSpriteBuckets
 
-loc_4CBC:
+S3Level_RunCompetitionSimulationStep:
                 bsr.w   Demo_PlayRecord
                 jsr     (Process_Sprites).l
                 jsr     (DeformBgLayer).l
 
-loc_4CCC:
+S3Level_FinishCompStepsAndRender:
                 subq.w  #1,(sp)
-                bne.s   loc_4C78
+                bne.s   S3Level_TryCompExtraStep
                 addq.w  #2,sp
                 tst.w   (Restart_level_flag).w
                 bne.w   Level
@@ -430,36 +431,36 @@ loc_4CCC:
                 bsr.w   Process_Nem_Queue_Init
                 jsr     (Process_Kos_Module_Queue).l
                 cmpi.b  #GameMode_Demo,(Game_mode).w
-                beq.s   loc_4D10
+                beq.s   S3Level_TestCompetitionDemoContinuation
                 cmpi.b  #GameMode_Level,(Game_mode).w
-                beq.w   loc_4C5A
+                beq.w   S3Level_BeginCompetitionVideoFrame
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4D10:
+S3Level_TestCompetitionDemoContinuation:
                 tst.w   (Restart_level_flag).w
-                bne.s   loc_4D2E
+                bne.s   S3Level_HandleExpiredCompDemo
                 tst.w   (Demo_timer).w
-                beq.s   loc_4D2E
+                beq.s   S3Level_HandleExpiredCompDemo
                 cmpi.b  #GameMode_Demo,(Game_mode).w
-                beq.w   loc_4C5A
+                beq.w   S3Level_BeginCompetitionVideoFrame
                 move.b  #GameMode_SegaScreen,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4D2E:
+S3Level_HandleExpiredCompDemo:
                 cmpi.b  #GameMode_Demo,(Game_mode).w
-                bne.s   loc_4D3E
+                bne.s   S3Level_InitializeCompetitionExitFade
                 move.b  #GameMode_SegaScreen,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4D3E:
+S3Level_InitializeCompetitionExitFade:
                 move.w  #60,(Demo_timer).w
                 move.w  #$40-1,(Palette_fade_info).w
                 clr.w   (Pal_fade_delay).w
 
-loc_4D4E:
+S3Level_RunCompetitionExitFadeFrame:
                 move.b  #VInt_ID_8,(V_int_routine).w
                 bsr.w   Wait_VSync
                 bsr.w   Demo_PlayRecord
@@ -470,11 +471,11 @@ loc_4D4E:
                 jsr     (Load_Sprites).l
                 jsr     (Process_Kos_Module_Queue).l
                 subq.w  #1,(Pal_fade_delay).w
-                bpl.s   loc_4D90
+                bpl.s   S3Level_TestCompetitionExitFadeTimer
                 move.w  #2,(Pal_fade_delay).w
                 bsr.w   Pal_ToBlack
 
-loc_4D90:
+S3Level_TestCompetitionExitFadeTimer:
                 tst.w   (Demo_timer).w
-                bne.s   loc_4D4E
+                bne.s   S3Level_RunCompetitionExitFadeFrame
                 rts

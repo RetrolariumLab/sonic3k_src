@@ -137,7 +137,7 @@ loc_7FE96:
                 clr.b   (Player_2+object_control).w
                 jsr     (AllocateObject).l
                 bne.s   loc_7FEC6
-                move.l  #loc_8642E,(a1)
+                move.l  #SKLevel_InitializeScreenShakeRumbleActor,(a1)
 
 loc_7FEC6:
                 lea     (PLC_BossExplosion).l,a1
@@ -296,7 +296,7 @@ loc_80030:
                 bset    #5,$38(a0)
                 jsr     (AllocateObject).l
                 bne.s   loc_8004A
-                move.l  #loc_8642E,(a1)
+                move.l  #SKLevel_InitializeScreenShakeRumbleActor,(a1)
 
 loc_8004A:
                 move.w  (Camera_X_pos).w,d0

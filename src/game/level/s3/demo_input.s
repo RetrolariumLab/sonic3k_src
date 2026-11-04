@@ -21,18 +21,18 @@ DemoPtrs:
 
 Demo_PlayRecord:
                 tst.w   (Demo_mode_flag).w
-                bne.s   loc_587C
+                bne.s   S3Level_CancelDemoFromEitherPlayerStart
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_587C:
+S3Level_CancelDemoFromEitherPlayerStart:
                 move.b  (Ctrl_1_pressed).w,d0
                 or.b    (Ctrl_2_pressed).w,d0
                 andi.b  #button_start_mask,d0
-                beq.s   loc_5890
+                beq.s   S3Level_DecodeRawDemoSampleAndStartEdges
                 move.b  #GameMode_TitleScreen,(Game_mode).w
 
-loc_5890:
+S3Level_DecodeRawDemoSampleAndStartEdges:
                 movea.l (Demo_data_addr).w,a0
                 move.b  (Demo_start_button).w,d1
                 andi.b  #button_start_mask,d1

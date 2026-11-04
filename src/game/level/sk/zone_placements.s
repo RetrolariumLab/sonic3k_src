@@ -29,45 +29,45 @@ SOZ1_Rings:
 SOZ2_Rings:
                 binclude "data/Levels/SOZ/Ring Pos/2.bin"
                 even
-word_1F6C70:
+SKLevel_SOZRockRideTrack00:
                 dc.w    $A68, $13A0
                 dc.w    $D00, $FFFF
-word_1F6C78:
+SKLevel_SOZRockRideTrack01:
                 dc.w    $A70, $19C0
                 dc.w    $AD2, $1AF0
                 dc.w    $FFFF
-word_1F6C82:
+SKLevel_SOZRockRideTrack02:
                 dc.w    $470, $1F40
                 dc.w    $490, $1FA0
                 dc.w    $D00, $FFFF
-word_1F6C8E:
+SKLevel_SOZRockRideTrack03:
                 dc.w    $AD0, $2D80
                 dc.w    $B00, $2E30
                 dc.w    $D00, $FFFF
-word_1F6C9A:
+SKLevel_SOZRockRideTrack04:
                 dc.w    $450, $24C0
                 dc.w    $4F0, $2560
                 dc.w    $D00, $FFFF
-word_1F6CA6:
+SKLevel_SOZRockRideTrack05:
                 dc.w    $270, $1600
                 dc.w    $2D2, $1730
                 dc.w    $FFFF
-word_1F6CB0:
+SKLevel_SOZRockRideTrack06:
                 dc.w    $A68, $2740
                 dc.w    $A80, $2838
                 dc.w    $D00, $FFFF
-word_1F6CBC:
+SKLevel_SOZRockRideTrack07:
                 dc.w    $5EC, $47F0
                 dc.w    $FFFF
-word_1F6CC2:
+SKLevel_SOZRockRideTrack08:
                 dc.w    $4E0, $4620
                 dc.w    $600, $FFFF
-word_1F6CCA:
+SKLevel_SOZRockRideTrack09:
                 dc.w    $630,  $460
                 dc.w    $652,  $4F0
                 dc.w    $FFFF
-word_1F6CD4:
+SKLevel_SOZRockRideTrack10:
                 dc.w    $6F0, $2D70
                 dc.w    $FFFF
-word_1F6CDA:
+SKSOZRockRide_UnusedTrackSlots:
                 dc.w    $FFFF

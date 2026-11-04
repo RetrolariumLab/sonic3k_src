@@ -1,0 +1,2287 @@
+{
+  "schema_version": 1,
+  "packet": "20-level-lifecycle",
+  "mappings": [
+    {
+      "source": "src/game/level/s3/demo_input.s",
+      "original_line": 28,
+      "old": "loc_587C",
+      "new": "S3Level_CancelDemoFromEitherPlayerStart",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_CancelDemoFromEitherPlayerStart at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/demo_input.s",
+      "original_line": 35,
+      "old": "loc_5890",
+      "new": "S3Level_DecodeRawDemoSampleAndStartEdges",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_DecodeRawDemoSampleAndStartEdges at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 11,
+      "old": "loc_46C2",
+      "new": "S3Level_ResetDecodersAndFade",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_ResetDecompressionAndFadeBeforeLoad at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 32,
+      "old": "loc_4712",
+      "new": "S3Level_RestoreBonusReturnZoneIDs",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_RestoreBonusReturnZoneIDs at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 36,
+      "old": "loc_471E",
+      "new": "S3Level_ChooseInitialResourceLookupID",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_ChooseInitialResourceLookupID at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 46,
+      "old": "loc_4732",
+      "new": "S3Level_UseAIZPostIntroInitialLookup",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_UseAIZPostIntroInitialLookup at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 49,
+      "old": "loc_4736",
+      "new": "S3Level_LoadInitialDescriptorPLC",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_LoadInitialDescriptorPLC at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 62,
+      "old": "loc_4756",
+      "new": "S3Level_LoadCharacterAndChooseIntroArt",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_LoadCharacterAndChooseIntroArt at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 77,
+      "old": "loc_4782",
+      "new": "S3Level_ChooseRegularCharacterPLC",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_ChooseRegularCharacterPLC at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 86,
+      "old": "loc_4796",
+      "new": "S3Level_SubmitChosenCharacterPLC",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_SubmitChosenCharacterPLC at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 89,
+      "old": "loc_479A",
+      "new": "S3Level_ClearLevelRAMAndInitializeVideo",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_ClearLevelRAMAndInitializeVideo at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 113,
+      "old": "loc_483C",
+      "new": "S3Level_EnableDebugFromHeldA",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_EnableDebugFromHeldA at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 118,
+      "old": "loc_484A",
+      "new": "S3Level_ConfigureCompHInt",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_ConfigureCompetitionHorizontalInterrupt at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 133,
+      "old": "loc_4886",
+      "new": "S3Level_ResetDMAAndLoadImmediatePalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_ResetDMAAndLoadImmediatePalette at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 145,
+      "old": "loc_48BA",
+      "new": "S3Level_SelectLevelMusicAndTitleCard",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_SelectLevelMusicAndTitleCard at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 163,
+      "old": "loc_48F2",
+      "new": "S3Level_CreateTitleCardForSupportedZone",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_CreateTitleCardForSupportedZone at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 168,
+      "old": "loc_4902",
+      "new": "S3Level_WaitForTitleCardAndNemQueue",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_WaitForTitleCardAndNemQueue at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 181,
+      "old": "loc_4934",
+      "new": "S3Level_UploadInitialHud",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_UploadInitialHUDWithInterruptsMasked at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 186,
+      "old": "loc_4942",
+      "new": "S3Level_InitGeometryAndResources",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_InitializeGeometryResourcesAndControls at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 215,
+      "old": "loc_49C6",
+      "new": "S3Level_InstallHCZWaterSplashActors",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_InstallHCZWaterSplashActors at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 220,
+      "old": "loc_49DC",
+      "new": "S3Level_ResetFreshRunState",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_ResetFreshRunCountersAndSavedShields at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 235,
+      "old": "loc_4A0C",
+      "new": "S3Level_ResetTransientStateAndPrimeLevel",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_ResetTransientStateAndPrimeLevel at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 268,
+      "old": "loc_4AA2",
+      "new": "S3Level_UnlockAndPickLoop",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_UnlockControlsAndChooseCompetitionLoop at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 281,
+      "old": "loc_4ADA",
+      "new": "S3Level_LoadAnimalsForRegularZone",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_LoadAnimalsForRegularZone at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 286,
+      "old": "loc_4AE8",
+      "new": "S3Level_StartRegularFadeInAndGameplay",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_StartRegularFadeInAndGameplay at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 336,
+      "old": "loc_4BB2",
+      "new": "S3Level_ResolveExpiredRegularDemoMode",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_ResolveExpiredRegularDemoMode at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 343,
+      "old": "loc_4BC2",
+      "new": "S3Level_InitializeRegularExitFade",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_InitializeRegularExitFade at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 348,
+      "old": "loc_4BD2",
+      "new": "S3Level_RunRegularExitFadeFrame",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_RunRegularExitFadeFrame at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 363,
+      "old": "loc_4C14",
+      "new": "S3Level_TestRegularExitFadeTimer",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_TestRegularExitFadeTimer at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 369,
+      "old": "loc_4C1C",
+      "new": "S3Level_ChooseCompetitionExtraStepRate",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_ChooseCompetitionExtraStepRate at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 380,
+      "old": "loc_4C3C",
+      "new": "S3Level_InitCompFadeAndFraction",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_InitializeCompetitionFadeAndFraction at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 387,
+      "old": "loc_4C5A",
+      "new": "S3Level_BeginCompetitionVideoFrame",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_BeginCompetitionVideoFrame at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 397,
+      "old": "loc_4C78",
+      "new": "S3Level_TryCompExtraStep",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_TryCompetitionFractionalExtraStep at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 409,
+      "old": "loc_4CAC",
+      "new": "S3Level_ClearCompSpriteBuckets",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_ClearCompetitionSpriteBucketHeaders at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 415,
+      "old": "loc_4CBC",
+      "new": "S3Level_RunCompetitionSimulationStep",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_RunCompetitionSimulationStep at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 420,
+      "old": "loc_4CCC",
+      "new": "S3Level_FinishCompStepsAndRender",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_FinishCompetitionAttemptAndRenderBatch at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 439,
+      "old": "loc_4D10",
+      "new": "S3Level_TestCompetitionDemoContinuation",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_TestCompetitionDemoContinuation at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 450,
+      "old": "loc_4D2E",
+      "new": "S3Level_HandleExpiredCompDemo",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_ResolveExpiredCompetitionDemoMode at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 457,
+      "old": "loc_4D3E",
+      "new": "S3Level_InitializeCompetitionExitFade",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_InitializeCompetitionExitFade at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 462,
+      "old": "loc_4D4E",
+      "new": "S3Level_RunCompetitionExitFadeFrame",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_RunCompetitionExitFadeFrame at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "original_line": 477,
+      "old": "loc_4D90",
+      "new": "S3Level_TestCompetitionExitFadeTimer",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_TestCompetitionExitFadeTimer at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 16,
+      "old": "loc_4DAE",
+      "new": "S3Level_ForceSonicTailsMode",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_ForceSonicAndTailsForDemoOrCompetition at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 42,
+      "old": "locret_4DFC",
+      "new": "S3Level_ReturnAfterAIZIntroDecision",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_ReturnAfterAIZIntroDecision at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 46,
+      "old": "loc_4DFE",
+      "new": "S3Level_ChooseHCZArrivalPose",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_ChooseHCZArrivalPose at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 55,
+      "old": "loc_4E20",
+      "new": "S3Level_SetActiveCompanionHCZArrivalPose",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_SetActiveCompanionHCZArrivalPose at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 62,
+      "old": "loc_4E36",
+      "new": "S3Level_SetMGZArrivalPose",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_SetMGZArrivalPose at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 72,
+      "old": "loc_4E5A",
+      "new": "S3Level_ChooseCNZCompanionEntryMode",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_ChooseCNZCompanionEntryMode at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 84,
+      "old": "loc_4E86",
+      "new": "S3Level_SelectCNZTailsCPUEntryRoutine",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_SelectCNZTailsCPUEntryRoutine at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 89,
+      "old": "loc_4E94",
+      "new": "S3Level_ChooseICZIntroActor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_ChooseICZIntroActor at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 98,
+      "old": "loc_4EAE",
+      "new": "S3Level_InstallRegularICZIntroActor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_InstallRegularICZIntroActor at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 101,
+      "old": "loc_4EB6",
+      "new": "S3Level_InstallLBZGroundLaunchIntro",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_InstallLBZGroundLaunchIntro at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 106,
+      "old": "locret_4EC6",
+      "new": "S3Level_ReturnFromMainSpriteSpawning",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_ReturnFromMainSpriteSpawning at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 125,
+      "old": "locret_4EF0",
+      "new": "S3Level_RestoreShieldReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_ReturnWithoutRestoredElementalShield at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 129,
+      "old": "loc_4EF2",
+      "new": "S3Level_RestoreSavedFireShieldFirst",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_RestoreSavedFireShieldFirst at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 140,
+      "old": "loc_4F18",
+      "new": "S3Level_TryRestoreLightningShield",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_RestoreSavedLightningShieldSecond at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 151,
+      "old": "loc_4F3E",
+      "new": "S3Level_RestoreSavedBubbleShieldLast",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_RestoreSavedBubbleShieldLast at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 162,
+      "old": "locret_4F64",
+      "new": "S3Level_ReturnAfterSavedShieldSelection",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_ReturnAfterSavedShieldSelection at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 187,
+      "old": "loc_4FC2",
+      "new": "S3Level_ChooseSingleSonicSpawn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_ChooseSingleSonicSpawn at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 197,
+      "old": "loc_4FE6",
+      "new": "S3Level_ChooseSingleTailsSpawn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_ChooseSingleTailsSpawn at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 207,
+      "old": "loc_5008",
+      "new": "S3Level_SpawnFallbackSonic",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_SpawnFallbackSonicWithoutCompanion at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 213,
+      "old": "loc_501A",
+      "new": "S3Level_SpawnCompetitionPlayersAndDust",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_SpawnCompetitionPlayersAndDust at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 229,
+      "old": "loc_505C",
+      "new": "S3Level_JoinCompetitionPaletteUpload",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_JoinCompetitionPaletteUpload at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 240,
+      "old": "loc_5068",
+      "new": "S3Level_TestCompetitionCharacterForTails",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_TestCompetitionCharacterForTails at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 247,
+      "old": "loc_5074",
+      "new": "S3Level_SelectFallbackCompetitionSonic",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_SelectFallbackCompetitionSonic at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 254,
+      "old": "loc_507C",
+      "new": "S3Level_PrepareCompetitionPaletteLineTwo",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_PrepareCompetitionPaletteLineTwo at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "original_line": 259,
+      "old": "loc_508A",
+      "new": "S3Level_CopyCompPaletteLine2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_CopyCompetitionPaletteLineTwoWords at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/resource_setup.s",
+      "original_line": 21,
+      "old": "loc_1A776",
+      "new": "S3Level_UseAIZPostIntroResourceLookup",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_UseAIZPostIntroResourceLookup at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/resource_setup.s",
+      "original_line": 24,
+      "old": "loc_1A77A",
+      "new": "S3Level_DecodeDescriptorBlocks",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_DecodeDescriptorBlocks at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/resource_setup.s",
+      "original_line": 48,
+      "old": "loc_1A7C0",
+      "new": "S3Level_DecodeDescriptorChunks",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_DecodeDescriptorChunks at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/resource_setup.s",
+      "original_line": 62,
+      "old": "loc_1A7EC",
+      "new": "S3Level_LoadLayoutAndTrySecondaryPlc",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_LoadLayoutAndDistinctSecondaryPLC at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/resource_setup.s",
+      "original_line": 74,
+      "old": "loc_1A806",
+      "new": "S3Level_LoadDescriptorPalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_LoadDescriptorPalette at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/act_transition.s",
+      "original_line": 51,
+      "old": "loc_85E0E",
+      "new": "SKLevel_CreateBoundsMover",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_CreateGradualLevelBoundsChildFromOffset at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/demo_input.s",
+      "original_line": 35,
+      "old": "loc_761E",
+      "new": "SKLevel_CancelDemoFromPlayerOneStart",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_CancelDemoFromPlayerOneStart at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/demo_input.s",
+      "original_line": 41,
+      "old": "loc_762E",
+      "new": "SKLevel_ChooseRawOrRunLengthDemoDecoder",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ChooseRawOrRunLengthDemoDecoder at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/demo_input.s",
+      "original_line": 57,
+      "old": "loc_765E",
+      "new": "SKDemo_ReadRunButtons",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ReadRunLengthButtonsBeforeCounterAdvance at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/demo_input.s",
+      "original_line": 64,
+      "old": "loc_766E",
+      "new": "SKDemo_MergePhysicalStart",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_MergeRunLengthButtonsWithPhysicalStart at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/demo_input.s",
+      "original_line": 74,
+      "old": "loc_768C",
+      "new": "SKDemo_StoreInputAndCursor",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_StoreDemoHeldPressedAndStreamPointer at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/early_zone_placements.s",
+      "original_line": 76,
+      "old": "word_1EE2D4",
+      "new": "SKLevel_FBZSnakePlatformPath00",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_FBZSnakePlatformPath00 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/early_zone_placements.s",
+      "original_line": 85,
+      "old": "word_1EE2E4",
+      "new": "SKLevel_FBZSnakePlatformPath01",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_FBZSnakePlatformPath01 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/early_zone_placements.s",
+      "original_line": 94,
+      "old": "word_1EE2F4",
+      "new": "SKLevel_FBZSnakePlatformPath02",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_FBZSnakePlatformPath02 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/early_zone_placements.s",
+      "original_line": 109,
+      "old": "word_1EE310",
+      "new": "SKLevel_FBZSnakePlatformPath03",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_FBZSnakePlatformPath03 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/early_zone_placements.s",
+      "original_line": 126,
+      "old": "word_1EE330",
+      "new": "SKLevel_FBZSnakePlatformPath04",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_FBZSnakePlatformPath04 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/early_zone_placements.s",
+      "original_line": 143,
+      "old": "word_1EE350",
+      "new": "SKLevel_FBZSnakePlatformPath05",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_FBZSnakePlatformPath05 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/early_zone_placements.s",
+      "original_line": 158,
+      "old": "word_1EE36C",
+      "new": "SKLevel_FBZSnakePlatformPath06",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_FBZSnakePlatformPath06 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/early_zone_placements.s",
+      "original_line": 181,
+      "old": "word_1EE398",
+      "new": "SKLevel_FBZSnakePlatformPath07",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_FBZSnakePlatformPath07 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/late_placements.s",
+      "original_line": 46,
+      "old": "word_1FB49E",
+      "new": "SKLevel_DEZLightTunnelPath00",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_DEZLightTunnelPath00 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/late_placements.s",
+      "original_line": 77,
+      "old": "word_1FB518",
+      "new": "SKLevel_DEZLightTunnelPath01",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_DEZLightTunnelPath01 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/late_placements.s",
+      "original_line": 116,
+      "old": "word_1FB5B2",
+      "new": "SKLevel_DEZLightTunnelPath02And03",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_DEZLightTunnelPath02And03 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/late_placements.s",
+      "original_line": 132,
+      "old": "word_1FB5F0",
+      "new": "SKLevel_DEZLightTunnelPath04",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_DEZLightTunnelPath04 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/late_placements.s",
+      "original_line": 154,
+      "old": "word_1FB646",
+      "new": "SKLevel_DEZLightTunnelPath05",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_DEZLightTunnelPath05 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/late_placements.s",
+      "original_line": 182,
+      "old": "word_1FB6B4",
+      "new": "SKLevel_DEZLightTunnelPath06",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_DEZLightTunnelPath06 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/late_placements.s",
+      "original_line": 189,
+      "old": "word_1FB6CE",
+      "new": "SKLevel_DEZLightTunnelPath07",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_DEZLightTunnelPath07 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/level_restart_actor.s",
+      "original_line": 18,
+      "old": "loc_86418",
+      "new": "SKLevel_RestartFromActorSubtype",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_DecodeActorSubtypeAndRequestLevelRestart at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/level_restart_actor.s",
+      "original_line": 25,
+      "old": "word_86426",
+      "new": "SKLevel_RestartActorPlayerRangeRectangle",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_RestartActorPlayerRangeRectangle at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/level_restart_actor.s",
+      "original_line": 29,
+      "old": "loc_8642E",
+      "new": "SKLevel_InitializeScreenShakeRumbleActor",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_InitializeScreenShakeRumbleActor at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/level_restart_actor.s",
+      "original_line": 33,
+      "old": "loc_86438",
+      "new": "SKLevel_WaitForScreenShakeAndPulseRumble",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_WaitForScreenShakeAndPulseRumble at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/level_restart_actor.s",
+      "original_line": 43,
+      "old": "loc_86452",
+      "new": "SKLevel_DeleteFinishedScreenShakeActor",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_DeleteFinishedScreenShakeActor at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/level_restart_actor.s",
+      "original_line": 55,
+      "old": "loc_8646A",
+      "new": "SKLevel_ReadMirroredChildX",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ReadAndMirrorChildHorizontalOffset at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/level_restart_actor.s",
+      "original_line": 62,
+      "old": "loc_86478",
+      "new": "SKLevel_StoreChildPosition",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_StoreChildPositionAndContinueRecordLoop at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 11,
+      "old": "loc_5FC4",
+      "new": "SKLevel_ResetDecodersAndPickFade",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ResetDecompressionAndChooseExitFade at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 23,
+      "old": "loc_5FF6",
+      "new": "SKLevel_FadePreviousLevelToBlack",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_FadePreviousLevelToBlack at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 28,
+      "old": "loc_5FFC",
+      "new": "SKLevel_FadePreviousLevelToWhite",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_FadePreviousLevelToWhite at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 31,
+      "old": "loc_6000",
+      "new": "SKLevel_ResetDisplayAndStarPosts",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ResetDisplayAndRestoreCheckpointIDs at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 48,
+      "old": "loc_6034",
+      "new": "SKLevel_RestoreBonusReturnZoneIDs",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_RestoreBonusReturnZoneIDs at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 52,
+      "old": "loc_6040",
+      "new": "SKLevel_ChooseInitialResourceLookupID",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ChooseInitialResourceLookupID at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 62,
+      "old": "loc_6054",
+      "new": "SKLevel_UseAIZPostIntroInitialLookup",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_UseAIZPostIntroInitialLookup at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 65,
+      "old": "loc_6058",
+      "new": "SKLevel_SkipFBZ2InitialPLCAtExactPostSix",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_SkipFBZ2InitialPLCAtExactPostSix at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 71,
+      "old": "loc_6068",
+      "new": "SKLevel_LoadInitialDescriptorPLC",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_LoadInitialDescriptorPLC at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 84,
+      "old": "loc_6088",
+      "new": "SKLevel_LoadCharacterAndChooseIntroArt",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_LoadCharacterAndChooseIntroArt at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 99,
+      "old": "loc_60B4",
+      "new": "SKLevel_ChooseRegularCharacterPLC",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ChooseRegularCharacterPLC at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 114,
+      "old": "loc_60DA",
+      "new": "SKLevel_SubmitChosenCharacterPLC",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_SubmitChosenCharacterPLC at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 117,
+      "old": "loc_60DE",
+      "new": "SKLevel_ClearLevelRAMAndInitializeVideo",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ClearLevelRAMAndInitializeVideo at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 141,
+      "old": "loc_6182",
+      "new": "SKLevel_ConfigureCompHInt",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ConfigureCompetitionHorizontalInterrupt at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 156,
+      "old": "loc_61BE",
+      "new": "SKLevel_ResetDmaAndPickPalette",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ResetDMAAndChooseImmediatePalette at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 165,
+      "old": "loc_61DA",
+      "new": "SKLevel_LoadPaletteAndCheckWater",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_LoadImmediatePaletteAndCheckWater at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 173,
+      "old": "loc_61FC",
+      "new": "SKLevel_PickMusicAndAIZOverride",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ChoosePlaylistMusicAndAIZCheckpointOverride at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 188,
+      "old": "loc_622A",
+      "new": "SKLevel_TryKnuxMHZIntroMusic",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ChooseStandaloneKnucklesMHZIntroMusic at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 199,
+      "old": "loc_6248",
+      "new": "SKLevel_PlayMusicAndCheckTitle",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_PlayChosenMusicAndGateIntroTitleCard at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 211,
+      "old": "loc_6268",
+      "new": "SKLevel_TryLoadKnuxIntroAnimals",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_LoadStandaloneKnucklesIntroAnimals at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 230,
+      "old": "loc_62B6",
+      "new": "SKLevel_TryCreateTitleCard",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_CreateTitleCardUnlessHPZArenaOrActThree at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 237,
+      "old": "loc_62CC",
+      "new": "SKLevel_WaitForTitleCardAndNemQueue",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_WaitForTitleCardAndNemQueue at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 250,
+      "old": "loc_62FE",
+      "new": "SKLevel_ClearActThreeAndUploadInitialHUD",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ClearActThreeAndUploadInitialHUD at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 256,
+      "old": "loc_6310",
+      "new": "SKLevel_InitGeometryAndResources",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_InitializeGeometryResourcesAndControls at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 284,
+      "old": "loc_638E",
+      "new": "SKLevel_InstallHCZWaterSplashActors",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_InstallHCZWaterSplashActors at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 289,
+      "old": "loc_63A4",
+      "new": "SKLevel_InstallMHZPollenSpawner",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_InstallMHZPollenSpawner at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 294,
+      "old": "loc_63B4",
+      "new": "SKLevel_ResetFreshRunState",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ResetFreshRunCountersAndChooseSavedShieldPolicy at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 315,
+      "old": "loc_63FC",
+      "new": "SKLevel_ClearSecondarySavedShield",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ClearSecondarySavedShield at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 318,
+      "old": "loc_6400",
+      "new": "SKLevel_ClearRespawnRetention",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ClearRespawnRetention at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 321,
+      "old": "loc_6404",
+      "new": "SKLevel_ResetTransientStateAndStartHUD",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ResetTransientStateAndStartHUD at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 344,
+      "old": "loc_6460",
+      "new": "SKLevel_DisableArenaTimer",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_SuppressTimerAndStartedFlagForArena at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 348,
+      "old": "loc_6468",
+      "new": "SKLevel_PrimeActorsAndUnlock",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_PrimeActorsAndUnlockLevelControls at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 369,
+      "old": "loc_64CE",
+      "new": "SKLevel_LoadAnimalsForRegularZone",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_LoadAnimalsForRegularZone at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 374,
+      "old": "loc_64DC",
+      "new": "SKLevel_StartFadeAndSeedInput",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_StartRegularFadeAndSeedPhysicalControls at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 436,
+      "old": "loc_65D0",
+      "new": "SKLevel_ResolveExpiredRegularDemoMode",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ResolveExpiredRegularDemoMode at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 443,
+      "old": "loc_65E0",
+      "new": "SKLevel_InitializeRegularExitFade",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_InitializeRegularExitFade at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 448,
+      "old": "loc_65F0",
+      "new": "SKLevel_RunRegularExitFadeFrame",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_RunRegularExitFadeFrame at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 463,
+      "old": "loc_6632",
+      "new": "SKLevel_TestRegularExitFadeTimer",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_TestRegularExitFadeTimer at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 469,
+      "old": "loc_663A",
+      "new": "SKLevel_ChooseCompetitionExtraStepRate",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ChooseCompetitionExtraStepRate at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 480,
+      "old": "loc_665A",
+      "new": "SKLevel_InitCompFadeAndFraction",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_InitializeCompetitionFadeAndFraction at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 487,
+      "old": "loc_6678",
+      "new": "SKLevel_BeginCompetitionVideoFrame",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_BeginCompetitionVideoFrame at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 497,
+      "old": "loc_6696",
+      "new": "SKLevel_TryCompExtraStep",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_TryCompetitionFractionalExtraStep at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 509,
+      "old": "loc_66CA",
+      "new": "SKLevel_ClearCompSpriteBuckets",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ClearCompetitionSpriteBucketHeaders at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 515,
+      "old": "loc_66DA",
+      "new": "SKLevel_RunCompetitionSimulationStep",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_RunCompetitionSimulationStep at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 520,
+      "old": "loc_66EA",
+      "new": "SKLevel_FinishCompStepsAndRender",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_FinishCompetitionAttemptAndRenderBatch at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 539,
+      "old": "loc_672E",
+      "new": "SKLevel_TestCompetitionDemoContinuation",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_TestCompetitionDemoContinuation at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 550,
+      "old": "loc_674C",
+      "new": "SKLevel_HandleExpiredCompDemo",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ResolveExpiredCompetitionDemoMode at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 557,
+      "old": "loc_675C",
+      "new": "SKLevel_InitializeCompetitionExitFade",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_InitializeCompetitionExitFade at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 562,
+      "old": "loc_676C",
+      "new": "SKLevel_RunCompetitionExitFadeFrame",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_RunCompetitionExitFadeFrame at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "original_line": 577,
+      "old": "loc_67AE",
+      "new": "SKLevel_TestCompetitionExitFadeTimer",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_TestCompetitionExitFadeTimer at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 16,
+      "old": "loc_67CC",
+      "new": "SKLevel_PickDemoCharacterMode",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ChooseDemoOrCompetitionCharacterMode at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 25,
+      "old": "locret_67EC",
+      "new": "SKLevel_CharacterModeReturn",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ReturnAfterActiveCharacterSelection at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 48,
+      "old": "locret_6832",
+      "new": "SKLevel_ReturnAfterAIZIntroDecision",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ReturnAfterAIZIntroDecision at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 52,
+      "old": "loc_6834",
+      "new": "SKLevel_TryHCZArrivalPose",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ChooseHCZArrivalPoseAndKnucklesAnimation at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 63,
+      "old": "loc_685C",
+      "new": "SKLevel_MarkHCZMainPlayerAirborne",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_MarkHCZMainPlayerAirborne at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 69,
+      "old": "loc_6870",
+      "new": "SKLevel_SetActiveCompanionHCZArrivalPose",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_SetActiveCompanionHCZArrivalPose at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 76,
+      "old": "loc_6886",
+      "new": "SKLevel_ChooseLRZNonKnucklesArrivalPose",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ChooseLRZNonKnucklesArrivalPose at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 82,
+      "old": "loc_6896",
+      "new": "SKLevel_TryEncounterOrMGZPose",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ChooseHiddenEncounterOrMGZArrivalPose at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 88,
+      "old": "loc_68A6",
+      "new": "SKLevel_SetPlayersAirborne",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_SetMainAndActiveCompanionAirbornePose at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 96,
+      "old": "loc_68C2",
+      "new": "SKLevel_ChooseCombinedMHZCompanionEntry",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ChooseCombinedMHZCompanionEntry at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 102,
+      "old": "loc_68D0",
+      "new": "SKLevel_ChooseCNZCompanionEntry",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ChooseCNZCompanionEntry at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 106,
+      "old": "loc_68D8",
+      "new": "SKLevel_SpawnIntroTailsForSoloSonic",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_CreateSingleSonicCompanionForIntro at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 116,
+      "old": "loc_68FC",
+      "new": "SKLevel_SelectIntroTailsCPURoutine",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_SelectIntroTailsCPURoutine at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 121,
+      "old": "loc_690A",
+      "new": "SKLevel_PickICZIntro",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ChooseICZIntroByExactCharacterMode at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 131,
+      "old": "loc_6926",
+      "new": "SKLevel_InstallRegularICZIntroActor",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_InstallRegularICZIntroActor at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 134,
+      "old": "loc_692E",
+      "new": "SKLevel_InstallLBZGroundLaunchIntro",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_InstallLBZGroundLaunchIntro at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 139,
+      "old": "loc_693E",
+      "new": "SKLevel_SetKnucklesMHZArrivalPose",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_SetKnucklesMHZArrivalPose at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 147,
+      "old": "loc_695A",
+      "new": "SKLevel_InstallSOZGroundFallIntro",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_InstallSOZGroundFallIntro at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 158,
+      "old": "loc_6986",
+      "new": "SKLevel_PickRunningIntro",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ChooseRunningIntroByLevelAndCharacter at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 168,
+      "old": "loc_69A6",
+      "new": "SKLevel_TryKnuxRunningIntro",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_RequireKnucklesForCNZOrLRZRunIntro at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 172,
+      "old": "loc_69AE",
+      "new": "SKLevel_InstallPlayerRunningIntro",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_InstallPlayerRunningIntro at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 175,
+      "old": "locret_69B6",
+      "new": "SKLevel_ReturnFromMainSpriteSpawning",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ReturnFromMainSpriteSpawning at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 193,
+      "old": "loc_69E0",
+      "new": "SKLevel_ReadAndClearSavedShields",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ConsumeSavedElementalShieldCandidates at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 204,
+      "old": "locret_6A00",
+      "new": "SKLevel_RestoreShieldReturn",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ReturnWithoutRestoredElementalShield at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 208,
+      "old": "loc_6A02",
+      "new": "SKLevel_RestoreSavedFireShieldFirst",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_RestoreSavedFireShieldFirst at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 219,
+      "old": "loc_6A28",
+      "new": "SKLevel_TryRestoreLightningShield",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_RestoreSavedLightningShieldSecond at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 230,
+      "old": "loc_6A4E",
+      "new": "SKLevel_RestoreSavedBubbleShieldLast",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_RestoreSavedBubbleShieldLast at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 241,
+      "old": "locret_6A74",
+      "new": "SKLevel_ReturnAfterSavedShieldSelection",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ReturnAfterSavedShieldSelection at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 254,
+      "old": "loc_6A8A",
+      "new": "SKLevel_TryInitPachinko",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_InitializePachinkoSavedRingsAndTrap at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 264,
+      "old": "loc_6AB8",
+      "new": "SKLevel_PickPlayerSpawn",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ChooseSlotsCompetitionOrRegularPlayerSpawn at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 285,
+      "old": "loc_6B1E",
+      "new": "SKLevel_ChooseSingleSonicSpawn",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ChooseSingleSonicSpawn at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 295,
+      "old": "loc_6B42",
+      "new": "SKLevel_ChooseSingleTailsSpawn",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_ChooseSingleTailsSpawn at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 305,
+      "old": "loc_6B64",
+      "new": "SKLevel_SpawnFallbackKnuckles",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_SpawnFallbackKnucklesWithoutShield at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 311,
+      "old": "loc_6B76",
+      "new": "SKLevel_InitSlotsPlayerAndLayout",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_SpawnRotatingSlotsPlayerAndLayout at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 321,
+      "old": "loc_6B94",
+      "new": "SKLevel_SpawnCompetitionPlayersAndDust",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_SpawnCompetitionPlayersAndDust at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 337,
+      "old": "loc_6BD6",
+      "new": "SKLevel_JoinCompetitionPaletteUpload",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_JoinCompetitionPaletteUpload at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 348,
+      "old": "loc_6BE2",
+      "new": "SKLevel_TestCompetitionCharacterForTails",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_TestCompetitionCharacterForTails at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 355,
+      "old": "loc_6BEE",
+      "new": "SKLevel_SelectFallbackCompetitionSonic",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_SelectFallbackCompetitionSonic at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 362,
+      "old": "loc_6BF6",
+      "new": "SKLevel_PrepareCompetitionPaletteLineTwo",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_PrepareCompetitionPaletteLineTwo at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "original_line": 367,
+      "old": "loc_6C04",
+      "new": "SKLevel_CopyCompPaletteLine2",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_CopyCompetitionPaletteLineTwoWords at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/resource_setup.s",
+      "original_line": 21,
+      "old": "loc_1C2C4",
+      "new": "SKLevel_UseAIZPostIntroResourceLookup",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_UseAIZPostIntroResourceLookup at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/resource_setup.s",
+      "original_line": 24,
+      "old": "loc_1C2C8",
+      "new": "SKLevel_DecodeDescriptorBlocks",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_DecodeDescriptorBlocks at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/resource_setup.s",
+      "original_line": 48,
+      "old": "loc_1C30E",
+      "new": "SKLevel_DecodeDescriptorChunks",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_DecodeDescriptorChunks at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/resource_setup.s",
+      "original_line": 62,
+      "old": "loc_1C33A",
+      "new": "SKLevel_LoadLayoutAndTrySecondaryPlc",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_LoadLayoutAndDistinctSecondaryPLC at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/resource_setup.s",
+      "original_line": 74,
+      "old": "loc_1C354",
+      "new": "SKLevel_LoadDescriptorPalette",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_LoadDescriptorPalette at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/zone_placements.s",
+      "original_line": 32,
+      "old": "word_1F6C70",
+      "new": "SKLevel_SOZRockRideTrack00",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_SOZRockRideTrack00 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/zone_placements.s",
+      "original_line": 35,
+      "old": "word_1F6C78",
+      "new": "SKLevel_SOZRockRideTrack01",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_SOZRockRideTrack01 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/zone_placements.s",
+      "original_line": 39,
+      "old": "word_1F6C82",
+      "new": "SKLevel_SOZRockRideTrack02",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_SOZRockRideTrack02 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/zone_placements.s",
+      "original_line": 43,
+      "old": "word_1F6C8E",
+      "new": "SKLevel_SOZRockRideTrack03",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_SOZRockRideTrack03 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/zone_placements.s",
+      "original_line": 47,
+      "old": "word_1F6C9A",
+      "new": "SKLevel_SOZRockRideTrack04",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_SOZRockRideTrack04 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/zone_placements.s",
+      "original_line": 51,
+      "old": "word_1F6CA6",
+      "new": "SKLevel_SOZRockRideTrack05",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_SOZRockRideTrack05 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/zone_placements.s",
+      "original_line": 55,
+      "old": "word_1F6CB0",
+      "new": "SKLevel_SOZRockRideTrack06",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_SOZRockRideTrack06 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/zone_placements.s",
+      "original_line": 59,
+      "old": "word_1F6CBC",
+      "new": "SKLevel_SOZRockRideTrack07",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_SOZRockRideTrack07 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/zone_placements.s",
+      "original_line": 62,
+      "old": "word_1F6CC2",
+      "new": "SKLevel_SOZRockRideTrack08",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_SOZRockRideTrack08 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/zone_placements.s",
+      "original_line": 65,
+      "old": "word_1F6CCA",
+      "new": "SKLevel_SOZRockRideTrack09",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_SOZRockRideTrack09 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/zone_placements.s",
+      "original_line": 69,
+      "old": "word_1F6CD4",
+      "new": "SKLevel_SOZRockRideTrack10",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_SOZRockRideTrack10 at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/zone_placements.s",
+      "original_line": 72,
+      "old": "word_1F6CDA",
+      "new": "SKSOZRockRide_UnusedTrackSlots",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_SOZRockRideTrackSlots11Through31Sentinel at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/modes/s3/pause.s",
+      "original_line": 17,
+      "old": "loc_168E",
+      "new": "S3Pause_EnterPauseAndSignalZ80MusicHold",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Pause_EnterPauseAndSignalZ80MusicHold"
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/game/level/s3/demo_input.s",
+      "tokens": [
+        [15, 1, 0, ""],
+        [17, 0, 0, ""],
+        [21, 1, 1, ""],
+        [23, 0, 1, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "tokens": [
+        [4, 1, 2, ""],
+        [7, 0, 2, ""],
+        [13, 1, 10, ""],
+        [20, 1, 4, ""],
+        [22, 1, 3, ""],
+        [25, 1, 4, ""],
+        [26, 0, 3, ""],
+        [29, 0, 4, ""],
+        [31, 1, 6, ""],
+        [33, 1, 5, ""],
+        [35, 1, 6, ""],
+        [36, 0, 5, ""],
+        [38, 0, 6, ""],
+        [48, 1, 7, ""],
+        [50, 0, 7, ""],
+        [53, 1, 8, ""],
+        [55, 1, 8, ""],
+        [57, 1, 8, ""],
+        [62, 1, 10, ""],
+        [63, 0, 8, ""],
+        [66, 1, 9, ""],
+        [69, 1, 9, ""],
+        [71, 0, 9, ""],
+        [73, 0, 10, ""],
+        [92, 1, 12, ""],
+        [94, 1, 11, ""],
+        [96, 0, 11, ""],
+        [98, 1, 12, ""],
+        [100, 0, 12, ""],
+        [103, 1, 13, ""],
+        [112, 1, 13, ""],
+        [114, 0, 13, ""],
+        [123, 1, 14, ""],
+        [125, 0, 14, ""],
+        [127, 1, 18, ""],
+        [137, 1, 15, ""],
+        [139, 1, 15, ""],
+        [141, 1, 17, ""],
+        [142, 0, 15, ""],
+        [144, 1, 17, ""],
+        [146, 0, 16, ""],
+        [155, 1, 16, ""],
+        [157, 1, 16, ""],
+        [158, 0, 17, ""],
+        [162, 0, 18, ""],
+        [185, 1, 20, ""],
+        [187, 1, 19, ""],
+        [189, 1, 20, ""],
+        [190, 0, 19, ""],
+        [194, 0, 20, ""],
+        [197, 1, 21, ""],
+        [206, 1, 21, ""],
+        [208, 0, 21, ""],
+        [235, 1, 22, ""],
+        [238, 1, 22, ""],
+        [240, 0, 22, ""],
+        [247, 1, 29, ""],
+        [249, 1, 23, ""],
+        [251, 1, 24, ""],
+        [252, 0, 23, ""],
+        [254, 1, 24, ""],
+        [256, 0, 24, ""],
+        [294, 1, 25, ""],
+        [296, 1, 25, ""],
+        [301, 0, 25, ""],
+        [303, 1, 26, ""],
+        [306, 0, 26, ""],
+        [310, 0, 27, ""],
+        [321, 1, 28, ""],
+        [324, 0, 28, ""],
+        [326, 1, 27, ""],
+        [328, 0, 29, ""],
+        [331, 1, 30, ""],
+        [334, 1, 30, ""],
+        [338, 0, 30, ""],
+        [344, 0, 31, ""],
+        [351, 1, 34, ""],
+        [352, 0, 32, ""],
+        [355, 1, 35, ""],
+        [363, 0, 33, ""],
+        [367, 1, 33, ""],
+        [368, 0, 34, ""],
+        [372, 0, 35, ""],
+        [374, 1, 32, ""],
+        [385, 1, 36, ""],
+        [387, 1, 31, ""],
+        [389, 0, 36, ""],
+        [391, 1, 37, ""],
+        [393, 1, 37, ""],
+        [395, 1, 31, ""],
+        [398, 0, 37, ""],
+        [400, 1, 38, ""],
+        [403, 0, 38, ""],
+        [407, 0, 39, ""],
+        [418, 1, 40, ""],
+        [421, 0, 40, ""],
+        [423, 1, 39, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/s3/player_spawn.s",
+      "tokens": [
+        [3, 1, 41, ""],
+        [5, 1, 41, ""],
+        [8, 0, 41, ""],
+        [16, 1, 51, ""],
+        [18, 1, 51, ""],
+        [22, 1, 43, ""],
+        [24, 1, 42, ""],
+        [28, 0, 42, ""],
+        [30, 0, 43, ""],
+        [32, 1, 45, ""],
+        [36, 1, 44, ""],
+        [38, 0, 44, ""],
+        [40, 1, 45, ""],
+        [44, 0, 45, ""],
+        [46, 1, 46, ""],
+        [50, 1, 46, ""],
+        [53, 0, 46, ""],
+        [55, 1, 48, ""],
+        [57, 1, 47, ""],
+        [62, 1, 48, ""],
+        [63, 0, 47, ""],
+        [65, 1, 48, ""],
+        [67, 0, 48, ""],
+        [69, 1, 50, ""],
+        [71, 1, 49, ""],
+        [73, 1, 50, ""],
+        [74, 0, 49, ""],
+        [76, 0, 50, ""],
+        [78, 1, 51, ""],
+        [80, 0, 51, ""],
+        [84, 1, 52, ""],
+        [89, 1, 53, ""],
+        [93, 1, 53, ""],
+        [94, 0, 52, ""],
+        [96, 0, 53, ""],
+        [98, 1, 54, ""],
+        [105, 0, 54, ""],
+        [107, 1, 55, ""],
+        [114, 0, 55, ""],
+        [116, 1, 56, ""],
+        [123, 0, 56, ""],
+        [127, 1, 60, ""],
+        [129, 1, 57, ""],
+        [142, 0, 57, ""],
+        [144, 1, 58, ""],
+        [150, 0, 58, ""],
+        [152, 1, 59, ""],
+        [158, 0, 59, ""],
+        [162, 0, 60, ""],
+        [171, 1, 61, ""],
+        [177, 0, 61, ""],
+        [178, 1, 64, ""],
+        [181, 1, 62, ""],
+        [183, 0, 62, ""],
+        [185, 1, 63, ""],
+        [188, 0, 63, ""],
+        [191, 0, 64, ""],
+        [195, 0, 65, ""],
+        [197, 3, 65, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/s3/resource_setup.s",
+      "tokens": [
+        [5, 1, 67, ""],
+        [7, 1, 66, ""],
+        [9, 1, 67, ""],
+        [10, 0, 66, ""],
+        [12, 0, 67, ""],
+        [32, 1, 68, ""],
+        [35, 0, 68, ""],
+        [45, 1, 69, ""],
+        [48, 0, 69, ""],
+        [55, 1, 70, ""],
+        [57, 1, 70, ""],
+        [59, 0, 70, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/act_transition.s",
+      "tokens": [
+        [34, 1, 71, ""],
+        [36, 0, 71, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/demo_input.s",
+      "tokens": [
+        [22, 1, 72, ""],
+        [24, 0, 72, ""],
+        [27, 1, 73, ""],
+        [29, 0, 73, ""],
+        [32, 1, 74, ""],
+        [34, 1, 74, ""],
+        [42, 1, 76, ""],
+        [43, 0, 74, ""],
+        [46, 1, 75, ""],
+        [49, 0, 75, ""],
+        [58, 0, 76, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/early_zone_placements.s",
+      "tokens": [
+        [73, 0, 77, ""],
+        [82, 0, 78, ""],
+        [91, 0, 79, ""],
+        [106, 0, 80, ""],
+        [123, 0, 81, ""],
+        [140, 0, 82, ""],
+        [155, 0, 83, ""],
+        [178, 0, 84, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/late_placements.s",
+      "tokens": [
+        [43, 0, 85, ""],
+        [74, 0, 86, ""],
+        [113, 0, 87, ""],
+        [129, 0, 88, ""],
+        [151, 0, 89, ""],
+        [179, 0, 90, ""],
+        [186, 0, 91, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/level_restart_actor.s",
+      "tokens": [
+        [3, 1, 93, ""],
+        [7, 1, 92, ""],
+        [9, 1, 92, ""],
+        [12, 0, 92, ""],
+        [18, 0, 93, ""],
+        [20, 0, 94, ""],
+        [22, 2, 95, ""],
+        [23, 0, 95, ""],
+        [25, 1, 96, ""],
+        [31, 0, 96, ""],
+        [39, 0, 97, ""],
+        [43, 1, 98, ""],
+        [45, 0, 98, ""],
+        [53, 3, 97, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "tokens": [
+        [4, 1, 99, ""],
+        [7, 0, 99, ""],
+        [13, 1, 101, ""],
+        [15, 1, 100, ""],
+        [17, 1, 101, ""],
+        [18, 0, 100, ""],
+        [20, 1, 102, ""],
+        [21, 0, 101, ""],
+        [23, 0, 102, ""],
+        [25, 1, 111, ""],
+        [32, 1, 104, ""],
+        [34, 1, 103, ""],
+        [37, 1, 104, ""],
+        [38, 0, 103, ""],
+        [41, 0, 104, ""],
+        [43, 1, 106, ""],
+        [45, 1, 105, ""],
+        [47, 1, 106, ""],
+        [48, 0, 105, ""],
+        [50, 0, 106, ""],
+        [52, 1, 107, ""],
+        [54, 1, 108, ""],
+        [55, 0, 107, ""],
+        [65, 1, 108, ""],
+        [67, 0, 108, ""],
+        [70, 1, 109, ""],
+        [72, 1, 109, ""],
+        [74, 1, 109, ""],
+        [79, 1, 111, ""],
+        [80, 0, 109, ""],
+        [83, 1, 110, ""],
+        [86, 1, 110, ""],
+        [89, 1, 110, ""],
+        [92, 1, 110, ""],
+        [94, 0, 110, ""],
+        [96, 0, 111, ""],
+        [115, 1, 112, ""],
+        [117, 1, 112, ""],
+        [119, 0, 112, ""],
+        [122, 1, 113, ""],
+        [131, 1, 113, ""],
+        [133, 0, 113, ""],
+        [139, 1, 114, ""],
+        [141, 0, 114, ""],
+        [146, 1, 115, ""],
+        [148, 0, 115, ""],
+        [150, 1, 122, ""],
+        [158, 1, 116, ""],
+        [160, 1, 116, ""],
+        [162, 0, 116, ""],
+        [164, 1, 117, ""],
+        [166, 1, 117, ""],
+        [168, 1, 117, ""],
+        [170, 1, 117, ""],
+        [172, 0, 117, ""],
+        [176, 1, 118, ""],
+        [178, 1, 119, ""],
+        [180, 1, 121, ""],
+        [181, 1, 119, ""],
+        [182, 0, 118, ""],
+        [184, 1, 119, ""],
+        [186, 1, 119, ""],
+        [188, 1, 119, ""],
+        [190, 1, 119, ""],
+        [198, 1, 121, ""],
+        [199, 0, 119, ""],
+        [201, 1, 121, ""],
+        [203, 1, 121, ""],
+        [205, 0, 120, ""],
+        [214, 1, 120, ""],
+        [216, 1, 120, ""],
+        [217, 0, 121, ""],
+        [222, 0, 122, ""],
+        [244, 1, 124, ""],
+        [246, 1, 123, ""],
+        [248, 1, 124, ""],
+        [249, 0, 123, ""],
+        [253, 0, 124, ""],
+        [255, 1, 125, ""],
+        [257, 0, 125, ""],
+        [260, 1, 128, ""],
+        [268, 1, 127, ""],
+        [270, 1, 127, ""],
+        [272, 1, 128, ""],
+        [274, 1, 126, ""],
+        [276, 1, 128, ""],
+        [277, 0, 126, ""],
+        [279, 0, 127, ""],
+        [281, 0, 128, ""],
+        [300, 1, 129, ""],
+        [302, 1, 130, ""],
+        [303, 0, 129, ""],
+        [306, 0, 130, ""],
+        [321, 1, 137, ""],
+        [323, 1, 131, ""],
+        [325, 1, 132, ""],
+        [326, 0, 131, ""],
+        [328, 1, 132, ""],
+        [330, 0, 132, ""],
+        [378, 1, 133, ""],
+        [380, 1, 133, ""],
+        [385, 0, 133, ""],
+        [387, 1, 134, ""],
+        [390, 0, 134, ""],
+        [394, 0, 135, ""],
+        [405, 1, 136, ""],
+        [408, 0, 136, ""],
+        [410, 1, 135, ""],
+        [412, 0, 137, ""],
+        [415, 1, 138, ""],
+        [418, 1, 138, ""],
+        [422, 0, 138, ""],
+        [428, 0, 139, ""],
+        [435, 1, 142, ""],
+        [436, 0, 140, ""],
+        [439, 1, 143, ""],
+        [447, 0, 141, ""],
+        [451, 1, 141, ""],
+        [452, 0, 142, ""],
+        [456, 0, 143, ""],
+        [458, 1, 140, ""],
+        [469, 1, 144, ""],
+        [471, 1, 139, ""],
+        [473, 0, 144, ""],
+        [475, 1, 145, ""],
+        [477, 1, 145, ""],
+        [479, 1, 139, ""],
+        [482, 0, 145, ""],
+        [484, 1, 146, ""],
+        [487, 0, 146, ""],
+        [491, 0, 147, ""],
+        [502, 1, 148, ""],
+        [505, 0, 148, ""],
+        [507, 1, 147, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/player_spawn.s",
+      "tokens": [
+        [3, 1, 149, ""],
+        [5, 1, 149, ""],
+        [8, 0, 149, ""],
+        [11, 1, 150, ""],
+        [14, 1, 150, ""],
+        [16, 0, 150, ""],
+        [23, 1, 170, ""],
+        [25, 1, 170, ""],
+        [29, 1, 152, ""],
+        [31, 1, 151, ""],
+        [34, 0, 151, ""],
+        [36, 0, 152, ""],
+        [38, 1, 155, ""],
+        [41, 1, 153, ""],
+        [45, 0, 153, ""],
+        [48, 1, 154, ""],
+        [50, 0, 154, ""],
+        [52, 1, 155, ""],
+        [56, 0, 155, ""],
+        [58, 1, 156, ""],
+        [60, 1, 157, ""],
+        [61, 0, 156, ""],
+        [63, 1, 157, ""],
+        [65, 1, 158, ""],
+        [66, 0, 157, ""],
+        [70, 1, 158, ""],
+        [73, 0, 158, ""],
+        [75, 1, 159, ""],
+        [77, 1, 160, ""],
+        [78, 0, 159, ""],
+        [80, 1, 162, ""],
+        [81, 0, 160, ""],
+        [83, 1, 161, ""],
+        [88, 1, 162, ""],
+        [89, 0, 161, ""],
+        [91, 1, 162, ""],
+        [93, 0, 162, ""],
+        [95, 1, 164, ""],
+        [97, 1, 163, ""],
+        [98, 1, 164, ""],
+        [100, 1, 164, ""],
+        [101, 0, 163, ""],
+        [103, 0, 164, ""],
+        [105, 1, 165, ""],
+        [107, 0, 165, ""],
+        [109, 1, 166, ""],
+        [111, 1, 166, ""],
+        [114, 0, 166, ""],
+        [116, 1, 167, ""],
+        [121, 1, 167, ""],
+        [124, 0, 167, ""],
+        [126, 1, 168, ""],
+        [128, 1, 169, ""],
+        [130, 1, 169, ""],
+        [132, 1, 170, ""],
+        [133, 0, 168, ""],
+        [135, 1, 170, ""],
+        [136, 0, 169, ""],
+        [138, 0, 170, ""],
+        [142, 1, 172, ""],
+        [144, 1, 171, ""],
+        [146, 1, 171, ""],
+        [148, 1, 171, ""],
+        [150, 1, 172, ""],
+        [151, 0, 171, ""],
+        [156, 1, 173, ""],
+        [160, 1, 173, ""],
+        [161, 0, 172, ""],
+        [163, 0, 173, ""],
+        [165, 1, 174, ""],
+        [172, 0, 174, ""],
+        [174, 1, 175, ""],
+        [181, 0, 175, ""],
+        [183, 1, 176, ""],
+        [190, 0, 176, ""],
+        [194, 1, 177, ""],
+        [196, 1, 177, ""],
+        [198, 0, 177, ""],
+        [200, 1, 178, ""],
+        [207, 0, 178, ""],
+        [209, 1, 182, ""],
+        [211, 1, 183, ""],
+        [213, 1, 179, ""],
+        [226, 0, 179, ""],
+        [228, 1, 180, ""],
+        [234, 0, 180, ""],
+        [236, 1, 181, ""],
+        [242, 0, 181, ""],
+        [246, 0, 182, ""],
+        [254, 0, 183, ""],
+        [263, 1, 184, ""],
+        [269, 0, 184, ""],
+        [270, 1, 187, ""],
+        [273, 1, 185, ""],
+        [275, 0, 185, ""],
+        [277, 1, 186, ""],
+        [280, 0, 186, ""],
+        [283, 0, 187, ""],
+        [287, 0, 188, ""],
+        [289, 3, 188, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/resource_setup.s",
+      "tokens": [
+        [5, 1, 190, ""],
+        [7, 1, 189, ""],
+        [9, 1, 190, ""],
+        [10, 0, 189, ""],
+        [12, 0, 190, ""],
+        [32, 1, 191, ""],
+        [35, 0, 191, ""],
+        [45, 1, 192, ""],
+        [48, 0, 192, ""],
+        [55, 1, 193, ""],
+        [57, 1, 193, ""],
+        [59, 0, 193, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/scripted_path_resources.s",
+      "tokens": [
+        [2, 1, 77, ""],
+        [3, 1, 78, ""],
+        [4, 1, 79, ""],
+        [5, 1, 80, ""],
+        [6, 1, 81, ""],
+        [7, 1, 82, ""],
+        [8, 1, 83, ""],
+        [9, 1, 84, ""],
+        [19, 1, 194, ""],
+        [20, 1, 195, ""],
+        [21, 1, 196, ""],
+        [22, 1, 197, ""],
+        [23, 1, 198, ""],
+        [24, 1, 199, ""],
+        [25, 1, 200, ""],
+        [26, 1, 201, ""],
+        [27, 1, 202, ""],
+        [28, 1, 203, ""],
+        [29, 1, 204, ""],
+        [30, 1, 205, ""],
+        [31, 1, 205, ""],
+        [32, 1, 205, ""],
+        [33, 1, 205, ""],
+        [34, 1, 205, ""],
+        [35, 1, 205, ""],
+        [36, 1, 205, ""],
+        [37, 1, 205, ""],
+        [38, 1, 205, ""],
+        [39, 1, 205, ""],
+        [40, 1, 205, ""],
+        [41, 1, 205, ""],
+        [42, 1, 205, ""],
+        [43, 1, 205, ""],
+        [44, 1, 205, ""],
+        [45, 1, 205, ""],
+        [46, 1, 205, ""],
+        [47, 1, 205, ""],
+        [48, 1, 205, ""],
+        [49, 1, 205, ""],
+        [50, 1, 205, ""],
+        [52, 1, 85, ""],
+        [53, 1, 86, ""],
+        [54, 1, 87, ""],
+        [55, 1, 87, ""],
+        [56, 1, 88, ""],
+        [57, 1, 89, ""],
+        [58, 1, 90, ""],
+        [59, 1, 91, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/zone_placements.s",
+      "tokens": [
+        [29, 0, 194, ""],
+        [32, 0, 195, ""],
+        [36, 0, 196, ""],
+        [40, 0, 197, ""],
+        [44, 0, 198, ""],
+        [48, 0, 199, ""],
+        [52, 0, 200, ""],
+        [56, 0, 201, ""],
+        [59, 0, 202, ""],
+        [62, 0, 203, ""],
+        [66, 0, 204, ""],
+        [69, 0, 205, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/s3/pause.s",
+      "tokens": [
+        [6, 1, 206, ""],
+        [11, 0, 206, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "tokens": [
+        [28, 2, 94, ""],
+        [110, 2, 94, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "tokens": [[89, 2, 94, ""]]
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "tokens": [
+        [102, 2, 94, ""],
+        [218, 2, 94, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/fbz/sk/act2_subboss.s",
+      "tokens": [[359, 2, 94, ""]]
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "tokens": [[453, 2, 94, ""]]
+    }
+  ]
+}

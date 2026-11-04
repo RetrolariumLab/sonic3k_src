@@ -193,7 +193,7 @@
     },
     {
       "path": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
-      "sha256": "0afa23c5e644e6be7affa725d22db0a126c548e8ae71b7d8e9f9bb92f73b66d1"
+      "sha256": "1300917e8b92e8b132f31a04e114e2168d128124cb103efb0f7fe61f393376b0"
     },
     {
       "path": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
@@ -229,7 +229,7 @@
     },
     {
       "path": "src/objects/bosses/fbz/sk/act2_subboss.s",
-      "sha256": "6b4e8c006d10090fd4aad546d2a127df554de90608eb3b4b4a0a2989b27a7c9c"
+      "sha256": "225664087385c13c15d5ab6f90a641d46f540a85e783970bda12ebd8cd89b628"
     },
     {
       "path": "src/objects/bosses/fbz/sk/act2_subboss_resources.s",
@@ -501,7 +501,7 @@
     },
     {
       "path": "src/objects/bosses/ssz/end_boss/sk/battle.s",
-      "sha256": "b3bf99cea6af73d7799ad1a5ac3de0dc83844a494b10d214fca757c4498f8ea4"
+      "sha256": "d49bb2430e9e59ea4545cbaf3b53528a6fc870f125b2340d3fa842e1c4964b01"
     },
     {
       "path": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",

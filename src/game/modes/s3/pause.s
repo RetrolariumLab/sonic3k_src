@@ -8,13 +8,13 @@ Pause_Game:
                 tst.b   (Life_count).w
                 beq.w   Pause_Unpause
                 tst.w   (Game_paused).w
-                bne.s   loc_168E
+                bne.s   S3Pause_EnterPauseAndSignalZ80MusicHold
                 move.b  (Ctrl_1_pressed).w,d0
                 or.b    (Ctrl_2_pressed).w,d0
                 andi.b  #button_start_mask,d0           ; is Start pressed?
                 beq.w   Pause_NoPause                   ; if not, branch
 
-loc_168E:
+S3Pause_EnterPauseAndSignalZ80MusicHold:
                 move.w  #1,(Game_paused).w
                 stopZ80
                 move.b  #1,(Z80_RAM+zPauseFlag).l       ; Pause the music

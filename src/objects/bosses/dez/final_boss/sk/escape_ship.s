@@ -33,7 +33,7 @@ loc_80184:
                 move.w  d0,y_pos(a0)
                 jsr     (AllocateObject).l
                 bne.s   loc_801C6
-                move.l  #loc_8642E,(a1)
+                move.l  #SKLevel_InitializeScreenShakeRumbleActor,(a1)
 
 loc_801C6:
                 lea     (Child1_MakeRoboHead3).l,a2
@@ -137,7 +137,7 @@ loc_802DE:
                 ori.b   #$30,$38(a0)
                 jsr     (AllocateObject).l
                 bne.s   loc_802FE
-                move.l  #loc_8642E,(a1)
+                move.l  #SKLevel_InitializeScreenShakeRumbleActor,(a1)
 
 loc_802FE:
                 lea     (ArtKosM_BadnikExplosion).l,a1

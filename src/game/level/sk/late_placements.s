@@ -43,7 +43,7 @@ DEZ1_Rings:
 DEZ2_Rings:
                 binclude "data/Levels/DEZ/Ring Pos/2.bin"
                 even
-word_1FB49E:    dc.w    $1E
+SKLevel_DEZLightTunnelPath00:   dc.w    $1E
                 dc.w    $1B80,  $331
                 dc.w    $1BD8,  $328
                 dc.w    $1C8C,  $328
@@ -74,7 +74,7 @@ word_1FB49E:    dc.w    $1E
                 dc.w    $202C,  $1A8
                 dc.w    $81F8, $7880
                 dc.w    $20D4,  $1A8
-word_1FB518:    dc.w    $26
+SKLevel_DEZLightTunnelPath01:   dc.w    $26
                 dc.w    $2B80,  $3B1
                 dc.w    $2BD8,  $3A8
                 dc.w    $2C78,  $3A8
@@ -113,7 +113,7 @@ word_1FB518:    dc.w    $26
                 dc.w    $3140,  $228
                 dc.w    $81F8, $7880
                 dc.w    $31D0,  $228
-word_1FB5B2:    dc.w    $F
+SKLevel_DEZLightTunnelPath02And03:  dc.w    $F
                 dc.w    $1D00,  $1B1
                 dc.w    $1D54,  $1A8
                 dc.w    $1E08,  $1A8
@@ -129,7 +129,7 @@ word_1FB5B2:    dc.w    $F
                 dc.w    $8108, $C8C0
                 dc.w    $81F8, $3880
                 dc.w    $204C,  $228
-word_1FB5F0:    dc.w    $15
+SKLevel_DEZLightTunnelPath04:   dc.w    $15
                 dc.w    $2B80,  $5B1
                 dc.w    $2BD8,  $5A8
                 dc.w    $2C80,  $5A8
@@ -151,7 +151,7 @@ word_1FB5F0:    dc.w    $15
                 dc.w    $8004, $C000
                 dc.w    $2F08,  $628
                 dc.w    $2F44,  $628
-word_1FB646:    dc.w    $1B
+SKLevel_DEZLightTunnelPath05:   dc.w    $1B
                 dc.w    $2F00,  $8F1
                 dc.w    $2EA8,  $8E8
                 dc.w    $2DF4,  $8E8
@@ -179,14 +179,14 @@ word_1FB646:    dc.w    $1B
                 dc.w    $8108, $48C0
                 dc.w    $81F8, $3800
                 dc.w    $2AB0,  $968
-word_1FB6B4:    dc.w    6
+SKLevel_DEZLightTunnelPath06:   dc.w    6
                 dc.w    $2C00,  $6B1
                 dc.w    $2BA8,  $6A8
                 dc.w    $2AF4,  $688
                 dc.w    $8304, $8480
                 dc.w    $8304, $8480
                 dc.w    $2A40,  $4E8
-word_1FB6CE:    dc.w    9
+SKLevel_DEZLightTunnelPath07:   dc.w    9
                 dc.w    $2500,  $38E
                 dc.w    $24A8,  $398
                 dc.w    $240C,  $398

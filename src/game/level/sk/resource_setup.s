@@ -12,16 +12,16 @@ j_LevelSetup:
 
 LoadLevelLoadBlock2:
                 move.w  (Current_zone_and_act).w,d0
-                bne.s   loc_1C2C8
+                bne.s   SKLevel_DecodeDescriptorBlocks
                 cmpi.w  #2,(Player_mode).w
-                bhs.s   loc_1C2C4
+                bhs.s   SKLevel_UseAIZPostIntroResourceLookup
                 tst.b   (Last_star_post_hit).w
-                beq.s   loc_1C2C8
+                beq.s   SKLevel_DecodeDescriptorBlocks
 
-loc_1C2C4:
+SKLevel_UseAIZPostIntroResourceLookup:
                 move.w  #$D00,d0
 
-loc_1C2C8:
+SKLevel_DecodeDescriptorBlocks:
                 ror.b   #1,d0
                 lsr.w   #4,d0
                 andi.w  #$1F8,d0
@@ -41,11 +41,11 @@ loc_1C2C8:
                 move.l  (a2)+,d0
                 andi.l  #$FFFFFF,d0
                 cmp.l   d0,d7
-                beq.s   loc_1C30E
+                beq.s   SKLevel_DecodeDescriptorChunks
                 movea.l d0,a0
                 jsr     (Kos_Decomp).l
 
-loc_1C30E:
+SKLevel_DecodeDescriptorChunks:
                 move.l  (a2)+,d0
                 andi.l  #$FFFFFF,d0
                 move.l  d0,d7
@@ -55,23 +55,23 @@ loc_1C30E:
                 move.l  (a2)+,d0
                 andi.l  #$FFFFFF,d0
                 cmp.l   d0,d7
-                beq.s   loc_1C33A
+                beq.s   SKLevel_LoadLayoutAndTrySecondaryPlc
                 movea.l d0,a0
                 jsr     (Kos_Decomp).l
 
-loc_1C33A:
+SKLevel_LoadLayoutAndTrySecondaryPlc:
                 bsr.w   Load_Level
                 movea.l (sp)+,a2
                 move.b  (a2),d1
                 addq.w  #4,a2
                 moveq   #0,d0
                 move.b  (a2),d0
-                beq.s   loc_1C354
+                beq.s   SKLevel_LoadDescriptorPalette
                 cmp.b   d0,d1
-                beq.s   loc_1C354
+                beq.s   SKLevel_LoadDescriptorPalette
                 jsr     (Load_PLC).l
 
-loc_1C354:
+SKLevel_LoadDescriptorPalette:
                 addq.w  #4,a2
                 moveq   #0,d0
                 move.b  (a2),d0

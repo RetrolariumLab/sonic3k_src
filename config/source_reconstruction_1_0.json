@@ -1053,9 +1053,15 @@
       "commits": ["658c229d85876862ebcbe1b050fcbb9b4a49cd7d"]
     },
     {
-      "id": "current-shorten-19-compression",
+      "id": "change-645c170d2f96",
       "kind": "source_or_tooling",
       "summary": "Apply 18 reviewed short labels for compression.",
+      "commits": ["645c170d2f967ed7276206cd000dc512c4672279"]
+    },
+    {
+      "id": "current-shorten-20-level-lifecycle",
+      "kind": "source_or_tooling",
+      "summary": "Apply 63 reviewed short labels for level entry, demo input and player spawn.",
       "commits": ["release-commit"]
     }
   ],

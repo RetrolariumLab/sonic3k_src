@@ -123,7 +123,7 @@ DEZFinalWorld_TryBeginDefeat:
                 move.w  #$80,y_vel(a0)
                 jsr     (AllocateObject).l
                 bne.s   loc_80F62
-                move.l  #loc_8642E,(a1)
+                move.l  #SKLevel_InitializeScreenShakeRumbleActor,(a1)
 
 loc_80F62:
                 bclr    #5,$38(a0)
