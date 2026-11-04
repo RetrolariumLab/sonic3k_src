@@ -5,10 +5,10 @@
 
 Ending_ScreenInit:
                 jsr     (AllocateObject).l
-                bne.s   loc_5AAB0
-                move.l  #Obj_5D86A,(a1)
+                bne.s   SKEndingFG_InitCameraAndSceneSky
+                move.l  #EndScene_DispatchProxyAndSyncPlayer,(a1)
 
-loc_5AAB0:
+SKEndingFG_InitCameraAndSceneSky:
                 st      (Ending_running_flag).w
                 st      (Scroll_lock).w
                 move.b  #3,(Player_1+object_control).w
@@ -31,111 +31,111 @@ Ending_ScreenEvent:
 ; ---------------------------------------------------------------------------
 
 Ending_ScreenEvent_Index:
-                bra.w   loc_5AB36
+                bra.w   SKEndingFG_WaitForSignalAndSetOrigin
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5AB58
+                bra.w   SKEndingFG_TrackCameraUntilSignal2
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5AB6E
+                bra.w   SKEndingFG_TrackFGAndRiseWithSevenChaos
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5ABBC
+                bra.w   SKEndingFG_PublishCameraDuringFade
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5AC70
+                bra.w   SKEndingFG_WaitForArtAndPrimeAIZ
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5ACFC
+                bra.w   SKEndingFG_RevealAIZBottomUp
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5AD16
+                bra.w   SKEndingFG_WaitForBGThenPrepFade
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5AD30
+                bra.w   SKEndingFG_FadeInAndResumePalCycle
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5AD56
+                bra.w   SKEndingFG_RaiseAIZAndWaitForSignal
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5AD8E
+                bra.w   SKEndingFG_FadeAIZAndClearActors
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5AE0A
+                bra.w   SKEndingFG_WaitArtLoadSSZAndPrepPal
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5AE76
+                bra.w   SKEndingFG_RevealSSZAndRequestBG
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5AE90
+                bra.w   SKEndingFG_WaitForSSZBackground
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5AEA8
+                bra.w   SKEndingFG_FadeInAndZeroCameraY
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5AED4
+                bra.w   SKEndingFG_RunCreditsProgram
 ; ---------------------------------------------------------------------------
 
-loc_5AB36:
+SKEndingFG_WaitForSignalAndSetOrigin:
                 tst.w   (Events_fg_4).w
-                beq.w   loc_5AEE4
+                beq.w   SKEndingFG_DrawWhileWaiting
                 clr.w   (Events_fg_4).w
                 move.w  (_unkEE98).w,(Events_bg+$00).w
                 jsr     SKEnding_PublishForegroundCamera(pc)
                 jsr     (Reset_TileOffsetPositionActual).l
                 addq.w  #4,(Events_routine_fg).w
-                bra.s   loc_5AB62
+                bra.s   SKEndingFG_DrawIncrementalFG
 ; ---------------------------------------------------------------------------
 
-loc_5AB58:
+SKEndingFG_TrackCameraUntilSignal2:
                 tst.w   (Events_fg_4).w
-                bne.s   loc_5AB66
+                bne.s   SKEndingFG_ConsumeSignal2
                 jsr     SKEnding_PublishForegroundCamera(pc)
 
-loc_5AB62:
-                bra.w   loc_5AEE4
+SKEndingFG_DrawIncrementalFG:
+                bra.w   SKEndingFG_DrawWhileWaiting
 ; ---------------------------------------------------------------------------
 
-loc_5AB66:
+SKEndingFG_ConsumeSignal2:
                 clr.w   (Events_fg_4).w
                 addq.w  #4,(Events_routine_fg).w
 
-loc_5AB6E:
+SKEndingFG_TrackFGAndRiseWithSevenChaos:
                 jsr     SKEnding_PublishForegroundCamera(pc)
                 cmpi.b  #7,(Chaos_emerald_count).w
-                blo.s   loc_5AB96
+                blo.s   SKEndingFG_ConsumeSignal3AndFadeOut
                 moveq   #0,d0
                 move.w  (Events_bg+$06).w,d0
                 addi.w  #$10,d0
                 cmpi.w  #$8000,d0
-                blo.s   loc_5AB8E
+                blo.s   SKEndingFG_CapRiseSpeedAndApplyY
                 move.w  #$8000,d0
 
-loc_5AB8E:
+SKEndingFG_CapRiseSpeedAndApplyY:
                 move.w  d0,(Events_bg+$06).w
                 sub.l   d0,(Events_bg+$02).w
 
-loc_5AB96:
+SKEndingFG_ConsumeSignal3AndFadeOut:
                 tst.w   (Events_fg_4).w
-                beq.w   loc_5AEE4
+                beq.w   SKEndingFG_DrawWhileWaiting
                 clr.w   (Events_fg_4).w
                 move.w  #$40-1,(Palette_fade_info).w
                 move.w  #$15,(Events_bg+$08).w
                 st      (Palette_fade_timer).w
                 st      (Palette_cycle_counters+$00).w
                 addq.w  #4,(Events_routine_fg).w
-                bra.s   loc_5ABC0
+                bra.s   SKEndingFG_FadeOutAndChooseInterlude
 ; ---------------------------------------------------------------------------
 
-loc_5ABBC:
+SKEndingFG_PublishCameraDuringFade:
                 jsr     SKEnding_PublishForegroundCamera(pc)
 
-loc_5ABC0:
+SKEndingFG_FadeOutAndChooseInterlude:
                 move.l  a0,-(sp)
                 jsr     (Pal_ToBlack).l
                 movea.l (sp)+,a0
                 subq.w  #1,(Events_bg+$08).w
-                bpl.w   loc_5AEE4
+                bpl.w   SKEndingFG_DrawWhileWaiting
                 clearRAM Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
                 clearRAM Player_2,(Kos_decomp_buffer-Player_2)-2
                 cmpi.b  #7,(Super_emerald_count).w
-                bhs.s   loc_5AC04
+                bhs.s   SKEndingFG_TryInterludePlaneActor
                 move.w  #$24,(Events_routine_fg).w
-                bra.w   loc_5ADC0
+                bra.w   SKEndingFG_TryMainEndingActor
 ; ---------------------------------------------------------------------------
 
-loc_5AC04:
+SKEndingFG_TryInterludePlaneActor:
                 jsr     (AllocateObject).l
-                bne.s   loc_5AC12
-                move.l  #Obj_5DFEE,(a1)
+                bne.s   SKEndingFG_QueueAIZInterludeArt
+                move.l  #EndKnux_InitPlaneEntrance,(a1)
 
-loc_5AC12:
+SKEndingFG_QueueAIZInterludeArt:
                 movem.l d7-a0/a2-a3,-(sp)
                 lea     (AIZ1_128x128_Kos).l,a1
                 lea     (RAM_start).l,a2
@@ -155,9 +155,9 @@ loc_5AC12:
                 movem.l (sp)+,d7-a0/a2-a3
                 addq.w  #4,(Events_routine_fg).w
 
-loc_5AC70:
+SKEndingFG_WaitForArtAndPrimeAIZ:
                 tst.b   (Kos_modules_left).w
-                bne.w   loc_5AEE4
+                bne.w   SKEndingFG_DrawWhileWaiting
                 movem.l d7-a0/a2-a3,-(sp)
                 clr.w   (Current_zone_and_act).w
                 move.b  #1,(Last_star_post_hit).w
@@ -173,9 +173,9 @@ loc_5AC70:
                 lea     (Target_palette_line_2).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_5ACB8:
+SKEndingFG_SetAIZCameraAndPalette:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_5ACB8
+                dbf     d6,SKEndingFG_SetAIZCameraAndPalette
                 jsr     (Adjust_AIZ1Chunks2).l
                 movem.l (sp)+,d7-a0/a2-a3
                 move.w  #$1EB8,d0
@@ -191,44 +191,44 @@ loc_5ACB8:
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_fg).w
 
-loc_5ACFC:
+SKEndingFG_RevealAIZBottomUp:
                 move.w  (Camera_X_pos_copy).w,d1
                 move.w  (Camera_Y_pos_copy).w,d2
                 jsr     (Draw_PlaneVertBottomUp).l
-                bpl.w   loc_5AEE4
+                bpl.w   SKEndingFG_DrawWhileWaiting
                 addq.w  #4,(Events_routine_bg).w
                 addq.w  #4,(Events_routine_fg).w
 
-loc_5AD16:
+SKEndingFG_WaitForBGThenPrepFade:
                 cmpi.w  #$10,(Events_routine_bg).w
-                blo.w   loc_5AEE4
+                blo.w   SKEndingFG_DrawWhileWaiting
                 move.w  #$40-1,(Palette_fade_info).w
                 move.w  #$15,(Events_bg+$08).w
                 addq.w  #4,(Events_routine_fg).w
 
-loc_5AD30:
+SKEndingFG_FadeInAndResumePalCycle:
                 move.l  a0,-(sp)
                 jsr     (Pal_FromBlack).l
                 movea.l (sp)+,a0
                 subq.w  #1,(Events_bg+$08).w
-                bpl.w   loc_5AEE4
+                bpl.w   SKEndingFG_DrawWhileWaiting
                 clr.w   (Palette_fade_timer).w
                 clr.b   (Palette_cycle_counters+$00).w
                 clr.w   (Palette_cycle_counter1).w
                 clr.w   (Palette_cycle_counter0).w
                 addq.w  #4,(Events_routine_fg).w
 
-loc_5AD56:
+SKEndingFG_RaiseAIZAndWaitForSignal:
                 tst.w   (Events_fg_4).w
-                bne.s   loc_5AD72
+                bne.s   SKEndingFG_ConsumeAIZFinishAndFade
                 addi.l  #$1000,(Events_bg+$0A).w
                 move.l  a0,-(sp)
                 jsr     (AnPal_AIZ1).l
                 movea.l (sp)+,a0
-                bra.w   loc_5AEE4
+                bra.w   SKEndingFG_DrawWhileWaiting
 ; ---------------------------------------------------------------------------
 
-loc_5AD72:
+SKEndingFG_ConsumeAIZFinishAndFade:
                 clr.w   (Events_fg_4).w
                 move.w  #$40-1,(Palette_fade_info).w
                 move.w  #$15,(Events_bg+$08).w
@@ -236,21 +236,21 @@ loc_5AD72:
                 st      (Palette_cycle_counters+$00).w
                 addq.w  #4,(Events_routine_fg).w
 
-loc_5AD8E:
+SKEndingFG_FadeAIZAndClearActors:
                 move.l  a0,-(sp)
                 jsr     (Pal_ToBlack).l
                 movea.l (sp)+,a0
                 subq.w  #1,(Events_bg+$08).w
-                bpl.w   loc_5AEE4
+                bpl.w   SKEndingFG_DrawWhileWaiting
                 clearRAM Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
                 clearRAM Player_2,(Kos_decomp_buffer-Player_2)-2
 
-loc_5ADC0:
+SKEndingFG_TryMainEndingActor:
                 jsr     (AllocateObject).l
-                bne.s   loc_5ADCE
+                bne.s   SKEndingFG_QueueSSZEndingArt
                 move.l  #Obj_Ending,(a1)
 
-loc_5ADCE:
+SKEndingFG_QueueSSZEndingArt:
                 movem.l d7-a0/a2-a3,-(sp)
                 lea     (SSZ2_128x128_Kos).l,a1
                 lea     (RAM_start).l,a2
@@ -264,9 +264,9 @@ loc_5ADCE:
                 movem.l (sp)+,d7-a0/a2-a3
                 addq.w  #4,(Events_routine_fg).w
 
-loc_5AE0A:
+SKEndingFG_WaitArtLoadSSZAndPrepPal:
                 tst.b   (Kos_modules_left).w
-                bne.w   loc_5AEE4
+                bne.w   SKEndingFG_DrawWhileWaiting
                 movem.l d7-a0/a2-a3,-(sp)
                 jsr     (Load_Level).l
                 jsr     (LoadSolids).l
@@ -276,9 +276,9 @@ loc_5AE0A:
                 lea     (Target_palette_line_2).w,a5
                 moveq   #bytesToLcnt($60),d0
 
-loc_5AE36:
+SKEndingFG_CopyColorsAndPrimeSSZ:
                 move.l  (a1)+,(a5)+
-                dbf     d0,loc_5AE36
+                dbf     d0,SKEndingFG_CopyColorsAndPrimeSSZ
                 jsr     SKEnding_LoadSkyColorsToTarget(pc)
                 movem.l (sp)+,d7-a0/a2-a3
                 move.l  #$2000000,d0
@@ -293,27 +293,27 @@ loc_5AE36:
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_fg).w
 
-loc_5AE76:
+SKEndingFG_RevealSSZAndRequestBG:
                 move.w  (Camera_X_pos_copy).w,d1
                 move.w  (Camera_Y_pos_copy).w,d2
                 jsr     (Draw_PlaneVertBottomUp).l
-                bpl.s   loc_5AEE4
+                bpl.s   SKEndingFG_DrawWhileWaiting
                 move.w  #$14,(Events_routine_bg).w
                 addq.w  #4,(Events_routine_fg).w
 
-loc_5AE90:
+SKEndingFG_WaitForSSZBackground:
                 cmpi.w  #4,(Events_routine_bg).w
-                bhi.s   loc_5AEE4
+                bhi.s   SKEndingFG_DrawWhileWaiting
                 move.w  #$40-1,(Palette_fade_info).w
                 move.w  #$15,(Events_bg+$08).w
                 addq.w  #4,(Events_routine_fg).w
 
-loc_5AEA8:
+SKEndingFG_FadeInAndZeroCameraY:
                 move.l  a0,-(sp)
                 jsr     (Pal_FromBlack).l
                 movea.l (sp)+,a0
                 subq.w  #1,(Events_bg+$08).w
-                bpl.s   loc_5AEE4
+                bpl.s   SKEndingFG_DrawWhileWaiting
                 clr.w   (Palette_fade_timer).w
                 clr.b   (Palette_cycle_counters+$00).w
                 clr.w   (Palette_cycle_counter1).w
@@ -322,14 +322,14 @@ loc_5AEA8:
                 clr.l   (Camera_Y_pos_copy).w
                 addq.w  #4,(Events_routine_fg).w
 
-loc_5AED4:
+SKEndingFG_RunCreditsProgram:
                 movem.l d7-a0/a2-a3,-(sp)
                 jsr     (SKCredits_DispatchScrollState).l
                 movem.l (sp)+,d7-a0/a2-a3
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5AEE4:
+SKEndingFG_DrawWhileWaiting:
                 jmp     (DrawTilesAsYouMove).l
 
 ; =============== S U B R O U T I N E =======================================

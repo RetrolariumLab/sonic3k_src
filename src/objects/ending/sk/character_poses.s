@@ -3,31 +3,31 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
 
-loc_5F31C:
-                lea     word_60160(pc),a1
+EndingSonicPose_Initialize:
+                lea     EndingSonicPose_PartialAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
                 bclr    #2,render_flags(a0)
-                move.l  #loc_5F376,(a0)
-                lea     byte_5F36E(pc),a1
+                move.l  #EndPose_AnimateSonicAndWaitForBanner,(a0)
+                lea     EndingSonicPose_PlayerModeSignedOffsets(pc),a1
                 bsr.w   EndingOffsetPoseByMaskedPlayerModePair
                 lea     (Pal_SonicTails).l,a1
                 lea     (Target_palette).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_5F346:
+EndPose_CopySonicPaletteAndTryFlash:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_5F346
+                dbf     d6,EndPose_CopySonicPaletteAndTryFlash
                 jsr     (AllocateObject).l
-                bne.s   locret_5F36C
-                move.l  #loc_5FF62,(a1)
+                bne.s   EndingSonicPose_ReturnAfterPaletteSetup
+                move.l  #EndSprite_InitFlashRaisePasses,(a1)
                 move.w  #Normal_palette+2,$30(a1)
                 move.w  #Target_palette+2,$32(a1)
                 move.w  #$E,$3A(a1)
 
-locret_5F36C:
+EndingSonicPose_ReturnAfterPaletteSetup:
                 rts
 ; ---------------------------------------------------------------------------
-byte_5F36E:
+EndingSonicPose_PlayerModeSignedOffsets:
                 dc.b    0, $40
                 dc.b    0, $40
                 dc.b    -$1C, $2C
@@ -35,35 +35,35 @@ byte_5F36E:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_5F376:
-                lea     AniRaw_6025C(pc),a1
+EndPose_AnimateSonicAndWaitForBanner:
+                lea     EndData_SonicPoseSignalWaitAnim(pc),a1
                 jsr     (Animate_RawNoSST).l
                 btst    #2,(_unkFAB8).w
-                beq.s   loc_5F398
-                move.l  #loc_5F39E,(a0)
-                lea     AniRaw_60260(pc),a1
+                beq.s   EndingSonicPose_DrawAfterSignalCheck
+                move.l  #EndPose_AnimateFinalSonicAndDraw,(a0)
+                lea     EndingSonicPose_FinalRawAnimation(pc),a1
                 jsr     (Set_Raw_Animation).l
 
-loc_5F398:
+EndingSonicPose_DrawAfterSignalCheck:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5F39E:
+EndPose_AnimateFinalSonicAndDraw:
                 jsr     (Animate_Raw).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5F3AA:
-                lea     word_60168(pc),a1
+EndingTailsPose_InitializeAndCreateTail:
+                lea     EndingTailsPose_PartialAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
                 bclr    #2,render_flags(a0)
-                move.l  #loc_5F3DA,(a0)
-                lea     byte_5F3D2(pc),a1
+                move.l  #EndingTailsPose_AnimateAndDraw,(a0)
+                lea     EndingTailsPose_PlayerModeSignedOffsets(pc),a1
                 bsr.w   EndingOffsetPoseByMaskedPlayerModePair
-                lea     ChildObjDat_60204(pc),a2
+                lea     EndingTailsPoseTail_NormalChildRecord(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
-byte_5F3D2:
+EndingTailsPose_PlayerModeSignedOffsets:
                 dc.b    $24, $2C
                 dc.b    $24, $2C
                 dc.b    8, $40
@@ -71,49 +71,49 @@ byte_5F3D2:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_5F3DA:
-                lea     AniRaw_6026B(pc),a1
+EndingTailsPose_AnimateAndDraw:
+                lea     EndingTailsPose_RawAnimation(pc),a1
                 jsr     (Animate_RawNoSST).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5F3EA:
-                lea     word_60170(pc),a1
+EndingTailsPoseTail_Initialize:
+                lea     EndingTailsPoseTail_PartialAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 bclr    #2,render_flags(a0)
-                move.l  #loc_5F400,(a0)
+                move.l  #EndingTailsPoseTail_AnimateAndDraw,(a0)
 
-loc_5F400:
-                lea     AniRaw_6026F(pc),a1
+EndingTailsPoseTail_AnimateAndDraw:
+                lea     EndingTailsPoseTail_RawAnimation(pc),a1
                 jsr     (Animate_RawNoSST).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5F410:
-                lea     ObjDat3_60176(pc),a1
+EndingKnucklesGroupPose_Initialize:
+                lea     EndingKnucklesGroupPose_Attributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 bclr    #2,render_flags(a0)
-                move.l  #loc_5F46A,(a0)
-                lea     byte_5F462(pc),a1
+                move.l  #EndPose_AnimateGroupLoadArtAndDraw,(a0)
+                lea     EndPose_SignedPlayerModeOffsets(pc),a1
                 bsr.w   EndingOffsetPoseByMaskedPlayerModePair
                 lea     (Pal_EndingEyecatchKnuckles).l,a1
                 lea     (Target_palette_line_3).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_5F43A:
+EndPose_CopyGroupPaletteAndTryFlash:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_5F43A
+                dbf     d6,EndPose_CopyGroupPaletteAndTryFlash
                 jsr     (AllocateObject).l
-                bne.s   locret_5F460
-                move.l  #loc_5FF62,(a1)
+                bne.s   EndPose_GroupPaletteSetupReturn
+                move.l  #EndSprite_InitFlashRaisePasses,(a1)
                 move.w  #Normal_palette_line_3+2,$30(a1)
                 move.w  #Target_palette_line_3+2,$32(a1)
                 move.w  #$E,$3A(a1)
 
-locret_5F460:
+EndPose_GroupPaletteSetupReturn:
                 rts
 ; ---------------------------------------------------------------------------
-byte_5F462:
+EndPose_SignedPlayerModeOffsets:
                 dc.b    -$1C, $2C
                 dc.b    -$1C, $2C
                 dc.b    $1C, $2C
@@ -121,15 +121,15 @@ byte_5F462:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_5F46A:
+EndPose_AnimateGroupLoadArtAndDraw:
                 lea     (SKSceneAnim_HPZEncounterOpening).l,a1
                 jsr     (Animate_Raw2NoSSTMultiDelay).l
                 bsr.w   KnucklesEnding_Load_PLC
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5F480:
-                move.l  #loc_5F4E4,(a0)
+EndingKnucklesSoloPose_Initialize:
+                move.l  #EndPose_AnimateKnuxUntilCleanup,(a0)
                 move.l  #Map_KnuxEndPose,mappings(a0)
                 move.w  #make_art_tile(ArtTile_Ending_KnuxEndPose,0,0),art_tile(a0)
                 move.w  #$100,priority(a0)
@@ -137,70 +137,70 @@ loc_5F480:
                 move.b  #$40,height_pixels(a0)
                 move.w  #$120,x_pos(a0)
                 move.w  #$108,y_pos(a0)
-                move.l  #AniRaw_602CA,$30(a0)
+                move.l  #EndingKnucklesSoloPose_RawAnimation,$30(a0)
                 lea     (Pal_KnuxEndPose).l,a1
                 lea     (Normal_palette).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_5F4C6:
+EndPose_CopyKnuxPaletteAndTryCycle:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_5F4C6
+                dbf     d6,EndPose_CopyKnuxPaletteAndTryCycle
                 tst.b   (_unkFA88).w
-                beq.s   locret_5F4E2
-                bmi.s   locret_5F4E2
+                beq.s   EndPose_SoloPaletteSetupReturn
+                bmi.s   EndPose_SoloPaletteSetupReturn
                 jsr     (AllocateObject).l
-                bne.s   locret_5F4E2
+                bne.s   EndPose_SoloPaletteSetupReturn
                 move.l  #EndSuperKnuxPal_AdvanceCycle,(a1)
 
-locret_5F4E2:
+EndPose_SoloPaletteSetupReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5F4E4:
+EndPose_AnimateKnuxUntilCleanup:
                 btst    #3,(_unkFAB8).w
-                bne.w   loc_5F204
+                bne.w   EndingBanner_DeleteAfterProgramHandoff
                 jsr     (Animate_Raw).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5F4FA:
+EndPose_InitOverlayIfGraphicsFlag:
                 tst.b   (Graphics_flags).w
-                bpl.w   loc_5EC36
-                lea     ObjDat3_60130(pc),a1
+                bpl.w   EndingChild_DeleteCurrentActor
+                lea     EndingBannerOptionalOverlay_Attributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 bclr    #2,render_flags(a0)
                 move.l  #Child_Draw_Sprite,(a0)
-                lea     byte_5F520(pc),a1
-                bra.w   loc_5FFD4
+                lea     EndPose_OptionalOverlayOffsets(pc),a1
+                bra.w   EndSprite_OffsetOverlayBySubtype
 ; ---------------------------------------------------------------------------
-byte_5F520:
+EndPose_OptionalOverlayOffsets:
                 dc.b    $48,   8
                 dc.b    $34,-$10
                 dc.b    $48,-$34
                 even
 ; ---------------------------------------------------------------------------
 
-loc_5F526:
-                lea     ObjDat3_6013C(pc),a1
+EndingBannerFrameZeroOverlay_Initialize:
+                lea     EndingBannerFrameZeroOverlay_Attributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 bclr    #2,render_flags(a0)
                 move.l  #Child_Draw_Sprite,(a0)
-                lea     byte_5F544(pc),a1
-                bra.w   loc_5FFD4
+                lea     EndPose_Frame0OverlayOffset(pc),a1
+                bra.w   EndSprite_OffsetOverlayBySubtype
 ; ---------------------------------------------------------------------------
-byte_5F544:
+EndPose_Frame0OverlayOffset:
                 dc.b    0, $14
                 even
 ; ---------------------------------------------------------------------------
 
-loc_5F546:
-                lea     ObjDat3_60148(pc),a1
+EndingBannerFrameOneOverlay_Initialize:
+                lea     EndingBannerFrameOneOverlay_Attributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 bclr    #2,render_flags(a0)
                 move.l  #Child_Draw_Sprite,(a0)
-                lea     byte_5F564(pc),a1
-                bra.w   loc_5FFD4
+                lea     EndPose_Frame1OverlayOffset(pc),a1
+                bra.w   EndSprite_OffsetOverlayBySubtype
 ; ---------------------------------------------------------------------------
-byte_5F564:
+EndPose_Frame1OverlayOffset:
                 dc.b    0, $48
                 even

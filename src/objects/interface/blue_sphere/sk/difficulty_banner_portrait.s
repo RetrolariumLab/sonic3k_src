@@ -27,7 +27,7 @@ SKDifficultyBanner_QueueDraw:
 
 BSDifficulty_InitKnucklesWordmarkIfShown:
                 tst.b   (Graphics_flags).w
-                bpl.w   loc_5EC36
+                bpl.w   EndingChild_DeleteCurrentActor
                 move.l  #Map_ANDKnuckles,mappings(a0)
                 move.w  #make_art_tile(ArtTile_BlueSphere_Difficulty+$48,3,0),art_tile(a0)
                 move.w  #$280,priority(a0)
@@ -35,8 +35,8 @@ BSDifficulty_InitKnucklesWordmarkIfShown:
                 move.b  #4,height_pixels(a0)
                 move.b  #2,mapping_frame(a0)
                 move.l  #Child_Draw_Sprite,(a0)
-                lea     byte_5F520(pc),a1
-                bra.w   loc_5FFD4
+                lea     EndPose_OptionalOverlayOffsets(pc),a1
+                bra.w   EndSprite_OffsetOverlayBySubtype
 ; ---------------------------------------------------------------------------
 
 Obj_Difficulty_Eggman:
@@ -53,6 +53,6 @@ Obj_Difficulty_Eggman:
 ; ---------------------------------------------------------------------------
 
 BSDifficulty_AnimateAndDrawEggman:
-                lea     AniRaw_602C6(pc),a1
+                lea     EndingEggmanEyecatch_RawAnimation(pc),a1
                 jsr     (Animate_RawNoSST).l
                 jmp     (Draw_Sprite).l

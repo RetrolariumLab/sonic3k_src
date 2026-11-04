@@ -66,9 +66,9 @@ S3Credits:
                 lea     (Target_palette).w,a2
                 moveq   #bytesToLcnt($40),d6
 
-loc_404AC:
+S3Credits_CopyPaletteAndStartDisplay:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_404AC
+                dbf     d6,S3Credits_CopyPaletteAndStartDisplay
                 moveq   #signextendB(mus_Credits3),d0
                 jsr     (Play_Music).l
                 move.w  #3*60,(_unkFA82).w
@@ -79,7 +79,7 @@ loc_404AC:
                 move.w  d0,(VDP_control_port).l
                 jsr     (Pal_FadeFromBlack).l
 
-loc_404E0:
+S3Credits_RunUntilModeChanges:
                 move.b  #VInt_ID_18,(V_int_routine).w
                 jsr     (Process_Kos_Queue).l
                 jsr     (Wait_VSync).l
@@ -90,31 +90,31 @@ loc_404E0:
                 jsr     (Process_Nem_Queue_Init).l
                 jsr     (Process_Kos_Module_Queue).l
                 cmpi.b  #GameMode_S3Credits,(Game_mode).w
-                beq.w   loc_404E0
+                beq.w   S3Credits_RunUntilModeChanges
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
 S3Credits_DispatchDisplayState:
                 move.w  (_unkFA86).w,d0
-                move.w  off_4052A(pc,d0.w),d0
-                jmp     off_4052A(pc,d0.w)
+                move.w  S3Credits_PageStateOffsets(pc,d0.w),d0
+                jmp     S3Credits_PageStateOffsets(pc,d0.w)
 ; End of function S3Credits_DispatchDisplayState
 
 ; ---------------------------------------------------------------------------
-off_4052A:
-                dc.w    loc_40530-off_4052A
-                dc.w    loc_405AE-off_4052A
-                dc.w    locret_4069C-off_4052A
+S3Credits_PageStateOffsets:
+                dc.w    S3Credits_TickPageTimer-S3Credits_PageStateOffsets
+                dc.w    S3Credits_ScrollAltPageUntilByteWrap-S3Credits_PageStateOffsets
+                dc.w    S3Credits_FinishedCreditsReturn-S3Credits_PageStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_40530:
+S3Credits_TickPageTimer:
                 subq.w  #1,(_unkFA82).w
-                bmi.s   loc_40538
+                bmi.s   S3Credits_FadeToNextPageOrEyecatch
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_40538:
+S3Credits_FadeToNextPageOrEyecatch:
                 move.w  #3*60,(_unkFA82).w
                 jsr     (Pal_FadeToBlack).l
                 clearRAM RAM_start+$2000,$1000
@@ -123,7 +123,7 @@ loc_40538:
                 move.w  d0,(_unkFA84).w
                 lea     S3CreditsText_Main(pc),a1
                 move.w  (a1,d0.w),d0
-                beq.w   loc_405FA
+                beq.w   S3Credits_BeginEyecatchAndSelectColors
                 lea     (a1,d0.w),a1
                 bsr.w   S3Credits_DrawPageAndQueueUpload
                 move.b  #VInt_ID_18,(V_int_routine).w
@@ -140,78 +140,79 @@ loc_40538:
                 lea     (Normal_palette).w,a2
                 moveq   #bytesToLcnt($80),d6
 
-loc_405A2:
+S3Credits_CopyAlternateTargetPalette:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_405A2
+                dbf     d6,S3Credits_CopyAlternateTargetPalette
                 clr.w   (_unkFA84).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_405AE:
+S3Credits_ScrollAltPageUntilByteWrap:
                 move.w  (V_scroll_value).w,d0
                 addq.w  #1,d0
                 move.w  d0,(V_scroll_value).w
                 andi.w  #$FF,d0
-                beq.s   loc_405C0
+                beq.s   S3Credits_AdvanceDummyAndSelectHalf
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_405C0:
+S3Credits_AdvanceDummyAndSelectHalf:
                 move.w  (_unkFA84).w,d0
                 addq.w  #2,d0
                 move.w  d0,(_unkFA84).w
                 lea     (RAM_start+$2000).l,a2
                 btst    #1,d0
-                bne.s   loc_405DC
+                bne.s   S3Credits_Prepare4KHalfClear
                 lea     (RAM_start+$3000).l,a2
 
-loc_405DC:
+S3Credits_Prepare4KHalfClear:
                 moveq   #0,d2
                 move.w  #bytesToLcnt($1000),d3
 
-loc_405E2:
+S3Credits_ClearHalfAndDrawDummyPage:
                 move.l  d2,(a2)+
-                dbf     d3,loc_405E2
+                dbf     d3,S3Credits_ClearHalfAndDrawDummyPage
                 lea     S3CreditsText_Dummy(pc),a1
                 move.w  (a1,d0.w),d0
-                beq.s   loc_405FA
+                beq.s   S3Credits_BeginEyecatchAndSelectColors
                 lea     (a1,d0.w),a1
                 bra.w   S3Credits_DrawPageAndQueueUpload
 ; ---------------------------------------------------------------------------
 
-loc_405FA:
+; Select the logo palette only when the whole Chaos emerald word equals seven
+S3Credits_BeginEyecatchAndSelectColors:
                 jsr     (Pal_FadeToBlack).l
                 move.w  #4,(_unkFA86).w
                 lea     Pal_EndingEyecatchKnuckles(pc),a1
                 cmpi.w  #7,(Chaos_emerald_count).w
-                bne.s   loc_40616
+                bne.s   S3Credits_PrepareLowerPaletteLines
                 lea     Pal_EndingS3Logo(pc),a1
 
-loc_40616:
+S3Credits_PrepareLowerPaletteLines:
                 lea     (Target_palette_line_3).w,a2
                 moveq   #bytesToLcnt($40),d0
 
-loc_4061C:
+S3Credits_CopyPaletteAndSelectActors:
                 move.l  (a1)+,(a2)+
-                dbf     d0,loc_4061C
+                dbf     d0,S3Credits_CopyPaletteAndSelectActors
                 clearRAM RAM_start+$2000,$2000
                 bset    #0,(_unkFA88).w
                 clr.l   (V_scroll_value).w
                 lea     Child6_EndingS3Logo(pc),a1
                 cmpi.w  #7,(Chaos_emerald_count).w
-                beq.s   loc_40656
+                beq.s   S3Credits_ReadActorCountAndBindSlots
                 lea     S3CreditsText_TryAgain(pc),a1
                 bsr.w   S3Credits_DrawPageAndQueueUpload
                 lea     Child6_EndingTryAgain(pc),a1
 
-loc_40656:
+S3Credits_ReadActorCountAndBindSlots:
                 move.w  (a1)+,d0
                 lea     (Dynamic_object_RAM+object_size).w,a2
 
-loc_4065C:
+S3Credits_InstallActorsAndFadeIn:
                 move.l  (a1)+,(a2)
                 lea     next_object(a2),a2
-                dbf     d0,loc_4065C
+                dbf     d0,S3Credits_InstallActorsAndFadeIn
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
                 move.b  #VInt_ID_18,(V_int_routine).w
@@ -220,21 +221,21 @@ loc_4065C:
 ; ---------------------------------------------------------------------------
 Child6_EndingS3Logo:
                 dc.w    3-1
-                dc.l    loc_4069E
-                dc.l    loc_4078C
-                dc.l    loc_407FC
+                dc.l    S3Credits_InitFallingLogoAndHandle
+                dc.l    S3Credits_InitLogoReadyCompanion
+                dc.l    S3Credits_InitMirroredCompanion
 Child6_EndingTryAgain:
                 dc.w    2-1
-                dc.l    loc_40896
-                dc.l    loc_409A2
+                dc.l    S3Credits_InitMissingEmeraldThrower
+                dc.l    S3Credits_InitTryAgainCompanion
 ; ---------------------------------------------------------------------------
 
-locret_4069C:
+S3Credits_FinishedCreditsReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4069E:
-                move.l  #loc_406E2,(a0)
+S3Credits_InitFallingLogoAndHandle:
+                move.l  #S3Credits_TickLogoDropDelay,(a0)
                 move.w  a0,(_unkFAA4).w
                 move.l  #Map_EndingGraphics,mappings(a0)
                 move.w  #make_art_tile(ArtTile_Ending_Sprites,2,1),art_tile(a0)
@@ -248,47 +249,47 @@ loc_4069E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_406E2:
+S3Credits_TickLogoDropDelay:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_406EA
+                bmi.s   S3Credits_BeginLogoFall
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_406EA:
-                move.l  #loc_406F0,(a0)
+S3Credits_BeginLogoFall:
+                move.l  #S3Credits_MoveLogoAndCheckFloor,(a0)
 
-loc_406F0:
+S3Credits_MoveLogoAndCheckFloor:
                 jsr     (MoveSprite).l
                 cmpi.w  #$F0,y_pos(a0)
-                bcs.s   loc_40712
+                bcs.s   S3Credits_DrawFallingLogo
                 move.w  y_vel(a0),d0
-                bmi.s   loc_40712
+                bmi.s   S3Credits_DrawFallingLogo
                 asr.w   #1,d0
                 cmpi.w  #$80,d0
-                bcs.s   loc_40718
+                bcs.s   S3Credits_SettleLogoAndStartFlash
                 neg.w   d0
                 move.w  d0,y_vel(a0)
 
-loc_40712:
+S3Credits_DrawFallingLogo:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_40718:
-                move.l  #loc_40728,(a0)
+S3Credits_SettleLogoAndStartFlash:
+                move.l  #S3Credits_TickLogoFlashDelay,(a0)
                 move.w  #$F0,y_pos(a0)
                 clr.w   $2E(a0)
 
-loc_40728:
+S3Credits_TickLogoFlashDelay:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_40734
+                bmi.s   S3Credits_AdvanceFlashOrSetReady
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_40734:
+S3Credits_AdvanceFlashOrSetReady:
                 move.w  #1,$2E(a0)
                 move.w  $3A(a0),d0
                 cmpi.w  #6,d0
-                bcc.s   loc_40762
+                bcc.s   S3Credits_MarkLogoReadyAndHold
                 addq.w  #1,$3A(a0)
                 lsl.w   #5,d0
                 lea     Pal_EndingS3LogoFlash(pc),a1
@@ -296,30 +297,30 @@ loc_40734:
                 lea     (Normal_palette_line_3).w,a2
                 moveq   #bytesToLcnt($20),d0
 
-loc_40756:
+S3Credits_CopyLogoFlashPalette:
                 move.l  (a1)+,(a2)+
-                dbf     d0,loc_40756
+                dbf     d0,S3Credits_CopyLogoFlashPalette
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_40762:
-                move.l  #loc_40774,(a0)
+S3Credits_MarkLogoReadyAndHold:
+                move.l  #S3Credits_TickFinalLogoHold,(a0)
                 move.w  #6*60,$2E(a0)
                 bset    #5,$38(a0)
 
-loc_40774:
+S3Credits_TickFinalLogoHold:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_40780
+                bmi.s   S3Credits_SelectSegaAfterLogoHold
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_40780:
+S3Credits_SelectSegaAfterLogoHold:
                 move.b  #GameMode_SegaScreen,(Game_mode).w
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_4078C:
-                move.l  #loc_407CC,(a0)
+S3Credits_InitLogoReadyCompanion:
+                move.l  #S3Credits_LatchLogoReadyAndDraw,(a0)
                 move.l  #Map_EndingGraphics,mappings(a0)
                 move.w  #make_art_tile(ArtTile_Ending_Sprites,3,1),art_tile(a0)
                 move.w  #$100,priority(a0)
@@ -328,9 +329,9 @@ loc_4078C:
                 move.b  #1,mapping_frame(a0)
                 move.w  #$100,x_pos(a0)
                 move.w  #$11C,y_pos(a0)
-                move.l  #AniRaw_41932,$30(a0)
+                move.l  #S3CreditsPage_LogoCompanionWaitAnim,$30(a0)
 
-loc_407CC:
+S3Credits_LatchLogoReadyAndDraw:
                 bsr.w   S3Ending_TryResumeLogoAnimation
                 jsr     (Animate_Raw).l
                 jmp     (Draw_Sprite).l
@@ -341,20 +342,20 @@ loc_407CC:
 S3Ending_TryResumeLogoAnimation:
                 movea.w (_unkFAA4).w,a1
                 btst    #5,$38(a1)
-                beq.s   locret_407FA
+                beq.s   S3Credits_LogoReadyLatchReturn
                 clr.b   anim_frame_timer(a0)
                 clr.b   anim_frame(a0)
-                move.l  #AniRaw_41936,$30(a0)
+                move.l  #S3CreditsPage_LogoCompanionReadyAnim,$30(a0)
                 move.l  (sp),(a0)
 
-locret_407FA:
+S3Credits_LogoReadyLatchReturn:
                 rts
 ; End of function S3Ending_TryResumeLogoAnimation
 
 ; ---------------------------------------------------------------------------
 
-loc_407FC:
-                move.l  #loc_40844,(a0)
+S3Credits_InitMirroredCompanion:
+                move.l  #S3Credits_AnimateMirroredCompanion,(a0)
                 move.l  #Map_EndingGraphics,mappings(a0)
                 move.w  #make_art_tile(ArtTile_Ending_Sprites,3,1),art_tile(a0)
                 move.w  #$100,priority(a0)
@@ -364,17 +365,17 @@ loc_407FC:
                 bset    #0,render_flags(a0)
                 move.w  #$140,x_pos(a0)
                 move.w  #$11C,y_pos(a0)
-                lea     ChildObjDat_4192A(pc),a2
+                lea     S3CreditsPage_MirroredOffsetChildRecord(pc),a2
                 jsr     (CreateChild1_Normal).l
 
-loc_40844:
-                lea     AniRaw_41941(pc),a1
+S3Credits_AnimateMirroredCompanion:
+                lea     S3CreditsPage_MirroredCompanionAnim(pc),a1
                 jsr     (Animate_RawNoSST).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_40854:
-                move.l  #loc_40886,(a0)
+S3Credits_InitMirroredOffsetChild:
+                move.l  #S3Credits_AnimateMirroredOffsetChild,(a0)
                 move.l  #Map_EndingGraphics,mappings(a0)
                 move.w  #make_art_tile(ArtTile_Ending_Sprites,3,1),art_tile(a0)
                 move.w  #$180,priority(a0)
@@ -383,14 +384,14 @@ loc_40854:
                 move.b  #1,mapping_frame(a0)
                 bset    #0,render_flags(a0)
 
-loc_40886:
-                lea     AniRaw_41945(pc),a1
+S3Credits_AnimateMirroredOffsetChild:
+                lea     S3CreditsPage_MirroredOffsetChildAnim(pc),a1
                 jsr     (Animate_RawNoSST).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_40896:
-                move.l  #loc_408D6,(a0)
+S3Credits_InitMissingEmeraldThrower:
+                move.l  #S3Credits_AnimateThrowerForward,(a0)
                 move.l  #Map_EndingGraphics,mappings(a0)
                 move.w  #make_art_tile(ArtTile_Ending_Sprites,2,1),art_tile(a0)
                 move.w  #$100,priority(a0)
@@ -399,44 +400,45 @@ loc_40896:
                 move.b  #$C,mapping_frame(a0)
                 move.w  #$12C,x_pos(a0)
                 move.w  #$E8,y_pos(a0)
-                move.l  #loc_408E6,$34(a0)
+                move.l  #S3Credits_SetWaitAndTryEmeralds,$34(a0)
 
-loc_408D6:
-                lea     AniRaw_41950(pc),a1
+S3Credits_AnimateThrowerForward:
+                lea     S3CreditsPage_EmeraldThrowerForwardAnim(pc),a1
                 jsr     (Animate_RawNoSSTMultiDelay).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_408E6:
-                move.l  #loc_408F0,(a0)
-                bra.w   loc_40A02
+S3Credits_SetWaitAndTryEmeralds:
+                move.l  #S3Credits_WaitForLastEmerald,(a0)
+                bra.w   S3Credits_PrepareSevenEmeraldChecks
 ; ---------------------------------------------------------------------------
 
-loc_408F0:
+; The saved handle is dereferenced without a zero check
+S3Credits_WaitForLastEmerald:
                 movea.w $44(a0),a1
                 btst    #7,status(a1)
-                beq.s   loc_4090A
-                move.l  #loc_40910,(a0)
-                move.l  #loc_40920,$34(a0)
+                beq.s   S3Credits_DrawWaitingThrower
+                move.l  #S3Credits_AnimateThrowerReverse,(a0)
+                move.l  #S3Credits_RearmForwardThrow,$34(a0)
 
-loc_4090A:
+S3Credits_DrawWaitingThrower:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_40910:
-                lea     AniRaw_41959(pc),a1
+S3Credits_AnimateThrowerReverse:
+                lea     S3CreditsPage_EmeraldThrowerReverseAnim(pc),a1
                 jsr     (Animate_RawNoSSTMultiDelay).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_40920:
-                move.l  #loc_408D6,(a0)
-                move.l  #loc_408E6,$34(a0)
+S3Credits_RearmForwardThrow:
+                move.l  #S3Credits_AnimateThrowerForward,(a0)
+                move.l  #S3Credits_SetWaitAndTryEmeralds,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_40930:
-                move.l  #loc_40962,(a0)
+S3Credits_InitEmeraldSubtypeDelay:
+                move.l  #S3Credits_WaitThenSetEmeraldVelocity,(a0)
                 move.l  #Map_AIZIntroEmeralds,mappings(a0)
                 move.w  #make_art_tile(ArtTile_Ending_Emeralds,3,1),art_tile(a0)
                 move.w  #$80,priority(a0)
@@ -447,33 +449,33 @@ loc_40930:
                 add.w   d0,d0
                 move.w  d0,$2E(a0)
 
-loc_40962:
+S3Credits_WaitThenSetEmeraldVelocity:
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_40974
-                move.l  #loc_4097A,(a0)
+                bpl.s   S3Credits_DrawWaitingEmerald
+                move.l  #S3Credits_MoveEmeraldAndCheckParentY,(a0)
                 move.w  #-$300,y_vel(a0)
 
-loc_40974:
+S3Credits_DrawWaitingEmerald:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_4097A:
+S3Credits_MoveEmeraldAndCheckParentY:
                 jsr     (MoveSprite_LightGravity).l
                 tst.w   y_vel(a0)
-                bmi.s   loc_4099C
+                bmi.s   S3Credits_DrawEmeraldAfterDeleteMark
                 movea.w $46(a0),a1
                 move.w  y_pos(a1),d0
                 subq.w  #4,d0
                 cmp.w   y_pos(a0),d0
-                bhi.s   loc_4099C
+                bhi.s   S3Credits_DrawEmeraldAfterDeleteMark
                 jsr     (Go_Delete_Sprite).l
 
-loc_4099C:
+S3Credits_DrawEmeraldAfterDeleteMark:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_409A2:
-                move.l  #loc_409E0,(a0)
+S3Credits_InitTryAgainCompanion:
+                move.l  #S3Credits_AnimateTryAgainAndTickHold,(a0)
                 move.l  #Map_EndingGraphics,mappings(a0)
                 move.w  #make_art_tile(ArtTile_Ending_Sprites,2,1),art_tile(a0)
                 move.w  #$180,priority(a0)
@@ -484,31 +486,32 @@ loc_409A2:
                 move.w  #$E0,y_pos(a0)
                 move.w  #6*60,$2E(a0)
 
-loc_409E0:
+S3Credits_AnimateTryAgainAndTickHold:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_409F6
-                lea     AniRaw_4194C(pc),a1
+                bmi.s   S3Credits_SelectSegaAfterTryAgain
+                lea     S3CreditsPage_TryAgainCompanionAnim(pc),a1
                 jsr     (Animate_RawNoSST).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_409F6:
+S3Credits_SelectSegaAfterTryAgain:
                 move.b  #GameMode_SegaScreen,(Game_mode).w
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_40A02:
+S3Credits_PrepareSevenEmeraldChecks:
                 lea     (Collected_emeralds_array).w,a2
                 moveq   #0,d1
                 moveq   #0,d2
                 moveq   #7-1,d3
 
-loc_40A0C:
+; Keep the last successfully allocated actor's handle for the thrower
+S3Credits_TryMissingEmeraldActor:
                 tst.b   (a2)+
-                bne.s   loc_40A42
+                bne.s   S3Credits_AdvanceEmeraldFrameIndex
                 jsr     (AllocateObject).l
-                bne.s   loc_40A42
-                move.l  #loc_40930,(a1)
+                bne.s   S3Credits_AdvanceEmeraldFrameIndex
+                move.l  #S3Credits_InitEmeraldSubtypeDelay,(a1)
                 move.b  d1,mapping_frame(a1)
                 move.b  d2,subtype(a1)
                 move.w  x_pos(a0),d4
@@ -519,9 +522,9 @@ loc_40A0C:
                 addq.b  #2,d2
                 move.w  a1,$44(a0)
 
-loc_40A42:
+S3Credits_AdvanceEmeraldFrameIndex:
                 addq.b  #1,d1
-                dbf     d3,loc_40A0C
+                dbf     d3,S3Credits_TryMissingEmeraldActor
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -529,9 +532,9 @@ loc_40A42:
 S3Credits_DrawPageAndQueueUpload:
                 move.w  (a1)+,d6
 
-loc_40A4C:
+S3Credits_DrawStringsAndUpload8K:
                 bsr.w   S3Credits_DrawPositionedText
-                dbf     d6,loc_40A4C
+                dbf     d6,S3Credits_DrawStringsAndUpload8K
                 bset    #0,(_unkFA88).w
                 rts
 ; End of function S3Credits_DrawPageAndQueueUpload
@@ -544,13 +547,13 @@ S3Credits_DrawPositionedText:
                 move.w  (a1)+,d0
                 adda.w  d0,a2
 
-loc_40A66:
+S3Credits_DecodeNextTextGlyph:
                 moveq   #0,d0
                 move.b  (a1)+,d0
-                beq.w   loc_40B10
+                beq.w   S3Credits_AlignNextStringRecord
                 move.w  d0,d1
                 subi.b  #"a",d0
-                bcs.s   loc_40A9A
+                bcs.s   S3Credits_MapLargeSpace
                 lea     (S3Credits_PlaneMapSmall).l,a3
                 lsl.w   #2,d0
                 adda.w  d0,a3
@@ -561,41 +564,41 @@ loc_40A66:
                 ori.l   #$2000,d2
                 movea.l d2,a4
                 move.w  (a3)+,(a4)
-                bra.s   loc_40A66
+                bra.s   S3Credits_DecodeNextTextGlyph
 ; ---------------------------------------------------------------------------
 
-loc_40A9A:
+S3Credits_MapLargeSpace:
                 cmpi.b  #" ",d1
-                bne.s   loc_40AA6
+                bne.s   S3Credits_MapLargePeriod
                 moveq   #$1D,d1
-                bra.w   loc_40ACE
+                bra.w   S3Credits_BindLargeGlyphWidth
 ; ---------------------------------------------------------------------------
 
-loc_40AA6:
+S3Credits_MapLargePeriod:
                 cmpi.b  #".",d1
-                bne.s   loc_40AB2
+                bne.s   S3Credits_MapLargeLeftParen
                 moveq   #$1A,d1
-                bra.w   loc_40ACE
+                bra.w   S3Credits_BindLargeGlyphWidth
 ; ---------------------------------------------------------------------------
 
-loc_40AB2:
+S3Credits_MapLargeLeftParen:
                 cmpi.b  #"(",d1
-                bne.s   loc_40ABE
+                bne.s   S3Credits_MapLargeRightParen
                 moveq   #$1B,d1
-                bra.w   loc_40ACE
+                bra.w   S3Credits_BindLargeGlyphWidth
 ; ---------------------------------------------------------------------------
 
-loc_40ABE:
+S3Credits_MapLargeRightParen:
                 cmpi.b  #")",d1
-                bne.s   loc_40ACA
+                bne.s   S3Credits_IndexLargeUppercaseGlyph
                 moveq   #$1C,d1
-                bra.w   loc_40ACE
+                bra.w   S3Credits_BindLargeGlyphWidth
 ; ---------------------------------------------------------------------------
 
-loc_40ACA:
+S3Credits_IndexLargeUppercaseGlyph:
                 subi.b  #"A",d1
 
-loc_40ACE:
+S3Credits_BindLargeGlyphWidth:
                 add.w   d1,d1
                 lea     (S3Credits_PlaneMapLarge).l,a3
                 move.w  (a3,d1.w),d1
@@ -604,31 +607,31 @@ loc_40ACE:
                 movea.l a2,a4
                 moveq   #2,d3
 
-loc_40AE4:
+S3Credits_PrepareLargeGlyphRow:
                 move.w  d0,d1
                 movea.l a4,a5
 
-loc_40AE8:
+S3Credits_CopyLargeGlyphRow:
                 move.w  (a3)+,(a5)+
-                dbf     d1,loc_40AE8
+                dbf     d1,S3Credits_CopyLargeGlyphRow
                 move.l  a4,d2
                 addi.w  #$80,d2
                 andi.l  #$FFFF3FFF,d2
                 ori.l   #$2000,d2
                 movea.l d2,a4
-                dbf     d3,loc_40AE4
+                dbf     d3,S3Credits_PrepareLargeGlyphRow
                 addq.w  #1,d0
                 add.w   d0,d0
                 adda.w  d0,a2
-                bra.w   loc_40A66
+                bra.w   S3Credits_DecodeNextTextGlyph
 ; ---------------------------------------------------------------------------
 
-loc_40B10:
+S3Credits_AlignNextStringRecord:
                 move.l  a1,d0
                 btst    #0,d0
-                beq.s   locret_40B1A
+                beq.s   S3Credits_PositionedStringReturn
                 addq.l  #1,a1
 
-locret_40B1A:
+S3Credits_PositionedStringReturn:
                 rts
 ; End of function S3Credits_DrawPositionedText

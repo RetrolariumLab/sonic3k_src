@@ -3,126 +3,126 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
 
-Obj_5EBC6:
-                move.l  #loc_5EBE4,(a0)
+EndingAttachedMasterEmerald_Initialize:
+                move.l  #EndScenery_FollowAndDrawMasterEmerald,(a0)
                 lea     (SSZMechaMasterEmerald_Attributes).l,a1
                 jsr     (SetUp_ObjAttributes).l
                 addi.w  #make_art_tile($000,2,0),art_tile(a0)
                 move.b  #2,mapping_frame(a0)
 
-loc_5EBE4:
+EndScenery_FollowAndDrawMasterEmerald:
                 jsr     (Refresh_ChildPosition).l
                 jmp     (Child_Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5EBF0:
-                lea     word_600F2(pc),a1
+EndingPlaneBlinkDetail_Initialize:
+                lea     EndingPlaneBlinkDetail_PartialAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_5EC14,(a0)
+                move.l  #EndScenery_FollowPlaneBlinkDetail,(a0)
 
-loc_5EC00:
+EndingChild_MatchParentCoordinateMode:
                 movea.w parent3(a0),a1
                 btst    #2,render_flags(a1)
-                bne.s   locret_5EC12
+                bne.s   EndScenery_ChildCoordModeReturn
                 bclr    #2,render_flags(a0)
 
-locret_5EC12:
+EndScenery_ChildCoordModeReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5EC14:
+EndScenery_FollowPlaneBlinkDetail:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.s   loc_5EC36
+                bne.s   EndingChild_DeleteCurrentActor
                 btst    #1,(V_int_run_count+3).w
-                bne.w   locret_5FF1A
+                bne.w   EndingScene_SharedReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5EC36:
+EndingChild_DeleteCurrentActor:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5EC3C:
-                lea     word_600F8(pc),a1
+EndingPlanePoseOffsetDetail_Initialize:
+                lea     EndData_PlaneCyclingDetailPartAttrs(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_5EC4E,(a0)
-                bra.s   loc_5EC00
+                move.l  #EndScenery_UpdatePoseOffsetFromFrame,(a0)
+                bra.s   EndingChild_MatchParentCoordinateMode
 ; ---------------------------------------------------------------------------
 
-loc_5EC4E:
+EndScenery_UpdatePoseOffsetFromFrame:
                 movea.w parent3(a0),a1
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 subq.w  #1,d0
                 add.w   d0,d0
-                move.w  byte_5EC8E(pc,d0.w),child_dx(a0)  ; and child_dy
+                move.w  EndScenery_ParentFrameOffsetPairs(pc,d0.w),child_dx(a0)  ; and child_dy
                 jsr     (Refresh_ChildPositionAdjusted).l
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.s   loc_5EC36
+                bne.s   EndingChild_DeleteCurrentActor
                 move.b  #$16,mapping_frame(a0)
                 btst    #1,(V_int_run_count+3).w
-                beq.s   loc_5EC88
+                beq.s   EndingPlanePoseOffsetDetail_Draw
                 move.b  #$17,mapping_frame(a0)
 
-loc_5EC88:
+EndingPlanePoseOffsetDetail_Draw:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-byte_5EC8E:
+EndScenery_ParentFrameOffsetPairs:
                 dc.b    -$A,  $C
                 dc.b    -9,  $B
                 dc.b    -8,   9
                 even
 ; ---------------------------------------------------------------------------
 
-loc_5EC94:
-                lea     word_600FE(pc),a1
+EndingPlaneWideDetail_Initialize:
+                lea     EndingPlaneWideDetail_PartialAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_5ECA8,(a0)
-                bra.w   loc_5EC00
+                move.l  #EndingPlaneWideDetail_FollowAndDraw,(a0)
+                bra.w   EndingChild_MatchParentCoordinateMode
 ; ---------------------------------------------------------------------------
 
-loc_5ECA8:
+EndingPlaneWideDetail_FollowAndDraw:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_5ECB4:
-                lea     ObjDat3_600E6(pc),a1
+EndScenery_InitPoseDetailAndPriority:
+                lea     EndingPlanePoseDetail_Attributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 movea.w parent3(a0),a1
                 bclr    #7,art_tile(a0)
                 btst    #7,art_tile(a1)
-                beq.s   loc_5ECD6
+                beq.s   EndScenery_MatchParentCoordMode
                 bset    #7,art_tile(a0)
 
-loc_5ECD6:
+EndScenery_MatchParentCoordMode:
                 btst    #2,render_flags(a1)
-                bne.s   loc_5ECE4
+                bne.s   EndScenery_SelectPoseOutcomeGroup
                 bclr    #2,render_flags(a0)
 
-loc_5ECE4:
-                move.l  #loc_5ED18,(a0)
+EndScenery_SelectPoseOutcomeGroup:
+                move.l  #EndScenery_FollowParentPoseUntilCleanup,(a0)
                 move.w  (Player_mode).w,d0
                 cmpi.w  #3,d0
-                bne.s   loc_5ECFC
+                bne.s   EndScenery_SelectPoseSubtypeColumn
                 tst.b   (_unkFA88).w
-                bmi.s   loc_5ECFC
+                bmi.s   EndScenery_SelectPoseSubtypeColumn
                 addq.w  #1,d0
 
-loc_5ECFC:
+EndScenery_SelectPoseSubtypeColumn:
                 add.w   d0,d0
                 tst.b   subtype(a0)
-                beq.s   loc_5ED06
+                beq.s   EndingPlanePoseDetail_ApplySelectedFrame
                 addq.b  #1,d0
 
-loc_5ED06:
-                move.b  byte_5ED0E(pc,d0.w),mapping_frame(a0)
+EndingPlanePoseDetail_ApplySelectedFrame:
+                move.b  EndScenery_PoseFramesByOutcomeAndSide(pc,d0.w),mapping_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------
-byte_5ED0E:
+EndScenery_PoseFramesByOutcomeAndSide:
                 dc.b    $C,  $E
                 dc.b    $C,  $E
                 dc.b    $D,  $F
@@ -130,53 +130,53 @@ byte_5ED0E:
                 dc.b    $13, $15
 ; ---------------------------------------------------------------------------
 
-loc_5ED18:
+EndScenery_FollowParentPoseUntilCleanup:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.w   loc_5EC36
+                bne.w   EndingChild_DeleteCurrentActor
                 bsr.w   EndingAttachment_SetOffsetsFromPose
                 jsr     (Refresh_ChildPositionAdjusted).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5ED36:
-                lea     word_60110(pc),a1
+EndingSmallPlaneOutcomeDetail_Initialize:
+                lea     EndData_SmallPlaneOutcomeArtAndAttrs(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
-                move.l  #loc_5ED4A,(a0)
-                bra.w   loc_5EC00
+                move.l  #EndScenery_FollowSmallPlaneOutcome,(a0)
+                bra.w   EndingChild_MatchParentCoordinateMode
 ; ---------------------------------------------------------------------------
 
-loc_5ED4A:
+EndScenery_FollowSmallPlaneOutcome:
                 jsr     (Child_GetPriority).l
                 jsr     (Refresh_ChildPositionAdjusted).l
                 movea.w parent3(a0),a1
                 btst    #5,$38(a1)
-                bne.w   loc_5EC36
+                bne.w   EndingChild_DeleteCurrentActor
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5ED6A:
-                lea     word_600F8(pc),a1
+EndingSmallPlaneCyclingDetail_Initialize:
+                lea     EndData_PlaneCyclingDetailPartAttrs(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_5ED7E,(a0)
-                bra.w   loc_5EC00
+                move.l  #EndScenery_FollowSmallPlaneCycle,(a0)
+                bra.w   EndingChild_MatchParentCoordinateMode
 ; ---------------------------------------------------------------------------
 
-loc_5ED7E:
+EndScenery_FollowSmallPlaneCycle:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                bne.w   loc_5EC36
+                bne.w   EndingChild_DeleteCurrentActor
                 move.b  #$18,mapping_frame(a0)
                 btst    #1,(V_int_run_count+3).w
-                beq.s   loc_5EDA6
+                beq.s   EndingSmallPlaneCyclingDetail_Draw
                 move.b  #$19,mapping_frame(a0)
 
-loc_5EDA6:
+EndingSmallPlaneCyclingDetail_Draw:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5EDAC:
+EndScenery_InitLiftSpriteBySubtype:
                 move.l  #Map_IslandLiftGfx,mappings(a0)
                 move.w  #make_art_tile(ArtTile_Ending_IslandLiftGfx,3,1),art_tile(a0)
                 move.w  #$300,priority(a0)
@@ -187,98 +187,98 @@ loc_5EDAC:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 subi.b  #$41,d0
-                bcc.s   loc_5EDE6
+                bcc.s   EndScenery_DispatchLiftSubtypeInit
                 moveq   #0,d0
 
-loc_5EDE6:
+EndScenery_DispatchLiftSubtypeInit:
                 add.w   d0,d0
-                move.w  off_5EDF0(pc,d0.w),d0
-                jmp     off_5EDF0(pc,d0.w)
+                move.w  EndScenery_LiftSubtypeInitOffsets(pc,d0.w),d0
+                jmp     EndScenery_LiftSubtypeInitOffsets(pc,d0.w)
 ; ---------------------------------------------------------------------------
-off_5EDF0:
-                dc.w    loc_5EDFE-off_5EDF0
-                dc.w    loc_5EE18-off_5EDF0
-                dc.w    loc_5EE3C-off_5EDF0
-                dc.w    loc_5EE5E-off_5EDF0
-                dc.w    loc_5EE86-off_5EDF0
-                dc.w    loc_5EE86-off_5EDF0
-                dc.w    loc_5EE86-off_5EDF0
+EndScenery_LiftSubtypeInitOffsets:
+                dc.w    EndScenery_InitLiftWorldEffectPhase-EndScenery_LiftSubtypeInitOffsets
+                dc.w    EndScenery_InitLiftProjectedDetail-EndScenery_LiftSubtypeInitOffsets
+                dc.w    EndScenery_InitLiftGroup43Anim-EndScenery_LiftSubtypeInitOffsets
+                dc.w    EndScenery_InitLiftGroup44Anim-EndScenery_LiftSubtypeInitOffsets
+                dc.w    EndScenery_InitLiftWorldGroupAnim-EndScenery_LiftSubtypeInitOffsets
+                dc.w    EndScenery_InitLiftWorldGroupAnim-EndScenery_LiftSubtypeInitOffsets
+                dc.w    EndScenery_InitLiftWorldGroupAnim-EndScenery_LiftSubtypeInitOffsets
 ; ---------------------------------------------------------------------------
 
-loc_5EDFE:
-                move.l  #loc_5EEC4,(a0)
+EndScenery_InitLiftWorldEffectPhase:
+                move.l  #EndScenery_ConvertLiftEffectToScreen,(a0)
                 bset    #2,render_flags(a0)
                 move.w  (Camera_Y_pos_copy).w,$3A(a0)
                 bclr    #7,art_tile(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5EE18:
-                move.l  #loc_5EF28,(a0)
+EndScenery_InitLiftProjectedDetail:
+                move.l  #EndScenery_AnimateAndProjectLiftDetail,(a0)
                 move.b  #4,mapping_frame(a0)
                 move.b  $2D(a0),d0
                 move.b  d0,$24(a0)
                 cmpi.w  #3,(Player_mode).w
-                bne.s   locret_5EE3A
+                bne.s   EndScenery_ProjectedDetailInitReturn
                 bset    #2,render_flags(a0)
 
-locret_5EE3A:
+EndScenery_ProjectedDetailInitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5EE3C:
-                move.l  #loc_5EF5C,(a0)
+EndScenery_InitLiftGroup43Anim:
+                move.l  #EndScenery_AnimateAndDrawLiftDetail,(a0)
                 move.b  #$1A,mapping_frame(a0)
-                move.l  #AniRaw_60281,$30(a0)
+                move.l  #EndingIslandLiftGroup43_RawAnimation,$30(a0)
                 tst.b   $2D(a0)
-                beq.s   locret_5EE5C
+                beq.s   EndScenery_LiftGroup43InitReturn
                 move.b  #$18,$24(a0)
 
-locret_5EE5C:
+EndScenery_LiftGroup43InitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5EE5E:
-                move.l  #loc_5EF5C,(a0)
+EndScenery_InitLiftGroup44Anim:
+                move.l  #EndScenery_AnimateAndDrawLiftDetail,(a0)
                 move.b  #$1A,mapping_frame(a0)
-                move.l  #AniRaw_60289,$30(a0)
+                move.l  #EndingIslandLiftGroup44_RawAnimation,$30(a0)
                 tst.b   subtype(a0)
                 cmpi.b  #8,$2D(a0)
-                blo.s   locret_5EE84
+                blo.s   EndScenery_LiftGroup44InitReturn
                 move.b  #$10,$24(a0)
 
-locret_5EE84:
+EndScenery_LiftGroup44InitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5EE86:
+EndScenery_InitLiftWorldGroupAnim:
                 bclr    #7,art_tile(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 subi.b  #$45,d0
                 lsl.w   #2,d0
-                move.l  off_5EEB8(pc,d0.w),$30(a0)
-                move.l  #loc_5EF5C,(a0)
+                move.l  EndScenery_LiftWorldGroupAnimPointers(pc,d0.w),$30(a0)
+                move.l  #EndScenery_AnimateAndDrawLiftDetail,(a0)
                 bset    #2,render_flags(a0)
                 tst.b   $2D(a0)
-                beq.s   locret_5EEB6
+                beq.s   EndScenery_LiftWorldGroupInitReturn
                 move.b  #$C,$24(a0)
 
-locret_5EEB6:
+EndScenery_LiftWorldGroupInitReturn:
                 rts
 ; ---------------------------------------------------------------------------
-off_5EEB8:
-                dc.l    AniRaw_6028F
-                dc.l    AniRaw_60295
-                dc.l    AniRaw_6029B
+EndScenery_LiftWorldGroupAnimPointers:
+                dc.l    EndingIslandLiftGroup45_RawAnimation
+                dc.l    EndingIslandLiftGroup46_RawAnimation
+                dc.l    EndingIslandLiftGroup47_RawAnimation
 ; ---------------------------------------------------------------------------
 
-loc_5EEC4:
+EndScenery_ConvertLiftEffectToScreen:
                 move.w  (Camera_Y_pos_copy).w,d0
                 sub.w   $3A(a0),d0
                 cmpi.w  #$10,d0
-                blt.s   loc_5EF04
-                move.l  #loc_5EF08,(a0)
+                blt.s   EndScenery_AnimateWorldLiftEffect
+                move.l  #EndScenery_MoveScreenLiftEffect,(a0)
                 bclr    #2,render_flags(a0)
                 move.w  #$10,y_vel(a0)
                 move.w  x_pos(a0),d0
@@ -290,41 +290,41 @@ loc_5EEC4:
                 addi.w  #$80,d0
                 move.w  d0,y_pos(a0)
 
-loc_5EF04:
-                bra.w   loc_5EF0E
+EndScenery_AnimateWorldLiftEffect:
+                bra.w   EndScenery_AnimateAndBlinkLiftEffect
 ; ---------------------------------------------------------------------------
 
-loc_5EF08:
+EndScenery_MoveScreenLiftEffect:
                 jsr     (MoveSprite2).l
 
-loc_5EF0E:
-                lea     AniRaw_60276(pc),a1
+EndScenery_AnimateAndBlinkLiftEffect:
+                lea     EndingIslandLiftWorldEffect_RawAnimation(pc),a1
                 jsr     (Animate_RawNoSST).l
                 btst    #0,(V_int_run_count+3).w
-                bne.w   locret_5FF1A
+                bne.w   EndingScene_SharedReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5EF28:
-                lea     AniRaw_6027C(pc),a1
+EndScenery_AnimateAndProjectLiftDetail:
+                lea     EndData_LiftProjectedDetailAnim(pc),a1
                 jsr     (Animate_RawNoSST).l
                 cmpi.w  #3,(Player_mode).w
-                beq.s   loc_5EF3E
+                beq.s   EndScenery_CheckLiftDetailWindow
                 bsr.w   Ending_ProjectActorAndFlagOutside
 
-loc_5EF3E:
+EndScenery_CheckLiftDetailWindow:
                 btst    #3,(_unkFAB8).w
-                bne.s   loc_5EF56
+                bne.s   EndingIslandLiftProjectedDetail_Delete
                 btst    #6,$38(a0)
-                bne.w   locret_5FF1A
+                bne.w   EndingScene_SharedReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5EF56:
+EndingIslandLiftProjectedDetail_Delete:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5EF5C:
+EndScenery_AnimateAndDrawLiftDetail:
                 jsr     (Animate_Raw).l
                 jmp     (Draw_Sprite).l
-; End of function loc_5EF5C
+; End of function EndScenery_AnimateAndDrawLiftDetail

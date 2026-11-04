@@ -9,7 +9,7 @@ Create_Continue_Sprite:
 
                 .loop:
                 jsr     (AllocateObject).l
-                move.l  #loc_5EDAC,(a1)
+                move.l  #EndScenery_InitLiftSpriteBySubtype,(a1)
                 move.b  d1,subtype(a1)
                 move.b  d3,$2D(a1)
                 move.w  (a2,d3.w),x_pos(a1)
@@ -29,18 +29,18 @@ Ending_ProjectActorAndFlagOutside:
                 addi.w  #$80,d0
                 move.w  d0,x_pos(a0)
                 cmpi.w  #$200,d0
-                bhs.s   loc_5FE7A
+                bhs.s   EndingSceneProjection_MarkOutsideWindow
                 move.w  $3C(a0),d0
                 sub.w   (_unkEE9C).w,d0
                 addi.w  #$80,d0
                 move.w  d0,y_pos(a0)
                 cmpi.w  #$200,d0
-                blo.s   locret_5FE80
+                blo.s   EndSprite_ProjectionWindowReturn
 
-loc_5FE7A:
+EndingSceneProjection_MarkOutsideWindow:
                 bset    #6,$38(a0)
 
-locret_5FE80:
+EndSprite_ProjectionWindowReturn:
                 rts
 ; End of function Ending_ProjectActorAndFlagOutside
 
@@ -54,13 +54,13 @@ Ending_InitEmeraldOutcome:
                 move.l  d0,(a1)+
                 moveq   #2,d0
                 cmpi.b  #7,(Super_emerald_count).w
-                beq.s   loc_5FEA2
+                beq.s   EndSprite_StoreEmeraldOutcome
                 moveq   #0,d0
                 cmpi.b  #7,(Chaos_emerald_count).w
-                beq.s   loc_5FEA2
+                beq.s   EndSprite_StoreEmeraldOutcome
                 moveq   #-2,d0
 
-loc_5FEA2:
+EndSprite_StoreEmeraldOutcome:
                 move.b  d0,(_unkFA88).w
                 rts
 ; End of function Ending_InitEmeraldOutcome
@@ -116,7 +116,7 @@ EndingOffsetPoseByMaskedPlayerModePair:
                 ext.w   d0
                 add.w   d0,y_pos(a0)
 
-locret_5FF1A:
+EndingScene_SharedReturn:
                 rts
 ; End of function EndingOffsetPoseByMaskedPlayerModePair
 
@@ -134,65 +134,65 @@ EndingBanner_PlaceAndTryFlash:
                 moveq   #0,d0
                 moveq   #bytesToLcnt($20),d1
 
-loc_5FF3A:
+EndSprite_BlankLine2AndTryFlash:
                 move.l  d0,(a1)+
-                dbf     d1,loc_5FF3A
+                dbf     d1,EndSprite_BlankLine2AndTryFlash
                 jsr     (AllocateObject).l
-                bne.s   locret_5FF60
-                move.l  #loc_5FF62,(a1)
+                bne.s   EndSprite_FlashSpawnReturn
+                move.l  #EndSprite_InitFlashRaisePasses,(a1)
                 move.w  #Normal_palette_line_2,$30(a1)
                 move.w  #Target_palette_line_2,$32(a1)
                 move.w  #$F,$3A(a1)
 
-locret_5FF60:
+EndSprite_FlashSpawnReturn:
                 rts
 ; End of function EndingBanner_PlaceAndTryFlash
 
 ; ---------------------------------------------------------------------------
 
-loc_5FF62:
+EndSprite_InitFlashRaisePasses:
                 move.b  #7,$39(a0)
-                move.l  #loc_5FF6E,(a0)
+                move.l  #EndSprite_WaitThenRaiseColors,(a0)
 
-loc_5FF6E:
+EndSprite_WaitThenRaiseColors:
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_5FF92
+                bpl.s   EndSprite_FlashUpdateReturn
                 move.w  #3,$2E(a0)
                 movea.w $30(a0),a1
                 move.w  $3A(a0),d0
 
-loc_5FF82:
+EndSprite_RaiseNextColorAndStep:
                 jsr     (EffectColorSKRaiseOneColorTowardWhite).l
-                dbf     d0,loc_5FF82
+                dbf     d0,EndSprite_RaiseNextColorAndStep
                 subq.b  #1,$39(a0)
-                bmi.s   loc_5FF94
+                bmi.s   EndSprite_BeginTargetColorRestore
 
-locret_5FF92:
+EndSprite_FlashUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5FF94:
-                move.l  #loc_5FFA6,(a0)
+EndSprite_BeginTargetColorRestore:
+                move.l  #EndSprite_WaitThenRestoreColors,(a0)
                 move.b  #7,$39(a0)
                 move.w  #3,$2E(a0)
 
-loc_5FFA6:
+EndSprite_WaitThenRestoreColors:
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_5FF92
+                bpl.s   EndSprite_FlashUpdateReturn
                 move.w  #3,$2E(a0)
                 movea.w $30(a0),a1
                 movea.w $32(a0),a2
                 move.w  $3A(a0),d0
 
-loc_5FFBE:
+EndSprite_LowerNextColorAndStep:
                 jsr     (EffectColorSKLowerOneColorTowardTarget).l
-                dbf     d0,loc_5FFBE
+                dbf     d0,EndSprite_LowerNextColorAndStep
                 subq.b  #1,$39(a0)
-                bpl.s   locret_5FF92
+                bpl.s   EndSprite_FlashUpdateReturn
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5FFD4:
+EndSprite_OffsetOverlayBySubtype:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lea     (a1,d0.w),a1

@@ -1,8 +1,8 @@
 ; Data owner: ui/shared/ending
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_SKPoseBanner_:
-                dc.w    word_60646-Map_SKPoseBanner_
-word_60646:     dc.w    7
+                dc.w    SKEnd_BannerMap-Map_SKPoseBanner_
+SKEnd_BannerMap:    dc.w    7
                 dc.b    $EC,  $D,   0,   0, $FF, $C8
                 dc.b    $EC,  $D,   0,   8, $FF, $E8
                 dc.b    $EC,  $D,   0, $10,   0,   8

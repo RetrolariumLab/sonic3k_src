@@ -20,47 +20,47 @@ Ending_BackgroundEvent:
 ; ---------------------------------------------------------------------------
 
 Ending_BackgroundEvent_Index:
-                bra.w   loc_5AF4E
+                bra.w   SKEndingBG_BuildCloudBandsWhileWaiting
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5AF84
+                bra.w   SKEndingBG_BuildExpandingBands
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5AFC4
+                bra.w   SKEndingBG_InitAIZReveal
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5AFF0
+                bra.w   SKEndingBG_RefreshAIZDeformation
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5B012
+                bra.w   SKEndingBG_ApplyAIZRiseToBGCamera
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5B03A
+                bra.w   SKEndingBG_PatchLayoutAndPrimeSSZ
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5B072
+                bra.w   SKEndingBG_BuildBandsDuringSSZReveal
 ; ---------------------------------------------------------------------------
 
-loc_5AF4E:
+SKEndingBG_BuildCloudBandsWhileWaiting:
                 tst.w   (Events_fg_5).w
-                bne.s   loc_5AF5A
+                bne.s   SKEndingBG_ConsumeCloudSignalAndPrepPal
                 jsr     SKEnding_BuildInitialCloudBands(pc)
-                bra.s   loc_5AF88
+                bra.s   SKEndingBG_DrawRowAndChooseDeformation
 ; ---------------------------------------------------------------------------
 
-loc_5AF5A:
+SKEndingBG_ConsumeCloudSignalAndPrepPal:
                 clr.w   (Events_fg_5).w
                 lea     (Pal_Ending1).l,a1
                 lea     (Normal_palette_line_2).w,a5
                 moveq   #bytesToLcnt($60),d0
 
-loc_5AF6A:
+SKEndingBG_CopyColorsAndExpandScene:
                 move.l  (a1)+,(a5)+
-                dbf     d0,loc_5AF6A
+                dbf     d0,SKEndingBG_CopyColorsAndExpandScene
                 jsr     SKEnding_LoadSkyColorsNowAndTarget(pc)
                 move.w  #$220,d0
                 move.w  d0,(_unkEE9C).w
                 move.w  d0,(Camera_Y_pos_BG_rounded).w
                 addq.w  #4,(Events_routine_bg).w
 
-loc_5AF84:
+SKEndingBG_BuildExpandingBands:
                 jsr     SKEnding_BuildExpandingBgBands(pc)
 
-loc_5AF88:
+SKEndingBG_DrawRowAndChooseDeformation:
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
                 move.w  #$200,d1
@@ -68,22 +68,22 @@ loc_5AF88:
                 jsr     (Draw_TileRow).l
                 lea     Ending_BGDeformArray1(pc),a4
                 tst.w   (Events_routine_bg).w
-                beq.s   loc_5AFAA
+                beq.s   SKEndingBG_ApplyDeformAndPickPalCycle
                 lea     Ending_BGDeformArray2(pc),a4
 
-loc_5AFAA:
+SKEndingBG_ApplyDeformAndPickPalCycle:
                 lea     (HScroll_table+$004).w,a5
                 jsr     (ApplyDeformation).l
                 lea     CycleSsz2EmeraldEndingAccentPalette(pc),a1
                 tst.w   (Events_routine_bg).w
-                beq.s   loc_5AFC2
+                beq.s   SKEndingBG_DispatchSSZPaletteCycle
                 lea     CycleSsz2EndingWaterPalette(pc),a1
 
-loc_5AFC2:
+SKEndingBG_DispatchSSZPaletteCycle:
                 jmp     (a1)
 ; ---------------------------------------------------------------------------
 
-loc_5AFC4:
+SKEndingBG_InitAIZReveal:
                 jsr     (AIZ1_Deform).l
                 jsr     (Reset_TileOffsetPositionEff).l
                 clr.l   (HScroll_table).w
@@ -93,28 +93,28 @@ loc_5AFC4:
                 move.w  d0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_5AFF6
+                bra.s   SKEndingBG_RevealAIZBottomUp
 ; ---------------------------------------------------------------------------
 
-loc_5AFF0:
+SKEndingBG_RefreshAIZDeformation:
                 jsr     (AIZ1_Deform).l
 
-loc_5AFF6:
+SKEndingBG_RevealAIZBottomUp:
                 lea     (AIZ1_BGDrawArray).l,a4
                 lea     (HScroll_table-$04).w,a5
                 move.w  (Camera_Y_pos_BG_copy).w,d1
                 jsr     (Draw_PlaneVertBottomUpComplex).l
-                bpl.s   loc_5B020
+                bpl.s   SKEndingBG_DrawAIZAndApplyWaterDeform
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_5B020
+                bra.s   SKEndingBG_DrawAIZAndApplyWaterDeform
 ; ---------------------------------------------------------------------------
 
-loc_5B012:
+SKEndingBG_ApplyAIZRiseToBGCamera:
                 jsr     (AIZ1_Deform).l
                 move.w  (Events_bg+$0A).w,d0
                 sub.w   d0,(Camera_Y_pos_BG_copy).w
 
-loc_5B020:
+SKEndingBG_DrawAIZAndApplyWaterDeform:
                 lea     (AIZ1_BGDrawArray).l,a4
                 lea     (HScroll_table).w,a5
                 moveq   #$20,d6
@@ -123,7 +123,7 @@ loc_5B020:
                 jmp     (AIZ1_ApplyDeformWater).l
 ; ---------------------------------------------------------------------------
 
-loc_5B03A:
+SKEndingBG_PatchLayoutAndPrimeSSZ:
                 movea.w $1C(a3),a1
                 addq.w  #4,a1
                 move.b  #$1A,(a1)+
@@ -137,19 +137,19 @@ loc_5B03A:
                 move.w  d0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_5B076
+                bra.s   SKEndingBG_FinishSSZRevealAndExpand
 ; ---------------------------------------------------------------------------
 
-loc_5B072:
+SKEndingBG_BuildBandsDuringSSZReveal:
                 jsr     SKEnding_BuildExpandingBgBands(pc)
 
-loc_5B076:
+SKEndingBG_FinishSSZRevealAndExpand:
                 move.w  #$200,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 jsr     (Draw_PlaneVertBottomUp).l
-                bpl.w   loc_5AF88
+                bpl.w   SKEndingBG_DrawRowAndChooseDeformation
                 move.w  #4,(Events_routine_bg).w
-                bpl.w   loc_5AF88
+                bpl.w   SKEndingBG_DrawRowAndChooseDeformation
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -157,10 +157,10 @@ loc_5B076:
 SKEnding_BuildInitialCloudBands:
                 move.w  (_unkEE9C).w,d0
                 cmpi.w  #$120,d0
-                bls.s   loc_5B0A0
+                bls.s   SKEndingBG_CapInitialYAndBuildClouds
                 move.w  #$120,d0
 
-loc_5B0A0:
+SKEndingBG_CapInitialYAndBuildClouds:
                 move.w  d0,(Camera_Y_pos_BG_copy).w
                 jmp     SKSSZ2BG_AdvancePanoramaDrift(pc)
 ; End of function SKEnding_BuildInitialCloudBands
@@ -181,7 +181,7 @@ SKEnding_BuildExpandingBgBands:
                 lea     $10(a1),a1
                 moveq   #$20-1,d2
 
-loc_5B0CC:
+SKEndingBG_Write32BandsAndSamples:
                 swap    d0
                 move.w  d0,(a1)+
                 move.w  d0,(a1)+
@@ -189,7 +189,7 @@ loc_5B0CC:
                 move.w  d0,(a1)+
                 swap    d0
                 add.l   d1,d0
-                dbf     d2,loc_5B0CC
+                dbf     d2,SKEndingBG_Write32BandsAndSamples
                 lea     (HScroll_table+$014).w,a1
                 move.w  (a1),d0
                 move.w  d0,-4(a1)
@@ -211,7 +211,7 @@ loc_5B0CC:
 
 SKEnding_LoadSkyColorsNowAndTarget:
                 lea     (Normal_palette_line_2).w,a6
-                bra.s   loc_5B120
+                bra.s   SKEndingBG_PrepareSkyAndSSZColors
 ; End of function SKEnding_LoadSkyColorsNowAndTarget
 
 ; =============== S U B R O U T I N E =======================================
@@ -219,22 +219,22 @@ SKEnding_LoadSkyColorsNowAndTarget:
 SKEnding_LoadSkyColorsToTarget:
                 lea     (Target_palette_line_2).w,a6
 
-loc_5B120:
+SKEndingBG_PrepareSkyAndSSZColors:
                 lea     (Target_palette_line_2).w,a5
-                lea     Pal_5B16E(pc),a1
+                lea     SKEndingBG_SkyPaletteLine(pc),a1
                 moveq   #bytesToLcnt($20),d0
 
-loc_5B12A:
+SKEndingBG_CopySkyColorsToBothCursors:
                 move.l  (a1),(a5)+
                 move.l  (a1)+,(a6)+
-                dbf     d0,loc_5B12A
+                dbf     d0,SKEndingBG_CopySkyColorsToBothCursors
                 lea     (Pal_SSZ2+$20).l,a1
                 moveq   #bytesToLcnt($20),d0
 
-loc_5B13A:
+SKEndingBG_CopySSZColorsToNextLine:
                 move.l  (a1),(a5)+
                 move.l  (a1)+,(a6)+
-                dbf     d0,loc_5B13A
+                dbf     d0,SKEndingBG_CopySSZColorsToNextLine
                 rts
 ; End of function SKEnding_LoadSkyColorsToTarget
 
@@ -262,6 +262,6 @@ Ending_BGDeformArray2:
                 dc.w    $20
                 dc.w    $8080
                 dc.w    $7FFF
-Pal_5B16E:
+SKEndingBG_SkyPaletteLine:
                 binclude "data/General/Ending/Palettes/Sky.bin"
                 even

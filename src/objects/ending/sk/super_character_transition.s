@@ -9,7 +9,7 @@ EndingPrepareSuperSonicVisualState:
                 move.w  #$24,(Palette_frame).w
                 move.b  #1,(Super_Sonic_Knux_flag).w
 
-loc_5FC9E:
+EndPose_InstallSuperSonicVisuals:
                 move.b  #-1,(Super_palette_status).w
                 move.b  #0,(Palette_timer).w
                 move.l  #Map_SuperSonic,(Player_1+mappings).w
@@ -31,44 +31,44 @@ EndingPrepareSuperTailsPaletteState:
 EndingAndDDZPrepareHyperSonicVisualState:
                 move.b  #-1,(Super_Sonic_Knux_flag).w
                 move.w  #0,(Palette_frame).w
-                bra.s   loc_5FC9E
+                bra.s   EndPose_InstallSuperSonicVisuals
 ; End of function EndingAndDDZPrepareHyperSonicVisualState
 
 ; ---------------------------------------------------------------------------
 
-loc_5FCDC:
-                move.l  #loc_5FCEC,(a0)
+EndingSuperTailsPaletteActor_Initialize:
+                move.l  #EndPose_CycleSuperTailsUntilCleanup,(a0)
                 lea     PalSPtr_EndingSuperTails(pc),a1
                 jsr     (InstallSingleGlobalPaletteRotationScript).l
 
-loc_5FCEC:
+EndPose_CycleSuperTailsUntilCleanup:
                 btst    #3,(_unkFAB8).w
-                bne.w   loc_5EC36
+                bne.w   EndingChild_DeleteCurrentActor
                 jmp     (Run_PalRotationScript).l
 ; ---------------------------------------------------------------------------
 
-loc_5FCFC:
-                move.l  #loc_5FD16,(a0)
+EndPose_InitPaletteActorBySubtype:
+                move.l  #EndingSonicPosePaletteActor_AdvanceCycle,(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  byte_5FD4E(pc,d0.w),$3A(a0)
+                move.w  EndPose_PaletteSpanDelayPairs(pc,d0.w),$3A(a0)
                 add.w   d0,d0
-                move.l  off_5FD52(pc,d0.w),$30(a0)
+                move.l  EndPose_PaletteSourcePointers(pc,d0.w),$30(a0)
 
-loc_5FD16:
+EndingSonicPosePaletteActor_AdvanceCycle:
                 tst.b   (Palette_cycle_counters+$00).w
-                bne.w   loc_5EC36
+                bne.w   EndingChild_DeleteCurrentActor
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_5FD4C
+                bpl.s   EndPose_PosePaletteUpdateReturn
                 move.b  $3B(a0),anim_frame_timer(a0)
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 addq.b  #6,d0
                 cmp.b   $3A(a0),d0
-                blo.s   loc_5FD3A
+                blo.s   EndPose_CopySelectedPoseColors
                 moveq   #0,d0
 
-loc_5FD3A:
+EndPose_CopySelectedPoseColors:
                 move.b  d0,anim_frame(a0)
                 movea.l $30(a0),a1
                 adda.w  d0,a1
@@ -76,31 +76,31 @@ loc_5FD3A:
                 move.l  (a1)+,(a2)+
                 move.w  (a1)+,(a2)+
 
-locret_5FD4C:
+EndPose_PosePaletteUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
-byte_5FD4E:
+EndPose_PaletteSpanDelayPairs:
                 dc.b    $18,   6
                 dc.b    $48,   4
                 even
-off_5FD52:
+EndPose_PaletteSourcePointers:
                 dc.l    PalCycle_SuperSonic+$24
                 dc.l    PalCycle_HyperSonic
 ; ---------------------------------------------------------------------------
 
-loc_5FD5A:
-                move.l  #loc_5FD66,(a0)
+EndingDelayedS3ResultBanner_Initialize:
+                move.l  #EndPose_WaitAndTryS3Banner,(a0)
                 move.w  #32-1,$2E(a0)
 
-loc_5FD66:
+EndPose_WaitAndTryS3Banner:
                 subq.w  #1,$2E(a0)
-                bpl.w   locret_5FF1A
+                bpl.w   EndingScene_SharedReturn
                 jsr     (AllocateObject).l
-                bne.s   loc_5FD82
-                move.l  #loc_5F26C,(a1)
+                bne.s   EndPose_DeleteAfterBannerAttempt
+                move.l  #EndBanner_InitS3GraphicsProgram,(a1)
                 move.b  #4,subtype(a1)
 
-loc_5FD82:
+EndPose_DeleteAfterBannerAttempt:
                 jmp     (Delete_Current_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -109,12 +109,12 @@ Ending_SetP1PoseAndLoadArt:
                 lea     (Player_1).w,a1
                 move.w  (Player_mode).w,d0
                 andi.w  #3,d0
-                move.b  byte_5FDA0(pc,d0.w),mapping_frame(a1)
+                move.b  EndPose_FramesByPlayerMode(pc,d0.w),mapping_frame(a1)
                 jmp     (Player_Load_PLC).l
 ; End of function Ending_SetP1PoseAndLoadArt
 
 ; ---------------------------------------------------------------------------
-byte_5FDA0:
+EndPose_FramesByPlayerMode:
                 dc.b    $BA
                 dc.b    $BA
                 dc.b    $AD
@@ -126,7 +126,7 @@ byte_5FDA0:
 ; Store the allocated fade actor's short handle in the eyecatch owner
 Ending_TrySpawnLine2Fade:
                 jsr     (AllocateObject).l
-                bne.s   locret_5FDD2
+                bne.s   EndPose_Line2FadeSpawnReturn
                 move.w  a1,$44(a0)
                 move.l  #Obj_FadeSelectedFromBlack,(a1)
                 moveq   #5,d0
@@ -136,7 +136,7 @@ Ending_TrySpawnLine2Fade:
                 move.w  #Normal_palette_line_2,$30(a1)
                 move.w  #Target_palette_line_2,$32(a1)
 
-locret_5FDD2:
+EndPose_Line2FadeSpawnReturn:
                 rts
 ; End of function Ending_TrySpawnLine2Fade
 
@@ -144,12 +144,12 @@ locret_5FDD2:
 
 Obj_Ending_RevertSuperSonic:
                 move.w  #(2*60)-1,$2E(a0)
-                move.l  #loc_5FDE0,(a0)
+                move.l  #EndPose_WaitAndRestoreNormalFlags,(a0)
 
-loc_5FDE0:
+EndPose_WaitAndRestoreNormalFlags:
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_5FE0E
-                move.l  #loc_5FE10,(a0)
+                bpl.s   EndPose_SuperRevertFlagReturn
+                move.l  #EndPose_RestoreNormalMapAndDelete,(a0)
                 lea     (Player_1).w,a1
                 move.b  #$F,anim(a1)
                 move.b  #2,(Super_palette_status).w
@@ -157,10 +157,10 @@ loc_5FDE0:
                 move.b  #0,(Super_Sonic_Knux_flag).w
                 move.b  #0,(Super_Tails_flag).w
 
-locret_5FE0E:
+EndPose_SuperRevertFlagReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5FE10:
+EndPose_RestoreNormalMapAndDelete:
                 move.l  #Map_Sonic,(Player_1+mappings).w
                 jmp     (Delete_Current_Sprite).l

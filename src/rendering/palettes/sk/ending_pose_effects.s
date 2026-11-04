@@ -5,7 +5,7 @@
 
 EndSuperKnuxPal_AdvanceCycle:
                 tst.b   (Palette_cycle_counters+$00).w
-                bne.w   loc_5EC36
+                bne.w   EndingChild_DeleteCurrentActor
                 subq.b  #1,anim_frame_timer(a0)
                 bpl.w   EndSuperKnuxPal_CycleReturn
                 move.b  #2,anim_frame_timer(a0)

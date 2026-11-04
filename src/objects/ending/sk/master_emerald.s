@@ -3,154 +3,154 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
 
-Obj_5DE60:
+EndingMasterEmerald_DispatchStateAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_5DE74(pc,d0.w),d1
-                jsr     off_5DE74(pc,d1.w)
+                move.w  EndingMasterEmerald_StateOffsets(pc,d0.w),d1
+                jsr     EndingMasterEmerald_StateOffsets(pc,d1.w)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-off_5DE74:
-                dc.w    loc_5DE80-off_5DE74
-                dc.w    loc_5DED4-off_5DE74
-                dc.w    loc_5DEF0-off_5DE74
-                dc.w    loc_5DF12-off_5DE74
-                dc.w    loc_5DF34-off_5DE74
-                dc.w    loc_5DF48-off_5DE74
+EndingMasterEmerald_StateOffsets:
+                dc.w    EndEmerald_InitMasterEmeraldAndOutcome-EndingMasterEmerald_StateOffsets
+                dc.w    EndEmerald_WaitForBoardingSignal-EndingMasterEmerald_StateOffsets
+                dc.w    EndEmerald_DriftUntilCarrierReady-EndingMasterEmerald_StateOffsets
+                dc.w    EndEmerald_FollowCarrierAndCheckExit-EndingMasterEmerald_StateOffsets
+                dc.w    EndEmerald_WaitBeforeMissingOutcomeExit-EndingMasterEmerald_StateOffsets
+                dc.w    EndingMasterEmerald_RiseUntilTopCutoff-EndingMasterEmerald_StateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_5DE80:
+EndEmerald_InitMasterEmeraldAndOutcome:
                 move.b  #2,routine(a0)
                 move.l  #Map_SSZMasterEmerald,mappings(a0)
                 move.b  #$20,width_pixels(a0)
                 move.b  #$18,height_pixels(a0)
                 move.b  #2,mapping_frame(a0)
                 tst.b   subtype(a0)
-                bne.s   loc_5DEC6
+                bne.s   EndEmerald_SetAlternateAppearance
                 move.w  #make_art_tile(ArtTile_Ending_MasterEmerald,2,1),art_tile(a0)
                 move.w  #$280,priority(a0)
                 tst.b   (_unkFA88).w
-                bpl.s   locret_5DEC4
+                bpl.s   EndEmerald_MasterEmeraldInitReturn
                 move.b  #8,routine(a0)
                 move.w  #(2*60)-1,$2E(a0)
 
-locret_5DEC4:
+EndEmerald_MasterEmeraldInitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5DEC6:
+EndEmerald_SetAlternateAppearance:
                 move.w  #make_art_tile(ArtTile_Ending_MasterEmerald,1,0),art_tile(a0)
                 move.w  #$300,priority(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5DED4:
+EndEmerald_WaitForBoardingSignal:
                 btst    #0,(_unkFAB8).w
-                bne.s   loc_5DEDE
+                bne.s   EndingMasterEmerald_BeginLeftDownDrift
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5DEDE:
+EndingMasterEmerald_BeginLeftDownDrift:
                 move.b  #4,routine(a0)
                 move.w  #-$200,x_vel(a0)
                 move.w  #$100,y_vel(a0)
 
-loc_5DEF0:
+EndEmerald_DriftUntilCarrierReady:
                 move.w  (_unkFAA4).w,d0
-                bne.s   loc_5DEFC
+                bne.s   EndEmerald_AttachToCarrier
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_5DEFC:
+EndEmerald_AttachToCarrier:
                 move.b  #6,routine(a0)
                 move.w  d0,parent3(a0)
                 move.b  #-$20,child_dx(a0)
                 move.b  #1,child_dy(a0)
 
-loc_5DF12:
+EndEmerald_FollowCarrierAndCheckExit:
                 jsr     (Refresh_ChildPosition).l
                 cmpi.w  #$50,x_pos(a0)
-                bls.s   loc_5DF2E
+                bls.s   EndEmerald_DeleteMasterEmerald
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_5DF2E
+                bne.s   EndEmerald_DeleteMasterEmerald
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5DF2E:
+EndEmerald_DeleteMasterEmerald:
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5DF34:
+EndEmerald_WaitBeforeMissingOutcomeExit:
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_5DF46
+                bpl.s   EndingMasterEmerald_ReturnFromExitDelay
                 move.b  #$A,routine(a0)
                 move.w  #-$80,y_vel(a0)
 
-locret_5DF46:
+EndingMasterEmerald_ReturnFromExitDelay:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5DF48:
+EndingMasterEmerald_RiseUntilTopCutoff:
                 jsr     (MoveSprite2).l
                 cmpi.w  #$40,y_pos(a0)
-                blo.s   loc_5DF2E
+                blo.s   EndEmerald_DeleteMasterEmerald
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5DF58:
+EndEmerald_CycleAllSuperAccent:
                 tst.b   (_unkFA88).w
-                beq.s   locret_5DF7E
-                bmi.s   locret_5DF7E
+                beq.s   EndEmerald_AccentPaletteUpdateReturn
+                bmi.s   EndEmerald_AccentPaletteUpdateReturn
                 move.b  (_unkFAC1).w,d0
-                beq.s   locret_5DF7E
+                beq.s   EndEmerald_AccentPaletteUpdateReturn
                 lea     (SSZMasterEmeraldColorCycle_IndexedScript).l,a1
                 lea     (Normal_palette_line_3+$1C).w,a2
                 tst.b   d0
-                bpl.s   loc_5DF78
+                bpl.s   EndEmerald_RunOutcomePaletteScript
                 lea     (Normal_palette_line_2+$1C).w,a2
 
-loc_5DF78:
+EndEmerald_RunOutcomePaletteScript:
                 jsr     (Run_PalRotationScript2).l
 
-locret_5DF7E:
+EndEmerald_AccentPaletteUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5DF80:
-                lea     ObjDat3_60104(pc),a1
+EndEmerald_InitCarrierPlaneExtension:
+                lea     EndData_EmeraldCarrierAttrs(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 bclr    #2,render_flags(a0)
-                move.l  #loc_5DF98,(a0)
+                move.l  #EndEmerald_CarrierWaitForDeparture,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5DF98:
+EndEmerald_CarrierWaitForDeparture:
                 btst    #1,(_unkFAB8).w
-                beq.s   loc_5DFA6
-                move.l  #loc_5DFB2,(a0)
+                beq.s   EndEmerald_FollowParentBeforeDeparture
+                move.l  #EndEmerald_ShiftCarrierAndPublishHandle,(a0)
 
-loc_5DFA6:
+EndEmerald_FollowParentBeforeDeparture:
                 jsr     (Refresh_ChildPosition).l
                 jmp     (Child_Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5DFB2:
+EndEmerald_ShiftCarrierAndPublishHandle:
                 move.b  child_dx(a0),d0
                 subq.b  #2,d0
                 move.b  d0,child_dx(a0)
                 cmpi.b  #-$74,d0
-                bgt.s   loc_5DFCC
-                move.l  #loc_5DFD8,(a0)
+                bgt.s   EndEmerald_RefreshShiftedCarrier
+                move.l  #EndEmerald_FollowUntilCarrierCutoff,(a0)
                 move.w  a0,(_unkFAA4).w
 
-loc_5DFCC:
+EndEmerald_RefreshShiftedCarrier:
                 jsr     (Refresh_ChildPosition).l
                 jmp     (Child_Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5DFD8:
+EndEmerald_FollowUntilCarrierCutoff:
                 jsr     (Refresh_ChildPosition).l
                 cmpi.w  #$50,x_pos(a0)
-                bls.w   loc_5EC36
+                bls.w   EndingChild_DeleteCurrentActor
                 jmp     (Child_Draw_Sprite).l

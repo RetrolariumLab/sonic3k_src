@@ -1,15 +1,15 @@
 ; Data owner: ui/shared/ending
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_KnuxEndPose_:
-                dc.w    word_60A52-Map_KnuxEndPose_
-                dc.w    word_60A5A-Map_KnuxEndPose_
-                dc.w    word_60A68-Map_KnuxEndPose_
-word_60A52:     dc.w    1
+                dc.w    EndKnux_InitialPoseMap-Map_KnuxEndPose_
+                dc.w    EndKnux_IntermediatePoseMap-Map_KnuxEndPose_
+                dc.w    EndKnux_FinalPoseMap-Map_KnuxEndPose_
+EndKnux_InitialPoseMap: dc.w    1
                 dc.b    $F8,   5,   0, $10, $FF, $F8
-word_60A5A:     dc.w    2
+EndKnux_IntermediatePoseMap:    dc.w    2
                 dc.b    $F0,  $F,   0, $26, $FF, $F0
                 dc.b    $10,   4,   0, $36,   0,   0
-word_60A68:     dc.w    8
+EndKnux_FinalPoseMap:   dc.w    8
                 dc.b    $CC,  $F,   0, $38,   0,   0
                 dc.b    $CC,   5,   0, $48, $FF, $F0
                 dc.b    $DC,  $F,   0, $4C, $FF, $E0

@@ -6,32 +6,32 @@
 
 SKCredits_DispatchScrollState:
                 move.w  (_unkFA86).w,d0
-                move.w  off_5B19A(pc,d0.w),d0
-                jmp     off_5B19A(pc,d0.w)
+                move.w  SKCredits_ScrollStateOffsets(pc,d0.w),d0
+                jmp     SKCredits_ScrollStateOffsets(pc,d0.w)
 ; End of function SKCredits_DispatchScrollState
 
 ; ---------------------------------------------------------------------------
-off_5B19A:
-                dc.w    loc_5B1A2-off_5B19A
-                dc.w    loc_5B1F4-off_5B19A
-                dc.w    loc_5B204-off_5B19A
-                dc.w    locret_5B2D4-off_5B19A
+SKCredits_ScrollStateOffsets:
+                dc.w    SKCredits_InitScrollAndTryMusic-SKCredits_ScrollStateOffsets
+                dc.w    SKCredits_TickDelayThenQueuePose-SKCredits_ScrollStateOffsets
+                dc.w    SKCredits_ScrollAndCheckTileCrossing-SKCredits_ScrollStateOffsets
+                dc.w    SKCredits_FinishedCreditsReturn-SKCredits_ScrollStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_5B1A2:
+SKCredits_InitScrollAndTryMusic:
                 addq.w  #2,(_unkFA86).w
                 clr.b   (_unkFACC).w
                 clr.l   (Camera_Y_pos).w
                 clr.l   (V_scroll_value).w
                 clr.w   (_unkFAAE).w
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_5B1D2
+                bne.s   SKCredits_SelectParamsAndLoadFont
                 jsr     (AllocateObject).l
-                bne.s   loc_5B1D2
+                bne.s   SKCredits_SelectParamsAndLoadFont
                 move.l  #Obj_Song_Fade_Transition,(a1)
                 move.b  #mus_CreditsK,subtype(a1)
 
-loc_5B1D2:
+SKCredits_SelectParamsAndLoadFont:
                 bsr.w   SKCredits_SelectScrollSpeedAndDelay
                 move.w  #$EEE,(Normal_palette+$2).w
                 move.w  #$EE,(Normal_palette_line_2+$2).w
@@ -43,17 +43,17 @@ PLC_SKCredits:  plrlistheader
 PLC_SKCredits_End:
 ; ---------------------------------------------------------------------------
 
-loc_5B1F4:
+SKCredits_TickDelayThenQueuePose:
                 subq.w  #1,(_unkF660).w
-                bpl.s   locret_5B202
+                bpl.s   SKCredits_ScrollDelayReturn
                 addq.w  #2,(_unkFA86).w
                 bsr.w   SKCredits_QueueEndingPoseArt
 
-locret_5B202:
+SKCredits_ScrollDelayReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5B204:
+SKCredits_ScrollAndCheckTileCrossing:
                 move.l  (Camera_Y_pos).w,d0
                 move.l  d0,d1
                 add.l   (_unkFAC8).w,d0
@@ -62,7 +62,7 @@ loc_5B204:
                 swap    d1
                 eor.w   d0,d1
                 btst    #4,d1
-                beq.s   locret_5B282
+                beq.s   SKCredits_ScrollTextUpdateReturn
                 lsl.w   #4,d0
                 addi.w  #$E00,d0
                 move.w  d0,d1
@@ -70,78 +70,78 @@ loc_5B204:
                 bsr.w   SKCredits_ClearTwoPlaneRows
                 moveq   #0,d2
                 tst.w   (SK_alone_flag).w
-                beq.s   loc_5B238
+                beq.s   SKCredits_SelectPartAndCheckTextRow
                 moveq   #8,d2
 
-loc_5B238:
+SKCredits_SelectPartAndCheckTextRow:
                 add.w   (_unkFAAE).w,d2
-                movea.l off_5B284(pc,d2.w),a1
+                movea.l SKCredits_CreditPartPointers(pc,d2.w),a1
                 move.w  (_unkFA84).w,d2
                 move.w  (a1,d2.w),d2
                 lea     (a1,d2.w),a1
                 move.w  (a1)+,d2
                 cmpi.w  #-8,d2
-                beq.s   loc_5B294
+                beq.s   SKCredits_PartTransitionOffsets
                 cmpi.w  #-$C,d2
-                beq.s   loc_5B29E
+                beq.s   SKCredits_FinishCreditsAndSignalScene
                 move.w  d2,d3
                 andi.w  #$FF00,d0
                 andi.w  #$FF00,d3
                 cmp.w   d0,d3
-                bne.s   locret_5B282
+                bne.s   SKCredits_ScrollTextUpdateReturn
                 move.w  #make_art_tile(ArtTile_Ending_CreditsText,0,1),d6
                 bclr    #0,d2
-                beq.s   loc_5B276
+                beq.s   SKCredits_UploadTwoRowsAndAdvance
                 move.w  #make_art_tile(ArtTile_Ending_CreditsText,1,1),d6
 
-loc_5B276:
+SKCredits_UploadTwoRowsAndAdvance:
                 andi.w  #$FFE,d2
                 bsr.w   SKCredits_BuildAndUploadText
                 addq.w  #2,(_unkFA84).w
 
-locret_5B282:
+SKCredits_ScrollTextUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
-off_5B284:
+SKCredits_CreditPartPointers:
                 dc.l    CreditsText_Part1
                 dc.l    CreditsText_Part2
                 dc.l    CreditsText_Part1_SK
                 dc.l    CreditsText_Part2_SK
 ; ---------------------------------------------------------------------------
 
-loc_5B294:
+SKCredits_PartTransitionOffsets:
                 addq.w  #4,(_unkFAAE).w
                 clr.w   (_unkFA84).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5B29E:
+SKCredits_FinishCreditsAndSignalScene:
                 addq.w  #2,(_unkFA86).w
                 clr.l   (Timer).w
                 st      (Events_fg_4).w
                 st      (_unkFACC).w
                 cmpi.w  #3,(Player_mode).w
-                beq.s   loc_5B2B8
+                beq.s   SKCredits_TryKnucklesHandoff
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5B2B8:
+SKCredits_TryKnucklesHandoff:
                 tst.b   (_unkFA88).w
-                bmi.s   loc_5B2CE
+                bmi.s   SKCredits_ClearKnucklesSceneLatch
                 jsr     (AllocateObject).l
-                bne.s   locret_5B2CC
-                move.l  #Obj_5EF68,(a1)
+                bne.s   SKCredits_HandoffSpawnReturn
+                move.l  #EndingResults_SelectProgramAndStartDelay,(a1)
 
-locret_5B2CC:
+SKCredits_HandoffSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5B2CE:
+SKCredits_ClearKnucklesSceneLatch:
                 clr.b   (_unkFAB9).w
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_5B2D4:
+SKCredits_FinishedCreditsReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -163,18 +163,19 @@ SKCredits_ClearTwoPlaneRows:
                 moveq   #0,d4
                 moveq   #2-1,d5
 
-loc_5B300:
+SKCredits_SelectPlaneRowToClear:
                 move.l  d2,VDP_control_port-VDP_data_port(a6)
                 moveq   #$28-1,d6
 
-loc_5B306:
+; The row clear exits with SR set to $2300
+SKCredits_ClearFortyColumns:
                 move.w  d4,(a6)
-                dbf     d6,loc_5B306
+                dbf     d6,SKCredits_ClearFortyColumns
                 add.l   d3,d2
-                dbf     d5,loc_5B300
+                dbf     d5,SKCredits_SelectPlaneRowToClear
                 move    #$2300,sr
 
-locret_5B316:
+SKCredits_RowOrGlyphReturn:
                 rts
 ; End of function SKCredits_ClearTwoPlaneRows
 
@@ -200,15 +201,16 @@ SKCredits_BuildAndUploadText:
                 subq.w  #1,d0
                 move.w  d0,d1
 
-loc_5B350:
+SKCredits_UploadTopGlyphRow:
                 move.w  (a1)+,(a6)
-                dbf     d0,loc_5B350
+                dbf     d0,SKCredits_UploadTopGlyphRow
                 lea     (Chunk_table+$7080).l,a1
                 move.l  d3,VDP_control_port-VDP_data_port(a6)
 
-loc_5B360:
+; The final row upload exits with SR set to $2300
+SKCredits_UploadBottomGlyphRow:
                 move.w  (a1)+,(a6)
-                dbf     d1,loc_5B360
+                dbf     d1,SKCredits_UploadBottomGlyphRow
                 move    #$2300,sr
                 rts
 ; End of function SKCredits_BuildAndUploadText
@@ -221,33 +223,33 @@ SKCredits_BuildGlyphRows:
                 lea     (Chunk_table+$7080).l,a3
                 moveq   #0,d0
 
-loc_5B37A:
+SKCredits_DecodeNextGlyph:
                 moveq   #0,d1
                 move.b  (a1)+,d1
-                beq.s   locret_5B316
+                beq.s   SKCredits_RowOrGlyphReturn
                 cmpi.b  #" ",d1
-                beq.w   loc_5B420
+                beq.w   SKCredits_AppendBlankColumn
                 cmpi.b  #"?",d1
-                beq.w   loc_5B418
+                beq.w   SKCredits_SelectQuestionMark
                 cmpi.b  #"!",d1
-                beq.s   loc_5B410
+                beq.s   SKCredits_SelectExclamation
                 cmpi.b  #"&",d1
-                beq.s   loc_5B408
+                beq.s   SKCredits_SelectAmpersand
                 cmpi.b  #")",d1
-                beq.s   loc_5B400
+                beq.s   SKCredits_SelectRightParen
                 cmpi.b  #"(",d1
-                beq.s   loc_5B3F8
+                beq.s   SKCredits_SelectLeftParen
                 cmpi.b  #".",d1
-                beq.s   loc_5B3F0
+                beq.s   SKCredits_SelectPeriod
                 cmpi.b  #"I",d1
-                beq.s   loc_5B3DC
+                beq.s   SKCredits_SelectNarrowI
                 addq.w  #2,d0
                 subi.b  #"A",d1
                 lsl.w   #3,d1
                 lea     CreditsText_PlaneMap(pc),a4
                 adda.w  d1,a4
 
-loc_5B3C2:
+SKCredits_AppendTwoColumnGlyph:
                 move.w  (a4)+,d5
                 add.w   d6,d5
                 move.w  d5,(a2)+
@@ -260,64 +262,64 @@ loc_5B3C2:
                 move.w  (a4)+,d5
                 add.w   d6,d5
                 move.w  d5,(a3)+
-                bra.s   loc_5B37A
+                bra.s   SKCredits_DecodeNextGlyph
 ; ---------------------------------------------------------------------------
 
-loc_5B3DC:
+SKCredits_SelectNarrowI:
                 addq.w  #1,d0
                 lea     CreditsText_PlaneMap.LetterI(pc),a4
 
-loc_5B3E2:
+SKCredits_AppendOneColumnGlyph:
                 move.w  (a4)+,d5
                 add.w   d6,d5
                 move.w  d5,(a2)+
                 move.w  (a4)+,d5
                 add.w   d6,d5
                 move.w  d5,(a3)+
-                bra.s   loc_5B37A
+                bra.s   SKCredits_DecodeNextGlyph
 ; ---------------------------------------------------------------------------
 
-loc_5B3F0:
+SKCredits_SelectPeriod:
                 addq.w  #1,d0
                 lea     CreditsText_PlaneMap.Period(pc),a4
-                bra.s   loc_5B3E2
+                bra.s   SKCredits_AppendOneColumnGlyph
 ; ---------------------------------------------------------------------------
 
-loc_5B3F8:
+SKCredits_SelectLeftParen:
                 addq.w  #1,d0
                 lea     CreditsText_PlaneMap.LeftBracket(pc),a4
-                bra.s   loc_5B3E2
+                bra.s   SKCredits_AppendOneColumnGlyph
 ; ---------------------------------------------------------------------------
 
-loc_5B400:
+SKCredits_SelectRightParen:
                 addq.w  #1,d0
                 lea     CreditsText_PlaneMap.RightBracket(pc),a4
-                bra.s   loc_5B3E2
+                bra.s   SKCredits_AppendOneColumnGlyph
 ; ---------------------------------------------------------------------------
 
-loc_5B408:
+SKCredits_SelectAmpersand:
                 addq.w  #2,d0
                 lea     CreditsText_PlaneMap.Ampersand(pc),a4
-                bra.s   loc_5B3C2
+                bra.s   SKCredits_AppendTwoColumnGlyph
 ; ---------------------------------------------------------------------------
 
-loc_5B410:
+SKCredits_SelectExclamation:
                 addq.w  #1,d0
                 lea     CreditsText_PlaneMap.Exclamation(pc),a4
-                bra.s   loc_5B3E2
+                bra.s   SKCredits_AppendOneColumnGlyph
 ; ---------------------------------------------------------------------------
 
-loc_5B418:
+SKCredits_SelectQuestionMark:
                 addq.w  #2,d0
                 lea     CreditsText_PlaneMap.QuestionMark(pc),a4
-                bra.s   loc_5B3C2
+                bra.s   SKCredits_AppendTwoColumnGlyph
 ; ---------------------------------------------------------------------------
 
-loc_5B420:
+SKCredits_AppendBlankColumn:
                 addq.w  #1,d0
                 clr.w   (a2)+
                 clr.w   (a3)+
-                bra.w   loc_5B37A
+                bra.w   SKCredits_DecodeNextGlyph
 ; End of function SKCredits_BuildGlyphRows
 
 ; =============== S U B R O U T I N E =======================================
@@ -331,69 +333,69 @@ SKCredits_QueueEndingPoseArt:
                 moveq   #0,d1
                 andi.w  #3,d0
                 subq.w  #2,d0
-                bmi.s   loc_5B452
-                beq.s   loc_5B44E
+                bmi.s   SKCredits_AddLockOnPoseStride
+                beq.s   SKCredits_AddCharacterPoseStride
                 addi.w  #$18,d1
 
-loc_5B44E:
+SKCredits_AddCharacterPoseStride:
                 addi.w  #$18,d1
 
-loc_5B452:
+SKCredits_AddLockOnPoseStride:
                 tst.w   (SK_alone_flag).w
-                bne.s   loc_5B45C
+                bne.s   SKCredits_SelectCompletionPoseColumn
                 addi.w  #$C,d1
 
-loc_5B45C:
+SKCredits_SelectCompletionPoseColumn:
                 tst.b   (_unkFA88).w
-                bmi.s   loc_5B46C
-                beq.s   loc_5B468
+                bmi.s   SKCredits_DispatchSelectedPoseLoader
+                beq.s   SKCredits_AddFinalPoseStride
                 addi.w  #4,d1
 
-loc_5B468:
+SKCredits_AddFinalPoseStride:
                 addi.w  #4,d1
 
-loc_5B46C:
-                movea.l off_5B472(pc,d1.w),a2
+SKCredits_DispatchSelectedPoseLoader:
+                movea.l SKCredits_PoseLoaderPointers(pc,d1.w),a2
                 jmp     (a2)
 ; End of function SKCredits_QueueEndingPoseArt
 
 ; ---------------------------------------------------------------------------
-off_5B472:
-                dc.l    loc_5B4C4
-                dc.l    loc_5B4C4
-                dc.l    loc_5B4C4
+SKCredits_PoseLoaderPointers:
+                dc.l    SKCredits_QueueStandaloneBanner
+                dc.l    SKCredits_QueueStandaloneBanner
+                dc.l    SKCredits_QueueStandaloneBanner
                 dc.l    SKCreditsQueueSonicThreePoseBannerArt
                 dc.l    SKCreditsQueueSonicThreePoseBannerArt
-                dc.l    loc_5B4F8
+                dc.l    SKCredits_QueueLockOnBannerThenLoadS3
                 dc.l    SKCreditsQueueSonicThreePoseBannerArt
                 dc.l    SKCreditsQueueSonicThreePoseBannerArt
-                dc.l    loc_5B4F8
+                dc.l    SKCredits_QueueLockOnBannerThenLoadS3
                 dc.l    SKCreditsQueueSonicThreePoseBannerArt
                 dc.l    SKCreditsQueueSonicThreePoseBannerArt
-                dc.l    loc_5B4F8
-                dc.l    loc_5B4C4
-                dc.l    loc_5B4BA
-                dc.l    loc_5B4BA
+                dc.l    SKCredits_QueueLockOnBannerThenLoadS3
+                dc.l    SKCredits_QueueStandaloneBanner
+                dc.l    SKCredits_LoadKnuxAndStandaloneBanner
+                dc.l    SKCredits_LoadKnuxAndStandaloneBanner
                 dc.l    SKCreditsQueueSonicThreePoseBannerArt
-                dc.l    loc_5B4DE
-                dc.l    loc_5B4D4
+                dc.l    SKCredits_LoadKnuxAndLockOnBanner
+                dc.l    SKCredits_LoadS3ArtBeforeKnuxAndBanner
 ; ---------------------------------------------------------------------------
 
-loc_5B4BA:
+SKCredits_LoadKnuxAndStandaloneBanner:
                 lea     PLC_CreditsKnuxPose(pc),a1
                 jsr     (Load_PLC_Raw).l
 
-loc_5B4C4:
+SKCredits_QueueStandaloneBanner:
                 lea     (ArtKosM_SKPoseBanner).l,a1
                 move.w  #tiles_to_bytes(ArtTile_Ending_Logo),d2
                 jmp     (Queue_Kos_Module).l
 ; ---------------------------------------------------------------------------
 
-loc_5B4D4:
+SKCredits_LoadS3ArtBeforeKnuxAndBanner:
                 lea     PLC_S3EndingGraphics(pc),a1
                 jsr     (Load_PLC_Raw).l
 
-loc_5B4DE:
+SKCredits_LoadKnuxAndLockOnBanner:
                 lea     PLC_CreditsKnuxPose(pc),a1
                 jsr     (Load_PLC_Raw).l
 
@@ -407,7 +409,7 @@ SKCreditsQueueSonicThreePoseBannerArt:
 
 ; ---------------------------------------------------------------------------
 
-loc_5B4F8:
+SKCredits_QueueLockOnBannerThenLoadS3:
                 bsr.s   SKCreditsQueueSonicThreePoseBannerArt
                 lea     PLC_S3EndingGraphics(pc),a1
                 jmp     (Load_PLC_Raw).l

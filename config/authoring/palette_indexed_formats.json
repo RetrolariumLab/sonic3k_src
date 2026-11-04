@@ -42,11 +42,11 @@
     },
     {
       "path": "src/objects/ending/sk/master_emerald.s",
-      "sha256": "2a4a668660f885eadce44119ea376564d9b868c1605f6b3376f43d4782833419"
+      "sha256": "b0a5a5113daa095923ee3b7e1d0e581e4b89f34dc259053b477e7dd3cb115171"
     },
     {
       "path": "src/objects/ending/sk/plane_scene.s",
-      "sha256": "de527c023d21ff966733f6f78c1a510b74e80f6655699fb9b95f358ed6f09631"
+      "sha256": "81e04dd04c4907dbf55e66435e9aa6688304047b03675c8db7d3e02ab704ca9e"
     },
     {
       "path": "src/objects/interface/blue_sphere/sk/difficulty_widgets.s",

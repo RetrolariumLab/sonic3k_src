@@ -10053,7 +10053,7 @@
       "responsibility": "Ending credit progression, character-specific pose graphics and scrolling tile transfer helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 413,
+      "physical_lines": 415,
       "origin": {
         "commit": "3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e",
         "path": "sonic3k.s",
@@ -10543,7 +10543,7 @@
       "responsibility": "Ending and credits mode, scene coordination, logo and text actors and text drawing helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 634,
+      "physical_lines": 637,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "s3.s",
@@ -23219,7 +23219,7 @@
       "responsibility": "Ending player poses, rescued animals, plane sequence and final camera or palette transition.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 664,
+      "physical_lines": 665,
       "origin": {
         "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
         "path": "sonic3k.s",
@@ -23296,7 +23296,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_5F8C6",
+          "name": "EndResultEmerald_InitPlacementAndArt",
           "kind": "terminal-tail",
           "reason": "The complete result emerald display contains only terminal graphics or drawing jumps and retains its private indexed placement record.",
           "origin_first_line": 2422,
@@ -23441,7 +23441,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_5EF5C",
+          "name": "EndScenery_AnimateAndDrawLiftDetail",
           "kind": "terminal-tail",
           "reason": "Close the final animate-and-draw callback after all earlier independent scenery and creature returns.",
           "origin_first_line": 1582,

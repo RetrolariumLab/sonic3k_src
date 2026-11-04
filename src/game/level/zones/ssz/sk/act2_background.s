@@ -533,7 +533,7 @@ SKSSZ2BG_MoveFinalCameraAndTryHandoff:
                 bne.s   SKSSZ2BG_EndingMotionReturn
                 jsr     (AllocateObject).l
                 bne.s   SKSSZ2BG_DeleteEndingMotionActor
-                move.l  #Obj_5EF68,(a1)
+                move.l  #EndingResults_SelectProgramAndStartDelay,(a1)
 
 SKSSZ2BG_DeleteEndingMotionActor:
                 jmp     (Delete_Current_Sprite).l

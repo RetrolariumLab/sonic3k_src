@@ -29,11 +29,11 @@
     },
     {
       "path": "src/game/modes/s3/ending_credits.s",
-      "sha256": "18e7c395946c99f4b84e13dc1187849b4955294566c9add0f355f1bf9cd883dc"
+      "sha256": "3a27e1a74c7ba0f6bb5a02a3200fc3dbcc62b853f6fa89d978b1207fa8dc1c7c"
     },
     {
       "path": "src/game/modes/s3/ending_credits_data.s",
-      "sha256": "4e5fb18dcd54dc9167fcc0562477ec7f9adc5ea2980d121a71bf677cf0d76ab2"
+      "sha256": "4f09cc7d707b01652ded1d812ac421f2bf3ee3bc289e042545701bbe5eec2b1f"
     },
     {
       "path": "src/objects/bonus/gumball/sk/machine.s",
@@ -501,7 +501,7 @@
     },
     {
       "path": "src/objects/bosses/ssz/end_boss/sk/battle.s",
-      "sha256": "c679d34df9f1ba40bc301365cbb62033fb3727d643d35e50108739566b647d0e"
+      "sha256": "59d629be65c39b964d515683b2ac1a2c2f5fd5c3f774a0c22950eabc475ab394"
     },
     {
       "path": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
@@ -621,39 +621,39 @@
     },
     {
       "path": "src/objects/ending/sk/character_poses.s",
-      "sha256": "19a11794973a61b8b4974ca50eeacf378b384cd2f7ce4e55ee8c822d44c05614"
+      "sha256": "f6279aba3928ad654c32ce2905f1df7ec18a5cacb31282c5f4a19a96be16fb3c"
     },
     {
       "path": "src/objects/ending/sk/villain_eyecatch.s",
-      "sha256": "e015594177e3a59edafe0a97246b773440b0bcc0bddc03178ec3f77ce66421bd"
+      "sha256": "a2b49c7c1f77cec5bfa655424fdb9d7e1b28c390db34badefe85da27bb55cf5d"
     },
     {
       "path": "src/objects/ending/sk/mecha_sonic_eyecatch.s",
-      "sha256": "968c90126bbb91f8aebc8b537293793bc8e05f54b97986fc42751ff16a1c0261"
+      "sha256": "e951927ef42123e037fe931d242726669c91fd0f3d49781cf6330112736d75c7"
     },
     {
       "path": "src/objects/ending/sk/object_catalog.s",
-      "sha256": "53452ec38bdb5d73705d499bf2017714b4a00ebc2f0df0da6e4df49320e9d5d7"
+      "sha256": "df4b260fc83b97d73ac69701052a22531e13875df2295526d80ad3d440abc791"
     },
     {
       "path": "src/objects/ending/sk/plane_and_knuckles.s",
-      "sha256": "28b3b4d267ccc58808c9004f2dca1f3acac8fc802463d294dbfba8a0fcaba7d9"
+      "sha256": "5c0120252489ded633d99cd89f6a56188ba97f00f8cc6f61f29ac47104037129"
     },
     {
       "path": "src/objects/ending/sk/plane_scene.s",
-      "sha256": "de527c023d21ff966733f6f78c1a510b74e80f6655699fb9b95f358ed6f09631"
+      "sha256": "81e04dd04c4907dbf55e66435e9aa6688304047b03675c8db7d3e02ab704ca9e"
     },
     {
       "path": "src/objects/ending/sk/scene_controller.s",
-      "sha256": "2e198cbf2760b2e56889923918ea239003c6ff9db3da68cdd5358c9649fa0917"
+      "sha256": "f584ae5372a75c2939c75cd51be507a6c559e9341eff0d0da23c30be2467d388"
     },
     {
       "path": "src/objects/ending/sk/scenery_and_creatures.s",
-      "sha256": "a1383923cddca34887b463742fb0929dbd929a3fa07132886026b808b852be1e"
+      "sha256": "38f45fb7c52bbf8feef18accdb804013cf88f25d07796ffc80716aa7b59c2987"
     },
     {
       "path": "src/objects/ending/sk/super_character_transition.s",
-      "sha256": "f579745eebebb920b12698cf074fbf3600b15c23369c349992daf2fc2803149a"
+      "sha256": "5eab514951d531454b382d630729fe4fbfd5580332d83e0a2400267c4b07a0cf"
     },
     {
       "path": "src/objects/enemies/aiz/s3/bloominator.s",
@@ -897,7 +897,7 @@
     },
     {
       "path": "src/objects/interface/blue_sphere/sk/difficulty_banner_portrait.s",
-      "sha256": "c9151ac83c78717391c3bf86774362aebe35a6c730385cf829e3ae2556ca94be"
+      "sha256": "f38cd2a796af72f7090f687ff23fdb1c808de777d04cdf45118299d4d5aca9cd"
     },
     {
       "path": "src/objects/interface/continue/sk/characters.s",
@@ -1398,13 +1398,13 @@
     },
     {
       "path": "src/game/modes/s3/ending_credits_data.s",
-      "symbol": "AniRaw_41932",
-      "scope": "AniRaw_41932",
+      "symbol": "S3CreditsPage_LogoCompanionWaitAnim",
+      "scope": "S3CreditsPage_LogoCompanionWaitAnim",
       "first_line": 597,
       "last_line": 615,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 46,
-      "declarations_sha256": "68867c981d4b9f57a6d8c3ebc5da9204df024163e311d40bbe44311fa01a7da0",
+      "declarations_sha256": "caa8b5b715fc14dfdb02864a3d936df0edf8ac857784d8a6b8ece5155cb489ca",
       "entries": [
         [0, "fixed"],
         [4, "fixed"],
@@ -1416,13 +1416,13 @@
       ],
       "external_symbols": [],
       "members": [
-        "AniRaw_41932",
-        "AniRaw_41936",
-        "AniRaw_41941",
-        "AniRaw_41945",
-        "AniRaw_4194C",
-        "AniRaw_41950",
-        "AniRaw_41959"
+        "S3CreditsPage_LogoCompanionWaitAnim",
+        "S3CreditsPage_LogoCompanionReadyAnim",
+        "S3CreditsPage_MirroredCompanionAnim",
+        "S3CreditsPage_MirroredOffsetChildAnim",
+        "S3CreditsPage_TryAgainCompanionAnim",
+        "S3CreditsPage_EmeraldThrowerForwardAnim",
+        "S3CreditsPage_EmeraldThrowerReverseAnim"
       ],
       "stored_markers": []
     },
@@ -3577,13 +3577,13 @@
     },
     {
       "path": "src/objects/ending/sk/object_catalog.s",
-      "symbol": "AniRaw_60236",
-      "scope": "AniRaw_60236",
+      "symbol": "EndData_SSZPlaneMissingOutcomeAnim",
+      "scope": "EndData_SSZPlaneMissingOutcomeAnim",
       "first_line": 172,
       "last_line": 221,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 160,
-      "declarations_sha256": "fd7881258f8fc2828322d1312f286b7a9e7c387e19beba8739698ae5bee2f4c8",
+      "declarations_sha256": "0cba3f9f8f3974036f74fb68982f8068bff093e6776c33c044923f3015035282",
       "entries": [
         [0, "pairs"],
         [9, "pairs"],
@@ -3608,55 +3608,55 @@
       ],
       "external_symbols": [],
       "members": [
-        "AniRaw_60236",
-        "AniRaw_6023F",
-        "AniRaw_60244",
-        "AniRaw_60253",
-        "AniRaw_6025C",
-        "AniRaw_60260",
-        "AniRaw_6026B",
-        "AniRaw_6026F",
-        "AniRaw_60276",
-        "AniRaw_6027C",
-        "AniRaw_60281",
-        "AniRaw_60289",
-        "AniRaw_6028F",
-        "AniRaw_60295",
-        "AniRaw_6029B",
-        "AniRaw_602A1",
-        "AniRaw_602A7",
-        "AniRaw_602C2",
-        "AniRaw_602C6",
-        "AniRaw_602CA"
+        "EndData_SSZPlaneMissingOutcomeAnim",
+        "EndData_SSZPlaneEmeraldHoldAnim",
+        "EndData_SSZPlaneEmeraldApexAnim",
+        "EndingReturnPlane_RawFrameDelayScript",
+        "EndData_SonicPoseSignalWaitAnim",
+        "EndingSonicPose_FinalRawAnimation",
+        "EndingTailsPose_RawAnimation",
+        "EndingTailsPoseTail_RawAnimation",
+        "EndingIslandLiftWorldEffect_RawAnimation",
+        "EndData_LiftProjectedDetailAnim",
+        "EndingIslandLiftGroup43_RawAnimation",
+        "EndingIslandLiftGroup44_RawAnimation",
+        "EndingIslandLiftGroup45_RawAnimation",
+        "EndingIslandLiftGroup46_RawAnimation",
+        "EndingIslandLiftGroup47_RawAnimation",
+        "EndingSwayingAnimal_RawAnimation",
+        "EndData_EggRoboSignalDetailAnim",
+        "EndingEggRoboEyecatch_RawAnimation",
+        "EndingEggmanEyecatch_RawAnimation",
+        "EndingKnucklesSoloPose_RawAnimation"
       ],
       "stored_markers": []
     },
     {
       "path": "src/objects/ending/sk/scenery_and_creatures.s",
-      "symbol": "byte_5ED0E",
-      "scope": "byte_5ED0E",
+      "symbol": "EndScenery_PoseFramesByOutcomeAndSide",
+      "scope": "EndScenery_PoseFramesByOutcomeAndSide",
       "first_line": 125,
       "last_line": 130,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 10,
-      "declarations_sha256": "c118740d3a232be96f1352b57bedbef51aeb4ce5a741680c677155e7479ce370",
+      "declarations_sha256": "d2b38f0ce21ff2c07edff5b166906ed658cc09acc97e48442092e3dfe7f65d60",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_5ED0E"],
+      "members": ["EndScenery_PoseFramesByOutcomeAndSide"],
       "stored_markers": []
     },
     {
       "path": "src/objects/ending/sk/super_character_transition.s",
-      "symbol": "byte_5FDA0",
-      "scope": "byte_5FDA0",
+      "symbol": "EndPose_FramesByPlayerMode",
+      "scope": "EndPose_FramesByPlayerMode",
       "first_line": 117,
       "last_line": 122,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 4,
-      "declarations_sha256": "3d7c6c3ded49ec6f43a2514f8639630a7d958ae28e38da2ee9e39ea1e4492a3e",
+      "declarations_sha256": "41dfdc7d15d1ec763e6c6fa436adb1a87716e115fb1114de1edcfb30dcdf3adc",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_5FDA0"],
+      "members": ["EndPose_FramesByPlayerMode"],
       "stored_markers": []
     },
     {

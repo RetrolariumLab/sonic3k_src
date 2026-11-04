@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 171
+    "commit_count": 172
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -1073,9 +1073,15 @@
       "commits": ["71e51d1ff53e9f7cddf710da5e8810039b2bafb4"]
     },
     {
-      "id": "current-shorten-65-cutscenes",
+      "id": "change-ac59597c69e0",
       "kind": "source_or_tooling",
       "summary": "Apply 921 reviewed short labels for cutscenes.",
+      "commits": ["ac59597c69e03eb2d59776bf0a6840fa578ef6c7"]
+    },
+    {
+      "id": "current-shorten-66-ending",
+      "kind": "source_or_tooling",
+      "summary": "Apply 766 reviewed short labels for ending.",
       "commits": ["release-commit"]
     }
   ],

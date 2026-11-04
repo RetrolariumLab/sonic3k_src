@@ -3,198 +3,198 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
 
-Obj_5EF68:
-                move.l  #loc_5F144,(a0)
+EndingResults_SelectProgramAndStartDelay:
+                move.l  #EndResults_TickDelayAndSignalExit,(a0)
                 move.w  #$1FF,$2E(a0)
                 clr.b   (Super_palette_status).w
                 move.w  (Player_mode).w,d0
                 moveq   #0,d1
                 andi.w  #3,d0
                 subq.w  #2,d0
-                bmi.s   loc_5EF90
-                beq.s   loc_5EF8C
+                bmi.s   EndResults_SelectStandaloneOrLockOn
+                beq.s   EndResults_AddCharacterProgramStride
                 addi.w  #$30,d1
 
-loc_5EF8C:
+EndResults_AddCharacterProgramStride:
                 addi.w  #$30,d1
 
-loc_5EF90:
+EndResults_SelectStandaloneOrLockOn:
                 tst.w   (SK_alone_flag).w
-                bne.s   loc_5EF9A
+                bne.s   EndingResults_SelectEmeraldOutcomeStride
                 addi.w  #$18,d1
 
-loc_5EF9A:
+EndingResults_SelectEmeraldOutcomeStride:
                 tst.b   (_unkFA88).w
-                bmi.s   loc_5EFAA
-                beq.s   loc_5EFA6
+                bmi.s   EndingResults_StartSelectedInitializer
+                beq.s   EndingResults_AddOutcomeRecordStride
                 addi.w  #8,d1
 
-loc_5EFA6:
+EndingResults_AddOutcomeRecordStride:
                 addi.w  #8,d1
 
-loc_5EFAA:
-                lea     off_5EFB6(pc,d1.w),a1
+EndingResults_StartSelectedInitializer:
+                lea     EndResults_InitAndAfterFadePrograms(pc,d1.w),a1
                 movea.l (a1)+,a2
                 move.l  (a1)+,$34(a0)
                 jmp     (a2)
 ; ---------------------------------------------------------------------------
-off_5EFB6:
-                dc.l    loc_5F046, loc_5F0E2
-                dc.l    loc_5F046, loc_5F106
-                dc.l    loc_5F046, loc_5F106
-                dc.l    loc_5F05C, loc_5F0E2
-                dc.l    loc_5F05C, loc_5F106
-                dc.l    loc_5F05C, loc_5F116
-                dc.l    loc_5F05C, loc_5F0E2
-                dc.l    loc_5F05C, loc_5F106
-                dc.l    loc_5F05C, loc_5F116
-                dc.l    loc_5F05C, loc_5F0E2
-                dc.l    loc_5F05C, loc_5F106
-                dc.l    loc_5F05C, loc_5F116
-                dc.l    loc_5F090, loc_5F126
-                dc.l    loc_5F072, loc_5F0DA
-                dc.l    loc_5F072, loc_5F0DA
-                dc.l    loc_5F0C4, loc_5F126
-                dc.l    loc_5F0A6, loc_5F0DA
-                dc.l    loc_5F0A6, loc_5F116
+EndResults_InitAndAfterFadePrograms:
+                dc.l    EndResults_SpawnSKBannerAtPlacement2, EndResults_StartEggmanEmeraldEyecatch
+                dc.l    EndResults_SpawnSKBannerAtPlacement2, EndingResults_StartEggRoboEyecatch
+                dc.l    EndResults_SpawnSKBannerAtPlacement2, EndingResults_StartEggRoboEyecatch
+                dc.l    EndResults_SpawnS3KBannerAtPlacement2, EndResults_StartEggmanEmeraldEyecatch
+                dc.l    EndResults_SpawnS3KBannerAtPlacement2, EndingResults_StartEggRoboEyecatch
+                dc.l    EndResults_SpawnS3KBannerAtPlacement2, EndResults_StartDelayedS3Graphics
+                dc.l    EndResults_SpawnS3KBannerAtPlacement2, EndResults_StartEggmanEmeraldEyecatch
+                dc.l    EndResults_SpawnS3KBannerAtPlacement2, EndingResults_StartEggRoboEyecatch
+                dc.l    EndResults_SpawnS3KBannerAtPlacement2, EndResults_StartDelayedS3Graphics
+                dc.l    EndResults_SpawnS3KBannerAtPlacement2, EndResults_StartEggmanEmeraldEyecatch
+                dc.l    EndResults_SpawnS3KBannerAtPlacement2, EndingResults_StartEggRoboEyecatch
+                dc.l    EndResults_SpawnS3KBannerAtPlacement2, EndResults_StartDelayedS3Graphics
+                dc.l    EndResults_SpawnSKBannerAtPlacement3, EndResults_StartMechaEmeraldEyecatch
+                dc.l    EndResults_SpawnKnuxPoseForSK, EndingResults_ReturnToSegaScreen
+                dc.l    EndResults_SpawnKnuxPoseForSK, EndingResults_ReturnToSegaScreen
+                dc.l    EndResults_SpawnS3KBannerAtPlacement3, EndResults_StartMechaEmeraldEyecatch
+                dc.l    EndResults_SpawnKnuxPoseForS3K, EndingResults_ReturnToSegaScreen
+                dc.l    EndResults_SpawnKnuxPoseForS3K, EndResults_StartDelayedS3Graphics
 ; ---------------------------------------------------------------------------
 
-loc_5F046:
+EndResults_SpawnSKBannerAtPlacement2:
                 jsr     (AllocateObject).l
-                bne.s   locret_5F05A
-                move.l  #loc_5F1AC,(a1)
+                bne.s   EndResults_SKPlacement2Return
+                move.l  #EndBanner_InitSKPlacementAndPalette,(a1)
                 move.b  #4,subtype(a1)
 
-locret_5F05A:
+EndResults_SKPlacement2Return:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5F05C:
+EndResults_SpawnS3KBannerAtPlacement2:
                 jsr     (AllocateObject).l
-                bne.s   locret_5F070
-                move.l  #loc_5F20A,(a1)
+                bne.s   EndResults_S3KPlacement2Return
+                move.l  #EndBanner_InitS3KPlacementAndPalette,(a1)
                 move.b  #4,subtype(a1)
 
-locret_5F070:
+EndResults_S3KPlacement2Return:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5F072:
+EndResults_SpawnKnuxPoseForSK:
                 jsr     (AllocateObject).l
-                bne.s   loc_5F080
-                move.l  #loc_5F480,(a1)
+                bne.s   EndResults_TrySKBannerAfterKnuxPose
+                move.l  #EndingKnucklesSoloPose_Initialize,(a1)
 
-loc_5F080:
+EndResults_TrySKBannerAfterKnuxPose:
                 jsr     (AllocateObject).l
-                bne.s   locret_5F08E
-                move.l  #loc_5F1AC,(a1)
+                bne.s   EndResults_KnuxSKSpawnReturn
+                move.l  #EndBanner_InitSKPlacementAndPalette,(a1)
 
-locret_5F08E:
+EndResults_KnuxSKSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5F090:
+EndResults_SpawnSKBannerAtPlacement3:
                 jsr     (AllocateObject).l
-                bne.s   locret_5F0A4
-                move.l  #loc_5F1AC,(a1)
+                bne.s   EndResults_SKPlacement3Return
+                move.l  #EndBanner_InitSKPlacementAndPalette,(a1)
                 move.b  #8,subtype(a1)
 
-locret_5F0A4:
+EndResults_SKPlacement3Return:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5F0A6:
+EndResults_SpawnKnuxPoseForS3K:
                 jsr     (AllocateObject).l
-                bne.s   loc_5F0B4
-                move.l  #loc_5F480,(a1)
+                bne.s   EndResults_TryS3KBannerAfterKnuxPose
+                move.l  #EndingKnucklesSoloPose_Initialize,(a1)
 
-loc_5F0B4:
+EndResults_TryS3KBannerAfterKnuxPose:
                 jsr     (AllocateObject).l
-                bne.s   locret_5F0C2
-                move.l  #loc_5F20A,(a1)
+                bne.s   EndResults_KnuxS3KSpawnReturn
+                move.l  #EndBanner_InitS3KPlacementAndPalette,(a1)
 
-locret_5F0C2:
+EndResults_KnuxS3KSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5F0C4:
+EndResults_SpawnS3KBannerAtPlacement3:
                 jsr     (AllocateObject).l
-                bne.s   locret_5F0D8
-                move.l  #loc_5F20A,(a1)
+                bne.s   EndResults_S3KPlacement3Return
+                move.l  #EndBanner_InitS3KPlacementAndPalette,(a1)
                 move.b  #8,subtype(a1)
 
-locret_5F0D8:
+EndResults_S3KPlacement3Return:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5F0DA:
+EndingResults_ReturnToSegaScreen:
                 move.b  #GameMode_SegaScreen,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5F0E2:
+EndResults_StartEggmanEmeraldEyecatch:
                 jsr     (AllocateObject).l
-                bne.s   loc_5F0F0
-                move.l  #loc_5F566,(a1)
+                bne.s   EndResults_TryEmeraldAtPlacement2
+                move.l  #EndingEggmanEyecatch_Initialize,(a1)
 
-loc_5F0F0:
+EndResults_TryEmeraldAtPlacement2:
                 jsr     (AllocateObject).l
-                bne.s   locret_5F104
-                move.l  #loc_5F8C6,(a1)
+                bne.s   EndResults_EggmanEmeraldSpawnReturn
+                move.l  #EndResultEmerald_InitPlacementAndArt,(a1)
                 move.b  #4,subtype(a1)
 
-locret_5F104:
+EndResults_EggmanEmeraldSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5F106:
+EndingResults_StartEggRoboEyecatch:
                 jsr     (AllocateObject).l
-                bne.s   locret_5F114
-                move.l  #loc_5F5C2,(a1)
+                bne.s   EndingResults_ReturnAfterEggRoboAttempt
+                move.l  #EndVillain_DispatchEggRoboAndDraw,(a1)
 
-locret_5F114:
+EndingResults_ReturnAfterEggRoboAttempt:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5F116:
+EndResults_StartDelayedS3Graphics:
                 jsr     (AllocateObject).l
-                bne.s   locret_5F124
-                move.l  #loc_5FD5A,(a1)
+                bne.s   EndResults_DelayedGraphicsSpawnReturn
+                move.l  #EndingDelayedS3ResultBanner_Initialize,(a1)
 
-locret_5F124:
+EndResults_DelayedGraphicsSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5F126:
+EndResults_StartMechaEmeraldEyecatch:
                 jsr     (AllocateObject).l
-                bne.s   loc_5F134
-                move.l  #loc_5F71E,(a1)
+                bne.s   EndResults_TryEmeraldAtDefaultPlacement
+                move.l  #EndMecha_DispatchLoadArtAndDraw,(a1)
 
-loc_5F134:
+EndResults_TryEmeraldAtDefaultPlacement:
                 jsr     (AllocateObject).l
-                bne.s   locret_5F142
-                move.l  #loc_5F8C6,(a1)
+                bne.s   EndResults_MechaEmeraldSpawnReturn
+                move.l  #EndResultEmerald_InitPlacementAndArt,(a1)
 
-locret_5F142:
+EndResults_MechaEmeraldSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5F144:
+EndResults_TickDelayAndSignalExit:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_5F15A
+                bmi.s   EndingResults_AttemptFadeAndInstallWait
                 cmpi.w  #$40,$2E(a0)
-                bne.s   locret_5F158
+                bne.s   EndResults_ExitDelayReturn
                 bset    #2,(_unkFAB8).w
 
-locret_5F158:
+EndResults_ExitDelayReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5F15A:
-                move.l  #loc_5F18A,(a0)
+EndingResults_AttemptFadeAndInstallWait:
+                move.l  #EndResults_WaitFadeAndHandOff,(a0)
                 st      (Palette_cycle_counters+$00).w
                 jsr     (AllocateObject).l
-                bne.s   locret_5F158
+                bne.s   EndResults_ExitDelayReturn
                 move.w  a1,$44(a0)
                 move.l  #Obj_FadeSelectedToBlack,(a1)
                 move.w  #5,$3A(a1)
@@ -203,15 +203,15 @@ loc_5F15A:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5F18A:
+EndResults_WaitFadeAndHandOff:
                 movea.w $44(a0),a1
                 btst    #7,status(a1)
-                beq.w   locret_5FF1A
-                move.l  #locret_5F1AA,(a0)
+                beq.w   EndingScene_SharedReturn
+                move.l  #EndingResults_NoOpAfterProgramHandoff,(a0)
                 bset    #3,(_unkFAB8).w
                 movea.l $34(a0),a1
                 jmp     (a1)
 ; ---------------------------------------------------------------------------
 
-locret_5F1AA:
+EndingResults_NoOpAfterProgramHandoff:
                 rts

@@ -117932,12 +117932,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 54
       },
-      "declarations_sha256": "59ee73f1a83c8045c028bb46166efe7a0b8f51010d7b4a054889fe28f2d620dd",
+      "declarations_sha256": "f1b04ec0a2abfe9cba6319d6edc1a5cab1032a245a3823ba9ed29b9e9ced3ecb",
       "labels": {
         "Map_ANDKnuckles_": 0,
-        "word_6093E": 6,
-        "word_6094C": 20,
-        "word_60966": 46
+        "EndingAndKnuckles_NarrowSubtitlePieces": 6,
+        "EndingAndKnuckles_WideSubtitlePieces": 20,
+        "EndSubtitle_RegionMarkMap": 46
       },
       "external_symbols": [],
       "blocks": [
@@ -117945,21 +117945,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6093E",
+          "target": "EndingAndKnuckles_NarrowSubtitlePieces",
           "base": "Map_ANDKnuckles_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6094C",
+          "target": "EndingAndKnuckles_WideSubtitlePieces",
           "base": "Map_ANDKnuckles_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60966",
+          "target": "EndSubtitle_RegionMarkMap",
           "base": "Map_ANDKnuckles_"
         },
         {
@@ -117988,16 +117988,16 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 166
       },
-      "declarations_sha256": "cd63d262992790dc9f54484c2d009ff10e1308874a91ad86a4125e522d7f93a6",
+      "declarations_sha256": "313a0d25f8a83b3f30682d11adcf355bd87a0b2be63b59f2fb6ada75e4d2f953",
       "labels": {
         "Map_EndingEyecatchEggRobo_": 0,
-        "word_6097C": 14,
-        "word_609AE": 64,
-        "word_609D4": 102,
-        "word_609DC": 110,
-        "word_609E4": 118,
-        "word_60A0A": 156,
-        "word_60A12": 164
+        "EndEggRobo_PortraitMap1": 14,
+        "EndEggRobo_PortraitMap2": 64,
+        "EndEggRobo_AttachedEffectMap1": 102,
+        "EndEggRobo_AttachedEffectMap2": 110,
+        "EndEggRobo_RetainedWideMap": 118,
+        "EndEggRobo_RetainedTileMap": 156,
+        "EndEggRobo_BlankEffectMap": 164
       },
       "external_symbols": [],
       "blocks": [
@@ -118005,49 +118005,49 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6097C",
+          "target": "EndEggRobo_PortraitMap1",
           "base": "Map_EndingEyecatchEggRobo_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_609AE",
+          "target": "EndEggRobo_PortraitMap2",
           "base": "Map_EndingEyecatchEggRobo_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_609D4",
+          "target": "EndEggRobo_AttachedEffectMap1",
           "base": "Map_EndingEyecatchEggRobo_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_609DC",
+          "target": "EndEggRobo_AttachedEffectMap2",
           "base": "Map_EndingEyecatchEggRobo_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_609E4",
+          "target": "EndEggRobo_RetainedWideMap",
           "base": "Map_EndingEyecatchEggRobo_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60A0A",
+          "target": "EndEggRobo_RetainedTileMap",
           "base": "Map_EndingEyecatchEggRobo_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60A12",
+          "target": "EndEggRobo_BlankEffectMap",
           "base": "Map_EndingEyecatchEggRobo_"
         },
         {
@@ -118096,11 +118096,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 56
       },
-      "declarations_sha256": "3d07f2bf05a7771b55becdba4fc75b0b9081e5b99e358e92c23e87f4b4f33e68",
+      "declarations_sha256": "9f07a9b781e9edd4de6a73a5579646073a367b575548af10e5ee2cad8cbd3ec7",
       "labels": {
         "Map_EndingEyecatchEggman_": 0,
-        "word_60A18": 4,
-        "word_60A32": 30
+        "EndEggman_PortraitMap1": 4,
+        "EndEggman_PortraitMap2": 30
       },
       "external_symbols": [],
       "blocks": [
@@ -118108,14 +118108,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60A18",
+          "target": "EndEggman_PortraitMap1",
           "base": "Map_EndingEyecatchEggman_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60A32",
+          "target": "EndEggman_PortraitMap2",
           "base": "Map_EndingEyecatchEggman_"
         },
         {
@@ -118139,14 +118139,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 80
       },
-      "declarations_sha256": "59914c4f4b5649a09d331977abbc3d1506e9ed7a565591caed18224e4135ed47",
+      "declarations_sha256": "ced15f7b79238438eaac69f4faa01da88a48a5f34197771f441a92259d32a2e6",
       "labels": {
         "Map_EndingAnimals_": 0,
-        "word_607A0": 10,
-        "word_607B4": 30,
-        "word_607CE": 56,
-        "word_607D6": 64,
-        "word_607DE": 72
+        "EndAnimal_LeapAscendMap": 10,
+        "EndAnimal_LeapDescendMap": 30,
+        "EndAnimal_FlightMap1": 56,
+        "EndAnimal_FlightMap2": 64,
+        "EndAnimal_FlightMap3": 72
       },
       "external_symbols": [],
       "blocks": [
@@ -118154,35 +118154,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_607A0",
+          "target": "EndAnimal_LeapAscendMap",
           "base": "Map_EndingAnimals_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_607B4",
+          "target": "EndAnimal_LeapDescendMap",
           "base": "Map_EndingAnimals_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_607CE",
+          "target": "EndAnimal_FlightMap1",
           "base": "Map_EndingAnimals_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_607D6",
+          "target": "EndAnimal_FlightMap2",
           "base": "Map_EndingAnimals_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_607DE",
+          "target": "EndAnimal_FlightMap3",
           "base": "Map_EndingAnimals_"
         },
         {
@@ -118221,36 +118221,36 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 264
       },
-      "declarations_sha256": "365988632e571bf9c4031ed16adddb3934e922949ccb48bf8eacc08a51db752e",
+      "declarations_sha256": "a84090a8bd62b0e23332c65835ef0be6930b8807274786adf9268dbbe88b63f8",
       "labels": {
         "Map_IslandLiftGfx_": 0,
-        "word_606C4": 54,
-        "word_606CC": 62,
-        "word_606D4": 70,
-        "word_606DC": 78,
-        "word_606E4": 86,
-        "word_606EC": 94,
-        "word_606F4": 102,
-        "word_606FC": 110,
-        "word_60704": 118,
-        "word_6070C": 126,
-        "word_60714": 134,
-        "word_6071C": 142,
-        "word_60724": 150,
-        "word_6072C": 158,
-        "word_60734": 166,
-        "word_6073C": 174,
-        "word_60744": 182,
-        "word_6074C": 190,
-        "word_60754": 198,
-        "word_6075C": 206,
-        "word_60764": 214,
-        "word_6076C": 222,
-        "word_60774": 230,
-        "word_6077C": 238,
-        "word_60784": 246,
-        "word_6078C": 254,
-        "word_60794": 262
+        "EndLift_InitialMap1": 54,
+        "EndLift_InitialMap2": 62,
+        "EndLift_InitialFlippedMap1": 70,
+        "EndLift_InitialFlippedMap2": 78,
+        "EndLift_SecondSequenceMap1": 86,
+        "EndLift_SecondSequenceMap2": 94,
+        "EndLift_SecondSequenceMap3": 102,
+        "EndLift_ThirdSequenceMap1": 110,
+        "EndLift_ThirdSequenceMap2": 118,
+        "EndLift_ThirdSequenceMap3": 126,
+        "EndLift_HorizontalStripMap1": 134,
+        "EndLift_HorizontalStripMap2": 142,
+        "EndLift_HorizontalStripMap3": 150,
+        "EndLift_HorizontalStripMap4": 158,
+        "EndLift_TallStripMap1": 166,
+        "EndLift_TallStripMap2": 174,
+        "EndLift_TallStripMap3": 182,
+        "EndLift_TallStripMap4": 190,
+        "EndLift_ShortStripMap1": 198,
+        "EndLift_ShortStripMap2": 206,
+        "EndLift_ShortStripMap3": 214,
+        "EndLift_ShortStripMap4": 222,
+        "EndLift_SingleTileMap1": 230,
+        "EndLift_SingleTileMap2": 238,
+        "EndLift_SingleTileMap3": 246,
+        "EndLift_SingleTileMap4": 254,
+        "EndingIslandLift_EmptySequenceFrame": 262
       },
       "external_symbols": [],
       "blocks": [
@@ -118258,189 +118258,189 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_606C4",
+          "target": "EndLift_InitialMap1",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_606CC",
+          "target": "EndLift_InitialMap2",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_606D4",
+          "target": "EndLift_InitialFlippedMap1",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_606DC",
+          "target": "EndLift_InitialFlippedMap2",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_606E4",
+          "target": "EndLift_SecondSequenceMap1",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_606EC",
+          "target": "EndLift_SecondSequenceMap2",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_606F4",
+          "target": "EndLift_SecondSequenceMap3",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_606FC",
+          "target": "EndLift_ThirdSequenceMap1",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60704",
+          "target": "EndLift_ThirdSequenceMap2",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6070C",
+          "target": "EndLift_ThirdSequenceMap3",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60714",
+          "target": "EndLift_HorizontalStripMap1",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6071C",
+          "target": "EndLift_HorizontalStripMap2",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60724",
+          "target": "EndLift_HorizontalStripMap3",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6072C",
+          "target": "EndLift_HorizontalStripMap4",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60734",
+          "target": "EndLift_TallStripMap1",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6073C",
+          "target": "EndLift_TallStripMap2",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60744",
+          "target": "EndLift_TallStripMap3",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6074C",
+          "target": "EndLift_TallStripMap4",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60754",
+          "target": "EndLift_ShortStripMap1",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6075C",
+          "target": "EndLift_ShortStripMap2",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60764",
+          "target": "EndLift_ShortStripMap3",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6076C",
+          "target": "EndLift_ShortStripMap4",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60774",
+          "target": "EndLift_SingleTileMap1",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6077C",
+          "target": "EndLift_SingleTileMap2",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60784",
+          "target": "EndLift_SingleTileMap3",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6078C",
+          "target": "EndLift_SingleTileMap4",
           "base": "Map_IslandLiftGfx_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60794",
+          "target": "EndingIslandLift_EmptySequenceFrame",
           "base": "Map_IslandLiftGfx_"
         },
         {
@@ -118589,12 +118589,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 78
       },
-      "declarations_sha256": "8101086cc5419eb6f5d46aa8549622b76a8dcff3cd6684e7c4221f1715c8dcca",
+      "declarations_sha256": "b071cf22110de850499e79f14bf135c7b08056208b212bcdb1db31738d1e2c6c",
       "labels": {
         "Map_KnuxEndPose_": 0,
-        "word_60A52": 6,
-        "word_60A5A": 14,
-        "word_60A68": 28
+        "EndKnux_InitialPoseMap": 6,
+        "EndKnux_IntermediatePoseMap": 14,
+        "EndKnux_FinalPoseMap": 28
       },
       "external_symbols": [],
       "blocks": [
@@ -118602,21 +118602,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60A52",
+          "target": "EndKnux_InitialPoseMap",
           "base": "Map_KnuxEndPose_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60A5A",
+          "target": "EndKnux_IntermediatePoseMap",
           "base": "Map_KnuxEndPose_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60A68",
+          "target": "EndKnux_FinalPoseMap",
           "base": "Map_KnuxEndPose_"
         },
         {
@@ -118645,10 +118645,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 28
       },
-      "declarations_sha256": "9206376f6c633301ecd2f71018639438a15f2637c33ddaafbeba3e009919e285",
+      "declarations_sha256": "45fc4b7c89fc7eb830958f1e78d03d877b1b823cf0fe923f609031e5fe304dd2",
       "labels": {
         "Map_KnuxEndingIslandMask_": 0,
-        "word_59272": 2
+        "EndKnux_IslandMaskMap": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -118656,7 +118656,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_59272",
+          "target": "EndKnux_IslandMaskMap",
           "base": "Map_KnuxEndingIslandMask_"
         },
         {
@@ -118675,26 +118675,26 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 416
       },
-      "declarations_sha256": "09943ec436b623ad063b20f1144c5abaa570c1610df12b504a1d50b41754b1ec",
+      "declarations_sha256": "93d5a8e0471bc728eb29d8cc0563348bb747b55444f12513bb5e5fc76f95f5b3",
       "labels": {
         "Map_EndingGraphics_": 0,
-        "Frame_2417AC": 34,
-        "Frame_24180E": 132,
-        "Frame_241822": 152,
-        "Frame_241836": 172,
-        "Frame_241850": 198,
-        "Frame_241864": 218,
-        "Frame_24186C": 226,
-        "Frame_24187A": 240,
-        "Frame_241888": 254,
-        "Frame_241890": 262,
-        "Frame_24189E": 276,
-        "Frame_2418AC": 290,
-        "Frame_2418BA": 304,
-        "Frame_2418DA": 336,
-        "Frame_2418FA": 368,
-        "Frame_241908": 382,
-        "Frame_241916": 396
+        "S3EndingMapping_BouncingLogoPieces": 34,
+        "S3End_LogoCharacterIdleMap1": 132,
+        "S3End_LogoCharacterIdleMap2": 152,
+        "S3End_LogoCharacterReadyMap": 172,
+        "S3End_LogoCharacterHeldMap": 198,
+        "S3End_LogoAttachmentMap1": 218,
+        "S3End_LogoAttachmentMap2": 226,
+        "S3End_LogoAttachmentMap3": 240,
+        "S3End_LogoAttachmentMap4": 254,
+        "S3End_LogoAttachmentMap5": 262,
+        "S3End_LogoSideActorMap1": 276,
+        "S3End_LogoSideActorMap2": 290,
+        "S3End_TryAgainLoopMap1": 304,
+        "S3End_TryAgainLoopMap2": 336,
+        "S3End_TryAgainActionMap1": 368,
+        "S3End_TryAgainActionMap2": 382,
+        "S3End_TryAgainActionMap3": 396
       },
       "external_symbols": [],
       "blocks": [
@@ -118702,119 +118702,119 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2417AC",
+          "target": "S3EndingMapping_BouncingLogoPieces",
           "base": "Map_EndingGraphics_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_24180E",
+          "target": "S3End_LogoCharacterIdleMap1",
           "base": "Map_EndingGraphics_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_241822",
+          "target": "S3End_LogoCharacterIdleMap2",
           "base": "Map_EndingGraphics_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_241836",
+          "target": "S3End_LogoCharacterReadyMap",
           "base": "Map_EndingGraphics_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_241850",
+          "target": "S3End_LogoCharacterHeldMap",
           "base": "Map_EndingGraphics_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_241864",
+          "target": "S3End_LogoAttachmentMap1",
           "base": "Map_EndingGraphics_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_24186C",
+          "target": "S3End_LogoAttachmentMap2",
           "base": "Map_EndingGraphics_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_24187A",
+          "target": "S3End_LogoAttachmentMap3",
           "base": "Map_EndingGraphics_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_241888",
+          "target": "S3End_LogoAttachmentMap4",
           "base": "Map_EndingGraphics_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_241890",
+          "target": "S3End_LogoAttachmentMap5",
           "base": "Map_EndingGraphics_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_24189E",
+          "target": "S3End_LogoSideActorMap1",
           "base": "Map_EndingGraphics_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2418AC",
+          "target": "S3End_LogoSideActorMap2",
           "base": "Map_EndingGraphics_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2418BA",
+          "target": "S3End_TryAgainLoopMap1",
           "base": "Map_EndingGraphics_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2418DA",
+          "target": "S3End_TryAgainLoopMap2",
           "base": "Map_EndingGraphics_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2418FA",
+          "target": "S3End_TryAgainActionMap1",
           "base": "Map_EndingGraphics_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_241908",
+          "target": "S3End_TryAgainActionMap2",
           "base": "Map_EndingGraphics_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_241916",
+          "target": "S3End_TryAgainActionMap3",
           "base": "Map_EndingGraphics_"
         },
         {
@@ -118913,10 +118913,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 28
       },
-      "declarations_sha256": "f9d9ab291ac2f3344b884b2a51d6a78ba5aca7350ecd2d7697b2a8a3ee6d4813",
+      "declarations_sha256": "af311dfda94db473fd025f5b7cd41266da81feffbce5e398e5c77ff966628ae5",
       "labels": {
         "Map_S3PoseBanner_": 0,
-        "word_60674": 2
+        "S3End_BannerMap": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -118924,7 +118924,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60674",
+          "target": "S3End_BannerMap",
           "base": "Map_S3PoseBanner_"
         },
         {
@@ -118943,10 +118943,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 46
       },
-      "declarations_sha256": "89e1ecda53eba62cb66b21c21efbbcc761ea2dc92cb9158150290a80f234ea8e",
+      "declarations_sha256": "b606ca0aa0890c6bc74658928a77bbf4d7cecd6233af1326ebe3e7cc3ffb0113",
       "labels": {
         "Map_SKPoseBanner_": 0,
-        "word_60646": 2
+        "SKEnd_BannerMap": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -118954,7 +118954,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60646",
+          "target": "SKEnd_BannerMap",
           "base": "Map_SKPoseBanner_"
         },
         {
@@ -118973,22 +118973,22 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 280
       },
-      "declarations_sha256": "f8e82427aec0fd2cef53fd781bef5eed91626715ff779c8afbcc501fa61f1975",
+      "declarations_sha256": "24656cec36324b81788174eb438a82a3acb01dbcd26fba9f5166cf69d1cee25d",
       "labels": {
         "Map_SonicPlane_": 0,
-        "word_60388": 26,
-        "word_6038A": 28,
-        "word_603BC": 78,
-        "word_603C4": 86,
-        "word_603CC": 94,
-        "word_603D4": 102,
-        "word_603DC": 110,
-        "word_603F0": 130,
-        "word_60404": 150,
-        "word_60436": 200,
-        "word_6045C": 238,
-        "word_60470": 258,
-        "word_6047E": 272
+        "EndingPlaneMapping_EmptyActorFrame": 26,
+        "EndPlane_MainBodyMap": 28,
+        "EndPlane_NarrowPanelMap1": 78,
+        "EndPlane_NarrowPanelMap2": 86,
+        "EndPlane_NarrowPanelMap3": 94,
+        "EndPlane_NarrowPanelMap4": 102,
+        "EndPlane_WideThreePieceMap1": 110,
+        "EndPlane_WideThreePieceMap2": 130,
+        "EndPlane_EightPieceStripMap": 150,
+        "EndPlane_SixPieceStripMap": 200,
+        "EndPlane_MirroredStripMap": 238,
+        "EndingPlaneMapping_MirroredTwoPieceStrip": 258,
+        "EndPlane_SonicModeAttachmentMap": 272
       },
       "external_symbols": [],
       "blocks": [
@@ -118996,91 +118996,91 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60388",
+          "target": "EndingPlaneMapping_EmptyActorFrame",
           "base": "Map_SonicPlane_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6038A",
+          "target": "EndPlane_MainBodyMap",
           "base": "Map_SonicPlane_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_603BC",
+          "target": "EndPlane_NarrowPanelMap1",
           "base": "Map_SonicPlane_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_603C4",
+          "target": "EndPlane_NarrowPanelMap2",
           "base": "Map_SonicPlane_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_603CC",
+          "target": "EndPlane_NarrowPanelMap3",
           "base": "Map_SonicPlane_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_603D4",
+          "target": "EndPlane_NarrowPanelMap4",
           "base": "Map_SonicPlane_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_603DC",
+          "target": "EndPlane_WideThreePieceMap1",
           "base": "Map_SonicPlane_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_603F0",
+          "target": "EndPlane_WideThreePieceMap2",
           "base": "Map_SonicPlane_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60404",
+          "target": "EndPlane_EightPieceStripMap",
           "base": "Map_SonicPlane_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60436",
+          "target": "EndPlane_SixPieceStripMap",
           "base": "Map_SonicPlane_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6045C",
+          "target": "EndPlane_MirroredStripMap",
           "base": "Map_SonicPlane_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60470",
+          "target": "EndingPlaneMapping_MirroredTwoPieceStrip",
           "base": "Map_SonicPlane_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6047E",
+          "target": "EndPlane_SonicModeAttachmentMap",
           "base": "Map_SonicPlane_"
         },
         {
@@ -119159,34 +119159,34 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 446
       },
-      "declarations_sha256": "8063547300cafc5254fd1b835cc4802b1b93579bad44db4e10d2e91b0f6cc49d",
+      "declarations_sha256": "a4e0abb8d9decbda661f19e6849709daeab8afbeb282d9b6272953692c95ee4e",
       "labels": {
         "Map_SonicPlaneEnding_": 0,
-        "word_604BC": 54,
-        "word_604BE": 56,
-        "word_604D2": 76,
-        "word_604E6": 96,
-        "word_60500": 122,
-        "word_60508": 130,
-        "word_60510": 138,
-        "word_6051E": 152,
-        "word_6055C": 214,
-        "word_6059A": 276,
-        "word_605A8": 290,
-        "word_605B0": 298,
-        "word_605B8": 306,
-        "word_605C0": 314,
-        "word_605C8": 322,
-        "word_605D6": 336,
-        "word_605DE": 344,
-        "word_605EC": 358,
-        "word_605F4": 366,
-        "word_60602": 380,
-        "word_6061C": 406,
-        "word_60624": 414,
-        "word_6062C": 422,
-        "word_60634": 430,
-        "word_6063C": 438
+        "EndingPlaneExtra_EmptyActorFrame": 54,
+        "EndPlaneExtra_ThreePiecePlaneMap1": 56,
+        "EndPlaneExtra_ThreePiecePlaneMap2": 76,
+        "EndPlaneExtra_FourPiecePlaneMap": 96,
+        "EndPlaneExtra_NarrowBlinkMap": 122,
+        "EndingPlaneExtra_SquareAuxiliaryPiece": 130,
+        "EndPlaneExtra_SmallDepartingPlaneMap": 138,
+        "EndPlaneExtra_ExtendedStripMap": 152,
+        "EndPlaneExtra_LongStripMapFrames8And9": 214,
+        "EndPlaneExtra_TailsAttachMap10And11": 276,
+        "EndPlaneExtra_SonicPrimaryAttachmentMap": 290,
+        "EndPlaneExtra_TailsPrimaryAttachmentMap": 298,
+        "EndPlaneExtra_SonicSecondaryAttachMap": 306,
+        "EndPlaneExtra_TailsSecondaryAttachMap": 314,
+        "EndPlaneExtra_TwoPieceAttachmentMap": 322,
+        "EndPlaneExtra_Pal2SingleTileMap": 336,
+        "EndPlaneExtra_KnuxPlaneAttachmentMap": 344,
+        "EndPlaneExtra_KnuxPrimaryAttachmentMap": 358,
+        "EndPlaneExtra_KnuxMissingOutcomeMap": 366,
+        "EndPlaneExtra_KnuxOtherOutcomeMap": 380,
+        "EndPlaneExtra_PoseOffsetBlinkMap1": 406,
+        "EndPlaneExtra_PoseOffsetBlinkMap2": 414,
+        "EndPlaneExtra_ParentFlagBlinkMap1": 422,
+        "EndPlaneExtra_ParentFlagBlinkMap2": 430,
+        "EndingPlaneExtra_FinalSmallAircraftPiece": 438
       },
       "external_symbols": [],
       "blocks": [
@@ -119194,189 +119194,189 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_604BC",
+          "target": "EndingPlaneExtra_EmptyActorFrame",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_604BE",
+          "target": "EndPlaneExtra_ThreePiecePlaneMap1",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_604D2",
+          "target": "EndPlaneExtra_ThreePiecePlaneMap2",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_604E6",
+          "target": "EndPlaneExtra_FourPiecePlaneMap",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60500",
+          "target": "EndPlaneExtra_NarrowBlinkMap",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60508",
+          "target": "EndingPlaneExtra_SquareAuxiliaryPiece",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60510",
+          "target": "EndPlaneExtra_SmallDepartingPlaneMap",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6051E",
+          "target": "EndPlaneExtra_ExtendedStripMap",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6055C",
+          "target": "EndPlaneExtra_LongStripMapFrames8And9",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6055C",
+          "target": "EndPlaneExtra_LongStripMapFrames8And9",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6059A",
+          "target": "EndPlaneExtra_TailsAttachMap10And11",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6059A",
+          "target": "EndPlaneExtra_TailsAttachMap10And11",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_605A8",
+          "target": "EndPlaneExtra_SonicPrimaryAttachmentMap",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_605B0",
+          "target": "EndPlaneExtra_TailsPrimaryAttachmentMap",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_605B8",
+          "target": "EndPlaneExtra_SonicSecondaryAttachMap",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_605C0",
+          "target": "EndPlaneExtra_TailsSecondaryAttachMap",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_605C8",
+          "target": "EndPlaneExtra_TwoPieceAttachmentMap",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_605D6",
+          "target": "EndPlaneExtra_Pal2SingleTileMap",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_605DE",
+          "target": "EndPlaneExtra_KnuxPlaneAttachmentMap",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_605EC",
+          "target": "EndPlaneExtra_KnuxPrimaryAttachmentMap",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_605F4",
+          "target": "EndPlaneExtra_KnuxMissingOutcomeMap",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60602",
+          "target": "EndPlaneExtra_KnuxOtherOutcomeMap",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6061C",
+          "target": "EndPlaneExtra_PoseOffsetBlinkMap1",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60624",
+          "target": "EndPlaneExtra_PoseOffsetBlinkMap2",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6062C",
+          "target": "EndPlaneExtra_ParentFlagBlinkMap1",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60634",
+          "target": "EndPlaneExtra_ParentFlagBlinkMap2",
           "base": "Map_SonicPlaneEnding_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6063C",
+          "target": "EndingPlaneExtra_FinalSmallAircraftPiece",
           "base": "Map_SonicPlaneEnding_"
         },
         {
@@ -119515,14 +119515,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 338
       },
-      "declarations_sha256": "b7e0d15e5a700d061d3b1674a6e48df38d18cd8431f5dfa33884c80ae4f77a7a",
+      "declarations_sha256": "ece2973fbfd1a575caf36c2df51a181841dabce2b7d8aadaf3770fa48db7ea4f",
       "labels": {
         "Map_SonicTailsEndPoses_": 0,
-        "word_607F0": 10,
-        "word_60816": 48,
-        "word_60866": 128,
-        "word_608D4": 238,
-        "word_608EE": 264
+        "SKEndPose_SonicInitialMap": 10,
+        "SKEndPose_SonicHeldMap": 48,
+        "SKEndPose_SuperSonicPresentationMap": 128,
+        "SKEndPose_TailsInitialMap": 238,
+        "SKEndPose_TailsHeldMap": 264
       },
       "external_symbols": [],
       "blocks": [
@@ -119530,35 +119530,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_607F0",
+          "target": "SKEndPose_SonicInitialMap",
           "base": "Map_SonicTailsEndPoses_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60816",
+          "target": "SKEndPose_SonicHeldMap",
           "base": "Map_SonicTailsEndPoses_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60866",
+          "target": "SKEndPose_SuperSonicPresentationMap",
           "base": "Map_SonicTailsEndPoses_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_608D4",
+          "target": "SKEndPose_TailsInitialMap",
           "base": "Map_SonicTailsEndPoses_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_608EE",
+          "target": "SKEndPose_TailsHeldMap",
           "base": "Map_SonicTailsEndPoses_"
         },
         {
@@ -119597,14 +119597,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 254
       },
-      "declarations_sha256": "d28534fdb9196600a873b5513b16179f378d6d7ca707afa1822c48a7cb6a7068",
+      "declarations_sha256": "c4361555b7cfdabee616c1c1dbf2207fc368f72e2424efdeadf38068fb8a4e3c",
       "labels": {
         "Map_SonicTailsEndPoses_": 0,
-        "word_52186": 10,
-        "word_521AC": 48,
-        "word_521DE": 98,
-        "word_521F8": 124,
-        "word_52242": 198
+        "S3LBZEndPose_FirstInitialMap": 10,
+        "S3LBZEndPose_FirstHeldMap": 48,
+        "S3LBZEndPose_SecondInitialMap": 98,
+        "S3LBZEndPose_SecondHeldMap": 124,
+        "S3LBZEndPose_DepartureMap": 198
       },
       "external_symbols": [],
       "blocks": [
@@ -119612,35 +119612,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_52186",
+          "target": "S3LBZEndPose_FirstInitialMap",
           "base": "Map_SonicTailsEndPoses_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_521AC",
+          "target": "S3LBZEndPose_FirstHeldMap",
           "base": "Map_SonicTailsEndPoses_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_521DE",
+          "target": "S3LBZEndPose_SecondInitialMap",
           "base": "Map_SonicTailsEndPoses_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_521F8",
+          "target": "S3LBZEndPose_SecondHeldMap",
           "base": "Map_SonicTailsEndPoses_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_52242",
+          "target": "S3LBZEndPose_DepartureMap",
           "base": "Map_SonicTailsEndPoses_"
         },
         {

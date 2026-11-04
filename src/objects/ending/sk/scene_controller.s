@@ -7,42 +7,42 @@ S3Credits:
                 rts
 ; ---------------------------------------------------------------------------
 
-Obj_5D86A:
+EndScene_DispatchProxyAndSyncPlayer:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_5D89C(pc,d0.w),d1
-                jsr     off_5D89C(pc,d1.w)
+                move.w  EndingScene_StateOffsets(pc,d0.w),d1
+                jsr     EndingScene_StateOffsets(pc,d1.w)
                 cmpi.w  #2,(Player_mode).w
-                bne.s   loc_5D886
+                bne.s   EndingScene_MirrorProxyPositionAndDraw
                 move.b  #$7F,(Palette_timer).w
 
-loc_5D886:
+EndingScene_MirrorProxyPositionAndDraw:
                 lea     (Player_1).w,a1
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-off_5D89C:
-                dc.w    loc_5D8BC-off_5D89C
-                dc.w    loc_5D9EE-off_5D89C
-                dc.w    loc_5DA50-off_5D89C
-                dc.w    loc_5DA74-off_5D89C
-                dc.w    loc_5DB2C-off_5D89C
-                dc.w    loc_5DB60-off_5D89C
-                dc.w    loc_5DB76-off_5D89C
-                dc.w    loc_5DBBE-off_5D89C
-                dc.w    loc_5DBDC-off_5D89C
-                dc.w    loc_5DBF6-off_5D89C
-                dc.w    loc_5DC2C-off_5D89C
-                dc.w    loc_5DC98-off_5D89C
-                dc.w    loc_5DCA6-off_5D89C
-                dc.w    loc_5DD34-off_5D89C
-                dc.w    loc_5DD6A-off_5D89C
-                dc.w    loc_5DE1A-off_5D89C
+EndingScene_StateOffsets:
+                dc.w    EndScene_InitProxyAndPlayerOutcome-EndingScene_StateOffsets
+                dc.w    EndScene_TryOutcomeAccentDuringRise-EndingScene_StateOffsets
+                dc.w    EndScene_ScrollUpAndSignalTornado-EndingScene_StateOffsets
+                dc.w    EndingScene_WaitForTornadoToReachProxy-EndingScene_StateOffsets
+                dc.w    EndScene_TickCarrierDepartureDelay-EndingScene_StateOffsets
+                dc.w    EndScene_BobUntilCarrierReady-EndingScene_StateOffsets
+                dc.w    EndScene_WaitThenStartIslandLift-EndingScene_StateOffsets
+                dc.w    EndScene_ScrollDownRightDuringLift-EndingScene_StateOffsets
+                dc.w    EndScene_ScrollRightDuringLiftHold-EndingScene_StateOffsets
+                dc.w    EndScene_MoveLeftBeforeFGHandoff-EndingScene_StateOffsets
+                dc.w    EndScene_WaitThenInitReturnPlane-EndingScene_StateOffsets
+                dc.w    EndingScene_WaitBeforeReturnPlaneFlight-EndingScene_StateOffsets
+                dc.w    EndScene_FlyReturnPlaneRight-EndingScene_StateOffsets
+                dc.w    EndingScene_FlySmallPlaneLeftToCenter-EndingScene_StateOffsets
+                dc.w    EndScene_WaitThenSpawnLiftEffects-EndingScene_StateOffsets
+                dc.w    EndingScene_FlyLeftAndSwitchToFinalWait-EndingScene_StateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_5D8BC:
-                lea     ObjDat3_600DA(pc),a1
+EndScene_InitProxyAndPlayerOutcome:
+                lea     EndingSceneProxy_Attributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 bclr    #2,render_flags(a0)
                 move.b  #2,routine(a0)
@@ -61,46 +61,46 @@ loc_5D8BC:
                 move.w  #$7FFF,(Super_frame_count).w
                 move.b  #1,(Update_HUD_timer).w
                 tst.b   (_unkFA88).w
-                bmi.w   loc_5D96A
-                bne.s   loc_5D944
+                bmi.w   EndingScene_PlaceProxyTornadoAndEmerald
+                bne.s   EndScene_SelectSuperTailsOrHyperSonic
                 cmpi.w  #2,(Player_mode).w
-                bhs.w   loc_5D96A
+                bhs.w   EndingScene_PlaceProxyTornadoAndEmerald
                 bsr.w   EndingPrepareSuperSonicVisualState
                 jsr     (AllocateObject).l
-                bne.s   loc_5D940
+                bne.s   EndScene_ContinueAfterSuperRevert
                 move.l  #Obj_Ending_RevertSuperSonic,(a1)
 
-loc_5D940:
-                bra.w   loc_5D95C
+EndScene_ContinueAfterSuperRevert:
+                bra.w   EndingScene_SetBrightSonicPaletteEntries
 ; ---------------------------------------------------------------------------
 
-loc_5D944:
+EndScene_SelectSuperTailsOrHyperSonic:
                 clr.b   (Player_1+anim).w
                 cmpi.w  #2,(Player_mode).w
-                bne.s   loc_5D958
+                bne.s   EndingScene_PrepareHyperSonicVisuals
                 bsr.w   EndingPrepareSuperTailsPaletteState
-                bra.w   loc_5D96A
+                bra.w   EndingScene_PlaceProxyTornadoAndEmerald
 ; ---------------------------------------------------------------------------
 
-loc_5D958:
+EndingScene_PrepareHyperSonicVisuals:
                 bsr.w   EndingAndDDZPrepareHyperSonicVisualState
 
-loc_5D95C:
+EndingScene_SetBrightSonicPaletteEntries:
                 move.l  #$EEE0EEE,d0
                 move.l  d0,(Normal_palette+$4).w
                 move.w  d0,(Normal_palette+$8).w
 
-loc_5D96A:
+EndingScene_PlaceProxyTornadoAndEmerald:
                 move.w  #$100,x_pos(a0)
                 move.w  #$E0,y_pos(a0)
                 lea     (Dynamic_object_RAM+(object_size*5)).w,a1
                 move.w  a1,$44(a0)
-                move.l  #Obj_5EA52,(a1)
+                move.l  #EndingTornado_DispatchStateAndSubSprites,(a1)
                 st      $2C(a1)
                 bset    #2,$38(a1)
                 move.w  a0,$46(a1)
                 lea     (Dynamic_object_RAM+(object_size*45)).w,a1
-                move.l  #Obj_5DE60,(a1)
+                move.l  #EndingMasterEmerald_DispatchStateAndDraw,(a1)
                 move.w  a0,$46(a1)
                 move.w  #$11E,x_pos(a1)
                 move.w  #$CF,y_pos(a1)
@@ -108,9 +108,9 @@ loc_5D96A:
                 lea     (Target_palette_line_3).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_5D9B8:
+EndScene_CopyPaletteAndQueueSceneArt:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_5D9B8
+                dbf     d6,EndScene_CopyPaletteAndQueueSceneArt
                 lea     (ArtKosM_EndingMasterEmerald).l,a1
                 move.w  #tiles_to_bytes(ArtTile_Ending_MasterEmerald),d2
                 jsr     (Queue_Kos_Module).l
@@ -122,62 +122,62 @@ loc_5D9B8:
                 jmp     (Queue_Kos_Module).l
 ; ---------------------------------------------------------------------------
 
-loc_5D9EE:
+EndScene_TryOutcomeAccentDuringRise:
                 cmpi.w  #$EEE,(Normal_palette+$2).w
-                bne.s   loc_5DA12
+                bne.s   EndScene_ScrollUpAndTryCloudField
                 bset    #7,$38(a0)
-                bne.s   loc_5DA12
+                bne.s   EndScene_ScrollUpAndTryCloudField
                 move.b  #1,(_unkFAC1).w
                 jsr     (AllocateObject).l
-                bne.s   loc_5DA12
-                move.l  #loc_5DF58,(a1)
+                bne.s   EndScene_ScrollUpAndTryCloudField
+                move.l  #EndEmerald_CycleAllSuperAccent,(a1)
 
-loc_5DA12:
+EndScene_ScrollUpAndTryCloudField:
                 move.l  (_unkEE9C).w,d0
                 addi.l  #$8000,d0
                 move.l  d0,(_unkEE9C).w
                 cmpi.l  #$800000,d0
-                blo.s   locret_5DA4E
+                blo.s   EndingScene_ReturnFromInitialRise
                 move.b  #4,routine(a0)
                 jsr     (AllocateObject).l
-                bne.s   loc_5DA3C
-                move.l  #loc_5F94C,(a1)
+                bne.s   EndScene_EnableCloudsAndDiagonalMove
+                move.l  #EndCloud_InitFieldPaletteAndArt,(a1)
 
-loc_5DA3C:
+EndScene_EnableCloudsAndDiagonalMove:
                 move.b  #$1F,(_unkFAB9).w
                 move.w  #-$100,(_unkFAC2).w
                 move.w  #-$100,(_unkFAC4).w
 
-locret_5DA4E:
+EndingScene_ReturnFromInitialRise:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5DA50:
+EndScene_ScrollUpAndSignalTornado:
                 move.l  (_unkEE9C).w,d0
                 addi.l  #$8000,d0
                 move.l  d0,(_unkEE9C).w
                 cmpi.l  #$1000000,d0
-                blo.s   locret_5DA72
+                blo.s   EndScene_ApproachSignalReturn
                 move.b  #6,routine(a0)
                 bset    #3,$38(a0)
 
-locret_5DA72:
+EndScene_ApproachSignalReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5DA74:
+EndingScene_WaitForTornadoToReachProxy:
                 movea.w $44(a0),a1
                 move.w  x_pos(a1),d0
                 addi.w  #$20,d0
                 cmp.w   x_pos(a0),d0
-                bgt.s   loc_5DA96
+                bgt.s   EndingScene_AlignProxyAndSignalBoarding
                 move.l  (_unkEE9C).w,d0
                 addi.l  #$8000,d0
                 move.l  d0,(_unkEE9C).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5DA96:
+EndingScene_AlignProxyAndSignalBoarding:
                 move.b  #8,routine(a0)
                 bset    #0,(_unkFAB8).w
                 move.w  #$20,$2E(a0)
@@ -189,11 +189,11 @@ loc_5DA96:
                 move.w  d1,x_pos(a0)
                 moveq   #$2B,d0
                 cmpi.w  #2,(Player_mode).w
-                bne.s   loc_5DACC
+                bne.s   EndScene_AlignProxyAndRestorePlayer
                 subq.b  #4,d0
                 bclr    #2,(Tails_tails+render_flags).w
 
-loc_5DACC:
+EndScene_AlignProxyAndRestorePlayer:
                 move.b  d0,$43(a1)
                 move.w  y_pos(a1),d1
                 neg.w   d0
@@ -202,60 +202,60 @@ loc_5DACC:
                 move.w  d1,$3A(a0)
                 lea     (Player_1).w,a1
                 tst.b   (_unkFA88).w
-                bmi.s   loc_5DB1C
-                beq.s   loc_5DB1C
+                bmi.s   EndScene_SetBoardedPoseAndLoadArt
+                beq.s   EndScene_SetBoardedPoseAndLoadArt
                 move.b  #2,(Super_palette_status).w
                 move.w  #$1E,(Palette_frame).w
                 move.b  #0,(Super_Sonic_Knux_flag).w
                 move.b  #0,(Super_Tails_flag).w
                 move.l  #Map_Sonic,mappings(a1)
                 cmpi.w  #2,(Player_mode).w
-                bne.s   loc_5DB1C
+                bne.s   EndScene_SetBoardedPoseAndLoadArt
                 move.l  #Map_Tails,mappings(a1)
 
-loc_5DB1C:
+EndScene_SetBoardedPoseAndLoadArt:
                 move.b  #5,anim(a1)
                 move.b  #$83,$2E(a1)
                 bsr.w   Ending_SetP1PoseAndLoadArt
 
-loc_5DB2C:
+EndScene_TickCarrierDepartureDelay:
                 subq.w  #1,$2E(a0)
-                bne.s   loc_5DB38
+                bne.s   EndScene_MoveBoardedProxyAndCheckWait
                 bset    #1,(_unkFAB8).w
 
-loc_5DB38:
+EndScene_MoveBoardedProxyAndCheckWait:
                 addq.w  #2,x_pos(a0)
                 cmpi.w  #$160,x_pos(a0)
-                blo.s   loc_5DB5C
+                blo.s   EndingScene_BobAfterBoardedMovement
                 move.b  #$A,routine(a0)
                 tst.b   (_unkFA88).w
-                bpl.s   loc_5DB5C
+                bpl.s   EndingScene_BobAfterBoardedMovement
                 move.b  #$C,routine(a0)
                 move.w  #(5*60)-1,$2E(a0)
 
-loc_5DB5C:
+EndingScene_BobAfterBoardedMovement:
                 bra.w   EndingBobYFromSavedBaseAndByteSinePhase
 ; ---------------------------------------------------------------------------
 
-loc_5DB60:
+EndScene_BobUntilCarrierReady:
                 tst.w   (_unkFAA4).w
-                bne.s   loc_5DB6A
+                bne.s   EndingScene_BeginBoardedHoldDelay
                 bra.w   EndingBobYFromSavedBaseAndByteSinePhase
 ; ---------------------------------------------------------------------------
 
-loc_5DB6A:
+EndingScene_BeginBoardedHoldDelay:
                 move.b  #$C,routine(a0)
                 move.w  #(5*60)-1,$2E(a0)
 
-loc_5DB76:
+EndScene_WaitThenStartIslandLift:
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_5DBB2
+                bpl.s   EndingScene_BobDuringIslandLiftStartWait
                 move.b  #$E,routine(a0)
                 move.w  #-$100,(_unkFAC4).w
                 clr.b   (_unkFAB9).w
                 move.w  #$BF,$2E(a0)
                 st      (Events_fg_5).w
-                lea     word_5DBB6(pc),a2
+                lea     EndScene_LiftInitialDetailPositions(pc),a2
                 moveq   #$42,d1
                 moveq   #2-1,d2
                 bsr.w   Create_Continue_Sprite
@@ -263,61 +263,61 @@ loc_5DB76:
                 move.w  #tiles_to_bytes(ArtTile_Ending_IslandLiftGfx),d2
                 jsr     (Queue_Kos_Module).l
 
-loc_5DBB2:
+EndingScene_BobDuringIslandLiftStartWait:
                 bra.w   EndingBobYFromSavedBaseAndByteSinePhase
 ; ---------------------------------------------------------------------------
-word_5DBB6:
+EndScene_LiftInitialDetailPositions:
                 dc.w    $69C,  $384
                 dc.w    $6DC,  $384
 ; ---------------------------------------------------------------------------
 
-loc_5DBBE:
+EndScene_ScrollDownRightDuringLift:
                 addq.w  #2,(_unkEE98).w
                 addq.w  #1,(_unkEE9C).w
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_5DBD8
+                bpl.s   EndScene_BobDuringDiagonalScroll
                 move.b  #$10,routine(a0)
                 move.w  #(5*60)-1,$2E(a0)
 
-loc_5DBD8:
+EndScene_BobDuringDiagonalScroll:
                 bra.w   EndingBobYFromSavedBaseAndByteSinePhase
 ; ---------------------------------------------------------------------------
 
-loc_5DBDC:
+EndScene_ScrollRightDuringLiftHold:
                 addq.w  #2,(_unkEE98).w
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_5DBF2
+                bpl.s   EndScene_BobDuringHorizontalScroll
                 move.b  #$12,routine(a0)
                 move.w  #$8F,$2E(a0)
 
-loc_5DBF2:
+EndScene_BobDuringHorizontalScroll:
                 bra.w   EndingBobYFromSavedBaseAndByteSinePhase
 ; ---------------------------------------------------------------------------
 
-loc_5DBF6:
+EndScene_MoveLeftBeforeFGHandoff:
                 cmpi.w  #$60,x_pos(a0)
-                bls.s   loc_5DC02
+                bls.s   EndScene_ScrollAndSignalFGHandoff
                 subq.w  #2,x_pos(a0)
 
-loc_5DC02:
+EndScene_ScrollAndSignalFGHandoff:
                 addq.w  #2,(_unkEE98).w
                 bsr.w   EndingBobYFromSavedBaseAndByteSinePhase
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_5DC2A
+                bpl.s   EndScene_FGHandoffWaitReturn
                 move.b  #$14,routine(a0)
                 bset    #7,status(a0)
                 st      (Events_fg_4).w
                 move.w  #$8F,$2E(a0)
                 clr.b   (Player_1+anim).w
 
-locret_5DC2A:
+EndScene_FGHandoffWaitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5DC2C:
+EndScene_WaitThenInitReturnPlane:
                 addq.w  #2,(_unkEE98).w
                 subq.w  #1,$2E(a0)
-                bpl.w   locret_5FF1A
+                bpl.w   EndingScene_SharedReturn
                 move.b  #$16,routine(a0)
                 move.b  #1,mapping_frame(a0)
                 move.w  #$40,x_pos(a0)
@@ -327,38 +327,38 @@ loc_5DC2C:
                 clr.b   mapping_frame(a1)
                 move.w  #$100,x_vel(a0)
                 bsr.w   EndingInitializeGentleVerticalSwing
-                lea     ChildObjDat_601CA(pc),a2
+                lea     EndData_PlanePoseDetailChildRecord(pc),a2
                 jsr     (CreateChild6_Simple).l
-                lea     ChildObjDat_601D0(pc),a2
+                lea     EndingPlaneBlinkDetail_ChildRecord(pc),a2
                 jsr     (CreateChild1_Normal).l
-                lea     ChildObjDat_601D8(pc),a2
+                lea     EndingPlanePoseOffsetDetail_ChildRecord(pc),a2
                 jsr     (CreateChild1_Normal).l
                 tst.b   (_unkFA88).w
-                bmi.w   locret_5FF1A
-                lea     ChildObjDat_601E0(pc),a2
+                bmi.w   EndingScene_SharedReturn
+                lea     EndingPlaneWideDetail_ChildRecord(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_5DC98:
+EndingScene_WaitBeforeReturnPlaneFlight:
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_5DCA4
+                bpl.s   EndingScene_ReturnFromReturnPlaneDelay
                 move.b  #$18,routine(a0)
 
-locret_5DCA4:
+EndingScene_ReturnFromReturnPlaneDelay:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5DCA6:
+EndScene_FlyReturnPlaneRight:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 cmpi.w  #$140,x_pos(a0)
-                blo.s   loc_5DCC4
-                lea     AniRaw_60253(pc),a1
+                blo.s   EndScene_SwitchToSmallPlane
+                lea     EndingReturnPlane_RawFrameDelayScript(pc),a1
                 jsr     (Animate_RawNoSSTMultiDelay).l
 
-loc_5DCC4:
+EndScene_SwitchToSmallPlane:
                 cmpi.w  #$220,x_pos(a0)
-                bls.w   locret_5FF1A
+                bls.w   EndingScene_SharedReturn
                 move.b  #$1A,routine(a0)
                 move.w  #make_art_tile(ArtTile_Ending_PlaneExtra,1,0),art_tile(a0)
                 bset    #0,render_flags(a0)
@@ -369,118 +369,118 @@ loc_5DCC4:
                 clr.w   y_vel(a0)
                 move.b  #5,mapping_frame(a0)
                 cmpi.w  #2,(Player_mode).w
-                bne.s   loc_5DD0E
+                bne.s   EndScene_LoadSmallPlanePalAndChildren
                 move.b  #6,mapping_frame(a0)
 
-loc_5DD0E:
+EndScene_LoadSmallPlanePalAndChildren:
                 lea     Pal_EndingSmallPlane(pc),a1
                 jsr     (PalLoad_Line1).l
-                lea     ChildObjDat_6022E(pc),a2
+                lea     EndData_SmallPlaneCyclingChild(pc),a2
                 jsr     (CreateChild1_Normal).l
                 tst.b   (_unkFA88).w
-                bmi.w   locret_5FF1A
-                lea     ChildObjDat_6020C(pc),a2
+                bmi.w   EndingScene_SharedReturn
+                lea     EndData_SmallPlaneOutcomeChild(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_5DD34:
+EndingScene_FlySmallPlaneLeftToCenter:
                 jsr     (MoveSprite2).l
                 cmpi.w  #$120,x_pos(a0)
-                bhs.s   locret_5DD68
+                bhs.s   EndScene_SmallPlaneApproachReturn
                 move.b  #$1C,routine(a0)
                 move.w  #60-1,$2E(a0)
                 bset    #5,$38(a0)
                 tst.b   (_unkFA88).w
-                bmi.s   locret_5DD68
+                bmi.s   EndScene_SmallPlaneApproachReturn
                 jsr     (AllocateObject).l
-                bne.s   locret_5DD68
+                bne.s   EndScene_SmallPlaneApproachReturn
                 move.l  #EndLine3Flash_InitRaise,(a1)
 
-locret_5DD68:
+EndScene_SmallPlaneApproachReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5DD6A:
+EndScene_WaitThenSpawnLiftEffects:
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_5DDD0
+                bpl.s   EndScene_LiftEffectsSetupReturn
                 move.b  #$1E,routine(a0)
                 st      (Events_fg_4).w
                 cmpi.w  #3,(Player_mode).w
-                beq.s   locret_5DDD0
+                beq.s   EndScene_LiftEffectsSetupReturn
                 tst.b   (_unkFA88).w
-                bmi.s   locret_5DDD0
-                lea     word_5DDD2(pc),a2
+                bmi.s   EndScene_LiftEffectsSetupReturn
+                lea     EndScene_LiftEffectProjectionPoints(pc),a2
                 moveq   #$41,d1
                 moveq   #6-1,d2
                 bsr.w   Create_Continue_Sprite
-                lea     word_5DDEA(pc),a2
+                lea     EndScene_LiftDetail43Positions(pc),a2
                 moveq   #$43,d1
                 moveq   #2-1,d2
                 bsr.w   Create_Continue_Sprite
-                lea     word_5DDF2(pc),a2
+                lea     EndScene_LiftDetail44Positions(pc),a2
                 moveq   #$44,d1
                 moveq   #4-1,d2
                 bsr.w   Create_Continue_Sprite
-                lea     word_5DE02(pc),a2
+                lea     EndScene_LiftDetail45Positions(pc),a2
                 moveq   #$45,d1
                 moveq   #2-1,d2
                 bsr.w   Create_Continue_Sprite
-                lea     word_5DE0A(pc),a2
+                lea     EndScene_LiftDetail46Positions(pc),a2
                 moveq   #$46,d1
                 moveq   #2-1,d2
                 bsr.w   Create_Continue_Sprite
-                lea     word_5DE12(pc),a2
+                lea     EndScene_LiftDetail47Positions(pc),a2
                 moveq   #$47,d1
                 moveq   #2-1,d2
                 bsr.w   Create_Continue_Sprite
 
-locret_5DDD0:
+EndScene_LiftEffectsSetupReturn:
                 rts
 ; ---------------------------------------------------------------------------
-word_5DDD2:
+EndScene_LiftEffectProjectionPoints:
                 dc.w    $2B0,   $D4
                 dc.w    $2D0,   $D4
                 dc.w    $2F0,   $D4
                 dc.w    $310,   $D4
                 dc.w    $330,   $D4
                 dc.w    $350,   $D4
-word_5DDEA:
+EndScene_LiftDetail43Positions:
                 dc.w    $12C,  $11C
                 dc.w    $F4,  $11C
-word_5DDF2:
+EndScene_LiftDetail44Positions:
                 dc.w    $E8,  $12C
                 dc.w    $158,  $12C
                 dc.w    $B8,  $12C
                 dc.w    $188,  $12C
-word_5DE02:
+EndScene_LiftDetail45Positions:
                 dc.w    $2FC,   $DC
                 dc.w    $32C,   $DC
-word_5DE0A:
+EndScene_LiftDetail46Positions:
                 dc.w    $2C4,   $D8
                 dc.w    $2EC,   $D8
-word_5DE12:
+EndScene_LiftDetail47Positions:
                 dc.w    $304,   $D0
                 dc.w    $344,   $D0
 ; ---------------------------------------------------------------------------
 
-loc_5DE1A:
+EndingScene_FlyLeftAndSwitchToFinalWait:
                 jsr     (MoveSprite2).l
                 cmpi.w  #$60,x_pos(a0)
-                bhs.s   locret_5DE34
-                move.l  #loc_5DE36,(a0)
+                bhs.s   EndingScene_ReturnFromFinalLeftFlight
+                move.l  #EndScene_WaitForFinalCameraOrFail,(a0)
                 bset    #1,$38(a0)
 
-locret_5DE34:
+EndingScene_ReturnFromFinalLeftFlight:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5DE36:
+EndScene_WaitForFinalCameraOrFail:
                 tst.b   (_unkFA88).w
-                bmi.s   loc_5DE46
+                bmi.s   EndScene_FadeMusicClearFlagsAndDelete
                 cmpi.w  #$78,(Camera_Y_pos_copy).w
-                blo.w   locret_5FF1A
+                blo.w   EndingScene_SharedReturn
 
-loc_5DE46:
+EndScene_FadeMusicClearFlagsAndDelete:
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
                 clr.b   (_unkFAC1).w

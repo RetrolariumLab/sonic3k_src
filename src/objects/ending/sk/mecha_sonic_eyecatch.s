@@ -3,27 +3,27 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
 
-loc_5F71E:
+EndMecha_DispatchLoadArtAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_5F73E(pc,d0.w),d1
-                jsr     off_5F73E(pc,d1.w)
+                move.w  EndingMechaSonicEyecatch_StateOffsets(pc,d0.w),d1
+                jsr     EndingMechaSonicEyecatch_StateOffsets(pc,d1.w)
                 lea     (DPLCPtr_MechaSonic).l,a2
                 jsr     (Perform_DPLC).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-off_5F73E:
-                dc.w    loc_5F74E-off_5F73E
-                dc.w    loc_5F7CC-off_5F73E
-                dc.w    loc_5F802-off_5F73E
-                dc.w    loc_5F82C-off_5F73E
-                dc.w    loc_5F82C-off_5F73E
-                dc.w    loc_5F85A-off_5F73E
-                dc.w    loc_5F82C-off_5F73E
-                dc.w    loc_5F8A8-off_5F73E
+EndingMechaSonicEyecatch_StateOffsets:
+                dc.w    EndMecha_InitSlottedAppearance-EndingMechaSonicEyecatch_StateOffsets
+                dc.w    EndMecha_WaitAndCyclePalette-EndingMechaSonicEyecatch_StateOffsets
+                dc.w    EndMecha_WaitThenStartFirstAnim-EndingMechaSonicEyecatch_StateOffsets
+                dc.w    EndMecha_AnimateWithCallback-EndingMechaSonicEyecatch_StateOffsets
+                dc.w    EndMecha_AnimateWithCallback-EndingMechaSonicEyecatch_StateOffsets
+                dc.w    EndMecha_JumpAndAnimateLanding-EndingMechaSonicEyecatch_StateOffsets
+                dc.w    EndMecha_AnimateWithCallback-EndingMechaSonicEyecatch_StateOffsets
+                dc.w    EndMecha_WaitForStartOrTimeout-EndingMechaSonicEyecatch_StateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_5F74E:
+EndMecha_InitSlottedAppearance:
                 clr.w   (Slotted_object_bits).w
                 lea     (ObjSlot_MechaSonic).l,a1
                 jsr     (SetUp_ObjAttributesSlotted).l
@@ -37,16 +37,16 @@ loc_5F74E:
                 lea     (Target_palette_line_2).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_5F78E:
+EndMecha_CopyPaletteAndTrySparks:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_5F78E
+                dbf     d6,EndMecha_CopyPaletteAndTrySparks
                 bsr.w   Ending_TrySpawnLine2Fade
                 lea     (SSZMechaSparks_SimpleChildRecord).l,a2
                 jsr     (CreateChild6_Simple).l
-                bne.s   loc_5F7AC
+                bne.s   EndMecha_InstallPaletteScriptAndArt
                 move.b  #$80,subtype(a1)
 
-loc_5F7AC:
+EndMecha_InstallPaletteScriptAndArt:
                 lea     (MechaSonic_IdleFlashPaletteScript).l,a1
                 lea     (Palette_rotation_data).w,a2
                 move.l  (a1)+,(a2)+
@@ -57,84 +57,84 @@ loc_5F7AC:
                 jmp     (Queue_Kos_Module).l
 ; ---------------------------------------------------------------------------
 
-loc_5F7CC:
+EndMecha_WaitAndCyclePalette:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_5F7D8
+                bmi.s   EndMecha_BeginChildEffectHandshake
                 jmp     (Run_PalRotationScript).l
 ; ---------------------------------------------------------------------------
 
-loc_5F7D8:
+EndMecha_BeginChildEffectHandshake:
                 move.b  #4,routine(a0)
                 lea     (Pal_SSZGHZMisc).l,a1
                 lea     (Normal_palette_line_2).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_5F7EA:
+EndMecha_RestorePaletteAndSetWaitFlag:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_5F7EA
+                dbf     d6,EndMecha_RestorePaletteAndSetWaitFlag
                 bset    #6,$38(a0)
                 lea     (SSZMechaSignalEffect_NormalChildRecord).l,a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_5F802:
+EndMecha_WaitThenStartFirstAnim:
                 btst    #6,$38(a0)
-                bne.w   locret_5FF1A
+                bne.w   EndingScene_SharedReturn
                 move.b  #6,routine(a0)
                 move.b  #$E,mapping_frame(a0)
-                move.l  #loc_5F832,$34(a0)
+                move.l  #EndMecha_BeginSecondAnim,$34(a0)
                 lea     (SSZMecha_RecoverThenActAnim).l,a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
-loc_5F82C:
+EndMecha_AnimateWithCallback:
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_5F832:
+EndMecha_BeginSecondAnim:
                 move.b  #8,routine(a0)
-                move.l  #loc_5F84C,$34(a0)
+                move.l  #EndingMechaSonicEyecatch_LaunchJump,$34(a0)
                 lea     (SSZMecha_PreJumpCallbackRawAnimation).l,a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
-loc_5F84C:
+EndingMechaSonicEyecatch_LaunchJump:
                 move.b  #$A,routine(a0)
                 move.w  #-$400,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5F85A:
+EndMecha_JumpAndAnimateLanding:
                 jsr     (MoveSprite_LightGravity).l
                 tst.w   y_vel(a0)
-                bmi.w   locret_5FF1A
+                bmi.w   EndingScene_SharedReturn
                 cmpi.w  #$C8,y_pos(a0)
-                blo.w   locret_5FF1A
+                blo.w   EndingScene_SharedReturn
                 move.b  #$C,routine(a0)
                 move.w  #$CC,y_pos(a0)
-                move.l  #loc_5F89A,$34(a0)
+                move.l  #EndMecha_BeginFinalExitDelay,$34(a0)
                 moveq   #signextendB(sfx_MechaLand),d0
                 jsr     (Play_SFX).l
                 lea     (SSZMecha_TransformLandingAnim).l,a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
-loc_5F89A:
+EndMecha_BeginFinalExitDelay:
                 move.b  #$E,routine(a0)
                 move.w  #$4AF,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5F8A8:
+EndMecha_WaitForStartOrTimeout:
                 btst    #button_start,(Ctrl_1_held).w
-                bne.s   loc_5F8BE
+                bne.s   EndMecha_SelectSegaScreen
                 btst    #button_start,(Ctrl_2_held).w
-                bne.s   loc_5F8BE
+                bne.s   EndMecha_SelectSegaScreen
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_5F8C4
+                bpl.s   EndMecha_ExitWaitReturn
 
-loc_5F8BE:
+EndMecha_SelectSegaScreen:
                 move.b  #GameMode_SegaScreen,(Game_mode).w
 
-locret_5F8C4:
+EndMecha_ExitWaitReturn:
                 rts

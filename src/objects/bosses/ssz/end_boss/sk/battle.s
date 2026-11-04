@@ -866,7 +866,7 @@ SSZMecha_WaitAndTryKnucklesEnding:
                 move.w  #3,(Player_mode).w
                 jsr     (AllocateObject).l
                 bne.s   SSZMecha_TryPaletteRestore
-                move.l  #loc_5E6C0,(a1)
+                move.l  #EndPlane_DispatchKnuxPlaneAndDraw,(a1)
 
 SSZMecha_TryPaletteRestore:
                 jsr     (AllocateObject).l

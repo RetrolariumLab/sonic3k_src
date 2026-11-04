@@ -8,34 +8,34 @@
 SKCredits_SelectScrollSpeedAndDelay:
                 moveq   #0,d1
                 tst.w   (SK_alone_flag).w
-                bne.s   loc_5B520
+                bne.s   SKCreditScroll_AddRegionGroupStride
                 addi.w  #$24,d1
 
-loc_5B520:
+SKCreditScroll_AddRegionGroupStride:
                 btst    #6,(Graphics_flags).w
-                beq.s   loc_5B52C
+                beq.s   SKCreditScroll_SelectCharacterGroup
                 addi.w  #$12,d1
 
-loc_5B52C:
+SKCreditScroll_SelectCharacterGroup:
                 move.w  (Player_mode).w,d0
                 subq.w  #2,d0
-                bmi.s   loc_5B53E
-                beq.s   loc_5B53A
+                bmi.s   SKCreditScroll_SelectSignedEndingOutcome
+                beq.s   SKCreditScroll_AddCharacterGroupStride
                 addi.w  #6,d1
 
-loc_5B53A:
+SKCreditScroll_AddCharacterGroupStride:
                 addi.w  #6,d1
 
-loc_5B53E:
+SKCreditScroll_SelectSignedEndingOutcome:
                 tst.b   (_unkFA88).w
-                bmi.s   loc_5B54A
-                beq.s   loc_5B548
+                bmi.s   SKCreditScroll_LoadSpeedAndDelay
+                beq.s   SKCreditScroll_AddZeroOutcomeOffset
                 addq.w  #2,d1
 
-loc_5B548:
+SKCreditScroll_AddZeroOutcomeOffset:
                 addq.w  #2,d1
 
-loc_5B54A:
+SKCreditScroll_LoadSpeedAndDelay:
                 lea     CreditsText_ScrollSpeed(pc),a1
                 moveq   #0,d0
                 move.w  (a1,d1.w),d0
