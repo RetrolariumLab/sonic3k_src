@@ -39,15 +39,15 @@ loc_25A7E:
                 jmp     (Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
 word_25AB8:
-                dc.w    locret_258CE-word_25AB8
-                dc.w    loc_258D0-word_25AB8
-                dc.w    loc_258DC-word_25AB8
-                dc.w    loc_25924-word_25AB8
-                dc.w    loc_258FA-word_25AB8
-                dc.w    loc_25906-word_25AB8
-                dc.w    loc_25938-word_25AB8
-                dc.w    loc_2594C-word_25AB8
-                dc.w    loc_25960-word_25AB8
+                dc.w    SKLRZMovingSolid_Stationary-word_25AB8
+                dc.w    SKLRZMovingSolid_OscillateX64-word_25AB8
+                dc.w    SKLRZMovingSolid_OscillateX128-word_25AB8
+                dc.w    SKLRZMovingSolid_AccelOscillateX96-word_25AB8
+                dc.w    SKLRZMovingSolid_OscillateY64-word_25AB8
+                dc.w    SKLRZMovingSolid_OscillateY128-word_25AB8
+                dc.w    SKLRZMovingSolid_AccelOscillateY96-word_25AB8
+                dc.w    SKLRZMovingSolid_AccelOscillateX128-word_25AB8
+                dc.w    SKLRZMovingSolid_AccelOscillateY128-word_25AB8
 ; ---------------------------------------------------------------------------
 Map_DEZFloatingPlatform:
                 include "src/objects/shared/zones/dez/mappings/floating_platform.s"

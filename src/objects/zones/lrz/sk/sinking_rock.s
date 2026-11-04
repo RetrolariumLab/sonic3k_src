@@ -12,29 +12,29 @@ Obj_LRZSinkingRock:
                 move.w  #$280,priority(a0)
                 move.w  y_pos(a0),$46(a0)
                 tst.b   (Current_act).w
-                beq.s   loc_427DC
+                beq.s   SKLRZSinkRock_InitUpdate
                 move.b  #1,mapping_frame(a0)
                 move.w  #make_art_tile($090,2,0),art_tile(a0)
 
-loc_427DC:
-                move.l  #loc_427E2,(a0)
+SKLRZSinkRock_InitUpdate:
+                move.l  #SKLRZSinkRock_RecoverWhenUnoccupied,(a0)
 
-loc_427E2:
+SKLRZSinkRock_RecoverWhenUnoccupied:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                bne.s   loc_427F8
+                bne.s   SKLRZSinkRock_StepSinkingPhase
                 tst.b   $2E(a0)
-                beq.s   loc_42804
+                beq.s   SKLRZSinkRock_ApplySagAndCheckSolid
                 subq.b  #1,$2E(a0)
-                bra.s   loc_42804
+                bra.s   SKLRZSinkRock_ApplySagAndCheckSolid
 ; ---------------------------------------------------------------------------
 
-loc_427F8:
+SKLRZSinkRock_StepSinkingPhase:
                 cmpi.b  #$40,$2E(a0)
-                beq.s   loc_42804
+                beq.s   SKLRZSinkRock_ApplySagAndCheckSolid
                 addq.b  #1,$2E(a0)
 
-loc_42804:
+SKLRZSinkRock_ApplySagAndCheckSolid:
                 move.b  $2E(a0),d0
                 jsr     (GetSineCosine).l
                 asr.w   #3,d0

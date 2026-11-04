@@ -16,11 +16,11 @@ LRZ2_ScreenEvent:
 
 LRZ2_BackgroundInit:
                 jsr     (AllocateObject).l
-                bne.s   loc_56FD2
-                move.l  #loc_5711E,(a1)
+                bne.s   SKLRZ2Events_InitSteadyBackground
+                move.l  #SKLRZ2Events_HideBackdropForKnuckles,(a1)
                 move.w  a1,(Events_bg+$06).w
 
-loc_56FD2:
+SKLRZ2Events_InitSteadyBackground:
                 move.w  #8,(Events_routine_bg).w
                 jsr     LRZ2_BuildParallaxAndPlaceDeathEgg(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
@@ -37,20 +37,20 @@ LRZ2_BackgroundEvent:
 ; ---------------------------------------------------------------------------
 
 LRZ2_BackgroundEvent_Index:
-                bra.w   loc_5700C
+                bra.w   SKLRZ2Events_TryAllocDeathEggBackdrop
 ; ---------------------------------------------------------------------------
-                bra.w   loc_57040
+                bra.w   SKLRZ2Events_PositionTransitionBG
 ; ---------------------------------------------------------------------------
-                bra.w   loc_57058
+                bra.w   SKLRZ2Events_PositionSteadyBG
 ; ---------------------------------------------------------------------------
 
-loc_5700C:
+SKLRZ2Events_TryAllocDeathEggBackdrop:
                 jsr     (AllocateObject).l
-                bne.s   loc_5701E
-                move.l  #loc_5711E,(a1)
+                bne.s   SKLRZ2Events_BeginBackgroundRedraw
+                move.l  #SKLRZ2Events_HideBackdropForKnuckles,(a1)
                 move.w  a1,(Events_bg+$06).w
 
-loc_5701E:
+SKLRZ2Events_BeginBackgroundRedraw:
                 jsr     LRZ2_BuildParallaxAndPlaceDeathEgg(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 addi.w  #$E0,d0
@@ -58,25 +58,25 @@ loc_5701E:
                 move.w  d0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_57044
+                bra.s   SKLRZ2Events_RedrawBackgroundBottomUp
 ; ---------------------------------------------------------------------------
 
-loc_57040:
+SKLRZ2Events_PositionTransitionBG:
                 jsr     LRZ2_BuildParallaxAndPlaceDeathEgg(pc)
 
-loc_57044:
+SKLRZ2Events_RedrawBackgroundBottomUp:
                 moveq   #0,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 jsr     (Draw_PlaneVertBottomUp).l
-                bpl.s   loc_5705C
+                bpl.s   SKLRZ2Events_DrawBackgroundAndShake
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_5705C
+                bra.s   SKLRZ2Events_DrawBackgroundAndShake
 ; ---------------------------------------------------------------------------
 
-loc_57058:
+SKLRZ2Events_PositionSteadyBG:
                 jsr     LRZ2_BuildParallaxAndPlaceDeathEgg(pc)
 
-loc_5705C:
+SKLRZ2Events_DrawBackgroundAndShake:
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
                 moveq   #0,d1
@@ -124,76 +124,76 @@ LRZ2_BuildParallaxAndPlaceDeathEgg:
                 move.l  d2,d1
                 moveq   #8-1,d3
 
-loc_570D2:
+SKLRZ2Events_WriteReverseParallaxBands:
                 swap    d1
                 move.w  d1,-(a1)
                 swap    d1
                 add.l   d0,d1
-                dbf     d3,loc_570D2
+                dbf     d3,SKLRZ2Events_WriteReverseParallaxBands
                 lea     (HScroll_table+$010).w,a1
                 add.l   d0,d2
                 add.l   d0,d0
                 moveq   #5-1,d3
 
-loc_570E8:
+SKLRZ2Events_WriteForwardParallaxBands:
                 swap    d2
                 move.w  d2,(a1)+
                 swap    d2
                 add.l   d0,d2
-                dbf     d3,loc_570E8
+                dbf     d3,SKLRZ2Events_WriteForwardParallaxBands
                 move.w  (Events_bg+$06).w,d0
-                beq.s   locret_5711C
+                beq.s   SKLRZ2Events_BackdropPositionReturn
                 movea.w d0,a1
                 move.w  #$678,d0
                 sub.w   (HScroll_table+$004).w,d0
                 cmpi.w  #-$7E0,d0
-                ble.s   loc_5710C
+                ble.s   SKLRZ2Events_ApplyBackdropPosition
                 moveq   #0,d0
 
-loc_5710C:
+SKLRZ2Events_ApplyBackdropPosition:
                 move.w  d0,$10(a1)
                 move.w  #$C0,d0
                 sub.w   (Camera_Y_pos_BG_copy).w,d0
                 move.w  d0,$14(a1)
 
-locret_5711C:
+SKLRZ2Events_BackdropPositionReturn:
                 rts
 ; End of function LRZ2_BuildParallaxAndPlaceDeathEgg
 
 ; ---------------------------------------------------------------------------
 
-loc_5711E:
+SKLRZ2Events_HideBackdropForKnuckles:
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_57130
+                bne.s   SKLRZ2Events_InitBackdropActor
                 clr.w   (Events_bg+$06).w
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_57130:
-                move.l  #loc_57156,(a0)
+SKLRZ2Events_InitBackdropActor:
+                move.l  #SKLRZ2Events_TryLoadVisibleBackdropArt,(a0)
                 move.b  #$40,height_pixels(a0)
                 move.b  #$50,width_pixels(a0)
                 move.w  #$380,priority(a0)
                 move.w  #make_art_tile(ArtTile_LRZ2DeathEggBG,3,0),art_tile(a0)
                 move.l  #Map_LRZ2DeathEggBG,mappings(a0)
 
-loc_57156:
+SKLRZ2Events_TryLoadVisibleBackdropArt:
                 tst.w   $2E(a0)
-                bne.s   loc_57176
+                bne.s   SKLRZ2Events_TryDrawBackdrop
                 tst.w   x_pos(a0)
-                beq.s   locret_57182
+                beq.s   SKLRZ2Events_BackdropDrawReturn
                 lea     (ArtKosM_LRZ2DeathEggBG).l,a1
                 move.w  #tiles_to_bytes(ArtTile_LRZ2DeathEggBG),d2
                 jsr     (Queue_Kos_Module).l
                 st      $2E(a0)
 
-loc_57176:
+SKLRZ2Events_TryDrawBackdrop:
                 tst.w   x_pos(a0)
-                beq.s   locret_57182
+                beq.s   SKLRZ2Events_BackdropDrawReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_57182:
+SKLRZ2Events_BackdropDrawReturn:
                 rts
 ; ---------------------------------------------------------------------------
 LRZ2_BGDeformArray:

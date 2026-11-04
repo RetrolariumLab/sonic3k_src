@@ -15,11 +15,12 @@ Obj_LRZSmashingSpikePlatform:
                 move.b  subtype(a0),d0
                 lsl.w   #3,d0
                 move.w  d0,$38(a0)
-                move.l  #loc_43128,(a0)
+                move.l  #SKLRZSpikeSlam_DropAndCheckBottom,(a0)
 
-loc_43128:
+; Integrate the old Y velocity into displacement before using the new velocity
+SKLRZSpikeSlam_DropAndCheckBottom:
                 tst.b   $32(a0)
-                bne.s   loc_43178
+                bne.s   SKLRZSpikeSlam_TickBottomHold
                 move.w  y_vel(a0),d0
                 addi.w  #$40,y_vel(a0)
                 ext.l   d0
@@ -27,55 +28,55 @@ loc_43128:
                 add.l   d0,$34(a0)
                 move.w  $34(a0),d2
                 cmp.w   $38(a0),d2
-                blo.w   loc_431E0
+                blo.w   SKLRZSpikeSlam_PlaceAndCheckSolid
                 clr.w   y_vel(a0)
                 move.w  $38(a0),$34(a0)
                 move.b  #1,$32(a0)
                 move.w  #30,$3A(a0)
                 move.b  #0,anim_frame(a0)
                 tst.b   render_flags(a0)
-                bpl.s   loc_431E0
+                bpl.s   SKLRZSpikeSlam_PlaceAndCheckSolid
                 moveq   #signextendB(sfx_Crash),d0
                 jsr     (Play_SFX).l
-                bra.s   loc_431E0
+                bra.s   SKLRZSpikeSlam_PlaceAndCheckSolid
 ; ---------------------------------------------------------------------------
 
-loc_43178:
+SKLRZSpikeSlam_TickBottomHold:
                 tst.w   $3A(a0)
-                beq.s   loc_431AA
+                beq.s   SKLRZSpikeSlam_RetractAndToggleFrame
                 subq.w  #1,$3A(a0)
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
-                move.b  RawAni_43196(pc,d0.w),mapping_frame(a0)
-                beq.s   loc_431E0
+                move.b  SKLRZSpikeSlam_BottomHoldFrames(pc,d0.w),mapping_frame(a0)
+                beq.s   SKLRZSpikeSlam_PlaceAndCheckSolid
                 addq.b  #1,anim_frame(a0)
-                bra.s   loc_431E0
+                bra.s   SKLRZSpikeSlam_PlaceAndCheckSolid
 ; ---------------------------------------------------------------------------
-RawAni_43196:
+SKLRZSpikeSlam_BottomHoldFrames:
                 dc.b    2,   4,   6,   7,   7,   7,   7,   6,   6,   5,   5,   4,   4,   3,   3,   2,   2,   1,   1,   0
                 even
 ; ---------------------------------------------------------------------------
 
-loc_431AA:
+SKLRZSpikeSlam_RetractAndToggleFrame:
                 move.w  $34(a0),d2
-                beq.s   loc_431D4
+                beq.s   SKLRZSpikeSlam_ResetDropState
                 subq.w  #1,d2
                 move.w  d2,$34(a0)
                 addq.b  #8,mapping_frame(a0)
                 andi.b  #8,mapping_frame(a0)
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #$1F,d0
-                bne.s   loc_431E0
+                bne.s   SKLRZSpikeSlam_PlaceAndCheckSolid
                 moveq   #signextendB(sfx_Blast),d0
                 jsr     (Play_SFX).l
-                bra.s   loc_431E0
+                bra.s   SKLRZSpikeSlam_PlaceAndCheckSolid
 ; ---------------------------------------------------------------------------
 
-loc_431D4:
+SKLRZSpikeSlam_ResetDropState:
                 move.b  #0,$32(a0)
                 move.b  #0,mapping_frame(a0)
 
-loc_431E0:
+SKLRZSpikeSlam_PlaceAndCheckSolid:
                 move.w  $46(a0),d0
                 add.w   $34(a0),d0
                 move.w  d0,y_pos(a0)
@@ -93,24 +94,24 @@ loc_431E0:
                 jsr     (SolidObjectFull).l
                 swap    d6
                 andi.w  #4|8,d6
-                bne.s   loc_43222
+                bne.s   SKLRZSpikeSlam_TryHurtP1
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_43222:
+SKLRZSpikeSlam_TryHurtP1:
                 move.b  d6,d0
                 andi.b  #4,d0
-                beq.s   loc_43234
+                beq.s   SKLRZSpikeSlam_TryHurtP2
                 lea     (Player_1).w,a1
                 jsr     (HurtPlayerFromSolidHazard).l
 
-loc_43234:
+SKLRZSpikeSlam_TryHurtP2:
                 andi.b  #8,d6
-                beq.s   loc_43244
+                beq.s   SKLRZSpikeSlam_DrawPlatform
                 lea     (Player_2).w,a1
                 jsr     (HurtPlayerFromSolidHazard).l
 
-loc_43244:
+SKLRZSpikeSlam_DrawPlatform:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_LRZSmashingSpikePlatform:

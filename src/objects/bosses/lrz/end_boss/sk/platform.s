@@ -216,7 +216,7 @@ loc_79E7C:
 ; ---------------------------------------------------------------------------
 
 loc_79E9C:
-                lea     ObjDat3_7960E(pc),a1
+                lea     SKLRZ3Scene_PlatformDebrisAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #Obj_FlickerMove,(a0)
                 bsr.w   SeedLRZBossPlatformTenDebrisPieces

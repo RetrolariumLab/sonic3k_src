@@ -15,17 +15,17 @@ Obj_LRZSpikeBall:
                 move.w  x_pos(a0),$44(a0)
                 move.w  y_pos(a0),$46(a0)
                 tst.b   subtype(a0)
-                bne.s   loc_437F8
+                bne.s   SKLRZSpikeBall_InitApproachOrbit
                 ori.w   #high_priority,art_tile(a0)
                 move.b  #$8F,collision_flags(a0)
-                move.l  #loc_4397E,(a0)
-                bra.w   loc_4397E
+                move.l  #SKLRZSpikeBall_PlacePerpetualOrbit,(a0)
+                bra.w   SKLRZSpikeBall_PlacePerpetualOrbit
 ; ---------------------------------------------------------------------------
 
-loc_437F8:
-                move.l  #loc_437FE,(a0)
+SKLRZSpikeBall_InitApproachOrbit:
+                move.l  #SKLRZSpikeBall_PlaceOrbitAndSetDamage,(a0)
 
-loc_437FE:
+SKLRZSpikeBall_PlaceOrbitAndSetDamage:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 asr.w   #2,d1
@@ -34,154 +34,155 @@ loc_437FE:
                 move.b  #0,collision_flags(a0)
                 andi.w  #drawing_mask,art_tile(a0)
                 tst.b   angle(a0)
-                bpl.s   loc_43830
+                bpl.s   SKLRZSpikeBall_TryLatchP1Approach
                 ori.w   #high_priority,art_tile(a0)
                 move.b  #$8F,collision_flags(a0)
 
-loc_43830:
+SKLRZSpikeBall_TryLatchP1Approach:
                 lea     (Player_1).w,a1
                 move.w  y_pos(a1),d0
                 sub.w   $46(a0),d0
                 addi.w  #$40,d0
                 cmpi.w  #$80,d0
-                bhs.s   loc_4385C
+                bhs.s   SKLRZSpikeBall_TryLaunchFromOrbit
                 move.w  x_pos(a1),d0
                 sub.w   $44(a0),d0
-                bcc.s   loc_4385C
+                bcc.s   SKLRZSpikeBall_TryLaunchFromOrbit
                 tst.w   (Debug_placement_mode).w
-                bne.s   loc_4385C
+                bne.s   SKLRZSpikeBall_TryLaunchFromOrbit
                 move.b  #1,$30(a0)
 
-loc_4385C:
+; Launch after the approach latch is set and the angle exactly equals the subtype
+SKLRZSpikeBall_TryLaunchFromOrbit:
                 tst.b   $30(a0)
-                beq.s   loc_4387E
+                beq.s   SKLRZSpikeBall_StepOrbitAndChooseDraw
                 move.b  subtype(a0),d0
                 cmp.b   angle(a0),d0
-                bne.s   loc_4387E
-                move.l  #loc_4389E,(a0)
+                bne.s   SKLRZSpikeBall_StepOrbitAndChooseDraw
+                move.l  #SKLRZSpikeBall_RollAndProbeWall,(a0)
                 move.w  #-$400,x_vel(a0)
                 move.w  #0,y_vel(a0)
 
-loc_4387E:
+SKLRZSpikeBall_StepOrbitAndChooseDraw:
                 subq.b  #2,angle(a0)
                 tst.b   $30(a0)
-                bne.s   loc_43892
+                bne.s   SKLRZSpikeBall_DrawLatchedOrbit
                 move.w  $44(a0),d0
                 jmp     (SKTouchCull_TestAnchorAndDraw).l
 ; ---------------------------------------------------------------------------
 
-loc_43892:
+SKLRZSpikeBall_DrawLatchedOrbit:
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_4389E:
+SKLRZSpikeBall_RollAndProbeWall:
                 btst    #1,status(a0)
-                bne.s   loc_4390E
+                bne.s   SKLRZSpikeBall_ProbeWallInAir
                 jsr     (MoveSprite2).l
                 moveq   #-$20,d3
                 add.w   x_pos(a0),d3
                 jsr     (ObjCheckLeftWallDist_Part2).l
                 tst.w   d1
-                bpl.s   loc_438CC
+                bpl.s   SKLRZSpikeBall_FollowFloorOrFall
                 sub.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
                 move.b  #0,$30(a0)
 
-loc_438CC:
+SKLRZSpikeBall_FollowFloorOrFall:
                 jsr     (ObjCheckFloorDist).l
                 cmpi.w  #$E,d1
-                bgt.s   loc_43906
+                bgt.s   SKLRZSpikeBall_BeginFall
                 add.w   d1,y_pos(a0)
                 move.w  #0,y_vel(a0)
                 tst.w   x_vel(a0)
-                beq.s   loc_438FA
+                beq.s   SKLRZSpikeBall_AccelRollAndTryDebris
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #$F,d0
-                bne.s   loc_438FA
+                bne.s   SKLRZSpikeBall_AccelRollAndTryDebris
                 moveq   #signextendB(sfx_MechaLand),d0
                 jsr     (Play_SFX).l
 
-loc_438FA:
+SKLRZSpikeBall_AccelRollAndTryDebris:
                 subi.w  #4,x_vel(a0)
                 bsr.w   EmitLrzSpikeBallGroundDebris
-                bra.s   loc_43948
+                bra.s   SKLRZSpikeBall_TickRollingFrames
 ; ---------------------------------------------------------------------------
 
-loc_43906:
+SKLRZSpikeBall_BeginFall:
                 bset    #1,status(a0)
-                bra.s   loc_43948
+                bra.s   SKLRZSpikeBall_TickRollingFrames
 ; ---------------------------------------------------------------------------
 
-loc_4390E:
+SKLRZSpikeBall_ProbeWallInAir:
                 moveq   #-$20,d3
                 add.w   x_pos(a0),d3
                 jsr     (ObjCheckLeftWallDist_Part2).l
                 tst.w   d1
-                bpl.s   loc_43928
+                bpl.s   SKLRZSpikeBall_FallAndCheckLanding
                 sub.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
 
-loc_43928:
+SKLRZSpikeBall_FallAndCheckLanding:
                 jsr     (MoveSprite).l
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.s   loc_43948
+                bpl.s   SKLRZSpikeBall_TickRollingFrames
                 add.w   d1,y_pos(a0)
                 bclr    #1,status(a0)
                 move.w  #0,y_vel(a0)
 
-loc_43948:
+SKLRZSpikeBall_TickRollingFrames:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_43966
+                bpl.s   SKLRZSpikeBall_ChooseRollingDraw
                 move.b  #3,anim_frame_timer(a0)
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #3,mapping_frame(a0)
-                blo.s   loc_43966
+                blo.s   SKLRZSpikeBall_ChooseRollingDraw
                 move.b  #0,mapping_frame(a0)
 
-loc_43966:
+SKLRZSpikeBall_ChooseRollingDraw:
                 tst.b   $30(a0)
-                beq.s   loc_43978
+                beq.s   SKLRZSpikeBall_TouchCullRollingBall
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_43978:
+SKLRZSpikeBall_TouchCullRollingBall:
                 jmp     (Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
 
-loc_4397E:
+SKLRZSpikeBall_PlacePerpetualOrbit:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 asr.w   #2,d1
                 add.w   $44(a0),d1
                 move.w  d1,x_pos(a0)
                 btst    #1,status(a0)
-                bne.s   loc_439A4
+                bne.s   SKLRZSpikeBall_TryPlayTerrainSound
                 jsr     (ObjCheckFloorDist).l
                 add.w   d1,y_pos(a0)
 
-loc_439A4:
+SKLRZSpikeBall_TryPlayTerrainSound:
                 tst.b   render_flags(a0)
-                bpl.s   loc_439BC
+                bpl.s   SKLRZSpikeBall_TryDebrisAndTickFrames
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #$F,d0
-                bne.s   loc_439BC
+                bne.s   SKLRZSpikeBall_TryDebrisAndTickFrames
                 moveq   #signextendB(sfx_MechaLand),d0
                 jsr     (Play_SFX).l
 
-loc_439BC:
+SKLRZSpikeBall_TryDebrisAndTickFrames:
                 bsr.w   EmitLrzSpikeBallGroundDebris
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_439DE
+                bpl.s   SKLRZSpikeBall_StepPerpetualOrbit
                 move.b  #3,anim_frame_timer(a0)
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #3,mapping_frame(a0)
-                blo.s   loc_439DE
+                blo.s   SKLRZSpikeBall_StepPerpetualOrbit
                 move.b  #0,mapping_frame(a0)
 
-loc_439DE:
+SKLRZSpikeBall_StepPerpetualOrbit:
                 subq.b  #2,angle(a0)
                 move.w  $44(a0),d0
                 jmp     (SKTouchCull_TestAnchorAndDraw).l
@@ -191,12 +192,12 @@ loc_439DE:
 EmitLrzSpikeBallGroundDebris:
                 move.w  (Level_frame_counter).w,d0
                 andi.w  #3,d0
-                bne.s   locret_43A6A
+                bne.s   SKLRZSpikeBall_DebrisSpawnReturn
                 tst.b   render_flags(a0)
-                bpl.s   locret_43A6A
+                bpl.s   SKLRZSpikeBall_DebrisSpawnReturn
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   locret_43A6A
-                move.l  #loc_43A6C,(a1)
+                bne.w   SKLRZSpikeBall_DebrisSpawnReturn
+                move.l  #SKLRZSpikeBall_UpdateVisibleDebris,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 addi.w  #$20,y_pos(a1)
@@ -217,22 +218,22 @@ EmitLrzSpikeBallGroundDebris:
                 addi.w  #-$400,d0
                 move.w  d0,y_vel(a1)
 
-locret_43A6A:
+SKLRZSpikeBall_DebrisSpawnReturn:
                 rts
 ; End of function EmitLrzSpikeBallGroundDebris
 
 ; ---------------------------------------------------------------------------
 
-loc_43A6C:
+SKLRZSpikeBall_UpdateVisibleDebris:
                 tst.b   render_flags(a0)
-                bpl.s   loc_43A88
+                bpl.s   SKLRZSpikeBall_DeleteDebris
                 addq.b  #1,mapping_frame(a0)
                 andi.b  #3,mapping_frame(a0)
                 jsr     (MoveSprite).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_43A88:
+SKLRZSpikeBall_DeleteDebris:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_LRZSpikeBall:

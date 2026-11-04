@@ -11,35 +11,35 @@ Obj_LRZOrbitingSpikeBallHorizontal:
                 move.w  x_pos(a0),$44(a0)
                 move.w  y_pos(a0),$46(a0)
                 bclr    #0,subtype(a0)
-                beq.s   loc_43B84
+                beq.s   SKLRZOrbitBall_InitSmallX
                 move.b  #$20,width_pixels(a0)
                 move.b  #$20,height_pixels(a0)
                 move.b  #1,mapping_frame(a0)
-                move.l  #loc_43BDE,(a0)
-                bra.w   loc_43BDE
+                move.l  #SKLRZOrbitBall_CalcLargeXPhase,(a0)
+                bra.w   SKLRZOrbitBall_CalcLargeXPhase
 ; ---------------------------------------------------------------------------
 
-loc_43B84:
+SKLRZOrbitBall_InitSmallX:
                 move.b  #$10,width_pixels(a0)
                 move.b  #$10,height_pixels(a0)
-                move.l  #loc_43B96,(a0)
+                move.l  #SKLRZOrbitBall_CalcSmallXPhase,(a0)
 
-loc_43B96:
+SKLRZOrbitBall_CalcSmallXPhase:
                 move.b  #0,collision_flags(a0)
                 andi.w  #drawing_mask,art_tile(a0)
                 move.b  (Level_frame_counter+1).w,d0
                 add.b   d0,d0
                 btst    #0,status(a0)
-                beq.s   loc_43BB2
+                beq.s   SKLRZOrbitBall_TryEnableSmallXContact
                 neg.b   d0
 
-loc_43BB2:
+SKLRZOrbitBall_TryEnableSmallXContact:
                 add.b   subtype(a0),d0
-                bpl.s   loc_43BC4
+                bpl.s   SKLRZOrbitBall_PlaceSmallX
                 ori.w   #high_priority,art_tile(a0)
                 move.b  #$9A,collision_flags(a0)
 
-loc_43BC4:
+SKLRZOrbitBall_PlaceSmallX:
                 jsr     (GetSineCosine).l
                 asr.w   #3,d1
                 add.w   $44(a0),d1
@@ -48,22 +48,22 @@ loc_43BC4:
                 jmp     (SKTouchCull_TestAnchorAndDraw).l
 ; ---------------------------------------------------------------------------
 
-loc_43BDE:
+SKLRZOrbitBall_CalcLargeXPhase:
                 move.b  #0,collision_flags(a0)
                 andi.w  #drawing_mask,art_tile(a0)
                 move.b  (Level_frame_counter+1).w,d0
                 add.b   d0,d0
                 btst    #0,status(a0)
-                beq.s   loc_43BFA
+                beq.s   SKLRZOrbitBall_TryEnableLargeXContact
                 neg.b   d0
 
-loc_43BFA:
+SKLRZOrbitBall_TryEnableLargeXContact:
                 add.b   subtype(a0),d0
-                bpl.s   loc_43C0C
+                bpl.s   SKLRZOrbitBall_PlaceLargeX
                 ori.w   #high_priority,art_tile(a0)
                 move.b  #$8F,collision_flags(a0)
 
-loc_43C0C:
+SKLRZOrbitBall_PlaceLargeX:
                 jsr     (GetSineCosine).l
                 move.w  d1,d0
                 asr.w   #1,d1
@@ -83,35 +83,35 @@ Obj_LRZOrbitingSpikeBallVertical:
                 move.w  x_pos(a0),$44(a0)
                 move.w  y_pos(a0),$46(a0)
                 bclr    #0,subtype(a0)
-                beq.s   loc_43C76
+                beq.s   SKLRZOrbitBall_InitSmallY
                 move.b  #$20,width_pixels(a0)
                 move.b  #$20,height_pixels(a0)
                 move.b  #1,mapping_frame(a0)
-                move.l  #loc_43CD6,(a0)
-                bra.w   loc_43CD6
+                move.l  #SKLRZOrbitBall_CalcLargeYPhase,(a0)
+                bra.w   SKLRZOrbitBall_CalcLargeYPhase
 ; ---------------------------------------------------------------------------
 
-loc_43C76:
+SKLRZOrbitBall_InitSmallY:
                 move.b  #$10,width_pixels(a0)
                 move.b  #$10,height_pixels(a0)
-                move.l  #loc_43C88,(a0)
+                move.l  #SKLRZOrbitBall_CalcSmallYPhase,(a0)
 
-loc_43C88:
+SKLRZOrbitBall_CalcSmallYPhase:
                 move.b  #0,collision_flags(a0)
                 andi.w  #drawing_mask,art_tile(a0)
                 move.b  (Level_frame_counter+1).w,d0
                 add.b   d0,d0
                 btst    #0,status(a0)
-                beq.s   loc_43CA4
+                beq.s   SKLRZOrbitBall_TryEnableSmallYContact
                 neg.b   d0
 
-loc_43CA4:
+SKLRZOrbitBall_TryEnableSmallYContact:
                 add.b   subtype(a0),d0
-                bpl.s   loc_43CB6
+                bpl.s   SKLRZOrbitBall_PlaceSmallY
                 ori.w   #high_priority,art_tile(a0)
                 move.b  #$9A,collision_flags(a0)
 
-loc_43CB6:
+SKLRZOrbitBall_PlaceSmallY:
                 jsr     (GetSineCosine).l
                 move.w  d1,d0
                 asr.w   #2,d1
@@ -123,22 +123,22 @@ loc_43CB6:
                 jmp     (SKTouchCull_TestAnchorAndDraw).l
 ; ---------------------------------------------------------------------------
 
-loc_43CD6:
+SKLRZOrbitBall_CalcLargeYPhase:
                 move.b  #0,collision_flags(a0)
                 andi.w  #drawing_mask,art_tile(a0)
                 move.b  (Level_frame_counter+1).w,d0
                 add.b   d0,d0
                 btst    #0,status(a0)
-                beq.s   loc_43CF2
+                beq.s   SKLRZOrbitBall_TryEnableLargeYContact
                 neg.b   d0
 
-loc_43CF2:
+SKLRZOrbitBall_TryEnableLargeYContact:
                 add.b   subtype(a0),d0
-                bpl.s   loc_43D04
+                bpl.s   SKLRZOrbitBall_PlaceLargeY
                 ori.w   #high_priority,art_tile(a0)
                 move.b  #$8F,collision_flags(a0)
 
-loc_43D04:
+SKLRZOrbitBall_PlaceLargeY:
                 jsr     (GetSineCosine).l
                 asr.w   #2,d1
                 move.w  d1,d0

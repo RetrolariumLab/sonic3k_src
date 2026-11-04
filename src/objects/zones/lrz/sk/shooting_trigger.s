@@ -16,17 +16,17 @@ Obj_LRZShootingTrigger:
                 andi.w  #$F0,d0
                 lsr.w   #2,d0
                 move.w  d0,$30(a0)
-                move.l  #loc_42E00,(a0)
+                move.l  #SKLRZShotTrigger_TickShotTimer,(a0)
 
-loc_42E00:
+SKLRZShotTrigger_TickShotTimer:
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_42E84
+                bpl.s   SKLRZShotTrigger_BindTriggerAndCheckP1
                 move.w  $30(a0),$2E(a0)
                 tst.b   render_flags(a0)
-                bpl.s   loc_42E84
+                bpl.s   SKLRZShotTrigger_BindTriggerAndCheckP1
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_42E84
-                move.l  #loc_42EE8,(a1)
+                bne.w   SKLRZShotTrigger_BindTriggerAndCheckP1
+                move.l  #SKLRZShotTrigger_MoveVisibleShot,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.b  render_flags(a0),render_flags(a1)
@@ -41,16 +41,16 @@ loc_42E00:
                 move.w  #$200,x_vel(a1)
                 move.w  #$200,y_vel(a1)
                 btst    #0,status(a0)
-                beq.s   loc_42E7C
+                beq.s   SKLRZShotTrigger_PlayShotSound
                 neg.w   x_vel(a1)
 
-loc_42E7C:
+SKLRZShotTrigger_PlayShotSound:
                 moveq   #signextendB(sfx_Projectile),d0
                 jsr     (Play_SFX).l
 
-loc_42E84:
+SKLRZShotTrigger_BindTriggerAndCheckP1:
                 move.b  collision_property(a0),d0
-                beq.w   loc_42EBA
+                beq.w   SKLRZShotTrigger_TouchCullTrigger
                 move.b  subtype(a0),d0
                 andi.w  #$F,d0
                 lea     (Level_trigger_array).w,a3
@@ -58,16 +58,16 @@ loc_42E84:
                 moveq   #0,d3
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
-                beq.s   loc_42EAC
+                beq.s   SKLRZShotTrigger_CheckP2Contact
                 bsr.s   LRZShootingTrigger_TryActivateOnRoll
 
-loc_42EAC:
+SKLRZShotTrigger_CheckP2Contact:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
-                beq.s   loc_42EBA
+                beq.s   SKLRZShotTrigger_TouchCullTrigger
                 bsr.s   LRZShootingTrigger_TryActivateOnRoll
 
-loc_42EBA:
+SKLRZShotTrigger_TouchCullTrigger:
                 jmp     (Sprite_CheckDeleteTouch3).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -75,7 +75,7 @@ loc_42EBA:
 ; Reverse the rolling player, set the level trigger bit and turn the switch into an explosion
 LRZShootingTrigger_TryActivateOnRoll:
                 cmpi.b  #2,anim(a1)
-                bne.s   locret_42EE6
+                bne.s   SKLRZShotTrigger_ActivationReturn
                 neg.w   x_vel(a1)
                 neg.w   y_vel(a1)
                 bset    d3,(a3)
@@ -84,21 +84,21 @@ LRZShootingTrigger_TryActivateOnRoll:
                 clr.b   collision_flags(a0)
                 clr.b   collision_property(a0)
 
-locret_42EE6:
+SKLRZShotTrigger_ActivationReturn:
                 rts
 ; End of function LRZShootingTrigger_TryActivateOnRoll
 
 ; ---------------------------------------------------------------------------
 
-loc_42EE8:
+SKLRZShotTrigger_MoveVisibleShot:
                 tst.b   render_flags(a0)
-                bpl.s   loc_42F00
+                bpl.s   SKLRZShotTrigger_DeleteShot
                 jsr     (MoveSprite2).l
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_42F00:
+SKLRZShotTrigger_DeleteShot:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_LRZShootingTrigger:

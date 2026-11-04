@@ -1,12 +1,12 @@
 ; Data owner: objects/shared/zones/lrz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_LRZOrbitingSpikeBall_:
-                dc.w    word_43D28-Map_LRZOrbitingSpikeBall_
-                dc.w    word_43D36-Map_LRZOrbitingSpikeBall_
-word_43D28:     dc.w    2
+                dc.w    LRZSharedSK_OrbitingSpikeBall_MapSlot0-Map_LRZOrbitingSpikeBall_
+                dc.w    LRZSharedSK_OrbitingSpikeBall_MapSlot1-Map_LRZOrbitingSpikeBall_
+LRZSharedSK_OrbitingSpikeBall_MapSlot0: dc.w    2
                 dc.b    $F0,   7,   0, $10, $FF, $F0
                 dc.b    $F0,   7,   8, $10,   0,   0
-word_43D36:     dc.w    8
+LRZSharedSK_OrbitingSpikeBall_MapSlot1: dc.w    8
                 dc.b    $E8,  $A,   0, $10, $FF, $E8
                 dc.b    $E8,  $A,   8, $10,   0,   0
                 dc.b    0,  $A,   0, $19, $FF, $E8

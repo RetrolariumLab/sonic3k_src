@@ -15,17 +15,17 @@ Obj_LRZFireballLauncher:
                 move.b  subtype(a0),d0
                 lsl.w   #2,d0
                 move.w  d0,$30(a0)
-                move.l  #loc_42BF6,(a0)
+                move.l  #SKLRZFireball_TickShotTimer,(a0)
 
-loc_42BF6:
+SKLRZFireball_TickShotTimer:
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_42C7A
+                bpl.s   SKLRZFireball_DrawLauncher
                 move.w  $30(a0),$2E(a0)
                 tst.b   render_flags(a0)
-                bpl.s   loc_42C7A
+                bpl.s   SKLRZFireball_DrawLauncher
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_42C7A
-                move.l  #loc_42C80,(a1)
+                bne.w   SKLRZFireball_DrawLauncher
+                move.l  #SKLRZFireball_TickFireballFrame,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 addi.w  #8,x_pos(a1)
@@ -39,34 +39,35 @@ loc_42BF6:
                 bset    #4,shield_reaction(a1)
                 move.w  #$200,x_vel(a1)
                 btst    #0,status(a0)
-                beq.s   loc_42C72
+                beq.s   SKLRZFireball_PlayLaunchSound
                 neg.w   x_vel(a1)
                 subi.w  #2*8,x_pos(a1)
 
-loc_42C72:
+SKLRZFireball_PlayLaunchSound:
                 moveq   #signextendB(sfx_LevelProjectile),d0
                 jsr     (Play_SFX).l
 
-loc_42C7A:
+SKLRZFireball_DrawLauncher:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_42C80:
+SKLRZFireball_TickFireballFrame:
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #3,d0
-                bne.s   loc_42C94
+                bne.s   SKLRZFireball_MoveVisibleFireball
                 addq.b  #1,mapping_frame(a0)
                 andi.b  #1,mapping_frame(a0)
 
-loc_42C94:
+; Use the previous render flag to decide whether to move and queue collision
+SKLRZFireball_MoveVisibleFireball:
                 tst.b   render_flags(a0)
-                bpl.s   loc_42CAC
+                bpl.s   SKLRZFireball_DeleteFireball
                 jsr     (MoveSprite2).l
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_42CAC:
+SKLRZFireball_DeleteFireball:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_LRZFireballLauncher:

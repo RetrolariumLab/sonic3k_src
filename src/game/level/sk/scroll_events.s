@@ -63,7 +63,7 @@ SpecialEvents_Index:
                 dc.l    SKMHZ1Events_WrapChaseCameraAndPlayers
                 dc.l    SKMHZ2BG_StepChaseCamera
                 dc.l    SKSOZ2BG_StepSandCollisionOffset
-                dc.l    loc_59E46
+                dc.l    SKLRZ3Events_TickAutoscrollDelay
 ; ---------------------------------------------------------------------------
 
 SKCamera_SpecialEventReturn:

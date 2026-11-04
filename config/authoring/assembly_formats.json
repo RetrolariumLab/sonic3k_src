@@ -103448,11 +103448,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 20
       },
-      "declarations_sha256": "2c2280c6f2599f11f9e015ed6178ee46e0c322f196fb608f31419d7e005770cf",
+      "declarations_sha256": "57c62de472da78067ec9797c009923a9f214d00b3a9a5102f425544fa3377411",
       "labels": {
         "Map_TunnelExhaust_": 0,
-        "word_29C8E": 4,
-        "word_29C96": 12
+        "TunnelExhaustSharedData_MapSlot00": 4,
+        "TunnelExhaustSharedData_MapSlot01": 12
       },
       "external_symbols": [],
       "blocks": [
@@ -103460,14 +103460,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_29C8E",
+          "target": "TunnelExhaustSharedData_MapSlot00",
           "base": "Map_TunnelExhaust_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_29C96",
+          "target": "TunnelExhaustSharedData_MapSlot01",
           "base": "Map_TunnelExhaust_"
         },
         {
@@ -104756,11 +104756,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 98
       },
-      "declarations_sha256": "9c1024bf4087f817200c01c11b0e59204474dc84224e4e94244224678e109a92",
+      "declarations_sha256": "50516e8a03bbb199501be624784ee18439c3ac49aa364c33a2851c039617f0b7",
       "labels": {
         "Ani_LRZSpikeBallLauncher_": 0,
-        "byte_4495E": 4,
-        "byte_44964": 10
+        "LRZBallLaunchAni_HoldThenCharge": 4,
+        "LRZBallLaunchAni_ChargeThenLaunch": 10
       },
       "external_symbols": [],
       "blocks": [
@@ -104768,14 +104768,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4495E",
+          "target": "LRZBallLaunchAni_HoldThenCharge",
           "base": "Ani_LRZSpikeBallLauncher_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_44964",
+          "target": "LRZBallLaunchAni_ChargeThenLaunch",
           "base": "Ani_LRZSpikeBallLauncher_"
         },
         {
@@ -104801,10 +104801,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 88
       },
-      "declarations_sha256": "4afbe722a4b2742b1f04feeb6e8d65af4d5f25bc218a36db7ac69077d6f971a5",
+      "declarations_sha256": "07a38f6eb07b069ab2d7ae75c0cd48a31f8855e19925757287134433c1048313",
       "labels": {
         "Map_LRZ2DeathEggBG_": 0,
-        "word_571A0": 2
+        "LRZSharedSK_Backdrop_MapSlot0": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -104812,7 +104812,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_571A0",
+          "target": "LRZSharedSK_Backdrop_MapSlot0",
           "base": "Map_LRZ2DeathEggBG_"
         },
         {
@@ -104831,29 +104831,29 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 266
       },
-      "declarations_sha256": "9b62c33e9a00984589428de3d56d4a48000b6ab39e76024ae8abd9f2f56d649f",
+      "declarations_sha256": "04e03cde2a3996a2c6583c33cf67273817cf5c2f97b9872f4d693e5b38ba86ea",
       "labels": {
         "Map_LRZ3Autoscroll_": 0,
-        "word_1876DA": 40,
-        "word_187700": 78,
-        "word_187708": 86,
-        "word_187710": 94,
-        "word_18771E": 108,
-        "word_18772C": 122,
-        "word_187734": 130,
-        "word_18773C": 138,
-        "word_187744": 146,
-        "word_18774C": 154,
-        "word_187754": 162,
-        "word_18775C": 170,
-        "word_187764": 178,
-        "word_187772": 192,
-        "word_18778C": 218,
-        "word_187794": 226,
-        "word_18779C": 234,
-        "word_1877A4": 242,
-        "word_1877AC": 250,
-        "word_1877AE": 252
+        "LRZSharedSK_Autoscroll_MapSlot0": 40,
+        "LRZSharedSK_Autoscroll_MapSlot1": 78,
+        "LRZSharedSK_Autoscroll_MapSlot2": 86,
+        "LRZSharedSK_Autoscroll_MapSlot3": 94,
+        "LRZSharedSK_Autoscroll_MapSlot4": 108,
+        "LRZSharedSK_Autoscroll_MapSlot5": 122,
+        "LRZSharedSK_Autoscroll_MapSlot6": 130,
+        "LRZSharedSK_Autoscroll_MapSlot7": 138,
+        "LRZSharedSK_Autoscroll_MapSlot8": 146,
+        "LRZSharedSK_Autoscroll_MapSlot9": 154,
+        "LRZSharedSK_Autoscroll_MapSlotA": 162,
+        "LRZSharedSK_Autoscroll_MapSlotB": 170,
+        "LRZSharedSK_Autoscroll_MapSlotC": 178,
+        "LRZSharedSK_Autoscroll_MapSlotD": 192,
+        "LRZSharedSK_Autoscroll_MapSlotE": 218,
+        "LRZSharedSK_Autoscroll_MapSlotF": 226,
+        "LRZSharedSK_Autoscroll_MapSlot10": 234,
+        "LRZSharedSK_Autoscroll_MapSlot11": 242,
+        "LRZSharedSK_Autoscroll_MapSlot12": 250,
+        "LRZSharedSK_Autoscroll_MapSlot13": 252
       },
       "external_symbols": [],
       "blocks": [
@@ -104861,140 +104861,140 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1876DA",
+          "target": "LRZSharedSK_Autoscroll_MapSlot0",
           "base": "Map_LRZ3Autoscroll_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187700",
+          "target": "LRZSharedSK_Autoscroll_MapSlot1",
           "base": "Map_LRZ3Autoscroll_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187708",
+          "target": "LRZSharedSK_Autoscroll_MapSlot2",
           "base": "Map_LRZ3Autoscroll_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187710",
+          "target": "LRZSharedSK_Autoscroll_MapSlot3",
           "base": "Map_LRZ3Autoscroll_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18771E",
+          "target": "LRZSharedSK_Autoscroll_MapSlot4",
           "base": "Map_LRZ3Autoscroll_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18772C",
+          "target": "LRZSharedSK_Autoscroll_MapSlot5",
           "base": "Map_LRZ3Autoscroll_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187734",
+          "target": "LRZSharedSK_Autoscroll_MapSlot6",
           "base": "Map_LRZ3Autoscroll_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18773C",
+          "target": "LRZSharedSK_Autoscroll_MapSlot7",
           "base": "Map_LRZ3Autoscroll_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187744",
+          "target": "LRZSharedSK_Autoscroll_MapSlot8",
           "base": "Map_LRZ3Autoscroll_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18774C",
+          "target": "LRZSharedSK_Autoscroll_MapSlot9",
           "base": "Map_LRZ3Autoscroll_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187754",
+          "target": "LRZSharedSK_Autoscroll_MapSlotA",
           "base": "Map_LRZ3Autoscroll_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18775C",
+          "target": "LRZSharedSK_Autoscroll_MapSlotB",
           "base": "Map_LRZ3Autoscroll_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187764",
+          "target": "LRZSharedSK_Autoscroll_MapSlotC",
           "base": "Map_LRZ3Autoscroll_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187772",
+          "target": "LRZSharedSK_Autoscroll_MapSlotD",
           "base": "Map_LRZ3Autoscroll_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18778C",
+          "target": "LRZSharedSK_Autoscroll_MapSlotE",
           "base": "Map_LRZ3Autoscroll_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187794",
+          "target": "LRZSharedSK_Autoscroll_MapSlotF",
           "base": "Map_LRZ3Autoscroll_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18779C",
+          "target": "LRZSharedSK_Autoscroll_MapSlot10",
           "base": "Map_LRZ3Autoscroll_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1877A4",
+          "target": "LRZSharedSK_Autoscroll_MapSlot11",
           "base": "Map_LRZ3Autoscroll_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1877AC",
+          "target": "LRZSharedSK_Autoscroll_MapSlot12",
           "base": "Map_LRZ3Autoscroll_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1877AE",
+          "target": "LRZSharedSK_Autoscroll_MapSlot13",
           "base": "Map_LRZ3Autoscroll_"
         },
         {
@@ -105108,14 +105108,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 164
       },
-      "declarations_sha256": "571473463676ab40667186fbfffedc23924b2fb412427264a789c225040a4f65",
+      "declarations_sha256": "7ed24888b56a1ca780d6d9ab148a1a35599fd8fe5d21af0122dfb2b68ef3b46c",
       "labels": {
         "Map_LRZ3DeathEggFlash_": 0,
-        "word_1877C6": 10,
-        "word_1877D4": 24,
-        "word_1877E2": 38,
-        "word_1877FC": 64,
-        "word_187828": 108
+        "LRZSharedSK_DeathEggFlash_MapSlot0": 10,
+        "LRZSharedSK_DeathEggFlash_MapSlot1": 24,
+        "LRZSharedSK_DeathEggFlash_MapSlot2": 38,
+        "LRZSharedSK_DeathEggFlash_MapSlot3": 64,
+        "LRZSharedSK_DeathEggFlash_MapSlot4": 108
       },
       "external_symbols": [],
       "blocks": [
@@ -105123,35 +105123,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1877C6",
+          "target": "LRZSharedSK_DeathEggFlash_MapSlot0",
           "base": "Map_LRZ3DeathEggFlash_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1877D4",
+          "target": "LRZSharedSK_DeathEggFlash_MapSlot1",
           "base": "Map_LRZ3DeathEggFlash_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1877E2",
+          "target": "LRZSharedSK_DeathEggFlash_MapSlot2",
           "base": "Map_LRZ3DeathEggFlash_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1877FC",
+          "target": "LRZSharedSK_DeathEggFlash_MapSlot3",
           "base": "Map_LRZ3DeathEggFlash_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187828",
+          "target": "LRZSharedSK_DeathEggFlash_MapSlot4",
           "base": "Map_LRZ3DeathEggFlash_"
         },
         {
@@ -105190,48 +105190,48 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 510
       },
-      "declarations_sha256": "4efd44bffb5bd9be361e13c322beff26b2ee96acd2d0a2e83803a172d5e0c351",
+      "declarations_sha256": "2301868a9a28968d51496e9bf1ae309e9092a52e363460497f856178a327a4d1",
       "labels": {
         "Map_LRZ3Platform_": 0,
-        "word_187502": 78,
-        "word_187528": 116,
-        "word_18753C": 136,
-        "word_18754A": 150,
-        "word_187558": 164,
-        "word_18757E": 202,
-        "word_1875A4": 240,
-        "word_1875B2": 254,
-        "word_1875BA": 262,
-        "word_1875C2": 270,
-        "word_1875CA": 278,
-        "word_1875D2": 286,
-        "word_1875DA": 294,
-        "word_1875E2": 302,
-        "word_1875EA": 310,
-        "word_1875F2": 318,
-        "word_1875FA": 326,
-        "word_187602": 334,
-        "word_18760A": 342,
-        "word_187612": 350,
-        "word_18761A": 358,
-        "word_187622": 366,
-        "word_18762A": 374,
-        "word_187632": 382,
-        "word_18763A": 390,
-        "word_187642": 398,
-        "word_18764A": 406,
-        "word_187652": 414,
-        "word_18765A": 422,
-        "word_187662": 430,
-        "word_18766A": 438,
-        "word_187672": 446,
-        "word_18767A": 454,
-        "word_187682": 462,
-        "word_18768A": 470,
-        "word_187692": 478,
-        "word_18769A": 486,
-        "word_1876A2": 494,
-        "word_1876AA": 502
+        "LRZ3Platform_MapFrame00": 78,
+        "LRZ3Platform_MapFrame01": 116,
+        "LRZ3Platform_MapFrame02": 136,
+        "LRZ3Platform_MapFrame03": 150,
+        "LRZ3Platform_MapFrame04": 164,
+        "LRZ3Platform_MapFrame05": 202,
+        "LRZ3Platform_MapFrame06": 240,
+        "LRZ3Platform_MapFrame07": 254,
+        "LRZ3Platform_MapFrame08": 262,
+        "LRZ3Platform_MapFrame09": 270,
+        "LRZ3Platform_MapFrame0A": 278,
+        "LRZ3Platform_MapFrame0B": 286,
+        "LRZ3Platform_MapFrame0C": 294,
+        "LRZ3Platform_MapFrame0D": 302,
+        "LRZ3Platform_MapFrame0E": 310,
+        "LRZ3Platform_MapFrame0F": 318,
+        "LRZ3Platform_MapFrame10": 326,
+        "LRZ3Platform_MapFrame11": 334,
+        "LRZ3Platform_MapFrame12": 342,
+        "LRZ3Platform_MapFrame13": 350,
+        "LRZ3Platform_MapFrame14": 358,
+        "LRZ3Platform_MapFrame15": 366,
+        "LRZ3Platform_MapFrame16": 374,
+        "LRZ3Platform_MapFrame17": 382,
+        "LRZ3Platform_MapFrame18": 390,
+        "LRZ3Platform_MapFrame19": 398,
+        "LRZ3Platform_MapFrame1A": 406,
+        "LRZ3Platform_MapFrame1B": 414,
+        "LRZ3Platform_MapFrame1C": 422,
+        "LRZ3Platform_MapFrame1D": 430,
+        "LRZ3Platform_MapFrame1E": 438,
+        "LRZ3Platform_MapFrame1F": 446,
+        "LRZ3Platform_MapFrame20": 454,
+        "LRZ3Platform_MapFrame21": 462,
+        "LRZ3Platform_MapFrame22": 470,
+        "LRZ3Platform_MapFrame23": 478,
+        "LRZ3Platform_MapFrame24": 486,
+        "LRZ3Platform_MapFrame25": 494,
+        "LRZ3Platform_MapFrame26": 502
       },
       "external_symbols": [],
       "blocks": [
@@ -105239,273 +105239,273 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187502",
+          "target": "LRZ3Platform_MapFrame00",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187528",
+          "target": "LRZ3Platform_MapFrame01",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18753C",
+          "target": "LRZ3Platform_MapFrame02",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18754A",
+          "target": "LRZ3Platform_MapFrame03",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187558",
+          "target": "LRZ3Platform_MapFrame04",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18757E",
+          "target": "LRZ3Platform_MapFrame05",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1875A4",
+          "target": "LRZ3Platform_MapFrame06",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1875B2",
+          "target": "LRZ3Platform_MapFrame07",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1875BA",
+          "target": "LRZ3Platform_MapFrame08",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1875C2",
+          "target": "LRZ3Platform_MapFrame09",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1875CA",
+          "target": "LRZ3Platform_MapFrame0A",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1875D2",
+          "target": "LRZ3Platform_MapFrame0B",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1875DA",
+          "target": "LRZ3Platform_MapFrame0C",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1875E2",
+          "target": "LRZ3Platform_MapFrame0D",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1875EA",
+          "target": "LRZ3Platform_MapFrame0E",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1875F2",
+          "target": "LRZ3Platform_MapFrame0F",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1875FA",
+          "target": "LRZ3Platform_MapFrame10",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187602",
+          "target": "LRZ3Platform_MapFrame11",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18760A",
+          "target": "LRZ3Platform_MapFrame12",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187612",
+          "target": "LRZ3Platform_MapFrame13",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18761A",
+          "target": "LRZ3Platform_MapFrame14",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187622",
+          "target": "LRZ3Platform_MapFrame15",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18762A",
+          "target": "LRZ3Platform_MapFrame16",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187632",
+          "target": "LRZ3Platform_MapFrame17",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18763A",
+          "target": "LRZ3Platform_MapFrame18",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187642",
+          "target": "LRZ3Platform_MapFrame19",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18764A",
+          "target": "LRZ3Platform_MapFrame1A",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187652",
+          "target": "LRZ3Platform_MapFrame1B",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18765A",
+          "target": "LRZ3Platform_MapFrame1C",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 58,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187662",
+          "target": "LRZ3Platform_MapFrame1D",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 60,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18766A",
+          "target": "LRZ3Platform_MapFrame1E",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 62,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187672",
+          "target": "LRZ3Platform_MapFrame1F",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 64,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18767A",
+          "target": "LRZ3Platform_MapFrame20",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 66,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187682",
+          "target": "LRZ3Platform_MapFrame21",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 68,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18768A",
+          "target": "LRZ3Platform_MapFrame22",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 70,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187692",
+          "target": "LRZ3Platform_MapFrame23",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 72,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18769A",
+          "target": "LRZ3Platform_MapFrame24",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 74,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1876A2",
+          "target": "LRZ3Platform_MapFrame25",
           "base": "Map_LRZ3Platform_"
         },
         {
           "offset": 76,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1876AA",
+          "target": "LRZ3Platform_MapFrame26",
           "base": "Map_LRZ3Platform_"
         },
         {
@@ -105714,13 +105714,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 40
       },
-      "declarations_sha256": "61ea4673de289f85864462d11739ca9e29ccc1aba20a56c58866338089916fd6",
+      "declarations_sha256": "c4e0da4ed9d3fa49c4d013ba95556b8832012e5c5a0d0f9cd5e27a91ab7b8bb3",
       "labels": {
         "Map_LRZ3Debris_": 0,
-        "word_187868": 8,
-        "word_187870": 16,
-        "word_187878": 24,
-        "word_187880": 32
+        "LRZ3Debris_MapFrame00": 8,
+        "LRZ3Debris_MapFrame01": 16,
+        "LRZ3Debris_MapFrame02": 24,
+        "LRZ3Debris_MapFrame03": 32
       },
       "external_symbols": [],
       "blocks": [
@@ -105728,28 +105728,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187868",
+          "target": "LRZ3Debris_MapFrame00",
           "base": "Map_LRZ3Debris_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187870",
+          "target": "LRZ3Debris_MapFrame01",
           "base": "Map_LRZ3Debris_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187878",
+          "target": "LRZ3Debris_MapFrame02",
           "base": "Map_LRZ3Debris_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187880",
+          "target": "LRZ3Debris_MapFrame03",
           "base": "Map_LRZ3Debris_"
         },
         {
@@ -105783,10 +105783,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 148
       },
-      "declarations_sha256": "1e3be1d5c5ba2ae7cb07017b2663a85cda10e388d8e4c713c6167b1cc6d7082b",
+      "declarations_sha256": "4d9a38d624840eff6275c0cbc170e8c71d40c9a52803988605d14466581cbb1a",
       "labels": {
         "Map_LRZBigDoor_": 0,
-        "word_42B26": 2
+        "LRZSharedSK_BigDoor_MapSlot0": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -105794,7 +105794,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_42B26",
+          "target": "LRZSharedSK_BigDoor_MapSlot0",
           "base": "Map_LRZBigDoor_"
         },
         {
@@ -105813,19 +105813,19 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 162
       },
-      "declarations_sha256": "852d1ce4fbca56efc134adf54bcabbbfc7bd7b7d7ce33f3bd5214dfb22276337",
+      "declarations_sha256": "6662f3799b19d7285a54386db61084c8191d9de9a39ec296874c24abd763bc23",
       "labels": {
         "Map_LRZBreakableRock_": 0,
-        "word_203EE": 22,
-        "word_203F6": 30,
-        "word_203FE": 38,
-        "word_20406": 46,
-        "word_2040E": 54,
-        "word_20416": 62,
-        "word_2041E": 70,
-        "word_20426": 78,
-        "word_2042E": 86,
-        "word_20454": 124
+        "LRZSharedSK_BreakableRockAct1_MapSlot0": 22,
+        "LRZSharedSK_BreakableRockAct1_MapSlot1": 30,
+        "LRZSharedSK_BreakableRockAct1_MapSlot2": 38,
+        "LRZSharedSK_BreakableRockAct1_MapSlot3": 46,
+        "LRZSharedSK_BreakableRockAct1_MapSlot4": 54,
+        "LRZSharedSK_BreakableRockAct1_MapSlot5": 62,
+        "LRZSharedSK_BreakableRockAct1_MapSlot6": 70,
+        "LRZSharedSK_BreakableRockAct1_MapSlot7": 78,
+        "LRZSharedSK_BreakableRockAct1_MapSlot8": 86,
+        "LRZ1BreakRockMap_Slots9A": 124
       },
       "external_symbols": [],
       "blocks": [
@@ -105833,77 +105833,77 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_203EE",
+          "target": "LRZSharedSK_BreakableRockAct1_MapSlot0",
           "base": "Map_LRZBreakableRock_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_203F6",
+          "target": "LRZSharedSK_BreakableRockAct1_MapSlot1",
           "base": "Map_LRZBreakableRock_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_203FE",
+          "target": "LRZSharedSK_BreakableRockAct1_MapSlot2",
           "base": "Map_LRZBreakableRock_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_20406",
+          "target": "LRZSharedSK_BreakableRockAct1_MapSlot3",
           "base": "Map_LRZBreakableRock_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2040E",
+          "target": "LRZSharedSK_BreakableRockAct1_MapSlot4",
           "base": "Map_LRZBreakableRock_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_20416",
+          "target": "LRZSharedSK_BreakableRockAct1_MapSlot5",
           "base": "Map_LRZBreakableRock_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2041E",
+          "target": "LRZSharedSK_BreakableRockAct1_MapSlot6",
           "base": "Map_LRZBreakableRock_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_20426",
+          "target": "LRZSharedSK_BreakableRockAct1_MapSlot7",
           "base": "Map_LRZBreakableRock_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2042E",
+          "target": "LRZSharedSK_BreakableRockAct1_MapSlot8",
           "base": "Map_LRZBreakableRock_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_20454",
+          "target": "LRZ1BreakRockMap_Slots9A",
           "base": "Map_LRZBreakableRock_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_20454",
+          "target": "LRZ1BreakRockMap_Slots9A",
           "base": "Map_LRZBreakableRock_"
         },
         {
@@ -105967,15 +105967,15 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 132
       },
-      "declarations_sha256": "73c95a3cbf3b9f58575ac7a981d9fb47c3753560353b9d0a1dd711e48c877a7a",
+      "declarations_sha256": "cedd167c43b8b00d15c06ebaabbfc5b71aa6f44900ecb3716872e319f6ef62cf",
       "labels": {
         "Map_LRZBreakableRock2_": 0,
-        "word_20492": 24,
-        "word_204A0": 38,
-        "word_204AE": 52,
-        "word_204BC": 66,
-        "word_204CA": 80,
-        "word_204E4": 106
+        "LRZ2BreakRockMap_Slots04": 24,
+        "LRZ2BreakRockMap_Slots15": 38,
+        "LRZ2BreakRockMap_Slots26": 52,
+        "LRZ2BreakRockMap_Slots37": 66,
+        "LRZ2BreakRockMap_Slots8B": 80,
+        "LRZ2BreakRockMap_Slots9A": 106
       },
       "external_symbols": [],
       "blocks": [
@@ -105983,84 +105983,84 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_20492",
+          "target": "LRZ2BreakRockMap_Slots04",
           "base": "Map_LRZBreakableRock2_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_204A0",
+          "target": "LRZ2BreakRockMap_Slots15",
           "base": "Map_LRZBreakableRock2_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_204AE",
+          "target": "LRZ2BreakRockMap_Slots26",
           "base": "Map_LRZBreakableRock2_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_204BC",
+          "target": "LRZ2BreakRockMap_Slots37",
           "base": "Map_LRZBreakableRock2_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_20492",
+          "target": "LRZ2BreakRockMap_Slots04",
           "base": "Map_LRZBreakableRock2_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_204A0",
+          "target": "LRZ2BreakRockMap_Slots15",
           "base": "Map_LRZBreakableRock2_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_204AE",
+          "target": "LRZ2BreakRockMap_Slots26",
           "base": "Map_LRZBreakableRock2_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_204BC",
+          "target": "LRZ2BreakRockMap_Slots37",
           "base": "Map_LRZBreakableRock2_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_204CA",
+          "target": "LRZ2BreakRockMap_Slots8B",
           "base": "Map_LRZBreakableRock2_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_204E4",
+          "target": "LRZ2BreakRockMap_Slots9A",
           "base": "Map_LRZBreakableRock2_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_204E4",
+          "target": "LRZ2BreakRockMap_Slots9A",
           "base": "Map_LRZBreakableRock2_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_204CA",
+          "target": "LRZ2BreakRockMap_Slots8B",
           "base": "Map_LRZBreakableRock2_"
         },
         {
@@ -106104,11 +106104,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 80
       },
-      "declarations_sha256": "c539d3ab83619d5dc9291b29eb5d1b0b1edca591a60fdbe38cc88f68d13f3129",
+      "declarations_sha256": "e5f377ff66265fbc003ac6d784e7e4702cdecd1e76a56a27c339e82444348d78",
       "labels": {
         "Map_LRZBreakableWall_": 0,
-        "word_21C22": 4,
-        "word_21C3C": 30
+        "LRZSharedSK_BreakableWall_MapSlot0": 4,
+        "LRZSharedSK_BreakableWall_MapSlot1": 30
       },
       "external_symbols": [],
       "blocks": [
@@ -106116,14 +106116,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_21C22",
+          "target": "LRZSharedSK_BreakableWall_MapSlot0",
           "base": "Map_LRZBreakableWall_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_21C3C",
+          "target": "LRZSharedSK_BreakableWall_MapSlot1",
           "base": "Map_LRZBreakableWall_"
         },
         {
@@ -106147,12 +106147,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 48
       },
-      "declarations_sha256": "e166263453ff7fdcdb0e0f986133dad888bd73d9aa03002c4e9de70714cb8e27",
+      "declarations_sha256": "ca0421571c61e92bbb6fcca1c7d34a1308685745e7a67d311f4fa8a644c8c43e",
       "labels": {
         "Map_LRZButton_": 0,
-        "word_2C74E": 6,
-        "word_2C75C": 20,
-        "word_2C76A": 34
+        "LRZSharedSK_Button_MapSlot0": 6,
+        "LRZSharedSK_Button_MapSlot1": 20,
+        "LRZSharedSK_Button_MapSlot2": 34
       },
       "external_symbols": [],
       "blocks": [
@@ -106160,21 +106160,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2C74E",
+          "target": "LRZSharedSK_Button_MapSlot0",
           "base": "Map_LRZButton_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2C75C",
+          "target": "LRZSharedSK_Button_MapSlot1",
           "base": "Map_LRZButton_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2C76A",
+          "target": "LRZSharedSK_Button_MapSlot2",
           "base": "Map_LRZButton_"
         },
         {
@@ -106203,15 +106203,15 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 66
       },
-      "declarations_sha256": "1c72f69e094a1803042c0391a3bc1300479396b4a4ff028ddb8b15a57087249f",
+      "declarations_sha256": "3b2af1b4417543fd92ff0d88c7f668fa931fc758eb0684bad2534a3a8fa8713b",
       "labels": {
         "Map_LRZButtonHorizontal_": 0,
-        "word_42D82": 6,
-        "word_42D90": 20,
+        "LRZSharedSK_HorizontalButton_MapSlot0": 6,
+        "LRZSharedSK_HorizontalButton_MapSlot1": 20,
         "Map_LRZButtonHorizontal2": 34,
         "Map_LRZButtonHorizontal2_": 34,
-        "word_42DA2": 38,
-        "word_42DB0": 52
+        "LRZHorizButtonMap_Act1Frame2Act2Frame0": 38,
+        "LRZHorizButtonMap_Act2Frame1": 52
       },
       "external_symbols": [],
       "blocks": [
@@ -106219,21 +106219,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_42D82",
+          "target": "LRZSharedSK_HorizontalButton_MapSlot0",
           "base": "Map_LRZButtonHorizontal_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_42D90",
+          "target": "LRZSharedSK_HorizontalButton_MapSlot1",
           "base": "Map_LRZButtonHorizontal_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_42DA2",
+          "target": "LRZHorizButtonMap_Act1Frame2Act2Frame0",
           "base": "Map_LRZButtonHorizontal_"
         },
         {
@@ -106250,14 +106250,14 @@
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_42DA2",
+          "target": "LRZHorizButtonMap_Act1Frame2Act2Frame0",
           "base": "Map_LRZButtonHorizontal2_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_42DB0",
+          "target": "LRZHorizButtonMap_Act2Frame1",
           "base": "Map_LRZButtonHorizontal2_"
         },
         {
@@ -106281,10 +106281,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 40
       },
-      "declarations_sha256": "c5aa0838d2f7376dbbc173c8c83bf18859f926333ad72cef0bb8aab14f154399",
+      "declarations_sha256": "d8dae4a0dbbf6574b76a905bdef6b79920e6d443822c1985bb927e9698fa9350",
       "labels": {
         "Map_LRZChainedPlatforms_": 0,
-        "word_4A982": 2
+        "LRZSharedSK_ChainedPlatforms_MapSlot0": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -106292,7 +106292,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4A982",
+          "target": "LRZSharedSK_ChainedPlatforms_MapSlot0",
           "base": "Map_LRZChainedPlatforms_"
         },
         {
@@ -106311,18 +106311,18 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 180
       },
-      "declarations_sha256": "4bd2187f2955009ef40099c212e708bbbd32f3801afe12c9630004da03a9a968",
+      "declarations_sha256": "24762043b4d4b8f3da41b94535364e68ccf383b26098d04e87fa6eba0345880a",
       "labels": {
         "Map_LRZCollapsingBridge_": 0,
-        "word_39E8C": 18,
-        "word_39E94": 26,
-        "word_39E9C": 34,
-        "word_39EA4": 42,
-        "word_39EAC": 50,
-        "word_39EB4": 58,
-        "word_39EBC": 66,
-        "word_39EC4": 74,
-        "word_39ECC": 82
+        "LRZSharedSK_CollapsingBridge_MapSlot0": 18,
+        "LRZSharedSK_CollapsingBridge_MapSlot1": 26,
+        "LRZSharedSK_CollapsingBridge_MapSlot2": 34,
+        "LRZSharedSK_CollapsingBridge_MapSlot3": 42,
+        "LRZSharedSK_CollapsingBridge_MapSlot4": 50,
+        "LRZSharedSK_CollapsingBridge_MapSlot5": 58,
+        "LRZSharedSK_CollapsingBridge_MapSlot6": 66,
+        "LRZSharedSK_CollapsingBridge_MapSlot7": 74,
+        "LRZSharedSK_CollapsingBridge_MapSlot8": 82
       },
       "external_symbols": [],
       "blocks": [
@@ -106330,63 +106330,63 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_39E8C",
+          "target": "LRZSharedSK_CollapsingBridge_MapSlot0",
           "base": "Map_LRZCollapsingBridge_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_39E94",
+          "target": "LRZSharedSK_CollapsingBridge_MapSlot1",
           "base": "Map_LRZCollapsingBridge_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_39E9C",
+          "target": "LRZSharedSK_CollapsingBridge_MapSlot2",
           "base": "Map_LRZCollapsingBridge_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_39EA4",
+          "target": "LRZSharedSK_CollapsingBridge_MapSlot3",
           "base": "Map_LRZCollapsingBridge_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_39EAC",
+          "target": "LRZSharedSK_CollapsingBridge_MapSlot4",
           "base": "Map_LRZCollapsingBridge_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_39EB4",
+          "target": "LRZSharedSK_CollapsingBridge_MapSlot5",
           "base": "Map_LRZCollapsingBridge_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_39EBC",
+          "target": "LRZSharedSK_CollapsingBridge_MapSlot6",
           "base": "Map_LRZCollapsingBridge_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_39EC4",
+          "target": "LRZSharedSK_CollapsingBridge_MapSlot7",
           "base": "Map_LRZCollapsingBridge_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_39ECC",
+          "target": "LRZSharedSK_CollapsingBridge_MapSlot8",
           "base": "Map_LRZCollapsingBridge_"
         },
         {
@@ -106445,12 +106445,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 192
       },
-      "declarations_sha256": "49c27bba9da00c0df98394c40a08bf6b5eafabab2b528b217f7b8012840474a1",
+      "declarations_sha256": "637b46a8117a9006d2847be4dda1e4c0165ff8b5ad27b32e1fafb4fe46c41613",
       "labels": {
         "Map_LRZCollapsingPlatform_": 0,
-        "word_20F14": 6,
-        "word_20F3A": 44,
-        "word_20F84": 118
+        "LRZSharedSK_CollapsingPlatform_MapSlot0": 6,
+        "LRZSharedSK_CollapsingPlatform_MapSlot1": 44,
+        "LRZSharedSK_CollapsingPlatform_MapSlot2": 118
       },
       "external_symbols": [],
       "blocks": [
@@ -106458,21 +106458,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_20F14",
+          "target": "LRZSharedSK_CollapsingPlatform_MapSlot0",
           "base": "Map_LRZCollapsingPlatform_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_20F3A",
+          "target": "LRZSharedSK_CollapsingPlatform_MapSlot1",
           "base": "Map_LRZCollapsingPlatform_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_20F84",
+          "target": "LRZSharedSK_CollapsingPlatform_MapSlot2",
           "base": "Map_LRZCollapsingPlatform_"
         },
         {
@@ -106501,12 +106501,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 84
       },
-      "declarations_sha256": "c139525b117120c3ff17eba10224e8b7a387169a058ebb14f6f7831ac5ab9a59",
+      "declarations_sha256": "2b2bcb56aeae1d5975fe15623be2c4b8f00e08898dca6a1f8ee1fdd6128eef89",
       "labels": {
         "Map_LRZDashElevator_": 0,
-        "word_4309C": 6,
-        "word_430B6": 32,
-        "word_430D0": 58
+        "LRZSharedSK_DashElevator_MapSlot0": 6,
+        "LRZSharedSK_DashElevator_MapSlot1": 32,
+        "LRZSharedSK_DashElevator_MapSlot2": 58
       },
       "external_symbols": [],
       "blocks": [
@@ -106514,21 +106514,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4309C",
+          "target": "LRZSharedSK_DashElevator_MapSlot0",
           "base": "Map_LRZDashElevator_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_430B6",
+          "target": "LRZSharedSK_DashElevator_MapSlot1",
           "base": "Map_LRZDashElevator_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_430D0",
+          "target": "LRZSharedSK_DashElevator_MapSlot2",
           "base": "Map_LRZDashElevator_"
         },
         {
@@ -106557,11 +106557,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 62
       },
-      "declarations_sha256": "d01c8d8822610b7213dcce12bf5348abe071398bc13ee759da143a8117fe32b4",
+      "declarations_sha256": "95cdf6f83d36335cfdd834e40452d5665fe701fbfde178cb42f98fc8d89c583d",
       "labels": {
         "Map_LRZDoor_": 0,
-        "word_429DE": 4,
-        "word_429FE": 36
+        "LRZSharedSK_Door_MapSlot0": 4,
+        "LRZSharedSK_Door_MapSlot1": 36
       },
       "external_symbols": [],
       "blocks": [
@@ -106569,14 +106569,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_429DE",
+          "target": "LRZSharedSK_Door_MapSlot0",
           "base": "Map_LRZDoor_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_429FE",
+          "target": "LRZSharedSK_Door_MapSlot1",
           "base": "Map_LRZDoor_"
         },
         {
@@ -106851,10 +106851,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 10
       },
-      "declarations_sha256": "1aee2707548e97f5d2c7aad27488ccb4eb7fbbd7292ecce7a341e2e0b14d7458",
+      "declarations_sha256": "d2833053fba276fa110b77ff9e627d4146722bac865872e13cf2d2ecc1db9507",
       "labels": {
         "Map_LRZFallingSpike_": 0,
-        "word_42922": 2
+        "LRZSharedSK_FallingSpike_MapSlot0": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -106862,7 +106862,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_42922",
+          "target": "LRZSharedSK_FallingSpike_MapSlot0",
           "base": "Map_LRZFallingSpike_"
         },
         {
@@ -106881,12 +106881,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 36
       },
-      "declarations_sha256": "2a1db55bdc9c697fa68a625971b85ebb8dd24dd549f731f38a1c9fa6e545efb2",
+      "declarations_sha256": "4ea46f1a7c186d59272f6e5877b9b26a226ef8256100de1b1f8635dc711d00f2",
       "labels": {
         "Map_LRZFireballLauncher_": 0,
-        "word_42CB8": 6,
-        "word_42CC0": 14,
-        "word_42CC8": 22
+        "LRZSharedSK_FireballLauncher_MapSlot0": 6,
+        "LRZSharedSK_FireballLauncher_MapSlot1": 14,
+        "LRZSharedSK_FireballLauncher_MapSlot2": 22
       },
       "external_symbols": [],
       "blocks": [
@@ -106894,21 +106894,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_42CB8",
+          "target": "LRZSharedSK_FireballLauncher_MapSlot0",
           "base": "Map_LRZFireballLauncher_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_42CC0",
+          "target": "LRZSharedSK_FireballLauncher_MapSlot1",
           "base": "Map_LRZFireballLauncher_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_42CC8",
+          "target": "LRZSharedSK_FireballLauncher_MapSlot2",
           "base": "Map_LRZFireballLauncher_"
         },
         {
@@ -106937,17 +106937,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 104
       },
-      "declarations_sha256": "72f7fd0dd8602dd2c9a600d7f748adc22659f9f6f77262921f065db32f1d75bf",
+      "declarations_sha256": "fff68258446f480cd50fdee09a3e57c99bb6e35ef5910a14399129413b390f84",
       "labels": {
         "Map_LRZFlameThrower_": 0,
-        "word_4409A": 16,
-        "word_440A2": 24,
-        "word_440AA": 32,
-        "word_440B2": 40,
-        "word_440BA": 48,
-        "word_440C2": 56,
-        "word_440CA": 64,
-        "word_440DE": 84
+        "LRZSharedSK_Flamethrower_MapSlot0": 16,
+        "LRZSharedSK_Flamethrower_MapSlot1": 24,
+        "LRZSharedSK_Flamethrower_MapSlot2": 32,
+        "LRZSharedSK_Flamethrower_MapSlot3": 40,
+        "LRZSharedSK_Flamethrower_MapSlot4": 48,
+        "LRZSharedSK_Flamethrower_MapSlot5": 56,
+        "LRZSharedSK_Flamethrower_MapSlot6": 64,
+        "LRZSharedSK_Flamethrower_MapSlot7": 84
       },
       "external_symbols": [],
       "blocks": [
@@ -106955,56 +106955,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4409A",
+          "target": "LRZSharedSK_Flamethrower_MapSlot0",
           "base": "Map_LRZFlameThrower_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_440A2",
+          "target": "LRZSharedSK_Flamethrower_MapSlot1",
           "base": "Map_LRZFlameThrower_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_440AA",
+          "target": "LRZSharedSK_Flamethrower_MapSlot2",
           "base": "Map_LRZFlameThrower_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_440B2",
+          "target": "LRZSharedSK_Flamethrower_MapSlot3",
           "base": "Map_LRZFlameThrower_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_440BA",
+          "target": "LRZSharedSK_Flamethrower_MapSlot4",
           "base": "Map_LRZFlameThrower_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_440C2",
+          "target": "LRZSharedSK_Flamethrower_MapSlot5",
           "base": "Map_LRZFlameThrower_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_440CA",
+          "target": "LRZSharedSK_Flamethrower_MapSlot6",
           "base": "Map_LRZFlameThrower_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_440DE",
+          "target": "LRZSharedSK_Flamethrower_MapSlot7",
           "base": "Map_LRZFlameThrower_"
         },
         {
@@ -107058,10 +107058,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 28
       },
-      "declarations_sha256": "f6a4a386df273f736ef4f27172389c98b92d7c2006b41eafa47e87c0a9f3558c",
+      "declarations_sha256": "6207c82c75c0f35df6b22ba56b39beeb30178bc8ddfb218fafffac0cc38bd147",
       "labels": {
         "Map_LRZKnuxBoulder_": 0,
-        "word_66B50": 2
+        "LRZSharedSK_KnucklesBoulder_MapSlot0": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -107069,7 +107069,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66B50",
+          "target": "LRZSharedSK_KnucklesBoulder_MapSlot0",
           "base": "Map_LRZKnuxBoulder_"
         },
         {
@@ -107088,10 +107088,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 28
       },
-      "declarations_sha256": "ce5766a0aca7acb12d76f2f800ef6441c3dc26f5285990e71410d482270b4788",
+      "declarations_sha256": "955ce41ff7b05a8b46a1c57adc217a54c4ec2524763fd0dfc693a8254115855c",
       "labels": {
         "Map_LRZLavaFall_": 0,
-        "word_43784": 2
+        "LRZSharedSK_LavaFall_MapSlot0": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -107099,7 +107099,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_43784",
+          "target": "LRZSharedSK_LavaFall_MapSlot0",
           "base": "Map_LRZLavaFall_"
         },
         {
@@ -107395,11 +107395,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 68
       },
-      "declarations_sha256": "e516af97457b86abb701234868622341edf85f9695bafeb456b9184d3d2ecec2",
+      "declarations_sha256": "ff731d0cb9ee58e1aa5a96b32b5e009c96a1097e77853eeba308947277a45ec9",
       "labels": {
         "Map_LRZOrbitingSpikeBall_": 0,
-        "word_43D28": 4,
-        "word_43D36": 18
+        "LRZSharedSK_OrbitingSpikeBall_MapSlot0": 4,
+        "LRZSharedSK_OrbitingSpikeBall_MapSlot1": 18
       },
       "external_symbols": [],
       "blocks": [
@@ -107407,14 +107407,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_43D28",
+          "target": "LRZSharedSK_OrbitingSpikeBall_MapSlot0",
           "base": "Map_LRZOrbitingSpikeBall_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_43D36",
+          "target": "LRZSharedSK_OrbitingSpikeBall_MapSlot1",
           "base": "Map_LRZOrbitingSpikeBall_"
         },
         {
@@ -107438,12 +107438,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 66
       },
-      "declarations_sha256": "2a292d9d82a36b78c77162a6f24a655589ed70eef39c4ed57fc8626449d8b5f8",
+      "declarations_sha256": "d2464e01fbb67f1d01b214dc442f66e045204c592d90a6ffb241f597b5b37c09",
       "labels": {
         "Map_LRZRockCrusher_": 0,
-        "word_186D70": 6,
-        "word_186D84": 26,
-        "word_186D98": 46
+        "LRZSharedSK_RockCrusher_MapSlot0": 6,
+        "LRZSharedSK_RockCrusher_MapSlot1": 26,
+        "LRZSharedSK_RockCrusher_MapSlot2": 46
       },
       "external_symbols": [],
       "blocks": [
@@ -107451,21 +107451,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186D70",
+          "target": "LRZSharedSK_RockCrusher_MapSlot0",
           "base": "Map_LRZRockCrusher_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186D84",
+          "target": "LRZSharedSK_RockCrusher_MapSlot1",
           "base": "Map_LRZRockCrusher_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186D98",
+          "target": "LRZSharedSK_RockCrusher_MapSlot2",
           "base": "Map_LRZRockCrusher_"
         },
         {
@@ -107494,13 +107494,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 40
       },
-      "declarations_sha256": "e42e74bdd61b04efc79dcac9ef9c462dbd2c612907fb4fb721e46a41ccb5a474",
+      "declarations_sha256": "71f854cf7f6f61f24f351eb5617407320b36089a556653f4e3f8e8cb6338f34b",
       "labels": {
         "Map_LRZRockDebris_": 0,
-        "word_43B1A": 8,
-        "word_43B22": 16,
-        "word_43B2A": 24,
-        "word_43B32": 32
+        "LRZSharedSK_RockDebris_MapSlot0": 8,
+        "LRZSharedSK_RockDebris_MapSlot1": 16,
+        "LRZSharedSK_RockDebris_MapSlot2": 24,
+        "LRZSharedSK_RockDebris_MapSlot3": 32
       },
       "external_symbols": [],
       "blocks": [
@@ -107508,28 +107508,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_43B1A",
+          "target": "LRZSharedSK_RockDebris_MapSlot0",
           "base": "Map_LRZRockDebris_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_43B22",
+          "target": "LRZSharedSK_RockDebris_MapSlot1",
           "base": "Map_LRZRockDebris_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_43B2A",
+          "target": "LRZSharedSK_RockDebris_MapSlot2",
           "base": "Map_LRZRockDebris_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_43B32",
+          "target": "LRZSharedSK_RockDebris_MapSlot3",
           "base": "Map_LRZRockDebris_"
         },
         {
@@ -107563,11 +107563,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 20
       },
-      "declarations_sha256": "f9529cb7d01187773d560f508fea81b29b26fc2e16ca362e34a2b5a6321010ac",
+      "declarations_sha256": "3aa6ca113fae13198e06ba7fd51d81498e6d6e44574e8088e004facf03b7b26c",
       "labels": {
         "Map_LRZShootingTrigger_": 0,
-        "word_42F0A": 4,
-        "word_42F12": 12
+        "LRZSharedSK_ShootingTrigger_MapSlot0": 4,
+        "LRZSharedSK_ShootingTrigger_MapSlot1": 12
       },
       "external_symbols": [],
       "blocks": [
@@ -107575,14 +107575,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_42F0A",
+          "target": "LRZSharedSK_ShootingTrigger_MapSlot0",
           "base": "Map_LRZShootingTrigger_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_42F12",
+          "target": "LRZSharedSK_ShootingTrigger_MapSlot1",
           "base": "Map_LRZShootingTrigger_"
         },
         {
@@ -107606,11 +107606,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 38
       },
-      "declarations_sha256": "94d727cae39d3ca4c3a51a5a78004fa3e5dc258de4feb75206230e962c12423b",
+      "declarations_sha256": "c0aa8004d2be73af9178f27ef384c91a0e01fc3c03c8bea65eaf24fbfbee460a",
       "labels": {
         "Map_LRZSinkingRock_": 0,
-        "word_42838": 4,
-        "word_4284C": 24
+        "LRZSharedSK_SinkingRock_MapSlot0": 4,
+        "LRZSharedSK_SinkingRock_MapSlot1": 24
       },
       "external_symbols": [],
       "blocks": [
@@ -107618,14 +107618,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_42838",
+          "target": "LRZSharedSK_SinkingRock_MapSlot0",
           "base": "Map_LRZSinkingRock_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4284C",
+          "target": "LRZSharedSK_SinkingRock_MapSlot1",
           "base": "Map_LRZSinkingRock_"
         },
         {
@@ -107649,18 +107649,18 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 696
       },
-      "declarations_sha256": "a575a3725f3874a1f406065d271b00a50f5865e01f8904b820d0cf5199b6e1b0",
+      "declarations_sha256": "fd3ee84f706ebee1e19d680192239bfd70f0e7c7140a762426ac0b99746bc2ee",
       "labels": {
         "Map_LRZSmashingSpikePlatform_": 0,
-        "word_4325C": 18,
-        "word_432A6": 92,
-        "word_432F0": 166,
-        "word_4333A": 240,
-        "word_43384": 314,
-        "word_433CE": 388,
-        "word_43418": 462,
-        "word_43462": 536,
-        "word_434AC": 610
+        "LRZSpikeSlamMap_Frame0": 18,
+        "LRZSpikeSlamMap_Frame1": 92,
+        "LRZSpikeSlamMap_Frame2": 166,
+        "LRZSpikeSlamMap_Frame3": 240,
+        "LRZSpikeSlamMap_Frame4": 314,
+        "LRZSpikeSlamMap_Frame5": 388,
+        "LRZSpikeSlamMap_Frame6": 462,
+        "LRZSpikeSlamMap_Frame7": 536,
+        "LRZSpikeSlamMap_Frame8": 610
       },
       "external_symbols": [],
       "blocks": [
@@ -107668,63 +107668,63 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4325C",
+          "target": "LRZSpikeSlamMap_Frame0",
           "base": "Map_LRZSmashingSpikePlatform_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_432A6",
+          "target": "LRZSpikeSlamMap_Frame1",
           "base": "Map_LRZSmashingSpikePlatform_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_432F0",
+          "target": "LRZSpikeSlamMap_Frame2",
           "base": "Map_LRZSmashingSpikePlatform_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4333A",
+          "target": "LRZSpikeSlamMap_Frame3",
           "base": "Map_LRZSmashingSpikePlatform_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_43384",
+          "target": "LRZSpikeSlamMap_Frame4",
           "base": "Map_LRZSmashingSpikePlatform_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_433CE",
+          "target": "LRZSpikeSlamMap_Frame5",
           "base": "Map_LRZSmashingSpikePlatform_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_43418",
+          "target": "LRZSpikeSlamMap_Frame6",
           "base": "Map_LRZSmashingSpikePlatform_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_43462",
+          "target": "LRZSpikeSlamMap_Frame7",
           "base": "Map_LRZSmashingSpikePlatform_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_434AC",
+          "target": "LRZSpikeSlamMap_Frame8",
           "base": "Map_LRZSmashingSpikePlatform_"
         },
         {
@@ -107783,11 +107783,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 104
       },
-      "declarations_sha256": "f962d38b1abb9a3f1c072862aa9332bd82254021bfe1a2425317eef1cbc2e0b6",
+      "declarations_sha256": "7bd8941aff042af07802b222f1d2049f3d978b82e2b0ccdd4300731ed163e334",
       "labels": {
         "Map_LRZSolidMovingPlatforms_": 0,
-        "word_259C8": 4,
-        "word_259FA": 54
+        "LRZMovingSolidMap_Frame0": 4,
+        "LRZMovingSolidMap_Frame1": 54
       },
       "external_symbols": [],
       "blocks": [
@@ -107795,14 +107795,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_259C8",
+          "target": "LRZMovingSolidMap_Frame0",
           "base": "Map_LRZSolidMovingPlatforms_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_259FA",
+          "target": "LRZMovingSolidMap_Frame1",
           "base": "Map_LRZSolidMovingPlatforms_"
         },
         {
@@ -107826,10 +107826,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 22
       },
-      "declarations_sha256": "a7b0ca35d856c61ac98df51b42474b1ebdf9ec03cb4213f0b97993ce08dbe30a",
+      "declarations_sha256": "11b73ad32bdc898a28781c59599d9bc0355e25c597d4c0ad677fbfea69c6baac",
       "labels": {
         "Map_LRZSolidRock_": 0,
-        "word_44288": 2
+        "LRZSharedSK_SolidRock_MapSlot0": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -107837,7 +107837,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_44288",
+          "target": "LRZSharedSK_SolidRock_MapSlot0",
           "base": "Map_LRZSolidRock_"
         },
         {
@@ -107856,12 +107856,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 132
       },
-      "declarations_sha256": "071256f30a69d5eb14baa2ad92a33e8b2a76654664c3eefd39e37dbc58a04e11",
+      "declarations_sha256": "e1621f33c57c8686823149bce442ce80a796c75a6cd5fe1f2aa26e522de6ee23",
       "labels": {
         "Map_LRZSpikeBall_": 0,
-        "word_43A94": 6,
-        "word_43ABA": 44,
-        "word_43AE6": 88
+        "LRZSharedSK_SpikeBall_MapSlot0": 6,
+        "LRZSharedSK_SpikeBall_MapSlot1": 44,
+        "LRZSharedSK_SpikeBall_MapSlot2": 88
       },
       "external_symbols": [],
       "blocks": [
@@ -107869,21 +107869,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_43A94",
+          "target": "LRZSharedSK_SpikeBall_MapSlot0",
           "base": "Map_LRZSpikeBall_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_43ABA",
+          "target": "LRZSharedSK_SpikeBall_MapSlot1",
           "base": "Map_LRZSpikeBall_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_43AE6",
+          "target": "LRZSharedSK_SpikeBall_MapSlot2",
           "base": "Map_LRZSpikeBall_"
         },
         {
@@ -107912,14 +107912,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 80
       },
-      "declarations_sha256": "ca7357aa94f6fbf07cf2c505c0ae76986ef983adc46f1ed1734ea7c687262065",
+      "declarations_sha256": "5f5d090e050951e3d1c11051fccc0c21b1d5bea9822ece10b4e0d18874334c07",
       "labels": {
         "Map_LRZSpikeBallLauncher_": 0,
-        "word_449C6": 10,
-        "word_449D4": 24,
-        "word_449DC": 32,
-        "word_449E4": 40,
-        "word_449F2": 54
+        "LRZSharedSK_SpikeBallLauncher_MapSlot0": 10,
+        "LRZSharedSK_SpikeBallLauncher_MapSlot1": 24,
+        "LRZSharedSK_SpikeBallLauncher_MapSlot2": 32,
+        "LRZSharedSK_SpikeBallLauncher_MapSlot3": 40,
+        "LRZSharedSK_SpikeBallLauncher_MapSlot4": 54
       },
       "external_symbols": [],
       "blocks": [
@@ -107927,35 +107927,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_449C6",
+          "target": "LRZSharedSK_SpikeBallLauncher_MapSlot0",
           "base": "Map_LRZSpikeBallLauncher_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_449D4",
+          "target": "LRZSharedSK_SpikeBallLauncher_MapSlot1",
           "base": "Map_LRZSpikeBallLauncher_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_449DC",
+          "target": "LRZSharedSK_SpikeBallLauncher_MapSlot2",
           "base": "Map_LRZSpikeBallLauncher_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_449E4",
+          "target": "LRZSharedSK_SpikeBallLauncher_MapSlot3",
           "base": "Map_LRZSpikeBallLauncher_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_449F2",
+          "target": "LRZSharedSK_SpikeBallLauncher_MapSlot4",
           "base": "Map_LRZSpikeBallLauncher_"
         },
         {
@@ -107994,15 +107994,15 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 50
       },
-      "declarations_sha256": "8cfb5b107d8e0dd7ad9764deb1ffd4af4e815a2d6b2a87cf8d4d63ed8623897c",
+      "declarations_sha256": "bc25a91ada7218c33403f187f426e1ba4558720febf98e03ff2da57f92c79bce",
       "labels": {
         "Map_LRZSwingingSpikeBall_": 0,
-        "word_4366E": 8,
-        "word_43676": 16,
+        "LRZSharedSK_SwingingSpikeBall_MapSlot0": 8,
+        "LRZSharedSK_SwingingSpikeBall_MapSlot1": 16,
         "Map_LRZSwingingSpikeBall2": 24,
         "Map_LRZSwingingSpikeBall2_": 24,
-        "word_43682": 28,
-        "word_43690": 42
+        "LRZSwingBallMap_Act1Frame2Act2Frame0": 28,
+        "LRZSwingBallMap_Act1Frame3Act2Frame1": 42
       },
       "external_symbols": [],
       "blocks": [
@@ -108010,28 +108010,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4366E",
+          "target": "LRZSharedSK_SwingingSpikeBall_MapSlot0",
           "base": "Map_LRZSwingingSpikeBall_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_43676",
+          "target": "LRZSharedSK_SwingingSpikeBall_MapSlot1",
           "base": "Map_LRZSwingingSpikeBall_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_43682",
+          "target": "LRZSwingBallMap_Act1Frame2Act2Frame0",
           "base": "Map_LRZSwingingSpikeBall_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_43690",
+          "target": "LRZSwingBallMap_Act1Frame3Act2Frame1",
           "base": "Map_LRZSwingingSpikeBall_"
         },
         {
@@ -108048,14 +108048,14 @@
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_43682",
+          "target": "LRZSwingBallMap_Act1Frame2Act2Frame0",
           "base": "Map_LRZSwingingSpikeBall2_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_43690",
+          "target": "LRZSwingBallMap_Act1Frame3Act2Frame1",
           "base": "Map_LRZSwingingSpikeBall2_"
         },
         {
@@ -108079,19 +108079,19 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 640
       },
-      "declarations_sha256": "61dca779fc1029f2b7979fc47bdd7aef80facde4d17d9cd6c370c00a1ffdfa4d",
+      "declarations_sha256": "c8b75ec86a872007c9be6f1f3486e73d12a5896e8a0b20572f5467e0fb632ff9",
       "labels": {
         "Map_LRZTurbineSprites_": 0,
         "Map_LRZTurbineSprites2": 10,
         "Map_LRZTurbineSprites2_": 10,
-        "word_445B8": 18,
-        "word_4461A": 116,
-        "word_4467C": 214,
-        "word_446DE": 312,
-        "word_44740": 410,
-        "word_44778": 466,
-        "word_447B0": 522,
-        "word_447EE": 584
+        "LRZSharedSK_Turbine_MapSlot0": 18,
+        "LRZSharedSK_Turbine_MapSlot3": 116,
+        "LRZSharedSK_Turbine_MapSlot2": 214,
+        "LRZSharedSK_Turbine_MapSlot1": 312,
+        "LRZSharedSK_Turbine_MapSlot4AndNarrow0": 410,
+        "LRZSharedSK_Turbine_MapSlotNarrow3": 466,
+        "LRZSharedSK_Turbine_MapSlotNarrow2": 522,
+        "LRZSharedSK_Turbine_MapSlotNarrow1": 584
       },
       "external_symbols": [],
       "blocks": [
@@ -108099,63 +108099,63 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_445B8",
+          "target": "LRZSharedSK_Turbine_MapSlot0",
           "base": "Map_LRZTurbineSprites_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_446DE",
+          "target": "LRZSharedSK_Turbine_MapSlot1",
           "base": "Map_LRZTurbineSprites_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4467C",
+          "target": "LRZSharedSK_Turbine_MapSlot2",
           "base": "Map_LRZTurbineSprites_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4461A",
+          "target": "LRZSharedSK_Turbine_MapSlot3",
           "base": "Map_LRZTurbineSprites_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_44740",
+          "target": "LRZSharedSK_Turbine_MapSlot4AndNarrow0",
           "base": "Map_LRZTurbineSprites_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_44740",
+          "target": "LRZSharedSK_Turbine_MapSlot4AndNarrow0",
           "base": "Map_LRZTurbineSprites2_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_447EE",
+          "target": "LRZSharedSK_Turbine_MapSlotNarrow1",
           "base": "Map_LRZTurbineSprites2_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_447B0",
+          "target": "LRZSharedSK_Turbine_MapSlotNarrow2",
           "base": "Map_LRZTurbineSprites2_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_44778",
+          "target": "LRZSharedSK_Turbine_MapSlotNarrow3",
           "base": "Map_LRZTurbineSprites2_"
         },
         {

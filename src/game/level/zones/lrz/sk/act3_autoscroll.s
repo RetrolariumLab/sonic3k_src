@@ -4,7 +4,7 @@
 ; ---------------------------------------------------------------------------
 
 Obj_LRZ3Autoscroll:
-                move.l  #loc_78F82,(a0)
+                move.l  #SKLRZ3Scene_LockControlsAndTickDelay,(a0)
                 move.w  #60-1,$2E(a0)
                 lea     (ArtKosM_LRZ3DeathEggFlash).l,a1
                 move.w  #tiles_to_bytes(ArtTile_LRZ3DeathEggFlash),d2
@@ -14,29 +14,29 @@ Obj_LRZ3Autoscroll:
                 jmp     (Queue_Kos_Module).l
 ; ---------------------------------------------------------------------------
 
-loc_78F82:
+SKLRZ3Scene_LockControlsAndTickDelay:
                 st      (Ctrl_1_locked).w
                 st      (Ctrl_2_locked).w
                 clr.w   (Ctrl_1_logical).w
                 clr.w   (Ctrl_2_logical).w
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_78FAC
-                move.l  #loc_78FAE,(a0)
+                bpl.s   SKLRZ3Scene_SceneWaitReturn
+                move.l  #SKLRZ3Scene_WaitForFlashAndInitCarrier,(a0)
                 jsr     (AllocateObject).l
-                bne.s   locret_78FAC
-                move.l  #loc_793E2,(a1)
+                bne.s   SKLRZ3Scene_SceneWaitReturn
+                move.l  #SKLRZ3Scene_InitDeathEggFlash,(a1)
 
-locret_78FAC:
+SKLRZ3Scene_SceneWaitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_78FAE:
+SKLRZ3Scene_WaitForFlashAndInitCarrier:
                 btst    #0,(_unkFAB8).w
-                beq.s   locret_78FAC
-                move.l  #loc_79002,(a0)
+                beq.s   SKLRZ3Scene_SceneWaitReturn
+                move.l  #SKLRZ3Scene_DispatchCarrierAndDraw,(a0)
                 clr.b   (Ctrl_1_locked).w
                 clr.b   (Ctrl_2_locked).w
-                lea     ObjDat3_795D2(pc),a1
+                lea     SKLRZ3Scene_CarrierAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 clr.b   routine(a0)
                 move.w  #-$40,x_pos(a0)
@@ -44,54 +44,54 @@ loc_78FAE:
                 move.w  #$100,x_vel(a0)
                 jsr     (Swing_Setup1).l
                 move.w  #$11F,$2E(a0)
-                move.l  #loc_79034,$34(a0)
-                lea     ChildObjDat_7961A(pc),a2
+                move.l  #SKLRZ3Scene_StopCarrierAndSignalLaunch,$34(a0)
+                lea     SKLRZ3Scene_DelayedLaunchChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_79002:
+SKLRZ3Scene_DispatchCarrierAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_79016(pc,d0.w),d1
-                jsr     off_79016(pc,d1.w)
+                move.w  SKLRZ3Scene_CarrierStateOffsets(pc,d0.w),d1
+                jsr     SKLRZ3Scene_CarrierStateOffsets(pc,d1.w)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-off_79016:
-                dc.w    loc_7901A-off_79016
-                dc.w    loc_79022-off_79016
+SKLRZ3Scene_CarrierStateOffsets:
+                dc.w    SKLRZ3Scene_PlayCarrierSiren-SKLRZ3Scene_CarrierStateOffsets
+                dc.w    SKLRZ3Scene_MoveCarrierAndTickWait-SKLRZ3Scene_CarrierStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_7901A:
+SKLRZ3Scene_PlayCarrierSiren:
                 moveq   #signextendB(sfx_RobotnikSiren),d0
                 jsr     (Play_SFX_Continuous).l
 
-loc_79022:
+SKLRZ3Scene_MoveCarrierAndTickWait:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_79034:
+SKLRZ3Scene_StopCarrierAndSignalLaunch:
                 move.b  #2,routine(a0)
                 bset    #1,(_unkFAB8).w
                 clr.w   x_vel(a0)
                 move.w  #$BF,$2E(a0)
-                move.l  #loc_79054,$34(a0)
+                move.l  #SKLRZ3Scene_BeginCarrierDeparture,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_79054:
-                move.l  #loc_79072,(a0)
+SKLRZ3Scene_BeginCarrierDeparture:
+                move.l  #SKLRZ3Scene_UpdateDepartingCarrier,(a0)
                 st      (Events_fg_4).w
                 clr.w   $2E(a0)
                 move.w  #$200,x_vel(a0)
-                lea     ChildObjDat_79652(pc),a2
+                lea     SKLRZ3Scene_ImpactTargetChildren(pc),a2
                 jmp     (CreateChild6_Simple).l
 ; ---------------------------------------------------------------------------
 
-loc_79072:
+SKLRZ3Scene_UpdateDepartingCarrier:
                 tst.b   render_flags(a0)
-                bpl.s   loc_790A6
+                bpl.s   SKLRZ3Scene_RetireCarrier
                 moveq   #signextendB(sfx_RobotnikSiren),d0
                 jsr     (Play_SFX_Continuous).l
                 jsr     (Swing_UpAndDown).l
@@ -100,145 +100,146 @@ loc_79072:
                 addq.w  #1,d0
                 move.w  d0,$2E(a0)
                 cmpi.w  #$1B0,d0
-                blo.s   loc_790A0
+                blo.s   SKLRZ3Scene_DrawDepartingCarrier
                 addq.w  #1,y_pos(a0)
 
-loc_790A0:
+SKLRZ3Scene_DrawDepartingCarrier:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_790A6:
+SKLRZ3Scene_RetireCarrier:
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_790AC:
-                lea     word_795F0(pc),a1
+SKLRZ3Scene_InitImpactTarget:
+                lea     SKLRZ3Scene_TargetAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_790D8,(a0)
+                move.l  #SKLRZ3Scene_WaitForTargetAtRightEdge,(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_790D0(pc,d0.w),x_pos(a0)
+                move.w  SKLRZ3Scene_ImpactTargetXPositions(pc,d0.w),x_pos(a0)
                 move.w  #$4C0,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
-word_790D0:
+SKLRZ3Scene_ImpactTargetXPositions:
                 dc.w    $108
                 dc.w    $208
                 dc.w    $308
                 dc.w    $3F8
 ; ---------------------------------------------------------------------------
 
-loc_790D8:
+SKLRZ3Scene_WaitForTargetAtRightEdge:
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$120,d0
                 cmp.w   x_pos(a0),d0
-                bhs.s   loc_790E8
+                bhs.s   SKLRZ3Scene_ActivateTargetAndSpawnActors
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_790E8:
-                move.l  #loc_7910A,(a0)
+SKLRZ3Scene_ActivateTargetAndSpawnActors:
+                move.l  #SKLRZ3Scene_WaitForChildImpact,(a0)
                 moveq   #signextendB(sfx_Targeting),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_79672(pc),a2
+                lea     SKLRZ3Scene_FallingImpactChildren(pc),a2
                 jsr     (CreateChild6_Simple).l
-                lea     ChildObjDat_79658(pc),a2
+                lea     SKLRZ3Scene_TargetMarkerChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_7910A:
+SKLRZ3Scene_WaitForChildImpact:
                 btst    #1,$38(a0)
-                bne.s   loc_79118
+                bne.s   SKLRZ3Scene_PublishImpactAndSpawnDebris
                 jmp     (Sprite_CheckDelete).l
 ; ---------------------------------------------------------------------------
 
-loc_79118:
+SKLRZ3Scene_PublishImpactAndSpawnDebris:
                 move.w  x_pos(a0),d0
                 subi.w  #$40,d0
                 move.w  d0,(Events_bg+$0C).w
                 move.w  #$480,(Events_bg+$0E).w
                 moveq   #signextendB(sfx_MissileExplode),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_79686(pc),a2
+                lea     SKLRZ3Scene_PlatformDebrisChildren(pc),a2
                 jsr     (CreateChild6_Simple).l
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_79142:
-                lea     word_795F6(pc),a1
+SKLRZ3Scene_InitTargetMarker:
+                lea     SKLRZ3Scene_MarkerAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_79192,(a0)
+                move.l  #SKLRZ3Scene_MoveMarkerOutward,(a0)
                 move.w  x_pos(a0),$3A(a0)
                 move.w  y_pos(a0),$3C(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,d1
                 lsr.w   #1,d0
-                move.b  RawAni_7917E(pc,d0.w),mapping_frame(a0)
+                move.b  SKLRZ3Scene_FourMarkerMappingFrameBytes(pc,d0.w),mapping_frame(a0)
                 add.w   d1,d1
-                move.l  word_79182(pc,d1.w),x_vel(a0)   ; and y_vel
+                move.l  SKLRZ3Scene_MarkerVelocityPairs(pc,d1.w),x_vel(a0)  ; and y_vel
                 move.w  #$B,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
-RawAni_7917E:
+SKLRZ3Scene_FourMarkerMappingFrameBytes:
                 dc.b    $E,  $F, $10, $11
                 even
-word_79182:
+SKLRZ3Scene_MarkerVelocityPairs:
                 dc.w    $100,     0
                 dc.w    -$100,     0
                 dc.w    0,  $100
                 dc.w    0, -$100
 ; ---------------------------------------------------------------------------
 
-loc_79192:
+SKLRZ3Scene_MoveMarkerOutward:
                 jsr     (MoveSprite2).l
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_791AA
-                move.l  #loc_791B0,(a0)
+                bpl.s   SKLRZ3Scene_DrawTargetMarker
+                move.l  #SKLRZ3Scene_WaitAndResetTargetMarker,(a0)
                 move.w  #$F,$2E(a0)
 
-loc_791AA:
+SKLRZ3Scene_DrawTargetMarker:
                 jmp     (Child_Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_791B0:
+SKLRZ3Scene_WaitAndResetTargetMarker:
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_791CE
-                move.l  #loc_79192,(a0)
+                bpl.s   SKLRZ3Scene_CheckMarkerParent
+                move.l  #SKLRZ3Scene_MoveMarkerOutward,(a0)
                 move.w  $3A(a0),x_pos(a0)
                 move.w  $3C(a0),y_pos(a0)
                 move.w  #$B,$2E(a0)
 
-loc_791CE:
+SKLRZ3Scene_CheckMarkerParent:
                 jmp     (Child_CheckParent).l
 ; ---------------------------------------------------------------------------
 
-loc_791D4:
-                lea     word_795FC(pc),a1
+SKLRZ3Scene_InitFallingImpactActor:
+                lea     SKLRZ3Scene_FallingImpactAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_791FE,(a0)
+                move.l  #SKLRZ3Scene_FallTowardTarget,(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_791FA(pc,d0.w),y_pos(a0)
-                lea     ChildObjDat_79678(pc),a2
+                move.w  SKLRZ3Scene_ImpactActorStartY(pc,d0.w),y_pos(a0)
+                lea     SKLRZ3Scene_FollowingImpactChild(pc),a2
                 jmp     (CreateChild6_Simple).l
 ; ---------------------------------------------------------------------------
-word_791FA:
+SKLRZ3Scene_ImpactActorStartY:
                 dc.w    $340,  $2C0
 ; ---------------------------------------------------------------------------
 
-loc_791FE:
+SKLRZ3Scene_FallTowardTarget:
                 addq.w  #4,y_pos(a0)
                 movea.w parent3(a0),a1
                 move.w  y_pos(a1),d0
                 subi.w  #$10,d0
                 cmp.w   y_pos(a0),d0
-                bls.s   loc_7921A
+                bls.s   SKLRZ3Scene_ArmImpactCollisionAndSignal
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7921A:
-                move.l  #loc_79266,(a0)
+; Only the second falling actor signals the target to apply the foreground patch
+SKLRZ3Scene_ArmImpactCollisionAndSignal:
+                move.l  #SKLRZ3Scene_TickImpactCollision,(a0)
                 bclr    #7,render_flags(a0)
                 move.b  #$91,collision_flags(a0)
                 move.w  #$1F,$2E(a0)
@@ -249,31 +250,31 @@ loc_7921A:
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l
                 tst.b   subtype(a0)
-                beq.s   locret_79264
+                beq.s   SKLRZ3Scene_ImpactSetupReturn
                 movea.w parent3(a0),a1
                 bset    #1,$38(a1)
 
-locret_79264:
+SKLRZ3Scene_ImpactSetupReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_79266:
+SKLRZ3Scene_TickImpactCollision:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_79272
+                bmi.s   SKLRZ3Scene_RetireImpactActor
                 jmp     (Add_SpriteToCollisionResponseList).l
 ; ---------------------------------------------------------------------------
 
-loc_79272:
+SKLRZ3Scene_RetireImpactActor:
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_79278:
-                lea     word_795E4(pc),a1
+SKLRZ3Scene_InitImpactEffect:
+                lea     SKLRZ3Scene_FollowingEffectAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_79290,(a0)
-                move.l  #byte_796B5,$30(a0)
+                move.l  #SKLRZ3Scene_FollowAndAnimateImpact,(a0)
+                move.l  #SKLRZ3Scene_FollowingImpactAnim,$30(a0)
 
-loc_79290:
+SKLRZ3Scene_FollowAndAnimateImpact:
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),x_pos(a0)
                 move.w  y_pos(a1),y_pos(a0)
@@ -281,71 +282,71 @@ loc_79290:
                 jmp     (Child_Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_792AC:
-                lea     word_795DE(pc),a1
+SKLRZ3Scene_InitDelayedLaunchChild:
+                lea     SKLRZ3Scene_LaunchChildAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_792F0,(a0)
+                move.l  #SKLRZ3Scene_WaitAttachedForLaunch,(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_792D0(pc,d0.w),$2E(a0)
-                move.w  word_792E0(pc,d0.w),x_vel(a0)
+                move.w  SKLRZ3Scene_EightDelayedLaunchWaitWords(pc,d0.w),$2E(a0)
+                move.w  SKLRZ3Scene_LaunchChildXSpeeds(pc,d0.w),x_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
-word_792D0:
+SKLRZ3Scene_EightDelayedLaunchWaitWords:
                 dc.w    $24,   $64,   $18,   $58,    $C,   $4C,     0,   $40
-word_792E0:
+SKLRZ3Scene_LaunchChildXSpeeds:
                 dc.w    -$80,   $80,  -$C0,   $C0, -$100,  $100, -$140,  $140
 ; ---------------------------------------------------------------------------
 
-loc_792F0:
+SKLRZ3Scene_WaitAttachedForLaunch:
                 btst    #1,(_unkFAB8).w
-                bne.s   loc_79304
+                bne.s   SKLRZ3Scene_TickAttachedLaunchDelay
                 jsr     (Refresh_ChildPosition).l
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_79304:
-                move.l  #loc_7931E,$34(a0)
+SKLRZ3Scene_TickAttachedLaunchDelay:
+                move.l  #SKLRZ3Scene_BeginLightGravity,$34(a0)
                 jsr     (Refresh_ChildPosition).l
                 jsr     (Obj_Wait).l
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7931E:
-                move.l  #loc_79334,(a0)
+SKLRZ3Scene_BeginLightGravity:
+                move.l  #SKLRZ3Scene_MoveWithLightGravity,(a0)
                 move.w  #$14,$2E(a0)
-                move.l  #loc_79346,$34(a0)
+                move.l  #SKLRZ3Scene_BeginPoweredRise,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_79334:
+SKLRZ3Scene_MoveWithLightGravity:
                 jsr     (MoveSprite_LightGravity).l
                 jsr     (Obj_Wait).l
                 jmp     (Sprite_CheckDeleteXY).l
 ; ---------------------------------------------------------------------------
 
-loc_79346:
-                move.l  #loc_7935E,(a0)
+SKLRZ3Scene_BeginPoweredRise:
+                move.l  #SKLRZ3Scene_RiseAndTryEmitExhaust,(a0)
                 moveq   #signextendB(sfx_MissileShoot),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_7964C(pc),a2
+                lea     SKLRZ3Scene_FollowingRiseChild(pc),a2
                 jmp     (CreateChild6_Simple).l
 ; ---------------------------------------------------------------------------
 
-loc_7935E:
+SKLRZ3Scene_RiseAndTryEmitExhaust:
                 addi.w  #-$40,y_vel(a0)
                 jsr     (MoveSprite2).l
                 bsr.w   EmitLrz3RisingActorExhaust
                 jmp     (Sprite_CheckDeleteXY).l
 ; ---------------------------------------------------------------------------
 
-loc_79374:
-                lea     word_795E4(pc),a1
+SKLRZ3Scene_InitFollowingRiseEffect:
+                lea     SKLRZ3Scene_FollowingEffectAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_7938C,(a0)
-                move.l  #byte_79694,$30(a0)
+                move.l  #SKLRZ3Scene_FollowAndAnimateRiseEffect,(a0)
+                move.l  #SKLRZ3Scene_FollowingRiseAnim,$30(a0)
 
-loc_7938C:
+SKLRZ3Scene_FollowAndAnimateRiseEffect:
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),x_pos(a0)
                 move.w  y_pos(a1),y_pos(a0)
@@ -353,37 +354,37 @@ loc_7938C:
                 jmp     (Child_Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_793A8:
-                lea     word_795EA(pc),a1
+SKLRZ3Scene_InitExhaustParticle:
+                lea     SKLRZ3Scene_ExhaustAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_793C6,(a0)
+                move.l  #SKLRZ3Scene_AnimateAndMoveExhaust,(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 move.w  #$100,y_vel(a0)
 
-loc_793C6:
-                lea     byte_796B9(pc),a1
+SKLRZ3Scene_AnimateAndMoveExhaust:
+                lea     SKLRZ3Scene_ExhaustParticleAnim(pc),a1
                 jsr     (Animate_RawNoSSTMultiDelay).l
                 addi.w  #-$10,y_vel(a0)
                 jsr     (MoveSprite2).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_793E2:
-                lea     ObjDat3_79602(pc),a1
+SKLRZ3Scene_InitDeathEggFlash:
+                lea     SKLRZ3Scene_DeathEggFlashAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_79406,(a0)
+                move.l  #SKLRZ3Scene_AnimateDeathEggFlash,(a0)
                 move.w  #$B0,x_pos(a0)
                 move.w  #$449,y_pos(a0)
-                move.l  #loc_79416,$34(a0)
+                move.l  #SKLRZ3Scene_BeginFirePaletteTransition,$34(a0)
 
-loc_79406:
-                lea     byte_7968C(pc),a1
+SKLRZ3Scene_AnimateDeathEggFlash:
+                lea     SKLRZ3Scene_DeathEggFlashAnim(pc),a1
                 jsr     (Animate_RawNoSST).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_79416:
-                move.l  #loc_79486,(a0)
+SKLRZ3Scene_BeginFirePaletteTransition:
+                move.l  #SKLRZ3Scene_WaitForPaletteEffect,(a0)
                 move.b  #$80,(Palette_cycle_counters+$00).w
                 move.w  #$F,$2E(a0)
                 moveq   #signextendB(sfx_SuperTransform),d0
@@ -392,23 +393,24 @@ loc_79416:
                 lea     (Target_palette).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_7943A:
+SKLRZ3Scene_CopyNormalPaletteLine1:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_7943A
+                dbf     d6,SKLRZ3Scene_CopyNormalPaletteLine1
                 lea     (Pal_LRZBossFire).l,a1
                 lea     (Target_palette_line_2).w,a2
                 moveq   #bytesToLcnt($60),d6
 
-loc_7944C:
+SKLRZ3Scene_CopyFirePaletteAndTryEffect:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_7944C
+                dbf     d6,SKLRZ3Scene_CopyFirePaletteAndTryEffect
                 jsr     (AllocateObject).l
-                bne.s   loc_7946A
+                bne.s   SKLRZ3Scene_QueueSceneArt
                 move.l  #SKPalEffect_InitWhiteAndLockRotation,(a1)
                 move.w  a1,$44(a0)
                 move.w  #3,$3A(a1)
 
-loc_7946A:
+; Queue the art and explosion PLC even if allocating the palette effect failed
+SKLRZ3Scene_QueueSceneArt:
                 lea     (ArtKosM_LRZ3Autoscroll).l,a1
                 move.w  #tiles_to_bytes(ArtTile_LRZ3Autoscroll),d2
                 jsr     (Queue_Kos_Module).l
@@ -416,33 +418,33 @@ loc_7946A:
                 jmp     (Load_PLC_Raw).l
 ; ---------------------------------------------------------------------------
 
-loc_79486:
+SKLRZ3Scene_WaitForPaletteEffect:
                 movea.w $44(a0),a1
                 btst    #7,status(a1)
-                beq.w   locret_78FAC
+                beq.w   SKLRZ3Scene_SceneWaitReturn
                 move.b  #1,(Palette_cycle_counters+$00).w
                 bset    #0,(_unkFAB8).w
                 st      (Events_fg_4).w
                 moveq   #signextendB(sfx_SuperEmerald),d0
                 jsr     (Play_SFX).l
                 jsr     (AllocateObject).l
-                bne.s   loc_794BE
+                bne.s   SKLRZ3Scene_TrySpawnCollapsingBridge
                 move.l  #SKPalEffect_InitTargetPasses,(a1)
                 move.w  a1,$44(a0)
 
-loc_794BE:
+SKLRZ3Scene_TrySpawnCollapsingBridge:
                 jsr     (AllocateObject).l
-                bne.s   loc_794D8
+                bne.s   SKLRZ3Scene_DeleteFlashActor
                 move.l  #Obj_CollapsingBridge,(a1)
                 move.w  #$60,x_pos(a1)
                 move.w  #$4D0,y_pos(a1)
 
-loc_794D8:
+SKLRZ3Scene_DeleteFlashActor:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_794DE:
-                lea     ObjDat3_7960E(pc),a1
+SKLRZ3Scene_InitPlatformDebris:
+                lea     SKLRZ3Scene_PlatformDebrisAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #Obj_FlickerMove,(a0)
                 bsr.w   InitializeLrz3PlatformDebrisPiece
@@ -452,11 +454,11 @@ loc_794DE:
 
 EmitLrz3RisingActorExhaust:
                 tst.w   y_vel(a0)
-                bpl.w   locret_78FAC
+                bpl.w   SKLRZ3Scene_SceneWaitReturn
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #3,d0
-                bne.w   locret_78FAC
-                lea     ChildObjDat_7967E(pc),a2
+                bne.w   SKLRZ3Scene_SceneWaitReturn
+                lea     SKLRZ3Scene_ExhaustParticleChild(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; End of function EmitLrz3RisingActorExhaust
 
@@ -467,11 +469,11 @@ InitializeLrz3PlatformDebrisPiece:
                 move.b  subtype(a0),d0
                 move.w  d0,d1
                 lsr.w   #1,d0
-                move.b  byte_79554(pc,d0.w),mapping_frame(a0)
+                move.b  SKLRZ3Scene_PlatformDebrisFrames(pc,d0.w),mapping_frame(a0)
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),d2
                 move.w  y_pos(a1),d3
-                lea     byte_79566(pc,d1.w),a2
+                lea     SKLRZ3Scene_PlatformDebrisOffsets(pc,d1.w),a2
                 move.b  (a2)+,d0
                 ext.w   d0
                 add.w   d0,d2
@@ -481,12 +483,12 @@ InitializeLrz3PlatformDebrisPiece:
                 move.w  d2,x_pos(a0)
                 move.w  d3,y_pos(a0)
                 add.w   d1,d1
-                move.l  word_7958A(pc,d1.w),x_vel(a0)   ; and y_vel
+                move.l  SKLRZ3Scene_PlatformDebrisVelocities(pc,d1.w),x_vel(a0)  ; and y_vel
                 rts
 ; End of function InitializeLrz3PlatformDebrisPiece
 
 ; ---------------------------------------------------------------------------
-byte_79554:
+SKLRZ3Scene_PlatformDebrisFrames:
                 dc.b    0
                 dc.b    0
                 dc.b    0
@@ -506,7 +508,7 @@ byte_79554:
                 dc.b    2
                 dc.b    3
                 even
-byte_79566:
+SKLRZ3Scene_PlatformDebrisOffsets:
                 dc.b    $20,  -8
                 dc.b    -$20, $10
                 dc.b    0, $10
@@ -525,7 +527,7 @@ byte_79566:
                 dc.b    0, $20
                 dc.b    $20, $20
                 dc.b    0, $2C
-word_7958A:
+SKLRZ3Scene_PlatformDebrisVelocities:
                 dc.w    $200, -$200
                 dc.w    -$180, -$180
                 dc.w    $80, -$100
@@ -544,89 +546,89 @@ word_7958A:
                 dc.w    $100, -$200
                 dc.w    $200, -$380
                 dc.w    $80, -$100
-ObjDat3_795D2:
+SKLRZ3Scene_CarrierAttributes:
                 dc.l    Map_LRZ3Autoscroll
                 dc.w    make_art_tile(ArtTile_LRZ3Autoscroll,1,0)
                 dc.w    $300
                 dc.b    $20, $20,   0,   0
-word_795DE:
+SKLRZ3Scene_LaunchChildAttributes:
                 dc.w    $280
                 dc.b    4, $10,   1,   0
-word_795E4:
+SKLRZ3Scene_FollowingEffectAttributes:
                 dc.w    $280
                 dc.b    $10, $10,   2,   0
-word_795EA:
+SKLRZ3Scene_ExhaustAttributes:
                 dc.w    $280
                 dc.b    8,   8,   7,   0
-word_795F0:
+SKLRZ3Scene_TargetAttributes:
                 dc.w    $280
                 dc.b    $C,  $C,  $D,   0
-word_795F6:
+SKLRZ3Scene_MarkerAttributes:
                 dc.w    $280
                 dc.b    4,   4,  $E,   0
-word_795FC:
+SKLRZ3Scene_FallingImpactAttributes:
                 dc.w    $280
                 dc.b    8, $1C,  $C, $92
-ObjDat3_79602:
+SKLRZ3Scene_DeathEggFlashAttributes:
                 dc.l    Map_LRZ3DeathEggFlash
                 dc.w    make_art_tile(ArtTile_LRZ3DeathEggFlash,1,0)
                 dc.w    $300
                 dc.b    $2C, $28,   0,   0
-ObjDat3_7960E:
+SKLRZ3Scene_PlatformDebrisAttributes:
                 dc.l    Map_LRZ3Debris
                 dc.w    make_art_tile(ArtTile_LRZ3PlatformDebris,3,1)
                 dc.w    $80
                 dc.b    $C,  $C,   0,   0
-ChildObjDat_7961A:
+SKLRZ3Scene_DelayedLaunchChildren:
                 dc.w    8-1
-                dc.l    loc_792AC
+                dc.l    SKLRZ3Scene_InitDelayedLaunchChild
                 dc.b    -$C,  $C
-                dc.l    loc_792AC
+                dc.l    SKLRZ3Scene_InitDelayedLaunchChild
                 dc.b    $C,  $C
-                dc.l    loc_792AC
+                dc.l    SKLRZ3Scene_InitDelayedLaunchChild
                 dc.b    -$14,  $C
-                dc.l    loc_792AC
+                dc.l    SKLRZ3Scene_InitDelayedLaunchChild
                 dc.b    $14,  $C
-                dc.l    loc_792AC
+                dc.l    SKLRZ3Scene_InitDelayedLaunchChild
                 dc.b    -$14,   4
-                dc.l    loc_792AC
+                dc.l    SKLRZ3Scene_InitDelayedLaunchChild
                 dc.b    $14,   4
-                dc.l    loc_792AC
+                dc.l    SKLRZ3Scene_InitDelayedLaunchChild
                 dc.b    -$18,   4
-                dc.l    loc_792AC
+                dc.l    SKLRZ3Scene_InitDelayedLaunchChild
                 dc.b    $18,   4
-ChildObjDat_7964C:
+SKLRZ3Scene_FollowingRiseChild:
                 dc.w    1-1
-                dc.l    loc_79374
-ChildObjDat_79652:
+                dc.l    SKLRZ3Scene_InitFollowingRiseEffect
+SKLRZ3Scene_ImpactTargetChildren:
                 dc.w    4-1
-                dc.l    loc_790AC
-ChildObjDat_79658:
+                dc.l    SKLRZ3Scene_InitImpactTarget
+SKLRZ3Scene_TargetMarkerChildren:
                 dc.w    4-1
-                dc.l    loc_79142
+                dc.l    SKLRZ3Scene_InitTargetMarker
                 dc.b    -$10,   0
-                dc.l    loc_79142
+                dc.l    SKLRZ3Scene_InitTargetMarker
                 dc.b    $10,   0
-                dc.l    loc_79142
+                dc.l    SKLRZ3Scene_InitTargetMarker
                 dc.b    0,-$10
-                dc.l    loc_79142
+                dc.l    SKLRZ3Scene_InitTargetMarker
                 dc.b    0, $10
-ChildObjDat_79672:
+SKLRZ3Scene_FallingImpactChildren:
                 dc.w    2-1
-                dc.l    loc_791D4
-ChildObjDat_79678:
+                dc.l    SKLRZ3Scene_InitFallingImpactActor
+SKLRZ3Scene_FollowingImpactChild:
                 dc.w    1-1
-                dc.l    loc_79278
-ChildObjDat_7967E:
+                dc.l    SKLRZ3Scene_InitImpactEffect
+SKLRZ3Scene_ExhaustParticleChild:
                 dc.w    1-1
-                dc.l    loc_793A8
+                dc.l    SKLRZ3Scene_InitExhaustParticle
                 dc.b    0, $18
-ChildObjDat_79686:
+SKLRZ3Scene_PlatformDebrisChildren:
                 dc.w    $12-1
-                dc.l    loc_794DE
-byte_7968C:
+                dc.l    SKLRZ3Scene_InitPlatformDebris
+SKLRZ3Scene_DeathEggFlashAnim:
                 dc.b    4,   0,   0,   1,   2,   3,   4, $F4
-byte_79694:
+SKLRZ3Scene_FollowingRiseAnim:
                 dc.b    2,   1
                 dc.b    2,   1
                 dc.b    3,   1
@@ -640,15 +642,15 @@ byte_79694:
                 dc.b    5,   0
                 dc.b    6,   0
                 dc.b    5,   0
-                dc.b    $F8, .jump-byte_79694
+                dc.b    $F8, .jump-SKLRZ3Scene_FollowingRiseAnim
 
                 .jump:
                 dc.b    6,   0
                 dc.b    $12,   0
                 dc.b    $FC
-byte_796B5:
+SKLRZ3Scene_FollowingImpactAnim:
                 dc.b    0, $12, $13, $FC
-byte_796B9:
+SKLRZ3Scene_ExhaustParticleAnim:
                 dc.b    6,   2
                 dc.b    7,   2
                 dc.b    8,   3

@@ -14,14 +14,14 @@ Obj_LRZSwingingSpikeBall:
                 move.w  y_pos(a0),$46(a0)
                 move.b  #$9A,collision_flags(a0)
                 tst.b   (Current_act).w
-                beq.s   loc_4354E
+                beq.s   SKLRZSwingBall_TryAllocChain
                 move.l  #Map_LRZSwingingSpikeBall2,mappings(a0)
                 move.w  #make_art_tile(ArtTile_LRZ2Misc,1,1),art_tile(a0)
 
-loc_4354E:
+SKLRZSwingBall_TryAllocChain:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_435CA
-                move.l  #loc_435FE,(a1)
+                bne.w   SKLRZSwingBall_SelectAngularStep
+                move.l  #SKLRZSwingBall_DrawChain,(a1)
                 move.l  mappings(a0),mappings(a1)
                 move.w  art_tile(a0),art_tile(a1)
                 andi.w  #$9FFF,art_tile(a1)
@@ -39,25 +39,27 @@ loc_4354E:
                 move.w  mainspr_childsprites(a1),d0
                 subq.w  #1,d0
 
-loc_435B0:
+; The loop assumes the chain link count is nonzero
+SKLRZSwingBall_InitChainLinks:
                 move.w  x_pos(a0),(a2)+
                 move.w  y_pos(a0),(a2)+
                 move.w  #1,(a2)+
-                dbf     d0,loc_435B0
+                dbf     d0,SKLRZSwingBall_InitChainLinks
                 move.b  #1,mapping_frame(a1)
                 move.w  a1,$3C(a0)
 
-loc_435CA:
+SKLRZSwingBall_SelectAngularStep:
                 moveq   #2,d0
                 btst    #0,status(a0)
-                beq.s   loc_435D6
+                beq.s   SKLRZSwingBall_InitSwingMotion
                 neg.w   d0
 
-loc_435D6:
+SKLRZSwingBall_InitSwingMotion:
                 move.b  d0,$36(a0)
-                move.l  #loc_435E0,(a0)
+                move.l  #SKLRZSwingBall_PlaceChainAndStepAngle,(a0)
 
-loc_435E0:
+; Use the saved chain handle directly. Cull the ball relative to its anchor
+SKLRZSwingBall_PlaceChainAndStepAngle:
                 movea.w $3C(a0),a1
                 bsr.w   PositionLrzSwingingSpikeChain
                 move.b  $34(a0),d2
@@ -67,7 +69,7 @@ loc_435E0:
                 jmp     (SKTouchCull_TestAnchorAndDraw).l
 ; ---------------------------------------------------------------------------
 
-loc_435FE:
+SKLRZSwingBall_DrawChain:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -84,16 +86,16 @@ PositionLrzSwingingSpikeChain:
                 move.l  d0,d4
                 move.l  d1,d5
                 tst.b   subtype(a0)
-                bpl.s   loc_4362C
+                bpl.s   SKLRZSwingBall_BindChainPlacement
                 add.l   d0,d4
                 add.l   d1,d5
 
-loc_4362C:
+SKLRZSwingBall_BindChainPlacement:
                 lea     sub2_x_pos(a1),a2
                 move.w  mainspr_childsprites(a1),d6
                 subq.w  #1,d6
 
-loc_43636:
+SKLRZSwingBall_PlaceLinksAndBall:
                 movem.l d4-d5,-(sp)
                 swap    d4
                 swap    d5
@@ -105,7 +107,7 @@ loc_43636:
                 add.l   d0,d4
                 add.l   d1,d5
                 addq.w  #2,a2
-                dbf     d6,loc_43636
+                dbf     d6,SKLRZSwingBall_PlaceLinksAndBall
                 swap    d4
                 swap    d5
                 add.w   d2,d4

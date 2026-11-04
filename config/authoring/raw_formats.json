@@ -17,7 +17,7 @@
     },
     {
       "path": "src/game/level/zones/lrz/sk/act3_autoscroll.s",
-      "sha256": "72026fe06940c756876adb9d4e2db07076d30f8eb9c1681b0c80b7d4da9ad54c"
+      "sha256": "d760814b5627875776dab6d261c7ecb3d8e380db1e0c2f92cea1c66dd6768cb8"
     },
     {
       "path": "src/game/modes/s3/continue_resources.s",
@@ -389,7 +389,7 @@
     },
     {
       "path": "src/objects/bosses/lrz/end_boss/sk/platform.s",
-      "sha256": "b89eab2725c044f83fcac5e74d914bd294328d21ac3da2aefce18d1a5a28953c"
+      "sha256": "75c33706a98aa02d226f745fe6cb425040514b34cbf8d924f9a5800314430e84"
     },
     {
       "path": "src/objects/bosses/lrz/miniboss/sk/battle_and_attacks.s",
@@ -1257,19 +1257,19 @@
     },
     {
       "path": "src/objects/zones/lrz/sk/corkscrew.s",
-      "sha256": "7644d0ee06abf2ae02833bfba0e312b2038d77e51106c664b55772097394fc0a"
+      "sha256": "f12178415b8943c704ae21a87d7ba2eaa51e18e56fbff71e887c65ada1260528"
     },
     {
       "path": "src/objects/zones/lrz/sk/smashing_spike_platform.s",
-      "sha256": "e453a4ae60dbf8bce5276f4d94a2bff4cb0d531a26455f19b19f81bef8f7bd1c"
+      "sha256": "05a1c45d5b41956991bf5d5a7861d7022b9dd1bb2f04aa67facb2cb054e5bcdc"
     },
     {
       "path": "src/objects/zones/lrz/sk/turbine_sprites.s",
-      "sha256": "e5b7d6eea5a4b57f72281f778ae5eb66ed305822ad061488569d8f042a013686"
+      "sha256": "ee123b6603c6d59e902d696a4668bb7e4896d14cba4d28f6e590bc5636697b81"
     },
     {
       "path": "src/objects/zones/lrz/sk/wall_ride.s",
-      "sha256": "6ca29ab338b5cc3f2226d9bff410b8a6bf4f829d0f95b3e3e6b9c5cf4f65a06f"
+      "sha256": "dd6aea374ccfaa8f6c357f84fa358b20ce951667e4a633b99ef7ebfb4d100243"
     },
     {
       "path": "src/objects/zones/mgz/s3/twisting_loop.s",
@@ -1315,41 +1315,41 @@
   "groups": [
     {
       "path": "src/game/level/zones/lrz/sk/act3_autoscroll.s",
-      "symbol": "RawAni_7917E",
-      "scope": "RawAni_7917E",
+      "symbol": "SKLRZ3Scene_FourMarkerMappingFrameBytes",
+      "scope": "SKLRZ3Scene_FourMarkerMappingFrameBytes",
       "first_line": 183,
       "last_line": 185,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 4,
-      "declarations_sha256": "c431301473e48b563afbdf87bf1345b327198d8e2c1c633f8414fa6c6ba34c82",
+      "declarations_sha256": "b2666e376b1ff071443f81eace0ca07ed55ac4f698bdfded065677cb192facc0",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_7917E"],
+      "members": ["SKLRZ3Scene_FourMarkerMappingFrameBytes"],
       "stored_markers": []
     },
     {
       "path": "src/game/level/zones/lrz/sk/act3_autoscroll.s",
-      "symbol": "byte_79554",
-      "scope": "byte_79554",
-      "first_line": 489,
-      "last_line": 508,
+      "symbol": "SKLRZ3Scene_PlatformDebrisFrames",
+      "scope": "SKLRZ3Scene_PlatformDebrisFrames",
+      "first_line": 491,
+      "last_line": 510,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 18,
-      "declarations_sha256": "61deae666fc4f4ffbf12c6c41791b6a2934b6f8c4dc7a88c7179b7427c5f9877",
+      "declarations_sha256": "d9e16f21a6938f29a5843cc26813e37b2467ac8162c1aee2986c8ac1f97e4eb3",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_79554"],
+      "members": ["SKLRZ3Scene_PlatformDebrisFrames"],
       "stored_markers": []
     },
     {
       "path": "src/game/level/zones/lrz/sk/act3_autoscroll.s",
-      "symbol": "byte_7968C",
-      "scope": "byte_7968C",
-      "first_line": 627,
-      "last_line": 659,
+      "symbol": "SKLRZ3Scene_DeathEggFlashAnim",
+      "scope": "SKLRZ3Scene_DeathEggFlashAnim",
+      "first_line": 629,
+      "last_line": 661,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 58,
-      "declarations_sha256": "37c363803a4f5bfab12e360f1c2a6a414168dc70efbd7360707b2adce5fceafd",
+      "declarations_sha256": "a9a8a7db6c1086b58c8c97ada95767c1329028700a3ba1bde1325657fe19f7b5",
       "entries": [
         [0, "fixed"],
         [8, "pairs"],
@@ -1357,7 +1357,12 @@
         [45, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_7968C", "byte_79694", "byte_796B5", "byte_796B9"],
+      "members": [
+        "SKLRZ3Scene_DeathEggFlashAnim",
+        "SKLRZ3Scene_FollowingRiseAnim",
+        "SKLRZ3Scene_FollowingImpactAnim",
+        "SKLRZ3Scene_ExhaustParticleAnim"
+      ],
       "stored_markers": []
     },
     {
@@ -5546,58 +5551,58 @@
     },
     {
       "path": "src/objects/zones/lrz/sk/corkscrew.s",
-      "symbol": "RawAni_4247E",
-      "scope": "RawAni_4247E",
+      "symbol": "SKLRZCorkscrew_RiderFrames",
+      "scope": "SKLRZCorkscrew_RiderFrames",
       "first_line": 179,
       "last_line": 180,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 12,
-      "declarations_sha256": "50bd4b13d13ffa4f4b5e780b857c62ade8054388f73bf509e05d7a07e67a9c13",
+      "declarations_sha256": "a50989608b4ed91f9d33d4c1e881e5805db9501f908c586c13ba21a4ea9d1ad1",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_4247E"],
+      "members": ["SKLRZCorkscrew_RiderFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/lrz/sk/smashing_spike_platform.s",
-      "symbol": "RawAni_43196",
-      "scope": "RawAni_43196",
-      "first_line": 54,
-      "last_line": 56,
+      "symbol": "SKLRZSpikeSlam_BottomHoldFrames",
+      "scope": "SKLRZSpikeSlam_BottomHoldFrames",
+      "first_line": 55,
+      "last_line": 57,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 20,
-      "declarations_sha256": "71f0f6e4e876156a4cc641293ab421ac50a629918deca3a198323c5602178aec",
+      "declarations_sha256": "6b4e215725bce7984779968d802af4a48d66468d75daa2fb496457b6e44860d9",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_43196"],
+      "members": ["SKLRZSpikeSlam_BottomHoldFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/lrz/sk/turbine_sprites.s",
-      "symbol": "RawAni_44552",
-      "scope": "RawAni_44552",
-      "first_line": 220,
-      "last_line": 222,
+      "symbol": "SKLRZTurbine_RiderFrames",
+      "scope": "SKLRZTurbine_RiderFrames",
+      "first_line": 221,
+      "last_line": 223,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 32,
-      "declarations_sha256": "04989f3ddb56bea2d69f4b3d99c42c24d22c356d505a12e96ccbacff4f033643",
+      "declarations_sha256": "af79c6992938a376efa8d128eb0390206938a490a073a9266aacd266bc4b82ea",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_44552"],
+      "members": ["SKLRZTurbine_RiderFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/lrz/sk/wall_ride.s",
-      "symbol": "RawAni_42792",
-      "scope": "RawAni_42792",
-      "first_line": 196,
-      "last_line": 198,
+      "symbol": "SKLRZWallRide_RiderFrames",
+      "scope": "SKLRZWallRide_RiderFrames",
+      "first_line": 197,
+      "last_line": 199,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 12,
-      "declarations_sha256": "6c5d376024a9ee17739c45fa15a7e245e1d4033102b9902ef0f316fb50fba66b",
+      "declarations_sha256": "9ec6958aedfd370c8f839a8135480059c1c6a88adc8ada376025ab7151f35bca",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_42792"],
+      "members": ["SKLRZWallRide_RiderFrames"],
       "stored_markers": []
     },
     {

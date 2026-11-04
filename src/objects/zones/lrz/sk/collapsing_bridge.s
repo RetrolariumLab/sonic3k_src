@@ -4,7 +4,7 @@
 ; ---------------------------------------------------------------------------
 
 Obj_LRZCollapsingBridge:
-                move.l  #loc_39CA8,(a0)
+                move.l  #SKLRZBridge_CheckCollapseDelay,(a0)
                 move.b  #4,render_flags(a0)
                 move.w  #$80,priority(a0)
                 move.l  #Map_LRZCollapsingBridge,mappings(a0)
@@ -17,15 +17,15 @@ Obj_LRZCollapsingBridge:
                 move.b  d0,$30(a0)
                 andi.w  #$F0,d1
                 lsr.w   #2,d1
-                lea     byte_39CA4(pc,d1.w),a1
+                lea     SKLRZBridge_BridgeAttributes(pc,d1.w),a1
                 move.b  (a1)+,width_pixels(a0)
                 move.b  (a1)+,height_pixels(a0)
                 move.b  (a1)+,mapping_frame(a0)
                 move.b  (a1)+,subtype(a0)
                 move.b  #$1C,y_radius(a0)
-                bra.s   loc_39CA8
+                bra.s   SKLRZBridge_CheckCollapseDelay
 ; ---------------------------------------------------------------------------
-byte_39CA4:
+SKLRZBridge_BridgeAttributes:
                 dc.b    $40
                 dc.b    $20
                 dc.b    8
@@ -33,24 +33,24 @@ byte_39CA4:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_39CA8:
+SKLRZBridge_CheckCollapseDelay:
                 tst.b   $32(a0)
-                beq.s   loc_39CBC
+                beq.s   SKLRZBridge_CheckStandingLatch
                 tst.b   $30(a0)
-                bne.s   loc_39CB8
-                bra.w   loc_39D84
+                bne.s   SKLRZBridge_TickCollapseDelay
+                bra.w   SKLRZBridge_BeginCollapse
 ; ---------------------------------------------------------------------------
 
-loc_39CB8:
+SKLRZBridge_TickCollapseDelay:
                 subq.b  #1,$30(a0)
 
-loc_39CBC:
+SKLRZBridge_CheckStandingLatch:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                beq.s   loc_39CCC
+                beq.s   SKLRZBridge_CheckIntactSolidAndDraw
                 move.b  #1,$32(a0)
 
-loc_39CCC:
+SKLRZBridge_CheckIntactSolidAndDraw:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 moveq   #0,d3
@@ -60,7 +60,8 @@ loc_39CCC:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_39CE8:
+; Keep an invisible top surface for 42 updates after spawning the visible fragments
+SKLRZBridge_TickTemporarySolid:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 moveq   #0,d3
@@ -68,7 +69,7 @@ loc_39CE8:
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectTop).l
                 subq.b  #1,$30(a0)
-                bne.s   locret_39D3C
+                bne.s   SKLRZBridge_ProxyReturn
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 bsr.s   ReleasePlayerFromCollapsedLrzBridge
@@ -81,29 +82,29 @@ loc_39CE8:
 
 ReleasePlayerFromCollapsedLrzBridge:
                 btst    d6,status(a0)
-                beq.s   locret_39D3C
+                beq.s   SKLRZBridge_ProxyReturn
                 bclr    d6,status(a0)
                 bclr    #Status_OnObj,status(a1)
                 bclr    #Status_Push,status(a1)
                 bset    #Status_InAir,status(a1)
                 move.b  #1,prev_anim(a1)
 
-locret_39D3C:
+SKLRZBridge_ProxyReturn:
                 rts
 ; End of function ReleasePlayerFromCollapsedLrzBridge
 
 ; ---------------------------------------------------------------------------
 
-loc_39D3E:
+SKLRZBridge_TickFragmentDelay:
                 tst.b   $30(a0)
-                beq.s   loc_39D4E
+                beq.s   SKLRZBridge_TickFragmentFrames
                 subq.b  #1,$30(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_39D4E:
+SKLRZBridge_TickFragmentFrames:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_39D6C
+                bpl.s   SKLRZBridge_FallAndDrawVisible
                 move.b  #7,anim_frame_timer(a0)
                 move.b  mapping_frame(a0),d0
                 addq.b  #1,d0
@@ -111,30 +112,30 @@ loc_39D4E:
                 add.b   $34(a0),d0
                 move.b  d0,mapping_frame(a0)
 
-loc_39D6C:
+SKLRZBridge_FallAndDrawVisible:
                 jsr     (MoveSprite).l
                 tst.b   render_flags(a0)
-                bpl.s   loc_39D7E
+                bpl.s   SKLRZBridge_DeleteFragment
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_39D7E:
+SKLRZBridge_DeleteFragment:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_39D84:
+SKLRZBridge_BeginCollapse:
                 move.b  #$2A,$30(a0)
-                lea     (word_39E20).l,a3
-                move.l  #loc_39CE8,(a0)
-                move.l  #loc_39D3E,d4
+                lea     (SKLRZBridge_FragmentRecords).l,a3
+                move.l  #SKLRZBridge_TickTemporarySolid,(a0)
+                move.l  #SKLRZBridge_TickFragmentDelay,d4
                 move.w  (a3)+,d1
                 move.b  render_flags(a0),d5
                 move.w  x_pos(a0),d2
                 move.w  y_pos(a0),d3
 
-loc_39DAA:
+SKLRZBridge_TrySpawnFragment:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_39E08
+                bne.s   SKLRZBridge_ClearPlacementRespawn
                 move.l  d4,(a1)
                 move.l  mappings(a0),mappings(a1)
                 move.b  d5,render_flags(a1)
@@ -159,20 +160,20 @@ loc_39DAA:
                 move.b  mapping_frame(a1),d0
                 andi.b  #$FC,d0
                 move.b  d0,$34(a1)
-                dbf     d1,loc_39DAA
+                dbf     d1,SKLRZBridge_TrySpawnFragment
 
-loc_39E08:
+SKLRZBridge_ClearPlacementRespawn:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_39E18
+                beq.s   SKLRZBridge_PlayCollapseSound
                 movea.w d0,a1
                 bclr    #7,(a1)
                 clr.w   respawn_addr(a0)
 
-loc_39E18:
+SKLRZBridge_PlayCollapseSound:
                 moveq   #signextendB(sfx_Collapse),d0
                 jmp     (Play_SFX).l
 ; ---------------------------------------------------------------------------
-word_39E20:     dc.w    $16-1
+SKLRZBridge_FragmentRecords:    dc.w    $16-1
                 dc.b    -$20,   4,   7, $24
                 dc.b    0,   8,   6, $20
                 dc.b    $20,   4,   6, $22

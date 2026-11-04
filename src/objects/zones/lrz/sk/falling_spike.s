@@ -13,54 +13,54 @@ Obj_LRZFallingSpike:
                 move.w  #$280,priority(a0)
                 move.b  #$82,collision_flags(a0)
                 move.b  subtype(a0),$2F(a0)
-                move.l  #loc_42898,(a0)
+                move.l  #SKLRZFallSpike_CalcP1Distance,(a0)
 
-loc_42898:
+SKLRZFallSpike_CalcP1Distance:
                 lea     (Player_1).w,a1
                 move.w  x_pos(a0),d0
                 sub.w   x_pos(a1),d0
-                bpl.s   loc_428A8
+                bpl.s   SKLRZFallSpike_CalcP2Distance
                 neg.w   d0
 
-loc_428A8:
+SKLRZFallSpike_CalcP2Distance:
                 lea     (Player_2).w,a2
                 move.w  x_pos(a0),d1
                 sub.w   x_pos(a2),d1
-                bpl.s   loc_428B8
+                bpl.s   SKLRZFallSpike_SelectNearestDistance
                 neg.w   d1
 
-loc_428B8:
+SKLRZFallSpike_SelectNearestDistance:
                 cmp.w   d1,d0
-                bls.s   loc_428BE
+                bls.s   SKLRZFallSpike_TryBeginFall
                 move.w  d1,d0
 
-loc_428BE:
+SKLRZFallSpike_TryBeginFall:
                 cmp.w   $2E(a0),d0
-                bhs.s   loc_428D0
+                bhs.s   SKLRZFallSpike_TouchCullWaitingSpike
                 tst.w   (Debug_placement_mode).w
-                bne.s   loc_428D0
-                move.l  #loc_428D6,(a0)
+                bne.s   SKLRZFallSpike_TouchCullWaitingSpike
+                move.l  #SKLRZFallSpike_FallAndCheckLanding,(a0)
 
-loc_428D0:
+SKLRZFallSpike_TouchCullWaitingSpike:
                 jmp     (Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
 
-loc_428D6:
+SKLRZFallSpike_FallAndCheckLanding:
                 jsr     (MoveSprite).l
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.s   loc_428FE
+                bpl.s   SKLRZFallSpike_TouchCullFallingSpike
                 add.w   d1,y_pos(a0)
                 move.b  #0,collision_flags(a0)
-                move.l  #loc_42904,(a0)
+                move.l  #SKLRZFallSpike_CheckLandedSolidAndDraw,(a0)
                 moveq   #signextendB(sfx_BossProjectile),d0
                 jsr     (Play_SFX).l
 
-loc_428FE:
+SKLRZFallSpike_TouchCullFallingSpike:
                 jmp     (Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
 
-loc_42904:
+SKLRZFallSpike_CheckLandedSolidAndDraw:
                 move.w  #$13,d1
                 move.w  #$10,d2
                 move.w  #$11,d3

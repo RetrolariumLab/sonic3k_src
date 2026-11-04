@@ -5,7 +5,7 @@
   "scope": "All35470 researched inherited address and numeric-local labels; completed1571 procedure migration remains independent.",
   "target_count": 35470,
   "scope_sha256": "6d32002c76db58fe4732f6fc7113c9b2d93f88b650fec5e995b26b2a5fe4f278",
-  "applied_targets": 19254,
+  "applied_targets": 20007,
   "packets": [
     {
       "id": "01-audio",
@@ -4183,7 +4183,7 @@
     },
     {
       "id": "32-zone-lrz",
-      "state": "pending",
+      "state": "applied",
       "target_count": 753,
       "scope_sha256": "fe264c466f554e433a71cfbe303343401c6990416b422535fb8995c71f6a02b0",
       "registry": "config/reconstruction/semantic_labels/32-zone-lrz.json",
@@ -4453,7 +4453,7 @@
           "profiles": ["sk"]
         }
       ],
-      "destination_sha256": "3731b26c3abb8d24d9fee374c5fabe38ae64cbd50c7c815f5f518c46d729384f"
+      "destination_sha256": "b19e4881f75aba13a0326eec9cfc91c700aa8821fc7b18013795451cbb0a65d4"
     },
     {
       "id": "33-zone-ssz",
@@ -7447,6 +7447,7 @@
     "28-zone-icz",
     "29-zone-lbz",
     "30-zone-mhz",
-    "31-zone-soz"
+    "31-zone-soz",
+    "32-zone-lrz"
   ]
 }

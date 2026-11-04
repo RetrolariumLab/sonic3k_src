@@ -4,14 +4,14 @@
 ; ---------------------------------------------------------------------------
 
 Obj_LRZRockCrusher:
-                lea     word_901B8(pc),a1
+                lea     SKLRZCrusher_FirstCameraGate(pc),a1
                 tst.b   subtype(a0)
-                beq.s   loc_900FE
-                lea     word_901C4(pc),a1
+                beq.s   SKLRZCrusher_CheckCameraAndSaveBounds
+                lea     SKLRZCrusher_SecondCameraGate(pc),a1
 
-loc_900FE:
+SKLRZCrusher_CheckCameraAndSaveBounds:
                 jsr     (Check_CameraInRange).l
-                move.l  #loc_901D0,(a0)
+                move.l  #SKLRZCrusher_DispatchRootAndDraw,(a0)
                 move.w  (Camera_min_Y_pos).w,(Camera_stored_min_Y_pos).w
                 move.w  (Camera_target_max_Y_pos).w,(Camera_stored_max_Y_pos).w
                 move.w  (Camera_min_X_pos).w,(Camera_stored_min_X_pos).w
@@ -25,26 +25,26 @@ loc_900FE:
                 move.b  #-1,collision_property(a0)
                 move.b  #$40,y_radius(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_90154
+                beq.s   SKLRZCrusher_TrySpawnSpriteMask
                 bset    #7,art_tile(a0)
 
-loc_90154:
-                lea     ChildObjDat_9067A(pc),a2
+SKLRZCrusher_TrySpawnSpriteMask:
+                lea     SKLRZCrusher_SpriteMaskChild(pc),a2
                 jsr     (CreateChild6_Simple).l
-                bne.s   loc_90188
+                bne.s   SKLRZCrusher_LoadArtAndSpawnMechanism
                 move.b  #$8B,subtype(a1)
                 tst.b   subtype(a0)
-                bne.s   loc_9017C
+                bne.s   SKLRZCrusher_PlaceSecondEncounterMask
                 move.w  #$F40,x_pos(a1)
                 move.w  #$760,y_pos(a1)
-                bra.w   loc_90188
+                bra.w   SKLRZCrusher_LoadArtAndSpawnMechanism
 ; ---------------------------------------------------------------------------
 
-loc_9017C:
+SKLRZCrusher_PlaceSecondEncounterMask:
                 move.w  #$540,x_pos(a1)
                 move.w  #$860,y_pos(a1)
 
-loc_90188:
+SKLRZCrusher_LoadArtAndSpawnMechanism:
                 lea     (ArtKosM_LRZRockCrusher).l,a1
                 move.w  #tiles_to_bytes(ArtTile_LRZRockCrusher),d2
                 jsr     (Queue_Kos_Module).l
@@ -52,159 +52,160 @@ loc_90188:
                 jsr     (Load_PLC_Raw).l
                 lea     Pal_LRZRockCrusher(pc),a1
                 jsr     (PalLoad_Line1).l
-                lea     ChildObjDat_90626(pc),a2
+                lea     SKLRZCrusher_MechanismChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
-word_901B8:
+SKLRZCrusher_FirstCameraGate:
                 dc.w    $5E0,  $740,  $DC0,  $EC0,  $EA0,  $6A0
-word_901C4:
+SKLRZCrusher_SecondCameraGate:
                 dc.w    $680,  $880,  $400,  $780,  $4A0,  $790
 ; ---------------------------------------------------------------------------
 
-loc_901D0:
+SKLRZCrusher_DispatchRootAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_901EA(pc,d0.w),d1
-                jsr     off_901EA(pc,d1.w)
+                move.w  SKLRZCrusher_RootStateOffsets(pc,d0.w),d1
+                jsr     SKLRZCrusher_RootStateOffsets(pc,d1.w)
                 jsr     (UpdateLrzCrusherHitFlash).l
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
-off_901EA:
-                dc.w    loc_901F4-off_901EA
-                dc.w    loc_9026E-off_901EA
-                dc.w    loc_902F0-off_901EA
-                dc.w    loc_902FE-off_901EA
-                dc.w    loc_90338-off_901EA
+SKLRZCrusher_RootStateOffsets:
+                dc.w    SKLRZCrusher_TryLockCameraY-SKLRZCrusher_RootStateOffsets
+                dc.w    SKLRZCrusher_RumbleAndSelectJitter-SKLRZCrusher_RootStateOffsets
+                dc.w    SKLRZCrusher_TickDropDelay-SKLRZCrusher_RootStateOffsets
+                dc.w    SKLRZCrusher_FallAndCheckDropDepth-SKLRZCrusher_RootStateOffsets
+                dc.w    SKLRZCrusher_TrySignalDefeat-SKLRZCrusher_RootStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_901F4:
+SKLRZCrusher_TryLockCameraY:
                 btst    #0,$27(a0)
-                bne.s   loc_90210
+                bne.s   SKLRZCrusher_TryLockCameraX
                 move.w  (Camera_target_max_Y_pos).w,d0
                 cmp.w   (Camera_max_Y_pos).w,d0
-                bne.s   loc_90210
+                bne.s   SKLRZCrusher_TryLockCameraX
                 move.w  d0,(Camera_min_Y_pos).w
                 bset    #0,$27(a0)
 
-loc_90210:
+SKLRZCrusher_TryLockCameraX:
                 btst    #1,$27(a0)
-                bne.s   loc_9022E
+                bne.s   SKLRZCrusher_TryBeginShakeAndRelay
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
                 move.w  $1C(a0),d0
                 cmp.w   (Camera_X_pos).w,d0
-                bhi.s   loc_9022E
+                bhi.s   SKLRZCrusher_TryBeginShakeAndRelay
                 bset    #1,$27(a0)
 
-loc_9022E:
+SKLRZCrusher_TryBeginShakeAndRelay:
                 move.b  $27(a0),d0
                 andi.b  #3,d0
                 cmpi.b  #3,d0
-                bne.s   locret_9026C
+                bne.s   SKLRZCrusher_WaitReturn
                 move.b  #2,routine(a0)
                 clr.b   $27(a0)
                 clr.w   $1C(a0)
                 clr.b   $26(a0)
                 bset    #2,$38(a0)
                 jsr     (AllocateObject).l
-                bne.s   locret_9026C
-                move.l  #loc_90502,(a1)
+                bne.s   SKLRZCrusher_WaitReturn
+                move.l  #SKLRZCrusher_InitSceneRelay,(a1)
                 move.b  subtype(a0),subtype(a1)
                 move.w  a0,parent3(a1)
 
-locret_9026C:
+SKLRZCrusher_WaitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_9026E:
+SKLRZCrusher_RumbleAndSelectJitter:
                 moveq   #signextendB(sfx_BigRumble),d0
                 jsr     (Play_SFX_Continuous).l
                 moveq   #1,d0
                 bchg    #0,$38(a0)
-                beq.s   loc_90282
+                beq.s   SKLRZCrusher_JitterAndCheckExit
                 neg.w   d0
 
-loc_90282:
+SKLRZCrusher_JitterAndCheckExit:
                 add.w   d0,y_pos(a0)
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.s   loc_902BE
+                bpl.s   SKLRZCrusher_StopPartsAndArmDrop
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.s   loc_902B6
+                bhi.s   SKLRZCrusher_AbortOffscreen
                 move.w  y_pos(a0),d0
                 sub.w   (Camera_Y_pos).w,d0
                 addi.w  #$80,d0
                 cmpi.w  #$200,d0
-                bls.w   locret_9026C
+                bls.w   SKLRZCrusher_WaitReturn
 
-loc_902B6:
+SKLRZCrusher_AbortOffscreen:
                 clr.b   (Screen_shake_flag).w
-                bra.w   loc_90368
+                bra.w   SKLRZCrusher_RestoreLevelArtAndDelete
 ; ---------------------------------------------------------------------------
 
-loc_902BE:
+SKLRZCrusher_StopPartsAndArmDrop:
                 move.b  #4,routine(a0)
                 ori.b   #$28,$38(a0)
                 move.w  #$27,$2E(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_902EC(pc,d0.w),$3A(a0)
+                move.w  SKLRZCrusher_DropDepths(pc,d0.w),$3A(a0)
                 move.w  (Camera_stored_max_Y_pos).w,(Camera_target_max_Y_pos).w
                 lea     Child7_ChangeLevSize(pc),a2
                 jmp     (CreateChild7_Normal2).l
 ; ---------------------------------------------------------------------------
-word_902EC:
+SKLRZCrusher_DropDepths:
                 dc.w    $850
                 dc.w    $950
 ; ---------------------------------------------------------------------------
 
-loc_902F0:
+SKLRZCrusher_TickDropDelay:
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_902FC
+                bpl.s   SKLRZCrusher_DropDelayReturn
                 move.b  #6,routine(a0)
 
-locret_902FC:
+SKLRZCrusher_DropDelayReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_902FE:
+SKLRZCrusher_FallAndCheckDropDepth:
                 jsr     (MoveSprite).l
                 move.w  y_pos(a0),d0
                 cmp.w   $3A(a0),d0
-                bhs.s   loc_90310
+                bhs.s   SKLRZCrusher_BeginDescentAndExplosion
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_90310:
+SKLRZCrusher_BeginDescentAndExplosion:
                 move.b  #8,routine(a0)
                 move.w  #$40,y_vel(a0)
                 move.w  #$7F,$2E(a0)
-                move.l  #loc_90352,$34(a0)
+                move.l  #SKLRZCrusher_BeginPostDescentWait,$34(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_90338:
+; Notify the mechanism parts at timer $40 while the root continues descending
+SKLRZCrusher_TrySignalDefeat:
                 cmpi.w  #$40,$2E(a0)
-                bne.s   loc_90346
+                bne.s   SKLRZCrusher_DescendAndTickWait
                 bset    #7,status(a0)
 
-loc_90346:
+SKLRZCrusher_DescendAndTickWait:
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_90352:
+SKLRZCrusher_BeginPostDescentWait:
                 move.l  #Obj_Wait,(a0)
                 move.w  #$BF,$2E(a0)
-                move.l  #loc_90368,$34(a0)
+                move.l  #SKLRZCrusher_RestoreLevelArtAndDelete,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_90368:
+SKLRZCrusher_RestoreLevelArtAndDelete:
                 lea     (ArtKosM_FirewormSegments).l,a1
                 move.w  #tiles_to_bytes(ArtTile_FirewormSegments),d2
                 jsr     (Queue_Kos_Module).l
@@ -216,99 +217,99 @@ loc_90368:
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_9039A:
+SKLRZCrusher_DispatchMechanismPart:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_903C2(pc,d0.w),d1
-                jsr     off_903C2(pc,d1.w)
+                move.w  SKLRZCrusher_PartStateOffsets(pc,d0.w),d1
+                jsr     SKLRZCrusher_PartStateOffsets(pc,d1.w)
                 cmpi.b  #8,subtype(a0)
-                blo.s   loc_903BA
+                blo.s   SKLRZCrusher_DrawOrBreakAwayPart
                 move.b  #-1,collision_property(a0)
                 bsr.w   UpdateLrzCrusherHitFlash
 
-loc_903BA:
+SKLRZCrusher_DrawOrBreakAwayPart:
                 moveq   #0,d0
                 jmp     (Child_DrawTouch_Sprite_FlickerMove).l
 ; ---------------------------------------------------------------------------
-off_903C2:
-                dc.w    loc_903CC-off_903C2
-                dc.w    loc_903F4-off_903C2
-                dc.w    loc_90408-off_903C2
-                dc.w    loc_90436-off_903C2
-                dc.w    loc_904B4-off_903C2
+SKLRZCrusher_PartStateOffsets:
+                dc.w    SKLRZCrusher_InitMechanismPart-SKLRZCrusher_PartStateOffsets
+                dc.w    SKLRZCrusher_WaitForParentActivation-SKLRZCrusher_PartStateOffsets
+                dc.w    SKLRZCrusher_TickRestOrFollowParent-SKLRZCrusher_PartStateOffsets
+                dc.w    SKLRZCrusher_MovePartAndTickPulse-SKLRZCrusher_PartStateOffsets
+                dc.w    SKLRZCrusher_FollowParentAfterStop-SKLRZCrusher_PartStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_903CC:
-                lea     word_90614(pc),a1
+SKLRZCrusher_InitMechanismPart:
+                lea     SKLRZCrusher_PartAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.b  subtype(a0),d0
                 cmpi.b  #8,d0
-                blo.s   loc_903EC
+                blo.s   SKLRZCrusher_InitPartDelay
                 move.b  #2,mapping_frame(a0)
                 move.b  #$12,collision_flags(a0)
 
-loc_903EC:
+SKLRZCrusher_InitPartDelay:
                 andi.b  #4,d0
                 move.b  d0,$2E(a0)
 
-loc_903F4:
+SKLRZCrusher_WaitForParentActivation:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                beq.w   locret_9026C
+                beq.w   SKLRZCrusher_WaitReturn
                 move.b  #4,routine(a0)
 
-loc_90408:
+SKLRZCrusher_TickRestOrFollowParent:
                 subq.b  #1,$2E(a0)
-                bmi.s   loc_90426
+                bmi.s   SKLRZCrusher_BeginPartPulse
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                beq.s   loc_90420
+                beq.s   SKLRZCrusher_FollowParentAtRest
                 move.b  #8,routine(a0)
 
-loc_90420:
+SKLRZCrusher_FollowParentAtRest:
                 jmp     (Refresh_ChildPosition).l
 ; ---------------------------------------------------------------------------
 
-loc_90426:
+SKLRZCrusher_BeginPartPulse:
                 move.b  #6,routine(a0)
                 move.b  #2,$39(a0)
                 clr.b   $40(a0)
 
-loc_90436:
+SKLRZCrusher_MovePartAndTickPulse:
                 move.b  $40(a0),d0
                 add.b   d0,$43(a0)
                 subq.b  #1,$2E(a0)
-                bpl.s   loc_9048A
+                bpl.s   SKLRZCrusher_FollowParentAfterPulse
                 subq.b  #1,$39(a0)
-                bmi.s   loc_90490
+                bmi.s   SKLRZCrusher_ResetPartRestDelay
                 move.b  subtype(a0),d3
                 andi.w  #8,d3
-                bne.s   loc_9046E
+                bne.s   SKLRZCrusher_SelectPulseBankAndPhase
                 btst    #2,$38(a0)
-                beq.s   loc_9046E
+                beq.s   SKLRZCrusher_SelectPulseBankAndPhase
                 bchg    #1,$38(a0)
-                bne.s   loc_9046E
-                lea     ChildObjDat_90658(pc),a2
+                bne.s   SKLRZCrusher_SelectPulseBankAndPhase
+                lea     SKLRZCrusher_DebrisChildren(pc),a2
                 jsr     (CreateChild3_NormalRepeated).l
 
-loc_9046E:
+SKLRZCrusher_SelectPulseBankAndPhase:
                 lsr.w   #1,d3
                 moveq   #0,d1
                 bchg    #2,$38(a0)
-                beq.s   loc_9047C
+                beq.s   SKLRZCrusher_LoadPulseDelayAndStep
                 moveq   #2,d1
 
-loc_9047C:
+SKLRZCrusher_LoadPulseDelayAndStep:
                 add.w   d1,d3
-                lea     byte_904AC(pc,d3.w),a1
+                lea     SKLRZCrusher_PartPulsePairs(pc,d3.w),a1
                 move.b  (a1)+,$2E(a0)
                 move.b  (a1)+,$40(a0)
 
-loc_9048A:
+SKLRZCrusher_FollowParentAfterPulse:
                 jmp     (Refresh_ChildPosition).l
 ; ---------------------------------------------------------------------------
 
-loc_90490:
+SKLRZCrusher_ResetPartRestDelay:
                 move.b  #4,routine(a0)
                 move.b  subtype(a0),d0
                 andi.b  #8,d0
@@ -317,7 +318,7 @@ loc_90490:
                 move.b  d0,$2E(a0)
                 jmp     (Refresh_ChildPosition).l
 ; ---------------------------------------------------------------------------
-byte_904AC:
+SKLRZCrusher_PartPulsePairs:
                 dc.b    1,   8
                 dc.b    3,  -4
                 dc.b    3,  -4
@@ -325,24 +326,24 @@ byte_904AC:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_904B4:
+SKLRZCrusher_FollowParentAfterStop:
                 jmp     (Refresh_ChildPosition).l
 ; ---------------------------------------------------------------------------
 
-loc_904BA:
-                lea     ObjDat3_9061A(pc),a1
+SKLRZCrusher_InitDebris:
+                lea     SKLRZCrusher_DebrisAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_43A6C,(a0)
+                move.l  #SKLRZSpikeBall_UpdateVisibleDebris,(a0)
                 bset    #7,render_flags(a0)
                 jsr     (Random_Number).l
                 andi.w  #$1FF,d0
                 move.w  #$200,d1
                 tst.b   subtype(a0)
-                beq.s   loc_904E8
+                beq.s   SKLRZCrusher_StoreRandomDebrisSpeed
                 neg.w   d0
                 neg.w   d1
 
-loc_904E8:
+SKLRZCrusher_StoreRandomDebrisSpeed:
                 add.w   d1,d0
                 move.w  d0,x_vel(a0)
                 swap    d0
@@ -354,47 +355,48 @@ loc_904E8:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_90502:
-                move.l  #loc_90512,(a0)
+SKLRZCrusher_InitSceneRelay:
+                move.l  #SKLRZCrusher_TickRelayAndSelectScene,(a0)
                 move.w  #(3*60)-1,$2E(a0)
                 st      (Screen_shake_flag).w
 
-loc_90512:
+SKLRZCrusher_TickRelayAndSelectScene:
                 subq.w  #1,$2E(a0)
-                bpl.w   locret_9026C
+                bpl.w   SKLRZCrusher_WaitReturn
                 tst.b   subtype(a0)
-                bne.s   loc_9056E
+                bne.s   SKLRZCrusher_SignalSecondSceneAndBridge
                 st      (Events_bg+$0C).w
                 clr.b   (Screen_shake_flag).w
                 jsr     (AllocateObject).l
-                bne.s   loc_90548
+                bne.s   SKLRZCrusher_TrySecondBridge
                 move.l  #Obj_LRZCollapsingBridge,(a1)
                 move.b  #1,$32(a1)
                 move.w  #$F00,x_pos(a1)
                 move.w  #$760,y_pos(a1)
 
-loc_90548:
+; Attempt the second bridge even if allocating the first failed
+SKLRZCrusher_TrySecondBridge:
                 jsr     (AllocateObject).l
-                bne.s   loc_90568
+                bne.s   SKLRZCrusher_DeleteSceneRelay
                 move.l  #Obj_LRZCollapsingBridge,(a1)
                 move.b  #1,$32(a1)
                 move.w  #$F80,x_pos(a1)
                 move.w  #$760,y_pos(a1)
 
-loc_90568:
+SKLRZCrusher_DeleteSceneRelay:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_9056E:
+SKLRZCrusher_SignalSecondSceneAndBridge:
                 st      (Events_bg+$0D).w
                 jsr     (AllocateObject).l
-                bne.s   loc_90592
+                bne.s   SKLRZCrusher_RestoreCameraAndDeleteRelay
                 move.l  #Obj_LRZCollapsingBridge,(a1)
                 move.b  #1,$32(a1)
                 move.w  #$540,x_pos(a1)
                 move.w  #$860,y_pos(a1)
 
-loc_90592:
+SKLRZCrusher_RestoreCameraAndDeleteRelay:
                 move.w  (Camera_stored_max_Y_pos).w,(Camera_target_max_Y_pos).w
                 lea     Child7_ChangeLevSize(pc),a2
                 jsr     (CreateChild7_Normal2).l
@@ -404,42 +406,42 @@ loc_90592:
 
 UpdateLrzCrusherHitFlash:
                 tst.b   collision_flags(a0)
-                bne.s   locret_905E6
+                bne.s   SKLRZCrusher_HitFlashReturn
                 tst.b   $20(a0)
-                bne.s   loc_905C8
+                bne.s   SKLRZCrusher_SelectFlashColors
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
                 move.b  #-1,collision_property(a0)
 
-loc_905C8:
+SKLRZCrusher_SelectFlashColors:
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_905D6
+                bne.s   SKLRZCrusher_WriteFlashAndTick
                 addi.w  #2*3,d0
 
-loc_905D6:
+SKLRZCrusher_WriteFlashAndTick:
                 bsr.w   WriteLrzCrusherHitPalette
                 subq.b  #1,$20(a0)
-                bne.s   locret_905E6
+                bne.s   SKLRZCrusher_HitFlashReturn
                 move.b  $25(a0),collision_flags(a0)
 
-locret_905E6:
+SKLRZCrusher_HitFlashReturn:
                 rts
 ; End of function UpdateLrzCrusherHitFlash
 
 ; =============== S U B R O U T I N E =======================================
 
 WriteLrzCrusherHitPalette:
-                lea     word_905F6(pc),a1
-                lea     word_905FC(pc,d0.w),a2
+                lea     SKLRZCrusher_FlashPaletteDestinations(pc),a1
+                lea     SKLRZCrusher_FlashColorBanks(pc,d0.w),a2
                 jmp     (CopyWordData_3).l
 ; End of function WriteLrzCrusherHitPalette
 
 ; ---------------------------------------------------------------------------
-word_905F6:
+SKLRZCrusher_FlashPaletteDestinations:
                 dc.w    Normal_palette_line_2+$16, Normal_palette_line_2+$1A, Normal_palette_line_2+$1C
-word_905FC:
+SKLRZCrusher_FlashColorBanks:
                 dc.w    $20,  $866,  $644
                 dc.w    $EEE,  $AAA,  $CCC
 ObjDat_LRZRockCrusher:
@@ -447,35 +449,35 @@ ObjDat_LRZRockCrusher:
                 dc.w    make_art_tile(ArtTile_LRZRockCrusher,1,0)
                 dc.w    $180
                 dc.b    $80, $40,   0, $10
-word_90614:
+SKLRZCrusher_PartAttributes:
                 dc.w    $200
                 dc.b    $C, $14,   1, $8B
-ObjDat3_9061A:
+SKLRZCrusher_DebrisAttributes:
                 dc.l    Map_LRZRockDebris
                 dc.w    make_art_tile($0D3,2,1)
                 dc.w    0
                 dc.b    4,   4,   0,   0
-ChildObjDat_90626:
+SKLRZCrusher_MechanismChildren:
                 dc.w    8-1
-                dc.l    loc_9039A
+                dc.l    SKLRZCrusher_DispatchMechanismPart
                 dc.b    -$1C, $1C
-                dc.l    loc_9039A
+                dc.l    SKLRZCrusher_DispatchMechanismPart
                 dc.b    $1C, $1C
-                dc.l    loc_9039A
+                dc.l    SKLRZCrusher_DispatchMechanismPart
                 dc.b    -$24, $1C
-                dc.l    loc_9039A
+                dc.l    SKLRZCrusher_DispatchMechanismPart
                 dc.b    $24, $1C
-                dc.l    loc_9039A
+                dc.l    SKLRZCrusher_DispatchMechanismPart
                 dc.b    -$1C,-$24
-                dc.l    loc_9039A
+                dc.l    SKLRZCrusher_DispatchMechanismPart
                 dc.b    $1C,-$24
-                dc.l    loc_9039A
+                dc.l    SKLRZCrusher_DispatchMechanismPart
                 dc.b    -$24,-$24
-                dc.l    loc_9039A
+                dc.l    SKLRZCrusher_DispatchMechanismPart
                 dc.b    $24,-$24
-ChildObjDat_90658:
+SKLRZCrusher_DebrisChildren:
                 dc.w    2-1
-                dc.l    loc_904BA
+                dc.l    SKLRZCrusher_InitDebris
                 dc.b    0,  $C
 Child7_ChangeLevSize:
                 dc.w    4-1
@@ -487,7 +489,7 @@ Child7_ChangeLevSize:
                 dc.b    0,   0
                 dc.l    Obj_IncLevEndXGradual
                 dc.b    0,   0
-ChildObjDat_9067A:
+SKLRZCrusher_SpriteMaskChild:
                 dc.w    1-1
                 dc.l    Obj_SpriteMask
 Pal_LRZRockCrusher:

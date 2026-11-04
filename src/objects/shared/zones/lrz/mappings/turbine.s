@@ -1,18 +1,18 @@
 ; Data owner: objects/shared/zones/lrz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_LRZTurbineSprites_:
-                dc.w    word_445B8-Map_LRZTurbineSprites_
-                dc.w    word_446DE-Map_LRZTurbineSprites_
-                dc.w    word_4467C-Map_LRZTurbineSprites_
-                dc.w    word_4461A-Map_LRZTurbineSprites_
-                dc.w    word_44740-Map_LRZTurbineSprites_
+                dc.w    LRZSharedSK_Turbine_MapSlot0-Map_LRZTurbineSprites_
+                dc.w    LRZSharedSK_Turbine_MapSlot1-Map_LRZTurbineSprites_
+                dc.w    LRZSharedSK_Turbine_MapSlot2-Map_LRZTurbineSprites_
+                dc.w    LRZSharedSK_Turbine_MapSlot3-Map_LRZTurbineSprites_
+                dc.w    LRZSharedSK_Turbine_MapSlot4AndNarrow0-Map_LRZTurbineSprites_
 Map_LRZTurbineSprites2:
 Map_LRZTurbineSprites2_:
-                dc.w    word_44740-Map_LRZTurbineSprites2_
-                dc.w    word_447EE-Map_LRZTurbineSprites2_
-                dc.w    word_447B0-Map_LRZTurbineSprites2_
-                dc.w    word_44778-Map_LRZTurbineSprites2_
-word_445B8:     dc.w    $10
+                dc.w    LRZSharedSK_Turbine_MapSlot4AndNarrow0-Map_LRZTurbineSprites2_
+                dc.w    LRZSharedSK_Turbine_MapSlotNarrow1-Map_LRZTurbineSprites2_
+                dc.w    LRZSharedSK_Turbine_MapSlotNarrow2-Map_LRZTurbineSprites2_
+                dc.w    LRZSharedSK_Turbine_MapSlotNarrow3-Map_LRZTurbineSprites2_
+LRZSharedSK_Turbine_MapSlot0:   dc.w    $10
                 dc.b    $D0,   4,   0, $30, $FF, $F0
                 dc.b    $D0,   4,   8, $30,   0,   0
                 dc.b    $E0,   5,   0, $32, $FF, $F0
@@ -29,7 +29,7 @@ word_445B8:     dc.w    $10
                 dc.b    $F8,   7, $48, $24,   0,   0
                 dc.b    $18,   5, $40, $2C, $FF, $F0
                 dc.b    $18,   5, $48, $2C,   0,   0
-word_4461A:     dc.w    $10
+LRZSharedSK_Turbine_MapSlot3:   dc.w    $10
                 dc.b    $D0,   5,   0, $3E, $FF, $F0
                 dc.b    $D0,   5,   8, $3E,   0,   0
                 dc.b    $E8,   4,   0, $42, $FF, $F0
@@ -46,7 +46,7 @@ word_4461A:     dc.w    $10
                 dc.b    $F8,   7, $48, $24,   0,   0
                 dc.b    $18,   5, $40, $2C, $FF, $F0
                 dc.b    $18,   5, $48, $2C,   0,   0
-word_4467C:     dc.w    $10
+LRZSharedSK_Turbine_MapSlot2:   dc.w    $10
                 dc.b    $D8,   4,   0, $4A, $FF, $F0
                 dc.b    $D8,   4,   8, $4A,   0,   0
                 dc.b    $F0,   4,   0, $4C, $FF, $F0
@@ -63,7 +63,7 @@ word_4467C:     dc.w    $10
                 dc.b    $F8,   7, $48, $24,   0,   0
                 dc.b    $18,   5, $40, $2C, $FF, $F0
                 dc.b    $18,   5, $48, $2C,   0,   0
-word_446DE:     dc.w    $10
+LRZSharedSK_Turbine_MapSlot1:   dc.w    $10
                 dc.b    $D0,   4,   0, $56, $FF, $F0
                 dc.b    $D0,   4,   8, $56,   0,   0
                 dc.b    $E0,   4,   0, $58, $FF, $F0
@@ -80,7 +80,7 @@ word_446DE:     dc.w    $10
                 dc.b    $F8,   7, $48, $24,   0,   0
                 dc.b    $18,   5, $40, $2C, $FF, $F0
                 dc.b    $18,   5, $48, $2C,   0,   0
-word_44740:     dc.w    9
+LRZSharedSK_Turbine_MapSlot4AndNarrow0: dc.w    9
                 dc.b    $D0,   3,   0,   0, $FF, $FC
                 dc.b    $F8,   1,   0,   4, $FF, $FC
                 dc.b    $10,   3, $10,   0, $FF, $FC
@@ -90,7 +90,7 @@ word_44740:     dc.w    9
                 dc.b    $F8,   3, $48, $16,   0,   0
                 dc.b    $18,   1, $40, $1A, $FF, $F8
                 dc.b    $18,   1, $48, $1A,   0,   0
-word_44778:     dc.w    9
+LRZSharedSK_Turbine_MapSlotNarrow3: dc.w    9
                 dc.b    $D0,   3,   0,   6, $FF, $FC
                 dc.b    0,   1,   0,   4, $FF, $FC
                 dc.b    $18,   2,   0,  $A, $FF, $FC
@@ -100,7 +100,7 @@ word_44778:     dc.w    9
                 dc.b    $F8,   3, $48, $16,   0,   0
                 dc.b    $18,   1, $40, $1A, $FF, $F8
                 dc.b    $18,   1, $48, $1A,   0,   0
-word_447B0:     dc.w    9
+LRZSharedSK_Turbine_MapSlotNarrow2: dc.w    9
                 dc.b    $D0,   3,   0,  $D, $FF, $FC
                 dc.b    $F0,   0,   0, $11, $FF, $FC
                 dc.b    8,   3, $10,  $E, $FF, $FC
@@ -111,7 +111,7 @@ word_447B0:     dc.w    9
                 dc.b    $F8,   3, $48, $16,   0,   0
                 dc.b    $18,   1, $40, $1A, $FF, $F8
                 dc.b    $18,   1,   8, $1A,   0,   0
-word_447EE:     dc.w    9
+LRZSharedSK_Turbine_MapSlotNarrow1: dc.w    9
                 dc.b    $D0,   2, $10,  $A, $FF, $FC
                 dc.b    $F0,   1,   0,   4, $FF, $FC
                 dc.b    $10,   3, $10,   6, $FF, $FC

@@ -12,76 +12,76 @@ Obj_LRZFlameThrower:
                 move.w  #$280,priority(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                bpl.s   loc_43DC4
+                bpl.s   SKLRZFlame_InitHorizontalEmitter
                 andi.w  #$7F,d0
                 lsl.w   #2,d0
                 move.w  d0,$32(a0)
                 move.w  #2*60,$30(a0)
                 move.b  #7,mapping_frame(a0)
                 btst    #0,status(a0)
-                beq.s   loc_43DBA
+                beq.s   SKLRZFlame_InitVerticalEmitter
                 bset    #1,render_flags(a0)
 
-loc_43DBA:
-                move.l  #loc_43F12,(a0)
-                bra.w   loc_43F12
+SKLRZFlame_InitVerticalEmitter:
+                move.l  #SKLRZFlame_TickVerticalActive,(a0)
+                bra.w   SKLRZFlame_TickVerticalActive
 ; ---------------------------------------------------------------------------
 
-loc_43DC4:
+SKLRZFlame_InitHorizontalEmitter:
                 lsl.w   #2,d0
                 move.w  d0,$32(a0)
                 move.w  #2*60,$30(a0)
                 move.b  #6,mapping_frame(a0)
-                move.l  #loc_43DDC,(a0)
+                move.l  #SKLRZFlame_TickHorizontalActive,(a0)
 
-loc_43DDC:
+SKLRZFlame_TickHorizontalActive:
                 tst.b   $2F(a0)
-                bne.s   loc_43DF8
+                bne.s   SKLRZFlame_TickHorizontalPause
                 subq.w  #1,$30(a0)
-                bpl.s   loc_43E14
+                bpl.s   SKLRZFlame_TickHorizontalFramePhase
                 move.w  $32(a0),$30(a0)
                 move.b  #1,$2F(a0)
-                bra.w   loc_43EF6
+                bra.w   SKLRZFlame_CheckHorizontalSolid
 ; ---------------------------------------------------------------------------
 
-loc_43DF8:
+SKLRZFlame_TickHorizontalPause:
                 subq.w  #1,$30(a0)
-                bpl.w   loc_43EF6
+                bpl.w   SKLRZFlame_CheckHorizontalSolid
                 move.w  #2*60,$30(a0)
                 move.b  #0,$2F(a0)
                 moveq   #signextendB(sfx_FlamethrowerLoud),d0
                 jsr     (Play_SFX).l
 
-loc_43E14:
+SKLRZFlame_TickHorizontalFramePhase:
                 subq.b  #1,$24(a0)
-                bpl.s   loc_43E2A
+                bpl.s   SKLRZFlame_CheckHorizontalEmission
                 move.b  #2,$24(a0)
                 addq.b  #1,$25(a0)
                 andi.b  #1,$25(a0)
 
-loc_43E2A:
+SKLRZFlame_CheckHorizontalEmission:
                 move.b  (Level_frame_counter+1).w,d0
                 move.b  d0,d1
                 andi.b  #3,d0
-                bne.w   loc_43EF6
+                bne.w   SKLRZFlame_CheckHorizontalSolid
                 andi.b  #$F,d1
-                bne.s   loc_43E4E
+                bne.s   SKLRZFlame_AimAndTrySpawnHorizontal
                 cmpi.w  #30,$30(a0)
-                blo.s   loc_43E4E
+                blo.s   SKLRZFlame_AimAndTrySpawnHorizontal
                 moveq   #signextendB(sfx_FlamethrowerLoud),d0
                 jsr     (Play_SFX).l
 
-loc_43E4E:
+SKLRZFlame_AimAndTrySpawnHorizontal:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 asr.w   #4,d0
                 move.b  d0,$2E(a0)
                 addq.b  #8,angle(a0)
                 tst.b   render_flags(a0)
-                bpl.w   loc_43EF6
+                bpl.w   SKLRZFlame_CheckHorizontalSolid
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_43EF6
-                move.l  #loc_44048,(a1)
+                bne.w   SKLRZFlame_CheckHorizontalSolid
+                move.l  #SKLRZFlame_TickParticleGrowth,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 addi.w  #$10,x_pos(a1)
@@ -100,16 +100,16 @@ loc_43E4E:
                 move.w  d1,x_vel(a1)
                 move.w  d0,y_vel(a1)
                 btst    #0,status(a0)
-                beq.s   loc_43EE4
+                beq.s   SKLRZFlame_InitHorizontalParticle
                 neg.w   x_vel(a1)
                 subi.w  #2*$10,x_pos(a1)
 
-loc_43EE4:
+SKLRZFlame_InitHorizontalParticle:
                 move.b  $25(a0),mapping_frame(a1)
                 move.b  $24(a0),$25(a1)
                 move.b  #8,$24(a1)
 
-loc_43EF6:
+SKLRZFlame_CheckHorizontalSolid:
                 move.w  #$23,d1
                 move.w  #$10,d2
                 move.w  #$11,d3
@@ -118,54 +118,54 @@ loc_43EF6:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_43F12:
+SKLRZFlame_TickVerticalActive:
                 tst.b   $2F(a0)
-                bne.s   loc_43F2E
+                bne.s   SKLRZFlame_TickVerticalPause
                 subq.w  #1,$30(a0)
-                bpl.s   loc_43F4A
+                bpl.s   SKLRZFlame_TickVerticalFramePhase
                 move.w  $32(a0),$30(a0)
                 move.b  #1,$2F(a0)
-                bra.w   loc_4402C
+                bra.w   SKLRZFlame_CheckVerticalSolid
 ; ---------------------------------------------------------------------------
 
-loc_43F2E:
+SKLRZFlame_TickVerticalPause:
                 subq.w  #1,$30(a0)
-                bpl.w   loc_4402C
+                bpl.w   SKLRZFlame_CheckVerticalSolid
                 move.w  #2*60,$30(a0)
                 move.b  #0,$2F(a0)
                 moveq   #signextendB(sfx_FlamethrowerLoud),d0
                 jsr     (Play_SFX).l
 
-loc_43F4A:
+SKLRZFlame_TickVerticalFramePhase:
                 subq.b  #1,$24(a0)
-                bpl.s   loc_43F60
+                bpl.s   SKLRZFlame_CheckVerticalEmission
                 move.b  #2,$24(a0)
                 addq.b  #1,$25(a0)
                 andi.b  #1,$25(a0)
 
-loc_43F60:
+SKLRZFlame_CheckVerticalEmission:
                 move.b  (Level_frame_counter+1).w,d0
                 move.b  d0,d1
                 andi.b  #3,d0
-                bne.w   loc_4402C
+                bne.w   SKLRZFlame_CheckVerticalSolid
                 andi.b  #$F,d1
-                bne.s   loc_43F84
+                bne.s   SKLRZFlame_AimAndTrySpawnVertical
                 cmpi.w  #30,$30(a0)
-                blo.s   loc_43F84
+                blo.s   SKLRZFlame_AimAndTrySpawnVertical
                 moveq   #signextendB(sfx_FlamethrowerLoud),d0
                 jsr     (Play_SFX).l
 
-loc_43F84:
+SKLRZFlame_AimAndTrySpawnVertical:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 asr.w   #4,d0
                 move.b  d0,$2E(a0)
                 addq.b  #8,angle(a0)
                 tst.b   render_flags(a0)
-                bpl.w   loc_4402C
+                bpl.w   SKLRZFlame_CheckVerticalSolid
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_4402C
-                move.l  #loc_44048,(a1)
+                bne.w   SKLRZFlame_CheckVerticalSolid
+                move.l  #SKLRZFlame_TickParticleGrowth,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 addi.w  #$10,y_pos(a1)
@@ -184,16 +184,16 @@ loc_43F84:
                 move.w  d1,y_vel(a1)
                 move.w  d0,x_vel(a1)
                 btst    #0,status(a0)
-                beq.s   loc_4401A
+                beq.s   SKLRZFlame_InitVerticalParticle
                 neg.w   y_vel(a1)
                 subi.w  #$20,y_pos(a1)
 
-loc_4401A:
+SKLRZFlame_InitVerticalParticle:
                 move.b  $25(a0),mapping_frame(a1)
                 move.b  $24(a0),$25(a1)
                 move.b  #8,$24(a1)
 
-loc_4402C:
+SKLRZFlame_CheckVerticalSolid:
                 move.w  #$1B,d1
                 move.w  #$10,d2
                 move.w  #$11,d3
@@ -202,27 +202,28 @@ loc_4402C:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_44048:
+SKLRZFlame_TickParticleGrowth:
                 subq.b  #1,$24(a0)
-                bpl.s   loc_44060
+                bpl.s   SKLRZFlame_TickParticleFlicker
                 move.b  #7,$24(a0)
                 addq.b  #2,mapping_frame(a0)
                 cmpi.b  #6,mapping_frame(a0)
-                bhs.s   loc_44084
+                bhs.s   SKLRZFlame_DeleteParticle
 
-loc_44060:
+; The low frame bit has a separate timer from the growth frame pair
+SKLRZFlame_TickParticleFlicker:
                 subq.b  #1,$25(a0)
-                bpl.s   loc_44072
+                bpl.s   SKLRZFlame_MoveParticleAndQueueContact
                 move.b  #2,$25(a0)
                 bchg    #0,mapping_frame(a0)
 
-loc_44072:
+SKLRZFlame_MoveParticleAndQueueContact:
                 jsr     (MoveSprite2).l
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_44084:
+SKLRZFlame_DeleteParticle:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_LRZFlameThrower:

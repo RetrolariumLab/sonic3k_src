@@ -12,46 +12,47 @@ Obj_LRZBigDoor:
                 move.w  #$280,priority(a0)
                 move.w  y_pos(a0),$46(a0)
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_42A62
+                beq.s   SKLRZBigDoor_InitApproachGate
                 movea.w d0,a2
                 btst    #0,(a2)
-                beq.s   loc_42A62
+                beq.s   SKLRZBigDoor_InitApproachGate
                 addi.w  #$80,y_pos(a0)
-                move.l  #loc_42B08,(a0)
-                bra.w   loc_42B08
+                move.l  #SKLRZBigDoor_CheckStaticSolidAndCull,(a0)
+                bra.w   SKLRZBigDoor_CheckStaticSolidAndCull
 ; ---------------------------------------------------------------------------
 
-loc_42A62:
-                move.l  #loc_42A68,(a0)
+SKLRZBigDoor_InitApproachGate:
+                move.l  #SKLRZBigDoor_TryOpenForP1,(a0)
 
-loc_42A68:
+; P1 must be at least $50 pixels to the right and $40 to $BF pixels below the door
+SKLRZBigDoor_TryOpenForP1:
                 lea     (Player_1).w,a1
                 move.w  y_pos(a1),d0
                 sub.w   y_pos(a0),d0
                 addi.w  #-$40,d0
                 cmpi.w  #$80,d0
-                bhs.w   loc_42B08
+                bhs.w   SKLRZBigDoor_CheckStaticSolidAndCull
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 cmpi.w  #$50,d0
-                blt.s   loc_42B08
-                move.l  #loc_42AAE,(a0)
+                blt.s   SKLRZBigDoor_CheckStaticSolidAndCull
+                move.l  #SKLRZBigDoor_StepOpeningAndShake,(a0)
                 move.w  #-1,(Screen_shake_flag).w
                 moveq   #signextendB(sfx_BigRumble),d0
                 jsr     (Play_SFX).l
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_42AAE
+                beq.s   SKLRZBigDoor_StepOpeningAndShake
                 movea.w d0,a2
                 bset    #0,(a2)
 
-loc_42AAE:
+SKLRZBigDoor_StepOpeningAndShake:
                 addq.b  #1,$2E(a0)
                 cmpi.b  #$40,$2E(a0)
-                bne.s   loc_42AC6
-                move.l  #loc_42B08,(a0)
+                bne.s   SKLRZBigDoor_PlaceDoorAndTickRumble
+                move.l  #SKLRZBigDoor_CheckStaticSolidAndCull,(a0)
                 move.w  #0,(Screen_shake_flag).w
 
-loc_42AC6:
+SKLRZBigDoor_PlaceDoorAndTickRumble:
                 move.b  $2E(a0),d0
                 jsr     (GetSineCosine).l
                 asr.w   #1,d0
@@ -59,11 +60,11 @@ loc_42AC6:
                 move.w  d0,y_pos(a0)
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #$F,d0
-                bne.s   loc_42AEC
+                bne.s   SKLRZBigDoor_CheckMovingSolidAndDraw
                 moveq   #signextendB(sfx_BigRumble),d0
                 jsr     (Play_SFX).l
 
-loc_42AEC:
+SKLRZBigDoor_CheckMovingSolidAndDraw:
                 move.w  #$3B,d1
                 move.w  #$40,d2
                 move.w  #$41,d3
@@ -72,7 +73,7 @@ loc_42AEC:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_42B08:
+SKLRZBigDoor_CheckStaticSolidAndCull:
                 move.w  #$3B,d1
                 move.w  #$40,d2
                 move.w  #$41,d3

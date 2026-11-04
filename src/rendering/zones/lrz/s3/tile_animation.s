@@ -12,7 +12,7 @@ AnimateTiles_LRZ1:
                 divu.w  #$30,d0
                 swap    d0
                 cmp.b   1(a3),d0
-                beq.s   loc_27440
+                beq.s   S3LRZTiles_AdvanceToSecondBand
                 move.b  d0,1(a3)
                 moveq   #0,d1
                 move.w  d0,d2
@@ -29,7 +29,7 @@ AnimateTiles_LRZ1:
                 add.w   d2,d2
                 add.w   d2,d1
                 lsr.w   #1,d0
-                lea     word_27446(pc,d0.w),a4
+                lea     S3LRZTiles_MainBandDmaCounts(pc,d0.w),a4
                 lea     (ArtUnc_AniLRZ__BG).l,a0
                 move.w  #tiles_to_bytes($301),d4
                 add.l   a0,d1
@@ -42,14 +42,14 @@ AnimateTiles_LRZ1:
                 add.l   a0,d1
                 move.w  d4,d2
                 move.w  (a4)+,d3
-                beq.s   loc_27440
+                beq.s   S3LRZTiles_AdvanceToSecondBand
                 jsr     (Add_To_DMA_Queue).l
 
-loc_27440:
+S3LRZTiles_AdvanceToSecondBand:
                 addq.w  #2,a3
-                bra.w   loc_2745E
+                bra.w   S3LRZTiles_UpdateSecondBand
 ; ---------------------------------------------------------------------------
-word_27446:
+S3LRZTiles_MainBandDmaCounts:
                 dc.w    $240
                 dc.w    0
                 dc.w    $1E0
@@ -64,13 +64,13 @@ word_27446:
                 dc.w    $1E0
 ; ---------------------------------------------------------------------------
 
-loc_2745E:
+S3LRZTiles_UpdateSecondBand:
                 moveq   #0,d0
                 move.w  (Events_bg+$10).w,d0
                 sub.w   (Camera_X_pos_BG_copy).w,d0
                 andi.w  #$1F,d0
                 cmp.b   1(a3),d0
-                beq.s   locret_274BE
+                beq.s   S3LRZTiles_SecondBandReturn
                 move.b  d0,1(a3)
                 moveq   #0,d1
                 move.w  d0,d2
@@ -83,7 +83,7 @@ loc_2745E:
                 lsl.w   #3,d2
                 add.w   d2,d1
                 lsr.w   #1,d0
-                lea     word_274C0(pc,d0.w),a4
+                lea     S3LRZTiles_SecondBandDmaCounts(pc,d0.w),a4
                 lea     (ArtUnc_AniLRZ__BG2).l,a0
                 move.w  #tiles_to_bytes($325),d4
                 add.l   a0,d1
@@ -96,13 +96,13 @@ loc_2745E:
                 add.l   a0,d1
                 move.w  d4,d2
                 move.w  (a4)+,d3
-                beq.s   locret_274BE
+                beq.s   S3LRZTiles_SecondBandReturn
                 jsr     (Add_To_DMA_Queue).l
 
-locret_274BE:
+S3LRZTiles_SecondBandReturn:
                 rts
 ; ---------------------------------------------------------------------------
-word_274C0:
+S3LRZTiles_SecondBandDmaCounts:
                 dc.w    $80
                 dc.w    0
                 dc.w    $60

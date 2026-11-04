@@ -13,24 +13,25 @@ Obj_LRZDashElevator:
                 move.w  y_pos(a0),$46(a0)
                 moveq   #0,d1
                 move.b  subtype(a0),d0
-                bpl.s   loc_42F54
+                bpl.s   SKLRZDashLift_InitTravelAndEndpoint
                 moveq   #$20,d1
                 move.w  d1,$30(a0)
 
-loc_42F54:
+; The original facing bit chooses the starting end and is then cleared
+SKLRZDashLift_InitTravelAndEndpoint:
                 andi.w  #$7F,d0
                 lsl.w   #3,d0
                 move.w  d0,$34(a0)
                 bclr    #0,status(a0)
-                beq.s   loc_42F72
+                beq.s   SKLRZDashLift_InitDriveState
                 move.w  d0,$30(a0)
                 sub.w   d1,$30(a0)
                 sub.w   d0,$46(a0)
 
-loc_42F72:
-                move.l  #loc_42F78,(a0)
+SKLRZDashLift_InitDriveState:
+                move.l  #SKLRZDashLift_SumDriveAndMove,(a0)
 
-loc_42F78:
+SKLRZDashLift_SumDriveAndMove:
                 moveq   #0,d5
                 lea     $2E(a0),a2
                 lea     (Player_1).w,a1
@@ -44,48 +45,48 @@ loc_42F78:
                 swap    d5
                 asr.l   #3,d5
                 add.l   d5,d0
-                bpl.s   loc_42FA4
+                bpl.s   SKLRZDashLift_ClampUpperTravel
                 moveq   #0,d0
                 moveq   #0,d5
 
-loc_42FA4:
+SKLRZDashLift_ClampUpperTravel:
                 move.l  $34(a0),d1
                 cmp.l   d1,d0
-                blo.s   loc_42FB0
+                blo.s   SKLRZDashLift_ApplyTravelAndAnimate
                 move.l  d1,d0
                 moveq   #0,d5
 
-loc_42FB0:
+SKLRZDashLift_ApplyTravelAndAnimate:
                 move.l  d0,$30(a0)
                 swap    d0
                 add.w   $46(a0),d0
                 move.w  d0,y_pos(a0)
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #3,d0
-                bne.s   loc_43000
+                bne.s   SKLRZDashLift_CheckSolidAndDraw
                 tst.l   d5
-                beq.s   loc_43000
-                bpl.s   loc_42FE2
+                beq.s   SKLRZDashLift_CheckSolidAndDraw
+                bpl.s   SKLRZDashLift_StepFrameBackward
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #3,mapping_frame(a0)
-                blo.s   loc_42FEE
+                blo.s   SKLRZDashLift_TryPlayMovingSound
                 move.b  #0,mapping_frame(a0)
-                bra.s   loc_42FEE
+                bra.s   SKLRZDashLift_TryPlayMovingSound
 ; ---------------------------------------------------------------------------
 
-loc_42FE2:
+SKLRZDashLift_StepFrameBackward:
                 subq.b  #1,mapping_frame(a0)
-                bcc.s   loc_42FEE
+                bcc.s   SKLRZDashLift_TryPlayMovingSound
                 move.b  #2,mapping_frame(a0)
 
-loc_42FEE:
+SKLRZDashLift_TryPlayMovingSound:
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #$F,d0
-                bne.s   loc_43000
+                bne.s   SKLRZDashLift_CheckSolidAndDraw
                 moveq   #signextendB(sfx_ConveyorPlatform),d0
                 jsr     (Play_SFX).l
 
-loc_43000:
+SKLRZDashLift_CheckSolidAndDraw:
                 move.w  #$2B,d1
                 move.w  #8,d2
                 move.w  #9,d3
@@ -97,59 +98,60 @@ loc_43000:
 
 AccumulatePlayerDriveForLrzDashElevator:
                 tst.b   (a2)
-                bne.s   loc_4303A
+                bne.s   SKLRZDashLift_CheckDriverState
                 btst    d6,status(a0)
-                beq.s   locret_43038
+                beq.s   SKLRZDashLift_DriveCaptureReturn
                 cmpi.b  #9,anim(a1)
-                bne.s   locret_43038
+                bne.s   SKLRZDashLift_DriveCaptureReturn
                 move.w  x_pos(a0),x_pos(a1)
                 move.b  #1,(a2)
 
-locret_43038:
+SKLRZDashLift_DriveCaptureReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4303A:
+SKLRZDashLift_CheckDriverState:
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_43052
+                bne.s   SKLRZDashLift_ReleaseDriverAndStopX
                 cmpi.b  #2,anim(a1)
-                beq.s   loc_4305E
+                beq.s   SKLRZDashLift_CenterDriverAndApplyDrag
                 cmpi.b  #9,anim(a1)
-                beq.s   loc_4305E
+                beq.s   SKLRZDashLift_CenterDriverAndApplyDrag
 
-loc_43052:
+SKLRZDashLift_ReleaseDriverAndStopX:
                 move.w  #0,x_vel(a1)
                 move.b  #0,(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4305E:
+SKLRZDashLift_CenterDriverAndApplyDrag:
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  ground_vel(a1),d0
-                beq.s   loc_43082
-                bpl.s   loc_43076
+                beq.s   SKLRZDashLift_CalcSignedDrive
+                bpl.s   SKLRZDashLift_DampPositiveGroundSpeed
                 addi.w  #$40,d0
-                bcc.s   loc_4307E
+                bcc.s   SKLRZDashLift_StoreDampedGroundSpeed
                 moveq   #0,d0
-                bra.s   loc_4307E
+                bra.s   SKLRZDashLift_StoreDampedGroundSpeed
 ; ---------------------------------------------------------------------------
 
-loc_43076:
+SKLRZDashLift_DampPositiveGroundSpeed:
                 subi.w  #$40,d0
-                bcc.s   loc_4307E
+                bcc.s   SKLRZDashLift_StoreDampedGroundSpeed
                 moveq   #0,d0
 
-loc_4307E:
+SKLRZDashLift_StoreDampedGroundSpeed:
                 move.w  d0,ground_vel(a1)
 
-loc_43082:
+; Add the spin dash counter to 8 as a byte, then apply the rider's facing sign
+SKLRZDashLift_CalcSignedDrive:
                 moveq   #8,d0
                 add.b   spin_dash_counter(a1),d0
                 btst    #Status_Facing,status(a1)
-                bne.s   loc_43092
+                bne.s   SKLRZDashLift_AccumulateDrive
                 neg.w   d0
 
-loc_43092:
+SKLRZDashLift_AccumulateDrive:
                 add.w   d0,d5
                 rts
 ; End of function AccumulatePlayerDriveForLrzDashElevator

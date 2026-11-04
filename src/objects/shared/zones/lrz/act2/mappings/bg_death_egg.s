@@ -1,8 +1,8 @@
 ; Data owner: objects/shared/zones/lrz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_LRZ2DeathEggBG_:
-                dc.w    word_571A0-Map_LRZ2DeathEggBG_
-word_571A0:     dc.w    $E
+                dc.w    LRZSharedSK_Backdrop_MapSlot0-Map_LRZ2DeathEggBG_
+LRZSharedSK_Backdrop_MapSlot0:  dc.w    $E
                 dc.b    0,  $D,   0,   0, $FF, $B0
                 dc.b    0,  $E,   0,   8,   0, $30
                 dc.b    0,  $F,   0, $14, $FF, $D0

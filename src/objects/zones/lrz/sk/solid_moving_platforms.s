@@ -3,7 +3,7 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 
 ; ---------------------------------------------------------------------------
-byte_25826:
+SKLRZMovingSolid_ShapeAttributes:
                 dc.b    $20, $20, 0
                 even
                 dc.b    $20, $20, 1
@@ -19,7 +19,7 @@ Obj_LRZSolidMovingPlatforms:
                 move.b  subtype(a0),d0
                 lsr.w   #2,d0
                 andi.w  #$1C,d0
-                lea     byte_25826(pc,d0.w),a2
+                lea     SKLRZMovingSolid_ShapeAttributes(pc,d0.w),a2
                 move.b  (a2)+,width_pixels(a0)
                 move.b  (a2)+,height_pixels(a0)
                 move.b  (a2)+,mapping_frame(a0)
@@ -28,12 +28,12 @@ Obj_LRZSolidMovingPlatforms:
                 move.b  subtype(a0),d0
                 andi.w  #$F,d0
                 add.w   d0,d0
-                move.w  off_258BC(pc,d0.w),d0
-                lea     off_258BC(pc,d0.w),a1
+                move.w  SKLRZMovingSolid_MotionOffsets(pc,d0.w),d0
+                lea     SKLRZMovingSolid_MotionOffsets(pc,d0.w),a1
                 move.l  a1,$42(a0)
-                move.l  #loc_2588C,(a0)
+                move.l  #SKLRZMovingSolid_MoveAndCheckSolid,(a0)
 
-loc_2588C:
+SKLRZMovingSolid_MoveAndCheckSolid:
                 move.w  x_pos(a0),-(sp)
                 movea.l $42(a0),a1
                 jsr     (a1)
@@ -49,69 +49,69 @@ loc_2588C:
                 move.w  $30(a0),d0
                 jmp     (Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
-off_258BC:
-                dc.w    locret_258CE-off_258BC
-                dc.w    loc_258D0-off_258BC
-                dc.w    loc_258DC-off_258BC
-                dc.w    loc_25924-off_258BC
-                dc.w    loc_258FA-off_258BC
-                dc.w    loc_25906-off_258BC
-                dc.w    loc_25938-off_258BC
-                dc.w    loc_2594C-off_258BC
-                dc.w    loc_25960-off_258BC
+SKLRZMovingSolid_MotionOffsets:
+                dc.w    SKLRZMovingSolid_Stationary-SKLRZMovingSolid_MotionOffsets
+                dc.w    SKLRZMovingSolid_OscillateX64-SKLRZMovingSolid_MotionOffsets
+                dc.w    SKLRZMovingSolid_OscillateX128-SKLRZMovingSolid_MotionOffsets
+                dc.w    SKLRZMovingSolid_AccelOscillateX96-SKLRZMovingSolid_MotionOffsets
+                dc.w    SKLRZMovingSolid_OscillateY64-SKLRZMovingSolid_MotionOffsets
+                dc.w    SKLRZMovingSolid_OscillateY128-SKLRZMovingSolid_MotionOffsets
+                dc.w    SKLRZMovingSolid_AccelOscillateY96-SKLRZMovingSolid_MotionOffsets
+                dc.w    SKLRZMovingSolid_AccelOscillateX128-SKLRZMovingSolid_MotionOffsets
+                dc.w    SKLRZMovingSolid_AccelOscillateY128-SKLRZMovingSolid_MotionOffsets
 ; ---------------------------------------------------------------------------
 
-locret_258CE:
+SKLRZMovingSolid_Stationary:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_258D0:
+SKLRZMovingSolid_OscillateX64:
                 moveq   #0,d0
                 move.b  (Oscillating_table+$0A).w,d0
                 subi.w  #$20,d0
-                bra.s   loc_258E6
+                bra.s   SKLRZMovingSolid_TryMirrorOffsetX
 ; ---------------------------------------------------------------------------
 
-loc_258DC:
+SKLRZMovingSolid_OscillateX128:
                 moveq   #0,d0
                 move.b  (Oscillating_table+$1E).w,d0
                 subi.w  #$40,d0
 
-loc_258E6:
+SKLRZMovingSolid_TryMirrorOffsetX:
                 btst    #0,status(a0)
-                beq.s   loc_258F0
+                beq.s   SKLRZMovingSolid_ApplyOffsetX
                 neg.w   d0
 
-loc_258F0:
+SKLRZMovingSolid_ApplyOffsetX:
                 add.w   $30(a0),d0
                 move.w  d0,x_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_258FA:
+SKLRZMovingSolid_OscillateY64:
                 moveq   #0,d0
                 move.b  (Oscillating_table+$0A).w,d0
                 subi.w  #$20,d0
-                bra.s   loc_25910
+                bra.s   SKLRZMovingSolid_TryMirrorOffsetY
 ; ---------------------------------------------------------------------------
 
-loc_25906:
+SKLRZMovingSolid_OscillateY128:
                 moveq   #0,d0
                 move.b  (Oscillating_table+$1E).w,d0
                 subi.w  #$40,d0
 
-loc_25910:
+SKLRZMovingSolid_TryMirrorOffsetY:
                 btst    #0,status(a0)
-                beq.s   loc_2591A
+                beq.s   SKLRZMovingSolid_ApplyOffsetY
                 neg.w   d0
 
-loc_2591A:
+SKLRZMovingSolid_ApplyOffsetY:
                 add.w   $34(a0),d0
                 move.w  d0,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_25924:
+SKLRZMovingSolid_AccelOscillateX96:
                 move.w  #$5F,d2
                 bsr.s   AdvanceLrzPlatformAcceleratedOffset
                 subi.w  #$60,d0
@@ -120,7 +120,7 @@ loc_25924:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_25938:
+SKLRZMovingSolid_AccelOscillateY96:
                 move.w  #$5F,d2
                 bsr.s   AdvanceLrzPlatformAcceleratedOffset
                 subi.w  #$60,d0
@@ -129,7 +129,7 @@ loc_25938:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2594C:
+SKLRZMovingSolid_AccelOscillateX128:
                 move.w  #$7F,d2
                 bsr.s   AdvanceLrzPlatformAcceleratedOffset
                 subi.w  #$80,d0
@@ -138,7 +138,7 @@ loc_2594C:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_25960:
+SKLRZMovingSolid_AccelOscillateY128:
                 move.w  #$7F,d2
                 bsr.s   AdvanceLrzPlatformAcceleratedOffset
                 subi.w  #$80,d0
@@ -150,35 +150,35 @@ loc_25960:
 
 AdvanceLrzPlatformAcceleratedOffset:
                 tst.b   $3C(a0)
-                bne.s   loc_25996
+                bne.s   SKLRZMovingSolid_DecelAndCheckTurn
                 move.w  $40(a0),d1
                 addq.w  #4,d1
                 move.w  d1,$40(a0)
                 add.w   d1,$36(a0)
                 cmp.b   $36(a0),d2
-                bhi.s   loc_259B0
+                bhi.s   SKLRZMovingSolid_GetMirroredOffset
                 move.b  #1,$3C(a0)
-                bra.s   loc_259B0
+                bra.s   SKLRZMovingSolid_GetMirroredOffset
 ; ---------------------------------------------------------------------------
 
-loc_25996:
+SKLRZMovingSolid_DecelAndCheckTurn:
                 move.w  $40(a0),d1
                 subq.w  #4,d1
                 move.w  d1,$40(a0)
                 add.w   d1,$36(a0)
                 cmp.b   $36(a0),d2
-                bls.s   loc_259B0
+                bls.s   SKLRZMovingSolid_GetMirroredOffset
                 move.b  #0,$3C(a0)
 
-loc_259B0:
+SKLRZMovingSolid_GetMirroredOffset:
                 moveq   #0,d0
                 move.b  $36(a0),d0
                 btst    #0,status(a0)
-                beq.s   locret_259C2
+                beq.s   SKLRZMovingSolid_OffsetReturn
                 neg.w   d0
                 add.w   d2,d0
 
-locret_259C2:
+SKLRZMovingSolid_OffsetReturn:
                 rts
 ; End of function AdvanceLrzPlatformAcceleratedOffset
 

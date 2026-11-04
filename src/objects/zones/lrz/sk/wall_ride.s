@@ -5,9 +5,9 @@
 
 Obj_LRZWallRide:
                 move.b  #$D0,width_pixels(a0)
-                move.l  #loc_42556,(a0)
+                move.l  #SKLRZWallRide_UpdateRidersAndCull,(a0)
 
-loc_42556:
+SKLRZWallRide_UpdateRidersAndCull:
                 bsr.s   UpdatePlayersOnLrzWallRide
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
@@ -29,52 +29,52 @@ UpdatePlayersOnLrzWallRide:
 
 UpdatePlayerOnLrzWallRide:
                 btst    d6,status(a0)
-                bne.w   loc_426B0
+                bne.w   SKLRZWallRide_CheckDebugExit
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$10,d0
                 cmpi.w  #$20,d0
-                bhs.s   locret_425E8
+                bhs.s   SKLRZWallRide_CaptureReturn
                 move.w  y_pos(a1),d0
                 sub.w   y_pos(a0),d0
                 addi.w  #$10,d0
                 cmpi.w  #$20,d0
-                bhs.s   locret_425E8
+                bhs.s   SKLRZWallRide_CaptureReturn
                 btst    #0,status(a0)
-                bne.s   loc_425EA
+                bne.s   SKLRZWallRide_CheckMirroredEntry
                 tst.b   object_control(a1)
-                bne.s   locret_425E8
+                bne.s   SKLRZWallRide_CaptureReturn
                 btst    #Status_InAir,status(a1)
-                bne.s   locret_425E8
+                bne.s   SKLRZWallRide_CaptureReturn
                 tst.w   ground_vel(a1)
-                bmi.w   locret_425E8
+                bmi.w   SKLRZWallRide_CaptureReturn
                 cmpi.w  #$400,ground_vel(a1)
-                bge.w   loc_425CE
+                bge.w   SKLRZWallRide_CaptureForwardRider
                 move.w  #$400,ground_vel(a1)
 
-loc_425CE:
+SKLRZWallRide_CaptureForwardRider:
                 bsr.s   AttachPlayerToLrzWallRide
                 move.l  #0,(a2)
                 bclr    #Status_Facing,status(a1)
                 andi.b  #$FC,render_flags(a1)
                 move.b  #$43,object_control(a1)
 
-locret_425E8:
+SKLRZWallRide_CaptureReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_425EA:
+SKLRZWallRide_CheckMirroredEntry:
                 tst.b   object_control(a1)
-                bne.s   locret_425E8
+                bne.s   SKLRZWallRide_CaptureReturn
                 btst    #Status_InAir,status(a1)
-                bne.s   locret_425E8
+                bne.s   SKLRZWallRide_CaptureReturn
                 tst.w   ground_vel(a1)
-                bpl.w   locret_425E8
+                bpl.w   SKLRZWallRide_CaptureReturn
                 cmpi.w  #-$400,ground_vel(a1)
-                ble.w   loc_42610
+                ble.w   SKLRZWallRide_CaptureMirroredRider
                 move.w  #-$400,ground_vel(a1)
 
-loc_42610:
+SKLRZWallRide_CaptureMirroredRider:
                 bsr.s   AttachPlayerToLrzWallRide
                 move.l  #0,(a2)
                 neg.w   ground_vel(a1)
@@ -89,11 +89,11 @@ loc_42610:
 
 AttachPlayerToLrzWallRide:
                 btst    #Status_OnObj,status(a1)
-                beq.s   loc_42646
+                beq.s   SKLRZWallRide_InitRiderState
                 movea.w interact(a1),a3
                 bclr    d6,status(a3)
 
-loc_42646:
+SKLRZWallRide_InitRiderState:
                 move.w  a0,interact(a1)
                 bset    d6,status(a0)
                 move.w  #0,x_vel(a1)
@@ -117,20 +117,20 @@ loc_42646:
 
 ; ---------------------------------------------------------------------------
 
-loc_426B0:
+SKLRZWallRide_CheckDebugExit:
                 tst.w   (Debug_placement_mode).w
-                beq.s   loc_426F8
+                beq.s   SKLRZWallRide_AdvanceCurveProgress
 
-loc_426B6:
+SKLRZWallRide_SelectExitState:
                 andi.b  #$80,status(a1)
                 bset    #Status_InAir,status(a1)
                 btst    #Status_Facing,status(a0)
-                bne.s   loc_426DA
+                bne.s   SKLRZWallRide_ReleaseAndSetExitSpeed
                 bclr    #Status_InAir,status(a1)
                 bset    #Status_Facing,status(a1)
                 neg.w   ground_vel(a1)
 
-loc_426DA:
+SKLRZWallRide_ReleaseAndSetExitSpeed:
                 bclr    d6,status(a0)
                 move.w  #1,anim(a1)                     ; and prev_anim
                 move.b  #0,object_control(a1)
@@ -139,19 +139,20 @@ loc_426DA:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_426F8:
+SKLRZWallRide_AdvanceCurveProgress:
                 move.w  ground_vel(a1),d0
                 ext.l   d0
                 lsl.l   #7,d0
                 add.l   d0,(a2)
-                bmi.s   loc_426B6
+                bmi.s   SKLRZWallRide_SelectExitState
                 cmpi.w  #$100,(a2)
-                bhs.s   loc_426B6
+                bhs.s   SKLRZWallRide_SelectExitState
                 cmpi.w  #$1000,ground_vel(a1)
-                bge.s   loc_42718
+                bge.s   SKLRZWallRide_CalcCurveXAndYScale
                 addi.w  #$10,ground_vel(a1)
 
-loc_42718:
+; D2 starts with the player's old X, then is overwritten with the curve scale used in the X velocity subtraction
+SKLRZWallRide_CalcCurveXAndYScale:
                 move.w  x_pos(a1),d2
                 move.w  (a2),d0
                 lsr.w   #1,d0
@@ -161,11 +162,11 @@ loc_42718:
                 swap    d0
                 move.w  #$165,d2
                 btst    #0,status(a0)
-                beq.s   loc_42740
+                beq.s   SKLRZWallRide_ApplyCurveAndPose
                 move.w  #$142,d2
                 neg.w   d0
 
-loc_42740:
+SKLRZWallRide_ApplyCurveAndPose:
                 add.w   x_pos(a0),d0
                 move.w  d0,x_pos(a1)
                 sub.w   d2,d0
@@ -188,11 +189,11 @@ loc_42740:
                 lsr.w   #1,d0
                 andi.w  #$FF,d0
                 divu.w  #$16,d0
-                move.b  RawAni_42792(pc,d0.w),mapping_frame(a1)
+                move.b  SKLRZWallRide_RiderFrames(pc,d0.w),mapping_frame(a1)
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 jmp     (Perform_Player_DPLC).l
 ; ---------------------------------------------------------------------------
-RawAni_42792:
+SKLRZWallRide_RiderFrames:
                 dc.b    $EF, $DF, $E0, $E1, $E2, $E3, $F5, $F4, $F3, $F2, $F1, $F0
                 even

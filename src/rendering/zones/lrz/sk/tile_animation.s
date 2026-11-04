@@ -6,20 +6,20 @@
 AnimateTiles_LRZ3:
                 move.w  #tiles_to_bytes($170),d4
                 move.w  #tiles_to_bytes($194),d6
-                bra.s   loc_282D0
+                bra.s   SKLRZTiles_UpdateMainBand
 ; ---------------------------------------------------------------------------
 
 AnimateTiles_LRZ1:
                 move.w  #tiles_to_bytes($320),d4
                 move.w  #tiles_to_bytes($344),d6
-                bra.s   loc_282D0
+                bra.s   SKLRZTiles_UpdateMainBand
 ; ---------------------------------------------------------------------------
 
 AnimateTiles_LRZ2:
                 move.w  #tiles_to_bytes($320),d4
                 move.w  #tiles_to_bytes($344),d6
 
-loc_282D0:
+SKLRZTiles_UpdateMainBand:
                 lea     (Anim_Counters).w,a3
                 moveq   #0,d0
                 move.w  (Events_bg+$12).w,d0
@@ -28,7 +28,7 @@ loc_282D0:
                 divu.w  #$30,d0
                 swap    d0
                 cmp.b   1(a3),d0
-                beq.s   loc_2833C
+                beq.s   SKLRZTiles_TryAdvanceToSecondBand
                 move.b  d0,1(a3)
                 moveq   #0,d1
                 move.w  d0,d2
@@ -45,7 +45,7 @@ loc_282D0:
                 add.w   d2,d2
                 add.w   d2,d1
                 lsr.w   #1,d0
-                lea     word_2834C(pc,d0.w),a4
+                lea     SKLRZTiles_MainBandDmaCounts(pc,d0.w),a4
                 lea     (ArtUnc_AniLRZ__BG).l,a0
                 add.l   a0,d1
                 move.w  d4,d2
@@ -57,20 +57,20 @@ loc_282D0:
                 add.l   a0,d1
                 move.w  d4,d2
                 move.w  (a4)+,d3
-                beq.s   loc_2833C
+                beq.s   SKLRZTiles_TryAdvanceToSecondBand
                 jsr     (Add_To_DMA_Queue).l
 
-loc_2833C:
+SKLRZTiles_TryAdvanceToSecondBand:
                 cmpi.b  #$16,(Current_zone).w
-                beq.s   locret_2834A
+                beq.s   SKLRZTiles_ReturnAfterThirdActMainBand
                 addq.w  #2,a3
-                bra.w   loc_28364
+                bra.w   SKLRZTiles_UpdateSecondBand
 ; ---------------------------------------------------------------------------
 
-locret_2834A:
+SKLRZTiles_ReturnAfterThirdActMainBand:
                 rts
 ; ---------------------------------------------------------------------------
-word_2834C:
+SKLRZTiles_MainBandDmaCounts:
                 dc.w    $240
                 dc.w    0
                 dc.w    $1E0
@@ -85,13 +85,13 @@ word_2834C:
                 dc.w    $1E0
 ; ---------------------------------------------------------------------------
 
-loc_28364:
+SKLRZTiles_UpdateSecondBand:
                 moveq   #0,d0
                 move.w  (Events_bg+$10).w,d0
                 sub.w   (Camera_X_pos_BG_copy).w,d0
                 andi.w  #$1F,d0
                 cmp.b   1(a3),d0
-                beq.s   loc_283CC
+                beq.s   SKLRZTiles_AdvanceAndRunScripts
                 move.b  d0,1(a3)
                 moveq   #0,d1
                 move.w  d0,d2
@@ -109,7 +109,7 @@ loc_28364:
                 add.w   d2,d2
                 add.w   d2,d1
                 lsr.w   #1,d0
-                lea     word_283D2(pc,d0.w),a4
+                lea     SKLRZTiles_SecondBandDmaCounts(pc,d0.w),a4
                 lea     (ArtUnc_AniLRZ__BG2).l,a0
                 move.w  d6,d4
                 add.l   a0,d1
@@ -122,14 +122,14 @@ loc_28364:
                 add.l   a0,d1
                 move.w  d4,d2
                 move.w  (a4)+,d3
-                beq.s   loc_283CC
+                beq.s   SKLRZTiles_AdvanceAndRunScripts
                 jsr     (Add_To_DMA_Queue).l
 
-loc_283CC:
+SKLRZTiles_AdvanceAndRunScripts:
                 addq.w  #2,a3
                 bra.w   SKTileScripts_RunAtCounter
 ; ---------------------------------------------------------------------------
-word_283D2:
+SKLRZTiles_SecondBandDmaCounts:
                 dc.w    $C0
                 dc.w    0
                 dc.w    $90

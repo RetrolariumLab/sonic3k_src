@@ -1,9 +1,9 @@
 ; Data owner: objects/shared/zones/lbz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_TunnelExhaust_:
-                dc.w    word_29C8E-Map_TunnelExhaust_
-                dc.w    word_29C96-Map_TunnelExhaust_
-word_29C8E:     dc.w    1
+                dc.w    TunnelExhaustSharedData_MapSlot00-Map_TunnelExhaust_
+                dc.w    TunnelExhaustSharedData_MapSlot01-Map_TunnelExhaust_
+TunnelExhaustSharedData_MapSlot00:  dc.w    1
                 dc.b    $F4,  $E,   0, $2A, $FF, $F0
-word_29C96:     dc.w    1
+TunnelExhaustSharedData_MapSlot01:  dc.w    1
                 dc.b    $F0,  $B,   0, $2A, $FF, $F4
