@@ -13,9 +13,9 @@ Sonic_Move:
                 move.w  Acceleration-Max_speed(a4),d5   ; set Acceleration
                 move.w  Deceleration-Max_speed(a4),d4   ; set Deceleration
                 tst.b   status_secondary(a0)            ; is bit 7 set? (Infinite inertia)
-                bmi.w   SKSonicGroundMove_ProjectGroundSpeedIntoCartesianVelocity  ; if so, branch
+                bmi.w   SKSonicGround_ProjectGroundSpeed  ; if so, branch
                 tst.w   move_lock(a0)
-                bne.w   SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
+                bne.w   SKSonicGround_ResetLookDelay
                 btst    #button_left,(Ctrl_1_held_logical).w  ; is left being pressed?
                 beq.s   Sonic_NotLeft                   ; if not, branch
                 bsr.w   SonicSKApplyGroundLeftInput
@@ -29,16 +29,16 @@ Sonic_NotRight:
                 move.b  angle(a0),d0
                 addi.b  #$20,d0
                 andi.b  #$C0,d0                         ; is Sonic on a slope?
-                bne.w   SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery  ; if yes, branch
+                bne.w   SKSonicGround_ResetLookDelay    ; if yes, branch
                 tst.w   ground_vel(a0)                  ; is Sonic moving?
-                bne.w   SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery  ; if yes, branch
+                bne.w   SKSonicGround_ResetLookDelay    ; if yes, branch
                 bclr    #Status_Push,status(a0)
                 move.b  #5,anim(a0)                     ; use standing animation
                 btst    #Status_OnObj,status(a0)
                 beq.w   Sonic_Balance
                 movea.w interact(a0),a1                 ; load interacting object's RAM space
                 tst.b   status(a1)                      ; is status bit 7 set? (unused?)
-                bmi.w   SKSonicGroundMove_CheckPrimaryStationaryLookControl  ; if so, branch
+                bmi.w   SKSonicGround_CheckFirstLookInput  ; if so, branch
 
 ; Calculations to determine where on the object Sonic is, and make him balance accordingly
                 moveq   #0,d1                           ; Clear d1
@@ -54,29 +54,29 @@ Sonic_NotRight:
                 blt.s   Sonic_BalanceOnObjLeft          ; if so, branch
                 cmp.w   d2,d1
                 bge.s   Sonic_BalanceOnObjRight         ; if Sonic is within two units of object's right edge, branch (Realistically, it checks this, and BEYOND the right edge of the object)
-                bra.w   SKSonicGroundMove_CheckPrimaryStationaryLookControl  ; if Sonic is more than 2 units from both edges, branch
+                bra.w   SKSonicGround_CheckFirstLookInput  ; if Sonic is more than 2 units from both edges, branch
 ; ---------------------------------------------------------------------------
 
 SuperSonic_Balance:
                 cmpi.w  #2,d1                           ; is Sonic within two units of object's left edge?
-                blt.w   SKSonicGroundMove_FaceLeftForPoweredObjectOrTerrainBalance  ; if so, branch
+                blt.w   SKSonicGround_FaceLeftForPoweredBalance  ; if so, branch
                 cmp.w   d2,d1
-                bge.w   SKSonicGroundMove_FaceRightForPoweredObjectOrTerrainBalance  ; if Sonic is within two units of object's right edge, branch (Realistically, it checks this, and BEYOND the right edge of the object)
-                bra.w   SKSonicGroundMove_CheckPrimaryStationaryLookControl  ; if Sonic is more than 2 units from both edges, branch
+                bge.w   SKSonicGround_FaceRightForPoweredBalance  ; if Sonic is within two units of object's right edge, branch (Realistically, it checks this, and BEYOND the right edge of the object)
+                bra.w   SKSonicGround_CheckFirstLookInput  ; if Sonic is more than 2 units from both edges, branch
 ; ---------------------------------------------------------------------------
 ; balancing checks for when you're on the right edge of an object
 
 Sonic_BalanceOnObjRight:
                 btst    #Status_Facing,status(a0)       ; is Sonic facing right?
-                bne.s   SKSonicGroundMove_FaceRightAndChooseObjectRightEdgeBalance  ; if so, branch
+                bne.s   SKSonicGround_BalanceAtObjectRightEdge  ; if so, branch
                 move.b  #6,anim(a0)                     ; Balance animation 1
                 addq.w  #6,d2                           ; extend balance range
                 cmp.w   d2,d1                           ; is Sonic within (two units before and) four units past the right edge?
-                blt.w   SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery  ; if so, branch
+                blt.w   SKSonicGround_ResetLookDelay    ; if so, branch
                 move.b  #$C,anim(a0)                    ; if REALLY close to the edge, use different animation (Balance animation 2)
-                bra.w   SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
+                bra.w   SKSonicGround_ResetLookDelay
 
-SKSonicGroundMove_FaceRightAndChooseObjectRightEdgeBalance:
+SKSonicGround_BalanceAtObjectRightEdge:
 ; Somewhat dummied out/redundant code from Sonic 2
 ; Originally, Sonic displayed different animations for each direction faced
 ; But now, Sonic uses only the one set of animations no matter what, making the check pointless, and the code redundant
@@ -84,30 +84,30 @@ SKSonicGroundMove_FaceRightAndChooseObjectRightEdgeBalance:
                 move.b  #6,anim(a0)                     ; Balance animation 1
                 addq.w  #6,d2                           ; extend balance range
                 cmp.w   d2,d1                           ; is Sonic within (two units before and) four units past the right edge?
-                blt.w   SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery  ; if so, branch
+                blt.w   SKSonicGround_ResetLookDelay    ; if so, branch
                 move.b  #$C,anim(a0)                    ; if REALLY close to the edge, use different animation (Balance animation 2)
-                bra.w   SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
+                bra.w   SKSonicGround_ResetLookDelay
 ; ---------------------------------------------------------------------------
 
 Sonic_BalanceOnObjLeft:
                 btst    #Status_Facing,status(a0)       ; is Sonic facing right?
-                beq.s   SKSonicGroundMove_FaceLeftAndChooseObjectLeftEdgeBalance
+                beq.s   SKSonicGround_BalanceAtObjectLeftEdge
                 move.b  #6,anim(a0)                     ; Balance animation 1
                 cmpi.w  #-4,d1                          ; is Sonic within (two units before and) four units past the left edge?
-                bge.w   SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery  ; if so branch (instruction signed to match)
+                bge.w   SKSonicGround_ResetLookDelay    ; if so branch (instruction signed to match)
                 move.b  #$C,anim(a0)                    ; if REALLY close to the edge, use different animation (Balance animation 2)
-                bra.w   SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
+                bra.w   SKSonicGround_ResetLookDelay
 
-SKSonicGroundMove_FaceLeftAndChooseObjectLeftEdgeBalance:
+SKSonicGround_BalanceAtObjectLeftEdge:
 ; Somewhat dummied out/redundant code from Sonic 2
 ; Originally, Sonic displayed different animations for each direction faced
 ; But now, Sonic uses only the one set of animations no matter what, making the check pointless, and the code redundant
                 bset    #Status_Facing,status(a0)       ; is Sonic facing right?
                 move.b  #6,anim(a0)                     ; Balance animation 1
                 cmpi.w  #-4,d1                          ; is Sonic within (two units before and) four units past the left edge?
-                bge.w   SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery  ; if so branch (instruction signed to match)
+                bge.w   SKSonicGround_ResetLookDelay    ; if so branch (instruction signed to match)
                 move.b  #$C,anim(a0)                    ; if REALLY close to the edge, use different animation (Balance animation 2)
-                bra.w   SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
+                bra.w   SKSonicGround_ResetLookDelay
 ; ---------------------------------------------------------------------------
 ; balancing checks for when you're on the edge of part of the level
 
@@ -115,24 +115,24 @@ Sonic_Balance:
                 move.w  x_pos(a0),d3
                 bsr.w   ChooseChkFloorEdge
                 cmpi.w  #$C,d1
-                blt.w   SKSonicGroundMove_CheckPrimaryStationaryLookControl
+                blt.w   SKSonicGround_CheckFirstLookInput
                 tst.b   (Super_Sonic_Knux_flag).w       ; is Sonic Super/Hyper?
-                bne.w   SKSonicGroundMove_CheckPoweredTerrainRightEdgeSensor  ; if so, branch
+                bne.w   SKSonicGround_CheckPoweredRightEdge  ; if so, branch
                 cmpi.b  #3,next_tilt(a0)
-                bne.s   SKSonicGroundMove_CheckOtherTerrainSensorBeforeLeftEdgeBalance
+                bne.s   SKSonicGround_CheckLeftEdgeSensor
                 btst    #Status_Facing,status(a0)
-                bne.s   SKSonicGroundMove_FaceRightAndReprobeTerrainSixPixelsLeftForBalance
+                bne.s   SKSonicGround_FaceRightAndReprobeLeft6
                 move.b  #6,anim(a0)
                 move.w  x_pos(a0),d3
                 subq.w  #6,d3
                 bsr.w   ChooseChkFloorEdge
                 cmpi.w  #$C,d1
-                blt.w   SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
+                blt.w   SKSonicGround_ResetLookDelay
                 move.b  #$C,anim(a0)
-                bra.w   SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
+                bra.w   SKSonicGround_ResetLookDelay
 ; on right edge but facing left:
 
-SKSonicGroundMove_FaceRightAndReprobeTerrainSixPixelsLeftForBalance:
+SKSonicGround_FaceRightAndReprobeLeft6:
 ; Somewhat dummied out/redundant code from Sonic 2
 ; Originally, Sonic displayed different animations for each direction faced
 ; But now, Sonic uses only the one set of animations no matter what, making the check pointless, and the code redundant
@@ -142,147 +142,147 @@ SKSonicGroundMove_FaceRightAndReprobeTerrainSixPixelsLeftForBalance:
                 subq.w  #6,d3
                 bsr.w   ChooseChkFloorEdge
                 cmpi.w  #$C,d1
-                blt.w   SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
+                blt.w   SKSonicGround_ResetLookDelay
                 move.b  #$C,anim(a0)
-                bra.w   SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
+                bra.w   SKSonicGround_ResetLookDelay
 ; ---------------------------------------------------------------------------
 
-SKSonicGroundMove_CheckOtherTerrainSensorBeforeLeftEdgeBalance:
+SKSonicGround_CheckLeftEdgeSensor:
                 cmpi.b  #3,tilt(a0)
-                bne.s   SKSonicGroundMove_CheckPrimaryStationaryLookControl
+                bne.s   SKSonicGround_CheckFirstLookInput
                 btst    #Status_Facing,status(a0)
-                beq.s   SKSonicGroundMove_FaceLeftAndReprobeTerrainSixPixelsRightForBalance
+                beq.s   SKSonicGround_FaceLeftAndReprobeRight6
                 move.b  #6,anim(a0)
                 move.w  x_pos(a0),d3
                 addq.w  #6,d3
                 bsr.w   ChooseChkFloorEdge
                 cmpi.w  #$C,d1
-                blt.w   SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
+                blt.w   SKSonicGround_ResetLookDelay
                 move.b  #$C,anim(a0)
-                bra.w   SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
+                bra.w   SKSonicGround_ResetLookDelay
 ; ---------------------------------------------------------------------------
 
-SKSonicGroundMove_FaceLeftAndReprobeTerrainSixPixelsRightForBalance:
+SKSonicGround_FaceLeftAndReprobeRight6:
                 bset    #Status_Facing,status(a0)
                 move.b  #6,anim(a0)
                 move.w  x_pos(a0),d3
                 addq.w  #6,d3
                 bsr.w   ChooseChkFloorEdge
                 cmpi.w  #$C,d1
-                blt.w   SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
+                blt.w   SKSonicGround_ResetLookDelay
                 move.b  #$C,anim(a0)
-                bra.w   SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
+                bra.w   SKSonicGround_ResetLookDelay
 ; ---------------------------------------------------------------------------
 
-SKSonicGroundMove_CheckPoweredTerrainRightEdgeSensor:
+SKSonicGround_CheckPoweredRightEdge:
                 cmpi.b  #3,next_tilt(a0)
-                bne.s   SKSonicGroundMove_CheckPoweredTerrainLeftEdgeSensor
+                bne.s   SKSonicGround_CheckPoweredLeftEdge
 
-SKSonicGroundMove_FaceRightForPoweredObjectOrTerrainBalance:
+SKSonicGround_FaceRightForPoweredBalance:
                 bclr    #Status_Facing,status(a0)
-                bra.s   SKSonicGroundMove_SetPoweredBalanceAnimationAndResetLookDelay
+                bra.s   SKSonicGround_SetPoweredBalanceAnim
 ; ---------------------------------------------------------------------------
 
-SKSonicGroundMove_CheckPoweredTerrainLeftEdgeSensor:
+SKSonicGround_CheckPoweredLeftEdge:
                 cmpi.b  #3,tilt(a0)
-                bne.s   SKSonicGroundMove_CheckPrimaryStationaryLookControl
+                bne.s   SKSonicGround_CheckFirstLookInput
 
-SKSonicGroundMove_FaceLeftForPoweredObjectOrTerrainBalance:
+SKSonicGround_FaceLeftForPoweredBalance:
                 bset    #Status_Facing,status(a0)
 
-SKSonicGroundMove_SetPoweredBalanceAnimationAndResetLookDelay:
+SKSonicGround_SetPoweredBalanceAnim:
                 move.b  #6,anim(a0)
-                bra.s   SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
+                bra.s   SKSonicGround_ResetLookDelay
 ; ---------------------------------------------------------------------------
 
-SKSonicGroundMove_CheckPrimaryStationaryLookControl:
+SKSonicGround_CheckFirstLookInput:
                 btst    #button_down,(Ctrl_1_logical).w
-                beq.s   SKSonicGroundMove_CheckSecondaryStationaryLookControl
+                beq.s   SKSonicGround_CheckSecondLookInput
                 move.b  #8,anim(a0)
                 addq.b  #1,scroll_delay_counter(a0)
                 cmpi.b  #120,scroll_delay_counter(a0)
-                blo.s   SKSonicGroundMove_RecoverCameraDistanceTowardDefaultByTwo
+                blo.s   SKSonicGround_EaseLookCamera
                 move.b  #120,scroll_delay_counter(a0)
                 tst.b   (Reverse_gravity_flag).w
-                bne.s   SKSonicGroundMove_RaiseCameraDistanceForReverseGravityDuck
+                bne.s   SKSonicGround_RaiseCameraForReverseDuck
                 cmpi.w  #8,(a5)
-                beq.s   SKSonicGroundMove_SelectPoweredNeutralGroundDecayStep
+                beq.s   SKSonicGround_SelectPoweredFriction
                 subq.w  #2,(a5)
-                bra.s   SKSonicGroundMove_SelectPoweredNeutralGroundDecayStep
+                bra.s   SKSonicGround_SelectPoweredFriction
 ; ---------------------------------------------------------------------------
 
-SKSonicGroundMove_RaiseCameraDistanceForReverseGravityDuck:
+SKSonicGround_RaiseCameraForReverseDuck:
                 cmpi.w  #$D8,(a5)
-                beq.s   SKSonicGroundMove_SelectPoweredNeutralGroundDecayStep
+                beq.s   SKSonicGround_SelectPoweredFriction
                 addq.w  #2,(a5)
-                bra.s   SKSonicGroundMove_SelectPoweredNeutralGroundDecayStep
+                bra.s   SKSonicGround_SelectPoweredFriction
 ; ---------------------------------------------------------------------------
 
-SKSonicGroundMove_CheckSecondaryStationaryLookControl:
+SKSonicGround_CheckSecondLookInput:
                 btst    #button_up,(Ctrl_1_held_logical).w
-                beq.s   SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
+                beq.s   SKSonicGround_ResetLookDelay
                 move.b  #7,anim(a0)
                 addq.b  #1,scroll_delay_counter(a0)
                 cmpi.b  #120,scroll_delay_counter(a0)
-                blo.s   SKSonicGroundMove_RecoverCameraDistanceTowardDefaultByTwo
+                blo.s   SKSonicGround_EaseLookCamera
                 move.b  #120,scroll_delay_counter(a0)
                 tst.b   (Reverse_gravity_flag).w
-                bne.s   SKSonicGroundMove_LowerCameraDistanceForReverseGravityLookUp
+                bne.s   SKSonicGround_LowerCameraForReverseLook
                 cmpi.w  #$C8,(a5)
-                beq.s   SKSonicGroundMove_SelectPoweredNeutralGroundDecayStep
+                beq.s   SKSonicGround_SelectPoweredFriction
                 addq.w  #2,(a5)
-                bra.s   SKSonicGroundMove_SelectPoweredNeutralGroundDecayStep
+                bra.s   SKSonicGround_SelectPoweredFriction
 ; ---------------------------------------------------------------------------
 
-SKSonicGroundMove_LowerCameraDistanceForReverseGravityLookUp:
+SKSonicGround_LowerCameraForReverseLook:
                 cmpi.w  #$18,(a5)
-                beq.s   SKSonicGroundMove_SelectPoweredNeutralGroundDecayStep
+                beq.s   SKSonicGround_SelectPoweredFriction
                 subq.w  #2,(a5)
-                bra.s   SKSonicGroundMove_SelectPoweredNeutralGroundDecayStep
+                bra.s   SKSonicGround_SelectPoweredFriction
 ; ---------------------------------------------------------------------------
 
-SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery:
+SKSonicGround_ResetLookDelay:
                 move.b  #0,scroll_delay_counter(a0)
 
-SKSonicGroundMove_RecoverCameraDistanceTowardDefaultByTwo:
+SKSonicGround_EaseLookCamera:
                 cmpi.w  #$60,(a5)
-                beq.s   SKSonicGroundMove_SelectPoweredNeutralGroundDecayStep
-                bcc.s   SKSonicGroundMove_SubtractCameraRecoveryStep
+                beq.s   SKSonicGround_SelectPoweredFriction
+                bcc.s   SKSonicGround_ReduceCameraDistanceBy2
                 addq.w  #4,(a5)
 
-SKSonicGroundMove_SubtractCameraRecoveryStep:
+SKSonicGround_ReduceCameraDistanceBy2:
                 subq.w  #2,(a5)
 
-SKSonicGroundMove_SelectPoweredNeutralGroundDecayStep:
+SKSonicGround_SelectPoweredFriction:
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   SKSonicGroundMove_ApplyNeutralGroundDecayOnlyWithoutHorizontalInput
+                beq.s   SKSonicGround_ApplyNeutralFriction
                 move.w  #$C,d5
 
-SKSonicGroundMove_ApplyNeutralGroundDecayOnlyWithoutHorizontalInput:
+SKSonicGround_ApplyNeutralFriction:
                 move.b  (Ctrl_1_held_logical).w,d0
                 andi.b  #button_left_mask|button_right_mask,d0
-                bne.s   SKSonicGroundMove_ProjectGroundSpeedIntoCartesianVelocity
+                bne.s   SKSonicGround_ProjectGroundSpeed
                 move.w  ground_vel(a0),d0
-                beq.s   SKSonicGroundMove_ProjectGroundSpeedIntoCartesianVelocity
-                bmi.s   SKSonicGroundMove_DecayNegativeGroundSpeedAndClampOnCarry
+                beq.s   SKSonicGround_ProjectGroundSpeed
+                bmi.s   SKSonicGround_ApplyNegativeFriction
                 sub.w   d5,d0
-                bcc.s   SKSonicGroundMove_StorePositiveNeutralDecayResult
+                bcc.s   SKSonicGround_StorePositiveFriction
                 move.w  #0,d0
 
-SKSonicGroundMove_StorePositiveNeutralDecayResult:
+SKSonicGround_StorePositiveFriction:
                 move.w  d0,ground_vel(a0)
-                bra.s   SKSonicGroundMove_ProjectGroundSpeedIntoCartesianVelocity
+                bra.s   SKSonicGround_ProjectGroundSpeed
 ; ---------------------------------------------------------------------------
 
-SKSonicGroundMove_DecayNegativeGroundSpeedAndClampOnCarry:
+SKSonicGround_ApplyNegativeFriction:
                 add.w   d5,d0
-                bcc.s   SKSonicGroundMove_StoreNegativeNeutralDecayResult
+                bcc.s   SKSonicGround_StoreNegativeFriction
                 move.w  #0,d0
 
-SKSonicGroundMove_StoreNegativeNeutralDecayResult:
+SKSonicGround_StoreNegativeFriction:
                 move.w  d0,ground_vel(a0)
 
-SKSonicGroundMove_ProjectGroundSpeedIntoCartesianVelocity:
+SKSonicGround_ProjectGroundSpeed:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 muls.w  ground_vel(a0),d1
@@ -292,74 +292,76 @@ SKSonicGroundMove_ProjectGroundSpeedIntoCartesianVelocity:
                 asr.l   #8,d0
                 move.w  d0,y_vel(a0)
 
-SKSonicGroundMove_GateSharedWalkingAndRollingObstructionProbe:
+SKSonicGround_CheckTravelProbe:
                 btst    #6,object_control(a0)
-                bne.w   SKSonicGroundMove_ReturnAfterSkippedProbeOrVerticalResponse
+                bne.w   SKSonicGround_TravelProbeReturn
                 move.b  angle(a0),d0
                 andi.b  #$3F,d0
-                beq.s   SKSonicGroundMove_SelectTravelSideProbeOffsetAfterCardinalAngleException
+                beq.s   SKSonicGround_PickTravelProbeOffset
                 move.b  angle(a0),d0
                 addi.b  #$40,d0
-                bmi.w   SKSonicGroundMove_ReturnAfterSkippedProbeOrVerticalResponse
+                bmi.w   SKSonicGround_TravelProbeReturn
 
-SKSonicGroundMove_SelectTravelSideProbeOffsetAfterCardinalAngleException:
+; Cardinal angles reach this step directly, including when the general angle test would skip the probe
+SKSonicGround_PickTravelProbeOffset:
                 move.b  #$40,d1
                 tst.w   ground_vel(a0)
-                beq.s   SKSonicGroundMove_ReturnAfterSkippedProbeOrVerticalResponse
-                bmi.s   SKSonicGroundMove_ProbeGroundTravelSideAndApplyOnlyNegativeClearance
+                beq.s   SKSonicGround_TravelProbeReturn
+                bmi.s   SKSonicGround_ProbeTravelSide
                 neg.w   d1
 
-SKSonicGroundMove_ProbeGroundTravelSideAndApplyOnlyNegativeClearance:
+; Resolve negative clearance only. Convert the penetration to velocity units by shifting left eight
+SKSonicGround_ProbeTravelSide:
                 move.b  angle(a0),d0
                 add.b   d1,d0
                 move.w  d0,-(sp)
                 bsr.w   ProbeNextSurfaceWithFixedLookahead
                 move.w  (sp)+,d0
                 tst.w   d1
-                bpl.s   SKSonicGroundMove_ReturnAfterSkippedProbeOrVerticalResponse
+                bpl.s   SKSonicGround_TravelProbeReturn
                 asl.w   #8,d1
                 cmpi.b  #8,(Current_zone).w
-                bne.s   SKSonicGroundMove_RoundSavedProbeDirectionAndApplyObstructionResponse
+                bne.s   SKSonicGround_RoundProbeAndResolve
                 tst.b   d0
-                bpl.s   SKSonicGroundMove_RoundSavedProbeDirectionAndApplyObstructionResponse
+                bpl.s   SKSonicGround_RoundProbeAndResolve
                 subq.b  #1,d0
 
-SKSonicGroundMove_RoundSavedProbeDirectionAndApplyObstructionResponse:
+SKSonicGround_RoundProbeAndResolve:
                 addi.b  #$20,d0
                 andi.b  #$C0,d0
-                beq.s   SKSonicGroundMove_AddScaledFloorClearanceToYVelocity
+                beq.s   SKSonicGround_ApplyFloorCorrection
                 cmpi.b  #$40,d0
-                beq.s   SKSonicGroundMove_CorrectLeftWallVelocityAndSetPushOnlyWhenFacingLeft
+                beq.s   SKSonicGround_ApplyLeftWallCorrection
                 cmpi.b  #$80,d0
-                beq.s   SKSonicGroundMove_SubtractScaledCeilingClearanceFromYVelocity
+                beq.s   SKSonicGround_ApplyCeilingCorrection
                 add.w   d1,x_vel(a0)
                 move.w  #0,ground_vel(a0)
                 btst    #Status_Facing,status(a0)
-                bne.s   SKSonicGroundMove_ReturnAfterHorizontalObstructionResponse
+                bne.s   SKSonicGround_HorizontalProbeReturn
                 bset    #Status_Push,status(a0)
 
-SKSonicGroundMove_ReturnAfterHorizontalObstructionResponse:
+SKSonicGround_HorizontalProbeReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKSonicGroundMove_SubtractScaledCeilingClearanceFromYVelocity:
+SKSonicGround_ApplyCeilingCorrection:
                 sub.w   d1,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-SKSonicGroundMove_CorrectLeftWallVelocityAndSetPushOnlyWhenFacingLeft:
+SKSonicGround_ApplyLeftWallCorrection:
                 sub.w   d1,x_vel(a0)
                 move.w  #0,ground_vel(a0)
                 btst    #Status_Facing,status(a0)
-                beq.s   SKSonicGroundMove_ReturnAfterHorizontalObstructionResponse
+                beq.s   SKSonicGround_HorizontalProbeReturn
                 bset    #Status_Push,status(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-SKSonicGroundMove_AddScaledFloorClearanceToYVelocity:
+SKSonicGround_ApplyFloorCorrection:
                 add.w   d1,y_vel(a0)
 
-SKSonicGroundMove_ReturnAfterSkippedProbeOrVerticalResponse:
+SKSonicGround_TravelProbeReturn:
                 rts
 ; End of function Sonic_Move
 
@@ -367,38 +369,40 @@ SKSonicGroundMove_ReturnAfterSkippedProbeOrVerticalResponse:
 
 SonicSKApplyGroundLeftInput:
                 move.w  ground_vel(a0),d0
-                beq.s   SKSonicGroundMove_FaceLeftForNonpositiveGroundAcceleration
-                bpl.s   SKSonicGroundMove_BrakePositiveGroundSpeedForLeftInput
+                beq.s   SKSonicGround_FaceLeftAndResetTurnState
+                bpl.s   SKSonicGround_BrakeRightwardSpeed
 
-SKSonicGroundMove_FaceLeftForNonpositiveGroundAcceleration:
+SKSonicGround_FaceLeftAndResetTurnState:
                 bset    #Status_Facing,status(a0)
-                bne.s   SKSonicGroundMove_AccelerateLeftWithoutIncreasingExistingOverspeed
+                bne.s   SKSonicGround_AccelerateLeft
                 bclr    #Status_Push,status(a0)
                 move.b  #1,prev_anim(a0)
 
-SKSonicGroundMove_AccelerateLeftWithoutIncreasingExistingOverspeed:
+; Keep the previous speed when left input would increase existing overspeed
+SKSonicGround_AccelerateLeft:
                 sub.w   d5,d0
                 move.w  d6,d1
                 neg.w   d1
                 cmp.w   d1,d0
-                bgt.s   SKSonicGroundMove_StoreLeftAccelerationAndRequestMovementAnimation
+                bgt.s   SKSonicGround_StoreLeftSpeedAndAnimate
                 add.w   d5,d0
                 cmp.w   d1,d0
-                ble.s   SKSonicGroundMove_StoreLeftAccelerationAndRequestMovementAnimation
+                ble.s   SKSonicGround_StoreLeftSpeedAndAnimate
                 move.w  d1,d0
 
-SKSonicGroundMove_StoreLeftAccelerationAndRequestMovementAnimation:
+SKSonicGround_StoreLeftSpeedAndAnimate:
                 move.w  d0,ground_vel(a0)
                 move.b  #0,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-SKSonicGroundMove_BrakePositiveGroundSpeedForLeftInput:
+SKSonicGround_BrakeRightwardSpeed:
                 sub.w   d4,d0
-                bcc.s   SKSonicGroundMove_StoreLeftBrakeAndGateRightFacingSkidUsingModifiedSpeedWord
+                bcc.s   SKSonicGround_StoreLeftBrakeAndCheckSkid
                 move.w  #-$80,d0
 
-SKSonicGroundMove_StoreLeftBrakeAndGateRightFacingSkidUsingModifiedSpeedWord:
+; The skid threshold sees the speed high byte and the rounded angle in the low byte
+SKSonicGround_StoreLeftBrakeAndCheckSkid:
                 move.w  d0,ground_vel(a0)
 ; These three instructions partially overwrite the inertia value in
 ; 'd0'! This causes the character to trigger their skidding
@@ -408,21 +412,21 @@ SKSonicGroundMove_StoreLeftBrakeAndGateRightFacingSkidUsingModifiedSpeedWord:
                 move.b  angle(a0),d0
                 addi.b  #$20,d0
                 andi.b  #$C0,d0
-                bne.s   SKSonicGroundMove_ReturnAfterLeftBrakingAndOptionalSkidDustRequest
+                bne.s   SKSonicGround_LeftBrakeReturn
                 cmpi.w  #$400,d0
-                blt.s   SKSonicGroundMove_ReturnAfterLeftBrakingAndOptionalSkidDustRequest
+                blt.s   SKSonicGround_LeftBrakeReturn
                 tst.b   flip_type(a0)
-                bmi.s   SKSonicGroundMove_ReturnAfterLeftBrakingAndOptionalSkidDustRequest
+                bmi.s   SKSonicGround_LeftBrakeReturn
                 move.w  #sfx_Skid,d0
                 jsr     (Play_SFX).l
                 move.b  #$D,anim(a0)
                 bclr    #Status_Facing,status(a0)
                 cmpi.b  #12,air_left(a0)
-                blo.s   SKSonicGroundMove_ReturnAfterLeftBrakingAndOptionalSkidDustRequest
+                blo.s   SKSonicGround_LeftBrakeReturn
                 move.b  #6,routine(a6)
                 move.b  #$15,mapping_frame(a6)
 
-SKSonicGroundMove_ReturnAfterLeftBrakingAndOptionalSkidDustRequest:
+SKSonicGround_LeftBrakeReturn:
                 rts
 ; End of function SonicSKApplyGroundLeftInput
 
@@ -430,33 +434,35 @@ SKSonicGroundMove_ReturnAfterLeftBrakingAndOptionalSkidDustRequest:
 
 SonicSKApplyGroundRightInput:
                 move.w  ground_vel(a0),d0
-                bmi.s   SKSonicGroundMove_BrakeNegativeGroundSpeedForRightInput
+                bmi.s   SKSonicGround_BrakeLeftwardSpeed
                 bclr    #Status_Facing,status(a0)
-                beq.s   SKSonicGroundMove_AccelerateRightWithoutIncreasingExistingOverspeed
+                beq.s   SKSonicGround_AccelerateRight
                 bclr    #Status_Push,status(a0)
                 move.b  #1,prev_anim(a0)
 
-SKSonicGroundMove_AccelerateRightWithoutIncreasingExistingOverspeed:
+; Keep the previous speed when right input would increase existing overspeed
+SKSonicGround_AccelerateRight:
                 add.w   d5,d0
                 cmp.w   d6,d0
-                blt.s   SKSonicGroundMove_StoreRightAccelerationAndRequestMovementAnimation
+                blt.s   SKSonicGround_StoreRightSpeedAndAnimate
                 sub.w   d5,d0
                 cmp.w   d6,d0
-                bge.s   SKSonicGroundMove_StoreRightAccelerationAndRequestMovementAnimation
+                bge.s   SKSonicGround_StoreRightSpeedAndAnimate
                 move.w  d6,d0
 
-SKSonicGroundMove_StoreRightAccelerationAndRequestMovementAnimation:
+SKSonicGround_StoreRightSpeedAndAnimate:
                 move.w  d0,ground_vel(a0)
                 move.b  #0,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-SKSonicGroundMove_BrakeNegativeGroundSpeedForRightInput:
+SKSonicGround_BrakeLeftwardSpeed:
                 add.w   d4,d0
-                bcc.s   SKSonicGroundMove_StoreRightBrakeAndGateLeftFacingSkidUsingModifiedSpeedWord
+                bcc.s   SKSonicGround_StoreRightBrakeAndTestSkid
                 move.w  #$80,d0
 
-SKSonicGroundMove_StoreRightBrakeAndGateLeftFacingSkidUsingModifiedSpeedWord:
+; The skid threshold sees the speed high byte and the rounded angle in the low byte
+SKSonicGround_StoreRightBrakeAndTestSkid:
                 move.w  d0,ground_vel(a0)
 ; These three instructions partially overwrite the inertia value in
 ; 'd0'! This causes the character to trigger their skidding
@@ -466,20 +472,20 @@ SKSonicGroundMove_StoreRightBrakeAndGateLeftFacingSkidUsingModifiedSpeedWord:
                 move.b  angle(a0),d0
                 addi.b  #$20,d0
                 andi.b  #$C0,d0
-                bne.s   SKSonicGroundMove_ReturnAfterRightBrakingAndOptionalSkidDustRequest
+                bne.s   SKSonicGround_RightBrakeReturn
                 cmpi.w  #-$400,d0
-                bgt.s   SKSonicGroundMove_ReturnAfterRightBrakingAndOptionalSkidDustRequest
+                bgt.s   SKSonicGround_RightBrakeReturn
                 tst.b   flip_type(a0)
-                bmi.s   SKSonicGroundMove_ReturnAfterRightBrakingAndOptionalSkidDustRequest
+                bmi.s   SKSonicGround_RightBrakeReturn
                 move.w  #sfx_Skid,d0
                 jsr     (Play_SFX).l
                 move.b  #$D,anim(a0)
                 bset    #Status_Facing,status(a0)
                 cmpi.b  #12,air_left(a0)
-                blo.s   SKSonicGroundMove_ReturnAfterRightBrakingAndOptionalSkidDustRequest
+                blo.s   SKSonicGround_RightBrakeReturn
                 move.b  #6,routine(a6)
                 move.b  #$15,mapping_frame(a6)
 
-SKSonicGroundMove_ReturnAfterRightBrakingAndOptionalSkidDustRequest:
+SKSonicGround_RightBrakeReturn:
                 rts
 ; End of function SonicSKApplyGroundRightInput

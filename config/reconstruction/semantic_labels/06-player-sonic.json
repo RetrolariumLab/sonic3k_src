@@ -742,7 +742,7 @@
       "source": "src/objects/players/sonic/s3/environment_and_modes.s",
       "original_line": 15,
       "old": "locret_11F32",
-      "new": "S3SonicEnvironment_ReturnFromWaterTransitionCheck",
+      "new": "S3SonicEnv_WaterTransitionReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicEnvironment_ReturnFromWaterTransitionCheck."
     },
@@ -750,7 +750,7 @@
       "source": "src/objects/players/sonic/s3/environment_and_modes.s",
       "original_line": 42,
       "old": "loc_11F88",
-      "new": "S3SonicEnvironment_DampenWaterEntryVelocityUnlessObjectControlled",
+      "new": "S3SonicEnv_DampenWaterEntry",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicEnvironment_DampenWaterEntryVelocityUnlessObjectControlled."
     },
@@ -758,7 +758,7 @@
       "source": "src/objects/players/sonic/s3/environment_and_modes.s",
       "original_line": 70,
       "old": "loc_11FE6",
-      "new": "S3SonicEnvironment_DoubleWaterExitYVelocityWhenEligible",
+      "new": "S3SonicEnv_TryDoubleExitYSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicEnvironment_DoubleWaterExitYVelocityWhenEligible."
     },
@@ -766,7 +766,7 @@
       "source": "src/objects/players/sonic/s3/environment_and_modes.s",
       "original_line": 80,
       "old": "loc_12002",
-      "new": "S3SonicEnvironment_GateWaterExitSplashAndClampNegativeYVelocity",
+      "new": "S3SonicEnv_CheckExitSplashAndClampY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicEnvironment_GateWaterExitSplashAndClampNegativeYVelocity."
     },
@@ -774,7 +774,7 @@
       "source": "src/objects/players/sonic/s3/environment_and_modes.s",
       "original_line": 90,
       "old": "loc_12028",
-      "new": "S3SonicEnvironment_PlayWaterExitSplashSound",
+      "new": "S3SonicEnv_PlayExitSplash",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicEnvironment_PlayWaterExitSplashSound."
     },
@@ -782,7 +782,7 @@
       "source": "src/objects/players/sonic/s3/environment_and_modes.s",
       "original_line": 122,
       "old": "locret_1207C",
-      "new": "S3SonicEnvironment_ReturnAfterNormalGroundBackgroundChecks",
+      "new": "S3SonicEnv_GroundModeReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicEnvironment_ReturnAfterNormalGroundBackgroundChecks."
     },
@@ -790,7 +790,7 @@
       "source": "src/objects/players/sonic/s3/environment_and_modes.s",
       "original_line": 137,
       "old": "loc_1209E",
-      "new": "S3SonicEnvironment_FinishAirModeWithAngleAndTerrainCollision",
+      "new": "S3SonicEnv_AirAngleAndCollision",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicEnvironment_FinishAirModeWithAngleAndTerrainCollision."
     },
@@ -798,7 +798,7 @@
       "source": "src/objects/players/sonic/s3/environment_and_modes.s",
       "original_line": 150,
       "old": "loc_120B2",
-      "new": "S3SonicEnvironment_ContinueGroundRollAfterOptionalJump",
+      "new": "S3SonicEnv_RunGroundRoll",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicEnvironment_ContinueGroundRollAfterOptionalJump."
     },
@@ -806,7 +806,7 @@
       "source": "src/objects/players/sonic/s3/environment_and_modes.s",
       "original_line": 169,
       "old": "locret_120F0",
-      "new": "S3SonicEnvironment_ReturnAfterGroundRollBackgroundChecks",
+      "new": "S3SonicEnv_GroundRollReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicEnvironment_ReturnAfterGroundRollBackgroundChecks."
     },
@@ -814,7 +814,7 @@
       "source": "src/objects/players/sonic/s3/environment_and_modes.s",
       "original_line": 186,
       "old": "loc_12112",
-      "new": "S3SonicEnvironment_FinishBallAirModeWithAngleAndTerrainCollision",
+      "new": "S3SonicEnv_BallAirAngleAndCollision",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicEnvironment_FinishBallAirModeWithAngleAndTerrainCollision."
     },
@@ -822,7 +822,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 79,
       "old": "loc_121E4",
-      "new": "S3SonicGroundMove_FaceRightAndChooseObjectRightEdgeBalance",
+      "new": "S3SonicGround_BalanceAtObjectRightEdge",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_FaceRightAndChooseObjectRightEdgeBalance."
     },
@@ -830,7 +830,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 101,
       "old": "loc_12222",
-      "new": "S3SonicGroundMove_FaceLeftAndChooseObjectLeftEdgeBalance",
+      "new": "S3SonicGround_BalanceAtObjectLeftEdge",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_FaceLeftAndChooseObjectLeftEdgeBalance."
     },
@@ -838,7 +838,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 134,
       "old": "loc_1228A",
-      "new": "S3SonicGroundMove_FaceRightAndReprobeTerrainSixPixelsLeftForBalance",
+      "new": "S3SonicGround_FaceRightAndReprobeLeft6",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_FaceRightAndReprobeTerrainSixPixelsLeftForBalance."
     },
@@ -846,7 +846,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 149,
       "old": "loc_122B4",
-      "new": "S3SonicGroundMove_CheckOtherTerrainSensorBeforeLeftEdgeBalance",
+      "new": "S3SonicGround_CheckLeftEdgeSensor",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_CheckOtherTerrainSensorBeforeLeftEdgeBalance."
     },
@@ -854,7 +854,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 164,
       "old": "loc_122E8",
-      "new": "S3SonicGroundMove_FaceLeftAndReprobeTerrainSixPixelsRightForBalance",
+      "new": "S3SonicGround_FaceLeftAndReprobeRight6",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_FaceLeftAndReprobeTerrainSixPixelsRightForBalance."
     },
@@ -862,7 +862,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 176,
       "old": "loc_12312",
-      "new": "S3SonicGroundMove_CheckPoweredTerrainRightEdgeSensor",
+      "new": "S3SonicGround_CheckPoweredRightEdge",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_CheckPoweredTerrainRightEdgeSensor."
     },
@@ -870,7 +870,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 180,
       "old": "loc_1231A",
-      "new": "S3SonicGroundMove_FaceRightForPoweredObjectOrTerrainBalance",
+      "new": "S3SonicGround_FaceRightForPoweredBalance",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_FaceRightForPoweredObjectOrTerrainBalance."
     },
@@ -878,7 +878,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 185,
       "old": "loc_12322",
-      "new": "S3SonicGroundMove_CheckPoweredTerrainLeftEdgeSensor",
+      "new": "S3SonicGround_CheckPoweredLeftEdge",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_CheckPoweredTerrainLeftEdgeSensor."
     },
@@ -886,7 +886,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 189,
       "old": "loc_1232A",
-      "new": "S3SonicGroundMove_FaceLeftForPoweredObjectOrTerrainBalance",
+      "new": "S3SonicGround_FaceLeftForPoweredBalance",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_FaceLeftForPoweredObjectOrTerrainBalance."
     },
@@ -894,7 +894,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 192,
       "old": "loc_12330",
-      "new": "S3SonicGroundMove_SetPoweredBalanceAnimationAndResetLookDelay",
+      "new": "S3SonicGround_SetPoweredBalanceAnim",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_SetPoweredBalanceAnimationAndResetLookDelay."
     },
@@ -902,7 +902,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 197,
       "old": "loc_12338",
-      "new": "S3SonicGroundMove_CheckPrimaryStationaryLookControl",
+      "new": "S3SonicGround_CheckFirstLookInput",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_CheckPrimaryStationaryLookControl."
     },
@@ -910,7 +910,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 211,
       "old": "loc_12362",
-      "new": "S3SonicGroundMove_CheckSecondaryStationaryLookControl",
+      "new": "S3SonicGround_CheckSecondLookInput",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_CheckSecondaryStationaryLookControl."
     },
@@ -918,7 +918,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 225,
       "old": "loc_1238C",
-      "new": "S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery",
+      "new": "S3SonicGround_ResetLookDelay",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery."
     },
@@ -926,7 +926,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 228,
       "old": "loc_12392",
-      "new": "S3SonicGroundMove_RecoverCameraDistanceTowardDefaultByTwo",
+      "new": "S3SonicGround_EaseLookCamera",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_RecoverCameraDistanceTowardDefaultByTwo."
     },
@@ -934,7 +934,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 234,
       "old": "loc_1239C",
-      "new": "S3SonicGroundMove_SubtractCameraRecoveryStep",
+      "new": "S3SonicGround_ReduceCameraDistanceBy2",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_SubtractCameraRecoveryStep."
     },
@@ -942,7 +942,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 237,
       "old": "loc_1239E",
-      "new": "S3SonicGroundMove_SelectPoweredNeutralGroundDecayStep",
+      "new": "S3SonicGround_SelectPoweredFriction",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_SelectPoweredNeutralGroundDecayStep."
     },
@@ -950,7 +950,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 242,
       "old": "loc_123AA",
-      "new": "S3SonicGroundMove_ApplyNeutralGroundDecayOnlyWithoutHorizontalInput",
+      "new": "S3SonicGround_ApplyNeutralFriction",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_ApplyNeutralGroundDecayOnlyWithoutHorizontalInput."
     },
@@ -958,7 +958,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 253,
       "old": "loc_123C4",
-      "new": "S3SonicGroundMove_StorePositiveNeutralDecayResult",
+      "new": "S3SonicGround_StorePositiveFriction",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_StorePositiveNeutralDecayResult."
     },
@@ -966,7 +966,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 258,
       "old": "loc_123CA",
-      "new": "S3SonicGroundMove_DecayNegativeGroundSpeedAndClampOnCarry",
+      "new": "S3SonicGround_ApplyNegativeFriction",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_DecayNegativeGroundSpeedAndClampOnCarry."
     },
@@ -974,7 +974,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 263,
       "old": "loc_123D2",
-      "new": "S3SonicGroundMove_StoreNegativeNeutralDecayResult",
+      "new": "S3SonicGround_StoreNegativeFriction",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_StoreNegativeNeutralDecayResult."
     },
@@ -982,7 +982,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 266,
       "old": "loc_123D6",
-      "new": "S3SonicGroundMove_ProjectGroundSpeedIntoCartesianVelocity",
+      "new": "S3SonicGround_ProjectGroundSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_ProjectGroundSpeedIntoCartesianVelocity."
     },
@@ -990,7 +990,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 276,
       "old": "loc_123F4",
-      "new": "S3SonicGroundMove_GateSharedWalkingAndRollingObstructionProbe",
+      "new": "S3SonicGround_CheckTravelProbe",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_GateSharedWalkingAndRollingObstructionProbe."
     },
@@ -998,7 +998,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 288,
       "old": "loc_12416",
-      "new": "S3SonicGroundMove_ProbeGroundTravelSideAndApplyOnlyNegativeClearance",
+      "new": "S3SonicGround_ProbeTravelSide",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_ProbeGroundTravelSideAndApplyOnlyNegativeClearance."
     },
@@ -1006,7 +1006,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 310,
       "old": "locret_12458",
-      "new": "S3SonicGroundMove_ReturnAfterHorizontalObstructionResponse",
+      "new": "S3SonicGround_HorizontalProbeReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_ReturnAfterHorizontalObstructionResponse."
     },
@@ -1014,7 +1014,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 314,
       "old": "loc_1245A",
-      "new": "S3SonicGroundMove_SubtractScaledCeilingClearanceFromYVelocity",
+      "new": "S3SonicGround_ApplyCeilingCorrection",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_SubtractScaledCeilingClearanceFromYVelocity."
     },
@@ -1022,7 +1022,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 319,
       "old": "loc_12460",
-      "new": "S3SonicGroundMove_CorrectLeftWallVelocityAndSetPushOnlyWhenFacingLeft",
+      "new": "S3SonicGround_ApplyLeftWallCorrection",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_CorrectLeftWallVelocityAndSetPushOnlyWhenFacingLeft."
     },
@@ -1030,7 +1030,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 328,
       "old": "loc_1247A",
-      "new": "S3SonicGroundMove_AddScaledFloorClearanceToYVelocity",
+      "new": "S3SonicGround_ApplyFloorCorrection",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_AddScaledFloorClearanceToYVelocity."
     },
@@ -1038,7 +1038,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 331,
       "old": "locret_1247E",
-      "new": "S3SonicGroundMove_ReturnAfterSkippedProbeOrVerticalResponse",
+      "new": "S3SonicGround_TravelProbeReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_ReturnAfterSkippedProbeOrVerticalResponse."
     },
@@ -1046,7 +1046,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 342,
       "old": "loc_12488",
-      "new": "S3SonicGroundMove_FaceLeftForNonpositiveGroundAcceleration",
+      "new": "S3SonicGround_FaceLeftAndResetTurnState",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_FaceLeftForNonpositiveGroundAcceleration."
     },
@@ -1054,7 +1054,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 348,
       "old": "loc_1249C",
-      "new": "S3SonicGroundMove_AccelerateLeftWithoutIncreasingExistingOverspeed",
+      "new": "S3SonicGround_AccelerateLeft",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_AccelerateLeftWithoutIncreasingExistingOverspeed."
     },
@@ -1062,7 +1062,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 359,
       "old": "loc_124AE",
-      "new": "S3SonicGroundMove_StoreLeftAccelerationAndRequestMovementAnimation",
+      "new": "S3SonicGround_StoreLeftSpeedAndAnimate",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_StoreLeftAccelerationAndRequestMovementAnimation."
     },
@@ -1070,7 +1070,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 365,
       "old": "loc_124BA",
-      "new": "S3SonicGroundMove_BrakePositiveGroundSpeedForLeftInput",
+      "new": "S3SonicGround_BrakeRightwardSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_BrakePositiveGroundSpeedForLeftInput."
     },
@@ -1078,7 +1078,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 370,
       "old": "loc_124C2",
-      "new": "S3SonicGroundMove_StoreLeftBrakeAndGateRightFacingSkidUsingModifiedSpeedWord",
+      "new": "S3SonicGround_StoreLeftBrakeAndCheckSkid",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_StoreLeftBrakeAndGateRightFacingSkidUsingModifiedSpeedWord."
     },
@@ -1086,7 +1086,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 394,
       "old": "locret_1250A",
-      "new": "S3SonicGroundMove_ReturnAfterLeftBrakingAndOptionalSkidDustRequest",
+      "new": "S3SonicGround_LeftBrakeReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_ReturnAfterLeftBrakingAndOptionalSkidDustRequest."
     },
@@ -1094,7 +1094,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 408,
       "old": "loc_12526",
-      "new": "S3SonicGroundMove_AccelerateRightWithoutIncreasingExistingOverspeed",
+      "new": "S3SonicGround_AccelerateRight",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_AccelerateRightWithoutIncreasingExistingOverspeed."
     },
@@ -1102,7 +1102,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 417,
       "old": "loc_12534",
-      "new": "S3SonicGroundMove_StoreRightAccelerationAndRequestMovementAnimation",
+      "new": "S3SonicGround_StoreRightSpeedAndAnimate",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_StoreRightAccelerationAndRequestMovementAnimation."
     },
@@ -1110,7 +1110,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 423,
       "old": "loc_12540",
-      "new": "S3SonicGroundMove_BrakeNegativeGroundSpeedForRightInput",
+      "new": "S3SonicGround_BrakeLeftwardSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_BrakeNegativeGroundSpeedForRightInput."
     },
@@ -1118,7 +1118,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 428,
       "old": "loc_12548",
-      "new": "S3SonicGroundMove_StoreRightBrakeAndGateLeftFacingSkidUsingModifiedSpeedWord",
+      "new": "S3SonicGround_StoreRightBrakeAndTestSkid",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_StoreRightBrakeAndGateLeftFacingSkidUsingModifiedSpeedWord."
     },
@@ -1126,7 +1126,7 @@
       "source": "src/objects/players/sonic/s3/ground_movement.s",
       "original_line": 452,
       "old": "locret_12590",
-      "new": "S3SonicGroundMove_ReturnAfterRightBrakingAndOptionalSkidDustRequest",
+      "new": "S3SonicGround_RightBrakeReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicGroundMove_ReturnAfterRightBrakingAndOptionalSkidDustRequest."
     },
@@ -1134,7 +1134,7 @@
       "source": "src/objects/players/sonic/s3/jump_actions.s",
       "original_line": 35,
       "old": "locret_1278A",
-      "new": "S3SonicJumpActions_ReturnAfterDeathPlaneDisabledOrBoundsPassed",
+      "new": "S3SonicJump_LevelBoundsReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterDeathPlaneDisabledOrBoundsPassed."
     },
@@ -1142,7 +1142,7 @@
       "source": "src/objects/players/sonic/s3/jump_actions.s",
       "original_line": 60,
       "old": "loc_127B8",
-      "new": "S3SonicJumpActions_CompareRollingStartSpeedMagnitude",
+      "new": "S3SonicJump_CheckRollStartSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CompareRollingStartSpeedMagnitude."
     },
@@ -1150,7 +1150,7 @@
       "source": "src/objects/players/sonic/s3/jump_actions.s",
       "original_line": 69,
       "old": "locret_127D0",
-      "new": "S3SonicJumpActions_ReturnAfterRollInputGateOrDuckSelection",
+      "new": "S3SonicJump_RollInputReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterRollInputGateOrDuckSelection."
     },
@@ -1158,7 +1158,7 @@
       "source": "src/objects/players/sonic/s3/jump_actions.s",
       "original_line": 91,
       "old": "locret_1280E",
-      "new": "S3SonicJumpActions_ReturnAfterRollingShapeAndOptionalMinimumSpeed",
+      "new": "S3SonicJump_StartRollReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterRollingShapeAndOptionalMinimumSpeed."
     },
@@ -1166,7 +1166,7 @@
       "source": "src/objects/players/sonic/s3/jump_actions.s",
       "original_line": 118,
       "old": "loc_12848",
-      "new": "S3SonicJumpActions_OverrideJumpImpulseForUnderwaterStatus",
+      "new": "S3SonicJump_SelectUnderwaterImpulse",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe OverrideJumpImpulseForUnderwaterStatus."
     },
@@ -1174,7 +1174,7 @@
       "source": "src/objects/players/sonic/s3/jump_actions.s",
       "original_line": 123,
       "old": "loc_12854",
-      "new": "S3SonicJumpActions_ApplySurfaceNormalJumpImpulseAndAbortGroundCaller",
+      "new": "S3SonicJump_ApplyImpulseAndSkipGround",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ApplySurfaceNormalJumpImpulseAndAbortGroundCaller."
     },
@@ -1182,7 +1182,7 @@
       "source": "src/objects/players/sonic/s3/jump_actions.s",
       "original_line": 154,
       "old": "locret_128D0",
-      "new": "S3SonicJumpActions_ReturnFromRejectedJumpOrCompletedLaunch",
+      "new": "S3SonicJump_LaunchReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnFromRejectedJumpOrCompletedLaunch."
     },
@@ -1190,7 +1190,7 @@
       "source": "src/objects/players/sonic/s3/jump_actions.s",
       "original_line": 174,
       "old": "loc_128F0",
-      "new": "S3SonicJumpActions_GateJumpReleaseCapVersusShieldAction",
+      "new": "S3SonicJump_CheckReleaseOrShieldAction",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe GateJumpReleaseCapVersusShieldAction."
     },
@@ -1198,7 +1198,7 @@
       "source": "src/objects/players/sonic/s3/jump_actions.s",
       "original_line": 182,
       "old": "locret_12906",
-      "new": "S3SonicJumpActions_ReturnAfterHeldJumpOrReleaseVelocityCap",
+      "new": "S3SonicJump_ReleaseCapReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterHeldJumpOrReleaseVelocityCap."
     },
@@ -1206,7 +1206,7 @@
       "source": "src/objects/players/sonic/s3/jump_actions.s",
       "original_line": 193,
       "old": "locret_1291C",
-      "new": "S3SonicJumpActions_ReturnAfterNonJumpingUpwardVelocityLimit",
+      "new": "S3SonicJump_UpwardSpeedLimitReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterNonJumpingUpwardVelocityLimit."
     },
@@ -1214,7 +1214,7 @@
       "source": "src/objects/players/sonic/s3/jump_actions.s",
       "original_line": 222,
       "old": "loc_12972",
-      "new": "S3SonicJumpActions_ApplyFacingFireShieldDashAndResetHistory",
+      "new": "S3SonicJump_ApplyFireDashAndResetHistory",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ApplyFacingFireShieldDashAndResetHistory."
     },
@@ -1222,7 +1222,7 @@
       "source": "src/objects/players/sonic/s3/jump_actions.s",
       "original_line": 275,
       "old": "locret_12A20",
-      "new": "S3SonicJumpActions_ReturnWhenAirActionUnavailableOrBasicShieldBlocks",
+      "new": "S3SonicJump_ShieldActionReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnWhenAirActionUnavailableOrBasicShieldBlocks."
     },
@@ -1230,7 +1230,7 @@
       "source": "src/objects/players/sonic/s3/lifecycle.s",
       "original_line": 23,
       "old": "loc_11BE0",
-      "new": "S3SonicLifecycle_AdvanceDebugFrameCycleWithProfileLimit",
+      "new": "S3SonicMain_AdvanceDebugFrame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicLifecycle_AdvanceDebugFrameCycleWithProfileLimit."
     },
@@ -1238,7 +1238,7 @@
       "source": "src/objects/players/sonic/s3/lifecycle.s",
       "original_line": 29,
       "old": "loc_11BF2",
-      "new": "S3SonicLifecycle_LoadAndQueueCurrentDebugFrame",
+      "new": "S3SonicMain_LoadAndDrawDebugFrame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicLifecycle_LoadAndQueueCurrentDebugFrame."
     },
@@ -1246,7 +1246,7 @@
       "source": "src/objects/players/sonic/s3/lifecycle.s",
       "original_line": 110,
       "old": "locret_11D04",
-      "new": "S3SonicLifecycle_ReturnAfterEnteringDebugPlacementOrFrameCycle",
+      "new": "S3SonicMain_DebugReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicLifecycle_ReturnAfterEnteringDebugPlacementOrFrameCycle."
     },
@@ -1254,7 +1254,7 @@
       "source": "src/objects/players/sonic/s3/lifecycle.s",
       "original_line": 114,
       "old": "loc_11D06",
-      "new": "S3SonicLifecycle_CopyPhysicalControllerWordUnlessLogicalInputLocked",
+      "new": "S3SonicMain_CopyUnlockedInput",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicLifecycle_CopyPhysicalControllerWordUnlessLogicalInputLocked."
     },
@@ -1262,7 +1262,7 @@
       "source": "src/objects/players/sonic/s3/lifecycle.s",
       "original_line": 119,
       "old": "loc_11D12",
-      "new": "S3SonicLifecycle_SkipOwnMovementAndResetDoubleJumpWhenExternallyControlled",
+      "new": "S3SonicMain_CheckExternalMovement",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicLifecycle_SkipOwnMovementAndResetDoubleJumpWhenExternallyControlled."
     },
@@ -1270,7 +1270,7 @@
       "source": "src/objects/players/sonic/s3/lifecycle.s",
       "original_line": 126,
       "old": "loc_11D22",
-      "new": "S3SonicLifecycle_DispatchGroundAirRollJumpModeWhilePreservingSharedBaseRegisters",
+      "new": "S3SonicMain_DispatchMovementMode",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicLifecycle_DispatchGroundAirRollJumpModeWhilePreservingSharedBaseRegisters."
     },
@@ -1278,7 +1278,7 @@
       "source": "src/objects/players/sonic/s3/lifecycle.s",
       "original_line": 135,
       "old": "loc_11D3C",
-      "new": "S3SonicLifecycle_WrapPlayerYWordOnlyAtMinusOneHundredCameraMinimum",
+      "new": "S3SonicMain_WrapPlayerYIfEnabled",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicLifecycle_WrapPlayerYWordOnlyAtMinusOneHundredCameraMinimum."
     },
@@ -1286,7 +1286,7 @@
       "source": "src/objects/players/sonic/s3/lifecycle.s",
       "original_line": 141,
       "old": "loc_11D4C",
-      "new": "S3SonicLifecycle_QueueDisplayThenUpdatePowersHistoryWaterAndWindTunnelAnimation",
+      "new": "S3SonicMain_UpdateFrameServices",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicLifecycle_QueueDisplayThenUpdatePowersHistoryWaterAndWindTunnelAnimation."
     },
@@ -1294,7 +1294,7 @@
       "source": "src/objects/players/sonic/s3/lifecycle.s",
       "original_line": 154,
       "old": "loc_11D78",
-      "new": "S3SonicLifecycle_GateAnimationPatternLoadAndSkOuterGravityFlipByControlBitOne",
+      "new": "S3SonicMain_CheckAnimateAndLoadPatterns",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicLifecycle_GateAnimationPatternLoadAndSkOuterGravityFlipByControlBitOne."
     },
@@ -1302,7 +1302,7 @@
       "source": "src/objects/players/sonic/s3/lifecycle.s",
       "original_line": 160,
       "old": "loc_11D88",
-      "new": "S3SonicLifecycle_RunTouchResponseUnlessControlBitsFiveOrSevenSet",
+      "new": "S3SonicMain_CheckTouchResponse",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicLifecycle_RunTouchResponseUnlessControlBitsFiveOrSevenSet."
     },
@@ -1310,7 +1310,7 @@
       "source": "src/objects/players/sonic/s3/lifecycle.s",
       "original_line": 166,
       "old": "locret_11D98",
-      "new": "S3SonicLifecycle_ReturnAfterNormalServicesAndOptionalTouchResponse",
+      "new": "S3SonicMain_FrameReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicLifecycle_ReturnAfterNormalServicesAndOptionalTouchResponse."
     },
@@ -1318,7 +1318,7 @@
       "source": "src/objects/players/sonic/s3/lifecycle.s",
       "original_line": 185,
       "old": "loc_11DB0",
-      "new": "S3SonicLifecycle_QueueVisibleBlinkPhaseBeforeTimedPowerExpiryChecks",
+      "new": "S3SonicMain_DrawVisibleBlinkPhase",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicLifecycle_QueueVisibleBlinkPhaseBeforeTimedPowerExpiryChecks."
     },
@@ -1326,7 +1326,7 @@
       "source": "src/objects/players/sonic/s3/lifecycle.s",
       "original_line": 229,
       "old": "loc_11E3C",
-      "new": "S3SonicLifecycle_ClearExpiredSpeedShoesAndRestoreMusicTempo",
+      "new": "S3SonicMain_ExpireSpeedShoes",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicLifecycle_ClearExpiredSpeedShoesAndRestoreMusicTempo."
     },
@@ -1334,7 +1334,7 @@
       "source": "src/objects/players/sonic/s3/lifecycle.s",
       "original_line": 275,
       "old": "locret_11EA4",
-      "new": "S3SonicLifecycle_ReturnAfterPrimaryHistoryRecordOrNonprimarySkip",
+      "new": "S3SonicMain_RecordPositionReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicLifecycle_ReturnAfterPrimaryHistoryRecordOrNonprimarySkip."
     },
@@ -1342,7 +1342,7 @@
       "source": "src/objects/players/sonic/s3/rolling_control.s",
       "original_line": 23,
       "old": "loc_125C2",
-      "new": "S3SonicRolling_TestRollingRightInputAfterLeftInput",
+      "new": "S3SonicRoll_CheckRightInput",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe TestRollingRightInputAfterLeftInput."
     },
@@ -1350,7 +1350,7 @@
       "source": "src/objects/players/sonic/s3/rolling_control.s",
       "original_line": 28,
       "old": "loc_125CE",
-      "new": "S3SonicRolling_ApplyRollingFrictionByGroundVelocitySign",
+      "new": "S3SonicRoll_ApplySignedFriction",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ApplyRollingFrictionByGroundVelocitySign."
     },
@@ -1358,7 +1358,7 @@
       "source": "src/objects/players/sonic/s3/rolling_control.s",
       "original_line": 36,
       "old": "loc_125DE",
-      "new": "S3SonicRolling_StoreNonnegativeRollingFrictionResult",
+      "new": "S3SonicRoll_StorePositiveFrictionResult",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreNonnegativeRollingFrictionResult."
     },
@@ -1366,7 +1366,7 @@
       "source": "src/objects/players/sonic/s3/rolling_control.s",
       "original_line": 41,
       "old": "loc_125E4",
-      "new": "S3SonicRolling_AddFrictionToNegativeRollingVelocity",
+      "new": "S3SonicRoll_ApplyNegativeFriction",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AddFrictionToNegativeRollingVelocity."
     },
@@ -1374,7 +1374,7 @@
       "source": "src/objects/players/sonic/s3/rolling_control.s",
       "original_line": 46,
       "old": "loc_125EC",
-      "new": "S3SonicRolling_StoreNegativeRollingFrictionResult",
+      "new": "S3SonicRoll_StoreNegativeFrictionResult",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreNegativeRollingFrictionResult."
     },
@@ -1382,7 +1382,7 @@
       "source": "src/objects/players/sonic/s3/rolling_control.s",
       "original_line": 49,
       "old": "loc_125F0",
-      "new": "S3SonicRolling_EndRollingOnlyAtZeroGroundVelocity",
+      "new": "S3SonicRoll_CheckUnrollAtZeroSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe EndRollingOnlyAtZeroGroundVelocity."
     },
@@ -1390,7 +1390,7 @@
       "source": "src/objects/players/sonic/s3/rolling_control.s",
       "original_line": 65,
       "old": "loc_12624",
-      "new": "S3SonicRolling_RestartSlowChargedRollAtFacingSpeed",
+      "new": "S3SonicRoll_ResumeChargedRoll",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RestartSlowChargedRollAtFacingSpeed."
     },
@@ -1398,7 +1398,7 @@
       "source": "src/objects/players/sonic/s3/rolling_control.s",
       "original_line": 71,
       "old": "loc_12636",
-      "new": "S3SonicRolling_RelaxRollingCameraDistanceTowardDefault",
+      "new": "S3SonicRoll_EaseRollCamera",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RelaxRollingCameraDistanceTowardDefault."
     },
@@ -1406,7 +1406,7 @@
       "source": "src/objects/players/sonic/s3/rolling_control.s",
       "original_line": 77,
       "old": "loc_12640",
-      "new": "S3SonicRolling_SubtractTwoFromRollingCameraDistance",
+      "new": "S3SonicRoll_ReduceRollCameraDistanceBy2",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SubtractTwoFromRollingCameraDistance."
     },
@@ -1414,7 +1414,7 @@
       "source": "src/objects/players/sonic/s3/rolling_control.s",
       "original_line": 80,
       "old": "loc_12642",
-      "new": "S3SonicRolling_ProjectRollingGroundVelocityThroughSineCosine",
+      "new": "S3SonicRoll_ProjectGroundSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ProjectRollingGroundVelocityThroughSineCosine."
     },
@@ -1422,7 +1422,7 @@
       "source": "src/objects/players/sonic/s3/rolling_control.s",
       "original_line": 92,
       "old": "loc_12666",
-      "new": "S3SonicRolling_ClampProjectedRollingXVelocityLowerBound",
+      "new": "S3SonicRoll_ClampProjectedMinXSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ClampProjectedRollingXVelocityLowerBound."
     },
@@ -1430,7 +1430,7 @@
       "source": "src/objects/players/sonic/s3/rolling_control.s",
       "original_line": 97,
       "old": "loc_12670",
-      "new": "S3SonicRolling_StoreRollingXVelocityAndContinueGroundProbe",
+      "new": "S3SonicRoll_StoreXSpeedAndProbe",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreRollingXVelocityAndContinueGroundProbe."
     },
@@ -1438,7 +1438,7 @@
       "source": "src/objects/players/sonic/s3/rolling_control.s",
       "original_line": 109,
       "old": "loc_12680",
-      "new": "S3SonicRolling_FaceLeftWhileAlreadyRollingLeftOrStopped",
+      "new": "S3SonicRoll_FaceLeftAndKeepRolling",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe FaceLeftWhileAlreadyRollingLeftOrStopped."
     },
@@ -1446,7 +1446,7 @@
       "source": "src/objects/players/sonic/s3/rolling_control.s",
       "original_line": 115,
       "old": "loc_1268E",
-      "new": "S3SonicRolling_BrakeRightwardRollWithLeftInput",
+      "new": "S3SonicRoll_BrakeRightwardRoll",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe BrakeRightwardRollWithLeftInput."
     },
@@ -1454,7 +1454,7 @@
       "source": "src/objects/players/sonic/s3/rolling_control.s",
       "original_line": 120,
       "old": "loc_12696",
-      "new": "S3SonicRolling_StoreLeftInputRollingBrakeResult",
+      "new": "S3SonicRoll_StoreLeftBrakeResult",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreLeftInputRollingBrakeResult."
     },
@@ -1462,7 +1462,7 @@
       "source": "src/objects/players/sonic/s3/rolling_control.s",
       "original_line": 135,
       "old": "loc_126B0",
-      "new": "S3SonicRolling_BrakeLeftwardRollWithRightInput",
+      "new": "S3SonicRoll_BrakeLeftwardRoll",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe BrakeLeftwardRollWithRightInput."
     },
@@ -1470,7 +1470,7 @@
       "source": "src/objects/players/sonic/s3/rolling_control.s",
       "original_line": 140,
       "old": "loc_126B8",
-      "new": "S3SonicRolling_StoreRightInputRollingBrakeResult",
+      "new": "S3SonicRoll_StoreRightBrakeResult",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreRightInputRollingBrakeResult."
     },
@@ -1478,7 +1478,7 @@
       "source": "src/objects/players/sonic/s3/rolling_control.s",
       "original_line": 172,
       "old": "loc_126F2",
-      "new": "S3SonicRolling_ApplyAirRightInputAfterLeftSpeedLimitHandling",
+      "new": "S3SonicRoll_CheckAirRightInput",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ApplyAirRightInputAfterLeftSpeedLimitHandling."
     },
@@ -1486,7 +1486,7 @@
       "source": "src/objects/players/sonic/s3/rolling_control.s",
       "original_line": 185,
       "old": "loc_1270E",
-      "new": "S3SonicRolling_StoreAirInputXVelocityBeforeCameraReset",
+      "new": "S3SonicRoll_StoreAirXSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreAirInputXVelocityBeforeCameraReset."
     },
@@ -1494,7 +1494,7 @@
       "source": "src/objects/players/sonic/s3/rolling_control.s",
       "original_line": 194,
       "old": "loc_1271C",
-      "new": "S3SonicRolling_SubtractTwoFromAirCameraDistance",
+      "new": "S3SonicRoll_ReduceAirCameraDistanceBy2",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SubtractTwoFromAirCameraDistance."
     },
@@ -1502,7 +1502,7 @@
       "source": "src/objects/players/sonic/s3/rolling_control.s",
       "original_line": 210,
       "old": "loc_1273A",
-      "new": "S3SonicRolling_StoreRightwardAirDragResult",
+      "new": "S3SonicRoll_StoreRightAirDrag",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreRightwardAirDragResult."
     },
@@ -1510,7 +1510,7 @@
       "source": "src/objects/players/sonic/s3/rolling_control.s",
       "original_line": 220,
       "old": "loc_12748",
-      "new": "S3SonicRolling_StoreLeftwardAirDragResult",
+      "new": "S3SonicRoll_StoreLeftAirDrag",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreLeftwardAirDragResult."
     },
@@ -1518,7 +1518,7 @@
       "source": "src/objects/players/sonic/s3/rolling_control.s",
       "original_line": 223,
       "old": "locret_1274C",
-      "new": "S3SonicRolling_ReturnAfterAirDragOrUnsignedYGate",
+      "new": "S3SonicRoll_AirDragReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterAirDragOrUnsignedYGate."
     },
@@ -1526,7 +1526,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 17,
       "old": "loc_12E26",
-      "new": "S3SonicTerrain_DispatchTerrainResponseByVelocityAngleQuadrant",
+      "new": "S3SonicLand_DispatchVelocitySector",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_DispatchTerrainResponseByVelocityAngleQuadrant."
     },
@@ -1534,7 +1534,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 36,
       "old": "loc_12E6A",
-      "new": "S3SonicTerrain_CheckRightWallAfterDefaultSectorLeftCorrection",
+      "new": "S3SonicLand_CheckDefaultRightWall",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_CheckRightWallAfterDefaultSectorLeftCorrection."
     },
@@ -1542,7 +1542,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 43,
       "old": "loc_12E7C",
-      "new": "S3SonicTerrain_GateDefaultFloorPenetrationBySignedByteSpeedDepth",
+      "new": "S3SonicLand_TestDefaultFloorDepth",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_GateDefaultFloorPenetrationBySignedByteSpeedDepth."
     },
@@ -1550,7 +1550,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 55,
       "old": "loc_12E94",
-      "new": "S3SonicTerrain_StoreLandingAngleAndClassifyDefaultFloorSlope",
+      "new": "S3SonicLand_StoreDefaultFloorAngle",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_StoreLandingAngleAndClassifyDefaultFloorSlope."
     },
@@ -1558,7 +1558,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 70,
       "old": "loc_12EBA",
-      "new": "S3SonicTerrain_SetFlatLandingGroundSpeedBeforeTouchFloorCleanup",
+      "new": "S3SonicLand_LandOnFlatFloor",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_SetFlatLandingGroundSpeedBeforeTouchFloorCleanup."
     },
@@ -1566,7 +1566,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 77,
       "old": "loc_12ECC",
-      "new": "S3SonicTerrain_StopHorizontalSpeedAndCapPositiveSteepLandingYVelocity",
+      "new": "S3SonicLand_ClampSteepLandingSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_StopHorizontalSpeedAndCapPositiveSteepLandingYVelocity."
     },
@@ -1574,7 +1574,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 83,
       "old": "loc_12EE0",
-      "new": "S3SonicTerrain_RunLandingCleanupBeforeSamplingSignedSlopeGroundSpeed",
+      "new": "S3SonicLand_FinishSlopeLanding",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_RunLandingCleanupBeforeSamplingSignedSlopeGroundSpeed."
     },
@@ -1582,7 +1582,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 90,
       "old": "locret_12EF2",
-      "new": "S3SonicTerrain_ReturnAfterDefaultSectorFloorRejectOrLanding",
+      "new": "S3SonicLand_DefaultFloorReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_ReturnAfterDefaultSectorFloorRejectOrLanding."
     },
@@ -1590,7 +1590,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 114,
       "old": "locret_12F2C",
-      "new": "S3SonicTerrain_ReturnAfterShallowLeftSectorCeilingCorrection",
+      "new": "S3SonicLand_LeftCeilingReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_ReturnAfterShallowLeftSectorCeilingCorrection."
     },
@@ -1598,7 +1598,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 118,
       "old": "loc_12F2E",
-      "new": "S3SonicTerrain_ProbeOppositeRightWallForDeepLeftSectorCeilingPenetration",
+      "new": "S3SonicLand_CheckRightWallAtDeepCeiling",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_ProbeOppositeRightWallForDeepLeftSectorCeilingPenetration."
     },
@@ -1606,7 +1606,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 125,
       "old": "locret_12F40",
-      "new": "S3SonicTerrain_ReturnAfterDeepLeftCeilingOppositeWallFallback",
+      "new": "S3SonicLand_DeepCeilingWallReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_ReturnAfterDeepLeftCeilingOppositeWallFallback."
     },
@@ -1614,7 +1614,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 129,
       "old": "loc_12F42",
-      "new": "S3SonicTerrain_GateLeftSectorFloorProbeByWindOrNonnegativeYVelocity",
+      "new": "S3SonicLand_CheckLeftFloorEligibility",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_GateLeftSectorFloorProbeByWindOrNonnegativeYVelocity."
     },
@@ -1622,7 +1622,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 135,
       "old": "loc_12F4E",
-      "new": "S3SonicTerrain_ProbeAndAdmitLeftSectorGravityRelativeFloor",
+      "new": "S3SonicLand_ProbeLeftFloor",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_ProbeAndAdmitLeftSectorGravityRelativeFloor."
     },
@@ -1630,7 +1630,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 145,
       "old": "locret_12F6E",
-      "new": "S3SonicTerrain_ReturnAfterLeftSectorFloorSkipRejectOrCleanup",
+      "new": "S3SonicLand_LeftFloorReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_ReturnAfterLeftSectorFloorSkipRejectOrCleanup."
     },
@@ -1638,7 +1638,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 156,
       "old": "loc_12F82",
-      "new": "S3SonicTerrain_CheckRightWallAfterCeilingSectorLeftCorrection",
+      "new": "S3SonicLand_CheckCeilingSectorRightWall",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_CheckRightWallAfterCeilingSectorLeftCorrection."
     },
@@ -1646,7 +1646,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 163,
       "old": "loc_12F94",
-      "new": "S3SonicTerrain_CorrectCeilingPenetrationAndChooseStopOrSlopeAttachment",
+      "new": "S3SonicLand_ProbeCeilingAndResolve",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_CorrectCeilingPenetrationAndChooseStopOrSlopeAttachment."
     },
@@ -1654,7 +1654,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 176,
       "old": "loc_12FB4",
-      "new": "S3SonicTerrain_AttachToSteepCeilingUsingPostCleanupYGroundSpeed",
+      "new": "S3SonicLand_AttachToSteepCeiling",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_AttachToSteepCeilingUsingPostCleanupYGroundSpeed."
     },
@@ -1662,7 +1662,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 184,
       "old": "locret_12FCA",
-      "new": "S3SonicTerrain_ReturnAfterCeilingSectorNoContactOrSlopeAttachment",
+      "new": "S3SonicLand_CeilingSectorReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_ReturnAfterCeilingSectorNoContactOrSlopeAttachment."
     },
@@ -1670,7 +1670,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 188,
       "old": "loc_12FCC",
-      "new": "S3SonicTerrain_ResolveRightVelocitySectorWallBeforeCeiling",
+      "new": "S3SonicLand_CheckRightSectorWall",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_ResolveRightVelocitySectorWallBeforeCeiling."
     },
@@ -1678,7 +1678,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 196,
       "old": "loc_12FE4",
-      "new": "S3SonicTerrain_CorrectRightSectorCeilingAndStopOnlyUpwardYVelocity",
+      "new": "S3SonicLand_ResolveRightSectorCeiling",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_CorrectRightSectorCeilingAndStopOnlyUpwardYVelocity."
     },
@@ -1686,7 +1686,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 205,
       "old": "locret_12FFC",
-      "new": "S3SonicTerrain_ReturnAfterRightSectorCeilingCorrection",
+      "new": "S3SonicLand_RightCeilingReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_ReturnAfterRightSectorCeilingCorrection."
     },
@@ -1694,7 +1694,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 209,
       "old": "loc_12FFE",
-      "new": "S3SonicTerrain_GateRightSectorFloorProbeByWindOrNonnegativeYVelocity",
+      "new": "S3SonicLand_CheckRightFloorEligibility",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_GateRightSectorFloorProbeByWindOrNonnegativeYVelocity."
     },
@@ -1702,7 +1702,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 215,
       "old": "loc_1300A",
-      "new": "S3SonicTerrain_ProbeAndAdmitRightSectorGravityRelativeFloor",
+      "new": "S3SonicLand_ProbeRightFloor",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_ProbeAndAdmitRightSectorGravityRelativeFloor."
     },
@@ -1710,7 +1710,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 225,
       "old": "locret_1302A",
-      "new": "S3SonicTerrain_ReturnAfterRightSectorFloorSkipRejectOrCleanup",
+      "new": "S3SonicLand_RightFloorReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_ReturnAfterRightSectorFloorSkipRejectOrCleanup."
     },
@@ -1718,7 +1718,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 254,
       "old": "loc_13070",
-      "new": "S3SonicTerrain_ClearLandingMotionFlagsThenGateBubbleRebound",
+      "new": "S3SonicLand_ResetLandingAndCheckBubble",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_ClearLandingMotionFlagsThenGateBubbleRebound."
     },
@@ -1726,7 +1726,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 270,
       "old": "loc_130B6",
-      "new": "S3SonicTerrain_ClearCompletedDoubleJumpActionAfterOptionalBubbleBounce",
+      "new": "S3SonicLand_ClearDoubleJumpFlag",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_ClearCompletedDoubleJumpActionAfterOptionalBubbleBounce."
     },
@@ -1734,7 +1734,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 273,
       "old": "locret_130BC",
-      "new": "S3SonicTerrain_ReturnAfterLandingResetAndOptionalImmediateRebound",
+      "new": "S3SonicLand_LandingResetReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_ReturnAfterLandingResetAndOptionalImmediateRebound."
     },
@@ -1742,7 +1742,7 @@
       "source": "src/objects/players/sonic/s3/terrain_landing.s",
       "original_line": 286,
       "old": "loc_130D2",
-      "new": "S3SonicTerrain_AddAngleNormalBubbleImpulseAndRestoreRollingGeometry",
+      "new": "S3SonicLand_ApplyBubbleNormalImpulse",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicTerrain_AddAngleNormalBubbleImpulseAndRestoreRollingGeometry."
     },
@@ -2566,7 +2566,7 @@
       "source": "src/objects/players/sonic/sk/environment_and_modes.s",
       "original_line": 15,
       "old": "locret_10E2C",
-      "new": "SKSonicEnvironment_ReturnFromWaterTransitionCheck",
+      "new": "SKSonicEnv_WaterTransitionReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicEnvironment_ReturnFromWaterTransitionCheck."
     },
@@ -2574,7 +2574,7 @@
       "source": "src/objects/players/sonic/sk/environment_and_modes.s",
       "original_line": 42,
       "old": "loc_10E82",
-      "new": "SKSonicEnvironment_DampenWaterEntryVelocityUnlessObjectControlled",
+      "new": "SKSonicEnv_DampenWaterEntry",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicEnvironment_DampenWaterEntryVelocityUnlessObjectControlled."
     },
@@ -2582,7 +2582,7 @@
       "source": "src/objects/players/sonic/sk/environment_and_modes.s",
       "original_line": 70,
       "old": "loc_10EE0",
-      "new": "SKSonicEnvironment_DoubleWaterExitYVelocityWhenEligible",
+      "new": "SKSonicEnv_TryDoubleExitYSpeed",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicEnvironment_DoubleWaterExitYVelocityWhenEligible."
     },
@@ -2590,7 +2590,7 @@
       "source": "src/objects/players/sonic/sk/environment_and_modes.s",
       "original_line": 80,
       "old": "loc_10EFC",
-      "new": "SKSonicEnvironment_GateWaterExitSplashAndClampNegativeYVelocity",
+      "new": "SKSonicEnv_CheckExitSplashAndClampY",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicEnvironment_GateWaterExitSplashAndClampNegativeYVelocity."
     },
@@ -2598,7 +2598,7 @@
       "source": "src/objects/players/sonic/sk/environment_and_modes.s",
       "original_line": 90,
       "old": "loc_10F22",
-      "new": "SKSonicEnvironment_PlayWaterExitSplashSound",
+      "new": "SKSonicEnv_PlayExitSplash",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicEnvironment_PlayWaterExitSplashSound."
     },
@@ -2606,7 +2606,7 @@
       "source": "src/objects/players/sonic/sk/environment_and_modes.s",
       "original_line": 121,
       "old": "loc_10F72",
-      "new": "SKSonicEnvironment_CheckNormalGroundRightWallAfterLeftCorrection",
+      "new": "SKSonicEnv_CheckGroundRightWall",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicEnvironment_CheckNormalGroundRightWallAfterLeftCorrection."
     },
@@ -2614,7 +2614,7 @@
       "source": "src/objects/players/sonic/sk/environment_and_modes.s",
       "original_line": 127,
       "old": "loc_10F7E",
-      "new": "SKSonicEnvironment_RestoreNormalGroundRegistersAfterBothWallChecks",
+      "new": "SKSonicEnv_RestoreGroundWallRegisters",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicEnvironment_RestoreNormalGroundRegistersAfterBothWallChecks."
     },
@@ -2622,7 +2622,7 @@
       "source": "src/objects/players/sonic/sk/environment_and_modes.s",
       "original_line": 130,
       "old": "locret_10F82",
-      "new": "SKSonicEnvironment_ReturnAfterNormalGroundBackgroundChecks",
+      "new": "SKSonicEnv_GroundModeReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicEnvironment_ReturnAfterNormalGroundBackgroundChecks."
     },
@@ -2630,7 +2630,7 @@
       "source": "src/objects/players/sonic/sk/environment_and_modes.s",
       "original_line": 165,
       "old": "loc_10FD6",
-      "new": "SKSonicEnvironment_FinishAirModeWithAngleAndTerrainCollision",
+      "new": "SKSonicEnv_AirAngleAndCollision",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicEnvironment_FinishAirModeWithAngleAndTerrainCollision."
     },
@@ -2638,7 +2638,7 @@
       "source": "src/objects/players/sonic/sk/environment_and_modes.s",
       "original_line": 178,
       "old": "loc_10FEA",
-      "new": "SKSonicEnvironment_ContinueGroundRollAfterOptionalJump",
+      "new": "SKSonicEnv_RunGroundRoll",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicEnvironment_ContinueGroundRollAfterOptionalJump."
     },
@@ -2646,7 +2646,7 @@
       "source": "src/objects/players/sonic/sk/environment_and_modes.s",
       "original_line": 196,
       "old": "loc_11024",
-      "new": "SKSonicEnvironment_CheckGroundRollRightWallAfterLeftCorrection",
+      "new": "SKSonicEnv_CheckGroundRollRightWall",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicEnvironment_CheckGroundRollRightWallAfterLeftCorrection."
     },
@@ -2654,7 +2654,7 @@
       "source": "src/objects/players/sonic/sk/environment_and_modes.s",
       "original_line": 202,
       "old": "loc_11030",
-      "new": "SKSonicEnvironment_RestoreGroundRollRegistersAfterBothWallChecks",
+      "new": "SKSonicEnv_RestoreRollWallRegisters",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicEnvironment_RestoreGroundRollRegistersAfterBothWallChecks."
     },
@@ -2662,7 +2662,7 @@
       "source": "src/objects/players/sonic/sk/environment_and_modes.s",
       "original_line": 205,
       "old": "locret_11034",
-      "new": "SKSonicEnvironment_ReturnAfterGroundRollBackgroundChecks",
+      "new": "SKSonicEnv_GroundRollReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicEnvironment_ReturnAfterGroundRollBackgroundChecks."
     },
@@ -2670,7 +2670,7 @@
       "source": "src/objects/players/sonic/sk/environment_and_modes.s",
       "original_line": 222,
       "old": "loc_11056",
-      "new": "SKSonicEnvironment_FinishBallAirModeWithAngleAndTerrainCollision",
+      "new": "SKSonicEnv_BallAirAngleAndCollision",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicEnvironment_FinishBallAirModeWithAngleAndTerrainCollision."
     },
@@ -2678,7 +2678,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 79,
       "old": "loc_11128",
-      "new": "SKSonicGroundMove_FaceRightAndChooseObjectRightEdgeBalance",
+      "new": "SKSonicGround_BalanceAtObjectRightEdge",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_FaceRightAndChooseObjectRightEdgeBalance."
     },
@@ -2686,7 +2686,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 101,
       "old": "loc_11166",
-      "new": "SKSonicGroundMove_FaceLeftAndChooseObjectLeftEdgeBalance",
+      "new": "SKSonicGround_BalanceAtObjectLeftEdge",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_FaceLeftAndChooseObjectLeftEdgeBalance."
     },
@@ -2694,7 +2694,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 135,
       "old": "loc_111CE",
-      "new": "SKSonicGroundMove_FaceRightAndReprobeTerrainSixPixelsLeftForBalance",
+      "new": "SKSonicGround_FaceRightAndReprobeLeft6",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_FaceRightAndReprobeTerrainSixPixelsLeftForBalance."
     },
@@ -2702,7 +2702,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 150,
       "old": "loc_111F6",
-      "new": "SKSonicGroundMove_CheckOtherTerrainSensorBeforeLeftEdgeBalance",
+      "new": "SKSonicGround_CheckLeftEdgeSensor",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_CheckOtherTerrainSensorBeforeLeftEdgeBalance."
     },
@@ -2710,7 +2710,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 165,
       "old": "loc_11228",
-      "new": "SKSonicGroundMove_FaceLeftAndReprobeTerrainSixPixelsRightForBalance",
+      "new": "SKSonicGround_FaceLeftAndReprobeRight6",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_FaceLeftAndReprobeTerrainSixPixelsRightForBalance."
     },
@@ -2718,7 +2718,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 177,
       "old": "loc_11250",
-      "new": "SKSonicGroundMove_CheckPoweredTerrainRightEdgeSensor",
+      "new": "SKSonicGround_CheckPoweredRightEdge",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_CheckPoweredTerrainRightEdgeSensor."
     },
@@ -2726,7 +2726,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 181,
       "old": "loc_11258",
-      "new": "SKSonicGroundMove_FaceRightForPoweredObjectOrTerrainBalance",
+      "new": "SKSonicGround_FaceRightForPoweredBalance",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_FaceRightForPoweredObjectOrTerrainBalance."
     },
@@ -2734,7 +2734,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 186,
       "old": "loc_11260",
-      "new": "SKSonicGroundMove_CheckPoweredTerrainLeftEdgeSensor",
+      "new": "SKSonicGround_CheckPoweredLeftEdge",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_CheckPoweredTerrainLeftEdgeSensor."
     },
@@ -2742,7 +2742,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 190,
       "old": "loc_11268",
-      "new": "SKSonicGroundMove_FaceLeftForPoweredObjectOrTerrainBalance",
+      "new": "SKSonicGround_FaceLeftForPoweredBalance",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_FaceLeftForPoweredObjectOrTerrainBalance."
     },
@@ -2750,7 +2750,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 193,
       "old": "loc_1126E",
-      "new": "SKSonicGroundMove_SetPoweredBalanceAnimationAndResetLookDelay",
+      "new": "SKSonicGround_SetPoweredBalanceAnim",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_SetPoweredBalanceAnimationAndResetLookDelay."
     },
@@ -2758,7 +2758,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 198,
       "old": "loc_11276",
-      "new": "SKSonicGroundMove_CheckPrimaryStationaryLookControl",
+      "new": "SKSonicGround_CheckFirstLookInput",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_CheckPrimaryStationaryLookControl."
     },
@@ -2766,7 +2766,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 214,
       "old": "loc_112A6",
-      "new": "SKSonicGroundMove_RaiseCameraDistanceForReverseGravityDuck",
+      "new": "SKSonicGround_RaiseCameraForReverseDuck",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_RaiseCameraDistanceForReverseGravityDuck."
     },
@@ -2774,7 +2774,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 221,
       "old": "loc_112B0",
-      "new": "SKSonicGroundMove_CheckSecondaryStationaryLookControl",
+      "new": "SKSonicGround_CheckSecondLookInput",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_CheckSecondaryStationaryLookControl."
     },
@@ -2782,7 +2782,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 237,
       "old": "loc_112E0",
-      "new": "SKSonicGroundMove_LowerCameraDistanceForReverseGravityLookUp",
+      "new": "SKSonicGround_LowerCameraForReverseLook",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_LowerCameraDistanceForReverseGravityLookUp."
     },
@@ -2790,7 +2790,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 244,
       "old": "loc_112EA",
-      "new": "SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery",
+      "new": "SKSonicGround_ResetLookDelay",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery."
     },
@@ -2798,7 +2798,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 247,
       "old": "loc_112F0",
-      "new": "SKSonicGroundMove_RecoverCameraDistanceTowardDefaultByTwo",
+      "new": "SKSonicGround_EaseLookCamera",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_RecoverCameraDistanceTowardDefaultByTwo."
     },
@@ -2806,7 +2806,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 253,
       "old": "loc_112FA",
-      "new": "SKSonicGroundMove_SubtractCameraRecoveryStep",
+      "new": "SKSonicGround_ReduceCameraDistanceBy2",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_SubtractCameraRecoveryStep."
     },
@@ -2814,7 +2814,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 256,
       "old": "loc_112FC",
-      "new": "SKSonicGroundMove_SelectPoweredNeutralGroundDecayStep",
+      "new": "SKSonicGround_SelectPoweredFriction",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_SelectPoweredNeutralGroundDecayStep."
     },
@@ -2822,7 +2822,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 261,
       "old": "loc_11306",
-      "new": "SKSonicGroundMove_ApplyNeutralGroundDecayOnlyWithoutHorizontalInput",
+      "new": "SKSonicGround_ApplyNeutralFriction",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_ApplyNeutralGroundDecayOnlyWithoutHorizontalInput."
     },
@@ -2830,7 +2830,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 272,
       "old": "loc_11320",
-      "new": "SKSonicGroundMove_StorePositiveNeutralDecayResult",
+      "new": "SKSonicGround_StorePositiveFriction",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_StorePositiveNeutralDecayResult."
     },
@@ -2838,7 +2838,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 277,
       "old": "loc_11326",
-      "new": "SKSonicGroundMove_DecayNegativeGroundSpeedAndClampOnCarry",
+      "new": "SKSonicGround_ApplyNegativeFriction",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_DecayNegativeGroundSpeedAndClampOnCarry."
     },
@@ -2846,7 +2846,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 282,
       "old": "loc_1132E",
-      "new": "SKSonicGroundMove_StoreNegativeNeutralDecayResult",
+      "new": "SKSonicGround_StoreNegativeFriction",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_StoreNegativeNeutralDecayResult."
     },
@@ -2854,7 +2854,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 285,
       "old": "loc_11332",
-      "new": "SKSonicGroundMove_ProjectGroundSpeedIntoCartesianVelocity",
+      "new": "SKSonicGround_ProjectGroundSpeed",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_ProjectGroundSpeedIntoCartesianVelocity."
     },
@@ -2862,7 +2862,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 295,
       "old": "loc_11350",
-      "new": "SKSonicGroundMove_GateSharedWalkingAndRollingObstructionProbe",
+      "new": "SKSonicGround_CheckTravelProbe",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_GateSharedWalkingAndRollingObstructionProbe."
     },
@@ -2870,7 +2870,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 305,
       "old": "loc_11370",
-      "new": "SKSonicGroundMove_SelectTravelSideProbeOffsetAfterCardinalAngleException",
+      "new": "SKSonicGround_PickTravelProbeOffset",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_SelectTravelSideProbeOffsetAfterCardinalAngleException."
     },
@@ -2878,7 +2878,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 312,
       "old": "loc_1137E",
-      "new": "SKSonicGroundMove_ProbeGroundTravelSideAndApplyOnlyNegativeClearance",
+      "new": "SKSonicGround_ProbeTravelSide",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_ProbeGroundTravelSideAndApplyOnlyNegativeClearance."
     },
@@ -2886,7 +2886,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 327,
       "old": "loc_113A0",
-      "new": "SKSonicGroundMove_RoundSavedProbeDirectionAndApplyObstructionResponse",
+      "new": "SKSonicGround_RoundProbeAndResolve",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_RoundSavedProbeDirectionAndApplyObstructionResponse."
     },
@@ -2894,7 +2894,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 341,
       "old": "locret_113CE",
-      "new": "SKSonicGroundMove_ReturnAfterHorizontalObstructionResponse",
+      "new": "SKSonicGround_HorizontalProbeReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_ReturnAfterHorizontalObstructionResponse."
     },
@@ -2902,7 +2902,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 345,
       "old": "loc_113D0",
-      "new": "SKSonicGroundMove_SubtractScaledCeilingClearanceFromYVelocity",
+      "new": "SKSonicGround_ApplyCeilingCorrection",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_SubtractScaledCeilingClearanceFromYVelocity."
     },
@@ -2910,7 +2910,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 350,
       "old": "loc_113D6",
-      "new": "SKSonicGroundMove_CorrectLeftWallVelocityAndSetPushOnlyWhenFacingLeft",
+      "new": "SKSonicGround_ApplyLeftWallCorrection",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_CorrectLeftWallVelocityAndSetPushOnlyWhenFacingLeft."
     },
@@ -2918,7 +2918,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 359,
       "old": "loc_113F0",
-      "new": "SKSonicGroundMove_AddScaledFloorClearanceToYVelocity",
+      "new": "SKSonicGround_ApplyFloorCorrection",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_AddScaledFloorClearanceToYVelocity."
     },
@@ -2926,7 +2926,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 362,
       "old": "locret_113F4",
-      "new": "SKSonicGroundMove_ReturnAfterSkippedProbeOrVerticalResponse",
+      "new": "SKSonicGround_TravelProbeReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_ReturnAfterSkippedProbeOrVerticalResponse."
     },
@@ -2934,7 +2934,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 373,
       "old": "loc_113FE",
-      "new": "SKSonicGroundMove_FaceLeftForNonpositiveGroundAcceleration",
+      "new": "SKSonicGround_FaceLeftAndResetTurnState",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_FaceLeftForNonpositiveGroundAcceleration."
     },
@@ -2942,7 +2942,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 379,
       "old": "loc_11412",
-      "new": "SKSonicGroundMove_AccelerateLeftWithoutIncreasingExistingOverspeed",
+      "new": "SKSonicGround_AccelerateLeft",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_AccelerateLeftWithoutIncreasingExistingOverspeed."
     },
@@ -2950,7 +2950,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 390,
       "old": "loc_11424",
-      "new": "SKSonicGroundMove_StoreLeftAccelerationAndRequestMovementAnimation",
+      "new": "SKSonicGround_StoreLeftSpeedAndAnimate",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_StoreLeftAccelerationAndRequestMovementAnimation."
     },
@@ -2958,7 +2958,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 396,
       "old": "loc_11430",
-      "new": "SKSonicGroundMove_BrakePositiveGroundSpeedForLeftInput",
+      "new": "SKSonicGround_BrakeRightwardSpeed",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_BrakePositiveGroundSpeedForLeftInput."
     },
@@ -2966,7 +2966,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 401,
       "old": "loc_11438",
-      "new": "SKSonicGroundMove_StoreLeftBrakeAndGateRightFacingSkidUsingModifiedSpeedWord",
+      "new": "SKSonicGround_StoreLeftBrakeAndCheckSkid",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_StoreLeftBrakeAndGateRightFacingSkidUsingModifiedSpeedWord."
     },
@@ -2974,7 +2974,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 425,
       "old": "locret_11480",
-      "new": "SKSonicGroundMove_ReturnAfterLeftBrakingAndOptionalSkidDustRequest",
+      "new": "SKSonicGround_LeftBrakeReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_ReturnAfterLeftBrakingAndOptionalSkidDustRequest."
     },
@@ -2982,7 +2982,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 439,
       "old": "loc_1149C",
-      "new": "SKSonicGroundMove_AccelerateRightWithoutIncreasingExistingOverspeed",
+      "new": "SKSonicGround_AccelerateRight",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_AccelerateRightWithoutIncreasingExistingOverspeed."
     },
@@ -2990,7 +2990,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 448,
       "old": "loc_114AA",
-      "new": "SKSonicGroundMove_StoreRightAccelerationAndRequestMovementAnimation",
+      "new": "SKSonicGround_StoreRightSpeedAndAnimate",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_StoreRightAccelerationAndRequestMovementAnimation."
     },
@@ -2998,7 +2998,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 454,
       "old": "loc_114B6",
-      "new": "SKSonicGroundMove_BrakeNegativeGroundSpeedForRightInput",
+      "new": "SKSonicGround_BrakeLeftwardSpeed",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_BrakeNegativeGroundSpeedForRightInput."
     },
@@ -3006,7 +3006,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 459,
       "old": "loc_114BE",
-      "new": "SKSonicGroundMove_StoreRightBrakeAndGateLeftFacingSkidUsingModifiedSpeedWord",
+      "new": "SKSonicGround_StoreRightBrakeAndTestSkid",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_StoreRightBrakeAndGateLeftFacingSkidUsingModifiedSpeedWord."
     },
@@ -3014,7 +3014,7 @@
       "source": "src/objects/players/sonic/sk/ground_movement.s",
       "original_line": 483,
       "old": "locret_11506",
-      "new": "SKSonicGroundMove_ReturnAfterRightBrakingAndOptionalSkidDustRequest",
+      "new": "SKSonicGround_RightBrakeReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicGroundMove_ReturnAfterRightBrakingAndOptionalSkidDustRequest."
     },
@@ -3022,7 +3022,7 @@
       "source": "src/objects/players/sonic/sk/jump_actions.s",
       "original_line": 37,
       "old": "locret_11720",
-      "new": "SKSonicJumpActions_ReturnAfterDeathPlaneDisabledOrBoundsPassed",
+      "new": "SKSonicJump_LevelBoundsReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterDeathPlaneDisabledOrBoundsPassed."
     },
@@ -3030,7 +3030,7 @@
       "source": "src/objects/players/sonic/sk/jump_actions.s",
       "original_line": 41,
       "old": "loc_11722",
-      "new": "SKSonicJumpActions_CheckReverseGravityDeathAtCameraMinimum",
+      "new": "SKSonicJump_CheckReverseDeathPlane",
       "profiles": ["sk"],
       "meaning": "Describe CheckReverseGravityDeathAtCameraMinimum."
     },
@@ -3038,7 +3038,7 @@
       "source": "src/objects/players/sonic/sk/jump_actions.s",
       "original_line": 72,
       "old": "loc_1176A",
-      "new": "SKSonicJumpActions_CompareRollingStartSpeedMagnitude",
+      "new": "SKSonicJump_CheckRollStartSpeed",
       "profiles": ["sk"],
       "meaning": "Describe CompareRollingStartSpeedMagnitude."
     },
@@ -3046,7 +3046,7 @@
       "source": "src/objects/players/sonic/sk/jump_actions.s",
       "original_line": 79,
       "old": "locret_1177E",
-      "new": "SKSonicJumpActions_ReturnAfterRollInputGateOrDuckSelection",
+      "new": "SKSonicJump_RollInputReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterRollInputGateOrDuckSelection."
     },
@@ -3054,7 +3054,7 @@
       "source": "src/objects/players/sonic/sk/jump_actions.s",
       "original_line": 106,
       "old": "loc_117C2",
-      "new": "SKSonicJumpActions_PlayRollSoundAfterGravityAdjustedShapeShift",
+      "new": "SKSonicJump_PlayRollSFXAndSeedSpeed",
       "profiles": ["sk"],
       "meaning": "Describe PlayRollSoundAfterGravityAdjustedShapeShift."
     },
@@ -3062,7 +3062,7 @@
       "source": "src/objects/players/sonic/sk/jump_actions.s",
       "original_line": 113,
       "old": "locret_117D8",
-      "new": "SKSonicJumpActions_ReturnAfterRollingShapeAndOptionalMinimumSpeed",
+      "new": "SKSonicJump_StartRollReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterRollingShapeAndOptionalMinimumSpeed."
     },
@@ -3070,7 +3070,7 @@
       "source": "src/objects/players/sonic/sk/jump_actions.s",
       "original_line": 135,
       "old": "loc_117FC",
-      "new": "SKSonicJumpActions_ProbeJumpClearanceWithGravityAdjustedNormal",
+      "new": "SKSonicJump_ProbeLaunchClearance",
       "profiles": ["sk"],
       "meaning": "Describe ProbeJumpClearanceWithGravityAdjustedNormal."
     },
@@ -3078,7 +3078,7 @@
       "source": "src/objects/players/sonic/sk/jump_actions.s",
       "original_line": 147,
       "old": "loc_11822",
-      "new": "SKSonicJumpActions_OverrideJumpImpulseForUnderwaterStatus",
+      "new": "SKSonicJump_SelectUnderwaterImpulse",
       "profiles": ["sk"],
       "meaning": "Describe OverrideJumpImpulseForUnderwaterStatus."
     },
@@ -3086,7 +3086,7 @@
       "source": "src/objects/players/sonic/sk/jump_actions.s",
       "original_line": 152,
       "old": "loc_1182E",
-      "new": "SKSonicJumpActions_ApplySurfaceNormalJumpImpulseAndAbortGroundCaller",
+      "new": "SKSonicJump_ApplyImpulseAndSkipGround",
       "profiles": ["sk"],
       "meaning": "Describe ApplySurfaceNormalJumpImpulseAndAbortGroundCaller."
     },
@@ -3094,7 +3094,7 @@
       "source": "src/objects/players/sonic/sk/jump_actions.s",
       "original_line": 185,
       "old": "loc_118AE",
-      "new": "SKSonicJumpActions_ApplyGravityAdjustedJumpRadiusCompensation",
+      "new": "SKSonicJump_ApplyJumpRadiusOffset",
       "profiles": ["sk"],
       "meaning": "Describe ApplyGravityAdjustedJumpRadiusCompensation."
     },
@@ -3102,7 +3102,7 @@
       "source": "src/objects/players/sonic/sk/jump_actions.s",
       "original_line": 188,
       "old": "locret_118B2",
-      "new": "SKSonicJumpActions_ReturnFromRejectedJumpOrCompletedLaunch",
+      "new": "SKSonicJump_LaunchReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnFromRejectedJumpOrCompletedLaunch."
     },
@@ -3110,7 +3110,7 @@
       "source": "src/objects/players/sonic/sk/jump_actions.s",
       "original_line": 208,
       "old": "loc_118D2",
-      "new": "SKSonicJumpActions_GateJumpReleaseCapVersusShieldAction",
+      "new": "SKSonicJump_CheckReleaseOrShieldAction",
       "profiles": ["sk"],
       "meaning": "Describe GateJumpReleaseCapVersusShieldAction."
     },
@@ -3118,7 +3118,7 @@
       "source": "src/objects/players/sonic/sk/jump_actions.s",
       "original_line": 216,
       "old": "locret_118E8",
-      "new": "SKSonicJumpActions_ReturnAfterHeldJumpOrReleaseVelocityCap",
+      "new": "SKSonicJump_ReleaseCapReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterHeldJumpOrReleaseVelocityCap."
     },
@@ -3126,7 +3126,7 @@
       "source": "src/objects/players/sonic/sk/jump_actions.s",
       "original_line": 227,
       "old": "locret_118FE",
-      "new": "SKSonicJumpActions_ReturnAfterNonJumpingUpwardVelocityLimit",
+      "new": "SKSonicJump_UpwardSpeedLimitReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterNonJumpingUpwardVelocityLimit."
     },
@@ -3134,7 +3134,7 @@
       "source": "src/objects/players/sonic/sk/jump_actions.s",
       "original_line": 257,
       "old": "loc_11958",
-      "new": "SKSonicJumpActions_ApplyFacingFireShieldDashAndResetHistory",
+      "new": "SKSonicJump_ApplyFireDashAndResetHistory",
       "profiles": ["sk"],
       "meaning": "Describe ApplyFacingFireShieldDashAndResetHistory."
     },
@@ -3142,7 +3142,7 @@
       "source": "src/objects/players/sonic/sk/jump_actions.s",
       "original_line": 301,
       "old": "loc_119E8",
-      "new": "SKSonicJumpActions_GateEmeraldEligibleTransformationByRingsAndTimer",
+      "new": "SKSonicJump_CheckTransformRingsAndTimer",
       "profiles": ["sk"],
       "meaning": "Describe GateEmeraldEligibleTransformationByRingsAndTimer."
     },
@@ -3150,7 +3150,7 @@
       "source": "src/objects/players/sonic/sk/jump_actions.s",
       "original_line": 316,
       "old": "locret_11A14",
-      "new": "SKSonicJumpActions_ReturnWhenAirActionUnavailableOrBasicShieldBlocks",
+      "new": "SKSonicJump_ShieldActionReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnWhenAirActionUnavailableOrBasicShieldBlocks."
     },
@@ -3158,7 +3158,7 @@
       "source": "src/objects/players/sonic/sk/lifecycle.s",
       "original_line": 23,
       "old": "loc_10ABC",
-      "new": "SKSonicLifecycle_AdvanceDebugFrameCycleWithProfileLimit",
+      "new": "SKSonicMain_AdvanceDebugFrame",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicLifecycle_AdvanceDebugFrameCycleWithProfileLimit."
     },
@@ -3166,7 +3166,7 @@
       "source": "src/objects/players/sonic/sk/lifecycle.s",
       "original_line": 29,
       "old": "loc_10ACE",
-      "new": "SKSonicLifecycle_LoadAndQueueCurrentDebugFrame",
+      "new": "SKSonicMain_LoadAndDrawDebugFrame",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicLifecycle_LoadAndQueueCurrentDebugFrame."
     },
@@ -3174,7 +3174,7 @@
       "source": "src/objects/players/sonic/sk/lifecycle.s",
       "original_line": 106,
       "old": "loc_10BCE",
-      "new": "SKSonicLifecycle_CheckDebugBEntryAfterConsumingNewAForGravityToggle",
+      "new": "SKSonicMain_CheckDebugBEntry",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicLifecycle_CheckDebugBEntryAfterConsumingNewAForGravityToggle."
     },
@@ -3182,7 +3182,7 @@
       "source": "src/objects/players/sonic/sk/lifecycle.s",
       "original_line": 115,
       "old": "locret_10BEE",
-      "new": "SKSonicLifecycle_ReturnAfterEnteringDebugPlacementOrFrameCycle",
+      "new": "SKSonicMain_DebugReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicLifecycle_ReturnAfterEnteringDebugPlacementOrFrameCycle."
     },
@@ -3190,7 +3190,7 @@
       "source": "src/objects/players/sonic/sk/lifecycle.s",
       "original_line": 119,
       "old": "loc_10BF0",
-      "new": "SKSonicLifecycle_CopyPhysicalControllerWordUnlessLogicalInputLocked",
+      "new": "SKSonicMain_CopyUnlockedInput",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicLifecycle_CopyPhysicalControllerWordUnlessLogicalInputLocked."
     },
@@ -3198,7 +3198,7 @@
       "source": "src/objects/players/sonic/sk/lifecycle.s",
       "original_line": 124,
       "old": "loc_10BFC",
-      "new": "SKSonicLifecycle_SkipOwnMovementAndResetDoubleJumpWhenExternallyControlled",
+      "new": "SKSonicMain_CheckExternalMovement",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicLifecycle_SkipOwnMovementAndResetDoubleJumpWhenExternallyControlled."
     },
@@ -3206,7 +3206,7 @@
       "source": "src/objects/players/sonic/sk/lifecycle.s",
       "original_line": 131,
       "old": "loc_10C0C",
-      "new": "SKSonicLifecycle_DispatchGroundAirRollJumpModeWhilePreservingSharedBaseRegisters",
+      "new": "SKSonicMain_DispatchMovementMode",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicLifecycle_DispatchGroundAirRollJumpModeWhilePreservingSharedBaseRegisters."
     },
@@ -3214,7 +3214,7 @@
       "source": "src/objects/players/sonic/sk/lifecycle.s",
       "original_line": 140,
       "old": "loc_10C26",
-      "new": "SKSonicLifecycle_WrapPlayerYWordOnlyAtMinusOneHundredCameraMinimum",
+      "new": "SKSonicMain_WrapPlayerYIfEnabled",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicLifecycle_WrapPlayerYWordOnlyAtMinusOneHundredCameraMinimum."
     },
@@ -3222,7 +3222,7 @@
       "source": "src/objects/players/sonic/sk/lifecycle.s",
       "original_line": 146,
       "old": "loc_10C36",
-      "new": "SKSonicLifecycle_QueueDisplayThenUpdatePowersHistoryWaterAndWindTunnelAnimation",
+      "new": "SKSonicMain_UpdateFrameServices",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicLifecycle_QueueDisplayThenUpdatePowersHistoryWaterAndWindTunnelAnimation."
     },
@@ -3230,7 +3230,7 @@
       "source": "src/objects/players/sonic/sk/lifecycle.s",
       "original_line": 159,
       "old": "loc_10C62",
-      "new": "SKSonicLifecycle_GateAnimationPatternLoadAndSkOuterGravityFlipByControlBitOne",
+      "new": "SKSonicMain_CheckAnimateAndLoadPatterns",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicLifecycle_GateAnimationPatternLoadAndSkOuterGravityFlipByControlBitOne."
     },
@@ -3238,7 +3238,7 @@
       "source": "src/objects/players/sonic/sk/lifecycle.s",
       "original_line": 167,
       "old": "loc_10C7A",
-      "new": "SKSonicLifecycle_LoadSonicPatternsAfterOptionalOuterReverseGravityFlip",
+      "new": "SKSonicMain_LoadPatterns",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicLifecycle_LoadSonicPatternsAfterOptionalOuterReverseGravityFlip."
     },
@@ -3246,7 +3246,7 @@
       "source": "src/objects/players/sonic/sk/lifecycle.s",
       "original_line": 170,
       "old": "loc_10C7E",
-      "new": "SKSonicLifecycle_RunTouchResponseUnlessControlBitsFiveOrSevenSet",
+      "new": "SKSonicMain_CheckTouchResponse",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicLifecycle_RunTouchResponseUnlessControlBitsFiveOrSevenSet."
     },
@@ -3254,7 +3254,7 @@
       "source": "src/objects/players/sonic/sk/lifecycle.s",
       "original_line": 176,
       "old": "locret_10C8E",
-      "new": "SKSonicLifecycle_ReturnAfterNormalServicesAndOptionalTouchResponse",
+      "new": "SKSonicMain_FrameReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicLifecycle_ReturnAfterNormalServicesAndOptionalTouchResponse."
     },
@@ -3262,7 +3262,7 @@
       "source": "src/objects/players/sonic/sk/lifecycle.s",
       "original_line": 195,
       "old": "loc_10CA6",
-      "new": "SKSonicLifecycle_QueueVisibleBlinkPhaseBeforeTimedPowerExpiryChecks",
+      "new": "SKSonicMain_DrawVisibleBlinkPhase",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicLifecycle_QueueVisibleBlinkPhaseBeforeTimedPowerExpiryChecks."
     },
@@ -3270,7 +3270,7 @@
       "source": "src/objects/players/sonic/sk/lifecycle.s",
       "original_line": 239,
       "old": "loc_10D32",
-      "new": "SKSonicLifecycle_ClearExpiredSpeedShoesAndRestoreMusicTempo",
+      "new": "SKSonicMain_ExpireSpeedShoes",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicLifecycle_ClearExpiredSpeedShoesAndRestoreMusicTempo."
     },
@@ -3278,7 +3278,7 @@
       "source": "src/objects/players/sonic/sk/lifecycle.s",
       "original_line": 286,
       "old": "locret_10D9E",
-      "new": "SKSonicLifecycle_ReturnAfterPrimaryHistoryRecordOrNonprimarySkip",
+      "new": "SKSonicMain_RecordPositionReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicLifecycle_ReturnAfterPrimaryHistoryRecordOrNonprimarySkip."
     },
@@ -3286,7 +3286,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 16,
       "old": "loc_1151C",
-      "new": "SKSonicRolling_GateRollingInputAfterSuperFrictionSelection",
+      "new": "SKSonicRoll_CheckRollInput",
       "profiles": ["sk"],
       "meaning": "Describe GateRollingInputAfterSuperFrictionSelection."
     },
@@ -3294,7 +3294,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 28,
       "old": "loc_11542",
-      "new": "SKSonicRolling_TestRollingRightInputAfterLeftInput",
+      "new": "SKSonicRoll_CheckRightInput",
       "profiles": ["sk"],
       "meaning": "Describe TestRollingRightInputAfterLeftInput."
     },
@@ -3302,7 +3302,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 33,
       "old": "loc_1154E",
-      "new": "SKSonicRolling_ApplyRollingFrictionByGroundVelocitySign",
+      "new": "SKSonicRoll_ApplySignedFriction",
       "profiles": ["sk"],
       "meaning": "Describe ApplyRollingFrictionByGroundVelocitySign."
     },
@@ -3310,7 +3310,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 41,
       "old": "loc_1155E",
-      "new": "SKSonicRolling_StoreNonnegativeRollingFrictionResult",
+      "new": "SKSonicRoll_StorePositiveFrictionResult",
       "profiles": ["sk"],
       "meaning": "Describe StoreNonnegativeRollingFrictionResult."
     },
@@ -3318,7 +3318,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 46,
       "old": "loc_11564",
-      "new": "SKSonicRolling_AddFrictionToNegativeRollingVelocity",
+      "new": "SKSonicRoll_ApplyNegativeFriction",
       "profiles": ["sk"],
       "meaning": "Describe AddFrictionToNegativeRollingVelocity."
     },
@@ -3326,7 +3326,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 51,
       "old": "loc_1156C",
-      "new": "SKSonicRolling_StoreNegativeRollingFrictionResult",
+      "new": "SKSonicRoll_StoreNegativeFrictionResult",
       "profiles": ["sk"],
       "meaning": "Describe StoreNegativeRollingFrictionResult."
     },
@@ -3334,7 +3334,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 54,
       "old": "loc_11570",
-      "new": "SKSonicRolling_TakeWordMagnitudeForRollingExitThreshold",
+      "new": "SKSonicRoll_GetRollSpeedMagnitude",
       "profiles": ["sk"],
       "meaning": "Describe TakeWordMagnitudeForRollingExitThreshold."
     },
@@ -3342,7 +3342,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 59,
       "old": "loc_11578",
-      "new": "SKSonicRolling_EndSlowRollBelowUnsignedMagnitudeThreshold",
+      "new": "SKSonicRoll_CheckUnrollBelow80",
       "profiles": ["sk"],
       "meaning": "Describe EndSlowRollBelowUnsignedMagnitudeThreshold."
     },
@@ -3350,7 +3350,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 75,
       "old": "loc_115AE",
-      "new": "SKSonicRolling_ApplyGravityAdjustedUnrollRadiusOffset",
+      "new": "SKSonicRoll_ApplyUnrollRadiusOffset",
       "profiles": ["sk"],
       "meaning": "Describe ApplyGravityAdjustedUnrollRadiusOffset."
     },
@@ -3358,7 +3358,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 80,
       "old": "loc_115B4",
-      "new": "SKSonicRolling_RestartSlowChargedRollAtFacingSpeed",
+      "new": "SKSonicRoll_ResumeChargedRoll",
       "profiles": ["sk"],
       "meaning": "Describe RestartSlowChargedRollAtFacingSpeed."
     },
@@ -3366,7 +3366,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 86,
       "old": "loc_115C6",
-      "new": "SKSonicRolling_RelaxRollingCameraDistanceTowardDefault",
+      "new": "SKSonicRoll_EaseRollCamera",
       "profiles": ["sk"],
       "meaning": "Describe RelaxRollingCameraDistanceTowardDefault."
     },
@@ -3374,7 +3374,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 92,
       "old": "loc_115D0",
-      "new": "SKSonicRolling_SubtractTwoFromRollingCameraDistance",
+      "new": "SKSonicRoll_ReduceRollCameraDistanceBy2",
       "profiles": ["sk"],
       "meaning": "Describe SubtractTwoFromRollingCameraDistance."
     },
@@ -3382,7 +3382,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 95,
       "old": "loc_115D2",
-      "new": "SKSonicRolling_ProjectRollingGroundVelocityThroughSineCosine",
+      "new": "SKSonicRoll_ProjectGroundSpeed",
       "profiles": ["sk"],
       "meaning": "Describe ProjectRollingGroundVelocityThroughSineCosine."
     },
@@ -3390,7 +3390,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 107,
       "old": "loc_115F6",
-      "new": "SKSonicRolling_ClampProjectedRollingXVelocityLowerBound",
+      "new": "SKSonicRoll_ClampProjectedMinXSpeed",
       "profiles": ["sk"],
       "meaning": "Describe ClampProjectedRollingXVelocityLowerBound."
     },
@@ -3398,7 +3398,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 112,
       "old": "loc_11600",
-      "new": "SKSonicRolling_StoreRollingXVelocityAndContinueGroundProbe",
+      "new": "SKSonicRoll_StoreXSpeedAndProbe",
       "profiles": ["sk"],
       "meaning": "Describe StoreRollingXVelocityAndContinueGroundProbe."
     },
@@ -3406,7 +3406,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 124,
       "old": "loc_11610",
-      "new": "SKSonicRolling_FaceLeftWhileAlreadyRollingLeftOrStopped",
+      "new": "SKSonicRoll_FaceLeftAndKeepRolling",
       "profiles": ["sk"],
       "meaning": "Describe FaceLeftWhileAlreadyRollingLeftOrStopped."
     },
@@ -3414,7 +3414,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 130,
       "old": "loc_1161E",
-      "new": "SKSonicRolling_BrakeRightwardRollWithLeftInput",
+      "new": "SKSonicRoll_BrakeRightwardRoll",
       "profiles": ["sk"],
       "meaning": "Describe BrakeRightwardRollWithLeftInput."
     },
@@ -3422,7 +3422,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 135,
       "old": "loc_11626",
-      "new": "SKSonicRolling_StoreLeftInputRollingBrakeResult",
+      "new": "SKSonicRoll_StoreLeftBrakeResult",
       "profiles": ["sk"],
       "meaning": "Describe StoreLeftInputRollingBrakeResult."
     },
@@ -3430,7 +3430,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 150,
       "old": "loc_11640",
-      "new": "SKSonicRolling_BrakeLeftwardRollWithRightInput",
+      "new": "SKSonicRoll_BrakeLeftwardRoll",
       "profiles": ["sk"],
       "meaning": "Describe BrakeLeftwardRollWithRightInput."
     },
@@ -3438,7 +3438,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 155,
       "old": "loc_11648",
-      "new": "SKSonicRolling_StoreRightInputRollingBrakeResult",
+      "new": "SKSonicRoll_StoreRightBrakeResult",
       "profiles": ["sk"],
       "meaning": "Describe StoreRightInputRollingBrakeResult."
     },
@@ -3446,7 +3446,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 187,
       "old": "loc_11682",
-      "new": "SKSonicRolling_ApplyAirRightInputAfterLeftSpeedLimitHandling",
+      "new": "SKSonicRoll_CheckAirRightInput",
       "profiles": ["sk"],
       "meaning": "Describe ApplyAirRightInputAfterLeftSpeedLimitHandling."
     },
@@ -3454,7 +3454,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 200,
       "old": "loc_1169E",
-      "new": "SKSonicRolling_StoreAirInputXVelocityBeforeCameraReset",
+      "new": "SKSonicRoll_StoreAirXSpeed",
       "profiles": ["sk"],
       "meaning": "Describe StoreAirInputXVelocityBeforeCameraReset."
     },
@@ -3462,7 +3462,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 209,
       "old": "loc_116AC",
-      "new": "SKSonicRolling_SubtractTwoFromAirCameraDistance",
+      "new": "SKSonicRoll_ReduceAirCameraDistanceBy2",
       "profiles": ["sk"],
       "meaning": "Describe SubtractTwoFromAirCameraDistance."
     },
@@ -3470,7 +3470,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 225,
       "old": "loc_116CA",
-      "new": "SKSonicRolling_StoreRightwardAirDragResult",
+      "new": "SKSonicRoll_StoreRightAirDrag",
       "profiles": ["sk"],
       "meaning": "Describe StoreRightwardAirDragResult."
     },
@@ -3478,7 +3478,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 235,
       "old": "loc_116D8",
-      "new": "SKSonicRolling_StoreLeftwardAirDragResult",
+      "new": "SKSonicRoll_StoreLeftAirDrag",
       "profiles": ["sk"],
       "meaning": "Describe StoreLeftwardAirDragResult."
     },
@@ -3486,7 +3486,7 @@
       "source": "src/objects/players/sonic/sk/rolling_control.s",
       "original_line": 238,
       "old": "locret_116DC",
-      "new": "SKSonicRolling_ReturnAfterAirDragOrUnsignedYGate",
+      "new": "SKSonicRoll_AirDragReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterAirDragOrUnsignedYGate."
     },
@@ -3494,7 +3494,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 17,
       "old": "loc_11F00",
-      "new": "SKSonicTerrain_DispatchTerrainResponseByVelocityAngleQuadrant",
+      "new": "SKSonicLand_DispatchVelocitySector",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_DispatchTerrainResponseByVelocityAngleQuadrant."
     },
@@ -3502,7 +3502,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 36,
       "old": "loc_11F44",
-      "new": "SKSonicTerrain_CheckRightWallAfterDefaultSectorLeftCorrection",
+      "new": "SKSonicLand_CheckDefaultRightWall",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_CheckRightWallAfterDefaultSectorLeftCorrection."
     },
@@ -3510,7 +3510,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 43,
       "old": "loc_11F56",
-      "new": "SKSonicTerrain_GateDefaultFloorPenetrationBySignedByteSpeedDepth",
+      "new": "SKSonicLand_TestDefaultFloorDepth",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_GateDefaultFloorPenetrationBySignedByteSpeedDepth."
     },
@@ -3518,7 +3518,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 55,
       "old": "loc_11F6E",
-      "new": "SKSonicTerrain_StoreLandingAngleAndClassifyDefaultFloorSlope",
+      "new": "SKSonicLand_StoreDefaultFloorAngle",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_StoreLandingAngleAndClassifyDefaultFloorSlope."
     },
@@ -3526,7 +3526,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 61,
       "old": "loc_11F7A",
-      "new": "SKSonicTerrain_ApplyGravitySignedDefaultFloorCorrectionAndClassifySlope",
+      "new": "SKSonicLand_CorrectDefaultFloorAndSlope",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_ApplyGravitySignedDefaultFloorCorrectionAndClassifySlope."
     },
@@ -3534,7 +3534,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 75,
       "old": "loc_11F9C",
-      "new": "SKSonicTerrain_SetFlatLandingGroundSpeedBeforeTouchFloorCleanup",
+      "new": "SKSonicLand_LandOnFlatFloor",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_SetFlatLandingGroundSpeedBeforeTouchFloorCleanup."
     },
@@ -3542,7 +3542,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 82,
       "old": "loc_11FAE",
-      "new": "SKSonicTerrain_StopHorizontalSpeedAndCapPositiveSteepLandingYVelocity",
+      "new": "SKSonicLand_ClampSteepLandingSpeed",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_StopHorizontalSpeedAndCapPositiveSteepLandingYVelocity."
     },
@@ -3550,7 +3550,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 88,
       "old": "loc_11FC2",
-      "new": "SKSonicTerrain_RunLandingCleanupBeforeSamplingSignedSlopeGroundSpeed",
+      "new": "SKSonicLand_FinishSlopeLanding",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_RunLandingCleanupBeforeSamplingSignedSlopeGroundSpeed."
     },
@@ -3558,7 +3558,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 95,
       "old": "locret_11FD4",
-      "new": "SKSonicTerrain_ReturnAfterDefaultSectorFloorRejectOrLanding",
+      "new": "SKSonicLand_DefaultFloorReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_ReturnAfterDefaultSectorFloorRejectOrLanding."
     },
@@ -3566,7 +3566,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 152,
       "old": "loc_12042",
-      "new": "SKSonicTerrain_ApplyGravitySignedShallowLeftCeilingCorrection",
+      "new": "SKSonicLand_CorrectLeftCeilingY",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_ApplyGravitySignedShallowLeftCeilingCorrection."
     },
@@ -3574,7 +3574,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 158,
       "old": "locret_12052",
-      "new": "SKSonicTerrain_ReturnAfterShallowLeftSectorCeilingCorrection",
+      "new": "SKSonicLand_LeftCeilingReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_ReturnAfterShallowLeftSectorCeilingCorrection."
     },
@@ -3582,7 +3582,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 162,
       "old": "loc_12054",
-      "new": "SKSonicTerrain_ProbeOppositeRightWallForDeepLeftSectorCeilingPenetration",
+      "new": "SKSonicLand_CheckRightWallAtDeepCeiling",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_ProbeOppositeRightWallForDeepLeftSectorCeilingPenetration."
     },
@@ -3590,7 +3590,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 169,
       "old": "locret_12066",
-      "new": "SKSonicTerrain_ReturnAfterDeepLeftCeilingOppositeWallFallback",
+      "new": "SKSonicLand_DeepCeilingWallReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_ReturnAfterDeepLeftCeilingOppositeWallFallback."
     },
@@ -3598,7 +3598,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 173,
       "old": "loc_12068",
-      "new": "SKSonicTerrain_GateLeftSectorFloorProbeByWindOrNonnegativeYVelocity",
+      "new": "SKSonicLand_CheckLeftFloorEligibility",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_GateLeftSectorFloorProbeByWindOrNonnegativeYVelocity."
     },
@@ -3606,7 +3606,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 179,
       "old": "loc_12074",
-      "new": "SKSonicTerrain_ProbeAndAdmitLeftSectorGravityRelativeFloor",
+      "new": "SKSonicLand_ProbeLeftFloor",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_ProbeAndAdmitLeftSectorGravityRelativeFloor."
     },
@@ -3614,7 +3614,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 187,
       "old": "loc_12084",
-      "new": "SKSonicTerrain_ApplyGravitySignedLeftFloorLandingAndFlatSpeedTransfer",
+      "new": "SKSonicLand_LandOnLeftSectorFloor",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_ApplyGravitySignedLeftFloorLandingAndFlatSpeedTransfer."
     },
@@ -3622,7 +3622,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 194,
       "old": "locret_1209C",
-      "new": "SKSonicTerrain_ReturnAfterLeftSectorFloorSkipRejectOrCleanup",
+      "new": "SKSonicLand_LeftFloorReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_ReturnAfterLeftSectorFloorSkipRejectOrCleanup."
     },
@@ -3630,7 +3630,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 205,
       "old": "loc_120B0",
-      "new": "SKSonicTerrain_CheckRightWallAfterCeilingSectorLeftCorrection",
+      "new": "SKSonicLand_CheckCeilingSectorRightWall",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_CheckRightWallAfterCeilingSectorLeftCorrection."
     },
@@ -3638,7 +3638,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 212,
       "old": "loc_120C2",
-      "new": "SKSonicTerrain_CorrectCeilingPenetrationAndChooseStopOrSlopeAttachment",
+      "new": "SKSonicLand_ProbeCeilingAndResolve",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_CorrectCeilingPenetrationAndChooseStopOrSlopeAttachment."
     },
@@ -3646,7 +3646,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 220,
       "old": "loc_120D2",
-      "new": "SKSonicTerrain_SubtractGravitySignedCeilingDistanceBeforeSlopeDecision",
+      "new": "SKSonicLand_CorrectCeilingAndCheckSlope",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_SubtractGravitySignedCeilingDistanceBeforeSlopeDecision."
     },
@@ -3654,7 +3654,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 230,
       "old": "loc_120EA",
-      "new": "SKSonicTerrain_AttachToSteepCeilingUsingPostCleanupYGroundSpeed",
+      "new": "SKSonicLand_AttachToSteepCeiling",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_AttachToSteepCeilingUsingPostCleanupYGroundSpeed."
     },
@@ -3662,7 +3662,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 238,
       "old": "locret_12100",
-      "new": "SKSonicTerrain_ReturnAfterCeilingSectorNoContactOrSlopeAttachment",
+      "new": "SKSonicLand_CeilingSectorReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_ReturnAfterCeilingSectorNoContactOrSlopeAttachment."
     },
@@ -3670,7 +3670,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 242,
       "old": "loc_12102",
-      "new": "SKSonicTerrain_ResolveRightVelocitySectorWallBeforeCeiling",
+      "new": "SKSonicLand_CheckRightSectorWall",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_ResolveRightVelocitySectorWallBeforeCeiling."
     },
@@ -3678,7 +3678,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 250,
       "old": "loc_1211A",
-      "new": "SKSonicTerrain_CorrectRightSectorCeilingAndStopOnlyUpwardYVelocity",
+      "new": "SKSonicLand_ResolveRightSectorCeiling",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_CorrectRightSectorCeilingAndStopOnlyUpwardYVelocity."
     },
@@ -3686,7 +3686,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 258,
       "old": "loc_1212A",
-      "new": "SKSonicTerrain_SubtractGravitySignedRightSectorCeilingDistance",
+      "new": "SKSonicLand_CorrectRightCeilingY",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_SubtractGravitySignedRightSectorCeilingDistance."
     },
@@ -3694,7 +3694,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 264,
       "old": "locret_1213A",
-      "new": "SKSonicTerrain_ReturnAfterRightSectorCeilingCorrection",
+      "new": "SKSonicLand_RightCeilingReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_ReturnAfterRightSectorCeilingCorrection."
     },
@@ -3702,7 +3702,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 268,
       "old": "loc_1213C",
-      "new": "SKSonicTerrain_GateRightSectorFloorProbeByWindOrNonnegativeYVelocity",
+      "new": "SKSonicLand_CheckRightFloorEligibility",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_GateRightSectorFloorProbeByWindOrNonnegativeYVelocity."
     },
@@ -3710,7 +3710,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 274,
       "old": "loc_12148",
-      "new": "SKSonicTerrain_ProbeAndAdmitRightSectorGravityRelativeFloor",
+      "new": "SKSonicLand_ProbeRightFloor",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_ProbeAndAdmitRightSectorGravityRelativeFloor."
     },
@@ -3718,7 +3718,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 282,
       "old": "loc_12158",
-      "new": "SKSonicTerrain_ApplyGravitySignedRightFloorLandingAndFlatSpeedTransfer",
+      "new": "SKSonicLand_LandOnRightSectorFloor",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_ApplyGravitySignedRightFloorLandingAndFlatSpeedTransfer."
     },
@@ -3726,7 +3726,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 289,
       "old": "locret_12170",
-      "new": "SKSonicTerrain_ReturnAfterRightSectorFloorSkipRejectOrCleanup",
+      "new": "SKSonicLand_RightFloorReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_ReturnAfterRightSectorFloorSkipRejectOrCleanup."
     },
@@ -3734,7 +3734,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 321,
       "old": "loc_121C4",
-      "new": "SKSonicTerrain_SaveUnrollYOffsetAndInvertForOppositeSurfaceHalfPlane",
+      "new": "SKSonicLand_AdjustUnrollOffsetForSurface",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_SaveUnrollYOffsetAndInvertForOppositeSurfaceHalfPlane."
     },
@@ -3742,7 +3742,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 328,
       "old": "loc_121D2",
-      "new": "SKSonicTerrain_PopSurfaceAndGravityAdjustedUnrollOffsetIntoPlayerY",
+      "new": "SKSonicLand_ApplyUnrollYOffset",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_PopSurfaceAndGravityAdjustedUnrollOffsetIntoPlayerY."
     },
@@ -3750,7 +3750,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 332,
       "old": "loc_121D8",
-      "new": "SKSonicTerrain_ClearLandingMotionFlagsThenGateBubbleRebound",
+      "new": "SKSonicLand_ResetLandingAndCheckBubble",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_ClearLandingMotionFlagsThenGateBubbleRebound."
     },
@@ -3758,7 +3758,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 352,
       "old": "loc_1222A",
-      "new": "SKSonicTerrain_ClearCompletedDoubleJumpActionAfterOptionalBubbleBounce",
+      "new": "SKSonicLand_ClearDoubleJumpFlag",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_ClearCompletedDoubleJumpActionAfterOptionalBubbleBounce."
     },
@@ -3766,7 +3766,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 355,
       "old": "locret_12230",
-      "new": "SKSonicTerrain_ReturnAfterLandingResetAndOptionalImmediateRebound",
+      "new": "SKSonicLand_LandingResetReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_ReturnAfterLandingResetAndOptionalImmediateRebound."
     },
@@ -3774,7 +3774,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 368,
       "old": "loc_12246",
-      "new": "SKSonicTerrain_AddAngleNormalBubbleImpulseAndRestoreRollingGeometry",
+      "new": "SKSonicLand_ApplyBubbleNormalImpulse",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_AddAngleNormalBubbleImpulseAndRestoreRollingGeometry."
     },
@@ -3782,7 +3782,7 @@
       "source": "src/objects/players/sonic/sk/terrain_landing.s",
       "original_line": 395,
       "old": "loc_122AA",
-      "new": "SKSonicTerrain_ApplyBubbleRadiusOffsetAfterReverseGravitySignChoice",
+      "new": "SKSonicLand_ApplyBubbleRadiusOffset",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicTerrain_ApplyBubbleRadiusOffsetAfterReverseGravitySignChoice."
     },

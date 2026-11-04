@@ -909,9 +909,15 @@
       "commits": ["919681cc63905c8241d9163a94268e1f899cb4cd"]
     },
     {
-      "id": "current-shorten-05-player-common",
+      "id": "change-227dc5ddb069",
       "kind": "source_or_tooling",
       "summary": "Shorten 261 shared player state labels and keep their animation, resource, and motion contracts.",
+      "commits": ["227dc5ddb069fd100e23b7c439701ffeff6e643b"]
+    },
+    {
+      "id": "current-shorten-06a-sonic-motion",
+      "kind": "source_or_tooling",
+      "summary": "Shorten 279 Sonic movement state names with comments for the uncommon state and speed rules.",
       "commits": ["release-commit"]
     }
   ],

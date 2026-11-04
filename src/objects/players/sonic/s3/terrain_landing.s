@@ -11,10 +11,10 @@
 Sonic_DoLevelCollision:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   S3SonicTerrain_DispatchTerrainResponseByVelocityAngleQuadrant
+                beq.s   S3SonicLand_DispatchVelocitySector
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-S3SonicTerrain_DispatchTerrainResponseByVelocityAngleQuadrant:
+S3SonicLand_DispatchVelocitySector:
                 move.b  lrb_solid_bit(a0),d5
                 move.w  x_vel(a0),d1
                 move.w  y_vel(a0),d2
@@ -26,68 +26,70 @@ S3SonicTerrain_DispatchTerrainResponseByVelocityAngleQuadrant:
                 cmpi.b  #$80,d0
                 beq.w   Player_HitCeilingAndWalls
                 cmpi.b  #$C0,d0
-                beq.w   S3SonicTerrain_ResolveRightVelocitySectorWallBeforeCeiling
+                beq.w   S3SonicLand_CheckRightSectorWall
                 bsr.w   CheckLeftWallDist
                 tst.w   d1
-                bpl.s   S3SonicTerrain_CheckRightWallAfterDefaultSectorLeftCorrection
+                bpl.s   S3SonicLand_CheckDefaultRightWall
                 sub.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)                    ; stop Sonic since he hit a wall
 
-S3SonicTerrain_CheckRightWallAfterDefaultSectorLeftCorrection:
+S3SonicLand_CheckDefaultRightWall:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   S3SonicTerrain_GateDefaultFloorPenetrationBySignedByteSpeedDepth
+                bpl.s   S3SonicLand_TestDefaultFloorDepth
                 add.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)                    ; stop Sonic since he hit a wall
 
-S3SonicTerrain_GateDefaultFloorPenetrationBySignedByteSpeedDepth:
+; Add eight to the high Y speed byte and negate it before the signed penetration and sensor comparisons
+S3SonicLand_TestDefaultFloorDepth:
                 bsr.w   Sonic_CheckFloor
                 tst.w   d1
-                bpl.s   S3SonicTerrain_ReturnAfterDefaultSectorFloorRejectOrLanding
+                bpl.s   S3SonicLand_DefaultFloorReturn
                 move.b  y_vel(a0),d2
                 addq.b  #8,d2
                 neg.b   d2
                 cmp.b   d2,d1
-                bge.s   S3SonicTerrain_StoreLandingAngleAndClassifyDefaultFloorSlope
+                bge.s   S3SonicLand_StoreDefaultFloorAngle
                 cmp.b   d2,d0
-                blt.s   S3SonicTerrain_ReturnAfterDefaultSectorFloorRejectOrLanding
+                blt.s   S3SonicLand_DefaultFloorReturn
 
-S3SonicTerrain_StoreLandingAngleAndClassifyDefaultFloorSlope:
+S3SonicLand_StoreDefaultFloorAngle:
                 add.w   d1,y_pos(a0)
                 move.b  d3,angle(a0)
                 move.b  d3,d0
                 addi.b  #$20,d0
                 andi.b  #$40,d0
-                bne.s   S3SonicTerrain_StopHorizontalSpeedAndCapPositiveSteepLandingYVelocity
+                bne.s   S3SonicLand_ClampSteepLandingSpeed
                 move.b  d3,d0
                 addi.b  #$10,d0
                 andi.b  #$20,d0
-                beq.s   S3SonicTerrain_SetFlatLandingGroundSpeedBeforeTouchFloorCleanup
+                beq.s   S3SonicLand_LandOnFlatFloor
                 asr     y_vel(a0)
-                bra.s   S3SonicTerrain_RunLandingCleanupBeforeSamplingSignedSlopeGroundSpeed
+                bra.s   S3SonicLand_FinishSlopeLanding
 ; ---------------------------------------------------------------------------
 
-S3SonicTerrain_SetFlatLandingGroundSpeedBeforeTouchFloorCleanup:
+S3SonicLand_LandOnFlatFloor:
                 move.w  #0,y_vel(a0)
                 move.w  x_vel(a0),ground_vel(a0)
                 bsr.w   Player_TouchFloor_Check_Spindash
                 rts
 ; ---------------------------------------------------------------------------
 
-S3SonicTerrain_StopHorizontalSpeedAndCapPositiveSteepLandingYVelocity:
+S3SonicLand_ClampSteepLandingSpeed:
                 move.w  #0,x_vel(a0)                    ; stop Sonic since he hit a wall
                 cmpi.w  #$FC0,y_vel(a0)
-                ble.s   S3SonicTerrain_RunLandingCleanupBeforeSamplingSignedSlopeGroundSpeed
+                ble.s   S3SonicLand_FinishSlopeLanding
                 move.w  #$FC0,y_vel(a0)
 
-S3SonicTerrain_RunLandingCleanupBeforeSamplingSignedSlopeGroundSpeed:
+; Read Y velocity after landing cleanup, which can trigger a bubble rebound
+S3SonicLand_FinishSlopeLanding:
                 bsr.w   Player_TouchFloor_Check_Spindash
                 move.w  y_vel(a0),ground_vel(a0)
                 tst.b   d3
-                bpl.s   S3SonicTerrain_ReturnAfterDefaultSectorFloorRejectOrLanding
+                bpl.s   S3SonicLand_DefaultFloorReturn
                 neg.w   ground_vel(a0)
 
-S3SonicTerrain_ReturnAfterDefaultSectorFloorRejectOrLanding:
+S3SonicLand_DefaultFloorReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -102,127 +104,128 @@ Player_HitLeftWall:
 Player_HitCeiling:
                 bsr.w   Sonic_CheckCeiling
                 tst.w   d1
-                bpl.s   S3SonicTerrain_GateLeftSectorFloorProbeByWindOrNonnegativeYVelocity  ; branch if distance is positive (not inside ceiling)
+                bpl.s   S3SonicLand_CheckLeftFloorEligibility  ; branch if distance is positive (not inside ceiling)
                 neg.w   d1
                 cmpi.w  #$14,d1
-                bhs.s   S3SonicTerrain_ProbeOppositeRightWallForDeepLeftSectorCeilingPenetration
+                bhs.s   S3SonicLand_CheckRightWallAtDeepCeiling
                 add.w   d1,y_pos(a0)
                 tst.w   y_vel(a0)
-                bpl.s   S3SonicTerrain_ReturnAfterShallowLeftSectorCeilingCorrection
+                bpl.s   S3SonicLand_LeftCeilingReturn
                 move.w  #0,y_vel(a0)                    ; stop Sonic in y since he hit a ceiling
 
-S3SonicTerrain_ReturnAfterShallowLeftSectorCeilingCorrection:
+S3SonicLand_LeftCeilingReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3SonicTerrain_ProbeOppositeRightWallForDeepLeftSectorCeilingPenetration:
+; Ceiling penetration of at least $14 pixels routes the left sector to the opposite wall probe
+S3SonicLand_CheckRightWallAtDeepCeiling:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   S3SonicTerrain_ReturnAfterDeepLeftCeilingOppositeWallFallback
+                bpl.s   S3SonicLand_DeepCeilingWallReturn
                 add.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
 
-S3SonicTerrain_ReturnAfterDeepLeftCeilingOppositeWallFallback:
+S3SonicLand_DeepCeilingWallReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3SonicTerrain_GateLeftSectorFloorProbeByWindOrNonnegativeYVelocity:
+S3SonicLand_CheckLeftFloorEligibility:
                 tst.b   (WindTunnel_flag).w
-                bne.s   S3SonicTerrain_ProbeAndAdmitLeftSectorGravityRelativeFloor
+                bne.s   S3SonicLand_ProbeLeftFloor
                 tst.w   y_vel(a0)
-                bmi.s   S3SonicTerrain_ReturnAfterLeftSectorFloorSkipRejectOrCleanup
+                bmi.s   S3SonicLand_LeftFloorReturn
 
-S3SonicTerrain_ProbeAndAdmitLeftSectorGravityRelativeFloor:
+S3SonicLand_ProbeLeftFloor:
                 bsr.w   Sonic_CheckFloor
                 tst.w   d1
-                bpl.s   S3SonicTerrain_ReturnAfterLeftSectorFloorSkipRejectOrCleanup
+                bpl.s   S3SonicLand_LeftFloorReturn
                 add.w   d1,y_pos(a0)
                 move.b  d3,angle(a0)
                 move.w  #0,y_vel(a0)
                 move.w  x_vel(a0),ground_vel(a0)
                 bsr.w   Player_TouchFloor_Check_Spindash
 
-S3SonicTerrain_ReturnAfterLeftSectorFloorSkipRejectOrCleanup:
+S3SonicLand_LeftFloorReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 Player_HitCeilingAndWalls:
                 bsr.w   CheckLeftWallDist
                 tst.w   d1
-                bpl.s   S3SonicTerrain_CheckRightWallAfterCeilingSectorLeftCorrection
+                bpl.s   S3SonicLand_CheckCeilingSectorRightWall
                 sub.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)                    ; stop Sonic since he hit a wall
 
-S3SonicTerrain_CheckRightWallAfterCeilingSectorLeftCorrection:
+S3SonicLand_CheckCeilingSectorRightWall:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   S3SonicTerrain_CorrectCeilingPenetrationAndChooseStopOrSlopeAttachment
+                bpl.s   S3SonicLand_ProbeCeilingAndResolve
                 add.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)                    ; stop Sonic since he hit a wall
 
-S3SonicTerrain_CorrectCeilingPenetrationAndChooseStopOrSlopeAttachment:
+S3SonicLand_ProbeCeilingAndResolve:
                 bsr.w   Sonic_CheckCeiling
                 tst.w   d1
-                bpl.s   S3SonicTerrain_ReturnAfterCeilingSectorNoContactOrSlopeAttachment
+                bpl.s   S3SonicLand_CeilingSectorReturn
                 sub.w   d1,y_pos(a0)
                 move.b  d3,d0
                 addi.b  #$20,d0
                 andi.b  #$40,d0
-                bne.s   S3SonicTerrain_AttachToSteepCeilingUsingPostCleanupYGroundSpeed
+                bne.s   S3SonicLand_AttachToSteepCeiling
                 move.w  #0,y_vel(a0)                    ; stop Sonic in y since he hit a ceiling
                 rts
 ; ---------------------------------------------------------------------------
 
-S3SonicTerrain_AttachToSteepCeilingUsingPostCleanupYGroundSpeed:
+S3SonicLand_AttachToSteepCeiling:
                 move.b  d3,angle(a0)
                 bsr.w   Player_TouchFloor_Check_Spindash
                 move.w  y_vel(a0),ground_vel(a0)
                 tst.b   d3
-                bpl.s   S3SonicTerrain_ReturnAfterCeilingSectorNoContactOrSlopeAttachment
+                bpl.s   S3SonicLand_CeilingSectorReturn
                 neg.w   ground_vel(a0)
 
-S3SonicTerrain_ReturnAfterCeilingSectorNoContactOrSlopeAttachment:
+S3SonicLand_CeilingSectorReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3SonicTerrain_ResolveRightVelocitySectorWallBeforeCeiling:
+S3SonicLand_CheckRightSectorWall:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   S3SonicTerrain_CorrectRightSectorCeilingAndStopOnlyUpwardYVelocity
+                bpl.s   S3SonicLand_ResolveRightSectorCeiling
                 add.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
                 move.w  y_vel(a0),ground_vel(a0)
 
-S3SonicTerrain_CorrectRightSectorCeilingAndStopOnlyUpwardYVelocity:
+S3SonicLand_ResolveRightSectorCeiling:
                 bsr.w   Sonic_CheckCeiling
                 tst.w   d1
-                bpl.s   S3SonicTerrain_GateRightSectorFloorProbeByWindOrNonnegativeYVelocity
+                bpl.s   S3SonicLand_CheckRightFloorEligibility
                 sub.w   d1,y_pos(a0)
                 tst.w   y_vel(a0)
-                bpl.s   S3SonicTerrain_ReturnAfterRightSectorCeilingCorrection
+                bpl.s   S3SonicLand_RightCeilingReturn
                 move.w  #0,y_vel(a0)
 
-S3SonicTerrain_ReturnAfterRightSectorCeilingCorrection:
+S3SonicLand_RightCeilingReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3SonicTerrain_GateRightSectorFloorProbeByWindOrNonnegativeYVelocity:
+S3SonicLand_CheckRightFloorEligibility:
                 tst.b   (WindTunnel_flag).w
-                bne.s   S3SonicTerrain_ProbeAndAdmitRightSectorGravityRelativeFloor
+                bne.s   S3SonicLand_ProbeRightFloor
                 tst.w   y_vel(a0)
-                bmi.s   S3SonicTerrain_ReturnAfterRightSectorFloorSkipRejectOrCleanup
+                bmi.s   S3SonicLand_RightFloorReturn
 
-S3SonicTerrain_ProbeAndAdmitRightSectorGravityRelativeFloor:
+S3SonicLand_ProbeRightFloor:
                 bsr.w   Sonic_CheckFloor
                 tst.w   d1
-                bpl.s   S3SonicTerrain_ReturnAfterRightSectorFloorSkipRejectOrCleanup
+                bpl.s   S3SonicLand_RightFloorReturn
                 add.w   d1,y_pos(a0)
                 move.b  d3,angle(a0)
                 move.w  #0,y_vel(a0)
                 move.w  x_vel(a0),ground_vel(a0)
                 bsr.w   Player_TouchFloor_Check_Spindash
 
-S3SonicTerrain_ReturnAfterRightSectorFloorSkipRejectOrCleanup:
+S3SonicLand_RightFloorReturn:
                 rts
 ; End of function Sonic_DoLevelCollision
 
@@ -230,7 +233,7 @@ S3SonicTerrain_ReturnAfterRightSectorFloorSkipRejectOrCleanup:
 
 Player_TouchFloor_Check_Spindash:
                 tst.b   spin_dash_flag(a0)
-                bne.s   S3SonicTerrain_ClearLandingMotionFlagsThenGateBubbleRebound
+                bne.s   S3SonicLand_ResetLandingAndCheckBubble
                 move.b  #0,anim(a0)
 ; End of function Player_TouchFloor_Check_Spindash
 
@@ -244,14 +247,14 @@ Player_TouchFloor:
                 move.b  default_y_radius(a0),y_radius(a0)
                 move.b  default_x_radius(a0),x_radius(a0)
                 btst    #Status_Roll,status(a0)
-                beq.s   S3SonicTerrain_ClearLandingMotionFlagsThenGateBubbleRebound
+                beq.s   S3SonicLand_ResetLandingAndCheckBubble
                 bclr    #Status_Roll,status(a0)
                 move.b  #0,anim(a0)
                 sub.b   default_y_radius(a0),d0
                 ext.w   d0
                 add.w   d0,y_pos(a0)
 
-S3SonicTerrain_ClearLandingMotionFlagsThenGateBubbleRebound:
+S3SonicLand_ResetLandingAndCheckBubble:
                 bclr    #Status_InAir,status(a0)
                 bclr    #Status_Push,status(a0)
                 bclr    #Status_RollJump,status(a0)
@@ -262,15 +265,15 @@ S3SonicTerrain_ClearLandingMotionFlagsThenGateBubbleRebound:
                 move.b  #0,flips_remaining(a0)
                 move.b  #0,scroll_delay_counter(a0)
                 tst.b   double_jump_flag(a0)
-                beq.s   S3SonicTerrain_ReturnAfterLandingResetAndOptionalImmediateRebound
+                beq.s   S3SonicLand_LandingResetReturn
                 btst    #Status_BublShield,status_secondary(a0)
-                beq.s   S3SonicTerrain_ClearCompletedDoubleJumpActionAfterOptionalBubbleBounce
+                beq.s   S3SonicLand_ClearDoubleJumpFlag
                 bsr.s   BubbleShield_Bounce
 
-S3SonicTerrain_ClearCompletedDoubleJumpActionAfterOptionalBubbleBounce:
+S3SonicLand_ClearDoubleJumpFlag:
                 move.b  #0,double_jump_flag(a0)
 
-S3SonicTerrain_ReturnAfterLandingResetAndOptionalImmediateRebound:
+S3SonicLand_LandingResetReturn:
                 rts
 ; End of function Player_TouchFloor
 
@@ -280,10 +283,10 @@ BubbleShield_Bounce:
                 movem.l d1-d2,-(sp)
                 move.w  #$780,d2
                 btst    #Status_Underwater,status(a0)
-                beq.s   S3SonicTerrain_AddAngleNormalBubbleImpulseAndRestoreRollingGeometry
+                beq.s   S3SonicLand_ApplyBubbleNormalImpulse
                 move.w  #$400,d2
 
-S3SonicTerrain_AddAngleNormalBubbleImpulseAndRestoreRollingGeometry:
+S3SonicLand_ApplyBubbleNormalImpulse:
                 moveq   #0,d0
                 move.b  angle(a0),d0
                 subi.b  #$40,d0

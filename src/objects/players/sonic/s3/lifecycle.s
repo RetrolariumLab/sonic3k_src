@@ -17,16 +17,16 @@ Obj_Sonic:
                 beq.s   JmpTo_DebugMode                 ; If so, skip to debug mode routine
 ; By this point, we're assuming you're in frame cycling mode
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   S3SonicLifecycle_AdvanceDebugFrameCycleWithProfileLimit
+                beq.s   S3SonicMain_AdvanceDebugFrame
                 move.w  #0,(Debug_placement_mode).w     ; Leave debug mode
 
-S3SonicLifecycle_AdvanceDebugFrameCycleWithProfileLimit:
+S3SonicMain_AdvanceDebugFrame:
                 addq.b  #1,mapping_frame(a0)            ; Next frame
                 cmpi.b  #$D9,mapping_frame(a0)          ; Have we reached the end of Sonic's frames?
-                bcs.s   S3SonicLifecycle_LoadAndQueueCurrentDebugFrame
+                bcs.s   S3SonicMain_LoadAndDrawDebugFrame
                 move.b  #0,mapping_frame(a0)            ; If so, reset to Sonic's first frame
 
-S3SonicLifecycle_LoadAndQueueCurrentDebugFrame:
+S3SonicMain_LoadAndDrawDebugFrame:
                 bsr.w   Sonic_Load_PLC
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -98,32 +98,33 @@ Sonic_Init_Continued:
 
 Sonic_Control:                                          ; Routine 2
                 tst.w   (Debug_mode_flag).w             ; is debug cheat enabled?
-                beq.s   S3SonicLifecycle_CopyPhysicalControllerWordUnlessLogicalInputLocked  ; if not, branch
+                beq.s   S3SonicMain_CopyUnlockedInput   ; if not, branch
                 btst    #button_B,(Ctrl_1_pressed).w    ; is button B pressed?
-                beq.s   S3SonicLifecycle_CopyPhysicalControllerWordUnlessLogicalInputLocked  ; if not, branch
+                beq.s   S3SonicMain_CopyUnlockedInput   ; if not, branch
                 move.w  #1,(Debug_placement_mode).w     ; change Sonic into a ring/item
                 clr.b   (Ctrl_1_locked).w               ; unlock control
                 btst    #button_C,(Ctrl_1_held).w       ; was button C held before pressing B?
-                beq.s   S3SonicLifecycle_ReturnAfterEnteringDebugPlacementOrFrameCycle  ; if not, branch
+                beq.s   S3SonicMain_DebugReturn         ; if not, branch
                 move.w  #2,(Debug_placement_mode).w     ; enter animation cycle mode
 
-S3SonicLifecycle_ReturnAfterEnteringDebugPlacementOrFrameCycle:
+S3SonicMain_DebugReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3SonicLifecycle_CopyPhysicalControllerWordUnlessLogicalInputLocked:
+S3SonicMain_CopyUnlockedInput:
                 tst.b   (Ctrl_1_locked).w               ; are controls locked?
-                bne.s   S3SonicLifecycle_SkipOwnMovementAndResetDoubleJumpWhenExternallyControlled  ; if yes, branch
+                bne.s   S3SonicMain_CheckExternalMovement  ; if yes, branch
                 move.w  (Ctrl_1).w,(Ctrl_1_logical).w   ; copy new held buttons, to enable joypad control
 
-S3SonicLifecycle_SkipOwnMovementAndResetDoubleJumpWhenExternallyControlled:
+; External movement clears the double-jump flag and skips the normal movement dispatch
+S3SonicMain_CheckExternalMovement:
                 btst    #0,object_control(a0)           ; is Sonic interacting with another object that holds him in place or controls his movement somehow?
-                beq.s   S3SonicLifecycle_DispatchGroundAirRollJumpModeWhilePreservingSharedBaseRegisters  ; if yes, branch to skip Sonic's control
+                beq.s   S3SonicMain_DispatchMovementMode  ; if yes, branch to skip Sonic's control
                 move.b  #0,double_jump_flag(a0)         ; enable double jump
-                bra.s   S3SonicLifecycle_WrapPlayerYWordOnlyAtMinusOneHundredCameraMinimum
+                bra.s   S3SonicMain_WrapPlayerYIfEnabled
 ; ---------------------------------------------------------------------------
 
-S3SonicLifecycle_DispatchGroundAirRollJumpModeWhilePreservingSharedBaseRegisters:
+S3SonicMain_DispatchMovementMode:
                 movem.l a4-a6,-(sp)
                 moveq   #0,d0
                 move.b  status(a0),d0
@@ -132,13 +133,14 @@ S3SonicLifecycle_DispatchGroundAirRollJumpModeWhilePreservingSharedBaseRegisters
                 jsr     Sonic_Modes(pc,d1.w)            ; run Sonic's movement control code
                 movem.l (sp)+,a4-a6
 
-S3SonicLifecycle_WrapPlayerYWordOnlyAtMinusOneHundredCameraMinimum:
+; Mask integer Y only when the camera minimum equals -$100
+S3SonicMain_WrapPlayerYIfEnabled:
                 cmpi.w  #-$100,(Camera_min_Y_pos).w     ; is vertical wrapping enabled?
-                bne.s   S3SonicLifecycle_QueueDisplayThenUpdatePowersHistoryWaterAndWindTunnelAnimation
+                bne.s   S3SonicMain_UpdateFrameServices
                 move.w  (Screen_Y_wrap_value).w,d0
                 and.w   d0,y_pos(a0)                    ; perform wrapping of Sonic's y position
 
-S3SonicLifecycle_QueueDisplayThenUpdatePowersHistoryWaterAndWindTunnelAnimation:
+S3SonicMain_UpdateFrameServices:
                 bsr.s   Sonic_Display
                 bsr.w   Sonic_Super
                 bsr.w   Sonic_RecordPos
@@ -146,24 +148,26 @@ S3SonicLifecycle_QueueDisplayThenUpdatePowersHistoryWaterAndWindTunnelAnimation:
                 move.b  (Primary_Angle).w,next_tilt(a0)
                 move.b  (Secondary_Angle).w,tilt(a0)
                 tst.b   (WindTunnel_flag).w
-                beq.s   S3SonicLifecycle_GateAnimationPatternLoadAndSkOuterGravityFlipByControlBitOne
+                beq.s   S3SonicMain_CheckAnimateAndLoadPatterns
                 tst.b   anim(a0)
-                bne.s   S3SonicLifecycle_GateAnimationPatternLoadAndSkOuterGravityFlipByControlBitOne
+                bne.s   S3SonicMain_CheckAnimateAndLoadPatterns
                 move.b  prev_anim(a0),anim(a0)
 
-S3SonicLifecycle_GateAnimationPatternLoadAndSkOuterGravityFlipByControlBitOne:
+; Object control bit 1 suppresses the animation and pattern update
+S3SonicMain_CheckAnimateAndLoadPatterns:
                 btst    #1,object_control(a0)
-                bne.s   S3SonicLifecycle_RunTouchResponseUnlessControlBitsFiveOrSevenSet
+                bne.s   S3SonicMain_CheckTouchResponse
                 bsr.w   Animate_Sonic
                 bsr.w   Sonic_Load_PLC
 
-S3SonicLifecycle_RunTouchResponseUnlessControlBitsFiveOrSevenSet:
+; Suppress touch processing when either object control bit 5 or 7 is set
+S3SonicMain_CheckTouchResponse:
                 move.b  object_control(a0),d0
                 andi.b  #$A0,d0
-                bne.s   S3SonicLifecycle_ReturnAfterNormalServicesAndOptionalTouchResponse
+                bne.s   S3SonicMain_FrameReturn
                 jsr     (TouchResponse).l
 
-S3SonicLifecycle_ReturnAfterNormalServicesAndOptionalTouchResponse:
+S3SonicMain_FrameReturn:
                 rts
 ; ---------------------------------------------------------------------------
 ; secondary states under state Sonic_Control
@@ -177,12 +181,12 @@ Sonic_Modes:
 
 Sonic_Display:
                 move.b  invulnerability_timer(a0),d0
-                beq.s   S3SonicLifecycle_QueueVisibleBlinkPhaseBeforeTimedPowerExpiryChecks
+                beq.s   S3SonicMain_DrawVisibleBlinkPhase
                 subq.b  #1,invulnerability_timer(a0)
                 lsr.b   #3,d0
                 bcc.s   Sonic_ChkInvin
 
-S3SonicLifecycle_QueueVisibleBlinkPhaseBeforeTimedPowerExpiryChecks:
+S3SonicMain_DrawVisibleBlinkPhase:
                 jsr     (Draw_Sprite).l
 
 Sonic_ChkInvin:                                         ; Checks if invincibility has expired and disables it if it has
@@ -221,12 +225,12 @@ Sonic_ChkShoes:                                         ; Checks if Speed Shoes 
                 move.w  #$C,Acceleration-Max_speed(a4)  ; set Acceleration
                 move.w  #$80,Deceleration-Max_speed(a4)  ; set Deceleration
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   S3SonicLifecycle_ClearExpiredSpeedShoesAndRestoreMusicTempo  ; if Super, set different values
+                beq.s   S3SonicMain_ExpireSpeedShoes    ; if Super, set different values
                 move.w  #$A00,Max_speed-Max_speed(a4)   ; set Max_speed
                 move.w  #$30,Acceleration-Max_speed(a4)  ; set Acceleration
                 move.w  #$100,Deceleration-Max_speed(a4)  ; set Deceleration
 
-S3SonicLifecycle_ClearExpiredSpeedShoesAndRestoreMusicTempo:
+S3SonicMain_ExpireSpeedShoes:
                 bclr    #Status_SpeedShoes,status_secondary(a0)
                 moveq   #0,d0                           ; Slow down tempo
                 jmp     (Change_Music_Tempo).l
@@ -260,7 +264,7 @@ Sonic_RecordPos:
                 tst.w   (Competition_mode).w            ; are we in Competition mode?
                 bne.s   Sonic_RecordPosCompetition      ; if so, branch
                 cmpa.w  #Player_1,a0                    ; is Sonic the sidekick?
-                bne.s   S3SonicLifecycle_ReturnAfterPrimaryHistoryRecordOrNonprimarySkip  ; if so, branch
+                bne.s   S3SonicMain_RecordPositionReturn  ; if so, branch
                 move.w  (Pos_table_index).w,d0
                 lea     (Pos_table).w,a1
                 lea     (a1,d0.w),a1
@@ -272,7 +276,7 @@ Sonic_RecordPos:
                 move.w  (Ctrl_1_logical).w,(a1)+
                 move.w  status(a0),(a1)+
 
-S3SonicLifecycle_ReturnAfterPrimaryHistoryRecordOrNonprimarySkip:
+S3SonicMain_RecordPositionReturn:
                 rts
 ; ---------------------------------------------------------------------------
 

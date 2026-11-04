@@ -12,7 +12,7 @@ Sonic_Water:
                 tst.b   (Water_flag).w                  ; does level have water?
                 bne.s   Sonic_InWater                   ; if yes, branch
 
-SKSonicEnvironment_ReturnFromWaterTransitionCheck:
+SKSonicEnv_WaterTransitionReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -22,7 +22,7 @@ Sonic_InWater:
                 bge.s   Sonic_OutWater                  ; if yes, branch
 
                 bset    #Status_Underwater,status(a0)   ; set underwater flag
-                bne.s   SKSonicEnvironment_ReturnFromWaterTransitionCheck  ; if already underwater, branch
+                bne.s   SKSonicEnv_WaterTransitionReturn  ; if already underwater, branch
 
                 addq.b  #1,(Water_entered_counter).w
                 movea.l a0,a1
@@ -34,18 +34,18 @@ Sonic_InWater:
                 move.w  #6,Acceleration-Max_speed(a4)
                 move.w  #$40,Deceleration-Max_speed(a4)
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   SKSonicEnvironment_DampenWaterEntryVelocityUnlessObjectControlled  ; if Super/Hyper, set different values
+                beq.s   SKSonicEnv_DampenWaterEntry     ; if Super/Hyper, set different values
                 move.w  #$500,Max_speed-Max_speed(a4)
                 move.w  #$18,Acceleration-Max_speed(a4)
                 move.w  #$80,Deceleration-Max_speed(a4)
 
-SKSonicEnvironment_DampenWaterEntryVelocityUnlessObjectControlled:
+SKSonicEnv_DampenWaterEntry:
                 tst.b   object_control(a0)
-                bne.s   SKSonicEnvironment_ReturnFromWaterTransitionCheck
+                bne.s   SKSonicEnv_WaterTransitionReturn
                 asr     x_vel(a0)
                 asr     y_vel(a0)                       ; memory operands can only be shifted one bit at a time
                 asr     y_vel(a0)
-                beq.s   SKSonicEnvironment_ReturnFromWaterTransitionCheck
+                beq.s   SKSonicEnv_WaterTransitionReturn
                 move.w  #1<<8,anim(a6)                  ; splash animation, write 1 to anim and clear prev_anim
                 move.w  #sfx_Splash,d0
                 jmp     (Play_SFX).l
@@ -53,7 +53,7 @@ SKSonicEnvironment_DampenWaterEntryVelocityUnlessObjectControlled:
 
 Sonic_OutWater:
                 bclr    #Status_Underwater,status(a0)   ; unset underwater flag
-                beq.w   SKSonicEnvironment_ReturnFromWaterTransitionCheck  ; if already above water, branch
+                beq.w   SKSonicEnv_WaterTransitionReturn  ; if already above water, branch
                 addq.b  #1,(Water_entered_counter).w
 
                 movea.l a0,a1
@@ -62,32 +62,32 @@ Sonic_OutWater:
                 move.w  #$C,Acceleration-Max_speed(a4)
                 move.w  #$80,Deceleration-Max_speed(a4)
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   SKSonicEnvironment_DoubleWaterExitYVelocityWhenEligible  ; if Super/Hyper, set different values
+                beq.s   SKSonicEnv_TryDoubleExitYSpeed  ; if Super/Hyper, set different values
                 move.w  #$A00,Max_speed-Max_speed(a4)
                 move.w  #$30,Acceleration-Max_speed(a4)
                 move.w  #$100,Deceleration-Max_speed(a4)
 
-SKSonicEnvironment_DoubleWaterExitYVelocityWhenEligible:
+SKSonicEnv_TryDoubleExitYSpeed:
                 cmpi.b  #4,routine(a0)                  ; is Sonic falling back from getting hurt?
-                beq.s   SKSonicEnvironment_GateWaterExitSplashAndClampNegativeYVelocity  ; if yes, branch
+                beq.s   SKSonicEnv_CheckExitSplashAndClampY  ; if yes, branch
                 tst.b   object_control(a0)
-                bne.s   SKSonicEnvironment_GateWaterExitSplashAndClampNegativeYVelocity
+                bne.s   SKSonicEnv_CheckExitSplashAndClampY
                 move.w  y_vel(a0),d0
                 cmpi.w  #-$400,d0
-                blt.s   SKSonicEnvironment_GateWaterExitSplashAndClampNegativeYVelocity
+                blt.s   SKSonicEnv_CheckExitSplashAndClampY
                 asl     y_vel(a0)
 
-SKSonicEnvironment_GateWaterExitSplashAndClampNegativeYVelocity:
+SKSonicEnv_CheckExitSplashAndClampY:
                 cmpi.b  #$1C,anim(a0)                   ; is Sonic in his 'blank' animation?
-                beq.w   SKSonicEnvironment_ReturnFromWaterTransitionCheck  ; if so, branch
+                beq.w   SKSonicEnv_WaterTransitionReturn  ; if so, branch
                 tst.w   y_vel(a0)
-                beq.w   SKSonicEnvironment_ReturnFromWaterTransitionCheck
+                beq.w   SKSonicEnv_WaterTransitionReturn
                 move.w  #1<<8,anim(a6)                  ; splash animation, write 1 to anim and clear prev_anim
                 cmpi.w  #-$1000,y_vel(a0)
-                bgt.s   SKSonicEnvironment_PlayWaterExitSplashSound
+                bgt.s   SKSonicEnv_PlayExitSplash
                 move.w  #-$1000,y_vel(a0)               ; limit upward y velocity exiting the water
 
-SKSonicEnvironment_PlayWaterExitSplashSound:
+SKSonicEnv_PlayExitSplash:
                 move.w  #sfx_Splash,d0
                 jmp     (Play_SFX).l
 ; End of function Sonic_Water
@@ -108,26 +108,26 @@ Sonic_MdNormal:
                 bsr.w   Call_Player_AnglePos
                 bsr.w   Player_SlopeRepel
                 tst.b   (Background_collision_flag).w
-                beq.s   SKSonicEnvironment_ReturnAfterNormalGroundBackgroundChecks
+                beq.s   SKSonicEnv_GroundModeReturn
                 bsr.w   CheckPlayerBodyFloorClearance
                 tst.w   d1
                 bmi.w   Kill_Character
                 movem.l a4-a6,-(sp)
                 bsr.w   CheckLeftWallDist
                 tst.w   d1
-                bpl.s   SKSonicEnvironment_CheckNormalGroundRightWallAfterLeftCorrection
+                bpl.s   SKSonicEnv_CheckGroundRightWall
                 sub.w   d1,x_pos(a0)
 
-SKSonicEnvironment_CheckNormalGroundRightWallAfterLeftCorrection:
+SKSonicEnv_CheckGroundRightWall:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   SKSonicEnvironment_RestoreNormalGroundRegistersAfterBothWallChecks
+                bpl.s   SKSonicEnv_RestoreGroundWallRegisters
                 add.w   d1,x_pos(a0)
 
-SKSonicEnvironment_RestoreNormalGroundRegistersAfterBothWallChecks:
+SKSonicEnv_RestoreGroundWallRegisters:
                 movem.l (sp)+,a4-a6
 
-SKSonicEnvironment_ReturnAfterNormalGroundBackgroundChecks:
+SKSonicEnv_GroundModeReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -159,10 +159,10 @@ Sonic_MdAir:
                 bsr.w   Player_LevelBound
                 jsr     (MoveSprite_TestGravity).l
                 btst    #Status_Underwater,status(a0)   ; is Sonic underwater?
-                beq.s   SKSonicEnvironment_FinishAirModeWithAngleAndTerrainCollision  ; if not, branch
+                beq.s   SKSonicEnv_AirAngleAndCollision  ; if not, branch
                 subi.w  #$28,y_vel(a0)                  ; reduce gravity by $28 ($38-$28=$10)
 
-SKSonicEnvironment_FinishAirModeWithAngleAndTerrainCollision:
+SKSonicEnv_AirAngleAndCollision:
                 bsr.w   Player_JumpAngle
                 bsr.w   SonicKnux_DoLevelCollision
                 rts
@@ -172,10 +172,10 @@ SKSonicEnvironment_FinishAirModeWithAngleAndTerrainCollision:
 
 Sonic_MdRoll:
                 tst.b   spin_dash_flag(a0)
-                bne.s   SKSonicEnvironment_ContinueGroundRollAfterOptionalJump
+                bne.s   SKSonicEnv_RunGroundRoll
                 bsr.w   Sonic_Jump
 
-SKSonicEnvironment_ContinueGroundRollAfterOptionalJump:
+SKSonicEnv_RunGroundRoll:
                 bsr.w   Player_RollRepel
                 bsr.w   Sonic_RollSpeed
                 bsr.w   Player_LevelBound
@@ -183,26 +183,26 @@ SKSonicEnvironment_ContinueGroundRollAfterOptionalJump:
                 bsr.w   Call_Player_AnglePos
                 bsr.w   Player_SlopeRepel
                 tst.b   (Background_collision_flag).w
-                beq.s   SKSonicEnvironment_ReturnAfterGroundRollBackgroundChecks
+                beq.s   SKSonicEnv_GroundRollReturn
                 bsr.w   CheckPlayerBodyFloorClearance
                 tst.w   d1
                 bmi.w   Kill_Character
                 movem.l a4-a6,-(sp)
                 bsr.w   CheckLeftWallDist
                 tst.w   d1
-                bpl.s   SKSonicEnvironment_CheckGroundRollRightWallAfterLeftCorrection
+                bpl.s   SKSonicEnv_CheckGroundRollRightWall
                 sub.w   d1,x_pos(a0)
 
-SKSonicEnvironment_CheckGroundRollRightWallAfterLeftCorrection:
+SKSonicEnv_CheckGroundRollRightWall:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   SKSonicEnvironment_RestoreGroundRollRegistersAfterBothWallChecks
+                bpl.s   SKSonicEnv_RestoreRollWallRegisters
                 add.w   d1,x_pos(a0)
 
-SKSonicEnvironment_RestoreGroundRollRegistersAfterBothWallChecks:
+SKSonicEnv_RestoreRollWallRegisters:
                 movem.l (sp)+,a4-a6
 
-SKSonicEnvironment_ReturnAfterGroundRollBackgroundChecks:
+SKSonicEnv_GroundRollReturn:
                 rts
 ; ---------------------------------------------------------------------------
 ; Start of subroutine Sonic_MdJump
@@ -216,10 +216,10 @@ Sonic_MdJump:
                 bsr.w   Player_LevelBound
                 jsr     (MoveSprite_TestGravity).l
                 btst    #Status_Underwater,status(a0)   ; is Sonic underwater?
-                beq.s   SKSonicEnvironment_FinishBallAirModeWithAngleAndTerrainCollision  ; if not, branch
+                beq.s   SKSonicEnv_BallAirAngleAndCollision  ; if not, branch
                 subi.w  #$28,y_vel(a0)                  ; reduce gravity by $28 ($38-$28=$10)
 
-SKSonicEnvironment_FinishBallAirModeWithAngleAndTerrainCollision:
+SKSonicEnv_BallAirAngleAndCollision:
                 bsr.w   Player_JumpAngle
                 bsr.w   SonicKnux_DoLevelCollision
                 rts

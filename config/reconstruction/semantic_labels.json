@@ -497,7 +497,7 @@
           "profiles": ["s3-eu", "s3-jp", "s3-us"]
         }
       ],
-      "destination_sha256": "c36f8987d41b2b4d6e9cbe1f490201a2f33a313f5129facac77c1f0d8117ac66"
+      "destination_sha256": "e608d751ed273216401f0db9337be384f076de58befc736d613a6f564661b7dd"
     },
     {
       "id": "07-player-tails",

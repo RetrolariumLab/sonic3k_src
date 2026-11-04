@@ -11,10 +11,10 @@
 SonicKnux_DoLevelCollision:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   SKSonicTerrain_DispatchTerrainResponseByVelocityAngleQuadrant
+                beq.s   SKSonicLand_DispatchVelocitySector
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-SKSonicTerrain_DispatchTerrainResponseByVelocityAngleQuadrant:
+SKSonicLand_DispatchVelocitySector:
                 move.b  lrb_solid_bit(a0),d5
                 move.w  x_vel(a0),d1
                 move.w  y_vel(a0),d2
@@ -26,73 +26,75 @@ SKSonicTerrain_DispatchTerrainResponseByVelocityAngleQuadrant:
                 cmpi.b  #$80,d0
                 beq.w   Player_HitCeilingAndWalls
                 cmpi.b  #$C0,d0
-                beq.w   SKSonicTerrain_ResolveRightVelocitySectorWallBeforeCeiling
+                beq.w   SKSonicLand_CheckRightSectorWall
                 bsr.w   CheckLeftWallDist
                 tst.w   d1
-                bpl.s   SKSonicTerrain_CheckRightWallAfterDefaultSectorLeftCorrection
+                bpl.s   SKSonicLand_CheckDefaultRightWall
                 sub.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)                    ; stop Sonic since he hit a wall
 
-SKSonicTerrain_CheckRightWallAfterDefaultSectorLeftCorrection:
+SKSonicLand_CheckDefaultRightWall:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   SKSonicTerrain_GateDefaultFloorPenetrationBySignedByteSpeedDepth
+                bpl.s   SKSonicLand_TestDefaultFloorDepth
                 add.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)                    ; stop Sonic since he hit a wall
 
-SKSonicTerrain_GateDefaultFloorPenetrationBySignedByteSpeedDepth:
+; Add eight to the high Y speed byte and negate it before the signed penetration and sensor comparisons
+SKSonicLand_TestDefaultFloorDepth:
                 bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
                 tst.w   d1
-                bpl.s   SKSonicTerrain_ReturnAfterDefaultSectorFloorRejectOrLanding
+                bpl.s   SKSonicLand_DefaultFloorReturn
                 move.b  y_vel(a0),d2
                 addq.b  #8,d2
                 neg.b   d2
                 cmp.b   d2,d1
-                bge.s   SKSonicTerrain_StoreLandingAngleAndClassifyDefaultFloorSlope
+                bge.s   SKSonicLand_StoreDefaultFloorAngle
                 cmp.b   d2,d0
-                blt.s   SKSonicTerrain_ReturnAfterDefaultSectorFloorRejectOrLanding
+                blt.s   SKSonicLand_DefaultFloorReturn
 
-SKSonicTerrain_StoreLandingAngleAndClassifyDefaultFloorSlope:
+SKSonicLand_StoreDefaultFloorAngle:
                 move.b  d3,angle(a0)
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKSonicTerrain_ApplyGravitySignedDefaultFloorCorrectionAndClassifySlope
+                beq.s   SKSonicLand_CorrectDefaultFloorAndSlope
                 neg.w   d1
 
-SKSonicTerrain_ApplyGravitySignedDefaultFloorCorrectionAndClassifySlope:
+SKSonicLand_CorrectDefaultFloorAndSlope:
                 add.w   d1,y_pos(a0)
                 move.b  d3,d0
                 addi.b  #$20,d0
                 andi.b  #$40,d0
-                bne.s   SKSonicTerrain_StopHorizontalSpeedAndCapPositiveSteepLandingYVelocity
+                bne.s   SKSonicLand_ClampSteepLandingSpeed
                 move.b  d3,d0
                 addi.b  #$10,d0
                 andi.b  #$20,d0
-                beq.s   SKSonicTerrain_SetFlatLandingGroundSpeedBeforeTouchFloorCleanup
+                beq.s   SKSonicLand_LandOnFlatFloor
                 asr     y_vel(a0)
-                bra.s   SKSonicTerrain_RunLandingCleanupBeforeSamplingSignedSlopeGroundSpeed
+                bra.s   SKSonicLand_FinishSlopeLanding
 ; ---------------------------------------------------------------------------
 
-SKSonicTerrain_SetFlatLandingGroundSpeedBeforeTouchFloorCleanup:
+SKSonicLand_LandOnFlatFloor:
                 move.w  #0,y_vel(a0)
                 move.w  x_vel(a0),ground_vel(a0)
                 bsr.w   Player_TouchFloor_Check_Spindash
                 rts
 ; ---------------------------------------------------------------------------
 
-SKSonicTerrain_StopHorizontalSpeedAndCapPositiveSteepLandingYVelocity:
+SKSonicLand_ClampSteepLandingSpeed:
                 move.w  #0,x_vel(a0)                    ; stop Sonic since he hit a wall
                 cmpi.w  #$FC0,y_vel(a0)
-                ble.s   SKSonicTerrain_RunLandingCleanupBeforeSamplingSignedSlopeGroundSpeed
+                ble.s   SKSonicLand_FinishSlopeLanding
                 move.w  #$FC0,y_vel(a0)
 
-SKSonicTerrain_RunLandingCleanupBeforeSamplingSignedSlopeGroundSpeed:
+; Read Y velocity after landing cleanup, which can trigger a bubble rebound
+SKSonicLand_FinishSlopeLanding:
                 bsr.w   Player_TouchFloor_Check_Spindash
                 move.w  y_vel(a0),ground_vel(a0)
                 tst.b   d3
-                bpl.s   SKSonicTerrain_ReturnAfterDefaultSectorFloorRejectOrLanding
+                bpl.s   SKSonicLand_DefaultFloorReturn
                 neg.w   ground_vel(a0)
 
-SKSonicTerrain_ReturnAfterDefaultSectorFloorRejectOrLanding:
+SKSonicLand_DefaultFloorReturn:
                 rts
 ; End of function SonicKnux_DoLevelCollision
 
@@ -141,159 +143,160 @@ Player_HitLeftWall:
 Player_HitCeiling:
                 bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
                 tst.w   d1
-                bpl.s   SKSonicTerrain_GateLeftSectorFloorProbeByWindOrNonnegativeYVelocity  ; branch if distance is positive (not inside ceiling)
+                bpl.s   SKSonicLand_CheckLeftFloorEligibility  ; branch if distance is positive (not inside ceiling)
                 neg.w   d1
                 cmpi.w  #$14,d1
-                bhs.s   SKSonicTerrain_ProbeOppositeRightWallForDeepLeftSectorCeilingPenetration
+                bhs.s   SKSonicLand_CheckRightWallAtDeepCeiling
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKSonicTerrain_ApplyGravitySignedShallowLeftCeilingCorrection
+                beq.s   SKSonicLand_CorrectLeftCeilingY
                 neg.w   d1
 
-SKSonicTerrain_ApplyGravitySignedShallowLeftCeilingCorrection:
+SKSonicLand_CorrectLeftCeilingY:
                 add.w   d1,y_pos(a0)
                 tst.w   y_vel(a0)
-                bpl.s   SKSonicTerrain_ReturnAfterShallowLeftSectorCeilingCorrection
+                bpl.s   SKSonicLand_LeftCeilingReturn
                 move.w  #0,y_vel(a0)                    ; stop Sonic in y since he hit a ceiling
 
-SKSonicTerrain_ReturnAfterShallowLeftSectorCeilingCorrection:
+SKSonicLand_LeftCeilingReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKSonicTerrain_ProbeOppositeRightWallForDeepLeftSectorCeilingPenetration:
+; Ceiling penetration of at least $14 pixels routes the left sector to the opposite wall probe
+SKSonicLand_CheckRightWallAtDeepCeiling:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   SKSonicTerrain_ReturnAfterDeepLeftCeilingOppositeWallFallback
+                bpl.s   SKSonicLand_DeepCeilingWallReturn
                 add.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
 
-SKSonicTerrain_ReturnAfterDeepLeftCeilingOppositeWallFallback:
+SKSonicLand_DeepCeilingWallReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKSonicTerrain_GateLeftSectorFloorProbeByWindOrNonnegativeYVelocity:
+SKSonicLand_CheckLeftFloorEligibility:
                 tst.b   (WindTunnel_flag).w
-                bne.s   SKSonicTerrain_ProbeAndAdmitLeftSectorGravityRelativeFloor
+                bne.s   SKSonicLand_ProbeLeftFloor
                 tst.w   y_vel(a0)
-                bmi.s   SKSonicTerrain_ReturnAfterLeftSectorFloorSkipRejectOrCleanup
+                bmi.s   SKSonicLand_LeftFloorReturn
 
-SKSonicTerrain_ProbeAndAdmitLeftSectorGravityRelativeFloor:
+SKSonicLand_ProbeLeftFloor:
                 bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
                 tst.w   d1
-                bpl.s   SKSonicTerrain_ReturnAfterLeftSectorFloorSkipRejectOrCleanup
+                bpl.s   SKSonicLand_LeftFloorReturn
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKSonicTerrain_ApplyGravitySignedLeftFloorLandingAndFlatSpeedTransfer
+                beq.s   SKSonicLand_LandOnLeftSectorFloor
                 neg.w   d1
 
-SKSonicTerrain_ApplyGravitySignedLeftFloorLandingAndFlatSpeedTransfer:
+SKSonicLand_LandOnLeftSectorFloor:
                 add.w   d1,y_pos(a0)
                 move.b  d3,angle(a0)
                 move.w  #0,y_vel(a0)
                 move.w  x_vel(a0),ground_vel(a0)
                 bsr.w   Player_TouchFloor_Check_Spindash
 
-SKSonicTerrain_ReturnAfterLeftSectorFloorSkipRejectOrCleanup:
+SKSonicLand_LeftFloorReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 Player_HitCeilingAndWalls:
                 bsr.w   CheckLeftWallDist
                 tst.w   d1
-                bpl.s   SKSonicTerrain_CheckRightWallAfterCeilingSectorLeftCorrection
+                bpl.s   SKSonicLand_CheckCeilingSectorRightWall
                 sub.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)                    ; stop Sonic since he hit a wall
 
-SKSonicTerrain_CheckRightWallAfterCeilingSectorLeftCorrection:
+SKSonicLand_CheckCeilingSectorRightWall:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   SKSonicTerrain_CorrectCeilingPenetrationAndChooseStopOrSlopeAttachment
+                bpl.s   SKSonicLand_ProbeCeilingAndResolve
                 add.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)                    ; stop Sonic since he hit a wall
 
-SKSonicTerrain_CorrectCeilingPenetrationAndChooseStopOrSlopeAttachment:
+SKSonicLand_ProbeCeilingAndResolve:
                 bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
                 tst.w   d1
-                bpl.s   SKSonicTerrain_ReturnAfterCeilingSectorNoContactOrSlopeAttachment
+                bpl.s   SKSonicLand_CeilingSectorReturn
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKSonicTerrain_SubtractGravitySignedCeilingDistanceBeforeSlopeDecision
+                beq.s   SKSonicLand_CorrectCeilingAndCheckSlope
                 neg.w   d1
 
-SKSonicTerrain_SubtractGravitySignedCeilingDistanceBeforeSlopeDecision:
+SKSonicLand_CorrectCeilingAndCheckSlope:
                 sub.w   d1,y_pos(a0)
                 move.b  d3,d0
                 addi.b  #$20,d0
                 andi.b  #$40,d0
-                bne.s   SKSonicTerrain_AttachToSteepCeilingUsingPostCleanupYGroundSpeed
+                bne.s   SKSonicLand_AttachToSteepCeiling
                 move.w  #0,y_vel(a0)                    ; stop Sonic in y since he hit a ceiling
                 rts
 ; ---------------------------------------------------------------------------
 
-SKSonicTerrain_AttachToSteepCeilingUsingPostCleanupYGroundSpeed:
+SKSonicLand_AttachToSteepCeiling:
                 move.b  d3,angle(a0)
                 bsr.w   Player_TouchFloor_Check_Spindash
                 move.w  y_vel(a0),ground_vel(a0)
                 tst.b   d3
-                bpl.s   SKSonicTerrain_ReturnAfterCeilingSectorNoContactOrSlopeAttachment
+                bpl.s   SKSonicLand_CeilingSectorReturn
                 neg.w   ground_vel(a0)
 
-SKSonicTerrain_ReturnAfterCeilingSectorNoContactOrSlopeAttachment:
+SKSonicLand_CeilingSectorReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKSonicTerrain_ResolveRightVelocitySectorWallBeforeCeiling:
+SKSonicLand_CheckRightSectorWall:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   SKSonicTerrain_CorrectRightSectorCeilingAndStopOnlyUpwardYVelocity
+                bpl.s   SKSonicLand_ResolveRightSectorCeiling
                 add.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
                 move.w  y_vel(a0),ground_vel(a0)
 
-SKSonicTerrain_CorrectRightSectorCeilingAndStopOnlyUpwardYVelocity:
+SKSonicLand_ResolveRightSectorCeiling:
                 bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
                 tst.w   d1
-                bpl.s   SKSonicTerrain_GateRightSectorFloorProbeByWindOrNonnegativeYVelocity
+                bpl.s   SKSonicLand_CheckRightFloorEligibility
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKSonicTerrain_SubtractGravitySignedRightSectorCeilingDistance
+                beq.s   SKSonicLand_CorrectRightCeilingY
                 neg.w   d1
 
-SKSonicTerrain_SubtractGravitySignedRightSectorCeilingDistance:
+SKSonicLand_CorrectRightCeilingY:
                 sub.w   d1,y_pos(a0)
                 tst.w   y_vel(a0)
-                bpl.s   SKSonicTerrain_ReturnAfterRightSectorCeilingCorrection
+                bpl.s   SKSonicLand_RightCeilingReturn
                 move.w  #0,y_vel(a0)
 
-SKSonicTerrain_ReturnAfterRightSectorCeilingCorrection:
+SKSonicLand_RightCeilingReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKSonicTerrain_GateRightSectorFloorProbeByWindOrNonnegativeYVelocity:
+SKSonicLand_CheckRightFloorEligibility:
                 tst.b   (WindTunnel_flag).w
-                bne.s   SKSonicTerrain_ProbeAndAdmitRightSectorGravityRelativeFloor
+                bne.s   SKSonicLand_ProbeRightFloor
                 tst.w   y_vel(a0)
-                bmi.s   SKSonicTerrain_ReturnAfterRightSectorFloorSkipRejectOrCleanup
+                bmi.s   SKSonicLand_RightFloorReturn
 
-SKSonicTerrain_ProbeAndAdmitRightSectorGravityRelativeFloor:
+SKSonicLand_ProbeRightFloor:
                 bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
                 tst.w   d1
-                bpl.s   SKSonicTerrain_ReturnAfterRightSectorFloorSkipRejectOrCleanup
+                bpl.s   SKSonicLand_RightFloorReturn
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKSonicTerrain_ApplyGravitySignedRightFloorLandingAndFlatSpeedTransfer
+                beq.s   SKSonicLand_LandOnRightSectorFloor
                 neg.w   d1
 
-SKSonicTerrain_ApplyGravitySignedRightFloorLandingAndFlatSpeedTransfer:
+SKSonicLand_LandOnRightSectorFloor:
                 add.w   d1,y_pos(a0)
                 move.b  d3,angle(a0)
                 move.w  #0,y_vel(a0)
                 move.w  x_vel(a0),ground_vel(a0)
                 bsr.w   Player_TouchFloor_Check_Spindash
 
-SKSonicTerrain_ReturnAfterRightSectorFloorSkipRejectOrCleanup:
+SKSonicLand_RightFloorReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
 Player_TouchFloor_Check_Spindash:
                 tst.b   spin_dash_flag(a0)
-                bne.s   SKSonicTerrain_ClearLandingMotionFlagsThenGateBubbleRebound
+                bne.s   SKSonicLand_ResetLandingAndCheckBubble
                 move.b  #0,anim(a0)
 ; End of function Player_TouchFloor_Check_Spindash
 
@@ -309,27 +312,27 @@ Player_TouchFloor:
                 move.b  default_y_radius(a0),y_radius(a0)
                 move.b  default_x_radius(a0),x_radius(a0)
                 btst    #Status_Roll,status(a0)
-                beq.s   SKSonicTerrain_ClearLandingMotionFlagsThenGateBubbleRebound
+                beq.s   SKSonicLand_ResetLandingAndCheckBubble
                 bclr    #Status_Roll,status(a0)
                 move.b  #0,anim(a0)
                 sub.b   default_y_radius(a0),d0
                 ext.w   d0
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKSonicTerrain_SaveUnrollYOffsetAndInvertForOppositeSurfaceHalfPlane
+                beq.s   SKSonicLand_AdjustUnrollOffsetForSurface
                 neg.w   d0
 
-SKSonicTerrain_SaveUnrollYOffsetAndInvertForOppositeSurfaceHalfPlane:
+SKSonicLand_AdjustUnrollOffsetForSurface:
                 move.w  d0,-(sp)
                 move.b  angle(a0),d0
                 addi.b  #$40,d0
-                bpl.s   SKSonicTerrain_PopSurfaceAndGravityAdjustedUnrollOffsetIntoPlayerY
+                bpl.s   SKSonicLand_ApplyUnrollYOffset
                 neg.w   (sp)
 
-SKSonicTerrain_PopSurfaceAndGravityAdjustedUnrollOffsetIntoPlayerY:
+SKSonicLand_ApplyUnrollYOffset:
                 move.w  (sp)+,d0
                 add.w   d0,y_pos(a0)
 
-SKSonicTerrain_ClearLandingMotionFlagsThenGateBubbleRebound:
+SKSonicLand_ResetLandingAndCheckBubble:
                 bclr    #Status_InAir,status(a0)
                 bclr    #Status_Push,status(a0)
                 bclr    #Status_RollJump,status(a0)
@@ -340,19 +343,19 @@ SKSonicTerrain_ClearLandingMotionFlagsThenGateBubbleRebound:
                 move.b  #0,flips_remaining(a0)
                 move.b  #0,scroll_delay_counter(a0)
                 tst.b   double_jump_flag(a0)
-                beq.s   SKSonicTerrain_ReturnAfterLandingResetAndOptionalImmediateRebound
+                beq.s   SKSonicLand_LandingResetReturn
                 tst.b   character_id(a0)
-                bne.s   SKSonicTerrain_ClearCompletedDoubleJumpActionAfterOptionalBubbleBounce
+                bne.s   SKSonicLand_ClearDoubleJumpFlag
                 tst.b   (Super_Sonic_Knux_flag).w
-                bne.s   SKSonicTerrain_ClearCompletedDoubleJumpActionAfterOptionalBubbleBounce
+                bne.s   SKSonicLand_ClearDoubleJumpFlag
                 btst    #Status_BublShield,status_secondary(a0)
-                beq.s   SKSonicTerrain_ClearCompletedDoubleJumpActionAfterOptionalBubbleBounce
+                beq.s   SKSonicLand_ClearDoubleJumpFlag
                 bsr.s   BubbleShield_Bounce
 
-SKSonicTerrain_ClearCompletedDoubleJumpActionAfterOptionalBubbleBounce:
+SKSonicLand_ClearDoubleJumpFlag:
                 move.b  #0,double_jump_flag(a0)
 
-SKSonicTerrain_ReturnAfterLandingResetAndOptionalImmediateRebound:
+SKSonicLand_LandingResetReturn:
                 rts
 ; End of function Player_TouchFloor
 
@@ -362,10 +365,10 @@ BubbleShield_Bounce:
                 movem.l d1-d2,-(sp)
                 move.w  #$780,d2
                 btst    #Status_Underwater,status(a0)
-                beq.s   SKSonicTerrain_AddAngleNormalBubbleImpulseAndRestoreRollingGeometry
+                beq.s   SKSonicLand_ApplyBubbleNormalImpulse
                 move.w  #$400,d2
 
-SKSonicTerrain_AddAngleNormalBubbleImpulseAndRestoreRollingGeometry:
+SKSonicLand_ApplyBubbleNormalImpulse:
                 moveq   #0,d0
                 move.b  angle(a0),d0
                 subi.b  #$40,d0
@@ -389,10 +392,10 @@ SKSonicTerrain_AddAngleNormalBubbleImpulseAndRestoreRollingGeometry:
                 sub.b   default_y_radius(a0),d0
                 ext.w   d0
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKSonicTerrain_ApplyBubbleRadiusOffsetAfterReverseGravitySignChoice
+                beq.s   SKSonicLand_ApplyBubbleRadiusOffset
                 neg.w   d0
 
-SKSonicTerrain_ApplyBubbleRadiusOffsetAfterReverseGravitySignChoice:
+SKSonicLand_ApplyBubbleRadiusOffset:
                 sub.w   d0,y_pos(a0)
                 move.b  #2,(Shield+anim).w
                 move.w  #sfx_BubbleAttack,d0

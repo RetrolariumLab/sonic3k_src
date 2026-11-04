@@ -28009,7 +28009,7 @@
       "responsibility": "Sonic ground acceleration, balance, braking and horizontal movement helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 454,
+      "physical_lines": 459,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "s3.s",
@@ -28049,7 +28049,7 @@
       "responsibility": "Player level bounds, rolling initiation, jump launch, jump height and shield or hyper jump actions with private direction data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 299,
+      "physical_lines": 300,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "s3.s",
@@ -28089,7 +28089,7 @@
       "responsibility": "Sonic object dispatch, initialization, active control, timed powers and player position history.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 331,
+      "physical_lines": 335,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "s3.s",
@@ -28129,7 +28129,7 @@
       "responsibility": "Sonic rolling speed control, airborne direction changes and jump peak deceleration.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 225,
+      "physical_lines": 226,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "s3.s",
@@ -28174,7 +28174,7 @@
       "responsibility": "Sonic or Knuckles terrain collision, landing attachment and bubble shield bounce response.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 313,
+      "physical_lines": 316,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "s3.s",
@@ -28309,7 +28309,7 @@
       "responsibility": "Sonic ground acceleration, balance, braking and horizontal movement helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 485,
+      "physical_lines": 491,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "sonic3k.s",
@@ -28339,7 +28339,7 @@
       "responsibility": "Player level bounds, rolling initiation, jump launch, jump height and shield or hyper jump actions with private direction data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 404,
+      "physical_lines": 405,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "sonic3k.s",
@@ -28369,7 +28369,7 @@
       "responsibility": "Sonic object dispatch, initialization, active control, timed powers and player position history.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 342,
+      "physical_lines": 346,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "sonic3k.s",
@@ -28399,7 +28399,7 @@
       "responsibility": "Sonic rolling speed control, airborne direction changes and jump peak deceleration.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 240,
+      "physical_lines": 242,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "sonic3k.s",
@@ -28434,7 +28434,7 @@
       "responsibility": "Sonic or Knuckles terrain collision, landing attachment and bubble shield bounce response.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 400,
+      "physical_lines": 403,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "sonic3k.s",
