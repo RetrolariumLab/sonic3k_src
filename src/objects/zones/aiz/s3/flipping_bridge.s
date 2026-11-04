@@ -11,12 +11,12 @@ Obj_AIZFlippingBridge:
                 move.b  #4,render_flags(a0)
                 move.w  #$200,priority(a0)
                 move.w  y_pos(a0),$30(a0)
-                move.l  #word_2A126,$32(a0)
+                move.l  #S3FlipBridge_SteepSlopeHeights,$32(a0)
                 move.b  subtype(a0),d0
-                bpl.s   loc_29FC2
-                move.l  #word_2A1A6,$32(a0)
+                bpl.s   S3FlipBridge_PickFrameTiming
+                move.l  #S3FlipBridge_ShallowSlopeHeights,$32(a0)
 
-loc_29FC2:
+S3FlipBridge_PickFrameTiming:
                 move.b  d0,d1
                 andi.w  #$F,d0
                 addi.w  #$10,d0
@@ -26,15 +26,15 @@ loc_29FC2:
                 move.b  d1,$25(a0)
                 moveq   #1,d1
                 btst    #0,status(a0)
-                beq.s   loc_29FEA
+                beq.s   S3FlipBridge_TryCreateDisplay
                 moveq   #-1,d1
                 subq.b  #1,$37(a0)
 
-loc_29FEA:
+S3FlipBridge_TryCreateDisplay:
                 move.b  d1,$36(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_2A084
-                move.l  #loc_2A0AC,(a1)
+                bne.w   S3FlipBridge_StartActiveRoot
+                move.l  #S3FlipBridge_CullOrDrawDisplay,(a1)
                 move.l  #Map_AIZFlippingBridge,mappings(a1)
                 move.w  #make_art_tile(ArtTile_AIZMisc2,2,0),art_tile(a1)
                 move.b  #4,render_flags(a1)
@@ -51,17 +51,17 @@ loc_29FEA:
                 addi.w  #$20,d2
                 move.w  #8,d4
                 tst.b   subtype(a0)
-                bpl.s   loc_2A05E
+                bpl.s   S3FlipBridge_BeginSectionRecords
                 subi.w  #$10,d2
                 move.w  #4,d4
 
-loc_2A05E:
+S3FlipBridge_BeginSectionRecords:
                 moveq   #0,d1
                 lea     sub2_x_pos(a1),a2
                 move.w  mainspr_childsprites(a1),d6
                 subq.w  #1,d6
 
-loc_2A06A:
+S3FlipBridge_WriteSectionRecord:
                 move.w  d3,(a2)+
                 move.w  d2,(a2)+
                 move.w  d1,(a2)+
@@ -69,13 +69,13 @@ loc_2A06A:
                 andi.w  #$F,d1
                 addi.w  #$20,d3
                 sub.w   d4,d2
-                dbf     d6,loc_2A06A
+                dbf     d6,S3FlipBridge_WriteSectionRecord
                 move.w  a1,$3C(a0)
 
-loc_2A084:
-                move.l  #loc_2A08A,(a0)
+S3FlipBridge_StartActiveRoot:
+                move.l  #S3FlipBridge_UpdateRoot,(a0)
 
-loc_2A08A:
+S3FlipBridge_UpdateRoot:
                 movea.w $3C(a0),a3
                 bsr.w   AdvanceAizFlippingBridgeFrames
                 moveq   #0,d1
@@ -86,67 +86,67 @@ loc_2A08A:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
-loc_2A0AC:
+S3FlipBridge_CullOrDrawDisplay:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
 AdvanceAizFlippingBridgeFrames:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_2A0FC
+                bpl.s   S3FlipBridge_ForwardAnimReturn
                 move.b  $25(a0),anim_frame_timer(a0)
                 lea     sub2_mapframe(a3),a2
                 move.w  mainspr_childsprites(a3),d6
                 subq.w  #1,d6
                 move.b  $37(a0),d2
                 move.b  $36(a0),d1
-                bmi.s   loc_2A0FE
+                bmi.s   S3FlipBridge_ReverseSectionFrame
 
-loc_2A0D2:
+S3FlipBridge_AdvanceSectionFrame:
                 add.b   d1,(a2)
                 cmp.b   (a2),d2
-                bhi.s   loc_2A0DC
+                bhi.s   S3FlipBridge_NextForwardSection
                 move.b  #0,(a2)
 
-loc_2A0DC:
+S3FlipBridge_NextForwardSection:
                 addq.w  #next_subspr,a2
-                dbf     d6,loc_2A0D2
+                dbf     d6,S3FlipBridge_AdvanceSectionFrame
                 tst.b   render_flags(a3)
-                bpl.s   locret_2A0FC
+                bpl.s   S3FlipBridge_ForwardAnimReturn
                 move.b  (Level_frame_counter+1).w,d0
                 addq.b  #3,d0
                 andi.b  #7,d0
-                bne.s   locret_2A0FC
+                bne.s   S3FlipBridge_ForwardAnimReturn
                 moveq   #signextendB(sfx_GlideLand),d0
                 jsr     (Play_SFX).l
 
-locret_2A0FC:
+S3FlipBridge_ForwardAnimReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2A0FE:
+S3FlipBridge_ReverseSectionFrame:
                 add.b   d1,(a2)
-                bcs.s   loc_2A104
+                bcs.s   S3FlipBridge_NextReverseSection
                 move.b  d2,(a2)
 
-loc_2A104:
+S3FlipBridge_NextReverseSection:
                 addq.w  #next_subspr,a2
-                dbf     d6,loc_2A0FE
+                dbf     d6,S3FlipBridge_ReverseSectionFrame
                 tst.b   render_flags(a3)
-                bpl.s   locret_2A124
+                bpl.s   S3FlipBridge_ReverseAnimReturn
                 move.b  (Level_frame_counter+1).w,d0
                 addq.b  #3,d0
                 andi.b  #7,d0
-                bne.s   locret_2A124
+                bne.s   S3FlipBridge_ReverseAnimReturn
                 moveq   #signextendB(sfx_GlideLand),d0
                 jsr     (Play_SFX).l
 
-locret_2A124:
+S3FlipBridge_ReverseAnimReturn:
                 rts
 ; End of function AdvanceAizFlippingBridgeFrames
 
 ; ---------------------------------------------------------------------------
-word_2A126:
+S3FlipBridge_SteepSlopeHeights:
                 dc.b    -$1C,-$1C,-$1C,-$1C
                 dc.b    -$1C,-$1C,-$1C,-$1C
                 dc.b    -$1C,-$1C,-$1C,-$1C
@@ -179,7 +179,7 @@ word_2A126:
                 dc.b    $1C, $1C, $1C, $1C
                 dc.b    $1C, $1C, $1C, $1C
                 dc.b    $1C, $1C, $1C, $1C
-word_2A1A6:
+S3FlipBridge_ShallowSlopeHeights:
                 dc.b    -$C, -$C, -$C, -$C
                 dc.b    -$C, -$C, -$C, -$C
                 dc.b    -$C, -$C, -$C, -$C
@@ -230,19 +230,19 @@ CollidePlayersWithAizFlippingBridge:
 
 CollidePlayerWithAizFlippingBridge:
                 btst    d6,status(a0)
-                beq.s   loc_2A292
+                beq.s   S3FlipBridge_CheckLandingSpan
                 move.w  d1,d2
                 add.w   d2,d2
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_2A25E
+                bne.s   S3FlipBridge_ReleaseRider
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_2A25E
+                bmi.s   S3FlipBridge_ReleaseRider
                 cmp.w   d2,d0
-                blo.s   loc_2A272
+                blo.s   S3FlipBridge_CheckRiderSection
 
-loc_2A25E:
+S3FlipBridge_ReleaseRider:
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    d6,status(a0)
@@ -250,7 +250,7 @@ loc_2A25E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2A272:
+S3FlipBridge_CheckRiderSection:
                 lsr.w   #5,d0
                 add.w   d0,d0
                 move.w  d0,d3
@@ -258,29 +258,29 @@ loc_2A272:
                 add.w   d3,d0
                 move.b  sub2_mapframe(a3,d0.w),d0
                 cmpi.b  #5,d0
-                blo.s   loc_2A25E
+                blo.s   S3FlipBridge_ReleaseRider
                 move.w  d4,d2
                 jsr     (SolidObjSloped2).l
                 moveq   #0,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2A292:
+S3FlipBridge_CheckLandingSpan:
                 tst.w   y_vel(a1)
-                bmi.s   locret_2A30E
+                bmi.s   S3FlipBridge_LandingReturn
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   locret_2A30E
+                bmi.s   S3FlipBridge_LandingReturn
                 add.w   d1,d1
                 cmp.w   d1,d0
-                bhs.s   locret_2A30E
+                bhs.s   S3FlipBridge_LandingReturn
                 btst    #0,render_flags(a0)
-                beq.s   loc_2A2B6
+                beq.s   S3FlipBridge_TryLandOnSlope
                 not.w   d0
                 add.w   d1,d0
 
-loc_2A2B6:
+S3FlipBridge_TryLandOnSlope:
                 move.w  d0,d4
                 lsr.w   #1,d0
                 move.b  (a2,d0.w),d3
@@ -293,13 +293,13 @@ loc_2A2B6:
                 add.w   d2,d1
                 addq.w  #4,d1
                 sub.w   d1,d0
-                bhi.s   locret_2A30E
+                bhi.s   S3FlipBridge_LandingReturn
                 cmpi.w  #-$10,d0
-                blo.s   locret_2A30E
+                blo.s   S3FlipBridge_LandingReturn
                 tst.b   object_control(a1)
-                bne.s   locret_2A30E
+                bne.s   S3FlipBridge_LandingReturn
                 cmpi.b  #6,routine(a1)
-                bhs.s   locret_2A30E
+                bhs.s   S3FlipBridge_LandingReturn
                 lsr.w   #5,d4
                 add.w   d4,d4
                 move.w  d4,d1
@@ -307,14 +307,14 @@ loc_2A2B6:
                 add.w   d1,d4
                 move.b  sub2_mapframe(a3,d4.w),d4
                 cmpi.b  #5,d4
-                blo.s   locret_2A30E
+                blo.s   S3FlipBridge_LandingReturn
                 add.w   d0,d2
                 addq.w  #3,d2
                 move.w  d2,y_pos(a1)
                 jmp     (RideObject_SetRide).l
 ; ---------------------------------------------------------------------------
 
-locret_2A30E:
+S3FlipBridge_LandingReturn:
                 rts
 ; End of function CollidePlayerWithAizFlippingBridge
 

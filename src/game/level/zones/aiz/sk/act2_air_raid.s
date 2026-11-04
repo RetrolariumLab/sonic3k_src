@@ -11,50 +11,50 @@ Obj_AIZBattleship:
                 move.w  #$3FBC,d1
                 moveq   #2-1,d2
 
-loc_50364:
+SKAIZAirRaid_TryCreateShipPropellers:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_5037E
+                bne.s   SKAIZAirRaid_SetUpShipPaletteCopy
                 move.l  #Obj_BattleshipPropeller,(a1)   ; Create two propellers, one at the front and one in the back
                 move.w  d1,$2E(a1)
                 move.w  #$3DCC,d1
-                dbf     d2,loc_50364
+                dbf     d2,SKAIZAirRaid_TryCreateShipPropellers
 
-loc_5037E:
+SKAIZAirRaid_SetUpShipPaletteCopy:
                 lea     (Normal_palette_line_2).w,a1
                 lea     (Pal_AIZBattleship).l,a5
                 moveq   #bytesToLcnt($20),d0
 
-loc_5038A:
+SKAIZAirRaid_CopyShipPalette:
                 move.l  (a5)+,(a1)+
-                dbf     d0,loc_5038A
+                dbf     d0,SKAIZAirRaid_CopyShipPalette
 
 Obj_AIZBattleshipMain:
                 subi.l  #$8800,(_unkEE98).w
                 move.w  (_unkEE98).w,d0
                 cmpi.w  #$3CDC,d0
-                bpl.s   loc_503BC
+                bpl.s   SKAIZAirRaid_PickShipYMotion
                 move.l  #Obj_AIZ2BossSmall,(a0)
                 st      (Events_fg_4).w                 ; Set for the next screen event
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   locret_503BA
+                bne.s   SKAIZAirRaid_ShipExitReturn
                 move.l  #Obj_AIZ2MakeTree,(a1)
 
-locret_503BA:
+SKAIZAirRaid_ShipExitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_503BC:
+SKAIZAirRaid_PickShipYMotion:
                 move.w  d0,d1
                 subi.w  #$3D5C,d0
-                bpl.s   loc_503D2
+                bpl.s   SKAIZAirRaid_ApplyShipBob
                 neg.w   d0                              ; Move upwards as the battleship goes offscreen
                 asr.w   #1,d0
                 add.w   (_unkEEA2).w,d0
                 move.w  d0,(_unkEE9C).w
-                bra.s   loc_503EA
+                bra.s   SKAIZAirRaid_TryShipSound
 ; ---------------------------------------------------------------------------
 
-loc_503D2:
+SKAIZAirRaid_ApplyShipBob:
                 asr.w   #2,d1                           ; Continue bobbing up and down
                 andi.w  #$F,d1
                 lea     (AIZBattleShip_BobbingMotion).l,a1
@@ -62,27 +62,27 @@ loc_503D2:
                 add.w   (_unkEEA2).w,d1
                 move.w  d1,(_unkEE9C).w                 ; Get the bobbing motion delta, apply it to the second camera Y
 
-loc_503EA:
+SKAIZAirRaid_TryShipSound:
                 move.w  (Level_frame_counter).w,d0
                 subq.w  #1,d0
                 andi.w  #$F,d0
-                bne.s   loc_503FE
+                bne.s   SKAIZAirRaid_TickBombScriptAndTrySpawn
                 moveq   #signextendB(sfx_LargeShip),d0  ; Replay the battleship flying sound every 16th frame
                 jsr     (Play_SFX).l
 
-loc_503FE:
+SKAIZAirRaid_TickBombScriptAndTrySpawn:
                 subq.w  #1,$32(a0)                      ; Wait for delay to finish
-                bcc.s   locret_50424
+                bcc.s   SKAIZAirRaid_BombScriptReturn
                 movea.l $2E(a0),a2
                 move.w  (a2)+,$32(a0)                   ; Get the first word of the bomb script as the new delay
-                bmi.s   locret_50424
+                bmi.s   SKAIZAirRaid_BombScriptReturn
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   locret_50424
+                bne.s   SKAIZAirRaid_BombScriptReturn
                 move.l  #Obj_AIZShipBomb,(a1)           ; Create a new bomb
                 move.w  (a2)+,$2E(a1)                   ; Put the X position into $2E so it can be translated
                 move.l  a2,$2E(a0)                      ; Update the script position
 
-locret_50424:
+SKAIZAirRaid_BombScriptReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -98,11 +98,11 @@ Obj_BattleshipPropeller:
 
 Obj_BattleshipPropellerMain:
                 cmpi.w  #$C,(Events_routine_fg).w
-                bne.s   loc_50466
+                bne.s   SKAIZAirRaid_AnimateAndDrawPropeller
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_50466:
+SKAIZAirRaid_AnimateAndDrawPropeller:
                 lea     (Ani_AIZShipPropeller).l,a1
                 jsr     (Animate_Sprite).l
                 jsr     Translate_Camera2ObjPosition(pc)
@@ -137,19 +137,19 @@ AIZShipBomb_Index:
 AIZShipBomb_ReadyDrop:
                 addq.w  #2,$30(a0)
                 cmpi.w  #$A80,$30(a0)                   ; Put bomb into position before delay
-                blo.s   loc_504EE
+                blo.s   SKAIZAirRaid_DrawAttachedBomb
                 addq.b  #4,routine(a0)
-                bra.s   loc_504EE
+                bra.s   SKAIZAirRaid_DrawAttachedBomb
 ; ---------------------------------------------------------------------------
 
 AIZShipBomb_Delay:
                 subq.w  #1,$32(a0)
-                bne.s   loc_504EE
+                bne.s   SKAIZAirRaid_DrawAttachedBomb
                 addq.b  #4,routine(a0)
                 moveq   #signextendB(sfx_MissileThrow),d0
                 jsr     (Play_SFX).l                    ; Play the drop sound after the delay
 
-loc_504EE:
+SKAIZAirRaid_DrawAttachedBomb:
                 jsr     Translate_Camera2ObjPosition(pc)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -164,16 +164,16 @@ AIZShipBomb_Drop:
                 jsr     (Draw_Sprite).l
                 jsr     (ObjCheckFloorDist).l
                 cmpi.w  #-8,d1
-                bgt.s   locret_50578
+                bgt.s   SKAIZAirRaid_BombDropReturn
                 move.w  #$10,(Screen_shake_flag).w      ; If touching the floor, set up a timed screen shake
                 moveq   #signextendB(sfx_MissileExplode),d0
                 jsr     (Play_SFX).l                    ; Play the bomb explosion sound
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_50572
+                bne.s   SKAIZAirRaid_ScheduleBombDelete
                 lea     (AIZBombExplodeDat).l,a2
                 moveq   #8-1,d1
 
-loc_50542:
+SKAIZAirRaid_InitBombExplosionPiece:
                 move.l  #Obj_AIZBombExplosion,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
@@ -184,12 +184,12 @@ loc_50542:
                 move.w  (a2)+,anim(a1)
                 move.w  (a2)+,$2E(a1)
                 jsr     (CreateNewSprite4).l
-                dbne    d1,loc_50542
+                dbne    d1,SKAIZAirRaid_InitBombExplosionPiece
 
-loc_50572:
+SKAIZAirRaid_ScheduleBombDelete:
                 move.l  #Delete_Current_Sprite,(a0)     ; Delete the bomb sprite
 
-locret_50578:
+SKAIZAirRaid_BombDropReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -216,73 +216,73 @@ Obj_AIZBombExplosion:
                 move.w  (Level_repeat_offset).w,d0
                 sub.w   d0,x_pos(a0)
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_505B4
+                bmi.s   SKAIZAirRaid_StartBombExplosion
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_505B4:
+SKAIZAirRaid_StartBombExplosion:
                 move.l  #Obj_AIZBombExplosionAnim,(a0)
                 move.b  #4,render_flags(a0)
                 move.b  #$20,width_pixels(a0)
                 move.w  #make_art_tile(ArtTile_AIZ2Bombership,0,0),art_tile(a0)
                 move.l  #Map_AIZ2BombExplode,mappings(a0)
                 move.b  #$8B,collision_flags(a0)
-                bra.s   loc_505E4
+                bra.s   SKAIZAirRaid_AnimateBombExplosion
 ; ---------------------------------------------------------------------------
 
 Obj_AIZBombExplosionAnim:
                 move.w  (Level_repeat_offset).w,d0
                 sub.w   d0,x_pos(a0)
 
-loc_505E4:
+SKAIZAirRaid_AnimateBombExplosion:
                 lea     (Ani_AIZ2BombExplode).l,a1
                 jsr     (Animate_SpriteIrregularDelay).l
                 tst.b   routine(a0)
-                beq.s   loc_505FC
+                beq.s   SKAIZAirRaid_TryQueueExplosionTouch
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_505FC:
+SKAIZAirRaid_TryQueueExplosionTouch:
                 moveq   #4,d0
                 add.b   anim(a0),d0
                 cmp.b   mapping_frame(a0),d0
-                bls.s   loc_5060E
+                bls.s   SKAIZAirRaid_DrawExplosion
                 jsr     (Add_SpriteToCollisionResponseList).l
 
-loc_5060E:
+SKAIZAirRaid_DrawExplosion:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
 Obj_AIZ2MakeTree:
                 cmpi.w  #$44D0,(Camera_X_pos).w
-                bhs.s   loc_5061E
+                bhs.s   SKAIZAirRaid_StartTreeSpawnScript
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5061E:
-                move.l  #loc_50632,(a0)
+SKAIZAirRaid_StartTreeSpawnScript:
+                move.l  #SKAIZAirRaid_ReadTreeSpawnThreshold,(a0)
                 move.w  (Events_fg_1).w,$2E(a0)
                 move.l  #AIZMakeTreeScript,$30(a0)
 
-loc_50632:
+SKAIZAirRaid_ReadTreeSpawnThreshold:
                 movea.l $30(a0),a2
                 tst.w   (a2)
-                bpl.s   loc_50640
+                bpl.s   SKAIZAirRaid_TrySpawnTreeAtDistance
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_50640:
+SKAIZAirRaid_TrySpawnTreeAtDistance:
                 move.w  (Events_fg_1).w,d0
                 sub.w   $2E(a0),d0
                 cmp.w   (a2)+,d0
-                blo.s   locret_50662
+                blo.s   SKAIZAirRaid_TreeSpawnReturn
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   locret_50662
+                bne.s   SKAIZAirRaid_TreeSpawnReturn
                 move.l  #Obj_AIZ2BGTree,(a1)
                 move.w  (a2)+,8(a1)
                 move.l  a2,$30(a0)
 
-locret_50662:
+SKAIZAirRaid_TreeSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -296,11 +296,12 @@ Obj_AIZ2BGTree:
 
 Obj_AIZ2BGTreeMove:
                 cmpi.w  #$4880,(Camera_X_pos).w
-                blo.s   loc_50698
+                blo.s   SKAIZAirRaid_PositionBackgroundTree
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_50698:
+; Subtract one quarter of the signed event displacement to get the tree step
+SKAIZAirRaid_PositionBackgroundTree:
                 move.w  (Events_fg_1).w,d0
                 sub.w   $30(a0),d0
                 move.w  d0,d1
@@ -310,11 +311,11 @@ loc_50698:
                 sub.w   d1,d0
                 move.w  d0,x_pos(a0)
                 cmpi.w  #$1C0,d0
-                bhs.s   locret_506BC
+                bhs.s   SKAIZAirRaid_BackgroundTreeReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_506BC:
+SKAIZAirRaid_BackgroundTreeReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -331,20 +332,20 @@ Obj_AIZ2BossSmall:
                 lea     (Pal_AIZBossSmall).l,a5
                 moveq   #bytesToLcnt($1C),d0
 
-loc_506FA:
+SKAIZAirRaid_CopySmallBossPalette:
                 move.l  (a5)+,(a1)+
-                dbf     d0,loc_506FA
+                dbf     d0,SKAIZAirRaid_CopySmallBossPalette
 
 Obj_AIZ2BossSmallMain:
                 tst.b   $2E(a0)
-                bne.s   loc_50712
+                bne.s   SKAIZAirRaid_CheckSmallBossExit
                 cmpi.w  #$4670,(Camera_X_pos).w
-                blo.s   locret_5077C
+                blo.s   SKAIZAirRaid_SmallBossReturn
                 st      $2E(a0)
 
-loc_50712:
+SKAIZAirRaid_CheckSmallBossExit:
                 cmpi.w  #$240,x_pos(a0)
-                blo.s   loc_50732
+                blo.s   SKAIZAirRaid_StepSmallBossX
                 clr.b   (Scroll_lock).w
                 clr.w   (Special_events_routine).w
                 clr.w   (Level_repeat_offset).w         ; Stop repeating scrolling section
@@ -352,33 +353,33 @@ loc_50712:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_50732:
+SKAIZAirRaid_StepSmallBossX:
                 move.l  x_pos(a0),d0
                 move.l  x_vel(a0),d1                    ; Move Robotnik
                 add.l   d1,d0
                 move.l  d0,x_pos(a0)
                 tst.b   $2F(a0)
-                bne.s   loc_50758
+                bne.s   SKAIZAirRaid_AccelerateSmallBoss
                 subi.l  #$E80,d1                        ; Phase 1: Slow down until moving slightly to the left
                 cmpi.l  #-$10000,d1
                 sle     $2F(a0)
-                bra.s   loc_5075E
+                bra.s   SKAIZAirRaid_DrawSmallBossAndTrySiren
 ; ---------------------------------------------------------------------------
 
-loc_50758:
+SKAIZAirRaid_AccelerateSmallBoss:
                 addi.l  #$E80,d1                        ; Phase 2: Speed up till moving off screen
 
-loc_5075E:
+SKAIZAirRaid_DrawSmallBossAndTrySiren:
                 move.l  d1,x_vel(a0)
                 jsr     (Draw_Sprite).l
                 move.w  (Level_frame_counter).w,d0
                 subq.w  #1,d0
                 andi.w  #$F,d0
-                bne.s   locret_5077C
+                bne.s   SKAIZAirRaid_SmallBossReturn
                 moveq   #signextendB(sfx_RobotnikSiren),d0  ; Every sixteenth frame, play alarm sound
                 jsr     (Play_SFX).l
 
-locret_5077C:
+SKAIZAirRaid_SmallBossReturn:
                 rts
 ; ---------------------------------------------------------------------------
 AIZ2_SOZ1_LRZ3_FGDeformDelta:

@@ -5,7 +5,7 @@
 
 Obj_AIZGiantRideVine:
                 movea.l a0,a1
-                move.l  #loc_2082C,(a1)
+                move.l  #S3GiantVine_CullOrDrawAnchor,(a1)
                 bsr.w   InitializeAizGiantVineSprite
                 move.b  #$21,mapping_frame(a1)
                 move.w  x_pos(a0),d2
@@ -13,26 +13,26 @@ Obj_AIZGiantRideVine:
                 move.b  subtype(a0),d1
                 andi.w  #$F,d1
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_20802
+                bne.w   S3GiantVine_RunAnchorAfterBuild
                 move.w  #-$1B0,$44(a1)
                 move.w  #$800,$38(a1)
                 move.w  a1,$3E(a0)
-                move.l  #loc_20874,(a1)
+                move.l  #S3GiantVine_TryGlobalLeadAngle,(a1)
                 move.w  a0,$3C(a1)
                 move.b  subtype(a0),d0
                 andi.b  #$F0,d0
                 move.b  d0,$42(a1)
-                bra.s   loc_207D4
+                bra.s   S3GiantVine_InitLinkOrHandle
 ; ---------------------------------------------------------------------------
 
-loc_207BC:
+S3GiantVine_TryAllocateNextLink:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_20802
-                move.l  #loc_20908,(a1)
+                bne.w   S3GiantVine_RunAnchorAfterBuild
+                move.l  #S3GiantVine_UpdateLinkFromParent,(a1)
                 move.w  a2,$3C(a1)
                 move.w  a1,$3E(a2)
 
-loc_207D4:
+S3GiantVine_InitLinkOrHandle:
                 movea.l a1,a2
                 bsr.s   InitializeAizGiantVineSprite
                 move.w  d2,x_pos(a1)
@@ -40,13 +40,13 @@ loc_207D4:
                 addi.w  #$10,d3
                 addq.w  #1,$36(a0)
                 move.w  $36(a0),$36(a1)
-                dbf     d1,loc_207BC
-                move.l  #loc_20968,(a1)
+                dbf     d1,S3GiantVine_TryAllocateNextLink
+                move.l  #S3GiantVine_PlaceHandleAndCacheX,(a1)
                 move.b  #$20,mapping_frame(a1)
                 move.w  a1,$40(a0)
 
-loc_20802:
-                bra.s   loc_2082C
+S3GiantVine_RunAnchorAfterBuild:
+                bra.s   S3GiantVine_CullOrDrawAnchor
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -62,40 +62,41 @@ InitializeAizGiantVineSprite:
 
 ; ---------------------------------------------------------------------------
 
-loc_2082C:
+S3GiantVine_CullOrDrawAnchor:
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_20846
+                bhi.w   S3GiantVine_BeginDeleteChain
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_20846:
+S3GiantVine_BeginDeleteChain:
                 move.w  $36(a0),d2
                 subq.w  #1,d2
-                bcs.s   loc_20862
+                bcs.s   S3GiantVine_ClearAnchorRespawn
                 movea.w $3E(a0),a2
 
-loc_20852:
+S3GiantVine_DeleteLinkAndAdvance:
                 movea.l a2,a1
                 movea.w $3E(a1),a2
                 jsr     (Delete_Referenced_Sprite).l
-                dbf     d2,loc_20852
+                dbf     d2,S3GiantVine_DeleteLinkAndAdvance
 
-loc_20862:
+S3GiantVine_ClearAnchorRespawn:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_2086E
+                beq.s   S3GiantVine_DeleteAnchor
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_2086E:
+S3GiantVine_DeleteAnchor:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_20874:
+; Use the global angle when the high byte of the handler word is zero
+S3GiantVine_TryGlobalLeadAngle:
                 tst.b   (a0)
-                bne.s   loc_208A6
+                bne.s   S3GiantVine_UpdatePrivatePhase
                 move.b  (AIZ_vine_angle).w,d0
                 add.b   $42(a0),d0
                 jsr     (GetSineCosine).l
@@ -110,31 +111,31 @@ loc_20874:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_208A6:
+S3GiantVine_UpdatePrivatePhase:
                 moveq   #0,d2
                 move.b  $38(a0),d2
                 move.w  $44(a0),d0
                 move.w  #0,d1
                 tst.w   $2E(a0)
-                bne.s   loc_208D2
+                bne.s   S3GiantVine_DeceleratePrivatePhase
                 add.w   d2,d0
                 move.w  d0,$44(a0)
                 add.w   d0,$42(a0)
                 cmp.b   $42(a0),d1
-                bgt.s   loc_208E8
+                bgt.s   S3GiantVine_CommitPhaseAndFrame
                 move.w  #1,$2E(a0)
-                bra.s   loc_208E8
+                bra.s   S3GiantVine_CommitPhaseAndFrame
 ; ---------------------------------------------------------------------------
 
-loc_208D2:
+S3GiantVine_DeceleratePrivatePhase:
                 sub.w   d2,d0
                 move.w  d0,$44(a0)
                 add.w   d0,$42(a0)
                 cmp.b   $42(a0),d1
-                ble.s   loc_208E8
+                ble.s   S3GiantVine_CommitPhaseAndFrame
                 move.w  #0,$2E(a0)
 
-loc_208E8:
+S3GiantVine_CommitPhaseAndFrame:
                 move.w  $42(a0),d0
                 move.w  d0,angle(a0)
                 asr.w   #3,d0
@@ -146,7 +147,7 @@ loc_208E8:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_20908:
+S3GiantVine_UpdateLinkFromParent:
                 movea.w $3C(a0),a1
                 move.w  $3A(a1),$3A(a0)
                 move.w  angle(a1),d0
@@ -181,20 +182,20 @@ PositionAizGiantVineLink:
 
 ; ---------------------------------------------------------------------------
 
-loc_20968:
+S3GiantVine_PlaceHandleAndCacheX:
                 move.w  x_pos(a0),d4
                 move.w  y_pos(a0),d5
                 bsr.w   PositionAizGiantVineLink
                 cmp.w   x_pos(a0),d4
-                beq.s   loc_2097E
+                beq.s   S3GiantVine_TryCacheOldHandleY
                 move.w  d4,$42(a0)
 
-loc_2097E:
+S3GiantVine_TryCacheOldHandleY:
                 cmp.w   y_pos(a0),d5
-                beq.s   loc_20988
+                beq.s   S3GiantVine_UpdateBothHandleRiders
                 move.w  d5,$44(a0)
 
-loc_20988:
+S3GiantVine_UpdateBothHandleRiders:
                 lea     $32(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d0
@@ -204,15 +205,15 @@ loc_20988:
                 move.w  (Ctrl_2_logical).w,d0
                 bsr.w   UpdatePlayerOnAizVineHandle
                 tst.w   $32(a0)
-                beq.s   loc_209B2
+                beq.s   S3GiantVine_DrawHandle
                 tst.w   $30(a0)
-                bne.s   locret_209B8
+                bne.s   S3GiantVine_HandleDrawReturn
 
-loc_209B2:
+S3GiantVine_DrawHandle:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_209B8:
+S3GiantVine_HandleDrawReturn:
                 rts
 ; ---------------------------------------------------------------------------
 Map_AIZRideVine:

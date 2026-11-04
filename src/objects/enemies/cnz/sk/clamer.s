@@ -168,7 +168,7 @@ ChildObjDat_89148:
                 dc.b    0,  -8
 ChildObjDat_89150:
                 dc.w    1-1
-                dc.l    loc_86D4A
+                dc.l    SKCallbackShot_InitDeflectable
                 dc.l    ObjDat3_8913C
                 dc.l    0
                 dc.l    MoveSprite2

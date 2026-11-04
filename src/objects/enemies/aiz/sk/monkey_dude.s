@@ -12,12 +12,12 @@ Obj_MonkeyDude:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 MonkeyDude_Index:
-                dc.w    loc_87172-MonkeyDude_Index
-                dc.w    loc_871BC-MonkeyDude_Index
-                dc.w    loc_871DA-MonkeyDude_Index
+                dc.w    SKMonkeyDude_InitBodyAndArm-MonkeyDude_Index
+                dc.w    SKMonkeyDude_TickBodyIdle-MonkeyDude_Index
+                dc.w    SKMonkeyDude_AnimateClimbAndTryStepDown-MonkeyDude_Index
 ; ---------------------------------------------------------------------------
 
-loc_87172:
+SKMonkeyDude_InitBodyAndArm:
                 lea     ObjDat_MonkeyDude(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 moveq   #0,d0
@@ -26,75 +26,75 @@ loc_87172:
                 move.b  d0,subtype(a0)
                 lsr.w   #1,d0
                 move.b  d0,$39(a0)
-                move.l  #byte_876B4,$30(a0)
+                move.l  #MonkeyDudeSK_Body_UniformIdleFrames,$30(a0)
                 move.w  #60-1,$2E(a0)
-                move.l  #loc_871C2,$34(a0)
+                move.l  #SKMonkeyDude_StartClimbAnim,$34(a0)
                 btst    #0,render_flags(a0)
-                bne.w   loc_871B4
-                lea     ChildObjDat_87680(pc),a2
+                bne.w   SKMonkeyDude_CreateFlippedArm
+                lea     SKMonkeyDude_NormalArmChain(pc),a2
                 jmp     CreateChild4_LinkListRepeated(pc)
 ; ---------------------------------------------------------------------------
 
-loc_871B4:
-                lea     ChildObjDat_87686(pc),a2
+SKMonkeyDude_CreateFlippedArm:
+                lea     SKMonkeyDude_FlippedArmChain(pc),a2
                 jmp     CreateChild4_LinkListRepeated(pc)
 ; ---------------------------------------------------------------------------
 
-loc_871BC:
+SKMonkeyDude_TickBodyIdle:
                 jmp     (SKRawWait_AnimateAndTickTimer).l
 ; ---------------------------------------------------------------------------
 
-loc_871C2:
+SKMonkeyDude_StartClimbAnim:
                 move.b  #4,routine(a0)
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
-                move.l  #byte_876B8,$30(a0)
+                move.l  #MonkeyDudeSK_Body_ClimbFrameDelayPairs,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_871DA:
+SKMonkeyDude_AnimateClimbAndTryStepDown:
                 jsr     Animate_RawMultiDelay(pc)
                 tst.w   d2
-                beq.s   locret_87202
+                beq.s   SKMonkeyDude_ClimbReturn
                 btst    #2,$38(a0)
-                bne.s   loc_87204
+                bne.s   SKMonkeyDude_TryClimbStepUp
                 cmpi.b  #0,mapping_frame(a0)
-                bne.s   locret_87202
+                bne.s   SKMonkeyDude_ClimbReturn
                 addq.w  #8,y_pos(a0)
                 subq.b  #1,$39(a0)
                 cmpi.b  #1,$39(a0)
-                beq.s   loc_87218
+                beq.s   SKMonkeyDude_FinishClimbAndReverse
 
-locret_87202:
+SKMonkeyDude_ClimbReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_87204:
+SKMonkeyDude_TryClimbStepUp:
                 cmpi.b  #2,mapping_frame(a0)
-                bne.s   locret_87202
+                bne.s   SKMonkeyDude_ClimbReturn
                 subq.b  #1,$39(a0)
-                beq.s   loc_87218
+                beq.s   SKMonkeyDude_FinishClimbAndReverse
                 subq.w  #8,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_87218:
+SKMonkeyDude_FinishClimbAndReverse:
                 move.b  #2,routine(a0)
                 move.b  subtype(a0),$39(a0)
                 bchg    #2,$38(a0)
                 move.w  #60-1,$2E(a0)
-                move.l  #byte_876B4,$30(a0)
+                move.l  #MonkeyDudeSK_Body_UniformIdleFrames,$30(a0)
                 move.b  #0,mapping_frame(a0)
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_87248:
+SKMonkeyDude_MarkFlippedArmNode:
                 bset    #3,$38(a0)
 
-loc_8724E:
-                lea     word_87666(pc),a1
+SKMonkeyDude_InitArmNode:
+                lea     MonkeyDudeSK_ArmNode_PartialAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
                 clr.b   routine(a0)
                 move.b  subtype(a0),d0
@@ -102,29 +102,29 @@ loc_8724E:
                 move.b  d0,$3B(a0)
                 move.b  d0,$3A(a0)
                 tst.b   subtype(a0)
-                bne.s   loc_87292
-                move.l  #loc_872CC,(a0)
+                bne.s   SKMonkeyDude_PickArmNodeHandler
+                move.l  #SKMonkeyDude_UpdatePivot,(a0)
                 moveq   #$E,d0
                 btst    #3,$38(a0)
-                bne.s   loc_87280
+                bne.s   SKMonkeyDude_PlaceArmPivot
                 neg.w   d0
 
-loc_87280:
+SKMonkeyDude_PlaceArmPivot:
                 add.w   d0,x_pos(a0)
                 subq.w  #2,y_pos(a0)
                 move.w  y_pos(a0),$3E(a0)
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_87292:
+SKMonkeyDude_PickArmNodeHandler:
                 cmpi.b  #8,subtype(a0)
-                beq.s   loc_872A4
-                move.l  #loc_8741C,(a0)
+                beq.s   SKMonkeyDude_InitArmTip
+                move.l  #SKMonkeyDude_UpdateArmLink,(a0)
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_872A4:
-                move.l  #loc_8744C,(a0)
+SKMonkeyDude_InitArmTip:
+                move.l  #SKMonkeyDude_UpdateArmTip,(a0)
                 move.b  #6,mapping_frame(a0)
                 movea.w parent3(a0),a1
                 movea.w parent3(a1),a1
@@ -135,269 +135,269 @@ loc_872A4:
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_872CC:
+SKMonkeyDude_UpdatePivot:
                 bsr.w   FollowMonkeyArmPivotYFromBodyPose
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_872E2(pc,d0.w),d1
-                jsr     off_872E2(pc,d1.w)
+                move.w  SKMonkeyDude_PivotStateOffsets(pc,d0.w),d1
+                jsr     SKMonkeyDude_PivotStateOffsets(pc,d1.w)
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
-off_872E2:
-                dc.w    loc_872EE-off_872E2
-                dc.w    loc_8732A-off_872E2
-                dc.w    loc_87382-off_872E2
-                dc.w    loc_873B4-off_872E2
-                dc.w    loc_873EA-off_872E2
-                dc.w    loc_87330-off_872E2
+SKMonkeyDude_PivotStateOffsets:
+                dc.w    SKMonkeyDude_CenterPivot-SKMonkeyDude_PivotStateOffsets
+                dc.w    SKMonkeyDude_CheckPlayerBeforeWobble-SKMonkeyDude_PivotStateOffsets
+                dc.w    SKMonkeyDude_WindUpPivot-SKMonkeyDude_PivotStateOffsets
+                dc.w    SKMonkeyDude_SwingPivot-SKMonkeyDude_PivotStateOffsets
+                dc.w    SKMonkeyDude_RecoverPivot-SKMonkeyDude_PivotStateOffsets
+                dc.w    SKMonkeyDude_WobblePivot-SKMonkeyDude_PivotStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_872EE:
+SKMonkeyDude_CenterPivot:
                 move.b  $3C(a0),d0
                 btst    #3,$38(a0)
-                beq.s   loc_87308
+                beq.s   SKMonkeyDude_CenterPivotDecreasing
                 addq.b  #4,d0
                 cmpi.b  #$80,d0
-                bhs.s   loc_87316
+                bhs.s   MonkeyDudeSK_Pivot_SelectPlayerGatedIdle
                 move.b  d0,$3C(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_87308:
+SKMonkeyDude_CenterPivotDecreasing:
                 subq.b  #4,d0
                 cmpi.b  #$80,d0
-                bls.s   loc_87316
+                bls.s   MonkeyDudeSK_Pivot_SelectPlayerGatedIdle
                 move.b  d0,$3C(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_87316:
+MonkeyDudeSK_Pivot_SelectPlayerGatedIdle:
                 move.b  #2,routine(a0)
 
-loc_8731C:
+SKMonkeyDude_InitPivotIdle:
                 bsr.w   RandomizeMonkeyArmIdleStepAndWait
-                move.l  #loc_87370,$34(a0)
+                move.l  #SKMonkeyDude_RerollPivotWobble,$34(a0)
 
-locret_87328:
+SKMonkeyDude_PivotOrThrowReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8732A:
+SKMonkeyDude_CheckPlayerBeforeWobble:
                 bsr.w   TestMonkeyDudePlayerInThrowDirection
-                beq.s   loc_87374
+                beq.s   SKMonkeyDude_StartPivotWindup
 
-loc_87330:
+SKMonkeyDude_WobblePivot:
                 btst    #3,$38(a0)
-                beq.s   loc_8734E
+                beq.s   SKMonkeyDude_WobblePivotUnflipped
                 move.b  $41(a0),d1
                 bsr.w   AdvanceMonkeyArmAngleByByteStep
                 subi.b  #$20,d0
                 cmpi.b  #$60,d0
-                bhs.s   loc_87360
-                bra.w   loc_8736C
+                bhs.s   SKMonkeyDude_ReversePivotWobble
+                bra.w   MonkeyDudeSK_Pivot_CountRandomIdleWait
 ; ---------------------------------------------------------------------------
 
-loc_8734E:
+SKMonkeyDude_WobblePivotUnflipped:
                 move.b  $41(a0),d1
                 bsr.w   AdvanceMonkeyArmAngleByByteStep
                 subi.b  #$80,d0
                 cmpi.b  #$60,d0
-                blo.s   loc_8736C
+                blo.s   MonkeyDudeSK_Pivot_CountRandomIdleWait
 
-loc_87360:
+SKMonkeyDude_ReversePivotWobble:
                 neg.w   $40(a0)
                 move.b  $41(a0),d1
                 bsr.w   AdvanceMonkeyArmAngleByByteStep
 
-loc_8736C:
+MonkeyDudeSK_Pivot_CountRandomIdleWait:
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_87370:
+SKMonkeyDude_RerollPivotWobble:
                 bra.w   RandomizeMonkeyArmIdleStepAndWait
 ; ---------------------------------------------------------------------------
 
-loc_87374:
+SKMonkeyDude_StartPivotWindup:
                 move.b  #4,routine(a0)
                 bset    #1,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_87382:
+SKMonkeyDude_WindUpPivot:
                 btst    #3,$38(a0)
-                beq.s   loc_87398
+                beq.s   SKMonkeyDude_WindUpPivotUnflipped
                 moveq   #4,d1
                 bsr.w   AdvanceMonkeyArmAngleByByteStep
                 cmpi.b  #-$40,d0
-                bhs.s   loc_873A6
+                bhs.s   SKMonkeyDude_StartFastSwing
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_87398:
+SKMonkeyDude_WindUpPivotUnflipped:
                 moveq   #-4,d1
                 bsr.w   AdvanceMonkeyArmAngleByByteStep
                 cmpi.b  #$40,d0
-                bls.s   loc_873A6
+                bls.s   SKMonkeyDude_StartFastSwing
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_873A6:
+SKMonkeyDude_StartFastSwing:
                 move.b  #6,routine(a0)
                 bset    #2,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_873B4:
+SKMonkeyDude_SwingPivot:
                 btst    #3,$38(a0)
-                beq.s   loc_873CA
+                beq.s   SKMonkeyDude_SwingPivotUnflipped
                 moveq   #-8,d1
                 bsr.w   AdvanceMonkeyArmAngleByByteStep
                 moveq   #$60,d1
                 cmp.b   d1,d0
-                bls.s   loc_873D8
+                bls.s   SKMonkeyDude_FinishSwingAndClearSignal
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_873CA:
+SKMonkeyDude_SwingPivotUnflipped:
                 moveq   #8,d1
                 bsr.w   AdvanceMonkeyArmAngleByByteStep
                 moveq   #-$60,d1
                 cmp.b   d1,d0
-                bhs.s   loc_873D8
+                bhs.s   SKMonkeyDude_FinishSwingAndClearSignal
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_873D8:
+SKMonkeyDude_FinishSwingAndClearSignal:
                 move.b  #8,routine(a0)
                 move.b  d1,$3C(a0)
                 bclr    #1,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_873EA:
+SKMonkeyDude_RecoverPivot:
                 btst    #3,$38(a0)
-                bne.s   loc_87400
+                bne.s   SKMonkeyDude_RecoverPivotFlipped
                 moveq   #-2,d1
                 bsr.w   AdvanceMonkeyArmAngleByByteStep
                 moveq   #-$80,d1
                 cmp.b   d1,d0
-                bls.s   loc_8740E
+                bls.s   SKMonkeyDude_FinishPivotRecovery
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_87400:
+SKMonkeyDude_RecoverPivotFlipped:
                 moveq   #2,d1
                 bsr.w   AdvanceMonkeyArmAngleByByteStep
                 moveq   #-$80,d1
                 cmp.b   d1,d0
-                bhs.s   loc_8740E
+                bhs.s   SKMonkeyDude_FinishPivotRecovery
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8740E:
+SKMonkeyDude_FinishPivotRecovery:
                 move.b  #$A,routine(a0)
                 move.b  d1,$3C(a0)
-                bra.w   loc_8731C
+                bra.w   SKMonkeyDude_InitPivotIdle
 ; ---------------------------------------------------------------------------
 
-loc_8741C:
+SKMonkeyDude_UpdateArmLink:
                 bsr.w   CopyMonkeyArmLinkParentPriority
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_87432(pc,d0.w),d1
-                jsr     off_87432(pc,d1.w)
+                move.w  SKMonkeyDude_LinkStateOffsets(pc,d0.w),d1
+                jsr     SKMonkeyDude_LinkStateOffsets(pc,d1.w)
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
-off_87432:
-                dc.w    loc_87438-off_87432
-                dc.w    loc_87442-off_87432
-                dc.w    loc_8743E-off_87432
+SKMonkeyDude_LinkStateOffsets:
+                dc.w    SKMonkeyDude_TryActivateLink-SKMonkeyDude_LinkStateOffsets
+                dc.w    SKMonkeyDude_CheckLinkReleaseAndOrbit-SKMonkeyDude_LinkStateOffsets
+                dc.w    SKMonkeyDude_RunLinkDelayedOrbit-SKMonkeyDude_LinkStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_87438:
+SKMonkeyDude_TryActivateLink:
                 moveq   #2,d1
                 bsr.w   MonkeyArmLink_TryEnterAttack
 
-loc_8743E:
-                bra.w   loc_8754C
+SKMonkeyDude_RunLinkDelayedOrbit:
+                bra.w   SKMonkeyDude_TickLinkPhaseDelay
 ; ---------------------------------------------------------------------------
 
-loc_87442:
+SKMonkeyDude_CheckLinkReleaseAndOrbit:
                 moveq   #4,d1
                 bsr.w   MonkeyArmLink_TryLeaveAttack
-                bra.w   loc_8754C
+                bra.w   SKMonkeyDude_TickLinkPhaseDelay
 ; ---------------------------------------------------------------------------
 
-loc_8744C:
+SKMonkeyDude_UpdateArmTip:
                 bsr.w   CopyMonkeyArmLinkParentPriority
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_87462(pc,d0.w),d1
-                jsr     off_87462(pc,d1.w)
+                move.w  SKMonkeyDude_TipStateOffsets(pc,d0.w),d1
+                jsr     SKMonkeyDude_TipStateOffsets(pc,d1.w)
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
-off_87462:
-                dc.w    loc_87468-off_87462
-                dc.w    loc_87472-off_87462
-                dc.w    loc_8746E-off_87462
+SKMonkeyDude_TipStateOffsets:
+                dc.w    SKMonkeyDude_TryActivateTip-SKMonkeyDude_TipStateOffsets
+                dc.w    SKMonkeyDude_TryTipThrowAndRelease-SKMonkeyDude_TipStateOffsets
+                dc.w    SKMonkeyDude_RunTipDelayedOrbit-SKMonkeyDude_TipStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_87468:
+SKMonkeyDude_TryActivateTip:
                 moveq   #2,d1
                 bsr.w   MonkeyArmLink_TryEnterAttack
 
-loc_8746E:
-                bra.w   loc_8754C
+SKMonkeyDude_RunTipDelayedOrbit:
+                bra.w   SKMonkeyDude_TickLinkPhaseDelay
 ; ---------------------------------------------------------------------------
 
-loc_87472:
+SKMonkeyDude_TryTipThrowAndRelease:
                 bsr.w   TryThrowMonkeyDudeProjectileAtArmPhase
                 moveq   #4,d1
                 bsr.w   MonkeyArmLink_TryLeaveAttack
-                bra.w   loc_8754C
+                bra.w   SKMonkeyDude_TickLinkPhaseDelay
 ; ---------------------------------------------------------------------------
 
-loc_87480:
-                lea     word_8766C(pc),a1
+SKMonkeyDude_InitRetainedShot:
+                lea     SKMonkeyDude_RetainedShotAttrs(pc),a1
                 jsr     SetUp_ObjAttributes2(pc)
-                move.l  #loc_874B6,(a0)
-                move.l  #byte_876BD,$30(a0)
-                move.l  #loc_874CA,$34(a0)
+                move.l  #SKMonkeyDude_UpdateRetainedShot,(a0)
+                move.l  #SKMonkeyDude_RetainedShotAnim,$30(a0)
+                move.l  #SKMonkeyDude_StopRetainedShot,$34(a0)
                 move.b  #8,y_radius(a0)
                 move.w  #-$200,x_vel(a0)
                 move.w  #-$400,y_vel(a0)
                 jmp     (Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
 
-loc_874B6:
+SKMonkeyDude_UpdateRetainedShot:
                 jsr     (MoveSprite_LightGravity).l
                 jsr     Animate_RawMultiDelay(pc)
                 jsr     ObjHitFloor_DoRoutine(pc)
                 jmp     (Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
 
-loc_874CA:
-                move.l  #loc_874D2,(a0)
+SKMonkeyDude_StopRetainedShot:
+                move.l  #SKMonkeyDude_DrawRetainedStoppedShot,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_874D2:
+SKMonkeyDude_DrawRetainedStoppedShot:
                 jmp     (Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
 ; unused
                 movea.w parent3(a0),a1
                 move.b  render_flags(a1),d0
                 btst    #3,$38(a0)
-                beq.s   loc_874EC
+                beq.s   SKMonkeyDude_PickRetainedPriority
                 bchg    #0,d0
 
-loc_874EC:
+SKMonkeyDude_PickRetainedPriority:
                 move.w  #$200,priority(a0)
                 btst    #0,d0
-                beq.s   locret_874FE
+                beq.s   SKMonkeyDude_RetainedPriorityReturn
                 move.w  #$300,priority(a0)
 
-locret_874FE:
+SKMonkeyDude_RetainedPriorityReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -407,10 +407,10 @@ FollowMonkeyArmPivotYFromBodyPose:
                 move.w  y_pos(a1),d0
                 subq.w  #2,d0
                 tst.b   mapping_frame(a1)
-                beq.s   loc_87512
+                beq.s   SKMonkeyDude_StorePivotY
                 subq.w  #2,d0
 
-loc_87512:
+SKMonkeyDude_StorePivotY:
                 move.w  d0,y_pos(a0)
                 rts
 ; End of function FollowMonkeyArmPivotYFromBodyPose
@@ -428,17 +428,17 @@ CopyMonkeyArmLinkParentPriority:
 TestMonkeyDudePlayerInThrowDirection:
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$80,d2
-                bhs.s   loc_8753C
+                bhs.s   SKMonkeyDude_ReturnThrowTooFar
                 btst    #3,$38(a0)
-                beq.s   loc_87538
+                beq.s   SKMonkeyDude_ReturnThrowSideTest
                 subq.w  #2,d0
 
-loc_87538:
+SKMonkeyDude_ReturnThrowSideTest:
                 tst.w   d0
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8753C:
+SKMonkeyDude_ReturnThrowTooFar:
                 moveq   #1,d4
                 rts
 ; End of function TestMonkeyDudePlayerInThrowDirection
@@ -454,14 +454,14 @@ AdvanceMonkeyArmAngleByByteStep:
 
 ; ---------------------------------------------------------------------------
 
-loc_8754C:
+SKMonkeyDude_TickLinkPhaseDelay:
                 subq.b  #1,$3B(a0)
-                bne.s   loc_87562
+                bne.s   SKMonkeyDude_OrbitLinkParent
                 move.b  $3A(a0),$3B(a0)
                 movea.w parent3(a0),a1
                 move.b  $3C(a1),$3C(a0)
 
-loc_87562:
+SKMonkeyDude_OrbitLinkParent:
                 moveq   #5,d2
                 jsr     MoveSprite_CircularSimple(pc)
                 rts
@@ -472,7 +472,7 @@ loc_87562:
 MonkeyArmLink_TryEnterAttack:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                beq.s   locret_87590
+                beq.s   SKMonkeyDude_LinkActivationReturn
                 move.b  d1,routine(a0)
                 bset    #1,$38(a0)
                 move.b  $3A(a0),d0
@@ -480,7 +480,7 @@ MonkeyArmLink_TryEnterAttack:
                 move.b  d0,$3A(a0)
                 move.b  #1,$3B(a0)
 
-locret_87590:
+SKMonkeyDude_LinkActivationReturn:
                 rts
 ; End of function MonkeyArmLink_TryEnterAttack
 
@@ -490,14 +490,14 @@ locret_87590:
 MonkeyArmLink_TryLeaveAttack:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                bne.s   locret_875B2
+                bne.s   SKMonkeyDude_LinkReleaseReturn
                 move.b  d1,routine(a0)
                 move.b  $3A(a0),d0
                 add.b   d0,d0
                 move.b  d0,$3A(a0)
                 move.b  #1,$3B(a0)
 
-locret_875B2:
+SKMonkeyDude_LinkReleaseReturn:
                 rts
 ; End of function MonkeyArmLink_TryLeaveAttack
 
@@ -505,41 +505,42 @@ locret_875B2:
 
 TryThrowMonkeyDudeProjectileAtArmPhase:
                 btst    #3,$38(a0)
-                beq.s   loc_875E0
+                beq.s   SKMonkeyDude_CheckUnflippedThrow
                 btst    #0,$38(a0)
-                bne.w   locret_87328
+                bne.w   SKMonkeyDude_PivotOrThrowReturn
                 movea.w $44(a0),a1
                 btst    #2,$38(a1)
-                beq.s   locret_875DE
+                beq.s   SKMonkeyDude_TipThrowReturn
                 movea.w $3E(a0),a1
                 cmpi.b  #-$7C,$3C(a1)
-                blo.s   loc_8760A
+                blo.s   SKMonkeyDude_LatchThrowAndTrySpawnShot
 
-locret_875DE:
+SKMonkeyDude_TipThrowReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_875E0:
+SKMonkeyDude_CheckUnflippedThrow:
                 btst    #0,$38(a0)
-                bne.w   locret_87328
+                bne.w   SKMonkeyDude_PivotOrThrowReturn
                 movea.w $44(a0),a1
                 btst    #2,$38(a1)
-                beq.s   locret_875DE
+                beq.s   SKMonkeyDude_TipThrowReturn
                 movea.w $3E(a0),a1
                 cmpi.b  #$7C,$3C(a1)
-                blo.w   locret_87328
+                blo.w   SKMonkeyDude_PivotOrThrowReturn
                 move.w  #make_art_tile(ArtTile_MonkeyDude,1,0),art_tile(a0)
 
-loc_8760A:
+; Set the one-shot latch before allocating the projectile
+SKMonkeyDude_LatchThrowAndTrySpawnShot:
                 bset    #0,$38(a0)
                 move.b  #4,mapping_frame(a0)
                 moveq   #signextendB(sfx_MissileThrow),d0
                 jsr     (Play_SFX).l
-                lea     (ChildObjDat_8769C).l,a2
+                lea     (SKMonkeyDude_ThrownShotChildRecord).l,a2
                 jsr     CreateChild2_Complex(pc)
-                bne.s   locret_875DE
+                bne.s   SKMonkeyDude_TipThrowReturn
                 btst    #3,$38(a0)
-                beq.s   locret_875DE
+                beq.s   SKMonkeyDude_TipThrowReturn
                 neg.w   x_vel(a1)
                 rts
 ; End of function TryThrowMonkeyDudeProjectileAtArmPhase
@@ -551,10 +552,10 @@ RandomizeMonkeyArmIdleStepAndWait:
                 move.w  (RNG_seed).w,d0
                 moveq   #1,d1
                 btst    #0,d0
-                beq.s   loc_8764C
+                beq.s   SKMonkeyDude_StorePivotIdleStepAndWait
                 neg.w   d1
 
-loc_8764C:
+SKMonkeyDude_StorePivotIdleStepAndWait:
                 move.w  d1,$40(a0)
                 andi.w  #$3C,d0
                 move.w  d0,$2E(a0)
@@ -567,50 +568,51 @@ ObjDat_MonkeyDude:
                 dc.w    make_art_tile(ArtTile_MonkeyDude,1,0)
                 dc.w    $280
                 dc.b    $20, $20,   0,  $B
-word_87666:
+MonkeyDudeSK_ArmNode_PartialAttributes:
                 dc.w    $300
                 dc.b    4,   4,   3,   0
-word_8766C:
+SKMonkeyDude_RetainedShotAttrs:
                 dc.w    make_art_tile(ArtTile_MonkeyDude,1,1)
                 dc.w    $280
                 dc.b    $20, $20,   6,  $B
-ObjDat3_87674:
+MonkeyDudeSK_Projectile_FullAttributes:
                 dc.l    Map_MonkeyDude
                 dc.w    make_art_tile(ArtTile_MonkeyDude,0,0)
                 dc.w    $280
                 dc.b    $20, $20,   6, $98
-ChildObjDat_87680:
+SKMonkeyDude_NormalArmChain:
                 dc.w    5-1
-                dc.l    loc_8724E
-ChildObjDat_87686:
+                dc.l    SKMonkeyDude_InitArmNode
+; The linked-chain count uses five nodes. Retain the trailing child records
+SKMonkeyDude_FlippedArmChain:
                 dc.w    5-1
-                dc.l    loc_87248
+                dc.l    SKMonkeyDude_MarkFlippedArmNode
                 dc.w    1-1
-                dc.l    loc_8724E
+                dc.l    SKMonkeyDude_InitArmNode
                 dc.b    0,   8
                 dc.w    1-1
-                dc.l    loc_87480
+                dc.l    SKMonkeyDude_InitRetainedShot
                 dc.b    0,   0
-ChildObjDat_8769C:
+SKMonkeyDude_ThrownShotChildRecord:
                 dc.w    1-1
-                dc.l    loc_86D4A
-                dc.l    ObjDat3_87674
+                dc.l    SKCallbackShot_InitDeflectable
+                dc.l    MonkeyDudeSK_Projectile_FullAttributes
                 dc.l    0
                 dc.l    MoveSprite_LightGravity
                 dc.b    0,   0
                 dc.w    -$200, -$400
-byte_876B4:
+MonkeyDudeSK_Body_UniformIdleFrames:
                 dc.b    7,   0,   1, $FC
-byte_876B8:
+MonkeyDudeSK_Body_ClimbFrameDelayPairs:
                 dc.b    0,   7
                 dc.b    2,   7
                 dc.b    $FC
-byte_876BD:
+SKMonkeyDude_RetainedShotAnim:
                 dc.b    8,  $F
                 dc.b    8,  $F
                 dc.b    9,  $F
                 dc.b    $A,  $F
-                dc.b    $F8, .jump-byte_876BD
+                dc.b    $F8, .jump-SKMonkeyDude_RetainedShotAnim
 
                 .jump:
                 dc.b    6, $7E

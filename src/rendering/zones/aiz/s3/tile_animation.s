@@ -5,17 +5,17 @@
 
 AnimateTiles_AIZ1:
                 tst.b   (Boss_flag).w
-                bne.s   locret_26B82
+                bne.s   S3AIZ1Tiles_UpdateReturn
                 tst.b   (Dynamic_resize_routine).w
                 bne.w   AnimateTiles_DoAniPLC
 
-locret_26B82:
+S3AIZ1Tiles_UpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 AnimateTiles_AIZ2:
                 tst.b   (Boss_flag).w
-                bne.s   locret_26BB8
+                bne.s   S3AIZ2Tiles_UpdateReturn
                 cmpi.w  #$1C0,(Camera_X_pos).w
                 bhs.w   AnimateTiles_DoAniPLC
                 lea     (Anim_Counters).w,a3
@@ -30,5 +30,5 @@ AnimateTiles_AIZ2:
                 jmp     (Add_To_DMA_Queue).l
 ; ---------------------------------------------------------------------------
 
-locret_26BB8:
+S3AIZ2Tiles_UpdateReturn:
                 rts

@@ -72,7 +72,7 @@ loc_8FB90:
                 movea.l $3E(a0),a1
                 jsr     (SetUp_ObjAttributes3).l
                 bset    #3,shield_reaction(a0)
-                move.l  #loc_86D5E,(a0)
+                move.l  #SKCallbackShot_UpdateAndDraw,(a0)
                 move.b  subtype(a0),d0
                 lsr.b   #2,d0
                 addq.b  #6,d0

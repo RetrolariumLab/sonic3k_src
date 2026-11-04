@@ -9,11 +9,11 @@
     },
     {
       "path": "src/game/level/zones/aiz/s3/act2_air_raid.s",
-      "sha256": "83808576a7d578f4312651ddf8fcbacc13f5e5963e0a155d0e7ed52f4d5d9a66"
+      "sha256": "e8a17bcb25fba335374869f003a74f53346ba80e9cd85c627bc0b00d56280adf"
     },
     {
       "path": "src/game/level/zones/aiz/sk/act2_air_raid.s",
-      "sha256": "5369daa57e3732169deacaaced3008552d21b528d21370d96f05bf300133cc49"
+      "sha256": "bba9a2330dfb6237b0bbcbfe45eda7ca325d494671ee9092c174bc29f44f4736"
     },
     {
       "path": "src/game/level/zones/lrz/sk/act3_autoscroll.s",
@@ -657,31 +657,31 @@
     },
     {
       "path": "src/objects/enemies/aiz/s3/bloominator.s",
-      "sha256": "ba184bfed2795ccdc1e555b527cb39f7495dcf871a8e9c82d76f481bb43ba202"
+      "sha256": "20a960187953cba722017445ef7c56ab103d2b78f163fe22f4efc077f080e2a2"
     },
     {
       "path": "src/objects/enemies/aiz/s3/monkey_dude.s",
-      "sha256": "78455e0a5750d9a7775c94fe41f1f0cac339e55d6b50f895525292677b6fba40"
+      "sha256": "3a70be2c13c10d08c23bfa956bdbdf344347e655a97c35b10331b55a917942f8"
     },
     {
       "path": "src/objects/enemies/aiz/s3/rhinobot.s",
-      "sha256": "98484e45119fd18e59b3ebcf389b939012ae175cae08b3c83f48c3c2a3e0b5b8"
+      "sha256": "7b1b9f80cfc0900d00c156722506bb4c32524b9d7e9135502ee60bb46cad4367"
     },
     {
       "path": "src/objects/enemies/aiz/sk/bloominator.s",
-      "sha256": "10d57b7616f75d49467307b575570c8eeb84b2567d6ddcda255d758b6d699005"
+      "sha256": "03e9f39e6f112542d90d7030bc6b75c7e8486e2382e0b9783d552c37a97bfa21"
     },
     {
       "path": "src/objects/enemies/aiz/sk/monkey_dude.s",
-      "sha256": "3d0f741ffab9966e17f41e865025d3dbecb80fc2e49e40b02a0bab82ab527030"
+      "sha256": "03a7b6d1c8345e8a4774fd1254ad5224c00e04505765febff50b0191ce08a5be"
     },
     {
       "path": "src/objects/enemies/aiz/sk/rhinobot.s",
-      "sha256": "2d4f60aac2d1731da59b65efce0f9080032d1c21cffc99abe9acd19283b4f84f"
+      "sha256": "e5e79e305fbdc6dee2e07f7595a055473d2591258c375cc261498378057d507c"
     },
     {
       "path": "src/objects/enemies/cnz/s3/clamer.s",
-      "sha256": "f25294733b3dc0b2515887f4be899b1390ddd4ca72e0855140c5a1b905865c47"
+      "sha256": "6e6be3093a0b299b84a75c996a2d9a3d28fd099059eccb1e06879fa03aa7f946"
     },
     {
       "path": "src/objects/enemies/cnz/s3/sparkle.s",
@@ -689,7 +689,7 @@
     },
     {
       "path": "src/objects/enemies/cnz/sk/clamer.s",
-      "sha256": "1852db6a00d48cfc410ee3d1f666e32c99efed20d236e3db61cfe459158a5aa0"
+      "sha256": "c108b8112d6e8d4cd28701982712ccf0702320074ddab5c7e5816274571d5514"
     },
     {
       "path": "src/objects/enemies/cnz/sk/sparkle.s",
@@ -701,7 +701,7 @@
     },
     {
       "path": "src/objects/enemies/fbz/s3/blaster.s",
-      "sha256": "1751669d2e8b40f1045e1f48713cccc5f48454d6c091a1de4c8d79a92f390b03"
+      "sha256": "67091be788a2c8d80d854f137833d54871ebb28713406e1070e02ee80794db6b"
     },
     {
       "path": "src/objects/enemies/fbz/s3/techno_squeek.s",
@@ -713,7 +713,7 @@
     },
     {
       "path": "src/objects/enemies/fbz/sk/blaster.s",
-      "sha256": "1aa5eda6dfa5f92e38872574d8cf93d5eeaba6d71b9efb89c5b23f0c11cf25b2"
+      "sha256": "caf08f0d28d97d60f2de274f6c6b9620bad306294d023e345c971d5181a32f94"
     },
     {
       "path": "src/objects/enemies/fbz/sk/techno_squeek.s",
@@ -721,7 +721,7 @@
     },
     {
       "path": "src/objects/enemies/hcz/s3/blastoid.s",
-      "sha256": "3dff3492aca4adbbcb909c2a3e2d3e16c0e8f68a939872b35e6d45c35e8c9e64"
+      "sha256": "3a5e5a7e1d0a86b7e22d3b10125b3c852ab570fe8bc38deb2d44b716c3fcd1bb"
     },
     {
       "path": "src/objects/enemies/hcz/s3/buggernaut.s",
@@ -749,7 +749,7 @@
     },
     {
       "path": "src/objects/enemies/hcz/sk/blastoid.s",
-      "sha256": "c3f0f1cf0af6df0ff837444d7b8e02197251817baa8514d0a93630f9099a3aef"
+      "sha256": "7bbdfab6d99bc71b9dba4b8c107ca3adbf3a421b31f4034f9d78423aa51ef51a"
     },
     {
       "path": "src/objects/enemies/hcz/sk/buggernaut.s",
@@ -781,7 +781,7 @@
     },
     {
       "path": "src/objects/enemies/icz/s3/snale_blaster.s",
-      "sha256": "01949dd32fba743975fa44525dd5eba854d5a4f4ab8f01e88c8cedfe1f24b164"
+      "sha256": "3289c295774a3ac8e7054f93946cd7992fc952e4dc0ddc1618dfe303bd793630"
     },
     {
       "path": "src/objects/enemies/icz/s3/star_pointer.s",
@@ -793,7 +793,7 @@
     },
     {
       "path": "src/objects/enemies/icz/sk/snale_blaster.s",
-      "sha256": "1408a3f75828265133376b90aa96870a0cad18acfb59da135350532796f04bba"
+      "sha256": "ec13ef97e8f453d3db393e64c0799c738bee4d321c562d9daa5b9dadb7de902d"
     },
     {
       "path": "src/objects/enemies/icz/sk/star_pointer.s",
@@ -833,7 +833,7 @@
     },
     {
       "path": "src/objects/enemies/mgz/s3/spiker.s",
-      "sha256": "027e65676024d61abdf43d48a76412baeb52a3ca2eae2772dfc5c791f8f1a7e6"
+      "sha256": "b22b0705dc851d8ce8c6b2d20c141c555628dbeca588eecc9a92607c5a4338ee"
     },
     {
       "path": "src/objects/enemies/mgz/sk/bubbles.s",
@@ -845,7 +845,7 @@
     },
     {
       "path": "src/objects/enemies/mgz/sk/spiker.s",
-      "sha256": "5cfdef379c47f0d4c5465bb007f043818a9c9912498d7b6fd9cace13a0626dd4"
+      "sha256": "1ed87b2694fbe48a252e944851d7daa057fe583751c81a75ca27e23a8fb9e027"
     },
     {
       "path": "src/objects/enemies/sk/butterdroid.s",
@@ -869,7 +869,7 @@
     },
     {
       "path": "src/objects/enemies/sk/iwamodoki.s",
-      "sha256": "6af1f081d9ac22394dc6a0e42aaedc8e40aac9d9b59c5ca972d38bdb8573e79e"
+      "sha256": "0a74544a03bf83de05d612e4a316d9e530f5219ecea2f3c0cc90c5f490a5ff39"
     },
     {
       "path": "src/objects/enemies/sk/madmole.s",
@@ -1157,31 +1157,31 @@
     },
     {
       "path": "src/objects/zones/aiz/s3/hollow_tree.s",
-      "sha256": "d50ad508458a1a827c7913960f3c510c493c572a80ebc930d16c723ada38fd0a"
+      "sha256": "2208256a8ece2ed29c326411ac8a3106aa9cc1551c810d58ce2a050b0ae1e667"
     },
     {
       "path": "src/objects/zones/aiz/s3/plane_intro.s",
-      "sha256": "5cff699482b00ed1c069b9ae20a4f3bd5129f5b8b4f5a1d6b327cf9b0b75baa2"
+      "sha256": "63270659d95dbd59a05897a1d544d90bfdc54f7cc1af6ef6bbb014609278f0b3"
     },
     {
       "path": "src/objects/zones/aiz/s3/ride_vine.s",
-      "sha256": "7574973bf85465f62207a41dd010835c9b42990fe04e0dc1c7c9a8b1fabd1040"
+      "sha256": "68aa300c04d20acaf72e2c024c95388b0458fe366c3c43ce1571e7a904717bcd"
     },
     {
       "path": "src/objects/zones/aiz/s3/spiked_log.s",
-      "sha256": "f3654203a93241770f2159bc222a1324ca6d37347442ba227e29da27b90031a6"
+      "sha256": "219ea006f9957072908510dc9eb00e54d8ee9998a6fd683a6c4d5993cfdb8239"
     },
     {
       "path": "src/objects/zones/aiz/sk/hollow_tree.s",
-      "sha256": "c8cd1e46c37832383dcaf7f338de3a4e6e85690b40281ef06af182bf0ef23c09"
+      "sha256": "95043552eba605bd0edab42ebd639948c4d4d6df3790316297b5bca802a90d09"
     },
     {
       "path": "src/objects/zones/aiz/sk/ride_vine.s",
-      "sha256": "7e84394248e7c2080f1068fb47818a24c968c6ae8d6a62144b5748c29e24280f"
+      "sha256": "7fb36627181d9878c97cdf6590cc469d8f4c7ce0a06973f15d9e02b90630c706"
     },
     {
       "path": "src/objects/zones/aiz/sk/spiked_log.s",
-      "sha256": "605ff65dc7ec3d9ed22135f14f64de0ea7a3860271ecaad2c7409899672aa016"
+      "sha256": "627177264dea1d9bd2f525d16656c862750420a761e8aa71d33cabf3fc87fb30"
     },
     {
       "path": "src/objects/zones/cnz/s3/cylinder.s",
@@ -3551,100 +3551,108 @@
     },
     {
       "path": "src/objects/enemies/aiz/s3/bloominator.s",
-      "symbol": "byte_54C3E",
-      "scope": "byte_54C3E",
-      "first_line": 102,
-      "last_line": 113,
+      "symbol": "S3Bloominator_AttackAnim",
+      "scope": "S3Bloominator_AttackAnim",
+      "first_line": 104,
+      "last_line": 115,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 20,
-      "declarations_sha256": "221014133113fce1f6ab1129e6ed133892b083c96aed861bc944fcf24e9413ce",
+      "declarations_sha256": "0d0b9ff64cedb22497e99d7b4cd969045083e239322c9d1a43feffaea2e78e36",
       "entries": [[0, "pairs"]],
       "external_symbols": [],
-      "members": ["byte_54C3E"],
+      "members": ["S3Bloominator_AttackAnim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/aiz/s3/monkey_dude.s",
-      "symbol": "byte_554B0",
-      "scope": "byte_554B0",
-      "first_line": 602,
-      "last_line": 618,
+      "symbol": "MonkeyDudeS3_Body_UniformIdleFrames",
+      "scope": "MonkeyDudeS3_Body_UniformIdleFrames",
+      "first_line": 604,
+      "last_line": 620,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 22,
-      "declarations_sha256": "b192f6c5738a84b6268c0efd1ffa09f7f48cfe1302704a66268deabcf5e46f46",
+      "declarations_sha256": "9a1c05a639b8b9cf763a5b678eb71414554d57ea356c463c4481ac1e7e0963bf",
       "entries": [
         [0, "fixed"],
         [4, "pairs"],
         [9, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_554B0", "byte_554B4", "byte_554B9"],
+      "members": [
+        "MonkeyDudeS3_Body_UniformIdleFrames",
+        "MonkeyDudeS3_Body_ClimbFrameDelayPairs",
+        "S3MonkeyDude_RetainedShotAnim"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/aiz/s3/rhinobot.s",
-      "symbol": "byte_54F36",
-      "scope": "byte_54F36",
-      "first_line": 319,
-      "last_line": 324,
+      "symbol": "S3Rhinobot_PatrolDustAnim",
+      "scope": "S3Rhinobot_PatrolDustAnim",
+      "first_line": 322,
+      "last_line": 327,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 28,
-      "declarations_sha256": "ff06b5ec182da46240300cbc21c8716e149c15f0a09cddd0d3ba82fb67e05737",
+      "declarations_sha256": "dd9cf3f6441b71a72d254c6ee16c1f2231f14a2e7a97b5f754bf93a59f315eaf",
       "entries": [
         [0, "fixed"],
         [16, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_54F36", "byte_54F46"],
+      "members": ["S3Rhinobot_PatrolDustAnim", "S3Rhinobot_ChargeDustAnim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/aiz/sk/bloominator.s",
-      "symbol": "byte_86E42",
-      "scope": "byte_86E42",
-      "first_line": 102,
-      "last_line": 113,
+      "symbol": "SKBloominator_AttackAnim",
+      "scope": "SKBloominator_AttackAnim",
+      "first_line": 104,
+      "last_line": 115,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 20,
-      "declarations_sha256": "7aed358c732162e4c980fa4eb0b7fba7f6b5fbcfdb4c3d7683559059a5a966cb",
+      "declarations_sha256": "3f6fbf180132d2bc4b439db5615d720cd96dbff47c03c6c167964b188f6a112e",
       "entries": [[0, "pairs"]],
       "external_symbols": [],
-      "members": ["byte_86E42"],
+      "members": ["SKBloominator_AttackAnim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/aiz/sk/monkey_dude.s",
-      "symbol": "byte_876B4",
-      "scope": "byte_876B4",
-      "first_line": 602,
-      "last_line": 618,
+      "symbol": "MonkeyDudeSK_Body_UniformIdleFrames",
+      "scope": "MonkeyDudeSK_Body_UniformIdleFrames",
+      "first_line": 604,
+      "last_line": 620,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 22,
-      "declarations_sha256": "c0233a359857183f070f4fab0fa50105d97df717172bf2d84508bfd9b9785347",
+      "declarations_sha256": "a21e2818a770bb1260e10de9281062c3ee68cba26c21e083263cdc659601f60a",
       "entries": [
         [0, "fixed"],
         [4, "pairs"],
         [9, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_876B4", "byte_876B8", "byte_876BD"],
+      "members": [
+        "MonkeyDudeSK_Body_UniformIdleFrames",
+        "MonkeyDudeSK_Body_ClimbFrameDelayPairs",
+        "SKMonkeyDude_RetainedShotAnim"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/aiz/sk/rhinobot.s",
-      "symbol": "byte_8713A",
-      "scope": "byte_8713A",
-      "first_line": 319,
-      "last_line": 324,
+      "symbol": "SKRhinobot_PatrolDustAnim",
+      "scope": "SKRhinobot_PatrolDustAnim",
+      "first_line": 322,
+      "last_line": 327,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 28,
-      "declarations_sha256": "201e8e28a32862f4f2f6a01e24ab89952845218539c0c84d98ac8fcedf650428",
+      "declarations_sha256": "3c9ad265a414df6a45c68dde0c811e0536309d470a0af59d1dea48b669781c00",
       "entries": [
         [0, "fixed"],
         [16, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_8713A", "byte_8714A"],
+      "members": ["SKRhinobot_PatrolDustAnim", "SKRhinobot_ChargeDustAnim"],
       "stored_markers": []
     },
     {
@@ -4969,8 +4977,8 @@
       "path": "src/objects/zones/aiz/s3/hollow_tree.s",
       "symbol": "AIZTree_PlayerFrames",
       "scope": "AIZTree_PlayerFrames",
-      "first_line": 220,
-      "last_line": 223,
+      "first_line": 221,
+      "last_line": 224,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 54,
       "declarations_sha256": "909abf2b02660aded800316ee5c1ca3ca2e19314c7745b92a1213f1f5c36e134",
@@ -4981,13 +4989,13 @@
     },
     {
       "path": "src/objects/zones/aiz/s3/plane_intro.s",
-      "symbol": "byte_45E60",
-      "scope": "byte_45E60",
-      "first_line": 522,
-      "last_line": 542,
+      "symbol": "S3PlaneIntro_CountedJumpFrames",
+      "scope": "S3PlaneIntro_CountedJumpFrames",
+      "first_line": 525,
+      "last_line": 545,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 38,
-      "declarations_sha256": "61edd31b44de8e99a838f1f100dc5ba983c831964bc9a7b87e66ac0d91e01b51",
+      "declarations_sha256": "a1b4175ba101804aed5d2ff225524a63642fdc7b0741c99e2b90501fc7e43cfd",
       "entries": [
         [0, "counted"],
         [11, "fixed"],
@@ -4995,7 +5003,12 @@
         [23, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_45E60", "byte_45E6B", "byte_45E73", "byte_45E77"],
+      "members": [
+        "S3PlaneIntro_CountedJumpFrames",
+        "S3PlaneIntro_PlaneAttachmentAAnim",
+        "S3PlaneIntro_PlaneAttachmentBAnim",
+        "S3PlaneIntro_WakeAnim"
+      ],
       "stored_markers": [
         {
           "offset": 10,
@@ -5006,52 +5019,52 @@
     },
     {
       "path": "src/objects/zones/aiz/s3/ride_vine.s",
-      "symbol": "byte_20624",
-      "scope": "byte_20624",
-      "first_line": 481,
-      "last_line": 483,
+      "symbol": "S3RideVine_IdleHangFrames",
+      "scope": "S3RideVine_IdleHangFrames",
+      "first_line": 482,
+      "last_line": 484,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 16,
-      "declarations_sha256": "02b44cb8a13182d992d8b65ee8a93add206bfd30fe2e23b2ead676942816e657",
+      "declarations_sha256": "5bd962272c6869df8b7326ca928370fcbb0126677f061d1417bb8f8a104be8b3",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_20624"],
+      "members": ["S3RideVine_IdleHangFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/aiz/s3/ride_vine.s",
-      "symbol": "byte_206BE",
-      "scope": "byte_206BE",
-      "first_line": 533,
-      "last_line": 549,
+      "symbol": "S3RideVine_SwingFramePairs",
+      "scope": "S3RideVine_SwingFramePairs",
+      "first_line": 534,
+      "last_line": 550,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 16,
-      "declarations_sha256": "7ded8adf50b6a0658c771d4c59002482a46e7c9d5bbd3b1b5ac15b478bff3920",
+      "declarations_sha256": "414eb6ac0c37f15526d2b0270adcf74963be40865ac2b0e010f5b2086239d03e",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_206BE"],
+      "members": ["S3RideVine_SwingFramePairs"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/aiz/s3/spiked_log.s",
-      "symbol": "byte_2B056",
-      "scope": "byte_2B056",
+      "symbol": "S3SpikedLog_IdleFrames",
+      "scope": "S3SpikedLog_IdleFrames",
       "first_line": 101,
       "last_line": 109,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 8,
-      "declarations_sha256": "f8ab2814df265ab33c1c72f3f19aa8617c935dff5c01a42f167cd7f342b66b89",
+      "declarations_sha256": "fd1967cf9fac7405d76dda06cb58f24f75cddcff86b132cec8c670b145d126e9",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_2B056"],
+      "members": ["S3SpikedLog_IdleFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/aiz/sk/hollow_tree.s",
       "symbol": "AIZTree_PlayerFrames",
       "scope": "AIZTree_PlayerFrames",
-      "first_line": 220,
-      "last_line": 223,
+      "first_line": 221,
+      "last_line": 224,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 54,
       "declarations_sha256": "909abf2b02660aded800316ee5c1ca3ca2e19314c7745b92a1213f1f5c36e134",
@@ -5062,44 +5075,44 @@
     },
     {
       "path": "src/objects/zones/aiz/sk/ride_vine.s",
-      "symbol": "byte_22248",
-      "scope": "byte_22248",
-      "first_line": 536,
-      "last_line": 538,
+      "symbol": "SKRideVine_IdleHangFrames",
+      "scope": "SKRideVine_IdleHangFrames",
+      "first_line": 537,
+      "last_line": 539,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 16,
-      "declarations_sha256": "eb24139756a59efd8de03b98ddad3a5605240ed2da9f9564c7965d2992132a12",
+      "declarations_sha256": "4f0fb7db13a498632ac5afc776181d0d8763d560eb506ceeeea3a71bd7f09b7e",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_22248"],
+      "members": ["SKRideVine_IdleHangFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/aiz/sk/ride_vine.s",
-      "symbol": "byte_222D4",
-      "scope": "byte_222D4",
-      "first_line": 583,
-      "last_line": 599,
+      "symbol": "SKRideVine_SwingFramePairs",
+      "scope": "SKRideVine_SwingFramePairs",
+      "first_line": 584,
+      "last_line": 600,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 16,
-      "declarations_sha256": "389ddb0599c098514375eaeec7dad91025c8a97876870c1344ed89eb602068e1",
+      "declarations_sha256": "a11a03871be37a9dd8179678726cb58bcd15a2fe633aa6858266bd6730d3f67e",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_222D4"],
+      "members": ["SKRideVine_SwingFramePairs"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/aiz/sk/spiked_log.s",
-      "symbol": "byte_2B88E",
-      "scope": "byte_2B88E",
+      "symbol": "SKSpikedLog_IdleFrames",
+      "scope": "SKSpikedLog_IdleFrames",
       "first_line": 101,
       "last_line": 109,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 8,
-      "declarations_sha256": "6a223ec7e89c38056e1a8fff36e1d51173e034b8b251fc347798f62b4bf729cc",
+      "declarations_sha256": "bd4b21071791c4f8d369b7ff9a5a8ae399eec4cc9d13f5f732fdcaf9a0e7e392",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_2B88E"],
+      "members": ["SKSpikedLog_IdleFrames"],
       "stored_markers": []
     },
     {

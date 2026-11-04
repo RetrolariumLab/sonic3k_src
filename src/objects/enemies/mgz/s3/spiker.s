@@ -300,7 +300,7 @@ ChildObjDat_56BDC:
                 dc.b    0, -$C
 ChildObjDat_56BF0:
                 dc.w    1-1
-                dc.l    loc_54B46
+                dc.l    S3CallbackShot_InitDeflectable
                 dc.l    ObjDat3_56BD0
                 dc.l    byte_56C1A
                 dc.l    MoveSlowFall_AnimateRaw

@@ -267,7 +267,7 @@ ChildObjDat_89726:
                 dc.b    -$1B,-$16
 ChildObjDat_8972E:
                 dc.w    1-1
-                dc.l    loc_86D4A
+                dc.l    SKCallbackShot_InitDeflectable
                 dc.l    ObjDat3_8970E
                 dc.l    byte_89771
                 dc.l    MoveFall_AnimateRaw
@@ -275,7 +275,7 @@ ChildObjDat_8972E:
                 dc.w    -$200, -$400
 ChildObjDat_89746:
                 dc.w    1-1
-                dc.l    loc_86D4A
+                dc.l    SKCallbackShot_InitDeflectable
                 dc.l    ObjDat3_8971A
                 dc.l    byte_89775
                 dc.l    MoveFall_AnimateRaw

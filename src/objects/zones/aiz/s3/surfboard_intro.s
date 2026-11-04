@@ -19,12 +19,12 @@ Obj_AIZSurfboardIntro:
                 move.w  #0,y_vel(a0)
                 clr.w   (Events_fg_1).w
                 tst.b   $2C(a0)
-                bne.s   loc_20B78
+                bne.s   S3SurfIntro_TryCreatePrimarySplash
                 lea     (Player_1).w,a1
                 move.b  #0,mapping_frame(a1)
                 move.b  #3,$2E(a1)
 
-loc_20B78:
+S3SurfIntro_TryCreatePrimarySplash:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   Obj_AIZSurfboardIntro_Main
                 move.l  #Obj_SurfboardSplash,(a1)
@@ -32,21 +32,22 @@ loc_20B78:
 
 Obj_AIZSurfboardIntro_Main:
                 tst.b   subtype(a0)
-                bne.s   loc_20BFC
+                bne.s   S3SurfIntro_TrackPlayer
                 lea     (Player_1).w,a1
                 addi.w  #8,x_pos(a1)
                 addi.w  #8,x_pos(a0)
                 cmpi.w  #$900,x_pos(a1)
-                bcs.s   loc_20BFC
+                bcs.s   S3SurfIntro_TrackPlayer
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_20BD0
+                bne.w   S3SurfIntro_StartJump
                 move.l  #Obj_Surfboard,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 addi.w  #$C,y_pos(a1)
                 move.w  a0,$30(a1)
 
-loc_20BD0:
+; Start the jump even if the detached board was not allocated
+S3SurfIntro_StartJump:
                 move.w  #$800,x_vel(a0)
                 move.w  #-$400,y_vel(a0)
                 move.l  #Obj_AIZSurfboardIntro_Jump,(a0)
@@ -54,13 +55,13 @@ loc_20BD0:
                 subi.w  #5,x_pos(a0)
                 move.b  #7,mapping_frame(a0)
                 jsr     (SurfboardIntro_Load_PLC).l
-                bra.s   loc_20C00
+                bra.s   S3SurfIntro_CullOrDrawRoot
 ; ---------------------------------------------------------------------------
 
-loc_20BFC:
+S3SurfIntro_TrackPlayer:
                 bsr.w   SurfboardIntro_Move
 
-loc_20C00:
+S3SurfIntro_CullOrDrawRoot:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
@@ -72,18 +73,18 @@ Obj_AIZSurfboardIntro_Jump:
                 moveq   #1,d2
                 move.w  x_pos(a0),d0
                 cmp.w   x_pos(a1),d0
-                beq.s   loc_20C30
-                blt.s   loc_20C2C
+                beq.s   S3SurfIntro_TryLandAndRestorePlayer
+                blt.s   S3SurfIntro_NudgeJumpX
                 neg.w   d2
 
-loc_20C2C:
+S3SurfIntro_NudgeJumpX:
                 add.w   d2,x_pos(a0)
 
-loc_20C30:
+S3SurfIntro_TryLandAndRestorePlayer:
                 tst.w   y_vel(a0)
-                bmi.s   loc_20C74
+                bmi.s   S3SurfIntro_DrawJump
                 cmpi.w  #$440,y_pos(a0)
-                bcs.s   loc_20C74
+                bcs.s   S3SurfIntro_DrawJump
                 move.w  #$440,y_pos(a0)
                 move.w  #0,y_vel(a0)
                 move.w  x_pos(a0),x_pos(a1)
@@ -94,7 +95,7 @@ loc_20C30:
                 move.w  #0,y_vel(a1)
                 move.l  #Obj_AIZSurfboardIntro_Run,(a0)
 
-loc_20C74:
+S3SurfIntro_DrawJump:
                 lea     (Ani_SurfboardIntro).l,a1
                 jsr     (Animate_Sprite).l
                 jsr     (SurfboardIntro_Load_PLC).l
@@ -109,22 +110,22 @@ Obj_AIZSurfboardIntro_Run:
                 lea     (Player_1).w,a0
                 move.w  #0,y_vel(a0)
                 cmpi.w  #$1170,x_pos(a0)
-                bcs.s   loc_20CB6
+                bcs.s   S3SurfIntro_RunPlayerToStopPoint
                 cmpi.w  #$1270,x_pos(a0)
-                bcc.s   loc_20CB6
+                bcc.s   S3SurfIntro_RunPlayerToStopPoint
                 move.w  #-$138,y_vel(a0)
 
-loc_20CB6:
+S3SurfIntro_RunPlayerToStopPoint:
                 jsr     (MoveSprite2).l
                 cmpi.w  #$13C0,x_pos(a0)
-                bcs.s   loc_20CE2
+                bcs.s   S3SurfIntro_AnimateRunnerAndRoot
                 move.b  #0,$2E(a0)
                 move.l  #Obj_AIZSurfboardIntro_Stop,(a3)
                 move.b  #1,(Ctrl_1_locked).w
                 move.w  #button_left_mask<<8,(Ctrl_1_logical).w
                 move.w  #$E,$2E(a3)
 
-loc_20CE2:
+S3SurfIntro_AnimateRunnerAndRoot:
                 jsr     (Animate_Sonic).l
                 move.l  a3,-(sp)
                 jsr     (Sonic_Load_PLC).l
@@ -136,7 +137,7 @@ loc_20CE2:
 
 Obj_AIZSurfboardIntro_Stop:
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_20D32
+                bpl.s   S3SurfIntro_DrawStoppedRoot
                 lea     (Player_1).w,a1
                 move.w  #0,ground_vel(a1)
                 move.w  #0,x_vel(a1)
@@ -145,7 +146,7 @@ Obj_AIZSurfboardIntro_Stop:
                 move.w  #0,(Ctrl_1_logical).w
                 move.l  #Obj_AIZSurfboardIntro_CheckDelete,(a0)
 
-loc_20D32:
+S3SurfIntro_DrawStoppedRoot:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
@@ -158,51 +159,51 @@ SurfboardIntro_Move:
                 move.w  #2,d1
                 move.w  (Player_1+x_pos).w,d0
                 cmp.w   x_pos(a0),d0
-                bcc.s   loc_20D4E
+                bcc.s   S3SurfIntro_TrackXAndPickYFrames
                 neg.w   d1
 
-loc_20D4E:
+S3SurfIntro_TrackXAndPickYFrames:
                 add.w   d1,x_vel(a0)
                 moveq   #0,d2
                 lea     (SurfboardIntro_DownFrames).l,a1
                 move.w  #3,d1
                 move.w  (Player_1+y_pos).w,d0
                 cmp.w   y_pos(a0),d0
-                bcc.s   loc_20D76
+                bcc.s   S3SurfIntro_MoveAndReadYFrameMetric
                 moveq   #1,d2
                 lea     (SurfboardIntro_UpFrames).l,a1
                 move.w  #4,d1
                 neg.w   d1
 
-loc_20D76:
+S3SurfIntro_MoveAndReadYFrameMetric:
                 add.w   d1,y_vel(a0)
                 jsr     (MoveSprite2).l
                 move.w  y_vel(a0),d0
                 tst.w   d2
-                bne.s   loc_20D8A
+                bne.s   S3SurfIntro_ClampYFrameMetric
                 neg.w   d0
 
-loc_20D8A:
+S3SurfIntro_ClampYFrameMetric:
                 addi.w  #$80,d0
                 cmpi.w  #$100,d0
-                bcs.s   loc_20D98
+                bcs.s   S3SurfIntro_SetFrameAndTryWake
                 move.w  #$100,d0
 
-loc_20D98:
+S3SurfIntro_SetFrameAndTryWake:
                 lsr.w   #5,d0
                 move.b  (a1,d0.w),d0
                 addq.b  #1,d0
                 move.b  d0,mapping_frame(a0)
                 jsr     (SurfboardIntro_Load_PLC).l
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_20DCA
+                bpl.s   S3SurfIntro_WakeReturn
                 move.w  #5,$2E(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   locret_20DCA
+                bne.w   S3SurfIntro_WakeReturn
                 move.l  #Obj_SurfboardWaves,(a1)
                 move.w  a0,$30(a1)
 
-locret_20DCA:
+S3SurfIntro_WakeReturn:
                 rts
 ; ---------------------------------------------------------------------------
 SurfboardIntro_DownFrames:
@@ -218,17 +219,17 @@ SurfboardIntro_Load_PLC:
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
                 cmp.b   (Player_prev_frame).w,d0
-                beq.s   locret_20E32
+                beq.s   S3SurfIntro_FrameDmaReturn
                 move.b  d0,(Player_prev_frame).w
                 lea     (DPLC_SurfboardIntro).l,a2
                 add.w   d0,d0
                 adda.w  (a2,d0.w),a2
                 move.w  (a2)+,d5
                 subq.w  #1,d5
-                bmi.s   locret_20E32
+                bmi.s   S3SurfIntro_FrameDmaReturn
                 move.w  #tiles_to_bytes(ArtTile_Player_1),d4
 
-loc_20E06:
+S3SurfIntro_QueueFrameDma:
                 moveq   #0,d1
                 move.w  (a2)+,d1
                 move.w  d1,d3
@@ -242,9 +243,9 @@ loc_20E06:
                 add.w   d3,d4
                 add.w   d3,d4
                 jsr     (Add_To_DMA_Queue).l
-                dbf     d5,loc_20E06
+                dbf     d5,S3SurfIntro_QueueFrameDma
 
-locret_20E32:
+S3SurfIntro_FrameDmaReturn:
                 rts
 ; End of function SurfboardIntro_Load_PLC
 
@@ -276,10 +277,10 @@ Obj_SurfboardWaves_Main:
                 lea     (Ani_SurfboardWaves).l,a1
                 jsr     (Animate_SpriteIrregularDelay).l
                 tst.b   routine(a0)
-                beq.s   loc_20FE6
+                beq.s   S3SurfIntro_DrawFinishedWave
                 move.w  #$7FFF,x_pos(a0)
 
-loc_20FE6:
+S3SurfIntro_DrawFinishedWave:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Ani_SurfboardWaves:
@@ -290,7 +291,7 @@ Obj_SurfboardSplash:
                 movea.l a0,a1
                 bsr.s   SurfboardSplash_Init
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_2102A
+                bne.w   S3SurfIntro_RunPrimarySplash
                 bsr.s   SurfboardSplash2_Init
                 move.l  #Obj_SurfboardSplash2_Main,(a1)
                 move.w  #$80,priority(a1)
@@ -298,7 +299,7 @@ Obj_SurfboardSplash:
                 move.w  #$10,$34(a1)
                 move.w  $30(a0),$30(a1)
 
-loc_2102A:
+S3SurfIntro_RunPrimarySplash:
                 bra.s   Obj_SurfboardSplash_Main
 
 ; =============== S U B R O U T I N E =======================================
@@ -332,27 +333,27 @@ Obj_SurfboardSplash_Main:
                 move.w  $34(a0),d0
                 add.w   d0,y_pos(a0)
                 cmpi.b  #7,mapping_frame(a1)
-                bcs.s   loc_210A4
+                bcs.s   S3SurfIntro_CheckPrimarySplashTrail
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_210A4:
+S3SurfIntro_CheckPrimarySplashTrail:
                 cmpi.b  #5,mapping_frame(a1)
-                bcs.s   loc_210BA
+                bcs.s   S3SurfIntro_ReloadPrimaryTrail
                 tst.w   $36(a0)
-                beq.s   locret_210B8
+                beq.s   S3SurfIntro_PrimarySplashReturn
                 subq.w  #1,$36(a0)
-                bra.s   loc_210C0
+                bra.s   S3SurfIntro_DrawPrimarySplash
 ; ---------------------------------------------------------------------------
 
-locret_210B8:
+S3SurfIntro_PrimarySplashReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_210BA:
+S3SurfIntro_ReloadPrimaryTrail:
                 move.w  #3,$36(a0)
 
-loc_210C0:
+S3SurfIntro_DrawPrimarySplash:
                 lea     (Ani_SurfboardSplash).l,a1
                 jsr     (Animate_SpriteIrregularDelay).l
                 jmp     (Sprite_OnScreen_Test).l
@@ -378,27 +379,27 @@ Obj_SurfboardSplash2_Main:
                 move.w  $34(a0),d0
                 add.w   d0,y_pos(a0)
                 cmpi.b  #7,mapping_frame(a1)
-                bcs.s   loc_21116
+                bcs.s   S3SurfIntro_CheckSecondarySplashTrail
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_21116:
+S3SurfIntro_CheckSecondarySplashTrail:
                 cmpi.b  #5,mapping_frame(a1)
-                bcc.s   loc_2112C
+                bcc.s   S3SurfIntro_ReloadSecondaryTrail
                 tst.w   $36(a0)
-                beq.s   locret_2112A
+                beq.s   S3SurfIntro_SecondarySplashReturn
                 subq.w  #1,$36(a0)
-                bra.s   loc_21132
+                bra.s   S3SurfIntro_DrawSecondarySplash
 ; ---------------------------------------------------------------------------
 
-locret_2112A:
+S3SurfIntro_SecondarySplashReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2112C:
+S3SurfIntro_ReloadSecondaryTrail:
                 move.w  #3,$36(a0)
 
-loc_21132:
+S3SurfIntro_DrawSecondarySplash:
                 lea     (Ani_SurfboardSplash).l,a1
                 jsr     (Animate_SpriteIrregularDelay).l
                 jmp     (Sprite_OnScreen_Test).l
@@ -422,26 +423,26 @@ SurfboardSplash_SetOffsets:
                 ext.w   d1
                 moveq   #1,d2
                 cmp.w   $32(a0),d1
-                beq.s   loc_21170
-                bgt.s   loc_2116C
+                beq.s   S3SurfIntro_PickSplashYStep
+                bgt.s   S3SurfIntro_StepSplashOffsetX
                 neg.w   d2
 
-loc_2116C:
+S3SurfIntro_StepSplashOffsetX:
                 add.w   d2,$32(a0)
 
-loc_21170:
+S3SurfIntro_PickSplashYStep:
                 move.b  1(a2,d0.w),d1
                 ext.w   d1
                 moveq   #1,d2
                 cmp.w   $34(a0),d1
-                beq.s   locret_21186
-                bgt.s   loc_21182
+                beq.s   S3SurfIntro_SplashOffsetReturn
+                bgt.s   S3SurfIntro_StepSplashOffsetY
                 neg.w   d2
 
-loc_21182:
+S3SurfIntro_StepSplashOffsetY:
                 add.w   d2,$34(a0)
 
-locret_21186:
+S3SurfIntro_SplashOffsetReturn:
                 rts
 ; End of function SurfboardSplash_SetOffsets
 
@@ -467,12 +468,12 @@ Obj_Surfboard:
 
 Obj_Surfboard_Main:
                 cmpi.b  #3,anim_frame(a0)
-                bcs.s   loc_212FE
+                bcs.s   S3SurfIntro_MoveAndAnimateBoard
                 tst.w   x_vel(a0)
-                beq.s   loc_212FE
+                beq.s   S3SurfIntro_MoveAndAnimateBoard
                 subi.w  #$10,x_vel(a0)
 
-loc_212FE:
+S3SurfIntro_MoveAndAnimateBoard:
                 jsr     (MoveSprite2).l
                 addi.w  #$20,y_vel(a0)
                 lea     (Ani_Surfboard).l,a1
@@ -481,15 +482,15 @@ loc_212FE:
                 move.b  anim_frame(a0),d0
                 andi.b  #7,d0
                 cmpi.b  #4,d0
-                bcs.s   loc_21330
+                bcs.s   S3SurfIntro_HideFinishedBoard
                 move.b  #3,status(a0)
 
-loc_21330:
+S3SurfIntro_HideFinishedBoard:
                 tst.b   routine(a0)
-                beq.s   loc_2133C
+                beq.s   S3SurfIntro_CullOrDrawBoard
                 move.w  #$7FFF,x_pos(a0)
 
-loc_2133C:
+S3SurfIntro_CullOrDrawBoard:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Ani_Surfboard:

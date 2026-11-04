@@ -300,7 +300,7 @@ ChildObjDat_88E1E:
                 dc.b    0, -$C
 ChildObjDat_88E32:
                 dc.w    1-1
-                dc.l    loc_86D4A
+                dc.l    SKCallbackShot_InitDeflectable
                 dc.l    ObjDat3_88E12
                 dc.l    byte_88E5C
                 dc.l    MoveSlowFall_AnimateRaw

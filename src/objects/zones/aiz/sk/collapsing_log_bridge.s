@@ -6,7 +6,7 @@
 
 Obj_AIZCollapsingLogBridge:
                 move.b  subtype(a0),d0
-                bmi.w   loc_2ADA8
+                bmi.w   SKCollapseLog_InitFireBridge
                 move.b  d0,$36(a0)
                 addi.b  #$30,d0
                 move.b  d0,$35(a0)
@@ -18,8 +18,8 @@ Obj_AIZCollapsingLogBridge:
                 move.b  #4,render_flags(a0)             ; oddly, this is not an ori like the child sprites, however it doesn't matter in normal gameplay as this object only faces one direction
                 move.w  #$200,priority(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_2AD9E
-                move.l  #loc_2AEB4,(a1)
+                bne.w   SKCollapseLog_StartStandingBridge
+                move.l  #SKCollapseLog_CullOrDrawBridge,(a1)
                 move.l  #Map_AIZCollapsingLogBridge,mappings(a1)
                 move.w  #make_art_tile(ArtTile_AIZMisc2,2,0),art_tile(a1)
                 ori.b   #4,render_flags(a1)
@@ -38,21 +38,21 @@ Obj_AIZCollapsingLogBridge:
                 subq.w  #1,d6
                 move.w  #1,4(a2)
 
-loc_2AD86:
+SKCollapseLog_WriteLogChildPositions:
                 move.w  d3,(a2)+
                 move.w  d2,(a2)+
                 addq.w  #2,a2
                 addi.w  #$1E,d3
-                dbf     d6,loc_2AD86
+                dbf     d6,SKCollapseLog_WriteLogChildPositions
                 move.w  #2,-2(a2)
                 move.w  a1,$3C(a0)
 
-loc_2AD9E:
-                move.l  #loc_2AE70,(a0)
-                bra.w   loc_2AE70
+SKCollapseLog_StartStandingBridge:
+                move.l  #SKCollapseLog_TrySplitStandingBridge,(a0)
+                bra.w   SKCollapseLog_TrySplitStandingBridge
 ; ---------------------------------------------------------------------------
 
-loc_2ADA8:
+SKCollapseLog_InitFireBridge:
                 andi.b  #$7F,d0
                 move.b  d0,$36(a0)
                 addi.b  #$30,d0
@@ -65,8 +65,8 @@ loc_2ADA8:
                 move.b  #4,render_flags(a0)             ; oddly, this is not an ori like the child sprites, however it doesn't matter in normal gameplay as this object only faces one direction
                 move.w  #$200,priority(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_2AE66
-                move.l  #loc_2AEB4,(a1)
+                bne.w   SKCollapseLog_StartGlobalFireBridge
+                move.l  #SKCollapseLog_CullOrDrawBridge,(a1)
                 move.l  #Map_AIZDrawBridgeFire,mappings(a1)
                 move.w  #make_art_tile(ArtTile_AIZMisc2,2,1),art_tile(a1)
                 ori.b   #4,render_flags(a1)
@@ -85,32 +85,32 @@ loc_2ADA8:
                 subq.w  #1,d6
                 move.w  #1,4(a2)
 
-loc_2AE4E:
+SKCollapseLog_WriteFireChildPositions:
                 move.w  d3,(a2)+
                 move.w  d2,(a2)+
                 addq.w  #2,a2
                 addi.w  #$20,d3
-                dbf     d6,loc_2AE4E
+                dbf     d6,SKCollapseLog_WriteFireChildPositions
                 move.w  #2,-2(a2)
                 move.w  a1,$3C(a0)
 
-loc_2AE66:
-                move.l  #loc_2AEE2,(a0)
-                bra.w   loc_2AEE2
+SKCollapseLog_StartGlobalFireBridge:
+                move.l  #SKCollapseLog_TrySplitFireBridge,(a0)
+                bra.w   SKCollapseLog_TrySplitFireBridge
 ; ---------------------------------------------------------------------------
 
-loc_2AE70:
+SKCollapseLog_TrySplitStandingBridge:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                beq.s   loc_2AE98
+                beq.s   SKCollapseLog_CheckLogTopSolid
                 move.b  $35(a0),$34(a0)
                 move.b  $36(a0),d2
                 move.b  $37(a0),d3
-                move.l  #loc_2AF70,(a0)
-                move.l  #loc_2AEBA,d4
+                move.l  #SKCollapseLog_TickBridgeCollapse,(a0)
+                move.l  #SKCollapseLog_WaitLogFragment,d4
                 bsr.w   SplitAizCollapsingBridgeSprites
 
-loc_2AE98:
+SKCollapseLog_CheckLogTopSolid:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 moveq   #0,d3
@@ -120,39 +120,39 @@ loc_2AE98:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
-loc_2AEB4:
+SKCollapseLog_CullOrDrawBridge:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_2AEBA:
+SKCollapseLog_WaitLogFragment:
                 tst.b   $34(a0)
-                beq.s   loc_2AECA
+                beq.s   SKCollapseLog_FallLogFragment
                 subq.b  #1,$34(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2AECA:
+SKCollapseLog_FallLogFragment:
                 jsr     (MoveSprite).l
                 tst.b   render_flags(a0)
-                bpl.s   loc_2AEDC
+                bpl.s   SKCollapseLog_DeleteLogFragment
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2AEDC:
+SKCollapseLog_DeleteLogFragment:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2AEE2:
+SKCollapseLog_TrySplitFireBridge:
                 tst.b   (_unkFAA2).w
-                beq.s   loc_2AF06
+                beq.s   SKCollapseLog_CheckFireTopSolid
                 move.b  $35(a0),$34(a0)
                 move.b  $36(a0),d2
                 move.b  $37(a0),d3
-                move.l  #loc_2AF70,(a0)
-                move.l  #loc_2AF22,d4
+                move.l  #SKCollapseLog_TickBridgeCollapse,(a0)
+                move.l  #SKCollapseLog_WaitFireFragment,d4
                 bsr.w   SplitAizCollapsingBridgeSprites
 
-loc_2AF06:
+SKCollapseLog_CheckFireTopSolid:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 moveq   #0,d3
@@ -162,43 +162,43 @@ loc_2AF06:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
-loc_2AF22:
+SKCollapseLog_WaitFireFragment:
                 tst.b   $34(a0)
-                beq.s   loc_2AF3A
+                beq.s   SKCollapseLog_AnimateFireFragment
                 subq.b  #1,$34(a0)
-                bne.s   loc_2AF34
+                bne.s   SKCollapseLog_DrawWaitingFireFragment
                 move.b  #3,mapping_frame(a0)
 
-loc_2AF34:
+SKCollapseLog_DrawWaitingFireFragment:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2AF3A:
+SKCollapseLog_AnimateFireFragment:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_2AF58
+                bpl.s   SKCollapseLog_FallFireFragment
                 move.b  #3,anim_frame_timer(a0)
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #8,mapping_frame(a0)
-                blo.s   loc_2AF58
+                blo.s   SKCollapseLog_FallFireFragment
                 move.b  #3,mapping_frame(a0)
 
-loc_2AF58:
+SKCollapseLog_FallFireFragment:
                 jsr     (MoveSprite).l
                 tst.b   render_flags(a0)
-                bpl.s   loc_2AF6A
+                bpl.s   SKCollapseLog_DeleteFireFragment
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2AF6A:
+SKCollapseLog_DeleteFireFragment:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2AF70:
+SKCollapseLog_TickBridgeCollapse:
                 subq.b  #1,$34(a0)
-                bne.s   loc_2AF7C
-                move.l  #loc_2B452,(a0)
+                bne.s   SKCollapseLog_CheckRidersForRelease
+                move.l  #SKDrawbridge_TickFinalRiderDelay,(a0)
 
-loc_2AF7C:
+SKCollapseLog_CheckRidersForRelease:
                 move.b  $34(a0),d3
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
@@ -214,23 +214,23 @@ loc_2AF7C:
 
 ReleasePlayerFromCollapsingAizLogSegment:
                 btst    d6,status(a0)
-                beq.s   locret_2AFFC
+                beq.s   SKCollapseLog_RiderReleaseReturn
                 move.w  d1,d2
                 add.w   d2,d2
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_2AFE0
+                bne.s   SKCollapseLog_ReleaseBridgeRider
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_2AFE0
+                bmi.s   SKCollapseLog_ReleaseBridgeRider
                 cmp.w   d2,d0
-                bhs.s   loc_2AFE0
+                bhs.s   SKCollapseLog_ReleaseBridgeRider
                 btst    #0,status(a0)
-                beq.s   loc_2AFCA
+                beq.s   SKCollapseLog_CheckRiderSegmentDeadline
                 neg.w   d0
                 add.w   d2,d0
 
-loc_2AFCA:
+SKCollapseLog_CheckRiderSegmentDeadline:
                 lsr.w   #5,d0
                 add.w   d0,d0
                 add.w   d0,d0
@@ -239,16 +239,16 @@ loc_2AFCA:
                 move.b  $35(a0),d2
                 sub.b   d0,d2
                 cmp.b   d2,d3
-                bhi.s   locret_2AFFC
+                bhi.s   SKCollapseLog_RiderReleaseReturn
 
-loc_2AFE0:
+SKCollapseLog_ReleaseBridgeRider:
                 bclr    d6,status(a0)
                 bclr    #Status_OnObj,status(a1)
                 bclr    #Status_Push,status(a1)
                 bset    #Status_InAir,status(a1)
                 move.b  #1,prev_anim(a1)
 
-locret_2AFFC:
+SKCollapseLog_RiderReleaseReturn:
                 rts
 ; End of function ReleasePlayerFromCollapsingAizLogSegment
 
@@ -261,14 +261,14 @@ SplitAizCollapsingBridgeSprites:
                 subq.w  #1,d6
                 bclr    #6,render_flags(a3)
                 movea.l a3,a1
-                bra.s   loc_2B01E
+                bra.s   SKCollapseLog_InitFragmentFromChild
 ; ---------------------------------------------------------------------------
 
-loc_2B016:
+SKCollapseLog_TryNextFragment:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_2B05C
+                bne.s   SKCollapseLog_ClearChildCoordsAndSound
 
-loc_2B01E:
+SKCollapseLog_InitFragmentFromChild:
                 move.l  d4,(a1)
                 move.l  mappings(a3),mappings(a1)
                 move.b  render_flags(a3),render_flags(a1)
@@ -282,9 +282,10 @@ loc_2B01E:
                 move.b  d0,mapping_frame(a1)
                 move.b  d2,$34(a1)
                 add.b   d3,d2
-                dbf     d6,loc_2B016
+                dbf     d6,SKCollapseLog_TryNextFragment
 
-loc_2B05C:
+; Clear the embedded X and Y words reused by the root's velocity fields
+SKCollapseLog_ClearChildCoordsAndSound:
                 move.w  #0,sub2_x_pos(a3)
                 move.w  #0,sub2_y_pos(a3)
                 moveq   #signextendB(sfx_Collapse),d0

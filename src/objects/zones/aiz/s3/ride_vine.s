@@ -5,7 +5,7 @@
 
 Obj_AIZRideVine:
                 movea.l a0,a1
-                move.l  #loc_20168,(a1)
+                move.l  #S3RideVine_WaitForRider,(a1)
                 bsr.w   InitializeAizRideVineSprite
                 move.b  #$21,mapping_frame(a1)
                 move.w  x_pos(a0),d2
@@ -19,21 +19,21 @@ Obj_AIZRideVine:
                 moveq   #3,d1
                 addq.w  #1,d1
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_2013E
+                bne.w   S3RideVine_JoinHandleWait
                 move.w  a1,$3E(a0)
-                move.l  #loc_203C0,(a1)
+                move.l  #S3RideVine_PickLeadOscillation,(a1)
                 move.w  a0,$3C(a1)
-                bra.s   loc_20110
+                bra.s   S3RideVine_InitNextLink
 ; ---------------------------------------------------------------------------
 
-loc_200F8:
+S3RideVine_TryAllocateNextLink:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_2013E
-                move.l  #loc_20454,(a1)
+                bne.w   S3RideVine_JoinHandleWait
+                move.l  #S3RideVine_UpdateLinkFromParent,(a1)
                 move.w  a2,$3C(a1)
                 move.w  a1,$3E(a2)
 
-loc_20110:
+S3RideVine_InitNextLink:
                 movea.l a1,a2
                 bsr.s   InitializeAizRideVineSprite
                 move.w  d2,x_pos(a1)
@@ -41,13 +41,13 @@ loc_20110:
                 addi.w  #$10,d3
                 addq.w  #1,$36(a0)
                 move.w  $36(a0),$36(a1)
-                dbf     d1,loc_200F8
+                dbf     d1,S3RideVine_TryAllocateNextLink
                 move.l  #Obj_AIZRideVineHandle,(a1)
                 move.b  #$20,mapping_frame(a1)
                 move.w  a1,$40(a0)
 
-loc_2013E:
-                bra.s   loc_20168
+S3RideVine_JoinHandleWait:
+                bra.s   S3RideVine_WaitForRider
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -63,28 +63,28 @@ InitializeAizRideVineSprite:
 
 ; ---------------------------------------------------------------------------
 
-loc_20168:
+S3RideVine_WaitForRider:
                 movea.w $40(a0),a1
                 tst.w   $32(a1)
-                beq.s   loc_20188
-                move.l  #loc_2018C,(a0)
+                beq.s   S3RideVine_DrawAfterHandleWait
+                move.l  #S3RideVine_MoveToEndpoint,(a0)
                 movea.w $3E(a0),a1
                 move.w  #1,$2E(a1)
                 move.w  #0,$38(a1)
 
-loc_20188:
-                bra.w   loc_20378
+S3RideVine_DrawAfterHandleWait:
+                bra.w   S3RideVine_CullChainOrDrawRoot
 ; ---------------------------------------------------------------------------
 
-loc_2018C:
+S3RideVine_MoveToEndpoint:
                 addi.l  #$80000,x_pos(a0)
                 addi.l  #$20000,y_pos(a0)
                 move.w  x_pos(a0),d0
                 cmp.w   $46(a0),d0
-                blo.w   loc_2022E
+                blo.w   S3RideVine_DrawAfterTravel
                 tst.b   subtype(a0)
-                bpl.s   loc_20202
-                move.l  #loc_20232,(a0)
+                bpl.s   S3RideVine_StartSwingAndTangentRelease
+                move.l  #S3RideVine_UpdateDroppedRoot,(a0)
                 move.w  #$800,x_vel(a0)
                 move.w  #$200,y_vel(a0)
                 move.l  #Map_AnimatedStillSprites,mappings(a0)
@@ -96,64 +96,64 @@ loc_2018C:
                 movea.w $40(a0),a1
                 lea     $32(a1),a2
                 tst.b   (a2)
-                beq.s   loc_201F6
+                beq.s   S3RideVine_TryForceReleaseP2
                 move.b  #$81,(a2)
 
-loc_201F6:
+S3RideVine_TryForceReleaseP2:
                 addq.w  #1,a2
                 tst.b   (a2)
-                beq.s   loc_20200
+                beq.s   S3RideVine_DrawAfterDropSetup
                 move.b  #$81,(a2)
 
-loc_20200:
-                bra.s   loc_2022E
+S3RideVine_DrawAfterDropSetup:
+                bra.s   S3RideVine_DrawAfterTravel
 ; ---------------------------------------------------------------------------
 
-loc_20202:
-                move.l  #loc_20254,(a0)
+S3RideVine_StartSwingAndTangentRelease:
+                move.l  #S3RideVine_UpdateOccupiedSwing,(a0)
                 movea.w $3E(a0),a1
-                move.l  #loc_20428,(a1)
+                move.l  #S3RideVine_PlaceRootDrivenLead,(a1)
                 move.w  #0,$3A(a1)
                 movea.w $40(a0),a1
                 move.w  #1,$30(a1)
                 move.w  #0,angle(a0)
                 move.w  #$400,$3A(a0)
 
-loc_2022E:
-                bra.w   loc_20378
+S3RideVine_DrawAfterTravel:
+                bra.w   S3RideVine_CullChainOrDrawRoot
 ; ---------------------------------------------------------------------------
 
-loc_20232:
+S3RideVine_UpdateDroppedRoot:
                 jsr     (MoveSprite).l
                 tst.b   render_flags(a0)
-                bmi.s   loc_20244
+                bmi.s   S3RideVine_AnimateDroppedRoot
                 move.w  #$7FF0,x_pos(a0)
 
-loc_20244:
+S3RideVine_AnimateDroppedRoot:
                 lea     (Ani_AnimatedStillSprites).l,a1
                 jsr     (Animate_Sprite).l
-                bra.w   loc_20378
+                bra.w   S3RideVine_CullChainOrDrawRoot
 ; ---------------------------------------------------------------------------
 
-loc_20254:
+S3RideVine_UpdateOccupiedSwing:
                 movea.w $40(a0),a1
                 move.w  $3A(a0),d0
                 move.b  angle(a0),d1
                 ext.w   d1
-                bpl.s   loc_20266
+                bpl.s   S3RideVine_StepSwingAndCheckEmpty
                 neg.w   d1
 
-loc_20266:
+S3RideVine_StepSwingAndCheckEmpty:
                 add.w   d1,d1
                 sub.w   d1,d0
                 sub.w   d0,angle(a0)
                 tst.w   $32(a1)
-                bne.s   loc_202A8
+                bne.s   S3RideVine_DrawAfterSwing
                 move.b  angle(a0),d0
                 addq.b  #8,d0
                 cmpi.b  #$10,d0
-                bhs.s   loc_202A8
-                move.l  #loc_202AC,(a0)
+                bhs.s   S3RideVine_DrawAfterSwing
+                move.l  #S3RideVine_StepDampedSwing,(a0)
                 move.w  #0,$42(a0)
                 move.w  #-$300,$44(a0)
                 move.w  #$1000,$38(a0)
@@ -161,132 +161,132 @@ loc_20266:
                 movea.w $40(a0),a1
                 move.w  #2,$30(a1)
 
-loc_202A8:
-                bra.w   loc_20378
+S3RideVine_DrawAfterSwing:
+                bra.w   S3RideVine_CullChainOrDrawRoot
 ; ---------------------------------------------------------------------------
 
-loc_202AC:
+S3RideVine_StepDampedSwing:
                 moveq   #0,d2
                 move.b  $38(a0),d2
                 move.w  $44(a0),d0
                 move.w  #0,d1
                 tst.w   $2E(a0)
-                bne.s   loc_20304
+                bne.s   S3RideVine_StepDampedSwingNegative
                 add.w   d2,d0
                 move.w  d0,$44(a0)
                 add.w   d0,$42(a0)
                 cmp.b   $42(a0),d1
-                bgt.s   loc_2032E
+                bgt.s   S3RideVine_ApplyDampedAngle
                 asr.w   #4,d0
                 sub.w   d0,$44(a0)
                 move.w  #1,$2E(a0)
                 cmpi.w  #$C00,$38(a0)
-                beq.s   loc_202EC
+                beq.s   S3RideVine_RestoreIdleHandle
                 subi.w  #$40,$38(a0)
-                bra.s   loc_2032E
+                bra.s   S3RideVine_ApplyDampedAngle
 ; ---------------------------------------------------------------------------
 
-loc_202EC:
-                move.l  #loc_2034A,(a0)
+S3RideVine_RestoreIdleHandle:
+                move.l  #S3RideVine_StepIdleSwing,(a0)
                 move.w  #0,$38(a0)
                 movea.w $40(a0),a1
                 move.w  #0,$30(a1)
-                bra.s   loc_2032E
+                bra.s   S3RideVine_ApplyDampedAngle
 ; ---------------------------------------------------------------------------
 
-loc_20304:
+S3RideVine_StepDampedSwingNegative:
                 sub.w   d2,d0
                 move.w  d0,$44(a0)
                 add.w   d0,$42(a0)
                 cmp.b   $42(a0),d1
-                ble.s   loc_2032E
+                ble.s   S3RideVine_ApplyDampedAngle
                 asr.w   #4,d0
                 sub.w   d0,$44(a0)
                 move.w  #0,$2E(a0)
                 cmpi.w  #$C00,$38(a0)
-                beq.s   loc_202EC
+                beq.s   S3RideVine_RestoreIdleHandle
                 subi.w  #$40,$38(a0)
 
-loc_2032E:
+S3RideVine_ApplyDampedAngle:
                 move.w  $42(a0),d0
                 move.w  d0,angle(a0)
                 asr.w   #3,d0
                 move.w  d0,$3A(a0)
                 movea.w $3E(a0),a1
                 move.w  $3A(a0),$3A(a1)
-                bra.w   loc_20378
+                bra.w   S3RideVine_CullChainOrDrawRoot
 ; ---------------------------------------------------------------------------
 
-loc_2034A:
+S3RideVine_StepIdleSwing:
                 move.b  $38(a0),d0
                 addi.w  #$200,$38(a0)
                 jsr     (GetSineCosine).l
                 asl.w   #2,d0
                 cmpi.w  #$400,d0
-                bne.s   loc_20366
+                bne.s   S3RideVine_ApplyIdleAngle
                 move.w  #$3FF,d0
 
-loc_20366:
+S3RideVine_ApplyIdleAngle:
                 move.w  d0,angle(a0)
                 move.w  d0,$3A(a0)
                 movea.w $3E(a0),a1
                 move.w  $3A(a0),$3A(a1)
 
-loc_20378:
+S3RideVine_CullChainOrDrawRoot:
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_20392
+                bhi.w   S3RideVine_BeginDeleteChain
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_20392:
+S3RideVine_BeginDeleteChain:
                 move.w  $36(a0),d2
                 subq.w  #1,d2
-                bcs.s   loc_203AE
+                bcs.s   S3RideVine_ClearRootRespawn
                 movea.w $3E(a0),a2
 
-loc_2039E:
+S3RideVine_DeleteLinkAndAdvance:
                 movea.l a2,a1
                 movea.w $3E(a1),a2
                 jsr     (Delete_Referenced_Sprite).l
-                dbf     d2,loc_2039E
+                dbf     d2,S3RideVine_DeleteLinkAndAdvance
 
-loc_203AE:
+S3RideVine_ClearRootRespawn:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_203BA
+                beq.s   S3RideVine_DeleteRoot
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_203BA:
+S3RideVine_DeleteRoot:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_203C0:
+S3RideVine_PickLeadOscillation:
                 tst.w   $2E(a0)
-                bne.s   loc_203E8
+                bne.s   S3RideVine_StepLeadTravelSine
                 move.b  $38(a0),d0
                 addi.w  #$200,$38(a0)
                 jsr     (GetSineCosine).l
                 asl.w   #2,d0
                 cmpi.w  #$400,d0
-                bne.s   loc_203E2
+                bne.s   S3RideVine_StoreLeadIdleStep
                 move.w  #$3FF,d0
 
-loc_203E2:
+S3RideVine_StoreLeadIdleStep:
                 move.w  d0,$3A(a0)
-                bra.s   loc_203FE
+                bra.s   S3RideVine_PlaceOscillatingLead
 ; ---------------------------------------------------------------------------
 
-loc_203E8:
+S3RideVine_StepLeadTravelSine:
                 move.b  $38(a0),d0
                 addi.w  #$100,$38(a0)
                 jsr     (GetSineCosine).l
                 asl.w   #3,d0
                 move.w  d0,$3A(a0)
 
-loc_203FE:
+S3RideVine_PlaceOscillatingLead:
                 move.w  $3A(a0),d0
                 move.w  d0,angle(a0)
                 move.b  angle(a0),d0
@@ -299,7 +299,7 @@ loc_203FE:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_20428:
+S3RideVine_PlaceRootDrivenLead:
                 movea.w $3C(a0),a1
                 move.w  angle(a1),angle(a0)
                 move.b  angle(a0),d0
@@ -312,7 +312,7 @@ loc_20428:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_20454:
+S3RideVine_UpdateLinkFromParent:
                 movea.w $3C(a0),a1
                 move.w  $3A(a1),$3A(a0)
                 move.w  angle(a1),d0
@@ -352,15 +352,15 @@ Obj_AIZRideVineHandle:
                 move.w  y_pos(a0),d5
                 bsr.w   PositionAizRideVineLink
                 cmp.w   x_pos(a0),d4
-                beq.s   loc_204CA
+                beq.s   S3RideVine_TryCacheOldHandleY
                 move.w  d4,$42(a0)
 
-loc_204CA:
+S3RideVine_TryCacheOldHandleY:
                 cmp.w   y_pos(a0),d5
-                beq.s   loc_204D4
+                beq.s   S3RideVine_UpdateBothRiders
                 move.w  d5,$44(a0)
 
-loc_204D4:
+S3RideVine_UpdateBothRiders:
                 lea     $32(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d0
@@ -370,33 +370,33 @@ loc_204D4:
                 move.w  (Ctrl_2_logical).w,d0
                 bsr.s   UpdatePlayerOnAizVineHandle
                 tst.w   $32(a0)
-                beq.s   loc_204FA
+                beq.s   S3RideVine_DrawHandle
                 tst.w   $30(a0)
-                bne.s   locret_20500
+                bne.s   S3RideVine_HandleDrawReturn
 
-loc_204FA:
+S3RideVine_DrawHandle:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_20500:
+S3RideVine_HandleDrawReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
 UpdatePlayerOnAizVineHandle:
                 tst.b   (a2)
-                beq.w   loc_206DE
-                bmi.w   loc_205BC
+                beq.w   S3RideVine_TickRegrabCooldown
+                bmi.w   S3RideVine_ForceDiagonalRelease
                 tst.b   render_flags(a1)
-                bpl.w   loc_205CE
+                bpl.w   S3RideVine_ClearGrabAndStartCooldown
                 cmpi.b  #4,routine(a1)
-                bhs.w   loc_205CE
+                bhs.w   S3RideVine_ClearGrabAndStartCooldown
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   loc_205DC
+                beq.w   S3RideVine_PickRiderPose
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 cmpi.w  #1,$30(a0)
-                beq.s   loc_2059A
+                beq.s   S3RideVine_ReleaseAlongLinkTangent
                 move.w  x_pos(a0),d1
                 sub.w   $42(a0),d1
                 asl.w   #7,d1
@@ -407,18 +407,19 @@ UpdatePlayerOnAizVineHandle:
                 move.w  d1,y_vel(a1)
                 move.b  #$3C,2(a2)
                 btst    #button_left+8,d0
-                beq.s   loc_20562
+                beq.s   S3RideVine_TryJumpRightOverride
                 move.w  #-$200,x_vel(a1)
 
-loc_20562:
+; If both directions are held, the right override wins
+S3RideVine_TryJumpRightOverride:
                 btst    #button_right+8,d0
-                beq.s   loc_2056E
+                beq.s   S3RideVine_AddReleaseJumpBias
                 move.w  #$200,x_vel(a1)
 
-loc_2056E:
+S3RideVine_AddReleaseJumpBias:
                 addi.w  #-$380,y_vel(a1)
 
-loc_20574:
+S3RideVine_SetReleasedJumpState:
                 bset    #Status_InAir,status(a1)
                 move.b  #1,jumping(a1)
                 move.b  #$E,y_radius(a1)
@@ -428,7 +429,7 @@ loc_20574:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2059A:
+S3RideVine_ReleaseAlongLinkTangent:
                 move.b  #$3C,2(a2)
                 movea.w $3C(a0),a3
                 move.b  angle(a3),d0
@@ -437,15 +438,15 @@ loc_2059A:
                 move.w  d1,x_vel(a1)
                 asl.w   #3,d0
                 move.w  d0,y_vel(a1)
-                bra.s   loc_20574
+                bra.s   S3RideVine_SetReleasedJumpState
 ; ---------------------------------------------------------------------------
 
-loc_205BC:
+S3RideVine_ForceDiagonalRelease:
                 move.w  #$300,x_vel(a1)
                 move.w  #$200,y_vel(a1)
                 bset    #Status_InAir,status(a1)
 
-loc_205CE:
+S3RideVine_ClearGrabAndStartCooldown:
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.b  #$3C,2(a2)
@@ -454,9 +455,9 @@ loc_205CE:
 
 ; ---------------------------------------------------------------------------
 
-loc_205DC:
+S3RideVine_PickRiderPose:
                 tst.w   $30(a0)
-                bne.s   loc_20634
+                bne.s   S3RideVine_ComputeSwingPose
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 addi.w  #$14,y_pos(a1)
@@ -464,13 +465,13 @@ loc_205DC:
                 moveq   #0,d0
                 move.b  angle(a3),d0
                 btst    #Status_Facing,status(a1)
-                beq.s   loc_20608
+                beq.s   S3RideVine_PickIdleHangFrame
                 neg.b   d0
 
-loc_20608:
+S3RideVine_PickIdleHangFrame:
                 addq.b  #8,d0
                 lsr.w   #4,d0
-                move.b  byte_20624(pc,d0.w),mapping_frame(a1)
+                move.b  S3RideVine_IdleHangFrames(pc,d0.w),mapping_frame(a1)
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 move.l  a2,-(sp)
@@ -478,35 +479,35 @@ loc_20608:
                 movea.l (sp)+,a2
                 rts
 ; ---------------------------------------------------------------------------
-byte_20624:
+S3RideVine_IdleHangFrames:
                 dc.b    $91, $91, $90, $90, $90, $90, $90, $90, $92, $92, $92, $92, $92, $92, $91, $91
                 even
 ; ---------------------------------------------------------------------------
 
-loc_20634:
+S3RideVine_ComputeSwingPose:
                 movea.w $3C(a0),a3
                 moveq   #0,d0
                 move.b  angle(a3),d0
                 btst    #Status_Facing,status(a1)
-                beq.s   loc_20648
+                beq.s   S3RideVine_ReadSwingFrameAndOffset
                 neg.b   d0
 
-loc_20648:
+S3RideVine_ReadSwingFrameAndOffset:
                 addi.b  #$10,d0
                 lsr.w   #5,d0
                 add.w   d0,d0
-                move.b  byte_206BE(pc,d0.w),mapping_frame(a1)
+                move.b  S3RideVine_SwingFramePairs(pc,d0.w),mapping_frame(a1)
                 move.b  #0,anim(a1)
                 andi.w  #$FFFE,d0
-                move.b  byte_206CE(pc,d0.w),d2
-                move.b  byte_206CE+1(pc,d0.w),d3
+                move.b  S3RideVine_SwingPoseOffsets(pc,d0.w),d2
+                move.b  S3RideVine_SwingPoseOffsets+1(pc,d0.w),d3
                 ext.w   d2
                 ext.w   d3
                 btst    #Status_Facing,status(a1)
-                beq.s   loc_20676
+                beq.s   S3RideVine_PlaceSwingPoseFromLink
                 neg.w   d2
 
-loc_20676:
+S3RideVine_PlaceSwingPoseFromLink:
                 movea.w $3C(a0),a3
                 move.b  angle(a3),d0
                 addq.b  #4,d0
@@ -530,7 +531,7 @@ loc_20676:
                 movea.l (sp)+,a2
                 rts
 ; ---------------------------------------------------------------------------
-byte_206BE:
+S3RideVine_SwingFramePairs:
                 dc.b    $78
                 dc.b    $78
                 dc.b    $7F
@@ -547,7 +548,7 @@ byte_206BE:
                 dc.b    $7A
                 dc.b    $79
                 dc.b    $79
-byte_206CE:
+S3RideVine_SwingPoseOffsets:
                 dc.b    0, $18
                 dc.b    -$12, $13
                 dc.b    -$18,   0
@@ -559,28 +560,28 @@ byte_206CE:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_206DE:
+S3RideVine_TickRegrabCooldown:
                 tst.b   2(a2)
-                beq.s   loc_206EC
+                beq.s   S3RideVine_TryGrabHandle
                 subq.b  #1,2(a2)
-                bne.w   locret_20766
+                bne.w   S3RideVine_GrabReturn
 
-loc_206EC:
+S3RideVine_TryGrabHandle:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$10,d0
                 cmpi.w  #$20,d0
-                bhs.w   locret_20766
+                bhs.w   S3RideVine_GrabReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 cmpi.w  #$18,d1
-                bhs.w   locret_20766
+                bhs.w   S3RideVine_GrabReturn
                 tst.b   object_control(a1)
-                bne.s   locret_20766
+                bne.s   S3RideVine_GrabReturn
                 cmpi.b  #4,routine(a1)
-                bhs.s   locret_20766
+                bhs.s   S3RideVine_GrabReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_20766
+                bne.s   S3RideVine_GrabReturn
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)
                 clr.w   ground_vel(a1)
@@ -595,5 +596,5 @@ loc_206EC:
                 moveq   #signextendB(sfx_Grab),d0
                 jsr     (Play_SFX).l
 
-locret_20766:
+S3RideVine_GrabReturn:
                 rts

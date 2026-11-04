@@ -49,7 +49,7 @@ AIZ2SE_ShipRefresh:
                 move.w  (Camera_Y_pos_copy).w,d2
                 subi.w  #$10,d2
                 jsr     Draw_PlaneVertBottomUp(pc)
-                bpl.w   loc_4FFF0
+                bpl.w   SKAIZ2Screen_DrawShipForegroundStrip
                 move.w  #$4020,d0
                 move.w  d0,(HScroll_table+$1F6).w
                 move.w  d0,(_unkEE98).w
@@ -60,10 +60,11 @@ AIZ2SE_ShipRefresh:
                 move.w  d0,(_unkEE9C).w
                 move.w  d0,(_unkEEA2).w                 ; Set up secondary BG camera Y
                 jsr     (AllocateObject).l
-                bne.s   loc_4FFBA
+                bne.s   SKAIZ2Screen_BeginShipForeground
                 move.l  #Obj_AIZBattleship,(a1)         ; Start battleship sequence
 
-loc_4FFBA:
+; Advance the foreground state even if the ship object was not allocated
+SKAIZ2Screen_BeginShipForeground:
                 st      (Events_bg+$04).w
                 move.l  #HInt7,(H_int_addr).w           ; HInt is needed to change Y scroll value to proper amount mid-draw
                 clr.b   (Water_flag).w
@@ -72,7 +73,7 @@ loc_4FFBA:
 
 AIZ2SE_ShipDraw:
                 tst.w   (Events_fg_4).w
-                bne.s   loc_50008                       ; Branch when battleship has gone off-screen
+                bne.s   SKAIZ2Screen_BeginShipExitRefresh  ; Branch when battleship has gone off-screen
                 lea     AIZ2SE_BGShipDrawArray2(pc),a4
                 lea     (HScroll_table+$1F4).w,a6
                 move.w  (_unkEE98).w,(a6)
@@ -80,7 +81,7 @@ AIZ2SE_ShipDraw:
                 move.w  (_unkEEA2).w,d6
                 jsr     Draw_BGNoVert(pc)
 
-loc_4FFF0:
+SKAIZ2Screen_DrawShipForegroundStrip:
                 lea     AIZ2SE_BGShipDrawArray1(pc),a4
                 lea     (HScroll_table+$1F8).w,a6
                 move.w  (Camera_X_pos_copy).w,4(a6)
@@ -89,7 +90,7 @@ loc_4FFF0:
                 jmp     Draw_BGNoVert(pc)
 ; ---------------------------------------------------------------------------
 
-loc_50008:
+SKAIZ2Screen_BeginShipExitRefresh:
                 clr.w   (Events_fg_4).w
                 move.w  #$170,(Draw_delayed_position).w
                 move.w  #4,(Draw_delayed_rowcount).w    ; Set redraw memory
@@ -100,7 +101,7 @@ AIZ2SE_EndRefresh:
                 move.w  (Camera_Y_pos_copy).w,d2
                 subi.w  #$10,d2
                 jsr     Draw_PlaneVertBottomUp(pc)
-                bpl.s   loc_4FFF0
+                bpl.s   SKAIZ2Screen_DrawShipForegroundStrip
                 move.w  (Camera_X_pos_copy).w,d0
                 andi.w  #$FFF0,d0
                 subi.w  #$10,d0
@@ -133,11 +134,11 @@ AIZ2_BackgroundInit:
                 move.w  (Camera_X_pos_copy).w,(Events_fg_1).w
                 move.w  #$C,(Events_routine_bg).w
                 cmpi.w  #$3E80,(Camera_X_pos).w
-                blo.s   loc_500A0
+                blo.s   SKAIZ2Screen_InitBgPlaneAndDeform
                 move.w  #$14,(Events_routine_bg).w
                 move.w  #$4440,(Events_bg+$02).w
 
-loc_500A0:
+SKAIZ2Screen_InitBgPlaneAndDeform:
                 jsr     (AIZ2_Deform).l
                 jsr     Reset_TileOffsetPositionEff(pc)
                 moveq   #0,d1
@@ -175,13 +176,13 @@ AIZ2BGE_FireRedraw:
                 move.w  (Camera_X_pos_copy).w,d1
                 move.w  (Camera_Y_pos_copy).w,d2
                 jsr     Draw_PlaneVertBottomUp(pc)
-                bmi.s   loc_50110
+                bmi.s   SKAIZ2Screen_BeginFireAlignWait
                 jsr     (AIZ1_FireRise).l
                 jsr     (AIZTrans_WavyFlame).l
                 jmp     PlainDeformation(pc)
 ; ---------------------------------------------------------------------------
 
-loc_50110:
+SKAIZ2Screen_BeginFireAlignWait:
                 addq.w  #2,a3
                 move.w  #VRAM_Plane_B_Name_Table,d7
                 clr.w   (Events_bg+$00).w
@@ -191,19 +192,19 @@ AIZ2BGE_WaitFire:
                 jsr     (AIZ1_FireRise).l
                 jsr     (AIZTrans_WavyFlame).l
                 tst.w   (Events_bg+$00).w
-                bne.s   loc_50160
+                bne.s   SKAIZ2Screen_DrawFireRowsAndTryRestore
                 move.w  (Camera_Y_pos_BG_copy).w,d0
                 andi.w  #$7F,d0
                 cmpi.w  #$20,d0
-                blo.s   loc_50144
+                blo.s   SKAIZ2Screen_UsePlainFireDeform
                 cmpi.w  #$30,d0
-                blo.s   loc_50148
+                blo.s   SKAIZ2Screen_SetFireBgAlignment
 
-loc_50144:
+SKAIZ2Screen_UsePlainFireDeform:
                 jmp     PlainDeformation(pc)
 ; ---------------------------------------------------------------------------
 
-loc_50148:
+SKAIZ2Screen_SetFireBgAlignment:
                 addi.w  #$180,d0
                 move.w  d0,(Camera_Y_pos_BG_copy).w
                 and.w   (Camera_Y_pos_mask).w,d0
@@ -211,14 +212,14 @@ loc_50148:
                 move.w  d0,(Camera_Y_pos_BG_rounded).w
                 st      (Events_bg+$00).w
 
-loc_50160:
+SKAIZ2Screen_DrawFireRowsAndTryRestore:
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
                 move.w  #$200,d1
                 moveq   #$20,d6
                 jsr     Draw_TileRow(pc)
                 cmpi.w  #$310,(Camera_Y_pos_BG_copy).w
-                blo.s   loc_501D6                       ; If fire hasn't subsided, branch
+                blo.s   SKAIZ2Screen_ApplyWavesAndFlattenBg  ; If fire hasn't subsided, branch
                 movem.l d7-a0/a2-a3,-(sp)
                 moveq   #PLCID_0C,d0
                 jsr     (Load_PLC).l
@@ -238,17 +239,17 @@ loc_50160:
                 move.w  #$F,(Draw_delayed_rowcount).w   ; Set up redraw count
                 move.w  #$C,(Special_V_int_routine).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_50204
+                bra.s   SKAIZ2Screen_RefreshBgAndDraw
 ; ---------------------------------------------------------------------------
 
-loc_501D6:
+SKAIZ2Screen_ApplyWavesAndFlattenBg:
                 jsr     (AIZ2_ApplyDeform).l
                 lea     (H_scroll_buffer+2).w,a1
                 move.w  (Camera_X_pos_BG_copy).w,d0     ; Cancel out background deformation since we're still in the open field
                 neg.w   d0
                 moveq   #bytesToLcnt(224),d1
 
-loc_501E8:
+SKAIZ2Screen_FillFlatBgScroll:
                 move.w  d0,(a1)
                 addq.w  #4,a1
                 move.w  d0,(a1)
@@ -257,33 +258,33 @@ loc_501E8:
                 addq.w  #4,a1
                 move.w  d0,(a1)
                 addq.w  #4,a1
-                dbf     d1,loc_501E8
+                dbf     d1,SKAIZ2Screen_FillFlatBgScroll
                 rts
 ; ---------------------------------------------------------------------------
 
 AIZ2BGE_BGRedraw:
                 jsr     (AIZ2_Deform).l
 
-loc_50204:
+SKAIZ2Screen_RefreshBgAndDraw:
                 moveq   #0,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 jsr     Draw_PlaneVertBottomUp(pc)
-                bpl.s   loc_50260
+                bpl.s   SKAIZ2Screen_DrawNormalBgAndShake
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_50260
+                bra.s   SKAIZ2Screen_DrawNormalBgAndShake
 ; ---------------------------------------------------------------------------
 
 AIZ2BGE_Normal:
                 jsr     (AIZ2_Deform).l
                 tst.w   (Events_fg_5).w
-                beq.s   loc_50260
+                beq.s   SKAIZ2Screen_DrawNormalBgAndShake
                 clr.w   (Events_fg_5).w
                 move.w  #$A8,d0
                 cmpi.w  #$400,(Camera_Y_pos).w
-                blo.s   loc_50236
+                blo.s   SKAIZ2Screen_SetShipBgYAndRefresh
                 move.w  #-$198,d0
 
-loc_50236:
+SKAIZ2Screen_SetShipBgYAndRefresh:
                 move.w  d0,(Events_bg+$16).w
                 add.w   d0,(Camera_Y_pos_BG_copy).w
                 jsr     Reset_TileOffsetPositionEff(pc)
@@ -293,10 +294,10 @@ loc_50236:
                 move.w  #$F,(Draw_delayed_rowcount).w
                 move.w  #$4440,(Events_bg+$02).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_50280
+                bra.s   SKAIZ2Screen_RefreshShipBgAndDraw
 ; ---------------------------------------------------------------------------
 
-loc_50260:
+SKAIZ2Screen_DrawNormalBgAndShake:
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
                 moveq   #0,d1
@@ -309,19 +310,20 @@ loc_50260:
 AIZ2BGE_ShipRefresh:
                 jsr     (AIZ2_Deform).l
 
-loc_50280:
+SKAIZ2Screen_RefreshShipBgAndDraw:
                 moveq   #0,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 jsr     Draw_PlaneVertBottomUp(pc)
-                bpl.s   loc_50298
+                bpl.s   SKAIZ2Screen_DrawShipBg
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_50298
+                bra.s   SKAIZ2Screen_DrawShipBg
 ; ---------------------------------------------------------------------------
 
 AIZ2BGE_ShipMove:
                 jsr     (AIZ2_Deform).l
 
-loc_50298:
+; Skip the remaining ScreenEvents work when the effective ship camera supplies vertical scroll
+SKAIZ2Screen_DrawShipBg:
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
                 moveq   #0,d1
@@ -329,12 +331,12 @@ loc_50298:
                 jsr     Draw_TileRow(pc)
                 jsr     (AIZ2_ApplyDeform).l
                 tst.w   (Events_bg+$04).w
-                beq.s   loc_502C2
+                beq.s   SKAIZ2Screen_ApplyScreenShake
                 move.w  (_unkEE9C).w,(V_scroll_value).w  ; Use effective camera position rather than actual camera position
                 move.w  (Camera_Y_pos_BG_copy).w,(V_scroll_value_BG).w
                 addq.w  #4,sp                           ; Skip last part of ScreenEvents
 
-loc_502C2:
+SKAIZ2Screen_ApplyScreenShake:
                 jmp     ShakeScreen_Setup(pc)
 ; ---------------------------------------------------------------------------
 
@@ -343,7 +345,7 @@ AIZ2_DoShipLoop:
                 move.w  (Camera_X_pos).w,d0
                 addq.w  #4,d0
                 cmp.w   (Events_bg+$02).w,d0
-                blo.s   loc_502FA
+                blo.s   SKAIZ2Screen_CommitShipCamAndClampP1P2
                 move.w  #$200,d1                        ; Do loop
                 move.w  d1,(Level_repeat_offset).w
                 sub.w   d1,(Player_1+x_pos).w
@@ -355,7 +357,7 @@ AIZ2_DoShipLoop:
                 move.w  d1,(Camera_X_pos_rounded).w
                 move.w  d1,(HScroll_table+$1FE).w
 
-loc_502FA:
+SKAIZ2Screen_CommitShipCamAndClampP1P2:
                 move.w  d0,(Camera_X_pos).w
                 move.w  d0,(Camera_X_pos_copy).w
                 move.w  d0,(Camera_min_X_pos).w
@@ -370,24 +372,24 @@ loc_502FA:
 
 ClampPlayerToAiz2ShipScrollWindow:
                 cmpi.b  #5,anim(a1)
-                bne.s   loc_50324
+                bne.s   SKAIZ2Screen_TryClampShipRunnerLeft
                 clr.b   anim(a1)                        ; If Sonic is standing, set him to the running animation
 
-loc_50324:
+SKAIZ2Screen_TryClampShipRunnerLeft:
                 addi.w  #$18,d0
                 cmp.w   x_pos(a1),d0
-                bls.s   loc_5033A
+                bls.s   SKAIZ2Screen_TryClampShipRunnerRight
                 move.w  d0,x_pos(a1)                    ; Make sure Sonic stays on-screen
                 move.w  #$400,ground_vel(a1)            ; Set his running velocity to $400 if the left of screen is hit
-                bra.s   locret_50348
+                bra.s   SKAIZ2Screen_ShipRunnerClampReturn
 ; ---------------------------------------------------------------------------
 
-loc_5033A:
+SKAIZ2Screen_TryClampShipRunnerRight:
                 addi.w  #$88,d0
                 cmp.w   x_pos(a1),d0
-                bhi.s   locret_50348
+                bhi.s   SKAIZ2Screen_ShipRunnerClampReturn
                 move.w  d0,x_pos(a1)                    ; Make sure Sonic can't go past a certain point to the right
 
-locret_50348:
+SKAIZ2Screen_ShipRunnerClampReturn:
                 rts
 ; End of function ClampPlayerToAiz2ShipScrollWindow

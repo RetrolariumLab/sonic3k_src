@@ -5,7 +5,7 @@
 
 Obj_AIZCollapsingLogBridge:
                 move.b  subtype(a0),d0
-                bmi.w   loc_2A470
+                bmi.w   S3CollapseLog_InitFireBridge
                 move.b  d0,$36(a0)
                 addi.b  #$30,d0
                 move.b  d0,$35(a0)
@@ -17,8 +17,8 @@ Obj_AIZCollapsingLogBridge:
                 move.b  #4,render_flags(a0)             ; oddly, this is not an ori like the child sprites, however it doesn't matter in normal gameplay as this object only faces one direction
                 move.w  #$200,priority(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_2A466
-                move.l  #loc_2A57C,(a1)
+                bne.w   S3CollapseLog_StartStandingBridge
+                move.l  #S3CollapseLog_CullOrDrawBridge,(a1)
                 move.l  #Map_AIZCollapsingLogBridge,mappings(a1)
                 move.w  #make_art_tile(ArtTile_AIZMisc2,2,0),art_tile(a1)
                 ori.b   #4,render_flags(a1)
@@ -37,21 +37,21 @@ Obj_AIZCollapsingLogBridge:
                 subq.w  #1,d6
                 move.w  #1,4(a2)
 
-loc_2A44E:
+S3CollapseLog_WriteLogChildPositions:
                 move.w  d3,(a2)+
                 move.w  d2,(a2)+
                 addq.w  #2,a2
                 addi.w  #$1E,d3
-                dbf     d6,loc_2A44E
+                dbf     d6,S3CollapseLog_WriteLogChildPositions
                 move.w  #2,-2(a2)
                 move.w  a1,$3C(a0)
 
-loc_2A466:
-                move.l  #loc_2A538,(a0)
-                bra.w   loc_2A538
+S3CollapseLog_StartStandingBridge:
+                move.l  #S3CollapseLog_TrySplitStandingBridge,(a0)
+                bra.w   S3CollapseLog_TrySplitStandingBridge
 ; ---------------------------------------------------------------------------
 
-loc_2A470:
+S3CollapseLog_InitFireBridge:
                 andi.b  #$7F,d0
                 move.b  d0,$36(a0)
                 addi.b  #$30,d0
@@ -64,8 +64,8 @@ loc_2A470:
                 move.b  #4,render_flags(a0)             ; oddly, this is not an ori like the child sprites, however it doesn't matter in normal gameplay as this object only faces one direction
                 move.w  #$200,priority(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_2A52E
-                move.l  #loc_2A57C,(a1)
+                bne.w   S3CollapseLog_StartGlobalFireBridge
+                move.l  #S3CollapseLog_CullOrDrawBridge,(a1)
                 move.l  #Map_AIZDrawBridgeFire,mappings(a1)
                 move.w  #make_art_tile(ArtTile_AIZMisc2,2,1),art_tile(a1)
                 ori.b   #4,render_flags(a1)
@@ -84,32 +84,32 @@ loc_2A470:
                 subq.w  #1,d6
                 move.w  #1,4(a2)
 
-loc_2A516:
+S3CollapseLog_WriteFireChildPositions:
                 move.w  d3,(a2)+
                 move.w  d2,(a2)+
                 addq.w  #2,a2
                 addi.w  #$20,d3
-                dbf     d6,loc_2A516
+                dbf     d6,S3CollapseLog_WriteFireChildPositions
                 move.w  #2,-2(a2)
                 move.w  a1,$3C(a0)
 
-loc_2A52E:
-                move.l  #loc_2A5AA,(a0)
-                bra.w   loc_2A5AA
+S3CollapseLog_StartGlobalFireBridge:
+                move.l  #S3CollapseLog_TrySplitFireBridge,(a0)
+                bra.w   S3CollapseLog_TrySplitFireBridge
 ; ---------------------------------------------------------------------------
 
-loc_2A538:
+S3CollapseLog_TrySplitStandingBridge:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                beq.s   loc_2A560
+                beq.s   S3CollapseLog_CheckLogTopSolid
                 move.b  $35(a0),$34(a0)
                 move.b  $36(a0),d2
                 move.b  $37(a0),d3
-                move.l  #loc_2A638,(a0)
-                move.l  #loc_2A582,d4
+                move.l  #S3CollapseLog_TickBridgeCollapse,(a0)
+                move.l  #S3CollapseLog_WaitLogFragment,d4
                 bsr.w   SplitAizCollapsingBridgeSprites
 
-loc_2A560:
+S3CollapseLog_CheckLogTopSolid:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 moveq   #0,d3
@@ -119,39 +119,39 @@ loc_2A560:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
-loc_2A57C:
+S3CollapseLog_CullOrDrawBridge:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_2A582:
+S3CollapseLog_WaitLogFragment:
                 tst.b   $34(a0)
-                beq.s   loc_2A592
+                beq.s   S3CollapseLog_FallLogFragment
                 subq.b  #1,$34(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2A592:
+S3CollapseLog_FallLogFragment:
                 jsr     (MoveSprite).l
                 tst.b   render_flags(a0)
-                bpl.s   loc_2A5A4
+                bpl.s   S3CollapseLog_DeleteLogFragment
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2A5A4:
+S3CollapseLog_DeleteLogFragment:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2A5AA:
+S3CollapseLog_TrySplitFireBridge:
                 tst.b   (_unkFAA2).w
-                beq.s   loc_2A5CE
+                beq.s   S3CollapseLog_CheckFireTopSolid
                 move.b  $35(a0),$34(a0)
                 move.b  $36(a0),d2
                 move.b  $37(a0),d3
-                move.l  #loc_2A638,(a0)
-                move.l  #loc_2A5EA,d4
+                move.l  #S3CollapseLog_TickBridgeCollapse,(a0)
+                move.l  #S3CollapseLog_WaitFireFragment,d4
                 bsr.w   SplitAizCollapsingBridgeSprites
 
-loc_2A5CE:
+S3CollapseLog_CheckFireTopSolid:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 moveq   #0,d3
@@ -161,43 +161,43 @@ loc_2A5CE:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
-loc_2A5EA:
+S3CollapseLog_WaitFireFragment:
                 tst.b   $34(a0)
-                beq.s   loc_2A602
+                beq.s   S3CollapseLog_AnimateFireFragment
                 subq.b  #1,$34(a0)
-                bne.s   loc_2A5FC
+                bne.s   S3CollapseLog_DrawWaitingFireFragment
                 move.b  #3,mapping_frame(a0)
 
-loc_2A5FC:
+S3CollapseLog_DrawWaitingFireFragment:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2A602:
+S3CollapseLog_AnimateFireFragment:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_2A620
+                bpl.s   S3CollapseLog_FallFireFragment
                 move.b  #3,anim_frame_timer(a0)
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #8,mapping_frame(a0)
-                blo.s   loc_2A620
+                blo.s   S3CollapseLog_FallFireFragment
                 move.b  #3,mapping_frame(a0)
 
-loc_2A620:
+S3CollapseLog_FallFireFragment:
                 jsr     (MoveSprite).l
                 tst.b   render_flags(a0)
-                bpl.s   loc_2A632
+                bpl.s   S3CollapseLog_DeleteFireFragment
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2A632:
+S3CollapseLog_DeleteFireFragment:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2A638:
+S3CollapseLog_TickBridgeCollapse:
                 subq.b  #1,$34(a0)
-                bne.s   loc_2A644
-                move.l  #loc_2AB1A,(a0)
+                bne.s   S3CollapseLog_CheckRidersForRelease
+                move.l  #S3Drawbridge_TickFinalRiderDelay,(a0)
 
-loc_2A644:
+S3CollapseLog_CheckRidersForRelease:
                 move.b  $34(a0),d3
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
@@ -213,23 +213,23 @@ loc_2A644:
 
 ReleasePlayerFromCollapsingAizLogSegment:
                 btst    d6,status(a0)
-                beq.s   locret_2A6C4
+                beq.s   S3CollapseLog_RiderReleaseReturn
                 move.w  d1,d2
                 add.w   d2,d2
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_2A6A8
+                bne.s   S3CollapseLog_ReleaseBridgeRider
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_2A6A8
+                bmi.s   S3CollapseLog_ReleaseBridgeRider
                 cmp.w   d2,d0
-                bhs.s   loc_2A6A8
+                bhs.s   S3CollapseLog_ReleaseBridgeRider
                 btst    #0,status(a0)
-                beq.s   loc_2A692
+                beq.s   S3CollapseLog_CheckRiderSegmentDeadline
                 neg.w   d0
                 add.w   d2,d0
 
-loc_2A692:
+S3CollapseLog_CheckRiderSegmentDeadline:
                 lsr.w   #5,d0
                 add.w   d0,d0
                 add.w   d0,d0
@@ -238,16 +238,16 @@ loc_2A692:
                 move.b  $35(a0),d2
                 sub.b   d0,d2
                 cmp.b   d2,d3
-                bhi.s   locret_2A6C4
+                bhi.s   S3CollapseLog_RiderReleaseReturn
 
-loc_2A6A8:
+S3CollapseLog_ReleaseBridgeRider:
                 bclr    d6,status(a0)
                 bclr    #Status_OnObj,status(a1)
                 bclr    #Status_Push,status(a1)
                 bset    #Status_InAir,status(a1)
                 move.b  #1,prev_anim(a1)
 
-locret_2A6C4:
+S3CollapseLog_RiderReleaseReturn:
                 rts
 ; End of function ReleasePlayerFromCollapsingAizLogSegment
 
@@ -260,14 +260,14 @@ SplitAizCollapsingBridgeSprites:
                 subq.w  #1,d6
                 bclr    #6,render_flags(a3)
                 movea.l a3,a1
-                bra.s   loc_2A6E6
+                bra.s   S3CollapseLog_InitFragmentFromChild
 ; ---------------------------------------------------------------------------
 
-loc_2A6DE:
+S3CollapseLog_TryNextFragment:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_2A724
+                bne.s   S3CollapseLog_ClearChildCoordsAndSound
 
-loc_2A6E6:
+S3CollapseLog_InitFragmentFromChild:
                 move.l  d4,(a1)
                 move.l  mappings(a3),mappings(a1)
                 move.b  render_flags(a3),render_flags(a1)
@@ -281,9 +281,10 @@ loc_2A6E6:
                 move.b  d0,mapping_frame(a1)
                 move.b  d2,$34(a1)
                 add.b   d3,d2
-                dbf     d6,loc_2A6DE
+                dbf     d6,S3CollapseLog_TryNextFragment
 
-loc_2A724:
+; Clear the embedded X and Y words reused by the root's velocity fields
+S3CollapseLog_ClearChildCoordsAndSound:
                 move.w  #0,sub2_x_pos(a3)
                 move.w  #0,sub2_y_pos(a3)
                 moveq   #signextendB(sfx_Collapse),d0

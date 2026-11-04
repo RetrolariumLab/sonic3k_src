@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 127
+    "commit_count": 128
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -809,9 +809,15 @@
       "commits": ["a6fe2a6b10979a9bb7ccd64b2b9fea461581f8c5"]
     },
     {
-      "id": "current-shorten-22-level-environment",
+      "id": "change-f64d40301ba3",
       "kind": "source_or_tooling",
       "summary": "Apply 193 reviewed short labels for level environment.",
+      "commits": ["f64d40301ba3e5eeb54f8a61ad980fd45440bbd2"]
+    },
+    {
+      "id": "current-shorten-23-zone-aiz",
+      "kind": "source_or_tooling",
+      "summary": "Apply 973 reviewed short labels for aiz.",
       "commits": ["release-commit"]
     }
   ],

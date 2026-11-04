@@ -15,7 +15,7 @@ Obj_AIZForegroundPlant:
                 move.w  d0,d1
                 add.w   d0,d0
                 add.w   d1,d0
-                lea     word_2C242(pc,d0.w),a1
+                lea     SKAIZFgPlant_Attrs(pc,d0.w),a1
                 move.w  (a1)+,art_tile(a0)
                 move.w  (a1)+,priority(a0)
                 move.b  (a1)+,width_pixels(a0)
@@ -23,31 +23,31 @@ Obj_AIZForegroundPlant:
                 move.b  subtype(a0),d0
                 lsr.w   #2,d0
                 andi.w  #$3C,d0
-                move.l  off_2C24E(pc,d0.w),(a0)
+                move.l  SKAIZFgPlant_ParallaxHandlers(pc,d0.w),(a0)
                 rts
 ; ---------------------------------------------------------------------------
-word_2C242:
+SKAIZFgPlant_Attrs:
                 dc.w    make_art_tile(ArtTile_AIZMisc1,2,1)
                 dc.w    0
                 dc.b    $20, $30
                 dc.w    make_art_tile(ArtTile_AIZMisc1,2,1)
                 dc.w    0
                 dc.b    $20, $3C
-off_2C24E:
-                dc.l    loc_2C26A
-                dc.l    loc_2C270
-                dc.l    loc_2C2A6
-                dc.l    loc_2C2DC
-                dc.l    loc_2C312
-                dc.l    loc_2C348
-                dc.l    loc_2C37A
+SKAIZFgPlant_ParallaxHandlers:
+                dc.l    SKAIZFgPlant_DrawStatic
+                dc.l    SKAIZFgPlant_ApplyParallax1Over16
+                dc.l    SKAIZFgPlant_ApplyParallax1Over8
+                dc.l    SKAIZFgPlant_ApplyParallax1Over4
+                dc.l    SKAIZFgPlant_ApplyParallax1Over2
+                dc.l    SKAIZFgPlant_ApplyParallax1x
+                dc.l    SKAIZFgPlant_ApplyParallaxX2Y1
 ; ---------------------------------------------------------------------------
 
-loc_2C26A:
+SKAIZFgPlant_DrawStatic:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_2C270:
+SKAIZFgPlant_ApplyParallax1Over16:
                 move.w  $30(a0),d1
                 move.w  d1,d2
                 subi.w  #320/2,d1
@@ -66,7 +66,7 @@ loc_2C270:
                 jmp     (Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
 
-loc_2C2A6:
+SKAIZFgPlant_ApplyParallax1Over8:
                 move.w  $30(a0),d1
                 move.w  d1,d2
                 subi.w  #320/2,d1
@@ -85,7 +85,7 @@ loc_2C2A6:
                 jmp     (Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
 
-loc_2C2DC:
+SKAIZFgPlant_ApplyParallax1Over4:
                 move.w  $30(a0),d1
                 move.w  d1,d2
                 subi.w  #320/2,d1
@@ -104,7 +104,7 @@ loc_2C2DC:
                 jmp     (Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
 
-loc_2C312:
+SKAIZFgPlant_ApplyParallax1Over2:
                 move.w  $30(a0),d1
                 move.w  d1,d2
                 subi.w  #320/2,d1
@@ -123,7 +123,7 @@ loc_2C312:
                 jmp     (Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
 
-loc_2C348:
+SKAIZFgPlant_ApplyParallax1x:
                 move.w  $30(a0),d1
                 move.w  d1,d2
                 subi.w  #320/2,d1
@@ -140,7 +140,7 @@ loc_2C348:
                 jmp     (Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
 
-loc_2C37A:
+SKAIZFgPlant_ApplyParallaxX2Y1:
                 move.w  $30(a0),d1
                 move.w  d1,d2
                 subi.w  #320/2,d1

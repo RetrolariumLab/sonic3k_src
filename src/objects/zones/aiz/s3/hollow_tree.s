@@ -6,47 +6,47 @@
 
 Obj_AIZHollowTree:
                 move.b  #$D0,width_pixels(a0)
-                move.l  #loc_1D3D0,(a0)
+                move.l  #S3HollowTree_UpdateRidersAndCamera,(a0)
 
-loc_1D3D0:
+S3HollowTree_UpdateRidersAndCamera:
                 bsr.w   UpdatePlayersInAizHollowTree
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                bne.s   loc_1D430
+                bne.s   S3HollowTree_CullController
                 tst.w   $38(a0)
-                beq.s   loc_1D430
+                beq.s   S3HollowTree_CullController
                 subq.w  #1,$38(a0)
-                bne.s   loc_1D3F8
+                bne.s   S3HollowTree_RestoreCameraMinX
                 move.w  #$1300,(Camera_min_X_pos).w
                 move.w  #$4000,(Camera_max_X_pos).w
-                bra.s   loc_1D430
+                bra.s   S3HollowTree_CullController
 ; ---------------------------------------------------------------------------
 
-loc_1D3F8:
+S3HollowTree_RestoreCameraMinX:
                 cmpi.w  #$1300,(Camera_min_X_pos).w
-                beq.s   loc_1D414
+                beq.s   S3HollowTree_RestoreCameraMaxX
                 cmpi.w  #$2D00,(Player_1+x_pos).w
-                blo.s   loc_1D410
+                blo.s   S3HollowTree_LowerMinXBy4
                 move.w  #$1300,(Camera_min_X_pos).w
-                bra.s   loc_1D414
+                bra.s   S3HollowTree_RestoreCameraMaxX
 ; ---------------------------------------------------------------------------
 
-loc_1D410:
+S3HollowTree_LowerMinXBy4:
                 subq.w  #4,(Camera_min_X_pos).w
 
-loc_1D414:
+S3HollowTree_RestoreCameraMaxX:
                 cmpi.w  #$4000,(Camera_max_X_pos).w
-                beq.s   loc_1D430
+                beq.s   S3HollowTree_CullController
                 cmpi.w  #$2D00,(Player_1+x_pos).w
-                bhs.s   loc_1D42C
+                bhs.s   S3HollowTree_RaiseMaxXBy4
                 move.w  #$4000,(Camera_max_X_pos).w
-                bra.s   loc_1D430
+                bra.s   S3HollowTree_CullController
 ; ---------------------------------------------------------------------------
 
-loc_1D42C:
+S3HollowTree_RaiseMaxXBy4:
                 addq.w  #4,(Camera_max_X_pos).w
 
-loc_1D430:
+S3HollowTree_CullController:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -67,55 +67,56 @@ UpdatePlayersInAizHollowTree:
 
 UpdatePlayerInAizHollowTree:
                 btst    d6,status(a0)
-                bne.w   loc_1D4DA
+                bne.w   S3HollowTree_ReadRiderSpeedMagnitude
                 btst    #Status_InAir,status(a1)
-                bne.w   locret_1D4D8
+                bne.w   S3HollowTree_CaptureReturn
                 move.w  x_pos(a1),d0
                 addi.w  #$10,d0
                 sub.w   x_pos(a0),d0
-                bcs.s   locret_1D4D8
+                bcs.s   S3HollowTree_CaptureReturn
                 cmpi.w  #$40,d0
-                bge.s   locret_1D4D8
+                bge.s   S3HollowTree_CaptureReturn
                 move.w  y_pos(a1),d0
                 sub.w   y_pos(a0),d0
                 cmpi.w  #-$5A,d0
-                blt.s   locret_1D4D8
+                blt.s   S3HollowTree_CaptureReturn
                 cmpi.w  #$A0,d0
-                bgt.s   locret_1D4D8
+                bgt.s   S3HollowTree_CaptureReturn
                 cmpi.w  #$600,x_vel(a1)
-                blt.s   locret_1D4D8
+                blt.s   S3HollowTree_CaptureReturn
                 tst.b   object_control(a1)
-                bne.s   locret_1D4D8
+                bne.s   S3HollowTree_CaptureReturn
                 bsr.w   RideObject_SetRide
                 move.l  #0,(a2)
                 bset    #6,object_control(a1)
                 bset    #1,object_control(a1)
                 move.b  #0,anim(a1)
                 cmpa.w  #Player_1,a1
-                bne.s   locret_1D4D8
+                bne.s   S3HollowTree_CaptureReturn
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_1D4C6
+                bne.w   S3HollowTree_LockCameraForP1
                 move.l  #Obj_AIZ1TreeRevealControl,(a1)
 
-loc_1D4C6:
+; Lock the camera after P1 capture even if the reveal actor was not allocated
+S3HollowTree_LockCameraForP1:
                 move.w  #$2C60,(Camera_min_X_pos).w
                 move.w  #$2C60,(Camera_max_X_pos).w
                 move.w  #$3C,$38(a0)
 
-locret_1D4D8:
+S3HollowTree_CaptureReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1D4DA:
+S3HollowTree_ReadRiderSpeedMagnitude:
                 move.w  ground_vel(a1),d0
-                bpl.s   loc_1D4E2
+                bpl.s   S3HollowTree_CheckRiderTraversal
                 neg.w   d0
 
-loc_1D4E2:
+S3HollowTree_CheckRiderTraversal:
                 cmpi.w  #$600,d0
-                blo.w   loc_1D57C
+                blo.w   S3HollowTree_FinishLowSpeedRelease
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_1D50A
+                bne.s   S3HollowTree_TryClampAirborneLeft
                 move.w  y_pos(a1),d0
                 sub.w   y_pos(a0),d0
                 addi.w  #$90,d0
@@ -125,13 +126,13 @@ loc_1D4E2:
                 bra.s   AIZTree_FallOff
 ; ---------------------------------------------------------------------------
 
-loc_1D50A:
+S3HollowTree_TryClampAirborneLeft:
                 cmpi.w  #$2C99,x_pos(a1)
-                bhs.s   loc_1D51E
+                bhs.s   S3HollowTree_TryClampAirborneRight
                 move.w  #$2C99,x_pos(a1)
                 move.w  #$400,x_vel(a1)
 
-loc_1D51E:
+S3HollowTree_TryClampAirborneRight:
                 cmpi.w  #$2D66,x_pos(a1)
                 blo.s   AIZTree_FallOff
                 move.w  #$2D66,x_pos(a1)
@@ -154,7 +155,7 @@ AIZTree_FallOff:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1D57C:
+S3HollowTree_FinishLowSpeedRelease:
                 cmpi.w  #$400,(a2)
                 bhs.s   AIZTree_FallOff
                 move.l  d6,-(sp)
@@ -167,24 +168,24 @@ loc_1D57C:
 
 ; ---------------------------------------------------------------------------
 ; unused
-                bra.w   loc_1D50A
+                bra.w   S3HollowTree_TryClampAirborneLeft
 
 ; =============== S U B R O U T I N E =======================================
 
 AIZTree_SetPlayerPos:
                 btst    #Status_OnObj,status(a1)
-                beq.w   locret_1D4D8
+                beq.w   S3HollowTree_CaptureReturn
                 move.w  ground_vel(a1),d0
                 ext.l   d0
                 lsl.l   #8,d0
                 add.l   d0,(a2)
                 bmi.s   AIZTree_FallOff
                 cmpi.w  #$400,(a2)
-                blo.s   loc_1D5BA
+                blo.s   S3HollowTree_PlaceRiderAndLoadFrame
                 move.w  #$1300,(Camera_min_X_pos).w
                 move.w  #$4000,(Camera_max_X_pos).w
 
-loc_1D5BA:
+S3HollowTree_PlaceRiderAndLoadFrame:
                 move.w  x_pos(a1),d2
                 move.w  (a2),d0
                 lsr.w   #1,d0

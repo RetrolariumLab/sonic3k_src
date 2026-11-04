@@ -93,7 +93,7 @@ ObjDat3_879EC:
                 dc.b    4,   4,   2, $98
 ChildObjDat_879F8:
                 dc.w    1-1
-                dc.l    loc_86D4A
+                dc.l    SKCallbackShot_InitDeflectable
                 dc.l    ObjDat3_879EC
                 dc.l    byte_87A1F
                 dc.l    Move_AnimateRaw

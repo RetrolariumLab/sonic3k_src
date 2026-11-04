@@ -11,59 +11,59 @@ AIZ1_ScreenInit:
 AIZ1_ScreenEvent:
                 jsr     DrawTilesAsYouMove(pc)
                 move.w  (Events_fg_4).w,d0
-                beq.w   locret_3AB48
+                beq.w   S3AIZ1Screen_TreeRevealReturn
                 cmpi.w  #$2D30,(Camera_X_pos_copy).w    ; perform the tree tile manipulation routine when signaled
                 bhs.w   AIZ1SE_ChangeChunk1
                 cmpi.w  #$39,d0
                 bhs.w   AIZ1SE_ChangeChunk1
                 cmpi.w  #$34,d0
-                blo.s   loc_3AACC
+                blo.s   S3AIZ1Screen_TryTreePatchAt36
                 bsr.w   AIZ1SE_ChangeChunk2
-                bra.s   loc_3AAE2
+                bra.s   S3AIZ1Screen_PickTreeRevealMask
 ; ---------------------------------------------------------------------------
 
-loc_3AACC:
+S3AIZ1Screen_TryTreePatchAt36:
                 cmpi.w  #$24,d0
-                blo.s   loc_3AAD8
+                blo.s   S3AIZ1Screen_TryTreePatchAt20
                 bsr.w   AIZ1SE_ChangeChunk3
-                bra.s   loc_3AAE2
+                bra.s   S3AIZ1Screen_PickTreeRevealMask
 ; ---------------------------------------------------------------------------
 
-loc_3AAD8:
+S3AIZ1Screen_TryTreePatchAt20:
                 cmpi.w  #$14,d0
-                blo.s   loc_3AAE2
+                blo.s   S3AIZ1Screen_PickTreeRevealMask
                 bsr.w   AIZ1SE_ChangeChunk4
 
-loc_3AAE2:
+S3AIZ1Screen_PickTreeRevealMask:
                 lea     AIZ_TreeRevealArray(pc),a6
                 btst    #0,d0
-                bne.s   loc_3AAF0
+                bne.s   S3AIZ1Screen_SetUpRevealRows
                 lea     $10(a6),a6
 
-loc_3AAF0:
+S3AIZ1Screen_SetUpRevealRows:
                 subq.w  #1,d0
                 lsr.w   #1,d0
                 move.w  d0,(Events_bg+$00).w
                 cmpi.w  #3,d0
-                blo.s   loc_3AB04
+                blo.s   S3AIZ1Screen_GetFirstRevealRowY
                 move.w  #2,(Events_bg+$00).w
 
-loc_3AB04:
+S3AIZ1Screen_GetFirstRevealRowY:
                 lsl.w   #4,d0
                 neg.w   d0
                 addi.w  #$470,d0
 
-loc_3AB0C:
+S3AIZ1Screen_SkipHiddenRevealRows:
                 cmp.w   (Camera_Y_pos_rounded).w,d0
-                bhs.s   loc_3AB22
+                bhs.s   S3AIZ1Screen_DrawMaskedRevealRow
                 lea     $20(a6),a6
                 addi.w  #$10,d0
                 subq.w  #1,(Events_bg+$00).w
-                bpl.s   loc_3AB0C
+                bpl.s   S3AIZ1Screen_SkipHiddenRevealRows
                 bra.s   AIZ1SE_ChangeChunk1
 ; ---------------------------------------------------------------------------
 
-loc_3AB22:
+S3AIZ1Screen_DrawMaskedRevealRow:
                 move.w  #$2C80,d1
                 moveq   #$10,d6
                 move.l  a0,-(sp)
@@ -76,9 +76,9 @@ loc_3AB22:
                 lea     $10(a6),a6
                 addi.w  #$290,d0
                 subq.w  #1,(Events_bg+$00).w
-                bpl.s   loc_3AB0C
+                bpl.s   S3AIZ1Screen_SkipHiddenRevealRows
 
-locret_3AB48:
+S3AIZ1Screen_TreeRevealReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -130,7 +130,7 @@ AIZ_TreeReveal:
                 lea     $40(a0),a0
                 jsr     Get_LevelAddrChunkRow(pc)
 
-loc_3ABAE:
+S3AIZ1Screen_LoadTreeBlockAndTryFlipV:
                 move.w  (a5,d2.w),d3
                 move.w  d3,d4
                 andi.w  #$3FF,d3
@@ -138,40 +138,40 @@ loc_3ABAE:
                 move.l  (a2,d3.w),d5
                 move.l  4(a2,d3.w),d3
                 btst    #$B,d4
-                beq.s   loc_3ABD6
+                beq.s   S3AIZ1Screen_TryFlipTreeBlockH
                 eori.l  #$10001000,d5
                 eori.l  #$10001000,d3
                 exg     d3,d5
 
-loc_3ABD6:
+S3AIZ1Screen_TryFlipTreeBlockH:
                 btst    #$A,d4
-                beq.s   loc_3ABEC
+                beq.s   S3AIZ1Screen_TryCopyUpperTreePair
                 eori.l  #$8000800,d5
                 eori.l  #$8000800,d3
                 swap    d5
                 swap    d3
 
-loc_3ABEC:
+S3AIZ1Screen_TryCopyUpperTreePair:
                 tst.b   (a6)+
-                beq.s   loc_3ABF2
+                beq.s   S3AIZ1Screen_TryCopyLowerTreePair
                 move.l  d5,(a1)
 
-loc_3ABF2:
+S3AIZ1Screen_TryCopyLowerTreePair:
                 addq.w  #4,a1
                 tst.b   $F(a6)
-                beq.s   loc_3ABFC
+                beq.s   S3AIZ1Screen_AdvanceTreeBlock
                 move.l  d3,(a0)
 
-loc_3ABFC:
+S3AIZ1Screen_AdvanceTreeBlock:
                 addq.w  #4,a0
                 addq.w  #2,d2
                 andi.w  #$E,d2
-                bne.s   loc_3AC0C
+                bne.s   S3AIZ1Screen_NextTreeBlockOrEndRow
                 addq.w  #1,d1
                 jsr     Get_ChunkRow(pc)
 
-loc_3AC0C:
-                dbf     d6,loc_3ABAE
+S3AIZ1Screen_NextTreeBlockOrEndRow:
+                dbf     d6,S3AIZ1Screen_LoadTreeBlockAndTryFlipV
                 clr.w   (a0)
                 rts
 ; End of function AIZ_TreeReveal
@@ -180,27 +180,27 @@ loc_3AC0C:
 
 Obj_AIZ1TreeRevealControl:
                 tst.w   $2E(a0)
-                beq.s   loc_3AC26
+                beq.s   S3AIZ1Screen_TickTreeReveal
                 tst.w   (Events_fg_4).w
-                bne.s   loc_3AC26
+                bne.s   S3AIZ1Screen_TickTreeReveal
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3AC26:
+S3AIZ1Screen_TickTreeReveal:
                 subq.w  #1,$2E(a0)
                 move.w  #$480,d0
                 sub.w   (Player_1+y_pos).w,d0
                 lsr.w   #3,d0
                 addq.w  #3,d0
                 cmp.w   (Events_fg_4).w,d0
-                bhs.s   loc_3AC44
+                bhs.s   S3AIZ1Screen_AdvanceTreeReveal
                 btst    #0,$2F(a0)
-                beq.s   locret_3AC48
+                beq.s   S3AIZ1Screen_TreeRevealTickReturn
 
-loc_3AC44:
+S3AIZ1Screen_AdvanceTreeReveal:
                 addq.w  #1,(Events_fg_4).w
 
-locret_3AC48:
+S3AIZ1Screen_TreeRevealTickReturn:
                 rts
 ; ---------------------------------------------------------------------------
 AIZ_TreeRevealArray:
@@ -216,13 +216,13 @@ AIZ_TreeRevealArray:
 
 AIZ1_BackgroundInit:
                 cmpi.w  #$1300,(Camera_X_pos_copy).w
-                bhs.s   loc_3ACE6
+                bhs.s   S3AIZ1Screen_InitNormalBg
                 lea     (HScroll_table).w,a1            ; Intro deformation
                 moveq   #bytesToLcnt($28),d0
 
-loc_3ACC8:
+S3AIZ1Screen_ClearIntroHScroll:
                 clr.l   (a1)+
-                dbf     d0,loc_3ACC8
+                dbf     d0,S3AIZ1Screen_ClearIntroHScroll
                 jsr     AIZ1_IntroDeform(pc)
                 jsr     Reset_TileOffsetPositionEff(pc)
                 jsr     Refresh_PlaneFull(pc)
@@ -231,7 +231,7 @@ loc_3ACC8:
                 jmp     ApplyDeformation(pc)
 ; ---------------------------------------------------------------------------
 
-loc_3ACE6:
+S3AIZ1Screen_InitNormalBg:
                 move.w  #8,(Events_routine_bg).w        ; If not in the intro
                 jsr     AIZ1_Deform(pc)
                 jsr     Reset_TileOffsetPositionEff(pc)
@@ -264,9 +264,9 @@ AIZ1_BackgroundEvent_Index:
 
 AIZ1BGE_Intro:
                 tst.w   (Events_fg_5).w
-                beq.s   loc_3AD66
+                beq.s   S3AIZ1Screen_DrawIntroBg
                 tst.w   (Kos_decomp_queue_count).w
-                bne.w   loc_3AD66
+                bne.w   S3AIZ1Screen_DrawIntroBg
                 clr.w   (Events_fg_5).w
                 jsr     AIZ1_Deform(pc)                 ; Set up normal deformation when intro is over
                 jsr     Reset_TileOffsetPositionEff(pc)
@@ -277,10 +277,10 @@ AIZ1BGE_Intro:
                 move.w  d0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w        ; Next routine
-                bra.s   loc_3AD8A
+                bra.s   S3AIZ1Screen_RefreshNormalBg
 ; ---------------------------------------------------------------------------
 
-loc_3AD66:
+S3AIZ1Screen_DrawIntroBg:
                 jsr     AIZ1_IntroDeform(pc)
                 lea     AIZ1_IntroDrawArray(pc),a4
                 lea     (HScroll_table).w,a5
@@ -295,14 +295,14 @@ loc_3AD66:
 AIZ1BGE_NormalRefresh:
                 jsr     AIZ1_Deform(pc)
 
-loc_3AD8A:
+S3AIZ1Screen_RefreshNormalBg:
                 lea     AIZ1_BGDrawArray(pc),a4
                 lea     (HScroll_table-$04).w,a5
                 move.w  (Camera_Y_pos_BG_copy).w,d1
                 jsr     Draw_PlaneVertBottomUpComplex(pc)
-                bpl.s   loc_3ADAC
+                bpl.s   S3AIZ1Screen_DrawNormalBgAndWater
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_3ADAC
+                bra.s   S3AIZ1Screen_DrawNormalBgAndWater
 ; ---------------------------------------------------------------------------
 
 AIZ1BGE_Normal:
@@ -310,7 +310,7 @@ AIZ1BGE_Normal:
                 bne.s   AIZ1_AIZ2_Transition            ; Wait for signal to start level transition
                 jsr     AIZ1_Deform(pc)
 
-loc_3ADAC:
+S3AIZ1Screen_DrawNormalBgAndWater:
                 lea     AIZ1_BGDrawArray(pc),a4
                 lea     (HScroll_table).w,a5
                 moveq   #$20,d6
@@ -333,7 +333,7 @@ AIZ1_AIZ2_Transition:
 
 AIZ1BGE_FireTransition:
                 tst.w   (Events_bg+$02).w
-                bne.s   loc_3AE18
+                bne.s   S3AIZ1Screen_StepFireRise
                 move.w  (Events_bg+$00).w,d0
                 swap    d0
                 clr.w   d0
@@ -341,19 +341,19 @@ AIZ1BGE_FireTransition:
                 asr.l   #5,d0
                 add.l   d0,(Camera_Y_pos_BG_copy).w
                 cmpi.l  #$1400,d0
-                bhs.s   loc_3AE1C
+                bhs.s   S3AIZ1Screen_DrawFireRowAndTryAct2Load
 
-loc_3AE18:
+S3AIZ1Screen_StepFireRise:
                 jsr     AIZ1_FireRise(pc)
 
-loc_3AE1C:
+S3AIZ1Screen_DrawFireRowAndTryAct2Load:
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
                 move.w  #$1000,d1
                 moveq   #$20,d6
                 jsr     Draw_TileRow(pc)
                 cmpi.w  #$190,(Camera_Y_pos_BG_copy).w
-                blo.w   loc_3AECA
+                blo.w   S3AIZ1Screen_DrawFlameBeforeRefresh
                 movem.l d7-a0/a2-a3,-(sp)
                 lea     (AIZ2_128x128_Kos).l,a1
                 lea     (RAM_start).l,a2
@@ -374,19 +374,19 @@ loc_3AE1C:
                 jsr     (Load_PLC_Raw).l
                 movem.l (sp)+,d7-a0/a2-a3
                 jsr     (AllocateObject).l
-                bne.s   loc_3AEB8
+                bne.s   S3AIZ1Screen_StartFireRefresh
                 move.l  #Obj_AIZTransitionFloor,(a1)
                 move.w  #$2FB0,x_pos(a1)
                 move.w  #$3A0,y_pos(a1)
 
-loc_3AEB8:
+S3AIZ1Screen_StartFireRefresh:
                 move.w  #$F0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_3AED6
+                bra.s   S3AIZ1Screen_RefreshFireFg
 ; ---------------------------------------------------------------------------
 
-loc_3AECA:
+S3AIZ1Screen_DrawFlameBeforeRefresh:
                 jsr     AIZTrans_WavyFlame(pc)
                 jmp     PlainDeformation(pc)
 ; ---------------------------------------------------------------------------
@@ -394,20 +394,20 @@ loc_3AECA:
 AIZ1BGE_FireRefresh:
                 jsr     AIZ1_FireRise(pc)
 
-loc_3AED6:
+S3AIZ1Screen_RefreshFireFg:
                 lea     (Level_layout_main).w,a3
                 move.w  #VRAM_Plane_A_Name_Table,d7
                 move.w  #$180,d1
                 moveq   #0,d2
                 jsr     Draw_PlaneVertBottomUp(pc)      ; Refresh main plane
-                bpl.s   loc_3AEF6
+                bpl.s   S3AIZ1Screen_DrawFlameDuringRefresh
                 addq.w  #2,a3
                 move.w  #VRAM_Plane_B_Name_Table,d7
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_3AF02
+                bra.s   S3AIZ1Screen_TryFinishActTransition
 ; ---------------------------------------------------------------------------
 
-loc_3AEF6:
+S3AIZ1Screen_DrawFlameDuringRefresh:
                 jsr     AIZTrans_WavyFlame(pc)
                 jmp     PlainDeformation(pc)
 ; ---------------------------------------------------------------------------
@@ -415,9 +415,9 @@ loc_3AEF6:
 AIZ1BGE_Finish:
                 jsr     AIZ1_FireRise(pc)
 
-loc_3AF02:
+S3AIZ1Screen_TryFinishActTransition:
                 tst.b   (Kos_modules_left).w
-                bne.w   loc_3AFCA                       ; Wait for the art to be loaded
+                bne.w   S3AIZ1Screen_DrawTransitionFlames  ; Wait for the art to be loaded
                 move.w  #1,(Current_zone_and_act).w     ; Officially change this to act 2
                 clr.b   (Dynamic_resize_routine).w
                 clr.b   (Object_load_routine).w
@@ -461,6 +461,6 @@ loc_3AF02:
                 move.w  #$F,(Draw_delayed_rowcount).w
                 clr.w   (Events_routine_bg).w
 
-loc_3AFCA:
+S3AIZ1Screen_DrawTransitionFlames:
                 jsr     AIZTrans_WavyFlame(pc)
                 jmp     PlainDeformation(pc)

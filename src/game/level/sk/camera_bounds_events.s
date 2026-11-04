@@ -135,7 +135,7 @@ SKBounds_AIZ1_LoadIntroPalette:
                 cmpi.w  #3,(Player_mode).w
                 bne.s   SKBounds_AIZ1_ReleaseTailsAndAdvance
                 lea     (Normal_palette_line_4+$10).w,a1
-                lea     (word_4FAE4).l,a2
+                lea     (SKAIZ1Screen_KnuxPalettePrefix).l,a2
                 move.l  (a2)+,(a1)+
                 move.l  (a2),(a1)
 
@@ -207,7 +207,7 @@ SKBounds_AIZ1_PickFlameEntryColor:
                 move.w  #$C02,d0
                 cmpi.w  #3,(Player_mode).w
                 bne.s   SKBounds_AIZ1_StartFlameLoad
-                move.w  (word_4FAEA).l,d0
+                move.w  (SKAIZ1Screen_KnuxPaletteSharedColor).l,d0
 
 SKBounds_AIZ1_StartFlameLoad:
                 move.w  d0,(Normal_palette_line_3+$1E).w

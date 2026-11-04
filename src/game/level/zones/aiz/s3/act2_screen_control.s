@@ -47,7 +47,7 @@ AIZ2SE_ShipRefresh:
                 move.w  (Camera_Y_pos_copy).w,d2
                 subi.w  #$10,d2
                 jsr     Draw_PlaneVertBottomUp(pc)
-                bpl.w   loc_3B368
+                bpl.w   S3AIZ2Screen_DrawShipForegroundStrip
                 move.w  #$4020,d0
                 move.w  d0,(HScroll_table+$1F6).w
                 move.w  d0,(_unkEE98).w
@@ -58,10 +58,11 @@ AIZ2SE_ShipRefresh:
                 move.w  d0,(_unkEE9C).w
                 move.w  d0,(_unkEEA2).w                 ; Set up secondary BG camera Y
                 jsr     (AllocateObject).l
-                bne.s   loc_3B332
+                bne.s   S3AIZ2Screen_BeginShipForeground
                 move.l  #Obj_AIZBattleship,(a1)         ; Start battleship sequence
 
-loc_3B332:
+; Advance the foreground state even if the ship object was not allocated
+S3AIZ2Screen_BeginShipForeground:
                 st      (Events_bg+$04).w
                 move.l  #HInt7,(H_int_addr).w           ; HInt is needed to change Y scroll value to proper amount mid-draw
                 clr.b   (Water_flag).w
@@ -70,7 +71,7 @@ loc_3B332:
 
 AIZ2SE_ShipDraw:
                 tst.w   (Events_fg_4).w
-                bne.s   loc_3B380                       ; Branch when battleship has gone off-screen
+                bne.s   S3AIZ2Screen_BeginShipExitRefresh  ; Branch when battleship has gone off-screen
                 lea     AIZ2SE_BGShipDrawArray2(pc),a4
                 lea     (HScroll_table+$1F4).w,a6
                 move.w  (_unkEE98).w,(a6)
@@ -78,7 +79,7 @@ AIZ2SE_ShipDraw:
                 move.w  (_unkEEA2).w,d6
                 jsr     Draw_BGNoVert(pc)
 
-loc_3B368:
+S3AIZ2Screen_DrawShipForegroundStrip:
                 lea     AIZ2SE_BGShipDrawArray1(pc),a4
                 lea     (HScroll_table+$1F8).w,a6
                 move.w  (Camera_X_pos_copy).w,4(a6)
@@ -87,7 +88,7 @@ loc_3B368:
                 jmp     Draw_BGNoVert(pc)
 ; ---------------------------------------------------------------------------
 
-loc_3B380:
+S3AIZ2Screen_BeginShipExitRefresh:
                 clr.w   (Events_fg_4).w
                 move.w  #$170,(Draw_delayed_position).w
                 move.w  #4,(Draw_delayed_rowcount).w    ; Set redraw memory
@@ -98,7 +99,7 @@ AIZ2SE_EndRefresh:
                 move.w  (Camera_Y_pos_copy).w,d2
                 subi.w  #$10,d2
                 jsr     Draw_PlaneVertBottomUp(pc)
-                bpl.s   loc_3B368
+                bpl.s   S3AIZ2Screen_DrawShipForegroundStrip
                 move.w  (Camera_X_pos_copy).w,d0
                 andi.w  #$FFF0,d0
                 subi.w  #$10,d0
@@ -131,11 +132,11 @@ AIZ2_BackgroundInit:
                 move.w  (Camera_X_pos_copy).w,(Events_fg_1).w
                 move.w  #$C,(Events_routine_bg).w
                 cmpi.w  #$3E80,(Camera_X_pos_copy).w
-                blo.s   loc_3B418
+                blo.s   S3AIZ2Screen_InitBgPlaneAndDeform
                 move.w  #$14,(Events_routine_bg).w
                 move.w  #$4440,(Events_bg+$02).w
 
-loc_3B418:
+S3AIZ2Screen_InitBgPlaneAndDeform:
                 jsr     AIZ2_Deform(pc)
                 jsr     Reset_TileOffsetPositionEff(pc)
                 moveq   #0,d1
@@ -173,13 +174,13 @@ AIZ2BGE_FireRedraw:
                 move.w  (Camera_X_pos_copy).w,d1
                 move.w  (Camera_Y_pos_copy).w,d2
                 jsr     Draw_PlaneVertBottomUp(pc)
-                bmi.s   loc_3B480
+                bmi.s   S3AIZ2Screen_BeginFireAlignWait
                 jsr     AIZ1_FireRise(pc)
                 jsr     AIZTrans_WavyFlame(pc)
                 jmp     PlainDeformation(pc)
 ; ---------------------------------------------------------------------------
 
-loc_3B480:
+S3AIZ2Screen_BeginFireAlignWait:
                 addq.w  #2,a3
                 move.w  #VRAM_Plane_B_Name_Table,d7
                 clr.w   (Events_bg+$00).w
@@ -189,19 +190,19 @@ AIZ2BGE_WaitFire:
                 jsr     AIZ1_FireRise(pc)
                 jsr     AIZTrans_WavyFlame(pc)
                 tst.w   (Events_bg+$00).w
-                bne.s   loc_3B4CC
+                bne.s   S3AIZ2Screen_DrawFireRowsAndTryRestore
                 move.w  (Camera_Y_pos_BG_copy).w,d0
                 andi.w  #$7F,d0
                 cmpi.w  #$20,d0
-                blo.s   loc_3B4B0
+                blo.s   S3AIZ2Screen_UsePlainFireDeform
                 cmpi.w  #$30,d0
-                blo.s   loc_3B4B4
+                blo.s   S3AIZ2Screen_SetFireBgAlignment
 
-loc_3B4B0:
+S3AIZ2Screen_UsePlainFireDeform:
                 jmp     PlainDeformation(pc)
 ; ---------------------------------------------------------------------------
 
-loc_3B4B4:
+S3AIZ2Screen_SetFireBgAlignment:
                 addi.w  #$180,d0
                 move.w  d0,(Camera_Y_pos_BG_copy).w
                 and.w   (Camera_Y_pos_mask).w,d0
@@ -209,14 +210,14 @@ loc_3B4B4:
                 move.w  d0,(Camera_Y_pos_BG_rounded).w
                 st      (Events_bg+$00).w
 
-loc_3B4CC:
+S3AIZ2Screen_DrawFireRowsAndTryRestore:
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
                 move.w  #$200,d1
                 moveq   #$20,d6
                 jsr     Draw_TileRow(pc)
                 cmpi.w  #$310,(Camera_Y_pos_BG_copy).w
-                blo.s   loc_3B544                       ; If fire hasn't subsided, branch
+                blo.s   S3AIZ2Screen_ApplyWavesAndFlattenBg  ; If fire hasn't subsided, branch
                 movem.l d7-a0/a2-a3,-(sp)
                 moveq   #PLCID_0C,d0
                 jsr     (Load_PLC).l
@@ -237,17 +238,17 @@ loc_3B4CC:
                 move.w  #$F,(Draw_delayed_rowcount).w   ; Set up redraw count
                 move.w  #$C,(Special_V_int_routine).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_3B56E
+                bra.s   S3AIZ2Screen_RefreshBgAndDraw
 ; ---------------------------------------------------------------------------
 
-loc_3B544:
+S3AIZ2Screen_ApplyWavesAndFlattenBg:
                 jsr     AIZ2_ApplyDeform(pc)
                 lea     (H_scroll_buffer+2).w,a1
                 move.w  (Camera_X_pos_BG_copy).w,d0     ; Cancel out background deformation since we're still in the open field
                 neg.w   d0
                 moveq   #bytesToLcnt(224),d1
 
-loc_3B554:
+S3AIZ2Screen_FillFlatBgScroll:
                 move.w  d0,(a1)
                 addq.w  #4,a1
                 move.w  d0,(a1)
@@ -256,33 +257,33 @@ loc_3B554:
                 addq.w  #4,a1
                 move.w  d0,(a1)
                 addq.w  #4,a1
-                dbf     d1,loc_3B554
+                dbf     d1,S3AIZ2Screen_FillFlatBgScroll
                 rts
 ; ---------------------------------------------------------------------------
 
 AIZ2BGE_BGRedraw:
                 jsr     AIZ2_Deform(pc)
 
-loc_3B56E:
+S3AIZ2Screen_RefreshBgAndDraw:
                 moveq   #0,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 jsr     Draw_PlaneVertBottomUp(pc)
-                bpl.s   loc_3B5C8
+                bpl.s   S3AIZ2Screen_DrawNormalBgAndShake
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_3B5C8
+                bra.s   S3AIZ2Screen_DrawNormalBgAndShake
 ; ---------------------------------------------------------------------------
 
 AIZ2BGE_Normal:
                 jsr     AIZ2_Deform(pc)
                 tst.w   (Events_fg_5).w
-                beq.s   loc_3B5C8
+                beq.s   S3AIZ2Screen_DrawNormalBgAndShake
                 clr.w   (Events_fg_5).w
                 move.w  #$A8,d0
                 cmpi.w  #$400,(Camera_Y_pos_copy).w
-                blo.s   loc_3B59E
+                blo.s   S3AIZ2Screen_SetShipBgYAndRefresh
                 move.w  #-$198,d0
 
-loc_3B59E:
+S3AIZ2Screen_SetShipBgYAndRefresh:
                 move.w  d0,(Events_bg+$16).w
                 add.w   d0,(Camera_Y_pos_BG_copy).w
                 jsr     Reset_TileOffsetPositionEff(pc)
@@ -292,10 +293,10 @@ loc_3B59E:
                 move.w  #$F,(Draw_delayed_rowcount).w
                 move.w  #$4440,(Events_bg+$02).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_3B5E4
+                bra.s   S3AIZ2Screen_RefreshShipBgAndDraw
 ; ---------------------------------------------------------------------------
 
-loc_3B5C8:
+S3AIZ2Screen_DrawNormalBgAndShake:
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
                 moveq   #0,d1
@@ -308,19 +309,20 @@ loc_3B5C8:
 AIZ2BGE_ShipRefresh:
                 jsr     AIZ2_Deform(pc)
 
-loc_3B5E4:
+S3AIZ2Screen_RefreshShipBgAndDraw:
                 moveq   #0,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 jsr     Draw_PlaneVertBottomUp(pc)
-                bpl.s   loc_3B5FA
+                bpl.s   S3AIZ2Screen_DrawShipBg
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_3B5FA
+                bra.s   S3AIZ2Screen_DrawShipBg
 ; ---------------------------------------------------------------------------
 
 AIZ2BGE_ShipMove:
                 jsr     AIZ2_Deform(pc)
 
-loc_3B5FA:
+; Skip the remaining ScreenEvents work when the effective ship camera supplies vertical scroll
+S3AIZ2Screen_DrawShipBg:
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
                 moveq   #0,d1
@@ -328,10 +330,10 @@ loc_3B5FA:
                 jsr     Draw_TileRow(pc)
                 jsr     AIZ2_ApplyDeform(pc)
                 tst.w   (Events_bg+$04).w
-                beq.s   loc_3B622
+                beq.s   S3AIZ2Screen_ApplyScreenShake
                 move.w  (_unkEE9C).w,(V_scroll_value).w  ; Use effective camera position rather than actual camera position
                 move.w  (Camera_Y_pos_BG_copy).w,(V_scroll_value_BG).w
                 addq.w  #4,sp                           ; Skip last part of ScreenEvents
 
-loc_3B622:
+S3AIZ2Screen_ApplyScreenShake:
                 jmp     ShakeScreen_Setup(pc)

@@ -17,22 +17,22 @@ Obj_AIZDrawBridge:
                 move.b  #-$40,$38(a0)
                 moveq   #-$10,d4
                 btst    #1,status(a0)
-                beq.s   loc_2B186
+                beq.s   SKDrawbridge_PickRotationSpeed
                 addi.w  #$D0,y_pos(a0)
                 move.b  #$40,$38(a0)
                 neg.w   d4
 
-loc_2B186:
+SKDrawbridge_PickRotationSpeed:
                 move.w  #$200,d1
                 btst    #0,status(a0)
-                beq.s   loc_2B194
+                beq.s   SKDrawbridge_TryCreateFirstBank
                 neg.w   d1
 
-loc_2B194:
+SKDrawbridge_TryCreateFirstBank:
                 move.w  d1,$34(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_2B266
-                move.l  #loc_2B380,(a1)
+                bne.w   SKDrawbridge_StartTriggerWait
+                move.l  #SKDrawbridge_DrawBank,(a1)
                 move.l  mappings(a0),mappings(a1)
                 move.w  art_tile(a0),art_tile(a1)
                 move.w  priority(a0),priority(a1)
@@ -47,18 +47,18 @@ loc_2B194:
                 subq.w  #1,d1
                 lea     sub2_x_pos(a1),a2
 
-loc_2B1E6:
+SKDrawbridge_WriteFirstBankSections:
                 add.w   d4,d3
                 move.w  d2,(a2)+
                 move.w  d3,(a2)+
                 move.w  #1,(a2)+
-                dbf     d1,loc_2B1E6
+                dbf     d1,SKDrawbridge_WriteFirstBankSections
                 move.w  $30(a1),x_pos(a1)
                 move.w  $32(a1),y_pos(a1)
                 move.w  a1,$3C(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_2B266
-                move.l  #loc_2B380,(a1)
+                bne.s   SKDrawbridge_StartTriggerWait
+                move.l  #SKDrawbridge_DrawBank,(a1)
                 move.l  mappings(a0),mappings(a1)
                 move.w  art_tile(a0),art_tile(a1)
                 move.w  priority(a0),priority(a1)
@@ -71,130 +71,130 @@ loc_2B1E6:
                 subq.w  #1,d1
                 lea     sub2_x_pos(a1),a2
 
-loc_2B248:
+SKDrawbridge_WriteSecondBankSections:
                 add.w   d4,d3
                 move.w  d2,(a2)+
                 move.w  d3,(a2)+
                 move.w  #1,(a2)+
-                dbf     d1,loc_2B248
+                dbf     d1,SKDrawbridge_WriteSecondBankSections
                 move.w  sub2_x_pos(a1),x_pos(a1)
                 move.w  sub2_y_pos(a1),y_pos(a1)
                 move.w  a1,$3E(a0)
 
-loc_2B266:
-                move.l  #loc_2B26C,(a0)
+SKDrawbridge_StartTriggerWait:
+                move.l  #SKDrawbridge_TryStartRotation,(a0)
 
-loc_2B26C:
+SKDrawbridge_TryStartRotation:
                 tst.b   (_unkFAA3).w
-                beq.s   loc_2B2B0
+                beq.s   SKDrawbridge_CheckRotationPhase
                 tst.b   $36(a0)
-                bne.s   loc_2B2B0
+                bne.s   SKDrawbridge_CheckRotationPhase
                 move.b  #1,$36(a0)
                 moveq   #signextendB(sfx_FlipBridge),d0
                 jsr     (Play_SFX).l
                 move.w  #$68,d1
                 btst    #0,status(a0)
-                beq.s   loc_2B294
+                beq.s   SKDrawbridge_PlaceHorizontalCollision
                 neg.w   d1
 
-loc_2B294:
+SKDrawbridge_PlaceHorizontalCollision:
                 move.w  $30(a0),x_pos(a0)
                 move.w  $32(a0),y_pos(a0)
                 add.w   d1,x_pos(a0)
                 move.b  #$60,width_pixels(a0)
                 move.b  #8,height_pixels(a0)
 
-loc_2B2B0:
+SKDrawbridge_CheckRotationPhase:
                 tst.b   $36(a0)
-                beq.s   loc_2B2E2
+                beq.s   SKDrawbridge_PlacePiecesAndCheckSolid
                 tst.b   $38(a0)
-                beq.s   loc_2B2C4
+                beq.s   SKDrawbridge_BeginCollapseWait
                 cmpi.b  #$80,$38(a0)
-                bne.s   loc_2B2DA
+                bne.s   SKDrawbridge_StepRotationPhase
 
-loc_2B2C4:
+SKDrawbridge_BeginCollapseWait:
                 move.b  #0,$36(a0)
                 moveq   #signextendB(sfx_FlipBridge),d0
                 jsr     (Play_SFX).l
-                move.l  #loc_2B2E8,(a0)
-                bra.s   loc_2B2E2
+                move.l  #SKDrawbridge_TryCollapseBanks,(a0)
+                bra.s   SKDrawbridge_PlacePiecesAndCheckSolid
 ; ---------------------------------------------------------------------------
 
-loc_2B2DA:
+SKDrawbridge_StepRotationPhase:
                 move.w  $34(a0),d0
                 add.w   d0,$38(a0)
 
-loc_2B2E2:
+SKDrawbridge_PlacePiecesAndCheckSolid:
                 bsr.w   PositionAizDrawbridgePieces
-                bra.s   loc_2B304
+                bra.s   SKDrawbridge_PickSolidRectangle
 ; ---------------------------------------------------------------------------
 
-loc_2B2E8:
+SKDrawbridge_TryCollapseBanks:
                 tst.b   (_unkFAA9).w
-                beq.s   loc_2B304
-                move.l  #loc_2B452,(a0)
+                beq.s   SKDrawbridge_PickSolidRectangle
+                move.l  #SKDrawbridge_TickFinalRiderDelay,(a0)
                 move.b  #$E,$34(a0)
-                move.l  #loc_2B42A,d4
-                bra.w   loc_2B498
+                move.l  #SKDrawbridge_TickFragmentDelay,d4
+                bra.w   SKDrawbridge_TrySplitFirstBank
 ; ---------------------------------------------------------------------------
 
-loc_2B304:
+SKDrawbridge_PickSolidRectangle:
                 move.w  #$13,d1
                 move.w  #$60,d2
                 move.w  #$61,d3
                 move.b  $38(a0),d0
-                beq.s   loc_2B322
+                beq.s   SKDrawbridge_UseHorizontalRectangle
                 cmpi.b  #$40,d0
-                beq.s   loc_2B32E
+                beq.s   SKDrawbridge_CheckSolidAndCullAtHinge
                 cmpi.b  #-$40,d0
-                beq.s   loc_2B32E
+                beq.s   SKDrawbridge_CheckSolidAndCullAtHinge
 
-loc_2B322:
+SKDrawbridge_UseHorizontalRectangle:
                 move.w  #$6B,d1
                 move.w  #8,d2
                 move.w  #8,d3
 
-loc_2B32E:
+SKDrawbridge_CheckSolidAndCullAtHinge:
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull2).l
                 move.w  $30(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_2B352
+                bhi.w   SKDrawbridge_TryDeleteFirstBank
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2B352:
+SKDrawbridge_TryDeleteFirstBank:
                 move.w  $3C(a0),d0
-                beq.s   loc_2B360
+                beq.s   SKDrawbridge_TryDeleteSecondBank
                 movea.w d0,a1
                 jsr     (Delete_Referenced_Sprite).l
 
-loc_2B360:
+SKDrawbridge_TryDeleteSecondBank:
                 move.w  $3E(a0),d0
-                beq.s   loc_2B36E
+                beq.s   SKDrawbridge_ClearRespawnBit
                 movea.w d0,a1
                 jsr     (Delete_Referenced_Sprite).l
 
-loc_2B36E:
+SKDrawbridge_ClearRespawnBit:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_2B37A
+                beq.s   SKDrawbridge_DeleteAfterBankCleanup
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_2B37A:
+SKDrawbridge_DeleteAfterBankCleanup:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2B380:
+SKDrawbridge_DrawBank:
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
 PositionAizDrawbridgePieces:
                 tst.b   $36(a0)
-                beq.w   locret_2B428
+                beq.w   SKDrawbridge_PositionPiecesReturn
                 moveq   #0,d0
                 moveq   #0,d1
                 move.b  $38(a0),d0
@@ -205,7 +205,7 @@ PositionAizDrawbridgePieces:
                 movea.w $3C(a0),a1
                 move.w  mainspr_childsprites(a1),d6
                 subq.w  #1,d6
-                bcs.s   locret_2B428
+                bcs.s   SKDrawbridge_PositionPiecesReturn
                 swap    d0
                 swap    d1
                 asr.l   #4,d0
@@ -214,7 +214,7 @@ PositionAizDrawbridgePieces:
                 move.l  d1,d5
                 lea     sub2_x_pos(a1),a2
 
-loc_2B3C2:
+SKDrawbridge_PositionFirstBank:
                 movem.l d4-d5,-(sp)
                 swap    d4
                 swap    d5
@@ -226,17 +226,17 @@ loc_2B3C2:
                 add.l   d0,d4
                 add.l   d1,d5
                 addq.w  #2,a2
-                dbf     d6,loc_2B3C2
+                dbf     d6,SKDrawbridge_PositionFirstBank
                 move.w  $30(a1),x_pos(a1)
                 move.w  $32(a1),y_pos(a1)
                 moveq   #0,d6
                 movea.w $3E(a0),a1
                 move.w  mainspr_childsprites(a1),d6
                 subq.w  #1,d6
-                bcs.s   locret_2B428
+                bcs.s   SKDrawbridge_PositionPiecesReturn
                 lea     sub2_x_pos(a1),a2
 
-loc_2B3FE:
+SKDrawbridge_PositionSecondBank:
                 movem.l d4-d5,-(sp)
                 swap    d4
                 swap    d5
@@ -248,90 +248,90 @@ loc_2B3FE:
                 add.l   d0,d4
                 add.l   d1,d5
                 addq.w  #2,a2
-                dbf     d6,loc_2B3FE
+                dbf     d6,SKDrawbridge_PositionSecondBank
                 move.w  sub2_x_pos(a1),x_pos(a1)
                 move.w  sub2_y_pos(a1),y_pos(a1)
 
-locret_2B428:
+SKDrawbridge_PositionPiecesReturn:
                 rts
 ; End of function PositionAizDrawbridgePieces
 
 ; ---------------------------------------------------------------------------
 
-loc_2B42A:
+SKDrawbridge_TickFragmentDelay:
                 tst.b   $34(a0)
-                beq.s   loc_2B43A
+                beq.s   SKDrawbridge_FallFragment
                 subq.b  #1,$34(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2B43A:
+SKDrawbridge_FallFragment:
                 jsr     (MoveSprite).l
                 tst.b   render_flags(a0)
-                bpl.s   loc_2B44C
+                bpl.s   SKDrawbridge_DeleteFragment
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2B44C:
+SKDrawbridge_DeleteFragment:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2B452:
+SKDrawbridge_TickFinalRiderDelay:
                 tst.b   $34(a0)
-                beq.s   loc_2B45E
+                beq.s   SKDrawbridge_TryReleaseFinalP1
                 subq.b  #1,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2B45E:
+SKDrawbridge_TryReleaseFinalP1:
                 bclr    #p1_standing_bit,status(a0)
-                beq.s   loc_2B478
+                beq.s   SKDrawbridge_TryReleaseFinalP2
                 bclr    #Status_OnObj,(Player_1+status).w
                 bset    #Status_InAir,(Player_1+status).w
                 move.b  #$1B,(Player_1+anim).w
 
-loc_2B478:
+SKDrawbridge_TryReleaseFinalP2:
                 bclr    #p2_standing_bit,status(a0)
-                beq.s   loc_2B492
+                beq.s   SKDrawbridge_DeleteAfterRiderRelease
                 bclr    #Status_OnObj,(Player_2+status).w
                 bset    #Status_InAir,(Player_2+status).w
                 move.b  #$1B,(Player_2+anim).w
 
-loc_2B492:
+SKDrawbridge_DeleteAfterRiderRelease:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2B498:
+SKDrawbridge_TrySplitFirstBank:
                 move.w  $3C(a0),d0
-                beq.s   loc_2B4A2
+                beq.s   SKDrawbridge_TrySplitSecondBank
                 movea.w d0,a3
-                bsr.s   loc_2B4AE
+                bsr.s   SKDrawbridge_InitBankSplit
 
-loc_2B4A2:
+SKDrawbridge_TrySplitSecondBank:
                 move.w  $3E(a0),d0
-                beq.s   locret_2B4AC
+                beq.s   SKDrawbridge_SplitBanksReturn
                 movea.w d0,a3
-                bsr.s   loc_2B4AE
+                bsr.s   SKDrawbridge_InitBankSplit
 
-locret_2B4AC:
+SKDrawbridge_SplitBanksReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2B4AE:
-                lea     (byte_2B548).l,a4
+SKDrawbridge_InitBankSplit:
+                lea     (SKDrawbridge_FragmentDelays).l,a4
                 lea     sub2_x_pos(a3),a2
                 move.w  mainspr_childsprites(a3),d6
                 subq.w  #1,d6
                 bclr    #6,render_flags(a3)
                 movea.l a3,a1
-                bra.s   loc_2B4D0
+                bra.s   SKDrawbridge_InitFragmentAndTryExplosion
 ; ---------------------------------------------------------------------------
 
-loc_2B4C8:
+SKDrawbridge_TryAllocateFragment:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_2B534
+                bne.s   SKDrawbridge_ClearChildCoordsAndSound
 
-loc_2B4D0:
+SKDrawbridge_InitFragmentAndTryExplosion:
                 move.l  d4,(a1)
                 move.l  mappings(a3),mappings(a1)
                 move.b  render_flags(a3),render_flags(a1)
@@ -347,20 +347,20 @@ loc_2B4D0:
                 move.b  (a4)+,$34(a1)
                 movea.l a1,a5
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_2B534
+                bne.s   SKDrawbridge_ClearChildCoordsAndSound
                 move.l  #SKExplosion_InitHighPriorityDelayed,(a1)
                 move.w  x_pos(a5),x_pos(a1)
                 move.w  y_pos(a5),y_pos(a1)
                 move.b  -1(a4),anim_frame_timer(a1)
-                dbf     d6,loc_2B4C8
+                dbf     d6,SKDrawbridge_TryAllocateFragment
 
-loc_2B534:
+SKDrawbridge_ClearChildCoordsAndSound:
                 move.w  #0,sub2_x_pos(a3)
                 move.w  #0,sub2_y_pos(a3)
                 moveq   #signextendB(sfx_BridgeCollapse),d0
                 jmp     (Play_SFX).l
 ; ---------------------------------------------------------------------------
-byte_2B548:
+SKDrawbridge_FragmentDelays:
                 dc.b    8
                 dc.b    $10
                 dc.b    $C

@@ -221,7 +221,7 @@ ChildObjDat_57462:
                 dc.b    -$1B,-$16
 ChildObjDat_5746A:
                 dc.w    1-1
-                dc.l    loc_54B46
+                dc.l    S3CallbackShot_InitDeflectable
                 dc.l    ObjDat3_5744A
                 dc.l    byte_574AD
                 dc.l    MoveFall_AnimateRaw
@@ -229,7 +229,7 @@ ChildObjDat_5746A:
                 dc.w    -$200, -$400
 ChildObjDat_57482:
                 dc.w    1-1
-                dc.l    loc_54B46
+                dc.l    S3CallbackShot_InitDeflectable
                 dc.l    ObjDat3_57456
                 dc.l    byte_574B1
                 dc.l    MoveFall_AnimateRaw

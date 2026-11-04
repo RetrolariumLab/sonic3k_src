@@ -9,9 +9,9 @@ Obj_AIZ1Tree:
                 move.b  #8,width_pixels(a0)
                 move.b  #4,render_flags(a0)
                 move.w  #make_art_tile($001,2,0),art_tile(a0)
-                move.l  #loc_1C3E2,(a0)
+                move.l  #AIZZoneS3_ActOneTree_HorizontalCullDraw,(a0)
 
-loc_1C3E2:
+AIZZoneS3_ActOneTree_HorizontalCullDraw:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_AIZ1Tree:
@@ -25,9 +25,9 @@ Obj_AIZ1ZiplinePeg:
                 move.b  #$20,width_pixels(a0)
                 move.b  #4,render_flags(a0)
                 move.w  #make_art_tile(ArtTile_AIZSlideRope,2,0),art_tile(a0)
-                move.l  #loc_1C424,(a0)
+                move.l  #AIZZoneS3_ZiplinePeg_HorizontalCullDraw,(a0)
 
-loc_1C424:
+AIZZoneS3_ZiplinePeg_HorizontalCullDraw:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_AIZ1ZiplinePeg:

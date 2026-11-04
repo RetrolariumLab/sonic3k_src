@@ -166,7 +166,7 @@ ChildObjDat_56EFC:
                 dc.b    0,  -8
 ChildObjDat_56F04:
                 dc.w    1-1
-                dc.l    loc_54B46
+                dc.l    S3CallbackShot_InitDeflectable
                 dc.l    ObjDat3_56EF0
                 dc.l    0
                 dc.l    MoveSprite2

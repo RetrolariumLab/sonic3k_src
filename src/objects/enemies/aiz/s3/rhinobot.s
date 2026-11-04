@@ -14,13 +14,13 @@ Obj_Rhinobot:
                 jmp     Sprite_CheckDeleteTouchSlotted(pc)
 ; ---------------------------------------------------------------------------
 Rhinobot_Index:
-                dc.w    loc_54C7A-Rhinobot_Index
-                dc.w    loc_54CC0-Rhinobot_Index
-                dc.w    loc_54CE6-Rhinobot_Index
-                dc.w    loc_54CEA-Rhinobot_Index
+                dc.w    S3Rhinobot_InitArtAndPatrol-Rhinobot_Index
+                dc.w    S3Rhinobot_RunPatrol-Rhinobot_Index
+                dc.w    RhinobotS3_Charge_CountPreparationWait-Rhinobot_Index
+                dc.w    S3Rhinobot_RunCharge-Rhinobot_Index
 ; ---------------------------------------------------------------------------
 
-loc_54C7A:
+S3Rhinobot_InitArtAndPatrol:
                 lea     ObjSlot_Rhinobot(pc),a1
                 jsr     SetUp_ObjAttributesSlotted(pc)
                 move.b  #8,x_radius(a0)
@@ -28,212 +28,213 @@ loc_54C7A:
                 move.w  #-$10,d0
                 move.w  #-$300,d1
                 btst    #0,render_flags(a0)
-                beq.s   loc_54CAE
+                beq.s   S3Rhinobot_SetPatrolSpeedAndCallback
                 neg.w   d0
                 neg.w   d1
                 bset    #3,$38(a0)
                 bset    #2,$38(a0)
 
-loc_54CAE:
+S3Rhinobot_SetPatrolSpeedAndCallback:
                 move.w  d0,$40(a0)
                 move.w  d1,$3E(a0)
-                move.l  #loc_54D3C,$34(a0)
+                move.l  #S3Rhinobot_ReversePatrolAccel,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_54CC0:
-                lea     loc_54D8E(pc),a3
+S3Rhinobot_RunPatrol:
+                lea     S3Rhinobot_BeginChargeWindup(pc),a3
                 bsr.w   TriggerRhinobotChargeForPlayerAhead
-                lea     loc_54D70(pc),a3
+                lea     S3Rhinobot_SetTurnaroundPhase(pc),a3
                 bsr.w   FollowRhinobotFloorOrAbortState
                 move.w  $40(a0),d0
                 add.w   d0,x_vel(a0)
                 jsr     (MoveSprite2).l
                 bsr.w   DispatchRhinobotVelocityMilestone
-                bra.w   loc_54E18
+                bra.w   S3Rhinobot_PickPatrolFrame
 ; ---------------------------------------------------------------------------
 
-loc_54CE6:
+RhinobotS3_Charge_CountPreparationWait:
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_54CEA:
-                lea     loc_54DE4(pc),a3
+S3Rhinobot_RunCharge:
+                lea     S3Rhinobot_AbortChargeToPatrol(pc),a3
                 bsr.w   FollowRhinobotFloorOrAbortState
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_54CF8:
+S3Rhinobot_UpdateDust:
                 cmpi.w  #1,(Current_zone_and_act).w
-                beq.s   loc_54D22
+                beq.s   S3Rhinobot_DeleteDustInAct2
                 jsr     Refresh_ChildPositionAdjusted(pc)
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_54D1E(pc,d0.w),d1
-                jsr     off_54D1E(pc,d1.w)
+                move.w  RhinobotS3_Dust_TwoRelativeStateOffsets(pc,d0.w),d1
+                jsr     RhinobotS3_Dust_TwoRelativeStateOffsets(pc,d1.w)
                 lea     DPLCPtr_AIZRhinobot(pc),a2
                 jsr     Perform_DPLC(pc)
                 jmp     Child_Remember_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
-off_54D1E:
-                dc.w    loc_54D28-off_54D1E
-                dc.w    loc_54D38-off_54D1E
+RhinobotS3_Dust_TwoRelativeStateOffsets:
+                dc.w    S3Rhinobot_InitDustArtSlot-RhinobotS3_Dust_TwoRelativeStateOffsets
+                dc.w    S3Rhinobot_AnimateDust-RhinobotS3_Dust_TwoRelativeStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_54D22:
+S3Rhinobot_DeleteDustInAct2:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_54D28:
-                lea     ObjSlot_54F0C(pc),a1
+S3Rhinobot_InitDustArtSlot:
+                lea     RhinobotS3_Dust_SlottedAttributeRecord(pc),a1
                 jsr     SetUp_ObjAttributesSlotted(pc)
                 move.l  #Go_Delete_SpriteSlotted3,$34(a0)
 
-loc_54D38:
+S3Rhinobot_AnimateDust:
                 jmp     Animate_Raw(pc)
 ; ---------------------------------------------------------------------------
 
-loc_54D3C:
+S3Rhinobot_ReversePatrolAccel:
                 bchg    #2,$38(a0)
-                move.l  #loc_54D54,$34(a0)
+                move.l  #S3Rhinobot_FlipPatrolFacing,$34(a0)
                 neg.w   $40(a0)
                 neg.w   $3E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_54D54:
+S3Rhinobot_FlipPatrolFacing:
                 bchg    #3,$38(a0)
                 bchg    #0,render_flags(a0)
                 bclr    #1,$38(a0)
-                move.l  #loc_54D3C,$34(a0)
+                move.l  #S3Rhinobot_ReversePatrolAccel,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_54D70:
+S3Rhinobot_SetTurnaroundPhase:
                 bclr    #2,$38(a0)
                 btst    #3,$38(a0)
-                bne.s   loc_54D84
+                bne.s   S3Rhinobot_StopAndTurnAround
                 bset    #2,$38(a0)
 
-loc_54D84:
+S3Rhinobot_StopAndTurnAround:
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
-                bra.s   loc_54D54
+                bra.s   S3Rhinobot_FlipPatrolFacing
 ; ---------------------------------------------------------------------------
 
-loc_54D8E:
+; Load $20 into the wait counter. The callback runs after the counter underflows
+S3Rhinobot_BeginChargeWindup:
                 move.b  #4,routine(a0)
                 move.b  #0,mapping_frame(a0)
                 move.w  #$20,$2E(a0)
-                move.l  #loc_54DCA,$34(a0)
+                move.l  #S3Rhinobot_PickChargeVelocity,$34(a0)
                 bset    #1,$38(a0)
                 moveq   #signextendB(sfx_Blast),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_54F26(pc),a2
+                lea     S3Rhinobot_ChargeDustChildRecord(pc),a2
                 jsr     CreateChild1_Normal(pc)
-                bne.s   locret_54DC8
-                move.l  #byte_54F46,$30(a1)
+                bne.s   S3Rhinobot_ChargeWindupReturn
+                move.l  #S3Rhinobot_ChargeDustAnim,$30(a1)
 
-locret_54DC8:
+S3Rhinobot_ChargeWindupReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_54DCA:
+S3Rhinobot_PickChargeVelocity:
                 move.b  #6,routine(a0)
                 move.w  #$400,d0
                 btst    #3,$38(a0)
-                bne.s   loc_54DDE
+                bne.s   S3Rhinobot_StoreChargeVelocity
                 neg.w   d0
 
-loc_54DDE:
+S3Rhinobot_StoreChargeVelocity:
                 move.w  d0,x_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_54DE4:
+S3Rhinobot_AbortChargeToPatrol:
                 move.b  #2,routine(a0)
                 move.b  #0,mapping_frame(a0)
-                bra.w   loc_54D70
+                bra.w   S3Rhinobot_SetTurnaroundPhase
 
 ; =============== S U B R O U T I N E =======================================
 
 DispatchRhinobotVelocityMilestone:
                 move.w  x_vel(a0),d0
-                beq.s   loc_54E12
+                beq.s   RhinobotS3_Milestone_TailCurrentCallback
                 btst    #2,$38(a0)
-                beq.s   loc_54E0A
+                beq.s   S3Rhinobot_CheckLowerSpeedTarget
                 cmp.w   $3E(a0),d0
-                bge.s   loc_54E12
+                bge.s   RhinobotS3_Milestone_TailCurrentCallback
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_54E0A:
+S3Rhinobot_CheckLowerSpeedTarget:
                 cmp.w   $3E(a0),d0
-                ble.s   loc_54E12
+                ble.s   RhinobotS3_Milestone_TailCurrentCallback
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_54E12:
+RhinobotS3_Milestone_TailCurrentCallback:
                 movea.l $34(a0),a1
                 jmp     (a1)
 ; End of function DispatchRhinobotVelocityMilestone
 
 ; ---------------------------------------------------------------------------
 
-loc_54E18:
+S3Rhinobot_PickPatrolFrame:
                 moveq   #0,d1
                 btst    #3,$38(a0)
-                beq.s   loc_54E50
+                beq.s   S3Rhinobot_PickPatrolFrameLeft
                 btst    #2,$38(a0)
-                beq.s   loc_54E38
+                beq.s   S3Rhinobot_PickBrakeFrameRight
                 cmpi.w  #$80,x_vel(a0)
-                bgt.s   loc_54E7A
+                bgt.s   S3Rhinobot_StorePatrolFrame
                 moveq   #1,d1
-                bra.w   loc_54E7A
+                bra.w   S3Rhinobot_StorePatrolFrame
 ; ---------------------------------------------------------------------------
 
-loc_54E38:
+S3Rhinobot_PickBrakeFrameRight:
                 moveq   #1,d1
                 cmpi.w  #$280,x_vel(a0)
-                bgt.s   loc_54E7A
+                bgt.s   S3Rhinobot_StorePatrolFrame
                 moveq   #2,d1
                 bset    #1,$38(a0)
-                beq.s   loc_54E80
-                bra.w   loc_54E7A
+                beq.s   S3Rhinobot_StoreFrameAndTryDust
+                bra.w   S3Rhinobot_StorePatrolFrame
 ; ---------------------------------------------------------------------------
 
-loc_54E50:
+S3Rhinobot_PickPatrolFrameLeft:
                 btst    #2,$38(a0)
-                bne.s   loc_54E66
+                bne.s   S3Rhinobot_PickBrakeFrameLeft
                 cmpi.w  #-$80,x_vel(a0)
-                ble.s   loc_54E7A
+                ble.s   S3Rhinobot_StorePatrolFrame
                 moveq   #1,d1
-                bra.w   loc_54E7A
+                bra.w   S3Rhinobot_StorePatrolFrame
 ; ---------------------------------------------------------------------------
 
-loc_54E66:
+S3Rhinobot_PickBrakeFrameLeft:
                 moveq   #1,d1
                 cmpi.w  #-$280,x_vel(a0)
-                ble.s   loc_54E7A
+                ble.s   S3Rhinobot_StorePatrolFrame
                 moveq   #2,d1
                 bset    #1,$38(a0)
-                beq.s   loc_54E80
+                beq.s   S3Rhinobot_StoreFrameAndTryDust
 
-loc_54E7A:
+S3Rhinobot_StorePatrolFrame:
                 move.b  d1,mapping_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_54E80:
+S3Rhinobot_StoreFrameAndTryDust:
                 move.b  d1,mapping_frame(a0)
                 moveq   #signextendB(sfx_Blast),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_54F1E(pc),a2
+                lea     S3Rhinobot_PatrolDustChildRecord(pc),a2
                 jsr     CreateChild1_Normal(pc)
-                bne.s   locret_54E9E
-                move.l  #byte_54F36,$30(a1)
+                bne.s   S3Rhinobot_PatrolDustReturn
+                move.l  #S3Rhinobot_PatrolDustAnim,$30(a1)
 
-locret_54E9E:
+S3Rhinobot_PatrolDustReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -241,22 +242,23 @@ locret_54E9E:
 TriggerRhinobotChargeForPlayerAhead:
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$20,d3
-                bhi.s   locret_54EBE
+                bhi.s   S3Rhinobot_ChargeTriggerReturn
                 cmpi.w  #$60,d2
-                bhi.s   locret_54EBE
+                bhi.s   S3Rhinobot_ChargeTriggerReturn
                 btst    #3,$38(a0)
-                bne.s   loc_54EBA
+                bne.s   S3Rhinobot_CheckNearestPlayerSide
                 subq.w  #2,d0
 
-loc_54EBA:
+S3Rhinobot_CheckNearestPlayerSide:
                 tst.w   d0
-                bne.s   loc_54EC0
+                bne.s   S3Rhinobot_EnterChargeAndSkipPatrol
 
-locret_54EBE:
+S3Rhinobot_ChargeTriggerReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_54EC0:
+; Discard the caller's return address after the setup callback
+S3Rhinobot_EnterChargeAndSkipPatrol:
                 jsr     (a3)
                 addq.w  #4,sp
                 rts
@@ -267,24 +269,25 @@ loc_54EC0:
 FollowRhinobotFloorOrAbortState:
                 moveq   #4,d0
                 btst    #3,$38(a0)
-                bne.s   loc_54ED2
+                bne.s   S3Rhinobot_ProbeFloorAhead
                 neg.w   d0
 
-loc_54ED2:
+S3Rhinobot_ProbeFloorAhead:
                 move.w  x_pos(a0),d3
                 add.w   d0,d3
                 move.l  a3,-(sp)
                 jsr     (ObjCheckFloorDist2).l
                 movea.l (sp)+,a3
                 cmpi.w  #-1,d1
-                blt.s   loc_54EF4
+                blt.s   S3Rhinobot_AbortAndSkipStateTail
                 cmpi.w  #$C,d1
-                bge.s   loc_54EF4
+                bge.s   S3Rhinobot_AbortAndSkipStateTail
                 add.w   d1,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_54EF4:
+; Discard the caller's return address after the floor-abort callback
+S3Rhinobot_AbortAndSkipStateTail:
                 jsr     (a3)
                 addq.w  #4,sp
                 rts
@@ -298,27 +301,27 @@ ObjSlot_Rhinobot:
                 dc.l    Map_Rhinobot
                 dc.w    $280
                 dc.b    $14, $10,   0,  $B
-ObjSlot_54F0C:
+RhinobotS3_Dust_SlottedAttributeRecord:
                 dc.w    2-1
                 dc.w    make_art_tile(ArtTile_Rhinobot-$B6,0,0)
                 dc.w    6,     2
                 dc.l    Map_Rhinobot
                 dc.w    $200
                 dc.b    $C,   8,   4,   0
-ChildObjDat_54F1E:
+S3Rhinobot_PatrolDustChildRecord:
                 dc.w    1-1
-                dc.l    loc_54CF8
+                dc.l    S3Rhinobot_UpdateDust
                 dc.b    $C,   8
-ChildObjDat_54F26:
+S3Rhinobot_ChargeDustChildRecord:
                 dc.w    1-1
-                dc.l    loc_54CF8
+                dc.l    S3Rhinobot_UpdateDust
                 dc.b    $10,   8
 DPLCPtr_AIZRhinobot:
                 dc.l    ArtUnc_AIZRhinobot
                 dc.l    DPLC_Rhinobot
-byte_54F36:
+S3Rhinobot_PatrolDustAnim:
                 dc.b    2,   4,   4,   5,   6,   7,   4,   5,   6,   7,   4,   5,   6,   7, $F4
                 even
-byte_54F46:
+S3Rhinobot_ChargeDustAnim:
                 dc.b    2,   4,   4,   5,   6,   7,   4,   5,   6,   7, $F4
                 even

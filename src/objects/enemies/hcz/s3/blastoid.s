@@ -86,7 +86,7 @@ ObjDat3_557D2:
                 dc.b    4,   4,   2, $98
 ChildObjDat_557DE:
                 dc.w    1-1
-                dc.l    loc_54B46
+                dc.l    S3CallbackShot_InitDeflectable
                 dc.l    ObjDat3_557D2
                 dc.l    byte_55805
                 dc.l    Move_AnimateRaw

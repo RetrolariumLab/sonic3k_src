@@ -1,11 +1,11 @@
 ; Data owner: objects/shared/zones/aiz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_AIZCollapsingPlatform_:
-                dc.w    Frame_21E6D0-Map_AIZCollapsingPlatform_
-                dc.w    Frame_21E6D0-Map_AIZCollapsingPlatform_
-                dc.w    Frame_21E71A-Map_AIZCollapsingPlatform_
-                dc.w    Frame_21E71A-Map_AIZCollapsingPlatform_
-Frame_21E6D0:   dc.w    $C
+                dc.w    S3AIZ1CollapsePlat_MapSlots00_01-Map_AIZCollapsingPlatform_
+                dc.w    S3AIZ1CollapsePlat_MapSlots00_01-Map_AIZCollapsingPlatform_
+                dc.w    S3AIZ1CollapsePlat_MapSlots02_03-Map_AIZCollapsingPlatform_
+                dc.w    S3AIZ1CollapsePlat_MapSlots02_03-Map_AIZCollapsingPlatform_
+S3AIZ1CollapsePlat_MapSlots00_01:   dc.w    $C
                 dc.b    $E0,  $D,   0,   0, $FF, $D0
                 dc.b    $E0,  $D,   0,   8, $FF, $F0
                 dc.b    $E8,  $C,   0, $10,   0, $10
@@ -18,7 +18,7 @@ Frame_21E6D0:   dc.w    $C
                 dc.b    $10,  $D,   0, $2C, $FF, $D0
                 dc.b    $10,  $D,   8, $2C, $FF, $F0
                 dc.b    $10,  $D,   0, $2C,   0, $10
-Frame_21E71A:   dc.w    $18
+S3AIZ1CollapsePlat_MapSlots02_03:   dc.w    $18
                 dc.b    $E0,   5,   0,   0, $FF, $D0
                 dc.b    $E0,   5,   0,   4, $FF, $E0
                 dc.b    $E0,   5,   0,   8, $FF, $F0

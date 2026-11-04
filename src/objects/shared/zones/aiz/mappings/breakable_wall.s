@@ -1,31 +1,31 @@
 ; Data owner: objects/shared/zones/aiz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_AIZBreakableWall_:
-                dc.w    Frame_21FD5E-Map_AIZBreakableWall_
-                dc.w    Frame_21FDBE-Map_AIZBreakableWall_
-                dc.w    Frame_21FD7E-Map_AIZBreakableWall_
-                dc.w    Frame_21FDFC-Map_AIZBreakableWall_
-                dc.w    Frame_21FD9E-Map_AIZBreakableWall_
-                dc.w    Frame_21FE3A-Map_AIZBreakableWall_
-Frame_21FD5E:   dc.w    5
+                dc.w    AIZBreakableWallS3_MapFrame00-Map_AIZBreakableWall_
+                dc.w    AIZBreakableWallS3_MapFrame01-Map_AIZBreakableWall_
+                dc.w    AIZBreakableWallS3_MapFrame02-Map_AIZBreakableWall_
+                dc.w    AIZBreakableWallS3_MapFrame03-Map_AIZBreakableWall_
+                dc.w    AIZBreakableWallS3_MapFrame04-Map_AIZBreakableWall_
+                dc.w    AIZBreakableWallS3_MapFrame05-Map_AIZBreakableWall_
+AIZBreakableWallS3_MapFrame00:  dc.w    5
                 dc.b    $D8,  $D,   0, $16, $FF, $F0
                 dc.b    $E8,  $D, $18, $16, $FF, $F0
                 dc.b    $F8,  $D,   0, $16, $FF, $F0
                 dc.b    8,  $D, $18, $16, $FF, $F0
                 dc.b    $18,  $D,   0, $16, $FF, $F0
-Frame_21FD7E:   dc.w    5
+AIZBreakableWallS3_MapFrame02:  dc.w    5
                 dc.b    $D8,  $D, $10, $16, $FF, $F0
                 dc.b    $E8,  $D,   8, $16, $FF, $F0
                 dc.b    $F8,  $D, $10, $16, $FF, $F0
                 dc.b    8,  $D,   8, $16, $FF, $F0
                 dc.b    $18,  $D, $18, $16, $FF, $F0
-Frame_21FD9E:   dc.w    5
+AIZBreakableWallS3_MapFrame04:  dc.w    5
                 dc.b    $D8,  $D,   8, $16, $FF, $F0
                 dc.b    $E8,  $D, $10, $16, $FF, $F0
                 dc.b    $F8,  $D,   8, $16, $FF, $F0
                 dc.b    8,  $D, $10, $16, $FF, $F0
                 dc.b    $18,  $D,   8, $16, $FF, $F0
-Frame_21FDBE:   dc.w    $A
+AIZBreakableWallS3_MapFrame01:  dc.w    $A
                 dc.b    $D8,   5,   0, $16, $FF, $F0
                 dc.b    $D8,   5,   0, $1A,   0,   0
                 dc.b    $E8,   5, $18, $1A, $FF, $F0
@@ -36,7 +36,7 @@ Frame_21FDBE:   dc.w    $A
                 dc.b    8,   5, $18, $16,   0,   0
                 dc.b    $18,   5,   0, $16, $FF, $F0
                 dc.b    $18,   5,   0, $1A,   0,   0
-Frame_21FDFC:   dc.w    $A
+AIZBreakableWallS3_MapFrame03:  dc.w    $A
                 dc.b    $D8,   5, $10, $16, $FF, $F0
                 dc.b    $D8,   5, $10, $1A,   0,   0
                 dc.b    $E8,   5,   8, $1A, $FF, $F0
@@ -47,7 +47,7 @@ Frame_21FDFC:   dc.w    $A
                 dc.b    8,   5,   8, $16,   0,   0
                 dc.b    $18,   5, $18, $1A, $FF, $F0
                 dc.b    $18,   5, $18, $16,   0,   0
-Frame_21FE3A:   dc.w    $A
+AIZBreakableWallS3_MapFrame05:  dc.w    $A
                 dc.b    $D8,   5,   8, $1A, $FF, $F0
                 dc.b    $D8,   5,   8, $16,   0,   0
                 dc.b    $E8,   5, $10, $16, $FF, $F0

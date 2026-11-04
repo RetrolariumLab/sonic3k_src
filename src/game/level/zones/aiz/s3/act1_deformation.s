@@ -7,23 +7,23 @@
 AIZ1_IntroDeform:
                 move.w  (Camera_Y_pos_copy).w,(Camera_Y_pos_BG_copy).w
                 move.w  (Events_fg_1).w,d0
-                bmi.s   loc_3AFE2
+                bmi.s   S3AIZ1Deform_PickIntroScrollShape
                 move.w  (Camera_X_pos_copy).w,d0
 
-loc_3AFE2:
+S3AIZ1Deform_PickIntroScrollShape:
                 asr.w   #1,d0
                 lea     (HScroll_table+$028).w,a1
                 cmpi.w  #$580,d0
-                blt.s   loc_3AFF8
+                blt.s   S3AIZ1Deform_InitIntroRamp
                 moveq   #$25-1,d1
 
-loc_3AFF0:
+S3AIZ1Deform_FillIntroPlateau:
                 move.w  d0,(a1)+
-                dbf     d1,loc_3AFF0
-                bra.s   loc_3B018
+                dbf     d1,S3AIZ1Deform_FillIntroPlateau
+                bra.s   S3AIZ1Deform_SampleIntroDrawScroll
 ; ---------------------------------------------------------------------------
 
-loc_3AFF8:
+S3AIZ1Deform_InitIntroRamp:
                 move.w  d0,(a1)+
                 subi.w  #$580,d0
                 swap    d0
@@ -32,36 +32,36 @@ loc_3AFF8:
                 asr.l   #5,d1
                 moveq   #$24-1,d2
 
-loc_3B008:
+S3AIZ1Deform_WriteIntroRampSamples:
                 add.l   d1,d0
                 move.l  d0,d3
                 swap    d3
                 addi.w  #$580,d3
                 move.w  d3,(a1)+
-                dbf     d2,loc_3B008
+                dbf     d2,S3AIZ1Deform_WriteIntroRampSamples
 
-loc_3B018:
+S3AIZ1Deform_SampleIntroDrawScroll:
                 lea     (HScroll_table+$028).w,a1
                 lea     (HScroll_table).w,a5
                 move.w  (a1)+,d0
-                bpl.s   loc_3B026
+                bpl.s   S3AIZ1Deform_StoreFirstIntroDrawOffset
                 moveq   #0,d0
 
-loc_3B026:
+S3AIZ1Deform_StoreFirstIntroDrawOffset:
                 move.w  d0,(a5)
                 addq.w  #4,a5
                 moveq   #9-1,d0
 
-loc_3B02C:
+S3AIZ1Deform_ClampIntroDrawSample:
                 move.w  (a1),d1
-                bpl.s   loc_3B032
+                bpl.s   S3AIZ1Deform_StoreIntroDrawSamples
                 moveq   #0,d1
 
-loc_3B032:
+S3AIZ1Deform_StoreIntroDrawSamples:
                 move.w  d1,(a5)
                 addq.w  #8,a1
                 addq.w  #4,a5
-                dbf     d0,loc_3B02C
+                dbf     d0,S3AIZ1Deform_ClampIntroDrawSample
                 rts
 ; End of function AIZ1_IntroDeform
 
@@ -109,24 +109,24 @@ AIZ1_Deform:
                 asr.l   #1,d0
                 moveq   #5,d1
 
-loc_3B0AE:
+S3AIZ1Deform_WriteNormalBgOffsets:
                 add.l   d3,d0
                 swap    d0
                 move.w  d0,-(a1)
                 swap    d0
                 add.l   d2,d0
-                dbf     d1,loc_3B0AE
+                dbf     d1,S3AIZ1Deform_WriteNormalBgOffsets
                 lea     (HScroll_table+$016).w,a1
                 move.l  d2,d0
                 asr.l   #3,d2
                 moveq   #$C,d1
 
-loc_3B0C6:
+S3AIZ1Deform_WriteFineBgOffsets:
                 add.l   d2,d0
                 swap    d0
                 move.w  d0,(a1)+
                 swap    d0
-                dbf     d1,loc_3B0C6
+                dbf     d1,S3AIZ1Deform_WriteFineBgOffsets
                 rts
 ; End of function AIZ1_Deform
 
@@ -138,11 +138,11 @@ AIZ1_ApplyDeformWater:
                 move.w  (Water_level).w,d1
                 sub.w   (Camera_Y_pos_copy).w,d1
                 cmpi.w  #$E0,d1
-                blt.s   loc_3B0EE
+                blt.s   S3AIZ1Deform_ApplyWaterSplitWaves
                 jmp     ApplyDeformation(pc)
 ; ---------------------------------------------------------------------------
 
-loc_3B0EE:
+S3AIZ1Deform_ApplyWaterSplitWaves:
                 subq.w  #1,d1
                 jsr     ApplyDeformation3(pc)
                 move.l  a1,-(sp)
@@ -179,20 +179,20 @@ loc_3B0EE:
 
 AIZ1_FireRise:
                 cmpi.b  #6,(Player_1+routine).w
-                bcc.s   locret_3B178
+                bcc.s   S3AIZ1Deform_FireRiseReturn
                 moveq   #0,d0
                 move.w  (Events_bg+$02).w,d0
                 addi.w  #$280,d0
                 cmpi.w  #$A000,d0
-                bcs.s   loc_3B16E
+                bcs.s   S3AIZ1Deform_ApplyFireRise
                 move.w  #$A000,d0
 
-loc_3B16E:
+S3AIZ1Deform_ApplyFireRise:
                 move.w  d0,(Events_bg+$02).w
                 lsl.l   #4,d0
                 add.l   d0,(Camera_Y_pos_BG_copy).w
 
-locret_3B178:
+S3AIZ1Deform_FireRiseReturn:
                 rts
 ; End of function AIZ1_FireRise
 
@@ -200,7 +200,7 @@ locret_3B178:
 
 AIZTrans_WavyFlame:
                 cmpi.b  #6,(Player_1+routine).w
-                bcc.s   locret_3B1C4
+                bcc.s   S3AIZ1Deform_FlameVScrollReturn
                 addq.w  #6,(_unkEE8E).w
                 move.w  (_unkEE8E).w,d0
                 andi.w  #$60,d0
@@ -215,16 +215,16 @@ AIZTrans_WavyFlame:
                 asr.w   #2,d2
                 moveq   #$14-1,d3
 
-loc_3B1B0:
+S3AIZ1Deform_WriteFlameVScroll:
                 addq.w  #2,d2
                 andi.w  #$F,d2
                 move.b  (a5,d2.w),d0
                 ext.w   d0
                 add.w   d1,d0
                 move.l  d0,(a1)+
-                dbf     d3,loc_3B1B0
+                dbf     d3,S3AIZ1Deform_WriteFlameVScroll
 
-locret_3B1C4:
+S3AIZ1Deform_FlameVScrollReturn:
                 rts
 ; End of function AIZTrans_WavyFlame
 
@@ -232,11 +232,11 @@ locret_3B1C4:
 
 Obj_AIZTransitionFloor:
                 tst.b   (Current_act).w
-                beq.s   loc_3B1D8
+                beq.s   S3AIZ1Deform_CheckTransitionFloorSolid
                 move.w  #$7F00,x_pos(a0)
                 move.l  #Delete_Current_Sprite,(a0)
 
-loc_3B1D8:
+S3AIZ1Deform_CheckTransitionFloorSolid:
                 move.b  #$A0,width_pixels(a0)
                 bset    #7,status(a0)
                 move.w  #$A0+$B,d1

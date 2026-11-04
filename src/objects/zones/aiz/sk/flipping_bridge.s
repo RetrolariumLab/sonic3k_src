@@ -11,12 +11,12 @@ Obj_AIZFlippingBridge:
                 move.b  #4,render_flags(a0)
                 move.w  #$200,priority(a0)
                 move.w  y_pos(a0),$30(a0)
-                move.l  #word_2AAF2,$32(a0)
+                move.l  #SKFlipBridge_SteepSlopeHeights,$32(a0)
                 move.b  subtype(a0),d0
-                bpl.s   loc_2A98E
-                move.l  #word_2AB72,$32(a0)
+                bpl.s   SKFlipBridge_PickFrameTiming
+                move.l  #SKFlipBridge_ShallowSlopeHeights,$32(a0)
 
-loc_2A98E:
+SKFlipBridge_PickFrameTiming:
                 move.b  d0,d1
                 andi.w  #$F,d0
                 addi.w  #$10,d0
@@ -26,15 +26,15 @@ loc_2A98E:
                 move.b  d1,$25(a0)
                 moveq   #1,d1
                 btst    #0,status(a0)
-                beq.s   loc_2A9B6
+                beq.s   SKFlipBridge_TryCreateDisplay
                 moveq   #-1,d1
                 subq.b  #1,$37(a0)
 
-loc_2A9B6:
+SKFlipBridge_TryCreateDisplay:
                 move.b  d1,$36(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_2AA50
-                move.l  #loc_2AA78,(a1)
+                bne.w   SKFlipBridge_StartActiveRoot
+                move.l  #SKFlipBridge_CullOrDrawDisplay,(a1)
                 move.l  #Map_AIZFlippingBridge,mappings(a1)
                 move.w  #make_art_tile(ArtTile_AIZMisc2,2,0),art_tile(a1)
                 move.b  #4,render_flags(a1)
@@ -51,17 +51,17 @@ loc_2A9B6:
                 addi.w  #$20,d2
                 move.w  #8,d4
                 tst.b   subtype(a0)
-                bpl.s   loc_2AA2A
+                bpl.s   SKFlipBridge_BeginSectionRecords
                 subi.w  #$10,d2
                 move.w  #4,d4
 
-loc_2AA2A:
+SKFlipBridge_BeginSectionRecords:
                 moveq   #0,d1
                 lea     sub2_x_pos(a1),a2
                 move.w  mainspr_childsprites(a1),d6
                 subq.w  #1,d6
 
-loc_2AA36:
+SKFlipBridge_WriteSectionRecord:
                 move.w  d3,(a2)+
                 move.w  d2,(a2)+
                 move.w  d1,(a2)+
@@ -69,13 +69,13 @@ loc_2AA36:
                 andi.w  #$F,d1
                 addi.w  #$20,d3
                 sub.w   d4,d2
-                dbf     d6,loc_2AA36
+                dbf     d6,SKFlipBridge_WriteSectionRecord
                 move.w  a1,$3C(a0)
 
-loc_2AA50:
-                move.l  #loc_2AA56,(a0)
+SKFlipBridge_StartActiveRoot:
+                move.l  #SKFlipBridge_UpdateRoot,(a0)
 
-loc_2AA56:
+SKFlipBridge_UpdateRoot:
                 movea.w $3C(a0),a3
                 bsr.w   AdvanceAizFlippingBridgeFrames
                 moveq   #0,d1
@@ -86,67 +86,67 @@ loc_2AA56:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
-loc_2AA78:
+SKFlipBridge_CullOrDrawDisplay:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
 AdvanceAizFlippingBridgeFrames:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_2AAC8
+                bpl.s   SKFlipBridge_ForwardAnimReturn
                 move.b  $25(a0),anim_frame_timer(a0)
                 lea     sub2_mapframe(a3),a2
                 move.w  mainspr_childsprites(a3),d6
                 subq.w  #1,d6
                 move.b  $37(a0),d2
                 move.b  $36(a0),d1
-                bmi.s   loc_2AACA
+                bmi.s   SKFlipBridge_ReverseSectionFrame
 
-loc_2AA9E:
+SKFlipBridge_AdvanceSectionFrame:
                 add.b   d1,(a2)
                 cmp.b   (a2),d2
-                bhi.s   loc_2AAA8
+                bhi.s   SKFlipBridge_NextForwardSection
                 move.b  #0,(a2)
 
-loc_2AAA8:
+SKFlipBridge_NextForwardSection:
                 addq.w  #next_subspr,a2
-                dbf     d6,loc_2AA9E
+                dbf     d6,SKFlipBridge_AdvanceSectionFrame
                 tst.b   render_flags(a3)
-                bpl.s   locret_2AAC8
+                bpl.s   SKFlipBridge_ForwardAnimReturn
                 move.b  (Level_frame_counter+1).w,d0
                 addq.b  #3,d0
                 andi.b  #7,d0
-                bne.s   locret_2AAC8
+                bne.s   SKFlipBridge_ForwardAnimReturn
                 moveq   #signextendB(sfx_GlideLand),d0
                 jsr     (Play_SFX).l
 
-locret_2AAC8:
+SKFlipBridge_ForwardAnimReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2AACA:
+SKFlipBridge_ReverseSectionFrame:
                 add.b   d1,(a2)
-                bcs.s   loc_2AAD0
+                bcs.s   SKFlipBridge_NextReverseSection
                 move.b  d2,(a2)
 
-loc_2AAD0:
+SKFlipBridge_NextReverseSection:
                 addq.w  #next_subspr,a2
-                dbf     d6,loc_2AACA
+                dbf     d6,SKFlipBridge_ReverseSectionFrame
                 tst.b   render_flags(a3)
-                bpl.s   locret_2AAF0
+                bpl.s   SKFlipBridge_ReverseAnimReturn
                 move.b  (Level_frame_counter+1).w,d0
                 addq.b  #3,d0
                 andi.b  #7,d0
-                bne.s   locret_2AAF0
+                bne.s   SKFlipBridge_ReverseAnimReturn
                 moveq   #signextendB(sfx_GlideLand),d0
                 jsr     (Play_SFX).l
 
-locret_2AAF0:
+SKFlipBridge_ReverseAnimReturn:
                 rts
 ; End of function AdvanceAizFlippingBridgeFrames
 
 ; ---------------------------------------------------------------------------
-word_2AAF2:
+SKFlipBridge_SteepSlopeHeights:
                 dc.b    -$1C,-$1C,-$1C,-$1C
                 dc.b    -$1C,-$1C,-$1C,-$1C
                 dc.b    -$1C,-$1C,-$1C,-$1C
@@ -179,7 +179,7 @@ word_2AAF2:
                 dc.b    $1C, $1C, $1C, $1C
                 dc.b    $1C, $1C, $1C, $1C
                 dc.b    $1C, $1C, $1C, $1C
-word_2AB72:
+SKFlipBridge_ShallowSlopeHeights:
                 dc.b    -$C, -$C, -$C, -$C
                 dc.b    -$C, -$C, -$C, -$C
                 dc.b    -$C, -$C, -$C, -$C
@@ -230,19 +230,19 @@ CollidePlayersWithAizFlippingBridge:
 
 CollidePlayerWithAizFlippingBridge:
                 btst    d6,status(a0)
-                beq.s   loc_2AC5E
+                beq.s   SKFlipBridge_CheckLandingSpan
                 move.w  d1,d2
                 add.w   d2,d2
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_2AC2A
+                bne.s   SKFlipBridge_ReleaseRider
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_2AC2A
+                bmi.s   SKFlipBridge_ReleaseRider
                 cmp.w   d2,d0
-                blo.s   loc_2AC3E
+                blo.s   SKFlipBridge_CheckRiderSection
 
-loc_2AC2A:
+SKFlipBridge_ReleaseRider:
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    d6,status(a0)
@@ -250,7 +250,7 @@ loc_2AC2A:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2AC3E:
+SKFlipBridge_CheckRiderSection:
                 lsr.w   #5,d0
                 add.w   d0,d0
                 move.w  d0,d3
@@ -258,29 +258,29 @@ loc_2AC3E:
                 add.w   d3,d0
                 move.b  sub2_mapframe(a3,d0.w),d0
                 cmpi.b  #5,d0
-                blo.s   loc_2AC2A
+                blo.s   SKFlipBridge_ReleaseRider
                 move.w  d4,d2
                 jsr     (SolidObjSloped2).l
                 moveq   #0,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2AC5E:
+SKFlipBridge_CheckLandingSpan:
                 tst.w   y_vel(a1)
-                bmi.s   locret_2ACDA
+                bmi.s   SKFlipBridge_LandingReturn
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   locret_2ACDA
+                bmi.s   SKFlipBridge_LandingReturn
                 add.w   d1,d1
                 cmp.w   d1,d0
-                bhs.s   locret_2ACDA
+                bhs.s   SKFlipBridge_LandingReturn
                 btst    #0,render_flags(a0)
-                beq.s   loc_2AC82
+                beq.s   SKFlipBridge_TryLandOnSlope
                 not.w   d0
                 add.w   d1,d0
 
-loc_2AC82:
+SKFlipBridge_TryLandOnSlope:
                 move.w  d0,d4
                 lsr.w   #1,d0
                 move.b  (a2,d0.w),d3
@@ -293,13 +293,13 @@ loc_2AC82:
                 add.w   d2,d1
                 addq.w  #4,d1
                 sub.w   d1,d0
-                bhi.s   locret_2ACDA
+                bhi.s   SKFlipBridge_LandingReturn
                 cmpi.w  #-$10,d0
-                blo.s   locret_2ACDA
+                blo.s   SKFlipBridge_LandingReturn
                 tst.b   object_control(a1)
-                bne.s   locret_2ACDA
+                bne.s   SKFlipBridge_LandingReturn
                 cmpi.b  #6,routine(a1)
-                bhs.s   locret_2ACDA
+                bhs.s   SKFlipBridge_LandingReturn
                 lsr.w   #5,d4
                 add.w   d4,d4
                 move.w  d4,d1
@@ -307,13 +307,13 @@ loc_2AC82:
                 add.w   d1,d4
                 move.b  sub2_mapframe(a3,d4.w),d4
                 cmpi.b  #5,d4
-                blo.s   locret_2ACDA
+                blo.s   SKFlipBridge_LandingReturn
                 add.w   d0,d2
                 addq.w  #3,d2
                 move.w  d2,y_pos(a1)
                 jmp     (RideObject_SetRide).l
 ; ---------------------------------------------------------------------------
 
-locret_2ACDA:
+SKFlipBridge_LandingReturn:
                 rts
 ; End of function CollidePlayerWithAizFlippingBridge

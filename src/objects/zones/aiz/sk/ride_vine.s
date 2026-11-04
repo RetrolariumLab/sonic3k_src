@@ -5,7 +5,7 @@
 
 Obj_AIZRideVine:
                 movea.l a0,a1
-                move.l  #loc_21D28,(a1)
+                move.l  #SKRideVine_WaitForRider,(a1)
                 bsr.w   InitializeAizRideVineSprite
                 move.b  #$21,mapping_frame(a1)
                 move.w  x_pos(a0),d2
@@ -19,21 +19,21 @@ Obj_AIZRideVine:
                 moveq   #3,d1
                 addq.w  #1,d1
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_21CFE
+                bne.w   SKRideVine_JoinHandleWait
                 move.w  a1,$3E(a0)
-                move.l  #loc_21F80,(a1)
+                move.l  #SKRideVine_PickLeadOscillation,(a1)
                 move.w  a0,$3C(a1)
-                bra.s   loc_21CD0
+                bra.s   SKRideVine_InitNextLink
 ; ---------------------------------------------------------------------------
 
-loc_21CB8:
+SKRideVine_TryAllocateNextLink:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_21CFE
-                move.l  #loc_22014,(a1)
+                bne.w   SKRideVine_JoinHandleWait
+                move.l  #SKRideVine_UpdateLinkFromParent,(a1)
                 move.w  a2,$3C(a1)
                 move.w  a1,$3E(a2)
 
-loc_21CD0:
+SKRideVine_InitNextLink:
                 movea.l a1,a2
                 bsr.s   InitializeAizRideVineSprite
                 move.w  d2,x_pos(a1)
@@ -41,13 +41,13 @@ loc_21CD0:
                 addi.w  #$10,d3
                 addq.w  #1,$36(a0)
                 move.w  $36(a0),$36(a1)
-                dbf     d1,loc_21CB8
+                dbf     d1,SKRideVine_TryAllocateNextLink
                 move.l  #Obj_AIZRideVineHandle,(a1)
                 move.b  #$20,mapping_frame(a1)
                 move.w  a1,$40(a0)
 
-loc_21CFE:
-                bra.s   loc_21D28
+SKRideVine_JoinHandleWait:
+                bra.s   SKRideVine_WaitForRider
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -63,28 +63,28 @@ InitializeAizRideVineSprite:
 
 ; ---------------------------------------------------------------------------
 
-loc_21D28:
+SKRideVine_WaitForRider:
                 movea.w $40(a0),a1
                 tst.w   $32(a1)
-                beq.s   loc_21D48
-                move.l  #loc_21D4C,(a0)
+                beq.s   SKRideVine_DrawAfterHandleWait
+                move.l  #SKRideVine_MoveToEndpoint,(a0)
                 movea.w $3E(a0),a1
                 move.w  #1,$2E(a1)
                 move.w  #0,$38(a1)
 
-loc_21D48:
-                bra.w   loc_21F38
+SKRideVine_DrawAfterHandleWait:
+                bra.w   SKRideVine_CullChainOrDrawRoot
 ; ---------------------------------------------------------------------------
 
-loc_21D4C:
+SKRideVine_MoveToEndpoint:
                 addi.l  #$80000,x_pos(a0)
                 addi.l  #$20000,y_pos(a0)
                 move.w  x_pos(a0),d0
                 cmp.w   $46(a0),d0
-                blo.w   loc_21DEE
+                blo.w   SKRideVine_DrawAfterTravel
                 tst.b   subtype(a0)
-                bpl.s   loc_21DC2
-                move.l  #loc_21DF2,(a0)
+                bpl.s   SKRideVine_StartSwingAndTangentRelease
+                move.l  #SKRideVine_UpdateDroppedRoot,(a0)
                 move.w  #$800,x_vel(a0)
                 move.w  #$200,y_vel(a0)
                 move.l  #Map_AnimatedStillSprites,mappings(a0)
@@ -96,64 +96,64 @@ loc_21D4C:
                 movea.w $40(a0),a1
                 lea     $32(a1),a2
                 tst.b   (a2)
-                beq.s   loc_21DB6
+                beq.s   SKRideVine_TryForceReleaseP2
                 move.b  #$81,(a2)
 
-loc_21DB6:
+SKRideVine_TryForceReleaseP2:
                 addq.w  #1,a2
                 tst.b   (a2)
-                beq.s   loc_21DC0
+                beq.s   SKRideVine_DrawAfterDropSetup
                 move.b  #$81,(a2)
 
-loc_21DC0:
-                bra.s   loc_21DEE
+SKRideVine_DrawAfterDropSetup:
+                bra.s   SKRideVine_DrawAfterTravel
 ; ---------------------------------------------------------------------------
 
-loc_21DC2:
-                move.l  #loc_21E14,(a0)
+SKRideVine_StartSwingAndTangentRelease:
+                move.l  #SKRideVine_UpdateOccupiedSwing,(a0)
                 movea.w $3E(a0),a1
-                move.l  #loc_21FE8,(a1)
+                move.l  #SKRideVine_PlaceRootDrivenLead,(a1)
                 move.w  #0,$3A(a1)
                 movea.w $40(a0),a1
                 move.w  #1,$30(a1)
                 move.w  #0,angle(a0)
                 move.w  #$400,$3A(a0)
 
-loc_21DEE:
-                bra.w   loc_21F38
+SKRideVine_DrawAfterTravel:
+                bra.w   SKRideVine_CullChainOrDrawRoot
 ; ---------------------------------------------------------------------------
 
-loc_21DF2:
+SKRideVine_UpdateDroppedRoot:
                 jsr     (MoveSprite).l
                 tst.b   render_flags(a0)
-                bmi.s   loc_21E04
+                bmi.s   SKRideVine_AnimateDroppedRoot
                 move.w  #$7FF0,x_pos(a0)
 
-loc_21E04:
+SKRideVine_AnimateDroppedRoot:
                 lea     (Ani_AnimatedStillSprites).l,a1
                 jsr     (Animate_Sprite).l
-                bra.w   loc_21F38
+                bra.w   SKRideVine_CullChainOrDrawRoot
 ; ---------------------------------------------------------------------------
 
-loc_21E14:
+SKRideVine_UpdateOccupiedSwing:
                 movea.w $40(a0),a1
                 move.w  $3A(a0),d0
                 move.b  angle(a0),d1
                 ext.w   d1
-                bpl.s   loc_21E26
+                bpl.s   SKRideVine_StepSwingAndCheckEmpty
                 neg.w   d1
 
-loc_21E26:
+SKRideVine_StepSwingAndCheckEmpty:
                 add.w   d1,d1
                 sub.w   d1,d0
                 sub.w   d0,angle(a0)
                 tst.w   $32(a1)
-                bne.s   loc_21E68
+                bne.s   SKRideVine_DrawAfterSwing
                 move.b  angle(a0),d0
                 addq.b  #8,d0
                 cmpi.b  #$10,d0
-                bhs.s   loc_21E68
-                move.l  #loc_21E6C,(a0)
+                bhs.s   SKRideVine_DrawAfterSwing
+                move.l  #SKRideVine_StepDampedSwing,(a0)
                 move.w  #0,$42(a0)
                 move.w  #-$300,$44(a0)
                 move.w  #$1000,$38(a0)
@@ -161,132 +161,132 @@ loc_21E26:
                 movea.w $40(a0),a1
                 move.w  #2,$30(a1)
 
-loc_21E68:
-                bra.w   loc_21F38
+SKRideVine_DrawAfterSwing:
+                bra.w   SKRideVine_CullChainOrDrawRoot
 ; ---------------------------------------------------------------------------
 
-loc_21E6C:
+SKRideVine_StepDampedSwing:
                 moveq   #0,d2
                 move.b  $38(a0),d2
                 move.w  $44(a0),d0
                 move.w  #0,d1
                 tst.w   $2E(a0)
-                bne.s   loc_21EC4
+                bne.s   SKRideVine_StepDampedSwingNegative
                 add.w   d2,d0
                 move.w  d0,$44(a0)
                 add.w   d0,$42(a0)
                 cmp.b   $42(a0),d1
-                bgt.s   loc_21EEE
+                bgt.s   SKRideVine_ApplyDampedAngle
                 asr.w   #4,d0
                 sub.w   d0,$44(a0)
                 move.w  #1,$2E(a0)
                 cmpi.w  #$C00,$38(a0)
-                beq.s   loc_21EAC
+                beq.s   SKRideVine_RestoreIdleHandle
                 subi.w  #$40,$38(a0)
-                bra.s   loc_21EEE
+                bra.s   SKRideVine_ApplyDampedAngle
 ; ---------------------------------------------------------------------------
 
-loc_21EAC:
-                move.l  #loc_21F0A,(a0)
+SKRideVine_RestoreIdleHandle:
+                move.l  #SKRideVine_StepIdleSwing,(a0)
                 move.w  #0,$38(a0)
                 movea.w $40(a0),a1
                 move.w  #0,$30(a1)
-                bra.s   loc_21EEE
+                bra.s   SKRideVine_ApplyDampedAngle
 ; ---------------------------------------------------------------------------
 
-loc_21EC4:
+SKRideVine_StepDampedSwingNegative:
                 sub.w   d2,d0
                 move.w  d0,$44(a0)
                 add.w   d0,$42(a0)
                 cmp.b   $42(a0),d1
-                ble.s   loc_21EEE
+                ble.s   SKRideVine_ApplyDampedAngle
                 asr.w   #4,d0
                 sub.w   d0,$44(a0)
                 move.w  #0,$2E(a0)
                 cmpi.w  #$C00,$38(a0)
-                beq.s   loc_21EAC
+                beq.s   SKRideVine_RestoreIdleHandle
                 subi.w  #$40,$38(a0)
 
-loc_21EEE:
+SKRideVine_ApplyDampedAngle:
                 move.w  $42(a0),d0
                 move.w  d0,angle(a0)
                 asr.w   #3,d0
                 move.w  d0,$3A(a0)
                 movea.w $3E(a0),a1
                 move.w  $3A(a0),$3A(a1)
-                bra.w   loc_21F38
+                bra.w   SKRideVine_CullChainOrDrawRoot
 ; ---------------------------------------------------------------------------
 
-loc_21F0A:
+SKRideVine_StepIdleSwing:
                 move.b  $38(a0),d0
                 addi.w  #$200,$38(a0)
                 jsr     (GetSineCosine).l
                 asl.w   #2,d0
                 cmpi.w  #$400,d0
-                bne.s   loc_21F26
+                bne.s   SKRideVine_ApplyIdleAngle
                 move.w  #$3FF,d0
 
-loc_21F26:
+SKRideVine_ApplyIdleAngle:
                 move.w  d0,angle(a0)
                 move.w  d0,$3A(a0)
                 movea.w $3E(a0),a1
                 move.w  $3A(a0),$3A(a1)
 
-loc_21F38:
+SKRideVine_CullChainOrDrawRoot:
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_21F52
+                bhi.w   SKRideVine_BeginDeleteChain
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_21F52:
+SKRideVine_BeginDeleteChain:
                 move.w  $36(a0),d2
                 subq.w  #1,d2
-                bcs.s   loc_21F6E
+                bcs.s   SKRideVine_ClearRootRespawn
                 movea.w $3E(a0),a2
 
-loc_21F5E:
+SKRideVine_DeleteLinkAndAdvance:
                 movea.l a2,a1
                 movea.w $3E(a1),a2
                 jsr     (Delete_Referenced_Sprite).l
-                dbf     d2,loc_21F5E
+                dbf     d2,SKRideVine_DeleteLinkAndAdvance
 
-loc_21F6E:
+SKRideVine_ClearRootRespawn:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_21F7A
+                beq.s   SKRideVine_DeleteRoot
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_21F7A:
+SKRideVine_DeleteRoot:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_21F80:
+SKRideVine_PickLeadOscillation:
                 tst.w   $2E(a0)
-                bne.s   loc_21FA8
+                bne.s   SKRideVine_StepLeadTravelSine
                 move.b  $38(a0),d0
                 addi.w  #$200,$38(a0)
                 jsr     (GetSineCosine).l
                 asl.w   #2,d0
                 cmpi.w  #$400,d0
-                bne.s   loc_21FA2
+                bne.s   SKRideVine_StoreLeadIdleStep
                 move.w  #$3FF,d0
 
-loc_21FA2:
+SKRideVine_StoreLeadIdleStep:
                 move.w  d0,$3A(a0)
-                bra.s   loc_21FBE
+                bra.s   SKRideVine_PlaceOscillatingLead
 ; ---------------------------------------------------------------------------
 
-loc_21FA8:
+SKRideVine_StepLeadTravelSine:
                 move.b  $38(a0),d0
                 addi.w  #$100,$38(a0)
                 jsr     (GetSineCosine).l
                 asl.w   #3,d0
                 move.w  d0,$3A(a0)
 
-loc_21FBE:
+SKRideVine_PlaceOscillatingLead:
                 move.w  $3A(a0),d0
                 move.w  d0,angle(a0)
                 move.b  angle(a0),d0
@@ -299,7 +299,7 @@ loc_21FBE:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_21FE8:
+SKRideVine_PlaceRootDrivenLead:
                 movea.w $3C(a0),a1
                 move.w  angle(a1),angle(a0)
                 move.b  angle(a0),d0
@@ -312,7 +312,7 @@ loc_21FE8:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_22014:
+SKRideVine_UpdateLinkFromParent:
                 movea.w $3C(a0),a1
                 move.w  $3A(a1),$3A(a0)
                 move.w  angle(a1),d0
@@ -352,15 +352,15 @@ Obj_AIZRideVineHandle:
                 move.w  y_pos(a0),d5
                 bsr.w   PositionAizRideVineLink
                 cmp.w   x_pos(a0),d4
-                beq.s   loc_2208A
+                beq.s   SKRideVine_TryCacheOldHandleY
                 move.w  d4,$42(a0)
 
-loc_2208A:
+SKRideVine_TryCacheOldHandleY:
                 cmp.w   y_pos(a0),d5
-                beq.s   loc_22094
+                beq.s   SKRideVine_UpdateBothRiders
                 move.w  d5,$44(a0)
 
-loc_22094:
+SKRideVine_UpdateBothRiders:
                 lea     $32(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d0
@@ -370,34 +370,34 @@ loc_22094:
                 move.w  (Ctrl_2_logical).w,d0
                 bsr.s   UpdatePlayerOnAizVineHandle
                 tst.w   $32(a0)
-                beq.s   loc_220BA
+                beq.s   SKRideVine_DrawHandle
                 tst.w   $30(a0)
-                bne.s   locret_220C0
+                bne.s   SKRideVine_HandleDrawReturn
 
-loc_220BA:
+SKRideVine_DrawHandle:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_220C0:
+SKRideVine_HandleDrawReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
 UpdatePlayerOnAizVineHandle:
                 tst.b   (a2)
-                beq.w   loc_222F4
-                bmi.w   loc_2217E
+                beq.w   SKRideVine_TickRegrabCooldown
+                bmi.w   SKRideVine_ForceDiagonalRelease
                 tst.b   render_flags(a1)
-                bpl.w   loc_22190
+                bpl.w   SKRideVine_ClearGrabAndStartCooldown
                 cmpi.b  #4,routine(a1)
-                bhs.w   loc_22190
+                bhs.w   SKRideVine_ClearGrabAndStartCooldown
                 move.b  d0,d1
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d1
-                beq.w   loc_221EC
+                beq.w   SKRideVine_PickRiderPose
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 cmpi.w  #1,$30(a0)
-                beq.s   loc_2215C
+                beq.s   SKRideVine_ReleaseAlongLinkTangent
                 move.w  x_pos(a0),d1
                 sub.w   $42(a0),d1
                 asl.w   #7,d1
@@ -408,18 +408,19 @@ UpdatePlayerOnAizVineHandle:
                 move.w  d1,y_vel(a1)
                 move.b  #$3C,2(a2)
                 btst    #button_left+8,d0
-                beq.s   loc_22124
+                beq.s   SKRideVine_TryJumpRightOverride
                 move.w  #-$200,x_vel(a1)
 
-loc_22124:
+; If both directions are held, the right override wins
+SKRideVine_TryJumpRightOverride:
                 btst    #button_right+8,d0
-                beq.s   loc_22130
+                beq.s   SKRideVine_AddReleaseJumpBias
                 move.w  #$200,x_vel(a1)
 
-loc_22130:
+SKRideVine_AddReleaseJumpBias:
                 addi.w  #-$380,y_vel(a1)
 
-loc_22136:
+SKRideVine_SetReleasedJumpState:
                 bset    #Status_InAir,status(a1)
                 move.b  #1,jumping(a1)
                 move.b  #$E,y_radius(a1)
@@ -429,7 +430,7 @@ loc_22136:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2215C:
+SKRideVine_ReleaseAlongLinkTangent:
                 move.b  #$3C,2(a2)
                 movea.w $3C(a0),a3
                 move.b  angle(a3),d0
@@ -438,15 +439,15 @@ loc_2215C:
                 move.w  d1,x_vel(a1)
                 asl.w   #3,d0
                 move.w  d0,y_vel(a1)
-                bra.s   loc_22136
+                bra.s   SKRideVine_SetReleasedJumpState
 ; ---------------------------------------------------------------------------
 
-loc_2217E:
+SKRideVine_ForceDiagonalRelease:
                 move.w  #$300,x_vel(a1)
                 move.w  #$200,y_vel(a1)
                 bset    #Status_InAir,status(a1)
 
-loc_22190:
+SKRideVine_ClearGrabAndStartCooldown:
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.b  #$3C,2(a2)
@@ -457,16 +458,16 @@ loc_22190:
 
 CheckAizVineLevelSelectSequence:
                 cmpa.w  #Player_1,a1
-                bne.s   locret_221E0
+                bne.s   SKRideVine_CheatReturn
                 tst.b   d0
-                beq.s   locret_221E0
+                beq.s   SKRideVine_CheatReturn
                 moveq   #0,d1
                 move.b  $25(a0),d1
-                cmp.b   byte_221E2(pc,d1.w),d0
-                bne.s   loc_221DA
+                cmp.b   SKRideVine_LevelSelectInputs(pc,d1.w),d0
+                bne.s   SKRideVine_ResetCheatProgress
                 addq.b  #1,$25(a0)
-                move.b  byte_221E2+1(pc,d1.w),d1
-                bne.s   locret_221E0
+                move.b  SKRideVine_LevelSelectInputs+1(pc,d1.w),d1
+                bne.s   SKRideVine_CheatReturn
 
                 moveq   #0,d1                           ; what the fuck
                 subi.w  #-Level_select_flag,d1
@@ -480,15 +481,15 @@ CheckAizVineLevelSelectSequence:
                 jsr     (Play_SFX).l
                 move.w  d1,d0
 
-loc_221DA:
+SKRideVine_ResetCheatProgress:
                 move.b  #0,$25(a0)
 
-locret_221E0:
+SKRideVine_CheatReturn:
                 rts
 ; End of function CheckAizVineLevelSelectSequence
 
 ; ---------------------------------------------------------------------------
-byte_221E2:
+SKRideVine_LevelSelectInputs:
                 dc.b    button_left_mask
                 dc.b    button_left_mask
                 dc.b    button_left_mask
@@ -502,9 +503,9 @@ byte_221E2:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_221EC:
+SKRideVine_PickRiderPose:
                 tst.w   $30(a0)
-                bne.s   loc_22258
+                bne.s   SKRideVine_ComputeSwingPose
                 bsr.s   CheckAizVineLevelSelectSequence
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
@@ -513,15 +514,15 @@ loc_221EC:
                 moveq   #0,d0
                 move.b  angle(a3),d0
                 btst    #Status_Facing,status(a1)
-                beq.s   loc_2221A
+                beq.s   SKRideVine_PickIdleHangFrame
                 neg.b   d0
 
-loc_2221A:
+SKRideVine_PickIdleHangFrame:
                 addq.b  #8,d0
                 lsr.w   #4,d0
-                move.b  byte_22248(pc,d0.w),mapping_frame(a1)
+                move.b  SKRideVine_IdleHangFrames(pc,d0.w),mapping_frame(a1)
 
-loc_22224:
+SKRideVine_SyncFacingAndDplc:
                 move.b  status(a1),d1
                 andi.b  #1,d1
                 andi.b  #$FC,render_flags(a1)
@@ -533,35 +534,35 @@ loc_22224:
                 movea.l (sp)+,a2
                 rts
 ; ---------------------------------------------------------------------------
-byte_22248:
+SKRideVine_IdleHangFrames:
                 dc.b    $91, $91, $90, $90, $90, $90, $90, $90, $92, $92, $92, $92, $92, $92, $91, $91
                 even
 ; ---------------------------------------------------------------------------
 
-loc_22258:
+SKRideVine_ComputeSwingPose:
                 movea.w $3C(a0),a3
                 moveq   #0,d0
                 move.b  angle(a3),d0
                 btst    #Status_Facing,status(a1)
-                beq.s   loc_2226C
+                beq.s   SKRideVine_ReadSwingFrameAndOffset
                 neg.b   d0
 
-loc_2226C:
+SKRideVine_ReadSwingFrameAndOffset:
                 addi.b  #$10,d0
                 lsr.w   #5,d0
                 add.w   d0,d0
-                move.b  byte_222D4(pc,d0.w),mapping_frame(a1)
+                move.b  SKRideVine_SwingFramePairs(pc,d0.w),mapping_frame(a1)
                 move.b  #0,anim(a1)
                 andi.w  #$FFFE,d0
-                move.b  byte_222E4(pc,d0.w),d2
-                move.b  byte_222E4+1(pc,d0.w),d3
+                move.b  SKRideVine_SwingPoseOffsets(pc,d0.w),d2
+                move.b  SKRideVine_SwingPoseOffsets+1(pc,d0.w),d3
                 ext.w   d2
                 ext.w   d3
                 btst    #Status_Facing,status(a1)
-                beq.s   loc_2229A
+                beq.s   SKRideVine_PlaceSwingPoseFromLink
                 neg.w   d2
 
-loc_2229A:
+SKRideVine_PlaceSwingPoseFromLink:
                 movea.w $3C(a0),a3
                 move.b  angle(a3),d0
                 addq.b  #4,d0
@@ -578,9 +579,9 @@ loc_2229A:
                 add.w   y_pos(a3),d1
                 add.w   d3,d1
                 move.w  d1,y_pos(a1)
-                bra.w   loc_22224
+                bra.w   SKRideVine_SyncFacingAndDplc
 ; ---------------------------------------------------------------------------
-byte_222D4:
+SKRideVine_SwingFramePairs:
                 dc.b    $78
                 dc.b    $78
                 dc.b    $7F
@@ -597,7 +598,7 @@ byte_222D4:
                 dc.b    $7A
                 dc.b    $79
                 dc.b    $79
-byte_222E4:
+SKRideVine_SwingPoseOffsets:
                 dc.b    0, $18
                 dc.b    -$12, $13
                 dc.b    -$18,   0
@@ -609,28 +610,28 @@ byte_222E4:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_222F4:
+SKRideVine_TickRegrabCooldown:
                 tst.b   2(a2)
-                beq.s   loc_22302
+                beq.s   SKRideVine_TryGrabHandle
                 subq.b  #1,2(a2)
-                bne.w   locret_2237C
+                bne.w   SKRideVine_GrabReturn
 
-loc_22302:
+SKRideVine_TryGrabHandle:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$10,d0
                 cmpi.w  #$20,d0
-                bhs.w   locret_2237C
+                bhs.w   SKRideVine_GrabReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 cmpi.w  #$18,d1
-                bhs.w   locret_2237C
+                bhs.w   SKRideVine_GrabReturn
                 tst.b   object_control(a1)
-                bne.s   locret_2237C
+                bne.s   SKRideVine_GrabReturn
                 cmpi.b  #4,routine(a1)
-                bhs.s   locret_2237C
+                bhs.s   SKRideVine_GrabReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_2237C
+                bne.s   SKRideVine_GrabReturn
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)
                 clr.w   ground_vel(a1)
@@ -645,5 +646,5 @@ loc_22302:
                 moveq   #signextendB(sfx_Grab),d0
                 jsr     (Play_SFX).l
 
-locret_2237C:
+SKRideVine_GrabReturn:
                 rts

@@ -7798,7 +7798,7 @@
       "responsibility": "Angel Island act-two battleship scene, bombs, background trees, small boss objects and shared scene resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 501,
+      "physical_lines": 502,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "s3.s",
@@ -7883,7 +7883,7 @@
       "responsibility": "Angel Island act-two screen initialization, background setup and event control.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 337,
+      "physical_lines": 339,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "s3.s",
@@ -7923,7 +7923,7 @@
       "responsibility": "Angel Island act-one screen and background setup, events, tree reveal and transition floor.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 560,
+      "physical_lines": 561,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -7953,7 +7953,7 @@
       "responsibility": "Angel Island act-two battleship scene, bombs, background trees and small boss actors.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 417,
+      "physical_lines": 418,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -7983,7 +7983,7 @@
       "responsibility": "Angel Island act-two screen and background initialization, event control and deformation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 393,
+      "physical_lines": 395,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -23539,7 +23539,7 @@
       "responsibility": "Bloominator enemy states, projectiles and child resources, including the shared callback projectile initializer referenced by enemy child records.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 113,
+      "physical_lines": 115,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -23584,7 +23584,7 @@
       "responsibility": "Monkey Dude patrol and projectile states, helper callbacks and private child data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 618,
+      "physical_lines": 620,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -23624,7 +23624,7 @@
       "responsibility": "Rhinobot charge and tracking states, movement helpers and sprite pattern resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 324,
+      "physical_lines": 327,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -23664,7 +23664,7 @@
       "responsibility": "Bloominator enemy states, projectiles and child resources, including the shared callback projectile initializer referenced by enemy child records.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 113,
+      "physical_lines": 115,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -23699,7 +23699,7 @@
       "responsibility": "Monkey Dude patrol and projectile states, helper callbacks and private child data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 618,
+      "physical_lines": 620,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -23729,7 +23729,7 @@
       "responsibility": "Rhinobot charge and tracking states, movement helpers and sprite pattern resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 324,
+      "physical_lines": 327,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -43132,7 +43132,7 @@
       "responsibility": "Assembler data for Levels/AIZ/Misc Object Data/Anim - Disappearing Floor",
       "role": "data",
       "status": "owned",
-      "physical_lines": 10,
+      "physical_lines": 11,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "Levels/AIZ/Misc Object Data/Anim - Disappearing Floor.s",
@@ -56005,7 +56005,7 @@
       "responsibility": "Angel Island collapsing log bridge timing, log and fire fragments and shared bridge mappings.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 297,
+      "physical_lines": 298,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "s3.s",
@@ -56340,7 +56340,7 @@
       "responsibility": "Giant Angel Island ride-vine motion, player positioning and shared vine mapping storage.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 219,
+      "physical_lines": 220,
       "origin": {
         "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
         "path": "s3.s",
@@ -56385,7 +56385,7 @@
       "responsibility": "Angel Island hollow-tree player movement, release and private player-frame lookup data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 223,
+      "physical_lines": 224,
       "origin": {
         "commit": "112c6fc7e9ba620c0c05a2197fdcce4fb164e687",
         "path": "s3.s",
@@ -56430,7 +56430,7 @@
       "responsibility": "Angel Island opening plane scene, coordinated character motion and transition control.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 545,
+      "physical_lines": 548,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "s3.s",
@@ -56470,7 +56470,7 @@
       "responsibility": "Normal Angel Island ride-vine motion, player contact, handle state and positioning helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 599,
+      "physical_lines": 600,
       "origin": {
         "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
         "path": "s3.s",
@@ -56658,7 +56658,7 @@
       "responsibility": "Angel Island surfboard introduction, character motion, waves, splash objects, board display and shared art loading.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 498,
+      "physical_lines": 499,
       "origin": {
         "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
         "path": "s3.s",
@@ -56698,7 +56698,7 @@
       "responsibility": "Angel Island collapsing log bridge timing, log and fire fragments and shared bridge mappings.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 298,
+      "physical_lines": 299,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "sonic3k.s",
@@ -56918,7 +56918,7 @@
       "responsibility": "Giant Angel Island ride-vine motion and player positioning.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 216,
+      "physical_lines": 217,
       "origin": {
         "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
         "path": "sonic3k.s",
@@ -56953,7 +56953,7 @@
       "responsibility": "Angel Island hollow-tree player movement, release and private player-frame lookup data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 223,
+      "physical_lines": 224,
       "origin": {
         "commit": "112c6fc7e9ba620c0c05a2197fdcce4fb164e687",
         "path": "sonic3k.s",
@@ -56988,7 +56988,7 @@
       "responsibility": "Normal Angel Island ride-vine motion, player contact, handle state and positioning helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 649,
+      "physical_lines": 650,
       "origin": {
         "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
         "path": "sonic3k.s",
