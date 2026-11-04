@@ -1,0 +1,3205 @@
+{
+  "schema_version": 1,
+  "packet": "46-boss-soz",
+  "mappings": [
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 25,
+      "old": "loc_7767C",
+      "new": "SOZBoss_InitShipAndBody",
+      "profiles": ["sk"],
+      "meaning": "Initialize the ship root, health, bob baseline, art and body actors."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 42,
+      "old": "loc_776C6",
+      "new": "SOZBoss_CopyPaletteAndSpawnBodyGroups",
+      "profiles": ["sk"],
+      "meaning": "Copy the second boss palette and attempt three independent actor groups."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 53,
+      "old": "loc_776EA",
+      "new": "SOZBoss_WaitForPlayerXProximity",
+      "profiles": ["sk"],
+      "meaning": "Wait until Player1 approaches within C0 hex horizontally."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 63,
+      "old": "locret_7770E",
+      "new": "SOZBoss_PlayerProximityReturn",
+      "profiles": ["sk"],
+      "meaning": "Return while the initial horizontal approach gate has not passed."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 67,
+      "old": "loc_77710",
+      "new": "SOZBoss_TickIntroAndStartMusic",
+      "profiles": ["sk"],
+      "meaning": "Count the start delay and begin the character-selected motion profile."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 75,
+      "old": "loc_7772C",
+      "new": "SOZBoss_ChooseMotionProfile",
+      "profiles": ["sk"],
+      "meaning": "Select the normal or Knuckles-specific six-WORD motion profile."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 81,
+      "old": "loc_7773C",
+      "new": "SOZBoss_LoadMotionProfile",
+      "profiles": ["sk"],
+      "meaning": "Decode the six motion-profile WORDs into root fields."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 91,
+      "old": "word_7775A",
+      "new": "SOZEndBoss_DefaultSixWordMotionProfile",
+      "profiles": ["sk"],
+      "meaning": "Default root movement, angular-step, pose-step and timing record."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 93,
+      "old": "word_77766",
+      "new": "SOZEndBoss_KnucklesSixWordMotionProfile",
+      "profiles": ["sk"],
+      "meaning": "Player1 character2 root movement and timing record."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 97,
+      "old": "loc_77772",
+      "new": "SOZBoss_MoveAndBobBeforePose",
+      "profiles": ["sk"],
+      "meaning": "Move and bob during the initial travel interval."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 105,
+      "old": "locret_7778E",
+      "new": "SOZEndBoss_ReturnAfterInitialTravelTimer",
+      "profiles": ["sk"],
+      "meaning": "Return after initial travel or its routine8 handoff."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 109,
+      "old": "loc_77790",
+      "new": "SOZBoss_MoveBobAndAdvancePose",
+      "profiles": ["sk"],
+      "meaning": "Advance a moving pose phase and periodically attempt a charge generator."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 124,
+      "old": "locret_777CA",
+      "new": "SOZBoss_MovingPoseReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after the moving pose phase and optional impact-hold selection."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 128,
+      "old": "loc_777CC",
+      "new": "SOZBoss_TickHoldAndTurnPose",
+      "profiles": ["sk"],
+      "meaning": "Tick charge spawning during the stationary turn hold."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 138,
+      "old": "locret_777EE",
+      "new": "SOZBoss_PoseHoldReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after hold timer or pose-step reversal."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 142,
+      "old": "loc_777F0",
+      "new": "SOZBoss_HoldExposedUntilRecovery",
+      "profiles": ["sk"],
+      "meaning": "Handle the temporarily exposed root while the background eye event is active."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 148,
+      "old": "loc_777FA",
+      "new": "SOZBoss_RestoreRoutineAndNormalColors",
+      "profiles": ["sk"],
+      "meaning": "Close root vulnerability after background eye-event completion."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 155,
+      "old": "loc_7780A",
+      "new": "SOZBoss_BeginDefeatDropAndRelease",
+      "profiles": ["sk"],
+      "meaning": "Begin defeated ship movement after the music-fade wait callback."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 163,
+      "old": "loc_77822",
+      "new": "SOZBoss_DropWithLightGravity",
+      "profiles": ["sk"],
+      "meaning": "Move defeated ship under light gravity until signed y_vel reaches200 hex."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 171,
+      "old": "loc_77842",
+      "new": "SOZBoss_DrawDefeatedDrop",
+      "profiles": ["sk"],
+      "meaning": "Draw ship after the light-gravity step and optional state transition."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 175,
+      "old": "loc_77848",
+      "new": "SOZBoss_RiseAndTryCapsule",
+      "profiles": ["sk"],
+      "meaning": "Reduce defeated ship Y velocity and enter swinging escape at -100 hex or below."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 188,
+      "old": "loc_77882",
+      "new": "SOZBoss_ClearReleaseAndTryFlame",
+      "profiles": ["sk"],
+      "meaning": "Continue escape setup even when EggCapsule allocation fails."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 193,
+      "old": "loc_77894",
+      "new": "SOZBoss_DrawDefeatedRise",
+      "profiles": ["sk"],
+      "meaning": "Draw after escape acceleration and its independent child attempts."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 197,
+      "old": "loc_7789A",
+      "new": "SOZBoss_SwingRiseAndEscape",
+      "profiles": ["sk"],
+      "meaning": "Lock minimum camera X and move the escaping ship upward and right."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 207,
+      "old": "loc_778BC",
+      "new": "SOZBoss_MoveAndCheckRightExit",
+      "profiles": ["sk"],
+      "meaning": "Apply the escape speed candidate and test strict offscreen-right completion."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 217,
+      "old": "loc_778DA",
+      "new": "SOZBoss_HideShipAndWaitCapsule",
+      "profiles": ["sk"],
+      "meaning": "Hide escaped ship and wait for the shared capsule-completion flag to clear."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 225,
+      "old": "loc_778F2",
+      "new": "SOZBoss_WaitCapsuleAndRestoreControls",
+      "profiles": ["sk"],
+      "meaning": "Wait for FAA8 zero before preparing scripted player exit."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 241,
+      "old": "loc_77936",
+      "new": "SOZEndBoss_AttemptPartnerInputLockHelper",
+      "profiles": ["sk"],
+      "meaning": "Try the separate partner input-lock/idle helper after optional partner follower."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 246,
+      "old": "loc_77944",
+      "new": "SOZBoss_SetExitCameraBounds",
+      "profiles": ["sk"],
+      "meaning": "Configure exit camera limits after independent partner-helper attempts."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 254,
+      "old": "locret_77964",
+      "new": "SOZBoss_ExitCameraSpawnReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after optional gradual maximum-X expansion actor setup."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 258,
+      "old": "loc_77966",
+      "new": "SOZBoss_HoldExitMaxYAndRoutePlayer",
+      "profiles": ["sk"],
+      "meaning": "Maintain exit Y range then test Player1 X route threshold."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 263,
+      "old": "loc_77974",
+      "new": "SOZBoss_WalkPlayerToHandoff",
+      "profiles": ["sk"],
+      "meaning": "Use the logical right/button helper until Player1 reaches5468 hex."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 270,
+      "old": "loc_77986",
+      "new": "SOZBoss_CapturePlayerAndChooseExit",
+      "profiles": ["sk"],
+      "meaning": "Capture integer Player1 XY/X velocity and choose the exit route."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 283,
+      "old": "loc_779B8",
+      "new": "SOZBoss_BeginKnucklesHorizontalExit",
+      "profiles": ["sk"],
+      "meaning": "Install the character2 straight horizontal exit handler."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 288,
+      "old": "loc_779C0",
+      "new": "SOZBoss_CarryPlayerToFallTrigger",
+      "profiles": ["sk"],
+      "meaning": "Integrate captured velocity and copy movement to Player1 until54C0 hex."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 304,
+      "old": "loc_779FC",
+      "new": "SOZEndBoss_CopySelectedExitXToPlayerOnly",
+      "profiles": ["sk"],
+      "meaning": "Store the current or one-call-clamped exit X into Player1."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 309,
+      "old": "loc_77A02",
+      "new": "SOZBoss_ClampUnsignedFallSpeed",
+      "profiles": ["sk"],
+      "meaning": "Apply the scripted fall old-velocity cap with its original unsigned gate."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 314,
+      "old": "loc_77A10",
+      "new": "SOZBoss_MoveFallAndSyncPlayer",
+      "profiles": ["sk"],
+      "meaning": "Integrate falling coordinator, copy integerXY and count the level-change wait."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 324,
+      "old": "loc_77A2E",
+      "new": "SOZEndBoss_StartNextLevelAfterTimedFall",
+      "profiles": ["sk"],
+      "meaning": "Change to level0900 hex after the scripted fall timer."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 330,
+      "old": "loc_77A3E",
+      "new": "SOZEndBoss_MoveKnucklesRouteUntil5560",
+      "profiles": ["sk"],
+      "meaning": "Integrate captured velocity and copy integerXY along the character2 route."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 341,
+      "old": "loc_77A5E",
+      "new": "SOZBoss_StartLevelAtKnucklesExitX",
+      "profiles": ["sk"],
+      "meaning": "Change to level0900 hex after character2 reaches the X threshold."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 347,
+      "old": "loc_77A6E",
+      "new": "SOZBoss_WaitFallAndTakeP2Control",
+      "profiles": ["sk"],
+      "meaning": "Begin partner forced follow after FAB8 bit0 is set."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 357,
+      "old": "loc_77A98",
+      "new": "SOZBoss_SyncPartnerAboveP1",
+      "profiles": ["sk"],
+      "meaning": "Keep Player2 at Player1 integerX and20 hex above."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 367,
+      "old": "loc_77AB4",
+      "new": "SOZEndBoss_SelectRearTreeSubtypeOffset",
+      "profiles": ["sk"],
+      "meaning": "Bias the second repeated three-link tree into the rear actor entries."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 370,
+      "old": "loc_77AB8",
+      "new": "SOZBoss_BindLimbMappingsAndDispatch",
+      "profiles": ["sk"],
+      "meaning": "Bind SOZ limb mappings/art and select one of six limb initializers."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 378,
+      "old": "off_77AD4",
+      "new": "SOZEndBoss_SixLimbInitializerOffsets",
+      "profiles": ["sk"],
+      "meaning": "Six relative WORD limb initializer entries indexed by even subtype."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 387,
+      "old": "loc_77AE0",
+      "new": "SOZEndBoss_InitializeSolidFrontBase",
+      "profiles": ["sk"],
+      "meaning": "Initialize the front base segment and its fixed BYTE Y offset."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 393,
+      "old": "locret_77AF6",
+      "new": "SOZBoss_SharedActorReturn",
+      "profiles": ["sk"],
+      "meaning": "Shared RTS used across boss and child gates."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 397,
+      "old": "loc_77AF8",
+      "new": "SOZEndBoss_InitializeHiddenRearBase",
+      "profiles": ["sk"],
+      "meaning": "Initialize the paired rear base segment."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 406,
+      "old": "loc_77B16",
+      "new": "SOZBoss_FrontBaseFollowAndSolid",
+      "profiles": ["sk"],
+      "meaning": "Position front base using signed root pose high BYTE divided by4."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 424,
+      "old": "loc_77B50",
+      "new": "SOZBoss_RearBaseFollowUntilRelease",
+      "profiles": ["sk"],
+      "meaning": "Refresh the rear base position and wait for root bit4."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 433,
+      "old": "loc_77B6C",
+      "new": "SOZEndBoss_InitializeSolidMiddleLimb",
+      "profiles": ["sk"],
+      "meaning": "Initialize front middle-link attributes and updater."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 440,
+      "old": "loc_77B7E",
+      "new": "SOZBoss_InitMirroredRearMiddle",
+      "profiles": ["sk"],
+      "meaning": "Initialize rear middle-link attributes and pose-sign selector."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 449,
+      "old": "loc_77B9A",
+      "new": "SOZEndBoss_ReadRootPoseAndSaveOldMiddleX",
+      "profiles": ["sk"],
+      "meaning": "Prepare middle limb angle from root high pose BYTE."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 457,
+      "old": "loc_77BAE",
+      "new": "SOZBoss_FrontMiddlePlaceAndSolid",
+      "profiles": ["sk"],
+      "meaning": "Resolve front middle-link angle,solid riders and previous-link death."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 472,
+      "old": "loc_77BE0",
+      "new": "SOZBoss_RearMiddleReadMirroredPose",
+      "profiles": ["sk"],
+      "meaning": "Prepare rear middle-link angle from root and own sign selector."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 479,
+      "old": "loc_77BF0",
+      "new": "SOZBoss_RearMiddlePlaceAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Position rear middle relative to previous link and use status7 flicker policy."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 487,
+      "old": "loc_77C08",
+      "new": "SOZEndBoss_InitializeSolidFrontArm",
+      "profiles": ["sk"],
+      "meaning": "Initialize front terminal arm attributes and updater."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 494,
+      "old": "loc_77C1A",
+      "new": "SOZEndBoss_InitializeRearArm",
+      "profiles": ["sk"],
+      "meaning": "Initialize rear terminal arm with lower art priority."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 502,
+      "old": "loc_77C32",
+      "new": "SOZBoss_FrontArmPlaceSolidAndTouch",
+      "profiles": ["sk"],
+      "meaning": "Place solid front arm then apply its custom player contact policy."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 522,
+      "old": "loc_77C7A",
+      "new": "SOZBoss_LimbReleaseRidersAndBreak",
+      "profiles": ["sk"],
+      "meaning": "Shared front-limb release after root flag or previous-link death."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 528,
+      "old": "loc_77C88",
+      "new": "SOZBoss_RearArmPlaceAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Position the rear terminal arm from the negated root pose."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 541,
+      "old": "loc_77CB4",
+      "new": "SOZBoss_InitUpperSolidBody",
+      "profiles": ["sk"],
+      "meaning": "Set upper-body dimensions and fall through first solid update."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 546,
+      "old": "loc_77CC6",
+      "new": "SOZBoss_UpperBodySolidAndTouch",
+      "profiles": ["sk"],
+      "meaning": "Resolve upper solid body and its eye-opening contact policy."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 560,
+      "old": "loc_77CF2",
+      "new": "SOZBoss_UpperBodyCheckParentDeath",
+      "profiles": ["sk"],
+      "meaning": "Check parent status7 for upper/lower invisible body retirement."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 567,
+      "old": "loc_77D00",
+      "new": "SOZBoss_BodyReleaseRidersAndDelete",
+      "profiles": ["sk"],
+      "meaning": "Retire an invisible body actor after parent status7."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 572,
+      "old": "loc_77D0C",
+      "new": "SOZBoss_UpperBodySuspendDuringEye",
+      "profiles": ["sk"],
+      "meaning": "Wait without upper solid processing while Events_bg+0A is nonzero."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 577,
+      "old": "loc_77D18",
+      "new": "SOZBoss_UpperBodyCheckLifeAfterEye",
+      "profiles": ["sk"],
+      "meaning": "Tail into common body parent-status check."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 581,
+      "old": "loc_77D1A",
+      "new": "SOZBoss_InitLowerSolidBody",
+      "profiles": ["sk"],
+      "meaning": "Set lower-body dimensions and fall through its event-gated solid updater."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 586,
+      "old": "loc_77D2C",
+      "new": "SOZBoss_LowerBodySolidAndTouch",
+      "profiles": ["sk"],
+      "meaning": "Resolve lower invisible body only when background eye event is inactive."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 604,
+      "old": "loc_77D60",
+      "new": "SOZBoss_LowerBodySuspendAndRelease",
+      "profiles": ["sk"],
+      "meaning": "Install lower suspension after the eye event activates."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 608,
+      "old": "loc_77D6C",
+      "new": "SOZBoss_LowerBodyResumeAfterEye",
+      "profiles": ["sk"],
+      "meaning": "Resume lower body solid work when background event clears."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 616,
+      "old": "loc_77D82",
+      "new": "SOZBoss_InitRightBarrier",
+      "profiles": ["sk"],
+      "meaning": "Initialize the invisible right-side barrier dimensions and updater."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 621,
+      "old": "loc_77D94",
+      "new": "SOZBoss_RightBarrierFollowAndSolid",
+      "profiles": ["sk"],
+      "meaning": "Place the tall barrier at rootX+20 hex and resolve solid contact."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 638,
+      "old": "loc_77DCC",
+      "new": "SOZBoss_RightBarrierReleaseAndDelete",
+      "profiles": ["sk"],
+      "meaning": "Remove the right-side barrier after root release bit4."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 643,
+      "old": "loc_77DD8",
+      "new": "SOZBoss_InitVisibleFollower",
+      "profiles": ["sk"],
+      "meaning": "Initialize the visible parent-relative SOZ body piece."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 650,
+      "old": "loc_77DEA",
+      "new": "SOZBoss_VisiblePieceFollowAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Follow the visible piece and apply bit4-based parent flicker lifetime."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 656,
+      "old": "loc_77DF8",
+      "new": "SOZBoss_InitChargeGenerator",
+      "profiles": ["sk"],
+      "meaning": "Initialize charge generator and attempt twenty converging particles."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 664,
+      "old": "loc_77E16",
+      "new": "SOZBoss_WaitForLastChargeParticle",
+      "profiles": ["sk"],
+      "meaning": "Wait for remembered child pointer +38 bit4 before firing."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 669,
+      "old": "loc_77E22",
+      "new": "SOZBoss_ChargeGeneratorFollowDraw",
+      "profiles": ["sk"],
+      "meaning": "Follow charge generator and draw only on even VInt phases."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 681,
+      "old": "loc_77E4A",
+      "new": "SOZBoss_DeleteChargeFamily",
+      "profiles": ["sk"],
+      "meaning": "Shared immediate retirement for charge generator and converging particles."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 686,
+      "old": "loc_77E56",
+      "new": "SOZBoss_SpawnMaskAndShot",
+      "profiles": ["sk"],
+      "meaning": "Fire the laser children and begin generator retirement delay."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 694,
+      "old": "loc_77E74",
+      "new": "SOZBoss_TickChargeFireWait",
+      "profiles": ["sk"],
+      "meaning": "Count down the generator after firing."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 700,
+      "old": "loc_77E7C",
+      "new": "SOZBoss_InitChargeParticleAndDelay",
+      "profiles": ["sk"],
+      "meaning": "Initialize a partial2 charge particle and its fixed-point convergence inputs."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 706,
+      "old": "loc_77E90",
+      "new": "SOZBoss_TickChargeParticleDelay",
+      "profiles": ["sk"],
+      "meaning": "Wait for particle stagger underflow while checking cancellation."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 717,
+      "old": "loc_77EAA",
+      "new": "SOZBoss_BeginParticleConvergence",
+      "profiles": ["sk"],
+      "meaning": "Start particle convergence with a bit4-signaling raw callback."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 721,
+      "old": "loc_77EB8",
+      "new": "SOZBoss_ParticleAnimateAndMoveX",
+      "profiles": ["sk"],
+      "meaning": "Animate particle and increase its WORD X accumulator velocity."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 735,
+      "old": "loc_77EE4",
+      "new": "SOZBoss_ParticleMoveYAndClamp",
+      "profiles": ["sk"],
+      "meaning": "Advance Y convergence and latch the first zero crossing."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 746,
+      "old": "loc_77EFE",
+      "new": "SOZEndBoss_StoreParticleYOffsetCandidate",
+      "profiles": ["sk"],
+      "meaning": "Commit the current or sign-change-clamped WORD Y offset."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 749,
+      "old": "loc_77F02",
+      "new": "SOZBoss_ParticleProjectAndCheckLife",
+      "profiles": ["sk"],
+      "meaning": "Position particle from signed HIGH BYTE fixed-point offsets relative to generator."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 768,
+      "old": "loc_77F3E",
+      "new": "SOZBoss_InitShotAndAimAtPlayer",
+      "profiles": ["sk"],
+      "meaning": "Initialize fired shot and choose geometry from Player1 horizontal separation."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 779,
+      "old": "loc_77F64",
+      "new": "SOZBoss_ChooseShotDistanceVariant",
+      "profiles": ["sk"],
+      "meaning": "Choose near speed pair below the unsigned separation threshold."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 787,
+      "old": "loc_77F7A",
+      "new": "SOZBoss_InitFarShot",
+      "profiles": ["sk"],
+      "meaning": "Override far shot frame,paired BYTE offsets and Y speed."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 793,
+      "old": "locret_77F92",
+      "new": "SOZBoss_ShotInitReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after near/far fired-shot setup."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 797,
+      "old": "loc_77F94",
+      "new": "SOZBoss_MoveShotRelativeToParent",
+      "profiles": ["sk"],
+      "meaning": "Advance shot relative to generator before independent flight."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 808,
+      "old": "loc_77FB6",
+      "new": "SOZBoss_BeginIndependentShotFlight",
+      "profiles": ["sk"],
+      "meaning": "Switch shot to free velocity motion after relative-phase underflow."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 811,
+      "old": "loc_77FBC",
+      "new": "SOZBoss_ShotMoveAndCull",
+      "profiles": ["sk"],
+      "meaning": "Integrate the free shot and apply touch plus immediate coarse-X lifetime."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 817,
+      "old": "loc_77FCE",
+      "new": "SOZBoss_InitShortSpriteMask",
+      "profiles": ["sk"],
+      "meaning": "Initialize the sprite-mask actor and fall through its first wait/draw."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 824,
+      "old": "loc_77FEC",
+      "new": "SOZBoss_SetMaskFollowAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Request sprite masking while following the charge generator."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 830,
+      "old": "loc_77FFC",
+      "new": "SOZBoss_InitFixedBodyMask",
+      "profiles": ["sk"],
+      "meaning": "Initialize the fixed-position SOZ body mapping actor."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 837,
+      "old": "loc_78018",
+      "new": "SOZBoss_DrawFixedBodyUntilExit",
+      "profiles": ["sk"],
+      "meaning": "Draw the fixed body mapping while its position gate and parent lifetime allow."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 846,
+      "old": "loc_78032",
+      "new": "SOZBoss_DeleteFixedBody",
+      "profiles": ["sk"],
+      "meaning": "Immediate deletion tail for the fixed body actor."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/motion_helpers.s",
+      "original_line": 18,
+      "old": "loc_78054",
+      "new": "SOZBoss_CheckRightLimitAndReset",
+      "profiles": ["sk"],
+      "meaning": "Reload the character-selected motion profile at the right turn bound."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/motion_helpers.s",
+      "original_line": 22,
+      "old": "locret_7805E",
+      "new": "SOZBoss_TurnBoundsReturn",
+      "profiles": ["sk"],
+      "meaning": "Return when no turn-bound profile change is required."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/motion_helpers.s",
+      "original_line": 27,
+      "old": "word_78060",
+      "new": "SOZEndBoss_CatchUpSixWordMotionProfile",
+      "profiles": ["sk"],
+      "meaning": "Fast rightward catch-up motion record used beyond the strict left bound."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/motion_helpers.s",
+      "original_line": 82,
+      "old": "loc_780E4",
+      "new": "SOZBoss_OpenEyeAndExposeBoss",
+      "profiles": ["sk"],
+      "meaning": "Latch triggering playerY and expose root after accepted left-side contact."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/motion_helpers.s",
+      "original_line": 93,
+      "old": "locret_78118",
+      "new": "SOZBoss_UpperContactReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from upper-body player contact policy."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/motion_helpers.s",
+      "original_line": 97,
+      "old": "loc_7811A",
+      "new": "SOZBoss_UpperContactHurtPlayer",
+      "profiles": ["sk"],
+      "meaning": "Hurt a contacting player positioned unsigned-right of upper-body actor."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/motion_helpers.s",
+      "original_line": 122,
+      "old": "loc_78140",
+      "new": "SOZBoss_LowerDetachAndTryHurt",
+      "profiles": ["sk"],
+      "meaning": "Detach a lower-body contact/previous rider and optionally apply hurt."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/motion_helpers.s",
+      "original_line": 129,
+      "old": "locret_78158",
+      "new": "SOZBoss_LowerContactReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after the lower-body selected-player policy."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/motion_helpers.s",
+      "original_line": 160,
+      "old": "locret_78198",
+      "new": "SOZBoss_ArmContactReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after root-guarded arm contact checks."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/motion_helpers.s",
+      "original_line": 180,
+      "old": "byte_781BC",
+      "new": "SOZBoss_ChargeParticleOffsets",
+      "profiles": ["sk"],
+      "meaning": "Twenty signed BYTE XY seeds for fixed-point charge-particle offsets."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/motion_helpers.s",
+      "original_line": 204,
+      "old": "loc_781E4",
+      "new": "SOZBoss_CheckExposedHitOrDefeat",
+      "profiles": ["sk"],
+      "meaning": "Handle exposed-root health and flash only while background eye latch remains nonzero."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/motion_helpers.s",
+      "original_line": 216,
+      "old": "loc_7820A",
+      "new": "SOZBoss_HitChooseFlashRow",
+      "profiles": ["sk"],
+      "meaning": "Select normal or alternate stored five-color source row."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/motion_helpers.s",
+      "original_line": 222,
+      "old": "loc_78218",
+      "new": "SOZBoss_HitCopyColorsAndTick",
+      "profiles": ["sk"],
+      "meaning": "Advance exposed-root flash and restore saved collision at timer zero."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/motion_helpers.s",
+      "original_line": 229,
+      "old": "locret_7822E",
+      "new": "SOZBoss_HitUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from exposed-root collision/health recovery handling."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/motion_helpers.s",
+      "original_line": 233,
+      "old": "loc_78230",
+      "new": "SOZBoss_BeginDefeatAndLockCamera",
+      "profiles": ["sk"],
+      "meaning": "Commit defeated root callback and independent explosion before common bookkeeping."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/motion_helpers.s",
+      "original_line": 253,
+      "old": "word_7826C",
+      "new": "SOZBoss_HitPaletteDestinations",
+      "profiles": ["sk"],
+      "meaning": "Five stored palette destination WORD addresses with original three-copy bug."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/motion_helpers.s",
+      "original_line": 256,
+      "old": "word_78276",
+      "new": "SOZBoss_HitPaletteColorRows",
+      "profiles": ["sk"],
+      "meaning": "Two five-WORD source color rows selected at byte offsets0/10."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
+      "original_line": 9,
+      "old": "ObjDat3_78296",
+      "new": "SOZBoss_VisibleFollowerAttributes",
+      "profiles": ["sk"],
+      "meaning": "Full attributes for the root-following visible body piece."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
+      "original_line": 14,
+      "old": "ObjDat3_782A2",
+      "new": "SOZBoss_FixedBodyAttributes",
+      "profiles": ["sk"],
+      "meaning": "Full attributes for the fixed background body mapping actor."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
+      "original_line": 19,
+      "old": "word_782AE",
+      "new": "SOZEndBoss_FrontBasePartialAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte partial front base descriptor."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
+      "original_line": 22,
+      "old": "word_782B4",
+      "new": "SOZEndBoss_RearBasePartialAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte partial rear base descriptor."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
+      "original_line": 25,
+      "old": "word_782BA",
+      "new": "SOZEndBoss_FrontMiddlePartialAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte partial front middle-link descriptor."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
+      "original_line": 28,
+      "old": "word_782C0",
+      "new": "SOZEndBoss_RearMiddlePartialAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte partial rear middle-link descriptor."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
+      "original_line": 31,
+      "old": "word_782C6",
+      "new": "SOZEndBoss_FrontArmPartialAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte partial solid front arm descriptor."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
+      "original_line": 34,
+      "old": "word_782CC",
+      "new": "SOZEndBoss_RearArmPartialAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte partial rear terminal arm descriptor."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
+      "original_line": 37,
+      "old": "ObjDat3_782D2",
+      "new": "SOZEndBoss_ChargeGeneratorFullAttributes",
+      "profiles": ["sk"],
+      "meaning": "Full attributes for the flickering charge-generator actor."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
+      "original_line": 42,
+      "old": "word_782DE",
+      "new": "SOZBoss_ChargeParticleAttributes",
+      "profiles": ["sk"],
+      "meaning": "Eight-byte partial2 charge-particle descriptor beginning at art."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
+      "original_line": 46,
+      "old": "word_782E6",
+      "new": "SOZEndBoss_FiredShotPartial2Attributes",
+      "profiles": ["sk"],
+      "meaning": "Eight-byte partial2 fired-shot descriptor beginning at art."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
+      "original_line": 50,
+      "old": "ObjDat3_782EE",
+      "new": "SOZEndBoss_SpriteMaskFullAttributes",
+      "profiles": ["sk"],
+      "meaning": "Full descriptor for the short sprite-mask child."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
+      "original_line": 55,
+      "old": "ChildObjDat_782FA",
+      "new": "SOZEndBoss_SixDistinctRootNormalChildren",
+      "profiles": ["sk"],
+      "meaning": "Six normal child records for root collision proxies,body graphics,charge-related piece and Robotnik head."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
+      "original_line": 69,
+      "old": "ChildObjDat_78320",
+      "new": "SOZEndBoss_ThreeFrontLinkedBodyActors",
+      "profiles": ["sk"],
+      "meaning": "Three repeated tree entries for the front linked body."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
+      "original_line": 72,
+      "old": "ChildObjDat_78326",
+      "new": "SOZEndBoss_ThreeRearLinkedBodyActors",
+      "profiles": ["sk"],
+      "meaning": "Three repeated tree entries for the rear linked body."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
+      "original_line": 75,
+      "old": "ChildObjDat_7832C",
+      "new": "SOZBoss_ChargeGeneratorChild",
+      "profiles": ["sk"],
+      "meaning": "One normal child record for the periodic charge generator."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
+      "original_line": 79,
+      "old": "ChildObjDat_78334",
+      "new": "SOZEndBoss_TwentyRepeatedChargeParticles",
+      "profiles": ["sk"],
+      "meaning": "Twenty simple repeated particles attached to the charge generator."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
+      "original_line": 82,
+      "old": "ChildObjDat_7833A",
+      "new": "SOZBoss_MaskAndShotChildren",
+      "profiles": ["sk"],
+      "meaning": "Two normal child entries created by the charge-generator fire state."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
+      "original_line": 88,
+      "old": "byte_78348",
+      "new": "SOZBoss_ChargeParticleAnim",
+      "profiles": ["sk"],
+      "meaning": "Fixed-delay raw particle stream with custom completion callback."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
+      "original_line": 102,
+      "old": "word_784E0",
+      "new": "LRZMiniboss_CameraTriggerBounds",
+      "profiles": ["sk"],
+      "meaning": "Four WORD trigger bounds consumed by the LRZ miniboss camera entry."
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
+      "original_line": 104,
+      "old": "word_784E8",
+      "new": "LRZMiniboss_CameraTargetBounds",
+      "profiles": ["sk"],
+      "meaning": "Four WORD camera target limits used by LRZ miniboss transition."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 14,
+      "old": "loc_76A30",
+      "new": "SOZMini_CopyFadePaletteToLineTwo",
+      "profiles": ["sk"],
+      "meaning": "Copy the initial fade palette into normal line2."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 21,
+      "old": "loc_76A42",
+      "new": "SOZMini_CopyTargetPaletteAndLoadArt",
+      "profiles": ["sk"],
+      "meaning": "Copy target line2 and prepare delayed boss activation/resources."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 38,
+      "old": "loc_76A8A",
+      "new": "SOZMinibossEntry_InstallRootDispatcher",
+      "profiles": ["sk"],
+      "meaning": "Install root battle dispatcher after entry wait."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 43,
+      "old": "loc_76A92",
+      "new": "SOZMini_BattleDispatchHitAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Dispatch root state, apply armed knockback/sink defeat and select layer before drawing."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 52,
+      "old": "off_76AAE",
+      "new": "SOZMinibossRoot_StateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Thirteen relative WORD root state entries."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 68,
+      "old": "loc_76AC8",
+      "new": "SOZMini_InitArenaAndTryFade",
+      "profiles": ["sk"],
+      "meaning": "Initialize root resources and optional selected-palette fade actor."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 87,
+      "old": "locret_76B28",
+      "new": "SOZMini_IntroFadeSpawnReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after successful or failed fade actor initialization."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 91,
+      "old": "loc_76B2A",
+      "new": "SOZMini_TickInitialSpawnWait",
+      "profiles": ["sk"],
+      "meaning": "Run current signed timer callback before collision children are created."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 95,
+      "old": "loc_76B30",
+      "new": "SOZMini_SpawnWeakspotPair",
+      "profiles": ["sk"],
+      "meaning": "Signal the scene and attempt two normal collision-control children."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 102,
+      "old": "loc_76B44",
+      "new": "SOZMini_WaitForPlayerProximity",
+      "profiles": ["sk"],
+      "meaning": "Wait until selected player horizontal distance is strictly below0x60."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 109,
+      "old": "loc_76B52",
+      "new": "SOZMini_BeginPreparationAndFace",
+      "profiles": ["sk"],
+      "meaning": "Start preparation and copy selected horizontal side into root flipX."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 116,
+      "old": "loc_76B68",
+      "new": "SOZMini_SetPrepWaitAndTryOverlay",
+      "profiles": ["sk"],
+      "meaning": "Wait63 decrements while optionally displaying the upward-moving overlay."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 123,
+      "old": "loc_76B80",
+      "new": "SOZMinibossRoot_WaitThroughPreparation",
+      "profiles": ["sk"],
+      "meaning": "Use current Obj_Wait before short vertical movement sequence."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 127,
+      "old": "loc_76B86",
+      "new": "SOZMini_BeginRiseAndSpawnPoseParts",
+      "profiles": ["sk"],
+      "meaning": "Start short upward movement and attempt eight repeated normal pose parts."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 136,
+      "old": "loc_76BAA",
+      "new": "SOZMini_MoveAndTickVerticalWait",
+      "profiles": ["sk"],
+      "meaning": "Shared movement/wait state for short rise,stop and settle."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 141,
+      "old": "loc_76BB6",
+      "new": "SOZMini_BeginShortVerticalPause",
+      "profiles": ["sk"],
+      "meaning": "Stop vertical movement for the next eight-decrement interval."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 148,
+      "old": "loc_76BCA",
+      "new": "SOZMini_SettleBeforeLaunch",
+      "profiles": ["sk"],
+      "meaning": "Start slow downward settling for sixteen timer decrements."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 155,
+      "old": "loc_76BE0",
+      "new": "SOZMini_BeginFirstLaunchPose",
+      "profiles": ["sk"],
+      "meaning": "Finish settling and select fixed-pointer launch tokens."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 160,
+      "old": "locret_76BF2",
+      "new": "SOZMini_SharedReturn",
+      "profiles": ["sk"],
+      "meaning": "Shared RTS for root callbacks, upward gravity and post-sign watcher gates."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 164,
+      "old": "loc_76BF4",
+      "new": "SOZMini_MoveAndAnimateFirstLaunch",
+      "profiles": ["sk"],
+      "meaning": "Move first,then decode launch frame-delay tokens and retain only ordinary new-frame results."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 176,
+      "old": "loc_76C1E",
+      "new": "SOZMini_HideLaunchTokenFrame",
+      "profiles": ["sk"],
+      "meaning": "Replace an ordinary launch token with root displayed frame0."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 179,
+      "old": "locret_76C24",
+      "new": "SOZMini_FirstLaunchUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after waiting,control or ordinary first-launch token processing."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 183,
+      "old": "loc_76C26",
+      "new": "SOZMini_BeginFirstLandingFlight",
+      "profiles": ["sk"],
+      "meaning": "Select free gravity flight after first launch-token callback."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 189,
+      "old": "loc_76C36",
+      "new": "SOZMini_StopXAtRightBoundary",
+      "profiles": ["sk"],
+      "meaning": "Apply original one-sided X-velocity stop before gravity flight."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 196,
+      "old": "loc_76C48",
+      "new": "SOZMini_ApplyGravityAndProbeFloor",
+      "profiles": ["sk"],
+      "meaning": "Integrate gravity and run landing callback only after vertical speed is nonnegative."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 204,
+      "old": "loc_76C5E",
+      "new": "SOZMini_BeginFirstLandingRecovery",
+      "profiles": ["sk"],
+      "meaning": "Select first landing pose recovery and its arming continuation."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 209,
+      "old": "loc_76C72",
+      "new": "SOZMini_StartImpactPoseAndDust",
+      "profiles": ["sk"],
+      "meaning": "Common impact setup for first or repeated landing recovery."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 218,
+      "old": "loc_76C92",
+      "new": "SOZMini_BeginRepeatLandingRecovery",
+      "profiles": ["sk"],
+      "meaning": "Recover after later launch without repeating first arming-uniform stage."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 224,
+      "old": "loc_76CA2",
+      "new": "SOZMini_ResetAfterKnockbackLanding",
+      "profiles": ["sk"],
+      "meaning": "Return to proximity wait after armed knockback lands."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 236,
+      "old": "loc_76CCE",
+      "new": "SOZMini_AnimateAndApplyRecoveryPose",
+      "profiles": ["sk"],
+      "meaning": "Decode recovery tokens into child pose and apply cursor-indexed root displacement."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 246,
+      "old": "locret_76CEE",
+      "new": "SOZMini_RecoveryPoseReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after recovery wait/control or applied ordinary token."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 250,
+      "old": "loc_76CF0",
+      "new": "SOZMini_BeginArmingAnimation",
+      "profiles": ["sk"],
+      "meaning": "Select the first recovery uniform stream and arming callback."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 257,
+      "old": "loc_76D08",
+      "new": "SOZMini_AnimateArming",
+      "profiles": ["sk"],
+      "meaning": "Run current uniform-delay raw stream."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 261,
+      "old": "loc_76D0E",
+      "new": "SOZMini_ArmWeakspot",
+      "profiles": ["sk"],
+      "meaning": "Set root weakspot-arming flag before shared standing wait setup."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 264,
+      "old": "loc_76D14",
+      "new": "SOZMini_BeginSideAlignment",
+      "profiles": ["sk"],
+      "meaning": "Select display base1 and a timed side-alignment wait."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 271,
+      "old": "loc_76D28",
+      "new": "SOZMini_TickAlignmentOrChooseSide",
+      "profiles": ["sk"],
+      "meaning": "Count remaining alignment time before checking selected player side."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 279,
+      "old": "loc_76D3E",
+      "new": "SOZMini_CheckFacingForAlignment",
+      "profiles": ["sk"],
+      "meaning": "Compare selected side with the root current flip orientation."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 285,
+      "old": "loc_76D44",
+      "new": "SOZMinibossRoot_SelectFlipTurnPoseTokens",
+      "profiles": ["sk"],
+      "meaning": "Select frame-delay FlipX turn while retaining alignment timer."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 292,
+      "old": "loc_76D5C",
+      "new": "SOZMini_BeginSecondLaunchPose",
+      "profiles": ["sk"],
+      "meaning": "Start second launch tokens after signed alignment timer expiry."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 301,
+      "old": "loc_76D7C",
+      "new": "SOZMini_TickAlignmentAndAnimateTurn",
+      "profiles": ["sk"],
+      "meaning": "Continue countdown during turn and map ordinary tokens to pose/display split."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 314,
+      "old": "locret_76DA6",
+      "new": "SOZMinibossRoot_ReturnAfterTurnTokenGate",
+      "profiles": ["sk"],
+      "meaning": "Return after turn wait/control or ordinary displayed-frame selection."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 318,
+      "old": "loc_76DA8",
+      "new": "SOZMini_ResumeAlignmentAfterTurn",
+      "profiles": ["sk"],
+      "meaning": "Return to timed alignment without reloading remaining time."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 323,
+      "old": "loc_76DB0",
+      "new": "SOZMini_MoveAndAnimateSecondLaunch",
+      "profiles": ["sk"],
+      "meaning": "Move then decode second-launch tokens,launch velocity and per-token displacement."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 334,
+      "old": "loc_76DD6",
+      "new": "SOZMini_ApplySecondLaunchPoseOffset",
+      "profiles": ["sk"],
+      "meaning": "Finish ordinary second-launch token remapping and root displacement."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 339,
+      "old": "locret_76DE4",
+      "new": "SOZMini_SecondLaunchUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after second-launch decoder result or pose displacement."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 343,
+      "old": "loc_76DE6",
+      "new": "SOZMini_BeginRepeatLandingFlight",
+      "profiles": ["sk"],
+      "meaning": "After second launch tokens choose gravity state and signed horizontal flight speed."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 351,
+      "old": "loc_76E02",
+      "new": "SOZMini_StoreFacingFlightSpeed",
+      "profiles": ["sk"],
+      "meaning": "Commit horizontal speed for repeated gravity flight."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 356,
+      "old": "locret_76E08",
+      "new": "SOZMinibossRoot_UnusedRoutineSlotReturn",
+      "profiles": ["sk"],
+      "meaning": "RTS selected by the last root state-table slot."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 360,
+      "old": "loc_76E0A",
+      "new": "SOZMini_SinkAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Move the sinking root for nonnegative timer values only."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 367,
+      "old": "loc_76E1C",
+      "new": "SOZMini_MarkDeadAndTryExitController",
+      "profiles": ["sk"],
+      "meaning": "Finish sink wait, mark root dead and attempt an independent post-sign watcher."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 378,
+      "old": "loc_76E48",
+      "new": "SOZMini_StartEndSign",
+      "profiles": ["sk"],
+      "meaning": "Enter shared sign progression regardless of watcher allocation outcome."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 382,
+      "old": "loc_76E4E",
+      "new": "SOZMini_WaitForSignActivation",
+      "profiles": ["sk"],
+      "meaning": "Wait for FAA8 nonzero before accepting its later completion edge."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 387,
+      "old": "loc_76E5C",
+      "new": "SOZMini_WaitSignThenLockControls",
+      "profiles": ["sk"],
+      "meaning": "After FAA8 clears, attempt boundary helpers and begin scripted Player1 alignment."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 398,
+      "old": "loc_76E86",
+      "new": "SOZMini_SavePlayerAlignmentSide",
+      "profiles": ["sk"],
+      "meaning": "Choose leftward approach if initial Player1 X is at or above0x43A0."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 403,
+      "old": "loc_76E94",
+      "new": "SOZMini_WalkTowardAlignmentX",
+      "profiles": ["sk"],
+      "meaning": "Generate scripted logical input toward Player1 X0x43A0."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 417,
+      "old": "loc_76EC0",
+      "new": "SOZMini_SetRightAndJumpInput",
+      "profiles": ["sk"],
+      "meaning": "Write Right held/pressed plus optional A held/pressed."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 423,
+      "old": "loc_76EC8",
+      "new": "SOZMini_CheckLeftWalkAndJump",
+      "profiles": ["sk"],
+      "meaning": "Approach target from right and complete once Player1 X<=target."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 431,
+      "old": "loc_76EDC",
+      "new": "SOZMini_SetLeftAndJumpInput",
+      "profiles": ["sk"],
+      "meaning": "Write Left held/pressed plus optional jump."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 437,
+      "old": "loc_76EE4",
+      "new": "SOZMini_StopPlayerAndSignalScene",
+      "profiles": ["sk"],
+      "meaning": "Complete alignment and publish the0x55 scene handshake."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 449,
+      "old": "loc_76F0E",
+      "new": "SOZMini_InitPosePartPriority",
+      "profiles": ["sk"],
+      "meaning": "Initialize inherited-resource pose part and remember base queue priority."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 455,
+      "old": "loc_76F24",
+      "new": "SOZMini_PosePartFollowOrBreak",
+      "profiles": ["sk"],
+      "meaning": "Follow root pose unless root status6 requests breakup motion."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 465,
+      "old": "loc_76F40",
+      "new": "SOZMini_BeginPosePartBreakaway",
+      "profiles": ["sk"],
+      "meaning": "Detach through generic indexed velocity and gravity/flicker conversion."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 469,
+      "old": "loc_76F46",
+      "new": "SOZMini_CollisionPartFollowDispatch",
+      "profiles": ["sk"],
+      "meaning": "Follow adjusted BYTE offsets, dispatch collision state and retain child touch/draw."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 477,
+      "old": "off_76F60",
+      "new": "SOZMinibossCollisionChild_StateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Five relative WORD states for initialization, idle, arming, contact and hit raw."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 485,
+      "old": "loc_76F6A",
+      "new": "SOZMini_InitCollisionPartBySubtype",
+      "profiles": ["sk"],
+      "meaning": "Initialize common attributes and disable only subtype0 until armed."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 493,
+      "old": "locret_76F84",
+      "new": "SOZMini_CollisionPartInitReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after shared attributes and subtype collision selection."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 497,
+      "old": "locret_76F86",
+      "new": "SOZMini_StaticCompanionIdle",
+      "profiles": ["sk"],
+      "meaning": "No-op state for nonzero companion collision child."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 501,
+      "old": "loc_76F88",
+      "new": "SOZMini_WeakspotWaitUntilArmed",
+      "profiles": ["sk"],
+      "meaning": "Enable attack contact when root flag1 is set."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 509,
+      "old": "locret_76FA4",
+      "new": "SOZMini_WeakspotArmingReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after root arming test or active collision setup."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 513,
+      "old": "loc_76FA6",
+      "new": "SOZMini_WeakspotCheckAttackOrHurt",
+      "profiles": ["sk"],
+      "meaning": "Consume contact then choose attack reaction or ordinary hurt."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 523,
+      "old": "loc_76FC2",
+      "new": "SOZMini_WeakspotReflectAndSignalHit",
+      "profiles": ["sk"],
+      "meaning": "Reflect player motion and arm one knockback with actual attacker handle."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 535,
+      "old": "locret_76FF8",
+      "new": "SOZMini_WeakspotContactReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after no contact, invulnerability gate or accepted attack setup."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 539,
+      "old": "loc_76FFA",
+      "new": "SOZMini_WeakspotResetAfterHit",
+      "profiles": ["sk"],
+      "meaning": "End hit raw, return to arming wait and clear root breakup/arming flags."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 549,
+      "old": "loc_7701C",
+      "new": "SOZMini_WeakspotAnimateHit",
+      "profiles": ["sk"],
+      "meaning": "Run uniform-delay hit stream through stored actor pointer."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 553,
+      "old": "loc_77022",
+      "new": "SOZMini_InitRisingOverlay",
+      "profiles": ["sk"],
+      "meaning": "Initialize rising overlay, saved priority and parent orientation."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 563,
+      "old": "loc_7704A",
+      "new": "SOZMini_RisingOverlayBeginMotion",
+      "profiles": ["sk"],
+      "meaning": "Install upward timed movement and draw initial inherited position."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 570,
+      "old": "loc_77062",
+      "new": "SOZMini_RisingOverlayMoveAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Update layer then apply timed velocity movement and draw."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 575,
+      "old": "loc_7706C",
+      "new": "SOZMini_InitDustAndFacingOffset",
+      "profiles": ["sk"],
+      "meaning": "Initialize dust resources and mirror only creator BYTE base X offset."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 585,
+      "old": "loc_7708E",
+      "new": "SOZMini_DustLoadOffsetAndDelay",
+      "profiles": ["sk"],
+      "meaning": "Form mirrored base X then read unmirrored particle extra offset."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 596,
+      "old": "loc_770AA",
+      "new": "SOZMini_DustStoreOffsetAndDelay",
+      "profiles": ["sk"],
+      "meaning": "Store dust X and BYTE delay at WORD timer high-byte address."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 603,
+      "old": "byte_770B8",
+      "new": "SOZMini_DustOffsetDelayPairs",
+      "profiles": ["sk"],
+      "meaning": "Six signed extra-X/delay BYTE pairs indexed by even subtype."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 612,
+      "old": "loc_770C4",
+      "new": "SOZMini_DustTickBeforeDraw",
+      "profiles": ["sk"],
+      "meaning": "Wait without drawing until BYTE delay becomes signed-negative."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 618,
+      "old": "locret_770D8",
+      "new": "SOZMini_DustDelayReturn",
+      "profiles": ["sk"],
+      "meaning": "Return without drawing during delay or after raw-draw pointer setup."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "original_line": 622,
+      "old": "loc_770DA",
+      "new": "SOZMini_DustAnimateAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Draw stationary dust with fixed frame-delay stream and configured delete callback."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/motion_helpers.s",
+      "original_line": 15,
+      "old": "loc_77106",
+      "new": "SOZMini_StoreLayerPriority",
+      "profiles": ["sk"],
+      "meaning": "Finish layer selection using world X0x4200 boundary."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/motion_helpers.s",
+      "original_line": 44,
+      "old": "loc_7714E",
+      "new": "SOZMini_PoseApplyRecordFlip",
+      "profiles": ["sk"],
+      "meaning": "Apply record flip override after root orientation and X reflection."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/motion_helpers.s",
+      "original_line": 49,
+      "old": "loc_77158",
+      "new": "SOZMini_PoseApplyRootOffsets",
+      "profiles": ["sk"],
+      "meaning": "Write part integer XY from signed record offsets."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/motion_helpers.s",
+      "original_line": 60,
+      "old": "off_7716E",
+      "new": "SOZMini_PoseTableOffsets",
+      "profiles": ["sk"],
+      "meaning": "Eight relative WORD offsets to ten-record pose arrays."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/motion_helpers.s",
+      "original_line": 69,
+      "old": "byte_7717E",
+      "new": "SOZMinibossPart00_TenPoseRecords",
+      "profiles": ["sk"],
+      "meaning": "Subtype0 part offset/frame/flip records."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/motion_helpers.s",
+      "original_line": 80,
+      "old": "byte_771A6",
+      "new": "SOZMinibossPart02_TenPoseRecords",
+      "profiles": ["sk"],
+      "meaning": "Subtype2 part offset/frame/flip records."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/motion_helpers.s",
+      "original_line": 91,
+      "old": "byte_771CE",
+      "new": "SOZMinibossPart04_TenPoseRecords",
+      "profiles": ["sk"],
+      "meaning": "Subtype4 part with constant frame0x17 and changing offsets."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/motion_helpers.s",
+      "original_line": 102,
+      "old": "byte_771F6",
+      "new": "SOZMinibossPart06_TenPoseRecords",
+      "profiles": ["sk"],
+      "meaning": "Subtype6 part with always-set extra draw-flip toggle."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/motion_helpers.s",
+      "original_line": 113,
+      "old": "byte_7721E",
+      "new": "SOZMinibossPart08_TenPoseRecords",
+      "profiles": ["sk"],
+      "meaning": "Subtype8 part with frame0xC/0xD/0xE/0xF selection."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/motion_helpers.s",
+      "original_line": 124,
+      "old": "byte_77246",
+      "new": "SOZMinibossPart10_TenPoseRecords",
+      "profiles": ["sk"],
+      "meaning": "Subtype10 decimal part with constant frame0x17."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/motion_helpers.s",
+      "original_line": 135,
+      "old": "byte_7726E",
+      "new": "SOZMinibossPart12_TenPoseRecords",
+      "profiles": ["sk"],
+      "meaning": "Subtype12 decimal part with frame0x10 then0x11."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/motion_helpers.s",
+      "original_line": 146,
+      "old": "byte_77296",
+      "new": "SOZMinibossPart14_TenPoseRecords",
+      "profiles": ["sk"],
+      "meaning": "Subtype14 decimal part with constant frame3."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/motion_helpers.s",
+      "original_line": 171,
+      "old": "loc_772D4",
+      "new": "SOZMini_ApplyPoseCursorDisplacement",
+      "profiles": ["sk"],
+      "meaning": "Apply signed XY displacement with root flip reflecting only X."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/motion_helpers.s",
+      "original_line": 180,
+      "old": "byte_772E2",
+      "new": "SOZMini_PoseCursorDisplacements",
+      "profiles": ["sk"],
+      "meaning": "Ten signed BYTE XY displacement pairs for frame-delay cursor."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/motion_helpers.s",
+      "original_line": 220,
+      "old": "loc_77358",
+      "new": "SOZMini_StoreKnockbackVelocity",
+      "profiles": ["sk"],
+      "meaning": "Commit one armed knockback selected from saved attacker X."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/motion_helpers.s",
+      "original_line": 226,
+      "old": "loc_77364",
+      "new": "SOZMini_BeginDefeatSink",
+      "profiles": ["sk"],
+      "meaning": "Start sink defeat and lock current horizontal camera without a health counter."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/motion_helpers.s",
+      "original_line": 241,
+      "old": "locret_773AA",
+      "new": "SOZMini_HitUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after absent armed knockback or completed sink effect attempt."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
+      "original_line": 11,
+      "old": "word_773B8",
+      "new": "SOZMinibossPosePart_PartialAttributes",
+      "profiles": ["sk"],
+      "meaning": "Inherited-resource partial attributes for eight pose parts."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
+      "original_line": 14,
+      "old": "word_773BE",
+      "new": "SOZMini_RisingOverlayAttributes",
+      "profiles": ["sk"],
+      "meaning": "Inherited-resource partial attributes for rising overlay."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
+      "original_line": 17,
+      "old": "word_773C4",
+      "new": "SOZMini_WeakspotPairAttributes",
+      "profiles": ["sk"],
+      "meaning": "Shared partial attributes for normal collision children."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
+      "original_line": 20,
+      "old": "ObjDat3_773CA",
+      "new": "SOZMinibossLandingDust_FullAttributes",
+      "profiles": ["sk"],
+      "meaning": "Separate full dust resources and initial attributes."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
+      "original_line": 25,
+      "old": "ChildObjDat_773D6",
+      "new": "SOZMini_PosePartChildren",
+      "profiles": ["sk"],
+      "meaning": "Eight repeated normal pose parts at shared initial offset."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
+      "original_line": 29,
+      "old": "ChildObjDat_773DE",
+      "new": "SOZMini_RisingOverlayChild",
+      "profiles": ["sk"],
+      "meaning": "One upward timed overlay at parent offset(0,64)."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
+      "original_line": 33,
+      "old": "ChildObjDat_773E6",
+      "new": "SOZMini_WeakspotPairChildren",
+      "profiles": ["sk"],
+      "meaning": "Two normal collision children with distinct subtype modes."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
+      "original_line": 39,
+      "old": "ChildObjDat_773F4",
+      "new": "SOZMini_ExitCameraBoundsChildren",
+      "profiles": ["sk"],
+      "meaning": "Two gradual horizontal bound actors after FAA8 completion."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
+      "original_line": 45,
+      "old": "ChildObjDat_77402",
+      "new": "SOZMini_LandingDustChildren",
+      "profiles": ["sk"],
+      "meaning": "Six repeated dust children at landing offset(-4,56)."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
+      "original_line": 49,
+      "old": "ChildObjDat_7740A",
+      "new": "SOZMini_KnockbackDustChildren",
+      "profiles": ["sk"],
+      "meaning": "Six repeated dust children at knockback-landing offset(0,4)."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
+      "original_line": 59,
+      "old": "byte_77452",
+      "new": "SOZMinibossRoot_FlipTurnPoseTokenStream",
+      "profiles": ["sk"],
+      "meaning": "Frame-delay tokens with bit6 flip control for alignment turn."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
+      "original_line": 66,
+      "old": "byte_7745D",
+      "new": "SOZMini_FirstLaunchPoseAnim",
+      "profiles": ["sk"],
+      "meaning": "Fixed-pointer frame-delay launch pose and velocity triggers."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
+      "original_line": 74,
+      "old": "byte_7746A",
+      "new": "SOZMini_LandingRecoveryPoseAnim",
+      "profiles": ["sk"],
+      "meaning": "Stored-pointer frame-delay recovery tokens and cursor motion."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
+      "original_line": 85,
+      "old": "byte_7747D",
+      "new": "SOZMinibossRoot_UniformArmingTokenStream",
+      "profiles": ["sk"],
+      "meaning": "Uniform-delay animation whose callback arms the weakspot."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
+      "original_line": 87,
+      "old": "byte_77482",
+      "new": "SOZMini_SecondLaunchPoseAnim",
+      "profiles": ["sk"],
+      "meaning": "Stored-pointer second-launch pose and velocity stream."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
+      "original_line": 98,
+      "old": "byte_77495",
+      "new": "SOZMini_WeakspotHitAnim",
+      "profiles": ["sk"],
+      "meaning": "Uniform-delay weakspot reaction and root-flag reset callback."
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
+      "original_line": 100,
+      "old": "byte_7749B",
+      "new": "SOZMini_DustDeleteAnim",
+      "profiles": ["sk"],
+      "meaning": "Stationary dust frame-delay stream with scheduled-delete callback."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/boss/mappings/body.s",
+      "original_line": 5,
+      "old": "word_7848C",
+      "new": "SOZEndBossBody_MapFrame00",
+      "profiles": ["sk"],
+      "meaning": "SOZEndBossBody mapping frame at verified BYTE index00 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/end_boss.s",
+      "original_line": 20,
+      "old": "word_7836E",
+      "new": "SOZEndBoss_MapFrame00",
+      "profiles": ["sk"],
+      "meaning": "SOZEndBoss mapping frame at verified BYTE index00 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/end_boss.s",
+      "original_line": 26,
+      "old": "word_7838E",
+      "new": "SOZEndBoss_MapFrame01",
+      "profiles": ["sk"],
+      "meaning": "SOZEndBoss mapping frame at verified BYTE index01 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/end_boss.s",
+      "original_line": 31,
+      "old": "word_783A8",
+      "new": "SOZEndBoss_MapFrame02",
+      "profiles": ["sk"],
+      "meaning": "SOZEndBoss mapping frame at verified BYTE index02 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/end_boss.s",
+      "original_line": 37,
+      "old": "word_783C8",
+      "new": "SOZEndBoss_MapFrame03",
+      "profiles": ["sk"],
+      "meaning": "SOZEndBoss mapping frame at verified BYTE index03 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/end_boss.s",
+      "original_line": 42,
+      "old": "word_783E2",
+      "new": "SOZEndBoss_MapFrame04",
+      "profiles": ["sk"],
+      "meaning": "SOZEndBoss mapping frame at verified BYTE index04 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/end_boss.s",
+      "original_line": 47,
+      "old": "word_783FC",
+      "new": "SOZEndBoss_MapFrame05",
+      "profiles": ["sk"],
+      "meaning": "SOZEndBoss mapping frame at verified BYTE index05 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/end_boss.s",
+      "original_line": 53,
+      "old": "word_7841C",
+      "new": "SOZEndBoss_MapFrame06",
+      "profiles": ["sk"],
+      "meaning": "SOZEndBoss mapping frame at verified BYTE index06 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/end_boss.s",
+      "original_line": 58,
+      "old": "word_78436",
+      "new": "SOZEndBoss_MapFrame07",
+      "profiles": ["sk"],
+      "meaning": "SOZEndBoss mapping frame at verified BYTE index07 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/end_boss.s",
+      "original_line": 60,
+      "old": "word_7843E",
+      "new": "SOZEndBoss_MapFrame08",
+      "profiles": ["sk"],
+      "meaning": "SOZEndBoss mapping frame at verified BYTE index08 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/end_boss.s",
+      "original_line": 62,
+      "old": "word_78446",
+      "new": "SOZEndBoss_MapFrame09",
+      "profiles": ["sk"],
+      "meaning": "SOZEndBoss mapping frame at verified BYTE index09 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/end_boss.s",
+      "original_line": 64,
+      "old": "word_7844E",
+      "new": "SOZEndBoss_MapFrame0A",
+      "profiles": ["sk"],
+      "meaning": "SOZEndBoss mapping frame at verified BYTE index0A hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/end_boss.s",
+      "original_line": 66,
+      "old": "word_78456",
+      "new": "SOZEndBoss_MapFrame0B",
+      "profiles": ["sk"],
+      "meaning": "SOZEndBoss mapping frame at verified BYTE index0B hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/end_boss.s",
+      "original_line": 68,
+      "old": "word_7845E",
+      "new": "SOZEndBoss_MapFrame0C",
+      "profiles": ["sk"],
+      "meaning": "SOZEndBoss mapping frame at verified BYTE index0C hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/end_boss.s",
+      "original_line": 70,
+      "old": "word_78466",
+      "new": "SOZEndBoss_MapFrame0D",
+      "profiles": ["sk"],
+      "meaning": "SOZEndBoss mapping frame at verified BYTE index0D hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/end_boss.s",
+      "original_line": 72,
+      "old": "word_7846E",
+      "new": "SOZEndBoss_MapFrame0E",
+      "profiles": ["sk"],
+      "meaning": "SOZEndBoss mapping frame at verified BYTE index0E hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/end_boss.s",
+      "original_line": 75,
+      "old": "word_7847C",
+      "new": "SOZEndBoss_MapFrame0F",
+      "profiles": ["sk"],
+      "meaning": "SOZEndBoss mapping frame at verified BYTE index0F hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 31,
+      "old": "word_774DC",
+      "new": "SOZMiniboss_MapFrame00",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index00 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 36,
+      "old": "word_774F6",
+      "new": "SOZMiniboss_MapFrame01",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index01 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 41,
+      "old": "word_77510",
+      "new": "SOZMiniboss_MapFrame02",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index02 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 46,
+      "old": "word_7752A",
+      "new": "SOZMiniboss_MapFrame03",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index03 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 48,
+      "old": "word_77532",
+      "new": "SOZMiniboss_MapFrame04",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index04 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 50,
+      "old": "word_7753A",
+      "new": "SOZMiniboss_MapFrame05",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index05 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 52,
+      "old": "word_77542",
+      "new": "SOZMiniboss_MapFrame06",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index06 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 54,
+      "old": "word_7754A",
+      "new": "SOZMiniboss_MapFrame07",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index07 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 57,
+      "old": "word_77558",
+      "new": "SOZMiniboss_MapFrame08",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index08 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 60,
+      "old": "word_77566",
+      "new": "SOZMiniboss_MapFrame09",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index09 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 62,
+      "old": "word_7756E",
+      "new": "SOZMiniboss_MapFrame0A",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index0A hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 65,
+      "old": "word_7757C",
+      "new": "SOZMiniboss_MapFrame0B",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index0B hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 68,
+      "old": "word_7758A",
+      "new": "SOZMiniboss_MapFrame0C",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index0C hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 70,
+      "old": "word_77592",
+      "new": "SOZMiniboss_MapFrame0D",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index0D hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 72,
+      "old": "word_7759A",
+      "new": "SOZMiniboss_MapFrame0E",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index0E hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 74,
+      "old": "word_775A2",
+      "new": "SOZMiniboss_MapFrame0F",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index0F hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 76,
+      "old": "word_775AA",
+      "new": "SOZMiniboss_MapFrame10",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index10 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 79,
+      "old": "word_775B8",
+      "new": "SOZMiniboss_MapFrame11",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index11 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 82,
+      "old": "word_775C6",
+      "new": "SOZMiniboss_MapFrame12",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index12 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 84,
+      "old": "word_775CE",
+      "new": "SOZMiniboss_MapFrame13",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index13 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 86,
+      "old": "word_775D6",
+      "new": "SOZMiniboss_MapFrame14",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index14 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 88,
+      "old": "word_775DE",
+      "new": "SOZMiniboss_MapFrame15",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index15 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 90,
+      "old": "word_775E6",
+      "new": "SOZMiniboss_MapFrame16",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index16 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 92,
+      "old": "word_775EE",
+      "new": "SOZMiniboss_MapFrame17",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index17 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 94,
+      "old": "word_775F6",
+      "new": "SOZMiniboss_MapFrame18",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index18 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 98,
+      "old": "word_7760A",
+      "new": "SOZMiniboss_MapFrame19",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index19 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "original_line": 103,
+      "old": "word_77624",
+      "new": "SOZMiniboss_MapFrame1A",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SOZMiniboss mapping frame at verified BYTE index1A hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/miniboss/mappings/landing_dust.s",
+      "original_line": 8,
+      "old": "word_7762E",
+      "new": "SOZMinibossDust_MapFrame00",
+      "profiles": ["sk"],
+      "meaning": "SOZMinibossDust mapping frame at verified BYTE index00 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/miniboss/mappings/landing_dust.s",
+      "original_line": 10,
+      "old": "word_77636",
+      "new": "SOZMinibossDust_MapFrame01",
+      "profiles": ["sk"],
+      "meaning": "SOZMinibossDust mapping frame at verified BYTE index01 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/miniboss/mappings/landing_dust.s",
+      "original_line": 12,
+      "old": "word_7763E",
+      "new": "SOZMinibossDust_MapFrame02",
+      "profiles": ["sk"],
+      "meaning": "SOZMinibossDust mapping frame at verified BYTE index02 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/soz/miniboss/mappings/landing_dust.s",
+      "original_line": 14,
+      "old": "word_77646",
+      "new": "SOZMinibossDust_MapFrame03",
+      "profiles": ["sk"],
+      "meaning": "SOZMinibossDust mapping frame at verified BYTE index03 hex."
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/objects/bosses/lrz/miniboss/sk/battle_and_attacks.s",
+      "tokens": [
+        [2, 1, 138, ""],
+        [6, 1, 139, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "tokens": [
+        [10, 1, 0, ""],
+        [11, 1, 2, ""],
+        [12, 1, 4, ""],
+        [13, 1, 9, ""],
+        [14, 1, 11, ""],
+        [15, 1, 13, ""],
+        [16, 1, 15, ""],
+        [17, 0, 0, ""],
+        [33, 0, 1, ""],
+        [35, 3, 1, ""],
+        [36, 1, 131, ""],
+        [38, 1, 132, ""],
+        [40, 1, 133, ""],
+        [42, 0, 2, ""],
+        [46, 1, 3, ""],
+        [51, 0, 3, ""],
+        [53, 0, 4, ""],
+        [55, 1, 47, ""],
+        [60, 0, 5, ""],
+        [61, 1, 7, ""],
+        [63, 1, 6, ""],
+        [64, 1, 8, ""],
+        [65, 0, 6, ""],
+        [74, 0, 7, ""],
+        [76, 0, 8, ""],
+        [78, 0, 9, ""],
+        [82, 1, 10, ""],
+        [85, 0, 10, ""],
+        [87, 0, 11, ""],
+        [95, 1, 12, ""],
+        [101, 0, 12, ""],
+        [103, 0, 13, ""],
+        [106, 1, 14, ""],
+        [112, 0, 14, ""],
+        [114, 0, 15, ""],
+        [116, 1, 16, ""],
+        [117, 1, 112, ""],
+        [118, 0, 16, ""],
+        [123, 0, 17, ""],
+        [124, 2, 18, ""],
+        [129, 0, 18, ""],
+        [132, 1, 19, ""],
+        [133, 2, 20, ""],
+        [136, 0, 19, ""],
+        [138, 0, 20, ""],
+        [142, 1, 22, ""],
+        [143, 2, 23, ""],
+        [146, 1, 21, ""],
+        [150, 0, 21, ""],
+        [154, 0, 22, ""],
+        [156, 0, 23, ""],
+        [163, 1, 24, ""],
+        [165, 0, 24, ""],
+        [171, 1, 25, ""],
+        [173, 0, 25, ""],
+        [174, 2, 26, ""],
+        [179, 0, 26, ""],
+        [182, 1, 47, ""],
+        [183, 2, 30, ""],
+        [192, 1, 27, ""],
+        [193, 2, 41, ""],
+        [194, 0, 27, ""],
+        [196, 1, 28, ""],
+        [198, 0, 28, ""],
+        [203, 1, 29, ""],
+        [205, 0, 29, ""],
+        [207, 0, 30, ""],
+        [209, 1, 31, ""],
+        [211, 0, 31, ""],
+        [214, 1, 32, ""],
+        [216, 0, 32, ""],
+        [222, 1, 33, ""],
+        [223, 2, 34, ""],
+        [227, 0, 33, ""],
+        [228, 2, 39, ""],
+        [230, 0, 34, ""],
+        [237, 1, 35, ""],
+        [238, 2, 36, ""],
+        [245, 0, 35, ""],
+        [248, 0, 36, ""],
+        [250, 1, 37, ""],
+        [252, 0, 37, ""],
+        [258, 1, 38, ""],
+        [260, 0, 38, ""],
+        [264, 0, 39, ""],
+        [271, 1, 40, ""],
+        [273, 0, 40, ""],
+        [277, 0, 41, ""],
+        [279, 1, 47, ""],
+        [280, 2, 42, ""],
+        [286, 0, 42, ""],
+        [294, 0, 43, ""],
+        [296, 0, 44, ""],
+        [301, 1, 45, ""],
+        [302, 1, 45, ""],
+        [303, 0, 45, ""],
+        [304, 1, 46, ""],
+        [304, 3, 45, ""],
+        [305, 1, 51, ""],
+        [305, 3, 45, ""],
+        [306, 1, 57, ""],
+        [306, 3, 45, ""],
+        [307, 1, 48, ""],
+        [307, 3, 45, ""],
+        [308, 1, 52, ""],
+        [308, 3, 45, ""],
+        [309, 1, 58, ""],
+        [309, 3, 45, ""],
+        [310, 0, 46, ""],
+        [311, 1, 121, ""],
+        [313, 2, 49, ""],
+        [315, 0, 47, ""],
+        [317, 0, 48, ""],
+        [318, 1, 122, ""],
+        [320, 2, 50, ""],
+        [324, 0, 49, ""],
+        [338, 1, 60, ""],
+        [340, 0, 50, ""],
+        [344, 1, 47, ""],
+        [347, 0, 51, ""],
+        [348, 1, 123, ""],
+        [350, 2, 53, ""],
+        [352, 0, 52, ""],
+        [353, 1, 124, ""],
+        [355, 2, 55, ""],
+        [359, 0, 53, ""],
+        [364, 1, 54, ""],
+        [366, 0, 54, ""],
+        [377, 1, 60, ""],
+        [379, 0, 55, ""],
+        [383, 1, 56, ""],
+        [385, 0, 56, ""],
+        [391, 0, 57, ""],
+        [392, 1, 125, ""],
+        [394, 2, 59, ""],
+        [396, 0, 58, ""],
+        [397, 1, 126, ""],
+        [399, 2, 61, ""],
+        [402, 0, 59, ""],
+        [418, 1, 60, ""],
+        [420, 0, 60, ""],
+        [424, 0, 61, ""],
+        [435, 0, 62, ""],
+        [438, 2, 63, ""],
+        [439, 0, 63, ""],
+        [452, 0, 64, ""],
+        [455, 1, 65, ""],
+        [457, 0, 65, ""],
+        [460, 0, 66, ""],
+        [462, 1, 67, ""],
+        [463, 2, 63, ""],
+        [464, 0, 67, ""],
+        [465, 1, 64, ""],
+        [466, 0, 68, ""],
+        [469, 2, 69, ""],
+        [470, 0, 69, ""],
+        [472, 1, 70, ""],
+        [485, 1, 64, ""],
+        [486, 0, 70, ""],
+        [487, 2, 71, ""],
+        [489, 0, 71, ""],
+        [491, 1, 64, ""],
+        [492, 2, 69, ""],
+        [494, 1, 69, ""],
+        [495, 0, 72, ""],
+        [498, 2, 73, ""],
+        [499, 0, 73, ""],
+        [512, 1, 74, ""],
+        [514, 0, 74, ""],
+        [517, 0, 75, ""],
+        [518, 1, 119, ""],
+        [520, 2, 76, ""],
+        [522, 0, 76, ""],
+        [526, 0, 77, ""],
+        [527, 1, 127, ""],
+        [529, 2, 78, ""],
+        [530, 1, 135, ""],
+        [533, 0, 78, ""],
+        [536, 1, 81, ""],
+        [537, 0, 79, ""],
+        [541, 1, 80, ""],
+        [543, 1, 80, ""],
+        [545, 1, 47, ""],
+        [547, 0, 80, ""],
+        [550, 0, 81, ""],
+        [551, 2, 82, ""],
+        [555, 1, 136, ""],
+        [557, 0, 82, ""],
+        [559, 1, 80, ""],
+        [560, 1, 79, ""],
+        [561, 0, 83, ""],
+        [562, 1, 128, ""],
+        [564, 2, 84, ""],
+        [566, 0, 84, ""],
+        [568, 1, 85, ""],
+        [571, 1, 80, ""],
+        [573, 1, 80, ""],
+        [575, 0, 85, ""],
+        [576, 2, 86, ""],
+        [578, 0, 86, ""],
+        [579, 1, 137, ""],
+        [586, 1, 89, ""],
+        [589, 1, 87, ""],
+        [591, 0, 87, ""],
+        [598, 1, 88, ""],
+        [601, 0, 88, ""],
+        [603, 0, 89, ""],
+        [616, 1, 80, ""],
+        [618, 1, 80, ""],
+        [620, 0, 90, ""],
+        [621, 1, 129, ""],
+        [623, 2, 94, ""],
+        [628, 1, 91, ""],
+        [630, 0, 91, ""],
+        [632, 1, 92, ""],
+        [635, 1, 93, ""],
+        [636, 0, 92, ""],
+        [641, 0, 93, ""],
+        [643, 0, 94, ""],
+        [645, 1, 95, ""],
+        [652, 0, 95, ""],
+        [653, 2, 96, ""],
+        [654, 0, 96, ""],
+        [658, 0, 97, ""],
+        [659, 1, 130, ""],
+        [661, 2, 98, ""],
+        [664, 0, 98, ""],
+        [668, 0, 99, ""],
+        [669, 1, 120, ""],
+        [671, 2, 100, ""],
+        [674, 0, 100, ""],
+        [677, 1, 101, ""],
+        [679, 1, 101, ""],
+        [681, 0, 101, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/motion_helpers.s",
+      "tokens": [
+        [3, 1, 103, ""],
+        [5, 1, 102, ""],
+        [7, 1, 103, ""],
+        [8, 1, 104, ""],
+        [9, 1, 6, ""],
+        [10, 0, 102, ""],
+        [12, 1, 5, ""],
+        [13, 0, 103, ""],
+        [15, 0, 104, ""],
+        [19, 1, 47, ""],
+        [23, 1, 134, ""],
+        [44, 1, 106, ""],
+        [47, 1, 107, ""],
+        [49, 1, 105, ""],
+        [51, 1, 105, ""],
+        [53, 1, 106, ""],
+        [54, 0, 105, ""],
+        [56, 2, 66, ""],
+        [64, 0, 106, ""],
+        [66, 0, 107, ""],
+        [79, 1, 108, ""],
+        [81, 1, 109, ""],
+        [82, 0, 108, ""],
+        [85, 1, 109, ""],
+        [88, 0, 109, ""],
+        [93, 1, 110, ""],
+        [102, 1, 110, ""],
+        [104, 1, 110, ""],
+        [107, 1, 110, ""],
+        [110, 0, 110, ""],
+        [115, 1, 111, ""],
+        [118, 1, 111, ""],
+        [123, 0, 111, ""],
+        [145, 0, 112, ""],
+        [147, 1, 115, ""],
+        [149, 1, 116, ""],
+        [151, 1, 113, ""],
+        [156, 0, 113, ""],
+        [159, 1, 114, ""],
+        [161, 0, 114, ""],
+        [164, 1, 115, ""],
+        [167, 0, 115, ""],
+        [169, 0, 116, ""],
+        [171, 2, 17, ""],
+        [179, 1, 117, ""],
+        [180, 1, 118, ""],
+        [182, 0, 117, ""],
+        [185, 0, 118, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
+      "tokens": [
+        [6, 0, 119, ""],
+        [11, 0, 120, ""],
+        [16, 0, 121, ""],
+        [19, 0, 122, ""],
+        [22, 0, 123, ""],
+        [25, 0, 124, ""],
+        [28, 0, 125, ""],
+        [31, 0, 126, ""],
+        [34, 0, 127, ""],
+        [39, 0, 128, ""],
+        [43, 0, 129, ""],
+        [47, 0, 130, ""],
+        [52, 0, 131, ""],
+        [54, 1, 62, ""],
+        [56, 1, 68, ""],
+        [58, 1, 72, ""],
+        [60, 1, 99, ""],
+        [62, 1, 75, ""],
+        [66, 0, 132, ""],
+        [68, 1, 44, ""],
+        [69, 0, 133, ""],
+        [71, 1, 43, ""],
+        [72, 0, 134, ""],
+        [74, 1, 77, ""],
+        [76, 0, 135, ""],
+        [78, 1, 83, ""],
+        [79, 0, 136, ""],
+        [81, 1, 97, ""],
+        [83, 1, 90, ""],
+        [85, 0, 137, ""],
+        [98, 0, 138, ""],
+        [100, 0, 139, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "tokens": [
+        [8, 0, 140, ""],
+        [10, 3, 140, ""],
+        [14, 0, 141, ""],
+        [16, 3, 141, ""],
+        [17, 2, 142, ""],
+        [29, 0, 142, ""],
+        [30, 2, 143, ""],
+        [32, 0, 143, ""],
+        [35, 1, 144, ""],
+        [36, 1, 144, ""],
+        [40, 0, 144, ""],
+        [41, 1, 145, ""],
+        [41, 3, 144, ""],
+        [42, 1, 147, ""],
+        [42, 3, 144, ""],
+        [43, 1, 149, ""],
+        [43, 3, 144, ""],
+        [44, 1, 152, ""],
+        [44, 3, 144, ""],
+        [45, 1, 154, ""],
+        [45, 3, 144, ""],
+        [46, 1, 159, ""],
+        [46, 3, 144, ""],
+        [47, 1, 163, ""],
+        [47, 3, 144, ""],
+        [48, 1, 169, ""],
+        [48, 3, 144, ""],
+        [49, 1, 172, ""],
+        [49, 3, 144, ""],
+        [50, 1, 175, ""],
+        [50, 3, 144, ""],
+        [51, 1, 179, ""],
+        [51, 3, 144, ""],
+        [52, 1, 182, ""],
+        [52, 3, 144, ""],
+        [53, 1, 187, ""],
+        [53, 3, 144, ""],
+        [54, 0, 145, ""],
+        [59, 2, 148, ""],
+        [64, 2, 148, ""],
+        [66, 1, 146, ""],
+        [72, 0, 146, ""],
+        [74, 0, 147, ""],
+        [76, 0, 148, ""],
+        [79, 1, 247, ""],
+        [81, 0, 149, ""],
+        [84, 1, 150, ""],
+        [86, 0, 150, ""],
+        [90, 1, 151, ""],
+        [92, 0, 151, ""],
+        [94, 2, 153, ""],
+        [95, 1, 246, ""],
+        [97, 0, 152, ""],
+        [99, 0, 153, ""],
+        [103, 2, 155, ""],
+        [104, 1, 245, ""],
+        [106, 0, 154, ""],
+        [109, 0, 155, ""],
+        [112, 2, 156, ""],
+        [114, 0, 156, ""],
+        [117, 2, 157, ""],
+        [119, 0, 157, ""],
+        [121, 2, 162, ""],
+        [123, 0, 158, ""],
+        [125, 0, 159, ""],
+        [127, 1, 252, ""],
+        [130, 1, 161, ""],
+        [131, 1, 161, ""],
+        [134, 1, 160, ""],
+        [136, 0, 160, ""],
+        [138, 0, 161, ""],
+        [140, 0, 162, ""],
+        [142, 2, 165, ""],
+        [144, 0, 163, ""],
+        [146, 1, 164, ""],
+        [148, 1, 164, ""],
+        [150, 0, 164, ""],
+        [154, 1, 158, ""],
+        [156, 0, 165, ""],
+        [159, 2, 171, ""],
+        [160, 0, 166, ""],
+        [161, 2, 253, ""],
+        [165, 1, 249, ""],
+        [167, 0, 167, ""],
+        [169, 2, 174, ""],
+        [170, 1, 166, ""],
+        [171, 0, 168, ""],
+        [179, 1, 250, ""],
+        [181, 0, 169, ""],
+        [184, 1, 170, ""],
+        [185, 1, 170, ""],
+        [188, 1, 237, ""],
+        [190, 0, 170, ""],
+        [192, 0, 171, ""],
+        [194, 2, 254, ""],
+        [195, 2, 173, ""],
+        [197, 0, 172, ""],
+        [199, 0, 173, ""],
+        [201, 0, 174, ""],
+        [206, 0, 175, ""],
+        [208, 1, 178, ""],
+        [211, 1, 176, ""],
+        [213, 0, 176, ""],
+        [215, 1, 177, ""],
+        [217, 0, 177, ""],
+        [219, 2, 251, ""],
+        [220, 2, 181, ""],
+        [222, 0, 178, ""],
+        [224, 2, 255, ""],
+        [225, 2, 185, ""],
+        [229, 0, 179, ""],
+        [233, 1, 180, ""],
+        [234, 1, 180, ""],
+        [239, 1, 180, ""],
+        [241, 0, 180, ""],
+        [243, 0, 181, ""],
+        [246, 0, 182, ""],
+        [250, 1, 184, ""],
+        [251, 1, 184, ""],
+        [254, 1, 183, ""],
+        [256, 0, 183, ""],
+        [258, 1, 237, ""],
+        [260, 0, 184, ""],
+        [262, 0, 185, ""],
+        [264, 2, 167, ""],
+        [267, 1, 186, ""],
+        [269, 0, 186, ""],
+        [272, 0, 187, ""],
+        [274, 0, 188, ""],
+        [276, 1, 189, ""],
+        [279, 0, 189, ""],
+        [287, 1, 190, ""],
+        [288, 2, 191, ""],
+        [289, 0, 190, ""],
+        [291, 0, 191, ""],
+        [293, 1, 158, ""],
+        [294, 2, 192, ""],
+        [295, 0, 192, ""],
+        [297, 1, 158, ""],
+        [298, 2, 194, ""],
+        [299, 1, 248, ""],
+        [303, 1, 193, ""],
+        [305, 0, 193, ""],
+        [307, 1, 194, ""],
+        [309, 0, 194, ""],
+        [315, 1, 196, ""],
+        [317, 1, 198, ""],
+        [320, 1, 195, ""],
+        [322, 0, 195, ""],
+        [326, 0, 196, ""],
+        [328, 1, 198, ""],
+        [331, 1, 197, ""],
+        [333, 0, 197, ""],
+        [337, 0, 198, ""],
+        [347, 0, 199, ""],
+        [348, 1, 241, ""],
+        [351, 2, 200, ""],
+        [352, 0, 200, ""],
+        [357, 1, 201, ""],
+        [360, 0, 201, ""],
+        [362, 0, 202, ""],
+        [366, 1, 203, ""],
+        [367, 1, 203, ""],
+        [369, 0, 203, ""],
+        [370, 1, 204, ""],
+        [370, 3, 203, ""],
+        [371, 1, 206, ""],
+        [371, 3, 203, ""],
+        [372, 1, 207, ""],
+        [372, 3, 203, ""],
+        [373, 1, 209, ""],
+        [373, 3, 203, ""],
+        [374, 1, 213, ""],
+        [374, 3, 203, ""],
+        [375, 0, 204, ""],
+        [376, 1, 243, ""],
+        [379, 1, 205, ""],
+        [382, 0, 205, ""],
+        [384, 0, 206, ""],
+        [386, 0, 207, ""],
+        [389, 1, 208, ""],
+        [393, 0, 208, ""],
+        [395, 0, 209, ""],
+        [397, 1, 211, ""],
+        [399, 1, 210, ""],
+        [401, 1, 211, ""],
+        [403, 0, 210, ""],
+        [408, 2, 256, ""],
+        [409, 2, 212, ""],
+        [414, 0, 211, ""],
+        [416, 0, 212, ""],
+        [424, 0, 213, ""],
+        [426, 0, 214, ""],
+        [427, 1, 242, ""],
+        [433, 1, 215, ""],
+        [435, 0, 215, ""],
+        [436, 2, 216, ""],
+        [440, 0, 216, ""],
+        [443, 0, 217, ""],
+        [444, 1, 244, ""],
+        [446, 2, 221, ""],
+        [450, 1, 218, ""],
+        [452, 0, 218, ""],
+        [458, 1, 220, ""],
+        [460, 1, 219, ""],
+        [462, 0, 219, ""],
+        [468, 0, 220, ""],
+        [475, 0, 221, ""],
+        [477, 1, 222, ""],
+        [478, 2, 223, ""],
+        [480, 0, 222, ""],
+        [482, 0, 223, ""],
+        [483, 1, 257, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/motion_helpers.s",
+      "tokens": [
+        [5, 1, 224, ""],
+        [8, 0, 224, ""],
+        [14, 1, 227, ""],
+        [15, 1, 227, ""],
+        [29, 1, 225, ""],
+        [32, 0, 225, ""],
+        [34, 1, 226, ""],
+        [36, 0, 226, ""],
+        [44, 0, 227, ""],
+        [45, 1, 228, ""],
+        [45, 3, 227, ""],
+        [46, 1, 229, ""],
+        [46, 3, 227, ""],
+        [47, 1, 230, ""],
+        [47, 3, 227, ""],
+        [48, 1, 231, ""],
+        [48, 3, 227, ""],
+        [49, 1, 232, ""],
+        [49, 3, 227, ""],
+        [50, 1, 233, ""],
+        [50, 3, 227, ""],
+        [51, 1, 234, ""],
+        [51, 3, 227, ""],
+        [52, 1, 235, ""],
+        [52, 3, 227, ""],
+        [53, 0, 228, ""],
+        [64, 0, 229, ""],
+        [75, 0, 230, ""],
+        [86, 0, 231, ""],
+        [97, 0, 232, ""],
+        [108, 0, 233, ""],
+        [119, 0, 234, ""],
+        [130, 0, 235, ""],
+        [149, 1, 236, ""],
+        [151, 0, 236, ""],
+        [157, 0, 237, ""],
+        [171, 1, 239, ""],
+        [173, 1, 240, ""],
+        [175, 1, 240, ""],
+        [177, 2, 168, ""],
+        [191, 1, 238, ""],
+        [193, 0, 238, ""],
+        [197, 0, 239, ""],
+        [198, 2, 188, ""],
+        [209, 1, 240, ""],
+        [211, 0, 240, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
+      "tokens": [
+        [6, 0, 241, ""],
+        [9, 0, 242, ""],
+        [12, 0, 243, ""],
+        [15, 0, 244, ""],
+        [20, 0, 245, ""],
+        [22, 1, 199, ""],
+        [24, 0, 246, ""],
+        [26, 1, 214, ""],
+        [28, 0, 247, ""],
+        [30, 1, 202, ""],
+        [32, 1, 202, ""],
+        [34, 0, 248, ""],
+        [40, 0, 249, ""],
+        [42, 1, 217, ""],
+        [44, 0, 250, ""],
+        [46, 1, 217, ""],
+        [54, 0, 251, ""],
+        [61, 0, 252, ""],
+        [69, 0, 253, ""],
+        [80, 0, 254, ""],
+        [82, 0, 255, ""],
+        [93, 0, 256, ""],
+        [95, 0, 257, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/soz/boss/mappings/body.s",
+      "tokens": [
+        [2, 1, 258, ""],
+        [3, 0, 258, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/end_boss.s",
+      "tokens": [
+        [2, 1, 259, ""],
+        [3, 1, 260, ""],
+        [4, 1, 261, ""],
+        [5, 1, 262, ""],
+        [6, 1, 263, ""],
+        [7, 1, 264, ""],
+        [8, 1, 265, ""],
+        [9, 1, 266, ""],
+        [10, 1, 267, ""],
+        [11, 1, 268, ""],
+        [12, 1, 269, ""],
+        [13, 1, 270, ""],
+        [14, 1, 271, ""],
+        [15, 1, 272, ""],
+        [16, 1, 273, ""],
+        [17, 1, 274, ""],
+        [18, 0, 259, ""],
+        [24, 0, 260, ""],
+        [29, 0, 261, ""],
+        [35, 0, 262, ""],
+        [40, 0, 263, ""],
+        [45, 0, 264, ""],
+        [51, 0, 265, ""],
+        [56, 0, 266, ""],
+        [58, 0, 267, ""],
+        [60, 0, 268, ""],
+        [62, 0, 269, ""],
+        [64, 0, 270, ""],
+        [66, 0, 271, ""],
+        [68, 0, 272, ""],
+        [70, 0, 273, ""],
+        [73, 0, 274, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/soz/mappings/miniboss.s",
+      "tokens": [
+        [2, 1, 275, ""],
+        [3, 1, 276, ""],
+        [4, 1, 277, ""],
+        [5, 1, 278, ""],
+        [6, 1, 279, ""],
+        [7, 1, 280, ""],
+        [8, 1, 281, ""],
+        [9, 1, 282, ""],
+        [10, 1, 283, ""],
+        [11, 1, 284, ""],
+        [12, 1, 285, ""],
+        [13, 1, 286, ""],
+        [14, 1, 287, ""],
+        [15, 1, 288, ""],
+        [16, 1, 289, ""],
+        [17, 1, 290, ""],
+        [18, 1, 291, ""],
+        [19, 1, 292, ""],
+        [20, 1, 293, ""],
+        [21, 1, 294, ""],
+        [22, 1, 295, ""],
+        [23, 1, 296, ""],
+        [24, 1, 297, ""],
+        [25, 1, 298, ""],
+        [26, 1, 299, ""],
+        [27, 1, 300, ""],
+        [28, 1, 301, ""],
+        [29, 0, 275, ""],
+        [34, 0, 276, ""],
+        [39, 0, 277, ""],
+        [44, 0, 278, ""],
+        [46, 0, 279, ""],
+        [48, 0, 280, ""],
+        [50, 0, 281, ""],
+        [52, 0, 282, ""],
+        [55, 0, 283, ""],
+        [58, 0, 284, ""],
+        [60, 0, 285, ""],
+        [63, 0, 286, ""],
+        [66, 0, 287, ""],
+        [68, 0, 288, ""],
+        [70, 0, 289, ""],
+        [72, 0, 290, ""],
+        [74, 0, 291, ""],
+        [77, 0, 292, ""],
+        [80, 0, 293, ""],
+        [82, 0, 294, ""],
+        [84, 0, 295, ""],
+        [86, 0, 296, ""],
+        [88, 0, 297, ""],
+        [90, 0, 298, ""],
+        [92, 0, 299, ""],
+        [96, 0, 300, ""],
+        [101, 0, 301, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/soz/miniboss/mappings/landing_dust.s",
+      "tokens": [
+        [2, 1, 302, ""],
+        [3, 1, 303, ""],
+        [4, 1, 304, ""],
+        [5, 1, 305, ""],
+        [6, 0, 302, ""],
+        [8, 0, 303, ""],
+        [10, 0, 304, ""],
+        [12, 0, 305, ""]
+      ]
+    }
+  ]
+}

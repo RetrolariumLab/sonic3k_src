@@ -4,11 +4,11 @@
 ; ---------------------------------------------------------------------------
 
 Obj_LRZMiniboss:
-                lea     word_784E0(pc),a1
+                lea     LRZMiniboss_CameraTriggerBounds(pc),a1
                 jsr     (Check_CameraInRange).l
                 move.l  #loc_78522,(a0)
                 move.l  #loc_78528,$34(a0)
-                lea     word_784E8(pc),a1
+                lea     LRZMiniboss_CameraTargetBounds(pc),a1
                 move.b  #mus_Miniboss,boss_saved_mus(a0)
                 jsr     (Boss_BeginCameraTransition).l
                 lea     Pal_LRZMiniboss1(pc),a1

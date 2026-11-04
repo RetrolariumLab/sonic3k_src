@@ -13,16 +13,16 @@ Obj_SOZEndBoss:
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 SOZEndBoss_Index:
-                dc.w    loc_7767C-SOZEndBoss_Index
-                dc.w    loc_776EA-SOZEndBoss_Index
-                dc.w    loc_77710-SOZEndBoss_Index
-                dc.w    loc_77772-SOZEndBoss_Index
-                dc.w    loc_77790-SOZEndBoss_Index
-                dc.w    loc_777CC-SOZEndBoss_Index
-                dc.w    loc_777F0-SOZEndBoss_Index
+                dc.w    SOZBoss_InitShipAndBody-SOZEndBoss_Index
+                dc.w    SOZBoss_WaitForPlayerXProximity-SOZEndBoss_Index
+                dc.w    SOZBoss_TickIntroAndStartMusic-SOZEndBoss_Index
+                dc.w    SOZBoss_MoveAndBobBeforePose-SOZEndBoss_Index
+                dc.w    SOZBoss_MoveBobAndAdvancePose-SOZEndBoss_Index
+                dc.w    SOZBoss_TickHoldAndTurnPose-SOZEndBoss_Index
+                dc.w    SOZBoss_HoldExposedUntilRecovery-SOZEndBoss_Index
 ; ---------------------------------------------------------------------------
 
-loc_7767C:
+SOZBoss_InitShipAndBody:
                 lea     ObjDat_SOZEndBoss(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.b  #8,collision_property(a0)
@@ -39,46 +39,47 @@ loc_7767C:
                 lea     (Normal_palette_line_4).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_776C6:
+SOZBoss_CopyPaletteAndSpawnBodyGroups:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_776C6
-                lea     ChildObjDat_782FA(pc),a2
+                dbf     d6,SOZBoss_CopyPaletteAndSpawnBodyGroups
+                lea     SOZEndBoss_SixDistinctRootNormalChildren(pc),a2
                 jsr     (CreateChild1_Normal).l
-                lea     ChildObjDat_78320(pc),a2
+                lea     SOZEndBoss_ThreeFrontLinkedBodyActors(pc),a2
                 jsr     (CreateChild8_TreeListRepeated).l
-                lea     ChildObjDat_78326(pc),a2
+                lea     SOZEndBoss_ThreeRearLinkedBodyActors(pc),a2
                 jmp     (CreateChild8_TreeListRepeated).l
 ; ---------------------------------------------------------------------------
 
-loc_776EA:
+SOZBoss_WaitForPlayerXProximity:
                 lea     (Player_1).w,a1
                 jsr     (Find_OtherObject).l
                 cmpi.w  #$C0,d2
-                bhs.s   locret_7770E
+                bhs.s   SOZBoss_PlayerProximityReturn
                 move.b  #4,routine(a0)
                 move.w  #60-1,$2E(a0)
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
 
-locret_7770E:
+SOZBoss_PlayerProximityReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_77710:
+SOZBoss_TickIntroAndStartMusic:
                 subq.w  #1,$2E(a0)
-                bpl.w   locret_77AF6
+                bpl.w   SOZBoss_SharedActorReturn
                 move.b  #6,routine(a0)
                 moveq   #signextendB(mus_EndBoss),d0
                 jsr     (Play_Music).l
                 move.b  #mus_EndBoss,(Current_music+1).w
 
-loc_7772C:
-                lea     word_7775A(pc),a1
+SOZBoss_ChooseMotionProfile:
+                lea     SOZEndBoss_DefaultSixWordMotionProfile(pc),a1
                 cmpi.b  #2,(Player_1+character_id).w
-                bne.s   loc_7773C
-                lea     word_77766(pc),a1
+                bne.s   SOZBoss_LoadMotionProfile
+                lea     SOZEndBoss_KnucklesSixWordMotionProfile(pc),a1
 
-loc_7773C:
+; The fourth word seeds both the active timer and its saved value
+SOZBoss_LoadMotionProfile:
                 move.w  (a1)+,x_vel(a0)
                 move.w  (a1)+,$3E(a0)
                 move.w  (a1)+,$40(a0)
@@ -88,25 +89,25 @@ loc_7773C:
                 move.w  (a1)+,$46(a0)
                 rts
 ; ---------------------------------------------------------------------------
-word_7775A:
+SOZEndBoss_DefaultSixWordMotionProfile:
                 dc.w    -$40,  $100,  -$80,   $3F,   $7F,   $1F
-word_77766:
+SOZEndBoss_KnucklesSixWordMotionProfile:
                 dc.w    -$80,  $200, -$100,   $1F,   $3F,   $1F
 ; ---------------------------------------------------------------------------
 
-loc_77772:
+SOZBoss_MoveAndBobBeforePose:
                 jsr     (MoveSprite2).l
                 bsr.w   UpdateSOZEndBossSineBobFromAngleStep
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_7778E
+                bpl.s   SOZEndBoss_ReturnAfterInitialTravelTimer
                 move.b  #8,routine(a0)
                 move.w  $30(a0),$2E(a0)
 
-locret_7778E:
+SOZEndBoss_ReturnAfterInitialTravelTimer:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_77790:
+SOZBoss_MoveBobAndAdvancePose:
                 bsr.w   TickSOZEndBossChargeAttackSpawnTimer
                 jsr     (MoveSprite2).l
                 bsr.w   UpdateSOZEndBossSineBobFromAngleStep
@@ -114,119 +115,119 @@ loc_77790:
                 add.w   $40(a0),d0
                 move.w  d0,$3C(a0)
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_777CA
+                bpl.s   SOZBoss_MovingPoseReturn
                 move.b  #$A,routine(a0)
                 move.w  $46(a0),$2E(a0)
                 move.w  #$14,(Screen_shake_flag).w
                 moveq   #signextendB(sfx_ThumpBoss),d0
                 jsr     (Play_SFX).l
 
-locret_777CA:
+SOZBoss_MovingPoseReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_777CC:
+SOZBoss_TickHoldAndTurnPose:
                 bsr.w   TickSOZEndBossChargeAttackSpawnTimer
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_777EE
+                bpl.s   SOZBoss_PoseHoldReturn
                 move.b  #8,routine(a0)
                 bsr.w   SOZBoss_TryReloadMotionAtBounds
                 neg.b   $3E(a0)
                 neg.w   $40(a0)
                 move.w  $32(a0),$2E(a0)
 
-locret_777EE:
+SOZBoss_PoseHoldReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_777F0:
+SOZBoss_HoldExposedUntilRecovery:
                 tst.w   (Events_bg+$0A).w
-                beq.s   loc_777FA
-                bra.w   loc_781E4
+                beq.s   SOZBoss_RestoreRoutineAndNormalColors
+                bra.w   SOZBoss_CheckExposedHitOrDefeat
 ; ---------------------------------------------------------------------------
 
-loc_777FA:
+SOZBoss_RestoreRoutineAndNormalColors:
                 move.b  $42(a0),routine(a0)
                 clr.b   collision_flags(a0)
                 moveq   #0,d0
                 bra.w   SOZBoss_CopyPalette3Of5
 ; ---------------------------------------------------------------------------
 
-loc_7780A:
-                move.l  #loc_77822,(a0)
+SOZBoss_BeginDefeatDropAndRelease:
+                move.l  #SOZBoss_DropWithLightGravity,(a0)
                 bset    #4,$38(a0)
                 bset    #7,art_tile(a0)
                 clr.w   x_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_77822:
+SOZBoss_DropWithLightGravity:
                 jsr     (MoveSprite_LightGravity).l
                 cmpi.w  #$200,y_vel(a0)
-                blt.s   loc_77842
-                move.l  #loc_77848,(a0)
+                blt.s   SOZBoss_DrawDefeatedDrop
+                move.l  #SOZBoss_RiseAndTryCapsule,(a0)
                 bclr    #7,status(a0)
                 bset    #0,render_flags(a0)
 
-loc_77842:
+SOZBoss_DrawDefeatedDrop:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_77848:
+SOZBoss_RiseAndTryCapsule:
                 addi.w  #-$40,y_vel(a0)
                 jsr     (MoveSprite2).l
                 cmpi.w  #-$100,y_vel(a0)
-                bgt.s   loc_77894
-                move.l  #loc_7789A,(a0)
+                bgt.s   SOZBoss_DrawDefeatedRise
+                move.l  #SOZBoss_SwingRiseAndEscape,(a0)
                 jsr     (Swing_Setup1).l
                 jsr     (AllocateObject).l
-                bne.s   loc_77882
+                bne.s   SOZBoss_ClearReleaseAndTryFlame
                 move.l  #Obj_EggCapsule,(a1)
                 move.w  #$5360,x_pos(a1)
                 move.w  #$720,y_pos(a1)
 
-loc_77882:
+SOZBoss_ClearReleaseAndTryFlame:
                 bclr    #4,$38(a0)
                 lea     (Child1_MakeRoboShipFlame).l,a2
                 jsr     (CreateChild1_Normal).l
 
-loc_77894:
+SOZBoss_DrawDefeatedRise:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7789A:
+SOZBoss_SwingRiseAndEscape:
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
                 jsr     (Swing_UpAndDown).l
                 subq.w  #1,y_pos(a0)
                 move.w  x_vel(a0),d0
                 addi.w  #$20,d0
                 cmpi.w  #$400,d0
-                bls.s   loc_778BC
+                bls.s   SOZBoss_MoveAndCheckRightExit
                 move.w  #$400,d0
 
-loc_778BC:
+SOZBoss_MoveAndCheckRightExit:
                 move.w  d0,x_vel(a0)
                 jsr     (MoveSprite2).l
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$1A0,d0
                 cmp.w   x_pos(a0),d0
-                blo.s   loc_778DA
+                blo.s   SOZBoss_HideShipAndWaitCapsule
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_778DA:
-                move.l  #loc_778F2,(a0)
+SOZBoss_HideShipAndWaitCapsule:
+                move.l  #SOZBoss_WaitCapsuleAndRestoreControls,(a0)
                 st      (_unkFAA8).w
                 ori.b   #$30,$38(a0)
                 bclr    #7,render_flags(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_778F2:
+SOZBoss_WaitCapsuleAndRestoreControls:
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
                 tst.b   (_unkFAA8).w
-                bne.w   locret_77AF6
-                move.l  #loc_77966,(a0)
+                bne.w   SOZBoss_SharedActorReturn
+                move.l  #SOZBoss_HoldExitMaxYAndRoutePlayer,(a0)
                 jsr     (Restore_PlayerControl).l
                 jsr     (Restore_LevelMusic).l
                 clr.w   (Ctrl_1_logical).w
@@ -235,65 +236,65 @@ loc_778F2:
                 lea     (Player_2).w,a1
                 jsr     (Restore_PlayerControl2).l
                 jsr     (AllocateObject).l
-                bne.s   loc_77936
-                move.l  #loc_77A6E,(a1)
+                bne.s   SOZEndBoss_AttemptPartnerInputLockHelper
+                move.l  #SOZBoss_WaitFallAndTakeP2Control,(a1)
 
-loc_77936:
+SOZEndBoss_AttemptPartnerInputLockHelper:
                 jsr     (AllocateObject).l
-                bne.s   loc_77944
+                bne.s   SOZBoss_SetExitCameraBounds
                 move.l  #SKInput_LockP2IfActive,(a1)
 
-loc_77944:
+SOZBoss_SetExitCameraBounds:
                 move.w  #-$100,(Camera_min_Y_pos).w
                 move.w  #$800,(Camera_target_max_Y_pos).w
                 move.w  #$5440,(Camera_stored_max_X_pos).w
                 jsr     (AllocateObject).l
-                bne.s   locret_77964
+                bne.s   SOZBoss_ExitCameraSpawnReturn
                 move.l  #Obj_IncLevEndXGradual,(a1)
 
-locret_77964:
+SOZBoss_ExitCameraSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_77966:
+SOZBoss_HoldExitMaxYAndRoutePlayer:
                 cmpi.w  #$700,(Camera_target_max_Y_pos).w
-                blo.s   loc_77974
+                blo.s   SOZBoss_WalkPlayerToHandoff
                 move.w  #$800,(Camera_max_Y_pos).w
 
-loc_77974:
+SOZBoss_WalkPlayerToHandoff:
                 lea     (Player_1).w,a1
                 cmpi.w  #$5468,x_pos(a1)
-                bhs.s   loc_77986
+                bhs.s   SOZBoss_CapturePlayerAndChooseExit
                 jmp     (SKInput_BuildAutoRightAndJump).l
 ; ---------------------------------------------------------------------------
 
-loc_77986:
+SOZBoss_CapturePlayerAndChooseExit:
                 move.w  x_pos(a1),x_pos(a0)
                 move.w  y_pos(a1),y_pos(a0)
                 move.w  x_vel(a1),x_vel(a0)
                 clr.w   y_vel(a0)
                 cmpi.b  #2,character_id(a1)
-                beq.s   loc_779B8
-                move.l  #loc_779C0,(a0)
+                beq.s   SOZBoss_BeginKnucklesHorizontalExit
+                move.l  #SOZBoss_CarryPlayerToFallTrigger,(a0)
                 move.b  #$81,object_control(a1)
                 move.b  #$1A,anim(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_779B8:
-                move.l  #loc_77A3E,(a0)
+SOZBoss_BeginKnucklesHorizontalExit:
+                move.l  #SOZEndBoss_MoveKnucklesRouteUntil5560,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_779C0:
+SOZBoss_CarryPlayerToFallTrigger:
                 jsr     (MoveSprite2).l
                 lea     (Player_1).w,a1
                 move.w  y_pos(a0),y_pos(a1)
                 move.w  x_pos(a0),d0
                 move.w  #$54C0,d1
                 cmp.w   d1,d0
-                blo.s   loc_779FC
-                move.l  #loc_77A02,(a0)
+                blo.s   SOZEndBoss_CopySelectedExitXToPlayerOnly
+                move.l  #SOZBoss_ClampUnsignedFallSpeed,(a0)
                 bset    #0,(_unkFAB8).w
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
@@ -301,60 +302,60 @@ loc_779C0:
                 st      (Fast_V_scroll_flag).w
                 move.w  #$7F,$2E(a0)
 
-loc_779FC:
+SOZEndBoss_CopySelectedExitXToPlayerOnly:
                 move.w  d0,x_pos(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_77A02:
+SOZBoss_ClampUnsignedFallSpeed:
                 cmpi.w  #$1000,y_vel(a0)
-                blo.s   loc_77A10
+                blo.s   SOZBoss_MoveFallAndSyncPlayer
                 move.w  #$1000,y_vel(a0)
 
-loc_77A10:
+SOZBoss_MoveFallAndSyncPlayer:
                 jsr     (MoveSprite).l
                 lea     (Player_1).w,a1
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_77A2E
+                bmi.s   SOZEndBoss_StartNextLevelAfterTimedFall
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_77A2E:
+SOZEndBoss_StartNextLevelAfterTimedFall:
                 move.w  #$900,d0
                 jsr     (StartNewLevel).l
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_77A3E:
+SOZEndBoss_MoveKnucklesRouteUntil5560:
                 jsr     (MoveSprite2).l
                 lea     (Player_1).w,a1
                 move.w  y_pos(a0),y_pos(a1)
                 move.w  x_pos(a0),d0
                 move.w  d0,x_pos(a1)
                 cmpi.w  #$5560,d0
-                bhs.s   loc_77A5E
+                bhs.s   SOZBoss_StartLevelAtKnucklesExitX
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_77A5E:
+SOZBoss_StartLevelAtKnucklesExitX:
                 move.w  #$900,d0
                 jsr     (StartNewLevel).l
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_77A6E:
+SOZBoss_WaitFallAndTakeP2Control:
                 btst    #0,(_unkFAB8).w
-                beq.w   locret_77AF6
-                move.l  #loc_77A98,(a0)
+                beq.w   SOZBoss_SharedActorReturn
+                move.l  #SOZBoss_SyncPartnerAboveP1,(a0)
                 lea     (Player_2).w,a1
                 bclr    #7,art_tile(a1)
                 move.b  #$81,object_control(a1)
                 move.b  #$1A,anim(a1)
                 clr.b   (Ctrl_2_locked).w
 
-loc_77A98:
+SOZBoss_SyncPartnerAboveP1:
                 lea     (Player_1).w,a1
                 lea     (Player_2).w,a2
                 move.w  x_pos(a1),x_pos(a2)
@@ -364,46 +365,46 @@ loc_77A98:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_77AB4:
+SOZEndBoss_SelectRearTreeSubtypeOffset:
                 addq.b  #6,subtype(a0)
 
-loc_77AB8:
+SOZBoss_BindLimbMappingsAndDispatch:
                 move.l  #Map_SOZEndBoss,mappings(a0)
                 move.w  #make_art_tile(ArtTile_SOZEndBoss,3,1),art_tile(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  off_77AD4(pc,d0.w),d0
-                jmp     off_77AD4(pc,d0.w)
+                move.w  SOZEndBoss_SixLimbInitializerOffsets(pc,d0.w),d0
+                jmp     SOZEndBoss_SixLimbInitializerOffsets(pc,d0.w)
 ; ---------------------------------------------------------------------------
-off_77AD4:
-                dc.w    loc_77AE0-off_77AD4
-                dc.w    loc_77B6C-off_77AD4
-                dc.w    loc_77C08-off_77AD4
-                dc.w    loc_77AF8-off_77AD4
-                dc.w    loc_77B7E-off_77AD4
-                dc.w    loc_77C1A-off_77AD4
+SOZEndBoss_SixLimbInitializerOffsets:
+                dc.w    SOZEndBoss_InitializeSolidFrontBase-SOZEndBoss_SixLimbInitializerOffsets
+                dc.w    SOZEndBoss_InitializeSolidMiddleLimb-SOZEndBoss_SixLimbInitializerOffsets
+                dc.w    SOZEndBoss_InitializeSolidFrontArm-SOZEndBoss_SixLimbInitializerOffsets
+                dc.w    SOZEndBoss_InitializeHiddenRearBase-SOZEndBoss_SixLimbInitializerOffsets
+                dc.w    SOZBoss_InitMirroredRearMiddle-SOZEndBoss_SixLimbInitializerOffsets
+                dc.w    SOZEndBoss_InitializeRearArm-SOZEndBoss_SixLimbInitializerOffsets
 ; ---------------------------------------------------------------------------
 
-loc_77AE0:
-                lea     word_782AE(pc),a1
+SOZEndBoss_InitializeSolidFrontBase:
+                lea     SOZEndBoss_FrontBasePartialAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_77B16,(a0)
+                move.l  #SOZBoss_FrontBaseFollowAndSolid,(a0)
                 move.b  #$28,child_dy(a0)
 
-locret_77AF6:
+SOZBoss_SharedActorReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_77AF8:
-                lea     word_782B4(pc),a1
+SOZEndBoss_InitializeHiddenRearBase:
+                lea     SOZEndBoss_RearBasePartialAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_77B50,(a0)
+                move.l  #SOZBoss_RearBaseFollowUntilRelease,(a0)
                 move.b  #$28,child_dy(a0)
                 bclr    #7,art_tile(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_77B16:
+SOZBoss_FrontBaseFollowAndSolid:
                 movea.w parent3(a0),a1
                 move.b  $3C(a1),d0
                 asr.b   #2,d0
@@ -417,44 +418,44 @@ loc_77B16:
                 jsr     (SolidObjectFull).l
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.w   loc_77C7A
+                bne.w   SOZBoss_LimbReleaseRidersAndBreak
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_77B50:
+SOZBoss_RearBaseFollowUntilRelease:
                 jsr     (Refresh_ChildPosition).l
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                beq.w   locret_77AF6
+                beq.w   SOZBoss_SharedActorReturn
                 moveq   #0,d0
                 jmp     (SKChild_StartFlickerAndDraw).l
 ; ---------------------------------------------------------------------------
 
-loc_77B6C:
-                lea     word_782BA(pc),a1
+SOZEndBoss_InitializeSolidMiddleLimb:
+                lea     SOZEndBoss_FrontMiddlePartialAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_77B9A,(a0)
+                move.l  #SOZEndBoss_ReadRootPoseAndSaveOldMiddleX,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_77B7E:
-                lea     word_782C0(pc),a1
+SOZBoss_InitMirroredRearMiddle:
+                lea     SOZEndBoss_RearMiddlePartialAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_77BE0,(a0)
+                move.l  #SOZBoss_RearMiddleReadMirroredPose,(a0)
                 bclr    #7,art_tile(a0)
                 st      $3A(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_77B9A:
+SOZEndBoss_ReadRootPoseAndSaveOldMiddleX:
                 move.w  x_pos(a0),-(sp)
                 movea.w $44(a0),a1
                 move.b  $3C(a1),d0
                 tst.b   $3A(a0)
-                beq.s   loc_77BAE
+                beq.s   SOZBoss_FrontMiddlePlaceAndSolid
                 neg.b   d0
 
-loc_77BAE:
+SOZBoss_FrontMiddlePlaceAndSolid:
                 move.b  d0,$3C(a0)
                 lea     (AngleLookup_3).l,a2
                 jsr     (MoveSprite_AtAngleLookup).l
@@ -465,18 +466,18 @@ loc_77BAE:
                 jsr     (SolidObjectFull).l
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.w   loc_77C7A
+                bne.w   SOZBoss_LimbReleaseRidersAndBreak
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_77BE0:
+SOZBoss_RearMiddleReadMirroredPose:
                 movea.w $44(a0),a1
                 move.b  $3C(a1),d0
                 tst.b   $3A(a0)
-                beq.s   loc_77BF0
+                beq.s   SOZBoss_RearMiddlePlaceAndDraw
                 neg.b   d0
 
-loc_77BF0:
+SOZBoss_RearMiddlePlaceAndDraw:
                 move.b  d0,$3C(a0)
                 lea     (AngleLookup_3).l,a2
                 jsr     (MoveSprite_AtAngleLookup).l
@@ -484,22 +485,22 @@ loc_77BF0:
                 jmp     (Child_Draw_Sprite_FlickerMove).l
 ; ---------------------------------------------------------------------------
 
-loc_77C08:
-                lea     word_782C6(pc),a1
+SOZEndBoss_InitializeSolidFrontArm:
+                lea     SOZEndBoss_FrontArmPartialAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_77C32,(a0)
+                move.l  #SOZBoss_FrontArmPlaceSolidAndTouch,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_77C1A:
-                lea     word_782CC(pc),a1
+SOZEndBoss_InitializeRearArm:
+                lea     SOZEndBoss_RearArmPartialAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_77C88,(a0)
+                move.l  #SOZBoss_RearArmPlaceAndDraw,(a0)
                 bclr    #7,art_tile(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_77C32:
+SOZBoss_FrontArmPlaceSolidAndTouch:
                 move.w  x_pos(a0),-(sp)
                 movea.w $44(a0),a1
                 move.b  $3C(a1),$3C(a0)
@@ -515,17 +516,17 @@ loc_77C32:
                 bsr.w   SOZBossArm_CheckContactsWhileAlive
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_77C7A
+                bne.s   SOZBoss_LimbReleaseRidersAndBreak
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_77C7A:
+SOZBoss_LimbReleaseRidersAndBreak:
                 jsr     (Displace_PlayerOffObject).l
                 moveq   #0,d0
                 jmp     (SKChild_StartFlickerAndDraw).l
 ; ---------------------------------------------------------------------------
 
-loc_77C88:
+SOZBoss_RearArmPlaceAndDraw:
                 movea.w $44(a0),a1
                 move.b  $3C(a1),d0
                 neg.b   d0
@@ -538,12 +539,12 @@ loc_77C88:
                 jmp     (Child_Draw_Sprite_FlickerMove).l
 ; ---------------------------------------------------------------------------
 
-loc_77CB4:
+SOZBoss_InitUpperSolidBody:
                 move.b  #$20,width_pixels(a0)
                 move.b  #$50,height_pixels(a0)
-                move.l  #loc_77CC6,(a0)
+                move.l  #SOZBoss_UpperBodySolidAndTouch,(a0)
 
-loc_77CC6:
+SOZBoss_UpperBodySolidAndTouch:
                 move.w  x_pos(a0),-(sp)
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),x_pos(a0)
@@ -557,35 +558,35 @@ loc_77CC6:
                 jsr     (SolidObjectFull2).l
                 bsr.w   SOZBossUpper_CheckBothContacts
 
-loc_77CF2:
+SOZBoss_UpperBodyCheckParentDeath:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_77D00
+                bne.s   SOZBoss_BodyReleaseRidersAndDelete
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_77D00:
+SOZBoss_BodyReleaseRidersAndDelete:
                 jsr     (Displace_PlayerOffObject).l
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_77D0C:
+SOZBoss_UpperBodySuspendDuringEye:
                 tst.w   (Events_bg+$0A).w
-                bne.s   loc_77D18
-                move.l  #loc_77CC6,(a0)
+                bne.s   SOZBoss_UpperBodyCheckLifeAfterEye
+                move.l  #SOZBoss_UpperBodySolidAndTouch,(a0)
 
-loc_77D18:
-                bra.s   loc_77CF2
+SOZBoss_UpperBodyCheckLifeAfterEye:
+                bra.s   SOZBoss_UpperBodyCheckParentDeath
 ; ---------------------------------------------------------------------------
 
-loc_77D1A:
+SOZBoss_InitLowerSolidBody:
                 move.b  #$30,width_pixels(a0)
                 move.b  #$30,height_pixels(a0)
-                move.l  #loc_77D2C,(a0)
+                move.l  #SOZBoss_LowerBodySolidAndTouch,(a0)
 
-loc_77D2C:
+SOZBoss_LowerBodySolidAndTouch:
                 tst.w   (Events_bg+$0A).w
-                bne.s   loc_77D60
+                bne.s   SOZBoss_LowerBodySuspendAndRelease
                 move.w  x_pos(a0),-(sp)
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),x_pos(a0)
@@ -598,27 +599,27 @@ loc_77D2C:
                 move.w  (sp)+,d4
                 jsr     (SolidObjectFull2).l
                 bsr.w   SOZBossLower_CheckBothContacts
-                bra.s   loc_77CF2
+                bra.s   SOZBoss_UpperBodyCheckParentDeath
 ; ---------------------------------------------------------------------------
 
-loc_77D60:
-                move.l  #loc_77D6C,(a0)
+SOZBoss_LowerBodySuspendAndRelease:
+                move.l  #SOZBoss_LowerBodyResumeAfterEye,(a0)
                 jsr     (Displace_PlayerOffObject).l
 
-loc_77D6C:
+SOZBoss_LowerBodyResumeAfterEye:
                 tst.w   (Events_bg+$0A).w
-                bne.w   loc_77CF2
-                move.l  #loc_77D2C,(a0)
+                bne.w   SOZBoss_UpperBodyCheckParentDeath
+                move.l  #SOZBoss_LowerBodySolidAndTouch,(a0)
                 jsr     (Displace_PlayerOffObject).l
-                bra.s   loc_77D2C
+                bra.s   SOZBoss_LowerBodySolidAndTouch
 ; ---------------------------------------------------------------------------
 
-loc_77D82:
+SOZBoss_InitRightBarrier:
                 move.b  #$20,width_pixels(a0)
                 move.b  #$FF,height_pixels(a0)
-                move.l  #loc_77D94,(a0)
+                move.l  #SOZBoss_RightBarrierFollowAndSolid,(a0)
 
-loc_77D94:
+SOZBoss_RightBarrierFollowAndSolid:
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),d0
                 addi.w  #$20,d0
@@ -631,122 +632,124 @@ loc_77D94:
                 jsr     (SolidObjectFull2).l
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.s   loc_77DCC
+                bne.s   SOZBoss_RightBarrierReleaseAndDelete
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_77DCC:
+SOZBoss_RightBarrierReleaseAndDelete:
                 jsr     (Displace_PlayerOffObject).l
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_77DD8:
-                lea     ObjDat3_78296(pc),a1
+SOZBoss_InitVisibleFollower:
+                lea     SOZBoss_VisibleFollowerAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_77DEA,(a0)
+                move.l  #SOZBoss_VisiblePieceFollowAndDraw,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_77DEA:
+SOZBoss_VisiblePieceFollowAndDraw:
                 jsr     (Refresh_ChildPosition).l
                 moveq   #0,d0
                 jmp     (Child_Draw_Sprite2_FlickerMove).l
 ; ---------------------------------------------------------------------------
 
-loc_77DF8:
-                lea     ObjDat3_782D2(pc),a1
+; Save the last returned particle pointer without checking allocation success
+SOZBoss_InitChargeGenerator:
+                lea     SOZEndBoss_ChargeGeneratorFullAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_77E16,(a0)
-                lea     ChildObjDat_78334(pc),a2
+                move.l  #SOZBoss_WaitForLastChargeParticle,(a0)
+                lea     SOZEndBoss_TwentyRepeatedChargeParticles(pc),a2
                 jsr     (CreateChild6_Simple).l
                 move.w  a1,$44(a0)
 
-loc_77E16:
+SOZBoss_WaitForLastChargeParticle:
                 movea.w $44(a0),a1
                 btst    #4,$38(a1)
-                bne.s   loc_77E56
+                bne.s   SOZBoss_SpawnMaskAndShot
 
-loc_77E22:
+SOZBoss_ChargeGeneratorFollowDraw:
                 jsr     (Refresh_ChildPosition).l
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_77E4A
+                bne.s   SOZBoss_DeleteChargeFamily
                 tst.w   (Events_bg+$0A).w
-                bne.s   loc_77E4A
+                bne.s   SOZBoss_DeleteChargeFamily
                 btst    #0,(V_int_run_count+3).w
-                bne.w   locret_77AF6
+                bne.w   SOZBoss_SharedActorReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_77E4A:
+SOZBoss_DeleteChargeFamily:
                 bset    #7,status(a0)
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_77E56:
-                move.l  #loc_77E74,(a0)
+SOZBoss_SpawnMaskAndShot:
+                move.l  #SOZBoss_TickChargeFireWait,(a0)
                 move.w  #8,$2E(a0)
                 moveq   #signextendB(sfx_Laser),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_7833A(pc),a2
+                lea     SOZBoss_MaskAndShotChildren(pc),a2
                 jsr     (CreateChild1_Normal).l
 
-loc_77E74:
+SOZBoss_TickChargeFireWait:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_77E4A
-                bra.s   loc_77E22
+                bmi.s   SOZBoss_DeleteChargeFamily
+                bra.s   SOZBoss_ChargeGeneratorFollowDraw
 ; ---------------------------------------------------------------------------
 
-loc_77E7C:
-                lea     word_782DE(pc),a1
+SOZBoss_InitChargeParticleAndDelay:
+                lea     SOZBoss_ChargeParticleAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
-                move.l  #loc_77E90,(a0)
+                move.l  #SOZBoss_TickChargeParticleDelay,(a0)
                 bsr.w   SOZBossCharge_InitParticle
 
-loc_77E90:
+SOZBoss_TickChargeParticleDelay:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_77EAA
+                bmi.s   SOZBoss_BeginParticleConvergence
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_77E4A
+                bne.s   SOZBoss_DeleteChargeFamily
                 tst.w   (Events_bg+$0A).w
-                bne.s   loc_77E4A
+                bne.s   SOZBoss_DeleteChargeFamily
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_77EAA:
-                move.l  #loc_77EB8,(a0)
+SOZBoss_BeginParticleConvergence:
+                move.l  #SOZBoss_ParticleAnimateAndMoveX,(a0)
                 move.l  #Go_Delete_Sprite_2,$34(a0)
 
-loc_77EB8:
-                lea     byte_78348(pc),a1
+SOZBoss_ParticleAnimateAndMoveX:
+                lea     SOZBoss_ChargeParticleAnim(pc),a1
                 jsr     (Animate_RawNoSST).l
                 move.w  x_vel(a0),d0
                 addi.w  #$10,d0
                 move.w  d0,x_vel(a0)
                 add.w   d0,$3A(a0)
                 btst    #2,$38(a0)
-                bne.s   loc_77F02
+                bne.s   SOZBoss_ParticleProjectAndCheckLife
                 moveq   #$10,d0
                 move.w  $3C(a0),d1
-                bmi.s   loc_77EE4
+                bmi.s   SOZBoss_ParticleMoveYAndClamp
                 neg.w   d0
 
-loc_77EE4:
+; Clamp the offset to zero when its sign changes
+SOZBoss_ParticleMoveYAndClamp:
                 move.w  y_vel(a0),d2
                 add.w   d0,d2
                 move.w  d2,y_vel(a0)
                 move.w  d1,d3
                 add.w   d2,d1
                 eor.w   d1,d3
-                bpl.s   loc_77EFE
+                bpl.s   SOZEndBoss_StoreParticleYOffsetCandidate
                 moveq   #0,d1
                 bset    #2,$38(a0)
 
-loc_77EFE:
+SOZEndBoss_StoreParticleYOffsetCandidate:
                 move.w  d1,$3C(a0)
 
-loc_77F02:
+SOZBoss_ParticleProjectAndCheckLife:
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),d0
                 move.w  y_pos(a1),d1
@@ -759,44 +762,45 @@ loc_77F02:
                 add.w   d3,d1
                 move.w  d1,y_pos(a0)
                 btst    #7,status(a1)
-                bne.w   loc_77E4A
+                bne.w   SOZBoss_DeleteChargeFamily
                 tst.w   (Events_bg+$0A).w
-                bne.w   loc_77E4A
+                bne.w   SOZBoss_DeleteChargeFamily
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_77F3E:
-                lea     word_782E6(pc),a1
+SOZBoss_InitShotAndAimAtPlayer:
+                lea     SOZEndBoss_FiredShotPartial2Attributes(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
-                move.l  #loc_77F94,(a0)
+                move.l  #SOZBoss_MoveShotRelativeToParent,(a0)
                 move.w  #7,$2E(a0)
                 lea     (Player_1).w,a1
                 move.w  x_pos(a0),d0
                 sub.w   x_pos(a1),d0
-                bpl.s   loc_77F64
+                bpl.s   SOZBoss_ChooseShotDistanceVariant
                 neg.w   d0
 
-loc_77F64:
+; Use the far shot at $80 pixels or more
+SOZBoss_ChooseShotDistanceVariant:
                 cmpi.w  #$80,d0
-                bhs.s   loc_77F7A
+                bhs.s   SOZBoss_InitFarShot
                 move.w  #-$400,x_vel(a0)
                 move.w  #$400,y_vel(a0)
-                bra.w   locret_77F92
+                bra.w   SOZBoss_ShotInitReturn
 ; ---------------------------------------------------------------------------
 
-loc_77F7A:
+SOZBoss_InitFarShot:
                 move.b  #$F,mapping_frame(a0)
                 move.w  #(8<<8)|((-8)&$FF),child_dx(a0)  ; and child_dy
                 move.w  #-$400,x_vel(a0)
                 move.w  #$300,y_vel(a0)
 
-locret_77F92:
+SOZBoss_ShotInitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_77F94:
+SOZBoss_MoveShotRelativeToParent:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_77FB6
+                bmi.s   SOZBoss_BeginIndependentShotFlight
                 move.b  x_vel(a0),d0
                 add.b   d0,child_dx(a0)
                 move.b  y_vel(a0),d0
@@ -805,43 +809,43 @@ loc_77F94:
                 jmp     (Child_Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_77FB6:
-                move.l  #loc_77FBC,(a0)
+SOZBoss_BeginIndependentShotFlight:
+                move.l  #SOZBoss_ShotMoveAndCull,(a0)
 
-loc_77FBC:
+SOZBoss_ShotMoveAndCull:
                 jsr     (MoveSprite2).l
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_77FCE:
-                lea     ObjDat3_782EE(pc),a1
+SOZBoss_InitShortSpriteMask:
+                lea     SOZEndBoss_SpriteMaskFullAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_77FEC,(a0)
+                move.l  #SOZBoss_SetMaskFollowAndDraw,(a0)
                 move.w  #8,$2E(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
 
-loc_77FEC:
+SOZBoss_SetMaskFollowAndDraw:
                 st      (Spritemask_flag).w
                 jsr     (Refresh_ChildPosition).l
                 jmp     (Wait_Draw).l
 ; ---------------------------------------------------------------------------
 
-loc_77FFC:
-                lea     ObjDat3_782A2(pc),a1
+SOZBoss_InitFixedBodyMask:
+                lea     SOZBoss_FixedBodyAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_78018,(a0)
+                move.l  #SOZBoss_DrawFixedBodyUntilExit,(a0)
                 move.w  #$5260,x_pos(a0)
                 move.w  #$710,y_pos(a0)
 
-loc_78018:
+SOZBoss_DrawFixedBodyUntilExit:
                 movea.w parent3(a0),a1
                 cmpi.w  #$5180,x_pos(a0)
-                blo.s   loc_78032
+                blo.s   SOZBoss_DeleteFixedBody
                 btst    #7,status(a1)
-                bne.s   loc_78032
+                bne.s   SOZBoss_DeleteFixedBody
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_78032:
+SOZBoss_DeleteFixedBody:
                 jmp     (Delete_Current_Sprite).l

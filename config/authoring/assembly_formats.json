@@ -113450,25 +113450,25 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 316
       },
-      "declarations_sha256": "50d3618b139fd752fcb1b04f69401e0471896888d2c18b6d92dc339252f8fef6",
+      "declarations_sha256": "fc20ff52067eb31c2f20b64bc474b9aeb3bebae3023fa1fb18d656feaf35160e",
       "labels": {
         "Map_SOZEndBoss_": 0,
-        "word_7836E": 32,
-        "word_7838E": 64,
-        "word_783A8": 90,
-        "word_783C8": 122,
-        "word_783E2": 148,
-        "word_783FC": 174,
-        "word_7841C": 206,
-        "word_78436": 232,
-        "word_7843E": 240,
-        "word_78446": 248,
-        "word_7844E": 256,
-        "word_78456": 264,
-        "word_7845E": 272,
-        "word_78466": 280,
-        "word_7846E": 288,
-        "word_7847C": 302
+        "SOZEndBoss_MapFrame00": 32,
+        "SOZEndBoss_MapFrame01": 64,
+        "SOZEndBoss_MapFrame02": 90,
+        "SOZEndBoss_MapFrame03": 122,
+        "SOZEndBoss_MapFrame04": 148,
+        "SOZEndBoss_MapFrame05": 174,
+        "SOZEndBoss_MapFrame06": 206,
+        "SOZEndBoss_MapFrame07": 232,
+        "SOZEndBoss_MapFrame08": 240,
+        "SOZEndBoss_MapFrame09": 248,
+        "SOZEndBoss_MapFrame0A": 256,
+        "SOZEndBoss_MapFrame0B": 264,
+        "SOZEndBoss_MapFrame0C": 272,
+        "SOZEndBoss_MapFrame0D": 280,
+        "SOZEndBoss_MapFrame0E": 288,
+        "SOZEndBoss_MapFrame0F": 302
       },
       "external_symbols": [],
       "blocks": [
@@ -113476,112 +113476,112 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7836E",
+          "target": "SOZEndBoss_MapFrame00",
           "base": "Map_SOZEndBoss_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7838E",
+          "target": "SOZEndBoss_MapFrame01",
           "base": "Map_SOZEndBoss_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_783A8",
+          "target": "SOZEndBoss_MapFrame02",
           "base": "Map_SOZEndBoss_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_783C8",
+          "target": "SOZEndBoss_MapFrame03",
           "base": "Map_SOZEndBoss_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_783E2",
+          "target": "SOZEndBoss_MapFrame04",
           "base": "Map_SOZEndBoss_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_783FC",
+          "target": "SOZEndBoss_MapFrame05",
           "base": "Map_SOZEndBoss_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7841C",
+          "target": "SOZEndBoss_MapFrame06",
           "base": "Map_SOZEndBoss_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_78436",
+          "target": "SOZEndBoss_MapFrame07",
           "base": "Map_SOZEndBoss_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7843E",
+          "target": "SOZEndBoss_MapFrame08",
           "base": "Map_SOZEndBoss_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_78446",
+          "target": "SOZEndBoss_MapFrame09",
           "base": "Map_SOZEndBoss_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7844E",
+          "target": "SOZEndBoss_MapFrame0A",
           "base": "Map_SOZEndBoss_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_78456",
+          "target": "SOZEndBoss_MapFrame0B",
           "base": "Map_SOZEndBoss_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7845E",
+          "target": "SOZEndBoss_MapFrame0C",
           "base": "Map_SOZEndBoss_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_78466",
+          "target": "SOZEndBoss_MapFrame0D",
           "base": "Map_SOZEndBoss_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7846E",
+          "target": "SOZEndBoss_MapFrame0E",
           "base": "Map_SOZEndBoss_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7847C",
+          "target": "SOZEndBoss_MapFrame0F",
           "base": "Map_SOZEndBoss_"
         },
         {
@@ -113675,10 +113675,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 22
       },
-      "declarations_sha256": "f77c419fb8d86a61c8d77e40fbe1a7006c44d36b99b099b46aea480e23882e2a",
+      "declarations_sha256": "63fb64567a03e2a652a51796b52408718be7367d6bb1548dfba780f54809d52c",
       "labels": {
         "Map_SOZEndBossBody_": 0,
-        "word_7848C": 2
+        "SOZEndBossBody_MapFrame00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -113686,7 +113686,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7848C",
+          "target": "SOZEndBossBody_MapFrame00",
           "base": "Map_SOZEndBossBody_"
         },
         {
@@ -113882,36 +113882,36 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 384
       },
-      "declarations_sha256": "03ddde3ff7e7cfc09a5325d727766ac7cdd68f4ff1a502782b5d992533c539f4",
+      "declarations_sha256": "b1d3a0e0b632b819b431243077e0d0d7b44c9c4d194807495b8033e6425dda05",
       "labels": {
         "Map_SOZMiniboss_": 0,
-        "word_774DC": 54,
-        "word_774F6": 80,
-        "word_77510": 106,
-        "word_7752A": 132,
-        "word_77532": 140,
-        "word_7753A": 148,
-        "word_77542": 156,
-        "word_7754A": 164,
-        "word_77558": 178,
-        "word_77566": 192,
-        "word_7756E": 200,
-        "word_7757C": 214,
-        "word_7758A": 228,
-        "word_77592": 236,
-        "word_7759A": 244,
-        "word_775A2": 252,
-        "word_775AA": 260,
-        "word_775B8": 274,
-        "word_775C6": 288,
-        "word_775CE": 296,
-        "word_775D6": 304,
-        "word_775DE": 312,
-        "word_775E6": 320,
-        "word_775EE": 328,
-        "word_775F6": 336,
-        "word_7760A": 356,
-        "word_77624": 382
+        "SOZMiniboss_MapFrame00": 54,
+        "SOZMiniboss_MapFrame01": 80,
+        "SOZMiniboss_MapFrame02": 106,
+        "SOZMiniboss_MapFrame03": 132,
+        "SOZMiniboss_MapFrame04": 140,
+        "SOZMiniboss_MapFrame05": 148,
+        "SOZMiniboss_MapFrame06": 156,
+        "SOZMiniboss_MapFrame07": 164,
+        "SOZMiniboss_MapFrame08": 178,
+        "SOZMiniboss_MapFrame09": 192,
+        "SOZMiniboss_MapFrame0A": 200,
+        "SOZMiniboss_MapFrame0B": 214,
+        "SOZMiniboss_MapFrame0C": 228,
+        "SOZMiniboss_MapFrame0D": 236,
+        "SOZMiniboss_MapFrame0E": 244,
+        "SOZMiniboss_MapFrame0F": 252,
+        "SOZMiniboss_MapFrame10": 260,
+        "SOZMiniboss_MapFrame11": 274,
+        "SOZMiniboss_MapFrame12": 288,
+        "SOZMiniboss_MapFrame13": 296,
+        "SOZMiniboss_MapFrame14": 304,
+        "SOZMiniboss_MapFrame15": 312,
+        "SOZMiniboss_MapFrame16": 320,
+        "SOZMiniboss_MapFrame17": 328,
+        "SOZMiniboss_MapFrame18": 336,
+        "SOZMiniboss_MapFrame19": 356,
+        "SOZMiniboss_MapFrame1A": 382
       },
       "external_symbols": [],
       "blocks": [
@@ -113919,189 +113919,189 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_774DC",
+          "target": "SOZMiniboss_MapFrame00",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_774F6",
+          "target": "SOZMiniboss_MapFrame01",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_77510",
+          "target": "SOZMiniboss_MapFrame02",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7752A",
+          "target": "SOZMiniboss_MapFrame03",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_77532",
+          "target": "SOZMiniboss_MapFrame04",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7753A",
+          "target": "SOZMiniboss_MapFrame05",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_77542",
+          "target": "SOZMiniboss_MapFrame06",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7754A",
+          "target": "SOZMiniboss_MapFrame07",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_77558",
+          "target": "SOZMiniboss_MapFrame08",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_77566",
+          "target": "SOZMiniboss_MapFrame09",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7756E",
+          "target": "SOZMiniboss_MapFrame0A",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7757C",
+          "target": "SOZMiniboss_MapFrame0B",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7758A",
+          "target": "SOZMiniboss_MapFrame0C",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_77592",
+          "target": "SOZMiniboss_MapFrame0D",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7759A",
+          "target": "SOZMiniboss_MapFrame0E",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_775A2",
+          "target": "SOZMiniboss_MapFrame0F",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_775AA",
+          "target": "SOZMiniboss_MapFrame10",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_775B8",
+          "target": "SOZMiniboss_MapFrame11",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_775C6",
+          "target": "SOZMiniboss_MapFrame12",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_775CE",
+          "target": "SOZMiniboss_MapFrame13",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_775D6",
+          "target": "SOZMiniboss_MapFrame14",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_775DE",
+          "target": "SOZMiniboss_MapFrame15",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_775E6",
+          "target": "SOZMiniboss_MapFrame16",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_775EE",
+          "target": "SOZMiniboss_MapFrame17",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_775F6",
+          "target": "SOZMiniboss_MapFrame18",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7760A",
+          "target": "SOZMiniboss_MapFrame19",
           "base": "Map_SOZMiniboss_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_77624",
+          "target": "SOZMiniboss_MapFrame1A",
           "base": "Map_SOZMiniboss_"
         },
         {
@@ -114250,13 +114250,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 40
       },
-      "declarations_sha256": "058311520b63d9d84451f306171967860a25ad022f769d552eb9af82233edcb2",
+      "declarations_sha256": "a9c8dd417a9ace56fc552c5a4bf908d0811a4dd3040cba45afa86f134383c9a7",
       "labels": {
         "Map_SOZMinibossDust_": 0,
-        "word_7762E": 8,
-        "word_77636": 16,
-        "word_7763E": 24,
-        "word_77646": 32
+        "SOZMinibossDust_MapFrame00": 8,
+        "SOZMinibossDust_MapFrame01": 16,
+        "SOZMinibossDust_MapFrame02": 24,
+        "SOZMinibossDust_MapFrame03": 32
       },
       "external_symbols": [],
       "blocks": [
@@ -114264,28 +114264,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7762E",
+          "target": "SOZMinibossDust_MapFrame00",
           "base": "Map_SOZMinibossDust_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_77636",
+          "target": "SOZMinibossDust_MapFrame01",
           "base": "Map_SOZMinibossDust_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7763E",
+          "target": "SOZMinibossDust_MapFrame02",
           "base": "Map_SOZMinibossDust_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_77646",
+          "target": "SOZMinibossDust_MapFrame03",
           "base": "Map_SOZMinibossDust_"
         },
         {

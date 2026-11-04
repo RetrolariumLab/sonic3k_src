@@ -11,17 +11,17 @@ Obj_SOZMiniboss:
                 lea     (Normal_palette_line_2).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_76A30:
+SOZMini_CopyFadePaletteToLineTwo:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_76A30
+                dbf     d6,SOZMini_CopyFadePaletteToLineTwo
                 lea     (Pal_SOZMinibossMain).l,a1
                 lea     (Target_palette_line_2).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_76A42:
+SOZMini_CopyTargetPaletteAndLoadArt:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_76A42
-                move.l  #loc_76A8A,$34(a0)
+                dbf     d6,SOZMini_CopyTargetPaletteAndLoadArt
+                move.l  #SOZMinibossEntry_InstallRootDispatcher,$34(a0)
                 move.w  #2*60,$2E(a0)
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
@@ -35,193 +35,193 @@ loc_76A42:
                 jmp     (Load_PLC_Raw).l
 ; ---------------------------------------------------------------------------
 
-loc_76A8A:
-                move.l  #loc_76A92,(a0)
+SOZMinibossEntry_InstallRootDispatcher:
+                move.l  #SOZMini_BattleDispatchHitAndDraw,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_76A92:
+SOZMini_BattleDispatchHitAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_76AAE(pc,d0.w),d1
-                jsr     off_76AAE(pc,d1.w)
+                move.w  SOZMinibossRoot_StateOffsets(pc,d0.w),d1
+                jsr     SOZMinibossRoot_StateOffsets(pc,d1.w)
                 bsr.w   SOZMini_HandleKnockbackOrSink
                 bsr.w   SOZMini_SetLayerFromWorldX
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
-off_76AAE:
-                dc.w    loc_76AC8-off_76AAE
-                dc.w    loc_76B2A-off_76AAE
-                dc.w    loc_76B44-off_76AAE
-                dc.w    loc_76B80-off_76AAE
-                dc.w    loc_76BAA-off_76AAE
-                dc.w    loc_76BF4-off_76AAE
-                dc.w    loc_76C36-off_76AAE
-                dc.w    loc_76CCE-off_76AAE
-                dc.w    loc_76D08-off_76AAE
-                dc.w    loc_76D28-off_76AAE
-                dc.w    loc_76D7C-off_76AAE
-                dc.w    loc_76DB0-off_76AAE
-                dc.w    locret_76E08-off_76AAE
+SOZMinibossRoot_StateOffsets:
+                dc.w    SOZMini_InitArenaAndTryFade-SOZMinibossRoot_StateOffsets
+                dc.w    SOZMini_TickInitialSpawnWait-SOZMinibossRoot_StateOffsets
+                dc.w    SOZMini_WaitForPlayerProximity-SOZMinibossRoot_StateOffsets
+                dc.w    SOZMinibossRoot_WaitThroughPreparation-SOZMinibossRoot_StateOffsets
+                dc.w    SOZMini_MoveAndTickVerticalWait-SOZMinibossRoot_StateOffsets
+                dc.w    SOZMini_MoveAndAnimateFirstLaunch-SOZMinibossRoot_StateOffsets
+                dc.w    SOZMini_StopXAtRightBoundary-SOZMinibossRoot_StateOffsets
+                dc.w    SOZMini_AnimateAndApplyRecoveryPose-SOZMinibossRoot_StateOffsets
+                dc.w    SOZMini_AnimateArming-SOZMinibossRoot_StateOffsets
+                dc.w    SOZMini_TickAlignmentOrChooseSide-SOZMinibossRoot_StateOffsets
+                dc.w    SOZMini_TickAlignmentAndAnimateTurn-SOZMinibossRoot_StateOffsets
+                dc.w    SOZMini_MoveAndAnimateSecondLaunch-SOZMinibossRoot_StateOffsets
+                dc.w    SOZMinibossRoot_UnusedRoutineSlotReturn-SOZMinibossRoot_StateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_76AC8:
+SOZMini_InitArenaAndTryFade:
                 lea     ObjDat_SOZMiniboss(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.w  priority(a0),$3C(a0)
                 move.b  #$3B,y_radius(a0)
-                move.l  #loc_76B30,$34(a0)
+                move.l  #SOZMini_SpawnWeakspotPair,$34(a0)
                 moveq   #signextendB(mus_Miniboss),d0
                 jsr     (Play_Music).l
                 move.b  #mus_Miniboss,(Current_music+1).w
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_76B30,$34(a0)
+                move.l  #SOZMini_SpawnWeakspotPair,$34(a0)
                 jsr     (AllocateObject).l
-                bne.s   locret_76B28
+                bne.s   SOZMini_IntroFadeSpawnReturn
                 move.l  #Obj_FadeSelectedFromBlack,(a1)
                 move.w  #3,$3A(a1)
                 move.w  #$F,$3C(a1)
                 move.w  #Normal_palette_line_2,$30(a1)
                 move.w  #Target_palette_line_2,$32(a1)
 
-locret_76B28:
+SOZMini_IntroFadeSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_76B2A:
+SOZMini_TickInitialSpawnWait:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_76B30:
+SOZMini_SpawnWeakspotPair:
                 move.b  #4,routine(a0)
                 st      (Events_bg+$02).w
-                lea     ChildObjDat_773E6(pc),a2
+                lea     SOZMini_WeakspotPairChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_76B44:
+SOZMini_WaitForPlayerProximity:
                 jsr     (Find_SonicTails).l
                 cmpi.w  #$60,d2
-                blo.s   loc_76B52
+                blo.s   SOZMini_BeginPreparationAndFace
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_76B52:
+SOZMini_BeginPreparationAndFace:
                 move.b  #6,routine(a0)
                 bclr    #0,render_flags(a0)
                 tst.w   d0
-                beq.s   loc_76B68
+                beq.s   SOZMini_SetPrepWaitAndTryOverlay
                 bset    #0,render_flags(a0)
 
-loc_76B68:
+SOZMini_SetPrepWaitAndTryOverlay:
                 move.w  #$3E,$2E(a0)
-                move.l  #loc_76B86,$34(a0)
-                lea     ChildObjDat_773DE(pc),a2
+                move.l  #SOZMini_BeginRiseAndSpawnPoseParts,$34(a0)
+                lea     SOZMini_RisingOverlayChild(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_76B80:
+SOZMinibossRoot_WaitThroughPreparation:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_76B86:
+SOZMini_BeginRiseAndSpawnPoseParts:
                 move.b  #8,routine(a0)
                 move.w  #-$100,y_vel(a0)
                 move.w  #7,$2E(a0)
-                move.l  #loc_76BB6,$34(a0)
-                lea     ChildObjDat_773D6(pc),a2
+                move.l  #SOZMini_BeginShortVerticalPause,$34(a0)
+                lea     SOZMini_PosePartChildren(pc),a2
                 jmp     (CreateChild3_NormalRepeated).l
 ; ---------------------------------------------------------------------------
 
-loc_76BAA:
+SOZMini_MoveAndTickVerticalWait:
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_76BB6:
+SOZMini_BeginShortVerticalPause:
                 clr.w   y_vel(a0)
                 move.w  #7,$2E(a0)
-                move.l  #loc_76BCA,$34(a0)
+                move.l  #SOZMini_SettleBeforeLaunch,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_76BCA:
+SOZMini_SettleBeforeLaunch:
                 move.w  #$80,y_vel(a0)
                 move.w  #$F,$2E(a0)
-                move.l  #loc_76BE0,$34(a0)
+                move.l  #SOZMini_BeginFirstLaunchPose,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_76BE0:
+SOZMini_BeginFirstLaunchPose:
                 move.b  #$A,routine(a0)
-                move.l  #loc_76C26,$34(a0)
+                move.l  #SOZMini_BeginFirstLandingFlight,$34(a0)
                 clr.w   y_vel(a0)
 
-locret_76BF2:
+SOZMini_SharedReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_76BF4:
+SOZMini_MoveAndAnimateFirstLaunch:
                 jsr     (MoveSprite2).l
-                lea     byte_7745D(pc),a1
+                lea     SOZMini_FirstLaunchPoseAnim(pc),a1
                 jsr     (Animate_RawNoSSTMultiDelay).l
                 tst.w   d2
-                beq.s   locret_76C24
-                bmi.s   locret_76C24
+                beq.s   SOZMini_FirstLaunchUpdateReturn
+                bmi.s   SOZMini_FirstLaunchUpdateReturn
                 move.b  mapping_frame(a0),$39(a0)
                 cmpi.b  #7,mapping_frame(a0)
-                bne.s   loc_76C1E
+                bne.s   SOZMini_HideLaunchTokenFrame
                 move.w  #-$700,y_vel(a0)
 
-loc_76C1E:
+SOZMini_HideLaunchTokenFrame:
                 move.b  #0,mapping_frame(a0)
 
-locret_76C24:
+SOZMini_FirstLaunchUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_76C26:
+SOZMini_BeginFirstLandingFlight:
                 move.b  #$C,routine(a0)
-                move.l  #loc_76C5E,$34(a0)
+                move.l  #SOZMini_BeginFirstLandingRecovery,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_76C36:
+SOZMini_StopXAtRightBoundary:
                 tst.w   x_vel(a0)
-                bmi.s   loc_76C48
+                bmi.s   SOZMini_ApplyGravityAndProbeFloor
                 cmpi.w  #$4438,x_pos(a0)
-                blo.s   loc_76C48
+                blo.s   SOZMini_ApplyGravityAndProbeFloor
                 clr.w   x_vel(a0)
 
-loc_76C48:
+SOZMini_ApplyGravityAndProbeFloor:
                 moveq   #$60,d1
                 jsr     (MoveSprite_CustomGravity).l
                 tst.w   y_vel(a0)
-                bmi.w   locret_76BF2
+                bmi.w   SOZMini_SharedReturn
                 jmp     (ObjHitFloor_DoRoutine).l
 ; ---------------------------------------------------------------------------
 
-loc_76C5E:
+SOZMini_BeginFirstLandingRecovery:
                 move.b  #$E,routine(a0)
                 move.b  #0,$3A(a0)
-                move.l  #loc_76CF0,$34(a0)
+                move.l  #SOZMini_BeginArmingAnimation,$34(a0)
 
-loc_76C72:
-                move.l  #byte_7746A,$30(a0)
+SOZMini_StartImpactPoseAndDust:
+                move.l  #SOZMini_LandingRecoveryPoseAnim,$30(a0)
                 move.w  #$14,(Screen_shake_flag).w
                 moveq   #signextendB(sfx_BossHitFloor),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_77402(pc),a2
+                lea     SOZMini_LandingDustChildren(pc),a2
                 jmp     (CreateChild3_NormalRepeated).l
 ; ---------------------------------------------------------------------------
 
-loc_76C92:
+SOZMini_BeginRepeatLandingRecovery:
                 move.b  #$E,routine(a0)
-                move.l  #loc_76D14,$34(a0)
-                bra.s   loc_76C72
+                move.l  #SOZMini_BeginSideAlignment,$34(a0)
+                bra.s   SOZMini_StartImpactPoseAndDust
 ; ---------------------------------------------------------------------------
 
-loc_76CA2:
+SOZMini_ResetAfterKnockbackLanding:
                 move.b  #4,routine(a0)
                 move.b  #$3B,y_radius(a0)
                 clr.w   x_vel(a0)
@@ -229,142 +229,142 @@ loc_76CA2:
                 move.w  #8,(Screen_shake_flag).w
                 moveq   #signextendB(sfx_Crash),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_7740A(pc),a2
+                lea     SOZMini_KnockbackDustChildren(pc),a2
                 jmp     (CreateChild3_NormalRepeated).l
 ; ---------------------------------------------------------------------------
 
-loc_76CCE:
+SOZMini_AnimateAndApplyRecoveryPose:
                 jsr     (Animate_RawMultiDelay).l
                 tst.w   d2
-                beq.s   locret_76CEE
-                bmi.s   locret_76CEE
+                beq.s   SOZMini_RecoveryPoseReturn
+                bmi.s   SOZMini_RecoveryPoseReturn
                 move.b  mapping_frame(a0),$39(a0)
                 move.b  $3A(a0),mapping_frame(a0)
-                lea     byte_772E2(pc),a1
+                lea     SOZMini_PoseCursorDisplacements(pc),a1
                 bsr.w   SOZMini_ApplyAnimStepOffset
 
-locret_76CEE:
+SOZMini_RecoveryPoseReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_76CF0:
+SOZMini_BeginArmingAnimation:
                 move.b  #$10,routine(a0)
-                move.l  #byte_7747D,$30(a0)
-                move.l  #loc_76D0E,$34(a0)
+                move.l  #SOZMinibossRoot_UniformArmingTokenStream,$30(a0)
+                move.l  #SOZMini_ArmWeakspot,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_76D08:
+SOZMini_AnimateArming:
                 jmp     (Animate_Raw).l
 ; ---------------------------------------------------------------------------
 
-loc_76D0E:
+SOZMini_ArmWeakspot:
                 bset    #1,$38(a0)
 
-loc_76D14:
+SOZMini_BeginSideAlignment:
                 move.b  #$12,routine(a0)
                 move.b  #1,$3A(a0)
                 move.w  #$60,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_76D28:
+SOZMini_TickAlignmentOrChooseSide:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_76D5C
+                bmi.s   SOZMini_BeginSecondLaunchPose
                 jsr     (Find_SonicTails).l
                 btst    #0,render_flags(a0)
-                beq.s   loc_76D3E
+                beq.s   SOZMini_CheckFacingForAlignment
                 subq.w  #2,d0
 
-loc_76D3E:
+SOZMini_CheckFacingForAlignment:
                 tst.w   d0
-                bne.s   loc_76D44
+                bne.s   SOZMinibossRoot_SelectFlipTurnPoseTokens
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_76D44:
+SOZMinibossRoot_SelectFlipTurnPoseTokens:
                 move.b  #$14,routine(a0)
-                move.l  #byte_77452,$30(a0)
-                move.l  #loc_76DA8,$34(a0)
+                move.l  #SOZMinibossRoot_FlipTurnPoseTokenStream,$30(a0)
+                move.l  #SOZMini_ResumeAlignmentAfterTurn,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_76D5C:
+SOZMini_BeginSecondLaunchPose:
                 move.b  #$16,routine(a0)
-                move.l  #byte_77482,$30(a0)
-                move.l  #loc_76DE6,$34(a0)
+                move.l  #SOZMini_SecondLaunchPoseAnim,$30(a0)
+                move.l  #SOZMini_BeginRepeatLandingFlight,$34(a0)
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_76D7C:
+SOZMini_TickAlignmentAndAnimateTurn:
                 subq.w  #1,$2E(a0)
                 jsr     (Animate_RawMultiDelayFlipX).l
                 tst.w   d2
-                beq.s   locret_76DA6
-                bmi.s   locret_76DA6
+                beq.s   SOZMinibossRoot_ReturnAfterTurnTokenGate
+                bmi.s   SOZMinibossRoot_ReturnAfterTurnTokenGate
                 move.b  mapping_frame(a0),d0
                 move.b  d0,$39(a0)
                 move.b  #1,mapping_frame(a0)
                 cmpi.b  #9,d0
-                bne.s   locret_76DA6
+                bne.s   SOZMinibossRoot_ReturnAfterTurnTokenGate
                 move.b  #$19,mapping_frame(a0)
 
-locret_76DA6:
+SOZMinibossRoot_ReturnAfterTurnTokenGate:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_76DA8:
+SOZMini_ResumeAlignmentAfterTurn:
                 move.b  #$12,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_76DB0:
+SOZMini_MoveAndAnimateSecondLaunch:
                 jsr     (MoveSprite2).l
                 jsr     (Animate_RawMultiDelay).l
                 tst.w   d2
-                beq.s   locret_76DE4
-                bmi.s   locret_76DE4
+                beq.s   SOZMini_SecondLaunchUpdateReturn
+                bmi.s   SOZMini_SecondLaunchUpdateReturn
                 move.b  mapping_frame(a0),$39(a0)
                 cmpi.b  #7,mapping_frame(a0)
-                bne.s   loc_76DD6
+                bne.s   SOZMini_ApplySecondLaunchPoseOffset
                 move.w  #-$700,y_vel(a0)
 
-loc_76DD6:
+SOZMini_ApplySecondLaunchPoseOffset:
                 move.b  $3A(a0),mapping_frame(a0)
-                lea     byte_772E2(pc),a1
+                lea     SOZMini_PoseCursorDisplacements(pc),a1
                 bsr.w   SOZMini_ApplyAnimStepOffset
 
-locret_76DE4:
+SOZMini_SecondLaunchUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_76DE6:
+SOZMini_BeginRepeatLandingFlight:
                 move.b  #$C,routine(a0)
-                move.l  #loc_76C92,$34(a0)
+                move.l  #SOZMini_BeginRepeatLandingRecovery,$34(a0)
                 move.w  #$180,d0
                 btst    #0,render_flags(a0)
-                bne.s   loc_76E02
+                bne.s   SOZMini_StoreFacingFlightSpeed
                 neg.w   d0
 
-loc_76E02:
+SOZMini_StoreFacingFlightSpeed:
                 move.w  d0,x_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_76E08:
+SOZMinibossRoot_UnusedRoutineSlotReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_76E0A:
+SOZMini_SinkAndDraw:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_76E1C
+                bmi.s   SOZMini_MarkDeadAndTryExitController
                 jsr     (MoveSprite2).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_76E1C:
+SOZMini_MarkDeadAndTryExitController:
                 bset    #5,$38(a0)
                 bset    #7,status(a0)
                 move.w  (Camera_X_pos).w,d0
@@ -372,69 +372,69 @@ loc_76E1C:
                 move.w  d0,x_pos(a0)
                 bclr    #7,render_flags(a0)
                 jsr     (AllocateObject).l
-                bne.s   loc_76E48
-                move.l  #loc_76E4E,(a1)
+                bne.s   SOZMini_StartEndSign
+                move.l  #SOZMini_WaitForSignActivation,(a1)
 
-loc_76E48:
+SOZMini_StartEndSign:
                 jmp     (Obj_EndSignControl).l
 ; ---------------------------------------------------------------------------
 
-loc_76E4E:
+SOZMini_WaitForSignActivation:
                 tst.b   (_unkFAA8).w
-                beq.w   locret_76BF2
-                move.l  #loc_76E5C,(a0)
+                beq.w   SOZMini_SharedReturn
+                move.l  #SOZMini_WaitSignThenLockControls,(a0)
 
-loc_76E5C:
+SOZMini_WaitSignThenLockControls:
                 tst.b   (_unkFAA8).w
-                bne.w   locret_76BF2
-                move.l  #loc_76E94,(a0)
-                lea     ChildObjDat_773F4(pc),a2
+                bne.w   SOZMini_SharedReturn
+                move.l  #SOZMini_WalkTowardAlignmentX,(a0)
+                lea     SOZMini_ExitCameraBoundsChildren(pc),a2
                 jsr     (CreateChild1_Normal).l
                 st      (Ctrl_1_locked).w
                 jsr     (AllocateObject).l
-                bne.s   loc_76E86
+                bne.s   SOZMini_SavePlayerAlignmentSide
                 move.l  #SKInput_LockP2IfActive,(a1)
 
-loc_76E86:
+SOZMini_SavePlayerAlignmentSide:
                 cmpi.w  #$43A0,(Player_1+x_pos).w
-                blo.s   loc_76E94
+                blo.s   SOZMini_WalkTowardAlignmentX
                 bset    #3,$38(a0)
 
-loc_76E94:
+SOZMini_WalkTowardAlignmentX:
                 lea     (Ctrl_1_logical).w,a1
                 lea     (Player_1).w,a2
                 move.w  #$43A0,d0
                 tst.w   x_vel(a0)
                 btst    #3,$38(a0)
-                bne.s   loc_76EC8
+                bne.s   SOZMini_CheckLeftWalkAndJump
                 cmp.w   x_pos(a2),d0
-                bls.s   loc_76EE4
+                bls.s   SOZMini_StopPlayerAndSignalScene
                 moveq   #0,d1
                 btst    #Status_Push,status(a2)
-                beq.s   loc_76EC0
+                beq.s   SOZMini_SetRightAndJumpInput
                 ori.w   #(button_A_mask<<8)|button_A_mask,d1
 
-loc_76EC0:
+SOZMini_SetRightAndJumpInput:
                 ori.w   #(button_right_mask<<8)|button_right_mask,d1
                 move.w  d1,(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_76EC8:
+SOZMini_CheckLeftWalkAndJump:
                 cmp.w   x_pos(a2),d0
-                bhs.s   loc_76EE4
+                bhs.s   SOZMini_StopPlayerAndSignalScene
                 moveq   #0,d1
                 btst    #Status_Push,status(a2)
-                beq.s   loc_76EDC
+                beq.s   SOZMini_SetLeftAndJumpInput
                 ori.w   #(button_A_mask<<8)|button_A_mask,d1
 
-loc_76EDC:
+SOZMini_SetLeftAndJumpInput:
                 ori.w   #(button_left_mask<<8)|button_left_mask,d1
                 move.w  d1,(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_76EE4:
+SOZMini_StopPlayerAndSignalScene:
                 move.w  d0,x_pos(a2)
                 clr.w   (a1)
                 bclr    #0,render_flags(a2)
@@ -446,97 +446,98 @@ loc_76EE4:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_76F0E:
-                lea     word_773B8(pc),a1
+SOZMini_InitPosePartPriority:
+                lea     SOZMinibossPosePart_PartialAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.w  priority(a0),$3C(a0)
-                move.l  #loc_76F24,(a0)
+                move.l  #SOZMini_PosePartFollowOrBreak,(a0)
 
-loc_76F24:
+SOZMini_PosePartFollowOrBreak:
                 bsr.w   SOZMini_SetLayerFromWorldX
                 movea.w parent3(a0),a1
                 moveq   #8,d0
                 btst    #6,status(a1)
-                bne.s   loc_76F40
+                bne.s   SOZMini_BeginPosePartBreakaway
                 bsr.w   SOZMiniPart_SyncFromRootPose
                 jmp     (Child_DrawTouch_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_76F40:
+SOZMini_BeginPosePartBreakaway:
                 jmp     (SKChild_StartFlickerAndDraw).l
 ; ---------------------------------------------------------------------------
 
-loc_76F46:
+SOZMini_CollisionPartFollowDispatch:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_76F60(pc,d0.w),d1
-                jsr     off_76F60(pc,d1.w)
+                move.w  SOZMinibossCollisionChild_StateOffsets(pc,d0.w),d1
+                jsr     SOZMinibossCollisionChild_StateOffsets(pc,d1.w)
                 jmp     (Child_DrawTouch_Sprite).l
 ; ---------------------------------------------------------------------------
-off_76F60:
-                dc.w    loc_76F6A-off_76F60
-                dc.w    locret_76F86-off_76F60
-                dc.w    loc_76F88-off_76F60
-                dc.w    loc_76FA6-off_76F60
-                dc.w    loc_7701C-off_76F60
+SOZMinibossCollisionChild_StateOffsets:
+                dc.w    SOZMini_InitCollisionPartBySubtype-SOZMinibossCollisionChild_StateOffsets
+                dc.w    SOZMini_StaticCompanionIdle-SOZMinibossCollisionChild_StateOffsets
+                dc.w    SOZMini_WeakspotWaitUntilArmed-SOZMinibossCollisionChild_StateOffsets
+                dc.w    SOZMini_WeakspotCheckAttackOrHurt-SOZMinibossCollisionChild_StateOffsets
+                dc.w    SOZMini_WeakspotAnimateHit-SOZMinibossCollisionChild_StateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_76F6A:
-                lea     word_773C4(pc),a1
+SOZMini_InitCollisionPartBySubtype:
+                lea     SOZMini_WeakspotPairAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 tst.b   subtype(a0)
-                bne.s   locret_76F84
+                bne.s   SOZMini_CollisionPartInitReturn
                 clr.b   collision_flags(a0)
                 move.b  #4,routine(a0)
 
-locret_76F84:
+SOZMini_CollisionPartInitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_76F86:
+SOZMini_StaticCompanionIdle:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_76F88:
+SOZMini_WeakspotWaitUntilArmed:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                beq.s   locret_76FA4
+                beq.s   SOZMini_WeakspotArmingReturn
                 move.b  #6,routine(a0)
                 move.b  #$D7,collision_flags(a0)
                 clr.b   collision_property(a0)
 
-locret_76FA4:
+SOZMini_WeakspotArmingReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_76FA6:
+SOZMini_WeakspotCheckAttackOrHurt:
                 jsr     (Check_PlayerCollision).l
-                beq.s   locret_76FF8
+                beq.s   SOZMini_WeakspotContactReturn
                 jsr     (Check_PlayerAttack).l
-                bne.s   loc_76FC2
+                bne.s   SOZMini_WeakspotReflectAndSignalHit
                 tst.b   invulnerability_timer(a1)
-                bne.s   locret_76FF8
+                bne.s   SOZMini_WeakspotContactReturn
                 jmp     (HurtCharacter_Directly).l
 ; ---------------------------------------------------------------------------
 
-loc_76FC2:
+; Reflect all three player speeds and store the attacker for root knockback
+SOZMini_WeakspotReflectAndSignalHit:
                 neg.w   x_vel(a1)
                 neg.w   y_vel(a1)
                 neg.w   ground_vel(a1)
                 move.b  #8,routine(a0)
-                move.l  #byte_77495,$30(a0)
-                move.l  #loc_76FFA,$34(a0)
+                move.l  #SOZMini_WeakspotHitAnim,$30(a0)
+                move.l  #SOZMini_WeakspotResetAfterHit,$34(a0)
                 movea.w parent3(a0),a2
                 move.w  a1,$44(a2)
                 bset    #6,status(a2)
                 bset    #7,$38(a2)
 
-locret_76FF8:
+SOZMini_WeakspotContactReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_76FFA:
+SOZMini_WeakspotResetAfterHit:
                 move.b  #$1A,mapping_frame(a0)
                 movea.w parent3(a0),a1
                 bclr    #6,status(a1)
@@ -546,61 +547,61 @@ loc_76FFA:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7701C:
+SOZMini_WeakspotAnimateHit:
                 jmp     (Animate_Raw).l
 ; ---------------------------------------------------------------------------
 
-loc_77022:
-                lea     word_773BE(pc),a1
+SOZMini_InitRisingOverlay:
+                lea     SOZMini_RisingOverlayAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.w  priority(a0),$3C(a0)
                 movea.w parent3(a0),a1
                 bclr    #0,render_flags(a0)
                 btst    #0,render_flags(a1)
-                beq.s   loc_7704A
+                beq.s   SOZMini_RisingOverlayBeginMotion
                 bset    #0,render_flags(a0)
 
-loc_7704A:
-                move.l  #loc_77062,(a0)
+SOZMini_RisingOverlayBeginMotion:
+                move.l  #SOZMini_RisingOverlayMoveAndDraw,(a0)
                 move.w  #-$100,y_vel(a0)
                 move.w  #$3F,$2E(a0)
                 jmp     (Child_DrawTouch_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_77062:
+SOZMini_RisingOverlayMoveAndDraw:
                 bsr.w   SOZMini_SetLayerFromWorldX
                 jmp     (MoveDraw_SpriteTimed).l
 ; ---------------------------------------------------------------------------
 
-loc_7706C:
-                lea     ObjDat3_773CA(pc),a1
+SOZMini_InitDustAndFacingOffset:
+                lea     SOZMinibossLandingDust_FullAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_770C4,(a0)
+                move.l  #SOZMini_DustTickBeforeDraw,(a0)
                 movea.w parent3(a0),a1
                 move.b  child_dx(a0),d0
                 btst    #0,render_flags(a1)
-                beq.s   loc_7708E
+                beq.s   SOZMini_DustLoadOffsetAndDelay
                 neg.b   d0
 
-loc_7708E:
+SOZMini_DustLoadOffsetAndDelay:
                 ext.w   d0
                 move.w  x_pos(a1),d1
                 add.w   d0,d1
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                lea     byte_770B8(pc,d0.w),a2
+                lea     SOZMini_DustOffsetDelayPairs(pc,d0.w),a2
                 move.b  (a2)+,d0
-                bmi.s   loc_770AA
+                bmi.s   SOZMini_DustStoreOffsetAndDelay
                 bset    #0,render_flags(a0)
 
-loc_770AA:
+SOZMini_DustStoreOffsetAndDelay:
                 ext.w   d0
                 add.w   d0,d1
                 move.w  d1,x_pos(a0)
                 move.b  (a2)+,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
-byte_770B8:
+SOZMini_DustOffsetDelayPairs:
                 dc.b    -$18,  $B
                 dc.b    $18,  $B
                 dc.b    -$10,   5
@@ -609,17 +610,17 @@ byte_770B8:
                 dc.b    8, $FF
 ; ---------------------------------------------------------------------------
 
-loc_770C4:
+SOZMini_DustTickBeforeDraw:
                 subq.b  #1,$2E(a0)
-                bpl.s   locret_770D8
-                move.l  #loc_770DA,(a0)
+                bpl.s   SOZMini_DustDelayReturn
+                move.l  #SOZMini_DustAnimateAndDraw,(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
 
-locret_770D8:
+SOZMini_DustDelayReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_770DA:
-                lea     byte_7749B(pc),a1
+SOZMini_DustAnimateAndDraw:
+                lea     SOZMini_DustDeleteAnim(pc),a1
                 jsr     (Animate_RawNoSSTMultiDelay).l
                 jmp     (Draw_Sprite).l

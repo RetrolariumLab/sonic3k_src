@@ -7,36 +7,36 @@
 ; Reload the motion profile only during a negative joint-angle phase and at the edge in the travel direction
 SOZBoss_TryReloadMotionAtBounds:
                 tst.b   $3C(a0)
-                bpl.s   locret_7805E
+                bpl.s   SOZBoss_TurnBoundsReturn
                 tst.w   x_vel(a0)
-                bpl.s   loc_78054
+                bpl.s   SOZBoss_CheckRightLimitAndReset
                 cmpi.w  #$4E80,x_pos(a0)
-                bhs.s   locret_7805E
-                lea     word_78060(pc),a1
-                bra.w   loc_7773C
+                bhs.s   SOZBoss_TurnBoundsReturn
+                lea     SOZEndBoss_CatchUpSixWordMotionProfile(pc),a1
+                bra.w   SOZBoss_LoadMotionProfile
 ; ---------------------------------------------------------------------------
 
-loc_78054:
+SOZBoss_CheckRightLimitAndReset:
                 cmpi.w  #$5210,x_pos(a0)
-                bhs.w   loc_7772C
+                bhs.w   SOZBoss_ChooseMotionProfile
 
-locret_7805E:
+SOZBoss_TurnBoundsReturn:
                 rts
 ; End of function SOZBoss_TryReloadMotionAtBounds
 
 ; ---------------------------------------------------------------------------
-word_78060:
+SOZEndBoss_CatchUpSixWordMotionProfile:
                 dc.w    $400,  $800, -$400,   $1F,    $F,     7
 
 ; =============== S U B R O U T I N E =======================================
 
 TickSOZEndBossChargeAttackSpawnTimer:
                 subq.w  #1,(_unkFA82).w
-                bpl.w   locret_77AF6
+                bpl.w   SOZBoss_SharedActorReturn
                 move.w  #$200,(_unkFA82).w
                 moveq   #signextendB(sfx_Charging),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_7832C(pc),a2
+                lea     SOZBoss_ChargeGeneratorChild(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; End of function TickSOZEndBossChargeAttackSpawnTimer
 
@@ -70,20 +70,20 @@ SOZBossUpper_CheckBothContacts:
 ; Eligible attacks from the left open the eye. Side contact from the right requests guarded damage
 SOZBossUpper_TryOpenEyeOrHurt:
                 btst    d0,d6
-                beq.s   locret_78118
+                beq.s   SOZBoss_UpperContactReturn
                 move.w  x_pos(a0),d0
                 sub.w   x_pos(a1),d0
-                bcs.s   loc_7811A
+                bcs.s   SOZBoss_UpperContactHurtPlayer
                 cmpi.b  #2,anim(a1)
-                beq.s   loc_780E4
+                beq.s   SOZBoss_OpenEyeAndExposeBoss
                 cmpi.b  #2,character_id(a1)
-                bne.s   loc_780E4
+                bne.s   SOZBoss_OpenEyeAndExposeBoss
                 cmpi.b  #1,double_jump_flag(a1)
-                bne.s   locret_78118
+                bne.s   SOZBoss_UpperContactReturn
 
-loc_780E4:
+SOZBoss_OpenEyeAndExposeBoss:
                 move.w  y_pos(a1),(Events_bg+$0A).w
-                move.l  #loc_77D0C,(a0)
+                move.l  #SOZBoss_UpperBodySuspendDuringEye,(a0)
                 move.w  #-$400,x_vel(a1)
                 move.w  #-$300,y_vel(a1)
                 movea.w parent3(a0),a2
@@ -92,11 +92,11 @@ loc_780E4:
                 move.b  #$F,collision_flags(a2)
                 jsr     (Displace_PlayerOffObject).l
 
-locret_78118:
+SOZBoss_UpperContactReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7811A:
+SOZBoss_UpperContactHurtPlayer:
                 jmp     (HurtPlayerFromSolidHazard).l
 ; End of function SOZBossUpper_TryOpenEyeOrHurt
 
@@ -118,18 +118,18 @@ SOZBossLower_CheckBothContacts:
 ; Check both side contact and stale standing attachment. The local damage gate can suppress the hurt request
 SOZBossLower_DetachOrHurt:
                 btst    d0,d6
-                bne.s   loc_78140
+                bne.s   SOZBoss_LowerDetachAndTryHurt
                 bclr    d1,status(a0)
-                beq.s   locret_78158
+                beq.s   SOZBoss_LowerContactReturn
 
-loc_78140:
+SOZBoss_LowerDetachAndTryHurt:
                 bclr    #Status_OnObj,status(a1)
                 tst.b   invulnerability_timer(a1)
-                bne.s   locret_78158
+                bne.s   SOZBoss_LowerContactReturn
                 andi.b  #$9F,status(a0)
                 jsr     (HurtPlayerFromSolidHazard).l
 
-locret_78158:
+SOZBoss_LowerContactReturn:
                 rts
 ; End of function SOZBossLower_DetachOrHurt
 
@@ -138,7 +138,7 @@ locret_78158:
 SOZBossArm_CheckContactsWhileAlive:
                 movea.w $44(a0),a1
                 btst    #7,status(a1)
-                bne.s   locret_78198
+                bne.s   SOZBoss_ArmContactReturn
                 swap    d6
                 moveq   #0,d0
                 lea     (Player_1).w,a1
@@ -151,16 +151,16 @@ SOZBossArm_CheckContactsWhileAlive:
 
 HurtSOZEndBossArmContactPlayerOnLeftSide:
                 btst    d0,d6
-                beq.s   locret_78198
+                beq.s   SOZBoss_ArmContactReturn
                 tst.b   $34(a1)
-                bne.s   locret_78198
+                bne.s   SOZBoss_ArmContactReturn
                 move.w  x_pos(a0),d0
                 sub.w   x_pos(a1),d0
-                bcs.s   locret_78198
+                bcs.s   SOZBoss_ArmContactReturn
                 andi.b  #$9F,status(a0)
                 jsr     (HurtPlayerFromSolidHazard).l
 
-locret_78198:
+SOZBoss_ArmContactReturn:
                 rts
 ; End of function HurtSOZEndBossArmContactPlayerOnLeftSide
 
@@ -170,10 +170,10 @@ locret_78198:
 SOZBossCharge_InitParticle:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                lea     byte_781BC(pc,d0.w),a1
+                lea     SOZBoss_ChargeParticleOffsets(pc,d0.w),a1
                 move.b  (a1)+,$3A(a0)
                 move.b  (a1)+,$3C(a0)
-                move.w  byte_781BC(pc,d0.w),child_dx(a0)  ; and child_dy
+                move.w  SOZBoss_ChargeParticleOffsets(pc,d0.w),child_dx(a0)  ; and child_dy
                 addq.w  #2,d0
                 lsl.w   #2,d0
                 move.w  d0,$2E(a0)
@@ -181,7 +181,7 @@ SOZBossCharge_InitParticle:
 ; End of function SOZBossCharge_InitParticle
 
 ; ---------------------------------------------------------------------------
-byte_781BC:
+SOZBoss_ChargeParticleOffsets:
                 dc.b    -$16,   2
                 dc.b    -$10,  -8
                 dc.b    -$14,   9
@@ -205,38 +205,39 @@ byte_781BC:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_781E4:
+SOZBoss_CheckExposedHitOrDefeat:
                 tst.b   collision_flags(a0)
-                bne.s   locret_7822E
+                bne.s   SOZBoss_HitUpdateReturn
                 tst.b   collision_property(a0)
-                beq.s   loc_78230
+                beq.s   SOZBoss_BeginDefeatAndLockCamera
                 tst.b   $20(a0)
-                bne.s   loc_7820A
+                bne.s   SOZBoss_HitChooseFlashRow
                 bset    #6,status(a0)
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
 
-loc_7820A:
+SOZBoss_HitChooseFlashRow:
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_78218
+                bne.s   SOZBoss_HitCopyColorsAndTick
                 addi.w  #2*5,d0
 
-loc_78218:
+; Copy only the first three colors from the selected five-color row
+SOZBoss_HitCopyColorsAndTick:
                 bsr.w   SOZBoss_CopyPalette3Of5
                 subq.b  #1,$20(a0)
-                bne.s   locret_7822E
+                bne.s   SOZBoss_HitUpdateReturn
                 bclr    #6,status(a0)
                 move.b  $25(a0),collision_flags(a0)
 
-locret_7822E:
+SOZBoss_HitUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_78230:
+SOZBoss_BeginDefeatAndLockCamera:
                 move.l  #Wait_FadeToLevelMusic,(a0)
-                move.l  #loc_7780A,$34(a0)
+                move.l  #SOZBoss_BeginDefeatDropAndRelease,$34(a0)
                 move.w  #$55,(Events_fg_5).w
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l
@@ -247,16 +248,16 @@ loc_78230:
 ; =============== S U B R O U T I N E =======================================
 
 SOZBoss_CopyPalette3Of5:
-                lea     word_7826C(pc),a1
-                lea     word_78276(pc,d0.w),a2
+                lea     SOZBoss_HitPaletteDestinations(pc),a1
+                lea     SOZBoss_HitPaletteColorRows(pc,d0.w),a2
 ; Bug: this should go to CopyWordData_5
                 jmp     (CopyWordData_3).l
 ; End of function SOZBoss_CopyPalette3Of5
 
 ; ---------------------------------------------------------------------------
-word_7826C:
+SOZBoss_HitPaletteDestinations:
                 dc.w    Normal_palette_line_4+$0C, Normal_palette_line_4+$0E, Normal_palette_line_4+$10
                 dc.w    Normal_palette_line_4+$12, Normal_palette_line_4+$14
-word_78276:
+SOZBoss_HitPaletteColorRows:
                 dc.w    $6E,  $24C,   $28,     4,     2
                 dc.w    $AAA,  $CCC,  $CCC,  $EEE,  $EEE

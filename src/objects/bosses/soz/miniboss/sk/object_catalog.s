@@ -8,47 +8,47 @@ ObjDat_SOZMiniboss:
                 dc.w    make_art_tile(ArtTile_SOZMiniboss,1,1)
                 dc.w    $300
                 dc.b    $24, $34,   0,   0
-word_773B8:
+SOZMinibossPosePart_PartialAttributes:
                 dc.w    $280
                 dc.b    $14, $14,   0,   0
-word_773BE:
+SOZMini_RisingOverlayAttributes:
                 dc.w    $280
                 dc.b    $34, $34, $18,   0
-word_773C4:
+SOZMini_WeakspotPairAttributes:
                 dc.w    $280
                 dc.b    $C, $10, $1A, $A8
-ObjDat3_773CA:
+SOZMinibossLandingDust_FullAttributes:
                 dc.l    Map_SOZMinibossDust
                 dc.w    make_art_tile(ArtTile_SOZSand,2,1)
                 dc.w    $180
                 dc.b    8,   8,   0,   0
-ChildObjDat_773D6:
+SOZMini_PosePartChildren:
                 dc.w    8-1
-                dc.l    loc_76F0E
+                dc.l    SOZMini_InitPosePartPriority
                 dc.b    0,   0
-ChildObjDat_773DE:
+SOZMini_RisingOverlayChild:
                 dc.w    1-1
-                dc.l    loc_77022
+                dc.l    SOZMini_InitRisingOverlay
                 dc.b    0, $40
-ChildObjDat_773E6:
+SOZMini_WeakspotPairChildren:
                 dc.w    2-1
-                dc.l    loc_76F46
+                dc.l    SOZMini_CollisionPartFollowDispatch
                 dc.b    -$C,-$1C
-                dc.l    loc_76F46
+                dc.l    SOZMini_CollisionPartFollowDispatch
                 dc.b    0,   0
-ChildObjDat_773F4:
+SOZMini_ExitCameraBoundsChildren:
                 dc.w    2-1
                 dc.l    Obj_DecLevStartXGradual
                 dc.b    0,   0
                 dc.l    Obj_IncLevEndXGradual
                 dc.b    0,   0
-ChildObjDat_77402:
+SOZMini_LandingDustChildren:
                 dc.w    6-1
-                dc.l    loc_7706C
+                dc.l    SOZMini_InitDustAndFacingOffset
                 dc.b    -4, $38
-ChildObjDat_7740A:
+SOZMini_KnockbackDustChildren:
                 dc.w    6-1
-                dc.l    loc_7706C
+                dc.l    SOZMini_InitDustAndFacingOffset
                 dc.b    0,   4
 Pal_SOZMinibossFade:
                 binclude "data/Levels/SOZ/Palettes/Miniboss Fade.bin"
@@ -56,14 +56,14 @@ Pal_SOZMinibossFade:
 Pal_SOZMinibossMain:
                 binclude "data/Levels/SOZ/Palettes/Miniboss Main.bin"
                 even
-byte_77452:
+SOZMinibossRoot_FlipTurnPoseTokenStream:
                 dc.b    0,   9
                 dc.b    0, $1F
                 dc.b    9,   9
                 dc.b    $40|9,   9
                 dc.b    0,   9
                 dc.b    $F4
-byte_7745D:
+SOZMini_FirstLaunchPoseAnim:
                 dc.b    0,   9
                 dc.b    0,   9
                 dc.b    5,   4
@@ -71,7 +71,7 @@ byte_7745D:
                 dc.b    7,   4
                 dc.b    8,   1
                 dc.b    $F4
-byte_7746A:
+SOZMini_LandingRecoveryPoseAnim:
                 dc.b    8,   4
                 dc.b    7,   4
                 dc.b    6,   4
@@ -82,9 +82,9 @@ byte_7746A:
                 dc.b    1,   9
                 dc.b    0, $1F
                 dc.b    $F4
-byte_7747D:
+SOZMinibossRoot_UniformArmingTokenStream:
                 dc.b    $F,   0, $19,   1, $F4
-byte_77482:
+SOZMini_SecondLaunchPoseAnim:
                 dc.b    0,   4
                 dc.b    1,   4
                 dc.b    2,   4
@@ -95,9 +95,9 @@ byte_77482:
                 dc.b    7,   5
                 dc.b    8,   0
                 dc.b    $F4
-byte_77495:
+SOZMini_WeakspotHitAnim:
                 dc.b    3, $12, $12, $13, $14, $F4
-byte_7749B:
+SOZMini_DustDeleteAnim:
                 dc.b    0,   3
                 dc.b    0,   3
                 dc.b    1,   5

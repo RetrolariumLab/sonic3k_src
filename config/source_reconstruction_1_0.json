@@ -1215,9 +1215,15 @@
       "commits": ["6b37744bdd5eb1c8c01da9a71bb4c432041f0a01"]
     },
     {
-      "id": "current-shorten-45-boss-mhz",
+      "id": "change-228cb49639e0",
       "kind": "source_or_tooling",
       "summary": "Apply 209 reviewed short labels for boss mhz.",
+      "commits": ["228cb49639e0f3fe14b4a1a0a37b839ab6c828b8"]
+    },
+    {
+      "id": "current-shorten-46-boss-soz",
+      "kind": "source_or_tooling",
+      "summary": "Apply 207 reviewed short labels for boss soz.",
       "commits": ["release-commit"]
     }
   ],

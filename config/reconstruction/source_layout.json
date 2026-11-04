@@ -19495,7 +19495,7 @@
       "responsibility": "Sandopolis end-boss body, attached actors, attack state, player interaction and defeat progression.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 847,
+      "physical_lines": 851,
       "origin": {
         "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
         "path": "sonic3k.s",
@@ -19530,7 +19530,7 @@
       "responsibility": "Sandopolis end-boss child motion, collision, palette and attack helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 262,
+      "physical_lines": 263,
       "origin": {
         "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
         "path": "sonic3k.s",
@@ -19595,7 +19595,7 @@
       "responsibility": "Sandopolis miniboss battle controller, attack actors, collision and defeat progression.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 625,
+      "physical_lines": 626,
       "origin": {
         "commit": "24deaac72b77ad185430eee2c24d3f0bea32414e",
         "path": "sonic3k.s",

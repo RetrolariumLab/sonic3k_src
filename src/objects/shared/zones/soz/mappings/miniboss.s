@@ -1,103 +1,103 @@
 ; Data owner: objects/shared/zones/soz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_SOZMiniboss_:
-                dc.w    word_774DC-Map_SOZMiniboss_
-                dc.w    word_774F6-Map_SOZMiniboss_
-                dc.w    word_77510-Map_SOZMiniboss_
-                dc.w    word_7752A-Map_SOZMiniboss_
-                dc.w    word_77532-Map_SOZMiniboss_
-                dc.w    word_7753A-Map_SOZMiniboss_
-                dc.w    word_77542-Map_SOZMiniboss_
-                dc.w    word_7754A-Map_SOZMiniboss_
-                dc.w    word_77558-Map_SOZMiniboss_
-                dc.w    word_77566-Map_SOZMiniboss_
-                dc.w    word_7756E-Map_SOZMiniboss_
-                dc.w    word_7757C-Map_SOZMiniboss_
-                dc.w    word_7758A-Map_SOZMiniboss_
-                dc.w    word_77592-Map_SOZMiniboss_
-                dc.w    word_7759A-Map_SOZMiniboss_
-                dc.w    word_775A2-Map_SOZMiniboss_
-                dc.w    word_775AA-Map_SOZMiniboss_
-                dc.w    word_775B8-Map_SOZMiniboss_
-                dc.w    word_775C6-Map_SOZMiniboss_
-                dc.w    word_775CE-Map_SOZMiniboss_
-                dc.w    word_775D6-Map_SOZMiniboss_
-                dc.w    word_775DE-Map_SOZMiniboss_
-                dc.w    word_775E6-Map_SOZMiniboss_
-                dc.w    word_775EE-Map_SOZMiniboss_
-                dc.w    word_775F6-Map_SOZMiniboss_
-                dc.w    word_7760A-Map_SOZMiniboss_
-                dc.w    word_77624-Map_SOZMiniboss_
-word_774DC:     dc.w    4
+                dc.w    SOZMiniboss_MapFrame00-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame01-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame02-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame03-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame04-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame05-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame06-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame07-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame08-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame09-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame0A-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame0B-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame0C-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame0D-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame0E-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame0F-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame10-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame11-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame12-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame13-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame14-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame15-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame16-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame17-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame18-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame19-Map_SOZMiniboss_
+                dc.w    SOZMiniboss_MapFrame1A-Map_SOZMiniboss_
+SOZMiniboss_MapFrame00: dc.w    4
                 dc.b    $F4,  $E,   0,   0, $FF, $E8
                 dc.b    $F4,   6,   0,  $C,   0,   8
                 dc.b    $DC,  $A,   0, $4D, $FF, $E8
                 dc.b    $DC,  $A,   8, $4D,   0,   0
-word_774F6:     dc.w    4
+SOZMiniboss_MapFrame01: dc.w    4
                 dc.b    $F4,  $E,   0,   0, $FF, $E8
                 dc.b    $F4,   6,   0,  $C,   0,   8
                 dc.b    $D4,  $B,   0, $2C, $FF, $E8
                 dc.b    $DC,  $A,   8, $4D,   0,   0
-word_77510:     dc.w    4
+SOZMiniboss_MapFrame02: dc.w    4
                 dc.b    $F4,  $E,   0, $12, $FF, $E8
                 dc.b    $F4,   6,   0, $1E,   0,   8
                 dc.b    $D4,  $B,   0, $38, $FF, $E8
                 dc.b    $DC,  $A,   8, $44,   0,   0
-word_7752A:     dc.w    1
+SOZMiniboss_MapFrame03: dc.w    1
                 dc.b    $F8,  $D,   0, $24, $FF, $F0
-word_77532:     dc.w    1
+SOZMiniboss_MapFrame04: dc.w    1
                 dc.b    $F0,  $B,   0, $2C, $FF, $F4
-word_7753A:     dc.w    1
+SOZMiniboss_MapFrame05: dc.w    1
                 dc.b    $F0,  $B,   0, $38, $FF, $F4
-word_77542:     dc.w    1
+SOZMiniboss_MapFrame06: dc.w    1
                 dc.b    $F0,  $F,   0, $56, $FF, $F0
-word_7754A:     dc.w    2
+SOZMiniboss_MapFrame07: dc.w    2
                 dc.b    $F0,  $B,   0, $66, $FF, $EC
                 dc.b    $F0,   6,   0, $72,   0,   4
-word_77558:     dc.w    2
+SOZMiniboss_MapFrame08: dc.w    2
                 dc.b    $F4,  $E,   0, $78, $FF, $EC
                 dc.b    $F4,   2,   0, $84,   0,  $C
-word_77566:     dc.w    1
+SOZMiniboss_MapFrame09: dc.w    1
                 dc.b    $F0,  $F,   0, $87, $FF, $F0
-word_7756E:     dc.w    2
+SOZMiniboss_MapFrame0A: dc.w    2
                 dc.b    $EC,  $E,   0, $97, $FF, $F0
                 dc.b    4,   9,   0, $A3, $FF, $F8
-word_7757C:     dc.w    2
+SOZMiniboss_MapFrame0B: dc.w    2
                 dc.b    $F8,   1,   0, $A9, $FF, $EC
                 dc.b    $F0,  $F,   0, $AB, $FF, $F4
-word_7758A:     dc.w    1
+SOZMiniboss_MapFrame0C: dc.w    1
                 dc.b    $F4,  $A,   0, $BB, $FF, $F4
-word_77592:     dc.w    1
+SOZMiniboss_MapFrame0D: dc.w    1
                 dc.b    $F4,  $E,   0, $C4, $FF, $F0
-word_7759A:     dc.w    1
+SOZMiniboss_MapFrame0E: dc.w    1
                 dc.b    $F4,  $A,   0, $D0, $FF, $F4
-word_775A2:     dc.w    1
+SOZMiniboss_MapFrame0F: dc.w    1
                 dc.b    $F4,  $A,   0, $D9, $FF, $F4
-word_775AA:     dc.w    2
+SOZMiniboss_MapFrame10: dc.w    2
                 dc.b    $F8,  $D,   0, $E2, $FF, $EC
                 dc.b    $F8,   1,   0, $EA,   0,  $C
-word_775B8:     dc.w    2
+SOZMiniboss_MapFrame11: dc.w    2
                 dc.b    $F8,  $D,   0, $EC, $FF, $EC
                 dc.b    $F8,   1,   0, $F4,   0,  $C
-word_775C6:     dc.w    1
+SOZMiniboss_MapFrame12: dc.w    1
                 dc.b    $F0,  $B,   0, $F6, $FF, $F4
-word_775CE:     dc.w    1
+SOZMiniboss_MapFrame13: dc.w    1
                 dc.b    $F0,  $B,   1,   2, $FF, $F8
-word_775D6:     dc.w    1
+SOZMiniboss_MapFrame14: dc.w    1
                 dc.b    $F0,  $B,   1,  $E, $FF, $FC
-word_775DE:     dc.w    1
+SOZMiniboss_MapFrame15: dc.w    1
                 dc.b    $F0,  $F,   1, $1A, $FF, $F0
-word_775E6:     dc.w    1
+SOZMiniboss_MapFrame16: dc.w    1
                 dc.b    $F0,  $F,   1, $2A, $FF, $F0
-word_775EE:     dc.w    1
+SOZMiniboss_MapFrame17: dc.w    1
                 dc.b    $F8,   5,   1, $3A, $FF, $F8
-word_775F6:     dc.w    3
+SOZMiniboss_MapFrame18: dc.w    3
                 dc.b    $E8,  $F,   1, $1A, $FF, $F0
                 dc.b    4,  $F,   0, $56, $FF, $E4
                 dc.b    $FC,   5,   1, $3A, $FF, $F8
-word_7760A:     dc.w    4
+SOZMiniboss_MapFrame19: dc.w    4
                 dc.b    $F4,  $E,   0,   0, $FF, $E8
                 dc.b    $F4,   6,   0,  $C,   0,   8
                 dc.b    $D4,  $B,   0, $38, $FF, $E8
                 dc.b    $DC,  $A,   8, $4D,   0,   0
-word_77624:     dc.w    0
+SOZMiniboss_MapFrame1A: dc.w    0

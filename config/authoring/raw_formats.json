@@ -393,7 +393,7 @@
     },
     {
       "path": "src/objects/bosses/lrz/miniboss/sk/battle_and_attacks.s",
-      "sha256": "d61292270fce32957274f8bc80fb1302ee585deb7a3c5570b3d044d18a70f18c"
+      "sha256": "30c7f474be1a7f4a4a396857045d003e42b15d42011003697490b0a8fc1b26f5"
     },
     {
       "path": "src/objects/bosses/lrz/miniboss/sk/object_catalog.s",
@@ -485,19 +485,19 @@
     },
     {
       "path": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
-      "sha256": "f441f618952418c8be34d319fcd1626a3a6b09160cfd97a7dd602b282d849154"
+      "sha256": "11962eee765f94f17b5ee752f3eb2517ad266c91c8dcdf6637b78ae5c7ba2042"
     },
     {
       "path": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
-      "sha256": "a3f32736fdda45b94b7a6eb3de5db3f40d5ac2993d8cf223b75869a37c5143a2"
+      "sha256": "a0e209bf5f43dd2778f03b89f5822a4cf768031ec98b4ebddd189dad341bf69e"
     },
     {
       "path": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
-      "sha256": "7674b9f833696f177fb8a8b2bcbb54b21c9cc1df50f3e31e52b55c9ae8f59024"
+      "sha256": "cd825c43e56dea24a33361e111941d11cfb9fa2eda9393ec68417508235a13d8"
     },
     {
       "path": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
-      "sha256": "00be60924c58e12d68334d59c3458f2bbce62ef55773354d2c04431ae3e2a2a5"
+      "sha256": "bea0cfcad871038d2e8f7323cce31f2b9d6c3221e22b426141a159814aada51e"
     },
     {
       "path": "src/objects/bosses/ssz/end_boss/sk/battle.s",
@@ -3153,27 +3153,27 @@
     },
     {
       "path": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
-      "symbol": "byte_78348",
-      "scope": "byte_78348",
+      "symbol": "SOZBoss_ChargeParticleAnim",
+      "scope": "SOZBoss_ChargeParticleAnim",
       "first_line": 88,
       "last_line": 90,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 6,
-      "declarations_sha256": "21bf935d1f620f5f5efc0537c0b9dc6028e6c7ea039a37d0b020435559ddca0b",
+      "declarations_sha256": "5c6736004e5744a75cf1713194779ec1554b1c1474763ebdfe4ca9e6fdd112f2",
       "entries": [[0, "fixed"]],
       "external_symbols": [],
-      "members": ["byte_78348"],
+      "members": ["SOZBoss_ChargeParticleAnim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
-      "symbol": "byte_77452",
-      "scope": "byte_77452",
+      "symbol": "SOZMinibossRoot_FlipTurnPoseTokenStream",
+      "scope": "SOZMinibossRoot_FlipTurnPoseTokenStream",
       "first_line": 59,
       "last_line": 107,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 84,
-      "declarations_sha256": "5d379cf21a54ca93a19aaf050933405376043b203078af52cc47e58899632a43",
+      "declarations_sha256": "899249fa7cc23a47f09a0f6f121df6de602af79a690fed5cdafd572a0ab67eee",
       "entries": [
         [0, "pairs-flip-x"],
         [11, "pairs"],
@@ -3184,7 +3184,15 @@
         [73, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_77452", "byte_7745D", "byte_7746A", "byte_7747D", "byte_77482", "byte_77495", "byte_7749B"],
+      "members": [
+        "SOZMinibossRoot_FlipTurnPoseTokenStream",
+        "SOZMini_FirstLaunchPoseAnim",
+        "SOZMini_LandingRecoveryPoseAnim",
+        "SOZMinibossRoot_UniformArmingTokenStream",
+        "SOZMini_SecondLaunchPoseAnim",
+        "SOZMini_WeakspotHitAnim",
+        "SOZMini_DustDeleteAnim"
+      ],
       "stored_markers": []
     },
     {
