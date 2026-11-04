@@ -27924,7 +27924,7 @@
       "responsibility": "Competition Sonic object dispatch, player initialization and shared two-player movement helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 440,
+      "physical_lines": 446,
       "origin": {
         "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
         "path": "s3.s",
@@ -28244,7 +28244,7 @@
       "responsibility": "Competition Sonic object dispatch, player initialization and shared two-player movement helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 435,
+      "physical_lines": 441,
       "origin": {
         "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
         "path": "sonic3k.s",
@@ -28669,7 +28669,7 @@
       "responsibility": "Competition Tails object dispatch, active control, flying and two-player movement helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 489,
+      "physical_lines": 494,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "s3.s",
@@ -29264,7 +29264,7 @@
       "responsibility": "Competition Tails object dispatch, active control, flying and two-player movement helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 489,
+      "physical_lines": 494,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "sonic3k.s",

@@ -366,7 +366,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 15,
       "old": "loc_116FE",
-      "new": "S3SonicCompetition_GatePrimaryPlayerDebugPlacementBeforeRoutineDispatch",
+      "new": "S3SonicComp_CheckP1DebugPlacement",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_GatePrimaryPlayerDebugPlacementBeforeRoutineDispatch."
     },
@@ -374,7 +374,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 21,
       "old": "loc_1170A",
-      "new": "S3SonicCompetition_SelectSecondaryPlayerBasesAndToggleMatchingCharacterTopViewportMask",
+      "new": "S3SonicComp_SelectP2BasesAndViewport",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_SelectSecondaryPlayerBasesAndToggleMatchingCharacterTopViewportMask."
     },
@@ -382,7 +382,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 30,
       "old": "loc_11726",
-      "new": "S3SonicCompetition_DispatchCompetitionRoutineByteThroughSixRelativeEntries",
+      "new": "S3SonicComp_DispatchRoutine",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_DispatchCompetitionRoutineByteThroughSixRelativeEntries."
     },
@@ -390,7 +390,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 45,
       "old": "loc_11740",
-      "new": "S3SonicCompetition_InitializeCompactCompetitionGeometrySpeedsAndOptionalRespawnSnapshot",
+      "new": "S3SonicComp_InitCompactPlayer",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_InitializeCompactCompetitionGeometrySpeedsAndOptionalRespawnSnapshot."
     },
@@ -398,7 +398,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 76,
       "old": "loc_117CC",
-      "new": "S3SonicCompetition_ApplyPrimaryZoneSpecificHighPriorityBeforeSavingRespawnState",
+      "new": "S3SonicComp_CheckP1ZonePriority",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_ApplyPrimaryZoneSpecificHighPriorityBeforeSavingRespawnState."
     },
@@ -406,7 +406,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 81,
       "old": "loc_117DA",
-      "new": "S3SonicCompetition_SavePrimaryCompetitionRespawnCoordinatesArtAndSolidity",
+      "new": "S3SonicComp_SaveP1RespawnState",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_SavePrimaryCompetitionRespawnCoordinatesArtAndSolidity."
     },
@@ -414,7 +414,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 89,
       "old": "loc_117F4",
-      "new": "S3SonicCompetition_SelectSecondaryCompactMappingsPaletteAndArtTile",
+      "new": "S3SonicComp_SelectP2ArtAndMappings",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_SelectSecondaryCompactMappingsPaletteAndArtTile."
     },
@@ -422,7 +422,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 97,
       "old": "loc_11816",
-      "new": "S3SonicCompetition_ApplySecondaryZoneSpecificHighPriorityBeforeSavingRespawnState",
+      "new": "S3SonicComp_CheckP2ZonePriority",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_ApplySecondaryZoneSpecificHighPriorityBeforeSavingRespawnState."
     },
@@ -430,7 +430,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 102,
       "old": "loc_11824",
-      "new": "S3SonicCompetition_SaveSecondaryCompetitionRespawnCoordinatesArtAndSolidity",
+      "new": "S3SonicComp_SaveP2RespawnState",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_SaveSecondaryCompetitionRespawnCoordinatesArtAndSolidity."
     },
@@ -438,7 +438,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 108,
       "old": "loc_1183C",
-      "new": "S3SonicCompetition_FinalizeCompetitionInitializationAndSeedPositionHistory",
+      "new": "S3SonicComp_FinishInitAndSeedHistory",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_FinalizeCompetitionInitializationAndSeedPositionHistory."
     },
@@ -446,7 +446,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 115,
       "old": "loc_11858",
-      "new": "S3SonicCompetition_EnterPrimaryCompetitionDebugPlacementOnNewPhysicalB",
+      "new": "S3SonicComp_CheckP1DebugBPress",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_EnterPrimaryCompetitionDebugPlacementOnNewPhysicalB."
     },
@@ -454,7 +454,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 127,
       "old": "loc_11878",
-      "new": "S3SonicCompetition_CopyPrimaryControllerWordUnlessItsInputIsLocked",
+      "new": "S3SonicComp_CopyUnlockedP1Input",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_CopyPrimaryControllerWordUnlessItsInputIsLocked."
     },
@@ -462,7 +462,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 136,
       "old": "loc_1188C",
-      "new": "S3SonicCompetition_CopySecondaryControllerWordIntoSharedLogicalInputUnlessLocked",
+      "new": "S3SonicComp_CopyUnlockedP2Input",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_CopySecondaryControllerWordIntoSharedLogicalInputUnlessLocked."
     },
@@ -470,7 +470,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 141,
       "old": "loc_11898",
-      "new": "S3SonicCompetition_QueueBlinkDisplayAndGateCompetitionMovementByControlBitZero",
+      "new": "S3SonicComp_DrawAndCheckMovement",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_QueueBlinkDisplayAndGateCompetitionMovementByControlBitZero."
     },
@@ -478,7 +478,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 151,
       "old": "loc_118B6",
-      "new": "S3SonicCompetition_WrapIntegerPlayerYOnlyAtSharedMinusOneHundredCameraMinimum",
+      "new": "S3SonicComp_WrapPlayerYIfEnabled",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_WrapIntegerPlayerYOnlyAtSharedMinusOneHundredCameraMinimum."
     },
@@ -486,7 +486,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 157,
       "old": "loc_118C6",
-      "new": "S3SonicCompetition_WrapIntegerXRecordPositionAndGateCompactAnimationPatterns",
+      "new": "S3SonicComp_WrapXAndUpdateFrame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_WrapIntegerXRecordPositionAndGateCompactAnimationPatterns."
     },
@@ -494,7 +494,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 169,
       "old": "loc_118F4",
-      "new": "S3SonicCompetition_RunCompetitionTouchUnlessControlBitsFiveOrSevenSet",
+      "new": "S3SonicComp_CheckTouchResponse",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_RunCompetitionTouchUnlessControlBitsFiveOrSevenSet."
     },
@@ -502,7 +502,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 175,
       "old": "locret_11904",
-      "new": "S3SonicCompetition_ReturnAfterCompetitionNormalTailAndOptionalTouch",
+      "new": "S3SonicComp_FrameReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_ReturnAfterCompetitionNormalTailAndOptionalTouch."
     },
@@ -510,7 +510,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 178,
       "old": "off_11906",
-      "new": "S3SonicCompetition_CompetitionGroundAirRollJumpRelativeModeTable",
+      "new": "S3SonicComp_MovementModeOffsets",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_CompetitionGroundAirRollJumpRelativeModeTable."
     },
@@ -518,7 +518,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 185,
       "old": "loc_1190E",
-      "new": "S3SonicCompetition_GateGroundStepForLiteralExtendedIdleAnimationState",
+      "new": "S3SonicComp_CheckExtendedIdle",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_GateGroundStepForLiteralExtendedIdleAnimationState."
     },
@@ -526,7 +526,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 208,
       "old": "loc_1195C",
-      "new": "S3SonicCompetition_RunCompetitionGroundStepUnlessSpindashOrJumpAbortsCaller",
+      "new": "S3SonicComp_RunGroundMovement",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_RunCompetitionGroundStepUnlessSpindashOrJumpAbortsCaller."
     },
@@ -534,7 +534,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 216,
       "old": "loc_11976",
-      "new": "S3SonicCompetition_AttachCompetitionGroundActorAndApplySlopeRepel",
+      "new": "S3SonicComp_AttachAndApplySlopeRepel",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_AttachCompetitionGroundActorAndApplySlopeRepel."
     },
@@ -542,7 +542,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 220,
       "old": "locret_1197E",
-      "new": "S3SonicCompetition_ReturnAfterGroundAttachmentOrIdleAnimationBypass",
+      "new": "S3SonicComp_GroundModeReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_ReturnAfterGroundAttachmentOrIdleAnimationBypass."
     },
@@ -550,7 +550,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 224,
       "old": "loc_11980",
-      "new": "S3SonicCompetition_UpdateCompetitionNonrollingAirWithOrdinaryIntegrator",
+      "new": "S3SonicComp_RunAirMovement",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_UpdateCompetitionNonrollingAirWithOrdinaryIntegrator."
     },
@@ -558,7 +558,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 232,
       "old": "loc_1199C",
-      "new": "S3SonicCompetition_ResolveCompetitionAirTerrainWhilePreservingActorBaseRegisters",
+      "new": "S3SonicComp_ResolveAirTerrain",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_ResolveCompetitionAirTerrainWhilePreservingActorBaseRegisters."
     },
@@ -566,7 +566,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 240,
       "old": "loc_119AE",
-      "new": "S3SonicCompetition_GateCompetitionRollingJumpBySpindashFlag",
+      "new": "S3SonicComp_TryGroundRollJump",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_GateCompetitionRollingJumpBySpindashFlag."
     },
@@ -574,7 +574,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 245,
       "old": "loc_119B8",
-      "new": "S3SonicCompetition_AdvanceCompetitionGroundRollAndAttachWithoutLevelBounds",
+      "new": "S3SonicComp_RunGroundRoll",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_AdvanceCompetitionGroundRollAndAttachWithoutLevelBounds."
     },
@@ -582,7 +582,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 254,
       "old": "loc_119D0",
-      "new": "S3SonicCompetition_UpdateCompetitionRollingAirWithOrdinaryIntegrator",
+      "new": "S3SonicComp_RunAirRollMovement",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_UpdateCompetitionRollingAirWithOrdinaryIntegrator."
     },
@@ -590,7 +590,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 262,
       "old": "loc_119EC",
-      "new": "S3SonicCompetition_ResolveCompetitionRollingAirTerrainWhilePreservingActorBases",
+      "new": "S3SonicComp_ResolveAirRollTerrain",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_ResolveCompetitionRollingAirTerrainWhilePreservingActorBases."
     },
@@ -598,7 +598,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 278,
       "old": "loc_11A0C",
-      "new": "S3SonicCompetition_RequireCompetitionRollSpeedAndDownWithoutHorizontalInput",
+      "new": "S3SonicComp_CheckRollEntry",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_RequireCompetitionRollSpeedAndDownWithoutHorizontalInput."
     },
@@ -606,7 +606,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 287,
       "old": "locret_11A24",
-      "new": "S3SonicCompetition_ReturnWhenCompetitionDownRollEligibilityFails",
+      "new": "S3SonicComp_RollEntryReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_ReturnWhenCompetitionDownRollEligibilityFails."
     },
@@ -614,7 +614,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 291,
       "old": "loc_11A26",
-      "new": "S3SonicCompetition_AvoidRepeatingCompetitionRollGeometryWhenAlreadyRolling",
+      "new": "S3SonicComp_CheckAlreadyRolling",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_AvoidRepeatingCompetitionRollGeometryWhenAlreadyRolling."
     },
@@ -622,7 +622,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 297,
       "old": "loc_11A30",
-      "new": "S3SonicCompetition_EnterCompactRollAndApplyLiteralPositiveFourPixelYOffset",
+      "new": "S3SonicComp_InitCompactRoll",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_EnterCompactRollAndApplyLiteralPositiveFourPixelYOffset."
     },
@@ -630,7 +630,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 309,
       "old": "locret_11A62",
-      "new": "S3SonicCompetition_ReturnAfterCompetitionRollEntryAndOptionalFallbackSpeed",
+      "new": "S3SonicComp_InitRollReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_ReturnAfterCompetitionRollEntryAndOptionalFallbackSpeed."
     },
@@ -638,7 +638,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 333,
       "old": "loc_11AAA",
-      "new": "S3SonicCompetition_AttachAtSpindashStartAfterDiscardingGroundHelperReturn",
+      "new": "S3SonicComp_AttachAtSpinDashStart",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_AttachAtSpindashStartAfterDiscardingGroundHelperReturn."
     },
@@ -646,7 +646,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 336,
       "old": "locret_11AAE",
-      "new": "S3SonicCompetition_ReturnFromSpindashGateOrFinishAbortedStart",
+      "new": "S3SonicComp_SpinDashEntryReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_ReturnFromSpindashGateOrFinishAbortedStart."
     },
@@ -654,7 +654,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 340,
       "old": "loc_11AB0",
-      "new": "S3SonicCompetition_MaintainChargedSpindashOrReleaseUsingChargeIntegerByte",
+      "new": "S3SonicComp_ReleaseOrKeepCharging",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_MaintainChargedSpindashOrReleaseUsingChargeIntegerByte."
     },
@@ -662,7 +662,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 357,
       "old": "loc_11AF2",
-      "new": "S3SonicCompetition_ComputeReleasedSpindashCameraHistoryLagAndChoosePlayerWord",
+      "new": "S3SonicComp_CalcReleaseCameraLag",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_ComputeReleasedSpindashCameraHistoryLagAndChoosePlayerWord."
     },
@@ -670,7 +670,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 369,
       "old": "loc_11B14",
-      "new": "S3SonicCompetition_StorePlayerCameraHistoryLagAndSignLaunchByFacing",
+      "new": "S3SonicComp_StoreLagAndApplyFacing",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_StorePlayerCameraHistoryLagAndSignLaunchByFacing."
     },
@@ -678,7 +678,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 375,
       "old": "loc_11B22",
-      "new": "S3SonicCompetition_CommitReleasedRollStopChargeDustAndPlayDashSound",
+      "new": "S3SonicComp_BeginRollAndStopDust",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_CommitReleasedRollStopChargeDustAndPlayDashSound."
     },
@@ -686,7 +686,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 382,
       "old": "word_11B38",
-      "new": "S3SonicCompetition_NormalCompetitionSpindashLaunchSpeedWords",
+      "new": "S3SonicComp_NormalLaunchSpeeds",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_NormalCompetitionSpindashLaunchSpeedWords."
     },
@@ -694,7 +694,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 392,
       "old": "word_11B4A",
-      "new": "S3SonicCompetition_RetainedPoweredCompetitionSpindashLaunchSpeedWords",
+      "new": "S3SonicComp_PoweredLaunchSpeeds",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_RetainedPoweredCompetitionSpindashLaunchSpeedWords."
     },
@@ -702,7 +702,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 404,
       "old": "loc_11B5C",
-      "new": "S3SonicCompetition_DecayCompetitionChargeWordWhileDownRemainsHeld",
+      "new": "S3SonicComp_DecayHeldCharge",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_DecayCompetitionChargeWordWhileDownRemainsHeld."
     },
@@ -710,7 +710,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 413,
       "old": "loc_11B74",
-      "new": "S3SonicCompetition_AddCompetitionSpindashChargeOnNewJumpButtonAndRestartAnimation",
+      "new": "S3SonicComp_ChargeOnNewPress",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_AddCompetitionSpindashChargeOnNewJumpButtonAndRestartAnimation."
     },
@@ -718,7 +718,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 425,
       "old": "loc_11BA4",
-      "new": "S3SonicCompetition_DiscardGroundStepReturnAndRecoverCameraDistanceBeforeAttachment",
+      "new": "S3SonicComp_SkipGroundAndEaseCamera",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_DiscardGroundStepReturnAndRecoverCameraDistanceBeforeAttachment."
     },
@@ -726,7 +726,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 432,
       "old": "loc_11BB0",
-      "new": "S3SonicCompetition_SubtractCompetitionSpindashCameraRecoveryStep",
+      "new": "S3SonicComp_ReduceCameraDistanceBy2",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_SubtractCompetitionSpindashCameraRecoveryStep."
     },
@@ -734,7 +734,7 @@
       "source": "src/objects/players/sonic/s3/competition_player.s",
       "original_line": 435,
       "old": "loc_11BB2",
-      "new": "S3SonicCompetition_AttachChargedOrReleasedSpindashAndExitAbortedGroundMode",
+      "new": "S3SonicComp_AttachAfterSpinDash",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicCompetition_AttachChargedOrReleasedSpindashAndExitAbortedGroundMode."
     },
@@ -2198,7 +2198,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 15,
       "old": "loc_105E6",
-      "new": "SKSonicCompetition_GatePrimaryPlayerDebugPlacementBeforeRoutineDispatch",
+      "new": "SKSonicComp_CheckP1DebugPlacement",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_GatePrimaryPlayerDebugPlacementBeforeRoutineDispatch."
     },
@@ -2206,7 +2206,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 21,
       "old": "loc_105F2",
-      "new": "SKSonicCompetition_SelectSecondaryPlayerBasesAndToggleMatchingCharacterTopViewportMask",
+      "new": "SKSonicComp_SelectP2BasesAndViewport",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_SelectSecondaryPlayerBasesAndToggleMatchingCharacterTopViewportMask."
     },
@@ -2214,7 +2214,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 30,
       "old": "loc_1060E",
-      "new": "SKSonicCompetition_DispatchCompetitionRoutineByteThroughSixRelativeEntries",
+      "new": "SKSonicComp_DispatchRoutine",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_DispatchCompetitionRoutineByteThroughSixRelativeEntries."
     },
@@ -2222,7 +2222,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 45,
       "old": "loc_10628",
-      "new": "SKSonicCompetition_InitializeCompactCompetitionGeometrySpeedsAndOptionalRespawnSnapshot",
+      "new": "SKSonicComp_InitCompactPlayer",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_InitializeCompactCompetitionGeometrySpeedsAndOptionalRespawnSnapshot."
     },
@@ -2230,7 +2230,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 76,
       "old": "loc_106B4",
-      "new": "SKSonicCompetition_ApplyPrimaryZoneSpecificHighPriorityBeforeSavingRespawnState",
+      "new": "SKSonicComp_CheckP1ZonePriority",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_ApplyPrimaryZoneSpecificHighPriorityBeforeSavingRespawnState."
     },
@@ -2238,7 +2238,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 81,
       "old": "loc_106C2",
-      "new": "SKSonicCompetition_SavePrimaryCompetitionRespawnCoordinatesArtAndSolidity",
+      "new": "SKSonicComp_SaveP1RespawnState",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_SavePrimaryCompetitionRespawnCoordinatesArtAndSolidity."
     },
@@ -2246,7 +2246,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 89,
       "old": "loc_106DC",
-      "new": "SKSonicCompetition_SelectSecondaryCompactMappingsPaletteAndArtTile",
+      "new": "SKSonicComp_SelectP2ArtAndMappings",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_SelectSecondaryCompactMappingsPaletteAndArtTile."
     },
@@ -2254,7 +2254,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 97,
       "old": "loc_106FE",
-      "new": "SKSonicCompetition_ApplySecondaryZoneSpecificHighPriorityBeforeSavingRespawnState",
+      "new": "SKSonicComp_CheckP2ZonePriority",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_ApplySecondaryZoneSpecificHighPriorityBeforeSavingRespawnState."
     },
@@ -2262,7 +2262,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 102,
       "old": "loc_1070C",
-      "new": "SKSonicCompetition_SaveSecondaryCompetitionRespawnCoordinatesArtAndSolidity",
+      "new": "SKSonicComp_SaveP2RespawnState",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_SaveSecondaryCompetitionRespawnCoordinatesArtAndSolidity."
     },
@@ -2270,7 +2270,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 108,
       "old": "loc_10724",
-      "new": "SKSonicCompetition_FinalizeCompetitionInitializationAndSeedPositionHistory",
+      "new": "SKSonicComp_FinishInitAndSeedHistory",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_FinalizeCompetitionInitializationAndSeedPositionHistory."
     },
@@ -2278,7 +2278,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 115,
       "old": "loc_10740",
-      "new": "SKSonicCompetition_EnterPrimaryCompetitionDebugPlacementOnNewPhysicalB",
+      "new": "SKSonicComp_CheckP1DebugBPress",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_EnterPrimaryCompetitionDebugPlacementOnNewPhysicalB."
     },
@@ -2286,7 +2286,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 127,
       "old": "loc_10760",
-      "new": "SKSonicCompetition_CopyPrimaryControllerWordUnlessItsInputIsLocked",
+      "new": "SKSonicComp_CopyUnlockedP1Input",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_CopyPrimaryControllerWordUnlessItsInputIsLocked."
     },
@@ -2294,7 +2294,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 136,
       "old": "loc_10774",
-      "new": "SKSonicCompetition_CopySecondaryControllerWordIntoSharedLogicalInputUnlessLocked",
+      "new": "SKSonicComp_CopyUnlockedP2Input",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_CopySecondaryControllerWordIntoSharedLogicalInputUnlessLocked."
     },
@@ -2302,7 +2302,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 141,
       "old": "loc_10780",
-      "new": "SKSonicCompetition_QueueBlinkDisplayAndGateCompetitionMovementByControlBitZero",
+      "new": "SKSonicComp_DrawAndCheckMovement",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_QueueBlinkDisplayAndGateCompetitionMovementByControlBitZero."
     },
@@ -2310,7 +2310,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 151,
       "old": "loc_1079E",
-      "new": "SKSonicCompetition_WrapIntegerPlayerYOnlyAtSharedMinusOneHundredCameraMinimum",
+      "new": "SKSonicComp_WrapPlayerYIfEnabled",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_WrapIntegerPlayerYOnlyAtSharedMinusOneHundredCameraMinimum."
     },
@@ -2318,7 +2318,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 157,
       "old": "loc_107AE",
-      "new": "SKSonicCompetition_WrapIntegerXRecordPositionAndGateCompactAnimationPatterns",
+      "new": "SKSonicComp_WrapXAndUpdateFrame",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_WrapIntegerXRecordPositionAndGateCompactAnimationPatterns."
     },
@@ -2326,7 +2326,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 169,
       "old": "loc_107DC",
-      "new": "SKSonicCompetition_RunCompetitionTouchUnlessControlBitsFiveOrSevenSet",
+      "new": "SKSonicComp_CheckTouchResponse",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_RunCompetitionTouchUnlessControlBitsFiveOrSevenSet."
     },
@@ -2334,7 +2334,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 175,
       "old": "locret_107EC",
-      "new": "SKSonicCompetition_ReturnAfterCompetitionNormalTailAndOptionalTouch",
+      "new": "SKSonicComp_FrameReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_ReturnAfterCompetitionNormalTailAndOptionalTouch."
     },
@@ -2342,7 +2342,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 178,
       "old": "off_107EE",
-      "new": "SKSonicCompetition_CompetitionGroundAirRollJumpRelativeModeTable",
+      "new": "SKSonicComp_MovementModeOffsets",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_CompetitionGroundAirRollJumpRelativeModeTable."
     },
@@ -2350,7 +2350,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 185,
       "old": "loc_107F6",
-      "new": "SKSonicCompetition_GateGroundStepForLiteralExtendedIdleAnimationState",
+      "new": "SKSonicComp_CheckExtendedIdle",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_GateGroundStepForLiteralExtendedIdleAnimationState."
     },
@@ -2358,7 +2358,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 208,
       "old": "loc_10844",
-      "new": "SKSonicCompetition_RunCompetitionGroundStepUnlessSpindashOrJumpAbortsCaller",
+      "new": "SKSonicComp_RunGroundMovement",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_RunCompetitionGroundStepUnlessSpindashOrJumpAbortsCaller."
     },
@@ -2366,7 +2366,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 216,
       "old": "loc_1085E",
-      "new": "SKSonicCompetition_AttachCompetitionGroundActorAndApplySlopeRepel",
+      "new": "SKSonicComp_AttachAndApplySlopeRepel",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_AttachCompetitionGroundActorAndApplySlopeRepel."
     },
@@ -2374,7 +2374,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 220,
       "old": "locret_10866",
-      "new": "SKSonicCompetition_ReturnAfterGroundAttachmentOrIdleAnimationBypass",
+      "new": "SKSonicComp_GroundModeReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_ReturnAfterGroundAttachmentOrIdleAnimationBypass."
     },
@@ -2382,7 +2382,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 224,
       "old": "loc_10868",
-      "new": "SKSonicCompetition_UpdateCompetitionNonrollingAirWithOrdinaryIntegrator",
+      "new": "SKSonicComp_RunAirMovement",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_UpdateCompetitionNonrollingAirWithOrdinaryIntegrator."
     },
@@ -2390,7 +2390,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 232,
       "old": "loc_10884",
-      "new": "SKSonicCompetition_ResolveCompetitionAirTerrainWhilePreservingActorBaseRegisters",
+      "new": "SKSonicComp_ResolveAirTerrain",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_ResolveCompetitionAirTerrainWhilePreservingActorBaseRegisters."
     },
@@ -2398,7 +2398,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 240,
       "old": "loc_10896",
-      "new": "SKSonicCompetition_GateCompetitionRollingJumpBySpindashFlag",
+      "new": "SKSonicComp_TryGroundRollJump",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_GateCompetitionRollingJumpBySpindashFlag."
     },
@@ -2406,7 +2406,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 245,
       "old": "loc_108A0",
-      "new": "SKSonicCompetition_AdvanceCompetitionGroundRollAndAttachWithoutLevelBounds",
+      "new": "SKSonicComp_RunGroundRoll",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_AdvanceCompetitionGroundRollAndAttachWithoutLevelBounds."
     },
@@ -2414,7 +2414,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 254,
       "old": "loc_108B8",
-      "new": "SKSonicCompetition_UpdateCompetitionRollingAirWithOrdinaryIntegrator",
+      "new": "SKSonicComp_RunAirRollMovement",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_UpdateCompetitionRollingAirWithOrdinaryIntegrator."
     },
@@ -2422,7 +2422,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 262,
       "old": "loc_108D4",
-      "new": "SKSonicCompetition_ResolveCompetitionRollingAirTerrainWhilePreservingActorBases",
+      "new": "SKSonicComp_ResolveAirRollTerrain",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_ResolveCompetitionRollingAirTerrainWhilePreservingActorBases."
     },
@@ -2430,7 +2430,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 278,
       "old": "loc_108F4",
-      "new": "SKSonicCompetition_RequireCompetitionRollSpeedAndDownWithoutHorizontalInput",
+      "new": "SKSonicComp_CheckRollEntry",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_RequireCompetitionRollSpeedAndDownWithoutHorizontalInput."
     },
@@ -2438,7 +2438,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 287,
       "old": "locret_1090C",
-      "new": "SKSonicCompetition_ReturnWhenCompetitionDownRollEligibilityFails",
+      "new": "SKSonicComp_RollEntryReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_ReturnWhenCompetitionDownRollEligibilityFails."
     },
@@ -2446,7 +2446,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 291,
       "old": "loc_1090E",
-      "new": "SKSonicCompetition_AvoidRepeatingCompetitionRollGeometryWhenAlreadyRolling",
+      "new": "SKSonicComp_CheckAlreadyRolling",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_AvoidRepeatingCompetitionRollGeometryWhenAlreadyRolling."
     },
@@ -2454,7 +2454,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 297,
       "old": "loc_10918",
-      "new": "SKSonicCompetition_EnterCompactRollAndApplyLiteralPositiveFourPixelYOffset",
+      "new": "SKSonicComp_InitCompactRoll",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_EnterCompactRollAndApplyLiteralPositiveFourPixelYOffset."
     },
@@ -2462,7 +2462,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 309,
       "old": "locret_1094A",
-      "new": "SKSonicCompetition_ReturnAfterCompetitionRollEntryAndOptionalFallbackSpeed",
+      "new": "SKSonicComp_InitRollReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_ReturnAfterCompetitionRollEntryAndOptionalFallbackSpeed."
     },
@@ -2470,7 +2470,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 333,
       "old": "loc_10992",
-      "new": "SKSonicCompetition_AttachAtSpindashStartAfterDiscardingGroundHelperReturn",
+      "new": "SKSonicComp_AttachAtSpinDashStart",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_AttachAtSpindashStartAfterDiscardingGroundHelperReturn."
     },
@@ -2478,7 +2478,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 336,
       "old": "locret_10996",
-      "new": "SKSonicCompetition_ReturnFromSpindashGateOrFinishAbortedStart",
+      "new": "SKSonicComp_SpinDashEntryReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_ReturnFromSpindashGateOrFinishAbortedStart."
     },
@@ -2486,7 +2486,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 340,
       "old": "loc_10998",
-      "new": "SKSonicCompetition_MaintainChargedSpindashOrReleaseUsingChargeIntegerByte",
+      "new": "SKSonicComp_ReleaseOrKeepCharging",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_MaintainChargedSpindashOrReleaseUsingChargeIntegerByte."
     },
@@ -2494,7 +2494,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 364,
       "old": "loc_109F0",
-      "new": "SKSonicCompetition_StorePlayerCameraHistoryLagAndSignLaunchByFacing",
+      "new": "SKSonicComp_StoreLagAndApplyFacing",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_StorePlayerCameraHistoryLagAndSignLaunchByFacing."
     },
@@ -2502,7 +2502,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 370,
       "old": "loc_109FE",
-      "new": "SKSonicCompetition_CommitReleasedRollStopChargeDustAndPlayDashSound",
+      "new": "SKSonicComp_BeginRollAndStopDust",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_CommitReleasedRollStopChargeDustAndPlayDashSound."
     },
@@ -2510,7 +2510,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 377,
       "old": "word_10A14",
-      "new": "SKSonicCompetition_NormalCompetitionSpindashLaunchSpeedWords",
+      "new": "SKSonicComp_NormalLaunchSpeeds",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_NormalCompetitionSpindashLaunchSpeedWords."
     },
@@ -2518,7 +2518,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 387,
       "old": "word_10A26",
-      "new": "SKSonicCompetition_RetainedPoweredCompetitionSpindashLaunchSpeedWords",
+      "new": "SKSonicComp_PoweredLaunchSpeeds",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_RetainedPoweredCompetitionSpindashLaunchSpeedWords."
     },
@@ -2526,7 +2526,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 399,
       "old": "loc_10A38",
-      "new": "SKSonicCompetition_DecayCompetitionChargeWordWhileDownRemainsHeld",
+      "new": "SKSonicComp_DecayHeldCharge",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_DecayCompetitionChargeWordWhileDownRemainsHeld."
     },
@@ -2534,7 +2534,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 408,
       "old": "loc_10A50",
-      "new": "SKSonicCompetition_AddCompetitionSpindashChargeOnNewJumpButtonAndRestartAnimation",
+      "new": "SKSonicComp_ChargeOnNewPress",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_AddCompetitionSpindashChargeOnNewJumpButtonAndRestartAnimation."
     },
@@ -2542,7 +2542,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 420,
       "old": "loc_10A80",
-      "new": "SKSonicCompetition_DiscardGroundStepReturnAndRecoverCameraDistanceBeforeAttachment",
+      "new": "SKSonicComp_SkipGroundAndEaseCamera",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_DiscardGroundStepReturnAndRecoverCameraDistanceBeforeAttachment."
     },
@@ -2550,7 +2550,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 427,
       "old": "loc_10A8C",
-      "new": "SKSonicCompetition_SubtractCompetitionSpindashCameraRecoveryStep",
+      "new": "SKSonicComp_ReduceCameraDistanceBy2",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_SubtractCompetitionSpindashCameraRecoveryStep."
     },
@@ -2558,7 +2558,7 @@
       "source": "src/objects/players/sonic/sk/competition_player.s",
       "original_line": 430,
       "old": "loc_10A8E",
-      "new": "SKSonicCompetition_AttachChargedOrReleasedSpindashAndExitAbortedGroundMode",
+      "new": "SKSonicComp_AttachAfterSpinDash",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicCompetition_AttachChargedOrReleasedSpindashAndExitAbortedGroundMode."
     },

@@ -1046,7 +1046,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 15,
       "old": "loc_13E7A",
-      "new": "S3TailsCompetition_GatePrimaryCompetitionDebugPlacement",
+      "new": "S3TailsComp_CheckP1DebugPlacement",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe GatePrimaryCompetitionDebugPlacement."
     },
@@ -1054,7 +1054,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 21,
       "old": "loc_13E86",
-      "new": "S3TailsCompetition_SelectSecondaryCompetitionBasesAndMatchingCharacterViewportMask",
+      "new": "S3TailsComp_SelectP2BasesAndViewport",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SelectSecondaryCompetitionBasesAndMatchingCharacterViewportMask."
     },
@@ -1062,7 +1062,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 30,
       "old": "loc_13EA2",
-      "new": "S3TailsCompetition_DispatchSixCompetitionTailsRoutineEntries",
+      "new": "S3TailsComp_DispatchRoutine",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe DispatchSixCompetitionTailsRoutineEntries."
     },
@@ -1070,7 +1070,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 45,
       "old": "loc_13EBC",
-      "new": "S3TailsCompetition_InitializeCompactTailsAndLoadCharacterOneSpeeds",
+      "new": "S3TailsComp_InitCompactPlayer",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe InitializeCompactTailsAndLoadCharacterOneSpeeds."
     },
@@ -1078,7 +1078,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 76,
       "old": "loc_13F48",
-      "new": "S3TailsCompetition_SavePrimaryRespawnAndCreatePrimaryCompactTail",
+      "new": "S3TailsComp_SaveP1RespawnAndBindTail",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SavePrimaryRespawnAndCreatePrimaryCompactTail."
     },
@@ -1086,7 +1086,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 86,
       "old": "loc_13F6E",
-      "new": "S3TailsCompetition_SelectSecondaryArtAndZoneHighPriority",
+      "new": "S3TailsComp_SelectP2ArtAndPriority",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SelectSecondaryArtAndZoneHighPriority."
     },
@@ -1094,7 +1094,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 92,
       "old": "loc_13F82",
-      "new": "S3TailsCompetition_SaveSecondaryRespawnAndCreateSecondaryCompactTail",
+      "new": "S3TailsComp_SaveP2RespawnAndBindTail",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SaveSecondaryRespawnAndCreateSecondaryCompactTail."
     },
@@ -1102,7 +1102,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 100,
       "old": "loc_13FA6",
-      "new": "S3TailsCompetition_ResetCompetitionCpuTimersAndFallThroughControl",
+      "new": "S3TailsComp_ResetAITimersAndRunFrame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ResetCompetitionCpuTimersAndFallThroughControl."
     },
@@ -1110,7 +1110,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 108,
       "old": "loc_13FCA",
-      "new": "S3TailsCompetition_EnterPrimaryCompetitionDebugOnPhysicalB",
+      "new": "S3TailsComp_CheckP1DebugBPress",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe EnterPrimaryCompetitionDebugOnPhysicalB."
     },
@@ -1118,7 +1118,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 120,
       "old": "loc_13FEA",
-      "new": "S3TailsCompetition_CopyPrimaryInputIntoBothLogicalWordsWithLockedFallback",
+      "new": "S3TailsComp_CopyP1InputToBothWords",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CopyPrimaryInputIntoBothLogicalWordsWithLockedFallback."
     },
@@ -1126,7 +1126,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 131,
       "old": "loc_1400A",
-      "new": "S3TailsCompetition_CopySecondaryCompetitionInputUnlessLocked",
+      "new": "S3TailsComp_CopyUnlockedP2Input",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CopySecondaryCompetitionInputUnlessLocked."
     },
@@ -1134,7 +1134,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 136,
       "old": "loc_14016",
-      "new": "S3TailsCompetition_QueueCompetitionDisplayAndGateFourMovementModes",
+      "new": "S3TailsComp_DrawAndCheckMovement",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe QueueCompetitionDisplayAndGateFourMovementModes."
     },
@@ -1142,7 +1142,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 146,
       "old": "loc_14034",
-      "new": "S3TailsCompetition_WrapCompetitionIntegerYAtSharedCameraMinimum",
+      "new": "S3TailsComp_WrapPlayerYIfEnabled",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe WrapCompetitionIntegerYAtSharedCameraMinimum."
     },
@@ -1150,7 +1150,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 152,
       "old": "loc_14044",
-      "new": "S3TailsCompetition_WrapXRecordHistoryAndGateCompactTailsAnimation",
+      "new": "S3TailsComp_WrapXAndUpdateFrame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe WrapXRecordHistoryAndGateCompactTailsAnimation."
     },
@@ -1158,7 +1158,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 164,
       "old": "loc_14072",
-      "new": "S3TailsCompetition_RunCompactCompetitionTouchUnlessControlMaskA0Set",
+      "new": "S3TailsComp_CheckTouchResponse",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RunCompactCompetitionTouchUnlessControlMaskA0Set."
     },
@@ -1166,7 +1166,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 170,
       "old": "locret_14082",
-      "new": "S3TailsCompetition_ReturnAfterCompactCompetitionServices",
+      "new": "S3TailsComp_FrameReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterCompactCompetitionServices."
     },
@@ -1174,7 +1174,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 173,
       "old": "off_14084",
-      "new": "S3TailsCompetition_CompetitionTailsGroundAirRollJumpModeOffsets",
+      "new": "S3TailsComp_MovementModeOffsets",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CompetitionTailsGroundAirRollJumpModeOffsets."
     },
@@ -1182,7 +1182,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 180,
       "old": "loc_1408C",
-      "new": "S3TailsCompetition_RunCompactGroundTailsUnlessJumpOrSpindashAborts",
+      "new": "S3TailsComp_RunGroundMovement",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RunCompactGroundTailsUnlessJumpOrSpindashAborts."
     },
@@ -1190,7 +1190,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 192,
       "old": "loc_140B0",
-      "new": "S3TailsCompetition_ChooseCompetitionFlightOrOrdinaryNonrollingAir",
+      "new": "S3TailsComp_RunAirOrFlightMovement",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ChooseCompetitionFlightOrOrdinaryNonrollingAir."
     },
@@ -1198,7 +1198,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 202,
       "old": "loc_140D2",
-      "new": "S3TailsCompetition_ResolveCompactAirAngleAndPreserveBasesAcrossTerrain",
+      "new": "S3TailsComp_ResolveAirTerrain",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ResolveCompactAirAngleAndPreserveBasesAcrossTerrain."
     },
@@ -1206,7 +1206,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 210,
       "old": "loc_140E4",
-      "new": "S3TailsCompetition_UpdateCompactFlightWithoutNormalAnimationOrCarryService",
+      "new": "S3TailsComp_RunFlightMovement",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe UpdateCompactFlightWithoutNormalAnimationOrCarryService."
     },
@@ -1214,7 +1214,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 230,
       "old": "loc_14118",
-      "new": "S3TailsCompetition_AdvanceActiveFlapOrCheckNewFlapRequest",
+      "new": "S3TailsComp_TickFlap",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AdvanceActiveFlapOrCheckNewFlapRequest."
     },
@@ -1222,7 +1222,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 240,
       "old": "loc_1413A",
-      "new": "S3TailsCompetition_ResetCompetitionFlapStateToOne",
+      "new": "S3TailsComp_ResetFlapToWaiting",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ResetCompetitionFlapStateToOne."
     },
@@ -1230,7 +1230,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 243,
       "old": "loc_14140",
-      "new": "S3TailsCompetition_JoinFlapBurstAtCeilingAndSoundChecks",
+      "new": "S3TailsComp_AfterActiveFlap",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe JoinFlapBurstAtCeilingAndSoundChecks."
     },
@@ -1238,7 +1238,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 247,
       "old": "loc_14142",
-      "new": "S3TailsCompetition_GateNewCompetitionFlapByPressSpeedFatigueAndUnderwaterCarry",
+      "new": "S3TailsComp_CheckNewFlap",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe GateNewCompetitionFlapByPressSpeedFatigueAndUnderwaterCarry."
     },
@@ -1246,7 +1246,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 260,
       "old": "loc_14168",
-      "new": "S3TailsCompetition_BeginNewFlapBurstBeforeIdleGravityStep",
+      "new": "S3TailsComp_StartFlapCounter",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe BeginNewFlapBurstBeforeIdleGravityStep."
     },
@@ -1254,7 +1254,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 263,
       "old": "loc_1416E",
-      "new": "S3TailsCompetition_AddCompetitionFlightIdleGravity",
+      "new": "S3TailsComp_ApplyWaitingGravity",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AddCompetitionFlightIdleGravity."
     },
@@ -1262,7 +1262,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 266,
       "old": "loc_14174",
-      "new": "S3TailsCompetition_StopUpwardCompetitionFlightAtSharedCameraTopMargin",
+      "new": "S3TailsComp_ClampAscentAtCameraTop",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StopUpwardCompetitionFlightAtSharedCameraTopMargin."
     },
@@ -1270,7 +1270,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 275,
       "old": "loc_1418E",
-      "new": "S3TailsCompetition_ChooseFatiguedOrNormalFlightSoundCadence",
+      "new": "S3TailsComp_ChooseFlightSound",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ChooseFatiguedOrNormalFlightSoundCadence."
     },
@@ -1278,7 +1278,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 285,
       "old": "locret_141A8",
-      "new": "S3TailsCompetition_ReturnAfterFatiguedCompetitionFlightSoundGate",
+      "new": "S3TailsComp_TiredFlightReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterFatiguedCompetitionFlightSoundGate."
     },
@@ -1286,7 +1286,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 289,
       "old": "loc_141AA",
-      "new": "S3TailsCompetition_PlayNormalCompetitionFlightSoundOnSixteenFramePhase",
+      "new": "S3TailsComp_TryFlightSoundEvery16",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe PlayNormalCompetitionFlightSoundOnSixteenFramePhase."
     },
@@ -1294,7 +1294,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 297,
       "old": "locret_141BE",
-      "new": "S3TailsCompetition_ReturnAfterNormalCompetitionFlightSoundGate",
+      "new": "S3TailsComp_FlightSoundReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterNormalCompetitionFlightSoundGate."
     },
@@ -1302,7 +1302,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 303,
       "old": "loc_141C0",
-      "new": "S3TailsCompetition_GateCompactRollingJumpByAnySpindashFlag",
+      "new": "S3TailsComp_TryGroundRollJump",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe GateCompactRollingJumpByAnySpindashFlag."
     },
@@ -1310,7 +1310,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 308,
       "old": "loc_141CA",
-      "new": "S3TailsCompetition_AdvanceCompactGroundRollAndAttach",
+      "new": "S3TailsComp_RunGroundRoll",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AdvanceCompactGroundRollAndAttach."
     },
@@ -1318,7 +1318,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 317,
       "old": "loc_141E2",
-      "new": "S3TailsCompetition_RunCompactRollingAirWithoutInitialFlightDispatch",
+      "new": "S3TailsComp_RunAirRollMovement",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RunCompactRollingAirWithoutInitialFlightDispatch."
     },
@@ -1326,7 +1326,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 325,
       "old": "loc_141FE",
-      "new": "S3TailsCompetition_ResolveCompactRollingAirTerrainWhileSavingBases",
+      "new": "S3TailsComp_ResolveAirRollTerrain",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ResolveCompactRollingAirTerrainWhileSavingBases."
     },
@@ -1334,7 +1334,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 341,
       "old": "loc_1421E",
-      "new": "S3TailsCompetition_RequireCompactRollMagnitudeAndDownWithoutHorizontalInput",
+      "new": "S3TailsComp_CheckRollEntry",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RequireCompactRollMagnitudeAndDownWithoutHorizontalInput."
     },
@@ -1342,7 +1342,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 350,
       "old": "locret_14236",
-      "new": "S3TailsCompetition_ReturnAfterRejectedCompactRollEligibility",
+      "new": "S3TailsComp_RollEntryReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterRejectedCompactRollEligibility."
     },
@@ -1350,7 +1350,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 354,
       "old": "loc_14238",
-      "new": "S3TailsCompetition_AvoidReapplyingCompactRollIfAlreadyRolling",
+      "new": "S3TailsComp_CheckAlreadyRolling",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AvoidReapplyingCompactRollIfAlreadyRolling."
     },
@@ -1358,7 +1358,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 360,
       "old": "loc_14242",
-      "new": "S3TailsCompetition_EnterCompactRollWithFourPixelYOffsetAndOptionalZeroSpeedFallback",
+      "new": "S3TailsComp_InitCompactRoll",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe EnterCompactRollWithFourPixelYOffsetAndOptionalZeroSpeedFallback."
     },
@@ -1366,7 +1366,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 372,
       "old": "locret_14274",
-      "new": "S3TailsCompetition_ReturnAfterCompactRollGeometryAndSound",
+      "new": "S3TailsComp_InitRollReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterCompactRollGeometryAndSound."
     },
@@ -1374,7 +1374,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 396,
       "old": "loc_142BC",
-      "new": "S3TailsCompetition_ApplyBoundsAndAttachmentAfterStartingCompetitionSpindash",
+      "new": "S3TailsComp_CheckBoundsAndAttachAtStart",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ApplyBoundsAndAttachmentAfterStartingCompetitionSpindash."
     },
@@ -1382,7 +1382,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 400,
       "old": "locret_142C4",
-      "new": "S3TailsCompetition_ReturnFromRejectedOrStackAbortedSpindashStart",
+      "new": "S3TailsComp_SpinDashEntryReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnFromRejectedOrStackAbortedSpindashStart."
     },
@@ -1390,7 +1390,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 404,
       "old": "loc_142C6",
-      "new": "S3TailsCompetition_MaintainOrReleaseCompactSpindashFromChargeIntegerByte",
+      "new": "S3TailsComp_ReleaseOrKeepCharging",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe MaintainOrReleaseCompactSpindashFromChargeIntegerByte."
     },
@@ -1398,7 +1398,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 428,
       "old": "loc_1431E",
-      "new": "S3TailsCompetition_StoreCompactDashHistoryLagAndSignSpeedByFacing",
+      "new": "S3TailsComp_StoreLagAndApplyFacing",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreCompactDashHistoryLagAndSignSpeedByFacing."
     },
@@ -1406,7 +1406,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 434,
       "old": "loc_1432C",
-      "new": "S3TailsCompetition_CommitCompactDashRollStopDustAndPlayReleaseSound",
+      "new": "S3TailsComp_BeginRollAndStopDust",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CommitCompactDashRollStopDustAndPlayReleaseSound."
     },
@@ -1414,7 +1414,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 441,
       "old": "word_14344",
-      "new": "S3TailsCompetition_CompactTailsSpindashLaunchSpeedWords",
+      "new": "S3TailsComp_NormalLaunchSpeeds",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CompactTailsSpindashLaunchSpeedWords."
     },
@@ -1422,7 +1422,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 453,
       "old": "loc_14356",
-      "new": "S3TailsCompetition_DecayHeldCompactSpindashChargeWord",
+      "new": "S3TailsComp_DecayHeldCharge",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe DecayHeldCompactSpindashChargeWord."
     },
@@ -1430,7 +1430,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 462,
       "old": "loc_1436E",
-      "new": "S3TailsCompetition_BoostCompactChargeOnNewAbcAndRestartChargeAnimation",
+      "new": "S3TailsComp_ChargeOnNewPress",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe BoostCompactChargeOnNewAbcAndRestartChargeAnimation."
     },
@@ -1438,7 +1438,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 474,
       "old": "loc_1439E",
-      "new": "S3TailsCompetition_DiscardGroundReturnAndRecoverCameraTargetDuringChargeOrRelease",
+      "new": "S3TailsComp_SkipGroundAndEaseCamera",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe DiscardGroundReturnAndRecoverCameraTargetDuringChargeOrRelease."
     },
@@ -1446,7 +1446,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 481,
       "old": "loc_143AA",
-      "new": "S3TailsCompetition_SubtractCompactSpindashCameraRecoveryStep",
+      "new": "S3TailsComp_ReduceCameraDistanceBy2",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SubtractCompactSpindashCameraRecoveryStep."
     },
@@ -1454,7 +1454,7 @@
       "source": "src/objects/players/tails/s3/competition_player.s",
       "original_line": 484,
       "old": "loc_143AC",
-      "new": "S3TailsCompetition_AttachChargedOrReleasedCompactDashAndExitGroundMode",
+      "new": "S3TailsComp_AttachAfterSpinDash",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AttachChargedOrReleasedCompactDashAndExitGroundMode."
     },
@@ -4614,7 +4614,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 15,
       "old": "loc_13124",
-      "new": "SKTailsCompetition_GatePrimaryCompetitionDebugPlacement",
+      "new": "SKTailsComp_CheckP1DebugPlacement",
       "profiles": ["sk"],
       "meaning": "Describe GatePrimaryCompetitionDebugPlacement."
     },
@@ -4622,7 +4622,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 21,
       "old": "loc_13130",
-      "new": "SKTailsCompetition_SelectSecondaryCompetitionBasesAndMatchingCharacterViewportMask",
+      "new": "SKTailsComp_SelectP2BasesAndViewport",
       "profiles": ["sk"],
       "meaning": "Describe SelectSecondaryCompetitionBasesAndMatchingCharacterViewportMask."
     },
@@ -4630,7 +4630,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 30,
       "old": "loc_1314C",
-      "new": "SKTailsCompetition_DispatchSixCompetitionTailsRoutineEntries",
+      "new": "SKTailsComp_DispatchRoutine",
       "profiles": ["sk"],
       "meaning": "Describe DispatchSixCompetitionTailsRoutineEntries."
     },
@@ -4638,7 +4638,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 45,
       "old": "loc_13166",
-      "new": "SKTailsCompetition_InitializeCompactTailsAndLoadCharacterOneSpeeds",
+      "new": "SKTailsComp_InitCompactPlayer",
       "profiles": ["sk"],
       "meaning": "Describe InitializeCompactTailsAndLoadCharacterOneSpeeds."
     },
@@ -4646,7 +4646,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 76,
       "old": "loc_131F2",
-      "new": "SKTailsCompetition_SavePrimaryRespawnAndCreatePrimaryCompactTail",
+      "new": "SKTailsComp_SaveP1RespawnAndBindTail",
       "profiles": ["sk"],
       "meaning": "Describe SavePrimaryRespawnAndCreatePrimaryCompactTail."
     },
@@ -4654,7 +4654,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 86,
       "old": "loc_13218",
-      "new": "SKTailsCompetition_SelectSecondaryArtAndZoneHighPriority",
+      "new": "SKTailsComp_SelectP2ArtAndPriority",
       "profiles": ["sk"],
       "meaning": "Describe SelectSecondaryArtAndZoneHighPriority."
     },
@@ -4662,7 +4662,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 92,
       "old": "loc_1322C",
-      "new": "SKTailsCompetition_SaveSecondaryRespawnAndCreateSecondaryCompactTail",
+      "new": "SKTailsComp_SaveP2RespawnAndBindTail",
       "profiles": ["sk"],
       "meaning": "Describe SaveSecondaryRespawnAndCreateSecondaryCompactTail."
     },
@@ -4670,7 +4670,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 100,
       "old": "loc_13250",
-      "new": "SKTailsCompetition_ResetCompetitionCpuTimersAndFallThroughControl",
+      "new": "SKTailsComp_ResetAITimersAndRunFrame",
       "profiles": ["sk"],
       "meaning": "Describe ResetCompetitionCpuTimersAndFallThroughControl."
     },
@@ -4678,7 +4678,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 108,
       "old": "loc_13274",
-      "new": "SKTailsCompetition_EnterPrimaryCompetitionDebugOnPhysicalB",
+      "new": "SKTailsComp_CheckP1DebugBPress",
       "profiles": ["sk"],
       "meaning": "Describe EnterPrimaryCompetitionDebugOnPhysicalB."
     },
@@ -4686,7 +4686,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 120,
       "old": "loc_13294",
-      "new": "SKTailsCompetition_CopyPrimaryInputIntoBothLogicalWordsWithLockedFallback",
+      "new": "SKTailsComp_CopyP1InputToBothWords",
       "profiles": ["sk"],
       "meaning": "Describe CopyPrimaryInputIntoBothLogicalWordsWithLockedFallback."
     },
@@ -4694,7 +4694,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 131,
       "old": "loc_132B4",
-      "new": "SKTailsCompetition_CopySecondaryCompetitionInputUnlessLocked",
+      "new": "SKTailsComp_CopyUnlockedP2Input",
       "profiles": ["sk"],
       "meaning": "Describe CopySecondaryCompetitionInputUnlessLocked."
     },
@@ -4702,7 +4702,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 136,
       "old": "loc_132C0",
-      "new": "SKTailsCompetition_QueueCompetitionDisplayAndGateFourMovementModes",
+      "new": "SKTailsComp_DrawAndCheckMovement",
       "profiles": ["sk"],
       "meaning": "Describe QueueCompetitionDisplayAndGateFourMovementModes."
     },
@@ -4710,7 +4710,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 146,
       "old": "loc_132DE",
-      "new": "SKTailsCompetition_WrapCompetitionIntegerYAtSharedCameraMinimum",
+      "new": "SKTailsComp_WrapPlayerYIfEnabled",
       "profiles": ["sk"],
       "meaning": "Describe WrapCompetitionIntegerYAtSharedCameraMinimum."
     },
@@ -4718,7 +4718,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 152,
       "old": "loc_132EE",
-      "new": "SKTailsCompetition_WrapXRecordHistoryAndGateCompactTailsAnimation",
+      "new": "SKTailsComp_WrapXAndUpdateFrame",
       "profiles": ["sk"],
       "meaning": "Describe WrapXRecordHistoryAndGateCompactTailsAnimation."
     },
@@ -4726,7 +4726,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 164,
       "old": "loc_1331C",
-      "new": "SKTailsCompetition_RunCompactCompetitionTouchUnlessControlMaskA0Set",
+      "new": "SKTailsComp_CheckTouchResponse",
       "profiles": ["sk"],
       "meaning": "Describe RunCompactCompetitionTouchUnlessControlMaskA0Set."
     },
@@ -4734,7 +4734,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 170,
       "old": "locret_1332C",
-      "new": "SKTailsCompetition_ReturnAfterCompactCompetitionServices",
+      "new": "SKTailsComp_FrameReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterCompactCompetitionServices."
     },
@@ -4742,7 +4742,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 173,
       "old": "off_1332E",
-      "new": "SKTailsCompetition_CompetitionTailsGroundAirRollJumpModeOffsets",
+      "new": "SKTailsComp_MovementModeOffsets",
       "profiles": ["sk"],
       "meaning": "Describe CompetitionTailsGroundAirRollJumpModeOffsets."
     },
@@ -4750,7 +4750,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 180,
       "old": "loc_13336",
-      "new": "SKTailsCompetition_RunCompactGroundTailsUnlessJumpOrSpindashAborts",
+      "new": "SKTailsComp_RunGroundMovement",
       "profiles": ["sk"],
       "meaning": "Describe RunCompactGroundTailsUnlessJumpOrSpindashAborts."
     },
@@ -4758,7 +4758,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 192,
       "old": "loc_1335A",
-      "new": "SKTailsCompetition_ChooseCompetitionFlightOrOrdinaryNonrollingAir",
+      "new": "SKTailsComp_RunAirOrFlightMovement",
       "profiles": ["sk"],
       "meaning": "Describe ChooseCompetitionFlightOrOrdinaryNonrollingAir."
     },
@@ -4766,7 +4766,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 202,
       "old": "loc_1337C",
-      "new": "SKTailsCompetition_ResolveCompactAirAngleAndPreserveBasesAcrossTerrain",
+      "new": "SKTailsComp_ResolveAirTerrain",
       "profiles": ["sk"],
       "meaning": "Describe ResolveCompactAirAngleAndPreserveBasesAcrossTerrain."
     },
@@ -4774,7 +4774,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 210,
       "old": "loc_1338E",
-      "new": "SKTailsCompetition_UpdateCompactFlightWithoutNormalAnimationOrCarryService",
+      "new": "SKTailsComp_RunFlightMovement",
       "profiles": ["sk"],
       "meaning": "Describe UpdateCompactFlightWithoutNormalAnimationOrCarryService."
     },
@@ -4782,7 +4782,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 230,
       "old": "loc_133C2",
-      "new": "SKTailsCompetition_AdvanceActiveFlapOrCheckNewFlapRequest",
+      "new": "SKTailsComp_TickFlap",
       "profiles": ["sk"],
       "meaning": "Describe AdvanceActiveFlapOrCheckNewFlapRequest."
     },
@@ -4790,7 +4790,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 240,
       "old": "loc_133E4",
-      "new": "SKTailsCompetition_ResetCompetitionFlapStateToOne",
+      "new": "SKTailsComp_ResetFlapToWaiting",
       "profiles": ["sk"],
       "meaning": "Describe ResetCompetitionFlapStateToOne."
     },
@@ -4798,7 +4798,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 243,
       "old": "loc_133EA",
-      "new": "SKTailsCompetition_JoinFlapBurstAtCeilingAndSoundChecks",
+      "new": "SKTailsComp_AfterActiveFlap",
       "profiles": ["sk"],
       "meaning": "Describe JoinFlapBurstAtCeilingAndSoundChecks."
     },
@@ -4806,7 +4806,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 247,
       "old": "loc_133EC",
-      "new": "SKTailsCompetition_GateNewCompetitionFlapByPressSpeedFatigueAndUnderwaterCarry",
+      "new": "SKTailsComp_CheckNewFlap",
       "profiles": ["sk"],
       "meaning": "Describe GateNewCompetitionFlapByPressSpeedFatigueAndUnderwaterCarry."
     },
@@ -4814,7 +4814,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 260,
       "old": "loc_13412",
-      "new": "SKTailsCompetition_BeginNewFlapBurstBeforeIdleGravityStep",
+      "new": "SKTailsComp_StartFlapCounter",
       "profiles": ["sk"],
       "meaning": "Describe BeginNewFlapBurstBeforeIdleGravityStep."
     },
@@ -4822,7 +4822,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 263,
       "old": "loc_13418",
-      "new": "SKTailsCompetition_AddCompetitionFlightIdleGravity",
+      "new": "SKTailsComp_ApplyWaitingGravity",
       "profiles": ["sk"],
       "meaning": "Describe AddCompetitionFlightIdleGravity."
     },
@@ -4830,7 +4830,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 266,
       "old": "loc_1341E",
-      "new": "SKTailsCompetition_StopUpwardCompetitionFlightAtSharedCameraTopMargin",
+      "new": "SKTailsComp_ClampAscentAtCameraTop",
       "profiles": ["sk"],
       "meaning": "Describe StopUpwardCompetitionFlightAtSharedCameraTopMargin."
     },
@@ -4838,7 +4838,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 275,
       "old": "loc_13438",
-      "new": "SKTailsCompetition_ChooseFatiguedOrNormalFlightSoundCadence",
+      "new": "SKTailsComp_ChooseFlightSound",
       "profiles": ["sk"],
       "meaning": "Describe ChooseFatiguedOrNormalFlightSoundCadence."
     },
@@ -4846,7 +4846,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 285,
       "old": "locret_13452",
-      "new": "SKTailsCompetition_ReturnAfterFatiguedCompetitionFlightSoundGate",
+      "new": "SKTailsComp_TiredFlightReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterFatiguedCompetitionFlightSoundGate."
     },
@@ -4854,7 +4854,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 289,
       "old": "loc_13454",
-      "new": "SKTailsCompetition_PlayNormalCompetitionFlightSoundOnSixteenFramePhase",
+      "new": "SKTailsComp_TryFlightSoundEvery16",
       "profiles": ["sk"],
       "meaning": "Describe PlayNormalCompetitionFlightSoundOnSixteenFramePhase."
     },
@@ -4862,7 +4862,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 297,
       "old": "locret_13468",
-      "new": "SKTailsCompetition_ReturnAfterNormalCompetitionFlightSoundGate",
+      "new": "SKTailsComp_FlightSoundReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterNormalCompetitionFlightSoundGate."
     },
@@ -4870,7 +4870,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 303,
       "old": "loc_1346A",
-      "new": "SKTailsCompetition_GateCompactRollingJumpByAnySpindashFlag",
+      "new": "SKTailsComp_TryGroundRollJump",
       "profiles": ["sk"],
       "meaning": "Describe GateCompactRollingJumpByAnySpindashFlag."
     },
@@ -4878,7 +4878,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 308,
       "old": "loc_13474",
-      "new": "SKTailsCompetition_AdvanceCompactGroundRollAndAttach",
+      "new": "SKTailsComp_RunGroundRoll",
       "profiles": ["sk"],
       "meaning": "Describe AdvanceCompactGroundRollAndAttach."
     },
@@ -4886,7 +4886,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 317,
       "old": "loc_1348C",
-      "new": "SKTailsCompetition_RunCompactRollingAirWithoutInitialFlightDispatch",
+      "new": "SKTailsComp_RunAirRollMovement",
       "profiles": ["sk"],
       "meaning": "Describe RunCompactRollingAirWithoutInitialFlightDispatch."
     },
@@ -4894,7 +4894,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 325,
       "old": "loc_134A8",
-      "new": "SKTailsCompetition_ResolveCompactRollingAirTerrainWhileSavingBases",
+      "new": "SKTailsComp_ResolveAirRollTerrain",
       "profiles": ["sk"],
       "meaning": "Describe ResolveCompactRollingAirTerrainWhileSavingBases."
     },
@@ -4902,7 +4902,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 341,
       "old": "loc_134C8",
-      "new": "SKTailsCompetition_RequireCompactRollMagnitudeAndDownWithoutHorizontalInput",
+      "new": "SKTailsComp_CheckRollEntry",
       "profiles": ["sk"],
       "meaning": "Describe RequireCompactRollMagnitudeAndDownWithoutHorizontalInput."
     },
@@ -4910,7 +4910,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 350,
       "old": "locret_134E0",
-      "new": "SKTailsCompetition_ReturnAfterRejectedCompactRollEligibility",
+      "new": "SKTailsComp_RollEntryReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterRejectedCompactRollEligibility."
     },
@@ -4918,7 +4918,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 354,
       "old": "loc_134E2",
-      "new": "SKTailsCompetition_AvoidReapplyingCompactRollIfAlreadyRolling",
+      "new": "SKTailsComp_CheckAlreadyRolling",
       "profiles": ["sk"],
       "meaning": "Describe AvoidReapplyingCompactRollIfAlreadyRolling."
     },
@@ -4926,7 +4926,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 360,
       "old": "loc_134EC",
-      "new": "SKTailsCompetition_EnterCompactRollWithFourPixelYOffsetAndOptionalZeroSpeedFallback",
+      "new": "SKTailsComp_InitCompactRoll",
       "profiles": ["sk"],
       "meaning": "Describe EnterCompactRollWithFourPixelYOffsetAndOptionalZeroSpeedFallback."
     },
@@ -4934,7 +4934,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 372,
       "old": "locret_1351E",
-      "new": "SKTailsCompetition_ReturnAfterCompactRollGeometryAndSound",
+      "new": "SKTailsComp_InitRollReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterCompactRollGeometryAndSound."
     },
@@ -4942,7 +4942,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 396,
       "old": "loc_13566",
-      "new": "SKTailsCompetition_ApplyBoundsAndAttachmentAfterStartingCompetitionSpindash",
+      "new": "SKTailsComp_CheckBoundsAndAttachAtStart",
       "profiles": ["sk"],
       "meaning": "Describe ApplyBoundsAndAttachmentAfterStartingCompetitionSpindash."
     },
@@ -4950,7 +4950,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 400,
       "old": "locret_1356E",
-      "new": "SKTailsCompetition_ReturnFromRejectedOrStackAbortedSpindashStart",
+      "new": "SKTailsComp_SpinDashEntryReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnFromRejectedOrStackAbortedSpindashStart."
     },
@@ -4958,7 +4958,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 404,
       "old": "loc_13570",
-      "new": "SKTailsCompetition_MaintainOrReleaseCompactSpindashFromChargeIntegerByte",
+      "new": "SKTailsComp_ReleaseOrKeepCharging",
       "profiles": ["sk"],
       "meaning": "Describe MaintainOrReleaseCompactSpindashFromChargeIntegerByte."
     },
@@ -4966,7 +4966,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 428,
       "old": "loc_135C8",
-      "new": "SKTailsCompetition_StoreCompactDashHistoryLagAndSignSpeedByFacing",
+      "new": "SKTailsComp_StoreLagAndApplyFacing",
       "profiles": ["sk"],
       "meaning": "Describe StoreCompactDashHistoryLagAndSignSpeedByFacing."
     },
@@ -4974,7 +4974,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 434,
       "old": "loc_135D6",
-      "new": "SKTailsCompetition_CommitCompactDashRollStopDustAndPlayReleaseSound",
+      "new": "SKTailsComp_BeginRollAndStopDust",
       "profiles": ["sk"],
       "meaning": "Describe CommitCompactDashRollStopDustAndPlayReleaseSound."
     },
@@ -4982,7 +4982,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 441,
       "old": "word_135EE",
-      "new": "SKTailsCompetition_CompactTailsSpindashLaunchSpeedWords",
+      "new": "SKTailsComp_NormalLaunchSpeeds",
       "profiles": ["sk"],
       "meaning": "Describe CompactTailsSpindashLaunchSpeedWords."
     },
@@ -4990,7 +4990,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 453,
       "old": "loc_13600",
-      "new": "SKTailsCompetition_DecayHeldCompactSpindashChargeWord",
+      "new": "SKTailsComp_DecayHeldCharge",
       "profiles": ["sk"],
       "meaning": "Describe DecayHeldCompactSpindashChargeWord."
     },
@@ -4998,7 +4998,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 462,
       "old": "loc_13618",
-      "new": "SKTailsCompetition_BoostCompactChargeOnNewAbcAndRestartChargeAnimation",
+      "new": "SKTailsComp_ChargeOnNewPress",
       "profiles": ["sk"],
       "meaning": "Describe BoostCompactChargeOnNewAbcAndRestartChargeAnimation."
     },
@@ -5006,7 +5006,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 474,
       "old": "loc_13648",
-      "new": "SKTailsCompetition_DiscardGroundReturnAndRecoverCameraTargetDuringChargeOrRelease",
+      "new": "SKTailsComp_SkipGroundAndEaseCamera",
       "profiles": ["sk"],
       "meaning": "Describe DiscardGroundReturnAndRecoverCameraTargetDuringChargeOrRelease."
     },
@@ -5014,7 +5014,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 481,
       "old": "loc_13654",
-      "new": "SKTailsCompetition_SubtractCompactSpindashCameraRecoveryStep",
+      "new": "SKTailsComp_ReduceCameraDistanceBy2",
       "profiles": ["sk"],
       "meaning": "Describe SubtractCompactSpindashCameraRecoveryStep."
     },
@@ -5022,7 +5022,7 @@
       "source": "src/objects/players/tails/sk/competition_player.s",
       "original_line": 484,
       "old": "loc_13656",
-      "new": "SKTailsCompetition_AttachChargedOrReleasedCompactDashAndExitGroundMode",
+      "new": "SKTailsComp_AttachAfterSpinDash",
       "profiles": ["sk"],
       "meaning": "Describe AttachChargedOrReleasedCompactDashAndExitGroundMode."
     },

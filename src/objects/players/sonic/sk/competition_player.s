@@ -3,46 +3,47 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 Obj_Sonic2P:
                 cmpa.w  #Player_1,a0
-                bne.s   SKSonicCompetition_SelectSecondaryPlayerBasesAndToggleMatchingCharacterTopViewportMask
+                bne.s   SKSonicComp_SelectP2BasesAndViewport
                 lea     (Max_speed).w,a4
                 lea     (Distance_from_top).w,a5
                 lea     (Dust).w,a6
                 move.b  (Player_2+character_id).w,d0
                 cmp.b   character_id(a0),d0
-                bne.s   SKSonicCompetition_GatePrimaryPlayerDebugPlacementBeforeRoutineDispatch
+                bne.s   SKSonicComp_CheckP1DebugPlacement
                 bchg    #3,render_flags(a0)
 
-SKSonicCompetition_GatePrimaryPlayerDebugPlacementBeforeRoutineDispatch:
+SKSonicComp_CheckP1DebugPlacement:
                 tst.w   (Debug_placement_mode).w
-                beq.s   SKSonicCompetition_DispatchCompetitionRoutineByteThroughSixRelativeEntries
+                beq.s   SKSonicComp_DispatchRoutine
                 jmp     (DebugMode).l
 ; ---------------------------------------------------------------------------
 
-SKSonicCompetition_SelectSecondaryPlayerBasesAndToggleMatchingCharacterTopViewportMask:
+; Toggle render bit 4 when both players use the same character
+SKSonicComp_SelectP2BasesAndViewport:
                 lea     (Max_speed_P2).w,a4
                 lea     (Distance_from_top_P2).w,a5
                 lea     (Dust_P2).w,a6
                 move.b  (Player_1+character_id).w,d0
                 cmp.b   character_id(a0),d0
-                bne.s   SKSonicCompetition_DispatchCompetitionRoutineByteThroughSixRelativeEntries
+                bne.s   SKSonicComp_DispatchRoutine
                 bchg    #4,render_flags(a0)
 
-SKSonicCompetition_DispatchCompetitionRoutineByteThroughSixRelativeEntries:
+SKSonicComp_DispatchRoutine:
                 moveq   #0,d0
                 move.b  routine(a0),d0
                 move.w  Sonic2P_Index(pc,d0.w),d1
                 jmp     Sonic2P_Index(pc,d1.w)
 ; ---------------------------------------------------------------------------
 Sonic2P_Index:
-                dc.w    SKSonicCompetition_InitializeCompactCompetitionGeometrySpeedsAndOptionalRespawnSnapshot-Sonic2P_Index
-                dc.w    SKSonicCompetition_EnterPrimaryCompetitionDebugPlacementOnNewPhysicalB-Sonic2P_Index
+                dc.w    SKSonicComp_InitCompactPlayer-Sonic2P_Index
+                dc.w    SKSonicComp_CheckP1DebugBPress-Sonic2P_Index
                 dc.w    SKRecovery_HurtState4-Sonic2P_Index
                 dc.w    SKRecovery_DeathState6-Sonic2P_Index
                 dc.w    SKRecovery_RestartState8-Sonic2P_Index
                 dc.w    SKRecovery_ScrollWaitStateA-Sonic2P_Index
 ; ---------------------------------------------------------------------------
 
-SKSonicCompetition_InitializeCompactCompetitionGeometrySpeedsAndOptionalRespawnSnapshot:
+SKSonicComp_InitCompactPlayer:
                 addq.b  #2,routine(a0)
                 move.b  #$B,y_radius(a0)
                 move.b  #5,x_radius(a0)
@@ -61,100 +62,102 @@ SKSonicCompetition_InitializeCompactCompetitionGeometrySpeedsAndOptionalRespawnS
                 move.w  (a1)+,Acceleration-Max_speed(a4)
                 move.w  (a1)+,Deceleration-Max_speed(a4)
                 tst.b   (Last_star_post_hit).w
-                bne.w   SKSonicCompetition_FinalizeCompetitionInitializationAndSeedPositionHistory
+                bne.w   SKSonicComp_FinishInitAndSeedHistory
                 move.b  #$C,top_solid_bit(a0)
                 move.b  #$D,lrb_solid_bit(a0)
                 cmpa.w  #Player_1,a0
-                bne.s   SKSonicCompetition_SelectSecondaryCompactMappingsPaletteAndArtTile
+                bne.s   SKSonicComp_SelectP2ArtAndMappings
                 move.w  #make_art_tile(ArtTile_Player_1,0,0),art_tile(a0)
                 move.l  #Map_Sonic2P,mappings(a0)
                 tst.b   character_id(a0)
-                beq.s   SKSonicCompetition_ApplyPrimaryZoneSpecificHighPriorityBeforeSavingRespawnState
+                beq.s   SKSonicComp_CheckP1ZonePriority
                 move.l  #Map_Knuckles2P,mappings(a0)
                 addi.w  #palette_line_1,art_tile(a0)
 
-SKSonicCompetition_ApplyPrimaryZoneSpecificHighPriorityBeforeSavingRespawnState:
+SKSonicComp_CheckP1ZonePriority:
                 cmpi.b  #$12,(Current_zone).w
-                bne.s   SKSonicCompetition_SavePrimaryCompetitionRespawnCoordinatesArtAndSolidity
+                bne.s   SKSonicComp_SaveP1RespawnState
                 ori.w   #high_priority,art_tile(a0)
 
-SKSonicCompetition_SavePrimaryCompetitionRespawnCoordinatesArtAndSolidity:
+SKSonicComp_SaveP1RespawnState:
                 move.w  x_pos(a0),(Saved_X_pos).w
                 move.w  y_pos(a0),(Saved_Y_pos).w
                 move.w  art_tile(a0),(Saved_art_tile).w
                 move.w  top_solid_bit(a0),(Saved_solid_bits).w
-                bra.s   SKSonicCompetition_FinalizeCompetitionInitializationAndSeedPositionHistory
+                bra.s   SKSonicComp_FinishInitAndSeedHistory
 ; ---------------------------------------------------------------------------
 
-SKSonicCompetition_SelectSecondaryCompactMappingsPaletteAndArtTile:
+SKSonicComp_SelectP2ArtAndMappings:
                 move.w  #make_art_tile(ArtTile_Player_2,0,0),art_tile(a0)
                 move.l  #Map_Sonic2P,mappings(a0)
                 tst.b   character_id(a0)
-                beq.s   SKSonicCompetition_ApplySecondaryZoneSpecificHighPriorityBeforeSavingRespawnState
+                beq.s   SKSonicComp_CheckP2ZonePriority
                 move.l  #Map_Knuckles2P,mappings(a0)
                 addi.w  #palette_line_1,art_tile(a0)
 
-SKSonicCompetition_ApplySecondaryZoneSpecificHighPriorityBeforeSavingRespawnState:
+SKSonicComp_CheckP2ZonePriority:
                 cmpi.b  #$12,(Current_zone).w
-                bne.s   SKSonicCompetition_SaveSecondaryCompetitionRespawnCoordinatesArtAndSolidity
+                bne.s   SKSonicComp_SaveP2RespawnState
                 ori.w   #high_priority,art_tile(a0)
 
-SKSonicCompetition_SaveSecondaryCompetitionRespawnCoordinatesArtAndSolidity:
+SKSonicComp_SaveP2RespawnState:
                 move.w  x_pos(a0),(Saved2_X_pos).w
                 move.w  y_pos(a0),(Saved2_Y_pos).w
                 move.w  art_tile(a0),(Saved2_art_tile).w
                 move.w  top_solid_bit(a0),(Saved2_solid_bits).w
 
-SKSonicCompetition_FinalizeCompetitionInitializationAndSeedPositionHistory:
+SKSonicComp_FinishInitAndSeedHistory:
                 move.b  #0,flips_remaining(a0)
                 move.b  #4,flip_speed(a0)
                 move.b  #0,(Super_Sonic_Knux_flag).w
                 move.b  #30,air_left(a0)
                 bsr.w   Reset_Player_Position_Array
 
-SKSonicCompetition_EnterPrimaryCompetitionDebugPlacementOnNewPhysicalB:
+SKSonicComp_CheckP1DebugBPress:
                 tst.w   (Debug_mode_flag).w
-                beq.s   SKSonicCompetition_CopyPrimaryControllerWordUnlessItsInputIsLocked
+                beq.s   SKSonicComp_CopyUnlockedP1Input
                 cmpa.w  #Player_1,a0
-                bne.s   SKSonicCompetition_CopyPrimaryControllerWordUnlessItsInputIsLocked
+                bne.s   SKSonicComp_CopyUnlockedP1Input
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   SKSonicCompetition_CopyPrimaryControllerWordUnlessItsInputIsLocked
+                beq.s   SKSonicComp_CopyUnlockedP1Input
                 move.w  #1,(Debug_placement_mode).w
                 clr.b   (Ctrl_1_locked).w
                 rts
 ; ---------------------------------------------------------------------------
 
-SKSonicCompetition_CopyPrimaryControllerWordUnlessItsInputIsLocked:
+SKSonicComp_CopyUnlockedP1Input:
                 cmpa.w  #Player_1,a0
-                bne.s   SKSonicCompetition_CopySecondaryControllerWordIntoSharedLogicalInputUnlessLocked
+                bne.s   SKSonicComp_CopyUnlockedP2Input
                 tst.b   (Ctrl_1_locked).w
-                bne.s   SKSonicCompetition_QueueBlinkDisplayAndGateCompetitionMovementByControlBitZero
+                bne.s   SKSonicComp_DrawAndCheckMovement
                 move.w  (Ctrl_1).w,(Ctrl_1_logical).w
-                bra.s   SKSonicCompetition_QueueBlinkDisplayAndGateCompetitionMovementByControlBitZero
+                bra.s   SKSonicComp_DrawAndCheckMovement
 ; ---------------------------------------------------------------------------
 
-SKSonicCompetition_CopySecondaryControllerWordIntoSharedLogicalInputUnlessLocked:
+SKSonicComp_CopyUnlockedP2Input:
                 tst.b   (Ctrl_2_locked).w
-                bne.s   SKSonicCompetition_QueueBlinkDisplayAndGateCompetitionMovementByControlBitZero
+                bne.s   SKSonicComp_DrawAndCheckMovement
                 move.w  (Ctrl_2).w,(Ctrl_1_logical).w
 
-SKSonicCompetition_QueueBlinkDisplayAndGateCompetitionMovementByControlBitZero:
+SKSonicComp_DrawAndCheckMovement:
                 bsr.w   Sonic_Display
                 btst    #0,object_control(a0)
-                bne.s   SKSonicCompetition_WrapIntegerPlayerYOnlyAtSharedMinusOneHundredCameraMinimum
+                bne.s   SKSonicComp_WrapPlayerYIfEnabled
                 moveq   #0,d0
                 move.b  status(a0),d0
                 andi.w  #6,d0
-                move.w  SKSonicCompetition_CompetitionGroundAirRollJumpRelativeModeTable(pc,d0.w),d1
-                jsr     SKSonicCompetition_CompetitionGroundAirRollJumpRelativeModeTable(pc,d1.w)
+                move.w  SKSonicComp_MovementModeOffsets(pc,d0.w),d1
+                jsr     SKSonicComp_MovementModeOffsets(pc,d1.w)
 
-SKSonicCompetition_WrapIntegerPlayerYOnlyAtSharedMinusOneHundredCameraMinimum:
+; Mask integer Y only when the camera minimum equals -$100
+SKSonicComp_WrapPlayerYIfEnabled:
                 cmpi.w  #-$100,(Camera_min_Y_pos).w
-                bne.s   SKSonicCompetition_WrapIntegerXRecordPositionAndGateCompactAnimationPatterns
+                bne.s   SKSonicComp_WrapXAndUpdateFrame
                 move.w  (Screen_Y_wrap_value).w,d0
                 and.w   d0,y_pos(a0)
 
-SKSonicCompetition_WrapIntegerXRecordPositionAndGateCompactAnimationPatterns:
+; Add $400 to integer X after masking. Object control bit 1 suppresses animation and pattern loading
+SKSonicComp_WrapXAndUpdateFrame:
                 move.w  (Screen_X_wrap_value).w,d0
                 and.w   d0,x_pos(a0)
                 addi.w  #$400,x_pos(a0)
@@ -162,50 +165,51 @@ SKSonicCompetition_WrapIntegerXRecordPositionAndGateCompactAnimationPatterns:
                 move.b  (Primary_Angle).w,next_tilt(a0)
                 move.b  (Secondary_Angle).w,tilt(a0)
                 btst    #1,object_control(a0)
-                bne.s   SKSonicCompetition_RunCompetitionTouchUnlessControlBitsFiveOrSevenSet
+                bne.s   SKSonicComp_CheckTouchResponse
                 bsr.w   Animate_SonicKnuckles_2P
                 bsr.w   SonicKnuckles2P_Load_PLC
 
-SKSonicCompetition_RunCompetitionTouchUnlessControlBitsFiveOrSevenSet:
+SKSonicComp_CheckTouchResponse:
                 move.b  object_control(a0),d0
                 andi.b  #$A0,d0
-                bne.s   SKSonicCompetition_ReturnAfterCompetitionNormalTailAndOptionalTouch
+                bne.s   SKSonicComp_FrameReturn
                 jsr     (TouchResponse_CompetitionMode).l
 
-SKSonicCompetition_ReturnAfterCompetitionNormalTailAndOptionalTouch:
+SKSonicComp_FrameReturn:
                 rts
 ; ---------------------------------------------------------------------------
-SKSonicCompetition_CompetitionGroundAirRollJumpRelativeModeTable:
-                dc.w    SKSonicCompetition_GateGroundStepForLiteralExtendedIdleAnimationState-SKSonicCompetition_CompetitionGroundAirRollJumpRelativeModeTable
-                dc.w    SKSonicCompetition_UpdateCompetitionNonrollingAirWithOrdinaryIntegrator-SKSonicCompetition_CompetitionGroundAirRollJumpRelativeModeTable
-                dc.w    SKSonicCompetition_GateCompetitionRollingJumpBySpindashFlag-SKSonicCompetition_CompetitionGroundAirRollJumpRelativeModeTable
-                dc.w    SKSonicCompetition_UpdateCompetitionRollingAirWithOrdinaryIntegrator-SKSonicCompetition_CompetitionGroundAirRollJumpRelativeModeTable
+SKSonicComp_MovementModeOffsets:
+                dc.w    SKSonicComp_CheckExtendedIdle-SKSonicComp_MovementModeOffsets
+                dc.w    SKSonicComp_RunAirMovement-SKSonicComp_MovementModeOffsets
+                dc.w    SKSonicComp_TryGroundRollJump-SKSonicComp_MovementModeOffsets
+                dc.w    SKSonicComp_RunAirRollMovement-SKSonicComp_MovementModeOffsets
 ; ---------------------------------------------------------------------------
 
-SKSonicCompetition_GateGroundStepForLiteralExtendedIdleAnimationState:
+; Without a new jump press, animations $A and $B bypass ground movement. Animation 5 checks for frame $1E or later
+SKSonicComp_CheckExtendedIdle:
                 move.b  (Ctrl_1_pressed_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                bne.s   SKSonicCompetition_RunCompetitionGroundStepUnlessSpindashOrJumpAbortsCaller
+                bne.s   SKSonicComp_RunGroundMovement
                 cmpi.b  #$A,anim(a0)
-                beq.s   SKSonicCompetition_ReturnAfterGroundAttachmentOrIdleAnimationBypass
+                beq.s   SKSonicComp_GroundModeReturn
                 cmpi.b  #$B,anim(a0)
-                beq.s   SKSonicCompetition_ReturnAfterGroundAttachmentOrIdleAnimationBypass
+                beq.s   SKSonicComp_GroundModeReturn
                 cmpi.b  #5,anim(a0)
-                bne.s   SKSonicCompetition_RunCompetitionGroundStepUnlessSpindashOrJumpAbortsCaller
+                bne.s   SKSonicComp_RunGroundMovement
                 cmpi.b  #$1E,anim_frame(a0)
-                blo.s   SKSonicCompetition_RunCompetitionGroundStepUnlessSpindashOrJumpAbortsCaller
+                blo.s   SKSonicComp_RunGroundMovement
                 bsr.w   Player_SlopeResist
                 move.b  (Ctrl_1_logical).w,d0
                 andi.b  #button_up_mask|button_down_mask|button_left_mask|button_right_mask|button_A_mask|button_B_mask|button_C_mask,d0
-                beq.s   SKSonicCompetition_AttachCompetitionGroundActorAndApplySlopeRepel
+                beq.s   SKSonicComp_AttachAndApplySlopeRepel
                 move.b  #$A,anim(a0)
                 cmpi.b  #$AC,anim_frame(a0)
-                blo.s   SKSonicCompetition_AttachCompetitionGroundActorAndApplySlopeRepel
+                blo.s   SKSonicComp_AttachAndApplySlopeRepel
                 move.b  #$B,anim(a0)
-                bra.s   SKSonicCompetition_AttachCompetitionGroundActorAndApplySlopeRepel
+                bra.s   SKSonicComp_AttachAndApplySlopeRepel
 ; ---------------------------------------------------------------------------
 
-SKSonicCompetition_RunCompetitionGroundStepUnlessSpindashOrJumpAbortsCaller:
+SKSonicComp_RunGroundMovement:
                 bsr.w   SonicSKHandleCompetitionSpindashAndAbortGroundStep
                 bsr.w   Sonic_Jump
                 bsr.w   Player_SlopeResist
@@ -213,23 +217,23 @@ SKSonicCompetition_RunCompetitionGroundStepUnlessSpindashOrJumpAbortsCaller:
                 bsr.w   SonicSKTryCompetitionRollFromDown
                 jsr     (MoveSprite2).l
 
-SKSonicCompetition_AttachCompetitionGroundActorAndApplySlopeRepel:
+SKSonicComp_AttachAndApplySlopeRepel:
                 bsr.w   Player_AnglePos
                 bsr.w   Player_SlopeRepel
 
-SKSonicCompetition_ReturnAfterGroundAttachmentOrIdleAnimationBypass:
+SKSonicComp_GroundModeReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKSonicCompetition_UpdateCompetitionNonrollingAirWithOrdinaryIntegrator:
+SKSonicComp_RunAirMovement:
                 bsr.w   Sonic_JumpHeight
                 bsr.w   Sonic_ChgJumpDir
                 jsr     (MoveSprite).l
                 btst    #Status_Underwater,status(a0)
-                beq.s   SKSonicCompetition_ResolveCompetitionAirTerrainWhilePreservingActorBaseRegisters
+                beq.s   SKSonicComp_ResolveAirTerrain
                 subi.w  #$28,y_vel(a0)
 
-SKSonicCompetition_ResolveCompetitionAirTerrainWhilePreservingActorBaseRegisters:
+SKSonicComp_ResolveAirTerrain:
                 bsr.w   Player_JumpAngle
                 movem.l a4-a6,-(sp)
                 bsr.w   SonicKnux_DoLevelCollision
@@ -237,12 +241,12 @@ SKSonicCompetition_ResolveCompetitionAirTerrainWhilePreservingActorBaseRegisters
                 rts
 ; ---------------------------------------------------------------------------
 
-SKSonicCompetition_GateCompetitionRollingJumpBySpindashFlag:
+SKSonicComp_TryGroundRollJump:
                 tst.b   spin_dash_flag(a0)
-                bne.s   SKSonicCompetition_AdvanceCompetitionGroundRollAndAttachWithoutLevelBounds
+                bne.s   SKSonicComp_RunGroundRoll
                 bsr.w   Sonic_Jump
 
-SKSonicCompetition_AdvanceCompetitionGroundRollAndAttachWithoutLevelBounds:
+SKSonicComp_RunGroundRoll:
                 bsr.w   Player_RollRepel
                 bsr.w   Sonic_RollSpeed
                 jsr     (MoveSprite2).l
@@ -251,15 +255,15 @@ SKSonicCompetition_AdvanceCompetitionGroundRollAndAttachWithoutLevelBounds:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKSonicCompetition_UpdateCompetitionRollingAirWithOrdinaryIntegrator:
+SKSonicComp_RunAirRollMovement:
                 bsr.w   Sonic_JumpHeight
                 bsr.w   Sonic_ChgJumpDir
                 jsr     (MoveSprite).l
                 btst    #Status_Underwater,status(a0)
-                beq.s   SKSonicCompetition_ResolveCompetitionRollingAirTerrainWhilePreservingActorBases
+                beq.s   SKSonicComp_ResolveAirRollTerrain
                 subi.w  #$28,y_vel(a0)
 
-SKSonicCompetition_ResolveCompetitionRollingAirTerrainWhilePreservingActorBases:
+SKSonicComp_ResolveAirRollTerrain:
                 bsr.w   Player_JumpAngle
                 movem.l a4-a6,-(sp)
                 bsr.w   SonicKnux_DoLevelCollision
@@ -270,31 +274,32 @@ SKSonicCompetition_ResolveCompetitionRollingAirTerrainWhilePreservingActorBases:
 
 SonicSKTryCompetitionRollFromDown:
                 tst.b   status_secondary(a0)
-                bmi.s   SKSonicCompetition_ReturnWhenCompetitionDownRollEligibilityFails
+                bmi.s   SKSonicComp_RollEntryReturn
                 move.w  ground_vel(a0),d0
-                bpl.s   SKSonicCompetition_RequireCompetitionRollSpeedAndDownWithoutHorizontalInput
+                bpl.s   SKSonicComp_CheckRollEntry
                 neg.w   d0
 
-SKSonicCompetition_RequireCompetitionRollSpeedAndDownWithoutHorizontalInput:
+SKSonicComp_CheckRollEntry:
                 cmpi.w  #$80,d0
-                blo.s   SKSonicCompetition_ReturnWhenCompetitionDownRollEligibilityFails
+                blo.s   SKSonicComp_RollEntryReturn
                 move.b  (Ctrl_1_logical).w,d0
                 andi.b  #button_left_mask|button_right_mask,d0
-                bne.s   SKSonicCompetition_ReturnWhenCompetitionDownRollEligibilityFails
+                bne.s   SKSonicComp_RollEntryReturn
                 btst    #button_down,(Ctrl_1_held_logical).w
-                bne.s   SKSonicCompetition_AvoidRepeatingCompetitionRollGeometryWhenAlreadyRolling
+                bne.s   SKSonicComp_CheckAlreadyRolling
 
-SKSonicCompetition_ReturnWhenCompetitionDownRollEligibilityFails:
+SKSonicComp_RollEntryReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKSonicCompetition_AvoidRepeatingCompetitionRollGeometryWhenAlreadyRolling:
+SKSonicComp_CheckAlreadyRolling:
                 btst    #Status_Roll,status(a0)
-                beq.s   SKSonicCompetition_EnterCompactRollAndApplyLiteralPositiveFourPixelYOffset
+                beq.s   SKSonicComp_InitCompactRoll
                 rts
 ; ---------------------------------------------------------------------------
 
-SKSonicCompetition_EnterCompactRollAndApplyLiteralPositiveFourPixelYOffset:
+; Add four pixels to Y on roll entry in both gravity modes
+SKSonicComp_InitCompactRoll:
                 bset    #Status_Roll,status(a0)
                 move.b  #7,y_radius(a0)
                 move.b  #3,x_radius(a0)
@@ -303,10 +308,10 @@ SKSonicCompetition_EnterCompactRollAndApplyLiteralPositiveFourPixelYOffset:
                 move.w  #sfx_Roll,d0
                 jsr     (Play_SFX).l
                 tst.w   ground_vel(a0)
-                bne.s   SKSonicCompetition_ReturnAfterCompetitionRollEntryAndOptionalFallbackSpeed
+                bne.s   SKSonicComp_InitRollReturn
                 move.w  #$200,ground_vel(a0)
 
-SKSonicCompetition_ReturnAfterCompetitionRollEntryAndOptionalFallbackSpeed:
+SKSonicComp_InitRollReturn:
                 rts
 ; End of function SonicSKTryCompetitionRollFromDown
 
@@ -314,12 +319,12 @@ SKSonicCompetition_ReturnAfterCompetitionRollEntryAndOptionalFallbackSpeed:
 
 SonicSKHandleCompetitionSpindashAndAbortGroundStep:
                 tst.b   spin_dash_flag(a0)
-                bne.s   SKSonicCompetition_MaintainChargedSpindashOrReleaseUsingChargeIntegerByte
+                bne.s   SKSonicComp_ReleaseOrKeepCharging
                 cmpi.b  #8,anim(a0)
-                bne.s   SKSonicCompetition_ReturnFromSpindashGateOrFinishAbortedStart
+                bne.s   SKSonicComp_SpinDashEntryReturn
                 move.b  (Ctrl_1_pressed_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   SKSonicCompetition_ReturnFromSpindashGateOrFinishAbortedStart
+                beq.w   SKSonicComp_SpinDashEntryReturn
                 move.b  #9,anim(a0)
                 move.w  #signextendB(sfx_Spindash),d0
                 jsr     (Play_SFX).l
@@ -327,20 +332,20 @@ SonicSKHandleCompetitionSpindashAndAbortGroundStep:
                 move.b  #1,spin_dash_flag(a0)
                 move.w  #0,spin_dash_counter(a0)
                 cmpi.b  #12,air_left(a0)
-                blo.s   SKSonicCompetition_AttachAtSpindashStartAfterDiscardingGroundHelperReturn
+                blo.s   SKSonicComp_AttachAtSpinDashStart
                 move.b  #2,anim(a6)
 
-SKSonicCompetition_AttachAtSpindashStartAfterDiscardingGroundHelperReturn:
+SKSonicComp_AttachAtSpinDashStart:
                 bsr.w   Player_AnglePos
 
-SKSonicCompetition_ReturnFromSpindashGateOrFinishAbortedStart:
+SKSonicComp_SpinDashEntryReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKSonicCompetition_MaintainChargedSpindashOrReleaseUsingChargeIntegerByte:
+SKSonicComp_ReleaseOrKeepCharging:
                 move.b  (Ctrl_1_logical).w,d0
                 btst    #button_down,d0
-                bne.w   SKSonicCompetition_DecayCompetitionChargeWordWhileDownRemainsHeld
+                bne.w   SKSonicComp_DecayHeldCharge
                 move.b  #7,y_radius(a0)
                 move.b  #3,x_radius(a0)
                 move.b  #2,anim(a0)
@@ -349,7 +354,7 @@ SKSonicCompetition_MaintainChargedSpindashOrReleaseUsingChargeIntegerByte:
                 moveq   #0,d0
                 move.b  spin_dash_counter(a0),d0
                 add.w   d0,d0
-                move.w  SKSonicCompetition_NormalCompetitionSpindashLaunchSpeedWords(pc,d0.w),ground_vel(a0)
+                move.w  SKSonicComp_NormalLaunchSpeeds(pc,d0.w),ground_vel(a0)
                 move.w  ground_vel(a0),d0
                 subi.w  #$800,d0
                 add.w   d0,d0
@@ -358,23 +363,23 @@ SKSonicCompetition_MaintainChargedSpindashOrReleaseUsingChargeIntegerByte:
                 addi.w  #$2000,d0
                 lea     (H_scroll_frame_offset).w,a1
                 cmpa.w  #Player_1,a0
-                beq.s   SKSonicCompetition_StorePlayerCameraHistoryLagAndSignLaunchByFacing
+                beq.s   SKSonicComp_StoreLagAndApplyFacing
                 lea     (H_scroll_frame_offset_P2).w,a1
 
-SKSonicCompetition_StorePlayerCameraHistoryLagAndSignLaunchByFacing:
+SKSonicComp_StoreLagAndApplyFacing:
                 move.w  d0,(a1)
                 btst    #Status_Facing,status(a0)
-                beq.s   SKSonicCompetition_CommitReleasedRollStopChargeDustAndPlayDashSound
+                beq.s   SKSonicComp_BeginRollAndStopDust
                 neg.w   ground_vel(a0)
 
-SKSonicCompetition_CommitReleasedRollStopChargeDustAndPlayDashSound:
+SKSonicComp_BeginRollAndStopDust:
                 bset    #Status_Roll,status(a0)
                 move.b  #0,anim(a6)
                 moveq   #signextendB(sfx_Dash),d0
                 jsr     (Play_SFX).l
-                bra.s   SKSonicCompetition_DiscardGroundStepReturnAndRecoverCameraDistanceBeforeAttachment
+                bra.s   SKSonicComp_SkipGroundAndEaseCamera
 ; ---------------------------------------------------------------------------
-SKSonicCompetition_NormalCompetitionSpindashLaunchSpeedWords:
+SKSonicComp_NormalLaunchSpeeds:
                 dc.w    $800
                 dc.w    $880
                 dc.w    $900
@@ -384,7 +389,7 @@ SKSonicCompetition_NormalCompetitionSpindashLaunchSpeedWords:
                 dc.w    $B00
                 dc.w    $B80
                 dc.w    $C00
-SKSonicCompetition_RetainedPoweredCompetitionSpindashLaunchSpeedWords:
+SKSonicComp_PoweredLaunchSpeeds:
                 dc.w    $B00
                 dc.w    $B80
                 dc.w    $C00
@@ -396,38 +401,39 @@ SKSonicCompetition_RetainedPoweredCompetitionSpindashLaunchSpeedWords:
                 dc.w    $F00
 ; ---------------------------------------------------------------------------
 
-SKSonicCompetition_DecayCompetitionChargeWordWhileDownRemainsHeld:
+SKSonicComp_DecayHeldCharge:
                 tst.w   spin_dash_counter(a0)
-                beq.s   SKSonicCompetition_AddCompetitionSpindashChargeOnNewJumpButtonAndRestartAnimation
+                beq.s   SKSonicComp_ChargeOnNewPress
                 move.w  spin_dash_counter(a0),d0
                 lsr.w   #5,d0
                 sub.w   d0,spin_dash_counter(a0)
-                bcc.s   SKSonicCompetition_AddCompetitionSpindashChargeOnNewJumpButtonAndRestartAnimation
+                bcc.s   SKSonicComp_ChargeOnNewPress
                 move.w  #0,spin_dash_counter(a0)
 
-SKSonicCompetition_AddCompetitionSpindashChargeOnNewJumpButtonAndRestartAnimation:
+SKSonicComp_ChargeOnNewPress:
                 move.b  (Ctrl_1_pressed_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   SKSonicCompetition_DiscardGroundStepReturnAndRecoverCameraDistanceBeforeAttachment
+                beq.w   SKSonicComp_SkipGroundAndEaseCamera
                 move.w  #9<<8,anim(a0)                  ; and prev_anim
                 move.w  #signextendB(sfx_Spindash),d0
                 jsr     (Play_SFX).l
                 addi.w  #$200,spin_dash_counter(a0)
                 cmpi.w  #$800,spin_dash_counter(a0)
-                blo.s   SKSonicCompetition_DiscardGroundStepReturnAndRecoverCameraDistanceBeforeAttachment
+                blo.s   SKSonicComp_SkipGroundAndEaseCamera
                 move.w  #$800,spin_dash_counter(a0)
 
-SKSonicCompetition_DiscardGroundStepReturnAndRecoverCameraDistanceBeforeAttachment:
+; Discard the ground movement return address before adjusting the camera
+SKSonicComp_SkipGroundAndEaseCamera:
                 addq.l  #4,sp
                 cmpi.w  #$60,(a5)
-                beq.s   SKSonicCompetition_AttachChargedOrReleasedSpindashAndExitAbortedGroundMode
-                bcc.s   SKSonicCompetition_SubtractCompetitionSpindashCameraRecoveryStep
+                beq.s   SKSonicComp_AttachAfterSpinDash
+                bcc.s   SKSonicComp_ReduceCameraDistanceBy2
                 addq.w  #4,(a5)
 
-SKSonicCompetition_SubtractCompetitionSpindashCameraRecoveryStep:
+SKSonicComp_ReduceCameraDistanceBy2:
                 subq.w  #2,(a5)
 
-SKSonicCompetition_AttachChargedOrReleasedSpindashAndExitAbortedGroundMode:
+SKSonicComp_AttachAfterSpinDash:
                 bsr.w   Player_AnglePos
                 rts
 ; End of function SonicSKHandleCompetitionSpindashAndAbortGroundStep

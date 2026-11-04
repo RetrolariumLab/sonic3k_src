@@ -497,7 +497,7 @@
           "profiles": ["s3-eu", "s3-jp", "s3-us"]
         }
       ],
-      "destination_sha256": "0ce91b9a0727004eaa483dc6b7ce9ffffad4a89bfe42bcc69470b0cb3bb771f8"
+      "destination_sha256": "7721b512b91f3932b562af0f200ece3871e4dda200c6b959d5485d2f8269ca57"
     },
     {
       "id": "07-player-tails",
@@ -679,7 +679,7 @@
           "profiles": ["sk"]
         }
       ],
-      "destination_sha256": "59c5e52fe293702098213e6b0d99b8f6ffba8c909efb5391db3e18ded1270c46"
+      "destination_sha256": "4fe0f2ee544434777a5532a0b5d96d045e5f4bf4b64b5ebbdebd1370b7ec1f2d"
     },
     {
       "id": "08-player-knuckles",

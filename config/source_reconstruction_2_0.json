@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 105
+    "commit_count": 106
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -677,9 +677,15 @@
       "commits": ["3e765e529708778f09ba26efb67af3f9e0229a00"]
     },
     {
-      "id": "current-shorten-07c-tails-animation",
+      "id": "change-b72709b60035",
       "kind": "source_or_tooling",
       "summary": "Shorten 153 Tails and tail animation labels and preserve their resource bindings.",
+      "commits": ["b72709b60035572a6fd836af40866103c087517f"]
+    },
+    {
+      "id": "current-shorten-08-competition",
+      "kind": "source_or_tooling",
+      "summary": "Shorten 197 Competition player labels across both game engines.",
       "commits": ["release-commit"]
     }
   ],
