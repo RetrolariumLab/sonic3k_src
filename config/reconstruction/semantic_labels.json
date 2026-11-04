@@ -5,7 +5,7 @@
   "scope": "All35470 researched inherited address and numeric-local labels; completed1571 procedure migration remains independent.",
   "target_count": 35470,
   "scope_sha256": "6d32002c76db58fe4732f6fc7113c9b2d93f88b650fec5e995b26b2a5fe4f278",
-  "applied_targets": 9936,
+  "applied_targets": 9958,
   "packets": [
     {
       "id": "01-audio",
@@ -1761,7 +1761,7 @@
     },
     {
       "id": "19-compression",
-      "state": "pending",
+      "state": "applied",
       "target_count": 22,
       "scope_sha256": "1068eb8f21c1373c3914e29e37da8f1ac929b041bc851fbb6c46514c87a58d0b",
       "registry": "config/reconstruction/semantic_labels/19-compression.json",
@@ -1783,7 +1783,7 @@
           "profiles": ["s3-eu", "s3-jp", "s3-us"]
         }
       ],
-      "destination_sha256": "cf0bc319f47e60564ecdff05edfc2d4af9bc950620c0ba5b42d9a7a45c321d9f"
+      "destination_sha256": "59ba16997b40b0d0c7cea93709c5052a36bfef1c09ba6bdc14d9ed2b4bf79318"
     },
     {
       "id": "20-level-lifecycle",
@@ -7434,6 +7434,7 @@
     "15-world-sprites",
     "16-sprite-rendering",
     "17-tile-rendering",
-    "18-palettes"
+    "18-palettes",
+    "19-compression"
   ]
 }

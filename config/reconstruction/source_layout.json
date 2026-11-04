@@ -66576,7 +66576,7 @@
       "responsibility": "Kosinski decompression, moduled scheduling and interrupt-resumable queue state.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 420,
+      "physical_lines": 421,
       "origin": {
         "commit": "406dd409844defcd68512edc13fd0b1bf94eaf49",
         "path": "s3.s",

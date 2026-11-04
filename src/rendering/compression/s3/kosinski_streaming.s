@@ -48,22 +48,22 @@ Kos_Decomp_ChkBit2:
                 move    d6,ccr                          ; was the bit set?
                 bcs.s   Kos_Decomp_FullMatch            ; if it was, branch
                 lsr.w   #1,d5                           ; bit which is shifted out goes into X flag
-                dbf     d4,loc_1D0A
+                dbf     d4,S3Kosinski_ReadShortLenHi
                 move.b  (a0)+,1(sp)
                 move.b  (a0)+,(sp)
                 move.w  (sp),d5
                 moveq   #$F,d4
 
-loc_1D0A:
+S3Kosinski_ReadShortLenHi:
                 roxl.w  #1,d3                           ; get high repeat count bit (shift X flag in)
                 lsr.w   #1,d5
-                dbf     d4,loc_1D1C
+                dbf     d4,S3Kosinski_ReadShortLenLoAndOffset
                 move.b  (a0)+,1(sp)
                 move.b  (a0)+,(sp)
                 move.w  (sp),d5
                 moveq   #$F,d4
 
-loc_1D1C:
+S3Kosinski_ReadShortLenLoAndOffset:
                 roxl.w  #1,d3                           ; get low repeat count bit
                 addq.w  #1,d3                           ; increment repeat count
                 moveq   #-1,d2
@@ -151,21 +151,22 @@ Process_Kos_Module_Queue_Init:
 
                 move.w  (a1)+,d3                        ; get uncompressed size
                 cmpi.w  #$A000,d3                       ; does this data contain placeholder tiles? (prototype leftover)
-                bne.s   loc_1D80                        ; if not, branch
+                bne.s   S3Kosinski_SplitModuleSize      ; if not, branch
                 move.w  #$8000,d3                       ; don't load the placeholder tiles
 
-loc_1D80:
+; For an exact multiple of $800 words, make the final module a full $800 words
+S3Kosinski_SplitModuleSize:
                 lsr.w   #1,d3
                 move.w  d3,d0
                 rol.w   #5,d0
                 andi.w  #$1F,d0                         ; get number of complete modules
                 move.b  d0,(Kos_modules_left).w
                 andi.l  #$7FF,d3                        ; get size of last module in words
-                bne.s   loc_1DA0                        ; branch if it's non-zero
+                bne.s   S3Kosinski_InitModuleTransfer   ; branch if it's non-zero
                 subq.b  #1,(Kos_modules_left).w         ; otherwise decrement the number of modules
                 move.l  #$800,d3                        ; and take the size of the last module to be $800 words
 
-loc_1DA0:
+S3Kosinski_InitModuleTransfer:
                 move.w  d3,(Kos_last_module_size).w
                 move.w  d2,(Kos_module_destination).w
                 move.l  a1,(Kos_module_queue).w
@@ -206,10 +207,10 @@ Process_Kos_Module_Queue:
                 andi.b  #$7F,(Kos_modules_left).w
                 move.l  #$800,d3
                 subq.b  #1,(Kos_modules_left).w
-                bne.s   loc_1DF4                        ; branch if it isn't the last module
+                bne.s   S3Kosinski_QueueModuleDma       ; branch if it isn't the last module
                 move.w  (Kos_last_module_size).w,d3
 
-loc_1DF4:
+S3Kosinski_QueueModuleDma:
                 move.w  (Kos_module_destination).w,d2
                 move.w  d2,d0
                 add.w   d3,d0
@@ -225,7 +226,7 @@ loc_1DF4:
                 andi.l  #$FFFFFF,d1
                 jsr     (Add_To_DMA_Queue).l
                 tst.b   (Kos_modules_left).w
-                bne.s   locret_1E60                     ; return if this wasn't the last module
+                bne.s   S3Kosinski_ModuleQueueReturn    ; return if this wasn't the last module
                 lea     (Kos_module_queue).w,a0
                 lea     (Kos_module_queue+6).w,a1
                 move.l  (a1)+,(a0)+                     ; otherwise, shift all entries up
@@ -237,12 +238,12 @@ loc_1DF4:
                 move.l  #0,(a0)+                        ; and mark the last slot as free
                 move.w  #0,(a0)+
                 move.l  (Kos_module_queue).w,d0
-                beq.s   locret_1E60                     ; return if the queue is now empty
+                beq.s   S3Kosinski_ModuleQueueReturn    ; return if the queue is now empty
                 movea.l d0,a1
                 move.w  (Kos_module_destination).w,d2
                 jmp     (Process_Kos_Module_Queue_Init).l
 
-locret_1E60:
+S3Kosinski_ModuleQueueReturn:
                 rts
 ; End of function Process_Kos_Module_Queue
 
@@ -337,22 +338,22 @@ Process_Kos_Queue_ChkBit2:
                 move    d6,ccr
                 bcs.s   Process_Kos_Queue_SeparateRLE
                 lsr.w   #1,d5
-                dbf     d4,loc_1F0E
+                dbf     d4,S3Kosinski_ReadQueuedShortLenHi
                 move.b  (a0)+,1(a2)
                 move.b  (a0)+,(a2)
                 move.w  (a2),d5
                 moveq   #$F,d4
 
-loc_1F0E:
+S3Kosinski_ReadQueuedShortLenHi:
                 roxl.w  #1,d3
                 lsr.w   #1,d5
-                dbf     d4,loc_1F20
+                dbf     d4,S3Kosinski_ReadQueuedLenLoAndOffset
                 move.b  (a0)+,1(a2)
                 move.b  (a0)+,(a2)
                 move.w  (a2),d5
                 moveq   #$F,d4
 
-loc_1F20:
+S3Kosinski_ReadQueuedLenLoAndOffset:
                 roxl.w  #1,d3
                 addq.w  #1,d3
                 moveq   #-1,d2

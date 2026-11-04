@@ -120,18 +120,18 @@ Clear_Nem_Queue:
 
 Process_Nem_Queue_Init:
                 tst.l   (Nem_decomp_queue).w
-                beq.s   locret_1A60                     ; return if the queue is empty
+                beq.s   S3NemesisQueue_InitReturn       ; return if the queue is empty
                 tst.w   (Nem_patterns_left).w
-                bne.s   locret_1A60                     ; return if processing of a previous piece is still going on
+                bne.s   S3NemesisQueue_InitReturn       ; return if processing of a previous piece is still going on
                 movea.l (Nem_decomp_queue).w,a0
                 lea     (Nem_PCD_WriteRowToVDP).l,a3
                 nop
                 lea     (Nem_code_table).w,a1
                 move.w  (a0)+,d2
-                bpl.s   loc_1A2E
+                bpl.s   S3NemesisQueue_InitDecodeState
                 adda.w  #Nem_PCD_WriteRowToVDP_XOR-Nem_PCD_WriteRowToVDP,a3
 
-loc_1A2E:
+S3NemesisQueue_InitDecodeState:
                 andi.w  #$7FFF,d2
                 bsr.w   Nem_Build_Code_Table
                 move.b  (a0)+,d5
@@ -148,7 +148,7 @@ loc_1A2E:
                 move.l  d6,(Nem_shift_value).w
                 move.w  d2,(Nem_patterns_left).w
 
-locret_1A60:
+S3NemesisQueue_InitReturn:
                 rts
 ; End of function Process_Nem_Queue_Init
 

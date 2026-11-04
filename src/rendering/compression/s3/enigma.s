@@ -38,11 +38,11 @@ Eni_Decomp_Loop:
                 andi.w  #$7F,d1                         ; get format list entry
                 move.w  d1,d2                           ; and copy it
                 cmpi.w  #$40,d1                         ; is the high bit of the entry set?
-                bhs.s   loc_1B78
+                bhs.s   S3Enigma_DispatchPacket
                 moveq   #6,d0                           ; if it isn't, the entry is actually 6 bits
                 lsr.w   #1,d2
 
-loc_1B78:
+S3Enigma_DispatchPacket:
                 bsr.w   Eni_Decomp_FetchByte
                 andi.w  #$F,d2                          ; get repeat count
                 lsr.w   #4,d1
@@ -124,16 +124,16 @@ Eni_Decomp_Index:
 Eni_Decomp_Done:
                 subq.w  #1,a0                           ; go back by one byte
                 cmpi.w  #$10,d6
-                bne.s   loc_1BEE
+                bne.s   S3Enigma_AlignSourceEven
                 subq.w  #1,a0                           ; and another one if needed
 
-loc_1BEE:
+S3Enigma_AlignSourceEven:
                 move.w  a0,d0
                 lsr.w   #1,d0
-                bcc.s   loc_1BF6
+                bcc.s   S3Enigma_RestoreAndReturn
                 addq.w  #1,a0                           ; make sure it's an even address
 
-loc_1BF6:
+S3Enigma_RestoreAndReturn:
                 movem.l (sp)+,d0-d7/a1-a5
                 rts
 ; End of function Eni_Decomp
@@ -149,45 +149,45 @@ Eni_Decomp_FetchInlineValue:
                 move.w  a3,d3                           ; copy starting art tile
                 move.b  d4,d1                           ; copy PCCVH bitfield
                 add.b   d1,d1                           ; is the priority bit set?
-                bcc.s   loc_1C0E                        ; if not, branch
+                bcc.s   S3Enigma_ReadOptionalHighPaletteFlag  ; if not, branch
                 subq.w  #1,d6
                 btst    d6,d5                           ; is the priority bit set in the inline render flags?
-                beq.s   loc_1C0E                        ; if not, branch
+                beq.s   S3Enigma_ReadOptionalHighPaletteFlag  ; if not, branch
                 ori.w   #high_priority,d3               ; otherwise set priority bit in art tile
 
-loc_1C0E:
+S3Enigma_ReadOptionalHighPaletteFlag:
                 add.b   d1,d1                           ; is the high palette line bit set?
-                bcc.s   loc_1C1C                        ; if not, branch
+                bcc.s   S3Enigma_ReadOptionalLowPaletteFlag  ; if not, branch
                 subq.w  #1,d6
                 btst    d6,d5
-                beq.s   loc_1C1C
+                beq.s   S3Enigma_ReadOptionalLowPaletteFlag
                 addi.w  #palette_line_2,d3
 
-loc_1C1C:
+S3Enigma_ReadOptionalLowPaletteFlag:
                 add.b   d1,d1                           ; is the low palette line bit set?
-                bcc.s   loc_1C2A                        ; if not, branch
+                bcc.s   S3Enigma_ReadOptionalVerticalFlipFlag  ; if not, branch
                 subq.w  #1,d6
                 btst    d6,d5
-                beq.s   loc_1C2A
+                beq.s   S3Enigma_ReadOptionalVerticalFlipFlag
                 addi.w  #palette_line_1,d3
 
-loc_1C2A:
+S3Enigma_ReadOptionalVerticalFlipFlag:
                 add.b   d1,d1                           ; is the vertical flip flag set?
-                bcc.s   loc_1C38                        ; if not, branch
+                bcc.s   S3Enigma_ReadOptionalHorizontalFlipFlag  ; if not, branch
                 subq.w  #1,d6
                 btst    d6,d5
-                beq.s   loc_1C38
+                beq.s   S3Enigma_ReadOptionalHorizontalFlipFlag
                 ori.w   #$1000,d3
 
-loc_1C38:
+S3Enigma_ReadOptionalHorizontalFlipFlag:
                 add.b   d1,d1                           ; is the horizontal flip flag set?
-                bcc.s   loc_1C46                        ; if not, branch
+                bcc.s   S3Enigma_ReadInlineTileBits     ; if not, branch
                 subq.w  #1,d6
                 btst    d6,d5
-                beq.s   loc_1C46
+                beq.s   S3Enigma_ReadInlineTileBits
                 ori.w   #$800,d3
 
-loc_1C46:
+S3Enigma_ReadInlineTileBits:
                 move.w  d5,d1
                 move.w  d6,d7
                 sub.w   a5,d7                           ; subtract length in bits of inline copy value
@@ -256,11 +256,11 @@ Eni_Decomp_Masks:
 Eni_Decomp_FetchByte:
                 sub.w   d0,d6                           ; subtract length of current entry from shift value so that next entry is read next time around
                 cmpi.w  #9,d6                           ; does a new byte need to be read?
-                bhs.s   locret_1CBA                     ; if not, branch
+                bhs.s   S3Enigma_FetchReturn            ; if not, branch
                 addq.w  #8,d6
                 asl.w   #8,d5
                 move.b  (a0)+,d5
 
-locret_1CBA:
+S3Enigma_FetchReturn:
                 rts
 ; End of function Eni_Decomp_FetchByte

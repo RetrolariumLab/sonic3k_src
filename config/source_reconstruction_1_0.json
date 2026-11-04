@@ -1047,9 +1047,15 @@
       "commits": ["52b06392d1c7341d1e1699b1f369bc3805cef3d8"]
     },
     {
-      "id": "current-shorten-18-palettes",
+      "id": "change-658c229d8587",
       "kind": "source_or_tooling",
       "summary": "Apply 216 reviewed short labels for palettes.",
+      "commits": ["658c229d85876862ebcbe1b050fcbb9b4a49cd7d"]
+    },
+    {
+      "id": "current-shorten-19-compression",
+      "kind": "source_or_tooling",
+      "summary": "Apply 18 reviewed short labels for compression.",
       "commits": ["release-commit"]
     }
   ],
