@@ -21474,12 +21474,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 302
       },
-      "declarations_sha256": "8465062bec14dadb7d4ef66b1db2bd5b26947c5fa09b75fed54402a435b9173b",
+      "declarations_sha256": "295001a039766d902bce97b8dd3232d286a4a99fd9f83b6b85a055298295dc79",
       "labels": {
         "Map_SStageKnuckles_": 0,
         "PLC_SStageKnuckles": 24,
         "PLC_SStageKnuckles_": 24,
-        "SpecialStageKnuckles_EmptyMappingAndDplcFrame00": 48,
+        "SStageKnux_EmptyMapDPLC00": 48,
         "SpecialStageKnuckles_MappingFrame05": 50,
         "SpecialStageKnuckles_MappingFrame04": 70,
         "SpecialStageKnuckles_MappingFrame03": 90,
@@ -21509,7 +21509,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "SpecialStageKnuckles_EmptyMappingAndDplcFrame00",
+          "target": "SStageKnux_EmptyMapDPLC00",
           "base": "Map_SStageKnuckles_"
         },
         {
@@ -21593,7 +21593,7 @@
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "SpecialStageKnuckles_EmptyMappingAndDplcFrame00",
+          "target": "SStageKnux_EmptyMapDPLC00",
           "base": "PLC_SStageKnuckles_"
         },
         {

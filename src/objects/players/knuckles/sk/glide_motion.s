@@ -6,13 +6,13 @@
 
 Knuckles_Climb_Ledge:
                 tst.b   anim_frame_timer(a0)
-                bne.s   SKKnucklesLedge_ReturnAfterTimerGateStepOrCompletion
+                bne.s   SKKnuxLedge_ClimbReturn
 
                 bsr.w   Knuckles_DoLedgeClimbingAnimation
 
 ; Have we reached the end of the ledge-climbing animation?
                 cmpi.b  #Knuckles_ClimbLedge_Frames_End-Knuckles_ClimbLedge_Frames,double_jump_property(a0)
-                bne.s   SKKnucklesLedge_ReturnAfterTimerGateStepOrCompletion
+                bne.s   SKKnuxLedge_ClimbReturn
 
 ; Yes
                 move.w  #0,ground_vel(a0)
@@ -26,7 +26,7 @@ Knuckles_Climb_Ledge:
                 bsr.w   Knux_TouchFloor
                 move.b  #5,anim(a0)
 
-SKKnucklesLedge_ReturnAfterTimerGateStepOrCompletion:
+SKKnuxLedge_ClimbReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -194,10 +194,10 @@ Knuckles_Move_Glide:
 
 Knux_Spin_Path:
                 tst.b   spin_dash_flag(a0)
-                bne.s   SKKnucklesRolling_RunGroundPhysicsAttachmentAndBackground
+                bne.s   SKKnuxRoll_RunGroundRoll
                 bsr.w   Knux_Jump
 
-SKKnucklesRolling_RunGroundPhysicsAttachmentAndBackground:
+SKKnuxRoll_RunGroundRoll:
                 bsr.w   Player_RollRepel
                 bsr.w   Knux_RollSpeed
                 bsr.w   Player_LevelBound
@@ -205,26 +205,26 @@ SKKnucklesRolling_RunGroundPhysicsAttachmentAndBackground:
                 bsr.w   Call_Player_AnglePos
                 bsr.w   Player_SlopeRepel
                 tst.b   (Background_collision_flag).w
-                beq.s   SKKnucklesRolling_ReturnAfterGroundStepOrBackgroundCorrection
+                beq.s   SKKnuxRoll_GroundRollReturn
                 bsr.w   CheckPlayerBodyFloorClearance
                 tst.w   d1
                 bmi.w   Kill_Character
                 movem.l a4-a6,-(sp)
                 bsr.w   CheckLeftWallDist
                 tst.w   d1
-                bpl.s   SKKnucklesRolling_ProbeRightBackgroundWallAfterLeftCorrection
+                bpl.s   SKKnuxRoll_CheckGroundRollRightWall
                 sub.w   d1,x_pos(a0)
 
-SKKnucklesRolling_ProbeRightBackgroundWallAfterLeftCorrection:
+SKKnuxRoll_CheckGroundRollRightWall:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   SKKnucklesRolling_RestoreSavedBackgroundProbeBases
+                bpl.s   SKKnuxRoll_RestoreRollWallRegisters
                 add.w   d1,x_pos(a0)
 
-SKKnucklesRolling_RestoreSavedBackgroundProbeBases:
+SKKnuxRoll_RestoreRollWallRegisters:
                 movem.l (sp)+,a4-a6
 
-SKKnucklesRolling_ReturnAfterGroundStepOrBackgroundCorrection:
+SKKnuxRoll_GroundRollReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -234,10 +234,10 @@ Knux_Spin_Freespace:
                 bsr.w   Player_LevelBound
                 jsr     (MoveSprite_TestGravity).l
                 btst    #Status_Underwater,status(a0)
-                beq.s   SKKnucklesAir_FinishRollingAirAngleAndTerrain
+                beq.s   SKKnuxAir_BallAngleAndCollision
                 subi.w  #$28,y_vel(a0)
 
-SKKnucklesAir_FinishRollingAirAngleAndTerrain:
+SKKnuxAir_BallAngleAndCollision:
                 bsr.w   Player_JumpAngle
                 bsr.w   SonicKnux_DoLevelCollision
                 rts

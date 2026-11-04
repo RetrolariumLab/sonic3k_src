@@ -6,7 +6,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 18,
       "old": "loc_17D58",
-      "new": "SKKnucklesAnimation_ResolveRelativeKnucklesAnimationHeaderAndOrdinaryTimer",
+      "new": "SKKnuxAnim_DispatchHeader",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: ResolveRelativeKnucklesAnimationHeaderAndOrdinaryTimer"
     },
@@ -14,7 +14,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 31,
       "old": "loc_17D7E",
-      "new": "SKKnucklesAnimation_ReadKnucklesFrameBytecodeWithFcThreshold",
+      "new": "SKKnuxAnim_ReadFrameOrCommand",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: ReadKnucklesFrameBytecodeWithFcThreshold"
     },
@@ -22,7 +22,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 38,
       "old": "loc_17D8E",
-      "new": "SKKnucklesAnimation_StoreKnucklesMappingFrameAndAdvanceByteCursor",
+      "new": "SKKnuxAnim_StoreFrameAndAdvance",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: StoreKnucklesMappingFrameAndAdvanceByteCursor"
     },
@@ -30,7 +30,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 42,
       "old": "locret_17D96",
-      "new": "SKKnucklesAnimation_ReturnAfterKnucklesAnimationHoldOrFrameStore",
+      "new": "SKKnuxAnim_FrameReturn",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: ReturnAfterKnucklesAnimationHoldOrFrameStore"
     },
@@ -38,7 +38,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 46,
       "old": "loc_17D98",
-      "new": "SKKnucklesAnimation_RestartKnucklesStreamForFfCommand",
+      "new": "SKKnuxAnim_TestRestartFF",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: RestartKnucklesStreamForFfCommand"
     },
@@ -46,7 +46,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 54,
       "old": "loc_17DA8",
-      "new": "SKKnucklesAnimation_BacktrackKnucklesStreamForFeCommand",
+      "new": "SKKnuxAnim_TestBacktrackFE",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: BacktrackKnucklesStreamForFeCommand"
     },
@@ -54,7 +54,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 64,
       "old": "loc_17DBC",
-      "new": "SKKnucklesAnimation_DeferKnucklesAnimationChangeForFdCommand",
+      "new": "SKKnuxAnim_TestChangeFD",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: DeferKnucklesAnimationChangeForFdCommand"
     },
@@ -62,7 +62,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 69,
       "old": "locret_17DC6",
-      "new": "SKKnucklesAnimation_ReturnAfterKnucklesDeferredChangeOrIgnoredFc",
+      "new": "SKKnuxAnim_CommandReturn",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: ReturnAfterKnucklesDeferredChangeOrIgnoredFc"
     },
@@ -70,7 +70,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 73,
       "old": "loc_17DC8",
-      "new": "SKKnucklesAnimation_ChooseKnucklesWalkTumbleOrNegativeHeaderRoll",
+      "new": "SKKnuxAnim_DispatchMovementHeaderFF",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: ChooseKnucklesWalkTumbleOrNegativeHeaderRoll"
     },
@@ -78,7 +78,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 87,
       "old": "loc_17DEC",
-      "new": "SKKnucklesAnimation_ReflectKnucklesMovementAngleForFacingClear",
+      "new": "SKKnuxAnim_OrientWalkAngle",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: ReflectKnucklesMovementAngleForFacingClear"
     },
@@ -86,7 +86,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 93,
       "old": "loc_17DF8",
-      "new": "SKKnucklesAnimation_ChooseKnucklesMovementQuadrantFlipPair",
+      "new": "SKKnuxAnim_ChooseWalkFlip",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: ChooseKnucklesMovementQuadrantFlipPair"
     },
@@ -94,7 +94,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 98,
       "old": "loc_17E00",
-      "new": "SKKnucklesAnimation_CommitKnucklesMovementFlipsAndSelectPushOrSpeed",
+      "new": "SKKnuxAnim_ApplyWalkFlipAndCheckPush",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: CommitKnucklesMovementFlipsAndSelectPushOrSpeed"
     },
@@ -102,7 +102,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 110,
       "old": "loc_17E24",
-      "new": "SKKnucklesAnimation_DoubleKnucklesAnimationSpeedForSecondarySignBit",
+      "new": "SKKnuxAnim_AdjustWalkSpeed",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: DoubleKnucklesAnimationSpeedForSecondarySignBit"
     },
@@ -110,7 +110,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 115,
       "old": "loc_17E2E",
-      "new": "SKKnucklesAnimation_ChooseKnucklesWalkOrRunAtUnsignedSixHundred",
+      "new": "SKKnuxAnim_SelectWalkOrRunAt600",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: ChooseKnucklesWalkOrRunAtUnsignedSixHundred"
     },
@@ -118,7 +118,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 122,
       "old": "loc_17E42",
-      "new": "SKKnucklesAnimation_ComputeKnucklesAngularStrideAndReadCurrentMovementFrame",
+      "new": "SKKnuxAnim_ReadAngularMoveFrame",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: ComputeKnucklesAngularStrideAndReadCurrentMovementFrame"
     },
@@ -126,7 +126,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 133,
       "old": "loc_17E60",
-      "new": "SKKnucklesAnimation_WriteKnucklesAngularFrameBeforeTimerGate",
+      "new": "SKKnuxAnim_StoreMoveFrameAndTick",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: WriteKnucklesAngularFrameBeforeTimerGate"
     },
@@ -134,7 +134,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 143,
       "old": "loc_17E78",
-      "new": "SKKnucklesAnimation_ReloadKnucklesMovementDelayAndAdvanceCursor",
+      "new": "SKKnuxAnim_ReloadMoveDelayAndAdvance",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: ReloadKnucklesMovementDelayAndAdvanceCursor"
     },
@@ -142,7 +142,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 148,
       "old": "locret_17E82",
-      "new": "SKKnucklesAnimation_ReturnAfterKnucklesMovementFrameRefresh",
+      "new": "SKKnuxAnim_MovementReturn",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: ReturnAfterKnucklesMovementFrameRefresh"
     },
@@ -150,7 +150,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 152,
       "old": "loc_17E84",
-      "new": "SKKnucklesAnimation_ApplyFacingAndGateAllOtherNegativeHeadersAsRoll",
+      "new": "SKKnuxAnim_TickRollFrames",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: ApplyFacingAndGateAllOtherNegativeHeadersAsRoll"
     },
@@ -158,7 +158,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 163,
       "old": "loc_17EA6",
-      "new": "SKKnucklesAnimation_ChooseKnucklesRollStreamAtUnsignedSixHundred",
+      "new": "SKKnuxAnim_SelectRollSequenceAt600",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: ChooseKnucklesRollStreamAtUnsignedSixHundred"
     },
@@ -166,7 +166,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 169,
       "old": "loc_17EB8",
-      "new": "SKKnucklesAnimation_ClampWrappedKnucklesRollDuration",
+      "new": "SKKnuxAnim_ClampRollDelay",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: ClampWrappedKnucklesRollDuration"
     },
@@ -174,7 +174,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 175,
       "old": "loc_17EC2",
-      "new": "SKKnucklesAnimation_ReloadKnucklesRollDelayAndStepPayload",
+      "new": "SKKnuxAnim_ReloadRollDelayAndReadFrame",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: ReloadKnucklesRollDelayAndStepPayload"
     },
@@ -182,7 +182,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 181,
       "old": "loc_17ECC",
-      "new": "SKKnucklesAnimation_GateKnucklesPushFrameAndPrepareNegativeSpeed",
+      "new": "SKKnuxAnim_TickPushFrames",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: GateKnucklesPushFrameAndPrepareNegativeSpeed"
     },
@@ -190,7 +190,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 188,
       "old": "loc_17EDC",
-      "new": "SKKnucklesAnimation_ClampWrappedKnucklesPushDuration",
+      "new": "SKKnuxAnim_ClampPushDelay",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: ClampWrappedKnucklesPushDuration"
     },
@@ -198,7 +198,7 @@
       "source": "src/objects/players/knuckles/sk/animation_and_patterns.s",
       "original_line": 193,
       "old": "loc_17EE4",
-      "new": "SKKnucklesAnimation_ReloadKnucklesPushDelayAndStepPushPayload",
+      "new": "SKKnuxAnim_ReloadPushDelayAndReadFrame",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles animation control entry: ReloadKnucklesPushDelayAndStepPushPayload"
     },
@@ -230,7 +230,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 13,
       "old": "loc_17952",
-      "new": "SKKnucklesGlideContact_DispatchByStoredVelocityQuadrantAndProbeFirstLeftWall",
+      "new": "SKKnuxGlideHit_DispatchVelocitySector",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: DispatchByStoredVelocityQuadrantAndProbeFirstLeftWall"
     },
@@ -238,7 +238,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 33,
       "old": "loc_1799C",
-      "new": "SKKnucklesGlideContact_ProbeRightWallBeforeDefaultFloorQuery",
+      "new": "SKKnuxGlideHit_CheckDefaultRightWall",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: ProbeRightWallBeforeDefaultFloorQuery"
     },
@@ -246,7 +246,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 41,
       "old": "loc_179B4",
-      "new": "SKKnucklesGlideContact_QueryDefaultGravityRelativeFloorAndGateNegativeDistance",
+      "new": "SKKnuxGlideHit_ProbeDefaultFloor",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: QueryDefaultGravityRelativeFloorAndGateNegativeDistance"
     },
@@ -254,7 +254,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 49,
       "old": "loc_179C4",
-      "new": "SKKnucklesGlideContact_ApplyDefaultFloorContactAndClearGlobalAirFlag",
+      "new": "SKKnuxGlideHit_LandOnDefaultFloor",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: ApplyDefaultFloorContactAndClearGlobalAirFlag"
     },
@@ -262,7 +262,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 55,
       "old": "locret_179D8",
-      "new": "SKKnucklesGlideContact_ReturnAfterDefaultFloorMissOrAppliedContact",
+      "new": "SKKnuxGlideHit_DefaultFloorReturn",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: ReturnAfterDefaultFloorMissOrAppliedContact"
     },
@@ -270,7 +270,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 59,
       "old": "loc_179DA",
-      "new": "SKKnucklesGlideContact_ProbeLeftWallForLeftwardVelocitySector",
+      "new": "SKKnuxGlideHit_CheckLeftSectorWall",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: ProbeLeftWallForLeftwardVelocitySector"
     },
@@ -278,7 +278,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 67,
       "old": "loc_179F2",
-      "new": "SKKnucklesGlideContact_ChooseShallowLeftSectorCeilingOrOppositeWallProbe",
+      "new": "SKKnuxGlideHit_CheckLeftSectorCeiling",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: ChooseShallowLeftSectorCeilingOrOppositeWallProbe"
     },
@@ -286,7 +286,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 78,
       "old": "loc_17A0A",
-      "new": "SKKnucklesGlideContact_CorrectShallowLeftSectorCeilingAndStopUpwardSpeed",
+      "new": "SKKnuxGlideHit_CorrectLeftCeilingY",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: CorrectShallowLeftSectorCeilingAndStopUpwardSpeed"
     },
@@ -294,7 +294,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 84,
       "old": "locret_17A1A",
-      "new": "SKKnucklesGlideContact_ReturnAfterShallowLeftSectorCeilingResponse",
+      "new": "SKKnuxGlideHit_LeftCeilingReturn",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: ReturnAfterShallowLeftSectorCeilingResponse"
     },
@@ -302,7 +302,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 88,
       "old": "loc_17A1C",
-      "new": "SKKnucklesGlideContact_ProbeOppositeRightWallForDeepLeftSectorCeiling",
+      "new": "SKKnuxGlideHit_ProbeWallAtDeepCeiling",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: ProbeOppositeRightWallForDeepLeftSectorCeiling"
     },
@@ -310,7 +310,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 96,
       "old": "locret_17A34",
-      "new": "SKKnucklesGlideContact_ReturnAfterDeepCeilingOppositeWallProbe",
+      "new": "SKKnuxGlideHit_DeepCeilingWallReturn",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: ReturnAfterDeepCeilingOppositeWallProbe"
     },
@@ -318,7 +318,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 100,
       "old": "loc_17A36",
-      "new": "SKKnucklesGlideContact_GateLeftSectorFloorFallbackByNonnegativeYVelocity",
+      "new": "SKKnuxGlideHit_TryLeftSectorFloor",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: GateLeftSectorFloorFallbackByNonnegativeYVelocity"
     },
@@ -326,7 +326,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 110,
       "old": "loc_17A4C",
-      "new": "SKKnucklesGlideContact_ApplyLeftSectorFloorContactAndClearGlobalAir",
+      "new": "SKKnuxGlideHit_LandOnLeftSectorFloor",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: ApplyLeftSectorFloorContactAndClearGlobalAir"
     },
@@ -334,7 +334,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 116,
       "old": "locret_17A60",
-      "new": "SKKnucklesGlideContact_ReturnAfterLeftSectorFloorGateOrAppliedContact",
+      "new": "SKKnuxGlideHit_LeftFloorReturn",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: ReturnAfterLeftSectorFloorGateOrAppliedContact"
     },
@@ -342,7 +342,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 120,
       "old": "loc_17A62",
-      "new": "SKKnucklesGlideContact_ProbeLeftWallForUpwardVelocitySector",
+      "new": "SKKnuxGlideHit_CheckUpwardLeftWall",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: ProbeLeftWallForUpwardVelocitySector"
     },
@@ -350,7 +350,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 128,
       "old": "loc_17A7A",
-      "new": "SKKnucklesGlideContact_ProbeRightWallBeforeUpwardSectorCeilingQuery",
+      "new": "SKKnuxGlideHit_CheckUpwardRightWall",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: ProbeRightWallBeforeUpwardSectorCeilingQuery"
     },
@@ -358,7 +358,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 136,
       "old": "loc_17A94",
-      "new": "SKKnucklesGlideContact_QueryUpwardSectorCeilingAndAdjustDistanceForGravity",
+      "new": "SKKnuxGlideHit_ProbeUpwardSectorCeiling",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: QueryUpwardSectorCeilingAndAdjustDistanceForGravity"
     },
@@ -366,7 +366,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 144,
       "old": "loc_17AA4",
-      "new": "SKKnucklesGlideContact_ApplyUpwardSectorCeilingAndClearYVelocity",
+      "new": "SKKnuxGlideHit_CorrectUpwardCeilingY",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: ApplyUpwardSectorCeilingAndClearYVelocity"
     },
@@ -374,7 +374,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 148,
       "old": "locret_17AAE",
-      "new": "SKKnucklesGlideContact_ReturnAfterUpwardSectorCeilingMissOrCorrection",
+      "new": "SKKnuxGlideHit_UpwardCeilingReturn",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: ReturnAfterUpwardSectorCeilingMissOrCorrection"
     },
@@ -382,7 +382,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 152,
       "old": "loc_17AB0",
-      "new": "SKKnucklesGlideContact_ProbeRightWallForRightwardVelocitySector",
+      "new": "SKKnuxGlideHit_CheckRightSectorWall",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: ProbeRightWallForRightwardVelocitySector"
     },
@@ -390,7 +390,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 160,
       "old": "loc_17ACA",
-      "new": "SKKnucklesGlideContact_QueryRightSectorCeilingOrUseFloorFallback",
+      "new": "SKKnuxGlideHit_CheckRightSectorCeiling",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: QueryRightSectorCeilingOrUseFloorFallback"
     },
@@ -398,7 +398,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 168,
       "old": "loc_17ADA",
-      "new": "SKKnucklesGlideContact_CorrectRightSectorCeilingAndClampOnlyNegativeYSpeed",
+      "new": "SKKnuxGlideHit_CorrectRightCeilingY",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: CorrectRightSectorCeilingAndClampOnlyNegativeYSpeed"
     },
@@ -406,7 +406,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 174,
       "old": "locret_17AEA",
-      "new": "SKKnucklesGlideContact_ReturnAfterRightSectorCeilingResponse",
+      "new": "SKKnuxGlideHit_RightCeilingReturn",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: ReturnAfterRightSectorCeilingResponse"
     },
@@ -414,7 +414,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 178,
       "old": "loc_17AEC",
-      "new": "SKKnucklesGlideContact_GateRightSectorFloorFallbackByNonnegativeYVelocity",
+      "new": "SKKnuxGlideHit_TryRightSectorFloor",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: GateRightSectorFloorFallbackByNonnegativeYVelocity"
     },
@@ -422,7 +422,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 188,
       "old": "loc_17B02",
-      "new": "SKKnucklesGlideContact_ApplyRightSectorFloorContactAndClearGlobalAir",
+      "new": "SKKnuxGlideHit_LandOnRightSectorFloor",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: ApplyRightSectorFloorContactAndClearGlobalAir"
     },
@@ -430,7 +430,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 194,
       "old": "locret_17B16",
-      "new": "SKKnucklesGlideContact_ReturnAfterRightSectorFloorGateOrContact",
+      "new": "SKKnuxGlideHit_RightFloorReturn",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles GlideContact control entry: ReturnAfterRightSectorFloorGateOrContact"
     },
@@ -438,7 +438,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 223,
       "old": "loc_17B56",
-      "new": "SKKnucklesLanding_AdjustUnrollYOffsetByGravityAndAngleHemisphere",
+      "new": "SKKnuxLand_AdjustUnrollOffsetForSurface",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles Landing control entry: AdjustUnrollYOffsetByGravityAndAngleHemisphere"
     },
@@ -446,7 +446,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 230,
       "old": "loc_17B64",
-      "new": "SKKnucklesLanding_ApplySavedUnrollYOffsetBeforeCommonLandingReset",
+      "new": "SKKnuxLand_ApplyUnrollYOffset",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles Landing control entry: ApplySavedUnrollYOffsetBeforeCommonLandingReset"
     },
@@ -454,7 +454,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 234,
       "old": "loc_17B6A",
-      "new": "SKKnucklesLanding_ClearActorAirPushRollJumpAndGlideState",
+      "new": "SKKnuxLand_ResetLandingAndGlide",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles Landing control entry: ClearActorAirPushRollJumpAndGlideState"
     },
@@ -462,7 +462,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 249,
       "old": "locret_17BB4",
-      "new": "SKKnucklesLanding_ReturnAfterLandingResetAndOptionalSpecialAnimationClear",
+      "new": "SKKnuxLand_LandingResetReturn",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles Landing control entry: ReturnAfterLandingResetAndOptionalSpecialAnimationClear"
     },
@@ -470,7 +470,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 255,
       "old": "loc_17BB6",
-      "new": "SKKnucklesRecovery_EnterDebugBeforeHurtMotionOrContinueHurtState",
+      "new": "SKKnuxRecovery_CheckHurtDebugEntry",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles Recovery control entry: EnterDebugBeforeHurtMotionOrContinueHurtState"
     },
@@ -478,7 +478,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 265,
       "old": "loc_17BD0",
-      "new": "SKKnucklesRecovery_MoveHurtWithOldVelocityThenApplyStoredGravity",
+      "new": "SKKnuxRecovery_MoveHurtAndApplyGravity",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles Recovery control entry: MoveHurtWithOldVelocityThenApplyStoredGravity"
     },
@@ -486,7 +486,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 272,
       "old": "loc_17BEA",
-      "new": "SKKnucklesRecovery_WrapHurtIntegerYAtSharedMinusHundredCameraMinimum",
+      "new": "SKKnuxRecovery_WrapHurtYIfEnabled",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles Recovery control entry: WrapHurtIntegerYAtSharedMinusHundredCameraMinimum"
     },
@@ -494,7 +494,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 278,
       "old": "loc_17BFA",
-      "new": "SKKnucklesRecovery_ResolveHurtLandingThenBoundsHistoryAnimationAndDraw",
+      "new": "SKKnuxRecovery_ResolveHurtAndDraw",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles Recovery control entry: ResolveHurtLandingThenBoundsHistoryAnimationAndDraw"
     },
@@ -502,7 +502,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 299,
       "old": "loc_17C2E",
-      "new": "SKKnucklesRecovery_TestReverseGravityHurtDeathPlaneIncludingEquality",
+      "new": "SKKnuxRecovery_CheckReverseDeathPlane",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles Recovery control entry: TestReverseGravityHurtDeathPlaneIncludingEquality"
     },
@@ -510,7 +510,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 306,
       "old": "loc_17C3C",
-      "new": "SKKnucklesRecovery_ProbeHurtTerrainAndRecoverControlWhenActorAirBitClears",
+      "new": "SKKnuxRecovery_CheckHurtLandingAndReset",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles Recovery control entry: ProbeHurtTerrainAndRecoverControlWhenActorAirBitClears"
     },
@@ -518,7 +518,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 323,
       "old": "locret_17C80",
-      "new": "SKKnucklesRecovery_ReturnAfterHurtTerrainHoldOrRecoveredState",
+      "new": "SKKnuxRecovery_HurtLandingReturn",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles Recovery control entry: ReturnAfterHurtTerrainHoldOrRecoveredState"
     },
@@ -526,7 +526,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 327,
       "old": "loc_17C82",
-      "new": "SKKnucklesRecovery_TailKillAfterEnabledHurtDeathPlaneCrossing",
+      "new": "SKKnuxRecovery_KillAtHurtDeathPlane",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles Recovery control entry: TailKillAfterEnabledHurtDeathPlaneCrossing"
     },
@@ -534,7 +534,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 333,
       "old": "loc_17C88",
-      "new": "SKKnucklesRecovery_EnterDebugBeforeDeathFinisherOrContinueDeathState",
+      "new": "SKKnuxRecovery_CheckDeathDebugEntry",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles Recovery control entry: EnterDebugBeforeDeathFinisherOrContinueDeathState"
     },
@@ -542,7 +542,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 343,
       "old": "loc_17CA2",
-      "new": "SKKnucklesRecovery_FinishDeathBeforeGravityMotionHistoryAndDraw",
+      "new": "SKKnuxRecovery_ResolveDeathAndDraw",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles Recovery control entry: FinishDeathBeforeGravityMotionHistoryAndDraw"
     },
@@ -550,7 +550,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 351,
       "old": "loc_17CBA",
-      "new": "SKKnucklesRecovery_CountNonzeroRestartDelayAndRequestLevelRestartAtZero",
+      "new": "SKKnuxRecovery_TickRestartTimer",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles Recovery control entry: CountNonzeroRestartDelayAndRequestLevelRestartAtZero"
     },
@@ -558,7 +558,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 358,
       "old": "locret_17CCC",
-      "new": "SKKnucklesRecovery_ReturnWhileRestartDelayHoldsOrRestartRequested",
+      "new": "SKKnuxRecovery_RestartReturn",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles Recovery control entry: ReturnWhileRestartDelayHoldsOrRestartRequested"
     },
@@ -566,7 +566,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 362,
       "old": "loc_17CCE",
-      "new": "SKKnucklesRecovery_ResumeControlOnlyWhenBothPrimaryScrollAmountsAreZero",
+      "new": "SKKnuxRecovery_CheckP1ScrollSettled",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles Recovery control entry: ResumeControlOnlyWhenBothPrimaryScrollAmountsAreZero"
     },
@@ -574,7 +574,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 369,
       "old": "loc_17CE0",
-      "new": "SKKnucklesRecovery_AnimateAndDrawDuringScrollWaitOrAfterRelease",
+      "new": "SKKnuxRecovery_DrawScrollWaitFrame",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles Recovery control entry: AnimateAndDrawDuringScrollWaitOrAfterRelease"
     },
@@ -582,7 +582,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 374,
       "old": "loc_17CEA",
-      "new": "SKKnucklesRecovery_EnterDebugBeforeDrowningMotionOrContinueDrowning",
+      "new": "SKKnuxRecovery_CheckDrownDebugEntry",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles Recovery control entry: EnterDebugBeforeDrowningMotionOrContinueDrowning"
     },
@@ -590,7 +590,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 384,
       "old": "loc_17D04",
-      "new": "SKKnucklesRecovery_AdvanceDrowningWithOldVelocityAndTenHexGravity",
+      "new": "SKKnuxRecovery_MoveDrowningAndDraw",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles Recovery control entry: AdvanceDrowningWithOldVelocityAndTenHexGravity"
     },
@@ -598,7 +598,7 @@
       "source": "src/objects/players/knuckles/sk/damage_and_respawn.s",
       "original_line": 399,
       "old": "loc_17D2C",
-      "new": "SKKnucklesRecovery_TailNormalPatternLoaderAfterAnimationAndGravityMirror",
+      "new": "SKKnuxRecovery_LoadRecoveryPatterns",
       "profiles": ["sk"],
       "meaning": "Describe actual Knuckles Recovery control entry: TailNormalPatternLoaderAfterAnimationAndGravityMirror"
     },
@@ -606,7 +606,7 @@
       "source": "src/objects/players/knuckles/sk/environment_and_modes.s",
       "original_line": 11,
       "old": "locret_166F4",
-      "new": "SKKnucklesEnvironment_ReturnFromWaterStateOrSplashGate",
+      "new": "SKKnuxEnv_WaterTransitionReturn",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry ReturnFromWaterStateOrSplashGate."
     },
@@ -614,7 +614,7 @@
       "source": "src/objects/players/knuckles/sk/environment_and_modes.s",
       "original_line": 15,
       "old": "loc_166F6",
-      "new": "SKKnucklesEnvironment_DetectSignedWaterSideAndCommitFirstEntry",
+      "new": "SKKnuxEnv_CheckWaterAndInitEntry",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry DetectSignedWaterSideAndCommitFirstEntry."
     },
@@ -622,7 +622,7 @@
       "source": "src/objects/players/knuckles/sk/environment_and_modes.s",
       "original_line": 36,
       "old": "loc_1674A",
-      "new": "SKKnucklesEnvironment_AttenuateEntryVelocityOnlyWithZeroObjectControl",
+      "new": "SKKnuxEnv_DampenWaterEntry",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry AttenuateEntryVelocityOnlyWithZeroObjectControl."
     },
@@ -630,7 +630,7 @@
       "source": "src/objects/players/knuckles/sk/environment_and_modes.s",
       "original_line": 48,
       "old": "loc_1676E",
-      "new": "SKKnucklesEnvironment_ClearUnderwaterStateAndRestoreExitRates",
+      "new": "SKKnuxEnv_RestoreAirAndSpeedsOnExit",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry ClearUnderwaterStateAndRestoreExitRates."
     },
@@ -638,7 +638,7 @@
       "source": "src/objects/players/knuckles/sk/environment_and_modes.s",
       "original_line": 63,
       "old": "loc_167A8",
-      "new": "SKKnucklesEnvironment_ConditionallyDoubleExitVerticalVelocity",
+      "new": "SKKnuxEnv_TryDoubleExitYSpeed",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry ConditionallyDoubleExitVerticalVelocity."
     },
@@ -646,7 +646,7 @@
       "source": "src/objects/players/knuckles/sk/environment_and_modes.s",
       "original_line": 73,
       "old": "loc_167C4",
-      "new": "SKKnucklesEnvironment_GateExitSplashAndClampStrongUpwardVelocity",
+      "new": "SKKnuxEnv_CheckExitSplashAndClampY",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry GateExitSplashAndClampStrongUpwardVelocity."
     },
@@ -654,7 +654,7 @@
       "source": "src/objects/players/knuckles/sk/environment_and_modes.s",
       "original_line": 83,
       "old": "loc_167EA",
-      "new": "SKKnucklesEnvironment_RequestExitSplashSoundAfterVelocityClamp",
+      "new": "SKKnuxEnv_PlayExitSplash",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry RequestExitSplashSoundAfterVelocityClamp."
     },
@@ -662,7 +662,7 @@
       "source": "src/objects/players/knuckles/sk/environment_and_modes.s",
       "original_line": 111,
       "old": "loc_1683A",
-      "new": "SKKnucklesEnvironment_ProbeRightBackgroundWallAfterLeftCorrection",
+      "new": "SKKnuxEnv_CheckGroundRightWall",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry ProbeRightBackgroundWallAfterLeftCorrection."
     },
@@ -670,7 +670,7 @@
       "source": "src/objects/players/knuckles/sk/environment_and_modes.s",
       "original_line": 117,
       "old": "loc_16846",
-      "new": "SKKnucklesEnvironment_RestoreRegistersAfterGroundBackgroundWallProbes",
+      "new": "SKKnuxEnv_RestoreGroundWallRegisters",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry RestoreRegistersAfterGroundBackgroundWallProbes."
     },
@@ -678,7 +678,7 @@
       "source": "src/objects/players/knuckles/sk/environment_and_modes.s",
       "original_line": 120,
       "old": "locret_1684A",
-      "new": "SKKnucklesEnvironment_ReturnFromStandingGroundStepAfterBackgroundChecks",
+      "new": "SKKnuxEnv_GroundModeReturn",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry ReturnFromStandingGroundStepAfterBackgroundChecks."
     },
@@ -686,7 +686,7 @@
       "source": "src/objects/players/knuckles/sk/glide_and_climbing.s",
       "original_line": 17,
       "old": "loc_16872",
-      "new": "SKKnucklesAir_FinishStandingAirAngleAndTerrain",
+      "new": "SKKnuxAir_AngleAndCollision",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesAir_FinishStandingAirAngleAndTerrain from actual mode and state callers."
     },
@@ -694,7 +694,7 @@
       "source": "src/objects/players/knuckles/sk/glide_and_climbing.s",
       "original_line": 29,
       "old": "locret_1688E",
-      "new": "SKKnucklesGlide_ReturnAfterStateUpdateOrZeroFlag",
+      "new": "SKKnuxGlide_UpdateReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGlide_ReturnAfterStateUpdateOrZeroFlag from actual mode and state callers."
     },
@@ -702,7 +702,7 @@
       "source": "src/objects/players/knuckles/sk/glide_and_climbing.s",
       "original_line": 101,
       "old": "loc_1693E",
-      "new": "SKKnucklesGlide_BeginFlatSectorSlideAndRequestDust",
+      "new": "SKKnuxGlide_BeginFlatSlide",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGlide_BeginFlatSectorSlideAndRequestDust from actual mode and state callers."
     },
@@ -710,7 +710,7 @@
       "source": "src/objects/players/knuckles/sk/glide_motion.s",
       "original_line": 29,
       "old": "locret_16FA6",
-      "new": "SKKnucklesLedge_ReturnAfterTimerGateStepOrCompletion",
+      "new": "SKKnuxLedge_ClimbReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesLedge_ReturnAfterTimerGateStepOrCompletion from actual mode and state callers."
     },
@@ -718,7 +718,7 @@
       "source": "src/objects/players/knuckles/sk/glide_motion.s",
       "original_line": 200,
       "old": "loc_170CC",
-      "new": "SKKnucklesRolling_RunGroundPhysicsAttachmentAndBackground",
+      "new": "SKKnuxRoll_RunGroundRoll",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_RunGroundPhysicsAttachmentAndBackground from actual mode and state callers."
     },
@@ -726,7 +726,7 @@
       "source": "src/objects/players/knuckles/sk/glide_motion.s",
       "original_line": 218,
       "old": "loc_17106",
-      "new": "SKKnucklesRolling_ProbeRightBackgroundWallAfterLeftCorrection",
+      "new": "SKKnuxRoll_CheckGroundRollRightWall",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_ProbeRightBackgroundWallAfterLeftCorrection from actual mode and state callers."
     },
@@ -734,7 +734,7 @@
       "source": "src/objects/players/knuckles/sk/glide_motion.s",
       "original_line": 224,
       "old": "loc_17112",
-      "new": "SKKnucklesRolling_RestoreSavedBackgroundProbeBases",
+      "new": "SKKnuxRoll_RestoreRollWallRegisters",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_RestoreSavedBackgroundProbeBases from actual mode and state callers."
     },
@@ -742,7 +742,7 @@
       "source": "src/objects/players/knuckles/sk/glide_motion.s",
       "original_line": 227,
       "old": "locret_17116",
-      "new": "SKKnucklesRolling_ReturnAfterGroundStepOrBackgroundCorrection",
+      "new": "SKKnuxRoll_GroundRollReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_ReturnAfterGroundStepOrBackgroundCorrection from actual mode and state callers."
     },
@@ -750,7 +750,7 @@
       "source": "src/objects/players/knuckles/sk/glide_motion.s",
       "original_line": 240,
       "old": "loc_17138",
-      "new": "SKKnucklesAir_FinishRollingAirAngleAndTerrain",
+      "new": "SKKnuxAir_BallAngleAndCollision",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesAir_FinishRollingAirAngleAndTerrain from actual mode and state callers."
     },
@@ -758,7 +758,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 19,
       "old": "loc_17168",
-      "new": "SKKnucklesGround_ApplyRightGroundInputAfterLeftInput",
+      "new": "SKKnuxGround_CheckRightInput",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_ApplyRightGroundInputAfterLeftInput."
     },
@@ -766,7 +766,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 24,
       "old": "loc_17174",
-      "new": "SKKnucklesGround_GateStationaryBalanceAndTwoPixelObjectEdges",
+      "new": "SKKnuxGround_CheckStationaryBalance",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_GateStationaryBalanceAndTwoPixelObjectEdges."
     },
@@ -774,7 +774,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 52,
       "old": "loc_171D0",
-      "new": "SKKnucklesGround_ChooseObjectRightBalanceFromExistingFacing",
+      "new": "SKKnuxGround_CheckObjectRightBalance",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_ChooseObjectRightBalanceFromExistingFacing."
     },
@@ -782,7 +782,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 59,
       "old": "loc_171E2",
-      "new": "SKKnucklesGround_TurnRightAndResumeObjectBalanceAtFrameFour",
+      "new": "SKKnuxGround_TurnRightOnObjectAtFrame4",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_TurnRightAndResumeObjectBalanceAtFrameFour."
     },
@@ -790,7 +790,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 67,
       "old": "loc_171FE",
-      "new": "SKKnucklesGround_ChooseObjectLeftBalanceFromExistingFacing",
+      "new": "SKKnuxGround_CheckObjectLeftBalance",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_ChooseObjectLeftBalanceFromExistingFacing."
     },
@@ -798,7 +798,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 74,
       "old": "loc_17210",
-      "new": "SKKnucklesGround_TurnLeftAndResumeObjectBalanceAtFrameFour",
+      "new": "SKKnuxGround_TurnLeftOnObjectAtFrame4",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_TurnLeftAndResumeObjectBalanceAtFrameFour."
     },
@@ -806,7 +806,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 82,
       "old": "loc_1722C",
-      "new": "SKKnucklesGround_ProbeTerrainBalanceAndPreferForwardTiltThree",
+      "new": "SKKnuxGround_ProbeBalanceAndCheckTilt3",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_ProbeTerrainBalanceAndPreferForwardTiltThree."
     },
@@ -814,7 +814,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 95,
       "old": "loc_17256",
-      "new": "SKKnucklesGround_TurnRightAndResumeTerrainBalanceAtFrameFour",
+      "new": "SKKnuxGround_TurnRightOnTerrainAtFrame4",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_TurnRightAndResumeTerrainBalanceAtFrameFour."
     },
@@ -822,7 +822,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 103,
       "old": "loc_17272",
-      "new": "SKKnucklesGround_RequireRearTiltThreeForTerrainLeftBalance",
+      "new": "SKKnuxGround_CheckRearTilt3",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_RequireRearTiltThreeForTerrainLeftBalance."
     },
@@ -830,7 +830,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 112,
       "old": "loc_1728C",
-      "new": "SKKnucklesGround_TurnLeftAndResumeTerrainBalanceAtFrameFour",
+      "new": "SKKnuxGround_TurnLeftOnTerrainAtFrame4",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_TurnLeftAndResumeTerrainBalanceAtFrameFour."
     },
@@ -838,7 +838,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 120,
       "old": "loc_172A8",
-      "new": "SKKnucklesGround_PrioritizeDelayedDuckCameraOverLookUp",
+      "new": "SKKnuxGround_CheckDuckBeforeLookUp",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_PrioritizeDelayedDuckCameraOverLookUp."
     },
@@ -846,7 +846,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 136,
       "old": "loc_172D8",
-      "new": "SKKnucklesGround_RaiseReverseGravityDuckCameraTargetTowardD8",
+      "new": "SKKnuxGround_RaiseCameraForReverseDuck",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_RaiseReverseGravityDuckCameraTargetTowardD8."
     },
@@ -854,7 +854,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 143,
       "old": "loc_172E2",
-      "new": "SKKnucklesGround_CheckDelayedLookUpOnlyWithoutDown",
+      "new": "SKKnuxGround_CheckLookUp",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_CheckDelayedLookUpOnlyWithoutDown."
     },
@@ -862,7 +862,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 159,
       "old": "loc_17312",
-      "new": "SKKnucklesGround_LowerReverseGravityLookUpTargetToward18",
+      "new": "SKKnuxGround_LowerCameraForReverseLook",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_LowerReverseGravityLookUpTargetToward18."
     },
@@ -870,7 +870,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 166,
       "old": "loc_1731C",
-      "new": "SKKnucklesGround_ResetLookDelayBeforeCameraRecovery",
+      "new": "SKKnuxGround_ResetLookDelay",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_ResetLookDelayBeforeCameraRecovery."
     },
@@ -878,7 +878,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 169,
       "old": "loc_17322",
-      "new": "SKKnucklesGround_RecoverCameraTargetTowardSixtyWithUnsignedComparison",
+      "new": "SKKnuxGround_EaseLookCamera",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_RecoverCameraTargetTowardSixtyWithUnsignedComparison."
     },
@@ -886,7 +886,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 175,
       "old": "loc_1732C",
-      "new": "SKKnucklesGround_SubtractTwoFromVerticalCameraRecoveryTarget",
+      "new": "SKKnuxGround_ReduceCameraDistanceBy2",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_SubtractTwoFromVerticalCameraRecoveryTarget."
     },
@@ -894,7 +894,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 178,
       "old": "loc_1732E",
-      "new": "SKKnucklesGround_OverrideNeutralGroundFrictionForSuperOrHyper",
+      "new": "SKKnuxGround_SelectPoweredFriction",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_OverrideNeutralGroundFrictionForSuperOrHyper."
     },
@@ -902,7 +902,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 183,
       "old": "loc_17338",
-      "new": "SKKnucklesGround_ApplyGroundFrictionOnlyWithoutHeldHorizontalDirections",
+      "new": "SKKnuxGround_ApplyNeutralFriction",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_ApplyGroundFrictionOnlyWithoutHeldHorizontalDirections."
     },
@@ -910,7 +910,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 194,
       "old": "loc_17352",
-      "new": "SKKnucklesGround_StorePositiveNeutralGroundFriction",
+      "new": "SKKnuxGround_StorePositiveFriction",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_StorePositiveNeutralGroundFriction."
     },
@@ -918,7 +918,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 199,
       "old": "loc_17358",
-      "new": "SKKnucklesGround_ReduceNegativeGroundSpeedWithCarryClamp",
+      "new": "SKKnuxGround_ApplyNegativeFriction",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_ReduceNegativeGroundSpeedWithCarryClamp."
     },
@@ -926,7 +926,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 204,
       "old": "loc_17360",
-      "new": "SKKnucklesGround_StoreNegativeNeutralGroundFriction",
+      "new": "SKKnuxGround_StoreNegativeFriction",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_StoreNegativeNeutralGroundFriction."
     },
@@ -934,7 +934,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 207,
       "old": "loc_17364",
-      "new": "SKKnucklesGround_ProjectGroundSpeedIntoUnclampedWalkingVelocity",
+      "new": "SKKnuxGround_ProjectGroundSpeed",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_ProjectGroundSpeedIntoUnclampedWalkingVelocity."
     },
@@ -942,7 +942,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 217,
       "old": "loc_17382",
-      "new": "SKKnucklesGround_GateSharedWalkingAndRollingObstructionProbe",
+      "new": "SKKnuxGround_CheckTravelProbe",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_GateSharedWalkingAndRollingObstructionProbe."
     },
@@ -950,7 +950,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 227,
       "old": "loc_173A2",
-      "new": "SKKnucklesGround_ChooseObstructionDirectionFromGroundSpeedSign",
+      "new": "SKKnuxGround_PickTravelProbeOffset",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_ChooseObstructionDirectionFromGroundSpeedSign."
     },
@@ -958,7 +958,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 234,
       "old": "loc_173B0",
-      "new": "SKKnucklesGround_ProbeAheadAndRestoreRequestedDirectionBeforeResponse",
+      "new": "SKKnuxGround_ProbeTravelSide",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_ProbeAheadAndRestoreRequestedDirectionBeforeResponse."
     },
@@ -966,7 +966,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 249,
       "old": "loc_173D2",
-      "new": "SKKnucklesGround_RoundSavedDirectionAndResolveVelocityObstruction",
+      "new": "SKKnuxGround_RoundProbeAndResolve",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_RoundSavedDirectionAndResolveVelocityObstruction."
     },
@@ -974,7 +974,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 263,
       "old": "locret_17400",
-      "new": "SKKnucklesGround_ReturnAfterHorizontalResponseAndFacingDependentPush",
+      "new": "SKKnuxGround_HorizontalProbeReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_ReturnAfterHorizontalResponseAndFacingDependentPush."
     },
@@ -982,7 +982,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 267,
       "old": "loc_17402",
-      "new": "SKKnucklesGround_SubtractScaledCeilingGapFromYVelocity",
+      "new": "SKKnuxGround_ApplyCeilingCorrection",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_SubtractScaledCeilingGapFromYVelocity."
     },
@@ -990,7 +990,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 272,
       "old": "loc_17408",
-      "new": "SKKnucklesGround_ResolveLeftWallVelocityAndPushOnlyFacingLeft",
+      "new": "SKKnuxGround_ApplyLeftWallCorrection",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_ResolveLeftWallVelocityAndPushOnlyFacingLeft."
     },
@@ -998,7 +998,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 281,
       "old": "loc_17422",
-      "new": "SKKnucklesGround_AddScaledFloorGapToYVelocity",
+      "new": "SKKnuxGround_ApplyFloorCorrection",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_AddScaledFloorGapToYVelocity."
     },
@@ -1006,7 +1006,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 284,
       "old": "locret_17426",
-      "new": "SKKnucklesGround_ReturnAfterProjectionGateOrVerticalObstruction",
+      "new": "SKKnuxGround_TravelProbeReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_ReturnAfterProjectionGateOrVerticalObstruction."
     },
@@ -1014,7 +1014,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 295,
       "old": "loc_17430",
-      "new": "SKKnucklesGround_FaceLeftAndRestartMovementOnlyWhenFacingChanged",
+      "new": "SKKnuxGround_FaceLeftAndResetTurnState",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_FaceLeftAndRestartMovementOnlyWhenFacingChanged."
     },
@@ -1022,7 +1022,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 301,
       "old": "loc_17444",
-      "new": "SKKnucklesGround_AccelerateLeftWhilePreservingExistingOverspeed",
+      "new": "SKKnuxGround_AccelerateLeft",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_AccelerateLeftWhilePreservingExistingOverspeed."
     },
@@ -1030,7 +1030,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 312,
       "old": "loc_17456",
-      "new": "SKKnucklesGround_CommitLeftAccelerationAndMovementAnimation",
+      "new": "SKKnuxGround_StoreLeftSpeedAndAnimate",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_CommitLeftAccelerationAndMovementAnimation."
     },
@@ -1038,7 +1038,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 318,
       "old": "loc_17462",
-      "new": "SKKnucklesGround_BrakePositiveGroundSpeedForLeftHeldInput",
+      "new": "SKKnuxGround_BrakeRightwardSpeed",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_BrakePositiveGroundSpeedForLeftHeldInput."
     },
@@ -1046,7 +1046,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 323,
       "old": "loc_1746A",
-      "new": "SKKnucklesGround_StoreLeftBrakeThenTestSkidWithDestroyedLowByte",
+      "new": "SKKnuxGround_StoreLeftBrakeAndTestSkid",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_StoreLeftBrakeThenTestSkidWithDestroyedLowByte."
     },
@@ -1054,7 +1054,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 347,
       "old": "locret_174B2",
-      "new": "SKKnucklesGround_ReturnAfterLeftSkidGateAndOptionalDustRequest",
+      "new": "SKKnuxGround_LeftBrakeReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_ReturnAfterLeftSkidGateAndOptionalDustRequest."
     },
@@ -1062,7 +1062,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 361,
       "old": "loc_174CE",
-      "new": "SKKnucklesGround_AccelerateRightWhilePreservingExistingOverspeed",
+      "new": "SKKnuxGround_AccelerateRight",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_AccelerateRightWhilePreservingExistingOverspeed."
     },
@@ -1070,7 +1070,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 370,
       "old": "loc_174DC",
-      "new": "SKKnucklesGround_CommitRightAccelerationAndMovementAnimation",
+      "new": "SKKnuxGround_StoreRightSpeedAndAnimate",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_CommitRightAccelerationAndMovementAnimation."
     },
@@ -1078,7 +1078,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 376,
       "old": "loc_174E8",
-      "new": "SKKnucklesGround_BrakeNegativeGroundSpeedForRightHeldInput",
+      "new": "SKKnuxGround_BrakeLeftwardSpeed",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_BrakeNegativeGroundSpeedForRightHeldInput."
     },
@@ -1086,7 +1086,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 381,
       "old": "loc_174F0",
-      "new": "SKKnucklesGround_StoreRightBrakeThenTestSkidWithDestroyedLowByte",
+      "new": "SKKnuxGround_StoreRightBrakeAndTestSkid",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_StoreRightBrakeThenTestSkidWithDestroyedLowByte."
     },
@@ -1094,7 +1094,7 @@
       "source": "src/objects/players/knuckles/sk/ground_movement.s",
       "original_line": 405,
       "old": "locret_17538",
-      "new": "SKKnucklesGround_ReturnAfterRightSkidGateAndOptionalDustRequest",
+      "new": "SKKnuxGround_RightBrakeReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesGround_ReturnAfterRightSkidGateAndOptionalDustRequest."
     },
@@ -1102,7 +1102,7 @@
       "source": "src/objects/players/knuckles/sk/jump_actions.s",
       "original_line": 19,
       "old": "loc_17732",
-      "new": "SKKnucklesJump_ProbeOverheadAfterOptionalGravityAngleNormalization",
+      "new": "SKKnuxJump_ProbeLaunchClearance",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesJump_ProbeOverheadAfterOptionalGravityAngleNormalization."
     },
@@ -1110,7 +1110,7 @@
       "source": "src/objects/players/knuckles/sk/jump_actions.s",
       "original_line": 31,
       "old": "loc_1775C",
-      "new": "SKKnucklesJump_AddKnucklesJumpImpulseAndDiscardGroundReturn",
+      "new": "SKKnuxJump_ApplyImpulseAndSkipGround",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesJump_AddKnucklesJumpImpulseAndDiscardGroundReturn."
     },
@@ -1118,7 +1118,7 @@
       "source": "src/objects/players/knuckles/sk/jump_actions.s",
       "original_line": 64,
       "old": "loc_177DC",
-      "new": "SKKnucklesJump_ApplySignedJumpRadiusDeltaToIntegerY",
+      "new": "SKKnuxJump_ApplyJumpRadiusOffset",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesJump_ApplySignedJumpRadiusDeltaToIntegerY."
     },
@@ -1126,7 +1126,7 @@
       "source": "src/objects/players/knuckles/sk/jump_actions.s",
       "original_line": 67,
       "old": "locret_177E0",
-      "new": "SKKnucklesJump_ReturnFromRejectedOrNewlyRollingJumpWithProperStackContext",
+      "new": "SKKnuxJump_LaunchReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesJump_ReturnFromRejectedOrNewlyRollingJumpWithProperStackContext."
     },
@@ -1134,7 +1134,7 @@
       "source": "src/objects/players/knuckles/sk/jump_actions.s",
       "original_line": 71,
       "old": "loc_177E2",
-      "new": "SKKnucklesJump_MarkJumpStartedWhileAlreadyRolling",
+      "new": "SKKnuxJump_MarkRollJump",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesJump_MarkJumpStartedWhileAlreadyRolling."
     },
@@ -1142,7 +1142,7 @@
       "source": "src/objects/players/knuckles/sk/jump_actions.s",
       "original_line": 86,
       "old": "loc_17800",
-      "new": "SKKnucklesJump_TestGlideOrCapReleasedJumpAtSignedYThreshold",
+      "new": "SKKnuxJump_CheckReleaseOrGlide",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesJump_TestGlideOrCapReleasedJumpAtSignedYThreshold."
     },
@@ -1150,7 +1150,7 @@
       "source": "src/objects/players/knuckles/sk/jump_actions.s",
       "original_line": 94,
       "old": "locret_17816",
-      "new": "SKKnucklesJump_ReturnAfterHeldOrReleasedJumpHeightDecision",
+      "new": "SKKnuxJump_ReleaseCapReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesJump_ReturnAfterHeldOrReleasedJumpHeightDecision."
     },
@@ -1158,7 +1158,7 @@
       "source": "src/objects/players/knuckles/sk/jump_actions.s",
       "original_line": 98,
       "old": "loc_17818",
-      "new": "SKKnucklesJump_CapNonJumpUpwardVelocityUnlessSpinFlagSet",
+      "new": "SKKnuxJump_CapNonJumpAscent",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesJump_CapNonJumpUpwardVelocityUnlessSpinFlagSet."
     },
@@ -1166,7 +1166,7 @@
       "source": "src/objects/players/knuckles/sk/jump_actions.s",
       "original_line": 105,
       "old": "locret_1782C",
-      "new": "SKKnucklesJump_ReturnAfterNonJumpVelocityCapOrSpinExemption",
+      "new": "SKKnuxJump_UpwardSpeedLimitReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesJump_ReturnAfterNonJumpVelocityCapOrSpinExemption."
     },
@@ -1174,7 +1174,7 @@
       "source": "src/objects/players/knuckles/sk/jump_actions.s",
       "original_line": 124,
       "old": "loc_1785E",
-      "new": "SKKnucklesJump_GateSuperOrHyperTransformByRingsAndRunningHudTimer",
+      "new": "SKKnuxJump_CheckTransformRingsAndTimer",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesJump_GateSuperOrHyperTransformByRingsAndRunningHudTimer."
     },
@@ -1182,7 +1182,7 @@
       "source": "src/objects/players/knuckles/sk/jump_actions.s",
       "original_line": 130,
       "old": "loc_1786C",
-      "new": "SKKnucklesJump_EnterGlideWithTenPixelRadiiAndNonnegativeAdjustedY",
+      "new": "SKKnuxJump_InitGlideShapeAndYSpeed",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesJump_EnterGlideWithTenPixelRadiiAndNonnegativeAdjustedY."
     },
@@ -1190,7 +1190,7 @@
       "source": "src/objects/players/knuckles/sk/jump_actions.s",
       "original_line": 140,
       "old": "loc_17898",
-      "new": "SKKnucklesJump_InitializePositiveGlideMagnitudeAndFacingSignedHeading",
+      "new": "SKKnuxJump_SetGlideSpeedAndHeading",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesJump_InitializePositiveGlideMagnitudeAndFacingSignedHeading."
     },
@@ -1198,7 +1198,7 @@
       "source": "src/objects/players/knuckles/sk/jump_actions.s",
       "original_line": 149,
       "old": "loc_178AE",
-      "new": "SKKnucklesJump_StoreGlideXHeadingClearBothAnglesAndInitializeContactFlags",
+      "new": "SKKnuxJump_StoreGlideHeadingAndFlags",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesJump_StoreGlideXHeadingClearBothAnglesAndInitializeContactFlags."
     },
@@ -1206,7 +1206,7 @@
       "source": "src/objects/players/knuckles/sk/jump_actions.s",
       "original_line": 157,
       "old": "locret_178CC",
-      "new": "SKKnucklesJump_ReturnAfterRejectedOrInitializedGlide",
+      "new": "SKKnuxJump_GlideStartReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesJump_ReturnAfterRejectedOrInitializedGlide."
     },
@@ -1214,7 +1214,7 @@
       "source": "src/objects/players/knuckles/sk/lifecycle.s",
       "original_line": 18,
       "old": "loc_1646C",
-      "new": "SKKnucklesLifecycle_CycleDebugMappingFrameWithFbExclusiveLimit",
+      "new": "SKKnuxMain_AdvanceDebugFrame",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry CycleDebugMappingFrameWithFbExclusiveLimit."
     },
@@ -1222,7 +1222,7 @@
       "source": "src/objects/players/knuckles/sk/lifecycle.s",
       "original_line": 24,
       "old": "loc_1647E",
-      "new": "SKKnucklesLifecycle_LoadDebugFramePatternsAndQueueSprite",
+      "new": "SKKnuxMain_LoadAndDrawDebugFrame",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry LoadDebugFramePatternsAndQueueSprite."
     },
@@ -1230,7 +1230,7 @@
       "source": "src/objects/players/knuckles/sk/lifecycle.s",
       "original_line": 29,
       "old": "loc_16488",
-      "new": "SKKnucklesLifecycle_DelegateObjectPlacementToDebugMode",
+      "new": "SKKnuxMain_EnterDebugPlacement",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry DelegateObjectPlacementToDebugMode."
     },
@@ -1238,7 +1238,7 @@
       "source": "src/objects/players/knuckles/sk/lifecycle.s",
       "original_line": 96,
       "old": "loc_16580",
-      "new": "SKKnucklesLifecycle_SelectPlacementOrFrameViewerFromDebugButton",
+      "new": "SKKnuxMain_CheckDebugBEntry",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry SelectPlacementOrFrameViewerFromDebugButton."
     },
@@ -1246,7 +1246,7 @@
       "source": "src/objects/players/knuckles/sk/lifecycle.s",
       "original_line": 105,
       "old": "locret_165A0",
-      "new": "SKKnucklesLifecycle_ReturnAfterSelectingDebugPresentationMode",
+      "new": "SKKnuxMain_DebugReturn",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry ReturnAfterSelectingDebugPresentationMode."
     },
@@ -1254,7 +1254,7 @@
       "source": "src/objects/players/knuckles/sk/lifecycle.s",
       "original_line": 109,
       "old": "loc_165A2",
-      "new": "SKKnucklesLifecycle_RefreshLogicalPrimaryInputUnlessLocked",
+      "new": "SKKnuxMain_CopyUnlockedInput",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry RefreshLogicalPrimaryInputUnlessLocked."
     },
@@ -1262,7 +1262,7 @@
       "source": "src/objects/players/knuckles/sk/lifecycle.s",
       "original_line": 114,
       "old": "loc_165AE",
-      "new": "SKKnucklesLifecycle_GateMovementAndResetGlideStateWhenControlled",
+      "new": "SKKnuxMain_CheckExternalMovement",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry GateMovementAndResetGlideStateWhenControlled."
     },
@@ -1270,7 +1270,7 @@
       "source": "src/objects/players/knuckles/sk/lifecycle.s",
       "original_line": 121,
       "old": "loc_165BE",
-      "new": "SKKnucklesLifecycle_DispatchStandingRollingAndAirModesWithSavedRegisters",
+      "new": "SKKnuxMain_DispatchMovementMode",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry DispatchStandingRollingAndAirModesWithSavedRegisters."
     },
@@ -1278,7 +1278,7 @@
       "source": "src/objects/players/knuckles/sk/lifecycle.s",
       "original_line": 130,
       "old": "loc_165D8",
-      "new": "SKKnucklesLifecycle_WrapIntegerYBeforeActiveServices",
+      "new": "SKKnuxMain_WrapPlayerYIfEnabled",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry WrapIntegerYBeforeActiveServices."
     },
@@ -1286,7 +1286,7 @@
       "source": "src/objects/players/knuckles/sk/lifecycle.s",
       "original_line": 136,
       "old": "loc_165E8",
-      "new": "SKKnucklesLifecycle_RunDisplayPowerHistoryAndWaterBeforeAnimation",
+      "new": "SKKnuxMain_UpdateFrameServices",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry RunDisplayPowerHistoryAndWaterBeforeAnimation."
     },
@@ -1294,7 +1294,7 @@
       "source": "src/objects/players/knuckles/sk/lifecycle.s",
       "original_line": 149,
       "old": "loc_16614",
-      "new": "SKKnucklesLifecycle_GateAnimationAndApplyOuterGravityMirror",
+      "new": "SKKnuxMain_CheckAnimateAndMirror",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry GateAnimationAndApplyOuterGravityMirror."
     },
@@ -1302,7 +1302,7 @@
       "source": "src/objects/players/knuckles/sk/lifecycle.s",
       "original_line": 157,
       "old": "loc_1662C",
-      "new": "SKKnucklesLifecycle_LoadPatternsAfterOptionalGravityMirror",
+      "new": "SKKnuxMain_LoadPatterns",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry LoadPatternsAfterOptionalGravityMirror."
     },
@@ -1310,7 +1310,7 @@
       "source": "src/objects/players/knuckles/sk/lifecycle.s",
       "original_line": 160,
       "old": "loc_16630",
-      "new": "SKKnucklesLifecycle_GateTouchResponseByControlBitsFiveAndSeven",
+      "new": "SKKnuxMain_CheckTouchResponse",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry GateTouchResponseByControlBitsFiveAndSeven."
     },
@@ -1318,7 +1318,7 @@
       "source": "src/objects/players/knuckles/sk/lifecycle.s",
       "original_line": 166,
       "old": "locret_16640",
-      "new": "SKKnucklesLifecycle_ReturnAfterActiveControlAndContactGate",
+      "new": "SKKnuxMain_FrameReturn",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry ReturnAfterActiveControlAndContactGate."
     },
@@ -1326,7 +1326,7 @@
       "source": "src/objects/players/knuckles/sk/lifecycle.s",
       "original_line": 184,
       "old": "loc_16658",
-      "new": "SKKnucklesLifecycle_QueueSpriteForSelectedInvulnerabilityFlashPhase",
+      "new": "SKKnuxMain_DrawVisibleBlinkPhase",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry QueueSpriteForSelectedInvulnerabilityFlashPhase."
     },
@@ -1334,7 +1334,7 @@
       "source": "src/objects/players/knuckles/sk/lifecycle.s",
       "original_line": 187,
       "old": "loc_1665E",
-      "new": "SKKnucklesLifecycle_TickInvincibilityOnGlobalEighthPhase",
+      "new": "SKKnuxMain_TickInvincibilityEvery8",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry TickInvincibilityOnGlobalEighthPhase."
     },
@@ -1342,7 +1342,7 @@
       "source": "src/objects/players/knuckles/sk/lifecycle.s",
       "original_line": 204,
       "old": "loc_16694",
-      "new": "SKKnucklesLifecycle_ClearInvincibilityAfterExpiryMusicDecision",
+      "new": "SKKnuxMain_ExpireInvincibility",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry ClearInvincibilityAfterExpiryMusicDecision."
     },
@@ -1350,7 +1350,7 @@
       "source": "src/objects/players/knuckles/sk/lifecycle.s",
       "original_line": 207,
       "old": "loc_1669A",
-      "new": "SKKnucklesLifecycle_TickSpeedShoesAndRestoreExpirySpeedProfile",
+      "new": "SKKnuxMain_TickShoesAndRestoreSpeed",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry TickSpeedShoesAndRestoreExpirySpeedProfile."
     },
@@ -1358,7 +1358,7 @@
       "source": "src/objects/players/knuckles/sk/lifecycle.s",
       "original_line": 226,
       "old": "loc_166DE",
-      "new": "SKKnucklesLifecycle_ClearSpeedShoesAndRequestNormalMusicTempo",
+      "new": "SKKnuxMain_ClearShoesAndRestoreTempo",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry ClearSpeedShoesAndRequestNormalMusicTempo."
     },
@@ -1366,7 +1366,7 @@
       "source": "src/objects/players/knuckles/sk/lifecycle.s",
       "original_line": 232,
       "old": "locret_166EC",
-      "new": "SKKnucklesLifecycle_ReturnWithoutSpeedShoesExpiryCleanup",
+      "new": "SKKnuxMain_PowerUpdateReturn",
       "profiles": ["sk"],
       "meaning": "Describe native Knuckles entry ReturnWithoutSpeedShoesExpiryCleanup."
     },
@@ -1374,7 +1374,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 16,
       "old": "loc_1754E",
-      "new": "SKKnucklesRolling_SetFixedRollingBrakeAndGateForcedLockedInput",
+      "new": "SKKnuxRoll_CheckRollInput",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_SetFixedRollingBrakeAndGateForcedLockedInput."
     },
@@ -1382,7 +1382,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 28,
       "old": "loc_17574",
-      "new": "SKKnucklesRolling_ApplyRightRollingInputAfterLeftInput",
+      "new": "SKKnuxRoll_CheckRightInput",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_ApplyRightRollingInputAfterLeftInput."
     },
@@ -1390,7 +1390,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 33,
       "old": "loc_17580",
-      "new": "SKKnucklesRolling_ApplyRollingFrictionEvenWithHeldDirectionsOrMoveLock",
+      "new": "SKKnuxRoll_ApplySignedFriction",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_ApplyRollingFrictionEvenWithHeldDirectionsOrMoveLock."
     },
@@ -1398,7 +1398,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 41,
       "old": "loc_17590",
-      "new": "SKKnucklesRolling_StorePositiveRollingFrictionBeforeUnrollMagnitude",
+      "new": "SKKnuxRoll_StorePositiveFriction",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_StorePositiveRollingFrictionBeforeUnrollMagnitude."
     },
@@ -1406,7 +1406,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 46,
       "old": "loc_17596",
-      "new": "SKKnucklesRolling_ApplyNegativeRollingFrictionWithCarryClamp",
+      "new": "SKKnuxRoll_ApplyNegativeFriction",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_ApplyNegativeRollingFrictionWithCarryClamp."
     },
@@ -1414,7 +1414,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 51,
       "old": "loc_1759E",
-      "new": "SKKnucklesRolling_StoreNegativeRollingFrictionBeforeUnrollMagnitude",
+      "new": "SKKnuxRoll_StoreNegativeFriction",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_StoreNegativeRollingFrictionBeforeUnrollMagnitude."
     },
@@ -1422,7 +1422,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 54,
       "old": "loc_175A2",
-      "new": "SKKnucklesRolling_BuildWordMagnitudeForUnrollThreshold",
+      "new": "SKKnuxRoll_GetRollSpeedMagnitude",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_BuildWordMagnitudeForUnrollThreshold."
     },
@@ -1430,7 +1430,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 59,
       "old": "loc_175AA",
-      "new": "SKKnucklesRolling_UnrollBelowUnsignedEightyOrMaintainForcedRoll",
+      "new": "SKKnuxRoll_CheckUnrollBelow80",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_UnrollBelowUnsignedEightyOrMaintainForcedRoll."
     },
@@ -1438,7 +1438,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 75,
       "old": "loc_175E0",
-      "new": "SKKnucklesRolling_ApplyGravityAdjustedUnrollDeltaToIntegerY",
+      "new": "SKKnuxRoll_ApplyUnrollRadiusOffset",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_ApplyGravityAdjustedUnrollDeltaToIntegerY."
     },
@@ -1446,7 +1446,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 80,
       "old": "loc_175E6",
-      "new": "SKKnucklesRolling_RestoreForcedRollSpeedByFacingBelowUnrollThreshold",
+      "new": "SKKnuxRoll_ResumeForcedRoll",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_RestoreForcedRollSpeedByFacingBelowUnrollThreshold."
     },
@@ -1454,7 +1454,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 86,
       "old": "loc_175F8",
-      "new": "SKKnucklesRolling_RecoverRollingCameraBeforeVelocityProjection",
+      "new": "SKKnuxRoll_EaseRollCamera",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_RecoverRollingCameraBeforeVelocityProjection."
     },
@@ -1462,7 +1462,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 92,
       "old": "loc_17602",
-      "new": "SKKnucklesRolling_SubtractRollingCameraRecoveryStep",
+      "new": "SKKnuxRoll_ReduceRollCameraDistanceBy2",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_SubtractRollingCameraRecoveryStep."
     },
@@ -1470,7 +1470,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 95,
       "old": "loc_17604",
-      "new": "SKKnucklesRolling_ProjectRollingYAndClampPositiveProjectedXWord",
+      "new": "SKKnuxRoll_ProjectGroundSpeed",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_ProjectRollingYAndClampPositiveProjectedXWord."
     },
@@ -1478,7 +1478,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 107,
       "old": "loc_17628",
-      "new": "SKKnucklesRolling_ClampNegativeRollingProjectionWord",
+      "new": "SKKnuxRoll_ClampProjectedMinXSpeed",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_ClampNegativeRollingProjectionWord."
     },
@@ -1486,7 +1486,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 112,
       "old": "loc_17632",
-      "new": "SKKnucklesRolling_StoreRollingXAndTailBranchGroundObstruction",
+      "new": "SKKnuxRoll_StoreXSpeedAndProbe",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_StoreRollingXAndTailBranchGroundObstruction."
     },
@@ -1494,7 +1494,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 124,
       "old": "loc_17642",
-      "new": "SKKnucklesRolling_FaceLeftAndKeepRollAnimationWithoutAcceleration",
+      "new": "SKKnuxRoll_FaceLeftAndKeepRolling",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_FaceLeftAndKeepRollAnimationWithoutAcceleration."
     },
@@ -1502,7 +1502,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 130,
       "old": "loc_17650",
-      "new": "SKKnucklesRolling_BrakePositiveRollByFixedTwentyForLeftInput",
+      "new": "SKKnuxRoll_BrakeRightwardRoll",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_BrakePositiveRollByFixedTwentyForLeftInput."
     },
@@ -1510,7 +1510,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 135,
       "old": "loc_17658",
-      "new": "SKKnucklesRolling_StoreLeftRollingBrakeAndReturn",
+      "new": "SKKnuxRoll_StoreLeftBrakeResult",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_StoreLeftRollingBrakeAndReturn."
     },
@@ -1518,7 +1518,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 150,
       "old": "loc_17672",
-      "new": "SKKnucklesRolling_BrakeNegativeRollByFixedTwentyForRightInput",
+      "new": "SKKnuxRoll_BrakeLeftwardRoll",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_BrakeNegativeRollByFixedTwentyForRightInput."
     },
@@ -1526,7 +1526,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 155,
       "old": "loc_1767A",
-      "new": "SKKnucklesRolling_StoreRightRollingBrakeAndReturn",
+      "new": "SKKnuxRoll_StoreRightBrakeResult",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_StoreRightRollingBrakeAndReturn."
     },
@@ -1534,7 +1534,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 183,
       "old": "loc_176B4",
-      "new": "SKKnucklesRolling_ApplyRightAirInputAfterOverspeedPreservingLeftStep",
+      "new": "SKKnuxRoll_CheckAirRightInput",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_ApplyRightAirInputAfterOverspeedPreservingLeftStep."
     },
@@ -1542,7 +1542,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 195,
       "old": "loc_176D0",
-      "new": "SKKnucklesRolling_CommitAirInputHorizontalVelocity",
+      "new": "SKKnuxRoll_StoreAirXSpeed",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_CommitAirInputHorizontalVelocity."
     },
@@ -1550,7 +1550,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 198,
       "old": "loc_176D4",
-      "new": "SKKnucklesRolling_RecoverAirCameraEvenWhenRollJumpBlocksInput",
+      "new": "SKKnuxRoll_EaseAirCamera",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_RecoverAirCameraEvenWhenRollJumpBlocksInput."
     },
@@ -1558,7 +1558,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 204,
       "old": "loc_176DE",
-      "new": "SKKnucklesRolling_SubtractAirCameraRecoveryStep",
+      "new": "SKKnuxRoll_ReduceAirCameraDistanceBy2",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_SubtractAirCameraRecoveryStep."
     },
@@ -1566,7 +1566,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 207,
       "old": "loc_176E0",
-      "new": "SKKnucklesRolling_GateAirDragByUnsignedUpwardVelocityWindow",
+      "new": "SKKnuxRoll_CheckAirDragWindow",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_GateAirDragByUnsignedUpwardVelocityWindow."
     },
@@ -1574,7 +1574,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 219,
       "old": "loc_176FC",
-      "new": "SKKnucklesRolling_CommitPositiveQuotientAirDrag",
+      "new": "SKKnuxRoll_StoreRightAirDrag",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_CommitPositiveQuotientAirDrag."
     },
@@ -1582,7 +1582,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 224,
       "old": "loc_17702",
-      "new": "SKKnucklesRolling_ApplyNegativeQuotientAirDragWithBorrowPolarity",
+      "new": "SKKnuxRoll_ApplyLeftAirDrag",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_ApplyNegativeQuotientAirDragWithBorrowPolarity."
     },
@@ -1590,7 +1590,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 229,
       "old": "loc_1770A",
-      "new": "SKKnucklesRolling_CommitNegativeQuotientAirDrag",
+      "new": "SKKnuxRoll_StoreLeftAirDrag",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_CommitNegativeQuotientAirDrag."
     },
@@ -1598,7 +1598,7 @@
       "source": "src/objects/players/knuckles/sk/rolling_control.s",
       "original_line": 232,
       "old": "locret_1770E",
-      "new": "SKKnucklesRolling_ReturnAfterAirDragOrRejectedVelocity",
+      "new": "SKKnuxRoll_AirDragReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKKnucklesRolling_ReturnAfterAirDragOrRejectedVelocity."
     },
@@ -6390,7 +6390,7 @@
       "source": "src/objects/shared/knuckles/mappings/sstage_knuckles.s",
       "original_line": 30,
       "old": "word_AD332",
-      "new": "SpecialStageKnuckles_EmptyMappingAndDplcFrame00",
+      "new": "SStageKnux_EmptyMapDPLC00",
       "profiles": ["sk"],
       "meaning": "Describe SpecialStageKnuckles_EmptyMappingAndDplcFrame00 from actual literal/table/reader contracts."
     },

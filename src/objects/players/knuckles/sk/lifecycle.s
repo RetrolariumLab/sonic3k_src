@@ -10,23 +10,23 @@ Obj_Knuckles:
                 tst.w   (Debug_placement_mode).w
                 beq.s   Knuckles_Normal
                 cmpi.b  #1,(Debug_placement_type).w
-                beq.s   SKKnucklesLifecycle_DelegateObjectPlacementToDebugMode
+                beq.s   SKKnuxMain_EnterDebugPlacement
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   SKKnucklesLifecycle_CycleDebugMappingFrameWithFbExclusiveLimit
+                beq.s   SKKnuxMain_AdvanceDebugFrame
                 move.w  #0,(Debug_placement_mode).w
 
-SKKnucklesLifecycle_CycleDebugMappingFrameWithFbExclusiveLimit:
+SKKnuxMain_AdvanceDebugFrame:
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #$FB,mapping_frame(a0)
-                blo.s   SKKnucklesLifecycle_LoadDebugFramePatternsAndQueueSprite
+                blo.s   SKKnuxMain_LoadAndDrawDebugFrame
                 move.b  #0,mapping_frame(a0)
 
-SKKnucklesLifecycle_LoadDebugFramePatternsAndQueueSprite:
+SKKnuxMain_LoadAndDrawDebugFrame:
                 bsr.w   Knuckles_Load_PLC
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-SKKnucklesLifecycle_DelegateObjectPlacementToDebugMode:
+SKKnuxMain_EnterDebugPlacement:
                 jmp     (DebugMode).l
 ; ---------------------------------------------------------------------------
 
@@ -39,11 +39,11 @@ Knuckles_Normal:
 Knuckles_Index:
                 dc.w    Knuckles_Init-Knuckles_Index
                 dc.w    Knuckles_Control-Knuckles_Index
-                dc.w    SKKnucklesRecovery_EnterDebugBeforeHurtMotionOrContinueHurtState-Knuckles_Index
-                dc.w    SKKnucklesRecovery_EnterDebugBeforeDeathFinisherOrContinueDeathState-Knuckles_Index
-                dc.w    SKKnucklesRecovery_CountNonzeroRestartDelayAndRequestLevelRestartAtZero-Knuckles_Index
-                dc.w    SKKnucklesRecovery_ResumeControlOnlyWhenBothPrimaryScrollAmountsAreZero-Knuckles_Index
-                dc.w    SKKnucklesRecovery_EnterDebugBeforeDrowningMotionOrContinueDrowning-Knuckles_Index
+                dc.w    SKKnuxRecovery_CheckHurtDebugEntry-Knuckles_Index
+                dc.w    SKKnuxRecovery_CheckDeathDebugEntry-Knuckles_Index
+                dc.w    SKKnuxRecovery_TickRestartTimer-Knuckles_Index
+                dc.w    SKKnuxRecovery_CheckP1ScrollSettled-Knuckles_Index
+                dc.w    SKKnuxRecovery_CheckDrownDebugEntry-Knuckles_Index
 ; ---------------------------------------------------------------------------
 
 Knuckles_Init:
@@ -88,37 +88,38 @@ Knuckles_Init_Continued:
 
 Knuckles_Control:
                 tst.w   (Debug_mode_flag).w
-                beq.s   SKKnucklesLifecycle_RefreshLogicalPrimaryInputUnlessLocked
+                beq.s   SKKnuxMain_CopyUnlockedInput
                 bclr    #button_A,(Ctrl_1_pressed).w
-                beq.s   SKKnucklesLifecycle_SelectPlacementOrFrameViewerFromDebugButton
+                beq.s   SKKnuxMain_CheckDebugBEntry
                 eori.b  #1,(Reverse_gravity_flag).w
 
-SKKnucklesLifecycle_SelectPlacementOrFrameViewerFromDebugButton:
+SKKnuxMain_CheckDebugBEntry:
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   SKKnucklesLifecycle_RefreshLogicalPrimaryInputUnlessLocked
+                beq.s   SKKnuxMain_CopyUnlockedInput
                 move.w  #1,(Debug_placement_mode).w
                 clr.b   (Ctrl_1_locked).w
                 btst    #button_C,(Ctrl_1_held).w
-                beq.s   SKKnucklesLifecycle_ReturnAfterSelectingDebugPresentationMode
+                beq.s   SKKnuxMain_DebugReturn
                 move.w  #2,(Debug_placement_mode).w
 
-SKKnucklesLifecycle_ReturnAfterSelectingDebugPresentationMode:
+SKKnuxMain_DebugReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKKnucklesLifecycle_RefreshLogicalPrimaryInputUnlessLocked:
+SKKnuxMain_CopyUnlockedInput:
                 tst.b   (Ctrl_1_locked).w
-                bne.s   SKKnucklesLifecycle_GateMovementAndResetGlideStateWhenControlled
+                bne.s   SKKnuxMain_CheckExternalMovement
                 move.w  (Ctrl_1).w,(Ctrl_1_logical).w
 
-SKKnucklesLifecycle_GateMovementAndResetGlideStateWhenControlled:
+; External movement clears the glide state and skips normal movement dispatch
+SKKnuxMain_CheckExternalMovement:
                 btst    #0,object_control(a0)
-                beq.s   SKKnucklesLifecycle_DispatchStandingRollingAndAirModesWithSavedRegisters
+                beq.s   SKKnuxMain_DispatchMovementMode
                 move.b  #0,double_jump_flag(a0)
-                bra.s   SKKnucklesLifecycle_WrapIntegerYBeforeActiveServices
+                bra.s   SKKnuxMain_WrapPlayerYIfEnabled
 ; ---------------------------------------------------------------------------
 
-SKKnucklesLifecycle_DispatchStandingRollingAndAirModesWithSavedRegisters:
+SKKnuxMain_DispatchMovementMode:
                 movem.l a4-a6,-(sp)
                 moveq   #0,d0
                 move.b  status(a0),d0
@@ -127,13 +128,13 @@ SKKnucklesLifecycle_DispatchStandingRollingAndAirModesWithSavedRegisters:
                 jsr     Knux_Modes(pc,d1.w)
                 movem.l (sp)+,a4-a6
 
-SKKnucklesLifecycle_WrapIntegerYBeforeActiveServices:
+SKKnuxMain_WrapPlayerYIfEnabled:
                 cmpi.w  #-$100,(Camera_min_Y_pos).w
-                bne.s   SKKnucklesLifecycle_RunDisplayPowerHistoryAndWaterBeforeAnimation
+                bne.s   SKKnuxMain_UpdateFrameServices
                 move.w  (Screen_Y_wrap_value).w,d0
                 and.w   d0,y_pos(a0)
 
-SKKnucklesLifecycle_RunDisplayPowerHistoryAndWaterBeforeAnimation:
+SKKnuxMain_UpdateFrameServices:
                 bsr.s   Knuckles_Display
                 bsr.w   SonicKnux_SuperHyper
                 bsr.w   Sonic_RecordPos
@@ -141,29 +142,29 @@ SKKnucklesLifecycle_RunDisplayPowerHistoryAndWaterBeforeAnimation:
                 move.b  (Primary_Angle).w,next_tilt(a0)
                 move.b  (Secondary_Angle).w,tilt(a0)
                 tst.b   (WindTunnel_flag).w
-                beq.s   SKKnucklesLifecycle_GateAnimationAndApplyOuterGravityMirror
+                beq.s   SKKnuxMain_CheckAnimateAndMirror
                 tst.b   anim(a0)
-                bne.s   SKKnucklesLifecycle_GateAnimationAndApplyOuterGravityMirror
+                bne.s   SKKnuxMain_CheckAnimateAndMirror
                 move.b  prev_anim(a0),anim(a0)
 
-SKKnucklesLifecycle_GateAnimationAndApplyOuterGravityMirror:
+SKKnuxMain_CheckAnimateAndMirror:
                 btst    #1,object_control(a0)
-                bne.s   SKKnucklesLifecycle_GateTouchResponseByControlBitsFiveAndSeven
+                bne.s   SKKnuxMain_CheckTouchResponse
                 bsr.w   Animate_Knuckles
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKKnucklesLifecycle_LoadPatternsAfterOptionalGravityMirror
+                beq.s   SKKnuxMain_LoadPatterns
                 eori.b  #2,render_flags(a0)
 
-SKKnucklesLifecycle_LoadPatternsAfterOptionalGravityMirror:
+SKKnuxMain_LoadPatterns:
                 bsr.w   Knuckles_Load_PLC
 
-SKKnucklesLifecycle_GateTouchResponseByControlBitsFiveAndSeven:
+SKKnuxMain_CheckTouchResponse:
                 move.b  object_control(a0),d0
                 andi.b  #$A0,d0
-                bne.s   SKKnucklesLifecycle_ReturnAfterActiveControlAndContactGate
+                bne.s   SKKnuxMain_FrameReturn
                 jsr     (TouchResponse).l
 
-SKKnucklesLifecycle_ReturnAfterActiveControlAndContactGate:
+SKKnuxMain_FrameReturn:
                 rts
 ; ---------------------------------------------------------------------------
 Knux_Modes:
@@ -176,59 +177,59 @@ Knux_Modes:
 
 Knuckles_Display:
                 move.b  invulnerability_timer(a0),d0
-                beq.s   SKKnucklesLifecycle_QueueSpriteForSelectedInvulnerabilityFlashPhase
+                beq.s   SKKnuxMain_DrawVisibleBlinkPhase
                 subq.b  #1,invulnerability_timer(a0)
                 lsr.b   #3,d0
-                bcc.s   SKKnucklesLifecycle_TickInvincibilityOnGlobalEighthPhase
+                bcc.s   SKKnuxMain_TickInvincibilityEvery8
 
-SKKnucklesLifecycle_QueueSpriteForSelectedInvulnerabilityFlashPhase:
+SKKnuxMain_DrawVisibleBlinkPhase:
                 jsr     (Draw_Sprite).l
 
-SKKnucklesLifecycle_TickInvincibilityOnGlobalEighthPhase:
+SKKnuxMain_TickInvincibilityEvery8:
                 btst    #Status_Invincible,status_secondary(a0)
-                beq.s   SKKnucklesLifecycle_TickSpeedShoesAndRestoreExpirySpeedProfile
+                beq.s   SKKnuxMain_TickShoesAndRestoreSpeed
                 tst.b   invincibility_timer(a0)
-                beq.s   SKKnucklesLifecycle_TickSpeedShoesAndRestoreExpirySpeedProfile
+                beq.s   SKKnuxMain_TickShoesAndRestoreSpeed
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #7,d0
-                bne.s   SKKnucklesLifecycle_TickSpeedShoesAndRestoreExpirySpeedProfile
+                bne.s   SKKnuxMain_TickShoesAndRestoreSpeed
                 subq.b  #1,invincibility_timer(a0)
-                bne.s   SKKnucklesLifecycle_TickSpeedShoesAndRestoreExpirySpeedProfile
+                bne.s   SKKnuxMain_TickShoesAndRestoreSpeed
                 tst.b   (Boss_flag).w
-                bne.s   SKKnucklesLifecycle_ClearInvincibilityAfterExpiryMusicDecision
+                bne.s   SKKnuxMain_ExpireInvincibility
                 cmpi.b  #12,air_left(a0)
-                blo.s   SKKnucklesLifecycle_ClearInvincibilityAfterExpiryMusicDecision
+                blo.s   SKKnuxMain_ExpireInvincibility
                 move.w  (Current_music).w,d0
                 jsr     (Play_Music).l
 
-SKKnucklesLifecycle_ClearInvincibilityAfterExpiryMusicDecision:
+SKKnuxMain_ExpireInvincibility:
                 bclr    #Status_Invincible,status_secondary(a0)
 
-SKKnucklesLifecycle_TickSpeedShoesAndRestoreExpirySpeedProfile:
+SKKnuxMain_TickShoesAndRestoreSpeed:
                 btst    #Status_SpeedShoes,status_secondary(a0)
-                beq.s   SKKnucklesLifecycle_ReturnWithoutSpeedShoesExpiryCleanup
+                beq.s   SKKnuxMain_PowerUpdateReturn
                 tst.b   speed_shoes_timer(a0)
-                beq.s   SKKnucklesLifecycle_ReturnWithoutSpeedShoesExpiryCleanup
+                beq.s   SKKnuxMain_PowerUpdateReturn
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #7,d0
-                bne.s   SKKnucklesLifecycle_ReturnWithoutSpeedShoesExpiryCleanup
+                bne.s   SKKnuxMain_PowerUpdateReturn
                 subq.b  #1,speed_shoes_timer(a0)
-                bne.s   SKKnucklesLifecycle_ReturnWithoutSpeedShoesExpiryCleanup
+                bne.s   SKKnuxMain_PowerUpdateReturn
                 move.w  #$600,Max_speed-Max_speed(a4)
                 move.w  #$C,Acceleration-Max_speed(a4)
                 move.w  #$80,Deceleration-Max_speed(a4)
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   SKKnucklesLifecycle_ClearSpeedShoesAndRequestNormalMusicTempo
+                beq.s   SKKnuxMain_ClearShoesAndRestoreTempo
                 move.w  #$800,Max_speed-Max_speed(a4)
                 move.w  #$18,Acceleration-Max_speed(a4)
                 move.w  #$C0,Deceleration-Max_speed(a4)
 
-SKKnucklesLifecycle_ClearSpeedShoesAndRequestNormalMusicTempo:
+SKKnuxMain_ClearShoesAndRestoreTempo:
                 bclr    #Status_SpeedShoes,status_secondary(a0)
                 moveq   #0,d0
                 jmp     (Change_Music_Tempo).l
 ; ---------------------------------------------------------------------------
 
-SKKnucklesLifecycle_ReturnWithoutSpeedShoesExpiryCleanup:
+SKKnuxMain_PowerUpdateReturn:
                 rts
 ; End of function Knuckles_Display

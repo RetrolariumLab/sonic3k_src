@@ -945,9 +945,15 @@
       "commits": ["b72709b60035572a6fd836af40866103c087517f"]
     },
     {
-      "id": "current-shorten-08-competition",
+      "id": "change-2085ca69c2b0",
       "kind": "source_or_tooling",
       "summary": "Shorten 197 Competition player labels across both game engines.",
+      "commits": ["2085ca69c2b06c41783548846eab2edeed0aa7c2"]
+    },
+    {
+      "id": "current-shorten-09-knuckles",
+      "kind": "source_or_tooling",
+      "summary": "Shorten 198 Knuckles motion and animation labels and preserve their state and resource bindings.",
       "commits": ["release-commit"]
     }
   ],

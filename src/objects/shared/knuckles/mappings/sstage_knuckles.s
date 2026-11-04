@@ -1,7 +1,7 @@
 ; Data owner: objects/shared/knuckles
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_SStageKnuckles_:
-                dc.w    SpecialStageKnuckles_EmptyMappingAndDplcFrame00-Map_SStageKnuckles_
+                dc.w    SStageKnux_EmptyMapDPLC00-Map_SStageKnuckles_
                 dc.w    SpecialStageKnuckles_MappingFrame01-Map_SStageKnuckles_
                 dc.w    SpecialStageKnuckles_MappingFrame02-Map_SStageKnuckles_
                 dc.w    SpecialStageKnuckles_MappingFrame03-Map_SStageKnuckles_
@@ -15,7 +15,7 @@ Map_SStageKnuckles_:
                 dc.w    SpecialStageKnuckles_MappingFrame0B-Map_SStageKnuckles_
 PLC_SStageKnuckles:
 PLC_SStageKnuckles_:
-                dc.w    SpecialStageKnuckles_EmptyMappingAndDplcFrame00-PLC_SStageKnuckles_
+                dc.w    SStageKnux_EmptyMapDPLC00-PLC_SStageKnuckles_
                 dc.w    SpecialStageKnuckles_DplcFrame01-PLC_SStageKnuckles_
                 dc.w    SpecialStageKnuckles_DplcFrame02-PLC_SStageKnuckles_
                 dc.w    SpecialStageKnuckles_DplcFrame03-PLC_SStageKnuckles_
@@ -27,8 +27,8 @@ PLC_SStageKnuckles_:
                 dc.w    SpecialStageKnuckles_DplcFrame09-PLC_SStageKnuckles_
                 dc.w    SpecialStageKnuckles_DplcFrame0A-PLC_SStageKnuckles_
                 dc.w    SpecialStageKnuckles_DplcFrame0B-PLC_SStageKnuckles_
-SpecialStageKnuckles_EmptyMappingAndDplcFrame00:    dc.w    0
-SpecialStageKnuckles_MappingFrame05:                dc.w    3
+SStageKnux_EmptyMapDPLC00:              dc.w    0
+SpecialStageKnuckles_MappingFrame05:    dc.w    3
                 dc.b    $D5,  $F,   0,   0, $FF, $F0
                 dc.b    $F5,   8,   0, $10, $FF, $F8
                 dc.b    $FD,   0,   0, $13, $FF, $F8

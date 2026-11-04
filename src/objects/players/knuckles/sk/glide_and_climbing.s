@@ -11,10 +11,10 @@ Knux_Stand_Freespace:
                 bsr.w   Player_LevelBound
                 jsr     (MoveSprite_TestGravity).l
                 btst    #Status_Underwater,status(a0)
-                beq.s   SKKnucklesAir_FinishStandingAirAngleAndTerrain
+                beq.s   SKKnuxAir_AngleAndCollision
                 subi.w  #$28,y_vel(a0)
 
-SKKnucklesAir_FinishStandingAirAngleAndTerrain:
+SKKnuxAir_AngleAndCollision:
                 bsr.w   Player_JumpAngle
                 bsr.w   SonicKnux_DoLevelCollision
                 rts
@@ -26,14 +26,14 @@ Knux_Glide_Freespace:
                 jsr     (MoveSprite_TestGravity2).l
                 bsr.w   Knuckles_Glide
 
-SKKnucklesGlide_ReturnAfterStateUpdateOrZeroFlag:
+SKKnuxGlide_UpdateReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
 Knuckles_Glide:
                 move.b  double_jump_flag(a0),d0
-                beq.s   SKKnucklesGlide_ReturnAfterStateUpdateOrZeroFlag
+                beq.s   SKKnuxGlide_UpdateReturn
                 cmpi.b  #2,d0
                 beq.w   Knuckles_Fall_From_Glide
                 cmpi.b  #3,d0
@@ -90,7 +90,7 @@ Knux_Gliding_HitFloor:
                 move.b  angle(a0),d0
                 addi.b  #$20,d0
                 andi.b  #$C0,d0
-                beq.s   SKKnucklesGlide_BeginFlatSectorSlideAndRequestDust
+                beq.s   SKKnuxGlide_BeginFlatSlide
 
                 move.w  ground_vel(a0),x_vel(a0)
                 move.w  #0,y_vel(a0)
@@ -98,7 +98,8 @@ Knux_Gliding_HitFloor:
                 bra.w   Knux_TouchFloor
 ; ---------------------------------------------------------------------------
 
-SKKnucklesGlide_BeginFlatSectorSlideAndRequestDust:
+; Request slide dust only when at least 12 air units remain
+SKKnuxGlide_BeginFlatSlide:
                 move.b  #3,double_jump_flag(a0)
                 move.b  #$CC,mapping_frame(a0)
                 move.b  #$7F,anim_frame_timer(a0)

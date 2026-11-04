@@ -27579,7 +27579,7 @@
       "responsibility": "Knuckles animation selection and dynamic pattern loading.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 243,
+      "physical_lines": 245,
       "origin": {
         "commit": "82531d7389a6c4d2dad09fdb6c482c351281095b",
         "path": "sonic3k.s",
@@ -27614,7 +27614,7 @@
       "responsibility": "Knuckles hurt, death, recovery, restart and collision response states.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 401,
+      "physical_lines": 405,
       "origin": {
         "commit": "82531d7389a6c4d2dad09fdb6c482c351281095b",
         "path": "sonic3k.s",
@@ -27679,7 +27679,7 @@
       "responsibility": "Complete Knuckles gliding, falling, sliding and wall-climbing state machine, ledge animation and wall-distance lookup.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 858,
+      "physical_lines": 859,
       "origin": {
         "commit": "82531d7389a6c4d2dad09fdb6c482c351281095b",
         "path": "sonic3k.s",
@@ -27749,7 +27749,7 @@
       "responsibility": "Knuckles ground input acceleration, balance, braking and horizontal movement helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 407,
+      "physical_lines": 412,
       "origin": {
         "commit": "82531d7389a6c4d2dad09fdb6c482c351281095b",
         "path": "sonic3k.s",
@@ -27779,7 +27779,7 @@
       "responsibility": "Knuckles jump launch, jump height control and glide initiation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 189,
+      "physical_lines": 190,
       "origin": {
         "commit": "82531d7389a6c4d2dad09fdb6c482c351281095b",
         "path": "sonic3k.s",
@@ -27814,7 +27814,7 @@
       "responsibility": "Knuckles object dispatch, initialization, active control, timed powers and display state.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 234,
+      "physical_lines": 235,
       "origin": {
         "commit": "82531d7389a6c4d2dad09fdb6c482c351281095b",
         "path": "sonic3k.s",
@@ -27849,7 +27849,7 @@
       "responsibility": "Knuckles rolling speed, airborne direction input and jump peak deceleration.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 234,
+      "physical_lines": 235,
       "origin": {
         "commit": "82531d7389a6c4d2dad09fdb6c482c351281095b",
         "path": "sonic3k.s",

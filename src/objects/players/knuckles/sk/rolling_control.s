@@ -10,57 +10,57 @@ Knux_RollSpeed:
                 move.w  Acceleration-Max_speed(a4),d5
                 asr.w   #1,d5
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   SKKnucklesRolling_SetFixedRollingBrakeAndGateForcedLockedInput
+                beq.s   SKKnuxRoll_CheckRollInput
                 move.w  #6,d5
 
-SKKnucklesRolling_SetFixedRollingBrakeAndGateForcedLockedInput:
+SKKnuxRoll_CheckRollInput:
                 move.w  #$20,d4
                 tst.b   spin_dash_flag(a0)
-                bmi.w   SKKnucklesRolling_RecoverRollingCameraBeforeVelocityProjection
+                bmi.w   SKKnuxRoll_EaseRollCamera
                 tst.b   status_secondary(a0)
-                bmi.w   SKKnucklesRolling_RecoverRollingCameraBeforeVelocityProjection
+                bmi.w   SKKnuxRoll_EaseRollCamera
                 tst.w   move_lock(a0)
-                bne.s   SKKnucklesRolling_ApplyRollingFrictionEvenWithHeldDirectionsOrMoveLock
+                bne.s   SKKnuxRoll_ApplySignedFriction
                 btst    #button_left,(Ctrl_1_held_logical).w
-                beq.s   SKKnucklesRolling_ApplyRightRollingInputAfterLeftInput
+                beq.s   SKKnuxRoll_CheckRightInput
                 bsr.w   KnucklesSKApplyRollingLeftInput
 
-SKKnucklesRolling_ApplyRightRollingInputAfterLeftInput:
+SKKnuxRoll_CheckRightInput:
                 btst    #button_right,(Ctrl_1_held_logical).w
-                beq.s   SKKnucklesRolling_ApplyRollingFrictionEvenWithHeldDirectionsOrMoveLock
+                beq.s   SKKnuxRoll_ApplySignedFriction
                 bsr.w   KnucklesSKApplyRollingRightInput
 
-SKKnucklesRolling_ApplyRollingFrictionEvenWithHeldDirectionsOrMoveLock:
+SKKnuxRoll_ApplySignedFriction:
                 move.w  ground_vel(a0),d0
-                beq.s   SKKnucklesRolling_BuildWordMagnitudeForUnrollThreshold
-                bmi.s   SKKnucklesRolling_ApplyNegativeRollingFrictionWithCarryClamp
+                beq.s   SKKnuxRoll_GetRollSpeedMagnitude
+                bmi.s   SKKnuxRoll_ApplyNegativeFriction
                 sub.w   d5,d0
-                bcc.s   SKKnucklesRolling_StorePositiveRollingFrictionBeforeUnrollMagnitude
+                bcc.s   SKKnuxRoll_StorePositiveFriction
                 move.w  #0,d0
 
-SKKnucklesRolling_StorePositiveRollingFrictionBeforeUnrollMagnitude:
+SKKnuxRoll_StorePositiveFriction:
                 move.w  d0,ground_vel(a0)
-                bra.s   SKKnucklesRolling_BuildWordMagnitudeForUnrollThreshold
+                bra.s   SKKnuxRoll_GetRollSpeedMagnitude
 ; ---------------------------------------------------------------------------
 
-SKKnucklesRolling_ApplyNegativeRollingFrictionWithCarryClamp:
+SKKnuxRoll_ApplyNegativeFriction:
                 add.w   d5,d0
-                bcc.s   SKKnucklesRolling_StoreNegativeRollingFrictionBeforeUnrollMagnitude
+                bcc.s   SKKnuxRoll_StoreNegativeFriction
                 move.w  #0,d0
 
-SKKnucklesRolling_StoreNegativeRollingFrictionBeforeUnrollMagnitude:
+SKKnuxRoll_StoreNegativeFriction:
                 move.w  d0,ground_vel(a0)
 
-SKKnucklesRolling_BuildWordMagnitudeForUnrollThreshold:
+SKKnuxRoll_GetRollSpeedMagnitude:
                 move.w  ground_vel(a0),d0
-                bpl.s   SKKnucklesRolling_UnrollBelowUnsignedEightyOrMaintainForcedRoll
+                bpl.s   SKKnuxRoll_CheckUnrollBelow80
                 neg.w   d0
 
-SKKnucklesRolling_UnrollBelowUnsignedEightyOrMaintainForcedRoll:
+SKKnuxRoll_CheckUnrollBelow80:
                 cmpi.w  #$80,d0
-                bhs.s   SKKnucklesRolling_RecoverRollingCameraBeforeVelocityProjection
+                bhs.s   SKKnuxRoll_EaseRollCamera
                 tst.b   spin_dash_flag(a0)
-                bne.s   SKKnucklesRolling_RestoreForcedRollSpeedByFacingBelowUnrollThreshold
+                bne.s   SKKnuxRoll_ResumeForcedRoll
                 bclr    #Status_Roll,status(a0)
                 move.b  y_radius(a0),d0
                 move.b  default_y_radius(a0),y_radius(a0)
@@ -69,30 +69,30 @@ SKKnucklesRolling_UnrollBelowUnsignedEightyOrMaintainForcedRoll:
                 sub.b   default_y_radius(a0),d0
                 ext.w   d0
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKKnucklesRolling_ApplyGravityAdjustedUnrollDeltaToIntegerY
+                beq.s   SKKnuxRoll_ApplyUnrollRadiusOffset
                 neg.w   d0
 
-SKKnucklesRolling_ApplyGravityAdjustedUnrollDeltaToIntegerY:
+SKKnuxRoll_ApplyUnrollRadiusOffset:
                 add.w   d0,y_pos(a0)
-                bra.s   SKKnucklesRolling_RecoverRollingCameraBeforeVelocityProjection
+                bra.s   SKKnuxRoll_EaseRollCamera
 ; ---------------------------------------------------------------------------
 
-SKKnucklesRolling_RestoreForcedRollSpeedByFacingBelowUnrollThreshold:
+SKKnuxRoll_ResumeForcedRoll:
                 move.w  #$400,ground_vel(a0)
                 btst    #Status_Facing,status(a0)
-                beq.s   SKKnucklesRolling_RecoverRollingCameraBeforeVelocityProjection
+                beq.s   SKKnuxRoll_EaseRollCamera
                 neg.w   ground_vel(a0)
 
-SKKnucklesRolling_RecoverRollingCameraBeforeVelocityProjection:
+SKKnuxRoll_EaseRollCamera:
                 cmpi.w  #$60,(a5)
-                beq.s   SKKnucklesRolling_ProjectRollingYAndClampPositiveProjectedXWord
-                bcc.s   SKKnucklesRolling_SubtractRollingCameraRecoveryStep
+                beq.s   SKKnuxRoll_ProjectGroundSpeed
+                bcc.s   SKKnuxRoll_ReduceRollCameraDistanceBy2
                 addq.w  #4,(a5)
 
-SKKnucklesRolling_SubtractRollingCameraRecoveryStep:
+SKKnuxRoll_ReduceRollCameraDistanceBy2:
                 subq.w  #2,(a5)
 
-SKKnucklesRolling_ProjectRollingYAndClampPositiveProjectedXWord:
+SKKnuxRoll_ProjectGroundSpeed:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 muls.w  ground_vel(a0),d0
@@ -101,38 +101,38 @@ SKKnucklesRolling_ProjectRollingYAndClampPositiveProjectedXWord:
                 muls.w  ground_vel(a0),d1
                 asr.l   #8,d1
                 cmpi.w  #$1000,d1
-                ble.s   SKKnucklesRolling_ClampNegativeRollingProjectionWord
+                ble.s   SKKnuxRoll_ClampProjectedMinXSpeed
                 move.w  #$1000,d1
 
-SKKnucklesRolling_ClampNegativeRollingProjectionWord:
+SKKnuxRoll_ClampProjectedMinXSpeed:
                 cmpi.w  #-$1000,d1
-                bge.s   SKKnucklesRolling_StoreRollingXAndTailBranchGroundObstruction
+                bge.s   SKKnuxRoll_StoreXSpeedAndProbe
                 move.w  #-$1000,d1
 
-SKKnucklesRolling_StoreRollingXAndTailBranchGroundObstruction:
+SKKnuxRoll_StoreXSpeedAndProbe:
                 move.w  d1,x_vel(a0)
-                bra.w   SKKnucklesGround_GateSharedWalkingAndRollingObstructionProbe
+                bra.w   SKKnuxGround_CheckTravelProbe
 ; End of function Knux_RollSpeed
 
 ; =============== S U B R O U T I N E =======================================
 
 KnucklesSKApplyRollingLeftInput:
                 move.w  ground_vel(a0),d0
-                beq.s   SKKnucklesRolling_FaceLeftAndKeepRollAnimationWithoutAcceleration
-                bpl.s   SKKnucklesRolling_BrakePositiveRollByFixedTwentyForLeftInput
+                beq.s   SKKnuxRoll_FaceLeftAndKeepRolling
+                bpl.s   SKKnuxRoll_BrakeRightwardRoll
 
-SKKnucklesRolling_FaceLeftAndKeepRollAnimationWithoutAcceleration:
+SKKnuxRoll_FaceLeftAndKeepRolling:
                 bset    #Status_Facing,status(a0)
                 move.b  #2,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-SKKnucklesRolling_BrakePositiveRollByFixedTwentyForLeftInput:
+SKKnuxRoll_BrakeRightwardRoll:
                 sub.w   d4,d0
-                bcc.s   SKKnucklesRolling_StoreLeftRollingBrakeAndReturn
+                bcc.s   SKKnuxRoll_StoreLeftBrakeResult
                 move.w  #-$80,d0
 
-SKKnucklesRolling_StoreLeftRollingBrakeAndReturn:
+SKKnuxRoll_StoreLeftBrakeResult:
                 move.w  d0,ground_vel(a0)
                 rts
 ; End of function KnucklesSKApplyRollingLeftInput
@@ -141,18 +141,18 @@ SKKnucklesRolling_StoreLeftRollingBrakeAndReturn:
 
 KnucklesSKApplyRollingRightInput:
                 move.w  ground_vel(a0),d0
-                bmi.s   SKKnucklesRolling_BrakeNegativeRollByFixedTwentyForRightInput
+                bmi.s   SKKnuxRoll_BrakeLeftwardRoll
                 bclr    #Status_Facing,status(a0)
                 move.b  #2,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-SKKnucklesRolling_BrakeNegativeRollByFixedTwentyForRightInput:
+SKKnuxRoll_BrakeLeftwardRoll:
                 add.w   d4,d0
-                bcc.s   SKKnucklesRolling_StoreRightRollingBrakeAndReturn
+                bcc.s   SKKnuxRoll_StoreRightBrakeResult
                 move.w  #$80,d0
 
-SKKnucklesRolling_StoreRightRollingBrakeAndReturn:
+SKKnuxRoll_StoreRightBrakeResult:
                 move.w  d0,ground_vel(a0)
                 rts
 ; End of function KnucklesSKApplyRollingRightInput
@@ -165,70 +165,71 @@ Knux_ChgJumpDir:
                 move.w  Acceleration-Max_speed(a4),d5
                 asl.w   #1,d5
                 btst    #Status_RollJump,status(a0)
-                bne.s   SKKnucklesRolling_RecoverAirCameraEvenWhenRollJumpBlocksInput
+                bne.s   SKKnuxRoll_EaseAirCamera
                 move.w  x_vel(a0),d0
                 btst    #button_left,(Ctrl_1_held_logical).w
-                beq.s   SKKnucklesRolling_ApplyRightAirInputAfterOverspeedPreservingLeftStep
+                beq.s   SKKnuxRoll_CheckAirRightInput
                 bset    #Status_Facing,status(a0)
                 sub.w   d5,d0
                 move.w  d6,d1
                 neg.w   d1
                 cmp.w   d1,d0
-                bgt.s   SKKnucklesRolling_ApplyRightAirInputAfterOverspeedPreservingLeftStep
+                bgt.s   SKKnuxRoll_CheckAirRightInput
                 add.w   d5,d0
                 cmp.w   d1,d0
-                ble.s   SKKnucklesRolling_ApplyRightAirInputAfterOverspeedPreservingLeftStep
+                ble.s   SKKnuxRoll_CheckAirRightInput
                 move.w  d1,d0
 
-SKKnucklesRolling_ApplyRightAirInputAfterOverspeedPreservingLeftStep:
+SKKnuxRoll_CheckAirRightInput:
                 btst    #button_right,(Ctrl_1_held_logical).w
-                beq.s   SKKnucklesRolling_CommitAirInputHorizontalVelocity
+                beq.s   SKKnuxRoll_StoreAirXSpeed
                 bclr    #Status_Facing,status(a0)
                 add.w   d5,d0
                 cmp.w   d6,d0
-                blt.s   SKKnucklesRolling_CommitAirInputHorizontalVelocity
+                blt.s   SKKnuxRoll_StoreAirXSpeed
                 sub.w   d5,d0
                 cmp.w   d6,d0
-                bge.s   SKKnucklesRolling_CommitAirInputHorizontalVelocity
+                bge.s   SKKnuxRoll_StoreAirXSpeed
                 move.w  d6,d0
 
-SKKnucklesRolling_CommitAirInputHorizontalVelocity:
+SKKnuxRoll_StoreAirXSpeed:
                 move.w  d0,x_vel(a0)
 
-SKKnucklesRolling_RecoverAirCameraEvenWhenRollJumpBlocksInput:
+SKKnuxRoll_EaseAirCamera:
                 cmpi.w  #$60,(a5)
-                beq.s   SKKnucklesRolling_GateAirDragByUnsignedUpwardVelocityWindow
-                bcc.s   SKKnucklesRolling_SubtractAirCameraRecoveryStep
+                beq.s   SKKnuxRoll_CheckAirDragWindow
+                bcc.s   SKKnuxRoll_ReduceAirCameraDistanceBy2
                 addq.w  #4,(a5)
 
-SKKnucklesRolling_SubtractAirCameraRecoveryStep:
+SKKnuxRoll_ReduceAirCameraDistanceBy2:
                 subq.w  #2,(a5)
 
-SKKnucklesRolling_GateAirDragByUnsignedUpwardVelocityWindow:
+; Use an unsigned word comparison against -$400 before applying horizontal drag
+SKKnuxRoll_CheckAirDragWindow:
                 cmpi.w  #-$400,y_vel(a0)
-                blo.s   SKKnucklesRolling_ReturnAfterAirDragOrRejectedVelocity
+                blo.s   SKKnuxRoll_AirDragReturn
                 move.w  x_vel(a0),d0
                 move.w  d0,d1
                 asr.w   #5,d1
-                beq.s   SKKnucklesRolling_ReturnAfterAirDragOrRejectedVelocity
-                bmi.s   SKKnucklesRolling_ApplyNegativeQuotientAirDragWithBorrowPolarity
+                beq.s   SKKnuxRoll_AirDragReturn
+                bmi.s   SKKnuxRoll_ApplyLeftAirDrag
                 sub.w   d1,d0
-                bcc.s   SKKnucklesRolling_CommitPositiveQuotientAirDrag
+                bcc.s   SKKnuxRoll_StoreRightAirDrag
                 move.w  #0,d0
 
-SKKnucklesRolling_CommitPositiveQuotientAirDrag:
+SKKnuxRoll_StoreRightAirDrag:
                 move.w  d0,x_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-SKKnucklesRolling_ApplyNegativeQuotientAirDragWithBorrowPolarity:
+SKKnuxRoll_ApplyLeftAirDrag:
                 sub.w   d1,d0
-                bcs.s   SKKnucklesRolling_CommitNegativeQuotientAirDrag
+                bcs.s   SKKnuxRoll_StoreLeftAirDrag
                 move.w  #0,d0
 
-SKKnucklesRolling_CommitNegativeQuotientAirDrag:
+SKKnuxRoll_StoreLeftAirDrag:
                 move.w  d0,x_vel(a0)
 
-SKKnucklesRolling_ReturnAfterAirDragOrRejectedVelocity:
+SKKnuxRoll_AirDragReturn:
                 rts
 ; End of function Knux_ChgJumpDir

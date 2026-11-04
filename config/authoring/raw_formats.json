@@ -933,7 +933,7 @@
     },
     {
       "path": "src/objects/players/knuckles/sk/glide_motion.s",
-      "sha256": "3dde1adc9f0c706db9bfd2506ef7b0e080d434199ef3eb566cfdc7f29a675d6c"
+      "sha256": "645274b51157b847ad450398799b6d3c4fe5e904db5d3154f9ec451ee0fee49c"
     },
     {
       "path": "src/objects/players/tails/s3/carrying.s",

@@ -7,28 +7,29 @@
 Knux_Jump:
                 move.b  (Ctrl_1_pressed_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   SKKnucklesJump_ReturnFromRejectedOrNewlyRollingJumpWithProperStackContext
+                beq.w   SKKnuxJump_LaunchReturn
                 moveq   #0,d0
                 move.b  angle(a0),d0
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKKnucklesJump_ProbeOverheadAfterOptionalGravityAngleNormalization
+                beq.s   SKKnuxJump_ProbeLaunchClearance
                 addi.b  #$40,d0
                 neg.b   d0
                 subi.b  #$40,d0
 
-SKKnucklesJump_ProbeOverheadAfterOptionalGravityAngleNormalization:
+SKKnuxJump_ProbeLaunchClearance:
                 addi.b  #$80,d0
                 movem.l a4-a6,-(sp)
                 jsr     (CalcRoomOverHead).l
                 movem.l (sp)+,a4-a6
                 cmpi.w  #6,d1
-                blt.w   SKKnucklesJump_ReturnFromRejectedOrNewlyRollingJumpWithProperStackContext
+                blt.w   SKKnuxJump_LaunchReturn
                 move.w  #$600,d2
                 btst    #Status_Underwater,status(a0)
-                beq.s   SKKnucklesJump_AddKnucklesJumpImpulseAndDiscardGroundReturn
+                beq.s   SKKnuxJump_ApplyImpulseAndSkipGround
                 move.w  #$300,d2
 
-SKKnucklesJump_AddKnucklesJumpImpulseAndDiscardGroundReturn:
+; Launch along the surface normal and discard the ground movement return address
+SKKnuxJump_ApplyImpulseAndSkipGround:
                 moveq   #0,d0
                 move.b  angle(a0),d0
                 subi.b  #$40,d0
@@ -49,7 +50,7 @@ SKKnucklesJump_AddKnucklesJumpImpulseAndDiscardGroundReturn:
                 move.b  default_y_radius(a0),y_radius(a0)
                 move.b  default_x_radius(a0),x_radius(a0)
                 btst    #Status_Roll,status(a0)
-                bne.s   SKKnucklesJump_MarkJumpStartedWhileAlreadyRolling
+                bne.s   SKKnuxJump_MarkRollJump
                 move.b  #$E,y_radius(a0)
                 move.b  #7,x_radius(a0)
                 move.b  #2,anim(a0)
@@ -58,17 +59,17 @@ SKKnucklesJump_AddKnucklesJumpImpulseAndDiscardGroundReturn:
                 sub.b   default_y_radius(a0),d0
                 ext.w   d0
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKKnucklesJump_ApplySignedJumpRadiusDeltaToIntegerY
+                beq.s   SKKnuxJump_ApplyJumpRadiusOffset
                 neg.w   d0
 
-SKKnucklesJump_ApplySignedJumpRadiusDeltaToIntegerY:
+SKKnuxJump_ApplyJumpRadiusOffset:
                 sub.w   d0,y_pos(a0)
 
-SKKnucklesJump_ReturnFromRejectedOrNewlyRollingJumpWithProperStackContext:
+SKKnuxJump_LaunchReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKKnucklesJump_MarkJumpStartedWhileAlreadyRolling:
+SKKnuxJump_MarkRollJump:
                 bset    #Status_RollJump,status(a0)
                 rts
 ; End of function Knux_Jump
@@ -77,76 +78,76 @@ SKKnucklesJump_MarkJumpStartedWhileAlreadyRolling:
 
 Knux_JumpHeight:
                 tst.b   jumping(a0)
-                beq.s   SKKnucklesJump_CapNonJumpUpwardVelocityUnlessSpinFlagSet
+                beq.s   SKKnuxJump_CapNonJumpAscent
                 move.w  #-$400,d1
                 btst    #Status_Underwater,status(a0)
-                beq.s   SKKnucklesJump_TestGlideOrCapReleasedJumpAtSignedYThreshold
+                beq.s   SKKnuxJump_CheckReleaseOrGlide
                 move.w  #-$200,d1
 
-SKKnucklesJump_TestGlideOrCapReleasedJumpAtSignedYThreshold:
+SKKnuxJump_CheckReleaseOrGlide:
                 cmp.w   y_vel(a0),d1
                 ble.w   Knux_Test_For_Glide
                 move.b  (Ctrl_1_held_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                bne.s   SKKnucklesJump_ReturnAfterHeldOrReleasedJumpHeightDecision
+                bne.s   SKKnuxJump_ReleaseCapReturn
                 move.w  d1,y_vel(a0)
 
-SKKnucklesJump_ReturnAfterHeldOrReleasedJumpHeightDecision:
+SKKnuxJump_ReleaseCapReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKKnucklesJump_CapNonJumpUpwardVelocityUnlessSpinFlagSet:
+SKKnuxJump_CapNonJumpAscent:
                 tst.b   spin_dash_flag(a0)
-                bne.s   SKKnucklesJump_ReturnAfterNonJumpVelocityCapOrSpinExemption
+                bne.s   SKKnuxJump_UpwardSpeedLimitReturn
                 cmpi.w  #-$FC0,y_vel(a0)
-                bge.s   SKKnucklesJump_ReturnAfterNonJumpVelocityCapOrSpinExemption
+                bge.s   SKKnuxJump_UpwardSpeedLimitReturn
                 move.w  #-$FC0,y_vel(a0)
 
-SKKnucklesJump_ReturnAfterNonJumpVelocityCapOrSpinExemption:
+SKKnuxJump_UpwardSpeedLimitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 Knux_Test_For_Glide:
                 tst.b   double_jump_flag(a0)
-                bne.w   SKKnucklesJump_ReturnAfterRejectedOrInitializedGlide
+                bne.w   SKKnuxJump_GlideStartReturn
                 move.b  (Ctrl_1_pressed_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   SKKnucklesJump_ReturnAfterRejectedOrInitializedGlide
+                beq.w   SKKnuxJump_GlideStartReturn
                 tst.b   (Super_Sonic_Knux_flag).w
-                bne.s   SKKnucklesJump_EnterGlideWithTenPixelRadiiAndNonnegativeAdjustedY
+                bne.s   SKKnuxJump_InitGlideShapeAndYSpeed
                 cmpi.b  #7,(Super_emerald_count).w
-                bhs.s   SKKnucklesJump_GateSuperOrHyperTransformByRingsAndRunningHudTimer
+                bhs.s   SKKnuxJump_CheckTransformRingsAndTimer
                 cmpi.b  #7,(Chaos_emerald_count).w
-                blo.s   SKKnucklesJump_EnterGlideWithTenPixelRadiiAndNonnegativeAdjustedY
+                blo.s   SKKnuxJump_InitGlideShapeAndYSpeed
                 tst.b   (Emeralds_converted_flag).w
-                bne.s   SKKnucklesJump_EnterGlideWithTenPixelRadiiAndNonnegativeAdjustedY
+                bne.s   SKKnuxJump_InitGlideShapeAndYSpeed
 
-SKKnucklesJump_GateSuperOrHyperTransformByRingsAndRunningHudTimer:
+SKKnuxJump_CheckTransformRingsAndTimer:
                 cmpi.w  #50,(Ring_count).w
-                blo.s   SKKnucklesJump_EnterGlideWithTenPixelRadiiAndNonnegativeAdjustedY
+                blo.s   SKKnuxJump_InitGlideShapeAndYSpeed
                 tst.b   (Update_HUD_timer).w
                 bne.s   Knux_Transform
 
-SKKnucklesJump_EnterGlideWithTenPixelRadiiAndNonnegativeAdjustedY:
+SKKnuxJump_InitGlideShapeAndYSpeed:
                 bclr    #Status_Roll,status(a0)
                 move.b  #$A,y_radius(a0)
                 move.b  #$A,x_radius(a0)
                 bclr    #Status_RollJump,status(a0)
                 move.b  #1,double_jump_flag(a0)
                 addi.w  #$200,y_vel(a0)
-                bpl.s   SKKnucklesJump_InitializePositiveGlideMagnitudeAndFacingSignedHeading
+                bpl.s   SKKnuxJump_SetGlideSpeedAndHeading
                 move.w  #0,y_vel(a0)
 
-SKKnucklesJump_InitializePositiveGlideMagnitudeAndFacingSignedHeading:
+SKKnuxJump_SetGlideSpeedAndHeading:
                 moveq   #0,d1
                 move.w  #$400,d0
                 move.w  d0,ground_vel(a0)
                 btst    #Status_Facing,status(a0)
-                beq.s   SKKnucklesJump_StoreGlideXHeadingClearBothAnglesAndInitializeContactFlags
+                beq.s   SKKnuxJump_StoreGlideHeadingAndFlags
                 neg.w   d0
                 moveq   #-$80,d1
 
-SKKnucklesJump_StoreGlideXHeadingClearBothAnglesAndInitializeContactFlags:
+SKKnuxJump_StoreGlideHeadingAndFlags:
                 move.w  d0,x_vel(a0)
                 move.b  d1,double_jump_property(a0)
                 move.w  #0,angle(a0)
@@ -154,7 +155,7 @@ SKKnucklesJump_StoreGlideXHeadingClearBothAnglesAndInitializeContactFlags:
                 bset    #Status_InAir,(Gliding_collision_flags).w
                 bsr.w   Knuckles_Set_Gliding_Animation
 
-SKKnucklesJump_ReturnAfterRejectedOrInitializedGlide:
+SKKnuxJump_GlideStartReturn:
                 rts
 ; ---------------------------------------------------------------------------
 

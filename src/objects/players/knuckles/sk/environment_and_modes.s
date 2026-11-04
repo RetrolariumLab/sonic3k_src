@@ -6,18 +6,18 @@
 
 Knuckles_Water:
                 tst.b   (Water_flag).w
-                bne.s   SKKnucklesEnvironment_DetectSignedWaterSideAndCommitFirstEntry
+                bne.s   SKKnuxEnv_CheckWaterAndInitEntry
 
-SKKnucklesEnvironment_ReturnFromWaterStateOrSplashGate:
+SKKnuxEnv_WaterTransitionReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKKnucklesEnvironment_DetectSignedWaterSideAndCommitFirstEntry:
+SKKnuxEnv_CheckWaterAndInitEntry:
                 move.w  (Water_level).w,d0
                 cmp.w   y_pos(a0),d0
-                bge.s   SKKnucklesEnvironment_ClearUnderwaterStateAndRestoreExitRates
+                bge.s   SKKnuxEnv_RestoreAirAndSpeedsOnExit
                 bset    #Status_Underwater,status(a0)
-                bne.s   SKKnucklesEnvironment_ReturnFromWaterStateOrSplashGate
+                bne.s   SKKnuxEnv_WaterTransitionReturn
                 addq.b  #1,(Water_entered_counter).w
                 movea.l a0,a1
                 bsr.w   Player_ResetAirTimer
@@ -28,26 +28,26 @@ SKKnucklesEnvironment_DetectSignedWaterSideAndCommitFirstEntry:
                 move.w  #6,Acceleration-Max_speed(a4)
                 move.w  #$40,Deceleration-Max_speed(a4)
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   SKKnucklesEnvironment_AttenuateEntryVelocityOnlyWithZeroObjectControl
+                beq.s   SKKnuxEnv_DampenWaterEntry
                 move.w  #$400,Max_speed-Max_speed(a4)
                 move.w  #$C,Acceleration-Max_speed(a4)
                 move.w  #$60,Deceleration-Max_speed(a4)
 
-SKKnucklesEnvironment_AttenuateEntryVelocityOnlyWithZeroObjectControl:
+SKKnuxEnv_DampenWaterEntry:
                 tst.b   object_control(a0)
-                bne.s   SKKnucklesEnvironment_ReturnFromWaterStateOrSplashGate
+                bne.s   SKKnuxEnv_WaterTransitionReturn
                 asr     x_vel(a0)
                 asr     y_vel(a0)
                 asr     y_vel(a0)
-                beq.s   SKKnucklesEnvironment_ReturnFromWaterStateOrSplashGate
+                beq.s   SKKnuxEnv_WaterTransitionReturn
                 move.w  #1<<8,anim(a6)                  ; and prev_anim
                 move.w  #sfx_Splash,d0
                 jmp     (Play_SFX).l
 ; ---------------------------------------------------------------------------
 
-SKKnucklesEnvironment_ClearUnderwaterStateAndRestoreExitRates:
+SKKnuxEnv_RestoreAirAndSpeedsOnExit:
                 bclr    #Status_Underwater,status(a0)
-                beq.w   SKKnucklesEnvironment_ReturnFromWaterStateOrSplashGate
+                beq.w   SKKnuxEnv_WaterTransitionReturn
                 addq.b  #1,(Water_entered_counter).w
                 movea.l a0,a1
                 bsr.w   Player_ResetAirTimer
@@ -55,32 +55,32 @@ SKKnucklesEnvironment_ClearUnderwaterStateAndRestoreExitRates:
                 move.w  #$C,Acceleration-Max_speed(a4)
                 move.w  #$80,Deceleration-Max_speed(a4)
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   SKKnucklesEnvironment_ConditionallyDoubleExitVerticalVelocity
+                beq.s   SKKnuxEnv_TryDoubleExitYSpeed
                 move.w  #$800,Max_speed-Max_speed(a4)
                 move.w  #$18,Acceleration-Max_speed(a4)
                 move.w  #$C0,Deceleration-Max_speed(a4)
 
-SKKnucklesEnvironment_ConditionallyDoubleExitVerticalVelocity:
+SKKnuxEnv_TryDoubleExitYSpeed:
                 cmpi.b  #4,routine(a0)
-                beq.s   SKKnucklesEnvironment_GateExitSplashAndClampStrongUpwardVelocity
+                beq.s   SKKnuxEnv_CheckExitSplashAndClampY
                 tst.b   object_control(a0)
-                bne.s   SKKnucklesEnvironment_GateExitSplashAndClampStrongUpwardVelocity
+                bne.s   SKKnuxEnv_CheckExitSplashAndClampY
                 move.w  y_vel(a0),d0
                 cmpi.w  #-$400,d0
-                blt.s   SKKnucklesEnvironment_GateExitSplashAndClampStrongUpwardVelocity
+                blt.s   SKKnuxEnv_CheckExitSplashAndClampY
                 asl     y_vel(a0)
 
-SKKnucklesEnvironment_GateExitSplashAndClampStrongUpwardVelocity:
+SKKnuxEnv_CheckExitSplashAndClampY:
                 cmpi.b  #$1C,anim(a0)
-                beq.w   SKKnucklesEnvironment_ReturnFromWaterStateOrSplashGate
+                beq.w   SKKnuxEnv_WaterTransitionReturn
                 tst.w   y_vel(a0)
-                beq.w   SKKnucklesEnvironment_ReturnFromWaterStateOrSplashGate
+                beq.w   SKKnuxEnv_WaterTransitionReturn
                 move.w  #1<<8,anim(a6)                  ; and prev_anim
                 cmpi.w  #-$1000,y_vel(a0)
-                bgt.s   SKKnucklesEnvironment_RequestExitSplashSoundAfterVelocityClamp
+                bgt.s   SKKnuxEnv_PlayExitSplash
                 move.w  #-$1000,y_vel(a0)
 
-SKKnucklesEnvironment_RequestExitSplashSoundAfterVelocityClamp:
+SKKnuxEnv_PlayExitSplash:
                 move.w  #sfx_Splash,d0
                 jmp     (Play_SFX).l
 ; End of function Knuckles_Water
@@ -98,24 +98,24 @@ Knux_Stand_Path:
                 bsr.w   Call_Player_AnglePos
                 bsr.w   Player_SlopeRepel
                 tst.b   (Background_collision_flag).w
-                beq.s   SKKnucklesEnvironment_ReturnFromStandingGroundStepAfterBackgroundChecks
+                beq.s   SKKnuxEnv_GroundModeReturn
                 bsr.w   CheckPlayerBodyFloorClearance
                 tst.w   d1
                 bmi.w   Kill_Character
                 movem.l a4-a6,-(sp)
                 bsr.w   CheckLeftWallDist
                 tst.w   d1
-                bpl.s   SKKnucklesEnvironment_ProbeRightBackgroundWallAfterLeftCorrection
+                bpl.s   SKKnuxEnv_CheckGroundRightWall
                 sub.w   d1,x_pos(a0)
 
-SKKnucklesEnvironment_ProbeRightBackgroundWallAfterLeftCorrection:
+SKKnuxEnv_CheckGroundRightWall:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   SKKnucklesEnvironment_RestoreRegistersAfterGroundBackgroundWallProbes
+                bpl.s   SKKnuxEnv_RestoreGroundWallRegisters
                 add.w   d1,x_pos(a0)
 
-SKKnucklesEnvironment_RestoreRegistersAfterGroundBackgroundWallProbes:
+SKKnuxEnv_RestoreGroundWallRegisters:
                 movem.l (sp)+,a4-a6
 
-SKKnucklesEnvironment_ReturnFromStandingGroundStepAfterBackgroundChecks:
+SKKnuxEnv_GroundModeReturn:
                 rts
