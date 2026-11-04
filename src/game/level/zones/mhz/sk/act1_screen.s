@@ -9,71 +9,72 @@ MHZ1_ScreenInit:
                 clr.b   (_unkF7C1).w
                 jsr     SelectMhz1CameraLeftLimit(pc)
                 tst.w   (SK_alone_flag).w
-                beq.s   loc_54B18
+                beq.s   SKMHZ1Events_RefreshInitialForeground
                 move.b  (Last_star_post_hit).w,d0
-                beq.s   loc_54AE0
+                beq.s   SKMHZ1Events_SetStandaloneStart
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_54B18
+                bne.s   SKMHZ1Events_RefreshInitialForeground
                 subq.b  #1,d0
-                bne.s   loc_54B18
+                bne.s   SKMHZ1Events_RefreshInitialForeground
                 move.w  #$680,d2
-                bra.s   loc_54B10
+                bra.s   SKMHZ1Events_StoreStartCameraX
 ; ---------------------------------------------------------------------------
 
-loc_54AE0:
+; Use the standalone Act 1 start camera and move P1 only outside Knuckles mode
+SKMHZ1Events_SetStandaloneStart:
                 move.w  #$560,d2
                 move.w  #$948,d3
                 cmpi.w  #3,(Player_mode).w
-                beq.s   loc_54B08
+                beq.s   SKMHZ1Events_StoreStartCameraY
                 lea     (Player_1).w,a1
                 move.w  #$718,x_pos(a1)
                 move.w  #$62D,y_pos(a1)
                 move.w  #$680,d2
                 move.w  #$5CD,d3
 
-loc_54B08:
+SKMHZ1Events_StoreStartCameraY:
                 move.w  d3,(Camera_Y_pos).w
                 move.w  d3,(Camera_Y_pos_copy).w
 
-loc_54B10:
+SKMHZ1Events_StoreStartCameraX:
                 move.w  d2,(Camera_X_pos).w
                 move.w  d2,(Camera_X_pos_copy).w
 
-loc_54B18:
+SKMHZ1Events_RefreshInitialForeground:
                 jsr     Reset_TileOffsetPositionActual(pc)
                 jmp     Refresh_PlaneFull(pc)
 ; ---------------------------------------------------------------------------
 
 MHZ1_ScreenEvent:
                 tst.b   (Events_bg+$00).w
-                bne.s   loc_54B7C
+                bne.s   SKMHZ1Events_DrawForeground
                 tst.w   (Events_bg+$16).w
-                bne.s   loc_54B7C
+                bne.s   SKMHZ1Events_DrawForeground
                 jsr     SelectMhz1CameraLeftLimit(pc)
                 move.w  #$AA0,d0
                 cmpi.w  #$4100,(Player_1+x_pos).w
-                blo.s   loc_54B40
+                blo.s   SKMHZ1Events_UpdateCameraMaxY
                 move.w  #$710,d0
 
-loc_54B40:
+SKMHZ1Events_UpdateCameraMaxY:
                 cmp.w   (Camera_max_Y_pos).w,d0
-                beq.s   loc_54B4E
+                beq.s   SKMHZ1Events_TryStartMiniboss
                 move.w  d0,(Camera_max_Y_pos).w
                 move.w  d0,(Camera_target_max_Y_pos).w
 
-loc_54B4E:
+SKMHZ1Events_TryStartMiniboss:
                 cmpi.w  #$710,(Camera_Y_pos).w
-                blo.s   loc_54B7C
+                blo.s   SKMHZ1Events_DrawForeground
                 cmpi.w  #$4298,(Camera_X_pos).w
-                blo.s   loc_54B7C
+                blo.s   SKMHZ1Events_DrawForeground
                 move.w  #$710,(Camera_min_Y_pos).w
                 move.w  #8,(Special_events_routine).w
                 st      (Events_bg+$00).w
                 jsr     (AllocateObject).l
-                bne.s   loc_54B7C
+                bne.s   SKMHZ1Events_DrawForeground
                 move.l  #Obj_MHZMiniboss,(a1)
 
-loc_54B7C:
+SKMHZ1Events_DrawForeground:
                 jmp     DrawTilesAsYouMove(pc)
 
 ; =============== S U B R O U T I N E =======================================
@@ -81,18 +82,18 @@ loc_54B7C:
 SelectMhz1CameraLeftLimit:
                 move.w  #$680,d0
                 tst.w   (SK_alone_flag).w
-                bne.s   loc_54B98
+                bne.s   SKMHZ1Events_UpdateCameraMinX
                 moveq   #0,d0
                 cmpi.w  #$580,(Player_1+y_pos).w
-                bhs.s   loc_54B98
+                bhs.s   SKMHZ1Events_UpdateCameraMinX
                 move.w  #$C0,d0
 
-loc_54B98:
+SKMHZ1Events_UpdateCameraMinX:
                 cmp.w   (Camera_min_X_pos).w,d0
-                beq.s   locret_54BA2
+                beq.s   SKMHZ1Events_LeftLimitReturn
                 move.w  d0,(Camera_min_X_pos).w
 
-locret_54BA2:
+SKMHZ1Events_LeftLimitReturn:
                 rts
 ; End of function SelectMhz1CameraLeftLimit
 
@@ -110,7 +111,7 @@ MHZ1_BackgroundInit:
 
 MHZ1_BackgroundEvent:
                 tst.w   (Events_fg_5).w
-                beq.w   loc_54C3C
+                beq.w   SKMHZ1Events_DrawLoopedBackground
                 clr.w   (Events_fg_5).w
                 movem.l d7-a0/a2-a3,-(sp)
                 moveq   #PLCID_28,d0
@@ -139,7 +140,7 @@ MHZ1_BackgroundEvent:
                 clr.w   (Special_events_routine).w
                 clr.b   (Events_bg+$00).w
 
-loc_54C3C:
+SKMHZ1Events_DrawLoopedBackground:
                 lea     (Events_fg_0).w,a1
                 move.w  (Camera_X_pos_copy).w,d0
                 move.w  #$100,d2
@@ -189,11 +190,11 @@ MHZ_Deform:
 
 ; ---------------------------------------------------------------------------
 
-loc_54CB0:
+SKMHZ1Events_WrapChaseCameraAndPlayers:
                 clr.w   (Level_repeat_offset).w
                 move.w  (Camera_X_pos).w,d0
                 cmpi.w  #$4400,d0
-                blo.s   loc_54CEE
+                blo.s   SKMHZ1Events_PinCameraMinX
                 move.w  #$200,d1
                 move.w  d1,(Level_repeat_offset).w
                 sub.w   d1,(Player_1+x_pos).w
@@ -208,7 +209,7 @@ loc_54CB0:
                 move.w  #$4298,d2
                 move.w  d2,(Camera_max_X_pos).w
 
-loc_54CEE:
+SKMHZ1Events_PinCameraMinX:
                 move.w  d0,(Camera_min_X_pos).w
                 rts
 
@@ -219,25 +220,25 @@ MHZ_TranslateObjectsForAct2:
                 lea     (Dynamic_object_RAM+object_size).w,a1
                 moveq   #((Breathing_bubbles)-(Dynamic_object_RAM+object_size))/object_size-1,d2
 
-loc_54CFA:
+SKMHZ1Events_TryRetireStaticObject:
                 move.l  (a1),d3
-                beq.s   loc_54D26
+                beq.s   SKMHZ1Events_NextTransitionObject
                 cmpi.l  #SKStaticScenery_CullOrEnqueue,d3
-                bne.s   loc_54D16
+                bne.s   SKMHZ1Events_ShiftWorldObject
                 move.l  #Delete_Current_Sprite,(a1)
                 move.w  respawn_addr(a1),d3
-                beq.s   loc_54D16
+                beq.s   SKMHZ1Events_ShiftWorldObject
                 movea.w d3,a5
                 clr.b   (a5)
 
-loc_54D16:
+SKMHZ1Events_ShiftWorldObject:
                 btst    #2,render_flags(a1)
-                beq.s   loc_54D26
+                beq.s   SKMHZ1Events_NextTransitionObject
                 sub.w   d0,x_pos(a1)
                 sub.w   d1,y_pos(a1)
 
-loc_54D26:
+SKMHZ1Events_NextTransitionObject:
                 lea     next_object(a1),a1
-                dbf     d2,loc_54CFA
+                dbf     d2,SKMHZ1Events_TryRetireStaticObject
                 rts
 ; End of function MHZ_TranslateObjectsForAct2

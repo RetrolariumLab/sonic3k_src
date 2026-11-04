@@ -49,7 +49,7 @@ Obj_MHZMushroomCap_Main:
                 move.w  #$18,d1
                 moveq   #0,d3
                 move.b  mapping_frame(a0),d3
-                move.b  byte_3E0DA(pc,d3.w),d3
+                move.b  SKMHZMushCap_FrameSolidHeights(pc,d3.w),d3
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectTop).l
 ; Bounce player
@@ -65,7 +65,7 @@ Obj_MHZMushroomCap_Main:
 
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
-byte_3E0DA:
+SKMHZMushCap_FrameSolidHeights:
                 dc.b    $12,   8, $12, $12
                 even
 

@@ -7,18 +7,18 @@ MHZ2_BackgroundInit:
                 move.w  (Camera_X_pos_copy).w,(Events_fg_0).w
                 move.w  (Camera_X_pos_copy).w,(Events_fg_1).w
                 cmpi.w  #$3700,(Player_1+x_pos).w
-                blo.s   loc_55198
+                blo.s   SKMHZ2BG_InitOrdinaryBackground
                 cmpi.w  #$500,(Player_1+y_pos).w
-                bhs.s   loc_55198
+                bhs.s   SKMHZ2BG_InitOrdinaryBackground
                 move.w  #8,(Events_routine_bg).w
                 jsr     BuildMhz2ChaseBackgroundCoordinates(pc)
-                bra.s   loc_5519C
+                bra.s   SKMHZ2BG_RefreshInitialBackground
 ; ---------------------------------------------------------------------------
 
-loc_55198:
+SKMHZ2BG_InitOrdinaryBackground:
                 jsr     MHZ_Deform(pc)
 
-loc_5519C:
+SKMHZ2BG_RefreshInitialBackground:
                 jsr     Reset_TileOffsetPositionEff(pc)
                 moveq   #0,d1
                 jsr     Refresh_PlaneFull(pc)
@@ -36,32 +36,32 @@ MHZ2_BackgroundEvent:
 ; ---------------------------------------------------------------------------
 
 MHZ2_BackgroundEvent_Index:
-                bra.w   loc_551EE
+                bra.w   SKMHZ2BG_TryBeginChaseRedraw
 ; ---------------------------------------------------------------------------
-                bra.w   loc_55236
+                bra.w   SKMHZ2BG_UpdateChaseRedraw
 ; ---------------------------------------------------------------------------
-                bra.w   loc_55250
+                bra.w   SKMHZ2BG_ChooseReverseOrCustomLayout
 ; ---------------------------------------------------------------------------
-                bra.w   loc_552F8
+                bra.w   SKMHZ2BG_UpdateReverseRedraw
 ; ---------------------------------------------------------------------------
-                bra.w   loc_55312
+                bra.w   SKMHZ2BG_TryBeginShipForeground
 ; ---------------------------------------------------------------------------
-                bra.w   loc_553B6
+                bra.w   SKMHZ2BG_RedrawBossBGAndAllocActors
 ; ---------------------------------------------------------------------------
-                bra.w   loc_55424
+                bra.w   SKMHZ2BG_WaitForForegroundFinish
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5543A
+                bra.w   SKMHZ2BG_RestoreUpperBackground
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5545A
+                bra.w   SKMHZ2BG_RestoreForegroundRows
 ; ---------------------------------------------------------------------------
-                bra.w   loc_55486
+                bra.w   SKMHZ2BG_DrawChaseAndComposeScroll
 ; ---------------------------------------------------------------------------
 
-loc_551EE:
+SKMHZ2BG_TryBeginChaseRedraw:
                 cmpi.w  #$3700,(Player_1+x_pos).w
-                blo.s   loc_5521E
+                blo.s   SKMHZ2BG_UpdateOrdinaryBackground
                 cmpi.w  #$500,(Player_1+y_pos).w
-                bhs.s   loc_5521E
+                bhs.s   SKMHZ2BG_UpdateOrdinaryBackground
                 jsr     BuildMhz2ChaseBackgroundCoordinates(pc)
                 jsr     Reset_TileOffsetPositionEff(pc)
                 addi.w  #$E0,d0
@@ -69,13 +69,13 @@ loc_551EE:
                 move.w  d0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_5523A
+                bra.s   SKMHZ2BG_RedrawChaseBottomUp
 ; ---------------------------------------------------------------------------
 
-loc_5521E:
+SKMHZ2BG_UpdateOrdinaryBackground:
                 jsr     MHZ_Deform(pc)
 
-loc_55222:
+SKMHZ2BG_DrawOrdinaryRow:
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
                 moveq   #0,d1
@@ -84,21 +84,21 @@ loc_55222:
                 jmp     PlainDeformation(pc)
 ; ---------------------------------------------------------------------------
 
-loc_55236:
+SKMHZ2BG_UpdateChaseRedraw:
                 jsr     BuildMhz2ChaseBackgroundCoordinates(pc)
 
-loc_5523A:
+SKMHZ2BG_RedrawChaseBottomUp:
                 moveq   #0,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 jsr     Draw_PlaneVertSingleBottomUp(pc)
-                bpl.w   loc_552E4
+                bpl.w   SKMHZ2BG_DrawChaseRow
                 addq.w  #4,(Events_routine_bg).w
-                bra.w   loc_552E4
+                bra.w   SKMHZ2BG_DrawChaseRow
 ; ---------------------------------------------------------------------------
 
-loc_55250:
+SKMHZ2BG_ChooseReverseOrCustomLayout:
                 cmpi.w  #$500,(Player_1+y_pos).w
-                blo.s   loc_5527A
+                blo.s   SKMHZ2BG_CheckCustomLayoutSwap
                 jsr     MHZ_Deform(pc)
                 jsr     Reset_TileOffsetPositionEff(pc)
                 addi.w  #$E0,d0
@@ -106,25 +106,26 @@ loc_55250:
                 move.w  d0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.w   loc_552FC
+                bra.w   SKMHZ2BG_RedrawOrdinaryBottomUp
 ; ---------------------------------------------------------------------------
 
-loc_5527A:
+SKMHZ2BG_CheckCustomLayoutSwap:
                 cmpi.w  #$420,(Player_1+y_pos).w
-                bls.s   loc_5528A
+                bls.s   SKMHZ2BG_BindCustomLayoutCopy
                 btst    #1,(Player_1+status).w
-                bne.s   loc_552E0
+                bne.s   SKMHZ2BG_UpdateChaseWhileWaiting
 
-loc_5528A:
+SKMHZ2BG_BindCustomLayoutCopy:
                 movem.l d7-a0/a2-a3,-(sp)
                 lea     (MHZ_Custom_Layout).l,a1
                 lea     (Level_layout_header).w,a2
                 move.w  #$200-1,d0
 
-loc_5529C:
+; Copy $1000 layout bytes before queueing the custom chunks, blocks and art
+SKMHZ2BG_CopyAndQueueCustomLayout:
                 move.l  (a1)+,(a2)+
                 move.l  (a1)+,(a2)+
-                dbf     d0,loc_5529C
+                dbf     d0,SKMHZ2BG_CopyAndQueueCustomLayout
                 lea     (MHZ_128x128_Custom_Kos).l,a1
                 lea     (Chunk_table+$2280).l,a2
                 jsr     (Queue_Kos).l
@@ -136,13 +137,13 @@ loc_5529C:
                 jsr     (Queue_Kos_Module).l
                 movem.l (sp)+,d7-a0/a2-a3
                 addq.w  #8,(Events_routine_bg).w
-                bra.s   loc_55312
+                bra.s   SKMHZ2BG_TryBeginShipForeground
 ; ---------------------------------------------------------------------------
 
-loc_552E0:
+SKMHZ2BG_UpdateChaseWhileWaiting:
                 jsr     BuildMhz2ChaseBackgroundCoordinates(pc)
 
-loc_552E4:
+SKMHZ2BG_DrawChaseRow:
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
                 moveq   #0,d1
@@ -151,23 +152,23 @@ loc_552E4:
                 jmp     PlainDeformation(pc)
 ; ---------------------------------------------------------------------------
 
-loc_552F8:
+SKMHZ2BG_UpdateReverseRedraw:
                 jsr     MHZ_Deform(pc)
 
-loc_552FC:
+SKMHZ2BG_RedrawOrdinaryBottomUp:
                 moveq   #0,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 jsr     Draw_PlaneVertSingleBottomUp(pc)
-                bpl.w   loc_55222
+                bpl.w   SKMHZ2BG_DrawOrdinaryRow
                 clr.w   (Events_routine_bg).w
-                bra.w   loc_55222
+                bra.w   SKMHZ2BG_DrawOrdinaryRow
 ; ---------------------------------------------------------------------------
 
-loc_55312:
+SKMHZ2BG_TryBeginShipForeground:
                 tst.b   (Events_bg+$00).w
-                bne.s   loc_55380
+                bne.s   SKMHZ2BG_RedrawShipForeground
                 cmpi.w  #$3F00,(Camera_X_pos).w
-                blo.w   loc_55486
+                blo.w   SKMHZ2BG_DrawChaseAndComposeScroll
                 addq.w  #4,(Events_routine_fg).w
                 clr.l   (HScroll_table).w
                 move.w  (Camera_X_pos_copy).w,d0
@@ -177,12 +178,12 @@ loc_55312:
                 move.w  #$1A0,(Draw_delayed_position).w
                 move.w  #2,(Draw_delayed_rowcount).w
                 st      (Events_bg+$00).w
-                lea     word_558E8(pc),a1
+                lea     SKMHZ2BG_ChasePhaseScripts(pc),a1
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_5535A
+                bne.s   SKMHZ2BG_SeedChasePhaseAndCamera
                 lea     $10(a1),a1
 
-loc_5535A:
+SKMHZ2BG_SeedChasePhaseAndCamera:
                 move.b  (a1),(Events_bg+$07).w
                 st      (Scroll_lock).w
                 move.w  #$C,(Special_events_routine).w
@@ -192,7 +193,7 @@ loc_5535A:
                 jsr     (Queue_Kos_Module).l
                 movem.l (sp)+,d7-a0/a2-a3
 
-loc_55380:
+SKMHZ2BG_RedrawShipForeground:
                 move.w  #$4000,d1
                 move.w  #$180,d2
                 lea     (Level_layout_main).w,a3
@@ -201,64 +202,65 @@ loc_55380:
                 addq.w  #2,a3
                 move.w  #VRAM_Plane_B_Name_Table,d7
                 tst.w   (Draw_delayed_rowcount).w
-                bpl.w   loc_55486
+                bpl.w   SKMHZ2BG_DrawChaseAndComposeScroll
                 move.w  #$80,(Draw_delayed_position).w
                 move.w  #2,(Draw_delayed_rowcount).w
                 st      (Events_bg+$01).w
                 addq.w  #4,(Events_routine_bg).w
 
-loc_553B6:
+SKMHZ2BG_RedrawBossBGAndAllocActors:
                 move.w  #$200,d1
                 move.w  #$80,d2
                 jsr     Draw_PlaneVertTopDown(pc)
-                bpl.w   loc_55486
+                bpl.w   SKMHZ2BG_DrawChaseAndComposeScroll
                 lea     (HScroll_table+$008).w,a5
                 clr.l   (a5)
                 clr.l   4(a5)
                 jsr     (AllocateObject).l
-                bne.s   loc_55420
-                move.l  #loc_556F8,(a1)
+                bne.s   SKMHZ2BG_AdvanceAfterBossRedraw
+                move.l  #SKMHZ2BG_InitFixedPillar,(a1)
                 jsr     (CreateNewSprite4).l
-                bne.s   loc_55420
-                move.l  #loc_55732,(a1)
+                bne.s   SKMHZ2BG_AdvanceAfterBossRedraw
+                move.l  #SKMHZ2BG_InitProjectedPillar,(a1)
                 move.w  a1,(a5)+
                 moveq   #2,d1
 
-loc_553F0:
+; Keep already allocated actors if a later allocation fails
+SKMHZ2BG_AllocSpikePairsByTier:
                 jsr     (CreateNewSprite4).l
-                bne.s   loc_55420
-                move.l  #loc_5577C,(a1)
+                bne.s   SKMHZ2BG_AdvanceAfterBossRedraw
+                move.l  #SKMHZ2BG_InitTieredSpike,(a1)
                 move.w  d1,$2E(a1)
                 move.w  a1,(a5)+
                 jsr     (CreateNewSprite4).l
-                bne.s   loc_55420
-                move.l  #loc_5577C,(a1)
+                bne.s   SKMHZ2BG_AdvanceAfterBossRedraw
+                move.l  #SKMHZ2BG_InitTieredSpike,(a1)
                 move.w  d1,$2E(a1)
                 st      $30(a1)
                 move.w  a1,(a5)+
-                dbf     d1,loc_553F0
+                dbf     d1,SKMHZ2BG_AllocSpikePairsByTier
 
-loc_55420:
+SKMHZ2BG_AdvanceAfterBossRedraw:
                 addq.w  #4,(Events_routine_bg).w
 
-loc_55424:
+SKMHZ2BG_WaitForForegroundFinish:
                 tst.w   (Events_fg_5).w
-                bpl.s   loc_55486
+                bpl.s   SKMHZ2BG_DrawChaseAndComposeScroll
                 move.w  #$180,(Draw_delayed_position).w
                 move.w  #2,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w
 
-loc_5543A:
+SKMHZ2BG_RestoreUpperBackground:
                 moveq   #0,d1
                 move.w  #$180,d2
                 jsr     Draw_PlaneVertTopDown(pc)
-                bpl.s   loc_55486
+                bpl.s   SKMHZ2BG_DrawChaseAndComposeScroll
                 clr.b   (Events_bg+$01).w
                 move.w  #$280,(Draw_delayed_position).w
                 move.w  #2,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w
 
-loc_5545A:
+SKMHZ2BG_RestoreForegroundRows:
                 move.w  #$4080,d1
                 move.w  #$280,d2
                 lea     (Level_layout_main).w,a3
@@ -267,12 +269,12 @@ loc_5545A:
                 addq.w  #2,a3
                 move.w  #VRAM_Plane_B_Name_Table,d7
                 tst.w   (Draw_delayed_rowcount).w
-                bpl.s   loc_55486
+                bpl.s   SKMHZ2BG_DrawChaseAndComposeScroll
                 clr.b   (Events_bg+$00).w
                 clr.w   (Events_routine_fg).w
                 addq.w  #4,(Events_routine_bg).w
 
-loc_55486:
+SKMHZ2BG_DrawChaseAndComposeScroll:
                 jsr     BuildMhz2ChaseBackgroundCoordinates(pc)
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
@@ -281,12 +283,12 @@ loc_55486:
                 jsr     Draw_TileRow(pc)
                 jsr     ComposeMhz2ShipAndBossPerspectiveScroll(pc)
                 cmpi.w  #$10,(Events_routine_fg).w
-                bne.s   loc_554B4
+                bne.s   SKMHZ2BG_ApplyScreenShake
                 move.w  (_unkEE9C).w,(V_scroll_value).w
                 move.w  (Camera_Y_pos_BG_copy).w,(V_scroll_value_BG).w
                 addq.w  #4,sp
 
-loc_554B4:
+SKMHZ2BG_ApplyScreenShake:
                 jmp     ShakeScreen_Setup(pc)
 
 ; =============== S U B R O U T I N E =======================================
@@ -332,43 +334,43 @@ BuildMhz2ChaseBackgroundCoordinates:
 ComposeMhz2ShipAndBossPerspectiveScroll:
                 jsr     PlainDeformation(pc)
                 cmpi.w  #$10,(Events_routine_fg).w
-                bne.s   loc_55534
+                bne.s   SKMHZ2BG_TryFillBossForegroundScroll
                 lea     (H_scroll_buffer).w,a1
                 move.w  (HScroll_table).w,d0
                 neg.w   d0
                 moveq   #$40-1,d1
 
-loc_55524:
+SKMHZ2BG_FillShipForegroundScroll:
                 move.w  d0,(a1)
                 addq.w  #4,a1
                 move.w  d0,(a1)
                 addq.w  #4,a1
-                dbf     d1,loc_55524
-                bra.w   locret_5560A
+                dbf     d1,SKMHZ2BG_FillShipForegroundScroll
+                bra.w   SKMHZ2BG_PerspectiveReturn
 ; ---------------------------------------------------------------------------
 
-loc_55534:
+SKMHZ2BG_TryFillBossForegroundScroll:
                 tst.b   (Events_bg+$00).w
-                beq.s   loc_55552
+                beq.s   SKMHZ2BG_CheckPerspectiveDistance
                 lea     (H_scroll_buffer).w,a1
                 move.w  (Camera_X_pos_BG_copy).w,d0
                 neg.w   d0
                 moveq   #$18-1,d1
 
-loc_55546:
+SKMHZ2BG_FillBossForegroundScroll:
                 move.w  d0,(a1)
                 addq.w  #4,a1
                 move.w  d0,(a1)
                 addq.w  #4,a1
-                dbf     d1,loc_55546
+                dbf     d1,SKMHZ2BG_FillBossForegroundScroll
 
-loc_55552:
+SKMHZ2BG_CheckPerspectiveDistance:
                 tst.b   (Events_bg+$01).w
-                beq.w   locret_5560A
+                beq.w   SKMHZ2BG_PerspectiveReturn
                 move.w  (Camera_X_pos).w,d0
                 subi.w  #$4180,d0
                 cmpi.w  #-$140,d0
-                blt.w   loc_555FC
+                blt.w   SKMHZ2BG_PrepareClearPerspective
                 move.w  d0,d1
                 muls.w  #$5600,d1
                 add.l   d1,d1
@@ -379,10 +381,11 @@ loc_55552:
                 clr.w   d0
                 tst.l   d0
                 smi     d3
-                bpl.s   loc_55586
+                bpl.s   SKMHZ2BG_DividePerspectiveStep
                 neg.l   d0
 
-loc_55586:
+; Divide the fixed-point magnitude by $30 in two unsigned stages, then restore the sign
+SKMHZ2BG_DividePerspectiveStep:
                 moveq   #0,d2
                 swap    d0
                 move.w  d0,d2
@@ -394,10 +397,10 @@ loc_55586:
                 swap    d1
                 move.w  d2,d1
                 tst.b   d3
-                beq.s   loc_555A4
+                beq.s   SKMHZ2BG_SeedPerspectiveScroll
                 neg.l   d1
 
-loc_555A4:
+SKMHZ2BG_SeedPerspectiveScroll:
                 lea     (H_scroll_buffer+2).w,a1
                 move.w  (Camera_X_pos_copy).w,d0
                 subi.w  #$80,d0
@@ -406,21 +409,22 @@ loc_555A4:
                 clr.w   d0
                 moveq   #$30-1,d2
 
-loc_555B8:
+SKMHZ2BG_WritePerspectiveScroll:
                 swap    d0
                 move.w  d0,(a1)
                 swap    d0
                 add.l   d1,d0
                 addq.w  #4,a1
-                dbf     d2,loc_555B8
+                dbf     d2,SKMHZ2BG_WritePerspectiveScroll
                 lea     (HScroll_table+$008).w,a1
                 lea     (H_scroll_buffer+$BE).w,a5
                 moveq   #$1C,d0
                 moveq   #7-1,d1
 
-loc_555D2:
+; A zero handle ends projection. Alternate scroll samples for the populated spike pairs
+SKMHZ2BG_ProjectBossActorX:
                 move.w  (a1)+,d2
-                beq.s   locret_5560A
+                beq.s   SKMHZ2BG_PerspectiveReturn
                 movea.w d2,a6
                 move.w  (a5),d2
                 subi.w  #$48,d2
@@ -428,54 +432,54 @@ loc_555D2:
                 add.w   (Camera_X_pos).w,d2
                 move.w  d2,$10(a6)
                 btst    #0,d1
-                bne.s   loc_555F6
+                bne.s   SKMHZ2BG_NextBossActor
                 suba.w  d0,a5
                 addi.w  #$C,d0
 
-loc_555F6:
-                dbf     d1,loc_555D2
-                bra.s   locret_5560A
+SKMHZ2BG_NextBossActor:
+                dbf     d1,SKMHZ2BG_ProjectBossActorX
+                bra.s   SKMHZ2BG_PerspectiveReturn
 ; ---------------------------------------------------------------------------
 
-loc_555FC:
+SKMHZ2BG_PrepareClearPerspective:
                 lea     (H_scroll_buffer+2).w,a1
                 moveq   #$30-1,d0
 
-loc_55602:
+SKMHZ2BG_ClearPerspectiveScroll:
                 clr.w   (a1)
                 addq.w  #4,a1
-                dbf     d0,loc_55602
+                dbf     d0,SKMHZ2BG_ClearPerspectiveScroll
 
-locret_5560A:
+SKMHZ2BG_PerspectiveReturn:
                 rts
 ; End of function ComposeMhz2ShipAndBossPerspectiveScroll
 
 ; ---------------------------------------------------------------------------
 
-loc_5560C:
+SKMHZ2BG_StepChaseCamera:
                 clr.w   (Level_repeat_offset).w
                 move.w  (Camera_X_pos).w,d0
                 addq.w  #4,d0
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_55620
+                bne.s   SKMHZ2BG_ChooseChaseWrapOrStop
                 addq.w  #1,d0
 
-loc_55620:
+SKMHZ2BG_ChooseChaseWrapOrStop:
                 cmpi.w  #$4280,d0
-                blo.s   loc_5569A
+                blo.s   SKMHZ2BG_SetChaseCameraMaxX
                 tst.w   (Events_fg_5).w
-                beq.s   loc_5564A
+                beq.s   SKMHZ2BG_WrapPlayersAndAdvancePhase
                 st      (Events_fg_5).w
                 cmpi.w  #$4420,d0
-                blo.s   loc_5569A
+                blo.s   SKMHZ2BG_SetChaseCameraMaxX
                 move.w  #$4420,d0
                 move.w  #$45A0,(Camera_max_X_pos).w
                 st      (Scroll_lock).w
                 clr.w   (Special_events_routine).w
-                bra.s   loc_5569E
+                bra.s   SKMHZ2BG_CommitCameraAndClampPlayers
 ; ---------------------------------------------------------------------------
 
-loc_5564A:
+SKMHZ2BG_WrapPlayersAndAdvancePhase:
                 move.w  #$200,d1
                 move.w  d1,(Level_repeat_offset).w
                 sub.w   d1,(Player_1+x_pos).w
@@ -488,22 +492,22 @@ loc_5564A:
                 addq.w  #1,(Events_bg+$08).w
                 move.w  (Events_bg+$08).w,d1
                 andi.w  #$F,d1
-                lea     word_558E8(pc),a1
+                lea     SKMHZ2BG_ChasePhaseScripts(pc),a1
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_55686
+                bne.s   SKMHZ2BG_StorePhaseAndConsumeShipLatch
                 lea     $10(a1),a1
 
-loc_55686:
+SKMHZ2BG_StorePhaseAndConsumeShipLatch:
                 move.b  (a1,d1.w),(Events_bg+$07).w
                 tst.b   (_unkFAA9).w
-                beq.s   loc_5569A
+                beq.s   SKMHZ2BG_SetChaseCameraMaxX
                 st      (Events_bg+$0A).w
                 clr.b   (_unkFAA9).w
 
-loc_5569A:
+SKMHZ2BG_SetChaseCameraMaxX:
                 move.w  d0,(Camera_max_X_pos).w
 
-loc_5569E:
+SKMHZ2BG_CommitCameraAndClampPlayers:
                 move.w  d0,(Camera_X_pos).w
                 move.w  d0,(Camera_X_pos_copy).w
                 move.w  d0,(Camera_min_X_pos).w
@@ -517,35 +521,35 @@ loc_5569E:
 
 ClampPlayerToMhz2ChaseWindow:
                 cmpi.b  #5,anim(a1)
-                bne.s   loc_556C4
+                bne.s   SKMHZ2BG_ClampLeftAndSetGroundSpeed
                 clr.b   anim(a1)
 
-loc_556C4:
+SKMHZ2BG_ClampLeftAndSetGroundSpeed:
                 addi.w  #$18,d0
                 cmp.w   x_pos(a1),d0
-                bls.s   loc_556E8
+                bls.s   SKMHZ2BG_ClampRight
                 move.w  d0,x_pos(a1)
                 move.w  #$400,ground_vel(a1)
                 cmpi.w  #3,(Player_mode).w
-                bne.s   locret_556F6
+                bne.s   SKMHZ2BG_PlayerClampReturn
                 move.w  #$500,ground_vel(a1)
-                bra.s   locret_556F6
+                bra.s   SKMHZ2BG_PlayerClampReturn
 ; ---------------------------------------------------------------------------
 
-loc_556E8:
+SKMHZ2BG_ClampRight:
                 addi.w  #$A8,d0
                 cmp.w   x_pos(a1),d0
-                bhi.s   locret_556F6
+                bhi.s   SKMHZ2BG_PlayerClampReturn
                 move.w  d0,x_pos(a1)
 
-locret_556F6:
+SKMHZ2BG_PlayerClampReturn:
                 rts
 ; End of function ClampPlayerToMhz2ChaseWindow
 
 ; ---------------------------------------------------------------------------
 
-loc_556F8:
-                move.l  #loc_5576A,(a0)
+SKMHZ2BG_InitFixedPillar:
+                move.l  #SKMHZ2BG_CheckPillarLifetime,(a0)
                 move.b  #4,render_flags(a0)
                 move.b  #$18,height_pixels(a0)
                 move.b  #$18,width_pixels(a0)
@@ -554,11 +558,11 @@ loc_556F8:
                 move.l  #Map_MHZEndBossMisc,mappings(a0)
                 move.w  #$4238,x_pos(a0)
                 move.w  #$2F0,y_pos(a0)
-                bra.s   loc_5576A
+                bra.s   SKMHZ2BG_CheckPillarLifetime
 ; ---------------------------------------------------------------------------
 
-loc_55732:
-                move.l  #loc_5576A,(a0)
+SKMHZ2BG_InitProjectedPillar:
+                move.l  #SKMHZ2BG_CheckPillarLifetime,(a0)
                 move.b  #$44,render_flags(a0)
                 move.b  #$80,height_pixels(a0)
                 move.b  #$C,width_pixels(a0)
@@ -568,18 +572,18 @@ loc_55732:
                 move.w  #$300,y_pos(a0)
                 move.b  #1,mapping_frame(a0)
 
-loc_5576A:
+SKMHZ2BG_CheckPillarLifetime:
                 tst.b   (Events_bg+$01).w
-                bne.s   loc_55776
+                bne.s   SKMHZ2BG_DrawActivePillar
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_55776:
+SKMHZ2BG_DrawActivePillar:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5577C:
-                move.l  #loc_557C8,(a0)
+SKMHZ2BG_InitTieredSpike:
+                move.l  #SKMHZ2BG_CheckSpikeLifetime,(a0)
                 move.b  #$44,render_flags(a0)
                 move.b  #$10,height_pixels(a0)
                 move.b  #$10,width_pixels(a0)
@@ -590,109 +594,111 @@ loc_5577C:
                 moveq   #4,d1
                 move.w  $2E(a0),d2
                 subq.w  #1,d2
-                bcs.s   loc_557C0
+                bcs.s   SKMHZ2BG_ApplySpikePriorityAndFrame
 
-loc_557B6:
+SKMHZ2BG_StepSpikePriorityAndFrame:
                 addi.w  #$80,d0
                 subq.w  #1,d1
-                dbf     d2,loc_557B6
+                dbf     d2,SKMHZ2BG_StepSpikePriorityAndFrame
 
-loc_557C0:
+SKMHZ2BG_ApplySpikePriorityAndFrame:
                 move.w  d0,priority(a0)
                 move.b  d1,mapping_frame(a0)
 
-loc_557C8:
+SKMHZ2BG_CheckSpikeLifetime:
                 tst.w   (Events_bg+$0A).w
-                bne.s   loc_557D4
+                bne.s   SKMHZ2BG_DeleteRetiredSpike
                 tst.b   (Events_bg+$01).w
-                bne.s   loc_557DA
+                bne.s   SKMHZ2BG_GateSecondSpikeOnPhaseFour
 
-loc_557D4:
+SKMHZ2BG_DeleteRetiredSpike:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_557DA:
+SKMHZ2BG_GateSecondSpikeOnPhaseFour:
                 move.w  (Events_bg+$06).w,d0
                 tst.w   $30(a0)
-                beq.s   loc_557EC
+                beq.s   SKMHZ2BG_DrawSpikeAndTryAddCollision
                 cmpi.w  #4,d0
-                bne.s   locret_55812
+                bne.s   SKMHZ2BG_SpikeUpdateReturn
                 moveq   #0,d0
 
-loc_557EC:
+; Select Y by phase and tier. Only the middle tier adds collision
+SKMHZ2BG_DrawSpikeAndTryAddCollision:
                 lsl.w   #2,d0
                 add.w   $2E(a0),d0
                 add.w   d0,d0
-                lea     word_558C2(pc),a1
+                lea     SKMHZ2BG_PhaseByTierSpikeYWordRows(pc),a1
                 move.w  (a1,d0.w),y_pos(a0)
                 jsr     (Draw_Sprite).l
                 cmpi.w  #1,$2E(a0)
-                bne.s   locret_55812
+                bne.s   SKMHZ2BG_SpikeUpdateReturn
                 jmp     (Add_SpriteToCollisionResponseList).l
 ; ---------------------------------------------------------------------------
 
-locret_55812:
+SKMHZ2BG_SpikeUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55814:
-                move.l  #loc_5582E,(a0)
+SKMHZ2BG_InitShipPropeller:
+                move.l  #SKMHZ2BG_AnimateShipPropellerThenDraw,(a0)
                 move.w  #$380,priority(a0)
                 move.w  #make_art_tile(ArtTile_MHZShipPropeller,1,1),art_tile(a0)
                 move.l  #Map_MHZEndBossMisc,mappings(a0)
 
-loc_5582E:
+SKMHZ2BG_AnimateShipPropellerThenDraw:
                 lea     Ani_MHZEndPropellers(pc),a1
                 jsr     (Animate_Sprite).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5583E:
+SKMHZ2BG_AccelerateShipAndSelectY:
                 addq.b  #1,$3C(a0)
                 addi.l  #$C0,$38(a0)
                 move.l  $38(a0),d0
                 sub.l   d0,(_unkEE98).w
                 tst.w   (Events_fg_4).w
-                beq.s   loc_55876
+                beq.s   SKMHZ2BG_CalcShipVerticalSwing
                 cmpi.l  #$2800,$2E(a0)
-                bne.s   loc_55876
+                bne.s   SKMHZ2BG_CalcShipVerticalSwing
                 move.w  $32(a0),d0
                 move.b  $3C(a0),d1
                 andi.w  #3,d1
-                bne.s   loc_55888
+                bne.s   SKMHZ2BG_StoreShipYAndCheckThreshold
                 addq.w  #1,$32(a0)
-                bra.s   loc_55888
+                bra.s   SKMHZ2BG_StoreShipYAndCheckThreshold
 ; ---------------------------------------------------------------------------
 
-loc_55876:
+SKMHZ2BG_CalcShipVerticalSwing:
                 move.l  #$2800,d0
                 move.l  #$C0,d1
                 jsr     (Gradual_SwingOffset).l
 
-loc_55888:
+SKMHZ2BG_StoreShipYAndCheckThreshold:
                 add.w   (_unkEEA2).w,d0
                 addq.w  #5,d0
                 move.w  d0,(_unkEE9C).w
                 tst.b   (_unkFAA9).w
-                bne.s   loc_558AC
+                bne.s   SKMHZ2BG_TickShipSound
                 cmpi.w  #-$3E6,(_unkEE98).w
-                bgt.s   loc_558AC
+                bgt.s   SKMHZ2BG_TickShipSound
                 st      (_unkFAA9).w
                 st      (Events_fg_4).w
                 st      (Scroll_lock).w
 
-loc_558AC:
+; Play the large ship sound on frames whose low nibble is 1
+SKMHZ2BG_TickShipSound:
                 move.w  (Level_frame_counter).w,d0
                 subq.w  #1,d0
                 andi.w  #$F,d0
-                bne.s   locret_558C0
+                bne.s   SKMHZ2BG_ShipUpdateReturn
                 moveq   #signextendB(sfx_LargeShip),d0
                 jsr     (Play_SFX).l
 
-locret_558C0:
+SKMHZ2BG_ShipUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
-word_558C2:
+SKMHZ2BG_PhaseByTierSpikeYWordRows:
                 dc.w    $336
                 dc.w    $334
                 dc.w    $333
@@ -712,7 +718,8 @@ word_558C2:
                 dc.w    $2C9
                 dc.w    $2CF
                 dc.w    $2D4
-word_558E8:
+; The normal and Knuckles scripts occupy 16 bytes each
+SKMHZ2BG_ChasePhaseScripts:
                 dc.w    $102
                 dc.w    2
                 dc.w    $102

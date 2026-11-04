@@ -5,47 +5,47 @@
 
 Obj_MHZ_Pollen_Spawner:
                 cmpi.b  #$10,(MHZ_pollen_counter).w
-                bhs.s   locret_3DA22
+                bhs.s   SKMHZPollen_EmitterReturn
                 lea     $2E(a0),a3
                 lea     (Player_1).w,a2
                 bsr.s   EmitMhzPollenFromPlayerMotion
                 lea     (Player_2).w,a2
                 tst.b   render_flags(a2)
-                bpl.s   locret_3DA22
+                bpl.s   SKMHZPollen_EmitterReturn
                 lea     $30(a0),a3
                 bsr.s   EmitMhzPollenFromPlayerMotion
 
-locret_3DA22:
+SKMHZPollen_EmitterReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
 EmitMhzPollenFromPlayerMotion:
                 cmpi.b  #$C,top_solid_bit(a2)
-                bne.s   locret_3DA22
+                bne.s   SKMHZPollen_EmitterReturn
                 btst    #Status_InAir,status(a2)
-                bne.w   loc_3DAC4
+                bne.w   SKMHZPollen_SaveAirborneYSpeed
                 jsr     (Random_Number).l
                 andi.w  #3,d0
-                bne.s   locret_3DA22
+                bne.s   SKMHZPollen_EmitterReturn
                 move.w  (a3),d2
-                beq.s   loc_3DA58
+                beq.s   SKMHZPollen_CalcAbsPlayerXSpeed
                 move.w  #0,(a3)
                 btst    #Status_OnObj,status(a2)
-                bne.s   loc_3DA58
+                bne.s   SKMHZPollen_CalcAbsPlayerXSpeed
                 cmpi.w  #$400,d2
-                bhs.s   loc_3DACA
+                bhs.s   SKMHZPollen_BeginLandingBurst
 
-loc_3DA58:
+SKMHZPollen_CalcAbsPlayerXSpeed:
                 move.w  x_vel(a2),d2
-                bpl.s   loc_3DA60
+                bpl.s   SKMHZPollen_TryEmitFromRunSpeed
                 neg.w   d2
 
-loc_3DA60:
+SKMHZPollen_TryEmitFromRunSpeed:
                 cmpi.w  #$500,d2
-                blo.s   locret_3DAC2
+                blo.s   SKMHZPollen_RunEmissionReturn
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   locret_3DAC2
+                bne.s   SKMHZPollen_RunEmissionReturn
                 bsr.w   SelectMhzPollenOrLeafGraphics
                 ori.b   #4,render_flags(a1)
                 move.w  #0,priority(a1)
@@ -66,23 +66,24 @@ loc_3DA60:
                 move.l  #Obj_MHZ_Pollen,(a1)
                 addq.b  #1,(MHZ_pollen_counter).w
 
-locret_3DAC2:
+SKMHZPollen_RunEmissionReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3DAC4:
+SKMHZPollen_SaveAirborneYSpeed:
                 move.w  y_vel(a2),(a3)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3DACA:
+SKMHZPollen_BeginLandingBurst:
                 move.w  #$100,d2
-                lea     (word_3DB50).l,a4
+                lea     (SKMHZPollen_BurstVelocityBias).l,a4
                 moveq   #6-1,d6
 
-loc_3DAD6:
+; Advance the velocity bias only on successful allocation
+SKMHZPollen_TrySpawnBurstParticle:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_3DB4A
+                bne.s   SKMHZPollen_NextBurstAttempt
                 bsr.w   SelectMhzPollenOrLeafGraphics
                 ori.b   #4,render_flags(a1)
                 move.w  #0,priority(a1)
@@ -107,16 +108,16 @@ loc_3DAD6:
                 andi.w  #3,d0
                 addq.w  #2,d0
                 move.w  d0,$34(a1)
-                move.l  #loc_3DC18,(a1)
+                move.l  #SKMHZPollen_MoveBurstAndCheckApex,(a1)
                 addq.b  #1,(MHZ_pollen_counter).w
 
-loc_3DB4A:
-                dbf     d6,loc_3DAD6
+SKMHZPollen_NextBurstAttempt:
+                dbf     d6,SKMHZPollen_TrySpawnBurstParticle
                 rts
 ; End of function EmitMhzPollenFromPlayerMotion
 
 ; ---------------------------------------------------------------------------
-word_3DB50:
+SKMHZPollen_BurstVelocityBias:
                 dc.w    $80,  $100
                 dc.w    $100,   $C0
                 dc.w    $180,   $80
@@ -128,31 +129,31 @@ word_3DB50:
 
 SelectMhzPollenOrLeafGraphics:
                 tst.b   (_unkF7C1).w
-                bne.s   loc_3DB7E
+                bne.s   SKMHZPollen_ChooseLeafVariant
                 move.l  #Map_MHZPollen,mappings(a1)
                 move.w  #make_art_tile(ArtTile_MHZMisc+$21,3,1),art_tile(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3DB7E:
+SKMHZPollen_ChooseLeafVariant:
                 move.b  $32(a0),d0
                 addq.b  #1,$32(a0)
                 andi.w  #7,d0
-                move.b  byte_3DBB0(pc,d0.w),d0
-                bne.s   loc_3DBA0
+                move.b  SKMHZPollen_LeafVariantCycle(pc,d0.w),d0
+                bne.s   SKMHZPollen_UseSmallLeafArt
                 move.l  #Map_MHZBigLeaves,mappings(a1)
                 move.w  #make_art_tile(ArtTile_MHZMisc+$1C,3,1),art_tile(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3DBA0:
+SKMHZPollen_UseSmallLeafArt:
                 move.l  #Map_MHZPollen,mappings(a1)
                 move.w  #make_art_tile(ArtTile_MHZMisc+$1C,3,1),art_tile(a1)
                 rts
 ; End of function SelectMhzPollenOrLeafGraphics
 
 ; ---------------------------------------------------------------------------
-byte_3DBB0:
+SKMHZPollen_LeafVariantCycle:
                 dc.b    0,   0,   1,   0,   0,   0,   1,   1
                 even
 ; ---------------------------------------------------------------------------
@@ -163,16 +164,16 @@ Obj_MHZ_Pollen:
                 add.w   d0,d0
                 add.w   d0,d0
                 add.w   d0,y_vel(a0)
-                bmi.s   loc_3DBD8
-                move.l  #loc_3DBE0,(a0)
+                bmi.s   SKMHZPollen_DrawInitialRise
+                move.l  #SKMHZPollen_MoveWithSineDrift,(a0)
                 move.b  (Level_frame_counter+1).w,angle(a0)
 
-loc_3DBD8:
+SKMHZPollen_DrawInitialRise:
                 bsr.s   AnimateMhzPollenByHorizontalDirection
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3DBE0:
+SKMHZPollen_MoveWithSineDrift:
                 move.b  angle(a0),d0
                 addq.b  #4,angle(a0)
                 jsr     (GetSineCosine).l
@@ -181,25 +182,26 @@ loc_3DBE0:
                 move.w  $34(a0),d0
                 add.w   d0,y_vel(a0)
                 tst.b   render_flags(a0)
-                bmi.s   loc_3DC10
+                bmi.s   SKMHZPollen_DrawDescendingParticle
                 move.w  #$7F00,x_pos(a0)
                 subq.b  #1,(MHZ_pollen_counter).w
 
-loc_3DC10:
+SKMHZPollen_DrawDescendingParticle:
                 bsr.s   AnimateMhzPollenByHorizontalDirection
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_3DC18:
+; Switch to descending motion with the angle already stored in the particle
+SKMHZPollen_MoveBurstAndCheckApex:
                 jsr     (MoveSprite2).l
                 move.w  $34(a0),d0
                 add.w   d0,d0
                 add.w   d0,d0
                 add.w   d0,y_vel(a0)
-                bmi.s   loc_3DC32
-                move.l  #loc_3DBE0,(a0)
+                bmi.s   SKMHZPollen_DrawBurstRise
+                move.l  #SKMHZPollen_MoveWithSineDrift,(a0)
 
-loc_3DC32:
+SKMHZPollen_DrawBurstRise:
                 bsr.s   AnimateMhzPollenByHorizontalDirection
                 jmp     (Draw_Sprite).l
 
@@ -207,15 +209,15 @@ loc_3DC32:
 
 AnimateMhzPollenByHorizontalDirection:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_3DC5A
+                bpl.s   SKMHZPollen_DirectionAnimReturn
                 move.b  #7,anim_frame_timer(a0)
                 addq.b  #1,mapping_frame(a0)
                 andi.b  #1,mapping_frame(a0)
                 tst.w   x_vel(a0)
-                bpl.s   locret_3DC5A
+                bpl.s   SKMHZPollen_DirectionAnimReturn
                 addq.b  #2,mapping_frame(a0)
 
-locret_3DC5A:
+SKMHZPollen_DirectionAnimReturn:
                 rts
 ; End of function AnimateMhzPollenByHorizontalDirection
 

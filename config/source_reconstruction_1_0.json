@@ -1113,9 +1113,15 @@
       "commits": ["a3b7efeceffff617e386ba3b8d16b7d95bd69c00"]
     },
     {
-      "id": "current-shorten-29-zone-lbz",
+      "id": "change-478182c6b3f2",
       "kind": "source_or_tooling",
       "summary": "Apply 1047 reviewed short labels for lbz.",
+      "commits": ["478182c6b3f2a0547c3c72008a953976d7c29045"]
+    },
+    {
+      "id": "current-shorten-30-zone-mhz",
+      "kind": "source_or_tooling",
+      "summary": "Apply 386 reviewed short labels for mhz.",
       "commits": ["release-commit"]
     }
   ],

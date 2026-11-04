@@ -79,9 +79,9 @@ SKUpdraft_ApplyReturn:
 ; Only the two mushroom-parachute flight callbacks qualify for controlled lift
 SKUpdraft_CheckParachuteHandler:
                 movea.w interact(a1),a3
-                cmpi.l  #loc_3F51C,(a3)
+                cmpi.l  #SKMHZParachute_UpdateControlledFlight,(a3)
                 beq.s   SKUpdraft_TestConfiguredMushroomLiftBand
-                cmpi.l  #loc_3F572,(a3)
+                cmpi.l  #SKMHZParachute_UpdateUnoccupiedFlight,(a3)
                 bne.s   SKUpdraft_ApplyReturn
 
 SKUpdraft_TestConfiguredMushroomLiftBand:

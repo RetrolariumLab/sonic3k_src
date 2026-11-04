@@ -9433,7 +9433,7 @@
       "responsibility": "Mushroom Hill act-one screen and background initialization, events and deformation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 243,
+      "physical_lines": 244,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -9468,7 +9468,7 @@
       "responsibility": "Mushroom Hill act-two background initialization, events, deformation and private sequence data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 735,
+      "physical_lines": 742,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -9503,7 +9503,7 @@
       "responsibility": "Mushroom Hill act-two screen initialization, event dispatch and progression control.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 417,
+      "physical_lines": 422,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -65096,7 +65096,7 @@
       "responsibility": "Mushroom catapult activation, compression, player launch and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 243,
+      "physical_lines": 244,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",
@@ -65131,7 +65131,7 @@
       "responsibility": "Mushroom parachute movement, player contact and descent control.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 331,
+      "physical_lines": 332,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",
@@ -65206,7 +65206,7 @@
       "responsibility": "Pollen and leaf emitters, particle creation, particle movement and sprite resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 226,
+      "physical_lines": 228,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",
@@ -65271,7 +65271,7 @@
       "responsibility": "Sticky vine capture, climbing or movement control and player release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 280,
+      "physical_lines": 282,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",
@@ -65306,7 +65306,7 @@
       "responsibility": "Mushroom Hill swing-vine motion, character launch, player positioning and shared vine mapping storage.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 535,
+      "physical_lines": 537,
       "origin": {
         "commit": "21b0a899f14ebf22404b12ac17b1396d0db4809e",
         "path": "sonic3k.s",

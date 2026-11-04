@@ -16,9 +16,9 @@ Obj_MHZPulleyLift:
                 move.w  d1,mainspr_childsprites(a0)
                 subq.b  #1,d1
                 lea     sub2_x_pos(a0),a2
-                lea     word_3E29E(pc),a3
+                lea     SKMHZPulley_CompositeStartOffsets(pc),a3
 
-loc_3E280:
+SKMHZPulley_InitCompositeSprites:
                 move.w  (a3)+,d0
                 add.w   x_pos(a0),d0
                 move.w  d0,(a2)+
@@ -26,20 +26,20 @@ loc_3E280:
                 add.w   y_pos(a0),d0
                 move.w  d0,(a2)+
                 move.w  (a3)+,(a2)+
-                dbf     d1,loc_3E280
+                dbf     d1,SKMHZPulley_InitCompositeSprites
                 move.b  #4,mapping_frame(a0)
-                bra.s   loc_3E2B0
+                bra.s   SKMHZPulley_TrySpawnHandles
 ; ---------------------------------------------------------------------------
-word_3E29E:
+SKMHZPulley_CompositeStartOffsets:
                 dc.w    0,   $40,     0
                 dc.w    -$10,   $78,     5
                 dc.w    $10,   $78,     6
 ; ---------------------------------------------------------------------------
 
-loc_3E2B0:
+SKMHZPulley_TrySpawnHandles:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_3E378
-                move.l  #loc_3E472,(a1)
+                bne.w   SKMHZPulley_BeginPulleyControl
+                move.l  #SKMHZPulleyGrip_FollowRootAndReadRiders,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.w  x_pos(a0),$2E(a1)
@@ -55,8 +55,8 @@ loc_3E2B0:
                 move.b  #2,mapping_frame(a1)
                 move.w  #$34,$36(a1)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_3E378
-                move.l  #loc_3E472,(a1)
+                bne.s   SKMHZPulley_BeginPulleyControl
+                move.l  #SKMHZPulleyGrip_FollowRootAndReadRiders,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.w  x_pos(a0),$2E(a1)
@@ -73,10 +73,10 @@ loc_3E2B0:
                 move.w  #$36,$36(a1)
                 move.w  a0,parent3(a1)
 
-loc_3E378:
-                move.l  #loc_3E37E,(a0)
+SKMHZPulley_BeginPulleyControl:
+                move.l  #SKMHZPulley_AverageLengthsAndPickFrame,(a0)
 
-loc_3E37E:
+SKMHZPulley_AverageLengthsAndPickFrame:
                 lea     sub2_x_pos(a0),a2
                 move.w  $34(a0),d0
                 add.w   $36(a0),d0
@@ -86,70 +86,70 @@ loc_3E37E:
                 addi.w  #$40,d0
                 move.b  #0,sub2_mapframe-sub2_x_pos(a2)
                 cmpi.w  #$20,d0
-                bhi.s   loc_3E3A6
+                bhi.s   SKMHZPulley_CheckLengthChange
                 move.b  #1,sub2_mapframe-sub2_x_pos(a2)
 
-loc_3E3A6:
+SKMHZPulley_CheckLengthChange:
                 move.w  d0,d1
                 move.w  d2,d3
                 sub.w   $38(a0),d2
-                beq.s   loc_3E422
-                bcc.s   loc_3E3E6
+                beq.s   SKMHZPulley_PlaceCompositeAndDraw
+                bcc.s   SKMHZPulley_CheckExtendingHandles
                 cmpi.w  #-4,d2
-                beq.s   loc_3E3CC
+                beq.s   SKMHZPulley_CheckFourUnitRetraction
                 add.w   y_pos(a0),d0
                 andi.w  #$E,d0
                 cmpi.w  #2,d0
-                bne.s   loc_3E422
+                bne.s   SKMHZPulley_PlaceCompositeAndDraw
 
-loc_3E3C6:
+SKMHZPulley_RaiseRootTwoPixels:
                 subq.w  #2,y_pos(a0)
-                bra.s   loc_3E422
+                bra.s   SKMHZPulley_PlaceCompositeAndDraw
 ; ---------------------------------------------------------------------------
 
-loc_3E3CC:
+SKMHZPulley_CheckFourUnitRetraction:
                 add.w   y_pos(a0),d0
                 andi.w  #$E,d0
                 cmpi.w  #2,d0
-                beq.s   loc_3E3C6
+                beq.s   SKMHZPulley_RaiseRootTwoPixels
                 cmpi.w  #4,d0
-                bne.s   loc_3E422
+                bne.s   SKMHZPulley_PlaceCompositeAndDraw
                 subq.w  #4,y_pos(a0)
-                bra.s   loc_3E422
+                bra.s   SKMHZPulley_PlaceCompositeAndDraw
 ; ---------------------------------------------------------------------------
 
-loc_3E3E6:
+SKMHZPulley_CheckExtendingHandles:
                 cmpi.w  #4,d2
-                beq.s   loc_3E40E
+                beq.s   SKMHZPulley_CheckFourUnitExtension
                 add.w   y_pos(a0),d0
 
-loc_3E3F0:
+SKMHZPulley_CheckUseAlignment:
                 move.w  d0,d2
                 andi.w  #$E,d0
-                bne.s   loc_3E422
+                bne.s   SKMHZPulley_PlaceCompositeAndDraw
 
-loc_3E3F8:
+SKMHZPulley_TryConsumeUse:
                 cmp.w   $3C(a0),d2
-                beq.s   loc_3E422
+                beq.s   SKMHZPulley_PlaceCompositeAndDraw
                 move.w  d2,$3C(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_3E422
+                beq.s   SKMHZPulley_PlaceCompositeAndDraw
                 subq.b  #1,subtype(a0)
-                bra.s   loc_3E422
+                bra.s   SKMHZPulley_PlaceCompositeAndDraw
 ; ---------------------------------------------------------------------------
 
-loc_3E40E:
+SKMHZPulley_CheckFourUnitExtension:
                 add.w   y_pos(a0),d0
                 addq.w  #2,d0
                 move.w  d0,d2
                 andi.w  #$E,d0
-                beq.s   loc_3E3F8
+                beq.s   SKMHZPulley_TryConsumeUse
                 move.w  d2,d0
                 subq.w  #2,d0
-                bra.s   loc_3E3F0
+                bra.s   SKMHZPulley_CheckUseAlignment
 ; ---------------------------------------------------------------------------
 
-loc_3E422:
+SKMHZPulley_PlaceCompositeAndDraw:
                 move.w  d3,$38(a0)
                 add.w   y_pos(a0),d1
                 move.w  d1,d0
@@ -158,7 +158,7 @@ loc_3E422:
                 move.w  d0,sub3_y_pos-sub2_x_pos(a2)
                 move.w  d0,sub4_y_pos-sub2_x_pos(a2)
                 andi.w  #$F,d1
-                move.b  byte_3E462(pc,d1.w),d1
+                move.b  SKMHZPulley_SideSpreadByPhase(pc,d1.w),d1
                 addi.w  #$10,d1
                 move.w  d1,d0
                 neg.w   d0
@@ -168,7 +168,7 @@ loc_3E422:
                 move.w  d1,sub4_x_pos-sub2_x_pos(a2)
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
-byte_3E462:
+SKMHZPulley_SideSpreadByPhase:
                 dc.b    0
                 dc.b    8
                 dc.b    8
@@ -188,7 +188,7 @@ byte_3E462:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_3E472:
+SKMHZPulleyGrip_FollowRootAndReadRiders:
                 move.b  #0,$3A(a0)
                 movea.w parent3(a0),a3
                 move.w  $34(a0),d0
@@ -198,35 +198,35 @@ loc_3E472:
                 bsr.s   UpdatePlayersOnMhzPulleyHandle
                 moveq   #$18,d1
                 tst.b   $3A(a0)
-                beq.s   loc_3E4AA
+                beq.s   SKMHZPulleyGrip_TryRetractHandle
                 tst.b   subtype(a3)
-                beq.s   loc_3E4B6
+                beq.s   SKMHZPulleyGrip_PublishLengthAndFrame
                 cmpi.w  #$40,$34(a0)
-                beq.s   loc_3E4B6
+                beq.s   SKMHZPulleyGrip_PublishLengthAndFrame
                 addq.w  #4,$34(a0)
                 moveq   #$1C,d1
-                bra.s   loc_3E4B6
+                bra.s   SKMHZPulleyGrip_PublishLengthAndFrame
 ; ---------------------------------------------------------------------------
 
-loc_3E4AA:
+SKMHZPulleyGrip_TryRetractHandle:
                 tst.w   $34(a0)
-                beq.s   loc_3E4B6
+                beq.s   SKMHZPulleyGrip_PublishLengthAndFrame
                 subq.w  #4,$34(a0)
                 moveq   #$14,d1
 
-loc_3E4B6:
+SKMHZPulleyGrip_PublishLengthAndFrame:
                 move.w  $36(a0),d0
                 move.w  $34(a0),(a3,d0.w)
                 move.b  #3,mapping_frame(a0)
                 cmp.w   $34(a0),d1
-                bhi.s   loc_3E4E2
+                bhi.s   SKMHZPulleyGrip_DrawFromRootX
                 move.b  #2,mapping_frame(a0)
                 addi.w  #$10,d1
                 cmp.w   $34(a0),d1
-                bhi.s   loc_3E4E2
+                bhi.s   SKMHZPulleyGrip_DrawFromRootX
                 move.b  #7,mapping_frame(a0)
 
-loc_3E4E2:
+SKMHZPulleyGrip_DrawFromRootX:
                 move.w  $2E(a0),d0
                 jmp     (Sprite_OnScreen_Test2).l
 
@@ -247,34 +247,34 @@ UpdatePlayersOnMhzPulleyHandle:
 
 UpdatePlayerOnMhzPulleyHandle:
                 tst.b   (a2)
-                beq.w   loc_3E682
+                beq.w   SKMHZPulleyGrip_TickCaptureCooldown
                 tst.b   render_flags(a1)
-                bpl.s   loc_3E58A
+                bpl.s   SKMHZPulleyGrip_DetachWithoutJump
                 cmpi.b  #4,routine(a1)
-                bhs.s   loc_3E58A
+                bhs.s   SKMHZPulleyGrip_DetachWithoutJump
                 tst.w   (Debug_placement_mode).w
-                bne.s   loc_3E58A
+                bne.s   SKMHZPulleyGrip_DetachWithoutJump
                 move.w  d0,d1
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d1
-                beq.w   loc_3E5F2
+                beq.w   SKMHZPulleyGrip_CheckCheatAndTryFaceLeft
                 clr.b   $2E(a1)
                 clr.b   (a2)
                 move.b  #$12,2(a2)
                 andi.w  #(button_up_mask|button_down_mask|button_left_mask|button_right_mask)<<8,d0
-                beq.w   loc_3E546
+                beq.w   SKMHZPulleyGrip_TrySetJumpLeft
                 move.b  #$3C,2(a2)
 
-loc_3E546:
+SKMHZPulleyGrip_TrySetJumpLeft:
                 btst    #button_left+8,d0
-                beq.s   loc_3E552
+                beq.s   SKMHZPulleyGrip_TrySetJumpRight
                 move.w  #-$200,x_vel(a1)
 
-loc_3E552:
+SKMHZPulleyGrip_TrySetJumpRight:
                 btst    #button_right+8,d0
-                beq.s   loc_3E55E
+                beq.s   SKMHZPulleyGrip_SetJumpReleasePose
                 move.w  #$200,x_vel(a1)
 
-loc_3E55E:
+SKMHZPulleyGrip_SetJumpReleasePose:
                 move.w  #-$380,y_vel(a1)
                 bset    #Status_InAir,status(a1)
                 move.b  #1,jumping(a1)
@@ -285,7 +285,7 @@ loc_3E55E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3E58A:
+SKMHZPulleyGrip_DetachWithoutJump:
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.b  #$3C,2(a2)
@@ -296,28 +296,28 @@ loc_3E58A:
 
 RecognizeMhzPulleyCheatSequence:
                 cmpa.w  #Player_1,a1
-                bne.s   locret_3E5E6
+                bne.s   SKMHZPulleyCheat_SequenceReturn
                 tst.b   d0
-                beq.s   locret_3E5E6
+                beq.s   SKMHZPulleyCheat_SequenceReturn
                 moveq   #0,d1
                 move.b  $40(a0),d1
-                cmp.b   byte_3E5E8(pc,d1.w),d0
-                bne.s   loc_3E5E0
+                cmp.b   SKMHZPulleyCheat_DirectionSequence(pc,d1.w),d0
+                bne.s   SKMHZPulleyCheat_ResetSequenceCursor
                 addq.b  #1,$40(a0)
-                move.b  byte_3E5E8+1(pc,d1.w),d1
-                bne.s   locret_3E5E6
+                move.b  SKMHZPulleyCheat_DirectionSequence+1(pc,d1.w),d1
+                bne.s   SKMHZPulleyCheat_SequenceReturn
 
                 moveq   #0,d1                           ; what the fuck
                 subi.w  #-Level_select_flag,d1
                 movea.w d1,a4
 
                 tst.w   SK_alone_flag-Level_select_flag(a4)
-                bne.s   loc_3E5CC
+                bne.s   SKMHZPulleyCheat_SetFlagsAndPlaySound
                 tst.w   (a4)
-                beq.s   loc_3E5E0
+                beq.s   SKMHZPulleyCheat_ResetSequenceCursor
                 addq.w  #Debug_cheat_flag-Level_select_flag,a4
 
-loc_3E5CC:
+SKMHZPulleyCheat_SetFlagsAndPlaySound:
                 moveq   #1,d1
                 move.b  d1,(a4)
                 move.b  d1,1(a4)
@@ -326,15 +326,15 @@ loc_3E5CC:
                 jsr     (Play_SFX).l
                 move.w  d1,d0
 
-loc_3E5E0:
+SKMHZPulleyCheat_ResetSequenceCursor:
                 move.b  #0,$40(a0)
 
-locret_3E5E6:
+SKMHZPulleyCheat_SequenceReturn:
                 rts
 ; End of function RecognizeMhzPulleyCheatSequence
 
 ; ---------------------------------------------------------------------------
-byte_3E5E8:
+SKMHZPulleyCheat_DirectionSequence:
                 dc.b    button_left_mask
                 dc.b    button_left_mask
                 dc.b    button_left_mask
@@ -347,50 +347,50 @@ byte_3E5E8:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_3E5F2:
+SKMHZPulleyGrip_CheckCheatAndTryFaceLeft:
                 bsr.s   RecognizeMhzPulleyCheatSequence
                 btst    #button_left+8,d0
-                beq.s   loc_3E600
+                beq.s   SKMHZPulleyGrip_TryFaceRight
                 bset    #Status_Facing,status(a1)
 
-loc_3E600:
+SKMHZPulleyGrip_TryFaceRight:
                 btst    #button_right+8,d0
-                beq.s   loc_3E60C
+                beq.s   SKMHZPulleyGrip_SyncFacingAndReadDown
                 bclr    #Status_Facing,status(a1)
 
-loc_3E60C:
+SKMHZPulleyGrip_SyncFacingAndReadDown:
                 move.b  status(a1),d1
                 andi.b  #1,d1
                 andi.b  #$FC,render_flags(a1)
                 or.b    d1,render_flags(a1)
                 move.b  #$90,d1
                 btst    #9,d0
-                beq.s   loc_3E632
+                beq.s   SKMHZPulleyGrip_TryPlayPullSound
                 move.b  #1,$3A(a0)
                 move.b  #$91,d1
 
-loc_3E632:
+SKMHZPulleyGrip_TryPlayPullSound:
                 btst    #1,d0
-                beq.s   loc_3E646
+                beq.s   SKMHZPulleyGrip_PlaceRiderAtGrip
                 tst.b   subtype(a3)
-                beq.s   loc_3E646
+                beq.s   SKMHZPulleyGrip_PlaceRiderAtGrip
                 moveq   #signextendB(sfx_PulleyMove),d0
                 jsr     (Play_SFX).l
 
-loc_3E646:
+SKMHZPulleyGrip_PlaceRiderAtGrip:
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 addi.w  #$42,y_pos(a1)
 
-loc_3E658:
+SKMHZPulleyGrip_PickExtendedRiderPose:
                 move.w  $34(a0),d0
-                beq.s   loc_3E66C
+                beq.s   SKMHZPulleyGrip_UploadRiderPose
                 move.b  #$91,d1
                 cmpi.w  #$20,d0
-                blo.s   loc_3E66C
+                blo.s   SKMHZPulleyGrip_UploadRiderPose
                 move.b  #$92,d1
 
-loc_3E66C:
+SKMHZPulleyGrip_UploadRiderPose:
                 move.b  d1,mapping_frame(a1)
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
@@ -400,32 +400,32 @@ loc_3E66C:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3E682:
+SKMHZPulleyGrip_TickCaptureCooldown:
                 tst.b   2(a2)
-                beq.s   loc_3E690
+                beq.s   SKMHZPulleyGrip_TryCaptureRider
                 subq.b  #1,2(a2)
-                bne.w   locret_3E71E
+                bne.w   SKMHZPulleyGrip_CaptureReturn
 
-loc_3E690:
+SKMHZPulleyGrip_TryCaptureRider:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$10,d0
                 cmpi.w  #$20,d0
-                bhs.w   locret_3E71E
+                bhs.w   SKMHZPulleyGrip_CaptureReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 subi.w  #$30,d1
                 cmpi.w  #$18,d1
-                bhs.w   locret_3E71E
+                bhs.w   SKMHZPulleyGrip_CaptureReturn
                 tst.b   object_control(a1)
-                bne.s   locret_3E71E
+                bne.s   SKMHZPulleyGrip_CaptureReturn
                 cmpi.b  #4,routine(a1)
-                bhs.s   locret_3E71E
+                bhs.s   SKMHZPulleyGrip_CaptureReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_3E71E
+                bne.s   SKMHZPulleyGrip_CaptureReturn
                 tst.w   y_vel(a1)
-                beq.s   locret_3E71E
-                bmi.s   locret_3E71E
+                beq.s   SKMHZPulleyGrip_CaptureReturn
+                bmi.s   SKMHZPulleyGrip_CaptureReturn
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)
                 clr.w   ground_vel(a1)
@@ -440,10 +440,10 @@ loc_3E690:
                 move.b  #$90,d1
                 moveq   #signextendB(sfx_Grab),d0
                 jsr     (Play_SFX).l
-                bra.w   loc_3E658
+                bra.w   SKMHZPulleyGrip_PickExtendedRiderPose
 ; ---------------------------------------------------------------------------
 
-locret_3E71E:
+SKMHZPulleyGrip_CaptureReturn:
                 rts
 ; ---------------------------------------------------------------------------
 Map_MHZPulleyLift:

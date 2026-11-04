@@ -60,8 +60,8 @@ SpecialEvents:
 SpecialEvents_Index:
                 dc.l    SKCamera_SpecialEventReturn
                 dc.l    AIZ2_DoShipLoop
-                dc.l    loc_54CB0
-                dc.l    loc_5560C
+                dc.l    SKMHZ1Events_WrapChaseCameraAndPlayers
+                dc.l    SKMHZ2BG_StepChaseCamera
                 dc.l    loc_569BA
                 dc.l    loc_59E46
 ; ---------------------------------------------------------------------------

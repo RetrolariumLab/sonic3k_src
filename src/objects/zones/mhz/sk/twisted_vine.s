@@ -6,15 +6,15 @@
 Obj_MHZTwistedVine:
                 move.b  #$D0,width_pixels(a0)
                 btst    #0,status(a0)
-                beq.s   loc_3DCB4
-                move.l  #loc_3DE6A,(a0)
-                bra.w   loc_3DE6A
+                beq.s   SKMHZTwistVine_StartOrdinaryVine
+                move.l  #SKMHZTwistVine_UpdateInvertedRiders,(a0)
+                bra.w   SKMHZTwistVine_UpdateInvertedRiders
 ; ---------------------------------------------------------------------------
 
-loc_3DCB4:
-                move.l  #loc_3DCBA,(a0)
+SKMHZTwistVine_StartOrdinaryVine:
+                move.l  #SKMHZTwistVine_UpdateOrdinaryRiders,(a0)
 
-loc_3DCBA:
+SKMHZTwistVine_UpdateOrdinaryRiders:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 bsr.s   UpdatePlayerOnMhzTwistedVine
@@ -27,48 +27,48 @@ loc_3DCBA:
 
 UpdatePlayerOnMhzTwistedVine:
                 btst    d6,status(a0)
-                bne.w   loc_3DD9E
+                bne.w   SKMHZTwistVine_GetOrdinaryAbsSpeed
                 btst    #Status_InAir,status(a1)
-                bne.w   locret_3DD9C
+                bne.w   SKMHZTwistVine_OrdinaryRideReturn
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 tst.w   x_vel(a1)
-                beq.w   locret_3DD9C
-                bmi.s   loc_3DD48
+                beq.w   SKMHZTwistVine_OrdinaryRideReturn
+                bmi.s   SKMHZTwistVine_TryCaptureFromRight
                 cmpi.w  #-$30,d0
-                bgt.w   locret_3DD9C
+                bgt.w   SKMHZTwistVine_OrdinaryRideReturn
                 cmpi.w  #-$40,d0
-                blt.w   locret_3DD9C
+                blt.w   SKMHZTwistVine_OrdinaryRideReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 addi.w  #$30,d1
                 cmpi.w  #$20,d1
-                bhs.w   locret_3DD9C
+                bhs.w   SKMHZTwistVine_OrdinaryRideReturn
                 tst.b   object_control(a1)
-                bne.s   locret_3DD9C
+                bne.s   SKMHZTwistVine_OrdinaryRideReturn
                 bclr    #0,status(a1)
                 jsr     (RideObject_SetRide).l
                 move.b  #$80,flip_type(a1)
                 move.w  #20,move_lock(a1)
                 move.w  ground_vel(a1),d0
                 cmpi.w  #$600,d0
-                bhs.s   locret_3DD9C
+                bhs.s   SKMHZTwistVine_OrdinaryRideReturn
                 move.w  #$600,ground_vel(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3DD48:
+SKMHZTwistVine_TryCaptureFromRight:
                 cmpi.w  #$30,d0
-                blt.s   locret_3DD9C
+                blt.s   SKMHZTwistVine_OrdinaryRideReturn
                 cmpi.w  #$40,d0
-                bgt.s   locret_3DD9C
+                bgt.s   SKMHZTwistVine_OrdinaryRideReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 subi.w  #$10,d1
                 cmpi.w  #$20,d1
-                bhs.s   locret_3DD9C
+                bhs.s   SKMHZTwistVine_OrdinaryRideReturn
                 tst.b   object_control(a1)
-                bne.s   locret_3DD9C
+                bne.s   SKMHZTwistVine_OrdinaryRideReturn
                 bset    #Status_Facing,status(a1)
                 jsr     (RideObject_SetRide).l
                 move.b  #$80,flip_angle(a1)
@@ -76,30 +76,30 @@ loc_3DD48:
                 move.w  ground_vel(a1),d0
                 neg.w   d0
                 cmpi.w  #$600,d0
-                bhs.s   locret_3DD9C
+                bhs.s   SKMHZTwistVine_OrdinaryRideReturn
                 move.w  #-$600,ground_vel(a1)
                 move.w  #20,move_lock(a1)
 
-locret_3DD9C:
+SKMHZTwistVine_OrdinaryRideReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3DD9E:
+SKMHZTwistVine_GetOrdinaryAbsSpeed:
                 move.w  ground_vel(a1),d0
-                bpl.s   loc_3DDA6
+                bpl.s   SKMHZTwistVine_CheckOrdinaryRide
                 neg.w   d0
 
-loc_3DDA6:
+SKMHZTwistVine_CheckOrdinaryRide:
                 cmpi.w  #$500,d0
-                blo.s   loc_3DE12
+                blo.s   SKMHZTwistVine_ClearOrdinarySlowFlip
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_3DE18
+                bne.s   SKMHZTwistVine_ReleaseOrdinaryRider
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$40,d0
-                bmi.s   loc_3DDF4
+                bmi.s   SKMHZTwistVine_ReleaseOrdinaryLeftEnd
                 cmpi.w  #$80,d0
-                blo.s   loc_3DE36
+                blo.s   SKMHZTwistVine_ProjectOrdinaryRider
                 bclr    #Status_OnObj,status(a1)
                 bclr    d6,status(a0)
                 move.b  #$80,angle(a1)
@@ -111,7 +111,7 @@ loc_3DDA6:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3DDF4:
+SKMHZTwistVine_ReleaseOrdinaryLeftEnd:
                 bclr    #Status_OnObj,status(a1)
                 bclr    d6,status(a0)
                 move.b  #0,angle(a1)
@@ -120,10 +120,10 @@ loc_3DDF4:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3DE12:
+SKMHZTwistVine_ClearOrdinarySlowFlip:
                 move.b  #0,flip_angle(a1)
 
-loc_3DE18:
+SKMHZTwistVine_ReleaseOrdinaryRider:
                 bclr    #Status_OnObj,status(a1)
                 bclr    d6,status(a0)
                 move.b  #0,flips_remaining(a1)
@@ -132,9 +132,9 @@ loc_3DE18:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3DE36:
+SKMHZTwistVine_ProjectOrdinaryRider:
                 btst    #Status_OnObj,status(a1)
-                beq.w   locret_3DD9C
+                beq.w   SKMHZTwistVine_OrdinaryRideReturn
                 move.w  d0,d2
                 addi.b  #$80,d0
                 jsr     (GetSineCosine).l
@@ -153,7 +153,7 @@ loc_3DE36:
 
 ; ---------------------------------------------------------------------------
 
-loc_3DE6A:
+SKMHZTwistVine_UpdateInvertedRiders:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 bsr.s   UpdatePlayerOnMhzInvertedTwistedVine
@@ -166,25 +166,25 @@ loc_3DE6A:
 
 UpdatePlayerOnMhzInvertedTwistedVine:
                 btst    d6,status(a0)
-                bne.w   loc_3DF48
+                bne.w   SKMHZTwistVine_GetInvertedAbsSpeed
                 btst    #Status_InAir,status(a1)
-                bne.w   locret_3DEF2
+                bne.w   SKMHZTwistVine_InvertedRideReturn
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 tst.w   x_vel(a1)
-                beq.w   locret_3DEF2
-                bpl.s   loc_3DEF4
+                beq.w   SKMHZTwistVine_InvertedRideReturn
+                bpl.s   SKMHZTwistVine_TryCaptureFromLeft
                 cmpi.w  #$30,d0
-                blt.s   locret_3DEF2
+                blt.s   SKMHZTwistVine_InvertedRideReturn
                 cmpi.w  #$40,d0
-                bgt.s   locret_3DEF2
+                bgt.s   SKMHZTwistVine_InvertedRideReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 addi.w  #$30,d1
                 cmpi.w  #$20,d1
-                bhs.s   locret_3DEF2
+                bhs.s   SKMHZTwistVine_InvertedRideReturn
                 tst.b   object_control(a1)
-                bne.s   locret_3DEF2
+                bne.s   SKMHZTwistVine_InvertedRideReturn
                 bset    #Status_Facing,status(a1)
                 jsr     (RideObject_SetRide).l
                 move.b  #$84,flip_type(a1)
@@ -192,53 +192,53 @@ UpdatePlayerOnMhzInvertedTwistedVine:
                 move.w  ground_vel(a1),d0
                 neg.w   d0
                 cmpi.w  #$600,d0
-                bhs.s   locret_3DEF2
+                bhs.s   SKMHZTwistVine_InvertedRideReturn
                 move.w  #-$600,ground_vel(a1)
 
-locret_3DEF2:
+SKMHZTwistVine_InvertedRideReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3DEF4:
+SKMHZTwistVine_TryCaptureFromLeft:
                 cmpi.w  #-$30,d0
-                bgt.s   locret_3DEF2
+                bgt.s   SKMHZTwistVine_InvertedRideReturn
                 cmpi.w  #-$40,d0
-                blt.s   locret_3DEF2
+                blt.s   SKMHZTwistVine_InvertedRideReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 subi.w  #$10,d1
                 cmpi.w  #$20,d1
-                bhs.s   locret_3DEF2
+                bhs.s   SKMHZTwistVine_InvertedRideReturn
                 tst.b   object_control(a1)
-                bne.s   locret_3DEF2
+                bne.s   SKMHZTwistVine_InvertedRideReturn
                 bclr    #Status_Facing,status(a1)
                 jsr     (RideObject_SetRide).l
                 move.b  #$80,flip_angle(a1)
                 move.b  #$84,flip_type(a1)
                 move.w  ground_vel(a1),d0
                 cmpi.w  #$600,d0
-                bhs.s   locret_3DEF2
+                bhs.s   SKMHZTwistVine_InvertedRideReturn
                 move.w  #$600,ground_vel(a1)
                 move.w  #20,move_lock(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3DF48:
+SKMHZTwistVine_GetInvertedAbsSpeed:
                 move.w  ground_vel(a1),d0
-                bpl.s   loc_3DF50
+                bpl.s   SKMHZTwistVine_CheckInvertedRide
                 neg.w   d0
 
-loc_3DF50:
+SKMHZTwistVine_CheckInvertedRide:
                 cmpi.w  #$500,d0
-                blo.s   loc_3DFBE
+                blo.s   SKMHZTwistVine_ClearInvertedSlowFlip
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_3DFC4
+                bne.s   SKMHZTwistVine_ReleaseInvertedRider
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$40,d0
-                bmi.s   loc_3DF92
+                bmi.s   SKMHZTwistVine_ReflectInvertedLeftExit
                 cmpi.w  #$80,d0
-                blo.w   loc_3DFE2
+                blo.w   SKMHZTwistVine_ProjectInvertedRider
                 bclr    #Status_OnObj,status(a1)
                 bclr    d6,status(a0)
                 move.b  #0,angle(a1)
@@ -247,7 +247,7 @@ loc_3DF50:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3DF92:
+SKMHZTwistVine_ReflectInvertedLeftExit:
                 bclr    #Status_OnObj,status(a1)
                 bclr    d6,status(a0)
                 move.b  #$80,angle(a1)
@@ -259,10 +259,10 @@ loc_3DF92:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3DFBE:
+SKMHZTwistVine_ClearInvertedSlowFlip:
                 move.b  #0,flip_angle(a1)
 
-loc_3DFC4:
+SKMHZTwistVine_ReleaseInvertedRider:
                 bclr    #Status_OnObj,status(a1)
                 bclr    d6,status(a0)
                 move.b  #0,flips_remaining(a1)
@@ -271,9 +271,9 @@ loc_3DFC4:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3DFE2:
+SKMHZTwistVine_ProjectInvertedRider:
                 btst    #Status_OnObj,status(a1)
-                beq.w   locret_3DEF2
+                beq.w   SKMHZTwistVine_InvertedRideReturn
                 move.w  d0,d2
                 jsr     (GetSineCosine).l
                 move.w  d1,d3

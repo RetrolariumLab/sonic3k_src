@@ -11,7 +11,7 @@ AnimateTiles_MHZ:
                 sub.w   (Camera_X_pos_BG_copy).w,d0
                 andi.w  #$1F,d0
                 cmp.b   1(a3),d0
-                beq.s   loc_28110
+                beq.s   SKMHZTiles_AdvanceToSecondChannel
                 move.b  d0,1(a3)
                 moveq   #0,d1
                 move.w  d0,d2
@@ -24,7 +24,7 @@ AnimateTiles_MHZ:
                 lsl.w   #3,d2
                 add.w   d2,d1
                 lsr.w   #1,d0
-                lea     word_28114(pc,d0.w),a4
+                lea     SKMHZTiles_FirstChannelDmaCounts(pc,d0.w),a4
                 lea     (ArtUnc_AniMHZ__BG).l,a0
                 move.w  #tiles_to_bytes($1B8),d4
                 add.l   a0,d1
@@ -37,14 +37,14 @@ AnimateTiles_MHZ:
                 add.l   a0,d1
                 move.w  d4,d2
                 move.w  (a4)+,d3
-                beq.s   loc_28110
+                beq.s   SKMHZTiles_AdvanceToSecondChannel
                 jsr     (Add_To_DMA_Queue).l
 
-loc_28110:
+SKMHZTiles_AdvanceToSecondChannel:
                 addq.w  #2,a3
-                bra.s   loc_28124
+                bra.s   SKMHZTiles_UpdateSecondChannel
 ; ---------------------------------------------------------------------------
-word_28114:
+SKMHZTiles_FirstChannelDmaCounts:
                 dc.w    $80
                 dc.w    0
                 dc.w    $60
@@ -55,13 +55,13 @@ word_28114:
                 dc.w    $60
 ; ---------------------------------------------------------------------------
 
-loc_28124:
+SKMHZTiles_UpdateSecondChannel:
                 moveq   #0,d1
                 move.w  (Events_bg+$10).w,d1
                 sub.w   (Camera_X_pos_BG_copy).w,d1
                 andi.w  #$3F,d1
                 cmp.b   1(a3),d1
-                beq.s   loc_28180
+                beq.s   SKMHZTiles_AdvanceAuxPhase
                 move.b  d1,1(a3)
                 move.w  d1,d2
                 andi.w  #7,d1
@@ -72,7 +72,7 @@ loc_28124:
                 lsl.w   #4,d2
                 add.w   d2,d1
                 lsr.w   #1,d0
-                lea     word_28198(pc,d0.w),a4
+                lea     SKMHZTiles_SecondChannelDmaCounts(pc,d0.w),a4
                 lea     (ArtUnc_AniMHZ__BG2).l,a0
                 move.w  #tiles_to_bytes($1D5),d4
                 add.l   a0,d1
@@ -85,22 +85,22 @@ loc_28124:
                 add.l   a0,d1
                 move.w  d4,d2
                 move.w  (a4)+,d3
-                beq.s   loc_28180
+                beq.s   SKMHZTiles_AdvanceAuxPhase
                 jsr     (Add_To_DMA_Queue).l
 
-loc_28180:
+SKMHZTiles_AdvanceAuxPhase:
                 addq.w  #2,a3
                 move.b  (Anim_Counters+$F).w,d0
                 addq.b  #2,d0
                 cmpi.b  #$58,d0
-                blo.s   loc_28190
+                blo.s   SKMHZTiles_SetPhaseAndRunScripts
                 moveq   #0,d0
 
-loc_28190:
+SKMHZTiles_SetPhaseAndRunScripts:
                 move.b  d0,(Anim_Counters+$F).w
                 bra.w   SKTileScripts_RunAtCounter
 ; ---------------------------------------------------------------------------
-word_28198:
+SKMHZTiles_SecondChannelDmaCounts:
                 dc.w    $200
                 dc.w    0
                 dc.w    $1C0

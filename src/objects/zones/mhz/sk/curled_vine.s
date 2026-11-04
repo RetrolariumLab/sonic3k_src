@@ -5,8 +5,8 @@
 
 Obj_MHZCurledVine:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_3E89C
-                move.l  #loc_3E9A6,(a1)
+                bne.s   SKMHZCurlVine_DeleteWithoutDisplay
+                move.l  #SKMHZCurlVine_DrawVineDisplay,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.l  #Map_MHZCurledVine,mappings(a1)
@@ -20,38 +20,38 @@ Obj_MHZCurledVine:
                 move.l  #$FFF40000,$32(a0)
                 bset    #7,status(a0)
                 move.w  a1,parent3(a0)
-                move.l  #loc_3E8A2,(a0)
-                bra.s   loc_3E8A2
+                move.l  #SKMHZCurlVine_PickShapeFromRiders,(a0)
+                bra.s   SKMHZCurlVine_PickShapeFromRiders
 ; ---------------------------------------------------------------------------
 
-loc_3E89C:
+SKMHZCurlVine_DeleteWithoutDisplay:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3E8A2:
+SKMHZCurlVine_PickShapeFromRiders:
                 movea.w parent3(a0),a1
                 moveq   #0,d1
                 moveq   #0,d2
                 move.b  status(a0),d1
                 andi.b  #standing_mask,d1
-                beq.s   loc_3E8C4
+                beq.s   SKMHZCurlVine_LoadWidthAndCurvature
                 move.b  $36(a0),d1
                 move.b  $37(a0),d2
                 cmp.b   d1,d2
-                blo.s   loc_3E8C2
+                blo.s   SKMHZCurlVine_GetRiderShapeIndex
                 move.b  d2,d1
 
-loc_3E8C2:
+SKMHZCurlVine_GetRiderShapeIndex:
                 addq.b  #1,d1
 
-loc_3E8C4:
-                move.b  byte_3E8F6(pc,d1.w),d2
+SKMHZCurlVine_LoadWidthAndCurvature:
+                move.b  SKMHZCurlVine_SupportWidths(pc,d1.w),d2
                 move.w  d2,-(sp)
                 lsl.w   #2,d1
-                move.l  dword_3E8D2(pc,d1.w),d0
-                bra.s   loc_3E900
+                move.l  SKMHZCurlVine_CurvatureTargets(pc,d1.w),d0
+                bra.s   SKMHZCurlVine_StepTowardCurvature
 ; ---------------------------------------------------------------------------
-dword_3E8D2:
+SKMHZCurlVine_CurvatureTargets:
                 dc.l    $FFF40000
                 dc.l    $FFFA0000
                 dc.l    $FFFB0000
@@ -61,7 +61,7 @@ dword_3E8D2:
                 dc.l    $FFFF0000
                 dc.l    $FFFF0000
                 dc.l    $FFFF0000
-byte_3E8F6:
+SKMHZCurlVine_SupportWidths:
                 dc.b    $40
                 dc.b    $40
                 dc.b    $40
@@ -74,19 +74,19 @@ byte_3E8F6:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_3E900:
+SKMHZCurlVine_StepTowardCurvature:
                 move.l  $32(a0),d4
                 cmp.l   d0,d4
-                beq.s   loc_3E918
-                bcs.s   loc_3E912
+                beq.s   SKMHZCurlVine_BeginCurveProjection
+                bcs.s   SKMHZCurlVine_IncreaseCurvature
                 subi.l  #$10000,d4
-                bra.s   loc_3E918
+                bra.s   SKMHZCurlVine_BeginCurveProjection
 ; ---------------------------------------------------------------------------
 
-loc_3E912:
+SKMHZCurlVine_IncreaseCurvature:
                 addi.l  #$10000,d4
 
-loc_3E918:
+SKMHZCurlVine_BeginCurveProjection:
                 move.l  d4,$32(a0)
                 move.l  d4,d1
                 asr.l   #1,d1
@@ -97,10 +97,10 @@ loc_3E918:
                 moveq   #8-1,d6
                 lea     sub2_x_pos(a1),a2
                 move.l  d1,-(sp)
-                bra.s   loc_3E952
+                bra.s   SKMHZCurlVine_PlaceSegmentsAndRiders
 ; ---------------------------------------------------------------------------
 
-loc_3E93C:
+SKMHZCurlVine_StepCurvePoint:
                 move.l  d1,-(sp)
                 swap    d5
                 move.w  d5,d0
@@ -111,14 +111,14 @@ loc_3E93C:
                 add.w   d1,d2
                 add.w   d0,d3
 
-loc_3E952:
+SKMHZCurlVine_PlaceSegmentsAndRiders:
                 move.w  d2,(a2)+
                 move.w  d3,(a2)+
                 addq.w  #2,a2
                 add.l   d4,d5
                 move.l  (sp)+,d1
                 add.l   d1,d4
-                dbf     d6,loc_3E93C
+                dbf     d6,SKMHZCurlVine_StepCurvePoint
                 move.w  (sp)+,d2
                 move.w  #$40,d1
                 moveq   #8,d3
@@ -129,23 +129,23 @@ loc_3E952:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_3E98A
+                bhi.w   SKMHZCurlVine_ClearVineRespawnBit
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3E98A:
+SKMHZCurlVine_ClearVineRespawnBit:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_3E996
+                beq.s   SKMHZCurlVine_DeleteDisplayAndRoot
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_3E996:
+SKMHZCurlVine_DeleteDisplayAndRoot:
                 movea.w parent3(a0),a1
                 jsr     (Delete_Referenced_Sprite).l
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3E9A6:
+SKMHZCurlVine_DrawVineDisplay:
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -166,18 +166,18 @@ CheckPlayersOnMhzCurledVine:
 
 CheckPlayerOnMhzCurledVineSegments:
                 btst    d6,status(a0)
-                beq.s   loc_3EA1E
+                beq.s   SKMHZCurlVine_TryLandOnSegment
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_3E9E6
+                bne.s   SKMHZCurlVine_DetachAndClearSegment
                 moveq   #0,d0
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_3E9E6
+                bmi.s   SKMHZCurlVine_DetachAndClearSegment
                 cmp.w   d2,d0
-                blo.s   loc_3E9FA
+                blo.s   SKMHZCurlVine_PlaceRiderOnSegment
 
-loc_3E9E6:
+SKMHZCurlVine_DetachAndClearSegment:
                 bclr    #Status_OnObj,status(a1)
                 bclr    d6,status(a0)
                 move.b  #0,(a0,d5.w)
@@ -185,7 +185,7 @@ loc_3E9E6:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3E9FA:
+SKMHZCurlVine_PlaceRiderOnSegment:
                 lsr.w   #4,d0
                 move.b  d0,(a0,d5.w)
                 add.w   d0,d0
@@ -202,15 +202,15 @@ loc_3E9FA:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3EA1E:
+SKMHZCurlVine_TryLandOnSegment:
                 tst.w   y_vel(a1)
-                bmi.s   locret_3EA4A
+                bmi.s   SKMHZCurlVine_LandingReturn
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   locret_3EA4A
+                bmi.s   SKMHZCurlVine_LandingReturn
                 cmp.w   d2,d0
-                bhs.s   locret_3EA4A
+                bhs.s   SKMHZCurlVine_LandingReturn
                 lsr.w   #4,d0
                 add.w   d0,d0
                 move.w  d0,d1
@@ -221,7 +221,7 @@ loc_3EA1E:
                 jmp     (SKPlatform_CheckTopAndSnapRider).l
 ; ---------------------------------------------------------------------------
 
-locret_3EA4A:
+SKMHZCurlVine_LandingReturn:
                 rts
 ; End of function CheckPlayerOnMhzCurledVineSegments
 

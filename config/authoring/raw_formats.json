@@ -857,7 +857,7 @@
     },
     {
       "path": "src/objects/enemies/sk/cluckoid.s",
-      "sha256": "b4db2fb990eea6eddb900721ddfbe43f989ce4d2f230334ca03facb29477b6af"
+      "sha256": "8f143cb35ca438d4544198a494e72fce5bea866e60dc2823b405479dfcfcad88"
     },
     {
       "path": "src/objects/enemies/sk/dragonfly.s",
@@ -1281,19 +1281,19 @@
     },
     {
       "path": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
-      "sha256": "73d896d6767da16cb4f4821baac86805e66a7f8053c767e1a4ea5c636ade1a46"
+      "sha256": "146673942352fb38ba1e31dbe369263e9553c8d38577cf2f51608a32b99b6c67"
     },
     {
       "path": "src/objects/zones/mhz/sk/mushroom_parachute.s",
-      "sha256": "530404ff911a189fcda1193fa42ec957b34d605eb8c855be4e726e58e35f9dec"
+      "sha256": "c53d8976b0fc9e4e72b07ae769eaa4aabcf4d26dd926440c35077c7576645d89"
     },
     {
       "path": "src/objects/zones/mhz/sk/swing_vine.s",
-      "sha256": "fe801ced6e82572afef9329fa2c9e3d21b88b172aabb2b5936c3607c2a292eb9"
+      "sha256": "d4787c092b70be21861d1b7861477a41b4d5e7ac6330777ecac9b739b289b9bc"
     },
     {
       "path": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
-      "sha256": "2f8a161d4f4215250e4f5b07c18f8b1874db9098409cc74d11daad5af01251af"
+      "sha256": "2b61dff811125aaa3a5e0337d4319b927abb3f3400bba5bb31f7e13437f5c4c8"
     },
     {
       "path": "src/objects/zones/soz/sk/ghost_capsule.s",
@@ -5630,72 +5630,72 @@
     },
     {
       "path": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
-      "symbol": "RawAni_3F01A",
-      "scope": "RawAni_3F01A",
+      "symbol": "SKMHZHorizBar_RiderPoseFrames",
+      "scope": "SKMHZHorizBar_RiderPoseFrames",
       "first_line": 254,
       "last_line": 256,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 32,
-      "declarations_sha256": "f90cb47838c5d93a7da430a98b25cfe16a64a3e26c76811aa5d3e3e6477704d6",
+      "declarations_sha256": "7d4bbb0534da0f8304e672a9b3d11fff2835b5608b6b5ef094630021ab65c55f",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_3F01A"],
+      "members": ["SKMHZHorizBar_RiderPoseFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/mhz/sk/mushroom_parachute.s",
-      "symbol": "RawAni_3F6EE",
-      "scope": "RawAni_3F6EE",
-      "first_line": 190,
-      "last_line": 192,
+      "symbol": "SKMHZParachute_RiderHeadingFrames",
+      "scope": "SKMHZParachute_RiderHeadingFrames",
+      "first_line": 191,
+      "last_line": 193,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 16,
-      "declarations_sha256": "033427755f74c508b92944159f890e0c1e0817a0dd08b59c3832fbcb022eec33",
+      "declarations_sha256": "f4498a369e95bb01876105f9e7022e15e74ad59e788301a7b6e53e0dd065992b",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_3F6EE"],
+      "members": ["SKMHZParachute_RiderHeadingFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/mhz/sk/swing_vine.s",
-      "symbol": "byte_22A4C",
-      "scope": "byte_22A4C",
-      "first_line": 401,
-      "last_line": 403,
+      "symbol": "SKMHZSwingVine_IdleRiderFrames",
+      "scope": "SKMHZSwingVine_IdleRiderFrames",
+      "first_line": 402,
+      "last_line": 404,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 16,
-      "declarations_sha256": "a92cb32430b1e00845ef31f389e51a5a47e5de56e8c56a1c36c50fcbcc6a53ec",
+      "declarations_sha256": "a341a1771497bbb3aca7167c8005b23cef737b6c96258e8005f393432695da5e",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_22A4C"],
+      "members": ["SKMHZSwingVine_IdleRiderFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/mhz/sk/swing_vine.s",
-      "symbol": "byte_22AD8",
-      "scope": "byte_22AD8",
-      "first_line": 448,
-      "last_line": 465,
+      "symbol": "SKMHZSwingVine_MovingRiderFrames",
+      "scope": "SKMHZSwingVine_MovingRiderFrames",
+      "first_line": 450,
+      "last_line": 467,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 17,
-      "declarations_sha256": "07d3208876711a02adf1449893759fc30673ceae69fd4a960c110a0708eee7d0",
+      "declarations_sha256": "a64fbd7dd07a67098b43f29327d9a31a15449ac88664e49a5f50f1beb1bcefd8",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_22AD8"],
+      "members": ["SKMHZSwingVine_MovingRiderFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
-      "symbol": "RawAni_3F146",
-      "scope": "RawAni_3F146",
+      "symbol": "SKMHZVertBar_RiderPoseFrames",
+      "scope": "SKMHZVertBar_RiderPoseFrames",
       "first_line": 85,
       "last_line": 86,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 16,
-      "declarations_sha256": "fe5f9bb4c8d8123ad42523039d6d332acdbdf2010b78f3fee4392438783f0b93",
+      "declarations_sha256": "6f860b576089c12a33712ec2f84406832f5e24f017021dafd492d895831056fa",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_3F146"],
+      "members": ["SKMHZVertBar_RiderPoseFrames"],
       "stored_markers": []
     },
     {

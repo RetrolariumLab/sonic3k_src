@@ -10,9 +10,9 @@ Obj_MHZSwingBarHorizontal:
                 move.w  #$280,priority(a0)
                 move.b  #$20,width_pixels(a0)
                 move.b  #4,height_pixels(a0)
-                move.l  #loc_3ED46,(a0)
+                move.l  #SKMHZHorizBar_UpdateBarRiders,(a0)
 
-loc_3ED46:
+SKMHZHorizBar_UpdateBarRiders:
                 lea     $30(a0),a2
                 lea     $3A(a0),a3
                 lea     (Player_1).w,a1
@@ -29,45 +29,45 @@ loc_3ED46:
 
 UpdatePlayerOnMhzHorizontalSwingBar:
                 tst.b   (a2)
-                beq.w   loc_3EECE
+                beq.w   SKMHZHorizBar_TickCaptureCooldown
                 tst.w   (Debug_placement_mode).w
-                bne.w   loc_3EE2C
+                bne.w   SKMHZHorizBar_StartManualCooldown
                 cmpi.b  #4,routine(a1)
-                bhs.w   loc_3EE2C
+                bhs.w   SKMHZHorizBar_StartManualCooldown
                 btst    #button_left+8,d1
-                beq.s   loc_3EDB6
+                beq.s   SKMHZHorizBar_TryMoveRiderRight
                 move.w  x_pos(a0),d0
                 subi.w  #$16,d0
                 cmp.w   x_pos(a1),d0
-                bge.s   loc_3EDB6
+                bge.s   SKMHZHorizBar_TryMoveRiderRight
                 subq.w  #1,x_pos(a1)
                 subq.b  #1,6(a2)
-                bpl.s   loc_3EDB6
+                bpl.s   SKMHZHorizBar_TryMoveRiderRight
                 move.b  #7,6(a2)
                 addi.b  #$10,8(a2)
                 andi.b  #$10,8(a2)
 
-loc_3EDB6:
+SKMHZHorizBar_TryMoveRiderRight:
                 btst    #button_right+8,d1
-                beq.s   loc_3EDE6
+                beq.s   SKMHZHorizBar_TryReleaseByInputOrPhase
                 move.w  x_pos(a0),d0
                 addi.w  #$15,d0
                 cmp.w   x_pos(a1),d0
-                ble.s   loc_3EDE6
+                ble.s   SKMHZHorizBar_TryReleaseByInputOrPhase
                 addq.w  #1,x_pos(a1)
                 subq.b  #1,6(a2)
-                bpl.s   loc_3EDE6
+                bpl.s   SKMHZHorizBar_TryReleaseByInputOrPhase
                 move.b  #7,6(a2)
                 addi.b  #$10,8(a2)
                 andi.b  #$10,8(a2)
 
-loc_3EDE6:
+SKMHZHorizBar_TryReleaseByInputOrPhase:
                 andi.w  #button_A_mask|button_B_mask|button_C_mask,d1
-                bne.w   loc_3EE18
+                bne.w   SKMHZHorizBar_SetManualJumpYSpeed
                 cmpi.b  #$28,4(a2)
-                beq.w   loc_3EE7A
+                beq.w   SKMHZHorizBar_ReleaseWithBoostedYSpeed
                 cmpi.b  #5,4(a2)
-                beq.w   loc_3EEC2
+                beq.w   SKMHZHorizBar_ReleaseWithSavedYSpeed
                 bsr.w   UpdateMhzHorizontalBarPlayerPose
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
@@ -77,20 +77,20 @@ loc_3EDE6:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3EE18:
+SKMHZHorizBar_SetManualJumpYSpeed:
                 move.w  #-$500,y_vel(a1)
                 btst    #Status_Underwater,status(a1)
-                beq.s   loc_3EE2C
+                beq.s   SKMHZHorizBar_StartManualCooldown
                 move.w  #-$200,y_vel(a1)
 
-loc_3EE2C:
+SKMHZHorizBar_StartManualCooldown:
                 clr.b   (a2)
                 move.b  #30,2(a2)
                 btst    #Status_Underwater,status(a1)
-                beq.s   loc_3EE42
+                beq.s   SKMHZHorizBar_SetReleasedRollPose
                 move.b  #60,2(a2)
 
-loc_3EE42:
+SKMHZHorizBar_SetReleasedRollPose:
                 andi.b  #$FC,object_control(a1)
                 bset    #Status_InAir,status(a1)
                 move.b  #1,jumping(a1)
@@ -103,7 +103,7 @@ loc_3EE42:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3EE7A:
+SKMHZHorizBar_ReleaseWithBoostedYSpeed:
                 move.w  #$10<<8,anim(a1)                ; and prev_anim
                 move.w  (a3),d0
                 move.w  d0,d1
@@ -111,7 +111,7 @@ loc_3EE7A:
                 add.w   d1,d0
                 move.w  d0,y_vel(a1)
 
-loc_3EE8C:
+SKMHZHorizBar_StartAutomaticCooldown:
                 clr.b   (a2)
                 move.b  #8,2(a2)
                 andi.b  #$FC,object_control(a1)
@@ -125,38 +125,38 @@ loc_3EE8C:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3EEC2:
+SKMHZHorizBar_ReleaseWithSavedYSpeed:
                 move.w  #0,anim(a1)
                 move.w  (a3),y_vel(a1)
-                bra.s   loc_3EE8C
+                bra.s   SKMHZHorizBar_StartAutomaticCooldown
 ; ---------------------------------------------------------------------------
 
-loc_3EECE:
+SKMHZHorizBar_TickCaptureCooldown:
                 tst.b   2(a2)
-                beq.s   loc_3EEDA
+                beq.s   SKMHZHorizBar_TryCaptureAndSaveYSpeed
                 subq.b  #1,2(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3EEDA:
+SKMHZHorizBar_TryCaptureAndSaveYSpeed:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$16,d0
                 cmpi.w  #$2C,d0
-                bhs.w   locret_3EFB8
+                bhs.w   SKMHZHorizBar_CaptureReturn
                 move.w  y_pos(a0),d0
                 addi.w  #$14,d0
                 cmp.w   y_pos(a1),d0
-                bhs.w   locret_3EFB8
+                bhs.w   SKMHZHorizBar_CaptureReturn
                 addi.w  #$10,d0
                 cmp.w   y_pos(a1),d0
-                bcs.w   locret_3EFB8
+                bcs.w   SKMHZHorizBar_CaptureReturn
                 tst.w   (Debug_placement_mode).w
-                bne.w   locret_3EFB8
+                bne.w   SKMHZHorizBar_CaptureReturn
                 cmpi.b  #4,routine(a1)
-                bhs.w   locret_3EFB8
+                bhs.w   SKMHZHorizBar_CaptureReturn
                 tst.b   object_control(a1)
-                bne.w   locret_3EFB8
+                bne.w   SKMHZHorizBar_CaptureReturn
                 move.w  y_vel(a1),(a3)
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)
@@ -172,21 +172,21 @@ loc_3EEDA:
                 move.b  #0,6(a2)
                 move.b  #0,8(a2)
                 cmpi.w  #-$400,(a3)
-                bgt.s   loc_3EF84
+                bgt.s   SKMHZHorizBar_TryFastEntryPose
                 move.b  #$95,mapping_frame(a1)
                 move.b  #$20,4(a2)
                 move.b  #$10,8(a2)
-                bra.s   loc_3EF9C
+                bra.s   SKMHZHorizBar_LatchRiderAndUploadPose
 ; ---------------------------------------------------------------------------
 
-loc_3EF84:
+SKMHZHorizBar_TryFastEntryPose:
                 cmpi.w  #$400,(a3)
-                blt.s   loc_3EF9C
+                blt.s   SKMHZHorizBar_LatchRiderAndUploadPose
                 move.b  #$95,mapping_frame(a1)
                 move.b  #$21,4(a2)
                 move.b  #$10,8(a2)
 
-loc_3EF9C:
+SKMHZHorizBar_LatchRiderAndUploadPose:
                 move.b  #1,(a2)
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
@@ -196,7 +196,7 @@ loc_3EF9C:
                 moveq   #signextendB(sfx_Grab),d0
                 jsr     (Play_SFX).l
 
-locret_3EFB8:
+SKMHZHorizBar_CaptureReturn:
                 rts
 ; End of function UpdatePlayerOnMhzHorizontalSwingBar
 
@@ -204,46 +204,46 @@ locret_3EFB8:
 
 UpdateMhzHorizontalBarPlayerPose:
                 cmpi.w  #-$400,(a3)
-                ble.s   loc_3EFE6
+                ble.s   SKMHZHorizBar_StepFastPhase
                 cmpi.w  #$400,(a3)
-                bge.s   loc_3EFE6
+                bge.s   SKMHZHorizBar_StepFastPhase
                 move.b  4(a2),d0
-                beq.s   loc_3EFE4
-                bpl.s   loc_3EFD8
+                beq.s   SKMHZHorizBar_ApplyNeutralPose
+                bpl.s   SKMHZHorizBar_DampPositivePhase
                 addi.b  #6,d0
-                bcc.s   loc_3EFD6
+                bcc.s   SKMHZHorizBar_FinishNegativeDamping
                 moveq   #0,d0
 
-loc_3EFD6:
-                bra.s   loc_3EFE0
+SKMHZHorizBar_FinishNegativeDamping:
+                bra.s   SKMHZHorizBar_SetDampedPhase
 ; ---------------------------------------------------------------------------
 
-loc_3EFD8:
+SKMHZHorizBar_DampPositivePhase:
                 subi.b  #6,d0
-                bcc.s   loc_3EFE0
+                bcc.s   SKMHZHorizBar_SetDampedPhase
                 moveq   #0,d0
 
-loc_3EFE0:
+SKMHZHorizBar_SetDampedPhase:
                 move.b  d0,4(a2)
 
-loc_3EFE4:
-                bra.s   loc_3EFF2
+SKMHZHorizBar_ApplyNeutralPose:
+                bra.s   SKMHZHorizBar_ApplyFrameAndYOffset
 ; ---------------------------------------------------------------------------
 
-loc_3EFE6:
+SKMHZHorizBar_StepFastPhase:
                 move.b  4(a2),d0
                 addi.b  #$C,d0
                 move.b  d0,4(a2)
 
-loc_3EFF2:
+SKMHZHorizBar_ApplyFrameAndYOffset:
                 moveq   #0,d0
                 move.b  4(a2),d0
                 lsr.b   #4,d0
                 add.b   8(a2),d0
-                move.b  RawAni_3F01A(pc,d0.w),d1
+                move.b  SKMHZHorizBar_RiderPoseFrames(pc,d0.w),d1
                 move.b  d1,mapping_frame(a1)
                 andi.w  #$F,d0
-                move.b  byte_3F03A(pc,d0.w),d1
+                move.b  SKMHZHorizBar_RiderPoseYOffsets(pc,d0.w),d1
                 ext.w   d1
                 add.w   y_pos(a0),d1
                 move.w  d1,y_pos(a1)
@@ -251,9 +251,9 @@ loc_3EFF2:
 ; End of function UpdateMhzHorizontalBarPlayerPose
 
 ; ---------------------------------------------------------------------------
-RawAni_3F01A:
+SKMHZHorizBar_RiderPoseFrames:
                 dc.b    $94, $63, $64, $64, $65, $65, $65, $66, $66, $66, $66, $67, $67, $67, $68, $68, $95, $63, $64, $64
                 dc.b    $65, $65, $65, $66, $66, $66, $66, $67, $67, $67, $68, $68
-byte_3F03A:
+SKMHZHorizBar_RiderPoseYOffsets:
                 dc.b    $14, $14,  $B,  $B, -$F, -$F, -$F,-$14,-$14,-$14,-$14, -$C, -$C, -$C,  -2,  -2
                 even

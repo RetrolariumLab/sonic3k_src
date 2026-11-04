@@ -1,0 +1,5114 @@
+{
+  "schema_version": 1,
+  "packet": "30-zone-mhz",
+  "mappings": [
+    {
+      "source": "src/game/level/zones/mhz/sk/act1_screen.s",
+      "original_line": 23,
+      "old": "loc_54AE0",
+      "new": "SKMHZ1Events_SetStandaloneStart",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ1Events_ChooseStandaloneActOneStartCameraAndNonKnucklesPlayerPosition"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act1_screen.s",
+      "original_line": 34,
+      "old": "loc_54B08",
+      "new": "SKMHZ1Events_StoreStartCameraY",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ1Events_StoreSelectedStartCameraYAndCopy"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act1_screen.s",
+      "original_line": 38,
+      "old": "loc_54B10",
+      "new": "SKMHZ1Events_StoreStartCameraX",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ1Events_StoreSelectedStartCameraXAndCopy"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act1_screen.s",
+      "original_line": 42,
+      "old": "loc_54B18",
+      "new": "SKMHZ1Events_RefreshInitialForeground",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ1Events_ResetActualTileOffsetsAndRefreshInitialForeground"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act1_screen.s",
+      "original_line": 58,
+      "old": "loc_54B40",
+      "new": "SKMHZ1Events_UpdateCameraMaxY",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ1Events_UpdateActOneMaximumYOnlyWhenCurrentLimitDiffers"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act1_screen.s",
+      "original_line": 64,
+      "old": "loc_54B4E",
+      "new": "SKMHZ1Events_TryStartMiniboss",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ1Events_StartMinibossAtCameraX4298AndY0710"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act1_screen.s",
+      "original_line": 76,
+      "old": "loc_54B7C",
+      "new": "SKMHZ1Events_DrawForeground",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ1Events_DrawForegroundAfterActOneEventOrGatedSkip"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act1_screen.s",
+      "original_line": 90,
+      "old": "loc_54B98",
+      "new": "SKMHZ1Events_UpdateCameraMinX",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ1Events_StoreActOneLeftLimitOnlyWhenChanged"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act1_screen.s",
+      "original_line": 95,
+      "old": "locret_54BA2",
+      "new": "SKMHZ1Events_LeftLimitReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ1Events_ReturnAfterActOneLeftLimitSelection"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act1_screen.s",
+      "original_line": 142,
+      "old": "loc_54C3C",
+      "new": "SKMHZ1Events_DrawLoopedBackground",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ1Events_MaintainLoopCompensatedBackgroundAndDrawActOneBands"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act1_screen.s",
+      "original_line": 192,
+      "old": "loc_54CB0",
+      "new": "SKMHZ1Events_WrapChaseCameraAndPlayers",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ1Events_LockActOneChaseCameraAndWrapPlayersAtX4400"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act1_screen.s",
+      "original_line": 211,
+      "old": "loc_54CEE",
+      "new": "SKMHZ1Events_PinCameraMinX",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ1Events_PinActOneMinimumXToSelectedCameraPosition"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act1_screen.s",
+      "original_line": 221,
+      "old": "loc_54CFA",
+      "new": "SKMHZ1Events_TryRetireStaticObject",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ1Events_VisitTransitionObjectsAndRetireInitializedStaticScenery"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act1_screen.s",
+      "original_line": 232,
+      "old": "loc_54D16",
+      "new": "SKMHZ1Events_ShiftWorldObject",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ1Events_OffsetOnlyWorldRenderedTransitionObjectCoordinates"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act1_screen.s",
+      "original_line": 238,
+      "old": "loc_54D26",
+      "new": "SKMHZ1Events_NextTransitionObject",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ1Events_AdvanceTransitionObjectSlotAndFinishCountedScan"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 18,
+      "old": "loc_55198",
+      "new": "SKMHZ2BG_InitOrdinaryBackground",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_BuildOrdinaryInitialBackgroundOutsideChaseEntrance"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 21,
+      "old": "loc_5519C",
+      "new": "SKMHZ2BG_RefreshInitialBackground",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_ResetEffectiveOffsetsAndRefreshInitialBackground"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 60,
+      "old": "loc_551EE",
+      "new": "SKMHZ2BG_TryBeginChaseRedraw",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_BeginChaseBackgroundRedrawInsideUpperEntrance"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 75,
+      "old": "loc_5521E",
+      "new": "SKMHZ2BG_UpdateOrdinaryBackground",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_BuildOrdinaryBackgroundForRoutineZeroOutsideEntrance"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 78,
+      "old": "loc_55222",
+      "new": "SKMHZ2BG_DrawOrdinaryRow",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_DrawOrdinaryBackgroundRowAndPlainDeformation"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 87,
+      "old": "loc_55236",
+      "new": "SKMHZ2BG_UpdateChaseRedraw",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_BuildChaseCoordinatesBeforeBottomUpTransitionStep"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 90,
+      "old": "loc_5523A",
+      "new": "SKMHZ2BG_RedrawChaseBottomUp",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_DrawChaseBottomUpStepAndAdvanceOnNegativeCount"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 99,
+      "old": "loc_55250",
+      "new": "SKMHZ2BG_ChooseReverseOrCustomLayout",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_ChooseReverseBackgroundRedrawOrCustomLayoutEntry"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 112,
+      "old": "loc_5527A",
+      "new": "SKMHZ2BG_CheckCustomLayoutSwap",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_GateCustomLayoutSwapOnLowYOrGroundedPlayer"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 118,
+      "old": "loc_5528A",
+      "new": "SKMHZ2BG_BindCustomLayoutCopy",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_BindCustomLayoutAndSaveNativeEventRegisters"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 124,
+      "old": "loc_5529C",
+      "new": "SKMHZ2BG_CopyAndQueueCustomLayout",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_Copy4096BytesFromCustomLayoutStartAndQueueChunkBlockArtResources"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 142,
+      "old": "loc_552E0",
+      "new": "SKMHZ2BG_UpdateChaseWhileWaiting",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_RebuildChaseCoordinatesWhileWaitingForCustomLayoutTrigger"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 145,
+      "old": "loc_552E4",
+      "new": "SKMHZ2BG_DrawChaseRow",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_DrawChaseRowAndApplyPlainDeformation"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 154,
+      "old": "loc_552F8",
+      "new": "SKMHZ2BG_UpdateReverseRedraw",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_BuildOrdinaryCoordinatesBeforeReverseTransitionStep"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 157,
+      "old": "loc_552FC",
+      "new": "SKMHZ2BG_RedrawOrdinaryBottomUp",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_FinishReverseBottomUpRedrawAndReturnToRoutineZero"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 166,
+      "old": "loc_55312",
+      "new": "SKMHZ2BG_TryBeginShipForeground",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_PrepareShipForegroundRedrawOnceCameraReaches3F00"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 185,
+      "old": "loc_5535A",
+      "new": "SKMHZ2BG_SeedChasePhaseAndCamera",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_SeedChasePatternByteAndEnableSpecialCameraRoutine"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 195,
+      "old": "loc_55380",
+      "new": "SKMHZ2BG_RedrawShipForeground",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_DrawShipForegroundBottomUpThenArmBackgroundRows"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 210,
+      "old": "loc_553B6",
+      "new": "SKMHZ2BG_RedrawBossBGAndAllocActors",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_DrawBossBackgroundTopDownAndAllocatePillarSpikePrefix"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 227,
+      "old": "loc_553F0",
+      "new": "SKMHZ2BG_AllocSpikePairsByTier",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_AllocateTwoSpikeActorsPerDescendingTierWithPartialPrefixRetention"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 241,
+      "old": "loc_55420",
+      "new": "SKMHZ2BG_AdvanceAfterBossRedraw",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_AdvanceBackgroundAfterAnyPillarSpikeAllocationOutcome"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 244,
+      "old": "loc_55424",
+      "new": "SKMHZ2BG_WaitForForegroundFinish",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_WaitForNegativeForegroundCompletionWordBeforeRestoration"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 251,
+      "old": "loc_5543A",
+      "new": "SKMHZ2BG_RestoreUpperBackground",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_RestoreUpperBackgroundRowsThenArmForegroundRestoration"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 261,
+      "old": "loc_5545A",
+      "new": "SKMHZ2BG_RestoreForegroundRows",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_RestoreForegroundRowsAndClearChaseFlagsAfterNegativeCount"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 275,
+      "old": "loc_55486",
+      "new": "SKMHZ2BG_DrawChaseAndComposeScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_BuildChaseCoordinatesDrawRowAndComposeSpecialScroll"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 289,
+      "old": "loc_554B4",
+      "new": "SKMHZ2BG_ApplyScreenShake",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_TailShakeScreenSetupAfterSpecialBackgroundComposition"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 341,
+      "old": "loc_55524",
+      "new": "SKMHZ2BG_FillShipForegroundScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_Overwrite128ForegroundScrollWordsForShipMode"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 350,
+      "old": "loc_55534",
+      "new": "SKMHZ2BG_TryFillBossForegroundScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_OptionallyOverwrite48ForegroundScrollWordsForBossTransition"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 358,
+      "old": "loc_55546",
+      "new": "SKMHZ2BG_FillBossForegroundScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_WritePairedBossTransitionForegroundScrollHalves"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 365,
+      "old": "loc_55552",
+      "new": "SKMHZ2BG_CheckPerspectiveDistance",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_GatePerspectiveBySecondByteAndSignedCameraDistance"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 385,
+      "old": "loc_55586",
+      "new": "SKMHZ2BG_DividePerspectiveStep",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_DividePerspectiveMagnitudeBy48UsingTwoNativeUnsignedStages"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 400,
+      "old": "loc_555A4",
+      "new": "SKMHZ2BG_SeedPerspectiveScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_SeedPerspectiveFromNegatedCameraCopyMinus80"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 409,
+      "old": "loc_555B8",
+      "new": "SKMHZ2BG_WritePerspectiveScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_Write48PerspectiveBackgroundHalvesThenVisitActorHandleList"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 421,
+      "old": "loc_555D2",
+      "new": "SKMHZ2BG_ProjectBossActorX",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_ProjectNonzeroPillarOrSpikeHandleFromSampledScroll"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 435,
+      "old": "loc_555F6",
+      "new": "SKMHZ2BG_NextBossActor",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_AdvanceSevenHandleProjectionCountAfterAlternatingSamples"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 440,
+      "old": "loc_555FC",
+      "new": "SKMHZ2BG_PrepareClearPerspective",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_PrepareZeroScrollForCameraBeforePerspectiveThreshold"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 444,
+      "old": "loc_55602",
+      "new": "SKMHZ2BG_ClearPerspectiveScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_Clear48PerspectiveBackgroundScrollHalves"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 449,
+      "old": "locret_5560A",
+      "new": "SKMHZ2BG_PerspectiveReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_ReturnAfterPerspectiveOverlayOrEarlyGate"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 455,
+      "old": "loc_5560C",
+      "new": "SKMHZ2BG_StepChaseCamera",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_AdvanceSpecialChaseCameraByFourOrFivePixels"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 463,
+      "old": "loc_55620",
+      "new": "SKMHZ2BG_ChooseChaseWrapOrStop",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_ChooseChaseWrapOrCompletionStopAt4280"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 478,
+      "old": "loc_5564A",
+      "new": "SKMHZ2BG_WrapPlayersAndAdvancePhase",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_WrapChasePlayersAndAdvanceSixteenBytePatternIndex"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 496,
+      "old": "loc_55686",
+      "new": "SKMHZ2BG_StorePhaseAndConsumeShipLatch",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_StoreNextPatternByteAndConsumeShipThresholdLatch"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 503,
+      "old": "loc_5569A",
+      "new": "SKMHZ2BG_SetChaseCameraMaxX",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_SetMovingCameraMaximumToCurrentCandidate"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 506,
+      "old": "loc_5569E",
+      "new": "SKMHZ2BG_CommitCameraAndClampPlayers",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_CommitChaseCameraAndClampBothFixedPlayerSlots"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 523,
+      "old": "loc_556C4",
+      "new": "SKMHZ2BG_ClampLeftAndSetGroundSpeed",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_ClampPlayerBehindLeftMarginAndAssignGroundSpeed"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 535,
+      "old": "loc_556E8",
+      "new": "SKMHZ2BG_ClampRight",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_ClampPlayerAtOrBeyondRightMargin"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 541,
+      "old": "locret_556F6",
+      "new": "SKMHZ2BG_PlayerClampReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_ReturnFromSinglePlayerChaseClamp"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 547,
+      "old": "loc_556F8",
+      "new": "SKMHZ2BG_InitFixedPillar",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_InitializeFixedWorldPillarAndJoinFlagLifetimeCheck"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 560,
+      "old": "loc_55732",
+      "new": "SKMHZ2BG_InitProjectedPillar",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_InitializeProjectedPillarAndJoinFlagLifetimeCheck"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 571,
+      "old": "loc_5576A",
+      "new": "SKMHZ2BG_CheckPillarLifetime",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_DeletePillarUnlessBossBackgroundByteRemainsSet"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 577,
+      "old": "loc_55776",
+      "new": "SKMHZ2BG_DrawActivePillar",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_DrawPillarWhileBossBackgroundByteSet"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 581,
+      "old": "loc_5577C",
+      "new": "SKMHZ2BG_InitTieredSpike",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_InitializeTieredProjectedSpikeAndSelectFramePriority"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 595,
+      "old": "loc_557B6",
+      "new": "SKMHZ2BG_StepSpikePriorityAndFrame",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_IncreaseSpikePriorityAndDecreaseFrameOncePerTier"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 600,
+      "old": "loc_557C0",
+      "new": "SKMHZ2BG_ApplySpikePriorityAndFrame",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_CommitSpikePriorityAndMappingFrameBeforeUpdate"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 604,
+      "old": "loc_557C8",
+      "new": "SKMHZ2BG_CheckSpikeLifetime",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_DeleteSpikesOnRetirementWordOrClearedBackgroundByte"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 610,
+      "old": "loc_557D4",
+      "new": "SKMHZ2BG_DeleteRetiredSpike",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_TailDeleteRetiredOrInactiveProjectedSpike"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 614,
+      "old": "loc_557DA",
+      "new": "SKMHZ2BG_GateSecondSpikeOnPhaseFour",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_GateSecondSpikeOfPairOnPhaseFour"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 622,
+      "old": "loc_557EC",
+      "new": "SKMHZ2BG_DrawSpikeAndTryAddCollision",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_ReadPhaseTierYThenDrawAndRegisterOnlyMiddleTierCollision"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 634,
+      "old": "locret_55812",
+      "new": "SKMHZ2BG_SpikeUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_ReturnFromSpikeUpdateWithoutFurtherCollisionWork"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 638,
+      "old": "loc_55814",
+      "new": "SKMHZ2BG_InitShipPropeller",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_InitializeShipPropellerPriorityArtAndMappings"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 644,
+      "old": "loc_5582E",
+      "new": "SKMHZ2BG_AnimateShipPropellerThenDraw",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_AnimateShipPropellerThenDraw"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 650,
+      "old": "loc_5583E",
+      "new": "SKMHZ2BG_AccelerateShipAndSelectY",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_AccelerateShipScrollAndChooseSwingOrAccumulatedVerticalPhase"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 667,
+      "old": "loc_55876",
+      "new": "SKMHZ2BG_CalcShipVerticalSwing",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_ComputeShipVerticalOscillationFromNativeSwingHelper"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 672,
+      "old": "loc_55888",
+      "new": "SKMHZ2BG_StoreShipYAndCheckThreshold",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_StoreShipYAndLatchSignedHorizontalThreshold"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 684,
+      "old": "loc_558AC",
+      "new": "SKMHZ2BG_TickShipSound",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_PlayLargeShipSoundOnFrameLowNibbleOne"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 692,
+      "old": "locret_558C0",
+      "new": "SKMHZ2BG_ShipUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2BG_ReturnAfterShipScrollAndOptionalSoundUpdate"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 695,
+      "old": "word_558C2",
+      "new": "SKMHZ2BG_PhaseByTierSpikeYWordRows",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKMHZ2BG_PhaseByTierSpikeYWordRows"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "original_line": 715,
+      "old": "word_558E8",
+      "new": "SKMHZ2BG_ChasePhaseScripts",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKMHZ2BG_NormalAndKnucklesSixteenByteChasePhaseScripts"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 25,
+      "old": "loc_54D72",
+      "new": "SKMHZ2FG_BindInitPaletteTargets",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_BindNormalAndTargetPaletteDestinationsForActTwoInit"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 30,
+      "old": "loc_54D7C",
+      "new": "SKMHZ2FG_CopyInitPalettes",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_Copy64PaletteBytesToNormalAndTargetThenRefresh"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 57,
+      "old": "loc_54DB0",
+      "new": "SKMHZ2FG_WaitForLevelEnd",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_AdvanceIdleForegroundRoutineOnEndOfLevelFlag"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 62,
+      "old": "loc_54DBA",
+      "new": "SKMHZ2FG_DrawForegroundAfterIdleFlagTest",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_DrawForegroundAfterIdleFlagTest"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 66,
+      "old": "loc_54DBE",
+      "new": "SKMHZ2FG_TryBeginShipRedraw",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_ConsumeShipRebuildSignalBeforeNormalCameraBounds"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 76,
+      "old": "loc_54DDC",
+      "new": "SKMHZ2FG_CheckLateCameraBounds",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_RestrictLateCameraBoundsOnlyAtExactX3C90"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 87,
+      "old": "loc_54E00",
+      "new": "SKMHZ2FG_SelectCameraMinY",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_SelectMinimumYFromThreeCameraXRegions"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 96,
+      "old": "loc_54E1A",
+      "new": "SKMHZ2FG_UpdateCameraMinY",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_StoreSelectedCurrentMinimumYWhenDifferent"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 101,
+      "old": "loc_54E24",
+      "new": "SKMHZ2FG_SelectEarlyMinimumXFromPlayerY",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_SelectEarlyMinimumXFromPlayerY"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 109,
+      "old": "loc_54E3C",
+      "new": "SKMHZ2FG_TryUpdateCameraMinX",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_StoreMinimumXOnlyWhenChangedAndNotLocallyLocked"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 116,
+      "old": "loc_54E4C",
+      "new": "SKMHZ2FG_SelectMaxYFromPlayerRegion",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_SelectMaximumYWithNarrowPlayerRegionException"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 127,
+      "old": "loc_54E70",
+      "new": "SKMHZ2FG_UpdateCameraMaxY",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_StoreCurrentAndTargetMaximumYOnlyOnCurrentChange"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 133,
+      "old": "loc_54E7E",
+      "new": "SKMHZ2FG_SwitchPaletteAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_SwitchRegionPaletteThenDrawForeground"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 138,
+      "old": "loc_54E86",
+      "new": "SKMHZ2FG_DrawDeformedBands",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_DrawForegroundUsingDeformedBandArrayForRoutineEight"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 147,
+      "old": "loc_54E9C",
+      "new": "SKMHZ2FG_RedrawAndInitShip",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_DrawShipForegroundBottomUpAndInitializeScrollOnCompletion"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 169,
+      "old": "loc_54EE4",
+      "new": "SKMHZ2FG_CopyShipPaletteAndAllocProps",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_Copy32ShipPaletteBytesAndAllocateMovementPropellerPrefix"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 188,
+      "old": "loc_54F2A",
+      "new": "SKMHZ2FG_InstallShipHIntAndAdvance",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_QueuePropellerArtInstallHIntAndAdvanceAfterAnyAllocationOutcome"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 200,
+      "old": "locret_54F62",
+      "new": "SKMHZ2FG_ShipSetupReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_ReturnAfterRedrawWaitOrCompletedShipSetup"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 204,
+      "old": "loc_54F64",
+      "new": "SKMHZ2FG_CarryPlayerAndDrawShipBands",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_UpdateShipCarryThenDrawTwoHorizontalBandSources"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 235,
+      "old": "loc_54FC4",
+      "new": "SKMHZ2FG_CarryP1ByInverseShipDelta",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_CarryControlledPlayerByOldMinusNewShipOffsets"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 242,
+      "old": "loc_54FD4",
+      "new": "SKMHZ2FG_CacheShipYAndPlacePropellers",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_CacheShipYAndPositionBothPropellerHandles"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 265,
+      "old": "locret_55006",
+      "new": "SKMHZ2FG_PropellerPositionReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_ReturnFromPropellerPositionOnMissingHandleOrNegativeDifference"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 278,
+      "old": "loc_5501A",
+      "new": "SKMHZ2FG_CheckPaletteRegion",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_ScanFivePaletteRegionsWithInclusiveXAndHalfOpenY"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 289,
+      "old": "loc_5502C",
+      "new": "SKMHZ2FG_NextPaletteRegion",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_AdvanceTenBytePaletteRecordAndBranchSelector"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 296,
+      "old": "loc_55038",
+      "new": "SKMHZ2FG_DispatchPaletteRegion",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_DispatchMatchedPaletteRegionByFourByteCodeOffset"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 302,
+      "old": "loc_5503C",
+      "new": "SKMHZ2FG_PaletteRegionBranches",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_FiveExecutablePaletteRegionBranchEntries"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 314,
+      "old": "loc_55050",
+      "new": "SKMHZ2FG_TryAct2PaletteAboveBoundary",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_ChooseFirstRegionVerticalPaletteTransitionFromWordFlag"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 322,
+      "old": "loc_5505C",
+      "new": "SKMHZ2FG_TryAct1PaletteBelowBoundary",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_ReturnFirstRegionToActOnePaletteAtOrAboveYThreshold"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 328,
+      "old": "loc_55062",
+      "new": "SKMHZ2FG_TryAct2PaletteRightBoundary",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_ChooseSecondRegionHorizontalPaletteTransitionFromWordFlag"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 336,
+      "old": "loc_5506E",
+      "new": "SKMHZ2FG_TryAct1PaletteLeftOfBoundary",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_ReturnSecondRegionToActOnePaletteBelowXThreshold"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 342,
+      "old": "loc_55074",
+      "new": "SKMHZ2FG_TryAct2PaletteLeftOfBoundary",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_ChooseThirdOrFourthHorizontalGoldBoundaryTransition"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 350,
+      "old": "loc_55080",
+      "new": "SKMHZ2FG_TryGoldPaletteRightBoundary",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_SelectGoldPaletteAtOrAboveHorizontalThreshold"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 356,
+      "old": "loc_55086",
+      "new": "SKMHZ2FG_TryGoldRegionAct2Above",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_ChooseFifthVerticalGoldBoundaryTransition"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 364,
+      "old": "loc_55092",
+      "new": "SKMHZ2FG_TryGoldPaletteBelowBoundary",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_SelectGoldPaletteAtOrAboveVerticalThreshold"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 370,
+      "old": "loc_55098",
+      "new": "SKMHZ2FG_SelectAct2Palette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_SetActTwoPaletteFlagsAndBindActTwoSource"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 377,
+      "old": "loc_550A8",
+      "new": "SKMHZ2FG_SelectAct1Palette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_ClearRegionFlagsAndBindActOnePaletteSource"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 384,
+      "old": "loc_550B8",
+      "new": "SKMHZ2FG_SelectGoldPalette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_BindGoldPaletteAndSelectLeafGraphicsVariant"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 389,
+      "old": "loc_550C4",
+      "new": "SKMHZ2FG_PrepareNormalPalette64ByteCopy",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_PrepareNormalPalette64ByteCopy"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 393,
+      "old": "loc_550CA",
+      "new": "SKMHZ2FG_CopySelectedPalette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZ2FG_Copy16LongsToNormalPaletteAndReturn"
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "original_line": 410,
+      "old": "word_5513E",
+      "new": "SKMHZ2FG_PaletteRegionBounds",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKMHZ2FG_FiveTenBytePaletteRegionAndThresholdRecords"
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 40,
+      "old": "word_22BE6",
+      "new": "AIZMHZRideVineSK_MapFrame00",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot00hex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 42,
+      "old": "word_22BEE",
+      "new": "AIZMHZRideVineSK_MapFrame01",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot01hex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 44,
+      "old": "word_22BF6",
+      "new": "AIZMHZRideVineSK_MapFrame02",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot02hex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 46,
+      "old": "word_22BFE",
+      "new": "AIZMHZRideVineSK_MapFrame03",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot03hex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 48,
+      "old": "word_22C06",
+      "new": "AIZMHZRideVineSK_MapFrame04",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot04hex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 50,
+      "old": "word_22C0E",
+      "new": "AIZMHZRideVineSK_MapFrame05",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot05hex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 52,
+      "old": "word_22C16",
+      "new": "AIZMHZRideVineSK_MapFrame06",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot06hex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 54,
+      "old": "word_22C1E",
+      "new": "AIZMHZRideVineSK_MapFrame07",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot07hex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 56,
+      "old": "word_22C26",
+      "new": "AIZMHZRideVineSK_MapFrame08",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot08hex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 58,
+      "old": "word_22C2E",
+      "new": "AIZMHZRideVineSK_MapFrame09",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot09hex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 60,
+      "old": "word_22C36",
+      "new": "AIZMHZRideVineSK_MapFrame0A",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot0Ahex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 62,
+      "old": "word_22C3E",
+      "new": "AIZMHZRideVineSK_MapFrame0B",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot0Bhex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 64,
+      "old": "word_22C46",
+      "new": "AIZMHZRideVineSK_MapFrame0C",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot0Chex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 66,
+      "old": "word_22C4E",
+      "new": "AIZMHZRideVineSK_MapFrame0D",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot0Dhex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 68,
+      "old": "word_22C56",
+      "new": "AIZMHZRideVineSK_MapFrame0E",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot0Ehex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 70,
+      "old": "word_22C5E",
+      "new": "AIZMHZRideVineSK_MapFrame0F",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot0Fhex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 72,
+      "old": "word_22C66",
+      "new": "AIZMHZRideVineSK_MapFrame10",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot10hex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 74,
+      "old": "word_22C6E",
+      "new": "AIZMHZRideVineSK_MapFrame11",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot11hex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 76,
+      "old": "word_22C76",
+      "new": "AIZMHZRideVineSK_MapFrame12",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot12hex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 78,
+      "old": "word_22C7E",
+      "new": "AIZMHZRideVineSK_MapFrame13",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot13hex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 80,
+      "old": "word_22C86",
+      "new": "AIZMHZRideVineSK_MapFrame14",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot14hex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 82,
+      "old": "word_22C8E",
+      "new": "AIZMHZRideVineSK_MapFrame15",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot15hex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 84,
+      "old": "word_22C96",
+      "new": "AIZMHZRideVineSK_MapFrame16",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot16hex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 86,
+      "old": "word_22C9E",
+      "new": "AIZMHZRideVineSK_MapFrame17",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot17hex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 88,
+      "old": "word_22CA6",
+      "new": "AIZMHZRideVineSK_MapFrame18",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot18hex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 90,
+      "old": "word_22CAE",
+      "new": "AIZMHZRideVineSK_MapFrame19",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot19hex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 92,
+      "old": "word_22CB6",
+      "new": "AIZMHZRideVineSK_MapFrame1A",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot1Ahex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 94,
+      "old": "word_22CBE",
+      "new": "AIZMHZRideVineSK_MapFrame1B",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot1Bhex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 96,
+      "old": "word_22CC6",
+      "new": "AIZMHZRideVineSK_MapFrame1C",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot1Chex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 98,
+      "old": "word_22CCE",
+      "new": "AIZMHZRideVineSK_MapFrame1D",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot1Dhex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 100,
+      "old": "word_22CD6",
+      "new": "AIZMHZRideVineSK_MapFrame1E",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot1Ehex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 102,
+      "old": "word_22CDE",
+      "new": "AIZMHZRideVineSK_MapFrame1F",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot1Fhex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 104,
+      "old": "word_22CE6",
+      "new": "AIZMHZRideVineSK_MapFrame20",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot20hex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 106,
+      "old": "word_22CEE",
+      "new": "AIZMHZRideVineSK_MapFrame21",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot21hex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 108,
+      "old": "word_22CF6",
+      "new": "AIZMHZRideVineSK_MapFrame22",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot22hex."
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "original_line": 110,
+      "old": "word_22CFE",
+      "new": "AIZMHZRideVineSK_MapFrame23",
+      "profiles": ["sk"],
+      "meaning": "AIZMHZRideVineSK physical mapping body at exact relative-table slot23hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/act2/mappings/knuckles_leaves.s",
+      "original_line": 5,
+      "old": "word_66B46",
+      "new": "MHZKnucklesSceneLeavesSKData_MapSlot00",
+      "profiles": ["sk"],
+      "meaning": "MHZKnucklesSceneLeavesSKData physical geometry at actual map selector 0."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/animations/end_propellers.s",
+      "original_line": 5,
+      "old": "byte_55A3E",
+      "new": "MHZEndPropellers_SpinAnim",
+      "profiles": ["sk"],
+      "meaning": "MHZAct2ShipPropellersSKData actual STANDARD animation bank 0."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/animations/mushroom_cap.s",
+      "original_line": 6,
+      "old": "byte_3E1DE",
+      "new": "MHZMushroomCapSKData_StandardAnim00",
+      "profiles": ["sk"],
+      "meaning": "MHZMushroomCapSKData actual STANDARD animation bank 0."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/animations/mushroom_cap.s",
+      "original_line": 7,
+      "old": "byte_3E1E1",
+      "new": "MHZMushroomCapSKData_StandardAnim01",
+      "profiles": ["sk"],
+      "meaning": "MHZMushroomCapSKData actual STANDARD animation bank 1."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/animations/mushroom_platform.s",
+      "original_line": 6,
+      "old": "byte_3F420",
+      "new": "MHZMushroomPlatformSKData_StandardAnim00",
+      "profiles": ["sk"],
+      "meaning": "MHZMushroomPlatformSKData actual STANDARD animation bank 0."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/animations/mushroom_platform.s",
+      "original_line": 7,
+      "old": "byte_3F425",
+      "new": "MHZMushroomPlatformSKData_StandardAnim01",
+      "profiles": ["sk"],
+      "meaning": "MHZMushroomPlatformSKData actual STANDARD animation bank 1."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/big_leaves.s",
+      "original_line": 8,
+      "old": "word_3DC7C",
+      "new": "MHZBigLeavesSK_MapFrame00",
+      "profiles": ["sk"],
+      "meaning": "MHZBigLeavesSK physical mapping body for exact logical slot(s) 0 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/big_leaves.s",
+      "original_line": 10,
+      "old": "word_3DC84",
+      "new": "MHZBigLeavesSK_MapFrame01",
+      "profiles": ["sk"],
+      "meaning": "MHZBigLeavesSK physical mapping body for exact logical slot(s) 1 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/big_leaves.s",
+      "original_line": 12,
+      "old": "word_3DC8C",
+      "new": "MHZBigLeavesSK_MapFrame02",
+      "profiles": ["sk"],
+      "meaning": "MHZBigLeavesSK physical mapping body for exact logical slot(s) 2 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/big_leaves.s",
+      "original_line": 14,
+      "old": "word_3DC94",
+      "new": "MHZBigLeavesSK_MapFrame03",
+      "profiles": ["sk"],
+      "meaning": "MHZBigLeavesSK physical mapping body for exact logical slot(s) 3 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/breakable_wall.s",
+      "original_line": 6,
+      "old": "word_21BD2",
+      "new": "MHZBreakableWallSKData_MapSlot00",
+      "profiles": ["sk"],
+      "meaning": "MHZBreakableWallSKData physical geometry at actual map selector 0."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/breakable_wall.s",
+      "original_line": 11,
+      "old": "word_21BEC",
+      "new": "MHZBreakableWallSKData_MapSlot01",
+      "profiles": ["sk"],
+      "meaning": "MHZBreakableWallSKData physical geometry at actual map selector 1."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/curled_vine.s",
+      "original_line": 5,
+      "old": "word_3EA4E",
+      "new": "MHZCurledVineSegmentsSKData_MapSlot00",
+      "profiles": ["sk"],
+      "meaning": "MHZCurledVineSegmentsSKData physical geometry at actual map selector 0."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/knuckles_peering.s",
+      "original_line": 9,
+      "old": "word_66A5C",
+      "new": "MHZKnucklesAct1SceneSKData_MapSlot00",
+      "profiles": ["sk"],
+      "meaning": "MHZKnucklesAct1SceneSKData physical geometry at actual map selector 0."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/knuckles_peering.s",
+      "original_line": 12,
+      "old": "word_66A6A",
+      "new": "MHZKnucklesAct1SceneSKData_MapSlot01",
+      "profiles": ["sk"],
+      "meaning": "MHZKnucklesAct1SceneSKData physical geometry at actual map selector 1."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/knuckles_peering.s",
+      "original_line": 15,
+      "old": "word_66A78",
+      "new": "MHZKnucklesAct1SceneSKData_MapSlot02",
+      "profiles": ["sk"],
+      "meaning": "MHZKnucklesAct1SceneSKData physical geometry at actual map selector 2."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/knuckles_peering.s",
+      "original_line": 18,
+      "old": "word_66A86",
+      "new": "MHZKnucklesAct1SceneSKData_MapSlot03",
+      "profiles": ["sk"],
+      "meaning": "MHZKnucklesAct1SceneSKData physical geometry at actual map selector 3."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/knuckles_peering.s",
+      "original_line": 21,
+      "old": "word_66A94",
+      "new": "MHZKnucklesAct1SceneSKData_MapSlot04",
+      "profiles": ["sk"],
+      "meaning": "MHZKnucklesAct1SceneSKData physical geometry at actual map selector 4."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/knuckles_switch_door.s",
+      "original_line": 5,
+      "old": "word_66A9E",
+      "new": "MHZKnucklesAct1DoorSKData_MapSlot00",
+      "profiles": ["sk"],
+      "meaning": "MHZKnucklesAct1DoorSKData physical geometry at actual map selector 0."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/mushroom_cap.s",
+      "original_line": 8,
+      "old": "word_3E206",
+      "new": "MHZMushroomCapSKData_MapSlot00",
+      "profiles": ["sk"],
+      "meaning": "MHZMushroomCapSKData physical geometry at actual map selector 0."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/mushroom_cap.s",
+      "original_line": 11,
+      "old": "word_3E214",
+      "new": "MHZMushroomCapSKData_MapSlot01",
+      "profiles": ["sk"],
+      "meaning": "MHZMushroomCapSKData physical geometry at actual map selector 1."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/mushroom_cap.s",
+      "original_line": 14,
+      "old": "word_3E222",
+      "new": "MHZMushroomCapSKData_MapSlot02",
+      "profiles": ["sk"],
+      "meaning": "MHZMushroomCapSKData physical geometry at actual map selector 2."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/mushroom_cap.s",
+      "original_line": 17,
+      "old": "word_3E230",
+      "new": "MHZMushroomCapSKData_MapSlot03",
+      "profiles": ["sk"],
+      "meaning": "MHZMushroomCapSKData physical geometry at actual map selector 3."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/mushroom_catapult.s",
+      "original_line": 6,
+      "old": "word_3FB74",
+      "new": "MHZMushroomCatapultSKData_MapSlot00",
+      "profiles": ["sk"],
+      "meaning": "MHZMushroomCatapultSKData physical geometry at actual map selector 0."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/mushroom_catapult.s",
+      "original_line": 9,
+      "old": "word_3FB82",
+      "new": "MHZMushroomCatapultSKData_MapSlot01",
+      "profiles": ["sk"],
+      "meaning": "MHZMushroomCatapultSKData physical geometry at actual map selector 1."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/mushroom_parachute.s",
+      "original_line": 5,
+      "old": "word_3F854",
+      "new": "MHZMushroomParachuteSKData_MapSlot00",
+      "profiles": ["sk"],
+      "meaning": "MHZMushroomParachuteSKData physical geometry at actual map selector 0."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/mushroom_platform.s",
+      "original_line": 7,
+      "old": "word_3F450",
+      "new": "MHZMushroomPlatformSKData_MapSlot00",
+      "profiles": ["sk"],
+      "meaning": "MHZMushroomPlatformSKData physical geometry at actual map selector 0."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/mushroom_platform.s",
+      "original_line": 13,
+      "old": "word_3F470",
+      "new": "MHZMushroomPlatformSKData_MapSlot01",
+      "profiles": ["sk"],
+      "meaning": "MHZMushroomPlatformSKData physical geometry at actual map selector 1."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/mushroom_platform.s",
+      "original_line": 19,
+      "old": "word_3F490",
+      "new": "MHZMushroomPlatformSKData_MapSlot02",
+      "profiles": ["sk"],
+      "meaning": "MHZMushroomPlatformSKData physical geometry at actual map selector 2."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/pollen_leaves.s",
+      "original_line": 8,
+      "old": "word_3DC64",
+      "new": "MHZPollenSK_MapSlots00_01",
+      "profiles": ["sk"],
+      "meaning": "MHZPollenSK physical mapping body for exact logical slot(s) 0,1 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/pollen_leaves.s",
+      "original_line": 10,
+      "old": "word_3DC6C",
+      "new": "MHZPollenSK_MapSlots02_03",
+      "profiles": ["sk"],
+      "meaning": "MHZPollenSK physical mapping body for exact logical slot(s) 2,3 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/pulley_lift.s",
+      "original_line": 12,
+      "old": "word_3E730",
+      "new": "MHZPulleyLiftSKData_MapSlot00",
+      "profiles": ["sk"],
+      "meaning": "MHZPulleyLiftSKData physical geometry at actual map selector 0."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/pulley_lift.s",
+      "original_line": 22,
+      "old": "word_3E768",
+      "new": "MHZPulleyLiftSKData_MapSlot01",
+      "profiles": ["sk"],
+      "meaning": "MHZPulleyLiftSKData physical geometry at actual map selector 1."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/pulley_lift.s",
+      "original_line": 30,
+      "old": "word_3E794",
+      "new": "MHZPulleyLiftSKData_MapSlot02",
+      "profiles": ["sk"],
+      "meaning": "MHZPulleyLiftSKData physical geometry at actual map selector 2."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/pulley_lift.s",
+      "original_line": 34,
+      "old": "word_3E7A8",
+      "new": "MHZPulleyLiftSKData_MapSlot03",
+      "profiles": ["sk"],
+      "meaning": "MHZPulleyLiftSKData physical geometry at actual map selector 3."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/pulley_lift.s",
+      "original_line": 37,
+      "old": "word_3E7B6",
+      "new": "MHZPulleyLiftSKData_MapSlot04",
+      "profiles": ["sk"],
+      "meaning": "MHZPulleyLiftSKData physical geometry at actual map selector 4."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/pulley_lift.s",
+      "original_line": 53,
+      "old": "word_3E812",
+      "new": "MHZPulleyLiftSKData_MapSlot05",
+      "profiles": ["sk"],
+      "meaning": "MHZPulleyLiftSKData physical geometry at actual map selector 5."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/pulley_lift.s",
+      "original_line": 55,
+      "old": "word_3E81A",
+      "new": "MHZPulleyLiftSKData_MapSlot06",
+      "profiles": ["sk"],
+      "meaning": "MHZPulleyLiftSKData physical geometry at actual map selector 6."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/pulley_lift.s",
+      "original_line": 57,
+      "old": "word_3E822",
+      "new": "MHZPulleyLiftSKData_MapSlot07",
+      "profiles": ["sk"],
+      "meaning": "MHZPulleyLiftSKData physical geometry at actual map selector 7."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/sticky_vine.s",
+      "original_line": 5,
+      "old": "word_3ED12",
+      "new": "MHZStickyVineSegmentsSKData_MapSlot00",
+      "profiles": ["sk"],
+      "meaning": "MHZStickyVineSegmentsSKData physical geometry at actual map selector 0."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/swing_bar_horizontal.s",
+      "original_line": 5,
+      "old": "word_3F04C",
+      "new": "MHZHorizontalSwingBarSKData_MapSlot00",
+      "profiles": ["sk"],
+      "meaning": "MHZHorizontalSwingBarSKData physical geometry at actual map selector 0."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/swing_bar_vertical.s",
+      "original_line": 5,
+      "old": "word_3F362",
+      "new": "MHZVerticalSwingBarSKData_MapSlot00",
+      "profiles": ["sk"],
+      "meaning": "MHZVerticalSwingBarSKData physical geometry at actual map selector 0."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/curled_vine.s",
+      "original_line": 27,
+      "old": "loc_3E89C",
+      "new": "SKMHZCurlVine_DeleteWithoutDisplay",
+      "profiles": ["sk"],
+      "meaning": "Abort curled-vine root without required composite display."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/curled_vine.s",
+      "original_line": 31,
+      "old": "loc_3E8A2",
+      "new": "SKMHZCurlVine_PickShapeFromRiders",
+      "profiles": ["sk"],
+      "meaning": "Drive curled geometry from prior player support."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/curled_vine.s",
+      "original_line": 44,
+      "old": "loc_3E8C2",
+      "new": "SKMHZCurlVine_GetRiderShapeIndex",
+      "profiles": ["sk"],
+      "meaning": "Convert maximum recorded segment to nonzero shape selector."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/curled_vine.s",
+      "original_line": 47,
+      "old": "loc_3E8C4",
+      "new": "SKMHZCurlVine_LoadWidthAndCurvature",
+      "profiles": ["sk"],
+      "meaning": "Fetch paired geometry-control tables."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/curled_vine.s",
+      "original_line": 54,
+      "old": "dword_3E8D2",
+      "new": "SKMHZCurlVine_CurvatureTargets",
+      "profiles": ["sk"],
+      "meaning": "Store curvature targets by furthest supported segment."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/curled_vine.s",
+      "original_line": 64,
+      "old": "byte_3E8F6",
+      "new": "SKMHZCurlVine_SupportWidths",
+      "profiles": ["sk"],
+      "meaning": "Store current horizontal support span by shape selector."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/curled_vine.s",
+      "original_line": 77,
+      "old": "loc_3E900",
+      "new": "SKMHZCurlVine_StepTowardCurvature",
+      "profiles": ["sk"],
+      "meaning": "Smooth retained curvature before rebuilding display."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/curled_vine.s",
+      "original_line": 86,
+      "old": "loc_3E912",
+      "new": "SKMHZCurlVine_IncreaseCurvature",
+      "profiles": ["sk"],
+      "meaning": "Move retained curvature upward one unit."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/curled_vine.s",
+      "original_line": 89,
+      "old": "loc_3E918",
+      "new": "SKMHZCurlVine_BeginCurveProjection",
+      "profiles": ["sk"],
+      "meaning": "Prepare composite chain coordinate integration."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/curled_vine.s",
+      "original_line": 103,
+      "old": "loc_3E93C",
+      "new": "SKMHZCurlVine_StepCurvePoint",
+      "profiles": ["sk"],
+      "meaning": "Advance composite point using current high phase WORD."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/curled_vine.s",
+      "original_line": 114,
+      "old": "loc_3E952",
+      "new": "SKMHZCurlVine_PlaceSegmentsAndRiders",
+      "profiles": ["sk"],
+      "meaning": "Commit composite geometry and root lifetime policy."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/curled_vine.s",
+      "original_line": 136,
+      "old": "loc_3E98A",
+      "new": "SKMHZCurlVine_ClearVineRespawnBit",
+      "profiles": ["sk"],
+      "meaning": "Release root placement after coarse-range failure."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/curled_vine.s",
+      "original_line": 142,
+      "old": "loc_3E996",
+      "new": "SKMHZCurlVine_DeleteDisplayAndRoot",
+      "profiles": ["sk"],
+      "meaning": "Remove mandatory display and invisible root together."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/curled_vine.s",
+      "original_line": 148,
+      "old": "loc_3E9A6",
+      "new": "SKMHZCurlVine_DrawVineDisplay",
+      "profiles": ["sk"],
+      "meaning": "Display eight embedded curled-vine points."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/curled_vine.s",
+      "original_line": 180,
+      "old": "loc_3E9E6",
+      "new": "SKMHZCurlVine_DetachAndClearSegment",
+      "profiles": ["sk"],
+      "meaning": "Release rider who became airborne or left current X span."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/curled_vine.s",
+      "original_line": 188,
+      "old": "loc_3E9FA",
+      "new": "SKMHZCurlVine_PlaceRiderOnSegment",
+      "profiles": ["sk"],
+      "meaning": "Update retained rider's support height and segment index."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/curled_vine.s",
+      "original_line": 205,
+      "old": "loc_3EA1E",
+      "new": "SKMHZCurlVine_TryLandOnSegment",
+      "profiles": ["sk"],
+      "meaning": "Use actual embedded geometry for fresh top landing."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/curled_vine.s",
+      "original_line": 224,
+      "old": "locret_3EA4A",
+      "new": "SKMHZCurlVine_LandingReturn",
+      "profiles": ["sk"],
+      "meaning": "Reject unsupported curled-vine contact."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "original_line": 15,
+      "old": "loc_3ED46",
+      "new": "SKMHZHorizBar_UpdateBarRiders",
+      "profiles": ["sk"],
+      "meaning": "Run horizontal bar capture and rotation for both players."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "original_line": 50,
+      "old": "loc_3EDB6",
+      "new": "SKMHZHorizBar_TryMoveRiderRight",
+      "profiles": ["sk"],
+      "meaning": "Apply rightward shimmy after optional left movement."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "original_line": 64,
+      "old": "loc_3EDE6",
+      "new": "SKMHZHorizBar_TryReleaseByInputOrPhase",
+      "profiles": ["sk"],
+      "meaning": "Dispatch active bar behavior before new pose step."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "original_line": 80,
+      "old": "loc_3EE18",
+      "new": "SKMHZHorizBar_SetManualJumpYSpeed",
+      "profiles": ["sk"],
+      "meaning": "Assign explicit action departure impulse."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "original_line": 86,
+      "old": "loc_3EE2C",
+      "new": "SKMHZHorizBar_StartManualCooldown",
+      "profiles": ["sk"],
+      "meaning": "Start manual/invalid-rider release."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "original_line": 93,
+      "old": "loc_3EE42",
+      "new": "SKMHZHorizBar_SetReleasedRollPose",
+      "profiles": ["sk"],
+      "meaning": "Commit common departure player state."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "original_line": 106,
+      "old": "loc_3EE7A",
+      "new": "SKMHZHorizBar_ReleaseWithBoostedYSpeed",
+      "profiles": ["sk"],
+      "meaning": "Apply automatic phase28hex boosted departure."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "original_line": 114,
+      "old": "loc_3EE8C",
+      "new": "SKMHZHorizBar_StartAutomaticCooldown",
+      "profiles": ["sk"],
+      "meaning": "Finish automatic phase-boundary departure."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "original_line": 128,
+      "old": "loc_3EEC2",
+      "new": "SKMHZHorizBar_ReleaseWithSavedYSpeed",
+      "profiles": ["sk"],
+      "meaning": "Apply automatic phase5 departure."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "original_line": 134,
+      "old": "loc_3EECE",
+      "new": "SKMHZHorizBar_TickCaptureCooldown",
+      "profiles": ["sk"],
+      "meaning": "Delay bar reacquisition while inactive."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "original_line": 141,
+      "old": "loc_3EEDA",
+      "new": "SKMHZHorizBar_TryCaptureAndSaveYSpeed",
+      "profiles": ["sk"],
+      "meaning": "Acquire uncontrolled player in narrow rectangle."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "original_line": 182,
+      "old": "loc_3EF84",
+      "new": "SKMHZHorizBar_TryFastEntryPose",
+      "profiles": ["sk"],
+      "meaning": "Choose automatic rotation for saved downward speed."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "original_line": 189,
+      "old": "loc_3EF9C",
+      "new": "SKMHZHorizBar_LatchRiderAndUploadPose",
+      "profiles": ["sk"],
+      "meaning": "Finish bar capture with immediate graphics and grab sound."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "original_line": 199,
+      "old": "locret_3EFB8",
+      "new": "SKMHZHorizBar_CaptureReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish free horizontal-bar player handling."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "original_line": 217,
+      "old": "loc_3EFD6",
+      "new": "SKMHZHorizBar_FinishNegativeDamping",
+      "profiles": ["sk"],
+      "meaning": "Join slow-input phase store after BYTE toward-zero step."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "original_line": 221,
+      "old": "loc_3EFD8",
+      "new": "SKMHZHorizBar_DampPositivePhase",
+      "profiles": ["sk"],
+      "meaning": "Damp slow-input nonnegative pose phase."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "original_line": 226,
+      "old": "loc_3EFE0",
+      "new": "SKMHZHorizBar_SetDampedPhase",
+      "profiles": ["sk"],
+      "meaning": "Commit slow-input phase adjustment."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "original_line": 229,
+      "old": "loc_3EFE4",
+      "new": "SKMHZHorizBar_ApplyNeutralPose",
+      "profiles": ["sk"],
+      "meaning": "Continue zero-phase slow-input pose projection."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "original_line": 233,
+      "old": "loc_3EFE6",
+      "new": "SKMHZHorizBar_StepFastPhase",
+      "profiles": ["sk"],
+      "meaning": "Rotate automatic swing phase from large saved vertical speed."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "original_line": 238,
+      "old": "loc_3EFF2",
+      "new": "SKMHZHorizBar_ApplyFrameAndYOffset",
+      "profiles": ["sk"],
+      "meaning": "Position active player from direct phase tables."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "original_line": 254,
+      "old": "RawAni_3F01A",
+      "new": "SKMHZHorizBar_RiderPoseFrames",
+      "profiles": ["sk"],
+      "meaning": "Store bar phase player-frame lookup."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "original_line": 257,
+      "old": "byte_3F03A",
+      "new": "SKMHZHorizBar_RiderPoseYOffsets",
+      "profiles": ["sk"],
+      "meaning": "Store one-cycle vertical pose offsets."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_cap.s",
+      "original_line": 68,
+      "old": "byte_3E0DA",
+      "new": "SKMHZMushCap_FrameSolidHeights",
+      "profiles": ["sk"],
+      "meaning": "Select top-solid height from current cap mapping frame."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_catapult.s",
+      "original_line": 26,
+      "old": "loc_3F8CE",
+      "new": "SKMHZMushCat_InitOppositeCapAndFlipper",
+      "profiles": ["sk"],
+      "meaning": "Complete first child and try independent moving flipper."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_catapult.s",
+      "original_line": 54,
+      "old": "loc_3F960",
+      "new": "SKMHZMushCat_StartCatapult",
+      "profiles": ["sk"],
+      "meaning": "Activate catapult after both child attempts or early failure."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_catapult.s",
+      "original_line": 57,
+      "old": "loc_3F966",
+      "new": "SKMHZMushCat_UpdateCompressionAndSolid",
+      "profiles": ["sk"],
+      "meaning": "Run root cap and paired mechanism."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_catapult.s",
+      "original_line": 88,
+      "old": "loc_3F9C0",
+      "new": "SKMHZMushCat_TryLatchOppositeContact",
+      "profiles": ["sk"],
+      "meaning": "Choose opposite cap's compression target from old support."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_catapult.s",
+      "original_line": 98,
+      "old": "loc_3F9E0",
+      "new": "SKMHZMushCat_StepCompression",
+      "profiles": ["sk"],
+      "meaning": "Advance compression by eight with deferred endpoint callbacks."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_catapult.s",
+      "original_line": 107,
+      "old": "loc_3F9F0",
+      "new": "SKMHZMushCat_ExtendCompression",
+      "profiles": ["sk"],
+      "meaning": "Move positive compression toward maximum."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_catapult.s",
+      "original_line": 112,
+      "old": "locret_3F9FC",
+      "new": "SKMHZMushCat_CompressionReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish compression and selected-player bounce helpers."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_catapult.s",
+      "original_line": 116,
+      "old": "loc_3F9FE",
+      "new": "SKMHZMushCat_TryLaunchAtZero",
+      "profiles": ["sk"],
+      "meaning": "Handle completed root decompression at exact zero."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_catapult.s",
+      "original_line": 127,
+      "old": "loc_3FA18",
+      "new": "SKMHZMushCat_TryLaunchOppositeRiders",
+      "profiles": ["sk"],
+      "meaning": "Dispatch opposed-cap bounce for both players."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_catapult.s",
+      "original_line": 145,
+      "old": "loc_3FA3C",
+      "new": "SKMHZMushCat_SetOppositeLaunchSpeed",
+      "profiles": ["sk"],
+      "meaning": "Commit chosen opposed-cap launch impulse."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_catapult.s",
+      "original_line": 152,
+      "old": "loc_3FA42",
+      "new": "SKMHZMushCat_TryLaunchAtFullCompression",
+      "profiles": ["sk"],
+      "meaning": "Handle completed root extension at18hex."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_catapult.s",
+      "original_line": 169,
+      "old": "loc_3FA66",
+      "new": "SKMHZMushCat_FinishSpringLaunch",
+      "profiles": ["sk"],
+      "meaning": "Finish either cap's accepted player bounce."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_catapult.s",
+      "original_line": 182,
+      "old": "loc_3FA8E",
+      "new": "SKMHZMushCat_PlaceOppositeCap",
+      "profiles": ["sk"],
+      "meaning": "Run independent opposite cap's solid/display update."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_catapult.s",
+      "original_line": 197,
+      "old": "loc_3FAC2",
+      "new": "SKMHZMushCat_TryLaunchFlipper",
+      "profiles": ["sk"],
+      "meaning": "Run center flipper at rest under root cap."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_catapult.s",
+      "original_line": 215,
+      "old": "loc_3FB06",
+      "new": "SKMHZMushCat_DrawRestingFlipper",
+      "profiles": ["sk"],
+      "meaning": "Finish flipper resting state."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_catapult.s",
+      "original_line": 219,
+      "old": "loc_3FB0C",
+      "new": "SKMHZMushCat_MoveAndTryReseatFlipper",
+      "profiles": ["sk"],
+      "meaning": "Integrate flipper and detect return against moving cap height."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_catapult.s",
+      "original_line": 235,
+      "old": "loc_3FB4A",
+      "new": "SKMHZMushCat_DrawFlyingFlipper",
+      "profiles": ["sk"],
+      "meaning": "Finish current flipper update."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_catapult.s",
+      "original_line": 238,
+      "old": "byte_3FB50",
+      "new": "SKMHZMushCat_SurfaceHeights",
+      "profiles": ["sk"],
+      "meaning": "Store shared root/opposed cap collision surface."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 21,
+      "old": "loc_3F4FA",
+      "new": "SKMHZParachute_StartCaptureWait",
+      "profiles": ["sk"],
+      "meaning": "Finish parachute resource/orientation setup."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 24,
+      "old": "loc_3F500",
+      "new": "SKMHZParachute_UpdateRidersAndTryStart",
+      "profiles": ["sk"],
+      "meaning": "Run idle capture before primary-player departure gate."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 31,
+      "old": "loc_3F516",
+      "new": "SKMHZParachute_DrawIdleParachute",
+      "profiles": ["sk"],
+      "meaning": "Finish stationary capture-controller update."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 35,
+      "old": "loc_3F51C",
+      "new": "SKMHZParachute_UpdateControlledFlight",
+      "profiles": ["sk"],
+      "meaning": "Run controlled flight with exact callback order."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 46,
+      "old": "loc_3F544",
+      "new": "SKMHZParachute_TryReleaseHiddenP1",
+      "profiles": ["sk"],
+      "meaning": "Prepare offscreen controlled-flight disposal."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 55,
+      "old": "loc_3F55E",
+      "new": "SKMHZParachute_TryReleaseHiddenP2",
+      "profiles": ["sk"],
+      "meaning": "Complete attached-player control cleanup before root cull."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 61,
+      "old": "loc_3F56C",
+      "new": "SKMHZParachute_DrawControlledFlight",
+      "profiles": ["sk"],
+      "meaning": "Finish controlled-flight update."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 65,
+      "old": "loc_3F572",
+      "new": "SKMHZParachute_UpdateUnoccupiedFlight",
+      "profiles": ["sk"],
+      "meaning": "Run permanently unoccupied flight after last rider left."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 76,
+      "old": "loc_3F596",
+      "new": "SKMHZParachute_TryClearUnoccupiedP2",
+      "profiles": ["sk"],
+      "meaning": "Finish unoccupied-root old-render failure handling."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 82,
+      "old": "loc_3F5A4",
+      "new": "SKMHZParachute_DrawUnoccupiedFlight",
+      "profiles": ["sk"],
+      "meaning": "Finish no-rider flight update."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 124,
+      "old": "loc_3F61C",
+      "new": "SKMHZParachute_TrySetJumpLeft",
+      "profiles": ["sk"],
+      "meaning": "Choose voluntary release horizontal impulse."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 129,
+      "old": "loc_3F628",
+      "new": "SKMHZParachute_TrySetJumpRight",
+      "profiles": ["sk"],
+      "meaning": "Apply right after left on voluntary release."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 134,
+      "old": "loc_3F634",
+      "new": "SKMHZParachute_SetJumpReleasePose",
+      "profiles": ["sk"],
+      "meaning": "Finish action-button departure."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 145,
+      "old": "loc_3F660",
+      "new": "SKMHZParachute_NudgeRiderUpAndDetach",
+      "profiles": ["sk"],
+      "meaning": "Release player after prior invisibility or velocity mismatch."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 148,
+      "old": "loc_3F666",
+      "new": "SKMHZParachute_DetachWithoutJump",
+      "profiles": ["sk"],
+      "meaning": "End attachment after invalid player or altered velocities."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 156,
+      "old": "loc_3F678",
+      "new": "SKMHZParachute_CarryRiderAndCheckTerrain",
+      "profiles": ["sk"],
+      "meaning": "Move retained rider then preserve collision-call context."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 167,
+      "old": "loc_3F6A6",
+      "new": "SKMHZParachute_SetFacingFromHeading",
+      "profiles": ["sk"],
+      "meaning": "Choose attached player visual facing."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 174,
+      "old": "loc_3F6BC",
+      "new": "SKMHZParachute_ApplyHeadingPose",
+      "profiles": ["sk"],
+      "meaning": "Apply facing/render and direct angle-based frame."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 190,
+      "old": "RawAni_3F6EE",
+      "new": "SKMHZParachute_RiderHeadingFrames",
+      "profiles": ["sk"],
+      "meaning": "Store player pose for parachute angle sectors."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 195,
+      "old": "loc_3F6FE",
+      "new": "SKMHZParachute_TickCaptureCooldown",
+      "profiles": ["sk"],
+      "meaning": "Throttle reacquisition with exact zero behavior."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 201,
+      "old": "loc_3F70C",
+      "new": "SKMHZParachute_TryCaptureRider",
+      "profiles": ["sk"],
+      "meaning": "Acquire player in hanging rectangle."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 241,
+      "old": "locret_3F7AC",
+      "new": "SKMHZParachute_CaptureReturn",
+      "profiles": ["sk"],
+      "meaning": "End inactive player helper."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 253,
+      "old": "loc_3F7C2",
+      "new": "SKMHZParachute_ResolveLeftWall",
+      "profiles": ["sk"],
+      "meaning": "Resolve first sidewall of controlled root."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 260,
+      "old": "loc_3F7D2",
+      "new": "SKMHZParachute_ResolveRightWall",
+      "profiles": ["sk"],
+      "meaning": "Resolve second sidewall without changing velocity."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 266,
+      "old": "locret_3F7E0",
+      "new": "SKMHZParachute_WallProbeReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish controlled-flight terrain helper."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 284,
+      "old": "loc_3F800",
+      "new": "SKMHZParachute_StepLeftSteer",
+      "profiles": ["sk"],
+      "meaning": "Commit left-biased steering preparation."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 289,
+      "old": "loc_3F804",
+      "new": "SKMHZParachute_TrySteerRight",
+      "profiles": ["sk"],
+      "meaning": "Choose right steering after left rejection."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 297,
+      "old": "loc_3F814",
+      "new": "SKMHZParachute_StepRightSteer",
+      "profiles": ["sk"],
+      "meaning": "Complete right-biased angle step."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 302,
+      "old": "loc_3F818",
+      "new": "SKMHZParachute_StepPassiveHeading",
+      "profiles": ["sk"],
+      "meaning": "Relax heading by literal positive BYTE step."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 308,
+      "old": "loc_3F822",
+      "new": "SKMHZParachute_ApplyHeadingAndDescent",
+      "profiles": ["sk"],
+      "meaning": "Set root flight speed from current heading."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 321,
+      "old": "loc_3F84A",
+      "new": "SKMHZParachute_IncreaseDescentSpeed",
+      "profiles": ["sk"],
+      "meaning": "Apply positive vy correction below80hex."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "original_line": 324,
+      "old": "locret_3F850",
+      "new": "SKMHZParachute_SteeringReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish root speed preparation."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_platform.s",
+      "original_line": 15,
+      "old": "loc_3F39C",
+      "new": "SKMHZMushPlat_TickFallDelay",
+      "profiles": ["sk"],
+      "meaning": "Choose stationary wait or delayed falling motion."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_platform.s",
+      "original_line": 24,
+      "old": "loc_3F3AE",
+      "new": "SKMHZMushPlat_FallAndCheckRiderRelease",
+      "profiles": ["sk"],
+      "meaning": "Advance latched falling platform after sixteen waiting calls."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_platform.s",
+      "original_line": 32,
+      "old": "loc_3F3CC",
+      "new": "SKMHZMushPlat_ResolveSolidAndTryArmFall",
+      "profiles": ["sk"],
+      "meaning": "Collide players and detect first standing activation."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_platform.s",
+      "original_line": 49,
+      "old": "loc_3F40A",
+      "new": "SKMHZMushPlat_AnimateAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Finish stationary, waiting or falling mushroom platform."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_platform.s",
+      "original_line": 56,
+      "old": "byte_3F42A",
+      "new": "SKMHZMushPlat_SurfaceHeights",
+      "profiles": ["sk"],
+      "meaning": "Store sloped top profile used for player riding."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pollen.s",
+      "original_line": 18,
+      "old": "locret_3DA22",
+      "new": "SKMHZPollen_EmitterReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish emitter without drawing or range deletion."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pollen.s",
+      "original_line": 39,
+      "old": "loc_3DA58",
+      "new": "SKMHZPollen_CalcAbsPlayerXSpeed",
+      "profiles": ["sk"],
+      "meaning": "Choose fast-ground-motion single particle path."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pollen.s",
+      "original_line": 44,
+      "old": "loc_3DA60",
+      "new": "SKMHZPollen_TryEmitFromRunSpeed",
+      "profiles": ["sk"],
+      "meaning": "Create one rising particle from fast grounded motion."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pollen.s",
+      "original_line": 69,
+      "old": "locret_3DAC2",
+      "new": "SKMHZPollen_RunEmissionReturn",
+      "profiles": ["sk"],
+      "meaning": "End fast-ground-motion emission branch."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pollen.s",
+      "original_line": 73,
+      "old": "loc_3DAC4",
+      "new": "SKMHZPollen_SaveAirborneYSpeed",
+      "profiles": ["sk"],
+      "meaning": "Remember latest player vy while airborne."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pollen.s",
+      "original_line": 78,
+      "old": "loc_3DACA",
+      "new": "SKMHZPollen_BeginLandingBurst",
+      "profiles": ["sk"],
+      "meaning": "Select scatter table and fixed vertical bias."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pollen.s",
+      "original_line": 83,
+      "old": "loc_3DAD6",
+      "new": "SKMHZPollen_TrySpawnBurstParticle",
+      "profiles": ["sk"],
+      "meaning": "Create one scatter particle when a slot is available."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pollen.s",
+      "original_line": 113,
+      "old": "loc_3DB4A",
+      "new": "SKMHZPollen_NextBurstAttempt",
+      "profiles": ["sk"],
+      "meaning": "Finish fixed six-attempt burst."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pollen.s",
+      "original_line": 119,
+      "old": "word_3DB50",
+      "new": "SKMHZPollen_BurstVelocityBias",
+      "profiles": ["sk"],
+      "meaning": "Store landing-burst horizontal and vertical biases."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pollen.s",
+      "original_line": 137,
+      "old": "loc_3DB7E",
+      "new": "SKMHZPollen_ChooseLeafVariant",
+      "profiles": ["sk"],
+      "meaning": "Choose alternate leaf resources while global season flag nonzero."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pollen.s",
+      "original_line": 148,
+      "old": "loc_3DBA0",
+      "new": "SKMHZPollen_UseSmallLeafArt",
+      "profiles": ["sk"],
+      "meaning": "Choose nonzero leaf-cycle branch."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pollen.s",
+      "original_line": 155,
+      "old": "byte_3DBB0",
+      "new": "SKMHZPollen_LeafVariantCycle",
+      "profiles": ["sk"],
+      "meaning": "Store alternate-season leaf-shape cycle."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pollen.s",
+      "original_line": 170,
+      "old": "loc_3DBD8",
+      "new": "SKMHZPollen_DrawInitialRise",
+      "profiles": ["sk"],
+      "meaning": "Finish fast-motion particle rise update."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pollen.s",
+      "original_line": 175,
+      "old": "loc_3DBE0",
+      "new": "SKMHZPollen_MoveWithSineDrift",
+      "profiles": ["sk"],
+      "meaning": "Update descending pollen/leaf with drift and local counter release."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pollen.s",
+      "original_line": 188,
+      "old": "loc_3DC10",
+      "new": "SKMHZPollen_DrawDescendingParticle",
+      "profiles": ["sk"],
+      "meaning": "Finish descending particle after optional counter decrement."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pollen.s",
+      "original_line": 193,
+      "old": "loc_3DC18",
+      "new": "SKMHZPollen_MoveBurstAndCheckApex",
+      "profiles": ["sk"],
+      "meaning": "Update scattered burst particle during rising phase."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pollen.s",
+      "original_line": 202,
+      "old": "loc_3DC32",
+      "new": "SKMHZPollen_DrawBurstRise",
+      "profiles": ["sk"],
+      "meaning": "Finish burst-rise update or just-selected descent."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pollen.s",
+      "original_line": 218,
+      "old": "locret_3DC5A",
+      "new": "SKMHZPollen_DirectionAnimReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish custom two-frame-per-direction animation."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 21,
+      "old": "loc_3E280",
+      "new": "SKMHZPulley_InitCompositeSprites",
+      "profiles": ["sk"],
+      "meaning": "Build root composite from three WORD triples."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 33,
+      "old": "word_3E29E",
+      "new": "SKMHZPulley_CompositeStartOffsets",
+      "profiles": ["sk"],
+      "meaning": "Store initial root mechanism records."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 39,
+      "old": "loc_3E2B0",
+      "new": "SKMHZPulley_TrySpawnHandles",
+      "profiles": ["sk"],
+      "meaning": "Allocate up to two handle actors with distinct root-field selectors."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 76,
+      "old": "loc_3E378",
+      "new": "SKMHZPulley_BeginPulleyControl",
+      "profiles": ["sk"],
+      "meaning": "Begin root mechanism regardless allocation prefix length."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 79,
+      "old": "loc_3E37E",
+      "new": "SKMHZPulley_AverageLengthsAndPickFrame",
+      "profiles": ["sk"],
+      "meaning": "Compute root mechanism geometry from prior child lengths."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 92,
+      "old": "loc_3E3A6",
+      "new": "SKMHZPulley_CheckLengthChange",
+      "profiles": ["sk"],
+      "meaning": "Select root quantized response from signed-looking unsigned delta."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 105,
+      "old": "loc_3E3C6",
+      "new": "SKMHZPulley_RaiseRootTwoPixels",
+      "profiles": ["sk"],
+      "meaning": "Apply quantized upward root step."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 110,
+      "old": "loc_3E3CC",
+      "new": "SKMHZPulley_CheckFourUnitRetraction",
+      "profiles": ["sk"],
+      "meaning": "Choose two/four-pixel root rise from alignment phase."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 121,
+      "old": "loc_3E3E6",
+      "new": "SKMHZPulley_CheckExtendingHandles",
+      "profiles": ["sk"],
+      "meaning": "Choose ordinary or exact-four alignment accounting."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 126,
+      "old": "loc_3E3F0",
+      "new": "SKMHZPulley_CheckUseAlignment",
+      "profiles": ["sk"],
+      "meaning": "Test quantized remembered-coordinate update."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 131,
+      "old": "loc_3E3F8",
+      "new": "SKMHZPulley_TryConsumeUse",
+      "profiles": ["sk"],
+      "meaning": "Advance finite-use counter on a new quantized sample."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 141,
+      "old": "loc_3E40E",
+      "new": "SKMHZPulley_CheckFourUnitExtension",
+      "profiles": ["sk"],
+      "meaning": "Handle larger positive average step in two candidate positions."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 152,
+      "old": "loc_3E422",
+      "new": "SKMHZPulley_PlaceCompositeAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Finish root geometry with current averaged length."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 171,
+      "old": "byte_3E462",
+      "new": "SKMHZPulley_SideSpreadByPhase",
+      "profiles": ["sk"],
+      "meaning": "Store extra side-rope horizontal spread."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 191,
+      "old": "loc_3E472",
+      "new": "SKMHZPulleyGrip_FollowRootAndReadRiders",
+      "profiles": ["sk"],
+      "meaning": "Run independently allocated handle and its riders."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 211,
+      "old": "loc_3E4AA",
+      "new": "SKMHZPulleyGrip_TryRetractHandle",
+      "profiles": ["sk"],
+      "meaning": "Return unpulled handle toward zero extension."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 217,
+      "old": "loc_3E4B6",
+      "new": "SKMHZPulleyGrip_PublishLengthAndFrame",
+      "profiles": ["sk"],
+      "meaning": "Write selected parent field and handle mapping frame."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 229,
+      "old": "loc_3E4E2",
+      "new": "SKMHZPulleyGrip_DrawFromRootX",
+      "profiles": ["sk"],
+      "meaning": "Finish handle update with fixed range anchor."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 267,
+      "old": "loc_3E546",
+      "new": "SKMHZPulleyGrip_TrySetJumpLeft",
+      "profiles": ["sk"],
+      "meaning": "Choose voluntary handle release horizontal speed."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 272,
+      "old": "loc_3E552",
+      "new": "SKMHZPulleyGrip_TrySetJumpRight",
+      "profiles": ["sk"],
+      "meaning": "Apply Right after Left on action departure."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 277,
+      "old": "loc_3E55E",
+      "new": "SKMHZPulleyGrip_SetJumpReleasePose",
+      "profiles": ["sk"],
+      "meaning": "Complete action-button handle release."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 288,
+      "old": "loc_3E58A",
+      "new": "SKMHZPulleyGrip_DetachWithoutJump",
+      "profiles": ["sk"],
+      "meaning": "Detach on old player invisibility/routine>=4/debug."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 320,
+      "old": "loc_3E5CC",
+      "new": "SKMHZPulleyCheat_SetFlagsAndPlaySound",
+      "profiles": ["sk"],
+      "meaning": "Complete exact P1 press sequence with mode-specific flag target."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 329,
+      "old": "loc_3E5E0",
+      "new": "SKMHZPulleyCheat_ResetSequenceCursor",
+      "profiles": ["sk"],
+      "meaning": "Restart pulley cheat recognition."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 332,
+      "old": "locret_3E5E6",
+      "new": "SKMHZPulleyCheat_SequenceReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish cheat recognizer without universal input rewrite."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 337,
+      "old": "byte_3E5E8",
+      "new": "SKMHZPulleyCheat_DirectionSequence",
+      "profiles": ["sk"],
+      "meaning": "Store three-left three-right three-up input pattern."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 350,
+      "old": "loc_3E5F2",
+      "new": "SKMHZPulleyGrip_CheckCheatAndTryFaceLeft",
+      "profiles": ["sk"],
+      "meaning": "Run retained rider's nonjump input policy."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 356,
+      "old": "loc_3E600",
+      "new": "SKMHZPulleyGrip_TryFaceRight",
+      "profiles": ["sk"],
+      "meaning": "Apply Right after Left for rider facing."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 361,
+      "old": "loc_3E60C",
+      "new": "SKMHZPulleyGrip_SyncFacingAndReadDown",
+      "profiles": ["sk"],
+      "meaning": "Choose current hanging pose and movement request."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 372,
+      "old": "loc_3E632",
+      "new": "SKMHZPulleyGrip_TryPlayPullSound",
+      "profiles": ["sk"],
+      "meaning": "Gate pulley sound separately from held-Down extension."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 380,
+      "old": "loc_3E646",
+      "new": "SKMHZPulleyGrip_PlaceRiderAtGrip",
+      "profiles": ["sk"],
+      "meaning": "Place retained hanging player before length animation."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 385,
+      "old": "loc_3E658",
+      "new": "SKMHZPulleyGrip_PickExtendedRiderPose",
+      "profiles": ["sk"],
+      "meaning": "Choose direct hanging player frame from current length."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 393,
+      "old": "loc_3E66C",
+      "new": "SKMHZPulleyGrip_UploadRiderPose",
+      "profiles": ["sk"],
+      "meaning": "Finish retained or newly captured player graphics."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 403,
+      "old": "loc_3E682",
+      "new": "SKMHZPulleyGrip_TickCaptureCooldown",
+      "profiles": ["sk"],
+      "meaning": "Throttle inactive rider acquisition."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 409,
+      "old": "loc_3E690",
+      "new": "SKMHZPulleyGrip_TryCaptureRider",
+      "profiles": ["sk"],
+      "meaning": "Acquire player below handle in exact rectangle."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "original_line": 446,
+      "old": "locret_3E71E",
+      "new": "SKMHZPulleyGrip_CaptureReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish selected free-player handling."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 24,
+      "old": "loc_3EAA8",
+      "new": "SKMHZStickVine_InitDisplaySegments",
+      "profiles": ["sk"],
+      "meaning": "Fill required composite then activate idle controller."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 34,
+      "old": "loc_3EAC4",
+      "new": "SKMHZStickVine_DeleteWithoutDisplay",
+      "profiles": ["sk"],
+      "meaning": "Abort missing-display sticky vine."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 38,
+      "old": "loc_3EACA",
+      "new": "SKMHZStickVine_CheckPlayersAndCull",
+      "profiles": ["sk"],
+      "meaning": "Find a player to pull on later updates."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 46,
+      "old": "loc_3EADA",
+      "new": "SKMHZStickVine_TrySelectPlayer",
+      "profiles": ["sk"],
+      "meaning": "Latch player handle from wrapped proximity rectangle."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 66,
+      "old": "locret_3EB24",
+      "new": "SKMHZStickVine_PlayerSelectReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish one proximity test."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 70,
+      "old": "loc_3EB26",
+      "new": "SKMHZStickVine_TrackPlayerAndCheckDash",
+      "profiles": ["sk"],
+      "meaning": "Track selected handle with spindash memory."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 77,
+      "old": "loc_3EB3C",
+      "new": "SKMHZStickVine_PlaceSegmentsAndPull",
+      "profiles": ["sk"],
+      "meaning": "Run active tether geometry before player correction."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 85,
+      "old": "loc_3EB50",
+      "new": "SKMHZStickVine_RecoilFromSavedEndpoint",
+      "profiles": ["sk"],
+      "meaning": "Return detached vine endpoint toward root after delayed spindash."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 100,
+      "old": "loc_3EB74",
+      "new": "SKMHZStickVine_RetractPositiveX",
+      "profiles": ["sk"],
+      "meaning": "Retract right-side saved endpoint."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 105,
+      "old": "loc_3EB7A",
+      "new": "SKMHZStickVine_SetEndpointXAndCheckY",
+      "profiles": ["sk"],
+      "meaning": "Commit X recovery and inspect saved endpoint Y side."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 126,
+      "old": "loc_3EBBA",
+      "new": "SKMHZStickVine_ReturnFromBelowRoot",
+      "profiles": ["sk"],
+      "meaning": "Choose ballistic upward continuation or direct recovery."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 137,
+      "old": "loc_3EBD4",
+      "new": "SKMHZStickVine_RetractBelowRoot",
+      "profiles": ["sk"],
+      "meaning": "Move nonballistic lower endpoint toward root."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 145,
+      "old": "loc_3EBEE",
+      "new": "SKMHZStickVine_TryReturnToIdle",
+      "profiles": ["sk"],
+      "meaning": "Finish recoil mode selection."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 150,
+      "old": "loc_3EBF8",
+      "new": "SKMHZStickVine_CullInvisibleRoot",
+      "profiles": ["sk"],
+      "meaning": "Apply controller lifetime after idle/tracking/recoil."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 159,
+      "old": "loc_3EC0E",
+      "new": "SKMHZStickVine_ClearVineRespawnBit",
+      "profiles": ["sk"],
+      "meaning": "Release source placement on custom range failure."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 165,
+      "old": "loc_3EC1A",
+      "new": "SKMHZStickVine_DeleteDisplayAndRoot",
+      "profiles": ["sk"],
+      "meaning": "Remove both vine actors after root range exit."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 186,
+      "old": "loc_3EC4A",
+      "new": "SKMHZStickVine_StepSegmentPosition",
+      "profiles": ["sk"],
+      "meaning": "Advance interpolated geometry toward saved endpoint."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 190,
+      "old": "loc_3EC4E",
+      "new": "SKMHZStickVine_PlaceSegmentsBackward",
+      "profiles": ["sk"],
+      "meaning": "Store tether interpolation without changing frame words."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 212,
+      "old": "loc_3EC70",
+      "new": "SKMHZStickVine_CalcAbsPullY",
+      "profiles": ["sk"],
+      "meaning": "Prepare second component of Manhattan pull strength."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 217,
+      "old": "loc_3EC76",
+      "new": "SKMHZStickVine_ApplyDirectionalPull",
+      "profiles": ["sk"],
+      "meaning": "Correct player LONG position toward root."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 236,
+      "old": "loc_3ECAA",
+      "new": "SKMHZStickVine_GetGroundPullMagnitude",
+      "profiles": ["sk"],
+      "meaning": "Prepare grounded pull magnitude."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 242,
+      "old": "loc_3ECB2",
+      "new": "SKMHZStickVine_GetGroundSpeedMagnitude",
+      "profiles": ["sk"],
+      "meaning": "Read grounded player speed after positional correction."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 247,
+      "old": "loc_3ECBA",
+      "new": "SKMHZStickVine_TryDampGroundSpeed",
+      "profiles": ["sk"],
+      "meaning": "Apply conditional grounded slowdown."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 255,
+      "old": "loc_3ECCC",
+      "new": "SKMHZStickVine_TickRecoilDelay",
+      "profiles": ["sk"],
+      "meaning": "Detach geometric endpoint after remembered spindash ends."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 269,
+      "old": "loc_3ED02",
+      "new": "SKMHZStickVine_ClearPlayerPush",
+      "profiles": ["sk"],
+      "meaning": "Finish pull and optional recoil selection."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "original_line": 276,
+      "old": "loc_3ED0A",
+      "new": "SKMHZStickVine_DrawVineDisplay",
+      "profiles": ["sk"],
+      "meaning": "Display required eight-record vine geometry."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 23,
+      "old": "loc_22608",
+      "new": "SKMHZSwingVine_TryAllocateNextLink",
+      "profiles": ["sk"],
+      "meaning": "Extend allocated vine chain by another actor."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 29,
+      "old": "loc_2261A",
+      "new": "SKMHZSwingVine_InitLinkAndUpdateEnd",
+      "profiles": ["sk"],
+      "meaning": "Configure successful chain link with cumulative index."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 44,
+      "old": "loc_22654",
+      "new": "SKMHZSwingVine_EnterSwingWait",
+      "profiles": ["sk"],
+      "meaning": "Activate root after complete or incomplete chain setup."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 61,
+      "old": "loc_2267E",
+      "new": "SKMHZSwingVine_WaitForFastCapture",
+      "profiles": ["sk"],
+      "meaning": "Watch combined endpoint player-state bytes before powered swing."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 69,
+      "old": "loc_22690",
+      "new": "SKMHZSwingVine_BeginPoweredSwing",
+      "profiles": ["sk"],
+      "meaning": "Arm rotation after fast endpoint capture."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 76,
+      "old": "loc_226AC",
+      "new": "SKMHZSwingVine_DrawAfterWait",
+      "profiles": ["sk"],
+      "meaning": "Finish wait/power-selection state."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 80,
+      "old": "loc_226B0",
+      "new": "SKMHZSwingVine_CalcAbsPoweredAngle",
+      "profiles": ["sk"],
+      "meaning": "Drive powered rotation with angle-dependent step."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 88,
+      "old": "loc_226C2",
+      "new": "SKMHZSwingVine_StepPoweredSwing",
+      "profiles": ["sk"],
+      "meaning": "Advance full root angle WORD."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 99,
+      "old": "loc_226E0",
+      "new": "SKMHZSwingVine_SetPoweredPriority",
+      "profiles": ["sk"],
+      "meaning": "Choose powered-root queue priority."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 105,
+      "old": "loc_226F2",
+      "new": "SKMHZSwingVine_TryForceP1Camera",
+      "profiles": ["sk"],
+      "meaning": "Request scroll anchor while P1 attached."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 112,
+      "old": "loc_2270A",
+      "new": "SKMHZSwingVine_TryBeginDamping",
+      "profiles": ["sk"],
+      "meaning": "Select no-rider settling state."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 127,
+      "old": "loc_22744",
+      "new": "SKMHZSwingVine_DrawAfterPoweredSwing",
+      "profiles": ["sk"],
+      "meaning": "Finish current powered state."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 131,
+      "old": "loc_22748",
+      "new": "SKMHZSwingVine_StepPositiveDamping",
+      "profiles": ["sk"],
+      "meaning": "Integrate settling angular oscillator with high-byte force."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 152,
+      "old": "loc_22788",
+      "new": "SKMHZSwingVine_FinishDamping",
+      "profiles": ["sk"],
+      "meaning": "Return root to wait at selected phase crossing."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 162,
+      "old": "loc_227AC",
+      "new": "SKMHZSwingVine_StepNegativeDamping",
+      "profiles": ["sk"],
+      "meaning": "Integrate opposite settling half-cycle."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 175,
+      "old": "loc_227D6",
+      "new": "SKMHZSwingVine_ApplySettlingAngle",
+      "profiles": ["sk"],
+      "meaning": "Apply current damping phase even after stop callback selection."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 183,
+      "old": "loc_227F0",
+      "new": "SKMHZSwingVine_SetDampingAndTestRestart",
+      "profiles": ["sk"],
+      "meaning": "Share damped phase-derived parameter and inspect new latch."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 195,
+      "old": "loc_22812",
+      "new": "SKMHZSwingVine_RestartPoweredSwing",
+      "profiles": ["sk"],
+      "meaning": "Resume powered rotation after a new fast capture."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 200,
+      "old": "loc_22824",
+      "new": "SKMHZSwingVine_DrawOrCullChain",
+      "profiles": ["sk"],
+      "meaning": "Own root/chain lifetime from coarse rootX."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 209,
+      "old": "loc_2283E",
+      "new": "SKMHZSwingVine_BeginChainCleanup",
+      "profiles": ["sk"],
+      "meaning": "Prepare linked prefix deletion."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 215,
+      "old": "loc_2284A",
+      "new": "SKMHZSwingVine_DeleteChainLink",
+      "profiles": ["sk"],
+      "meaning": "Walk successful chain prefix safely before actor clear."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 221,
+      "old": "loc_2285A",
+      "new": "SKMHZSwingVine_ClearRootRespawnBit",
+      "profiles": ["sk"],
+      "meaning": "Release remembered placement on root range exit."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 227,
+      "old": "loc_22866",
+      "new": "SKMHZSwingVine_DeleteSwingRoot",
+      "profiles": ["sk"],
+      "meaning": "Remove root actor directly."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 231,
+      "old": "loc_2286C",
+      "new": "SKMHZSwingVine_FollowPreviousLink",
+      "profiles": ["sk"],
+      "meaning": "Update intermediate orientation sprite."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 265,
+      "old": "loc_228CC",
+      "new": "SKMHZSwingVine_MoveEndAndSaveOldX",
+      "profiles": ["sk"],
+      "meaning": "Run endpoint geometry and player hooks."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 273,
+      "old": "loc_228E2",
+      "new": "SKMHZSwingVine_TrySaveOldEndY",
+      "profiles": ["sk"],
+      "meaning": "Retain last pre-change endpoint Y."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 278,
+      "old": "loc_228EC",
+      "new": "SKMHZSwingVine_UpdateEndRiders",
+      "profiles": ["sk"],
+      "meaning": "Handle manual captures and attached poses."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 292,
+      "old": "loc_22912",
+      "new": "SKMHZSwingVine_DrawEmptyOrIdleEnd",
+      "profiles": ["sk"],
+      "meaning": "Display endpoint handle frame22hex."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 296,
+      "old": "locret_22918",
+      "new": "SKMHZSwingVine_SkipOccupiedEndDraw",
+      "profiles": ["sk"],
+      "meaning": "Suppress endpoint sprite during occupied nonzero mode."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 300,
+      "old": "loc_2291A",
+      "new": "SKMHZSwingVine_UpdateRiderOrCapture",
+      "profiles": ["sk"],
+      "meaning": "Run one player's endpoint attachment state."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 328,
+      "old": "loc_2297E",
+      "new": "SKMHZSwingVine_TrySetJumpRight",
+      "profiles": ["sk"],
+      "meaning": "Process Right after Left on nonpowered action release."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 333,
+      "old": "loc_2298A",
+      "new": "SKMHZSwingVine_AddJumpImpulseY",
+      "profiles": ["sk"],
+      "meaning": "Finish nonpowered action velocity construction."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 336,
+      "old": "loc_22990",
+      "new": "SKMHZSwingVine_SetJumpReleasePose",
+      "profiles": ["sk"],
+      "meaning": "Complete mode-specific action departure."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 346,
+      "old": "loc_229B6",
+      "new": "SKMHZSwingVine_LaunchAlongLink",
+      "profiles": ["sk"],
+      "meaning": "Assign mode1 action velocity from exact root orientation."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 364,
+      "old": "loc_229E4",
+      "new": "SKMHZSwingVine_DetachWithoutJump",
+      "profiles": ["sk"],
+      "meaning": "Detach on previous invisibility/routine>=4/debug."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 371,
+      "old": "loc_229F2",
+      "new": "SKMHZSwingVine_PlaceIdleRider",
+      "profiles": ["sk"],
+      "meaning": "Handle retained rider with no action press."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 384,
+      "old": "loc_22A1E",
+      "new": "SKMHZSwingVine_ApplyIdleRiderFrame",
+      "profiles": ["sk"],
+      "meaning": "Select stationary hanging player frame."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 389,
+      "old": "loc_22A28",
+      "new": "SKMHZSwingVine_ApplyFacingAndUploadPose",
+      "profiles": ["sk"],
+      "meaning": "Finish any retained endpoint player visual."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 401,
+      "old": "byte_22A4C",
+      "new": "SKMHZSwingVine_IdleRiderFrames",
+      "profiles": ["sk"],
+      "meaning": "Store direct hanging frame selectors by rounded phase."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 406,
+      "old": "loc_22A5C",
+      "new": "SKMHZSwingVine_GetMovingPoseAngle",
+      "profiles": ["sk"],
+      "meaning": "Handle retained rider while endpoint mode nonzero."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 414,
+      "old": "loc_22A70",
+      "new": "SKMHZSwingVine_LoadFrameAndPoseOffset",
+      "profiles": ["sk"],
+      "meaning": "Decode actual moving-pose bank and interleaved coordinates."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 429,
+      "old": "loc_22A9E",
+      "new": "SKMHZSwingVine_ProjectMovingRider",
+      "profiles": ["sk"],
+      "meaning": "Position moving rider from previous-link geometry."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 448,
+      "old": "byte_22AD8",
+      "new": "SKMHZSwingVine_MovingRiderFrames",
+      "profiles": ["sk"],
+      "meaning": "Store duplicated frame bank plus boundary X coordinate."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 466,
+      "old": "byte_22AE9",
+      "new": "SKMHZSwingVine_MovingRiderYOffsets",
+      "profiles": ["sk"],
+      "meaning": "Continue actual X/Y pose pairs across preceding label boundary."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 485,
+      "old": "loc_22AF8",
+      "new": "SKMHZSwingVine_TickCaptureCooldown",
+      "profiles": ["sk"],
+      "meaning": "Throttle free-player endpoint acquisition."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 491,
+      "old": "loc_22B06",
+      "new": "SKMHZSwingVine_CheckCaptureBounds",
+      "profiles": ["sk"],
+      "meaning": "Gate free endpoint capture with literal speed asymmetry."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 507,
+      "old": "loc_22B3C",
+      "new": "SKMHZSwingVine_CaptureAndCheckFastGrab",
+      "profiles": ["sk"],
+      "meaning": "Capture player then preserve slow-path control-gate reentry."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "original_line": 531,
+      "old": "locret_22B9C",
+      "new": "SKMHZSwingVine_CaptureReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish endpoint free-player helper."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/twisted_vine.s",
+      "original_line": 14,
+      "old": "loc_3DCB4",
+      "new": "SKMHZTwistVine_StartOrdinaryVine",
+      "profiles": ["sk"],
+      "meaning": "Select noninverted twisted-vine player policy."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/twisted_vine.s",
+      "original_line": 17,
+      "old": "loc_3DCBA",
+      "new": "SKMHZTwistVine_UpdateOrdinaryRiders",
+      "profiles": ["sk"],
+      "meaning": "Run ordinary orientation with literal standing selector progression."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/twisted_vine.s",
+      "original_line": 60,
+      "old": "loc_3DD48",
+      "new": "SKMHZTwistVine_TryCaptureFromRight",
+      "profiles": ["sk"],
+      "meaning": "Capture ordinary orientation entrant moving left."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/twisted_vine.s",
+      "original_line": 83,
+      "old": "locret_3DD9C",
+      "new": "SKMHZTwistVine_OrdinaryRideReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish ordinary selected-player processing."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/twisted_vine.s",
+      "original_line": 87,
+      "old": "loc_3DD9E",
+      "new": "SKMHZTwistVine_GetOrdinaryAbsSpeed",
+      "profiles": ["sk"],
+      "meaning": "Start active ordinary orientation maintenance."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/twisted_vine.s",
+      "original_line": 92,
+      "old": "loc_3DDA6",
+      "new": "SKMHZTwistVine_CheckOrdinaryRide",
+      "profiles": ["sk"],
+      "meaning": "Choose active ordinary ride or release boundary."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/twisted_vine.s",
+      "original_line": 114,
+      "old": "loc_3DDF4",
+      "new": "SKMHZTwistVine_ReleaseOrdinaryLeftEnd",
+      "profiles": ["sk"],
+      "meaning": "Detach ordinary rider past left span."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/twisted_vine.s",
+      "original_line": 123,
+      "old": "loc_3DE12",
+      "new": "SKMHZTwistVine_ClearOrdinarySlowFlip",
+      "profiles": ["sk"],
+      "meaning": "Prepare low-speed ordinary bailout."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/twisted_vine.s",
+      "original_line": 126,
+      "old": "loc_3DE18",
+      "new": "SKMHZTwistVine_ReleaseOrdinaryRider",
+      "profiles": ["sk"],
+      "meaning": "Detach too-slow or already-airborne ordinary rider."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/twisted_vine.s",
+      "original_line": 135,
+      "old": "loc_3DE36",
+      "new": "SKMHZTwistVine_ProjectOrdinaryRider",
+      "profiles": ["sk"],
+      "meaning": "Position supported ordinary rider from worldX phase."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/twisted_vine.s",
+      "original_line": 156,
+      "old": "loc_3DE6A",
+      "new": "SKMHZTwistVine_UpdateInvertedRiders",
+      "profiles": ["sk"],
+      "meaning": "Run root-status0-set orientation player policy."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/twisted_vine.s",
+      "original_line": 198,
+      "old": "locret_3DEF2",
+      "new": "SKMHZTwistVine_InvertedRideReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish inverted selected-player helper."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/twisted_vine.s",
+      "original_line": 202,
+      "old": "loc_3DEF4",
+      "new": "SKMHZTwistVine_TryCaptureFromLeft",
+      "profiles": ["sk"],
+      "meaning": "Capture inverted entrant moving right."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/twisted_vine.s",
+      "original_line": 226,
+      "old": "loc_3DF48",
+      "new": "SKMHZTwistVine_GetInvertedAbsSpeed",
+      "profiles": ["sk"],
+      "meaning": "Start inverted active maintenance."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/twisted_vine.s",
+      "original_line": 231,
+      "old": "loc_3DF50",
+      "new": "SKMHZTwistVine_CheckInvertedRide",
+      "profiles": ["sk"],
+      "meaning": "Choose inverted projection or boundary release."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/twisted_vine.s",
+      "original_line": 250,
+      "old": "loc_3DF92",
+      "new": "SKMHZTwistVine_ReflectInvertedLeftExit",
+      "profiles": ["sk"],
+      "meaning": "Detach past inverted left span and reverse travel orientation."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/twisted_vine.s",
+      "original_line": 262,
+      "old": "loc_3DFBE",
+      "new": "SKMHZTwistVine_ClearInvertedSlowFlip",
+      "profiles": ["sk"],
+      "meaning": "Prepare inverted slow-rider bailout."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/twisted_vine.s",
+      "original_line": 265,
+      "old": "loc_3DFC4",
+      "new": "SKMHZTwistVine_ReleaseInvertedRider",
+      "profiles": ["sk"],
+      "meaning": "Release too-slow or airborne inverted rider."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/twisted_vine.s",
+      "original_line": 274,
+      "old": "loc_3DFE2",
+      "new": "SKMHZTwistVine_ProjectInvertedRider",
+      "profiles": ["sk"],
+      "meaning": "Position inverted supported rider without frame decoder."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
+      "original_line": 16,
+      "old": "loc_3F08C",
+      "new": "SKMHZVertBar_UpdateSolidAndRiders",
+      "profiles": ["sk"],
+      "meaning": "Run solid vertical bar and selected-player rotation."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
+      "original_line": 36,
+      "old": "loc_3F0D2",
+      "new": "SKMHZVertBar_DrawVerticalBar",
+      "profiles": ["sk"],
+      "meaning": "Finish vertical bar update."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
+      "original_line": 55,
+      "old": "loc_3F10A",
+      "new": "SKMHZVertBar_UploadRiderTiles",
+      "profiles": ["sk"],
+      "meaning": "Finish selected pose or automatic launch through DPLC."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
+      "original_line": 78,
+      "old": "loc_3F13C",
+      "new": "SKMHZVertBar_ApplyRiderXOffset",
+      "profiles": ["sk"],
+      "meaning": "Commit manual player horizontal pose."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
+      "original_line": 85,
+      "old": "RawAni_3F146",
+      "new": "SKMHZVertBar_RiderPoseFrames",
+      "profiles": ["sk"],
+      "meaning": "Store sixteen phase-sector pose selectors."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
+      "original_line": 87,
+      "old": "byte_3F156",
+      "new": "SKMHZVertBar_RiderPoseXOffsets",
+      "profiles": ["sk"],
+      "meaning": "Store direct X offsets per phase sector."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
+      "original_line": 92,
+      "old": "loc_3F166",
+      "new": "SKMHZVertBar_SetManualJumpYSpeed",
+      "profiles": ["sk"],
+      "meaning": "Choose manual release impulse."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
+      "original_line": 98,
+      "old": "loc_3F17A",
+      "new": "SKMHZVertBar_StartManualCooldown",
+      "profiles": ["sk"],
+      "meaning": "Start manual or invalid-player release."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
+      "original_line": 105,
+      "old": "loc_3F190",
+      "new": "SKMHZVertBar_SetReleasedRollPose",
+      "profiles": ["sk"],
+      "meaning": "Complete manual vertical-bar departure."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
+      "original_line": 118,
+      "old": "loc_3F1C8",
+      "new": "SKMHZVertBar_LaunchByFacing",
+      "profiles": ["sk"],
+      "meaning": "Release after one rotation phase reaches exact F8hex."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
+      "original_line": 131,
+      "old": "loc_3F200",
+      "new": "SKMHZVertBar_SetAutoLaunchPose",
+      "profiles": ["sk"],
+      "meaning": "Finish full-rotation horizontal launch."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
+      "original_line": 147,
+      "old": "loc_3F246",
+      "new": "SKMHZVertBar_TickCaptureCooldown",
+      "profiles": ["sk"],
+      "meaning": "Wait after manual or automatic release."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
+      "original_line": 154,
+      "old": "loc_3F252",
+      "new": "SKMHZVertBar_CheckLeftwardEntry",
+      "profiles": ["sk"],
+      "meaning": "Capture negative-vx player in literal left-side strip."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
+      "original_line": 173,
+      "old": "loc_3F28C",
+      "new": "SKMHZVertBar_CheckRightwardEntry",
+      "profiles": ["sk"],
+      "meaning": "Capture nonnegative-vx player only at sufficient speed."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
+      "original_line": 188,
+      "old": "loc_3F2BE",
+      "new": "SKMHZVertBar_CheckRiderEligibility",
+      "profiles": ["sk"],
+      "meaning": "Complete capture gates and player body conversion."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
+      "original_line": 210,
+      "old": "loc_3F316",
+      "new": "SKMHZVertBar_PlaceAndLatchRider",
+      "profiles": ["sk"],
+      "meaning": "Commit grounded rotation capture."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
+      "original_line": 223,
+      "old": "loc_3F346",
+      "new": "SKMHZVertBar_UploadPoseAndPlayGrab",
+      "profiles": ["sk"],
+      "meaning": "Complete bar acquisition through graphics and sound."
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
+      "original_line": 232,
+      "old": "locret_3F35E",
+      "new": "SKMHZVertBar_CaptureReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish selected inactive-player helper."
+    },
+    {
+      "source": "src/rendering/zones/mhz/sk/tile_animation.s",
+      "original_line": 43,
+      "old": "loc_28110",
+      "new": "SKMHZTiles_AdvanceToSecondChannel",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZTiles_AdvanceToSecondCyclicBackgroundChannel"
+    },
+    {
+      "source": "src/rendering/zones/mhz/sk/tile_animation.s",
+      "original_line": 47,
+      "old": "word_28114",
+      "new": "SKMHZTiles_FirstChannelDmaCounts",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKMHZTiles_FirstChannelFourSplitWordCountPairs"
+    },
+    {
+      "source": "src/rendering/zones/mhz/sk/tile_animation.s",
+      "original_line": 58,
+      "old": "loc_28124",
+      "new": "SKMHZTiles_UpdateSecondChannel",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZTiles_UpdateSecondSixtyFourPhaseCyclicChannel"
+    },
+    {
+      "source": "src/rendering/zones/mhz/sk/tile_animation.s",
+      "original_line": 91,
+      "old": "loc_28180",
+      "new": "SKMHZTiles_AdvanceAuxPhase",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZTiles_AdvanceCursorAndWrapAuxiliaryEvenPhase"
+    },
+    {
+      "source": "src/rendering/zones/mhz/sk/tile_animation.s",
+      "original_line": 99,
+      "old": "loc_28190",
+      "new": "SKMHZTiles_SetPhaseAndRunScripts",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMHZTiles_StoreAuxiliaryPhaseAndRunRemainingScripts"
+    },
+    {
+      "source": "src/rendering/zones/mhz/sk/tile_animation.s",
+      "original_line": 103,
+      "old": "word_28198",
+      "new": "SKMHZTiles_SecondChannelDmaCounts",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKMHZTiles_SecondChannelEightSplitWordCountPairs"
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/game/level/sk/scroll_events.s",
+      "tokens": [
+        [41, 1, 10, ""],
+        [42, 1, 53, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act1_screen.s",
+      "tokens": [
+        [6, 1, 3, ""],
+        [8, 1, 0, ""],
+        [10, 1, 3, ""],
+        [12, 1, 3, ""],
+        [14, 1, 2, ""],
+        [15, 0, 0, ""],
+        [19, 1, 1, ""],
+        [25, 0, 1, ""],
+        [28, 0, 2, ""],
+        [31, 0, 3, ""],
+        [36, 1, 6, ""],
+        [38, 1, 6, ""],
+        [42, 1, 4, ""],
+        [44, 0, 4, ""],
+        [46, 1, 5, ""],
+        [49, 0, 5, ""],
+        [51, 1, 6, ""],
+        [53, 1, 6, ""],
+        [58, 1, 6, ""],
+        [60, 0, 6, ""],
+        [65, 1, 7, ""],
+        [68, 1, 7, ""],
+        [70, 0, 7, ""],
+        [72, 1, 8, ""],
+        [74, 0, 8, ""],
+        [86, 1, 9, ""],
+        [114, 0, 9, ""],
+        [157, 0, 10, ""],
+        [161, 1, 11, ""],
+        [175, 0, 11, ""],
+        [181, 0, 12, ""],
+        [183, 1, 14, ""],
+        [185, 1, 13, ""],
+        [188, 1, 13, ""],
+        [191, 0, 13, ""],
+        [193, 1, 14, ""],
+        [196, 0, 14, ""],
+        [198, 3, 12, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "tokens": [
+        [5, 1, 15, ""],
+        [7, 1, 15, ""],
+        [10, 1, 16, ""],
+        [11, 0, 15, ""],
+        [13, 0, 16, ""],
+        [27, 1, 17, ""],
+        [28, 1, 20, ""],
+        [29, 1, 22, ""],
+        [30, 1, 28, ""],
+        [31, 1, 30, ""],
+        [32, 1, 33, ""],
+        [33, 1, 36, ""],
+        [34, 1, 37, ""],
+        [35, 1, 38, ""],
+        [36, 1, 39, ""],
+        [37, 0, 17, ""],
+        [39, 1, 18, ""],
+        [41, 1, 18, ""],
+        [49, 1, 21, ""],
+        [50, 0, 18, ""],
+        [52, 0, 19, ""],
+        [59, 0, 20, ""],
+        [61, 0, 21, ""],
+        [65, 1, 27, ""],
+        [67, 1, 27, ""],
+        [68, 0, 22, ""],
+        [70, 1, 23, ""],
+        [78, 1, 29, ""],
+        [79, 0, 23, ""],
+        [81, 1, 24, ""],
+        [83, 1, 26, ""],
+        [84, 0, 24, ""],
+        [89, 0, 25, ""],
+        [92, 3, 25, ""],
+        [104, 1, 30, ""],
+        [105, 0, 26, ""],
+        [107, 0, 27, ""],
+        [114, 0, 28, ""],
+        [116, 0, 29, ""],
+        [120, 1, 19, ""],
+        [122, 1, 19, ""],
+        [123, 0, 30, ""],
+        [125, 1, 32, ""],
+        [127, 1, 39, ""],
+        [137, 1, 82, ""],
+        [139, 1, 31, ""],
+        [141, 0, 31, ""],
+        [150, 0, 32, ""],
+        [159, 1, 39, ""],
+        [164, 0, 33, ""],
+        [168, 1, 39, ""],
+        [173, 1, 35, ""],
+        [174, 2, 62, ""],
+        [176, 1, 35, ""],
+        [177, 2, 63, ""],
+        [180, 0, 34, ""],
+        [182, 1, 35, ""],
+        [183, 2, 66, ""],
+        [187, 1, 35, ""],
+        [188, 2, 66, ""],
+        [192, 3, 34, ""],
+        [193, 0, 35, ""],
+        [195, 0, 36, ""],
+        [197, 1, 39, ""],
+        [201, 0, 37, ""],
+        [205, 1, 39, ""],
+        [210, 0, 38, ""],
+        [219, 1, 39, ""],
+        [223, 0, 39, ""],
+        [232, 1, 40, ""],
+        [236, 0, 40, ""],
+        [275, 1, 42, ""],
+        [280, 0, 41, ""],
+        [285, 3, 41, ""],
+        [286, 1, 52, ""],
+        [287, 0, 42, ""],
+        [289, 1, 44, ""],
+        [294, 0, 43, ""],
+        [299, 3, 43, ""],
+        [300, 0, 44, ""],
+        [302, 1, 52, ""],
+        [306, 1, 50, ""],
+        [317, 1, 45, ""],
+        [319, 0, 45, ""],
+        [331, 1, 46, ""],
+        [333, 0, 46, ""],
+        [341, 0, 47, ""],
+        [347, 3, 47, ""],
+        [352, 0, 48, ""],
+        [354, 1, 52, ""],
+        [362, 1, 49, ""],
+        [365, 0, 49, ""],
+        [366, 3, 48, ""],
+        [367, 1, 52, ""],
+        [368, 0, 50, ""],
+        [371, 0, 51, ""],
+        [374, 3, 51, ""],
+        [375, 0, 52, ""],
+        [377, 0, 53, ""],
+        [382, 1, 54, ""],
+        [384, 0, 54, ""],
+        [386, 1, 57, ""],
+        [388, 1, 55, ""],
+        [391, 1, 57, ""],
+        [396, 1, 58, ""],
+        [397, 0, 55, ""],
+        [410, 1, 82, ""],
+        [412, 1, 56, ""],
+        [414, 0, 56, ""],
+        [417, 1, 57, ""],
+        [420, 0, 57, ""],
+        [422, 0, 58, ""],
+        [433, 1, 59, ""],
+        [435, 0, 59, ""],
+        [438, 1, 60, ""],
+        [442, 1, 61, ""],
+        [444, 1, 61, ""],
+        [445, 0, 60, ""],
+        [448, 1, 61, ""],
+        [450, 0, 61, ""],
+        [452, 0, 62, ""],
+        [453, 2, 64, ""],
+        [462, 1, 64, ""],
+        [463, 0, 63, ""],
+        [464, 2, 64, ""],
+        [473, 0, 64, ""],
+        [475, 1, 65, ""],
+        [477, 0, 65, ""],
+        [479, 0, 66, ""],
+        [480, 2, 69, ""],
+        [491, 1, 68, ""],
+        [492, 0, 67, ""],
+        [495, 3, 67, ""],
+        [496, 0, 68, ""],
+        [499, 0, 69, ""],
+        [501, 1, 70, ""],
+        [503, 1, 71, ""],
+        [504, 0, 70, ""],
+        [506, 0, 71, ""],
+        [509, 1, 72, ""],
+        [511, 1, 73, ""],
+        [513, 0, 72, ""],
+        [517, 1, 81, ""],
+        [521, 1, 73, ""],
+        [523, 0, 73, ""],
+        [525, 0, 74, ""],
+        [526, 2, 75, ""],
+        [530, 0, 75, ""],
+        [534, 0, 76, ""],
+        [540, 1, 77, ""],
+        [542, 1, 77, ""],
+        [546, 1, 78, ""],
+        [548, 1, 78, ""],
+        [549, 0, 77, ""],
+        [553, 0, 78, ""],
+        [558, 1, 79, ""],
+        [560, 1, 79, ""],
+        [564, 0, 79, ""],
+        [568, 1, 80, ""],
+        [571, 0, 80, ""],
+        [573, 0, 81, ""],
+        [593, 0, 82, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "tokens": [
+        [8, 1, 83, ""],
+        [12, 1, 83, ""],
+        [14, 1, 83, ""],
+        [18, 0, 83, ""],
+        [22, 0, 84, ""],
+        [25, 3, 84, ""],
+        [34, 1, 85, ""],
+        [35, 1, 87, ""],
+        [36, 1, 96, ""],
+        [37, 1, 97, ""],
+        [38, 1, 101, ""],
+        [39, 0, 85, ""],
+        [41, 1, 86, ""],
+        [43, 0, 86, ""],
+        [45, 0, 87, ""],
+        [47, 1, 88, ""],
+        [52, 1, 97, ""],
+        [53, 0, 88, ""],
+        [55, 1, 89, ""],
+        [56, 1, 95, ""],
+        [59, 1, 95, ""],
+        [61, 1, 95, ""],
+        [62, 0, 89, ""],
+        [65, 1, 90, ""],
+        [68, 1, 90, ""],
+        [70, 0, 90, ""],
+        [72, 1, 91, ""],
+        [74, 0, 91, ""],
+        [76, 1, 93, ""],
+        [79, 1, 92, ""],
+        [81, 0, 92, ""],
+        [83, 1, 93, ""],
+        [85, 1, 93, ""],
+        [87, 0, 93, ""],
+        [90, 1, 94, ""],
+        [93, 1, 94, ""],
+        [95, 1, 94, ""],
+        [97, 0, 94, ""],
+        [99, 1, 95, ""],
+        [102, 0, 95, ""],
+        [105, 0, 96, ""],
+        [112, 0, 97, ""],
+        [116, 1, 100, ""],
+        [133, 0, 98, ""],
+        [135, 3, 98, ""],
+        [139, 1, 99, ""],
+        [140, 2, 76, ""],
+        [144, 1, 99, ""],
+        [145, 2, 74, ""],
+        [148, 1, 99, ""],
+        [149, 2, 74, ""],
+        [151, 0, 99, ""],
+        [162, 0, 100, ""],
+        [164, 0, 101, ""],
+        [186, 1, 103, ""],
+        [189, 1, 102, ""],
+        [191, 0, 102, ""],
+        [197, 0, 103, ""],
+        [207, 1, 104, ""],
+        [210, 1, 104, ""],
+        [215, 0, 104, ""],
+        [218, 1, 122, ""],
+        [223, 0, 105, ""],
+        [226, 1, 106, ""],
+        [228, 1, 106, ""],
+        [230, 1, 106, ""],
+        [232, 1, 107, ""],
+        [233, 0, 106, ""],
+        [236, 3, 105, ""],
+        [238, 0, 107, ""],
+        [239, 1, 108, ""],
+        [240, 0, 108, ""],
+        [241, 1, 109, ""],
+        [242, 1, 111, ""],
+        [243, 1, 113, ""],
+        [244, 1, 113, ""],
+        [245, 1, 115, ""],
+        [246, 0, 109, ""],
+        [248, 1, 110, ""],
+        [250, 1, 117, ""],
+        [252, 0, 110, ""],
+        [254, 1, 118, ""],
+        [256, 0, 111, ""],
+        [258, 1, 112, ""],
+        [260, 1, 117, ""],
+        [262, 0, 112, ""],
+        [264, 1, 118, ""],
+        [266, 0, 113, ""],
+        [268, 1, 114, ""],
+        [270, 1, 117, ""],
+        [272, 0, 114, ""],
+        [274, 1, 119, ""],
+        [276, 0, 115, ""],
+        [278, 1, 116, ""],
+        [280, 1, 117, ""],
+        [282, 0, 116, ""],
+        [284, 1, 119, ""],
+        [286, 0, 117, ""],
+        [290, 1, 120, ""],
+        [291, 0, 118, ""],
+        [295, 1, 120, ""],
+        [296, 0, 119, ""],
+        [300, 0, 120, ""],
+        [303, 0, 121, ""],
+        [305, 3, 121, ""],
+        [319, 0, 122, ""]
+      ]
+    },
+    {
+      "source": "src/objects/enemies/sk/cluckoid.s",
+      "tokens": [[92, 2, 310, ""]]
+    },
+    {
+      "source": "src/objects/shared/sk/updraft.s",
+      "tokens": [
+        [67, 2, 263, ""],
+        [69, 2, 267, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/aiz/mappings/mhz_ride_vine.s",
+      "tokens": [
+        [2, 1, 123, ""],
+        [3, 1, 124, ""],
+        [4, 1, 125, ""],
+        [5, 1, 126, ""],
+        [6, 1, 127, ""],
+        [7, 1, 128, ""],
+        [8, 1, 129, ""],
+        [9, 1, 130, ""],
+        [10, 1, 131, ""],
+        [11, 1, 132, ""],
+        [12, 1, 133, ""],
+        [13, 1, 134, ""],
+        [14, 1, 135, ""],
+        [15, 1, 136, ""],
+        [16, 1, 137, ""],
+        [17, 1, 138, ""],
+        [18, 1, 139, ""],
+        [19, 1, 140, ""],
+        [20, 1, 141, ""],
+        [21, 1, 142, ""],
+        [22, 1, 143, ""],
+        [23, 1, 144, ""],
+        [24, 1, 145, ""],
+        [25, 1, 146, ""],
+        [26, 1, 147, ""],
+        [27, 1, 148, ""],
+        [28, 1, 149, ""],
+        [29, 1, 150, ""],
+        [30, 1, 151, ""],
+        [31, 1, 152, ""],
+        [32, 1, 153, ""],
+        [33, 1, 154, ""],
+        [34, 1, 155, ""],
+        [35, 1, 156, ""],
+        [36, 1, 157, ""],
+        [37, 1, 158, ""],
+        [38, 0, 123, ""],
+        [40, 0, 124, ""],
+        [42, 0, 125, ""],
+        [44, 0, 126, ""],
+        [46, 0, 127, ""],
+        [48, 0, 128, ""],
+        [50, 0, 129, ""],
+        [52, 0, 130, ""],
+        [54, 0, 131, ""],
+        [56, 0, 132, ""],
+        [58, 0, 133, ""],
+        [60, 0, 134, ""],
+        [62, 0, 135, ""],
+        [64, 0, 136, ""],
+        [66, 0, 137, ""],
+        [68, 0, 138, ""],
+        [70, 0, 139, ""],
+        [72, 0, 140, ""],
+        [74, 0, 141, ""],
+        [76, 0, 142, ""],
+        [78, 0, 143, ""],
+        [80, 0, 144, ""],
+        [82, 0, 145, ""],
+        [84, 0, 146, ""],
+        [86, 0, 147, ""],
+        [88, 0, 148, ""],
+        [90, 0, 149, ""],
+        [92, 0, 150, ""],
+        [94, 0, 151, ""],
+        [96, 0, 152, ""],
+        [98, 0, 153, ""],
+        [100, 0, 154, ""],
+        [102, 0, 155, ""],
+        [104, 0, 156, ""],
+        [106, 0, 157, ""],
+        [108, 0, 158, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/act2/mappings/knuckles_leaves.s",
+      "tokens": [
+        [2, 1, 159, ""],
+        [3, 0, 159, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/animations/end_propellers.s",
+      "tokens": [
+        [2, 1, 160, ""],
+        [3, 0, 160, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/animations/mushroom_cap.s",
+      "tokens": [
+        [2, 1, 161, ""],
+        [3, 1, 162, ""],
+        [4, 0, 161, ""],
+        [5, 0, 162, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/animations/mushroom_platform.s",
+      "tokens": [
+        [2, 1, 163, ""],
+        [3, 1, 164, ""],
+        [4, 0, 163, ""],
+        [5, 0, 164, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/big_leaves.s",
+      "tokens": [
+        [2, 1, 165, ""],
+        [3, 1, 166, ""],
+        [4, 1, 167, ""],
+        [5, 1, 168, ""],
+        [6, 0, 165, ""],
+        [8, 0, 166, ""],
+        [10, 0, 167, ""],
+        [12, 0, 168, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/breakable_wall.s",
+      "tokens": [
+        [2, 1, 169, ""],
+        [3, 1, 170, ""],
+        [4, 0, 169, ""],
+        [9, 0, 170, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/curled_vine.s",
+      "tokens": [
+        [2, 1, 171, ""],
+        [3, 0, 171, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/knuckles_peering.s",
+      "tokens": [
+        [2, 1, 172, ""],
+        [3, 1, 173, ""],
+        [4, 1, 174, ""],
+        [5, 1, 175, ""],
+        [6, 1, 176, ""],
+        [7, 0, 172, ""],
+        [10, 0, 173, ""],
+        [13, 0, 174, ""],
+        [16, 0, 175, ""],
+        [19, 0, 176, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/knuckles_switch_door.s",
+      "tokens": [
+        [2, 1, 177, ""],
+        [3, 0, 177, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/mushroom_cap.s",
+      "tokens": [
+        [2, 1, 178, ""],
+        [3, 1, 179, ""],
+        [4, 1, 180, ""],
+        [5, 1, 181, ""],
+        [6, 0, 178, ""],
+        [9, 0, 179, ""],
+        [12, 0, 180, ""],
+        [15, 0, 181, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/mushroom_catapult.s",
+      "tokens": [
+        [2, 1, 182, ""],
+        [3, 1, 183, ""],
+        [4, 0, 182, ""],
+        [7, 0, 183, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/mushroom_parachute.s",
+      "tokens": [
+        [2, 1, 184, ""],
+        [3, 0, 184, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/mushroom_platform.s",
+      "tokens": [
+        [2, 1, 185, ""],
+        [3, 1, 186, ""],
+        [4, 1, 187, ""],
+        [5, 0, 185, ""],
+        [11, 0, 186, ""],
+        [17, 0, 187, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/pollen_leaves.s",
+      "tokens": [
+        [2, 1, 188, ""],
+        [3, 1, 188, ""],
+        [4, 1, 189, ""],
+        [5, 1, 189, ""],
+        [6, 0, 188, ""],
+        [8, 0, 189, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/pulley_lift.s",
+      "tokens": [
+        [2, 1, 190, ""],
+        [3, 1, 191, ""],
+        [4, 1, 192, ""],
+        [5, 1, 193, ""],
+        [6, 1, 194, ""],
+        [7, 1, 195, ""],
+        [8, 1, 196, ""],
+        [9, 1, 197, ""],
+        [10, 0, 190, ""],
+        [20, 0, 191, ""],
+        [28, 0, 192, ""],
+        [32, 0, 193, ""],
+        [35, 0, 194, ""],
+        [51, 0, 195, ""],
+        [53, 0, 196, ""],
+        [55, 0, 197, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/sticky_vine.s",
+      "tokens": [
+        [2, 1, 198, ""],
+        [3, 0, 198, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/swing_bar_horizontal.s",
+      "tokens": [
+        [2, 1, 199, ""],
+        [3, 0, 199, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/swing_bar_vertical.s",
+      "tokens": [
+        [2, 1, 200, ""],
+        [3, 0, 200, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/curled_vine.s",
+      "tokens": [
+        [3, 1, 201, ""],
+        [4, 2, 214, ""],
+        [18, 2, 202, ""],
+        [19, 1, 202, ""],
+        [20, 0, 201, ""],
+        [22, 0, 202, ""],
+        [28, 1, 204, ""],
+        [32, 1, 203, ""],
+        [34, 0, 203, ""],
+        [36, 0, 204, ""],
+        [37, 1, 206, ""],
+        [40, 1, 205, ""],
+        [41, 1, 207, ""],
+        [42, 0, 205, ""],
+        [52, 0, 206, ""],
+        [63, 0, 207, ""],
+        [66, 1, 209, ""],
+        [67, 1, 208, ""],
+        [69, 1, 209, ""],
+        [70, 0, 208, ""],
+        [72, 0, 209, ""],
+        [83, 1, 211, ""],
+        [84, 0, 210, ""],
+        [94, 0, 211, ""],
+        [101, 3, 210, ""],
+        [112, 1, 212, ""],
+        [114, 0, 212, ""],
+        [116, 1, 213, ""],
+        [119, 0, 213, ""],
+        [123, 0, 214, ""],
+        [137, 1, 217, ""],
+        [139, 1, 215, ""],
+        [144, 1, 215, ""],
+        [146, 1, 216, ""],
+        [147, 0, 215, ""],
+        [153, 0, 216, ""],
+        [168, 0, 217, ""],
+        [170, 1, 218, ""],
+        [174, 1, 218, ""],
+        [176, 1, 218, ""],
+        [185, 0, 218, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
+      "tokens": [
+        [8, 2, 219, ""],
+        [9, 0, 219, ""],
+        [23, 1, 228, ""],
+        [25, 1, 223, ""],
+        [27, 1, 223, ""],
+        [29, 1, 220, ""],
+        [33, 1, 220, ""],
+        [36, 1, 220, ""],
+        [40, 0, 220, ""],
+        [42, 1, 221, ""],
+        [46, 1, 221, ""],
+        [49, 1, 221, ""],
+        [53, 0, 221, ""],
+        [55, 1, 222, ""],
+        [57, 1, 225, ""],
+        [59, 1, 227, ""],
+        [67, 0, 222, ""],
+        [70, 1, 223, ""],
+        [72, 0, 223, ""],
+        [76, 1, 224, ""],
+        [78, 0, 224, ""],
+        [89, 0, 225, ""],
+        [96, 0, 226, ""],
+        [108, 0, 227, ""],
+        [111, 1, 226, ""],
+        [112, 0, 228, ""],
+        [114, 1, 229, ""],
+        [117, 0, 229, ""],
+        [122, 1, 232, ""],
+        [126, 1, 232, ""],
+        [129, 1, 232, ""],
+        [131, 1, 232, ""],
+        [133, 1, 232, ""],
+        [135, 1, 232, ""],
+        [151, 1, 230, ""],
+        [155, 1, 231, ""],
+        [156, 0, 230, ""],
+        [158, 1, 231, ""],
+        [162, 0, 231, ""],
+        [171, 0, 232, ""],
+        [175, 1, 237, ""],
+        [177, 1, 237, ""],
+        [179, 1, 236, ""],
+        [180, 1, 234, ""],
+        [182, 1, 233, ""],
+        [184, 0, 233, ""],
+        [185, 1, 235, ""],
+        [186, 0, 234, ""],
+        [188, 1, 235, ""],
+        [190, 0, 235, ""],
+        [192, 0, 236, ""],
+        [193, 1, 238, ""],
+        [194, 0, 237, ""],
+        [198, 0, 238, ""],
+        [203, 1, 239, ""],
+        [206, 1, 240, ""],
+        [211, 0, 239, ""],
+        [214, 0, 240, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_cap.s",
+      "tokens": [
+        [39, 1, 241, ""],
+        [51, 0, 241, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_catapult.s",
+      "tokens": [
+        [10, 1, 243, ""],
+        [11, 2, 254, ""],
+        [18, 1, 242, ""],
+        [20, 0, 242, ""],
+        [32, 1, 243, ""],
+        [33, 2, 255, ""],
+        [47, 0, 243, ""],
+        [48, 2, 244, ""],
+        [49, 0, 244, ""],
+        [58, 2, 259, ""],
+        [65, 1, 246, ""],
+        [68, 1, 245, ""],
+        [71, 1, 245, ""],
+        [74, 1, 246, ""],
+        [75, 0, 245, ""],
+        [78, 1, 246, ""],
+        [81, 1, 246, ""],
+        [84, 0, 246, ""],
+        [86, 1, 247, ""],
+        [88, 1, 249, ""],
+        [90, 1, 248, ""],
+        [91, 0, 247, ""],
+        [93, 1, 252, ""],
+        [95, 0, 248, ""],
+        [97, 0, 249, ""],
+        [99, 1, 248, ""],
+        [103, 1, 250, ""],
+        [106, 0, 250, ""],
+        [114, 1, 248, ""],
+        [117, 1, 251, ""],
+        [119, 0, 251, ""],
+        [121, 1, 253, ""],
+        [122, 0, 252, ""],
+        [124, 1, 248, ""],
+        [133, 1, 248, ""],
+        [135, 0, 253, ""],
+        [144, 0, 254, ""],
+        [152, 2, 259, ""],
+        [157, 0, 255, ""],
+        [165, 1, 256, ""],
+        [166, 2, 257, ""],
+        [172, 1, 256, ""],
+        [174, 0, 256, ""],
+        [176, 0, 257, ""],
+        [184, 1, 258, ""],
+        [186, 2, 255, ""],
+        [191, 0, 258, ""],
+        [193, 0, 259, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
+      "tokens": [
+        [13, 1, 260, ""],
+        [15, 0, 260, ""],
+        [16, 2, 261, ""],
+        [17, 0, 261, ""],
+        [20, 1, 262, ""],
+        [21, 2, 263, ""],
+        [23, 0, 262, ""],
+        [25, 0, 263, ""],
+        [33, 1, 264, ""],
+        [34, 2, 267, ""],
+        [35, 0, 264, ""],
+        [37, 1, 266, ""],
+        [40, 1, 265, ""],
+        [43, 0, 265, ""],
+        [45, 1, 266, ""],
+        [48, 0, 266, ""],
+        [50, 0, 267, ""],
+        [54, 1, 269, ""],
+        [57, 1, 268, ""],
+        [60, 0, 268, ""],
+        [62, 1, 269, ""],
+        [65, 0, 269, ""],
+        [77, 1, 279, ""],
+        [79, 1, 273, ""],
+        [81, 1, 274, ""],
+        [83, 1, 274, ""],
+        [86, 1, 273, ""],
+        [89, 1, 273, ""],
+        [91, 1, 275, ""],
+        [97, 1, 270, ""],
+        [99, 0, 270, ""],
+        [101, 1, 271, ""],
+        [103, 0, 271, ""],
+        [105, 1, 272, ""],
+        [107, 0, 272, ""],
+        [116, 0, 273, ""],
+        [118, 0, 274, ""],
+        [124, 0, 275, ""],
+        [134, 0, 276, ""],
+        [138, 1, 277, ""],
+        [140, 0, 277, ""],
+        [148, 1, 278, ""],
+        [155, 0, 278, ""],
+        [158, 0, 279, ""],
+        [160, 1, 280, ""],
+        [162, 1, 281, ""],
+        [163, 0, 280, ""],
+        [168, 1, 281, ""],
+        [173, 1, 281, ""],
+        [175, 1, 281, ""],
+        [177, 1, 281, ""],
+        [179, 1, 281, ""],
+        [181, 1, 281, ""],
+        [182, 1, 281, ""],
+        [200, 1, 276, ""],
+        [201, 0, 281, ""],
+        [206, 1, 282, ""],
+        [208, 0, 282, ""],
+        [212, 1, 283, ""],
+        [214, 0, 283, ""],
+        [217, 1, 284, ""],
+        [219, 0, 284, ""],
+        [224, 1, 288, ""],
+        [226, 1, 286, ""],
+        [228, 1, 286, ""],
+        [230, 1, 285, ""],
+        [232, 0, 285, ""],
+        [234, 1, 289, ""],
+        [235, 0, 286, ""],
+        [237, 1, 288, ""],
+        [239, 1, 288, ""],
+        [240, 1, 287, ""],
+        [242, 0, 287, ""],
+        [244, 1, 289, ""],
+        [245, 0, 288, ""],
+        [248, 1, 289, ""],
+        [250, 0, 289, ""],
+        [258, 1, 290, ""],
+        [260, 1, 291, ""],
+        [261, 0, 290, ""],
+        [263, 0, 291, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/mushroom_platform.s",
+      "tokens": [
+        [8, 2, 292, ""],
+        [9, 0, 292, ""],
+        [11, 1, 294, ""],
+        [13, 1, 293, ""],
+        [15, 1, 294, ""],
+        [16, 0, 293, ""],
+        [21, 1, 294, ""],
+        [23, 0, 294, ""],
+        [26, 2, 296, ""],
+        [31, 1, 295, ""],
+        [34, 1, 295, ""],
+        [36, 1, 295, ""],
+        [39, 0, 295, ""],
+        [45, 0, 296, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pollen.s",
+      "tokens": [
+        [3, 1, 297, ""],
+        [9, 1, 297, ""],
+        [12, 0, 297, ""],
+        [16, 1, 297, ""],
+        [18, 1, 301, ""],
+        [21, 1, 297, ""],
+        [23, 1, 298, ""],
+        [26, 1, 298, ""],
+        [28, 1, 302, ""],
+        [29, 0, 298, ""],
+        [31, 1, 299, ""],
+        [33, 0, 299, ""],
+        [35, 1, 300, ""],
+        [37, 1, 300, ""],
+        [57, 0, 300, ""],
+        [59, 0, 301, ""],
+        [62, 0, 302, ""],
+        [64, 2, 305, ""],
+        [66, 0, 303, ""],
+        [68, 1, 304, ""],
+        [93, 2, 312, ""],
+        [95, 0, 304, ""],
+        [96, 3, 303, ""],
+        [98, 0, 305, ""],
+        [107, 1, 306, ""],
+        [111, 0, 306, ""],
+        [115, 1, 308, ""],
+        [116, 1, 307, ""],
+        [120, 0, 307, ""],
+        [124, 0, 308, ""],
+        [133, 1, 309, ""],
+        [134, 2, 310, ""],
+        [136, 0, 309, ""],
+        [139, 0, 310, ""],
+        [148, 1, 311, ""],
+        [151, 0, 311, ""],
+        [154, 0, 312, ""],
+        [160, 1, 313, ""],
+        [161, 2, 310, ""],
+        [162, 0, 313, ""],
+        [167, 1, 314, ""],
+        [172, 1, 314, ""],
+        [174, 0, 314, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pulley_lift.s",
+      "tokens": [
+        [14, 1, 316, ""],
+        [15, 0, 315, ""],
+        [23, 3, 315, ""],
+        [25, 1, 317, ""],
+        [26, 0, 316, ""],
+        [30, 0, 317, ""],
+        [32, 1, 318, ""],
+        [33, 2, 329, ""],
+        [49, 1, 318, ""],
+        [50, 2, 329, ""],
+        [66, 0, 318, ""],
+        [67, 2, 319, ""],
+        [68, 0, 319, ""],
+        [78, 1, 320, ""],
+        [80, 0, 320, ""],
+        [84, 1, 327, ""],
+        [85, 1, 323, ""],
+        [87, 1, 322, ""],
+        [91, 1, 327, ""],
+        [92, 0, 321, ""],
+        [94, 1, 327, ""],
+        [95, 0, 322, ""],
+        [99, 1, 321, ""],
+        [101, 1, 327, ""],
+        [103, 1, 327, ""],
+        [104, 0, 323, ""],
+        [106, 1, 326, ""],
+        [108, 0, 324, ""],
+        [111, 1, 327, ""],
+        [112, 0, 325, ""],
+        [114, 1, 327, ""],
+        [117, 1, 327, ""],
+        [119, 1, 327, ""],
+        [120, 0, 326, ""],
+        [125, 1, 325, ""],
+        [128, 1, 324, ""],
+        [129, 0, 327, ""],
+        [138, 1, 328, ""],
+        [147, 0, 328, ""],
+        [165, 0, 329, ""],
+        [175, 1, 330, ""],
+        [177, 1, 331, ""],
+        [179, 1, 331, ""],
+        [182, 1, 331, ""],
+        [183, 0, 330, ""],
+        [185, 1, 331, ""],
+        [188, 0, 331, ""],
+        [193, 1, 332, ""],
+        [197, 1, 332, ""],
+        [199, 0, 332, ""],
+        [213, 1, 348, ""],
+        [215, 1, 336, ""],
+        [217, 1, 336, ""],
+        [219, 1, 336, ""],
+        [222, 1, 341, ""],
+        [227, 1, 333, ""],
+        [229, 0, 333, ""],
+        [231, 1, 334, ""],
+        [233, 0, 334, ""],
+        [235, 1, 335, ""],
+        [237, 0, 335, ""],
+        [246, 0, 336, ""],
+        [253, 1, 339, ""],
+        [255, 1, 339, ""],
+        [258, 1, 340, ""],
+        [259, 1, 338, ""],
+        [261, 1, 340, ""],
+        [262, 1, 339, ""],
+        [267, 1, 337, ""],
+        [269, 1, 338, ""],
+        [271, 0, 337, ""],
+        [279, 0, 338, ""],
+        [281, 0, 339, ""],
+        [283, 0, 340, ""],
+        [294, 0, 341, ""],
+        [297, 1, 342, ""],
+        [299, 0, 342, ""],
+        [301, 1, 343, ""],
+        [303, 0, 343, ""],
+        [310, 1, 344, ""],
+        [313, 0, 344, ""],
+        [315, 1, 345, ""],
+        [317, 1, 345, ""],
+        [320, 0, 345, ""],
+        [324, 0, 346, ""],
+        [326, 1, 347, ""],
+        [329, 1, 347, ""],
+        [331, 0, 347, ""],
+        [339, 0, 348, ""],
+        [341, 1, 349, ""],
+        [343, 1, 350, ""],
+        [344, 0, 349, ""],
+        [349, 1, 350, ""],
+        [354, 1, 350, ""],
+        [356, 1, 350, ""],
+        [358, 1, 350, ""],
+        [360, 1, 350, ""],
+        [362, 1, 350, ""],
+        [363, 1, 350, ""],
+        [378, 1, 346, ""],
+        [379, 0, 350, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/sticky_vine.s",
+      "tokens": [
+        [3, 1, 352, ""],
+        [4, 2, 376, ""],
+        [18, 0, 351, ""],
+        [22, 3, 351, ""],
+        [24, 2, 353, ""],
+        [26, 0, 352, ""],
+        [28, 0, 353, ""],
+        [30, 1, 354, ""],
+        [32, 1, 354, ""],
+        [33, 1, 364, ""],
+        [34, 0, 354, ""],
+        [39, 1, 355, ""],
+        [44, 1, 355, ""],
+        [46, 1, 355, ""],
+        [48, 1, 355, ""],
+        [50, 1, 355, ""],
+        [51, 2, 356, ""],
+        [53, 0, 355, ""],
+        [55, 0, 356, ""],
+        [58, 1, 357, ""],
+        [61, 0, 357, ""],
+        [66, 1, 364, ""],
+        [67, 0, 358, ""],
+        [74, 1, 360, ""],
+        [75, 1, 359, ""],
+        [77, 1, 360, ""],
+        [79, 1, 360, ""],
+        [80, 0, 359, ""],
+        [82, 1, 360, ""],
+        [84, 0, 360, ""],
+        [90, 1, 363, ""],
+        [91, 1, 361, ""],
+        [99, 1, 363, ""],
+        [102, 1, 363, ""],
+        [103, 0, 361, ""],
+        [105, 1, 362, ""],
+        [111, 1, 363, ""],
+        [112, 0, 362, ""],
+        [116, 1, 363, ""],
+        [119, 0, 363, ""],
+        [121, 1, 364, ""],
+        [122, 2, 353, ""],
+        [123, 0, 364, ""],
+        [128, 1, 365, ""],
+        [130, 0, 365, ""],
+        [132, 1, 366, ""],
+        [135, 0, 366, ""],
+        [150, 1, 368, ""],
+        [151, 0, 367, ""],
+        [154, 0, 368, ""],
+        [162, 3, 367, ""],
+        [169, 1, 369, ""],
+        [171, 0, 369, ""],
+        [173, 1, 370, ""],
+        [175, 0, 370, ""],
+        [186, 1, 371, ""],
+        [189, 1, 374, ""],
+        [191, 1, 374, ""],
+        [192, 0, 371, ""],
+        [195, 1, 372, ""],
+        [197, 0, 372, ""],
+        [199, 1, 373, ""],
+        [201, 0, 373, ""],
+        [203, 1, 374, ""],
+        [206, 1, 374, ""],
+        [208, 0, 374, ""],
+        [210, 1, 375, ""],
+        [212, 1, 375, ""],
+        [214, 1, 375, ""],
+        [220, 2, 358, ""],
+        [221, 0, 375, ""],
+        [224, 0, 376, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/swing_vine.s",
+      "tokens": [
+        [3, 2, 380, ""],
+        [11, 1, 379, ""],
+        [13, 2, 400, ""],
+        [15, 1, 378, ""],
+        [16, 0, 377, ""],
+        [18, 1, 379, ""],
+        [21, 0, 378, ""],
+        [29, 3, 377, ""],
+        [30, 2, 401, ""],
+        [35, 0, 379, ""],
+        [36, 1, 380, ""],
+        [45, 0, 380, ""],
+        [48, 1, 382, ""],
+        [49, 1, 381, ""],
+        [51, 1, 382, ""],
+        [52, 0, 381, ""],
+        [53, 2, 383, ""],
+        [58, 0, 382, ""],
+        [59, 1, 395, ""],
+        [60, 0, 383, ""],
+        [65, 1, 384, ""],
+        [67, 0, 384, ""],
+        [74, 1, 385, ""],
+        [77, 0, 385, ""],
+        [80, 1, 386, ""],
+        [82, 0, 386, ""],
+        [84, 1, 387, ""],
+        [88, 0, 387, ""],
+        [90, 1, 388, ""],
+        [94, 1, 388, ""],
+        [95, 2, 389, ""],
+        [102, 0, 388, ""],
+        [103, 1, 395, ""],
+        [104, 0, 389, ""],
+        [110, 1, 391, ""],
+        [115, 1, 392, ""],
+        [120, 1, 390, ""],
+        [122, 1, 392, ""],
+        [123, 0, 390, ""],
+        [124, 2, 380, ""],
+        [130, 1, 392, ""],
+        [131, 0, 391, ""],
+        [136, 1, 392, ""],
+        [141, 1, 390, ""],
+        [143, 0, 392, ""],
+        [148, 1, 393, ""],
+        [150, 0, 393, ""],
+        [157, 1, 395, ""],
+        [158, 1, 394, ""],
+        [160, 1, 395, ""],
+        [161, 0, 394, ""],
+        [162, 2, 383, ""],
+        [165, 0, 395, ""],
+        [170, 1, 396, ""],
+        [172, 0, 396, ""],
+        [175, 1, 398, ""],
+        [177, 0, 397, ""],
+        [181, 3, 397, ""],
+        [182, 0, 398, ""],
+        [184, 1, 399, ""],
+        [187, 0, 399, ""],
+        [189, 0, 400, ""],
+        [216, 0, 401, ""],
+        [221, 1, 402, ""],
+        [223, 0, 402, ""],
+        [225, 1, 403, ""],
+        [227, 0, 403, ""],
+        [231, 1, 406, ""],
+        [235, 1, 406, ""],
+        [237, 1, 404, ""],
+        [239, 1, 405, ""],
+        [240, 0, 404, ""],
+        [242, 0, 405, ""],
+        [244, 0, 406, ""],
+        [246, 1, 421, ""],
+        [248, 1, 411, ""],
+        [250, 1, 411, ""],
+        [252, 1, 411, ""],
+        [254, 1, 412, ""],
+        [258, 1, 410, ""],
+        [269, 1, 407, ""],
+        [271, 0, 407, ""],
+        [273, 1, 408, ""],
+        [275, 0, 408, ""],
+        [277, 0, 409, ""],
+        [285, 0, 410, ""],
+        [300, 1, 409, ""],
+        [301, 0, 411, ""],
+        [306, 0, 412, ""],
+        [308, 1, 416, ""],
+        [316, 1, 413, ""],
+        [318, 0, 413, ""],
+        [321, 1, 415, ""],
+        [322, 0, 414, ""],
+        [333, 0, 415, ""],
+        [336, 0, 416, ""],
+        [341, 1, 417, ""],
+        [343, 0, 417, ""],
+        [347, 1, 419, ""],
+        [350, 1, 419, ""],
+        [351, 1, 420, ""],
+        [355, 1, 418, ""],
+        [357, 0, 418, ""],
+        [374, 1, 414, ""],
+        [375, 0, 419, ""],
+        [393, 0, 420, ""],
+        [410, 0, 421, ""],
+        [412, 1, 422, ""],
+        [414, 1, 424, ""],
+        [415, 0, 422, ""],
+        [420, 1, 424, ""],
+        [424, 1, 424, ""],
+        [427, 1, 423, ""],
+        [429, 1, 424, ""],
+        [430, 0, 423, ""],
+        [432, 1, 424, ""],
+        [434, 1, 424, ""],
+        [436, 1, 424, ""],
+        [449, 1, 423, ""],
+        [453, 0, 424, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/twisted_vine.s",
+      "tokens": [
+        [4, 1, 425, ""],
+        [5, 2, 435, ""],
+        [6, 1, 435, ""],
+        [7, 0, 425, ""],
+        [8, 2, 426, ""],
+        [9, 0, 426, ""],
+        [19, 1, 429, ""],
+        [21, 1, 428, ""],
+        [25, 1, 428, ""],
+        [26, 1, 427, ""],
+        [28, 1, 428, ""],
+        [30, 1, 428, ""],
+        [35, 1, 428, ""],
+        [37, 1, 428, ""],
+        [44, 1, 428, ""],
+        [47, 0, 427, ""],
+        [49, 1, 428, ""],
+        [51, 1, 428, ""],
+        [56, 1, 428, ""],
+        [58, 1, 428, ""],
+        [66, 1, 428, ""],
+        [69, 0, 428, ""],
+        [71, 0, 429, ""],
+        [73, 1, 430, ""],
+        [75, 0, 430, ""],
+        [77, 1, 432, ""],
+        [79, 1, 433, ""],
+        [83, 1, 431, ""],
+        [85, 1, 434, ""],
+        [95, 0, 431, ""],
+        [102, 0, 432, ""],
+        [104, 0, 433, ""],
+        [111, 0, 434, ""],
+        [113, 1, 428, ""],
+        [128, 0, 435, ""],
+        [138, 1, 438, ""],
+        [140, 1, 436, ""],
+        [144, 1, 436, ""],
+        [145, 1, 437, ""],
+        [147, 1, 436, ""],
+        [149, 1, 436, ""],
+        [154, 1, 436, ""],
+        [156, 1, 436, ""],
+        [164, 1, 436, ""],
+        [166, 0, 436, ""],
+        [168, 0, 437, ""],
+        [170, 1, 436, ""],
+        [172, 1, 436, ""],
+        [177, 1, 436, ""],
+        [179, 1, 436, ""],
+        [186, 1, 436, ""],
+        [190, 0, 438, ""],
+        [192, 1, 439, ""],
+        [194, 0, 439, ""],
+        [196, 1, 441, ""],
+        [198, 1, 442, ""],
+        [202, 1, 440, ""],
+        [204, 1, 443, ""],
+        [211, 0, 440, ""],
+        [221, 0, 441, ""],
+        [223, 0, 442, ""],
+        [230, 0, 443, ""],
+        [232, 1, 436, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/vertical_swing_bar.s",
+      "tokens": [
+        [9, 2, 444, ""],
+        [10, 0, 444, ""],
+        [25, 1, 445, ""],
+        [29, 0, 445, ""],
+        [33, 1, 455, ""],
+        [35, 1, 451, ""],
+        [37, 1, 451, ""],
+        [39, 1, 450, ""],
+        [41, 1, 453, ""],
+        [44, 0, 446, ""],
+        [55, 1, 448, ""],
+        [57, 1, 449, ""],
+        [60, 1, 447, ""],
+        [62, 0, 447, ""],
+        [66, 0, 448, ""],
+        [68, 0, 449, ""],
+        [71, 0, 450, ""],
+        [74, 1, 451, ""],
+        [76, 0, 451, ""],
+        [80, 1, 452, ""],
+        [82, 0, 452, ""],
+        [93, 0, 453, ""],
+        [102, 1, 454, ""],
+        [105, 0, 454, ""],
+        [116, 1, 446, ""],
+        [118, 1, 446, ""],
+        [119, 0, 455, ""],
+        [121, 1, 456, ""],
+        [124, 0, 456, ""],
+        [126, 1, 457, ""],
+        [128, 1, 461, ""],
+        [133, 1, 461, ""],
+        [138, 1, 461, ""],
+        [140, 1, 458, ""],
+        [141, 0, 457, ""],
+        [143, 1, 461, ""],
+        [148, 1, 461, ""],
+        [153, 1, 461, ""],
+        [155, 0, 458, ""],
+        [157, 1, 461, ""],
+        [159, 1, 461, ""],
+        [161, 1, 461, ""],
+        [163, 1, 461, ""],
+        [172, 1, 459, ""],
+        [176, 0, 459, ""],
+        [186, 1, 460, ""],
+        [188, 0, 460, ""],
+        [196, 0, 461, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/zones/mhz/sk/tile_animation.s",
+      "tokens": [
+        [8, 1, 462, ""],
+        [21, 1, 463, ""],
+        [34, 1, 462, ""],
+        [36, 0, 462, ""],
+        [38, 1, 464, ""],
+        [39, 0, 463, ""],
+        [48, 0, 464, ""],
+        [54, 1, 465, ""],
+        [65, 1, 467, ""],
+        [78, 1, 465, ""],
+        [80, 0, 465, ""],
+        [85, 1, 466, ""],
+        [87, 0, 466, ""],
+        [90, 0, 467, ""]
+      ]
+    }
+  ]
+}

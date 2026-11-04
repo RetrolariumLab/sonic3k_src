@@ -5,7 +5,7 @@
 
 Obj_MHZSwingVine:
                 movea.l a0,a1
-                move.l  #loc_2267E,(a1)
+                move.l  #SKMHZSwingVine_WaitForFastCapture,(a1)
                 bsr.w   InitializeMhzSwingVineSprite
                 move.b  #$23,mapping_frame(a1)
                 move.w  x_pos(a0),d2
@@ -13,20 +13,20 @@ Obj_MHZSwingVine:
                 moveq   #0,d1
                 addq.w  #1,d1
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_22654
+                bne.w   SKMHZSwingVine_EnterSwingWait
                 move.w  a1,$3E(a0)
-                move.l  #loc_2286C,(a1)
+                move.l  #SKMHZSwingVine_FollowPreviousLink,(a1)
                 move.w  a0,$3C(a1)
-                bra.s   loc_2261A
+                bra.s   SKMHZSwingVine_InitLinkAndUpdateEnd
 ; ---------------------------------------------------------------------------
 
-loc_22608:
+SKMHZSwingVine_TryAllocateNextLink:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_22654
+                bne.w   SKMHZSwingVine_EnterSwingWait
                 move.w  a2,$3C(a1)
                 move.w  a1,$3E(a2)
 
-loc_2261A:
+SKMHZSwingVine_InitLinkAndUpdateEnd:
                 movea.l a1,a2
                 bsr.s   InitializeMhzSwingVineSprite
                 move.w  d2,x_pos(a1)
@@ -34,15 +34,16 @@ loc_2261A:
                 addi.w  #$10,d3
                 addq.w  #1,$36(a0)
                 move.w  $36(a0),$36(a1)
-                dbf     d1,loc_22608
-                move.l  #loc_228CC,(a1)
+                dbf     d1,SKMHZSwingVine_TryAllocateNextLink
+                move.l  #SKMHZSwingVine_MoveEndAndSaveOldX,(a1)
                 move.b  #$22,mapping_frame(a1)
                 move.w  x_pos(a1),$42(a1)
                 move.w  y_pos(a1),$44(a1)
                 move.w  a1,$40(a0)
 
-loc_22654:
-                bra.s   loc_2267E
+; Enter the wait state even when only a prefix of the chain could be allocated
+SKMHZSwingVine_EnterSwingWait:
+                bra.s   SKMHZSwingVine_WaitForFastCapture
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -58,65 +59,65 @@ InitializeMhzSwingVineSprite:
 
 ; ---------------------------------------------------------------------------
 
-loc_2267E:
+SKMHZSwingVine_WaitForFastCapture:
                 movea.w $40(a0),a1
                 tst.w   $32(a1)
-                beq.s   loc_226AC
-                bmi.s   loc_22690
+                beq.s   SKMHZSwingVine_DrawAfterWait
+                bmi.s   SKMHZSwingVine_BeginPoweredSwing
                 tst.b   $33(a1)
-                bpl.s   loc_226AC
+                bpl.s   SKMHZSwingVine_DrawAfterWait
 
-loc_22690:
-                move.l  #loc_226B0,(a0)
+SKMHZSwingVine_BeginPoweredSwing:
+                move.l  #SKMHZSwingVine_CalcAbsPoweredAngle,(a0)
                 movea.w $40(a0),a1
                 move.w  #1,$30(a1)
                 move.w  #0,angle(a0)
                 move.w  #$800,$3A(a0)
 
-loc_226AC:
-                bra.w   loc_22824
+SKMHZSwingVine_DrawAfterWait:
+                bra.w   SKMHZSwingVine_DrawOrCullChain
 ; ---------------------------------------------------------------------------
 
-loc_226B0:
+SKMHZSwingVine_CalcAbsPoweredAngle:
                 movea.w $40(a0),a1
                 move.w  $3A(a0),d0
                 move.b  angle(a0),d1
                 ext.w   d1
-                bpl.s   loc_226C2
+                bpl.s   SKMHZSwingVine_StepPoweredSwing
                 neg.w   d1
 
-loc_226C2:
+SKMHZSwingVine_StepPoweredSwing:
                 add.w   d1,d1
                 sub.w   d1,d0
                 sub.w   d0,angle(a0)
                 move.b  angle(a0),d0
                 andi.b  #$F8,d0
                 cmpi.b  #$40,d0
-                bne.s   loc_226E0
+                bne.s   SKMHZSwingVine_SetPoweredPriority
                 moveq   #signextendB(sfx_GroundSlide),d0
                 jsr     (Play_SFX).l
 
-loc_226E0:
+SKMHZSwingVine_SetPoweredPriority:
                 move.w  #$200,priority(a0)
                 tst.w   angle(a0)
-                bpl.s   loc_226F2
+                bpl.s   SKMHZSwingVine_TryForceP1Camera
                 move.w  #$280,priority(a0)
 
-loc_226F2:
+SKMHZSwingVine_TryForceP1Camera:
                 tst.b   $32(a1)
-                beq.s   loc_2270A
+                beq.s   SKMHZSwingVine_TryBeginDamping
                 move.b  #1,(Scroll_force_positions).w
                 move.w  x_pos(a0),(Scroll_forced_X_pos).w
                 move.w  y_pos(a0),(Scroll_forced_Y_pos).w
 
-loc_2270A:
+SKMHZSwingVine_TryBeginDamping:
                 tst.w   $32(a1)
-                bne.s   loc_22744
+                bne.s   SKMHZSwingVine_DrawAfterPoweredSwing
                 move.b  angle(a0),d0
                 addq.b  #8,d0
                 cmpi.b  #$10,d0
-                bhs.s   loc_22744
-                move.l  #loc_22748,(a0)
+                bhs.s   SKMHZSwingVine_DrawAfterPoweredSwing
+                move.l  #SKMHZSwingVine_StepPositiveDamping,(a0)
                 move.w  #0,$42(a0)
                 move.w  #-$300,$44(a0)
                 move.w  #$1000,$38(a0)
@@ -124,111 +125,111 @@ loc_2270A:
                 movea.w $40(a0),a1
                 move.w  #2,$30(a1)
 
-loc_22744:
-                bra.w   loc_22824
+SKMHZSwingVine_DrawAfterPoweredSwing:
+                bra.w   SKMHZSwingVine_DrawOrCullChain
 ; ---------------------------------------------------------------------------
 
-loc_22748:
+SKMHZSwingVine_StepPositiveDamping:
                 moveq   #0,d2
                 move.b  $38(a0),d2
                 move.w  $44(a0),d0
                 move.w  #0,d1
                 tst.w   $2E(a0)
-                bne.s   loc_227AC
+                bne.s   SKMHZSwingVine_StepNegativeDamping
                 add.w   d2,d0
                 move.w  d0,$44(a0)
                 add.w   d0,$42(a0)
                 cmp.b   $42(a0),d1
-                bgt.s   loc_227D6
+                bgt.s   SKMHZSwingVine_ApplySettlingAngle
                 asr.w   #4,d0
                 sub.w   d0,$44(a0)
                 move.w  #1,$2E(a0)
                 cmpi.w  #$C00,$38(a0)
-                beq.s   loc_22788
+                beq.s   SKMHZSwingVine_FinishDamping
                 subi.w  #$40,$38(a0)
-                bra.s   loc_227D6
+                bra.s   SKMHZSwingVine_ApplySettlingAngle
 ; ---------------------------------------------------------------------------
 
-loc_22788:
-                move.l  #loc_2267E,(a0)
+SKMHZSwingVine_FinishDamping:
+                move.l  #SKMHZSwingVine_WaitForFastCapture,(a0)
                 move.w  #0,$38(a0)
                 movea.w $40(a0),a1
                 move.w  #0,$30(a1)
                 move.w  x_pos(a1),$42(a1)
                 move.w  y_pos(a1),$44(a1)
-                bra.s   loc_227D6
+                bra.s   SKMHZSwingVine_ApplySettlingAngle
 ; ---------------------------------------------------------------------------
 
-loc_227AC:
+SKMHZSwingVine_StepNegativeDamping:
                 sub.w   d2,d0
                 move.w  d0,$44(a0)
                 add.w   d0,$42(a0)
                 cmp.b   $42(a0),d1
-                ble.s   loc_227D6
+                ble.s   SKMHZSwingVine_ApplySettlingAngle
                 asr.w   #4,d0
                 sub.w   d0,$44(a0)
                 move.w  #0,$2E(a0)
                 cmpi.w  #$C00,$38(a0)
-                beq.s   loc_22788
+                beq.s   SKMHZSwingVine_FinishDamping
                 subi.w  #$40,$38(a0)
 
-loc_227D6:
+SKMHZSwingVine_ApplySettlingAngle:
                 move.w  $42(a0),d0
                 move.w  d0,angle(a0)
                 move.w  #$200,priority(a0)
                 tst.w   angle(a0)
-                bpl.s   loc_227F0
+                bpl.s   SKMHZSwingVine_SetDampingAndTestRestart
                 move.w  #$280,priority(a0)
 
-loc_227F0:
+SKMHZSwingVine_SetDampingAndTestRestart:
                 asr.w   #3,d0
                 move.w  d0,$3A(a0)
                 movea.w $3E(a0),a1
                 move.w  $3A(a0),$3A(a1)
                 movea.w $40(a0),a1
                 tst.w   $32(a1)
-                beq.s   loc_22824
-                bmi.s   loc_22812
+                beq.s   SKMHZSwingVine_DrawOrCullChain
+                bmi.s   SKMHZSwingVine_RestartPoweredSwing
                 tst.b   $33(a1)
-                bpl.s   loc_22824
+                bpl.s   SKMHZSwingVine_DrawOrCullChain
 
-loc_22812:
-                move.l  #loc_226B0,(a0)
+SKMHZSwingVine_RestartPoweredSwing:
+                move.l  #SKMHZSwingVine_CalcAbsPoweredAngle,(a0)
                 move.w  #1,$30(a1)
                 move.w  #$800,$3A(a0)
 
-loc_22824:
+SKMHZSwingVine_DrawOrCullChain:
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_2283E
+                bhi.w   SKMHZSwingVine_BeginChainCleanup
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2283E:
+SKMHZSwingVine_BeginChainCleanup:
                 move.w  $36(a0),d2
                 subq.w  #1,d2
-                bcs.s   loc_2285A
+                bcs.s   SKMHZSwingVine_ClearRootRespawnBit
                 movea.w $3E(a0),a2
 
-loc_2284A:
+SKMHZSwingVine_DeleteChainLink:
                 movea.l a2,a1
                 movea.w $3E(a1),a2
                 jsr     (Delete_Referenced_Sprite).l
-                dbf     d2,loc_2284A
+                dbf     d2,SKMHZSwingVine_DeleteChainLink
 
-loc_2285A:
+SKMHZSwingVine_ClearRootRespawnBit:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_22866
+                beq.s   SKMHZSwingVine_DeleteSwingRoot
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_22866:
+SKMHZSwingVine_DeleteSwingRoot:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2286C:
+SKMHZSwingVine_FollowPreviousLink:
                 movea.w $3C(a0),a1
                 move.w  angle(a1),angle(a0)
                 move.b  angle(a0),d0
@@ -262,56 +263,56 @@ PositionMhzSwingVineEndFromPreviousLink:
 
 ; ---------------------------------------------------------------------------
 
-loc_228CC:
+SKMHZSwingVine_MoveEndAndSaveOldX:
                 move.w  x_pos(a0),d4
                 move.w  y_pos(a0),d5
                 bsr.w   PositionMhzSwingVineEndFromPreviousLink
                 cmp.w   x_pos(a0),d4
-                beq.s   loc_228E2
+                beq.s   SKMHZSwingVine_TrySaveOldEndY
                 move.w  d4,$42(a0)
 
-loc_228E2:
+SKMHZSwingVine_TrySaveOldEndY:
                 cmp.w   y_pos(a0),d5
-                beq.s   loc_228EC
+                beq.s   SKMHZSwingVine_UpdateEndRiders
                 move.w  d5,$44(a0)
 
-loc_228EC:
+SKMHZSwingVine_UpdateEndRiders:
                 lea     $32(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d0
-                bsr.s   loc_2291A
+                bsr.s   SKMHZSwingVine_UpdateRiderOrCapture
                 lea     (Player_2).w,a1
                 addq.w  #1,a2
                 move.w  (Ctrl_2_logical).w,d0
-                bsr.s   loc_2291A
+                bsr.s   SKMHZSwingVine_UpdateRiderOrCapture
                 tst.w   $32(a0)
-                beq.s   loc_22912
+                beq.s   SKMHZSwingVine_DrawEmptyOrIdleEnd
                 tst.w   $30(a0)
-                bne.s   locret_22918
+                bne.s   SKMHZSwingVine_SkipOccupiedEndDraw
 
-loc_22912:
+SKMHZSwingVine_DrawEmptyOrIdleEnd:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_22918:
+SKMHZSwingVine_SkipOccupiedEndDraw:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2291A:
+SKMHZSwingVine_UpdateRiderOrCapture:
                 tst.b   (a2)
-                beq.w   loc_22AF8
+                beq.w   SKMHZSwingVine_TickCaptureCooldown
                 tst.b   render_flags(a1)
-                bpl.w   loc_229E4
+                bpl.w   SKMHZSwingVine_DetachWithoutJump
                 cmpi.b  #4,routine(a1)
-                bhs.w   loc_229E4
+                bhs.w   SKMHZSwingVine_DetachWithoutJump
                 tst.w   (Debug_placement_mode).w
-                bne.w   loc_229E4
+                bne.w   SKMHZSwingVine_DetachWithoutJump
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   loc_229F2
+                beq.w   SKMHZSwingVine_PlaceIdleRider
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 cmpi.w  #1,$30(a0)
-                beq.s   loc_229B6
+                beq.s   SKMHZSwingVine_LaunchAlongLink
                 move.w  x_pos(a0),d1
                 sub.w   $42(a0),d1
                 asl.w   #7,d1
@@ -322,18 +323,18 @@ loc_2291A:
                 move.w  d1,y_vel(a1)
                 move.b  #$3C,2(a2)
                 btst    #button_left+8,d0
-                beq.s   loc_2297E
+                beq.s   SKMHZSwingVine_TrySetJumpRight
                 move.w  #-$200,x_vel(a1)
 
-loc_2297E:
+SKMHZSwingVine_TrySetJumpRight:
                 btst    #button_right+8,d0
-                beq.s   loc_2298A
+                beq.s   SKMHZSwingVine_AddJumpImpulseY
                 move.w  #$200,x_vel(a1)
 
-loc_2298A:
+SKMHZSwingVine_AddJumpImpulseY:
                 addi.w  #-$380,y_vel(a1)
 
-loc_22990:
+SKMHZSwingVine_SetJumpReleasePose:
                 bset    #Status_InAir,status(a1)
                 move.b  #1,$40(a1)
                 move.b  #$E,y_radius(a1)
@@ -343,7 +344,7 @@ loc_22990:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_229B6:
+SKMHZSwingVine_LaunchAlongLink:
                 move.b  #$3C,2(a2)
                 movea.w $3C(a0),a3
                 move.b  angle(a3),d0
@@ -358,19 +359,19 @@ loc_229B6:
                 asl.w   #1,d0
                 add.w   d2,d0
                 move.w  d0,y_vel(a1)
-                bra.s   loc_22990
+                bra.s   SKMHZSwingVine_SetJumpReleasePose
 ; ---------------------------------------------------------------------------
 
-loc_229E4:
+SKMHZSwingVine_DetachWithoutJump:
                 clr.b   $2E(a1)
                 clr.b   (a2)
                 move.b  #$3C,2(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_229F2:
+SKMHZSwingVine_PlaceIdleRider:
                 tst.w   $30(a0)
-                bne.s   loc_22A5C
+                bne.s   SKMHZSwingVine_GetMovingPoseAngle
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 addi.w  #$14,y_pos(a1)
@@ -378,15 +379,15 @@ loc_229F2:
                 moveq   #0,d0
                 move.b  angle(a3),d0
                 btst    #Status_Facing,status(a1)
-                beq.s   loc_22A1E
+                beq.s   SKMHZSwingVine_ApplyIdleRiderFrame
                 neg.b   d0
 
-loc_22A1E:
+SKMHZSwingVine_ApplyIdleRiderFrame:
                 addq.b  #8,d0
                 lsr.w   #4,d0
-                move.b  byte_22A4C(pc,d0.w),mapping_frame(a1)
+                move.b  SKMHZSwingVine_IdleRiderFrames(pc,d0.w),mapping_frame(a1)
 
-loc_22A28:
+SKMHZSwingVine_ApplyFacingAndUploadPose:
                 move.b  status(a1),d1
                 andi.b  #1,d1
                 andi.b  #$FC,render_flags(a1)
@@ -398,35 +399,35 @@ loc_22A28:
                 movea.l (sp)+,a2
                 rts
 ; ---------------------------------------------------------------------------
-byte_22A4C:
+SKMHZSwingVine_IdleRiderFrames:
                 dc.b    $91, $91, $90, $90, $90, $90, $90, $90, $92, $92, $92, $92, $92, $92, $91, $91
                 even
 ; ---------------------------------------------------------------------------
 
-loc_22A5C:
+SKMHZSwingVine_GetMovingPoseAngle:
                 movea.w $3C(a0),a3
                 moveq   #0,d0
                 move.b  angle(a3),d0
                 btst    #Status_Facing,status(a1)
-                beq.s   loc_22A70
+                beq.s   SKMHZSwingVine_LoadFrameAndPoseOffset
                 neg.b   d0
 
-loc_22A70:
+SKMHZSwingVine_LoadFrameAndPoseOffset:
                 addi.b  #$10,d0
                 lsr.w   #5,d0
                 add.w   d0,d0
-                move.b  byte_22AD8(pc,d0.w),mapping_frame(a1)
+                move.b  SKMHZSwingVine_MovingRiderFrames(pc,d0.w),mapping_frame(a1)
                 move.b  #0,anim(a1)
                 andi.w  #$FFFE,d0
-                move.b  byte_22AD8+$10(pc,d0.w),d2
-                move.b  byte_22AE9(pc,d0.w),d3
+                move.b  SKMHZSwingVine_MovingRiderFrames+$10(pc,d0.w),d2
+                move.b  SKMHZSwingVine_MovingRiderYOffsets(pc,d0.w),d3
                 ext.w   d2
                 ext.w   d3
                 btst    #Status_Facing,status(a1)
-                beq.s   loc_22A9E
+                beq.s   SKMHZSwingVine_ProjectMovingRider
                 neg.w   d2
 
-loc_22A9E:
+SKMHZSwingVine_ProjectMovingRider:
                 movea.w $3C(a0),a3
                 move.b  angle(a3),d0
                 addq.b  #4,d0
@@ -443,9 +444,10 @@ loc_22A9E:
                 add.w   y_pos(a3),d1
                 add.w   d3,d1
                 move.w  d1,y_pos(a1)
-                bra.w   loc_22A28
+                bra.w   SKMHZSwingVine_ApplyFacingAndUploadPose
 ; ---------------------------------------------------------------------------
-byte_22AD8:
+; The X-offset lookup starts 16 bytes into this table, at the last byte before the Y-offset label
+SKMHZSwingVine_MovingRiderFrames:
                 dc.b    $78
                 dc.b    $78
                 dc.b    $7F
@@ -463,7 +465,7 @@ byte_22AD8:
                 dc.b    $79
                 dc.b    $79
                 dc.b    0
-byte_22AE9:
+SKMHZSwingVine_MovingRiderYOffsets:
                 dc.b    $18
                 dc.b    -$12
                 dc.b    $13
@@ -482,35 +484,35 @@ byte_22AE9:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_22AF8:
+SKMHZSwingVine_TickCaptureCooldown:
                 tst.b   2(a2)
-                beq.s   loc_22B06
+                beq.s   SKMHZSwingVine_CheckCaptureBounds
                 subq.b  #1,2(a2)
-                bne.w   locret_22B9C
+                bne.w   SKMHZSwingVine_CaptureReturn
 
-loc_22B06:
+SKMHZSwingVine_CheckCaptureBounds:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$10,d0
                 cmpi.w  #$20,d0
-                bhs.w   locret_22B9C
+                bhs.w   SKMHZSwingVine_CaptureReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 cmpi.w  #$28,d1
-                bhs.w   locret_22B9C
+                bhs.w   SKMHZSwingVine_CaptureReturn
                 move.w  x_vel(a1),d0
                 cmpi.w  #$400,d0
-                bge.s   loc_22B3C
+                bge.s   SKMHZSwingVine_CaptureAndCheckFastGrab
                 cmpi.w  #$18,d1
-                bhs.w   locret_22B9C
+                bhs.w   SKMHZSwingVine_CaptureReturn
 
-loc_22B3C:
+SKMHZSwingVine_CaptureAndCheckFastGrab:
                 tst.b   object_control(a1)
-                bne.s   locret_22B9C
+                bne.s   SKMHZSwingVine_CaptureReturn
                 cmpi.b  #4,routine(a1)
-                bhs.s   locret_22B9C
+                bhs.s   SKMHZSwingVine_CaptureReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_22B9C
+                bne.s   SKMHZSwingVine_CaptureReturn
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)
                 clr.w   ground_vel(a1)
@@ -523,12 +525,12 @@ loc_22B3C:
                 andi.b  #$FD,render_flags(a1)
                 move.b  #1,(a2)
                 cmpi.w  #$400,d0
-                blt.s   loc_22B3C
+                blt.s   SKMHZSwingVine_CaptureAndCheckFastGrab
                 move.b  #$81,(a2)
                 moveq   #signextendB(sfx_Grab),d0
                 jsr     (Play_SFX).l
 
-locret_22B9C:
+SKMHZSwingVine_CaptureReturn:
                 rts
 ; ---------------------------------------------------------------------------
 Map_AIZMHZRideVine:

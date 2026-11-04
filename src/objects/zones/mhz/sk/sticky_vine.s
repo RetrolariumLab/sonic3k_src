@@ -5,8 +5,8 @@
 
 Obj_MHZStickyVine:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_3EAC4
-                move.l  #loc_3ED0A,(a1)
+                bne.s   SKMHZStickVine_DeleteWithoutDisplay
+                move.l  #SKMHZStickVine_DrawVineDisplay,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.l  #Map_MHZStickyVine,mappings(a1)
@@ -21,95 +21,96 @@ Obj_MHZStickyVine:
                 subq.b  #1,d1
                 lea     sub2_x_pos(a1),a2
 
-loc_3EAA8:
+SKMHZStickVine_InitDisplaySegments:
                 move.w  x_pos(a0),(a2)+
                 move.w  y_pos(a0),(a2)+
                 move.w  #0,(a2)+
-                dbf     d1,loc_3EAA8
+                dbf     d1,SKMHZStickVine_InitDisplaySegments
                 move.w  a1,parent3(a0)
-                move.l  #loc_3EACA,(a0)
+                move.l  #SKMHZStickVine_CheckPlayersAndCull,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3EAC4:
+SKMHZStickVine_DeleteWithoutDisplay:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3EACA:
+SKMHZStickVine_CheckPlayersAndCull:
                 lea     (Player_1).w,a1
-                bsr.s   loc_3EADA
+                bsr.s   SKMHZStickVine_TrySelectPlayer
                 lea     (Player_2).w,a1
-                bsr.s   loc_3EADA
-                bra.w   loc_3EBF8
+                bsr.s   SKMHZStickVine_TrySelectPlayer
+                bra.w   SKMHZStickVine_CullInvisibleRoot
 ; ---------------------------------------------------------------------------
 
-loc_3EADA:
+; Track the selected player without taking object control
+SKMHZStickVine_TrySelectPlayer:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$C,d0
                 cmpi.w  #$18,d0
-                bhs.w   locret_3EB24
+                bhs.w   SKMHZStickVine_PlayerSelectReturn
                 move.w  y_pos(a1),d0
                 sub.w   y_pos(a0),d0
                 addi.w  #$18,d0
                 cmpi.w  #$30,d0
-                bhs.w   locret_3EB24
+                bhs.w   SKMHZStickVine_PlayerSelectReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_3EB24
+                bne.s   SKMHZStickVine_PlayerSelectReturn
                 cmpi.b  #4,routine(a1)
-                bhs.w   locret_3EB24
+                bhs.w   SKMHZStickVine_PlayerSelectReturn
                 tst.b   object_control(a1)
-                bne.w   locret_3EB24
-                move.l  #loc_3EB26,(a0)
+                bne.w   SKMHZStickVine_PlayerSelectReturn
+                move.l  #SKMHZStickVine_TrackPlayerAndCheckDash,(a0)
                 move.l  a1,$2E(a0)
 
-locret_3EB24:
+SKMHZStickVine_PlayerSelectReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3EB26:
+SKMHZStickVine_TrackPlayerAndCheckDash:
                 movea.l $2E(a0),a1
                 tst.b   spin_dash_flag(a1)
-                beq.s   loc_3EB3C
+                beq.s   SKMHZStickVine_PlaceSegmentsAndPull
                 move.b  #1,$3D(a0)
                 move.b  #$10,$3E(a0)
 
-loc_3EB3C:
+SKMHZStickVine_PlaceSegmentsAndPull:
                 move.l  x_pos(a1),d0
                 move.l  y_pos(a1),d1
                 bsr.w   LayOutMhzStickyVineSegments
                 bsr.w   ApplyMhzStickyVinePullToPlayer
-                bra.w   loc_3EBF8
+                bra.w   SKMHZStickVine_CullInvisibleRoot
 ; ---------------------------------------------------------------------------
 
-loc_3EB50:
+SKMHZStickVine_RecoilFromSavedEndpoint:
                 movea.l $2E(a0),a1
                 move.l  $30(a0),d0
                 move.l  $34(a0),d1
                 bsr.w   LayOutMhzStickyVineSegments
                 move.w  $30(a0),d0
                 sub.w   x_pos(a0),d0
-                beq.s   loc_3EB7A
-                bcc.s   loc_3EB74
+                beq.s   SKMHZStickVine_SetEndpointXAndCheckY
+                bcc.s   SKMHZStickVine_RetractPositiveX
                 addq.w  #2,d0
-                bcc.s   loc_3EB7A
+                bcc.s   SKMHZStickVine_SetEndpointXAndCheckY
                 moveq   #0,d0
-                bra.s   loc_3EB7A
+                bra.s   SKMHZStickVine_SetEndpointXAndCheckY
 ; ---------------------------------------------------------------------------
 
-loc_3EB74:
+SKMHZStickVine_RetractPositiveX:
                 subq.w  #2,d0
-                bcc.s   loc_3EB7A
+                bcc.s   SKMHZStickVine_SetEndpointXAndCheckY
                 moveq   #0,d0
 
-loc_3EB7A:
+SKMHZStickVine_SetEndpointXAndCheckY:
                 move.w  d0,d2
                 add.w   x_pos(a0),d2
                 move.w  d2,$30(a0)
                 move.w  $34(a0),d1
                 sub.w   y_pos(a0),d1
-                beq.s   loc_3EBEE
-                bcc.s   loc_3EBBA
+                beq.s   SKMHZStickVine_TryReturnToIdle
+                bcc.s   SKMHZStickVine_ReturnFromBelowRoot
                 move.w  y_vel(a0),d2
                 addi.w  #$38,y_vel(a0)
                 ext.l   d2
@@ -117,52 +118,52 @@ loc_3EB7A:
                 add.l   d2,$34(a0)
                 move.w  $34(a0),d2
                 cmp.w   y_pos(a0),d2
-                blo.s   loc_3EBEE
+                blo.s   SKMHZStickVine_TryReturnToIdle
                 move.w  y_pos(a0),$34(a0)
                 move.w  #0,y_vel(a0)
-                bra.s   loc_3EBEE
+                bra.s   SKMHZStickVine_TryReturnToIdle
 ; ---------------------------------------------------------------------------
 
-loc_3EBBA:
+SKMHZStickVine_ReturnFromBelowRoot:
                 tst.w   y_vel(a0)
-                bpl.s   loc_3EBD4
+                bpl.s   SKMHZStickVine_RetractBelowRoot
                 move.w  y_vel(a0),d2
                 addi.w  #$38,y_vel(a0)
                 ext.l   d2
                 asl.l   #8,d2
                 add.l   d2,$34(a0)
-                bra.s   loc_3EBEE
+                bra.s   SKMHZStickVine_TryReturnToIdle
 ; ---------------------------------------------------------------------------
 
-loc_3EBD4:
+SKMHZStickVine_RetractBelowRoot:
                 subq.w  #2,$34(a0)
                 move.w  $34(a0),d2
                 cmp.w   y_pos(a0),d2
-                bhs.s   loc_3EBEE
+                bhs.s   SKMHZStickVine_TryReturnToIdle
                 move.w  y_pos(a0),$34(a0)
                 move.w  #0,y_vel(a0)
 
-loc_3EBEE:
+SKMHZStickVine_TryReturnToIdle:
                 or.w    d0,d1
-                bne.s   loc_3EBF8
-                move.l  #loc_3EACA,(a0)
+                bne.s   SKMHZStickVine_CullInvisibleRoot
+                move.l  #SKMHZStickVine_CheckPlayersAndCull,(a0)
 
-loc_3EBF8:
+SKMHZStickVine_CullInvisibleRoot:
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_3EC0E
+                bhi.w   SKMHZStickVine_ClearVineRespawnBit
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3EC0E:
+SKMHZStickVine_ClearVineRespawnBit:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_3EC1A
+                beq.s   SKMHZStickVine_DeleteDisplayAndRoot
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_3EC1A:
+SKMHZStickVine_DeleteDisplayAndRoot:
                 movea.w parent3(a0),a1
                 jsr     (Delete_Referenced_Sprite).l
                 jmp     (Delete_Current_Sprite).l
@@ -180,14 +181,14 @@ LayOutMhzStickyVineSegments:
                 asr.l   #3,d1
                 lea     $48(a2),a3
                 moveq   #8-1,d6
-                bra.s   loc_3EC4E
+                bra.s   SKMHZStickVine_PlaceSegmentsBackward
 ; ---------------------------------------------------------------------------
 
-loc_3EC4A:
+SKMHZStickVine_StepSegmentPosition:
                 add.l   d0,d2
                 add.l   d1,d3
 
-loc_3EC4E:
+SKMHZStickVine_PlaceSegmentsBackward:
                 subq.w  #2,a3
                 swap    d3
                 move.w  d3,-(a3)
@@ -195,7 +196,7 @@ loc_3EC4E:
                 swap    d2
                 move.w  d2,-(a3)
                 swap    d2
-                dbf     d6,loc_3EC4A
+                dbf     d6,SKMHZStickVine_StepSegmentPosition
                 movem.l (sp)+,d1-d2
                 rts
 ; End of function LayOutMhzStickyVineSegments
@@ -206,15 +207,16 @@ ApplyMhzStickyVinePullToPlayer:
                 swap    d1
                 swap    d2
                 move.w  d1,d3
-                bpl.s   loc_3EC70
+                bpl.s   SKMHZStickVine_CalcAbsPullY
                 neg.w   d3
 
-loc_3EC70:
+SKMHZStickVine_CalcAbsPullY:
                 move.w  d2,d4
-                bpl.s   loc_3EC76
+                bpl.s   SKMHZStickVine_ApplyDirectionalPull
                 neg.w   d4
 
-loc_3EC76:
+; Use twice the sum of the absolute deltas as the magnitude and scale X twice as much as Y
+SKMHZStickVine_ApplyDirectionalPull:
                 add.w   d4,d3
                 add.w   d3,d3
                 jsr     (GetArcTan).l
@@ -225,55 +227,55 @@ loc_3EC76:
                 asl.l   #2,d1
                 sub.l   d1,x_pos(a1)
                 btst    #Status_InAir,status(a1)
-                beq.s   loc_3ECAA
+                beq.s   SKMHZStickVine_GetGroundPullMagnitude
                 sub.l   d0,y_pos(a1)
                 tst.w   y_vel(a1)
-                bmi.s   loc_3ECCC
+                bmi.s   SKMHZStickVine_TickRecoilDelay
                 asr     x_vel(a1)
-                bra.s   loc_3ECCC
+                bra.s   SKMHZStickVine_TickRecoilDelay
 ; ---------------------------------------------------------------------------
 
-loc_3ECAA:
+SKMHZStickVine_GetGroundPullMagnitude:
                 asr.l   #8,d1
                 tst.w   d1
-                bpl.s   loc_3ECB2
+                bpl.s   SKMHZStickVine_GetGroundSpeedMagnitude
                 neg.w   d1
 
-loc_3ECB2:
+SKMHZStickVine_GetGroundSpeedMagnitude:
                 move.w  ground_vel(a1),d0
-                bpl.s   loc_3ECBA
+                bpl.s   SKMHZStickVine_TryDampGroundSpeed
                 neg.w   d0
 
-loc_3ECBA:
+SKMHZStickVine_TryDampGroundSpeed:
                 cmpi.w  #$200,d0
-                blo.s   loc_3ECCC
+                blo.s   SKMHZStickVine_TickRecoilDelay
                 subi.w  #$10,d0
                 cmp.w   d1,d0
-                bhs.s   loc_3ECCC
+                bhs.s   SKMHZStickVine_TickRecoilDelay
                 asr     ground_vel(a1)
 
-loc_3ECCC:
+SKMHZStickVine_TickRecoilDelay:
                 tst.b   $3D(a0)
-                beq.s   loc_3ED02
+                beq.s   SKMHZStickVine_ClearPlayerPush
                 tst.b   spin_dash_flag(a1)
-                bne.s   loc_3ED02
+                bne.s   SKMHZStickVine_ClearPlayerPush
                 subq.b  #1,$3E(a0)
-                bne.s   loc_3ED02
+                bne.s   SKMHZStickVine_ClearPlayerPush
                 move.l  x_pos(a1),$30(a0)
                 move.l  y_pos(a1),$34(a0)
                 move.w  #-$600,y_vel(a0)
                 move.b  #0,$3D(a0)
                 move.b  #0,$3E(a0)
-                move.l  #loc_3EB50,(a0)
+                move.l  #SKMHZStickVine_RecoilFromSavedEndpoint,(a0)
 
-loc_3ED02:
+SKMHZStickVine_ClearPlayerPush:
                 bclr    #Status_Push,status(a1)
                 rts
 ; End of function ApplyMhzStickyVinePullToPlayer
 
 ; ---------------------------------------------------------------------------
 
-loc_3ED0A:
+SKMHZStickVine_DrawVineDisplay:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_MHZStickyVine:

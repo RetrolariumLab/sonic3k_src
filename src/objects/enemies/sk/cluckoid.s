@@ -123,7 +123,7 @@ loc_8E290:
 loc_8E294:
                 cmpi.b  #3,d1
                 bne.s   loc_8E2A6
-                move.l  #loc_3DBE0,(a0)
+                move.l  #SKMHZPollen_MoveWithSineDrift,(a0)
                 move.w  #2,$34(a0)
 
 loc_8E2A6:

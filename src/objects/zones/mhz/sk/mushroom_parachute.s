@@ -15,24 +15,24 @@ Obj_MHZMushroomParachute:
                 move.w  #$200,ground_vel(a0)
                 move.b  #0,angle(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_3F4FA
+                beq.s   SKMHZParachute_StartCaptureWait
                 move.b  #$80,angle(a0)
 
-loc_3F4FA:
-                move.l  #loc_3F500,(a0)
+SKMHZParachute_StartCaptureWait:
+                move.l  #SKMHZParachute_UpdateRidersAndTryStart,(a0)
 
-loc_3F500:
+SKMHZParachute_UpdateRidersAndTryStart:
                 bsr.w   UpdatePlayersOnMhzMushroomParachute
                 tst.b   $30(a0)
-                beq.s   loc_3F516
-                move.l  #loc_3F51C,(a0)
+                beq.s   SKMHZParachute_DrawIdleParachute
+                move.l  #SKMHZParachute_UpdateControlledFlight,(a0)
                 move.w  #$300,y_vel(a0)
 
-loc_3F516:
+SKMHZParachute_DrawIdleParachute:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_3F51C:
+SKMHZParachute_UpdateControlledFlight:
                 bsr.w   MHZParachute_SteerAndAdjustDescent
                 jsr     (MoveSprite2).l
                 bsr.w   ResolveMhzMushroomParachuteSideWalls
@@ -40,46 +40,47 @@ loc_3F51C:
                 move.w  x_vel(a0),$34(a0)
                 move.w  y_vel(a0),$36(a0)
                 tst.w   $30(a0)
-                bne.s   loc_3F544
-                move.l  #loc_3F572,(a0)
+                bne.s   SKMHZParachute_TryReleaseHiddenP1
+                move.l  #SKMHZParachute_UpdateUnoccupiedFlight,(a0)
 
-loc_3F544:
+SKMHZParachute_TryReleaseHiddenP1:
                 tst.b   render_flags(a0)
-                bmi.s   loc_3F56C
+                bmi.s   SKMHZParachute_DrawControlledFlight
                 move.w  #$7F00,x_pos(a0)
                 tst.b   $30(a0)
-                beq.s   loc_3F55E
+                beq.s   SKMHZParachute_TryReleaseHiddenP2
                 clr.w   (Player_1+interact).w
                 clr.b   (Player_1+object_control).w
 
-loc_3F55E:
+SKMHZParachute_TryReleaseHiddenP2:
                 tst.b   $31(a0)
-                beq.s   loc_3F56C
+                beq.s   SKMHZParachute_DrawControlledFlight
                 clr.w   (Player_2+interact).w
                 clr.b   (Player_2+object_control).w
 
-loc_3F56C:
+SKMHZParachute_DrawControlledFlight:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_3F572:
+; Continue steering and moving without wall probes or rider capture
+SKMHZParachute_UpdateUnoccupiedFlight:
                 bsr.w   MHZParachute_SteerAndAdjustDescent
                 jsr     (MoveSprite2).l
                 tst.b   render_flags(a0)
-                bmi.s   loc_3F5A4
+                bmi.s   SKMHZParachute_DrawUnoccupiedFlight
                 move.w  #$7F00,x_pos(a0)
                 tst.b   $30(a0)
-                beq.s   loc_3F596
+                beq.s   SKMHZParachute_TryClearUnoccupiedP2
                 clr.w   (Player_1+interact).w
                 clr.b   (Player_1+object_control).w
 
-loc_3F596:
+SKMHZParachute_TryClearUnoccupiedP2:
                 tst.b   $31(a0)
-                beq.s   loc_3F5A4
+                beq.s   SKMHZParachute_DrawUnoccupiedFlight
                 clr.w   (Player_2+interact).w
                 clr.b   (Player_2+object_control).w
 
-loc_3F5A4:
+SKMHZParachute_DrawUnoccupiedFlight:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -98,40 +99,40 @@ UpdatePlayersOnMhzMushroomParachute:
 
 UpdatePlayerOnMhzMushroomParachute:
                 tst.b   (a2)
-                beq.w   loc_3F6FE
+                beq.w   SKMHZParachute_TickCaptureCooldown
                 tst.b   render_flags(a1)
-                bpl.w   loc_3F660
+                bpl.w   SKMHZParachute_NudgeRiderUpAndDetach
                 cmpi.b  #4,routine(a1)
-                bhs.w   loc_3F666
+                bhs.w   SKMHZParachute_DetachWithoutJump
                 tst.w   (Debug_placement_mode).w
-                bne.w   loc_3F666
+                bne.w   SKMHZParachute_DetachWithoutJump
                 move.w  $34(a0),d1
                 cmp.w   x_vel(a1),d1
-                bne.s   loc_3F660
+                bne.s   SKMHZParachute_NudgeRiderUpAndDetach
                 move.w  $36(a0),d1
                 cmp.w   y_vel(a1),d1
-                bne.s   loc_3F660
+                bne.s   SKMHZParachute_NudgeRiderUpAndDetach
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   loc_3F678
+                beq.w   SKMHZParachute_CarryRiderAndCheckTerrain
                 clr.w   interact(a1)
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.b  #$12,2(a2)
                 andi.w  #(button_up_mask|button_down_mask|button_left_mask|button_right_mask)<<8,d0
-                beq.w   loc_3F61C
+                beq.w   SKMHZParachute_TrySetJumpLeft
                 move.b  #$3C,2(a2)
 
-loc_3F61C:
+SKMHZParachute_TrySetJumpLeft:
                 btst    #button_left+8,d0
-                beq.s   loc_3F628
+                beq.s   SKMHZParachute_TrySetJumpRight
                 move.w  #-$200,x_vel(a1)
 
-loc_3F628:
+SKMHZParachute_TrySetJumpRight:
                 btst    #button_right+8,d0
-                beq.s   loc_3F634
+                beq.s   SKMHZParachute_SetJumpReleasePose
                 move.w  #$200,x_vel(a1)
 
-loc_3F634:
+SKMHZParachute_SetJumpReleasePose:
                 move.w  #-$380,y_vel(a1)
                 bset    #Status_InAir,status(a1)
                 move.b  #1,jumping(a1)
@@ -142,10 +143,10 @@ loc_3F634:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3F660:
+SKMHZParachute_NudgeRiderUpAndDetach:
                 move.w  #-$100,y_vel(a1)
 
-loc_3F666:
+SKMHZParachute_DetachWithoutJump:
                 clr.w   interact(a1)
                 clr.b   object_control(a1)
                 clr.b   (a2)
@@ -153,7 +154,7 @@ loc_3F666:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3F678:
+SKMHZParachute_CarryRiderAndCheckTerrain:
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 addi.w  #$25,y_pos(a1)
@@ -164,14 +165,14 @@ loc_3F678:
                 jsr     (SonicKnux_DoLevelCollision).l
                 movem.l (sp)+,d0-a6
 
-loc_3F6A6:
+SKMHZParachute_SetFacingFromHeading:
                 bclr    #Status_Facing,status(a1)
                 move.b  angle(a0),d0
                 addi.b  #$40,d0
-                bpl.s   loc_3F6BC
+                bpl.s   SKMHZParachute_ApplyHeadingPose
                 bset    #Status_Facing,status(a1)
 
-loc_3F6BC:
+SKMHZParachute_ApplyHeadingPose:
                 move.b  status(a1),d0
                 andi.b  #1,d0
                 andi.b  #$FC,render_flags(a1)
@@ -179,7 +180,7 @@ loc_3F6BC:
                 moveq   #0,d0
                 move.b  angle(a0),d0
                 lsr.w   #4,d0
-                move.b  RawAni_3F6EE(pc,d0.w),mapping_frame(a1)
+                move.b  SKMHZParachute_RiderHeadingFrames(pc,d0.w),mapping_frame(a1)
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 move.l  a2,-(sp)
@@ -187,37 +188,37 @@ loc_3F6BC:
                 movea.l (sp)+,a2
                 rts
 ; ---------------------------------------------------------------------------
-RawAni_3F6EE:
+SKMHZParachute_RiderHeadingFrames:
                 dc.b    $E4, $E5, $E6, $E6, $E7, $E6, $E6, $E5, $E4, $E5, $E6, $E6, $E7, $E6, $E6, $E5
                 even
 ; ---------------------------------------------------------------------------
 
-loc_3F6FE:
+SKMHZParachute_TickCaptureCooldown:
                 tst.b   2(a2)
-                beq.s   loc_3F70C
+                beq.s   SKMHZParachute_TryCaptureRider
                 subq.b  #1,2(a2)
-                bne.w   locret_3F7AC
+                bne.w   SKMHZParachute_CaptureReturn
 
-loc_3F70C:
+SKMHZParachute_TryCaptureRider:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$10,d0
                 cmpi.w  #$20,d0
-                bhs.w   locret_3F7AC
+                bhs.w   SKMHZParachute_CaptureReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 subi.w  #$25,d1
                 cmpi.w  #$18,d1
-                bhs.w   locret_3F7AC
+                bhs.w   SKMHZParachute_CaptureReturn
                 tst.b   object_control(a1)
-                bne.s   locret_3F7AC
+                bne.s   SKMHZParachute_CaptureReturn
                 cmpi.b  #4,routine(a1)
-                bhs.s   locret_3F7AC
+                bhs.s   SKMHZParachute_CaptureReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_3F7AC
+                bne.s   SKMHZParachute_CaptureReturn
                 tst.w   y_vel(a1)
-                beq.s   locret_3F7AC
-                bmi.s   locret_3F7AC
+                beq.s   SKMHZParachute_CaptureReturn
+                bmi.s   SKMHZParachute_CaptureReturn
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)
                 clr.w   ground_vel(a1)
@@ -235,10 +236,10 @@ loc_3F70C:
                 move.w  y_vel(a0),y_vel(a1)
                 moveq   #signextendB(sfx_Grab),d0
                 jsr     (Play_SFX).l
-                bra.w   loc_3F6A6
+                bra.w   SKMHZParachute_SetFacingFromHeading
 ; ---------------------------------------------------------------------------
 
-locret_3F7AC:
+SKMHZParachute_CaptureReturn:
                 rts
 ; End of function UpdatePlayerOnMhzMushroomParachute
 
@@ -247,23 +248,23 @@ locret_3F7AC:
 ResolveMhzMushroomParachuteSideWalls:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$D,lrb_solid_bit(a0)
-                beq.s   loc_3F7C2
+                beq.s   SKMHZParachute_ResolveLeftWall
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-loc_3F7C2:
+SKMHZParachute_ResolveLeftWall:
                 moveq   #$D,d5
                 jsr     (ProbeLeftWallAtBodyExtents).l
                 tst.w   d1
-                bpl.s   loc_3F7D2
+                bpl.s   SKMHZParachute_ResolveRightWall
                 sub.w   d1,x_pos(a0)
 
-loc_3F7D2:
+SKMHZParachute_ResolveRightWall:
                 jsr     (ProbeRightWallAtBodyExtents).l
                 tst.w   d1
-                bpl.s   locret_3F7E0
+                bpl.s   SKMHZParachute_WallProbeReturn
                 add.w   d1,x_pos(a0)
 
-locret_3F7E0:
+SKMHZParachute_WallProbeReturn:
                 rts
 ; End of function ResolveMhzMushroomParachuteSideWalls
 
@@ -273,40 +274,40 @@ locret_3F7E0:
 MHZParachute_SteerAndAdjustDescent:
                 move.b  angle(a0),d0
                 tst.b   $30(a0)
-                beq.s   loc_3F818
+                beq.s   SKMHZParachute_StepPassiveHeading
                 btst    #button_left,(Ctrl_1_held_logical).w
-                beq.s   loc_3F804
+                beq.s   SKMHZParachute_TrySteerRight
                 cmpi.b  #$80,d0
-                beq.s   loc_3F804
+                beq.s   SKMHZParachute_TrySteerRight
                 tst.b   d0
-                bpl.s   loc_3F800
+                bpl.s   SKMHZParachute_StepLeftSteer
                 neg.b   d0
 
-loc_3F800:
+SKMHZParachute_StepLeftSteer:
                 addq.b  #2,d0
-                bra.s   loc_3F822
+                bra.s   SKMHZParachute_ApplyHeadingAndDescent
 ; ---------------------------------------------------------------------------
 
-loc_3F804:
+SKMHZParachute_TrySteerRight:
                 btst    #button_right,(Ctrl_1_held_logical).w
-                beq.s   loc_3F818
+                beq.s   SKMHZParachute_StepPassiveHeading
                 tst.b   d0
-                beq.s   loc_3F818
-                bmi.s   loc_3F814
+                beq.s   SKMHZParachute_StepPassiveHeading
+                bmi.s   SKMHZParachute_StepRightSteer
                 neg.b   d0
 
-loc_3F814:
+SKMHZParachute_StepRightSteer:
                 addq.b  #2,d0
-                bra.s   loc_3F822
+                bra.s   SKMHZParachute_ApplyHeadingAndDescent
 ; ---------------------------------------------------------------------------
 
-loc_3F818:
+SKMHZParachute_StepPassiveHeading:
                 move.b  d0,d1
                 andi.b  #$7F,d1
-                beq.s   loc_3F822
+                beq.s   SKMHZParachute_ApplyHeadingAndDescent
                 addq.b  #2,d0
 
-loc_3F822:
+SKMHZParachute_ApplyHeadingAndDescent:
                 move.b  d0,angle(a0)
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
@@ -314,15 +315,15 @@ loc_3F822:
                 asr.l   #8,d1
                 move.w  d1,x_vel(a0)
                 cmpi.w  #$80,y_vel(a0)
-                blt.s   loc_3F84A
+                blt.s   SKMHZParachute_IncreaseDescentSpeed
                 subi.w  #$20,y_vel(a0)
-                bra.s   locret_3F850
+                bra.s   SKMHZParachute_SteeringReturn
 ; ---------------------------------------------------------------------------
 
-loc_3F84A:
+SKMHZParachute_IncreaseDescentSpeed:
                 addi.w  #$20,y_vel(a0)
 
-locret_3F850:
+SKMHZParachute_SteeringReturn:
                 rts
 ; End of function MHZParachute_SteerAndAdjustDescent
 
