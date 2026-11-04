@@ -24,10 +24,10 @@ Wait_VSync:
 
 Random_Number:
                 move.l  (RNG_seed).w,d1
-                bne.s   loc_1FBA
+                bne.s   S3Math_AdvanceFortyOneFoldPseudoRandomSeed
                 move.l  #$2A6D365A,d1                   ; reset seed if needed
 
-loc_1FBA:
+S3Math_AdvanceFortyOneFoldPseudoRandomSeed:
                 move.l  d1,d0
                 asl.l   #2,d1
                 add.l   d0,d1
@@ -80,42 +80,42 @@ GetArcTan:
                 beq.s   GetArcTan_Zero                  ; special case when both x and y are zero
                 move.w  d2,d4
                 tst.w   d3
-                bpl.s   loc_2284
+                bpl.s   S3Math_TakeUnsignedWordMagnitudeOfY
                 neg.w   d3
 
-loc_2284:
+S3Math_TakeUnsignedWordMagnitudeOfY:
                 tst.w   d4
-                bpl.s   loc_228A
+                bpl.s   S3Math_SelectShallowOrSteepArctangentRatio
                 neg.w   d4
 
-loc_228A:
+S3Math_SelectShallowOrSteepArctangentRatio:
                 cmp.w   d3,d4
-                bcc.s   loc_229A
+                bcc.s   S3Math_ComputeSteepOctantAngleFromReciprocalRatio
                 lsl.l   #8,d4
                 divu.w  d3,d4
                 moveq   #0,d0
                 move.b  ArcTanTable(pc,d4.w),d0
-                bra.s   loc_22A4
+                bra.s   S3Math_ReflectArctangentForNegativeOriginalX
 
-loc_229A:
+S3Math_ComputeSteepOctantAngleFromReciprocalRatio:
                 lsl.l   #8,d3
                 divu.w  d4,d3
                 moveq   #$40,d0
                 sub.b   ArcTanTable(pc,d3.w),d0         ; arctan(y/x) = 90 - arctan(x/y)
 
-loc_22A4:
+S3Math_ReflectArctangentForNegativeOriginalX:
                 tst.w   d1
-                bpl.s   loc_22AE
+                bpl.s   S3Math_ReflectArctangentForNegativeOriginalY
                 neg.w   d0
                 addi.w  #$80,d0                         ; place angle in appropriate quadrant
 
-loc_22AE:
+S3Math_ReflectArctangentForNegativeOriginalY:
                 tst.w   d2
-                bpl.s   loc_22B8
+                bpl.s   S3Math_RestoreMagnitudeWorkRegistersAndReturnAngle
                 neg.w   d0
                 addi.w  #$100,d0                        ; place angle in appropriate quadrant
 
-loc_22B8:
+S3Math_RestoreMagnitudeWorkRegistersAndReturnAngle:
                 movem.l (sp)+,d3-d4
                 rts
 ; ---------------------------------------------------------------------------

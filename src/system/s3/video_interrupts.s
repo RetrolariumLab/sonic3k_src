@@ -11,19 +11,19 @@ VInt:
                 tst.b   (V_int_routine).w
                 beq.w   VInt_0_Main
 
-loc_810:
+S3VInt_WaitForVBlankBeforeRequestedFrameTransfer:
                 move.w  (VDP_control_port).l,d0
                 andi.w  #8,d0
-                beq.s   loc_810                         ; wait until vertical blanking is taking place
+                beq.s   S3VInt_WaitForVBlankBeforeRequestedFrameTransfer  ; wait until vertical blanking is taking place
 
                 move.l  #vdpComm($0000,VSRAM,WRITE),(VDP_control_port).l
                 move.l  (V_scroll_value).w,(VDP_data_port).l
                 btst    #6,(Graphics_flags).w
-                beq.s   loc_83E                         ; branch if it's not a PAL system
+                beq.s   S3VInt_ConsumeFrameRequestAndDispatchMaskedVIntIndex  ; branch if it's not a PAL system
                 move.w  #$700,d0
                 dbf     d0,*                            ; otherwise, waste a bit of time here
 
-loc_83E:
+S3VInt_ConsumeFrameRequestAndDispatchMaskedVIntIndex:
                 move.b  (V_int_routine).w,d0
                 move.b  #VInt_ID_0,(V_int_routine).w
                 move.w  #1,(H_int_flag).w               ; Allow H Interrupt code to run
@@ -156,28 +156,28 @@ VInt_2:
                 dma68kToVDP H_scroll_buffer,$F000,H_scroll_buffer_end-H_scroll_buffer,VRAM
                 jsr     (SegaScr_VInt).l
                 tst.w   (Demo_timer).w
-                beq.w   locret_A4C
+                beq.w   S3VInt_ReturnAfterSegaVIntAndOptionalDemoTick
                 subq.w  #1,(Demo_timer).w
 
-locret_A4C:
+S3VInt_ReturnAfterSegaVIntAndOptionalDemoTick:
                 rts
 ; ---------------------------------------------------------------------------
 
 VInt_14:
                 move.b  (V_int_run_count+3).w,d0
                 andi.w  #$F,d0
-                bne.s   loc_A76                         ; run the following code once every 16 frames
+                bne.s   S3VInt_TickDemoTimerAfterSparseControllerPoll  ; run the following code once every 16 frames
 
                 stopZ80
                 bsr.w   Poll_Controllers
                 startZ80
 
-loc_A76:
+S3VInt_TickDemoTimerAfterSparseControllerPoll:
                 tst.w   (Demo_timer).w
-                beq.w   locret_A82
+                beq.w   S3VInt_ReturnFromSparsePollVInt
                 subq.w  #1,(Demo_timer).w
 
-locret_A82:
+S3VInt_ReturnFromSparsePollVInt:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -187,10 +187,10 @@ VInt_4:
                 move.w  (Ctrl_1).w,(Ctrl_1_title).w
                 bsr.w   Process_Nem_Queue
                 tst.w   (Demo_timer).w
-                beq.w   locret_AA2
+                beq.w   S3VInt_ReturnAfterTitleTransfersAndDemoTick
                 subq.w  #1,(Demo_timer).w
 
-locret_AA2:
+S3VInt_ReturnAfterTitleTransfersAndDemoTick:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -268,10 +268,10 @@ Do_Updates:
                 move.w  #0,(Lag_frame_count).w
                 bsr.w   Process_Nem_Queue_2
                 tst.w   (Demo_timer).w
-                beq.w   locret_C0C
+                beq.w   S3VInt_ReturnFromHudAndThreeTileUpdateGroup
                 subq.w  #1,(Demo_timer).w
 
-locret_C0C:
+S3VInt_ReturnFromHudAndThreeTileUpdateGroup:
                 rts
 ; End of function Do_Updates
 
@@ -344,10 +344,10 @@ VInt_18:
                 dma68kToVDP H_scroll_buffer,$F000,H_scroll_buffer_end-H_scroll_buffer,VRAM
 
                 bclr    #0,(_unkFA88).w
-                beq.s   loc_DEA
+                beq.s   S3VInt_FinishSaveVIntAfterOptionalPlaneBufferUpload
                 dma68kToVDP RAM_start+$2000,$C000,$2000,VRAM
 
-loc_DEA:
+S3VInt_FinishSaveVIntAfterOptionalPlaneBufferUpload:
                 bsr.w   Process_DMA_Queue
                 bsr.w   sndDriverInput
                 startZ80
@@ -367,10 +367,10 @@ VInt_16:
                 startZ80
                 bsr.w   Process_Nem_Queue
                 tst.w   (Demo_timer).w
-                beq.w   locret_E9E
+                beq.w   S3VInt_ReturnFromMenuVIntAndDemoTick
                 subq.w  #1,(Demo_timer).w
 
-locret_E9E:
+S3VInt_ReturnFromMenuVIntAndDemoTick:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -385,10 +385,10 @@ VInt_1C:
                 bsr.w   Do_ControllerPal
                 bsr.w   Update_SSMap
                 tst.w   (Demo_timer).w
-                beq.w   loc_EC6
+                beq.w   S3VInt_TailBookmarkAfterSpecialStageMapAndDemoTick
                 subq.w  #1,(Demo_timer).w
 
-loc_EC6:
+S3VInt_TailBookmarkAfterSpecialStageMapAndDemoTick:
                 jmp     (Set_Kos_Bookmark).l
 ; ---------------------------------------------------------------------------
 
@@ -405,14 +405,14 @@ Do_ControllerPal:
                 stopZ80
                 bsr.w   Poll_Controllers
                 tst.b   (Water_full_screen_flag).w
-                bne.s   loc_F20
+                bne.s   S3VInt_UploadFullWaterPaletteForControllerTransferGroup
                 dma68kToVDP Normal_palette,0,Normal_palette_end-Normal_palette,CRAM
-                bra.s   loc_F44
+                bra.s   S3VInt_UploadSpriteScrollAndQueuedDmaThenReleaseZ80
 
-loc_F20:
+S3VInt_UploadFullWaterPaletteForControllerTransferGroup:
                 dma68kToVDP Water_palette,0,Water_palette_end-Water_palette,CRAM
 
-loc_F44:
+S3VInt_UploadSpriteScrollAndQueuedDmaThenReleaseZ80:
                 dma68kToVDP Sprite_table,$F800,Sprite_table_end-Sprite_table,VRAM
                 dma68kToVDP H_scroll_buffer,$F000,H_scroll_buffer_end-H_scroll_buffer,VRAM
                 bsr.w   Process_DMA_Queue

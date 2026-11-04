@@ -146,25 +146,25 @@ SndDrvInit:
 ; Load SMPS sound driver
                 lea     (Z80_SoundDriver).l,a0
                 lea     (Z80_RAM).l,a1
-                move.w  #(Size_of_Snd_driver_guess+Size_of_Snd_driver2_guess+$BC)-1,d0  ; Oddly, this loads $BC extra bytes of padding into the Z80 instead of loading the exact size of the Z80. Remove the +$BC to fix this
+                move.w  #(Size_of_Snd_driver_guess+Size_of_Snd_driver2_guess+$BC)-1,d0  ; Preserve the original $BC extra bytes beyond the driver sections
 
-loc_1584:
+S3Device_CopySoundDriverAndRetainedExtraPaddingToZ80Ram:
                 move.b  (a0)+,(a1)+
-                dbf     d0,loc_1584
+                dbf     d0,S3Device_CopySoundDriverAndRetainedExtraPaddingToZ80Ram
 ; Load default variables
                 lea     (Z80_DefaultVariables).l,a0
                 lea     (Z80_RAM+zDataStart).l,a1
                 move.w  #Z80_DefaultVariables_end-Z80_DefaultVariables-1,d0
 
-loc_159A:
+S3Device_CopySixteenDefaultZ80VariableBytes:
                 move.b  (a0)+,(a1)+
-                dbf     d0,loc_159A
+                dbf     d0,S3Device_CopySixteenDefaultZ80VariableBytes
 ; Detect PAL region consoles
                 btst    #6,(Graphics_flags).w
-                beq.s   loc_15B0
+                beq.s   S3Device_PulseZ80ResetAndReleaseSoundBus
                 move.b  #1,(Z80_RAM+zPalFlag).l
 
-loc_15B0:
+S3Device_PulseZ80ResetAndReleaseSoundBus:
                 move.w  #0,(Z80_reset).l                ; reset Z80
                 nop
                 nop
@@ -228,17 +228,17 @@ Play_SFX_Local:
 Play_SFX:
                 stopZ80
                 cmp.b   (Z80_RAM+zSFXNumber0).l,d0
-                beq.s   loc_1642
+                beq.s   S3Device_ReleaseZ80BusAfterSfxRequestOrDuplicate
                 tst.b   (Z80_RAM+zSFXNumber0).l
-                bne.s   loc_163C
+                bne.s   S3Device_OverwriteSecondarySfxRequestWhenPrimaryOccupied
                 move.b  d0,(Z80_RAM+zSFXNumber0).l
                 startZ80
                 rts
 
-loc_163C:
+S3Device_OverwriteSecondarySfxRequestWhenPrimaryOccupied:
                 move.b  d0,(Z80_RAM+zSFXNumber1).l
 
-loc_1642:
+S3Device_ReleaseZ80BusAfterSfxRequestOrDuplicate:
                 startZ80
 
 Play_SFX_Done:

@@ -4,21 +4,21 @@
 ; ---------------------------------------------------------------------------
 
 Obj_SphereTest:
-                lea     (word_2382C).l,a6
+                lea     (S3SphereTest_AssignedGridRecordData).l,a6
                 movea.l a0,a1
                 move.l  #Obj_SphereTest_Main,(a1)
                 cmpi.b  #1,subtype(a0)
-                beq.w   loc_23398
+                beq.w   S3SphereTest_BeginFourRingPointConstruction
                 cmpi.b  #2,subtype(a0)
-                beq.w   loc_23556
+                beq.w   S3SphereTest_BeginThreeOrthogonalRingPointConstruction
                 tst.b   (Ctrl_2).w
-                bne.w   loc_23556
+                bne.w   S3SphereTest_BeginThreeOrthogonalRingPointConstruction
 
-loc_23398:
+S3SphereTest_BeginFourRingPointConstruction:
                 moveq   #0,d2
                 moveq   #$E-1,d3
                 tst.w   (Sphere_test_address).w
-                bne.s   loc_233D6
+                bne.s   S3SphereTest_InstallPointOnlyHandlerForPreexistingOwnerOrNewChild
                 move.w  a0,(Sphere_test_address).w
                 move.w  #0,(_unkE412).w
                 move.w  #0,(_unkE414).w
@@ -26,17 +26,17 @@ loc_23398:
                 move.w  #0,(SStage_scalar_index_0).w
                 move.w  #0,(SStage_scalar_index_1).w
                 move.w  #0,(SStage_scalar_index_2).w
-                bra.s   loc_233DC
+                bra.s   S3SphereTest_InitializeFirstRingAtNegativeFixedZ
 ; ---------------------------------------------------------------------------
 
-loc_233CC:
+S3SphereTest_AllocateNextFirstRingPointOrFinishPartialPrefix:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_234E0
+                bne.w   S3SphereTest_FinishFourRingPrefixWithPaletteAndArtRequest
 
-loc_233D6:
+S3SphereTest_InstallPointOnlyHandlerForPreexistingOwnerOrNewChild:
                 move.l  #Obj_EosianSphere,(a1)
 
-loc_233DC:
+S3SphereTest_InitializeFirstRingAtNegativeFixedZ:
                 bsr.w   SphereTestS3InitializeFourRingPointSpriteAndCenter
                 bsr.w   SphereTestS3SkipQuarterTurnSamples
                 move.w  d2,d0
@@ -49,13 +49,13 @@ loc_233DC:
                 move.w  #-$20,$38(a1)
                 move.l  a6,$3A(a1)
                 adda.w  #$10,a6
-                dbf     d3,loc_233CC
+                dbf     d3,S3SphereTest_AllocateNextFirstRingPointOrFinishPartialPrefix
                 moveq   #0,d2
                 moveq   #$E-1,d3
 
-loc_23412:
+S3SphereTest_AllocateSecondRingAtPositiveFixedZ:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_234E0
+                bne.w   S3SphereTest_FinishFourRingPrefixWithPaletteAndArtRequest
                 move.l  #Obj_EosianSphere,(a1)
                 bsr.w   SphereTestS3InitializeFourRingPointSpriteAndCenter
                 bsr.w   SphereTestS3SkipQuarterTurnSamples
@@ -69,13 +69,13 @@ loc_23412:
                 move.w  #$20,$38(a1)
                 move.l  a6,$3A(a1)
                 adda.w  #$10,a6
-                dbf     d3,loc_23412
+                dbf     d3,S3SphereTest_AllocateSecondRingAtPositiveFixedZ
                 moveq   #0,d2
                 moveq   #$E-1,d3
 
-loc_23458:
+S3SphereTest_AllocateThirdRingAtPositiveFixedX:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_234E0
+                bne.w   S3SphereTest_FinishFourRingPrefixWithPaletteAndArtRequest
                 move.l  #Obj_EosianSphere,(a1)
                 bsr.w   SphereTestS3InitializeFourRingPointSpriteAndCenter
                 bsr.w   SphereTestS3SkipQuarterTurnSamples
@@ -89,13 +89,13 @@ loc_23458:
                 move.w  d1,$38(a1)
                 move.l  a6,$3A(a1)
                 adda.w  #$10,a6
-                dbf     d3,loc_23458
+                dbf     d3,S3SphereTest_AllocateThirdRingAtPositiveFixedX
                 moveq   #0,d2
                 moveq   #$E-1,d3
 
-loc_2349E:
+S3SphereTest_AllocateFourthRingAtNegativeFixedX:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_234E0
+                bne.w   S3SphereTest_FinishFourRingPrefixWithPaletteAndArtRequest
                 move.l  #Obj_EosianSphere,(a1)
                 bsr.w   SphereTestS3InitializeFourRingPointSpriteAndCenter
                 bsr.w   SphereTestS3SkipQuarterTurnSamples
@@ -109,16 +109,16 @@ loc_2349E:
                 move.w  d1,$38(a1)
                 move.l  a6,$3A(a1)
                 adda.w  #$10,a6
-                dbf     d3,loc_2349E
+                dbf     d3,S3SphereTest_AllocateFourthRingAtNegativeFixedX
 
-loc_234E0:
+S3SphereTest_FinishFourRingPrefixWithPaletteAndArtRequest:
                 lea     (Pal_SphereTest).l,a1
                 lea     (Normal_palette_line_2).w,a2
                 move.w  #bytesToWcnt($20),d0
 
-loc_234EE:
+S3SphereTest_CopySixteenFourRingPaletteWords:
                 move.w  (a1)+,(a2)+
-                dbf     d0,loc_234EE
+                dbf     d0,S3SphereTest_CopySixteenFourRingPaletteWords
                 moveq   #PLCID_09,d0
                 jsr     (Load_PLC).l
                 bra.w   Obj_SphereTest_Main
@@ -143,25 +143,25 @@ SphereTestS3InitializeFourRingPointSpriteAndCenter:
 
 SphereTestS3SkipQuarterTurnSamples:
                 cmpi.w  #$40,d2
-                bne.s   loc_2354A
+                bne.s   S3SphereTest_SkipNegativeYQuarterPhaseWhenConstructingFourRings
                 addi.w  #$10,d2
 
-loc_2354A:
+S3SphereTest_SkipNegativeYQuarterPhaseWhenConstructingFourRings:
                 cmpi.w  #$C0,d2
-                bne.s   locret_23554
+                bne.s   S3SphereTest_ReturnAfterQuarterPhaseAdjustments
                 addi.w  #$10,d2
 
-locret_23554:
+S3SphereTest_ReturnAfterQuarterPhaseAdjustments:
                 rts
 ; End of function SphereTestS3SkipQuarterTurnSamples
 
 ; ---------------------------------------------------------------------------
 
-loc_23556:
+S3SphereTest_BeginThreeOrthogonalRingPointConstruction:
                 moveq   #0,d2
                 moveq   #$10-1,d3
                 tst.w   (Sphere_test_address).w
-                bne.s   loc_23594
+                bne.s   S3SphereTest_InstallPointHandlerForThreeRingExistingOwnerOrChild
                 move.w  a0,(Sphere_test_address).w
                 move.w  #0,(_unkE412).w
                 move.w  #0,(_unkE414).w
@@ -169,17 +169,17 @@ loc_23556:
                 move.w  #0,(SStage_scalar_index_0).w
                 move.w  #0,(SStage_scalar_index_1).w
                 move.w  #0,(SStage_scalar_index_2).w
-                bra.s   loc_2359A
+                bra.s   S3SphereTest_InitializeFirstThreeRingInZeroZPlane
 ; ---------------------------------------------------------------------------
 
-loc_2358A:
+S3SphereTest_AllocateNextFirstThreeRingPointOrFinishPrefix:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_2364C
+                bne.w   S3SphereTest_FinishThreeRingPrefixWithPaletteAndArtRequest
 
-loc_23594:
+S3SphereTest_InstallPointHandlerForThreeRingExistingOwnerOrChild:
                 move.l  #Obj_EosianSphere,(a1)
 
-loc_2359A:
+S3SphereTest_InitializeFirstThreeRingInZeroZPlane:
                 bsr.w   SphereTestS3InitializeThreeRingPointSpriteAndCenter
                 move.w  d2,d0
                 addi.w  #$10,d2
@@ -191,13 +191,13 @@ loc_2359A:
                 move.w  #0,$38(a1)
                 move.l  a6,$3A(a1)
                 adda.w  #$10,a6
-                dbf     d3,loc_2358A
+                dbf     d3,S3SphereTest_AllocateNextFirstThreeRingPointOrFinishPrefix
                 moveq   #0,d2
                 moveq   #$10-1,d3
 
-loc_235CC:
+S3SphereTest_AllocateSecondThreeRingInZeroXPlane:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_2364C
+                bne.w   S3SphereTest_FinishThreeRingPrefixWithPaletteAndArtRequest
                 move.l  #Obj_EosianSphere,(a1)
                 bsr.w   SphereTestS3InitializeThreeRingPointSpriteAndCenter
                 move.w  d2,d0
@@ -210,13 +210,13 @@ loc_235CC:
                 move.w  d1,$38(a1)
                 move.l  a6,$3A(a1)
                 adda.w  #$10,a6
-                dbf     d3,loc_235CC
+                dbf     d3,S3SphereTest_AllocateSecondThreeRingInZeroXPlane
                 moveq   #0,d2
                 moveq   #$10-1,d3
 
-loc_2360E:
+S3SphereTest_AllocateThirdThreeRingInZeroYPlane:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_2364C
+                bne.w   S3SphereTest_FinishThreeRingPrefixWithPaletteAndArtRequest
                 move.l  #Obj_EosianSphere,(a1)
                 bsr.w   SphereTestS3InitializeThreeRingPointSpriteAndCenter
                 move.w  d2,d0
@@ -229,16 +229,16 @@ loc_2360E:
                 move.w  d1,$38(a1)
                 move.l  a6,$3A(a1)
                 adda.w  #$10,a6
-                dbf     d3,loc_2360E
+                dbf     d3,S3SphereTest_AllocateThirdThreeRingInZeroYPlane
 
-loc_2364C:
+S3SphereTest_FinishThreeRingPrefixWithPaletteAndArtRequest:
                 lea     (Pal_SphereTest).l,a1
                 lea     (Normal_palette_line_2).w,a2
                 move.w  #bytesToWcnt($20),d0
 
-loc_2365A:
+S3SphereTest_CopySixteenThreeRingPaletteWords:
                 move.w  (a1)+,(a2)+
-                dbf     d0,loc_2365A
+                dbf     d0,S3SphereTest_CopySixteenThreeRingPaletteWords
                 moveq   #PLCID_09,d0
                 jsr     (Load_PLC).l
                 bra.w   Obj_SphereTest_Main
@@ -268,73 +268,73 @@ Pal_SphereTest:
 Obj_SphereTest_Main:
                 move.b  (Ctrl_2).w,d1
                 btst    #button_A,d1
-                beq.s   loc_236E2
+                beq.s   S3SphereTest_ApplyHeldCDepthDecreaseBeforeModeControls
                 cmpi.w  #$800,(_unkE416).w
-                bcc.s   loc_236E2
+                bcc.s   S3SphereTest_ApplyHeldCDepthDecreaseBeforeModeControls
                 addq.w  #8,(_unkE416).w
 
-loc_236E2:
+S3SphereTest_ApplyHeldCDepthDecreaseBeforeModeControls:
                 btst    #button_C,d1
-                beq.s   loc_236F4
+                beq.s   S3SphereTest_SelectAutomaticOrManualScalarIndexControls
                 cmpi.w  #$81,(_unkE416).w
-                bcs.s   loc_236F4
+                bcs.s   S3SphereTest_SelectAutomaticOrManualScalarIndexControls
                 subq.w  #8,(_unkE416).w
 
-loc_236F4:
+S3SphereTest_SelectAutomaticOrManualScalarIndexControls:
                 tst.w   $3E(a0)
-                bne.s   loc_2371A
+                bne.s   S3SphereTest_DecrementManualFirstIndexWhileUpHeld
                 btst    #button_up,d1
-                bne.s   loc_23704
+                bne.s   S3SphereTest_AdvanceAutomaticSecondIndexUnlessRightHeld
                 addq.w  #3,(SStage_scalar_index_0).w
 
-loc_23704:
+S3SphereTest_AdvanceAutomaticSecondIndexUnlessRightHeld:
                 btst    #button_right,d1
-                bne.s   loc_2370E
+                bne.s   S3SphereTest_AdvanceAutomaticThirdIndexUnlessBHeld
                 addq.w  #2,(SStage_scalar_index_1).w
 
-loc_2370E:
+S3SphereTest_AdvanceAutomaticThirdIndexUnlessBHeld:
                 btst    #button_B,d1
-                bne.s   loc_23718
+                bne.s   S3SphereTest_JoinStartToggleAfterAutomaticIndices
                 addq.w  #1,(SStage_scalar_index_2).w
 
-loc_23718:
-                bra.s   loc_23738
+S3SphereTest_JoinStartToggleAfterAutomaticIndices:
+                bra.s   S3SphereTest_ToggleControlModeAndResetAllAnglesOnNewStart
 ; ---------------------------------------------------------------------------
 
-loc_2371A:
+S3SphereTest_DecrementManualFirstIndexWhileUpHeld:
                 btst    #button_up,d1
-                beq.s   loc_23724
+                beq.s   S3SphereTest_IncrementManualSecondIndexWhileRightHeld
                 subq.w  #1,(SStage_scalar_index_0).w
 
-loc_23724:
+S3SphereTest_IncrementManualSecondIndexWhileRightHeld:
                 btst    #button_right,d1
-                beq.s   loc_2372E
+                beq.s   S3SphereTest_IncrementManualThirdIndexWhileBHeld
                 addq.w  #1,(SStage_scalar_index_1).w
 
-loc_2372E:
+S3SphereTest_IncrementManualThirdIndexWhileBHeld:
                 btst    #button_B,d1
-                beq.s   loc_23738
+                beq.s   S3SphereTest_ToggleControlModeAndResetAllAnglesOnNewStart
                 addq.w  #1,(SStage_scalar_index_2).w
 
-loc_23738:
+S3SphereTest_ToggleControlModeAndResetAllAnglesOnNewStart:
                 btst    #button_start,(Ctrl_2_pressed).w
-                beq.s   loc_23758
+                beq.s   S3SphereTest_IncreaseVerticalTranslationWhenDownNotHeld
                 eori.w  #-1,$3E(a0)
                 move.w  #0,(SStage_scalar_index_0).w
                 move.w  #0,(SStage_scalar_index_1).w
                 move.w  #0,(SStage_scalar_index_2).w
 
-loc_23758:
+S3SphereTest_IncreaseVerticalTranslationWhenDownNotHeld:
                 btst    #button_down,d1
-                bne.s   loc_23762
+                bne.s   S3SphereTest_DecreaseVerticalTranslationWhenLeftNotHeld
                 addq.w  #8,(_unkE414).w
 
-loc_23762:
+S3SphereTest_DecreaseVerticalTranslationWhenLeftNotHeld:
                 btst    #button_left,d1
-                bne.s   loc_2376C
+                bne.s   S3SphereTest_BuildThreeScalarPairsThenProjectCurrentPoint
                 subq.w  #8,(_unkE414).w
 
-loc_2376C:
+S3SphereTest_BuildThreeScalarPairsThenProjectCurrentPoint:
                 move.w  (SStage_scalar_index_2).w,d0
                 lea     (SStage_scalar_result_2).w,a1
                 bsr.w   GetScalars
@@ -350,26 +350,26 @@ Obj_EosianSphere:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_237A6
-                bra.s   loc_237C4
+                bhi.w   S3SphereTest_ReleaseRespawnBeforeOldProjectedXCull
+                bra.s   S3SphereTest_RotatePointCheckDepthProjectAndChooseFrame
 ; ---------------------------------------------------------------------------
 
-loc_237A6:
+S3SphereTest_ReleaseRespawnBeforeOldProjectedXCull:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_237B2
+                beq.s   S3SphereTest_ClearGlobalOwnerOnlyWhenFullSignextendedHandleMatches
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_237B2:
+S3SphereTest_ClearGlobalOwnerOnlyWhenFullSignextendedHandleMatches:
                 cmpa.w  (Sphere_test_address).w,a0
-                bne.s   loc_237BE
+                bne.s   S3SphereTest_ClearCulledSpherePointImmediately
                 move.w  #0,(Sphere_test_address).w
 
-loc_237BE:
+S3SphereTest_ClearCulledSpherePointImmediately:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_237C4:
+S3SphereTest_RotatePointCheckDepthProjectAndChooseFrame:
                 movea.l $3A(a0),a6
                 move.w  $34(a0),d1
                 move.w  $36(a0),d2
@@ -378,7 +378,7 @@ loc_237C4:
                 bsr.w   SphereTestS3RotateXZUsingScalarPair1
                 add.w   (_unkE416).w,d0
                 cmpi.w  #$80,d0
-                blt.s   locret_2382A
+                blt.s   S3SphereTest_ReturnAfterNearDepthRejectOrQueuedDraw
                 bsr.w   SphereTestS3RotateXYUsingScalarPair2
                 add.w   (_unkE414).w,d2
                 bsr.w   SphereTestS3PerspectiveDivideXYByDepth
@@ -390,20 +390,20 @@ loc_237C4:
                 lsr.w   #5,d0
                 addi.w  #0,d0
                 cmpi.w  #$10,d0
-                bcs.s   loc_23816
+                bcs.s   S3SphereTest_StoreDepthFrameAndQuantizedDrawPriority
                 move.w  #$F,d0
 
-loc_23816:
+S3SphereTest_StoreDepthFrameAndQuantizedDrawPriority:
                 move.b  d0,mapping_frame(a0)
                 lsl.w   #6,d0
                 andi.w  #$380,d0
                 move.w  d0,priority(a0)
                 jsr     (Draw_Sprite).l
 
-locret_2382A:
+S3SphereTest_ReturnAfterNearDepthRejectOrQueuedDraw:
                 rts
 ; ---------------------------------------------------------------------------
-word_2382C:
+S3SphereTest_AssignedGridRecordData:
                 dc.w    -$70, $8000,  -$70, $8000,     0, $8000,     0,  $234
                 dc.w    -$50, $8000,  -$70, $8000,     0, $8000,     0,  $234
                 dc.w    -$30, $8000,  -$70, $8000,     0, $8000,     0,  $234

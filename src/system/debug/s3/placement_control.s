@@ -13,11 +13,11 @@ DebugMode:
 
 ; ---------------------------------------------------------------------------
 DebugMode_Index:
-                dc.w    loc_5B532-DebugMode_Index
-                dc.w    loc_5B5BA-DebugMode_Index
+                dc.w    S3DebugPlacement_EnterAndSavePlayerAppearance-DebugMode_Index
+                dc.w    S3DebugPlacement_ResolveDebugListRunControlsAndDraw-DebugMode_Index
 ; ---------------------------------------------------------------------------
 
-loc_5B532:
+S3DebugPlacement_EnterAndSavePlayerAppearance:
                 addq.b  #2,(Debug_placement_routine).w
                 move.l  mappings(a0),(Debug_saved_mappings).w
                 move.w  art_tile(a0),(Debug_saved_art_tile).w
@@ -27,14 +27,14 @@ loc_5B532:
                 clr.b   (Scroll_lock).w
                 clr.w   (WindTunnel_flag).w
                 bclr    #Status_Underwater,status(a0)
-                beq.s   loc_5B578
+                beq.s   S3DebugPlacement_ClearPoseAndResolvePerActDebugList
                 movea.l a0,a1
                 jsr     (Player_ResetAirTimer).l
                 move.w  #$600,(Max_speed).w
                 move.w  #$C,(Acceleration).w
                 move.w  #$80,(Deceleration).w
 
-loc_5B578:
+S3DebugPlacement_ClearPoseAndResolvePerActDebugList:
                 move.b  #0,mapping_frame(a0)
                 move.b  #0,anim(a0)
                 moveq   #0,d0
@@ -46,15 +46,15 @@ loc_5B578:
                 adda.w  (a2,d0.w),a2
                 move.w  (a2)+,d6
                 cmp.b   (Debug_object).w,d6
-                bhi.s   loc_5B5AA
+                bhi.s   S3DebugPlacement_LoadSelectedPreviewAndSeedMovementRepeat
                 move.b  #0,(Debug_object).w
 
-loc_5B5AA:
+S3DebugPlacement_LoadSelectedPreviewAndSeedMovementRepeat:
                 bsr.w   DebugMode_LoadSelectedObjectAppearance
                 move.b  #$C,(Debug_camera_delay).w
                 move.b  #1,(Debug_camera_speed).w
 
-loc_5B5BA:
+S3DebugPlacement_ResolveDebugListRunControlsAndDraw:
                 moveq   #0,d0
                 move.w  (Current_zone_and_act).w,d0
                 ror.b   #1,d0
@@ -73,27 +73,27 @@ DebugMode_HandlePlacementControls:
                 move.w  #1,d1
                 move.b  (Ctrl_1_pressed).w,d4
                 andi.w  #button_up_mask|button_down_mask|button_left_mask|button_right_mask,d4
-                bne.s   loc_5B620
+                bne.s   S3DebugPlacement_ReloadHeldDirectionsForMovementPulse
                 move.b  (Ctrl_1_held).w,d0
                 andi.w  #button_up_mask|button_down_mask|button_left_mask|button_right_mask,d0
-                bne.s   loc_5B608
+                bne.s   S3DebugPlacement_DelayHeldMovementThenSaturateSpeedByte
                 move.b  #$C,(Debug_camera_delay).w
                 move.b  #$F,(Debug_camera_speed).w
-                bra.w   loc_5B684
+                bra.w   S3DebugPlacement_SelectPreviousObjectWithHeldAAndFreshC
 ; ---------------------------------------------------------------------------
 
-loc_5B608:
+S3DebugPlacement_DelayHeldMovementThenSaturateSpeedByte:
                 subq.b  #1,(Debug_camera_delay).w
-                bne.s   loc_5B624
+                bne.s   S3DebugPlacement_ComputeFixedPointDebugStepAndApplyUpClamp
                 move.b  #1,(Debug_camera_delay).w
                 addq.b  #1,(Debug_camera_speed).w
-                bne.s   loc_5B620
+                bne.s   S3DebugPlacement_ReloadHeldDirectionsForMovementPulse
                 move.b  #255,(Debug_camera_speed).w
 
-loc_5B620:
+S3DebugPlacement_ReloadHeldDirectionsForMovementPulse:
                 move.b  (Ctrl_1_held).w,d4
 
-loc_5B624:
+S3DebugPlacement_ComputeFixedPointDebugStepAndApplyUpClamp:
                 moveq   #0,d1
                 move.b  (Debug_camera_speed).w,d1
                 addq.w  #1,d1
@@ -102,71 +102,71 @@ loc_5B624:
                 move.l  y_pos(a0),d2
                 move.l  x_pos(a0),d3
                 btst    #button_up,d4
-                beq.s   loc_5B64E
+                beq.s   S3DebugPlacement_ApplyDownClampAtCameraMaximumPlusHeight
                 sub.l   d1,d2
                 moveq   #0,d0
                 move.w  (Camera_min_Y_pos).w,d0
                 swap    d0
                 cmp.l   d0,d2
-                bge.s   loc_5B64E
+                bge.s   S3DebugPlacement_ApplyDownClampAtCameraMaximumPlusHeight
                 move.l  d0,d2
 
-loc_5B64E:
+S3DebugPlacement_ApplyDownClampAtCameraMaximumPlusHeight:
                 btst    #button_down,d4
-                beq.s   loc_5B668
+                beq.s   S3DebugPlacement_ApplyLeftAndClampUnsignedBorrowToZero
                 add.l   d1,d2
                 moveq   #0,d0
                 move.w  (Camera_target_max_Y_pos).w,d0
                 addi.w  #$DF,d0
                 swap    d0
                 cmp.l   d0,d2
-                blt.s   loc_5B668
+                blt.s   S3DebugPlacement_ApplyLeftAndClampUnsignedBorrowToZero
                 move.l  d0,d2
 
-loc_5B668:
+S3DebugPlacement_ApplyLeftAndClampUnsignedBorrowToZero:
                 btst    #button_left,d4
-                beq.s   loc_5B674
+                beq.s   S3DebugPlacement_ApplyRightWithoutHorizontalUpperClamp
                 sub.l   d1,d3
-                bcc.s   loc_5B674
+                bcc.s   S3DebugPlacement_ApplyRightWithoutHorizontalUpperClamp
                 moveq   #0,d3
 
-loc_5B674:
+S3DebugPlacement_ApplyRightWithoutHorizontalUpperClamp:
                 btst    #button_right,d4
-                beq.s   loc_5B67C
+                beq.s   S3DebugPlacement_StoreDebugFixedPointPosition
                 add.l   d1,d3
 
-loc_5B67C:
+S3DebugPlacement_StoreDebugFixedPointPosition:
                 move.l  d2,y_pos(a0)
                 move.l  d3,x_pos(a0)
 
-loc_5B684:
+S3DebugPlacement_SelectPreviousObjectWithHeldAAndFreshC:
                 btst    #button_A,(Ctrl_1_held).w
-                beq.s   loc_5B6BC
+                beq.s   S3DebugPlacement_SpawnSelectedObjectOnCOrCheckExit
                 btst    #button_C,(Ctrl_1_pressed).w
-                beq.s   loc_5B6A0
+                beq.s   S3DebugPlacement_SelectNextObjectOnFreshA
                 subq.b  #1,(Debug_object).w
-                bcc.s   loc_5B6B8
+                bcc.s   S3DebugPlacement_TailReloadSelectedObjectPreview
                 add.b   d6,(Debug_object).w
-                bra.s   loc_5B6B8
+                bra.s   S3DebugPlacement_TailReloadSelectedObjectPreview
 ; ---------------------------------------------------------------------------
 
-loc_5B6A0:
+S3DebugPlacement_SelectNextObjectOnFreshA:
                 btst    #button_A,(Ctrl_1_pressed).w
-                beq.s   loc_5B6BC
+                beq.s   S3DebugPlacement_SpawnSelectedObjectOnCOrCheckExit
                 addq.b  #1,(Debug_object).w
                 cmp.b   (Debug_object).w,d6
-                bhi.s   loc_5B6B8
+                bhi.s   S3DebugPlacement_TailReloadSelectedObjectPreview
                 move.b  #0,(Debug_object).w
 
-loc_5B6B8:
+S3DebugPlacement_TailReloadSelectedObjectPreview:
                 bra.w   DebugMode_LoadSelectedObjectAppearance
 ; ---------------------------------------------------------------------------
 
-loc_5B6BC:
+S3DebugPlacement_SpawnSelectedObjectOnCOrCheckExit:
                 btst    #button_C,(Ctrl_1_pressed).w
-                beq.s   loc_5B708
+                beq.s   S3DebugPlacement_LeavePlacementAndRestorePlayerWithZeroSeed
                 jsr     (AllocateObject).l
-                bne.s   loc_5B708
+                bne.s   S3DebugPlacement_LeavePlacementAndRestorePlayerWithZeroSeed
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.b  render_flags(a0),render_flags(a1)
@@ -184,9 +184,9 @@ loc_5B6BC:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5B708:
+S3DebugPlacement_LeavePlacementAndRestorePlayerWithZeroSeed:
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   locret_5B734
+                beq.s   S3DebugPlacement_ReturnFromSpawnOrExitControls
                 moveq   #0,d0
                 move.w  d0,(Debug_placement_mode).w
                 lea     (Player_1).w,a1
@@ -196,7 +196,7 @@ loc_5B708:
                 move.b  #$13,y_radius(a1)
                 move.b  #9,x_radius(a1)
 
-locret_5B734:
+S3DebugPlacement_ReturnFromSpawnOrExitControls:
                 rts
 ; End of function DebugMode_HandlePlacementControls
 

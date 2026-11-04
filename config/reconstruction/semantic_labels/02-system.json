@@ -1,0 +1,1088 @@
+{
+  "schema_version": 1,
+  "packet": "02-system",
+  "mappings": [
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 17,
+      "old": "loc_23398",
+      "new": "S3SphereTest_BeginFourRingPointConstruction",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_BeginFourRingPointConstruction"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 32,
+      "old": "loc_233CC",
+      "new": "S3SphereTest_AllocateNextFirstRingPointOrFinishPartialPrefix",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_AllocateNextFirstRingPointOrFinishPartialPrefix"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 36,
+      "old": "loc_233D6",
+      "new": "S3SphereTest_InstallPointOnlyHandlerForPreexistingOwnerOrNewChild",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_InstallPointOnlyHandlerForPreexistingOwnerOrNewChild"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 39,
+      "old": "loc_233DC",
+      "new": "S3SphereTest_InitializeFirstRingAtNegativeFixedZ",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_InitializeFirstRingAtNegativeFixedZ"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 56,
+      "old": "loc_23412",
+      "new": "S3SphereTest_AllocateSecondRingAtPositiveFixedZ",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_AllocateSecondRingAtPositiveFixedZ"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 76,
+      "old": "loc_23458",
+      "new": "S3SphereTest_AllocateThirdRingAtPositiveFixedX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_AllocateThirdRingAtPositiveFixedX"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 96,
+      "old": "loc_2349E",
+      "new": "S3SphereTest_AllocateFourthRingAtNegativeFixedX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_AllocateFourthRingAtNegativeFixedX"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 114,
+      "old": "loc_234E0",
+      "new": "S3SphereTest_FinishFourRingPrefixWithPaletteAndArtRequest",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_FinishFourRingPrefixWithPaletteAndArtRequest"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 119,
+      "old": "loc_234EE",
+      "new": "S3SphereTest_CopySixteenFourRingPaletteWords",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_CopySixteenFourRingPaletteWords"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 149,
+      "old": "loc_2354A",
+      "new": "S3SphereTest_SkipNegativeYQuarterPhaseWhenConstructingFourRings",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_SkipNegativeYQuarterPhaseWhenConstructingFourRings"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 154,
+      "old": "locret_23554",
+      "new": "S3SphereTest_ReturnAfterQuarterPhaseAdjustments",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_ReturnAfterQuarterPhaseAdjustments"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 160,
+      "old": "loc_23556",
+      "new": "S3SphereTest_BeginThreeOrthogonalRingPointConstruction",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_BeginThreeOrthogonalRingPointConstruction"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 175,
+      "old": "loc_2358A",
+      "new": "S3SphereTest_AllocateNextFirstThreeRingPointOrFinishPrefix",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_AllocateNextFirstThreeRingPointOrFinishPrefix"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 179,
+      "old": "loc_23594",
+      "new": "S3SphereTest_InstallPointHandlerForThreeRingExistingOwnerOrChild",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_InstallPointHandlerForThreeRingExistingOwnerOrChild"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 182,
+      "old": "loc_2359A",
+      "new": "S3SphereTest_InitializeFirstThreeRingInZeroZPlane",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_InitializeFirstThreeRingInZeroZPlane"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 198,
+      "old": "loc_235CC",
+      "new": "S3SphereTest_AllocateSecondThreeRingInZeroXPlane",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_AllocateSecondThreeRingInZeroXPlane"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 217,
+      "old": "loc_2360E",
+      "new": "S3SphereTest_AllocateThirdThreeRingInZeroYPlane",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_AllocateThirdThreeRingInZeroYPlane"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 234,
+      "old": "loc_2364C",
+      "new": "S3SphereTest_FinishThreeRingPrefixWithPaletteAndArtRequest",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_FinishThreeRingPrefixWithPaletteAndArtRequest"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 239,
+      "old": "loc_2365A",
+      "new": "S3SphereTest_CopySixteenThreeRingPaletteWords",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_CopySixteenThreeRingPaletteWords"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 276,
+      "old": "loc_236E2",
+      "new": "S3SphereTest_ApplyHeldCDepthDecreaseBeforeModeControls",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_ApplyHeldCDepthDecreaseBeforeModeControls"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 283,
+      "old": "loc_236F4",
+      "new": "S3SphereTest_SelectAutomaticOrManualScalarIndexControls",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_SelectAutomaticOrManualScalarIndexControls"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 290,
+      "old": "loc_23704",
+      "new": "S3SphereTest_AdvanceAutomaticSecondIndexUnlessRightHeld",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_AdvanceAutomaticSecondIndexUnlessRightHeld"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 295,
+      "old": "loc_2370E",
+      "new": "S3SphereTest_AdvanceAutomaticThirdIndexUnlessBHeld",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_AdvanceAutomaticThirdIndexUnlessBHeld"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 300,
+      "old": "loc_23718",
+      "new": "S3SphereTest_JoinStartToggleAfterAutomaticIndices",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_JoinStartToggleAfterAutomaticIndices"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 304,
+      "old": "loc_2371A",
+      "new": "S3SphereTest_DecrementManualFirstIndexWhileUpHeld",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_DecrementManualFirstIndexWhileUpHeld"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 309,
+      "old": "loc_23724",
+      "new": "S3SphereTest_IncrementManualSecondIndexWhileRightHeld",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_IncrementManualSecondIndexWhileRightHeld"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 314,
+      "old": "loc_2372E",
+      "new": "S3SphereTest_IncrementManualThirdIndexWhileBHeld",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_IncrementManualThirdIndexWhileBHeld"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 319,
+      "old": "loc_23738",
+      "new": "S3SphereTest_ToggleControlModeAndResetAllAnglesOnNewStart",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_ToggleControlModeAndResetAllAnglesOnNewStart"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 327,
+      "old": "loc_23758",
+      "new": "S3SphereTest_IncreaseVerticalTranslationWhenDownNotHeld",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_IncreaseVerticalTranslationWhenDownNotHeld"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 332,
+      "old": "loc_23762",
+      "new": "S3SphereTest_DecreaseVerticalTranslationWhenLeftNotHeld",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_DecreaseVerticalTranslationWhenLeftNotHeld"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 337,
+      "old": "loc_2376C",
+      "new": "S3SphereTest_BuildThreeScalarPairsThenProjectCurrentPoint",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_BuildThreeScalarPairsThenProjectCurrentPoint"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 357,
+      "old": "loc_237A6",
+      "new": "S3SphereTest_ReleaseRespawnBeforeOldProjectedXCull",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_ReleaseRespawnBeforeOldProjectedXCull"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 363,
+      "old": "loc_237B2",
+      "new": "S3SphereTest_ClearGlobalOwnerOnlyWhenFullSignextendedHandleMatches",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_ClearGlobalOwnerOnlyWhenFullSignextendedHandleMatches"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 368,
+      "old": "loc_237BE",
+      "new": "S3SphereTest_ClearCulledSpherePointImmediately",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_ClearCulledSpherePointImmediately"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 372,
+      "old": "loc_237C4",
+      "new": "S3SphereTest_RotatePointCheckDepthProjectAndChooseFrame",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_RotatePointCheckDepthProjectAndChooseFrame"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 396,
+      "old": "loc_23816",
+      "new": "S3SphereTest_StoreDepthFrameAndQuantizedDrawPriority",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_StoreDepthFrameAndQuantizedDrawPriority"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 403,
+      "old": "locret_2382A",
+      "new": "S3SphereTest_ReturnAfterNearDepthRejectOrQueuedDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualnativeCODE: S3SphereTest_ReturnAfterNearDepthRejectOrQueuedDraw"
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "original_line": 406,
+      "old": "word_2382C",
+      "new": "S3SphereTest_AssignedGridRecordData",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "ActualDATA: S3SphereTest_AssignedGridRecordData"
+    },
+    {
+      "source": "src/system/debug/s3/placement_control.s",
+      "original_line": 20,
+      "old": "loc_5B532",
+      "new": "S3DebugPlacement_EnterAndSavePlayerAppearance",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DebugPlacement_EnterAndSavePlayerAppearance"
+    },
+    {
+      "source": "src/system/debug/s3/placement_control.s",
+      "original_line": 37,
+      "old": "loc_5B578",
+      "new": "S3DebugPlacement_ClearPoseAndResolvePerActDebugList",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DebugPlacement_ClearPoseAndResolvePerActDebugList"
+    },
+    {
+      "source": "src/system/debug/s3/placement_control.s",
+      "original_line": 52,
+      "old": "loc_5B5AA",
+      "new": "S3DebugPlacement_LoadSelectedPreviewAndSeedMovementRepeat",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DebugPlacement_LoadSelectedPreviewAndSeedMovementRepeat"
+    },
+    {
+      "source": "src/system/debug/s3/placement_control.s",
+      "original_line": 57,
+      "old": "loc_5B5BA",
+      "new": "S3DebugPlacement_ResolveDebugListRunControlsAndDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DebugPlacement_ResolveDebugListRunControlsAndDraw"
+    },
+    {
+      "source": "src/system/debug/s3/placement_control.s",
+      "original_line": 85,
+      "old": "loc_5B608",
+      "new": "S3DebugPlacement_DelayHeldMovementThenSaturateSpeedByte",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DebugPlacement_DelayHeldMovementThenSaturateSpeedByte"
+    },
+    {
+      "source": "src/system/debug/s3/placement_control.s",
+      "original_line": 93,
+      "old": "loc_5B620",
+      "new": "S3DebugPlacement_ReloadHeldDirectionsForMovementPulse",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DebugPlacement_ReloadHeldDirectionsForMovementPulse"
+    },
+    {
+      "source": "src/system/debug/s3/placement_control.s",
+      "original_line": 96,
+      "old": "loc_5B624",
+      "new": "S3DebugPlacement_ComputeFixedPointDebugStepAndApplyUpClamp",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DebugPlacement_ComputeFixedPointDebugStepAndApplyUpClamp"
+    },
+    {
+      "source": "src/system/debug/s3/placement_control.s",
+      "original_line": 114,
+      "old": "loc_5B64E",
+      "new": "S3DebugPlacement_ApplyDownClampAtCameraMaximumPlusHeight",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DebugPlacement_ApplyDownClampAtCameraMaximumPlusHeight"
+    },
+    {
+      "source": "src/system/debug/s3/placement_control.s",
+      "original_line": 126,
+      "old": "loc_5B668",
+      "new": "S3DebugPlacement_ApplyLeftAndClampUnsignedBorrowToZero",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DebugPlacement_ApplyLeftAndClampUnsignedBorrowToZero"
+    },
+    {
+      "source": "src/system/debug/s3/placement_control.s",
+      "original_line": 133,
+      "old": "loc_5B674",
+      "new": "S3DebugPlacement_ApplyRightWithoutHorizontalUpperClamp",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DebugPlacement_ApplyRightWithoutHorizontalUpperClamp"
+    },
+    {
+      "source": "src/system/debug/s3/placement_control.s",
+      "original_line": 138,
+      "old": "loc_5B67C",
+      "new": "S3DebugPlacement_StoreDebugFixedPointPosition",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DebugPlacement_StoreDebugFixedPointPosition"
+    },
+    {
+      "source": "src/system/debug/s3/placement_control.s",
+      "original_line": 142,
+      "old": "loc_5B684",
+      "new": "S3DebugPlacement_SelectPreviousObjectWithHeldAAndFreshC",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DebugPlacement_SelectPreviousObjectWithHeldAAndFreshC"
+    },
+    {
+      "source": "src/system/debug/s3/placement_control.s",
+      "original_line": 153,
+      "old": "loc_5B6A0",
+      "new": "S3DebugPlacement_SelectNextObjectOnFreshA",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DebugPlacement_SelectNextObjectOnFreshA"
+    },
+    {
+      "source": "src/system/debug/s3/placement_control.s",
+      "original_line": 161,
+      "old": "loc_5B6B8",
+      "new": "S3DebugPlacement_TailReloadSelectedObjectPreview",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DebugPlacement_TailReloadSelectedObjectPreview"
+    },
+    {
+      "source": "src/system/debug/s3/placement_control.s",
+      "original_line": 165,
+      "old": "loc_5B6BC",
+      "new": "S3DebugPlacement_SpawnSelectedObjectOnCOrCheckExit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DebugPlacement_SpawnSelectedObjectOnCOrCheckExit"
+    },
+    {
+      "source": "src/system/debug/s3/placement_control.s",
+      "original_line": 187,
+      "old": "loc_5B708",
+      "new": "S3DebugPlacement_LeavePlacementAndRestorePlayerWithZeroSeed",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DebugPlacement_LeavePlacementAndRestorePlayerWithZeroSeed"
+    },
+    {
+      "source": "src/system/debug/s3/placement_control.s",
+      "original_line": 199,
+      "old": "locret_5B734",
+      "new": "S3DebugPlacement_ReturnFromSpawnOrExitControls",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DebugPlacement_ReturnFromSpawnOrExitControls"
+    },
+    {
+      "source": "src/system/debug/sk/placement_control.s",
+      "original_line": 20,
+      "old": "loc_92A20",
+      "new": "SKDebugPlacement_EnterPlacementAndConditionallySaveArt",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDebugPlacement_EnterPlacementAndConditionallySaveArt"
+    },
+    {
+      "source": "src/system/debug/sk/placement_control.s",
+      "original_line": 27,
+      "old": "loc_92A38",
+      "new": "SKDebugPlacement_WrapVerticalCoordinatesAndResetUnderwaterState",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDebugPlacement_WrapVerticalCoordinatesAndResetUnderwaterState"
+    },
+    {
+      "source": "src/system/debug/sk/placement_control.s",
+      "original_line": 41,
+      "old": "loc_92A6E",
+      "new": "SKDebugPlacement_ClearPoseAndResolvePerActDebugList",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDebugPlacement_ClearPoseAndResolvePerActDebugList"
+    },
+    {
+      "source": "src/system/debug/sk/placement_control.s",
+      "original_line": 56,
+      "old": "loc_92AA0",
+      "new": "SKDebugPlacement_LoadSelectedPreviewAndSeedMovementRepeat",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDebugPlacement_LoadSelectedPreviewAndSeedMovementRepeat"
+    },
+    {
+      "source": "src/system/debug/sk/placement_control.s",
+      "original_line": 61,
+      "old": "loc_92AB0",
+      "new": "SKDebugPlacement_ResolveDebugListRunControlsAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDebugPlacement_ResolveDebugListRunControlsAndDraw"
+    },
+    {
+      "source": "src/system/debug/sk/placement_control.s",
+      "original_line": 89,
+      "old": "loc_92AFE",
+      "new": "SKDebugPlacement_DelayHeldMovementThenSaturateSpeedByte",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDebugPlacement_DelayHeldMovementThenSaturateSpeedByte"
+    },
+    {
+      "source": "src/system/debug/sk/placement_control.s",
+      "original_line": 97,
+      "old": "loc_92B16",
+      "new": "SKDebugPlacement_ReloadHeldDirectionsForMovementPulse",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDebugPlacement_ReloadHeldDirectionsForMovementPulse"
+    },
+    {
+      "source": "src/system/debug/sk/placement_control.s",
+      "original_line": 100,
+      "old": "loc_92B1A",
+      "new": "SKDebugPlacement_ComputeFixedPointDebugStepAndApplyUpClamp",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDebugPlacement_ComputeFixedPointDebugStepAndApplyUpClamp"
+    },
+    {
+      "source": "src/system/debug/sk/placement_control.s",
+      "original_line": 118,
+      "old": "loc_92B44",
+      "new": "SKDebugPlacement_ApplyDownClampAtCameraMaximumPlusHeight",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDebugPlacement_ApplyDownClampAtCameraMaximumPlusHeight"
+    },
+    {
+      "source": "src/system/debug/sk/placement_control.s",
+      "original_line": 130,
+      "old": "loc_92B5E",
+      "new": "SKDebugPlacement_ApplyLeftAndClampUnsignedBorrowToZero",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDebugPlacement_ApplyLeftAndClampUnsignedBorrowToZero"
+    },
+    {
+      "source": "src/system/debug/sk/placement_control.s",
+      "original_line": 137,
+      "old": "loc_92B6A",
+      "new": "SKDebugPlacement_ApplyRightWithoutHorizontalUpperClamp",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDebugPlacement_ApplyRightWithoutHorizontalUpperClamp"
+    },
+    {
+      "source": "src/system/debug/sk/placement_control.s",
+      "original_line": 142,
+      "old": "loc_92B72",
+      "new": "SKDebugPlacement_StoreDebugFixedPointPosition",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDebugPlacement_StoreDebugFixedPointPosition"
+    },
+    {
+      "source": "src/system/debug/sk/placement_control.s",
+      "original_line": 146,
+      "old": "loc_92B7A",
+      "new": "SKDebugPlacement_SelectPreviousObjectWithHeldAAndFreshC",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDebugPlacement_SelectPreviousObjectWithHeldAAndFreshC"
+    },
+    {
+      "source": "src/system/debug/sk/placement_control.s",
+      "original_line": 157,
+      "old": "loc_92B96",
+      "new": "SKDebugPlacement_SelectNextObjectOnFreshA",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDebugPlacement_SelectNextObjectOnFreshA"
+    },
+    {
+      "source": "src/system/debug/sk/placement_control.s",
+      "original_line": 165,
+      "old": "loc_92BAE",
+      "new": "SKDebugPlacement_TailReloadSelectedObjectPreview",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDebugPlacement_TailReloadSelectedObjectPreview"
+    },
+    {
+      "source": "src/system/debug/sk/placement_control.s",
+      "original_line": 169,
+      "old": "loc_92BB2",
+      "new": "SKDebugPlacement_SpawnSelectedObjectAndForceMonitorSubtypeNine",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDebugPlacement_SpawnSelectedObjectAndForceMonitorSubtypeNine"
+    },
+    {
+      "source": "src/system/debug/sk/placement_control.s",
+      "original_line": 192,
+      "old": "locret_92C0A",
+      "new": "SKDebugPlacement_ReturnAfterDebugObjectSpawn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDebugPlacement_ReturnAfterDebugObjectSpawn"
+    },
+    {
+      "source": "src/system/debug/sk/placement_control.s",
+      "original_line": 196,
+      "old": "loc_92C0C",
+      "new": "SKDebugPlacement_LeavePlacementRedrawHudAndRestorePlayer",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDebugPlacement_LeavePlacementRedrawHudAndRestorePlayer"
+    },
+    {
+      "source": "src/system/debug/sk/placement_control.s",
+      "original_line": 213,
+      "old": "locret_92C52",
+      "new": "SKDebugPlacement_ReturnFromPlacementExitCheck",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDebugPlacement_ReturnFromPlacementExitCheck"
+    },
+    {
+      "source": "src/system/s3/bootstrap.s",
+      "original_line": 94,
+      "old": "loc_218",
+      "new": "S3Boot_ChooseSoftResetFromInheritedPortTestFlags",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Select the soft-reset path using Z from whichever hardware port test reached this entry; retain cold-boot setup on zero."
+    },
+    {
+      "source": "src/system/s3/bootstrap.s",
+      "original_line": 552,
+      "old": "loc_6BC",
+      "new": "S3Boot_RunRetainedChecksumSetupThenClearCrossResetState",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Boot_RunRetainedChecksumSetupThenClearCrossResetState"
+    },
+    {
+      "source": "src/system/s3/bootstrap.s",
+      "original_line": 579,
+      "old": "loc_6EA",
+      "new": "S3Boot_ClearCrossResetLongwordsAndStampRegion",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Boot_ClearCrossResetLongwordsAndStampRegion"
+    },
+    {
+      "source": "src/system/s3/bootstrap.s",
+      "original_line": 593,
+      "old": "loc_716",
+      "new": "S3Boot_ClearOrdinaryWorkRamThenInitializeDevicesAndSave",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Boot_ClearOrdinaryWorkRamThenInitializeDevicesAndSave"
+    },
+    {
+      "source": "src/system/s3/device_services.s",
+      "original_line": 151,
+      "old": "loc_1584",
+      "new": "S3Device_CopySoundDriverAndRetainedExtraPaddingToZ80Ram",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Copy the original DBF byte count from ROM into Z80 RAM, including the extra $BC bytes beyond the driver sections."
+    },
+    {
+      "source": "src/system/s3/device_services.s",
+      "original_line": 159,
+      "old": "loc_159A",
+      "new": "S3Device_CopySixteenDefaultZ80VariableBytes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Device_CopySixteenDefaultZ80VariableBytes"
+    },
+    {
+      "source": "src/system/s3/device_services.s",
+      "original_line": 167,
+      "old": "loc_15B0",
+      "new": "S3Device_PulseZ80ResetAndReleaseSoundBus",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Device_PulseZ80ResetAndReleaseSoundBus"
+    },
+    {
+      "source": "src/system/s3/device_services.s",
+      "original_line": 238,
+      "old": "loc_163C",
+      "new": "S3Device_OverwriteSecondarySfxRequestWhenPrimaryOccupied",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Device_OverwriteSecondarySfxRequestWhenPrimaryOccupied"
+    },
+    {
+      "source": "src/system/s3/device_services.s",
+      "original_line": 241,
+      "old": "loc_1642",
+      "new": "S3Device_ReleaseZ80BusAfterSfxRequestOrDuplicate",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Device_ReleaseZ80BusAfterSfxRequestOrDuplicate"
+    },
+    {
+      "source": "src/system/s3/runtime_primitives.s",
+      "original_line": 30,
+      "old": "loc_1FBA",
+      "new": "S3Math_AdvanceFortyOneFoldPseudoRandomSeed",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Math_AdvanceFortyOneFoldPseudoRandomSeed"
+    },
+    {
+      "source": "src/system/s3/runtime_primitives.s",
+      "original_line": 86,
+      "old": "loc_2284",
+      "new": "S3Math_TakeUnsignedWordMagnitudeOfY",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Math_TakeUnsignedWordMagnitudeOfY"
+    },
+    {
+      "source": "src/system/s3/runtime_primitives.s",
+      "original_line": 91,
+      "old": "loc_228A",
+      "new": "S3Math_SelectShallowOrSteepArctangentRatio",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Math_SelectShallowOrSteepArctangentRatio"
+    },
+    {
+      "source": "src/system/s3/runtime_primitives.s",
+      "original_line": 100,
+      "old": "loc_229A",
+      "new": "S3Math_ComputeSteepOctantAngleFromReciprocalRatio",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Math_ComputeSteepOctantAngleFromReciprocalRatio"
+    },
+    {
+      "source": "src/system/s3/runtime_primitives.s",
+      "original_line": 106,
+      "old": "loc_22A4",
+      "new": "S3Math_ReflectArctangentForNegativeOriginalX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Math_ReflectArctangentForNegativeOriginalX"
+    },
+    {
+      "source": "src/system/s3/runtime_primitives.s",
+      "original_line": 112,
+      "old": "loc_22AE",
+      "new": "S3Math_ReflectArctangentForNegativeOriginalY",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Math_ReflectArctangentForNegativeOriginalY"
+    },
+    {
+      "source": "src/system/s3/runtime_primitives.s",
+      "original_line": 118,
+      "old": "loc_22B8",
+      "new": "S3Math_RestoreMagnitudeWorkRegistersAndReturnAngle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Math_RestoreMagnitudeWorkRegistersAndReturnAngle"
+    },
+    {
+      "source": "src/system/s3/video_interrupts.s",
+      "original_line": 14,
+      "old": "loc_810",
+      "new": "S3VInt_WaitForVBlankBeforeRequestedFrameTransfer",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3VInt_WaitForVBlankBeforeRequestedFrameTransfer"
+    },
+    {
+      "source": "src/system/s3/video_interrupts.s",
+      "original_line": 26,
+      "old": "loc_83E",
+      "new": "S3VInt_ConsumeFrameRequestAndDispatchMaskedVIntIndex",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3VInt_ConsumeFrameRequestAndDispatchMaskedVIntIndex"
+    },
+    {
+      "source": "src/system/s3/video_interrupts.s",
+      "original_line": 162,
+      "old": "locret_A4C",
+      "new": "S3VInt_ReturnAfterSegaVIntAndOptionalDemoTick",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3VInt_ReturnAfterSegaVIntAndOptionalDemoTick"
+    },
+    {
+      "source": "src/system/s3/video_interrupts.s",
+      "original_line": 175,
+      "old": "loc_A76",
+      "new": "S3VInt_TickDemoTimerAfterSparseControllerPoll",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3VInt_TickDemoTimerAfterSparseControllerPoll"
+    },
+    {
+      "source": "src/system/s3/video_interrupts.s",
+      "original_line": 180,
+      "old": "locret_A82",
+      "new": "S3VInt_ReturnFromSparsePollVInt",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3VInt_ReturnFromSparsePollVInt"
+    },
+    {
+      "source": "src/system/s3/video_interrupts.s",
+      "original_line": 193,
+      "old": "locret_AA2",
+      "new": "S3VInt_ReturnAfterTitleTransfersAndDemoTick",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3VInt_ReturnAfterTitleTransfersAndDemoTick"
+    },
+    {
+      "source": "src/system/s3/video_interrupts.s",
+      "original_line": 274,
+      "old": "locret_C0C",
+      "new": "S3VInt_ReturnFromHudAndThreeTileUpdateGroup",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3VInt_ReturnFromHudAndThreeTileUpdateGroup"
+    },
+    {
+      "source": "src/system/s3/video_interrupts.s",
+      "original_line": 350,
+      "old": "loc_DEA",
+      "new": "S3VInt_FinishSaveVIntAfterOptionalPlaneBufferUpload",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3VInt_FinishSaveVIntAfterOptionalPlaneBufferUpload"
+    },
+    {
+      "source": "src/system/s3/video_interrupts.s",
+      "original_line": 373,
+      "old": "locret_E9E",
+      "new": "S3VInt_ReturnFromMenuVIntAndDemoTick",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3VInt_ReturnFromMenuVIntAndDemoTick"
+    },
+    {
+      "source": "src/system/s3/video_interrupts.s",
+      "original_line": 391,
+      "old": "loc_EC6",
+      "new": "S3VInt_TailBookmarkAfterSpecialStageMapAndDemoTick",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3VInt_TailBookmarkAfterSpecialStageMapAndDemoTick"
+    },
+    {
+      "source": "src/system/s3/video_interrupts.s",
+      "original_line": 412,
+      "old": "loc_F20",
+      "new": "S3VInt_UploadFullWaterPaletteForControllerTransferGroup",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3VInt_UploadFullWaterPaletteForControllerTransferGroup"
+    },
+    {
+      "source": "src/system/s3/video_interrupts.s",
+      "original_line": 415,
+      "old": "loc_F44",
+      "new": "S3VInt_UploadSpriteScrollAndQueuedDmaThenReleaseZ80",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3VInt_UploadSpriteScrollAndQueuedDmaThenReleaseZ80"
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "tokens": [
+        [2, 2, 37, ""],
+        [6, 1, 0, ""],
+        [8, 1, 11, ""],
+        [10, 1, 11, ""],
+        [11, 0, 0, ""],
+        [15, 1, 2, ""],
+        [23, 1, 3, ""],
+        [24, 0, 1, ""],
+        [26, 1, 7, ""],
+        [27, 0, 2, ""],
+        [29, 0, 3, ""],
+        [42, 3, 1, ""],
+        [45, 0, 4, ""],
+        [47, 1, 7, ""],
+        [61, 3, 4, ""],
+        [64, 0, 5, ""],
+        [66, 1, 7, ""],
+        [80, 3, 5, ""],
+        [83, 0, 6, ""],
+        [85, 1, 7, ""],
+        [99, 3, 6, ""],
+        [100, 0, 7, ""],
+        [104, 0, 8, ""],
+        [106, 3, 8, ""],
+        [124, 1, 9, ""],
+        [126, 0, 9, ""],
+        [128, 1, 10, ""],
+        [130, 0, 10, ""],
+        [132, 0, 11, ""],
+        [136, 1, 13, ""],
+        [144, 1, 14, ""],
+        [145, 0, 12, ""],
+        [147, 1, 17, ""],
+        [148, 0, 13, ""],
+        [150, 0, 14, ""],
+        [162, 3, 12, ""],
+        [165, 0, 15, ""],
+        [167, 1, 17, ""],
+        [180, 3, 15, ""],
+        [183, 0, 16, ""],
+        [185, 1, 17, ""],
+        [198, 3, 16, ""],
+        [199, 0, 17, ""],
+        [203, 0, 18, ""],
+        [205, 3, 18, ""],
+        [227, 1, 19, ""],
+        [229, 1, 19, ""],
+        [231, 0, 19, ""],
+        [233, 1, 20, ""],
+        [235, 1, 20, ""],
+        [237, 0, 20, ""],
+        [239, 1, 24, ""],
+        [241, 1, 21, ""],
+        [243, 0, 21, ""],
+        [245, 1, 22, ""],
+        [247, 0, 22, ""],
+        [249, 1, 23, ""],
+        [251, 0, 23, ""],
+        [252, 1, 27, ""],
+        [253, 0, 24, ""],
+        [255, 1, 25, ""],
+        [257, 0, 25, ""],
+        [259, 1, 26, ""],
+        [261, 0, 26, ""],
+        [263, 1, 27, ""],
+        [265, 0, 27, ""],
+        [267, 1, 28, ""],
+        [272, 0, 28, ""],
+        [274, 1, 29, ""],
+        [276, 0, 29, ""],
+        [278, 1, 30, ""],
+        [280, 0, 30, ""],
+        [295, 1, 31, ""],
+        [296, 1, 34, ""],
+        [297, 0, 31, ""],
+        [299, 1, 32, ""],
+        [302, 0, 32, ""],
+        [304, 1, 33, ""],
+        [306, 0, 33, ""],
+        [308, 0, 34, ""],
+        [317, 1, 36, ""],
+        [329, 1, 35, ""],
+        [331, 0, 35, ""],
+        [337, 0, 36, ""],
+        [339, 0, 37, ""]
+      ]
+    },
+    {
+      "source": "src/system/debug/s3/placement_control.s",
+      "tokens": [
+        [7, 1, 38, ""],
+        [8, 1, 41, ""],
+        [9, 0, 38, ""],
+        [19, 1, 39, ""],
+        [25, 0, 39, ""],
+        [37, 1, 40, ""],
+        [39, 0, 40, ""],
+        [43, 0, 41, ""],
+        [59, 1, 43, ""],
+        [62, 1, 42, ""],
+        [65, 1, 49, ""],
+        [66, 0, 42, ""],
+        [68, 1, 44, ""],
+        [71, 1, 43, ""],
+        [73, 0, 43, ""],
+        [75, 0, 44, ""],
+        [84, 1, 45, ""],
+        [90, 1, 45, ""],
+        [92, 0, 45, ""],
+        [94, 1, 46, ""],
+        [101, 1, 46, ""],
+        [103, 0, 46, ""],
+        [105, 1, 47, ""],
+        [107, 1, 47, ""],
+        [109, 0, 47, ""],
+        [111, 1, 48, ""],
+        [113, 0, 48, ""],
+        [116, 0, 49, ""],
+        [118, 1, 52, ""],
+        [120, 1, 50, ""],
+        [122, 1, 51, ""],
+        [124, 1, 51, ""],
+        [125, 0, 50, ""],
+        [127, 1, 52, ""],
+        [130, 1, 51, ""],
+        [132, 0, 51, ""],
+        [134, 0, 52, ""],
+        [136, 1, 53, ""],
+        [138, 1, 53, ""],
+        [154, 0, 53, ""],
+        [156, 1, 54, ""],
+        [165, 0, 54, ""]
+      ]
+    },
+    {
+      "source": "src/system/debug/sk/placement_control.s",
+      "tokens": [
+        [7, 1, 55, ""],
+        [8, 1, 59, ""],
+        [9, 0, 55, ""],
+        [13, 1, 56, ""],
+        [15, 0, 56, ""],
+        [22, 1, 57, ""],
+        [28, 0, 57, ""],
+        [40, 1, 58, ""],
+        [42, 0, 58, ""],
+        [46, 0, 59, ""],
+        [62, 1, 61, ""],
+        [65, 1, 60, ""],
+        [68, 1, 67, ""],
+        [69, 0, 60, ""],
+        [71, 1, 62, ""],
+        [74, 1, 61, ""],
+        [76, 0, 61, ""],
+        [78, 0, 62, ""],
+        [87, 1, 63, ""],
+        [93, 1, 63, ""],
+        [95, 0, 63, ""],
+        [97, 1, 64, ""],
+        [104, 1, 64, ""],
+        [106, 0, 64, ""],
+        [108, 1, 65, ""],
+        [110, 1, 65, ""],
+        [112, 0, 65, ""],
+        [114, 1, 66, ""],
+        [116, 0, 66, ""],
+        [119, 0, 67, ""],
+        [121, 1, 70, ""],
+        [123, 1, 68, ""],
+        [125, 1, 69, ""],
+        [127, 1, 69, ""],
+        [128, 0, 68, ""],
+        [130, 1, 70, ""],
+        [133, 1, 69, ""],
+        [135, 0, 69, ""],
+        [137, 0, 70, ""],
+        [139, 1, 72, ""],
+        [141, 1, 72, ""],
+        [157, 1, 71, ""],
+        [159, 0, 71, ""],
+        [161, 0, 72, ""],
+        [163, 1, 73, ""],
+        [177, 0, 73, ""]
+      ]
+    },
+    {
+      "source": "src/system/s3/bootstrap.s",
+      "tokens": [
+        [71, 1, 74, ""],
+        [73, 0, 74, ""],
+        [464, 1, 75, ""],
+        [467, 0, 75, ""],
+        [492, 0, 76, ""],
+        [494, 3, 76, ""],
+        [504, 0, 77, ""],
+        [506, 3, 77, ""]
+      ]
+    },
+    {
+      "source": "src/system/s3/device_services.s",
+      "tokens": [
+        [107, 0, 78, ""],
+        [109, 3, 78, ""],
+        [113, 0, 79, ""],
+        [115, 3, 79, ""],
+        [117, 1, 80, ""],
+        [119, 0, 80, ""],
+        [157, 1, 82, ""],
+        [159, 1, 81, ""],
+        [163, 0, 81, ""],
+        [165, 0, 82, ""]
+      ]
+    },
+    {
+      "source": "src/system/s3/runtime_primitives.s",
+      "tokens": [
+        [9, 1, 83, ""],
+        [11, 0, 83, ""],
+        [45, 1, 84, ""],
+        [47, 0, 84, ""],
+        [49, 1, 85, ""],
+        [51, 0, 85, ""],
+        [53, 1, 86, ""],
+        [58, 1, 87, ""],
+        [59, 0, 86, ""],
+        [64, 0, 87, ""],
+        [66, 1, 88, ""],
+        [69, 0, 88, ""],
+        [71, 1, 89, ""],
+        [74, 0, 89, ""]
+      ]
+    },
+    {
+      "source": "src/system/s3/video_interrupts.s",
+      "tokens": [
+        [6, 0, 90, ""],
+        [9, 1, 90, ""],
+        [13, 1, 91, ""],
+        [16, 0, 91, ""],
+        [115, 1, 92, ""],
+        [117, 0, 92, ""],
+        [122, 1, 93, ""],
+        [126, 0, 93, ""],
+        [128, 1, 94, ""],
+        [130, 0, 94, ""],
+        [138, 1, 95, ""],
+        [140, 0, 95, ""],
+        [195, 1, 96, ""],
+        [197, 0, 96, ""],
+        [246, 1, 97, ""],
+        [248, 0, 97, ""],
+        [264, 1, 98, ""],
+        [266, 0, 98, ""],
+        [277, 1, 99, ""],
+        [279, 0, 99, ""],
+        [291, 1, 100, ""],
+        [293, 1, 101, ""],
+        [294, 0, 100, ""],
+        [296, 0, 101, ""]
+      ]
+    }
+  ]
+}

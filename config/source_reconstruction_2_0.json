@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 84
+    "commit_count": 85
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -551,9 +551,15 @@
       "commits": ["15afb64f15d7cfe86424217518474ea3dc437d16"]
     },
     {
-      "id": "current-semantic-01-audio",
+      "id": "change-7a3c691c39af",
       "kind": "source_or_tooling",
       "summary": "Apply reviewed physical labels and all frozen source-token references for subsystem 01-audio; retain exact reversible source proof and original ROM bytes.",
+      "commits": ["7a3c691c39af68ebdfa2f28770c5421e55632fd6"]
+    },
+    {
+      "id": "current-semantic-02-system",
+      "kind": "source_or_tooling",
+      "summary": "Apply reviewed physical labels and all frozen source-token references for subsystem 02-system; retain exact reversible source proof and original ROM bytes.",
       "commits": ["release-commit"]
     }
   ],
