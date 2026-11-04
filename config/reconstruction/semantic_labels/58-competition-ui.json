@@ -1,0 +1,3119 @@
+{
+  "schema_version": 1,
+  "packet": "58-competition-ui",
+  "mappings": [
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 29,
+      "old": "loc_95AE",
+      "new": "S3CompMenu_LoadBackgroundAndQueueArt",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionMenu_LoadCompetitionBackgroundAndQueueMenuArt"
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 59,
+      "old": "loc_963A",
+      "new": "S3CompMenu_CopyThreeTargetPaletteLines",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionMenu_CopyThreeMenuTargetPaletteLines"
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 65,
+      "old": "loc_9648",
+      "new": "S3CompMenu_CopyBGPaletteAndPrepActors",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionMenu_CopyBackgroundTargetPaletteAndPrepareSevenMenuActors"
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 72,
+      "old": "loc_9658",
+      "new": "S3CompMenu_BuildActorsAndEnableDisplay",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionMenu_ConstructSevenFixedMenuObjectsThenEnableDisplay"
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 94,
+      "old": "loc_96B8",
+      "new": "S3CompMenu_RunMenuAndCheckCancelFirst",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionMenu_RunCompetitionMenuAndPrioritizeCancelBeforeSelectionDispatch"
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 113,
+      "old": "loc_96F8",
+      "new": "S3CompMenu_DispatchRaceOrExit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionMenu_DispatchThreeShortRaceBranchesWithFourthChoiceFallingOnExit"
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 121,
+      "old": "loc_96FE",
+      "new": "S3CompMenu_ReturnToTitle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionMenu_ReturnToTitleOnCancelOrFourthMenuChoice"
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 126,
+      "old": "loc_9706",
+      "new": "S3CompMenu_OpenPlayerMenu",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionMenu_SelectTypeZeroPlayerMenuAndLatchSecondControllerConfirm"
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 136,
+      "old": "loc_9724",
+      "new": "S3CompMenu_OpenZoneMenu",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionMenu_SelectTypeThreeZoneMenuAndLatchSecondControllerConfirm"
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 146,
+      "old": "loc_9744",
+      "new": "S3CompMenu_OpenTimeAttackOnP1Confirm",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionMenu_OpenTimeAttackZoneSelectionOnlyForControllerOneConfirm"
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 154,
+      "old": "loc_975E",
+      "new": "S3CompMenu_PrepareScratchClear",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionMenu_PrepareFortyByteCompetitionScratchClearOnModeEntry"
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 159,
+      "old": "loc_9768",
+      "new": "S3CompMenu_ClearScratchAndPlayConfirm",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionMenu_ClearCompetitionScratchAndPlayAcceptedSelectionSound"
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 166,
+      "old": "loc_9776",
+      "new": "S3CompMenu_HandleUpAndWrap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionMenu_ProcessUpWithFourChoiceWrapAndPriorityOverDown"
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 178,
+      "old": "loc_978A",
+      "new": "S3CompMenu_HandleDownAndWrap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionMenu_ProcessDownAndWrapAfterFourthMenuChoice"
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 187,
+      "old": "loc_979A",
+      "new": "S3CompMenu_StoreChoiceAndPlaySwitch",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionMenu_StoreMenuChoiceAndPlaySwitchOnDirectionalInput"
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 193,
+      "old": "loc_97A8",
+      "new": "S3CompMenu_RepeatMenuFrame",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionMenu_RepeatCompetitionMenuAfterNavigation"
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 197,
+      "old": "Obj_Competition_97AC",
+      "new": "CompetitionMenu_UpdateSelectionPalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Draw a competition menu label with selection-dependent palette."
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 206,
+      "old": "loc_97C6",
+      "new": "CompetitionMenu_ApplyLabelPalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Commit the selected or unselected label palette."
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 209,
+      "old": "loc_97CA",
+      "new": "CompetitionMenu_DrawLabel",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Shared drawing entry for selectable and fixed-palette menu labels."
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 213,
+      "old": "Obj_Competition_97D0",
+      "new": "CompetitionMenu_UpdateItemsToggleCursor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Toggle item availability and blink its cursor on menu options0 or1."
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 225,
+      "old": "loc_97F6",
+      "new": "CompetitionMenu_SelectItemsCursorX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Choose the items cursor X position from the toggle state."
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 231,
+      "old": "loc_9804",
+      "new": "S3CompMenu_PositionAndBlinkItemsCursor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Store cursor X and draw only on one half of frame-counter bit3."
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 238,
+      "old": "locret_9816",
+      "new": "CompetitionMenu_ReturnFromItemsCursor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Shared hidden/inapplicable return for the items cursor."
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "original_line": 244,
+      "old": "ObjDat_9878",
+      "new": "CompetitionMenu_ActorRecords",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "7-entry fixed-slot actor initialization list for CompetitionMenu_ActorRecords."
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 60,
+      "old": "loc_A280",
+      "new": "S3CompPlayers_CopyBackgroundPalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionPlayers_CopyCompetitionPlayerMenuBackgroundPaletteLine"
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 66,
+      "old": "loc_A28C",
+      "new": "S3CompPlayers_CopyPalettesAndPrepActors",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionPlayers_CopyThreeCharacterPaletteLinesAndPrepareElevenActors"
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 73,
+      "old": "loc_A29C",
+      "new": "S3CompPlayers_BuildActorsAndSeedAngles",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionPlayers_ConstructElevenPlayerMenuActorsAndSeedCharacterAngles"
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 112,
+      "old": "loc_A33E",
+      "new": "S3CompPlayers_RunMenuAndCheckExitFirst",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionPlayers_RunPlayerMenuAndHonorExitMailboxBeforeReadiness"
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 125,
+      "old": "loc_A36A",
+      "new": "S3CompPlayers_SelectActiveReadyMask",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionPlayers_ChooseOnePlayerOrTwoPlayerReadyMask"
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 131,
+      "old": "loc_A376",
+      "new": "S3CompPlayers_StartRaceWhenPlayersReady",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionPlayers_StartFirstCompetitionLevelOnlyWhenRequiredPlayersReady"
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 158,
+      "old": "loc_A3BC",
+      "new": "S3CompPlayers_DrawInactiveP2Selector",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionPlayers_DrawInactiveSecondPlayerSelectorWithFrameZero"
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 168,
+      "old": "loc_A3CE",
+      "new": "S3CompPlayers_GateInputAndCheckCancel",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionPlayers_GatePlayerInputWhileScrollingAndAllowReadyCancel"
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 180,
+      "old": "loc_A3EE",
+      "new": "S3CompPlayers_StartOrContinueRotation",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionPlayers_StartCharacterRotationOrContinueCurrentInterpolation"
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 201,
+      "old": "loc_A42C",
+      "new": "S3CompPlayers_StoreNextChoiceAndAngle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionPlayers_CommitNextCharacterAndChooseForwardUnwrappedAngle"
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 207,
+      "old": "loc_A438",
+      "new": "S3CompPlayers_BeginForwardRotation",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionPlayers_StoreForwardAngleTargetAndEnterFiveUnitRotation"
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 213,
+      "old": "loc_A442",
+      "new": "S3CompPlayers_SelectPreviousCharacter",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionPlayers_SelectPreviousCharacterForBackwardRotation"
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 220,
+      "old": "loc_A450",
+      "new": "S3CompPlayers_StorePrevChoiceAndAngle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionPlayers_CommitPreviousCharacterAndSignExtendWrappedBackwardPhase"
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 227,
+      "old": "loc_A45E",
+      "new": "S3CompPlayers_BeginBackwardRotation",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionPlayers_StoreBackwardTargetBeforeSignedAngleInterpolation"
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 231,
+      "old": "loc_A466",
+      "new": "S3CompPlayers_AdvanceForwardAndClamp",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionPlayers_AdvanceForwardAngleByFiveAndClampAtSignedTarget"
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 244,
+      "old": "loc_A482",
+      "new": "S3CompPlayers_AdvanceBackwardAndClamp",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionPlayers_AdvanceBackwardAngleByFiveAndClampAtSignedTarget"
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 251,
+      "old": "loc_A48E",
+      "new": "S3CompPlayers_StoreAngleAndOrbitPhase",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionPlayers_StoreAngleWordAndExportLowByteForPortraitOrbit"
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 257,
+      "old": "loc_A498",
+      "new": "S3CompPlayers_CancelToCompetitionMenu",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionPlayers_RequestReturnToCompetitionMenuOnUnlockedCancel"
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 264,
+      "old": "loc_A4A6",
+      "new": "S3CompPlayers_ConfirmChoiceAndSetReady",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionPlayers_ConfirmCurrentCharacterAndClearOwnReadyByte"
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 273,
+      "old": "loc_A4BC",
+      "new": "S3CompPlayers_SelectReadyOrBlinkFrame",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionPlayers_ChooseSteadyConfirmedOrEightFrameBlinkSelectorFrame"
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 281,
+      "old": "loc_A4CE",
+      "new": "S3CompPlayers_StoreFrameAndProjectX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionPlayers_StoreSelectorFrameAndProjectBaseXWithScroll"
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 303,
+      "old": "loc_A504",
+      "new": "S3CompPlayers_ProjectCharacterPortrait",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionPlayers_LocatePrecedingSelectorAndProjectOneOfThreeCharacterPortraits"
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 332,
+      "old": "locret_A55C",
+      "new": "S3CompPlayers_CheckP2StartPrompt",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionPlayers_SuppressPressStartPromptWhenSecondPlayerActiveOrBlinkOff"
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "original_line": 344,
+      "old": "ObjDat_A65E",
+      "new": "S3CompPlayers_FixedActorRecords",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3CompetitionPlayers_ElevenFixedPlayerMenuActorRecords"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 66,
+      "old": "loc_AACC",
+      "new": "S3CompResults_CopyBackgroundPalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_CopyBackgroundPaletteAndPrepareTwoCharacterLines"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 72,
+      "old": "loc_AAD8",
+      "new": "S3CompResults_CopyCharacterPalettes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_CopyTwoCharacterPaletteLinesAndPrepareResultLine"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 78,
+      "old": "loc_AAE4",
+      "new": "S3CompResults_CopyPaletteAndPrepActors",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_CopyResultsPaletteLineAndLoadEightActorDescriptor"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 85,
+      "old": "loc_AAF4",
+      "new": "S3CompResults_BuildActorsAndFadeIn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_ConstructEightResultsActorsAndFadeDisplayIn"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 111,
+      "old": "loc_AB62",
+      "new": "S3CompResults_RunResultsAndBlinkWinner",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_RunResultsAndAlternateWinningTotalTilePalette"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 124,
+      "old": "loc_AB8A",
+      "new": "S3CompResults_DrawWinningTotalNormal",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_UploadNormalPaletteWinningTotalTime"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 128,
+      "old": "loc_AB92",
+      "new": "S3CompResults_Tick30FrameInputLockout",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_WaitThirtyResultsIterationsBeforeControlHandling"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 135,
+      "old": "loc_AB9E",
+      "new": "S3CompResults_ReadActiveControllers",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_ReadResultsConfirmFromFirstAndOptionalSecondController"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 141,
+      "old": "loc_ABAC",
+      "new": "S3CompResults_RouteControlsByPage",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_RouteControlsByResultsPageHorizontalPosition"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 149,
+      "old": "loc_ABBA",
+      "new": "S3CompResults_BeginSecondPageOnConfirm",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_BeginSecondResultsPageOnlyOnConfirm"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 153,
+      "old": "loc_ABC0",
+      "new": "S3CompResults_SlidePageLeftToEndpoint",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_SlideResultsPageLeftByEightUntilEndpoint"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 159,
+      "old": "loc_ABC8",
+      "new": "S3CompResults_ExitSecondPageOnConfirm",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_ReturnToCompetitionMenuOnSecondPageConfirm"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 166,
+      "old": "loc_ABD6",
+      "new": "S3CompResults_UpdateAndRenderActors",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_ProcessAndRenderResultsActorsThenRepeat"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 172,
+      "old": "Obj_Competition_ABE6",
+      "new": "S3CompResults_UpdatePlayerIcon",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Select the character icon for Player1 or Player2 on results rows."
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 180,
+      "old": "loc_AC02",
+      "new": "S3CompResults_StorePlayerIconFrame",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Commit the selected player character frame before scroll-aware drawing."
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 185,
+      "old": "Obj_Competition_AC0A",
+      "new": "CompetitionResults_UpdateWinLoseTieIcon",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Select each player result icon from the two race-win counters."
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 193,
+      "old": "loc_AC20",
+      "new": "S3CompResults_ComparePlayerWinCounts",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Compare own and opposing race-win counts for a result icon."
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 200,
+      "old": "loc_AC2A",
+      "new": "CompetitionResults_FinalizeNonTieFrame",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Translate the non-tie comparison branch into win/loss frame."
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 203,
+      "old": "loc_AC2C",
+      "new": "S3CompResults_StoreFrameAndBlinkWinner",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Store result frame and blink only the winning icon."
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 234,
+      "old": "loc_AC8A",
+      "new": "S3CompResults_BlinkP2TotalIfFaster",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_ChooseSecondPlayerFasterTotalForBlink"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 238,
+      "old": "loc_AC92",
+      "new": "S3CompResults_DrawP2TotalAndPrepRaceRows",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_DrawSecondTotalAndPrepareFiveRaceOutcomeRows"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 245,
+      "old": "loc_ACA8",
+      "new": "S3CompResults_CompareTimesAndCountWins",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_CompareRaceTimesAndCountStrictWins"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 259,
+      "old": "loc_ACCA",
+      "new": "S3CompResults_UseTieMapsWithoutWin",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_UseTieMapsWithoutAwardingEitherPlayerWin"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 264,
+      "old": "loc_ACD4",
+      "new": "S3CompResults_UploadMapsAndPrepBlink",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_UploadBothRaceOutcomeMapsAndPrepareTotalBlinkVariant"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 285,
+      "old": "loc_AD16",
+      "new": "S3CompResults_BuildWinnerBlinkTiles",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_BuildSixteenWordPaletteThreeTotalTimeVariant"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 292,
+      "old": "locret_AD26",
+      "new": "S3CompResults_OutcomeRowsReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_ReturnAfterOutcomeRowsOrWinningTotalVariant"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 301,
+      "old": "loc_AD2A",
+      "new": "S3CompResults_DrawFiveRaceTimes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_DrawFiveSequentialBinaryTimeRows"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 317,
+      "old": "loc_AD44",
+      "new": "S3CompResults_AccumulateHundredths",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_AccumulateHundredthsAndCarryAtOneHundred"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 326,
+      "old": "loc_AD5A",
+      "new": "S3CompResults_AccumulateSeconds",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_AccumulateSecondsAndCarryAtSixty"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 334,
+      "old": "loc_AD6C",
+      "new": "S3CompResults_AccumulateMinutesCap99",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_AccumulateMinutesAndCapAtNinetyNine"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 341,
+      "old": "loc_AD7A",
+      "new": "S3CompResults_RepeatAndReturnPackedTotal",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionResults_RepeatFiveTimeAccumulatesAndReturnPackedBinaryTotal"
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 351,
+      "old": "ObjDat_ADA4",
+      "new": "CompetitionResults_ActorRecords",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "8-entry fixed-slot actor initialization list for CompetitionResults_ActorRecords."
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "original_line": 377,
+      "old": "VRAMDatList_AE06",
+      "new": "S3CompResults_InitialPlaneTransfers",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3CompetitionResults_NineInitialPlaneMapTransferRecords"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 78,
+      "old": "loc_9B70",
+      "new": "S3CompZones_CopyBackgroundPalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_CopyBackgroundTargetPaletteThenPrepareCharacterLines"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 84,
+      "old": "loc_9B7C",
+      "new": "S3CompZones_CopyPalettesAndChooseActors",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_CopyThreePaletteLinesAndChooseRaceOrTimeAttackRecords"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 93,
+      "old": "loc_9B94",
+      "new": "S3CompZones_ReadFixedActorCount",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_ReadSelectedFixedActorCountBeforeConstruction"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 96,
+      "old": "loc_9B96",
+      "new": "S3CompZones_BuildActorsAndSeedAngles",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_ConstructZoneMenuActorsAndSeedRequiredCharacterAngles"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 123,
+      "old": "loc_9BF4",
+      "new": "S3CompZones_DrawActorsAndAddPreview",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_RenderInitialActorsAndInstallExtraZonePreview"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 144,
+      "old": "loc_9C5C",
+      "new": "S3CompZones_RunMenuAndCheckExitFirst",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_RunZoneMenuAndConsumeExitMailboxBeforeReadiness"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 157,
+      "old": "loc_9C88",
+      "new": "S3CompZones_MaskActiveReadyBytes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_MaskReadyBytesForActivePlayerCount"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 163,
+      "old": "loc_9C94",
+      "new": "S3CompZones_ChooseZoneOrCharacterView",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_ChooseZoneViewWhenReadyOrRestoreCharacterView"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 172,
+      "old": "loc_9CAC",
+      "new": "S3CompZones_SlideTowardCharacterView",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_SlideBackTowardCharacterViewByEight"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 178,
+      "old": "loc_9CB4",
+      "new": "S3CompZones_SlideTowardZoneView",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_SlideReadyPlayersTowardZoneViewByEight"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 185,
+      "old": "loc_9CC2",
+      "new": "S3CompZones_SelectScrollOrReadInput",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_ChooseSignedVerticalStepOrReadZoneInput"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 192,
+      "old": "loc_9CCE",
+      "new": "S3CompZones_ScrollAndConsumeDelta",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_AdvanceVerticalScrollAndConsumeSignedResidual"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 198,
+      "old": "loc_9CD8",
+      "new": "S3CompZones_ReadActiveControllers",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_ReadFirstControllerAndOptionalSecondForZoneView"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 205,
+      "old": "loc_9CE8",
+      "new": "S3CompZones_CancelP2ReadyOnB",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_CancelSecondPlayerReadinessWhenZoneViewReceivesB"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 211,
+      "old": "loc_9CF6",
+      "new": "S3CompZones_CancelP1ReadyOnB",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_CancelFirstPlayerReadinessWhenZoneViewReceivesB"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 217,
+      "old": "loc_9D04",
+      "new": "S3CompZones_HandleDownAndScroll",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_HandleZoneDownWithUpPriorityAndInteriorScrolling"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 238,
+      "old": "loc_9D3C",
+      "new": "S3CompZones_HandleUpAndScroll",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_HandleZoneUpAndScrollOnlyInteriorRows"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 251,
+      "old": "loc_9D5C",
+      "new": "S3CompZones_ConfirmSelectedZone",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_StartSelectedCompetitionZoneOnCombinedConfirm"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 289,
+      "old": "locret_9DC0",
+      "new": "S3CompZones_SkipCursorDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_SkipZoneListCursorWhenViewMovingOrBlinkOff"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 293,
+      "old": "loc_9DC2",
+      "new": "S3CompZones_ProjectPreviewAndSetPalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_ProjectSelectedZonePreviewAndChooseZonePalette"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 316,
+      "old": "loc_9E06",
+      "new": "S3CompZones_ChooseDefaultPreviewPalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_ChooseDefaultPreviewPaletteOutsideSettledZoneView"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 319,
+      "old": "loc_9E0A",
+      "new": "S3CompZones_PreparePreviewPaletteCopy",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_PrepareOneNormalPreviewPaletteLineCopy"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 323,
+      "old": "loc_9E10",
+      "new": "S3CompZones_CopyNormalPreviewPalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_CopyEightLongwordsIntoNormalPreviewPaletteLine"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 337,
+      "old": "loc_9E24",
+      "new": "S3CompZones_ClampVisibleRowTo2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_ClampDerivedVisibleScrollRowToTwo"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 342,
+      "old": "locret_9E2C",
+      "new": "S3CompZones_VisibleRowReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_ReturnClampedVisibleZoneRow"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 348,
+      "old": "loc_9E2E",
+      "new": "S3CompZones_ClearZoneColumnsOnVBlank",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_RunOneShotZoneViewColumnClearFromVIntCallback"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 356,
+      "old": "loc_9E50",
+      "new": "S3CompZones_BeginBlankColumn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_BeginOnePriorityBlankColumnOfThirtyEightRows"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 360,
+      "old": "loc_9E56",
+      "new": "S3CompZones_WriteColumnAndClearHoles",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_WriteNineteenLongwordsAndAdvanceColumnThenClearHoles"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 387,
+      "old": "loc_9E94",
+      "new": "S3CompZones_ClearTimeAttackCharacterHole",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_ClearSingleTimeAttackCharacterHoleAtWindowRow"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 418,
+      "old": "loc_9ED2",
+      "new": "S3CompZones_ConvertTimeToDecimalPairs",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_PackThreeBinaryTimeComponentsAsDecimalDigitPairs"
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "original_line": 442,
+      "old": "loc_9F0A",
+      "new": "S3CompZones_Upload8By2TimeTiles",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionZoneMenu_UploadEightByTwoTimeTileBlock"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_competition_selection.s",
+      "original_line": 60,
+      "old": "loc_626C",
+      "new": "S3LegacyVersus_FillStripAndPrepFourBoxes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyVersusMenu_FillUnselectedCompletionStripAndPrepareFourBoxes"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_competition_selection.s",
+      "original_line": 89,
+      "old": "loc_62E0",
+      "new": "S3LegacyVersus_CopyPaletteAndFadeIn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyVersusMenu_CopyAndClearThirdPaletteLineThenFadeIn"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_competition_selection.s",
+      "original_line": 131,
+      "old": "loc_6368",
+      "new": "S3LegacyVersus_ReturnToSegaAfterConfirm",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyVersusMenu_ReturnToSegaAfterAcceptedCompletionCheck"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_competition_selection.s",
+      "original_line": 156,
+      "old": "loc_63BE",
+      "new": "S3LegacyVersus_RetainedSpecialStageTail",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyVersusMenu_RetainedSpecialStageSelectionTail"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_competition_selection.s",
+      "original_line": 180,
+      "old": "loc_63F4",
+      "new": "S3LegacyVersus_ToggleSelectionColumn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyVersusMenu_ToggleSelectionColumnOnHorizontalInput"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_competition_selection.s",
+      "original_line": 185,
+      "old": "locret_6400",
+      "new": "S3LegacyVersus_FourBoxControlsReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyVersusMenu_ReturnFromFourBoxControls"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_competition_selection.s",
+      "original_line": 210,
+      "old": "loc_6446",
+      "new": "S3LegacyVersus_PrepareSelectedIconCopy",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyVersusMenu_PrepareThreeRowSelectedCompletionIconCopy"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_competition_selection.s",
+      "original_line": 213,
+      "old": "loc_6448",
+      "new": "S3LegacyVersus_CopySelectedIconAndUpload",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyVersusMenu_CopySelectedFourTileIconRowsAndUploadBox"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_competition_selection.s",
+      "original_line": 231,
+      "old": "loc_647A",
+      "new": "S3LegacyVersus_CopySelectedZonePalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyVersusMenu_CopySelectedZoneIconPaletteLine"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_competition_selection.s",
+      "original_line": 273,
+      "old": "loc_64E0",
+      "new": "S3LegacyVersus_PrepareUnselectedIconCopy",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyVersusMenu_PrepareUnselectedThreeRowCompletionIconCopy"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_competition_selection.s",
+      "original_line": 276,
+      "old": "loc_64E2",
+      "new": "S3LegacyVersus_UploadUnselectedIcon",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyVersusMenu_CopyUnselectedIconAndUploadSeventeenByTwelveBox"
+    },
+    {
+      "source": "src/game/modes/s3/time_attack_records.s",
+      "original_line": 84,
+      "old": "loc_B0C2",
+      "new": "S3TimeRecords_UploadIconsAndPrepPalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TimeRecordMenu_UploadCharacterIconTilesAndPrepareBackgroundPalette"
+    },
+    {
+      "source": "src/game/modes/s3/time_attack_records.s",
+      "original_line": 91,
+      "old": "loc_B0D4",
+      "new": "S3TimeRecords_CopyBackgroundPalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TimeRecordMenu_CopyBackgroundPaletteLine"
+    },
+    {
+      "source": "src/game/modes/s3/time_attack_records.s",
+      "original_line": 97,
+      "old": "loc_B0E0",
+      "new": "S3TimeRecords_CopyMiddlePaletteLines",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TimeRecordMenu_CopyMiddleTwoPaletteLines"
+    },
+    {
+      "source": "src/game/modes/s3/time_attack_records.s",
+      "original_line": 103,
+      "old": "loc_B0EC",
+      "new": "S3TimeRecords_CopyPaletteAndPrepActors",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TimeRecordMenu_CopyRecordPaletteLineAndPrepareFiveActors"
+    },
+    {
+      "source": "src/game/modes/s3/time_attack_records.s",
+      "original_line": 110,
+      "old": "loc_B0FC",
+      "new": "S3TimeRecords_InitRecordActorsAndFadeIn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TimeRecordMenu_InitializeFiveFixedRecordActorsAndFadeIn"
+    },
+    {
+      "source": "src/game/modes/s3/time_attack_records.s",
+      "original_line": 136,
+      "old": "loc_B16A",
+      "new": "S3TimeRecords_RunFrameAndBlinkRecord",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TimeRecordMenu_RunRecordsFrameAndBlinkHighlightedTime"
+    },
+    {
+      "source": "src/game/modes/s3/time_attack_records.s",
+      "original_line": 149,
+      "old": "loc_B192",
+      "new": "S3TimeRecords_RedrawHighlightedTime",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TimeRecordMenu_RedrawHighlightedRecordTime"
+    },
+    {
+      "source": "src/game/modes/s3/time_attack_records.s",
+      "original_line": 153,
+      "old": "loc_B19A",
+      "new": "S3TimeRecords_Tick30FrameExitLockout",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TimeRecordMenu_CountdownThirtyFrameExitLockout"
+    },
+    {
+      "source": "src/game/modes/s3/time_attack_records.s",
+      "original_line": 160,
+      "old": "loc_B1A6",
+      "new": "S3TimeRecordMenu_ExitRecordsOnStartAOrC",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TimeRecordMenu_ExitRecordsOnStartAOrC"
+    },
+    {
+      "source": "src/game/modes/s3/time_attack_records.s",
+      "original_line": 168,
+      "old": "loc_B1B8",
+      "new": "S3TimeRecords_RenderActorsAndRepeat",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TimeRecordMenu_RenderRecordActorsAndRepeat"
+    },
+    {
+      "source": "src/game/modes/s3/time_attack_records.s",
+      "original_line": 201,
+      "old": "Obj_Competition_B20C",
+      "new": "S3TimeRecords_InitIconFromSavedCharacter",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize the character icon for one of three saved time-attack records."
+    },
+    {
+      "source": "src/game/modes/s3/time_attack_records.s",
+      "original_line": 217,
+      "old": "loc_B244",
+      "new": "S3TimeRecords_SetIconFrameAndUpdate",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Select the saved-record character frame and install its blink updater."
+    },
+    {
+      "source": "src/game/modes/s3/time_attack_records.s",
+      "original_line": 222,
+      "old": "loc_B252",
+      "new": "CompetitionRecordIcon_BlinkNewTopRecord",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Blink the record icon whose row matches the newly achieved top-record index."
+    },
+    {
+      "source": "src/game/modes/s3/time_attack_records.s",
+      "original_line": 229,
+      "old": "loc_B264",
+      "new": "CompetitionRecordIcon_Draw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Draw the saved character icon for a time-attack record."
+    },
+    {
+      "source": "src/game/modes/s3/time_attack_records.s",
+      "original_line": 233,
+      "old": "locret_B26A",
+      "new": "CompetitionRecordIcon_ReturnDuringBlink",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Skip drawing the newly matched record icon during the hidden blink half."
+    },
+    {
+      "source": "src/game/modes/s3/time_attack_records.s",
+      "original_line": 239,
+      "old": "ObjDat_B28C",
+      "new": "CompetitionTimeAttack_ActorRecords",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "5-entry fixed-slot actor initialization list for CompetitionTimeAttack_ActorRecords."
+    },
+    {
+      "source": "src/game/modes/s3/time_attack_records.s",
+      "original_line": 256,
+      "old": "VRAMDatList_B2CA",
+      "new": "S3TimeRecords_InitialVRAMRectangles",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3TimeRecordMenu_NineBackgroundLapAndSavedRecordVramRectangles"
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 29,
+      "old": "loc_A8DC",
+      "new": "SKCompMenu_LoadBackgroundAndQueueArt",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionMenu_LoadCompetitionBackgroundAndQueueMenuArt"
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 59,
+      "old": "loc_A96A",
+      "new": "SKCompMenu_CopyThreeTargetPaletteLines",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionMenu_CopyThreeMenuTargetPaletteLines"
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 65,
+      "old": "loc_A978",
+      "new": "SKCompMenu_CopyBGPaletteAndPrepActors",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionMenu_CopyBackgroundTargetPaletteAndPrepareSevenMenuActors"
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 72,
+      "old": "loc_A988",
+      "new": "SKCompMenu_BuildActorsAndEnableDisplay",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionMenu_ConstructSevenFixedMenuObjectsThenEnableDisplay"
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 94,
+      "old": "loc_A9E8",
+      "new": "SKCompMenu_RunMenuAndCheckCancelFirst",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionMenu_RunCompetitionMenuAndPrioritizeCancelBeforeSelectionDispatch"
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 113,
+      "old": "loc_AA28",
+      "new": "SKCompMenu_DispatchRaceOrExit",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionMenu_DispatchThreeShortRaceBranchesWithFourthChoiceFallingOnExit"
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 121,
+      "old": "loc_AA2E",
+      "new": "SKCompMenu_ReturnToTitle",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionMenu_ReturnToTitleOnCancelOrFourthMenuChoice"
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 126,
+      "old": "loc_AA36",
+      "new": "SKCompMenu_OpenPlayerMenu",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionMenu_SelectTypeZeroPlayerMenuAndLatchSecondControllerConfirm"
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 136,
+      "old": "loc_AA54",
+      "new": "SKCompMenu_OpenZoneMenu",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionMenu_SelectTypeThreeZoneMenuAndLatchSecondControllerConfirm"
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 146,
+      "old": "loc_AA74",
+      "new": "SKCompMenu_OpenTimeAttackOnP1Confirm",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionMenu_OpenTimeAttackZoneSelectionOnlyForControllerOneConfirm"
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 154,
+      "old": "loc_AA8E",
+      "new": "SKCompMenu_PrepareScratchClear",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionMenu_PrepareFortyByteCompetitionScratchClearOnModeEntry"
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 159,
+      "old": "loc_AA98",
+      "new": "SKCompMenu_ClearScratchAndPlayConfirm",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionMenu_ClearCompetitionScratchAndPlayAcceptedSelectionSound"
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 166,
+      "old": "loc_AAA6",
+      "new": "SKCompMenu_HandleUpAndWrap",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionMenu_ProcessUpWithFourChoiceWrapAndPriorityOverDown"
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 178,
+      "old": "loc_AABA",
+      "new": "SKCompMenu_HandleDownAndWrap",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionMenu_ProcessDownAndWrapAfterFourthMenuChoice"
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 187,
+      "old": "loc_AACA",
+      "new": "SKCompMenu_StoreChoiceAndPlaySwitch",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionMenu_StoreMenuChoiceAndPlaySwitchOnDirectionalInput"
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 193,
+      "old": "loc_AAD8",
+      "new": "SKCompMenu_RepeatMenuFrame",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionMenu_RepeatCompetitionMenuAfterNavigation"
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 197,
+      "old": "Obj_Competition_AADC",
+      "new": "CompetitionMenu_UpdateSelectionPalette",
+      "profiles": ["sk"],
+      "meaning": "Draw a competition menu label with selection-dependent palette."
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 206,
+      "old": "loc_AAF6",
+      "new": "CompetitionMenu_ApplyLabelPalette",
+      "profiles": ["sk"],
+      "meaning": "Commit the selected or unselected label palette."
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 209,
+      "old": "loc_AAFA",
+      "new": "CompetitionMenu_DrawLabel",
+      "profiles": ["sk"],
+      "meaning": "Shared drawing entry for selectable and fixed-palette menu labels."
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 213,
+      "old": "Obj_Competition_AB00",
+      "new": "CompetitionMenu_UpdateItemsToggleCursor",
+      "profiles": ["sk"],
+      "meaning": "Toggle item availability and blink its cursor on menu options0 or1."
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 225,
+      "old": "loc_AB26",
+      "new": "CompetitionMenu_SelectItemsCursorX",
+      "profiles": ["sk"],
+      "meaning": "Choose the items cursor X position from the toggle state."
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 231,
+      "old": "loc_AB34",
+      "new": "SKCompMenu_PositionAndBlinkItemsCursor",
+      "profiles": ["sk"],
+      "meaning": "Store cursor X and draw only on one half of frame-counter bit3."
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 238,
+      "old": "locret_AB46",
+      "new": "CompetitionMenu_ReturnFromItemsCursor",
+      "profiles": ["sk"],
+      "meaning": "Shared hidden/inapplicable return for the items cursor."
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "original_line": 241,
+      "old": "ObjDat_AB48",
+      "new": "CompetitionMenu_ActorRecords",
+      "profiles": ["sk"],
+      "meaning": "7-entry fixed-slot actor initialization list for CompetitionMenu_ActorRecords."
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 60,
+      "old": "loc_B3E8",
+      "new": "SKCompPlayers_CopyBackgroundPalette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionPlayers_CopyCompetitionPlayerMenuBackgroundPaletteLine"
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 66,
+      "old": "loc_B3F6",
+      "new": "SKCompPlayers_CopyPalettesAndPrepActors",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionPlayers_CopyThreeCharacterPaletteLinesAndPrepareElevenActors"
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 73,
+      "old": "loc_B406",
+      "new": "SKCompPlayers_BuildActorsAndSeedAngles",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionPlayers_ConstructElevenPlayerMenuActorsAndSeedCharacterAngles"
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 112,
+      "old": "loc_B4A8",
+      "new": "SKCompPlayers_RunMenuAndCheckExitFirst",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionPlayers_RunPlayerMenuAndHonorExitMailboxBeforeReadiness"
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 125,
+      "old": "loc_B4D4",
+      "new": "SKCompPlayers_SelectActiveReadyMask",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionPlayers_ChooseOnePlayerOrTwoPlayerReadyMask"
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 131,
+      "old": "loc_B4E0",
+      "new": "SKCompPlayers_StartRaceWhenPlayersReady",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionPlayers_StartFirstCompetitionLevelOnlyWhenRequiredPlayersReady"
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 158,
+      "old": "loc_B526",
+      "new": "SKCompPlayers_DrawInactiveP2Selector",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionPlayers_DrawInactiveSecondPlayerSelectorWithFrameZero"
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 168,
+      "old": "loc_B538",
+      "new": "SKCompPlayers_GateInputAndCheckCancel",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionPlayers_GatePlayerInputWhileScrollingAndAllowReadyCancel"
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 180,
+      "old": "loc_B558",
+      "new": "SKCompPlayers_StartOrContinueRotation",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionPlayers_StartCharacterRotationOrContinueCurrentInterpolation"
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 201,
+      "old": "loc_B596",
+      "new": "SKCompPlayers_StoreNextChoiceAndAngle",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionPlayers_CommitNextCharacterAndChooseForwardUnwrappedAngle"
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 207,
+      "old": "loc_B5A2",
+      "new": "SKCompPlayers_BeginForwardRotation",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionPlayers_StoreForwardAngleTargetAndEnterFiveUnitRotation"
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 213,
+      "old": "loc_B5AC",
+      "new": "SKCompPlayers_SelectPreviousCharacter",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionPlayers_SelectPreviousCharacterForBackwardRotation"
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 220,
+      "old": "loc_B5BA",
+      "new": "SKCompPlayers_StorePrevChoiceAndAngle",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionPlayers_CommitPreviousCharacterAndSignExtendWrappedBackwardPhase"
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 227,
+      "old": "loc_B5C8",
+      "new": "SKCompPlayers_BeginBackwardRotation",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionPlayers_StoreBackwardTargetBeforeSignedAngleInterpolation"
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 231,
+      "old": "loc_B5D0",
+      "new": "SKCompPlayers_AdvanceForwardAndClamp",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionPlayers_AdvanceForwardAngleByFiveAndClampAtSignedTarget"
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 244,
+      "old": "loc_B5EC",
+      "new": "SKCompPlayers_AdvanceBackwardAndClamp",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionPlayers_AdvanceBackwardAngleByFiveAndClampAtSignedTarget"
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 251,
+      "old": "loc_B5F8",
+      "new": "SKCompPlayers_StoreAngleAndOrbitPhase",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionPlayers_StoreAngleWordAndExportLowByteForPortraitOrbit"
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 257,
+      "old": "loc_B602",
+      "new": "SKCompPlayers_CancelToCompetitionMenu",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionPlayers_RequestReturnToCompetitionMenuOnUnlockedCancel"
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 264,
+      "old": "loc_B610",
+      "new": "SKCompPlayers_ConfirmChoiceAndSetReady",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionPlayers_ConfirmCurrentCharacterAndClearOwnReadyByte"
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 273,
+      "old": "loc_B626",
+      "new": "SKCompPlayers_SelectReadyOrBlinkFrame",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionPlayers_ChooseSteadyConfirmedOrEightFrameBlinkSelectorFrame"
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 281,
+      "old": "loc_B638",
+      "new": "SKCompPlayers_StoreFrameAndProjectX",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionPlayers_StoreSelectorFrameAndProjectBaseXWithScroll"
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 303,
+      "old": "loc_B66E",
+      "new": "SKCompPlayers_ProjectCharacterPortrait",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionPlayers_LocatePrecedingSelectorAndProjectOneOfThreeCharacterPortraits"
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 332,
+      "old": "locret_B6C6",
+      "new": "SKCompPlayers_CheckP2StartPrompt",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionPlayers_SuppressPressStartPromptWhenSecondPlayerActiveOrBlinkOff"
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "original_line": 335,
+      "old": "ObjDat_B6C8",
+      "new": "SKCompPlayers_FixedActorRecords",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKCompetitionPlayers_ElevenFixedPlayerMenuActorRecords"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 66,
+      "old": "loc_B888",
+      "new": "SKCompResults_CopyBackgroundPalette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_CopyBackgroundPaletteAndPrepareTwoCharacterLines"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 72,
+      "old": "loc_B896",
+      "new": "SKCompResults_CopyCharacterPalettes",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_CopyTwoCharacterPaletteLinesAndPrepareResultLine"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 78,
+      "old": "loc_B8A4",
+      "new": "SKCompResults_CopyPaletteAndPrepActors",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_CopyResultsPaletteLineAndLoadEightActorDescriptor"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 85,
+      "old": "loc_B8B4",
+      "new": "SKCompResults_BuildActorsAndFadeIn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_ConstructEightResultsActorsAndFadeDisplayIn"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 111,
+      "old": "loc_B922",
+      "new": "SKCompResults_RunResultsAndBlinkWinner",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_RunResultsAndAlternateWinningTotalTilePalette"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 124,
+      "old": "loc_B94A",
+      "new": "SKCompResults_DrawWinningTotalNormal",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_UploadNormalPaletteWinningTotalTime"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 128,
+      "old": "loc_B952",
+      "new": "SKCompResults_Tick30FrameInputLockout",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_WaitThirtyResultsIterationsBeforeControlHandling"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 135,
+      "old": "loc_B95E",
+      "new": "SKCompResults_ReadActiveControllers",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_ReadResultsConfirmFromFirstAndOptionalSecondController"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 141,
+      "old": "loc_B96C",
+      "new": "SKCompResults_RouteControlsByPage",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_RouteControlsByResultsPageHorizontalPosition"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 149,
+      "old": "loc_B97A",
+      "new": "SKCompResults_BeginSecondPageOnConfirm",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_BeginSecondResultsPageOnlyOnConfirm"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 153,
+      "old": "loc_B980",
+      "new": "SKCompResults_SlidePageLeftToEndpoint",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_SlideResultsPageLeftByEightUntilEndpoint"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 159,
+      "old": "loc_B988",
+      "new": "SKCompResults_ExitSecondPageOnConfirm",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_ReturnToCompetitionMenuOnSecondPageConfirm"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 166,
+      "old": "loc_B996",
+      "new": "SKCompResults_UpdateAndRenderActors",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_ProcessAndRenderResultsActorsThenRepeat"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 172,
+      "old": "Obj_Competition_B9A6",
+      "new": "SKCompResults_UpdatePlayerIcon",
+      "profiles": ["sk"],
+      "meaning": "Select the character icon for Player1 or Player2 on results rows."
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 180,
+      "old": "loc_B9C2",
+      "new": "SKCompResults_StorePlayerIconFrame",
+      "profiles": ["sk"],
+      "meaning": "Commit the selected player character frame before scroll-aware drawing."
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 185,
+      "old": "Obj_Competition_B9CA",
+      "new": "CompetitionResults_UpdateWinLoseTieIcon",
+      "profiles": ["sk"],
+      "meaning": "Select each player result icon from the two race-win counters."
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 193,
+      "old": "loc_B9E0",
+      "new": "SKCompResults_ComparePlayerWinCounts",
+      "profiles": ["sk"],
+      "meaning": "Compare own and opposing race-win counts for a result icon."
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 200,
+      "old": "loc_B9EA",
+      "new": "CompetitionResults_FinalizeNonTieFrame",
+      "profiles": ["sk"],
+      "meaning": "Translate the non-tie comparison branch into win/loss frame."
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 203,
+      "old": "loc_B9EC",
+      "new": "SKCompResults_StoreFrameAndBlinkWinner",
+      "profiles": ["sk"],
+      "meaning": "Store result frame and blink only the winning icon."
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 234,
+      "old": "loc_BA4A",
+      "new": "SKCompResults_BlinkP2TotalIfFaster",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_ChooseSecondPlayerFasterTotalForBlink"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 238,
+      "old": "loc_BA52",
+      "new": "SKCompResults_DrawP2TotalAndPrepRaceRows",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_DrawSecondTotalAndPrepareFiveRaceOutcomeRows"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 245,
+      "old": "loc_BA68",
+      "new": "SKCompResults_CompareTimesAndCountWins",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_CompareRaceTimesAndCountStrictWins"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 259,
+      "old": "loc_BA8E",
+      "new": "SKCompResults_UseTieMapsWithoutWin",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_UseTieMapsWithoutAwardingEitherPlayerWin"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 264,
+      "old": "loc_BA9A",
+      "new": "SKCompResults_UploadMapsAndPrepBlink",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_UploadBothRaceOutcomeMapsAndPrepareTotalBlinkVariant"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 285,
+      "old": "loc_BADC",
+      "new": "SKCompResults_BuildWinnerBlinkTiles",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_BuildSixteenWordPaletteThreeTotalTimeVariant"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 292,
+      "old": "locret_BAEC",
+      "new": "SKCompResults_OutcomeRowsReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_ReturnAfterOutcomeRowsOrWinningTotalVariant"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 301,
+      "old": "loc_BAF0",
+      "new": "SKCompResults_DrawFiveRaceTimes",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_DrawFiveSequentialBinaryTimeRows"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 317,
+      "old": "loc_BB0A",
+      "new": "SKCompResults_AccumulateHundredths",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_AccumulateHundredthsAndCarryAtOneHundred"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 326,
+      "old": "loc_BB20",
+      "new": "SKCompResults_AccumulateSeconds",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_AccumulateSecondsAndCarryAtSixty"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 334,
+      "old": "loc_BB32",
+      "new": "SKCompResults_AccumulateMinutesCap99",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_AccumulateMinutesAndCapAtNinetyNine"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 341,
+      "old": "loc_BB40",
+      "new": "SKCompResults_RepeatAndReturnPackedTotal",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionResults_RepeatFiveTimeAccumulatesAndReturnPackedBinaryTotal"
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 348,
+      "old": "ObjDat_BB4A",
+      "new": "CompetitionResults_ActorRecords",
+      "profiles": ["sk"],
+      "meaning": "8-entry fixed-slot actor initialization list for CompetitionResults_ActorRecords."
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "original_line": 374,
+      "old": "VRAMDatList_BBAC",
+      "new": "SKCompResults_InitialPlaneTransfers",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKCompetitionResults_NineInitialPlaneMapTransferRecords"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 78,
+      "old": "loc_AD04",
+      "new": "SKCompZones_CopyBackgroundPalette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_CopyBackgroundTargetPaletteThenPrepareCharacterLines"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 84,
+      "old": "loc_AD12",
+      "new": "SKCompZones_CopyPalettesAndChooseActors",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_CopyThreePaletteLinesAndChooseRaceOrTimeAttackRecords"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 93,
+      "old": "loc_AD2A",
+      "new": "SKCompZones_ReadFixedActorCount",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_ReadSelectedFixedActorCountBeforeConstruction"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 96,
+      "old": "loc_AD2C",
+      "new": "SKCompZones_BuildActorsAndSeedAngles",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_ConstructZoneMenuActorsAndSeedRequiredCharacterAngles"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 123,
+      "old": "loc_AD8A",
+      "new": "SKCompZones_DrawActorsAndAddPreview",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_RenderInitialActorsAndInstallExtraZonePreview"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 144,
+      "old": "loc_ADF2",
+      "new": "SKCompZones_RunMenuAndCheckExitFirst",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_RunZoneMenuAndConsumeExitMailboxBeforeReadiness"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 157,
+      "old": "loc_AE1E",
+      "new": "SKCompZones_MaskActiveReadyBytes",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_MaskReadyBytesForActivePlayerCount"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 163,
+      "old": "loc_AE2A",
+      "new": "SKCompZones_ChooseZoneOrCharacterView",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_ChooseZoneViewWhenReadyOrRestoreCharacterView"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 172,
+      "old": "loc_AE42",
+      "new": "SKCompZones_SlideTowardCharacterView",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_SlideBackTowardCharacterViewByEight"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 178,
+      "old": "loc_AE4A",
+      "new": "SKCompZones_SlideTowardZoneView",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_SlideReadyPlayersTowardZoneViewByEight"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 185,
+      "old": "loc_AE58",
+      "new": "SKCompZones_SelectScrollOrReadInput",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_ChooseSignedVerticalStepOrReadZoneInput"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 192,
+      "old": "loc_AE64",
+      "new": "SKCompZones_ScrollAndConsumeDelta",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_AdvanceVerticalScrollAndConsumeSignedResidual"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 198,
+      "old": "loc_AE6E",
+      "new": "SKCompZones_ReadActiveControllers",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_ReadFirstControllerAndOptionalSecondForZoneView"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 205,
+      "old": "loc_AE7E",
+      "new": "SKCompZones_CancelP2ReadyOnB",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_CancelSecondPlayerReadinessWhenZoneViewReceivesB"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 211,
+      "old": "loc_AE8C",
+      "new": "SKCompZones_CancelP1ReadyOnB",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_CancelFirstPlayerReadinessWhenZoneViewReceivesB"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 217,
+      "old": "loc_AE9A",
+      "new": "SKCompZones_HandleDownAndScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_HandleZoneDownWithUpPriorityAndInteriorScrolling"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 238,
+      "old": "loc_AED2",
+      "new": "SKCompZones_HandleUpAndScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_HandleZoneUpAndScrollOnlyInteriorRows"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 251,
+      "old": "loc_AEF2",
+      "new": "SKCompZones_ConfirmSelectedZone",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_StartSelectedCompetitionZoneOnCombinedConfirm"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 289,
+      "old": "locret_AF56",
+      "new": "SKCompZones_SkipCursorDraw",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_SkipZoneListCursorWhenViewMovingOrBlinkOff"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 293,
+      "old": "loc_AF58",
+      "new": "SKCompZones_ProjectPreviewAndSetPalette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_ProjectSelectedZonePreviewAndChooseZonePalette"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 316,
+      "old": "loc_AF9E",
+      "new": "SKCompZones_ChooseDefaultPreviewPalette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_ChooseDefaultPreviewPaletteOutsideSettledZoneView"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 319,
+      "old": "loc_AFA4",
+      "new": "SKCompZones_PreparePreviewPaletteCopy",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_PrepareOneNormalPreviewPaletteLineCopy"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 323,
+      "old": "loc_AFAA",
+      "new": "SKCompZones_CopyNormalPreviewPalette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_CopyEightLongwordsIntoNormalPreviewPaletteLine"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 337,
+      "old": "loc_AFBE",
+      "new": "SKCompZones_ClampVisibleRowTo2",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_ClampDerivedVisibleScrollRowToTwo"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 342,
+      "old": "locret_AFC6",
+      "new": "SKCompZones_VisibleRowReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_ReturnClampedVisibleZoneRow"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 348,
+      "old": "loc_AFC8",
+      "new": "SKCompZones_ClearZoneColumnsOnVBlank",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_RunOneShotZoneViewColumnClearFromVIntCallback"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 356,
+      "old": "loc_AFEA",
+      "new": "SKCompZones_BeginBlankColumn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_BeginOnePriorityBlankColumnOfThirtyEightRows"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 360,
+      "old": "loc_AFF0",
+      "new": "SKCompZones_WriteColumnAndClearHoles",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_WriteNineteenLongwordsAndAdvanceColumnThenClearHoles"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 387,
+      "old": "loc_B02E",
+      "new": "SKCompZones_ClearTimeAttackCharacterHole",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_ClearSingleTimeAttackCharacterHoleAtWindowRow"
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "original_line": 418,
+      "old": "loc_B06C",
+      "new": "SKCompZones_ConvertTimeToDecimalPairs",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionZoneMenu_PackThreeBinaryTimeComponentsAsDecimalDigitPairs"
+    },
+    {
+      "source": "src/game/modes/sk/time_attack_records.s",
+      "original_line": 84,
+      "old": "loc_BDAA",
+      "new": "SKTimeRecords_UploadIconsAndPrepPalette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTimeRecordMenu_UploadCharacterIconTilesAndPrepareBackgroundPalette"
+    },
+    {
+      "source": "src/game/modes/sk/time_attack_records.s",
+      "original_line": 91,
+      "old": "loc_BDBC",
+      "new": "SKTimeRecords_CopyBackgroundPalette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTimeRecordMenu_CopyBackgroundPaletteLine"
+    },
+    {
+      "source": "src/game/modes/sk/time_attack_records.s",
+      "original_line": 97,
+      "old": "loc_BDCA",
+      "new": "SKTimeRecords_CopyMiddlePaletteLines",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTimeRecordMenu_CopyMiddleTwoPaletteLines"
+    },
+    {
+      "source": "src/game/modes/sk/time_attack_records.s",
+      "original_line": 103,
+      "old": "loc_BDD8",
+      "new": "SKTimeRecords_CopyPaletteAndPrepActors",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTimeRecordMenu_CopyRecordPaletteLineAndPrepareFiveActors"
+    },
+    {
+      "source": "src/game/modes/sk/time_attack_records.s",
+      "original_line": 110,
+      "old": "loc_BDE8",
+      "new": "SKTimeRecords_InitRecordActorsAndFadeIn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTimeRecordMenu_InitializeFiveFixedRecordActorsAndFadeIn"
+    },
+    {
+      "source": "src/game/modes/sk/time_attack_records.s",
+      "original_line": 136,
+      "old": "loc_BE56",
+      "new": "SKTimeRecords_RunFrameAndBlinkRecord",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTimeRecordMenu_RunRecordsFrameAndBlinkHighlightedTime"
+    },
+    {
+      "source": "src/game/modes/sk/time_attack_records.s",
+      "original_line": 149,
+      "old": "loc_BE7E",
+      "new": "SKTimeRecords_RedrawHighlightedTime",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTimeRecordMenu_RedrawHighlightedRecordTime"
+    },
+    {
+      "source": "src/game/modes/sk/time_attack_records.s",
+      "original_line": 153,
+      "old": "loc_BE86",
+      "new": "SKTimeRecords_Tick30FrameExitLockout",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTimeRecordMenu_CountdownThirtyFrameExitLockout"
+    },
+    {
+      "source": "src/game/modes/sk/time_attack_records.s",
+      "original_line": 160,
+      "old": "loc_BE92",
+      "new": "SKTimeRecordMenu_ExitRecordsOnStartAOrC",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTimeRecordMenu_ExitRecordsOnStartAOrC"
+    },
+    {
+      "source": "src/game/modes/sk/time_attack_records.s",
+      "original_line": 168,
+      "old": "loc_BEA4",
+      "new": "SKTimeRecords_RenderActorsAndRepeat",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTimeRecordMenu_RenderRecordActorsAndRepeat"
+    },
+    {
+      "source": "src/game/modes/sk/time_attack_records.s",
+      "original_line": 201,
+      "old": "Obj_Competition_BEF8",
+      "new": "SKTimeRecords_InitIconFromSavedCharacter",
+      "profiles": ["sk"],
+      "meaning": "Initialize the character icon for one of three saved time-attack records."
+    },
+    {
+      "source": "src/game/modes/sk/time_attack_records.s",
+      "original_line": 217,
+      "old": "loc_BF30",
+      "new": "SKTimeRecords_SetIconFrameAndUpdate",
+      "profiles": ["sk"],
+      "meaning": "Select the saved-record character frame and install its blink updater."
+    },
+    {
+      "source": "src/game/modes/sk/time_attack_records.s",
+      "original_line": 222,
+      "old": "loc_BF3E",
+      "new": "CompetitionRecordIcon_BlinkNewTopRecord",
+      "profiles": ["sk"],
+      "meaning": "Blink the record icon whose row matches the newly achieved top-record index."
+    },
+    {
+      "source": "src/game/modes/sk/time_attack_records.s",
+      "original_line": 229,
+      "old": "loc_BF50",
+      "new": "CompetitionRecordIcon_Draw",
+      "profiles": ["sk"],
+      "meaning": "Draw the saved character icon for a time-attack record."
+    },
+    {
+      "source": "src/game/modes/sk/time_attack_records.s",
+      "original_line": 233,
+      "old": "locret_BF56",
+      "new": "CompetitionRecordIcon_ReturnDuringBlink",
+      "profiles": ["sk"],
+      "meaning": "Skip drawing the newly matched record icon during the hidden blink half."
+    },
+    {
+      "source": "src/game/modes/sk/time_attack_records.s",
+      "original_line": 236,
+      "old": "ObjDat_BF58",
+      "new": "CompetitionTimeAttack_ActorRecords",
+      "profiles": ["sk"],
+      "meaning": "5-entry fixed-slot actor initialization list for CompetitionTimeAttack_ActorRecords."
+    },
+    {
+      "source": "src/game/modes/sk/time_attack_records.s",
+      "original_line": 253,
+      "old": "VRAMDatList_BF96",
+      "new": "SKTimeRecords_InitialVRAMRectangles",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKTimeRecordMenu_NineBackgroundLapAndSavedRecordVramRectangles"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_objects.s",
+      "original_line": 11,
+      "old": "Frame_2098CE",
+      "new": "CompMenu_PlayerSelectionRaceMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionMenuMapping_PlayerSelectionRaceOptionPieces"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_objects.s",
+      "original_line": 21,
+      "old": "Frame_209906",
+      "new": "CompMenu_DirectZoneRaceMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionMenuMapping_DirectZoneRaceOptionPieces"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_objects.s",
+      "original_line": 31,
+      "old": "Frame_20993E",
+      "new": "CompMenu_TimeAttackMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionMenuMapping_TimeAttackOptionPieces"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_objects.s",
+      "original_line": 42,
+      "old": "Frame_20997C",
+      "new": "CompetitionMenuMapping_ExitOptionPieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionMenuMapping_ExitOptionPieces"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_objects.s",
+      "original_line": 47,
+      "old": "Frame_209996",
+      "new": "CompMenu_FirstItemToggleLabelMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionMenuMapping_FirstItemToggleLabelPiece"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_objects.s",
+      "original_line": 49,
+      "old": "Frame_20999E",
+      "new": "CompMenu_SecondItemToggleLabelMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionMenuMapping_SecondItemToggleLabelPiece"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_objects.s",
+      "original_line": 51,
+      "old": "Frame_2099A6",
+      "new": "CompMenu_ItemToggleCursorMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionMenuMapping_BlinkingItemToggleCursorPieces"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_player_sprites.s",
+      "original_line": 7,
+      "old": "Frame_3A1AF4",
+      "new": "CompPortrait_Character0Map",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionPortrait_CharacterIdZeroPieces"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_player_sprites.s",
+      "original_line": 10,
+      "old": "Frame_3A1B02",
+      "new": "CompetitionPortrait_CharacterIdOnePieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionPortrait_CharacterIdOnePieces"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_player_sprites.s",
+      "original_line": 15,
+      "old": "Frame_3A1B1C",
+      "new": "CompetitionPortrait_CharacterIdTwoPieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionPortrait_CharacterIdTwoPieces"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_select.s",
+      "original_line": 20,
+      "old": "Frame_20A704",
+      "new": "CompSelect_BorderPhase1Map",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionSelection_FirstBorderPhasePieces"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_select.s",
+      "original_line": 33,
+      "old": "Frame_20A74E",
+      "new": "CompSelect_BorderPhase2Map",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionSelection_ConfirmedOrSecondBorderPhasePieces"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_select.s",
+      "original_line": 46,
+      "old": "Frame_20A798",
+      "new": "CompetitionSelection_ZoneListFramePieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionSelection_ZoneListFramePieces"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_select.s",
+      "original_line": 70,
+      "old": "Frame_20A824",
+      "new": "CompSelect_P1HeaderMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionSelection_PlayerOneHeaderPieces"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_select.s",
+      "original_line": 73,
+      "old": "Frame_20A832",
+      "new": "CompSelect_P2HeaderMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionSelection_PlayerTwoHeaderPieces"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_select.s",
+      "original_line": 76,
+      "old": "Frame_20A840",
+      "new": "CompSelect_P2PressStartMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionSelection_SecondControllerPressStartPromptPieces"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_select.s",
+      "original_line": 79,
+      "old": "Frame_20A84E",
+      "new": "CompSelect_ZonePreviewMap1",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionSelection_FirstZonePreviewPieces"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_select.s",
+      "original_line": 84,
+      "old": "Frame_20A868",
+      "new": "CompSelect_ZonePreviewMap2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionSelection_SecondZonePreviewPieces"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_select.s",
+      "original_line": 89,
+      "old": "Frame_20A882",
+      "new": "CompSelect_ZonePreviewMap3",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionSelection_ThirdZonePreviewPieces"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_select.s",
+      "original_line": 94,
+      "old": "Frame_20A89C",
+      "new": "CompSelect_ZonePreviewMap4",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionSelection_FourthZonePreviewPieces"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_select.s",
+      "original_line": 99,
+      "old": "Frame_20A8B6",
+      "new": "CompSelect_ZonePreviewMap5",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionSelection_FifthZonePreviewPieces"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_select.s",
+      "original_line": 104,
+      "old": "Frame_20A8D0",
+      "new": "CompSelect_WinnerLabelMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionSelection_WinningResultsLabelPieces"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_select.s",
+      "original_line": 108,
+      "old": "Frame_20A8E4",
+      "new": "CompSelect_LoserLabelMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionSelection_LosingResultsLabelPieces"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_select.s",
+      "original_line": 112,
+      "old": "Frame_20A8F8",
+      "new": "CompSelect_TieLabelMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionSelection_TiedResultsLabelPieces"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_select.s",
+      "original_line": 116,
+      "old": "Frame_20A90C",
+      "new": "CompSelect_CompactBorderMap1",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionSelection_CompactFirstBorderVariantPieces"
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_select.s",
+      "original_line": 128,
+      "old": "Frame_20A950",
+      "new": "CompSelect_CompactBorderMap2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: CompetitionSelection_CompactSecondBorderVariantPieces"
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "tokens": [
+        [23, 1, 0, ""],
+        [25, 0, 0, ""],
+        [54, 0, 1, ""],
+        [56, 3, 1, ""],
+        [59, 0, 2, ""],
+        [61, 3, 2, ""],
+        [63, 1, 23, ""],
+        [65, 0, 3, ""],
+        [74, 3, 3, ""],
+        [86, 0, 4, ""],
+        [96, 1, 12, ""],
+        [98, 1, 6, ""],
+        [102, 1, 5, ""],
+        [103, 0, 5, ""],
+        [104, 1, 7, ""],
+        [105, 1, 8, ""],
+        [106, 1, 9, ""],
+        [107, 0, 6, ""],
+        [110, 0, 7, ""],
+        [117, 1, 10, ""],
+        [118, 0, 8, ""],
+        [125, 1, 10, ""],
+        [126, 0, 9, ""],
+        [129, 1, 12, ""],
+        [133, 0, 10, ""],
+        [137, 0, 11, ""],
+        [139, 3, 11, ""],
+        [142, 0, 12, ""],
+        [146, 1, 13, ""],
+        [149, 1, 14, ""],
+        [151, 1, 14, ""],
+        [152, 0, 13, ""],
+        [154, 1, 14, ""],
+        [158, 1, 14, ""],
+        [160, 0, 14, ""],
+        [163, 1, 15, ""],
+        [165, 0, 15, ""],
+        [166, 1, 4, ""],
+        [167, 0, 16, ""],
+        [169, 1, 18, ""],
+        [173, 1, 17, ""],
+        [175, 0, 17, ""],
+        [177, 0, 18, ""],
+        [179, 0, 19, ""],
+        [181, 1, 22, ""],
+        [185, 1, 20, ""],
+        [190, 0, 20, ""],
+        [193, 1, 21, ""],
+        [195, 0, 21, ""],
+        [198, 1, 22, ""],
+        [200, 0, 22, ""],
+        [205, 0, 23, ""],
+        [207, 1, 16, ""],
+        [210, 1, 16, ""],
+        [213, 1, 16, ""],
+        [216, 1, 16, ""],
+        [219, 1, 16, ""],
+        [222, 1, 16, ""],
+        [225, 1, 19, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "tokens": [
+        [56, 0, 24, ""],
+        [58, 3, 24, ""],
+        [61, 0, 25, ""],
+        [63, 3, 25, ""],
+        [65, 1, 47, ""],
+        [67, 0, 26, ""],
+        [80, 3, 26, ""],
+        [105, 0, 27, ""],
+        [113, 1, 28, ""],
+        [116, 0, 28, ""],
+        [119, 1, 29, ""],
+        [121, 0, 29, ""],
+        [123, 1, 27, ""],
+        [138, 1, 31, ""],
+        [140, 1, 30, ""],
+        [143, 0, 30, ""],
+        [145, 1, 44, ""],
+        [150, 0, 31, ""],
+        [152, 1, 43, ""],
+        [154, 1, 32, ""],
+        [156, 1, 43, ""],
+        [159, 1, 43, ""],
+        [160, 0, 32, ""],
+        [162, 1, 38, ""],
+        [165, 1, 41, ""],
+        [173, 1, 35, ""],
+        [178, 1, 33, ""],
+        [180, 0, 33, ""],
+        [183, 1, 34, ""],
+        [185, 0, 34, ""],
+        [188, 1, 38, ""],
+        [189, 0, 35, ""],
+        [193, 1, 36, ""],
+        [195, 0, 36, ""],
+        [199, 1, 37, ""],
+        [201, 0, 37, ""],
+        [204, 0, 38, ""],
+        [208, 1, 39, ""],
+        [211, 1, 40, ""],
+        [214, 1, 40, ""],
+        [215, 0, 39, ""],
+        [218, 1, 40, ""],
+        [221, 0, 40, ""],
+        [224, 1, 43, ""],
+        [225, 0, 41, ""],
+        [227, 1, 42, ""],
+        [229, 1, 43, ""],
+        [230, 0, 42, ""],
+        [233, 1, 43, ""],
+        [238, 0, 43, ""],
+        [241, 1, 44, ""],
+        [245, 0, 44, ""],
+        [262, 0, 45, ""],
+        [265, 3, 45, ""],
+        [280, 1, 46, ""],
+        [282, 1, 46, ""],
+        [287, 0, 46, ""],
+        [298, 0, 47, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "tokens": [
+        [37, 1, 80, ""],
+        [62, 0, 48, ""],
+        [64, 3, 48, ""],
+        [67, 0, 49, ""],
+        [69, 3, 49, ""],
+        [72, 0, 50, ""],
+        [74, 3, 50, ""],
+        [76, 1, 79, ""],
+        [78, 0, 51, ""],
+        [91, 3, 51, ""],
+        [103, 0, 52, ""],
+        [108, 1, 54, ""],
+        [110, 1, 53, ""],
+        [112, 1, 111, ""],
+        [113, 1, 54, ""],
+        [114, 0, 53, ""],
+        [117, 0, 54, ""],
+        [119, 1, 55, ""],
+        [121, 1, 60, ""],
+        [122, 0, 55, ""],
+        [125, 1, 56, ""],
+        [127, 0, 56, ""],
+        [129, 1, 57, ""],
+        [131, 1, 59, ""],
+        [132, 1, 58, ""],
+        [133, 0, 57, ""],
+        [135, 1, 60, ""],
+        [136, 0, 58, ""],
+        [139, 1, 60, ""],
+        [140, 0, 59, ""],
+        [142, 1, 60, ""],
+        [145, 0, 60, ""],
+        [148, 1, 52, ""],
+        [149, 0, 61, ""],
+        [154, 1, 62, ""],
+        [156, 0, 62, ""],
+        [159, 0, 63, ""],
+        [164, 1, 64, ""],
+        [166, 0, 64, ""],
+        [169, 1, 66, ""],
+        [170, 1, 65, ""],
+        [172, 0, 65, ""],
+        [174, 0, 66, ""],
+        [196, 1, 68, ""],
+        [197, 1, 67, ""],
+        [199, 1, 68, ""],
+        [200, 0, 67, ""],
+        [203, 0, 68, ""],
+        [209, 0, 69, ""],
+        [215, 1, 70, ""],
+        [216, 1, 71, ""],
+        [220, 1, 71, ""],
+        [221, 0, 70, ""],
+        [225, 0, 71, ""],
+        [237, 3, 69, ""],
+        [239, 1, 73, ""],
+        [245, 0, 72, ""],
+        [250, 3, 72, ""],
+        [251, 0, 73, ""],
+        [255, 0, 74, ""],
+        [261, 3, 74, ""],
+        [266, 0, 75, ""],
+        [271, 1, 76, ""],
+        [274, 0, 76, ""],
+        [278, 1, 77, ""],
+        [281, 0, 77, ""],
+        [285, 1, 78, ""],
+        [287, 0, 78, ""],
+        [288, 3, 75, ""],
+        [294, 0, 79, ""],
+        [302, 1, 61, ""],
+        [305, 1, 63, ""],
+        [314, 1, 61, ""],
+        [317, 1, 63, ""],
+        [320, 0, 80, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "tokens": [
+        [74, 0, 81, ""],
+        [76, 3, 81, ""],
+        [79, 0, 82, ""],
+        [81, 3, 82, ""],
+        [85, 1, 83, ""],
+        [87, 0, 83, ""],
+        [89, 0, 84, ""],
+        [102, 3, 84, ""],
+        [109, 1, 85, ""],
+        [115, 0, 85, ""],
+        [123, 2, 100, ""],
+        [135, 0, 86, ""],
+        [143, 1, 87, ""],
+        [146, 0, 87, ""],
+        [149, 1, 88, ""],
+        [151, 0, 88, ""],
+        [153, 1, 90, ""],
+        [155, 1, 86, ""],
+        [157, 1, 89, ""],
+        [158, 2, 106, ""],
+        [159, 0, 89, ""],
+        [162, 1, 86, ""],
+        [163, 0, 90, ""],
+        [165, 1, 91, ""],
+        [167, 1, 86, ""],
+        [168, 0, 91, ""],
+        [171, 1, 93, ""],
+        [172, 1, 92, ""],
+        [174, 0, 92, ""],
+        [177, 1, 86, ""],
+        [178, 0, 93, ""],
+        [182, 1, 94, ""],
+        [184, 0, 94, ""],
+        [186, 1, 95, ""],
+        [189, 0, 95, ""],
+        [191, 1, 96, ""],
+        [194, 0, 96, ""],
+        [198, 1, 98, ""],
+        [201, 1, 97, ""],
+        [203, 1, 98, ""],
+        [208, 1, 98, ""],
+        [210, 1, 98, ""],
+        [212, 1, 86, ""],
+        [213, 0, 97, ""],
+        [215, 1, 98, ""],
+        [219, 1, 98, ""],
+        [221, 1, 98, ""],
+        [223, 1, 86, ""],
+        [224, 0, 98, ""],
+        [226, 1, 86, ""],
+        [245, 1, 99, ""],
+        [247, 1, 99, ""],
+        [255, 1, 99, ""],
+        [257, 0, 99, ""],
+        [259, 0, 100, ""],
+        [261, 1, 101, ""],
+        [263, 1, 101, ""],
+        [279, 1, 102, ""],
+        [280, 0, 101, ""],
+        [282, 0, 102, ""],
+        [285, 0, 103, ""],
+        [287, 3, 103, ""],
+        [293, 1, 104, ""],
+        [295, 0, 104, ""],
+        [297, 1, 105, ""],
+        [299, 0, 105, ""],
+        [301, 0, 106, ""],
+        [308, 0, 107, ""],
+        [311, 0, 108, ""],
+        [313, 3, 108, ""],
+        [315, 3, 107, ""],
+        [325, 1, 109, ""],
+        [331, 0, 109, ""],
+        [353, 0, 110, ""],
+        [360, 3, 110, ""],
+        [376, 0, 111, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/s3/legacy_competition_selection.s",
+      "tokens": [
+        [56, 0, 112, ""],
+        [58, 3, 112, ""],
+        [84, 0, 113, ""],
+        [87, 3, 113, ""],
+        [117, 1, 114, ""],
+        [121, 0, 114, ""],
+        [128, 1, 115, ""],
+        [142, 0, 115, ""],
+        [159, 1, 116, ""],
+        [161, 0, 116, ""],
+        [163, 1, 117, ""],
+        [165, 0, 117, ""],
+        [183, 1, 118, ""],
+        [185, 0, 118, ""],
+        [187, 0, 119, ""],
+        [191, 3, 119, ""],
+        [204, 0, 120, ""],
+        [206, 3, 120, ""],
+        [235, 1, 121, ""],
+        [237, 0, 121, ""],
+        [239, 0, 122, ""],
+        [243, 3, 122, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/s3/time_attack_records.s",
+      "tokens": [
+        [32, 1, 139, ""],
+        [80, 0, 123, ""],
+        [82, 3, 123, ""],
+        [86, 0, 124, ""],
+        [88, 3, 124, ""],
+        [91, 0, 125, ""],
+        [93, 3, 125, ""],
+        [96, 0, 126, ""],
+        [98, 3, 126, ""],
+        [100, 1, 138, ""],
+        [102, 0, 127, ""],
+        [115, 3, 127, ""],
+        [127, 0, 128, ""],
+        [132, 1, 130, ""],
+        [134, 1, 129, ""],
+        [136, 1, 111, ""],
+        [137, 1, 130, ""],
+        [138, 0, 129, ""],
+        [141, 0, 130, ""],
+        [143, 1, 131, ""],
+        [145, 1, 132, ""],
+        [146, 0, 131, ""],
+        [149, 1, 132, ""],
+        [152, 0, 132, ""],
+        [155, 1, 128, ""],
+        [160, 1, 74, ""],
+        [178, 0, 133, ""],
+        [191, 1, 134, ""],
+        [193, 0, 134, ""],
+        [196, 2, 135, ""],
+        [197, 0, 135, ""],
+        [200, 1, 136, ""],
+        [202, 1, 137, ""],
+        [203, 0, 136, ""],
+        [205, 0, 137, ""],
+        [210, 0, 138, ""],
+        [215, 1, 61, ""],
+        [218, 1, 133, ""],
+        [221, 1, 133, ""],
+        [224, 1, 133, ""],
+        [227, 0, 139, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "tokens": [
+        [23, 1, 140, ""],
+        [25, 0, 140, ""],
+        [54, 0, 141, ""],
+        [56, 3, 141, ""],
+        [59, 0, 142, ""],
+        [61, 3, 142, ""],
+        [63, 1, 163, ""],
+        [65, 0, 143, ""],
+        [74, 3, 143, ""],
+        [86, 0, 144, ""],
+        [96, 1, 152, ""],
+        [98, 1, 146, ""],
+        [102, 1, 145, ""],
+        [103, 0, 145, ""],
+        [104, 1, 147, ""],
+        [105, 1, 148, ""],
+        [106, 1, 149, ""],
+        [107, 0, 146, ""],
+        [110, 0, 147, ""],
+        [117, 1, 150, ""],
+        [118, 0, 148, ""],
+        [125, 1, 150, ""],
+        [126, 0, 149, ""],
+        [129, 1, 152, ""],
+        [133, 0, 150, ""],
+        [137, 0, 151, ""],
+        [139, 3, 151, ""],
+        [142, 0, 152, ""],
+        [146, 1, 153, ""],
+        [149, 1, 154, ""],
+        [151, 1, 154, ""],
+        [152, 0, 153, ""],
+        [154, 1, 154, ""],
+        [158, 1, 154, ""],
+        [160, 0, 154, ""],
+        [163, 1, 155, ""],
+        [165, 0, 155, ""],
+        [166, 1, 144, ""],
+        [167, 0, 156, ""],
+        [169, 1, 158, ""],
+        [173, 1, 157, ""],
+        [175, 0, 157, ""],
+        [177, 0, 158, ""],
+        [179, 0, 159, ""],
+        [181, 1, 162, ""],
+        [185, 1, 160, ""],
+        [190, 0, 160, ""],
+        [193, 1, 161, ""],
+        [195, 0, 161, ""],
+        [198, 1, 162, ""],
+        [200, 0, 162, ""],
+        [202, 0, 163, ""],
+        [204, 1, 156, ""],
+        [207, 1, 156, ""],
+        [210, 1, 156, ""],
+        [213, 1, 156, ""],
+        [216, 1, 156, ""],
+        [219, 1, 156, ""],
+        [222, 1, 159, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "tokens": [
+        [56, 0, 164, ""],
+        [58, 3, 164, ""],
+        [61, 0, 165, ""],
+        [63, 3, 165, ""],
+        [65, 1, 187, ""],
+        [67, 0, 166, ""],
+        [80, 3, 166, ""],
+        [105, 0, 167, ""],
+        [113, 1, 168, ""],
+        [116, 0, 168, ""],
+        [119, 1, 169, ""],
+        [121, 0, 169, ""],
+        [123, 1, 167, ""],
+        [138, 1, 171, ""],
+        [140, 1, 170, ""],
+        [143, 0, 170, ""],
+        [145, 1, 184, ""],
+        [150, 0, 171, ""],
+        [152, 1, 183, ""],
+        [154, 1, 172, ""],
+        [156, 1, 183, ""],
+        [159, 1, 183, ""],
+        [160, 0, 172, ""],
+        [162, 1, 178, ""],
+        [165, 1, 181, ""],
+        [173, 1, 175, ""],
+        [178, 1, 173, ""],
+        [180, 0, 173, ""],
+        [183, 1, 174, ""],
+        [185, 0, 174, ""],
+        [188, 1, 178, ""],
+        [189, 0, 175, ""],
+        [193, 1, 176, ""],
+        [195, 0, 176, ""],
+        [199, 1, 177, ""],
+        [201, 0, 177, ""],
+        [204, 0, 178, ""],
+        [208, 1, 179, ""],
+        [211, 1, 180, ""],
+        [214, 1, 180, ""],
+        [215, 0, 179, ""],
+        [218, 1, 180, ""],
+        [221, 0, 180, ""],
+        [224, 1, 183, ""],
+        [225, 0, 181, ""],
+        [227, 1, 182, ""],
+        [229, 1, 183, ""],
+        [230, 0, 182, ""],
+        [233, 1, 183, ""],
+        [238, 0, 183, ""],
+        [241, 1, 184, ""],
+        [245, 0, 184, ""],
+        [262, 0, 185, ""],
+        [265, 3, 185, ""],
+        [280, 1, 186, ""],
+        [282, 1, 186, ""],
+        [287, 0, 186, ""],
+        [289, 0, 187, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "tokens": [
+        [37, 1, 220, ""],
+        [62, 0, 188, ""],
+        [64, 3, 188, ""],
+        [67, 0, 189, ""],
+        [69, 3, 189, ""],
+        [72, 0, 190, ""],
+        [74, 3, 190, ""],
+        [76, 1, 219, ""],
+        [78, 0, 191, ""],
+        [91, 3, 191, ""],
+        [103, 0, 192, ""],
+        [108, 1, 194, ""],
+        [110, 1, 193, ""],
+        [113, 1, 194, ""],
+        [114, 0, 193, ""],
+        [117, 0, 194, ""],
+        [119, 1, 195, ""],
+        [121, 1, 200, ""],
+        [122, 0, 195, ""],
+        [125, 1, 196, ""],
+        [127, 0, 196, ""],
+        [129, 1, 197, ""],
+        [131, 1, 199, ""],
+        [132, 1, 198, ""],
+        [133, 0, 197, ""],
+        [135, 1, 200, ""],
+        [136, 0, 198, ""],
+        [139, 1, 200, ""],
+        [140, 0, 199, ""],
+        [142, 1, 200, ""],
+        [145, 0, 200, ""],
+        [148, 1, 192, ""],
+        [149, 0, 201, ""],
+        [154, 1, 202, ""],
+        [156, 0, 202, ""],
+        [159, 0, 203, ""],
+        [164, 1, 204, ""],
+        [166, 0, 204, ""],
+        [169, 1, 206, ""],
+        [170, 1, 205, ""],
+        [172, 0, 205, ""],
+        [174, 0, 206, ""],
+        [196, 1, 208, ""],
+        [197, 1, 207, ""],
+        [199, 1, 208, ""],
+        [200, 0, 207, ""],
+        [203, 0, 208, ""],
+        [209, 0, 209, ""],
+        [215, 1, 210, ""],
+        [216, 1, 211, ""],
+        [220, 1, 211, ""],
+        [221, 0, 210, ""],
+        [225, 0, 211, ""],
+        [237, 3, 209, ""],
+        [239, 1, 213, ""],
+        [245, 0, 212, ""],
+        [250, 3, 212, ""],
+        [251, 0, 213, ""],
+        [255, 0, 214, ""],
+        [261, 3, 214, ""],
+        [266, 0, 215, ""],
+        [271, 1, 216, ""],
+        [274, 0, 216, ""],
+        [278, 1, 217, ""],
+        [281, 0, 217, ""],
+        [285, 1, 218, ""],
+        [287, 0, 218, ""],
+        [288, 3, 215, ""],
+        [291, 0, 219, ""],
+        [299, 1, 201, ""],
+        [302, 1, 203, ""],
+        [311, 1, 201, ""],
+        [314, 1, 203, ""],
+        [317, 0, 220, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "tokens": [
+        [74, 0, 221, ""],
+        [76, 3, 221, ""],
+        [79, 0, 222, ""],
+        [81, 3, 222, ""],
+        [85, 1, 223, ""],
+        [87, 0, 223, ""],
+        [89, 0, 224, ""],
+        [102, 3, 224, ""],
+        [109, 1, 225, ""],
+        [115, 0, 225, ""],
+        [123, 2, 240, ""],
+        [135, 0, 226, ""],
+        [143, 1, 227, ""],
+        [146, 0, 227, ""],
+        [149, 1, 228, ""],
+        [151, 0, 228, ""],
+        [153, 1, 230, ""],
+        [155, 1, 226, ""],
+        [157, 1, 229, ""],
+        [158, 2, 246, ""],
+        [159, 0, 229, ""],
+        [162, 1, 226, ""],
+        [163, 0, 230, ""],
+        [165, 1, 231, ""],
+        [167, 1, 226, ""],
+        [168, 0, 231, ""],
+        [171, 1, 233, ""],
+        [172, 1, 232, ""],
+        [174, 0, 232, ""],
+        [177, 1, 226, ""],
+        [178, 0, 233, ""],
+        [182, 1, 234, ""],
+        [184, 0, 234, ""],
+        [186, 1, 235, ""],
+        [189, 0, 235, ""],
+        [191, 1, 236, ""],
+        [194, 0, 236, ""],
+        [198, 1, 238, ""],
+        [201, 1, 237, ""],
+        [203, 1, 238, ""],
+        [208, 1, 238, ""],
+        [210, 1, 238, ""],
+        [212, 1, 226, ""],
+        [213, 0, 237, ""],
+        [215, 1, 238, ""],
+        [219, 1, 238, ""],
+        [221, 1, 238, ""],
+        [223, 1, 226, ""],
+        [224, 0, 238, ""],
+        [226, 1, 226, ""],
+        [245, 1, 239, ""],
+        [247, 1, 239, ""],
+        [255, 1, 239, ""],
+        [257, 0, 239, ""],
+        [259, 0, 240, ""],
+        [261, 1, 241, ""],
+        [263, 1, 241, ""],
+        [279, 1, 242, ""],
+        [280, 0, 241, ""],
+        [282, 0, 242, ""],
+        [285, 0, 243, ""],
+        [287, 3, 243, ""],
+        [293, 1, 244, ""],
+        [295, 0, 244, ""],
+        [297, 1, 245, ""],
+        [299, 0, 245, ""],
+        [301, 0, 246, ""],
+        [308, 0, 247, ""],
+        [311, 0, 248, ""],
+        [313, 3, 248, ""],
+        [315, 3, 247, ""],
+        [325, 1, 249, ""],
+        [331, 0, 249, ""],
+        [353, 0, 250, ""],
+        [360, 3, 250, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/sk/time_attack_records.s",
+      "tokens": [
+        [32, 1, 267, ""],
+        [80, 0, 251, ""],
+        [82, 3, 251, ""],
+        [86, 0, 252, ""],
+        [88, 3, 252, ""],
+        [91, 0, 253, ""],
+        [93, 3, 253, ""],
+        [96, 0, 254, ""],
+        [98, 3, 254, ""],
+        [100, 1, 266, ""],
+        [102, 0, 255, ""],
+        [115, 3, 255, ""],
+        [127, 0, 256, ""],
+        [132, 1, 258, ""],
+        [134, 1, 257, ""],
+        [137, 1, 258, ""],
+        [138, 0, 257, ""],
+        [141, 0, 258, ""],
+        [143, 1, 259, ""],
+        [145, 1, 260, ""],
+        [146, 0, 259, ""],
+        [149, 1, 260, ""],
+        [152, 0, 260, ""],
+        [155, 1, 256, ""],
+        [160, 1, 214, ""],
+        [178, 0, 261, ""],
+        [191, 1, 262, ""],
+        [193, 0, 262, ""],
+        [196, 2, 263, ""],
+        [197, 0, 263, ""],
+        [200, 1, 264, ""],
+        [202, 1, 265, ""],
+        [203, 0, 264, ""],
+        [205, 0, 265, ""],
+        [207, 0, 266, ""],
+        [212, 1, 201, ""],
+        [215, 1, 261, ""],
+        [218, 1, 261, ""],
+        [221, 1, 261, ""],
+        [224, 0, 267, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_objects.s",
+      "tokens": [
+        [2, 1, 268, ""],
+        [3, 1, 269, ""],
+        [4, 1, 270, ""],
+        [5, 1, 271, ""],
+        [6, 1, 272, ""],
+        [7, 1, 273, ""],
+        [8, 1, 274, ""],
+        [9, 0, 268, ""],
+        [19, 0, 269, ""],
+        [29, 0, 270, ""],
+        [40, 0, 271, ""],
+        [45, 0, 272, ""],
+        [47, 0, 273, ""],
+        [49, 0, 274, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_player_sprites.s",
+      "tokens": [
+        [2, 1, 275, ""],
+        [3, 1, 276, ""],
+        [4, 1, 277, ""],
+        [5, 0, 275, ""],
+        [8, 0, 276, ""],
+        [13, 0, 277, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/competition_menu/mappings/competition_select.s",
+      "tokens": [
+        [2, 1, 278, ""],
+        [3, 1, 279, ""],
+        [4, 1, 280, ""],
+        [5, 1, 281, ""],
+        [6, 1, 282, ""],
+        [7, 1, 283, ""],
+        [8, 1, 284, ""],
+        [9, 1, 285, ""],
+        [10, 1, 286, ""],
+        [11, 1, 287, ""],
+        [12, 1, 288, ""],
+        [13, 1, 289, ""],
+        [14, 1, 290, ""],
+        [15, 1, 291, ""],
+        [16, 1, 292, ""],
+        [17, 1, 293, ""],
+        [18, 0, 278, ""],
+        [31, 0, 279, ""],
+        [44, 0, 280, ""],
+        [68, 0, 281, ""],
+        [71, 0, 282, ""],
+        [74, 0, 283, ""],
+        [77, 0, 284, ""],
+        [82, 0, 285, ""],
+        [87, 0, 286, ""],
+        [92, 0, 287, ""],
+        [97, 0, 288, ""],
+        [102, 0, 289, ""],
+        [106, 0, 290, ""],
+        [110, 0, 291, ""],
+        [114, 0, 292, ""],
+        [126, 0, 293, ""]
+      ]
+    }
+  ]
+}

@@ -75,25 +75,25 @@ Competition_LevelSelect:
                 lea     (Target_palette).w,a1
                 moveq   #bytesToLcnt($20),d0
 
-loc_AD04:
+SKCompZones_CopyBackgroundPalette:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_AD04
+                dbf     d0,SKCompZones_CopyBackgroundPalette
                 lea     (Pal_Competition2).l,a0
                 moveq   #bytesToLcnt($60),d0
 
-loc_AD12:
+SKCompZones_CopyPalettesAndChooseActors:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_AD12
+                dbf     d0,SKCompZones_CopyPalettesAndChooseActors
                 lea     (Object_RAM).w,a0
                 lea     ObjDat_CompetitionMatchRace(pc),a1
                 tst.b   (Game_mode).w
-                bpl.s   loc_AD2A
+                bpl.s   SKCompZones_ReadFixedActorCount
                 lea     ObjDat_CompetitionTimeAttack(pc),a1
 
-loc_AD2A:
+SKCompZones_ReadFixedActorCount:
                 move.w  (a1)+,d0
 
-loc_AD2C:
+SKCompZones_BuildActorsAndSeedAngles:
                 move.l  (a1)+,(a0)
                 move.l  #Map_CompetitionSelect,mappings(a0)
                 move.w  (a1),x_pos(a0)
@@ -106,21 +106,21 @@ loc_AD2C:
                 move.b  (a1)+,mapping_frame(a0)
                 move.b  (a1)+,$2E(a0)
                 lea     next_object(a0),a0
-                dbf     d0,loc_AD2C
+                dbf     d0,SKCompZones_BuildActorsAndSeedAngles
                 moveq   #0,d0
                 move.b  (P1_character).w,d0
                 mulu.w  #$55,d0
                 addi.b  #$40,d0
                 move.b  d0,(Reserved_object_3+objoff_2E).w
                 tst.b   (Game_mode).w
-                bmi.s   loc_AD8A
+                bmi.s   SKCompZones_DrawActorsAndAddPreview
                 moveq   #0,d0
                 move.b  (P2_character).w,d0
                 mulu.w  #$55,d0
                 addi.b  #$40,d0
                 move.b  d0,(Dynamic_object_RAM+(object_size*4)+objoff_2E).w
 
-loc_AD8A:
+SKCompZones_DrawActorsAndAddPreview:
                 jsr     (Init_SpriteTable).l
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
@@ -128,7 +128,7 @@ loc_AD8A:
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
                 lea     (Dynamic_object_RAM+(object_size*9)).w,a0
-                move.l  #loc_AF58,(a0)
+                move.l  #SKCompZones_ProjectPreviewAndSetPalette,(a0)
                 move.l  #Map_CompetitionSelect,mappings(a0)
                 addi.w  #make_art_tile(ArtTile_Competition_LevSel,2,1),art_tile(a0)
                 move.w  #$B0,x_pos(a0)
@@ -141,7 +141,7 @@ loc_AD8A:
                 move.w  d0,(VDP_control_port).l
                 jsr     (Pal_FadeFromBlack).l
 
-loc_ADF2:
+SKCompZones_RunMenuAndCheckExitFirst:
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 addq.w  #1,(Level_frame_counter).w
@@ -149,108 +149,108 @@ loc_ADF2:
                 jsr     Menu_UpdateBothCharacterDepthGroups(pc)
                 jsr     (Render_Sprites).l
                 move.b  (Events_bg+$12).w,d0
-                beq.s   loc_AE1E
+                beq.s   SKCompZones_MaskActiveReadyBytes
                 move.b  d0,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_AE1E:
+SKCompZones_MaskActiveReadyBytes:
                 move.w  (Events_bg+$10).w,d0
                 tst.b   (Not_ghost_flag).w
-                bne.s   loc_AE2A
+                bne.s   SKCompZones_ChooseZoneOrCharacterView
                 lsr.w   #8,d0
 
-loc_AE2A:
+SKCompZones_ChooseZoneOrCharacterView:
                 tst.w   d0
-                beq.s   loc_AE4A
+                beq.s   SKCompZones_SlideTowardZoneView
                 move.w  (H_scroll_buffer).w,d0
-                beq.s   loc_ADF2
+                beq.s   SKCompZones_RunMenuAndCheckExitFirst
                 cmpi.w  #-$58,d0
-                bne.s   loc_AE42
-                move.l  #loc_AFC8,(_unkEF44_1).w
+                bne.s   SKCompZones_SlideTowardCharacterView
+                move.l  #SKCompZones_ClearZoneColumnsOnVBlank,(_unkEF44_1).w
 
-loc_AE42:
+SKCompZones_SlideTowardCharacterView:
                 addq.w  #8,d0
                 move.w  d0,(H_scroll_buffer).w
-                bra.s   loc_ADF2
+                bra.s   SKCompZones_RunMenuAndCheckExitFirst
 ; ---------------------------------------------------------------------------
 
-loc_AE4A:
+SKCompZones_SlideTowardZoneView:
                 cmpi.w  #-$58,(H_scroll_buffer).w
-                beq.s   loc_AE58
+                beq.s   SKCompZones_SelectScrollOrReadInput
                 subq.w  #8,(H_scroll_buffer).w
-                bra.s   loc_ADF2
+                bra.s   SKCompZones_RunMenuAndCheckExitFirst
 ; ---------------------------------------------------------------------------
 
-loc_AE58:
+SKCompZones_SelectScrollOrReadInput:
                 moveq   #8,d0
                 move.w  (Events_bg+$14).w,d1
-                beq.s   loc_AE6E
-                bpl.s   loc_AE64
+                beq.s   SKCompZones_ReadActiveControllers
+                bpl.s   SKCompZones_ScrollAndConsumeDelta
                 neg.w   d0
 
-loc_AE64:
+SKCompZones_ScrollAndConsumeDelta:
                 add.w   d0,(V_scroll_value).w
                 sub.w   d0,(Events_bg+$14).w
-                bra.s   loc_ADF2
+                bra.s   SKCompZones_RunMenuAndCheckExitFirst
 ; ---------------------------------------------------------------------------
 
-loc_AE6E:
+SKCompZones_ReadActiveControllers:
                 move.b  (Ctrl_1_pressed).w,d1
                 moveq   #0,d2
                 tst.b   (Not_ghost_flag).w
-                beq.s   loc_AE7E
+                beq.s   SKCompZones_CancelP2ReadyOnB
                 move.b  (Ctrl_2_pressed).w,d2
 
-loc_AE7E:
+SKCompZones_CancelP2ReadyOnB:
                 btst    #button_B,d2
-                beq.s   loc_AE8C
+                beq.s   SKCompZones_CancelP1ReadyOnB
                 sf      (Dynamic_object_RAM+(object_size*4)+objoff_2F).w
                 st      (Events_bg+$11).w
 
-loc_AE8C:
+SKCompZones_CancelP1ReadyOnB:
                 btst    #button_B,d1
-                beq.s   loc_AE9A
+                beq.s   SKCompZones_HandleDownAndScroll
                 sf      (Reserved_object_3+objoff_2F).w
                 st      (Events_bg+$10).w
 
-loc_AE9A:
+SKCompZones_HandleDownAndScroll:
                 or.b    d2,d1
                 move.b  d1,d2
                 andi.w  #3,d2
-                beq.s   loc_AEF2
+                beq.s   SKCompZones_ConfirmSelectedZone
                 lea     (Competition_menu_zone).w,a0
                 lsr.w   #1,d2
-                bcs.s   loc_AED2
+                bcs.s   SKCompZones_HandleUpAndScroll
                 cmpi.b  #4,(a0)
-                beq.s   loc_AEF2
+                beq.s   SKCompZones_ConfirmSelectedZone
                 moveq   #signextendB(sfx_Switch),d0
                 jsr     (Play_SFX).l
                 addq.b  #1,(a0)
                 cmpi.b  #4,(a0)
-                beq.s   loc_AEF2
+                beq.s   SKCompZones_ConfirmSelectedZone
                 cmpi.b  #1,(a0)
-                beq.s   loc_AEF2
+                beq.s   SKCompZones_ConfirmSelectedZone
                 move.w  #$48,(Events_bg+$14).w
-                bra.w   loc_ADF2
+                bra.w   SKCompZones_RunMenuAndCheckExitFirst
 ; ---------------------------------------------------------------------------
 
-loc_AED2:
+SKCompZones_HandleUpAndScroll:
                 tst.b   (a0)
-                beq.s   loc_AEF2
+                beq.s   SKCompZones_ConfirmSelectedZone
                 moveq   #signextendB(sfx_Switch),d0
                 jsr     (Play_SFX).l
                 subq.b  #1,(a0)
-                beq.s   loc_AEF2
+                beq.s   SKCompZones_ConfirmSelectedZone
                 cmpi.b  #3,(a0)
-                beq.s   loc_AEF2
+                beq.s   SKCompZones_ConfirmSelectedZone
                 move.w  #-$48,(Events_bg+$14).w
-                bra.w   loc_ADF2
+                bra.w   SKCompZones_RunMenuAndCheckExitFirst
 ; ---------------------------------------------------------------------------
 
-loc_AEF2:
+SKCompZones_ConfirmSelectedZone:
                 andi.w  #$E0,d1
-                beq.w   loc_ADF2
+                beq.w   SKCompZones_RunMenuAndCheckExitFirst
                 moveq   #signextendB(sfx_Starpost),d0
                 jsr     (Play_SFX).l
                 moveq   #0,d0
@@ -272,9 +272,9 @@ Comp_ZoneList:
 
 Obj_Competition_ZoneSelect:
                 cmpi.w  #-$58,(H_scroll_buffer).w
-                bne.s   locret_AF56
+                bne.s   SKCompZones_SkipCursorDraw
                 tst.w   (Events_bg+$14).w
-                bne.s   locret_AF56
+                bne.s   SKCompZones_SkipCursorDraw
                 moveq   #0,d0
                 move.b  (Competition_menu_zone).w,d0
                 mulu.w  #$48,d0
@@ -282,19 +282,19 @@ Obj_Competition_ZoneSelect:
                 sub.w   (V_scroll_value).w,d0
                 move.w  d0,y_pos(a0)
                 btst    #3,(Level_frame_counter+1).w
-                beq.s   locret_AF56
+                beq.s   SKCompZones_SkipCursorDraw
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_AF56:
+SKCompZones_SkipCursorDraw:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_AF58:
+SKCompZones_ProjectPreviewAndSetPalette:
                 cmpi.w  #-$58,(H_scroll_buffer).w
-                bne.s   loc_AF9E
+                bne.s   SKCompZones_ChooseDefaultPreviewPalette
                 tst.w   (Events_bg+$14).w
-                bne.s   loc_AF9E
+                bne.s   SKCompZones_ChooseDefaultPreviewPalette
                 moveq   #0,d0
                 move.b  (Competition_menu_zone).w,d0
                 mulu.w  #$48,d0
@@ -310,19 +310,19 @@ loc_AF58:
                 lsl.w   #5,d0
                 lea     (Pal_Competition4).l,a1
                 adda.w  d0,a1
-                bra.s   loc_AFA4
+                bra.s   SKCompZones_PreparePreviewPaletteCopy
 ; ---------------------------------------------------------------------------
 
-loc_AF9E:
+SKCompZones_ChooseDefaultPreviewPalette:
                 lea     (Pal_Competition3).l,a1
 
-loc_AFA4:
+SKCompZones_PreparePreviewPaletteCopy:
                 lea     (Normal_palette_line_3).w,a2
                 moveq   #bytesToLcnt($20),d0
 
-loc_AFAA:
+SKCompZones_CopyNormalPreviewPalette:
                 move.l  (a1)+,(a2)+
-                dbf     d0,loc_AFAA
+                dbf     d0,SKCompZones_CopyNormalPreviewPalette
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -332,21 +332,21 @@ SKComp_GetZoneWindowRow:
                 moveq   #0,d0
                 move.b  (Competition_menu_zone).w,d0
                 subq.w  #1,d0
-                bcc.s   loc_AFBE
+                bcc.s   SKCompZones_ClampVisibleRowTo2
                 moveq   #0,d0
 
-loc_AFBE:
+SKCompZones_ClampVisibleRowTo2:
                 cmpi.w  #2,d0
-                bls.s   locret_AFC6
+                bls.s   SKCompZones_VisibleRowReturn
                 moveq   #2,d0
 
-locret_AFC6:
+SKCompZones_VisibleRowReturn:
                 rts
 ; End of function SKComp_GetZoneWindowRow
 
 ; ---------------------------------------------------------------------------
 
-loc_AFC8:
+SKCompZones_ClearZoneColumnsOnVBlank:
                 move.l  #locret_A85C,(_unkEF44_1).w
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table+$204,VRAM,WRITE),d0
                 lea     (VDP_data_port).l,a6
@@ -354,15 +354,15 @@ loc_AFC8:
                 move.w  #$8F80,VDP_control_port-VDP_data_port(a6)
                 moveq   #9-1,d2
 
-loc_AFEA:
+SKCompZones_BeginBlankColumn:
                 moveq   #$13-1,d3
                 move.l  d0,VDP_control_port-VDP_data_port(a6)
 
-loc_AFF0:
+SKCompZones_WriteColumnAndClearHoles:
                 move.l  d1,(a6)
-                dbf     d3,loc_AFF0
+                dbf     d3,SKCompZones_WriteColumnAndClearHoles
                 addi.l  #2<<16,d0
-                dbf     d2,loc_AFEA
+                dbf     d2,SKCompZones_BeginBlankColumn
                 move.w  #$8F02,VDP_control_port-VDP_data_port(a6)
 
 ; =============== S U B R O U T I N E =======================================
@@ -375,7 +375,7 @@ SKComp_ClearCharacterSelectAreas:
                 addi.w  #VRAM_Plane_A_Name_Table+$004,d0
                 move.w  d0,d7
                 tst.b   (Game_mode).w
-                bmi.s   loc_B02E
+                bmi.s   SKCompZones_ClearTimeAttackCharacterHole
                 jsr     Menu_ClearNineByEightTileArea(pc)
                 move.w  d7,d0
                 addi.w  #$600,d0
@@ -385,7 +385,7 @@ SKComp_ClearCharacterSelectAreas:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_B02E:
+SKCompZones_ClearTimeAttackCharacterHole:
                 addi.w  #$300,d0
                 jmp     Menu_ClearNineByEightTileArea(pc)
 ; End of function SKComp_ClearCharacterSelectAreas
@@ -417,14 +417,14 @@ SKComp_DrawPackedTime:
                 lsl.l   #8,d6
                 moveq   #2,d3
 
-loc_B06C:
+SKCompZones_ConvertTimeToDecimalPairs:
                 rol.l   #8,d6
                 moveq   #0,d0
                 move.b  d6,d0
                 jsr     (LevResults_GetDecimalScore).l
                 move.b  d1,d5
                 lsl.l   #8,d5
-                dbf     d3,loc_B06C
+                dbf     d3,SKCompZones_ConvertTimeToDecimalPairs
                 lea     (Plane_buffer).w,a1
                 lea     (MapUnc_CompetitionNumbers).l,a2
                 moveq   #0,d0

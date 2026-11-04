@@ -1,14 +1,14 @@
 ; Data owner: ui/shared/competition_menu
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_CompetitionObject_:
-                dc.w    Frame_2098CE-Map_CompetitionObject_
-                dc.w    Frame_209906-Map_CompetitionObject_
-                dc.w    Frame_20993E-Map_CompetitionObject_
-                dc.w    Frame_20997C-Map_CompetitionObject_
-                dc.w    Frame_209996-Map_CompetitionObject_
-                dc.w    Frame_20999E-Map_CompetitionObject_
-                dc.w    Frame_2099A6-Map_CompetitionObject_
-Frame_2098CE:   dc.w    9
+                dc.w    CompMenu_PlayerSelectionRaceMap-Map_CompetitionObject_
+                dc.w    CompMenu_DirectZoneRaceMap-Map_CompetitionObject_
+                dc.w    CompMenu_TimeAttackMap-Map_CompetitionObject_
+                dc.w    CompetitionMenuMapping_ExitOptionPieces-Map_CompetitionObject_
+                dc.w    CompMenu_FirstItemToggleLabelMap-Map_CompetitionObject_
+                dc.w    CompMenu_SecondItemToggleLabelMap-Map_CompetitionObject_
+                dc.w    CompMenu_ItemToggleCursorMap-Map_CompetitionObject_
+CompMenu_PlayerSelectionRaceMap:    dc.w    9
                 dc.b    0,  6,  0,$18,$FF,$BC
                 dc.b    0,  6,  0,$45,$FF,$CC
                 dc.b    0,  6,  0,  0,$FF,$DC
@@ -18,7 +18,7 @@ Frame_2098CE:   dc.w    9
                 dc.b    0,  6,  0,$45,  0,$1C
                 dc.b    0,  2,  0,$24,  0,$2C
                 dc.b    0,  6,  0,$57,  0,$34
-Frame_209906:   dc.w    9
+CompMenu_DirectZoneRaceMap: dc.w    9
                 dc.b    0, $A,  0,$30,$FF,$B8
                 dc.b    0,  6,  0,  0,$FF,$D0
                 dc.b    0,  6,  0,  6,$FF,$EC
@@ -28,7 +28,7 @@ Frame_209906:   dc.w    9
                 dc.b    0,  6,  0,  0,  0,$1C
                 dc.b    0,  6,  0,  6,  0,$2C
                 dc.b    0,  6,  0,$12,  0,$3C
-Frame_20993E:   dc.w    $A
+CompMenu_TimeAttackMap: dc.w    $A
                 dc.b    0,  6,  0,$51,$FF,$B0
                 dc.b    0,  2,  0,$24,$FF,$C0
                 dc.b    0, $A,  0,$30,$FF,$C8
@@ -39,16 +39,16 @@ Frame_20993E:   dc.w    $A
                 dc.b    0,  6,  0,  0,  0,$20
                 dc.b    0,  6,  0,  6,  0,$30
                 dc.b    0,  6,  0,$27,  0,$40
-Frame_20997C:   dc.w    4
+CompetitionMenuMapping_ExitOptionPieces:    dc.w    4
                 dc.b    0,  6,  0,$12,$FF,$E4
                 dc.b    0,  6,  0,$57,$FF,$F4
                 dc.b    0,  2,  0,$24,  0,  4
                 dc.b    0,  6,  0,$51,  0, $C
-Frame_209996:   dc.w    1
+CompMenu_FirstItemToggleLabelMap:   dc.w    1
                 dc.b    0, $A,  0,$5D,  0,  0
-Frame_20999E:   dc.w    1
+CompMenu_SecondItemToggleLabelMap:  dc.w    1
                 dc.b    0, $A,  0,$66,  0,  0
-Frame_2099A6:   dc.w    $E
+CompMenu_ItemToggleCursorMap:   dc.w    $E
                 dc.b    0,  5,$5F,$55,  0,  0
                 dc.b    0,  1,$5F,$57,  0,$10
                 dc.b    0,  1,$5F,$57,  0,$18

@@ -57,20 +57,20 @@ Competition_PlayerSelect:
                 lea     (Target_palette).w,a1
                 moveq   #bytesToLcnt($20),d0
 
-loc_B3E8:
+SKCompPlayers_CopyBackgroundPalette:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_B3E8
+                dbf     d0,SKCompPlayers_CopyBackgroundPalette
                 lea     (Pal_Competition2).l,a0
                 moveq   #bytesToLcnt($60),d0
 
-loc_B3F6:
+SKCompPlayers_CopyPalettesAndPrepActors:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_B3F6
+                dbf     d0,SKCompPlayers_CopyPalettesAndPrepActors
                 lea     (Player_2).w,a0
-                lea     ObjDat_B6C8(pc),a1
+                lea     SKCompPlayers_FixedActorRecords(pc),a1
                 move.w  (a1)+,d0
 
-loc_B406:
+SKCompPlayers_BuildActorsAndSeedAngles:
                 move.l  (a1)+,(a0)
                 move.l  #Map_CompetitionSelect,mappings(a0)
                 move.w  (a1),x_pos(a0)
@@ -83,7 +83,7 @@ loc_B406:
                 move.b  (a1)+,mapping_frame(a0)
                 move.b  (a1)+,$2E(a0)
                 lea     next_object(a0),a0
-                dbf     d0,loc_B406
+                dbf     d0,SKCompPlayers_BuildActorsAndSeedAngles
                 moveq   #0,d0
                 move.b  (P1_character).w,d0
                 mulu.w  #$55,d0
@@ -109,7 +109,7 @@ loc_B406:
                 move.w  d0,(VDP_control_port).l
                 jsr     (Pal_FadeFromBlack).l
 
-loc_B4A8:
+SKCompPlayers_RunMenuAndCheckExitFirst:
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 addq.w  #1,(Level_frame_counter).w
@@ -117,20 +117,20 @@ loc_B4A8:
                 jsr     Menu_UpdateBothCharacterDepthGroups(pc)
                 jsr     (Render_Sprites).l
                 move.b  (Events_bg+$12).w,d0
-                beq.s   loc_B4D4
+                beq.s   SKCompPlayers_SelectActiveReadyMask
                 move.b  d0,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_B4D4:
+SKCompPlayers_SelectActiveReadyMask:
                 move.w  (Events_bg+$10).w,d0
                 tst.b   (Not_ghost_flag).w
-                bne.s   loc_B4E0
+                bne.s   SKCompPlayers_StartRaceWhenPlayersReady
                 lsr.w   #8,d0
 
-loc_B4E0:
+SKCompPlayers_StartRaceWhenPlayersReady:
                 tst.w   d0
-                bne.s   loc_B4A8
+                bne.s   SKCompPlayers_RunMenuAndCheckExitFirst
                 move.w  #$E00,(Current_zone_and_act).w
                 jsr     SKComp_InitRoundState(pc)
                 move.b  #GameMode_Level,(Game_mode).w
@@ -149,15 +149,15 @@ Obj_Competition_2PSelect:
                 lea     (Events_bg+$11).w,a2
                 lea     (P2_character).w,a3
                 tst.b   (Not_ghost_flag).w
-                bne.s   loc_B538
+                bne.s   SKCompPlayers_GateInputAndCheckCancel
                 tst.w   (Events_bg+$14).w
-                bne.s   loc_B526
+                bne.s   SKCompPlayers_DrawInactiveP2Selector
                 tst.b   (a1)
                 smi     (Not_ghost_flag).w
 
-loc_B526:
+SKCompPlayers_DrawInactiveP2Selector:
                 moveq   #0,d0
-                bra.w   loc_B638
+                bra.w   SKCompPlayers_StoreFrameAndProjectX
 ; ---------------------------------------------------------------------------
 
 Obj_Competition_1PSelect:
@@ -165,24 +165,24 @@ Obj_Competition_1PSelect:
                 lea     (Events_bg+$10).w,a2
                 lea     (P1_character).w,a3
 
-loc_B538:
+SKCompPlayers_GateInputAndCheckCancel:
                 tst.w   (H_scroll_buffer).w
-                bne.w   loc_B626
+                bne.w   SKCompPlayers_SelectReadyOrBlinkFrame
                 tst.b   $2F(a0)
-                beq.s   loc_B558
+                beq.s   SKCompPlayers_StartOrContinueRotation
                 btst    #button_B,(a1)
-                beq.w   loc_B626
+                beq.w   SKCompPlayers_SelectReadyOrBlinkFrame
                 sf      $2F(a0)
                 st      (a2)
-                bra.w   loc_B626
+                bra.w   SKCompPlayers_SelectReadyOrBlinkFrame
 ; ---------------------------------------------------------------------------
 
-loc_B558:
+SKCompPlayers_StartOrContinueRotation:
                 tst.b   $30(a0)
-                bne.s   loc_B5D0
+                bne.s   SKCompPlayers_AdvanceForwardAndClamp
                 move.b  (a1),d0
                 andi.w  #button_left_mask|button_right_mask,d0
-                beq.w   loc_B602
+                beq.w   SKCompPlayers_CancelToCompetitionMenu
                 move.l  d0,-(sp)
                 moveq   #signextendB(sfx_GravityTunnel),d0
                 jsr     (Play_SFX).l
@@ -190,95 +190,97 @@ loc_B558:
                 clr.b   $34(a0)
                 move.b  $2E(a0),$35(a0)
                 btst    #button_left,d0
-                bne.s   loc_B5AC
+                bne.s   SKCompPlayers_SelectPreviousCharacter
                 move.b  #1,$30(a0)
                 move.b  (a3),d0
                 addq.b  #1,d0
                 cmpi.b  #2,d0
-                bls.s   loc_B596
+                bls.s   SKCompPlayers_StoreNextChoiceAndAngle
                 moveq   #0,d0
 
-loc_B596:
+SKCompPlayers_StoreNextChoiceAndAngle:
                 move.b  d0,(a3)
                 mulu.w  #$55,d0
-                bne.s   loc_B5A2
+                bne.s   SKCompPlayers_BeginForwardRotation
                 move.w  #$100,d0
 
-loc_B5A2:
+SKCompPlayers_BeginForwardRotation:
                 addi.w  #$40,d0
                 move.w  d0,$32(a0)
-                bra.s   loc_B5D0
+                bra.s   SKCompPlayers_AdvanceForwardAndClamp
 ; ---------------------------------------------------------------------------
 
-loc_B5AC:
+SKCompPlayers_SelectPreviousCharacter:
                 move.b  #-1,$30(a0)
                 move.b  (a3),d0
                 subq.b  #1,d0
-                bcc.s   loc_B5BA
+                bcc.s   SKCompPlayers_StorePrevChoiceAndAngle
                 moveq   #2,d0
 
-loc_B5BA:
+; Sign-extend the wrapped phase so the backward interpolation crosses zero continuously
+SKCompPlayers_StorePrevChoiceAndAngle:
                 move.b  d0,(a3)
                 mulu.w  #$55,d0
                 cmpi.w  #$80,d0
-                blo.s   loc_B5C8
+                blo.s   SKCompPlayers_BeginBackwardRotation
                 ext.w   d0
 
-loc_B5C8:
+SKCompPlayers_BeginBackwardRotation:
                 addi.w  #$40,d0
                 move.w  d0,$32(a0)
 
-loc_B5D0:
+SKCompPlayers_AdvanceForwardAndClamp:
                 move.w  $34(a0),d0
                 move.w  $32(a0),d1
                 tst.b   $30(a0)
-                bmi.s   loc_B5EC
+                bmi.s   SKCompPlayers_AdvanceBackwardAndClamp
                 addq.w  #5,d0
                 cmp.w   d0,d1
-                bgt.s   loc_B5F8
+                bgt.s   SKCompPlayers_StoreAngleAndOrbitPhase
                 move.w  d1,d0
                 clr.b   $30(a0)
-                bra.s   loc_B5F8
+                bra.s   SKCompPlayers_StoreAngleAndOrbitPhase
 ; ---------------------------------------------------------------------------
 
-loc_B5EC:
+SKCompPlayers_AdvanceBackwardAndClamp:
                 subq.w  #5,d0
                 cmp.w   d0,d1
-                blt.s   loc_B5F8
+                blt.s   SKCompPlayers_StoreAngleAndOrbitPhase
                 move.w  d1,d0
                 clr.b   $30(a0)
 
-loc_B5F8:
+SKCompPlayers_StoreAngleAndOrbitPhase:
                 move.w  d0,$34(a0)
                 move.b  d0,$2E(a0)
-                bra.s   loc_B626
+                bra.s   SKCompPlayers_SelectReadyOrBlinkFrame
 ; ---------------------------------------------------------------------------
 
-loc_B602:
+SKCompPlayers_CancelToCompetitionMenu:
                 btst    #button_B,(a1)
-                beq.s   loc_B610
+                beq.s   SKCompPlayers_ConfirmChoiceAndSetReady
                 move.b  #$38,(Events_bg+$12).w
-                bra.s   loc_B626
+                bra.s   SKCompPlayers_SelectReadyOrBlinkFrame
 ; ---------------------------------------------------------------------------
 
-loc_B610:
+; A zero in the shared ready byte marks this controller as ready
+SKCompPlayers_ConfirmChoiceAndSetReady:
                 move.b  (a1),d0
                 andi.w  #button_A_mask|button_C_mask|button_start_mask,d0
-                beq.s   loc_B626
+                beq.s   SKCompPlayers_SelectReadyOrBlinkFrame
                 st      $2F(a0)
                 sf      (a2)
                 moveq   #signextendB(sfx_Starpost),d0
                 jsr     (Play_SFX).l
 
-loc_B626:
+SKCompPlayers_SelectReadyOrBlinkFrame:
                 moveq   #1,d0
                 tst.b   $2F(a0)
-                bne.s   loc_B638
+                bne.s   SKCompPlayers_StoreFrameAndProjectX
                 move.w  (Level_frame_counter).w,d0
                 lsr.w   #3,d0
                 andi.w  #1,d0
 
-loc_B638:
+SKCompPlayers_StoreFrameAndProjectX:
                 move.b  d0,mapping_frame(a0)
                 move.w  $12(a0),d0
                 add.w   (H_scroll_buffer).w,d0
@@ -300,10 +302,10 @@ Obj_CompetitionPlayerSprite:
                 moveq   #0,d2
                 move.b  $2E(a0),d2
 
-loc_B66E:
+SKCompPlayers_ProjectCharacterPortrait:
                 addi.w  #object_size,d0
                 addi.w  #$55,d1
-                dbf     d2,loc_B66E
+                dbf     d2,SKCompPlayers_ProjectCharacterPortrait
                 neg.w   d0
                 move.b  $2E(a0,d0.w),d0
                 add.b   d1,d0
@@ -320,19 +322,19 @@ loc_B66E:
 
 Obj_Competition_PRESSSTART:
                 tst.b   (Not_ghost_flag).w
-                bne.s   locret_B6C6
+                bne.s   SKCompPlayers_CheckP2StartPrompt
                 btst    #5,(Level_frame_counter+1).w
-                beq.s   locret_B6C6
+                beq.s   SKCompPlayers_CheckP2StartPrompt
                 move.w  $12(a0),d0
                 add.w   (H_scroll_buffer).w,d0
                 move.w  d0,x_pos(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_B6C6:
+SKCompPlayers_CheckP2StartPrompt:
                 rts
 ; ---------------------------------------------------------------------------
-ObjDat_B6C8:
+SKCompPlayers_FixedActorRecords:
                 dc.w    $B-1
                 dc.l    Obj_Competition_StaticSprite
                 dc.w    $120,   $A9, palette_line_1

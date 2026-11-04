@@ -32,7 +32,7 @@ TimeAttack_Records:
                 lea     (RAM_start).l,a1
                 move.w  #make_art_tile(ArtTile_S3MenuBG,0,0),d0
                 jsr     (Eni_Decomp).l
-                lea     VRAMDatList_BF96(pc),a0
+                lea     SKTimeRecords_InitialVRAMRectangles(pc),a0
                 jsr     Copy_Listed_Data_To_VRAM(pc)
                 moveq   #0,d0
                 move.b  (Current_zone).w,d0
@@ -81,33 +81,33 @@ TimeAttack_Records:
                 lea     (VDP_data_port).l,a6
                 move.w  #bytesToLcnt(tiles_to_bytes($1B)),d0
 
-loc_BDAA:
+SKTimeRecords_UploadIconsAndPrepPalette:
                 move.l  (a0)+,(a6)
-                dbf     d0,loc_BDAA
+                dbf     d0,SKTimeRecords_UploadIconsAndPrepPalette
                 lea     (Pal_CompetitionMenuBG).l,a0
                 lea     (Target_palette).w,a1
                 moveq   #bytesToLcnt(Target_palette_line_2-Target_palette),d0
 
-loc_BDBC:
+SKTimeRecords_CopyBackgroundPalette:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_BDBC
+                dbf     d0,SKTimeRecords_CopyBackgroundPalette
                 lea     (Pal_Competition2).l,a0
                 moveq   #bytesToLcnt(Target_palette_line_4-Target_palette_line_2),d0
 
-loc_BDCA:
+SKTimeRecords_CopyMiddlePaletteLines:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_BDCA
+                dbf     d0,SKTimeRecords_CopyMiddlePaletteLines
                 lea     (Pal_CompetitionTimeAttack).l,a0
                 moveq   #bytesToLcnt(Target_palette_end-Target_palette_line_4),d0
 
-loc_BDD8:
+SKTimeRecords_CopyPaletteAndPrepActors:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_BDD8
+                dbf     d0,SKTimeRecords_CopyPaletteAndPrepActors
                 lea     (Object_RAM).w,a0
-                lea     ObjDat_BF58(pc),a1
+                lea     CompetitionTimeAttack_ActorRecords(pc),a1
                 move.w  (a1)+,d0
 
-loc_BDE8:
+SKTimeRecords_InitRecordActorsAndFadeIn:
                 move.l  (a1)+,(a0)
                 move.l  #Map_CompetitionSelect,mappings(a0)
                 move.w  (a1),x_pos(a0)
@@ -120,7 +120,7 @@ loc_BDE8:
                 move.b  (a1)+,mapping_frame(a0)
                 move.b  (a1)+,$2E(a0)
                 lea     next_object(a0),a0
-                dbf     d0,loc_BDE8
+                dbf     d0,SKTimeRecords_InitRecordActorsAndFadeIn
                 jsr     (Init_SpriteTable).l
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
@@ -133,42 +133,42 @@ loc_BDE8:
                 move.w  d0,(VDP_control_port).l
                 jsr     (Pal_FadeFromBlack).l
 
-loc_BE56:
+SKTimeRecords_RunFrameAndBlinkRecord:
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 addq.w  #1,(Level_frame_counter).w
                 move.w  (_unkEEA0).w,d7
-                beq.s   loc_BE86
+                beq.s   SKTimeRecords_Tick30FrameExitLockout
                 btst    #3,(Level_frame_counter+1).w
-                bne.s   loc_BE7E
+                bne.s   SKTimeRecords_RedrawHighlightedTime
                 lea     (Plane_buffer+$20).w,a1
                 jsr     CompetitionMenuUploadEightByTwoTileBlock(pc)
-                bra.s   loc_BE86
+                bra.s   SKTimeRecords_Tick30FrameExitLockout
 ; ---------------------------------------------------------------------------
 
-loc_BE7E:
+SKTimeRecords_RedrawHighlightedTime:
                 move.l  (_unkEE98).w,d6
                 jsr     SKComp_DrawPackedTime(pc)
 
-loc_BE86:
+SKTimeRecords_Tick30FrameExitLockout:
                 tst.w   (Events_bg+$16).w
-                beq.s   loc_BE92
+                beq.s   SKTimeRecordMenu_ExitRecordsOnStartAOrC
                 subq.w  #1,(Events_bg+$16).w
-                bra.s   loc_BEA4
+                bra.s   SKTimeRecords_RenderActorsAndRepeat
 ; ---------------------------------------------------------------------------
 
-loc_BE92:
+SKTimeRecordMenu_ExitRecordsOnStartAOrC:
                 move.b  (Ctrl_1_pressed).w,d0
                 andi.w  #button_start_mask|button_A_mask|button_C_mask,d0
-                beq.s   loc_BEA4
+                beq.s   SKTimeRecords_RenderActorsAndRepeat
                 move.b  #GameMode_CompetitionLevelSelect+$80,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_BEA4:
+SKTimeRecords_RenderActorsAndRepeat:
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
-                bra.s   loc_BE56
+                bra.s   SKTimeRecords_RunFrameAndBlinkRecord
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -177,7 +177,7 @@ SKComp_DrawLapTimesAndTopRecords:
                 lea     ((RAM_start+$7828)&$FFFFFF).l,a0
                 move.w  #VRAM_Plane_A_Name_Table+$15A,d7
                 moveq   #6-1,d0
-                jsr     loc_BAF0(pc)
+                jsr     SKCompResults_DrawFiveRaceTimes(pc)
                 moveq   #0,d0
                 move.b  (Current_zone).w,d0
                 subi.w  #$E,d0
@@ -199,7 +199,7 @@ SKComp_DrawLapTimesAndTopRecords:
 
 ; ---------------------------------------------------------------------------
 
-Obj_Competition_BEF8:
+SKTimeRecords_InitIconFromSavedCharacter:
                 move.l  #Map_Results,mappings(a0)
                 move.w  #make_art_tile(ArtTile_Competition_STKIcons+$263,0,1)|$1800,art_tile(a0)
                 moveq   #0,d0
@@ -212,46 +212,46 @@ Obj_Competition_BEF8:
                 move.b  $2E(a0),d0
                 move.b  (a1,d0.w),d0
                 cmpi.w  #2,d0
-                bne.s   loc_BF30
+                bne.s   SKTimeRecords_SetIconFrameAndUpdate
                 addi.w  #palette_line_1,art_tile(a0)
 
-loc_BF30:
+SKTimeRecords_SetIconFrameAndUpdate:
                 addi.w  #$29,d0
                 move.b  d0,mapping_frame(a0)
-                move.l  #loc_BF3E,(a0)
+                move.l  #CompetitionRecordIcon_BlinkNewTopRecord,(a0)
 
-loc_BF3E:
+CompetitionRecordIcon_BlinkNewTopRecord:
                 move.b  (Competition_time_attack_new_top_record).w,d0
                 cmp.b   $2E(a0),d0
-                bne.s   loc_BF50
+                bne.s   CompetitionRecordIcon_Draw
                 btst    #3,(Level_frame_counter+1).w
-                beq.s   locret_BF56
+                beq.s   CompetitionRecordIcon_ReturnDuringBlink
 
-loc_BF50:
+CompetitionRecordIcon_Draw:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_BF56:
+CompetitionRecordIcon_ReturnDuringBlink:
                 rts
 ; ---------------------------------------------------------------------------
-ObjDat_BF58:
+CompetitionTimeAttack_ActorRecords:
                 dc.w    5-1
                 dc.l    Obj_Competition_StaticSprite
                 dc.w    $14D,   $B9, palette_line_0
                 dc.b    0,   0
-                dc.l    Obj_Competition_B9A6
+                dc.l    SKCompResults_UpdatePlayerIcon
                 dc.w    $14D,   $CB, palette_line_0
                 dc.b    0,   0
-                dc.l    Obj_Competition_BEF8
+                dc.l    SKTimeRecords_InitIconFromSavedCharacter
                 dc.w    $130,  $120, palette_line_0
                 dc.b    0,   0
-                dc.l    Obj_Competition_BEF8
+                dc.l    SKTimeRecords_InitIconFromSavedCharacter
                 dc.w    $130,  $138, palette_line_0
                 dc.b    0,   1
-                dc.l    Obj_Competition_BEF8
+                dc.l    SKTimeRecords_InitIconFromSavedCharacter
                 dc.w    $130,  $150, palette_line_0
                 dc.b    0,   2
-VRAMDatList_BF96:
+SKTimeRecords_InitialVRAMRectangles:
                 dc.w    9-1
                 dc.l    RAM_start+$0000
                 dc.w    VRAM_Plane_B_Name_Table+$000,  40-1,  28-1

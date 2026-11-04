@@ -57,9 +57,9 @@ LevelSelect_S2Options:
                 lea     (RAM_start+$498).l,a2
                 moveq   #$10-1,d1
 
-loc_626C:
+S3LegacyVersus_FillStripAndPrepFourBoxes:
                 move.w  #make_art_tile(ArtTile_S2MenuBox+$B,1,0),(a2)+
-                dbf     d1,loc_626C
+                dbf     d1,S3LegacyVersus_FillStripAndPrepFourBoxes
                 bsr.w   Update2PLevSelSelection
                 addq.b  #1,(Current_zone_2P).w
                 andi.b  #3,(Current_zone_2P).w
@@ -86,10 +86,10 @@ loc_626C:
                 lea     (Target_palette_line_3).w,a2
                 moveq   #bytesToLcnt(Normal_palette_line_4-Normal_palette_line_3),d1
 
-loc_62E0:
+S3LegacyVersus_CopyPaletteAndFadeIn:
                 move.l  (a1),(a2)+
                 clr.l   (a1)+
-                dbf     d1,loc_62E0
+                dbf     d1,S3LegacyVersus_CopyPaletteAndFadeIn
                 moveq   #signextendB(mus_DataSelect),d0
                 bsr.w   Play_Music
                 move.w  #(30*60)-1,(Demo_timer).w
@@ -122,13 +122,13 @@ LevelSelect2P_Main:
 
 LevelSelect2P_PressStart:
                 bsr.w   Chk2PZoneCompletion
-                bmi.s   loc_6368
+                bmi.s   S3LegacyVersus_ReturnToSegaAfterConfirm
                 moveq   #signextendB(sfx_Error),d0
                 bsr.w   Play_SFX
                 bra.w   LevelSelect2P_Main
 ; ---------------------------------------------------------------------------
 
-loc_6368:
+S3LegacyVersus_ReturnToSegaAfterConfirm:
                 move.b  #GameMode_SegaScreen,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
@@ -137,7 +137,7 @@ loc_6368:
                 move.b  (Current_zone_2P).w,d0
                 add.w   d0,d0
                 move.w  LevelSelect2P_LevelOrder(pc,d0.w),d0
-                bmi.s   loc_63BE
+                bmi.s   S3LegacyVersus_RetainedSpecialStageTail
                 move.w  d0,(Current_zone_and_act).w
                 move.w  d0,(Apparent_zone_and_act).w
                 move.w  d0,(Saved_zone_and_act).w
@@ -153,7 +153,7 @@ loc_6368:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_63BE:
+S3LegacyVersus_RetainedSpecialStageTail:
                 move.b  #4,(Current_special_stage).w
                 move.b  #GameMode_SpecialStage_S2,(Game_mode).w
                 moveq   #1,d0
@@ -174,15 +174,15 @@ LevelSelect2P_Controls:
                 or.b    (Ctrl_2_pressed).w,d0
                 move.b  d0,d1
                 andi.b  #button_up_mask|button_down_mask,d0
-                beq.s   loc_63F4
+                beq.s   S3LegacyVersus_ToggleSelectionColumn
                 bchg    #1,(Current_zone_2P).w
 
-loc_63F4:
+S3LegacyVersus_ToggleSelectionColumn:
                 andi.b  #button_left_mask|button_right_mask,d1
-                beq.s   locret_6400
+                beq.s   S3LegacyVersus_FourBoxControlsReturn
                 bchg    #0,(Current_zone_2P).w
 
-locret_6400:
+S3LegacyVersus_FourBoxControlsReturn:
                 rts
 ; End of function LevelSelect2P_Controls
 
@@ -204,17 +204,17 @@ Update2PLevSelSelection:
                 lea     (RAM_start+$D8).l,a2
                 movea.l 4(a3),a1
                 bsr.w   Chk2PZoneCompletion
-                bmi.s   loc_6446
+                bmi.s   S3LegacyVersus_PrepareSelectedIconCopy
                 lea     (RAM_start+$468).l,a1
 
-loc_6446:
+S3LegacyVersus_PrepareSelectedIconCopy:
                 moveq   #3-1,d1
 
-loc_6448:
+S3LegacyVersus_CopySelectedIconAndUpload:
                 move.l  (a1)+,(a2)+
                 move.l  (a1)+,(a2)+
                 lea     $1A(a2),a2
-                dbf     d1,loc_6448
+                dbf     d1,S3LegacyVersus_CopySelectedIconAndUpload
                 lea     (RAM_start).l,a1
                 move.l  (a3)+,d0
                 moveq   #17-1,d1
@@ -228,9 +228,9 @@ loc_6448:
                 lea     (Normal_palette_line_3).w,a2
                 moveq   #bytesToLcnt($20),d1
 
-loc_647A:
+S3LegacyVersus_CopySelectedZonePalette:
                 move.l  (a1)+,(a2)+
-                dbf     d1,loc_647A
+                dbf     d1,S3LegacyVersus_CopySelectedZonePalette
                 rts
 ; End of function Update2PLevSelSelection
 
@@ -267,17 +267,17 @@ ClearOld2PLevSelSelection:
                 lea     (RAM_start+$270).l,a2
                 lea     (RAM_start+$498).l,a1
                 bsr.w   Chk2PZoneCompletion
-                bmi.s   loc_64E0
+                bmi.s   S3LegacyVersus_PrepareUnselectedIconCopy
                 lea     (RAM_start+$468).l,a1
 
-loc_64E0:
+S3LegacyVersus_PrepareUnselectedIconCopy:
                 moveq   #3-1,d1
 
-loc_64E2:
+S3LegacyVersus_UploadUnselectedIcon:
                 move.l  (a1)+,(a2)+
                 move.l  (a1)+,(a2)+
                 lea     $1A(a2),a2
-                dbf     d1,loc_64E2
+                dbf     d1,S3LegacyVersus_UploadUnselectedIcon
                 lea     (RAM_start+$198).l,a1
                 move.l  (a3)+,d0
                 moveq   #17-1,d1

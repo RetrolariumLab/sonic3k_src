@@ -37,7 +37,7 @@ Competition_Results:
                 lea     (RAM_start+$1000).l,a1
                 move.w  #make_art_tile(ArtTile_Competition_Results,1,1),d0
                 jsr     (Eni_Decomp).l
-                lea     VRAMDatList_BBAC(pc),a0
+                lea     SKCompResults_InitialPlaneTransfers(pc),a0
                 jsr     Copy_Listed_Data_To_VRAM(pc)
                 jsr     SKComp_BuildRaceResults(pc)
                 lea     (ArtKos_S3MenuBG).l,a0          ; Decompress source
@@ -63,26 +63,26 @@ Competition_Results:
                 lea     (Target_palette).w,a1
                 moveq   #bytesToLcnt(Target_palette_line_2-Target_palette),d0
 
-loc_B888:
+SKCompResults_CopyBackgroundPalette:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_B888
+                dbf     d0,SKCompResults_CopyBackgroundPalette
                 lea     (Pal_Competition2).l,a0
                 moveq   #bytesToLcnt(Target_palette_line_4-Target_palette_line_2),d0
 
-loc_B896:
+SKCompResults_CopyCharacterPalettes:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_B896
+                dbf     d0,SKCompResults_CopyCharacterPalettes
                 lea     (Pal_CompetitionResults).l,a0
                 moveq   #bytesToLcnt(Target_palette_end-Target_palette_line_4),d0
 
-loc_B8A4:
+SKCompResults_CopyPaletteAndPrepActors:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_B8A4
+                dbf     d0,SKCompResults_CopyPaletteAndPrepActors
                 lea     (Object_RAM).w,a0
-                lea     ObjDat_BB4A(pc),a1
+                lea     CompetitionResults_ActorRecords(pc),a1
                 move.w  (a1)+,d0
 
-loc_B8B4:
+SKCompResults_BuildActorsAndFadeIn:
                 move.l  (a1)+,(a0)
                 move.l  #Map_CompetitionSelect,mappings(a0)
                 move.w  (a1),x_pos(a0)
@@ -95,7 +95,7 @@ loc_B8B4:
                 move.b  (a1)+,mapping_frame(a0)
                 move.b  (a1)+,$2E(a0)
                 lea     next_object(a0),a0
-                dbf     d0,loc_B8B4
+                dbf     d0,SKCompResults_BuildActorsAndFadeIn
                 jsr     (Init_SpriteTable).l
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
@@ -108,99 +108,99 @@ loc_B8B4:
                 move.w  d0,(VDP_control_port).l
                 jsr     (Pal_FadeFromBlack).l
 
-loc_B922:
+SKCompResults_RunResultsAndBlinkWinner:
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 addq.w  #1,(Level_frame_counter).w
                 move.w  (_unkEEA0).w,d7
-                beq.s   loc_B952
+                beq.s   SKCompResults_Tick30FrameInputLockout
                 btst    #3,(Level_frame_counter+1).w
-                bne.s   loc_B94A
+                bne.s   SKCompResults_DrawWinningTotalNormal
                 lea     (Plane_buffer+$20).w,a1
                 jsr     CompetitionMenuUploadEightByTwoTileBlock(pc)
-                bra.s   loc_B952
+                bra.s   SKCompResults_Tick30FrameInputLockout
 ; ---------------------------------------------------------------------------
 
-loc_B94A:
+SKCompResults_DrawWinningTotalNormal:
                 move.l  (_unkEE98).w,d6
                 jsr     SKComp_DrawPackedTime(pc)
 
-loc_B952:
+SKCompResults_Tick30FrameInputLockout:
                 tst.w   (Events_bg+$16).w
-                beq.s   loc_B95E
+                beq.s   SKCompResults_ReadActiveControllers
                 subq.w  #1,(Events_bg+$16).w
-                bra.s   loc_B996
+                bra.s   SKCompResults_UpdateAndRenderActors
 ; ---------------------------------------------------------------------------
 
-loc_B95E:
+SKCompResults_ReadActiveControllers:
                 move.b  (Ctrl_1_pressed).w,d0
                 tst.b   (Not_ghost_flag).w
-                beq.s   loc_B96C
+                beq.s   SKCompResults_RouteControlsByPage
                 or.b    (Ctrl_2_pressed).w,d0
 
-loc_B96C:
+SKCompResults_RouteControlsByPage:
                 move.w  (H_scroll_buffer).w,d1
-                beq.s   loc_B97A
+                beq.s   SKCompResults_BeginSecondPageOnConfirm
                 cmpi.w  #$FF78,d1
-                beq.s   loc_B988
-                bra.s   loc_B980
+                beq.s   SKCompResults_ExitSecondPageOnConfirm
+                bra.s   SKCompResults_SlidePageLeftToEndpoint
 ; ---------------------------------------------------------------------------
 
-loc_B97A:
+SKCompResults_BeginSecondPageOnConfirm:
                 andi.w  #button_start_mask|button_A_mask|button_C_mask,d0
-                beq.s   loc_B996
+                beq.s   SKCompResults_UpdateAndRenderActors
 
-loc_B980:
+SKCompResults_SlidePageLeftToEndpoint:
                 subq.w  #8,d1
                 move.w  d1,(H_scroll_buffer).w
-                bra.s   loc_B996
+                bra.s   SKCompResults_UpdateAndRenderActors
 ; ---------------------------------------------------------------------------
 
-loc_B988:
+SKCompResults_ExitSecondPageOnConfirm:
                 andi.w  #button_start_mask|button_A_mask|button_C_mask,d0
-                beq.s   loc_B996
+                beq.s   SKCompResults_UpdateAndRenderActors
                 move.b  #GameMode_CompetitionMenu,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_B996:
+SKCompResults_UpdateAndRenderActors:
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
-                bra.w   loc_B922
+                bra.w   SKCompResults_RunResultsAndBlinkWinner
 ; ---------------------------------------------------------------------------
 
-Obj_Competition_B9A6:
+SKCompResults_UpdatePlayerIcon:
                 move.l  #Map_CompetitionPlayerSprite,mappings(a0)
                 move.w  #make_art_tile(ArtTile_Competition_CharSel,1,1),art_tile(a0)
                 move.b  (P1_character).w,d0
                 tst.b   $2E(a0)
-                beq.s   loc_B9C2
+                beq.s   SKCompResults_StorePlayerIconFrame
                 move.b  (P2_character).w,d0
 
-loc_B9C2:
+SKCompResults_StorePlayerIconFrame:
                 move.b  d0,mapping_frame(a0)
                 jmp     Obj_Competition_StaticSprite(pc)
 ; ---------------------------------------------------------------------------
 
-Obj_Competition_B9CA:
+CompetitionResults_UpdateWinLoseTieIcon:
                 move.w  #make_art_tile(ArtTile_Competition_Results,1,1),art_tile(a0)
                 move.b  (_unkEEA2).w,d0
                 move.b  (_unkEEA2+1).w,d1
                 tst.b   $2E(a0)
-                beq.s   loc_B9E0
+                beq.s   SKCompResults_ComparePlayerWinCounts
                 exg     d0,d1
 
-loc_B9E0:
+SKCompResults_ComparePlayerWinCounts:
                 moveq   #$D,d2
                 cmp.b   d0,d1
-                beq.s   loc_B9EC
-                bcs.s   loc_B9EA
+                beq.s   SKCompResults_StoreFrameAndBlinkWinner
+                bcs.s   CompetitionResults_FinalizeNonTieFrame
                 addq.w  #1,d2
 
-loc_B9EA:
+CompetitionResults_FinalizeNonTieFrame:
                 subq.b  #2,d2
 
-loc_B9EC:
+SKCompResults_StoreFrameAndBlinkWinner:
                 move.b  d2,mapping_frame(a0)
                 cmpi.b  #$B,d2
                 bne.w   Obj_Competition_StaticSprite
@@ -226,43 +226,43 @@ SKComp_BuildRaceResults:
                 jsr     SKComp_SumFivePackedTimes(pc)
                 move.w  #$CCDA,d7
                 cmp.l   (_unkEE98).w,d6
-                bhi.s   loc_BA52
-                bne.s   loc_BA4A
+                bhi.s   SKCompResults_DrawP2TotalAndPrepRaceRows
+                bne.s   SKCompResults_BlinkP2TotalIfFaster
                 clr.w   (_unkEEA0).w
-                bra.s   loc_BA52
+                bra.s   SKCompResults_DrawP2TotalAndPrepRaceRows
 ; ---------------------------------------------------------------------------
 
-loc_BA4A:
+SKCompResults_BlinkP2TotalIfFaster:
                 move.l  d6,(_unkEE98).w
                 move.w  d7,(_unkEEA0).w
 
-loc_BA52:
+SKCompResults_DrawP2TotalAndPrepRaceRows:
                 jsr     SKComp_DrawPackedTime(pc)
                 clr.w   (_unkEEA2).w
                 lea     ((RAM_start+$7800)&$FFFFFF).l,a0
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table+$148,VRAM,WRITE),d5
                 moveq   #5-1,d7
 
-loc_BA68:
+SKCompResults_CompareTimesAndCountWins:
                 lea     (MapUnc_ResultsWin).l,a1
                 lea     (MapUnc_ResultsLose).l,a2
                 addq.b  #1,(_unkEEA2).w
                 move.l  (a0)+,d0
                 cmp.l   x_pos(a0),d0
-                beq.s   loc_BA8E
-                bcs.s   loc_BA9A
+                beq.s   SKCompResults_UseTieMapsWithoutWin
+                bcs.s   SKCompResults_UploadMapsAndPrepBlink
                 exg     a1,a2
                 subq.b  #1,(_unkEEA2).w
                 addq.b  #1,(_unkEEA2+1).w
-                bra.s   loc_BA9A
+                bra.s   SKCompResults_UploadMapsAndPrepBlink
 ; ---------------------------------------------------------------------------
 
-loc_BA8E:
+SKCompResults_UseTieMapsWithoutWin:
                 lea     (MapUnc_ResultsTie).l,a1
                 movea.l a1,a2
                 subq.b  #1,(_unkEEA2).w
 
-loc_BA9A:
+SKCompResults_UploadMapsAndPrepBlink:
                 move.l  d5,d0
                 moveq   #2-1,d1
                 moveq   #2-1,d2
@@ -274,23 +274,23 @@ loc_BA9A:
                 moveq   #2-1,d2
                 jsr     (Plane_Map_To_VRAM).l
                 addi.l  #$100<<16,d5
-                dbf     d7,loc_BA68
+                dbf     d7,SKCompResults_CompareTimesAndCountWins
                 move.w  (_unkEEA0).w,d7
-                beq.s   locret_BAEC
+                beq.s   SKCompResults_OutcomeRowsReturn
                 move.l  (_unkEE98).w,d6
                 jsr     SKComp_DrawPackedTime(pc)
                 lea     (Plane_buffer).w,a0
                 lea     $20(a0),a1
                 moveq   #$10-1,d0
 
-loc_BADC:
+SKCompResults_BuildWinnerBlinkTiles:
                 move.w  (a0)+,d1
                 andi.w  #$9FFF,d1
                 ori.w   #palette_line_3,d1
                 move.w  d1,(a1)+
-                dbf     d0,loc_BADC
+                dbf     d0,SKCompResults_BuildWinnerBlinkTiles
 
-locret_BAEC:
+SKCompResults_OutcomeRowsReturn:
                 rts
 ; End of function SKComp_BuildRaceResults
 
@@ -299,13 +299,13 @@ locret_BAEC:
 SKCompDrawFiveSequentialTimeRows:
                 moveq   #5-1,d0
 
-loc_BAF0:
+SKCompResults_DrawFiveRaceTimes:
                 move.w  d0,-(sp)
                 move.l  (a0)+,d6
                 jsr     SKComp_DrawPackedTime(pc)
                 addi.w  #$100,d7
                 move.w  (sp)+,d0
-                dbf     d0,loc_BAF0
+                dbf     d0,SKCompResults_DrawFiveRaceTimes
                 rts
 ; End of function SKCompDrawFiveSequentialTimeRows
 
@@ -316,38 +316,38 @@ SKComp_SumFivePackedTimes:
                 clr.l   (_unkEF40_1).w
                 moveq   #5-1,d7
 
-loc_BB0A:
+SKCompResults_AccumulateHundredths:
                 move.l  (a0)+,d6
                 lea     (_unkEF44_2).w,a1
                 add.b   d6,-(a1)
                 cmpi.b  #100,(a1)
-                blo.s   loc_BB20
+                blo.s   SKCompResults_AccumulateSeconds
                 subi.b  #100,(a1)
                 addq.b  #1,-1(a1)
 
-loc_BB20:
+SKCompResults_AccumulateSeconds:
                 lsr.l   #8,d6
                 add.b   d6,-(a1)
                 cmpi.b  #60,(a1)
-                blo.s   loc_BB32
+                blo.s   SKCompResults_AccumulateMinutesCap99
                 subi.b  #60,(a1)
                 addq.b  #1,-1(a1)
 
-loc_BB32:
+SKCompResults_AccumulateMinutesCap99:
                 lsr.l   #8,d6
                 add.b   d6,-(a1)
                 cmpi.b  #100,(a1)
-                blo.s   loc_BB40
+                blo.s   SKCompResults_RepeatAndReturnPackedTotal
                 move.b  #99,(a1)
 
-loc_BB40:
-                dbf     d7,loc_BB0A
+SKCompResults_RepeatAndReturnPackedTotal:
+                dbf     d7,SKCompResults_AccumulateHundredths
                 move.l  (_unkEF40_1).w,d6
                 rts
 ; End of function SKComp_SumFivePackedTimes
 
 ; ---------------------------------------------------------------------------
-ObjDat_BB4A:
+CompetitionResults_ActorRecords:
                 dc.w    8-1
                 dc.l    Obj_Competition_StaticSprite
                 dc.w    $148,   $A1, palette_line_1
@@ -355,10 +355,10 @@ ObjDat_BB4A:
                 dc.l    Obj_Competition_StaticSprite
                 dc.w    $14D,   $B9, palette_line_0
                 dc.b    0,   0
-                dc.l    Obj_Competition_B9A6
+                dc.l    SKCompResults_UpdatePlayerIcon
                 dc.w    $14D,   $D3, palette_line_0
                 dc.b    0,   0
-                dc.l    Obj_Competition_B9CA
+                dc.l    CompetitionResults_UpdateWinLoseTieIcon
                 dc.w    $CC,   $BC, palette_line_0
                 dc.b    0,   0
                 dc.l    Obj_Competition_StaticSprite
@@ -367,13 +367,13 @@ ObjDat_BB4A:
                 dc.l    Obj_Competition_StaticSprite
                 dc.w    $14D,  $121, palette_line_0
                 dc.b    0,   0
-                dc.l    Obj_Competition_B9A6
+                dc.l    SKCompResults_UpdatePlayerIcon
                 dc.w    $14D,  $13B, palette_line_0
                 dc.b    0,   1
-                dc.l    Obj_Competition_B9CA
+                dc.l    CompetitionResults_UpdateWinLoseTieIcon
                 dc.w    $CC,  $124, palette_line_0
                 dc.b    0,   1
-VRAMDatList_BBAC:
+SKCompResults_InitialPlaneTransfers:
                 dc.w    9-1
                 dc.l    RAM_start+$0000
                 dc.w    VRAM_Plane_B_Name_Table+$000,  40-1,  28-1

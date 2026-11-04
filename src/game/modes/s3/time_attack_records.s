@@ -32,7 +32,7 @@ TimeAttack_Records:
                 lea     (RAM_start).l,a1
                 move.w  #make_art_tile(ArtTile_S3MenuBG,0,0),d0
                 jsr     (Eni_Decomp).l
-                lea     VRAMDatList_B2CA(pc),a0
+                lea     S3TimeRecords_InitialVRAMRectangles(pc),a0
                 jsr     Copy_Listed_Data_To_VRAM(pc)
                 moveq   #0,d0
                 move.b  (Current_zone).w,d0
@@ -81,33 +81,33 @@ TimeAttack_Records:
                 lea     (VDP_data_port).l,a6
                 move.w  #bytesToLcnt(tiles_to_bytes($1B)),d0
 
-loc_B0C2:
+S3TimeRecords_UploadIconsAndPrepPalette:
                 move.l  (a0)+,(a6)
-                dbf     d0,loc_B0C2
+                dbf     d0,S3TimeRecords_UploadIconsAndPrepPalette
                 lea     (Pal_CompetitionMenuBG).l,a0
                 lea     (Target_palette).w,a1
                 moveq   #bytesToLcnt(Target_palette_line_2-Target_palette),d0
 
-loc_B0D4:
+S3TimeRecords_CopyBackgroundPalette:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_B0D4
+                dbf     d0,S3TimeRecords_CopyBackgroundPalette
                 lea     Pal_Competition2(pc),a0
                 moveq   #bytesToLcnt(Target_palette_line_4-Target_palette_line_2),d0
 
-loc_B0E0:
+S3TimeRecords_CopyMiddlePaletteLines:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_B0E0
+                dbf     d0,S3TimeRecords_CopyMiddlePaletteLines
                 lea     Pal_CompetitionTimeAttack(pc),a0
                 moveq   #bytesToLcnt(Target_palette_end-Target_palette_line_4),d0
 
-loc_B0EC:
+S3TimeRecords_CopyPaletteAndPrepActors:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_B0EC
+                dbf     d0,S3TimeRecords_CopyPaletteAndPrepActors
                 lea     (Object_RAM).w,a0
-                lea     ObjDat_B28C(pc),a1
+                lea     CompetitionTimeAttack_ActorRecords(pc),a1
                 move.w  (a1)+,d0
 
-loc_B0FC:
+S3TimeRecords_InitRecordActorsAndFadeIn:
                 move.l  (a1)+,(a0)
                 move.l  #Map_CompetitionSelect,mappings(a0)
                 move.w  (a1),x_pos(a0)
@@ -120,7 +120,7 @@ loc_B0FC:
                 move.b  (a1)+,mapping_frame(a0)
                 move.b  (a1)+,$2E(a0)
                 lea     next_object(a0),a0
-                dbf     d0,loc_B0FC
+                dbf     d0,S3TimeRecords_InitRecordActorsAndFadeIn
                 jsr     (Init_SpriteTable).l
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
@@ -133,42 +133,42 @@ loc_B0FC:
                 move.w  d0,(VDP_control_port).l
                 jsr     (Pal_FadeFromBlack).l
 
-loc_B16A:
+S3TimeRecords_RunFrameAndBlinkRecord:
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 addq.w  #1,(Level_frame_counter).w
                 move.w  (_unkEEA0).w,d7
-                beq.s   loc_B19A
+                beq.s   S3TimeRecords_Tick30FrameExitLockout
                 btst    #3,(Level_frame_counter+1).w
-                bne.s   loc_B192
+                bne.s   S3TimeRecords_RedrawHighlightedTime
                 lea     (Plane_buffer+$20).w,a1
-                jsr     loc_9F0A(pc)
-                bra.s   loc_B19A
+                jsr     S3CompZones_Upload8By2TimeTiles(pc)
+                bra.s   S3TimeRecords_Tick30FrameExitLockout
 ; ---------------------------------------------------------------------------
 
-loc_B192:
+S3TimeRecords_RedrawHighlightedTime:
                 move.l  (_unkEE98).w,d6
                 jsr     S3Comp_DrawPackedTime(pc)
 
-loc_B19A:
+S3TimeRecords_Tick30FrameExitLockout:
                 tst.w   (Events_bg+$16).w
-                beq.s   loc_B1A6
+                beq.s   S3TimeRecordMenu_ExitRecordsOnStartAOrC
                 subq.w  #1,(Events_bg+$16).w
-                bra.s   loc_B1B8
+                bra.s   S3TimeRecords_RenderActorsAndRepeat
 ; ---------------------------------------------------------------------------
 
-loc_B1A6:
+S3TimeRecordMenu_ExitRecordsOnStartAOrC:
                 move.b  (Ctrl_1_pressed).w,d0
                 andi.w  #button_start_mask|button_A_mask|button_C_mask,d0
-                beq.s   loc_B1B8
+                beq.s   S3TimeRecords_RenderActorsAndRepeat
                 move.b  #GameMode_CompetitionLevelSelect+$80,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_B1B8:
+S3TimeRecords_RenderActorsAndRepeat:
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
-                bra.s   loc_B16A
+                bra.s   S3TimeRecords_RunFrameAndBlinkRecord
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -177,7 +177,7 @@ S3Comp_DrawLapTimesAndTopRecords:
                 lea     ((RAM_start+$7828)&$FFFFFF).l,a0
                 move.w  #VRAM_Plane_A_Name_Table+$15A,d7
                 moveq   #6-1,d0
-                jsr     loc_AD2A(pc)
+                jsr     S3CompResults_DrawFiveRaceTimes(pc)
                 moveq   #0,d0
                 move.b  (Current_zone).w,d0
                 subi.w  #$E,d0
@@ -199,7 +199,7 @@ S3Comp_DrawLapTimesAndTopRecords:
 
 ; ---------------------------------------------------------------------------
 
-Obj_Competition_B20C:
+S3TimeRecords_InitIconFromSavedCharacter:
                 move.l  #Map_Results,mappings(a0)
                 move.w  #make_art_tile(ArtTile_Competition_STKIcons-$77,1,1),art_tile(a0)
                 moveq   #0,d0
@@ -212,49 +212,49 @@ Obj_Competition_B20C:
                 move.b  $2E(a0),d0
                 move.b  (a1,d0.w),d0
                 cmpi.w  #2,d0
-                bne.s   loc_B244
+                bne.s   S3TimeRecords_SetIconFrameAndUpdate
                 addi.w  #palette_line_1,art_tile(a0)
 
-loc_B244:
+S3TimeRecords_SetIconFrameAndUpdate:
                 addi.w  #$29,d0
                 move.b  d0,mapping_frame(a0)
-                move.l  #loc_B252,(a0)
+                move.l  #CompetitionRecordIcon_BlinkNewTopRecord,(a0)
 
-loc_B252:
+CompetitionRecordIcon_BlinkNewTopRecord:
                 move.b  (Competition_time_attack_new_top_record).w,d0
                 cmp.b   $2E(a0),d0
-                bne.s   loc_B264
+                bne.s   CompetitionRecordIcon_Draw
                 btst    #3,(Level_frame_counter+1).w
-                beq.s   locret_B26A
+                beq.s   CompetitionRecordIcon_ReturnDuringBlink
 
-loc_B264:
+CompetitionRecordIcon_Draw:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_B26A:
+CompetitionRecordIcon_ReturnDuringBlink:
                 rts
 ; ---------------------------------------------------------------------------
 Pal_CompetitionTimeAttack:
                 binclude "data/General/Competition Menu/Palettes/Time Attack.bin"
                 even
-ObjDat_B28C:
+CompetitionTimeAttack_ActorRecords:
                 dc.w    5-1
                 dc.l    Obj_Competition_StaticSprite
                 dc.w    $14D,   $B9, palette_line_0
                 dc.b    0,   0
-                dc.l    Obj_Competition_ABE6
+                dc.l    S3CompResults_UpdatePlayerIcon
                 dc.w    $14D,   $CB, palette_line_0
                 dc.b    0,   0
-                dc.l    Obj_Competition_B20C
+                dc.l    S3TimeRecords_InitIconFromSavedCharacter
                 dc.w    $130,  $120, palette_line_0
                 dc.b    0,   0
-                dc.l    Obj_Competition_B20C
+                dc.l    S3TimeRecords_InitIconFromSavedCharacter
                 dc.w    $130,  $138, palette_line_0
                 dc.b    0,   1
-                dc.l    Obj_Competition_B20C
+                dc.l    S3TimeRecords_InitIconFromSavedCharacter
                 dc.w    $130,  $150, palette_line_0
                 dc.b    0,   2
-VRAMDatList_B2CA:
+S3TimeRecords_InitialVRAMRectangles:
                 dc.w    9-1
                 dc.l    RAM_start+$0000
                 dc.w    VRAM_Plane_B_Name_Table+$000,  40-1,  28-1

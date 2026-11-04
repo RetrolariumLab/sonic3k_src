@@ -10343,7 +10343,7 @@
       "responsibility": "Competition character and player-count selection, animated character widgets and input prompts.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 381,
+      "physical_lines": 383,
       "origin": {
         "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
         "path": "s3.s",
@@ -11233,7 +11233,7 @@
       "responsibility": "Competition character and player-count selection, animated character widgets and input prompts.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 370,
+      "physical_lines": 372,
       "origin": {
         "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
         "path": "sonic3k.s",

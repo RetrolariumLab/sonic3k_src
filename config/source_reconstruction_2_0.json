@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 163
+    "commit_count": 164
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -1025,9 +1025,15 @@
       "commits": ["a2d67f093296f4c1234129622784cf19edc8a528"]
     },
     {
-      "id": "current-shorten-57-continue",
+      "id": "change-071eea7d747d",
       "kind": "source_or_tooling",
       "summary": "Apply 136 reviewed short labels for continue.",
+      "commits": ["071eea7d747dbd4635f6dc41b76816d2e7c8984c"]
+    },
+    {
+      "id": "current-shorten-58-competition-ui",
+      "kind": "source_or_tooling",
+      "summary": "Apply 260 reviewed short labels for competition ui.",
       "commits": ["release-commit"]
     }
   ],

@@ -57,20 +57,20 @@ Competition_PlayerSelect:
                 lea     (Target_palette).w,a1
                 moveq   #bytesToLcnt(Target_palette_line_2-Target_palette),d0
 
-loc_A280:
+S3CompPlayers_CopyBackgroundPalette:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_A280
+                dbf     d0,S3CompPlayers_CopyBackgroundPalette
                 lea     Pal_Competition2(pc),a0
                 moveq   #bytesToLcnt(Target_palette_end-Target_palette_line_2),d0
 
-loc_A28C:
+S3CompPlayers_CopyPalettesAndPrepActors:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_A28C
+                dbf     d0,S3CompPlayers_CopyPalettesAndPrepActors
                 lea     (Player_2).w,a0
-                lea     ObjDat_A65E(pc),a1
+                lea     S3CompPlayers_FixedActorRecords(pc),a1
                 move.w  (a1)+,d0
 
-loc_A29C:
+S3CompPlayers_BuildActorsAndSeedAngles:
                 move.l  (a1)+,(a0)
                 move.l  #Map_CompetitionSelect,mappings(a0)
                 move.w  (a1),x_pos(a0)
@@ -83,7 +83,7 @@ loc_A29C:
                 move.b  (a1)+,mapping_frame(a0)
                 move.b  (a1)+,$2E(a0)
                 lea     next_object(a0),a0
-                dbf     d0,loc_A29C
+                dbf     d0,S3CompPlayers_BuildActorsAndSeedAngles
                 moveq   #0,d0
                 move.b  (P1_character).w,d0
                 mulu.w  #$55,d0
@@ -109,7 +109,7 @@ loc_A29C:
                 move.w  d0,(VDP_control_port).l
                 jsr     (Pal_FadeFromBlack).l
 
-loc_A33E:
+S3CompPlayers_RunMenuAndCheckExitFirst:
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 addq.w  #1,(Level_frame_counter).w
@@ -117,20 +117,20 @@ loc_A33E:
                 jsr     Menu_UpdateBothCharacterDepthGroups(pc)
                 jsr     (Render_Sprites).l
                 move.b  (Events_bg+$12).w,d0
-                beq.s   loc_A36A
+                beq.s   S3CompPlayers_SelectActiveReadyMask
                 move.b  d0,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_A36A:
+S3CompPlayers_SelectActiveReadyMask:
                 move.w  (Events_bg+$10).w,d0
                 tst.b   (Not_ghost_flag).w
-                bne.s   loc_A376
+                bne.s   S3CompPlayers_StartRaceWhenPlayersReady
                 lsr.w   #8,d0
 
-loc_A376:
+S3CompPlayers_StartRaceWhenPlayersReady:
                 tst.w   d0
-                bne.s   loc_A33E
+                bne.s   S3CompPlayers_RunMenuAndCheckExitFirst
                 move.w  #$E00,(Current_zone_and_act).w
                 jsr     S3Comp_InitRoundState(pc)
                 move.b  #GameMode_Level,(Game_mode).w
@@ -149,15 +149,15 @@ Obj_Competition_2PSelect:
                 lea     (Events_bg+$11).w,a2
                 lea     (P2_character).w,a3
                 tst.b   (Not_ghost_flag).w
-                bne.s   loc_A3CE
+                bne.s   S3CompPlayers_GateInputAndCheckCancel
                 tst.w   (Events_bg+$14).w
-                bne.s   loc_A3BC
+                bne.s   S3CompPlayers_DrawInactiveP2Selector
                 tst.b   (a1)
                 smi     (Not_ghost_flag).w
 
-loc_A3BC:
+S3CompPlayers_DrawInactiveP2Selector:
                 moveq   #0,d0
-                bra.w   loc_A4CE
+                bra.w   S3CompPlayers_StoreFrameAndProjectX
 ; ---------------------------------------------------------------------------
 
 Obj_Competition_1PSelect:
@@ -165,24 +165,24 @@ Obj_Competition_1PSelect:
                 lea     (Events_bg+$10).w,a2
                 lea     (P1_character).w,a3
 
-loc_A3CE:
+S3CompPlayers_GateInputAndCheckCancel:
                 tst.w   (H_scroll_buffer).w
-                bne.w   loc_A4BC
+                bne.w   S3CompPlayers_SelectReadyOrBlinkFrame
                 tst.b   $2F(a0)
-                beq.s   loc_A3EE
+                beq.s   S3CompPlayers_StartOrContinueRotation
                 btst    #button_B,(a1)
-                beq.w   loc_A4BC
+                beq.w   S3CompPlayers_SelectReadyOrBlinkFrame
                 sf      $2F(a0)
                 st      (a2)
-                bra.w   loc_A4BC
+                bra.w   S3CompPlayers_SelectReadyOrBlinkFrame
 ; ---------------------------------------------------------------------------
 
-loc_A3EE:
+S3CompPlayers_StartOrContinueRotation:
                 tst.b   $30(a0)
-                bne.s   loc_A466
+                bne.s   S3CompPlayers_AdvanceForwardAndClamp
                 move.b  (a1),d0
                 andi.w  #button_left_mask|button_right_mask,d0
-                beq.w   loc_A498
+                beq.w   S3CompPlayers_CancelToCompetitionMenu
                 move.l  d0,-(sp)
                 moveq   #signextendB(sfx_GravityTunnel),d0
                 jsr     (Play_SFX).l
@@ -190,95 +190,97 @@ loc_A3EE:
                 clr.b   $34(a0)
                 move.b  $2E(a0),$35(a0)
                 btst    #button_left,d0
-                bne.s   loc_A442
+                bne.s   S3CompPlayers_SelectPreviousCharacter
                 move.b  #1,$30(a0)
                 move.b  (a3),d0
                 addq.b  #1,d0
                 cmpi.b  #2,d0
-                bls.s   loc_A42C
+                bls.s   S3CompPlayers_StoreNextChoiceAndAngle
                 moveq   #0,d0
 
-loc_A42C:
+S3CompPlayers_StoreNextChoiceAndAngle:
                 move.b  d0,(a3)
                 mulu.w  #$55,d0
-                bne.s   loc_A438
+                bne.s   S3CompPlayers_BeginForwardRotation
                 move.w  #$100,d0
 
-loc_A438:
+S3CompPlayers_BeginForwardRotation:
                 addi.w  #$40,d0
                 move.w  d0,$32(a0)
-                bra.s   loc_A466
+                bra.s   S3CompPlayers_AdvanceForwardAndClamp
 ; ---------------------------------------------------------------------------
 
-loc_A442:
+S3CompPlayers_SelectPreviousCharacter:
                 move.b  #-1,$30(a0)
                 move.b  (a3),d0
                 subq.b  #1,d0
-                bcc.s   loc_A450
+                bcc.s   S3CompPlayers_StorePrevChoiceAndAngle
                 moveq   #2,d0
 
-loc_A450:
+; Sign-extend the wrapped phase so the backward interpolation crosses zero continuously
+S3CompPlayers_StorePrevChoiceAndAngle:
                 move.b  d0,(a3)
                 mulu.w  #$55,d0
                 cmpi.w  #$80,d0
-                blo.s   loc_A45E
+                blo.s   S3CompPlayers_BeginBackwardRotation
                 ext.w   d0
 
-loc_A45E:
+S3CompPlayers_BeginBackwardRotation:
                 addi.w  #$40,d0
                 move.w  d0,$32(a0)
 
-loc_A466:
+S3CompPlayers_AdvanceForwardAndClamp:
                 move.w  $34(a0),d0
                 move.w  $32(a0),d1
                 tst.b   $30(a0)
-                bmi.s   loc_A482
+                bmi.s   S3CompPlayers_AdvanceBackwardAndClamp
                 addq.w  #5,d0
                 cmp.w   d0,d1
-                bgt.s   loc_A48E
+                bgt.s   S3CompPlayers_StoreAngleAndOrbitPhase
                 move.w  d1,d0
                 clr.b   $30(a0)
-                bra.s   loc_A48E
+                bra.s   S3CompPlayers_StoreAngleAndOrbitPhase
 ; ---------------------------------------------------------------------------
 
-loc_A482:
+S3CompPlayers_AdvanceBackwardAndClamp:
                 subq.w  #5,d0
                 cmp.w   d0,d1
-                blt.s   loc_A48E
+                blt.s   S3CompPlayers_StoreAngleAndOrbitPhase
                 move.w  d1,d0
                 clr.b   $30(a0)
 
-loc_A48E:
+S3CompPlayers_StoreAngleAndOrbitPhase:
                 move.w  d0,$34(a0)
                 move.b  d0,$2E(a0)
-                bra.s   loc_A4BC
+                bra.s   S3CompPlayers_SelectReadyOrBlinkFrame
 ; ---------------------------------------------------------------------------
 
-loc_A498:
+S3CompPlayers_CancelToCompetitionMenu:
                 btst    #button_B,(a1)
-                beq.s   loc_A4A6
+                beq.s   S3CompPlayers_ConfirmChoiceAndSetReady
                 move.b  #$38,(Events_bg+$12).w
-                bra.s   loc_A4BC
+                bra.s   S3CompPlayers_SelectReadyOrBlinkFrame
 ; ---------------------------------------------------------------------------
 
-loc_A4A6:
+; A zero in the shared ready byte marks this controller as ready
+S3CompPlayers_ConfirmChoiceAndSetReady:
                 move.b  (a1),d0
                 andi.w  #button_A_mask|button_C_mask|button_start_mask,d0
-                beq.s   loc_A4BC
+                beq.s   S3CompPlayers_SelectReadyOrBlinkFrame
                 st      $2F(a0)
                 sf      (a2)
                 moveq   #signextendB(sfx_Starpost),d0
                 jsr     (Play_SFX).l
 
-loc_A4BC:
+S3CompPlayers_SelectReadyOrBlinkFrame:
                 moveq   #1,d0
                 tst.b   $2F(a0)
-                bne.s   loc_A4CE
+                bne.s   S3CompPlayers_StoreFrameAndProjectX
                 move.w  (Level_frame_counter).w,d0
                 lsr.w   #3,d0
                 andi.w  #1,d0
 
-loc_A4CE:
+S3CompPlayers_StoreFrameAndProjectX:
                 move.b  d0,mapping_frame(a0)
                 move.w  $12(a0),d0
                 add.w   (H_scroll_buffer).w,d0
@@ -300,10 +302,10 @@ Obj_CompetitionPlayerSprite:
                 moveq   #0,d2
                 move.b  $2E(a0),d2
 
-loc_A504:
+S3CompPlayers_ProjectCharacterPortrait:
                 addi.w  #object_size,d0
                 addi.w  #$55,d1
-                dbf     d2,loc_A504
+                dbf     d2,S3CompPlayers_ProjectCharacterPortrait
                 neg.w   d0
                 move.b  $2E(a0,d0.w),d0
                 add.b   d1,d0
@@ -320,16 +322,16 @@ loc_A504:
 
 Obj_Competition_PRESSSTART:
                 tst.b   (Not_ghost_flag).w
-                bne.s   locret_A55C
+                bne.s   S3CompPlayers_CheckP2StartPrompt
                 btst    #5,(Level_frame_counter+1).w
-                beq.s   locret_A55C
+                beq.s   S3CompPlayers_CheckP2StartPrompt
                 move.w  $12(a0),d0
                 add.w   (H_scroll_buffer).w,d0
                 move.w  d0,x_pos(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_A55C:
+S3CompPlayers_CheckP2StartPrompt:
                 rts
 ; ---------------------------------------------------------------------------
 Pal_Competition2:
@@ -341,7 +343,7 @@ Pal_Competition3:
 Pal_Competition4:
                 binclude "data/General/Competition Menu/Palettes/4.bin"
                 even
-ObjDat_A65E:
+S3CompPlayers_FixedActorRecords:
                 dc.w    $B-1
                 dc.l    Obj_Competition_StaticSprite
                 dc.w    $120,   $A9, palette_line_1

@@ -23,10 +23,10 @@ Competition_Menu:
                 move.l  #DMA_queue,(DMA_queue_slot).w
                 clr.w   (Level_frame_counter).w
                 cmpi.b  #3,(Competition_menu_selection).w
-                blo.s   loc_A8DC
+                blo.s   SKCompMenu_LoadBackgroundAndQueueArt
                 clr.b   (Competition_menu_selection).w
 
-loc_A8DC:
+SKCompMenu_LoadBackgroundAndQueueArt:
                 lea     (MapEni_S3MenuBG).l,a0
                 lea     (RAM_start).l,a1
                 move.w  #make_art_tile(ArtTile_S3MenuBG,3,0),d0
@@ -56,20 +56,20 @@ loc_A8DC:
                 lea     (Target_palette).w,a1
                 moveq   #bytesToLcnt($60),d0
 
-loc_A96A:
+SKCompMenu_CopyThreeTargetPaletteLines:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_A96A
+                dbf     d0,SKCompMenu_CopyThreeTargetPaletteLines
                 lea     (Pal_CompetitionMenuBG).l,a0
                 moveq   #bytesToLcnt($20),d0
 
-loc_A978:
+SKCompMenu_CopyBGPaletteAndPrepActors:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_A978
+                dbf     d0,SKCompMenu_CopyBGPaletteAndPrepActors
                 lea     (Object_RAM).w,a0
-                lea     ObjDat_AB48(pc),a1
+                lea     CompetitionMenu_ActorRecords(pc),a1
                 move.w  (a1)+,d0
 
-loc_A988:
+SKCompMenu_BuildActorsAndEnableDisplay:
                 move.l  (a1)+,(a0)
                 move.w  #make_art_tile(ArtTile_Competition_ModeSel,0,0),art_tile(a0)
                 move.l  #Map_CompetitionObject,mappings(a0)
@@ -78,7 +78,7 @@ loc_A988:
                 move.b  (a1)+,mapping_frame(a0)
                 move.b  (a1)+,$2E(a0)
                 lea     next_object(a0),a0
-                dbf     d0,loc_A988
+                dbf     d0,SKCompMenu_BuildActorsAndEnableDisplay
                 jsr     (Init_SpriteTable).l
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
@@ -91,7 +91,7 @@ loc_A988:
                 move.w  d0,(VDP_control_port).l
                 bsr.w   Pal_FadeFromBlack
 
-loc_A9E8:
+SKCompMenu_RunMenuAndCheckCancelFirst:
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 addq.w  #1,(Level_frame_counter).w
@@ -101,164 +101,164 @@ loc_A9E8:
                 or.b    (Ctrl_2_pressed).w,d0
                 move.b  d0,d1
                 andi.b  #button_A_mask|button_B_mask|button_C_mask|button_start_mask,d1
-                beq.w   loc_AAA6
+                beq.w   SKCompMenu_HandleUpAndWrap
                 btst    #button_B,d1
-                bne.s   loc_AA2E
+                bne.s   SKCompMenu_ReturnToTitle
                 moveq   #0,d2
                 move.b  (Competition_menu_selection).w,d2
                 add.w   d2,d2
-                jmp     loc_AA28(pc,d2.w)
+                jmp     SKCompMenu_DispatchRaceOrExit(pc,d2.w)
 ; ---------------------------------------------------------------------------
 
-loc_AA28:
-                bra.s   loc_AA36
+SKCompMenu_DispatchRaceOrExit:
+                bra.s   SKCompMenu_OpenPlayerMenu
 ; ---------------------------------------------------------------------------
-                bra.s   loc_AA54
+                bra.s   SKCompMenu_OpenZoneMenu
 ; ---------------------------------------------------------------------------
-                bra.s   loc_AA74
+                bra.s   SKCompMenu_OpenTimeAttackOnP1Confirm
 ; ---------------------------------------------------------------------------
 
-loc_AA2E:
+SKCompMenu_ReturnToTitle:
                 move.b  #GameMode_TitleScreen,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_AA36:
+SKCompMenu_OpenPlayerMenu:
                 clr.b   (Competition_type).w
                 move.b  (Competition_menu_items).w,(Competition_items).w
                 move.b  (Ctrl_2_pressed).w,d0
                 andi.b  #button_A_mask|button_C_mask|button_start_mask,d0
                 sne     (Not_ghost_flag).w
                 move.b  #GameMode_CompetitionPlayerSelect,(Game_mode).w
-                bra.s   loc_AA8E
+                bra.s   SKCompMenu_PrepareScratchClear
 ; ---------------------------------------------------------------------------
 
-loc_AA54:
+SKCompMenu_OpenZoneMenu:
                 move.b  #3,(Competition_type).w
                 move.b  (Competition_menu_items).w,(Competition_items).w
                 move.b  (Ctrl_2_pressed).w,d0
                 andi.b  #button_A_mask|button_C_mask|button_start_mask,d0
                 sne     (Not_ghost_flag).w
                 move.b  #GameMode_CompetitionLevelSelect,(Game_mode).w
-                bra.s   loc_AA8E
+                bra.s   SKCompMenu_PrepareScratchClear
 ; ---------------------------------------------------------------------------
 
-loc_AA74:
+SKCompMenu_OpenTimeAttackOnP1Confirm:
                 move.b  (Ctrl_1_pressed).w,d2
                 andi.w  #button_A_mask|button_C_mask|button_start_mask,d2
-                beq.s   loc_AAA6
+                beq.s   SKCompMenu_HandleUpAndWrap
                 move.w  #-1,(Competition_settings).w
                 clr.b   (Not_ghost_flag).w
                 move.b  #GameMode_CompetitionLevelSelect+$80,(Game_mode).w
 
-loc_AA8E:
+SKCompMenu_PrepareScratchClear:
                 lea     ((RAM_start+$7800)&$FFFFFF).l,a1
                 moveq   #0,d0
                 moveq   #bytesToLcnt($28),d1
 
-loc_AA98:
+SKCompMenu_ClearScratchAndPlayConfirm:
                 move.l  d0,(a1)+
-                dbf     d1,loc_AA98
+                dbf     d1,SKCompMenu_ClearScratchAndPlayConfirm
                 moveq   #signextendB(sfx_Starpost),d0
                 jmp     (Play_SFX).l
 ; ---------------------------------------------------------------------------
 
-loc_AAA6:
+SKCompMenu_HandleUpAndWrap:
                 moveq   #0,d2
                 move.b  (Competition_menu_selection).w,d1
                 lsr.w   #1,d0
-                bcc.s   loc_AABA
+                bcc.s   SKCompMenu_HandleDownAndWrap
                 moveq   #signextendB(sfx_Switch),d2
                 subq.b  #1,d1
-                bcc.s   loc_AACA
+                bcc.s   SKCompMenu_StoreChoiceAndPlaySwitch
                 moveq   #3,d1
-                bra.s   loc_AACA
+                bra.s   SKCompMenu_StoreChoiceAndPlaySwitch
 ; ---------------------------------------------------------------------------
 
-loc_AABA:
+SKCompMenu_HandleDownAndWrap:
                 lsr.w   #1,d0
-                bcc.s   loc_AACA
+                bcc.s   SKCompMenu_StoreChoiceAndPlaySwitch
                 moveq   #signextendB(sfx_Switch),d2
                 addq.b  #1,d1
                 cmpi.b  #3,d1
-                bls.s   loc_AACA
+                bls.s   SKCompMenu_StoreChoiceAndPlaySwitch
                 moveq   #0,d1
 
-loc_AACA:
+SKCompMenu_StoreChoiceAndPlaySwitch:
                 move.b  d1,(Competition_menu_selection).w
                 move.w  d2,d0
-                beq.s   loc_AAD8
+                beq.s   SKCompMenu_RepeatMenuFrame
                 jsr     (Play_SFX).l
 
-loc_AAD8:
-                bra.w   loc_A9E8
+SKCompMenu_RepeatMenuFrame:
+                bra.w   SKCompMenu_RunMenuAndCheckCancelFirst
 ; ---------------------------------------------------------------------------
 
-Obj_Competition_AADC:
+CompetitionMenu_UpdateSelectionPalette:
                 move.b  $2E(a0),d0
-                bmi.s   loc_AAFA
+                bmi.s   CompetitionMenu_DrawLabel
                 andi.w  #$9FFF,art_tile(a0)
                 move.w  #palette_line_1,d1
                 cmp.b   (Competition_menu_selection).w,d0
-                bne.s   loc_AAF6
+                bne.s   CompetitionMenu_ApplyLabelPalette
                 move.w  #palette_line_2,d1
 
-loc_AAF6:
+CompetitionMenu_ApplyLabelPalette:
                 or.w    d1,art_tile(a0)
 
-loc_AAFA:
+CompetitionMenu_DrawLabel:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-Obj_Competition_AB00:
+CompetitionMenu_UpdateItemsToggleCursor:
                 cmpi.b  #1,(Competition_menu_selection).w
-                bhi.s   locret_AB46
+                bhi.s   CompetitionMenu_ReturnFromItemsCursor
                 move.b  (Ctrl_1_pressed).w,d0
                 or.b    (Ctrl_2_pressed).w,d0
                 andi.w  #button_left_mask|button_right_mask,d0
-                beq.s   loc_AB26
+                beq.s   CompetitionMenu_SelectItemsCursorX
                 tst.b   (Competition_menu_items).w
                 seq     (Competition_menu_items).w
                 moveq   #signextendB(sfx_Switch),d0
                 jsr     (Play_SFX).l
 
-loc_AB26:
+CompetitionMenu_SelectItemsCursorX:
                 move.w  #$15C,d0
                 tst.b   (Competition_menu_items).w
-                beq.s   loc_AB34
+                beq.s   SKCompMenu_PositionAndBlinkItemsCursor
                 addi.w  #$20,d0
 
-loc_AB34:
+SKCompMenu_PositionAndBlinkItemsCursor:
                 move.w  d0,x_pos(a0)
                 btst    #3,(Level_frame_counter+1).w
-                beq.s   locret_AB46
+                beq.s   CompetitionMenu_ReturnFromItemsCursor
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_AB46:
+CompetitionMenu_ReturnFromItemsCursor:
                 rts
 ; ---------------------------------------------------------------------------
-ObjDat_AB48:
+CompetitionMenu_ActorRecords:
                 dc.w    7-1
-                dc.l    Obj_Competition_AADC
+                dc.l    CompetitionMenu_UpdateSelectionPalette
                 dc.w    $114,   $A0
                 dc.b    0,   0
-                dc.l    Obj_Competition_AADC
+                dc.l    CompetitionMenu_UpdateSelectionPalette
                 dc.w    $10C,   $C0
                 dc.b    1,   1
-                dc.l    Obj_Competition_AADC
+                dc.l    CompetitionMenu_UpdateSelectionPalette
                 dc.w    $108,   $E0
                 dc.b    2,   2
-                dc.l    Obj_Competition_AADC
+                dc.l    CompetitionMenu_UpdateSelectionPalette
                 dc.w    $13C,  $120
                 dc.b    3,   3
-                dc.l    Obj_Competition_AADC
+                dc.l    CompetitionMenu_UpdateSelectionPalette
                 dc.w    $164,   $B0
                 dc.b    4, $FF
-                dc.l    Obj_Competition_AADC
+                dc.l    CompetitionMenu_UpdateSelectionPalette
                 dc.w    $184,   $B0
                 dc.b    5, $FF
-                dc.l    Obj_Competition_AB00
+                dc.l    CompetitionMenu_UpdateItemsToggleCursor
                 dc.w    0,   $A8
                 dc.b    6, $FF
 ; ---------------------------------------------------------------------------

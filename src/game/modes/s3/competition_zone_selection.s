@@ -75,25 +75,25 @@ Competition_LevelSelect:
                 lea     (Target_palette).w,a1
                 moveq   #bytesToLcnt(Target_palette_line_2-Target_palette),d0
 
-loc_9B70:
+S3CompZones_CopyBackgroundPalette:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_9B70
+                dbf     d0,S3CompZones_CopyBackgroundPalette
                 lea     Pal_Competition2(pc),a0
                 moveq   #bytesToLcnt(Target_palette_end-Target_palette_line_2),d0
 
-loc_9B7C:
+S3CompZones_CopyPalettesAndChooseActors:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_9B7C
+                dbf     d0,S3CompZones_CopyPalettesAndChooseActors
                 lea     (Object_RAM).w,a0
                 lea     ObjDat_CompetitionMatchRace(pc),a1
                 tst.b   (Game_mode).w
-                bpl.s   loc_9B94
+                bpl.s   S3CompZones_ReadFixedActorCount
                 lea     ObjDat_CompetitionTimeAttack(pc),a1
 
-loc_9B94:
+S3CompZones_ReadFixedActorCount:
                 move.w  (a1)+,d0
 
-loc_9B96:
+S3CompZones_BuildActorsAndSeedAngles:
                 move.l  (a1)+,(a0)
                 move.l  #Map_CompetitionSelect,mappings(a0)
                 move.w  (a1),x_pos(a0)
@@ -106,21 +106,21 @@ loc_9B96:
                 move.b  (a1)+,mapping_frame(a0)
                 move.b  (a1)+,$2E(a0)
                 lea     next_object(a0),a0
-                dbf     d0,loc_9B96
+                dbf     d0,S3CompZones_BuildActorsAndSeedAngles
                 moveq   #0,d0
                 move.b  (P1_character).w,d0
                 mulu.w  #$55,d0
                 addi.b  #$40,d0
                 move.b  d0,(Reserved_object_3+objoff_2E).w
                 tst.b   (Game_mode).w
-                bmi.s   loc_9BF4
+                bmi.s   S3CompZones_DrawActorsAndAddPreview
                 moveq   #0,d0
                 move.b  (P2_character).w,d0
                 mulu.w  #$55,d0
                 addi.b  #$40,d0
                 move.b  d0,(Dynamic_object_RAM+(object_size*4)+objoff_2E).w
 
-loc_9BF4:
+S3CompZones_DrawActorsAndAddPreview:
                 jsr     (Init_SpriteTable).l
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
@@ -128,7 +128,7 @@ loc_9BF4:
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
                 lea     (Dynamic_object_RAM+(object_size*9)).w,a0
-                move.l  #loc_9DC2,(a0)
+                move.l  #S3CompZones_ProjectPreviewAndSetPalette,(a0)
                 move.l  #Map_CompetitionSelect,mappings(a0)
                 addi.w  #make_art_tile(ArtTile_Competition_LevSel,2,1),art_tile(a0)
                 move.w  #$B0,x_pos(a0)
@@ -141,7 +141,7 @@ loc_9BF4:
                 move.w  d0,(VDP_control_port).l
                 jsr     (Pal_FadeFromBlack).l
 
-loc_9C5C:
+S3CompZones_RunMenuAndCheckExitFirst:
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 addq.w  #1,(Level_frame_counter).w
@@ -149,108 +149,108 @@ loc_9C5C:
                 jsr     Menu_UpdateBothCharacterDepthGroups(pc)
                 jsr     (Render_Sprites).l
                 move.b  (Events_bg+$12).w,d0
-                beq.s   loc_9C88
+                beq.s   S3CompZones_MaskActiveReadyBytes
                 move.b  d0,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_9C88:
+S3CompZones_MaskActiveReadyBytes:
                 move.w  (Events_bg+$10).w,d0
                 tst.b   (Not_ghost_flag).w
-                bne.s   loc_9C94
+                bne.s   S3CompZones_ChooseZoneOrCharacterView
                 lsr.w   #8,d0
 
-loc_9C94:
+S3CompZones_ChooseZoneOrCharacterView:
                 tst.w   d0
-                beq.s   loc_9CB4
+                beq.s   S3CompZones_SlideTowardZoneView
                 move.w  (H_scroll_buffer).w,d0
-                beq.s   loc_9C5C
+                beq.s   S3CompZones_RunMenuAndCheckExitFirst
                 cmpi.w  #-$58,d0
-                bne.s   loc_9CAC
-                move.l  #loc_9E2E,(_unkEF44_1).w
+                bne.s   S3CompZones_SlideTowardCharacterView
+                move.l  #S3CompZones_ClearZoneColumnsOnVBlank,(_unkEF44_1).w
 
-loc_9CAC:
+S3CompZones_SlideTowardCharacterView:
                 addq.w  #8,d0
                 move.w  d0,(H_scroll_buffer).w
-                bra.s   loc_9C5C
+                bra.s   S3CompZones_RunMenuAndCheckExitFirst
 ; ---------------------------------------------------------------------------
 
-loc_9CB4:
+S3CompZones_SlideTowardZoneView:
                 cmpi.w  #-$58,(H_scroll_buffer).w
-                beq.s   loc_9CC2
+                beq.s   S3CompZones_SelectScrollOrReadInput
                 subq.w  #8,(H_scroll_buffer).w
-                bra.s   loc_9C5C
+                bra.s   S3CompZones_RunMenuAndCheckExitFirst
 ; ---------------------------------------------------------------------------
 
-loc_9CC2:
+S3CompZones_SelectScrollOrReadInput:
                 moveq   #8,d0
                 move.w  (Events_bg+$14).w,d1
-                beq.s   loc_9CD8
-                bpl.s   loc_9CCE
+                beq.s   S3CompZones_ReadActiveControllers
+                bpl.s   S3CompZones_ScrollAndConsumeDelta
                 neg.w   d0
 
-loc_9CCE:
+S3CompZones_ScrollAndConsumeDelta:
                 add.w   d0,(V_scroll_value).w
                 sub.w   d0,(Events_bg+$14).w
-                bra.s   loc_9C5C
+                bra.s   S3CompZones_RunMenuAndCheckExitFirst
 ; ---------------------------------------------------------------------------
 
-loc_9CD8:
+S3CompZones_ReadActiveControllers:
                 move.b  (Ctrl_1_pressed).w,d1
                 moveq   #0,d2
                 tst.b   (Not_ghost_flag).w
-                beq.s   loc_9CE8
+                beq.s   S3CompZones_CancelP2ReadyOnB
                 move.b  (Ctrl_2_pressed).w,d2
 
-loc_9CE8:
+S3CompZones_CancelP2ReadyOnB:
                 btst    #button_B,d2
-                beq.s   loc_9CF6
+                beq.s   S3CompZones_CancelP1ReadyOnB
                 sf      (Dynamic_object_RAM+(object_size*4)+objoff_2F).w
                 st      (Events_bg+$11).w
 
-loc_9CF6:
+S3CompZones_CancelP1ReadyOnB:
                 btst    #button_B,d1
-                beq.s   loc_9D04
+                beq.s   S3CompZones_HandleDownAndScroll
                 sf      (Reserved_object_3+objoff_2F).w
                 st      (Events_bg+$10).w
 
-loc_9D04:
+S3CompZones_HandleDownAndScroll:
                 or.b    d2,d1
                 move.b  d1,d2
                 andi.w  #3,d2
-                beq.s   loc_9D5C
+                beq.s   S3CompZones_ConfirmSelectedZone
                 lea     (Competition_menu_zone).w,a0
                 lsr.w   #1,d2
-                bcs.s   loc_9D3C
+                bcs.s   S3CompZones_HandleUpAndScroll
                 cmpi.b  #4,(a0)
-                beq.s   loc_9D5C
+                beq.s   S3CompZones_ConfirmSelectedZone
                 moveq   #signextendB(sfx_Switch),d0
                 jsr     (Play_SFX).l
                 addq.b  #1,(a0)
                 cmpi.b  #4,(a0)
-                beq.s   loc_9D5C
+                beq.s   S3CompZones_ConfirmSelectedZone
                 cmpi.b  #1,(a0)
-                beq.s   loc_9D5C
+                beq.s   S3CompZones_ConfirmSelectedZone
                 move.w  #$48,(Events_bg+$14).w
-                bra.w   loc_9C5C
+                bra.w   S3CompZones_RunMenuAndCheckExitFirst
 ; ---------------------------------------------------------------------------
 
-loc_9D3C:
+S3CompZones_HandleUpAndScroll:
                 tst.b   (a0)
-                beq.s   loc_9D5C
+                beq.s   S3CompZones_ConfirmSelectedZone
                 moveq   #signextendB(sfx_Switch),d0
                 jsr     (Play_SFX).l
                 subq.b  #1,(a0)
-                beq.s   loc_9D5C
+                beq.s   S3CompZones_ConfirmSelectedZone
                 cmpi.b  #3,(a0)
-                beq.s   loc_9D5C
+                beq.s   S3CompZones_ConfirmSelectedZone
                 move.w  #-$48,(Events_bg+$14).w
-                bra.w   loc_9C5C
+                bra.w   S3CompZones_RunMenuAndCheckExitFirst
 ; ---------------------------------------------------------------------------
 
-loc_9D5C:
+S3CompZones_ConfirmSelectedZone:
                 andi.w  #$E0,d1
-                beq.w   loc_9C5C
+                beq.w   S3CompZones_RunMenuAndCheckExitFirst
                 moveq   #signextendB(sfx_Starpost),d0
                 jsr     (Play_SFX).l
                 moveq   #0,d0
@@ -272,9 +272,9 @@ Comp_ZoneList:
 
 Obj_Competition_ZoneSelect:
                 cmpi.w  #-$58,(H_scroll_buffer).w
-                bne.s   locret_9DC0
+                bne.s   S3CompZones_SkipCursorDraw
                 tst.w   (Events_bg+$14).w
-                bne.s   locret_9DC0
+                bne.s   S3CompZones_SkipCursorDraw
                 moveq   #0,d0
                 move.b  (Competition_menu_zone).w,d0
                 mulu.w  #$48,d0
@@ -282,19 +282,19 @@ Obj_Competition_ZoneSelect:
                 sub.w   (V_scroll_value).w,d0
                 move.w  d0,y_pos(a0)
                 btst    #3,(Level_frame_counter+1).w
-                beq.s   locret_9DC0
+                beq.s   S3CompZones_SkipCursorDraw
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_9DC0:
+S3CompZones_SkipCursorDraw:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_9DC2:
+S3CompZones_ProjectPreviewAndSetPalette:
                 cmpi.w  #-$58,(H_scroll_buffer).w
-                bne.s   loc_9E06
+                bne.s   S3CompZones_ChooseDefaultPreviewPalette
                 tst.w   (Events_bg+$14).w
-                bne.s   loc_9E06
+                bne.s   S3CompZones_ChooseDefaultPreviewPalette
                 moveq   #0,d0
                 move.b  (Competition_menu_zone).w,d0
                 mulu.w  #$48,d0
@@ -310,19 +310,19 @@ loc_9DC2:
                 lsl.w   #5,d0
                 lea     Pal_Competition4(pc),a1
                 adda.w  d0,a1
-                bra.s   loc_9E0A
+                bra.s   S3CompZones_PreparePreviewPaletteCopy
 ; ---------------------------------------------------------------------------
 
-loc_9E06:
+S3CompZones_ChooseDefaultPreviewPalette:
                 lea     Pal_Competition3(pc),a1
 
-loc_9E0A:
+S3CompZones_PreparePreviewPaletteCopy:
                 lea     (Normal_palette_line_3).w,a2
                 moveq   #bytesToLcnt(Normal_palette_line_4-Normal_palette_line_3),d0
 
-loc_9E10:
+S3CompZones_CopyNormalPreviewPalette:
                 move.l  (a1)+,(a2)+
-                dbf     d0,loc_9E10
+                dbf     d0,S3CompZones_CopyNormalPreviewPalette
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -332,21 +332,21 @@ S3Comp_GetZoneWindowRow:
                 moveq   #0,d0
                 move.b  (Competition_menu_zone).w,d0
                 subq.w  #1,d0
-                bcc.s   loc_9E24
+                bcc.s   S3CompZones_ClampVisibleRowTo2
                 moveq   #0,d0
 
-loc_9E24:
+S3CompZones_ClampVisibleRowTo2:
                 cmpi.w  #2,d0
-                bls.s   locret_9E2C
+                bls.s   S3CompZones_VisibleRowReturn
                 moveq   #2,d0
 
-locret_9E2C:
+S3CompZones_VisibleRowReturn:
                 rts
 ; End of function S3Comp_GetZoneWindowRow
 
 ; ---------------------------------------------------------------------------
 
-loc_9E2E:
+S3CompZones_ClearZoneColumnsOnVBlank:
                 move.l  #locret_952E,(_unkEF44_1).w
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table+$204,VRAM,WRITE),d0
                 lea     (VDP_data_port).l,a6
@@ -354,15 +354,15 @@ loc_9E2E:
                 move.w  #$8F80,VDP_control_port-VDP_data_port(a6)
                 moveq   #9-1,d2
 
-loc_9E50:
+S3CompZones_BeginBlankColumn:
                 moveq   #$13-1,d3
                 move.l  d0,VDP_control_port-VDP_data_port(a6)
 
-loc_9E56:
+S3CompZones_WriteColumnAndClearHoles:
                 move.l  d1,(a6)
-                dbf     d3,loc_9E56
+                dbf     d3,S3CompZones_WriteColumnAndClearHoles
                 addi.l  #2<<16,d0
-                dbf     d2,loc_9E50
+                dbf     d2,S3CompZones_BeginBlankColumn
                 move.w  #$8F02,VDP_control_port-VDP_data_port(a6)
 
 ; =============== S U B R O U T I N E =======================================
@@ -375,7 +375,7 @@ S3Comp_ClearCharacterSelectAreas:
                 addi.w  #VRAM_Plane_A_Name_Table+$004,d0
                 move.w  d0,d7
                 tst.b   (Game_mode).w
-                bmi.s   loc_9E94
+                bmi.s   S3CompZones_ClearTimeAttackCharacterHole
                 jsr     Menu_ClearNineByEightTileArea(pc)
                 move.w  d7,d0
                 addi.w  #$600,d0
@@ -385,7 +385,7 @@ S3Comp_ClearCharacterSelectAreas:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_9E94:
+S3CompZones_ClearTimeAttackCharacterHole:
                 addi.w  #$300,d0
                 jmp     Menu_ClearNineByEightTileArea(pc)
 ; End of function S3Comp_ClearCharacterSelectAreas
@@ -417,14 +417,14 @@ S3Comp_DrawPackedTime:
                 lsl.l   #8,d6
                 moveq   #2,d3
 
-loc_9ED2:
+S3CompZones_ConvertTimeToDecimalPairs:
                 rol.l   #8,d6
                 moveq   #0,d0
                 move.b  d6,d0
                 jsr     (LevResults_GetDecimalScore).l
                 move.b  d1,d5
                 lsl.l   #8,d5
-                dbf     d3,loc_9ED2
+                dbf     d3,S3CompZones_ConvertTimeToDecimalPairs
                 lea     (Plane_buffer).w,a1
                 lea     MapUnc_CompetitionNumbers(pc),a2
                 moveq   #0,d0
@@ -441,7 +441,7 @@ loc_9ED2:
                 bsr.s   S3Comp_AppendTimeDigit
                 lea     (Plane_buffer).w,a1
 
-loc_9F0A:
+S3CompZones_Upload8By2TimeTiles:
                 move.w  d7,d0
                 swap    d0
                 clr.w   d0

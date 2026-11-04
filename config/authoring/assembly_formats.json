@@ -117167,16 +117167,16 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 316
       },
-      "declarations_sha256": "55a9f65030d8b62e8a6fa6957ac04cd7c22157cd65f0a8cacfa6b769a79ed098",
+      "declarations_sha256": "2616331296d79abec8b8a33be106a6fb523e2db4e3283a466683cfc387d2a49b",
       "labels": {
         "Map_CompetitionObject_": 0,
-        "Frame_2098CE": 14,
-        "Frame_209906": 70,
-        "Frame_20993E": 126,
-        "Frame_20997C": 188,
-        "Frame_209996": 214,
-        "Frame_20999E": 222,
-        "Frame_2099A6": 230
+        "CompMenu_PlayerSelectionRaceMap": 14,
+        "CompMenu_DirectZoneRaceMap": 70,
+        "CompMenu_TimeAttackMap": 126,
+        "CompetitionMenuMapping_ExitOptionPieces": 188,
+        "CompMenu_FirstItemToggleLabelMap": 214,
+        "CompMenu_SecondItemToggleLabelMap": 222,
+        "CompMenu_ItemToggleCursorMap": 230
       },
       "external_symbols": [],
       "blocks": [
@@ -117184,49 +117184,49 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2098CE",
+          "target": "CompMenu_PlayerSelectionRaceMap",
           "base": "Map_CompetitionObject_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_209906",
+          "target": "CompMenu_DirectZoneRaceMap",
           "base": "Map_CompetitionObject_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_20993E",
+          "target": "CompMenu_TimeAttackMap",
           "base": "Map_CompetitionObject_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_20997C",
+          "target": "CompetitionMenuMapping_ExitOptionPieces",
           "base": "Map_CompetitionObject_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_209996",
+          "target": "CompMenu_FirstItemToggleLabelMap",
           "base": "Map_CompetitionObject_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_20999E",
+          "target": "CompMenu_SecondItemToggleLabelMap",
           "base": "Map_CompetitionObject_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2099A6",
+          "target": "CompMenu_ItemToggleCursorMap",
           "base": "Map_CompetitionObject_"
         },
         {
@@ -117275,12 +117275,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 66
       },
-      "declarations_sha256": "463575008de875ebef1dbb779096c8ebceebed82f16aa3240f83d4449450e7b6",
+      "declarations_sha256": "1bd1f771aec69d9ad2bad3d9d66b3d31d3f6e0eff0bad6c43707b16dc617c151",
       "labels": {
         "Map_CompetitionPlayerSprite_": 0,
-        "Frame_3A1AF4": 6,
-        "Frame_3A1B02": 20,
-        "Frame_3A1B1C": 46
+        "CompPortrait_Character0Map": 6,
+        "CompetitionPortrait_CharacterIdOnePieces": 20,
+        "CompetitionPortrait_CharacterIdTwoPieces": 46
       },
       "external_symbols": [],
       "blocks": [
@@ -117288,21 +117288,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3A1AF4",
+          "target": "CompPortrait_Character0Map",
           "base": "Map_CompetitionPlayerSprite_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3A1B02",
+          "target": "CompetitionPortrait_CharacterIdOnePieces",
           "base": "Map_CompetitionPlayerSprite_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3A1B1C",
+          "target": "CompetitionPortrait_CharacterIdTwoPieces",
           "base": "Map_CompetitionPlayerSprite_"
         },
         {
@@ -117331,25 +117331,25 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 688
       },
-      "declarations_sha256": "c256a1781249cf44e7a4374765012b78f1ac200414406949c563f8619e001f5e",
+      "declarations_sha256": "7ec90273d6384c8d187cd7b85836d6a7d39ee0b4d16ebc309aa9365b58b6c800",
       "labels": {
         "Map_CompetitionSelect_": 0,
-        "Frame_20A704": 32,
-        "Frame_20A74E": 106,
-        "Frame_20A798": 180,
-        "Frame_20A824": 320,
-        "Frame_20A832": 334,
-        "Frame_20A840": 348,
-        "Frame_20A84E": 362,
-        "Frame_20A868": 388,
-        "Frame_20A882": 414,
-        "Frame_20A89C": 440,
-        "Frame_20A8B6": 466,
-        "Frame_20A8D0": 492,
-        "Frame_20A8E4": 512,
-        "Frame_20A8F8": 532,
-        "Frame_20A90C": 552,
-        "Frame_20A950": 620
+        "CompSelect_BorderPhase1Map": 32,
+        "CompSelect_BorderPhase2Map": 106,
+        "CompetitionSelection_ZoneListFramePieces": 180,
+        "CompSelect_P1HeaderMap": 320,
+        "CompSelect_P2HeaderMap": 334,
+        "CompSelect_P2PressStartMap": 348,
+        "CompSelect_ZonePreviewMap1": 362,
+        "CompSelect_ZonePreviewMap2": 388,
+        "CompSelect_ZonePreviewMap3": 414,
+        "CompSelect_ZonePreviewMap4": 440,
+        "CompSelect_ZonePreviewMap5": 466,
+        "CompSelect_WinnerLabelMap": 492,
+        "CompSelect_LoserLabelMap": 512,
+        "CompSelect_TieLabelMap": 532,
+        "CompSelect_CompactBorderMap1": 552,
+        "CompSelect_CompactBorderMap2": 620
       },
       "external_symbols": [],
       "blocks": [
@@ -117357,112 +117357,112 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_20A704",
+          "target": "CompSelect_BorderPhase1Map",
           "base": "Map_CompetitionSelect_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_20A74E",
+          "target": "CompSelect_BorderPhase2Map",
           "base": "Map_CompetitionSelect_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_20A798",
+          "target": "CompetitionSelection_ZoneListFramePieces",
           "base": "Map_CompetitionSelect_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_20A824",
+          "target": "CompSelect_P1HeaderMap",
           "base": "Map_CompetitionSelect_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_20A832",
+          "target": "CompSelect_P2HeaderMap",
           "base": "Map_CompetitionSelect_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_20A840",
+          "target": "CompSelect_P2PressStartMap",
           "base": "Map_CompetitionSelect_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_20A84E",
+          "target": "CompSelect_ZonePreviewMap1",
           "base": "Map_CompetitionSelect_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_20A868",
+          "target": "CompSelect_ZonePreviewMap2",
           "base": "Map_CompetitionSelect_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_20A882",
+          "target": "CompSelect_ZonePreviewMap3",
           "base": "Map_CompetitionSelect_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_20A89C",
+          "target": "CompSelect_ZonePreviewMap4",
           "base": "Map_CompetitionSelect_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_20A8B6",
+          "target": "CompSelect_ZonePreviewMap5",
           "base": "Map_CompetitionSelect_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_20A8D0",
+          "target": "CompSelect_WinnerLabelMap",
           "base": "Map_CompetitionSelect_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_20A8E4",
+          "target": "CompSelect_LoserLabelMap",
           "base": "Map_CompetitionSelect_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_20A8F8",
+          "target": "CompSelect_TieLabelMap",
           "base": "Map_CompetitionSelect_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_20A90C",
+          "target": "CompSelect_CompactBorderMap1",
           "base": "Map_CompetitionSelect_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_20A950",
+          "target": "CompSelect_CompactBorderMap2",
           "base": "Map_CompetitionSelect_"
         },
         {
