@@ -29,7 +29,7 @@ S3Jawz_ResolveContact:
                 beq.s   S3Jawz_StorePlayerAndDefeat
                 cmpi.b  #9,anim(a1)
                 beq.s   S3Jawz_StorePlayerAndDefeat
-                lea     (ChildObjDat_49BF4).l,a2
+                lea     (HCZBossS3_ExplosionChild).l,a2
                 jsr     CreateChild1_Normal(pc)
                 jmp     Go_Delete_Sprite(pc)
 ; ---------------------------------------------------------------------------

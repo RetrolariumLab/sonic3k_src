@@ -27,7 +27,7 @@ SKJawz_ResolveContact:
                 movea.w HCZJawzSK_ThreeContactPlayerWordHandles-2(pc,d0.w),a1
                 jsr     (Check_PlayerAttack).l
                 bne.s   SKJawz_StorePlayerAndDefeat
-                lea     (ChildObjDat_6BDB2).l,a2
+                lea     (HCZBossSK_ExplosionChild).l,a2
                 jsr     CreateChild1_Normal(pc)
                 jmp     Go_Delete_Sprite(pc)
 ; ---------------------------------------------------------------------------

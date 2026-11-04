@@ -11,7 +11,7 @@ ObjDat_HCZMiniboss_Rockets:
                 dc.w    make_art_tile(ArtTile_HCZMiniboss,1,1)
                 dc.w    $200
                 dc.b    $10, $10,   1, $8B
-word_6AD08:
+HCZMiniSK_RocketTipAttributes:
                 dc.w    make_art_tile(ArtTile_HCZMiniboss,0,1)
                 dc.w    $280
                 dc.b    $10, $10, $15,   0
@@ -19,27 +19,27 @@ ObjDat2_HCZMiniboss_Engine:
                 dc.w    make_art_tile(ArtTile_HCZMiniboss,0,1)
                 dc.w    $280
                 dc.b    $10, $10, $15, $92
-ObjDat3_6AD18:
+HCZMiniSK_VortexAttributes:
                 dc.l    Map_HCZMiniboss
                 dc.w    make_art_tile(ArtTile_HCZMiniboss,1,1)
                 dc.w    $280
                 dc.b    $10, $28, $16,   0
-ObjDat3_6AD24:
+HCZMiniSK_ParticleAttributes:
                 dc.l    Map_Bubbler
                 dc.w    make_art_tile(ArtTile_Bubbles,1,1)
                 dc.w    $280
                 dc.b    $10, $10,   0,   0
-ObjSlot_6AD30:
+HCZMiniSK_SplashArtSlots:
                 dc.w    3-1
                 dc.w    make_art_tile(ArtTile_HCZMinibossSplash,0,1)
                 dc.w    $10,     0
                 dc.l    Map_HCZMinibossSplash
                 dc.w    $80
                 dc.b    $10, $10,   0,   0
-word_6AD42:
+HCZMiniSK_BossFragmentAttributes:
                 dc.w    $280
                 dc.b    $C,  $C,   0,   0
-word_6AD48:
+HCZMiniSK_VortexDebrisAttributes:
                 dc.w    $280
                 dc.b    $14, $24,   0,   0
 Child1_HCZMiniboss_RocketsEngine:
@@ -54,60 +54,60 @@ Child1_HCZMiniboss_RocketsEngine:
                 dc.b    $18,-$18
                 dc.l    Obj_HCZMiniboss_Engine
                 dc.b    0, $24
-ChildObjDat_6AD6E:
+HCZMiniSK_VortexChild:
                 dc.w    1-1
-                dc.l    loc_6A51E
+                dc.l    HCZMiniSK_VortexDispatchAndDraw
                 dc.b    0,   0
-ChildObjDat_6AD76:
+HCZMiniSK_RocketTipChild:
                 dc.w    1-1
-                dc.l    loc_6A460
+                dc.l    HCZMiniSK_InitRocketTip
                 dc.b    0,   0
-ChildObjDat_6AD7E:
+HCZMiniSK_SurfaceSplashChildren:
                 dc.w    3-1
-                dc.l    loc_6A4C8
+                dc.l    HCZMiniSK_InitSlottedWaterSplash
                 dc.b    0,   0
-                dc.l    loc_6A4C8
+                dc.l    HCZMiniSK_InitSlottedWaterSplash
                 dc.b    -$10,   0
-                dc.l    loc_6A4C8
+                dc.l    HCZMiniSK_InitSlottedWaterSplash
                 dc.b    $10,   0
-ChildObjDat_6AD92:
+HCZMiniSK_VortexOrbitChildren:
                 dc.w    $1E-1
-                dc.l    loc_6A65C
-ChildObjDat_6AD98:
+                dc.l    HCZMiniSK_InitRandomOrbitParticle
+HCZMiniSK_WaterExitParticleChild:
                 dc.w    1-1
-                dc.l    loc_6A710
-ChildObjDat_6AD9E:
+                dc.l    HCZMiniSK_InitWaterExitParticle
+HCZMiniSK_ExitTransportSoloChild:
                 dc.w    1-1
-                dc.l    loc_6A7C4
-ChildObjDat_6ADA4:
+                dc.l    HCZMiniSK_TransportWaitForP1Underwater
+HCZMiniSK_ExitTransportPairChildren:
                 dc.w    2-1
-                dc.l    loc_6A7C4
-ChildObjDat_6ADAA:
+                dc.l    HCZMiniSK_TransportWaitForP1Underwater
+HCZMiniSK_BossFragmentChildren:
                 dc.w    4-1
-                dc.l    loc_6A8C6
+                dc.l    HCZMiniSK_InitBossFragmentFlicker
                 dc.b    -$C, -$C
-                dc.l    loc_6A8C6
+                dc.l    HCZMiniSK_InitBossFragmentFlicker
                 dc.b    -$C,  $C
-                dc.l    loc_6A8C6
+                dc.l    HCZMiniSK_InitBossFragmentFlicker
                 dc.b    $C, -$C
-                dc.l    loc_6A8C6
+                dc.l    HCZMiniSK_InitBossFragmentFlicker
                 dc.b    $C,  $C
-ChildObjDat_6ADC4:
+HCZMiniSK_VortexDebrisChildren:
                 dc.w    5-1
-                dc.l    loc_6A8EE
+                dc.l    HCZMiniSK_InitFallingVortexDebris
                 dc.b    0,-$24
-                dc.l    loc_6A8EE
+                dc.l    HCZMiniSK_InitFallingVortexDebris
                 dc.b    -8,   0
-                dc.l    loc_6A8EE
+                dc.l    HCZMiniSK_InitFallingVortexDebris
                 dc.b    8,   0
-                dc.l    loc_6A8EE
+                dc.l    HCZMiniSK_InitFallingVortexDebris
                 dc.b    -$C, $30
-                dc.l    loc_6A8EE
+                dc.l    HCZMiniSK_InitFallingVortexDebris
                 dc.b    $C, $30
 DPLCPtr_HCZMinibossSplash:
                 dc.l    ArtUnc_DashDust
                 dc.l    DPLC_HCZMinibossSplash
-byte_6ADEC:
+HCZMiniSK_VortexAccelerationAnim:
                 dc.b    $16,   7
                 dc.b    $17,   7
                 dc.b    $18,   7
@@ -127,9 +127,9 @@ byte_6ADEC:
                 dc.b    $17,   2
                 dc.b    $18,   2
                 dc.b    $F4
-byte_6AE11:
+HCZMiniSK_VortexActiveAnim:
                 dc.b    1, $16, $17, $18, $FC
-byte_6AE16:
+HCZMiniSK_VortexDecelerationAnim:
                 dc.b    $16,   2
                 dc.b    $17,   2
                 dc.b    $18,   2
@@ -149,15 +149,15 @@ byte_6AE16:
                 dc.b    $17,   7
                 dc.b    $18,   7
                 dc.b    $F4
-byte_6AE3B:
+HCZMiniSK_SplashDPLCAnimation:
                 dc.b    3,   0,   1,   2,   3,   4,   5,   6,   7,   8, $F4
-byte_6AE46:
+HCZMiniSK_ParticleAnimBase0:
                 dc.b    0,   0, $16, $FC
-byte_6AE4A:
+HCZMiniSK_ParticleAnimBase1:
                 dc.b    0,   1, $16, $FC
-byte_6AE4E:
+HCZMiniSK_ParticleAnimBase2:
                 dc.b    0,   2, $16, $FC
-byte_6AE52:
+HCZMiniSK_ParticleAnimBase3:
                 dc.b    0,   3, $16, $FC
                 even
 Pal_HCZMiniboss:
@@ -167,9 +167,9 @@ Pal_HCZMinibossWater:
                 binclude "data/Levels/HCZ/Palettes/Miniboss Water.bin"
                 even
 ; ---------------------------------------------------------------------------
-word_6AE96:
+HCZMiniSK_EndBossDefaultCameraBounds:
                 dc.w    $438,  $838, $3F00, $4100
                 dc.w    $738,  $738, $4000, $4050
-word_6AEA6:
+HCZMiniSK_EndBossKnucklesCameraBounds:
                 dc.w    0,  $3B8, $44E0, $4640
                 dc.w    $2B8,  $2B8, $4540, $4590

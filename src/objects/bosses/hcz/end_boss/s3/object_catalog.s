@@ -7,131 +7,132 @@ ObjDat_HCZEndBoss:
                 dc.w    make_art_tile(ArtTile_HCZEndBoss,1,1)
                 dc.w    $100
                 dc.b    $2C, $1C,   0,   6
-word_49B6E:
+HCZBossS3_FixedPlateAttributes:
                 dc.w    $200
                 dc.b    $C,   4,   1,   0
-word_49B74:
+HCZEndBossS3_Fan_PartialAttributeRecord:
                 dc.w    $200
                 dc.b    $1C,   4,   2,   0
-word_49B7A:
+HCZEndBossS3_Bomb_PartialAttributeRecord:
                 dc.w    $200
                 dc.b    $1C,   4,   6,   0
-word_49B80:
+HCZBossS3_ColumnAttributes:
                 dc.w    make_art_tile(ArtTile_HCZEndBoss,0,1)
                 dc.w    $80
                 dc.b    $14,  $C, $17,   0
-word_49B88:
+HCZBossS3_VortexAttributes:
                 dc.w    $80
                 dc.b    $14, $30,  $D,   0
-word_49B8E:
+HCZBossS3_SurfaceEdgeAttributes:
                 dc.w    0
                 dc.b    $10,   4, $1A,   0
-word_49B94:
+HCZBossS3_BombSplashAttributes:
                 dc.w    make_art_tile(ArtTile_HCZEndBoss,0,1)
                 dc.w    $80
                 dc.b    $C,   8, $18,   0
-ObjDat3_49B9C:
+HCZBossS3_GeyserLayerAttributes:
                 dc.l    Map_HCZEndBoss
                 dc.w    make_art_tile(ArtTile_HCZEndBoss,0,1)
                 dc.w    $100
                 dc.b    $C, $10,   8,   0
-ObjDat3_49BA8:
+HCZBossS3_ExplosionAttributes:
                 dc.l    Map_Explosion
                 dc.w    make_art_tile(ArtTile_Explosion,0,1)
                 dc.w    $80
                 dc.b    $C,  $C,   0, $8B
-ObjDat3_49BB4:
+HCZEndBossS3_Bubble_FullAttributeRecord:
                 dc.l    Map_Bubbler
                 dc.w    make_art_tile(ArtTile_Bubbles,0,1)
                 dc.w    $280
                 dc.b    $10, $10,   0,   0
-ObjDat3_49BC0:
+HCZBossS3_ExitGeyserAttributes:
                 dc.l    Map_HCZWaterWall
                 dc.w    make_art_tile(ArtTile_HCZCutsceneGeyser,2,0)
                 dc.w    $280
                 dc.b    $20, $60,   1,   0
-ChildObjDat_49BCC:
+HCZBossS3_BodyAttachmentChildren:
                 dc.w    5-1
-                dc.l    loc_493CE
+                dc.l    HCZBossS3_BombDispatchAndDraw
                 dc.b    $23, $12
-                dc.l    loc_493CE
+                dc.l    HCZBossS3_BombDispatchAndDraw
                 dc.b    $1B,  $A
-                dc.l    loc_493CE
+                dc.l    HCZBossS3_BombDispatchAndDraw
                 dc.b    $13,  $A
-                dc.l    loc_49566
+                dc.l    HCZBossS3_InitFixedPlate
                 dc.b    0, $1C
-                dc.l    loc_48FB2
+                dc.l    HCZBossS3_FanDispatchFollowAndDraw
                 dc.b    0, $24
-ChildObjDat_49BEC:
+HCZBossS3_ReplacementBombChild:
                 dc.w    1-1
-                dc.l    loc_493CE
+                dc.l    HCZBossS3_BombDispatchAndDraw
                 dc.b    $13,  $A
-ChildObjDat_49BF4:
+; The Jawz enemy also uses this child record
+HCZBossS3_ExplosionChild:
                 dc.w    1-1
-                dc.l    loc_49586
+                dc.l    HCZBossS3_InitExplosion
                 dc.b    0,   0
-ChildObjDat_49BFC:
+HCZEndBossS3_Fan_OneNormalColumnRecord:
                 dc.w    1-1
-                dc.l    loc_49078
+                dc.l    HCZBossS3_ColumnDispatchSolidAndDraw
                 dc.b    0,   0
-ChildObjDat_49C04:
+HCZBossS3_ColumnVortexChild:
                 dc.w    1-1
-                dc.l    loc_491E8
+                dc.l    HCZBossS3_VortexDispatchAndDraw
                 dc.b    0,   0
-ChildObjDat_49C0C:
+HCZEndBossS3_Surface_TwoNormalEdgeRecord:
                 dc.w    2-1
-                dc.l    loc_49260
+                dc.l    HCZBossS3_InitSurfaceEdge
                 dc.b    -4,   0
-                dc.l    loc_49260
+                dc.l    HCZBossS3_InitSurfaceEdge
                 dc.b    4,   0
-ChildObjDat_49C1A:
+HCZBossS3_BombSplashChild:
                 dc.w    1-1
-                dc.l    loc_492AC
+                dc.l    HCZBossS3_InitBombSplashAtWater
                 dc.b    0,   0
-ChildObjDat_49C22:
+HCZBossS3_BombGeyserChildren:
                 dc.w    5-1
-                dc.l    loc_492CE
-ChildObjDat_49C28:
+                dc.l    HCZBossS3_InitGeyserLayerAndEdges
+HCZBossS3_ColumnBubbleChildren:
                 dc.w    $14-1
-                dc.l    loc_49316
-ChildObjDat_49C2E:
+                dc.l    HCZBossS3_InitRandomColumnBubble
+HCZEndBossS3_Root_OneNormalShipTwoRecord:
                 dc.w    1-1
                 dc.l    Obj_RobotnikShip2
                 dc.b    0,  $C
-ChildObjDat_49C36:
+HCZBossS3_ExitCoordinatorChild:
                 dc.w    1-1
-                dc.l    loc_495C6
-byte_49C3C:
+                dc.l    HCZBossS3_ExitQueueGeyserArt
+HCZEndBossS3_Fan_AcceleratingRawStream:
                 dc.b    7,   8,   2,   3,   4,   5, $FC
-byte_49C43:
+HCZEndBossS3_Fan_UniformActiveRawStream:
                 dc.b    0,   2,   3,   4,   5, $FC
-byte_49C49:
+HCZEndBossS3_Fan_DeceleratingRawStream:
                 dc.b    7,   2,   3,   4,   5, $FC
-byte_49C4F:
+HCZBossS3_BombDetonationAnim:
                 dc.b    5,   8,   6,   7, $FC
-byte_49C54:
+HCZBossS3_ColumnBuildAnim:
                 dc.b    3, $17, $17, $22, $16, $21, $15, $20, $F4
-byte_49C5D:
+HCZBossS3_ColumnTravelAnim:
                 dc.b    3, $15, $20, $FC
-byte_49C61:
+HCZBossS3_VortexHeight0Anim:
                 dc.b    3,  $D,  $F, $11, $FC
-byte_49C66:
+HCZBossS3_VortexHeight1Anim:
                 dc.b    3, $24, $25, $26, $FC
-byte_49C6B:
+HCZBossS3_VortexHeight2Anim:
                 dc.b    3, $27, $28, $29, $FC
-byte_49C70:
+HCZBossS3_VortexHeight3Anim:
                 dc.b    3, $2A, $2B, $2C, $FC
-byte_49C75:
+HCZBossS3_VortexHeight4And5Anim:
                 dc.b    3, $2D, $2E, $2F, $FC
-byte_49C7A:
+HCZBossS3_SurfaceEdgeAnim:
                 dc.b    1, $1A, $23, $FC
-byte_49C7E:
+HCZBossS3_BombSplashAnim:
                 dc.b    $18,   2
                 dc.b    $18,   2
                 dc.b    $30,   3
                 dc.b    $19,   4
                 dc.b    $F4
-byte_49C87:
+HCZBossS3_GeyserLayer0Anim:
                 dc.b    8,   0
                 dc.b    8,   0
                 dc.b    $1B,   0
@@ -160,7 +161,7 @@ byte_49C87:
                 dc.b    $C,   3
                 dc.b    $1F,   3
                 dc.b    $F4
-byte_49CBE:
+HCZBossS3_GeyserLayer1Anim:
                 dc.b    8,   0
                 dc.b    8,   0
                 dc.b    $1B,   0
@@ -185,7 +186,7 @@ byte_49CBE:
                 dc.b    $C,   3
                 dc.b    $1F,   3
                 dc.b    $F4
-byte_49CED:
+HCZBossS3_GeyserLayer2Anim:
                 dc.b    8,   0
                 dc.b    8,   0
                 dc.b    $1B,   0
@@ -206,7 +207,7 @@ byte_49CED:
                 dc.b    $C,   3
                 dc.b    $1F,   3
                 dc.b    $F4
-byte_49D14:
+HCZBossS3_GeyserLayer3Anim:
                 dc.b    8,   0
                 dc.b    8,   0
                 dc.b    $1B,   0
@@ -223,7 +224,7 @@ byte_49D14:
                 dc.b    $C,   3
                 dc.b    $1F,   3
                 dc.b    $F4
-byte_49D33:
+HCZBossS3_GeyserLayer4Anim:
                 dc.b    8,   0
                 dc.b    8,   0
                 dc.b    $1B,   0
@@ -236,7 +237,7 @@ byte_49D33:
                 dc.b    $C,   3
                 dc.b    $1F,   3
                 dc.b    $F4
-byte_49D4A:
+HCZEndBossS3_Explosion_UniformRawStream:
                 dc.b    7,   0,   0,   1,   2,   3,   4, $F4
                 even
 Pal_HCZEndBoss:

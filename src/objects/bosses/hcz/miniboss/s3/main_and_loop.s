@@ -4,55 +4,56 @@
 ; ---------------------------------------------------------------------------
 
 Obj_HCZMiniboss:
-                lea     word_47D28(pc),a1
+                lea     HCZMiniS3_InitialCameraTriggers(pc),a1
                 jsr     (Check_CameraInRange).l
-                move.l  #loc_47D30,(a0)
+                move.l  #HCZMiniS3_LatchCameraYGate,(a0)
                 move.b  #1,(Boss_flag).w
                 st      (Events_bg+$16).w
                 moveq   #PLCID_5B,d0
                 jsr     (Load_PLC).l
                 move.w  #$300,(Camera_min_Y_pos).w
-                lea     ChildObjDat_48BB2(pc),a2
+                lea     HCZMiniS3_VortexChild(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
-word_47D28:
+HCZMiniS3_InitialCameraTriggers:
                 dc.w    $300,  $400, $3500, $3700
 ; ---------------------------------------------------------------------------
 
-loc_47D30:
+HCZMiniS3_LatchCameraYGate:
                 btst    #0,$38(a0)
-                bne.s   loc_47D54
+                bne.s   HCZMiniS3_TrackCameraMinXAndLatch
                 move.w  #$638,d0
                 cmp.w   (Camera_Y_pos).w,d0
-                bhi.s   loc_47D54
+                bhi.s   HCZMiniS3_TrackCameraMinXAndLatch
                 bset    #0,$38(a0)
                 move.w  d0,(Camera_min_Y_pos).w
                 move.w  d0,(Camera_max_Y_pos).w
                 move.w  d0,(Camera_target_max_Y_pos).w
 
-loc_47D54:
+HCZMiniS3_TrackCameraMinXAndLatch:
                 btst    #1,$38(a0)
                 move.w  #$3680,d0
                 move.w  (Camera_X_pos).w,d1
                 move.w  d1,(Camera_min_X_pos).w
                 cmp.w   d1,d0
-                bhi.s   loc_47D78
+                bhi.s   HCZMiniS3_CheckBothCameraGates
                 bset    #1,$38(a0)
                 move.w  d0,(Camera_min_X_pos).w
                 move.w  d0,(Camera_max_X_pos).w
 
-loc_47D78:
+; Enter the music delay only when the flag byte is exactly 3
+HCZMiniS3_CheckBothCameraGates:
                 cmpi.b  #3,$38(a0)
-                beq.s   loc_47D82
+                beq.s   HCZMiniS3_SaveBaselineAndFadeMusic
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47D82:
+HCZMiniS3_SaveBaselineAndFadeMusic:
                 move.w  (Camera_max_X_pos).w,(Camera_stored_max_X_pos).w
                 move.w  y_pos(a0),$44(a0)
                 move.l  #Obj_Wait,(a0)
                 move.w  #2*60,$2E(a0)
-                move.l  #loc_47DBA,$34(a0)
+                move.l  #HCZMiniS3_BeginFightLoopAndMusic,$34(a0)
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
                 bset    #3,$38(a0)
@@ -60,13 +61,13 @@ loc_47D82:
                 jmp     (PalLoad_Line1).l
 ; ---------------------------------------------------------------------------
 
-loc_47DBA:
+HCZMiniS3_BeginFightLoopAndMusic:
                 move.l  #Obj_HCZ_MinibossLoop,(a0)
 ; Bug: This is incorrectly using the End Boss music for a Miniboss
                 moveq   #signextendB(mus_EndBoss),d0
                 jsr     (Play_Music).l
 
-locret_47DC8:
+HCZMiniS3_SharedReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -79,21 +80,21 @@ Obj_HCZ_MinibossLoop:
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 HCZ_MinibossLoop_Index:
-                dc.w    loc_47DFA-HCZ_MinibossLoop_Index
-                dc.w    loc_47E34-HCZ_MinibossLoop_Index
-                dc.w    loc_47E5A-HCZ_MinibossLoop_Index
-                dc.w    loc_47E34-HCZ_MinibossLoop_Index
-                dc.w    loc_47E5A-HCZ_MinibossLoop_Index
-                dc.w    loc_47EC6-HCZ_MinibossLoop_Index
-                dc.w    loc_47F12-HCZ_MinibossLoop_Index
-                dc.w    loc_47F48-HCZ_MinibossLoop_Index
-                dc.w    loc_47F60-HCZ_MinibossLoop_Index
-                dc.w    loc_47FAA-HCZ_MinibossLoop_Index
-                dc.w    loc_47E5A-HCZ_MinibossLoop_Index
-                dc.w    loc_48066-HCZ_MinibossLoop_Index
+                dc.w    HCZMiniS3_InitFightAndSpawnRockets-HCZ_MinibossLoop_Index
+                dc.w    HCZMiniS3_MoveAndTickTransit-HCZ_MinibossLoop_Index
+                dc.w    HCZMiniS3_TickStationaryWait-HCZ_MinibossLoop_Index
+                dc.w    HCZMiniS3_MoveAndTickTransit-HCZ_MinibossLoop_Index
+                dc.w    HCZMiniS3_TickStationaryWait-HCZ_MinibossLoop_Index
+                dc.w    HCZMiniS3_TryDiveSurfaceSplash-HCZ_MinibossLoop_Index
+                dc.w    HCZMiniS3_SweepSnapToFloorAndWait-HCZ_MinibossLoop_Index
+                dc.w    HCZMiniS3_RiseToBaselineAndRedive-HCZ_MinibossLoop_Index
+                dc.w    HCZMiniS3_RiseToVortexEntryY-HCZ_MinibossLoop_Index
+                dc.w    HCZMiniS3_MoveArcWithGravity-HCZ_MinibossLoop_Index
+                dc.w    HCZMiniS3_TickStationaryWait-HCZ_MinibossLoop_Index
+                dc.w    HCZMiniS3_RiseToBaselineAndRelane-HCZ_MinibossLoop_Index
 ; ---------------------------------------------------------------------------
 
-loc_47DFA:
+HCZMiniS3_InitFightAndSpawnRockets:
                 lea     ObjDat_HCZMiniboss_Loop(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.b  #6,collision_property(a0)
@@ -101,47 +102,47 @@ loc_47DFA:
                 bset    #3,$38(a0)
                 move.w  #$100,y_vel(a0)
                 move.w  #$DF,$2E(a0)
-                move.l  #loc_47E40,$34(a0)
+                move.l  #HCZMiniS3_StopDescentAndWait,$34(a0)
                 lea     Child1_HCZMiniboss_RocketsEngine(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_47E34:
+HCZMiniS3_MoveAndTickTransit:
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_47E40:
+HCZMiniS3_StopDescentAndWait:
                 move.b  #4,routine(a0)
                 clr.w   y_vel(a0)
                 move.w  #60-1,$2E(a0)
-                move.l  #loc_47E60,$34(a0)
+                move.l  #HCZMiniS3_BeginFastRise,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47E5A:
+HCZMiniS3_TickStationaryWait:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_47E60:
+HCZMiniS3_BeginFastRise:
                 move.b  #6,routine(a0)
                 move.w  #-$400,y_vel(a0)
                 move.w  #$37,$2E(a0)
-                move.l  #loc_47E7C,$34(a0)
+                move.l  #HCZMiniS3_BeginDiveLaneWait,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47E7C:
+HCZMiniS3_BeginDiveLaneWait:
                 move.b  #8,routine(a0)
                 move.w  #60-1,$2E(a0)
-                move.l  #loc_47E92,$34(a0)
+                move.l  #HCZMiniS3_ChooseLaneAndDive,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47E92:
+HCZMiniS3_ChooseLaneAndDive:
                 bsr.w   SelectHCZBossDiveLaneAndRepeatCount
 
-loc_47E96:
+HCZMiniS3_BeginFloorDive:
                 move.b  #$A,routine(a0)
                 moveq   #signextendB(sfx_Roll),d0
                 jsr     (Play_SFX).l
@@ -149,138 +150,138 @@ loc_47E96:
                 bclr    #7,$38(a0)
                 move.w  #$400,y_vel(a0)
                 move.w  #$47,$2E(a0)
-                move.l  #loc_47EE8,$34(a0)
+                move.l  #HCZMiniS3_BeginAlternatingFloorSweep,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47EC6:
+HCZMiniS3_TryDiveSurfaceSplash:
                 btst    #7,$38(a0)
-                bne.s   loc_47EDC
+                bne.s   HCZMiniS3_MoveDiveAndCheckFloor
                 move.w  y_pos(a0),d0
                 cmp.w   (Water_level).w,d0
-                blo.s   loc_47EDC
+                blo.s   HCZMiniS3_MoveDiveAndCheckFloor
                 bsr.w   CreateHCZBossSurfaceSplash
 
-loc_47EDC:
+HCZMiniS3_MoveDiveAndCheckFloor:
                 jsr     (MoveSprite2).l
                 jmp     (ObjHitFloor_DoRoutine).l
 ; ---------------------------------------------------------------------------
 
-loc_47EE8:
+HCZMiniS3_BeginAlternatingFloorSweep:
                 move.b  #$C,routine(a0)
                 move.w  $40(a0),x_vel(a0)
                 neg.w   $40(a0)
                 clr.w   y_vel(a0)
                 move.w  #$2F,$2E(a0)
-                move.l  #loc_47F28,$34(a0)
+                move.l  #HCZMiniS3_BeginRiseAndTickDiveCount,$34(a0)
                 bclr    #7,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47F12:
+HCZMiniS3_SweepSnapToFloorAndWait:
                 jsr     (MoveSprite2).l
                 jsr     (ObjCheckFloorDist).l
                 add.w   d1,y_pos(a0)
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_47F28:
+HCZMiniS3_BeginRiseAndTickDiveCount:
                 move.w  #-$400,y_vel(a0)
                 clr.w   x_vel(a0)
                 subq.b  #1,$39(a0)
-                bmi.s   loc_47F40
+                bmi.s   HCZMiniS3_BeginFinalRiseToVortex
                 move.b  #$E,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47F40:
+HCZMiniS3_BeginFinalRiseToVortex:
                 move.b  #$10,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47F48:
+HCZMiniS3_RiseToBaselineAndRedive:
                 bsr.w   TriggerHCZBossSplashIfSubmerged
                 jsr     (MoveSprite2).l
                 move.w  y_pos(a0),d0
                 cmp.w   $44(a0),d0
-                bls.w   loc_47E96
+                bls.w   HCZMiniS3_BeginFloorDive
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47F60:
+HCZMiniS3_RiseToVortexEntryY:
                 bsr.w   TriggerHCZBossSplashIfSubmerged
                 jsr     (MoveSprite2).l
                 move.w  $44(a0),d0
                 addi.w  #$108,d0
                 cmp.w   y_pos(a0),d0
-                bhs.s   loc_47F7A
+                bhs.s   HCZMiniS3_ClampYAndChooseArcSpeed
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47F7A:
+HCZMiniS3_ClampYAndChooseArcSpeed:
                 move.b  #$12,routine(a0)
                 bclr    #7,$38(a0)
                 move.w  d0,y_pos(a0)
                 move.w  #$180,d0
                 tst.w   $40(a0)
-                bpl.s   loc_47F96
+                bpl.s   HCZMiniS3_StoreArcSpeedAndWait
                 neg.w   d0
 
-loc_47F96:
+HCZMiniS3_StoreArcSpeedAndWait:
                 move.w  d0,x_vel(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_47FBC,$34(a0)
+                move.l  #HCZMiniS3_CloseRocketsAndWait,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47FAA:
+HCZMiniS3_MoveArcWithGravity:
                 addi.w  #$20,y_vel(a0)
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_47FBC:
+HCZMiniS3_CloseRocketsAndWait:
                 move.b  #$14,routine(a0)
                 moveq   #signextendB(sfx_DoorClose),d0
                 jsr     (Play_SFX).l
                 bclr    #3,$38(a0)
                 move.w  #$9F,$2E(a0)
-                move.l  #loc_47FE4,$34(a0)
+                move.l  #HCZMiniS3_StartVortexHold,$34(a0)
                 clr.w   x_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47FE4:
+HCZMiniS3_StartVortexHold:
                 bset    #2,$38(a0)
                 move.w  #$17F,$2E(a0)
-                move.l  #loc_47FFA,$34(a0)
+                move.l  #HCZMiniS3_StopVortexAndWait,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47FFA:
+HCZMiniS3_StopVortexAndWait:
                 bclr    #2,$38(a0)
                 move.w  #$7F,$2E(a0)
-                move.l  #loc_48010,$34(a0)
+                move.l  #HCZMiniS3_ReopenRocketsAndWait,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_48010:
+HCZMiniS3_ReopenRocketsAndWait:
                 bset    #3,$38(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_48010,$34(a0)
-                move.l  #loc_4802E,$34(a0)
+                move.l  #HCZMiniS3_ReopenRocketsAndWait,$34(a0)
+                move.l  #HCZMiniS3_BeginSlowReturnRise,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4802E:
+HCZMiniS3_BeginSlowReturnRise:
                 move.b  #2,routine(a0)
                 move.w  #-$20,y_vel(a0)
                 move.w  #$7F,$2E(a0)
-                move.l  #loc_4804A,$34(a0)
+                move.l  #HCZMiniS3_BeginFastReturnRise,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4804A:
+HCZMiniS3_BeginFastReturnRise:
                 move.b  #$16,routine(a0)
                 bclr    #6,$38(a0)
                 move.w  #-$400,y_vel(a0)
@@ -289,53 +290,54 @@ loc_4804A:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_48066:
+HCZMiniS3_RiseToBaselineAndRelane:
                 jsr     (MoveSprite2).l
                 move.w  y_pos(a0),d0
                 cmp.w   $44(a0),d0
-                bls.w   loc_47E92
+                bls.w   HCZMiniS3_ChooseLaneAndDive
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4807A:
+HCZMiniS3_FreezeWaterAndTryExit:
                 st      (_unkFAA2).w
                 jsr     (Obj_EndSignControl).l
                 jsr     (AllocateObject).l
-                bne.s   loc_48092
-                move.l  #loc_4809C,(a1)
+                bne.s   HCZMiniS3_SpawnDefeatFragments
+                move.l  #HCZMiniS3_WaitResultsAndLockInputs,(a1)
 
-loc_48092:
-                lea     ChildObjDat_48BEE(pc),a2
+HCZMiniS3_SpawnDefeatFragments:
+                lea     HCZMiniS3_BossFragmentChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_4809C:
+HCZMiniS3_WaitResultsAndLockInputs:
                 tst.b   (_unkFAA8).w
-                bne.w   locret_47DC8
-                move.l  #loc_480C0,(a0)
+                bne.w   HCZMiniS3_SharedReturn
+                move.l  #HCZMiniS3_SelectExitTransportGroup,(a0)
                 clr.w   (Ctrl_1_logical).w
                 clr.w   (Ctrl_2_logical).w
                 st      (Ctrl_1_locked).w
                 st      (Ctrl_2_locked).w
                 move.b  #$80,(Player_1+object_control).w
 
-loc_480C0:
+HCZMiniS3_SelectExitTransportGroup:
                 tst.b   (End_of_level_flag).w
-                beq.w   locret_47DC8
-                move.l  #loc_480F0,(a0)
-                lea     ChildObjDat_48BE8(pc),a2
+                beq.w   HCZMiniS3_SharedReturn
+                move.l  #HCZMiniS3_SpawnExitParticlesAndTick,(a0)
+                lea     HCZMiniS3_ExitTransportPairChildren(pc),a2
                 tst.b   (Player_mode+1).w
-                beq.s   loc_480DC
-                lea     ChildObjDat_48BE2(pc),a2
+                beq.s   HCZMiniS3_SpawnTransportAndSetWait
+                lea     HCZMiniS3_ExitTransportSoloChild(pc),a2
 
-loc_480DC:
+HCZMiniS3_SpawnTransportAndSetWait:
                 jsr     (CreateChild6_Simple).l
                 move.w  #$2F,$2E(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
 
-loc_480F0:
+; Begin the particle and timer updates only after a transport signals readiness
+HCZMiniS3_SpawnExitParticlesAndTick:
                 btst    #0,$38(a0)
-                beq.w   locret_47DC8
-                lea     ChildObjDat_48BDC(pc),a2
+                beq.w   HCZMiniS3_SharedReturn
+                lea     HCZMiniS3_WaterExitParticleChild(pc),a2
                 jsr     (CreateChild6_Simple).l
                 jmp     (Obj_Wait).l

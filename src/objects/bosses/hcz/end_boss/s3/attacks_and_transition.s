@@ -3,115 +3,115 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
 
-loc_491E8:
+HCZBossS3_VortexDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_49200(pc,d0.w),d1
-                jsr     off_49200(pc,d1.w)
+                move.w  HCZEndBossS3_Vortex_ThreeStateOffsets(pc,d0.w),d1
+                jsr     HCZEndBossS3_Vortex_ThreeStateOffsets(pc,d1.w)
                 bsr.w   MarkHCZBossVortexDetachedWhenColumnDies
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
-off_49200:
-                dc.w    loc_49206-off_49200
-                dc.w    loc_4921A-off_49200
-                dc.w    loc_4924A-off_49200
+HCZEndBossS3_Vortex_ThreeStateOffsets:
+                dc.w    HCZBossS3_InitColumnVortex-HCZEndBossS3_Vortex_ThreeStateOffsets
+                dc.w    HCZBossS3_VortexCaptureAndFollow-HCZEndBossS3_Vortex_ThreeStateOffsets
+                dc.w    HCZBossS3_VortexDriftWithColumn-HCZEndBossS3_Vortex_ThreeStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_49206:
-                lea     word_49B88(pc),a1
+HCZBossS3_InitColumnVortex:
+                lea     HCZBossS3_VortexAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #byte_49C61,$30(a0)
+                move.l  #HCZBossS3_VortexHeight0Anim,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4921A:
+HCZBossS3_VortexCaptureAndFollow:
                 bsr.w   CaptureBothPlayersInHCZBossVortex
                 bsr.w   PullBothPlayersTowardHCZBossVortex
                 bsr.w   SynchronizeHCZBossVortexHeightVisual
                 jsr     (Animate_Raw).l
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                bne.s   loc_4923A
+                bne.s   HCZBossS3_VortexDetachAndRelease
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4923A:
+HCZBossS3_VortexDetachAndRelease:
                 move.b  #4,routine(a0)
                 move.w  x_vel(a1),x_vel(a0)
-                bra.w   loc_49960
+                bra.w   HCZBossS3_VortexReleaseTrackedP1
 ; ---------------------------------------------------------------------------
 
-loc_4924A:
+HCZBossS3_VortexDriftWithColumn:
                 bsr.w   SynchronizeHCZBossVortexHeightVisual
                 move.w  x_vel(a1),x_vel(a0)
                 jsr     (MoveSprite2).l
                 jmp     (Animate_Raw).l
 ; ---------------------------------------------------------------------------
 
-loc_49260:
-                lea     word_49B8E(pc),a1
+HCZBossS3_InitSurfaceEdge:
+                lea     HCZBossS3_SurfaceEdgeAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_49284,(a0)
-                move.l  #byte_49C7A,$30(a0)
+                move.l  #HCZBossS3_SurfaceEdgeFollowAndAnimate,(a0)
+                move.l  #HCZBossS3_SurfaceEdgeAnim,$30(a0)
 
-loc_49278:
+HCZBossS3_PlaceEdgeAboveWater:
                 move.w  (Water_level).w,d0
                 subq.w  #4,d0
                 move.w  d0,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_49284:
+HCZBossS3_SurfaceEdgeFollowAndAnimate:
                 jsr     (Animate_Raw).l
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_492A8(pc,d0.w),d0
+                move.w  HCZBossS3_SurfaceEdgeXOffsets(pc,d0.w),d0
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),d1
                 add.w   d0,d1
                 move.w  d1,x_pos(a0)
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
-word_492A8:
+HCZBossS3_SurfaceEdgeXOffsets:
                 dc.w    -4,     4
 ; ---------------------------------------------------------------------------
 
-loc_492AC:
-                lea     word_49B94(pc),a1
+HCZBossS3_InitBombSplashAtWater:
+                lea     HCZBossS3_BombSplashAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
                 move.l  #AnimateRaw_DrawTouch,(a0)
-                move.l  #byte_49C7E,$30(a0)
+                move.l  #HCZBossS3_BombSplashAnim,$30(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
-                bra.s   loc_49278
+                bra.s   HCZBossS3_PlaceEdgeAboveWater
 ; ---------------------------------------------------------------------------
 
-loc_492CE:
-                lea     ObjDat3_49B9C(pc),a1
+HCZBossS3_InitGeyserLayerAndEdges:
+                lea     HCZBossS3_GeyserLayerAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #Obj_Wait,(a0)
-                move.l  #loc_492FC,$34(a0)
+                move.l  #HCZBossS3_GeyserLayerBeginLaunch,$34(a0)
                 bsr.w   ConfigureHCZBossGeyserLayerFromSubtype
                 tst.b   subtype(a0)
-                bne.w   locret_48D3A
-                lea     ChildObjDat_49C0C(pc),a2
+                bne.w   HCZBossS3_SharedReturn
+                lea     HCZEndBossS3_Surface_TwoNormalEdgeRecord(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_492FC:
-                move.l  #loc_4930C,(a0)
+HCZBossS3_GeyserLayerBeginLaunch:
+                move.l  #HCZBossS3_GeyserLayerLaunchAndDraw,(a0)
                 move.l  #Go_Delete_Sprite_2,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4930C:
+HCZBossS3_GeyserLayerLaunchAndDraw:
                 bsr.w   ApplyHCZBossGeyserToBothPlayers
                 jmp     (AnimateRaw_DrawTouch).l
 ; ---------------------------------------------------------------------------
 
-loc_49316:
-                lea     ObjDat3_49BB4(pc),a1
+HCZBossS3_InitRandomColumnBubble:
+                lea     HCZEndBossS3_Bubble_FullAttributeRecord(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_49376,(a0)
+                move.l  #HCZBossS3_BubbleMoveAnimateAndDraw,(a0)
                 jsr     (Random_Number).l
                 andi.w  #$FF,d0
                 ext.w   d0
@@ -124,19 +124,19 @@ loc_49316:
                 andi.w  #3,d0
                 move.b  d0,mapping_frame(a0)
                 lsl.w   #2,d0
-                move.l  off_49366(pc,d0.w),$30(a0)
+                move.l  HCZBossS3_BubbleMinibossAnimations(pc,d0.w),$30(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_49390,$34(a0)
+                move.l  #HCZBossS3_BubbleFreezeFirstFrame,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
-off_49366:
-                dc.l    byte_48C8A
-                dc.l    byte_48C8E
-                dc.l    byte_48C92
-                dc.l    byte_48C96
+HCZBossS3_BubbleMinibossAnimations:
+                dc.l    HCZMiniS3_ParticleAnimBase0
+                dc.l    HCZMiniS3_ParticleAnimBase1
+                dc.l    HCZMiniS3_ParticleAnimBase2
+                dc.l    HCZMiniS3_ParticleAnimBase3
 ; ---------------------------------------------------------------------------
 
-loc_49376:
+HCZBossS3_BubbleMoveAnimateAndDraw:
                 movea.w parent3(a0),a3
                 bsr.w   AccelerateHCZBossBubbleTowardParentX
                 jsr     (Animate_Raw).l
@@ -144,95 +144,95 @@ loc_49376:
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_49390:
-                move.l  #loc_493A2,(a0)
+HCZBossS3_BubbleFreezeFirstFrame:
+                move.l  #HCZBossS3_BubbleWaitForColumnDrift,(a0)
                 movea.l $30(a0),a1
                 move.b  1(a1),mapping_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_493A2:
+HCZBossS3_BubbleWaitForColumnDrift:
                 movea.w parent3(a0),a3
                 btst    #3,$38(a3)
-                bne.s   loc_493B8
+                bne.s   HCZBossS3_BubbleBeginFinalAnimation
                 bsr.w   AccelerateHCZBossBubbleTowardParentX
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_493B8:
-                move.l  #loc_49376,(a0)
+HCZBossS3_BubbleBeginFinalAnimation:
+                move.l  #HCZBossS3_BubbleMoveAnimateAndDraw,(a0)
                 move.w  #$1F,$2E(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_493CE:
+HCZBossS3_BombDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_493E2(pc,d0.w),d1
-                jsr     off_493E2(pc,d1.w)
+                move.w  HCZEndBossS3_Bomb_SevenStateOffsets(pc,d0.w),d1
+                jsr     HCZEndBossS3_Bomb_SevenStateOffsets(pc,d1.w)
                 jmp     (Child_DrawTouch_Sprite).l
 ; ---------------------------------------------------------------------------
-off_493E2:
-                dc.w    loc_493F0-off_493E2
-                dc.w    loc_4940A-off_493E2
-                dc.w    loc_4944E-off_493E2
-                dc.w    loc_49482-off_493E2
-                dc.w    loc_494F0-off_493E2
-                dc.w    loc_49518-off_493E2
-                dc.w    loc_4953E-off_493E2
+HCZEndBossS3_Bomb_SevenStateOffsets:
+                dc.w    HCZBossS3_InitStackBomb-HCZEndBossS3_Bomb_SevenStateOffsets
+                dc.w    HCZBossS3_BombFollowAndWaitRequest-HCZEndBossS3_Bomb_SevenStateOffsets
+                dc.w    HCZBossS3_BombFollowUntilRequestClears-HCZEndBossS3_Bomb_SevenStateOffsets
+                dc.w    HCZBossS3_BombStepOffsetsAndWait-HCZEndBossS3_Bomb_SevenStateOffsets
+                dc.w    HCZBossS3_BombCheckWaterEntry-HCZEndBossS3_Bomb_SevenStateOffsets
+                dc.w    HCZBossS3_BombFallAndProbeFloor-HCZEndBossS3_Bomb_SevenStateOffsets
+                dc.w    HCZBossS3_BombAnimateDetonation-HCZEndBossS3_Bomb_SevenStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_493F0:
-                lea     word_49B7A(pc),a1
+HCZBossS3_InitStackBomb:
+                lea     HCZEndBossS3_Bomb_PartialAttributeRecord(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.b  #8,y_radius(a0)
                 bsr.w   SetHCZBossBombStackPriority
                 jmp     (Refresh_ChildPositionAdjusted).l
 ; ---------------------------------------------------------------------------
 
-loc_4940A:
+HCZBossS3_BombFollowAndWaitRequest:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                bne.s   loc_4941E
+                bne.s   HCZBossS3_BombArmAndCheckFrontSlot
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4941E:
+HCZBossS3_BombArmAndCheckFrontSlot:
                 move.b  #4,routine(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_4942C
+                beq.s   HCZBossS3_BombBeginFrontSlide
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4942C:
+HCZBossS3_BombBeginFrontSlide:
                 move.b  #6,routine(a0)
                 move.w  #3,$2E(a0)
-                move.l  #loc_494C4,$34(a0)
+                move.l  #HCZBossS3_BombBeginFallAndClearRequest,$34(a0)
                 move.b  #1,$40(a0)
                 move.b  #0,$41(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4944E:
+HCZBossS3_BombFollowUntilRequestClears:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                beq.s   loc_49462
+                beq.s   HCZBossS3_BombBeginStackCompaction
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_49462:
+HCZBossS3_BombBeginStackCompaction:
                 move.b  #6,routine(a0)
                 subq.b  #2,subtype(a0)
                 move.w  #7,$2E(a0)
-                move.l  #loc_4949E,$34(a0)
+                move.l  #HCZBossS3_BombCompactAndTryReplacement,$34(a0)
                 bsr.w   SetHCZBossBombStackPriority
-                bra.w   loc_49740
+                bra.w   HCZBossS3_BombLoadCompactionSteps
 ; ---------------------------------------------------------------------------
 
-loc_49482:
+HCZBossS3_BombStepOffsetsAndWait:
                 move.b  $40(a0),d0
                 add.b   d0,$42(a0)
                 move.b  $41(a0),d0
@@ -241,140 +241,141 @@ loc_49482:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_4949E:
+HCZBossS3_BombCompactAndTryReplacement:
                 move.b  #2,routine(a0)
                 tst.b   subtype(a0)
-                bne.s   locret_494C2
-                lea     ChildObjDat_49BEC(pc),a2
+                bne.s   HCZBossS3_BombReplacementReturn
+                lea     HCZBossS3_ReplacementBombChild(pc),a2
                 jsr     (CreateChild7_Normal2).l
-                bne.s   locret_494C2
+                bne.s   HCZBossS3_BombReplacementReturn
                 move.w  parent3(a0),parent3(a1)
                 move.b  #4,subtype(a1)
 
-locret_494C2:
+HCZBossS3_BombReplacementReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_494C4:
+HCZBossS3_BombBeginFallAndClearRequest:
                 move.b  #8,routine(a0)
-                move.l  #loc_49526,$34(a0)
+                move.l  #HCZBossS3_BombBeginDetonation,$34(a0)
                 move.w  #$100,x_vel(a0)
                 movea.w parent3(a0),a1
                 bclr    #1,$38(a1)
                 btst    #0,render_flags(a1)
-                beq.s   locret_494EE
+                beq.s   HCZBossS3_BombLaunchReturn
                 neg.w   x_vel(a0)
 
-locret_494EE:
+HCZBossS3_BombLaunchReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_494F0:
+HCZBossS3_BombCheckWaterEntry:
                 move.w  y_pos(a0),d0
                 cmp.w   (Water_level).w,d0
-                bhs.s   loc_49508
+                bhs.s   HCZBossS3_BombEnterWaterAndSplash
                 jsr     (MoveSprite_LightGravity).l
                 jsr     (ObjHitFloor_DoRoutine).l
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_49508:
+HCZBossS3_BombEnterWaterAndSplash:
                 move.b  #$A,routine(a0)
-                lea     ChildObjDat_49C1A(pc),a2
+                lea     HCZBossS3_BombSplashChild(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_49518:
+HCZBossS3_BombFallAndProbeFloor:
                 jsr     (MoveSprite_LightGravity).l
                 jsr     (ObjHitFloor_DoRoutine).l
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_49526:
+HCZBossS3_BombBeginDetonation:
                 move.b  #$C,routine(a0)
-                move.l  #byte_49C4F,$30(a0)
-                move.l  #loc_49544,$34(a0)
+                move.l  #HCZBossS3_BombDetonationAnim,$30(a0)
+                move.l  #HCZBossS3_BombSpawnGeysersAndExplode,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4953E:
+HCZBossS3_BombAnimateDetonation:
                 jmp     (Animate_RawGetFaster).l
 ; ---------------------------------------------------------------------------
 
-loc_49544:
-                lea     ChildObjDat_49C22(pc),a2
+HCZBossS3_BombSpawnGeysersAndExplode:
+                lea     HCZBossS3_BombGeyserChildren(pc),a2
                 jsr     (CreateChild6_Simple).l
                 moveq   #signextendB(sfx_MissileExplode),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_49BF4(pc),a2
+                lea     HCZBossS3_ExplosionChild(pc),a2
                 jsr     (CreateChild1_Normal).l
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_49566:
-                lea     word_49B6E(pc),a1
+HCZBossS3_InitFixedPlate:
+                lea     HCZBossS3_FixedPlateAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_49578,(a0)
+                move.l  #HCZBossS3_FixedPlateFollowAndDraw,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_49578:
+HCZBossS3_FixedPlateFollowAndDraw:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 moveq   #0,d0
                 jmp     (Child_Draw_Sprite2_FlickerMove).l
 ; ---------------------------------------------------------------------------
 
-loc_49586:
-                lea     ObjDat3_49BA8(pc),a1
+HCZBossS3_InitExplosion:
+                lea     HCZBossS3_ExplosionAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_495AC,(a0)
-                move.l  #byte_49D4A,$30(a0)
+                move.l  #HCZBossS3_ExplosionAnimateAndCheckTouch,(a0)
+                move.l  #HCZEndBossS3_Explosion_UniformRawStream,$30(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_495AC:
+; Submit collision only while the mapping frame is below 3
+HCZBossS3_ExplosionAnimateAndCheckTouch:
                 jsr     (Animate_Raw).l
                 cmpi.b  #3,mapping_frame(a0)
-                bhs.s   loc_495C0
+                bhs.s   HCZBossS3_ExplosionDraw
                 jsr     (Add_SpriteToCollisionResponseList).l
 
-loc_495C0:
+HCZBossS3_ExplosionDraw:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_495C6:
+HCZBossS3_ExitQueueGeyserArt:
                 lea     (ArtKosM_HCZGeyserVert).l,a1
                 move.w  #tiles_to_bytes(ArtTile_HCZCutsceneGeyser),d2
                 jsr     (Queue_Kos_Module).l
-                move.l  #loc_495DC,(a0)
+                move.l  #HCZBossS3_ExitWaitForArtModules,(a0)
 
-loc_495DC:
+HCZBossS3_ExitWaitForArtModules:
                 tst.b   (Kos_modules_left).w
-                bne.w   locret_48D3A
-                move.l  #loc_495FE,(a0)
+                bne.w   HCZBossS3_SharedReturn
+                move.l  #HCZBossS3_ExitTickRumbleWait,(a0)
                 move.w  #$5F,$2E(a0)
-                move.l  #loc_49616,$34(a0)
+                move.l  #HCZBossS3_ExitInstallGeyserInitializer,$34(a0)
                 st      (Screen_shake_flag).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_495FE:
+HCZBossS3_ExitTickRumbleWait:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #7,d0
-                bne.s   loc_49610
+                bne.s   HCZEndBossS3_Exit_TickRumbleWait
                 moveq   #signextendB(sfx_Rumble2),d0
                 jsr     (Play_SFX).l
 
-loc_49610:
+HCZEndBossS3_Exit_TickRumbleWait:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_49616:
-                move.l  #loc_4961C,(a0)
+HCZBossS3_ExitInstallGeyserInitializer:
+                move.l  #HCZBossS3_InitExitGeyserAtP1,(a0)
 
-loc_4961C:
-                lea     ObjDat3_49BC0(pc),a1
+HCZBossS3_InitExitGeyserAtP1:
+                lea     HCZBossS3_ExitGeyserAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 st      (Screen_shake_flag).w
                 moveq   #signextendB(sfx_Geyser),d0
@@ -390,28 +391,28 @@ loc_4961C:
                 addi.w  #$30,d0
                 sub.w   x_pos(a1),d0
                 cmpi.w  #$60,d0
-                bcc.s   loc_49664
+                bcc.s   HCZBossS3_ExitGeyserBeginRiseAndPalette
                 move.w  a1,$44(a0)
 
-loc_49664:
+HCZBossS3_ExitGeyserBeginRiseAndPalette:
                 jsr     (SpawnS3HCZExitGeyserEightDebrisPieces).l
-                move.l  #loc_49674,(a0)
+                move.l  #HCZBossS3_ExitRiseToCaptureHeight,(a0)
                 st      (Palette_cycle_counters+$00).w
 
-loc_49674:
+HCZBossS3_ExitRiseToCaptureHeight:
                 lea     (Player_1).w,a1
                 move.w  y_pos(a0),d0
                 subq.w  #6,d0
                 move.w  d0,y_pos(a0)
                 subi.w  #$60,d0
                 cmp.w   y_pos(a1),d0
-                bhs.s   loc_496A4
+                bhs.s   HCZBossS3_ExitLiftP2AndDraw
                 move.b  #$81,object_control(a1)
                 move.b  #$1A,anim(a1)
-                move.l  #loc_496B8,(a0)
+                move.l  #HCZBossS3_ExitLiftP1AndTickLevelWait,(a0)
                 move.w  #$5F,$2E(a0)
 
-loc_496A4:
+HCZBossS3_ExitLiftP2AndDraw:
                 bsr.w   S3HCZGeyser_CaptureAndLiftP2
                 move.l  a0,-(sp)
                 jsr     (AnPal_HCZ1).l
@@ -419,21 +420,21 @@ loc_496A4:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_496B8:
+HCZBossS3_ExitLiftP1AndTickLevelWait:
                 lea     (Player_1).w,a1
                 move.b  #$1A,anim(a1)
                 subq.w  #6,y_pos(a0)
                 subq.w  #6,(Player_1+y_pos).w
                 bsr.w   S3HCZGeyser_CaptureAndLiftP2
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_496E4
+                bmi.s   HCZBossS3_StartMarbleGardenAndDelete
                 move.l  a0,-(sp)
                 jsr     (AnPal_HCZ1).l
                 movea.l (sp)+,a0
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_496E4:
+HCZBossS3_StartMarbleGardenAndDelete:
                 move.w  #$200,d0
                 jsr     (StartNewLevel).l
                 jmp     (Delete_Current_Sprite).l

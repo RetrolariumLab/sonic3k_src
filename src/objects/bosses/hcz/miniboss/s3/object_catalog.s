@@ -11,7 +11,7 @@ ObjDat_HCZMiniboss_Rockets:
                 dc.w    make_art_tile(ArtTile_HCZMiniboss,1,1)
                 dc.w    $200
                 dc.b    $10, $10,   1, $8B
-word_48B4C:
+HCZMiniS3_RocketTipAttributes:
                 dc.w    make_art_tile(ArtTile_HCZMiniboss,0,1)
                 dc.w    $280
                 dc.b    $10, $10, $15,   0
@@ -19,27 +19,27 @@ ObjDat2_HCZMiniboss_Engine:
                 dc.w    make_art_tile(ArtTile_HCZMiniboss,0,1)
                 dc.w    $280
                 dc.b    $10, $10, $15, $92
-ObjDat3_48B5C:
+HCZMiniS3_VortexAttributes:
                 dc.l    Map_HCZMiniboss
                 dc.w    make_art_tile(ArtTile_HCZMiniboss,1,1)
                 dc.w    $280
                 dc.b    $10, $28, $16,   0
-ObjDat3_48B68:
+HCZMiniS3_ParticleAttributes:
                 dc.l    Map_Bubbler
                 dc.w    make_art_tile(ArtTile_Bubbles,1,1)
                 dc.w    $280
                 dc.b    $10, $10,   0,   0
-ObjSlot_48B74:
+HCZMiniS3_SplashArtSlots:
                 dc.w    3-1
                 dc.w    make_art_tile(ArtTile_HCZMinibossSplash,0,1)
                 dc.w    $10,     0
                 dc.l    Map_HCZMinibossSplash
                 dc.w    $80
                 dc.b    $10, $10,   0,   0
-word_48B86:
+HCZMiniS3_BossFragmentAttributes:
                 dc.w    $280
                 dc.b    $C,  $C,   0,   0
-word_48B8C:
+HCZMiniS3_VortexDebrisAttributes:
                 dc.w    $280
                 dc.b    $14, $24,   0,   0
 Child1_HCZMiniboss_RocketsEngine:
@@ -54,60 +54,60 @@ Child1_HCZMiniboss_RocketsEngine:
                 dc.b    $18,-$18
                 dc.l    Obj_HCZMiniboss_Engine
                 dc.b    0, $24
-ChildObjDat_48BB2:
+HCZMiniS3_VortexChild:
                 dc.w    1-1
-                dc.l    loc_48362
+                dc.l    HCZMiniS3_VortexDispatchAndDraw
                 dc.b    0,   0
-ChildObjDat_48BBA:
+HCZMiniS3_RocketTipChild:
                 dc.w    1-1
-                dc.l    loc_482B0
+                dc.l    HCZMiniS3_InitRocketTip
                 dc.b    0,   0
-ChildObjDat_48BC2:
+HCZMiniS3_SurfaceSplashChildren:
                 dc.w    3-1
-                dc.l    loc_4830C
+                dc.l    HCZMiniS3_InitSlottedWaterSplash
                 dc.b    0,   0
-                dc.l    loc_4830C
+                dc.l    HCZMiniS3_InitSlottedWaterSplash
                 dc.b    -$10,   0
-                dc.l    loc_4830C
+                dc.l    HCZMiniS3_InitSlottedWaterSplash
                 dc.b    $10,   0
-ChildObjDat_48BD6:
+HCZMiniS3_VortexOrbitChildren:
                 dc.w    $1E-1
-                dc.l    loc_484A0
-ChildObjDat_48BDC:
+                dc.l    HCZMiniS3_InitRandomOrbitParticle
+HCZMiniS3_WaterExitParticleChild:
                 dc.w    1-1
-                dc.l    loc_48554
-ChildObjDat_48BE2:
+                dc.l    HCZMiniS3_InitWaterExitParticle
+HCZMiniS3_ExitTransportSoloChild:
                 dc.w    1-1
-                dc.l    loc_48608
-ChildObjDat_48BE8:
+                dc.l    HCZMiniS3_TransportWaitForP1Underwater
+HCZMiniS3_ExitTransportPairChildren:
                 dc.w    2-1
-                dc.l    loc_48608
-ChildObjDat_48BEE:
+                dc.l    HCZMiniS3_TransportWaitForP1Underwater
+HCZMiniS3_BossFragmentChildren:
                 dc.w    4-1
-                dc.l    loc_4870A
+                dc.l    HCZMiniS3_InitBossFragmentFlicker
                 dc.b    -$C, -$C
-                dc.l    loc_4870A
+                dc.l    HCZMiniS3_InitBossFragmentFlicker
                 dc.b    -$C,  $C
-                dc.l    loc_4870A
+                dc.l    HCZMiniS3_InitBossFragmentFlicker
                 dc.b    $C, -$C
-                dc.l    loc_4870A
+                dc.l    HCZMiniS3_InitBossFragmentFlicker
                 dc.b    $C,  $C
-ChildObjDat_48C08:
+HCZMiniS3_VortexDebrisChildren:
                 dc.w    5-1
-                dc.l    loc_48732
+                dc.l    HCZMiniS3_InitFallingVortexDebris
                 dc.b    0,-$24
-                dc.l    loc_48732
+                dc.l    HCZMiniS3_InitFallingVortexDebris
                 dc.b    -8,   0
-                dc.l    loc_48732
+                dc.l    HCZMiniS3_InitFallingVortexDebris
                 dc.b    8,   0
-                dc.l    loc_48732
+                dc.l    HCZMiniS3_InitFallingVortexDebris
                 dc.b    -$C, $30
-                dc.l    loc_48732
+                dc.l    HCZMiniS3_InitFallingVortexDebris
                 dc.b    $C, $30
 DPLCPtr_HCZMinibossSplash:
                 dc.l    ArtUnc_DashDust
                 dc.l    DPLC_HCZMinibossSplash
-byte_48C30:
+HCZMiniS3_VortexAccelerationAnim:
                 dc.b    $16,   7
                 dc.b    $17,   7
                 dc.b    $18,   7
@@ -127,9 +127,9 @@ byte_48C30:
                 dc.b    $17,   2
                 dc.b    $18,   2
                 dc.b    $F4
-byte_48C55:
+HCZMiniS3_VortexActiveAnim:
                 dc.b    1, $16, $17, $18, $FC
-byte_48C5A:
+HCZMiniS3_VortexDecelerationAnim:
                 dc.b    $16,   2
                 dc.b    $17,   2
                 dc.b    $18,   2
@@ -149,15 +149,15 @@ byte_48C5A:
                 dc.b    $17,   7
                 dc.b    $18,   7
                 dc.b    $F4
-byte_48C7F:
+HCZMiniS3_SplashDPLCAnimation:
                 dc.b    3,   0,   1,   2,   3,   4,   5,   6,   7,   8, $F4
-byte_48C8A:
+HCZMiniS3_ParticleAnimBase0:
                 dc.b    0,   0, $16, $FC
-byte_48C8E:
+HCZMiniS3_ParticleAnimBase1:
                 dc.b    0,   1, $16, $FC
-byte_48C92:
+HCZMiniS3_ParticleAnimBase2:
                 dc.b    0,   2, $16, $FC
-byte_48C96:
+HCZMiniS3_ParticleAnimBase3:
                 dc.b    0,   3, $16, $FC
                 even
 Pal_HCZMiniboss:

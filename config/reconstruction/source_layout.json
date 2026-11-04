@@ -16480,7 +16480,7 @@
       "responsibility": "Hydrocity end-boss attack actors, movement states, geyser effects and player transition.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 439,
+      "physical_lines": 440,
       "origin": {
         "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
         "path": "s3.s",
@@ -16520,7 +16520,7 @@
       "responsibility": "Hydrocity end-boss battle control, defeat sequence, chassis states and coordinated child actors.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 413,
+      "physical_lines": 414,
       "origin": {
         "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
         "path": "s3.s",
@@ -16560,7 +16560,7 @@
       "responsibility": "Hydrocity end-boss player response, child motion, collision, callback and debris creation helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 504,
+      "physical_lines": 505,
       "origin": {
         "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
         "path": "s3.s",
@@ -16600,7 +16600,7 @@
       "responsibility": "Hydrocity end-boss object attributes, child records, animation and palette resources.",
       "role": "data",
       "status": "owned",
-      "physical_lines": 244,
+      "physical_lines": 245,
       "origin": {
         "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
         "path": "s3.s",
@@ -16640,7 +16640,7 @@
       "responsibility": "Hydrocity end-boss attack actors, movement states, geyser effects and player transition.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 450,
+      "physical_lines": 452,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
@@ -16670,7 +16670,7 @@
       "responsibility": "Hydrocity end-boss battle control, defeat sequence, chassis states and coordinated child actors.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 430,
+      "physical_lines": 431,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
@@ -16700,7 +16700,7 @@
       "responsibility": "Hydrocity end-boss child priority, motion, palette, collision, callback and debris helpers with their private indexed tables.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 475,
+      "physical_lines": 476,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
@@ -16730,7 +16730,7 @@
       "responsibility": "Hydrocity end-boss object attributes, child records, animation and palette resources.",
       "role": "data",
       "status": "owned",
-      "physical_lines": 241,
+      "physical_lines": 242,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
@@ -16760,7 +16760,7 @@
       "responsibility": "Hydrocity miniboss engine actors, coordinated effects, defeat sequence and debris states.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 372,
+      "physical_lines": 374,
       "origin": {
         "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
         "path": "s3.s",
@@ -16772,7 +16772,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_48732",
+          "name": "HCZMiniS3_InitFallingVortexDebris",
           "kind": "terminal-tail",
           "reason": "The complete final object state keeps its conditional early return with its unconditional state-transition or sprite-service tail call and contains no original independent return boundary.",
           "origin_first_line": 3074,
@@ -16810,7 +16810,7 @@
       "responsibility": "Hydrocity miniboss initialization, battle control and looping chassis states.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 341,
+      "physical_lines": 343,
       "origin": {
         "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
         "path": "s3.s",
@@ -16850,7 +16850,7 @@
       "responsibility": "Hydrocity miniboss motion, acceleration, child positioning, collision and animation helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 474,
+      "physical_lines": 477,
       "origin": {
         "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
         "path": "s3.s",
@@ -16930,7 +16930,7 @@
       "responsibility": "Hydrocity miniboss rocket actors, flight states and attack behavior.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 177,
+      "physical_lines": 180,
       "origin": {
         "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
         "path": "s3.s",
@@ -16975,7 +16975,7 @@
       "responsibility": "Hydrocity miniboss engine actors, coordinated effects, defeat sequence and debris states.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 373,
+      "physical_lines": 375,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
@@ -16987,7 +16987,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_6A8EE",
+          "name": "HCZMiniSK_InitFallingVortexDebris",
           "kind": "terminal-tail",
           "reason": "Close the final Hydrocity engine debris callback after its indexed parent-effect states and all earlier original independent returns.",
           "origin_first_line": 5100,
@@ -17015,7 +17015,7 @@
       "responsibility": "Hydrocity miniboss initialization, battle control and looping chassis states.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 341,
+      "physical_lines": 343,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
@@ -17045,7 +17045,7 @@
       "responsibility": "Hydrocity miniboss motion, acceleration, child positioning, collision and animation helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 474,
+      "physical_lines": 477,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
@@ -17105,7 +17105,7 @@
       "responsibility": "Hydrocity miniboss rocket actors, flight states and attack behavior.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 178,
+      "physical_lines": 181,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",

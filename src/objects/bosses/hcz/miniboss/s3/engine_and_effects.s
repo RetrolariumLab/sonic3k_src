@@ -6,62 +6,62 @@
 Obj_HCZMiniboss_Engine:
                 lea     ObjDat2_HCZMiniboss_Engine(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
-                move.l  #loc_48304,(a0)
+                move.l  #HCZMiniS3_EngineFollowAndCheckDraw,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_48304:
+HCZMiniS3_EngineFollowAndCheckDraw:
                 jsr     (Refresh_ChildPosition).l
-                bra.s   loc_482C6
+                bra.s   HCZMiniS3_EngineOrTipCheckDraw
 ; ---------------------------------------------------------------------------
 
-loc_4830C:
-                lea     ObjSlot_48B74(pc),a1
+HCZMiniS3_InitSlottedWaterSplash:
+                lea     HCZMiniS3_SplashArtSlots(pc),a1
                 jsr     (SetUp_ObjAttributesSlotted).l
                 move.w  (Water_level).w,y_pos(a0)
                 move.l  #Obj_Wait,(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_4832E
+                beq.s   HCZMiniS3_SplashSetDelayedCallback
                 move.w  #7,$2E(a0)
 
-loc_4832E:
-                move.l  #loc_48338,$34(a0)
+HCZMiniS3_SplashSetDelayedCallback:
+                move.l  #HCZMiniS3_SplashBeginDPLCAnimation,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_48338:
-                move.l  #loc_48348,(a0)
+HCZMiniS3_SplashBeginDPLCAnimation:
+                move.l  #HCZMiniS3_SplashAnimateLoadAndDraw,(a0)
                 move.l  #Go_Delete_SpriteSlotted3,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_48348:
-                lea     byte_48C7F(pc),a1
+HCZMiniS3_SplashAnimateLoadAndDraw:
+                lea     HCZMiniS3_SplashDPLCAnimation(pc),a1
                 jsr     (Animate_RawNoSST).l
                 lea     DPLCPtr_HCZMinibossSplash(pc),a2
                 jsr     (Perform_DPLC).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_48362:
+HCZMiniS3_VortexDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_4837A(pc,d0.w),d1
-                jsr     off_4837A(pc,d1.w)
+                move.w  HCZMiniS3_VortexStateOffsets(pc,d0.w),d1
+                jsr     HCZMiniS3_VortexStateOffsets(pc,d1.w)
                 bsr.w   SwitchHCZVortexToParentDefeatState
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
-off_4837A:
-                dc.w    loc_48386-off_4837A
-                dc.w    loc_483A0-off_4837A
-                dc.w    loc_483C0-off_4837A
-                dc.w    loc_483F6-off_4837A
-                dc.w    loc_4841C-off_4837A
-                dc.w    loc_4845C-off_4837A
+HCZMiniS3_VortexStateOffsets:
+                dc.w    HCZMiniS3_InitVortexAndClearPlayers-HCZMiniS3_VortexStateOffsets
+                dc.w    HCZMiniS3_VortexWaitVisibleAndLoadPal-HCZMiniS3_VortexStateOffsets
+                dc.w    HCZMiniS3_VortexAccelerateAndSpawn-HCZMiniS3_VortexStateOffsets
+                dc.w    HCZMiniS3_VortexAnimateAcceleration-HCZMiniS3_VortexStateOffsets
+                dc.w    HCZMiniS3_VortexCaptureAndCheckStop-HCZMiniS3_VortexStateOffsets
+                dc.w    HCZMiniS3_VortexAnimateDeceleration-HCZMiniS3_VortexStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_48386:
-                lea     ObjDat3_48B5C(pc),a1
+HCZMiniS3_InitVortexAndClearPlayers:
+                lea     HCZMiniS3_VortexAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 addi.w  #$148,y_pos(a0)
                 clr.w   $42(a0)
@@ -69,94 +69,95 @@ loc_48386:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_483A0:
+HCZMiniS3_VortexWaitVisibleAndLoadPal:
                 tst.b   render_flags(a0)
-                bpl.w   locret_47DC8
+                bpl.w   HCZMiniS3_SharedReturn
                 move.b  #4,routine(a0)
                 lea     Pal_HCZMinibossWater(pc),a1
                 lea     (Water_palette_line_2).w,a2
                 moveq   #bytesToLcnt($20),d0
 
-loc_483B8:
+HCZMiniS3_VortexCopyWaterPalette:
                 move.l  (a1)+,(a2)+
-                dbf     d0,loc_483B8
+                dbf     d0,HCZMiniS3_VortexCopyWaterPalette
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_483C0:
+HCZMiniS3_VortexAccelerateAndSpawn:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                beq.w   locret_47DC8
+                beq.w   HCZMiniS3_SharedReturn
                 move.b  #6,routine(a0)
-                move.l  #byte_48C30,$30(a0)
-                move.l  #loc_48400,$34(a0)
+                move.l  #HCZMiniS3_VortexAccelerationAnim,$30(a0)
+                move.l  #HCZMiniS3_VortexBeginCapture,$34(a0)
                 moveq   #signextendB(sfx_FanBig),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_48BD6(pc),a2
+                lea     HCZMiniS3_VortexOrbitChildren(pc),a2
                 jmp     (CreateChild6_Simple).l
 ; ---------------------------------------------------------------------------
 
-loc_483F6:
-                lea     byte_48C30(pc),a1
+HCZMiniS3_VortexAnimateAcceleration:
+                lea     HCZMiniS3_VortexAccelerationAnim(pc),a1
                 jmp     (Animate_RawNoSSTMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_48400:
+HCZMiniS3_VortexBeginCapture:
                 move.b  #8,routine(a0)
-                move.l  #byte_48C30,$30(a0)
-                move.l  #loc_48466,$34(a0)
+                move.l  #HCZMiniS3_VortexAccelerationAnim,$30(a0)
+                move.l  #HCZMiniS3_VortexResetRequestPoll,$34(a0)
                 clr.b   collision_property(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4841C:
+HCZMiniS3_VortexCaptureAndCheckStop:
                 bsr.w   CapturePlayersInHCZMinibossVortex
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                beq.s   loc_4843E
+                beq.s   HCZMiniS3_VortexReleaseAndDecelerate
                 moveq   #signextendB(sfx_BossRotate),d0
                 jsr     (Play_SFX_Continuous).l
-                lea     byte_48C55(pc),a1
+                lea     HCZMiniS3_VortexActiveAnim(pc),a1
                 jmp     (Animate_RawNoSST).l
 ; ---------------------------------------------------------------------------
 
-loc_4843E:
+HCZMiniS3_VortexReleaseAndDecelerate:
                 move.b  #$A,routine(a0)
                 bset    #3,$38(a0)
-                move.l  #loc_48466,$34(a0)
-                bsr.w   loc_487CA
+                move.l  #HCZMiniS3_VortexResetRequestPoll,$34(a0)
+                bsr.w   HCZMiniS3_VortexReleaseP1ThenP2
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_4845C:
-                lea     byte_48C5A(pc),a1
+HCZMiniS3_VortexAnimateDeceleration:
+                lea     HCZMiniS3_VortexDecelerationAnim(pc),a1
                 jmp     (Animate_RawNoSSTMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_48466:
+HCZMiniS3_VortexResetRequestPoll:
                 move.b  #4,routine(a0)
                 move.b  #$16,mapping_frame(a0)
                 bclr    #3,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4847A:
+; Boss flag 4 starts the breakup and releases any captured players
+HCZMiniS3_VortexWaitThenBreakUp:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                beq.s   loc_4849A
-                lea     ChildObjDat_48C08(pc),a2
+                beq.s   HCZMiniS3_VortexDefeatDraw
+                lea     HCZMiniS3_VortexDebrisChildren(pc),a2
                 jsr     (CreateChild1_Normal).l
-                bsr.w   loc_487CA
+                bsr.w   HCZMiniS3_VortexReleaseP1ThenP2
                 jsr     (Go_Delete_Sprite_2).l
 
-loc_4849A:
+HCZMiniS3_VortexDefeatDraw:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_484A0:
-                lea     ObjDat3_48B68(pc),a1
+HCZMiniS3_InitRandomOrbitParticle:
+                lea     HCZMiniS3_ParticleAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_484FC,(a0)
+                move.l  #HCZMiniS3_OrbitParticleAnimateAndDraw,(a0)
                 jsr     (Random_Number).l
                 andi.w  #$FF,d0
                 ext.w   d0
@@ -168,19 +169,19 @@ loc_484A0:
                 andi.w  #3,d0
                 move.b  d0,mapping_frame(a0)
                 lsl.w   #2,d0
-                move.l  off_484EC(pc,d0.w),$30(a0)
+                move.l  HCZMiniS3_ParticleAnimationPointers(pc,d0.w),$30(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_48516,$34(a0)
+                move.l  #HCZMiniS3_OrbitParticleFreezeFrame,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
-off_484EC:
-                dc.l    byte_48C8A
-                dc.l    byte_48C8E
-                dc.l    byte_48C92
-                dc.l    byte_48C96
+HCZMiniS3_ParticleAnimationPointers:
+                dc.l    HCZMiniS3_ParticleAnimBase0
+                dc.l    HCZMiniS3_ParticleAnimBase1
+                dc.l    HCZMiniS3_ParticleAnimBase2
+                dc.l    HCZMiniS3_ParticleAnimBase3
 ; ---------------------------------------------------------------------------
 
-loc_484FC:
+HCZMiniS3_OrbitParticleAnimateAndDraw:
                 movea.w parent3(a0),a3
                 bsr.w   MoveHCZVortexParticleAroundParent
                 jsr     (Animate_Raw).l
@@ -188,32 +189,32 @@ loc_484FC:
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_48516:
-                move.l  #loc_48528,(a0)
+HCZMiniS3_OrbitParticleFreezeFrame:
+                move.l  #HCZMiniS3_OrbitParticleUntilStop,(a0)
                 movea.l $30(a0),a1
                 move.b  1(a1),mapping_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_48528:
+HCZMiniS3_OrbitParticleUntilStop:
                 movea.w parent3(a0),a3
                 btst    #3,$38(a3)
-                bne.s   loc_4853E
+                bne.s   HCZMiniS3_OrbitParticleBeginFade
                 bsr.w   MoveHCZVortexParticleAroundParent
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_4853E:
-                move.l  #loc_484FC,(a0)
+HCZMiniS3_OrbitParticleBeginFade:
+                move.l  #HCZMiniS3_OrbitParticleAnimateAndDraw,(a0)
                 move.w  #$1F,$2E(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_48554:
-                lea     ObjDat3_48B68(pc),a1
+HCZMiniS3_InitWaterExitParticle:
+                lea     HCZMiniS3_ParticleAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_485E0,(a0)
+                move.l  #HCZMiniS3_ExitParticleMoveAndDraw,(a0)
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$A0,d0
                 move.w  d0,x_pos(a0)
@@ -225,10 +226,11 @@ loc_48554:
                 andi.w  #$FF,d0
                 move.w  d0,d1
                 ext.w   d0
-                bpl.s   loc_48592
+                bpl.s   HCZMiniS3_ExitParticleSetOffsetAndSpeed
                 st      $3C(a0)
 
-loc_48592:
+; Replace the launch helper's horizontal speed with the offset scaled by 16
+HCZMiniS3_ExitParticleSetOffsetAndSpeed:
                 add.w   d0,x_pos(a0)
                 bsr.w   SetHCZVortexLaunchVelocityFromOffset
                 lsl.w   #4,d0
@@ -241,7 +243,7 @@ loc_48592:
                 andi.w  #3,d0
                 move.b  d0,mapping_frame(a0)
                 lsl.w   #2,d0
-                lea     off_484EC(pc),a1
+                lea     HCZMiniS3_ParticleAnimationPointers(pc),a1
                 move.l  (a1,d0.w),$30(a0)
                 move.w  #$200,y_vel(a0)
                 move.w  #$BF,$2E(a0)
@@ -249,9 +251,9 @@ loc_48592:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_485E0:
+HCZMiniS3_ExitParticleMoveAndDraw:
                 tst.b   render_flags(a0)
-                bpl.s   loc_48602
+                bpl.s   HCZMiniS3_ExitParticleDeleteOffscreen
                 bsr.w   AccelerateHCZVortexActorTowardCenterX
                 jsr     (MoveSprite2).l
                 jsr     (Animate_Raw).l
@@ -259,15 +261,15 @@ loc_485E0:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_48602:
+HCZMiniS3_ExitParticleDeleteOffscreen:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_48608:
+HCZMiniS3_TransportWaitForP1Underwater:
                 lea     (Player_1).w,a1
                 btst    #Status_Underwater,status(a1)
-                beq.w   locret_47DC8
-                move.l  #loc_486B6,(a0)
+                beq.w   HCZMiniS3_SharedReturn
+                move.l  #HCZMiniS3_TransportMoveAndSyncPlayer,(a0)
                 clr.b   (_unkFAA2).w
                 movea.w parent3(a0),a1
                 bset    #0,$38(a1)
@@ -275,16 +277,16 @@ loc_48608:
                 lea     (Player_1).w,a1
                 lea     (Ctrl_1_locked).w,a2
                 tst.b   subtype(a0)
-                beq.s   loc_48650
+                beq.s   HCZMiniS3_TransportUnlockAndBindPlayer
                 lea     (Player_2).w,a1
                 lea     (Ctrl_2_locked).w,a2
                 btst    #Status_Underwater,status(a1)
-                beq.w   loc_486B0
+                beq.w   HCZMiniS3_TransportDeleteIfNoPlayer
 
-loc_48650:
+HCZMiniS3_TransportUnlockAndBindPlayer:
                 clr.b   (a2)
                 tst.l   (a1)
-                beq.s   loc_486B0
+                beq.s   HCZMiniS3_TransportDeleteIfNoPlayer
                 move.w  a1,$44(a0)
                 bclr    #7,art_tile(a0)
                 move.w  x_pos(a1),d0
@@ -294,10 +296,10 @@ loc_48650:
                 addi.w  #$A0,d1
                 move.w  d1,$3A(a0)
                 sub.w   d1,d0
-                bpl.s   loc_48682
+                bpl.s   HCZMiniS3_TransportLaunchAndTakeControl
                 st      $3C(a0)
 
-loc_48682:
+HCZMiniS3_TransportLaunchAndTakeControl:
                 bsr.w   SetHCZVortexLaunchVelocityFromOffset
                 move.w  #$200,y_vel(a0)
                 bset    #Status_InAir,status(a1)
@@ -310,11 +312,11 @@ loc_48682:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_486B0:
+HCZMiniS3_TransportDeleteIfNoPlayer:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_486B6:
+HCZMiniS3_TransportMoveAndSyncPlayer:
                 bsr.w   AccelerateHCZVortexActorTowardCenterX
                 jsr     (MoveSprite2).l
                 movea.w $44(a0),a1
@@ -322,31 +324,31 @@ loc_486B6:
                 move.w  y_pos(a0),d0
                 move.w  d0,y_pos(a1)
                 cmpi.w  #$828,d0
-                bhs.s   loc_486DA
+                bhs.s   HCZMiniS3_TransportChooseRelease
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_486DA:
+HCZMiniS3_TransportChooseRelease:
                 tst.b   subtype(a0)
-                beq.s   loc_486F2
+                beq.s   HCZMiniS3_TransportReleaseP1AndSetBounds
                 lea     (Player_2).w,a1
                 tst.l   (a1)
-                beq.s   loc_48704
+                beq.s   HCZMiniS3_TransportDeleteAfterRelease
                 jsr     (Restore_PlayerControl2).l
-                bra.w   loc_48704
+                bra.w   HCZMiniS3_TransportDeleteAfterRelease
 ; ---------------------------------------------------------------------------
 
-loc_486F2:
+HCZMiniS3_TransportReleaseP1AndSetBounds:
                 jsr     (Restore_PlayerControl).l
                 move.w  #0,(Camera_stored_min_Y_pos).w
                 jsr     (Make_LevelSizeObj).l
 
-loc_48704:
+HCZMiniS3_TransportDeleteAfterRelease:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_4870A:
-                lea     word_48B86(pc),a1
+HCZMiniS3_InitBossFragmentFlicker:
+                lea     HCZMiniS3_BossFragmentAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.l  #Obj_FlickerMove,(a0)
                 moveq   #0,d0
@@ -358,8 +360,8 @@ loc_4870A:
                 jmp     (Set_IndexedVelocity).l
 ; ---------------------------------------------------------------------------
 
-loc_48732:
-                lea     word_48B8C(pc),a1
+HCZMiniS3_InitFallingVortexDebris:
+                lea     HCZMiniS3_VortexDebrisAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.l  #MoveChkDel,(a0)
                 moveq   #0,d0
@@ -369,4 +371,4 @@ loc_48732:
                 move.b  d0,mapping_frame(a0)
                 moveq   #$1C,d0
                 jmp     (Set_IndexedVelocity).l
-; End of function loc_48732
+; End of function HCZMiniS3_InitFallingVortexDebris

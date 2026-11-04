@@ -1161,9 +1161,15 @@
       "commits": ["78e8c8f631741ed9a2e280c00af12d4d7bbe2265"]
     },
     {
-      "id": "current-shorten-36-boss-aiz",
+      "id": "change-5ab21d7ab88c",
       "kind": "source_or_tooling",
       "summary": "Apply 575 reviewed short labels for boss aiz.",
+      "commits": ["5ab21d7ab88cb60328f9c7169a4fa372d597c5db"]
+    },
+    {
+      "id": "current-shorten-37-boss-hcz",
+      "kind": "source_or_tooling",
+      "summary": "Apply 634 reviewed short labels for boss hcz.",
       "commits": ["release-commit"]
     }
   ],

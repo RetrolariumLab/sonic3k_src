@@ -10,17 +10,18 @@ AccelerateHCZVortexActorTowardCenterX:
                 move.w  #$100,d2
                 cmp.w   $3A(a0),d0
                 scs     d3
-                bcs.s   loc_6A92C
+                bcs.s   HCZMiniSK_AccelerateXAcrossCenter
                 neg.w   d2
 
-loc_6A92C:
+; Apply the acceleration twice when the subject crosses the center
+HCZMiniSK_AccelerateXAcrossCenter:
                 add.w   d2,d1
                 cmp.b   $3C(a0),d3
-                beq.s   loc_6A93A
+                beq.s   HCZMiniSK_StoreCenteringXSpeed
                 move.b  d3,$3C(a0)
                 add.w   d2,d1
 
-loc_6A93A:
+HCZMiniSK_StoreCenteringXSpeed:
                 move.w  d1,x_vel(a0)
                 rts
 ; End of function AccelerateHCZVortexActorTowardCenterX
@@ -30,22 +31,22 @@ loc_6A93A:
 SetHCZVortexLaunchVelocityFromOffset:
                 add.w   d0,d0
                 smi     d2
-                bpl.s   loc_6A948
+                bpl.s   HCZMiniSK_ClampLaunchMagnitude
                 neg.w   d0
 
-loc_6A948:
+HCZMiniSK_ClampLaunchMagnitude:
                 move.w  #$100,d3
                 sub.w   d0,d3
-                bpl.s   loc_6A952
+                bpl.s   HCZMiniSK_ScaleAndSignLaunchX
                 moveq   #0,d3
 
-loc_6A952:
+HCZMiniSK_ScaleAndSignLaunchX:
                 lsl.w   #4,d3
                 tst.b   d2
-                beq.s   loc_6A95A
+                beq.s   HCZMiniSK_StoreLaunchXSpeed
                 neg.w   d3
 
-loc_6A95A:
+HCZMiniSK_StoreLaunchXSpeed:
                 move.w  d3,x_vel(a0)
                 rts
 ; End of function SetHCZVortexLaunchVelocityFromOffset
@@ -55,21 +56,21 @@ loc_6A95A:
 SwitchHCZVortexToParentDefeatState:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                beq.w   locret_69F78
-                move.l  #loc_6A636,(a0)
+                beq.w   HCZMiniSK_SharedReturn
+                move.l  #HCZMiniSK_VortexWaitThenBreakUp,(a0)
                 clr.b   collision_flags(a0)
                 bclr    #3,$38(a0)
-                beq.w   locret_69F78
-                bra.w   loc_6A986
+                beq.w   HCZMiniSK_SharedReturn
+                bra.w   HCZMiniSK_VortexReleaseP1ThenP2
 
-loc_6A986:
+HCZMiniSK_VortexReleaseP1ThenP2:
                 move.w  $42(a0),d0
-                beq.s   loc_6A990
+                beq.s   HCZMiniSK_VortexReleaseP2
                 bsr.w   ReleaseHCZVortexControlledPlayer
 
-loc_6A990:
+HCZMiniSK_VortexReleaseP2:
                 move.w  $44(a0),d0
-                beq.s   locret_6A9A8
+                beq.s   HCZMiniSK_VortexReleaseReturn
 ; End of function SwitchHCZVortexToParentDefeatState
 
 ; =============== S U B R O U T I N E =======================================
@@ -80,7 +81,7 @@ ReleaseHCZVortexControlledPlayer:
                 clr.b   object_control(a2)
                 move.w  #$100,priority(a2)
 
-locret_6A9A8:
+HCZMiniSK_VortexReleaseReturn:
                 rts
 ; End of function ReleaseHCZVortexControlledPlayer
 
@@ -103,23 +104,24 @@ CapturePlayersInHCZMinibossVortex:
                 subi.w  #$20,d0
                 lea     (Player_1).w,a2
                 cmp.w   y_pos(a2),d0
-                bhi.s   loc_6A9E0
+                bhi.s   HCZMiniSK_VortexCheckP2Capture
                 move.w  a2,$42(a0)
                 bsr.w   ApplyHCZVortexOrbitToSubject
                 tst.b   object_control(a2)
-                bne.s   loc_6A9E0
+                bne.s   HCZMiniSK_VortexCheckP2Capture
                 bsr.w   InitializeHCZVortexPlayerControl
 
-loc_6A9E0:
+; Compare player two against the value already in D0 after processing player one
+HCZMiniSK_VortexCheckP2Capture:
                 lea     (Player_2).w,a2
                 cmp.w   y_pos(a2),d0
-                bhi.s   locret_6AA22
+                bhi.s   HCZMiniSK_VortexCaptureReturn
                 cmpi.b  #6,routine(a2)
-                bhs.s   locret_6AA22
+                bhs.s   HCZMiniSK_VortexCaptureReturn
                 move.w  a2,$44(a0)
                 bsr.w   ApplyHCZVortexOrbitToSubject
                 tst.b   object_control(a2)
-                bne.s   locret_6AA22
+                bne.s   HCZMiniSK_VortexCaptureReturn
 ; End of function CapturePlayersInHCZMinibossVortex
 
 ; =============== S U B R O U T I N E =======================================
@@ -133,7 +135,7 @@ InitializeHCZVortexPlayerControl:
                 clr.w   y_vel(a2)
                 clr.w   ground_vel(a2)
 
-locret_6AA22:
+HCZMiniSK_VortexCaptureReturn:
                 rts
 ; End of function InitializeHCZVortexPlayerControl
 
@@ -154,37 +156,37 @@ ApplyHCZVortexOrbitToSubject:
                 move.w  #$40,d2
                 sub.w   x_pos(a0),d0
                 scs     d3
-                bcc.s   loc_6AA46
+                bcc.s   HCZMiniSK_OrbitChooseXAcceleration
                 neg.w   d0
 
-loc_6AA46:
+HCZMiniSK_OrbitChooseXAcceleration:
                 cmpi.w  #3,d0
-                bhi.s   loc_6AA54
+                bhi.s   HCZMiniSK_OrbitResetSpeedOutsideRadius
                 tst.w   d1
-                bpl.s   loc_6AA62
-                bra.w   loc_6AA60
+                bpl.s   HCZMiniSK_OrbitSetXSpeedAndDepth
+                bra.w   HCZMiniSK_OrbitNegateXAcceleration
 ; ---------------------------------------------------------------------------
 
-loc_6AA54:
+HCZMiniSK_OrbitResetSpeedOutsideRadius:
                 cmpi.w  #$70,d0
-                bls.s   loc_6AA5C
+                bls.s   HCZMiniSK_OrbitChooseSideAcceleration
                 moveq   #0,d1
 
-loc_6AA5C:
+HCZMiniSK_OrbitChooseSideAcceleration:
                 tst.b   d3
-                bne.s   loc_6AA62
+                bne.s   HCZMiniSK_OrbitSetXSpeedAndDepth
 
-loc_6AA60:
+HCZMiniSK_OrbitNegateXAcceleration:
                 neg.w   d2
 
-loc_6AA62:
+HCZMiniSK_OrbitSetXSpeedAndDepth:
                 add.w   d2,d1
                 move.w  #$100,priority(a2)
                 move.w  d1,x_vel(a2)
-                bpl.s   loc_6AA76
+                bpl.s   HCZMiniSK_OrbitMoveXAndCheckY
                 move.w  #$300,priority(a2)
 
-loc_6AA76:
+HCZMiniSK_OrbitMoveXAndCheckY:
                 ext.l   d1
                 lsl.l   #8,d1
                 add.l   d1,x_pos(a2)
@@ -192,15 +194,15 @@ loc_6AA76:
                 move.w  y_pos(a2),d5
                 sub.w   y_pos(a0),d5
                 cmpi.w  #-$10,d5
-                blt.s   loc_6AA9A
+                blt.s   HCZMiniSK_OrbitApplyHalfPixelYStep
                 cmpi.w  #$10,d5
-                ble.s   locret_6AA9E
+                ble.s   HCZMiniSK_OrbitUpdateReturn
                 neg.l   d4
 
-loc_6AA9A:
+HCZMiniSK_OrbitApplyHalfPixelYStep:
                 add.l   d4,y_pos(a2)
 
-locret_6AA9E:
+HCZMiniSK_OrbitUpdateReturn:
                 rts
 ; End of function ApplyHCZVortexOrbitToSubject
 
@@ -208,10 +210,10 @@ locret_6AA9E:
 
 TriggerHCZBossSplashIfSubmerged:
                 btst    #7,$38(a0)
-                bne.w   locret_69F78
+                bne.w   HCZMiniSK_SharedReturn
                 move.w  y_pos(a0),d0
                 cmp.w   (Water_level).w,d0
-                blo.w   locret_69F78
+                blo.w   HCZMiniSK_SharedReturn
 ; End of function TriggerHCZBossSplashIfSubmerged
 
 ; =============== S U B R O U T I N E =======================================
@@ -221,7 +223,7 @@ CreateHCZBossSurfaceSplash:
                 moveq   #signextendB(sfx_Splash),d0
                 jsr     (Play_SFX).l
                 clr.w   (Slotted_object_bits).w
-                lea     ChildObjDat_6AD7E(pc),a2
+                lea     HCZMiniSK_SurfaceSplashChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; End of function CreateHCZBossSurfaceSplash
 
@@ -231,18 +233,18 @@ SelectHCZBossDiveLaneAndRepeatCount:
                 move.b  $3A(a0),d0
                 addq.b  #2,$3A(a0)
                 andi.w  #$E,d0
-                lea     byte_6AB0A(pc,d0.w),a1
+                lea     HCZMiniSK_DiveLaneAndRepeatPairs(pc,d0.w),a1
                 move.b  (a1)+,d0
-                bne.s   loc_6AAEA
+                bne.s   HCZMiniSK_DiveLaneChooseSweepDirection
                 move.w  #$100,d0
 
-loc_6AAEA:
+HCZMiniSK_DiveLaneChooseSweepDirection:
                 move.w  #$400,d2
                 cmpi.w  #$A0,d0
-                blo.s   loc_6AAF6
+                blo.s   HCZMiniSK_DiveLaneApplyPositionAndCount
                 neg.w   d2
 
-loc_6AAF6:
+HCZMiniSK_DiveLaneApplyPositionAndCount:
                 move.w  d2,$40(a0)
                 move.w  (Camera_X_pos).w,d1
                 add.w   d0,d1
@@ -252,7 +254,7 @@ loc_6AAF6:
 ; End of function SelectHCZBossDiveLaneAndRepeatCount
 
 ; ---------------------------------------------------------------------------
-byte_6AB0A:
+HCZMiniSK_DiveLaneAndRepeatPairs:
                 dc.b    $40,   1
                 dc.b    0,   1
                 dc.b    $40,   0
@@ -274,18 +276,18 @@ UpdateHCZMinibossRocketTwistPose:
                 moveq   #0,d0
                 move.b  $3D(a0),d0
                 lsr.w   #4,d0
-                move.b  byte_6AB50(pc,d0.w),mapping_frame(a0)
+                move.b  HCZMiniSK_RocketTwistFrames(pc,d0.w),mapping_frame(a0)
                 move.w  #$200,priority(a0)
                 cmpi.b  #8,d0
-                blo.s   locret_6AB4E
+                blo.s   HCZMiniSK_RocketTwistPoseReturn
                 move.w  #$280,priority(a0)
 
-locret_6AB4E:
+HCZMiniSK_RocketTwistPoseReturn:
                 rts
 ; End of function UpdateHCZMinibossRocketTwistPose
 
 ; ---------------------------------------------------------------------------
-byte_6AB50:
+HCZMiniSK_RocketTwistFrames:
                 dc.b    1
                 dc.b    2
                 dc.b    3
@@ -320,12 +322,12 @@ PositionHCZMinibossRocketTwistX:
 
 LookupHCZMinibossRocketTwistOffset:
                 cmpi.b  #$80,d0
-                blo.s   loc_6AB82
+                blo.s   HCZMiniSK_RocketTwistLoadFacingOffset
                 moveq   #-1,d1
                 sub.b   d0,d1
                 move.b  d1,d0
 
-loc_6AB82:
+HCZMiniSK_RocketTwistLoadFacingOffset:
                 lea     (HCZMiniboss_RocketTwistLookup).l,a1
                 move.b  (a1,d0.w),d1
                 ext.w   d1
@@ -353,16 +355,16 @@ FollowHCZMinibossRocketTipPose:
                 move.b  $3D(a2),d0
                 lsr.w   #3,d0
                 andi.w  #$FFFE,d0
-                move.w  word_6ABF8(pc,d0.w),priority(a0)
-                lea     byte_6AC18(pc,d0.w),a1
+                move.w  HCZMiniSK_RocketTipDepthByPhase(pc,d0.w),priority(a0)
+                lea     HCZMiniSK_RocketTipOffsetsByPhase(pc,d0.w),a1
                 move.b  (a1)+,d1
                 ext.w   d1
                 btst    #0,render_flags(a2)
-                beq.s   loc_6ABD6
+                beq.s   HCZMiniSK_RocketTipSetOffsetAndDepth
                 neg.w   d1
                 bset    #0,render_flags(a0)
 
-loc_6ABD6:
+HCZMiniSK_RocketTipSetOffsetAndDepth:
                 move.b  (a1)+,d2
                 ext.w   d2
                 move.w  x_pos(a2),d3
@@ -372,12 +374,12 @@ loc_6ABD6:
                 add.w   d2,d3
                 move.w  d3,y_pos(a0)
                 lsr.w   #1,d0
-                move.b  byte_6AC38(pc,d0.w),mapping_frame(a0)
+                move.b  HCZMiniSK_RocketTipFramesByPhase(pc,d0.w),mapping_frame(a0)
                 rts
 ; End of function FollowHCZMinibossRocketTipPose
 
 ; ---------------------------------------------------------------------------
-word_6ABF8:
+HCZMiniSK_RocketTipDepthByPhase:
                 dc.w    $280
                 dc.w    $200
                 dc.w    $200
@@ -394,7 +396,7 @@ word_6ABF8:
                 dc.w    $280
                 dc.w    $280
                 dc.w    $280
-byte_6AC18:
+HCZMiniSK_RocketTipOffsetsByPhase:
                 dc.b    3,   3
                 dc.b    0,   0
                 dc.b    6,   6
@@ -411,7 +413,7 @@ byte_6AC18:
                 dc.b    -$A, -$A
                 dc.b    0,   0
                 dc.b    0,   0
-byte_6AC38:
+HCZMiniSK_RocketTipFramesByPhase:
                 dc.b    $E,  $F
                 dc.b    $10, $11
                 dc.b    $12, $11
@@ -426,49 +428,50 @@ byte_6AC38:
 
 HandleHCZMinibossHitFlashOrDefeat:
                 tst.b   collision_flags(a0)
-                bne.s   locret_6ACA4
+                bne.s   HCZMiniSK_HitUpdateReturn
                 tst.b   collision_property(a0)
-                beq.s   loc_6ACA6
+                beq.s   HCZMiniSK_BeginScoredDefeatWait
                 tst.b   $20(a0)
-                bne.s   loc_6AC68
+                bne.s   HCZMiniSK_HitChooseFlashRow
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
 
-loc_6AC68:
+HCZMiniSK_HitChooseFlashRow:
                 bset    #6,status(a0)
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_6AC7C
+                bne.s   HCZMiniSK_HitCopyColorsAndTick
                 addi.w  #2*7,d0
 
-loc_6AC7C:
-                lea     word_6ACC6(pc),a1
-                lea     word_6ACD4(pc,d0.w),a2
+; Re-enable collision at the end of the flash only if the mapping frame is zero
+HCZMiniSK_HitCopyColorsAndTick:
+                lea     HCZMiniSK_HitPaletteDestinations(pc),a1
+                lea     HCZMiniSK_HitPaletteColorRows(pc,d0.w),a2
                 jsr     (CopyWordData_7).l
                 subq.b  #1,$20(a0)
-                bne.s   locret_6ACA4
+                bne.s   HCZMiniSK_HitUpdateReturn
                 bclr    #6,status(a0)
                 cmpi.b  #0,mapping_frame(a0)
-                bne.s   locret_6ACA4
+                bne.s   HCZMiniSK_HitUpdateReturn
                 move.b  $25(a0),collision_flags(a0)
 
-locret_6ACA4:
+HCZMiniSK_HitUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6ACA6:
+HCZMiniSK_BeginScoredDefeatWait:
                 move.l  #Wait_FadeToLevelMusic,(a0)
-                move.l  #loc_6A22A,$34(a0)
+                move.l  #HCZMiniSK_FreezeWaterAndTryExit,$34(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild1_Normal).l
                 jmp     (BossDefeated_StopTimer).l
 ; End of function HandleHCZMinibossHitFlashOrDefeat
 
 ; ---------------------------------------------------------------------------
-word_6ACC6:
+HCZMiniSK_HitPaletteDestinations:
                 dc.w    Normal_palette_line_2+$08, Normal_palette_line_2+$0E, Normal_palette_line_2+$12, Normal_palette_line_2+$14
                 dc.w    Normal_palette_line_2+$16, Normal_palette_line_2+$1A, Normal_palette_line_2+$1C
-word_6ACD4:
+HCZMiniSK_HitPaletteColorRows:
                 dc.w    4,     0,    $C,     8,   $20,  $826,  $624
                 dc.w    $AAA,  $AAA,  $888,  $AAA,  $EEE,  $888,  $AAA

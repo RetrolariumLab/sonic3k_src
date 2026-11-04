@@ -7,24 +7,24 @@
 ; After capture, subtract eight from the secondary player's integer Y each update
 S3HCZGeyser_CaptureAndLiftP2:
                 move.w  $44(a0),d0
-                beq.s   locret_4972A
+                beq.s   HCZBossS3_ExitP2CaptureReturn
                 movea.w d0,a1
                 btst    #2,$38(a0)
-                bne.s   loc_49726
+                bne.s   HCZBossS3_ExitLiftTrackedP2
                 move.w  y_pos(a0),d0
                 subi.w  #$60,d0
                 cmp.w   y_pos(a1),d0
-                bcc.s   locret_4972A
+                bcc.s   HCZBossS3_ExitP2CaptureReturn
                 bset    #2,$38(a0)
                 move.b  #$81,object_control(a1)
                 move.b  #$1A,anim(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_49726:
+HCZBossS3_ExitLiftTrackedP2:
                 subq.w  #8,y_pos(a1)
 
-locret_4972A:
+HCZBossS3_ExitP2CaptureReturn:
                 rts
 ; End of function S3HCZGeyser_CaptureAndLiftP2
 
@@ -33,24 +33,24 @@ locret_4972A:
 SetHCZBossBombStackPriority:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_4973A(pc,d0.w),priority(a0)
+                move.w  HCZBossS3_BombStackPriorities(pc,d0.w),priority(a0)
                 rts
 ; End of function SetHCZBossBombStackPriority
 
 ; ---------------------------------------------------------------------------
-word_4973A:
+HCZBossS3_BombStackPriorities:
                 dc.w    $280
                 dc.w    $200
                 dc.w    $180
 ; ---------------------------------------------------------------------------
 
-loc_49740:
+HCZBossS3_BombLoadCompactionSteps:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_4974E(pc,d0.w),$40(a0)
+                move.w  HCZBossS3_BombPackedCompactionSteps(pc,d0.w),$40(a0)
                 rts
 ; ---------------------------------------------------------------------------
-word_4974E:
+HCZBossS3_BombPackedCompactionSteps:
                 dc.w    $101
                 dc.w    $100
 
@@ -61,23 +61,24 @@ SynchronizeHCZBossVortexHeightVisual:
                 moveq   #0,d0
                 move.b  $39(a1),d0
                 cmp.b   $39(a0),d0
-                beq.s   locret_49782
+                beq.s   HCZBossS3_VortexHeightSyncReturn
                 move.b  d0,$39(a0)
-                move.b  byte_49784+1(pc,d0.w),d1
+                move.b  HCZBossS3_VortexHeightYOffsets+1(pc,d0.w),d1
                 ext.w   d1
                 move.w  (Water_level).w,d2
                 add.w   d1,d2
                 move.w  d2,y_pos(a0)
                 lsl.w   #2,d0
-                move.l  off_49790(pc,d0.w),$30(a0)
+                move.l  HCZBossS3_VortexAnimationsByHeight(pc,d0.w),$30(a0)
                 clr.b   anim_frame_timer(a0)
 
-locret_49782:
+HCZBossS3_VortexHeightSyncReturn:
                 rts
 ; End of function SynchronizeHCZBossVortexHeightVisual
 
 ; ---------------------------------------------------------------------------
-byte_49784:
+; The final bytes preserve the original instruction tail after the offset data
+HCZBossS3_VortexHeightYOffsets:
                 dc.b    -8
                 dc.b    -8
                 dc.b    -$10
@@ -91,13 +92,13 @@ byte_49784:
                 dc.b    -$64
                 dc.b    $61
                 even
-off_49790:
-                dc.l    byte_49C61
-                dc.l    byte_49C66
-                dc.l    byte_49C6B
-                dc.l    byte_49C70
-                dc.l    byte_49C75
-                dc.l    byte_49C75
+HCZBossS3_VortexAnimationsByHeight:
+                dc.l    HCZBossS3_VortexHeight0Anim
+                dc.l    HCZBossS3_VortexHeight1Anim
+                dc.l    HCZBossS3_VortexHeight2Anim
+                dc.l    HCZBossS3_VortexHeight3Anim
+                dc.l    HCZBossS3_VortexHeight4And5Anim
+                dc.l    HCZBossS3_VortexHeight4And5Anim
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -105,28 +106,28 @@ ConfigureHCZBossGeyserLayerFromSubtype:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,$2E(a0)
-                move.w  word_497CA(pc,d0.w),d1
+                move.w  HCZBossS3_GeyserLayerYOffsets(pc,d0.w),d1
                 move.w  (Water_level).w,d2
                 add.w   d1,d2
                 move.w  d2,y_pos(a0)
                 add.w   d0,d0
-                move.l  off_497D4(pc,d0.w),$30(a0)
+                move.l  HCZBossS3_GeyserLayerAnimationPointers(pc,d0.w),$30(a0)
                 rts
 ; End of function ConfigureHCZBossGeyserLayerFromSubtype
 
 ; ---------------------------------------------------------------------------
-word_497CA:
+HCZBossS3_GeyserLayerYOffsets:
                 dc.w    -8
                 dc.w    -$18
                 dc.w    -$28
                 dc.w    -$38
                 dc.w    -$48
-off_497D4:
-                dc.l    byte_49C87
-                dc.l    byte_49CBE
-                dc.l    byte_49CED
-                dc.l    byte_49D14
-                dc.l    byte_49D33
+HCZBossS3_GeyserLayerAnimationPointers:
+                dc.l    HCZBossS3_GeyserLayer0Anim
+                dc.l    HCZBossS3_GeyserLayer1Anim
+                dc.l    HCZBossS3_GeyserLayer2Anim
+                dc.l    HCZBossS3_GeyserLayer3Anim
+                dc.l    HCZBossS3_GeyserLayer4Anim
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -144,17 +145,17 @@ PullBothPlayersTowardHCZBossVortex:
 
 PullDeepPlayerWithHCZVortexDisplacement:
                 tst.b   object_control(a1)
-                bne.s   locret_4981C
+                bne.s   HCZBossS3_VortexPullReturn
                 cmp.w   y_pos(a1),d1
-                bhs.s   locret_4981C
+                bhs.s   HCZBossS3_VortexPullReturn
                 cmp.w   x_pos(a1),d0
-                bhs.s   loc_49818
+                bhs.s   HCZBossS3_VortexApplyPullToPlayerX
                 neg.l   d2
 
-loc_49818:
+HCZBossS3_VortexApplyPullToPlayerX:
                 add.l   d2,x_pos(a1)
 
-locret_4981C:
+HCZBossS3_VortexPullReturn:
                 rts
 ; End of function PullDeepPlayerWithHCZVortexDisplacement
 
@@ -165,7 +166,7 @@ CaptureBothPlayersInHCZBossVortex:
                 moveq   #0,d0
                 move.b  $39(a1),d0
                 lsl.w   #2,d0
-                lea     word_498FE(pc),a1
+                lea     HCZBossS3_VortexCaptureBoundsByHeight(pc),a1
                 lea     (a1,d0.w),a1
                 moveq   #$42,d4
                 lea     (Player_1).w,a2
@@ -181,34 +182,34 @@ CaptureAndLiftPlayerInHCZBossVortex:
                 btst    #7,status(a3)
                 bne.w   ReleasePlayerFromHCZBossVortex
                 cmpi.b  #6,routine(a2)
-                bhs.w   loc_498EE
+                bhs.w   HCZBossS3_VortexReleaseInvalidPlayer
                 tst.b   invulnerability_timer(a2)
-                bne.w   loc_498EE
+                bne.w   HCZBossS3_VortexReleaseInvalidPlayer
                 tst.b   object_control(a2)
-                beq.s   loc_4986E
+                beq.s   HCZBossS3_VortexCheckCaptureBounds
                 tst.b   (a0,d4.w)
-                bne.s   loc_498A8
+                bne.s   HCZBossS3_VortexCheckHeldPlayer
 
-loc_4986E:
+HCZBossS3_VortexCheckCaptureBounds:
                 move.w  y_pos(a0),d0
                 move.w  y_pos(a2),d2
                 add.w   (a1),d0
                 cmp.w   d0,d2
-                blo.w   locret_4993C
+                blo.w   HCZBossS3_VortexCaptureReturn
                 add.w   2(a1),d0
                 cmp.w   d0,d2
-                bhs.w   locret_4993C
+                bhs.w   HCZBossS3_VortexCaptureReturn
                 move.w  x_pos(a0),d0
                 move.w  x_pos(a2),d2
                 sub.w   d2,d0
                 addi.w  #$10,d0
                 cmpi.w  #$20,d0
-                bhs.w   locret_4993C
+                bhs.w   HCZBossS3_VortexCaptureReturn
                 tst.b   object_control(a2)
-                bne.s   loc_498A8
+                bne.s   HCZBossS3_VortexCheckHeldPlayer
                 bsr.w   InitializeHCZBossVortexPlayerCapture
 
-loc_498A8:
+HCZBossS3_VortexCheckHeldPlayer:
                 move.w  y_pos(a0),d0
                 move.w  y_pos(a2),d2
                 add.w   (a1)+,d0
@@ -223,10 +224,10 @@ loc_498A8:
                 cmpi.w  #$12,d0
                 bge.s   ReleasePlayerFromHCZBossVortex
                 tst.w   d0
-                bmi.s   loc_498DA
+                bmi.s   HCZBossS3_VortexMoveAndLiftPlayer
                 neg.w   d2
 
-loc_498DA:
+HCZBossS3_VortexMoveAndLiftPlayer:
                 add.w   d2,d1
                 move.w  d1,x_vel(a2)
                 ext.l   d1
@@ -236,7 +237,7 @@ loc_498DA:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_498EE:
+HCZBossS3_VortexReleaseInvalidPlayer:
                 jsr     (Displace_PlayerOffObject).l
                 clr.b   (a0,d4.w)
                 clr.b   object_control(a2)
@@ -244,7 +245,7 @@ loc_498EE:
 ; End of function CaptureAndLiftPlayerInHCZBossVortex
 
 ; ---------------------------------------------------------------------------
-word_498FE:
+HCZBossS3_VortexCaptureBoundsByHeight:
                 dc.w    -$18,   $48
                 dc.w    -$20,   $58
                 dc.w    -$28,   $68
@@ -264,7 +265,7 @@ InitializeHCZBossVortexPlayerCapture:
                 clr.w   y_vel(a2)
                 clr.w   ground_vel(a2)
 
-locret_4993C:
+HCZBossS3_VortexCaptureReturn:
                 rts
 ; End of function InitializeHCZBossVortexPlayerCapture
 
@@ -284,32 +285,32 @@ ReleasePlayerFromHCZBossVortex:
 
 ; ---------------------------------------------------------------------------
 
-loc_49960:
+HCZBossS3_VortexReleaseTrackedP1:
                 tst.b   $42(a0)
-                beq.s   loc_49970
+                beq.s   HCZBossS3_VortexReleaseTrackedP2
                 clr.b   $42(a0)
                 lea     (Player_1).w,a2
                 bsr.s   ReleasePlayerFromHCZBossVortex
 
-loc_49970:
+HCZBossS3_VortexReleaseTrackedP2:
                 tst.b   $43(a0)
-                beq.s   locret_49980
+                beq.s   HCZBossS3_VortexReleaseReturn
                 clr.b   $43(a0)
                 lea     (Player_2).w,a2
                 bsr.s   ReleasePlayerFromHCZBossVortex
 
-locret_49980:
+HCZBossS3_VortexReleaseReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
 ApplyHCZBossGeyserToBothPlayers:
                 cmpi.b  #$30,anim_frame(a0)
-                bhs.s   locret_499D2
-                lea     word_499D4(pc),a1
+                bhs.s   HCZBossS3_GeyserLaunchReturn
+                lea     HCZBossS3_GeyserLaunchBounds(pc),a1
                 lea     (Player_1).w,a2
                 bsr.w   LaunchPlayerInsideHCZBossGeyserRectangle
-                lea     word_499D4(pc),a1
+                lea     HCZBossS3_GeyserLaunchBounds(pc),a1
                 lea     (Player_2).w,a2
 ; End of function ApplyHCZBossGeyserToBothPlayers
 
@@ -317,31 +318,31 @@ ApplyHCZBossGeyserToBothPlayers:
 
 LaunchPlayerInsideHCZBossGeyserRectangle:
                 tst.b   object_control(a2)
-                bne.s   locret_499D2
+                bne.s   HCZBossS3_GeyserLaunchReturn
                 move.w  x_pos(a0),d0
                 move.w  x_pos(a2),d1
                 add.w   (a1)+,d0
                 cmp.w   d0,d1
-                blo.s   locret_499D2
+                blo.s   HCZBossS3_GeyserLaunchReturn
                 add.w   (a1)+,d0
                 cmp.w   d0,d1
-                bhs.s   locret_499D2
+                bhs.s   HCZBossS3_GeyserLaunchReturn
                 move.w  y_pos(a0),d0
                 move.w  y_pos(a2),d1
                 add.w   (a1)+,d0
                 cmp.w   d0,d1
-                blo.s   locret_499D2
+                blo.s   HCZBossS3_GeyserLaunchReturn
                 add.w   (a1)+,d0
                 cmp.w   d0,d1
-                bhs.s   locret_499D2
+                bhs.s   HCZBossS3_GeyserLaunchReturn
                 move.w  #-$800,y_vel(a2)
 
-locret_499D2:
+HCZBossS3_GeyserLaunchReturn:
                 rts
 ; End of function LaunchPlayerInsideHCZBossGeyserRectangle
 
 ; ---------------------------------------------------------------------------
-word_499D4:
+HCZBossS3_GeyserLaunchBounds:
                 dc.w    -$C,   $18
                 dc.w    -$38,   $40
 
@@ -354,10 +355,10 @@ AccelerateHCZBossBubbleTowardParentX:
                 move.w  #$80,d2
                 sub.w   x_pos(a1),d0
                 tst.w   d0
-                bmi.s   loc_499F6
+                bmi.s   HCZBossS3_BubbleIntegrateCenterX
                 neg.w   d2
 
-loc_499F6:
+HCZBossS3_BubbleIntegrateCenterX:
                 add.w   d2,d1
                 move.w  d1,x_vel(a0)
                 ext.l   d1
@@ -371,47 +372,47 @@ loc_499F6:
 ; The 32-update flash changes three colors. Defeat installs the wait handler for this engine
 HCZBoss_HandleHitFlashOrDefeat:
                 tst.l   (a0)
-                beq.s   locret_49A5C
+                beq.s   HCZBossS3_HitUpdateReturn
                 tst.b   collision_flags(a0)
-                bne.s   locret_49A5C
+                bne.s   HCZBossS3_HitUpdateReturn
                 tst.b   collision_property(a0)
-                beq.s   loc_49A5E
+                beq.s   HCZBossS3_BeginScoredDefeatWait
                 tst.b   $20(a0)
-                bne.s   loc_49A2A
+                bne.s   HCZBossS3_HitChooseFlashRow
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
 
-loc_49A2A:
+HCZBossS3_HitChooseFlashRow:
                 bset    #6,status(a0)
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_49A3C
+                bne.s   HCZBossS3_HitCopyColorsAndTick
                 addq.w  #2*3,d0
 
-loc_49A3C:
-                lea     word_49A72(pc),a1
-                lea     word_49A78(pc,d0.w),a2
+HCZBossS3_HitCopyColorsAndTick:
+                lea     HCZBossS3_HitPaletteDestinations(pc),a1
+                lea     HCZEndBossS3_Hit_TwoThreeColorFlashBanks(pc,d0.w),a2
                 jsr     (CopyWordData_3).l
                 subq.b  #1,$20(a0)
-                bne.s   locret_49A5C
+                bne.s   HCZBossS3_HitUpdateReturn
                 bclr    #6,status(a0)
                 move.b  $25(a0),collision_flags(a0)
 
-locret_49A5C:
+HCZBossS3_HitUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_49A5E:
+HCZBossS3_BeginScoredDefeatWait:
                 move.l  #Wait_Draw,(a0)
-                move.l  #loc_48EF6,$34(a0)
+                move.l  #HCZBossS3_BeginDefeatBreakaway,$34(a0)
                 jmp     (BossDefeated_StopTimer).l
 ; End of function HCZBoss_HandleHitFlashOrDefeat
 
 ; ---------------------------------------------------------------------------
-word_49A72:
+HCZBossS3_HitPaletteDestinations:
                 dc.w    Normal_palette_line_2+$14, Normal_palette_line_2+$16, Normal_palette_line_2+$1C
-word_49A78:
+HCZEndBossS3_Hit_TwoThreeColorFlashBanks:
                 dc.w    6,   $20,  $624
                 dc.w    $EEE,  $EEE,  $EEE
 
@@ -420,14 +421,14 @@ word_49A78:
 StartHCZBossColumnDescentAfterRootDeath:
                 movea.w $44(a0),a1
                 btst    #7,status(a1)
-                beq.s   locret_49AB0
+                beq.s   HCZBossS3_ColumnDeathCheckReturn
                 bset    #7,status(a0)
-                move.l  #loc_491D2,(a0)
+                move.l  #HCZBossS3_ColumnDescendOnBossDeath,(a0)
                 move.w  #$100,y_vel(a0)
                 move.l  #Go_Delete_Sprite_2,$34(a0)
                 jsr     (Displace_PlayerOffObject).l
 
-locret_49AB0:
+HCZBossS3_ColumnDeathCheckReturn:
                 rts
 ; End of function StartHCZBossColumnDescentAfterRootDeath
 
@@ -436,11 +437,11 @@ locret_49AB0:
 MarkHCZBossVortexDetachedWhenColumnDies:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                beq.s   locret_49ACA
+                beq.s   HCZBossS3_VortexDeathCheckReturn
                 bset    #7,status(a0)
                 move.b  #4,routine(a0)
 
-locret_49ACA:
+HCZBossS3_VortexDeathCheckReturn:
                 rts
 ; End of function MarkHCZBossVortexDetachedWhenColumnDies
 
@@ -450,20 +451,20 @@ locret_49ACA:
 HCZBossColumn_UpdateHeight:
                 move.w  $3A(a0),d0
                 sub.w   y_pos(a0),d0
-                bcs.s   loc_49AEE
+                bcs.s   HCZBossS3_ColumnRunHeightCallback
                 andi.w  #$F0,d0
                 lsr.w   #4,d0
                 move.b  d0,$39(a0)
                 tst.w   y_vel(a0)
-                bpl.s   locret_49AEC
+                bpl.s   HCZBossS3_ColumnHeightUpdateReturn
                 cmpi.b  #5,d0
-                bhs.s   loc_49AEE
+                bhs.s   HCZBossS3_ColumnRunHeightCallback
 
-locret_49AEC:
+HCZBossS3_ColumnHeightUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_49AEE:
+HCZBossS3_ColumnRunHeightCallback:
                 movea.l $34(a0),a2
                 jmp     (a2)
 ; End of function HCZBossColumn_UpdateHeight
@@ -477,9 +478,9 @@ SpawnS3HCZExitGeyserEightDebrisPieces:
                 subi.w  #$80,d3
                 moveq   #8-1,d1
 
-loc_49B08:
+HCZBossS3_ExitDebrisAllocatePiece:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   locret_49B60
+                bne.s   HCZBossS3_ExitDebrisSpawnReturn
                 move.l  #S3HCZWater_AnimateAirborneDebris,(a1)
                 move.l  #Map_HCZWaterWallDebris,mappings(a1)
                 move.w  #make_art_tile(ArtTile_HCZCutsceneGeyser+$58,2,0),art_tile(a1)
@@ -498,7 +499,7 @@ loc_49B08:
                 move.w  (a3)+,x_vel(a1)
                 move.w  (a3)+,y_vel(a1)
                 move.b  d1,mapping_frame(a1)
-                dbf     d1,loc_49B08
+                dbf     d1,HCZBossS3_ExitDebrisAllocatePiece
 
-locret_49B60:
+HCZBossS3_ExitDebrisSpawnReturn:
                 rts

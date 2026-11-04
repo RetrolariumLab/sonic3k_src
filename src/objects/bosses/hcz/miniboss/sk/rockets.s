@@ -12,167 +12,170 @@ Obj_HCZMiniboss_Rockets:
                 jmp     (Child_DrawTouch_Sprite_FlickerMove).l
 ; ---------------------------------------------------------------------------
 HCZMiniboss_Rockets_Index:
-                dc.w    loc_6A2DE-HCZMiniboss_Rockets_Index
-                dc.w    loc_6A2F8-HCZMiniboss_Rockets_Index
-                dc.w    loc_6A34C-HCZMiniboss_Rockets_Index
-                dc.w    loc_6A36C-HCZMiniboss_Rockets_Index
-                dc.w    loc_6A37A-HCZMiniboss_Rockets_Index
-                dc.w    loc_6A404-HCZMiniboss_Rockets_Index
-                dc.w    loc_6A41E-HCZMiniboss_Rockets_Index
+                dc.w    HCZMiniSK_InitRocketAndSpawnTip-HCZMiniboss_Rockets_Index
+                dc.w    HCZMiniSK_RocketWaitRequestAndInit-HCZMiniboss_Rockets_Index
+                dc.w    HCZMiniSK_RocketTwistAndTickInitial-HCZMiniboss_Rockets_Index
+                dc.w    HCZMiniSK_RocketTickStationaryWait-HCZMiniboss_Rockets_Index
+                dc.w    HCZMiniSK_RocketTwistAndTickShared-HCZMiniboss_Rockets_Index
+                dc.w    HCZMiniSK_RocketFastTwistUntilRelease-HCZMiniboss_Rockets_Index
+                dc.w    HCZMiniSK_RocketTwistToReturnAngle-HCZMiniboss_Rockets_Index
 ; ---------------------------------------------------------------------------
 
-loc_6A2DE:
+HCZMiniSK_InitRocketAndSpawnTip:
                 lea     ObjDat_HCZMiniboss_Rockets(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 bset    #6,$38(a0)
-                lea     ChildObjDat_6AD76(pc),a2
+                lea     HCZMiniSK_RocketTipChild(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_6A2F8:
+HCZMiniSK_RocketWaitRequestAndInit:
                 clr.b   collision_flags(a0)
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                beq.w   locret_69F78
+                beq.w   HCZMiniSK_SharedReturn
                 move.b  #4,routine(a0)
                 move.b  #1,$40(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_6A356,$34(a0)
+                move.l  #HCZMiniSK_RocketBeginSharedTwist,$34(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_6A344(pc,d0.w),$3C(a0)
+                move.w  HCZMiniSK_RocketInitialPhasePairs(pc,d0.w),$3C(a0)
                 cmpi.b  #4,d0
-                blo.s   locret_6A342
+                blo.s   HCZMiniSK_RocketInitPhaseReturn
                 bset    #0,render_flags(a0)
                 move.b  #6,routine(a0)
 
-locret_6A342:
+HCZMiniSK_RocketInitPhaseReturn:
                 rts
 ; ---------------------------------------------------------------------------
-word_6A344:
+; Each word holds two phase bytes selected by the even subtype
+HCZMiniSK_RocketInitialPhasePairs:
                 dc.w    0, $8080, $8000,   $80
 ; ---------------------------------------------------------------------------
 
-loc_6A34C:
+HCZMiniSK_RocketTwistAndTickInitial:
                 bsr.w   UpdateHCZMinibossRocketTwistPose
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6A356:
+HCZMiniSK_RocketBeginSharedTwist:
                 move.b  #8,routine(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_6A384,$34(a0)
+                move.l  #HCZMiniSK_RocketEnableTwistCollision,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6A36C:
+HCZMiniSK_RocketTickStationaryWait:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6A372:
+HCZMiniSK_RocketResumeRequestPoll:
                 move.b  #2,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6A37A:
+HCZMiniSK_RocketTwistAndTickShared:
                 bsr.w   UpdateHCZMinibossRocketTwistPose
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6A384:
+HCZMiniSK_RocketEnableTwistCollision:
                 move.b  #2,$40(a0)
                 move.b  #$8B,collision_flags(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_6A3A0,$34(a0)
+                move.l  #HCZMiniSK_RocketBeginFastTwist,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6A3A0:
+HCZMiniSK_RocketBeginFastTwist:
                 move.b  #$A,routine(a0)
                 move.b  #4,$40(a0)
-                move.l  #loc_6A416,$34(a0)
+                move.l  #HCZMiniSK_RocketBeginReturnAlignment,$34(a0)
                 bclr    #6,$38(a0)
                 moveq   #signextendB(sfx_LevelProjectile),d0
                 jsr     (Play_SFX).l
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6A3C4:
+HCZMiniSK_RocketArmReturnDelay:
                 move.b  #2,$40(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_6A3DA,$34(a0)
+                move.l  #HCZMiniSK_RocketChooseReturnPhase,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6A3DA:
+HCZMiniSK_RocketChooseReturnPhase:
                 move.b  #6,routine(a0)
                 cmpi.b  #4,subtype(a0)
-                blo.s   loc_6A3EE
+                blo.s   HCZMiniSK_RocketResetStepAndDelay
                 move.b  #4,routine(a0)
 
-loc_6A3EE:
+HCZMiniSK_RocketResetStepAndDelay:
                 move.b  #1,$40(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_6A372,$34(a0)
+                move.l  #HCZMiniSK_RocketResumeRequestPoll,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6A404:
+HCZMiniSK_RocketFastTwistUntilRelease:
                 bsr.w   UpdateHCZMinibossRocketTwistPose
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                bne.w   locret_69F78
+                bne.w   HCZMiniSK_SharedReturn
 
-loc_6A416:
+HCZMiniSK_RocketBeginReturnAlignment:
                 move.b  #$C,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6A41E:
+; Wait for the exact X phase assigned to this subtype before retracting
+HCZMiniSK_RocketTwistToReturnAngle:
                 bsr.w   UpdateHCZMinibossRocketTwistPose
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lsr.b   #1,d0
-                move.b  byte_6A45C(pc,d0.w),d1
+                move.b  HCZMiniSK_RocketReturnXPhases(pc,d0.w),d1
                 cmp.b   $3C(a0),d1
-                beq.s   loc_6A436
+                beq.s   HCZMiniSK_RocketDisableAndRetract
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6A436:
+HCZMiniSK_RocketDisableAndRetract:
                 move.b  #8,routine(a0)
                 clr.b   collision_flags(a0)
                 move.b  #2,$40(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_6A3C4,$34(a0)
+                move.l  #HCZMiniSK_RocketArmReturnDelay,$34(a0)
                 bset    #6,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
-byte_6A45C:
+HCZMiniSK_RocketReturnXPhases:
                 dc.b    $80,   0, $C0, $40
 ; ---------------------------------------------------------------------------
 
-loc_6A460:
-                lea     word_6AD08(pc),a1
+HCZMiniSK_InitRocketTip:
+                lea     HCZMiniSK_RocketTipAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
-                move.l  #loc_6A478,(a0)
+                move.l  #HCZMiniSK_RocketTipFollowAndDraw,(a0)
                 bset    #4,shield_reaction(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6A478:
+HCZMiniSK_RocketTipFollowAndDraw:
                 bsr.w   FollowHCZMinibossRocketTipPose
 
-loc_6A47C:
+; Delete after parent defeat and skip drawing when the parent is inactive or the V-int counter is odd
+HCZMiniSK_EngineOrTipCheckDraw:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_6A4A2
+                bne.s   HCZMiniSK_EngineOrTipDelete
                 btst    #6,$38(a1)
-                bne.w   locret_69F78
+                bne.w   HCZMiniSK_SharedReturn
                 btst    #0,(V_int_run_count+3).w
-                bne.w   locret_69F78
+                bne.w   HCZMiniSK_SharedReturn
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6A4A2:
+HCZMiniSK_EngineOrTipDelete:
                 jmp     (Go_Delete_Sprite).l

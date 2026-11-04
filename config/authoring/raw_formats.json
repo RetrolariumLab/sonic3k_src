@@ -237,51 +237,51 @@
     },
     {
       "path": "src/objects/bosses/hcz/end_boss/s3/attacks_and_transition.s",
-      "sha256": "f454d06c5ab856fc090cabc5fbb43ba25de0217f23f216c3831ac7263f521bce"
+      "sha256": "23af5294a729dff68d0104e1b90a407657f4a88f287bf93445b19c2ceaf5465f"
     },
     {
       "path": "src/objects/bosses/hcz/end_boss/s3/main_and_chassis.s",
-      "sha256": "16861ca78d972ea11059520f1a77fc2e9ce8631409a518832b3467994ee31897"
+      "sha256": "2df39e4b845e030d4edabc8f8aa6b0532dce04574da9e72a2c3729539a19787d"
     },
     {
       "path": "src/objects/bosses/hcz/end_boss/s3/object_catalog.s",
-      "sha256": "3e1089835c1d049a5967a81834759aceab4553026ef0a4564c7729c687fc0cb6"
+      "sha256": "253a79e5119d0f645c8588fc1df4b849b4999f1b8148739dca3bb029389135c8"
     },
     {
       "path": "src/objects/bosses/hcz/end_boss/sk/attacks_and_transition.s",
-      "sha256": "97f47b83e899676671ec2d92dab5bddc2bed50b64356452923420c4788f94766"
+      "sha256": "58a30a42dc5a401ce5f3e504e5ffba9507accf49cdb0f96e64715cb42ee93a25"
     },
     {
       "path": "src/objects/bosses/hcz/end_boss/sk/main_and_chassis.s",
-      "sha256": "8bc3f70b94c4aceb28a3a2500f6db6c7d65ceead42aeccfa8b24edcd3efb407f"
+      "sha256": "bb182f7594f88ea58ed6d70022496d037ab41e508a97b17fbcb60e203b71dd43"
     },
     {
       "path": "src/objects/bosses/hcz/end_boss/sk/object_catalog.s",
-      "sha256": "306e80118d19359763ff9d717cd6131738aedad61f5593cd1409ab0e8209df40"
+      "sha256": "e2313d2feacb430b9af06fc0128f041028e790eefcfb72d91bd0480cd2ecef06"
     },
     {
       "path": "src/objects/bosses/hcz/miniboss/s3/engine_and_effects.s",
-      "sha256": "f6aea61fcae9d0ace29ac05c86ad682c7640ef286d5d98608bd95043a2fb5717"
+      "sha256": "e53145fabbf4bac143d6f6cad4f714bb8566c4326b2fcb0ff2fab8a33cae559a"
     },
     {
       "path": "src/objects/bosses/hcz/miniboss/s3/motion_helpers.s",
-      "sha256": "33b5fa5cb6bafaaa8d07d6a58cd43c4b2dd1f7a892f444920bc54c38e8190fca"
+      "sha256": "f84d35c9fddea4f466e51b3bc701cf7b819358626ee970bcd9838c81231a6162"
     },
     {
       "path": "src/objects/bosses/hcz/miniboss/s3/object_catalog.s",
-      "sha256": "1a57c6c0b09c58e932b3d2855ddfbf6406a3806b5e2d802ee353150610eddbaf"
+      "sha256": "f203007bafc01a3e7ab04bfe7afaef4508a1ed125b1767b868320cc8a7298b4c"
     },
     {
       "path": "src/objects/bosses/hcz/miniboss/sk/engine_and_effects.s",
-      "sha256": "a9020b502a484ad1ca0664c47d65debd6c3c9e39638d98bd2ebd3a3566a44a2f"
+      "sha256": "62072da6f0e0746eade259cc9bf5f86377250bc71e62a23cf7985670ad3ab4b5"
     },
     {
       "path": "src/objects/bosses/hcz/miniboss/sk/motion_helpers.s",
-      "sha256": "223e349ad7f81a18a903310b096d403aa5f68fe83fe0d6c237baf9faf7a0d889"
+      "sha256": "87fd2d3ed02c29e809ebddac766f5d6a93caefbd2dd08c9cc2ff554523e518de"
     },
     {
       "path": "src/objects/bosses/hcz/miniboss/sk/object_catalog.s",
-      "sha256": "0087e4583d0798165f33cecc73857ec42fa9262e1e2b88d650fe330bf242bde7"
+      "sha256": "1c07b921a9c9dadcc456aec4f7e765aaaf3b6a48dac6628ffa5937ff875deb23"
     },
     {
       "path": "src/objects/bosses/icz/s3/end_boss.s",
@@ -733,7 +733,7 @@
     },
     {
       "path": "src/objects/enemies/hcz/s3/jawz.s",
-      "sha256": "6a256fa40c6fa261d3d6bb4da9260884ac880d0969581427ab578f64321136e8"
+      "sha256": "1642c567f0b2a50b0ae234f74805e78123a1298f5e5581e0ca90dd285bc2ddab"
     },
     {
       "path": "src/objects/enemies/hcz/s3/mega_chopper.s",
@@ -761,7 +761,7 @@
     },
     {
       "path": "src/objects/enemies/hcz/sk/jawz.s",
-      "sha256": "370ac8c36291ee41073adaa74adf794690a99f31e1a2d5d4def8e95184bf7181"
+      "sha256": "f52815c7fe96fa9e79474d45fc59b02a7dc17176d2030b99947409a74522bdc5"
     },
     {
       "path": "src/objects/enemies/hcz/sk/mega_chopper.s",
@@ -2131,13 +2131,13 @@
     },
     {
       "path": "src/objects/bosses/hcz/end_boss/s3/object_catalog.s",
-      "symbol": "byte_49C3C",
-      "scope": "byte_49C3C",
-      "first_line": 104,
-      "last_line": 241,
+      "symbol": "HCZEndBossS3_Fan_AcceleratingRawStream",
+      "scope": "HCZEndBossS3_Fan_AcceleratingRawStream",
+      "first_line": 105,
+      "last_line": 242,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 278,
-      "declarations_sha256": "812e4d63c24b3ad0e5c581403fbf8d45f16d8b02845e186310d0401322b59225",
+      "declarations_sha256": "e3d59f2cb0e8ff4ebb1e78b6c6425b4124d7b3ed5e5beb4df808dbee00882829",
       "entries": [
         [0, "accelerating"],
         [7, "fixed"],
@@ -2161,37 +2161,37 @@
       ],
       "external_symbols": [],
       "members": [
-        "byte_49C3C",
-        "byte_49C43",
-        "byte_49C49",
-        "byte_49C4F",
-        "byte_49C54",
-        "byte_49C5D",
-        "byte_49C61",
-        "byte_49C66",
-        "byte_49C6B",
-        "byte_49C70",
-        "byte_49C75",
-        "byte_49C7A",
-        "byte_49C7E",
-        "byte_49C87",
-        "byte_49CBE",
-        "byte_49CED",
-        "byte_49D14",
-        "byte_49D33",
-        "byte_49D4A"
+        "HCZEndBossS3_Fan_AcceleratingRawStream",
+        "HCZEndBossS3_Fan_UniformActiveRawStream",
+        "HCZEndBossS3_Fan_DeceleratingRawStream",
+        "HCZBossS3_BombDetonationAnim",
+        "HCZBossS3_ColumnBuildAnim",
+        "HCZBossS3_ColumnTravelAnim",
+        "HCZBossS3_VortexHeight0Anim",
+        "HCZBossS3_VortexHeight1Anim",
+        "HCZBossS3_VortexHeight2Anim",
+        "HCZBossS3_VortexHeight3Anim",
+        "HCZBossS3_VortexHeight4And5Anim",
+        "HCZBossS3_SurfaceEdgeAnim",
+        "HCZBossS3_BombSplashAnim",
+        "HCZBossS3_GeyserLayer0Anim",
+        "HCZBossS3_GeyserLayer1Anim",
+        "HCZBossS3_GeyserLayer2Anim",
+        "HCZBossS3_GeyserLayer3Anim",
+        "HCZBossS3_GeyserLayer4Anim",
+        "HCZEndBossS3_Explosion_UniformRawStream"
       ],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/hcz/end_boss/sk/object_catalog.s",
-      "symbol": "byte_6BDF4",
-      "scope": "byte_6BDF4",
-      "first_line": 101,
-      "last_line": 238,
+      "symbol": "HCZEndBossSK_Fan_AcceleratingRawStream",
+      "scope": "HCZEndBossSK_Fan_AcceleratingRawStream",
+      "first_line": 102,
+      "last_line": 239,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 278,
-      "declarations_sha256": "baded50f6e574b9fbe06c507026c2d13f6a62f1fb8ed700a0e49072e457dfca5",
+      "declarations_sha256": "b9e0de5800331d14e4b10cd7f90a6493e95e39d0c4fae139160e20a254ac2ca9",
       "entries": [
         [0, "accelerating"],
         [7, "fixed"],
@@ -2215,65 +2215,65 @@
       ],
       "external_symbols": [],
       "members": [
-        "byte_6BDF4",
-        "byte_6BDFB",
-        "byte_6BE01",
-        "byte_6BE07",
-        "byte_6BE0C",
-        "byte_6BE15",
-        "byte_6BE19",
-        "byte_6BE1E",
-        "byte_6BE23",
-        "byte_6BE28",
-        "byte_6BE2D",
-        "byte_6BE32",
-        "byte_6BE36",
-        "byte_6BE3F",
-        "byte_6BE76",
-        "byte_6BEA5",
-        "byte_6BECC",
-        "byte_6BEEB",
-        "byte_6BF02"
+        "HCZEndBossSK_Fan_AcceleratingRawStream",
+        "HCZEndBossSK_Fan_UniformActiveRawStream",
+        "HCZEndBossSK_Fan_DeceleratingRawStream",
+        "HCZBossSK_BombDetonationAnim",
+        "HCZBossSK_ColumnBuildAnim",
+        "HCZBossSK_ColumnTravelAnim",
+        "HCZBossSK_VortexHeight0Anim",
+        "HCZBossSK_VortexHeight1Anim",
+        "HCZBossSK_VortexHeight2Anim",
+        "HCZBossSK_VortexHeight3Anim",
+        "HCZBossSK_VortexHeight4And5Anim",
+        "HCZBossSK_SurfaceEdgeAnim",
+        "HCZBossSK_BombSplashAnim",
+        "HCZBossSK_GeyserLayer0Anim",
+        "HCZBossSK_GeyserLayer1Anim",
+        "HCZBossSK_GeyserLayer2Anim",
+        "HCZBossSK_GeyserLayer3Anim",
+        "HCZBossSK_GeyserLayer4Anim",
+        "HCZEndBossSK_Explosion_UniformRawStream"
       ],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/hcz/miniboss/s3/motion_helpers.s",
-      "symbol": "byte_48994",
-      "scope": "byte_48994",
-      "first_line": 288,
-      "last_line": 305,
+      "symbol": "HCZMiniS3_RocketTwistFrames",
+      "scope": "HCZMiniS3_RocketTwistFrames",
+      "first_line": 290,
+      "last_line": 307,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 16,
-      "declarations_sha256": "3ef32fcb21f9e290ccea804d234d8914b02ea6369c3e3c970661055a12292c1e",
+      "declarations_sha256": "ebb60d3202f974703054d2e12ec7e0c6b7a1d907d8f32de8f91347bb4cab9134",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_48994"],
+      "members": ["HCZMiniS3_RocketTwistFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/hcz/miniboss/s3/motion_helpers.s",
-      "symbol": "byte_48A7C",
-      "scope": "byte_48A7C",
-      "first_line": 414,
-      "last_line": 423,
+      "symbol": "HCZMiniS3_RocketTipFramesByPhase",
+      "scope": "HCZMiniS3_RocketTipFramesByPhase",
+      "first_line": 416,
+      "last_line": 425,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 16,
-      "declarations_sha256": "8b7060f741ca40a075c7a8fa63bb915c9dc24516989cdb939f2da91f416945e9",
+      "declarations_sha256": "3b8175a7b7c3a80661c88afd87f8b3e749d504518430bf0fc36e17a73ca62c41",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_48A7C"],
+      "members": ["HCZMiniS3_RocketTipFramesByPhase"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/hcz/miniboss/s3/object_catalog.s",
-      "symbol": "byte_48C30",
-      "scope": "byte_48C30",
+      "symbol": "HCZMiniS3_VortexAccelerationAnim",
+      "scope": "HCZMiniS3_VortexAccelerationAnim",
       "first_line": 110,
       "last_line": 162,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 106,
-      "declarations_sha256": "f7c5a9d25b2e580dd61c9c521acbeb2a3a40c88e6443e79a7cb2a42f575a66d6",
+      "declarations_sha256": "97c4b6ac08a67dfa658a526be2395465f264b7b8ba4d5974ce6eef6915ddb735",
       "entries": [
         [0, "pairs"],
         [37, "fixed"],
@@ -2286,54 +2286,54 @@
       ],
       "external_symbols": [],
       "members": [
-        "byte_48C30",
-        "byte_48C55",
-        "byte_48C5A",
-        "byte_48C7F",
-        "byte_48C8A",
-        "byte_48C8E",
-        "byte_48C92",
-        "byte_48C96"
+        "HCZMiniS3_VortexAccelerationAnim",
+        "HCZMiniS3_VortexActiveAnim",
+        "HCZMiniS3_VortexDecelerationAnim",
+        "HCZMiniS3_SplashDPLCAnimation",
+        "HCZMiniS3_ParticleAnimBase0",
+        "HCZMiniS3_ParticleAnimBase1",
+        "HCZMiniS3_ParticleAnimBase2",
+        "HCZMiniS3_ParticleAnimBase3"
       ],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/hcz/miniboss/sk/motion_helpers.s",
-      "symbol": "byte_6AB50",
-      "scope": "byte_6AB50",
-      "first_line": 288,
-      "last_line": 305,
+      "symbol": "HCZMiniSK_RocketTwistFrames",
+      "scope": "HCZMiniSK_RocketTwistFrames",
+      "first_line": 290,
+      "last_line": 307,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 16,
-      "declarations_sha256": "7fc7592ebb6305460b2bb7c1a53b9e042dda2c8ebc368537367d6315babdc7ca",
+      "declarations_sha256": "457cc8deb08b23e50365bdb0860588fa5d1dd368c36cf93ff3462e71e1d28f6d",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_6AB50"],
+      "members": ["HCZMiniSK_RocketTwistFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/hcz/miniboss/sk/motion_helpers.s",
-      "symbol": "byte_6AC38",
-      "scope": "byte_6AC38",
-      "first_line": 414,
-      "last_line": 423,
+      "symbol": "HCZMiniSK_RocketTipFramesByPhase",
+      "scope": "HCZMiniSK_RocketTipFramesByPhase",
+      "first_line": 416,
+      "last_line": 425,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 16,
-      "declarations_sha256": "e1ac87f825059b4e1fcf40943aaff686b27b8c0128eef2ede32957e2b0d0a954",
+      "declarations_sha256": "a2a5dd388f629a2595af8a05d8af72a399122018978790e823c1f1a435c3dd49",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_6AC38"],
+      "members": ["HCZMiniSK_RocketTipFramesByPhase"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/hcz/miniboss/sk/object_catalog.s",
-      "symbol": "byte_6ADEC",
-      "scope": "byte_6ADEC",
+      "symbol": "HCZMiniSK_VortexAccelerationAnim",
+      "scope": "HCZMiniSK_VortexAccelerationAnim",
       "first_line": 110,
       "last_line": 162,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 106,
-      "declarations_sha256": "1f33816a1332da9457f78e194bc67d3ab8dccdfb584b98e55272cb3c1c234be5",
+      "declarations_sha256": "8271c274c9ba9ead75517a671ae4aafa8383ea8633f00504000fd8b128270cff",
       "entries": [
         [0, "pairs"],
         [37, "fixed"],
@@ -2346,14 +2346,14 @@
       ],
       "external_symbols": [],
       "members": [
-        "byte_6ADEC",
-        "byte_6AE11",
-        "byte_6AE16",
-        "byte_6AE3B",
-        "byte_6AE46",
-        "byte_6AE4A",
-        "byte_6AE4E",
-        "byte_6AE52"
+        "HCZMiniSK_VortexAccelerationAnim",
+        "HCZMiniSK_VortexActiveAnim",
+        "HCZMiniSK_VortexDecelerationAnim",
+        "HCZMiniSK_SplashDPLCAnimation",
+        "HCZMiniSK_ParticleAnimBase0",
+        "HCZMiniSK_ParticleAnimBase1",
+        "HCZMiniSK_ParticleAnimBase2",
+        "HCZMiniSK_ParticleAnimBase3"
       ],
       "stored_markers": []
     },

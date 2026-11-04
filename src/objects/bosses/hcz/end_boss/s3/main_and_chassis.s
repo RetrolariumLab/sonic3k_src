@@ -5,9 +5,9 @@
 
 Obj_HCZEndBoss:
                 move.w  #$4050,(Camera_max_X_pos).w
-                lea     word_48D26(pc),a1
+                lea     HCZBossS3_InitialCameraRanges(pc),a1
                 jsr     (Check_CameraInRange).l
-                move.l  #loc_48D2E,(a0)
+                move.l  #HCZBossS3_TickCameraMusicTransition,(a0)
                 move.b  #1,(Boss_flag).w
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
@@ -16,179 +16,179 @@ Obj_HCZEndBoss:
                 move.w  (Camera_target_max_Y_pos).w,(Camera_stored_max_Y_pos).w
                 move.w  #$738,(Camera_target_max_Y_pos).w
                 move.w  #$4000,$1C(a0)
-                move.l  #loc_48D34,$34(a0)
+                move.l  #HCZBossS3_InstallBattleDispatcher,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
-word_48D26:
+HCZBossS3_InitialCameraRanges:
                 dc.w    $400,  $880, $3E80, $4090
 ; ---------------------------------------------------------------------------
 
-loc_48D2E:
+HCZBossS3_TickCameraMusicTransition:
                 jmp     (S3EndCamera_TickMusicDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_48D34:
-                move.l  #loc_48D3C,(a0)
+HCZBossS3_InstallBattleDispatcher:
+                move.l  #HCZBossS3_BattleDispatchHitAndDraw,(a0)
 
-locret_48D3A:
+HCZBossS3_SharedReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_48D3C:
+HCZBossS3_BattleDispatchHitAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_48D54(pc,d0.w),d1
-                jsr     off_48D54(pc,d1.w)
+                move.w  HCZEndBossS3_Root_SevenStateOffsets(pc,d0.w),d1
+                jsr     HCZEndBossS3_Root_SevenStateOffsets(pc,d1.w)
                 bsr.w   HCZBoss_HandleHitFlashOrDefeat
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
-off_48D54:
-                dc.w    loc_48D62-off_48D54
-                dc.w    loc_48DBC-off_48D54
-                dc.w    loc_48DFE-off_48D54
-                dc.w    loc_48DBC-off_48D54
-                dc.w    loc_48DBC-off_48D54
-                dc.w    loc_48DFE-off_48D54
-                dc.w    loc_48EAA-off_48D54
+HCZEndBossS3_Root_SevenStateOffsets:
+                dc.w    HCZBossS3_InitBodyAndSpawnShip-HCZEndBossS3_Root_SevenStateOffsets
+                dc.w    HCZEndBossS3_Root_MoveStraightThenWait-HCZEndBossS3_Root_SevenStateOffsets
+                dc.w    HCZEndBossS3_Root_BobMoveThenWait-HCZEndBossS3_Root_SevenStateOffsets
+                dc.w    HCZEndBossS3_Root_MoveStraightThenWait-HCZEndBossS3_Root_SevenStateOffsets
+                dc.w    HCZEndBossS3_Root_MoveStraightThenWait-HCZEndBossS3_Root_SevenStateOffsets
+                dc.w    HCZEndBossS3_Root_BobMoveThenWait-HCZEndBossS3_Root_SevenStateOffsets
+                dc.w    HCZBossS3_BobMoveAndTickTurn-HCZEndBossS3_Root_SevenStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_48D62:
+HCZBossS3_InitBodyAndSpawnShip:
                 lea     ObjDat_HCZEndBoss(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.b  #8,collision_property(a0)
                 move.w  #$80,y_vel(a0)
                 move.w  #$EF,$2E(a0)
-                move.l  #loc_48DC8,$34(a0)
+                move.l  #HCZBossS3_SaveBaselineAndBeginBob,$34(a0)
                 moveq   #PLCID_6C,d0
                 jsr     (Load_PLC).l
                 move.w  #0,(Normal_palette+$1E).w
                 lea     Pal_HCZEndBoss(pc),a1
                 jsr     (PalLoad_Line1).l
-                lea     (ChildObjDat_49C2E).l,a2
+                lea     (HCZEndBossS3_Root_OneNormalShipTwoRecord).l,a2
                 jsr     (CreateChild1_Normal).l
-                bne.s   loc_48DB2
+                bne.s   HCZBossS3_SpawnBodyAttachments
                 move.b  #5,subtype(a1)
 
-loc_48DB2:
-                lea     ChildObjDat_49BCC(pc),a2
+HCZBossS3_SpawnBodyAttachments:
+                lea     HCZBossS3_BodyAttachmentChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_48DBC:
+HCZEndBossS3_Root_MoveStraightThenWait:
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_48DC8:
+HCZBossS3_SaveBaselineAndBeginBob:
                 move.b  #4,routine(a0)
                 move.w  y_pos(a0),$3A(a0)
                 move.w  #-$100,$44(a0)
                 move.w  #$9F,$30(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_48E10,$34(a0)
+                move.l  #HCZBossS3_StartFanAndCheckDiveFlag,$34(a0)
                 lea     (PLC_Explosion).l,a1
                 jsr     (Load_PLC_Raw).l
                 jmp     Swing_Setup1(pc)
 ; ---------------------------------------------------------------------------
 
-loc_48DFE:
+HCZEndBossS3_Root_BobMoveThenWait:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_48E10:
+HCZBossS3_StartFanAndCheckDiveFlag:
                 bset    #3,$38(a0)
                 tst.b   (_unkFA80+1).w
-                bne.s   loc_48E38
+                bne.s   HCZBossS3_BeginLongFanWait
                 move.b  #6,routine(a0)
                 move.w  #$80,y_vel(a0)
                 move.w  #$9F,$2E(a0)
-                move.l  #loc_48E4E,$34(a0)
+                move.l  #HCZEndBossS3_Root_StartTimedFanAscent,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_48E38:
+HCZBossS3_BeginLongFanWait:
                 move.b  #$A,routine(a0)
                 move.w  #$1FF,$2E(a0)
-                move.l  #loc_48E80,$34(a0)
+                move.l  #HCZBossS3_BeginBombSweep,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_48E4E:
+HCZEndBossS3_Root_StartTimedFanAscent:
                 move.w  #-$100,y_vel(a0)
                 move.w  #$4F,$2E(a0)
-                move.l  #loc_48E64,$34(a0)
+                move.l  #HCZBossS3_RestoreBaselineAndBob,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_48E64:
+HCZBossS3_RestoreBaselineAndBob:
                 move.b  #$A,routine(a0)
                 move.w  #$FF,$2E(a0)
                 move.w  $3A(a0),y_pos(a0)
-                move.l  #loc_48E80,$34(a0)
+                move.l  #HCZBossS3_BeginBombSweep,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_48E80:
+HCZBossS3_BeginBombSweep:
                 move.b  #$C,routine(a0)
                 bclr    #3,$38(a0)
                 move.w  $44(a0),x_vel(a0)
                 move.w  #$BF,$2E(a0)
-                move.l  #loc_48ED4,$34(a0)
+                move.l  #HCZBossS3_RequestBombOrEndBurst,$34(a0)
                 move.b  #8,$39(a0)
                 jmp     Swing_Setup1(pc)
 ; ---------------------------------------------------------------------------
 
-loc_48EAA:
+HCZBossS3_BobMoveAndTickTurn:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 jsr     (Obj_Wait).l
                 subq.w  #1,$30(a0)
-                bpl.s   locret_48ED2
+                bpl.s   HCZBossS3_TurnCounterReturn
                 neg.w   x_vel(a0)
                 bchg    #0,render_flags(a0)
                 move.w  #$13F,$30(a0)
 
-locret_48ED2:
+HCZBossS3_TurnCounterReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_48ED4:
+HCZBossS3_RequestBombOrEndBurst:
                 move.w  #$5F,$2E(a0)
                 subq.b  #1,$39(a0)
-                bmi.s   loc_48EE8
+                bmi.s   HCZBossS3_SaveDriftAndRestartFan
                 bset    #1,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_48EE8:
+HCZBossS3_SaveDriftAndRestartFan:
                 move.w  x_vel(a0),$44(a0)
                 clr.w   x_vel(a0)
-                bra.w   loc_48E10
+                bra.w   HCZBossS3_StartFanAndCheckDiveFlag
 ; ---------------------------------------------------------------------------
 
-loc_48EF6:
-                move.l  #loc_48F20,(a0)
+HCZBossS3_BeginDefeatBreakaway:
+                move.l  #HCZBossS3_DefeatMoveWaitAndFlicker,(a0)
                 bset    #4,$38(a0)
                 move.w  #$7F,$2E(a0)
-                move.l  #loc_48F3C,$34(a0)
+                move.l  #HCZBossS3_OpenCameraAndPrepareFinish,$34(a0)
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
                 moveq   #$C,d0
                 jmp     (Set_IndexedVelocity).l
 ; ---------------------------------------------------------------------------
 
-loc_48F20:
+HCZBossS3_DefeatMoveWaitAndFlicker:
                 jsr     (MoveSprite).l
                 jsr     (Obj_Wait).l
                 btst    #0,(V_int_run_count+3).w
-                beq.w   locret_48D3A
+                beq.w   HCZBossS3_SharedReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_48F3C:
-                move.l  #loc_48F68,(a0)
+HCZBossS3_OpenCameraAndPrepareFinish:
+                move.l  #HCZBossS3_WaitFinishAndRestorePlayers,(a0)
                 bclr    #7,render_flags(a0)
                 st      (_unkFAA8).w
                 clr.b   (Boss_flag).w
@@ -198,10 +198,10 @@ loc_48F3C:
                 jmp     (CreateChild6_Simple).l
 ; ---------------------------------------------------------------------------
 
-loc_48F68:
+HCZBossS3_WaitFinishAndRestorePlayers:
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
                 tst.b   (_unkFAA8).w
-                bne.w   locret_48D3A
+                bne.w   HCZBossS3_SharedReturn
                 clr.w   (Ctrl_1_logical).w
                 clr.w   (Ctrl_2_logical).w
                 st      (Ctrl_1_locked).w
@@ -210,94 +210,94 @@ loc_48F68:
                 jsr     (Restore_PlayerControl).l
                 lea     (Player_2).w,a1
                 jsr     (Restore_PlayerControl2).l
-                lea     ChildObjDat_49C36(pc),a2
+                lea     HCZBossS3_ExitCoordinatorChild(pc),a2
                 jsr     (CreateChild6_Simple).l
                 move.w  #0,(Camera_min_Y_pos).w
                 jmp     (Go_Delete_Sprite_2).l
 ; ---------------------------------------------------------------------------
 
-loc_48FB2:
+HCZBossS3_FanDispatchFollowAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_48FCE(pc,d0.w),d1
-                jsr     off_48FCE(pc,d1.w)
+                move.w  HCZEndBossS3_Fan_FiveStateOffsets(pc,d0.w),d1
+                jsr     HCZEndBossS3_Fan_FiveStateOffsets(pc,d1.w)
                 jsr     (Refresh_ChildPosition).l
                 moveq   #0,d0
                 jmp     (Child_DrawTouch_Sprite2_FlickerMove).l
 ; ---------------------------------------------------------------------------
-off_48FCE:
-                dc.w    loc_48FD8-off_48FCE
-                dc.w    loc_48FE2-off_48FCE
-                dc.w    loc_4900E-off_48FCE
-                dc.w    loc_49034-off_48FCE
-                dc.w    loc_49066-off_48FCE
+HCZEndBossS3_Fan_FiveStateOffsets:
+                dc.w    HCZBossS3_InitFan-HCZEndBossS3_Fan_FiveStateOffsets
+                dc.w    HCZEndBossS3_Fan_WaitForRootFanFlag-HCZEndBossS3_Fan_FiveStateOffsets
+                dc.w    HCZBossS3_FanAccelerateWithSound-HCZEndBossS3_Fan_FiveStateOffsets
+                dc.w    HCZEndBossS3_Fan_AnimateAndPollRootFlag-HCZEndBossS3_Fan_FiveStateOffsets
+                dc.w    HCZEndBossS3_Fan_RunDeceleratingRaw-HCZEndBossS3_Fan_FiveStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_48FD8:
-                lea     word_49B74(pc),a1
+HCZBossS3_InitFan:
+                lea     HCZEndBossS3_Fan_PartialAttributeRecord(pc),a1
                 jmp     (SetUp_ObjAttributes3).l
 ; ---------------------------------------------------------------------------
 
-loc_48FE2:
+HCZEndBossS3_Fan_WaitForRootFanFlag:
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                bne.s   loc_48FF0
+                bne.s   HCZBossS3_FanBeginAcceleration
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_48FF0:
+HCZBossS3_FanBeginAcceleration:
                 move.b  #4,routine(a0)
                 move.b  #$A6,collision_flags(a0)
-                move.l  #byte_49C3C,$30(a0)
-                move.l  #loc_4901C,$34(a0)
+                move.l  #HCZEndBossS3_Fan_AcceleratingRawStream,$30(a0)
+                move.l  #HCZBossS3_FanBeginActiveAndSpawnColumn,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4900E:
+HCZBossS3_FanAccelerateWithSound:
                 moveq   #signextendB(sfx_FanBig),d0
                 jsr     (Play_SFX_Continuous).l
                 jmp     (Animate_RawGetFaster).l
 ; ---------------------------------------------------------------------------
 
-loc_4901C:
+HCZBossS3_FanBeginActiveAndSpawnColumn:
                 move.b  #6,routine(a0)
-                move.l  #byte_49C43,$30(a0)
-                lea     ChildObjDat_49BFC(pc),a2
+                move.l  #HCZEndBossS3_Fan_UniformActiveRawStream,$30(a0)
+                lea     HCZEndBossS3_Fan_OneNormalColumnRecord(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_49034:
+HCZEndBossS3_Fan_AnimateAndPollRootFlag:
                 jsr     (Animate_Raw).l
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                beq.s   loc_4904E
+                beq.s   HCZEndBossS3_Fan_StartDecelerationStream
                 moveq   #signextendB(sfx_FanBig),d0
                 jmp     (Play_SFX_Continuous).l
 ; ---------------------------------------------------------------------------
 
-loc_4904E:
+HCZEndBossS3_Fan_StartDecelerationStream:
                 move.b  #8,routine(a0)
-                move.l  #byte_49C49,$30(a0)
-                move.l  #loc_4906C,$34(a0)
+                move.l  #HCZEndBossS3_Fan_DeceleratingRawStream,$30(a0)
+                move.l  #HCZBossS3_FanIdleAndDisableTouch,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_49066:
+HCZEndBossS3_Fan_RunDeceleratingRaw:
                 jmp     (Animate_RawGetSlower).l
 ; ---------------------------------------------------------------------------
 
-loc_4906C:
+HCZBossS3_FanIdleAndDisableTouch:
                 move.b  #2,routine(a0)
                 clr.b   collision_flags(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_49078:
+HCZBossS3_ColumnDispatchSolidAndDraw:
                 move.w  x_pos(a0),-(sp)
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_490A8(pc,d0.w),d1
-                jsr     off_490A8(pc,d1.w)
+                move.w  HCZEndBossS3_Column_SixStateOffsets(pc,d0.w),d1
+                jsr     HCZEndBossS3_Column_SixStateOffsets(pc,d1.w)
                 move.w  #$1F,d1
                 move.w  #$C,d2
                 move.w  #$C,d3
@@ -306,91 +306,92 @@ loc_49078:
                 bsr.w   StartHCZBossColumnDescentAfterRootDeath
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-off_490A8:
-                dc.w    loc_490B4-off_490A8
-                dc.w    loc_490FC-off_490A8
-                dc.w    loc_49128-off_490A8
-                dc.w    loc_49140-off_490A8
-                dc.w    loc_49128-off_490A8
-                dc.w    loc_4919E-off_490A8
+HCZEndBossS3_Column_SixStateOffsets:
+                dc.w    HCZBossS3_InitColumnAtWater-HCZEndBossS3_Column_SixStateOffsets
+                dc.w    HCZEndBossS3_Column_AnimateInitialBuild-HCZEndBossS3_Column_SixStateOffsets
+                dc.w    HCZBossS3_ColumnMoveAnimateAndSetHeight-HCZEndBossS3_Column_SixStateOffsets
+                dc.w    HCZBossS3_ColumnHoldUntilFanStops-HCZEndBossS3_Column_SixStateOffsets
+                dc.w    HCZBossS3_ColumnMoveAnimateAndSetHeight-HCZEndBossS3_Column_SixStateOffsets
+                dc.w    HCZBossS3_ColumnFinalSolidAndDraw-HCZEndBossS3_Column_SixStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_490B4:
-                lea     word_49B80(pc),a1
+HCZBossS3_InitColumnAtWater:
+                lea     HCZBossS3_ColumnAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
                 move.w  (Water_level).w,d0
                 subq.w  #8,d0
                 move.w  d0,y_pos(a0)
                 move.w  d0,$3A(a0)
-                move.l  #byte_49C54,$30(a0)
-                move.l  #loc_49102,$34(a0)
-                lea     ChildObjDat_49C0C(pc),a2
+                move.l  #HCZBossS3_ColumnBuildAnim,$30(a0)
+                move.l  #HCZBossS3_ColumnRiseAndSpawnVortex,$34(a0)
+                lea     HCZEndBossS3_Surface_TwoNormalEdgeRecord(pc),a2
                 jsr     (CreateChild1_Normal).l
-                lea     ChildObjDat_49C28(pc),a2
+                lea     HCZBossS3_ColumnBubbleChildren(pc),a2
                 jsr     (CreateChild6_Simple).l
                 movea.w parent3(a0),a1
                 move.w  parent3(a1),$44(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_490FC:
+HCZEndBossS3_Column_AnimateInitialBuild:
                 jmp     (Animate_Raw).l
 ; ---------------------------------------------------------------------------
 
-loc_49102:
+HCZBossS3_ColumnRiseAndSpawnVortex:
                 move.b  #4,routine(a0)
-                move.l  #byte_49C5D,$30(a0)
+                move.l  #HCZBossS3_ColumnTravelAnim,$30(a0)
                 move.w  #-$100,y_vel(a0)
-                move.l  #loc_49138,$34(a0)
-                lea     ChildObjDat_49C04(pc),a2
+                move.l  #HCZBossS3_ColumnHoldHeight,$34(a0)
+                lea     HCZBossS3_ColumnVortexChild(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_49128:
+HCZBossS3_ColumnMoveAnimateAndSetHeight:
                 jsr     (MoveSprite2).l
                 jsr     (Animate_Raw).l
                 bra.w   HCZBossColumn_UpdateHeight
 ; ---------------------------------------------------------------------------
 
-loc_49138:
+HCZBossS3_ColumnHoldHeight:
                 move.b  #6,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_49140:
+HCZBossS3_ColumnHoldUntilFanStops:
                 jsr     (Animate_Raw).l
                 movea.w $44(a0),a1
                 btst    #3,$38(a1)
-                beq.s   loc_49154
+                beq.s   HCZBossS3_ColumnDetachAndDrift
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_49154:
+; Drift downward and use the parent's horizontal direction
+HCZBossS3_ColumnDetachAndDrift:
                 move.b  #8,routine(a0)
                 bset    #3,$38(a0)
                 move.w  #$80,y_vel(a0)
-                move.l  #loc_49184,$34(a0)
+                move.l  #HCZBossS3_ColumnBeginFinalSolidWait,$34(a0)
                 move.w  #$80,x_vel(a0)
                 tst.w   x_vel(a1)
-                bpl.s   locret_4917E
+                bpl.s   HCZBossS3_ColumnDriftInitReturn
                 neg.w   x_vel(a0)
 
-locret_4917E:
+HCZBossS3_ColumnDriftInitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 ; unused
                 bra.w   HCZBossColumn_UpdateHeight
 ; ---------------------------------------------------------------------------
 
-loc_49184:
-                move.l  #loc_4919E,(a0)
+HCZBossS3_ColumnBeginFinalSolidWait:
+                move.l  #HCZBossS3_ColumnFinalSolidAndDraw,(a0)
                 move.w  #$F,$2E(a0)
                 clr.w   x_vel(a0)
-                move.l  #loc_491C6,$34(a0)
+                move.l  #HCZBossS3_ColumnReleaseRidersAndDelete,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4919E:
+HCZBossS3_ColumnFinalSolidAndDraw:
                 move.w  #$1F,d1
                 move.w  #$C,d2
                 move.w  #$C,d3
@@ -401,12 +402,12 @@ loc_4919E:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_491C6:
+HCZBossS3_ColumnReleaseRidersAndDelete:
                 jsr     (Displace_PlayerOffObject).l
                 jmp     (Go_Delete_Sprite_2).l
 ; ---------------------------------------------------------------------------
 
-loc_491D2:
+HCZBossS3_ColumnDescendOnBossDeath:
                 jsr     (MoveSprite2).l
                 jsr     (Animate_Raw).l
                 bsr.w   HCZBossColumn_UpdateHeight

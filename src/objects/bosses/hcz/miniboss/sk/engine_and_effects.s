@@ -6,63 +6,63 @@
 Obj_HCZMiniboss_Engine:
                 lea     ObjDat2_HCZMiniboss_Engine(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
-                move.l  #loc_6A4C0,(a0)
+                move.l  #HCZMiniSK_EngineFollowAndCheckDraw,(a0)
                 bset    #4,shield_reaction(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6A4C0:
+HCZMiniSK_EngineFollowAndCheckDraw:
                 jsr     (Refresh_ChildPosition).l
-                bra.s   loc_6A47C
+                bra.s   HCZMiniSK_EngineOrTipCheckDraw
 ; ---------------------------------------------------------------------------
 
-loc_6A4C8:
-                lea     ObjSlot_6AD30(pc),a1
+HCZMiniSK_InitSlottedWaterSplash:
+                lea     HCZMiniSK_SplashArtSlots(pc),a1
                 jsr     (SetUp_ObjAttributesSlotted).l
                 move.w  (Water_level).w,y_pos(a0)
                 move.l  #Obj_Wait,(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_6A4EA
+                beq.s   HCZMiniSK_SplashSetDelayedCallback
                 move.w  #7,$2E(a0)
 
-loc_6A4EA:
-                move.l  #loc_6A4F4,$34(a0)
+HCZMiniSK_SplashSetDelayedCallback:
+                move.l  #HCZMiniSK_SplashBeginDPLCAnimation,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6A4F4:
-                move.l  #loc_6A504,(a0)
+HCZMiniSK_SplashBeginDPLCAnimation:
+                move.l  #HCZMiniSK_SplashAnimateLoadAndDraw,(a0)
                 move.l  #Go_Delete_SpriteSlotted3,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6A504:
-                lea     byte_6AE3B(pc),a1
+HCZMiniSK_SplashAnimateLoadAndDraw:
+                lea     HCZMiniSK_SplashDPLCAnimation(pc),a1
                 jsr     (Animate_RawNoSST).l
                 lea     DPLCPtr_HCZMinibossSplash(pc),a2
                 jsr     (Perform_DPLC).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6A51E:
+HCZMiniSK_VortexDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_6A536(pc,d0.w),d1
-                jsr     off_6A536(pc,d1.w)
+                move.w  HCZMiniSK_VortexStateOffsets(pc,d0.w),d1
+                jsr     HCZMiniSK_VortexStateOffsets(pc,d1.w)
                 bsr.w   SwitchHCZVortexToParentDefeatState
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
-off_6A536:
-                dc.w    loc_6A542-off_6A536
-                dc.w    loc_6A55C-off_6A536
-                dc.w    loc_6A57C-off_6A536
-                dc.w    loc_6A5B2-off_6A536
-                dc.w    loc_6A5D8-off_6A536
-                dc.w    loc_6A618-off_6A536
+HCZMiniSK_VortexStateOffsets:
+                dc.w    HCZMiniSK_InitVortexAndClearPlayers-HCZMiniSK_VortexStateOffsets
+                dc.w    HCZMiniSK_VortexWaitVisibleAndLoadPal-HCZMiniSK_VortexStateOffsets
+                dc.w    HCZMiniSK_VortexAccelerateAndSpawn-HCZMiniSK_VortexStateOffsets
+                dc.w    HCZMiniSK_VortexAnimateAcceleration-HCZMiniSK_VortexStateOffsets
+                dc.w    HCZMiniSK_VortexCaptureAndCheckStop-HCZMiniSK_VortexStateOffsets
+                dc.w    HCZMiniSK_VortexAnimateDeceleration-HCZMiniSK_VortexStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_6A542:
-                lea     ObjDat3_6AD18(pc),a1
+HCZMiniSK_InitVortexAndClearPlayers:
+                lea     HCZMiniSK_VortexAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 addi.w  #$148,y_pos(a0)
                 clr.w   $42(a0)
@@ -70,94 +70,95 @@ loc_6A542:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6A55C:
+HCZMiniSK_VortexWaitVisibleAndLoadPal:
                 tst.b   render_flags(a0)
-                bpl.w   locret_69F78
+                bpl.w   HCZMiniSK_SharedReturn
                 move.b  #4,routine(a0)
                 lea     Pal_HCZMinibossWater(pc),a1
                 lea     (Water_palette_line_2).w,a2
                 moveq   #bytesToLcnt($20),d0
 
-loc_6A574:
+HCZMiniSK_VortexCopyWaterPalette:
                 move.l  (a1)+,(a2)+
-                dbf     d0,loc_6A574
+                dbf     d0,HCZMiniSK_VortexCopyWaterPalette
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6A57C:
+HCZMiniSK_VortexAccelerateAndSpawn:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                beq.w   locret_69F78
+                beq.w   HCZMiniSK_SharedReturn
                 move.b  #6,routine(a0)
-                move.l  #byte_6ADEC,$30(a0)
-                move.l  #loc_6A5BC,$34(a0)
+                move.l  #HCZMiniSK_VortexAccelerationAnim,$30(a0)
+                move.l  #HCZMiniSK_VortexBeginCapture,$34(a0)
                 moveq   #signextendB(sfx_FanBig),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_6AD92(pc),a2
+                lea     HCZMiniSK_VortexOrbitChildren(pc),a2
                 jmp     (CreateChild6_Simple).l
 ; ---------------------------------------------------------------------------
 
-loc_6A5B2:
-                lea     byte_6ADEC(pc),a1
+HCZMiniSK_VortexAnimateAcceleration:
+                lea     HCZMiniSK_VortexAccelerationAnim(pc),a1
                 jmp     (Animate_RawNoSSTMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_6A5BC:
+HCZMiniSK_VortexBeginCapture:
                 move.b  #8,routine(a0)
-                move.l  #byte_6ADEC,$30(a0)
-                move.l  #loc_6A622,$34(a0)
+                move.l  #HCZMiniSK_VortexAccelerationAnim,$30(a0)
+                move.l  #HCZMiniSK_VortexResetRequestPoll,$34(a0)
                 clr.b   collision_property(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6A5D8:
+HCZMiniSK_VortexCaptureAndCheckStop:
                 bsr.w   CapturePlayersInHCZMinibossVortex
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                beq.s   loc_6A5FA
+                beq.s   HCZMiniSK_VortexReleaseAndDecelerate
                 moveq   #signextendB(sfx_BossRotate),d0
                 jsr     (Play_SFX_Continuous).l
-                lea     byte_6AE11(pc),a1
+                lea     HCZMiniSK_VortexActiveAnim(pc),a1
                 jmp     (Animate_RawNoSST).l
 ; ---------------------------------------------------------------------------
 
-loc_6A5FA:
+HCZMiniSK_VortexReleaseAndDecelerate:
                 move.b  #$A,routine(a0)
                 bset    #3,$38(a0)
-                move.l  #loc_6A622,$34(a0)
-                bsr.w   loc_6A986
+                move.l  #HCZMiniSK_VortexResetRequestPoll,$34(a0)
+                bsr.w   HCZMiniSK_VortexReleaseP1ThenP2
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_6A618:
-                lea     byte_6AE16(pc),a1
+HCZMiniSK_VortexAnimateDeceleration:
+                lea     HCZMiniSK_VortexDecelerationAnim(pc),a1
                 jmp     (Animate_RawNoSSTMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_6A622:
+HCZMiniSK_VortexResetRequestPoll:
                 move.b  #4,routine(a0)
                 move.b  #$16,mapping_frame(a0)
                 bclr    #3,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6A636:
+; Boss flag 4 starts the breakup and releases any captured players
+HCZMiniSK_VortexWaitThenBreakUp:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                beq.s   loc_6A656
-                lea     ChildObjDat_6ADC4(pc),a2
+                beq.s   HCZMiniSK_VortexDefeatDraw
+                lea     HCZMiniSK_VortexDebrisChildren(pc),a2
                 jsr     (CreateChild1_Normal).l
-                bsr.w   loc_6A986
+                bsr.w   HCZMiniSK_VortexReleaseP1ThenP2
                 jsr     (Go_Delete_Sprite_2).l
 
-loc_6A656:
+HCZMiniSK_VortexDefeatDraw:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6A65C:
-                lea     ObjDat3_6AD24(pc),a1
+HCZMiniSK_InitRandomOrbitParticle:
+                lea     HCZMiniSK_ParticleAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_6A6B8,(a0)
+                move.l  #HCZMiniSK_OrbitParticleAnimateAndDraw,(a0)
                 jsr     (Random_Number).l
                 andi.w  #$FF,d0
                 ext.w   d0
@@ -169,19 +170,19 @@ loc_6A65C:
                 andi.w  #3,d0
                 move.b  d0,mapping_frame(a0)
                 lsl.w   #2,d0
-                move.l  off_6A6A8(pc,d0.w),$30(a0)
+                move.l  HCZMiniSK_ParticleAnimationPointers(pc,d0.w),$30(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_6A6D2,$34(a0)
+                move.l  #HCZMiniSK_OrbitParticleFreezeFrame,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
-off_6A6A8:
-                dc.l    byte_6AE46
-                dc.l    byte_6AE4A
-                dc.l    byte_6AE4E
-                dc.l    byte_6AE52
+HCZMiniSK_ParticleAnimationPointers:
+                dc.l    HCZMiniSK_ParticleAnimBase0
+                dc.l    HCZMiniSK_ParticleAnimBase1
+                dc.l    HCZMiniSK_ParticleAnimBase2
+                dc.l    HCZMiniSK_ParticleAnimBase3
 ; ---------------------------------------------------------------------------
 
-loc_6A6B8:
+HCZMiniSK_OrbitParticleAnimateAndDraw:
                 movea.w parent3(a0),a3
                 bsr.w   MoveHCZVortexParticleAroundParent
                 jsr     (Animate_Raw).l
@@ -189,32 +190,32 @@ loc_6A6B8:
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_6A6D2:
-                move.l  #loc_6A6E4,(a0)
+HCZMiniSK_OrbitParticleFreezeFrame:
+                move.l  #HCZMiniSK_OrbitParticleUntilStop,(a0)
                 movea.l $30(a0),a1
                 move.b  1(a1),mapping_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6A6E4:
+HCZMiniSK_OrbitParticleUntilStop:
                 movea.w parent3(a0),a3
                 btst    #3,$38(a3)
-                bne.s   loc_6A6FA
+                bne.s   HCZMiniSK_OrbitParticleBeginFade
                 bsr.w   MoveHCZVortexParticleAroundParent
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_6A6FA:
-                move.l  #loc_6A6B8,(a0)
+HCZMiniSK_OrbitParticleBeginFade:
+                move.l  #HCZMiniSK_OrbitParticleAnimateAndDraw,(a0)
                 move.w  #$1F,$2E(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6A710:
-                lea     ObjDat3_6AD24(pc),a1
+HCZMiniSK_InitWaterExitParticle:
+                lea     HCZMiniSK_ParticleAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_6A79C,(a0)
+                move.l  #HCZMiniSK_ExitParticleMoveAndDraw,(a0)
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$A0,d0
                 move.w  d0,x_pos(a0)
@@ -226,10 +227,11 @@ loc_6A710:
                 andi.w  #$FF,d0
                 move.w  d0,d1
                 ext.w   d0
-                bpl.s   loc_6A74E
+                bpl.s   HCZMiniSK_ExitParticleSetOffsetAndSpeed
                 st      $3C(a0)
 
-loc_6A74E:
+; Replace the launch helper's horizontal speed with the offset scaled by 16
+HCZMiniSK_ExitParticleSetOffsetAndSpeed:
                 add.w   d0,x_pos(a0)
                 bsr.w   SetHCZVortexLaunchVelocityFromOffset
                 lsl.w   #4,d0
@@ -242,7 +244,7 @@ loc_6A74E:
                 andi.w  #3,d0
                 move.b  d0,mapping_frame(a0)
                 lsl.w   #2,d0
-                lea     off_6A6A8(pc),a1
+                lea     HCZMiniSK_ParticleAnimationPointers(pc),a1
                 move.l  (a1,d0.w),$30(a0)
                 move.w  #$200,y_vel(a0)
                 move.w  #$BF,$2E(a0)
@@ -250,9 +252,9 @@ loc_6A74E:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6A79C:
+HCZMiniSK_ExitParticleMoveAndDraw:
                 tst.b   render_flags(a0)
-                bpl.s   loc_6A7BE
+                bpl.s   HCZMiniSK_ExitParticleDeleteOffscreen
                 bsr.w   AccelerateHCZVortexActorTowardCenterX
                 jsr     (MoveSprite2).l
                 jsr     (Animate_Raw).l
@@ -260,15 +262,15 @@ loc_6A79C:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6A7BE:
+HCZMiniSK_ExitParticleDeleteOffscreen:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6A7C4:
+HCZMiniSK_TransportWaitForP1Underwater:
                 lea     (Player_1).w,a1
                 btst    #Status_Underwater,status(a1)
-                beq.w   locret_69F78
-                move.l  #loc_6A872,(a0)
+                beq.w   HCZMiniSK_SharedReturn
+                move.l  #HCZMiniSK_TransportMoveAndSyncPlayer,(a0)
                 clr.b   (_unkFAA2).w
                 movea.w parent3(a0),a1
                 bset    #0,$38(a1)
@@ -276,16 +278,16 @@ loc_6A7C4:
                 lea     (Player_1).w,a1
                 lea     (Ctrl_1_locked).w,a2
                 tst.b   subtype(a0)
-                beq.s   loc_6A80C
+                beq.s   HCZMiniSK_TransportUnlockAndBindPlayer
                 lea     (Player_2).w,a1
                 lea     (Ctrl_2_locked).w,a2
                 btst    #Status_Underwater,status(a1)
-                beq.w   loc_6A86C
+                beq.w   HCZMiniSK_TransportDeleteIfNoPlayer
 
-loc_6A80C:
+HCZMiniSK_TransportUnlockAndBindPlayer:
                 clr.b   (a2)
                 tst.l   (a1)
-                beq.s   loc_6A86C
+                beq.s   HCZMiniSK_TransportDeleteIfNoPlayer
                 move.w  a1,$44(a0)
                 bclr    #7,art_tile(a0)
                 move.w  x_pos(a1),d0
@@ -295,10 +297,10 @@ loc_6A80C:
                 addi.w  #$A0,d1
                 move.w  d1,$3A(a0)
                 sub.w   d1,d0
-                bpl.s   loc_6A83E
+                bpl.s   HCZMiniSK_TransportLaunchAndTakeControl
                 st      $3C(a0)
 
-loc_6A83E:
+HCZMiniSK_TransportLaunchAndTakeControl:
                 bsr.w   SetHCZVortexLaunchVelocityFromOffset
                 move.w  #$200,y_vel(a0)
                 bset    #Status_InAir,status(a1)
@@ -311,11 +313,11 @@ loc_6A83E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6A86C:
+HCZMiniSK_TransportDeleteIfNoPlayer:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6A872:
+HCZMiniSK_TransportMoveAndSyncPlayer:
                 bsr.w   AccelerateHCZVortexActorTowardCenterX
                 jsr     (MoveSprite2).l
                 movea.w $44(a0),a1
@@ -323,31 +325,31 @@ loc_6A872:
                 move.w  y_pos(a0),d0
                 move.w  d0,y_pos(a1)
                 cmpi.w  #$828,d0
-                bhs.s   loc_6A896
+                bhs.s   HCZMiniSK_TransportChooseRelease
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6A896:
+HCZMiniSK_TransportChooseRelease:
                 tst.b   subtype(a0)
-                beq.s   loc_6A8AE
+                beq.s   HCZMiniSK_TransportReleaseP1AndSetBounds
                 lea     (Player_2).w,a1
                 tst.l   (a1)
-                beq.s   loc_6A8C0
+                beq.s   HCZMiniSK_TransportDeleteAfterRelease
                 jsr     (Restore_PlayerControl2).l
-                bra.w   loc_6A8C0
+                bra.w   HCZMiniSK_TransportDeleteAfterRelease
 ; ---------------------------------------------------------------------------
 
-loc_6A8AE:
+HCZMiniSK_TransportReleaseP1AndSetBounds:
                 jsr     (Restore_PlayerControl).l
                 move.w  #0,(Camera_stored_min_Y_pos).w
                 jsr     (Make_LevelSizeObj).l
 
-loc_6A8C0:
+HCZMiniSK_TransportDeleteAfterRelease:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6A8C6:
-                lea     word_6AD42(pc),a1
+HCZMiniSK_InitBossFragmentFlicker:
+                lea     HCZMiniSK_BossFragmentAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.l  #Obj_FlickerMove,(a0)
                 moveq   #0,d0
@@ -359,8 +361,8 @@ loc_6A8C6:
                 jmp     (Set_IndexedVelocity).l
 ; ---------------------------------------------------------------------------
 
-loc_6A8EE:
-                lea     word_6AD48(pc),a1
+HCZMiniSK_InitFallingVortexDebris:
+                lea     HCZMiniSK_VortexDebrisAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.l  #MoveChkDel,(a0)
                 moveq   #0,d0
@@ -370,4 +372,4 @@ loc_6A8EE:
                 move.b  d0,mapping_frame(a0)
                 moveq   #$1C,d0
                 jmp     (Set_IndexedVelocity).l
-; End of function loc_6A8EE
+; End of function HCZMiniSK_InitFallingVortexDebris

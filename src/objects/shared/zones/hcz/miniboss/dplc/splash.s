@@ -1,30 +1,30 @@
 ; Data owner: objects/shared/zones/hcz
 ; Provenance and source range: config/reconstruction/source_layout.json
 DPLC_HCZMinibossSplash_:
-                dc.w    Frame_362C90-DPLC_HCZMinibossSplash_
-                dc.w    Frame_362C94-DPLC_HCZMinibossSplash_
-                dc.w    Frame_362C98-DPLC_HCZMinibossSplash_
-                dc.w    Frame_362C9C-DPLC_HCZMinibossSplash_
-                dc.w    Frame_362CA0-DPLC_HCZMinibossSplash_
-                dc.w    Frame_362CA4-DPLC_HCZMinibossSplash_
-                dc.w    Frame_362CA8-DPLC_HCZMinibossSplash_
-                dc.w    Frame_362CAC-DPLC_HCZMinibossSplash_
-                dc.w    Frame_362CB0-DPLC_HCZMinibossSplash_
-Frame_362C90:   dc.w    0
+                dc.w    HCZMinibossSplashS3_DPLCFrame00-DPLC_HCZMinibossSplash_
+                dc.w    HCZMinibossSplashS3_DPLCFrame01-DPLC_HCZMinibossSplash_
+                dc.w    HCZMinibossSplashS3_DPLCFrame02-DPLC_HCZMinibossSplash_
+                dc.w    HCZMinibossSplashS3_DPLCFrame03-DPLC_HCZMinibossSplash_
+                dc.w    HCZMinibossSplashS3_DPLCFrame04-DPLC_HCZMinibossSplash_
+                dc.w    HCZMinibossSplashS3_DPLCFrame05-DPLC_HCZMinibossSplash_
+                dc.w    HCZMinibossSplashS3_DPLCFrame06-DPLC_HCZMinibossSplash_
+                dc.w    HCZMinibossSplashS3_DPLCFrame07-DPLC_HCZMinibossSplash_
+                dc.w    HCZMinibossSplashS3_DPLCFrame08-DPLC_HCZMinibossSplash_
+HCZMinibossSplashS3_DPLCFrame00:    dc.w    0
                 dc.w    $0005
-Frame_362C94:   dc.w    0
+HCZMinibossSplashS3_DPLCFrame01:    dc.w    0
                 dc.w    $006F
-Frame_362C98:   dc.w    0
+HCZMinibossSplashS3_DPLCFrame02:    dc.w    0
                 dc.w    $016F
-Frame_362C9C:   dc.w    0
+HCZMinibossSplashS3_DPLCFrame03:    dc.w    0
                 dc.w    $026F
-Frame_362CA0:   dc.w    0
+HCZMinibossSplashS3_DPLCFrame04:    dc.w    0
                 dc.w    $036F
-Frame_362CA4:   dc.w    0
+HCZMinibossSplashS3_DPLCFrame05:    dc.w    0
                 dc.w    $046B
-Frame_362CA8:   dc.w    0
+HCZMinibossSplashS3_DPLCFrame06:    dc.w    0
                 dc.w    $0527
-Frame_362CAC:   dc.w    0
+HCZMinibossSplashS3_DPLCFrame07:    dc.w    0
                 dc.w    $05A3
-Frame_362CB0:   dc.w    0
+HCZMinibossSplashS3_DPLCFrame08:    dc.w    0
                 dc.w    $05E3
