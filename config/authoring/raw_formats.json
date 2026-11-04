@@ -149,11 +149,11 @@
     },
     {
       "path": "src/objects/bosses/common/s3/robotnik_heads.s",
-      "sha256": "6105fc94f400d2fa28ac61c8ce26dd75f42155a7394d44ed658e755d917bc5bd"
+      "sha256": "2564c8d39b53789a9d631088bc3089b7bd622138a299b04d8830db78a4929bab"
     },
     {
       "path": "src/objects/bosses/common/s3/robotnik_ships.s",
-      "sha256": "85fe005b39819f69672aabd6c7d21ed786a666154c673b11d812fef0e1744038"
+      "sha256": "a25f226718a53cdbfc0a4b64bf2a4cf0b7ffbc22dd96c45fc0fd8b546fa8832c"
     },
     {
       "path": "src/objects/bosses/ddz/sk/asteroids.s",
@@ -449,7 +449,7 @@
     },
     {
       "path": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
-      "sha256": "c163277efbaa70c89abb496e6b1cddd6c059caba364338ac6d0c9a4fe91cc498"
+      "sha256": "dde0ea4e37187432945793aee612908686f9d1b359c006e0ce64562834c98e8c"
     },
     {
       "path": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
@@ -477,11 +477,11 @@
     },
     {
       "path": "src/objects/bosses/shared/sk/robotnik_heads.s",
-      "sha256": "116f337efd3d4f66dc56000c5d3e82dcced42d47887c436ebe42798baee11928"
+      "sha256": "b29ec3eab2f5dd99a1807131b1ae75477d0c36474ea63e3b38d7128e1dda9476"
     },
     {
       "path": "src/objects/bosses/shared/sk/robotnik_ships.s",
-      "sha256": "ab80e4eacc233869cbb00d7ef84082ef38dd3d0ec0a9369d0798a32ad001ebed"
+      "sha256": "c31b87f5d710a159c2136f8ef3259febdcdc57370af29380eb60a61ed7f612ee"
     },
     {
       "path": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",

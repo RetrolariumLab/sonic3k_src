@@ -9,17 +9,17 @@ Obj_RobotnikShip:
                 move.w  RobotnikShip_Index(pc,d0.w),d1
                 jsr     RobotnikShip_Index(pc,d1.w)
                 btst    #6,$38(a0)
-                bne.w   locret_45EE0
+                bne.w   RobotnikS3_SharedReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 RobotnikShip_Index:
-                dc.w    loc_460A6-RobotnikShip_Index
-                dc.w    loc_460C2-RobotnikShip_Index
-                dc.w    loc_460F8-RobotnikShip_Index
-                dc.w    loc_4612A-RobotnikShip_Index
+                dc.w    RobotnikS3_InitHiddenShipAndHead-RobotnikShip_Index
+                dc.w    RobotnikS3_HiddenShipFollowAndTestDefeat-RobotnikShip_Index
+                dc.w    RobotnikS3_HiddenShipWaitForRelease-RobotnikShip_Index
+                dc.w    RobotnikS3_HiddenShipMoveAndTickFall-RobotnikShip_Index
 ; ---------------------------------------------------------------------------
 
-loc_460A6:
+RobotnikS3_InitHiddenShipAndHead:
                 lea     ObjDat_RobotnikShip(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.b  subtype(a0),mapping_frame(a0)
@@ -27,35 +27,35 @@ loc_460A6:
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_460C2:
+RobotnikS3_HiddenShipFollowAndTestDefeat:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 jsr     (Child_SyncDraw).l
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_460DC
+                bne.s   RobotnikS3_HiddenShipBeginDefeat
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_460DC:
+RobotnikS3_HiddenShipBeginDefeat:
                 move.b  #4,routine(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild1_Normal).l
-                bne.s   locret_460F6
+                bne.s   RobotnikS3_HiddenShipExplosionReturn
                 move.b  #4,subtype(a1)
 
-locret_460F6:
+RobotnikS3_HiddenShipExplosionReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_460F8:
+RobotnikS3_HiddenShipWaitForRelease:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.s   loc_46110
+                bne.s   RobotnikS3_HiddenShipBeginBreakaway
                 jsr     (Child_SyncDraw).l
                 jmp     (Refresh_ChildPositionAdjusted).l
 ; ---------------------------------------------------------------------------
 
-loc_46110:
+RobotnikS3_HiddenShipBeginBreakaway:
                 move.b  #6,routine(a0)
                 move.b  #5,mapping_frame(a0)
                 move.w  #-$200,y_vel(a0)
@@ -63,14 +63,14 @@ loc_46110:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4612A:
+RobotnikS3_HiddenShipMoveAndTickFall:
                 jsr     (MoveSprite).l
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_46138
+                bmi.s   RobotnikS3_HiddenShipSignalDone
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_46138:
+RobotnikS3_HiddenShipSignalDone:
                 bset    #5,$38(a0)
                 clr.b   (Boss_flag).w
                 jmp     (Go_Delete_Sprite_2).l
@@ -94,11 +94,11 @@ RobotnikShip2_Index:
 Obj_RobotnikShip2Wait:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.s   loc_46174
+                bne.s   RobotnikS3_UnusedShipSetReadyFrame
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_46174:
+RobotnikS3_UnusedShipSetReadyFrame:
                 move.b  #6,routine(a0)
                 move.b  #5,mapping_frame(a0)
                 rts
@@ -111,7 +111,7 @@ Obj_RobotnikShip3:
                 jsr     RobotnikShip3_Index(pc,d1.w)
                 movea.w parent3(a0),a1
                 btst    #5,$38(a1)
-                bne.s   loc_461AC
+                bne.s   RobotnikS3_Ship3ScheduleDeleteOnRelease
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 RobotnikShip3_Index:
@@ -122,7 +122,7 @@ RobotnikShip3_Index:
                 dc.w    Obj_RobotnikShipEscape-RobotnikShip3_Index
 ; ---------------------------------------------------------------------------
 
-loc_461AC:
+RobotnikS3_Ship3ScheduleDeleteOnRelease:
                 jmp     (Go_Delete_Sprite_2).l
 ; ---------------------------------------------------------------------------
 
@@ -139,29 +139,29 @@ Obj_RobotnikShipMain:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_461E8
+                bne.s   RobotnikS3_FollowShipBeginDefeat
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_461E8:
+RobotnikS3_FollowShipBeginDefeat:
                 move.b  #4,routine(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild1_Normal).l
-                bne.s   locret_46202
+                bne.s   RobotnikS3_FollowShipExplosionReturn
                 move.b  #4,subtype(a1)
 
-locret_46202:
+RobotnikS3_FollowShipExplosionReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 Obj_RobotnikShipWait:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.s   loc_46216
+                bne.s   RobotnikS3_FollowShipSetReadyFrame
                 jmp     (Refresh_ChildPositionAdjusted).l
 ; ---------------------------------------------------------------------------
 
-loc_46216:
+RobotnikS3_FollowShipSetReadyFrame:
                 move.b  #6,routine(a0)
                 move.b  #$A,mapping_frame(a0)
                 rts
@@ -171,15 +171,15 @@ Obj_RobotnikShipReady:
                 move.w  (Camera_Y_pos).w,d0
                 addi.w  #$40,d0
                 cmp.w   y_pos(a0),d0
-                bhs.s   loc_46238
+                bhs.s   RobotnikS3_FollowShipBeginEscape
                 subq.w  #1,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_46238:
+RobotnikS3_FollowShipBeginEscape:
                 move.b  #8,routine(a0)
 
-loc_4623E:
+RobotnikS3_ShipLaunchAndTryFlame:
                 bset    #0,render_flags(a0)
                 move.w  #$300,x_vel(a0)
                 clr.w   y_vel(a0)
@@ -191,11 +191,11 @@ loc_4623E:
 Obj_RobotnikShipEscape:
                 jsr     (MoveSprite2).l
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_4626C
+                bmi.s   RobotnikS3_EscapeShipSignalDone
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4626C:
+RobotnikS3_EscapeShipSignalDone:
                 bset    #5,$38(a0)
                 clr.b   (Boss_flag).w
                 jmp     (Go_Delete_Sprite_2).l
@@ -245,30 +245,30 @@ Obj_FBZRobotnikShipMain:
                 jsr     (Child_GetPriority).l
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_462F0
+                bne.s   RobotnikS3_FBZShipBeginDefeat
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_462F0:
+RobotnikS3_FBZShipBeginDefeat:
                 move.b  #4,routine(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild1_Normal).l
-                bne.s   locret_4630A
+                bne.s   RobotnikS3_FBZShipExplosionReturn
                 move.b  #4,subtype(a1)
 
-locret_4630A:
+RobotnikS3_FBZShipExplosionReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 Obj_FBZRobotnikShipWait:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.s   loc_46324
+                bne.s   RobotnikS3_FBZShipBeginFall
                 jsr     (Child_GetPriority).l
                 jmp     (Refresh_ChildPosition).l
 ; ---------------------------------------------------------------------------
 
-loc_46324:
+RobotnikS3_FBZShipBeginFall:
                 move.b  #6,routine(a0)
                 move.b  #5,mapping_frame(a0)
                 clr.w   x_vel(a0)
@@ -293,14 +293,14 @@ Obj_FBZRobotnikShipRise:
                 move.w  (Camera_Y_pos).w,d0
                 addi.w  #$C0,d0
                 cmp.w   y_pos(a0),d0
-                bhs.s   loc_46378
+                bhs.s   RobotnikS3_FBZShipLaunchAtCameraHeight
                 subq.w  #1,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_46378:
+RobotnikS3_FBZShipLaunchAtCameraHeight:
                 move.b  #$A,routine(a0)
-                bra.w   loc_4623E
+                bra.w   RobotnikS3_ShipLaunchAndTryFlame
 ; ---------------------------------------------------------------------------
 
 Obj_RobotnikShipFlame:
@@ -313,14 +313,14 @@ Obj_RobotnikShipFlame:
 Obj_RobotnikShipFlameMain:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.s   loc_463B6
+                bne.s   RobotnikS3_ShipFlameDeleteOnRelease
                 jsr     (Refresh_ChildPositionAdjusted).l
                 btst    #0,(V_int_run_count+3).w
-                bne.w   locret_45EE0
+                bne.w   RobotnikS3_SharedReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_463B6:
+RobotnikS3_ShipFlameDeleteOnRelease:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 ObjDat_RobotnikHead:

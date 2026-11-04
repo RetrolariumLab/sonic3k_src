@@ -4744,15 +4744,15 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 60
       },
-      "declarations_sha256": "f9129f7e8f5b76689335890354eb01ab33fd82f2caf59db2432cfa0cba7f9dd3",
+      "declarations_sha256": "022240e0560b0a8b8d3e7c23dbfd7631956e438b622a6d3c322e7ef1769e63dc",
       "labels": {
         "Map_BossExplosion_": 0,
-        "word_84008": 12,
-        "word_84010": 20,
-        "word_84018": 28,
-        "word_84020": 36,
-        "word_84028": 44,
-        "word_84030": 52
+        "BossExplosion_MapFrame0": 12,
+        "BossExplosion_MapFrame1": 20,
+        "BossExplosion_MapFrame2": 28,
+        "BossExplosion_MapFrame3": 36,
+        "BossExplosion_MapFrame4": 44,
+        "BossExplosion_MapFrame5": 52
       },
       "external_symbols": [],
       "blocks": [
@@ -4760,42 +4760,42 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_84008",
+          "target": "BossExplosion_MapFrame0",
           "base": "Map_BossExplosion_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_84010",
+          "target": "BossExplosion_MapFrame1",
           "base": "Map_BossExplosion_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_84018",
+          "target": "BossExplosion_MapFrame2",
           "base": "Map_BossExplosion_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_84020",
+          "target": "BossExplosion_MapFrame3",
           "base": "Map_BossExplosion_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_84028",
+          "target": "BossExplosion_MapFrame4",
           "base": "Map_BossExplosion_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_84030",
+          "target": "BossExplosion_MapFrame5",
           "base": "Map_BossExplosion_"
         },
         {
@@ -28294,13 +28294,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 40
       },
-      "declarations_sha256": "b4e6a9070e93cd1840b4920ace106e66ed7aaa6dc7bbb5321005edc3ccdcec62",
+      "declarations_sha256": "0b984fab8b29b5b58874b38677b32f5b2b296901588c5466d6d6f6ed36a0543e",
       "labels": {
         "Map_FBZRobotnikHead_": 0,
-        "word_6845C": 8,
-        "word_68464": 16,
-        "word_6846C": 24,
-        "word_68474": 32
+        "FBZRobotnikHead_MapFrame00": 8,
+        "FBZRobotnikHead_MapFrame01": 16,
+        "FBZRobotnikHead_MapFrame02": 24,
+        "FBZRobotnikHead_MapFrame03": 32
       },
       "external_symbols": [],
       "blocks": [
@@ -28308,28 +28308,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6845C",
+          "target": "FBZRobotnikHead_MapFrame00",
           "base": "Map_FBZRobotnikHead_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_68464",
+          "target": "FBZRobotnikHead_MapFrame01",
           "base": "Map_FBZRobotnikHead_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6846C",
+          "target": "FBZRobotnikHead_MapFrame02",
           "base": "Map_FBZRobotnikHead_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_68474",
+          "target": "FBZRobotnikHead_MapFrame03",
           "base": "Map_FBZRobotnikHead_"
         },
         {
@@ -28363,16 +28363,16 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 214
       },
-      "declarations_sha256": "e51a2d860624cf7740c9c95465784990c3bffe91355a77e024423cf4ca2015bb",
+      "declarations_sha256": "5ff1c1403a69a2615365107d352244a519916fb5cfc8c0bb279dfcc52fd9dec3",
       "labels": {
         "Map_FBZRobotnikRun_": 0,
-        "word_6838C": 14,
-        "word_683AC": 46,
-        "word_683C6": 72,
-        "word_683E6": 104,
-        "word_683FA": 124,
-        "word_6841A": 156,
-        "word_68434": 182
+        "FBZRobotnikRun_MapFrame00": 14,
+        "FBZRobotnikRun_MapFrame01": 46,
+        "FBZRobotnikRun_MapFrame02": 72,
+        "FBZRobotnikRun_MapFrame03": 104,
+        "FBZRobotnikRun_MapFrame04": 124,
+        "FBZRobotnikRun_MapFrame05": 156,
+        "FBZRobotnikRun_MapFrame06": 182
       },
       "external_symbols": [],
       "blocks": [
@@ -28380,49 +28380,49 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6838C",
+          "target": "FBZRobotnikRun_MapFrame00",
           "base": "Map_FBZRobotnikRun_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_683AC",
+          "target": "FBZRobotnikRun_MapFrame01",
           "base": "Map_FBZRobotnikRun_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_683C6",
+          "target": "FBZRobotnikRun_MapFrame02",
           "base": "Map_FBZRobotnikRun_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_683E6",
+          "target": "FBZRobotnikRun_MapFrame03",
           "base": "Map_FBZRobotnikRun_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_683FA",
+          "target": "FBZRobotnikRun_MapFrame04",
           "base": "Map_FBZRobotnikRun_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6841A",
+          "target": "FBZRobotnikRun_MapFrame05",
           "base": "Map_FBZRobotnikRun_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_68434",
+          "target": "FBZRobotnikRun_MapFrame06",
           "base": "Map_FBZRobotnikRun_"
         },
         {
@@ -28471,13 +28471,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 112
       },
-      "declarations_sha256": "71af731bbf98551c7ad108dec3b53810d53d079f5a0e96b1df76da1a5a5417d9",
+      "declarations_sha256": "440ac65c192a649430190d4b1c12707dd4e5f56d52820fda36d945e03cbc1fbb",
       "labels": {
         "Map_FBZRobotnikStand_": 0,
-        "word_68484": 8,
-        "word_6849E": 34,
-        "word_684B8": 60,
-        "word_684D2": 86
+        "FBZRobotnikStand_MapFrame00": 8,
+        "FBZRobotnikStand_MapFrame01": 34,
+        "FBZRobotnikStand_MapFrame02": 60,
+        "FBZRobotnikStand_MapFrame03": 86
       },
       "external_symbols": [],
       "blocks": [
@@ -28485,28 +28485,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_68484",
+          "target": "FBZRobotnikStand_MapFrame00",
           "base": "Map_FBZRobotnikStand_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6849E",
+          "target": "FBZRobotnikStand_MapFrame01",
           "base": "Map_FBZRobotnikStand_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_684B8",
+          "target": "FBZRobotnikStand_MapFrame02",
           "base": "Map_FBZRobotnikStand_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_684D2",
+          "target": "FBZRobotnikStand_MapFrame03",
           "base": "Map_FBZRobotnikStand_"
         },
         {
@@ -28540,22 +28540,22 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 370
       },
-      "declarations_sha256": "bb42a35a412f5af8b4db9c86d567a513fafa5df9b05694446dafbb00db2d6b68",
+      "declarations_sha256": "605e187c50fb5578f23a33d39d226bd427b69eeca2e7169006f35d71f4b4683d",
       "labels": {
         "Map_RobotnikShip_": 0,
-        "word_68226": 26,
-        "word_6822E": 34,
-        "word_68236": 42,
-        "word_68244": 56,
-        "word_6824C": 64,
-        "word_68254": 72,
-        "word_6829E": 146,
-        "word_682A6": 154,
-        "word_682C0": 180,
-        "word_682F2": 230,
-        "word_68306": 250,
-        "word_68332": 294,
-        "word_68358": 332
+        "RobotnikShip_MapFrame00": 26,
+        "RobotnikShip_MapFrame01": 34,
+        "RobotnikShip_MapFrame02": 42,
+        "RobotnikShip_MapFrame03": 56,
+        "RobotnikShip_MapFrame04": 64,
+        "RobotnikShip_MapFrame05": 72,
+        "RobotnikShip_MapFrame06": 146,
+        "RobotnikShip_MapFrame07": 154,
+        "RobotnikShip_MapFrame08": 180,
+        "RobotnikShip_MapFrame09": 230,
+        "RobotnikShip_MapFrame0A": 250,
+        "RobotnikShip_MapFrame0B": 294,
+        "RobotnikShip_MapFrame0C": 332
       },
       "external_symbols": [],
       "blocks": [
@@ -28563,91 +28563,91 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_68226",
+          "target": "RobotnikShip_MapFrame00",
           "base": "Map_RobotnikShip_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6822E",
+          "target": "RobotnikShip_MapFrame01",
           "base": "Map_RobotnikShip_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_68236",
+          "target": "RobotnikShip_MapFrame02",
           "base": "Map_RobotnikShip_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_68244",
+          "target": "RobotnikShip_MapFrame03",
           "base": "Map_RobotnikShip_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6824C",
+          "target": "RobotnikShip_MapFrame04",
           "base": "Map_RobotnikShip_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_68254",
+          "target": "RobotnikShip_MapFrame05",
           "base": "Map_RobotnikShip_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6829E",
+          "target": "RobotnikShip_MapFrame06",
           "base": "Map_RobotnikShip_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_682A6",
+          "target": "RobotnikShip_MapFrame07",
           "base": "Map_RobotnikShip_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_682C0",
+          "target": "RobotnikShip_MapFrame08",
           "base": "Map_RobotnikShip_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_682F2",
+          "target": "RobotnikShip_MapFrame09",
           "base": "Map_RobotnikShip_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_68306",
+          "target": "RobotnikShip_MapFrame0A",
           "base": "Map_RobotnikShip_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_68332",
+          "target": "RobotnikShip_MapFrame0B",
           "base": "Map_RobotnikShip_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_68358",
+          "target": "RobotnikShip_MapFrame0C",
           "base": "Map_RobotnikShip_"
         },
         {
@@ -28726,38 +28726,38 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 518
       },
-      "declarations_sha256": "139bb2bc2183f49679d2f49aa27a869fe76eaf98b68e063421832eb21a8e84fb",
+      "declarations_sha256": "db85712777fe43eeaebb634a5ed36936496f0b82939977625086bfcc5f5c91ff",
       "labels": {
         "Map_KnuxFinalBossCrane_": 0,
-        "word_67150": 58,
-        "word_6715E": 72,
-        "word_67166": 80,
-        "word_67174": 94,
-        "word_6717C": 102,
-        "word_6718A": 116,
-        "word_6719E": 136,
-        "word_671B8": 162,
-        "word_671D8": 194,
-        "word_671FE": 232,
-        "word_6722A": 276,
-        "word_6725C": 326,
-        "word_67294": 382,
-        "word_6729C": 390,
-        "word_672A4": 398,
-        "word_672AC": 406,
-        "word_672B4": 414,
-        "word_672BC": 422,
-        "word_672C4": 430,
-        "word_672CC": 438,
-        "word_672D4": 446,
-        "word_672DC": 454,
-        "word_672E4": 462,
-        "word_672EC": 470,
-        "word_672F4": 478,
-        "word_672FC": 486,
-        "word_67304": 494,
-        "word_6730C": 502,
-        "word_67314": 510
+        "SKRobotnikShipCraneMap_Frame00": 58,
+        "SKRobotnikShipCraneMap_Frame01": 72,
+        "SKRobotnikShipCraneMap_Frame02": 80,
+        "SKRobotnikShipCraneMap_Frame03": 94,
+        "SKRobotnikShipCraneMap_Frame04": 102,
+        "SKRobotnikShipCraneMap_Frame05": 116,
+        "SKRobotnikShipCraneMap_Frame06": 136,
+        "SKRobotnikShipCraneMap_Frame07": 162,
+        "SKRobotnikShipCraneMap_Frame08": 194,
+        "SKRobotnikShipCraneMap_Frame09": 232,
+        "SKRobotnikShipCraneMap_Frame0A": 276,
+        "SKRobotnikShipCraneMap_Frame0B": 326,
+        "SKRobotnikShipCraneMap_Frame0C": 382,
+        "SKRobotnikShipCraneMap_Frame0D": 390,
+        "SKRobotnikShipCraneMap_Frame0E": 398,
+        "SKRobotnikShipCraneMap_Frame0F": 406,
+        "SKRobotnikShipCraneMap_Frame10": 414,
+        "SKRobotnikShipCraneMap_Frame11": 422,
+        "SKRobotnikShipCraneMap_Frame12": 430,
+        "SKRobotnikShipCraneMap_Frame13": 438,
+        "SKRobotnikShipCraneMap_Frame14": 446,
+        "SKRobotnikShipCraneMap_Frame15": 454,
+        "SKRobotnikShipCraneMap_Frame16": 462,
+        "SKRobotnikShipCraneMap_Frame17": 470,
+        "SKRobotnikShipCraneMap_Frame18": 478,
+        "SKRobotnikShipCraneMap_Frame19": 486,
+        "SKRobotnikShipCraneMap_Frame1A": 494,
+        "SKRobotnikShipCraneMap_Frame1B": 502,
+        "SKRobotnikShipCraneMap_Frame1C": 510
       },
       "external_symbols": [],
       "blocks": [
@@ -28765,203 +28765,203 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_67150",
+          "target": "SKRobotnikShipCraneMap_Frame00",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6715E",
+          "target": "SKRobotnikShipCraneMap_Frame01",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_67166",
+          "target": "SKRobotnikShipCraneMap_Frame02",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_67174",
+          "target": "SKRobotnikShipCraneMap_Frame03",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6717C",
+          "target": "SKRobotnikShipCraneMap_Frame04",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6718A",
+          "target": "SKRobotnikShipCraneMap_Frame05",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6719E",
+          "target": "SKRobotnikShipCraneMap_Frame06",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_671B8",
+          "target": "SKRobotnikShipCraneMap_Frame07",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_671D8",
+          "target": "SKRobotnikShipCraneMap_Frame08",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_671FE",
+          "target": "SKRobotnikShipCraneMap_Frame09",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6722A",
+          "target": "SKRobotnikShipCraneMap_Frame0A",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6725C",
+          "target": "SKRobotnikShipCraneMap_Frame0B",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_67294",
+          "target": "SKRobotnikShipCraneMap_Frame0C",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6729C",
+          "target": "SKRobotnikShipCraneMap_Frame0D",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_672A4",
+          "target": "SKRobotnikShipCraneMap_Frame0E",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_672AC",
+          "target": "SKRobotnikShipCraneMap_Frame0F",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_672B4",
+          "target": "SKRobotnikShipCraneMap_Frame10",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_672BC",
+          "target": "SKRobotnikShipCraneMap_Frame11",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_672C4",
+          "target": "SKRobotnikShipCraneMap_Frame12",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_672CC",
+          "target": "SKRobotnikShipCraneMap_Frame13",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_672D4",
+          "target": "SKRobotnikShipCraneMap_Frame14",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_672DC",
+          "target": "SKRobotnikShipCraneMap_Frame15",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_672E4",
+          "target": "SKRobotnikShipCraneMap_Frame16",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_672EC",
+          "target": "SKRobotnikShipCraneMap_Frame17",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_672F4",
+          "target": "SKRobotnikShipCraneMap_Frame18",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_672FC",
+          "target": "SKRobotnikShipCraneMap_Frame19",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_67304",
+          "target": "SKRobotnikShipCraneMap_Frame1A",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6730C",
+          "target": "SKRobotnikShipCraneMap_Frame1B",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_67314",
+          "target": "SKRobotnikShipCraneMap_Frame1C",
           "base": "Map_KnuxFinalBossCrane_"
         },
         {
@@ -29120,13 +29120,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 58
       },
-      "declarations_sha256": "4527dff5680eb4063a2ed5e9e81a4893a832524a501c4fe27331c56f89e3835e",
+      "declarations_sha256": "53927630f528cdac45fec30f770d5f388b12c075323538f146c886ff66cd6666",
       "labels": {
         "Map_RoboshipPieces_": 0,
-        "word_7D6E0": 8,
-        "word_7D6EE": 22,
-        "word_7D6F6": 30,
-        "word_7D704": 44
+        "SKRobotnikShipPiecesMap_Frame00": 8,
+        "SKRobotnikShipPiecesMap_Frame01": 22,
+        "SKRobotnikShipPiecesMap_Frame02": 30,
+        "SKRobotnikShipPiecesMap_Frame03": 44
       },
       "external_symbols": [],
       "blocks": [
@@ -29134,28 +29134,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7D6E0",
+          "target": "SKRobotnikShipPiecesMap_Frame00",
           "base": "Map_RoboshipPieces_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7D6EE",
+          "target": "SKRobotnikShipPiecesMap_Frame01",
           "base": "Map_RoboshipPieces_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7D6F6",
+          "target": "SKRobotnikShipPiecesMap_Frame02",
           "base": "Map_RoboshipPieces_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7D704",
+          "target": "SKRobotnikShipPiecesMap_Frame03",
           "base": "Map_RoboshipPieces_"
         },
         {

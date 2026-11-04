@@ -292,7 +292,7 @@ MHZBoss_BeginShipDeparture:
                 jsr     (CreateChild1_Normal).l
                 cmpi.b  #2,(Player_1+character_id).w
                 bne.w   MHZBoss_SharedReturn
-                jmp     (loc_67B1C).l
+                jmp     (RobotnikSK_HeadLoadEggRoboAnimAndArt).l
 ; ---------------------------------------------------------------------------
 
 MHZBoss_PlaySirenAndSetDeparture:

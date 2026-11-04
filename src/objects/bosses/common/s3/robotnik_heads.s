@@ -24,7 +24,7 @@ Obj_RobotnikHeadInit:
                 movea.w parent3(a0),a1
                 move.w  parent3(a1),$44(a0)
 
-locret_45EE0:
+RobotnikS3_SharedReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -33,16 +33,16 @@ Obj_RobotnikHeadMain:
                 jsr     (Animate_RawNoSST).l
                 movea.w $44(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_45F08
+                bne.s   RobotnikS3_HeadSetDefeatFrame
                 btst    #6,status(a1)
-                beq.s   locret_45F06
+                beq.s   RobotnikS3_HeadExpressionReturn
                 move.b  #2,mapping_frame(a0)            ; Use hurt mapping frame if parent boss object is currently hurt
 
-locret_45F06:
+RobotnikS3_HeadExpressionReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_45F08:
+RobotnikS3_HeadSetDefeatFrame:
                 move.b  #4,routine(a0)
                 move.b  #3,mapping_frame(a0)            ; Use defeated head frame if parent boss object is defeated
                 rts
@@ -60,7 +60,7 @@ Obj_RobotnikHead2:
                 move.w  RobotnikHead2_Index(pc,d0.w),d1
                 jsr     RobotnikHead2_Index(pc,d1.w)
                 btst    #6,$38(a0)
-                bne.w   locret_45EE0
+                bne.w   RobotnikS3_SharedReturn
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
 RobotnikHead2_Index:
@@ -96,29 +96,29 @@ Obj_FBZRobotnikHeadMain:
                 move.w  x_pos(a0),d0
                 bclr    #0,render_flags(a0)
                 cmp.w   (Player_1+x_pos).w,d0
-                bhs.s   loc_45F9A
+                bhs.s   RobotnikS3_FBZHeadResetAndCheckRequest
                 bset    #0,render_flags(a0)
 
-loc_45F9A:
+RobotnikS3_FBZHeadResetAndCheckRequest:
                 clr.b   mapping_frame(a0)
                 movea.w $44(a0),a1
 ; Bug: this should check bit 2 of $38(a1)
                 btst    #2,$38(a0)
-                beq.s   loc_45FB0
+                beq.s   RobotnikS3_FBZHeadCheckRootExpression
                 move.b  #1,mapping_frame(a0)
 
-loc_45FB0:
+RobotnikS3_FBZHeadCheckRootExpression:
                 btst    #7,status(a1)
-                bne.s   loc_45FC8
+                bne.s   RobotnikS3_FBZHeadSetDefeatFrame
                 btst    #6,status(a1)
-                beq.s   locret_45FC6
+                beq.s   RobotnikS3_FBZHeadExpressionReturn
                 move.b  #2,mapping_frame(a0)
 
-locret_45FC6:
+RobotnikS3_FBZHeadExpressionReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_45FC8:
+RobotnikS3_FBZHeadSetDefeatFrame:
                 move.b  #4,routine(a0)
                 move.b  #3,mapping_frame(a0)
                 rts
@@ -143,10 +143,10 @@ Obj_RobotnikHead3Init:
                 jsr     (SetUp_ObjAttributes).l
                 movea.w parent3(a0),a1
                 btst    #7,art_tile(a1)
-                beq.s   locret_46012
+                beq.s   RobotnikS3_DirectHeadPriorityInitReturn
                 bset    #7,art_tile(a0)
 
-locret_46012:
+RobotnikS3_DirectHeadPriorityInitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -155,16 +155,16 @@ Obj_RobotnikHead3Main:
                 jsr     (Animate_RawNoSST).l
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_4603A
+                bne.s   RobotnikS3_DirectHeadSetDefeatFrame
                 btst    #6,status(a1)
-                beq.s   locret_46038
+                beq.s   RobotnikS3_DirectHeadExpressionReturn
                 move.b  #2,mapping_frame(a0)
 
-locret_46038:
+RobotnikS3_DirectHeadExpressionReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4603A:
+RobotnikS3_DirectHeadSetDefeatFrame:
                 move.b  #4,routine(a0)
                 move.b  #3,mapping_frame(a0)
                 rts
@@ -179,11 +179,11 @@ Obj_RobotnikHead4:
                 jsr     RobotnikHead4_Index(pc,d1.w)
                 movea.w parent3(a0),a1
                 btst    #5,$38(a1)
-                bne.s   loc_46074
+                bne.s   RobotnikS3_DirectHeadDeleteOnRelease
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_46074:
+RobotnikS3_DirectHeadDeleteOnRelease:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 RobotnikHead4_Index:

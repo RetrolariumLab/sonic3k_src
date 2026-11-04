@@ -1263,9 +1263,15 @@
       "commits": ["964f4f9351a38f7f95457c4612f908a90e77a34f"]
     },
     {
-      "id": "current-shorten-53-boss-ddz",
+      "id": "change-3bb3054949d7",
       "kind": "source_or_tooling",
       "summary": "Apply 275 reviewed short labels for boss ddz.",
+      "commits": ["3bb3054949d7c427ceeed357c800815173b86d71"]
+    },
+    {
+      "id": "current-shorten-54-boss-common",
+      "kind": "source_or_tooling",
+      "summary": "Apply 76 reviewed short labels for boss common.",
       "commits": ["release-commit"]
     }
   ],
