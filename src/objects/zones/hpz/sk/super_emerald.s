@@ -13,39 +13,39 @@ Obj_HPZSuperEmerald:
                 move.b  (a1,d0.w),d1
                 move.w  d1,d2
                 add.w   d2,d2
-                move.w  off_9079A(pc,d2.w),d2
-                jmp     off_9079A(pc,d2.w)
+                move.w  HPZSuper_CollectionStateDispatch(pc,d2.w),d2
+                jmp     HPZSuper_CollectionStateDispatch(pc,d2.w)
 ; ---------------------------------------------------------------------------
-off_9079A:
-                dc.w    loc_907A2-off_9079A
-                dc.w    loc_907A8-off_9079A
-                dc.w    loc_907A8-off_9079A
-                dc.w    loc_907DE-off_9079A
+HPZSuper_CollectionStateDispatch:
+                dc.w    HPZSuper_DeleteUncollectedState-HPZSuper_CollectionStateDispatch
+                dc.w    HPZSuper_InitializeGrayEligibleState-HPZSuper_CollectionStateDispatch
+                dc.w    HPZSuper_InitializeGrayEligibleState-HPZSuper_CollectionStateDispatch
+                dc.w    HPZSuper_InitializeCompletedColoredState-HPZSuper_CollectionStateDispatch
 ; ---------------------------------------------------------------------------
 
-loc_907A2:
+HPZSuper_DeleteUncollectedState:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_907A8:
-                move.l  #loc_908DE,(a0)
+HPZSuper_InitializeGrayEligibleState:
+                move.l  #HPZSuper_TopSolidAndArmStageEntry,(a0)
                 move.w  #make_art_tile(ArtTile_HPZGrayEmerald,0,1),art_tile(a0)
                 bset    #0,$38(a0)
                 bsr.w   PlaceHpzSuperEmeraldAtDisplaySlot
                 bsr.w   SetHpzSuperEmeraldSpritePriority
                 btst    #7,$38(a0)
-                beq.s   loc_907D8
-                move.l  #loc_90880,(a0)
+                beq.s   HPZSuper_DrawAfterGrayInitialization
+                move.l  #HPZSuper_WaitForBeamAndApplyGray,(a0)
                 move.b  d0,mapping_frame(a0)
                 bsr.w   SelectHpzSuperEmeraldArtPalette
 
-loc_907D8:
+HPZSuper_DrawAfterGrayInitialization:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_907DE:
+HPZSuper_InitializeCompletedColoredState:
                 move.b  d0,mapping_frame(a0)
-                move.l  #loc_9089E,(a0)
+                move.l  #HPZSuper_CheckGlobalGrayColorOverride,(a0)
                 bsr.w   PlaceHpzSuperEmeraldAtDisplaySlot
                 bsr.w   SetHpzSuperEmeraldSpritePriority
                 bsr.w   SelectHpzSuperEmeraldArtPalette
@@ -57,18 +57,18 @@ SelectHpzSuperEmeraldArtPalette:
                 move.w  d0,d1
                 lsl.w   #2,d1
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_90808
+                bne.s   HPZSuper_ApplySelectedArtAndCache
                 addq.w  #2,d1
 
-loc_90808:
-                move.w  word_90816(pc,d1.w),d0
+HPZSuper_ApplySelectedArtAndCache:
+                move.w  HPZSuper_ModePairedArtWords(pc,d1.w),d0
                 move.w  d0,art_tile(a0)
                 move.w  d0,$3A(a0)
                 rts
 ; End of function SelectHpzSuperEmeraldArtPalette
 
 ; ---------------------------------------------------------------------------
-word_90816:
+HPZSuper_ModePairedArtWords:
                 dc.w    make_art_tile(ArtTile_HPZEmeraldMisc,2,1)
                 dc.w    make_art_tile(ArtTile_HPZEmeraldMisc,2,1)
                 dc.w    make_art_tile(ArtTile_HPZEmeraldMisc,0,1)
@@ -89,12 +89,12 @@ word_90816:
 SetHpzSuperEmeraldSpritePriority:
                 move.w  d0,d1
                 add.w   d1,d1
-                move.w  word_9083E(pc,d1.w),priority(a0)
+                move.w  HPZSuper_DisplayQueuePriorities(pc,d1.w),priority(a0)
                 rts
 ; End of function SetHpzSuperEmeraldSpritePriority
 
 ; ---------------------------------------------------------------------------
-word_9083E:
+HPZSuper_DisplayQueuePriorities:
                 dc.w    $200
                 dc.w    $80
                 dc.w    $80
@@ -109,14 +109,14 @@ word_9083E:
 PlaceHpzSuperEmeraldAtDisplaySlot:
                 move.w  d0,d1
                 lsl.w   #2,d1
-                lea     word_90860(pc,d1.w),a1
+                lea     HPZSuper_DisplaySlotCoordinates(pc,d1.w),a1
                 move.w  (a1)+,x_pos(a0)
                 move.w  (a1)+,y_pos(a0)
                 rts
 ; End of function PlaceHpzSuperEmeraldAtDisplaySlot
 
 ; ---------------------------------------------------------------------------
-word_90860:
+HPZSuper_DisplaySlotCoordinates:
                 dc.w    $1640,  $368
                 dc.w    $15E0,  $3A0
                 dc.w    $16A0,  $3A0
@@ -127,57 +127,57 @@ word_90860:
                 dc.w    $1640,  $3AC
 ; ---------------------------------------------------------------------------
 
-loc_90880:
+HPZSuper_WaitForBeamAndApplyGray:
                 btst    #5,$38(a0)
-                beq.s   loc_9089E
-                move.l  #loc_908DE,(a0)
+                beq.s   HPZSuper_CheckGlobalGrayColorOverride
+                move.l  #HPZSuper_TopSolidAndArmStageEntry,(a0)
                 move.b  #$1E,mapping_frame(a0)
                 move.w  #make_art_tile(ArtTile_HPZGrayEmerald,0,1),art_tile(a0)
-                bra.w   loc_908DE
+                bra.w   HPZSuper_TopSolidAndArmStageEntry
 ; ---------------------------------------------------------------------------
 
-loc_9089E:
+HPZSuper_CheckGlobalGrayColorOverride:
                 move.b  (_unkFAC0).w,d0
-                bpl.s   loc_908BE
+                bpl.s   HPZSuper_SelectColoredOrParityFrame
                 bclr    #7,d0
                 cmp.b   subtype(a0),d0
-                bne.s   loc_908BE
+                bne.s   HPZSuper_SelectColoredOrParityFrame
                 move.b  #$1E,mapping_frame(a0)
                 move.w  #make_art_tile(ArtTile_HPZGrayEmerald,0,1),art_tile(a0)
-                bra.w   loc_908DE
+                bra.w   HPZSuper_TopSolidAndArmStageEntry
 ; ---------------------------------------------------------------------------
 
-loc_908BE:
+HPZSuper_SelectColoredOrParityFrame:
                 move.b  subtype(a0),mapping_frame(a0)
                 move.w  $3A(a0),art_tile(a0)
                 btst    #0,(V_int_run_count+3).w
-                beq.s   loc_908DE
+                beq.s   HPZSuper_TopSolidAndArmStageEntry
                 move.b  #7,mapping_frame(a0)
                 move.w  #make_art_tile(ArtTile_HPZEmeraldMisc,0,1),art_tile(a0)
 
-loc_908DE:
+HPZSuper_TopSolidAndArmStageEntry:
                 move.w  #$1B,d1
                 move.w  #$10,d2
                 move.w  #$10,d3
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectTop).l
                 btst    #p1_standing_bit,status(a0)
-                beq.s   loc_90920
+                beq.s   HPZSuper_DrawAfterTopSolid
                 btst    #0,$38(a0)
-                beq.s   loc_90920
-                move.l  #loc_90926,(a0)
+                beq.s   HPZSuper_DrawAfterTopSolid
+                move.l  #HPZSuper_CountDownAndRequestSpecialStage,(a0)
                 move.w  #$F,$2E(a0)
                 lea     (Player_1).w,a1
                 move.b  #$81,object_control(a1)
                 move.w  #5<<8,anim(a1)                  ; and prev_anim
 
-loc_90920:
+HPZSuper_DrawAfterTopSolid:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_90926:
+HPZSuper_CountDownAndRequestSpecialStage:
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_9095E
+                bpl.s   HPZSuper_DrawDuringStageRequest
                 moveq   #signextendB(sfx_EnterSS),d0
                 jsr     (Play_SFX).l
                 move.b  subtype(a0),(Current_special_stage).w
@@ -188,6 +188,6 @@ loc_90926:
                 move.b  (Saved2_last_star_post_hit).w,(Last_star_post_hit).w
                 move.b  (Player_1+status_secondary).w,(Saved2_status_secondary).w
 
-loc_9095E:
+HPZSuper_DrawDuringStageRequest:
                 jmp     (Draw_Sprite).l
-; End of function loc_90880
+; End of function HPZSuper_WaitForBeamAndApplyGray

@@ -5,12 +5,12 @@
 
 HPZS_ScreenInit:
                 tst.b   (Chaos_emerald_count).w
-                beq.s   loc_5AA14
+                beq.s   SKHPZSpecialEvents_ClearChunksAndRefresh
                 move.b  (Current_special_stage).w,d0
                 ori.b   #$80,d0
                 move.b  d0,(HPZ_current_special_stage).w
 
-loc_5AA14:
+SKHPZSpecialEvents_ClearChunksAndRefresh:
                 movea.w $10(a3),a1
                 clr.b   $29(a1)
                 clr.b   $2B(a1)

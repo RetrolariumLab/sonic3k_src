@@ -1,20 +1,20 @@
 ; Data owner: objects/shared/zones/hpz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_HPZKnuxDizzyStars_:
-                dc.w    word_67328-Map_HPZKnuxDizzyStars_
-                dc.w    word_6732A-Map_HPZKnuxDizzyStars_
-                dc.w    word_67332-Map_HPZKnuxDizzyStars_
-                dc.w    word_6733A-Map_HPZKnuxDizzyStars_
-                dc.w    word_67342-Map_HPZKnuxDizzyStars_
-                dc.w    word_6734A-Map_HPZKnuxDizzyStars_
-word_67328:     dc.w    0
-word_6732A:     dc.w    1
+                dc.w    HPZMap_KnucklesStars_TimedBlank-Map_HPZKnuxDizzyStars_
+                dc.w    HPZMap_KnucklesStars_CycleFirstPhase-Map_HPZKnuxDizzyStars_
+                dc.w    HPZMap_KnucklesStars_CycleSecondPhase-Map_HPZKnuxDizzyStars_
+                dc.w    HPZMap_KnucklesStars_CycleThirdPhase-Map_HPZKnuxDizzyStars_
+                dc.w    HPZMap_KnucklesStars_CycleFourthPhase-Map_HPZKnuxDizzyStars_
+                dc.w    HPZMap_KnucklesStars_FinalHoldPhase-Map_HPZKnuxDizzyStars_
+HPZMap_KnucklesStars_TimedBlank:        dc.w    0
+HPZMap_KnucklesStars_CycleFirstPhase:   dc.w    1
                 dc.b    $F4,   8,   0,   0, $FF, $F0
-word_67332:     dc.w    1
+HPZMap_KnucklesStars_CycleSecondPhase:  dc.w    1
                 dc.b    $F4,   8,   0,   3, $FF, $F0
-word_6733A:     dc.w    1
+HPZMap_KnucklesStars_CycleThirdPhase:   dc.w    1
                 dc.b    $F4,   8,   0,   6, $FF, $F0
-word_67342:     dc.w    1
+HPZMap_KnucklesStars_CycleFourthPhase:  dc.w    1
                 dc.b    $F4,   8,   0,   9, $FF, $F0
-word_6734A:     dc.w    1
+HPZMap_KnucklesStars_FinalHoldPhase:    dc.w    1
                 dc.b    $F4,   8,   0,  $C, $FF, $F0

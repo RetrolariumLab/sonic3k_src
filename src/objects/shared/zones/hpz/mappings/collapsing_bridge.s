@@ -1,17 +1,17 @@
 ; Data owner: objects/shared/zones/hpz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_HPZCollapsingBridge_:
-                dc.w    word_20FD4-Map_HPZCollapsingBridge_
-                dc.w    word_20FFA-Map_HPZCollapsingBridge_
-                dc.w    word_21044-Map_HPZCollapsingBridge_
-word_20FD4:     dc.w    6
+                dc.w    HPZMap_CollapsingBridge_IntactWhole-Map_HPZCollapsingBridge_
+                dc.w    HPZBridgeMap_DefaultFragmentOrder-Map_HPZCollapsingBridge_
+                dc.w    HPZBridgeMap_RightFirstFragmentOrder-Map_HPZCollapsingBridge_
+HPZMap_CollapsingBridge_IntactWhole:    dc.w    6
                 dc.b    $F0,  $D,   0,   0, $FF, $E0
                 dc.b    $F0,  $D,   8,   0,   0,   0
                 dc.b    0,  $D, $20,   8, $FF, $E0
                 dc.b    0,  $D, $28,   8,   0,   0
                 dc.b    $10,  $D, $20, $10, $FF, $E0
                 dc.b    $10,  $D, $28, $10,   0,   0
-word_20FFA:     dc.w    $C
+HPZBridgeMap_DefaultFragmentOrder:  dc.w    $C
                 dc.b    $F0,   5,   0,   0, $FF, $E0
                 dc.b    $F0,   5,   0,   4, $FF, $F0
                 dc.b    $F0,   5,   8,   4,   0,   0
@@ -24,7 +24,7 @@ word_20FFA:     dc.w    $C
                 dc.b    $10,   5, $20, $14, $FF, $F0
                 dc.b    $10,   5, $28, $14,   0,   0
                 dc.b    $10,   5, $28, $10,   0, $10
-word_21044:     dc.w    $C
+HPZBridgeMap_RightFirstFragmentOrder:   dc.w    $C
                 dc.b    $F0,   5,   8,   0,   0, $10
                 dc.b    $F0,   5,   0,   0, $FF, $E0
                 dc.b    $F0,   5,   0,   4, $FF, $F0

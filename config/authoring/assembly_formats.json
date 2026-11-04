@@ -98850,17 +98850,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 80
       },
-      "declarations_sha256": "b2c0102041f1fdba9777005e482792c7d46e6d71726546e72b3b05c3f8893a32",
+      "declarations_sha256": "3af56756f44f60a39c8ced03c284032b949b2bf97be2d1ab4204a72809729fa8",
       "labels": {
         "Map_HPZChaosEmeralds_": 0,
-        "word_9148E": 16,
-        "word_91496": 24,
-        "word_9149E": 32,
-        "word_914A6": 40,
-        "word_914AE": 48,
-        "word_914B6": 56,
-        "word_914BE": 64,
-        "word_914C6": 72
+        "HPZMap_ChaosParticle_ColorZero": 16,
+        "HPZMap_ChaosParticle_ColorOne": 24,
+        "HPZMap_ChaosParticle_ColorTwo": 32,
+        "HPZMap_ChaosParticle_ColorThree": 40,
+        "HPZMap_ChaosParticle_ColorFour": 48,
+        "HPZMap_ChaosParticle_ColorFive": 56,
+        "HPZMap_ChaosParticle_ColorSix": 64,
+        "HPZMap_ChaosParticle_StoredEighthSlot": 72
       },
       "external_symbols": [],
       "blocks": [
@@ -98868,56 +98868,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_9148E",
+          "target": "HPZMap_ChaosParticle_ColorZero",
           "base": "Map_HPZChaosEmeralds_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_91496",
+          "target": "HPZMap_ChaosParticle_ColorOne",
           "base": "Map_HPZChaosEmeralds_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_9149E",
+          "target": "HPZMap_ChaosParticle_ColorTwo",
           "base": "Map_HPZChaosEmeralds_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_914A6",
+          "target": "HPZMap_ChaosParticle_ColorThree",
           "base": "Map_HPZChaosEmeralds_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_914AE",
+          "target": "HPZMap_ChaosParticle_ColorFour",
           "base": "Map_HPZChaosEmeralds_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_914B6",
+          "target": "HPZMap_ChaosParticle_ColorFive",
           "base": "Map_HPZChaosEmeralds_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_914BE",
+          "target": "HPZMap_ChaosParticle_ColorSix",
           "base": "Map_HPZChaosEmeralds_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_914C6",
+          "target": "HPZMap_ChaosParticle_StoredEighthSlot",
           "base": "Map_HPZChaosEmeralds_"
         },
         {
@@ -98971,12 +98971,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 192
       },
-      "declarations_sha256": "c1d96726a8ca785ad565a7fdbab6fee8835086efc0172782db819c7a5507ffec",
+      "declarations_sha256": "0b8ac4e965e8909b94c3ef19de27185e4907015f214697e35b07cb5bdcb0236e",
       "labels": {
         "Map_HPZCollapsingBridge_": 0,
-        "word_20FD4": 6,
-        "word_20FFA": 44,
-        "word_21044": 118
+        "HPZMap_CollapsingBridge_IntactWhole": 6,
+        "HPZBridgeMap_DefaultFragmentOrder": 44,
+        "HPZBridgeMap_RightFirstFragmentOrder": 118
       },
       "external_symbols": [],
       "blocks": [
@@ -98984,21 +98984,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_20FD4",
+          "target": "HPZMap_CollapsingBridge_IntactWhole",
           "base": "Map_HPZCollapsingBridge_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_20FFA",
+          "target": "HPZBridgeMap_DefaultFragmentOrder",
           "base": "Map_HPZCollapsingBridge_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_21044",
+          "target": "HPZBridgeMap_RightFirstFragmentOrder",
           "base": "Map_HPZCollapsingBridge_"
         },
         {
@@ -99027,46 +99027,46 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 1144
       },
-      "declarations_sha256": "ad2df9198cf32bc6e4ad32d3f35647869f0a9d2193fbb432e4c7b43da3dd9acf",
+      "declarations_sha256": "fdbef1abf6941d6155b13dcd597794f6104da993a295342756e0c20a70ef2c51",
       "labels": {
         "Map_HPZEmeraldMisc_": 0,
-        "word_91050": 74,
-        "word_91070": 106,
-        "word_91090": 138,
-        "word_910B0": 170,
-        "word_910D0": 202,
-        "word_910F0": 234,
-        "word_91110": 266,
-        "word_91130": 298,
-        "word_91150": 330,
-        "word_911EE": 488,
-        "word_911F6": 496,
-        "word_911FE": 504,
-        "word_9121E": 536,
-        "word_91226": 544,
-        "word_9122E": 552,
-        "word_91236": 560,
-        "word_9123E": 568,
-        "word_91246": 576,
-        "word_9124E": 584,
-        "word_91256": 592,
-        "word_9125E": 600,
-        "word_91266": 608,
-        "word_9126E": 616,
-        "word_91276": 624,
-        "word_9127E": 632,
-        "word_91286": 640,
-        "word_9128E": 648,
-        "word_91296": 656,
-        "word_9129E": 664,
-        "word_912A6": 672,
-        "word_912A8": 674,
-        "word_912C2": 700,
-        "word_91348": 834,
-        "word_913B6": 944,
-        "word_9140C": 1030,
-        "word_9144A": 1092,
-        "word_91470": 1130
+        "HPZMap_SuperEmerald_ColorZero": 74,
+        "HPZMap_SuperEmerald_ColorOne": 106,
+        "HPZMap_SuperEmerald_ColorTwo": 138,
+        "HPZMap_SuperEmerald_ColorThree": 170,
+        "HPZMap_SuperEmerald_ColorFour": 202,
+        "HPZMap_SuperEmerald_ColorFive": 234,
+        "HPZMap_SuperEmerald_ColorSix": 266,
+        "HPZMap_SuperEmerald_ParityFlash": 298,
+        "HPZMap_ConversionBeam_FullHeight": 330,
+        "HPZMap_EmeraldMisc_StoredSinglePieceNine": 488,
+        "HPZMap_EmeraldMisc_StoredSinglePieceTen": 496,
+        "HPZMap_MasterEmerald_IntactBody": 504,
+        "HPZMap_MasterCompanion_PhaseThree": 536,
+        "HPZMap_MasterCompanion_PhaseFour": 544,
+        "HPZMap_MasterCompanion_PhaseFive": 552,
+        "HPZMap_MasterCompanion_PhaseSeven": 560,
+        "HPZMap_MasterCompanion_PhaseEight": 568,
+        "HPZMap_MasterCompanion_PhaseNine": 576,
+        "HPZMap_SceneEffect_ExpansionFirstPhase": 584,
+        "HPZMap_SceneEffect_ExpansionSecondPhase": 592,
+        "HPZMap_SceneEffect_ExpansionThirdPhase": 600,
+        "HPZMap_SceneEffect_ExpansionFourthPhase": 608,
+        "HPZMap_SceneEffect_RisingFirstPhase": 616,
+        "HPZMap_SceneEffect_RisingSecondPhase": 624,
+        "HPZMap_SceneDebris_OrdinalFour": 632,
+        "HPZMap_SceneDebris_OrdinalThree": 640,
+        "HPZMap_SceneDebris_OrdinalTwo": 648,
+        "HPZMap_SceneDebris_OrdinalOne": 656,
+        "HPZMap_SceneDebris_OrdinalZero": 664,
+        "HPZMap_EmeraldMisc_MasterAndBeamBlank": 672,
+        "HPZMap_SuperEmerald_GrayBody": 674,
+        "HPZBeamMap_ShortenFrame1": 700,
+        "HPZBeamMap_ShortenFrame2": 834,
+        "HPZBeamMap_ShortenFrame3": 944,
+        "HPZBeamMap_ShortenFrame4": 1030,
+        "HPZBeamMap_ShortenFrame5": 1092,
+        "HPZBeamMap_ShortenFrame6": 1130
       },
       "external_symbols": [],
       "blocks": [
@@ -99074,259 +99074,259 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_91050",
+          "target": "HPZMap_SuperEmerald_ColorZero",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_91070",
+          "target": "HPZMap_SuperEmerald_ColorOne",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_91090",
+          "target": "HPZMap_SuperEmerald_ColorTwo",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_910B0",
+          "target": "HPZMap_SuperEmerald_ColorThree",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_910D0",
+          "target": "HPZMap_SuperEmerald_ColorFour",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_910F0",
+          "target": "HPZMap_SuperEmerald_ColorFive",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_91110",
+          "target": "HPZMap_SuperEmerald_ColorSix",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_91130",
+          "target": "HPZMap_SuperEmerald_ParityFlash",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_91150",
+          "target": "HPZMap_ConversionBeam_FullHeight",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_911EE",
+          "target": "HPZMap_EmeraldMisc_StoredSinglePieceNine",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_911F6",
+          "target": "HPZMap_EmeraldMisc_StoredSinglePieceTen",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_911FE",
+          "target": "HPZMap_MasterEmerald_IntactBody",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_9121E",
+          "target": "HPZMap_MasterCompanion_PhaseThree",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_91226",
+          "target": "HPZMap_MasterCompanion_PhaseFour",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_9122E",
+          "target": "HPZMap_MasterCompanion_PhaseFive",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_91236",
+          "target": "HPZMap_MasterCompanion_PhaseSeven",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_9123E",
+          "target": "HPZMap_MasterCompanion_PhaseEight",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_91246",
+          "target": "HPZMap_MasterCompanion_PhaseNine",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_9124E",
+          "target": "HPZMap_SceneEffect_ExpansionFirstPhase",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_91256",
+          "target": "HPZMap_SceneEffect_ExpansionSecondPhase",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_9125E",
+          "target": "HPZMap_SceneEffect_ExpansionThirdPhase",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_91266",
+          "target": "HPZMap_SceneEffect_ExpansionFourthPhase",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_9126E",
+          "target": "HPZMap_SceneEffect_RisingFirstPhase",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_91276",
+          "target": "HPZMap_SceneEffect_RisingSecondPhase",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_9127E",
+          "target": "HPZMap_SceneDebris_OrdinalFour",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_91286",
+          "target": "HPZMap_SceneDebris_OrdinalThree",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_9128E",
+          "target": "HPZMap_SceneDebris_OrdinalTwo",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_91296",
+          "target": "HPZMap_SceneDebris_OrdinalOne",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_9129E",
+          "target": "HPZMap_SceneDebris_OrdinalZero",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 58,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_912A6",
+          "target": "HPZMap_EmeraldMisc_MasterAndBeamBlank",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 60,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_912A8",
+          "target": "HPZMap_SuperEmerald_GrayBody",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 62,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_912C2",
+          "target": "HPZBeamMap_ShortenFrame1",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 64,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_91348",
+          "target": "HPZBeamMap_ShortenFrame2",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 66,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_913B6",
+          "target": "HPZBeamMap_ShortenFrame3",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 68,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_9140C",
+          "target": "HPZBeamMap_ShortenFrame4",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 70,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_9144A",
+          "target": "HPZBeamMap_ShortenFrame5",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
           "offset": 72,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_91470",
+          "target": "HPZBeamMap_ShortenFrame6",
           "base": "Map_HPZEmeraldMisc_"
         },
         {
@@ -99525,15 +99525,15 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 54
       },
-      "declarations_sha256": "76b0f05559005882c076e4e464815f002547408898f7abb303cffb23edb6bda3",
+      "declarations_sha256": "e19e8eb09b54375a54dfa82dc5808c6deb93d90502cf4b3852d8a8862779790c",
       "labels": {
         "Map_HPZKnuxDizzyStars_": 0,
-        "word_67328": 12,
-        "word_6732A": 14,
-        "word_67332": 22,
-        "word_6733A": 30,
-        "word_67342": 38,
-        "word_6734A": 46
+        "HPZMap_KnucklesStars_TimedBlank": 12,
+        "HPZMap_KnucklesStars_CycleFirstPhase": 14,
+        "HPZMap_KnucklesStars_CycleSecondPhase": 22,
+        "HPZMap_KnucklesStars_CycleThirdPhase": 30,
+        "HPZMap_KnucklesStars_CycleFourthPhase": 38,
+        "HPZMap_KnucklesStars_FinalHoldPhase": 46
       },
       "external_symbols": [],
       "blocks": [
@@ -99541,42 +99541,42 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_67328",
+          "target": "HPZMap_KnucklesStars_TimedBlank",
           "base": "Map_HPZKnuxDizzyStars_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6732A",
+          "target": "HPZMap_KnucklesStars_CycleFirstPhase",
           "base": "Map_HPZKnuxDizzyStars_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_67332",
+          "target": "HPZMap_KnucklesStars_CycleSecondPhase",
           "base": "Map_HPZKnuxDizzyStars_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6733A",
+          "target": "HPZMap_KnucklesStars_CycleThirdPhase",
           "base": "Map_HPZKnuxDizzyStars_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_67342",
+          "target": "HPZMap_KnucklesStars_CycleFourthPhase",
           "base": "Map_HPZKnuxDizzyStars_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6734A",
+          "target": "HPZMap_KnucklesStars_FinalHoldPhase",
           "base": "Map_HPZKnuxDizzyStars_"
         },
         {

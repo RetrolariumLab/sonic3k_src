@@ -1229,15 +1229,15 @@
     },
     {
       "path": "src/objects/zones/hpz/sk/emerald_resources.s",
-      "sha256": "3b698f9fa0a8d09cc471f4422540292fd6f920d5a8fe42319c9a5bdd4d46de48"
+      "sha256": "0014a7c1113b032f8a8ff258c927f2b87446fd04a748a48511b2d47c3c66ca5c"
     },
     {
       "path": "src/objects/zones/hpz/sk/master_emerald.s",
-      "sha256": "3feaf8cd7c64c7543274151822ef8bf56a1e94bfb44cb1eea0d6c7befde74cbc"
+      "sha256": "7dd8c955891dfb27d3a251835b6b654bfb55879d81827ea57e7257ff727321dc"
     },
     {
       "path": "src/objects/zones/hpz/sk/special_stage_control.s",
-      "sha256": "f17c6f5aa8a307f591a11df2ace477bf67e66507f7681d3bc774d9fa1ee95b6c"
+      "sha256": "b588b063cf87acc30f6c08df8cd7b917bf2ad4f31b0793c53daa6a85dec41f0c"
     },
     {
       "path": "src/objects/zones/lbz/s3/ride_grapple.s",
@@ -5422,75 +5422,75 @@
     },
     {
       "path": "src/objects/zones/hpz/sk/emerald_resources.s",
-      "symbol": "byte_90FF6",
-      "scope": "byte_90FF6",
+      "symbol": "HPZBeam_CompletionRawFrameStream",
+      "scope": "HPZBeam_CompletionRawFrameStream",
       "first_line": 37,
       "last_line": 39,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 16,
-      "declarations_sha256": "1692b22af7813c56a3752c4c1e0c6218ac390401c9aa493464e961d74b606dc4",
+      "declarations_sha256": "af348b217bfc36196692599ea9c88ba87643970ac54ad24818e0124dc09fa9f3",
       "entries": [[0, "fixed"]],
       "external_symbols": [],
-      "members": ["byte_90FF6"],
+      "members": ["HPZBeam_CompletionRawFrameStream"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/hpz/sk/master_emerald.s",
-      "symbol": "RawAni_90768",
-      "scope": "RawAni_90768",
+      "symbol": "HPZMaster_PalettePhaseFrameLookup",
+      "scope": "HPZMaster_PalettePhaseFrameLookup",
       "first_line": 68,
       "last_line": 70,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 12,
-      "declarations_sha256": "650446310a06028e59f4952ffdf86787c07cbfa5e58c79bd2e4239df8741e12e",
+      "declarations_sha256": "9b6ab2bde327a6e8a6ff34138d90f0cafa7849460ddbf61297e34b57403cbf1f",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_90768"],
+      "members": ["HPZMaster_PalettePhaseFrameLookup"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/hpz/sk/special_stage_control.s",
-      "symbol": "RawAni_90BCA",
-      "scope": "RawAni_90BCA",
-      "first_line": 225,
-      "last_line": 229,
+      "symbol": "HPZEntry_AlignedViewingPoseFrameGroups",
+      "scope": "HPZEntry_AlignedViewingPoseFrameGroups",
+      "first_line": 226,
+      "last_line": 230,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 8,
-      "declarations_sha256": "bf5c57a88b52e7805d5fa6f21ad67e8ce08c477cd346dcc630733658f3c00738",
+      "declarations_sha256": "71d9436d3628bd865cd3ab8c1771d7e2e856a06d095402ce797aee903303b530",
       "entries": [
         [0, "frame-index"],
         [4, "frame-index"]
       ],
       "external_symbols": [],
-      "members": ["RawAni_90BCA"],
+      "members": ["HPZEntry_AlignedViewingPoseFrameGroups"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/hpz/sk/special_stage_control.s",
-      "symbol": "byte_90DD8",
-      "scope": "byte_90DD8",
-      "first_line": 425,
-      "last_line": 427,
+      "symbol": "HPZConversion_RevealFramesByCharacter",
+      "scope": "HPZConversion_RevealFramesByCharacter",
+      "first_line": 426,
+      "last_line": 428,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 4,
-      "declarations_sha256": "aa7d1bec92df1560797bfd0db90e3a6e5904fc890103e9ca8200f8e4748ae9f3",
+      "declarations_sha256": "ed5af81585eaee873728cc703f24025f358ba03ef7e3985c6d08a45dc72391b0",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_90DD8"],
+      "members": ["HPZConversion_RevealFramesByCharacter"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/hpz/sk/special_stage_control.s",
-      "symbol": "RawAni_90F06",
-      "scope": "RawAni_90F06",
-      "first_line": 545,
-      "last_line": 547,
+      "symbol": "HPZEntry_BeamReactionFramesByCharacter",
+      "scope": "HPZEntry_BeamReactionFramesByCharacter",
+      "first_line": 546,
+      "last_line": 548,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 4,
-      "declarations_sha256": "0f862ebc0d682fb473377b4987b615bf0291c844bbf9b8463b5cabf8a1b10075",
+      "declarations_sha256": "5d539072948bbf86994c590f9d40d6cf53a7b0870f0a7e04dcfa2fbd4f0551ad",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_90F06"],
+      "members": ["HPZEntry_BeamReactionFramesByCharacter"],
       "stored_markers": []
     },
     {

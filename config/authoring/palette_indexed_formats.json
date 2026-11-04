@@ -18,13 +18,13 @@
     },
     {
       "path": "src/objects/zones/hpz/sk/emerald_resources.s",
-      "symbol": "off_914CE",
+      "symbol": "HPZMaster_TwoColorLocalPaletteSequence",
       "first_line": 44,
       "last_line": 82,
-      "scope": "off_914CE",
+      "scope": "HPZMaster_TwoColorLocalPaletteSequence",
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 74,
-      "declarations_sha256": "b44e6b97e49cabe03c00f2c29d7ec30ca77c54f8dd423878a19cd7ab6f050845",
+      "declarations_sha256": "1968daa70ff5d4fbebee8959fd8fa2212b89d01e83176cafdf94666ce4403a61",
       "palette_count": 7,
       "step_count": 12,
       "color_count": 2,
@@ -54,11 +54,11 @@
     },
     {
       "path": "src/objects/zones/hpz/sk/emerald_resources.s",
-      "sha256": "3b698f9fa0a8d09cc471f4422540292fd6f920d5a8fe42319c9a5bdd4d46de48"
+      "sha256": "0014a7c1113b032f8a8ff258c927f2b87446fd04a748a48511b2d47c3c66ca5c"
     },
     {
       "path": "src/objects/zones/hpz/sk/master_emerald.s",
-      "sha256": "3feaf8cd7c64c7543274151822ef8bf56a1e94bfb44cb1eea0d6c7befde74cbc"
+      "sha256": "7dd8c955891dfb27d3a251835b6b654bfb55879d81827ea57e7257ff727321dc"
     },
     {
       "path": "src/rendering/palettes/sk/rotation_script.s",
@@ -117,7 +117,7 @@
     {
       "path": "src/objects/zones/hpz/sk/master_emerald.s",
       "call_line": 47,
-      "header": "off_914CE",
+      "header": "HPZMaster_TwoColorLocalPaletteSequence",
       "destinations": [
         {
           "symbol": "Normal_palette_line_4",

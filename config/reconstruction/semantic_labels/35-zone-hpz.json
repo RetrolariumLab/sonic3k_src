@@ -1,0 +1,1953 @@
+{
+  "schema_version": 1,
+  "packet": "35-zone-hpz",
+  "mappings": [
+    {
+      "source": "src/game/level/zones/hpz/sk/screen.s",
+      "original_line": 13,
+      "old": "loc_5A13E",
+      "new": "SKHPZEvents_TryPinUpperStartMinX",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKHPZEvents_PinLeftCameraBoundaryOnlyForNonKnucklesUpperStart"
+    },
+    {
+      "source": "src/game/level/zones/hpz/sk/screen.s",
+      "original_line": 18,
+      "old": "loc_5A14C",
+      "new": "SKHPZEvents_RefreshInitialForeground",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKHPZEvents_ResetActualTileOffsetsAndRefreshAfterStartBoundaryChoice"
+    },
+    {
+      "source": "src/game/level/zones/hpz/sk/screen.s",
+      "original_line": 32,
+      "old": "loc_5A172",
+      "new": "SKHPZEvents_LatchPaletteSetup",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKHPZEvents_LatchPaletteControllerAttemptEvenIfAllocationFailed"
+    },
+    {
+      "source": "src/game/level/zones/hpz/sk/screen.s",
+      "original_line": 35,
+      "old": "loc_5A176",
+      "new": "SKHPZEvents_AddShakeAndTryPatch",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKHPZEvents_AddShakeAndConsumeTwoChunkForegroundPatchSignal"
+    },
+    {
+      "source": "src/game/level/zones/hpz/sk/screen.s",
+      "original_line": 47,
+      "old": "loc_5A19E",
+      "new": "SKHPZEvents_DrawForeground",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKHPZEvents_DrawForegroundWhenPatchSignalZero"
+    },
+    {
+      "source": "src/game/level/zones/hpz/sk/screen.s",
+      "original_line": 59,
+      "old": "loc_5A1C2",
+      "new": "SKHPZEvents_SelectInitialRegion",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKHPZEvents_ChooseInitialParallaxRegionByPlayerX0EC0"
+    },
+    {
+      "source": "src/game/level/zones/hpz/sk/screen.s",
+      "original_line": 66,
+      "old": "loc_5A1D0",
+      "new": "SKHPZEvents_InitRightRegion",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKHPZEvents_SelectBackgroundStateEightAndBuildRightRegionParallax"
+    },
+    {
+      "source": "src/game/level/zones/hpz/sk/screen.s",
+      "original_line": 70,
+      "old": "loc_5A1DA",
+      "new": "SKHPZEvents_RoundScrollAndRefresh",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKHPZEvents_SeedTwoRoundedScrollPartnersAndRefreshDeformedBackground"
+    },
+    {
+      "source": "src/game/level/zones/hpz/sk/screen.s",
+      "original_line": 100,
+      "old": "loc_5A224",
+      "new": "SKHPZEvents_TryBeginRightRegion",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKHPZEvents_DetectRightRegionEntryAndArmComplexBottomUpRedraw"
+    },
+    {
+      "source": "src/game/level/zones/hpz/sk/screen.s",
+      "original_line": 118,
+      "old": "loc_5A25E",
+      "new": "SKHPZEvents_PositionLeftBackground",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKHPZEvents_BuildLeftParallaxBeforeCommonLeftBackgroundDraw"
+    },
+    {
+      "source": "src/game/level/zones/hpz/sk/screen.s",
+      "original_line": 121,
+      "old": "loc_5A262",
+      "new": "SKHPZEvents_DrawLeftBackground",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKHPZEvents_DrawTwoLeftRegionBandsAndComposeTenSpanScroll"
+    },
+    {
+      "source": "src/game/level/zones/hpz/sk/screen.s",
+      "original_line": 133,
+      "old": "loc_5A288",
+      "new": "SKHPZEvents_PositionRightEntry",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKHPZEvents_BuildRightParallaxBeforeEntryComplexRedrawStep"
+    },
+    {
+      "source": "src/game/level/zones/hpz/sk/screen.s",
+      "original_line": 136,
+      "old": "loc_5A28C",
+      "new": "SKHPZEvents_RedrawRightBottomUp",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKHPZEvents_StepRightEntryComplexRedrawAndAdvanceOnlyOnNegativeCount"
+    },
+    {
+      "source": "src/game/level/zones/hpz/sk/screen.s",
+      "original_line": 146,
+      "old": "loc_5A2A6",
+      "new": "SKHPZEvents_TryReturnToLeftRegion",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKHPZEvents_DetectLeftRegionReturnAndArmComplexBottomUpRedraw"
+    },
+    {
+      "source": "src/game/level/zones/hpz/sk/screen.s",
+      "original_line": 164,
+      "old": "loc_5A2E0",
+      "new": "SKHPZEvents_PositionRightBackground",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKHPZEvents_BuildRightParallaxBeforeCommonRightRegionDraw"
+    },
+    {
+      "source": "src/game/level/zones/hpz/sk/screen.s",
+      "original_line": 167,
+      "old": "loc_5A2E4",
+      "new": "SKHPZEvents_DrawRightBackground",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKHPZEvents_DrawTwoRightRegionBandsAndComposeTenSpanScroll"
+    },
+    {
+      "source": "src/game/level/zones/hpz/sk/screen.s",
+      "original_line": 179,
+      "old": "loc_5A30A",
+      "new": "SKHPZEvents_PositionLeftReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKHPZEvents_BuildLeftParallaxBeforeReturnComplexRedrawStep"
+    },
+    {
+      "source": "src/game/level/zones/hpz/sk/screen.s",
+      "original_line": 182,
+      "old": "loc_5A30E",
+      "new": "SKHPZEvents_RedrawLeftBottomUp",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKHPZEvents_StepLeftReturnComplexRedrawAndClearStateOnNegativeCount"
+    },
+    {
+      "source": "src/game/level/zones/hpz/sk/screen.s",
+      "original_line": 205,
+      "old": "loc_5A33C",
+      "new": "SKHPZEvents_BuildSharedParallax",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKHPZEvents_BuildThreeSixteenthsVerticalParallaxAndSharedHorizontalInputs"
+    },
+    {
+      "source": "src/game/level/zones/hpz/sk/screen.s",
+      "original_line": 238,
+      "old": "loc_5A388",
+      "new": "SKHPZEvents_WriteReverseParallaxBands",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKHPZEvents_WriteNineBackwardParallaxWordsAndCopyLastBandToSecondTuple"
+    },
+    {
+      "source": "src/game/level/zones/hpz/sk/special_screen.s",
+      "original_line": 13,
+      "old": "loc_5AA14",
+      "new": "SKHPZSpecialEvents_ClearChunksAndRefresh",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKHPZSpecialEvents_ClearThreeSpecialRoomChunkBytesThenRefreshForeground"
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/chaos_emeralds.s",
+      "original_line": 12,
+      "old": "word_9148E",
+      "new": "HPZMap_ChaosParticle_ColorZero",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ ChaosParticle ColorZero mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/chaos_emeralds.s",
+      "original_line": 14,
+      "old": "word_91496",
+      "new": "HPZMap_ChaosParticle_ColorOne",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ ChaosParticle ColorOne mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/chaos_emeralds.s",
+      "original_line": 16,
+      "old": "word_9149E",
+      "new": "HPZMap_ChaosParticle_ColorTwo",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ ChaosParticle ColorTwo mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/chaos_emeralds.s",
+      "original_line": 18,
+      "old": "word_914A6",
+      "new": "HPZMap_ChaosParticle_ColorThree",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ ChaosParticle ColorThree mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/chaos_emeralds.s",
+      "original_line": 20,
+      "old": "word_914AE",
+      "new": "HPZMap_ChaosParticle_ColorFour",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ ChaosParticle ColorFour mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/chaos_emeralds.s",
+      "original_line": 22,
+      "old": "word_914B6",
+      "new": "HPZMap_ChaosParticle_ColorFive",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ ChaosParticle ColorFive mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/chaos_emeralds.s",
+      "original_line": 24,
+      "old": "word_914BE",
+      "new": "HPZMap_ChaosParticle_ColorSix",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ ChaosParticle ColorSix mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/chaos_emeralds.s",
+      "original_line": 26,
+      "old": "word_914C6",
+      "new": "HPZMap_ChaosParticle_StoredEighthSlot",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ ChaosParticle StoredEighthSlot mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/collapsing_bridge.s",
+      "original_line": 7,
+      "old": "word_20FD4",
+      "new": "HPZMap_CollapsingBridge_IntactWhole",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ CollapsingBridge IntactWhole mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/collapsing_bridge.s",
+      "original_line": 14,
+      "old": "word_20FFA",
+      "new": "HPZBridgeMap_DefaultFragmentOrder",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ CollapsingBridge ForwardFragmentOrder mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/collapsing_bridge.s",
+      "original_line": 27,
+      "old": "word_21044",
+      "new": "HPZBridgeMap_RightFirstFragmentOrder",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ CollapsingBridge ReversedFragmentOrder mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 41,
+      "old": "word_91050",
+      "new": "HPZMap_SuperEmerald_ColorZero",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ SuperEmerald ColorZero mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 47,
+      "old": "word_91070",
+      "new": "HPZMap_SuperEmerald_ColorOne",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ SuperEmerald ColorOne mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 53,
+      "old": "word_91090",
+      "new": "HPZMap_SuperEmerald_ColorTwo",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ SuperEmerald ColorTwo mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 59,
+      "old": "word_910B0",
+      "new": "HPZMap_SuperEmerald_ColorThree",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ SuperEmerald ColorThree mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 65,
+      "old": "word_910D0",
+      "new": "HPZMap_SuperEmerald_ColorFour",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ SuperEmerald ColorFour mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 71,
+      "old": "word_910F0",
+      "new": "HPZMap_SuperEmerald_ColorFive",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ SuperEmerald ColorFive mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 77,
+      "old": "word_91110",
+      "new": "HPZMap_SuperEmerald_ColorSix",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ SuperEmerald ColorSix mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 83,
+      "old": "word_91130",
+      "new": "HPZMap_SuperEmerald_ParityFlash",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ SuperEmerald ParityFlash mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 89,
+      "old": "word_91150",
+      "new": "HPZMap_ConversionBeam_FullHeight",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ ConversionBeam FullHeight mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 116,
+      "old": "word_911EE",
+      "new": "HPZMap_EmeraldMisc_StoredSinglePieceNine",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ EmeraldMisc StoredSinglePieceNine mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 118,
+      "old": "word_911F6",
+      "new": "HPZMap_EmeraldMisc_StoredSinglePieceTen",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ EmeraldMisc StoredSinglePieceTen mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 120,
+      "old": "word_911FE",
+      "new": "HPZMap_MasterEmerald_IntactBody",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ MasterEmerald IntactBody mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 126,
+      "old": "word_9121E",
+      "new": "HPZMap_MasterCompanion_PhaseThree",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ MasterCompanion PhaseThree mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 128,
+      "old": "word_91226",
+      "new": "HPZMap_MasterCompanion_PhaseFour",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ MasterCompanion PhaseFour mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 130,
+      "old": "word_9122E",
+      "new": "HPZMap_MasterCompanion_PhaseFive",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ MasterCompanion PhaseFive mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 132,
+      "old": "word_91236",
+      "new": "HPZMap_MasterCompanion_PhaseSeven",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ MasterCompanion PhaseSeven mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 134,
+      "old": "word_9123E",
+      "new": "HPZMap_MasterCompanion_PhaseEight",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ MasterCompanion PhaseEight mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 136,
+      "old": "word_91246",
+      "new": "HPZMap_MasterCompanion_PhaseNine",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ MasterCompanion PhaseNine mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 138,
+      "old": "word_9124E",
+      "new": "HPZMap_SceneEffect_ExpansionFirstPhase",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ SceneEffect ExpansionFirstPhase mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 140,
+      "old": "word_91256",
+      "new": "HPZMap_SceneEffect_ExpansionSecondPhase",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ SceneEffect ExpansionSecondPhase mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 142,
+      "old": "word_9125E",
+      "new": "HPZMap_SceneEffect_ExpansionThirdPhase",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ SceneEffect ExpansionThirdPhase mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 144,
+      "old": "word_91266",
+      "new": "HPZMap_SceneEffect_ExpansionFourthPhase",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ SceneEffect ExpansionFourthPhase mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 146,
+      "old": "word_9126E",
+      "new": "HPZMap_SceneEffect_RisingFirstPhase",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ SceneEffect RisingFirstPhase mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 148,
+      "old": "word_91276",
+      "new": "HPZMap_SceneEffect_RisingSecondPhase",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ SceneEffect RisingSecondPhase mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 150,
+      "old": "word_9127E",
+      "new": "HPZMap_SceneDebris_OrdinalFour",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ SceneDebris OrdinalFour mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 152,
+      "old": "word_91286",
+      "new": "HPZMap_SceneDebris_OrdinalThree",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ SceneDebris OrdinalThree mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 154,
+      "old": "word_9128E",
+      "new": "HPZMap_SceneDebris_OrdinalTwo",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ SceneDebris OrdinalTwo mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 156,
+      "old": "word_91296",
+      "new": "HPZMap_SceneDebris_OrdinalOne",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ SceneDebris OrdinalOne mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 158,
+      "old": "word_9129E",
+      "new": "HPZMap_SceneDebris_OrdinalZero",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ SceneDebris OrdinalZero mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 160,
+      "old": "word_912A6",
+      "new": "HPZMap_EmeraldMisc_MasterAndBeamBlank",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ EmeraldMisc MasterAndBeamBlank mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 161,
+      "old": "word_912A8",
+      "new": "HPZMap_SuperEmerald_GrayBody",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ SuperEmerald GrayBody mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 166,
+      "old": "word_912C2",
+      "new": "HPZBeamMap_ShortenFrame1",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ ConversionBeam ShorteningFirstPhase mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 189,
+      "old": "word_91348",
+      "new": "HPZBeamMap_ShortenFrame2",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ ConversionBeam ShorteningSecondPhase mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 208,
+      "old": "word_913B6",
+      "new": "HPZBeamMap_ShortenFrame3",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ ConversionBeam ShorteningThirdPhase mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 223,
+      "old": "word_9140C",
+      "new": "HPZBeamMap_ShortenFrame4",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ ConversionBeam ShorteningFourthPhase mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 234,
+      "old": "word_9144A",
+      "new": "HPZBeamMap_ShortenFrame5",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ ConversionBeam ShorteningFifthPhase mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "original_line": 241,
+      "old": "word_91470",
+      "new": "HPZBeamMap_ShortenFrame6",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ ConversionBeam ShorteningLastPhase mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/knuckles_dizzy_stars.s",
+      "original_line": 10,
+      "old": "word_67328",
+      "new": "HPZMap_KnucklesStars_TimedBlank",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ KnucklesStars TimedBlank mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/knuckles_dizzy_stars.s",
+      "original_line": 11,
+      "old": "word_6732A",
+      "new": "HPZMap_KnucklesStars_CycleFirstPhase",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ KnucklesStars CycleFirstPhase mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/knuckles_dizzy_stars.s",
+      "original_line": 13,
+      "old": "word_67332",
+      "new": "HPZMap_KnucklesStars_CycleSecondPhase",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ KnucklesStars CycleSecondPhase mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/knuckles_dizzy_stars.s",
+      "original_line": 15,
+      "old": "word_6733A",
+      "new": "HPZMap_KnucklesStars_CycleThirdPhase",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ KnucklesStars CycleThirdPhase mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/knuckles_dizzy_stars.s",
+      "original_line": 17,
+      "old": "word_67342",
+      "new": "HPZMap_KnucklesStars_CycleFourthPhase",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ KnucklesStars CycleFourthPhase mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/knuckles_dizzy_stars.s",
+      "original_line": 19,
+      "old": "word_6734A",
+      "new": "HPZMap_KnucklesStars_FinalHoldPhase",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZ KnucklesStars FinalHoldPhase mapping body."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/emerald_resources.s",
+      "original_line": 9,
+      "old": "word_90FB8",
+      "new": "HPZMaster_CompanionPartialAttributes",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZMaster CompanionPartialAttributes."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/emerald_resources.s",
+      "original_line": 18,
+      "old": "ObjDat3_90FCC",
+      "new": "HPZBeam_FullAttributes",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZBeam FullAttributes."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/emerald_resources.s",
+      "original_line": 23,
+      "old": "ObjDat3_90FD8",
+      "new": "HPZParticle_FullAttributes",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZParticle FullAttributes."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/emerald_resources.s",
+      "original_line": 28,
+      "old": "ChildObjDat_90FE4",
+      "new": "HPZMaster_PaletteCompanionSimpleChild",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZMaster PaletteCompanionSimpleChild."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/emerald_resources.s",
+      "original_line": 31,
+      "old": "ChildObjDat_90FEA",
+      "new": "HPZEntry_ConversionChild",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry ConversionCoordinatorSimpleChild."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/emerald_resources.s",
+      "original_line": 34,
+      "old": "ChildObjDat_90FF0",
+      "new": "HPZConversion_ParticleChildren",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZConversion SevenParticleSimpleChildren."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/emerald_resources.s",
+      "original_line": 37,
+      "old": "byte_90FF6",
+      "new": "HPZBeam_CompletionRawFrameStream",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZBeam CompletionRawFrameStream."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/emerald_resources.s",
+      "original_line": 44,
+      "old": "off_914CE",
+      "new": "HPZMaster_TwoColorLocalPaletteSequence",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZMaster TwoColorLocalPaletteSequence."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/emerald_resources.s",
+      "original_line": 61,
+      "old": "off_914EE",
+      "new": "HPZMaster_LocalPalettePairOffsets",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZMaster LocalPalettePairOffsets."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/emerald_resources.s",
+      "original_line": 69,
+      "old": "word_914FC",
+      "new": "HPZMaster_LocalPalettePairZero",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZMaster LocalPalettePairZero."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/emerald_resources.s",
+      "original_line": 71,
+      "old": "word_91500",
+      "new": "HPZMaster_LocalPalettePairOne",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZMaster LocalPalettePairOne."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/emerald_resources.s",
+      "original_line": 73,
+      "old": "word_91504",
+      "new": "HPZMaster_LocalPalettePairTwo",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZMaster LocalPalettePairTwo."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/emerald_resources.s",
+      "original_line": 75,
+      "old": "word_91508",
+      "new": "HPZMaster_LocalPalettePairThree",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZMaster LocalPalettePairThree."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/emerald_resources.s",
+      "original_line": 77,
+      "old": "word_9150C",
+      "new": "HPZMaster_LocalPalettePairFour",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZMaster LocalPalettePairFour."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/emerald_resources.s",
+      "original_line": 79,
+      "old": "word_91510",
+      "new": "HPZMaster_LocalPalettePairFive",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZMaster LocalPalettePairFive."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/emerald_resources.s",
+      "original_line": 81,
+      "old": "word_91514",
+      "new": "HPZMaster_LocalPalettePairSix",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZMaster LocalPalettePairSix."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/master_emerald.s",
+      "original_line": 25,
+      "old": "loc_906EA",
+      "new": "HPZMaster_CheckEveryEmeraldStateThree",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZMaster CheckEveryEmeraldStateThree."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/master_emerald.s",
+      "original_line": 33,
+      "old": "loc_90700",
+      "new": "HPZMaster_UpdateVisiblePaletteAndTouch",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZMaster UpdateVisiblePaletteAndTouch."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/master_emerald.s",
+      "original_line": 42,
+      "old": "loc_9071A",
+      "new": "HPZMaster_TryCycleCompletedPalette",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZMaster TickCompletedPaletteUnlessFrozen."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/master_emerald.s",
+      "original_line": 49,
+      "old": "loc_9072E",
+      "new": "HPZMaster_QueueTouchAndRangeDraw",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZMaster QueueTouchAndRangeDraw."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/master_emerald.s",
+      "original_line": 53,
+      "old": "loc_90734",
+      "new": "HPZMaster_InitPaletteCompanion",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZMaster InitializePalettePhaseCompanion."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/master_emerald.s",
+      "original_line": 58,
+      "old": "loc_90744",
+      "new": "HPZMaster_FollowAndApplyPhaseFrame",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZMaster FollowAndSelectPalettePhaseFrame."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/master_emerald.s",
+      "original_line": 68,
+      "old": "RawAni_90768",
+      "new": "HPZMaster_PalettePhaseFrameLookup",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZMaster PalettePhaseFrameLookup."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 18,
+      "old": "loc_90998",
+      "new": "HPZEntry_SetCharacterPaletteDestination",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry SetCharacterPaletteDestination."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 22,
+      "old": "loc_9099E",
+      "new": "HPZEntry_CopyCharacterPaletteLongs",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry CopyCharacterPaletteLongs."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 29,
+      "old": "loc_909B0",
+      "new": "HPZEntry_CopyHubPalettesAndTryMaster",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry CopyHubPalettesAndTryMaster."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 37,
+      "old": "loc_909CC",
+      "new": "HPZEntry_TryCreateReturnTeleporter",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry TryCreateReturnTeleporter."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 45,
+      "old": "loc_909EA",
+      "new": "HPZEntry_SelectEmeraldSetup",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry SelectCompletedOrConversionSetup."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 51,
+      "old": "loc_909F4",
+      "new": "HPZEntry_SpawnCompletedEmeralds",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry SpawnSevenEmeraldsWithoutAllocationGuard."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 60,
+      "old": "loc_90A10",
+      "new": "HPZEntry_InitializeConversionController",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry InitializeConversionController."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 68,
+      "old": "loc_90A26",
+      "new": "HPZEntry_SpawnConvertedEmeralds",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry ScanAndSpawnAlreadyConvertedEmeralds."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 75,
+      "old": "loc_90A3A",
+      "new": "HPZEntry_NextEmeraldOrStagePlayers",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry AdvanceEmeraldScanAndStagePlayers."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 96,
+      "old": "loc_90A72",
+      "new": "HPZEntry_WaitThenTryInitialPlayerBeam",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry WaitThenTryInitialPlayerBeam."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 105,
+      "old": "locret_90A92",
+      "new": "HPZEntry_ReturnFromInitialBeamWait",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry ReturnFromInitialBeamWait."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 109,
+      "old": "loc_90A94",
+      "new": "HPZEntry_TryBuildConversionQueue",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry ConsumeBeamSignalAndBuildConversionQueue."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 122,
+      "old": "loc_90ABA",
+      "new": "HPZEntry_QueueOneCollectedChaosEmerald",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry QueueOneCollectedChaosEmerald."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 133,
+      "old": "loc_90AD2",
+      "new": "HPZEntry_RecordGrayEmeraldPresence",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry RecordGrayEmeraldPresence."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 138,
+      "old": "loc_90ADA",
+      "new": "HPZEntry_FinishQueueOrPermitReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry FinishQueueOrPermitReturn."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 147,
+      "old": "loc_90AEE",
+      "new": "HPZEntry_SkipEmptyConversion",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry LeaveStagingWithoutConversionList."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 151,
+      "old": "loc_90AF2",
+      "new": "HPZEntry_BeginConversion",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry StartConversionCoordinatorAndDelay."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 158,
+      "old": "word_90B0C",
+      "new": "HPZEntry_CameraTargetsByEmeraldColor",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry CameraTargetsByEmeraldColor."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 160,
+      "old": "byte_90B1A",
+      "new": "HPZEntry_ConversionColorScanOrder",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry ConversionColorScanOrder."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 165,
+      "old": "loc_90B22",
+      "new": "HPZEntry_TickPresentationDelay",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry WaitForConversionPresentationDelay."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 170,
+      "old": "loc_90B32",
+      "new": "HPZEntry_SelectNextViewingTarget",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry SelectNextCameraTargetAndPlayerPoses."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 188,
+      "old": "loc_90B72",
+      "new": "HPZEntry_ApplyBothViewingPoses",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry SelectViewingRecordAndBothPlayers."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 205,
+      "old": "loc_90BA0",
+      "new": "HPZEntry_ApplyPoseAndLoadArt",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry ApplyViewingFrameGroupAndLoadArt."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 217,
+      "old": "byte_90BBC",
+      "new": "HPZEntry_ViewFacingAndFrameGroupPairs",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry ViewFacingAndFrameGroupPairs."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 225,
+      "old": "RawAni_90BCA",
+      "new": "HPZEntry_AlignedViewingPoseFrameGroups",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry AlignedViewingPoseFrameGroups."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 232,
+      "old": "loc_90BD2",
+      "new": "HPZEntry_PanCameraTowardSelectedTarget",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry PanCameraTowardSelectedTarget."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 240,
+      "old": "loc_90BE2",
+      "new": "HPZEntry_StepCameraUnlessWithinSixteen",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry StepCameraUnlessWithinSixteen."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 247,
+      "old": "loc_90BEE",
+      "new": "HPZEntry_TailCallCameraArrivalCallback",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry TailCallCameraArrivalCallback."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 252,
+      "old": "loc_90BF4",
+      "new": "HPZEntry_TryBeamAtQueuedColor",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry TryBeamAtQueuedColor."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 260,
+      "old": "locret_90C14",
+      "new": "HPZEntry_ReturnAfterQueuedBeamAttempt",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry ReturnAfterQueuedBeamAttempt."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 264,
+      "old": "loc_90C16",
+      "new": "HPZEntry_ReleasePlayersAndWatchReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry ReleasePlayersAndWatchReturn."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 272,
+      "old": "loc_90C2A",
+      "new": "HPZEntry_WaitBeforeNextCameraTarget",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry WaitBeforeNextCameraTarget."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 276,
+      "old": "locret_90C32",
+      "new": "HPZEntry_SharedStateReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry SharedStateReturn."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 280,
+      "old": "loc_90C34",
+      "new": "HPZEntry_GetP1ReturnDistance",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry MeasurePlayerDistanceFromReturnCenter."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 287,
+      "old": "loc_90C44",
+      "new": "HPZEntry_CheckReturnWindow",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry ArmReturnAfterLeavingOuterWindow."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 296,
+      "old": "loc_90C58",
+      "new": "HPZEntry_ConsumeArmedCenterReentry",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry ConsumeArmedCenterReentry."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 313,
+      "old": "locret_90CA0",
+      "new": "HPZEntry_ReturnFromCenterMonitor",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry ReturnFromCenterMonitor."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 317,
+      "old": "loc_90CA2",
+      "new": "HPZBeam_InitializeFromSubtypePosition",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZBeam InitializeFromSubtypePosition."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 332,
+      "old": "word_90CD4",
+      "new": "HPZBeam_SubtypeXAndTargetY",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZBeam SubtypeXAndTargetY."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 343,
+      "old": "loc_90CF4",
+      "new": "HPZBeam_DescendAndArmMidpointTimer",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZBeam DescendAndArmMidpointTimer."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 355,
+      "old": "loc_90D20",
+      "new": "HPZBeam_DrawOnEvenVint",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZBeam DrawOnEvenVint."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 361,
+      "old": "loc_90D30",
+      "new": "HPZBeam_WaitForMidpointOrUnderflow",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZBeam WaitForMidpointOrUnderflow."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 368,
+      "old": "loc_90D42",
+      "new": "HPZBeam_InstallCompletionRawPhase",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZBeam InstallCompletionRawPhase."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 374,
+      "old": "loc_90D52",
+      "new": "HPZBeam_AnimateCompletionAndFlicker",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZBeam AnimateCompletionAndFlicker."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 380,
+      "old": "loc_90D5E",
+      "new": "HPZBeam_SignalDoneAndGrayChild",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZBeam SignalCompletionAndGrayOptionalChild."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 387,
+      "old": "loc_90D72",
+      "new": "HPZBeam_DeferDeletionAfterCompletion",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZBeam DeferDeletionAfterCompletion."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 391,
+      "old": "loc_90D78",
+      "new": "HPZConversion_InitRisingCoordinator",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZConversion InitializeRisingCoordinator."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 401,
+      "old": "loc_90DA2",
+      "new": "HPZConversion_RiseThenRevealBothPlayers",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZConversion RiseThenRevealBothPlayers."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 420,
+      "old": "locret_90DD6",
+      "new": "HPZConversion_RiseReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZConversion ReturnFromRiseOrPlayerReveal."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 425,
+      "old": "byte_90DD8",
+      "new": "HPZConversion_RevealFramesByCharacter",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZConversion RevealFramesByCharacter."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 430,
+      "old": "loc_90DDC",
+      "new": "HPZConversion_TryReleaseParticles",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZConversion ReleaseWhenAllSevenParticlesReady."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 439,
+      "old": "locret_90DFA",
+      "new": "HPZConversion_ReturnFromCompletionGate",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZConversion ReturnFromCompletionGate."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 443,
+      "old": "loc_90DFC",
+      "new": "HPZParticle_InitializeAndEnterExpansion",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZParticle InitializeAndEnterExpansion."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 451,
+      "old": "loc_90E1C",
+      "new": "HPZParticle_ExpandRadiusToTarget",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZParticle ExpandRadiusToTarget."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 459,
+      "old": "loc_90E34",
+      "new": "HPZParticle_AdvanceOrbitAndPosition",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZParticle AdvanceOrbitAndPosition."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 463,
+      "old": "loc_90E3E",
+      "new": "HPZParticle_DrawOnEvenVint",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZParticle DrawOnEvenVint."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 469,
+      "old": "loc_90E4E",
+      "new": "HPZParticle_CheckUnsignedPhaseDistance",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZParticle CheckUnsignedPhaseDistance."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 477,
+      "old": "loc_90E5E",
+      "new": "HPZParticle_SetParentColorCompletionBit",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZParticle SetParentColorCompletionBit."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 484,
+      "old": "loc_90E72",
+      "new": "HPZParticle_WaitForCoordinatorRelease",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZParticle WaitForCoordinatorRelease."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 492,
+      "old": "loc_90E86",
+      "new": "HPZParticle_MoveUntilPreviouslyOffscreen",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZParticle MoveUntilPreviouslyOffscreen."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 499,
+      "old": "loc_90E94",
+      "new": "HPZParticle_DeleteAfterVisibilityLoss",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZParticle DeleteAfterVisibilityLoss."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 521,
+      "old": "loc_90EBE",
+      "new": "HPZEntry_ApplyBeamReactionFrameAndArt",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry ApplyBeamReactionFrameAndArt."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 529,
+      "old": "loc_90ED0",
+      "new": "HPZBeam_RecordConversionAndSpawn",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZBeam IncrementCollectionAndTrySuperChild."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 541,
+      "old": "loc_90EFC",
+      "new": "HPZBeam_RequestSaveAfterConversion",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZBeam RequestSaveAfterConversion."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 545,
+      "old": "RawAni_90F06",
+      "new": "HPZEntry_BeamReactionFramesByCharacter",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZEntry BeamReactionFramesByCharacter."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 571,
+      "old": "loc_90F4A",
+      "new": "HPZParticle_ApplyModePairedArt",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZParticle ApplyModePairedArt."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 577,
+      "old": "loc_90F54",
+      "new": "HPZParticle_MarkSkippedColorAndDelete",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZParticle MarkSkippedColorAndNonlocalDelete."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 585,
+      "old": "byte_90F64",
+      "new": "HPZParticle_InitialPhasesByColor",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZParticle InitialPhasesByColor."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 588,
+      "old": "byte_90F6C",
+      "new": "HPZParticle_TargetPhasesByColor",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZParticle TargetPhasesByColor."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 591,
+      "old": "word_90F74",
+      "new": "HPZParticle_DepartureVelocityPairs",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZParticle DepartureVelocityPairs."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "original_line": 599,
+      "old": "word_90F90",
+      "new": "HPZParticle_ModePairedArtWords",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZParticle ModePairedArtWords."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/super_emerald.s",
+      "original_line": 19,
+      "old": "off_9079A",
+      "new": "HPZSuper_CollectionStateDispatch",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZSuper CollectionStateDispatch."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/super_emerald.s",
+      "original_line": 26,
+      "old": "loc_907A2",
+      "new": "HPZSuper_DeleteUncollectedState",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZSuper DeleteUncollectedState."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/super_emerald.s",
+      "original_line": 30,
+      "old": "loc_907A8",
+      "new": "HPZSuper_InitializeGrayEligibleState",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZSuper InitializeGrayEligibleState."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/super_emerald.s",
+      "original_line": 42,
+      "old": "loc_907D8",
+      "new": "HPZSuper_DrawAfterGrayInitialization",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZSuper DrawAfterGrayInitialization."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/super_emerald.s",
+      "original_line": 46,
+      "old": "loc_907DE",
+      "new": "HPZSuper_InitializeCompletedColoredState",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZSuper InitializeCompletedColoredState."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/super_emerald.s",
+      "original_line": 63,
+      "old": "loc_90808",
+      "new": "HPZSuper_ApplySelectedArtAndCache",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZSuper ApplySelectedArtAndCache."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/super_emerald.s",
+      "original_line": 71,
+      "old": "word_90816",
+      "new": "HPZSuper_ModePairedArtWords",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZSuper ModePairedArtWords."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/super_emerald.s",
+      "original_line": 97,
+      "old": "word_9083E",
+      "new": "HPZSuper_DisplayQueuePriorities",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZSuper DisplayQueuePriorities."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/super_emerald.s",
+      "original_line": 119,
+      "old": "word_90860",
+      "new": "HPZSuper_DisplaySlotCoordinates",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZSuper DisplaySlotCoordinates."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/super_emerald.s",
+      "original_line": 130,
+      "old": "loc_90880",
+      "new": "HPZSuper_WaitForBeamAndApplyGray",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZSuper TemporaryColorUntilBeamCompletion."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/super_emerald.s",
+      "original_line": 139,
+      "old": "loc_9089E",
+      "new": "HPZSuper_CheckGlobalGrayColorOverride",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZSuper CheckGlobalGrayColorOverride."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/super_emerald.s",
+      "original_line": 150,
+      "old": "loc_908BE",
+      "new": "HPZSuper_SelectColoredOrParityFrame",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZSuper SelectColoredOrParityFrame."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/super_emerald.s",
+      "original_line": 158,
+      "old": "loc_908DE",
+      "new": "HPZSuper_TopSolidAndArmStageEntry",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZSuper TopSolidAndArmStageEntry."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/super_emerald.s",
+      "original_line": 174,
+      "old": "loc_90920",
+      "new": "HPZSuper_DrawAfterTopSolid",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZSuper DrawAfterTopSolid."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/super_emerald.s",
+      "original_line": 178,
+      "old": "loc_90926",
+      "new": "HPZSuper_CountDownAndRequestSpecialStage",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZSuper CountDownAndRequestSpecialStage."
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/super_emerald.s",
+      "original_line": 191,
+      "old": "loc_9095E",
+      "new": "HPZSuper_DrawDuringStageRequest",
+      "profiles": ["sk"],
+      "meaning": "Describe HPZSuper DrawDuringStageRequest."
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/game/level/zones/hpz/sk/screen.s",
+      "tokens": [
+        [3, 1, 0, ""],
+        [5, 1, 1, ""],
+        [6, 0, 0, ""],
+        [8, 1, 1, ""],
+        [10, 0, 1, ""],
+        [15, 1, 3, ""],
+        [17, 1, 3, ""],
+        [19, 1, 2, ""],
+        [21, 0, 2, ""],
+        [23, 0, 3, ""],
+        [27, 1, 4, ""],
+        [33, 0, 4, ""],
+        [38, 1, 5, ""],
+        [42, 0, 5, ""],
+        [44, 1, 6, ""],
+        [46, 1, 7, ""],
+        [47, 0, 6, ""],
+        [50, 0, 7, ""],
+        [67, 1, 8, ""],
+        [68, 1, 11, ""],
+        [69, 1, 13, ""],
+        [70, 1, 16, ""],
+        [71, 0, 8, ""],
+        [73, 1, 9, ""],
+        [86, 1, 12, ""],
+        [87, 0, 9, ""],
+        [89, 0, 10, ""],
+        [99, 0, 11, ""],
+        [101, 0, 12, ""],
+        [106, 1, 15, ""],
+        [108, 1, 15, ""],
+        [109, 0, 13, ""],
+        [111, 1, 14, ""],
+        [124, 1, 17, ""],
+        [125, 0, 14, ""],
+        [127, 0, 15, ""],
+        [137, 0, 16, ""],
+        [139, 0, 17, ""],
+        [144, 1, 10, ""],
+        [146, 1, 10, ""],
+        [150, 1, 18, ""],
+        [154, 0, 18, ""],
+        [186, 0, 19, ""],
+        [191, 3, 19, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/hpz/sk/special_screen.s",
+      "tokens": [
+        [3, 1, 20, ""],
+        [7, 0, 20, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/chaos_emeralds.s",
+      "tokens": [
+        [2, 1, 21, ""],
+        [3, 1, 22, ""],
+        [4, 1, 23, ""],
+        [5, 1, 24, ""],
+        [6, 1, 25, ""],
+        [7, 1, 26, ""],
+        [8, 1, 27, ""],
+        [9, 1, 28, ""],
+        [10, 0, 21, ""],
+        [12, 0, 22, ""],
+        [14, 0, 23, ""],
+        [16, 0, 24, ""],
+        [18, 0, 25, ""],
+        [20, 0, 26, ""],
+        [22, 0, 27, ""],
+        [24, 0, 28, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/collapsing_bridge.s",
+      "tokens": [
+        [2, 1, 29, ""],
+        [3, 1, 30, ""],
+        [4, 1, 31, ""],
+        [5, 0, 29, ""],
+        [12, 0, 30, ""],
+        [25, 0, 31, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/emerald_misc_art.s",
+      "tokens": [
+        [2, 1, 32, ""],
+        [3, 1, 33, ""],
+        [4, 1, 34, ""],
+        [5, 1, 35, ""],
+        [6, 1, 36, ""],
+        [7, 1, 37, ""],
+        [8, 1, 38, ""],
+        [9, 1, 39, ""],
+        [10, 1, 40, ""],
+        [11, 1, 41, ""],
+        [12, 1, 42, ""],
+        [13, 1, 43, ""],
+        [14, 1, 44, ""],
+        [15, 1, 45, ""],
+        [16, 1, 46, ""],
+        [17, 1, 47, ""],
+        [18, 1, 48, ""],
+        [19, 1, 49, ""],
+        [20, 1, 50, ""],
+        [21, 1, 51, ""],
+        [22, 1, 52, ""],
+        [23, 1, 53, ""],
+        [24, 1, 54, ""],
+        [25, 1, 55, ""],
+        [26, 1, 56, ""],
+        [27, 1, 57, ""],
+        [28, 1, 58, ""],
+        [29, 1, 59, ""],
+        [30, 1, 60, ""],
+        [31, 1, 61, ""],
+        [32, 1, 62, ""],
+        [33, 1, 63, ""],
+        [34, 1, 64, ""],
+        [35, 1, 65, ""],
+        [36, 1, 66, ""],
+        [37, 1, 67, ""],
+        [38, 1, 68, ""],
+        [39, 0, 32, ""],
+        [45, 0, 33, ""],
+        [51, 0, 34, ""],
+        [57, 0, 35, ""],
+        [63, 0, 36, ""],
+        [69, 0, 37, ""],
+        [75, 0, 38, ""],
+        [81, 0, 39, ""],
+        [87, 0, 40, ""],
+        [114, 0, 41, ""],
+        [116, 0, 42, ""],
+        [118, 0, 43, ""],
+        [124, 0, 44, ""],
+        [126, 0, 45, ""],
+        [128, 0, 46, ""],
+        [130, 0, 47, ""],
+        [132, 0, 48, ""],
+        [134, 0, 49, ""],
+        [136, 0, 50, ""],
+        [138, 0, 51, ""],
+        [140, 0, 52, ""],
+        [142, 0, 53, ""],
+        [144, 0, 54, ""],
+        [146, 0, 55, ""],
+        [148, 0, 56, ""],
+        [150, 0, 57, ""],
+        [152, 0, 58, ""],
+        [154, 0, 59, ""],
+        [156, 0, 60, ""],
+        [158, 0, 61, ""],
+        [159, 0, 62, ""],
+        [164, 0, 63, ""],
+        [187, 0, 64, ""],
+        [206, 0, 65, ""],
+        [221, 0, 66, ""],
+        [232, 0, 67, ""],
+        [239, 0, 68, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/hpz/mappings/knuckles_dizzy_stars.s",
+      "tokens": [
+        [2, 1, 69, ""],
+        [3, 1, 70, ""],
+        [4, 1, 71, ""],
+        [5, 1, 72, ""],
+        [6, 1, 73, ""],
+        [7, 1, 74, ""],
+        [8, 0, 69, ""],
+        [9, 0, 70, ""],
+        [11, 0, 71, ""],
+        [13, 0, 72, ""],
+        [15, 0, 73, ""],
+        [17, 0, 74, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/emerald_resources.s",
+      "tokens": [
+        [6, 0, 75, ""],
+        [15, 0, 76, ""],
+        [20, 0, 77, ""],
+        [25, 0, 78, ""],
+        [27, 1, 95, ""],
+        [28, 0, 79, ""],
+        [30, 1, 144, ""],
+        [31, 0, 80, ""],
+        [33, 1, 150, ""],
+        [34, 0, 81, ""],
+        [41, 0, 82, ""],
+        [42, 1, 83, ""],
+        [57, 0, 83, ""],
+        [58, 1, 84, ""],
+        [58, 3, 83, ""],
+        [59, 1, 85, ""],
+        [59, 3, 83, ""],
+        [60, 1, 86, ""],
+        [60, 3, 83, ""],
+        [61, 1, 87, ""],
+        [61, 3, 83, ""],
+        [62, 1, 88, ""],
+        [62, 3, 83, ""],
+        [63, 1, 89, ""],
+        [63, 3, 83, ""],
+        [64, 1, 90, ""],
+        [64, 3, 83, ""],
+        [65, 0, 84, ""],
+        [67, 0, 85, ""],
+        [69, 0, 86, ""],
+        [71, 0, 87, ""],
+        [73, 0, 88, ""],
+        [75, 0, 89, ""],
+        [77, 0, 90, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/master_emerald.s",
+      "tokens": [
+        [4, 2, 92, ""],
+        [8, 2, 82, ""],
+        [19, 0, 91, ""],
+        [21, 1, 92, ""],
+        [22, 3, 91, ""],
+        [24, 1, 78, ""],
+        [26, 0, 92, ""],
+        [28, 1, 94, ""],
+        [30, 1, 93, ""],
+        [33, 0, 93, ""],
+        [35, 1, 94, ""],
+        [36, 1, 82, ""],
+        [39, 0, 94, ""],
+        [41, 0, 95, ""],
+        [42, 1, 75, ""],
+        [44, 2, 96, ""],
+        [45, 0, 96, ""],
+        [52, 1, 97, ""],
+        [54, 0, 97, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "tokens": [
+        [10, 1, 98, ""],
+        [12, 0, 98, ""],
+        [15, 0, 99, ""],
+        [17, 3, 99, ""],
+        [21, 0, 100, ""],
+        [23, 3, 100, ""],
+        [26, 1, 101, ""],
+        [28, 0, 101, ""],
+        [30, 1, 102, ""],
+        [35, 0, 102, ""],
+        [37, 1, 104, ""],
+        [40, 0, 103, ""],
+        [45, 3, 103, ""],
+        [47, 0, 104, ""],
+        [48, 2, 107, ""],
+        [54, 0, 105, ""],
+        [56, 1, 106, ""],
+        [60, 0, 106, ""],
+        [62, 3, 105, ""],
+        [74, 0, 107, ""],
+        [76, 1, 108, ""],
+        [77, 2, 109, ""],
+        [79, 1, 108, ""],
+        [80, 2, 135, ""],
+        [82, 0, 108, ""],
+        [84, 0, 109, ""],
+        [86, 1, 130, ""],
+        [88, 1, 116, ""],
+        [90, 1, 115, ""],
+        [96, 0, 110, ""],
+        [99, 1, 111, ""],
+        [101, 1, 111, ""],
+        [106, 0, 111, ""],
+        [108, 1, 112, ""],
+        [110, 0, 112, ""],
+        [111, 3, 110, ""],
+        [114, 1, 114, ""],
+        [116, 1, 113, ""],
+        [118, 0, 113, ""],
+        [119, 1, 128, ""],
+        [120, 0, 114, ""],
+        [121, 2, 117, ""],
+        [124, 1, 79, ""],
+        [126, 0, 115, ""],
+        [128, 0, 116, ""],
+        [131, 0, 117, ""],
+        [133, 1, 130, ""],
+        [134, 2, 126, ""],
+        [135, 0, 118, ""],
+        [136, 2, 123, ""],
+        [148, 1, 119, ""],
+        [149, 2, 128, ""],
+        [152, 0, 119, ""],
+        [154, 1, 121, ""],
+        [162, 1, 120, ""],
+        [165, 0, 120, ""],
+        [169, 1, 122, ""],
+        [174, 0, 121, ""],
+        [182, 0, 122, ""],
+        [187, 0, 123, ""],
+        [191, 1, 124, ""],
+        [194, 0, 124, ""],
+        [196, 1, 125, ""],
+        [199, 0, 125, ""],
+        [202, 0, 126, ""],
+        [203, 2, 129, ""],
+        [206, 1, 127, ""],
+        [207, 2, 135, ""],
+        [209, 0, 127, ""],
+        [211, 0, 128, ""],
+        [212, 2, 131, ""],
+        [217, 0, 129, ""],
+        [219, 1, 118, ""],
+        [220, 0, 130, ""],
+        [222, 0, 131, ""],
+        [226, 1, 132, ""],
+        [228, 0, 132, ""],
+        [230, 1, 133, ""],
+        [232, 1, 134, ""],
+        [235, 0, 133, ""],
+        [237, 1, 134, ""],
+        [240, 1, 134, ""],
+        [242, 1, 134, ""],
+        [251, 0, 134, ""],
+        [253, 0, 135, ""],
+        [254, 1, 76, ""],
+        [256, 2, 137, ""],
+        [260, 1, 136, ""],
+        [267, 0, 136, ""],
+        [276, 0, 137, ""],
+        [281, 1, 138, ""],
+        [282, 2, 139, ""],
+        [287, 0, 138, ""],
+        [289, 1, 130, ""],
+        [291, 0, 139, ""],
+        [293, 1, 140, ""],
+        [295, 1, 138, ""],
+        [297, 0, 140, ""],
+        [298, 2, 141, ""],
+        [299, 2, 142, ""],
+        [300, 1, 138, ""],
+        [301, 0, 141, ""],
+        [302, 1, 81, ""],
+        [304, 1, 138, ""],
+        [305, 0, 142, ""],
+        [308, 1, 143, ""],
+        [311, 0, 143, ""],
+        [313, 0, 144, ""],
+        [314, 2, 145, ""],
+        [320, 1, 80, ""],
+        [322, 0, 145, ""],
+        [325, 1, 146, ""],
+        [326, 2, 148, ""],
+        [333, 1, 147, ""],
+        [337, 0, 146, ""],
+        [339, 0, 147, ""],
+        [342, 0, 148, ""],
+        [344, 1, 149, ""],
+        [347, 1, 149, ""],
+        [350, 0, 149, ""],
+        [352, 0, 150, ""],
+        [353, 1, 77, ""],
+        [355, 2, 151, ""],
+        [359, 0, 151, ""],
+        [364, 1, 152, ""],
+        [365, 2, 154, ""],
+        [366, 0, 152, ""],
+        [369, 0, 153, ""],
+        [371, 1, 130, ""],
+        [373, 0, 154, ""],
+        [377, 1, 155, ""],
+        [378, 1, 152, ""],
+        [379, 0, 155, ""],
+        [380, 2, 156, ""],
+        [385, 0, 156, ""],
+        [388, 1, 153, ""],
+        [389, 2, 157, ""],
+        [390, 1, 153, ""],
+        [391, 0, 157, ""],
+        [393, 1, 158, ""],
+        [395, 1, 153, ""],
+        [396, 0, 158, ""],
+        [400, 1, 160, ""],
+        [408, 1, 159, ""],
+        [410, 0, 159, ""],
+        [411, 1, 162, ""],
+        [414, 0, 160, ""],
+        [420, 1, 161, ""],
+        [425, 0, 161, ""],
+        [428, 0, 162, ""],
+        [437, 1, 165, ""],
+        [438, 1, 166, ""],
+        [441, 1, 164, ""],
+        [443, 1, 164, ""],
+        [446, 1, 167, ""],
+        [448, 1, 163, ""],
+        [450, 0, 163, ""],
+        [451, 1, 168, ""],
+        [454, 0, 164, ""],
+        [459, 0, 165, ""],
+        [462, 0, 166, ""],
+        [465, 0, 167, ""],
+        [473, 0, 168, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/super_emerald.s",
+      "tokens": [
+        [11, 1, 169, ""],
+        [12, 1, 169, ""],
+        [13, 0, 169, ""],
+        [14, 1, 170, ""],
+        [14, 3, 169, ""],
+        [15, 1, 171, ""],
+        [15, 3, 169, ""],
+        [16, 1, 171, ""],
+        [16, 3, 169, ""],
+        [17, 1, 173, ""],
+        [17, 3, 169, ""],
+        [18, 0, 170, ""],
+        [20, 0, 171, ""],
+        [21, 2, 181, ""],
+        [27, 1, 172, ""],
+        [28, 2, 178, ""],
+        [31, 0, 172, ""],
+        [33, 0, 173, ""],
+        [35, 2, 179, ""],
+        [44, 1, 174, ""],
+        [46, 0, 174, ""],
+        [47, 1, 175, ""],
+        [51, 0, 175, ""],
+        [69, 1, 176, ""],
+        [71, 0, 176, ""],
+        [83, 1, 177, ""],
+        [87, 0, 177, ""],
+        [96, 0, 178, ""],
+        [98, 1, 179, ""],
+        [99, 2, 181, ""],
+        [102, 1, 181, ""],
+        [103, 0, 179, ""],
+        [105, 1, 180, ""],
+        [108, 1, 180, ""],
+        [111, 1, 181, ""],
+        [112, 0, 180, ""],
+        [116, 1, 181, ""],
+        [119, 0, 181, ""],
+        [126, 1, 182, ""],
+        [128, 1, 182, ""],
+        [129, 2, 183, ""],
+        [134, 0, 182, ""],
+        [136, 0, 183, ""],
+        [138, 1, 184, ""],
+        [148, 0, 184, ""]
+      ]
+    }
+  ]
+}

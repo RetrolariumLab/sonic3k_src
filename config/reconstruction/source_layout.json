@@ -8603,7 +8603,7 @@
       "responsibility": "Hidden Palace screen and background initialization, event state and progression control.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 252,
+      "physical_lines": 253,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -61196,7 +61196,7 @@
       "responsibility": "Hidden Palace special-stage selection, transition, hub state and common emerald control helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 614,
+      "physical_lines": 616,
       "origin": {
         "commit": "1616b6c2e29f266ddceab52d6b96b3b07759daab",
         "path": "sonic3k.s",
@@ -61238,7 +61238,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_90880",
+          "name": "HPZSuper_WaitForBeamAndApplyGray",
           "kind": "terminal-tail",
           "reason": "Close the Super Emerald collection and special-stage entry callbacks after the preceding annotated helpers and private position table; original independent boundaries remain unchanged.",
           "origin_first_line": 5277,

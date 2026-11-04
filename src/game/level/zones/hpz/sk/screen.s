@@ -5,38 +5,39 @@
 
 HPZ_ScreenInit:
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_5A13E
+                bne.s   SKHPZEvents_TryPinUpperStartMinX
                 move.w  #$AA0,(Camera_max_X_pos).w
-                bra.s   loc_5A14C
+                bra.s   SKHPZEvents_RefreshInitialForeground
 ; ---------------------------------------------------------------------------
 
-loc_5A13E:
+SKHPZEvents_TryPinUpperStartMinX:
                 cmpi.w  #$480,(Player_1+y_pos).w
-                bhs.s   loc_5A14C
+                bhs.s   SKHPZEvents_RefreshInitialForeground
                 move.w  #$AA0,(Camera_min_X_pos).w
 
-loc_5A14C:
+SKHPZEvents_RefreshInitialForeground:
                 jsr     (Reset_TileOffsetPositionActual).l
                 jmp     (Refresh_PlaneFull).l
 ; ---------------------------------------------------------------------------
 
 HPZ_ScreenEvent:
                 tst.w   (Events_bg+$00).w
-                bne.s   loc_5A176
+                bne.s   SKHPZEvents_AddShakeAndTryPatch
                 tst.w   (Palette_fade_timer).w
-                bne.s   loc_5A176
+                bne.s   SKHPZEvents_AddShakeAndTryPatch
                 jsr     (AllocateObject).l
-                bne.s   loc_5A172
+                bne.s   SKHPZEvents_LatchPaletteSetup
                 move.l  #Obj_HPZPaletteControl,(a1)
 
-loc_5A172:
+; Record the setup attempt even if allocating the palette controller failed
+SKHPZEvents_LatchPaletteSetup:
                 st      (Events_bg+$00).w
 
-loc_5A176:
+SKHPZEvents_AddShakeAndTryPatch:
                 move.w  (Screen_shake_offset).w,d0
                 add.w   d0,(Camera_Y_pos_copy).w
                 tst.w   (Events_fg_4).w
-                beq.s   loc_5A19E
+                beq.s   SKHPZEvents_DrawForeground
                 clr.w   (Events_fg_4).w
                 movea.w $1C(a3),a1
                 move.b  #$61,$30(a1)
@@ -44,30 +45,30 @@ loc_5A176:
                 jmp     (Refresh_PlaneScreenDirect).l
 ; ---------------------------------------------------------------------------
 
-loc_5A19E:
+SKHPZEvents_DrawForeground:
                 jmp     (DrawTilesAsYouMove).l
 ; ---------------------------------------------------------------------------
 
 HPZ_BackgroundInit:
                 move.w  $14(a3),$18(a3)
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_5A1C2
+                bne.s   SKHPZEvents_SelectInitialRegion
                 movea.w 4(a3),a1
                 move.b  #$8E,3(a1)
                 move.b  #$8F,4(a1)
 
-loc_5A1C2:
+SKHPZEvents_SelectInitialRegion:
                 cmpi.w  #$EC0,(Player_1+x_pos).w
-                bhs.s   loc_5A1D0
+                bhs.s   SKHPZEvents_InitRightRegion
                 jsr     BuildHpzLeftRegionParallax(pc)
-                bra.s   loc_5A1DA
+                bra.s   SKHPZEvents_RoundScrollAndRefresh
 ; ---------------------------------------------------------------------------
 
-loc_5A1D0:
+SKHPZEvents_InitRightRegion:
                 move.w  #8,(Events_routine_bg).w
                 jsr     BuildHpzRightRegionParallax(pc)
 
-loc_5A1DA:
+SKHPZEvents_RoundScrollAndRefresh:
                 jsr     (Reset_TileOffsetPositionEff).l
                 lea     (HScroll_table).w,a1
                 move.w  (a1)+,(a1)
@@ -88,18 +89,18 @@ HPZ_BackgroundEvent:
 ; ---------------------------------------------------------------------------
 
 HPZ_BackgroundEvent_Index:
-                bra.w   loc_5A224
+                bra.w   SKHPZEvents_TryBeginRightRegion
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5A288
+                bra.w   SKHPZEvents_PositionRightEntry
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5A2A6
+                bra.w   SKHPZEvents_TryReturnToLeftRegion
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5A30A
+                bra.w   SKHPZEvents_PositionLeftReturn
 ; ---------------------------------------------------------------------------
 
-loc_5A224:
+SKHPZEvents_TryBeginRightRegion:
                 cmpi.w  #$EC0,(Player_1+x_pos).w
-                blo.s   loc_5A25E
+                blo.s   SKHPZEvents_PositionLeftBackground
                 jsr     BuildHpzRightRegionParallax(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 lea     (HScroll_table).w,a1
@@ -112,13 +113,13 @@ loc_5A224:
                 move.w  d0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_5A28C
+                bra.s   SKHPZEvents_RedrawRightBottomUp
 ; ---------------------------------------------------------------------------
 
-loc_5A25E:
+SKHPZEvents_PositionLeftBackground:
                 jsr     BuildHpzLeftRegionParallax(pc)
 
-loc_5A262:
+SKHPZEvents_DrawLeftBackground:
                 lea     HPZ_BGDrawArray(pc),a4
                 lea     (HScroll_table).w,a5
                 moveq   #$20,d6
@@ -130,22 +131,22 @@ loc_5A262:
                 jmp     (ShakeScreen_Setup).l
 ; ---------------------------------------------------------------------------
 
-loc_5A288:
+SKHPZEvents_PositionRightEntry:
                 jsr     BuildHpzRightRegionParallax(pc)
 
-loc_5A28C:
+SKHPZEvents_RedrawRightBottomUp:
                 lea     HPZ_BGDrawArray(pc),a4
                 lea     (HScroll_table-$04).w,a5
                 move.w  (Camera_Y_pos_BG_copy).w,d1
                 jsr     (Draw_PlaneVertBottomUpComplex).l
-                bpl.s   loc_5A2E4
+                bpl.s   SKHPZEvents_DrawRightBackground
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_5A2E4
+                bra.s   SKHPZEvents_DrawRightBackground
 ; ---------------------------------------------------------------------------
 
-loc_5A2A6:
+SKHPZEvents_TryReturnToLeftRegion:
                 cmpi.w  #$EC0,(Player_1+x_pos).w
-                bhs.s   loc_5A2E0
+                bhs.s   SKHPZEvents_PositionRightBackground
                 jsr     BuildHpzLeftRegionParallax(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 lea     (HScroll_table).w,a1
@@ -158,13 +159,13 @@ loc_5A2A6:
                 move.w  d0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_5A30E
+                bra.s   SKHPZEvents_RedrawLeftBottomUp
 ; ---------------------------------------------------------------------------
 
-loc_5A2E0:
+SKHPZEvents_PositionRightBackground:
                 jsr     BuildHpzRightRegionParallax(pc)
 
-loc_5A2E4:
+SKHPZEvents_DrawRightBackground:
                 lea     HPZ_BGDrawArray(pc),a4
                 lea     (HScroll_table).w,a5
                 moveq   #$20,d6
@@ -176,24 +177,24 @@ loc_5A2E4:
                 jmp     (ShakeScreen_Setup).l
 ; ---------------------------------------------------------------------------
 
-loc_5A30A:
+SKHPZEvents_PositionLeftReturn:
                 jsr     BuildHpzLeftRegionParallax(pc)
 
-loc_5A30E:
+SKHPZEvents_RedrawLeftBottomUp:
                 lea     HPZ_BGDrawArray(pc),a4
                 lea     (HScroll_table-$04).w,a5
                 move.w  (Camera_Y_pos_BG_copy).w,d1
                 jsr     (Draw_PlaneVertBottomUpComplex).l
-                bpl.w   loc_5A262
+                bpl.w   SKHPZEvents_DrawLeftBackground
                 clr.w   (Events_routine_bg).w
-                bra.w   loc_5A262
+                bra.w   SKHPZEvents_DrawLeftBackground
 
 ; =============== S U B R O U T I N E =======================================
 
 BuildHpzLeftRegionParallax:
                 move.w  #$348,d2
                 moveq   #0,d3
-                bra.s   loc_5A33C
+                bra.s   SKHPZEvents_BuildSharedParallax
 ; End of function BuildHpzLeftRegionParallax
 
 ; =============== S U B R O U T I N E =======================================
@@ -202,7 +203,7 @@ BuildHpzRightRegionParallax:
                 move.w  #$E00,d2
                 move.w  #$700,d3
 
-loc_5A33C:
+SKHPZEvents_BuildSharedParallax:
                 move.w  (Camera_Y_pos_copy).w,d0
                 move.w  (Screen_shake_offset).w,d4
                 sub.w   d4,d0
@@ -235,12 +236,12 @@ loc_5A33C:
                 asr.l   #2,d2
                 moveq   #9-1,d1
 
-loc_5A388:
+SKHPZEvents_WriteReverseParallaxBands:
                 swap    d0
                 move.w  d0,-(a1)
                 swap    d0
                 sub.l   d2,d0
-                dbf     d1,loc_5A388
+                dbf     d1,SKHPZEvents_WriteReverseParallaxBands
                 move.w  (HScroll_table+$01A).w,(HScroll_table+$004).w
                 rts
 ; End of function BuildHpzRightRegionParallax
