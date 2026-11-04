@@ -3,139 +3,139 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
 
-Obj_57E96:
+SSZEscape_UpdateControllerAndRumble:
                 cmpi.b  #4,routine(a0)
-                bhi.s   loc_57EB0
+                bhi.s   SSZEscape_DispatchControllerState
                 move.w  (Level_frame_counter).w,d0
                 andi.w  #$F,d0
-                bne.s   loc_57EB0
+                bne.s   SSZEscape_DispatchControllerState
                 moveq   #signextendB(sfx_BigRumble),d0
                 jsr     (Play_SFX).l
 
-loc_57EB0:
+SSZEscape_DispatchControllerState:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                jmp     loc_57EBA(pc,d0.w)
+                jmp     SSZEscape_StateBranches(pc,d0.w)
 ; ---------------------------------------------------------------------------
 
-loc_57EBA:
-                bra.w   loc_57ECA
+SSZEscape_StateBranches:
+                bra.w   SSZEscape_CountDownBeforeCameraDescent
 ; ---------------------------------------------------------------------------
-                bra.w   loc_57EDC
+                bra.w   SSZEscape_LowerCameraAndStartCollapse
 ; ---------------------------------------------------------------------------
-                bra.w   loc_57F18
+                bra.w   SSZEscape_DescendToSpiralSetupHeight
 ; ---------------------------------------------------------------------------
-                bra.w   loc_57F3E
+                bra.w   SSZEscape_WaitForCollapseAndSpawnDebris
 ; ---------------------------------------------------------------------------
 
-loc_57ECA:
+SSZEscape_CountDownBeforeCameraDescent:
                 subq.w  #1,$2E(a0)
-                bne.w   locret_57FBE
+                bne.w   SSZEscape_ReturnFromControllerState
                 move.w  #4,$30(a0)
                 addq.b  #4,routine(a0)
 
-loc_57EDC:
+SSZEscape_LowerCameraAndStartCollapse:
                 jsr     StepSsz1EscapeCameraDownward(pc)
                 cmpi.w  #$600,(Camera_Y_pos).w
-                blo.w   locret_57FBE
+                blo.w   SSZEscape_ReturnFromControllerState
                 jsr     DriveSsz1EscapeJumpInputsForPlayers(pc)
                 cmpi.w  #$60C,(Camera_Y_pos).w
-                blo.w   locret_57FBE
+                blo.w   SSZEscape_ReturnFromControllerState
                 lea     (HScroll_table+$E0).w,a1
-                lea     word_577C6(pc),a5
+                lea     SSZEscape_ForegroundStripStartCountdowns(pc),a5
                 moveq   #($A/2)-1,d0
 
-loc_57F02:
+SSZEscape_CopyStripCollapseCountdowns:
                 move.l  (a5)+,(a1)+
-                dbf     d0,loc_57F02
+                dbf     d0,SSZEscape_CopyStripCollapseCountdowns
                 moveq   #signextendB(sfx_Collapse),d0
                 jsr     (Play_SFX).l
                 addq.b  #4,routine(a0)
-                bra.w   locret_57FBE
+                bra.w   SSZEscape_ReturnFromControllerState
 ; ---------------------------------------------------------------------------
 
-loc_57F18:
+SSZEscape_DescendToSpiralSetupHeight:
                 jsr     StepSsz1EscapeCameraDownward(pc)
                 jsr     DriveSsz1EscapeJumpInputsForPlayers(pc)
                 cmpi.w  #$640,(Camera_Y_pos).w
-                blo.w   locret_57FBE
+                blo.w   SSZEscape_ReturnFromControllerState
                 move.w  #$10-1,$2E(a0)
                 move.w  #8,$30(a0)
                 clr.w   $32(a0)
                 addq.b  #4,routine(a0)
 
-loc_57F3E:
+SSZEscape_WaitForCollapseAndSpawnDebris:
                 tst.w   (Events_fg_4).w
-                bpl.s   locret_57FBE
+                bpl.s   SSZEscape_ReturnFromControllerState
                 tst.w   $2E(a0)
-                beq.s   loc_57F5E
+                beq.s   SSZEscape_TryUpdateSpiralClimb
                 subq.w  #1,$2E(a0)
-                bne.s   locret_57FBE
+                bne.s   SSZEscape_ReturnFromControllerState
                 jsr     (AllocateObject).l
-                bne.s   loc_57F5E
-                move.l  #Obj_583BE,(a1)
+                bne.s   SSZEscape_TryUpdateSpiralClimb
+                move.l  #SSZRampDebris_WaitForEscape,(a1)
 
-loc_57F5E:
+SSZEscape_TryUpdateSpiralClimb:
                 cmpi.w  #$5C0,(Camera_Y_pos).w
-                bhs.s   loc_57F7E
+                bhs.s   SSZEscape_SelectTurnCameraTarget
                 jsr     UpdateSsz1EscapeSpiralForPlayers(pc)
                 move.w  (Level_frame_counter).w,d0
                 addq.w  #8,d0
                 andi.w  #$F,d0
-                bne.s   loc_57F7E
+                bne.s   SSZEscape_SelectTurnCameraTarget
                 moveq   #signextendB(sfx_DeathEggRiseLoud),d0
                 jsr     (Play_SFX).l
 
-loc_57F7E:
+SSZEscape_SelectTurnCameraTarget:
                 move.w  #$500,d0
                 moveq   #0,d1
                 move.b  $30(a0),d1
                 subq.w  #1,d1
-                bcs.s   loc_57F94
+                bcs.s   SSZEscape_ComputeUpwardCameraStep
 
-loc_57F8C:
+SSZEscape_SubtractCompletedTurnHeight:
                 subi.w  #$70,d0
-                dbf     d1,loc_57F8C
+                dbf     d1,SSZEscape_SubtractCompletedTurnHeight
 
-loc_57F94:
+SSZEscape_ComputeUpwardCameraStep:
                 moveq   #0,d1
                 move.b  $31(a0),d1
                 sub.w   d1,d0
                 move.w  (Camera_Y_pos).w,d1
                 sub.w   d0,d1
-                bcs.s   locret_57FBE
+                bcs.s   SSZEscape_ReturnFromControllerState
                 cmpi.w  #2,d1
-                bls.s   loc_57FAC
+                bls.s   SSZEscape_ApplyCameraRiseAndClampTop
                 moveq   #2,d1
 
-loc_57FAC:
+SSZEscape_ApplyCameraRiseAndClampTop:
                 sub.w   d1,(Camera_Y_pos).w
                 cmpi.w  #$110,(Camera_Y_pos).w
-                bhs.s   locret_57FBE
+                bhs.s   SSZEscape_ReturnFromControllerState
                 move.w  #$110,(Camera_Y_pos).w
 
-locret_57FBE:
+SSZEscape_ReturnFromControllerState:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
 StepSsz1EscapeCameraDownward:
                 cmpi.w  #$618,(Camera_Y_pos).w
-                blo.s   loc_57FD2
+                blo.s   SSZEscape_SelectSlowCameraDescentTicks
                 btst    #0,(Level_frame_counter+1).w
-                beq.s   locret_57FE0
-                bra.s   loc_57FDC
+                beq.s   SSZEscape_ReturnFromCameraDescentStep
+                bra.s   SSZEscape_IncrementCameraY
 ; ---------------------------------------------------------------------------
 
-loc_57FD2:
+SSZEscape_SelectSlowCameraDescentTicks:
                 move.w  (Level_frame_counter).w,d0
                 andi.w  #3,d0
-                beq.s   locret_57FE0
+                beq.s   SSZEscape_ReturnFromCameraDescentStep
 
-loc_57FDC:
+SSZEscape_IncrementCameraY:
                 addq.w  #1,(Camera_Y_pos).w
 
-locret_57FE0:
+SSZEscape_ReturnFromCameraDescentStep:
                 rts
 ; End of function StepSsz1EscapeCameraDownward
 
@@ -147,7 +147,7 @@ DriveSsz1EscapeJumpInputsForPlayers:
                 lea     $30(a0),a3
                 bsr.s   DriveSsz1EscapeJumpInputAndHidePlayer
                 tst.w   (Player_mode).w
-                bne.s   locret_58046
+                bne.s   SSZEscape_ReturnFromPlayerInputOrSetup
                 lea     (Player_2).w,a1
                 lea     (Ctrl_2_logical).w,a2
                 lea     $31(a0),a3
@@ -157,35 +157,35 @@ DriveSsz1EscapeJumpInputsForPlayers:
 
 DriveSsz1EscapeJumpInputAndHidePlayer:
                 tst.b   object_control(a1)
-                bne.s   locret_58046
+                bne.s   SSZEscape_ReturnFromPlayerInputOrSetup
                 tst.b   (a3)
-                bmi.s   loc_58016
+                bmi.s   SSZEscape_HidePlayerAfterJumpApex
                 subq.b  #1,(a3)
-                bpl.s   locret_58046
+                bpl.s   SSZEscape_ReturnFromPlayerInputOrSetup
                 move.w  #(button_C_mask<<8)|button_C_mask,(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_58016:
+SSZEscape_HidePlayerAfterJumpApex:
                 tst.w   y_vel(a1)
-                bmi.s   loc_58034
+                bmi.s   SSZEscape_SelectAirborneSteeringButtons
                 move.w  #$7FFF,y_pos(a1)
                 andi.b  #$FC,render_flags(a1)
                 move.b  #3,object_control(a1)
                 clr.b   anim(a1)
-                bra.s   locret_58046
+                bra.s   SSZEscape_ReturnFromPlayerInputOrSetup
 ; ---------------------------------------------------------------------------
 
-loc_58034:
+SSZEscape_SelectAirborneSteeringButtons:
                 move.w  #$2800,d0
                 cmpi.w  #$1A40,x_pos(a1)
-                blo.s   loc_58044
+                blo.s   SSZEscape_StoreAirborneSteeringButtons
                 move.w  #$2400,d0
 
-loc_58044:
+SSZEscape_StoreAirborneSteeringButtons:
                 move.w  d0,(a2)
 
-locret_58046:
+SSZEscape_ReturnFromPlayerInputOrSetup:
                 rts
 ; End of function DriveSsz1EscapeJumpInputAndHidePlayer
 
@@ -196,13 +196,13 @@ UpdateSsz1EscapeSpiralForPlayers:
                 lea     $30(a0),a2
                 moveq   #0,d3
                 cmpi.w  #2,(Player_mode).w
-                bne.s   loc_5805C
+                bne.s   SSZEscape_UpdateSpiralRiders
                 moveq   #-1,d3
 
-loc_5805C:
+SSZEscape_UpdateSpiralRiders:
                 bsr.s   UpdateSsz1EscapeSpiralClimbAndLaunch
                 tst.w   (Player_mode).w
-                bne.s   locret_58046
+                bne.s   SSZEscape_ReturnFromPlayerInputOrSetup
                 lea     (Player_2).w,a1
                 lea     $32(a0),a2
                 moveq   #-1,d3
@@ -212,9 +212,9 @@ loc_5805C:
 
 UpdateSsz1EscapeSpiralClimbAndLaunch:
                 tst.w   4(a2)
-                bne.w   loc_58192
+                bne.w   SSZSpiral_UpdateLaunchFlightOrExitDelay
                 cmpi.w  #$910,(a2)
-                bne.s   loc_580CC
+                bne.s   SSZSpiral_AdvanceWithinTurnPhase
                 st      4(a2)
                 move.b  #1,object_control(a1)
                 bset    #Status_InAir,status(a1)
@@ -232,26 +232,26 @@ UpdateSsz1EscapeSpiralClimbAndLaunch:
                 jmp     (Play_SFX).l
 ; ---------------------------------------------------------------------------
 
-loc_580CC:
+SSZSpiral_AdvanceWithinTurnPhase:
                 moveq   #0,d0
                 move.b  1(a2),d0
                 addq.b  #1,d0
                 cmpi.b  #$70,d0
-                blo.s   loc_580E0
+                blo.s   SSZSpiral_SelectAngleAndArtPriority
                 subi.b  #$70,d0
                 addq.b  #1,(a2)
 
-loc_580E0:
+SSZSpiral_SelectAngleAndArtPriority:
                 move.b  d0,1(a2)
-                lea     byte_587B4(pc),a6
+                lea     SSZSpiral_AngleByWithinTurnPhase(pc),a6
                 move.b  (a6,d0.w),d0
                 move.w  d0,d2
                 andi.w  #drawing_mask,art_tile(a1)
                 addi.b  #$40,d2
-                bmi.s   loc_58100
+                bmi.s   SSZSpiral_CalcOrbitAndArc
                 ori.w   #high_priority,art_tile(a1)
 
-loc_58100:
+SSZSpiral_CalcOrbitAndArc:
                 jsr     (GetSineCosine).l
                 muls.w  #$4C00,d0
                 swap    d0
@@ -260,14 +260,14 @@ loc_58100:
                 muls.w  #$1C00,d1
                 swap    d1
                 subi.b  #$40,d2
-                bpl.s   loc_58128
+                bpl.s   SSZSpiral_ApplyVerticalPhaseCorrection
                 neg.w   d1
                 subi.w  #$38,d1
 
-loc_58128:
+SSZSpiral_ApplyVerticalPhaseCorrection:
                 move.w  #$570,y_pos(a1)
                 add.w   d1,y_pos(a1)
-                lea     byte_58824(pc),a6
+                lea     SSZSpiral_PhaseYCorrections(pc),a6
                 moveq   #0,d0
                 move.b  1(a2),d0
                 move.b  (a6,d0.w),d0
@@ -276,37 +276,37 @@ loc_58128:
                 moveq   #0,d0
                 move.b  (a2),d0
                 subq.w  #1,d0
-                bcs.s   loc_58158
+                bcs.s   SSZSpiral_ApplyTailsHeightAndPriority
 
-loc_5814E:
+SSZSpiral_RaisePlayerForCompletedTurn:
                 subi.w  #$70,y_pos(a1)
-                dbf     d0,loc_5814E
+                dbf     d0,SSZSpiral_RaisePlayerForCompletedTurn
 
-loc_58158:
+SSZSpiral_ApplyTailsHeightAndPriority:
                 tst.w   d3
-                beq.s   loc_58170
+                beq.s   SSZSpiral_SelectRiderFrame
                 addq.w  #4,y_pos(a1)
                 move.w  #$100,priority(a1)
                 tst.b   d2
-                bmi.s   loc_58170
+                bmi.s   SSZSpiral_SelectRiderFrame
                 move.w  #$80,priority(a1)
 
-loc_58170:
+SSZSpiral_SelectRiderFrame:
                 addi.w  #$A,d2
                 andi.w  #$FF,d2
                 move.w  d2,d0
                 add.w   d2,d2
                 add.w   d0,d2
                 lsr.w   #6,d2
-                lea     byte_587A8(pc),a2
+                lea     SSZSpiral_CharacterFramesByAngleBand(pc),a2
                 move.b  (a2,d2.w),d0
                 move.b  d0,mapping_frame(a1)
                 jmp     (Perform_Player_DPLC).l
 ; ---------------------------------------------------------------------------
 
-loc_58192:
+SSZSpiral_UpdateLaunchFlightOrExitDelay:
                 tst.w   4(a2)
-                bpl.s   loc_581D2
+                bpl.s   SSZSpiral_TickP1ExitToDeathEgg
                 move.w  x_vel(a1),d0
                 ext.l   d0
                 lsl.l   #8,d0
@@ -317,33 +317,33 @@ loc_58192:
                 lsl.l   #8,d0
                 add.l   d0,y_pos(a1)
                 tst.w   y_vel(a1)
-                bmi.s   locret_581F0
+                bmi.s   SSZSpiral_ReturnDuringFlightOrExitDelay
                 move.b  #3,object_control(a1)
                 clr.b   mapping_frame(a1)
                 clr.b   anim(a1)
                 move.w  #3*60,4(a2)
-                bra.s   locret_581F0
+                bra.s   SSZSpiral_ReturnDuringFlightOrExitDelay
 ; ---------------------------------------------------------------------------
 
-loc_581D2:
+SSZSpiral_TickP1ExitToDeathEgg:
                 cmpa.w  #Player_1,a1
-                bne.s   locret_581F0
+                bne.s   SSZSpiral_ReturnDuringFlightOrExitDelay
                 subq.w  #1,4(a2)
-                bne.s   locret_581F0
+                bne.s   SSZSpiral_ReturnDuringFlightOrExitDelay
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
                 move.w  #$B00,d0
                 jmp     (StartNewLevel).l
 ; ---------------------------------------------------------------------------
 
-locret_581F0:
+SSZSpiral_ReturnDuringFlightOrExitDelay:
                 rts
 ; End of function UpdateSsz1EscapeSpiralClimbAndLaunch
 
 ; ---------------------------------------------------------------------------
 
-loc_581F2:
-                move.l  #loc_5821E,(a0)
+SSZSpiralLeftOuterSection_Initialize:
+                move.l  #SSZSpiralOuterLeft_CheckBreakHeight,(a0)
                 move.b  #4,render_flags(a0)
                 move.b  #$1C,height_pixels(a0)
                 move.w  #$80,priority(a0)
@@ -351,16 +351,16 @@ loc_581F2:
                 move.l  #Map_SSZCollapsingBridge,mappings(a0)
                 move.b  #9,mapping_frame(a0)
 
-loc_5821E:
+SSZSpiralOuterLeft_CheckBreakHeight:
                 move.w  y_pos(a0),d0
                 subi.w  #$24,d0
                 cmp.w   (Player_1+y_pos).w,d0
-                bhs.w   loc_583A0
+                bhs.w   SSZSpiralSection_ConvertParentToFalling
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_58234:
-                move.l  #loc_58260,(a0)
+SSZSpiralLeftInnerSection_Initialize:
+                move.l  #SSZSpiralInnerLeft_SelectBreakStage,(a0)
                 move.b  #4,render_flags(a0)
                 move.b  #$18,height_pixels(a0)
                 move.w  #$80,priority(a0)
@@ -368,47 +368,47 @@ loc_58234:
                 move.l  #Map_SSZCollapsingBridge,mappings(a0)
                 move.b  #6,mapping_frame(a0)
 
-loc_58260:
+SSZSpiralInnerLeft_SelectBreakStage:
                 move.w  y_pos(a0),d0
                 move.b  mapping_frame(a0),d1
                 subq.b  #6,d1
-                beq.s   loc_58288
+                beq.s   SSZSpiralInnerLeft_SetFirstShard
                 subq.b  #1,d1
-                beq.s   loc_5827E
+                beq.s   SSZSpiralInnerLeft_SetSecondShard
                 subi.w  #$2C,d0
                 cmp.w   (Player_1+y_pos).w,d0
-                blo.s   loc_582A6
-                bra.w   loc_583A0
+                blo.s   SSZSpiralLeftInnerSection_Draw
+                bra.w   SSZSpiralSection_ConvertParentToFalling
 ; ---------------------------------------------------------------------------
 
-loc_5827E:
+SSZSpiralInnerLeft_SetSecondShard:
                 moveq   #-$20,d1
                 moveq   #8,d2
                 subi.w  #$24,d0
-                bra.s   loc_58290
+                bra.s   SSZSpiralInnerLeft_TryAdvanceAndSpawn
 ; ---------------------------------------------------------------------------
 
-loc_58288:
+SSZSpiralInnerLeft_SetFirstShard:
                 moveq   #-$40,d1
                 moveq   #$10,d2
                 subi.w  #$1C,d0
 
-loc_58290:
+SSZSpiralInnerLeft_TryAdvanceAndSpawn:
                 cmp.w   (Player_1+y_pos).w,d0
-                blo.s   loc_582A6
+                blo.s   SSZSpiralLeftInnerSection_Draw
                 addq.b  #1,mapping_frame(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_582A6
+                bne.s   SSZSpiralLeftInnerSection_Draw
                 moveq   #8,d0
-                bra.s   loc_5831E
+                bra.s   SSZSpiralShard_InitFragment
 ; ---------------------------------------------------------------------------
 
-loc_582A6:
+SSZSpiralLeftInnerSection_Draw:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_582AC:
-                move.l  #loc_582D8,(a0)
+SSZSpiralRightInnerSection_Initialize:
+                move.l  #SSZSpiralInnerRight_SelectBreakStage,(a0)
                 move.b  #4,render_flags(a0)
                 move.b  #$18,height_pixels(a0)
                 move.w  #$200,priority(a0)
@@ -416,41 +416,41 @@ loc_582AC:
                 move.l  #Map_SSZCollapsingBridge,mappings(a0)
                 move.b  #$B,mapping_frame(a0)
 
-loc_582D8:
+SSZSpiralInnerRight_SelectBreakStage:
                 move.w  y_pos(a0),d0
                 move.b  mapping_frame(a0),d1
                 subi.b  #$B,d1
-                beq.s   loc_58302
+                beq.s   SSZSpiralInnerRight_SetFirstShard
                 subq.b  #1,d1
-                beq.s   loc_582F8
+                beq.s   SSZSpiralInnerRight_SetSecondShard
                 subi.w  #$2C,d0
                 cmp.w   (Player_1+y_pos).w,d0
-                blo.s   loc_5835A
-                bra.w   loc_583A0
+                blo.s   SSZSpiralRightInnerSection_Draw
+                bra.w   SSZSpiralSection_ConvertParentToFalling
 ; ---------------------------------------------------------------------------
 
-loc_582F8:
+SSZSpiralInnerRight_SetSecondShard:
                 moveq   #$20,d1
                 moveq   #8,d2
                 subi.w  #$24,d0
-                bra.s   loc_5830A
+                bra.s   SSZSpiralInnerRight_TryAdvanceAndSpawn
 ; ---------------------------------------------------------------------------
 
-loc_58302:
+SSZSpiralInnerRight_SetFirstShard:
                 moveq   #$40,d1
                 moveq   #$10,d2
                 subi.w  #$1C,d0
 
-loc_5830A:
+SSZSpiralInnerRight_TryAdvanceAndSpawn:
                 cmp.w   (Player_1+y_pos).w,d0
-                blo.s   loc_5835A
+                blo.s   SSZSpiralRightInnerSection_Draw
                 addq.b  #1,mapping_frame(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_5835A
+                bne.s   SSZSpiralRightInnerSection_Draw
                 moveq   #$D,d0
 
-loc_5831E:
-                move.l  #loc_583A6,(a1)
+SSZSpiralShard_InitFragment:
+                move.l  #SSZSpiralSection_DeleteIfNotRendered,(a1)
                 move.b  #$84,render_flags(a1)
                 move.b  #$10,height_pixels(a1)
                 move.w  priority(a0),priority(a1)
@@ -462,12 +462,12 @@ loc_5831E:
                 move.w  y_pos(a0),y_pos(a1)
                 add.w   d2,y_pos(a1)
 
-loc_5835A:
+SSZSpiralRightInnerSection_Draw:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_58360:
-                move.l  #loc_5838C,(a0)
+SSZSpiralRightOuterSection_Initialize:
+                move.l  #SSZSpiralOuterRight_CheckBreakHeight,(a0)
                 move.b  #4,render_flags(a0)
                 move.b  #$1C,height_pixels(a0)
                 move.w  #$100,priority(a0)
@@ -475,23 +475,23 @@ loc_58360:
                 move.l  #Map_SSZCollapsingBridge,mappings(a0)
                 move.b  #$A,mapping_frame(a0)
 
-loc_5838C:
+SSZSpiralOuterRight_CheckBreakHeight:
                 move.w  y_pos(a0),d0
                 subi.w  #$24,d0
                 cmp.w   (Player_1+y_pos).w,d0
-                bhs.s   loc_583A0
+                bhs.s   SSZSpiralSection_ConvertParentToFalling
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_583A0:
-                move.l  #loc_583A6,(a0)
+SSZSpiralSection_ConvertParentToFalling:
+                move.l  #SSZSpiralSection_DeleteIfNotRendered,(a0)
 
-loc_583A6:
+SSZSpiralSection_DeleteIfNotRendered:
                 tst.b   render_flags(a0)
-                bmi.s   loc_583B2
+                bmi.s   SSZSpiralSection_FallAndDraw
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_583B2:
+SSZSpiralSection_FallAndDraw:
                 jsr     (MoveSprite).l
                 jmp     (Draw_Sprite).l

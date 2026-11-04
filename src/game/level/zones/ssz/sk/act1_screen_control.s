@@ -5,10 +5,10 @@
 
 SSZ1_ScreenInit:
                 tst.b   (Last_star_post_hit).w
-                bne.s   loc_57246
+                bne.s   SKSSZ1FG_ResetEscapeOffsets
                 jsr     (AllocateObject).l
-                bne.s   loc_57246
-                move.l  #Obj_57C1E,(a1)
+                bne.s   SKSSZ1FG_ResetEscapeOffsets
+                move.l  #SSZArrival_AttemptBeamAllocation,(a1)
                 move.w  #$100,x_pos(a1)
                 move.b  #$6C,$2D(a1)
                 st      (Events_bg+$05).w
@@ -24,33 +24,33 @@ SSZ1_ScreenInit:
                 move.w  d0,(Camera_Y_pos).w
                 st      (Scroll_lock).w
 
-loc_57246:
+SKSSZ1FG_ResetEscapeOffsets:
                 clr.w   (_unkEE98).w
                 clr.w   (_unkEE9C).w
                 lea     (HScroll_table+$1F6).w,a1
                 lea     (a1),a5
                 moveq   #5-1,d0
 
-loc_57256:
+SKSSZ1FG_ClearCloudHandlesAndAlloc:
                 clr.w   (a1)+
-                dbf     d0,loc_57256
-                lea     word_58758(pc),a6
+                dbf     d0,SKSSZ1FG_ClearCloudHandlesAndAlloc
+                lea     SKSSZ1Geometry_CloudMotionSeeds(pc),a6
                 moveq   #5-1,d1
                 jsr     (AllocateObject).l
-                bne.s   loc_5728E
+                bne.s   SKSSZ1FG_PlaceCloudsAndRefresh
 
-loc_5726A:
+SKSSZ1FG_InitRoamingCloud:
                 move.w  a1,(a5)+
-                move.l  #loc_57BB2,(a1)
+                move.l  #SKSSZ1BG_InitRoamingCloud,(a1)
                 move.w  (a6)+,$38(a1)
                 move.w  (a6)+,$3A(a1)
                 move.w  (a6)+,$40(a1)
                 move.w  (a6)+,d2
                 move.b  d2,mapping_frame(a1)
                 jsr     (CreateNewSprite4).l
-                dbne    d1,loc_5726A
+                dbne    d1,SKSSZ1FG_InitRoamingCloud
 
-loc_5728E:
+SKSSZ1FG_PlaceCloudsAndRefresh:
                 jsr     PositionSsz1RoamingCloudSprites(pc)
                 jsr     (Reset_TileOffsetPositionActual).l
                 jmp     (Refresh_PlaneFull).l
@@ -64,46 +64,46 @@ SSZ1_ScreenEvent:
 ; ---------------------------------------------------------------------------
 
 SSZ1_ScreenEvent_Index:
-                bra.w   loc_572BA
+                bra.w   SKSSZ1FG_UpdateOrdinaryRoute
 ; ---------------------------------------------------------------------------
-                bra.w   loc_57344
+                bra.w   SKSSZ1FG_TryStepStripCollapse
 ; ---------------------------------------------------------------------------
-                bra.w   loc_574B0
+                bra.w   SKSSZ1FG_DrawEscapeForeground
 ; ---------------------------------------------------------------------------
 
-loc_572BA:
+SKSSZ1FG_UpdateOrdinaryRoute:
                 tst.b   (End_of_level_flag).w
-                bne.s   loc_572CE
+                bne.s   SKSSZ1FG_TrySpawnEscapeCamera
                 jsr     SSZ1_UpdateRouteAndBossGates(pc)
                 jsr     PositionSsz1RoamingCloudSprites(pc)
                 jmp     (DrawTilesAsYouMove).l
 ; ---------------------------------------------------------------------------
 
-loc_572CE:
+SKSSZ1FG_TrySpawnEscapeCamera:
                 jsr     (AllocateObject).l
-                bne.s   loc_572E2
-                move.l  #Obj_57E96,(a1)
+                bne.s   SKSSZ1FG_BindCollapseArrays
+                move.l  #SSZEscape_UpdateControllerAndRumble,(a1)
                 move.w  #$1E,$2E(a1)
 
-loc_572E2:
+SKSSZ1FG_BindCollapseArrays:
                 lea     (HScroll_table+$E0).w,a1
                 lea     $20(a1),a5
                 moveq   #$A-1,d0
 
-loc_572EC:
+SKSSZ1FG_InitStripCollapse:
                 move.w  #-1,(a1)+
                 clr.l   (a5)+
                 clr.l   $3C(a5)
-                dbf     d0,loc_572EC
+                dbf     d0,SKSSZ1FG_InitStripCollapse
                 jsr     UpdateSsz1TenStripForegroundCollapse(pc)
                 lea     (HScroll_table+$80).w,a1
                 move.w  (Camera_Y_pos_mask).w,d0
                 moveq   #$A-1,d1
 
-loc_57308:
+SKSSZ1FG_SeedRoundedYAndEnableVInt:
                 move.w  (a1)+,(a1)
                 and.w   d0,(a1)+
-                dbf     d1,loc_57308
+                dbf     d1,SKSSZ1FG_SeedRoundedYAndEnableVInt
                 jsr     (Restore_PlayerControl).l
                 lea     (Player_2).w,a1
                 jsr     (Restore_PlayerControl2).l
@@ -115,23 +115,23 @@ loc_57308:
                 st      (Screen_shake_flag).w
                 move.w  #4,(Special_V_int_routine).w
                 addq.w  #4,(Events_routine_fg).w
-                bra.s   loc_5734E
+                bra.s   SKSSZ1FG_DrawCollapsedStrips
 ; ---------------------------------------------------------------------------
 
-loc_57344:
+SKSSZ1FG_TryStepStripCollapse:
                 tst.w   (Events_fg_4).w
-                bne.s   loc_57360
+                bne.s   SKSSZ1FG_LoadEscapeArtAndLayout
                 jsr     UpdateSsz1TenStripForegroundCollapse(pc)
 
-loc_5734E:
-                lea     word_577B2(pc),a4
+SKSSZ1FG_DrawCollapsedStrips:
+                lea     SKSSZ1FG_CollapseStripSpans(pc),a4
                 lea     (HScroll_table+$80).w,a5
                 moveq   #$F,d6
                 moveq   #$A,d5
                 jmp     (DrawTilesVDeform).l
 ; ---------------------------------------------------------------------------
 
-loc_57360:
+SKSSZ1FG_LoadEscapeArtAndLayout:
                 movem.l d7-a0/a2-a3,-(sp)
                 lea     (SSZ1_128x128_Custom_Kos).l,a1
                 lea     (Chunk_table+$180).l,a2
@@ -160,9 +160,9 @@ loc_57360:
                 lea     Pal_SSZDeathEgg(pc),a5
                 moveq   #bytesToLcnt($20),d0
 
-loc_573E4:
+SKSSZ1FG_CopyEscapePaletteAndSetup:
                 move.l  (a5)+,(a1)+
-                dbf     d0,loc_573E4
+                dbf     d0,SKSSZ1FG_CopyEscapePaletteAndSetup
                 jsr     SSZ1Escape_UpdateCameraAndClouds(pc)
                 move.w  (_unkEEEA).w,d0
                 move.w  d0,d1
@@ -175,32 +175,33 @@ loc_573E4:
                 clr.l   (_unkEEF6).w
                 clr.w   (_unkEEFA).w
                 jsr     (AllocateObject).l
-                bne.w   loc_574A0
+                bne.w   SKSSZ1FG_SignalRampReadyAndSetVInt
                 move.w  #$5A8,d1
                 move.w  #$58C,d2
                 move.w  #$554,d3
                 moveq   #$A-1,d4
 
-loc_5742C:
-                move.l  #loc_58234,(a1)
+; The last group uses two pieces. An allocation failure leaves any earlier pieces in place
+SKSSZ1FG_TrySpawnRampGroup:
+                move.l  #SSZSpiralLeftInnerSection_Initialize,(a1)
                 move.w  #$1A38,x_pos(a1)
                 move.w  d1,y_pos(a1)
                 jsr     (CreateNewSprite4).l
-                bne.s   loc_574A0
-                move.l  #loc_58360,(a1)
+                bne.s   SKSSZ1FG_SignalRampReadyAndSetVInt
+                move.l  #SSZSpiralRightOuterSection_Initialize,(a1)
                 move.w  #$1A80,x_pos(a1)
                 move.w  d2,y_pos(a1)
                 tst.w   d4
-                beq.s   loc_574A0
+                beq.s   SKSSZ1FG_SignalRampReadyAndSetVInt
                 jsr     (CreateNewSprite4).l
-                bne.s   loc_574A0
-                move.l  #loc_582AC,(a1)
+                bne.s   SKSSZ1FG_SignalRampReadyAndSetVInt
+                move.l  #SSZSpiralRightInnerSection_Initialize,(a1)
                 move.w  #$1A48,x_pos(a1)
                 move.w  d1,y_pos(a1)
                 subi.w  #$38,y_pos(a1)
                 jsr     (CreateNewSprite4).l
-                bne.s   loc_574A0
-                move.l  #loc_581F2,(a1)
+                bne.s   SKSSZ1FG_SignalRampReadyAndSetVInt
+                move.l  #SSZSpiralLeftOuterSection_Initialize,(a1)
                 move.w  #$19F8,x_pos(a1)
                 move.w  d3,y_pos(a1)
                 moveq   #$70,d5
@@ -208,16 +209,16 @@ loc_5742C:
                 sub.w   d5,d2
                 sub.w   d5,d3
                 jsr     (CreateNewSprite4).l
-                dbne    d4,loc_5742C
+                dbne    d4,SKSSZ1FG_TrySpawnRampGroup
 
-loc_574A0:
+SKSSZ1FG_SignalRampReadyAndSetVInt:
                 st      (Events_fg_4).w
                 move.w  #$C,(Special_V_int_routine).w
                 addq.w  #4,(Events_routine_fg).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_574B0:
+SKSSZ1FG_DrawEscapeForeground:
                 jsr     SSZ1Escape_UpdateCameraAndClouds(pc)
                 lea     (_unkEEEA).w,a6
                 lea     (_unkEEF2).w,a5
@@ -256,34 +257,35 @@ UpdateSsz1TenStripForegroundCollapse:
                 moveq   #$A,d1
                 moveq   #$A-1,d2
 
-loc_5751C:
+SKSSZ1FG_SelectStripFallState:
                 tst.w   (a6)
-                beq.s   loc_57526
-                bmi.s   loc_57536
+                beq.s   SKSSZ1FG_MoveAndAccelStrip
+                bmi.s   SKSSZ1FG_ClampStripYAndCount
                 subq.w  #1,(a6)
-                bra.s   loc_57536
+                bra.s   SKSSZ1FG_ClampStripYAndCount
 ; ---------------------------------------------------------------------------
 
-loc_57526:
+SKSSZ1FG_MoveAndAccelStrip:
                 move.l  $80(a5),d3
                 addi.l  #$800,$80(a5)
                 sub.l   d3,$C0(a5)
 
-loc_57536:
+SKSSZ1FG_ClampStripYAndCount:
                 move.w  $C0(a5),d3
                 add.w   d0,d3
                 cmpi.w  #$580,d3
-                bhs.s   loc_5754C
+                bhs.s   SKSSZ1FG_WriteStripYAndPlaceActor
                 clr.l   $80(a5)
                 move.w  #$580,d3
                 subq.w  #1,d1
 
-loc_5754C:
+; Place the tracked actor from the unclamped strip displacement, independent of the exported draw Y
+SKSSZ1FG_WriteStripYAndPlaceActor:
                 move.w  d3,(a5)
                 move.w  d3,-$20(a6)
                 addq.w  #4,a5
                 addq.w  #2,a6
-                dbf     d2,loc_5751C
+                dbf     d2,SKSSZ1FG_SelectStripFallState
                 movea.w (_unkFAA4).w,a1
                 move.w  $10(a1),d0
                 subi.w  #$19A0,d0
@@ -322,9 +324,9 @@ PositionSsz1RoamingCloudSprites:
                 lea     (HScroll_table+$1F6).w,a5
                 moveq   #5-1,d2
 
-loc_575BA:
+SKSSZ1FG_TryPlaceRoamingCloud:
                 move.w  (a5)+,d3
-                beq.s   loc_575E4
+                beq.s   SKSSZ1FG_NextRoamingCloudHandle
                 movea.w d3,a6
                 move.w  $38(a6),d3
                 sub.w   d0,d3
@@ -337,8 +339,8 @@ loc_575BA:
                 addi.w  #$50,d3
                 move.w  d3,$10(a6)
 
-loc_575E4:
-                dbf     d2,loc_575BA
+SKSSZ1FG_NextRoamingCloudHandle:
+                dbf     d2,SKSSZ1FG_TryPlaceRoamingCloud
                 rts
 ; End of function PositionSsz1RoamingCloudSprites
 
@@ -347,170 +349,170 @@ loc_575E4:
 ; Lock the two replica-boss arenas, spawn their bosses and latch the final area's camera bounds
 SSZ1_UpdateRouteAndBossGates:
                 tst.b   (Events_bg+$06).w
-                bne.w   locret_57788
+                bne.w   SKSSZ1FG_RouteUpdateReturn
                 cmpi.w  #$19A0,(Camera_X_pos).w
-                blo.s   loc_5761C
+                blo.s   SKSSZ1FG_CheckOrdinaryCameraLimits
                 cmpi.w  #$680,(Player_1+y_pos).w
-                bhs.s   loc_5761C
+                bhs.s   SKSSZ1FG_CheckOrdinaryCameraLimits
                 move.w  #$19A0,(Camera_min_X_pos).w
                 move.w  #$5C0,d0
                 move.w  d0,(Camera_min_Y_pos).w
                 move.w  d0,(Camera_target_max_Y_pos).w
                 st      (Events_bg+$06).w
-                bra.w   locret_57788
+                bra.w   SKSSZ1FG_RouteUpdateReturn
 ; ---------------------------------------------------------------------------
 
-loc_5761C:
+SKSSZ1FG_CheckOrdinaryCameraLimits:
                 tst.b   (Events_bg+$05).w
-                bne.w   locret_57788
+                bne.w   SKSSZ1FG_RouteUpdateReturn
                 move.b  (Events_bg+$01).w,d0
                 or.b    (Events_bg+$03).w,d0
-                bne.s   loc_57686
+                bne.s   SKSSZ1FG_SelectReplicaBossRoute
                 move.w  (Camera_Y_pos).w,d0
                 cmpi.w  #$100,d0
-                blo.s   loc_57674
+                blo.s   SKSSZ1FG_EnableVerticalWrapLimits
                 cmpi.w  #$E00,d0
-                bhs.s   loc_57674
-                lea     word_5778A(pc),a1
+                bhs.s   SKSSZ1FG_EnableVerticalWrapLimits
+                lea     SKSSZ1FG_MinYByCameraX(pc),a1
                 move.w  (Player_1+x_pos).w,d1
 
-loc_57646:
+SKSSZ1FG_ScanMinYByCameraX:
                 cmp.w   (a1)+,d1
-                blo.s   loc_5764E
+                blo.s   SKSSZ1FG_TrySetCameraMinY
                 addq.w  #2,a1
-                bra.s   loc_57646
+                bra.s   SKSSZ1FG_ScanMinYByCameraX
 ; ---------------------------------------------------------------------------
 
-loc_5764E:
+SKSSZ1FG_TrySetCameraMinY:
                 move.w  (a1),d2
                 cmp.w   d0,d2
-                bhi.s   loc_57658
+                bhi.s   SKSSZ1FG_BindMaxYTable
                 move.w  d2,(Camera_min_Y_pos).w
 
-loc_57658:
-                lea     word_5779A(pc),a1
+SKSSZ1FG_BindMaxYTable:
+                lea     SKSSZ1FG_MaxYByCameraX(pc),a1
 
-loc_5765C:
+SKSSZ1FG_ScanMaxYByCameraX:
                 cmp.w   (a1)+,d1
-                blo.s   loc_57664
+                blo.s   SKSSZ1FG_TrySetCameraMaxY
                 addq.w  #2,a1
-                bra.s   loc_5765C
+                bra.s   SKSSZ1FG_ScanMaxYByCameraX
 ; ---------------------------------------------------------------------------
 
-loc_57664:
+SKSSZ1FG_TrySetCameraMaxY:
                 move.w  (a1),d2
                 cmp.w   d0,d2
-                blo.s   loc_57686
+                blo.s   SKSSZ1FG_SelectReplicaBossRoute
                 move.w  d2,(Camera_max_Y_pos).w
                 move.w  d2,(Camera_target_max_Y_pos).w
-                bra.s   loc_57686
+                bra.s   SKSSZ1FG_SelectReplicaBossRoute
 ; ---------------------------------------------------------------------------
 
-loc_57674:
+SKSSZ1FG_EnableVerticalWrapLimits:
                 move.w  #-$100,(Camera_min_Y_pos).w
                 move.w  #$1000,d0
                 move.w  d0,(Camera_max_Y_pos).w
                 move.w  d0,(Camera_target_max_Y_pos).w
 
-loc_57686:
+SKSSZ1FG_SelectReplicaBossRoute:
                 move.w  (Player_1+y_pos).w,d0
                 cmpi.w  #$440,d0
-                blo.s   loc_5770C
+                blo.s   SKSSZ1FG_CheckMTZRouteAndLockX
                 cmpi.w  #$880,d0
-                bhs.w   loc_5777E
+                bhs.w   SKSSZ1FG_OpenHorizontalRoute
                 tst.b   (Events_bg+$00).w
-                bmi.w   loc_5777E
-                bne.w   locret_57788
+                bmi.w   SKSSZ1FG_OpenHorizontalRoute
+                bne.w   SKSSZ1FG_RouteUpdateReturn
                 tst.b   (Events_bg+$01).w
-                bne.s   loc_576E8
+                bne.s   SKSSZ1FG_TrySpawnGHZReplica
                 move.w  #$160,(Camera_min_X_pos).w
                 move.w  #$19A0,(Camera_max_X_pos).w
                 cmpi.w  #$7C0,d0
-                blo.w   locret_57788
+                blo.w   SKSSZ1FG_RouteUpdateReturn
                 cmpi.w  #$160,(Camera_X_pos).w
-                bne.w   locret_57788
+                bne.w   SKSSZ1FG_RouteUpdateReturn
                 btst    #1,(Player_1+status).w
-                bne.w   locret_57788
+                bne.w   SKSSZ1FG_RouteUpdateReturn
                 move.w  #$160,(Camera_max_X_pos).w
                 move.w  #$7C0,d0
                 move.w  d0,(Camera_min_Y_pos).w
                 move.w  d0,(Camera_target_max_Y_pos).w
                 st      (Events_bg+$01).w
 
-loc_576E8:
+SKSSZ1FG_TrySpawnGHZReplica:
                 cmpi.w  #$7C0,(Camera_Y_pos).w
-                bne.w   locret_57788
+                bne.w   SKSSZ1FG_RouteUpdateReturn
                 jsr     (AllocateObject).l
-                bne.s   loc_5770A
+                bne.s   SKSSZ1FG_ReturnAfterGHZSpawn
                 move.l  #Obj_SSZGHZBoss,(a1)
                 st      (Events_bg+$05).w
                 move.w  #$7F00,(Events_bg+$00).w
 
-loc_5770A:
-                bra.s   locret_57788
+SKSSZ1FG_ReturnAfterGHZSpawn:
+                bra.s   SKSSZ1FG_RouteUpdateReturn
 ; ---------------------------------------------------------------------------
 
-loc_5770C:
+SKSSZ1FG_CheckMTZRouteAndLockX:
                 tst.b   (Events_bg+$02).w
-                bmi.s   loc_5777E
-                bne.s   locret_57788
+                bmi.s   SKSSZ1FG_OpenHorizontalRoute
+                bne.s   SKSSZ1FG_RouteUpdateReturn
                 tst.b   (Events_bg+$03).w
-                bne.s   loc_5775C
+                bne.s   SKSSZ1FG_TrySpawnMTZReplica
                 move.w  #$1660,(Camera_max_X_pos).w
                 moveq   #0,d1
                 tst.w   (Events_bg+$00).w
-                bne.s   loc_5772C
+                bne.s   SKSSZ1FG_SetMTZMinXAndCheckP1
                 move.w  #$160,d1
 
-loc_5772C:
+SKSSZ1FG_SetMTZMinXAndCheckP1:
                 move.w  d1,(Camera_min_X_pos).w
                 cmpi.w  #$420,d0
-                blo.s   locret_57788
+                blo.s   SKSSZ1FG_RouteUpdateReturn
                 cmpi.w  #$1660,(Camera_X_pos).w
-                bne.s   locret_57788
+                bne.s   SKSSZ1FG_RouteUpdateReturn
                 btst    #1,(Player_1+status).w
-                bne.s   locret_57788
+                bne.s   SKSSZ1FG_RouteUpdateReturn
                 move.w  #$1660,(Camera_min_X_pos).w
                 move.w  #$380,d0
                 move.w  d0,(Camera_min_Y_pos).w
                 move.w  d0,(Camera_target_max_Y_pos).w
                 st      (Events_bg+$03).w
 
-loc_5775C:
+SKSSZ1FG_TrySpawnMTZReplica:
                 cmpi.w  #$380,(Camera_Y_pos).w
-                bne.s   locret_57788
+                bne.s   SKSSZ1FG_RouteUpdateReturn
                 jsr     (AllocateObject).l
-                bne.s   loc_5777C
+                bne.s   SKSSZ1FG_ReturnAfterMTZSpawn
                 move.l  #Obj_SSZMTZBoss,(a1)
                 st      (Events_bg+$05).w
                 move.w  #$7F00,(Events_bg+$02).w
 
-loc_5777C:
-                bra.s   locret_57788
+SKSSZ1FG_ReturnAfterMTZSpawn:
+                bra.s   SKSSZ1FG_RouteUpdateReturn
 ; ---------------------------------------------------------------------------
 
-loc_5777E:
+SKSSZ1FG_OpenHorizontalRoute:
                 clr.w   (Camera_min_X_pos).w
                 move.w  #$19A0,(Camera_max_X_pos).w
 
-locret_57788:
+SKSSZ1FG_RouteUpdateReturn:
                 rts
 ; End of function SSZ1_UpdateRouteAndBossGates
 
 ; ---------------------------------------------------------------------------
-word_5778A:
+SKSSZ1FG_MinYByCameraX:
                 dc.w    $EE0,  $D00
                 dc.w    $11E0,  $CC0
                 dc.w    $1340,  $B20
                 dc.w    $7FFF,     0
-word_5779A:
+SKSSZ1FG_MaxYByCameraX:
                 dc.w    $640,  $C60
                 dc.w    $880,  $CA0
                 dc.w    $1200,  $C60
                 dc.w    $1380,  $A80
                 dc.w    $13C0,  $660
                 dc.w    $7FFF,  $3E0
-word_577B2:
+SKSSZ1FG_CollapseStripSpans:
                 dc.w    $19C0
                 dc.w    $20
                 dc.w    $20
@@ -521,7 +523,7 @@ word_577B2:
                 dc.w    $20
                 dc.w    $20
                 dc.w    $7FFF
-word_577C6:
+SSZEscape_ForegroundStripStartCountdowns:
                 dc.w    0,     9
                 dc.w    $C,     6
                 dc.w    3,    $C

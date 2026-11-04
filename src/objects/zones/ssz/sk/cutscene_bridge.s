@@ -14,29 +14,29 @@ Obj_SSZCutsceneBridge:
                 move.w  #3,mainspr_childsprites(a0)
                 bset    #7,status(a0)
                 move.w  #$C0,$2E(a0)
-                lea     loc_44FA2(pc),a1
+                lea     SKSSZSceneBridge_WaitForSlideSignal(pc),a1
                 tst.b   (Last_star_post_hit).w
-                beq.s   loc_44F9E
-                lea     loc_4501A(pc),a1
+                beq.s   SKSSZSceneBridge_RunCheckpointState
+                lea     SKSSZSceneBridge_CheckStaticSolidAndDraw(pc),a1
 
-loc_44F9E:
+SKSSZSceneBridge_RunCheckpointState:
                 move.l  a1,(a0)
                 jmp     (a1)
 ; ---------------------------------------------------------------------------
 
-loc_44FA2:
+SKSSZSceneBridge_WaitForSlideSignal:
                 move.w  $2E(a0),d1
                 tst.w   (Events_bg+$08).w
-                beq.s   loc_45006
+                beq.s   SKSSZSceneBridge_MoveAndCheckTopSolid
                 cmpi.w  #$68,d1
-                bne.s   loc_44FBA
+                bne.s   SKSSZSceneBridge_SlideAndSetCheckpoint
                 moveq   #signextendB(sfx_DoorOpen),d0
                 jsr     (Play_SFX).l
 
-loc_44FBA:
+SKSSZSceneBridge_SlideAndSetCheckpoint:
                 subq.w  #2,d1
                 move.w  d1,$2E(a0)
-                bne.s   loc_45006
+                bne.s   SKSSZSceneBridge_MoveAndCheckTopSolid
                 clr.b   (Events_bg+$05).w
                 clr.w   (Camera_min_X_pos).w
                 move.w  #$19A0,(Camera_max_X_pos).w
@@ -50,9 +50,9 @@ loc_44FBA:
                 jsr     (Save_Level_Data).l
                 clr.l   (Saved_timer).w
                 moveq   #0,d1
-                move.l  #loc_4501A,(a0)
+                move.l  #SKSSZSceneBridge_CheckStaticSolidAndDraw,(a0)
 
-loc_45006:
+SKSSZSceneBridge_MoveAndCheckTopSolid:
                 add.w   $12(a0),d1
                 move.w  x_pos(a0),d4
                 move.w  d1,x_pos(a0)
@@ -60,7 +60,7 @@ loc_45006:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_4501A:
+SKSSZSceneBridge_CheckStaticSolidAndDraw:
                 move.w  x_pos(a0),d4
                 bsr.s   UpdateSszCutsceneBridgeSolidAndPieces
                 jmp     (Sprite_OnScreen_Test).l
@@ -77,19 +77,19 @@ UpdateSszCutsceneBridgeSolidAndPieces:
                 subi.w  #$40,d0
                 moveq   #2,d1
 
-loc_45040:
+SKSSZSceneBridge_PlaceBridgePieces:
                 move.w  d0,(a1)+
                 move.w  y_pos(a0),(a1)+
                 addq.w  #2,a1
                 addi.w  #$40,d0
-                dbf     d1,loc_45040
+                dbf     d1,SKSSZSceneBridge_PlaceBridgePieces
                 rts
 ; End of function UpdateSszCutsceneBridgeSolidAndPieces
 
 ; ---------------------------------------------------------------------------
 
-loc_45052:
-                move.l  #loc_4507E,(a0)
+SKSSZBridgeShard_InitVisibleShard:
+                move.l  #SKSSZBridgeShard_CheckVisibility,(a0)
                 bset    #7,render_flags(a0)
                 move.b  #$10,height_pixels(a0)
                 move.b  #8,width_pixels(a0)
@@ -97,22 +97,22 @@ loc_45052:
                 move.w  #make_art_tile(ArtTile_SSZMisc+$20,2,1),art_tile(a0)
                 move.l  #Map_SSZCollapsingBridge,mappings(a0)
 
-loc_4507E:
+SKSSZBridgeShard_CheckVisibility:
                 tst.b   render_flags(a0)
-                bmi.s   loc_4508A
+                bmi.s   SKSSZBridgeShard_TickFallDelay
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_4508A:
+SKSSZBridgeShard_TickFallDelay:
                 move.w  $2E(a0),d0
-                beq.s   loc_45098
+                beq.s   SKSSZBridgeShard_FallWithGravity
                 subq.w  #1,d0
                 move.w  d0,$2E(a0)
-                bra.s   loc_4509E
+                bra.s   SKSSZBridgeShard_DrawShard
 ; ---------------------------------------------------------------------------
 
-loc_45098:
+SKSSZBridgeShard_FallWithGravity:
                 jsr     (MoveSprite).l
 
-loc_4509E:
+SKSSZBridgeShard_DrawShard:
                 jmp     (Draw_Sprite).l

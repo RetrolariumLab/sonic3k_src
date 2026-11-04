@@ -9738,7 +9738,7 @@
       "responsibility": "Sky Sanctuary act-one background initialization, events, deformation and private geometry.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 376,
+      "physical_lines": 377,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -9798,7 +9798,7 @@
       "responsibility": "Sky Sanctuary spiral-ramp debris state, rumble effects and cloud or ramp sprite resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 273,
+      "physical_lines": 274,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -9833,7 +9833,7 @@
       "responsibility": "Sky Sanctuary act-one screen initialization, event dispatch and progression control.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 532,
+      "physical_lines": 534,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -9863,7 +9863,7 @@
       "responsibility": "Sky Sanctuary act-two background initialization, event state, deformation and private records.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 665,
+      "physical_lines": 668,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -66111,7 +66111,7 @@
       "responsibility": "Bouncy cloud contact, deformation, player response and movement.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 273,
+      "physical_lines": 274,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "sonic3k.s",
@@ -66146,7 +66146,7 @@
       "responsibility": "Normal and diagonal collapsing bridge segment state and player collision.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 288,
+      "physical_lines": 289,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "sonic3k.s",
@@ -66181,7 +66181,7 @@
       "responsibility": "Collapsing column activation, fragments and player collision.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 117,
+      "physical_lines": 118,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "sonic3k.s",
@@ -66341,7 +66341,7 @@
       "responsibility": "Sky Sanctuary and Hidden Palace teleporter capture, transition control and player release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 315,
+      "physical_lines": 318,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "sonic3k.s",
@@ -66401,7 +66401,7 @@
       "responsibility": "Retracting spring timing, extension and player launch responses.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 374,
+      "physical_lines": 376,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "sonic3k.s",
@@ -66466,7 +66466,7 @@
       "responsibility": "Swinging carrier coordination, player attachment, travel and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 285,
+      "physical_lines": 286,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "sonic3k.s",

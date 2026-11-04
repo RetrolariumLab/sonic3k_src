@@ -1,26 +1,26 @@
 ; Data owner: objects/shared/zones/ssz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_SSZElevatorBar_:
-                dc.w    word_46AE4-Map_SSZElevatorBar_
-                dc.w    word_46AFE-Map_SSZElevatorBar_
-                dc.w    word_46B1E-Map_SSZElevatorBar_
-                dc.w    word_46B26-Map_SSZElevatorBar_
-                dc.w    word_46B34-Map_SSZElevatorBar_
-word_46AE4:     dc.w    4
+                dc.w    SSZMap_ElevatorBar_OrdinaryHangingBar-Map_SSZElevatorBar_
+                dc.w    SSZMap_ElevatorBar_CarrierWidePivot-Map_SSZElevatorBar_
+                dc.w    SSZElevatorBarMap_ChainLink-Map_SSZElevatorBar_
+                dc.w    SSZMap_ElevatorBar_CarrierEndpoint-Map_SSZElevatorBar_
+                dc.w    SSZMap_ElevatorBar_CarrierNarrowPivot-Map_SSZElevatorBar_
+SSZMap_ElevatorBar_OrdinaryHangingBar:  dc.w    4
                 dc.b    $FE,   8,   0,   0, $FF, $D0
                 dc.b    $FE,   8,   0,   0, $FF, $E8
                 dc.b    $FE,   8,   0,   0,   0,   0
                 dc.b    $FE,   8,   0,   0,   0, $18
-word_46AFE:     dc.w    5
+SSZMap_ElevatorBar_CarrierWidePivot:    dc.w    5
                 dc.b    $FE,   8,   0,   0, $FF, $CD
                 dc.b    $FE,   8,   0,   0, $FF, $E5
                 dc.b    $F8,   5, $20, $10, $FF, $F8
                 dc.b    $FE,   8,   0,   0,   0,   0
                 dc.b    $FE,   8,   0,   0,   0, $18
-word_46B1E:     dc.w    1
+SSZElevatorBarMap_ChainLink:    dc.w    1
                 dc.b    $F8,   5,   0,  $C, $FF, $F8
-word_46B26:     dc.w    2
+SSZMap_ElevatorBar_CarrierEndpoint: dc.w    2
                 dc.b    $F4,  $A,   0,   3, $FF, $E8
                 dc.b    $F4,  $A,   8,   3,   0,   0
-word_46B34:     dc.w    1
+SSZMap_ElevatorBar_CarrierNarrowPivot:  dc.w    1
                 dc.b    $F8,   5, $20, $10, $FF, $F8

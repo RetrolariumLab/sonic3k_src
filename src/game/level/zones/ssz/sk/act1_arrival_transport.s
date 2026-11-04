@@ -3,14 +3,14 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
 
-Obj_57C1E:
+SSZArrival_AttemptBeamAllocation:
                 jsr     (AllocateObjectAfterCurrent).l
-                beq.s   loc_57C28
+                beq.s   SSZArrival_InitializeBeamAndControllers
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57C28:
-                move.l  #loc_57CD2,(a0)
+SSZArrival_InitializeBeamAndControllers:
+                move.l  #SSZArrival_RaiseP1OrBeginSwing,(a0)
                 move.w  #$1000,y_pos(a0)
                 move.w  #-$100,$38(a0)
                 move.w  a1,$3C(a0)
@@ -29,13 +29,13 @@ loc_57C28:
                 move.b  #$18,$46(a1)
                 move.w  a0,$48(a1)
                 tst.b   (Current_act).w
-                bne.s   loc_57CAC
+                bne.s   SSZArrival_PlaceAndLockPrimaryPlayer
                 jsr     (CreateNewSprite4).l
-                bne.s   loc_57CAC
-                move.l  #Obj_57E34,(a1)
+                bne.s   SSZArrival_PlaceAndLockPrimaryPlayer
+                move.l  #SSZArrivalKnuckles_WaitThenAllocateActor,(a1)
                 move.w  #$60,subtype(a1)
 
-loc_57CAC:
+SSZArrival_PlaceAndLockPrimaryPlayer:
                 st      (Events_bg+$04).w
                 lea     (Player_1).w,a1
                 move.w  (Camera_Y_pos).w,d0
@@ -48,12 +48,12 @@ loc_57CAC:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57CD2:
+SSZArrival_RaiseP1OrBeginSwing:
                 jsr     (CycleSszHpzTeleporterPalettePair).l
                 lea     (Player_1).w,a1
                 move.w  x_pos(a0),x_pos(a1)
                 tst.b   $2D(a0)
-                bne.w   loc_57D50
+                bne.w   SSZArrival_RaisePlayerAndCameraStep
                 move.b  #1,object_control(a1)
                 move.b  #2,anim(a1)
                 bset    #Status_Roll,status(a1)
@@ -61,40 +61,40 @@ loc_57CD2:
                 move.w  y_pos(a1),d1
                 move.w  d1,$3E(a0)
                 tst.b   (Current_act).w
-                beq.s   loc_57D18
+                beq.s   SSZArrival_AttemptDelayedTailsTransport
                 bset    #7,art_tile(a1)
-                bra.s   loc_57D3C
+                bra.s   SSZArrival_ContractBeamAndStartSwing
 ; ---------------------------------------------------------------------------
 
-loc_57D18:
+SSZArrival_AttemptDelayedTailsTransport:
                 tst.w   (Player_mode).w
-                bne.s   loc_57D3C
+                bne.s   SSZArrival_ContractBeamAndStartSwing
                 jsr     (CreateNewSprite4).l
-                bne.s   loc_57D3C
-                move.l  #Obj_57DCC,(a1)
+                bne.s   SSZArrival_ContractBeamAndStartSwing
+                move.l  #SSZArrivalTails_WaitThenSwingIntoPlace,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  d1,$3E(a1)
                 move.w  #$C,subtype(a1)
 
-loc_57D3C:
+SSZArrival_ContractBeamAndStartSwing:
                 clr.b   (Scroll_lock).w
                 movea.w $3C(a0),a1
                 st      5(a1)
-                move.l  #Obj_57D64,(a0)
+                move.l  #SSZArrival_SwingP1AndUnlockControls,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57D50:
+SSZArrival_RaisePlayerAndCameraStep:
                 subi.w  #8,y_pos(a1)
                 subq.b  #1,$2D(a0)
-                beq.s   locret_57D62
+                beq.s   SSZArrival_ReturnAfterAscentStep
                 subi.w  #8,(Camera_Y_pos).w
 
-locret_57D62:
+SSZArrival_ReturnAfterAscentStep:
                 rts
 ; ---------------------------------------------------------------------------
 
-Obj_57D64:
+SSZArrival_SwingP1AndUnlockControls:
                 jsr     (CycleSszHpzTeleporterPalettePair).l
                 lea     (Player_1).w,a1
                 move.l  #$20000,d0
@@ -103,55 +103,55 @@ Obj_57D64:
                 add.w   $3E(a0),d0
                 move.w  d0,y_pos(a1)
                 tst.l   $2E(a0)
-                bmi.s   locret_57DA0
+                bmi.s   SSZArrival_ReturnFromPrimarySwing
                 clr.b   object_control(a1)
                 clr.b   anim(a1)
                 clr.b   (Events_bg+$04).w
-                move.l  #loc_57DA2,(a0)
+                move.l  #SSZArrival_WaitForCameraAndPalette,(a0)
 
-locret_57DA0:
+SSZArrival_ReturnFromPrimarySwing:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57DA2:
+SSZArrival_WaitForCameraAndPalette:
                 move.w  (Camera_Y_pos).w,d0
                 cmp.w   (Camera_max_Y_pos).w,d0
-                bne.s   loc_57DC6
+                bne.s   SSZArrival_ContinueTeleporterPalette
                 cmp.w   (Camera_min_Y_pos).w,d0
-                beq.s   loc_57DB6
+                beq.s   SSZArrival_DeleteWhenBeamPaletteIdle
                 move.w  d0,(Camera_min_Y_pos).w
 
-loc_57DB6:
+SSZArrival_DeleteWhenBeamPaletteIdle:
                 move.w  $3A(a0),d0
                 or.b    $38(a0),d0
-                bne.s   loc_57DC6
+                bne.s   SSZArrival_ContinueTeleporterPalette
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_57DC6:
+SSZArrival_ContinueTeleporterPalette:
                 jmp     (CycleSszHpzTeleporterPalettePair).l
 ; ---------------------------------------------------------------------------
 
-Obj_57DCC:
+SSZArrivalTails_WaitThenSwingIntoPlace:
                 lea     (Player_2).w,a1
                 tst.w   subtype(a0)
-                beq.s   loc_57DFA
+                beq.s   SSZArrivalTails_ApplySwingAndResumeCPU
                 subq.w  #1,subtype(a0)
-                bne.s   locret_57E32
+                bne.s   SSZArrivalTails_ReturnDuringDelayOrSwing
                 move.w  x_pos(a0),x_pos(a1)
                 move.b  #1,$2E(a1)
                 move.b  #2,anim(a1)
                 bset    #Status_Roll,status(a1)
                 move.w  #-1,y_vel(a1)
 
-loc_57DFA:
+SSZArrivalTails_ApplySwingAndResumeCPU:
                 move.l  #$20000,d0
                 move.l  #$800,d1
                 jsr     (Gradual_SwingOffset).l
                 add.w   $3E(a0),d0
                 move.w  d0,y_pos(a1)
                 tst.l   $2E(a0)
-                bmi.s   locret_57E32
+                bmi.s   SSZArrivalTails_ReturnDuringDelayOrSwing
                 clr.b   object_control(a1)
                 clr.b   anim(a1)
                 clr.w   (Tails_CPU_flight_timer).w
@@ -159,24 +159,24 @@ loc_57DFA:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_57E32:
+SSZArrivalTails_ReturnDuringDelayOrSwing:
                 rts
 ; ---------------------------------------------------------------------------
 
-Obj_57E34:
+SSZArrivalKnuckles_WaitThenAllocateActor:
                 tst.w   subtype(a0)
-                beq.s   loc_57E64
+                beq.s   SSZArrivalK_SwingActorAndSignalReady
                 subq.w  #1,subtype(a0)
-                bne.s   locret_57E94
+                bne.s   SSZArrivalK_ArrivalWaitReturn
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   locret_57E94
+                bne.s   SSZArrivalK_ArrivalWaitReturn
                 move.l  #Obj_CutsceneKnuckles,(a1)
                 move.w  #$100,x_pos(a1)
                 move.b  #$2C,subtype(a1)
                 move.w  a1,$20(a0)
                 move.w  #$C4E,$3E(a0)
 
-loc_57E64:
+SSZArrivalK_SwingActorAndSignalReady:
                 movea.w $20(a0),a1
                 move.l  #$20000,d0
                 move.l  #$800,d1
@@ -184,10 +184,10 @@ loc_57E64:
                 add.w   $3E(a0),d0
                 move.w  d0,y_pos(a1)
                 tst.l   $2E(a0)
-                bmi.s   locret_57E94
+                bmi.s   SSZArrivalK_ArrivalWaitReturn
                 bset    #0,(_unkFAB8).w
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_57E94:
+SSZArrivalK_ArrivalWaitReturn:
                 rts

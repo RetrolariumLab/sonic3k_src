@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 137
+    "commit_count": 138
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -869,9 +869,15 @@
       "commits": ["13cf5bcff1963d52d802c225a4186d6795f1c986"]
     },
     {
-      "id": "current-shorten-32-zone-lrz",
+      "id": "change-42f3a3301e5f",
       "kind": "source_or_tooling",
       "summary": "Apply 586 reviewed short labels for lrz.",
+      "commits": ["42f3a3301e5f4f967b24fa50c7fb8e31b0780fe2"]
+    },
+    {
+      "id": "current-shorten-33-zone-ssz",
+      "kind": "source_or_tooling",
+      "summary": "Apply 465 reviewed short labels for ssz.",
       "commits": ["release-commit"]
     }
   ],

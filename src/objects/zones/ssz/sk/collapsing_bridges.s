@@ -4,7 +4,7 @@
 ; ---------------------------------------------------------------------------
 
 Obj_SSZCollapsingBridge:
-                move.l  #loc_44C76,(a0)
+                move.l  #SKSSZFlatBridge_CheckSolidAndCollapse,(a0)
                 bset    #2,render_flags(a0)
                 move.b  #$10,height_pixels(a0)
                 move.b  #$20,width_pixels(a0)
@@ -13,54 +13,54 @@ Obj_SSZCollapsingBridge:
                 move.l  #Map_SSZCollapsingBridge,mappings(a0)
                 bset    #7,status(a0)
 
-loc_44C76:
+SKSSZFlatBridge_CheckSolidAndCollapse:
                 moveq   #$20,d1
                 moveq   #$10,d2
                 moveq   #9,d3
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectTop).l
                 tst.b   subtype(a0)
-                bmi.s   loc_44C96
+                bmi.s   SKSSZFlatBridge_DrawIntactBridge
                 move.b  status(a0),d0
                 andi.w  #standing_mask,d0
-                bne.s   loc_44C9C
+                bne.s   SKSSZFlatBridge_SelectStandingRider
 
-loc_44C96:
+SKSSZFlatBridge_DrawIntactBridge:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_44C9C:
+SKSSZFlatBridge_SelectStandingRider:
                 lea     (Player_1).w,a1
                 btst    #p1_standing_bit,d0
-                bne.s   loc_44CAA
+                bne.s   SKSSZFlatBridge_SelectShardOrder
                 lea     (Player_2).w,a1
 
-loc_44CAA:
+SKSSZFlatBridge_SelectShardOrder:
                 moveq   #$18,d1
                 moveq   #$10,d2
                 move.w  #$102,d3
                 move.w  x_pos(a0),d4
                 cmp.w   x_pos(a1),d4
                 scc     $2E(a0)
-                bcs.s   loc_44CC6
+                bcs.s   SKSSZFlatBridge_SetStartXAndFrameOrder
                 neg.w   d1
                 neg.w   d2
                 ror.w   #8,d3
 
-loc_44CC6:
+SKSSZFlatBridge_SetStartXAndFrameOrder:
                 add.w   d4,d1
                 btst    #0,render_flags(a0)
-                beq.s   loc_44CD2
+                beq.s   SKSSZFlatBridge_TrySpawnFirstShard
                 ror.w   #8,d3
 
-loc_44CD2:
+SKSSZFlatBridge_TrySpawnFirstShard:
                 moveq   #6,d4
                 moveq   #4-1,d5
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_44D0E
+                bne.s   SKSSZFlatBridge_BeginCollisionShrink
 
-loc_44CDE:
-                move.l  #loc_45052,(a1)
+SKSSZFlatBridge_InitAndTryNextShard:
+                move.l  #SKSSZBridgeShard_InitVisibleShard,(a1)
                 move.b  render_flags(a0),render_flags(a1)
                 move.w  d1,x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
@@ -70,33 +70,33 @@ loc_44CDE:
                 ror.w   #8,d3
                 addi.w  #6,d4
                 jsr     (CreateNewSprite4).l
-                dbne    d5,loc_44CDE
+                dbne    d5,SKSSZFlatBridge_InitAndTryNextShard
 
-loc_44D0E:
-                move.l  #loc_44D22,(a0)
+SKSSZFlatBridge_BeginCollisionShrink:
+                move.l  #SKSSZFlatBridge_TickCollisionShrink,(a0)
                 move.w  #6,$30(a0)
                 move.w  #$20,$32(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_44D22:
+SKSSZFlatBridge_TickCollisionShrink:
                 subq.w  #1,$30(a0)
-                bne.s   loc_44D48
+                bne.s   SKSSZFlatBridge_CheckReducedSolidAndCull
                 move.w  #6,$30(a0)
                 subq.w  #8,$32(a0)
-                bne.s   loc_44D3A
+                bne.s   SKSSZFlatBridge_SelectRetreatX
                 move.w  #$7FFF,x_pos(a0)
 
-loc_44D3A:
+SKSSZFlatBridge_SelectRetreatX:
                 moveq   #8,d0
                 tst.b   $2E(a0)
-                bne.s   loc_44D44
+                bne.s   SKSSZFlatBridge_ShiftCollisionRoot
                 neg.w   d0
 
-loc_44D44:
+SKSSZFlatBridge_ShiftCollisionRoot:
                 add.w   d0,x_pos(a0)
 
-loc_44D48:
+SKSSZFlatBridge_CheckReducedSolidAndCull:
                 move.w  $32(a0),d1
                 moveq   #$10,d2
                 moveq   #9,d3
@@ -106,7 +106,7 @@ loc_44D48:
 ; ---------------------------------------------------------------------------
 
 Obj_SSZCollapsingBridgeDiagonal:
-                move.l  #loc_44D98,(a0)
+                move.l  #SKSSZDiagBridge_CheckSlopeAndSaveRiders,(a0)
                 ori.b   #$44,render_flags(a0)
                 move.b  #$20,height_pixels(a0)
                 move.b  #$40,width_pixels(a0)
@@ -116,51 +116,51 @@ Obj_SSZCollapsingBridgeDiagonal:
                 move.b  #3,mapping_frame(a0)
                 bset    #7,status(a0)
 
-loc_44D98:
+SKSSZDiagBridge_CheckSlopeAndSaveRiders:
                 move.b  status(a0),d0
                 move.w  d0,-(sp)
                 moveq   #$40,d1
-                lea     byte_46658(pc),a2
+                lea     SKSSZDiagBridge_SlopeHeights(pc),a2
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectTopSloped2).l
                 move.w  (sp)+,d0
                 btst    #p1_standing_bit,d0
-                beq.s   loc_44DCE
+                beq.s   SKSSZDiagBridge_TryClearP2AirFlag
                 lea     (Player_1).w,a1
                 btst    #Status_InAir,status(a1)
-                beq.s   loc_44DCE
+                beq.s   SKSSZDiagBridge_TryClearP2AirFlag
                 tst.b   jumping(a1)
-                bne.s   loc_44DCE
+                bne.s   SKSSZDiagBridge_TryClearP2AirFlag
                 bclr    #Status_InAir,status(a1)
 
-loc_44DCE:
+SKSSZDiagBridge_TryClearP2AirFlag:
                 btst    #p2_standing_bit,d0
-                beq.s   loc_44DEC
+                beq.s   SKSSZDiagBridge_TryCollapseUnderRiders
                 lea     (Player_2).w,a1
                 btst    #Status_InAir,status(a1)
-                beq.s   loc_44DEC
+                beq.s   SKSSZDiagBridge_TryCollapseUnderRiders
                 tst.b   jumping(a1)
-                bne.s   loc_44DEC
+                bne.s   SKSSZDiagBridge_TryCollapseUnderRiders
                 bclr    #Status_InAir,status(a1)
 
-loc_44DEC:
+SKSSZDiagBridge_TryCollapseUnderRiders:
                 tst.b   subtype(a0)
-                bmi.s   loc_44DFC
+                bmi.s   SKSSZDiagBridge_DrawIntactSlope
                 move.b  status(a0),d0
                 andi.w  #standing_mask,d0
-                bne.s   loc_44E02
+                bne.s   SKSSZDiagBridge_SelectStandingRider
 
-loc_44DFC:
+SKSSZDiagBridge_DrawIntactSlope:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_44E02:
+SKSSZDiagBridge_SelectStandingRider:
                 lea     (Player_1).w,a1
                 btst    #p1_standing_bit,d0
-                bne.s   loc_44E10
+                bne.s   SKSSZDiagBridge_SetShardOrderAndSlope
                 lea     (Player_2).w,a1
 
-loc_44E10:
+SKSSZDiagBridge_SetShardOrderAndSlope:
                 moveq   #$38,d1
                 moveq   #$10,d2
                 move.w  #$405,d3
@@ -168,33 +168,33 @@ loc_44E10:
                 move.w  x_pos(a0),d4
                 cmp.w   x_pos(a1),d4
                 scc     $2E(a0)
-                bcs.s   loc_44E30
+                bcs.s   SKSSZDiagBridge_TryMirrorShardSlope
                 neg.w   d1
                 neg.w   d2
                 ror.w   #8,d3
                 neg.l   d6
 
-loc_44E30:
+SKSSZDiagBridge_TryMirrorShardSlope:
                 add.w   d4,d1
                 btst    #0,render_flags(a0)
-                beq.s   loc_44E3E
+                beq.s   SKSSZDiagBridge_AdjustInitialShardY
                 ror.w   #8,d3
                 neg.l   d6
 
-loc_44E3E:
+SKSSZDiagBridge_AdjustInitialShardY:
                 tst.l   d6
-                bmi.s   loc_44E44
+                bmi.s   SKSSZDiagBridge_TrySpawnFirstShard
                 addq.l  #8,d6
 
-loc_44E44:
+SKSSZDiagBridge_TrySpawnFirstShard:
                 moveq   #6,d4
                 moveq   #8-1,d5
                 swap    d7
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_44E9C
+                bne.s   SKSSZDiagBridge_BeginSlopeShrink
 
-loc_44E52:
-                move.l  #loc_45052,(a1)
+SKSSZDiagBridge_InitStaggeredShard:
+                move.l  #SKSSZBridgeShard_InitVisibleShard,(a1)
                 move.b  render_flags(a0),d7
                 andi.w  #$BF,d7
                 move.b  d7,render_flags(a1)
@@ -208,56 +208,57 @@ loc_44E52:
                 ror.w   #8,d3
                 addi.w  #6,d4
                 btst    #0,d5
-                bne.s   loc_44E92
+                bne.s   SKSSZDiagBridge_TryAllocNextShard
                 tst.l   d6
-                bmi.s   loc_44E90
+                bmi.s   SKSSZDiagBridge_StepNegativeShardY
                 subq.w  #8,d6
-                bra.s   loc_44E92
+                bra.s   SKSSZDiagBridge_TryAllocNextShard
 ; ---------------------------------------------------------------------------
 
-loc_44E90:
+SKSSZDiagBridge_StepNegativeShardY:
                 addq.w  #8,d6
 
-loc_44E92:
+SKSSZDiagBridge_TryAllocNextShard:
                 jsr     (CreateNewSprite4).l
-                dbne    d5,loc_44E52
+                dbne    d5,SKSSZDiagBridge_InitStaggeredShard
 
-loc_44E9C:
+SKSSZDiagBridge_BeginSlopeShrink:
                 swap    d7
-                move.l  #loc_44EBA,(a0)
+                move.l  #SKSSZDiagBridge_TickSlopeShrink,(a0)
                 move.w  #6,$30(a0)
                 move.w  #$40,$32(a0)
-                move.l  #byte_46658,$34(a0)
+                move.l  #SKSSZDiagBridge_SlopeHeights,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_44EBA:
+SKSSZDiagBridge_TickSlopeShrink:
                 subq.w  #1,$30(a0)
-                bne.s   loc_44EF6
+                bne.s   SKSSZDiagBridge_CheckReducedSlope
                 move.w  #6,$30(a0)
                 addq.l  #4,$34(a0)
                 subq.w  #8,$32(a0)
-                bne.s   loc_44ED6
+                bne.s   SKSSZDiagBridge_SelectRetreatSteps
                 move.w  #$7FFF,x_pos(a0)
 
-loc_44ED6:
+SKSSZDiagBridge_SelectRetreatSteps:
                 moveq   #8,d0
                 moveq   #2,d1
                 tst.b   $2E(a0)
-                bne.s   loc_44EE4
+                bne.s   SKSSZDiagBridge_ShiftXAndMirrorYStep
                 neg.w   d0
                 neg.w   d1
 
-loc_44EE4:
+SKSSZDiagBridge_ShiftXAndMirrorYStep:
                 add.w   d0,x_pos(a0)
                 btst    #0,render_flags(a0)
-                beq.s   loc_44EF2
+                beq.s   SKSSZDiagBridge_ApplyRetreatY
                 neg.w   d1
 
-loc_44EF2:
+SKSSZDiagBridge_ApplyRetreatY:
                 sub.w   d1,y_pos(a0)
 
-loc_44EF6:
+; Clear incidental airborne flags for previously standing riders only if they are not jumping
+SKSSZDiagBridge_CheckReducedSlope:
                 move.b  status(a0),d0
                 move.w  d0,-(sp)
                 move.w  $32(a0),d1
@@ -266,23 +267,23 @@ loc_44EF6:
                 jsr     (SolidObjectTopSloped2).l
                 move.w  (sp)+,d0
                 btst    #p1_standing_bit,d0
-                beq.s   loc_44F2E
+                beq.s   SKSSZDiagBridge_TryClearP2ShrinkAirFlag
                 lea     (Player_1).w,a1
                 btst    #Status_InAir,status(a1)
-                beq.s   loc_44F2E
+                beq.s   SKSSZDiagBridge_TryClearP2ShrinkAirFlag
                 tst.b   jumping(a1)
-                bne.s   loc_44F2E
+                bne.s   SKSSZDiagBridge_TryClearP2ShrinkAirFlag
                 bclr    #Status_InAir,status(a1)
 
-loc_44F2E:
+SKSSZDiagBridge_TryClearP2ShrinkAirFlag:
                 btst    #p2_standing_bit,d0
-                beq.s   loc_44F4C
+                beq.s   SKSSZDiagBridge_CullInvisibleSlope
                 lea     (Player_2).w,a1
                 btst    #Status_InAir,status(a1)
-                beq.s   loc_44F4C
+                beq.s   SKSSZDiagBridge_CullInvisibleSlope
                 tst.b   jumping(a1)
-                bne.s   loc_44F4C
+                bne.s   SKSSZDiagBridge_CullInvisibleSlope
                 bclr    #Status_InAir,status(a1)
 
-loc_44F4C:
+SKSSZDiagBridge_CullInvisibleSlope:
                 jmp     (Delete_Sprite_If_Not_In_Range).l

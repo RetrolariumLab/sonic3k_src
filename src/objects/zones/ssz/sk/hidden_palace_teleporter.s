@@ -5,7 +5,7 @@
 ; ---------------------------------------------------------------------------
 
 Obj_SSZHPZTeleporter:
-                move.l  #loc_455CC,(a0)
+                move.l  #SKSSZTeleporter_TryEnableHPZPalette,(a0)
                 move.b  #4,render_flags(a0)
                 move.b  #$10,height_pixels(a0)
                 move.b  #$18,width_pixels(a0)
@@ -14,122 +14,123 @@ Obj_SSZHPZTeleporter:
                 move.l  #Map_SSZHPZTeleporter,mappings(a0)
                 move.w  y_pos(a0),$16(a0)
                 move.b  subtype(a0),d0
-                bpl.s   loc_45574
+                bpl.s   SKSSZTeleporter_SelectZoneSetup
                 lea     (Events_bg+$00).w,a1
                 add.b   d0,d0
-                bpl.s   loc_4556A
+                bpl.s   SKSSZTeleporter_SelectRaisedStart
                 addq.w  #2,a1
 
-loc_4556A:
+SKSSZTeleporter_SelectRaisedStart:
                 tst.b   (a1)
-                bmi.s   loc_45574
+                bmi.s   SKSSZTeleporter_SelectZoneSetup
                 move.w  #$20,y_vel(a0)
 
-loc_45574:
+SKSSZTeleporter_SelectZoneSetup:
                 cmpi.w  #$1701,(Current_zone_and_act).w
-                beq.s   loc_455AC
+                beq.s   SKSSZTeleporter_InitAlternateZoneArt
                 cmpi.b  #$16,(Current_zone).w
-                bne.s   loc_455BA
+                bne.s   SKSSZBossPedestal_CheckEndBossPosition
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_45596
-                move.l  #loc_45B94,(a1)
+                bne.s   SKSSZTeleporter_InitHPZArtAndSubtype
+                move.l  #SKHPZDepartScene_SelectDepartureRoute,(a1)
                 move.w  a0,$2E(a1)
 
-loc_45596:
+SKSSZTeleporter_InitHPZArtAndSubtype:
                 move.w  #make_art_tile(ArtTile_HPZTeleporter,0,0),art_tile(a0)  ; If in HPZ, use this VRAM offset
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_455B2
+                bne.s   SKSSZTeleporter_InitFrameAndUpdate
                 move.b  #$4A,subtype(a0)
-                bra.s   loc_455B2
+                bra.s   SKSSZTeleporter_InitFrameAndUpdate
 ; ---------------------------------------------------------------------------
 
-loc_455AC:
+SKSSZTeleporter_InitAlternateZoneArt:
                 move.w  #make_art_tile(ArtTile_SSZMisc+$1b4,0,0),art_tile(a0)
 
-loc_455B2:
+SKSSZTeleporter_InitFrameAndUpdate:
                 move.b  #$A,mapping_frame(a0)
-                bra.s   loc_455CC
+                bra.s   SKSSZTeleporter_TryEnableHPZPalette
 ; ---------------------------------------------------------------------------
 
-loc_455BA:
+SKSSZBossPedestal_CheckEndBossPosition:
                 cmpi.w  #$1A00,x_pos(a0)
-                blo.s   loc_455CC
+                blo.s   SKSSZTeleporter_TryEnableHPZPalette
                 cmpi.w  #$680,y_pos(a0)
-                blo.w   loc_45A66
+                blo.w   SKSSZBossPedestal_InitBossSceneProp
 
-loc_455CC:
+SKSSZTeleporter_TryEnableHPZPalette:
                 cmpi.b  #$16,(Current_zone).w
-                bne.s   loc_455F8
+                bne.s   SKSSZTeleporter_ApplyYOffsetAndCycle
                 tst.b   render_flags(a0)
-                bpl.s   loc_455EE
+                bpl.s   SKSSZTeleporter_TryDisableHPZPalette
                 tst.b   $38(a0)
-                bne.s   loc_455F8
+                bne.s   SKSSZTeleporter_ApplyYOffsetAndCycle
                 move.l  #$40C0408,(Normal_palette_line_4+$2).w
                 st      (Palette_cycle_counters+$00).w
-                bra.s   loc_455F8
+                bra.s   SKSSZTeleporter_ApplyYOffsetAndCycle
 ; ---------------------------------------------------------------------------
 
-loc_455EE:
+SKSSZTeleporter_TryDisableHPZPalette:
                 tst.b   $38(a0)
-                bne.s   loc_455F8
+                bne.s   SKSSZTeleporter_ApplyYOffsetAndCycle
                 clr.b   (Palette_cycle_counters+$00).w
 
-loc_455F8:
+SKSSZTeleporter_ApplyYOffsetAndCycle:
                 move.w  $16(a0),d0
                 add.w   $1A(a0),d0
                 move.w  d0,y_pos(a0)
                 jsr     CycleSszHpzTeleporterPalettePair(pc)
                 tst.b   subtype(a0)
-                bne.s   loc_45616
+                bne.s   SKSSZTeleporter_TryCheckLoweredSlope
                 tst.b   (Events_bg+$04).w
-                bne.w   loc_456EE
+                bne.w   SKSSZTeleporter_DrawIdleSurface
 
-loc_45616:
+SKSSZTeleporter_TryCheckLoweredSlope:
                 tst.w   $1A(a0)
-                bne.s   loc_4562C
+                bne.s   SKSSZTeleporter_CheckSubtypeAndEvent
                 moveq   #$23,d1
-                lea     byte_466E8(pc),a2
+                lea     SKSSZTeleporter_SolidHeights(pc),a2
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectTopSloped2).l
 
-loc_4562C:
+SKSSZTeleporter_CheckSubtypeAndEvent:
                 lea     (Events_bg+$00).w,a1
                 move.b  subtype(a0),d0
-                beq.w   loc_456EE
-                bpl.s   loc_45660
+                beq.w   SKSSZTeleporter_DrawIdleSurface
+                bpl.s   SKSSZTeleporter_TryCaptureP1
                 add.b   d0,d0
-                bpl.s   loc_45640
+                bpl.s   SKSSZTeleporter_TickLowering
                 addq.w  #2,a1
 
-loc_45640:
+SKSSZTeleporter_TickLowering:
                 tst.b   (a1)
-                bpl.w   loc_456EE
+                bpl.w   SKSSZTeleporter_DrawIdleSurface
                 tst.w   $1A(a0)
-                beq.s   loc_45660
+                beq.s   SKSSZTeleporter_TryCaptureP1
                 move.w  (Level_frame_counter).w,d0
                 andi.w  #3,d0
-                bne.w   loc_456EE
+                bne.w   SKSSZTeleporter_DrawIdleSurface
                 subq.w  #1,y_vel(a0)
-                bra.w   loc_456EE
+                bra.w   SKSSZTeleporter_DrawIdleSurface
 ; ---------------------------------------------------------------------------
 
-loc_45660:
+; Take control of P1 only after the beam actor is allocated
+SKSSZTeleporter_TryCaptureP1:
                 btst    #p1_standing_bit,status(a0)
-                beq.w   loc_456EE
+                beq.w   SKSSZTeleporter_DrawIdleSurface
                 lea     (Player_1).w,a2
                 move.w  x_pos(a2),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$C,d0
                 cmpi.w  #$18,d0
-                bhs.s   loc_456EE
+                bhs.s   SKSSZTeleporter_DrawIdleSurface
                 tst.b   object_control(a2)
-                bne.w   loc_456EE
+                bne.w   SKSSZTeleporter_DrawIdleSurface
                 cmpi.b  #4,routine(a2)
-                bhs.w   loc_456EE
+                bhs.w   SKSSZTeleporter_DrawIdleSurface
                 tst.w   (Debug_placement_mode).w
-                bne.w   loc_456EE
+                bne.w   SKSSZTeleporter_DrawIdleSurface
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_456EE
+                bne.s   SKSSZTeleporter_DrawIdleSurface
                 move.w  a1,$3C(a0)
                 move.l  #Obj_TeleporterBeam,(a1)
                 move.w  a0,parent2(a1)
@@ -141,89 +142,90 @@ loc_45660:
                 clr.b   spin_dash_flag(a2)
                 move.b  #1,object_control(a2)
                 move.b  #5,anim(a2)
-                move.l  #loc_456F4,(a0)
+                move.l  #SKSSZTeleporter_TrackP1Charge,(a0)
                 move.w  #-$100,$38(a0)
                 moveq   #signextendB(sfx_Charging),d0
                 jsr     (Play_SFX).l
 
-loc_456EE:
+SKSSZTeleporter_DrawIdleSurface:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_456F4:
+SKSSZTeleporter_TrackP1Charge:
                 jsr     UpdateSszHpzTeleporterSurfaceAndPalette(pc)
                 lea     (Player_1).w,a1
                 movea.w $3C(a0),a2
                 cmpi.b  #8,$46(a2)
-                blt.w   loc_457B8
-                beq.w   loc_457A2
+                blt.w   SKSSZTeleporter_DrawCharge
+                beq.w   SKSSZTeleporter_RollP1AndSignalCapture
                 cmpi.b  #$18,$46(a2)
-                bhs.s   loc_45744
+                bhs.s   SKSSZTeleporter_SelectTravelCount
                 btst    #0,(Level_frame_counter+1).w
-                beq.w   loc_457B8
+                beq.w   SKSSZTeleporter_DrawCharge
                 subq.w  #1,y_pos(a1)
                 btst    #1,(Level_frame_counter+1).w
-                beq.w   loc_457B8
+                beq.w   SKSSZTeleporter_DrawCharge
                 moveq   #1,d1
                 move.w  x_pos(a1),d0
                 cmp.w   x_pos(a0),d0
-                beq.s   loc_457B8
-                bcs.s   loc_4573E
+                beq.s   SKSSZTeleporter_DrawCharge
+                bcs.s   SKSSZTeleporter_CenterChargingP1
                 neg.w   d1
 
-loc_4573E:
+SKSSZTeleporter_CenterChargingP1:
                 add.w   d1,x_pos(a1)
-                bra.s   loc_457B8
+                bra.s   SKSSZTeleporter_DrawCharge
 ; ---------------------------------------------------------------------------
 
-loc_45744:
-                move.l  #loc_457BE,(a0)
+; Hidden Palace uses the full subtype. Other zones mask it to six bits
+SKSSZTeleporter_SelectTravelCount:
+                move.l  #SKSSZTeleporter_TravelUpOrRebound,(a0)
                 move.b  subtype(a0),d0
                 cmpi.b  #$16,(Current_zone).w
-                beq.s   loc_4575A
+                beq.s   SKSSZTeleporter_BeginP1Travel
                 andi.w  #$3F,d0
 
-loc_4575A:
+SKSSZTeleporter_BeginP1Travel:
                 move.b  d0,$2D(a0)
                 move.b  #3,object_control(a1)
                 moveq   #0,d0
                 move.b  d0,anim(a1)
                 move.b  d0,mapping_frame(a1)
                 cmpi.b  #$16,(Current_zone).w
-                bne.s   loc_4577E
+                bne.s   SKSSZTeleporter_SetNonHPZCameraYBounds
                 move.w  #$AA0,(Camera_min_X_pos).w
-                bra.s   loc_45790
+                bra.s   SKSSZTeleporter_ClearEventAndLockScroll
 ; ---------------------------------------------------------------------------
 
-loc_4577E:
+SKSSZTeleporter_SetNonHPZCameraYBounds:
                 move.w  #-$100,(Camera_min_Y_pos).w
                 move.w  #$1000,d0
                 move.w  d0,(Camera_max_Y_pos).w
                 move.w  d0,(Camera_target_max_Y_pos).w
 
-loc_45790:
+SKSSZTeleporter_ClearEventAndLockScroll:
                 clr.b   (Events_bg+$05).w
                 moveq   #signextendB(sfx_Transporter),d0
                 jsr     (Play_SFX).l
                 st      (Scroll_lock).w
-                bra.s   loc_457B8
+                bra.s   SKSSZTeleporter_DrawCharge
 ; ---------------------------------------------------------------------------
 
-loc_457A2:
+SKSSZTeleporter_RollP1AndSignalCapture:
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_Roll,status(a1)
                 move.b  #2,anim(a1)
                 st      (Events_bg+$04).w
 
-loc_457B8:
+SKSSZTeleporter_DrawCharge:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_457BE:
+SKSSZTeleporter_TravelUpOrRebound:
                 jsr     UpdateSszHpzTeleporterSurfaceAndPalette(pc)
                 lea     (Player_1).w,a1
                 tst.b   $2D(a0)
-                bne.s   loc_45804
+                bne.s   SKSSZTeleporter_StepUpwardTravel
                 move.b  #1,object_control(a1)
                 move.b  #2,anim(a1)
                 bset    #Status_Roll,status(a1)
@@ -234,21 +236,22 @@ loc_457BE:
                 clr.b   (Scroll_lock).w
                 movea.w $3C(a0),a1
                 st      routine(a1)
-                move.l  #loc_4581C,(a0)
+                move.l  #SKSSZTeleporter_SwingP1AtArrival,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_45804:
+; Move P1 by 16 pixels each step. Keep the camera fixed on the last step
+SKSSZTeleporter_StepUpwardTravel:
                 subi.w  #$10,y_pos(a1)
                 subq.b  #1,$2D(a0)
-                beq.s   loc_45816
+                beq.s   SKSSZTeleporter_DrawTravel
                 subi.w  #$10,(Camera_Y_pos).w
 
-loc_45816:
+SKSSZTeleporter_DrawTravel:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_4581C:
+SKSSZTeleporter_SwingP1AtArrival:
                 jsr     UpdateSszHpzTeleporterSurfaceAndPalette(pc)
                 lea     (Player_1).w,a1
                 move.l  #$20000,d0
@@ -257,20 +260,20 @@ loc_4581C:
                 add.w   $3E(a0),d0
                 move.w  d0,y_pos(a1)
                 tst.l   $2E(a0)
-                bmi.s   locret_45854
+                bmi.s   SKSSZTeleporter_ArrivalReturn
                 clr.b   object_control(a1)
                 clr.b   anim(a1)
                 clr.b   (Events_bg+$04).w
-                move.l  #loc_455CC,(a0)
+                move.l  #SKSSZTeleporter_TryEnableHPZPalette,(a0)
 
-locret_45854:
+SKSSZTeleporter_ArrivalReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
 UpdateSszHpzTeleporterSurfaceAndPalette:
                 moveq   #$23,d1
-                lea     byte_466E8(pc),a2
+                lea     SKSSZTeleporter_SolidHeights(pc),a2
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectTopSloped2).l
 ; End of function UpdateSszHpzTeleporterSurfaceAndPalette
@@ -279,37 +282,37 @@ UpdateSszHpzTeleporterSurfaceAndPalette:
 
 CycleSszHpzTeleporterPalettePair:
                 tst.b   $39(a0)
-                beq.s   loc_45872
+                beq.s   SKSSZTeleporter_TickPaletteAtRest
                 subq.b  #1,$39(a0)
-                bra.s   locret_458B2
+                bra.s   SKSSZTeleporter_PaletteCycleReturn
 ; ---------------------------------------------------------------------------
 
-loc_45872:
+SKSSZTeleporter_TickPaletteAtRest:
                 move.b  #3,$39(a0)
                 move.w  $3A(a0),d0
-                bne.s   loc_45884
+                bne.s   SKSSZTeleporter_NextPalettePair
                 tst.b   $38(a0)
-                beq.s   locret_458B2
+                beq.s   SKSSZTeleporter_PaletteCycleReturn
 
-loc_45884:
+SKSSZTeleporter_NextPalettePair:
                 addq.w  #4,d0
                 cmpi.w  #$28,d0
-                blo.s   loc_4588E
+                blo.s   SKSSZTeleporter_WriteZonePalettePair
                 moveq   #0,d0
 
-loc_4588E:
+SKSSZTeleporter_WriteZonePalettePair:
                 move.w  d0,$3A(a0)
-                lea     word_4670C(pc),a1
+                lea     SKSSZTeleporter_PaletteCyclePairs(pc),a1
                 cmpi.b  #$A,(Current_zone).w
-                bne.s   loc_458A6
+                bne.s   SKSSZTeleporter_WriteReversedLine4Pair
                 move.l  (a1,d0.w),(Normal_palette_line_3+$18).w
-                bra.s   locret_458B2
+                bra.s   SKSSZTeleporter_PaletteCycleReturn
 ; ---------------------------------------------------------------------------
 
-loc_458A6:
+SKSSZTeleporter_WriteReversedLine4Pair:
                 move.w  2(a1,d0.w),(Normal_palette_line_4+$2).w
                 move.w  (a1,d0.w),(Normal_palette_line_4+$4).w
 
-locret_458B2:
+SKSSZTeleporter_PaletteCycleReturn:
                 rts
 ; End of function CycleSszHpzTeleporterPalettePair

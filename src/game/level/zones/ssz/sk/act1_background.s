@@ -6,15 +6,15 @@
 SSZ1_BackgroundInit:
                 clr.w   (Events_bg+$10).w
                 jsr     (AllocateObject).l
-                bne.s   loc_57840
-                move.l  #loc_57B6A,(a1)
-                lea     word_5853E(pc),a5
+                bne.s   SKSSZ1BG_SelectInitialAltitudeMode
+                move.l  #SKSSZ1BG_InitSharedBobController,(a1)
+                lea     SKSSZ1Geometry_SlopeSolidSpawnRecords(pc),a5
                 move.w  (a5)+,d1
 
-loc_57812:
+SKSSZ1BG_TrySpawnBobbingSolid:
                 jsr     (CreateNewSprite4).l
-                bne.s   loc_57840
-                move.l  #loc_57B8E,(a1)
+                bne.s   SKSSZ1BG_SelectInitialAltitudeMode
+                move.l  #SKSSZ1BG_PlaceBobbingSlopedSolid,(a1)
                 move.w  (a5)+,d2
                 move.b  d2,render_flags(a1)
                 move.b  #$80,height_pixels(a1)
@@ -22,24 +22,24 @@ loc_57812:
                 move.w  (a5)+,y_vel(a1)
                 move.w  (a5)+,$2E(a1)
                 move.l  (a5)+,$30(a1)
-                dbf     d1,loc_57812
+                dbf     d1,SKSSZ1BG_TrySpawnBobbingSolid
 
-loc_57840:
+SKSSZ1BG_SelectInitialAltitudeMode:
                 move.w  (Camera_Y_pos).w,d0
                 and.w   (Screen_Y_wrap_value).w,d0
                 cmpi.w  #$800,d0
-                blo.s   loc_57854
+                blo.s   SKSSZ1BG_RefreshOrdinaryBackground
                 cmpi.w  #$F00,d0
-                blo.s   loc_5786A
+                blo.s   SKSSZ1BG_RefreshMidAltitudeBackground
 
-loc_57854:
+SKSSZ1BG_RefreshOrdinaryBackground:
                 jsr     SetSsz1OrdinaryBackgroundAlignment(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 jsr     (Refresh_PlaneFull).l
                 jmp     (PlainDeformation).l
 ; ---------------------------------------------------------------------------
 
-loc_5786A:
+SKSSZ1BG_RefreshMidAltitudeBackground:
                 move.w  #8,(Events_routine_bg).w
                 jsr     SSZ1_BuildMidAltitudeParallax(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
@@ -56,22 +56,22 @@ SSZ1_BackgroundEvent:
 ; ---------------------------------------------------------------------------
 
 SSZ1_BackgroundEvent_Index:
-                bra.w   loc_578AA
+                bra.w   SKSSZ1BG_TryEnterMidAltitude
 ; ---------------------------------------------------------------------------
-                bra.w   loc_57942
+                bra.w   SKSSZ1BG_PositionMidAltitudeEntry
 ; ---------------------------------------------------------------------------
-                bra.w   loc_57960
+                bra.w   SKSSZ1BG_CheckMidAltitudeRange
 ; ---------------------------------------------------------------------------
-                bra.w   loc_579D2
+                bra.w   SKSSZ1BG_PositionOrdinaryReturn
 ; ---------------------------------------------------------------------------
 
-loc_578AA:
+SKSSZ1BG_TryEnterMidAltitude:
                 move.w  (Camera_Y_pos).w,d0
                 and.w   (Screen_Y_wrap_value).w,d0
                 cmpi.w  #$800,d0
-                blo.s   loc_578EC
+                blo.s   SKSSZ1BG_PositionOrdinaryBackground
                 cmpi.w  #$F00,d0
-                bhs.s   loc_578EC
+                bhs.s   SKSSZ1BG_PositionOrdinaryBackground
                 move.w  (Camera_X_pos_BG_copy).w,(Events_bg+$0C).w
                 move.w  (Camera_Y_pos_BG_copy).w,(Events_bg+$0E).w
                 jsr     SSZ1_BuildMidAltitudeParallax(pc)
@@ -81,65 +81,66 @@ loc_578AA:
                 move.w  d0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_57946
+                bra.s   SKSSZ1BG_RedrawMidAltitudeBottomUp
 ; ---------------------------------------------------------------------------
 
-loc_578EC:
+SKSSZ1BG_PositionOrdinaryBackground:
                 jsr     SetSsz1OrdinaryBackgroundAlignment(pc)
 
-loc_578F0:
+SKSSZ1BG_DrawOrdinaryAndSelectScroll:
                 jsr     (DrawBGAsYouMove).l
                 jsr     (PlainDeformation).l
                 jsr     (ShakeScreen_Setup).l
                 tst.w   (_unkEE98).w
-                bne.s   loc_57916
-                lea     word_577B2(pc),a4
+                bne.s   SKSSZ1BG_TryAppendEscapePlaneCommand
+                lea     SKSSZ1FG_CollapseStripSpans(pc),a4
                 lea     (HScroll_table+$0BE).w,a5
                 jmp     (Apply_FGVScroll).l
 ; ---------------------------------------------------------------------------
 
-loc_57916:
+SKSSZ1BG_TryAppendEscapePlaneCommand:
                 move.w  (_unkEEFA).w,d0
-                beq.s   loc_57932
+                beq.s   SKSSZ1BG_ApplyEscapeVScroll
                 clr.w   (_unkEEFA).w
                 move.w  d0,(a0)+
                 move.w  #7,(a0)+
                 moveq   #$20-1,d0
 
-loc_57928:
+SKSSZ1BG_WriteEscapePlaneFill:
                 move.w  #$6061,(a0)+
-                dbf     d0,loc_57928
+                dbf     d0,SKSSZ1BG_WriteEscapePlaneFill
                 clr.w   (a0)
 
-loc_57932:
+; Skip the caller's remaining screen-event work after writing the private escape scroll
+SKSSZ1BG_ApplyEscapeVScroll:
                 move.w  (_unkEEEE).w,(V_scroll_value).w
                 move.w  (Camera_Y_pos_BG_copy).w,(V_scroll_value_BG).w
                 addq.w  #4,sp
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57942:
+SKSSZ1BG_PositionMidAltitudeEntry:
                 jsr     SSZ1_BuildMidAltitudeParallax(pc)
 
-loc_57946:
+SKSSZ1BG_RedrawMidAltitudeBottomUp:
                 move.w  #$1C00,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 jsr     (Draw_PlaneVertBottomUp).l
-                bpl.s   loc_5799A
+                bpl.s   SKSSZ1BG_DrawMidAltitudeAndSetScroll
                 clr.w   (Events_bg+$0C).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_5799A
+                bra.s   SKSSZ1BG_DrawMidAltitudeAndSetScroll
 ; ---------------------------------------------------------------------------
 
-loc_57960:
+SKSSZ1BG_CheckMidAltitudeRange:
                 move.w  (Camera_Y_pos).w,d0
                 and.w   (Screen_Y_wrap_value).w,d0
                 cmpi.w  #$800,d0
-                blo.s   loc_57974
+                blo.s   SKSSZ1BG_BeginOrdinaryRedraw
                 cmpi.w  #$F00,d0
-                blo.s   loc_57996
+                blo.s   SKSSZ1BG_PositionSteadyMidAltitude
 
-loc_57974:
+SKSSZ1BG_BeginOrdinaryRedraw:
                 jsr     SetSsz1OrdinaryBackgroundAlignment(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 addi.w  #$E0,d0
@@ -147,49 +148,49 @@ loc_57974:
                 move.w  d0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_579D6
+                bra.s   SKSSZ1BG_RedrawOrdinaryBottomUp
 ; ---------------------------------------------------------------------------
 
-loc_57996:
+SKSSZ1BG_PositionSteadyMidAltitude:
                 jsr     SSZ1_BuildMidAltitudeParallax(pc)
 
-loc_5799A:
+SKSSZ1BG_DrawMidAltitudeAndSetScroll:
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
                 move.w  #$1C00,d1
                 moveq   #$20,d6
                 jsr     (Draw_TileRow).l
                 move.w  (Events_bg+$0C).w,d0
-                beq.s   loc_579C4
+                beq.s   SKSSZ1BG_ApplyMidAltitudeParallax
                 move.w  d0,(Camera_X_pos_BG_copy).w
                 move.w  (Events_bg+$0E).w,(Camera_Y_pos_BG_copy).w
                 jmp     (PlainDeformation).l
 ; ---------------------------------------------------------------------------
 
-loc_579C4:
+SKSSZ1BG_ApplyMidAltitudeParallax:
                 lea     SSZ1_BGDeformArray(pc),a4
                 lea     (HScroll_table+$004).w,a5
                 jmp     (ApplyDeformation).l
 ; ---------------------------------------------------------------------------
 
-loc_579D2:
+SKSSZ1BG_PositionOrdinaryReturn:
                 jsr     SetSsz1OrdinaryBackgroundAlignment(pc)
 
-loc_579D6:
+SKSSZ1BG_RedrawOrdinaryBottomUp:
                 move.w  (Camera_X_pos_BG_copy).w,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 jsr     (Draw_PlaneVertSingleBottomUp).l
-                bpl.w   loc_578F0
+                bpl.w   SKSSZ1BG_DrawOrdinaryAndSelectScroll
                 clr.w   (Events_routine_bg).w
-                bra.w   loc_578F0
+                bra.w   SKSSZ1BG_DrawOrdinaryAndSelectScroll
 
 ; =============== S U B R O U T I N E =======================================
 
 SetSsz1OrdinaryBackgroundAlignment:
                 tst.w   (Events_bg+$10).w
-                bne.s   loc_57A30
+                bne.s   SKSSZ1BG_CheckLeftAlignmentReturn
                 cmpi.w  #$1800,(Camera_X_pos).w
-                blo.s   loc_57A12
+                blo.s   SKSSZ1BG_AlignLeftWithBob
                 st      (Events_bg+$10).w
                 bsr.s   SetSsz1OrdinaryBackgroundAlignment
                 move.w  (Camera_X_pos_BG_copy).w,d0
@@ -198,7 +199,7 @@ SetSsz1OrdinaryBackgroundAlignment:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57A12:
+SKSSZ1BG_AlignLeftWithBob:
                 move.w  (Camera_Y_pos_copy).w,d0
                 addi.w  #$160,d0
                 add.w   (_unkEE9C).w,d0
@@ -209,9 +210,9 @@ loc_57A12:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57A30:
+SKSSZ1BG_CheckLeftAlignmentReturn:
                 cmpi.w  #$1800,(Camera_X_pos).w
-                bhs.s   loc_57A4C
+                bhs.s   SKSSZ1BG_AlignRightWithoutBob
                 clr.w   (Events_bg+$10).w
                 bsr.s   SetSsz1OrdinaryBackgroundAlignment
                 move.w  (Camera_X_pos_BG_copy).w,d0
@@ -220,7 +221,7 @@ loc_57A30:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57A4C:
+SKSSZ1BG_AlignRightWithoutBob:
                 move.w  (Camera_Y_pos_copy).w,d0
                 addi.w  #$180,d0
                 move.w  d0,(Camera_Y_pos_BG_copy).w
@@ -328,11 +329,11 @@ SSZ1_BuildMidAltitudeParallax:
 
 ; ---------------------------------------------------------------------------
 
-loc_57B6A:
-                move.l  #loc_57B76,(a0)
+SKSSZ1BG_InitSharedBobController:
+                move.l  #SKSSZ1BG_StepSharedBobOffset,(a0)
                 move.w  #$8000,$30(a0)
 
-loc_57B76:
+SKSSZ1BG_StepSharedBobOffset:
                 move.l  #$8000,d0
                 move.l  #$100,d1
                 jsr     (Gradual_SwingOffset).l
@@ -340,7 +341,7 @@ loc_57B76:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57B8E:
+SKSSZ1BG_PlaceBobbingSlopedSolid:
                 bset    #7,status(a0)
                 move.w  y_vel(a0),d0
                 sub.w   (_unkEE9C).w,d0
@@ -351,8 +352,8 @@ loc_57B8E:
                 jmp     (SolidObjectTopSloped2).l
 ; ---------------------------------------------------------------------------
 
-loc_57BB2:
-                move.l  #loc_57BF6,(a0)
+SKSSZ1BG_InitRoamingCloud:
+                move.l  #SKSSZ1BG_BobCloudAndMoveX,(a0)
                 move.b  #$40,render_flags(a0)
                 move.b  #$10,height_pixels(a0)
                 move.b  #$30,width_pixels(a0)
@@ -365,7 +366,7 @@ loc_57BB2:
                 addi.w  #$C00,d0
                 move.w  d0,$30(a0)
 
-loc_57BF6:
+SKSSZ1BG_BobCloudAndMoveX:
                 move.l  #$1C00,d0
                 move.l  #$80,d1
                 jsr     (Gradual_SwingOffset).l

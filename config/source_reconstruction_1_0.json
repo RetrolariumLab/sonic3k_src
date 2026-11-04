@@ -1131,9 +1131,15 @@
       "commits": ["13cf5bcff1963d52d802c225a4186d6795f1c986"]
     },
     {
-      "id": "current-shorten-32-zone-lrz",
+      "id": "change-42f3a3301e5f",
       "kind": "source_or_tooling",
       "summary": "Apply 586 reviewed short labels for lrz.",
+      "commits": ["42f3a3301e5f4f967b24fa50c7fb8e31b0780fe2"]
+    },
+    {
+      "id": "current-shorten-33-zone-ssz",
+      "kind": "source_or_tooling",
+      "summary": "Apply 465 reviewed short labels for ssz.",
       "commits": ["release-commit"]
     }
   ],

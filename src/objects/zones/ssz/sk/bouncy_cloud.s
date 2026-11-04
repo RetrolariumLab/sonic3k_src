@@ -4,7 +4,7 @@
 ; ---------------------------------------------------------------------------
 
 Obj_SSZBouncyCloud:
-                move.l  #loc_450EC,(a0)
+                move.l  #SKSSZCloud_MoveAndSelectRiderOffset,(a0)
                 move.b  #4,render_flags(a0)
                 move.b  #$10,height_pixels(a0)
                 move.b  #$20,width_pixels(a0)
@@ -18,7 +18,7 @@ Obj_SSZBouncyCloud:
                 addi.w  #$C00,d0
                 move.w  d0,$30(a0)
 
-loc_450EC:
+SKSSZCloud_MoveAndSelectRiderOffset:
                 move.l  #$1C00,d0
                 move.l  #$80,d1
                 jsr     Gradual_SwingOffset(pc)
@@ -27,37 +27,38 @@ loc_450EC:
                 move.b  $46(a0),d2
                 move.b  d1,d3
                 or.b    d2,d3
-                beq.s   loc_4511A
+                beq.s   SKSSZCloud_SelectRecoveryByTimer
                 cmp.b   d2,d1
-                bhs.s   loc_45114
+                bhs.s   SKSSZCloud_ApplyCompression
                 exg     d1,d2
 
-loc_45114:
+; Choose the larger compression as an unsigned byte, then sign-extend it for Y
+SKSSZCloud_ApplyCompression:
                 ext.w   d1
                 add.w   d1,d0
-                bra.s   loc_45134
+                bra.s   SKSSZCloud_StoreYAndTickCooldown
 ; ---------------------------------------------------------------------------
 
-loc_4511A:
+SKSSZCloud_SelectRecoveryByTimer:
                 move.b  $39(a0),d1
                 move.b  $3F(a0),d2
                 move.b  $41(a0),d3
                 move.b  $47(a0),d4
                 cmp.b   d3,d1
-                bhs.s   loc_45130
+                bhs.s   SKSSZCloud_ApplyRecoveryOffset
                 exg     d2,d4
 
-loc_45130:
+SKSSZCloud_ApplyRecoveryOffset:
                 ext.w   d2
                 add.w   d2,d0
 
-loc_45134:
+SKSSZCloud_StoreYAndTickCooldown:
                 move.w  d0,y_pos(a0)
                 tst.b   routine(a0)
-                beq.s   loc_45142
+                beq.s   SKSSZCloud_UpdateRidersAndDraw
                 subq.b  #1,routine(a0)
 
-loc_45142:
+SKSSZCloud_UpdateRidersAndDraw:
                 move.b  $2D(a0),anim(a0)
                 lea     (Player_1).w,a1
                 lea     $38(a0),a2
@@ -81,9 +82,9 @@ SSZCloud_UpdateBounceAndSpin:
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectTop_1P).l
                 tst.b   (a2)
-                bne.s   loc_451C2
+                bne.s   SKSSZCloud_TickCompressionOrSpin
                 btst    d6,status(a0)
-                beq.s   locret_451C0
+                beq.s   SKSSZCloud_RiderCaptureReturn
                 move.w  x_vel(a1),2(a2)
                 move.w  ground_vel(a1),4(a2)
                 clr.w   x_vel(a1)
@@ -91,30 +92,30 @@ SSZCloud_UpdateBounceAndSpin:
                 move.b  #1,anim(a0)
                 move.b  #1,flip_type(a0)
                 move.b  routine(a0),d0
-                bne.s   loc_451B6
+                bne.s   SKSSZCloud_BeginRiderCompression
                 moveq   #7,d0
                 move.b  d0,routine(a0)
 
-loc_451B6:
+SKSSZCloud_BeginRiderCompression:
                 move.b  d0,(a2)
-                move.b  (byte_4669F).l,6(a2)
+                move.b  (SKSSZCloud_InitialCompressionSample).l,6(a2)
 
-locret_451C0:
+SKSSZCloud_RiderCaptureReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_451C2:
-                bmi.w   loc_4527A
+SKSSZCloud_TickCompressionOrSpin:
+                bmi.w   SKSSZCloud_CheckSpinAndSampleRecovery
                 subq.b  #1,(a2)
-                beq.s   loc_451DC
+                beq.s   SKSSZCloud_LaunchRiderAndSelectSpin
                 move.b  (a2),d0
                 ext.w   d0
-                lea     byte_46698(pc),a3
+                lea     SKSSZCloud_CompressionSamples(pc),a3
                 move.b  (a3,d0.w),6(a2)
-                bra.w   locret_45278
+                bra.w   SKSSZCloud_BounceReturn
 ; ---------------------------------------------------------------------------
 
-loc_451DC:
+SKSSZCloud_LaunchRiderAndSelectSpin:
                 moveq   #signextendB(sfx_Bouncy),d0
                 jsr     (Play_SFX).l
                 move.w  2(a2),x_vel(a1)
@@ -129,23 +130,23 @@ loc_451DC:
                 st      (a2)
                 moveq   #-$1C,d0
                 btst    #0,status(a1)
-                bne.s   loc_45226
+                bne.s   SKSSZCloud_BeginRecoveryAndSpawnFx
                 neg.w   d0
                 bclr    #0,(a2)
 
-loc_45226:
+SKSSZCloud_BeginRecoveryAndSpawnFx:
                 move.b  d0,angle(a1)
                 clr.b   $2D(a0)
                 clr.b   6(a2)
                 move.b  #$26,1(a2)
-                lea     word_466C8(pc),a3
+                lea     SKSSZCloud_BounceParticleRecords(pc),a3
                 move.w  x_pos(a1),d1
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   locret_45278
+                bne.s   SKSSZCloud_BounceReturn
                 moveq   #4-1,d2
 
-loc_4524A:
-                move.l  #loc_452DA,(a1)
+SKSSZCloud_InitBounceParticle:
+                move.l  #SKSSZCloudFx_CheckSpawnBounds,(a1)
                 move.w  a0,$2E(a1)
                 move.w  (a3)+,d3
                 add.w   d1,d3
@@ -156,90 +157,90 @@ loc_4524A:
                 move.w  (a3)+,x_vel(a1)
                 move.w  (a3)+,y_vel(a1)
                 jsr     (CreateNewSprite4).l
-                dbne    d2,loc_4524A
+                dbne    d2,SKSSZCloud_InitBounceParticle
 
-locret_45278:
+SKSSZCloud_BounceReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4527A:
+SKSSZCloud_CheckSpinAndSampleRecovery:
                 tst.b   $2E(a1)
-                bne.s   loc_452D6
+                bne.s   SKSSZCloud_ClearSpinMarker
                 move.b  status(a1),d0
                 btst    #1,d0
-                beq.s   loc_452D6
+                beq.s   SKSSZCloud_ClearSpinMarker
                 andi.w  #$28,d0
-                bne.s   loc_452D6
+                bne.s   SKSSZCloud_ClearSpinMarker
                 move.b  1(a2),d0
                 ext.w   d0
-                lea     byte_466A0(pc),a3
+                lea     SKSSZCloud_RecoverySamples(pc),a3
                 move.b  (a3,d0.w),7(a2)
                 subq.b  #1,d0
-                bmi.s   loc_452A8
+                bmi.s   SKSSZCloud_SelectSpinStep
                 move.b  d0,1(a2)
 
-loc_452A8:
+SKSSZCloud_SelectSpinStep:
                 move.b  angle(a1),d0
                 move.l  #$60002,d1
                 btst    #0,(a2)
-                bne.s   loc_452C4
+                bne.s   SKSSZCloud_SelectReverseSpinRate
                 tst.b   d0
-                bmi.s   loc_452BE
+                bmi.s   SKSSZCloud_StepSpinForward
                 swap    d1
 
-loc_452BE:
+SKSSZCloud_StepSpinForward:
                 add.b   d1,d0
-                bcc.s   loc_452D0
-                bra.s   loc_452CE
+                bcc.s   SKSSZCloud_StoreSpinAngle
+                bra.s   SKSSZCloud_ZeroWrappedAngle
 ; ---------------------------------------------------------------------------
 
-loc_452C4:
+SKSSZCloud_SelectReverseSpinRate:
                 tst.b   d0
-                bpl.s   loc_452CA
+                bpl.s   SKSSZCloud_StepSpinBackward
                 swap    d1
 
-loc_452CA:
+SKSSZCloud_StepSpinBackward:
                 sub.b   d1,d0
-                bcc.s   loc_452D0
+                bcc.s   SKSSZCloud_StoreSpinAngle
 
-loc_452CE:
+SKSSZCloud_ZeroWrappedAngle:
                 moveq   #0,d0
 
-loc_452D0:
+SKSSZCloud_StoreSpinAngle:
                 move.b  d0,angle(a1)
-                bne.s   locret_452D8
+                bne.s   SKSSZCloud_SpinReturn
 
-loc_452D6:
+SKSSZCloud_ClearSpinMarker:
                 clr.b   (a2)
 
-locret_452D8:
+SKSSZCloud_SpinReturn:
                 rts
 ; End of function SSZCloud_UpdateBounceAndSpin
 
 ; ---------------------------------------------------------------------------
 
-loc_452DA:
+SKSSZCloudFx_CheckSpawnBounds:
                 movea.w $2E(a0),a1
                 move.w  x_pos(a1),d0
                 tst.w   x_vel(a0)
-                bpl.s   loc_452F4
+                bpl.s   SKSSZCloudFx_CheckRightSpawnBound
                 subi.w  #$18,d0
                 cmp.w   x_pos(a0),d0
-                bls.s   loc_45304
-                bra.s   loc_452FE
+                bls.s   SKSSZCloudFx_InitParticle
+                bra.s   SKSSZCloudFx_DeleteParticle
 ; ---------------------------------------------------------------------------
 
-loc_452F4:
+SKSSZCloudFx_CheckRightSpawnBound:
                 addi.w  #$18,d0
                 cmp.w   x_pos(a0),d0
-                bhs.s   loc_45304
+                bhs.s   SKSSZCloudFx_InitParticle
 
-loc_452FE:
+SKSSZCloudFx_DeleteParticle:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_45304:
-                move.l  #loc_45336,(a0)
+SKSSZCloudFx_InitParticle:
+                move.l  #SKSSZCloudFx_TickParticleAnimation,(a0)
                 move.b  #4,render_flags(a0)
                 move.b  #4,height_pixels(a0)
                 move.b  #4,width_pixels(a0)
@@ -248,14 +249,14 @@ loc_45304:
                 move.l  #Map_SSZBouncyCloud,mappings(a0)
                 move.b  #2,anim(a0)
 
-loc_45336:
+SKSSZCloudFx_TickParticleAnimation:
                 lea     Ani_SSZBouncyCloud(pc),a1
                 jsr     (Animate_SpriteIrregularDelay).l
                 tst.b   routine(a0)
-                beq.s   loc_4534C
+                beq.s   SKSSZCloudFx_MoveAndDampParticle
                 move.l  #Delete_Current_Sprite,(a0)
 
-loc_4534C:
+SKSSZCloudFx_MoveAndDampParticle:
                 jsr     (MoveSprite2).l
                 lea     x_vel(a0),a1
                 bsr.s   DampSszCloudParticleVelocity

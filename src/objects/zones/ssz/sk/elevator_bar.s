@@ -5,7 +5,7 @@
 ; ---------------------------------------------------------------------------
 
 Obj_SSZElevatorBar:
-                move.l  #loc_4539E,(a0)
+                move.l  #SKSSZElevatorBar_MoveBarAndGetP1Offset,(a0)
                 move.b  #4,render_flags(a0)
                 move.b  #4,height_pixels(a0)
                 move.b  #$30,width_pixels(a0)
@@ -14,7 +14,7 @@ Obj_SSZElevatorBar:
                 move.l  #Map_SSZElevatorBar,mappings(a0)
                 move.w  y_pos(a0),y_vel(a0)
 
-loc_4539E:
+SKSSZElevatorBar_MoveBarAndGetP1Offset:
                 move.l  #$18000,d0
                 move.l  #$480,d1
                 jsr     Gradual_SwingOffset(pc)
@@ -25,10 +25,10 @@ loc_4539E:
                 move.w  (Ctrl_1_logical).w,d0
                 moveq   #$14,d1
                 cmpi.w  #2,(Player_mode).w
-                bne.s   loc_453CE
+                bne.s   SKSSZElevatorBar_UpdateBothRiders
                 moveq   #$11,d1
 
-loc_453CE:
+SKSSZElevatorBar_UpdateBothRiders:
                 bsr.s   UpdatePlayerHangingFromSszElevatorBar
                 lea     (Player_2).w,a1
                 lea     $39(a0),a2
@@ -41,29 +41,29 @@ loc_453CE:
 
 UpdatePlayerHangingFromSszElevatorBar:
                 tst.b   (a2)
-                bne.w   loc_4548A
+                bne.w   SKSSZElevatorBar_CarryOrReleaseHurtRider
                 tst.b   2(a2)
-                beq.s   loc_45400
+                beq.s   SKSSZElevatorBar_TryCaptureRider
                 subq.b  #1,2(a2)
-                bne.w   locret_45526
+                bne.w   SKSSZElevatorBar_RiderUpdateReturn
                 move.w  #$180,priority(a0)
 
-loc_45400:
+SKSSZElevatorBar_TryCaptureRider:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$28,d0
                 cmpi.w  #$50,d0
-                bhs.w   locret_45526
+                bhs.w   SKSSZElevatorBar_RiderUpdateReturn
                 move.w  y_pos(a1),d0
                 sub.w   y_pos(a0),d0
                 cmpi.w  #$18,d0
-                bhs.w   locret_45526
+                bhs.w   SKSSZElevatorBar_RiderUpdateReturn
                 tst.b   object_control(a1)
-                bne.w   locret_45526
+                bne.w   SKSSZElevatorBar_RiderUpdateReturn
                 cmpi.b  #4,routine(a1)
-                bhs.w   locret_45526
+                bhs.w   SKSSZElevatorBar_RiderUpdateReturn
                 tst.w   (Debug_placement_mode).w
-                bne.w   locret_45526
+                bne.w   SKSSZElevatorBar_RiderUpdateReturn
                 moveq   #signextendB(sfx_Grab),d0
                 jsr     (Play_SFX).l
                 st      (a2)
@@ -77,30 +77,30 @@ loc_45400:
                 clr.b   anim(a1)
                 move.w  #$E5,d0
                 btst    #Status_Facing,status(a1)
-                beq.s   loc_4547C
+                beq.s   SKSSZElevatorBar_ApplyHangingFrame
                 addq.w  #4,d0
 
-loc_4547C:
+SKSSZElevatorBar_ApplyHangingFrame:
                 move.b  d0,mapping_frame(a1)
                 jsr     (Perform_Player_DPLC).l
-                bra.w   locret_45526
+                bra.w   SKSSZElevatorBar_RiderUpdateReturn
 ; ---------------------------------------------------------------------------
 
-loc_4548A:
+SKSSZElevatorBar_CarryOrReleaseHurtRider:
                 move.w  y_pos(a0),y_pos(a1)
                 add.w   d1,y_pos(a1)
                 cmpi.b  #4,routine(a1)
-                blo.s   loc_454AA
+                blo.s   SKSSZElevatorBar_TryJumpAndSetPriority
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.b  #60,2(a2)
-                bra.s   locret_45526
+                bra.s   SKSSZElevatorBar_RiderUpdateReturn
 ; ---------------------------------------------------------------------------
 
-loc_454AA:
+SKSSZElevatorBar_TryJumpAndSetPriority:
                 move.w  d0,d1
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d1
-                beq.s   locret_45526
+                beq.s   SKSSZElevatorBar_RiderUpdateReturn
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.b  #30,2(a2)
@@ -108,17 +108,17 @@ loc_454AA:
                 move.w  #-$200,d1
                 move.w  #-$400,d2
                 btst    #button_left+8,d0
-                bne.s   loc_454EA
+                bne.s   SKSSZElevatorBar_AddBarSpeedToJump
                 move.w  #$180,priority(a0)
                 neg.w   d1
                 btst    #button_right+8,d0
-                bne.s   loc_454EA
+                bne.s   SKSSZElevatorBar_AddBarSpeedToJump
                 moveq   #0,d1
                 btst    #button_down+8,d0
-                beq.s   loc_454EA
+                beq.s   SKSSZElevatorBar_AddBarSpeedToJump
                 moveq   #0,d2
 
-loc_454EA:
+SKSSZElevatorBar_AddBarSpeedToJump:
                 move.w  d1,x_vel(a1)
                 move.l  $2E(a0),d0
                 asr.l   #8,d0
@@ -133,6 +133,6 @@ loc_454EA:
                 moveq   #signextendB(sfx_Jump),d0
                 jsr     (Play_SFX).l
 
-locret_45526:
+SKSSZElevatorBar_RiderUpdateReturn:
                 rts
 ; End of function UpdatePlayerHangingFromSszElevatorBar

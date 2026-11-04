@@ -41,11 +41,11 @@ SSZ2_BackgroundEvent:
 ; ---------------------------------------------------------------------------
 
 SSZ2_BackgroundEvent_Index:
-                bra.w   loc_58D1E
+                bra.w   SKSSZ2BG_DrawEndingBackground
 ; ---------------------------------------------------------------------------
                 lea     (Level_layout_main).w,a3
 
-loc_58D1E:
+SKSSZ2BG_DrawEndingBackground:
                 jsr     BuildSsz2EndingStageScrollTables(pc)
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
@@ -59,9 +59,9 @@ loc_58D1E:
 
 BuildSsz2EndingStageScrollTables:
                 tst.w   (Events_routine_bg).w
-                beq.s   loc_58D6E
+                beq.s   SKSSZ2BG_SelectEndingScrollTables
 
-loc_58D44:
+SKSSZ2BG_AdvancePanoramaDrift:
                 lea     (HScroll_table).w,a1
                 move.l  (a1),d0
                 addi.l  #$8000,(a1)+
@@ -72,20 +72,20 @@ loc_58D44:
                 asr.l   #3,d1
                 moveq   #8-1,d2
 
-loc_58D60:
+SKSSZ2BG_WritePanoramaBands:
                 swap    d0
                 move.w  d0,-(a1)
                 swap    d0
                 sub.l   d1,d0
-                dbf     d2,loc_58D60
+                dbf     d2,SKSSZ2BG_WritePanoramaBands
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_58D6E:
+SKSSZ2BG_SelectEndingScrollTables:
                 cmpi.w  #$18,(Events_routine_fg).w
-                bhs.w   loc_58F52
+                bhs.w   SKSSZ2BG_BeginLateForegroundBands
                 cmpi.w  #$C,(Events_routine_fg).w
-                bhs.w   locret_58F50
+                bhs.w   SKSSZ2BG_ScrollTableReturn
                 lea     (HScroll_table).w,a1
                 move.l  (a1),d2
                 addi.l  #$1000,(a1)+
@@ -134,25 +134,25 @@ loc_58D6E:
                 lea     $18(a1),a1
                 moveq   #9-1,d2
 
-loc_58E14:
+SKSSZ2BG_WriteEarlyParallaxBands:
                 swap    d0
                 move.w  d0,(a1)+
                 swap    d0
                 add.l   d1,d0
-                dbf     d2,loc_58E14
+                dbf     d2,SKSSZ2BG_WriteEarlyParallaxBands
                 cmpi.w  #4,(Events_routine_fg).w
-                bhi.s   loc_58E3A
+                bhi.s   SKSSZ2BG_ReorderEarlyBands
                 lea     (HScroll_table+$02A).w,a1
                 move.w  (Camera_X_pos_copy).w,d0
                 moveq   #9-1,d1
 
-loc_58E32:
+SKSSZ2BG_FillBandsFromCameraX:
                 move.w  d0,(a1)+
-                dbf     d1,loc_58E32
-                bra.s   loc_58E6E
+                dbf     d1,SKSSZ2BG_FillBandsFromCameraX
+                bra.s   SKSSZ2BG_CalcEarlyBackgroundY
 ; ---------------------------------------------------------------------------
 
-loc_58E3A:
+SKSSZ2BG_ReorderEarlyBands:
                 lea     (HScroll_table+$004).w,a1
                 move.w  $2A(a1),$2C(a1)
                 move.w  $28(a1),d0
@@ -164,28 +164,28 @@ loc_58E3A:
                 move.w  $1E(a1),$32(a1)
                 move.w  $1A(a1),$34(a1)
 
-loc_58E6E:
+SKSSZ2BG_CalcEarlyBackgroundY:
                 move.w  (Camera_Y_pos_copy).w,d0
                 subi.w  #$320,d0
                 sub.w   (_unkEE9C).w,d0
                 move.w  (Special_V_int_routine).w,d1
                 subq.w  #4,d1
-                beq.s   loc_58E88
+                beq.s   SKSSZ2BG_SetEarlyPosAndBindRamp
                 subq.w  #4,d1
-                beq.s   loc_58E88
+                beq.s   SKSSZ2BG_SetEarlyPosAndBindRamp
                 addq.w  #8,d0
 
-loc_58E88:
+SKSSZ2BG_SetEarlyPosAndBindRamp:
                 move.w  d0,(Camera_Y_pos_BG_copy).w
                 move.w  #$5E,(Camera_X_pos_BG_copy).w
                 lea     (HScroll_table+$0D0).w,a5
                 lea     (a5),a6
                 move.w  (Events_bg+$00).w,d0
                 smi     d6
-                bpl.s   loc_58EA2
+                bpl.s   SKSSZ2BG_CalcHorizontalRampStep
                 neg.w   d0
 
-loc_58EA2:
+SKSSZ2BG_CalcHorizontalRampStep:
                 swap    d0
                 clr.w   d0
                 asr.l   #7,d0
@@ -195,37 +195,37 @@ loc_58EA2:
                 moveq   #0,d3
                 moveq   #$40-1,d4
                 tst.b   d6
-                bne.s   loc_58EC8
+                bne.s   SKSSZ2BG_WriteHorizontalRampRight
 
-loc_58EB6:
+SKSSZ2BG_WriteHorizontalRampLeft:
                 add.w   d1,d3
                 addx.w  d0,d2
                 move.w  d2,-(a5)
                 move.w  d2,d5
                 neg.w   d5
                 move.w  d5,(a6)+
-                dbf     d4,loc_58EB6
-                bra.s   loc_58ED8
+                dbf     d4,SKSSZ2BG_WriteHorizontalRampLeft
+                bra.s   SKSSZ2BG_BindVerticalRamp
 ; ---------------------------------------------------------------------------
 
-loc_58EC8:
+SKSSZ2BG_WriteHorizontalRampRight:
                 add.w   d1,d3
                 addx.w  d0,d2
                 move.w  d2,(a6)+
                 move.w  d2,d5
                 neg.w   d5
                 move.w  d5,-(a5)
-                dbf     d4,loc_58EC8
+                dbf     d4,SKSSZ2BG_WriteHorizontalRampRight
 
-loc_58ED8:
+SKSSZ2BG_BindVerticalRamp:
                 lea     (HScroll_table+$160).w,a5
                 lea     (a5),a6
                 move.w  (Events_bg+$00).w,d0
                 smi     d6
-                bpl.s   loc_58EE8
+                bpl.s   SKSSZ2BG_CalcVerticalRampStep
                 neg.w   d0
 
-loc_58EE8:
+SKSSZ2BG_CalcVerticalRampStep:
                 swap    d0
                 clr.w   d0
                 asr.l   #3,d0
@@ -235,38 +235,38 @@ loc_58EE8:
                 moveq   #0,d3
                 moveq   #8-1,d4
                 tst.b   d6
-                bne.s   loc_58F0E
+                bne.s   SKSSZ2BG_WriteVerticalRampForward
 
-loc_58EFC:
+SKSSZ2BG_WriteVerticalRampBackward:
                 add.w   d1,d3
                 addx.w  d0,d2
                 move.w  d2,-(a5)
                 move.w  d2,d5
                 neg.w   d5
                 move.w  d5,(a6)+
-                dbf     d4,loc_58EFC
-                bra.s   loc_58F1E
+                dbf     d4,SKSSZ2BG_WriteVerticalRampBackward
+                bra.s   SKSSZ2BG_SelectVerticalSampleWindow
 ; ---------------------------------------------------------------------------
 
-loc_58F0E:
+SKSSZ2BG_WriteVerticalRampForward:
                 add.w   d1,d3
                 addx.w  d0,d2
                 move.w  d2,(a6)+
                 move.w  d2,d5
                 neg.w   d5
                 move.w  d5,-(a5)
-                dbf     d4,loc_58F0E
+                dbf     d4,SKSSZ2BG_WriteVerticalRampForward
 
-loc_58F1E:
+SKSSZ2BG_SelectVerticalSampleWindow:
                 lea     (HScroll_table+$170).w,a1
                 lea     (HScroll_table+$140).w,a5
                 move.w  (Camera_X_pos_BG_copy).w,d0
                 move.w  d0,d1
                 andi.w  #$F,d1
-                beq.s   loc_58F36
+                beq.s   SKSSZ2BG_BindVerticalSampleWindow
                 addi.w  #$10,d0
 
-loc_58F36:
+SKSSZ2BG_BindVerticalSampleWindow:
                 lsr.w   #3,d0
                 andi.w  #$FFFE,d0
                 adda.w  d0,a5
@@ -274,17 +274,18 @@ loc_58F36:
                 addq.w  #8,d0
                 moveq   #$14-1,d1
 
-loc_58F46:
+; Read and write forward through the same scroll table. The source window can overlap the output
+SKSSZ2BG_WriteVerticalSamples:
                 move.w  (a5)+,d2
                 add.w   d0,d2
                 move.w  d2,(a1)+
-                dbf     d1,loc_58F46
+                dbf     d1,SKSSZ2BG_WriteVerticalSamples
 
-locret_58F50:
+SKSSZ2BG_ScrollTableReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_58F52:
+SKSSZ2BG_BeginLateForegroundBands:
                 lea     (HScroll_table).w,a1
                 move.l  (a1),d0
                 subi.l  #$10000,(a1)+
@@ -294,7 +295,7 @@ loc_58F52:
                 asr.l   #5,d1
                 moveq   #$20-1,d2
 
-loc_58F6A:
+SKSSZ2BG_WriteLateForegroundBands:
                 swap    d0
                 move.w  d0,-(a1)
                 move.w  d0,-(a1)
@@ -302,7 +303,7 @@ loc_58F6A:
                 move.w  d0,-(a1)
                 swap    d0
                 sub.l   d1,d0
-                dbf     d2,loc_58F6A
+                dbf     d2,SKSSZ2BG_WriteLateForegroundBands
                 move.w  (a1),d0
                 neg.w   d0
                 move.w  d0,-4(a1)
@@ -329,81 +330,81 @@ loc_58F6A:
 
 ComposeSsz2EndingScrollBuffersByStage:
                 tst.w   (Events_routine_bg).w
-                beq.s   loc_58FD0
+                beq.s   SKSSZ2BG_SelectEndingDeformation
                 lea     SSZ2_BGDeformArray(pc),a4
                 lea     (HScroll_table+$004).w,a5
                 jmp     (ApplyDeformation).l
 ; ---------------------------------------------------------------------------
 
-loc_58FD0:
+SKSSZ2BG_SelectEndingDeformation:
                 cmpi.w  #$18,(Events_routine_fg).w
-                bhs.w   loc_5906A
+                bhs.w   SKSSZ2BG_ApplyLateForegroundScroll
                 cmpi.w  #$C,(Events_routine_fg).w
-                bhs.w   loc_59064
-                lea     word_58C80(pc),a4
+                bhs.w   SKSSZ2BG_ApplyPlainEndingScroll
+                lea     SKSSZ2FG_ForegroundScrollSpans(pc),a4
                 lea     (HScroll_table+$004).w,a5
                 jsr     (ApplyFGDeformation).l
                 lea     (H_scroll_buffer+2).w,a1
                 lea     (HScroll_table+$050).w,a5
                 move.w  (Camera_Y_pos_BG_copy).w,d0
                 subi.w  #$100,d0
-                bmi.s   loc_59018
+                bmi.s   SKSSZ2BG_ClipEarlyOverlay
                 subi.w  #$80,d0
-                bpl.s   loc_5904A
+                bpl.s   SKSSZ2BG_PrepareVerticalScrollExport
                 move.w  d0,d1
                 neg.w   d0
                 addi.w  #$80,d1
                 add.w   d1,d1
                 adda.w  d1,a5
-                bra.s   loc_59036
+                bra.s   SKSSZ2BG_PrepareOverlayCopy
 ; ---------------------------------------------------------------------------
 
-loc_59018:
+SKSSZ2BG_ClipEarlyOverlay:
                 neg.w   d0
                 cmpi.w  #$E0,d0
-                bhs.s   loc_5904A
+                bhs.s   SKSSZ2BG_PrepareVerticalScrollExport
                 move.w  d0,d1
                 addi.w  #-$E0,d0
                 neg.w   d0
                 cmpi.w  #$80,d0
-                blo.s   loc_59032
+                blo.s   SKSSZ2BG_SkipClippedOverlayLines
                 move.w  #$80,d0
 
-loc_59032:
+SKSSZ2BG_SkipClippedOverlayLines:
                 lsl.w   #2,d1
                 adda.w  d1,a1
 
-loc_59036:
+SKSSZ2BG_PrepareOverlayCopy:
                 subq.w  #1,d0
                 move.w  (Camera_X_pos_BG_copy).w,d1
                 neg.w   d1
 
-loc_5903E:
+SKSSZ2BG_WriteBackgroundScrollHalves:
                 move.w  (a5)+,d2
                 add.w   d1,d2
                 move.w  d2,(a1)
                 addq.w  #4,a1
-                dbf     d0,loc_5903E
+                dbf     d0,SKSSZ2BG_WriteBackgroundScrollHalves
 
-loc_5904A:
+SKSSZ2BG_PrepareVerticalScrollExport:
                 lea     (Vscroll_buffer).w,a1
                 lea     (HScroll_table+$170).w,a5
                 move.w  (Camera_Y_pos_copy).w,d0
                 swap    d0
                 moveq   #$14-1,d1
 
-loc_5905A:
+SKSSZ2BG_WriteVerticalScrollPairs:
                 move.w  (a5)+,d0
                 move.l  d0,(a1)+
-                dbf     d1,loc_5905A
+                dbf     d1,SKSSZ2BG_WriteVerticalScrollPairs
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_59064:
+SKSSZ2BG_ApplyPlainEndingScroll:
                 jmp     (PlainDeformation).l
 ; ---------------------------------------------------------------------------
 
-loc_5906A:
+SKSSZ2BG_ApplyLateForegroundScroll:
                 lea     SSZ2_DeformArray(pc),a4
                 lea     (HScroll_table+$004).w,a5
                 jmp     (ApplyFGDeformation).l
@@ -411,137 +412,139 @@ loc_5906A:
 
 ; ---------------------------------------------------------------------------
 
-loc_59078:
+SKSSZ2BG_DispatchEndingMotion:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                jmp     loc_59082(pc,d0.w)
+                jmp     SKSSZ2BG_EndingMotionBranches(pc,d0.w)
 ; ---------------------------------------------------------------------------
 
-loc_59082:
-                bra.w   loc_5908E
+SKSSZ2BG_EndingMotionBranches:
+                bra.w   SKSSZ2BG_BobAndWaitForMotionSignal
 ; ---------------------------------------------------------------------------
-                bra.w   loc_590E4
+                bra.w   SKSSZ2BG_SelectEmeraldOrOrdinaryMove
 ; ---------------------------------------------------------------------------
-                bra.w   loc_59194
+                bra.w   SKSSZ2BG_MoveFinalCameraAndTryHandoff
 ; ---------------------------------------------------------------------------
 
-loc_5908E:
+; With a negative foreground signal, wait for two changes to zero amplitude before advancing
+SKSSZ2BG_BobAndWaitForMotionSignal:
                 tst.w   (Special_V_int_routine).w
-                beq.w   locret_591D4
+                beq.w   SKSSZ2BG_EndingMotionReturn
                 addi.l  #$11B,(_unkEE9C).w
                 move.l  #$2000,d0
                 move.l  #$4A,d1
                 jsr     (Gradual_SwingOffset).l
                 cmp.w   (Events_bg+$00).w,d0
-                beq.w   locret_591D4
+                beq.w   SKSSZ2BG_EndingMotionReturn
                 move.w  d0,(Events_bg+$00).w
-                bne.w   locret_591D4
+                bne.w   SKSSZ2BG_EndingMotionReturn
                 tst.w   (Events_fg_4).w
-                bpl.w   locret_591D4
+                bpl.w   SKSSZ2BG_EndingMotionReturn
                 tst.b   $38(a0)
-                bne.s   loc_590D6
+                bne.s   SKSSZ2BG_AcknowledgeAndSetEndingVInt
                 st      $38(a0)
-                bra.w   locret_591D4
+                bra.w   SKSSZ2BG_EndingMotionReturn
 ; ---------------------------------------------------------------------------
 
-loc_590D6:
+SKSSZ2BG_AcknowledgeAndSetEndingVInt:
                 clr.w   (Events_fg_4).w
                 move.w  #$C,(Special_V_int_routine).w
                 addq.b  #4,routine(a0)
 
-loc_590E4:
+SKSSZ2BG_SelectEmeraldOrOrdinaryMove:
                 cmpi.b  #7,(Super_emerald_count).w
-                bhs.s   loc_590F4
+                bhs.s   SKSSZ2BG_AccelEmeraldMotion
                 cmpi.b  #7,(Chaos_emerald_count).w
-                blo.s   loc_59146
+                blo.s   SKSSZ2BG_AccelOrdinaryMotion
 
-loc_590F4:
+SKSSZ2BG_AccelEmeraldMotion:
                 cmpi.w  #$8000,$3C(a0)
-                bhs.s   loc_59102
+                bhs.s   SKSSZ2BG_StepEmeraldMotion
                 addi.w  #$20,$3C(a0)
 
-loc_59102:
+SKSSZ2BG_StepEmeraldMotion:
                 move.l  $3A(a0),d0
                 sub.l   d0,(_unkEE9C).w
                 move.w  (Camera_Y_pos).w,d0
                 subi.w  #$318,d0
                 sub.w   (_unkEE9C).w,d0
                 cmpi.w  #$D0,d0
-                beq.s   loc_59124
-                bcs.s   loc_59132
+                beq.s   SKSSZ2BG_SignalEmeraldAccentOnce
+                bcs.s   SKSSZ2BG_TryFinishEmeraldMotion
                 subq.w  #1,(Camera_Y_pos).w
-                bra.s   loc_59132
+                bra.s   SKSSZ2BG_TryFinishEmeraldMotion
 ; ---------------------------------------------------------------------------
 
-loc_59124:
+SKSSZ2BG_SignalEmeraldAccentOnce:
                 tst.b   $39(a0)
-                bne.s   loc_59132
+                bne.s   SKSSZ2BG_TryFinishEmeraldMotion
                 st      $39(a0)
                 st      (_unkFAA9).w
 
-loc_59132:
+SKSSZ2BG_TryFinishEmeraldMotion:
                 cmpi.w  #$2A0,(Camera_Y_pos).w
-                bne.w   locret_591D4
+                bne.w   SKSSZ2BG_EndingMotionReturn
                 st      (Events_fg_4+1).w
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_59146:
+SKSSZ2BG_AccelOrdinaryMotion:
                 cmpi.w  #$8000,$3C(a0)
-                bhs.s   loc_59154
+                bhs.s   SKSSZ2BG_StepOrdinaryMotion
                 addi.w  #$20,$3C(a0)
 
-loc_59154:
+SKSSZ2BG_StepOrdinaryMotion:
                 move.l  $3A(a0),d0
                 add.l   d0,(_unkEE9C).w
                 move.w  (Camera_Y_pos).w,d0
                 subi.w  #$318,d0
                 sub.w   (_unkEE9C).w,d0
                 cmpi.w  #$D0,d0
-                beq.s   loc_59176
-                bcc.s   loc_59184
+                beq.s   SKSSZ2BG_SignalOrdinaryAccentOnce
+                bcc.s   SKSSZ2BG_TryBeginFinalCameraMove
                 addq.w  #1,(Camera_Y_pos).w
-                bra.s   loc_59184
+                bra.s   SKSSZ2BG_TryBeginFinalCameraMove
 ; ---------------------------------------------------------------------------
 
-loc_59176:
+SKSSZ2BG_SignalOrdinaryAccentOnce:
                 tst.b   $39(a0)
-                bne.s   loc_59184
+                bne.s   SKSSZ2BG_TryBeginFinalCameraMove
                 st      $39(a0)
                 st      (_unkFAA9).w
 
-loc_59184:
+SKSSZ2BG_TryBeginFinalCameraMove:
                 cmpi.w  #$600,(Camera_Y_pos).w
-                bne.s   locret_591D4
+                bne.s   SKSSZ2BG_EndingMotionReturn
                 st      (Events_fg_4+1).w
                 addq.b  #4,routine(a0)
 
-loc_59194:
+; Attempt the handoff only once speed turns negative and integer camera Y is exactly $804
+SKSSZ2BG_MoveFinalCameraAndTryHandoff:
                 cmpi.w  #$18,(Events_routine_fg).w
-                blo.s   locret_591D4
+                blo.s   SKSSZ2BG_EndingMotionReturn
                 move.l  $3A(a0),d0
                 add.l   d0,(Camera_Y_pos).w
                 move.w  (Camera_Y_pos).w,d0
                 cmpi.w  #$7D0,d0
-                blo.s   locret_591D4
+                blo.s   SKSSZ2BG_EndingMotionReturn
                 subi.l  #$98,$3A(a0)
-                bpl.s   locret_591D4
+                bpl.s   SKSSZ2BG_EndingMotionReturn
                 cmpi.w  #$804,(Camera_Y_pos).w
-                bne.s   locret_591D4
+                bne.s   SKSSZ2BG_EndingMotionReturn
                 jsr     (AllocateObject).l
-                bne.s   loc_591CE
+                bne.s   SKSSZ2BG_DeleteEndingMotionActor
                 move.l  #Obj_5EF68,(a1)
 
-loc_591CE:
+SKSSZ2BG_DeleteEndingMotionActor:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_591D4:
+SKSSZ2BG_EndingMotionReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_591D6:
-                move.l  #loc_59208,(a0)
+SKSSZ2BG_InitKnucklesIslandMask:
+                move.l  #SKSSZ2BG_TryMoveMaskWithPanorama,(a0)
                 move.b  #$40,render_flags(a0)
                 move.b  #$40,height_pixels(a0)
                 move.w  #$380,priority(a0)
@@ -550,48 +553,48 @@ loc_591D6:
                 move.w  #$F0,y_pos(a0)
                 move.w  #8,mainspr_childsprites(a0)
 
-loc_59208:
+SKSSZ2BG_TryMoveMaskWithPanorama:
                 tst.w   (Events_routine_bg).w
-                beq.s   loc_59232
+                beq.s   SKSSZ2BG_BindMaskSpriteRows
                 cmpi.w  #$80,(Camera_Y_pos_BG_copy).w
-                bne.s   loc_59218
-                bra.s   loc_59220
+                bne.s   SKSSZ2BG_StepPanoramaY
+                bra.s   SKSSZ2BG_ConvertPanoramaYToMaskScreenY
 ; ---------------------------------------------------------------------------
 
-loc_59218:
+SKSSZ2BG_StepPanoramaY:
                 subi.l  #$6000,(Camera_Y_pos_BG_copy).w
 
-loc_59220:
+SKSSZ2BG_ConvertPanoramaYToMaskScreenY:
                 move.w  (Camera_Y_pos_BG_copy).w,d0
                 subi.w  #$1D0,d0
                 neg.w   d0
                 addi.w  #$F0,d0
                 move.w  d0,y_pos(a0)
 
-loc_59232:
+SKSSZ2BG_BindMaskSpriteRows:
                 lea     sub2_x_pos(a0),a1
                 move.w  y_pos(a0),d0
                 subi.w  #$40,d0
                 moveq   #1,d2
 
-loc_59240:
+SKSSZ2BG_ResetFirstColumnXForEachMaskRow:
                 move.w  #$A2,d1
                 moveq   #4-1,d3
 
-loc_59246:
+SKSSZ2BG_PlaceMaskSprite:
                 move.w  d1,(a1)+
                 move.w  d0,(a1)+
                 addq.w  #2,a1
                 addi.w  #$40,d1
-                dbf     d3,loc_59246
+                dbf     d3,SKSSZ2BG_PlaceMaskSprite
                 addi.w  #$40,d0
-                dbf     d2,loc_59240
+                dbf     d2,SKSSZ2BG_ResetFirstColumnXForEachMaskRow
                 cmpi.w  #$18,(Events_routine_fg).w
-                bne.s   loc_5926A
+                bne.s   SKSSZ2BG_DrawIslandMask
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5926A:
+SKSSZ2BG_DrawIslandMask:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_KnuxEndingIslandMask:
@@ -601,22 +604,22 @@ Map_KnuxEndingIslandMask:
 
 CycleSsz2EndingWaterPalette:
                 tst.b   (Palette_cycle_counters+$00).w
-                bne.s   locret_592BC
+                bne.s   SKSSZ2BG_WaterCycleReturn
                 subq.w  #1,(Palette_cycle_counter1).w
-                bpl.s   locret_592BC
+                bpl.s   SKSSZ2BG_WaterCycleReturn
                 move.w  #7,(Palette_cycle_counter1).w
                 move.w  (Palette_cycle_counter0).w,d0
                 addq.w  #6,d0
                 cmpi.w  #$30,d0
-                blo.s   loc_592AC
+                blo.s   SKSSZ2BG_ApplyWaterCycleFrame
                 moveq   #0,d0
 
-loc_592AC:
+SKSSZ2BG_ApplyWaterCycleFrame:
                 move.w  d0,(Palette_cycle_counter0).w
                 move.l  Pal_EndingWater(pc,d0.w),(Normal_palette_line_4+$1A).w
                 move.w  Pal_EndingWater+$4(pc,d0.w),(Normal_palette_line_4+$1E).w
 
-locret_592BC:
+SKSSZ2BG_WaterCycleReturn:
                 rts
 ; End of function CycleSsz2EndingWaterPalette
 
@@ -629,26 +632,26 @@ Pal_EndingWater:
 
 CycleSsz2EmeraldEndingAccentPalette:
                 tst.b   (Palette_cycle_counters+$00).w
-                bne.s   locret_59318
+                bne.s   SKSSZ2BG_EmeraldAccentReturn
                 subq.w  #1,(Palette_cycle_counter1).w
-                bpl.s   locret_59318
+                bpl.s   SKSSZ2BG_EmeraldAccentReturn
                 move.w  #3,(Palette_cycle_counter1).w
                 move.w  (Palette_cycle_counter0).w,d0
                 addq.w  #4,d0
                 cmpi.w  #$38,d0
-                blo.s   loc_5930E
+                blo.s   SKSSZ2BG_ApplyEmeraldAccentFrame
                 moveq   #0,d0
 
-loc_5930E:
+SKSSZ2BG_ApplyEmeraldAccentFrame:
                 move.w  d0,(Palette_cycle_counter0).w
-                move.l  word_5931A(pc,d0.w),(Normal_palette_line_4+$16).w
+                move.l  SKSSZ2BG_EmeraldAccentColors(pc,d0.w),(Normal_palette_line_4+$16).w
 
-locret_59318:
+SKSSZ2BG_EmeraldAccentReturn:
                 rts
 ; End of function CycleSsz2EmeraldEndingAccentPalette
 
 ; ---------------------------------------------------------------------------
-word_5931A:
+SKSSZ2BG_EmeraldAccentColors:
                 dc.w    $C40,  $400
                 dc.w    $E68,  $600
                 dc.w    $E80,  $800

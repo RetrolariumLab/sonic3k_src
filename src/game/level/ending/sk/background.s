@@ -162,7 +162,7 @@ SKEnding_BuildInitialCloudBands:
 
 loc_5B0A0:
                 move.w  d0,(Camera_Y_pos_BG_copy).w
-                jmp     loc_58D44(pc)
+                jmp     SKSSZ2BG_AdvancePanoramaDrift(pc)
 ; End of function SKEnding_BuildInitialCloudBands
 
 ; =============== S U B R O U T I N E =======================================

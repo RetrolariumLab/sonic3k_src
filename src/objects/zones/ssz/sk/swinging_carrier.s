@@ -5,7 +5,7 @@
 ; ---------------------------------------------------------------------------
 
 Obj_SSZSwingingCarrier:
-                move.l  #loc_46142,(a0)
+                move.l  #SKSSZSwingPivot_CullAndSignalChain,(a0)
                 move.b  #4,render_flags(a0)
                 move.b  #8,height_pixels(a0)
                 move.w  #$180,priority(a0)
@@ -14,70 +14,70 @@ Obj_SSZSwingingCarrier:
                 moveq   #$30,d0
                 moveq   #1,d1
                 tst.b   subtype(a0)
-                bpl.s   loc_4610C
+                bpl.s   SKSSZSwingPivot_SetPivotAndTrySpawnChain
                 moveq   #8,d0
                 moveq   #4,d1
 
-loc_4610C:
+SKSSZSwingPivot_SetPivotAndTrySpawnChain:
                 move.b  d0,width_pixels(a0)
                 move.b  d1,mapping_frame(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_46142
+                bne.s   SKSSZSwingPivot_CullAndSignalChain
                 move.w  a1,$38(a0)
-                move.l  #loc_461A8,(a1)
+                move.l  #SKSSZSwingChain_InitChainAndTrySpawnEnd,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.b  status(a0),status(a1)
                 move.b  subtype(a0),subtype(a1)
                 move.w  a0,parent2(a1)
 
-loc_46142:
+SKSSZSwingPivot_CullAndSignalChain:
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bls.s   loc_46172
+                bls.s   SKSSZSwingPivot_SelectSwingOrRotation
                 move.w  $38(a0),d0
-                beq.s   loc_46160
+                beq.s   SKSSZSwingPivot_ClearPlacementRespawn
                 movea.w d0,a1
                 st      routine(a1)
 
-loc_46160:
+SKSSZSwingPivot_ClearPlacementRespawn:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_4616C
+                beq.s   SKSSZSwingPivot_DeletePivot
                 movea.w d0,a1
                 bclr    #7,(a1)
 
-loc_4616C:
+SKSSZSwingPivot_DeletePivot:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_46172:
+SKSSZSwingPivot_SelectSwingOrRotation:
                 tst.b   subtype(a0)
-                bmi.s   loc_46192
+                bmi.s   SKSSZSwingPivot_SelectRotationStep
                 move.l  #$20000,d0
                 move.l  #$821,d1
                 jsr     Gradual_SwingOffset(pc)
                 addi.w  #$41,d0
                 move.w  d0,$20(a0)
-                bra.s   loc_461A2
+                bra.s   SKSSZSwingPivot_DrawPivot
 ; ---------------------------------------------------------------------------
 
-loc_46192:
+SKSSZSwingPivot_SelectRotationStep:
                 moveq   #1,d0
                 btst    #0,status(a0)
-                beq.s   loc_4619E
+                beq.s   SKSSZSwingPivot_ApplyRotationStep
                 neg.w   d0
 
-loc_4619E:
+SKSSZSwingPivot_ApplyRotationStep:
                 add.w   d0,$20(a0)
 
-loc_461A2:
+SKSSZSwingPivot_DrawPivot:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_461A8:
-                move.l  #loc_461FE,(a0)
+SKSSZSwingChain_InitChainAndTrySpawnEnd:
+                move.l  #SKSSZSwingChain_RelayDeleteSignal,(a0)
                 move.b  #$44,render_flags(a0)
                 move.b  #$68,height_pixels(a0)
                 move.b  #$68,width_pixels(a0)
@@ -88,36 +88,36 @@ loc_461A8:
                 addq.w  #6,d0
                 move.w  d0,mainspr_childsprites(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_461FE
+                bne.s   SKSSZSwingChain_RelayDeleteSignal
                 move.w  a1,$12(a0)
-                move.l  #loc_46284,(a1)
+                move.l  #SKSSZSwingEnd_InitEndpoint,(a1)
                 move.b  status(a0),status(a1)
                 move.b  subtype(a0),subtype(a1)
                 move.w  a0,$2E(a1)
 
-loc_461FE:
+SKSSZSwingChain_RelayDeleteSignal:
                 tst.b   routine(a0)
-                beq.s   loc_46216
+                beq.s   SKSSZSwingChain_SelectChainPriority
                 move.w  $12(a0),d0
-                beq.s   loc_46210
+                beq.s   SKSSZSwingChain_DeleteChain
                 movea.w d0,a1
                 st      routine(a1)
 
-loc_46210:
+SKSSZSwingChain_DeleteChain:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_46216:
+SKSSZSwingChain_SelectChainPriority:
                 movea.w parent2(a0),a1
                 move.w  #$180,d1
                 move.w  $20(a1),d0
                 subi.w  #$40,d0
                 andi.w  #$FF,d0
                 cmpi.w  #$80,d0
-                blo.s   loc_46234
+                blo.s   SKSSZSwingChain_CalcLinkStep
                 move.w  #$100,d1
 
-loc_46234:
+SKSSZSwingChain_CalcLinkStep:
                 move.w  d1,priority(a0)
                 move.w  $20(a1),d0
                 jsr     (GetSineCosine).l
@@ -134,7 +134,7 @@ loc_46234:
                 subq.w  #1,d4
                 lea     sub2_x_pos(a0),a1
 
-loc_46262:
+SKSSZSwingChain_PlaceChainLinks:
                 add.l   d1,d3
                 add.l   d0,d2
                 swap    d3
@@ -145,12 +145,12 @@ loc_46262:
                 swap    d3
                 swap    d2
                 addq.w  #2,a1
-                dbf     d4,loc_46262
+                dbf     d4,SKSSZSwingChain_PlaceChainLinks
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_46284:
-                move.l  #loc_462B6,(a0)
+SKSSZSwingEnd_InitEndpoint:
+                move.l  #SKSSZSwingEnd_CheckDeleteSignal,(a0)
                 move.b  #4,render_flags(a0)
                 move.b  #$C,height_pixels(a0)
                 move.b  #$18,width_pixels(a0)
@@ -159,13 +159,13 @@ loc_46284:
                 move.l  #Map_SSZElevatorBar,mappings(a0)
                 move.b  #3,mapping_frame(a0)
 
-loc_462B6:
+SKSSZSwingEnd_CheckDeleteSignal:
                 tst.b   routine(a0)
-                beq.s   loc_462C2
+                beq.s   SKSSZSwingEnd_FollowChainAndCheckSolid
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_462C2:
+SKSSZSwingEnd_FollowChainAndCheckSolid:
                 movea.w $2E(a0),a1
                 move.w  mainspr_childsprites(a1),d0
                 subq.w  #1,d0
@@ -202,22 +202,22 @@ loc_462C2:
 
 UpdatePlayerOnSszSwingingCarrier:
                 tst.b   (a3)
-                bne.s   loc_4639A
+                bne.s   SKSSZSwingEnd_CarryAndTryFloorExit
                 tst.b   object_control(a1)
-                bne.s   locret_46348
+                bne.s   SKSSZSwingEnd_CaptureReturn
                 cmpi.b  #4,routine(a1)
-                bhs.s   locret_46348
+                bhs.s   SKSSZSwingEnd_CaptureReturn
                 btst    d5,status(a0)
-                bne.s   loc_4634A
+                bne.s   SKSSZSwingEnd_CaptureRiderInRoll
                 andi.w  #5,d6
-                beq.s   locret_46348
+                beq.s   SKSSZSwingEnd_CaptureReturn
                 jsr     (HurtPlayerFromSolidHazard).l
 
-locret_46348:
+SKSSZSwingEnd_CaptureReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4634A:
+SKSSZSwingEnd_CaptureRiderInRoll:
                 moveq   #signextendB(sfx_Roll),d0
                 jsr     (Play_SFX).l
                 st      (a3)
@@ -231,47 +231,48 @@ loc_4634A:
                 move.b  #$E,y_radius(a1)
                 move.b  #7,x_radius(a1)
                 tst.b   subtype(a0)
-                bpl.s   loc_4639A
+                bpl.s   SKSSZSwingEnd_CarryAndTryFloorExit
                 move.b  status(a0),d0
                 andi.w  #1,d0
                 andi.b  #$FE,status(a1)
                 or.b    d0,status(a1)
 
-loc_4639A:
+; Probe the floor only when the carrier subtype is negative
+SKSSZSwingEnd_CarryAndTryFloorExit:
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),d0
                 subi.w  #$C,d0
                 move.w  d0,y_pos(a1)
                 tst.b   subtype(a0)
-                bpl.s   loc_463FC
+                bpl.s   SKSSZSwingEnd_TryJumpRelease
                 movem.l d5/a1-a3,-(sp)
                 jsr     (SonicOnObjHitFloor).l
                 movem.l (sp)+,d5/a1-a3
                 tst.w   d1
-                bpl.s   loc_463FC
+                bpl.s   SKSSZSwingEnd_TryJumpRelease
                 add.w   d1,y_pos(a1)
                 cmpi.w  #-$10,d1
-                bgt.s   loc_463FC
+                bgt.s   SKSSZSwingEnd_TryJumpRelease
                 clr.b   (a3)
                 bclr    d5,status(a0)
                 clr.b   object_control(a1)
                 bclr    #Status_OnObj,status(a1)
                 move.w  #$800,d0
                 btst    #0,status(a0)
-                beq.s   loc_463EC
+                beq.s   SKSSZSwingEnd_ApplyFloorExitDash
                 neg.w   d0
 
-loc_463EC:
+SKSSZSwingEnd_ApplyFloorExitDash:
                 move.w  d0,x_vel(a1)
                 move.w  d0,ground_vel(a1)
                 moveq   #signextendB(sfx_Dash),d0
                 jmp     (Play_SFX).l
 ; ---------------------------------------------------------------------------
 
-loc_463FC:
+SKSSZSwingEnd_TryJumpRelease:
                 move.w  (a2),d0
                 andi.w  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.s   locret_46424
+                beq.s   SKSSZSwingEnd_RiderUpdateReturn
                 clr.b   (a3)
                 move.w  #-$680,y_vel(a1)
                 clr.b   object_control(a1)
@@ -280,6 +281,6 @@ loc_463FC:
                 moveq   #signextendB(sfx_Jump),d0
                 jsr     (Play_SFX).l
 
-locret_46424:
+SKSSZSwingEnd_RiderUpdateReturn:
                 rts
 ; End of function UpdatePlayerOnSszSwingingCarrier

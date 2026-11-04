@@ -6,8 +6,8 @@
 SSZ2_ScreenInit:
                 st      (Palette_cycle_counters+$00).w
                 jsr     (AllocateObject).l
-                bne.s   loc_58A92
-                move.l  #Obj_57C1E,(a1)
+                bne.s   SKSSZ2FG_RefreshInitialForeground
+                move.l  #SSZArrival_AttemptBeamAllocation,(a1)
                 move.w  #$A0,x_pos(a1)
                 move.b  #$44,$2D(a1)
                 moveq   #0,d1
@@ -18,11 +18,11 @@ SSZ2_ScreenInit:
                 move.w  d1,(Camera_Y_pos).w
                 st      (Scroll_lock).w
                 jsr     (CreateNewSprite4).l
-                bne.s   loc_58A92
-                move.l  #loc_59078,(a1)
+                bne.s   SKSSZ2FG_RefreshInitialForeground
+                move.l  #SKSSZ2BG_DispatchEndingMotion,(a1)
                 move.w  #1,$30(a1)
 
-loc_58A92:
+SKSSZ2FG_RefreshInitialForeground:
                 jsr     (Reset_TileOffsetPositionActual).l
                 moveq   #0,d1
                 jmp     (Refresh_PlaneFull).l
@@ -36,42 +36,42 @@ SSZ2_ScreenEvent:
 ; ---------------------------------------------------------------------------
 
 SSZ2_ScreenEvent_Index:
-                bra.w   loc_58ACC
+                bra.w   SKSSZ2FG_WaitForCameraYLock
 ; ---------------------------------------------------------------------------
-                bra.w   loc_58AE0
+                bra.w   SKSSZ2FG_TryPatchForegroundRows
 ; ---------------------------------------------------------------------------
-                bra.w   loc_58B20
+                bra.w   SKSSZ2FG_WaitForEndingTileFill
 ; ---------------------------------------------------------------------------
-                bra.w   loc_58B7C
+                bra.w   SKSSZ2FG_RedrawAndStartCredits
 ; ---------------------------------------------------------------------------
-                bra.w   loc_58B9E
+                bra.w   SKSSZ2FG_DispatchCreditsAndSelectEnd
 ; ---------------------------------------------------------------------------
-                bra.w   loc_58C42
+                bra.w   SKSSZ2FG_RedrawOrdinaryEnding
 ; ---------------------------------------------------------------------------
-                bra.w   loc_58C68
+                bra.w   SKSSZ2FG_CycleWaterAndDrawRow
 ; ---------------------------------------------------------------------------
 
-loc_58ACC:
+SKSSZ2FG_WaitForCameraYLock:
                 move.w  (Camera_min_Y_pos).w,d0
                 cmp.w   (Camera_max_Y_pos).w,d0
-                bne.w   loc_58C68
+                bne.w   SKSSZ2FG_CycleWaterAndDrawRow
                 addq.w  #4,(Special_V_int_routine).w
                 addq.w  #4,(Events_routine_fg).w
 
-loc_58AE0:
+SKSSZ2FG_TryPatchForegroundRows:
                 tst.w   (Events_fg_4).w
-                beq.w   loc_58C68
+                beq.w   SKSSZ2FG_CycleWaterAndDrawRow
                 clr.w   (Events_fg_4).w
                 movea.w $24(a3),a1
                 movea.w $28(a3),a5
                 moveq   #4-1,d0
 
-loc_58AF6:
+SKSSZ2FG_WriteAlternatingLayoutRow:
                 move.b  #$17,(a1)+
                 move.b  #$18,(a1)+
                 move.b  #$19,(a5)+
                 move.b  #$19,(a5)+
-                dbf     d0,loc_58AF6
+                dbf     d0,SKSSZ2FG_WriteAlternatingLayoutRow
                 move.b  #$17,(a1)
                 move.b  #$19,(a5)
                 st      (Ending_running_flag).w
@@ -79,10 +79,10 @@ loc_58AF6:
                 jmp     (Refresh_PlaneFullDirect).l
 ; ---------------------------------------------------------------------------
 
-loc_58B20:
+SKSSZ2FG_WaitForEndingTileFill:
                 tst.w   (Events_fg_4).w
-                beq.w   loc_58C68
-                bmi.w   loc_58C68
+                beq.w   SKSSZ2FG_CycleWaterAndDrawRow
+                bmi.w   SKSSZ2FG_CycleWaterAndDrawRow
                 clr.w   (Events_fg_4).w
                 move    #$2700,sr
                 lea     (VDP_data_port).l,a6
@@ -90,55 +90,55 @@ loc_58B20:
                 move.l  #$66666666,d0
                 moveq   #bytesToLcnt(tiles_to_bytes($10)),d1
 
-loc_58B4C:
+SKSSZ2FG_WriteTilesAndTryMask:
                 move.l  d0,(a6)
-                dbf     d1,loc_58B4C
+                dbf     d1,SKSSZ2FG_WriteTilesAndTryMask
                 move    #$2300,sr
                 jsr     (AllocateObject).l
-                bne.s   loc_58B64
-                move.l  #loc_591D6,(a1)
+                bne.s   SKSSZ2FG_BeginEndingRedraw
+                move.l  #SKSSZ2BG_InitKnucklesIslandMask,(a1)
 
-loc_58B64:
+SKSSZ2FG_BeginEndingRedraw:
                 move.w  #$1F0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 clr.b   (Palette_cycle_counters+$00).w
                 addq.w  #4,(Events_routine_fg).w
-                bra.w   locret_58C7E
+                bra.w   SKSSZ2FG_EndingForegroundReturn
 ; ---------------------------------------------------------------------------
 
-loc_58B7C:
+SKSSZ2FG_RedrawAndStartCredits:
                 move.w  #$200,d1
                 move.w  #$100,d2
                 jsr     (Draw_PlaneVertBottomUp).l
-                bpl.w   locret_58C7E
+                bpl.w   SKSSZ2FG_EndingForegroundReturn
                 clr.w   (Camera_Y_pos_copy).w
                 clr.l   (Camera_Y_pos).w
                 clr.w   (Camera_X_pos).w
                 addq.w  #4,(Events_routine_fg).w
 
-loc_58B9E:
+SKSSZ2FG_DispatchCreditsAndSelectEnd:
                 movem.l d7-a0/a2-a3,-(sp)
                 jsr     (SKCredits_DispatchScrollState).l
                 movem.l (sp)+,d7-a0/a2-a3
                 cmpi.b  #7,(Super_emerald_count).w
-                bhs.s   loc_58BBC
+                bhs.s   SKSSZ2FG_CycleEmeraldAccentAndWait
                 cmpi.b  #7,(Chaos_emerald_count).w
-                blo.s   loc_58C1A
+                blo.s   SKSSZ2FG_WaitForOrdinaryEndSignal
 
-loc_58BBC:
+SKSSZ2FG_CycleEmeraldAccentAndWait:
                 jsr     CycleSsz2EmeraldEndingAccentPalette(pc)
                 tst.w   (_unkFAAE).w
-                beq.w   locret_58C7E
+                beq.w   SKSSZ2FG_EndingForegroundReturn
                 move.w  #$14C0,d0
                 tst.w   (SK_alone_flag).w
-                bne.s   loc_58BD6
+                bne.s   SKSSZ2FG_TrySwitchEmeraldPanorama
                 move.w  #$1660,d0
 
-loc_58BD6:
+SKSSZ2FG_TrySwitchEmeraldPanorama:
                 cmp.w   (Camera_Y_pos).w,d0
-                bne.w   locret_58C7E
+                bne.w   SKSSZ2FG_EndingForegroundReturn
                 tst.w   (Events_routine_bg).w
-                bne.w   locret_58C7E
+                bne.w   SKSSZ2FG_EndingForegroundReturn
                 clr.b   (_unkFAB9).w
                 move.w  (Camera_Y_pos_BG_copy).w,d0
                 addi.w  #$100,d0
@@ -150,32 +150,32 @@ loc_58BD6:
                 lea     (Normal_palette_line_2).w,a5
                 moveq   #bytesToLcnt($60),d0
 
-loc_58C0E:
+SKSSZ2FG_CopyEnding2Palette:
                 move.l  (a1)+,(a5)+
-                dbf     d0,loc_58C0E
+                dbf     d0,SKSSZ2FG_CopyEnding2Palette
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   locret_58C7E
+                bra.s   SKSSZ2FG_EndingForegroundReturn
 ; ---------------------------------------------------------------------------
 
-loc_58C1A:
+SKSSZ2FG_WaitForOrdinaryEndSignal:
                 tst.w   (Events_fg_4).w
-                beq.s   locret_58C7E
+                beq.s   SKSSZ2FG_EndingForegroundReturn
                 lea     (Pal_Ending1).l,a1
                 lea     (Normal_palette_line_2).w,a5
                 moveq   #bytesToLcnt($60),d0
 
-loc_58C2C:
+SKSSZ2FG_CopyEnding1PaletteAndRedraw:
                 move.l  (a1)+,(a5)+
-                dbf     d0,loc_58C2C
+                dbf     d0,SKSSZ2FG_CopyEnding1PaletteAndRedraw
                 move.w  #$7F0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_fg).w
 
-loc_58C42:
+SKSSZ2FG_RedrawOrdinaryEnding:
                 moveq   #0,d1
                 move.w  #$700,d2
                 jsr     (Draw_PlaneVertBottomUp).l
-                bpl.s   locret_58C7E
+                bpl.s   SKSSZ2FG_EndingForegroundReturn
                 move.w  #$720,d0
                 move.w  d0,(Camera_Y_pos_copy).w
                 move.w  d0,(Camera_Y_pos).w
@@ -183,7 +183,7 @@ loc_58C42:
                 move.w  d0,(Camera_Y_pos_rounded).w
                 addq.w  #4,(Events_routine_fg).w
 
-loc_58C68:
+SKSSZ2FG_CycleWaterAndDrawRow:
                 jsr     CycleSsz2EndingWaterPalette(pc)
                 lea     (Camera_Y_pos_copy).w,a6
                 lea     (Camera_Y_pos_rounded).w,a5
@@ -192,10 +192,10 @@ loc_58C68:
                 jmp     (Draw_TileRow).l
 ; ---------------------------------------------------------------------------
 
-locret_58C7E:
+SKSSZ2FG_EndingForegroundReturn:
                 rts
 ; ---------------------------------------------------------------------------
-word_58C80:
+SKSSZ2FG_ForegroundScrollSpans:
                 dc.w    $380
                 dc.w    $10
                 dc.w    $10

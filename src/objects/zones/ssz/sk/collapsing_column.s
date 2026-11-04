@@ -4,7 +4,7 @@
 ; ---------------------------------------------------------------------------
 
 Obj_SSZCollapsingColumn:
-                move.l  #loc_44B30,(a0)
+                move.l  #SKSSZColumn_TryBreakUnderRiders,(a0)
                 move.b  #4,render_flags(a0)
                 move.b  #1,routine(a0)
                 move.b  #$21,height_pixels(a0)
@@ -19,19 +19,19 @@ Obj_SSZCollapsingColumn:
                 addi.w  #$800,d0
                 move.w  d0,$30(a0)
 
-loc_44B30:
+SKSSZColumn_TryBreakUnderRiders:
                 move.b  status(a0),d0
                 andi.w  #standing_mask,d0
-                beq.s   loc_44B90
+                beq.s   SKSSZColumn_CheckAttachedShardCount
                 clr.b   routine(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_44B7E
-                lea     word_46618(pc),a2
+                bne.s   SKSSZColumn_HideRootAfterSpawning
+                lea     SKSSZColumn_ShardRecords(pc),a2
                 move.w  x_pos(a0),d1
                 moveq   #8-1,d2
 
-loc_44B50:
-                move.l  #loc_44BCC,(a1)
+SKSSZColumn_SpawnAndCountShard:
+                move.l  #SKSSZColumn_InitShardAndUpdate,(a1)
                 move.w  a0,$2E(a1)
                 move.w  (a2)+,d3
                 add.w   d1,d3
@@ -42,23 +42,23 @@ loc_44B50:
                 move.b  d3,mapping_frame(a1)
                 addq.b  #1,routine(a0)
                 jsr     (CreateNewSprite4).l
-                dbne    d2,loc_44B50
+                dbne    d2,SKSSZColumn_SpawnAndCountShard
 
-loc_44B7E:
+SKSSZColumn_HideRootAfterSpawning:
                 moveq   #signextendB(sfx_Collapse),d0
                 jsr     (Play_SFX).l
                 clr.b   mapping_frame(a0)
-                move.l  #loc_44B90,(a0)
+                move.l  #SKSSZColumn_CheckAttachedShardCount,(a0)
 
-loc_44B90:
+SKSSZColumn_CheckAttachedShardCount:
                 tst.b   routine(a0)
-                beq.s   loc_44B98
-                bpl.s   loc_44B9E
+                beq.s   SKSSZColumn_MoveEmptyRootOffscreen
+                bpl.s   SKSSZColumn_MoveAndCheckTopSolid
 
-loc_44B98:
+SKSSZColumn_MoveEmptyRootOffscreen:
                 move.w  #$7FFF,x_pos(a0)
 
-loc_44B9E:
+SKSSZColumn_MoveAndCheckTopSolid:
                 move.l  #$2800,d0
                 move.l  #$80,d1
                 jsr     Gradual_SwingOffset(pc)
@@ -72,8 +72,8 @@ loc_44B9E:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_44BCC:
-                move.l  #loc_44BF8,(a0)
+SKSSZColumn_InitShardAndUpdate:
+                move.l  #SKSSZColumn_CullShardAndCheckDetach,(a0)
                 move.b  #$84,render_flags(a0)
                 move.b  #8,height_pixels(a0)
                 move.b  #8,width_pixels(a0)
@@ -81,37 +81,38 @@ loc_44BCC:
                 move.w  #make_art_tile(ArtTile_SSZMisc+$10,3,1),art_tile(a0)
                 move.l  #Map_SSZFloatingPlatform,mappings(a0)
 
-loc_44BF8:
+; On offscreen deletion, decrement the root count only if the detach timer is still positive
+SKSSZColumn_CullShardAndCheckDetach:
                 movea.w $2E(a0),a1
                 tst.b   render_flags(a0)
-                bmi.s   loc_44C14
+                bmi.s   SKSSZColumn_TickDetachOrFall
                 tst.w   $32(a0)
-                beq.s   loc_44C0E
-                bmi.s   loc_44C0E
+                beq.s   SKSSZColumn_DeleteShard
+                bmi.s   SKSSZColumn_DeleteShard
                 subq.b  #1,routine(a1)
 
-loc_44C0E:
+SKSSZColumn_DeleteShard:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_44C14:
+SKSSZColumn_TickDetachOrFall:
                 subq.w  #1,$32(a0)
-                bpl.s   loc_44C2C
+                bpl.s   SKSSZColumn_TryCountShardDetached
                 move.w  y_pos(a0),d0
                 addi.l  #$3800,$34(a0)
                 add.w   $34(a0),d0
-                bra.s   loc_44C3A
+                bra.s   SKSSZColumn_ApplyShardYAndDraw
 ; ---------------------------------------------------------------------------
 
-loc_44C2C:
-                bne.s   loc_44C32
+SKSSZColumn_TryCountShardDetached:
+                bne.s   SKSSZColumn_FollowRootY
                 subq.b  #1,routine(a1)
 
-loc_44C32:
+SKSSZColumn_FollowRootY:
                 move.w  y_pos(a1),d0
                 add.w   $30(a0),d0
 
-loc_44C3A:
+SKSSZColumn_ApplyShardYAndDraw:
                 move.w  d0,y_pos(a0)
                 jmp     (Draw_Sprite).l
 ; End of function Obj_SSZCollapsingColumn

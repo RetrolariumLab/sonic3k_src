@@ -4,7 +4,7 @@
 ; ---------------------------------------------------------------------------
 
 Obj_SSZFloatingPlatform:
-                move.l  #loc_44AA0,(a0)
+                move.l  #SKSSZFloatPlat_CheckRidersForSag,(a0)
                 move.b  #4,render_flags(a0)
                 move.b  #$11,height_pixels(a0)
                 move.b  #$20,width_pixels(a0)
@@ -14,23 +14,23 @@ Obj_SSZFloatingPlatform:
                 move.b  #1,mapping_frame(a0)
                 move.w  y_pos(a0),y_vel(a0)
 
-loc_44AA0:
+SKSSZFloatPlat_CheckRidersForSag:
                 move.w  $2E(a0),d0
                 move.b  status(a0),d1
                 andi.w  #standing_mask,d1
-                bne.s   loc_44AB6
+                bne.s   SKSSZFloatPlat_IncreaseOccupiedSag
                 tst.w   d0
-                beq.s   loc_44ABE
+                beq.s   SKSSZFloatPlat_ApplySagAndCheckSolid
                 subq.w  #1,d0
-                bra.s   loc_44ABE
+                bra.s   SKSSZFloatPlat_ApplySagAndCheckSolid
 ; ---------------------------------------------------------------------------
 
-loc_44AB6:
+SKSSZFloatPlat_IncreaseOccupiedSag:
                 cmpi.w  #4,d0
-                bhs.s   loc_44ABE
+                bhs.s   SKSSZFloatPlat_ApplySagAndCheckSolid
                 addq.w  #1,d0
 
-loc_44ABE:
+SKSSZFloatPlat_ApplySagAndCheckSolid:
                 move.w  d0,$2E(a0)
                 add.w   $1A(a0),d0
                 move.w  d0,y_pos(a0)
