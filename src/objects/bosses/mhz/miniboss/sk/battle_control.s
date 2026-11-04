@@ -14,7 +14,7 @@ Obj_MHZMiniboss:
 
 loc_751E2:
                 bsr.w   HandleMHZMinibossFourColorHitOrDefeat
-                bsr.w   SelectMHZMinibossRootSpritePriorityFromFrame
+                bsr.w   MHZMini_SetPriorityFromFrame
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 MHZMiniboss_Index:
@@ -508,7 +508,7 @@ loc_757C0:
 ; ---------------------------------------------------------------------------
 
 loc_757D6:
-                bsr.w   SelectMHZMinibossLinkedChildFramePriorityAndOffsets
+                bsr.w   MHZMiniPart_SetFramePriorityOffsets
                 jsr     (Refresh_ChildPositionAdjusted).l
                 movea.w parent3(a0),a1
                 btst    #6,$38(a1)
@@ -589,7 +589,7 @@ loc_7589E:
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
                 bpl.s   loc_758B8
-                bsr.w   BounceMHZMinibossThrownActorOrStartRecoveryWait
+                bsr.w   MHZMiniThrown_BounceOrStartRecovery
 
 loc_758B8:
                 jmp     (Animate_RawMultiDelay).l

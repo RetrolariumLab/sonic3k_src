@@ -412,7 +412,7 @@ loc_49674:
                 move.w  #$5F,$2E(a0)
 
 loc_496A4:
-                bsr.w   CaptureAndLiftSecondaryPlayerWithS3HCZExitGeyser
+                bsr.w   S3HCZGeyser_CaptureAndLiftP2
                 move.l  a0,-(sp)
                 jsr     (AnPal_HCZ1).l
                 movea.l (sp)+,a0
@@ -424,7 +424,7 @@ loc_496B8:
                 move.b  #$1A,anim(a1)
                 subq.w  #6,y_pos(a0)
                 subq.w  #6,(Player_1+y_pos).w
-                bsr.w   CaptureAndLiftSecondaryPlayerWithS3HCZExitGeyser
+                bsr.w   S3HCZGeyser_CaptureAndLiftP2
                 subq.w  #1,$2E(a0)
                 bmi.s   loc_496E4
                 move.l  a0,-(sp)

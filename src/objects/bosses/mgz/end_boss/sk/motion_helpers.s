@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-SelectMGZBossAttachmentFrameAndDepthFromParentAngle:
+; Copy the parent angle and index the caller's two-byte pose row. A zero depth entry leaves priority alone
+MGZBossPart_SelectFrameAndDepth:
                 movea.w parent3(a0),a1
                 move.w  angle(a1),d0
                 move.w  d0,angle(a0)
@@ -18,7 +19,7 @@ SelectMGZBossAttachmentFrameAndDepthFromParentAngle:
 
 locret_6D248:
                 rts
-; End of function SelectMGZBossAttachmentFrameAndDepthFromParentAngle
+; End of function MGZBossPart_SelectFrameAndDepth
 
 ; ---------------------------------------------------------------------------
 byte_6D24A:
@@ -43,7 +44,8 @@ byte_6D25A:
 
 ; =============== S U B R O U T I N E =======================================
 
-SelectMGZBossAttachmentOffsetsFromParentAngle:
+; Copy the parent angle and load signed byte offsets from the caller's pose table
+MGZBossPart_SetOffsetsFromAngle:
                 movea.w parent3(a0),a1
                 move.w  angle(a1),d0
                 move.w  d0,angle(a0)
@@ -51,7 +53,7 @@ SelectMGZBossAttachmentOffsetsFromParentAngle:
                 move.b  (a3)+,child_dx(a0)
                 move.b  (a3)+,child_dy(a0)
                 rts
-; End of function SelectMGZBossAttachmentOffsetsFromParentAngle
+; End of function MGZBossPart_SetOffsetsFromAngle
 
 ; ---------------------------------------------------------------------------
 byte_6D284:
@@ -165,7 +167,8 @@ word_6D34E:
 
 ; =============== S U B R O U T I N E =======================================
 
-InitializeMGZBossStaggeredTrailVelocityAndDelay:
+; Use the parent angle for velocity and the child's even subtype for its delay
+MGZBossTrail_InitVelAndDelay:
                 movea.w parent3(a0),a1
                 move.w  angle(a1),d0
                 add.w   d0,d0
@@ -179,7 +182,7 @@ loc_6D38A:
                 move.b  subtype(a0),d0
                 move.w  word_6D398(pc,d0.w),$2E(a0)
                 rts
-; End of function InitializeMGZBossStaggeredTrailVelocityAndDelay
+; End of function MGZBossTrail_InitVelAndDelay
 
 ; ---------------------------------------------------------------------------
 word_6D398:
@@ -486,7 +489,8 @@ loc_6D6BC:
 
 ; =============== S U B R O U T I N E =======================================
 
-SelectMGZBossScaledFlybyAndNextEntryPattern:
+; The eight-step parent counter selects the scaled flyby's vertical motion and the real boss's next entry
+MGZBossFlyby_SelectPathAndEntry:
                 movea.w parent3(a0),a2
                 moveq   #0,d0
                 move.b  $39(a2),d0
@@ -499,7 +503,7 @@ SelectMGZBossScaledFlybyAndNextEntryPattern:
                 move.w  (a1)+,y_vel(a0)
                 move.w  (a1)+,$3C(a0)
                 rts
-; End of function SelectMGZBossScaledFlybyAndNextEntryPattern
+; End of function MGZBossFlyby_SelectPathAndEntry
 
 ; ---------------------------------------------------------------------------
 word_6D6F8:

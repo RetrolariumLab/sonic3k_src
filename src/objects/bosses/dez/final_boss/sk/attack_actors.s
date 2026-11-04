@@ -11,12 +11,12 @@ loc_80A3A:
                 jsr     off_80A5C(pc,d1.w)
                 tst.b   subtype(a0)
                 bne.s   loc_80A56
-                bsr.w   PositionDEZFinalChildFromParentWordOffsets
+                bsr.w   DEZFinalChild_SetPosFromParent
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
 loc_80A56:
-                bsr.s   PositionDEZFinalAttackXFromParentOffsetOnly
+                bsr.s   DEZFinalAttack_SetXFromParent
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 off_80A5C:
@@ -107,7 +107,7 @@ loc_80B22:
                 andi.b  #7,d0
                 cmpi.b  #7,d0
                 beq.s   loc_80B42
-                bra.w   PositionDEZFinalAttackXFromParentOffsetOnly
+                bra.w   DEZFinalAttack_SetXFromParent
 ; ---------------------------------------------------------------------------
 
 loc_80B42:
@@ -298,7 +298,7 @@ loc_80CF8:
                 btst    #1,$38(a1)
                 bne.s   loc_80D18
                 jsr     Refresh_ChildPosition(pc)
-                bsr.w   ContinueDEZArmSegmentFlashOrSharedDestruction
+                bsr.w   DEZArmSegment_ContinueFlashOrBreak
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 

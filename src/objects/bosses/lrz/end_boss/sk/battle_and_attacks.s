@@ -41,7 +41,7 @@ loc_797FA:
                 move.b  routine(a0),d0
                 move.w  off_79812(pc,d0.w),d1
                 jsr     off_79812(pc,d1.w)
-                bsr.w   ConsumeLRZEndBossSelfHitLatchAndHandleDefeat
+                bsr.w   LRZBoss_HandleSelfHitOrDefeat
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 off_79812:
@@ -249,7 +249,7 @@ loc_79A54:
 
 loc_79A68:
                 move.w  d0,x_pos(a0)
-                bsr.w   SpawnLRZEndBossStreamPlatformAndRememberSlot
+                bsr.w   LRZBossStream_SpawnPlatform
 
 loc_79A70:
                 tst.b   (_unkFAA3).w
@@ -266,7 +266,8 @@ loc_79A86:
 
 ; =============== S U B R O U T I N E =======================================
 
-SpawnLRZEndBossStreamPlatformAndRememberSlot:
+; Save the allocated slot for the next platform spacing test
+LRZBossStream_SpawnPlatform:
                 jsr     (AllocateObject).l
                 bne.s   locret_79AA6
                 move.l  #loc_79E5A,(a1)
@@ -275,7 +276,7 @@ SpawnLRZEndBossStreamPlatformAndRememberSlot:
 
 locret_79AA6:
                 rts
-; End of function SpawnLRZEndBossStreamPlatformAndRememberSlot
+; End of function LRZBossStream_SpawnPlatform
 
 ; ---------------------------------------------------------------------------
 
@@ -290,7 +291,7 @@ loc_79AAE:
                 move.w  #-$800,y_vel(a0)
 
 loc_79AC4:
-                bsr.w   DeleteLRZEndBossProjectileOnParentDeathAndAbortUpdate
+                bsr.w   LRZBossShot_DeleteIfParentDefeated
                 tst.w   y_vel(a0)
                 bmi.s   loc_79B02
                 move.l  #loc_79B22,(a0)
@@ -323,7 +324,7 @@ loc_79B16:
 ; ---------------------------------------------------------------------------
 
 loc_79B22:
-                bsr.w   DeleteLRZEndBossProjectileOnParentDeathAndAbortUpdate
+                bsr.w   LRZBossShot_DeleteIfParentDefeated
                 jsr     (MoveSprite_LightGravity).l
                 movea.w $44(a0),a1
                 moveq   #0,d0
@@ -341,7 +342,7 @@ loc_79B4A:
                 clr.w   y_vel(a0)
 
 loc_79B54:
-                bsr.w   DeleteLRZEndBossProjectileOnParentDeathAndAbortUpdate
+                bsr.w   LRZBossShot_DeleteIfParentDefeated
                 tst.b   (_unkFAA3).w
                 bne.s   loc_79B66
                 tst.b   render_flags(a0)

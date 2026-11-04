@@ -39,7 +39,7 @@ loc_75FD4:
                 jsr     off_75FF4(pc,d1.w)
                 move.w  (Level_repeat_offset).w,d0
                 sub.w   d0,x_pos(a0)
-                bsr.w   HandleMHZEndBossPairedHitFlashAndEscapeThreshold
+                bsr.w   MHZBoss_HandlePairedHitsAndEscape
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 off_75FF4:
@@ -424,7 +424,7 @@ loc_764E0:
                 bset    #7,art_tile(a0)
 
 loc_764F8:
-                bsr.w   SyncMHZEndBossOverlayPositionAndHorizontalFlip
+                bsr.w   MHZBossOverlay_SyncPosAndXFlip
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
 
@@ -435,7 +435,7 @@ loc_76502:
                 bsr.w   SelectMHZEndBossOverlayLayerBySubtype
 
 loc_76516:
-                bsr.w   SyncMHZEndBossOverlayPositionAndHorizontalFlip
+                bsr.w   MHZBossOverlay_SyncPosAndXFlip
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
 

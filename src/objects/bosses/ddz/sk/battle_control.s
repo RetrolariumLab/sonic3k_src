@@ -76,7 +76,7 @@ loc_818B4:
                 jsr     (MoveSprite2).l
                 move.w  #$160,d2
                 move.w  #$130,d3
-                bsr.w   StepDDZBossXFromRightInputAndFlightControllerSpeed
+                bsr.w   DDZBoss_StepXFromFlightInput
                 move.w  (_unkFAA4).w,d0
                 beq.s   locret_81912
                 movea.w d0,a1
@@ -100,7 +100,7 @@ locret_81912:
 loc_81914:
                 move.w  #$160,d2
                 move.w  #$130,d3
-                bsr.w   StepDDZBossXFromRightInputAndFlightControllerSpeed
+                bsr.w   DDZBoss_StepXFromFlightInput
                 subq.w  #1,$2E(a0)
                 bpl.s   locret_81956
                 move.b  #8,routine(a0)
@@ -137,7 +137,7 @@ loc_8197C:
                 jsr     (Play_SFX_Continuous).l
                 move.w  #$160,d2
                 move.w  #$130,d3
-                bsr.w   StepDDZBossXFromRightInputAndFlightControllerSpeed
+                bsr.w   DDZBoss_StepXFromFlightInput
                 jsr     (MoveSprite2).l
                 move.w  (Camera_max_Y_pos).w,d0
                 addi.w  #$D0,d0
@@ -316,7 +316,7 @@ loc_81BB0:
 
 loc_81BB2:
                 move.l  d0,x_pos(a0)
-                bsr.w   TrySpawnDDZBossFourShotPatternByPlayerHeight
+                bsr.w   DDZBoss_TryFourShotBurst
                 bra.w   loc_82DCE
 ; ---------------------------------------------------------------------------
 
@@ -512,7 +512,7 @@ loc_81DCC:
                 jsr     Animate_RawNoSSTMultiDelay(pc)
 
 loc_81DD8:
-                bsr.w   PositionDDZAttachedActorFromParentWordOffsets
+                bsr.w   DDZChild_SetPosFromParent
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
                 beq.s   loc_81E16
@@ -565,12 +565,12 @@ loc_81E54:
                 move.b  #7,collision_property(a0)
 
 loc_81E72:
-                bsr.w   PositionDDZAttachedActorFromParentWordOffsets
+                bsr.w   DDZChild_SetPosFromParent
                 bra.w   loc_82D18
 ; ---------------------------------------------------------------------------
 
 loc_81E7A:
-                bsr.w   PositionDDZAttachedActorFromParentWordOffsets
+                bsr.w   DDZChild_SetPosFromParent
                 jmp     Child_Draw_Sprite2(pc)
 ; ---------------------------------------------------------------------------
 
@@ -632,11 +632,11 @@ loc_81F14:
                 lea     word_831C6(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
                 move.l  #loc_81F26,(a0)
-                bsr.w   SetDDZTurretShotVelocityFromParentEightWayIndex
+                bsr.w   DDZTurretShot_SetVelFromParentAngle
 
 loc_81F26:
                 jsr     (MoveSprite2).l
-                jsr     (ResolveDDZTurretShotPlayerContactOrParentDeath).l
+                jsr     (DDZTurretShot_CheckContactOrRetire).l
                 jmp     Sprite_CheckDeleteXY(pc)
 ; ---------------------------------------------------------------------------
 
@@ -662,7 +662,7 @@ word_81F5E:
 ; ---------------------------------------------------------------------------
 
 loc_81F6A:
-                bsr.w   PositionDDZAttachedActorFromParentWordOffsets
+                bsr.w   DDZChild_SetPosFromParent
                 btst    #1,(V_int_run_count+3).w
                 bne.s   loc_81F7A
                 jmp     Child_Draw_Sprite(pc)
@@ -684,7 +684,7 @@ word_81F8C:
 ; ---------------------------------------------------------------------------
 
 loc_81F94:
-                bsr.w   PositionDDZAttachedActorFromParentWordOffsets
+                bsr.w   DDZChild_SetPosFromParent
                 tst.b   $39(a0)
                 bpl.s   loc_81FDA
                 move.w  (Player_1+x_pos).w,d0

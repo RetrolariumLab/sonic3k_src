@@ -83,7 +83,7 @@ loc_7C726:
                 lea     ObjDat3_7D444(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.l  #loc_7C738,(a0)
-                bsr.w   SeedSSZSuperMechaEightWayProjectileVelocity
+                bsr.w   SSZSuperMechaShot_InitEightWayVel
 
 loc_7C738:
                 jsr     (MoveSprite2).l
@@ -94,7 +94,7 @@ loc_7C744:
                 lea     ObjDat3_7D438(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.l  #loc_7C756,(a0)
-                bsr.w   SelectSSZMechaLaserAnimationAndCompletionBySubtype
+                bsr.w   SSZMechaLaser_SelectAnimAndCallback
 
 loc_7C756:
                 jsr     Animate_Raw(pc)
@@ -245,7 +245,7 @@ loc_7C902:
                 lea     ObjDat3_7D402(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.l  #loc_7C91C,(a0)
-                bsr.w   SelectSSZMechaRollingTrailOffsetsAndQueuePriority
+                bsr.w   SSZMechaTrail_InitOffsetsAndPriority
                 moveq   #signextendB(sfx_Roll),d0
                 jsr     (Play_SFX).l
 

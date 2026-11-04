@@ -178,7 +178,7 @@ loc_513AC:
 
 loc_513BA:
                 move.b  #$9A,d0
-                bsr.w   LatchLBZFinalBoss2ChildTilePriorityAndCollision
+                bsr.w   LBZBoss2Child_LatchPriorityAndColl
                 jsr     Refresh_ChildPositionAdjusted(pc)
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)

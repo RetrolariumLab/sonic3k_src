@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ScheduleDEZBossCapsuleExplosionThenThreeDebris:
+; The delayed callback spawns three fragments before deleting the capsule
+DEZCapsule_ExplodeThenSpawnDebris:
                 move.l  #loc_7F4EE,$34(a0)
 
 loc_7F4C0:
@@ -19,7 +20,7 @@ loc_7F4D4:
                 subq.b  #1,$39(a1)
                 move.w  #7,$2E(a0)
                 jmp     (Draw_Sprite).l
-; End of function ScheduleDEZBossCapsuleExplosionThenThreeDebris
+; End of function DEZCapsule_ExplodeThenSpawnDebris
 
 ; ---------------------------------------------------------------------------
 
@@ -36,8 +37,8 @@ loc_7F4FA:
                 jsr     off_7F51E(pc,d1.w)
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.w   ScheduleDEZBossCapsuleExplosionThenDelete
-                bsr.w   DamageDEZEndBossFromCapsuleRangeAndDestroyCapsule
+                bne.w   DEZCapsule_ExplodeThenDelete
+                bsr.w   DEZCapsule_CheckBossHitAndShatter
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 off_7F51E:
@@ -49,8 +50,8 @@ off_7F51E:
 ; ---------------------------------------------------------------------------
 
 loc_7F528:
-                bsr.w   HandleRestingDEZCapsulePlayerContactAndLaunch
-                bsr.w   DropDEZCapsuleWhenRestingSideMismatchesGravity
+                bsr.w   DEZCapsule_CheckRestingContact
+                bsr.w   DEZCapsule_DropIfGravityReversed
                 subq.w  #1,$2E(a0)
                 bmi.s   loc_7F55A
                 rts
@@ -62,7 +63,7 @@ loc_7F538:
                 bsr.w   ReverseDEZEndBossAtInclusiveWorldXBounds
                 lea     byte_7FCDE(pc),a1
                 jsr     Animate_RawNoSST(pc)
-                bsr.w   DropDEZCapsuleWhenRestingSideMismatchesGravity
+                bsr.w   DEZCapsule_DropIfGravityReversed
                 subq.w  #1,$2E(a0)
                 bpl.w   locret_7F0D8
 
@@ -73,10 +74,10 @@ loc_7F55A:
 ; ---------------------------------------------------------------------------
 
 loc_7F568:
-                jsr     (MoveDEZBossCapsuleWithPreintegratedReversibleGravity).l
+                jsr     (DEZCapsule_MoveWithGravity).l
 
 loc_7F56E:
-                bsr.w   HandleFallingDEZCapsuleContactSuppressionAndAttack
+                bsr.w   DEZCapsule_CheckFallingContact
                 tst.w   y_vel(a0)
                 bpl.s   loc_7F5A0
                 jsr     (ObjCheckCeilingDist).l
@@ -118,7 +119,7 @@ loc_7F5D2:
                 bchg    #1,render_flags(a0)
 
 loc_7F5DE:
-                jsr     (MoveDEZBossCapsuleWithPreintegratedReversibleGravity).l
+                jsr     (DEZCapsule_MoveWithGravity).l
                 bsr.w   ReverseDEZEndBossAtInclusiveWorldXBounds
                 move.w  #$80,d0
                 tst.w   x_vel(a0)
@@ -133,7 +134,7 @@ loc_7F5F4:
 loc_7F5FC:
                 subq.w  #1,$2E(a0)
                 bpl.s   locret_7F608
-                bsr.w   ScheduleDEZBossCapsuleExplosionThenThreeDebris
+                bsr.w   DEZCapsule_ExplodeThenSpawnDebris
                 addq.w  #4,sp
 
 locret_7F608:
@@ -145,7 +146,7 @@ loc_7F60A:
                 jsr     SetUp_ObjAttributes3(pc)
                 move.l  #loc_7F62E,(a0)
                 jsr     Refresh_ChildPositionAdjusted(pc)
-                bsr.w   SeedDEZCapsuleThreeFragmentFramesAndVelocity
+                bsr.w   DEZCapsuleDebris_InitFrameAndVel
                 movea.w parent3(a0),a1
                 movea.w parent3(a1),a1
                 move.w  a1,parent3(a0)

@@ -8,7 +8,7 @@ Obj_LBZFinalBoss1:
                 move.b  routine(a0),d0
                 move.w  LBZFinalBoss1_Index(pc,d0.w),d1
                 jsr     LBZFinalBoss1_Index(pc,d1.w)
-                bsr.w   HandleLBZFinalBoss1HitSectionDropOrDefeat
+                bsr.w   LBZBoss1_HandleHitOrDefeat
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 LBZFinalBoss1_Index:
@@ -262,14 +262,14 @@ loc_72C68:
                 move.l  #loc_72C9E,(a0)
                 move.l  #loc_72CBE,$34(a0)
                 lea     (Player_1).w,a1
-                bsr.w   PreparePlayerForLBZEndingExternalAnimation
+                bsr.w   LBZEnding_InitExternalPlayerAnim
                 lea     (Player_2).w,a1
 ; Bug: this tries to hide Tails' tails by clearing his anim, but Tails is
 ; in a1. loc_72C9E fixes this, but only for player 2. Conversely, S3 only
 ; clears player 1's anim here, as P2 is absent from the final boss
                 clr.b   anim(a0)
 
-PreparePlayerForLBZEndingExternalAnimation:
+LBZEnding_InitExternalPlayerAnim:
                 move.b  #$83,object_control(a1)
                 clr.b   anim_frame_timer(a1)
                 clr.b   anim_frame(a1)

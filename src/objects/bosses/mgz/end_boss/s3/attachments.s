@@ -54,9 +54,9 @@ loc_4A67A:
 
 loc_4A680:
                 lea     byte_4AEBC(pc),a2
-                bsr.w   SelectMGZBossAttachmentFrameAndDepthFromParentAngle
+                bsr.w   MGZBossPart_SelectFrameAndDepth
                 lea     byte_4AEF6(pc),a2
-                bsr.w   SelectMGZBossAttachmentOffsetsFromParentAngle
+                bsr.w   MGZBossPart_SetOffsetsFromAngle
                 jmp     (Refresh_ChildPositionAdjusted).l
 ; ---------------------------------------------------------------------------
 
@@ -101,11 +101,11 @@ loc_4A6E2:
                 btst    #3,$38(a1)
                 bne.s   loc_4A70C
                 lea     byte_4AECC(pc),a2
-                bsr.w   SelectMGZBossAttachmentFrameAndDepthFromParentAngle
+                bsr.w   MGZBossPart_SelectFrameAndDepth
 
 loc_4A6FE:
                 lea     byte_4AF06(pc),a2
-                bsr.w   SelectMGZBossAttachmentOffsetsFromParentAngle
+                bsr.w   MGZBossPart_SetOffsetsFromAngle
                 jmp     (Refresh_ChildPositionAdjusted).l
 ; ---------------------------------------------------------------------------
 

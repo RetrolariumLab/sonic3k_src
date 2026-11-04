@@ -16,7 +16,7 @@ loc_78B3E:
 
 ; =============== S U B R O U T I N E =======================================
 
-ScheduleLRZMinibossArmSegmentDestructionBySide:
+LRZMiniArm_TryBreakSegmentBySide:
                 movea.w $44(a0),a1
                 moveq   #6,d0
                 btst    #0,render_flags(a0)
@@ -36,7 +36,7 @@ loc_78B56:
                 move.w  d1,$2E(a0)
                 move.l  #loc_78B86,$34(a0)
                 rts
-; End of function ScheduleLRZMinibossArmSegmentDestructionBySide
+; End of function LRZMiniArm_TryBreakSegmentBySide
 
 ; ---------------------------------------------------------------------------
 
@@ -75,13 +75,14 @@ word_78BCA:
 
 ; =============== S U B R O U T I N E =======================================
 
-SuspendLRZArmInitializationUntilCapturedContinuation:
+; Pop the immediate BSR return into the wait callback and return past the rest of arm initialization
+LRZMiniArm_DeferInitContinuation:
                 move.l  (sp)+,$34(a0)
                 move.l  #Wait_Draw,(a0)
                 move.b  #$80,$3C(a0)
                 move.b  #1,$40(a0)
                 rts
-; End of function SuspendLRZArmInitializationUntilCapturedContinuation
+; End of function LRZMiniArm_DeferInitContinuation
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -102,7 +103,8 @@ loc_78BFE:
 
 ; =============== S U B R O U T I N E =======================================
 
-HandleLRZMinibossRootHitOrDefeatWithMisoffsetFlash:
+; The hit flash uses the existing misaligned six-color source offset. Defeat also destroys both arms
+LRZMini_HandleHitFlashOrDefeat:
                 tst.b   collision_flags(a0)
                 bne.s   locret_78C5E
                 move.b  collision_property(a0),d0
@@ -122,7 +124,7 @@ loc_78C3A:
                 addi.w  #2*2,d0
 
 loc_78C48:
-                bsr.w   CopyLRZMinibossSixColorPaletteAtByteOffset
+                bsr.w   LRZMini_CopyPalette6
                 subq.b  #1,$20(a0)
                 bne.s   locret_78C5E
                 bclr    #6,status(a0)
@@ -142,15 +144,16 @@ loc_78C60:
                 jsr     (CreateChild1_Normal).l
                 jsr     (Displace_PlayerOffObject).l
                 jmp     (BossDefeated_StopTimer).l
-; End of function HandleLRZMinibossRootHitOrDefeatWithMisoffsetFlash
+; End of function LRZMini_HandleHitFlashOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
-CopyLRZMinibossSixColorPaletteAtByteOffset:
+; d0.w is a source byte offset and can select the misaligned flash row
+LRZMini_CopyPalette6:
                 lea     word_78CA6(pc),a1
                 lea     word_78CB2(pc,d0.w),a2
                 jmp     (CopyWordData_6).l
-; End of function CopyLRZMinibossSixColorPaletteAtByteOffset
+; End of function LRZMini_CopyPalette6
 
 ; ---------------------------------------------------------------------------
 word_78CA6:
@@ -162,7 +165,8 @@ word_78CB2:
 
 ; =============== S U B R O U T I N E =======================================
 
-ContinueLRZMinibossRootFlashWhileRetracting:
+; Continue the active flash during noncolliding retraction. Zero HP still enters defeat
+LRZMini_TickFlashWhileRetracting:
                 tst.b   collision_property(a0)
                 beq.s   loc_78C60
                 tst.b   $20(a0)
@@ -174,18 +178,19 @@ ContinueLRZMinibossRootFlashWhileRetracting:
                 addi.w  #2*2,d0
 
 loc_78CE4:
-                bsr.s   CopyLRZMinibossSixColorPaletteAtByteOffset
+                bsr.s   LRZMini_CopyPalette6
                 subq.b  #1,$20(a0)
                 bne.s   locret_78CF2
                 bclr    #6,status(a0)
 
 locret_78CF2:
                 rts
-; End of function ContinueLRZMinibossRootFlashWhileRetracting
+; End of function LRZMini_TickFlashWhileRetracting
 
 ; =============== S U B R O U T I N E =======================================
 
-HandleLRZMinibossTerminalArmHitAndSideDefeat:
+; A hit disables collision during the flash and spawns an impact. A defeated tip marks its side in the root
+LRZMiniArmTip_HandleHitOrDefeat:
                 tst.b   collision_flags(a0)
                 bne.s   locret_78D2A
                 move.b  collision_property(a0),d0
@@ -222,4 +227,4 @@ loc_78D40:
                 bne.s   locret_78D2A
                 move.w  #$1F,$2E(a1)
                 rts
-; End of function HandleLRZMinibossTerminalArmHitAndSideDefeat
+; End of function LRZMiniArmTip_HandleHitOrDefeat

@@ -280,7 +280,7 @@ loc_7E0A6:
                 jsr     (Play_SFX).l
 
 loc_7E0B8:
-                bsr.w   ReactToDEZMinibossSecondFormHitCountOrDefeat
+                bsr.w   DEZMiniForm2_ReactToHitOrDefeat
                 moveq   #0,d0
                 move.b  routine(a0),d0
                 move.w  off_7E0CA(pc,d0.w),d1
@@ -298,22 +298,22 @@ off_7E0CA:
 loc_7E0D6:
                 jsr     Swing_UpAndDown(pc)
                 jsr     (MoveSprite2).l
-                bsr.w   ReverseDEZMinibossHorizontalVelocityPastBounds
-                bsr.w   RetargetDEZMinibossPlatformAngularVelocityFromPlayer
+                bsr.w   DEZMini_ReversePastArenaXBounds
+                bsr.w   DEZMini_RetargetPlatformSpin
                 btst    #1,$38(a0)
                 beq.s   loc_7E0F4
-                bsr.w   EnterDEZMinibossPlatformExpansionReaction
+                bsr.w   DEZMini_BeginPlatformExpansion
 
 loc_7E0F4:
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-EnterDEZMinibossPlatformExpansionReaction:
+DEZMini_BeginPlatformExpansion:
                 move.b  #2,routine(a0)
                 bset    #7,$38(a0)
                 rts
-; End of function EnterDEZMinibossPlatformExpansionReaction
+; End of function DEZMini_BeginPlatformExpansion
 
 ; ---------------------------------------------------------------------------
 
@@ -321,8 +321,8 @@ loc_7E108:
                 jsr     Run_PalRotationScript(pc)
                 jsr     Swing_UpAndDown(pc)
                 jsr     (MoveSprite2).l
-                bsr.w   SetDEZMinibossPlayerPursuitVelocityWithinBounds
-                bsr.w   RetargetDEZMinibossPlatformAngularVelocityFromPlayer
+                bsr.w   DEZMini_SetPursuitVelWithinBounds
+                bsr.w   DEZMini_RetargetPlatformSpin
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -345,7 +345,7 @@ loc_7E13C:
 ; ---------------------------------------------------------------------------
 
 loc_7E15C:
-                bsr.s   EnterDEZMinibossPlatformExpansionReaction
+                bsr.s   DEZMini_BeginPlatformExpansion
                 bclr    #3,$38(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -560,7 +560,7 @@ loc_7E3CA:
                 bclr    #7,(Player_1+art_tile).w
 
 loc_7E3E8:
-                bra.w   AdvanceDEZPostBossPlayerTwelvePoseSpinAndPLC
+                bra.w   DEZPostBoss_AdvancePlayerSpin
 ; ---------------------------------------------------------------------------
 
 loc_7E3EC:
@@ -576,11 +576,11 @@ loc_7E3EC:
 
 loc_7E416:
                 subi.w  #$10,(Player_1+y_pos).w
-                bra.w   AdvanceDEZPostBossPlayerTwelvePoseSpinAndPLC
+                bra.w   DEZPostBoss_AdvancePlayerSpin
 ; ---------------------------------------------------------------------------
 
 loc_7E420:
-                bsr.w   AdvanceDEZPostBossPlayerTwelvePoseSpinAndPLC
+                bsr.w   DEZPostBoss_AdvancePlayerSpin
                 tst.w   y_vel(a0)
                 bmi.s   loc_7E44C
                 move.l  #loc_7E44C,(a0)
@@ -691,7 +691,7 @@ loc_7E566:
                 bne.s   loc_7E590
 
 loc_7E57A:
-                bsr.w   AccelerateDEZPlatformSharedAngularStepAndAdvancePhase
+                bsr.w   DEZMiniPlatform_AccelAndStepAngle
                 bra.w   loc_7EBF2
 ; ---------------------------------------------------------------------------
 
@@ -710,7 +710,7 @@ loc_7E598:
                 movea.w parent3(a0),a1
                 btst    #7,$38(a1)
                 bne.s   loc_7E582
-                bsr.w   AccelerateDEZPlatformSharedAngularStepAndAdvancePhase
+                bsr.w   DEZMiniPlatform_AccelAndStepAngle
                 movea.w parent3(a0),a1
                 move.b  $3C(a0),d0
                 tst.w   $3C(a1)
@@ -825,7 +825,7 @@ loc_7E6B6:
                 bne.w   loc_7E582
                 btst    #6,$38(a1)
                 beq.s   loc_7E6D0
-                bsr.w   RestoreDEZMinibossPlatformIdleHandlerBySide
+                bsr.w   DEZMiniPlatform_RestoreIdleBySide
 
 loc_7E6D0:
                 bra.w   loc_7EBF2

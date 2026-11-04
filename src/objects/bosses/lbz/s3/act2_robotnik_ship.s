@@ -43,7 +43,7 @@ loc_5A84E:
                 move.l  #loc_5AAAE,(a1)
 
 loc_5A8DE:
-                jsr     ForceLBZShipCarryFrameAndReloadPlayerGraphics(pc)
+                jsr     LBZShip_SetPlayerCarryFrame(pc)
 
 loc_5A8E2:
                 jmp     Sprite_CheckDeleteTouch(pc)
@@ -65,7 +65,7 @@ loc_5A912:
                 jsr     (MoveSprite2).l
                 bsr.w   AttachPlayer1PositionToLBZRobotnikShip
                 jsr     (Obj_Wait).l
-                jsr     ForceLBZShipCarryFrameAndReloadPlayerGraphics(pc)
+                jsr     LBZShip_SetPlayerCarryFrame(pc)
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
@@ -97,7 +97,7 @@ loc_5A94C:
                 move.l  #loc_5A990,$34(a0)
 
 loc_5A988:
-                jsr     ForceLBZShipCarryFrameAndReloadPlayerGraphics(pc)
+                jsr     LBZShip_SetPlayerCarryFrame(pc)
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
@@ -125,7 +125,7 @@ loc_5A9AC:
                 jsr     (Swing_Setup1).l
 
 loc_5A9E4:
-                jsr     ForceLBZShipCarryFrameAndReloadPlayerGraphics(pc)
+                jsr     LBZShip_SetPlayerCarryFrame(pc)
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
@@ -166,7 +166,7 @@ loc_5AA18:
                 move.w  #$780,y_pos(a1)
 
 loc_5AA78:
-                jsr     ForceLBZShipCarryFrameAndReloadPlayerGraphics(pc)
+                jsr     LBZShip_SetPlayerCarryFrame(pc)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -208,7 +208,8 @@ loc_5AAC4:
 
 ; =============== S U B R O U T I N E =======================================
 
-ForceLBZShipCarryFrameAndReloadPlayerGraphics:
+; Force the character-specific carry pose and invalidate its pattern cache before reloading
+LBZShip_SetPlayerCarryFrame:
                 lea     (Player_1).w,a1
                 moveq   #0,d0
                 move.b  character_id(a1),d0
@@ -217,7 +218,7 @@ ForceLBZShipCarryFrameAndReloadPlayerGraphics:
                 movea.w word_5AAEA(pc,d0.w),a2
                 clr.b   (a2)
                 jmp     (Player_Load_PLC).l
-; End of function ForceLBZShipCarryFrameAndReloadPlayerGraphics
+; End of function LBZShip_SetPlayerCarryFrame
 
 ; ---------------------------------------------------------------------------
 RawAni_5AAE8:

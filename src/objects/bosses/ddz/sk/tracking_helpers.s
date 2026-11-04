@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-TurnDDZHomingMissileTwoAngleUnitsTowardPlayer:
+; Turn by two angle units on three out of four V-int ticks
+DDZMissile_TurnTowardP1:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #3,d0
                 beq.s   locret_82AA4
@@ -21,11 +22,11 @@ loc_82AA0:
 
 locret_82AA4:
                 rts
-; End of function TurnDDZHomingMissileTwoAngleUnitsTowardPlayer
+; End of function DDZMissile_TurnTowardP1
 
 ; =============== S U B R O U T I N E =======================================
 
-QuantizeDDZMissileHeadingToEightDisplaySectors:
+DDZMissile_SelectEightWayFrame:
                 move.b  $3C(a0),d0
                 addi.b  #$10,d0
                 lsr.b   #5,d0
@@ -35,7 +36,7 @@ QuantizeDDZMissileHeadingToEightDisplaySectors:
 
 locret_82ABA:
                 rts
-; End of function QuantizeDDZMissileHeadingToEightDisplaySectors
+; End of function DDZMissile_SelectEightWayFrame
 
 ; ---------------------------------------------------------------------------
 
@@ -50,7 +51,8 @@ loc_82ABC:
 
 ; =============== S U B R O U T I N E =======================================
 
-SetDDZMissileFlameFrameAndRearOffsetFromSector:
+; Index both the flame frame and the rear offset by the parent missile's display sector
+DDZMissileFlame_SetFrameAndOffset:
                 movea.w parent3(a0),a1
                 moveq   #0,d0
                 move.b  $3D(a1),d0
@@ -59,7 +61,7 @@ SetDDZMissileFlameFrameAndRearOffsetFromSector:
                 add.w   d0,d0
                 move.w  byte_82AF6(pc,d0.w),child_dx(a0)  ; and child_dy
                 rts
-; End of function SetDDZMissileFlameFrameAndRearOffsetFromSector
+; End of function DDZMissileFlame_SetFrameAndOffset
 
 ; ---------------------------------------------------------------------------
 byte_82AF6:
@@ -75,7 +77,8 @@ byte_82AF6:
 
 ; =============== S U B R O U T I N E =======================================
 
-ResolveDDZMissileBossOrPlayerContactAndDisposal:
+; Check the vulnerable boss before Player 1. Contact schedules explosion cleanup. A defeated parent also retires the missile
+DDZMissile_CheckContactAndRetire:
                 tst.b   (Super_Sonic_Knux_flag).w
                 beq.s   locret_82B60
                 tst.b   render_flags(a0)
@@ -142,7 +145,7 @@ loc_82B84:
 loc_82BAC:
                 bset    #7,status(a0)
                 rts
-; End of function ResolveDDZMissileBossOrPlayerContactAndDisposal
+; End of function DDZMissile_CheckContactAndRetire
 
 ; ---------------------------------------------------------------------------
 word_82BB4:
@@ -165,7 +168,8 @@ word_82BDC:
 
 ; =============== S U B R O U T I N E =======================================
 
-ResolveDDZTurretShotPlayerContactOrParentDeath:
+; Retire when the parent dies. A Player 1 hit also sets a short invulnerability timer
+DDZTurretShot_CheckContactOrRetire:
                 tst.b   (Super_Sonic_Knux_flag).w
                 beq.s   locret_82C1E
                 movea.w parent3(a0),a1
@@ -186,7 +190,7 @@ loc_82C18:
 
 locret_82C1E:
                 rts
-; End of function ResolveDDZTurretShotPlayerContactOrParentDeath
+; End of function DDZTurretShot_CheckContactOrRetire
 
 ; ---------------------------------------------------------------------------
 word_82C20:
@@ -194,7 +198,8 @@ word_82C20:
 
 ; =============== S U B R O U T I N E =======================================
 
-ResolveDDZHeavyProjectileContactAndReduceFlightSpeed:
+; On a Player 1 hit, start the invulnerability timer and explode the projectile after slowing flight
+DDZHeavyShot_CheckHitAndSlowFlight:
                 tst.b   (Super_Sonic_Knux_flag).w
                 beq.s   locret_82C4E
                 lea     (Player_1).w,a1
@@ -213,9 +218,9 @@ locret_82C4E:
 loc_82C50:
                 lea     (Player_1).w,a1
                 move.b  #90-1,invulnerability_timer(a1)
-                bsr.w   ReduceDDZFlightScrollSpeedByThreeWithOnePixelFloor
+                bsr.w   DDZFlight_ReduceScrollSpeed
                 bra.w   loc_82B84
-; End of function ResolveDDZHeavyProjectileContactAndReduceFlightSpeed
+; End of function DDZHeavyShot_CheckHitAndSlowFlight
 
 ; ---------------------------------------------------------------------------
 word_82C62:
@@ -223,7 +228,8 @@ word_82C62:
 
 ; =============== S U B R O U T I N E =======================================
 
-ReduceDDZFlightScrollSpeedByThreeWithOnePixelFloor:
+; Subtract three pixels per update from 16.16 speed, with a signed minimum of one pixel per update
+DDZFlight_ReduceScrollSpeed:
                 move.l  (_unkFA82).w,d0
                 move.l  #$10000,d1
                 subi.l  #$30000,d0
@@ -234,11 +240,12 @@ ReduceDDZFlightScrollSpeedByThreeWithOnePixelFloor:
 loc_82C80:
                 move.l  d0,(_unkFA82).w
                 rts
-; End of function ReduceDDZFlightScrollSpeedByThreeWithOnePixelFloor
+; End of function DDZFlight_ReduceScrollSpeed
 
 ; =============== S U B R O U T I N E =======================================
 
-PositionDDZAttachedActorFromParentWordOffsets:
+; Apply the child's signed word offsets to the parent's integer coordinates
+DDZChild_SetPosFromParent:
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),d0
                 move.w  y_pos(a1),d1
@@ -247,17 +254,17 @@ PositionDDZAttachedActorFromParentWordOffsets:
                 move.w  d0,x_pos(a0)
                 move.w  d1,$14(a0)
                 rts
-; End of function PositionDDZAttachedActorFromParentWordOffsets
+; End of function DDZChild_SetPosFromParent
 
 ; =============== S U B R O U T I N E =======================================
 
-SetDDZTurretShotVelocityFromParentEightWayIndex:
+DDZTurretShot_SetVelFromParentAngle:
                 movea.w parent3(a0),a1
                 move.w  angle(a1),d0
                 add.w   d0,d0
                 move.l  word_82CB6(pc,d0.w),x_vel(a0)   ; and y_vel
                 rts
-; End of function SetDDZTurretShotVelocityFromParentEightWayIndex
+; End of function DDZTurretShot_SetVelFromParentAngle
 
 ; ---------------------------------------------------------------------------
 word_82CB6:
@@ -324,7 +331,7 @@ loc_82D3E:
                 addi.w  #2*$C,d0
 
 loc_82D4C:
-                bsr.w   CopyDDZBossTwelvePaletteWordsAtByteOffset
+                bsr.w   DDZBoss_CopyPalette12
                 subq.b  #1,$20(a0)
                 bne.s   locret_82D5A
                 clr.b   collision_flags(a0)

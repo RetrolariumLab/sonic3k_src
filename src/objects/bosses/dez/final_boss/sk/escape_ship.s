@@ -56,7 +56,7 @@ loc_801D8:
 ; ---------------------------------------------------------------------------
 
 loc_80208:
-                bsr.w   AccelerateDEZEscapeCameraAndLockHorizontalLimits
+                bsr.w   DEZEscape_AccelAndLockCameraX
                 jsr     Swing_UpAndDown(pc)
                 jsr     (MoveSprite2).l
                 move.w  (Camera_X_pos).w,d0
@@ -73,7 +73,7 @@ locret_8023C:
 ; ---------------------------------------------------------------------------
 
 loc_8023E:
-                bsr.w   TrySpawnDEZEscapeFallingDebrisEverySixteenTicks
+                bsr.w   DEZEscape_TryFallingDebrisEvery16
                 jsr     Swing_UpAndDown(pc)
                 jsr     (MoveSprite2).l
                 jmp     Obj_Wait(pc)
@@ -87,8 +87,8 @@ loc_80250:
 ; ---------------------------------------------------------------------------
 
 loc_80264:
-                bsr.w   AccelerateDEZEscapeCameraAndLockHorizontalLimits
-                bsr.w   TrySpawnDEZEscapeFallingDebrisEverySixteenTicks
+                bsr.w   DEZEscape_AccelAndLockCameraX
+                bsr.w   DEZEscape_TryFallingDebrisEvery16
                 jsr     Swing_UpAndDown(pc)
                 move.w  x_vel(a0),d0
                 cmpi.w  #$280,d0

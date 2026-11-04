@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-RestoreDEZMinibossPlatformIdleHandlerBySide:
+DEZMiniPlatform_RestoreIdleBySide:
                 move.l  #loc_7E566,(a0)
                 tst.b   subtype(a0)
                 beq.s   locret_7E6E6
@@ -15,7 +15,7 @@ locret_7E6E6:
 ; ---------------------------------------------------------------------------
 
 loc_7E6E8:
-                bsr.w   AccelerateDEZPlatformSharedAngularStepAndAdvancePhase
+                bsr.w   DEZMiniPlatform_AccelAndStepAngle
                 move.b  $3A(a0),d0
                 addq.b  #1,d0
                 cmpi.b  #$60,d0
@@ -36,17 +36,17 @@ loc_7E710:
                 move.l  #loc_7E724,(a0)
 
 loc_7E71C:
-                bsr.w   AccelerateDEZPlatformSharedAngularStepAndAdvancePhase
+                bsr.w   DEZMiniPlatform_AccelAndStepAngle
                 bra.w   loc_7EC52
 ; ---------------------------------------------------------------------------
 
 loc_7E724:
-                bsr.w   AccelerateDEZPlatformSharedAngularStepAndAdvancePhase
+                bsr.w   DEZMiniPlatform_AccelAndStepAngle
                 move.b  $3A(a0),d0
                 subq.b  #1,d0
                 cmpi.b  #$40,d0
                 bhi.s   loc_7E742
-                bsr.s   RestoreDEZMinibossPlatformIdleHandlerBySide
+                bsr.s   DEZMiniPlatform_RestoreIdleBySide
                 movea.w parent3(a0),a1
                 bclr    #7,$38(a1)
                 moveq   #$40,d0
@@ -54,7 +54,7 @@ loc_7E724:
 loc_7E742:
                 move.b  d0,$3A(a0)
                 bra.w   loc_7EC52
-; End of function RestoreDEZMinibossPlatformIdleHandlerBySide
+; End of function DEZMiniPlatform_RestoreIdleBySide
 
 ; ---------------------------------------------------------------------------
 
@@ -106,7 +106,7 @@ loc_7E7AE:
 
 loc_7E7B4:
                 bsr.w   TrackDEZMinibossEyeTowardPlayerOne
-                bsr.w   AdvanceDEZMinibossEyeHitAndIncrementRootCounter
+                bsr.w   DEZMiniEye_TickHitFlash
                 movea.w parent3(a0),a1
                 btst    #6,status(a1)
                 bne.s   loc_7E7CE
@@ -136,7 +136,7 @@ loc_7E7E8:
 
 loc_7E800:
                 bsr.w   TrackDEZMinibossEyeTowardPlayerOne
-                bsr.w   AdvanceDEZMinibossEyeHitAndIncrementRootCounter
+                bsr.w   DEZMiniEye_TickHitFlash
                 jmp     (Add_SpriteToCollisionResponseList).l
 ; ---------------------------------------------------------------------------
 
@@ -147,7 +147,7 @@ loc_7E80E:
                 bsr.w   SeedDEZMinibossEightOrbitHazardPhases
 
 loc_7E820:
-                bsr.w   SetDEZOrbitHazardCollisionFromParentStatusSix
+                bsr.w   DEZOrbitHazard_UpdateCollision
                 addq.b  #4,$3C(a0)
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
@@ -218,7 +218,7 @@ byte_7E8C2:
 ; ---------------------------------------------------------------------------
 
 loc_7E8E2:
-                bsr.w   SetDEZOrbitHazardCollisionFromParentStatusSix
+                bsr.w   DEZOrbitHazard_UpdateCollision
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
                 bpl.s   loc_7E8F6
@@ -356,7 +356,7 @@ loc_7EA3C:
                 jsr     (Play_SFX).l
 
 loc_7EA5E:
-                bsr.w   HurtBothPlayersInsideDEZMinibossBeamRange
+                bsr.w   DEZMiniBeam_CheckBothPlayers
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 

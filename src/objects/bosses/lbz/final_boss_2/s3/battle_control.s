@@ -179,7 +179,7 @@ loc_50E68:
 loc_50E6E:
                 moveq   #$50,d1
                 move.w  #$F0,d2
-                bsr.w   ReverseLBZFinalBoss2AtCameraRelativeBounds
+                bsr.w   LBZBoss2_ReverseAtCameraBounds
                 jsr     (MoveSprite2).l
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
@@ -272,7 +272,7 @@ loc_50F3E:
 loc_50F50:
                 moveq   #$30,d1
                 move.w  #$110,d2
-                bsr.w   ReverseLBZFinalBoss2AtCameraRelativeBounds
+                bsr.w   LBZBoss2_ReverseAtCameraBounds
                 jsr     (MoveSprite2).l
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------

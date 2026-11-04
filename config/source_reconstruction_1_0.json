@@ -951,9 +951,15 @@
       "commits": ["2085ca69c2b06c41783548846eab2edeed0aa7c2"]
     },
     {
-      "id": "current-shorten-09-knuckles",
+      "id": "change-0a91577701fc",
       "kind": "source_or_tooling",
       "summary": "Shorten 198 Knuckles motion and animation labels and preserve their state and resource bindings.",
+      "commits": ["0a91577701fc50b7d805997ec3d9b243e3a81f75"]
+    },
+    {
+      "id": "current-shorten-L01-bosses",
+      "kind": "source_or_tooling",
+      "summary": "Shorten 136 earlier boss procedure names and preserve their historical token and profile binding.",
       "commits": ["release-commit"]
     }
   ],

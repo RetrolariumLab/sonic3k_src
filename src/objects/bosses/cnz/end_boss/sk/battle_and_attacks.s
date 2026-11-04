@@ -586,12 +586,12 @@ loc_6EADA:
                 btst    #1,subtype(a0)
                 beq.s   loc_6EB0C
                 move.l  #loc_6EB0C,(a0)
-                bra.w   DeleteCNZBossElectricEffectWhenParentEnds
+                bra.w   CNZBossSpark_TryDelete
 ; ---------------------------------------------------------------------------
 
 loc_6EB0C:
                 move.l  #loc_6EB16,(a0)
-                bra.w   DeleteCNZBossElectricEffectWhenParentEnds
+                bra.w   CNZBossSpark_TryDelete
 ; ---------------------------------------------------------------------------
 
 loc_6EB16:
@@ -599,7 +599,7 @@ loc_6EB16:
                 jsr     (Play_SFX_Continuous).l
                 jsr     (Refresh_ChildPosition).l
                 jsr     (Animate_Raw).l
-                bsr.w   DeleteCNZBossElectricEffectWhenParentEnds
+                bsr.w   CNZBossSpark_TryDelete
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -622,7 +622,7 @@ loc_6EB34:
                 beq.s   loc_6EB84
                 move.l  #byte_6EE3B,$30(a0)
                 move.l  #loc_6EB8C,(a0)
-                bra.w   DeleteCNZBossElectricEffectWhenParentEnds
+                bra.w   CNZBossSpark_TryDelete
 ; ---------------------------------------------------------------------------
 
 loc_6EB84:
@@ -630,13 +630,13 @@ loc_6EB84:
 
 loc_6EB8C:
                 move.l  #loc_6EB96,(a0)
-                bra.w   DeleteCNZBossElectricEffectWhenParentEnds
+                bra.w   CNZBossSpark_TryDelete
 ; ---------------------------------------------------------------------------
 
 loc_6EB96:
                 jsr     (Refresh_ChildPosition).l
                 jsr     (Animate_RawMultiDelay).l
-                bsr.w   DeleteCNZBossElectricEffectWhenParentEnds
+                bsr.w   CNZBossSpark_TryDelete
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 

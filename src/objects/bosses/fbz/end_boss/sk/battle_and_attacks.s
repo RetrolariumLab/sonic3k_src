@@ -86,7 +86,7 @@ loc_706C2:
 ; ---------------------------------------------------------------------------
 
 loc_706E2:
-                bsr.w   PlayFBZEndBossHalfTurnSoundBeforeWaitEnds
+                bsr.w   FBZBoss_TryHalfTurnSound
                 addq.b  #4,$3C(a0)
                 lea     (FBZEndBoss_CircleLookup1).l,a2
                 jsr     (MoveSprite_AngleYLookup).l
@@ -162,7 +162,7 @@ loc_707BC:
                 bset    #1,$38(a0)
 
 loc_707CA:
-                bsr.w   PlayFBZEndBossHalfTurnSoundBeforeWaitEnds
+                bsr.w   FBZBoss_TryHalfTurnSound
                 move.b  $40(a0),d0
                 add.b   d0,$3C(a0)
                 lea     (FBZEndBoss_CircleLookup1).l,a2

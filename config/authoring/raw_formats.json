@@ -85,7 +85,7 @@
     },
     {
       "path": "src/objects/bosses/aiz/s3/miniboss.s",
-      "sha256": "7fc72accc1c12d5f44aabd194979d73919782cf3db1556c39db542782cb0feb2"
+      "sha256": "0ad352b4062a33bfdd40f99de171c2cacad4b374e136dc8491fce01b2d78b4a7"
     },
     {
       "path": "src/objects/bosses/aiz/s3/miniboss_arrival.s",
@@ -93,7 +93,7 @@
     },
     {
       "path": "src/objects/bosses/aiz/sk/miniboss.s",
-      "sha256": "aa6a806d8580fe88097f36eb5762cc5dd8e94c80d0f53eeaffcbf78030d1f389"
+      "sha256": "128f9308c943bdeedd2b986b6103a742f91cf7e3b027bd7b307a3cc839442729"
     },
     {
       "path": "src/objects/bosses/aiz/sk/miniboss_arrival.s",
@@ -101,7 +101,7 @@
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
-      "sha256": "7dd1b10872aac35a81b1032e82a4d94d5b30ffca5d9e807b3b65c2d00acb7bf2"
+      "sha256": "b3bfbf68e6d4dec0a46e58b4ceb98858b4768e373084c5592707c2cfacee6eb5"
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/s3/object_catalog.s",
@@ -109,7 +109,7 @@
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
-      "sha256": "75a82948fd98e460e1fdd08b18bdb0973a0caf5e267b4e5654d421041d5bc9e3"
+      "sha256": "919cde73e7ef8815d1c13f52a1cdffed9bd47b7a79c1857827a39002df315a8b"
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/sk/object_catalog.s",
@@ -157,15 +157,15 @@
     },
     {
       "path": "src/objects/bosses/ddz/sk/asteroids.s",
-      "sha256": "13e353b4226428029e53de298feaf2b9d37c90caa148f29aa51174a2f9e7394a"
+      "sha256": "93f107413673e6a432c5a3847fb09e4e3c50716da217887b0699179f5075fcf3"
     },
     {
       "path": "src/objects/bosses/ddz/sk/battle_control.s",
-      "sha256": "6ad27ba970dff4d4538f9690f3ee3b4141cca3ba6d55401e6fb9ec833f2f2111"
+      "sha256": "1c30c8d5b92c9f0d0d1b6c59f98893d6b762a19cb7a999ae7e15317b8a1443a5"
     },
     {
       "path": "src/objects/bosses/ddz/sk/missile.s",
-      "sha256": "ce6bd035193bcd59b699cac75544f7e8756f577b565048190364cfbe343f9898"
+      "sha256": "28acc49fa1924e6b30228d77c10999cfe1d7c59ac8e98431f7f807d317200b5a"
     },
     {
       "path": "src/objects/bosses/ddz/sk/object_catalog.s",
@@ -173,11 +173,11 @@
     },
     {
       "path": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
-      "sha256": "849caa0c1c619e67c35b9d77f0a28c4bce766f68633ecf3e604ab41dae6cf5d2"
+      "sha256": "c6798ed2d7f3e1ac07ba70f1fdd4a77abb1c4766dc45e8bffc7d6d3a347d7a8d"
     },
     {
       "path": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
-      "sha256": "85c2c88fde010fe92fee9e69bd545fafe989ac2827a2e2866463db53deeaaa27"
+      "sha256": "4471aea8648806b053804b7f765b697e378faa4ca4e3145090c2a6df976b5b08"
     },
     {
       "path": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
@@ -185,15 +185,15 @@
     },
     {
       "path": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
-      "sha256": "b625b240f2780a68feaf4348a9c10e76c800545503d7600401641f6072ecef93"
+      "sha256": "e53b249478619a3af7ede525c52c30fdcf0d124b5c94be3674d21bb2c96056f8"
     },
     {
       "path": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
-      "sha256": "ab5f1938f2c4c08592159492c7bc26e296f0c72e1e88786d26c364ef5c649fc9"
+      "sha256": "85934b102f4ac3c2216f65f9c97ea20a0153c962b1d90eb705ec9d0865d3ee69"
     },
     {
       "path": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
-      "sha256": "cf9438e5710fa60c20234822160521bef87c38c621bf44bf502ef440fdc899c4"
+      "sha256": "619f1fb95fa423f81b359cda38551096374281c809b47158ef089f8c32ac3d38"
     },
     {
       "path": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
@@ -201,11 +201,11 @@
     },
     {
       "path": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
-      "sha256": "eaa55cf6de63e49931cebe6f86f8d1a0567faad054ba135e150cacfe19a093ae"
+      "sha256": "d2405b6a2aad6ad523270ed39ecc64a07491c31afea44254bdd6157423b5b3ad"
     },
     {
       "path": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
-      "sha256": "9880f07efbddf3709f7a2ee5076ee8695b04d8f4f6ff53d6338829a8b575305a"
+      "sha256": "a31ee68cd50370b38fe801cd7ebea48283238e51410f7eebbef2ceb579b63877"
     },
     {
       "path": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
@@ -213,7 +213,7 @@
     },
     {
       "path": "src/objects/bosses/fbz/end_boss/sk/battle_and_attacks.s",
-      "sha256": "1ad38cf870c034e8e01c92b8c5ecc68c9f54b5b48b50f5dfeaa025640d7ec611"
+      "sha256": "dc54e88acf195adf6b99ae8a401f7fced6e5f6e08b52166c9ef9e74c9edbe4ae"
     },
     {
       "path": "src/objects/bosses/fbz/end_boss/sk/object_catalog.s",
@@ -237,11 +237,11 @@
     },
     {
       "path": "src/objects/bosses/hcz/end_boss/s3/attacks_and_transition.s",
-      "sha256": "c567d949f9f229154835b3612b40dc5ce9bae8df1dffb9950bbfd63142127dfb"
+      "sha256": "f454d06c5ab856fc090cabc5fbb43ba25de0217f23f216c3831ac7263f521bce"
     },
     {
       "path": "src/objects/bosses/hcz/end_boss/s3/main_and_chassis.s",
-      "sha256": "7f991fddf71a4fdb6bc695173f3f00cfa8ff5cea843587406996036820a9e768"
+      "sha256": "b9ec6db0ff8c69eff16fcdbd6d4506e25e843b123d6a6015971f8e136cab7516"
     },
     {
       "path": "src/objects/bosses/hcz/end_boss/s3/object_catalog.s",
@@ -253,7 +253,7 @@
     },
     {
       "path": "src/objects/bosses/hcz/end_boss/sk/main_and_chassis.s",
-      "sha256": "a896fe83eef1fcb3b80e0caa2aa3dcdb6817b52bf6b542f5c0b42b5df7900509"
+      "sha256": "696be627552caa2eee9eda65f22fd62bf53c8b217e9f96d22472bf2bfe8af7a7"
     },
     {
       "path": "src/objects/bosses/hcz/end_boss/sk/object_catalog.s",
@@ -285,7 +285,7 @@
     },
     {
       "path": "src/objects/bosses/icz/s3/end_boss.s",
-      "sha256": "9901af987d3bf94ddcd06bb82174c2c896c42871cc68a0bcf24911280add6da0"
+      "sha256": "f370e7a24cf33cfbaa2ed6edaf3f1596296f602c0ffbdce6447a99645aa25833"
     },
     {
       "path": "src/objects/bosses/icz/s3/miniboss.s",
@@ -293,7 +293,7 @@
     },
     {
       "path": "src/objects/bosses/icz/sk/end_boss.s",
-      "sha256": "275de922ad7b5e45d892e9ee350fc6916a1aba70eb316e3663b2170856f7d48d"
+      "sha256": "df5512295718e884fa499a9270dcfa17efb7b4a5f93f679249fbf1adae7c1425"
     },
     {
       "path": "src/objects/bosses/icz/sk/miniboss.s",
@@ -309,7 +309,7 @@
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
-      "sha256": "8b42ddba26b805f198e4f54f9a5a5cf61685f8860187ab7c2c579cd713c39d51"
+      "sha256": "04ce345ef4313a53b535ab1b5766790f5834e321e167c74d0386c3200700d92e"
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
@@ -317,7 +317,7 @@
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
-      "sha256": "49d79060d1f0acd80d8465226f4d4c5de815cf8817f635269ef3d81f159ae33f"
+      "sha256": "aad34862dd6237729269be4c3b01644bc8959716be1114166d017cec011ada88"
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
@@ -325,11 +325,11 @@
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
-      "sha256": "759c05872aab6734d6ffe4e05fbeb3ade4295a9c149c24d0861ab4d7bb9ef43a"
+      "sha256": "19a78869660bbe8799b73398098dbea8a0323a1c55a23c1833e4d4e5eb459703"
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
-      "sha256": "22a8f9ce8268f1df657547f08e3983d947058cec5d56c95d0283ae9e26297358"
+      "sha256": "3ac8d7abef8e52109c5bde59bfcd5257045c8f490005b83516fa94b6c72ffc97"
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
@@ -341,7 +341,7 @@
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
-      "sha256": "bd713405df0d42ce27746fedd7dad1ce84fe79938f200bd544c6bc63dc0666e6"
+      "sha256": "8d6f29faef9402748e68f5bc6670fa911aeb406710b11233e53e8bda32fdd035"
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
@@ -353,7 +353,7 @@
     },
     {
       "path": "src/objects/bosses/lbz/s3/act2_robotnik_ship.s",
-      "sha256": "7da09d44941dbe1512bb472e489c506926fa26f086ffb3377acfd9faf639d21e"
+      "sha256": "d76e691bdebdd7d06c9c9e2b368cb67a29590fb7a09cf49530a6770228c0682b"
     },
     {
       "path": "src/objects/bosses/lbz/s3/end_boss.s",
@@ -369,7 +369,7 @@
     },
     {
       "path": "src/objects/bosses/lbz/sk/act2_robotnik_ship.s",
-      "sha256": "73baf8065489090b95cf8e5c4f864f177c84c99d2d4f8919f70464b0bec5813f"
+      "sha256": "3a1b2301a629d1bc478d119fad67297cd08ae8c9de46406c95b57261d6f24af7"
     },
     {
       "path": "src/objects/bosses/lbz/sk/miniboss.s",
@@ -377,11 +377,11 @@
     },
     {
       "path": "src/objects/bosses/lrz/end_boss/sk/battle_and_attacks.s",
-      "sha256": "69edb7ba7c701c536ed8e450c36cc5b79177edd4fd4372f025689686d38c7e58"
+      "sha256": "31608bb3dda2a6beb66f6914538c577f3ed3a7c2427cbe0817943f09868dbf4f"
     },
     {
       "path": "src/objects/bosses/lrz/end_boss/sk/motion_helpers.s",
-      "sha256": "74f385fe398f176d0885528028f236d286a5aeed943112b7f9239cc2d703d968"
+      "sha256": "6ad59853353dd492863e56537c0c89ebb72d476b86081a88b6a722315a055616"
     },
     {
       "path": "src/objects/bosses/lrz/end_boss/sk/object_catalog.s",
@@ -389,11 +389,11 @@
     },
     {
       "path": "src/objects/bosses/lrz/end_boss/sk/platform.s",
-      "sha256": "ea246454164d4eba9ea02db93537ae00df3cf074d5150718bd597dd09ae7e78d"
+      "sha256": "b89eab2725c044f83fcac5e74d914bd294328d21ac3da2aefce18d1a5a28953c"
     },
     {
       "path": "src/objects/bosses/lrz/miniboss/sk/battle_and_attacks.s",
-      "sha256": "db2ca3b0f2dd0299932bd7e59452ec698c37b0512f0f8368913bf5bcead1e360"
+      "sha256": "0481c601b8dceb045510b64607054f25fc6fcfc3f3cd869f1f4f56366cab39bf"
     },
     {
       "path": "src/objects/bosses/lrz/miniboss/sk/object_catalog.s",
@@ -401,11 +401,11 @@
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/s3/attachments.s",
-      "sha256": "15641a367da48afcc21164da13687c371530824b4710d4d4f49292739f933f33"
+      "sha256": "e996630c3ba0991f47c0306fa5d92522d96bd1e0ef437aff09cfb0763b25e3c8"
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/s3/motion_helpers.s",
-      "sha256": "49ef0e47a6de7201408de457c5db3a135109a67a8f5bc04ed8f632cccc454d6d"
+      "sha256": "a59717fa00ddf94ae2c54814ab084a8a5f64db0b44e7649388caafc5e14955e1"
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/s3/object_catalog.s",
@@ -413,15 +413,15 @@
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/s3/projectiles_and_defeat.s",
-      "sha256": "6a650b748f4063e20206d4a1c89635099b98fbbfa6f7562ea5c58c6ca4e263b4"
+      "sha256": "d1e9520d8e24bc783b60973317df118ced55d33b2273e27b8cdab30bf1b1597b"
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/sk/attachments.s",
-      "sha256": "24f3d000dab49c9f7788609ba9f6a786e93a1f42c8d771426541694e6ca950b6"
+      "sha256": "3c668bd259b99f4d9728147ba4ff5515943e9357f8f83b7a9290bb16de3f8dde"
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/sk/motion_helpers.s",
-      "sha256": "83b7e6ff4332055ecbce142b988f7960189de59bed33a00a9717432e739688d7"
+      "sha256": "70e7c4629ccb4dc2ba124fc5f4871ad9ab09bcca31f6993c5c464b5dfefaa14c"
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/sk/object_catalog.s",
@@ -429,7 +429,7 @@
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/sk/projectiles_and_defeat.s",
-      "sha256": "35935d7a190f5a52812d8e145e3dce1b0d91e9b036b29ef1af179791d4923c7f"
+      "sha256": "55ebc67864e7e68ea02c4701dd166e3534571c7690afff211622fe9f88effebd"
     },
     {
       "path": "src/objects/bosses/mgz/miniboss/s3/object_catalog.s",
@@ -449,7 +449,7 @@
     },
     {
       "path": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
-      "sha256": "f418c6d687beb7945d66217d44ed197a196b5280381eb68c0aaf50803cc5047f"
+      "sha256": "eb6f4823501eda0b989b5f2817970e5cdfcee81e2d4be516828769f10a2483e0"
     },
     {
       "path": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
@@ -457,15 +457,15 @@
     },
     {
       "path": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
-      "sha256": "f78bbf739023eca0f3e87885147a9ef4eb0afd64675fd84de2d2b9514c43ae8c"
+      "sha256": "8c97ed91449d7043e1625f47d392f5ef3ec464c00ca8e63b6751c75481f8a5ae"
     },
     {
       "path": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
-      "sha256": "b4c266543cd67e3058928740e34e9959c1ff68077b19a3ae92ce45b4f98ac98e"
+      "sha256": "ab63af551564d102aa051b329433dbed4a7be2767d81daa71d8762424f42c9b8"
     },
     {
       "path": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
-      "sha256": "465261064bbc50215fc2dc6357e95579547f9aa952172cbdfc0978e179f6c8a3"
+      "sha256": "d32ce478c37e5a103d8a1bb8bb55d5f902a0eb937de206dba77364921be210fe"
     },
     {
       "path": "src/objects/bosses/mhz/miniboss/sk/object_catalog.s",
@@ -477,7 +477,7 @@
     },
     {
       "path": "src/objects/bosses/shared/sk/robotnik_heads.s",
-      "sha256": "403faba08dafcbfd6da0099cd1ffeffcd2a8e7c3da99dafe6b4f5d9b29fed5d7"
+      "sha256": "116f337efd3d4f66dc56000c5d3e82dcced42d47887c436ebe42798baee11928"
     },
     {
       "path": "src/objects/bosses/shared/sk/robotnik_ships.s",
@@ -485,7 +485,7 @@
     },
     {
       "path": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
-      "sha256": "03c40b0a62a1b8a9745ce07a374fe50b62483d56da425d213d713b321fc04d15"
+      "sha256": "f441f618952418c8be34d319fcd1626a3a6b09160cfd97a7dd602b282d849154"
     },
     {
       "path": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
@@ -493,7 +493,7 @@
     },
     {
       "path": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
-      "sha256": "e8b615ed4d035235950dd956fde6850766cf25861a32075d8aafd01caa22f8f7"
+      "sha256": "7674b9f833696f177fb8a8b2bcbb54b21c9cc1df50f3e31e52b55c9ae8f59024"
     },
     {
       "path": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
@@ -501,15 +501,15 @@
     },
     {
       "path": "src/objects/bosses/ssz/end_boss/sk/battle.s",
-      "sha256": "0fbdf133ea4cca47f04e9f56c24f1a368dc63a26fd65c59105c231ac3a38e21a"
+      "sha256": "1a4903cfa997d9c3fbf2ae713e0c2d2c1da4871d4c17f9f965527cf483ae22e9"
     },
     {
       "path": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
-      "sha256": "cfaa2be0e4300e33309b67b5fece8c6710bf617860185f77ee4c40f886e03f36"
+      "sha256": "d1241c6e5af7a8faad2a7c061070008176f51c347bdbee4c0c01720b2f47a88a"
     },
     {
       "path": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
-      "sha256": "6e8f345c7a775cd9bd6330c156765ddfb9f865ef9c730b8cc3ebc945863025b7"
+      "sha256": "79e54a0d813df6a1dfb6335b79e1f71b612363a747ddee19ea4e53632b2862d1"
     },
     {
       "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
@@ -1643,8 +1643,8 @@
       "path": "src/objects/bosses/aiz/s3/miniboss.s",
       "symbol": "byte_4703C",
       "scope": "byte_4703C",
-      "first_line": 697,
-      "last_line": 748,
+      "first_line": 698,
+      "last_line": 749,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 86,
       "declarations_sha256": "e324ec0983a65397a051d77ceb33b786e04abede9feadf7998bce350303be565",
@@ -1691,8 +1691,8 @@
       "path": "src/objects/bosses/aiz/sk/miniboss.s",
       "symbol": "byte_69126",
       "scope": "byte_69126",
-      "first_line": 718,
-      "last_line": 769,
+      "first_line": 719,
+      "last_line": 770,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 86,
       "declarations_sha256": "bb940ca3c69ecb0673ff16be9b18b7bdaa2f8d221e17093341ff081673c8d85b",
@@ -2007,8 +2007,8 @@
       "path": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
       "symbol": "byte_7ED50",
       "scope": "byte_7ED50",
-      "first_line": 292,
-      "last_line": 297,
+      "first_line": 297,
+      "last_line": 302,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 4,
       "declarations_sha256": "e1316e57bd5f7083b3ccc4f6a2c177bff63605bc35f5e38c6f8d09cbb9137dd4",
@@ -2021,8 +2021,8 @@
       "path": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
       "symbol": "byte_7EF2E",
       "scope": "byte_7EF2E",
-      "first_line": 501,
-      "last_line": 502,
+      "first_line": 509,
+      "last_line": 510,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 12,
       "declarations_sha256": "170e1e2aa8302b26a6b645a6fa81d6057724e48491ea5983fcdc153df17d69ca",
@@ -2356,8 +2356,8 @@
       "path": "src/objects/bosses/icz/s3/end_boss.s",
       "symbol": "byte_4F414",
       "scope": "byte_4F414",
-      "first_line": 740,
-      "last_line": 767,
+      "first_line": 741,
+      "last_line": 768,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 48,
       "declarations_sha256": "bebe4471da680cf61bf9a68a7a70ba15007d8198706118379e780209514c245f",
@@ -2389,8 +2389,8 @@
       "path": "src/objects/bosses/icz/sk/end_boss.s",
       "symbol": "byte_72380",
       "scope": "byte_72380",
-      "first_line": 750,
-      "last_line": 777,
+      "first_line": 751,
+      "last_line": 778,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 48,
       "declarations_sha256": "19bebd9d41072765ea60189dfa466fca1753129eaa1d35c9de958c043773a072",
@@ -2596,8 +2596,8 @@
       "path": "src/objects/bosses/lbz/s3/act2_robotnik_ship.s",
       "symbol": "RawAni_5AAE8",
       "scope": "RawAni_5AAE8",
-      "first_line": 223,
-      "last_line": 225,
+      "first_line": 224,
+      "last_line": 226,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 2,
       "declarations_sha256": "52dc59447af9d3600ecb88cf7c4685fdb7f7fe32ef8b43f35813c66e80a14821",
@@ -2678,8 +2678,8 @@
       "path": "src/objects/bosses/lbz/sk/act2_robotnik_ship.s",
       "symbol": "RawAni_8D55C",
       "scope": "RawAni_8D55C",
-      "first_line": 225,
-      "last_line": 227,
+      "first_line": 226,
+      "last_line": 228,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 2,
       "declarations_sha256": "7d2770044c749dc0eb88a3134d8d84e850e7e68aa08b88a7e9d02c2e738c8942",
@@ -2720,8 +2720,8 @@
       "path": "src/objects/bosses/lrz/end_boss/sk/motion_helpers.s",
       "symbol": "RawAni_7A0BA",
       "scope": "RawAni_7A0BA",
-      "first_line": 217,
-      "last_line": 219,
+      "first_line": 220,
+      "last_line": 222,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 10,
       "declarations_sha256": "a39717ca39e776fd3272f4c754b505dc61f9ae9735f71566e1ec7d55455b4035",
@@ -2754,8 +2754,8 @@
       "path": "src/objects/bosses/lrz/miniboss/sk/battle_and_attacks.s",
       "symbol": "RawAni_78A9C",
       "scope": "RawAni_78A9C",
-      "first_line": 504,
-      "last_line": 506,
+      "first_line": 505,
+      "last_line": 507,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 12,
       "declarations_sha256": "dddb6c70231873fa1a230cb0b594044c3839713764f0040e9f5139980612f6f6",
@@ -2801,8 +2801,8 @@
       "path": "src/objects/bosses/mgz/end_boss/s3/motion_helpers.s",
       "symbol": "RawAni_4B06E",
       "scope": "RawAni_4B06E",
-      "first_line": 219,
-      "last_line": 221,
+      "first_line": 222,
+      "last_line": 224,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 10,
       "declarations_sha256": "c166aa6a52cbb25a91846c1b50a4defd095d08c512cea90717b42e8452346de6",
@@ -2875,8 +2875,8 @@
       "path": "src/objects/bosses/mgz/end_boss/sk/motion_helpers.s",
       "symbol": "RawAni_6D3FC",
       "scope": "RawAni_6D3FC",
-      "first_line": 219,
-      "last_line": 221,
+      "first_line": 222,
+      "last_line": 224,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 10,
       "declarations_sha256": "e9c8ec7f3f4b82494af712912b2da28eb346fd2189f3e45dfc95e5f68ba9aea5",
@@ -2933,8 +2933,8 @@
       "path": "src/objects/bosses/mgz/end_boss/sk/projectiles_and_defeat.s",
       "symbol": "RawAni_6D224",
       "scope": "RawAni_6D224",
-      "first_line": 385,
-      "last_line": 387,
+      "first_line": 386,
+      "last_line": 388,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 4,
       "declarations_sha256": "1276dc8c9300611d579065798d5387bc4103bf2e06d5d30b1f6a87b8f1ed6024",
@@ -3027,8 +3027,8 @@
       "path": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
       "symbol": "RawAni_75CB6",
       "scope": "RawAni_75CB6",
-      "first_line": 141,
-      "last_line": 144,
+      "first_line": 143,
+      "last_line": 146,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 22,
       "declarations_sha256": "3b46e2eaef6cdec49e02e760c760d5d22ebfda919f86ef16f20e50d11495d26a",

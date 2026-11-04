@@ -34,7 +34,7 @@
   "consumer_sources": [
     {
       "path": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
-      "sha256": "6e8f345c7a775cd9bd6330c156765ddfb9f865ef9c730b8cc3ebc945863025b7"
+      "sha256": "79e54a0d813df6a1dfb6335b79e1f71b612363a747ddee19ea4e53632b2862d1"
     },
     {
       "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",

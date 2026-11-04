@@ -8,7 +8,7 @@ Obj_DDZAsteroid:
                 move.l  #Map_DDZMissileAsteroid,mappings(a0)
                 move.w  #make_art_tile(ArtTile_DDZMisc,1,1),art_tile(a0)
                 move.w  #0,priority(a0)
-                bsr.w   ConfigureDDZAsteroidSizeRangeAndHorizontalDriftFromSubtype
+                bsr.w   DDZAsteroid_InitFromSubtype
 
 loc_821FC:
                 tst.w   (Debug_placement_mode).w
@@ -318,7 +318,7 @@ loc_82568:
                 add.w   d0,x_pos(a0)
                 move.w  (_unkFAAE).w,d0
                 sub.w   d0,x_pos(a0)
-                bsr.w   ResolveDDZHeavyProjectileContactAndReduceFlightSpeed
+                bsr.w   DDZHeavyShot_CheckHitAndSlowFlight
                 jmp     Sprite_CheckDelete(pc)
 ; ---------------------------------------------------------------------------
 
@@ -410,7 +410,7 @@ loc_8268A:
                 jsr     (MoveSprite2).l
                 move.w  (_unkFA90).w,d0
                 add.w   d0,x_pos(a0)
-                bsr.w   ResolveDDZHeavyProjectileContactAndReduceFlightSpeed
+                bsr.w   DDZHeavyShot_CheckHitAndSlowFlight
                 jmp     Sprite_CheckDeleteXY(pc)
 ; ---------------------------------------------------------------------------
 

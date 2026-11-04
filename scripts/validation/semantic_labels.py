@@ -12,7 +12,7 @@ import tarfile
 
 from scripts.build.project import ROOT
 from scripts.validation.numeric_operands import code_part
-from scripts.validation.semantic_label_edits import apply_edits, code_fingerprint
+from scripts.validation.semantic_label_edits import apply_edits, code_fingerprint, code_lines
 
 INDEX = "config/reconstruction/semantic_labels.json"
 SHARDS = "config/reconstruction/semantic_labels"
@@ -99,6 +99,65 @@ def historical_source(root, revision):
     if not targets:
         raise ValueError("Semantic baseline has no inherited physical labels")
     return sources, targets
+
+
+def _legacy_edits(originals, previous, current, policy):
+    """Project a change in a legacy destination onto the immutable source tokens."""
+
+    def identities(rows):
+        return {(row["source"], row["original_line"], row["old"]): row for row in rows}
+
+    before = identities(previous)
+    after = identities(current)
+    if set(before) != set(after) or len(before) != len(previous) or len(after) != len(current):
+        raise ValueError("Legacy registry no longer has its frozen physical identities")
+    changed = {key for key in before if before[key]["new"] != after[key]["new"]}
+    if not changed:
+        return {}, {}
+    engine_files = defaultdict(set)
+    for profile, engine in policy["engines"].items():
+        for path in engine["sources"]:
+            engine_files[path].add(profile)
+    by_name = defaultdict(list)
+    definitions = defaultdict(dict)
+    for key, row in before.items():
+        name = row["new"]
+        by_name[name.casefold()].append(key)
+        if key not in changed:
+            continue
+        path = row["source"]
+        if name in definitions[path] or after[key]["profiles"] != row["profiles"]:
+            raise ValueError("Legacy change is ambiguous or changes profiles")
+        definitions[path][name] = after[key]["new"]
+    affected = {before[key]["new"].casefold() for key in changed}
+    edits = defaultdict(list)
+    found = set()
+    for path, original in originals.items():
+        applicable = engine_files.get(path, set())
+        if not applicable:
+            continue
+        for number, (_, tokens) in enumerate(code_lines(original), 1):
+            for index, token in enumerate(tokens):
+                if token.kind != "symbol":
+                    continue
+                name, dot, suffix = token.text.partition(".")
+                if name.casefold() not in affected:
+                    continue
+                matches = [key for key in by_name[name.casefold()] if applicable.intersection(before[key]["profiles"])]
+                if not matches:
+                    continue
+                replacements = {after[key]["new"] if key in changed else name for key in matches}
+                if len(replacements) != 1:
+                    raise ValueError("Legacy token has incompatible profile destinations: " + path + ":" + token.text)
+                new = replacements.pop()
+                if new == name:
+                    continue
+                edits[path].append({"code_line": number, "token": index, "old": token.text, "new": new + dot + suffix})
+                if index == 0 and not dot and len(tokens) > 1 and tokens[1].text == ":":
+                    found.update(key for key in matches if key[0] == path and key in changed)
+    if found != changed:
+        raise ValueError("A legacy destination does not resolve to its frozen physical source")
+    return dict(edits), dict(definitions)
 
 
 def validate(root=ROOT, index=None):
@@ -259,7 +318,25 @@ def validate(root=ROOT, index=None):
     order = value.get("applied_order")
     if not isinstance(order, list) or len(order) != len(set(order)) or set(order) != set(transforms):
         raise ValueError("Semantic edit order omits or duplicates an applied subsystem")
+    originals = historical_texts(str(root), value["baseline_commit"])
     views = defaultdict(list)
+    legacy_definitions = {}
+    # The semantic baseline already contains the original reviewed destinations
+    # of the earlier procedure migration. Undo later short names at exact tokens.
+    from scripts.validation.label_renames import POLICY, REGISTRY
+
+    if (root / REGISTRY).is_file():
+        earlier_registry = json.loads(
+            subprocess.check_output(["git", "show", value["baseline_commit"] + ":" + REGISTRY], cwd=root)
+        )
+        current_registry = read(root, REGISTRY)
+        legacy_views, legacy_definitions = _legacy_edits(
+            originals, earlier_registry["renames"], current_registry["renames"], read(root, POLICY)
+        )
+        for path, edits in legacy_views.items():
+            if any((path, row["code_line"], row["token"]) in edited_coordinates for row in edits):
+                raise ValueError("Legacy and semantic source-token edits overlap: " + path)
+            views[path].append(edits)
     for key in order:
         for consumer in transforms[key]:
             views[consumer["source"]].append(consumer["edits"])
@@ -269,7 +346,6 @@ def validate(root=ROOT, index=None):
         "target_count": len(targets),
         "applied_targets": applied_count,
     }
-    originals = historical_texts(str(root), value["baseline_commit"])
 
     # Physical declaration order survives inserted comments. Do not bind current
     # locations to old line numbers or accept a renamed pending definition.
@@ -284,10 +360,11 @@ def validate(root=ROOT, index=None):
         if len(current) != len(original):
             raise ValueError("Semantic migration added or removed declarations: " + path)
         scope = ""
+        earlier_names = legacy_definitions.get(path, {})
         for before, after in zip(original, current):
             identity = path + ":" + str(before["line"]) + ":" + before["name"]
             mapping = mappings.get(identity)
-            expected = mapping["new"] if mapping else before["name"]
+            expected = mapping["new"] if mapping else earlier_names.get(before["name"], before["name"])
             if after["name"] != expected:
                 raise ValueError("Unregistered or missing semantic declaration: " + identity)
             if not expected.startswith("."):

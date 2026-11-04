@@ -46,7 +46,7 @@ word_76754:
 
 ; =============== S U B R O U T I N E =======================================
 
-SyncMHZEndBossOverlayPositionAndHorizontalFlip:
+MHZBossOverlay_SyncPosAndXFlip:
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),x_pos(a0)
                 move.w  y_pos(a1),y_pos(a0)
@@ -57,11 +57,12 @@ SyncMHZEndBossOverlayPositionAndHorizontalFlip:
 
 locret_76780:
                 rts
-; End of function SyncMHZEndBossOverlayPositionAndHorizontalFlip
+; End of function MHZBossOverlay_SyncPosAndXFlip
 
 ; =============== S U B R O U T I N E =======================================
 
-HandleMHZEndBossPairedHitFlashAndEscapeThreshold:
+; Share hit recovery between the root and collision proxy. After the flash at one HP, begin the escape
+MHZBoss_HandlePairedHitsAndEscape:
                 movea.w $44(a0),a4
                 move.b  collision_property(a0),d0
                 tst.b   collision_flags(a0)
@@ -140,7 +141,7 @@ loc_76854:
 
 locret_76868:
                 rts
-; End of function HandleMHZEndBossPairedHitFlashAndEscapeThreshold
+; End of function MHZBoss_HandlePairedHitsAndEscape
 
 ; =============== S U B R O U T I N E =======================================
 

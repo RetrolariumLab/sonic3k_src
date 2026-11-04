@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-CopyDDZBossTwelvePaletteWordsAtByteOffset:
+; d0.w is a source byte offset. Copy to the twelve entries selected in palette line 3
+DDZBoss_CopyPalette12:
                 lea     word_82D86(pc),a1
                 lea     word_82D9E(pc,d0.w),a2
                 moveq   #$C-1,d1
@@ -14,7 +15,7 @@ CopyDDZBossTwelvePaletteWordsAtByteOffset:
                 move.w  (a2)+,(a3)+
                 dbf     d1,.loop
                 rts
-; End of function CopyDDZBossTwelvePaletteWordsAtByteOffset
+; End of function DDZBoss_CopyPalette12
 
 ; ---------------------------------------------------------------------------
 word_82D86:
@@ -42,7 +43,7 @@ loc_82DCE:
                 move.b  #90,(Player_1+invulnerability_timer).w
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
-                bsr.w   ReduceDDZFlightScrollSpeedByThreeWithOnePixelFloor
+                bsr.w   DDZFlight_ReduceScrollSpeed
                 move.w  (_unkFA8E).w,d0
                 beq.s   loc_82E14
                 movea.w d0,a1
@@ -55,7 +56,7 @@ loc_82E14:
                 addi.w  #2*$C,d0
 
 loc_82E22:
-                bsr.w   CopyDDZBossTwelvePaletteWordsAtByteOffset
+                bsr.w   DDZBoss_CopyPalette12
                 subq.b  #1,$20(a0)
 
 locret_82E2A:
@@ -94,11 +95,11 @@ word_82E92:
 ; ---------------------------------------------------------------------------
 
 loc_82E9A:
-                bsr.w   PositionDDZAttachedActorFromParentWordOffsets
+                bsr.w   DDZChild_SetPosFromParent
                 subq.w  #1,$2E(a0)
                 bpl.s   loc_82EEE
                 moveq   #$18,d0
-                bsr.w   CopyDDZBossTwelvePaletteWordsAtByteOffset
+                bsr.w   DDZBoss_CopyPalette12
                 moveq   #signextendB(sfx_MissileExplode),d0
                 jsr     (Play_SFX).l
                 move.w  #$1F,$2E(a0)
@@ -125,7 +126,7 @@ loc_82EEA:
 
 loc_82EEE:
                 moveq   #0,d0
-                bra.w   CopyDDZBossTwelvePaletteWordsAtByteOffset
+                bra.w   DDZBoss_CopyPalette12
 ; ---------------------------------------------------------------------------
 word_82EF4:
                 dc.w    $C0,   $38
@@ -141,7 +142,7 @@ word_82EF4:
 ; ---------------------------------------------------------------------------
 
 loc_82F1C:
-                bsr.w   PositionDDZAttachedActorFromParentWordOffsets
+                bsr.w   DDZChild_SetPosFromParent
                 subq.w  #1,$2E(a0)
                 bpl.s   locret_82F6A
                 move.w  #$1F,$2E(a0)
@@ -174,7 +175,7 @@ word_82F6C:
 ; ---------------------------------------------------------------------------
 
 loc_82F78:
-                bsr.w   PositionDDZAttachedActorFromParentWordOffsets
+                bsr.w   DDZChild_SetPosFromParent
                 moveq   #0,d0
                 move.b  $39(a0),d0
                 cmpi.b  #$30,d0
@@ -243,7 +244,7 @@ loc_83004:
 loc_8302A:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                beq.w   PositionDDZAttachedActorFromParentWordOffsets
+                beq.w   DDZChild_SetPosFromParent
 
 loc_83038:
                 jmp     (Delete_Current_Sprite).l
@@ -265,11 +266,12 @@ loc_83064:
                 move.b  #$E,subtype(a1)
 
 loc_83078:
-                bra.w   PositionDDZAttachedActorFromParentWordOffsets
+                bra.w   DDZChild_SetPosFromParent
 
 ; =============== S U B R O U T I N E =======================================
 
-TrySpawnDDZBossFourShotPatternByPlayerHeight:
+; Select the four-shot pattern by Player 1 height relative to the boss
+DDZBoss_TryFourShotBurst:
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$140,d0
                 cmp.w   x_pos(a0),d0
@@ -290,11 +292,12 @@ TrySpawnDDZBossFourShotPatternByPlayerHeight:
 loc_830B8:
                 lea     ChildObjDat_8328E(pc),a2
                 jmp     CreateChild6_Simple(pc)
-; End of function TrySpawnDDZBossFourShotPatternByPlayerHeight
+; End of function DDZBoss_TryFourShotBurst
 
 ; =============== S U B R O U T I N E =======================================
 
-StepDDZBossXFromRightInputAndFlightControllerSpeed:
+; Combine held Right with the flight controller speed and reject candidates on or outside the camera-relative limits
+DDZBoss_StepXFromFlightInput:
                 movea.w (_unkFA8E).w,a1
                 move.b  x_vel(a1),d1
                 ext.w   d1
@@ -327,7 +330,7 @@ loc_83100:
 
 locret_83106:
                 rts
-; End of function StepDDZBossXFromRightInputAndFlightControllerSpeed
+; End of function DDZBoss_StepXFromFlightInput
 
 ; ---------------------------------------------------------------------------
 
@@ -357,7 +360,8 @@ loc_8313E:
 
 ; =============== S U B R O U T I N E =======================================
 
-ConfigureDDZAsteroidSizeRangeAndHorizontalDriftFromSubtype:
+; Use the high nibble for size and contact bounds and the low nibble for X drift
+DDZAsteroid_InitFromSubtype:
                 move.b  subtype(a0),d0
                 move.w  d0,d1
                 andi.w  #$F0,d0
@@ -373,7 +377,7 @@ ConfigureDDZAsteroidSizeRangeAndHorizontalDriftFromSubtype:
                 add.w   d1,d1
                 move.w  word_8317E(pc,d1.w),x_vel(a0)
                 rts
-; End of function ConfigureDDZAsteroidSizeRangeAndHorizontalDriftFromSubtype
+; End of function DDZAsteroid_InitFromSubtype
 
 ; ---------------------------------------------------------------------------
 word_8317E:

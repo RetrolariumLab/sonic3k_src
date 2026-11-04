@@ -50,7 +50,8 @@ byte_4C6EE:
 
 ; =============== S U B R O U T I N E =======================================
 
-DeleteCNZBossElectricEffectWhenParentEnds:
+; Delete when the parent's pulse ends or the parent is defeated
+CNZBossSpark_TryDelete:
                 movea.w parent3(a0),a1
                 btst    #7,$38(a1)
                 bne.s   loc_4C70E
@@ -61,7 +62,7 @@ DeleteCNZBossElectricEffectWhenParentEnds:
 
 loc_4C70E:
                 jmp     (Go_Delete_Sprite).l
-; End of function DeleteCNZBossElectricEffectWhenParentEnds
+; End of function CNZBossSpark_TryDelete
 
 ; =============== S U B R O U T I N E =======================================
 

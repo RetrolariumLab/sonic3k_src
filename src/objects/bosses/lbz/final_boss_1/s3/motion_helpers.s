@@ -127,7 +127,8 @@ RandomizeLBZFinalBoss1LaserTrailOffset:
 
 ; =============== S U B R O U T I N E =======================================
 
-HandleLBZFinalBoss1HitSectionDropOrDefeat:
+; A hit freezes and flashes the root and speeds its vertical movement. Request body-section loss at five and one HP
+LBZBoss1_HandleHitOrDefeat:
                 tst.b   collision_flags(a0)
                 bne.w   locret_50192
                 tst.b   collision_property(a0)
@@ -205,7 +206,7 @@ loc_501D4:
                 move.l  #loc_4FB4C,(a0)
                 lea     ChildObjDat_5031E(pc),a2
                 jmp     CreateChild1_Normal(pc)
-; End of function HandleLBZFinalBoss1HitSectionDropOrDefeat
+; End of function LBZBoss1_HandleHitOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -256,7 +257,8 @@ locret_50258:
 
 ; =============== S U B R O U T I N E =======================================
 
-SeedLBZFinalBoss1SectionDebrisFrameAndVelocity:
+; Choose the frame from the parent's selected row and velocity from the fragment subtype
+LBZBoss1Debris_InitFrameAndVel:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,d1
@@ -269,7 +271,7 @@ SeedLBZFinalBoss1SectionDebrisFrameAndVelocity:
                 move.w  (a1)+,x_vel(a0)
                 move.w  (a1)+,y_vel(a0)
                 rts
-; End of function SeedLBZFinalBoss1SectionDebrisFrameAndVelocity
+; End of function LBZBoss1Debris_InitFrameAndVel
 
 ; ---------------------------------------------------------------------------
 word_50282:

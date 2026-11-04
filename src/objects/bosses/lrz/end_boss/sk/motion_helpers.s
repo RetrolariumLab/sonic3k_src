@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-DeleteLRZEndBossProjectileOnParentDeathAndAbortUpdate:
+; Try an explosion, delete immediately, and discard the return address to end this update
+LRZBossShot_DeleteIfParentDefeated:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
                 bne.s   loc_79EE6
@@ -32,7 +33,7 @@ loc_79EFA:
                 jsr     (Play_SFX).l
                 addq.w  #4,sp
                 rts
-; End of function DeleteLRZEndBossProjectileOnParentDeathAndAbortUpdate
+; End of function LRZBossShot_DeleteIfParentDefeated
 
 ; ---------------------------------------------------------------------------
 word_79F0C:
@@ -73,7 +74,8 @@ MatchLRZLavaRiderHeightFromWorldXSample:
 
 ; =============== S U B R O U T I N E =======================================
 
-ConsumeLRZEndBossSelfHitLatchAndHandleDefeat:
+; The projectile sets status bit 6. Consume one HP per new flash, then run four-color recovery or defeat
+LRZBoss_HandleSelfHitOrDefeat:
                 btst    #6,status(a0)
                 beq.s   locret_79F98
                 tst.b   $20(a0)
@@ -116,7 +118,7 @@ loc_79FC6:
                 jsr     (BossDefeated_StopTimer).l
                 move.w  #$7F,$2E(a0)
                 rts
-; End of function ConsumeLRZEndBossSelfHitLatchAndHandleDefeat
+; End of function LRZBoss_HandleSelfHitOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -135,7 +137,8 @@ word_79FEE:
 
 ; =============== S U B R O U T I N E =======================================
 
-ShatterLRZBossPlatformNearBossAndAbortUpdate:
+; Near the boss, spawn debris, detach riders and schedule deletion. Discard the return address to end this update
+LRZBossPlatform_TryShatter:
                 movea.w (_unkFAA4).w,a1
                 tst.w   (a1)
                 beq.w   locret_797F8
@@ -150,7 +153,7 @@ ShatterLRZBossPlatformNearBossAndAbortUpdate:
                 jsr     (Play_SFX).l
                 addq.w  #4,sp
                 rts
-; End of function ShatterLRZBossPlatformNearBossAndAbortUpdate
+; End of function LRZBossPlatform_TryShatter
 
 ; ---------------------------------------------------------------------------
 word_7A038:

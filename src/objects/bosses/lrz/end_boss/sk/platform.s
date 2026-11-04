@@ -42,7 +42,8 @@ loc_79C9E:
 
 ; =============== S U B R O U T I N E =======================================
 
-SpawnLRZRisingPlatformWithPlacementSubtypeAndLifetime:
+; Copy the placement subtype and initialize the lifetime to $4FF
+LRZRisingPlatform_Spawn:
                 lea     ChildObjDat_7A1B0(pc),a2
                 jsr     (CreateChild6_Simple).l
                 bne.s   locret_79CCC
@@ -51,14 +52,14 @@ SpawnLRZRisingPlatformWithPlacementSubtypeAndLifetime:
 
 locret_79CCC:
                 rts
-; End of function SpawnLRZRisingPlatformWithPlacementSubtypeAndLifetime
+; End of function LRZRisingPlatform_Spawn
 
 ; ---------------------------------------------------------------------------
 
 loc_79CCE:
                 bsr.w   IsLRZPlatformOriginInsideCameraViewport
                 beq.w   locret_797F8
-                bsr.s   SpawnLRZRisingPlatformWithPlacementSubtypeAndLifetime
+                bsr.s   LRZRisingPlatform_Spawn
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -156,7 +157,7 @@ loc_79DC2:
 ; ---------------------------------------------------------------------------
 
 loc_79DEA:
-                bsr.w   ShatterLRZBossPlatformNearBossAndAbortUpdate
+                bsr.w   LRZBossPlatform_TryShatter
                 tst.b   (_unkFAA3).w
                 bne.s   loc_79DFC
                 tst.b   render_flags(a0)

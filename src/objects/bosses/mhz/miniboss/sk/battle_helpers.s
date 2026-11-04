@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-BounceMHZMinibossThrownActorOrStartRecoveryWait:
+; Correct the floor penetration on contact. Bounce once, then schedule the recovery wait on the next contact
+MHZMiniThrown_BounceOrStartRecovery:
                 bset    #7,$38(a0)
                 bne.s   loc_758E2
                 add.w   d1,y_pos(a0)
@@ -24,7 +25,7 @@ loc_758E2:
                 move.w  #$1F,$2E(a0)
                 move.l  #loc_758FC,$34(a0)
                 rts
-; End of function BounceMHZMinibossThrownActorOrStartRecoveryWait
+; End of function MHZMiniThrown_BounceOrStartRecovery
 
 ; ---------------------------------------------------------------------------
 
@@ -127,7 +128,7 @@ loc_759FC:
                 lea     (ObjDat3_6646E).l,a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #loc_75A24,(a0)
-                bsr.w   SeedMHZMinibossParticleMotionFromHeightAndRandom
+                bsr.w   MHZMiniParticle_InitMotion
                 move.w  (Camera_Y_pos).w,d0
                 addi.w  #$AC,d0
                 move.w  d0,y_pos(a0)

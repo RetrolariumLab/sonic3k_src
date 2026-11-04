@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ReloadSOZEndBossMotionProfileAtTurnBounds:
+; Reload the motion profile only during a negative joint-angle phase and at the edge in the travel direction
+SOZBoss_TryReloadMotionAtBounds:
                 tst.b   $3C(a0)
                 bpl.s   locret_7805E
                 tst.w   x_vel(a0)
@@ -21,7 +22,7 @@ loc_78054:
 
 locret_7805E:
                 rts
-; End of function ReloadSOZEndBossMotionProfileAtTurnBounds
+; End of function SOZBoss_TryReloadMotionAtBounds
 
 ; ---------------------------------------------------------------------------
 word_78060:
@@ -55,18 +56,19 @@ UpdateSOZEndBossSineBobFromAngleStep:
 
 ; =============== S U B R O U T I N E =======================================
 
-ProcessSOZEndBossUpperBodyContactsForBothPlayers:
+SOZBossUpper_CheckBothContacts:
                 swap    d6
                 moveq   #0,d0
                 lea     (Player_1).w,a1
-                bsr.w   OpenSOZEndBossEyeOrHurtUpperBodyContactPlayer
+                bsr.w   SOZBossUpper_TryOpenEyeOrHurt
                 moveq   #1,d0
                 lea     (Player_2).w,a1
-; End of function ProcessSOZEndBossUpperBodyContactsForBothPlayers
+; End of function SOZBossUpper_CheckBothContacts
 
 ; =============== S U B R O U T I N E =======================================
 
-OpenSOZEndBossEyeOrHurtUpperBodyContactPlayer:
+; Eligible attacks from the left open the eye. Side contact from the right requests guarded damage
+SOZBossUpper_TryOpenEyeOrHurt:
                 btst    d0,d6
                 beq.s   locret_78118
                 move.w  x_pos(a0),d0
@@ -96,24 +98,25 @@ locret_78118:
 
 loc_7811A:
                 jmp     (HurtPlayerFromSolidHazard).l
-; End of function OpenSOZEndBossEyeOrHurtUpperBodyContactPlayer
+; End of function SOZBossUpper_TryOpenEyeOrHurt
 
 ; =============== S U B R O U T I N E =======================================
 
-ProcessSOZEndBossLowerBodyContactsForBothPlayers:
+SOZBossLower_CheckBothContacts:
                 swap    d6
                 moveq   #0,d0
                 moveq   #p1_standing_bit,d1
                 lea     (Player_1).w,a1
-                bsr.w   DetachOrHurtSOZEndBossLowerBodyContactPlayer
+                bsr.w   SOZBossLower_DetachOrHurt
                 moveq   #1,d0
                 moveq   #p2_standing_bit,d1
                 lea     (Player_2).w,a1
-; End of function ProcessSOZEndBossLowerBodyContactsForBothPlayers
+; End of function SOZBossLower_CheckBothContacts
 
 ; =============== S U B R O U T I N E =======================================
 
-DetachOrHurtSOZEndBossLowerBodyContactPlayer:
+; Check both side contact and stale standing attachment. The local damage gate can suppress the hurt request
+SOZBossLower_DetachOrHurt:
                 btst    d0,d6
                 bne.s   loc_78140
                 bclr    d1,status(a0)
@@ -128,11 +131,11 @@ loc_78140:
 
 locret_78158:
                 rts
-; End of function DetachOrHurtSOZEndBossLowerBodyContactPlayer
+; End of function SOZBossLower_DetachOrHurt
 
 ; =============== S U B R O U T I N E =======================================
 
-ProcessSOZEndBossArmContactsWhileRootAlive:
+SOZBossArm_CheckContactsWhileAlive:
                 movea.w $44(a0),a1
                 btst    #7,status(a1)
                 bne.s   locret_78198
@@ -142,7 +145,7 @@ ProcessSOZEndBossArmContactsWhileRootAlive:
                 bsr.w   HurtSOZEndBossArmContactPlayerOnLeftSide
                 moveq   #1,d0
                 lea     (Player_2).w,a1
-; End of function ProcessSOZEndBossArmContactsWhileRootAlive
+; End of function SOZBossArm_CheckContactsWhileAlive
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -163,7 +166,8 @@ locret_78198:
 
 ; =============== S U B R O U T I N E =======================================
 
-SeedSOZEndBossChargeParticleOffsetAndStagger:
+; Load signed fixed-point offsets and stagger the start delay across twenty particles
+SOZBossCharge_InitParticle:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lea     byte_781BC(pc,d0.w),a1
@@ -174,7 +178,7 @@ SeedSOZEndBossChargeParticleOffsetAndStagger:
                 lsl.w   #2,d0
                 move.w  d0,$2E(a0)
                 rts
-; End of function SeedSOZEndBossChargeParticleOffsetAndStagger
+; End of function SOZBossCharge_InitParticle
 
 ; ---------------------------------------------------------------------------
 byte_781BC:
@@ -220,7 +224,7 @@ loc_7820A:
                 addi.w  #2*5,d0
 
 loc_78218:
-                bsr.w   CopySOZEndBossFirstThreeOfFivePaletteColors
+                bsr.w   SOZBoss_CopyPalette3Of5
                 subq.b  #1,$20(a0)
                 bne.s   locret_7822E
                 bclr    #6,status(a0)
@@ -242,12 +246,12 @@ loc_78230:
 
 ; =============== S U B R O U T I N E =======================================
 
-CopySOZEndBossFirstThreeOfFivePaletteColors:
+SOZBoss_CopyPalette3Of5:
                 lea     word_7826C(pc),a1
                 lea     word_78276(pc,d0.w),a2
 ; Bug: this should go to CopyWordData_5
                 jmp     (CopyWordData_3).l
-; End of function CopySOZEndBossFirstThreeOfFivePaletteColors
+; End of function SOZBoss_CopyPalette3Of5
 
 ; ---------------------------------------------------------------------------
 word_7826C:

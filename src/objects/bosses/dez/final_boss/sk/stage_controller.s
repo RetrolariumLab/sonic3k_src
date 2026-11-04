@@ -19,7 +19,7 @@ DEZ3_Boss_Index:
                 dc.w    loc_7FE96-DEZ3_Boss_Index
                 dc.w    loc_7FEE2-DEZ3_Boss_Index
                 dc.w    loc_7FEF6-DEZ3_Boss_Index
-                dc.w    StepDEZFinalWorldHalfSineHopAndImpactPhase-DEZ3_Boss_Index
+                dc.w    DEZFinalWorld_StepHopOrImpact-DEZ3_Boss_Index
                 dc.w    loc_7FFD2-DEZ3_Boss_Index
                 dc.w    loc_8001C-DEZ3_Boss_Index
                 dc.w    loc_80058-DEZ3_Boss_Index
@@ -186,7 +186,8 @@ locret_7FF3C:
 
 ; =============== S U B R O U T I N E =======================================
 
-StepDEZFinalWorldHalfSineHopAndImpactPhase:
+; Use a half-sine lift while moving horizontally, then dispatch the impact phase
+DEZFinalWorld_StepHopOrImpact:
                 move.w  $40(a0),d0
                 add.w   d0,x_pos(a0)
                 move.b  angle(a0),d0
@@ -211,7 +212,7 @@ loc_7FF6A:
                 moveq   #0,d0
                 move.b  $30(a0),d0
                 jmp     loc_7FF8E(pc,d0.w)
-; End of function StepDEZFinalWorldHalfSineHopAndImpactPhase
+; End of function DEZFinalWorld_StepHopOrImpact
 
 ; ---------------------------------------------------------------------------
 
@@ -348,17 +349,17 @@ loc_800D0:
 ; ---------------------------------------------------------------------------
 
 loc_800DE:
-                bsr.w   BeginDEZFinalWorldDefeatAndAbortCurrentState
-                bsr.w   TrySpawnDEZFinalFireballOnEnabledInterval
-                bsr.w   StepDEZFinalWorldHalfSineHopAndImpactPhase
-                bra.w   LockDEZFinalCameraBoundsAheadOfWorldAndNudgeCamera
+                bsr.w   DEZFinalWorld_TryBeginDefeat
+                bsr.w   DEZFinal_TryTimedFireball
+                bsr.w   DEZFinalWorld_StepHopOrImpact
+                bra.w   DEZFinal_LockBoundsAndNudgeCamera
 ; ---------------------------------------------------------------------------
 
 loc_800EE:
-                bsr.w   BeginDEZFinalWorldDefeatAndAbortCurrentState
-                bsr.w   TrySpawnDEZFinalFireballOnEnabledInterval
+                bsr.w   DEZFinalWorld_TryBeginDefeat
+                bsr.w   DEZFinal_TryTimedFireball
                 addq.w  #1,x_pos(a0)
-                bsr.w   LockDEZFinalCameraBoundsAheadOfWorldAndNudgeCamera
+                bsr.w   DEZFinal_LockBoundsAndNudgeCamera
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 

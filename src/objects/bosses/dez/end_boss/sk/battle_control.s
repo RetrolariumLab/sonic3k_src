@@ -330,7 +330,7 @@ loc_7F40A:
                 move.w  x_pos(a1),x_pos(a0)
 
 loc_7F414:
-                bsr.w   MoveDEZBossCapsuleWithPreintegratedReversibleGravity
+                bsr.w   DEZCapsule_MoveWithGravity
                 tst.w   y_vel(a0)
                 bpl.s   loc_7F430
                 jsr     (ObjCheckCeilingDist).l
@@ -349,7 +349,7 @@ loc_7F430:
 loc_7F43E:
                 movea.w parent3(a0),a1
                 btst    #7,status(a0)
-                bne.s   ScheduleDEZBossCapsuleExplosionThenDelete
+                bne.s   DEZCapsule_ExplodeThenDelete
                 btst    #0,(V_int_run_count+3).w
                 bne.w   locret_7F0D8
                 jmp     (Draw_Sprite).l
@@ -389,7 +389,7 @@ loc_7F4A2:
 
 ; =============== S U B R O U T I N E =======================================
 
-ScheduleDEZBossCapsuleExplosionThenDelete:
+DEZCapsule_ExplodeThenDelete:
                 move.l  #Go_Delete_Sprite,$34(a0)
                 bra.w   loc_7F4C0
-; End of function ScheduleDEZBossCapsuleExplosionThenDelete
+; End of function DEZCapsule_ExplodeThenDelete

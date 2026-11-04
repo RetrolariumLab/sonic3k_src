@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-PlayFBZEndBossHalfTurnSoundBeforeWaitEnds:
+; Play the spike-ball sound at angle $00 or $80 with at least four wait ticks left
+FBZBoss_TryHalfTurnSound:
                 cmpi.w  #4,$2E(a0)
                 blo.s   locret_70C8C
                 move.b  $3C(a0),d0
@@ -15,7 +16,7 @@ PlayFBZEndBossHalfTurnSoundBeforeWaitEnds:
 
 locret_70C8C:
                 rts
-; End of function PlayFBZEndBossHalfTurnSoundBeforeWaitEnds
+; End of function FBZBoss_TryHalfTurnSound
 
 ; ---------------------------------------------------------------------------
 

@@ -37,7 +37,7 @@ loc_8D2B6:
                 jsr     (CreateChild6_Simple).l
                 lea     (Child1_MakeRoboShipFlame).l,a2
                 jsr     (CreateChild1_Normal).l
-                jsr     ForceLBZShipCarryFrameAndReloadPlayerGraphics(pc)
+                jsr     LBZShip_SetPlayerCarryFrame(pc)
 
 loc_8D33E:
                 jmp     (Sprite_CheckDeleteTouch).l
@@ -59,7 +59,7 @@ loc_8D370:
                 jsr     (MoveSprite2).l
                 bsr.w   AttachPlayer1PositionToLBZRobotnikShip
                 jsr     (Obj_Wait).l
-                jsr     ForceLBZShipCarryFrameAndReloadPlayerGraphics(pc)
+                jsr     LBZShip_SetPlayerCarryFrame(pc)
                 jmp     (Sprite_CheckDeleteTouch).l
 ; ---------------------------------------------------------------------------
 
@@ -91,7 +91,7 @@ loc_8D3AC:
                 move.l  #loc_8D3F2,$34(a0)
 
 loc_8D3E8:
-                jsr     ForceLBZShipCarryFrameAndReloadPlayerGraphics(pc)
+                jsr     LBZShip_SetPlayerCarryFrame(pc)
                 jmp     (Sprite_CheckDeleteTouch).l
 ; ---------------------------------------------------------------------------
 
@@ -119,7 +119,7 @@ loc_8D40E:
                 jsr     (Swing_Setup1).l
 
 loc_8D446:
-                jsr     ForceLBZShipCarryFrameAndReloadPlayerGraphics(pc)
+                jsr     LBZShip_SetPlayerCarryFrame(pc)
                 jmp     (Sprite_CheckDeleteTouch).l
 ; ---------------------------------------------------------------------------
 
@@ -157,7 +157,7 @@ loc_8D47C:
                 clr.b   jumping(a1)
 
 loc_8D4C2:
-                jsr     ForceLBZShipCarryFrameAndReloadPlayerGraphics(pc)
+                jsr     LBZShip_SetPlayerCarryFrame(pc)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -210,7 +210,8 @@ loc_8D538:
 
 ; =============== S U B R O U T I N E =======================================
 
-ForceLBZShipCarryFrameAndReloadPlayerGraphics:
+; Force the character-specific carry pose and invalidate its pattern cache before reloading
+LBZShip_SetPlayerCarryFrame:
                 lea     (Player_1).w,a1
                 moveq   #0,d0
                 move.b  character_id(a1),d0
@@ -219,7 +220,7 @@ ForceLBZShipCarryFrameAndReloadPlayerGraphics:
                 movea.w word_8D55E(pc,d0.w),a2
                 clr.b   (a2)
                 jmp     (Player_Load_PLC).l
-; End of function ForceLBZShipCarryFrameAndReloadPlayerGraphics
+; End of function LBZShip_SetPlayerCarryFrame
 
 ; ---------------------------------------------------------------------------
 RawAni_8D55C:

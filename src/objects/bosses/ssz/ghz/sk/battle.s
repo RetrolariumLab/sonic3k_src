@@ -51,7 +51,7 @@ loc_7A29C:
                 move.b  routine(a0),d0
                 move.w  off_7A2B4(pc,d0.w),d1
                 jsr     off_7A2B4(pc,d1.w)
-                bsr.w   HandleSSZGHZBossHitOrDefeatWithMisoffsetPalette
+                bsr.w   SSZGHZBoss_HandleHitOrDefeat
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 off_7A2B4:
@@ -326,7 +326,8 @@ loc_7A59A:
 
 ; =============== S U B R O U T I N E =======================================
 
-HandleSSZGHZBossHitOrDefeatWithMisoffsetPalette:
+; The scored defeat leaves the HUD timer running
+SSZGHZBoss_HandleHitOrDefeat:
                 tst.b   collision_flags(a0)
                 bne.s   locret_7A5EA
                 move.b  collision_property(a0),d0
@@ -366,7 +367,7 @@ loc_7A5EC:
 
 loc_7A60E:
                 jmp     (BossDefeated).l
-; End of function HandleSSZGHZBossHitOrDefeatWithMisoffsetPalette
+; End of function SSZGHZBoss_HandleHitOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 

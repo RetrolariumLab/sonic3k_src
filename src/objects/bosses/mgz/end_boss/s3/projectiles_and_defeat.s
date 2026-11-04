@@ -7,7 +7,7 @@ loc_4AA86:
                 lea     word_4B3A2(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.l  #loc_4AAA2,(a0)
-                bsr.w   InitializeMGZBossStaggeredTrailVelocityAndDelay
+                bsr.w   MGZBossTrail_InitVelAndDelay
                 move.l  #loc_4AABC,$34(a0)
 
 loc_4AAA2:
@@ -229,7 +229,7 @@ loc_4ACFC:
                 move.b  #4,$40(a0)
                 move.l  #ArtScaled_MGZEndBoss,$42(a0)
                 move.b  #1,$3E(a0)
-                bsr.w   SelectMGZBossScaledFlybyAndNextEntryPattern
+                bsr.w   MGZBossFlyby_SelectPathAndEntry
                 moveq   #6,d0
                 move.w  ground_vel(a0),d1
                 beq.s   loc_4AD60

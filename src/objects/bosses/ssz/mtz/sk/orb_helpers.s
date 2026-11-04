@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-SelectSSZMTZOrbFrameAndQueuePriorityFromDepth:
+SSZMTZOrb_SelectFrameAndPriority:
                 move.w  $3A(a0),d0
                 bmi.s   loc_7AF82
                 cmpi.w  #$C,d0
@@ -32,7 +32,7 @@ loc_7AF96:
                 move.b  #2,mapping_frame(a0)
                 move.w  #$380,priority(a0)
                 rts
-; End of function SelectSSZMTZOrbFrameAndQueuePriorityFromDepth
+; End of function SSZMTZOrb_SelectFrameAndPriority
 
 ; ---------------------------------------------------------------------------
 
@@ -59,10 +59,10 @@ loc_7AFD0:
                 move.w  #$42C,$38(a0)
                 move.b  #1,$32(a0)
                 addq.b  #2,routine(a0)
-                bsr.w   FaceDetachedSSZMTZOrbTowardPlayerOneOnLanding
+                bsr.w   SSZMTZOrb_FaceP1OnLanding
 
 loc_7AFF8:
-                bsr.w   ConsumeDetachedSSZMTZOrbContactOrBossDefeat
+                bsr.w   SSZMTZOrb_HandleContactOrDefeat
 
 loc_7AFFC:
                 lea     Ani_SSZMTZOrbs(pc),a1
@@ -89,7 +89,7 @@ loc_7B02A:
                 move.b  #$DA,collision_flags(a0)
 
 loc_7B03C:
-                bsr.w   ConsumeDetachedSSZMTZOrbContactOrBossDefeat
+                bsr.w   SSZMTZOrb_HandleContactOrDefeat
                 cmpi.b  #8,mapping_frame(a0)
                 bne.s   loc_7AFFC
                 move.b  $32(a0),d0
@@ -118,14 +118,14 @@ loc_7B080:
 
 loc_7B08C:
                 move.w  #$42C,y_pos(a0)
-                bsr.w   FaceDetachedSSZMTZOrbTowardPlayerOneOnLanding
+                bsr.w   SSZMTZOrb_FaceP1OnLanding
                 move.b  #1,$32(a0)
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-FaceDetachedSSZMTZOrbTowardPlayerOneOnLanding:
+SSZMTZOrb_FaceP1OnLanding:
                 move.w  (Player_1+x_pos).w,d0
                 sub.w   x_pos(a0),d0
                 bpl.s   loc_7B0BA
@@ -136,11 +136,12 @@ FaceDetachedSSZMTZOrbTowardPlayerOneOnLanding:
 loc_7B0BA:
                 bset    #0,render_flags(a0)
                 rts
-; End of function FaceDetachedSSZMTZOrbTowardPlayerOneOnLanding
+; End of function SSZMTZOrb_FaceP1OnLanding
 
 ; =============== S U B R O U T I N E =======================================
 
-ConsumeDetachedSSZMTZOrbContactOrBossDefeat:
+; Consume the contact accumulator to select the player response. The boss defeat signal also starts orb removal
+SSZMTZOrb_HandleContactOrDefeat:
                 moveq   #0,d0
                 move.b  collision_property(a0),d0
                 bne.s   loc_7B0D2
@@ -166,7 +167,7 @@ loc_7B0F6:
                 move.b  #6,anim(a0)
                 move.b  #8,routine(a0)
                 rts
-; End of function ConsumeDetachedSSZMTZOrbContactOrBossDefeat
+; End of function SSZMTZOrb_HandleContactOrDefeat
 
 ; ---------------------------------------------------------------------------
 word_7B10E:

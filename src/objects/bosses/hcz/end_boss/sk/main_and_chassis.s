@@ -38,7 +38,7 @@ loc_6AF0C:
                 move.b  routine(a0),d0
                 move.w  off_6AF24(pc,d0.w),d1
                 jsr     off_6AF24(pc,d1.w)
-                bsr.w   HandleHCZEndBossThreeColorHitFlashOrDefeat
+                bsr.w   HCZBoss_HandleHitFlashOrDefeat
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 off_6AF24:
@@ -366,7 +366,7 @@ loc_6B2F8:
 loc_6B31E:
                 jsr     (MoveSprite2).l
                 jsr     (Animate_Raw).l
-                bra.w   UpdateHCZBossColumnHeightAndCheckCallback
+                bra.w   HCZBossColumn_UpdateHeight
 ; ---------------------------------------------------------------------------
 
 loc_6B32E:
@@ -396,7 +396,7 @@ locret_6B374:
                 rts
 ; ---------------------------------------------------------------------------
 ; unused
-                bra.w   UpdateHCZBossColumnHeightAndCheckCallback
+                bra.w   HCZBossColumn_UpdateHeight
 ; ---------------------------------------------------------------------------
 
 loc_6B37A:
@@ -426,5 +426,5 @@ loc_6B3BC:
 loc_6B3C8:
                 jsr     (MoveSprite2).l
                 jsr     (Animate_Raw).l
-                bsr.w   UpdateHCZBossColumnHeightAndCheckCallback
+                bsr.w   HCZBossColumn_UpdateHeight
                 jmp     (Draw_Sprite).l

@@ -28,8 +28,8 @@ Obj_LBZ2UnusedRobotnik:
 ; ---------------------------------------------------------------------------
 
 loc_51BB6:
-                bsr.w   AdvanceLBZUnusedRobotnikArtFramesAndScale
-                bsr.w   AdjustLBZUnusedRobotnikVelocityWithinLimits
-                bsr.w   IntegrateAndProjectLBZUnusedScaledRobotnik
+                bsr.w   LBZUnusedRobotnik_StepArtAndScale
+                bsr.w   LBZUnusedRobotnik_AdjustVel
+                bsr.w   LBZUnusedRobotnik_IntegrateAndProject
                 jmp     (Draw_Sprite).l
 ; End of function Obj_LBZ2UnusedRobotnik

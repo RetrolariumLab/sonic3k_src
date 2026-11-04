@@ -130,7 +130,7 @@ loc_777CC:
                 subq.w  #1,$2E(a0)
                 bpl.s   locret_777EE
                 move.b  #8,routine(a0)
-                bsr.w   ReloadSOZEndBossMotionProfileAtTurnBounds
+                bsr.w   SOZBoss_TryReloadMotionAtBounds
                 neg.b   $3E(a0)
                 neg.w   $40(a0)
                 move.w  $32(a0),$2E(a0)
@@ -149,7 +149,7 @@ loc_777FA:
                 move.b  $42(a0),routine(a0)
                 clr.b   collision_flags(a0)
                 moveq   #0,d0
-                bra.w   CopySOZEndBossFirstThreeOfFivePaletteColors
+                bra.w   SOZBoss_CopyPalette3Of5
 ; ---------------------------------------------------------------------------
 
 loc_7780A:
@@ -512,7 +512,7 @@ loc_77C32:
                 moveq   #$C,d3
                 move.w  (sp)+,d4
                 jsr     (SolidObjectFull).l
-                bsr.w   ProcessSOZEndBossArmContactsWhileRootAlive
+                bsr.w   SOZBossArm_CheckContactsWhileAlive
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
                 bne.s   loc_77C7A
@@ -555,7 +555,7 @@ loc_77CC6:
                 moveq   #$28,d3
                 move.w  (sp)+,d4
                 jsr     (SolidObjectFull2).l
-                bsr.w   ProcessSOZEndBossUpperBodyContactsForBothPlayers
+                bsr.w   SOZBossUpper_CheckBothContacts
 
 loc_77CF2:
                 movea.w parent3(a0),a1
@@ -597,7 +597,7 @@ loc_77D2C:
                 moveq   #$30,d3
                 move.w  (sp)+,d4
                 jsr     (SolidObjectFull2).l
-                bsr.w   ProcessSOZEndBossLowerBodyContactsForBothPlayers
+                bsr.w   SOZBossLower_CheckBothContacts
                 bra.s   loc_77CF2
 ; ---------------------------------------------------------------------------
 
@@ -701,7 +701,7 @@ loc_77E7C:
                 lea     word_782DE(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
                 move.l  #loc_77E90,(a0)
-                bsr.w   SeedSOZEndBossChargeParticleOffsetAndStagger
+                bsr.w   SOZBossCharge_InitParticle
 
 loc_77E90:
                 subq.w  #1,$2E(a0)

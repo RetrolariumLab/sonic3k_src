@@ -45,8 +45,8 @@ loc_76A92:
                 move.b  routine(a0),d0
                 move.w  off_76AAE(pc,d0.w),d1
                 jsr     off_76AAE(pc,d1.w)
-                bsr.w   HandleSOZMinibossArmedKnockbackOrSinkDefeat
-                bsr.w   SelectSOZMinibossLayerAcrossWorldXBoundary
+                bsr.w   SOZMini_HandleKnockbackOrSink
+                bsr.w   SOZMini_SetLayerFromWorldX
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 off_76AAE:
@@ -241,7 +241,7 @@ loc_76CCE:
                 move.b  mapping_frame(a0),$39(a0)
                 move.b  $3A(a0),mapping_frame(a0)
                 lea     byte_772E2(pc),a1
-                bsr.w   ApplySOZMinibossPoseDisplacementFromAnimationCursor
+                bsr.w   SOZMini_ApplyAnimStepOffset
 
 locret_76CEE:
                 rts
@@ -334,7 +334,7 @@ loc_76DB0:
 loc_76DD6:
                 move.b  $3A(a0),mapping_frame(a0)
                 lea     byte_772E2(pc),a1
-                bsr.w   ApplySOZMinibossPoseDisplacementFromAnimationCursor
+                bsr.w   SOZMini_ApplyAnimStepOffset
 
 locret_76DE4:
                 rts
@@ -453,12 +453,12 @@ loc_76F0E:
                 move.l  #loc_76F24,(a0)
 
 loc_76F24:
-                bsr.w   SelectSOZMinibossLayerAcrossWorldXBoundary
+                bsr.w   SOZMini_SetLayerFromWorldX
                 movea.w parent3(a0),a1
                 moveq   #8,d0
                 btst    #6,status(a1)
                 bne.s   loc_76F40
-                bsr.w   SyncSOZMinibossPartFromRootPoseAndSubtype
+                bsr.w   SOZMiniPart_SyncFromRootPose
                 jmp     (Child_DrawTouch_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -568,7 +568,7 @@ loc_7704A:
 ; ---------------------------------------------------------------------------
 
 loc_77062:
-                bsr.w   SelectSOZMinibossLayerAcrossWorldXBoundary
+                bsr.w   SOZMini_SetLayerFromWorldX
                 jmp     (MoveDraw_SpriteTimed).l
 ; ---------------------------------------------------------------------------
 

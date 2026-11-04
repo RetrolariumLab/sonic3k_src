@@ -109,7 +109,7 @@ loc_78606:
 
 loc_78628:
                 jsr     (Animate_RawMultiDelay).l
-                bsr.w   RetargetLRZMinibossHorizontalSpeedEverySixteenTicks
+                bsr.w   LRZMini_RetargetXVelEvery16
                 jsr     (MoveSprite2).l
                 move.w  (_unkFAB0).w,d0
                 cmp.w   y_pos(a0),d0
@@ -124,13 +124,14 @@ loc_78628:
 
 loc_78666:
                 jsr     (Swing_UpAndDown).l
-                bsr.w   RetargetLRZMinibossHorizontalSpeedEverySixteenTicks
+                bsr.w   LRZMini_RetargetXVelEvery16
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 
 ; =============== S U B R O U T I N E =======================================
 
-RetargetLRZMinibossHorizontalSpeedEverySixteenTicks:
+; Pursue Player 1 outside an eight-pixel dead zone
+LRZMini_RetargetXVelEvery16:
                 move.b  (V_int_run_count+3).w,d0
                 andi.w  #$F,d0
                 bne.s   locret_786A0
@@ -143,7 +144,7 @@ RetargetLRZMinibossHorizontalSpeedEverySixteenTicks:
 
 locret_786A0:
                 rts
-; End of function RetargetLRZMinibossHorizontalSpeedEverySixteenTicks
+; End of function LRZMini_RetargetXVelEvery16
 
 ; ---------------------------------------------------------------------------
 word_786A2:
@@ -189,7 +190,7 @@ loc_7871A:
                 moveq   #0,d3
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull).l
-                bsr.w   HandleLRZMinibossRootHitOrDefeatWithMisoffsetFlash
+                bsr.w   LRZMini_HandleHitFlashOrDefeat
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
@@ -209,13 +210,13 @@ loc_78768:
                 jsr     (Animate_RawMultiDelay).l
                 cmpi.b  #6,anim_frame(a0)
                 bhs.s   loc_78784
-                bsr.w   HandleLRZMinibossRootHitOrDefeatWithMisoffsetFlash
+                bsr.w   LRZMini_HandleHitFlashOrDefeat
                 jsr     (Add_SpriteToCollisionResponseList).l
                 bra.w   loc_7878C
 ; ---------------------------------------------------------------------------
 
 loc_78784:
-                bsr.w   ContinueLRZMinibossRootFlashWhileRetracting
+                bsr.w   LRZMini_TickFlashWhileRetracting
                 clr.b   collision_flags(a0)
 
 loc_7878C:
@@ -293,7 +294,7 @@ loc_78838:
                 move.b  routine(a0),d0
                 move.w  off_78850(pc,d0.w),d1
                 jsr     off_78850(pc,d1.w)
-                bsr.w   ScheduleLRZMinibossArmSegmentDestructionBySide
+                bsr.w   LRZMiniArm_TryBreakSegmentBySide
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 off_78850:
@@ -355,7 +356,7 @@ loc_788CC:
 loc_788DE:
                 lea     word_78D66(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                bsr.w   SuspendLRZArmInitializationUntilCapturedContinuation
+                bsr.w   LRZMiniArm_DeferInitContinuation
                 move.l  #loc_788F4,(a0)
                 rts
 ; ---------------------------------------------------------------------------
@@ -375,14 +376,14 @@ loc_7890C:
                 move.b  d0,$3C(a0)
                 moveq   #4,d2
                 jsr     (MoveSprite_CircularSimple).l
-                bsr.w   ScheduleLRZMinibossArmSegmentDestructionBySide
+                bsr.w   LRZMiniArm_TryBreakSegmentBySide
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
 loc_78922:
                 lea     word_78D6C(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                bsr.w   SuspendLRZArmInitializationUntilCapturedContinuation
+                bsr.w   LRZMiniArm_DeferInitContinuation
                 move.l  #loc_78946,(a0)
                 move.l  #byte_78E05,$30(a0)
                 move.b  #4,collision_property(a0)
@@ -405,7 +406,7 @@ loc_78966:
                 clr.b   $39(a0)
 
 loc_78976:
-                bra.w   ScheduleLRZMinibossArmSegmentDestructionBySide
+                bra.w   LRZMiniArm_TryBreakSegmentBySide
 ; ---------------------------------------------------------------------------
 
 loc_7897A:
@@ -419,8 +420,8 @@ loc_7898C:
                 lea     (AngleLookup_2).l,a2
                 jsr     (MoveSprite_AtAngleLookup).l
                 jsr     (Obj_Wait).l
-                bsr.w   ScheduleLRZMinibossArmSegmentDestructionBySide
-                bsr.w   HandleLRZMinibossTerminalArmHitAndSideDefeat
+                bsr.w   LRZMiniArm_TryBreakSegmentBySide
+                bsr.w   LRZMiniArmTip_HandleHitOrDefeat
                 move.b  $20(a0),d0
                 beq.s   loc_789BE
                 btst    #0,d0

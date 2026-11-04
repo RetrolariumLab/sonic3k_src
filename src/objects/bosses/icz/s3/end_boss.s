@@ -42,7 +42,7 @@ loc_4ED3C:
                 move.b  routine(a0),d0
                 move.w  off_4ED52(pc,d0.w),d1
                 jsr     off_4ED52(pc,d1.w)
-                bsr.w   HandleICZEndBossHitPhaseTransitionOrDefeat
+                bsr.w   ICZBoss_HandleHitPhaseOrDefeat
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 off_4ED52:
@@ -618,7 +618,8 @@ byte_4F2E6:
 
 ; =============== S U B R O U T I N E =======================================
 
-HandleICZEndBossHitPhaseTransitionOrDefeat:
+; Enter the late phase on a new hit at two HP. Reenable collision only on the eligible body frame
+ICZBoss_HandleHitPhaseOrDefeat:
                 tst.b   collision_flags(a0)
                 bne.s   locret_4F35C
                 move.b  collision_property(a0),d0
@@ -666,7 +667,7 @@ loc_4F35E:
 
 loc_4F37E:
                 jmp     BossDefeated_StopTimer(pc)
-; End of function HandleICZEndBossHitPhaseTransitionOrDefeat
+; End of function ICZBoss_HandleHitPhaseOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 

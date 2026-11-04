@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-LatchLBZFinalBoss2ChildTilePriorityAndCollision:
+; Once the parent has high tile priority, set the child's priority and collision and store the caller's continuation as its handler
+LBZBoss2Child_LatchPriorityAndColl:
                 movea.w parent3(a0),a1
                 btst    #7,art_tile(a1)
                 beq.s   locret_74ED4
@@ -14,7 +15,7 @@ LatchLBZFinalBoss2ChildTilePriorityAndCollision:
 
 locret_74ED4:
                 rts
-; End of function LatchLBZFinalBoss2ChildTilePriorityAndCollision
+; End of function LBZBoss2Child_LatchPriorityAndColl
 
 ; ---------------------------------------------------------------------------
 ; unused
@@ -97,7 +98,7 @@ loc_74F90:
 
 ; =============== S U B R O U T I N E =======================================
 
-ReverseLBZFinalBoss2AtCameraRelativeBounds:
+LBZBoss2_ReverseAtCameraBounds:
                 move.w  (Camera_X_pos).w,d0
                 tst.w   x_vel(a0)
                 bmi.s   loc_74FBE
@@ -118,7 +119,7 @@ loc_74FC6:
 
 locret_74FD0:
                 rts
-; End of function ReverseLBZFinalBoss2AtCameraRelativeBounds
+; End of function LBZBoss2_ReverseAtCameraBounds
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -10,7 +10,7 @@ Obj_FBZMiniboss:
                 move.b  routine(a0),d0
                 move.w  FBZMiniboss_Index(pc,d0.w),d1
                 jsr     FBZMiniboss_Index(pc,d1.w)
-                bsr.w   SolidifyFBZMinibossBodyAndReleasedCapsule
+                bsr.w   FBZMini_SolidBodyOrCapsule
                 bsr.w   ProcessFBZMinibossArmSelfHitAndDefeat
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -754,7 +754,7 @@ loc_4D106:
 loc_4D12E:
                 cmpi.b  #$A,subtype(a0)
                 beq.s   loc_4D13E
-                bsr.w   InterpolateFBZMinibossPunchLinkBetweenEndpoints
+                bsr.w   FBZMiniPunch_InterpolateLink
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
@@ -794,7 +794,7 @@ loc_4D188:
 ; ---------------------------------------------------------------------------
 
 loc_4D196:
-                bsr.w   SolidifyFBZMinibossBodyAndReleasedCapsule
+                bsr.w   FBZMini_SolidBodyOrCapsule
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0

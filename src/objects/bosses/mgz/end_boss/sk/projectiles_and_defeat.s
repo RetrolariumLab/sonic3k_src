@@ -7,7 +7,7 @@ loc_6CDE8:
                 lea     word_6D78E(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.l  #loc_6CE04,(a0)
-                bsr.w   InitializeMGZBossStaggeredTrailVelocityAndDelay
+                bsr.w   MGZBossTrail_InitVelAndDelay
                 move.l  #loc_6CE1E,$34(a0)
 
 loc_6CE04:
@@ -194,7 +194,7 @@ loc_6CFF4:
                 move.b  #4,$40(a0)
                 move.l  #ArtScaled_MGZEndBoss,$42(a0)
                 move.b  #1,$3E(a0)
-                bsr.w   SelectMGZBossScaledFlybyAndNextEntryPattern
+                bsr.w   MGZBossFlyby_SelectPathAndEntry
                 moveq   #6,d0
                 move.w  ground_vel(a0),d1
                 beq.s   loc_6D058
@@ -344,7 +344,7 @@ loc_6D1BE:
                 lea     ObjDat3_6D7A8(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #loc_6D1D2,(a0)
-                bsr.w   RandomizeMGZBossCollapseDebrisFrameAndVelocity
+                bsr.w   MGZCollapseDebris_RandomizeMotion
 
 loc_6D1D2:
                 jsr     (MoveSprite_LightGravity).l
@@ -352,7 +352,8 @@ loc_6D1D2:
 
 ; =============== S U B R O U T I N E =======================================
 
-RandomizeMGZBossCollapseDebrisFrameAndVelocity:
+; Randomize the frame and signed X velocity. The lower emitter can also give a large upward launch
+MGZCollapseDebris_RandomizeMotion:
                 jsr     (Random_Number).l
                 move.w  d0,d1
                 andi.w  #3,d0
@@ -379,7 +380,7 @@ loc_6D21E:
 
 locret_6D222:
                 rts
-; End of function RandomizeMGZBossCollapseDebrisFrameAndVelocity
+; End of function MGZCollapseDebris_RandomizeMotion
 
 ; ---------------------------------------------------------------------------
 RawAni_6D224:

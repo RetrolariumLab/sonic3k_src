@@ -8,9 +8,9 @@ Obj_SSZEndBoss:
                 move.b  routine(a0),d0
                 move.w  SSZEndBoss_Index(pc,d0.w),d1
                 jsr     SSZEndBoss_Index(pc,d1.w)
-                lea     BeginSSZMechaScoredDefeatIntoPostBattleScene(pc),a4
-                bsr.w   HandleSSZMechaHitFlashOrTailDeathCallback
-                bsr.w   SelectSSZMechaCollisionFromFrameOutsideHitRecovery
+                lea     SSZMecha_BeginScoredDefeatScene(pc),a4
+                bsr.w   SSZMecha_HandleHitFlashOrDefeat
+                bsr.w   SSZMecha_TrySetCollisionFromFrame
                 lea     DPLCPtr_MechaSonic(pc),a2
                 jsr     (Perform_DPLC).l
                 jmp     (Draw_And_Touch_Sprite).l
@@ -792,7 +792,7 @@ loc_7BBE0:
                 clr.w   (H_scroll_frame_offset).w
                 clr.w   (Ctrl_1_logical).w
                 clr.b   (Ctrl_1_locked).w
-                bsr.w   StopPlayerOneAllThreeVelocitiesForSSZScene
+                bsr.w   SSZScene_ClearP1Velocities
                 move.l  #Obj_SSZ2_Boss,(a0)
                 move.b  #8,collision_property(a0)
                 move.b  #$23,collision_flags(a0)

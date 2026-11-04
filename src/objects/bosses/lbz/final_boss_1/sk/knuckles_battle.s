@@ -17,10 +17,10 @@ Obj_LBZFinalBossKnux:
 
 ; =============== S U B R O U T I N E =======================================
 
-QueueLBZFinalBossExtraShipAndExplosionGraphics:
+LBZFinalBoss_QueueShipAndExplosionArt:
                 lea     PLC_LBZFinalBoss_Extra(pc),a1
                 jmp     (Load_PLC_Raw).l
-; End of function QueueLBZFinalBossExtraShipAndExplosionGraphics
+; End of function LBZFinalBoss_QueueShipAndExplosionArt
 
 ; ---------------------------------------------------------------------------
 PLC_LBZFinalBoss_Extra: plrlistheader
@@ -121,7 +121,7 @@ loc_73138:
                 jsr     (SetUp_ObjAttributes3).l
                 move.l  #loc_73152,(a0)
                 move.w  #$60,$2E(a0)
-                bsr.w   SeedLBZFinalBoss1SectionDebrisFrameAndVelocity
+                bsr.w   LBZBoss1Debris_InitFrameAndVel
 
 loc_73152:
                 jsr     (MoveSprite).l
@@ -476,7 +476,8 @@ RandomizeLBZFinalBoss1LaserTrailOffset:
 
 ; =============== S U B R O U T I N E =======================================
 
-HandleLBZFinalBoss1HitSectionDropOrDefeat:
+; A hit freezes and flashes the root and speeds its vertical movement. Request body-section loss at five and one HP
+LBZBoss1_HandleHitOrDefeat:
                 tst.b   collision_flags(a0)
                 bne.w   locret_735B4
                 tst.b   collision_property(a0)
@@ -553,7 +554,7 @@ loc_735B6:
 loc_735FC:
                 move.l  #loc_73054,(a0)
                 rts
-; End of function HandleLBZFinalBoss1HitSectionDropOrDefeat
+; End of function LBZBoss1_HandleHitOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -604,7 +605,8 @@ locret_73680:
 
 ; =============== S U B R O U T I N E =======================================
 
-SeedLBZFinalBoss1SectionDebrisFrameAndVelocity:
+; Choose the frame from the parent's selected row and velocity from the fragment subtype
+LBZBoss1Debris_InitFrameAndVel:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,d1
@@ -617,7 +619,7 @@ SeedLBZFinalBoss1SectionDebrisFrameAndVelocity:
                 move.w  (a1)+,x_vel(a0)
                 move.w  (a1)+,y_vel(a0)
                 rts
-; End of function SeedLBZFinalBoss1SectionDebrisFrameAndVelocity
+; End of function LBZBoss1Debris_InitFrameAndVel
 
 ; ---------------------------------------------------------------------------
 word_736AA:

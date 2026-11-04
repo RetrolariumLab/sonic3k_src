@@ -34,7 +34,7 @@ loc_80E70:
                 addi.w  #2*2,d0
 
 loc_80E7E:
-                bsr.w   CopyDEZEscapeShipThreePaletteWordsAtByteOffset
+                bsr.w   DEZEscapeShip_CopyPalette3
                 subq.b  #1,$20(a0)
                 bne.s   locret_80EA2
                 bclr    #6,status(a0)
@@ -64,11 +64,12 @@ loc_80ECC:
 
 ; =============== S U B R O U T I N E =======================================
 
-CopyDEZEscapeShipThreePaletteWordsAtByteOffset:
+; d0.w supplies the source byte offset for the three fixed destinations
+DEZEscapeShip_CopyPalette3:
                 lea     word_80EE2(pc),a1
                 lea     word_80EE8(pc,d0.w),a2
                 jmp     CopyWordData_3(pc)
-; End of function CopyDEZEscapeShipThreePaletteWordsAtByteOffset
+; End of function DEZEscapeShip_CopyPalette3
 
 ; ---------------------------------------------------------------------------
 word_80EE2:
@@ -79,7 +80,7 @@ word_80EE8:
 
 ; =============== S U B R O U T I N E =======================================
 
-TrySpawnDEZEscapeFallingDebrisEverySixteenTicks:
+DEZEscape_TryFallingDebrisEvery16:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #$F,d0
                 bne.s   locret_80F0C
@@ -89,11 +90,12 @@ TrySpawnDEZEscapeFallingDebrisEverySixteenTicks:
 
 locret_80F0C:
                 rts
-; End of function TrySpawnDEZEscapeFallingDebrisEverySixteenTicks
+; End of function DEZEscape_TryFallingDebrisEvery16
 
 ; =============== S U B R O U T I N E =======================================
 
-AccelerateDEZEscapeCameraAndLockHorizontalLimits:
+; Advance X using the 16.16 speed accumulator, then set both horizontal limits from the integer result
+DEZEscape_AccelAndLockCameraX:
                 move.l  (_unkFA84).w,d0
                 addi.l  #$1000,d0
                 cmpi.l  #$40000,d0
@@ -108,11 +110,12 @@ loc_80F24:
                 move.w  d1,(Camera_min_X_pos).w
                 move.w  d1,(Camera_max_X_pos).w
                 rts
-; End of function AccelerateDEZEscapeCameraAndLockHorizontalLimits
+; End of function DEZEscape_AccelAndLockCameraX
 
 ; =============== S U B R O U T I N E =======================================
 
-BeginDEZFinalWorldDefeatAndAbortCurrentState:
+; On status bit 7, install the defeat drift and discard the return address to skip the rest of this state
+DEZFinalWorld_TryBeginDefeat:
                 btst    #7,status(a0)
                 beq.s   locret_80F9C
                 move.l  #loc_80102,(a0)
@@ -142,7 +145,7 @@ loc_80F90:
 
 locret_80F9C:
                 rts
-; End of function BeginDEZFinalWorldDefeatAndAbortCurrentState
+; End of function DEZFinalWorld_TryBeginDefeat
 
 ; ---------------------------------------------------------------------------
 PLC_DEZ3_Boss:  plrlistheader
@@ -190,7 +193,7 @@ word_80FF2:
 
 ; =============== S U B R O U T I N E =======================================
 
-TrySpawnDEZFinalChargeParticleEveryFourTicks:
+DEZFinal_TryChargeParticleEvery4:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #3,d0
                 bne.s   locret_8100C
@@ -199,22 +202,24 @@ TrySpawnDEZFinalChargeParticleEveryFourTicks:
 
 locret_8100C:
                 rts
-; End of function TrySpawnDEZFinalChargeParticleEveryFourTicks
+; End of function DEZFinal_TryChargeParticleEvery4
 
 ; =============== S U B R O U T I N E =======================================
 
-LockDEZFinalCameraBoundsAheadOfWorldAndNudgeCamera:
+; Pin both X limits at world X plus $40 and advance actual camera X by one pixel
+DEZFinal_LockBoundsAndNudgeCamera:
                 move.w  x_pos(a0),d0
                 addi.w  #$40,d0
                 move.w  d0,(Camera_min_X_pos).w
                 move.w  d0,(Camera_max_X_pos).w
                 addq.w  #1,(Camera_X_pos).w
                 rts
-; End of function LockDEZFinalCameraBoundsAheadOfWorldAndNudgeCamera
+; End of function DEZFinal_LockBoundsAndNudgeCamera
 
 ; =============== S U B R O U T I N E =======================================
 
-PositionDEZFinalChildFromParentWordOffsets:
+; Add the two signed word offsets to the parent's integer coordinates
+DEZFinalChild_SetPosFromParent:
                 movea.w parent3(a0),a1
                 move.w  $42(a0),d0
                 move.w  x_pos(a1),d1
@@ -225,11 +230,12 @@ PositionDEZFinalChildFromParentWordOffsets:
                 add.w   d0,d1
                 move.w  d1,y_pos(a0)
                 rts
-; End of function PositionDEZFinalChildFromParentWordOffsets
+; End of function DEZFinalChild_SetPosFromParent
 
 ; =============== S U B R O U T I N E =======================================
 
-TrySpawnDEZFinalFireballOnEnabledInterval:
+; Pause the fireball countdown while the attack-inhibit bit is set
+DEZFinal_TryTimedFireball:
                 btst    #2,$38(a0)
                 bne.s   locret_8106C
                 subq.w  #1,$1C(a0)
@@ -242,11 +248,12 @@ TrySpawnDEZFinalFireballOnEnabledInterval:
 
 locret_8106C:
                 rts
-; End of function TrySpawnDEZFinalFireballOnEnabledInterval
+; End of function DEZFinal_TryTimedFireball
 
 ; =============== S U B R O U T I N E =======================================
 
-CloneDEZPrimaryFireballIntoAnimatedFlameSegment:
+; Allocate after the current slot and copy its root attachment, position and trajectory offsets
+DEZFireball_SpawnFlameSegment:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.s   locret_8109E
                 move.l  #loc_80A3A,(a1)
@@ -259,7 +266,7 @@ CloneDEZPrimaryFireballIntoAnimatedFlameSegment:
 
 locret_8109E:
                 rts
-; End of function CloneDEZPrimaryFireballIntoAnimatedFlameSegment
+; End of function DEZFireball_SpawnFlameSegment
 
 ; ---------------------------------------------------------------------------
 
@@ -281,7 +288,7 @@ loc_810D0:
 
 ; =============== S U B R O U T I N E =======================================
 
-ContinueDEZArmSegmentFlashOrSharedDestruction:
+DEZArmSegment_ContinueFlashOrBreak:
                 move.b  collision_property(a0),d0
                 beq.s   loc_81140
                 tst.b   $20(a0)
@@ -294,13 +301,13 @@ ContinueDEZArmSegmentFlashOrSharedDestruction:
 
 locret_810F8:
                 rts
-; End of function ContinueDEZArmSegmentFlashOrSharedDestruction
+; End of function DEZArmSegment_ContinueFlashOrBreak
 
 ; =============== S U B R O U T I N E =======================================
 
 RecognizeDEZArmSegmentHitAtImpactFrame:
                 cmpi.b  #4,mapping_frame(a0)
-                bne.s   ContinueDEZArmSegmentFlashOrSharedDestruction
+                bne.s   DEZArmSegment_ContinueFlashOrBreak
                 tst.b   collision_flags(a0)
                 bne.s   locret_8113E
                 move.b  collision_property(a0),d0
@@ -360,7 +367,8 @@ loc_81190:
 
 ; =============== S U B R O U T I N E =======================================
 
-UpdateDEZFinalHeadHitFlashBounceAndWorldDefeat:
+; Bounce the hitter and flash five colors. At zero HP, signal the world controller's defeat
+DEZFinalHead_ProcessHitOrDefeat:
                 tst.b   collision_flags(a0)
                 bne.s   locret_81204
                 tst.b   collision_property(a0)
@@ -389,7 +397,7 @@ loc_811DA:
                 addi.w  #2*5,d0
 
 loc_811EE:
-                bsr.w   CopyDEZFinalHeadFivePaletteWordsAtByteOffset
+                bsr.w   DEZFinalHead_CopyPalette5
                 subq.b  #1,$20(a0)
                 bne.s   locret_81204
                 bclr    #6,status(a0)
@@ -410,15 +418,16 @@ loc_81220:
                 movea.w parent3(a0),a1
                 bset    #7,status(a1)
                 jmp     (BossDefeated_StopTimer).l
-; End of function UpdateDEZFinalHeadHitFlashBounceAndWorldDefeat
+; End of function DEZFinalHead_ProcessHitOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
-CopyDEZFinalHeadFivePaletteWordsAtByteOffset:
+; d0.w selects the source byte offset for the five destinations in palette line 2
+DEZFinalHead_CopyPalette5:
                 lea     word_8123E(pc),a1
                 lea     word_81248(pc,d0.w),a2
                 jmp     (CopyWordData_5).l
-; End of function CopyDEZFinalHeadFivePaletteWordsAtByteOffset
+; End of function DEZFinalHead_CopyPalette5
 
 ; ---------------------------------------------------------------------------
 word_8123E:
@@ -429,7 +438,8 @@ word_81248:
 
 ; =============== S U B R O U T I N E =======================================
 
-ContinueInactiveDEZFinalHeadPaletteFlashOrDefeat:
+; Continue an existing flash while the head is unexposed. Zero HP still enters defeat
+DEZFinalHead_TickFlashOrDefeat:
                 tst.b   collision_property(a0)
                 beq.s   loc_81206
                 tst.b   $20(a0)
@@ -440,11 +450,11 @@ ContinueInactiveDEZFinalHeadPaletteFlashOrDefeat:
                 addi.w  #2*5,d0
 
 loc_81276:
-                bsr.s   CopyDEZFinalHeadFivePaletteWordsAtByteOffset
+                bsr.s   DEZFinalHead_CopyPalette5
                 subq.b  #1,$20(a0)
                 bne.s   locret_81284
                 bclr    #6,status(a0)
 
 locret_81284:
                 rts
-; End of function ContinueInactiveDEZFinalHeadPaletteFlashOrDefeat
+; End of function DEZFinalHead_TickFlashOrDefeat

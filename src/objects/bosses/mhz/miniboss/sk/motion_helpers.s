@@ -58,7 +58,8 @@ byte_75BAE:
 
 ; =============== S U B R O U T I N E =======================================
 
-SeedMHZMinibossParticleMotionFromHeightAndRandom:
+; Use the height before relocation and random bits to seed horizontal speed and both motion adjustments
+MHZMiniParticle_InitMotion:
                 move.w  (Camera_Y_pos).w,d2
                 addi.w  #$E0,d2
                 sub.w   y_pos(a0),d2
@@ -82,7 +83,7 @@ loc_75C34:
                 addq.w  #8,d0
                 move.w  d0,$3E(a0)
                 rts
-; End of function SeedMHZMinibossParticleMotionFromHeightAndRandom
+; End of function MHZMiniParticle_InitMotion
 
 ; ---------------------------------------------------------------------------
 word_75C4A:
@@ -121,7 +122,8 @@ word_75C4A:
 
 ; =============== S U B R O U T I N E =======================================
 
-SelectMHZMinibossLinkedChildFramePriorityAndOffsets:
+; Select from the root frame and the child's side subtype
+MHZMiniPart_SetFramePriorityOffsets:
                 movea.w parent3(a0),a1
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
@@ -135,7 +137,7 @@ SelectMHZMinibossLinkedChildFramePriorityAndOffsets:
                 lea     byte_75CF8(pc,d1.w),a2
                 move.w  (a2)+,child_dx(a0)              ; and child_dy
                 rts
-; End of function SelectMHZMinibossLinkedChildFramePriorityAndOffsets
+; End of function MHZMiniPart_SetFramePriorityOffsets
 
 ; ---------------------------------------------------------------------------
 RawAni_75CB6:
@@ -214,7 +216,7 @@ byte_75CF8:
 
 ; =============== S U B R O U T I N E =======================================
 
-SelectMHZMinibossRootSpritePriorityFromFrame:
+MHZMini_SetPriorityFromFrame:
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
                 move.w  #$200,priority(a0)
@@ -224,7 +226,7 @@ SelectMHZMinibossRootSpritePriorityFromFrame:
 
 locret_75D68:
                 rts
-; End of function SelectMHZMinibossRootSpritePriorityFromFrame
+; End of function MHZMini_SetPriorityFromFrame
 
 ; ---------------------------------------------------------------------------
 byte_75D6A:

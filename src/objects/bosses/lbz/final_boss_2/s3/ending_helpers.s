@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-LatchLBZFinalBoss2ChildTilePriorityAndCollision:
+; Once the parent has high tile priority, set the child's priority and collision and store the caller's continuation as its handler
+LBZBoss2Child_LatchPriorityAndColl:
                 movea.w parent3(a0),a1
                 btst    #7,art_tile(a1)
                 beq.s   locret_51BE0
@@ -14,7 +15,7 @@ LatchLBZFinalBoss2ChildTilePriorityAndCollision:
 
 locret_51BE0:
                 rts
-; End of function LatchLBZFinalBoss2ChildTilePriorityAndCollision
+; End of function LBZBoss2Child_LatchPriorityAndColl
 
 ; ---------------------------------------------------------------------------
 ; unused
@@ -97,7 +98,7 @@ loc_51C9C:
 
 ; =============== S U B R O U T I N E =======================================
 
-ReverseLBZFinalBoss2AtCameraRelativeBounds:
+LBZBoss2_ReverseAtCameraBounds:
                 move.w  (Camera_X_pos).w,d0
                 tst.w   x_vel(a0)
                 bmi.s   loc_51CCA
@@ -118,7 +119,7 @@ loc_51CD2:
 
 locret_51CDC:
                 rts
-; End of function ReverseLBZFinalBoss2AtCameraRelativeBounds
+; End of function LBZBoss2_ReverseAtCameraBounds
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -217,7 +218,8 @@ Perform_Art_Scaling:
 
 ; =============== S U B R O U T I N E =======================================
 
-AdjustLBZUnusedRobotnikVelocityWithinLimits:
+; Apply each candidate velocity only when it remains within that axis's limit
+LBZUnusedRobotnik_AdjustVel:
                 move.w  x_vel(a0),d0
                 addi.w  #-$28,d0
                 cmpi.w  #-$80,d0
@@ -233,11 +235,12 @@ loc_51DFC:
 
 locret_51E0E:
                 rts
-; End of function AdjustLBZUnusedRobotnikVelocityWithinLimits
+; End of function LBZUnusedRobotnik_AdjustVel
 
 ; =============== S U B R O U T I N E =======================================
 
-IntegrateAndProjectLBZUnusedScaledRobotnik:
+; Integrate the alternate fixed-point coordinates and subtract the scale-dependent origin before writing integer X and Y
+LBZUnusedRobotnik_IntegrateAndProject:
                 bsr.w   IntegrateScaledActorPositionAccumulators
                 move.w  $30(a0),d2
                 move.w  $34(a0),d3
@@ -251,11 +254,12 @@ IntegrateAndProjectLBZUnusedScaledRobotnik:
                 move.w  d2,x_pos(a0)
                 move.w  d3,y_pos(a0)
                 rts
-; End of function IntegrateAndProjectLBZUnusedScaledRobotnik
+; End of function LBZUnusedRobotnik_IntegrateAndProject
 
 ; =============== S U B R O U T I N E =======================================
 
-AdvanceLBZUnusedRobotnikArtFramesAndScale:
+; Regenerate and queue scaled art as the actor grows. Schedule deletion after the last source frame
+LBZUnusedRobotnik_StepArtAndScale:
                 subq.w  #1,$1C(a0)
                 bpl.s   loc_51E62
                 moveq   #0,d0
@@ -285,7 +289,7 @@ locret_51E7E:
 
 loc_51E80:
                 jmp     (Go_Delete_Sprite).l
-; End of function AdvanceLBZUnusedRobotnikArtFramesAndScale
+; End of function LBZUnusedRobotnik_StepArtAndScale
 
 ; ---------------------------------------------------------------------------
 word_51E86:

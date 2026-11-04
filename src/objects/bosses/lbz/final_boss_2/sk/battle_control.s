@@ -160,7 +160,7 @@ loc_7440C:
 loc_74412:
                 moveq   #$50,d1
                 move.w  #$F0,d2
-                bsr.w   ReverseLBZFinalBoss2AtCameraRelativeBounds
+                bsr.w   LBZBoss2_ReverseAtCameraBounds
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
@@ -253,7 +253,7 @@ loc_744EA:
 loc_744FC:
                 moveq   #$30,d1
                 move.w  #$110,d2
-                bsr.w   ReverseLBZFinalBoss2AtCameraRelativeBounds
+                bsr.w   LBZBoss2_ReverseAtCameraBounds
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
@@ -459,7 +459,7 @@ loc_7473A:
                 tst.b   (_unkFAA2).w
                 beq.w   locret_74374
                 move.l  #loc_74768,(a0)
-                jsr     QueueLBZFinalBossExtraShipAndExplosionGraphics(pc)
+                jsr     LBZFinalBoss_QueueShipAndExplosionArt(pc)
                 bclr    #7,status(a0)
                 jsr     (Restore_PlayerControl).l
                 clr.w   (Ctrl_1_logical).w

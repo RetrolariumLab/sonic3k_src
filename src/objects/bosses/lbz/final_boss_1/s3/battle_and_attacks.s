@@ -8,7 +8,7 @@ Obj_LBZFinalBoss1:
                 move.b  routine(a0),d0
                 move.w  LBZFinalBoss1_Index(pc,d0.w),d1
                 jsr     LBZFinalBoss1_Index(pc,d1.w)
-                bsr.w   HandleLBZFinalBoss1HitSectionDropOrDefeat
+                bsr.w   LBZBoss1_HandleHitOrDefeat
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 LBZFinalBoss1_Index:
@@ -313,7 +313,7 @@ loc_4FCC8:
                 jsr     SetUp_ObjAttributes3(pc)
                 move.l  #loc_4FCE0,(a0)
                 move.w  #$60,$2E(a0)
-                bsr.w   SeedLBZFinalBoss1SectionDebrisFrameAndVelocity
+                bsr.w   LBZBoss1Debris_InitFrameAndVel
 
 loc_4FCE0:
                 jsr     (MoveSprite).l

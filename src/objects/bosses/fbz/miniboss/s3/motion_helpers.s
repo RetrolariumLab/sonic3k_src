@@ -4,13 +4,13 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-SolidifyFBZMinibossBodyAndReleasedCapsule:
+FBZMini_SolidBodyOrCapsule:
                 moveq   #$23,d1
                 moveq   #$20,d2
                 moveq   #$1C,d3
                 move.w  x_pos(a0),d4
                 jmp     (SolidObjectFull).l
-; End of function SolidifyFBZMinibossBodyAndReleasedCapsule
+; End of function FBZMini_SolidBodyOrCapsule
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -246,7 +246,8 @@ loc_4D34E:
 
 ; =============== S U B R O U T I N E =======================================
 
-InterpolateFBZMinibossPunchLinkBetweenEndpoints:
+; Place the link on the quantized line from the shoulder to the fist
+FBZMiniPunch_InterpolateLink:
                 movea.w $32(a0),a1
                 movea.w $30(a0),a2
                 moveq   #0,d2
@@ -289,7 +290,7 @@ loc_4D3BE:
                 add.w   d0,d3
                 move.w  d3,y_pos(a0)
                 rts
-; End of function InterpolateFBZMinibossPunchLinkBetweenEndpoints
+; End of function FBZMiniPunch_InterpolateLink
 
 ; =============== S U B R O U T I N E =======================================
 

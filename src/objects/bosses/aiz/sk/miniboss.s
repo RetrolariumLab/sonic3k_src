@@ -281,7 +281,7 @@ loc_68D1C:
                 move.b  #6,routine(a0)
                 move.l  #loc_68D48,$34(a0)
                 bset    #1,render_flags(a0)
-                bsr.w   PrepareAIZMinibossMissileDescentWithBarrelDelay
+                bsr.w   AIZMiniMissile_InitDescent
                 move.w  (Camera_Y_pos).w,d0
                 subi.w  #$20,d0
                 move.w  d0,y_pos(a0)
@@ -457,7 +457,8 @@ word_68ECE:
 
 ; =============== S U B R O U T I N E =======================================
 
-PrepareAIZMinibossMissileDescentWithBarrelDelay:
+; Use the launcher's subtype for the wait and its phase and facing for the camera-relative lane
+AIZMiniMissile_InitDescent:
                 movea.w parent3(a0),a1
                 moveq   #0,d0
                 move.b  subtype(a1),d0
@@ -485,7 +486,7 @@ loc_68F0E:
                 move.w  d0,x_pos(a0)
                 move.w  #$400,y_vel(a0)
                 rts
-; End of function PrepareAIZMinibossMissileDescentWithBarrelDelay
+; End of function AIZMiniMissile_InitDescent
 
 ; ---------------------------------------------------------------------------
 word_68F28:

@@ -4,23 +4,23 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-StopPlayerOneAllThreeVelocitiesForSSZScene:
+SSZScene_ClearP1Velocities:
                 lea     (Player_1).w,a1
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)
                 clr.w   ground_vel(a1)
                 rts
-; End of function StopPlayerOneAllThreeVelocitiesForSSZScene
+; End of function SSZScene_ClearP1Velocities
 
 ; =============== S U B R O U T I N E =======================================
 
-SeedSSZSuperMechaEightWayProjectileVelocity:
+SSZSuperMechaShot_InitEightWayVel:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 add.w   d0,d0
                 move.l  word_7D172(pc,d0.w),x_vel(a0)   ; and y_vel
                 rts
-; End of function SeedSSZSuperMechaEightWayProjectileVelocity
+; End of function SSZSuperMechaShot_InitEightWayVel
 
 ; ---------------------------------------------------------------------------
 word_7D172:
@@ -35,14 +35,14 @@ word_7D172:
 
 ; =============== S U B R O U T I N E =======================================
 
-SelectSSZMechaLaserAnimationAndCompletionBySubtype:
+SSZMechaLaser_SelectAnimAndCallback:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lea     off_7D1A6(pc,d0.w),a1
                 move.l  (a1)+,$30(a0)
                 move.l  (a1)+,$34(a0)
                 rts
-; End of function SelectSSZMechaLaserAnimationAndCompletionBySubtype
+; End of function SSZMechaLaser_SelectAnimAndCallback
 
 ; ---------------------------------------------------------------------------
 off_7D1A6:
@@ -53,8 +53,9 @@ off_7D1A6:
 
 ; =============== S U B R O U T I N E =======================================
 
-TestSSZPlayerRegionAgainstSelectedAttackList:
-                bsr.w   ClassifySSZPlayerHorizontalRegionWithCollapsedRightBins
+; Search the selected zero-terminated region list and return the match result through Z
+SSZMecha_TestPlayerAttackRegion:
+                bsr.w   SSZMecha_ClassifyPlayerXRegion
                 moveq   #0,d0
                 move.b  child_dx(a0),d0
                 lsl.w   #2,d0
@@ -69,7 +70,7 @@ loc_7D1C6:
 
 locret_7D1D0:
                 rts
-; End of function TestSSZPlayerRegionAgainstSelectedAttackList
+; End of function SSZMecha_TestPlayerAttackRegion
 
 ; ---------------------------------------------------------------------------
 byte_7D1D2:
@@ -101,7 +102,8 @@ byte_7D1D2:
 
 ; =============== S U B R O U T I N E =======================================
 
-ClassifySSZPlayerHorizontalRegionWithCollapsedRightBins:
+; Use X relative to the camera minimum. Return only classes 1, 2, 3 or 6 in d2 and the side flag in d3.b
+SSZMecha_ClassifyPlayerXRegion:
                 move.w  (Player_1+x_pos).w,d0
                 sub.w   (Camera_min_X_pos).w,d0
                 move.w  d0,d1
@@ -125,7 +127,7 @@ loc_7D204:
 
 locret_7D214:
                 rts
-; End of function ClassifySSZPlayerHorizontalRegionWithCollapsedRightBins
+; End of function SSZMecha_ClassifyPlayerXRegion
 
 ; ---------------------------------------------------------------------------
 
@@ -150,7 +152,7 @@ loc_7D234:
 
 ; =============== S U B R O U T I N E =======================================
 
-SelectSSZMechaRollingTrailOffsetsAndQueuePriority:
+SSZMechaTrail_InitOffsetsAndPriority:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 add.w   d0,d0
@@ -158,7 +160,7 @@ SelectSSZMechaRollingTrailOffsetsAndQueuePriority:
                 move.w  (a1)+,child_dx(a0)              ; and child_dy
                 move.w  (a1)+,priority(a0)
                 rts
-; End of function SelectSSZMechaRollingTrailOffsetsAndQueuePriority
+; End of function SSZMechaTrail_InitOffsetsAndPriority
 
 ; ---------------------------------------------------------------------------
 byte_7D24C:
@@ -175,7 +177,7 @@ byte_7D24C:
 
 ; =============== S U B R O U T I N E =======================================
 
-SelectSSZMechaCollisionProxyFromParentFrame:
+SSZMechaProxy_SetFromParentFrame:
                 lea     byte_7D280(pc),a1
                 movea.w parent3(a0),a2
                 moveq   #0,d0
@@ -186,7 +188,7 @@ SelectSSZMechaCollisionProxyFromParentFrame:
                 move.b  (a1)+,collision_flags(a0)
                 move.b  (a1)+,mapping_frame(a0)
                 rts
-; End of function SelectSSZMechaCollisionProxyFromParentFrame
+; End of function SSZMechaProxy_SetFromParentFrame
 
 ; ---------------------------------------------------------------------------
 byte_7D280:
@@ -216,7 +218,8 @@ byte_7D280:
 
 ; =============== S U B R O U T I N E =======================================
 
-SelectSSZMechaCollisionFromFrameOutsideHitRecovery:
+; Skip collision updates during hit recovery. The caller can request the forced-harmful type
+SSZMecha_TrySetCollisionFromFrame:
                 btst    #6,status(a0)
                 bne.s   locret_7D2FA
                 moveq   #0,d0
@@ -231,7 +234,7 @@ loc_7D2F6:
 
 locret_7D2FA:
                 rts
-; End of function SelectSSZMechaCollisionFromFrameOutsideHitRecovery
+; End of function SSZMecha_TrySetCollisionFromFrame
 
 ; ---------------------------------------------------------------------------
 byte_7D2FC:
@@ -261,7 +264,8 @@ byte_7D2FC:
 
 ; =============== S U B R O U T I N E =======================================
 
-HandleSSZMechaHitFlashOrTailDeathCallback:
+; At zero HP, tail-call the defeat handler in a4. The five-color flash retains its shifted palette offset
+SSZMecha_HandleHitFlashOrDefeat:
                 tst.b   collision_flags(a0)
                 bne.s   locret_7D356
                 move.b  collision_property(a0),d0
@@ -292,11 +296,12 @@ locret_7D356:
 
 loc_7D358:
                 jmp     (a4)
-; End of function HandleSSZMechaHitFlashOrTailDeathCallback
+; End of function SSZMecha_HandleHitFlashOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
-BeginSSZMechaScoredDefeatIntoPostBattleScene:
+; Switch the root to the shared post-battle controller, award score, stop the timer and try to spawn an explosion
+SSZMecha_BeginScoredDefeatScene:
                 move.l  #loc_7B81A,(a0)
                 clr.b   routine(a0)
                 move.l  #loc_7B858,$34(a0)
@@ -313,13 +318,13 @@ BeginSSZMechaScoredDefeatIntoPostBattleScene:
 
 locret_7D39C:
                 rts
-; End of function BeginSSZMechaScoredDefeatIntoPostBattleScene
+; End of function SSZMecha_BeginScoredDefeatScene
 
 ; ---------------------------------------------------------------------------
 
 loc_7D39E:
                 bset    #7,$38(a0)
-                bsr.s   BeginSSZMechaScoredDefeatIntoPostBattleScene
+                bsr.s   SSZMecha_BeginScoredDefeatScene
                 move.w  (Camera_X_pos).w,d0
                 move.w  d0,(Camera_min_X_pos).w
                 move.w  d0,(Camera_max_X_pos).w

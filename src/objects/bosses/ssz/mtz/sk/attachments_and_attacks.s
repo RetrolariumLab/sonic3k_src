@@ -74,8 +74,9 @@ ObjDat3_7ABFA:
 
 ; =============== S U B R O U T I N E =======================================
 
-ApplySSZMTZHitOrbReleaseAndPlayerHurtPolicy:
-                bsr.w   HandleSSZMTZBossHitOrDefeatUsingSharedHitterTimer
+; Request an orb at flash count $1F. The player response edits the low nibble of the packed animation command
+SSZMTZBoss_CheckHitOrbRelease:
+                bsr.w   SSZMTZBoss_HandleHitOrDefeat
                 cmpi.b  #$1F,$1C(a0)
                 bne.s   loc_7AC4A
                 st      $39(a0)
@@ -111,7 +112,7 @@ loc_7AC5A:
 
 locret_7AC78:
                 rts
-; End of function ApplySSZMTZHitOrbReleaseAndPlayerHurtPolicy
+; End of function SSZMTZBoss_CheckHitOrbRelease
 
 ; ---------------------------------------------------------------------------
 
@@ -157,7 +158,8 @@ loc_7ACC0:
 
 ; =============== S U B R O U T I N E =======================================
 
-HandleSSZMTZBossHitOrDefeatUsingSharedHitterTimer:
+; The recovery timer shares storage with the hitter field. Scored defeat leaves the HUD timer running
+SSZMTZBoss_HandleHitOrDefeat:
                 cmpi.b  #$10,$26(a0)
                 bhs.s   locret_7AD38
                 tst.b   collision_property(a0)
@@ -199,7 +201,7 @@ loc_7AD3A:
 
 loc_7AD64:
                 jmp     (BossDefeated).l
-; End of function HandleSSZMTZBossHitOrDefeatUsingSharedHitterTimer
+; End of function SSZMTZBoss_HandleHitOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -310,14 +312,15 @@ loc_7AE98:
                 move.w  d1,x_vel(a0)
 
 loc_7AE9C:
-                bsr.w   ProjectSSZMTZOrbPositionDepthAndFoldPhase
-                bsr.w   SelectSSZMTZOrbFrameAndQueuePriorityFromDepth
+                bsr.w   SSZMTZOrb_ProjectOrbitAndFold
+                bsr.w   SSZMTZOrb_SelectFrameAndPriority
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-ProjectSSZMTZOrbPositionDepthAndFoldPhase:
+; Use separate phases for position and depth while updating the shared fold state
+SSZMTZOrb_ProjectOrbitAndFold:
                 move.b  $2F(a0),d0
                 jsr     (GetSineCosine).l
                 move.w  d0,d3
@@ -383,4 +386,4 @@ loc_7AF4C:
 
 locret_7AF58:
                 rts
-; End of function ProjectSSZMTZOrbPositionDepthAndFoldPhase
+; End of function SSZMTZOrb_ProjectOrbitAndFold

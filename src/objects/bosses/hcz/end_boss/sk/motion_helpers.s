@@ -339,7 +339,8 @@ loc_6BBB4:
 
 ; =============== S U B R O U T I N E =======================================
 
-HandleHCZEndBossThreeColorHitFlashOrDefeat:
+; The 32-update flash changes three colors. Defeat installs the wait handler for this engine
+HCZBoss_HandleHitFlashOrDefeat:
                 tst.l   (a0)
                 beq.s   locret_6BC1A
                 tst.b   collision_flags(a0)
@@ -376,7 +377,7 @@ loc_6BC1C:
                 move.l  #Wait_FadeToLevelMusic,(a0)
                 move.l  #loc_6B0B0,$34(a0)
                 jmp     (BossDefeated_StopTimer).l
-; End of function HandleHCZEndBossThreeColorHitFlashOrDefeat
+; End of function HCZBoss_HandleHitFlashOrDefeat
 
 ; ---------------------------------------------------------------------------
 word_6BC30:
@@ -416,7 +417,8 @@ locret_6BC88:
 
 ; =============== S U B R O U T I N E =======================================
 
-UpdateHCZBossColumnHeightAndCheckCallback:
+; Publish the height bucket and run the callback when below the base or at the ascent threshold
+HCZBossColumn_UpdateHeight:
                 move.w  $3A(a0),d0
                 sub.w   y_pos(a0),d0
                 bcs.s   loc_6BCAC
@@ -435,7 +437,7 @@ locret_6BCAA:
 loc_6BCAC:
                 movea.l $34(a0),a2
                 jmp     (a2)
-; End of function UpdateHCZBossColumnHeightAndCheckCallback
+; End of function HCZBossColumn_UpdateHeight
 
 ; ---------------------------------------------------------------------------
 

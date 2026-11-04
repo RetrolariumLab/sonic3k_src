@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-MoveDEZBossCapsuleWithPreintegratedReversibleGravity:
+; Apply normal or reverse gravity before integrating vertical position
+DEZCapsule_MoveWithGravity:
                 move.w  x_vel(a0),d0
                 ext.l   d0
                 lsl.l   #8,d0
@@ -22,11 +23,11 @@ loc_7F8BA:
                 lsl.l   #8,d0
                 add.l   d0,y_pos(a0)
                 rts
-; End of function MoveDEZBossCapsuleWithPreintegratedReversibleGravity
+; End of function DEZCapsule_MoveWithGravity
 
 ; =============== S U B R O U T I N E =======================================
 
-DropDEZCapsuleWhenRestingSideMismatchesGravity:
+DEZCapsule_DropIfGravityReversed:
                 tst.b   $3A(a0)
                 sne     d0
                 tst.b   (Reverse_gravity_flag).w
@@ -49,11 +50,12 @@ loc_7F8FA:
 
 locret_7F8FE:
                 rts
-; End of function DropDEZCapsuleWhenRestingSideMismatchesGravity
+; End of function DEZCapsule_DropIfGravityReversed
 
 ; =============== S U B R O U T I N E =======================================
 
-HandleRestingDEZCapsulePlayerContactAndLaunch:
+; A grounded rolling player launches the capsule. An airborne rolling player bounces and destroys it
+DEZCapsule_CheckRestingContact:
                 jsr     Check_PlayerCollision(pc)
                 beq.w   locret_7F9A6
                 cmpi.b  #2,anim(a1)
@@ -74,7 +76,7 @@ loc_7F926:
                 move.b  #2,anim(a1)
                 move.w  #-$300,y_vel(a1)
                 bset    #Status_InAir,status(a1)
-                bsr.w   ScheduleDEZBossCapsuleExplosionThenDelete
+                bsr.w   DEZCapsule_ExplodeThenDelete
                 adda.w  #8,sp
                 rts
 ; ---------------------------------------------------------------------------
@@ -111,7 +113,7 @@ loc_7F9A0:
 
 locret_7F9A6:
                 rts
-; End of function HandleRestingDEZCapsulePlayerContactAndLaunch
+; End of function DEZCapsule_CheckRestingContact
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -152,7 +154,8 @@ locret_7F9F6:
 
 ; =============== S U B R O U T I N E =======================================
 
-HandleFallingDEZCapsuleContactSuppressionAndAttack:
+; Consume the initial contact reports without resolving them. A later attack can destroy the capsule if orientation matches
+DEZCapsule_CheckFallingContact:
                 jsr     Check_PlayerCollision(pc)
                 beq.s   locret_7FA5E
                 tst.b   $39(a0)
@@ -191,12 +194,12 @@ loc_7FA46:
                 neg.w   x_vel(a1)
                 neg.w   y_vel(a1)
                 neg.w   ground_vel(a1)
-                bsr.w   ScheduleDEZBossCapsuleExplosionThenDelete
+                bsr.w   DEZCapsule_ExplodeThenDelete
                 adda.w  #8,sp
 
 locret_7FA5E:
                 rts
-; End of function HandleFallingDEZCapsuleContactSuppressionAndAttack
+; End of function DEZCapsule_CheckFallingContact
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -290,7 +293,8 @@ byte_7FB0A:
 
 ; =============== S U B R O U T I N E =======================================
 
-SeedDEZCapsuleThreeFragmentFramesAndVelocity:
+; Choose one of three frame and velocity pairs by subtype and mirror Y velocity with the fragment's Y flip
+DEZCapsuleDebris_InitFrameAndVel:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,d1
@@ -305,7 +309,7 @@ SeedDEZCapsuleThreeFragmentFramesAndVelocity:
 
 locret_7FB40:
                 rts
-; End of function SeedDEZCapsuleThreeFragmentFramesAndVelocity
+; End of function DEZCapsuleDebris_InitFrameAndVel
 
 ; ---------------------------------------------------------------------------
 word_7FB42:
@@ -315,7 +319,8 @@ word_7FB42:
 
 ; =============== S U B R O U T I N E =======================================
 
-DamageDEZEndBossFromCapsuleRangeAndDestroyCapsule:
+; On contact with a vulnerable boss, shatter the capsule and skip its remaining update. Travel direction and flip decide whether to latch a hit
+DEZCapsule_CheckBossHitAndShatter:
                 movea.w parent3(a0),a1
                 btst    #6,status(a1)
                 bne.s   locret_7FB88
@@ -335,12 +340,12 @@ loc_7FB74:
                 bset    #6,status(a1)
 
 loc_7FB82:
-                bsr.w   ScheduleDEZBossCapsuleExplosionThenThreeDebris
+                bsr.w   DEZCapsule_ExplodeThenSpawnDebris
                 addq.w  #4,sp
 
 locret_7FB88:
                 rts
-; End of function DamageDEZEndBossFromCapsuleRangeAndDestroyCapsule
+; End of function DEZCapsule_CheckBossHitAndShatter
 
 ; ---------------------------------------------------------------------------
 word_7FB8A:

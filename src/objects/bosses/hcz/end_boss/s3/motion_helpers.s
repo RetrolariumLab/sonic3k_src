@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-CaptureAndLiftSecondaryPlayerWithS3HCZExitGeyser:
+; After capture, subtract eight from the secondary player's integer Y each update
+S3HCZGeyser_CaptureAndLiftP2:
                 move.w  $44(a0),d0
                 beq.s   locret_4972A
                 movea.w d0,a1
@@ -25,7 +26,7 @@ loc_49726:
 
 locret_4972A:
                 rts
-; End of function CaptureAndLiftSecondaryPlayerWithS3HCZExitGeyser
+; End of function S3HCZGeyser_CaptureAndLiftP2
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -367,7 +368,8 @@ loc_499F6:
 
 ; =============== S U B R O U T I N E =======================================
 
-HandleHCZEndBossThreeColorHitFlashOrDefeat:
+; The 32-update flash changes three colors. Defeat installs the wait handler for this engine
+HCZBoss_HandleHitFlashOrDefeat:
                 tst.l   (a0)
                 beq.s   locret_49A5C
                 tst.b   collision_flags(a0)
@@ -404,7 +406,7 @@ loc_49A5E:
                 move.l  #Wait_Draw,(a0)
                 move.l  #loc_48EF6,$34(a0)
                 jmp     (BossDefeated_StopTimer).l
-; End of function HandleHCZEndBossThreeColorHitFlashOrDefeat
+; End of function HCZBoss_HandleHitFlashOrDefeat
 
 ; ---------------------------------------------------------------------------
 word_49A72:
@@ -444,7 +446,8 @@ locret_49ACA:
 
 ; =============== S U B R O U T I N E =======================================
 
-UpdateHCZBossColumnHeightAndCheckCallback:
+; Publish the height bucket and run the callback when below the base or at the ascent threshold
+HCZBossColumn_UpdateHeight:
                 move.w  $3A(a0),d0
                 sub.w   y_pos(a0),d0
                 bcs.s   loc_49AEE
@@ -463,7 +466,7 @@ locret_49AEC:
 loc_49AEE:
                 movea.l $34(a0),a2
                 jmp     (a2)
-; End of function UpdateHCZBossColumnHeightAndCheckCallback
+; End of function HCZBossColumn_UpdateHeight
 
 ; ---------------------------------------------------------------------------
 

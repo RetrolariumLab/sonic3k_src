@@ -126,7 +126,7 @@ loc_7A800:
                 bset    #0,render_flags(a0)
 
 loc_7A84A:
-                bsr.w   ApplySSZMTZHitOrbReleaseAndPlayerHurtPolicy
+                bsr.w   SSZMTZBoss_CheckHitOrbRelease
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 
@@ -176,7 +176,7 @@ loc_7A8DA:
                 bsr.w   ApplySSZMTZBossFourPixelSineBob
 
 loc_7A8E4:
-                bsr.w   ApplySSZMTZHitOrbReleaseAndPlayerHurtPolicy
+                bsr.w   SSZMTZBoss_CheckHitOrbRelease
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------

@@ -10,8 +10,8 @@ Obj_SSZ2_Boss:
                 move.w  SSZ2_Boss_Index(pc,d0.w),d1
                 jsr     SSZ2_Boss_Index(pc,d1.w)
                 lea     loc_7D39E(pc),a4
-                bsr.w   HandleSSZMechaHitFlashOrTailDeathCallback
-                bsr.w   SelectSSZMechaCollisionFromFrameOutsideHitRecovery
+                bsr.w   SSZMecha_HandleHitFlashOrDefeat
+                bsr.w   SSZMecha_TrySetCollisionFromFrame
                 lea     DPLCPtr_MechaSonic(pc),a2
                 jsr     (Perform_DPLC).l
                 jmp     (Draw_And_Touch_Sprite).l
@@ -262,7 +262,7 @@ loc_7C008:
 ; ---------------------------------------------------------------------------
 
 loc_7C018:
-                bsr.w   ClassifySSZPlayerHorizontalRegionWithCollapsedRightBins
+                bsr.w   SSZMecha_ClassifyPlayerXRegion
                 move.b  d2,child_dy(a0)
                 move.w  x_pos(a0),d0
                 cmp.w   (_unkFA88).w,d0
@@ -294,7 +294,7 @@ loc_7C062:
 ; ---------------------------------------------------------------------------
 
 loc_7C06E:
-                bsr.w   TestSSZPlayerRegionAgainstSelectedAttackList
+                bsr.w   SSZMecha_TestPlayerAttackRegion
                 beq.s   loc_7C0B6
                 move.b  #$12,routine(a0)
                 move.w  #$1F,$2E(a0)

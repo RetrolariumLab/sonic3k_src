@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 107
+    "commit_count": 108
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -689,9 +689,15 @@
       "commits": ["2085ca69c2b06c41783548846eab2edeed0aa7c2"]
     },
     {
-      "id": "current-shorten-09-knuckles",
+      "id": "change-0a91577701fc",
       "kind": "source_or_tooling",
       "summary": "Shorten 198 Knuckles motion and animation labels and preserve their state and resource bindings.",
+      "commits": ["0a91577701fc50b7d805997ec3d9b243e3a81f75"]
+    },
+    {
+      "id": "current-shorten-L01-bosses",
+      "kind": "source_or_tooling",
+      "summary": "Shorten 136 earlier boss procedure names and preserve their historical token and profile binding.",
       "commits": ["release-commit"]
     }
   ],

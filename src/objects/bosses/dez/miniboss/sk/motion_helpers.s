@@ -4,22 +4,23 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-HurtBothPlayersInsideDEZMinibossBeamRange:
+DEZMiniBeam_CheckBothPlayers:
                 lea     word_7EB6E(pc),a1
                 jsr     (Check_PlayerInRange).l
                 tst.w   d0
                 beq.s   loc_7EB46
-                bsr.w   HurtDEZBeamRangePlayerUnlessProtectedOrOnObject
+                bsr.w   DEZMiniBeam_TryHurtPlayer
 
 loc_7EB46:
                 swap    d0
                 tst.w   d0
                 beq.s   locret_7EB6C
-; End of function HurtBothPlayersInsideDEZMinibossBeamRange
+; End of function DEZMiniBeam_CheckBothPlayers
 
 ; =============== S U B R O U T I N E =======================================
 
-HurtDEZBeamRangePlayerUnlessProtectedOrOnObject:
+; Skip players under object control or standing on an object. Preserve the packed player pointers in d0
+DEZMiniBeam_TryHurtPlayer:
                 movea.w d0,a1
                 tst.b   $34(a1)
                 bne.s   locret_7EB6C
@@ -33,7 +34,7 @@ HurtDEZBeamRangePlayerUnlessProtectedOrOnObject:
 
 locret_7EB6C:
                 rts
-; End of function HurtDEZBeamRangePlayerUnlessProtectedOrOnObject
+; End of function DEZMiniBeam_TryHurtPlayer
 
 ; ---------------------------------------------------------------------------
 word_7EB6E:
@@ -41,7 +42,8 @@ word_7EB6E:
 
 ; =============== S U B R O U T I N E =======================================
 
-SetDEZOrbitHazardCollisionFromParentStatusSix:
+; Collision type $86 is suppressed while the parent has status bit 6 set
+DEZOrbitHazard_UpdateCollision:
                 move.b  #$86,collision_flags(a0)
                 movea.w parent3(a0),a1
                 btst    #6,status(a1)
@@ -50,11 +52,12 @@ SetDEZOrbitHazardCollisionFromParentStatusSix:
 
 locret_7EB8C:
                 rts
-; End of function SetDEZOrbitHazardCollisionFromParentStatusSix
+; End of function DEZOrbitHazard_UpdateCollision
 
 ; =============== S U B R O U T I N E =======================================
 
-RetargetDEZMinibossPlatformAngularVelocityFromPlayer:
+; Use Player 1 side every 32 V-int ticks. Force positive rotation while Player 1 stands on an object
+DEZMini_RetargetPlatformSpin:
                 btst    #3,(Player_1+status).w
                 bne.s   loc_7EBBA
                 move.b  (V_int_run_count+3).w,d0
@@ -77,11 +80,12 @@ locret_7EBB8:
 loc_7EBBA:
                 move.w  $26(a0),$3C(a0)
                 rts
-; End of function RetargetDEZMinibossPlatformAngularVelocityFromPlayer
+; End of function DEZMini_RetargetPlatformSpin
 
 ; =============== S U B R O U T I N E =======================================
 
-AccelerateDEZPlatformSharedAngularStepAndAdvancePhase:
+; Approach the requested parent spin speed and add the shared step to this platform's phase
+DEZMiniPlatform_AccelAndStepAngle:
                 movea.w parent3(a0),a1
                 moveq   #8,d0
                 move.w  $3A(a1),d1
@@ -105,7 +109,7 @@ loc_7EBE8:
                 add.w   d1,$3C(a0)
                 move.w  d1,$3A(a1)
                 rts
-; End of function AccelerateDEZPlatformSharedAngularStepAndAdvancePhase
+; End of function DEZMiniPlatform_AccelAndStepAngle
 
 ; ---------------------------------------------------------------------------
 
@@ -164,7 +168,7 @@ loc_7EC52:
 
 ; =============== S U B R O U T I N E =======================================
 
-ReverseDEZMinibossHorizontalVelocityPastBounds:
+DEZMini_ReversePastArenaXBounds:
                 move.w  x_pos(a0),d0
                 tst.w   x_vel(a0)
                 beq.s   locret_7EC82
@@ -183,11 +187,12 @@ loc_7EC7E:
 
 locret_7EC82:
                 rts
-; End of function ReverseDEZMinibossHorizontalVelocityPastBounds
+; End of function DEZMini_ReversePastArenaXBounds
 
 ; =============== S U B R O U T I N E =======================================
 
-SetDEZMinibossPlayerPursuitVelocityWithinBounds:
+; Pursue Player 1 at half a pixel per update and stop at either inclusive arena bound
+DEZMini_SetPursuitVelWithinBounds:
                 move.w  x_pos(a0),d0
                 move.w  #-$80,d1
                 move.w  (Player_1+x_pos).w,d2
@@ -213,7 +218,7 @@ loc_7ECAC:
 
 locret_7ECB0:
                 rts
-; End of function SetDEZMinibossPlayerPursuitVelocityWithinBounds
+; End of function DEZMini_SetPursuitVelWithinBounds
 
 ; ---------------------------------------------------------------------------
 ; unused
@@ -366,7 +371,8 @@ byte_7EDBA:
 
 ; =============== S U B R O U T I N E =======================================
 
-AdvanceDEZMinibossEyeHitAndIncrementRootCounter:
+; Count a fresh hit on the parent once, at the start of the eye's flash
+DEZMiniEye_TickHitFlash:
                 tst.b   collision_flags(a0)
                 bne.s   locret_7EE10
                 tst.b   $20(a0)
@@ -391,7 +397,7 @@ loc_7EE00:
 
 locret_7EE10:
                 rts
-; End of function AdvanceDEZMinibossEyeHitAndIncrementRootCounter
+; End of function DEZMiniEye_TickHitFlash
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -439,7 +445,8 @@ locret_7EE86:
 
 ; =============== S U B R O U T I N E =======================================
 
-ReactToDEZMinibossSecondFormHitCountOrDefeat:
+; A changed hit count restarts the palette and platform reaction. Eight hits trigger defeat
+DEZMiniForm2_ReactToHitOrDefeat:
                 move.b  collision_property(a0),d0
                 cmp.b   $42(a0),d0
                 bne.s   loc_7EE94
@@ -472,11 +479,12 @@ loc_7EECC:
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     CreateChild1_Normal(pc)
                 jmp     BossDefeated_StopTimer(pc)
-; End of function ReactToDEZMinibossSecondFormHitCountOrDefeat
+; End of function DEZMiniForm2_ReactToHitOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
-AdvanceDEZPostBossPlayerTwelvePoseSpinAndPLC:
+; Cycle through twelve fixed-point poses, force the frame and flips, and load the player's patterns
+DEZPostBoss_AdvancePlayerSpin:
                 move.w  $3C(a0),d0
                 add.w   $1C(a0),d0
                 cmpi.w  #$C00,d0
@@ -495,7 +503,7 @@ loc_7EF00:
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 jmp     (Player_Load_PLC).l
-; End of function AdvanceDEZPostBossPlayerTwelvePoseSpinAndPLC
+; End of function DEZPostBoss_AdvancePlayerSpin
 
 ; ---------------------------------------------------------------------------
 byte_7EF2E:

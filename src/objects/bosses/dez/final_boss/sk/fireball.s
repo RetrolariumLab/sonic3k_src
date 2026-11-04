@@ -8,7 +8,7 @@ Obj_DEZ3_Boss_Fireball:
                 move.b  routine(a0),d0
                 move.w  DEZ3_Boss_Fireball_Index(pc,d0.w),d1
                 jsr     DEZ3_Boss_Fireball_Index(pc,d1.w)
-                bra.w   PositionDEZFinalChildFromParentWordOffsets
+                bra.w   DEZFinalChild_SetPosFromParent
 ; ---------------------------------------------------------------------------
 DEZ3_Boss_Fireball_Index:
                 dc.w    loc_80956-DEZ3_Boss_Fireball_Index
@@ -52,7 +52,7 @@ loc_809A6:
                 ext.w   d0
                 add.w   d0,$44(a0)
                 moveq   #0,d2
-                bra.w   CloneDEZPrimaryFireballIntoAnimatedFlameSegment
+                bra.w   DEZFireball_SpawnFlameSegment
 ; ---------------------------------------------------------------------------
 
 loc_809CA:
@@ -60,9 +60,9 @@ loc_809CA:
                 move.w  #$CF,y_pos(a0)
                 clr.b   anim_frame(a0)
                 move.w  #2,$2E(a0)
-                bsr.w   PositionDEZFinalAttackXFromParentOffsetOnly
+                bsr.w   DEZFinalAttack_SetXFromParent
                 moveq   #2,d2
-                bsr.w   CloneDEZPrimaryFireballIntoAnimatedFlameSegment
+                bsr.w   DEZFireball_SpawnFlameSegment
                 addq.w  #4,sp
                 rts
 ; ---------------------------------------------------------------------------
@@ -75,7 +75,7 @@ byte_809EE:
 
 loc_809F4:
                 subq.w  #1,$2E(a0)
-                bpl.s   PositionDEZFinalAttackXFromParentOffsetOnly
+                bpl.s   DEZFinalAttack_SetXFromParent
                 move.w  #2,$2E(a0)
                 addq.w  #8,$42(a0)
                 cmpi.w  #$300,$42(a0)
@@ -89,15 +89,15 @@ loc_809F4:
 
 loc_80A1E:
                 add.w   d0,y_pos(a0)
-                bsr.w   CloneDEZPrimaryFireballIntoAnimatedFlameSegment
+                bsr.w   DEZFireball_SpawnFlameSegment
 
 ; =============== S U B R O U T I N E =======================================
 
-PositionDEZFinalAttackXFromParentOffsetOnly:
+DEZFinalAttack_SetXFromParent:
                 movea.w parent3(a0),a1
                 move.w  $42(a0),d0
                 move.w  x_pos(a1),d1
                 add.w   d0,d1
                 move.w  d1,x_pos(a0)
                 rts
-; End of function PositionDEZFinalAttackXFromParentOffsetOnly
+; End of function DEZFinalAttack_SetXFromParent
