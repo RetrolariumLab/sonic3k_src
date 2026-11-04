@@ -7,11 +7,11 @@ Obj_SSEntryRing:
                 move.b  subtype(a0),d0
                 move.l  (Collected_special_ring_array).w,d1
                 btst    d0,d1
-                beq.s   loc_44248                       ; only make the ring if it hasn't already been collected
+                beq.s   S3SSRing_WaitForVisibilityThenDispatch  ; only make the ring if it hasn't already been collected
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_44248:
+S3SSRing_WaitForVisibilityThenDispatch:
                 jsr     (Obj_WaitOffscreen).l           ; Don't start anything until the ring is explicitly onscreen
                 moveq   #0,d0
                 move.b  routine(a0),d0
@@ -33,35 +33,35 @@ SSEntryRing_Init:
 SSEntryRing_Main:
                 jsr     (Animate_Raw).l
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_4429A                    ; If in debug mode, don't allow collision
+                bne.s   S3SSRing_ActivationReturn       ; If in debug mode, don't allow collision
                 cmpi.b  #8,mapping_frame(a0)
-                blo.s   locret_4429A                    ; If ring hasn't finished forming, don't allow collision
+                blo.s   S3SSRing_ActivationReturn       ; If ring hasn't finished forming, don't allow collision
                 lea     SSEntry_Range(pc),a1
                 jsr     (Check_PlayerInRange).l
                 tst.w   d0
-                bne.s   loc_4429C
+                bne.s   S3SSRing_CheckSevenChaosOrEnterStage
 
-locret_4429A:
+S3SSRing_ActivationReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4429C:
+S3SSRing_CheckSevenChaosOrEnterStage:
                 lea     (Player_1).w,a1                 ; If collision was made
                 cmpi.b  #6,routine(a1)
-                bhs.s   locret_4429A                    ; If player has died for whatever reason, don't do anything
+                bhs.s   S3SSRing_ActivationReturn       ; If player has died for whatever reason, don't do anything
                 cmpi.w  #7,(Chaos_emerald_count).w      ; If the emeralds are collected, go claim 50 rings
-                beq.s   loc_442FE
+                beq.s   S3SSRing_MarkCollectedAndAward50
                 move.b  #4,routine(a0)
                 move.b  #-1,(Player_prev_frame).w       ; Make the player disappear and lock input
                 lea     (Player_1).w,a1
                 move.b  #0,mapping_frame(a1)
                 move.b  #$1C,anim(a1)
                 move.b  #$53,object_control(a1)
-                lea     ChildObjDat_44476(pc),a2
+                lea     S3SSEntry_FlashSimpleChildDescriptor(pc),a2
                 jsr     (CreateChild6_Simple).l
                 move.w  (Player_1+x_pos).w,d0
                 cmp.w   x_pos(a0),d0
-                bcs.s   locret_4429A
+                bcs.s   S3SSRing_ActivationReturn
                 bset    #0,render_flags(a1)
                 moveq   #signextendB(sfx_BigRing),d0
                 jsr     (Play_SFX).l                    ; Play the ring swish sound
@@ -71,7 +71,7 @@ SSEntry_Range:
                 dc.w    -$18,   $30,  -$28,   $50
 ; ---------------------------------------------------------------------------
 
-loc_442FE:
+S3SSRing_MarkCollectedAndAward50:
                 moveq   #signextendB(sfx_BigRing),d0
                 jsr     (Play_SFX).l
                 move.b  subtype(a0),d0
@@ -114,13 +114,13 @@ SSEntryFlash_Main:
                 move.b  mapping_frame(a0),d6
                 jsr     (Animate_RawAdjustFlipX).l
                 cmp.b   mapping_frame(a0),d6
-                beq.s   locret_44390
+                beq.s   S3SSRing_FlashParentCheckReturn
                 cmpi.b  #3,anim_frame(a0)
-                bne.s   locret_44390
+                bne.s   S3SSRing_FlashParentCheckReturn
                 movea.w parent3(a0),a1                  ; Set parent to be deleted in the middle of the animation
                 bset    #0,$38(a1)
 
-locret_44390:
+S3SSRing_FlashParentCheckReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -133,7 +133,7 @@ SSEntryFlash_Finished:
 
 SSEntryFlash_GoSS:
                 cmpi.w  #7,(Chaos_emerald_count).w
-                beq.s   loc_443E4
+                beq.s   S3SSRing_ScheduleFlashTrackedDelete
                 moveq   #signextendB(sfx_EnterSS),d0
                 jsr     (Play_SFX).l                    ; Play the special stage entry sound (you know the one)
                 jsr     (Clear_SpriteRingMem).l
@@ -146,37 +146,37 @@ SSEntryFlash_GoSS:
                 bset    d0,d1
                 move.l  d1,(Collected_special_ring_array).w  ; Set SS ring as collected
 
-loc_443E4:
+S3SSRing_ScheduleFlashTrackedDelete:
                 jmp     (Go_Delete_SpriteSlotted2).l
 ; ---------------------------------------------------------------------------
 
 SSEntryRing_Display:
                 btst    #0,$38(a0)
-                bne.s   loc_4443C
+                bne.s   S3SSRing_RestoreExplosionArtAndDelete
                 tst.b   render_flags(a0)
-                bpl.s   loc_44408
+                bpl.s   S3SSRing_DrawWithinCameraWindow
                 lea     DPLCPtr_SSEntryRing(pc),a2
                 jsr     (Perform_DPLC).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_44408:
+S3SSRing_DrawWithinCameraWindow:
                 move.w  x_pos(a0),d0                    ; If off-screen
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.s   loc_4443C
+                bhi.s   S3SSRing_RestoreExplosionArtAndDelete
                 move.w  y_pos(a0),d0
                 move.w  (Camera_Y_pos).w,d1
                 move.w  y_pos(a0),d0
                 sub.w   (Camera_Y_pos).w,d0
                 addi.w  #$80,d0
                 cmpi.w  #$200,d0
-                bhi.w   loc_4443C                       ; Jump below when far enough off-screen
+                bhi.w   S3SSRing_RestoreExplosionArtAndDelete  ; Jump below when far enough off-screen
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_4443C:
+S3SSRing_RestoreExplosionArtAndDelete:
                 lea     (ArtKosM_BadnikExplosion).l,a1
                 move.w  #tiles_to_bytes(ArtTile_Explosion),d2
                 jsr     (Queue_Kos_Module).l            ; Restore the overwritten badnik explosion art
@@ -196,7 +196,7 @@ ObjSlot_SSEntryFlash:
                 dc.l    Map_SSEntryFlash
                 dc.w    $200
                 dc.b    $20, $20,   0,   0
-ChildObjDat_44476:
+S3SSEntry_FlashSimpleChildDescriptor:
                 dc.w    1-1
                 dc.l    Obj_SSEntryFlash
 DPLCPtr_SSEntryRing:

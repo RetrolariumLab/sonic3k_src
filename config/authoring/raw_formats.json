@@ -1101,11 +1101,11 @@
     },
     {
       "path": "src/objects/special_stage/s3/entry_ring.s",
-      "sha256": "0d226f32c91d82b9cd125bc0f8b91a5368dcd5c801ac118a5afce13011b273dc"
+      "sha256": "ebace52d3cb335ac7b1f030f5df2f4564388cea070a80ee0b346e5d13c7b3e46"
     },
     {
       "path": "src/objects/special_stage/sk/entry_ring.s",
-      "sha256": "b92e982163ba0bf84827ff241741ce131877e2fedf1f9d1d5cecb25422efc4dd"
+      "sha256": "ab96de1688bd597b964ef97fda7068dbed985200cd273bca975903d225ad2bf0"
     },
     {
       "path": "src/objects/terrain/icz/s3/breakable_ice.s",
@@ -5050,8 +5050,8 @@
       "path": "src/objects/special_stage/sk/entry_ring.s",
       "symbol": "AniRaw_SSEntryRing",
       "scope": "AniRaw_SSEntryRing",
-      "first_line": 299,
-      "last_line": 307,
+      "first_line": 301,
+      "last_line": 309,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 30,
       "declarations_sha256": "25a07c6be778cdec2f057ff178789ce3232587a01b5a5b697b3846883f27bc88",

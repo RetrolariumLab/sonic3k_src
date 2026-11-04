@@ -1,25 +1,25 @@
 ; Data owner: objects/shared/ss_entry
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_SSEntryFlash_:
-                dc.w    word_61B30-Map_SSEntryFlash_
-                dc.w    word_61B56-Map_SSEntryFlash_
-                dc.w    word_61B7C-Map_SSEntryFlash_
-                dc.w    word_61BAE-Map_SSEntryFlash_
-word_61B30:     dc.w    6
+                dc.w    SSEntryFlashMap_Frame00-Map_SSEntryFlash_
+                dc.w    SSEntryFlashMap_Frame01-Map_SSEntryFlash_
+                dc.w    SSEntryFlashMap_Frame02-Map_SSEntryFlash_
+                dc.w    SSEntryFlashMap_Frame03-Map_SSEntryFlash_
+SSEntryFlashMap_Frame00:    dc.w    6
                 dc.b    $E0,   8,   0,   0,   0,   0
                 dc.b    $E8,   9,   0,   3,   0,   8
                 dc.b    $F8,   0,   0,   9,   0, $18
                 dc.b    $18,   8, $10,   0,   0,   0
                 dc.b    8,   9, $10,   3,   0,   8
                 dc.b    0,   0, $10,   9,   0, $18
-word_61B56:     dc.w    6
+SSEntryFlashMap_Frame01:    dc.w    6
                 dc.b    $E0,  $C,   0,   0,   0,   0
                 dc.b    $E8,  $D,   0,   4,   0,   8
                 dc.b    $F8,   4,   0,  $C,   0, $18
                 dc.b    $18,  $C, $10,   0,   0,   0
                 dc.b    8,  $D, $10,   4,   0,   8
                 dc.b    0,   4, $10,  $C,   0, $18
-word_61B7C:     dc.w    8
+SSEntryFlashMap_Frame02:    dc.w    8
                 dc.b    $E0,   8,   0,   0,   0,   0
                 dc.b    $E8,  $E,   0,   3,   0,   0
                 dc.b    $18,   8, $10,   0,   0,   0
@@ -28,7 +28,7 @@ word_61B7C:     dc.w    8
                 dc.b    $F0,   1,   8, $13, $FF, $F8
                 dc.b    $10,   5, $18,  $F, $FF, $F0
                 dc.b    0,   1, $18, $13, $FF, $F8
-word_61BAE:     dc.w    8
+SSEntryFlashMap_Frame03:    dc.w    8
                 dc.b    $E0,   8,   0,   0,   0,   0
                 dc.b    $E8,  $E,   0,   3,   0,   0
                 dc.b    $18,   8, $10,   0,   0,   0

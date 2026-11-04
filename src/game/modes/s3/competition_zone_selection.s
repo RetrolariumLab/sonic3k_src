@@ -59,7 +59,7 @@ Competition_LevelSelect:
                 lea     (RAM_start).l,a1                ; Decompress destination/Transfer source
                 movea.w #tiles_to_bytes(ArtTile_S3MenuBG),a2  ; Transfer destination
                 jsr     KosArt_To_VDP(pc)
-                move.l  #locret_952E,(_unkEF44_1).w
+                move.l  #S3SS_NoOpVBlankReturn,(_unkEF44_1).w
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 lea     (ArtKos_CompetitionLevel).l,a0  ; Decompress source
@@ -347,7 +347,7 @@ S3CompZones_VisibleRowReturn:
 ; ---------------------------------------------------------------------------
 
 S3CompZones_ClearZoneColumnsOnVBlank:
-                move.l  #locret_952E,(_unkEF44_1).w
+                move.l  #S3SS_NoOpVBlankReturn,(_unkEF44_1).w
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table+$204,VRAM,WRITE),d0
                 lea     (VDP_data_port).l,a6
                 move.l  #$80008000,d1

@@ -12363,7 +12363,7 @@
       "responsibility": "Projected tail and shadow rendering, scalar setup, stage motion and layout-space response.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 400,
+      "physical_lines": 403,
       "origin": {
         "commit": "dc09abaa4de117f92491789747178b9736494966",
         "path": "s3.s",
@@ -12448,7 +12448,7 @@
       "responsibility": "Sphere and ring contact responses, ring enclosure conversion, emerald completion and private geometry/mapping tables.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 699,
+      "physical_lines": 701,
       "origin": {
         "commit": "dc09abaa4de117f92491789747178b9736494966",
         "path": "s3.s",
@@ -12488,7 +12488,7 @@
       "responsibility": "Special stage sprite projection, normal and departing sphere display and product-specific sprite output.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 430,
+      "physical_lines": 432,
       "origin": {
         "commit": "dc09abaa4de117f92491789747178b9736494966",
         "path": "s3.s",
@@ -13158,7 +13158,7 @@
       "responsibility": "Projected tail and shadow rendering, scalar setup, stage motion and layout-space response.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 432,
+      "physical_lines": 434,
       "origin": {
         "commit": "dc09abaa4de117f92491789747178b9736494966",
         "path": "sonic3k.s",
@@ -13188,7 +13188,7 @@
       "responsibility": "Special-stage results mode setup, display loop, palette and product-specific result loading resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 271,
+      "physical_lines": 272,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "sonic3k.s",
@@ -13223,7 +13223,7 @@
       "responsibility": "Sphere and ring contact responses, ring enclosure conversion, emerald completion and private geometry/mapping tables.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 737,
+      "physical_lines": 738,
       "origin": {
         "commit": "dc09abaa4de117f92491789747178b9736494966",
         "path": "sonic3k.s",
@@ -13258,7 +13258,7 @@
       "responsibility": "Special stage sprite projection, normal and departing sphere display and product-specific sprite output.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 459,
+      "physical_lines": 461,
       "origin": {
         "commit": "dc09abaa4de117f92491789747178b9736494966",
         "path": "sonic3k.s",
@@ -26539,7 +26539,7 @@
       "responsibility": "Special-stage results object dispatch, score tally, presentation choreography and result object allocation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 455,
+      "physical_lines": 458,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "sonic3k.s",
@@ -26581,7 +26581,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_2ECD0",
+          "name": "SKSSResults_InitOpposedProjectionPair",
           "kind": "terminal-tail",
           "reason": "The complete emerald projection and orbit object terminates in draw or deletion tail calls and contains no original independent return boundary.",
           "origin_first_line": 4138,
@@ -55005,7 +55005,7 @@
       "responsibility": "Special-stage entry ring and flash state machines, player interaction, transition checks and private pattern or animation records.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 307,
+      "physical_lines": 309,
       "origin": {
         "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
         "path": "sonic3k.s",

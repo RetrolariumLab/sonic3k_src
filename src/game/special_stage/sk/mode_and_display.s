@@ -34,20 +34,20 @@ SpecialStage:
                 lea     (Target_palette).w,a2
                 move.w  #bytesToWcnt(Target_palette_end-Target_palette),d0
 
-loc_8284:
+SKSS_CopyTargetPaletteAndCheckKnux:
                 move.w  (a1)+,(a2)+
-                dbf     d0,loc_8284
+                dbf     d0,SKSS_CopyTargetPaletteAndCheckKnux
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_82A6
+                bne.s   SKSS_LoadGraphicsAndInitStageRates
                 lea     (Pal_SStage_Knux).l,a1
                 lea     (Target_palette+$10).w,a2
                 move.w  #bytesToWcnt($10),d0
 
-loc_82A0:
+SKSStage_CopyKnucklesTargetPalettePatch:
                 move.w  (a1)+,(a2)+
-                dbf     d0,loc_82A0
+                dbf     d0,SKSStage_CopyKnucklesTargetPalettePatch
 
-loc_82A6:
+SKSS_LoadGraphicsAndInitStageRates:
                 move.l  #vdpComm(tiles_to_bytes($000),VRAM,WRITE),(VDP_control_port).l
                 lea     (ArtNem_SStageLayout).l,a0
                 bsr.w   Nem_Decomp
@@ -118,21 +118,21 @@ loc_82A6:
                 move.w  #$1000,(Special_stage_rate).w
                 move.w  #30*60,(Special_stage_rate_timer).w
                 tst.b   (Blue_spheres_stage_flag).w
-                beq.s   loc_842C
+                beq.s   SKSS_InstallPlayerAndOptionalTails
                 move.w  #45*60,(Special_stage_rate_timer).w
 
-loc_842C:
+SKSS_InstallPlayerAndOptionalTails:
                 move.w  #0,(Camera_X_pos_copy).w
                 move.w  #0,(Camera_Y_pos_copy).w
                 move.w  #-1,(Screen_Y_wrap_value).w
-                move.l  #Obj_SStage_8FAA,(Player_1).w
+                move.l  #SStagePlayer_InitializePrimaryCharacter,(Player_1).w
                 tst.w   (Player_mode).w
-                bne.s   loc_8454
-                move.l  #Obj_SStage_9212,(Player_2).w
+                bne.s   SKSS_WarmUpSpritesAndFadeIn
+                move.l  #SStageTails_InitializeFollower,(Player_2).w
 
-loc_8454:
-                move.l  #Obj_SStage_8DF8,(Reserved_object_3).w
-                move.l  #Obj_SStage_8E40,(Dynamic_object_RAM).w
+SKSS_WarmUpSpritesAndFadeIn:
+                move.l  #SStageIcons_Initialize,(Reserved_object_3).w
+                move.l  #SStageCue_InitializePair,(Dynamic_object_RAM).w
                 jsr     (Process_Sprites).l
                 bsr.w   Animate_SSRings
                 bsr.w   Touch_SSSprites
@@ -153,7 +153,7 @@ loc_8454:
                 move.w  d0,(VDP_control_port).l
                 bsr.w   Pal_FadeFromWhite
 
-loc_84C2:
+SKSStage_RunActiveModeFrameInNativeOrder:
                 bsr.w   Pause_Game
                 move.b  #VInt_ID_1C,(V_int_routine).w
                 jsr     (Process_Kos_Queue).l
@@ -171,25 +171,25 @@ loc_84C2:
                 bsr.w   Process_Nem_Queue_Init
                 jsr     (Process_Kos_Module_Queue).l
                 tst.w   (Demo_mode_flag).w
-                beq.s   loc_851A
+                beq.s   SKSS_RepeatWhileStageModeActive
                 tst.w   (Demo_timer).w
-                beq.s   loc_8522
+                beq.s   SKSStage_ChooseDemoExitBeforeCleanupFade
 
-loc_851A:
+SKSS_RepeatWhileStageModeActive:
                 cmpi.b  #GameMode_SpecialStage,(Game_mode).w
-                beq.s   loc_84C2
+                beq.s   SKSStage_RunActiveModeFrameInNativeOrder
 
-loc_8522:
+SKSStage_ChooseDemoExitBeforeCleanupFade:
                 tst.w   (Demo_mode_flag).w
-                beq.s   loc_852E
+                beq.s   SKSS_Start60TickCleanupFade
                 move.b  #GameMode_SegaScreen,(Game_mode).w
 
-loc_852E:
+SKSS_Start60TickCleanupFade:
                 move.w  #60,(Demo_timer).w
                 move.w  #$40-1,(Palette_fade_info).w
                 clr.w   (Pal_fade_delay).w
 
-loc_853E:
+SKSStage_ContinueCallbacksDuringExitFade:
                 move.b  #VInt_ID_1C,(V_int_routine).w
                 bsr.w   Wait_VSync
                 jsr     (Demo_PlayRecord).l
@@ -203,13 +203,13 @@ loc_853E:
                 bsr.w   Process_Nem_Queue_Init
                 jsr     (Process_Kos_Module_Queue).l
                 subq.w  #1,(Pal_fade_delay).w
-                bpl.s   loc_8588
+                bpl.s   SKSS_FinishCleanupWhenTimerExpires
                 move.w  #2,(Pal_fade_delay).w
                 bsr.w   Pal_ToWhite
 
-loc_8588:
+SKSS_FinishCleanupWhenTimerExpires:
                 tst.w   (Demo_timer).w
-                bne.s   loc_853E
+                bne.s   SKSStage_ContinueCallbacksDuringExitFade
                 rts
 ; ---------------------------------------------------------------------------
 SSLayoutOffs_RAM:
@@ -226,7 +226,7 @@ SSLayoutOffs_RAM:
 
 SStage_LoadLayoutAndPalette:
                 tst.b   (Blue_spheres_stage_flag).w
-                bne.w   loc_86C8
+                bne.w   SKSS_DecompressBlueSphereQuadrants
                 lea     (SSCompressedLayoutPtrs).l,a0
                 movea.l (a0),a0
                 lea     (RAM_start).l,a1
@@ -234,74 +234,74 @@ SStage_LoadLayoutAndPalette:
                 lea     (SStageLayoutPtrs).l,a2
                 move.b  (Chaos_emerald_count).w,d3
                 tst.w   (SK_alone_flag).w
-                beq.s   loc_85E4
+                beq.s   SKSS_SelectChaosOrNativeLayouts
                 lea     (SSLayoutOffs_RAM).l,a2
                 moveq   #0,d2
-                bra.s   loc_85F4
+                bra.s   SKSS_SelectDebugOrNormalLayout
 ; ---------------------------------------------------------------------------
 
-loc_85E4:
+SKSS_SelectChaosOrNativeLayouts:
                 move.b  (SK_special_stage_flag).w,d2
-                beq.s   loc_85F4
+                beq.s   SKSS_SelectDebugOrNormalLayout
                 lea     (SSLayoutOffs_RAM).l,a2
                 move.b  (Super_emerald_count).w,d3
 
-loc_85F4:
+SKSS_SelectDebugOrNormalLayout:
                 tst.b   (Debug_cheat_flag).w
-                beq.s   loc_8606
+                beq.s   SKSS_FindUncollectedEmerald
                 move.w  (Sound_test_sound).w,d0
                 btst    #button_A,(Ctrl_1).w
-                bne.s   loc_8630
+                bne.s   SKSS_StoreLayoutIndexAndRelocate
 
-loc_8606:
+SKSS_FindUncollectedEmerald:
                 moveq   #0,d0
                 move.b  (Current_special_stage).w,d0
                 cmpi.b  #7,d3
-                bhs.s   loc_8630
+                bhs.s   SKSS_StoreLayoutIndexAndRelocate
                 moveq   #5,d1
                 lea     (Collected_emeralds_array).w,a1
                 add.b   d2,d2
 
-loc_861A:
+SKSS_ScanEmeraldStatesWithWrap:
                 cmp.b   (a1,d0.w),d2
-                beq.s   loc_8630
+                beq.s   SKSS_StoreLayoutIndexAndRelocate
                 addq.w  #1,d0
                 cmpi.w  #7,d0
-                blo.s   loc_861A
+                blo.s   SKSS_ScanEmeraldStatesWithWrap
                 moveq   #0,d0
-                dbf     d1,loc_861A
+                dbf     d1,SKSS_ScanEmeraldStatesWithWrap
                 moveq   #7,d0
 
-loc_8630:
+SKSS_StoreLayoutIndexAndRelocate:
                 andi.w  #7,d0
                 move.b  d0,(Current_special_stage).w
                 move.w  d0,d1
                 lsl.w   #2,d0
                 movea.l (a2,d0.w),a2
                 tst.w   (SK_alone_flag).w
-                bne.s   loc_8652
+                bne.s   SKSS_PreparePaddedGridCopy
                 tst.b   (SK_special_stage_flag).w
-                bne.s   loc_8652
+                bne.s   SKSS_PreparePaddedGridCopy
                 adda.l  #LockOnROM_Start,a2
 
-loc_8652:
+SKSS_PreparePaddedGridCopy:
                 lea     (SStage_layout_buffer).w,a3
                 moveq   #0,d2
                 move.w  #bytesToLcnt($100),d0
 
-loc_865C:
+SKSStage_ClearLeadingLayoutPadding:
                 move.l  d2,(a3)+
-                dbf     d0,loc_865C
+                dbf     d0,SKSStage_ClearLeadingLayoutPadding
                 move.w  #bytesToLcnt($400),d0
 
-loc_8666:
+SKSS_CopyMainGrid:
                 move.l  (a2)+,(a3)+
-                dbf     d0,loc_8666
+                dbf     d0,SKSS_CopyMainGrid
                 move.w  #bytesToLcnt($100),d0
 
-loc_8670:
+SKSS_ClearPadAndReadGridHeader:
                 move.l  d2,(a3)+
-                dbf     d0,loc_8670
+                dbf     d0,SKSS_ClearPadAndReadGridHeader
                 move.w  (a2)+,(Special_stage_angle).w
                 move.w  (a2)+,(Special_stage_X_pos).w
                 move.w  (a2)+,(Special_stage_Y_pos).w
@@ -311,14 +311,14 @@ loc_8670:
                 lea     (Target_palette).w,a2
                 movea.l 4(a1,d1.w),a1
                 tst.w   (SK_alone_flag).w
-                bne.s   loc_86A2
+                bne.s   SKSS_SelectNativeVariantPalette
                 tst.b   (SK_special_stage_flag).w
-                beq.s   loc_86A6
+                beq.s   SKSS_StoreAndCopyTargetPalette
 
-loc_86A2:
+SKSS_SelectNativeVariantPalette:
                 lea     $130(a1),a1
 
-loc_86A6:
+SKSS_StoreAndCopyTargetPalette:
                 move.l  a1,(Special_stage_palette_addr).w
                 move.l  (a1)+,$70(a2)
                 move.l  (a1)+,$74(a2)
@@ -329,7 +329,7 @@ loc_86A6:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_86C8:
+SKSS_DecompressBlueSphereQuadrants:
                 lea     (SSCompressedLayoutPtrs).l,a0
                 movea.l 4(a0),a0
                 lea     (RAM_start).l,a1
@@ -338,9 +338,9 @@ loc_86C8:
                 moveq   #0,d2
                 move.w  #bytesToLcnt($600),d0
 
-loc_86E6:
+SKSS_ClearGridAndPrepFourQuadrants:
                 move.l  d2,(a3)+
-                dbf     d0,loc_86E6
+                dbf     d0,SKSS_ClearGridAndPrepFourQuadrants
                 move.b  #0,(Current_special_stage).w
                 move.w  #$4000,(Special_stage_angle).w
                 move.w  #$1000,(Special_stage_X_pos).w
@@ -348,10 +348,10 @@ loc_86E6:
                 clr.w   (Special_stage_rings_left).w
                 clr.w   (Blue_spheres_difficulty).w
                 lea     (Blue_spheres_current_stage).w,a4
-                lea     word_87BA(pc),a1
+                lea     SKSS_BlueSphereQuadrantCopyTable(pc),a1
                 moveq   #4-1,d7
 
-loc_8716:
+SKSS_AccumulateQuadrantMetadata:
                 lea     (RAM_start).l,a2
                 move.b  (a4)+,d0
                 andi.w  #$7F,d0
@@ -373,18 +373,18 @@ loc_8716:
                 lea     (a3,d0.w),a3
                 moveq   #$F,d0
 
-loc_8756:
+SKSStage_BeginOneTransformedQuadrantRow:
                 move.w  d4,d2
                 moveq   #$10-1,d1
 
-loc_875A:
+SKSS_CopyQuadrantCellsAndSelectPal:
                 move.b  (a2,d2.w),(a3)+
                 add.w   d3,d2
-                dbf     d1,loc_875A
+                dbf     d1,SKSS_CopyQuadrantCellsAndSelectPal
                 lea     $10(a3),a3
                 add.w   d5,d4
-                dbf     d0,loc_8756
-                dbf     d7,loc_8716
+                dbf     d0,SKSStage_BeginOneTransformedQuadrantRow
+                dbf     d7,SKSS_AccumulateQuadrantMetadata
                 moveq   #0,d1
                 move.b  (Blue_spheres_current_stage+2).w,d1
                 move.w  d1,d2
@@ -394,10 +394,10 @@ loc_875A:
                 lea     (Target_palette).w,a2
                 movea.l 4(a1,d1.w),a1
                 andi.w  #8,d2
-                beq.s   loc_8798
+                beq.s   SKSS_StoreBlueSphereTargetPalette
                 lea     $130(a1),a1
 
-loc_8798:
+SKSS_StoreBlueSphereTargetPalette:
                 move.l  a1,(Special_stage_palette_addr).w
                 move.l  (a1)+,$70(a2)
                 move.l  (a1)+,$74(a2)
@@ -409,7 +409,7 @@ loc_8798:
 ; End of function SStage_LoadLayoutAndPalette
 
 ; ---------------------------------------------------------------------------
-word_87BA:
+SKSS_BlueSphereQuadrantCopyTable:
                 dc.w    1
                 dc.w    0
                 dc.w    $10
@@ -431,16 +431,16 @@ word_87BA:
 
 Rotate_SSPal:
                 tst.b   (Special_stage_fade_timer).w
-                bne.s   locret_8818
+                bne.s   SKSS_PaletteRotationReturn
                 move.w  (Special_stage_anim_frame).w,d0
                 cmpi.w  #$10,d0
-                blo.s   loc_87F8
+                blo.s   SKSStage_ChooseEvenPhasePaletteSlice
                 tst.b   (Special_stage_turning).w
-                bpl.s   locret_8818
+                bpl.s   SKSS_PaletteRotationReturn
                 move.b  (Special_stage_palette_frame).w,d0
                 andi.w  #$F,d0
 
-loc_87F8:
+SKSStage_ChooseEvenPhasePaletteSlice:
                 andi.w  #$E,d0
                 neg.w   d0
                 addi.w  #$10,d0
@@ -449,11 +449,11 @@ loc_87F8:
                 lea     (Normal_palette_line_4+$10).w,a2
                 move.w  #bytesToWcnt($10),d0
 
-loc_8812:
+SKSStage_CopyEightRotatingPaletteWords:
                 move.w  (a1)+,(a2)+
-                dbf     d0,loc_8812
+                dbf     d0,SKSStage_CopyEightRotatingPaletteWords
 
-locret_8818:
+SKSS_PaletteRotationReturn:
                 rts
 ; End of function Rotate_SSPal
 
@@ -464,7 +464,7 @@ Update_SSMap:
                 lea     (SS_Pal_Map_Ptrs).l,a1
                 move.w  (Special_stage_anim_frame).w,d0
                 cmp.b   (Special_stage_prev_anim_frame).w,d0
-                beq.s   loc_8876
+                beq.s   SKSS_ConsumeSphereHUDDirtyFlag
                 move.b  d0,(Special_stage_prev_anim_frame).w
                 lsl.w   #3,d0
                 movea.l (a1,d0.w),a3
@@ -472,46 +472,46 @@ Update_SSMap:
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table+$19E,VRAM,WRITE),(VDP_control_port).l  ; VRAM write $C19E
                 moveq   #$A-1,d1
 
-loc_884A:
+SKSS_WriteTopGlobeMapWords:
                 move.w  (a1)+,(a6)
-                dbf     d1,loc_884A
+                dbf     d1,SKSS_WriteTopGlobeMapWords
                 lea     $140(a3),a3
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table+$200,VRAM,WRITE),d0  ; VRAM write $C200
                 moveq   #$28-1,d1
                 moveq   #$18-1,d2
                 move.l  #$80<<16,d4
 
-loc_8864:
+SKSStage_BeginOnePerspectivePlaneMapRow:
                 move.l  d0,VDP_control_port-VDP_data_port(a6)
                 move.w  d1,d3
 
-loc_886A:
+SKSStage_CopyFortyPerspectiveMapWords:
                 move.w  (a3)+,(a6)
-                dbf     d3,loc_886A
+                dbf     d3,SKSStage_CopyFortyPerspectiveMapWords
                 add.l   d4,d0
-                dbf     d2,loc_8864
+                dbf     d2,SKSStage_BeginOnePerspectivePlaneMapRow
 
-loc_8876:
+SKSS_ConsumeSphereHUDDirtyFlag:
                 tst.b   (Special_stage_sphere_HUD_flag).w
-                beq.s   loc_8890
+                beq.s   SKSS_ConsumeRingHUDDirtyBit
                 move.b  #0,(Special_stage_sphere_HUD_flag).w
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table+$086,VRAM,WRITE),d0  ; VRAM write $C086
                 move.w  (Special_stage_spheres_left).w,d1
                 bsr.w   Draw_SSNum
 
-loc_8890:
+SKSS_ConsumeRingHUDDirtyBit:
                 tst.b   (Special_stage_extra_life_flags).w
-                bpl.s   locret_88B4
+                bpl.s   SKSS_DisplayUpdateReturn
                 bclr    #7,(Special_stage_extra_life_flags).w
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table+$0BE,VRAM,WRITE),d0  ; VRAM write $C0BE
                 move.w  (Special_stage_ring_count).w,d1
                 tst.b   (Blue_spheres_stage_flag).w
-                beq.s   loc_88B0
+                beq.s   SKSS_DrawThreeDigitRingCount
                 move.w  (Special_stage_rings_left).w,d1
 
-loc_88B0:
+SKSS_DrawThreeDigitRingCount:
                 bsr.w   Draw_SSNum
 
-locret_88B4:
+SKSS_DisplayUpdateReturn:
                 rts
 ; End of function Update_SSMap

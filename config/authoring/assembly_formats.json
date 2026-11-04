@@ -2404,23 +2404,23 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 144
       },
-      "declarations_sha256": "7bf9d87e326bc70e431a0f1c29eda4be1b9c427c2579df85fc50c1f2d0786915",
+      "declarations_sha256": "41e9cf1d6546b6c13c62072ca9fde09d09d12ffbd99cf9bc6948af84a8f48efc",
       "labels": {
         "Map_SStageChaosEmerald_": 0,
-        "word_A6D2": 32,
-        "word_A6DA": 40,
-        "word_A6E2": 48,
-        "word_A6EA": 56,
-        "word_A6F2": 64,
-        "word_A6FA": 72,
-        "word_A702": 80,
-        "word_A70A": 88,
-        "word_A712": 96,
-        "word_A71A": 104,
-        "word_A722": 112,
-        "word_A72A": 120,
-        "word_A732": 128,
-        "word_A73A": 136
+        "SharedSStageChaosEmeraldMap_Frame00": 32,
+        "SharedSStageChaosEmeraldMap_Frame01": 40,
+        "SharedSStageChaosEmeraldMap_Frame02": 48,
+        "SharedSStageChaosEmeraldMap_Frame03": 56,
+        "SharedSStageChaosEmeraldMap_Frame04": 64,
+        "SharedSStageChaosEmeraldMap_Frame05": 72,
+        "SharedSStageChaosEmeraldMap_Frame06": 80,
+        "SharedSStageChaosEmeraldMap_Frame07": 88,
+        "SharedSStageChaosEmeraldMap_Frame08": 96,
+        "SharedSStageChaosEmeraldMap_Frame09": 104,
+        "SSChaosEmerald_FramesAToB": 112,
+        "SSChaosEmerald_FramesCToD": 120,
+        "SharedSStageChaosEmeraldMap_Frame0E": 128,
+        "SharedSStageChaosEmeraldMap_Frame0F": 136
       },
       "external_symbols": [],
       "blocks": [
@@ -2428,112 +2428,112 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A6D2",
+          "target": "SharedSStageChaosEmeraldMap_Frame00",
           "base": "Map_SStageChaosEmerald_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A6DA",
+          "target": "SharedSStageChaosEmeraldMap_Frame01",
           "base": "Map_SStageChaosEmerald_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A6E2",
+          "target": "SharedSStageChaosEmeraldMap_Frame02",
           "base": "Map_SStageChaosEmerald_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A6EA",
+          "target": "SharedSStageChaosEmeraldMap_Frame03",
           "base": "Map_SStageChaosEmerald_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A6F2",
+          "target": "SharedSStageChaosEmeraldMap_Frame04",
           "base": "Map_SStageChaosEmerald_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A6FA",
+          "target": "SharedSStageChaosEmeraldMap_Frame05",
           "base": "Map_SStageChaosEmerald_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A702",
+          "target": "SharedSStageChaosEmeraldMap_Frame06",
           "base": "Map_SStageChaosEmerald_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A70A",
+          "target": "SharedSStageChaosEmeraldMap_Frame07",
           "base": "Map_SStageChaosEmerald_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A712",
+          "target": "SharedSStageChaosEmeraldMap_Frame08",
           "base": "Map_SStageChaosEmerald_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A71A",
+          "target": "SharedSStageChaosEmeraldMap_Frame09",
           "base": "Map_SStageChaosEmerald_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A722",
+          "target": "SSChaosEmerald_FramesAToB",
           "base": "Map_SStageChaosEmerald_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A722",
+          "target": "SSChaosEmerald_FramesAToB",
           "base": "Map_SStageChaosEmerald_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A72A",
+          "target": "SSChaosEmerald_FramesCToD",
           "base": "Map_SStageChaosEmerald_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A72A",
+          "target": "SSChaosEmerald_FramesCToD",
           "base": "Map_SStageChaosEmerald_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A732",
+          "target": "SharedSStageChaosEmeraldMap_Frame0E",
           "base": "Map_SStageChaosEmerald_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A73A",
+          "target": "SharedSStageChaosEmeraldMap_Frame0F",
           "base": "Map_SStageChaosEmerald_"
         },
         {
@@ -2617,25 +2617,25 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 160
       },
-      "declarations_sha256": "47e6ad0e215fefaea21c90fbefd9da907a4f3c66ce8f9015ddee42e9fe9f9b24",
+      "declarations_sha256": "d2e824f5765f07625513970650ee84fa6267980575ba6e2bad6f8707fd2166e6",
       "labels": {
         "Map_SphereTest_": 0,
-        "word_23BF0": 32,
-        "word_23BF8": 40,
-        "word_23C00": 48,
-        "word_23C08": 56,
-        "word_23C10": 64,
-        "word_23C18": 72,
-        "word_23C20": 80,
-        "word_23C28": 88,
-        "word_23C30": 96,
-        "word_23C38": 104,
-        "word_23C40": 112,
-        "word_23C48": 120,
-        "word_23C50": 128,
-        "word_23C58": 136,
-        "word_23C60": 144,
-        "word_23C68": 152
+        "S3SphereTestMap_Frame00": 32,
+        "S3SphereTestMap_Frame01": 40,
+        "S3SphereTestMap_Frame02": 48,
+        "S3SphereTestMap_Frame03": 56,
+        "S3SphereTestMap_Frame04": 64,
+        "S3SphereTestMap_Frame05": 72,
+        "S3SphereTestMap_Frame06": 80,
+        "S3SphereTestMap_Frame07": 88,
+        "S3SphereTestMap_Frame08": 96,
+        "S3SphereTestMap_Frame09": 104,
+        "S3SphereTestMap_Frame0A": 112,
+        "S3SphereTestMap_Frame0B": 120,
+        "S3SphereTestMap_Frame0C": 128,
+        "S3SphereTestMap_Frame0D": 136,
+        "S3SphereTestMap_Frame0E": 144,
+        "S3SphereTestMap_Frame0F": 152
       },
       "external_symbols": [],
       "blocks": [
@@ -2643,112 +2643,112 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23BF0",
+          "target": "S3SphereTestMap_Frame00",
           "base": "Map_SphereTest_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23BF8",
+          "target": "S3SphereTestMap_Frame01",
           "base": "Map_SphereTest_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23C00",
+          "target": "S3SphereTestMap_Frame02",
           "base": "Map_SphereTest_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23C08",
+          "target": "S3SphereTestMap_Frame03",
           "base": "Map_SphereTest_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23C10",
+          "target": "S3SphereTestMap_Frame04",
           "base": "Map_SphereTest_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23C18",
+          "target": "S3SphereTestMap_Frame05",
           "base": "Map_SphereTest_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23C20",
+          "target": "S3SphereTestMap_Frame06",
           "base": "Map_SphereTest_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23C28",
+          "target": "S3SphereTestMap_Frame07",
           "base": "Map_SphereTest_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23C30",
+          "target": "S3SphereTestMap_Frame08",
           "base": "Map_SphereTest_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23C38",
+          "target": "S3SphereTestMap_Frame09",
           "base": "Map_SphereTest_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23C40",
+          "target": "S3SphereTestMap_Frame0A",
           "base": "Map_SphereTest_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23C48",
+          "target": "S3SphereTestMap_Frame0B",
           "base": "Map_SphereTest_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23C50",
+          "target": "S3SphereTestMap_Frame0C",
           "base": "Map_SphereTest_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23C58",
+          "target": "S3SphereTestMap_Frame0D",
           "base": "Map_SphereTest_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23C60",
+          "target": "S3SphereTestMap_Frame0E",
           "base": "Map_SphereTest_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23C68",
+          "target": "S3SphereTestMap_Frame0F",
           "base": "Map_SphereTest_"
         },
         {
@@ -2842,13 +2842,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 76
       },
-      "declarations_sha256": "fd5f38317ae0c4775b8a75f6a6acee4bc2d4681743448f9268aa9684197a6bdf",
+      "declarations_sha256": "0c0f2cf048543541a6b060e3cc5abcff0d920b400ee34d70f18cda3b41ce46a7",
       "labels": {
         "Map_GetBlueSpheres_": 0,
-        "word_8F66": 8,
-        "word_8F7A": 28,
-        "word_8F8E": 48,
-        "word_8F9C": 62
+        "SStageCue_OpeningLeftMapping": 8,
+        "SStageCue_OpeningRightMapping": 28,
+        "SStageCue_CompletionLeftMapping": 48,
+        "SStageCue_CompletionRightMapping": 62
       },
       "external_symbols": [],
       "blocks": [
@@ -2856,28 +2856,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F66",
+          "target": "SStageCue_OpeningLeftMapping",
           "base": "Map_GetBlueSpheres_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F7A",
+          "target": "SStageCue_OpeningRightMapping",
           "base": "Map_GetBlueSpheres_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F8E",
+          "target": "SStageCue_CompletionLeftMapping",
           "base": "Map_GetBlueSpheres_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F9C",
+          "target": "SStageCue_CompletionRightMapping",
           "base": "Map_GetBlueSpheres_"
         },
         {
@@ -2911,10 +2911,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 16
       },
-      "declarations_sha256": "4781ca5f277d5b493eef92ee48a53eefbf0bb49f4ca7346f88e9cfed4b74f40c",
+      "declarations_sha256": "db28e62da487560b3ce4577facd7abe86aca7e127005c6f9fdbd58221aebdb10",
       "labels": {
         "Map_SSIcons_": 0,
-        "word_8E32": 2
+        "SharedSStageIconsMap_Frame00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -2922,7 +2922,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E32",
+          "target": "SharedSStageIconsMap_Frame00",
           "base": "Map_SSIcons_"
         },
         {
@@ -2941,43 +2941,43 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 424
       },
-      "declarations_sha256": "d1974f09cfc53ddd27e4d3f31856126d62731d06e4edd208877e90b7078d7836",
+      "declarations_sha256": "adb2632135563cba5063452829b30ae689de51e8ab3a7c2adc5665a13ab7d252",
       "labels": {
         "Map_SStageRing_": 0,
-        "word_A572": 104,
-        "word_A57A": 112,
-        "word_A582": 120,
-        "word_A58A": 128,
-        "word_A592": 136,
-        "word_A59A": 144,
-        "word_A5A2": 152,
-        "word_A5AA": 160,
-        "word_A5B2": 168,
-        "word_A5BA": 176,
-        "word_A5D2": 200,
-        "word_A5DA": 208,
-        "word_A5E2": 216,
-        "word_A5EA": 224,
-        "word_A5F2": 232,
-        "word_A5FA": 240,
-        "word_A602": 248,
-        "word_A60A": 256,
-        "word_A612": 264,
-        "word_A61A": 272,
-        "word_A632": 296,
-        "word_A63A": 304,
-        "word_A642": 312,
-        "word_A64A": 320,
-        "word_A652": 328,
-        "word_A65A": 336,
-        "word_A662": 344,
-        "word_A66A": 352,
-        "word_A672": 360,
-        "word_A67A": 368,
-        "word_A692": 392,
-        "word_A69A": 400,
-        "word_A6A2": 408,
-        "word_A6AA": 416
+        "SharedSStageRingMap_Frame00": 104,
+        "SharedSStageRingMap_Frame01": 112,
+        "SharedSStageRingMap_Frame02": 120,
+        "SharedSStageRingMap_Frame03": 128,
+        "SharedSStageRingMap_Frame04": 136,
+        "SharedSStageRingMap_Frame05": 144,
+        "SharedSStageRingMap_Frame06": 152,
+        "SharedSStageRingMap_Frame07": 160,
+        "SharedSStageRingMap_Frame08": 168,
+        "SharedSStageRingMap_Frames09Through0F": 176,
+        "SharedSStageRingMap_Frame10": 200,
+        "SharedSStageRingMap_Frame11": 208,
+        "SharedSStageRingMap_Frame12": 216,
+        "SharedSStageRingMap_Frame13": 224,
+        "SharedSStageRingMap_Frame14": 232,
+        "SharedSStageRingMap_Frame15": 240,
+        "SharedSStageRingMap_Frame16": 248,
+        "SharedSStageRingMap_Frame17": 256,
+        "SharedSStageRingMap_Frame18": 264,
+        "SharedSStageRingMap_Frames19Through1F": 272,
+        "SharedSStageRingMap_Frame20": 296,
+        "SharedSStageRingMap_Frame21": 304,
+        "SharedSStageRingMap_Frame22": 312,
+        "SharedSStageRingMap_Frame23": 320,
+        "SharedSStageRingMap_Frame24": 328,
+        "SharedSStageRingMap_Frame25": 336,
+        "SharedSStageRingMap_Frame26": 344,
+        "SharedSStageRingMap_Frame27": 352,
+        "SharedSStageRingMap_Frame28": 360,
+        "SharedSStageRingMap_Frames29Through2F": 368,
+        "SharedSStageRingMap_Frame30": 392,
+        "SharedSStageRingMap_Frame31": 400,
+        "SharedSStageRingMap_Frame32": 408,
+        "SharedSStageRingMap_Frame33": 416
       },
       "external_symbols": [],
       "blocks": [
@@ -2985,364 +2985,364 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A572",
+          "target": "SharedSStageRingMap_Frame00",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A57A",
+          "target": "SharedSStageRingMap_Frame01",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A582",
+          "target": "SharedSStageRingMap_Frame02",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A58A",
+          "target": "SharedSStageRingMap_Frame03",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A592",
+          "target": "SharedSStageRingMap_Frame04",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A59A",
+          "target": "SharedSStageRingMap_Frame05",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A5A2",
+          "target": "SharedSStageRingMap_Frame06",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A5AA",
+          "target": "SharedSStageRingMap_Frame07",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A5B2",
+          "target": "SharedSStageRingMap_Frame08",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A5BA",
+          "target": "SharedSStageRingMap_Frames09Through0F",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A5BA",
+          "target": "SharedSStageRingMap_Frames09Through0F",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A5BA",
+          "target": "SharedSStageRingMap_Frames09Through0F",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A5BA",
+          "target": "SharedSStageRingMap_Frames09Through0F",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A5BA",
+          "target": "SharedSStageRingMap_Frames09Through0F",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A5BA",
+          "target": "SharedSStageRingMap_Frames09Through0F",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A5BA",
+          "target": "SharedSStageRingMap_Frames09Through0F",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A5D2",
+          "target": "SharedSStageRingMap_Frame10",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A5DA",
+          "target": "SharedSStageRingMap_Frame11",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A5E2",
+          "target": "SharedSStageRingMap_Frame12",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A5EA",
+          "target": "SharedSStageRingMap_Frame13",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A5F2",
+          "target": "SharedSStageRingMap_Frame14",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A5FA",
+          "target": "SharedSStageRingMap_Frame15",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A602",
+          "target": "SharedSStageRingMap_Frame16",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A60A",
+          "target": "SharedSStageRingMap_Frame17",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A612",
+          "target": "SharedSStageRingMap_Frame18",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A61A",
+          "target": "SharedSStageRingMap_Frames19Through1F",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A61A",
+          "target": "SharedSStageRingMap_Frames19Through1F",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A61A",
+          "target": "SharedSStageRingMap_Frames19Through1F",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A61A",
+          "target": "SharedSStageRingMap_Frames19Through1F",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 58,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A61A",
+          "target": "SharedSStageRingMap_Frames19Through1F",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 60,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A61A",
+          "target": "SharedSStageRingMap_Frames19Through1F",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 62,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A61A",
+          "target": "SharedSStageRingMap_Frames19Through1F",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 64,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A632",
+          "target": "SharedSStageRingMap_Frame20",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 66,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A63A",
+          "target": "SharedSStageRingMap_Frame21",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 68,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A642",
+          "target": "SharedSStageRingMap_Frame22",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 70,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A64A",
+          "target": "SharedSStageRingMap_Frame23",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 72,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A652",
+          "target": "SharedSStageRingMap_Frame24",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 74,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A65A",
+          "target": "SharedSStageRingMap_Frame25",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 76,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A662",
+          "target": "SharedSStageRingMap_Frame26",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 78,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A66A",
+          "target": "SharedSStageRingMap_Frame27",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 80,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A672",
+          "target": "SharedSStageRingMap_Frame28",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 82,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A67A",
+          "target": "SharedSStageRingMap_Frames29Through2F",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 84,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A67A",
+          "target": "SharedSStageRingMap_Frames29Through2F",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 86,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A67A",
+          "target": "SharedSStageRingMap_Frames29Through2F",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 88,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A67A",
+          "target": "SharedSStageRingMap_Frames29Through2F",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 90,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A67A",
+          "target": "SharedSStageRingMap_Frames29Through2F",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 92,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A67A",
+          "target": "SharedSStageRingMap_Frames29Through2F",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 94,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A67A",
+          "target": "SharedSStageRingMap_Frames29Through2F",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 96,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A692",
+          "target": "SharedSStageRingMap_Frame30",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 98,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A69A",
+          "target": "SharedSStageRingMap_Frame31",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 100,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A6A2",
+          "target": "SharedSStageRingMap_Frame32",
           "base": "Map_SStageRing_"
         },
         {
           "offset": 102,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A6AA",
+          "target": "SharedSStageRingMap_Frame33",
           "base": "Map_SStageRing_"
         },
         {
@@ -3556,10 +3556,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 10
       },
-      "declarations_sha256": "60ff051e6ec45d719ddb8a8342d810053121ba65833fe222cb679f70968c5312",
+      "declarations_sha256": "9d27b3d5ddf5b8abfdc9bb8ba2193ad0bf97e2a1696f88fc281db15185a57d14",
       "labels": {
         "Map_SStageShadow_": 0,
-        "word_83FA": 2
+        "S3SStageShadowMap_Frame00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -3567,7 +3567,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_83FA",
+          "target": "S3SStageShadowMap_Frame00",
           "base": "Map_SStageShadow_"
         },
         {
@@ -3586,25 +3586,25 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 166
       },
-      "declarations_sha256": "03940f7813f54a430baf017324e6e7df39cf68431311d66c795b0b1fbd6a8792",
+      "declarations_sha256": "9e21b77d3c05edb3618d16ac593a7b602990acd8d3e28948fd7c0ac7393ccc73",
       "labels": {
         "Map_SStageSphere_": 0,
-        "word_A48A": 38,
-        "word_A492": 46,
-        "word_A49A": 54,
-        "word_A4A2": 62,
-        "word_A4AA": 70,
-        "word_A4B2": 78,
-        "word_A4BA": 86,
-        "word_A4C2": 94,
-        "word_A4CA": 102,
-        "word_A4D2": 110,
-        "word_A4DA": 118,
-        "word_A4E2": 126,
-        "word_A4EA": 134,
-        "word_A4F2": 142,
-        "word_A4FA": 150,
-        "word_A502": 158
+        "SharedSStageSphereMap_Frame00": 38,
+        "SharedSStageSphereMap_Frame01": 46,
+        "SharedSStageSphereMap_Frame02": 54,
+        "SharedSStageSphereMap_Frame03": 62,
+        "SharedSStageSphereMap_Frame04": 70,
+        "SharedSStageSphereMap_Frame05": 78,
+        "SharedSStageSphereMap_Frame06": 86,
+        "SharedSStageSphereMap_Frame07": 94,
+        "SharedSStageSphereMap_Frame08": 102,
+        "SharedSStageSphereMap_Frame09": 110,
+        "SharedSStageSphereMap_Frames0AThrough0B": 118,
+        "SharedSStageSphereMap_Frames0CThrough0D": 126,
+        "SharedSStageSphereMap_Frames0EThrough0F": 134,
+        "SharedSStageSphereMap_Frame10": 142,
+        "SharedSStageSphereMap_Frame11": 150,
+        "SharedSStageSphereMap_Frame12": 158
       },
       "external_symbols": [],
       "blocks": [
@@ -3612,133 +3612,133 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A48A",
+          "target": "SharedSStageSphereMap_Frame00",
           "base": "Map_SStageSphere_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A492",
+          "target": "SharedSStageSphereMap_Frame01",
           "base": "Map_SStageSphere_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A49A",
+          "target": "SharedSStageSphereMap_Frame02",
           "base": "Map_SStageSphere_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A4A2",
+          "target": "SharedSStageSphereMap_Frame03",
           "base": "Map_SStageSphere_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A4AA",
+          "target": "SharedSStageSphereMap_Frame04",
           "base": "Map_SStageSphere_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A4B2",
+          "target": "SharedSStageSphereMap_Frame05",
           "base": "Map_SStageSphere_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A4BA",
+          "target": "SharedSStageSphereMap_Frame06",
           "base": "Map_SStageSphere_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A4C2",
+          "target": "SharedSStageSphereMap_Frame07",
           "base": "Map_SStageSphere_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A4CA",
+          "target": "SharedSStageSphereMap_Frame08",
           "base": "Map_SStageSphere_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A4D2",
+          "target": "SharedSStageSphereMap_Frame09",
           "base": "Map_SStageSphere_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A4DA",
+          "target": "SharedSStageSphereMap_Frames0AThrough0B",
           "base": "Map_SStageSphere_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A4DA",
+          "target": "SharedSStageSphereMap_Frames0AThrough0B",
           "base": "Map_SStageSphere_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A4E2",
+          "target": "SharedSStageSphereMap_Frames0CThrough0D",
           "base": "Map_SStageSphere_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A4E2",
+          "target": "SharedSStageSphereMap_Frames0CThrough0D",
           "base": "Map_SStageSphere_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A4EA",
+          "target": "SharedSStageSphereMap_Frames0EThrough0F",
           "base": "Map_SStageSphere_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A4EA",
+          "target": "SharedSStageSphereMap_Frames0EThrough0F",
           "base": "Map_SStageSphere_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A4F2",
+          "target": "SharedSStageSphereMap_Frame10",
           "base": "Map_SStageSphere_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A4FA",
+          "target": "SharedSStageSphereMap_Frame11",
           "base": "Map_SStageSphere_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A502",
+          "target": "SharedSStageSphereMap_Frame12",
           "base": "Map_SStageSphere_"
         },
         {
@@ -3832,23 +3832,23 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 282
       },
-      "declarations_sha256": "911cd4420df90f54b16290565f5b85ffa2c76d1cdb2586fa2170dd256fdcd753",
+      "declarations_sha256": "4b67e300750ace82050d2247e56a6ea876ba19d891849ce80ef8b1a94ee9a530",
       "labels": {
         "Map_SStageSuperEmerald_": 0,
-        "word_A762": 32,
-        "word_A77C": 58,
-        "word_A790": 78,
-        "word_A7A4": 98,
-        "word_A7B2": 112,
-        "word_A7C0": 126,
-        "word_A7CE": 140,
-        "word_A7E2": 160,
-        "word_A7F6": 180,
-        "word_A80A": 200,
-        "word_A81E": 220,
-        "word_A832": 240,
-        "word_A840": 254,
-        "word_A84E": 268
+        "SKSStageSuperEmeraldMap_Frame00": 32,
+        "SKSStageSuperEmeraldMap_Frame01": 58,
+        "SKSStageSuperEmeraldMap_Frame02": 78,
+        "SKSStageSuperEmeraldMap_Frame03": 98,
+        "SKSStageSuperEmeraldMap_Frame04": 112,
+        "SKSStageSuperEmeraldMap_Frame05": 126,
+        "SKSStageSuperEmeraldMap_Frame06": 140,
+        "SKSStageSuperEmeraldMap_Frame07": 160,
+        "SKSStageSuperEmeraldMap_Frame08": 180,
+        "SKSStageSuperEmeraldMap_Frame09": 200,
+        "SSSuperEmerald_FramesAToB": 220,
+        "SSSuperEmerald_FramesCToD": 240,
+        "SKSStageSuperEmeraldMap_Frame0E": 254,
+        "SKSStageSuperEmeraldMap_Frame0F": 268
       },
       "external_symbols": [],
       "blocks": [
@@ -3856,112 +3856,112 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A762",
+          "target": "SKSStageSuperEmeraldMap_Frame00",
           "base": "Map_SStageSuperEmerald_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A77C",
+          "target": "SKSStageSuperEmeraldMap_Frame01",
           "base": "Map_SStageSuperEmerald_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A790",
+          "target": "SKSStageSuperEmeraldMap_Frame02",
           "base": "Map_SStageSuperEmerald_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A7A4",
+          "target": "SKSStageSuperEmeraldMap_Frame03",
           "base": "Map_SStageSuperEmerald_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A7B2",
+          "target": "SKSStageSuperEmeraldMap_Frame04",
           "base": "Map_SStageSuperEmerald_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A7C0",
+          "target": "SKSStageSuperEmeraldMap_Frame05",
           "base": "Map_SStageSuperEmerald_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A7CE",
+          "target": "SKSStageSuperEmeraldMap_Frame06",
           "base": "Map_SStageSuperEmerald_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A7E2",
+          "target": "SKSStageSuperEmeraldMap_Frame07",
           "base": "Map_SStageSuperEmerald_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A7F6",
+          "target": "SKSStageSuperEmeraldMap_Frame08",
           "base": "Map_SStageSuperEmerald_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A80A",
+          "target": "SKSStageSuperEmeraldMap_Frame09",
           "base": "Map_SStageSuperEmerald_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A81E",
+          "target": "SSSuperEmerald_FramesAToB",
           "base": "Map_SStageSuperEmerald_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A81E",
+          "target": "SSSuperEmerald_FramesAToB",
           "base": "Map_SStageSuperEmerald_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A832",
+          "target": "SSSuperEmerald_FramesCToD",
           "base": "Map_SStageSuperEmerald_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A832",
+          "target": "SSSuperEmerald_FramesCToD",
           "base": "Map_SStageSuperEmerald_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A840",
+          "target": "SKSStageSuperEmeraldMap_Frame0E",
           "base": "Map_SStageSuperEmerald_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_A84E",
+          "target": "SKSStageSuperEmeraldMap_Frame0F",
           "base": "Map_SStageSuperEmerald_"
         },
         {
@@ -58291,13 +58291,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 46
       },
-      "declarations_sha256": "7bf624881b462da484bf4d2d9a6aa3fad372ec9939cb523e89e8be17a8803750",
+      "declarations_sha256": "013e9e5009ebe5b7e74c35d2ab67b6113f3ef4b2640ef195fabe8ccd339045ab",
       "labels": {
         "DPLC_SSEntryFlash_": 0,
-        "word_61C02": 8,
-        "word_61C0A": 16,
-        "word_61C12": 24,
-        "word_61C1C": 34
+        "SSEntryFlashDPLC_Frame00": 8,
+        "SSEntryFlashDPLC_Frame01": 16,
+        "SSEntryFlashDPLC_Frame02": 24,
+        "SSEntryFlashDPLC_Frame03": 34
       },
       "external_symbols": [],
       "blocks": [
@@ -58305,28 +58305,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61C02",
+          "target": "SSEntryFlashDPLC_Frame00",
           "base": "DPLC_SSEntryFlash_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61C0A",
+          "target": "SSEntryFlashDPLC_Frame01",
           "base": "DPLC_SSEntryFlash_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61C12",
+          "target": "SSEntryFlashDPLC_Frame02",
           "base": "DPLC_SSEntryFlash_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61C1C",
+          "target": "SSEntryFlashDPLC_Frame03",
           "base": "DPLC_SSEntryFlash_"
         },
         {
@@ -58365,21 +58365,21 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 106
       },
-      "declarations_sha256": "4f651aef35e2edfd3b57c1e26028e3eff5fafa12906b2c7f564fd28d62e009d6",
+      "declarations_sha256": "72a6ab2597c245ffc99336cd403ace47c4f31a400d35be99bf663660538e01da",
       "labels": {
         "DPLC_SSEntryRing_": 0,
-        "word_61AD6": 24,
-        "word_61ADA": 28,
-        "word_61ADE": 32,
-        "word_61AE2": 36,
-        "word_61AE6": 40,
-        "word_61AEA": 44,
-        "word_61AF0": 50,
-        "word_61AFA": 60,
-        "word_61B04": 70,
-        "word_61B0E": 80,
-        "word_61B18": 90,
-        "word_61B1E": 96
+        "SSEntryRingDPLC_Frame00": 24,
+        "SSEntryRingDPLC_Frame01": 28,
+        "SSEntryRingDPLC_Frame02": 32,
+        "SSEntryRingDPLC_Frame03": 36,
+        "SSEntryRingDPLC_Frame04": 40,
+        "SSEntryRingDPLC_Frame05": 44,
+        "SSEntryRingDPLC_Frame06": 50,
+        "SSEntryRingDPLC_Frame07": 60,
+        "SSEntryRingDPLC_Frame08": 70,
+        "SSEntryRingDPLC_Frame09": 80,
+        "SSEntryRingDPLC_Frame0A": 90,
+        "SSEntryRingDPLC_Frame0B": 96
       },
       "external_symbols": [],
       "blocks": [
@@ -58387,84 +58387,84 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61AD6",
+          "target": "SSEntryRingDPLC_Frame00",
           "base": "DPLC_SSEntryRing_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61ADA",
+          "target": "SSEntryRingDPLC_Frame01",
           "base": "DPLC_SSEntryRing_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61ADE",
+          "target": "SSEntryRingDPLC_Frame02",
           "base": "DPLC_SSEntryRing_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61AE2",
+          "target": "SSEntryRingDPLC_Frame03",
           "base": "DPLC_SSEntryRing_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61AE6",
+          "target": "SSEntryRingDPLC_Frame04",
           "base": "DPLC_SSEntryRing_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61AEA",
+          "target": "SSEntryRingDPLC_Frame05",
           "base": "DPLC_SSEntryRing_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61AF0",
+          "target": "SSEntryRingDPLC_Frame06",
           "base": "DPLC_SSEntryRing_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61AFA",
+          "target": "SSEntryRingDPLC_Frame07",
           "base": "DPLC_SSEntryRing_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61B04",
+          "target": "SSEntryRingDPLC_Frame08",
           "base": "DPLC_SSEntryRing_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61B0E",
+          "target": "SSEntryRingDPLC_Frame09",
           "base": "DPLC_SSEntryRing_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61B18",
+          "target": "SSEntryRingDPLC_Frame0A",
           "base": "DPLC_SSEntryRing_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61B1E",
+          "target": "SSEntryRingDPLC_Frame0B",
           "base": "DPLC_SSEntryRing_"
         },
         {
@@ -58538,13 +58538,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 210
       },
-      "declarations_sha256": "a8efb3ce947130972315e4f56acd26acf9585be8178863cd71f9e5ed7a843168",
+      "declarations_sha256": "ab44dd67b43e5a042c390e790639ff95ba5f8d69463760fdc139c4a992182c20",
       "labels": {
         "Map_SSEntryFlash_": 0,
-        "word_61B30": 8,
-        "word_61B56": 46,
-        "word_61B7C": 84,
-        "word_61BAE": 134
+        "SSEntryFlashMap_Frame00": 8,
+        "SSEntryFlashMap_Frame01": 46,
+        "SSEntryFlashMap_Frame02": 84,
+        "SSEntryFlashMap_Frame03": 134
       },
       "external_symbols": [],
       "blocks": [
@@ -58552,28 +58552,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61B30",
+          "target": "SSEntryFlashMap_Frame00",
           "base": "Map_SSEntryFlash_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61B56",
+          "target": "SSEntryFlashMap_Frame01",
           "base": "Map_SSEntryFlash_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61B7C",
+          "target": "SSEntryFlashMap_Frame02",
           "base": "Map_SSEntryFlash_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61BAE",
+          "target": "SSEntryFlashMap_Frame03",
           "base": "Map_SSEntryFlash_"
         },
         {
@@ -58612,21 +58612,21 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 222
       },
-      "declarations_sha256": "903654f2a4adcd44df6c89a537cc9563c4aa51783fd4c7a43f104834a18b48d4",
+      "declarations_sha256": "fef0ec7fd407c4dd2c3270c221998d4b44bc1390f0b54d5358a3baef4a18c014",
       "labels": {
         "Map_SSEntryRing_": 0,
-        "word_619F8": 24,
-        "word_61A00": 32,
-        "word_61A08": 40,
-        "word_61A10": 48,
-        "word_61A18": 56,
-        "word_61A20": 64,
-        "word_61A2E": 78,
-        "word_61A48": 104,
-        "word_61A62": 130,
-        "word_61A7C": 156,
-        "word_61A96": 182,
-        "word_61AA4": 196
+        "SSEntryRingMap_Frame00": 24,
+        "SSEntryRingMap_Frame01": 32,
+        "SSEntryRingMap_Frame02": 40,
+        "SSEntryRingMap_Frame03": 48,
+        "SSEntryRingMap_Frame04": 56,
+        "SSEntryRingMap_Frame05": 64,
+        "SSEntryRingMap_Frame06": 78,
+        "SSEntryRingMap_Frame07": 104,
+        "SSEntryRingMap_Frame08": 130,
+        "SSEntryRingMap_Frame09": 156,
+        "SSEntryRingMap_Frame0A": 182,
+        "SSEntryRingMap_Frame0B": 196
       },
       "external_symbols": [],
       "blocks": [
@@ -58634,84 +58634,84 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_619F8",
+          "target": "SSEntryRingMap_Frame00",
           "base": "Map_SSEntryRing_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61A00",
+          "target": "SSEntryRingMap_Frame01",
           "base": "Map_SSEntryRing_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61A08",
+          "target": "SSEntryRingMap_Frame02",
           "base": "Map_SSEntryRing_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61A10",
+          "target": "SSEntryRingMap_Frame03",
           "base": "Map_SSEntryRing_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61A18",
+          "target": "SSEntryRingMap_Frame04",
           "base": "Map_SSEntryRing_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61A20",
+          "target": "SSEntryRingMap_Frame05",
           "base": "Map_SSEntryRing_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61A2E",
+          "target": "SSEntryRingMap_Frame06",
           "base": "Map_SSEntryRing_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61A48",
+          "target": "SSEntryRingMap_Frame07",
           "base": "Map_SSEntryRing_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61A62",
+          "target": "SSEntryRingMap_Frame08",
           "base": "Map_SSEntryRing_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61A7C",
+          "target": "SSEntryRingMap_Frame09",
           "base": "Map_SSEntryRing_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61A96",
+          "target": "SSEntryRingMap_Frame0A",
           "base": "Map_SSEntryRing_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61AA4",
+          "target": "SSEntryRingMap_Frame0B",
           "base": "Map_SSEntryRing_"
         },
         {

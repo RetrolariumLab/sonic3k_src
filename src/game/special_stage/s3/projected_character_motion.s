@@ -4,7 +4,7 @@
 
 ; ---------------------------------------------------------------------------
 
-Obj_SStage_82EE:
+SStageTailsTail_InitializeAttachment:
                 move.b  #4,render_flags(a0)
                 move.b  #$10,width_pixels(a0)
                 move.b  #$10,height_pixels(a0)
@@ -15,43 +15,43 @@ Obj_SStage_82EE:
                 move.w  #$70,$32(a0)
                 move.b  #-1,$3A(a0)
                 move.b  #1,mapping_frame(a0)
-                move.l  #loc_8332,(a0)
+                move.l  #S3SS_TailFollowAndSelectRate,(a0)
 
-loc_8332:
+S3SS_TailFollowAndSelectRate:
                 movea.w $3E(a0),a1
                 move.w  x_pos(a1),x_pos(a0)
                 move.w  y_pos(a1),y_pos(a0)
                 move.w  #$2AAA,d0
                 move.w  (Special_stage_velocity).w,d1
-                bmi.s   loc_834E
+                bmi.s   S3SS_TailAdvanceFrameOnCarry
                 add.w   d1,d0
 
-loc_834E:
+S3SS_TailAdvanceFrameOnCarry:
                 add.w   d0,anim_frame_timer(a0)
-                bcc.s   loc_8366
+                bcc.s   SStageTailsTail_DrawAndQueueChangedArt
                 move.b  mapping_frame(a0),d0
                 addq.b  #1,d0
                 cmpi.b  #$F,d0
-                blo.s   loc_8362
+                blo.s   SStageTailsTail_StoreAdvancedFrame
                 moveq   #1,d0
 
-loc_8362:
+SStageTailsTail_StoreAdvancedFrame:
                 move.b  d0,mapping_frame(a0)
 
-loc_8366:
+SStageTailsTail_DrawAndQueueChangedArt:
                 jsr     (Draw_Sprite).l
                 lea     (PLC_SStageTailstails).l,a2
                 move.l  #ArtUnc_SStageTailstails,d6
                 move.w  #tiles_to_bytes(ArtTile_SStage_Player2_Tail),d4
-                bra.w   loc_80D8
+                bra.w   SStagePlayer_QueueArtForChangedFrame
 ; ---------------------------------------------------------------------------
 
-Obj_SStage_8380:
+S3SS_InitPrimaryShadowPosition:
                 move.w  #0,$34(a0)
                 move.w  #$F800,$36(a0)
                 move.w  #0,$38(a0)
 
-loc_8392:
+S3SS_InitShadowAttrsAndProject:
                 move.b  #4,render_flags(a0)
                 move.b  #$10,width_pixels(a0)
                 move.b  #$10,height_pixels(a0)
@@ -62,25 +62,25 @@ loc_8392:
                 move.w  #$70,$32(a0)
                 move.b  #-1,$3A(a0)
                 bsr.w   SStage_ProjectCharacterCoordinates
-                move.l  #loc_83D6,(a0)
+                move.l  #SStageShadow_DrawOnlyWhenNotFading,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_83D6:
+SStageShadow_DrawOnlyWhenNotFading:
                 tst.b   (Special_stage_fade_timer).w
-                beq.s   loc_83DE
+                beq.s   SStageShadow_Draw
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_83DE:
+SStageShadow_Draw:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-Obj_SStage_83E4:
+S3SS_InitFollowerShadowPosition:
                 move.w  #0,$34(a0)
                 move.w  #$F800,$36(a0)
                 move.w  #$FFE0,$38(a0)
-                bra.s   loc_8392
+                bra.s   S3SS_InitShadowAttrsAndProject
 ; ---------------------------------------------------------------------------
 Map_SStageShadow:
                 include "src/game/special_stage/shared/mappings/shadow.s"
@@ -133,95 +133,95 @@ SStage_ProjectCharacterCoordinates:
 
 SStage_UpdatePlayerGridMotion:
                 tst.b   (Special_stage_fade_timer).w
-                beq.s   loc_84A4
+                beq.s   S3SS_SelectTurnAlignmentAxis
                 cmpi.b  #$61,(Special_stage_fade_timer).w
-                bhs.s   loc_8490
+                bhs.s   S3SS_CheckAlignmentAfterFade
                 moveq   #8,d1
                 add.b   d1,(Special_stage_angle).w
                 addq.b  #1,(Special_stage_fade_timer).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8490:
+S3SS_CheckAlignmentAfterFade:
                 move.w  (Special_stage_X_pos).w,d0
                 or.w    (Special_stage_Y_pos).w,d0
                 andi.w  #$E0,d0
-                beq.s   loc_84A4
+                beq.s   S3SS_SelectTurnAlignmentAxis
                 move.b  #0,(Special_stage_fade_timer).w
 
-loc_84A4:
+S3SS_SelectTurnAlignmentAxis:
                 move.w  (Special_stage_X_pos).w,d3
                 btst    #6,(Special_stage_angle).w
-                bne.s   loc_84B4
+                bne.s   S3SS_TurnAtAlignedGroundCell
                 move.w  (Special_stage_Y_pos).w,d3
 
-loc_84B4:
+S3SS_TurnAtAlignedGroundCell:
                 moveq   #0,d2
                 move.b  (Special_stage_turning).w,d1
-                beq.s   loc_84F0
+                beq.s   S3SS_UnlockTurnOutsideCellCenter
                 andi.w  #$E0,d3
-                bne.s   loc_84F0
+                bne.s   S3SS_UnlockTurnOutsideCellCenter
                 tst.b   (Special_stage_jumping).w
-                bmi.s   loc_84FC
+                bmi.s   S3SS_LoadControlsAndVelocity
                 add.b   d1,(Special_stage_angle).w
                 move.b  (Special_stage_angle).w,d0
                 andi.b  #$3F,d0
-                bne.w   locret_85FC
+                bne.w   S3SS_GridMovementReturn
                 move.b  #0,(Special_stage_turning).w
                 move.b  #0,(Special_stage_bumper_lock).w
                 tst.w   (Special_stage_velocity).w
-                beq.s   loc_84F0
+                beq.s   S3SS_UnlockTurnOutsideCellCenter
                 move.b  #1,(Special_stage_turn_lock).w
 
-loc_84F0:
+S3SS_UnlockTurnOutsideCellCenter:
                 andi.w  #$E0,d3
-                beq.s   loc_84FC
+                beq.s   S3SS_LoadControlsAndVelocity
                 move.b  #0,(Special_stage_turn_lock).w
 
-loc_84FC:
+S3SS_LoadControlsAndVelocity:
                 move.b  (Ctrl_1_held).w,d1
                 move.w  (Special_stage_velocity).w,d2
                 tst.b   (Special_stage_clear_routine).w
-                bne.w   loc_85D4
+                bne.w   S3SS_IntegrateGridAndHandleCell
                 tst.b   (Special_stage_bumper_lock).w
-                bne.s   loc_8532
+                bne.s   S3SS_RequestLeftIfUnlocked
                 btst    #button_up,d1
-                beq.s   loc_851E
+                beq.s   S3SS_AccelerateTowardMoveRate
                 move.b  #1,(Special_stage_advancing).w
 
-loc_851E:
+S3SS_AccelerateTowardMoveRate:
                 tst.b   (Special_stage_advancing).w
-                beq.s   loc_8532
+                beq.s   S3SS_RequestLeftIfUnlocked
                 move.w  (Special_stage_rate).w,d3
                 addi.w  #$200,d2
                 cmp.w   d3,d2
-                blt.s   loc_8532
+                blt.s   S3SS_RequestLeftIfUnlocked
                 move.w  d3,d2
 
-loc_8532:
+S3SS_RequestLeftIfUnlocked:
                 tst.b   (Special_stage_turn_lock).w
-                bne.s   loc_8550
+                bne.s   S3SS_StoreVelocityAndCheckBumper
                 btst    #button_left,d1
-                beq.s   loc_8544
+                beq.s   S3SS_GiveRightTurnPriority
                 move.b  #4,(Special_stage_turning).w
 
-loc_8544:
+S3SS_GiveRightTurnPriority:
                 btst    #button_right,d1
-                beq.s   loc_8550
+                beq.s   S3SS_StoreVelocityAndCheckBumper
                 move.b  #-4,(Special_stage_turning).w
 
-loc_8550:
+S3SS_StoreVelocityAndCheckBumper:
                 move.w  d2,(Special_stage_velocity).w
                 tst.b   (Special_stage_bumper_lock).w
-                beq.s   loc_85D4
+                beq.s   S3SS_IntegrateGridAndHandleCell
                 move.w  (Special_stage_X_pos).w,d0
                 btst    #6,(Special_stage_angle).w
-                bne.s   loc_856A
+                bne.s   S3SS_UnlockBumperAtNewCell
                 move.w  (Special_stage_Y_pos).w,d0
 
-loc_856A:
+S3SS_UnlockBumperAtNewCell:
                 andi.w  #$E0,d0
-                bne.s   loc_85AE
+                bne.s   S3SS_UpdateLockedBumperMotion
                 move.w  (Special_stage_X_pos).w,d0
                 addi.w  #$80,d0
                 lsr.w   #8,d0
@@ -233,37 +233,38 @@ loc_856A:
                 lsl.w   #5,d1
                 or.b    d0,d1
                 cmp.w   (Special_stage_interact).w,d1
-                beq.s   loc_85AE
+                beq.s   S3SS_UpdateLockedBumperMotion
                 move.b  #0,(Special_stage_bumper_lock).w
                 move.w  (Special_stage_rate).w,d2
                 tst.w   (Special_stage_velocity).w
-                bmi.s   loc_85A8
+                bmi.s   S3SS_SetBumperExitRateAndReturn
                 neg.w   d2
 
-loc_85A8:
+S3SS_SetBumperExitRateAndReturn:
                 move.w  d2,(Special_stage_velocity).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_85AE:
+S3SS_UpdateLockedBumperMotion:
                 move.w  (Special_stage_velocity).w,d2
-                bne.s   loc_85D2
+                bne.s   S3SS_NegateBumperStepVelocity
                 move.b  #0,(Special_stage_bumper_lock).w
                 move.b  #1,(Special_stage_advancing).w
                 move.w  (Special_stage_rate).w,d2
                 tst.w   (Special_stage_velocity).w
-                bmi.s   loc_85CC
+                bmi.s   S3SS_RestartStationaryBumper
                 neg.w   d2
 
-loc_85CC:
+S3SS_RestartStationaryBumper:
                 move.w  d2,(Special_stage_velocity).w
-                bra.s   loc_85D4
+                bra.s   S3SS_IntegrateGridAndHandleCell
 ; ---------------------------------------------------------------------------
 
-loc_85D2:
+; Reverse the local integration velocity while keeping the stored rate
+S3SS_NegateBumperStepVelocity:
                 neg.w   d2
 
-loc_85D4:
+S3SS_IntegrateGridAndHandleCell:
                 move.b  (Special_stage_angle).w,d0
                 jsr     (GetSineCosine).l
                 muls.w  d2,d0
@@ -273,12 +274,12 @@ loc_85D4:
                 swap    d1
                 sub.w   d1,(Special_stage_Y_pos).w
                 tst.b   (Special_stage_jumping).w
-                bmi.s   locret_85FC
+                bmi.s   S3SS_GridMovementReturn
                 tst.b   (Special_stage_clear_routine).w
-                bne.s   locret_85FC
+                bne.s   S3SS_GridMovementReturn
                 bsr.s   SStage_HandlePlayerGridCell
 
-locret_85FC:
+S3SS_GridMovementReturn:
                 rts
 ; End of function SStage_UpdatePlayerGridMotion
 
@@ -298,49 +299,50 @@ SStage_HandlePlayerGridCell:
                 or.b    d0,d1
                 lea     (a1,d1.w),a1
                 move.b  (a1),d2
-                beq.w   locret_872E
+                beq.w   S3SS_GridContactReturn
                 cmpi.b  #1,d2
-                bne.s   loc_866E
+                bne.s   S3SS_TryQueueBlueSphereContact
                 move.w  (Special_stage_X_pos).w,d0
                 or.w    (Special_stage_Y_pos).w,d0
                 andi.w  #$E0,d0
-                bne.s   locret_866C
+                bne.s   S3SS_RedSphereContactReturn
                 tst.b   (Special_stage_fade_timer).w
-                bne.s   locret_866C
+                bne.s   S3SS_RedSphereContactReturn
                 move.b  #1,(Special_stage_fade_timer).w
                 move.b  #GameMode_SpecialStageResults,(Game_mode).w
                 tst.b   (Special_bonus_entry_flag).w
-                beq.s   loc_8664
+                beq.s   S3SS_PlayRedSphereExitSound
                 move.w  (Saved2_zone_and_act).w,(Current_zone_and_act).w
                 ori.b   #$80,(Last_star_post_hit).w
 
-loc_8664:
+S3SS_PlayRedSphereExitSound:
                 moveq   #signextendB(sfx_Goal),d0
                 jsr     (Play_SFX).l
 
-locret_866C:
+S3SS_RedSphereContactReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_866E:
+S3SS_TryQueueBlueSphereContact:
                 cmpi.b  #2,d2
-                bne.s   loc_868C
+                bne.s   S3SS_LatchBumperCellIfUnlocked
                 bsr.w   Find_SStageCollisionResponseSlot
-                bne.s   loc_8682
+                bne.s   S3SS_PlayBlueSphereSound
                 move.b  #2,(a2)
                 move.l  a1,4(a2)
 
-loc_8682:
+; The sound still plays if the contact queue is full
+S3SS_PlayBlueSphereSound:
                 moveq   #signextendB(sfx_BlueSphere),d0
                 jsr     (Play_SFX).l
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_868C:
+S3SS_LatchBumperCellIfUnlocked:
                 cmpi.b  #3,d2
-                bne.s   loc_86B2
+                bne.s   S3SS_TryQueueRingResponse
                 tst.b   (Special_stage_bumper_lock).w
-                bne.s   loc_86B2
+                bne.s   S3SS_TryQueueRingResponse
                 move.w  d1,(Special_stage_interact).w
                 move.b  #1,(Special_stage_bumper_lock).w
                 move.b  #0,(Special_stage_advancing).w
@@ -349,52 +351,53 @@ loc_868C:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_86B2:
+S3SS_TryQueueRingResponse:
                 cmpi.b  #4,d2
-                bne.s   locret_872E
+                bne.s   S3SS_GridContactReturn
                 bsr.w   Find_SStageCollisionResponseSlot
-                bne.s   loc_86C6
+                bne.s   S3SS_TickRemainingRings
                 move.b  #1,(a2)
                 move.l  a1,4(a2)
 
-loc_86C6:
+; Decrement the perfect counter even when no response slot was available
+S3SS_TickRemainingRings:
                 subq.w  #1,(Special_stage_rings_left).w
-                bne.s   loc_86D4
+                bne.s   S3SS_AddRingAndCheck50RingContinue
                 moveq   #signextendB(sfx_Perfect),d0
                 jsr     (Play_Music).l
 
-loc_86D4:
+S3SS_AddRingAndCheck50RingContinue:
                 addi.w  #1,(Special_stage_ring_count).w
                 bset    #7,(Special_stage_extra_life_flags).w
                 cmpi.w  #50,(Special_stage_ring_count).w
-                blo.s   loc_86FE
+                blo.s   S3SS_Check100And200RingLifeLatches
                 bset    #0,(Special_stage_extra_life_flags).w
-                bne.s   loc_86FE
+                bne.s   S3SS_Check100And200RingLifeLatches
                 addq.b  #1,(Continue_count).w
                 move.w  #signextendB(sfx_Continue),d0
                 jmp     (Play_Music).l
 ; ---------------------------------------------------------------------------
 
-loc_86FE:
+S3SS_Check100And200RingLifeLatches:
                 moveq   #signextendB(sfx_RingRight),d0
                 cmpi.w  #100,(Special_stage_ring_count).w
-                blo.s   loc_8726
+                blo.s   S3SStage_PlayRingOrLifeSoundAndReturn
                 bset    #1,(Special_stage_extra_life_flags).w
-                beq.s   loc_8720
+                beq.s   S3SS_AddLifeAndSelectSound
                 cmpi.w  #200,(Special_stage_ring_count).w
-                blo.s   loc_8726
+                blo.s   S3SStage_PlayRingOrLifeSoundAndReturn
                 bset    #2,(Special_stage_extra_life_flags).w
-                bne.s   loc_8726
+                bne.s   S3SStage_PlayRingOrLifeSoundAndReturn
 
-loc_8720:
+S3SS_AddLifeAndSelectSound:
                 addq.b  #1,(Life_count).w
                 moveq   #signextendB(sfx_RingLoss),d0
 
-loc_8726:
+S3SStage_PlayRingOrLifeSoundAndReturn:
                 jsr     (Play_SFX).l
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_872E:
+S3SS_GridContactReturn:
                 rts
 ; End of function SStage_HandlePlayerGridCell

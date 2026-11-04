@@ -6,18 +6,18 @@ Draw_SSNum:
                 moveq   #3-1,d6
                 lea     MapUnc_SSNum(pc),a1
 
-loc_7BE2:
+S3SS_BeginNextDecimalDigit:
                 moveq   #0,d2
                 move.w  (a2)+,d3
 
-loc_7BE6:
+S3SS_CountDigitUntilBorrow:
                 sub.w   d3,d1
-                bcs.s   loc_7BEE
+                bcs.s   S3SS_RestoreRemainderAndDrawDigit
                 addq.w  #1,d2
-                bra.s   loc_7BE6
+                bra.s   S3SS_CountDigitUntilBorrow
 ; ---------------------------------------------------------------------------
 
-loc_7BEE:
+S3SS_RestoreRemainderAndDrawDigit:
                 add.w   d3,d1
                 move.l  d0,VDP_control_port-VDP_data_port(a6)
                 add.w   d2,d2
@@ -31,7 +31,7 @@ loc_7BEE:
                 move.l  d0,VDP_control_port-VDP_data_port(a6)
                 move.l  $50(a3),(a6)
                 subi.l  #$FC<<16,d0
-                dbf     d6,loc_7BE2
+                dbf     d6,S3SS_BeginNextDecimalDigit
                 rts
 ; End of function Draw_SSNum
 

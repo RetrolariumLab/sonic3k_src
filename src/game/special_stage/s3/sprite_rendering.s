@@ -3,7 +3,7 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 
 ; ---------------------------------------------------------------------------
-word_8730:
+S3SS_QuarterTurnGridScanTable:
                 dc.w    $18
                 dc.w    6
                 dc.w    1
@@ -43,7 +43,7 @@ Draw_SSSprites:
                 move.b  (Special_stage_angle).w,d0
                 andi.w  #$C0,d0
                 lsr.w   #2,d0
-                lea     word_8730(pc,d0.w),a5
+                lea     S3SS_QuarterTurnGridScanTable(pc,d0.w),a5
                 moveq   #0,d1
                 move.b  (Special_stage_X_pos).w,d1
                 move.w  (Special_stage_X_pos).w,d0
@@ -52,44 +52,45 @@ Draw_SSSprites:
                 andi.w  #$100,d2
                 add.w   d2,d0
                 btst    #6,(Special_stage_angle).w
-                bne.s   loc_87B0
+                bne.s   S3SS_FoldProjectionPhase
                 move.b  (Special_stage_Y_pos).w,d1
                 move.w  (Special_stage_Y_pos).w,d0
                 move.w  (Special_stage_X_pos).w,d2
                 andi.w  #$100,d2
                 add.w   d2,d0
 
-loc_87B0:
+S3SS_FoldProjectionPhase:
                 tst.b   (Special_stage_angle).w
-                bmi.s   loc_87C6
+                bmi.s   S3SS_StorePhaseAndSetTurningGlobe
                 neg.w   d0
                 addi.w  #$1F,d0
                 move.w  d0,d2
                 andi.w  #$E0,d2
-                beq.s   loc_87C6
+                beq.s   S3SS_StorePhaseAndSetTurningGlobe
                 addq.b  #1,d1
 
-loc_87C6:
+; The turn overrides the globe frame and leaves the straight palette phase in place
+S3SS_StorePhaseAndSetTurningGlobe:
                 andi.w  #$1E0,d0
                 lsr.w   #5,d0
                 move.w  d0,(Special_stage_anim_frame).w
                 move.b  d0,(Special_stage_palette_frame).w
                 move.b  (Special_stage_angle).w,d0
                 andi.w  #$38,d0
-                beq.s   loc_87E8
+                beq.s   S3SS_SelectNormalOrFlyawayEmitter
                 lsr.w   #3,d0
                 addi.w  #$F,d0
                 move.w  d0,(Special_stage_anim_frame).w
 
-loc_87E8:
+S3SS_SelectNormalOrFlyawayEmitter:
                 lea     (Draw_SSSprite_Normal).l,a0
                 tst.w   (Special_stage_clear_timer).w
-                beq.s   loc_87FA
+                beq.s   S3SS_InitRowScanAndSpriteBudget
                 lea     (Draw_SSSprite_FlyAway).l,a0
 
-loc_87FA:
+S3SS_InitRowScanAndSpriteBudget:
                 btst    #6,(Special_stage_angle).w
-                bne.w   loc_88BC
+                bne.w   S3SS_InitColumnScanAndBudget
                 move.w  2(a5),d5
                 add.w   d1,d5
                 and.w   $A(a5),d5
@@ -109,7 +110,7 @@ loc_87FA:
                 adda.w  d6,a6
                 moveq   #$10-1,d2
 
-loc_883C:
+S3SS_BeginXInnerRow:
                 move.w  (a5),d4
                 moveq   #0,d0
                 move.b  (Special_stage_X_pos).w,d0
@@ -117,58 +118,58 @@ loc_883C:
                 and.w   6(a5),d4
                 moveq   #$F-1,d3
 
-loc_884C:
+S3SS_FilterRowCellAndDistance:
                 move.w  d5,d0
                 lsl.w   #5,d0
                 or.b    d4,d0
                 move.b  (a2,d0.w),d0
-                beq.s   loc_88A0
+                beq.s   S3SS_StepRowPerspectiveAndGrid
                 move.w  (a1),d1
                 andi.w  #$7C,d1
-                beq.s   loc_88A0
+                beq.s   S3SS_StepRowPerspectiveAndGrid
                 lsr.w   #2,d1
                 subq.w  #6,d1
                 cmpi.w  #$10,d1
-                bhs.s   loc_88A0
+                bhs.s   S3SS_StepRowPerspectiveAndGrid
                 add.w   d1,d1
                 andi.w  #$FF,d0
                 lsl.w   #3,d0
                 movea.l (a4,d0.w),a3
                 move.w  4(a4,d0.w),d6
                 cmpi.w  #$54,(a1)
-                blo.s   loc_8884
+                blo.s   S3SS_ApplyRowFrameControl
                 andi.w  #$7FFF,d6
 
-loc_8884:
+S3SS_ApplyRowFrameControl:
                 move.w  6(a4,d0.w),d0
                 add.w   d0,d0
-                bcc.s   loc_888E
+                bcc.s   S3SS_EmitRowMapBeforeBudgetCheck
                 moveq   #0,d1
 
-loc_888E:
+S3SS_EmitRowMapBeforeBudgetCheck:
                 add.w   d0,d1
                 adda.w  (a3,d1.w),a3
                 move.w  (a3)+,d1
                 subq.w  #1,d1
-                bmi.s   loc_88A0
+                bmi.s   S3SS_StepRowPerspectiveAndGrid
                 jsr     (a0)
                 tst.w   d7
-                bmi.s   locret_88BA
+                bmi.s   S3SS_RowScanReturn
 
-loc_88A0:
+S3SS_StepRowPerspectiveAndGrid:
                 addq.w  #6,a1
                 add.w   4(a5),d4
                 and.w   6(a5),d4
-                dbf     d3,loc_884C
+                dbf     d3,S3SS_FilterRowCellAndDistance
                 add.w   8(a5),d5
                 and.w   $A(a5),d5
-                dbf     d2,loc_883C
+                dbf     d2,S3SS_BeginXInnerRow
 
-locret_88BA:
+S3SS_RowScanReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88BC:
+S3SS_InitColumnScanAndBudget:
                 move.w  2(a5),d5
                 add.w   d1,d5
                 and.w   $A(a5),d5
@@ -188,7 +189,7 @@ loc_88BC:
                 adda.w  d6,a6
                 moveq   #$10-1,d2
 
-loc_88F4:
+S3SS_BeginYInnerColumn:
                 move.w  (a5),d4
                 moveq   #0,d0
                 move.b  (Special_stage_Y_pos).w,d0
@@ -196,54 +197,55 @@ loc_88F4:
                 and.w   6(a5),d4
                 moveq   #$F-1,d3
 
-loc_8904:
+S3SS_FilterColumnCellAndDistance:
                 move.w  d4,d0
                 lsl.w   #5,d0
                 or.b    d5,d0
                 move.b  (a2,d0.w),d0
-                beq.s   loc_8958
+                beq.s   S3SS_StepColumnPerspectiveAndGrid
                 move.w  (a1),d1
                 andi.w  #$7C,d1
-                beq.s   loc_8958
+                beq.s   S3SS_StepColumnPerspectiveAndGrid
                 lsr.w   #2,d1
                 subq.w  #6,d1
                 cmpi.w  #$10,d1
-                bhs.s   loc_8958
+                bhs.s   S3SS_StepColumnPerspectiveAndGrid
                 add.w   d1,d1
                 andi.w  #$FF,d0
                 lsl.w   #3,d0
                 movea.l (a4,d0.w),a3
                 move.w  4(a4,d0.w),d6
                 cmpi.w  #$54,(a1)
-                blo.s   loc_893C
+                blo.s   S3SS_ApplyColumnFrameControl
                 andi.w  #$7FFF,d6
 
-loc_893C:
+S3SS_ApplyColumnFrameControl:
                 move.w  6(a4,d0.w),d0
                 add.w   d0,d0
-                bcc.s   loc_8946
+                bcc.s   S3SS_EmitColumnMapBeforeBudgetCheck
                 moveq   #0,d1
 
-loc_8946:
+S3SS_EmitColumnMapBeforeBudgetCheck:
                 add.w   d0,d1
                 adda.w  (a3,d1.w),a3
                 move.w  (a3)+,d1
                 subq.w  #1,d1
-                bmi.s   loc_8958
+                bmi.s   S3SS_StepColumnPerspectiveAndGrid
                 jsr     (a0)
                 tst.w   d7
-                bmi.s   locret_8972
+                bmi.s   S3SS_ColumnScanReturn
 
-loc_8958:
+S3SS_StepColumnPerspectiveAndGrid:
                 addq.w  #6,a1
                 add.w   4(a5),d4
                 and.w   6(a5),d4
-                dbf     d3,loc_8904
+                dbf     d3,S3SS_FilterColumnCellAndDistance
                 add.w   8(a5),d5
                 and.w   $A(a5),d5
-                dbf     d2,loc_88F4
+                dbf     d2,S3SS_BeginYInnerColumn
 
-locret_8972:
+; Leave the published sprite count unchanged at this return
+S3SS_ColumnScanReturn:
                 rts
 ; End of function Draw_SSSprites
 
@@ -288,10 +290,10 @@ Draw_SSSprite_FlyAway:
                 asr.l   #8,d0
                 addi.w  #$120,d0
                 cmpi.w  #$1D0,d0
-                blo.s   loc_89D6
+                blo.s   S3SS_StoreFlyawayPieceX
                 move.w  #1,d0
 
-loc_89D6:
+S3SS_StoreFlyawayPieceX:
                 move.w  (sp)+,d1
                 move.w  d0,(a6)+
                 subq.w  #1,d7
@@ -302,37 +304,37 @@ loc_89D6:
 
 SStage_UpdateClearSequence:
                 move.b  (Special_stage_clear_routine).w,d1
-                beq.w   locret_8B58
+                beq.w   S3SS_ClearUpdateReturn
                 subq.b  #1,d1
-                bne.w   loc_8AB6
+                bne.w   S3SS_WaitForArtAndTickReveal
                 cmpi.w  #$100,(Special_stage_clear_timer).w
-                bhs.s   loc_8A26
+                bhs.s   S3SS_AdvanceClearAndPrepEmerald
                 addq.w  #2,(Special_stage_clear_timer).w
                 cmpi.w  #2,(Special_stage_clear_timer).w
-                bne.s   loc_8A0C
+                bne.s   S3SS_AccelerateFlyawayTimer
                 moveq   #signextendB(sfx_AllSpheres),d0
                 jsr     (Play_Music).l
 
-loc_8A0C:
+S3SS_AccelerateFlyawayTimer:
                 cmpi.w  #$40,(Special_stage_clear_timer).w
-                blo.s   locret_8A24
+                blo.s   S3SS_FlyawayTimerReturn
                 addq.w  #1,(Special_stage_clear_timer).w
                 cmpi.w  #$80,(Special_stage_clear_timer).w
-                blo.s   locret_8A24
+                blo.s   S3SS_FlyawayTimerReturn
                 addq.w  #1,(Special_stage_clear_timer).w
 
-locret_8A24:
+S3SS_FlyawayTimerReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A26:
+S3SS_AdvanceClearAndPrepEmerald:
                 addq.b  #1,(Special_stage_clear_routine).w
                 lea     (Level_layout_header).w,a1
                 move.w  #bytesToLcnt($400),d0
 
-loc_8A32:
+S3SS_WipeGridBeforeEmerald:
                 move.l  #0,(a1)+
-                dbf     d0,loc_8A32
+                dbf     d0,S3SS_WipeGridBeforeEmerald
                 move.b  (Special_stage_angle).w,d0
                 jsr     (GetSineCosine).l
                 move.w  (Special_stage_X_pos).w,d2
@@ -369,25 +371,25 @@ loc_8A32:
                 jmp     (Queue_Kos_Module).l
 ; ---------------------------------------------------------------------------
 
-loc_8AB6:
+S3SS_WaitForArtAndTickReveal:
                 subq.b  #1,d1
-                bne.s   loc_8ADA
+                bne.s   S3SS_CheckAlignedEmeraldContact
                 tst.b   (Kos_modules_left).w
-                bne.s   locret_8AD8
+                bne.s   S3SS_EmeraldRevealWaitReturn
                 move.w  #0,(Special_stage_clear_timer).w
                 subq.b  #1,(Special_stage_emerald_timer).w
-                bne.s   locret_8AD8
+                bne.s   S3SS_EmeraldRevealWaitReturn
                 addq.b  #1,(Special_stage_clear_routine).w
                 moveq   #signextendB(mus_Emerald),d0
                 jsr     (Play_Music).l
 
-locret_8AD8:
+S3SS_EmeraldRevealWaitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8ADA:
+S3SS_CheckAlignedEmeraldContact:
                 subq.b  #1,d1
-                bne.s   locret_8B58
+                bne.s   S3SS_ClearUpdateReturn
                 move.w  (Special_stage_X_pos).w,d0
                 addi.w  #$80,d0
                 lsr.w   #8,d0
@@ -399,32 +401,32 @@ loc_8ADA:
                 lsl.w   #5,d1
                 or.b    d0,d1
                 cmp.w   (Special_stage_interact).w,d1
-                bne.s   locret_8B58
+                bne.s   S3SS_ClearUpdateReturn
                 move.w  (Special_stage_X_pos).w,d0
                 or.w    (Special_stage_Y_pos).w,d0
                 andi.w  #$E0,d0
-                bne.s   locret_8B58
+                bne.s   S3SS_ClearUpdateReturn
                 cmpi.w  #7,(Chaos_emerald_count).w
-                bhs.s   loc_8B2E
+                bhs.s   S3SS_StartClearFadeAndResults
                 addq.w  #1,(Chaos_emerald_count).w
                 lea     (Collected_emeralds_array).w,a1
                 moveq   #0,d0
                 move.b  (Current_special_stage).w,d0
                 move.b  #1,(a1,d0.w)
 
-loc_8B2E:
+S3SS_StartClearFadeAndResults:
                 addq.b  #1,(Special_stage_clear_routine).w
                 move.b  #1,(Special_stage_fade_timer).w
                 move.b  #GameMode_SpecialStageResults,(Game_mode).w
                 tst.b   (Special_bonus_entry_flag).w
-                beq.s   loc_8B50
+                beq.s   S3SS_PlayClearGoalSound
                 move.w  (Saved2_zone_and_act).w,(Current_zone_and_act).w
                 ori.b   #$80,(Last_star_post_hit).w
 
-loc_8B50:
+S3SS_PlayClearGoalSound:
                 moveq   #signextendB(sfx_Goal),d0
                 jsr     (Play_SFX).l
 
-locret_8B58:
+S3SS_ClearUpdateReturn:
                 rts
 ; End of function SStage_UpdateClearSequence

@@ -28,9 +28,9 @@ SpecialStage:
                 lea     (Target_palette).w,a2
                 move.w  #bytesToWcnt(Target_palette_end-Target_palette),d0
 
-loc_7546:
+S3SS_CopyTargetPaletteAndPrepStage:
                 move.w  (a1)+,(a2)+
-                dbf     d0,loc_7546
+                dbf     d0,S3SS_CopyTargetPaletteAndPrepStage
                 move.l  #vdpComm(tiles_to_bytes($000),VRAM,WRITE),(VDP_control_port).l
                 lea     (ArtNem_SStageLayout).l,a0
                 bsr.w   Nem_Decomp
@@ -87,29 +87,29 @@ loc_7546:
                 jsr     (Plane_Map_To_VRAM).l
                 lea     (SStageLayoutPtrs).l,a2
                 tst.b   (Debug_cheat_flag).w
-                beq.s   loc_7692
+                beq.s   S3SS_ChooseStageOrBypassSearch
                 move.w  (Sound_test_sound).w,d0
                 btst    #button_A,(Ctrl_1_held).w
-                bne.s   loc_76B6
+                bne.s   S3SS_MaskStageIndexAndPrepCopy
 
-loc_7692:
+S3SS_ChooseStageOrBypassSearch:
                 moveq   #0,d0
                 move.b  (Current_special_stage).w,d0
                 cmpi.w  #7,(Chaos_emerald_count).w
-                bcc.s   loc_76B6
+                bcc.s   S3SS_MaskStageIndexAndPrepCopy
                 lea     (Collected_emeralds_array).w,a1
 
-loc_76A4:
+S3SS_FindUncollectedStage:
                 tst.b   (a1,d0.w)
-                beq.s   loc_76B6
+                beq.s   S3SS_MaskStageIndexAndPrepCopy
                 addq.w  #1,d0
                 cmpi.w  #7,d0
-                bcs.s   loc_76A4
+                bcs.s   S3SS_FindUncollectedStage
                 moveq   #0,d0
-                bra.s   loc_76A4
+                bra.s   S3SS_FindUncollectedStage
 ; ---------------------------------------------------------------------------
 
-loc_76B6:
+S3SS_MaskStageIndexAndPrepCopy:
                 andi.w  #7,d0
                 move.b  d0,(Current_special_stage).w
                 move.w  d0,d1
@@ -118,9 +118,9 @@ loc_76B6:
                 lea     (Level_layout_header).w,a3
                 move.w  #bytesToLcnt($400),d0
 
-loc_76CE:
+S3SS_CopyLayoutAndSeedActors:
                 move.l  (a2)+,(a3)+
-                dbf     d0,loc_76CE
+                dbf     d0,S3SS_CopyLayoutAndSeedActors
                 move.w  (a2)+,(Special_stage_angle).w
                 move.w  (a2)+,(Special_stage_X_pos).w
                 move.w  (a2)+,(Special_stage_Y_pos).w
@@ -146,16 +146,16 @@ loc_76CE:
                 move.w  #0,(Camera_X_pos_copy).w
                 move.w  #0,(Camera_Y_pos_copy).w
                 move.w  #-1,(Screen_Y_wrap_value).w
-                move.l  #Obj_SStage_7F1C,(Player_1).w
-                move.l  #Obj_SStage_8380,(Dynamic_object_RAM+object_size).w
+                move.l  #SStagePlayer_InitializePrimaryCharacter,(Player_1).w
+                move.l  #S3SS_InitPrimaryShadowPosition,(Dynamic_object_RAM+object_size).w
                 tst.w   (Player_option).w
-                bne.s   loc_7770
-                move.l  #Obj_SStage_8148,(Player_2).w
-                move.l  #Obj_SStage_83E4,(Dynamic_object_RAM+(object_size*2)).w
+                bne.s   S3SS_InitInstructionsAndDisplay
+                move.l  #SStageTails_InitializeFollower,(Player_2).w
+                move.l  #S3SS_InitFollowerShadowPosition,(Dynamic_object_RAM+(object_size*2)).w
 
-loc_7770:
-                move.l  #Obj_SStage_7D70,(Reserved_object_3).w
-                move.l  #Obj_SStage_7DB8,(Dynamic_object_RAM).w
+S3SS_InitInstructionsAndDisplay:
+                move.l  #SStageIcons_Initialize,(Reserved_object_3).w
+                move.l  #SStageCue_InitializePair,(Dynamic_object_RAM).w
                 jsr     (Process_Sprites).l
                 bsr.w   Animate_SSRings
                 bsr.w   Touch_SSSprites
@@ -174,7 +174,7 @@ loc_7770:
                 move.w  d0,(VDP_control_port).l
                 bsr.w   Pal_FadeFromWhite
 
-loc_77D2:
+S3SS_RunActiveStageUntilModeChanges:
                 bsr.w   Pause_Game
                 move.b  #VInt_ID_1C,(V_int_routine).w
                 jsr     (Process_Kos_Queue).l
@@ -190,17 +190,17 @@ loc_77D2:
                 bsr.w   Process_Nem_Queue_Init
                 jsr     (Process_Kos_Module_Queue).l
                 cmpi.b  #GameMode_SpecialStage3,(Game_mode).w
-                beq.s   loc_77D2
+                beq.s   S3SS_RunActiveStageUntilModeChanges
                 tst.w   (Demo_mode_flag).w
-                beq.s   loc_7828
+                beq.s   S3SS_Start60VBlankOutro
                 move.b  #GameMode_SegaScreen,(Game_mode).w
 
-loc_7828:
+S3SS_Start60VBlankOutro:
                 move.w  #60,(Demo_timer).w
                 move.w  #$40-1,(Palette_fade_info).w
                 clr.w   (Pal_fade_delay).w
 
-loc_7838:
+S3SS_SimulateOutroAndFadeWhite:
                 move.b  #VInt_ID_1C,(V_int_routine).w
                 bsr.w   Wait_VSync
                 jsr     (Process_Sprites).l
@@ -213,36 +213,36 @@ loc_7838:
                 bsr.w   Process_Nem_Queue_Init
                 jsr     (Process_Kos_Module_Queue).l
                 subq.w  #1,(Pal_fade_delay).w
-                bpl.s   loc_787C
+                bpl.s   S3SS_FinishOutroAndAdvanceStage
                 move.w  #2,(Pal_fade_delay).w
                 bsr.w   Pal_ToWhite
 
-loc_787C:
+S3SS_FinishOutroAndAdvanceStage:
                 tst.w   (Demo_timer).w
-                bne.s   loc_7838
+                bne.s   S3SS_SimulateOutroAndFadeWhite
                 addq.b  #1,(Current_special_stage).w
                 cmpi.b  #7,(Current_special_stage).w
-                bcs.s   locret_7894
+                bcs.s   S3SStage_ReturnAfterSpecialStageOutro
                 move.b  #0,(Current_special_stage).w
 
-locret_7894:
+S3SStage_ReturnAfterSpecialStageOutro:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
 Rotate_SSPal:
                 tst.b   (Special_stage_fade_timer).w
-                bne.s   locret_78DA
+                bne.s   S3SS_PaletteRotationReturn
                 lea     (SS_Pal_Map_Ptrs).l,a1
                 move.w  (Special_stage_anim_frame).w,d0
                 cmpi.w  #$10,d0
-                blo.s   loc_78BA
+                blo.s   S3SS_SelectPalettePhaseWindow
                 tst.b   (Special_stage_turning).w
-                bpl.s   locret_78DA
+                bpl.s   S3SS_PaletteRotationReturn
                 move.b  (Special_stage_palette_frame).w,d0
                 andi.w  #$F,d0
 
-loc_78BA:
+S3SS_SelectPalettePhaseWindow:
                 andi.w  #$E,d0
                 neg.w   d0
                 addi.w  #$10,d0
@@ -251,11 +251,11 @@ loc_78BA:
                 lea     (Normal_palette_line_4+$10).w,a2
                 move.w  #bytesToWcnt($10),d0
 
-loc_78D4:
+S3SS_CopyRotatingPaletteSlice:
                 move.w  (a1)+,(a2)+
-                dbf     d0,loc_78D4
+                dbf     d0,S3SS_CopyRotatingPaletteSlice
 
-locret_78DA:
+S3SS_PaletteRotationReturn:
                 rts
 ; End of function Rotate_SSPal
 
@@ -266,7 +266,7 @@ Update_SSMap:
                 lea     (SS_Pal_Map_Ptrs).l,a1
                 move.w  (Special_stage_anim_frame).w,d0
                 cmp.b   (Special_stage_prev_anim_frame).w,d0
-                beq.s   loc_7938
+                beq.s   S3SS_ConsumeSphereHUDDirtyFlag
                 move.b  d0,(Special_stage_prev_anim_frame).w
                 lsl.w   #3,d0
                 movea.l (a1,d0.w),a3
@@ -274,41 +274,41 @@ Update_SSMap:
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table+$19E,VRAM,WRITE),(VDP_control_port).l  ; VRAM write $C19E
                 moveq   #$A-1,d1
 
-loc_790C:
+S3SS_WriteGlobeSeam:
                 move.w  (a1)+,(a6)
-                dbf     d1,loc_790C
+                dbf     d1,S3SS_WriteGlobeSeam
                 lea     $140(a3),a3
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table+$200,VRAM,WRITE),d0  ; VRAM write $C200
                 moveq   #$28-1,d1
                 moveq   #$18-1,d2
                 move.l  #$80<<16,d4
 
-loc_7926:
+S3SS_SelectNextGlobeRow:
                 move.l  d0,VDP_control_port-VDP_data_port(a6)
                 move.w  d1,d3
 
-loc_792C:
+S3SS_WriteGlobeRowAndAdvance:
                 move.w  (a3)+,(a6)
-                dbf     d3,loc_792C
+                dbf     d3,S3SS_WriteGlobeRowAndAdvance
                 add.l   d4,d0
-                dbf     d2,loc_7926
+                dbf     d2,S3SS_SelectNextGlobeRow
 
-loc_7938:
+S3SS_ConsumeSphereHUDDirtyFlag:
                 tst.b   (Special_stage_sphere_HUD_flag).w
-                beq.s   loc_7952
+                beq.s   S3SS_ConsumeRingHUDDirtyBit
                 move.b  #0,(Special_stage_sphere_HUD_flag).w
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table+$086,VRAM,WRITE),d0  ; VRAM write $C086
                 move.w  (Special_stage_spheres_left).w,d1
                 bsr.w   Draw_SSNum
 
-loc_7952:
+S3SS_ConsumeRingHUDDirtyBit:
                 tst.b   (Special_stage_extra_life_flags).w
-                bpl.s   locret_796C
+                bpl.s   S3SS_DisplayUpdateReturn
                 bclr    #7,(Special_stage_extra_life_flags).w
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table+$0BE,VRAM,WRITE),d0  ; VRAM write $C0BE
                 move.w  (Special_stage_ring_count).w,d1
                 bsr.w   Draw_SSNum
 
-locret_796C:
+S3SS_DisplayUpdateReturn:
                 rts
 ; End of function Update_SSMap

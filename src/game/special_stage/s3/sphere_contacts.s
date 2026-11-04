@@ -13,16 +13,16 @@ SStage_UpdateBackgroundScroll:
                 move.w  (Special_stage_X_pos).w,d0
                 sub.w   (Special_stage_prev_X_pos).w,d0
                 btst    #6,(Special_stage_angle).w
-                bne.s   loc_8BB2
+                bne.s   S3SS_SelectSignedBGScrollDelta
                 move.w  (Special_stage_Y_pos).w,d0
                 sub.w   (Special_stage_prev_Y_pos).w,d0
 
-loc_8BB2:
+S3SS_SelectSignedBGScrollDelta:
                 tst.b   (Special_stage_angle).w
-                bmi.s   loc_8BBA
+                bmi.s   S3SS_ApplyBGScrollAndCacheGridPos
                 neg.w   d0
 
-loc_8BBA:
+S3SS_ApplyBGScrollAndCacheGridPos:
                 asr.w   #2,d0
                 add.w   d0,(V_scroll_value_BG).w
                 moveq   #0,d1
@@ -39,14 +39,14 @@ loc_8BBA:
 Animate_SSRings:
                 lea     (SStage_extra_sprites+$07).w,a1
                 subq.b  #1,(Rings_frame_timer).w
-                bpl.s   loc_8BFE
+                bpl.s   S3SS_StoreRingFrameBase
                 move.b  #7,(Rings_frame_timer).w
                 addi.b  #$10,(Rings_frame).w
                 cmpi.b  #$30,(Rings_frame).w
-                blo.s   loc_8BFE
+                blo.s   S3SS_StoreRingFrameBase
                 move.b  #0,(Rings_frame).w
 
-loc_8BFE:
+S3SS_StoreRingFrameBase:
                 move.b  (Rings_frame).w,anim(a1)
                 rts
 ; End of function Animate_SSRings
@@ -57,13 +57,14 @@ Find_SStageCollisionResponseSlot:
                 lea     (SStage_collision_response_list).w,a2
                 move.w  #bytesToXcnt(SStage_blue_sphere_to_ring_queue-SStage_collision_response_list,8),d0
 
-loc_8C0E:
+S3SS_FindFreeResponseSlot:
                 tst.b   (a2)
-                beq.s   locret_8C18
+                beq.s   S3SS_FreeResponseSearchReturn
                 addq.w  #8,a2
-                dbf     d0,loc_8C0E
+                dbf     d0,S3SS_FindFreeResponseSlot
 
-locret_8C18:
+; Z indicates that the scan found an empty record
+S3SS_FreeResponseSearchReturn:
                 rts
 ; End of function Find_SStageCollisionResponseSlot
 
@@ -73,82 +74,82 @@ Touch_SSSprites:
                 lea     (SStage_collision_response_list).w,a0
                 move.w  #bytesToXcnt(SStage_blue_sphere_to_ring_queue-SStage_collision_response_list,8),d7
 
-loc_8C22:
+S3SS_DispatchOccupiedResponse:
                 moveq   #0,d0
                 move.b  (a0),d0
-                beq.s   loc_8C30
+                beq.s   S3SS_AdvanceResponseScan
                 lsl.w   #2,d0
-                movea.l off_8C38-4(pc,d0.w),a1
+                movea.l S3SS_ResponseHandlerPointers-4(pc,d0.w),a1
                 jsr     (a1)
 
-loc_8C30:
+S3SS_AdvanceResponseScan:
                 addq.w  #8,a0
-                dbf     d7,loc_8C22
+                dbf     d7,S3SS_DispatchOccupiedResponse
                 rts
 ; End of function Touch_SSSprites
 
 ; ---------------------------------------------------------------------------
-off_8C38:
+S3SS_ResponseHandlerPointers:
                 dc.l    Touch_SSSprites_Ring
                 dc.l    Touch_SSSprites_BlueSphere
 ; ---------------------------------------------------------------------------
 
 Touch_SSSprites_Ring:
                 subq.b  #1,2(a0)
-                bpl.s   locret_8C68
+                bpl.s   S3SS_RingResponseReturn
                 move.b  #5,2(a0)
                 moveq   #0,d0
                 move.b  3(a0),d0
                 addq.b  #1,3(a0)
                 movea.l 4(a0),a1
-                move.b  byte_8C6A(pc,d0.w),d0
+                move.b  S3SS_RingResponseCellTypes(pc,d0.w),d0
                 move.b  d0,(a1)
-                bne.s   locret_8C68
+                bne.s   S3SS_RingResponseReturn
                 clr.l   (a0)
                 clr.l   4(a0)
 
-locret_8C68:
+S3SS_RingResponseReturn:
                 rts
 ; ---------------------------------------------------------------------------
-byte_8C6A:
+S3SS_RingResponseCellTypes:
                 dc.b    5,   6,   7,   8,   0
                 even
 ; ---------------------------------------------------------------------------
 
 Touch_SSSprites_BlueSphere:
                 subq.b  #1,2(a0)
-                bpl.s   locret_8CC2
+                bpl.s   S3SS_BlueResponseReturn
                 move.b  #9,2(a0)
                 movea.l 4(a0),a1
                 cmpi.b  #2,(a1)
-                bne.s   loc_8C9E
+                bne.s   S3SS_WaitForGridMoveBeforeRetire
                 bsr.w   Decrement_BlueSphere_Count
                 move.b  #9,(a1)
                 bsr.s   Sphere_To_Rings
-                beq.s   locret_8C9C
+                beq.s   S3SS_BlueEnclosureCheckReturn
                 move.b  #4,(a1)
                 clr.l   (a0)
                 clr.l   4(a0)
 
-locret_8C9C:
+S3SS_BlueEnclosureCheckReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C9E:
+S3SS_WaitForGridMoveBeforeRetire:
                 move.b  #0,2(a0)
                 move.w  (Special_stage_X_pos).w,d0
                 or.w    (Special_stage_Y_pos).w,d0
                 andi.w  #$E0,d0
-                beq.s   locret_8CC2
+                beq.s   S3SS_BlueResponseReturn
                 cmpi.b  #9,(a1)
-                bne.s   loc_8CBC
+                bne.s   S3SS_ClearEightByteResponse
                 move.b  #1,(a1)
 
-loc_8CBC:
+S3SS_ClearEightByteResponse:
                 clr.l   (a0)
                 clr.l   4(a0)
 
-locret_8CC2:
+S3SS_BlueResponseReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -157,10 +158,10 @@ Decrement_BlueSphere_Count:
                 move.w  d0,-(sp)
                 move.b  #-1,(Special_stage_sphere_HUD_flag).w  ; Set flag to update HUD
                 subq.w  #1,(Special_stage_spheres_left).w  ; Decrement Count
-                bne.s   loc_8CD8                        ; If Count is 0
+                bne.s   S3SS_RestoreWordAfterBlueHUDUpdate  ; If Count is 0
                 move.b  #1,(Special_stage_clear_routine).w  ; Set flag to clear special stage
 
-loc_8CD8:
+S3SS_RestoreWordAfterBlueHUDUpdate:
                 move.w  (sp)+,d0
                 rts
 ; End of function Decrement_BlueSphere_Count
@@ -172,13 +173,13 @@ SStage_CountInitialBlueSpheres:
                 moveq   #0,d1
                 move.w  #$400-1,d0
 
-loc_8CE6:
+S3SS_CountLiteralBlueCells:
                 cmpi.b  #2,(a3)+
-                bne.s   loc_8CEE
+                bne.s   S3SS_FinishInitialBlueCount
                 addq.w  #1,d1
 
-loc_8CEE:
-                dbf     d0,loc_8CE6
+S3SS_FinishInitialBlueCount:
+                dbf     d0,S3SS_CountLiteralBlueCells
                 move.w  d1,(Special_stage_spheres_left).w
                 rts
 ; End of function SStage_CountInitialBlueSpheres
@@ -216,7 +217,7 @@ Sphere_To_Rings:
                 move.l  a5,d1                           ; ring queue end (from Find_Red_Sphere_Loop)
                 lea     (SStage_blue_sphere_to_ring_queue).w,a4  ; ring queue start
                 sub.l   a4,d1                           ; remaining entries count = end - start
-                beq.s   locret_8D76                     ; if empty queue, return 0
+                beq.s   S3SS_EnclosureConversionReturn  ; if empty queue, return 0
 
 ; For each ring in the queue, find its blue sphere neighbors, then
 ; turn those blue spheres into rings, and add those positions
@@ -243,7 +244,7 @@ Blue_To_Ring_Continue_B:
                 move.l  a5,d1                           ; reset queue end
                 lea     (SStage_blue_sphere_to_ring_queue).w,a4  ; reset queue start
                 sub.l   a4,d1                           ; reset remaining entries count
-                beq.s   locret_8D76                     ; if empty queue (how?), return 0
+                beq.s   S3SS_EnclosureConversionReturn  ; if empty queue (how?), return 0
 
 ; For each ring in the queue, find its red sphere neighbors, then
 ; turn those red spheres into rings
@@ -267,7 +268,7 @@ Blue_To_Ring_Continue_R:
                 jsr     (Play_SFX).l
                 moveq   #1,d1                           ; Return 1
 
-locret_8D76:
+S3SS_EnclosureConversionReturn:
                 rts
 ; End of function Sphere_To_Rings
 
@@ -305,18 +306,18 @@ Red_Loop_Check_Neighbors:                               ; Loop[neighbors of touc
                 move.w  (a3)+,d1                        ; get next direction
                 add.w   d5,d1                           ; neighbor = touched + direction
                 cmpi.b  #9,(a2,d1.w)                    ; If neighbor is 9 (TOUCHED)
-                bne.s   loc_8D9A
+                bne.s   S3SS_CountBlueNeighbor
                 move.b  #1,(a2,d1.w)                    ; change to RedSphere
 
-loc_8D9A:
+S3SS_CountBlueNeighbor:
                 cmpi.b  #2,(a2,d1.w)                    ; If neighbor is Blue
-                bne.s   loc_8DA4
+                bne.s   S3SS_FinishNeighborsAndCheckSpans
                 addq.w  #1,d2                           ; increment count
 
-loc_8DA4:
+S3SS_FinishNeighborsAndCheckSpans:
                 dbf     d0,Red_Loop_Check_Neighbors     ; Loop[neighbors of touched]:end
                 tst.w   d2                              ; If there are no blue sphere neighbors
-                beq.w   locret_8E8A                     ; return
+                beq.w   S3SS_RedLoopSearchReturn        ; return
                 moveq   #0,d2                           ; Horizontal span length
                 move.w  d5,d1                           ; scanning index
 
@@ -335,7 +336,7 @@ Red_Loop_Count_Horizontal_Right:                        ; Loop[right until empty
                 bne.s   Red_Loop_Count_Horizontal_Right  ; break
         ; Loop[right until empty]:end
                 cmpi.w  #4,d2                           ; If horizontal span is less than 3 (< 4 because touched is double counted)
-                blo.w   locret_8E8A                     ; then return
+                blo.w   S3SS_RedLoopSearchReturn        ; then return
                 moveq   #0,d2                           ; Vertical span length
                 move.w  d5,d1                           ; scanning index
 
@@ -354,7 +355,7 @@ Red_Loop_Count_Vertically_Down:                         ; Loop[down until empty]
                 bne.s   Red_Loop_Count_Vertically_Down  ; break
         ; Loop[down until empty]:end
                 cmpi.w  #4,d2                           ; If vertical span is less than 3 (< 4 because touched is double counted)
-                blo.w   locret_8E8A                     ; then return
+                blo.w   S3SS_RedLoopSearchReturn        ; then return
                 lea     (SStage_red_sphere_dfs_walk_stack).w,a4
                 lea     (SStage_4_Directions).l,a3      ; Load Directions Pointer
                 moveq   #0,d6                           ; Walk Stack Size
@@ -425,7 +426,7 @@ Red_Loop_Pop_Stack:
                 move.b  -(a4),d4                        ; Pop direction index from walk stack
                 move.b  -(a4),d3                        ; Pop direction index lower bound from walk stack
                 subq.w  #1,d6                           ; Decrement walk stack size
-                bcs.s   locret_8E8A                     ; If walk stack was empty,
+                bcs.s   S3SS_RedLoopSearchReturn        ; If walk stack was empty,
         ; No more loops to find. Return
                 andi.b  #$7F,(a2,d0.w)                  ; Unmark current position as being processed
                 subq.w  #2,d4                           ; Decrement direction index
@@ -434,7 +435,7 @@ Red_Loop_Pop_Stack:
                 bra.s   Red_Loop_Pop_Stack              ; Else this position is done, pop the stack to get previous
 ; ---------------------------------------------------------------------------
 
-locret_8E8A:
+S3SS_RedLoopSearchReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -519,24 +520,24 @@ SStage_4_Directions:
 
 Load_SSSprite_Mappings:
                 lea     (SStage_extra_sprites).w,a1
-                lea     (MapPtr_8F1A).l,a0
-                moveq   #bytesToXcnt(MapPtr_8F1A_end-MapPtr_8F1A,8),d1
+                lea     (S3SS_CellRenderDescriptors).l,a0
+                moveq   #bytesToXcnt(S3SS_CellRenderDescriptorsEnd-S3SS_CellRenderDescriptors,8),d1
 
-loc_8F02:
+S3SS_CopyThirteenRenderDescriptors:
                 move.l  (a0)+,(a1)+
                 move.l  (a0)+,(a1)+
-                dbf     d1,loc_8F02
+                dbf     d1,S3SS_CopyThirteenRenderDescriptors
                 lea     (SStage_collision_response_list).w,a1
                 move.w  #bytesToLcnt(SStage_blue_sphere_to_ring_queue-SStage_collision_response_list),d1
 
-loc_8F12:
+S3SS_ClearContactResponseQueue:
                 clr.l   (a1)+
-                dbf     d1,loc_8F12
+                dbf     d1,S3SS_ClearContactResponseQueue
                 rts
 ; End of function Load_SSSprite_Mappings
 
 ; ---------------------------------------------------------------------------
-MapPtr_8F1A:
+S3SS_CellRenderDescriptors:
                 dc.l    Map_SStageSphere
                 dc.w    make_art_tile(ArtTile_SStage_Sphere,0,1), $0000
                 dc.l    Map_SStageSphere
@@ -563,7 +564,8 @@ MapPtr_8F1A:
                 dc.w    make_art_tile(ArtTile_SStage_Sphere,2,1), $0000
                 dc.l    Map_SStageSphere
                 dc.w    make_art_tile(ArtTile_SStage_Sphere,2,1), $0000
-MapPtr_8F1A_end:
+; A retained fragment of the perspective divide follows this boundary
+S3SS_CellRenderDescriptorsEnd:
 ; ---------------------------------------------------------------------------
 ; unused
                 ext.l   d1
@@ -694,6 +696,6 @@ Map_SStageChaosEmerald:
                 include "src/game/special_stage/shared/mappings/chaos_emerald.s"
 ; ---------------------------------------------------------------------------
 
-locret_952E:
+S3SS_NoOpVBlankReturn:
                 rts
 ; ---------------------------------------------------------------------------

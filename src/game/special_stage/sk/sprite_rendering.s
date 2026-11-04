@@ -3,7 +3,7 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 
 ; ---------------------------------------------------------------------------
-word_98B0:
+SKSS_QuarterTurnGridScanTable:
                 dc.w    $18
                 dc.w    6
                 dc.w    1
@@ -43,7 +43,7 @@ Draw_SSSprites:
                 move.b  (Special_stage_angle).w,d0
                 andi.w  #$C0,d0
                 lsr.w   #2,d0
-                lea     word_98B0(pc,d0.w),a5
+                lea     SKSS_QuarterTurnGridScanTable(pc,d0.w),a5
                 moveq   #0,d1
                 move.b  (Special_stage_X_pos).w,d1
                 move.w  (Special_stage_X_pos).w,d0
@@ -52,44 +52,44 @@ Draw_SSSprites:
                 andi.w  #$100,d2
                 add.w   d2,d0
                 btst    #6,(Special_stage_angle).w
-                bne.s   loc_9930
+                bne.s   SKSS_FoldProjectionPhase
                 move.b  (Special_stage_Y_pos).w,d1
                 move.w  (Special_stage_Y_pos).w,d0
                 move.w  (Special_stage_X_pos).w,d2
                 andi.w  #$100,d2
                 add.w   d2,d0
 
-loc_9930:
+SKSS_FoldProjectionPhase:
                 tst.b   (Special_stage_angle).w
-                bmi.s   loc_9946
+                bmi.s   SKSS_StorePhaseAndSetTurningView
                 neg.w   d0
                 addi.w  #$1F,d0
                 move.w  d0,d2
                 andi.w  #$E0,d2
-                beq.s   loc_9946
+                beq.s   SKSS_StorePhaseAndSetTurningView
                 addq.b  #1,d1
 
-loc_9946:
+SKSS_StorePhaseAndSetTurningView:
                 andi.w  #$1E0,d0
                 lsr.w   #5,d0
                 move.w  d0,(Special_stage_anim_frame).w
                 move.b  d0,(Special_stage_palette_frame).w
                 move.b  (Special_stage_angle).w,d0
                 andi.w  #$38,d0
-                beq.s   loc_9968
+                beq.s   SKSS_SelectNormalOrFlyawayEmitter
                 lsr.w   #3,d0
                 addi.w  #$F,d0
                 move.w  d0,(Special_stage_anim_frame).w
 
-loc_9968:
+SKSS_SelectNormalOrFlyawayEmitter:
                 lea     (Draw_SSSprite_Normal).l,a0
                 tst.w   (Special_stage_clear_timer).w
-                beq.s   loc_997A
+                beq.s   SKSS_InitRowScanAndSpriteBudget
                 lea     (Draw_SSSprite_FlyAway).l,a0
 
-loc_997A:
+SKSS_InitRowScanAndSpriteBudget:
                 btst    #6,(Special_stage_angle).w
-                bne.w   loc_9A3C
+                bne.w   SKSS_InitColumnScanAndBudget
                 move.w  2(a5),d5
                 add.w   d1,d5
                 and.w   $A(a5),d5
@@ -109,7 +109,7 @@ loc_997A:
                 adda.w  d6,a6
                 moveq   #$10-1,d2
 
-loc_99BC:
+SKSStage_BeginRowMajorGridColumnSequence:
                 move.w  (a5),d4
                 moveq   #0,d0
                 move.b  (Special_stage_X_pos).w,d0
@@ -117,58 +117,59 @@ loc_99BC:
                 and.w   6(a5),d4
                 moveq   #$F-1,d3
 
-loc_99CC:
+SKSS_FilterRowCellAndDistance:
                 move.w  d5,d0
                 lsl.w   #5,d0
                 or.b    d4,d0
                 move.b  (a2,d0.w),d0
-                beq.s   loc_9A20
+                beq.s   SKSS_StepRowPerspectiveAndGrid
                 move.w  (a1),d1
                 andi.w  #$7C,d1
-                beq.s   loc_9A20
+                beq.s   SKSS_StepRowPerspectiveAndGrid
                 lsr.w   #2,d1
                 subq.w  #6,d1
                 cmpi.w  #$10,d1
-                bhs.s   loc_9A20
+                bhs.s   SKSS_StepRowPerspectiveAndGrid
                 add.w   d1,d1
                 andi.w  #$FF,d0
                 lsl.w   #3,d0
                 movea.l (a4,d0.w),a3
                 move.w  4(a4,d0.w),d6
                 cmpi.w  #$54,(a1)
-                blo.s   loc_9A04
+                blo.s   SKSS_ApplyRowFrameControl
                 andi.w  #$7FFF,d6
 
-loc_9A04:
+; A carry from doubling the frame word forces distance index zero
+SKSS_ApplyRowFrameControl:
                 move.w  6(a4,d0.w),d0
                 add.w   d0,d0
-                bcc.s   loc_9A0E
+                bcc.s   SKSS_EmitNonemptyRowMap
                 moveq   #0,d1
 
-loc_9A0E:
+SKSS_EmitNonemptyRowMap:
                 add.w   d0,d1
                 adda.w  (a3,d1.w),a3
                 move.w  (a3)+,d1
                 subq.w  #1,d1
-                bmi.s   loc_9A20
+                bmi.s   SKSS_StepRowPerspectiveAndGrid
                 jsr     (a0)
                 tst.w   d7
-                bmi.s   locret_9A3A
+                bmi.s   SKSS_RowScanReturn
 
-loc_9A20:
+SKSS_StepRowPerspectiveAndGrid:
                 addq.w  #6,a1
                 add.w   4(a5),d4
                 and.w   6(a5),d4
-                dbf     d3,loc_99CC
+                dbf     d3,SKSS_FilterRowCellAndDistance
                 add.w   8(a5),d5
                 and.w   $A(a5),d5
-                dbf     d2,loc_99BC
+                dbf     d2,SKSStage_BeginRowMajorGridColumnSequence
 
-locret_9A3A:
+SKSS_RowScanReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_9A3C:
+SKSS_InitColumnScanAndBudget:
                 move.w  2(a5),d5
                 add.w   d1,d5
                 and.w   $A(a5),d5
@@ -188,7 +189,7 @@ loc_9A3C:
                 adda.w  d6,a6
                 moveq   #$10-1,d2
 
-loc_9A74:
+SKSS_BeginYInnerColumn:
                 move.w  (a5),d4
                 moveq   #0,d0
                 move.b  (Special_stage_Y_pos).w,d0
@@ -196,54 +197,55 @@ loc_9A74:
                 and.w   6(a5),d4
                 moveq   #$F-1,d3
 
-loc_9A84:
+SKSS_FilterColumnCellAndDistance:
                 move.w  d4,d0
                 lsl.w   #5,d0
                 or.b    d5,d0
                 move.b  (a2,d0.w),d0
-                beq.s   loc_9AD8
+                beq.s   SKSS_StepColumnPerspectiveAndGrid
                 move.w  (a1),d1
                 andi.w  #$7C,d1
-                beq.s   loc_9AD8
+                beq.s   SKSS_StepColumnPerspectiveAndGrid
                 lsr.w   #2,d1
                 subq.w  #6,d1
                 cmpi.w  #$10,d1
-                bhs.s   loc_9AD8
+                bhs.s   SKSS_StepColumnPerspectiveAndGrid
                 add.w   d1,d1
                 andi.w  #$FF,d0
                 lsl.w   #3,d0
                 movea.l (a4,d0.w),a3
                 move.w  4(a4,d0.w),d6
                 cmpi.w  #$54,(a1)
-                blo.s   loc_9ABC
+                blo.s   SKSS_ApplyColumnFrameControl
                 andi.w  #$7FFF,d6
 
-loc_9ABC:
+; A carry from doubling the frame word forces distance index zero
+SKSS_ApplyColumnFrameControl:
                 move.w  6(a4,d0.w),d0
                 add.w   d0,d0
-                bcc.s   loc_9AC6
+                bcc.s   SKSS_EmitNonemptyColumnMap
                 moveq   #0,d1
 
-loc_9AC6:
+SKSS_EmitNonemptyColumnMap:
                 add.w   d0,d1
                 adda.w  (a3,d1.w),a3
                 move.w  (a3)+,d1
                 subq.w  #1,d1
-                bmi.s   loc_9AD8
+                bmi.s   SKSS_StepColumnPerspectiveAndGrid
                 jsr     (a0)
                 tst.w   d7
-                bmi.s   locret_9AF2
+                bmi.s   SKSS_ColumnScanReturn
 
-loc_9AD8:
+SKSS_StepColumnPerspectiveAndGrid:
                 addq.w  #6,a1
                 add.w   4(a5),d4
                 and.w   6(a5),d4
-                dbf     d3,loc_9A84
+                dbf     d3,SKSS_FilterColumnCellAndDistance
                 add.w   8(a5),d5
                 and.w   $A(a5),d5
-                dbf     d2,loc_9A74
+                dbf     d2,SKSS_BeginYInnerColumn
 
-locret_9AF2:
+SKSS_ColumnScanReturn:
                 rts
 ; End of function Draw_SSSprites
 
@@ -288,10 +290,10 @@ Draw_SSSprite_FlyAway:
                 asr.l   #8,d0
                 addi.w  #$120,d0
                 cmpi.w  #$1D0,d0
-                blo.s   loc_9B56
+                blo.s   SKSS_StoreFlyawayPieceX
                 move.w  #1,d0
 
-loc_9B56:
+SKSS_StoreFlyawayPieceX:
                 move.w  (sp)+,d1
                 move.w  d0,(a6)+
                 subq.w  #1,d7
@@ -302,37 +304,37 @@ loc_9B56:
 
 SStage_UpdateClearSequence:
                 move.b  (Special_stage_clear_routine).w,d1
-                beq.w   locret_9D1C
+                beq.w   SKSS_ClearUpdateReturn
                 subq.b  #1,d1
-                bne.w   loc_9C5C
+                bne.w   SKSS_WaitForArtAndTickReveal
                 cmpi.w  #$100,(Special_stage_clear_timer).w
-                bhs.s   loc_9BA6
+                bhs.s   SKSS_AdvanceClearAndPrepGridWipe
                 addq.w  #2,(Special_stage_clear_timer).w
                 cmpi.w  #2,(Special_stage_clear_timer).w
-                bne.s   loc_9B8C
+                bne.s   SKSS_AccelerateFlyawayTimer
                 moveq   #signextendB(sfx_AllSpheres),d0
                 jsr     (Play_Music).l
 
-loc_9B8C:
+SKSS_AccelerateFlyawayTimer:
                 cmpi.w  #$40,(Special_stage_clear_timer).w
-                blo.s   locret_9BA4
+                blo.s   SKSS_FlyawayTimerReturn
                 addq.w  #1,(Special_stage_clear_timer).w
                 cmpi.w  #$80,(Special_stage_clear_timer).w
-                blo.s   locret_9BA4
+                blo.s   SKSS_FlyawayTimerReturn
                 addq.w  #1,(Special_stage_clear_timer).w
 
-locret_9BA4:
+SKSS_FlyawayTimerReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_9BA6:
+SKSS_AdvanceClearAndPrepGridWipe:
                 addq.b  #1,(Special_stage_clear_routine).w
                 lea     (SStage_layout_buffer+$100).w,a1
                 move.w  #bytesToLcnt($400),d0
 
-loc_9BB2:
+SKSS_WipeGridAndPlaceEmerald:
                 move.l  #0,(a1)+
-                dbf     d0,loc_9BB2
+                dbf     d0,SKSS_WipeGridAndPlaceEmerald
                 move.b  (Special_stage_angle).w,d0
                 jsr     (GetSineCosine).l
                 move.w  (Special_stage_X_pos).w,d2
@@ -354,20 +356,20 @@ loc_9BB2:
                 or.b    d0,d1
                 move.b  #$B,(a1,d1.w)
                 tst.b   (SK_special_stage_flag).w
-                beq.s   loc_9C08
+                beq.s   SKSS_StoreEmeraldAndSelectPalette
                 move.b  #$D,(a1,d1.w)
 
-loc_9C08:
+SKSS_StoreEmeraldAndSelectPalette:
                 move.w  d1,(Special_stage_interact).w
                 move.w  #$800,(Special_stage_velocity).w
                 move.b  #120,(Special_stage_emerald_timer).w
                 moveq   #0,d0
                 move.b  (Current_special_stage).w,d0
                 tst.b   (Blue_spheres_stage_flag).w
-                beq.s   loc_9C28
+                beq.s   SKSS_CopyPaletteAndChooseEmeraldArt
                 move.b  (Blue_spheres_current_stage+2).w,d0
 
-loc_9C28:
+SKSS_CopyPaletteAndChooseEmeraldArt:
                 andi.w  #7,d0
                 lea     (Pal_SStage_Emeralds).l,a1
                 lsl.w   #3,d0
@@ -377,33 +379,33 @@ loc_9C28:
                 move.l  (a1)+,(a2)+
                 lea     (ArtKosM_SStageChaosEmerald).l,a1
                 tst.b   (SK_special_stage_flag).w
-                beq.s   loc_9C52
+                beq.s   SKSS_QueueEmeraldArtAtRingTiles
                 lea     (ArtKosM_SStageSuperEmerald).l,a1
 
-loc_9C52:
+SKSS_QueueEmeraldArtAtRingTiles:
                 move.w  #tiles_to_bytes(ArtTile_SStage_Emerald),d2
                 jmp     (Queue_Kos_Module).l
 ; ---------------------------------------------------------------------------
 
-loc_9C5C:
+SKSS_WaitForArtAndTickReveal:
                 subq.b  #1,d1
-                bne.s   loc_9C80
+                bne.s   SKSS_CheckAlignedEmeraldContact
                 tst.b   (Kos_modules_left).w
-                bne.s   locret_9C7E
+                bne.s   SKSS_EmeraldRevealWaitReturn
                 move.w  #0,(Special_stage_clear_timer).w
                 subq.b  #1,(Special_stage_emerald_timer).w
-                bne.s   locret_9C7E
+                bne.s   SKSS_EmeraldRevealWaitReturn
                 addq.b  #1,(Special_stage_clear_routine).w
                 moveq   #signextendB(mus_Emerald),d0
                 jsr     (Play_Music).l
 
-locret_9C7E:
+SKSS_EmeraldRevealWaitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_9C80:
+SKSS_CheckAlignedEmeraldContact:
                 subq.b  #1,d1
-                bne.w   locret_9D1C
+                bne.w   SKSS_ClearUpdateReturn
                 move.w  (Special_stage_X_pos).w,d0
                 addi.w  #$80,d0
                 lsr.w   #8,d0
@@ -415,45 +417,45 @@ loc_9C80:
                 lsl.w   #5,d1
                 or.b    d0,d1
                 cmp.w   (Special_stage_interact).w,d1
-                bne.s   locret_9D1C
+                bne.s   SKSS_ClearUpdateReturn
                 move.w  (Special_stage_X_pos).w,d0
                 or.w    (Special_stage_Y_pos).w,d0
                 andi.w  #$E0,d0
-                bne.s   locret_9D1C
+                bne.s   SKSS_ClearUpdateReturn
                 tst.b   (Blue_spheres_stage_flag).w
-                bne.s   loc_9CE6
+                bne.s   SKSS_SelectStageOrBlueSphereResults
                 lea     (Chaos_emerald_count).w,a2
                 move.b  (SK_special_stage_flag).w,d2
-                beq.s   loc_9CCE
+                beq.s   SKSS_CountEmeraldAndMarkCollected
                 lea     (Super_emerald_count).w,a2
 
-loc_9CCE:
+SKSS_CountEmeraldAndMarkCollected:
                 cmpi.b  #7,(a2)
-                bhs.s   loc_9CE6
+                bhs.s   SKSS_SelectStageOrBlueSphereResults
                 addq.b  #1,(a2)
                 lea     (Collected_emeralds_array).w,a1
                 moveq   #0,d0
                 move.b  (Current_special_stage).w,d0
                 bset    #0,(a1,d0.w)
 
-loc_9CE6:
+SKSS_SelectStageOrBlueSphereResults:
                 addq.b  #1,(Special_stage_clear_routine).w
                 move.b  #1,(Special_stage_fade_timer).w
                 move.b  #GameMode_SpecialStageResults,(Game_mode).w
                 tst.b   (Blue_spheres_stage_flag).w
-                beq.s   loc_9D02
+                beq.s   SKSS_RestoreZoneAfterStageClear
                 move.b  #GameMode_BlueSpheresResults,(Game_mode).w
 
-loc_9D02:
+SKSS_RestoreZoneAfterStageClear:
                 tst.b   (Special_bonus_entry_flag).w
-                beq.s   loc_9D14
+                beq.s   SKSS_PlayClearGoalSound
                 move.w  (Saved2_zone_and_act).w,(Current_zone_and_act).w
                 ori.b   #$80,(Last_star_post_hit).w
 
-loc_9D14:
+SKSS_PlayClearGoalSound:
                 moveq   #signextendB(sfx_Goal),d0
                 jsr     (Play_SFX).l
 
-locret_9D1C:
+SKSS_ClearUpdateReturn:
                 rts
 ; End of function SStage_UpdateClearSequence

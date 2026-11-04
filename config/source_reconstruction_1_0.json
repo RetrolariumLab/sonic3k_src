@@ -1299,9 +1299,15 @@
       "commits": ["001d8b688fc9422f7243854c153a3c4ccd950bd6"]
     },
     {
-      "id": "current-shorten-59-competition-race",
+      "id": "change-d43a0fae6158",
       "kind": "source_or_tooling",
       "summary": "Apply 558 reviewed short labels for competition race.",
+      "commits": ["d43a0fae61586d42db5b2daa10885305a960dac6"]
+    },
+    {
+      "id": "current-shorten-60-special-stage",
+      "kind": "source_or_tooling",
+      "summary": "Apply 446 reviewed short labels for special stage.",
       "commits": ["release-commit"]
     }
   ],

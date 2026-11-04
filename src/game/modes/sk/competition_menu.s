@@ -40,7 +40,7 @@ SKCompMenu_LoadBackgroundAndQueueArt:
                 lea     (RAM_start).l,a1                ; Decompress destination/Transfer source
                 movea.w #tiles_to_bytes(ArtTile_S3MenuBG),a2  ; Transfer destination
                 jsr     KosArt_To_VDP(pc)
-                move.l  #locret_A85C,(_unkEF44_1).w
+                move.l  #SKSS_NoOpVBlankReturn,(_unkEF44_1).w
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 lea     (ArtKos_CompetitionLevel).l,a0  ; Decompress source

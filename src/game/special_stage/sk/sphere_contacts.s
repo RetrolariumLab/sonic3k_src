@@ -13,16 +13,16 @@ SStage_UpdateBackgroundScroll:
                 move.w  (Special_stage_X_pos).w,d0
                 sub.w   (Special_stage_prev_X_pos).w,d0
                 btst    #6,(Special_stage_angle).w
-                bne.s   loc_9D76
+                bne.s   SKSS_SelectSignedBGScrollDelta
                 move.w  (Special_stage_Y_pos).w,d0
                 sub.w   (Special_stage_prev_Y_pos).w,d0
 
-loc_9D76:
+SKSS_SelectSignedBGScrollDelta:
                 tst.b   (Special_stage_angle).w
-                bmi.s   loc_9D7E
+                bmi.s   SKSS_ApplyBGScrollAndCacheGridPos
                 neg.w   d0
 
-loc_9D7E:
+SKSS_ApplyBGScrollAndCacheGridPos:
                 asr.w   #2,d0
                 add.w   d0,(V_scroll_value_BG).w
                 moveq   #0,d1
@@ -39,14 +39,14 @@ loc_9D7E:
 Animate_SSRings:
                 lea     (SStage_extra_sprites+$07).w,a1
                 subq.b  #1,(Rings_frame_timer).w
-                bpl.s   loc_9DC2
+                bpl.s   SKSS_StoreRingFrameBase
                 move.b  #7,(Rings_frame_timer).w
                 addi.b  #$10,(Rings_frame).w
                 cmpi.b  #$30,(Rings_frame).w
-                blo.s   loc_9DC2
+                blo.s   SKSS_StoreRingFrameBase
                 move.b  #0,(Rings_frame).w
 
-loc_9DC2:
+SKSS_StoreRingFrameBase:
                 move.b  (Rings_frame).w,anim(a1)
                 rts
 ; End of function Animate_SSRings
@@ -57,13 +57,13 @@ Find_SStageCollisionResponseSlot:
                 lea     (SStage_collision_response_list).w,a2
                 move.w  #$20-1,d0
 
-loc_9DD2:
+SKSS_FindFreeResponseSlot:
                 tst.b   (a2)
-                beq.s   locret_9DDC
+                beq.s   SKSS_FreeResponseSearchReturn
                 addq.w  #8,a2
-                dbf     d0,loc_9DD2
+                dbf     d0,SKSS_FindFreeResponseSlot
 
-locret_9DDC:
+SKSS_FreeResponseSearchReturn:
                 rts
 ; End of function Find_SStageCollisionResponseSlot
 
@@ -73,82 +73,83 @@ Touch_SSSprites:
                 lea     (SStage_collision_response_list).w,a0
                 move.w  #$20-1,d7
 
-loc_9DE6:
+; The nonzero response type directly indexes the handler table
+SKSS_DispatchOccupiedResponse:
                 moveq   #0,d0
                 move.b  (a0),d0
-                beq.s   loc_9DF4
+                beq.s   SKSS_AdvanceResponseScan
                 lsl.w   #2,d0
-                movea.l off_9DFC-4(pc,d0.w),a1
+                movea.l SKSS_ResponseHandlerPointers-4(pc,d0.w),a1
                 jsr     (a1)
 
-loc_9DF4:
+SKSS_AdvanceResponseScan:
                 addq.w  #8,a0
-                dbf     d7,loc_9DE6
+                dbf     d7,SKSS_DispatchOccupiedResponse
                 rts
 ; End of function Touch_SSSprites
 
 ; ---------------------------------------------------------------------------
-off_9DFC:
+SKSS_ResponseHandlerPointers:
                 dc.l    Touch_SSSprites_Ring
                 dc.l    Touch_SSSprites_BlueSphere
 ; ---------------------------------------------------------------------------
 
 Touch_SSSprites_Ring:
                 subq.b  #1,2(a0)
-                bpl.s   locret_9E2C
+                bpl.s   SKSS_RingResponseReturn
                 move.b  #5,2(a0)
                 moveq   #0,d0
                 move.b  3(a0),d0
                 addq.b  #1,3(a0)
                 movea.l 4(a0),a1
-                move.b  byte_9E2E(pc,d0.w),d0
+                move.b  SKSStage_RingPickupCellTypeSequence(pc,d0.w),d0
                 move.b  d0,(a1)
-                bne.s   locret_9E2C
+                bne.s   SKSS_RingResponseReturn
                 clr.l   (a0)
                 clr.l   4(a0)
 
-locret_9E2C:
+SKSS_RingResponseReturn:
                 rts
 ; ---------------------------------------------------------------------------
-byte_9E2E:
+SKSStage_RingPickupCellTypeSequence:
                 dc.b    6,   7,   8,   9,   0
                 even
 ; ---------------------------------------------------------------------------
 
 Touch_SSSprites_BlueSphere:
                 subq.b  #1,2(a0)
-                bpl.s   locret_9E86
+                bpl.s   SKSS_BlueResponseReturn
                 move.b  #9,2(a0)
                 movea.l 4(a0),a1
                 cmpi.b  #2,(a1)
-                bne.s   loc_9E62
+                bne.s   SKSS_WaitForGridMoveBeforeRetire
                 bsr.w   Decrement_BlueSphere_Count
                 move.b  #$A,(a1)
                 bsr.s   Sphere_To_Rings
-                beq.s   locret_9E60
+                beq.s   SKSS_BlueEnclosureCheckReturn
                 move.b  #4,(a1)
                 clr.l   (a0)
                 clr.l   4(a0)
 
-locret_9E60:
+SKSS_BlueEnclosureCheckReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_9E62:
+SKSS_WaitForGridMoveBeforeRetire:
                 move.b  #0,2(a0)
                 move.w  (Special_stage_X_pos).w,d0
                 or.w    (Special_stage_Y_pos).w,d0
                 andi.w  #$E0,d0
-                beq.s   locret_9E86
+                beq.s   SKSS_BlueResponseReturn
                 cmpi.b  #$A,(a1)
-                bne.s   loc_9E80
+                bne.s   SKSStage_ClearCompletedBlueContactRecord
                 move.b  #1,(a1)
 
-loc_9E80:
+SKSStage_ClearCompletedBlueContactRecord:
                 clr.l   (a0)
                 clr.l   4(a0)
 
-locret_9E86:
+SKSS_BlueResponseReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -157,10 +158,10 @@ Decrement_BlueSphere_Count:
                 move.w  d0,-(sp)
                 move.b  #-1,(Special_stage_sphere_HUD_flag).w  ; Set flag to update HUD
                 subq.w  #1,(Special_stage_spheres_left).w  ; Decrement Count
-                bne.s   loc_9E9C                        ; If Count is 0
+                bne.s   SKSS_RestoreWordAfterBlueCount  ; If Count is 0
                 move.b  #1,(Special_stage_clear_routine).w  ; Set flag to clear special stage
 
-loc_9E9C:
+SKSS_RestoreWordAfterBlueCount:
                 move.w  (sp)+,d0
                 rts
 ; End of function Decrement_BlueSphere_Count
@@ -172,13 +173,13 @@ SStage_CountInitialBlueSpheres:
                 moveq   #0,d1
                 move.w  #$400-1,d0
 
-loc_9EAA:
+SKSStage_CountOnlyInitialGridByteTypeTwo:
                 cmpi.b  #2,(a3)+
-                bne.s   loc_9EB2
+                bne.s   SKSS_FinishInitialBlueCount
                 addq.w  #1,d1
 
-loc_9EB2:
-                dbf     d0,loc_9EAA
+SKSS_FinishInitialBlueCount:
+                dbf     d0,SKSStage_CountOnlyInitialGridByteTypeTwo
                 move.w  d1,(Special_stage_spheres_left).w
                 rts
 ; End of function SStage_CountInitialBlueSpheres
@@ -216,7 +217,7 @@ Sphere_To_Rings:
                 move.l  a5,d1                           ; ring queue end (from Find_Red_Sphere_Loop)
                 lea     (SStage_blue_sphere_to_ring_queue).w,a4  ; ring queue start
                 sub.l   a4,d1                           ; remaining entries count = end - start
-                beq.s   locret_9F42                     ; if empty queue, return 0
+                beq.s   SKSS_EnclosureConversionReturn  ; if empty queue, return 0
 
 ; For each ring in the queue, find its blue sphere neighbors, then
 ; turn those blue spheres into rings, and add those positions
@@ -244,7 +245,7 @@ Blue_To_Ring_Continue_B:
                 move.l  a5,d1                           ; reset queue end
                 lea     (SStage_blue_sphere_to_ring_queue).w,a4  ; reset queue start
                 sub.l   a4,d1                           ; reset remaining entries count
-                beq.s   locret_9F42                     ; if empty queue (how?), return 0
+                beq.s   SKSS_EnclosureConversionReturn  ; if empty queue (how?), return 0
 
 ; For each ring in the queue, find its red sphere neighbors, then
 ; turn those red spheres into rings
@@ -269,7 +270,7 @@ Blue_To_Ring_Continue_R:
                 jsr     (Play_SFX).l
                 moveq   #1,d1                           ; Return 1
 
-locret_9F42:
+SKSS_EnclosureConversionReturn:
                 rts
 ; End of function Sphere_To_Rings
 
@@ -308,18 +309,18 @@ Red_Loop_Check_Neighbors:                               ; Loop[neighbors of touc
                 add.w   d5,d1                           ; neighbor = touched + direction
                 andi.w  #$3FF,d1                        ; truncate to map size
                 cmpi.b  #$A,(a2,d1.w)                   ; If neighbor is $A (TOUCHED)
-                bne.s   loc_9F6A
+                bne.s   SKSS_CountBlueNeighbor
                 move.b  #1,(a2,d1.w)                    ; change to RedSphere
 
-loc_9F6A:
+SKSS_CountBlueNeighbor:
                 cmpi.b  #2,(a2,d1.w)                    ; If neighbor is Blue
-                bne.s   loc_9F74
+                bne.s   SKSS_RequireBlueAndProbeLeftSpan
                 addq.w  #1,d2                           ; increment count
 
-loc_9F74:
+SKSS_RequireBlueAndProbeLeftSpan:
                 dbf     d0,Red_Loop_Check_Neighbors     ; Loop[neighbors of touched]:end
                 tst.w   d2                              ; If there are no blue sphere neighbors
-                beq.w   locret_A076                     ; return
+                beq.w   SKSS_RedLoopSearchReturn        ; return
                 moveq   #0,d2                           ; Horizontal span length
                 move.w  d5,d1                           ; scanning index
                 moveq   #$10-1,d3
@@ -328,10 +329,10 @@ Red_Loop_Count_Horizontal_Left:                         ; Loop[left until empty 
                 addq.w  #1,d2                           ; increment horizontal span length
                 addi.w  #-1,d1                          ; move index left
                 tst.b   (a2,d1.w)                       ; If index is empty (map[index] == 0)
-                beq.s   loc_9F94                        ; break
+                beq.s   SKSS_ProbeRightSpan             ; break
                 dbf     d3,Red_Loop_Count_Horizontal_Left  ; Loop[left until empty (max 16)]:end
 
-loc_9F94:
+SKSS_ProbeRightSpan:
                 move.w  d5,d1                           ; scanning index
                 moveq   #$10-1,d3
 
@@ -339,12 +340,12 @@ Red_Loop_Count_Horizontal_Right:                        ; Loop[right until empty
                 addq.w  #1,d2                           ; increment horizontal span length
                 addi.w  #1,d1                           ; move index right
                 tst.b   (a2,d1.w)                       ; If index is empty (map[index] == 0)
-                beq.s   loc_9FA8                        ; break
+                beq.s   SKSS_CheckHorizontalSpanAndProbeUp  ; break
                 dbf     d3,Red_Loop_Count_Horizontal_Right  ; Loop[right until empty (max 16)]:end
 
-loc_9FA8:
+SKSS_CheckHorizontalSpanAndProbeUp:
                 cmpi.w  #4,d2                           ; If horizontal span is less than 3 (< 4 because touched is double counted)
-                blo.w   locret_A076                     ; then return
+                blo.w   SKSS_RedLoopSearchReturn        ; then return
                 moveq   #0,d2                           ; Vertical span length
                 move.w  d5,d1                           ; scanning index
                 moveq   #$10-1,d3
@@ -353,10 +354,10 @@ Red_Loop_Count_Vertically_Up:                           ; Loop[up until empty (m
                 addq.w  #1,d2                           ; increment vertical span length
                 addi.w  #-$20,d1                        ; move index up
                 tst.b   (a2,d1.w)                       ; If index is empty (map[index] == 0)
-                beq.s   loc_9FC6                        ; break
+                beq.s   SKSS_ProbeDownwardSpan          ; break
                 dbf     d3,Red_Loop_Count_Vertically_Up  ; Loop[up until empty (max 16)]:end
 
-loc_9FC6:
+SKSS_ProbeDownwardSpan:
                 move.w  d5,d1                           ; scanning index
                 moveq   #$10-1,d3
 
@@ -364,12 +365,12 @@ Red_Loop_Count_Vertically_Down:                         ; Loop[down until empty 
                 addq.w  #1,d2                           ; increment vertical span length
                 addi.w  #$20,d1                         ; move index up
                 tst.b   (a2,d1.w)                       ; If index is empty (map[index] == 0)
-                beq.s   loc_9FDA                        ; break
+                beq.s   SKSS_CheckVerticalSpanAndStartDFS  ; break
                 dbf     d3,Red_Loop_Count_Vertically_Down  ; Loop[down until empty (max 16)]:end
 
-loc_9FDA:
+SKSS_CheckVerticalSpanAndStartDFS:
                 cmpi.w  #4,d2                           ; If vertical span is less than 3 (< 4 because touched is double counted)
-                blo.w   locret_A076                     ; then return
+                blo.w   SKSS_RedLoopSearchReturn        ; then return
                 lea     (SStage_red_sphere_dfs_walk_stack).w,a4
                 lea     (SStage_4_Directions).l,a3      ; Load Directions Pointer
                 moveq   #0,d6                           ; Walk Stack Size
@@ -440,7 +441,7 @@ Red_Loop_Pop_Stack:
                 move.b  -(a4),d4                        ; Pop direction index from walk stack
                 move.b  -(a4),d3                        ; Pop direction index lower bound from walk stack
                 subq.w  #1,d6                           ; Decrement walk stack size
-                bcs.s   locret_A076                     ; If walk stack was empty,
+                bcs.s   SKSS_RedLoopSearchReturn        ; If walk stack was empty,
         ; No more loops to find. Return
                 andi.b  #$7F,(a2,d0.w)                  ; Unmark current position as being processed
                 subq.w  #2,d4                           ; Decrement direction index
@@ -449,7 +450,7 @@ Red_Loop_Pop_Stack:
                 bra.s   Red_Loop_Pop_Stack              ; Else this position is done, pop the stack to get previous
 ; ---------------------------------------------------------------------------
 
-locret_A076:
+SKSS_RedLoopSearchReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -541,24 +542,24 @@ SStage_4_Directions:
 
 Load_SSSprite_Mappings:
                 lea     (SStage_extra_sprites).w,a1
-                lea     (MapPtr_A10A).l,a0
+                lea     (SKSS_CellRenderDescriptors).l,a0
                 moveq   #bytesToXcnt($70,8),d1
 
-loc_A0F2:
+SKSS_CopyFourteenRenderDescriptors:
                 move.l  (a0)+,(a1)+
                 move.l  (a0)+,(a1)+
-                dbf     d1,loc_A0F2
+                dbf     d1,SKSS_CopyFourteenRenderDescriptors
                 lea     (SStage_collision_response_list).w,a1
                 move.w  #bytesToLcnt($100),d1
 
-loc_A102:
+SKSS_ClearContactResponseQueue:
                 clr.l   (a1)+
-                dbf     d1,loc_A102
+                dbf     d1,SKSS_ClearContactResponseQueue
                 rts
 ; End of function Load_SSSprite_Mappings
 
 ; ---------------------------------------------------------------------------
-MapPtr_A10A:
+SKSS_CellRenderDescriptors:
                 dc.l    Map_SStageSphere
                 dc.w    make_art_tile(ArtTile_SStage_Sphere,0,1), $0000
                 dc.l    Map_SStageSphere
@@ -732,6 +733,6 @@ Map_SStageSuperEmerald:
                 include "src/game/special_stage/shared/mappings/super_emerald.s"
 ; ---------------------------------------------------------------------------
 
-locret_A85C:
+SKSS_NoOpVBlankReturn:
                 rts
 ; ---------------------------------------------------------------------------

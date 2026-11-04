@@ -37,7 +37,7 @@ loc_4A238:
                 move.w  (Level_frame_counter).w,d0
                 andi.w  #3,d0
                 add.w   d1,d0
-                lea     (byte_1E4484).l,a1
+                lea     (SKPachinko_WeightedItemSubtypeBytes).l,a1
                 move.b  (a1,d0.w),subtype(a0)
                 move.l  #loc_4A34C,(a0)
                 bra.w   loc_4A2CC

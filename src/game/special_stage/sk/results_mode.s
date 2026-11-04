@@ -9,19 +9,19 @@ SpecialStage_Results:
                 move.b  (Current_special_stage).w,d0
                 move.b  d0,(Current_special_stage_2).w
                 move.b  (HPZ_current_special_stage).w,d1
-                beq.s   loc_2DF82
+                beq.s   SKSSResults_AdvanceStageWithSevenWrap
                 andi.b  #$7F,d1
                 move.b  d1,d0
-                bra.s   loc_2DF8C
+                bra.s   SKSSResults_StoreStageAndPrepResults
 ; ---------------------------------------------------------------------------
 
-loc_2DF82:
+SKSSResults_AdvanceStageWithSevenWrap:
                 addq.b  #1,d0
                 cmpi.b  #7,d0
-                blo.s   loc_2DF8C
+                blo.s   SKSSResults_StoreStageAndPrepResults
                 moveq   #0,d0
 
-loc_2DF8C:
+SKSSResults_StoreStageAndPrepResults:
                 move.b  d0,(Current_special_stage).w
                 move    #$2700,sr
                 move.w  (VDP_reg_1_command).w,d0
@@ -53,37 +53,37 @@ loc_2DF8C:
                 move.w  #tiles_to_bytes($5B8),d2
                 jsr     (Queue_Kos_Module).l
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_2E04E
+                bne.s   SKSSResults_ChooseSuperOrHyperWordArt
                 lea     (ArtKosM_SSResultsSUPERk).l,a1
                 cmpi.b  #7,(Super_emerald_count).w
-                blo.s   loc_2E06A
+                blo.s   SKSSResults_QueueTransformTextAndName
                 lea     (ArtKosM_SSResultsHYPERk).l,a1
-                bra.s   loc_2E06A
+                bra.s   SKSSResults_QueueTransformTextAndName
 ; ---------------------------------------------------------------------------
 
-loc_2E04E:
+SKSSResults_ChooseSuperOrHyperWordArt:
                 lea     (ArtKosM_SSResultsSUPER).l,a1
                 cmpi.w  #2,(Player_mode).w
-                beq.s   loc_2E06A
+                beq.s   SKSSResults_QueueTransformTextAndName
                 cmpi.b  #7,(Super_emerald_count).w
-                blo.s   loc_2E06A
+                blo.s   SKSSResults_QueueTransformTextAndName
                 lea     (ArtKosM_SSResultsHYPER).l,a1
 
-loc_2E06A:
+SKSSResults_QueueTransformTextAndName:
                 move.w  #tiles_to_bytes($50F),d2
                 jsr     (Queue_Kos_Module).l
                 lea     (ArtKosM_ResultsSONIC).l,a1
                 cmpi.w  #1,(Player_mode).w
-                bls.s   loc_2E0A2
+                bls.s   SKSSResults_QueueArtAndSetIdleVBlank
                 lea     (ArtKosM_ResultsKNUCKLES).l,a1
                 cmpi.w  #3,(Player_mode).w
-                beq.s   loc_2E0A2
+                beq.s   SKSSResults_QueueArtAndSetIdleVBlank
                 lea     (ArtKosM_ResultsMILES).l,a1
                 tst.b   (Graphics_flags).w
-                bpl.s   loc_2E0A2
+                bpl.s   SKSSResults_QueueArtAndSetIdleVBlank
                 lea     (ArtKosM_ResultsTAILS).l,a1
 
-loc_2E0A2:
+SKSSResults_QueueArtAndSetIdleVBlank:
                 move.w  #tiles_to_bytes($4F1),d2
                 jsr     (Queue_Kos_Module).l
                 lea     (ArtKosM_SSResults).l,a1
@@ -91,58 +91,58 @@ loc_2E0A2:
                 jsr     (Queue_Kos_Module).l
                 move.l  #SKLevelResults_SpecialVIntReturn,(_unkEF44_1).w
 
-loc_2E0C4:
+SKSSResults_WaitForBothArtQueues:
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Process_Kos_Queue).l
                 jsr     (Wait_VSync).l
                 jsr     (Process_Nem_Queue_Init).l
                 jsr     (Process_Kos_Module_Queue).l
                 tst.b   (Kos_modules_left).w
-                bne.s   loc_2E0C4
+                bne.s   SKSSResults_WaitForBothArtQueues
                 tst.l   (Nem_decomp_queue).w
-                bne.s   loc_2E0C4
+                bne.s   SKSSResults_WaitForBothArtQueues
                 jsr     (HUD_DrawInitial).l
                 move.b  #1,(Update_HUD_score).w
                 lea     Pal_Results(pc),a0
                 lea     (Normal_palette).w,a1
                 moveq   #bytesToLcnt(Normal_palette_end-Normal_palette),d0
 
-loc_2E104:
+SKSSResults_CopyNormalAndTargetPalette:
                 move.l  (a0),(a1)+
                 move.l  (a0)+,Target_palette-Normal_palette-4(a1)
-                dbf     d0,loc_2E104
+                dbf     d0,SKSSResults_CopyNormalAndTargetPalette
                 jsr     SStageResults_AdjustCharacterPalettes(pc)
                 tst.w   (SK_alone_flag).w
-                bne.w   loc_2E226
+                bne.w   SKSSResults_InstallCoordinatorAndDisplay
                 tst.b   (SK_special_stage_flag).w
-                beq.w   loc_2E226
+                beq.w   SKSSResults_InstallCoordinatorAndDisplay
                 lea     Pal_Results(pc),a0
                 lea     (Normal_palette).w,a1
                 moveq   #bytesToLcnt($20),d0
 
-loc_2E12C:
+SKSSResults_DuplicateFirstPaletteLine:
                 move.l  (a0)+,d1
                 move.l  d1,Target_palette_line_2-Normal_palette(a1)
                 move.l  d1,Normal_palette_line_2-Normal_palette(a1)
                 move.l  d1,Target_palette-Normal_palette(a1)
                 move.l  d1,(a1)+
-                dbf     d0,loc_2E12C
+                dbf     d0,SKSSResults_DuplicateFirstPaletteLine
                 jsr     SStageResults_AdjustCharacterPalettes(pc)
                 lea     (Pal_HPZIntro+$20).l,a0
                 lea     (Normal_palette_line_3).w,a1
                 moveq   #bytesToLcnt(Normal_palette_end-Normal_palette_line_3),d0
 
-loc_2E150:
+SKSSResults_SeedWhiteAndHiddenPalacePal:
                 move.l  #$CCC0CCC,(a1)+
                 move.l  (a0)+,Target_palette_line_3-Normal_palette_line_3-4(a1)
-                dbf     d0,loc_2E150
+                dbf     d0,SKSSResults_SeedWhiteAndHiddenPalacePal
                 lea     (Layout_HPZ).l,a0
                 lea     (Level_layout_header).w,a1
                 move.w  #bytesToLcnt(Level_layout_main_end-Level_layout_header),d0
 
-loc_2E16C:
+SKSSResults_LoadHiddenPalaceBackground:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_2E16C
+                dbf     d0,SKSSResults_LoadHiddenPalaceBackground
                 lea     (HPZ_128x128_Primary_Kos).l,a0
                 lea     (RAM_start).l,a1
                 jsr     (Kos_Decomp).l
@@ -170,19 +170,19 @@ loc_2E16C:
                 moveq   #0,d0
                 move.b  (Current_special_stage_2).w,d0
                 add.w   d0,d0
-                lea     word_2E398(pc),a0
+                lea     SKSSResults_ProjectionCenterXThenY(pc),a0
                 move.w  (a0,d0.w),(Camera_X_pos).w
                 move    #$2700,sr
                 jsr     (j_LevelSetup).l
                 move    #$2300,sr
                 tst.w   (Special_stage_spheres_left).w
-                bne.s   loc_2E226
+                bne.s   SKSSResults_InstallCoordinatorAndDisplay
                 move.b  (Current_special_stage_2).w,d0
                 ori.b   #$80,d0
                 move.b  d0,(_unkFAC0).w
                 st      (_unkFAC1).w
 
-loc_2E226:
+SKSSResults_InstallCoordinatorAndDisplay:
                 jsr     (Init_SpriteTable).l
                 move.w  #$98,(_unkEF68).w
                 st      (HPZ_special_stage_completed).w
@@ -191,7 +191,7 @@ loc_2E226:
                 ori.b   #$40,d0
                 move.w  d0,(VDP_control_port).l
 
-loc_2E24C:
+SKSSResults_RunFrameAndCycleFlicker:
                 move.b  #VInt_ID_8,(V_int_routine).w
                 jsr     (Process_Kos_Queue).l
                 jsr     (Wait_VSync).l
@@ -199,31 +199,31 @@ loc_2E24C:
                 move.w  (Emerald_flicker_flag).w,d1
                 addq.w  #1,d1
                 cmpi.w  #3,d1
-                blo.s   loc_2E270
+                blo.s   SKSSResults_StoreFlickerAndRunHPZEvents
                 moveq   #0,d1
 
-loc_2E270:
+SKSSResults_StoreFlickerAndRunHPZEvents:
                 move.w  d1,(Emerald_flicker_flag).w
                 jsr     (Process_Sprites).l
                 tst.w   (SK_alone_flag).w
-                bne.s   loc_2E28C
+                bne.s   SKSSResults_RenderAndTickFade
                 tst.b   (SK_special_stage_flag).w
-                beq.s   loc_2E28C
+                beq.s   SKSSResults_RenderAndTickFade
                 jsr     (ScreenEvents).l
 
-loc_2E28C:
+SKSSResults_RenderAndTickFade:
                 jsr     (Render_Sprites).l
                 jsr     (Process_Nem_Queue_Init).l
                 jsr     (Process_Kos_Module_Queue).l
                 tst.w   (Palette_fade_timer).w
-                beq.s   loc_2E2B0
-                bmi.s   loc_2E2B0
+                beq.s   SKSSResults_RestoreOriginalZoneAndExit
+                bmi.s   SKSSResults_RestoreOriginalZoneAndExit
                 subq.w  #1,(Palette_fade_timer).w
                 jsr     (Pal_FromWhite).l
 
-loc_2E2B0:
+SKSSResults_RestoreOriginalZoneAndExit:
                 cmpi.b  #GameMode_SpecialStageResults,(Game_mode).w
-                beq.s   loc_2E24C
+                beq.s   SKSSResults_RunFrameAndCycleFlicker
                 move.w  (Special_stage_zone_and_act).w,(Current_zone_and_act).w
                 rts
 
@@ -231,33 +231,34 @@ loc_2E2B0:
 
 SStageResults_AdjustCharacterPalettes:
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_2E2F6
+                bne.s   SKSSResults_AdjustOtherVariantColor
                 lea     (Normal_palette+$4).w,a0
                 move.l  #$84E040C,d0
                 move.l  d0,Target_palette-Normal_palette(a0)
                 move.l  d0,(a0)+
                 move.l  #$2060080,d0
                 tst.w   (SK_alone_flag).w
-                bne.s   loc_2E2EE
+                bne.s   SKSSResults_StoreKnucklesPalettePair
                 tst.b   (SK_special_stage_flag).w
-                beq.s   loc_2E2EE
+                beq.s   SKSSResults_StoreKnucklesPalettePair
                 move.w  #$EE,d0
 
-loc_2E2EE:
+; The variant changes only the low color word of the second pair
+SKSSResults_StoreKnucklesPalettePair:
                 move.l  d0,Target_palette-Normal_palette(a0)
                 move.l  d0,(a0)
-                bra.s   locret_2E30E
+                bra.s   SKSSResults_CharacterPalettePatchReturn
 ; ---------------------------------------------------------------------------
 
-loc_2E2F6:
+SKSSResults_AdjustOtherVariantColor:
                 tst.w   (SK_alone_flag).w
-                bne.s   locret_2E30E
+                bne.s   SKSSResults_CharacterPalettePatchReturn
                 tst.b   (SK_special_stage_flag).w
-                beq.s   locret_2E30E
+                beq.s   SKSSResults_CharacterPalettePatchReturn
                 move.w  #$EE,(Normal_palette_line_2+$A).w
                 move.w  #$EE,(Target_palette_line_2+$A).w
 
-locret_2E30E:
+SKSSResults_CharacterPalettePatchReturn:
                 rts
 ; End of function SStageResults_AdjustCharacterPalettes
 

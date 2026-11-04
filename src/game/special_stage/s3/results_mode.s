@@ -34,16 +34,16 @@ SpecialStage_Results:
                 jsr     (Queue_Kos_Module).l
                 lea     (ArtKosM_ResultsSONIC).l,a1
                 cmpi.w  #1,(Player_mode).w
-                bls.s   loc_2D2DE
+                bls.s   S3SSResults_QueueResultNameAndPanelArt
                 lea     (ArtKosM_ResultsKNUCKLES).l,a1
                 cmpi.w  #3,(Player_mode).w
-                beq.s   loc_2D2DE
+                beq.s   S3SSResults_QueueResultNameAndPanelArt
                 lea     (ArtKosM_ResultsMILES).l,a1
                 tst.b   (Graphics_flags).w
-                bpl.s   loc_2D2DE
+                bpl.s   S3SSResults_QueueResultNameAndPanelArt
                 lea     (ArtKosM_ResultsTAILS).l,a1
 
-loc_2D2DE:
+S3SSResults_QueueResultNameAndPanelArt:
                 move.w  #tiles_to_bytes($580),d2
                 jsr     (Queue_Kos_Module).l
                 lea     (ArtKosM_SSResults).l,a1
@@ -51,45 +51,45 @@ loc_2D2DE:
                 jsr     (Queue_Kos_Module).l
                 move.l  #S3LevelResults_SpecialVIntReturn,(_unkEF44_1).w
 
-loc_2D300:
+S3SSResults_WaitForGraphicsThenPrepHUD:
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Process_Kos_Queue).l
                 jsr     (Wait_VSync).l
                 jsr     (Process_Nem_Queue_Init).l
                 jsr     (Process_Kos_Module_Queue).l
                 tst.b   (Kos_modules_left).w
-                bne.s   loc_2D300
+                bne.s   S3SSResults_WaitForGraphicsThenPrepHUD
                 tst.l   (Nem_decomp_queue).w
-                bne.s   loc_2D300
+                bne.s   S3SSResults_WaitForGraphicsThenPrepHUD
                 jsr     (HUD_DrawInitial).l
                 move.b  #1,(Update_HUD_score).w
                 lea     Pal_Results(pc),a0
                 lea     (Normal_palette).w,a1
                 moveq   #bytesToLcnt($80),d0
 
-loc_2D340:
+S3SSResults_CopyPaletteAndPatchKnux:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_2D340
+                dbf     d0,S3SSResults_CopyPaletteAndPatchKnux
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_2D35C
+                bne.s   S3SSResults_InstallCoordinatorAndDisplay
                 move.l  #$84E040C,(Normal_palette+4).w
                 move.w  #$206,(Normal_palette+8).w
 
-loc_2D35C:
+S3SSResults_InstallCoordinatorAndDisplay:
                 jsr     (Init_SpriteTable).l
                 move.l  #Obj_SpecialStage_Results,(Dynamic_object_RAM+object_size).w
                 move.w  (VDP_reg_1_command).w,d0
                 ori.b   #$40,d0
                 move.w  d0,(VDP_control_port).l
 
-loc_2D378:
+S3SSResults_RunResultsUntilModeChanges:
                 move.b  #VInt_ID_8,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 addq.w  #1,(Level_frame_counter).w
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
                 cmpi.b  #GameMode_SpecialStageResults,(Game_mode).w
-                beq.s   loc_2D378
+                beq.s   S3SSResults_RunResultsUntilModeChanges
                 rts
 ; ---------------------------------------------------------------------------
 Pal_Results:

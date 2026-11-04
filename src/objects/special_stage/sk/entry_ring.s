@@ -7,11 +7,11 @@ Obj_SSEntryRing:
                 move.b  subtype(a0),d0
                 move.l  (Collected_special_ring_array).w,d1
                 btst    d0,d1
-                beq.s   loc_6167C                       ; only make the ring if it hasn't already been collected
+                beq.s   SKSSRing_WaitForVisibilityThenDispatch  ; only make the ring if it hasn't already been collected
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6167C:
+SKSSRing_WaitForVisibilityThenDispatch:
                 jsr     (Obj_WaitOffscreen).l           ; Don't start anything until the ring is explicitly onscreen
                 moveq   #0,d0
                 move.b  routine(a0),d0
@@ -30,7 +30,7 @@ SSEntryRing_Init:
                 jsr     (SetUp_ObjAttributesSlotted).l  ; Only one special stage ring can be loaded at one time, period
                 move.l  #AniRaw_SSEntryRing,$30(a0)
                 tst.b   subtype(a0)
-                bmi.s   loc_616C6                       ; If negative, then ALWAYS make this a Super Emerald ring
+                bmi.s   SKSSRing_SetSuperFlagAndPaletteScripts  ; If negative, then ALWAYS make this a Super Emerald ring
                 tst.w   (SK_alone_flag).w               ; Probably only used in MHZ for the first rings
                 bne.s   SSEntryRing_Main                ; If only Sonic & Knuckles, skip ahead
                 bsr.w   SSEntry_CheckLevel
@@ -38,7 +38,7 @@ SSEntryRing_Init:
                 cmpi.b  #7,(Chaos_emerald_count).w
                 bne.s   SSEntryRing_Main                ; Only make this a Super Emerald ring if you actually have 7 Chaos Emeralds
 
-loc_616C6:
+SKSSRing_SetSuperFlagAndPaletteScripts:
                 bset    #6,$38(a0)                      ; Make this a Super Emerald ring
                 lea     (PalSPtr_SSEntry).l,a1
                 lea     (Palette_rotation_data).w,a2
@@ -52,34 +52,34 @@ loc_616C6:
 SSEntryRing_Main:
                 jsr     (Animate_Raw).l
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_61708                    ; If in debug mode, don't allow collision
+                bne.s   SKSSRing_ActivationReturn       ; If in debug mode, don't allow collision
                 cmpi.b  #8,mapping_frame(a0)
-                blo.s   locret_61708                    ; If ring hasn't finished forming, don't allow collision
+                blo.s   SKSSRing_ActivationReturn       ; If ring hasn't finished forming, don't allow collision
                 lea     SSEntry_Range(pc),a1
                 jsr     (Check_PlayerInRange).l
                 tst.w   d0
-                bne.s   loc_6170A
+                bne.s   SKSSRing_PlayRingSoundAndSelectOutcome
 
-locret_61708:
+SKSSRing_ActivationReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6170A:
+SKSSRing_PlayRingSoundAndSelectOutcome:
                 lea     (Player_1).w,a1                 ; If collision was made
                 cmpi.b  #6,routine(a1)
-                bhs.s   locret_61708                    ; If player has died for whatever reason, don't do anything
+                bhs.s   SKSSRing_ActivationReturn       ; If player has died for whatever reason, don't do anything
                 moveq   #signextendB(sfx_BigRing),d0
                 jsr     (Play_SFX).l                    ; Play the ring swish sound
                 cmpi.b  #7,(Chaos_emerald_count).w
-                bne.s   loc_6173A                       ; If Chaos Emeralds aren't collected, branch
+                bne.s   SKSSRing_SetPrimaryAndOptionalP2State  ; If Chaos Emeralds aren't collected, branch
                 tst.w   (SK_alone_flag).w
-                bne.s   loc_61794                       ; If only Sonic & Knuckles and the emeralds are collected, go claim 50 rings
+                bne.s   SKSSRing_MarkCollectedAndAward50  ; If only Sonic & Knuckles and the emeralds are collected, go claim 50 rings
                 bsr.w   SSEntry_CheckLevel
-                beq.s   loc_61794                       ; Otherwise, only do so if on an S3 level
+                beq.s   SKSSRing_MarkCollectedAndAward50  ; Otherwise, only do so if on an S3 level
                 cmpi.b  #7,(Super_emerald_count).w
-                beq.s   loc_61794                       ; Only collect rings in an SK level if the Super Emeralds are collected as well
+                beq.s   SKSSRing_MarkCollectedAndAward50  ; Only collect rings in an SK level if the Super Emeralds are collected as well
 
-loc_6173A:
+SKSSRing_SetPrimaryAndOptionalP2State:
                 move.b  #4,routine(a0)
                 move.b  #-1,(Player_prev_frame).w       ; Make the player disappear and lock input
                 lea     (Player_1).w,a1
@@ -87,26 +87,27 @@ loc_6173A:
                 move.b  #$1C,anim(a1)
                 move.b  #$53,object_control(a1)
                 tst.b   (Flying_carrying_Sonic_flag).w
-                beq.s   loc_61778
+                beq.s   SKSSRing_TryAllocateTransitionFlash
                 lea     (Player_2).w,a1
                 move.b  #0,mapping_frame(a1)
                 move.b  #$1C,anim(a1)
                 move.b  #$53,object_control(a1)         ; Lock both players, etc
 
-loc_61778:
+SKSSRing_TryAllocateTransitionFlash:
                 jsr     (AllocateObject).l
-                bne.s   locret_6178A
+                bne.s   SKSSRing_FlashAllocationReturn
                 move.l  #Obj_SSEntryFlash,(a1)
                 move.w  a0,parent3(a1)                  ; Set ring as parent
 
-locret_6178A:
+SKSSRing_FlashAllocationReturn:
                 rts
 ; ---------------------------------------------------------------------------
 SSEntry_Range:
                 dc.w    -$18,   $30,  -$28,   $50
 ; ---------------------------------------------------------------------------
 
-loc_61794:
+; The reward path requests the ring sound again after the initial contact sound
+SKSSRing_MarkCollectedAndAward50:
                 moveq   #signextendB(sfx_BigRing),d0
                 jsr     (Play_SFX).l
                 move.b  subtype(a0),d0
@@ -147,10 +148,10 @@ SSEntryFlash_Init:
                 move.b  subtype(a1),subtype(a0)         ; Copy positional data from parent ring
                 move.w  (Player_1+x_pos).w,d0
                 cmp.w   x_pos(a0),d0
-                blo.s   locret_61820
+                blo.s   SKSSRing_FlashOrientationReturn
                 bset    #0,render_flags(a1)             ; Set direction based on where player approached
 
-locret_61820:
+SKSSRing_FlashOrientationReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -158,13 +159,13 @@ SSEntryFlash_Main:
                 move.b  mapping_frame(a0),d6
                 jsr     (Animate_RawAdjustFlipX).l
                 cmp.b   mapping_frame(a0),d6
-                beq.s   locret_61844
+                beq.s   SKSSRing_FlashParentCheckReturn
                 cmpi.b  #3,anim_frame(a0)
-                bne.s   locret_61844
+                bne.s   SKSSRing_FlashParentCheckReturn
                 movea.w parent3(a0),a1                  ; Set parent to be deleted in the middle of the animation
                 bset    #5,$38(a1)
 
-locret_61844:
+SKSSRing_FlashParentCheckReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -181,28 +182,29 @@ SSEntryFlash_GoSS:
                 jsr     (Clear_SpriteRingMem).l
                 jsr     (Save_Level_Data2).l
                 tst.b   subtype(a0)
-                bmi.s   loc_618AC                       ; If negative, always go to HPZ
+                bmi.s   SKSSRing_RequestHiddenPalaceRestart  ; If negative, always go to HPZ
                 moveq   #0,d0
                 tst.w   (SK_alone_flag).w
-                bne.s   loc_61892                       ; If SK alone, go directly to special stage
+                bne.s   SKSSRing_StoreVariantAndEnterStage  ; If SK alone, go directly to special stage
                 bsr.w   SSEntry_CheckLevel
-                beq.s   loc_61892                       ; Otherwise, do so if S3 levels
+                beq.s   SKSSRing_StoreVariantAndEnterStage  ; Otherwise, do so if S3 levels
                 cmpi.b  #7,(Chaos_emerald_count).w
-                bne.s   loc_61892                       ; or if Chaos Emeralds aren't collected
-                bra.w   loc_618AC                       ; When conditions are met, go to HPZ
+                bne.s   SKSSRing_StoreVariantAndEnterStage  ; or if Chaos Emeralds aren't collected
+                bra.w   SKSSRing_RequestHiddenPalaceRestart  ; When conditions are met, go to HPZ
 ; ---------------------------------------------------------------------------
 ; unused
                 moveq   #1,d0
 
-loc_61892:
+SKSSRing_StoreVariantAndEnterStage:
                 move.b  d0,(SK_special_stage_flag).w    ; Regular ring takes you directly to special stage
                 move.b  #1,(Special_bonus_entry_flag).w
                 move.b  #GameMode_SpecialStage,(Game_mode).w
                 move.b  #1,(Respawn_table_keep).w
-                bra.w   loc_618D0
+                bra.w   SKSSRing_MarkCollectedAndScheduleDelete
 ; ---------------------------------------------------------------------------
 
-loc_618AC:
+; Keep the secondary player's saved snapshot for this restart
+SKSSRing_RequestHiddenPalaceRestart:
                 move.b  #2,(Special_bonus_entry_flag).w  ; Super Emerald takes you to HPZ
                 move.w  #$1701,(Current_zone_and_act).w
                 move.w  #$1701,(Apparent_zone_and_act).w
@@ -210,7 +212,7 @@ loc_618AC:
                 move.b  #1,(Restart_level_flag).w
                 move.b  #1,(Respawn_table_keep).w
 
-loc_618D0:
+SKSSRing_MarkCollectedAndScheduleDelete:
                 move.b  subtype(a0),d0
                 move.l  (Collected_special_ring_array).w,d1
                 bset    d0,d1
@@ -221,14 +223,14 @@ loc_618D0:
 
 SSEntry_CheckLevel:
                 cmpi.b  #7,(Current_zone).w
-                bhs.s   loc_618F8
+                bhs.s   SKSSEntry_ReturnNonS3ZoneClassification
                 cmpi.b  #4,(Current_zone).w
-                beq.s   loc_618F8
+                beq.s   SKSSEntry_ReturnNonS3ZoneClassification
                 moveq   #0,d1                           ; 0 is S3 levels
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_618F8:
+SKSSEntry_ReturnNonS3ZoneClassification:
                 moveq   #1,d1                           ; 1 is SK levels
                 rts
 ; End of function SSEntry_CheckLevel
@@ -237,38 +239,38 @@ loc_618F8:
 
 SSEntryRing_Display:
                 btst    #5,$38(a0)
-                bne.s   loc_6196A
+                bne.s   SKSSRing_RestoreColorsAndArtThenDelete
                 tst.b   4(a0)
-                bpl.s   loc_61928
+                bpl.s   SKSSRing_DrawWithinCameraWindow
                 btst    #6,$38(a0)
-                beq.s   loc_61918
+                beq.s   SKSSRing_RefreshDPLCAndDraw
                 jsr     (Run_PalRotationScript).l       ; Only run the rotation script if this is a Super Emerald ring
 
-loc_61918:
+SKSSRing_RefreshDPLCAndDraw:
                 lea     DPLCPtr_SSEntryRing(pc),a2
                 jsr     (Perform_DPLC).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_61928:
+SKSSRing_DrawWithinCameraWindow:
                 move.w  x_pos(a0),d0                    ; If off-screen
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.s   loc_6196A
+                bhi.s   SKSSRing_RestoreColorsAndArtThenDelete
                 move.w  y_pos(a0),d0
                 move.w  (Camera_Y_pos).w,d1
                 move.w  y_pos(a0),d0
                 sub.w   (Camera_Y_pos).w,d0
                 addi.w  #$80,d0
                 cmpi.w  #$200,d0
-                bhi.w   loc_6196A                       ; Jump below when far enough off-screen
+                bhi.w   SKSSRing_RestoreColorsAndArtThenDelete  ; Jump below when far enough off-screen
                 move.l  #$EE0088,(Normal_palette_line_2+$A).w
                 move.w  #$44,(Normal_palette_line_2+$1E).w
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6196A:
+SKSSRing_RestoreColorsAndArtThenDelete:
                 move.l  #$EE0088,(Normal_palette_line_2+$A).w
                 move.w  #$44,(Normal_palette_line_2+$1E).w  ; Restore the part of the palette that was changed
                 lea     (ArtKosM_BadnikExplosion).l,a1

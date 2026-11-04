@@ -4,7 +4,7 @@
 
 ; ---------------------------------------------------------------------------
 
-Obj_SStage_9444:
+SStageTailsTail_InitializeAttachment:
                 move.b  #4,render_flags(a0)
                 move.b  #$10,width_pixels(a0)
                 move.b  #$10,height_pixels(a0)
@@ -15,40 +15,40 @@ Obj_SStage_9444:
                 move.w  #$70,$32(a0)
                 move.b  #-1,$3A(a0)
                 move.b  #1,mapping_frame(a0)
-                move.l  #loc_9488,(a0)
+                move.l  #SKSS_TailFollowAndSelectRate,(a0)
 
-loc_9488:
+SKSS_TailFollowAndSelectRate:
                 movea.w $3E(a0),a1
                 move.w  x_pos(a1),x_pos(a0)
                 move.w  y_pos(a1),y_pos(a0)
                 move.w  #$2AAA,d0
                 move.w  (Special_stage_velocity).w,d1
-                bmi.s   loc_94A4
+                bmi.s   SKSS_TailAdvanceFrameOnCarry
                 add.w   d1,d0
 
-loc_94A4:
+SKSS_TailAdvanceFrameOnCarry:
                 add.w   d0,anim_frame_timer(a0)
-                bcc.s   loc_94BC
+                bcc.s   SStageTailsTail_DrawAndQueueChangedArt
                 move.b  mapping_frame(a0),d0
                 addq.b  #1,d0
                 cmpi.b  #$F,d0
-                blo.s   loc_94B8
+                blo.s   SStageTailsTail_StoreAdvancedFrame
                 moveq   #1,d0
 
-loc_94B8:
+SStageTailsTail_StoreAdvancedFrame:
                 move.b  d0,mapping_frame(a0)
 
-loc_94BC:
+SStageTailsTail_DrawAndQueueChangedArt:
                 jsr     (Draw_Sprite).l
                 lea     (PLC_SStageTailstails).l,a2
                 move.l  #ArtUnc_SStageTailstails,d6
                 move.w  #tiles_to_bytes(ArtTile_SStage_Player2_Tail),d4
-                bra.w   SStage_PLCLoad_91A2
+                bra.w   SStagePlayer_QueueArtForChangedFrame
 
 ; =============== S U B R O U T I N E =======================================
 
 Draw_SSShadows:
-                lea     (word_94FC).l,a3
+                lea     (SStageShadows_HardwareSpriteTemplates).l,a3
                 move.w  (a3)+,(a6)+
                 move.b  (a3)+,(a6)+
                 addq.w  #1,a3
@@ -56,7 +56,7 @@ Draw_SSShadows:
                 move.w  (a3)+,(a6)+
                 move.w  (a3)+,(a6)+
                 tst.w   (Player_mode).w
-                bne.s   locret_94FA
+                bne.s   SStageShadows_ReturnAfterHardwareSprites
                 move.w  (a3)+,(a6)+
                 move.b  (a3)+,(a6)+
                 addq.w  #1,a3
@@ -64,12 +64,12 @@ Draw_SSShadows:
                 move.w  (a3)+,(a6)+
                 move.w  (a3)+,(a6)+
 
-locret_94FA:
+SStageShadows_ReturnAfterHardwareSprites:
                 rts
 ; End of function Draw_SSShadows
 
 ; ---------------------------------------------------------------------------
-word_94FC:
+SStageShadows_HardwareSpriteTemplates:
                 dc.w    $116, $F0A, make_art_tile(ArtTile_SStage_Shadow,3,1), $110
                 dc.w    $127, $F0B, make_art_tile(ArtTile_SStage_Shadow,3,1), $110
 
@@ -121,109 +121,109 @@ SStage_ProjectCharacterCoordinates:
 
 SStage_UpdatePlayerGridMotion:
                 tst.b   (Special_stage_fade_timer).w
-                beq.s   loc_95AE
+                beq.s   SKSStage_SelectMotionAxisFromAngleBitSix
                 cmpi.b  #$61,(Special_stage_fade_timer).w
-                bhs.s   loc_959A
+                bhs.s   SKSS_CheckAlignmentAfterExitSpin
                 moveq   #8,d1
                 add.b   d1,(Special_stage_angle).w
                 addq.b  #1,(Special_stage_fade_timer).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_959A:
+SKSS_CheckAlignmentAfterExitSpin:
                 move.w  (Special_stage_X_pos).w,d0
                 or.w    (Special_stage_Y_pos).w,d0
                 andi.w  #$E0,d0
-                beq.s   loc_95AE
+                beq.s   SKSStage_SelectMotionAxisFromAngleBitSix
                 move.b  #0,(Special_stage_fade_timer).w
 
-loc_95AE:
+SKSStage_SelectMotionAxisFromAngleBitSix:
                 move.w  (Special_stage_X_pos).w,d3
                 btst    #6,(Special_stage_angle).w
-                bne.s   loc_95BE
+                bne.s   SKSS_TurnAtAlignedGroundCell
                 move.w  (Special_stage_Y_pos).w,d3
 
-loc_95BE:
+SKSS_TurnAtAlignedGroundCell:
                 moveq   #0,d2
                 move.b  (Special_stage_turning).w,d1
-                beq.s   loc_95F4
+                beq.s   SKSS_UnlockTurnOutsideCellCenter
                 andi.w  #$E0,d3
-                bne.s   loc_95F4
+                bne.s   SKSS_UnlockTurnOutsideCellCenter
                 tst.b   (Special_stage_jumping).w
-                bmi.s   loc_9600
+                bmi.s   SKSS_LoadControlsAndGateAcceleration
                 add.b   d1,(Special_stage_angle).w
                 move.b  (Special_stage_angle).w,d0
                 andi.b  #$3F,d0
-                bne.w   locret_972C
+                bne.w   SKSS_GridMovementReturn
                 move.b  #0,(Special_stage_turning).w
                 tst.w   (Special_stage_velocity).w
-                beq.s   loc_95F4
+                beq.s   SKSS_UnlockTurnOutsideCellCenter
                 move.b  #1,(Special_stage_turn_lock).w
 
-loc_95F4:
+SKSS_UnlockTurnOutsideCellCenter:
                 andi.w  #$E0,d3
-                beq.s   loc_9600
+                beq.s   SKSS_LoadControlsAndGateAcceleration
                 move.b  #0,(Special_stage_turn_lock).w
 
-loc_9600:
+SKSS_LoadControlsAndGateAcceleration:
                 move.b  (Ctrl_1).w,d1
                 move.w  (Special_stage_velocity).w,d2
                 tst.b   (Special_stage_clear_routine).w
-                bne.w   loc_96FA
+                bne.w   SKSStage_DoubleOnlySpringJumpWorkingStep
                 tst.b   (Special_stage_bumper_lock).w
-                bne.s   loc_9658
+                bne.s   SKSStage_RequestLeftTurnUnlessTurnLocked
                 btst    #button_up,d1
-                beq.s   loc_9628
+                beq.s   SKSS_AccelerateTowardReverseRate
                 move.b  #1,(Special_stage_advancing).w
                 move.b  #1,(Special_stage_started).w
 
-loc_9628:
+SKSS_AccelerateTowardReverseRate:
                 tst.b   (Special_stage_advancing).w
-                bne.s   loc_964A
+                bne.s   SKSS_AccelerateTowardForwardRate
                 tst.b   (Special_stage_started).w
-                beq.s   loc_9658
+                beq.s   SKSStage_RequestLeftTurnUnlessTurnLocked
                 tst.w   d2
-                bpl.s   loc_964A
+                bpl.s   SKSS_AccelerateTowardForwardRate
                 move.w  (Special_stage_rate).w,d3
                 neg.w   d3
                 subi.w  #$200,d2
                 cmp.w   d3,d2
-                bgt.s   loc_9658
+                bgt.s   SKSStage_RequestLeftTurnUnlessTurnLocked
                 move.w  d3,d2
-                bra.s   loc_9658
+                bra.s   SKSStage_RequestLeftTurnUnlessTurnLocked
 ; ---------------------------------------------------------------------------
 
-loc_964A:
+SKSS_AccelerateTowardForwardRate:
                 move.w  (Special_stage_rate).w,d3
                 addi.w  #$200,d2
                 cmp.w   d3,d2
-                blt.s   loc_9658
+                blt.s   SKSStage_RequestLeftTurnUnlessTurnLocked
                 move.w  d3,d2
 
-loc_9658:
+SKSStage_RequestLeftTurnUnlessTurnLocked:
                 tst.b   (Special_stage_turn_lock).w
-                bne.s   loc_9676
+                bne.s   SKSS_StoreVelocityAndCheckBumper
                 btst    #button_left,d1
-                beq.s   loc_966A
+                beq.s   SKSS_GiveRightTurnPriority
                 move.b  #4,(Special_stage_turning).w
 
-loc_966A:
+SKSS_GiveRightTurnPriority:
                 btst    #button_right,d1
-                beq.s   loc_9676
+                beq.s   SKSS_StoreVelocityAndCheckBumper
                 move.b  #-4,(Special_stage_turning).w
 
-loc_9676:
+SKSS_StoreVelocityAndCheckBumper:
                 move.w  d2,(Special_stage_velocity).w
                 tst.b   (Special_stage_bumper_lock).w
-                beq.s   loc_96FA
+                beq.s   SKSStage_DoubleOnlySpringJumpWorkingStep
                 move.w  (Special_stage_X_pos).w,d0
                 btst    #6,(Special_stage_angle).w
-                bne.s   loc_9690
+                bne.s   SKSS_ReverseRateOnBumperExit
                 move.w  (Special_stage_Y_pos).w,d0
 
-loc_9690:
+SKSS_ReverseRateOnBumperExit:
                 andi.w  #$E0,d0
-                bne.s   loc_96D4
+                bne.s   SKSS_UpdateLockedBumperMotion
                 move.w  (Special_stage_X_pos).w,d0
                 addi.w  #$80,d0
                 lsr.w   #8,d0
@@ -235,42 +235,43 @@ loc_9690:
                 lsl.w   #5,d1
                 or.b    d0,d1
                 cmp.w   (Special_stage_interact).w,d1
-                beq.s   loc_96D4
+                beq.s   SKSS_UpdateLockedBumperMotion
                 move.b  #0,(Special_stage_bumper_lock).w
                 move.w  (Special_stage_rate).w,d2
                 tst.w   (Special_stage_velocity).w
-                bmi.s   loc_96CE
+                bmi.s   SKSS_SetBumperExitRateAndReturn
                 neg.w   d2
 
-loc_96CE:
+SKSS_SetBumperExitRateAndReturn:
                 move.w  d2,(Special_stage_velocity).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_96D4:
+SKSS_UpdateLockedBumperMotion:
                 move.w  (Special_stage_velocity).w,d2
-                bne.s   loc_96F8
+                bne.s   SKSS_NegateBumperStepVelocity
                 move.b  #0,(Special_stage_bumper_lock).w
                 move.b  #1,(Special_stage_advancing).w
                 move.w  (Special_stage_rate).w,d2
                 tst.w   (Special_stage_velocity).w
-                bmi.s   loc_96F2
+                bmi.s   SKSS_RestartStationaryBumper
                 neg.w   d2
 
-loc_96F2:
+SKSS_RestartStationaryBumper:
                 move.w  d2,(Special_stage_velocity).w
-                bra.s   loc_96FA
+                bra.s   SKSStage_DoubleOnlySpringJumpWorkingStep
 ; ---------------------------------------------------------------------------
 
-loc_96F8:
+; Reverse the local integration velocity while keeping the stored rate
+SKSS_NegateBumperStepVelocity:
                 neg.w   d2
 
-loc_96FA:
+SKSStage_DoubleOnlySpringJumpWorkingStep:
                 cmpi.b  #$81,(Special_stage_jumping).w
-                bne.s   loc_9704
+                bne.s   SKSS_IntegrateGridAndHandleCell
                 add.w   d2,d2
 
-loc_9704:
+SKSS_IntegrateGridAndHandleCell:
                 move.b  (Special_stage_angle).w,d0
                 jsr     (GetSineCosine).l
                 muls.w  d2,d0
@@ -280,12 +281,12 @@ loc_9704:
                 swap    d1
                 sub.w   d1,(Special_stage_Y_pos).w
                 tst.b   (Special_stage_jumping).w
-                bmi.s   locret_972C
+                bmi.s   SKSS_GridMovementReturn
                 tst.b   (Special_stage_clear_routine).w
-                bne.s   locret_972C
+                bne.s   SKSS_GridMovementReturn
                 bsr.s   SStage_HandlePlayerGridCell
 
-locret_972C:
+SKSS_GridMovementReturn:
                 rts
 ; End of function SStage_UpdatePlayerGridMotion
 
@@ -305,54 +306,55 @@ SStage_HandlePlayerGridCell:
                 or.b    d0,d1
                 lea     (a1,d1.w),a1
                 move.b  (a1),d2
-                beq.w   locret_98AE
+                beq.w   SKSS_GridContactReturn
                 cmpi.b  #1,d2
-                bne.s   loc_97AA
+                bne.s   SKSS_TryQueueBlueSphereContact
                 move.w  (Special_stage_X_pos).w,d0
                 or.w    (Special_stage_Y_pos).w,d0
                 andi.w  #$E0,d0
-                bne.s   locret_97A8
+                bne.s   SKSS_RedSphereContactReturn
                 tst.b   (Special_stage_fade_timer).w
-                bne.s   locret_97A8
+                bne.s   SKSS_RedSphereContactReturn
                 move.b  #1,(Special_stage_fade_timer).w
                 move.b  #GameMode_SpecialStageResults,(Game_mode).w
                 tst.b   (Blue_spheres_stage_flag).w
-                beq.s   loc_978E
+                beq.s   SKSS_RestoreZoneAfterRedSphere
                 move.b  #GameMode_BlueSpheresTitle,(Game_mode).w
 
-loc_978E:
+SKSS_RestoreZoneAfterRedSphere:
                 tst.b   (Special_bonus_entry_flag).w
-                beq.s   loc_97A0
+                beq.s   SKSS_PlayRedSphereExitSound
                 move.w  (Saved2_zone_and_act).w,(Current_zone_and_act).w
                 ori.b   #$80,(Last_star_post_hit).w
 
-loc_97A0:
+SKSS_PlayRedSphereExitSound:
                 moveq   #signextendB(sfx_Goal),d0
                 jsr     (Play_SFX).l
 
-locret_97A8:
+SKSS_RedSphereContactReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_97AA:
+SKSS_TryQueueBlueSphereContact:
                 cmpi.b  #2,d2
-                bne.s   loc_97C8
+                bne.s   SKSStage_LatchBumperCellAndStopAdvancing
                 bsr.w   Find_SStageCollisionResponseSlot
-                bne.s   loc_97BE
+                bne.s   SKSS_PlayBlueSphereSound
                 move.b  #2,(a2)
                 move.l  a1,4(a2)
 
-loc_97BE:
+; The sound still plays if the contact queue is full
+SKSS_PlayBlueSphereSound:
                 moveq   #signextendB(sfx_BlueSphere),d0
                 jsr     (Play_SFX).l
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_97C8:
+SKSStage_LatchBumperCellAndStopAdvancing:
                 cmpi.b  #3,d2
-                bne.s   loc_97EE
+                bne.s   SKSS_ArmSpringJumpAtCardinalAngle
                 tst.b   (Special_stage_bumper_lock).w
-                bne.s   loc_97EE
+                bne.s   SKSS_ArmSpringJumpAtCardinalAngle
                 move.w  d1,(Special_stage_interact).w
                 move.b  #1,(Special_stage_bumper_lock).w
                 move.b  #0,(Special_stage_advancing).w
@@ -361,72 +363,72 @@ loc_97C8:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_97EE:
+SKSS_ArmSpringJumpAtCardinalAngle:
                 cmpi.b  #5,d2
-                bne.s   loc_9822
+                bne.s   SKSS_TryQueueRingResponse
                 tst.b   (Special_stage_clear_routine).w
-                bne.s   loc_9822
+                bne.s   SKSS_TryQueueRingResponse
                 tst.b   (Special_stage_jumping).w
-                bmi.s   loc_9822
+                bmi.s   SKSS_TryQueueRingResponse
                 move.b  (Special_stage_angle).w,d0
                 andi.b  #$3F,d0
-                bne.w   loc_9822
+                bne.w   SKSS_TryQueueRingResponse
                 move.l  #$FFE80000,$40(a0)
                 move.b  #$81,(Special_stage_jumping).w
                 moveq   #signextendB(sfx_Spring),d0
                 jsr     (Play_SFX).l
 
-loc_9822:
+SKSS_TryQueueRingResponse:
                 cmpi.b  #4,d2
-                bne.w   locret_98AE
+                bne.w   SKSS_GridContactReturn
                 bsr.w   Find_SStageCollisionResponseSlot
-                bne.s   loc_9838
+                bne.s   SKSS_TickRemainingRingsAndCheckPerfect
                 move.b  #1,(a2)
                 move.l  a1,4(a2)
 
-loc_9838:
+SKSS_TickRemainingRingsAndCheckPerfect:
                 tst.w   (Special_stage_rings_left).w
-                beq.s   loc_984C
+                beq.s   SKSS_AddRingAndCheckContinue
                 subq.w  #1,(Special_stage_rings_left).w
-                bne.s   loc_984C
+                bne.s   SKSS_AddRingAndCheckContinue
                 moveq   #signextendB(sfx_Perfect),d0
                 jsr     (Play_Music).l
 
-loc_984C:
+SKSS_AddRingAndCheckContinue:
                 addi.w  #1,(Special_stage_ring_count).w
                 bset    #7,(Special_stage_extra_life_flags).w
                 moveq   #signextendB(sfx_RingRight),d0
                 tst.b   (Blue_spheres_stage_flag).w
-                bne.s   loc_98A6
+                bne.s   SKSS_PlayRingOrLifeSound
                 cmpi.w  #50,(Special_stage_ring_count).w
-                blo.s   loc_987E
+                blo.s   SKSS_Check100And200RingLifeLatches
                 bset    #0,(Special_stage_extra_life_flags).w
-                bne.s   loc_987E
+                bne.s   SKSS_Check100And200RingLifeLatches
                 addq.b  #1,(Continue_count).w
                 move.w  #signextendB(sfx_Continue),d0
                 jmp     (Play_Music).l
 ; ---------------------------------------------------------------------------
 
-loc_987E:
+SKSS_Check100And200RingLifeLatches:
                 moveq   #signextendB(sfx_RingRight),d0
                 cmpi.w  #100,(Special_stage_ring_count).w
-                blo.s   loc_98A6
+                blo.s   SKSS_PlayRingOrLifeSound
                 bset    #1,(Special_stage_extra_life_flags).w
-                beq.s   loc_98A0
+                beq.s   SKSS_AddLifeAndSelectSound
                 cmpi.w  #200,(Special_stage_ring_count).w
-                blo.s   loc_98A6
+                blo.s   SKSS_PlayRingOrLifeSound
                 bset    #2,(Special_stage_extra_life_flags).w
-                bne.s   loc_98A6
+                bne.s   SKSS_PlayRingOrLifeSound
 
-loc_98A0:
+SKSS_AddLifeAndSelectSound:
                 addq.b  #1,(Life_count).w
                 moveq   #signextendB(sfx_RingLoss),d0
 
-loc_98A6:
+SKSS_PlayRingOrLifeSound:
                 jsr     (Play_SFX).l
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_98AE:
+SKSS_GridContactReturn:
                 rts
 ; End of function SStage_HandlePlayerGridCell

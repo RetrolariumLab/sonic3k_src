@@ -106,7 +106,7 @@ loc_4A3AC:
 loc_4A3B6:
                 move.b  y_pos(a0),d0
                 andi.w  #$F,d0
-                lea     (byte_1E44C4).l,a1
+                lea     (SKPachinko_HighYBandRingAwardBytes).l,a1
                 move.b  (a1,d0.w),d0
                 add.w   d0,(Saved_ring_count).w
                 jmp     (AddRings).l
