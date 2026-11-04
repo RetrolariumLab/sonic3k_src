@@ -108540,58 +108540,58 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 664
       },
-      "declarations_sha256": "f0fcf8220faebea60b7ff14ee31f609459a01e0c9fb86f2518e853714f2b53de",
+      "declarations_sha256": "5a5f63f855825edcfc6eec70e26d65b2154bdbb558219da7f2265e0d6a68b4f1",
       "labels": {
         "Map_MGZEndBoss_": 0,
-        "Frame_36266A": 98,
-        "Frame_36268A": 130,
-        "Frame_362698": 144,
-        "Frame_3626A6": 158,
-        "Frame_3626C0": 184,
-        "Frame_3626D4": 204,
-        "Frame_3626DC": 212,
-        "Frame_3626E4": 220,
-        "Frame_3626EC": 228,
-        "Frame_3626FA": 242,
-        "Frame_362702": 250,
-        "Frame_36270A": 258,
-        "Frame_362712": 266,
-        "Frame_36271A": 274,
-        "Frame_362722": 282,
-        "Frame_36272A": 290,
-        "Frame_362738": 304,
-        "Frame_362746": 318,
-        "Frame_362754": 332,
-        "Frame_36275C": 340,
-        "Frame_36276A": 354,
-        "Frame_362772": 362,
-        "Frame_36277A": 370,
-        "Frame_362782": 378,
-        "Frame_36278A": 386,
-        "Frame_362792": 394,
-        "Frame_36279A": 402,
-        "Frame_3627A2": 410,
-        "Frame_3627AA": 418,
-        "Frame_3627B2": 426,
-        "Frame_3627CC": 452,
-        "Frame_3627E0": 472,
-        "Frame_3627FA": 498,
-        "Frame_362808": 512,
-        "Frame_362816": 526,
-        "Frame_362824": 540,
-        "Frame_362832": 554,
-        "Frame_36283A": 562,
-        "Frame_362842": 570,
-        "Frame_36284A": 578,
-        "Frame_362852": 586,
-        "Frame_36285A": 594,
-        "Frame_362862": 602,
-        "Frame_36286A": 610,
-        "Frame_362872": 618,
-        "Frame_36287A": 626,
-        "Frame_362882": 634,
-        "Frame_36288A": 642,
-        "Frame_362898": 656
+        "MGZEndBossS3_MapFrame00": 98,
+        "MGZEndBossS3_MapFrame01": 130,
+        "MGZEndBossS3_MapFrame02": 144,
+        "MGZEndBossS3_MapFrame03": 158,
+        "MGZEndBossS3_MapFrame04": 184,
+        "MGZEndBossS3_MapFrame05": 204,
+        "MGZEndBossS3_MapFrame06": 212,
+        "MGZEndBossS3_MapFrame07": 220,
+        "MGZEndBossS3_MapFrame08": 228,
+        "MGZEndBossS3_MapFrame09": 242,
+        "MGZEndBossS3_MapFrame0A": 250,
+        "MGZEndBossS3_MapFrame0B": 258,
+        "MGZEndBossS3_MapFrame0C": 266,
+        "MGZEndBossS3_MapFrame0D": 274,
+        "MGZEndBossS3_MapFrame0E": 282,
+        "MGZEndBossS3_MapFrame0F": 290,
+        "MGZEndBossS3_MapFrame10": 304,
+        "MGZEndBossS3_MapFrame11": 318,
+        "MGZEndBossS3_MapFrame12": 332,
+        "MGZEndBossS3_MapFrame13": 340,
+        "MGZEndBossS3_MapFrame14": 354,
+        "MGZEndBossS3_MapFrame15": 362,
+        "MGZEndBossS3_MapFrame16": 370,
+        "MGZEndBossS3_MapFrame17": 378,
+        "MGZEndBossS3_MapFrame18": 386,
+        "MGZEndBossS3_MapFrame19": 394,
+        "MGZEndBossS3_MapFrame1A": 402,
+        "MGZEndBossS3_MapFrame1B": 410,
+        "MGZEndBossS3_MapFrame1C": 418,
+        "MGZEndBossS3_MapFrame1D": 426,
+        "MGZEndBossS3_MapFrame1E": 452,
+        "MGZEndBossS3_MapFrame1F": 472,
+        "MGZEndBossS3_MapFrame20": 498,
+        "MGZEndBossS3_MapFrame21": 512,
+        "MGZEndBossS3_MapFrame22": 526,
+        "MGZEndBossS3_MapFrame23": 540,
+        "MGZEndBossS3_MapFrame24": 554,
+        "MGZEndBossS3_MapFrame25": 562,
+        "MGZEndBossS3_MapFrame26": 570,
+        "MGZEndBossS3_MapFrame27": 578,
+        "MGZEndBossS3_MapFrame28": 586,
+        "MGZEndBossS3_MapFrame29": 594,
+        "MGZEndBossS3_MapFrame2A": 602,
+        "MGZEndBossS3_MapFrame2B": 610,
+        "MGZEndBossS3_MapFrame2C": 618,
+        "MGZEndBossS3_MapFrame2D": 626,
+        "MGZEndBossS3_MapFrame2E": 634,
+        "MGZEndBossS3_MapFrame2F": 642,
+        "MGZEndBossS3_MapFrame30": 656
       },
       "external_symbols": [],
       "blocks": [
@@ -108599,343 +108599,343 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36266A",
+          "target": "MGZEndBossS3_MapFrame00",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36268A",
+          "target": "MGZEndBossS3_MapFrame01",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362698",
+          "target": "MGZEndBossS3_MapFrame02",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3626A6",
+          "target": "MGZEndBossS3_MapFrame03",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3626C0",
+          "target": "MGZEndBossS3_MapFrame04",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3626D4",
+          "target": "MGZEndBossS3_MapFrame05",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3626DC",
+          "target": "MGZEndBossS3_MapFrame06",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3626E4",
+          "target": "MGZEndBossS3_MapFrame07",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3626EC",
+          "target": "MGZEndBossS3_MapFrame08",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3626FA",
+          "target": "MGZEndBossS3_MapFrame09",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362702",
+          "target": "MGZEndBossS3_MapFrame0A",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36270A",
+          "target": "MGZEndBossS3_MapFrame0B",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362712",
+          "target": "MGZEndBossS3_MapFrame0C",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36271A",
+          "target": "MGZEndBossS3_MapFrame0D",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362722",
+          "target": "MGZEndBossS3_MapFrame0E",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36272A",
+          "target": "MGZEndBossS3_MapFrame0F",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362738",
+          "target": "MGZEndBossS3_MapFrame10",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362746",
+          "target": "MGZEndBossS3_MapFrame11",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362754",
+          "target": "MGZEndBossS3_MapFrame12",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36275C",
+          "target": "MGZEndBossS3_MapFrame13",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36276A",
+          "target": "MGZEndBossS3_MapFrame14",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362772",
+          "target": "MGZEndBossS3_MapFrame15",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36277A",
+          "target": "MGZEndBossS3_MapFrame16",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362782",
+          "target": "MGZEndBossS3_MapFrame17",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36278A",
+          "target": "MGZEndBossS3_MapFrame18",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362792",
+          "target": "MGZEndBossS3_MapFrame19",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36279A",
+          "target": "MGZEndBossS3_MapFrame1A",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3627A2",
+          "target": "MGZEndBossS3_MapFrame1B",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3627AA",
+          "target": "MGZEndBossS3_MapFrame1C",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 58,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3627B2",
+          "target": "MGZEndBossS3_MapFrame1D",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 60,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3627CC",
+          "target": "MGZEndBossS3_MapFrame1E",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 62,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3627E0",
+          "target": "MGZEndBossS3_MapFrame1F",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 64,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3627FA",
+          "target": "MGZEndBossS3_MapFrame20",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 66,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362808",
+          "target": "MGZEndBossS3_MapFrame21",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 68,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362816",
+          "target": "MGZEndBossS3_MapFrame22",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 70,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362824",
+          "target": "MGZEndBossS3_MapFrame23",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 72,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362832",
+          "target": "MGZEndBossS3_MapFrame24",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 74,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36283A",
+          "target": "MGZEndBossS3_MapFrame25",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 76,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362842",
+          "target": "MGZEndBossS3_MapFrame26",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 78,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36284A",
+          "target": "MGZEndBossS3_MapFrame27",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 80,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362852",
+          "target": "MGZEndBossS3_MapFrame28",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 82,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36285A",
+          "target": "MGZEndBossS3_MapFrame29",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 84,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362862",
+          "target": "MGZEndBossS3_MapFrame2A",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 86,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36286A",
+          "target": "MGZEndBossS3_MapFrame2B",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 88,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362872",
+          "target": "MGZEndBossS3_MapFrame2C",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 90,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36287A",
+          "target": "MGZEndBossS3_MapFrame2D",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 92,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362882",
+          "target": "MGZEndBossS3_MapFrame2E",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 94,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36288A",
+          "target": "MGZEndBossS3_MapFrame2F",
           "base": "Map_MGZEndBoss_"
         },
         {
           "offset": 96,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362898",
+          "target": "MGZEndBossS3_MapFrame30",
           "base": "Map_MGZEndBoss_"
         },
         {
@@ -109194,13 +109194,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 40
       },
-      "declarations_sha256": "ea30b4b18b45c775ecc97399d23755bcf05297c0df3e63549cba9a3b6c159263",
+      "declarations_sha256": "66382677fc926a2ed102f27a98526b7a9d0ed1959040bca22a63748ee2d580a1",
       "labels": {
         "Map_MGZEndBossDebris_": 0,
-        "Frame_3637DE": 8,
-        "Frame_3637E6": 16,
-        "Frame_3637EE": 24,
-        "Frame_3637F6": 32
+        "MGZBossDebrisS3_MapFrame00": 8,
+        "MGZBossDebrisS3_MapFrame01": 16,
+        "MGZBossDebrisS3_MapFrame02": 24,
+        "MGZBossDebrisS3_MapFrame03": 32
       },
       "external_symbols": [],
       "blocks": [
@@ -109208,28 +109208,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3637DE",
+          "target": "MGZBossDebrisS3_MapFrame00",
           "base": "Map_MGZEndBossDebris_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3637E6",
+          "target": "MGZBossDebrisS3_MapFrame01",
           "base": "Map_MGZEndBossDebris_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3637EE",
+          "target": "MGZBossDebrisS3_MapFrame02",
           "base": "Map_MGZEndBossDebris_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3637F6",
+          "target": "MGZBossDebrisS3_MapFrame03",
           "base": "Map_MGZEndBossDebris_"
         },
         {
@@ -109414,16 +109414,16 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 166
       },
-      "declarations_sha256": "61c1d5291dff73c60a393497d9e57b46a2a03d4104c61aee27484e8af645dfaf",
+      "declarations_sha256": "fb19bbc49aa38fcff0aed64ab77041ddf5650a6c7fae5c59b50aff53276404c9",
       "labels": {
         "Map_MGZMiniboss_": 0,
-        "Frame_361980": 14,
-        "Frame_3619A6": 52,
-        "Frame_3619CC": 90,
-        "Frame_3619F2": 128,
-        "Frame_3619FA": 136,
-        "Frame_361A08": 150,
-        "Frame_361A10": 158
+        "MGZMinibossS3_MapFrame00": 14,
+        "MGZMinibossS3_MapFrame01": 52,
+        "MGZMinibossS3_MapFrame02": 90,
+        "MGZMinibossS3_MapFrame03": 128,
+        "MGZMinibossS3_MapFrame04": 136,
+        "MGZMinibossS3_MapFrame05": 150,
+        "MGZMinibossS3_MapFrame06": 158
       },
       "external_symbols": [],
       "blocks": [
@@ -109431,49 +109431,49 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361980",
+          "target": "MGZMinibossS3_MapFrame00",
           "base": "Map_MGZMiniboss_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3619A6",
+          "target": "MGZMinibossS3_MapFrame01",
           "base": "Map_MGZMiniboss_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3619CC",
+          "target": "MGZMinibossS3_MapFrame02",
           "base": "Map_MGZMiniboss_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3619F2",
+          "target": "MGZMinibossS3_MapFrame03",
           "base": "Map_MGZMiniboss_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3619FA",
+          "target": "MGZMinibossS3_MapFrame04",
           "base": "Map_MGZMiniboss_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361A08",
+          "target": "MGZMinibossS3_MapFrame05",
           "base": "Map_MGZMiniboss_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361A10",
+          "target": "MGZMinibossS3_MapFrame06",
           "base": "Map_MGZMiniboss_"
         },
         {
@@ -109522,10 +109522,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 10
       },
-      "declarations_sha256": "eef2a439a0282319c28663758fdccf229ffb8e2c444544101335e2e22232e028",
+      "declarations_sha256": "aa9ade24b8ac4febd630b259e7c1621a660ada717ff326fd447814030e2cabfc",
       "labels": {
         "Map_MGZMinibossSpires_": 0,
-        "word_88B80": 2
+        "MGZMinibossSpire_MapFrame00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -109533,7 +109533,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_88B80",
+          "target": "MGZMinibossSpire_MapFrame00",
           "base": "Map_MGZMinibossSpires_"
         },
         {

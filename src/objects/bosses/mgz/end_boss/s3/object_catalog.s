@@ -6,103 +6,103 @@ ObjDat_MGZDrillBoss:
                 dc.w    make_art_tile(ArtTile_MGZEndBoss,1,0)
                 dc.w    $300
                 dc.b    $24, $20,   0,  $F
-word_4B390:
+MGZBossS3_RootCoverAttributes:
                 dc.w    $380
                 dc.b    $10, $10,   1,   0
-word_4B396:
+MGZBossS3_CarrierAttributes:
                 dc.w    $300
                 dc.b    $18, $18,   2,   0
-word_4B39C:
+MGZBossS3_DrillAttributes:
                 dc.w    $280
                 dc.b    $C,  $C,   9, $8B
-word_4B3A2:
+MGZBossS3_TrailAndShotAttributes:
                 dc.w    $200
                 dc.b    4,   4, $16, $98
-word_4B3A8:
+MGZBossS3_PoseAttachmentAttributes:
                 dc.w    $180
                 dc.b    $C,  $C,   6,   0
-word_4B3AE:
+MGZBossS3_PoseHazardAttributes:
                 dc.w    make_art_tile(ArtTile_MGZEndBoss,0,0)
                 dc.w    $180
                 dc.b    $C,  $C, $19, $9A
-ObjDat3_4B3B6:
+MGZBossS3_ArrivalDebrisAttributes:
                 dc.l    Map_MGZEndBossDebris
                 dc.w    make_art_tile(ArtTile_MGZEndBossDebris,2,1)
                 dc.w    $100
                 dc.b    $10, $10,   0,   0
-word_4B3C2:
+MGZBossS3_UnusedVisualAttributes:
                 dc.w    $200
                 dc.b    $10,   4,   0,   0
-ObjDat3_4B3C8:
+MGZEndBossS3_ScaledFlyby_FullAttributes:
                 dc.l    Map_ScaledArt
                 dc.w    make_art_tile(ArtTile_MGZEndBossScaled,1,0)
                 dc.w    $300
                 dc.b    $20, $20,   0,   0
-ChildObjDat_4B3D4:
+MGZBossS3_MainAttachmentChildren:
                 dc.w    4-1
-                dc.l    loc_4A8D6
+                dc.l    MGZBossS3_InitRootCover
                 dc.b    -$14,  $F
-                dc.l    loc_4A5FC
+                dc.l    MGZBossS3_CarrierDispatchAndDraw
                 dc.b    -$1C, $10
-                dc.l    loc_4AB4E
+                dc.l    MGZBossS3_InitPoseAttachment
                 dc.b    8, $18
-                dc.l    loc_4AB4E
+                dc.l    MGZBossS3_InitPoseAttachment
                 dc.b    -$C, $18
-ChildObjDat_4B3EE:
+MGZBossS3_CarrierDrillChild:
                 dc.w    1-1
-                dc.l    loc_4A69C
+                dc.l    MGZBossS3_DrillDispatchAndDraw
                 dc.b    -$17,   0
-ChildObjDat_4B3F6:
+MGZBossS3_PoseHazardChild:
                 dc.w    1-1
-                dc.l    loc_4ABBE
+                dc.l    MGZBossS3_InitPoseHazardAndCacheBoss
                 dc.b    0, $10
-ChildObjDat_4B3FE:
+MGZBossS3_RightArrivalDebrisChildren:
                 dc.w    $A-1
-                dc.l    loc_4AC36
+                dc.l    MGZBossS3_InitArrivalDebris
                 dc.b    $18,-$40
-ChildObjDat_4B406:
+MGZBossS3_LeftArrivalDebrisChildren:
                 dc.w    $A-1
-                dc.l    loc_4AC36
+                dc.l    MGZBossS3_InitArrivalDebris
                 dc.b    -$18,-$40
-ChildObjDat_4B40E:
+MGZBossS3_DrillPoseCoverChild:
                 dc.w    1-1
-                dc.l    loc_4A902
+                dc.l    MGZBossS3_InitTemporaryCoverPose
                 dc.b    $C,   0
-ChildObjDat_4B416:
+MGZBossS3_LeftTrailChildren:
                 dc.w    8-1
-                dc.l    loc_4AA86
+                dc.l    MGZBossS3_InitTrailMotionAndDelay
                 dc.b    -$10,   0
-ChildObjDat_4B41E:
+MGZBossS3_RightTrailChildren:
                 dc.w    8-1
-                dc.l    loc_4AA86
+                dc.l    MGZBossS3_InitTrailMotionAndDelay
                 dc.b    $10,   0
-ChildObjDat_4B426:
+MGZBossS3_DrillPassEmitterChild:
                 dc.w    1-1
-                dc.l    loc_4A976
+                dc.l    MGZBossS3_InitPassEmitter
                 dc.b    0,   0
-ChildObjDat_4B42E:
+MGZBossS3_EmitterProjectileChild:
                 dc.w    1-1
-                dc.l    loc_4A9CC
+                dc.l    MGZBossS3_InitPassShotAndCacheDrill
                 dc.b    0,   0
-ChildObjDat_4B436:
+MGZBossS3_DefeatFragmentChildren:
                 dc.w    3-1
-                dc.l    loc_4ACC6
+                dc.l    MGZBossS3_InitDefeatFragment
                 dc.b    $C,-$14
-                dc.l    loc_4ACC6
+                dc.l    MGZBossS3_InitDefeatFragment
                 dc.b    -$10,   8
-                dc.l    loc_4ACC6
+                dc.l    MGZBossS3_InitDefeatFragment
                 dc.b    $14,   8
-ChildObjDat_4B44A:
+MGZBossS3_ScaledFlybyChild:
                 dc.w    1-1
-                dc.l    loc_4ACFC
+                dc.l    MGZBossS3_InitScaledFlyby
                 dc.b    0,   0
-byte_4B450:                                             ; unused
+MGZBossS3_UnusedDelayFiveAnim:                          ; unused
                 dc.b    0,   5
                 dc.b    1,   5
                 dc.b    2,   5
                 dc.b    3,   5
                 dc.b    $FC
-byte_4B45B:
+MGZBossS3_DrillExtendFrames9:
                 dc.b    9,   7
                 dc.b    $A,   7
                 dc.b    $B,   7
@@ -118,13 +118,13 @@ byte_4B45B:
                 dc.b    9,   3
                 dc.b    $A,   3
                 dc.b    $B,   3
-                dc.b    $F8, byte_4B47B-byte_4B45B
-byte_4B47B:
+                dc.b    $F8, MGZBossS3_DrillFastFrames9-MGZBossS3_DrillExtendFrames9
+MGZBossS3_DrillFastFrames9:
                 dc.b    9,   2
                 dc.b    $A,   2
                 dc.b    $B,   2
                 dc.b    $FC
-byte_4B482:
+MGZBossS3_DrillExtendFrames12:
                 dc.b    $C,   7
                 dc.b    $D,   7
                 dc.b    $E,   7
@@ -140,13 +140,13 @@ byte_4B482:
                 dc.b    $C,   3
                 dc.b    $D,   3
                 dc.b    $E,   3
-                dc.b    $F8, byte_4B4A2-byte_4B482
-byte_4B4A2:
+                dc.b    $F8, MGZBossS3_DrillFastFrames12-MGZBossS3_DrillExtendFrames12
+MGZBossS3_DrillFastFrames12:
                 dc.b    $C,   2
                 dc.b    $D,   2
                 dc.b    $E,   2
                 dc.b    $FC
-byte_4B4A9:
+MGZBossS3_DrillExtendFrames32:
                 dc.b    $20,   7
                 dc.b    $21,   7
                 dc.b    $22,   7
@@ -162,26 +162,26 @@ byte_4B4A9:
                 dc.b    $20,   3
                 dc.b    $21,   3
                 dc.b    $22,   3
-                dc.b    $F8, byte_4B4C9-byte_4B4A9
-byte_4B4C9:
+                dc.b    $F8, MGZBossS3_DrillFastFrames32-MGZBossS3_DrillExtendFrames32
+MGZBossS3_DrillFastFrames32:
                 dc.b    $20,   2
                 dc.b    $21,   2
                 dc.b    $22,   2
                 dc.b    $FC
-byte_4B4D0:
+MGZEndBossS3_Drill_AngleSixHeldFrameLoop:
                 dc.b    $14, $7F
                 dc.b    $14, $7F
                 dc.b    $FC
-byte_4B4D5:
+MGZBossS3_DrillHoldFrame20:
                 dc.b    $13, $7F
                 dc.b    $13, $7F
                 dc.b    $FC
-byte_4B4DA:
+MGZBossS3_DrillFastFrames38:
                 dc.b    $26,   2
                 dc.b    $27,   2
                 dc.b    $28,   2
                 dc.b    $FC
-byte_4B4E1:
+MGZBossS3_DrillExtendFrames15:
                 dc.b    $F,   7
                 dc.b    $10,   7
                 dc.b    $11,   7
@@ -197,13 +197,13 @@ byte_4B4E1:
                 dc.b    $F,   3
                 dc.b    $10,   3
                 dc.b    $11,   3
-                dc.b    $F8, byte_4B501-byte_4B4E1
-byte_4B501:
+                dc.b    $F8, MGZBossS3_DrillFastFrames15-MGZBossS3_DrillExtendFrames15
+MGZBossS3_DrillFastFrames15:
                 dc.b    $F,   2
                 dc.b    $10,   2
                 dc.b    $11,   2
                 dc.b    $FC
-byte_4B508:
+MGZBossS3_DrillRetractFrames9:
                 dc.b    9,   3
                 dc.b    $A,   3
                 dc.b    $B,   3
@@ -220,7 +220,7 @@ byte_4B508:
                 dc.b    $A,   7
                 dc.b    $B,   7
                 dc.b    $F4
-byte_4B527:
+MGZBossS3_DrillRetractFrames12:
                 dc.b    $C,   3
                 dc.b    $D,   3
                 dc.b    $E,   3
@@ -237,7 +237,7 @@ byte_4B527:
                 dc.b    $D,   7
                 dc.b    $E,   7
                 dc.b    $F4
-byte_4B546:
+MGZBossS3_DrillRetractFrames32:
                 dc.b    $20,   3
                 dc.b    $21,   3
                 dc.b    $22,   3
@@ -254,7 +254,7 @@ byte_4B546:
                 dc.b    $21,   7
                 dc.b    $22,   7
                 dc.b    $F4
-byte_4B565:
+MGZBossS3_DrillRetractFrames15:
                 dc.b    $F,   3
                 dc.b    $10,   3
                 dc.b    $11,   3
@@ -271,7 +271,7 @@ byte_4B565:
                 dc.b    $10,   7
                 dc.b    $11,   7
                 dc.b    $F4
-RawAni_4B584:
+MGZBossS3_LegacyVisualIdleAnim:
                 dc.b    5,   0,   1, $FC
                 even
 Pal_MGZEndBoss:

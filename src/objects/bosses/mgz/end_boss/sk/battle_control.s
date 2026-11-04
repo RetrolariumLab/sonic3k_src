@@ -12,26 +12,26 @@ Obj_MGZEndBoss:
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 MGZEndBoss_Index:
-                dc.w    loc_6C354-MGZEndBoss_Index
-                dc.w    loc_6C3E6-MGZEndBoss_Index
-                dc.w    loc_6C416-MGZEndBoss_Index
-                dc.w    loc_6C43A-MGZEndBoss_Index
-                dc.w    loc_6C45A-MGZEndBoss_Index
-                dc.w    loc_6C3E6-MGZEndBoss_Index
-                dc.w    loc_6C4B2-MGZEndBoss_Index
-                dc.w    loc_6C4F2-MGZEndBoss_Index
-                dc.w    loc_6C514-MGZEndBoss_Index
-                dc.w    loc_6C3E6-MGZEndBoss_Index
-                dc.w    loc_6C546-MGZEndBoss_Index
-                dc.w    loc_6C3E6-MGZEndBoss_Index
-                dc.w    loc_6C514-MGZEndBoss_Index
-                dc.w    loc_6C5C4-MGZEndBoss_Index
-                dc.w    loc_6C5FE-MGZEndBoss_Index
-                dc.w    loc_6C4F2-MGZEndBoss_Index
-                dc.w    loc_6C514-MGZEndBoss_Index
+                dc.w    MGZBossSK_InitProtectedEntrance-MGZEndBoss_Index
+                dc.w    MGZEndBossSK_Sonic_WaitForPhaseCallback-MGZEndBoss_Index
+                dc.w    MGZBossSK_MoveAndTickDescent-MGZEndBoss_Index
+                dc.w    MGZEndBossSK_Sonic_SwingMoveAndWait-MGZEndBoss_Index
+                dc.w    MGZBossSK_SwingAndTurnToFloor-MGZEndBoss_Index
+                dc.w    MGZEndBossSK_Sonic_WaitForPhaseCallback-MGZEndBoss_Index
+                dc.w    MGZBossSK_MoveAndCheckFloorContact-MGZEndBoss_Index
+                dc.w    MGZBossSK_TickFloorOrFlybyWait-MGZEndBoss_Index
+                dc.w    MGZBossSK_MoveAndTickEntranceTransit-MGZEndBoss_Index
+                dc.w    MGZEndBossSK_Sonic_WaitForPhaseCallback-MGZEndBoss_Index
+                dc.w    MGZEndBossSK_Sonic_SweepAngleDownToZero-MGZEndBoss_Index
+                dc.w    MGZEndBossSK_Sonic_WaitForPhaseCallback-MGZEndBoss_Index
+                dc.w    MGZBossSK_MoveAndTickEntranceTransit-MGZEndBoss_Index
+                dc.w    MGZBossSK_ApproachUntilPlayerPasses-MGZEndBoss_Index
+                dc.w    MGZBossSK_MoveToFlybyThreshold-MGZEndBoss_Index
+                dc.w    MGZBossSK_TickFloorOrFlybyWait-MGZEndBoss_Index
+                dc.w    MGZBossSK_MoveAndTickEntranceTransit-MGZEndBoss_Index
 ; ---------------------------------------------------------------------------
 
-loc_6C354:
+MGZBossSK_InitProtectedEntrance:
                 lea     ObjDat_MGZDrillBoss(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 bset    #7,art_tile(a0)
@@ -43,7 +43,7 @@ loc_6C354:
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
                 move.w  #2*60,$2E(a0)
-                move.l  #loc_6C3EC,$34(a0)
+                move.l  #MGZBossSK_BeginMusicAndSlowDescent,$34(a0)
                 lea     (ArtKosM_MGZEndBoss).l,a1
                 move.w  #tiles_to_bytes(ArtTile_MGZEndBoss),d2
                 jsr     (Queue_Kos_Module).l
@@ -56,162 +56,162 @@ loc_6C354:
                 jsr     (PalLoad_Line1).l
                 lea     (Child1_MakeRoboShip3).l,a2
                 jsr     (CreateChild1_Normal).l
-                bne.s   loc_6C3DC
+                bne.s   MGZBossSK_SpawnEntranceAttachments
                 move.b  #9,subtype(a1)
 
-loc_6C3DC:
-                lea     ChildObjDat_6D7C0(pc),a2
+MGZBossSK_SpawnEntranceAttachments:
+                lea     MGZBossSK_MainAttachmentChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_6C3E6:
+MGZEndBossSK_Sonic_WaitForPhaseCallback:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6C3EC:
+MGZBossSK_BeginMusicAndSlowDescent:
                 move.b  #4,routine(a0)
                 moveq   #signextendB(mus_EndBoss),d0
                 jsr     (Play_Music).l
                 move.b  #mus_EndBoss,(Current_music+1).w
                 move.w  #$80,y_vel(a0)
                 move.w  #$BF,$2E(a0)
-                move.l  #loc_6C422,$34(a0)
+                move.l  #MGZEndBossSK_Sonic_StartInitialSwingHold,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C416:
+MGZBossSK_MoveAndTickDescent:
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6C422:
+MGZEndBossSK_Sonic_StartInitialSwingHold:
                 move.b  #6,routine(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_6C44C,$34(a0)
+                move.l  #MGZBossSK_BeginTurnToFloor,$34(a0)
                 jmp     Swing_Setup1(pc)
 ; ---------------------------------------------------------------------------
 
-loc_6C43A:
+MGZEndBossSK_Sonic_SwingMoveAndWait:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6C44C:
+MGZBossSK_BeginTurnToFloor:
                 move.b  #8,routine(a0)
                 move.w  #3,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C45A:
+MGZBossSK_SwingAndTurnToFloor:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_6C47E
+                bpl.s   MGZBossSK_FloorTurnReturn
                 move.w  #3,$2E(a0)
                 subq.w  #2,angle(a0)
                 cmpi.w  #4,angle(a0)
-                bls.s   loc_6C480
+                bls.s   MGZBossSK_ExtendDrillAndHold
 
-locret_6C47E:
+MGZBossSK_FloorTurnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C480:
+MGZBossSK_ExtendDrillAndHold:
                 move.b  #$A,routine(a0)
                 bset    #3,$38(a0)
                 move.w  #$5F,$2E(a0)
-                move.l  #loc_6C49C,$34(a0)
+                move.l  #MGZEndBossSK_Sonic_StartFloorDive,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C49C:
+MGZEndBossSK_Sonic_StartFloorDive:
                 move.b  #$C,routine(a0)
                 move.w  #$400,y_vel(a0)
-                move.l  #loc_6C4BE,$34(a0)
+                move.l  #MGZBossSK_BreakFloorAndTryTransition,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C4B2:
+MGZBossSK_MoveAndCheckFloorContact:
                 jsr     (MoveSprite2).l
                 jmp     (ObjHitFloor_DoRoutine).l
 ; ---------------------------------------------------------------------------
 
-loc_6C4BE:
+MGZBossSK_BreakFloorAndTryTransition:
                 move.b  #$E,routine(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_6C4F8,$34(a0)
+                move.l  #MGZBossSK_BeginShortRebound,$34(a0)
                 st      (Events_fg_4).w
                 st      (Disable_death_plane).w
                 moveq   #signextendB(sfx_BossHitFloor),d0
                 jsr     (Play_SFX).l
                 jsr     (AllocateObject).l
-                bne.s   locret_6C4F0
+                bne.s   MGZBossSK_TransitionSpawnReturn
                 move.l  #Obj_MGZ2_BossTransition,(a1)
 
-locret_6C4F0:
+MGZBossSK_TransitionSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C4F2:
+MGZBossSK_TickFloorOrFlybyWait:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6C4F8:
+MGZBossSK_BeginShortRebound:
                 move.b  #$10,routine(a0)
                 move.w  #-$400,y_vel(a0)
                 move.w  #$17,$2E(a0)
-                move.l  #loc_6C51A,$34(a0)
+                move.l  #MGZBossSK_RetractDrillAndHold,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C514:
+MGZBossSK_MoveAndTickEntranceTransit:
                 jmp     (Move_WaitNoFall).l
 ; ---------------------------------------------------------------------------
 
-loc_6C51A:
+MGZBossSK_RetractDrillAndHold:
                 move.b  #$12,routine(a0)
                 bclr    #3,$38(a0)
                 move.w  #$7F,$2E(a0)
-                move.l  #loc_6C538,$34(a0)
+                move.l  #MGZBossSK_BeginTurnToHorizontal,$34(a0)
                 jmp     Swing_Setup1(pc)
 ; ---------------------------------------------------------------------------
 
-loc_6C538:
+MGZBossSK_BeginTurnToHorizontal:
                 move.b  #$14,routine(a0)
                 move.w  #3,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C546:
+MGZEndBossSK_Sonic_SweepAngleDownToZero:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_6C564
+                bpl.s   MGZBossSK_HorizontalTurnReturn
                 move.w  #3,$2E(a0)
                 subq.w  #2,angle(a0)
-                beq.s   loc_6C566
+                beq.s   MGZBossSK_HoldBeforeArenaRise
 
-locret_6C564:
+MGZBossSK_HorizontalTurnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C566:
+MGZBossSK_HoldBeforeArenaRise:
                 move.b  #$16,routine(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_6C57C,$34(a0)
+                move.l  #MGZBossSK_BeginLongArenaRise,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C57C:
+MGZBossSK_BeginLongArenaRise:
                 move.b  #$18,routine(a0)
                 move.w  #-$400,y_vel(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_6C598,$34(a0)
+                move.l  #MGZBossSK_EnableFlightArenaCombat,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C598:
+MGZBossSK_EnableFlightArenaCombat:
                 move.b  #$1A,routine(a0)
                 clr.b   $46(a0)
                 bset    #0,render_flags(a0)
@@ -222,72 +222,73 @@ loc_6C598:
                 jmp     Swing_Setup1(pc)
 ; ---------------------------------------------------------------------------
 
-loc_6C5C4:
+; Move a second time after swinging if the hit flag is clear and the player remains left of the boss
+MGZBossSK_ApproachUntilPlayerPasses:
                 jsr     (MoveSprite2).l
                 btst    #6,status(a0)
-                bne.s   loc_6C5E8
+                bne.s   MGZBossSK_BeginRightwardFlybyApproach
                 move.w  (Player_1+x_pos).w,d0
                 cmp.w   x_pos(a0),d0
-                bhs.s   loc_6C5E8
+                bhs.s   MGZBossSK_BeginRightwardFlybyApproach
                 jsr     (Swing_UpAndDown).l
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_6C5E8:
+MGZBossSK_BeginRightwardFlybyApproach:
                 move.b  #$1C,routine(a0)
                 move.w  #$200,x_vel(a0)
-                move.l  #loc_6C614,$34(a0)
+                move.l  #MGZBossSK_SpawnScaledFlybyAndHold,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C5FE:
+MGZBossSK_MoveToFlybyThreshold:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 cmpi.w  #$3E00,x_pos(a0)
-                blo.w   locret_6BF96
+                blo.w   MGZArrivalSK_SharedReturn
 
-loc_6C614:
+MGZBossSK_SpawnScaledFlybyAndHold:
                 move.b  #$1E,routine(a0)
                 moveq   #signextendB(sfx_BossZoom),d0
                 jsr     (Play_SFX).l
                 bclr    #3,$38(a0)
                 bclr    #2,$38(a0)
                 move.w  #$9F,$2E(a0)
-                move.l  #loc_6C646,$34(a0)
-                lea     ChildObjDat_6D836(pc),a2
+                move.l  #MGZBossSK_LoadNextForegroundEntry,$34(a0)
+                lea     MGZEndBossSK_Sonic_OneScaledFlybyRecord(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_6C646:
+MGZBossSK_LoadNextForegroundEntry:
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_6C658,$34(a0)
-                bra.w   loc_6D710
+                move.l  #MGZBossSK_ExtendDrillForForegroundPass,$34(a0)
+                bra.w   MGZBossSK_LoadCameraRelativeEntry
 ; ---------------------------------------------------------------------------
 
-loc_6C658:
+MGZBossSK_ExtendDrillForForegroundPass:
                 bset    #3,$38(a0)
                 move.w  #$9F,$2E(a0)
-                move.l  #loc_6C66C,$34(a0)
+                move.l  #MGZBossSK_BeginTimedForegroundPass,$34(a0)
 
-loc_6C66C:
+MGZBossSK_BeginTimedForegroundPass:
                 move.b  #$20,routine(a0)
                 move.w  #$FF,$2E(a0)
-                move.l  #loc_6C614,$34(a0)
+                move.l  #MGZBossSK_SpawnScaledFlybyAndHold,$34(a0)
                 bset    #2,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
-word_6C688:
+MGZBossSK_KnucklesArenaCameraBounds:
                 dc.w    0,  $128, $3C78, $3E78
                 dc.w    $28,   $28, $3D78, $3D78
 ; ---------------------------------------------------------------------------
 
 Obj_MGZEndBossKnux:
-                lea     word_6C688(pc),a1
+                lea     MGZBossSK_KnucklesArenaCameraBounds(pc),a1
                 jsr     (Check_CameraInRange).l
                 move.b  #mus_Miniboss,boss_saved_mus(a0)  ; different song than other end bosses
                 jsr     (Boss_BeginCameraTransition).l
-                move.l  #loc_6C6F4,(a0)
-                move.l  #loc_6C6FA,$34(a0)
+                move.l  #MGZBossSK_KnucklesTickArenaTransition,(a0)
+                move.l  #MGZBossSK_KnucklesInstallDispatcher,$34(a0)
                 lea     (ArtKosM_MGZEndBoss).l,a1
                 move.w  #tiles_to_bytes(ArtTile_MGZEndBoss),d2
                 jsr     (Queue_Kos_Module).l
@@ -301,35 +302,35 @@ Obj_MGZEndBossKnux:
                 jmp     (PalLoad_Line1).l
 ; ---------------------------------------------------------------------------
 
-loc_6C6F4:
+MGZBossSK_KnucklesTickArenaTransition:
                 jmp     (SKEndCamera_TickAndSaveMusic).l
 ; ---------------------------------------------------------------------------
 
-loc_6C6FA:
-                move.l  #loc_6C702,(a0)
+MGZBossSK_KnucklesInstallDispatcher:
+                move.l  #MGZBossSK_KnucklesDispatchHitAndDraw,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C702:
+MGZBossSK_KnucklesDispatchHitAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
                 move.w  MGZEndBossKnux_Index(pc,d0.w),d1
                 jsr     MGZEndBossKnux_Index(pc,d1.w)
-                bsr.w   loc_6D61E
+                bsr.w   MGZBossSK_KnucklesCheckHitOrDefeat
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 MGZEndBossKnux_Index:
-                dc.w    loc_6C72A-MGZEndBossKnux_Index
-                dc.w    loc_6C782-MGZEndBossKnux_Index
-                dc.w    loc_6C796-MGZEndBossKnux_Index
-                dc.w    loc_6C814-MGZEndBossKnux_Index
-                dc.w    loc_6C7D8-MGZEndBossKnux_Index
-                dc.w    loc_6C814-MGZEndBossKnux_Index
-                dc.w    loc_6C83C-MGZEndBossKnux_Index
-                dc.w    loc_6C88A-MGZEndBossKnux_Index
+                dc.w    MGZBossSK_InitProtectedKnucklesBoss-MGZEndBossKnux_Index
+                dc.w    MGZBossSK_KnucklesTickAttackDelay-MGZEndBossKnux_Index
+                dc.w    MGZBossSK_KnucklesWaitDrillPair-MGZEndBossKnux_Index
+                dc.w    MGZBossSK_KnucklesTickPlanPause-MGZEndBossKnux_Index
+                dc.w    MGZBossSK_KnucklesTryUpperCollapse-MGZEndBossKnux_Index
+                dc.w    MGZBossSK_KnucklesTickPlanPause-MGZEndBossKnux_Index
+                dc.w    MGZBossSK_KnucklesTryLowerCollapse-MGZEndBossKnux_Index
+                dc.w    MGZBossSK_KnucklesWaitOffscreen-MGZEndBossKnux_Index
 ; ---------------------------------------------------------------------------
 
-loc_6C72A:
+MGZBossSK_InitProtectedKnucklesBoss:
                 lea     ObjDat_MGZDrillBoss(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 st      $46(a0)
@@ -339,129 +340,131 @@ loc_6C72A:
                 move.b  #2,subtype(a0)
                 bset    #3,$38(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_6C788,$34(a0)
+                move.l  #MGZBossSK_KnucklesRequestDrillPair,$34(a0)
                 lea     (Child1_MakeRoboShip3).l,a2
                 jsr     (CreateChild1_Normal).l
-                bne.s   loc_6C778
+                bne.s   MGZBossSK_KnucklesSpawnAttachments
                 move.b  #9,subtype(a1)
 
-loc_6C778:
-                lea     ChildObjDat_6D7C0(pc),a2
+MGZBossSK_KnucklesSpawnAttachments:
+                lea     MGZBossSK_MainAttachmentChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_6C782:
+MGZBossSK_KnucklesTickAttackDelay:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6C788:
+MGZBossSK_KnucklesRequestDrillPair:
                 move.b  #4,routine(a0)
                 bset    #1,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C796:
+MGZBossSK_KnucklesWaitDrillPair:
                 btst    #2,$38(a0)
-                bne.s   loc_6C7A0
+                bne.s   MGZBossSK_KnucklesDelayUpperPlan
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C7A0:
+MGZBossSK_KnucklesDelayUpperPlan:
                 move.b  #6,routine(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_6C7BC,$34(a0)
+                move.l  #MGZBossSK_KnucklesBeginUpperPlan,$34(a0)
                 move.b  #0,subtype(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C7BC:
+MGZBossSK_KnucklesBeginUpperPlan:
                 move.b  #8,routine(a0)
                 move.w  #$87,$2E(a0)
-                move.l  #loc_6C7FE,$34(a0)
+                move.l  #MGZBossSK_KnucklesPauseBetweenPlans,$34(a0)
                 lea     (_unkFA82).w,a1
-                bra.w   loc_6D51A
+                bra.w   MGZBossSK_ReplayDrillPlanAtHalfSpeed
 ; ---------------------------------------------------------------------------
 
-loc_6C7D8:
+; Spawn collapse debris at timer value 40 on the upper transit
+MGZBossSK_KnucklesTryUpperCollapse:
                 cmpi.w  #$28,$2E(a0)
-                bne.s   loc_6C7F2
+                bne.s   MGZBossSK_KnucklesMoveAndTickUpper
                 moveq   #signextendB(sfx_Collapse),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_6D83E(pc),a2
+                lea     MGZBossSK_CollapseEmitterChild(pc),a2
                 jsr     (CreateChild6_Simple).l
 
-loc_6C7F2:
+MGZBossSK_KnucklesMoveAndTickUpper:
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6C7FE:
+MGZBossSK_KnucklesPauseBetweenPlans:
                 move.b  #$A,routine(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_6C81A,$34(a0)
+                move.l  #MGZBossSK_KnucklesBeginLowerPlan,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C814:
+MGZBossSK_KnucklesTickPlanPause:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6C81A:
+MGZBossSK_KnucklesBeginLowerPlan:
                 move.b  #$C,routine(a0)
                 move.w  #$9F,$2E(a0)
-                move.l  #loc_6C862,$34(a0)
+                move.l  #MGZBossSK_KnucklesResetAfterPair,$34(a0)
                 move.b  #2,subtype(a0)
                 lea     (_unkFA8A).w,a1
-                bra.w   loc_6D51A
+                bra.w   MGZBossSK_ReplayDrillPlanAtHalfSpeed
 ; ---------------------------------------------------------------------------
 
-loc_6C83C:
+; Spawn collapse debris at timer value 72 on the lower transit
+MGZBossSK_KnucklesTryLowerCollapse:
                 cmpi.w  #$48,$2E(a0)
-                bne.s   loc_6C856
+                bne.s   MGZBossSK_KnucklesMoveAndTickLower
                 moveq   #signextendB(sfx_Collapse),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_6D83E(pc),a2
+                lea     MGZBossSK_CollapseEmitterChild(pc),a2
                 jsr     (CreateChild6_Simple).l
 
-loc_6C856:
+MGZBossSK_KnucklesMoveAndTickLower:
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6C862:
+MGZBossSK_KnucklesResetAfterPair:
                 move.b  #$E,routine(a0)
                 move.w  #$3E18,x_pos(a0)
                 move.w  #-$58,y_pos(a0)
                 move.w  #(2*60)-1,$2E(a0)
-                move.l  #loc_6C788,$34(a0)
+                move.l  #MGZBossSK_KnucklesRequestDrillPair,$34(a0)
                 bclr    #2,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C88A:
+MGZBossSK_KnucklesWaitOffscreen:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6C890:
+MGZBossSK_BeginDefeatWaitAndFragments:
                 move.l  #Obj_Wait,(a0)
                 move.w  #$200,priority(a0)
-                move.l  #loc_6C8B4,$34(a0)
+                move.l  #MGZBossSK_SpawnCapsuleAndInstallWait,$34(a0)
                 bset    #4,$38(a0)
-                lea     ChildObjDat_6D822(pc),a2
+                lea     MGZBossSK_DefeatFragmentChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_6C8B4:
-                move.l  #loc_6C8F4,(a0)
+MGZBossSK_SpawnCapsuleAndInstallWait:
+                move.l  #MGZBossSK_KnucklesWaitResultsAndLock,(a0)
                 st      (_unkFAA8).w
                 clr.b   (Boss_flag).w
                 jsr     (AllocateObject).l
-                bne.s   loc_6C8DC
+                bne.s   MGZBossSK_KnucklesExtendExitCamera
                 move.l  #Obj_EggCapsule,(a1)
                 move.w  #$3F40,x_pos(a1)
                 move.w  #$B0,y_pos(a1)
 
-loc_6C8DC:
+MGZBossSK_KnucklesExtendExitCamera:
                 move.w  (_unkFAB4).w,d0
                 addi.w  #$118,d0
                 move.w  d0,(Camera_stored_max_X_pos).w
@@ -469,11 +472,11 @@ loc_6C8DC:
                 jmp     (CreateChild6_Simple).l
 ; ---------------------------------------------------------------------------
 
-loc_6C8F4:
+MGZBossSK_KnucklesWaitResultsAndLock:
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
                 tst.b   (_unkFAA8).w
-                bne.w   locret_6BF96
-                move.l  #loc_6C932,(a0)
+                bne.w   MGZArrivalSK_SharedReturn
+                move.l  #MGZBossSK_KnucklesRunToExitGate,(a0)
                 clr.b   (_unkFAA8).w
                 jsr     (Restore_PlayerControl).l
                 jsr     (Restore_LevelMusic).l
@@ -485,9 +488,9 @@ loc_6C8F4:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C932:
+MGZBossSK_KnucklesRunToExitGate:
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$150,d0
                 cmp.w   (Player_1+x_pos).w,d0
-                bls.w   loc_6D13C
+                bls.w   MGZBossSK_StartCarnivalNightAndDelete
                 jmp     (SKInput_BuildAutoRightAndJump).l

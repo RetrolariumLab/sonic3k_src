@@ -29,7 +29,7 @@ Obj_MGZ2DrillingRobotnikGo:
                 jsr     (Play_Music).l
                 move.b  #mus_EndBoss,(Current_music+1).w
 
-locret_6BF96:
+MGZArrivalSK_SharedReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -42,22 +42,22 @@ Obj_MGZ2DrillingRobotnikStart:
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 MGZ2DrillingRobotnik_Index:
-                dc.w    loc_6BFCA-MGZ2DrillingRobotnik_Index
-                dc.w    loc_6C014-MGZ2DrillingRobotnik_Index
-                dc.w    loc_6C024-MGZ2DrillingRobotnik_Index
-                dc.w    loc_6C07E-MGZ2DrillingRobotnik_Index
-                dc.w    loc_6C0B2-MGZ2DrillingRobotnik_Index
-                dc.w    loc_6C0E4-MGZ2DrillingRobotnik_Index
-                dc.w    loc_6C122-MGZ2DrillingRobotnik_Index
-                dc.w    loc_6C136-MGZ2DrillingRobotnik_Index
-                dc.w    loc_6C0E4-MGZ2DrillingRobotnik_Index
-                dc.w    loc_6C16A-MGZ2DrillingRobotnik_Index
-                dc.w    loc_6C0E4-MGZ2DrillingRobotnik_Index
-                dc.w    loc_6C1D4-MGZ2DrillingRobotnik_Index
-                dc.w    loc_6C2B2-MGZ2DrillingRobotnik_Index
+                dc.w    MGZArrivalSK_InitDrillAndTryShip-MGZ2DrillingRobotnik_Index
+                dc.w    MGZArrivalSK_BeginCollapseMotion-MGZ2DrillingRobotnik_Index
+                dc.w    MGZArrivalSK_AccelerateEmergence-MGZ2DrillingRobotnik_Index
+                dc.w    MGZArrivalSK_SwingUntilHitOrCountEnd-MGZ2DrillingRobotnik_Index
+                dc.w    MGZArrivalSK_TickAngleTowardZero-MGZ2DrillingRobotnik_Index
+                dc.w    MGZArrivalSK_SwingMoveAndTickWait-MGZ2DrillingRobotnik_Index
+                dc.w    MGZArrivalSK_TickStationaryAttackWait-MGZ2DrillingRobotnik_Index
+                dc.w    MGZArrivalSK_WaitForAttachmentAttack-MGZ2DrillingRobotnik_Index
+                dc.w    MGZArrivalSK_SwingMoveAndTickWait-MGZ2DrillingRobotnik_Index
+                dc.w    MGZArrivalSK_SwingAndReturnAngle-MGZ2DrillingRobotnik_Index
+                dc.w    MGZArrivalSK_SwingMoveAndTickWait-MGZ2DrillingRobotnik_Index
+                dc.w    MGZArrivalSK_RetreatProbeCeiling-MGZ2DrillingRobotnik_Index
+                dc.w    MGZArrivalSK_MoveAndWaitAfterCeiling-MGZ2DrillingRobotnik_Index
 ; ---------------------------------------------------------------------------
 
-loc_6BFCA:
+MGZArrivalSK_InitDrillAndTryShip:
                 lea     ObjDat_MGZDrillBoss(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.b  #-1,collision_property(a0)
@@ -68,190 +68,190 @@ loc_6BFCA:
                 move.w  #-$800,y_vel(a0)
                 lea     Child1_MakeRoboShip3(pc),a2
                 jsr     (CreateChild1_Normal).l
-                bne.s   loc_6C00A
+                bne.s   MGZArrivalSK_SpawnDrillAttachments
                 move.b  #9,subtype(a1)
 
-loc_6C00A:
-                lea     ChildObjDat_6D7C0(pc),a2
+MGZArrivalSK_SpawnDrillAttachments:
+                lea     MGZBossSK_MainAttachmentChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_6C014:
+MGZArrivalSK_BeginCollapseMotion:
                 move.b  #4,routine(a0)
                 moveq   #signextendB(sfx_Collapse),d0
                 jsr     (Play_SFX).l
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C024:
+MGZArrivalSK_AccelerateEmergence:
                 move.w  y_vel(a0),d0
                 addi.w  #$40,d0
                 cmpi.w  #$C0,d0
-                bge.s   loc_6C06E
+                bge.s   MGZArrivalSK_BeginCountedSwing
                 move.w  d0,y_vel(a0)
                 btst    #7,$38(a0)
-                bne.s   loc_6C068
+                bne.s   MGZArrivalSK_MoveDuringEmergence
                 move.w  (Camera_Y_pos).w,d1
                 addi.w  #$120,d1
                 cmp.w   y_pos(a0),d1
-                blo.s   loc_6C068
+                blo.s   MGZArrivalSK_MoveDuringEmergence
                 bset    #7,$38(a0)
-                lea     ChildObjDat_6D7EA(pc),a2
+                lea     MGZBossSK_RightArrivalDebrisChildren(pc),a2
                 btst    #0,render_flags(a0)
-                beq.s   loc_6C062
-                lea     ChildObjDat_6D7F2(pc),a2
+                beq.s   MGZArrivalSK_SpawnEmergenceDebris
+                lea     MGZBossSK_LeftArrivalDebrisChildren(pc),a2
 
-loc_6C062:
+MGZArrivalSK_SpawnEmergenceDebris:
                 jsr     (CreateChild3_NormalRepeated).l
 
-loc_6C068:
+MGZArrivalSK_MoveDuringEmergence:
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_6C06E:
+MGZArrivalSK_BeginCountedSwing:
                 move.b  #6,routine(a0)
                 move.b  #5,$39(a0)
                 jmp     Swing_Setup1(pc)
 ; ---------------------------------------------------------------------------
 
-loc_6C07E:
+MGZArrivalSK_SwingUntilHitOrCountEnd:
                 btst    #6,status(a0)
-                bne.s   loc_6C092
+                bne.s   MGZArrivalSK_BeginTimedSwingRetreat
                 jsr     (Swing_UpAndDown_Count).l
                 tst.b   $39(a0)
-                bpl.s   loc_6C0AC
+                bpl.s   MGZArrivalSK_MoveAfterCountedSwing
 
-loc_6C092:
+MGZArrivalSK_BeginTimedSwingRetreat:
                 move.b  #$16,routine(a0)
                 move.w  #-$400,y_vel(a0)
                 move.w  #$7F,$2E(a0)
-                move.l  #loc_6C200,$34(a0)
+                move.l  #MGZArrivalSK_RestoreStageArtAndCamera,$34(a0)
 
-loc_6C0AC:
+MGZArrivalSK_MoveAfterCountedSwing:
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_6C0B2:
+MGZArrivalSK_TickAngleTowardZero:
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_6C0D8
+                bpl.s   MGZArrivalSK_SwingMoveAfterAngleTick
                 move.w  #3,$2E(a0)
                 subq.w  #2,angle(a0)
-                bne.s   loc_6C0D8
+                bne.s   MGZArrivalSK_SwingMoveAfterAngleTick
                 move.b  #$A,routine(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_6C0F6,$34(a0)
+                move.l  #MGZArrivalSK_BeginPreAttackPause,$34(a0)
 
-loc_6C0D8:
+MGZArrivalSK_SwingMoveAfterAngleTick:
                 jsr     (Swing_UpAndDown).l
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_6C0E4:
+MGZArrivalSK_SwingMoveAndTickWait:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6C0F6:
-                move.l  #loc_6C10C,$34(a0)
+MGZArrivalSK_BeginPreAttackPause:
+                move.l  #MGZArrivalSK_BeginStationaryAttackWait,$34(a0)
 
-loc_6C0FE:
+MGZArrivalSK_SetAttackReadyAndWait:
                 bset    #3,$38(a0)
                 move.w  #$5F,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C10C:
+MGZArrivalSK_BeginStationaryAttackWait:
                 move.b  #$C,routine(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_6C128,$34(a0)
+                move.l  #MGZArrivalSK_RequestAttachmentAttack,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C122:
+MGZArrivalSK_TickStationaryAttackWait:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6C128:
+MGZArrivalSK_RequestAttachmentAttack:
                 move.b  #$E,routine(a0)
                 bset    #1,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C136:
+MGZArrivalSK_WaitForAttachmentAttack:
                 btst    #1,$38(a0)
-                beq.s   loc_6C140
+                beq.s   MGZArrivalSK_BeginBobCooldown
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C140:
+MGZArrivalSK_BeginBobCooldown:
                 move.b  #$10,routine(a0)
                 bclr    #3,$38(a0)
                 move.w  #$5F,$2E(a0)
-                move.l  #loc_6C15C,$34(a0)
+                move.l  #MGZArrivalSK_BeginAngleReturn,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C15C:
+MGZArrivalSK_BeginAngleReturn:
                 move.b  #$12,routine(a0)
                 move.w  #3,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C16A:
+MGZArrivalSK_SwingAndReturnAngle:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_6C18E
+                bpl.s   MGZArrivalSK_AngleReturnUpdateDone
                 move.w  #3,$2E(a0)
                 addq.w  #2,angle(a0)
                 cmpi.w  #$C,angle(a0)
-                bhs.s   loc_6C190
+                bhs.s   MGZArrivalSK_BeginFinalBobDelay
 
-locret_6C18E:
+MGZArrivalSK_AngleReturnUpdateDone:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C190:
+MGZArrivalSK_BeginFinalBobDelay:
                 move.b  #$14,routine(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_6C1A6,$34(a0)
+                move.l  #MGZArrivalSK_ArmFinalRetreatPulse,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C1A6:
-                move.l  #loc_6C1B2,$34(a0)
-                bra.w   loc_6C0FE
+MGZArrivalSK_ArmFinalRetreatPulse:
+                move.l  #MGZArrivalSK_BeginFinalRetreat,$34(a0)
+                bra.w   MGZArrivalSK_SetAttackReadyAndWait
 ; ---------------------------------------------------------------------------
 
-loc_6C1B2:
+MGZArrivalSK_BeginFinalRetreat:
                 move.b  #$16,routine(a0)
                 move.w  #-$400,y_vel(a0)
                 move.w  #$7F,$2E(a0)
-                move.l  #loc_6C200,$34(a0)
+                move.l  #MGZArrivalSK_RestoreStageArtAndCamera,$34(a0)
                 bclr    #7,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C1D4:
+MGZArrivalSK_RetreatProbeCeiling:
                 jsr     (ObjCheckCeilingDist).l
                 tst.w   d1
-                bmi.s   loc_6C1E4
+                bmi.s   MGZArrivalSK_ChooseCeilingDebrisSide
                 jmp     (Move_WaitNoFall).l
 ; ---------------------------------------------------------------------------
 
-loc_6C1E4:
+MGZArrivalSK_ChooseCeilingDebrisSide:
                 move.b  #$18,routine(a0)
-                lea     ChildObjDat_6D7EA(pc),a2
+                lea     MGZBossSK_RightArrivalDebrisChildren(pc),a2
                 btst    #0,render_flags(a0)
-                beq.s   loc_6C1FA
-                lea     ChildObjDat_6D7F2(pc),a2
+                beq.s   MGZArrivalSK_SpawnCeilingDebris
+                lea     MGZBossSK_LeftArrivalDebrisChildren(pc),a2
 
-loc_6C1FA:
+MGZArrivalSK_SpawnCeilingDebris:
                 jmp     (CreateChild3_NormalRepeated).l
 ; ---------------------------------------------------------------------------
 
-loc_6C200:
+MGZArrivalSK_RestoreStageArtAndCamera:
                 bset    #5,$38(a0)
                 clr.b   (Boss_flag).w
                 move.l  #Delete_Current_Sprite,(a0)
@@ -277,58 +277,59 @@ loc_6C200:
                 move.w  #$1DF,(Camera_min_Y_pos).w
                 st      (Events_fg_2).w
                 btst    #0,render_flags(a0)
-                bne.s   loc_6C29E
+                bne.s   MGZArrivalSK_ReleaseCameraLeftLimit
                 move.w  #$6000,(Camera_stored_max_X_pos).w
                 jsr     (AllocateObject).l
-                bne.s   locret_6C29C
+                bne.s   MGZArrivalSK_CameraRightReleaseReturn
                 move.l  #Obj_IncLevEndXGradual,(a1)
 
-locret_6C29C:
+MGZArrivalSK_CameraRightReleaseReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C29E:
+MGZArrivalSK_ReleaseCameraLeftLimit:
                 clr.w   (Camera_stored_min_X_pos).w
                 jsr     (AllocateObject).l
-                bne.s   locret_6C2B0
+                bne.s   MGZArrivalSK_CameraLeftReleaseReturn
                 move.l  #Obj_DecLevStartXGradual,(a1)
 
-locret_6C2B0:
+MGZArrivalSK_CameraLeftReleaseReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C2B2:
+MGZArrivalSK_MoveAndWaitAfterCeiling:
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6C2BE:
+MGZArrivalSK_BeginDefeatWaitAndFragments:
                 move.l  #Obj_Wait,(a0)
                 bset    #4,$38(a0)
-                move.l  #loc_6C2E2,$34(a0)
+                move.l  #MGZArrivalSK_InstallCapsuleWait,$34(a0)
                 move.w  #$200,priority(a0)
-                lea     ChildObjDat_6D822(pc),a2
+                lea     MGZBossSK_DefeatFragmentChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_6C2E2:
-                move.l  #loc_6C2EE,(a0)
+; Reuse Angel Island's capsule initializer after installing the Marble Garden wait
+MGZArrivalSK_InstallCapsuleWait:
+                move.l  #MGZArrivalSK_WaitCapsuleAndTryPalette,(a0)
                 jmp     (AIZBossSK_SignalAndSpawnCapsule).l
 ; ---------------------------------------------------------------------------
 
-loc_6C2EE:
+MGZArrivalSK_WaitCapsuleAndTryPalette:
                 tst.b   (_unkFAA8).w
-                bne.w   locret_6BF96
-                move.l  #locret_6C318,(a0)
+                bne.w   MGZArrivalSK_SharedReturn
+                move.l  #MGZArrivalSK_DefeatedDrillIdle,(a0)
                 bset    #4,$38(a0)
                 jsr     (Restore_LevelMusic).l
                 jsr     (AllocateObject).l
-                bne.s   locret_6C316
-                move.l  #loc_6D104,(a1)
+                bne.s   MGZArrivalSK_PaletteSpawnReturn
+                move.l  #MGZBossSK_TickTransitionPalette,(a1)
 
-locret_6C316:
+MGZArrivalSK_PaletteSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_6C318:
+MGZArrivalSK_DefeatedDrillIdle:
                 rts

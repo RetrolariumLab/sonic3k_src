@@ -401,51 +401,51 @@
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/s3/attachments.s",
-      "sha256": "e996630c3ba0991f47c0306fa5d92522d96bd1e0ef437aff09cfb0763b25e3c8"
+      "sha256": "357b6d49cdf6e9b94953f3d692f176ac5d7dd71a7b3a9b111208dab99b191271"
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/s3/motion_helpers.s",
-      "sha256": "a59717fa00ddf94ae2c54814ab084a8a5f64db0b44e7649388caafc5e14955e1"
+      "sha256": "62f24ac5677a01d29c21a80669c437ac8e2bee0a708650fb6c177b2146ca38fc"
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/s3/object_catalog.s",
-      "sha256": "82baf09cab060aa5b8ed8141fc6a66574760c1cd00218d339913f70b8cf880d3"
+      "sha256": "b4169e4123ac900bc43aec9f1730e9cd111f36682aae6711a065cf05c70543b6"
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/s3/projectiles_and_defeat.s",
-      "sha256": "d1e9520d8e24bc783b60973317df118ced55d33b2273e27b8cdab30bf1b1597b"
+      "sha256": "60a0e6dde2e1fefec30cecca09449822c8638ef3f58ec45ef442892bf9eb9207"
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/sk/attachments.s",
-      "sha256": "3c668bd259b99f4d9728147ba4ff5515943e9357f8f83b7a9290bb16de3f8dde"
+      "sha256": "b9aec9b9bb75d79e28df4c24fe37e4fc722fa68f731383e08a407627053b55d4"
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/sk/motion_helpers.s",
-      "sha256": "70e7c4629ccb4dc2ba124fc5f4871ad9ab09bcca31f6993c5c464b5dfefaa14c"
+      "sha256": "6e8c8bad0d18ab5f4c3d3a6e175b2ce0f2b542f5792f4c6d9eb7b79ac74f93fa"
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/sk/object_catalog.s",
-      "sha256": "365b71b51ae6bf7c09fa08e2be53ada1670b1e2d55f3248a07c248197390fbf6"
+      "sha256": "a2c11c871fa631ae1ba86939eda337d341469021fbd1113cb6879ee672dfff05"
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/sk/projectiles_and_defeat.s",
-      "sha256": "55ebc67864e7e68ea02c4701dd166e3534571c7690afff211622fe9f88effebd"
+      "sha256": "a99ba303af45658e146211478d906942b46c3fa8ef5ddeb15ad105a4e2de3696"
     },
     {
       "path": "src/objects/bosses/mgz/miniboss/s3/object_catalog.s",
-      "sha256": "9b81f8b164e5e7b4942a93c012d3434c02c7318f2b156b05b322b9db888a752a"
+      "sha256": "fb2a7e6cda285f6c9f5f14df500a797fe5fd2368fc16682b4f50142510d675d3"
     },
     {
       "path": "src/objects/bosses/mgz/miniboss/s3/tunnelbot_and_battle.s",
-      "sha256": "a3dc11490032d1b444b9c847698e707147548e2a18203169b8c56ed132041238"
+      "sha256": "d96f1ed516e4ad5fa888e3e2e6abb3811b14f4409f4469a97b02ae8d64de043d"
     },
     {
       "path": "src/objects/bosses/mgz/miniboss/sk/object_catalog.s",
-      "sha256": "e55855550c90f5381cfcbaad58a1fc40d1c7d0dcb75f41baf6e556bd93340426"
+      "sha256": "fd11821ac517c06a220841d314a6cb4b3564fc8be042d39444998c6c1a7a3f4c"
     },
     {
       "path": "src/objects/bosses/mgz/miniboss/sk/tunnelbot_and_battle.s",
-      "sha256": "5bed04bb04b3b7361a83fc6ba9e14f72ff5a3508af74bf9734d4446ba0a55e66"
+      "sha256": "8d5667e6010e3e663556d6e365cc69b938a0cfedd6ca6cb2cbdecc993f7a52e4"
     },
     {
       "path": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
@@ -2790,41 +2790,41 @@
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/s3/attachments.s",
-      "symbol": "RawAni_4A948",
-      "scope": "RawAni_4A948",
-      "first_line": 292,
-      "last_line": 294,
+      "symbol": "MGZBossS3_TemporaryCoverFrames",
+      "scope": "MGZBossS3_TemporaryCoverFrames",
+      "first_line": 293,
+      "last_line": 295,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 8,
-      "declarations_sha256": "c7073a50df4572a64bc524db21ff4bc60c80de07db331019f28ce81152b6cc9e",
+      "declarations_sha256": "6e88ea2f0d7c092a224037e5029544849181253cdd705b90dc84694ea193ec1a",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_4A948"],
+      "members": ["MGZBossS3_TemporaryCoverFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/s3/motion_helpers.s",
-      "symbol": "RawAni_4B06E",
-      "scope": "RawAni_4B06E",
+      "symbol": "MGZBossS3_ArrivalDebrisFrames",
+      "scope": "MGZBossS3_ArrivalDebrisFrames",
       "first_line": 222,
       "last_line": 224,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 10,
-      "declarations_sha256": "c166aa6a52cbb25a91846c1b50a4defd095d08c512cea90717b42e8452346de6",
+      "declarations_sha256": "f4a5320a4f027b17e1af4e28e9acf32b3c9310faf03965cf4e13203cec139238",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_4B06E"],
+      "members": ["MGZBossS3_ArrivalDebrisFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/s3/object_catalog.s",
-      "symbol": "byte_4B45B",
-      "scope": "byte_4B45B",
+      "symbol": "MGZBossS3_DrillExtendFrames9",
+      "scope": "MGZBossS3_DrillExtendFrames9",
       "first_line": 105,
       "last_line": 276,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 301,
-      "declarations_sha256": "c36c243c43bc044780c31c80306c255c36cd23d545c190d6bf69449a45417e3f",
+      "declarations_sha256": "87445eea029def8c907767c35b3cfe3a283701feacf1da6fffc3d9c1184ca8bb",
       "entries": [
         [0, "pairs"],
         [39, "pairs"],
@@ -2844,61 +2844,61 @@
       ],
       "external_symbols": [],
       "members": [
-        "byte_4B45B",
-        "byte_4B482",
-        "byte_4B4A2",
-        "byte_4B4A9",
-        "byte_4B4C9",
-        "byte_4B4D0",
-        "byte_4B4D5",
-        "byte_4B4DA",
-        "byte_4B4E1",
-        "byte_4B501",
-        "byte_4B508",
-        "byte_4B527",
-        "byte_4B546",
-        "byte_4B565",
-        "RawAni_4B584"
+        "MGZBossS3_DrillExtendFrames9",
+        "MGZBossS3_DrillExtendFrames12",
+        "MGZBossS3_DrillFastFrames12",
+        "MGZBossS3_DrillExtendFrames32",
+        "MGZBossS3_DrillFastFrames32",
+        "MGZEndBossS3_Drill_AngleSixHeldFrameLoop",
+        "MGZBossS3_DrillHoldFrame20",
+        "MGZBossS3_DrillFastFrames38",
+        "MGZBossS3_DrillExtendFrames15",
+        "MGZBossS3_DrillFastFrames15",
+        "MGZBossS3_DrillRetractFrames9",
+        "MGZBossS3_DrillRetractFrames12",
+        "MGZBossS3_DrillRetractFrames32",
+        "MGZBossS3_DrillRetractFrames15",
+        "MGZBossS3_LegacyVisualIdleAnim"
       ],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/sk/attachments.s",
-      "symbol": "RawAni_6CCB8",
-      "scope": "RawAni_6CCB8",
-      "first_line": 300,
-      "last_line": 302,
+      "symbol": "MGZBossSK_TemporaryCoverFrames",
+      "scope": "MGZBossSK_TemporaryCoverFrames",
+      "first_line": 301,
+      "last_line": 303,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 8,
-      "declarations_sha256": "777e2f5a318865906501df91db8028ccb2079226e5c787c47fa7a088408ab971",
+      "declarations_sha256": "031902e11e49bda6eb2980e6981fc0a7842b4c6467c0529d867ed1b838650c56",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_6CCB8"],
+      "members": ["MGZBossSK_TemporaryCoverFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/sk/motion_helpers.s",
-      "symbol": "RawAni_6D3FC",
-      "scope": "RawAni_6D3FC",
+      "symbol": "MGZEndBossSK_Debris_TenSubtypeFrameBytes",
+      "scope": "MGZEndBossSK_Debris_TenSubtypeFrameBytes",
       "first_line": 222,
       "last_line": 224,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 10,
-      "declarations_sha256": "e9c8ec7f3f4b82494af712912b2da28eb346fd2189f3e45dfc95e5f68ba9aea5",
+      "declarations_sha256": "d0eba51771bc1796e10d579fe46c1bd48b177124b4ae3f4f8a234bb8f82a4a72",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_6D3FC"],
+      "members": ["MGZEndBossSK_Debris_TenSubtypeFrameBytes"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/sk/object_catalog.s",
-      "symbol": "byte_6D853",
-      "scope": "byte_6D853",
+      "symbol": "MGZBossSK_DrillExtendFrames9",
+      "scope": "MGZBossSK_DrillExtendFrames9",
       "first_line": 111,
       "last_line": 279,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 297,
-      "declarations_sha256": "a90311e244dc3e121a2b438eb105d3125e4d790b36d97596774a1296f85cd20c",
+      "declarations_sha256": "4ba3f3c7963782aae95db547aa8622eb3a4760231ea3c82a6f1fac86aad368f7",
       "entries": [
         [0, "pairs"],
         [39, "pairs"],
@@ -2917,97 +2917,97 @@
       ],
       "external_symbols": [],
       "members": [
-        "byte_6D853",
-        "byte_6D87A",
-        "byte_6D89A",
-        "byte_6D8A1",
-        "byte_6D8C1",
-        "byte_6D8C8",
-        "byte_6D8CD",
-        "byte_6D8D2",
-        "byte_6D8D9",
-        "byte_6D8F9",
-        "byte_6D900",
-        "byte_6D91F",
-        "byte_6D93E",
-        "byte_6D95D"
+        "MGZBossSK_DrillExtendFrames9",
+        "MGZBossSK_DrillExtendFrames12",
+        "MGZEndBossSK_Drill_FastTwelveTripletLoop",
+        "MGZBossSK_DrillExtendFrames32",
+        "MGZBossSK_DrillFastFrames32",
+        "MGZBossSK_DrillHoldFrame20",
+        "MGZBossSK_DrillHoldFrame19",
+        "MGZBossSK_DrillFastFrames38",
+        "MGZBossSK_DrillExtendFrames15",
+        "MGZBossSK_DrillFastFrames15",
+        "MGZBossSK_DrillRetractFrames9",
+        "MGZBossSK_DrillRetractFrames12",
+        "MGZBossSK_DrillRetractFrames32",
+        "MGZBossSK_DrillRetractFrames15"
       ],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/sk/projectiles_and_defeat.s",
-      "symbol": "RawAni_6D224",
-      "scope": "RawAni_6D224",
-      "first_line": 386,
-      "last_line": 388,
+      "symbol": "MGZBossSK_CollapseDebrisRandomFrames",
+      "scope": "MGZBossSK_CollapseDebrisRandomFrames",
+      "first_line": 389,
+      "last_line": 391,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 4,
-      "declarations_sha256": "1276dc8c9300611d579065798d5387bc4103bf2e06d5d30b1f6a87b8f1ed6024",
+      "declarations_sha256": "88c40fc83d72557ce1bb9408a4652dbdd3d6c61fff35e75416df29cfb18a3ea2",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_6D224"],
+      "members": ["MGZBossSK_CollapseDebrisRandomFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/mgz/miniboss/s3/object_catalog.s",
-      "symbol": "byte_56931",
-      "scope": "byte_56931",
+      "symbol": "MGZMiniS3_DrillAccelerateAnim",
+      "scope": "MGZMiniS3_DrillAccelerateAnim",
       "first_line": 60,
       "last_line": 64,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 11,
-      "declarations_sha256": "f69ce3db311a677fe230f315dfb2b065581fefec778d3cfaf89f7cd47396b9dd",
+      "declarations_sha256": "800f9627a33ee02a5242e84ec3111f5663d70f5232b987b1bb53c434be37a2fe",
       "entries": [
         [0, "accelerating"],
         [6, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_56931", "byte_56937"],
+      "members": ["MGZMiniS3_DrillAccelerateAnim", "MGZMiniS3_DrillSpinAnim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/mgz/miniboss/s3/tunnelbot_and_battle.s",
-      "symbol": "RawAni_5673C",
-      "scope": "RawAni_5673C",
-      "first_line": 437,
-      "last_line": 439,
+      "symbol": "MGZMiniS3_FragmentFramesBySubtype",
+      "scope": "MGZMiniS3_FragmentFramesBySubtype",
+      "first_line": 438,
+      "last_line": 440,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 6,
-      "declarations_sha256": "915fc9cee29afb3fd0a50ad8547c20aa7fc31cfbbd9851beadc3cdaff42417e3",
+      "declarations_sha256": "38d9325225bafb3695b33f7875cdfc1562033a2553af809c05e926e2541edabb",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_5673C"],
+      "members": ["MGZMiniS3_FragmentFramesBySubtype"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/mgz/miniboss/sk/object_catalog.s",
-      "symbol": "byte_88B73",
-      "scope": "byte_88B73",
+      "symbol": "MGZMiniSK_DrillAccelerateAnim",
+      "scope": "MGZMiniSK_DrillAccelerateAnim",
       "first_line": 58,
       "last_line": 62,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 11,
-      "declarations_sha256": "ddf1b4ee75d50c24e886e436d44545121b04ee0d4ac15efb88696e63e72d3d10",
+      "declarations_sha256": "be5fe96d94fad696a10f67c7fd100a8ab6a5dec2f1c8c2a7896c1083cc775890",
       "entries": [
         [0, "accelerating"],
         [6, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_88B73", "byte_88B79"],
+      "members": ["MGZMiniSK_DrillAccelerateAnim", "MGZMiniSK_DrillSpinAnim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/mgz/miniboss/sk/tunnelbot_and_battle.s",
-      "symbol": "RawAni_88970",
-      "scope": "RawAni_88970",
-      "first_line": 447,
-      "last_line": 449,
+      "symbol": "MGZMiniSK_FragmentFramesBySubtype",
+      "scope": "MGZMiniSK_FragmentFramesBySubtype",
+      "first_line": 449,
+      "last_line": 451,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 6,
-      "declarations_sha256": "9949e6eb99887c6d9d6a04c8ec9b6108226f5db151fe7c2474dda1be26a70464",
+      "declarations_sha256": "73930e1ee476ce3c2be57dbe5164d213f6e665b85c3e2edb8b2a8857132bd791",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_88970"],
+      "members": ["MGZMiniSK_FragmentFramesBySubtype"],
       "stored_markers": []
     },
     {

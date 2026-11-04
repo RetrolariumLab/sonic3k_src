@@ -18560,7 +18560,7 @@
       "responsibility": "Marble Garden end-boss attached actors, parent synchronization, movement and animation state.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 406,
+      "physical_lines": 408,
       "origin": {
         "commit": "995400f4b92884b1e428dc4a5225824813b45712",
         "path": "s3.s",
@@ -18600,7 +18600,7 @@
       "responsibility": "Marble Garden end-boss Sonic or Knuckles battle controllers, progression and defeat state.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 417,
+      "physical_lines": 418,
       "origin": {
         "commit": "995400f4b92884b1e428dc4a5225824813b45712",
         "path": "s3.s",
@@ -18640,7 +18640,7 @@
       "responsibility": "Marble Garden end-boss child motion, collision, palette adjustment, scaling and private geometry helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 523,
+      "physical_lines": 524,
       "origin": {
         "commit": "995400f4b92884b1e428dc4a5225824813b45712",
         "path": "s3.s",
@@ -18720,7 +18720,7 @@
       "responsibility": "Marble Garden end-boss projectiles, detached effects, debris and defeat palette transition.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 363,
+      "physical_lines": 365,
       "origin": {
         "commit": "995400f4b92884b1e428dc4a5225824813b45712",
         "path": "s3.s",
@@ -18760,7 +18760,7 @@
       "responsibility": "Marble Garden end-boss attached actors, parent synchronization, movement and animation state.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 405,
+      "physical_lines": 407,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
@@ -18790,7 +18790,7 @@
       "responsibility": "Marble Garden end-boss Sonic or Knuckles battle controllers, progression and defeat state.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 493,
+      "physical_lines": 496,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
@@ -18820,7 +18820,7 @@
       "responsibility": "Marble Garden end-boss child motion, collision, palette adjustment, scaling and private geometry helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 549,
+      "physical_lines": 550,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
@@ -18880,7 +18880,7 @@
       "responsibility": "Marble Garden end-boss projectiles, detached effects, debris and defeat palette transition.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 388,
+      "physical_lines": 391,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
@@ -18950,7 +18950,7 @@
       "responsibility": "Marble Garden Tunnelbot and miniboss state machines, spawned spires, movement helpers and private palette constants.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 581,
+      "physical_lines": 582,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -19020,7 +19020,7 @@
       "responsibility": "Marble Garden Tunnelbot and miniboss state machines, spawned spires, movement helpers and private palette constants.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 596,
+      "physical_lines": 598,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -19095,7 +19095,7 @@
       "responsibility": "Marble Garden drilling Robotnik arrival scene, movement and battle transition.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 334,
+      "physical_lines": 335,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
