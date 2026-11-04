@@ -1,18 +1,18 @@
 ; Data owner: objects/shared/zones/pachinko
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_PachinkoItemOrb_:
-                dc.w    word_4A29E-Map_PachinkoItemOrb_
-                dc.w    word_4A2A6-Map_PachinkoItemOrb_
-                dc.w    word_4A2AE-Map_PachinkoItemOrb_
-                dc.w    word_4A2B6-Map_PachinkoItemOrb_
-                dc.w    word_4A2BE-Map_PachinkoItemOrb_
-word_4A29E:     dc.w    1
+                dc.w    PachinkoItemOrbMap_Frame00-Map_PachinkoItemOrb_
+                dc.w    PachinkoItemOrbMap_Frame01-Map_PachinkoItemOrb_
+                dc.w    PachinkoItemOrbMap_Frame02-Map_PachinkoItemOrb_
+                dc.w    PachinkoItemOrbMap_Frame03-Map_PachinkoItemOrb_
+                dc.w    PachinkoItemOrbMap_Frame04-Map_PachinkoItemOrb_
+PachinkoItemOrbMap_Frame00: dc.w    1
                 dc.b    $F8,   5,   0,   0, $FF, $F8
-word_4A2A6:     dc.w    1
+PachinkoItemOrbMap_Frame01: dc.w    1
                 dc.b    $F8,   5,   0,   4, $FF, $F8
-word_4A2AE:     dc.w    1
+PachinkoItemOrbMap_Frame02: dc.w    1
                 dc.b    $F8,   5,   0,   8, $FF, $F8
-word_4A2B6:     dc.w    1
+PachinkoItemOrbMap_Frame03: dc.w    1
                 dc.b    $F8,   5,   0,  $C, $FF, $F8
-word_4A2BE:     dc.w    1
+PachinkoItemOrbMap_Frame04: dc.w    1
                 dc.b    $F8,   5,   0, $10, $FF, $F8

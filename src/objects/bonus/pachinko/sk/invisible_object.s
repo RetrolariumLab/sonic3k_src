@@ -10,9 +10,9 @@ Obj_PachinkoInvisibleUnknown:
                 move.b  #$88,width_pixels(a0)
                 move.b  #8,height_pixels(a0)
                 move.w  #$80,priority(a0)
-                move.l  #loc_4A0C6,(a0)
+                move.l  #PachinkoWave_UpdateFromPhaseAndParentY,(a0)
 
-loc_4A0C6:
+PachinkoWave_UpdateFromPhaseAndParentY:
                 movea.w $3E(a0),a1
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
@@ -23,18 +23,18 @@ loc_4A0C6:
                 move.b  angle(a0),d0
                 addi.b  #$10,d0
                 lsr.w   #5,d0
-                move.b  RawAni_4A110(pc,d0.w),mapping_frame(a0)
+                move.b  PachinkoWave_FramesByAngleSector(pc,d0.w),mapping_frame(a0)
                 addi.b  #$84,angle(a0)
                 addi.w  #2,x_pos(a0)
                 cmpi.w  #$178,x_pos(a0)
-                bls.s   loc_4A10A
+                bls.s   PachinkoWave_DrawWithinXLimit
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_4A10A:
+PachinkoWave_DrawWithinXLimit:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-RawAni_4A110:
+PachinkoWave_FramesByAngleSector:
                 dc.b    0,   1,   2,   3,   4,   3,   2,   1
                 even
 Map_PachinkoInvisibleUnknown:

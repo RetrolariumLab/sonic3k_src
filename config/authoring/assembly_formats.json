@@ -111924,11 +111924,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 18
       },
-      "declarations_sha256": "93c7ab069555903c2ff6cb56bba369f5704ff5632f3d346430bd006198162463",
+      "declarations_sha256": "d64e42af4700a66cba4f7431086f15f86c023f245b76625048015c171945d515",
       "labels": {
         "Ani_PachinkoFlipper_": 0,
-        "byte_49E7E": 4,
-        "byte_49E81": 7
+        "PachinkoFlipperSTD_Idle": 4,
+        "PachinkoFlipperSTD_LaunchThenReturnIdle": 7
       },
       "external_symbols": [],
       "blocks": [
@@ -111936,14 +111936,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_49E7E",
+          "target": "PachinkoFlipperSTD_Idle",
           "base": "Ani_PachinkoFlipper_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_49E81",
+          "target": "PachinkoFlipperSTD_LaunchThenReturnIdle",
           "base": "Ani_PachinkoFlipper_"
         },
         {
@@ -111974,10 +111974,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 12
       },
-      "declarations_sha256": "9d6671766488a1f124b7bd948045faad36c8f5cd5d27e82ecc56890df6176fe0",
+      "declarations_sha256": "78a357b75834686d80d72bb792a7a62f90f544a03f51a7b8f843584e76834454",
       "labels": {
         "Ani_PachinkoItemOrb_": 0,
-        "byte_4A28A": 2
+        "PachinkoItemOrbSTD_Cycle": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -111985,7 +111985,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4A28A",
+          "target": "PachinkoItemOrbSTD_Cycle",
           "base": "Ani_PachinkoItemOrb_"
         },
         {
@@ -112005,11 +112005,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 20
       },
-      "declarations_sha256": "93484a319d687750937f79870164fa2a1eeb764cd5c268cf162da8b9400c408a",
+      "declarations_sha256": "2c33d8c3a86eb7ed9b69ae0000b8c9caf67dd4846574f5369360f43b2af2c8fa",
       "labels": {
         "Ani_PachinkoTriangleBumper_": 0,
-        "byte_49BFA": 4,
-        "byte_49BFD": 7
+        "PachinkoTriangleSTD_IdleBlank": 4,
+        "PachinkoTriangleSTD_FlashThenReturnIdle": 7
       },
       "external_symbols": [],
       "blocks": [
@@ -112017,14 +112017,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_49BFA",
+          "target": "PachinkoTriangleSTD_IdleBlank",
           "base": "Ani_PachinkoTriangleBumper_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_49BFD",
+          "target": "PachinkoTriangleSTD_FlashThenReturnIdle",
           "base": "Ani_PachinkoTriangleBumper_"
         },
         {
@@ -112050,11 +112050,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 38
       },
-      "declarations_sha256": "7e90d8458e9209fa22ad4bdb5c62488449d252700dca08381b6efbaa361e5c93",
+      "declarations_sha256": "eef068ce6509062658c95e82c6adbced491c6d55d19924034ecc7db9c12d0c24",
       "labels": {
         "Map_PachinkoBumper_": 0,
-        "word_330A6": 4,
-        "word_330AE": 12
+        "SKPachinkoBumperMapping_Frame00": 4,
+        "SKPachinkoBumperMapping_Frame01": 12
       },
       "external_symbols": [],
       "blocks": [
@@ -112062,14 +112062,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_330A6",
+          "target": "SKPachinkoBumperMapping_Frame00",
           "base": "Map_PachinkoBumper_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_330AE",
+          "target": "SKPachinkoBumperMapping_Frame01",
           "base": "Map_PachinkoBumper_"
         },
         {
@@ -112093,10 +112093,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 16
       },
-      "declarations_sha256": "045052d1ebe727cc5ab677f649e9a29e15bebb75bbde5a73845fee20b0576b7d",
+      "declarations_sha256": "b454b0265c40a25d66db2d85c78e24a210ea2d41357ce145bf94d13442504e12",
       "labels": {
         "Map_PachinkoEnergyTrap_": 0,
-        "word_4A08C": 2
+        "PachinkoEnergyTrapMap_Frame00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -112104,7 +112104,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4A08C",
+          "target": "PachinkoEnergyTrapMap_Frame00",
           "base": "Map_PachinkoEnergyTrap_"
         },
         {
@@ -112123,10 +112123,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 10
       },
-      "declarations_sha256": "3ef6927b8b0241070f40c1e33d1803ef28cbb68eecb5a2321f2feee29a8b7212",
+      "declarations_sha256": "33b06b295eb28dac9df6ced3553527354d5478d4f1b1926b28baadb567547c72",
       "labels": {
         "Map_PachinkoFItem_": 0,
-        "word_4A3D4": 2
+        "PachinkoFItemMap_Frame00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -112134,7 +112134,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4A3D4",
+          "target": "PachinkoFItemMap_Frame00",
           "base": "Map_PachinkoFItem_"
         },
         {
@@ -112153,14 +112153,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 98
       },
-      "declarations_sha256": "79fdb2aa233af14c8d99fdf231cddb709e3bcc0bf38690e10f42abea5d85f09f",
+      "declarations_sha256": "82196f551d0fd8355b172da5d230025c6b6bf4e62840ba1dd92dd2c51bb7af23",
       "labels": {
         "Map_PachinkoFlipper_": 0,
-        "word_49E96": 10,
-        "word_49E9E": 18,
-        "word_49EB2": 38,
-        "word_49EC6": 58,
-        "word_49EDA": 78
+        "PachinkoFlipperMap_Frame00": 10,
+        "PachinkoFlipperMap_Frame01": 18,
+        "PachinkoFlipperMap_Frame02": 38,
+        "PachinkoFlipperMap_Frame03": 58,
+        "PachinkoFlipperMap_Frame04": 78
       },
       "external_symbols": [],
       "blocks": [
@@ -112168,35 +112168,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_49E96",
+          "target": "PachinkoFlipperMap_Frame00",
           "base": "Map_PachinkoFlipper_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_49E9E",
+          "target": "PachinkoFlipperMap_Frame01",
           "base": "Map_PachinkoFlipper_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_49EB2",
+          "target": "PachinkoFlipperMap_Frame02",
           "base": "Map_PachinkoFlipper_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_49EC6",
+          "target": "PachinkoFlipperMap_Frame03",
           "base": "Map_PachinkoFlipper_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_49EDA",
+          "target": "PachinkoFlipperMap_Frame04",
           "base": "Map_PachinkoFlipper_"
         },
         {
@@ -112235,14 +112235,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 110
       },
-      "declarations_sha256": "7c2aa38969ae1fdf8a481a7e2d02b6e04342136f36a11c922456d0859e0c3e68",
+      "declarations_sha256": "2c5cda0b86b26d8119d72717400d4f69a3af397b4a9cd073a1388667070de4a9",
       "labels": {
         "Map_PachinkoInvisibleUnknown_": 0,
-        "word_4A122": 10,
-        "word_4A136": 30,
-        "word_4A14A": 50,
-        "word_4A15E": 70,
-        "word_4A172": 90
+        "PachinkoMovingTripletMap_Frame00": 10,
+        "PachinkoMovingTripletMap_Frame01": 30,
+        "PachinkoMovingTripletMap_Frame02": 50,
+        "PachinkoMovingTripletMap_Frame03": 70,
+        "PachinkoMovingTripletMap_Frame04": 90
       },
       "external_symbols": [],
       "blocks": [
@@ -112250,35 +112250,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4A122",
+          "target": "PachinkoMovingTripletMap_Frame00",
           "base": "Map_PachinkoInvisibleUnknown_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4A136",
+          "target": "PachinkoMovingTripletMap_Frame01",
           "base": "Map_PachinkoInvisibleUnknown_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4A14A",
+          "target": "PachinkoMovingTripletMap_Frame02",
           "base": "Map_PachinkoInvisibleUnknown_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4A15E",
+          "target": "PachinkoMovingTripletMap_Frame03",
           "base": "Map_PachinkoInvisibleUnknown_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4A172",
+          "target": "PachinkoMovingTripletMap_Frame04",
           "base": "Map_PachinkoInvisibleUnknown_"
         },
         {
@@ -112317,14 +112317,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 50
       },
-      "declarations_sha256": "d6dc439e77b6effa5cf34dcc37877a3a32fc0d873f6027934b6410939eb555a6",
+      "declarations_sha256": "2ebfe910223f3a3c6e83283011e97b140daa03077256084cd05fd3992f38fbe1",
       "labels": {
         "Map_PachinkoItemOrb_": 0,
-        "word_4A29E": 10,
-        "word_4A2A6": 18,
-        "word_4A2AE": 26,
-        "word_4A2B6": 34,
-        "word_4A2BE": 42
+        "PachinkoItemOrbMap_Frame00": 10,
+        "PachinkoItemOrbMap_Frame01": 18,
+        "PachinkoItemOrbMap_Frame02": 26,
+        "PachinkoItemOrbMap_Frame03": 34,
+        "PachinkoItemOrbMap_Frame04": 42
       },
       "external_symbols": [],
       "blocks": [
@@ -112332,35 +112332,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4A29E",
+          "target": "PachinkoItemOrbMap_Frame00",
           "base": "Map_PachinkoItemOrb_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4A2A6",
+          "target": "PachinkoItemOrbMap_Frame01",
           "base": "Map_PachinkoItemOrb_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4A2AE",
+          "target": "PachinkoItemOrbMap_Frame02",
           "base": "Map_PachinkoItemOrb_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4A2B6",
+          "target": "PachinkoItemOrbMap_Frame03",
           "base": "Map_PachinkoItemOrb_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4A2BE",
+          "target": "PachinkoItemOrbMap_Frame04",
           "base": "Map_PachinkoItemOrb_"
         },
         {
@@ -112399,10 +112399,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 16
       },
-      "declarations_sha256": "c790e30999b10ff945c7440ec110f5fd53e9786b7b89ee5bfe6c841fe5644e89",
+      "declarations_sha256": "c62d1582aee1d83446814c15266b19b2577ceeca6b8aefa218db1d2c00dfc4dc",
       "labels": {
         "Map_PachinkoPlatform_": 0,
-        "word_4A1D8": 2
+        "PachinkoPlatformMap_Frame00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -112410,7 +112410,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4A1D8",
+          "target": "PachinkoPlatformMap_Frame00",
           "base": "Map_PachinkoPlatform_"
         },
         {
@@ -112429,12 +112429,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 84
       },
-      "declarations_sha256": "36fea587cad7d627a637ee8b76763c1785bad65d3b4d895eb212a2d343d356d3",
+      "declarations_sha256": "872b5bb2b57bb8e59f378b184045532e4265df3c0d52bb55fd81f413b74d16d8",
       "labels": {
         "Map_PachinkoTriangleBumper_": 0,
-        "word_49C10": 6,
-        "word_49C12": 8,
-        "word_49C44": 58
+        "PachinkoTriangleBumperMap_Frame00": 6,
+        "PachinkoTriangleBumperMap_Frame01": 8,
+        "PachinkoTriangleBumperMap_Frame02": 58
       },
       "external_symbols": [],
       "blocks": [
@@ -112442,21 +112442,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_49C10",
+          "target": "PachinkoTriangleBumperMap_Frame00",
           "base": "Map_PachinkoTriangleBumper_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_49C12",
+          "target": "PachinkoTriangleBumperMap_Frame01",
           "base": "Map_PachinkoTriangleBumper_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_49C44",
+          "target": "PachinkoTriangleBumperMap_Frame02",
           "base": "Map_PachinkoTriangleBumper_"
         },
         {

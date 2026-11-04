@@ -10,12 +10,12 @@ Obj_PachinkoFlipper:
                 move.b  #$20,width_pixels(a0)
                 move.b  #$1C,height_pixels(a0)
                 move.w  #$280,priority(a0)
-                move.l  #loc_49C8A,(a0)
+                move.l  #PachinkoFlipper_UpdateSolidAndCapture,(a0)
 
-loc_49C8A:
+PachinkoFlipper_UpdateSolidAndCapture:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
-                lea     (byte_49E5A).l,a2
+                lea     (SKBonus_Flipper_SignedSurfaceHeightBytes).l,a2
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectTopSloped2).l
                 lea     $36(a0),a3
@@ -29,7 +29,7 @@ loc_49C8A:
                 moveq   #p2_standing_bit,d6
                 bsr.s   PachinkoFlipper_UpdateRider
                 tst.b   $38(a0)
-                beq.s   loc_49CEC
+                beq.s   PachinkoFlipper_AnimateAndCullVertically
                 clr.b   $38(a0)
                 lea     $36(a0),a3
                 lea     (Player_1).w,a1
@@ -41,21 +41,21 @@ loc_49C8A:
                 bsr.w   PachinkoFlipper_LaunchRider
                 move.b  #1,anim(a0)
 
-loc_49CEC:
+PachinkoFlipper_AnimateAndCullVertically:
                 lea     (Ani_PachinkoFlipper).l,a1
                 jsr     (Animate_Sprite).l
-                jmp     (loc_49B22).l
+                jmp     (PachinkoTriangle_DrawWithinCoarseY).l
 
 ; =============== S U B R O U T I N E =======================================
 
 ; Capture a standing player in rolling object control and slide along the flipper. A fresh jump requests the shared launch
 PachinkoFlipper_UpdateRider:
                 tst.w   (Debug_placement_mode).w
-                bne.s   loc_49D48
+                bne.s   PachinkoFlipper_ClearCaptureAndControl
                 move.b  (a3),d0
-                bne.s   loc_49D3C
+                bne.s   PachinkoFlipper_CheckJumpOrSlide
                 btst    d6,status(a0)
-                beq.s   locret_49D3A
+                beq.s   PachinkoFlipper_InitialCaptureReturn
                 addq.b  #1,(a3)
                 move.w  #2<<8,anim(a1)                  ; and prev_anim
                 move.b  #1,object_control(a1)
@@ -63,39 +63,40 @@ PachinkoFlipper_UpdateRider:
                 move.b  #7,x_radius(a1)
                 move.b  #2,anim(a1)
                 bset    #Status_Roll,status(a1)
-                bne.s   locret_49D3A
+                bne.s   PachinkoFlipper_InitialCaptureReturn
                 addq.w  #5,y_pos(a1)
 
-locret_49D3A:
+PachinkoFlipper_InitialCaptureReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_49D3C:
+PachinkoFlipper_CheckJumpOrSlide:
                 andi.w  #button_A_mask|button_B_mask|button_C_mask,d5
-                bne.s   loc_49D68
+                bne.s   PachinkoFlipper_QueueLaunchAndSlideNow
                 btst    d6,status(a0)
-                bne.s   loc_49D54
+                bne.s   PachinkoFlipper_SelectFacingSlopeAccel
 
-loc_49D48:
+PachinkoFlipper_ClearCaptureAndControl:
                 move.b  #0,object_control(a1)
                 move.b  #0,(a3)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_49D54:
+; The flipped slope uses a ones' complement, giving -$19 instead of -$18
+PachinkoFlipper_SelectFacingSlopeAccel:
                 moveq   #$18,d1
                 btst    #0,status(a0)
-                beq.s   loc_49D60
+                beq.s   PachinkoFlipper_ApplySlopeAndSlide
                 not.w   d1
 
-loc_49D60:
+PachinkoFlipper_ApplySlopeAndSlide:
                 add.w   d1,ground_vel(a1)
-                bra.w   loc_49DE4
+                bra.w   PachinkoFlipper_DecaySpeedFromInput
 ; ---------------------------------------------------------------------------
 
-loc_49D68:
+PachinkoFlipper_QueueLaunchAndSlideNow:
                 move.b  #1,$38(a0)
-                bra.w   loc_49DE4
+                bra.w   PachinkoFlipper_DecaySpeedFromInput
 ; End of function PachinkoFlipper_UpdateRider
 
 ; =============== S U B R O U T I N E =======================================
@@ -103,14 +104,14 @@ loc_49D68:
 ; Launch speed depends on the rider's position on the lever. Clear capture and restore routine 2
 PachinkoFlipper_LaunchRider:
                 bclr    d6,status(a0)
-                beq.w   locret_49D3A
+                beq.w   PachinkoFlipper_InitialCaptureReturn
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 btst    #0,status(a0)
-                beq.s   loc_49D8C
+                beq.s   PachinkoFlipper_SetLaunchAngleAndPower
                 neg.w   d0
 
-loc_49D8C:
+PachinkoFlipper_SetLaunchAngleAndPower:
                 addi.w  #$20,d0
                 move.w  d0,d2
                 lsl.w   #5,d2
@@ -125,10 +126,10 @@ loc_49D8C:
                 asr.l   #8,d1
                 move.w  d0,y_vel(a1)
                 btst    #0,status(a0)
-                beq.s   loc_49DBC
+                beq.s   PachinkoFlipper_LaunchAndReleaseCapture
                 neg.w   d1
 
-loc_49DBC:
+PachinkoFlipper_LaunchAndReleaseCapture:
                 move.w  d1,x_vel(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    #Status_OnObj,status(a1)
@@ -141,30 +142,30 @@ loc_49DBC:
 
 ; ---------------------------------------------------------------------------
 
-loc_49DE4:
+PachinkoFlipper_DecaySpeedFromInput:
                 move.l  a0,-(sp)
                 movea.l a1,a0
                 move.w  ground_vel(a0),d0
-                beq.s   loc_49E0A
-                bmi.s   loc_49DFE
+                beq.s   PachinkoFlipper_MoveAndCorrectLeftWall
+                bmi.s   PachinkoFlipper_DecayNegativeClampCarry
                 sub.w   d5,d0
-                bcc.s   loc_49DF8
+                bcc.s   PachinkoFlipper_StorePositiveDecay
                 move.w  #0,d0
 
-loc_49DF8:
+PachinkoFlipper_StorePositiveDecay:
                 move.w  d0,ground_vel(a0)
-                bra.s   loc_49E0A
+                bra.s   PachinkoFlipper_MoveAndCorrectLeftWall
 ; ---------------------------------------------------------------------------
 
-loc_49DFE:
+PachinkoFlipper_DecayNegativeClampCarry:
                 add.w   d5,d0
-                bcc.s   loc_49E06
+                bcc.s   SKBonus_Flipper_StoreNegativeDecayResult
                 move.w  #0,d0
 
-loc_49E06:
+SKBonus_Flipper_StoreNegativeDecayResult:
                 move.w  d0,ground_vel(a0)
 
-loc_49E0A:
+PachinkoFlipper_MoveAndCorrectLeftWall:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 muls.w  ground_vel(a0),d0
@@ -176,22 +177,22 @@ loc_49E0A:
                 jsr     (MoveSprite_TestGravity2).l
                 jsr     (CheckLeftWallDist).l
                 tst.w   d1
-                bpl.s   loc_49E42
+                bpl.s   PachinkoFlipper_CorrectRightWall
                 sub.w   d1,x_pos(a0)
                 move.w  #0,ground_vel(a0)
 
-loc_49E42:
+PachinkoFlipper_CorrectRightWall:
                 jsr     (CheckRightWallDist).l
                 tst.w   d1
-                bpl.s   loc_49E56
+                bpl.s   PachinkoFlipper_RestoreFlipperPointer
                 add.w   d1,x_pos(a0)
                 move.w  #0,ground_vel(a0)
 
-loc_49E56:
+PachinkoFlipper_RestoreFlipperPointer:
                 movea.l (sp)+,a0
                 rts
 ; ---------------------------------------------------------------------------
-byte_49E5A:
+SKBonus_Flipper_SignedSurfaceHeightBytes:
                 dc.b    -4,  -4,  -4,  -4,  -4,  -4,  -4,  -4,  -4,  -5,  -6,  -7,  -8,  -9, -$A, -$B, -$C, -$D, -$E, -$F
                 dc.b    -$10,-$11,-$12,-$13,-$14,-$15,-$16,-$17,-$18,-$19,-$1A,-$1B
                 even

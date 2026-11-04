@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 168
+    "commit_count": 169
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -1055,9 +1055,15 @@
       "commits": ["3e7829b31e7a1b3339bc8168405552f9d95776ce"]
     },
     {
-      "id": "current-shorten-62-bonus-gumball",
+      "id": "change-2eabb9d6581c",
       "kind": "source_or_tooling",
       "summary": "Apply 89 reviewed short labels for bonus gumball.",
+      "commits": ["2eabb9d6581c6992e9ff509fc32a06cf5ba91fe5"]
+    },
+    {
+      "id": "current-shorten-63-bonus-pachinko",
+      "kind": "source_or_tooling",
+      "summary": "Apply 62 reviewed short labels for bonus pachinko.",
       "commits": ["release-commit"]
     }
   ],

@@ -49,7 +49,7 @@
     },
     {
       "path": "src/objects/bonus/pachinko/sk/invisible_object.s",
-      "sha256": "2b900a6f5da7db850b8f2c73d167d90270787e59aade77bd1b1f3d14a369512e"
+      "sha256": "83702f8b9f857efaf7fc41c43caf84d1ed8fa1a0a5e1f3c25c07b9a62f69b0b2"
     },
     {
       "path": "src/objects/bonus/s3/gumball_bumpers.s",
@@ -1481,16 +1481,16 @@
     },
     {
       "path": "src/objects/bonus/pachinko/sk/invisible_object.s",
-      "symbol": "RawAni_4A110",
-      "scope": "RawAni_4A110",
+      "symbol": "PachinkoWave_FramesByAngleSector",
+      "scope": "PachinkoWave_FramesByAngleSector",
       "first_line": 37,
       "last_line": 39,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 8,
-      "declarations_sha256": "a2c8c4a71ecd371c80c8cde17137b9519c4727c7f1d3bece1a3da4b7124d8f69",
+      "declarations_sha256": "7ed86af1226dd78983b1a7382a62afb7f08f38ae77c8385c3e6a77c45fb4395e",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_4A110"],
+      "members": ["PachinkoWave_FramesByAngleSector"],
       "stored_markers": []
     },
     {

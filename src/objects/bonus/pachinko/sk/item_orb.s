@@ -11,23 +11,23 @@ Obj_PachinkoItemOrb:
                 move.b  #$10,height_pixels(a0)
                 move.w  #$200,priority(a0)
                 move.b  #$D7,collision_flags(a0)
-                move.l  #loc_4A218,(a0)
+                move.l  #PachinkoItem_ArmSelectionAfterContact,(a0)
 
-loc_4A218:
+PachinkoItem_ArmSelectionAfterContact:
                 tst.b   collision_property(a0)
-                beq.s   loc_4A228
+                beq.s   PachinkoItem_AnimateAndCullVertically
                 clr.b   collision_property(a0)
-                move.l  #loc_4A238,(a0)
+                move.l  #PachinkoItem_SelectRewardWhenQuiet,(a0)
 
-loc_4A228:
+PachinkoItem_AnimateAndCullVertically:
                 lea     (Ani_PachinkoItemOrb).l,a1
                 jsr     (Animate_Sprite).l
                 bra.w   loc_4A31A
 ; ---------------------------------------------------------------------------
 
-loc_4A238:
+PachinkoItem_SelectRewardWhenQuiet:
                 tst.b   collision_property(a0)
-                bne.s   loc_4A274
+                bne.s   PachinkoItem_ClearContactAndDelayPick
                 clr.b   mapping_frame(a0)
                 moveq   #signextendB(sfx_BlueSphere),d0
                 jsr     (Play_SFX).l
@@ -43,7 +43,7 @@ loc_4A238:
                 bra.w   loc_4A2CC
 ; ---------------------------------------------------------------------------
 
-loc_4A274:
+PachinkoItem_ClearContactAndDelayPick:
                 clr.b   collision_property(a0)
                 lea     (Ani_PachinkoItemOrb).l,a1
                 jsr     (Animate_Sprite).l

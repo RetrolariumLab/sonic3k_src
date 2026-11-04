@@ -10,9 +10,9 @@ Obj_Pachinko_Platform:
                 move.b  #$20,width_pixels(a0)
                 move.b  #$C,height_pixels(a0)
                 move.w  #$280,priority(a0)
-                move.l  #loc_4A1B2,(a0)
+                move.l  #PachinkoPlatform_CollideTopAndCull,(a0)
 
-loc_4A1B2:
+PachinkoPlatform_CollideTopAndCull:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -22,7 +22,7 @@ loc_4A1B2:
                 addq.w  #1,d3
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectTop).l
-                jmp     (loc_49B22).l
+                jmp     (PachinkoTriangle_DrawWithinCoarseY).l
 ; ---------------------------------------------------------------------------
 Map_PachinkoPlatform:
                 include "src/objects/shared/zones/pachinko/mappings/platform.s"

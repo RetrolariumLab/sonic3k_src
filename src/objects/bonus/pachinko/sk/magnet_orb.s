@@ -10,9 +10,9 @@ Obj_PachinkoMagnetOrb:
                 move.b  #$10,width_pixels(a0)
                 move.b  #$10,height_pixels(a0)
                 move.w  #$280,priority(a0)
-                move.l  #loc_4A408,(a0)
+                move.l  #PachinkoMagnet_UpdateBothPlayersAndCull,(a0)
 
-loc_4A408:
+PachinkoMagnet_UpdateBothPlayersAndCull:
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d1
@@ -21,32 +21,32 @@ loc_4A408:
                 lea     (Player_2).w,a1
                 move.w  (Ctrl_2_logical).w,d1
                 bsr.s   PachinkoMagnet_UpdatePlayer
-                jmp     (loc_49B4E).l
+                jmp     (PachinkoTriangle_InRangeNoDrawReturn).l
 
 ; =============== S U B R O U T I N E =======================================
 
 ; Capture an eligible player, move it through the oscillation and launch by phase on jump. Then enforce recapture cooldown
 PachinkoMagnet_UpdatePlayer:
                 tst.b   (a2)
-                beq.w   loc_4A53A
+                beq.w   PachinkoMagnet_TickInactiveCooldown
                 tst.w   (Debug_placement_mode).w
-                bne.w   loc_4A4F0
+                bne.w   PachinkoMagnet_ClearControlLowBits
                 cmpi.b  #4,routine(a1)
-                bhs.w   loc_4A4F0
+                bhs.w   PachinkoMagnet_ClearControlLowBits
                 tst.b   object_control(a1)
-                bmi.w   loc_4A4F6
+                bmi.w   PachinkoMagnet_ReleaseAndInitCooldown
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d1
-                bne.w   loc_4A4B4
+                bne.w   PachinkoMagnet_ProjectReleaseVelocity
                 btst    #button_left+8,d1
-                beq.s   loc_4A45A
+                beq.s   PachinkoMagnet_AdjustHeldRightPhase
                 subq.b  #1,6(a2)
 
-loc_4A45A:
+PachinkoMagnet_AdjustHeldRightPhase:
                 btst    #button_right+8,d1
-                beq.s   loc_4A464
+                beq.s   PachinkoMagnet_MovePlayerAndSetVelocity
                 addq.b  #1,6(a2)
 
-loc_4A464:
+PachinkoMagnet_MovePlayerAndSetVelocity:
                 move.w  x_pos(a1),d1
                 move.w  y_pos(a1),d2
                 movem.l d1-d2,-(sp)
@@ -62,24 +62,24 @@ loc_4A464:
                 move.w  d2,y_vel(a1)
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #$F,d0
-                bne.s   locret_4A4A2
+                bne.s   PachinkoMagnet_CapturedUpdateReturn
                 moveq   #signextendB(sfx_WaveHover),d0
                 jsr     (Play_SFX).l
 
-locret_4A4A2:
+PachinkoMagnet_CapturedUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
-byte_4A4A4:
+PachinkoMagnet_ReleaseAngleByPhaseNibble:
                 dc.b    $20, $20, $20, $30, $40, $50, $60, $60, $60, $A0, $A0, $B0, $C0, $D0, $E0, $E0
                 even
 ; ---------------------------------------------------------------------------
 
-loc_4A4B4:
+PachinkoMagnet_ProjectReleaseVelocity:
                 moveq   #0,d1
                 move.b  4(a2),d0
                 move.b  d0,d1
                 lsr.w   #4,d1
-                move.b  byte_4A4A4(pc,d1.w),d1
+                move.b  PachinkoMagnet_ReleaseAngleByPhaseNibble(pc,d1.w),d1
                 andi.b  #$F,d0
                 or.b    d1,d0
                 jsr     (GetSineCosine).l
@@ -95,10 +95,10 @@ loc_4A4B4:
                 neg.w   d1
                 move.w  d1,y_vel(a1)
 
-loc_4A4F0:
+PachinkoMagnet_ClearControlLowBits:
                 andi.b  #$FC,object_control(a1)
 
-loc_4A4F6:
+PachinkoMagnet_ReleaseAndInitCooldown:
                 clr.b   (a2)
                 move.b  #30,2(a2)
                 move.w  #$100,priority(a1)
@@ -114,44 +114,45 @@ loc_4A4F6:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4A53A:
+; Even the tick that clears the cooldown returns before trying to capture again
+PachinkoMagnet_TickInactiveCooldown:
                 tst.b   2(a2)
-                beq.s   loc_4A54E
+                beq.s   PachinkoMagnet_TestCaptureBoundsAndState
                 subq.b  #1,2(a2)
-                bne.s   locret_4A54C
+                bne.s   PachinkoMagnet_CooldownReturn
                 move.w  #$100,priority(a1)
 
-locret_4A54C:
+PachinkoMagnet_CooldownReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4A54E:
+PachinkoMagnet_TestCaptureBoundsAndState:
                 move.w  x_pos(a1),d1
                 sub.w   x_pos(a0),d1
                 addi.w  #$38,d1
                 cmpi.w  #$70,d1
-                bhs.w   locret_4A5DE
+                bhs.w   PachinkoMagnet_CaptureCheckReturn
                 move.w  y_pos(a1),d2
                 sub.w   y_pos(a0),d2
                 addi.w  #$38,d2
                 cmpi.w  #$70,d2
-                bhs.w   locret_4A5DE
+                bhs.w   PachinkoMagnet_CaptureCheckReturn
                 tst.w   (Debug_placement_mode).w
-                bne.w   locret_4A5DE
+                bne.w   PachinkoMagnet_CaptureCheckReturn
                 cmpi.b  #4,routine(a1)
-                bhs.w   locret_4A5DE
+                bhs.w   PachinkoMagnet_CaptureCheckReturn
                 tst.b   object_control(a1)
-                bne.w   locret_4A5DE
+                bne.w   PachinkoMagnet_CaptureCheckReturn
                 subi.w  #$38,d1
                 subi.w  #$38,d2
                 jsr     (GetArcTan).l
                 moveq   #0,d1
                 tst.b   d0
-                bpl.s   loc_4A5AA
+                bpl.s   PachinkoMagnet_SetPhaseAndPositionPlayer
                 moveq   #-$80,d1
                 addi.b  #$80,d0
 
-loc_4A5AA:
+PachinkoMagnet_SetPhaseAndPositionPlayer:
                 move.b  d1,4(a2)
                 subi.b  #$40,d0
                 move.b  d0,6(a2)
@@ -164,7 +165,7 @@ loc_4A5AA:
                 move.b  #1,(a2)
                 bsr.w   PachinkoMagnet_PositionCapturedPlayer
 
-locret_4A5DE:
+PachinkoMagnet_CaptureCheckReturn:
                 rts
 ; End of function PachinkoMagnet_UpdatePlayer
 
@@ -195,11 +196,11 @@ PachinkoMagnet_PositionCapturedPlayer:
                 move.w  #$100,priority(a1)
                 ori.w   #high_priority,art_tile(a1)
                 move.b  4(a2),d0
-                bpl.s   loc_4A63C
+                bpl.s   PachinkoMagnet_StepPhaseAfterPriority
                 move.w  #$280,priority(a1)
                 andi.w  #drawing_mask,art_tile(a1)
 
-loc_4A63C:
+PachinkoMagnet_StepPhaseAfterPriority:
                 addq.b  #4,d0
                 move.b  d0,4(a2)
                 rts

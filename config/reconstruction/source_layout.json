@@ -13730,7 +13730,7 @@
       "responsibility": "Pachinko flipper timing, player contact, launch and sprite resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 201,
+      "physical_lines": 202,
       "origin": {
         "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
         "path": "sonic3k.s",
@@ -13855,7 +13855,7 @@
       "responsibility": "Pachinko magnet orb player attraction, capture, motion and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 206,
+      "physical_lines": 207,
       "origin": {
         "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
         "path": "sonic3k.s",

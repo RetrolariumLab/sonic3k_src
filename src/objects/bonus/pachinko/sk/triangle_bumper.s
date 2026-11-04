@@ -10,9 +10,9 @@ Obj_PachinkoTriangleBumper:
                 move.b  #$14,width_pixels(a0)
                 move.b  #$3C,height_pixels(a0)
                 move.w  #$280,priority(a0)
-                move.l  #loc_49ADA,(a0)
+                move.l  #PachinkoTriangle_CheckBothSideContacts,(a0)
 
-loc_49ADA:
+PachinkoTriangle_CheckBothSideContacts:
                 move.w  #$23,d1
                 move.w  #$40,d2
                 move.w  #$41,d3
@@ -20,60 +20,60 @@ loc_49ADA:
                 jsr     (SolidObjectFull2).l
                 swap    d6
                 andi.w  #1|2,d6
-                beq.s   loc_49B16
+                beq.s   PachinkoTriangle_AnimateIdleOrContact
                 move.w  d6,d0
                 andi.w  #1,d0
-                beq.s   loc_49B08
+                beq.s   PachinkoTriangle_KickP2OnSideContact
                 lea     (Player_1).w,a1
                 moveq   #p1_pushing_bit,d5
                 bsr.s   PachinkoTriangle_KickAndFlipPlayer
 
-loc_49B08:
+PachinkoTriangle_KickP2OnSideContact:
                 andi.w  #2,d6
-                beq.s   loc_49B16
+                beq.s   PachinkoTriangle_AnimateIdleOrContact
                 lea     (Player_2).w,a1
                 moveq   #p2_pushing_bit,d5
                 bsr.s   PachinkoTriangle_KickAndFlipPlayer
 
-loc_49B16:
+PachinkoTriangle_AnimateIdleOrContact:
                 lea     (Ani_PachinkoTriangleBumper).l,a1
                 jsr     (Animate_Sprite).l
 
-loc_49B22:
+PachinkoTriangle_DrawWithinCoarseY:
                 move.w  y_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_Y_pos_coarse_back).w,d0
                 cmpi.w  #$200,d0
-                bhi.w   loc_49B3C
+                bhi.w   PachinkoTriangle_ReleaseRespawnOnCull
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_49B3C:
+PachinkoTriangle_ReleaseRespawnOnCull:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_49B48
+                beq.s   PachinkoTriangle_DeleteDrawFamilySlot
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_49B48:
+PachinkoTriangle_DeleteDrawFamilySlot:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_49B4E:
+PachinkoTriangle_InRangeNoDrawReturn:
                 move.w  y_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_Y_pos_coarse_back).w,d0
                 cmpi.w  #$200,d0
-                bhi.w   loc_49B64
+                bhi.w   PachinkoTriangle_FreeRespawnOnRangeCull
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_49B64:
+PachinkoTriangle_FreeRespawnOnRangeCull:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_49B70
+                beq.s   PachinkoTriangle_DeleteRangeOnlySlot
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_49B70:
+PachinkoTriangle_DeleteRangeOnlySlot:
                 jmp     (Delete_Current_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -85,11 +85,11 @@ PachinkoTriangle_KickAndFlipPlayer:
                 move.w  #$800,x_vel(a1)
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
-                bcc.s   loc_49B9E
+                bcc.s   PachinkoTriangle_ClearPushAndStartFlip
                 bset    #Status_Facing,status(a1)
                 neg.w   x_vel(a1)
 
-loc_49B9E:
+PachinkoTriangle_ClearPushAndStartFlip:
                 bclr    d5,status(a0)
                 bset    #Status_InAir,status(a1)
                 bclr    #Status_Push,status(a1)
@@ -98,18 +98,18 @@ loc_49B9E:
                 clr.b   jumping(a1)
                 move.w  #1,ground_vel(a1)
                 tst.b   flip_angle(a1)
-                bne.s   loc_49BD0
+                bne.s   PachinkoTriangle_SetUnlimitedFlipFacing
                 move.b  #1,flip_angle(a1)
 
-loc_49BD0:
+PachinkoTriangle_SetUnlimitedFlipFacing:
                 move.b  #0,anim(a1)
                 move.b  #-1,flips_remaining(a1)
                 move.b  #4,flip_speed(a1)
                 btst    #Status_Facing,status(a1)
-                beq.s   loc_49BEE
+                beq.s   PachinkoTriangle_SelectContactAnim
                 neg.w   ground_vel(a1)
 
-loc_49BEE:
+PachinkoTriangle_SelectContactAnim:
                 move.b  #1,anim(a0)
                 rts
 ; End of function PachinkoTriangle_KickAndFlipPlayer

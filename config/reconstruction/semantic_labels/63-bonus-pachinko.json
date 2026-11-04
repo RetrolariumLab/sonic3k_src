@@ -1,0 +1,1037 @@
+{
+  "schema_version": 1,
+  "packet": "63-bonus-pachinko",
+  "mappings": [
+    {
+      "source": "src/objects/bonus/pachinko/sk/energy_trap.s",
+      "original_line": 12,
+      "old": "loc_49EF4",
+      "new": "PachinkoTrap_TrySpawnOffsetCompanion",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_EnergyTrap_AttemptOneOffsetCompanion"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/energy_trap.s",
+      "original_line": 22,
+      "old": "loc_49F20",
+      "new": "PachinkoTrap_SetActorAndFinishPair",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_EnergyTrap_ConfigureMainOrCompanionThenFinishTwoEntryLoop"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/energy_trap.s",
+      "original_line": 30,
+      "old": "loc_49F46",
+      "new": "PachinkoTrap_InitHoldAndRiseDelays",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_EnergyTrap_InitializeHoldAndRiseDelaysAfterCompanionAttempt"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/energy_trap.s",
+      "original_line": 36,
+      "old": "loc_49F5C",
+      "new": "PachinkoTrap_TryPeriodicWave",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_EnergyTrap_PeriodicallySpawnParentRelativeWave"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/energy_trap.s",
+      "original_line": 49,
+      "old": "loc_49F92",
+      "new": "PachinkoTrap_TickAngleAndCheckRise",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_EnergyTrap_AdvanceAngleAndGateUpwardRise"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/energy_trap.s",
+      "original_line": 59,
+      "old": "loc_49FAA",
+      "new": "PachinkoTrap_RiseAfterDelay",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_EnergyTrap_MoveIntegerYUpAfterDelay"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/energy_trap.s",
+      "original_line": 62,
+      "old": "loc_49FAE",
+      "new": "PachinkoTrap_WarnForP1AboveBand",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_EnergyTrap_RequestPeriodicWarningForPrimaryAboveBand"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/energy_trap.s",
+      "original_line": 75,
+      "old": "loc_49FD6",
+      "new": "PachinkoTrap_ProcessBothPlayersAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_EnergyTrap_ProcessBothPlayersThenQueueDraw"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/energy_trap.s",
+      "original_line": 93,
+      "old": "loc_49FFC",
+      "new": "PachinkoTrap_CheckCaptureAndSnapY",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_EnergyTrap_TestVerticalCaptureAndSnapPlayerY"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/energy_trap.s",
+      "original_line": 106,
+      "old": "loc_4A024",
+      "new": "PachinkoTrap_LockPlayerAndTickP1Return",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_EnergyTrap_LockPlayerAndReturnPrimaryAfterBorrowCountdown"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/energy_trap.s",
+      "original_line": 125,
+      "old": "locret_4A078",
+      "new": "PachinkoTrap_CaptureUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_EnergyTrap_ReturnAfterCaptureRejectOrCountdownStep"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/energy_trap.s",
+      "original_line": 131,
+      "old": "loc_4A07A",
+      "new": "PachinkoTrap_CompanionFollowParentY",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_EnergyTrap_CompanionFollowParentIntegerYOnly"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/flipper.s",
+      "original_line": 15,
+      "old": "loc_49C8A",
+      "new": "PachinkoFlipper_UpdateSolidAndCapture",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Flipper_SolidThenUpdateTwoCaptureLatchesAndSharedLaunch"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/flipper.s",
+      "original_line": 44,
+      "old": "loc_49CEC",
+      "new": "PachinkoFlipper_AnimateAndCullVertically",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Flipper_AnimateThenUseVerticalDrawCull"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/flipper.s",
+      "original_line": 68,
+      "old": "locret_49D3A",
+      "new": "PachinkoFlipper_InitialCaptureReturn",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Flipper_ReturnAfterNoStandingOrInitialRollCapture"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/flipper.s",
+      "original_line": 72,
+      "old": "loc_49D3C",
+      "new": "PachinkoFlipper_CheckJumpOrSlide",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Flipper_TestNewJumpButtonsBeforeStandingSlide"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/flipper.s",
+      "original_line": 78,
+      "old": "loc_49D48",
+      "new": "PachinkoFlipper_ClearCaptureAndControl",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Flipper_ReleaseCaptureLatchAndClearControlByte"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/flipper.s",
+      "original_line": 84,
+      "old": "loc_49D54",
+      "new": "PachinkoFlipper_SelectFacingSlopeAccel",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Flipper_AddAsymmetricFacingSlopeAcceleration"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/flipper.s",
+      "original_line": 90,
+      "old": "loc_49D60",
+      "new": "PachinkoFlipper_ApplySlopeAndSlide",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Flipper_ApplySlopeIncrementThenIntegrateCapturedPlayer"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/flipper.s",
+      "original_line": 95,
+      "old": "loc_49D68",
+      "new": "PachinkoFlipper_QueueLaunchAndSlideNow",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Flipper_LatchSharedLaunchRequestAndStillSlideNow"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/flipper.s",
+      "original_line": 111,
+      "old": "loc_49D8C",
+      "new": "PachinkoFlipper_SetLaunchAngleAndPower",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Flipper_DeriveLaunchAngleAndStrengthFromFacingLeverX"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/flipper.s",
+      "original_line": 129,
+      "old": "loc_49DBC",
+      "new": "PachinkoFlipper_LaunchAndReleaseCapture",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Flipper_CommitLaunchAndReleaseCurrentCapture"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/flipper.s",
+      "original_line": 142,
+      "old": "loc_49DE4",
+      "new": "PachinkoFlipper_DecaySpeedFromInput",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Flipper_SwapToPlayerAndDecayGroundSpeedByPressedMask"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/flipper.s",
+      "original_line": 152,
+      "old": "loc_49DF8",
+      "new": "PachinkoFlipper_StorePositiveDecay",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Flipper_StoreNonnegativeDecayResult"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/flipper.s",
+      "original_line": 157,
+      "old": "loc_49DFE",
+      "new": "PachinkoFlipper_DecayNegativeClampCarry",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Flipper_DecayNegativeGroundSpeedWithCarryClamp"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/flipper.s",
+      "original_line": 162,
+      "old": "loc_49E06",
+      "new": "SKBonus_Flipper_StoreNegativeDecayResult",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Flipper_StoreNegativeDecayResult"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/flipper.s",
+      "original_line": 165,
+      "old": "loc_49E0A",
+      "new": "PachinkoFlipper_MoveAndCorrectLeftWall",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Flipper_ProjectVelocityMoveAndCorrectLeftWall"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/flipper.s",
+      "original_line": 181,
+      "old": "loc_49E42",
+      "new": "PachinkoFlipper_CorrectRightWall",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Flipper_CorrectRightWallAfterLeftProbe"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/flipper.s",
+      "original_line": 188,
+      "old": "loc_49E56",
+      "new": "PachinkoFlipper_RestoreFlipperPointer",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Flipper_RestoreActorPointerAfterPlayerMotion"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/flipper.s",
+      "original_line": 192,
+      "old": "byte_49E5A",
+      "new": "SKBonus_Flipper_SignedSurfaceHeightBytes",
+      "profiles": ["sk"],
+      "meaning": "ActualprivateDATA: SKBonus_Flipper_SignedSurfaceHeightBytes"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/invisible_object.s",
+      "original_line": 15,
+      "old": "loc_4A0C6",
+      "new": "PachinkoWave_UpdateFromPhaseAndParentY",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_TrapWave_UpdateFromOldAngleAndParentYThenAdvanceX"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/invisible_object.s",
+      "original_line": 34,
+      "old": "loc_4A10A",
+      "new": "PachinkoWave_DrawWithinXLimit",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_TrapWave_DrawAtOrBelowAbsoluteXLimit"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/invisible_object.s",
+      "original_line": 37,
+      "old": "RawAni_4A110",
+      "new": "PachinkoWave_FramesByAngleSector",
+      "profiles": ["sk"],
+      "meaning": "ActualprivateDATA: SKBonus_TrapWave_FrameByRoundedAngleSector"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/item_orb.s",
+      "original_line": 16,
+      "old": "loc_4A218",
+      "new": "PachinkoItem_ArmSelectionAfterContact",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_ItemOrb_ArmQuiescentSelectionAfterFirstContact"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/item_orb.s",
+      "original_line": 22,
+      "old": "loc_4A228",
+      "new": "PachinkoItem_AnimateAndCullVertically",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_ItemOrb_AnimateAndUseSharedVerticalContactCull"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/item_orb.s",
+      "original_line": 28,
+      "old": "loc_4A238",
+      "new": "PachinkoItem_SelectRewardWhenQuiet",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_ItemOrb_SelectWeightedRewardOnlyWhenContactQuiet"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/item_orb.s",
+      "original_line": 46,
+      "old": "loc_4A274",
+      "new": "PachinkoItem_ClearContactAndDelayPick",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_ItemOrb_ConsumeRepeatedContactAndDelaySubtypeSelection"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/magnet_orb.s",
+      "original_line": 15,
+      "old": "loc_4A408",
+      "new": "PachinkoMagnet_UpdateBothPlayersAndCull",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Magnet_UpdateInterleavedPlayerStateBytesThenRangeOnlyCull"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/magnet_orb.s",
+      "original_line": 43,
+      "old": "loc_4A45A",
+      "new": "PachinkoMagnet_AdjustHeldRightPhase",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Magnet_AdjustHeldRightAngleAfterByteJumpMask"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/magnet_orb.s",
+      "original_line": 48,
+      "old": "loc_4A464",
+      "new": "PachinkoMagnet_MovePlayerAndSetVelocity",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Magnet_PositionCapturedPlayerAndDeriveWordDeltaVelocities"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/magnet_orb.s",
+      "original_line": 68,
+      "old": "locret_4A4A2",
+      "new": "PachinkoMagnet_CapturedUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Magnet_ReturnAfterCapturedPositionAndOptionalSound"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/magnet_orb.s",
+      "original_line": 71,
+      "old": "byte_4A4A4",
+      "new": "PachinkoMagnet_ReleaseAngleByPhaseNibble",
+      "profiles": ["sk"],
+      "meaning": "ActualprivateDATA: SKBonus_Magnet_ReleasePhaseHighNibbleAngles"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/magnet_orb.s",
+      "original_line": 76,
+      "old": "loc_4A4B4",
+      "new": "PachinkoMagnet_ProjectReleaseVelocity",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Magnet_ProjectReleaseVelocityFromRemappedPhase"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/magnet_orb.s",
+      "original_line": 97,
+      "old": "loc_4A4F0",
+      "new": "PachinkoMagnet_ClearControlLowBits",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Magnet_ClearControlLowBitsBeforeRelease"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/magnet_orb.s",
+      "original_line": 100,
+      "old": "loc_4A4F6",
+      "new": "PachinkoMagnet_ReleaseAndInitCooldown",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Magnet_ClearCaptureAndInstallCooldownRollFields"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/magnet_orb.s",
+      "original_line": 116,
+      "old": "loc_4A53A",
+      "new": "PachinkoMagnet_TickInactiveCooldown",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Magnet_TickInactiveCooldownWithoutSameCallRecapture"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/magnet_orb.s",
+      "original_line": 123,
+      "old": "locret_4A54C",
+      "new": "PachinkoMagnet_CooldownReturn",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Magnet_ReturnDuringOrAfterCooldown"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/magnet_orb.s",
+      "original_line": 127,
+      "old": "loc_4A54E",
+      "new": "PachinkoMagnet_TestCaptureBoundsAndState",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Magnet_TestCaptureRectangleAndPlayerEligibility"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/magnet_orb.s",
+      "original_line": 153,
+      "old": "loc_4A5AA",
+      "new": "PachinkoMagnet_SetPhaseAndPositionPlayer",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Magnet_SeedCapturePhaseAndPlacePlayerImmediately"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/magnet_orb.s",
+      "original_line": 166,
+      "old": "locret_4A5DE",
+      "new": "PachinkoMagnet_CaptureCheckReturn",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Magnet_ReturnAfterCaptureOrAnyEligibilityReject"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/magnet_orb.s",
+      "original_line": 200,
+      "old": "loc_4A63C",
+      "new": "PachinkoMagnet_StepPhaseAfterPriority",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Magnet_AdvancePhaseAfterPositionPrioritySelection"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/platform.s",
+      "original_line": 15,
+      "old": "loc_4A1B2",
+      "new": "PachinkoPlatform_CollideTopAndCull",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Platform_ApplyTopSolidThenVerticalDrawCull"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/triangle_bumper.s",
+      "original_line": 15,
+      "old": "loc_49ADA",
+      "new": "PachinkoTriangle_CheckBothSideContacts",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Triangle_ProcessSolidSideFlagsForBothPlayers"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/triangle_bumper.s",
+      "original_line": 31,
+      "old": "loc_49B08",
+      "new": "PachinkoTriangle_KickP2OnSideContact",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Triangle_KickSecondPlayerIfSecondSideFlag"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/triangle_bumper.s",
+      "original_line": 38,
+      "old": "loc_49B16",
+      "new": "PachinkoTriangle_AnimateIdleOrContact",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Triangle_AnimateIdleAndContactScripts"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/triangle_bumper.s",
+      "original_line": 42,
+      "old": "loc_49B22",
+      "new": "PachinkoTriangle_DrawWithinCoarseY",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_VerticalCull_DrawInsideUnsignedCoarseYWindow"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/triangle_bumper.s",
+      "original_line": 51,
+      "old": "loc_49B3C",
+      "new": "PachinkoTriangle_ReleaseRespawnOnCull",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_VerticalCull_ReleaseRespawnBeforeDrawFamilyDelete"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/triangle_bumper.s",
+      "original_line": 57,
+      "old": "loc_49B48",
+      "new": "PachinkoTriangle_DeleteDrawFamilySlot",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_VerticalCull_ClearCurrentSlotForDrawFamily"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/triangle_bumper.s",
+      "original_line": 61,
+      "old": "loc_49B4E",
+      "new": "PachinkoTriangle_InRangeNoDrawReturn",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_VerticalCull_ReturnInRangeWithoutDrawing"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/triangle_bumper.s",
+      "original_line": 70,
+      "old": "loc_49B64",
+      "new": "PachinkoTriangle_FreeRespawnOnRangeCull",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_VerticalCull_ReleaseRespawnBeforeRangeOnlyDelete"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/triangle_bumper.s",
+      "original_line": 76,
+      "old": "loc_49B70",
+      "new": "PachinkoTriangle_DeleteRangeOnlySlot",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_VerticalCull_ClearCurrentSlotForRangeOnlyFamily"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/triangle_bumper.s",
+      "original_line": 92,
+      "old": "loc_49B9E",
+      "new": "PachinkoTriangle_ClearPushAndStartFlip",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Triangle_ClearSelectedPushAndStartAirFlipState"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/triangle_bumper.s",
+      "original_line": 104,
+      "old": "loc_49BD0",
+      "new": "PachinkoTriangle_SetUnlimitedFlipFacing",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Triangle_ConfigureIndefiniteFlipAndGroundDirection"
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/triangle_bumper.s",
+      "original_line": 112,
+      "old": "loc_49BEE",
+      "new": "PachinkoTriangle_SelectContactAnim",
+      "profiles": ["sk"],
+      "meaning": "Actualnativebonusstatejoin: SKBonus_Triangle_SelectContactAnimationAfterKick"
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/animations/flipper.s",
+      "original_line": 6,
+      "old": "byte_49E7E",
+      "new": "PachinkoFlipperSTD_Idle",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoFlipperSTD_Idle from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/animations/flipper.s",
+      "original_line": 7,
+      "old": "byte_49E81",
+      "new": "PachinkoFlipperSTD_LaunchThenReturnIdle",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoFlipperSTD_LaunchThenReturnIdle from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/animations/item_orb.s",
+      "original_line": 5,
+      "old": "byte_4A28A",
+      "new": "PachinkoItemOrbSTD_Cycle",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoItemOrbSTD_Cycle from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/animations/triangle_bumper.s",
+      "original_line": 6,
+      "old": "byte_49BFA",
+      "new": "PachinkoTriangleSTD_IdleBlank",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoTriangleSTD_IdleBlank from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/animations/triangle_bumper.s",
+      "original_line": 7,
+      "old": "byte_49BFD",
+      "new": "PachinkoTriangleSTD_FlashThenReturnIdle",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoTriangleSTD_FlashThenReturnIdle from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/bumper.s",
+      "original_line": 6,
+      "old": "word_330A6",
+      "new": "SKPachinkoBumperMapping_Frame00",
+      "profiles": ["sk"],
+      "meaning": "Define physical bumper map frame 0."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/bumper.s",
+      "original_line": 8,
+      "old": "word_330AE",
+      "new": "SKPachinkoBumperMapping_Frame01",
+      "profiles": ["sk"],
+      "meaning": "Define physical bumper map frame 1."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/energy_trap.s",
+      "original_line": 5,
+      "old": "word_4A08C",
+      "new": "PachinkoEnergyTrapMap_Frame00",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoEnergyTrapMap_Frame00 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/f_item.s",
+      "original_line": 5,
+      "old": "word_4A3D4",
+      "new": "PachinkoFItemMap_Frame00",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoFItemMap_Frame00 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/flipper.s",
+      "original_line": 9,
+      "old": "word_49E96",
+      "new": "PachinkoFlipperMap_Frame00",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoFlipperMap_Frame00 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/flipper.s",
+      "original_line": 11,
+      "old": "word_49E9E",
+      "new": "PachinkoFlipperMap_Frame01",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoFlipperMap_Frame01 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/flipper.s",
+      "original_line": 15,
+      "old": "word_49EB2",
+      "new": "PachinkoFlipperMap_Frame02",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoFlipperMap_Frame02 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/flipper.s",
+      "original_line": 19,
+      "old": "word_49EC6",
+      "new": "PachinkoFlipperMap_Frame03",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoFlipperMap_Frame03 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/flipper.s",
+      "original_line": 23,
+      "old": "word_49EDA",
+      "new": "PachinkoFlipperMap_Frame04",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoFlipperMap_Frame04 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/invisible_unknown.s",
+      "original_line": 9,
+      "old": "word_4A122",
+      "new": "PachinkoMovingTripletMap_Frame00",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoMovingTripletMap_Frame00 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/invisible_unknown.s",
+      "original_line": 13,
+      "old": "word_4A136",
+      "new": "PachinkoMovingTripletMap_Frame01",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoMovingTripletMap_Frame01 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/invisible_unknown.s",
+      "original_line": 17,
+      "old": "word_4A14A",
+      "new": "PachinkoMovingTripletMap_Frame02",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoMovingTripletMap_Frame02 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/invisible_unknown.s",
+      "original_line": 21,
+      "old": "word_4A15E",
+      "new": "PachinkoMovingTripletMap_Frame03",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoMovingTripletMap_Frame03 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/invisible_unknown.s",
+      "original_line": 25,
+      "old": "word_4A172",
+      "new": "PachinkoMovingTripletMap_Frame04",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoMovingTripletMap_Frame04 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/item_orb.s",
+      "original_line": 9,
+      "old": "word_4A29E",
+      "new": "PachinkoItemOrbMap_Frame00",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoItemOrbMap_Frame00 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/item_orb.s",
+      "original_line": 11,
+      "old": "word_4A2A6",
+      "new": "PachinkoItemOrbMap_Frame01",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoItemOrbMap_Frame01 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/item_orb.s",
+      "original_line": 13,
+      "old": "word_4A2AE",
+      "new": "PachinkoItemOrbMap_Frame02",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoItemOrbMap_Frame02 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/item_orb.s",
+      "original_line": 15,
+      "old": "word_4A2B6",
+      "new": "PachinkoItemOrbMap_Frame03",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoItemOrbMap_Frame03 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/item_orb.s",
+      "original_line": 17,
+      "old": "word_4A2BE",
+      "new": "PachinkoItemOrbMap_Frame04",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoItemOrbMap_Frame04 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/platform.s",
+      "original_line": 5,
+      "old": "word_4A1D8",
+      "new": "PachinkoPlatformMap_Frame00",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoPlatformMap_Frame00 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/triangle_bumper.s",
+      "original_line": 7,
+      "old": "word_49C10",
+      "new": "PachinkoTriangleBumperMap_Frame00",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoTriangleBumperMap_Frame00 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/triangle_bumper.s",
+      "original_line": 8,
+      "old": "word_49C12",
+      "new": "PachinkoTriangleBumperMap_Frame01",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoTriangleBumperMap_Frame01 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/triangle_bumper.s",
+      "original_line": 17,
+      "old": "word_49C44",
+      "new": "PachinkoTriangleBumperMap_Frame02",
+      "profiles": ["sk"],
+      "meaning": "Establish PachinkoTriangleBumperMap_Frame02 from literal native mapping/script and actual readers."
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/objects/bonus/pachinko/sk/energy_trap.s",
+      "tokens": [
+        [4, 1, 1, ""],
+        [5, 0, 0, ""],
+        [7, 1, 2, ""],
+        [8, 2, 11, ""],
+        [14, 0, 1, ""],
+        [21, 0, 2, ""],
+        [22, 3, 0, ""],
+        [25, 2, 3, ""],
+        [26, 0, 3, ""],
+        [29, 1, 4, ""],
+        [31, 1, 4, ""],
+        [38, 0, 4, ""],
+        [41, 1, 6, ""],
+        [43, 1, 5, ""],
+        [45, 1, 6, ""],
+        [46, 0, 5, ""],
+        [48, 0, 6, ""],
+        [54, 1, 7, ""],
+        [57, 1, 7, ""],
+        [60, 0, 7, ""],
+        [68, 1, 8, ""],
+        [70, 1, 9, ""],
+        [72, 1, 9, ""],
+        [73, 0, 8, ""],
+        [77, 1, 10, ""],
+        [79, 1, 10, ""],
+        [82, 1, 9, ""],
+        [85, 0, 9, ""],
+        [89, 1, 10, ""],
+        [92, 1, 10, ""],
+        [103, 0, 10, ""],
+        [105, 0, 11, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/flipper.s",
+      "tokens": [
+        [8, 2, 12, ""],
+        [9, 0, 12, ""],
+        [12, 2, 29, ""],
+        [26, 1, 13, ""],
+        [37, 0, 13, ""],
+        [40, 2, 55, ""],
+        [43, 1, 16, ""],
+        [45, 1, 15, ""],
+        [47, 1, 14, ""],
+        [55, 1, 14, ""],
+        [57, 0, 14, ""],
+        [59, 0, 15, ""],
+        [61, 1, 19, ""],
+        [63, 1, 17, ""],
+        [64, 0, 16, ""],
+        [68, 0, 17, ""],
+        [71, 1, 18, ""],
+        [73, 0, 18, ""],
+        [75, 1, 22, ""],
+        [76, 0, 19, ""],
+        [78, 1, 22, ""],
+        [81, 1, 14, ""],
+        [85, 1, 20, ""],
+        [87, 0, 20, ""],
+        [102, 1, 21, ""],
+        [104, 0, 21, ""],
+        [113, 0, 22, ""],
+        [117, 1, 26, ""],
+        [118, 1, 24, ""],
+        [120, 1, 23, ""],
+        [122, 0, 23, ""],
+        [124, 1, 26, ""],
+        [125, 0, 24, ""],
+        [127, 1, 25, ""],
+        [129, 0, 25, ""],
+        [131, 0, 26, ""],
+        [143, 1, 27, ""],
+        [146, 0, 27, ""],
+        [149, 1, 28, ""],
+        [152, 0, 28, ""],
+        [155, 0, 29, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/invisible_object.s",
+      "tokens": [
+        [8, 2, 30, ""],
+        [9, 0, 30, ""],
+        [20, 1, 32, ""],
+        [24, 1, 31, ""],
+        [26, 0, 31, ""],
+        [28, 0, 32, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/item_orb.s",
+      "tokens": [
+        [9, 2, 33, ""],
+        [10, 0, 33, ""],
+        [12, 1, 34, ""],
+        [14, 2, 35, ""],
+        [15, 0, 34, ""],
+        [19, 0, 35, ""],
+        [21, 1, 36, ""],
+        [35, 0, 36, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/magnet_orb.s",
+      "tokens": [
+        [8, 2, 37, ""],
+        [9, 0, 37, ""],
+        [18, 2, 58, ""],
+        [21, 1, 45, ""],
+        [23, 1, 43, ""],
+        [25, 1, 43, ""],
+        [27, 1, 44, ""],
+        [29, 1, 42, ""],
+        [31, 1, 38, ""],
+        [33, 0, 38, ""],
+        [35, 1, 39, ""],
+        [37, 0, 39, ""],
+        [53, 1, 40, ""],
+        [56, 0, 40, ""],
+        [58, 0, 41, ""],
+        [61, 0, 42, ""],
+        [66, 1, 41, ""],
+        [81, 0, 43, ""],
+        [83, 0, 44, ""],
+        [97, 0, 45, ""],
+        [99, 1, 47, ""],
+        [101, 1, 46, ""],
+        [103, 0, 46, ""],
+        [105, 0, 47, ""],
+        [110, 1, 49, ""],
+        [115, 1, 49, ""],
+        [117, 1, 49, ""],
+        [119, 1, 49, ""],
+        [121, 1, 49, ""],
+        [127, 1, 48, ""],
+        [130, 0, 48, ""],
+        [142, 0, 49, ""],
+        [168, 1, 50, ""],
+        [171, 0, 50, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/platform.s",
+      "tokens": [
+        [8, 2, 51, ""],
+        [9, 0, 51, ""],
+        [19, 2, 55, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bonus/pachinko/sk/triangle_bumper.s",
+      "tokens": [
+        [8, 2, 52, ""],
+        [9, 0, 52, ""],
+        [17, 1, 54, ""],
+        [20, 1, 53, ""],
+        [24, 0, 53, ""],
+        [26, 1, 54, ""],
+        [30, 0, 54, ""],
+        [33, 0, 55, ""],
+        [38, 1, 56, ""],
+        [40, 0, 56, ""],
+        [42, 1, 57, ""],
+        [45, 0, 57, ""],
+        [47, 0, 58, ""],
+        [52, 1, 59, ""],
+        [54, 0, 59, ""],
+        [56, 1, 60, ""],
+        [59, 0, 60, ""],
+        [68, 1, 61, ""],
+        [71, 0, 61, ""],
+        [80, 1, 62, ""],
+        [82, 0, 62, ""],
+        [87, 1, 63, ""],
+        [89, 0, 63, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/animations/flipper.s",
+      "tokens": [
+        [2, 1, 64, ""],
+        [3, 1, 65, ""],
+        [4, 0, 64, ""],
+        [5, 0, 65, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/animations/item_orb.s",
+      "tokens": [
+        [2, 1, 66, ""],
+        [3, 0, 66, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/animations/triangle_bumper.s",
+      "tokens": [
+        [2, 1, 67, ""],
+        [3, 1, 68, ""],
+        [4, 0, 67, ""],
+        [5, 0, 68, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/bumper.s",
+      "tokens": [
+        [2, 1, 69, ""],
+        [3, 1, 70, ""],
+        [4, 0, 69, ""],
+        [6, 0, 70, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/energy_trap.s",
+      "tokens": [
+        [2, 1, 71, ""],
+        [3, 0, 71, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/f_item.s",
+      "tokens": [
+        [2, 1, 72, ""],
+        [3, 0, 72, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/flipper.s",
+      "tokens": [
+        [2, 1, 73, ""],
+        [3, 1, 74, ""],
+        [4, 1, 75, ""],
+        [5, 1, 76, ""],
+        [6, 1, 77, ""],
+        [7, 0, 73, ""],
+        [9, 0, 74, ""],
+        [13, 0, 75, ""],
+        [17, 0, 76, ""],
+        [21, 0, 77, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/invisible_unknown.s",
+      "tokens": [
+        [2, 1, 78, ""],
+        [3, 1, 79, ""],
+        [4, 1, 80, ""],
+        [5, 1, 81, ""],
+        [6, 1, 82, ""],
+        [7, 0, 78, ""],
+        [11, 0, 79, ""],
+        [15, 0, 80, ""],
+        [19, 0, 81, ""],
+        [23, 0, 82, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/item_orb.s",
+      "tokens": [
+        [2, 1, 83, ""],
+        [3, 1, 84, ""],
+        [4, 1, 85, ""],
+        [5, 1, 86, ""],
+        [6, 1, 87, ""],
+        [7, 0, 83, ""],
+        [9, 0, 84, ""],
+        [11, 0, 85, ""],
+        [13, 0, 86, ""],
+        [15, 0, 87, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/platform.s",
+      "tokens": [
+        [2, 1, 88, ""],
+        [3, 0, 88, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/pachinko/mappings/triangle_bumper.s",
+      "tokens": [
+        [2, 1, 89, ""],
+        [3, 1, 90, ""],
+        [4, 1, 91, ""],
+        [5, 0, 89, ""],
+        [6, 0, 90, ""],
+        [15, 0, 91, ""]
+      ]
+    }
+  ]
+}
