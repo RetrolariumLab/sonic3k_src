@@ -106600,27 +106600,27 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 306
       },
-      "declarations_sha256": "8db8915f6681875720f8a0655886621e10fd345e4837cfbaf3acad65bffcf760",
+      "declarations_sha256": "1b27d51b5381c366eb7b65af99002db995d6e2d3d4780052cb78c64002621777",
       "labels": {
         "Map_LRZEndBoss_": 0,
-        "word_1873A6": 36,
-        "word_1873EA": 104,
-        "word_187404": 130,
-        "word_187418": 150,
-        "word_18742C": 170,
-        "word_18743A": 184,
-        "word_187448": 198,
-        "word_187456": 212,
-        "word_18745E": 220,
-        "word_18746C": 234,
-        "word_187474": 242,
-        "word_18747C": 250,
-        "word_187484": 258,
-        "word_18748C": 266,
-        "word_187494": 274,
-        "word_18749C": 282,
-        "word_1874A4": 290,
-        "word_1874AC": 298
+        "LRZEndBoss_MapFrame00": 36,
+        "LRZEndBoss_MapFrame01": 104,
+        "LRZEndBoss_MapFrame02": 130,
+        "LRZEndBoss_MapFrame03": 150,
+        "LRZEndBoss_MapFrame04": 170,
+        "LRZEndBoss_MapFrame05": 184,
+        "LRZEndBoss_MapFrame06": 198,
+        "LRZEndBoss_MapFrame07": 212,
+        "LRZEndBoss_MapFrame08": 220,
+        "LRZEndBoss_MapFrame09": 234,
+        "LRZEndBoss_MapFrame0A": 242,
+        "LRZEndBoss_MapFrame0B": 250,
+        "LRZEndBoss_MapFrame0C": 258,
+        "LRZEndBoss_MapFrame0D": 266,
+        "LRZEndBoss_MapFrame0E": 274,
+        "LRZEndBoss_MapFrame0F": 282,
+        "LRZEndBoss_MapFrame10": 290,
+        "LRZEndBoss_MapFrame11": 298
       },
       "external_symbols": [],
       "blocks": [
@@ -106628,126 +106628,126 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1873A6",
+          "target": "LRZEndBoss_MapFrame00",
           "base": "Map_LRZEndBoss_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1873EA",
+          "target": "LRZEndBoss_MapFrame01",
           "base": "Map_LRZEndBoss_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187404",
+          "target": "LRZEndBoss_MapFrame02",
           "base": "Map_LRZEndBoss_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187418",
+          "target": "LRZEndBoss_MapFrame03",
           "base": "Map_LRZEndBoss_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18742C",
+          "target": "LRZEndBoss_MapFrame04",
           "base": "Map_LRZEndBoss_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18743A",
+          "target": "LRZEndBoss_MapFrame05",
           "base": "Map_LRZEndBoss_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187448",
+          "target": "LRZEndBoss_MapFrame06",
           "base": "Map_LRZEndBoss_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187456",
+          "target": "LRZEndBoss_MapFrame07",
           "base": "Map_LRZEndBoss_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18745E",
+          "target": "LRZEndBoss_MapFrame08",
           "base": "Map_LRZEndBoss_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18746C",
+          "target": "LRZEndBoss_MapFrame09",
           "base": "Map_LRZEndBoss_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187474",
+          "target": "LRZEndBoss_MapFrame0A",
           "base": "Map_LRZEndBoss_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18747C",
+          "target": "LRZEndBoss_MapFrame0B",
           "base": "Map_LRZEndBoss_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187484",
+          "target": "LRZEndBoss_MapFrame0C",
           "base": "Map_LRZEndBoss_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18748C",
+          "target": "LRZEndBoss_MapFrame0D",
           "base": "Map_LRZEndBoss_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187494",
+          "target": "LRZEndBoss_MapFrame0E",
           "base": "Map_LRZEndBoss_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18749C",
+          "target": "LRZEndBoss_MapFrame0F",
           "base": "Map_LRZEndBoss_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1874A4",
+          "target": "LRZEndBoss_MapFrame10",
           "base": "Map_LRZEndBoss_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1874AC",
+          "target": "LRZEndBoss_MapFrame11",
           "base": "Map_LRZEndBoss_"
         },
         {
@@ -107118,29 +107118,29 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 800
       },
-      "declarations_sha256": "db0bb91c19902e980051e4520a16bcdd0211becc155ef4bccd4d91bff6299cf9",
+      "declarations_sha256": "996d4545934d5e40fdf2f9992f5e874de4182e2223f7a9c0c8b1eef052b687a1",
       "labels": {
         "Map_LRZMiniboss_": 0,
-        "word_186EF0": 40,
-        "word_186EF2": 42,
-        "word_186F7E": 182,
-        "word_186FF8": 304,
-        "word_187072": 426,
-        "word_1870EC": 548,
-        "word_187154": 652,
-        "word_18715C": 660,
-        "word_187164": 668,
-        "word_18716C": 676,
-        "word_187174": 684,
-        "word_187182": 698,
-        "word_18718A": 706,
-        "word_187192": 714,
-        "word_1871A0": 728,
-        "word_1871AE": 742,
-        "word_1871BC": 756,
-        "word_1871CA": 770,
-        "word_1871D8": 784,
-        "word_1871E0": 792
+        "LRZMiniboss_MapFrame00": 40,
+        "LRZMiniboss_MapFrame01": 42,
+        "LRZMiniboss_MapFrame02": 182,
+        "LRZMiniboss_MapFrame03": 304,
+        "LRZMiniboss_MapFrame04": 426,
+        "LRZMiniboss_MapFrame05": 548,
+        "LRZMiniboss_MapFrame06": 652,
+        "LRZMiniboss_MapFrame07": 660,
+        "LRZMiniboss_MapFrame08": 668,
+        "LRZMiniboss_MapFrame09": 676,
+        "LRZMiniboss_MapFrame0A": 684,
+        "LRZMiniboss_MapFrame0B": 698,
+        "LRZMiniboss_MapFrame0C": 706,
+        "LRZMiniboss_MapFrame0D": 714,
+        "LRZMiniboss_MapFrame0E": 728,
+        "LRZMiniboss_MapFrame0F": 742,
+        "LRZMiniboss_MapFrame10": 756,
+        "LRZMiniboss_MapFrame11": 770,
+        "LRZMiniboss_MapFrame12": 784,
+        "LRZMiniboss_MapFrame13": 792
       },
       "external_symbols": [],
       "blocks": [
@@ -107148,140 +107148,140 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186EF0",
+          "target": "LRZMiniboss_MapFrame00",
           "base": "Map_LRZMiniboss_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186EF2",
+          "target": "LRZMiniboss_MapFrame01",
           "base": "Map_LRZMiniboss_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186F7E",
+          "target": "LRZMiniboss_MapFrame02",
           "base": "Map_LRZMiniboss_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186FF8",
+          "target": "LRZMiniboss_MapFrame03",
           "base": "Map_LRZMiniboss_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187072",
+          "target": "LRZMiniboss_MapFrame04",
           "base": "Map_LRZMiniboss_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1870EC",
+          "target": "LRZMiniboss_MapFrame05",
           "base": "Map_LRZMiniboss_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187154",
+          "target": "LRZMiniboss_MapFrame06",
           "base": "Map_LRZMiniboss_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18715C",
+          "target": "LRZMiniboss_MapFrame07",
           "base": "Map_LRZMiniboss_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187164",
+          "target": "LRZMiniboss_MapFrame08",
           "base": "Map_LRZMiniboss_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18716C",
+          "target": "LRZMiniboss_MapFrame09",
           "base": "Map_LRZMiniboss_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187174",
+          "target": "LRZMiniboss_MapFrame0A",
           "base": "Map_LRZMiniboss_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187182",
+          "target": "LRZMiniboss_MapFrame0B",
           "base": "Map_LRZMiniboss_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18718A",
+          "target": "LRZMiniboss_MapFrame0C",
           "base": "Map_LRZMiniboss_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187192",
+          "target": "LRZMiniboss_MapFrame0D",
           "base": "Map_LRZMiniboss_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1871A0",
+          "target": "LRZMiniboss_MapFrame0E",
           "base": "Map_LRZMiniboss_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1871AE",
+          "target": "LRZMiniboss_MapFrame0F",
           "base": "Map_LRZMiniboss_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1871BC",
+          "target": "LRZMiniboss_MapFrame10",
           "base": "Map_LRZMiniboss_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1871CA",
+          "target": "LRZMiniboss_MapFrame11",
           "base": "Map_LRZMiniboss_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1871D8",
+          "target": "LRZMiniboss_MapFrame12",
           "base": "Map_LRZMiniboss_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1871E0",
+          "target": "LRZMiniboss_MapFrame13",
           "base": "Map_LRZMiniboss_"
         },
         {

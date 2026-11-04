@@ -174,12 +174,12 @@
     },
     {
       "path": "src/objects/bosses/lrz/miniboss/sk/object_catalog.s",
-      "scope": "word_78EAA",
+      "scope": "LRZMini_CompletionPaletteScript",
       "first_line": 97,
       "last_line": 113,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 172,
-      "declarations_sha256": "cf0d752a5701290d1889282413912315937f2c9e3164b9221efd6cc59b9da1e9",
+      "declarations_sha256": "f8418e77af639ce3afa2eaa08daea9beb5b16248d1d2a8ef1b176c14c93b6927",
       "external_symbols": ["Normal_palette", "Normal_palette_line_3"],
       "file_frames": []
     },

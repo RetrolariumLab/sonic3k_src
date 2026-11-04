@@ -7,65 +7,65 @@ ObjDat_LRZEndBoss:
                 dc.w    make_art_tile(ArtTile_LRZEndBoss,1,0)
                 dc.w    $280
                 dc.b    $28, $2C,   0, $B8
-word_7A14C:
+LRZBossProjectile_PartialAttributes:
                 dc.w    $280
                 dc.b    $10, $10,   4, $9A
-word_7A152:
+LRZBossShotEffect_PartialAttributes:
                 dc.w    $280
                 dc.b    $10, $10,   5,   0
-word_7A158:
+LRZBossProjectileTrail_PartialAttributes:
                 dc.w    $280
                 dc.b    8,   8,  $A,   0
-word_7A15E:
+LRZBossSurfaceEffect_PartialAttributes:
                 dc.w    $200
                 dc.b    $28,   4,   1,   0
-word_7A164:
+LRZBoss_StatusDisplayAttributes:
                 dc.w    make_art_tile(ArtTile_LRZEndBoss,0,0)
                 dc.w    $200
                 dc.b    $C,   8,  $F,   0
-ObjDat3_7A16C:
+LRZBossSmallPlatform_FullAttributes:
                 dc.l    Map_LRZ3Platform
                 dc.w    make_art_tile($001,3,0)
                 dc.w    $280
                 dc.b    $18, $10,   1,   0
-ObjDat3_7A178:
+LRZBoss_LargePlatformAttributes:
                 dc.l    Map_LRZ3Platform
 ; this is using the incorrect palette line
                 dc.w    make_art_tile($001,3,0)
                 dc.w    $280
                 dc.b    $20, $18,   4,   0
-word_7A184:
+LRZBoss_PlatformOverlayAttributes:
                 dc.w    make_art_tile($001,2,0)
                 dc.w    $100
                 dc.b    $20,   8,   2,   0
-ChildObjDat_7A18C:
+LRZBoss_SurfaceAndDisplayChildren:
                 dc.w    2-1
-                dc.l    loc_79BE6
+                dc.l    LRZBoss_InitSurfaceEffect
                 dc.b    0,-$12
-                dc.l    loc_79C0C
+                dc.l    LRZBoss_InitStatusDisplay
                 dc.b    -$15,   1
-ChildObjDat_7A19A:
+LRZBoss_ShotAndEffectChildren:
                 dc.w    2-1
-                dc.l    loc_79AAE
+                dc.l    LRZBossProjectile_InitializeUpwardLaunch
                 dc.b    0,-$18
-                dc.l    loc_79B7E
+                dc.l    LRZBoss_InitShotEffect
                 dc.b    0,-$37
-ChildObjDat_7A1A8:
+LRZBossProjectile_SingleTrailNormalChild:
                 dc.w    1-1
-                dc.l    loc_79BAC
+                dc.l    LRZBoss_InitShotTrailAndMotion
                 dc.b    0, $10
-ChildObjDat_7A1B0:
+LRZRisingPlatform_SingleRepeatedChild:
                 dc.w    1-1
-                dc.l    loc_79D28
-ChildObjDat_7A1B6:
+                dc.l    LRZBoss_InitRisingPlatform
+LRZBoss_PlatformOverlayChild:
                 dc.w    1-1
-                dc.l    loc_79E6C
-ChildObjDat_7A1BC:
+                dc.l    LRZBoss_InitPlatformOverlay
+LRZBoss_PlatformDebrisChildren:
                 dc.w    $A-1
-                dc.l    loc_79E9C
-byte_7A1C2:
+                dc.l    LRZBoss_InitPlatformDebris
+LRZBossSurfaceEffect_UniformFrameLoop:
                 dc.b    2,   1,   2,   3, $FC
-byte_7A1C7:
+LRZBoss_ShotEffectDeleteAnim:
                 dc.b    5,   0
                 dc.b    5,   0
                 dc.b    6,   1
@@ -75,7 +75,7 @@ byte_7A1C7:
                 dc.b    8,   4
                 dc.b    9,   5
                 dc.b    $F4
-byte_7A1D8:
+LRZBoss_ShotTrailDeleteAnim:
                 dc.b    $A,   2
                 dc.b    $A,   2
                 dc.b    $B,   3
@@ -83,9 +83,9 @@ byte_7A1D8:
                 dc.b    $D,   5
                 dc.b    $E,   5
                 dc.b    $F4
-byte_7A1E5:
+LRZBossPlatformOverlay_UniformFrameLoop:
                 dc.b    3,   2,   3, $FC
-byte_7A1E9:
+LRZBossLargePlatform_UniformFrameLoop:
                 dc.b    7,   4,   5, $FC
                 even
 Pal_LRZEndBoss:

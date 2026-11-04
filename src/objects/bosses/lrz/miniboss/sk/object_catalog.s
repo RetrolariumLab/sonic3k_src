@@ -8,59 +8,59 @@ ObjDat_LRZMiniboss:
                 dc.w    make_art_tile(ArtTile_LRZMiniboss,1,1)
                 dc.w    0
                 dc.b    $30, $80,   1,   0
-word_78D66:
+LRZMini_ArmBaseAndMiddleAttributes:
                 dc.w    0
                 dc.b    8,   8,   8,   0
-word_78D6C:
+LRZMinibossArmTerminal_PartialAttributes:
                 dc.w    0
                 dc.b    $10, $10,   6,   6
-word_78D72:
+LRZMini_ArmShotAttributes:
                 dc.w    0
                 dc.b    4,   4,   9, $98
-word_78D78:
+LRZMini_ArmHitOverlayAttributes:
                 dc.w    0
                 dc.b    $10, $10,  $A,   0
-word_78D7E:
+LRZMinibossRootDebris_PartialAttributes:
                 dc.w    $80
                 dc.b    $18, $14,  $C,   0
-ChildObjDat_78D84:
+LRZMinibossLeftArm_TwelveLinkTreeRecord:
                 dc.w    $C-1
-                dc.l    loc_7880A
-ChildObjDat_78D8A:
+                dc.l    LRZMini_ChooseArmLinkInitializer
+LRZMinibossRightArm_TwelveLinkTreeRecord:
                 dc.w    $C-1
-                dc.l    loc_787FE
-ChildObjDat_78D90:
+                dc.l    LRZMini_InitRightArmChain
+LRZMini_ArmShotChild:
                 dc.w    1-1
-                dc.l    loc_78A02
+                dc.l    LRZMini_InitArmShot
                 dc.b    8,   0
-ChildObjDat_78D98:
+LRZMini_ArmHitOverlayChild:
                 dc.w    1-1
-                dc.l    loc_78A28
-ChildObjDat_78D9E:
+                dc.l    LRZMini_InitArmHitOverlay
+LRZMini_DefeatDebrisChildren:
                 dc.w    $B-1
-                dc.l    loc_78A70
+                dc.l    LRZMini_InitDefeatDebris
                 dc.b    0, -$C
-                dc.l    loc_78A70
+                dc.l    LRZMini_InitDefeatDebris
                 dc.b    -$19, -$C
-                dc.l    loc_78A70
+                dc.l    LRZMini_InitDefeatDebris
                 dc.b    $19, -$C
-                dc.l    loc_78A70
+                dc.l    LRZMini_InitDefeatDebris
                 dc.b    -$C, $22
-                dc.l    loc_78A70
+                dc.l    LRZMini_InitDefeatDebris
                 dc.b    $C, $22
-                dc.l    loc_78A70
+                dc.l    LRZMini_InitDefeatDebris
                 dc.b    -8, $36
-                dc.l    loc_78A70
+                dc.l    LRZMini_InitDefeatDebris
                 dc.b    8, $36
-                dc.l    loc_78A70
+                dc.l    LRZMini_InitDefeatDebris
                 dc.b    -$12,   4
-                dc.l    loc_78A70
+                dc.l    LRZMini_InitDefeatDebris
                 dc.b    $12,   4
-                dc.l    loc_78A70
+                dc.l    LRZMini_InitDefeatDebris
                 dc.b    -$12,  $C
-                dc.l    loc_78A70
+                dc.l    LRZMini_InitDefeatDebris
                 dc.b    $12,  $C
-byte_78DE2:
+LRZMinibossRoot_RiseFrameDelayLoop:
                 dc.b    5,   0
                 dc.b    5,   5
                 dc.b    4,   1
@@ -69,12 +69,12 @@ byte_78DE2:
                 dc.b    1, $7F
                 dc.b    1, $7F
                 dc.b    $FC
-byte_78DF1:
+LRZMini_SlamImpactAnim:
                 dc.b    3,   0
                 dc.b    3,   0
                 dc.b    4,   0
                 dc.b    $F4
-byte_78DF8:
+LRZMinibossRoot_RetractionFrameDelayLoop:
                 dc.b    4,   3
                 dc.b    4,   3
                 dc.b    3,   3
@@ -82,7 +82,7 @@ byte_78DF8:
                 dc.b    1, $7F
                 dc.b    1, $7F
                 dc.b    $FC
-byte_78E05:
+LRZMinibossArmTerminal_UniformFrameLoop:
                 dc.b    1,   6,   7,  $B, $FC
                 even
 Pal_LRZMiniboss1:
@@ -94,7 +94,7 @@ Pal_LRZMiniboss2:
 Pal_LRZMiniboss3:
                 binclude "data/Levels/LRZ/Palettes/Miniboss 3.bin"
                 even
-word_78EAA:     palscriptptr .header, .data
+LRZMini_CompletionPaletteScript:    palscriptptr .header, .data
                 dc.w    0
                 .header: palscripthdr Normal_palette_line_3+$02, 5, 2-1
                 .data:  palscriptdata 4, $0EE, $0AE, $06E, $00E, $00A

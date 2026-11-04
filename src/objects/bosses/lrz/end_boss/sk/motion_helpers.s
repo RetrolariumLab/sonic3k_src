@@ -8,26 +8,27 @@
 LRZBossShot_DeleteIfParentDefeated:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_79EE6
+                bne.s   LRZBoss_ShotTryImpactExplosion
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_79EC4:
+LRZBoss_ShotCheckBossSelfHit:
                 movea.w parent3(a0),a1
                 btst    #6,status(a1)
-                bne.w   locret_797F8
-                lea     word_79F0C(pc),a2
+                bne.w   LRZBoss_SharedReturn
+                lea     LRZBoss_ShotSelfHitBounds(pc),a2
                 jsr     (Check_InTheirRange).l
-                beq.w   locret_797F8
+                beq.w   LRZBoss_SharedReturn
                 bset    #6,status(a1)
 
-loc_79EE6:
+LRZBoss_ShotTryImpactExplosion:
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l
-                bne.s   loc_79EFA
+                bne.s   LRZBoss_ShotDeleteAndAbortUpdate
                 move.b  #6,subtype(a1)
 
-loc_79EFA:
+; Discard the caller's return address after deleting the shot and playing the impact sound
+LRZBoss_ShotDeleteAndAbortUpdate:
                 jsr     (Delete_Current_Sprite).l
                 moveq   #signextendB(sfx_ThumpBoss),d0
                 jsr     (Play_SFX).l
@@ -36,7 +37,7 @@ loc_79EFA:
 ; End of function LRZBossShot_DeleteIfParentDefeated
 
 ; ---------------------------------------------------------------------------
-word_79F0C:
+LRZBoss_ShotSelfHitBounds:
                 dc.w    -$30,   $60,  -$30,   $60
 ; =============== S U B R O U T I N E =======================================
 
@@ -47,10 +48,10 @@ SetLRZLavaRiderHorizontalStreamVelocity:
                 add.w   d1,d0
                 add.w   d0,d0
                 tst.b   (_unkFAA2).w
-                bne.s   loc_79F2A
+                bne.s   LRZBoss_LavaRiderStoreStreamSpeed
                 neg.w   d0
 
-loc_79F2A:
+LRZBoss_LavaRiderStoreStreamSpeed:
                 move.w  d0,x_vel(a0)
                 rts
 ; End of function SetLRZLavaRiderHorizontalStreamVelocity
@@ -77,43 +78,43 @@ MatchLRZLavaRiderHeightFromWorldXSample:
 ; The projectile sets status bit 6. Consume one HP per new flash, then run four-color recovery or defeat
 LRZBoss_HandleSelfHitOrDefeat:
                 btst    #6,status(a0)
-                beq.s   locret_79F98
+                beq.s   LRZEndBossHit_ReturnWithoutDefeat
                 tst.b   $20(a0)
-                bne.s   loc_79F7A
+                bne.s   LRZEndBossHit_SelectFourColorFlashOffset
                 subq.b  #1,collision_property(a0)
-                beq.s   loc_79F9A
+                beq.s   LRZBoss_DefeatStopStreamAndExplode
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
 
-loc_79F7A:
+LRZEndBossHit_SelectFourColorFlashOffset:
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_79F88
+                bne.s   LRZBoss_HitCopyColorsAndTick
                 addi.w  #2*4,d0
 
-loc_79F88:
+LRZBoss_HitCopyColorsAndTick:
                 bsr.w   CopyLRZEndBossFourColorPalette
                 subq.b  #1,$20(a0)
-                bne.s   locret_79F98
+                bne.s   LRZEndBossHit_ReturnWithoutDefeat
                 bclr    #6,status(a0)
 
-locret_79F98:
+LRZEndBossHit_ReturnWithoutDefeat:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_79F9A:
-                move.l  #loc_79988,(a0)
+LRZBoss_DefeatStopStreamAndExplode:
+                move.l  #LRZBoss_SinkDuringDefeat,(a0)
                 bset    #7,status(a0)
                 clr.b   (_unkFAA3).w
                 clr.w   (_unkFA84).w
                 st      (Events_fg_5).w
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l
-                bne.s   loc_79FC6
+                bne.s   LRZBoss_DefeatStopPressureAndScore
                 move.b  #4,subtype(a1)
 
-loc_79FC6:
+LRZBoss_DefeatStopPressureAndScore:
                 clr.b   (Events_bg+$09).w
                 jsr     (BossDefeated_StopTimer).l
                 move.w  #$7F,$2E(a0)
@@ -123,15 +124,15 @@ loc_79FC6:
 ; =============== S U B R O U T I N E =======================================
 
 CopyLRZEndBossFourColorPalette:
-                lea     word_79FE6(pc),a1
-                lea     word_79FEE(pc,d0.w),a2
+                lea     LRZBoss_HitPaletteDestinations(pc),a1
+                lea     LRZEndBossHit_TwoFourColorSourceProfiles(pc,d0.w),a2
                 jmp     (CopyWordData_4).l
 ; End of function CopyLRZEndBossFourColorPalette
 
 ; ---------------------------------------------------------------------------
-word_79FE6:
+LRZBoss_HitPaletteDestinations:
                 dc.w    Normal_palette_line_2+$08, Normal_palette_line_2+$18, Normal_palette_line_2+$1A, Normal_palette_line_2+$1C
-word_79FEE:
+LRZEndBossHit_TwoFourColorSourceProfiles:
                 dc.w    $406,  $646,  $424,     0
                 dc.w    $EEE,  $EEE,  $EEE,  $EEE
 
@@ -141,11 +142,11 @@ word_79FEE:
 LRZBossPlatform_TryShatter:
                 movea.w (_unkFAA4).w,a1
                 tst.w   (a1)
-                beq.w   locret_797F8
-                lea     word_7A038(pc),a2
+                beq.w   LRZBoss_SharedReturn
+                lea     LRZBoss_PlatformShatterBounds(pc),a2
                 jsr     (Check_InTheirRange).l
-                beq.w   locret_797F8
-                lea     ChildObjDat_7A1BC(pc),a2
+                beq.w   LRZBoss_SharedReturn
+                lea     LRZBoss_PlatformDebrisChildren(pc),a2
                 jsr     (CreateChild6_Simple).l
                 jsr     (Go_Delete_Sprite).l
                 jsr     (Displace_PlayerOffObject).l
@@ -156,7 +157,7 @@ LRZBossPlatform_TryShatter:
 ; End of function LRZBossPlatform_TryShatter
 
 ; ---------------------------------------------------------------------------
-word_7A038:
+LRZBoss_PlatformShatterBounds:
                 dc.w    -$40,   $80,  -$40,   $80
 
 ; =============== S U B R O U T I N E =======================================
@@ -165,16 +166,16 @@ IsLRZPlatformOriginInsideCameraViewport:
                 move.w  x_pos(a0),d0
                 sub.w   (Camera_X_pos).w,d0
                 cmpi.w  #$140,d0
-                bhs.s   loc_7A060
+                bhs.s   LRZBoss_RejectOffscreenPlatform
                 move.w  y_pos(a0),d0
                 sub.w   (Camera_Y_pos).w,d0
                 cmpi.w  #$E0,d0
-                bhs.s   loc_7A060
+                bhs.s   LRZBoss_RejectOffscreenPlatform
                 moveq   #1,d0
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7A060:
+LRZBoss_RejectOffscreenPlatform:
                 moveq   #0,d0
                 rts
 ; End of function IsLRZPlatformOriginInsideCameraViewport
@@ -198,11 +199,11 @@ SeedLRZBossPlatformTenDebrisPieces:
                 move.b  subtype(a0),d0
                 move.w  d0,d1
                 lsr.w   #1,d0
-                move.b  RawAni_7A0BA(pc,d0.w),mapping_frame(a0)
+                move.b  LRZBoss_PlatformDebrisFrames(pc,d0.w),mapping_frame(a0)
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),d2
                 move.w  y_pos(a1),d3
-                lea     byte_7A0C4(pc,d1.w),a2
+                lea     LRZPlatformDebris_SignedSpawnOffsetPairs(pc,d1.w),a2
                 move.b  (a2)+,d0
                 ext.w   d0
                 add.w   d0,d2
@@ -212,15 +213,15 @@ SeedLRZBossPlatformTenDebrisPieces:
                 move.w  d2,x_pos(a0)
                 move.w  d3,y_pos(a0)
                 add.w   d1,d1
-                move.l  word_7A0D8(pc,d1.w),x_vel(a0)   ; and y_vel
+                move.l  LRZPlatformDebris_TenPackedVelocityPairs(pc,d1.w),x_vel(a0)  ; and y_vel
                 rts
 ; End of function SeedLRZBossPlatformTenDebrisPieces
 
 ; ---------------------------------------------------------------------------
-RawAni_7A0BA:
+LRZBoss_PlatformDebrisFrames:
                 dc.b    1,   1,   1,   1,   1,   3,   2,   3,   2,   3
                 even
-byte_7A0C4:
+LRZPlatformDebris_SignedSpawnOffsetPairs:
                 dc.b    -$10,  -8
                 dc.b    0,  -8
                 dc.b    $10,  -8
@@ -231,7 +232,7 @@ byte_7A0C4:
                 dc.b    -$14,   8
                 dc.b    $14,   8
                 dc.b    0,  $C
-word_7A0D8:
+LRZPlatformDebris_TenPackedVelocityPairs:
                 dc.w    -$280, -$300
                 dc.w    $80, -$380
                 dc.w    $280, -$300
@@ -244,26 +245,26 @@ word_7A0D8:
                 dc.w    -$80, -$400
 ; ---------------------------------------------------------------------------
 
-loc_7A100:
+LRZBoss_WaitCapsuleAndInitPalette:
                 tst.b   (_unkFACD).w
-                beq.w   locret_797F8
-                move.l  #loc_7A12A,(a0)
-                lea     word_78EAA(pc),a1
+                beq.w   LRZBoss_SharedReturn
+                move.l  #LRZBoss_RunCapsulePalette,(a0)
+                lea     LRZMini_CompletionPaletteScript(pc),a1
                 lea     (Palette_rotation_data).w,a2
                 move.l  (a1)+,(a2)+
                 move.l  (a1)+,(a2)+
                 clr.w   (a2)
-                move.l  #loc_7A138,(Palette_rotation_custom).w
+                move.l  #LRZBoss_InstallCounterOnlyUpdate,(Palette_rotation_custom).w
                 move.w  #$7FFF,(Palette_cycle_counter1).w
 
-loc_7A12A:
+LRZBoss_RunCapsulePalette:
                 jsr     (Run_PalRotationScript).l
 
-loc_7A130:
+LRZBoss_ForcePaletteCycleCounter:
                 move.w  #$7FFF,(Palette_cycle_counter1).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7A138:
-                move.l  #loc_7A130,(a0)
+LRZBoss_InstallCounterOnlyUpdate:
+                move.l  #LRZBoss_ForcePaletteCycleCounter,(a0)
                 rts

@@ -377,27 +377,27 @@
     },
     {
       "path": "src/objects/bosses/lrz/end_boss/sk/battle_and_attacks.s",
-      "sha256": "31608bb3dda2a6beb66f6914538c577f3ed3a7c2427cbe0817943f09868dbf4f"
+      "sha256": "e763012d48e9fb6053d4a7f48bf1c22837529fca2414b195f3707542bf667663"
     },
     {
       "path": "src/objects/bosses/lrz/end_boss/sk/motion_helpers.s",
-      "sha256": "6ad59853353dd492863e56537c0c89ebb72d476b86081a88b6a722315a055616"
+      "sha256": "7fd7e85c3fb1c278bd6f2137a905929d3b9227a5bc2f53809c39f24462f4692c"
     },
     {
       "path": "src/objects/bosses/lrz/end_boss/sk/object_catalog.s",
-      "sha256": "2302f23991f8cfb084a3b200ff0c24580e5ab9b4a5875c70ce0478318bf65229"
+      "sha256": "6f0c043489decc77203cdbe4a59aa7c741b6f2e3e42260555106ec76b601d2d7"
     },
     {
       "path": "src/objects/bosses/lrz/end_boss/sk/platform.s",
-      "sha256": "75c33706a98aa02d226f745fe6cb425040514b34cbf8d924f9a5800314430e84"
+      "sha256": "ca09cee1c338b5ca5d5d605198ba913a54d6d24cab5ab3fd12ad4604f8153582"
     },
     {
       "path": "src/objects/bosses/lrz/miniboss/sk/battle_and_attacks.s",
-      "sha256": "30c7f474be1a7f4a4a396857045d003e42b15d42011003697490b0a8fc1b26f5"
+      "sha256": "da3dc1a22853fd68961f1c8254dbbe6034a38d47f7219123ff8e0953086a9c34"
     },
     {
       "path": "src/objects/bosses/lrz/miniboss/sk/object_catalog.s",
-      "sha256": "d84322f024fada8f1fb1ffee054add41085a85f88c55c8da40233578ef10ff24"
+      "sha256": "fe5d0230c2661dffd816baf2552521210818c73878bd1a4a6caa59887cbb6f3a"
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/s3/attachments.s",
@@ -2783,27 +2783,27 @@
     },
     {
       "path": "src/objects/bosses/lrz/end_boss/sk/motion_helpers.s",
-      "symbol": "RawAni_7A0BA",
-      "scope": "RawAni_7A0BA",
-      "first_line": 220,
-      "last_line": 222,
+      "symbol": "LRZBoss_PlatformDebrisFrames",
+      "scope": "LRZBoss_PlatformDebrisFrames",
+      "first_line": 221,
+      "last_line": 223,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 10,
-      "declarations_sha256": "a39717ca39e776fd3272f4c754b505dc61f9ae9735f71566e1ec7d55455b4035",
+      "declarations_sha256": "5504a749d33c7186f6c836bf654bce13998b26036261aaec569ef15d7345fa6e",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_7A0BA"],
+      "members": ["LRZBoss_PlatformDebrisFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/lrz/end_boss/sk/object_catalog.s",
-      "symbol": "byte_7A1C2",
-      "scope": "byte_7A1C2",
+      "symbol": "LRZBossSurfaceEffect_UniformFrameLoop",
+      "scope": "LRZBossSurfaceEffect_UniformFrameLoop",
       "first_line": 66,
       "last_line": 90,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 44,
-      "declarations_sha256": "aebcb4bb78d2500dadc0ef2c9f00cb705632c8ae9f7230914334bebc61eeb7d8",
+      "declarations_sha256": "a4acd577e474b20f7da39ad41a2b6c633be43137e363fb060902afc36442b80c",
       "entries": [
         [0, "fixed"],
         [5, "pairs"],
@@ -2812,32 +2812,38 @@
         [39, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_7A1C2", "byte_7A1C7", "byte_7A1D8", "byte_7A1E5", "byte_7A1E9"],
+      "members": [
+        "LRZBossSurfaceEffect_UniformFrameLoop",
+        "LRZBoss_ShotEffectDeleteAnim",
+        "LRZBoss_ShotTrailDeleteAnim",
+        "LRZBossPlatformOverlay_UniformFrameLoop",
+        "LRZBossLargePlatform_UniformFrameLoop"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/lrz/miniboss/sk/battle_and_attacks.s",
-      "symbol": "RawAni_78A9C",
-      "scope": "RawAni_78A9C",
-      "first_line": 505,
-      "last_line": 507,
+      "symbol": "LRZMini_DefeatDebrisFrames",
+      "scope": "LRZMini_DefeatDebrisFrames",
+      "first_line": 506,
+      "last_line": 508,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 12,
-      "declarations_sha256": "dddb6c70231873fa1a230cb0b594044c3839713764f0040e9f5139980612f6f6",
+      "declarations_sha256": "f6acd61e1b0373953f25075ef6a5d60c89c88916a55a4c1aca99f8b016072eab",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_78A9C"],
+      "members": ["LRZMini_DefeatDebrisFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/lrz/miniboss/sk/object_catalog.s",
-      "symbol": "byte_78DE2",
-      "scope": "byte_78DE2",
+      "symbol": "LRZMinibossRoot_RiseFrameDelayLoop",
+      "scope": "LRZMinibossRoot_RiseFrameDelayLoop",
       "first_line": 63,
       "last_line": 87,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 40,
-      "declarations_sha256": "4054fa4dad880d085ca1fb58788283f91f59fac28e93bb1d47fcb464334fbba2",
+      "declarations_sha256": "d6020a0180779e41bba822722719afa53d9504349a75dbaa332ddee8e0cb8af0",
       "entries": [
         [0, "pairs"],
         [15, "pairs"],
@@ -2845,7 +2851,12 @@
         [35, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_78DE2", "byte_78DF1", "byte_78DF8", "byte_78E05"],
+      "members": [
+        "LRZMinibossRoot_RiseFrameDelayLoop",
+        "LRZMini_SlamImpactAnim",
+        "LRZMinibossRoot_RetractionFrameDelayLoop",
+        "LRZMinibossArmTerminal_UniformFrameLoop"
+      ],
       "stored_markers": []
     },
     {
