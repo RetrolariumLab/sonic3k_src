@@ -93,7 +93,7 @@
     },
     {
       "path": "src/game/blue_sphere/sk/stage_selection.s",
-      "owner": "dword_4D21C",
+      "owner": "BSSelect_NineDigitDecimalDivisors",
       "kind": "rom-range-long",
       "operand": "1000000",
       "count": 1,
@@ -102,7 +102,7 @@
     },
     {
       "path": "src/game/blue_sphere/sk/stage_selection.s",
-      "owner": "dword_4D21C",
+      "owner": "BSSelect_NineDigitDecimalDivisors",
       "kind": "rom-range-long",
       "operand": "100000",
       "count": 1,
@@ -111,7 +111,7 @@
     },
     {
       "path": "src/game/blue_sphere/sk/stage_selection.s",
-      "owner": "word_4D294",
+      "owner": "BSSelect_Code48BitDecimalWeights",
       "kind": "rom-range-long",
       "operand": "1000000",
       "count": 1,
@@ -120,7 +120,7 @@
     },
     {
       "path": "src/game/blue_sphere/sk/stage_selection.s",
-      "owner": "word_4D294",
+      "owner": "BSSelect_Code48BitDecimalWeights",
       "kind": "rom-range-long",
       "operand": "100000",
       "count": 1,

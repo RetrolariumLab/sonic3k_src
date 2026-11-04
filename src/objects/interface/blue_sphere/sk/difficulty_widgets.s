@@ -40,24 +40,24 @@ Obj_Difficulty_MasterEmerald:
                 move.w  #$120,x_pos(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_7D03E(pc,d0.w),y_pos(a0)
-                move.l  #loc_7D042,(a0)
+                move.w  BSDifficultyEmerald_ScreenYBySubtype(pc,d0.w),y_pos(a0)
+                move.l  #BSDifficultyEmerald_CycleColorsAndDraw,(a0)
                 cmpi.b  #7,(Super_emerald_count).w
-                beq.s   locret_7D03C
-                move.l  #loc_7D050,(a0)
+                beq.s   BSDifficultyEmerald_SelectUpdateReturn
+                move.l  #BSDifficultyEmerald_QueueDraw,(a0)
 
-locret_7D03C:
+BSDifficultyEmerald_SelectUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
-word_7D03E:
+BSDifficultyEmerald_ScreenYBySubtype:
                 dc.w    $F0,  $120
 ; ---------------------------------------------------------------------------
 
-loc_7D042:
+BSDifficultyEmerald_CycleColorsAndDraw:
                 lea     SSZMasterEmeraldColorCycle_IndexedScript(pc),a1
                 lea     (Normal_palette_line_4+$1C).w,a2
                 jsr     (Run_PalRotationScript2).l
 
-loc_7D050:
+BSDifficultyEmerald_QueueDraw:
                 jmp     (Draw_Sprite).l
 ; End of function Obj_Difficulty_MasterEmerald

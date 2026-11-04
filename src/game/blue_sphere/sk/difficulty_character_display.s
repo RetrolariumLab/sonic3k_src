@@ -6,14 +6,14 @@
 
 Difficulty_Level_Sprites_Display:
                 jsr     (AllocateObject).l
-                bne.w   locret_4E178
+                bne.w   BSDifficulty_ActorAllocationReturn
                 moveq   #0,d1
                 move.b  (Blue_spheres_difficulty).w,d1
                 subq.b  #1,d1
                 lsl.w   #2,d1
                 move.l  Difficulty_Sprites(pc,d1.w),(a1)
 
-locret_4E178:
+BSDifficulty_ActorAllocationReturn:
                 rts
 ; End of function Difficulty_Level_Sprites_Display
 
@@ -33,17 +33,17 @@ Difficulty_Sprites:
                 dc.l    Obj_Difficulty_SuperSonic
 ; ---------------------------------------------------------------------------
 
-loc_4E1AA:
+BSDifficulty_InitResultsNumberSprite:
                 bsr.w   BlueSphere_InitNumericSprite
-                move.l  #loc_4E1B4,(a0)
+                move.l  #BSDifficulty_UpdateNumberVisibility,(a0)
 
-loc_4E1B4:
+BSDifficulty_UpdateNumberVisibility:
                 cmpi.b  #12,(Blue_spheres_difficulty).w
-                bne.s   loc_4E1BE
+                bne.s   BSDifficulty_DrawResultsNumber
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4E1BE:
+BSDifficulty_DrawResultsNumber:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -57,25 +57,25 @@ Obj_Difficulty_Sonic:
                 move.b  #$18,width_pixels(a0)
                 move.b  #$18,height_pixels(a0)
                 move.b  #$13,anim(a0)
-                move.l  #loc_4E202,(a0)
+                move.l  #BSDifficulty_CheckSuperSonicTransition,(a0)
 
-loc_4E202:
+BSDifficulty_CheckSuperSonicTransition:
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   loc_4E222
+                beq.s   BSDifficulty_TickSuperPoseDelay
                 move.l  #Map_SuperSonic,mappings(a0)
                 move.b  #$1F,anim(a0)
-                move.l  #loc_4E222,(a0)
+                move.l  #BSDifficulty_TickSuperPoseDelay,(a0)
                 move.w  #$14,$30(a0)
 
-loc_4E222:
+BSDifficulty_TickSuperPoseDelay:
                 tst.b   (Super_palette_status).w
-                bpl.s   loc_4E23A
+                bpl.s   BlueSphereDifficulty_AnimateAndDrawSonic
                 subq.w  #1,$30(a0)
-                bpl.s   loc_4E23A
+                bpl.s   BlueSphereDifficulty_AnimateAndDrawSonic
                 move.b  #5,anim(a0)
-                move.l  #loc_4E23A,(a0)
+                move.l  #BlueSphereDifficulty_AnimateAndDrawSonic,(a0)
 
-loc_4E23A:
+BlueSphereDifficulty_AnimateAndDrawSonic:
                 jsr     (Animate_Sonic).l
                 jsr     (Sonic_Load_PLC).l
                 jmp     (Draw_Sprite).l
@@ -97,9 +97,9 @@ Obj_Difficulty_Tails:
                 move.w  #$80,priority(a0)
                 move.b  #$18,width_pixels(a0)
                 move.b  #$18,height_pixels(a0)
-                move.l  #loc_4E29C,(a0)
+                move.l  #BlueSphereDifficulty_DrawStaticTailsPose,(a0)
 
-loc_4E29C:
+BlueSphereDifficulty_DrawStaticTailsPose:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_BSTailsPose:
@@ -115,19 +115,19 @@ Obj_Difficulty_Knuckles:
                 move.b  #$18,width_pixels(a0)
                 move.b  #$18,height_pixels(a0)
                 move.b  #$24,anim(a0)
-                move.l  #loc_4E2F0,(a0)
+                move.l  #BSDifficulty_UpdateKnucklesDisplay,(a0)
 
-loc_4E2F0:
+BSDifficulty_UpdateKnucklesDisplay:
                 jsr     (Animate_Knuckles).l
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
                 cmp.b   $30(a0),d0
-                beq.s   loc_4E310
+                beq.s   BlueSphereDifficulty_DrawKnucklesDisplay
                 move.b  d0,$30(a0)
                 move.w  #tiles_to_bytes(ArtTile_Player_2),d4
                 jsr     (KnucklesQueueFramePatternsAtVRAMBase).l
 
-loc_4E310:
+BlueSphereDifficulty_DrawKnucklesDisplay:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_BSResultsEmerald:

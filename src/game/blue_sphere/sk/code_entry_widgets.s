@@ -1,7 +1,7 @@
 ; Owner: game/blue_sphere/sk
 ; Responsibility: Blue Sphere level and serial-code entry widgets, digit state and conversion helpers
 ; Source provenance and ranges: config/reconstruction/source_layout.json
-word_4D2DC:
+BlueSphereCodeRow_DigitXPositions:
                 dc.w    $10C
                 dc.w    $114
                 dc.w    $11C
@@ -16,17 +16,17 @@ word_4D2DC:
                 dc.w    $174
 ; ---------------------------------------------------------------------------
 
-Obj_SpheresTitle_4D2F4:
-                move.l  #loc_4D3CE,(a0)
-                move.l  #loc_4D5FA,d2
-                bra.s   loc_4D30E
+BlueSphereCodeRow_InitializeEditable:
+                move.l  #BlueSphereCodeRow_UpdateEditorWhenActive,(a0)
+                move.l  #BlueSphereDigit_InitializeEditableCode,d2
+                bra.s   BSCode_InitLabelAndDigitSlots
 ; ---------------------------------------------------------------------------
 
-Obj_SpheresTitle_4D302:
-                move.l  #loc_4D362,(a0)
-                move.l  #loc_4D5E4,d2
+BlueSphereCodeRow_InitializeGenerated:
+                move.l  #BSCode_UpdateCodeOutsideEditor,(a0)
+                move.l  #BlueSphereDigit_InitializeGeneratedCode,d2
 
-loc_4D30E:
+BSCode_InitLabelAndDigitSlots:
                 move.l  #Map_BlueSpheresText,mappings(a0)
                 move.w  #make_art_tile(ArtTile_BlueSphere_Misc,0,1),art_tile(a0)
                 move.w  #$D4,x_pos(a0)
@@ -34,44 +34,44 @@ loc_4D30E:
                 move.b  #$14,width_pixels(a0)
                 move.b  #8,height_pixels(a0)
                 move.b  #2,mapping_frame(a0)
-                lea     word_4D2DC(pc),a2
+                lea     BlueSphereCodeRow_DigitXPositions(pc),a2
                 movea.l a0,a1
                 moveq   #$C-1,d1
 
-loc_4D342:
+BlueSphereCodeRow_InitializeDigitSlot:
                 lea     next_object(a1),a1
                 move.l  d2,(a1)
                 move.w  (a2)+,x_pos(a1)
                 subi.w  #$C,x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
-                dbf     d1,loc_4D342
+                dbf     d1,BlueSphereCodeRow_InitializeDigitSlot
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_4D362:
+BSCode_UpdateCodeOutsideEditor:
                 tst.b   (Blue_spheres_menu_flag).w
-                bpl.s   loc_4D36A
+                bpl.s   BlueSphereCodeRow_PrepareLevelCheckValue
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4D36A:
+BlueSphereCodeRow_PrepareLevelCheckValue:
                 lea     (Stat_table).w,a2
                 move.l  (Blue_spheres_current_level).w,(a2)
                 tst.b   (Blue_spheres_progress_flag).w
-                beq.s   loc_4D37E
+                beq.s   BSCode_ComputeProgressTaggedCheckBits
                 addi.l  #$7654321,(a2)
 
-loc_4D37E:
+BSCode_ComputeProgressTaggedCheckBits:
                 andi.l  #$7FFFFFF,(a2)
                 moveq   #1,d6
                 bsr.w   BlueSphere_ComputeCodeCheck
                 move.w  d4,d0
                 andi.w  #$3F,d0
                 tst.b   (Blue_spheres_progress_flag).w
-                beq.s   loc_4D39A
+                beq.s   BSCode_EncodeAndFormatGeneratedCode
                 ori.w   #$40,d0
 
-loc_4D39A:
+BSCode_EncodeAndFormatGeneratedCode:
                 eori.w  #$55,d0
                 move.l  (Blue_spheres_current_level).w,d1
                 addi.l  #$1234567,d1
@@ -84,24 +84,24 @@ loc_4D39A:
                 ror.l   #6,d1
                 eori.l  #$AAAAAAAA,d1
                 movea.l a0,a1
-                bsr.w   loc_4D240
+                bsr.w   BSSelect_FormatUnsigned48BitCode
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_4D3CE:
+BlueSphereCodeRow_UpdateEditorWhenActive:
                 tst.b   (Blue_spheres_menu_flag).w
-                bmi.s   loc_4D3DC
+                bmi.s   BlueSphereCodeRow_ValidateOnExactStart
                 move.w  #0,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4D3DC:
+BlueSphereCodeRow_ValidateOnExactStart:
                 move.b  (Ctrl_1_pressed).w,d0
                 cmpi.b  #button_start_mask,d0
-                bne.s   loc_4D3EA
+                bne.s   BlueSphereCodeRow_SelectDigitAndHandleUp
                 bsr.w   BlueSphere_TryRestoreEnteredCode
 
-loc_4D3EA:
+BlueSphereCodeRow_SelectDigitAndHandleUp:
                 movea.l a0,a1
                 move.w  $30(a0),d0
                 addq.w  #1,d0
@@ -110,37 +110,37 @@ loc_4D3EA:
                 move.w  #make_art_tile(ArtTile_BlueSphere_Misc,0,1),art_tile(a1)
                 move.b  (Ctrl_1_pressed).w,d1
                 btst    #button_up,d1
-                beq.s   loc_4D414
+                beq.s   BlueSphereCodeRow_HandleDownIncrement
                 subq.b  #1,mapping_frame(a1)
-                bcc.s   loc_4D414
+                bcc.s   BlueSphereCodeRow_HandleDownIncrement
                 move.b  #9,mapping_frame(a1)
 
-loc_4D414:
+BlueSphereCodeRow_HandleDownIncrement:
                 btst    #1,d1
-                beq.s   loc_4D42C
+                beq.s   BlueSphereCodeRow_HandleCursorLeft
                 addq.b  #1,mapping_frame(a1)
                 cmpi.b  #$A,mapping_frame(a1)
-                blo.s   loc_4D42C
+                blo.s   BlueSphereCodeRow_HandleCursorLeft
                 move.b  #0,mapping_frame(a1)
 
-loc_4D42C:
+BlueSphereCodeRow_HandleCursorLeft:
                 btst    #2,d1
-                beq.s   loc_4D43E
+                beq.s   BlueSphereCodeRow_HandleCursorRight
                 subq.w  #1,$30(a0)
-                bcc.s   loc_4D43E
+                bcc.s   BlueSphereCodeRow_HandleCursorRight
                 move.w  #$B,$30(a0)
 
-loc_4D43E:
+BlueSphereCodeRow_HandleCursorRight:
                 btst    #3,d1
-                beq.s   loc_4D456
+                beq.s   BlueSphereCodeRow_HighlightSelectedDigit
                 addq.w  #1,$30(a0)
                 cmpi.w  #$C,$30(a0)
-                blo.s   loc_4D456
+                blo.s   BlueSphereCodeRow_HighlightSelectedDigit
                 move.w  #0,$30(a0)
 
-loc_4D456:
+BlueSphereCodeRow_HighlightSelectedDigit:
                 tst.b   (Blue_spheres_menu_flag).w
-                bpl.s   loc_4D470
+                bpl.s   BSCode_PlayEditDirectionSound
                 movea.l a0,a1
                 move.w  $30(a0),d0
                 addq.w  #1,d0
@@ -148,21 +148,21 @@ loc_4D456:
                 adda.w  d0,a1
                 move.w  #make_art_tile(ArtTile_BlueSphere_Misc+$14,0,1),art_tile(a1)
 
-loc_4D470:
+BSCode_PlayEditDirectionSound:
                 move.b  (Ctrl_1_pressed).w,d1
                 andi.b  #button_up_mask|button_down_mask|button_left_mask|button_right_mask,d1
-                beq.s   loc_4D482
+                beq.s   BlueSphereCodeRow_DrawEditorLabel
                 moveq   #signextendB(sfx_WeatherMachine),d0
                 jsr     (Play_SFX).l
 
-loc_4D482:
+BlueSphereCodeRow_DrawEditorLabel:
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
 ; Decode the twelve decimal digits and validate the embedded 11-bit check value before restoring level, progress and stage
 BlueSphere_TryRestoreEnteredCode:
-                bsr.w   loc_4D268
+                bsr.w   BSSelect_ParseUnsigned48BitCode
                 eori.w  #$55,d0
                 move.w  d0,d2
                 andi.w  #$3F,d0
@@ -177,10 +177,10 @@ BlueSphere_TryRestoreEnteredCode:
                 swap    d1
                 subi.l  #$1234567,d1
                 andi.w  #$40,d2
-                beq.s   loc_4D4C2
+                beq.s   BSCode_CheckDecodedLevel
                 addi.l  #$7654321,d1
 
-loc_4D4C2:
+BSCode_CheckDecodedLevel:
                 andi.l  #$7FFFFFF,d1
                 move.l  d1,(Stat_table).w
                 lea     (Stat_table).w,a2
@@ -188,15 +188,15 @@ loc_4D4C2:
                 bsr.w   BlueSphere_ComputeCodeCheck
                 andi.w  #$7FF,d4
                 cmp.w   d4,d3
-                bne.w   loc_4D58A
+                bne.w   BSCode_RejectCodeAndExitEditor
                 move.b  #0,(Blue_spheres_progress_flag).w
                 tst.w   d2
-                beq.s   loc_4D4FC
+                beq.s   BSCode_InstallLevelAndStageBytes
                 subi.l  #$7654321,d1
                 andi.l  #$7FFFFFF,d1
                 move.b  #-1,(Blue_spheres_progress_flag).w
 
-loc_4D4FC:
+BSCode_InstallLevelAndStageBytes:
                 move.l  d1,(Blue_spheres_current_level).w
                 lea     (Blue_spheres_current_stage).w,a2
                 move.l  d1,d0
@@ -253,7 +253,7 @@ loc_4D4FC:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4D58A:
+BSCode_RejectCodeAndExitEditor:
                 moveq   #signextendB(sfx_Error),d0
                 jsr     (Play_SFX).l
                 andi.b  #$7F,(Blue_spheres_menu_flag).w
@@ -267,25 +267,25 @@ loc_4D58A:
 BlueSphere_ComputeCodeCheck:
                 moveq   #0,d4
 
-loc_4D5A2:
+BlueSphereCodeCheck_XorWordAndShift:
                 move.w  (a2)+,d5
                 eor.w   d5,d4
                 lsr.w   #1,d4
-                bcc.s   loc_4D5AE
+                bcc.s   BlueSphereCodeCheck_AdvanceWord
                 eori.w  #$8810,d4
 
-loc_4D5AE:
-                dbf     d6,loc_4D5A2
+BlueSphereCodeCheck_AdvanceWord:
+                dbf     d6,BlueSphereCodeCheck_XorWordAndShift
                 rts
 ; End of function BlueSphere_ComputeCodeCheck
 
 ; ---------------------------------------------------------------------------
 
-loc_4D5B4:
+BlueSphereDigit_InitializeAlwaysVisible:
                 bsr.s   BlueSphere_InitNumericSprite
-                move.l  #loc_4D5BC,(a0)
+                move.l  #BlueSphereDigit_DrawAlways,(a0)
 
-loc_4D5BC:
+BlueSphereDigit_DrawAlways:
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -301,30 +301,30 @@ BlueSphere_InitNumericSprite:
 
 ; ---------------------------------------------------------------------------
 
-loc_4D5E4:
+BlueSphereDigit_InitializeGeneratedCode:
                 bsr.s   BlueSphere_InitNumericSprite
-                move.l  #loc_4D5EC,(a0)
+                move.l  #BSCode_UpdateGeneratedDigitVisibility,(a0)
 
-loc_4D5EC:
+BSCode_UpdateGeneratedDigitVisibility:
                 tst.b   (Blue_spheres_menu_flag).w
-                bpl.s   loc_4D5F4
+                bpl.s   BlueSphereDigit_DrawGenerated
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4D5F4:
+BlueSphereDigit_DrawGenerated:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_4D5FA:
+BlueSphereDigit_InitializeEditableCode:
                 bsr.s   BlueSphere_InitNumericSprite
-                move.l  #loc_4D602,(a0)
+                move.l  #BlueSphereDigit_UpdateEditableVisibility,(a0)
 
-loc_4D602:
+BlueSphereDigit_UpdateEditableVisibility:
                 tst.b   (Blue_spheres_menu_flag).w
-                bmi.s   loc_4D60A
+                bmi.s   BlueSphereDigit_DrawEditable
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4D60A:
+BlueSphereDigit_DrawEditable:
                 jmp     (Draw_Sprite).l
-; End of function loc_4D5FA
+; End of function BlueSphereDigit_InitializeEditableCode

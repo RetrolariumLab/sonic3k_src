@@ -1,39 +1,39 @@
 ; Data owner: game/blue_sphere/shared/blue_sphere
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_BlueSpheresNum_:
-                dc.w    word_4D8C6-Map_BlueSpheresNum_
-                dc.w    word_4D8CE-Map_BlueSpheresNum_
-                dc.w    word_4D8D6-Map_BlueSpheresNum_
-                dc.w    word_4D8DE-Map_BlueSpheresNum_
-                dc.w    word_4D8E6-Map_BlueSpheresNum_
-                dc.w    word_4D8EE-Map_BlueSpheresNum_
-                dc.w    word_4D8F6-Map_BlueSpheresNum_
-                dc.w    word_4D8FE-Map_BlueSpheresNum_
-                dc.w    word_4D906-Map_BlueSpheresNum_
-                dc.w    word_4D90E-Map_BlueSpheresNum_
-                dc.w    word_4D916-Map_BlueSpheresNum_
-                dc.w    word_4D91E-Map_BlueSpheresNum_
-word_4D8C6:     dc.w    1
+                dc.w    BlueSphereDigit_ZeroPieces-Map_BlueSpheresNum_
+                dc.w    BlueSphereDigit_OnePieces-Map_BlueSpheresNum_
+                dc.w    BlueSphereDigit_TwoPieces-Map_BlueSpheresNum_
+                dc.w    BlueSphereDigit_ThreePieces-Map_BlueSpheresNum_
+                dc.w    BlueSphereDigit_FourPieces-Map_BlueSpheresNum_
+                dc.w    BlueSphereDigit_FivePieces-Map_BlueSpheresNum_
+                dc.w    BlueSphereDigit_SixPieces-Map_BlueSpheresNum_
+                dc.w    BlueSphereDigit_SevenPieces-Map_BlueSpheresNum_
+                dc.w    BlueSphereDigit_EightPieces-Map_BlueSpheresNum_
+                dc.w    BlueSphereDigit_NinePieces-Map_BlueSpheresNum_
+                dc.w    BSDigit_SuppressedAndSpacerMap-Map_BlueSpheresNum_
+                dc.w    BlueSphereDigit_TrailingSpacerPieces-Map_BlueSpheresNum_
+BlueSphereDigit_ZeroPieces: dc.w    1
                 dc.b    $F8,   1,   0, $12, $FF, $FC
-word_4D8CE:     dc.w    1
+BlueSphereDigit_OnePieces:  dc.w    1
                 dc.b    $F8,   1,   0, $14, $FF, $FC
-word_4D8D6:     dc.w    1
+BlueSphereDigit_TwoPieces:  dc.w    1
                 dc.b    $F8,   1,   0, $16, $FF, $FC
-word_4D8DE:     dc.w    1
+BlueSphereDigit_ThreePieces:    dc.w    1
                 dc.b    $F8,   1,   0, $18, $FF, $FC
-word_4D8E6:     dc.w    1
+BlueSphereDigit_FourPieces: dc.w    1
                 dc.b    $F8,   1,   0, $1A, $FF, $FC
-word_4D8EE:     dc.w    1
+BlueSphereDigit_FivePieces: dc.w    1
                 dc.b    $F8,   1,   0, $1C, $FF, $FC
-word_4D8F6:     dc.w    1
+BlueSphereDigit_SixPieces:  dc.w    1
                 dc.b    $F8,   1,   0, $1E, $FF, $FC
-word_4D8FE:     dc.w    1
+BlueSphereDigit_SevenPieces:    dc.w    1
                 dc.b    $F8,   1,   0, $20, $FF, $FC
-word_4D906:     dc.w    1
+BlueSphereDigit_EightPieces:    dc.w    1
                 dc.b    $F8,   1,   0, $22, $FF, $FC
-word_4D90E:     dc.w    1
+BlueSphereDigit_NinePieces: dc.w    1
                 dc.b    $F8,   1,   0, $24, $FF, $FC
-word_4D916:     dc.w    1
+BSDigit_SuppressedAndSpacerMap: dc.w    1
                 dc.b    $F8,   5,   0,   0, $FF, $F4
-word_4D91E:     dc.w    1
+BlueSphereDigit_TrailingSpacerPieces:   dc.w    1
                 dc.b    $F8,   5,   0,   0, $FF, $FC

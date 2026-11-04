@@ -1,0 +1,2487 @@
+{
+  "schema_version": 1,
+  "packet": "61-blue-sphere",
+  "mappings": [
+    {
+      "source": "src/game/blue_sphere/shared/animations/character_sprites.s",
+      "original_line": 8,
+      "old": "byte_4DA0C",
+      "new": "BSFooter_LeftmostAnim",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereFooter_AnimateLeftmostSmallSprite"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/animations/character_sprites.s",
+      "original_line": 9,
+      "old": "byte_4DA15",
+      "new": "BlueSphereFooter_AnimateSecondTallSprite",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereFooter_AnimateSecondTallSprite"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/animations/character_sprites.s",
+      "original_line": 10,
+      "old": "byte_4DA1A",
+      "new": "BlueSphereFooter_AnimateThirdWideSprite",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereFooter_AnimateThirdWideSprite"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/animations/character_sprites.s",
+      "original_line": 11,
+      "old": "byte_4DA1F",
+      "new": "BSFooter_RightmostAnim",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereFooter_AnimateRightmostCompositeSprite"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/character_sprites.s",
+      "original_line": 13,
+      "old": "word_188E8E",
+      "new": "BSFooter_LeftmostMap1",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereFooter_LeftmostFirstSmallPhasePieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/character_sprites.s",
+      "original_line": 15,
+      "old": "word_188E96",
+      "new": "BSFooter_LeftmostMap2",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereFooter_LeftmostMiddleSmallPhasePieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/character_sprites.s",
+      "original_line": 17,
+      "old": "word_188E9E",
+      "new": "BSFooter_LeftmostMap3",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereFooter_LeftmostLastSmallPhasePieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/character_sprites.s",
+      "original_line": 19,
+      "old": "word_188EA6",
+      "new": "BSFooter_SecondActorMap1",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereFooter_SecondActorFirstTallPhasePieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/character_sprites.s",
+      "original_line": 23,
+      "old": "word_188EBA",
+      "new": "BSFooter_SecondActorMap2",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereFooter_SecondActorSecondTallPhasePieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/character_sprites.s",
+      "original_line": 27,
+      "old": "word_188ECE",
+      "new": "BSFooter_ThirdActorMap1",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereFooter_ThirdActorFirstWidePhasePieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/character_sprites.s",
+      "original_line": 29,
+      "old": "word_188ED6",
+      "new": "BSFooter_ThirdActorMap2",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereFooter_ThirdActorSecondWidePhasePieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/character_sprites.s",
+      "original_line": 31,
+      "old": "word_188EDE",
+      "new": "BSFooter_RightmostMap1",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereFooter_RightmostFirstWideCompositePieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/character_sprites.s",
+      "original_line": 37,
+      "old": "word_188EFE",
+      "new": "BSFooter_RightmostMap2",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereFooter_RightmostSecondWideCompositePieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/copyright.s",
+      "original_line": 5,
+      "old": "word_4DA6A",
+      "new": "BlueSphereCopyright_StaticFooterPieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereCopyright_StaticFooterPieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/numbers.s",
+      "original_line": 16,
+      "old": "word_4D8C6",
+      "new": "BlueSphereDigit_ZeroPieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereDigit_ZeroPieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/numbers.s",
+      "original_line": 18,
+      "old": "word_4D8CE",
+      "new": "BlueSphereDigit_OnePieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereDigit_OnePieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/numbers.s",
+      "original_line": 20,
+      "old": "word_4D8D6",
+      "new": "BlueSphereDigit_TwoPieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereDigit_TwoPieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/numbers.s",
+      "original_line": 22,
+      "old": "word_4D8DE",
+      "new": "BlueSphereDigit_ThreePieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereDigit_ThreePieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/numbers.s",
+      "original_line": 24,
+      "old": "word_4D8E6",
+      "new": "BlueSphereDigit_FourPieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereDigit_FourPieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/numbers.s",
+      "original_line": 26,
+      "old": "word_4D8EE",
+      "new": "BlueSphereDigit_FivePieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereDigit_FivePieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/numbers.s",
+      "original_line": 28,
+      "old": "word_4D8F6",
+      "new": "BlueSphereDigit_SixPieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereDigit_SixPieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/numbers.s",
+      "original_line": 30,
+      "old": "word_4D8FE",
+      "new": "BlueSphereDigit_SevenPieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereDigit_SevenPieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/numbers.s",
+      "original_line": 32,
+      "old": "word_4D906",
+      "new": "BlueSphereDigit_EightPieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereDigit_EightPieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/numbers.s",
+      "original_line": 34,
+      "old": "word_4D90E",
+      "new": "BlueSphereDigit_NinePieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereDigit_NinePieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/numbers.s",
+      "original_line": 36,
+      "old": "word_4D916",
+      "new": "BSDigit_SuppressedAndSpacerMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereDigit_SuppressedAndLeadingSpacerPieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/numbers.s",
+      "original_line": 38,
+      "old": "word_4D91E",
+      "new": "BlueSphereDigit_TrailingSpacerPieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereDigit_TrailingSpacerPieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/results_emerald.s",
+      "original_line": 11,
+      "old": "word_4E324",
+      "new": "BSResults_OrbitEmeraldMap1",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereResultsEmerald_FirstOrbitMemberPieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/results_emerald.s",
+      "original_line": 13,
+      "old": "word_4E32C",
+      "new": "BSResults_OrbitEmeraldMap2",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereResultsEmerald_SecondOrbitMemberPieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/results_emerald.s",
+      "original_line": 15,
+      "old": "word_4E334",
+      "new": "BSResults_OrbitEmeraldMap3",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereResultsEmerald_ThirdOrbitMemberPieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/results_emerald.s",
+      "original_line": 17,
+      "old": "word_4E33C",
+      "new": "BSResults_OrbitEmeraldMap4",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereResultsEmerald_FourthOrbitMemberPieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/results_emerald.s",
+      "original_line": 19,
+      "old": "word_4E344",
+      "new": "BSResults_OrbitEmeraldMap5",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereResultsEmerald_FifthOrbitMemberPieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/results_emerald.s",
+      "original_line": 21,
+      "old": "word_4E34C",
+      "new": "BSResults_OrbitEmeraldMap6",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereResultsEmerald_SixthOrbitMemberPieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/results_emerald.s",
+      "original_line": 23,
+      "old": "word_4E354",
+      "new": "BSResults_OrbitEmeraldMap7",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereResultsEmerald_SeventhOrbitMemberPieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/rotating_icon.s",
+      "original_line": 12,
+      "old": "word_4D936",
+      "new": "BSOptionIcon_RotationMap1",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereOptionIcon_FirstRotationPhasePieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/rotating_icon.s",
+      "original_line": 14,
+      "old": "word_4D93E",
+      "new": "BSOptionIcon_RotationMap2",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereOptionIcon_SecondRotationPhasePieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/rotating_icon.s",
+      "original_line": 16,
+      "old": "word_4D946",
+      "new": "BSOptionIcon_RotationMap3",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereOptionIcon_ThirdRotationPhasePieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/rotating_icon.s",
+      "original_line": 18,
+      "old": "word_4D94E",
+      "new": "BSOptionIcon_RotationMap4",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereOptionIcon_FourthRotationPhasePieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/rotating_icon.s",
+      "original_line": 20,
+      "old": "word_4D956",
+      "new": "BSOptionIcon_RotationMap5",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereOptionIcon_FifthRotationPhasePieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/rotating_icon.s",
+      "original_line": 22,
+      "old": "word_4D95E",
+      "new": "BSOptionIcon_FlippedRotationMap6",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereOptionIcon_SixthFlippedRotationPhasePieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/rotating_icon.s",
+      "original_line": 24,
+      "old": "word_4D966",
+      "new": "BSOptionIcon_FlippedRotationMap7",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereOptionIcon_SeventhFlippedRotationPhasePieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/rotating_icon.s",
+      "original_line": 26,
+      "old": "word_4D96E",
+      "new": "BSOptionIcon_FlippedRotationMap8",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereOptionIcon_EighthFlippedRotationPhasePieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/tails_pose.s",
+      "original_line": 5,
+      "old": "word_4E2A4",
+      "new": "BSDifficulty_TailsStaticMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereDifficulty_TailsStaticPosePieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/text.s",
+      "original_line": 10,
+      "old": "word_4D7CA",
+      "new": "BSText_LevelSelectionMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereText_CurrentLevelSelectionLabelPieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/text.s",
+      "original_line": 15,
+      "old": "word_4D7E4",
+      "new": "BSText_PackedStageSelectionMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereText_PackedStageSelectionLabelPieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/text.s",
+      "original_line": 21,
+      "old": "word_4D804",
+      "new": "BSText_CodeEntryMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereText_TwelveDigitCodeEntryLabelPieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/text.s",
+      "original_line": 25,
+      "old": "word_4D818",
+      "new": "BSText_PlayerOptionMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereText_PlayerOptionModeLabelPieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/text.s",
+      "original_line": 31,
+      "old": "word_4D838",
+      "new": "BSText_DifficultyMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereText_OrdinaryDifficultyLabelPieces"
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/text.s",
+      "original_line": 40,
+      "old": "word_4D86A",
+      "new": "BSText_FinalDifficultyMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereText_FinalDifficultyTwoRowLabelPieces"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 4,
+      "old": "word_4D2DC",
+      "new": "BlueSphereCodeRow_DigitXPositions",
+      "profiles": ["sk"],
+      "meaning": "Twelve absolute digit X positions before the row initializer subtracts twelve pixels."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 19,
+      "old": "Obj_SpheresTitle_4D2F4",
+      "new": "BlueSphereCodeRow_InitializeEditable",
+      "profiles": ["sk"],
+      "meaning": "Initialize the twelve-digit editable Blue Sphere code row."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 25,
+      "old": "Obj_SpheresTitle_4D302",
+      "new": "BlueSphereCodeRow_InitializeGenerated",
+      "profiles": ["sk"],
+      "meaning": "Initialize the generated serial-code display row."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 29,
+      "old": "loc_4D30E",
+      "new": "BSCode_InitLabelAndDigitSlots",
+      "profiles": ["sk"],
+      "meaning": "Shared label and twelve-digit initialization for generated and editable code rows."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 41,
+      "old": "loc_4D342",
+      "new": "BlueSphereCodeRow_InitializeDigitSlot",
+      "profiles": ["sk"],
+      "meaning": "Build each of twelve fixed code digit slots."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 51,
+      "old": "loc_4D362",
+      "new": "BSCode_UpdateCodeOutsideEditor",
+      "profiles": ["sk"],
+      "meaning": "Hide generated code updates while the editable row is active."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 57,
+      "old": "loc_4D36A",
+      "new": "BlueSphereCodeRow_PrepareLevelCheckValue",
+      "profiles": ["sk"],
+      "meaning": "Prepare the generated code checksum from the current level and progress state."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 64,
+      "old": "loc_4D37E",
+      "new": "BSCode_ComputeProgressTaggedCheckBits",
+      "profiles": ["sk"],
+      "meaning": "Mask level data and build the progress-tagged checksum component."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 74,
+      "old": "loc_4D39A",
+      "new": "BSCode_EncodeAndFormatGeneratedCode",
+      "profiles": ["sk"],
+      "meaning": "Pack checksum/level fields and format the generated serial code."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 91,
+      "old": "loc_4D3CE",
+      "new": "BlueSphereCodeRow_UpdateEditorWhenActive",
+      "profiles": ["sk"],
+      "meaning": "Run editor only while menu flag bit7 selects code editing."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 98,
+      "old": "loc_4D3DC",
+      "new": "BlueSphereCodeRow_ValidateOnExactStart",
+      "profiles": ["sk"],
+      "meaning": "Attempt entered-code validation on exact Start press."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 104,
+      "old": "loc_4D3EA",
+      "new": "BlueSphereCodeRow_SelectDigitAndHandleUp",
+      "profiles": ["sk"],
+      "meaning": "Restore selected digit normal art and handle its Up decrement."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 118,
+      "old": "loc_4D414",
+      "new": "BlueSphereCodeRow_HandleDownIncrement",
+      "profiles": ["sk"],
+      "meaning": "Increment selected decimal digit on Down press."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 126,
+      "old": "loc_4D42C",
+      "new": "BlueSphereCodeRow_HandleCursorLeft",
+      "profiles": ["sk"],
+      "meaning": "Move code selection one digit left with wrap."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 133,
+      "old": "loc_4D43E",
+      "new": "BlueSphereCodeRow_HandleCursorRight",
+      "profiles": ["sk"],
+      "meaning": "Move code selection one digit right with wrap."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 141,
+      "old": "loc_4D456",
+      "new": "BlueSphereCodeRow_HighlightSelectedDigit",
+      "profiles": ["sk"],
+      "meaning": "Apply highlight art to the newly selected digit while editing remains active."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 151,
+      "old": "loc_4D470",
+      "new": "BSCode_PlayEditDirectionSound",
+      "profiles": ["sk"],
+      "meaning": "Play the code-edit sound on any pressed direction."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 158,
+      "old": "loc_4D482",
+      "new": "BlueSphereCodeRow_DrawEditorLabel",
+      "profiles": ["sk"],
+      "meaning": "Shared label draw tail after code editing input."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 182,
+      "old": "loc_4D4C2",
+      "new": "BSCode_CheckDecodedLevel",
+      "profiles": ["sk"],
+      "meaning": "Check the decoded level candidate against the entered eleven-bit check value."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 198,
+      "old": "loc_4D4FC",
+      "new": "BSCode_InstallLevelAndStageBytes",
+      "profiles": ["sk"],
+      "meaning": "Accept a validated code and regenerate all four stage-selection bytes."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 255,
+      "old": "loc_4D58A",
+      "new": "BSCode_RejectCodeAndExitEditor",
+      "profiles": ["sk"],
+      "meaning": "Reject an invalid code and return to selection option1."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 268,
+      "old": "loc_4D5A2",
+      "new": "BlueSphereCodeCheck_XorWordAndShift",
+      "profiles": ["sk"],
+      "meaning": "Process one WORD of the bespoke code check value."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 275,
+      "old": "loc_4D5AE",
+      "new": "BlueSphereCodeCheck_AdvanceWord",
+      "profiles": ["sk"],
+      "meaning": "Loop over the requested WORD count for the bespoke code check."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 282,
+      "old": "loc_4D5B4",
+      "new": "BlueSphereDigit_InitializeAlwaysVisible",
+      "profiles": ["sk"],
+      "meaning": "Initialize a numeric actor that always draws."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 286,
+      "old": "loc_4D5BC",
+      "new": "BlueSphereDigit_DrawAlways",
+      "profiles": ["sk"],
+      "meaning": "Unconditional numeric sprite drawing entry."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 302,
+      "old": "loc_4D5E4",
+      "new": "BlueSphereDigit_InitializeGeneratedCode",
+      "profiles": ["sk"],
+      "meaning": "Initialize a generated-code digit with edit-mode visibility gating."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 306,
+      "old": "loc_4D5EC",
+      "new": "BSCode_UpdateGeneratedDigitVisibility",
+      "profiles": ["sk"],
+      "meaning": "Draw a generated code digit only outside code editing."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 312,
+      "old": "loc_4D5F4",
+      "new": "BlueSphereDigit_DrawGenerated",
+      "profiles": ["sk"],
+      "meaning": "Sprite draw tail for visible generated-code digits."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 316,
+      "old": "loc_4D5FA",
+      "new": "BlueSphereDigit_InitializeEditableCode",
+      "profiles": ["sk"],
+      "meaning": "Initialize an editable-code digit with inverse visibility gating."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 320,
+      "old": "loc_4D602",
+      "new": "BlueSphereDigit_UpdateEditableVisibility",
+      "profiles": ["sk"],
+      "meaning": "Draw an editable code digit only while editing is active."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "original_line": 326,
+      "old": "loc_4D60A",
+      "new": "BlueSphereDigit_DrawEditable",
+      "profiles": ["sk"],
+      "meaning": "Sprite draw tail for visible editable-code digits."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/difficulty_character_display.s",
+      "original_line": 16,
+      "old": "locret_4E178",
+      "new": "BSDifficulty_ActorAllocationReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from optional difficulty-display actor allocation."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/difficulty_character_display.s",
+      "original_line": 36,
+      "old": "loc_4E1AA",
+      "new": "BSDifficulty_InitResultsNumberSprite",
+      "profiles": ["sk"],
+      "meaning": "Initialize a numeric/marker sprite used by the results difficulty widget."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/difficulty_character_display.s",
+      "original_line": 40,
+      "old": "loc_4E1B4",
+      "new": "BSDifficulty_UpdateNumberVisibility",
+      "profiles": ["sk"],
+      "meaning": "Draw a results difficulty numeric/marker sprite unless difficulty equals12."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/difficulty_character_display.s",
+      "original_line": 46,
+      "old": "loc_4E1BE",
+      "new": "BSDifficulty_DrawResultsNumber",
+      "profiles": ["sk"],
+      "meaning": "Draw the visible difficulty numeric/marker actor."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/difficulty_character_display.s",
+      "original_line": 62,
+      "old": "loc_4E202",
+      "new": "BSDifficulty_CheckSuperSonicTransition",
+      "profiles": ["sk"],
+      "meaning": "Switch the persistent Sonic difficulty display toward its Super Sonic mapping when the shared flag becomes nonzero."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/difficulty_character_display.s",
+      "original_line": 70,
+      "old": "loc_4E222",
+      "new": "BSDifficulty_TickSuperPoseDelay",
+      "profiles": ["sk"],
+      "meaning": "Gate the Sonic display pose delay on a negative Super_palette_status byte."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/difficulty_character_display.s",
+      "original_line": 78,
+      "old": "loc_4E23A",
+      "new": "BlueSphereDifficulty_AnimateAndDrawSonic",
+      "profiles": ["sk"],
+      "meaning": "Animate and draw the existing Sonic/Super Sonic difficulty actor using the common Sonic pattern loader."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/difficulty_character_display.s",
+      "original_line": 102,
+      "old": "loc_4E29C",
+      "new": "BlueSphereDifficulty_DrawStaticTailsPose",
+      "profiles": ["sk"],
+      "meaning": "Draw the initialized static Tails-pose difficulty actor."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/difficulty_character_display.s",
+      "original_line": 120,
+      "old": "loc_4E2F0",
+      "new": "BSDifficulty_UpdateKnucklesDisplay",
+      "profiles": ["sk"],
+      "meaning": "Animate the Knuckles difficulty actor and enqueue frame patterns only when its mapping frame changes."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/difficulty_character_display.s",
+      "original_line": 130,
+      "old": "loc_4E310",
+      "new": "BlueSphereDifficulty_DrawKnucklesDisplay",
+      "profiles": ["sk"],
+      "meaning": "Draw the Knuckles difficulty actor after optional frame-pattern enqueueing."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/mode_widgets.s",
+      "original_line": 6,
+      "old": "Obj_SpheresTitle_4D610",
+      "new": "BlueSphereInitStartRowCaption",
+      "profiles": ["sk"],
+      "meaning": "Initialize the static frame3 caption on the central start-option row of the three-row Blue Sphere menu."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/mode_widgets.s",
+      "original_line": 17,
+      "old": "loc_4D648",
+      "new": "BlueSphereStartRowCaptionDraw",
+      "profiles": ["sk"],
+      "meaning": "Draw the already initialized Start-row caption actor."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/mode_widgets.s",
+      "original_line": 22,
+      "old": "Obj_SpheresTitle_4D64E",
+      "new": "BlueSphereInitRotatingSelectionIcon",
+      "profiles": ["sk"],
+      "meaning": "Initialize one of the paired rotating menu-selection icons and select its position-table side."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/mode_widgets.s",
+      "original_line": 29,
+      "old": "loc_4D66A",
+      "new": "BSOptionIcon_SetInitialPosition",
+      "profiles": ["sk"],
+      "meaning": "Set the common icon position and choose the initial Y for the current Blue_spheres_mode."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/mode_widgets.s",
+      "original_line": 36,
+      "old": "loc_4D682",
+      "new": "BlueSphereSelectionIcon_SelectSideTable",
+      "profiles": ["sk"],
+      "meaning": "Select left or right menu-position pairs using render_flags bit0."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/mode_widgets.s",
+      "original_line": 43,
+      "old": "loc_4D6A0",
+      "new": "BlueSphereSelectionIcon_InstallUpdate",
+      "profiles": ["sk"],
+      "meaning": "Complete icon bounds and priority setup and install its per-frame updater."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/mode_widgets.s",
+      "original_line": 49,
+      "old": "loc_4D6B8",
+      "new": "BlueSphereUpdateRotatingSelectionIcon",
+      "profiles": ["sk"],
+      "meaning": "Update icon movement toward the selected menu row, eight-frame rotation and player-choice palette switching."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/mode_widgets.s",
+      "original_line": 69,
+      "old": "loc_4D6F0",
+      "new": "BSOptionIcon_SelectXAcceleration",
+      "profiles": ["sk"],
+      "meaning": "Choose the horizontal acceleration sign toward the selected target X."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/mode_widgets.s",
+      "original_line": 81,
+      "old": "loc_4D708",
+      "new": "BSOptionIcon_BrakeLeftwardMotion",
+      "profiles": ["sk"],
+      "meaning": "Apply fourfold positive horizontal acceleration when the target is at/right and X velocity is negative."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/mode_widgets.s",
+      "original_line": 87,
+      "old": "loc_4D712",
+      "new": "BSOptionIcon_ApplyXAndSelectYAccel",
+      "profiles": ["sk"],
+      "meaning": "Apply the chosen X acceleration and begin target-Y settling or vertical acceleration selection."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/mode_widgets.s",
+      "original_line": 100,
+      "old": "loc_4D732",
+      "new": "BSOptionIcon_SelectYAcceleration",
+      "profiles": ["sk"],
+      "meaning": "Choose vertical acceleration toward the selected target Y."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/mode_widgets.s",
+      "original_line": 112,
+      "old": "loc_4D74A",
+      "new": "BSOptionIcon_BrakeUpwardMotion",
+      "profiles": ["sk"],
+      "meaning": "Apply fourfold positive vertical acceleration when target Y is at/below and Y velocity is negative."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/mode_widgets.s",
+      "original_line": 118,
+      "old": "loc_4D754",
+      "new": "BSOptionIcon_ApplyVelocityAndMove",
+      "profiles": ["sk"],
+      "meaning": "Apply the selected vertical acceleration and integrate both icon axes."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/mode_widgets.s",
+      "original_line": 122,
+      "old": "loc_4D75E",
+      "new": "BSOptionIcon_TickRotationTimer",
+      "profiles": ["sk"],
+      "meaning": "Advance the rotating icon animation while preserving the original byte timer wrap behavior."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/mode_widgets.s",
+      "original_line": 129,
+      "old": "loc_4D774",
+      "new": "BSOptionIcon_TogglePlayerChoice",
+      "profiles": ["sk"],
+      "meaning": "Toggle Player_option and icon palette when any A/B/C press is present."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/mode_widgets.s",
+      "original_line": 141,
+      "old": "loc_4D7A0",
+      "new": "BlueSphereSelectionIcon_Draw",
+      "profiles": ["sk"],
+      "meaning": "Draw the rotating selection icon after movement, rotation and optional choice changes."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/mode_widgets.s",
+      "original_line": 144,
+      "old": "word_4D7A6",
+      "new": "BSOptionIcon_LeftPositionsByOption",
+      "profiles": ["sk"],
+      "meaning": "Three left-side icon (X,Y) WORD pairs indexed by menu option0..2."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/mode_widgets.s",
+      "original_line": 148,
+      "old": "word_4D7B2",
+      "new": "BSOptionIcon_RightPositionsByOption",
+      "profiles": ["sk"],
+      "meaning": "Three right-side icon (X,Y) WORD pairs indexed by menu option0..2."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_mode.s",
+      "original_line": 14,
+      "old": "loc_4DA96",
+      "new": "BSResults_CopyPaletteAndLoadScene",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereResults_CopyFullPaletteAndLoadNormalResultsScene"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_mode.s",
+      "original_line": 64,
+      "old": "loc_4DB9E",
+      "new": "BSResults_RunSceneAndChooseProgression",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereResults_RunNormalSceneThenChoosePerfectOrAdvance"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_mode.s",
+      "original_line": 87,
+      "old": "loc_4DBFC",
+      "new": "BSResults_WrapThirdStageByte126",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereResults_WrapThirdStageByteModuloOneTwentySix"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_mode.s",
+      "original_line": 92,
+      "old": "loc_4DC0A",
+      "new": "BSResults_WrapFourthStageByte125",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereResults_WrapFourthStageByteModuloOneTwentyFive"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_mode.s",
+      "original_line": 97,
+      "old": "locret_4DC18",
+      "new": "BSResults_NormalProgressionReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereResults_ReturnAfterNormalProgressionDecision"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_mode.s",
+      "original_line": 101,
+      "old": "loc_4DC1A",
+      "new": "BSResults_RebuildPerfectRevealScene",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereResults_RebuildPerfectDifficultyRevealScene"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_mode.s",
+      "original_line": 111,
+      "old": "loc_4DC48",
+      "new": "BSResults_CopySonicAndTailsPalette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereResults_CopySonicTailsPaletteLineThenPrepareKnuckles"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_mode.s",
+      "original_line": 118,
+      "old": "loc_4DC5A",
+      "new": "BSResults_CopyKnucklesPalette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereResults_CopyKnucklesPaletteLineThenPrepareResults"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_mode.s",
+      "original_line": 125,
+      "old": "loc_4DC6C",
+      "new": "BSResults_CopyResultsPalette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereResults_CopyResultsPaletteLineThenPrepareLogo"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_mode.s",
+      "original_line": 132,
+      "old": "loc_4DC7E",
+      "new": "BSResults_CopyLogoPalette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereResults_CopyLogoPaletteAndFinishPerfectSetup"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_mode.s",
+      "original_line": 176,
+      "old": "loc_4DD5E",
+      "new": "BSResults_WaitForTargetAndNewPress",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereResults_WaitForDifficultyTargetAndFreshButton"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_mode.s",
+      "original_line": 196,
+      "old": "loc_4DDAA",
+      "new": "BSResults_AdvancePerfectProgressStep",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereResults_AdvanceOneOfTenPerfectProgressSteps"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_mode.s",
+      "original_line": 204,
+      "old": "loc_4DDC6",
+      "new": "BSResults_PerfectWrapThirdStageByte",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereResults_WrapThirdByteDuringPerfectAdvance"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_mode.s",
+      "original_line": 209,
+      "old": "loc_4DDD4",
+      "new": "BSResults_PerfectWrapFourthStageByte",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereResults_WrapFourthByteDuringPerfectAdvance"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_mode.s",
+      "original_line": 214,
+      "old": "loc_4DDE2",
+      "new": "BSResults_RepeatTenPerfectSteps",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereResults_RepeatPerfectAdvanceForTenIterations"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_mode.s",
+      "original_line": 217,
+      "old": "locret_4DDE6",
+      "new": "BSResults_PerfectRevealReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereResults_ReturnFromPerfectReveal"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_mode.s",
+      "original_line": 247,
+      "old": "loc_4DEA8",
+      "new": "BSResults_UploadFourteenLogoBlocks",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereResults_UploadFourteenTwelveByEightLogoBlocks"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_mode.s",
+      "original_line": 260,
+      "old": "loc_4DED0",
+      "new": "BSResults_OffsetBGScrollLeft16",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereResults_ShiftAllBackgroundLineWordsLeftSixteen"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_mode.s",
+      "original_line": 268,
+      "old": "word_4DEDC",
+      "new": "BSResults_LogoPlaneCommandHighWords",
+      "profiles": ["sk"],
+      "meaning": "Data structure: BlueSphereResults_LogoPlaneFourteenCommandHighWords"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 6,
+      "old": "Obj_SphereResults_4DEF8",
+      "new": "BSResults_InitExitAndPerfectController",
+      "profiles": ["sk"],
+      "meaning": "Start the results-screen exit/perfect-message state machine with a5*60 frame-counter value."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 10,
+      "old": "loc_4DF04",
+      "new": "BSResults_WaitThenShowPerfect",
+      "profiles": ["sk"],
+      "meaning": "Wait for the first negative timer count and show PERFECT only when rings-left is zero."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 25,
+      "old": "loc_4DF38",
+      "new": "BlueSphereResults_InstallPostDelayState",
+      "profiles": ["sk"],
+      "meaning": "Install the post-delay result state, then retain the common early-exit check for this tick."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 28,
+      "old": "loc_4DF3E",
+      "new": "BSResults_AllowNonPerfectEarlyExit",
+      "profiles": ["sk"],
+      "meaning": "Allow any pressed button to return to the Blue Sphere title only while rings-left is nonzero."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 35,
+      "old": "locret_4DF50",
+      "new": "BSResults_InitialControllerReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from the initial delay/early-exit result-controller state."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 39,
+      "old": "loc_4DF52",
+      "new": "BSResults_TickExitDelayAndFlashScroll",
+      "profiles": ["sk"],
+      "meaning": "Update post-delay exit handling and the periodic horizontal-scroll bit toggle."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 45,
+      "old": "loc_4DF5E",
+      "new": "BSResults_CheckButtonAfterDelay",
+      "profiles": ["sk"],
+      "meaning": "Check any button press as the post-delay return-to-title trigger."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 49,
+      "old": "loc_4DF64",
+      "new": "BlueSphereResults_ReturnToTitleMode",
+      "profiles": ["sk"],
+      "meaning": "Select the Blue Sphere title game mode from the timer or button exit path."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 52,
+      "old": "loc_4DF6A",
+      "new": "BlueSphereResults_TestScrollFlashCadence",
+      "profiles": ["sk"],
+      "meaning": "Gate the result scroll toggle on the low V-int counter nibble being zero."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 59,
+      "old": "loc_4DF7A",
+      "new": "BlueSphereResults_ToggleScrollBit8Loop",
+      "profiles": ["sk"],
+      "meaning": "Toggle bit8 of sixteen selected horizontal-scroll entries."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 64,
+      "old": "locret_4DF84",
+      "new": "BSResults_PostDelayControllerReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after the post-delay timer/input and optional scroll work."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 68,
+      "old": "Obj_SphereResults_4DF86",
+      "new": "BlueSphereResultsInitPlayerDisplayActor",
+      "profiles": ["sk"],
+      "meaning": "Initialize the results player display as Sonic for Player_mode1 or Knuckles for every other value."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 85,
+      "old": "loc_4DFDA",
+      "new": "BSResults_CopyKnucklesTargetPalette",
+      "profiles": ["sk"],
+      "meaning": "Copy the existing Knuckles palette record to the target palette before installing its display updater."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 92,
+      "old": "loc_4DFE8",
+      "new": "BSResults_InstallSonicDisplayUpdate",
+      "profiles": ["sk"],
+      "meaning": "Install the Sonic result display updater and execute it on the same tick."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 95,
+      "old": "loc_4DFEE",
+      "new": "BlueSphereResults_UpdateSonicDisplay",
+      "profiles": ["sk"],
+      "meaning": "Animate Sonic, queue/load its existing pattern changes and draw the result actor."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 101,
+      "old": "loc_4E000",
+      "new": "BlueSphereResults_UpdateKnucklesDisplay",
+      "profiles": ["sk"],
+      "meaning": "Animate Knuckles, invoke its existing pattern-loader and draw the result actor."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 107,
+      "old": "Obj_Sphere_Results_4E012",
+      "new": "BSResults_InitSevenEmeraldOrbitActors",
+      "profiles": ["sk"],
+      "meaning": "Initialize seven consecutive emerald actors and make the first the shared radial-scale leader."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 113,
+      "old": "loc_4E01A",
+      "new": "BSResults_SeedEmeraldOrbitActor",
+      "profiles": ["sk"],
+      "meaning": "Initialize the next actor in the seven-emerald orbit group."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 128,
+      "old": "loc_4E05C",
+      "new": "BSResults_UpdateEmeraldPulseLeader",
+      "profiles": ["sk"],
+      "meaning": "Write the shared sinusoidal radial-scale value before updating the leading emerald position."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 136,
+      "old": "loc_4E074",
+      "new": "BSResults_UpdateEmeraldOrbitPosition",
+      "profiles": ["sk"],
+      "meaning": "Compute a rotating emerald position around(0x120,0x100) using the shared radial-scale WORD."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 152,
+      "old": "Obj_SphereResults_4E0A4",
+      "new": "BSResults_InitDifficultyProgressWidget",
+      "profiles": ["sk"],
+      "meaning": "Initialize a results difficulty-progress caption and its four numeric/marker children."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 168,
+      "old": "loc_4E0EC",
+      "new": "BSResults_SeedDifficultyNumberChildren",
+      "profiles": ["sk"],
+      "meaning": "Initialize the four following numeric/marker actors of the difficulty-progress widget."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 179,
+      "old": "loc_4E116",
+      "new": "BSResults_UpdateDifficultyProgress",
+      "profiles": ["sk"],
+      "meaning": "Refresh the displayed difficulty+1 and periodically advance difficulty toward its target."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 195,
+      "old": "loc_4E146",
+      "new": "BSResults_SelectDifficultyCaption",
+      "profiles": ["sk"],
+      "meaning": "Choose caption frame4 normally and frame5 when difficulty is exactly12."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "original_line": 201,
+      "old": "loc_4E15A",
+      "new": "BlueSphereResults_DrawDifficultyCaption",
+      "profiles": ["sk"],
+      "meaning": "Draw the difficulty-progress caption after its number/timer/caption update."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 6,
+      "old": "Obj_SpheresTitle_4CEAA",
+      "new": "BlueSphereSelection_InitializeController",
+      "profiles": ["sk"],
+      "meaning": "Initialize the Blue Sphere stage-selection controller."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 11,
+      "old": "loc_4CEB6",
+      "new": "BSSelect_CheckABCWithVectorGuard",
+      "profiles": ["sk"],
+      "meaning": "Retain the original vector-byte guard on the exact ABC input check."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 19,
+      "old": "locret_4CEC6",
+      "new": "BlueSphereSelection_ReturnFromABCCheck",
+      "profiles": ["sk"],
+      "meaning": "Return while the original guarded ABC condition is not satisfied."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 23,
+      "old": "loc_4CEC8",
+      "new": "BlueSphereSelection_EnableMenuFromABC",
+      "profiles": ["sk"],
+      "meaning": "Set up the selection menu after the guarded ABC check succeeds."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 37,
+      "old": "loc_4CEF8",
+      "new": "BlueSphereSelection_CreateMenuWidgets",
+      "profiles": ["sk"],
+      "meaning": "Install the active selection controller and create its fixed-slot widgets."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 58,
+      "old": "loc_4CF66",
+      "new": "BSSelect_ShowCodeForCompletedStage",
+      "profiles": ["sk"],
+      "meaning": "Optionally add the generated code row in zero mode after both stage counters reach zero."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 66,
+      "old": "locret_4CF80",
+      "new": "BSSelect_WidgetSetupReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from zero-mode widget setup and its incomplete-stage branches."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 70,
+      "old": "loc_4CF82",
+      "new": "BSSelect_UpdateScrollAndOptions",
+      "profiles": ["sk"],
+      "meaning": "Update menu scrolling, option selection and stage-start input."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 80,
+      "old": "loc_4CFA0",
+      "new": "BSSelect_PrepareCharacterRise",
+      "profiles": ["sk"],
+      "meaning": "Prepare the four-character upward slide during menu scroll."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 84,
+      "old": "loc_4CFA6",
+      "new": "BlueSphereSelection_RaiseCharacterSlot",
+      "profiles": ["sk"],
+      "meaning": "Raise each of four consecutive title character actors one pixel."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 89,
+      "old": "loc_4CFB2",
+      "new": "BlueSphereSelection_HandleOptionUp",
+      "profiles": ["sk"],
+      "meaning": "Handle moving to the preceding menu option outside code editing."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 101,
+      "old": "loc_4CFD4",
+      "new": "BlueSphereSelection_HandleOptionDown",
+      "profiles": ["sk"],
+      "meaning": "Handle advancing the menu option and entering code-edit mode."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 114,
+      "old": "loc_4D000",
+      "new": "BlueSphereSelection_CheckPlayableOption",
+      "profiles": ["sk"],
+      "meaning": "Permit stage launch from the active menu only for option1."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 118,
+      "old": "loc_4D008",
+      "new": "BSSelect_StartOnStartAlone",
+      "profiles": ["sk"],
+      "meaning": "Switch to the Blue Sphere special-stage mode on exact Start press."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 130,
+      "old": "locret_4D03C",
+      "new": "BlueSphereSelection_ReturnFromMenuInput",
+      "profiles": ["sk"],
+      "meaning": "Shared return when no stage launch occurs or after launch mode is set."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 134,
+      "old": "Obj_SpheresTitle_4D03E",
+      "new": "BlueSphereNumberRow_Initialize",
+      "profiles": ["sk"],
+      "meaning": "Initialize the stage/level title row and eleven fixed numeric/bracket actor slots."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 148,
+      "old": "loc_4D07A",
+      "new": "BSSelect_InitNumberSlot",
+      "profiles": ["sk"],
+      "meaning": "Initialize each numeric/bracket slot in the eleven-slot row."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 158,
+      "old": "loc_4D09E",
+      "new": "BSSelect_SelectStageOrLevelNumber",
+      "profiles": ["sk"],
+      "meaning": "Select packed-stage number or current-level display using mode, option and progress."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 166,
+      "old": "loc_4D0B0",
+      "new": "BlueSphereNumberRow_FormatPackedStage",
+      "profiles": ["sk"],
+      "meaning": "Build the fixed-width decimal display of the packed four-byte stage selection."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 181,
+      "old": "loc_4D0D4",
+      "new": "BSSelect_CheckProgressForAltDisplay",
+      "profiles": ["sk"],
+      "meaning": "Resolve the progress-dependent display choice for nonzero options."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 185,
+      "old": "loc_4D0DA",
+      "new": "BlueSphereNumberRow_FormatCurrentLevel",
+      "profiles": ["sk"],
+      "meaning": "Display the one-based current level with leading digits suppressed and centered."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 192,
+      "old": "loc_4D0F0",
+      "new": "BlueSphereNumberRow_Draw",
+      "profiles": ["sk"],
+      "meaning": "Shared sprite draw tail for the stage/level text row."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 204,
+      "old": "loc_4D108",
+      "new": "BlueSphereDigits_FixedWidthNextPlace",
+      "profiles": ["sk"],
+      "meaning": "Prepare each of nine fixed-width decimal places."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 209,
+      "old": "loc_4D110",
+      "new": "BSSelect_SubtractFixedWidthDivisor",
+      "profiles": ["sk"],
+      "meaning": "Count a fixed-width decimal digit by repeated unsigned subtraction."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 216,
+      "old": "loc_4D118",
+      "new": "BlueSphereDigits_FixedWidthStoreDigit",
+      "profiles": ["sk"],
+      "meaning": "Restore the residual value and write the fixed-width digit frame."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 224,
+      "old": "loc_4D12A",
+      "new": "BlueSphereDigits_FixedWidthPositionSlot",
+      "profiles": ["sk"],
+      "meaning": "Place all eleven numeric/boundary slots in the fixed-width row."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 242,
+      "old": "loc_4D14E",
+      "new": "BlueSphereDigits_CenteredNextPlace",
+      "profiles": ["sk"],
+      "meaning": "Prepare the next of nine potentially suppressed level-number digits."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 247,
+      "old": "loc_4D156",
+      "new": "BlueSphereDigits_CenteredSubtractDivisor",
+      "profiles": ["sk"],
+      "meaning": "Count a centered-row decimal digit by subtraction."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 254,
+      "old": "loc_4D15E",
+      "new": "BSSelect_CheckCenteredSignificance",
+      "profiles": ["sk"],
+      "meaning": "Restore the remainder and record the first significant digit."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 263,
+      "old": "loc_4D16C",
+      "new": "BSSelect_SuppressCenteredLeadingZero",
+      "profiles": ["sk"],
+      "meaning": "Replace digits before the first nonzero with blank frame0xA."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 268,
+      "old": "loc_4D172",
+      "new": "BSSelect_StoreCenteredDigitAndPrepX",
+      "profiles": ["sk"],
+      "meaning": "Store the digit and prepare centering after all nine places."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 280,
+      "old": "loc_4D18E",
+      "new": "BSSelect_PlaceCenteredLeadingSlots",
+      "profiles": ["sk"],
+      "meaning": "Place the leading boundary/blank slots at the centered starting X."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 285,
+      "old": "loc_4D19A",
+      "new": "BSSelect_PlaceCenteredSignificantSlots",
+      "profiles": ["sk"],
+      "meaning": "Place significant digits and final boundary at eight-pixel spacing."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 303,
+      "old": "loc_4D1BE",
+      "new": "BlueSphereDifficultyDigits_NextPlace",
+      "profiles": ["sk"],
+      "meaning": "Prepare the next of two decimal difficulty digits."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 308,
+      "old": "loc_4D1C6",
+      "new": "BSSelect_SubtractDifficultyDivisor",
+      "profiles": ["sk"],
+      "meaning": "Compute a difficulty digit using repeated unsigned subtraction."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 315,
+      "old": "loc_4D1CE",
+      "new": "BSSelect_CheckDifficultySignificance",
+      "profiles": ["sk"],
+      "meaning": "Restore difficulty remainder and track its first nonzero digit."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 324,
+      "old": "loc_4D1DC",
+      "new": "BSSelect_SuppressDifficultyLeadingZero",
+      "profiles": ["sk"],
+      "meaning": "Use blank frame0xA for insignificant difficulty digits."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 329,
+      "old": "loc_4D1E2",
+      "new": "BSSelect_StoreDifficultyDigitAndPrepX",
+      "profiles": ["sk"],
+      "meaning": "Store the difficulty frame byte and prepare its centered position pass."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 341,
+      "old": "loc_4D1FC",
+      "new": "BSSelect_PlaceDifficultyLeadingSlots",
+      "profiles": ["sk"],
+      "meaning": "Place leading boundary/blank difficulty slots at a shared centered X."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 346,
+      "old": "loc_4D208",
+      "new": "BSSelect_PlaceDifficultySignificantSlots",
+      "profiles": ["sk"],
+      "meaning": "Place significant difficulty digits and trailing boundary eight pixels apart."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 356,
+      "old": "dword_4D21C",
+      "new": "BSSelect_NineDigitDecimalDivisors",
+      "profiles": ["sk"],
+      "meaning": "Shared LONG powers of ten for the nine-digit writers."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 363,
+      "old": "dword_4D238",
+      "new": "BlueSphereDigits_TwoPlaceDecimalDivisors",
+      "profiles": ["sk"],
+      "meaning": "Aliased LONG divisor tail10,1 for the two-digit difficulty writer."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 367,
+      "old": "loc_4D240",
+      "new": "BSSelect_FormatUnsigned48BitCode",
+      "profiles": ["sk"],
+      "meaning": "Write twelve decimal digit frames from the unsigned48-bit value D0.W:D1.L."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 371,
+      "old": "loc_4D246",
+      "new": "BlueSphereCodeDigits_PrepareFormatPlace",
+      "profiles": ["sk"],
+      "meaning": "Prepare the next of twelve48-bit decimal place extractions."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 377,
+      "old": "loc_4D250",
+      "new": "BlueSphereCodeDigits_Subtract48BitPlace",
+      "profiles": ["sk"],
+      "meaning": "Count a code digit by subtracting a48-bit decimal divisor."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 385,
+      "old": "loc_4D25A",
+      "new": "BSSelect_RestoreAndStoreCodeDigit",
+      "profiles": ["sk"],
+      "meaning": "Undo the final borrowed subtraction and store the resulting code digit."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 393,
+      "old": "loc_4D268",
+      "new": "BSSelect_ParseUnsigned48BitCode",
+      "profiles": ["sk"],
+      "meaning": "Read twelve consecutive numeric sprite frames into an unsigned48-bit value."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 400,
+      "old": "loc_4D274",
+      "new": "BlueSphereCodeDigits_PrepareParsePlace",
+      "profiles": ["sk"],
+      "meaning": "Load one displayed code digit and its48-bit place value."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 409,
+      "old": "loc_4D286",
+      "new": "BSSelect_Add48BitDigitWeight",
+      "profiles": ["sk"],
+      "meaning": "Accumulate one place value for each unit of the displayed decimal digit."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 414,
+      "old": "loc_4D28E",
+      "new": "BlueSphereCodeDigits_AdvanceParsePlace",
+      "profiles": ["sk"],
+      "meaning": "Advance through all twelve displayed code digits."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "original_line": 418,
+      "old": "word_4D294",
+      "new": "BSSelect_Code48BitDecimalWeights",
+      "profiles": ["sk"],
+      "meaning": "Twelve six-byte decimal place values from10^11 to1."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_footer.s",
+      "original_line": 5,
+      "old": "word_4D976",
+      "new": "BlueSphereTitleCharacters_Positions",
+      "profiles": ["sk"],
+      "meaning": "Four WORD X/Y placement pairs for title character actors."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_footer.s",
+      "original_line": 12,
+      "old": "Obj_SpheresTitle_4D986",
+      "new": "BlueSphereTitleCharacters_Initialize",
+      "profiles": ["sk"],
+      "meaning": "Initialize four consecutive Blue Sphere title character actors."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_footer.s",
+      "original_line": 17,
+      "old": "loc_4D98E",
+      "new": "BlueSphereTitleCharacters_InitializeSlot",
+      "profiles": ["sk"],
+      "meaning": "Populate one of the four title character sprite slots."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_footer.s",
+      "original_line": 28,
+      "old": "loc_4D9B6",
+      "new": "BSFooter_SetSlotAnim",
+      "profiles": ["sk"],
+      "meaning": "Finish each character slot and select its descending animation index."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_footer.s",
+      "original_line": 42,
+      "old": "loc_4D9EC",
+      "new": "BSFooter_UpdateSlotAnim",
+      "profiles": ["sk"],
+      "meaning": "Animate title characters only when Blue Sphere mode is nonzero."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_footer.s",
+      "original_line": 48,
+      "old": "loc_4D9FE",
+      "new": "BlueSphereTitleCharacters_Draw",
+      "profiles": ["sk"],
+      "meaning": "Shared title character drawing tail."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_footer.s",
+      "original_line": 56,
+      "old": "Obj_SpheresTitle_4DA30",
+      "new": "BlueSphereCopyright_Initialize",
+      "profiles": ["sk"],
+      "meaning": "Initialize the Blue Sphere copyright sprite."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_footer.s",
+      "original_line": 66,
+      "old": "loc_4DA62",
+      "new": "BlueSphereCopyright_Draw",
+      "profiles": ["sk"],
+      "meaning": "Unconditional drawing entry of the title copyright sprite."
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_mode.s",
+      "original_line": 63,
+      "old": "loc_4CA8C",
+      "new": "BSTitle_UploadHeadingAndSetScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereTitle_UploadChosenHeadingAndAdjustHeaderScroll"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_mode.s",
+      "original_line": 71,
+      "old": "loc_4CAA8",
+      "new": "BSTitle_InstallActorsAndFadeIn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereTitle_InstallActorsRenderAndFadeIn"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_mode.s",
+      "original_line": 84,
+      "old": "loc_4CAE8",
+      "new": "BSTitle_RunTitleUntilModeChanges",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereTitle_RunSceneUntilGameModeChanges"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_mode.s",
+      "original_line": 104,
+      "old": "loc_4CB2C",
+      "new": "BSTitle_Set64WordPaletteCount",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereTitle_PrepareFullPaletteWordCopyCount"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_mode.s",
+      "original_line": 107,
+      "old": "loc_4CB2E",
+      "new": "BSTitle_CopyFullPalette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereTitle_CopySixtyFourPaletteWords"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_mode.s",
+      "original_line": 146,
+      "old": "loc_4CCAE",
+      "new": "BSTitle_Begin13ByteSerialWindow",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereTitle_StartNextNativeThirteenByteSerialWindow"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_mode.s",
+      "original_line": 151,
+      "old": "loc_4CCB8",
+      "new": "BSTitle_CompareByteAndLatchMismatch",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereTitle_CompareSerialByteAndLatchMismatch"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_mode.s",
+      "original_line": 157,
+      "old": "loc_4CCC0",
+      "new": "BSTitle_FinishOrAdvanceSerialWindow",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereTitle_FinishWindowOrAdvanceFourWindowScan"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_mode.s",
+      "original_line": 166,
+      "old": "locret_4CCDA",
+      "new": "BSTitle_SerialModeInitReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereTitle_ReturnAfterSerialModeInitialization"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_mode.s",
+      "original_line": 170,
+      "old": "loc_4CCDC",
+      "new": "BSTitle_EnableModeAndCheckReset",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereTitle_EnableRecognizedModeAndOptionallyResetSelection"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_mode.s",
+      "original_line": 192,
+      "old": "loc_4CD20",
+      "new": "BSTitle_FindFirstNonzeroSerialDigit",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereTitle_FindFirstNonzeroDecimalSerialDigit"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_mode.s",
+      "original_line": 199,
+      "old": "loc_4CD2E",
+      "new": "BSTitle_SkipZeroOrNondigit",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereTitle_AdvancePastZeroOrNondigitDuringInitialScan"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_mode.s",
+      "original_line": 203,
+      "old": "loc_4CD34",
+      "new": "BSTitle_ClearSerialAccumulator",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereTitle_ClearSerialAccumulatorBeforeNativeDigitPass"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_mode.s",
+      "original_line": 206,
+      "old": "loc_4CD36",
+      "new": "BSTitle_AccumulateSerialDigits",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereTitle_AccumulateAcceptedDecimalByteWithWordWrap"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_mode.s",
+      "original_line": 215,
+      "old": "loc_4CD4C",
+      "new": "BSTitle_FinishDigitsAndPackHeader",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereTitle_FinishDecimalPassAndBeginHeaderBitPacking"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_mode.s",
+      "original_line": 225,
+      "old": "loc_4CD6A",
+      "new": "BSTitle_MapDateAndPackSerialHeader",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereTitle_MapDateAndPackSerialHeaderFields"
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_mode.s",
+      "original_line": 268,
+      "old": "loc_4CDE6",
+      "new": "BSTitle_Finish27BitLevelAndResidues",
+      "profiles": ["sk"],
+      "meaning": "Execution state: BlueSphereTitle_FinalizeTwentySevenBitLevelAndFourStageResidues"
+    },
+    {
+      "source": "src/objects/interface/blue_sphere/sk/difficulty_banner_portrait.s",
+      "original_line": 20,
+      "old": "locret_5FB12",
+      "new": "BSDifficulty_WordmarkSpawnReturn",
+      "profiles": ["sk"],
+      "meaning": "Establish SKDifficultyBanner_ReturnAfterWordmarkAllocationAttempt from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/blue_sphere/sk/difficulty_banner_portrait.s",
+      "original_line": 24,
+      "old": "loc_5FB14",
+      "new": "SKDifficultyBanner_QueueDraw",
+      "profiles": ["sk"],
+      "meaning": "Establish SKDifficultyBanner_QueueDraw from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/blue_sphere/sk/difficulty_banner_portrait.s",
+      "original_line": 28,
+      "old": "loc_5FB1A",
+      "new": "BSDifficulty_InitKnucklesWordmarkIfShown",
+      "profiles": ["sk"],
+      "meaning": "Establish SKDifficultyBanner_InitializeConditionalKnucklesWordmarkChild from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/blue_sphere/sk/difficulty_banner_portrait.s",
+      "original_line": 55,
+      "old": "loc_5FB90",
+      "new": "BSDifficulty_AnimateAndDrawEggman",
+      "profiles": ["sk"],
+      "meaning": "Establish SKDifficultyEggman_AnimateRawPortraitAndQueueDraw from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/blue_sphere/sk/difficulty_widgets.s",
+      "original_line": 49,
+      "old": "locret_7D03C",
+      "new": "BSDifficultyEmerald_SelectUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Establish SKDifficultyEmerald_ReturnAfterSelectingPaletteOrDrawHandler from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/blue_sphere/sk/difficulty_widgets.s",
+      "original_line": 52,
+      "old": "word_7D03E",
+      "new": "BSDifficultyEmerald_ScreenYBySubtype",
+      "profiles": ["sk"],
+      "meaning": "Establish SKDifficultyEmerald_ScreenYWordsByEncodedSubtype from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/blue_sphere/sk/difficulty_widgets.s",
+      "original_line": 56,
+      "old": "loc_7D042",
+      "new": "BSDifficultyEmerald_CycleColorsAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Establish SKDifficultyEmerald_RunTwoColorRotationThenQueueDraw from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/blue_sphere/sk/difficulty_widgets.s",
+      "original_line": 61,
+      "old": "loc_7D050",
+      "new": "BSDifficultyEmerald_QueueDraw",
+      "profiles": ["sk"],
+      "meaning": "Establish SKDifficultyEmerald_QueueDrawAfterOptionalPaletteRotation from wholeactualowner/actualreaderandformat."
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/game/blue_sphere/shared/animations/character_sprites.s",
+      "tokens": [
+        [2, 1, 3, ""],
+        [3, 1, 2, ""],
+        [4, 1, 1, ""],
+        [5, 1, 0, ""],
+        [6, 0, 0, ""],
+        [7, 0, 1, ""],
+        [8, 0, 2, ""],
+        [9, 0, 3, ""]
+      ]
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/character_sprites.s",
+      "tokens": [
+        [2, 1, 4, ""],
+        [3, 1, 5, ""],
+        [4, 1, 6, ""],
+        [5, 1, 7, ""],
+        [6, 1, 8, ""],
+        [7, 1, 9, ""],
+        [8, 1, 10, ""],
+        [9, 1, 11, ""],
+        [10, 1, 12, ""],
+        [11, 0, 4, ""],
+        [13, 0, 5, ""],
+        [15, 0, 6, ""],
+        [17, 0, 7, ""],
+        [21, 0, 8, ""],
+        [25, 0, 9, ""],
+        [27, 0, 10, ""],
+        [29, 0, 11, ""],
+        [35, 0, 12, ""]
+      ]
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/copyright.s",
+      "tokens": [
+        [2, 1, 13, ""],
+        [3, 0, 13, ""]
+      ]
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/numbers.s",
+      "tokens": [
+        [2, 1, 14, ""],
+        [3, 1, 15, ""],
+        [4, 1, 16, ""],
+        [5, 1, 17, ""],
+        [6, 1, 18, ""],
+        [7, 1, 19, ""],
+        [8, 1, 20, ""],
+        [9, 1, 21, ""],
+        [10, 1, 22, ""],
+        [11, 1, 23, ""],
+        [12, 1, 24, ""],
+        [13, 1, 25, ""],
+        [14, 0, 14, ""],
+        [16, 0, 15, ""],
+        [18, 0, 16, ""],
+        [20, 0, 17, ""],
+        [22, 0, 18, ""],
+        [24, 0, 19, ""],
+        [26, 0, 20, ""],
+        [28, 0, 21, ""],
+        [30, 0, 22, ""],
+        [32, 0, 23, ""],
+        [34, 0, 24, ""],
+        [36, 0, 25, ""]
+      ]
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/results_emerald.s",
+      "tokens": [
+        [2, 1, 26, ""],
+        [3, 1, 27, ""],
+        [4, 1, 28, ""],
+        [5, 1, 29, ""],
+        [6, 1, 30, ""],
+        [7, 1, 31, ""],
+        [8, 1, 32, ""],
+        [9, 0, 26, ""],
+        [11, 0, 27, ""],
+        [13, 0, 28, ""],
+        [15, 0, 29, ""],
+        [17, 0, 30, ""],
+        [19, 0, 31, ""],
+        [21, 0, 32, ""]
+      ]
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/rotating_icon.s",
+      "tokens": [
+        [2, 1, 33, ""],
+        [3, 1, 34, ""],
+        [4, 1, 35, ""],
+        [5, 1, 36, ""],
+        [6, 1, 37, ""],
+        [7, 1, 38, ""],
+        [8, 1, 39, ""],
+        [9, 1, 40, ""],
+        [10, 0, 33, ""],
+        [12, 0, 34, ""],
+        [14, 0, 35, ""],
+        [16, 0, 36, ""],
+        [18, 0, 37, ""],
+        [20, 0, 38, ""],
+        [22, 0, 39, ""],
+        [24, 0, 40, ""]
+      ]
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/tails_pose.s",
+      "tokens": [
+        [2, 1, 41, ""],
+        [3, 0, 41, ""]
+      ]
+    },
+    {
+      "source": "src/game/blue_sphere/shared/mappings/text.s",
+      "tokens": [
+        [2, 1, 42, ""],
+        [3, 1, 43, ""],
+        [4, 1, 44, ""],
+        [5, 1, 45, ""],
+        [6, 1, 46, ""],
+        [7, 1, 47, ""],
+        [8, 0, 42, ""],
+        [13, 0, 43, ""],
+        [19, 0, 44, ""],
+        [23, 0, 45, ""],
+        [29, 0, 46, ""],
+        [38, 0, 47, ""]
+      ]
+    },
+    {
+      "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
+      "tokens": [
+        [1, 0, 48, ""],
+        [14, 0, 49, ""],
+        [15, 2, 57, ""],
+        [16, 2, 76, ""],
+        [17, 1, 51, ""],
+        [18, 0, 50, ""],
+        [19, 2, 53, ""],
+        [20, 2, 73, ""],
+        [21, 0, 51, ""],
+        [29, 1, 48, ""],
+        [32, 0, 52, ""],
+        [38, 3, 52, ""],
+        [40, 0, 53, ""],
+        [42, 1, 54, ""],
+        [44, 0, 54, ""],
+        [48, 1, 55, ""],
+        [50, 0, 55, ""],
+        [57, 1, 56, ""],
+        [59, 0, 56, ""],
+        [72, 1, 193, ""],
+        [74, 0, 57, ""],
+        [76, 1, 58, ""],
+        [79, 0, 58, ""],
+        [82, 1, 59, ""],
+        [84, 0, 59, ""],
+        [93, 1, 60, ""],
+        [95, 1, 60, ""],
+        [97, 0, 60, ""],
+        [99, 1, 61, ""],
+        [102, 1, 61, ""],
+        [104, 0, 61, ""],
+        [106, 1, 62, ""],
+        [108, 1, 62, ""],
+        [110, 0, 62, ""],
+        [112, 1, 63, ""],
+        [115, 1, 63, ""],
+        [117, 0, 63, ""],
+        [119, 1, 64, ""],
+        [126, 0, 64, ""],
+        [129, 1, 65, ""],
+        [132, 0, 65, ""],
+        [135, 1, 197, ""],
+        [150, 1, 66, ""],
+        [152, 0, 66, ""],
+        [160, 1, 68, ""],
+        [163, 1, 67, ""],
+        [167, 0, 67, ""],
+        [222, 0, 68, ""],
+        [230, 0, 69, ""],
+        [234, 1, 70, ""],
+        [236, 0, 70, ""],
+        [237, 3, 69, ""],
+        [239, 0, 71, ""],
+        [241, 2, 72, ""],
+        [242, 0, 72, ""],
+        [251, 0, 73, ""],
+        [253, 2, 74, ""],
+        [254, 0, 74, ""],
+        [256, 1, 75, ""],
+        [258, 0, 75, ""],
+        [260, 0, 76, ""],
+        [262, 2, 77, ""],
+        [263, 0, 77, ""],
+        [265, 1, 78, ""],
+        [267, 0, 78, ""]
+      ]
+    },
+    {
+      "source": "src/game/blue_sphere/sk/difficulty_character_display.s",
+      "tokens": [
+        [3, 1, 79, ""],
+        [9, 0, 79, ""],
+        [24, 0, 80, ""],
+        [26, 2, 81, ""],
+        [27, 0, 81, ""],
+        [29, 1, 82, ""],
+        [31, 0, 82, ""],
+        [43, 2, 83, ""],
+        [44, 0, 83, ""],
+        [46, 1, 84, ""],
+        [49, 2, 84, ""],
+        [51, 0, 84, ""],
+        [53, 1, 85, ""],
+        [55, 1, 85, ""],
+        [57, 2, 85, ""],
+        [58, 0, 85, ""],
+        [76, 2, 86, ""],
+        [77, 0, 86, ""],
+        [90, 2, 87, ""],
+        [91, 0, 87, ""],
+        [96, 1, 88, ""],
+        [100, 0, 88, ""]
+      ]
+    },
+    {
+      "source": "src/game/blue_sphere/sk/mode_widgets.s",
+      "tokens": [
+        [1, 0, 89, ""],
+        [10, 2, 90, ""],
+        [11, 0, 90, ""],
+        [13, 0, 91, ""],
+        [17, 1, 92, ""],
+        [19, 0, 92, ""],
+        [23, 1, 93, ""],
+        [25, 0, 93, ""],
+        [26, 2, 105, ""],
+        [28, 1, 94, ""],
+        [30, 2, 106, ""],
+        [31, 0, 94, ""],
+        [35, 2, 95, ""],
+        [36, 0, 95, ""],
+        [38, 1, 102, ""],
+        [46, 1, 96, ""],
+        [50, 1, 96, ""],
+        [53, 1, 98, ""],
+        [54, 0, 96, ""],
+        [57, 1, 97, ""],
+        [60, 1, 98, ""],
+        [63, 1, 98, ""],
+        [64, 0, 97, ""],
+        [66, 1, 98, ""],
+        [69, 0, 98, ""],
+        [72, 1, 99, ""],
+        [76, 1, 99, ""],
+        [79, 1, 101, ""],
+        [80, 0, 99, ""],
+        [83, 1, 100, ""],
+        [86, 1, 101, ""],
+        [89, 1, 101, ""],
+        [90, 0, 100, ""],
+        [92, 1, 101, ""],
+        [95, 0, 101, ""],
+        [98, 0, 102, ""],
+        [100, 1, 103, ""],
+        [104, 0, 103, ""],
+        [107, 1, 104, ""],
+        [112, 1, 104, ""],
+        [115, 0, 104, ""],
+        [117, 0, 105, ""],
+        [121, 0, 106, ""]
+      ]
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_mode.s",
+      "tokens": [
+        [8, 0, 107, ""],
+        [10, 3, 107, ""],
+        [44, 2, 126, ""],
+        [45, 2, 137, ""],
+        [46, 2, 166, ""],
+        [48, 2, 142, ""],
+        [57, 0, 108, ""],
+        [65, 1, 108, ""],
+        [67, 1, 112, ""],
+        [69, 1, 111, ""],
+        [71, 1, 111, ""],
+        [77, 1, 109, ""],
+        [79, 0, 109, ""],
+        [81, 1, 110, ""],
+        [83, 0, 110, ""],
+        [85, 1, 111, ""],
+        [87, 0, 111, ""],
+        [89, 0, 112, ""],
+        [98, 0, 113, ""],
+        [100, 3, 113, ""],
+        [104, 0, 114, ""],
+        [106, 3, 114, ""],
+        [110, 0, 115, ""],
+        [112, 3, 115, ""],
+        [116, 0, 116, ""],
+        [118, 3, 116, ""],
+        [145, 2, 166, ""],
+        [147, 2, 146, ""],
+        [159, 0, 117, ""],
+        [169, 1, 117, ""],
+        [171, 1, 117, ""],
+        [173, 1, 122, ""],
+        [175, 1, 122, ""],
+        [178, 0, 118, ""],
+        [183, 1, 119, ""],
+        [185, 0, 119, ""],
+        [187, 1, 120, ""],
+        [189, 0, 120, ""],
+        [191, 1, 121, ""],
+        [193, 0, 121, ""],
+        [194, 3, 118, ""],
+        [195, 0, 122, ""],
+        [217, 1, 125, ""],
+        [219, 0, 123, ""],
+        [227, 3, 123, ""],
+        [231, 0, 124, ""],
+        [234, 3, 124, ""],
+        [236, 0, 125, ""]
+      ]
+    },
+    {
+      "source": "src/game/blue_sphere/sk/results_widgets.s",
+      "tokens": [
+        [1, 0, 126, ""],
+        [3, 2, 127, ""],
+        [4, 0, 127, ""],
+        [6, 1, 129, ""],
+        [8, 1, 128, ""],
+        [18, 0, 128, ""],
+        [19, 2, 131, ""],
+        [20, 0, 129, ""],
+        [22, 1, 130, ""],
+        [24, 1, 130, ""],
+        [26, 0, 130, ""],
+        [28, 0, 131, ""],
+        [30, 1, 132, ""],
+        [32, 1, 133, ""],
+        [33, 0, 132, ""],
+        [35, 1, 134, ""],
+        [36, 0, 133, ""],
+        [38, 0, 134, ""],
+        [41, 1, 136, ""],
+        [44, 0, 135, ""],
+        [47, 3, 135, ""],
+        [48, 0, 136, ""],
+        [50, 0, 137, ""],
+        [60, 1, 139, ""],
+        [66, 0, 138, ""],
+        [68, 3, 138, ""],
+        [69, 2, 141, ""],
+        [70, 1, 141, ""],
+        [71, 0, 139, ""],
+        [72, 2, 140, ""],
+        [73, 0, 140, ""],
+        [77, 0, 141, ""],
+        [81, 0, 142, ""],
+        [86, 0, 143, ""],
+        [87, 2, 145, ""],
+        [98, 3, 143, ""],
+        [99, 2, 144, ""],
+        [100, 0, 144, ""],
+        [107, 0, 145, ""],
+        [121, 0, 146, ""],
+        [136, 0, 147, ""],
+        [138, 2, 80, ""],
+        [142, 3, 147, ""],
+        [145, 2, 148, ""],
+        [146, 0, 148, ""],
+        [152, 1, 149, ""],
+        [156, 1, 149, ""],
+        [161, 0, 149, ""],
+        [164, 1, 150, ""],
+        [166, 0, 150, ""]
+      ]
+    },
+    {
+      "source": "src/game/blue_sphere/sk/stage_selection.s",
+      "tokens": [
+        [1, 0, 151, ""],
+        [3, 1, 155, ""],
+        [4, 2, 152, ""],
+        [5, 0, 152, ""],
+        [7, 1, 153, ""],
+        [10, 1, 154, ""],
+        [11, 0, 153, ""],
+        [13, 0, 154, ""],
+        [26, 0, 155, ""],
+        [27, 2, 158, ""],
+        [28, 2, 166, ""],
+        [32, 2, 91, ""],
+        [33, 2, 91, ""],
+        [36, 1, 156, ""],
+        [38, 2, 49, ""],
+        [40, 2, 50, ""],
+        [42, 2, 89, ""],
+        [45, 0, 156, ""],
+        [47, 1, 157, ""],
+        [49, 1, 157, ""],
+        [50, 2, 50, ""],
+        [52, 0, 157, ""],
+        [54, 0, 158, ""],
+        [56, 1, 164, ""],
+        [58, 1, 161, ""],
+        [61, 1, 159, ""],
+        [63, 0, 159, ""],
+        [66, 0, 160, ""],
+        [69, 3, 160, ""],
+        [70, 0, 161, ""],
+        [72, 1, 163, ""],
+        [75, 1, 162, ""],
+        [77, 1, 162, ""],
+        [81, 0, 162, ""],
+        [83, 1, 163, ""],
+        [85, 1, 163, ""],
+        [90, 1, 163, ""],
+        [93, 0, 163, ""],
+        [95, 1, 165, ""],
+        [96, 0, 164, ""],
+        [99, 1, 165, ""],
+        [107, 0, 165, ""],
+        [109, 0, 166, ""],
+        [122, 0, 167, ""],
+        [124, 2, 71, ""],
+        [128, 3, 167, ""],
+        [130, 2, 168, ""],
+        [131, 0, 168, ""],
+        [133, 1, 169, ""],
+        [135, 1, 170, ""],
+        [137, 1, 171, ""],
+        [138, 0, 169, ""],
+        [150, 1, 172, ""],
+        [151, 0, 170, ""],
+        [153, 1, 169, ""],
+        [154, 0, 171, ""],
+        [160, 0, 172, ""],
+        [166, 1, 191, ""],
+        [168, 0, 173, ""],
+        [172, 0, 174, ""],
+        [174, 1, 175, ""],
+        [176, 1, 174, ""],
+        [177, 0, 175, ""],
+        [180, 3, 173, ""],
+        [184, 0, 176, ""],
+        [188, 3, 176, ""],
+        [194, 1, 191, ""],
+        [197, 0, 177, ""],
+        [201, 0, 178, ""],
+        [203, 1, 179, ""],
+        [205, 1, 178, ""],
+        [206, 0, 179, ""],
+        [209, 1, 180, ""],
+        [211, 1, 180, ""],
+        [214, 0, 180, ""],
+        [216, 1, 181, ""],
+        [218, 0, 181, ""],
+        [220, 3, 177, ""],
+        [229, 0, 182, ""],
+        [232, 3, 182, ""],
+        [233, 0, 183, ""],
+        [237, 3, 183, ""],
+        [243, 1, 192, ""],
+        [246, 0, 184, ""],
+        [250, 0, 185, ""],
+        [252, 1, 186, ""],
+        [254, 1, 185, ""],
+        [255, 0, 186, ""],
+        [258, 1, 187, ""],
+        [260, 1, 187, ""],
+        [263, 0, 187, ""],
+        [265, 1, 188, ""],
+        [267, 0, 188, ""],
+        [269, 3, 184, ""],
+        [278, 0, 189, ""],
+        [281, 3, 189, ""],
+        [282, 0, 190, ""],
+        [286, 3, 190, ""],
+        [289, 0, 191, ""],
+        [296, 0, 192, ""],
+        [298, 0, 193, ""],
+        [300, 1, 201, ""],
+        [301, 0, 194, ""],
+        [306, 0, 195, ""],
+        [309, 1, 196, ""],
+        [311, 1, 195, ""],
+        [312, 0, 196, ""],
+        [316, 3, 194, ""],
+        [318, 0, 197, ""],
+        [323, 1, 201, ""],
+        [324, 0, 198, ""],
+        [331, 1, 200, ""],
+        [332, 0, 199, ""],
+        [335, 3, 199, ""],
+        [336, 0, 200, ""],
+        [337, 3, 198, ""],
+        [339, 0, 201, ""]
+      ]
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_footer.s",
+      "tokens": [
+        [1, 0, 202, ""],
+        [6, 0, 203, ""],
+        [7, 1, 202, ""],
+        [10, 0, 204, ""],
+        [16, 1, 205, ""],
+        [18, 1, 205, ""],
+        [20, 0, 205, ""],
+        [24, 2, 206, ""],
+        [32, 3, 204, ""],
+        [33, 0, 206, ""],
+        [35, 1, 207, ""],
+        [38, 0, 207, ""],
+        [42, 0, 208, ""],
+        [50, 2, 209, ""],
+        [51, 0, 209, ""]
+      ]
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_mode.s",
+      "tokens": [
+        [52, 1, 210, ""],
+        [56, 0, 210, ""],
+        [61, 1, 211, ""],
+        [63, 0, 211, ""],
+        [64, 2, 151, ""],
+        [65, 2, 208, ""],
+        [66, 2, 203, ""],
+        [75, 0, 212, ""],
+        [84, 1, 212, ""],
+        [89, 1, 213, ""],
+        [91, 0, 213, ""],
+        [93, 0, 214, ""],
+        [95, 3, 214, ""],
+        [120, 0, 215, ""],
+        [124, 0, 216, ""],
+        [127, 1, 217, ""],
+        [129, 0, 217, ""],
+        [130, 3, 216, ""],
+        [132, 1, 219, ""],
+        [133, 3, 215, ""],
+        [137, 0, 218, ""],
+        [139, 0, 219, ""],
+        [142, 1, 218, ""],
+        [154, 0, 220, ""],
+        [157, 1, 221, ""],
+        [159, 1, 222, ""],
+        [160, 0, 221, ""],
+        [162, 3, 220, ""],
+        [163, 0, 222, ""],
+        [165, 0, 223, ""],
+        [169, 1, 224, ""],
+        [173, 0, 224, ""],
+        [174, 3, 223, ""],
+        [182, 0, 225, ""],
+        [184, 3, 225, ""],
+        [222, 1, 226, ""],
+        [224, 0, 226, ""]
+      ]
+    },
+    {
+      "source": "src/objects/interface/blue_sphere/sk/difficulty_banner_portrait.s",
+      "tokens": [
+        [7, 2, 228, ""],
+        [11, 1, 227, ""],
+        [12, 2, 229, ""],
+        [14, 0, 227, ""],
+        [16, 0, 228, ""],
+        [18, 0, 229, ""],
+        [37, 2, 230, ""],
+        [41, 0, 230, ""]
+      ]
+    },
+    {
+      "source": "src/objects/interface/blue_sphere/sk/difficulty_widgets.s",
+      "tokens": [
+        [32, 1, 232, ""],
+        [33, 2, 233, ""],
+        [35, 1, 231, ""],
+        [36, 2, 234, ""],
+        [37, 0, 231, ""],
+        [39, 0, 232, ""],
+        [41, 0, 233, ""],
+        [45, 0, 234, ""]
+      ]
+    }
+  ]
+}

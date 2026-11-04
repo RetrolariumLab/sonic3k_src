@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 166
+    "commit_count": 167
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -1043,9 +1043,15 @@
       "commits": ["d43a0fae61586d42db5b2daa10885305a960dac6"]
     },
     {
-      "id": "current-shorten-60-special-stage",
+      "id": "change-ef6aee24e7fe",
       "kind": "source_or_tooling",
       "summary": "Apply 446 reviewed short labels for special stage.",
+      "commits": ["ef6aee24e7fe447044e576a37b7a160062e3e0d7"]
+    },
+    {
+      "id": "current-shorten-61-blue-sphere",
+      "kind": "source_or_tooling",
+      "summary": "Apply 150 reviewed short labels for blue sphere.",
       "commits": ["release-commit"]
     }
   ],

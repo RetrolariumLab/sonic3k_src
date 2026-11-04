@@ -11,13 +11,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 44
       },
-      "declarations_sha256": "502ed1ff651bc71388da375af77780edec1e634688c0723db53f070a0bc4d706",
+      "declarations_sha256": "a609c39ced0dc380fc03964c591b8ac5e749780786d4b1860abc850b40101731",
       "labels": {
         "Ani_BlueSphereCharSprite_": 0,
-        "byte_4DA0C": 8,
-        "byte_4DA15": 17,
-        "byte_4DA1A": 22,
-        "byte_4DA1F": 27
+        "BSFooter_LeftmostAnim": 8,
+        "BlueSphereFooter_AnimateSecondTallSprite": 17,
+        "BlueSphereFooter_AnimateThirdWideSprite": 22,
+        "BSFooter_RightmostAnim": 27
       },
       "external_symbols": [],
       "blocks": [
@@ -25,28 +25,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4DA1F",
+          "target": "BSFooter_RightmostAnim",
           "base": "Ani_BlueSphereCharSprite_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4DA1A",
+          "target": "BlueSphereFooter_AnimateThirdWideSprite",
           "base": "Ani_BlueSphereCharSprite_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4DA15",
+          "target": "BlueSphereFooter_AnimateSecondTallSprite",
           "base": "Ani_BlueSphereCharSprite_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4DA0C",
+          "target": "BSFooter_LeftmostAnim",
           "base": "Ani_BlueSphereCharSprite_"
         },
         {
@@ -84,18 +84,18 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 162
       },
-      "declarations_sha256": "002b5534ab7dc3bbcad1d77ba9003e4e0ea75c6e64cf8a03970eeec82c02f269",
+      "declarations_sha256": "0b46efc4b3011ff892772f635d78cb78b89a14628367d32f0a177acd01416b65",
       "labels": {
         "Map_BlueSphereCharSprite_": 0,
-        "word_188E8E": 18,
-        "word_188E96": 26,
-        "word_188E9E": 34,
-        "word_188EA6": 42,
-        "word_188EBA": 62,
-        "word_188ECE": 82,
-        "word_188ED6": 90,
-        "word_188EDE": 98,
-        "word_188EFE": 130
+        "BSFooter_LeftmostMap1": 18,
+        "BSFooter_LeftmostMap2": 26,
+        "BSFooter_LeftmostMap3": 34,
+        "BSFooter_SecondActorMap1": 42,
+        "BSFooter_SecondActorMap2": 62,
+        "BSFooter_ThirdActorMap1": 82,
+        "BSFooter_ThirdActorMap2": 90,
+        "BSFooter_RightmostMap1": 98,
+        "BSFooter_RightmostMap2": 130
       },
       "external_symbols": [],
       "blocks": [
@@ -103,63 +103,63 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_188E8E",
+          "target": "BSFooter_LeftmostMap1",
           "base": "Map_BlueSphereCharSprite_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_188E96",
+          "target": "BSFooter_LeftmostMap2",
           "base": "Map_BlueSphereCharSprite_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_188E9E",
+          "target": "BSFooter_LeftmostMap3",
           "base": "Map_BlueSphereCharSprite_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_188EA6",
+          "target": "BSFooter_SecondActorMap1",
           "base": "Map_BlueSphereCharSprite_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_188EBA",
+          "target": "BSFooter_SecondActorMap2",
           "base": "Map_BlueSphereCharSprite_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_188ECE",
+          "target": "BSFooter_ThirdActorMap1",
           "base": "Map_BlueSphereCharSprite_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_188ED6",
+          "target": "BSFooter_ThirdActorMap2",
           "base": "Map_BlueSphereCharSprite_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_188EDE",
+          "target": "BSFooter_RightmostMap1",
           "base": "Map_BlueSphereCharSprite_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_188EFE",
+          "target": "BSFooter_RightmostMap2",
           "base": "Map_BlueSphereCharSprite_"
         },
         {
@@ -218,10 +218,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 22
       },
-      "declarations_sha256": "de7b9ac672338cd8e3048b8c529ddc7ea3cf527418fc1ebccb035fc7eeff4742",
+      "declarations_sha256": "d7e3246d83f7d56974b4634b9cb73267f0c02af845553da3c561c7e6d5d0dc96",
       "labels": {
         "Map_BlueSpheresCopyright_": 0,
-        "word_4DA6A": 2
+        "BlueSphereCopyright_StaticFooterPieces": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -229,7 +229,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4DA6A",
+          "target": "BlueSphereCopyright_StaticFooterPieces",
           "base": "Map_BlueSpheresCopyright_"
         },
         {
@@ -248,21 +248,21 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 120
       },
-      "declarations_sha256": "18b38bd58f2bf7d40551190e6b4976f8f4228d95446f8cc5cdad75dcfdea13fc",
+      "declarations_sha256": "77b182478b67f83f8638003e2361e2557bad04daa37895c95a073eaacc51fb1d",
       "labels": {
         "Map_BlueSpheresNum_": 0,
-        "word_4D8C6": 24,
-        "word_4D8CE": 32,
-        "word_4D8D6": 40,
-        "word_4D8DE": 48,
-        "word_4D8E6": 56,
-        "word_4D8EE": 64,
-        "word_4D8F6": 72,
-        "word_4D8FE": 80,
-        "word_4D906": 88,
-        "word_4D90E": 96,
-        "word_4D916": 104,
-        "word_4D91E": 112
+        "BlueSphereDigit_ZeroPieces": 24,
+        "BlueSphereDigit_OnePieces": 32,
+        "BlueSphereDigit_TwoPieces": 40,
+        "BlueSphereDigit_ThreePieces": 48,
+        "BlueSphereDigit_FourPieces": 56,
+        "BlueSphereDigit_FivePieces": 64,
+        "BlueSphereDigit_SixPieces": 72,
+        "BlueSphereDigit_SevenPieces": 80,
+        "BlueSphereDigit_EightPieces": 88,
+        "BlueSphereDigit_NinePieces": 96,
+        "BSDigit_SuppressedAndSpacerMap": 104,
+        "BlueSphereDigit_TrailingSpacerPieces": 112
       },
       "external_symbols": [],
       "blocks": [
@@ -270,84 +270,84 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D8C6",
+          "target": "BlueSphereDigit_ZeroPieces",
           "base": "Map_BlueSpheresNum_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D8CE",
+          "target": "BlueSphereDigit_OnePieces",
           "base": "Map_BlueSpheresNum_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D8D6",
+          "target": "BlueSphereDigit_TwoPieces",
           "base": "Map_BlueSpheresNum_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D8DE",
+          "target": "BlueSphereDigit_ThreePieces",
           "base": "Map_BlueSpheresNum_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D8E6",
+          "target": "BlueSphereDigit_FourPieces",
           "base": "Map_BlueSpheresNum_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D8EE",
+          "target": "BlueSphereDigit_FivePieces",
           "base": "Map_BlueSpheresNum_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D8F6",
+          "target": "BlueSphereDigit_SixPieces",
           "base": "Map_BlueSpheresNum_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D8FE",
+          "target": "BlueSphereDigit_SevenPieces",
           "base": "Map_BlueSpheresNum_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D906",
+          "target": "BlueSphereDigit_EightPieces",
           "base": "Map_BlueSpheresNum_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D90E",
+          "target": "BlueSphereDigit_NinePieces",
           "base": "Map_BlueSpheresNum_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D916",
+          "target": "BSDigit_SuppressedAndSpacerMap",
           "base": "Map_BlueSpheresNum_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D91E",
+          "target": "BlueSphereDigit_TrailingSpacerPieces",
           "base": "Map_BlueSpheresNum_"
         },
         {
@@ -421,16 +421,16 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 70
       },
-      "declarations_sha256": "488f880ca08a26fe7033037315276de6678158215b116b1b89bc073b9b2671aa",
+      "declarations_sha256": "a88f99f08e5c9fb6da0ec4c5d8adc0e103ff6d341fecd2eb93c3e76622d8bc7e",
       "labels": {
         "Map_BSResultsEmerald_": 0,
-        "word_4E324": 14,
-        "word_4E32C": 22,
-        "word_4E334": 30,
-        "word_4E33C": 38,
-        "word_4E344": 46,
-        "word_4E34C": 54,
-        "word_4E354": 62
+        "BSResults_OrbitEmeraldMap1": 14,
+        "BSResults_OrbitEmeraldMap2": 22,
+        "BSResults_OrbitEmeraldMap3": 30,
+        "BSResults_OrbitEmeraldMap4": 38,
+        "BSResults_OrbitEmeraldMap5": 46,
+        "BSResults_OrbitEmeraldMap6": 54,
+        "BSResults_OrbitEmeraldMap7": 62
       },
       "external_symbols": [],
       "blocks": [
@@ -438,49 +438,49 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4E324",
+          "target": "BSResults_OrbitEmeraldMap1",
           "base": "Map_BSResultsEmerald_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4E32C",
+          "target": "BSResults_OrbitEmeraldMap2",
           "base": "Map_BSResultsEmerald_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4E334",
+          "target": "BSResults_OrbitEmeraldMap3",
           "base": "Map_BSResultsEmerald_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4E33C",
+          "target": "BSResults_OrbitEmeraldMap4",
           "base": "Map_BSResultsEmerald_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4E344",
+          "target": "BSResults_OrbitEmeraldMap5",
           "base": "Map_BSResultsEmerald_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4E34C",
+          "target": "BSResults_OrbitEmeraldMap6",
           "base": "Map_BSResultsEmerald_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4E354",
+          "target": "BSResults_OrbitEmeraldMap7",
           "base": "Map_BSResultsEmerald_"
         },
         {
@@ -529,17 +529,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 80
       },
-      "declarations_sha256": "82b44dace1ea1fe0dff8f25c39ba98f7e336518ae510892240f9308e8a548464",
+      "declarations_sha256": "8df5e928d8a569ff3b5ac131d322842cc085ee0f51065abdab37a40968e75788",
       "labels": {
         "Map_BlueSpheresIcon_": 0,
-        "word_4D936": 16,
-        "word_4D93E": 24,
-        "word_4D946": 32,
-        "word_4D94E": 40,
-        "word_4D956": 48,
-        "word_4D95E": 56,
-        "word_4D966": 64,
-        "word_4D96E": 72
+        "BSOptionIcon_RotationMap1": 16,
+        "BSOptionIcon_RotationMap2": 24,
+        "BSOptionIcon_RotationMap3": 32,
+        "BSOptionIcon_RotationMap4": 40,
+        "BSOptionIcon_RotationMap5": 48,
+        "BSOptionIcon_FlippedRotationMap6": 56,
+        "BSOptionIcon_FlippedRotationMap7": 64,
+        "BSOptionIcon_FlippedRotationMap8": 72
       },
       "external_symbols": [],
       "blocks": [
@@ -547,56 +547,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D936",
+          "target": "BSOptionIcon_RotationMap1",
           "base": "Map_BlueSpheresIcon_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D93E",
+          "target": "BSOptionIcon_RotationMap2",
           "base": "Map_BlueSpheresIcon_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D946",
+          "target": "BSOptionIcon_RotationMap3",
           "base": "Map_BlueSpheresIcon_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D94E",
+          "target": "BSOptionIcon_RotationMap4",
           "base": "Map_BlueSpheresIcon_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D956",
+          "target": "BSOptionIcon_RotationMap5",
           "base": "Map_BlueSpheresIcon_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D95E",
+          "target": "BSOptionIcon_FlippedRotationMap6",
           "base": "Map_BlueSpheresIcon_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D966",
+          "target": "BSOptionIcon_FlippedRotationMap7",
           "base": "Map_BlueSpheresIcon_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D96E",
+          "target": "BSOptionIcon_FlippedRotationMap8",
           "base": "Map_BlueSpheresIcon_"
         },
         {
@@ -650,10 +650,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 22
       },
-      "declarations_sha256": "a9ec7ce506e159d40c58024d47cd5a5e411ee53ff0104e1b933551db65a58394",
+      "declarations_sha256": "7f1dbbe22315f4268fd47f36fced5d74b9ac5a18517f29b5c2e0d63c67b3f8a6",
       "labels": {
         "Map_BSTailsPose_": 0,
-        "word_4E2A4": 2
+        "BSDifficulty_TailsStaticMap": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -661,7 +661,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4E2A4",
+          "target": "BSDifficulty_TailsStaticMap",
           "base": "Map_BSTailsPose_"
         },
         {
@@ -680,15 +680,15 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 240
       },
-      "declarations_sha256": "1dc51af7520b9d30310dfd796e9be1cf199b51981e466550b849db9c647f885a",
+      "declarations_sha256": "2ae69a4a9a555cccde254cedfb5d6a0276e39aa3478e9ce610f930623e7b8c29",
       "labels": {
         "Map_BlueSpheresText_": 0,
-        "word_4D7CA": 12,
-        "word_4D7E4": 38,
-        "word_4D804": 70,
-        "word_4D818": 90,
-        "word_4D838": 122,
-        "word_4D86A": 172
+        "BSText_LevelSelectionMap": 12,
+        "BSText_PackedStageSelectionMap": 38,
+        "BSText_CodeEntryMap": 70,
+        "BSText_PlayerOptionMap": 90,
+        "BSText_DifficultyMap": 122,
+        "BSText_FinalDifficultyMap": 172
       },
       "external_symbols": [],
       "blocks": [
@@ -696,42 +696,42 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D7CA",
+          "target": "BSText_LevelSelectionMap",
           "base": "Map_BlueSpheresText_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D7E4",
+          "target": "BSText_PackedStageSelectionMap",
           "base": "Map_BlueSpheresText_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D804",
+          "target": "BSText_CodeEntryMap",
           "base": "Map_BlueSpheresText_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D818",
+          "target": "BSText_PlayerOptionMap",
           "base": "Map_BlueSpheresText_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D838",
+          "target": "BSText_DifficultyMap",
           "base": "Map_BlueSpheresText_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D86A",
+          "target": "BSText_FinalDifficultyMap",
           "base": "Map_BlueSpheresText_"
         },
         {

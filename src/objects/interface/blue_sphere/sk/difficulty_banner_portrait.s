@@ -9,23 +9,23 @@ Obj_Difficulty_SKLogo:
                 move.w  #$280,priority(a0)
                 move.b  #$40,width_pixels(a0)
                 move.b  #$14,height_pixels(a0)
-                move.l  #loc_5FB14,(a0)
+                move.l  #SKDifficultyBanner_QueueDraw,(a0)
                 move.w  #$120,x_pos(a0)
                 move.w  #$A0,y_pos(a0)
                 jsr     (AllocateObject).l
-                bne.s   locret_5FB12
-                move.l  #loc_5FB1A,(a1)
+                bne.s   BSDifficulty_WordmarkSpawnReturn
+                move.l  #BSDifficulty_InitKnucklesWordmarkIfShown,(a1)
                 move.w  a0,parent3(a1)
 
-locret_5FB12:
+BSDifficulty_WordmarkSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5FB14:
+SKDifficultyBanner_QueueDraw:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5FB1A:
+BSDifficulty_InitKnucklesWordmarkIfShown:
                 tst.b   (Graphics_flags).w
                 bpl.w   loc_5EC36
                 move.l  #Map_ANDKnuckles,mappings(a0)
@@ -46,13 +46,13 @@ Obj_Difficulty_Eggman:
                 move.w  #$280,priority(a0)
                 move.b  #$20,width_pixels(a0)
                 move.b  #$20,height_pixels(a0)
-                move.l  #loc_5FB90,(a0)
+                move.l  #BSDifficulty_AnimateAndDrawEggman,(a0)
                 move.w  #$168,x_pos(a0)
                 move.w  #$108,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5FB90:
+BSDifficulty_AnimateAndDrawEggman:
                 lea     AniRaw_602C6(pc),a1
                 jsr     (Animate_RawNoSST).l
                 jmp     (Draw_Sprite).l

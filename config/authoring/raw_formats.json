@@ -5,7 +5,7 @@
   "consumer_sources": [
     {
       "path": "src/game/blue_sphere/sk/mode_widgets.s",
-      "sha256": "d9981819f39de853012167789be8461635a085df6fb94553044515a0a051cc5b"
+      "sha256": "758421b8ded6fc5d54d0bb64103dc84a7ce845a6fdcd944acdc13223342790d2"
     },
     {
       "path": "src/game/level/zones/aiz/s3/act2_air_raid.s",
@@ -897,7 +897,7 @@
     },
     {
       "path": "src/objects/interface/blue_sphere/sk/difficulty_banner_portrait.s",
-      "sha256": "82266eecbb95aed11ed80bfb122221d4f5ef9d49077224ed6f7025124e806d63"
+      "sha256": "c9151ac83c78717391c3bf86774362aebe35a6c730385cf829e3ae2556ca94be"
     },
     {
       "path": "src/objects/interface/continue/sk/characters.s",

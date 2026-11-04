@@ -3629,7 +3629,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_4D5FA",
+          "name": "BlueSphereDigit_InitializeEditableCode",
           "kind": "terminal-tail",
           "reason": "The final digit display actor keeps its conditional early return and final drawing-service tail call together.",
           "origin_first_line": 3508,
@@ -3702,7 +3702,7 @@
       "responsibility": "Blue Sphere menu input, stage selection, stage-number widgets and numeric encoding helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 444,
+      "physical_lines": 445,
       "origin": {
         "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
         "path": "sonic3k.s",
@@ -3744,7 +3744,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "Obj_SpheresTitle_4D610",
+          "name": "BlueSphereInitStartRowCaption",
           "kind": "terminal-tail",
           "reason": "The complete mode-label actor ends in a drawing-service tail call.",
           "origin_first_line": 3522,
@@ -3752,7 +3752,7 @@
           "origin_end_line": 3534
         },
         {
-          "name": "Obj_SpheresTitle_4D64E",
+          "name": "BlueSphereInitRotatingSelectionIcon",
           "kind": "terminal-tail",
           "reason": "The complete rotating option-icon family ends in a drawing-service tail call followed by private position records.",
           "origin_first_line": 3537,
@@ -3867,7 +3867,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "Obj_SpheresTitle_4D986",
+          "name": "BlueSphereTitleCharacters_Initialize",
           "kind": "terminal-tail",
           "reason": "The complete title character-sprite family ends in a drawing-service tail call followed by checked animation resources.",
           "origin_first_line": 3681,
@@ -3875,7 +3875,7 @@
           "origin_end_line": 3721
         },
         {
-          "name": "Obj_SpheresTitle_4DA30",
+          "name": "BlueSphereCopyright_Initialize",
           "kind": "terminal-tail",
           "reason": "The complete copyright display actor ends in a drawing-service tail call followed by checked mapping resources.",
           "origin_first_line": 3724,
@@ -3938,7 +3938,7 @@
       "responsibility": "Blue Sphere title mode, display setup, serial and date text and title helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 346,
+      "physical_lines": 347,
       "origin": {
         "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
         "path": "sonic3k.s",

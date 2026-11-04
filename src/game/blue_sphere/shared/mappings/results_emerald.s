@@ -1,24 +1,24 @@
 ; Data owner: game/blue_sphere/shared/blue_sphere
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_BSResultsEmerald_:
-                dc.w    word_4E324-Map_BSResultsEmerald_
-                dc.w    word_4E32C-Map_BSResultsEmerald_
-                dc.w    word_4E334-Map_BSResultsEmerald_
-                dc.w    word_4E33C-Map_BSResultsEmerald_
-                dc.w    word_4E344-Map_BSResultsEmerald_
-                dc.w    word_4E34C-Map_BSResultsEmerald_
-                dc.w    word_4E354-Map_BSResultsEmerald_
-word_4E324:     dc.w    1
+                dc.w    BSResults_OrbitEmeraldMap1-Map_BSResultsEmerald_
+                dc.w    BSResults_OrbitEmeraldMap2-Map_BSResultsEmerald_
+                dc.w    BSResults_OrbitEmeraldMap3-Map_BSResultsEmerald_
+                dc.w    BSResults_OrbitEmeraldMap4-Map_BSResultsEmerald_
+                dc.w    BSResults_OrbitEmeraldMap5-Map_BSResultsEmerald_
+                dc.w    BSResults_OrbitEmeraldMap6-Map_BSResultsEmerald_
+                dc.w    BSResults_OrbitEmeraldMap7-Map_BSResultsEmerald_
+BSResults_OrbitEmeraldMap1: dc.w    1
                 dc.b    $F8,   5, $40, $4C, $FF, $F8
-word_4E32C:     dc.w    1
+BSResults_OrbitEmeraldMap2: dc.w    1
                 dc.b    $F8,   5, $40, $48, $FF, $F8
-word_4E334:     dc.w    1
+BSResults_OrbitEmeraldMap3: dc.w    1
                 dc.b    $F8,   5, $40, $50, $FF, $F8
-word_4E33C:     dc.w    1
+BSResults_OrbitEmeraldMap4: dc.w    1
                 dc.b    $F8,   5, $20, $48, $FF, $F8
-word_4E344:     dc.w    1
+BSResults_OrbitEmeraldMap5: dc.w    1
                 dc.b    $F8,   5,   0, $58, $FF, $F8
-word_4E34C:     dc.w    1
+BSResults_OrbitEmeraldMap6: dc.w    1
                 dc.b    $F8,   5,   0, $54, $FF, $F8
-word_4E354:     dc.w    1
+BSResults_OrbitEmeraldMap7: dc.w    1
                 dc.b    $F8,   5, $20, $4C, $FF, $F8

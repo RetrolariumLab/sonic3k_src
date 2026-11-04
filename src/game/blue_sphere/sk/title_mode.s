@@ -55,23 +55,23 @@ BlueSpheresTitle:
                 jsr     (Plane_Map_To_VRAM).l
                 lea     aGetBlueSpheres(pc),a1
                 tst.b   (Blue_spheres_menu_flag).w
-                bne.s   loc_4CA8C
+                bne.s   BSTitle_UploadHeadingAndSetScroll
                 lea     aNoWayNoWayNoWa(pc),a1
                 move.w  #1,(Player_option).w
                 move.l  #$FFF0FFF8,(V_scroll_value).w
 
-loc_4CA8C:
+BSTitle_UploadHeadingAndSetScroll:
                 move.w  #$100,d2
                 move.w  #make_art_tile(ArtTile_BlueSphere_TitleText,0,0),d6
                 jsr     (SKCredits_BuildAndUploadText).l
                 tst.b   (Blue_spheres_mode).w
-                bne.s   loc_4CAA8
+                bne.s   BSTitle_InstallActorsAndFadeIn
                 move.l  #$FFF0FFF8,(V_scroll_value).w
 
-loc_4CAA8:
-                move.l  #Obj_SpheresTitle_4CEAA,(Player_1).w
-                move.l  #Obj_SpheresTitle_4DA30,(Player_2).w
-                move.l  #Obj_SpheresTitle_4D986,(Reserved_object_3).w
+BSTitle_InstallActorsAndFadeIn:
+                move.l  #BlueSphereSelection_InitializeController,(Player_1).w
+                move.l  #BlueSphereCopyright_Initialize,(Player_2).w
+                move.l  #BlueSphereTitleCharacters_Initialize,(Reserved_object_3).w
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
                 moveq   #signextendB(mus_Continue),d0
@@ -81,7 +81,7 @@ loc_4CAA8:
                 move.w  d0,(VDP_control_port).l
                 jsr     (Pal_FadeFromBlack).l
 
-loc_4CAE8:
+BSTitle_RunTitleUntilModeChanges:
                 move.b  #VInt_ID_1A,(V_int_routine).w
                 jsr     (Process_Kos_Queue).l
                 jsr     (Wait_VSync).l
@@ -90,7 +90,7 @@ loc_4CAE8:
                 jsr     (Render_Sprites).l
                 jsr     (Process_Kos_Module_Queue).l
                 cmpi.b  #GameMode_BlueSpheresTitle,(Game_mode).w
-                beq.s   loc_4CAE8
+                beq.s   BSTitle_RunTitleUntilModeChanges
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -99,15 +99,15 @@ loc_4CAE8:
 BlueSphere_CopyProgressPalette:
                 lea     (Pal_SpheresTitle_2).l,a1
                 tst.b   (Blue_spheres_progress_flag).w
-                bne.s   loc_4CB2C
+                bne.s   BSTitle_Set64WordPaletteCount
                 lea     (Pal_SpheresTitle_1).l,a1
 
-loc_4CB2C:
+BSTitle_Set64WordPaletteCount:
                 moveq   #bytesToWcnt($80),d0
 
-loc_4CB2E:
+BSTitle_CopyFullPalette:
                 move.w  (a1)+,(a2)+
-                dbf     d0,loc_4CB2E
+                dbf     d0,BSTitle_CopyFullPalette
                 rts
 ; End of function BlueSphere_CopyProgressPalette
 
@@ -146,34 +146,34 @@ BlueSphere_InitSelectionFromSerial:
                 lea     (BlueSpheresSerialsText).l,a1
                 moveq   #4-1,d1
 
-loc_4CCAE:
+BSTitle_Begin13ByteSerialWindow:
                 lea     (LockonSerialNumber).l,a0
                 moveq   #0,d3
                 moveq   #$D-1,d2
 
-loc_4CCB8:
+BSTitle_CompareByteAndLatchMismatch:
                 move.b  (a1)+,d0
                 cmp.b   (a0)+,d0
-                beq.s   loc_4CCC0
+                beq.s   BSTitle_FinishOrAdvanceSerialWindow
                 moveq   #1,d3
 
-loc_4CCC0:
-                dbf     d2,loc_4CCB8
+BSTitle_FinishOrAdvanceSerialWindow:
+                dbf     d2,BSTitle_CompareByteAndLatchMismatch
                 tst.b   d3
-                beq.s   loc_4CCDC
-                dbf     d1,loc_4CCAE
+                beq.s   BSTitle_EnableModeAndCheckReset
+                dbf     d1,BSTitle_Begin13ByteSerialWindow
                 move.b  #0,(Blue_spheres_mode).w
                 move.b  #-1,(Blue_spheres_progress_flag).w
                 bsr.s   BlueSphere_DeriveLevelFromHeader
 
-locret_4CCDA:
+BSTitle_SerialModeInitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4CCDC:
+BSTitle_EnableModeAndCheckReset:
                 move.b  #1,(Blue_spheres_mode).w
                 tst.b   (Blue_spheres_menu_flag).w
-                bne.s   locret_4CCDA
+                bne.s   BSTitle_SerialModeInitReturn
                 clr.b   (Blue_spheres_progress_flag).w
                 move.l  #0,(Blue_spheres_current_level).w
                 move.l  #$10203,(Blue_spheres_current_stage).w
@@ -193,31 +193,32 @@ BlueSphere_DeriveLevelFromHeader:
                 lea     (LockonSerialNumber).l,a1
                 moveq   #$B-1,d1
 
-loc_4CD20:
+BSTitle_FindFirstNonzeroSerialDigit:
                 move.b  (a1),d0
                 subi.b  #'0',d0
-                beq.s   loc_4CD2E
+                beq.s   BSTitle_SkipZeroOrNondigit
                 cmpi.b  #10,d0
-                blo.s   loc_4CD34
+                blo.s   BSTitle_ClearSerialAccumulator
 
-loc_4CD2E:
+BSTitle_SkipZeroOrNondigit:
                 addq.w  #1,a1
-                dbf     d1,loc_4CD20
+                dbf     d1,BSTitle_FindFirstNonzeroSerialDigit
 
-loc_4CD34:
+BSTitle_ClearSerialAccumulator:
                 moveq   #0,d2
 
-loc_4CD36:
+; Decimal accumulation wraps to a word on each accepted digit
+BSTitle_AccumulateSerialDigits:
                 move.b  (a1)+,d0
                 subi.b  #$30,d0
                 cmpi.b  #$A,d0
-                bhs.s   loc_4CD4C
+                bhs.s   BSTitle_FinishDigitsAndPackHeader
                 andi.b  #$F,d0
                 mulu.w  #$A,d2
                 add.w   d0,d2
 
-loc_4CD4C:
-                dbf     d1,loc_4CD36
+BSTitle_FinishDigitsAndPackHeader:
+                dbf     d1,BSTitle_AccumulateSerialDigits
                 andi.w  #$7FFF,d2
                 moveq   #0,d6
                 move.w  d2,d6
@@ -226,9 +227,9 @@ loc_4CD4C:
                 move.l  (LockonDate).l,d0
                 moveq   #$E,d1
 
-loc_4CD6A:
+BSTitle_MapDateAndPackSerialHeader:
                 cmp.l   (a2)+,d0
-                dbeq    d1,loc_4CD6A
+                dbeq    d1,BSTitle_MapDateAndPackSerialHeader
                 subi.w  #$E,d1
                 neg.w   d1
                 andi.w  #$F,d1
@@ -266,10 +267,10 @@ loc_4CD6A:
                 or.b    d0,d6
                 moveq   #0,d1
                 cmpi.w  #"EG",(SSMagic_TestLoc_200114).l
-                beq.s   loc_4CDE6
+                beq.s   BSTitle_Finish27BitLevelAndResidues
                 moveq   #1,d1
 
-loc_4CDE6:
+BSTitle_Finish27BitLevelAndResidues:
                 lsl.l   #1,d6
                 or.b    d1,d6
                 move.b  (Blue_spheres_header_flag).w,d1

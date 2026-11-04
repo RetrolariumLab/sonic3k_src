@@ -11,9 +11,9 @@ BlueSpheresResults:
                 lea     (Target_palette).w,a2
                 moveq   #bytesToWcnt($80),d0
 
-loc_4DA96:
+BSResults_CopyPaletteAndLoadScene:
                 move.w  (a1)+,(a2)+
-                dbf     d0,loc_4DA96
+                dbf     d0,BSResults_CopyPaletteAndLoadScene
                 lea     (RAM_start).l,a1
                 lea     (ArtKos_SSResultsGeneral).l,a0
                 jsr     (Kos_Decomp).l
@@ -47,11 +47,11 @@ loc_4DA96:
                 jsr     (Eni_Decomp).l
                 bsr.w   BlueSphere_TileResultsLogoBg
                 move.b  #1,(Blue_spheres_option).w
-                move.l  #Obj_SphereResults_4DEF8,(Player_1).w
-                move.l  #Obj_SphereResults_4DF86,(Player_2).w
-                move.l  #Obj_SpheresTitle_4D03E,(Dynamic_object_RAM+(object_size*3)).w
+                move.l  #BSResults_InitExitAndPerfectController,(Player_1).w
+                move.l  #BlueSphereResultsInitPlayerDisplayActor,(Player_2).w
+                move.l  #BlueSphereNumberRow_Initialize,(Dynamic_object_RAM+(object_size*3)).w
                 move.w  #$90,(Dynamic_object_RAM+(object_size*3)+y_pos).w
-                move.l  #Obj_Sphere_Results_4E012,(Dynamic_object_RAM+(object_size*26)).w
+                move.l  #BSResults_InitSevenEmeraldOrbitActors,(Dynamic_object_RAM+(object_size*26)).w
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
                 moveq   #signextendB(mus_GotThroughAct),d0
@@ -61,7 +61,7 @@ loc_4DA96:
                 move.w  d0,(VDP_control_port).l
                 jsr     (Pal_FadeFromWhite).l
 
-loc_4DB9E:
+BSResults_RunSceneAndChooseProgression:
                 move.b  #VInt_ID_1A,(V_int_routine).w
                 jsr     (Process_Kos_Queue).l
                 jsr     (Wait_VSync).l
@@ -69,36 +69,36 @@ loc_4DB9E:
                 jsr     (Render_Sprites).l
                 jsr     (Process_Kos_Module_Queue).l
                 cmpi.b  #GameMode_BlueSpheresResults,(Game_mode).w
-                beq.s   loc_4DB9E
+                beq.s   BSResults_RunSceneAndChooseProgression
                 tst.w   (Special_stage_rings_left).w
-                beq.s   loc_4DC1A
+                beq.s   BSResults_RebuildPerfectRevealScene
                 tst.b   (Blue_spheres_progress_flag).w
-                bmi.s   locret_4DC18
+                bmi.s   BSResults_NormalProgressionReturn
                 tst.b   (Blue_spheres_mode).w
-                beq.s   locret_4DC18
+                beq.s   BSResults_NormalProgressionReturn
                 addq.l  #1,(Blue_spheres_current_level).w
                 lea     (Blue_spheres_current_stage).w,a2
                 addi.l  #$01030507,(a2)
                 andi.b  #$7F,(a2)
                 cmpi.b  #$7F,1(a2)
-                blo.s   loc_4DBFC
+                blo.s   BSResults_WrapThirdStageByte126
                 subi.b  #$7F,1(a2)
 
-loc_4DBFC:
+BSResults_WrapThirdStageByte126:
                 cmpi.b  #$7E,2(a2)
-                blo.s   loc_4DC0A
+                blo.s   BSResults_WrapFourthStageByte125
                 subi.b  #$7E,2(a2)
 
-loc_4DC0A:
+BSResults_WrapFourthStageByte125:
                 cmpi.b  #$7D,3(a2)
-                blo.s   locret_4DC18
+                blo.s   BSResults_NormalProgressionReturn
                 subi.b  #$7D,3(a2)
 
-locret_4DC18:
+BSResults_NormalProgressionReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4DC1A:
+BSResults_RebuildPerfectRevealScene:
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
                 jsr     (Pal_FadeToBlack).l
@@ -108,30 +108,30 @@ loc_4DC1A:
                 lea     (Target_palette).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_4DC48:
+BSResults_CopySonicAndTailsPalette:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_4DC48
+                dbf     d6,BSResults_CopySonicAndTailsPalette
                 lea     (Pal_Knuckles).l,a1
                 lea     (Target_palette_line_2).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_4DC5A:
+BSResults_CopyKnucklesPalette:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_4DC5A
+                dbf     d6,BSResults_CopyKnucklesPalette
                 lea     (Pal_SphereResults_3).l,a1
                 lea     (Target_palette_line_3).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_4DC6C:
+BSResults_CopyResultsPalette:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_4DC6C
+                dbf     d6,BSResults_CopyResultsPalette
                 lea     (Pal_EndingSKLogo).l,a1
                 lea     (Target_palette_line_4).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_4DC7E:
+BSResults_CopyLogoPalette:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_4DC7E
+                dbf     d6,BSResults_CopyLogoPalette
                 move.l  #vdpComm(tiles_to_bytes($000),VRAM,WRITE),(VDP_control_port).l
                 lea     (ArtNem_BlueSphereSKLogo).l,a0
                 jsr     (Nem_Decomp).l
@@ -158,9 +158,9 @@ loc_4DC7E:
                 move.w  #make_art_tile($000,2,0),d0
                 jsr     (Eni_Decomp).l
                 bsr.w   BlueSphere_TileResultsLogoBg
-                move.l  #Obj_SpheresTitle_4D03E,(Player_2).w
+                move.l  #BlueSphereNumberRow_Initialize,(Player_2).w
                 move.w  #$C0,(Player_2+y_pos).w
-                move.l  #Obj_SphereResults_4E0A4,(Dynamic_object_RAM+(object_size*10)).w
+                move.l  #BSResults_InitDifficultyProgressWidget,(Dynamic_object_RAM+(object_size*10)).w
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
                 clr.b   (Super_Sonic_Knux_flag).w
@@ -173,7 +173,7 @@ loc_4DC7E:
                 move.w  d0,(VDP_control_port).l
                 jsr     (Pal_FadeFromBlack).l
 
-loc_4DD5E:
+BSResults_WaitForTargetAndNewPress:
                 move.b  #VInt_ID_1A,(V_int_routine).w
                 jsr     (Process_Kos_Queue).l
                 jsr     (Wait_VSync).l
@@ -183,38 +183,38 @@ loc_4DD5E:
                 jsr     (SuperHyper_PalCycle).l
                 move.b  (Blue_spheres_difficulty).w,d1
                 cmp.b   (Blue_spheres_target_difficulty).w,d1
-                bne.s   loc_4DD5E
+                bne.s   BSResults_WaitForTargetAndNewPress
                 move.b  (Ctrl_1_pressed).w,d0
-                beq.s   loc_4DD5E
+                beq.s   BSResults_WaitForTargetAndNewPress
                 tst.b   (Blue_spheres_progress_flag).w
-                bmi.s   locret_4DDE6
+                bmi.s   BSResults_PerfectRevealReturn
                 tst.b   (Blue_spheres_mode).w
-                beq.s   locret_4DDE6
+                beq.s   BSResults_PerfectRevealReturn
                 lea     (Blue_spheres_current_stage).w,a2
                 moveq   #$A-1,d1
 
-loc_4DDAA:
+BSResults_AdvancePerfectProgressStep:
                 addq.l  #1,(Blue_spheres_current_level).w
                 addi.l  #$1030507,(a2)
                 andi.b  #$7F,(a2)
                 cmpi.b  #$7F,1(a2)
-                blo.s   loc_4DDC6
+                blo.s   BSResults_PerfectWrapThirdStageByte
                 subi.b  #$7F,1(a2)
 
-loc_4DDC6:
+BSResults_PerfectWrapThirdStageByte:
                 cmpi.b  #$7E,2(a2)
-                blo.s   loc_4DDD4
+                blo.s   BSResults_PerfectWrapFourthStageByte
                 subi.b  #$7E,2(a2)
 
-loc_4DDD4:
+BSResults_PerfectWrapFourthStageByte:
                 cmpi.b  #$7D,3(a2)
-                blo.s   loc_4DDE2
+                blo.s   BSResults_RepeatTenPerfectSteps
                 subi.b  #$7D,3(a2)
 
-loc_4DDE2:
-                dbf     d1,loc_4DDAA
+BSResults_RepeatTenPerfectSteps:
+                dbf     d1,BSResults_AdvancePerfectProgressStep
 
-locret_4DDE6:
+BSResults_PerfectRevealReturn:
                 rts
 ; ---------------------------------------------------------------------------
 PLC_SphereResults:  plrlistheader
@@ -242,10 +242,10 @@ aPerfect:
 
 ; Stamp the 12-by-8 map at fourteen plane B destinations and set the initial 16-pixel scroll offset
 BlueSphere_TileResultsLogoBg:
-                lea     word_4DEDC(pc),a2
+                lea     BSResults_LogoPlaneCommandHighWords(pc),a2
                 moveq   #$E-1,d5
 
-loc_4DEA8:
+BSResults_UploadFourteenLogoBlocks:
                 lea     (Level_layout_header).w,a1
                 move.w  (a2)+,d0
                 swap    d0
@@ -253,20 +253,20 @@ loc_4DEA8:
                 moveq   #12-1,d1
                 moveq   #8-1,d2
                 jsr     (Plane_Map_To_VRAM).l
-                dbf     d5,loc_4DEA8
+                dbf     d5,BSResults_UploadFourteenLogoBlocks
                 move.w  #$10,(V_scroll_value_BG).w
                 lea     (H_scroll_buffer+2).w,a1
                 move.w  #224-1,d1
 
-loc_4DED0:
+BSResults_OffsetBGScrollLeft16:
                 subi.w  #$10,(a1)
                 addq.w  #4,a1
-                dbf     d1,loc_4DED0
+                dbf     d1,BSResults_OffsetBGScrollLeft16
                 rts
 ; End of function BlueSphere_TileResultsLogoBg
 
 ; ---------------------------------------------------------------------------
-word_4DEDC:
+BSResults_LogoPlaneCommandHighWords:
                 dc.w    vdpComm(VRAM_Plane_B_Name_Table+$000,VRAM,WRITE)>>16
                 dc.w    vdpComm(VRAM_Plane_B_Name_Table+$020,VRAM,WRITE)>>16
                 dc.w    vdpComm(VRAM_Plane_B_Name_Table+$040,VRAM,WRITE)>>16

@@ -3,24 +3,24 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
 
-Obj_SpheresTitle_4CEAA:
+BlueSphereSelection_InitializeController:
                 tst.b   (Blue_spheres_menu_flag).w
-                bne.s   loc_4CEF8
-                move.l  #loc_4CEB6,(a0)
+                bne.s   BlueSphereSelection_CreateMenuWidgets
+                move.l  #BSSelect_CheckABCWithVectorGuard,(a0)
 
-loc_4CEB6:
+BSSelect_CheckABCWithVectorGuard:
 ; Bug: no idea what this was meant to be
                 tst.b   (Vectors).w
-                bne.s   locret_4CEC6
+                bne.s   BlueSphereSelection_ReturnFromABCCheck
                 move.b  (Ctrl_1).w,d0
                 cmpi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.s   loc_4CEC8
+                beq.s   BlueSphereSelection_EnableMenuFromABC
 
-locret_4CEC6:
+BlueSphereSelection_ReturnFromABCCheck:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4CEC8:
+BlueSphereSelection_EnableMenuFromABC:
                 clr.b   (Ctrl_1_pressed).w
                 moveq   #-1,d0
                 move.w  d0,(Special_stage_spheres_left).w
@@ -34,91 +34,92 @@ loc_4CEC8:
                 jsr     (SKCredits_BuildAndUploadText).l
                 move    #$2300,sr
 
-loc_4CEF8:
-                move.l  #loc_4CF82,(a0)
-                move.l  #Obj_SpheresTitle_4D03E,(Dynamic_object_RAM+(object_size*3)).w
+BlueSphereSelection_CreateMenuWidgets:
+                move.l  #BSSelect_UpdateScrollAndOptions,(a0)
+                move.l  #BlueSphereNumberRow_Initialize,(Dynamic_object_RAM+(object_size*3)).w
                 move.w  #$C0,(Dynamic_object_RAM+(object_size*3)+y_pos).w
                 move.b  #1,(Blue_spheres_menu_flag).w
                 move.b  #0,(Blue_spheres_option).w
-                move.l  #Obj_SpheresTitle_4D64E,(Dynamic_object_RAM+(object_size*43)).w
-                move.l  #Obj_SpheresTitle_4D64E,(Dynamic_object_RAM+(object_size*44)).w
+                move.l  #BlueSphereInitRotatingSelectionIcon,(Dynamic_object_RAM+(object_size*43)).w
+                move.l  #BlueSphereInitRotatingSelectionIcon,(Dynamic_object_RAM+(object_size*44)).w
                 bset    #0,(Dynamic_object_RAM+(object_size*44)+render_flags).w
                 tst.b   (Blue_spheres_mode).w
-                beq.s   loc_4CF66
+                beq.s   BSSelect_ShowCodeForCompletedStage
                 move.w  #$B0,(Dynamic_object_RAM+(object_size*3)+y_pos).w
-                move.l  #Obj_SpheresTitle_4D2F4,(Dynamic_object_RAM+(object_size*15)).w
+                move.l  #BlueSphereCodeRow_InitializeEditable,(Dynamic_object_RAM+(object_size*15)).w
                 move.w  #$144,(Dynamic_object_RAM+(object_size*15)+y_pos).w
-                move.l  #Obj_SpheresTitle_4D302,(Dynamic_object_RAM+(object_size*28)).w
+                move.l  #BlueSphereCodeRow_InitializeGenerated,(Dynamic_object_RAM+(object_size*28)).w
                 move.w  #$144,(Dynamic_object_RAM+(object_size*28)+y_pos).w
-                move.l  #Obj_SpheresTitle_4D610,(Dynamic_object_RAM+(object_size*42)).w
+                move.l  #BlueSphereInitStartRowCaption,(Dynamic_object_RAM+(object_size*42)).w
                 move.b  #1,(Blue_spheres_option).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4CF66:
+BSSelect_ShowCodeForCompletedStage:
                 tst.w   (Special_stage_spheres_left).w
-                bne.s   locret_4CF80
+                bne.s   BSSelect_WidgetSetupReturn
                 tst.w   (Special_stage_rings_left).w
-                bne.s   locret_4CF80
-                move.l  #Obj_SpheresTitle_4D302,(Dynamic_object_RAM+(object_size*28)).w
+                bne.s   BSSelect_WidgetSetupReturn
+                move.l  #BlueSphereCodeRow_InitializeGenerated,(Dynamic_object_RAM+(object_size*28)).w
                 move.w  #$144,(Dynamic_object_RAM+(object_size*28)+y_pos).w
 
-locret_4CF80:
+BSSelect_WidgetSetupReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4CF82:
+BSSelect_UpdateScrollAndOptions:
                 tst.b   (Blue_spheres_mode).w
-                beq.w   loc_4D008
+                beq.w   BSSelect_StartOnStartAlone
                 tst.w   (V_scroll_value).w
-                beq.s   loc_4CFB2
+                beq.s   BlueSphereSelection_HandleOptionUp
                 addq.w  #1,(V_scroll_value).w
                 btst    #0,(V_scroll_value_FG+1).w
-                bne.s   loc_4CFA0
+                bne.s   BSSelect_PrepareCharacterRise
                 addq.w  #1,(V_scroll_value_BG).w
 
-loc_4CFA0:
+BSSelect_PrepareCharacterRise:
                 lea     (Reserved_object_3).w,a1
                 moveq   #4-1,d1
 
-loc_4CFA6:
+BlueSphereSelection_RaiseCharacterSlot:
                 subq.w  #1,y_pos(a1)
                 lea     next_object(a1),a1
-                dbf     d1,loc_4CFA6
+                dbf     d1,BlueSphereSelection_RaiseCharacterSlot
 
-loc_4CFB2:
+BlueSphereSelection_HandleOptionUp:
                 tst.b   (Blue_spheres_menu_flag).w
-                bmi.s   loc_4D000
+                bmi.s   BlueSphereSelection_CheckPlayableOption
                 move.b  (Ctrl_1_pressed).w,d1
                 btst    #0,d1
-                beq.s   loc_4CFD4
+                beq.s   BlueSphereSelection_HandleOptionDown
                 tst.b   (Blue_spheres_option).w
-                beq.s   loc_4CFD4
+                beq.s   BlueSphereSelection_HandleOptionDown
                 subq.b  #1,(Blue_spheres_option).w
                 moveq   #signextendB(sfx_WeatherMachine),d0
                 jsr     (Play_SFX).l
 
-loc_4CFD4:
+BlueSphereSelection_HandleOptionDown:
                 btst    #1,d1
-                beq.s   loc_4D000
+                beq.s   BlueSphereSelection_CheckPlayableOption
                 cmpi.b  #2,(Blue_spheres_option).w
-                bhs.s   loc_4D000
+                bhs.s   BlueSphereSelection_CheckPlayableOption
                 addq.b  #1,(Blue_spheres_option).w
                 moveq   #signextendB(sfx_WeatherMachine),d0
                 jsr     (Play_SFX).l
                 cmpi.b  #2,(Blue_spheres_option).w
-                bne.s   loc_4D000
+                bne.s   BlueSphereSelection_CheckPlayableOption
                 ori.b   #$80,(Blue_spheres_menu_flag).w
                 clr.b   (Ctrl_1_pressed).w
 
-loc_4D000:
+BlueSphereSelection_CheckPlayableOption:
                 cmpi.b  #1,(Blue_spheres_option).w
-                bne.s   locret_4D03C
+                bne.s   BlueSphereSelection_ReturnFromMenuInput
 
-loc_4D008:
+; A simultaneous press of another button fails the exact pressed-byte comparison
+BSSelect_StartOnStartAlone:
                 move.b  (Ctrl_1_pressed).w,d0
                 cmpi.b  #button_start_mask,d0
-                bne.s   locret_4D03C
+                bne.s   BlueSphereSelection_ReturnFromMenuInput
                 move.b  #0,(Special_bonus_entry_flag).w
                 move.b  #1,(Blue_spheres_stage_flag).w
                 move.w  (Player_option).w,(Player_mode).w
@@ -127,11 +128,11 @@ loc_4D008:
                 move.b  #0,(Current_special_stage).w
                 move.b  #GameMode_SpecialStage,(Game_mode).w
 
-locret_4D03C:
+BlueSphereSelection_ReturnFromMenuInput:
                 rts
 ; ---------------------------------------------------------------------------
 
-Obj_SpheresTitle_4D03E:
+BlueSphereNumberRow_Initialize:
                 move.l  #Map_BlueSpheresText,mappings(a0)
                 move.w  #make_art_tile(ArtTile_BlueSphere_Misc,0,1),art_tile(a0)
                 move.w  #$120,x_pos(a0)
@@ -145,25 +146,25 @@ Obj_SpheresTitle_4D03E:
                 move.w  #$F7,d2
                 moveq   #$B-1,d1
 
-loc_4D07A:
+BSSelect_InitNumberSlot:
                 lea     next_object(a1),a1
-                move.l  #loc_4D5B4,(a1)
+                move.l  #BlueSphereDigit_InitializeAlwaysVisible,(a1)
                 move.w  d2,x_pos(a1)
                 move.w  d3,y_pos(a1)
                 addq.w  #8,d2
-                dbf     d1,loc_4D07A
+                dbf     d1,BSSelect_InitNumberSlot
                 move.b  #$B,mapping_frame(a1)
-                move.l  #loc_4D09E,(a0)
+                move.l  #BSSelect_SelectStageOrLevelNumber,(a0)
 
-loc_4D09E:
+BSSelect_SelectStageOrLevelNumber:
                 tst.b   (Blue_spheres_mode).w
-                beq.s   loc_4D0B0
+                beq.s   BlueSphereNumberRow_FormatPackedStage
                 tst.b   (Blue_spheres_option).w
-                bne.s   loc_4D0D4
+                bne.s   BSSelect_CheckProgressForAltDisplay
                 tst.b   (Blue_spheres_progress_flag).w
-                bne.s   loc_4D0DA
+                bne.s   BlueSphereNumberRow_FormatCurrentLevel
 
-loc_4D0B0:
+BlueSphereNumberRow_FormatPackedStage:
                 move.l  (Blue_spheres_current_stage).w,d1
                 lsl.b   #1,d1
                 lsl.w   #1,d1
@@ -175,21 +176,21 @@ loc_4D0B0:
                 andi.l  #$FFFFFFF,d1
                 bsr.w   BlueSphereSetFixedWidthNineDigitWidget
                 move.b  #1,mapping_frame(a0)
-                bra.s   loc_4D0F0
+                bra.s   BlueSphereNumberRow_Draw
 ; ---------------------------------------------------------------------------
 
-loc_4D0D4:
+BSSelect_CheckProgressForAltDisplay:
                 tst.b   (Blue_spheres_progress_flag).w
-                bne.s   loc_4D0B0
+                bne.s   BlueSphereNumberRow_FormatPackedStage
 
-loc_4D0DA:
+BlueSphereNumberRow_FormatCurrentLevel:
                 move.l  (Blue_spheres_current_level).w,d1
                 addq.l  #1,d1
                 andi.l  #$7FFFFFF,d1
                 bsr.w   BlueSphere_CenterLevelDigits
                 move.b  #0,mapping_frame(a0)
 
-loc_4D0F0:
+BlueSphereNumberRow_Draw:
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -198,34 +199,34 @@ BlueSphereSetFixedWidthNineDigitWidget:
                 andi.l  #$FFFFFFF,d1
                 movea.l a0,a1
                 lea     next_object(a1),a1
-                lea     dword_4D21C(pc),a2
+                lea     BSSelect_NineDigitDecimalDivisors(pc),a2
                 moveq   #8,d6
 
-loc_4D108:
+BlueSphereDigits_FixedWidthNextPlace:
                 lea     next_object(a1),a1
                 moveq   #0,d2
                 move.l  (a2)+,d3
 
-loc_4D110:
+BSSelect_SubtractFixedWidthDivisor:
                 sub.l   d3,d1
-                bcs.s   loc_4D118
+                bcs.s   BlueSphereDigits_FixedWidthStoreDigit
                 addq.w  #1,d2
-                bra.s   loc_4D110
+                bra.s   BSSelect_SubtractFixedWidthDivisor
 ; ---------------------------------------------------------------------------
 
-loc_4D118:
+BlueSphereDigits_FixedWidthStoreDigit:
                 add.l   d3,d1
                 move.b  d2,mapping_frame(a1)
-                dbf     d6,loc_4D108
+                dbf     d6,BlueSphereDigits_FixedWidthNextPlace
                 move.w  #$F7,d2
                 moveq   #$A,d1
                 movea.l a0,a1
 
-loc_4D12A:
+BlueSphereDigits_FixedWidthPositionSlot:
                 lea     next_object(a1),a1
                 move.w  d2,x_pos(a1)
                 addq.w  #8,d2
-                dbf     d1,loc_4D12A
+                dbf     d1,BlueSphereDigits_FixedWidthPositionSlot
                 rts
 ; End of function BlueSphereSetFixedWidthNineDigitWidget
 
@@ -236,39 +237,39 @@ BlueSphere_CenterLevelDigits:
                 andi.l  #$7FFFFFF,d1
                 movea.l a0,a1
                 lea     next_object(a1),a1
-                lea     dword_4D21C(pc),a2
+                lea     BSSelect_NineDigitDecimalDivisors(pc),a2
                 moveq   #8,d6
                 moveq   #0,d4
 
-loc_4D14E:
+BlueSphereDigits_CenteredNextPlace:
                 lea     next_object(a1),a1
                 moveq   #0,d2
                 move.l  (a2)+,d3
 
-loc_4D156:
+BlueSphereDigits_CenteredSubtractDivisor:
                 sub.l   d3,d1
-                bcs.s   loc_4D15E
+                bcs.s   BSSelect_CheckCenteredSignificance
                 addq.w  #1,d2
-                bra.s   loc_4D156
+                bra.s   BlueSphereDigits_CenteredSubtractDivisor
 ; ---------------------------------------------------------------------------
 
-loc_4D15E:
+BSSelect_CheckCenteredSignificance:
                 add.l   d3,d1
                 tst.w   d2
-                beq.s   loc_4D16C
+                beq.s   BSSelect_SuppressCenteredLeadingZero
                 tst.w   d4
-                bne.s   loc_4D16C
+                bne.s   BSSelect_SuppressCenteredLeadingZero
                 move.w  d6,d4
                 addq.w  #1,d4
 
-loc_4D16C:
+BSSelect_SuppressCenteredLeadingZero:
                 tst.w   d4
-                bne.s   loc_4D172
+                bne.s   BSSelect_StoreCenteredDigitAndPrepX
                 moveq   #$A,d2
 
-loc_4D172:
+BSSelect_StoreCenteredDigitAndPrepX:
                 move.b  d2,mapping_frame(a1)
-                dbf     d6,loc_4D14E
+                dbf     d6,BlueSphereDigits_CenteredNextPlace
                 move.w  #$F7,d2
                 move.w  d4,d0
                 subi.w  #9,d0
@@ -278,16 +279,16 @@ loc_4D172:
                 add.w   d0,d2
                 movea.l a0,a1
 
-loc_4D18E:
+BSSelect_PlaceCenteredLeadingSlots:
                 lea     next_object(a1),a1
                 move.w  d2,x_pos(a1)
-                dbf     d1,loc_4D18E
+                dbf     d1,BSSelect_PlaceCenteredLeadingSlots
 
-loc_4D19A:
+BSSelect_PlaceCenteredSignificantSlots:
                 lea     next_object(a1),a1
                 addq.w  #8,d2
                 move.w  d2,x_pos(a1)
-                dbf     d4,loc_4D19A
+                dbf     d4,BSSelect_PlaceCenteredSignificantSlots
                 rts
 ; End of function BlueSphere_CenterLevelDigits
 
@@ -298,39 +299,39 @@ BlueSphere_CenterDifficultyDigits:
                 andi.l  #$FF,d1
                 movea.l a0,a1
                 lea     next_object(a1),a1
-                lea     dword_4D238(pc),a2
+                lea     BlueSphereDigits_TwoPlaceDecimalDivisors(pc),a2
                 moveq   #1,d6
                 moveq   #0,d4
 
-loc_4D1BE:
+BlueSphereDifficultyDigits_NextPlace:
                 lea     next_object(a1),a1
                 moveq   #0,d2
                 move.l  (a2)+,d3
 
-loc_4D1C6:
+BSSelect_SubtractDifficultyDivisor:
                 sub.l   d3,d1
-                bcs.s   loc_4D1CE
+                bcs.s   BSSelect_CheckDifficultySignificance
                 addq.w  #1,d2
-                bra.s   loc_4D1C6
+                bra.s   BSSelect_SubtractDifficultyDivisor
 ; ---------------------------------------------------------------------------
 
-loc_4D1CE:
+BSSelect_CheckDifficultySignificance:
                 add.l   d3,d1
                 tst.w   d2
-                beq.s   loc_4D1DC
+                beq.s   BSSelect_SuppressDifficultyLeadingZero
                 tst.w   d4
-                bne.s   loc_4D1DC
+                bne.s   BSSelect_SuppressDifficultyLeadingZero
                 move.w  d6,d4
                 addq.w  #1,d4
 
-loc_4D1DC:
+BSSelect_SuppressDifficultyLeadingZero:
                 tst.w   d4
-                bne.s   loc_4D1E2
+                bne.s   BSSelect_StoreDifficultyDigitAndPrepX
                 moveq   #$A,d2
 
-loc_4D1E2:
+BSSelect_StoreDifficultyDigitAndPrepX:
                 move.b  d2,$22(a1)
-                dbf     d6,loc_4D1BE
+                dbf     d6,BlueSphereDifficultyDigits_NextPlace
                 move.w  #$113,d2
                 move.w  d4,d0
                 subq.w  #2,d0
@@ -340,84 +341,84 @@ loc_4D1E2:
                 add.w   d0,d2
                 movea.l a0,a1
 
-loc_4D1FC:
+BSSelect_PlaceDifficultyLeadingSlots:
                 lea     next_object(a1),a1
                 move.w  d2,x_pos(a1)
-                dbf     d1,loc_4D1FC
+                dbf     d1,BSSelect_PlaceDifficultyLeadingSlots
 
-loc_4D208:
+BSSelect_PlaceDifficultySignificantSlots:
                 lea     next_object(a1),a1
                 addq.w  #8,d2
                 move.w  d2,x_pos(a1)
-                dbf     d4,loc_4D208
+                dbf     d4,BSSelect_PlaceDifficultySignificantSlots
                 rts
 ; End of function BlueSphere_CenterDifficultyDigits
 
 ; ---------------------------------------------------------------------------
                 dc.l    1000000000
-dword_4D21C:    dc.l    100000000
+BSSelect_NineDigitDecimalDivisors:  dc.l    100000000
                 dc.l    10000000
                 dc.l    1000000
                 dc.l    100000
                 dc.l    10000
                 dc.l    1000
                 dc.l    100
-dword_4D238:    dc.l    10
+BlueSphereDigits_TwoPlaceDecimalDivisors:   dc.l    10
                 dc.l    1
 ; ---------------------------------------------------------------------------
 
-loc_4D240:
+BSSelect_FormatUnsigned48BitCode:
                 moveq   #$C-1,d6
-                lea     word_4D294(pc),a2
+                lea     BSSelect_Code48BitDecimalWeights(pc),a2
 
-loc_4D246:
+BlueSphereCodeDigits_PrepareFormatPlace:
                 lea     next_object(a1),a1
                 moveq   #0,d4
                 move.w  (a2)+,d2
                 move.l  (a2)+,d3
 
-loc_4D250:
+BlueSphereCodeDigits_Subtract48BitPlace:
                 sub.l   d3,d1
                 subx.w  d2,d0
-                bcs.s   loc_4D25A
+                bcs.s   BSSelect_RestoreAndStoreCodeDigit
                 addq.w  #1,d4
-                bra.s   loc_4D250
+                bra.s   BlueSphereCodeDigits_Subtract48BitPlace
 ; ---------------------------------------------------------------------------
 
-loc_4D25A:
+BSSelect_RestoreAndStoreCodeDigit:
                 add.l   d3,d1
                 addx.w  d2,d0
                 move.b  d4,mapping_frame(a1)
-                dbf     d6,loc_4D246
+                dbf     d6,BlueSphereCodeDigits_PrepareFormatPlace
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4D268:
+BSSelect_ParseUnsigned48BitCode:
                 movea.l a0,a1
                 moveq   #0,d0
                 moveq   #0,d1
                 moveq   #$C-1,d6
-                lea     word_4D294(pc),a2
+                lea     BSSelect_Code48BitDecimalWeights(pc),a2
 
-loc_4D274:
+BlueSphereCodeDigits_PrepareParsePlace:
                 lea     next_object(a1),a1
                 moveq   #0,d4
                 move.b  mapping_frame(a1),d4
                 move.w  (a2)+,d2
                 move.l  (a2)+,d3
                 subq.w  #1,d4
-                bcs.s   loc_4D28E
+                bcs.s   BlueSphereCodeDigits_AdvanceParsePlace
 
-loc_4D286:
+BSSelect_Add48BitDigitWeight:
                 add.l   d3,d1
                 addx.w  d2,d0
-                dbf     d4,loc_4D286
+                dbf     d4,BSSelect_Add48BitDigitWeight
 
-loc_4D28E:
-                dbf     d6,loc_4D274
+BlueSphereCodeDigits_AdvanceParsePlace:
+                dbf     d6,BlueSphereCodeDigits_PrepareParsePlace
                 rts
 ; ---------------------------------------------------------------------------
-word_4D294:
+BSSelect_Code48BitDecimalWeights:
                 dc.w    $17
                 dc.l    $4876E800
                 dc.w    2
