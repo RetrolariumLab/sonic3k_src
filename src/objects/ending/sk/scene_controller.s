@@ -46,7 +46,7 @@ loc_5D8BC:
                 jsr     (SetUp_ObjAttributes).l
                 bclr    #2,render_flags(a0)
                 move.b  #2,routine(a0)
-                bsr.w   EndingClearSceneMotionScratchAndClassifyEmeraldOutcome
+                bsr.w   Ending_InitEmeraldOutcome
                 st      (Scroll_lock).w
                 clr.b   (_unkFAB8).w
                 lea     (Player_1).w,a1
@@ -216,7 +216,7 @@ loc_5DACC:
 loc_5DB1C:
                 move.b  #5,anim(a1)
                 move.b  #$83,$2E(a1)
-                bsr.w   EndingSetP1PoseFrameByPlayerModeAndLoadArt
+                bsr.w   Ending_SetP1PoseAndLoadArt
 
 loc_5DB2C:
                 subq.w  #1,$2E(a0)

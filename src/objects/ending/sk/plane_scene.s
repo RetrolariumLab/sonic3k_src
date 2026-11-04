@@ -52,7 +52,7 @@ loc_5E1F0:
                 move.w  a1,$30(a2)
 
 loc_5E228:
-                bsr.w   EndingSetP1PoseFrameByPlayerModeAndLoadArt
+                bsr.w   Ending_SetP1PoseAndLoadArt
                 lea     ChildObjDat_601BA(pc),a2
                 jsr     (CreateChild1_Normal).l
                 bne.s   loc_5E23E
@@ -457,7 +457,7 @@ loc_5E70E:
                 lea     ChildObjDat_601BA(pc),a2
                 jsr     (CreateChild1_Normal).l
                 move.l  #AniRaw_60236,$30(a0)
-                bsr.w   EndingClearSceneMotionScratchAndClassifyEmeraldOutcome
+                bsr.w   Ending_InitEmeraldOutcome
                 tst.b   (_unkFA88).w
                 bmi.s   loc_5E7C0
                 move.b  #4,mapping_frame(a0)

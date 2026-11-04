@@ -118,7 +118,7 @@ MHZBlowerLockAndStopSelectedPlayer:
 ; ---------------------------------------------------------------------------
 
 loc_63220:
-                bsr.w   MHZBlowerApplyPlayerPoseToP1AndExistingP2
+                bsr.w   MHZBlower_ApplyPoseToBothPlayers
                 cmpi.b  #8,anim_frame(a0)
                 blo.s   loc_63238
                 moveq   #signextendB(sfx_LeafBlower),d0

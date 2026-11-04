@@ -10,7 +10,7 @@ Obj_CNZEndBoss:
                 move.l  #loc_6E4BE,$34(a0)
                 lea     word_6E476(pc),a1
                 move.b  #mus_EndBoss,boss_saved_mus(a0)
-                jsr     (BeginBossCameraTransitionSaveBoundsAndFadeMusic).l
+                jsr     (Boss_BeginCameraTransition).l
                 moveq   #PLCID_6E,d0
                 jsr     (Load_PLC).l
                 lea     Pal_CNZEndBoss(pc),a1

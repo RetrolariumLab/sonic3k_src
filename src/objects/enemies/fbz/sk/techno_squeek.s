@@ -391,7 +391,7 @@ Obj_FBZSpringPlunger:
                 lea     ObjDat_FBZSpringPlunger(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.b  #5,mapping_frame(a0)
-                jsr     (CapsuleSKResolveGroundButtonAndSpringPlungerSolid).l
+                jsr     (SKCapsule_CollideButtonOrPlunger).l
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
                 beq.s   loc_89CDE

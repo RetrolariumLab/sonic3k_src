@@ -54,7 +54,7 @@ loc_2D76C:
 loc_2D776:
                 tst.w   (Special_stage_spheres_left).w
                 bne.w   loc_2D89E
-                jsr     SpecialResultsS3SelectCharacterNameOffsetAndFrame(pc)
+                jsr     S3SpecialResults_SelectNamePose(pc)
                 add.w   d0,x_pos(a0)
                 add.w   d0,$46(a0)
                 add.b   d1,mapping_frame(a0)
@@ -72,7 +72,7 @@ loc_2D7A2:
 loc_2D7AC:
                 tst.w   (Special_stage_spheres_left).w
                 bne.w   loc_2D89E
-                jsr     SpecialResultsS3SelectCharacterNameOffsetAndFrame(pc)
+                jsr     S3SpecialResults_SelectNamePose(pc)
                 sub.w   d0,x_pos(a0)
                 sub.w   d0,$46(a0)
                 cmpi.b  #7,(Chaos_emerald_count+1).w
@@ -105,7 +105,7 @@ loc_2D800:
                 bne.w   loc_2D89E
                 cmpi.b  #7,(Chaos_emerald_count+1).w
                 blo.w   loc_2D89E
-                jsr     SpecialResultsS3SelectCharacterNameOffsetAndFrame(pc)
+                jsr     S3SpecialResults_SelectNamePose(pc)
                 sub.w   d0,x_pos(a0)
                 sub.w   d0,$46(a0)
                 lea     (loc_2D710).l,a1
@@ -169,7 +169,8 @@ loc_2D89E:
 
 ; =============== S U B R O U T I N E =======================================
 
-SpecialResultsS3SelectCharacterNameOffsetAndFrame:
+; Return the region and character-dependent text X offset and mapping frame
+S3SpecialResults_SelectNamePose:
                 moveq   #0,d0
                 moveq   #0,d1
                 cmpi.w  #1,(Player_mode).w
@@ -187,4 +188,4 @@ SpecialResultsS3SelectCharacterNameOffsetAndFrame:
 
                 .return:
                 rts
-; End of function SpecialResultsS3SelectCharacterNameOffsetAndFrame
+; End of function S3SpecialResults_SelectNamePose

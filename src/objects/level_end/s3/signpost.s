@@ -198,7 +198,7 @@ EndSign_CheckPlayerHit:
 
 ; Bug: After returning from the subroutine, the address of the characters in d0
 ; will be corrupted and the check will not work correctly
-                bsr.w   EndSignS3ApplyUpwardRollingPlayerHitAndScore
+                bsr.w   S3EndSign_TryScoreRollingHit
 
 loc_525C0:
                 swap    d0                              ; Get Tails address
@@ -208,7 +208,8 @@ loc_525C0:
 
 ; =============== S U B R O U T I N E =======================================
 
-EndSignS3ApplyUpwardRollingPlayerHitAndScore:
+; Require a rising roll. The successful path reuses d0, which carried the packed player pointers in the caller
+S3EndSign_TryScoreRollingHit:
                 movea.w d0,a1                           ; This can be done up to twice depending on who hit the signpost
                 cmpi.b  #2,anim(a1)
                 bne.s   locret_52612                    ; only go on if Player is currently jumping
@@ -238,7 +239,7 @@ loc_5260E:
 
 locret_52612:
                 rts
-; End of function EndSignS3ApplyUpwardRollingPlayerHitAndScore
+; End of function S3EndSign_TryScoreRollingHit
 
 ; ---------------------------------------------------------------------------
 EndSign_Range:

@@ -26,7 +26,8 @@ CutsceneKnucklesSolidThinWrapper:
 
 ; =============== S U B R O U T I N E =======================================
 
-OpeningAnimalChooseBoundedRandomBounceVelocity:
+; Randomize the upward hop and choose X direction from the movement bounds and escape flag
+OpeningAnimal_ChooseBounceVel:
                 jsr     (Random_Number).l
                 andi.w  #$1FF,d0
                 addi.w  #$100,d0
@@ -52,7 +53,7 @@ loc_65E3E:
 loc_65E46:
                 move.w  d1,x_vel(a0)
                 rts
-; End of function OpeningAnimalChooseBoundedRandomBounceVelocity
+; End of function OpeningAnimal_ChooseBounceVel
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -66,17 +67,18 @@ CutsceneKnucklesSolidTallWrapper:
 
 ; =============== S U B R O U T I N E =======================================
 
-MHZBlowerApplyPlayerPoseToP1AndExistingP2:
+MHZBlower_ApplyPoseToBothPlayers:
                 lea     (Player_1).w,a1
-                bsr.w   MHZBlowerSetSelectedPlayerForcedFlipFrames
+                bsr.w   MHZBlower_SetPlayerFlipPose
                 lea     (Player_2).w,a1
                 tst.l   (a1)
                 beq.s   locret_65EAE
-; End of function MHZBlowerApplyPlayerPoseToP1AndExistingP2
+; End of function MHZBlower_ApplyPoseToBothPlayers
 
 ; =============== S U B R O U T I N E =======================================
 
-MHZBlowerSetSelectedPlayerForcedFlipFrames:
+; Hold the waiting pose until blower frame $C, then use the forced inverted flicker and load its art
+MHZBlower_SetPlayerFlipPose:
                 move.b  #5,anim(a1)
                 cmpi.b  #$C,anim_frame(a0)
                 blo.s   locret_65EAE
@@ -95,7 +97,7 @@ loc_65E9E:
 
 locret_65EAE:
                 rts
-; End of function MHZBlowerSetSelectedPlayerForcedFlipFrames
+; End of function MHZBlower_SetPlayerFlipPose
 
 ; ---------------------------------------------------------------------------
 RawAni_65EB0:
@@ -138,17 +140,17 @@ locret_65EFC:
 
 ; =============== S U B R O U T I N E =======================================
 
-LRZRollingSceneCaptureAndOrbitBothPlayers:
+LRZRollingScene_OrbitBothPlayers:
                 lea     (Player_1).w,a1
                 moveq   #0,d2
                 moveq   #$3C,d3
                 moveq   #signextendB($8D),d4
-                bsr.w   LRZRollingSceneCapturePlayerAndSeedOrbitAngle
+                bsr.w   LRZRollingScene_TryCapturePlayer
                 lea     (Player_2).w,a1
                 moveq   #1,d2
                 moveq   #$3D,d3
                 moveq   #signextendB($8A),d4
-                bsr.w   LRZRollingSceneCapturePlayerAndSeedOrbitAngle
+                bsr.w   LRZRollingScene_TryCapturePlayer
                 lea     (Player_1).w,a1
                 moveq   #0,d2
                 moveq   #$3C,d3
@@ -156,7 +158,7 @@ LRZRollingSceneCaptureAndOrbitBothPlayers:
                 lea     (Player_2).w,a1
                 moveq   #1,d2
                 moveq   #$3D,d3
-; End of function LRZRollingSceneCaptureAndOrbitBothPlayers
+; End of function LRZRollingScene_OrbitBothPlayers
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -191,7 +193,8 @@ loc_65F5C:
 
 ; =============== S U B R O U T I N E =======================================
 
-LRZRollingSceneCapturePlayerAndSeedOrbitAngle:
+; Capture once within the signed 64-by-64 box, stop the timer and scroll lock, and seed the orbit angle
+LRZRollingScene_TryCapturePlayer:
                 btst    d2,$38(a0)
                 bne.s   locret_65FD4
                 lea     word_65FD6(pc),a2
@@ -217,7 +220,7 @@ LRZRollingSceneCapturePlayerAndSeedOrbitAngle:
 
 locret_65FD4:
                 rts
-; End of function LRZRollingSceneCapturePlayerAndSeedOrbitAngle
+; End of function LRZRollingScene_TryCapturePlayer
 
 ; ---------------------------------------------------------------------------
 word_65FD6:

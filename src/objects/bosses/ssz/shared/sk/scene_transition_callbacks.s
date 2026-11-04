@@ -9,7 +9,7 @@ loc_7D056:
 
 loc_7D062:
                 moveq   #2,d0
-                jsr     (CapsuleSKStartResultsWhenP1LandedAfterOpenWait).l
+                jsr     (SKCapsule_TryResultsOnLanding).l
                 tst.b   routine(a0)
                 beq.s   locret_7D076
                 move.l  #loc_7D078,(a0)

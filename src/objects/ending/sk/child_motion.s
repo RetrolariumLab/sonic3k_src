@@ -29,7 +29,8 @@ EndingInitializeGentleVerticalSwing:
 
 ; =============== S U B R O U T I N E =======================================
 
-EndingTornadoPositionTwoSubSpritesAndCycleTheirFrames:
+; Update both positions. One frame sequence has six steps, and the other alternates by V-int phase
+EndingTornado_UpdateSubSprites:
                 lea     byte_6006E(pc),a1
                 jsr     (SKMultiSprite_PositionChildren).l
                 moveq   #0,d0
@@ -50,7 +51,7 @@ loc_60052:
 loc_60068:
                 move.b  d0,$23(a0)
                 rts
-; End of function EndingTornadoPositionTwoSubSpritesAndCycleTheirFrames
+; End of function EndingTornado_UpdateSubSprites
 
 ; ---------------------------------------------------------------------------
 byte_6006E:
@@ -68,7 +69,7 @@ byte_60072:
 
 ; =============== S U B R O U T I N E =======================================
 
-EndingAttachmentSelectOffsetsFromParentPose:
+EndingAttachment_SetOffsetsFromPose:
                 movea.w parent3(a0),a1
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
@@ -84,7 +85,7 @@ loc_600A8:
                 move.w  (a2)+,d0
                 move.w  d0,child_dx(a0)                 ; and child_dy
                 rts
-; End of function EndingAttachmentSelectOffsetsFromParentPose
+; End of function EndingAttachment_SetOffsetsFromPose
 
 ; ---------------------------------------------------------------------------
 off_600B0:

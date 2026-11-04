@@ -21,7 +21,7 @@ loc_63D1A:
                 beq.w   CutsceneKnux_Delete
                 lea     word_63CEC(pc),a1
                 jsr     (Check_CameraInRange).l
-                jsr     (BeginBossCameraTransitionSaveBoundsAndFadeMusic).l
+                jsr     (Boss_BeginCameraTransition).l
                 jsr     (AllocateObject).l
                 bne.s   loc_63D5C
                 move.l  #loc_85CA4,(a1)
@@ -206,7 +206,7 @@ loc_63F20:
 ; ---------------------------------------------------------------------------
 
 loc_63F3C:
-                jsr     (HPZKnucklesStopHorizontalSpeedAtCameraMargins).l
+                jsr     (HPZKnux_StopAtCameraXMargins).l
                 move.w  x_vel(a0),d0
                 beq.s   loc_63F58
                 move.w  $40(a0),d1
@@ -325,7 +325,7 @@ loc_64066:
 ; ---------------------------------------------------------------------------
 
 loc_64090:
-                jsr     (HPZKnucklesStopHorizontalSpeedAtCameraMargins).l
+                jsr     (HPZKnux_StopAtCameraXMargins).l
                 jsr     (MoveSprite2).l
                 tst.w   x_vel(a0)
                 beq.w   loc_64132
@@ -443,7 +443,7 @@ loc_641C4:
 
 loc_641EC:
                 jsr     (Animate_RawCheckResult).l
-                jsr     (HPZKnucklesStopHorizontalSpeedAtCameraMargins).l
+                jsr     (HPZKnux_StopAtCameraXMargins).l
                 tst.w   x_vel(a0)
                 bne.s   loc_6420C
                 bchg    #0,render_flags(a0)
@@ -479,7 +479,7 @@ loc_64242:
 
 loc_64258:
                 jsr     (Animate_RawCheckResult).l
-                jsr     (HPZKnucklesStopHorizontalSpeedAtCameraMargins).l
+                jsr     (HPZKnux_StopAtCameraXMargins).l
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
                 bmi.w   locret_6206C
@@ -523,7 +523,7 @@ loc_642BC:
 ; ---------------------------------------------------------------------------
 
 loc_642F0:
-                jsr     (HPZKnucklesStopHorizontalSpeedAtCameraMargins).l
+                jsr     (HPZKnux_StopAtCameraXMargins).l
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
                 bmi.w   locret_6206C

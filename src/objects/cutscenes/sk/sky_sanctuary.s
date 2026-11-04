@@ -269,7 +269,7 @@ locret_65A48:
 ; ---------------------------------------------------------------------------
 
 loc_65A4A:
-                bsr.w   SSZSmallDeathEggEmitParticleEveryThirtyTwoVints
+                bsr.w   SSZSmallDeathEgg_TryParticleEvery32
                 jsr     (MoveSprite_SSZBGAdjust).l
                 jsr     (Draw_Sprite).l
                 move.w  (Camera_Y_pos).w,d0

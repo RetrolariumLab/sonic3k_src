@@ -10,7 +10,7 @@ Obj_ICZEndBoss:
                 move.l  #loc_71C0E,$34(a0)
                 lea     word_71BC6(pc),a1
                 move.b  #mus_EndBoss,boss_saved_mus(a0)
-                jsr     (BeginBossCameraTransitionSaveBoundsAndFadeMusic).l
+                jsr     (Boss_BeginCameraTransition).l
                 moveq   #PLCID_70,d0
                 jsr     (Load_PLC).l
                 lea     Pal_ICZEndBoss(pc),a1

@@ -254,7 +254,7 @@ loc_63720:
                 tst.w   d1
                 bpl.s   loc_6374A
                 add.w   d1,y_pos(a0)
-                bsr.w   OpeningAnimalChooseBoundedRandomBounceVelocity
+                bsr.w   OpeningAnimal_ChooseBounceVel
 
 loc_6374A:
                 jmp     (Draw_Sprite).l
@@ -269,7 +269,7 @@ loc_63750:
                 tst.w   d1
                 bpl.s   loc_63774
                 add.w   d1,y_pos(a0)
-                bsr.w   OpeningAnimalChooseBoundedRandomBounceVelocity
+                bsr.w   OpeningAnimal_ChooseBounceVel
 
 loc_63774:
                 subq.b  #1,anim_frame_timer(a0)

@@ -435,10 +435,10 @@ loc_5CA36:
                 move.w  #$380,priority(a0)
                 move.b  #8,width_pixels(a0)
                 move.b  #8,height_pixels(a0)
-                bsr.w   ContinuePlaceIconFromAlternatingCenterOutTable
+                bsr.w   ContinueIcon_SetCenterOutX
                 move.w  #$D8,y_pos(a0)
                 move.l  #loc_5CA5C,(a0)
-                bsr.w   ContinueSelectCharacterFramePairAndOptionalTailsChild
+                bsr.w   ContinueIcon_SelectCharacterFrames
 
 loc_5CA5C:
                 moveq   #0,d0

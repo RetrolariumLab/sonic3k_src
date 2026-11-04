@@ -174,7 +174,7 @@ loc_63C80:
                 moveq   #signextendB(sfx_PushBlock),d0
                 jsr     (Play_SFX_Continuous).l
                 bsr.w   LRZRollingSceneCycleOwnerRenderFlips
-                bsr.w   LRZRollingSceneCaptureAndOrbitBothPlayers
+                bsr.w   LRZRollingScene_OrbitBothPlayers
                 jsr     (MoveSprite2).l
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
@@ -189,7 +189,7 @@ loc_63CAC:
                 moveq   #signextendB(sfx_PushBlock),d0
                 jsr     (Play_SFX_Continuous).l
                 bsr.w   LRZRollingSceneCycleOwnerRenderFlips
-                bsr.w   LRZRollingSceneCaptureAndOrbitBothPlayers
+                bsr.w   LRZRollingScene_OrbitBothPlayers
                 jsr     (MoveSprite_LightGravity).l
                 tst.w   y_vel(a0)
                 bmi.s   loc_63CE6

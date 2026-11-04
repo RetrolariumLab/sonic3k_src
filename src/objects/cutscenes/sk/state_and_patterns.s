@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-SSZSmallDeathEggEmitParticleEveryThirtyTwoVints:
+SSZSmallDeathEgg_TryParticleEvery32:
                 move.b  (V_int_run_count+3).w,d0
                 andi.w  #$1F,d0
                 bne.w   locret_6206C
@@ -12,7 +12,7 @@ SSZSmallDeathEggEmitParticleEveryThirtyTwoVints:
                 jsr     (Play_SFX).l
                 lea     ChildObjDat_665F0(pc),a2
                 jmp     (CreateChild6_Simple).l
-; End of function SSZSmallDeathEggEmitParticleEveryThirtyTwoVints
+; End of function SSZSmallDeathEgg_TryParticleEvery32
 
 ; ---------------------------------------------------------------------------
 
@@ -61,7 +61,7 @@ loc_660BE:
                 tst.w   d0
                 beq.s   loc_660DA
                 move.l  d0,-(sp)
-                bsr.w   HPZKnucklesDispatchFrontAlignedOrOtherPlayerContact
+                bsr.w   HPZKnux_DispatchPlayerContact
                 move.l  (sp)+,d0
 
 loc_660DA:
@@ -71,7 +71,8 @@ loc_660DA:
 
 ; =============== S U B R O U T I N E =======================================
 
-HPZKnucklesDispatchFrontAlignedOrOtherPlayerContact:
+; Select the callback by facing side and vertical alignment. Nonrolling invincible contact goes directly to the hit response
+HPZKnux_DispatchPlayerContact:
                 btst    #4,$38(a0)
                 bne.w   locret_6206C
                 movea.w d0,a1
@@ -120,7 +121,7 @@ loc_66146:
 ; unused
                 movea.l $C(a3),a4
                 jmp     (a4)
-; End of function HPZKnucklesDispatchFrontAlignedOrOtherPlayerContact
+; End of function HPZKnux_DispatchPlayerContact
 
 ; ---------------------------------------------------------------------------
 word_66152:
@@ -128,7 +129,7 @@ word_66152:
 
 ; =============== S U B R O U T I N E =======================================
 
-HPZKnucklesStopHorizontalSpeedAtCameraMargins:
+HPZKnux_StopAtCameraXMargins:
                 tst.w   x_vel(a0)
                 beq.s   locret_66188
                 bmi.s   loc_66176
@@ -149,7 +150,7 @@ loc_66176:
 
 locret_66188:
                 rts
-; End of function HPZKnucklesStopHorizontalSpeedAtCameraMargins
+; End of function HPZKnux_StopAtCameraXMargins
 
 ; ---------------------------------------------------------------------------
 
@@ -263,7 +264,8 @@ locret_6628A:
 
 ; =============== S U B R O U T I N E =======================================
 
-HPZCraneAdvanceAngularOscillationAndReverseStep:
+; Add the signed byte step to the phase. Reverse the step when the signed countdown expires
+HPZCrane_TickOscillation:
                 move.b  $40(a0),d0
                 add.b   d0,$3C(a0)
                 subq.b  #1,$39(a0)
@@ -273,11 +275,12 @@ HPZCraneAdvanceAngularOscillationAndReverseStep:
 
 locret_662A4:
                 rts
-; End of function HPZCraneAdvanceAngularOscillationAndReverseStep
+; End of function HPZCrane_TickOscillation
 
 ; =============== S U B R O U T I N E =======================================
 
-HPZCraneSelectEightDirectionFrameFromPhase:
+; Round the phase to frames $13 through $1A
+HPZCrane_SelectEightWayFrame:
                 moveq   #0,d0
                 move.b  $3C(a0),d0
                 addi.b  #$10,d0
@@ -286,7 +289,7 @@ HPZCraneSelectEightDirectionFrameFromPhase:
                 addi.b  #$13,d0
                 move.b  d0,mapping_frame(a0)
                 rts
-; End of function HPZCraneSelectEightDirectionFrameFromPhase
+; End of function HPZCrane_SelectEightWayFrame
 
 ; ---------------------------------------------------------------------------
 
@@ -356,7 +359,8 @@ byte_66308:
 
 ; =============== S U B R O U T I N E =======================================
 
-HPZShipCountMovingHitPauseAndClearStatusBit:
+; Count 48 updates while hit status bit 6 is set, then clear the bit
+HPZShip_TickMovingHitPause:
                 btst    #6,status(a0)
                 beq.s   locret_66370
                 tst.b   $20(a0)
@@ -372,11 +376,12 @@ loc_66364:
 
 locret_66370:
                 rts
-; End of function HPZShipCountMovingHitPauseAndClearStatusBit
+; End of function HPZShip_TickMovingHitPause
 
 ; =============== S U B R O U T I N E =======================================
 
-HPZShipFlashThreePaletteSlotsAndRestoreContactAfterHit:
+; Flash three palette slots for 32 updates before restoring the saved collision type
+HPZShip_TickHitFlashAndRestoreColl:
                 tst.b   collision_flags(a0)
                 bne.s   locret_663B8
                 tst.b   $20(a0)
@@ -402,4 +407,4 @@ loc_663A0:
 
 locret_663B8:
                 rts
-; End of function HPZShipFlashThreePaletteSlotsAndRestoreContactAfterHit
+; End of function HPZShip_TickHitFlashAndRestoreColl

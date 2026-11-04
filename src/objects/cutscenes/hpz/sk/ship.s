@@ -62,7 +62,7 @@ loc_64F38:
                 jsr     (CreateChild3_NormalRepeated).l
 
 loc_64F66:
-                bsr.w   HPZShipCountMovingHitPauseAndClearStatusBit
+                bsr.w   HPZShip_TickMovingHitPause
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -77,7 +77,7 @@ loc_64F70:
 loc_64F8A:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
-                bsr.w   HPZShipFlashThreePaletteSlotsAndRestoreContactAfterHit
+                bsr.w   HPZShip_TickHitFlashAndRestoreColl
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -93,7 +93,7 @@ loc_64FA0:
                 jsr     (CreateChild1_Normal).l
 
 loc_64FD2:
-                bsr.w   HPZShipFlashThreePaletteSlotsAndRestoreContactAfterHit
+                bsr.w   HPZShip_TickHitFlashAndRestoreColl
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -104,7 +104,7 @@ loc_64FDC:
                 addi.w  #$200,d0
                 cmp.w   x_pos(a0),d0
                 blo.s   loc_65000
-                bsr.w   HPZShipFlashThreePaletteSlotsAndRestoreContactAfterHit
+                bsr.w   HPZShip_TickHitFlashAndRestoreColl
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 

@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-ContinueDrawCountdownNibbleDigitsToPlaneA:
+; Build two two-row digits from the countdown nibbles and transfer them immediately
+Continue_DrawCountdownToPlaneA:
                 move.b  (_unkFA84).w,d0
                 move.b  d0,d1
                 andi.w  #$F0,d0
@@ -42,11 +43,12 @@ ContinueDrawCountdownNibbleDigitsToPlaneA:
                 move.w  (a1)+,(a6)
                 move    #$2300,sr
                 rts
-; End of function ContinueDrawCountdownNibbleDigitsToPlaneA
+; End of function Continue_DrawCountdownToPlaneA
 
 ; =============== S U B R O U T I N E =======================================
 
-ContinueSeedAdditionalCountIconsInFixedSlots:
+; Reserve the first two screen objects and seed up to nine icons in consecutive fixed slots
+Continue_InitExtraCountIcons:
                 moveq   #0,d0
                 move.b  (Continue_count).w,d0
                 beq.s   loc_5CB2A
@@ -68,16 +70,16 @@ loc_5CB32:
                 addq.w  #2,d1
                 lea     next_object(a1),a1
                 bra.s   loc_5CB32
-; End of function ContinueSeedAdditionalCountIconsInFixedSlots
+; End of function Continue_InitExtraCountIcons
 
 ; =============== S U B R O U T I N E =======================================
 
-ContinuePlaceIconFromAlternatingCenterOutTable:
+ContinueIcon_SetCenterOutX:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  word_5CB58(pc,d0.w),x_pos(a0)
                 rts
-; End of function ContinuePlaceIconFromAlternatingCenterOutTable
+; End of function ContinueIcon_SetCenterOutX
 
 ; ---------------------------------------------------------------------------
 word_5CB58:
@@ -93,7 +95,8 @@ word_5CB58:
 
 ; =============== S U B R O U T I N E =======================================
 
-ContinueSelectCharacterFramePairAndOptionalTailsChild:
+; Select a two-frame sequence by player mode and try an auxiliary Tails child in Tails-alone mode
+ContinueIcon_SelectCharacterFrames:
                 move.w  (Player_mode).w,d4
                 cmpi.b  #2,d4
                 bne.s   loc_5CB7E
@@ -104,7 +107,7 @@ loc_5CB7E:
                 lsl.w   #2,d4
                 move.l  off_5CB8E(pc,d4.w),$30(a0)
                 rts
-; End of function ContinueSelectCharacterFramePairAndOptionalTailsChild
+; End of function ContinueIcon_SelectCharacterFrames
 
 ; ---------------------------------------------------------------------------
 ChildObjDat_5CB88:

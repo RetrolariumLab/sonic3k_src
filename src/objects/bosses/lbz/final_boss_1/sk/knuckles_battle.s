@@ -7,7 +7,7 @@ Obj_LBZFinalBossKnux:
                 lea     word_72FEA(pc),a1
                 jsr     (Check_CameraInRange).l
                 move.b  #mus_EndBoss,boss_saved_mus(a0)
-                jsr     (BeginBossCameraTransitionSaveBoundsAndFadeMusic).l
+                jsr     (Boss_BeginCameraTransition).l
                 move.l  #loc_73046,(a0)
                 move.l  #loc_7304C,$34(a0)
                 clr.b   (_unkFAA2).w

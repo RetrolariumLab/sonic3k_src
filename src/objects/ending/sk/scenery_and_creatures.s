@@ -134,7 +134,7 @@ loc_5ED18:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
                 bne.w   loc_5EC36
-                bsr.w   EndingAttachmentSelectOffsetsFromParentPose
+                bsr.w   EndingAttachment_SetOffsetsFromPose
                 jsr     (Refresh_ChildPositionAdjusted).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -310,7 +310,7 @@ loc_5EF28:
                 jsr     (Animate_RawNoSST).l
                 cmpi.w  #3,(Player_mode).w
                 beq.s   loc_5EF3E
-                bsr.w   EndingProjectSavedXYToSceneWindowAndFlagOutside
+                bsr.w   Ending_ProjectActorAndFlagOutside
 
 loc_5EF3E:
                 btst    #3,(_unkFAB8).w

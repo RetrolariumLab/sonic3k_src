@@ -12,7 +12,7 @@ Obj_HCZEndBoss:
 loc_6AEC6:
                 jsr     (Check_CameraInRange).l
                 move.b  #mus_EndBoss,boss_saved_mus(a0)
-                jsr     (BeginBossCameraTransitionSaveBoundsAndFadeMusic).l
+                jsr     (Boss_BeginCameraTransition).l
                 move.l  #loc_6AEFE,(a0)
                 move.l  #loc_6AF04,$34(a0)
                 moveq   #PLCID_6C,d0

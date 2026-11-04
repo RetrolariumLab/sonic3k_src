@@ -285,7 +285,7 @@ Obj_MGZEndBossKnux:
                 lea     word_6C688(pc),a1
                 jsr     (Check_CameraInRange).l
                 move.b  #mus_Miniboss,boss_saved_mus(a0)  ; different song than other end bosses
-                jsr     (BeginBossCameraTransitionSaveBoundsAndFadeMusic).l
+                jsr     (Boss_BeginCameraTransition).l
                 move.l  #loc_6C6F4,(a0)
                 move.l  #loc_6C6FA,$34(a0)
                 lea     (ArtKosM_MGZEndBoss).l,a1

@@ -62,7 +62,8 @@ loc_865D0:
 
 ; =============== S U B R O U T I N E =======================================
 
-CapsuleSKOpenAndRequestFragmentsAnimalsExplosion:
+; Set the opened state, conditionally lock Player 2 input and request fragments, animals and an explosion
+SKCapsule_OpenAndSpawnEffects:
                 cmpi.b  #2,(Current_zone).w
                 beq.s   loc_865EA
                 st      (Ctrl_2_locked).w
@@ -81,13 +82,13 @@ loc_865EA:
 
 locret_8661C:
                 rts
-; End of function CapsuleSKOpenAndRequestFragmentsAnimalsExplosion
+; End of function SKCapsule_OpenAndSpawnEffects
 
 ; ---------------------------------------------------------------------------
 
 loc_8661E:
                 move.b  #6,d0
-                bra.w   CapsuleSKStartResultsWhenP1LandedAfterOpenWait
+                bra.w   SKCapsule_TryResultsOnLanding
 ; ---------------------------------------------------------------------------
 
 loc_86626:
@@ -135,7 +136,7 @@ loc_86678:
                 move.b  (Current_zone).w,d0
                 move.b  byte_866A2(pc,d0.w),routine(a0)
                 move.w  a1,$44(a0)
-                bsr.w   CapsuleSKOpenAndRequestFragmentsAnimalsExplosion
+                bsr.w   SKCapsule_OpenAndSpawnEffects
 
 loc_86698:
                 jsr     Swing_UpAndDown(pc)
@@ -171,7 +172,7 @@ byte_866A2:
 
 loc_866BA:
                 move.b  #$C,d0
-                bsr.w   CapsuleSKStartResultsWhenP1LandedAfterOpenWait
+                bsr.w   SKCapsule_TryResultsOnLanding
                 jsr     Swing_UpAndDown(pc)
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
@@ -184,14 +185,14 @@ loc_866CC:
 
 loc_866DA:
                 move.b  #$C,d0
-                bsr.w   CapsuleSKStartResultsForVisibleTailsOrCarriedP1AfterWait
+                bsr.w   SKCapsule_TryAirborneResults
                 jsr     Swing_UpAndDown(pc)
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
 loc_866EC:
                 move.b  #$12,d0
-                bsr.w   CapsuleSKStartResultsWhenP1LandedAfterOpenWait
+                bsr.w   SKCapsule_TryResultsOnLanding
 
 loc_866F4:
                 jsr     Swing_UpAndDown(pc)
@@ -220,7 +221,7 @@ loc_8671C:
 ; ---------------------------------------------------------------------------
 
 loc_8672A:
-                jsr     (CapsuleSKResolveGroundButtonAndSpringPlungerSolid).l
+                jsr     (SKCapsule_CollideButtonOrPlunger).l
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
                 beq.s   loc_86750
@@ -234,7 +235,7 @@ loc_86750:
 ; ---------------------------------------------------------------------------
 
 loc_86754:
-                bsr.w   CapsuleSKResolveGroundButtonAndSpringPlungerSolid
+                bsr.w   SKCapsule_CollideButtonOrPlunger
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
@@ -319,7 +320,7 @@ loc_86820:
                 jsr     SetUp_ObjAttributes3(pc)
                 move.l  #loc_8683E,(a0)
                 move.b  #8,y_radius(a0)
-                bsr.w   CapsuleSKInitializeFreedAnimalBounceSpeciesAndReleaseDelay
+                bsr.w   SKCapsuleAnimal_InitRelease
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -350,7 +351,7 @@ loc_86854:
 
 loc_86880:
                 move.w  d1,x_vel(a0)
-                bsr.w   CapsuleSKSetFreedAnimalHorizontalFlipFromXVelocity
+                bsr.w   SKCapsuleAnimal_SetFacingFromXVel
 
 loc_86888:
                 moveq   #0,d0
@@ -382,9 +383,9 @@ loc_868B6:
                 move.w  #0,d3
                 move.w  #-$30,d4
                 sub.b   subtype(a0),d4
-                bsr.w   CapsuleSKAccelerateFreedAnimalTowardOffsetPlayerWithRetry
+                bsr.w   SKCapsuleAnimal_SteerTowardP1
                 jsr     (MoveSprite2).l
-                bsr.w   CapsuleSKSetFreedAnimalHorizontalFlipFromXVelocity
+                bsr.w   SKCapsuleAnimal_SetFacingFromXVel
                 tst.b   (_unkFAA8).w
                 bne.s   loc_868F0
                 move.l  #loc_868F2,(a0)
@@ -400,7 +401,8 @@ loc_868F2:
 
 ; =============== S U B R O U T I N E =======================================
 
-CapsuleSKStartResultsWhenP1LandedAfterOpenWait:
+; After the opening delay, check Player 1 landing, freeze the ending pose and attempt the results actor once
+SKCapsule_TryResultsOnLanding:
                 subq.w  #1,$2E(a0)
                 bpl.s   locret_86930
                 lea     (Player_1).w,a1
@@ -418,7 +420,7 @@ CapsuleSKStartResultsWhenP1LandedAfterOpenWait:
 
 locret_86930:
                 rts
-; End of function CapsuleSKStartResultsWhenP1LandedAfterOpenWait
+; End of function SKCapsule_TryResultsOnLanding
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -447,7 +449,8 @@ loc_8694A:
 
 ; =============== S U B R O U T I N E =======================================
 
-CapsuleSKStartResultsForVisibleTailsOrCarriedP1AfterWait:
+; After the wait, visible live Player 1 Tails or a carried Player 1 can start results before the grounded ending pose
+SKCapsule_TryAirborneResults:
                 subq.w  #1,$2E(a0)
                 bpl.s   locret_869C4
                 lea     (Player_1).w,a1
@@ -472,7 +475,7 @@ loc_869C2:
 
 locret_869C4:
                 rts
-; End of function CapsuleSKStartResultsForVisibleTailsOrCarriedP1AfterWait
+; End of function SKCapsule_TryAirborneResults
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -491,7 +494,8 @@ Set_PlayerEndingPose:
 
 ; =============== S U B R O U T I N E =======================================
 
-CapsuleSKAccelerateFreedAnimalTowardOffsetPlayerWithRetry:
+; Aim at Player 1 plus the supplied offsets. Retain the asymmetric retry for out-of-range negative Y velocity
+SKCapsuleAnimal_SteerTowardP1:
                 move.w  d2,d5
                 move.w  x_pos(a1),d6
                 add.w   d3,d6
@@ -528,17 +532,18 @@ loc_86A28:
 
 locret_86A3C:
                 rts
-; End of function CapsuleSKAccelerateFreedAnimalTowardOffsetPlayerWithRetry
+; End of function SKCapsuleAnimal_SteerTowardP1
 
 ; =============== S U B R O U T I N E =======================================
 
-CapsuleSKResolveGroundButtonAndSpringPlungerSolid:
+; Use the same narrow full-solid dimensions for the capsule button and FBZ spring plunger
+SKCapsule_CollideButtonOrPlunger:
                 move.w  #$1B,d1
                 move.w  #4,d2
                 move.w  #6,d3
                 move.w  x_pos(a0),d4
                 jmp     (SolidObjectFull).l
-; End of function CapsuleSKResolveGroundButtonAndSpringPlungerSolid
+; End of function SKCapsule_CollideButtonOrPlunger
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -567,7 +572,8 @@ byte_86A74:
 
 ; =============== S U B R O U T I N E =======================================
 
-CapsuleSKInitializeFreedAnimalBounceSpeciesAndReleaseDelay:
+; Set species, bounce, delay and escape direction. Inverted capsules use attachment followed by homing
+SKCapsuleAnimal_InitRelease:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,d1
@@ -613,9 +619,9 @@ loc_86AC0:
 
 loc_86B04:
                 move.w  d1,x_vel(a0)
-                bsr.w   CapsuleSKSetFreedAnimalHorizontalFlipFromXVelocity
+                bsr.w   SKCapsuleAnimal_SetFacingFromXVel
                 rts
-; End of function CapsuleSKInitializeFreedAnimalBounceSpeciesAndReleaseDelay
+; End of function SKCapsuleAnimal_InitRelease
 
 ; ---------------------------------------------------------------------------
 word_86B0E:
@@ -628,7 +634,7 @@ word_86B16:
 
 ; =============== S U B R O U T I N E =======================================
 
-CapsuleSKSetFreedAnimalHorizontalFlipFromXVelocity:
+SKCapsuleAnimal_SetFacingFromXVel:
                 bclr    #0,render_flags(a0)
                 tst.w   x_vel(a0)
                 bpl.s   locret_86B30
@@ -636,4 +642,4 @@ CapsuleSKSetFreedAnimalHorizontalFlipFromXVelocity:
 
 locret_86B30:
                 rts
-; End of function CapsuleSKSetFreedAnimalHorizontalFlipFromXVelocity
+; End of function SKCapsuleAnimal_SetFacingFromXVel

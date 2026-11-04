@@ -981,9 +981,15 @@
       "commits": ["a11f9d81279f59107f3948ea5f158e3f2ade8079"]
     },
     {
-      "id": "current-shorten-L05-modes",
+      "id": "change-7a68a974f888",
       "kind": "source_or_tooling",
       "summary": "Shorten 97 earlier menu, credits and bonus-stage procedure names.",
+      "commits": ["7a68a974f888c861d7f88849b2deba7940298597"]
+    },
+    {
+      "id": "current-shorten-L06-scenes",
+      "kind": "source_or_tooling",
+      "summary": "Shorten 46 earlier cutscene, capsule, signpost and results procedure names.",
       "commits": ["release-commit"]
     }
   ],

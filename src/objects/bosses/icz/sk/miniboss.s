@@ -14,7 +14,7 @@ Obj_ICZMiniboss:
 loc_71178:
                 jsr     (Check_CameraInRange).l
                 move.b  #mus_Miniboss,boss_saved_mus(a0)
-                jsr     (BeginBossCameraTransitionSaveBoundsAndFadeMusic).l
+                jsr     (Boss_BeginCameraTransition).l
                 move.l  #loc_711B0,(a0)
                 move.l  #loc_711B6,$34(a0)
                 moveq   #PLCID_5F,d0

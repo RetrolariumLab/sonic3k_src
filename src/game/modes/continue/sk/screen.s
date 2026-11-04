@@ -66,7 +66,7 @@ loc_5C3FE:
                 move.l  #loc_5C4D6,(a1)
                 move.w  a1,(_unkFAA4).w
                 move.l  #loc_5C9DC,(Dynamic_object_RAM+object_size).w
-                bsr.w   ContinueSeedAdditionalCountIconsInFixedSlots
+                bsr.w   Continue_InitExtraCountIcons
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
                 move.b  #VInt_ID_16,(V_int_routine).w
@@ -131,7 +131,7 @@ loc_5C4E6:
                 subq.b  #1,d0
                 bmi.s   loc_5C514
                 move.b  d0,(_unkFA84).w
-                bsr.w   ContinueDrawCountdownNibbleDigitsToPlaneA
+                bsr.w   Continue_DrawCountdownToPlaneA
 
 locret_5C512:
                 rts

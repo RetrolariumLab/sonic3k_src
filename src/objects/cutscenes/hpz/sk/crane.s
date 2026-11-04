@@ -72,7 +72,7 @@ byte_653DE:
 loc_653F2:
                 subi.w  #1,$2E(a0)
                 bmi.s   loc_65404
-                bsr.w   HPZCraneAdvanceAngularOscillationAndReverseStep
+                bsr.w   HPZCrane_TickOscillation
                 jmp     (MoveSprite_Circular).l
 ; ---------------------------------------------------------------------------
 
@@ -95,18 +95,18 @@ loc_65426:
 
 loc_65432:
                 move.w  d0,$3A(a0)
-                bsr.w   HPZCraneAdvanceAngularOscillationAndReverseStep
+                bsr.w   HPZCrane_TickOscillation
                 jsr     (MoveSprite_Circular).l
                 btst    #2,$38(a0)
                 beq.s   loc_6544C
-                bsr.w   HPZCraneSelectEightDirectionFrameFromPhase
+                bsr.w   HPZCrane_SelectEightWayFrame
 
 loc_6544C:
                 jmp     (Child_Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
 loc_65452:
-                bsr.w   HPZCraneAdvanceAngularOscillationAndReverseStep
+                bsr.w   HPZCrane_TickOscillation
                 movea.w $44(a0),a1
                 btst    #7,$38(a1)
                 beq.s   loc_6546E
@@ -123,7 +123,7 @@ loc_6546E:
 ; ---------------------------------------------------------------------------
 
 loc_65484:
-                bsr.w   HPZCraneSelectEightDirectionFrameFromPhase
+                bsr.w   HPZCrane_SelectEightWayFrame
                 lea     (AngleLookup_1).l,a2
                 jsr     (MoveSprite_AtAngleLookup).l
                 jmp     (Child_Draw_Sprite).l
@@ -264,6 +264,6 @@ loc_655A2:
 ; ---------------------------------------------------------------------------
 
 loc_655AA:
-                bsr.w   HPZCraneAdvanceAngularOscillationAndReverseStep
+                bsr.w   HPZCrane_TickOscillation
                 bra.w   loc_6546E
 ; End of function loc_65360

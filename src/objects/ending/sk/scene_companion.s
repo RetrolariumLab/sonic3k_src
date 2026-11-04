@@ -8,7 +8,7 @@ Obj_5EA52:
                 move.b  routine(a0),d0
                 move.w  off_5EA6A(pc,d0.w),d1
                 jsr     off_5EA6A(pc,d1.w)
-                bsr.w   EndingTornadoPositionTwoSubSpritesAndCycleTheirFrames
+                bsr.w   EndingTornado_UpdateSubSprites
                 jmp     (Child_Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 off_5EA6A:

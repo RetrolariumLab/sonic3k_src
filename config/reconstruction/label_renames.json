@@ -5740,7 +5740,7 @@
       "source": "src/objects/cutscenes/knuckles/s3/launch_base.s",
       "original_line": 155,
       "old": "sub_45174",
-      "new": "LBZCutsceneS3LockSelectedPlayerFacingRight",
+      "new": "S3LBZScene_LockPlayerFacingRight",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Set the LBZ scene scratch flag and force a nondead selected player into object-controlled right-facing pose."
     },
@@ -5772,7 +5772,7 @@
       "source": "src/objects/cutscenes/sk/launch_base.s",
       "original_line": 153,
       "old": "sub_62800",
-      "new": "LBZCutsceneSKLockSelectedPlayerFacingRight",
+      "new": "SKLBZScene_LockPlayerFacingRight",
       "profiles": ["sk"],
       "meaning": "Set the LBZ scene scratch flag and force a nondead selected player into object-controlled right-facing pose."
     },
@@ -5796,7 +5796,7 @@
       "source": "src/objects/cutscenes/sk/movement_and_collision.s",
       "original_line": 29,
       "old": "sub_65E02",
-      "new": "OpeningAnimalChooseBoundedRandomBounceVelocity",
+      "new": "OpeningAnimal_ChooseBounceVel",
       "profiles": ["sk"],
       "meaning": "Choose an opening-scene animal upward hop and horizontal direction from its own movement bounds, a global escape flag and RNG."
     },
@@ -5812,7 +5812,7 @@
       "source": "src/objects/cutscenes/sk/movement_and_collision.s",
       "original_line": 69,
       "old": "sub_65E62",
-      "new": "MHZBlowerApplyPlayerPoseToP1AndExistingP2",
+      "new": "MHZBlower_ApplyPoseToBothPlayers",
       "profiles": ["sk"],
       "meaning": "Apply the leaf-blower player pose to P1, then to P2 when its object handler exists."
     },
@@ -5820,7 +5820,7 @@
       "source": "src/objects/cutscenes/sk/movement_and_collision.s",
       "original_line": 79,
       "old": "sub_65E72",
-      "new": "MHZBlowerSetSelectedPlayerForcedFlipFrames",
+      "new": "MHZBlower_SetPlayerFlipPose",
       "profiles": ["sk"],
       "meaning": "Set waiting or forced inverted flicker pose for one player according to leaf-blower animation progress."
     },
@@ -5844,7 +5844,7 @@
       "source": "src/objects/cutscenes/sk/movement_and_collision.s",
       "original_line": 141,
       "old": "sub_65EFE",
-      "new": "LRZRollingSceneCaptureAndOrbitBothPlayers",
+      "new": "LRZRollingScene_OrbitBothPlayers",
       "profiles": ["sk"],
       "meaning": "Attempt capture of P1/P2 near the LRZ rolling scene object and update both captured-player orbits."
     },
@@ -5860,7 +5860,7 @@
       "source": "src/objects/cutscenes/sk/movement_and_collision.s",
       "original_line": 194,
       "old": "sub_65F84",
-      "new": "LRZRollingSceneCapturePlayerAndSeedOrbitAngle",
+      "new": "LRZRollingScene_TryCapturePlayer",
       "profiles": ["sk"],
       "meaning": "Capture one not-yet-flagged player inside a signed64x64 origin box, force its pose, stop main timer/scroll lock and seed approximate radial angle."
     },
@@ -5884,7 +5884,7 @@
       "source": "src/objects/cutscenes/sk/state_and_patterns.s",
       "original_line": 7,
       "old": "sub_66054",
-      "new": "SSZSmallDeathEggEmitParticleEveryThirtyTwoVints",
+      "new": "SSZSmallDeathEgg_TryParticleEvery32",
       "profiles": ["sk"],
       "meaning": "On global V-int phase0 modulo32, play emission sound and attempt one parent-position particle from the small Death Egg scene actor."
     },
@@ -5900,7 +5900,7 @@
       "source": "src/objects/cutscenes/sk/state_and_patterns.s",
       "original_line": 74,
       "old": "sub_660E2",
-      "new": "HPZKnucklesDispatchFrontAlignedOrOtherPlayerContact",
+      "new": "HPZKnux_DispatchPlayerContact",
       "profiles": ["sk"],
       "meaning": "Choose the active HPZ Knuckles contact callback by facing side and vertical alignment, routing nonrolling invincible contact directly to Knuckles hit response."
     },
@@ -5908,7 +5908,7 @@
       "source": "src/objects/cutscenes/sk/state_and_patterns.s",
       "original_line": 131,
       "old": "sub_6615A",
-      "new": "HPZKnucklesStopHorizontalSpeedAtCameraMargins",
+      "new": "HPZKnux_StopAtCameraXMargins",
       "profiles": ["sk"],
       "meaning": "Zero outward Knuckles X velocity after reaching the camera-relative left/right interior margins."
     },
@@ -5924,7 +5924,7 @@
       "source": "src/objects/cutscenes/sk/state_and_patterns.s",
       "original_line": 266,
       "old": "sub_6628C",
-      "new": "HPZCraneAdvanceAngularOscillationAndReverseStep",
+      "new": "HPZCrane_TickOscillation",
       "profiles": ["sk"],
       "meaning": "Advance crane phase BYTE by its signed BYTE step and reverse the step after a signed countdown expires."
     },
@@ -5932,7 +5932,7 @@
       "source": "src/objects/cutscenes/sk/state_and_patterns.s",
       "original_line": 280,
       "old": "sub_662A6",
-      "new": "HPZCraneSelectEightDirectionFrameFromPhase",
+      "new": "HPZCrane_SelectEightWayFrame",
       "profiles": ["sk"],
       "meaning": "Quantize crane phase into eight rounded orientation frames0x13..0x1A."
     },
@@ -5940,7 +5940,7 @@
       "source": "src/objects/cutscenes/sk/state_and_patterns.s",
       "original_line": 359,
       "old": "sub_66348",
-      "new": "HPZShipCountMovingHitPauseAndClearStatusBit",
+      "new": "HPZShip_TickMovingHitPause",
       "profiles": ["sk"],
       "meaning": "While ship hit-status bit6 is set, start/advance a48-update pause marker and clear bit6 when its BYTE timer expires."
     },
@@ -5948,7 +5948,7 @@
       "source": "src/objects/cutscenes/sk/state_and_patterns.s",
       "original_line": 379,
       "old": "sub_66372",
-      "new": "HPZShipFlashThreePaletteSlotsAndRestoreContactAfterHit",
+      "new": "HPZShip_TickHitFlashAndRestoreColl",
       "profiles": ["sk"],
       "meaning": "When ship collision flags have been cleared by a hit, count32 updates of palette flash and restore saved collision type."
     },
@@ -6108,7 +6108,7 @@
       "source": "src/objects/ending/sk/child_motion.s",
       "original_line": 32,
       "old": "sub_60038",
-      "new": "EndingTornadoPositionTwoSubSpritesAndCycleTheirFrames",
+      "new": "EndingTornado_UpdateSubSprites",
       "profiles": ["sk"],
       "meaning": "Update the ending Tornado multipart sub-sprite positions and animate their six-step and V-int-alternating mapping frames."
     },
@@ -6116,7 +6116,7 @@
       "source": "src/objects/ending/sk/child_motion.s",
       "original_line": 71,
       "old": "sub_6008A",
-      "new": "EndingAttachmentSelectOffsetsFromParentPose",
+      "new": "EndingAttachment_SetOffsetsFromPose",
       "profiles": ["sk"],
       "meaning": "Choose one of two attachment offset pairs for the parent current pose frame1..3 and store it for parent-relative positioning."
     },
@@ -6124,7 +6124,7 @@
       "source": "src/objects/ending/sk/sprite_helpers.s",
       "original_line": 24,
       "old": "sub_5FE48",
-      "new": "EndingProjectSavedXYToSceneWindowAndFlagOutside",
+      "new": "Ending_ProjectActorAndFlagOutside",
       "profiles": ["sk"],
       "meaning": "Derive actor screen XY from saved coordinates and scene offsets, setting local outside-window bit6 when either coordinate is outside0..511."
     },
@@ -6132,7 +6132,7 @@
       "source": "src/objects/ending/sk/sprite_helpers.s",
       "original_line": 48,
       "old": "sub_5FE82",
-      "new": "EndingClearSceneMotionScratchAndClassifyEmeraldOutcome",
+      "new": "Ending_InitEmeraldOutcome",
       "profiles": ["sk"],
       "meaning": "Clear eight bytes of ending scratch state and classify ending outcome as incomplete, Chaos-complete or Super-complete."
     },
@@ -6148,7 +6148,7 @@
       "source": "src/objects/ending/sk/sprite_helpers.s",
       "original_line": 123,
       "old": "sub_5FF1C",
-      "new": "EndingPlaceBannerBlackenPaletteAndSpawnWhiteFlashRestore",
+      "new": "EndingBanner_PlaceAndTryFlash",
       "profiles": ["sk"],
       "meaning": "Place a screen-relative banner, blacken normal palette line2, and attempt a two-phase white-flash/target-restore controller for that line."
     },
@@ -6180,7 +6180,7 @@
       "source": "src/objects/ending/sk/super_character_transition.s",
       "original_line": 108,
       "old": "sub_5FD88",
-      "new": "EndingSetP1PoseFrameByPlayerModeAndLoadArt",
+      "new": "Ending_SetP1PoseAndLoadArt",
       "profiles": ["sk"],
       "meaning": "Assign a character-specific fixed P1 pose frame and load its current character art through shared PLC dispatcher."
     },
@@ -6188,7 +6188,7 @@
       "source": "src/objects/ending/sk/super_character_transition.s",
       "original_line": 126,
       "old": "sub_5FDA4",
-      "new": "EndingSpawnLineTwoPaletteFadeAndStoreHandle",
+      "new": "Ending_TrySpawnLine2Fade",
       "profiles": ["sk"],
       "meaning": "Attempt a selected palette-line2 fade actor and save its short handle in the ending eyecatch owner."
     },
@@ -6852,7 +6852,7 @@
       "source": "src/objects/interface/continue/sk/countdown_and_patterns.s",
       "original_line": 7,
       "old": "sub_5CAAE",
-      "new": "ContinueDrawCountdownNibbleDigitsToPlaneA",
+      "new": "Continue_DrawCountdownToPlaneA",
       "profiles": ["sk"],
       "meaning": "Build and immediately transfer a two-column, two-row countdown tile block to the Continue screen plane A name table."
     },
@@ -6860,7 +6860,7 @@
       "source": "src/objects/interface/continue/sk/countdown_and_patterns.s",
       "original_line": 49,
       "old": "sub_5CB1C",
-      "new": "ContinueSeedAdditionalCountIconsInFixedSlots",
+      "new": "Continue_InitExtraCountIcons",
       "profiles": ["sk"],
       "meaning": "Seed up to nine extra continue-count icons in predetermined consecutive dynamic slots, reserving the first two screen objects."
     },
@@ -6868,7 +6868,7 @@
       "source": "src/objects/interface/continue/sk/countdown_and_patterns.s",
       "original_line": 75,
       "old": "sub_5CB4A",
-      "new": "ContinuePlaceIconFromAlternatingCenterOutTable",
+      "new": "ContinueIcon_SetCenterOutX",
       "profiles": ["sk"],
       "meaning": "Set one continue icon X position from its even subtype offset in a nine-entry alternating center/right/left table."
     },
@@ -6876,7 +6876,7 @@
       "source": "src/objects/interface/continue/sk/countdown_and_patterns.s",
       "original_line": 96,
       "old": "sub_5CB6A",
-      "new": "ContinueSelectCharacterFramePairAndOptionalTailsChild",
+      "new": "ContinueIcon_SelectCharacterFrames",
       "profiles": ["sk"],
       "meaning": "Select the continue-count icon two-frame pattern by Player_mode and optionally attempt an auxiliary child for Tails-alone mode."
     },
@@ -6892,7 +6892,7 @@
       "source": "src/objects/interface/s3/special_results_widgets.s",
       "original_line": 172,
       "old": "sub_2D8A4",
-      "new": "SpecialResultsS3SelectCharacterNameOffsetAndFrame",
+      "new": "S3SpecialResults_SelectNamePose",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Return character/region-specific result-name X adjustment and mapping-frame variant for the caller to apply to text elements."
     },
@@ -6900,7 +6900,7 @@
       "source": "src/objects/interface/sk/special_results_coordinator.s",
       "original_line": 441,
       "old": "sub_2E802",
-      "new": "SpecialResultsSeedContiguousElementsFromTwelveByteRecords",
+      "new": "SpecialResults_InitElementSlots",
       "profiles": ["sk"],
       "meaning": "Populate a caller-chosen consecutive object span from12-byte result-element descriptors, without allocation or clearing."
     },
@@ -6908,7 +6908,7 @@
       "source": "src/objects/interface/sk/special_results_widgets.s",
       "original_line": 276,
       "old": "sub_2EC80",
-      "new": "SpecialResultsSKSelectCharacterNameOffsetAndFrame",
+      "new": "SKSpecialResults_SelectNamePose",
       "profiles": ["sk"],
       "meaning": "Return character/region-specific result-name X adjustment and mapping-frame variant for the caller to apply to text elements."
     },
@@ -6916,7 +6916,7 @@
       "source": "src/objects/interface/sk/special_results_widgets.s",
       "original_line": 298,
       "old": "sub_2ECA8",
-      "new": "SpecialResultsSelectChaosOrSuperCountByte",
+      "new": "SpecialResults_SelectEmeraldCountPtr",
       "profiles": ["sk"],
       "meaning": "Return a pointer to the emerald-count BYTE relevant to the current product and special-stage family."
     },
@@ -6924,7 +6924,7 @@
       "source": "src/objects/interface/sk/special_results_widgets.s",
       "original_line": 312,
       "old": "sub_2ECBC",
-      "new": "SpecialResultsApplyOrdinaryEmeraldBaseArtWord",
+      "new": "SpecialResults_SetOrdinaryEmeraldArt",
       "profiles": ["sk"],
       "meaning": "Set the full result-element art WORD to tile0/palette3/low priority for ordinary/standalone emerald results, retaining existing art in lock-on Super-stage results."
     },
@@ -6956,7 +6956,7 @@
       "source": "src/objects/level_end/s3/egg_capsule.s",
       "original_line": 63,
       "old": "sub_54578",
-      "new": "CapsuleS3OpenAndRequestFragmentsAnimalsExplosion",
+      "new": "S3Capsule_OpenAndSpawnEffects",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Change opened capsule visual/wait state, selectively lock P2 input and request fragments, freed animals and explosion controller."
     },
@@ -6964,7 +6964,7 @@
       "source": "src/objects/level_end/s3/egg_capsule.s",
       "original_line": 354,
       "old": "sub_5484E",
-      "new": "CapsuleS3StartResultsWhenP1LandedAfterOpenWait",
+      "new": "S3Capsule_TryResultsOnLanding",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "After the opening delay and P1 landing eligibility, enter caller-selected capsule state, freeze P1 in ending pose and attempt the level-results actor once."
     },
@@ -6972,7 +6972,7 @@
       "source": "src/objects/level_end/s3/egg_capsule.s",
       "original_line": 401,
       "old": "sub_548DA",
-      "new": "CapsuleS3StartResultsForVisibleTailsOrCarriedP1AfterWait",
+      "new": "S3Capsule_TryAirborneResults",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "After opening delay, let a visible live P1 Tails or globally carried P1 start results without forcing an immediate grounded ending pose."
     },
@@ -6980,7 +6980,7 @@
       "source": "src/objects/level_end/s3/egg_capsule.s",
       "original_line": 444,
       "old": "sub_54946",
-      "new": "CapsuleS3AccelerateFreedAnimalTowardOffsetPlayerWithRetry",
+      "new": "S3CapsuleAnimal_SteerTowardP1",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Steer an inverted-capsule animal toward P1 plus caller offsets, accepting only in-range candidate velocities and retaining the original asymmetric negative-Y retry control flow."
     },
@@ -7004,7 +7004,7 @@
       "source": "src/objects/level_end/s3/egg_capsule.s",
       "original_line": 520,
       "old": "sub_549C4",
-      "new": "CapsuleS3InitializeFreedAnimalBounceSpeciesAndReleaseDelay",
+      "new": "S3CapsuleAnimal_InitRelease",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Configure a released capsule animal bounce, stage species/art, staggered delay and initial horizontal escape direction, with a separate attachment-then-homing path for inverted capsules."
     },
@@ -7012,7 +7012,7 @@
       "source": "src/objects/level_end/s3/egg_capsule.s",
       "original_line": 581,
       "old": "sub_54A68",
-      "new": "CapsuleS3SetFreedAnimalHorizontalFlipFromXVelocity",
+      "new": "S3CapsuleAnimal_SetFacingFromXVel",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Set the capsule animal horizontal display orientation from signed X velocity."
     },
@@ -7020,7 +7020,7 @@
       "source": "src/objects/level_end/s3/signpost.s",
       "original_line": 211,
       "old": "sub_525C6",
-      "new": "EndSignS3ApplyUpwardRollingPlayerHitAndScore",
+      "new": "S3EndSign_TryScoreRollingHit",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Apply an eligible player hit to the falling end sign, setting rebound/cooldown and awarding100 displayed points, while preserving the original packed-player-pointer corruption."
     },
@@ -7028,7 +7028,7 @@
       "source": "src/objects/level_end/sk/egg_capsule.s",
       "original_line": 65,
       "old": "sub_865DE",
-      "new": "CapsuleSKOpenAndRequestFragmentsAnimalsExplosion",
+      "new": "SKCapsule_OpenAndSpawnEffects",
       "profiles": ["sk"],
       "meaning": "Change opened capsule visual/wait state, selectively lock P2 input and request fragments, freed animals and explosion controller."
     },
@@ -7036,7 +7036,7 @@
       "source": "src/objects/level_end/sk/egg_capsule.s",
       "original_line": 403,
       "old": "sub_868F8",
-      "new": "CapsuleSKStartResultsWhenP1LandedAfterOpenWait",
+      "new": "SKCapsule_TryResultsOnLanding",
       "profiles": ["sk"],
       "meaning": "After the opening delay and P1 landing eligibility, enter caller-selected capsule state, freeze P1 in ending pose and attempt the level-results actor once."
     },
@@ -7044,7 +7044,7 @@
       "source": "src/objects/level_end/sk/egg_capsule.s",
       "original_line": 450,
       "old": "sub_86984",
-      "new": "CapsuleSKStartResultsForVisibleTailsOrCarriedP1AfterWait",
+      "new": "SKCapsule_TryAirborneResults",
       "profiles": ["sk"],
       "meaning": "After opening delay, let a visible live P1 Tails or globally carried P1 start results without forcing an immediate grounded ending pose."
     },
@@ -7052,7 +7052,7 @@
       "source": "src/objects/level_end/sk/egg_capsule.s",
       "original_line": 494,
       "old": "sub_869F6",
-      "new": "CapsuleSKAccelerateFreedAnimalTowardOffsetPlayerWithRetry",
+      "new": "SKCapsuleAnimal_SteerTowardP1",
       "profiles": ["sk"],
       "meaning": "Steer an inverted-capsule animal toward P1 plus caller offsets, accepting only in-range candidate velocities and retaining the original asymmetric negative-Y retry control flow."
     },
@@ -7060,7 +7060,7 @@
       "source": "src/objects/level_end/sk/egg_capsule.s",
       "original_line": 535,
       "old": "sub_86A3E",
-      "new": "CapsuleSKResolveGroundButtonAndSpringPlungerSolid",
+      "new": "SKCapsule_CollideButtonOrPlunger",
       "profiles": ["sk"],
       "meaning": "Apply SK ground capsule button or reused FBZ spring-plunger solid collision with fixed narrow vertical parameters."
     },
@@ -7084,7 +7084,7 @@
       "source": "src/objects/level_end/sk/egg_capsule.s",
       "original_line": 570,
       "old": "sub_86A7A",
-      "new": "CapsuleSKInitializeFreedAnimalBounceSpeciesAndReleaseDelay",
+      "new": "SKCapsuleAnimal_InitRelease",
       "profiles": ["sk"],
       "meaning": "Configure a released capsule animal bounce, stage species/art, staggered delay and initial horizontal escape direction, with a separate attachment-then-homing path for inverted capsules."
     },
@@ -7092,7 +7092,7 @@
       "source": "src/objects/level_end/sk/egg_capsule.s",
       "original_line": 631,
       "old": "sub_86B1E",
-      "new": "CapsuleSKSetFreedAnimalHorizontalFlipFromXVelocity",
+      "new": "SKCapsuleAnimal_SetFacingFromXVel",
       "profiles": ["sk"],
       "meaning": "Set the capsule animal horizontal display orientation from signed X velocity."
     },
@@ -7100,7 +7100,7 @@
       "source": "src/objects/level_end/sk/signpost.s",
       "original_line": 268,
       "old": "sub_83A70",
-      "new": "EndSignSKApplyUpwardRollingPlayerHitAndScore",
+      "new": "SKEndSign_TryScoreRollingHit",
       "profiles": ["sk"],
       "meaning": "Apply an eligible player hit to the falling end sign, setting rebound/cooldown and awarding100 displayed points, while preserving the original packed-player-pointer corruption."
     },
@@ -7108,7 +7108,7 @@
       "source": "src/objects/level_end/sk/signpost_control.s",
       "original_line": 198,
       "old": "sub_85D6A",
-      "new": "BeginBossCameraTransitionSaveBoundsAndFadeMusic",
+      "new": "Boss_BeginCameraTransition",
       "profiles": ["sk"],
       "meaning": "Initialize a boss/encounter transition by setting Boss_flag, fading music, setting a wait and saving/loading four camera-bound WORDs for later convergence."
     },

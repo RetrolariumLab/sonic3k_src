@@ -21,7 +21,8 @@ Create_Continue_Sprite:
 
 ; =============== S U B R O U T I N E =======================================
 
-EndingProjectSavedXYToSceneWindowAndFlagOutside:
+; Subtract the scene origin from saved XY. Set local status bit 6 when either coordinate lies outside 0 through 511
+Ending_ProjectActorAndFlagOutside:
                 bclr    #6,$38(a0)
                 move.w  $3A(a0),d0
                 sub.w   (_unkEE98).w,d0
@@ -41,11 +42,12 @@ loc_5FE7A:
 
 locret_5FE80:
                 rts
-; End of function EndingProjectSavedXYToSceneWindowAndFlagOutside
+; End of function Ending_ProjectActorAndFlagOutside
 
 ; =============== S U B R O U T I N E =======================================
 
-EndingClearSceneMotionScratchAndClassifyEmeraldOutcome:
+; Clear eight bytes of scene scratch. Store -2 for incomplete, 0 for Chaos complete, or 2 for Super complete
+Ending_InitEmeraldOutcome:
                 moveq   #0,d0
                 lea     (_unkFA82).w,a1
                 move.l  d0,(a1)+
@@ -61,7 +63,7 @@ EndingClearSceneMotionScratchAndClassifyEmeraldOutcome:
 loc_5FEA2:
                 move.b  d0,(_unkFA88).w
                 rts
-; End of function EndingClearSceneMotionScratchAndClassifyEmeraldOutcome
+; End of function Ending_InitEmeraldOutcome
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -120,7 +122,8 @@ locret_5FF1A:
 
 ; =============== S U B R O U T I N E =======================================
 
-EndingPlaceBannerBlackenPaletteAndSpawnWhiteFlashRestore:
+; Place the banner in screen coordinates and blacken normal line 2. Try a white flash followed by target-palette restore
+EndingBanner_PlaceAndTryFlash:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 adda.w  d0,a1
@@ -143,7 +146,7 @@ loc_5FF3A:
 
 locret_5FF60:
                 rts
-; End of function EndingPlaceBannerBlackenPaletteAndSpawnWhiteFlashRestore
+; End of function EndingBanner_PlaceAndTryFlash
 
 ; ---------------------------------------------------------------------------
 

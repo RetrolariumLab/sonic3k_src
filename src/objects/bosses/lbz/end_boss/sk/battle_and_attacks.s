@@ -30,7 +30,7 @@ loc_73906:
                 move.l  #loc_73960,$34(a0)
                 lea     word_738CE(pc),a1
                 move.b  #mus_EndBoss,boss_saved_mus(a0)
-                jsr     (BeginBossCameraTransitionSaveBoundsAndFadeMusic).l
+                jsr     (Boss_BeginCameraTransition).l
                 lea     ChildObjDat_7414C(pc),a2
                 jsr     (CreateChild1_Normal).l
                 moveq   #PLCID_77,d0

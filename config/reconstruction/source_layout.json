@@ -21557,7 +21557,7 @@
       "responsibility": "Knuckles Launch Base act-one and act-two cutscene programs, helpers and scene records.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 394,
+      "physical_lines": 395,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "s3.s",
@@ -21892,7 +21892,7 @@
       "responsibility": "Launch Base Knuckles encounters in both acts and their local transition helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 396,
+      "physical_lines": 397,
       "origin": {
         "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
         "path": "sonic3k.s",
@@ -22012,7 +22012,7 @@
       "responsibility": "Shared Knuckles cutscene motion, collision, animation and scene-relative adjustment helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 265,
+      "physical_lines": 268,
       "origin": {
         "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
         "path": "sonic3k.s",
@@ -22212,7 +22212,7 @@
       "responsibility": "Shared Knuckles cutscene state selection, graphics patterns, angle helpers and child positioning.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 405,
+      "physical_lines": 410,
       "origin": {
         "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
         "path": "sonic3k.s",
@@ -22909,7 +22909,7 @@
       "responsibility": "Ending child movement, parent-relative positioning and indexed character attachment offsets.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 102,
+      "physical_lines": 103,
       "origin": {
         "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
         "path": "sonic3k.s",
@@ -23469,7 +23469,7 @@
       "responsibility": "Create ending or continue scene sprites, apply scene position, load Knuckles pose patterns and initialize child animation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 207,
+      "physical_lines": 210,
       "origin": {
         "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
         "path": "sonic3k.s",
@@ -23504,7 +23504,7 @@
       "responsibility": "Prepare or revert the super character ending state and coordinate the related palette transition.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 165,
+      "physical_lines": 166,
       "origin": {
         "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
         "path": "sonic3k.s",
@@ -26044,7 +26044,7 @@
       "responsibility": "Continue countdown digit transfer, character child selection and private palette or animation records.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 138,
+      "physical_lines": 141,
       "origin": {
         "commit": "3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e",
         "path": "sonic3k.s",
@@ -26329,7 +26329,7 @@
       "responsibility": "Special-stage results text, emerald display, tally elements and product-specific emerald projection effects.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 190,
+      "physical_lines": 191,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "s3.s",
@@ -26539,7 +26539,7 @@
       "responsibility": "Special-stage results object dispatch, score tally, presentation choreography and result object allocation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 454,
+      "physical_lines": 455,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "sonic3k.s",
@@ -26569,7 +26569,7 @@
       "responsibility": "Special-stage results text, emerald display, tally elements and product-specific emerald projection effects.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 424,
+      "physical_lines": 426,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "sonic3k.s",
@@ -26874,7 +26874,7 @@
       "responsibility": "Egg capsule state machine, release children, ending poses and freed-animal movement helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 589,
+      "physical_lines": 594,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -26914,7 +26914,7 @@
       "responsibility": "End-of-act signpost states, bounce detection, score sparkles, stub children and their private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 314,
+      "physical_lines": 315,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -27029,7 +27029,7 @@
       "responsibility": "Egg capsule state machine, release children, ending poses and freed-animal movement helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 639,
+      "physical_lines": 645,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -27059,7 +27059,7 @@
       "responsibility": "End-of-act signpost states, player hit tests, score sparkles, stub children and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 379,
+      "physical_lines": 380,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -27089,7 +27089,7 @@
       "responsibility": "Player control restoration, end-sign sequencing and camera transition checks.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 216,
+      "physical_lines": 217,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",

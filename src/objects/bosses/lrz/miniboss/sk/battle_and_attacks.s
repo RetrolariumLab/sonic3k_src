@@ -10,7 +10,7 @@ Obj_LRZMiniboss:
                 move.l  #loc_78528,$34(a0)
                 lea     word_784E8(pc),a1
                 move.b  #mus_Miniboss,boss_saved_mus(a0)
-                jsr     (BeginBossCameraTransitionSaveBoundsAndFadeMusic).l
+                jsr     (Boss_BeginCameraTransition).l
                 lea     Pal_LRZMiniboss1(pc),a1
                 jmp     (PalLoad_Line1).l
 ; ---------------------------------------------------------------------------

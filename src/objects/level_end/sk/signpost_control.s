@@ -195,7 +195,8 @@ loc_85D48:
 
 ; =============== S U B R O U T I N E =======================================
 
-BeginBossCameraTransitionSaveBoundsAndFadeMusic:
+; Set the boss flag, fade music and start the wait. Save and load four camera-bound words for convergence
+Boss_BeginCameraTransition:
                 move.b  #1,(Boss_flag).w
 
 loc_85D70:
@@ -213,4 +214,4 @@ loc_85D7E:
                 move.w  (a1)+,(_unkFAB4).w
                 move.w  (a1)+,(_unkFAB6).w
                 rts
-; End of function BeginBossCameraTransitionSaveBoundsAndFadeMusic
+; End of function Boss_BeginCameraTransition

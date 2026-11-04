@@ -60,7 +60,8 @@ loc_5456A:
 
 ; =============== S U B R O U T I N E =======================================
 
-CapsuleS3OpenAndRequestFragmentsAnimalsExplosion:
+; Set the opened state, conditionally lock Player 2 input and request fragments, animals and an explosion
+S3Capsule_OpenAndSpawnEffects:
                 cmpi.b  #2,(Current_zone).w
                 beq.s   loc_54584
                 st      (Ctrl_2_locked).w
@@ -78,13 +79,13 @@ loc_54584:
 
 locret_545B2:
                 rts
-; End of function CapsuleS3OpenAndRequestFragmentsAnimalsExplosion
+; End of function S3Capsule_OpenAndSpawnEffects
 
 ; ---------------------------------------------------------------------------
 
 loc_545B4:
                 move.b  #6,d0
-                bra.w   CapsuleS3StartResultsWhenP1LandedAfterOpenWait
+                bra.w   S3Capsule_TryResultsOnLanding
 ; ---------------------------------------------------------------------------
 
 loc_545BC:
@@ -135,7 +136,7 @@ loc_5460E:
 
 loc_5462E:
                 move.w  a1,$44(a0)
-                bsr.w   CapsuleS3OpenAndRequestFragmentsAnimalsExplosion
+                bsr.w   S3Capsule_OpenAndSpawnEffects
 
 loc_54636:
                 jsr     Swing_UpAndDown(pc)
@@ -144,7 +145,7 @@ loc_54636:
 
 loc_54640:
                 move.b  #$C,d0
-                bsr.w   CapsuleS3StartResultsWhenP1LandedAfterOpenWait
+                bsr.w   S3Capsule_TryResultsOnLanding
                 jsr     Swing_UpAndDown(pc)
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
@@ -157,7 +158,7 @@ loc_54652:
 
 loc_54660:
                 move.b  #$C,d0
-                bsr.w   CapsuleS3StartResultsForVisibleTailsOrCarriedP1AfterWait
+                bsr.w   S3Capsule_TryAirborneResults
                 jsr     Swing_UpAndDown(pc)
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
@@ -270,7 +271,7 @@ loc_54776:
                 jsr     SetUp_ObjAttributes3(pc)
                 move.l  #loc_54794,(a0)
                 move.b  #8,y_radius(a0)
-                bsr.w   CapsuleS3InitializeFreedAnimalBounceSpeciesAndReleaseDelay
+                bsr.w   S3CapsuleAnimal_InitRelease
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -301,7 +302,7 @@ loc_547AA:
 
 loc_547D6:
                 move.w  d1,x_vel(a0)
-                bsr.w   CapsuleS3SetFreedAnimalHorizontalFlipFromXVelocity
+                bsr.w   S3CapsuleAnimal_SetFacingFromXVel
 
 loc_547DE:
                 moveq   #0,d0
@@ -333,9 +334,9 @@ loc_5480C:
                 move.w  #0,d3
                 move.w  #-$30,d4
                 sub.b   subtype(a0),d4
-                bsr.w   CapsuleS3AccelerateFreedAnimalTowardOffsetPlayerWithRetry
+                bsr.w   S3CapsuleAnimal_SteerTowardP1
                 jsr     (MoveSprite2).l
-                bsr.w   CapsuleS3SetFreedAnimalHorizontalFlipFromXVelocity
+                bsr.w   S3CapsuleAnimal_SetFacingFromXVel
                 tst.b   (_unkFAA8).w
                 bne.s   loc_54846
                 move.l  #loc_54848,(a0)
@@ -351,7 +352,8 @@ loc_54848:
 
 ; =============== S U B R O U T I N E =======================================
 
-CapsuleS3StartResultsWhenP1LandedAfterOpenWait:
+; After the opening delay, check Player 1 landing, freeze the ending pose and attempt the results actor once
+S3Capsule_TryResultsOnLanding:
                 subq.w  #1,$2E(a0)
                 bpl.s   locret_54886
                 lea     (Player_1).w,a1
@@ -369,7 +371,7 @@ CapsuleS3StartResultsWhenP1LandedAfterOpenWait:
 
 locret_54886:
                 rts
-; End of function CapsuleS3StartResultsWhenP1LandedAfterOpenWait
+; End of function S3Capsule_TryResultsOnLanding
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -398,7 +400,8 @@ loc_548A0:
 
 ; =============== S U B R O U T I N E =======================================
 
-CapsuleS3StartResultsForVisibleTailsOrCarriedP1AfterWait:
+; After the wait, visible live Player 1 Tails or a carried Player 1 can start results before the grounded ending pose
+S3Capsule_TryAirborneResults:
                 subq.w  #1,$2E(a0)
                 bpl.s   locret_5491A
                 lea     (Player_1).w,a1
@@ -423,7 +426,7 @@ loc_54918:
 
 locret_5491A:
                 rts
-; End of function CapsuleS3StartResultsForVisibleTailsOrCarriedP1AfterWait
+; End of function S3Capsule_TryAirborneResults
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -441,7 +444,8 @@ Set_PlayerEndingPose:
 
 ; =============== S U B R O U T I N E =======================================
 
-CapsuleS3AccelerateFreedAnimalTowardOffsetPlayerWithRetry:
+; Aim at Player 1 plus the supplied offsets. Retain the asymmetric retry for out-of-range negative Y velocity
+S3CapsuleAnimal_SteerTowardP1:
                 move.w  d2,d5
                 move.w  x_pos(a1),d6
                 add.w   d3,d6
@@ -478,7 +482,7 @@ loc_54978:
 
 locret_5498C:
                 rts
-; End of function CapsuleS3AccelerateFreedAnimalTowardOffsetPlayerWithRetry
+; End of function S3CapsuleAnimal_SteerTowardP1
 
 ; ---------------------------------------------------------------------------
 ; unused
@@ -517,7 +521,8 @@ byte_549BE:
 
 ; =============== S U B R O U T I N E =======================================
 
-CapsuleS3InitializeFreedAnimalBounceSpeciesAndReleaseDelay:
+; Set species, bounce, delay and escape direction. Inverted capsules use attachment followed by homing
+S3CapsuleAnimal_InitRelease:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,d1
@@ -563,9 +568,9 @@ loc_54A0A:
 
 loc_54A4E:
                 move.w  d1,x_vel(a0)
-                bsr.w   CapsuleS3SetFreedAnimalHorizontalFlipFromXVelocity
+                bsr.w   S3CapsuleAnimal_SetFacingFromXVel
                 rts
-; End of function CapsuleS3InitializeFreedAnimalBounceSpeciesAndReleaseDelay
+; End of function S3CapsuleAnimal_InitRelease
 
 ; ---------------------------------------------------------------------------
 word_54A58:
@@ -578,7 +583,7 @@ word_54A60:
 
 ; =============== S U B R O U T I N E =======================================
 
-CapsuleS3SetFreedAnimalHorizontalFlipFromXVelocity:
+S3CapsuleAnimal_SetFacingFromXVel:
                 bclr    #0,render_flags(a0)
                 tst.w   x_vel(a0)
                 bpl.s   locret_54A7A
@@ -586,4 +591,4 @@ CapsuleS3SetFreedAnimalHorizontalFlipFromXVelocity:
 
 locret_54A7A:
                 rts
-; End of function CapsuleS3SetFreedAnimalHorizontalFlipFromXVelocity
+; End of function S3CapsuleAnimal_SetFacingFromXVel

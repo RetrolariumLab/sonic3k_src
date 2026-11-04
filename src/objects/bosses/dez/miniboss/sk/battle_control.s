@@ -7,7 +7,7 @@ Obj_DEZMiniboss:
                 lea     word_7DDA4(pc),a1
                 jsr     (Check_CameraInRange).l
                 move.b  #mus_Miniboss,boss_saved_mus(a0)
-                jsr     (BeginBossCameraTransitionSaveBoundsAndFadeMusic).l
+                jsr     (Boss_BeginCameraTransition).l
                 move.l  #loc_7DE28,(a0)
                 move.l  #loc_7DE2C,$34(a0)
                 lea     ObjDat_DEZMiniboss(pc),a1
@@ -584,7 +584,7 @@ loc_7E420:
                 tst.w   y_vel(a0)
                 bmi.s   loc_7E44C
                 move.l  #loc_7E44C,(a0)
-                jsr     (EndingSetP1PoseFrameByPlayerModeAndLoadArt).l
+                jsr     (Ending_SetP1PoseAndLoadArt).l
                 lea     (Player_1).w,a1
                 bclr    #0,render_flags(a1)
                 bclr    #Status_Facing,status(a1)

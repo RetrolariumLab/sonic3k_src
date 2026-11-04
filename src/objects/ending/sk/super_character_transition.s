@@ -105,13 +105,13 @@ loc_5FD82:
 
 ; =============== S U B R O U T I N E =======================================
 
-EndingSetP1PoseFrameByPlayerModeAndLoadArt:
+Ending_SetP1PoseAndLoadArt:
                 lea     (Player_1).w,a1
                 move.w  (Player_mode).w,d0
                 andi.w  #3,d0
                 move.b  byte_5FDA0(pc,d0.w),mapping_frame(a1)
                 jmp     (Player_Load_PLC).l
-; End of function EndingSetP1PoseFrameByPlayerModeAndLoadArt
+; End of function Ending_SetP1PoseAndLoadArt
 
 ; ---------------------------------------------------------------------------
 byte_5FDA0:
@@ -123,7 +123,8 @@ byte_5FDA0:
 
 ; =============== S U B R O U T I N E =======================================
 
-EndingSpawnLineTwoPaletteFadeAndStoreHandle:
+; Store the allocated fade actor's short handle in the eyecatch owner
+Ending_TrySpawnLine2Fade:
                 jsr     (AllocateObject).l
                 bne.s   locret_5FDD2
                 move.w  a1,$44(a0)
@@ -137,7 +138,7 @@ EndingSpawnLineTwoPaletteFadeAndStoreHandle:
 
 locret_5FDD2:
                 rts
-; End of function EndingSpawnLineTwoPaletteFadeAndStoreHandle
+; End of function Ending_TrySpawnLine2Fade
 
 ; ---------------------------------------------------------------------------
 

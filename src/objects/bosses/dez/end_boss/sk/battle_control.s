@@ -10,7 +10,7 @@ Obj_DEZEndBoss:
                 move.l  #loc_7F0D2,$34(a0)
                 lea     word_7F0C6(pc),a1
                 move.b  #mus_EndBoss,boss_saved_mus(a0)
-                jsr     BeginBossCameraTransitionSaveBoundsAndFadeMusic(pc)
+                jsr     Boss_BeginCameraTransition(pc)
                 clr.b   (_unkFAB8).w
                 moveq   #PLCID_76,d0
                 jsr     (Load_PLC).l

@@ -135,13 +135,13 @@ loc_45136:
                 beq.s   loc_45162
                 movea.w parent3(a0),a2
                 bset    #3,$38(a2)
-                bsr.w   LBZCutsceneS3LockSelectedPlayerFacingRight
+                bsr.w   S3LBZScene_LockPlayerFacingRight
 
 loc_45162:
                 swap    d0
                 tst.w   d0
                 beq.s   locret_4516C
-                bsr.w   LBZCutsceneS3LockSelectedPlayerFacingRight
+                bsr.w   S3LBZScene_LockPlayerFacingRight
 
 locret_4516C:
                 rts
@@ -152,7 +152,8 @@ loc_4516E:
 
 ; =============== S U B R O U T I N E =======================================
 
-LBZCutsceneS3LockSelectedPlayerFacingRight:
+; Set the scene scratch flag and apply the pose to the selected player if still alive
+S3LBZScene_LockPlayerFacingRight:
                 st      (_unkFAA9).w
                 movea.w d0,a1
                 cmpi.b  #6,routine(a1)
@@ -161,7 +162,7 @@ LBZCutsceneS3LockSelectedPlayerFacingRight:
                 bclr    #0,render_flags(a1)
                 bclr    #Status_Facing,status(a1)
                 rts
-; End of function LBZCutsceneS3LockSelectedPlayerFacingRight
+; End of function S3LBZScene_LockPlayerFacingRight
 
 ; ---------------------------------------------------------------------------
 word_45196:
