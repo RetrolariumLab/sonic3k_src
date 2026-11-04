@@ -101895,24 +101895,24 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 276
       },
-      "declarations_sha256": "29c28ff69073efcbf502e7c963e9146145b783ab80ea2b336f2be2632152a574",
+      "declarations_sha256": "0768b592368f26facfaaa1c036e70ca7489b06d9391a67cbcd97f277e32f9920",
       "labels": {
         "Map_LBZEndBoss_": 0,
-        "Frame_3608B4": 30,
-        "Frame_3608DA": 68,
-        "Frame_3608E2": 76,
-        "Frame_3608F6": 96,
-        "Frame_36090A": 116,
-        "Frame_36091E": 136,
-        "Frame_360944": 174,
-        "Frame_36096A": 212,
-        "Frame_360972": 220,
-        "Frame_36097A": 228,
-        "Frame_360982": 236,
-        "Frame_36098A": 244,
-        "Frame_360992": 252,
-        "Frame_360994": 254,
-        "Frame_36099C": 262
+        "LBZEndBossS3_MapFrame00": 30,
+        "LBZEndBossS3_MapFrame01": 68,
+        "LBZEndBossS3_MapFrame02": 76,
+        "LBZEndBossS3_MapFrame03": 96,
+        "LBZEndBossS3_MapFrame04": 116,
+        "LBZEndBossS3_MapFrame05": 136,
+        "LBZEndBossS3_MapFrame06": 174,
+        "LBZEndBossS3_MapFrame07": 212,
+        "LBZEndBossS3_MapFrame08": 220,
+        "LBZEndBossS3_MapFrame09": 228,
+        "LBZEndBossS3_MapFrame0A": 236,
+        "LBZEndBossS3_MapFrame0B": 244,
+        "LBZEndBossS3_MapFrame0C": 252,
+        "LBZEndBossS3_MapFrame0D": 254,
+        "LBZEndBossS3_MapFrame0E": 262
       },
       "external_symbols": [],
       "blocks": [
@@ -101920,105 +101920,105 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3608B4",
+          "target": "LBZEndBossS3_MapFrame00",
           "base": "Map_LBZEndBoss_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3608DA",
+          "target": "LBZEndBossS3_MapFrame01",
           "base": "Map_LBZEndBoss_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3608E2",
+          "target": "LBZEndBossS3_MapFrame02",
           "base": "Map_LBZEndBoss_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3608F6",
+          "target": "LBZEndBossS3_MapFrame03",
           "base": "Map_LBZEndBoss_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36090A",
+          "target": "LBZEndBossS3_MapFrame04",
           "base": "Map_LBZEndBoss_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36091E",
+          "target": "LBZEndBossS3_MapFrame05",
           "base": "Map_LBZEndBoss_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360944",
+          "target": "LBZEndBossS3_MapFrame06",
           "base": "Map_LBZEndBoss_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36096A",
+          "target": "LBZEndBossS3_MapFrame07",
           "base": "Map_LBZEndBoss_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360972",
+          "target": "LBZEndBossS3_MapFrame08",
           "base": "Map_LBZEndBoss_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36097A",
+          "target": "LBZEndBossS3_MapFrame09",
           "base": "Map_LBZEndBoss_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360982",
+          "target": "LBZEndBossS3_MapFrame0A",
           "base": "Map_LBZEndBoss_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36098A",
+          "target": "LBZEndBossS3_MapFrame0B",
           "base": "Map_LBZEndBoss_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360992",
+          "target": "LBZEndBossS3_MapFrame0C",
           "base": "Map_LBZEndBoss_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360994",
+          "target": "LBZEndBossS3_MapFrame0D",
           "base": "Map_LBZEndBoss_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36099C",
+          "target": "LBZEndBossS3_MapFrame0E",
           "base": "Map_LBZEndBoss_"
         },
         {
@@ -103491,18 +103491,18 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 162
       },
-      "declarations_sha256": "dcd0ecc43214ff9d792f27085b15493828d9c9060652a0733b1bb2b52b995ba3",
+      "declarations_sha256": "268529ad7015d3a828000cc944046a62ff2355ea667eb22d58c59a15e2336111",
       "labels": {
         "Map_LBZMiniboss_": 0,
-        "Frame_3602DA": 18,
-        "Frame_3602E8": 32,
-        "Frame_3602F6": 46,
-        "Frame_360304": 60,
-        "Frame_36031E": 86,
-        "Frame_360338": 112,
-        "Frame_360352": 138,
-        "Frame_36035A": 146,
-        "Frame_360362": 154
+        "LBZMinibossS3_MapFrame00": 18,
+        "LBZMinibossS3_MapFrame01": 32,
+        "LBZMinibossS3_MapFrame02": 46,
+        "LBZMinibossS3_MapFrame03": 60,
+        "LBZMinibossS3_MapFrame04": 86,
+        "LBZMinibossS3_MapFrame05": 112,
+        "LBZMinibossS3_MapFrame06": 138,
+        "LBZMinibossS3_MapFrame07": 146,
+        "LBZMinibossS3_MapFrame08": 154
       },
       "external_symbols": [],
       "blocks": [
@@ -103510,63 +103510,63 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3602DA",
+          "target": "LBZMinibossS3_MapFrame00",
           "base": "Map_LBZMiniboss_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3602E8",
+          "target": "LBZMinibossS3_MapFrame01",
           "base": "Map_LBZMiniboss_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3602F6",
+          "target": "LBZMinibossS3_MapFrame02",
           "base": "Map_LBZMiniboss_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360304",
+          "target": "LBZMinibossS3_MapFrame03",
           "base": "Map_LBZMiniboss_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36031E",
+          "target": "LBZMinibossS3_MapFrame04",
           "base": "Map_LBZMiniboss_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360338",
+          "target": "LBZMinibossS3_MapFrame05",
           "base": "Map_LBZMiniboss_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360352",
+          "target": "LBZMinibossS3_MapFrame06",
           "base": "Map_LBZMiniboss_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36035A",
+          "target": "LBZMinibossS3_MapFrame07",
           "base": "Map_LBZMiniboss_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360362",
+          "target": "LBZMinibossS3_MapFrame08",
           "base": "Map_LBZMiniboss_"
         },
         {
@@ -103625,21 +103625,21 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 150
       },
-      "declarations_sha256": "a1780495308fc7570e044fe0202867bf011d46117297f304e7cae07e274e24aa",
+      "declarations_sha256": "2f7907b5b5065d30c487df140aefabcd47de857ef40dd21bffab441925fe9c3c",
       "labels": {
         "Map_LBZMinibossBox_": 0,
-        "Frame_360382": 24,
-        "Frame_360390": 38,
-        "Frame_36039E": 52,
-        "Frame_3603AC": 66,
-        "Frame_3603BA": 80,
-        "Frame_3603C8": 94,
-        "Frame_3603D0": 102,
-        "Frame_3603D8": 110,
-        "Frame_3603E0": 118,
-        "Frame_3603E8": 126,
-        "Frame_3603F0": 134,
-        "Frame_3603F8": 142
+        "LBZAct1BossBoxS3_MapFrame00": 24,
+        "LBZAct1BossBoxS3_MapFrame01": 38,
+        "LBZAct1BossBoxS3_MapFrame02": 52,
+        "LBZAct1BossBoxS3_MapFrame03": 66,
+        "LBZAct1BossBoxS3_MapFrame04": 80,
+        "LBZAct1BossBoxS3_MapFrame05": 94,
+        "LBZAct1BossBoxS3_MapFrame06": 102,
+        "LBZAct1BossBoxS3_MapFrame07": 110,
+        "LBZAct1BossBoxS3_MapFrame08": 118,
+        "LBZAct1BossBoxS3_MapFrame09": 126,
+        "LBZAct1BossBoxS3_MapFrame0A": 134,
+        "LBZAct1BossBoxS3_MapFrame0B": 142
       },
       "external_symbols": [],
       "blocks": [
@@ -103647,84 +103647,84 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360382",
+          "target": "LBZAct1BossBoxS3_MapFrame00",
           "base": "Map_LBZMinibossBox_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360390",
+          "target": "LBZAct1BossBoxS3_MapFrame01",
           "base": "Map_LBZMinibossBox_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36039E",
+          "target": "LBZAct1BossBoxS3_MapFrame02",
           "base": "Map_LBZMinibossBox_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3603AC",
+          "target": "LBZAct1BossBoxS3_MapFrame03",
           "base": "Map_LBZMinibossBox_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3603BA",
+          "target": "LBZAct1BossBoxS3_MapFrame04",
           "base": "Map_LBZMinibossBox_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3603C8",
+          "target": "LBZAct1BossBoxS3_MapFrame05",
           "base": "Map_LBZMinibossBox_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3603D0",
+          "target": "LBZAct1BossBoxS3_MapFrame06",
           "base": "Map_LBZMinibossBox_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3603D8",
+          "target": "LBZAct1BossBoxS3_MapFrame07",
           "base": "Map_LBZMinibossBox_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3603E0",
+          "target": "LBZAct1BossBoxS3_MapFrame08",
           "base": "Map_LBZMinibossBox_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3603E8",
+          "target": "LBZAct1BossBoxS3_MapFrame09",
           "base": "Map_LBZMinibossBox_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3603F0",
+          "target": "LBZAct1BossBoxS3_MapFrame0A",
           "base": "Map_LBZMinibossBox_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3603F8",
+          "target": "LBZAct1BossBoxS3_MapFrame0B",
           "base": "Map_LBZMinibossBox_"
         },
         {

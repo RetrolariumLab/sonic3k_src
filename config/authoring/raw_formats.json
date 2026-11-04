@@ -301,11 +301,11 @@
     },
     {
       "path": "src/objects/bosses/lbz/end_boss/sk/battle_and_attacks.s",
-      "sha256": "7cf7dd2d1ef4d4d581b985dab61c64f09f88fae89d6933f1bace25202ac33332"
+      "sha256": "ebd142a809c568e2099b9e86244fc0c7560f61958d7ad61da13a3da18f6b2a21"
     },
     {
       "path": "src/objects/bosses/lbz/end_boss/sk/object_catalog.s",
-      "sha256": "74457d1f1ac687bfdda57c41d6d471cc487b0ebbb6e587ae1755b6d6e0181514"
+      "sha256": "cc66c64602ada06dd382506c1dae7667fe97e5c2d601a267fcc40631f618198f"
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
@@ -349,31 +349,31 @@
     },
     {
       "path": "src/objects/bosses/lbz/s3/act1_robotnik_scene.s",
-      "sha256": "e9fd434ed964aa98dee6a913e32a0b586d8351e1b9e8493c8c1515751dcb663d"
+      "sha256": "4b97791269922a000e4426f8fa84f0059fc07cb602632c83a709c0d8be6c1707"
     },
     {
       "path": "src/objects/bosses/lbz/s3/act2_robotnik_ship.s",
-      "sha256": "d76e691bdebdd7d06c9c9e2b368cb67a29590fb7a09cf49530a6770228c0682b"
+      "sha256": "d7607ddf27968f4545d55fb9d5af644d6ee407aeab8035f5eb3b6cfe6e74f81b"
     },
     {
       "path": "src/objects/bosses/lbz/s3/end_boss.s",
-      "sha256": "3b013ce2d349c31819d4a4cf515e2474c90f12d4be3b8a41fe0bf64f7badb4b5"
+      "sha256": "30b349961051c28d49f20ba25145fcd5e728ed810a8e923bc1c38a673cb38e05"
     },
     {
       "path": "src/objects/bosses/lbz/s3/miniboss.s",
-      "sha256": "04f7a52a1084b4377a9f86ae43abff56754e56738905d332724d7800880c0359"
+      "sha256": "0d98e7c492b734da9c1a3b52529c0c5edcc9fcca1edd03ae894f852b277a010f"
     },
     {
       "path": "src/objects/bosses/lbz/sk/act1_robotnik_scene.s",
-      "sha256": "4e604d08d0fed8b7d24aaa9d76750d874164c86013a587553983cdbaff1bfcaa"
+      "sha256": "9e4863a6407298e6f5f4572030ec0163da49cfdc01d731366ed1f18da7ca2447"
     },
     {
       "path": "src/objects/bosses/lbz/sk/act2_robotnik_ship.s",
-      "sha256": "3a1b2301a629d1bc478d119fad67297cd08ae8c9de46406c95b57261d6f24af7"
+      "sha256": "f0d3b6ea5907b9fd8e8ff4029680db1f6579cd573f246bfacafb330c518140cd"
     },
     {
       "path": "src/objects/bosses/lbz/sk/miniboss.s",
-      "sha256": "45bb5026c7ed72cac8b23e5158dbc9672404c62b25ba888f4083540a2a676d8a"
+      "sha256": "6030e09046e7740e34225ed84e08a3e2112f612aac32f4cf931f96a37f3d9b7a"
     },
     {
       "path": "src/objects/bosses/lrz/end_boss/sk/battle_and_attacks.s",
@@ -2449,13 +2449,13 @@
     },
     {
       "path": "src/objects/bosses/lbz/end_boss/sk/object_catalog.s",
-      "symbol": "byte_741EA",
-      "scope": "byte_741EA",
+      "symbol": "LBZEndBossSK_Runner_UniformRawRunFrames",
+      "scope": "LBZEndBossSK_Runner_UniformRawRunFrames",
       "first_line": 110,
       "last_line": 118,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 20,
-      "declarations_sha256": "f8c724c29206af49e085d516fb8b938e91cc1ef3e6b72d63fbf8d8c4e7fa1e63",
+      "declarations_sha256": "eba5adc3dd4d0b8701f4124b212c69279c1f9899700dc520a9b1d2ae7a840a86",
       "entries": [
         [0, "fixed"],
         [6, "fixed"],
@@ -2463,7 +2463,12 @@
         [14, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_741EA", "byte_741F0", "byte_741F4", "byte_741F8"],
+      "members": [
+        "LBZEndBossSK_Runner_UniformRawRunFrames",
+        "LBZBossSK_OperatorBattleAnim",
+        "LBZBossSK_ShotLoopAnim",
+        "LBZBossSK_SmallEffectDeleteAnim"
+      ],
       "stored_markers": []
     },
     {
@@ -2602,13 +2607,13 @@
     },
     {
       "path": "src/objects/bosses/lbz/s3/act1_robotnik_scene.s",
-      "symbol": "byte_5A818",
-      "scope": "byte_5A818",
-      "first_line": 502,
-      "last_line": 514,
+      "symbol": "LBZSceneS3_BoxOpenFrames6To8",
+      "scope": "LBZSceneS3_BoxOpenFrames6To8",
+      "first_line": 503,
+      "last_line": 515,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 28,
-      "declarations_sha256": "6b365d3b7b9f0b283678d087ea0491763a7948099ae7302e80cf127ddff8c39f",
+      "declarations_sha256": "6c7f68cc09a049e81ba9e63e7aa26ace23c6c1ee676f406458d3e47412eb6370",
       "entries": [
         [0, "fixed"],
         [5, "fixed"],
@@ -2618,32 +2623,39 @@
         [24, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_5A818", "byte_5A81D", "byte_5A822", "byte_5A827", "byte_5A82C", "byte_5A830"],
+      "members": [
+        "LBZSceneS3_BoxOpenFrames6To8",
+        "LBZSceneS3_BoxOpenFrames9To11",
+        "LBZSceneS3_BoxSettleFrames0To2",
+        "LBZSceneS3_BoxSettleFrames3To5",
+        "LBZSceneS3_BoxSplitFromFrame0",
+        "LBZSceneS3_BoxSplitFromFrame3"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/lbz/s3/act2_robotnik_ship.s",
-      "symbol": "RawAni_5AAE8",
-      "scope": "RawAni_5AAE8",
-      "first_line": 224,
-      "last_line": 226,
+      "symbol": "LBZShipS3_CarryFramesByCharacter",
+      "scope": "LBZShipS3_CarryFramesByCharacter",
+      "first_line": 225,
+      "last_line": 227,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 2,
-      "declarations_sha256": "52dc59447af9d3600ecb88cf7c4685fdb7f7fe32ef8b43f35813c66e80a14821",
+      "declarations_sha256": "58a12208d2b865d683e2714606e67cc7b6aa09d534dcfda4676277e2ae60326a",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_5AAE8"],
+      "members": ["LBZShipS3_CarryFramesByCharacter"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/lbz/s3/end_boss.s",
-      "symbol": "byte_50C76",
-      "scope": "byte_50C76",
-      "first_line": 827,
-      "last_line": 835,
+      "symbol": "LBZEndBossS3_Runner_UniformRawRunFrames",
+      "scope": "LBZEndBossS3_Runner_UniformRawRunFrames",
+      "first_line": 829,
+      "last_line": 837,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 20,
-      "declarations_sha256": "5783c65bfba8c0d06f7d1d0242fd13116c9ed039e82794fd6ccf82b1b7dd0439",
+      "declarations_sha256": "dcd2b17691a92e22904bd066b3d677d251f979f443fb598fd139d0633be92489",
       "entries": [
         [0, "fixed"],
         [6, "fixed"],
@@ -2651,46 +2663,51 @@
         [14, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_50C76", "byte_50C7C", "byte_50C80", "byte_50C84"],
+      "members": [
+        "LBZEndBossS3_Runner_UniformRawRunFrames",
+        "LBZBossS3_OperatorBattleAnim",
+        "LBZBossS3_ShotLoopAnim",
+        "LBZBossS3_SmallEffectDeleteAnim"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/lbz/s3/miniboss.s",
-      "symbol": "byte_4F7FA",
-      "scope": "byte_4F7FA",
-      "first_line": 358,
-      "last_line": 359,
+      "symbol": "LBZMiniS3_ArmFramesBySubtype",
+      "scope": "LBZMiniS3_ArmFramesBySubtype",
+      "first_line": 360,
+      "last_line": 361,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 6,
-      "declarations_sha256": "ea8d05ffbc6f552fff6d868957e82eabfada146d1a5b8e26e6095019a9286052",
+      "declarations_sha256": "6ba3fe39b6c20cb25b9b35e603cedffa285b1bedc6d2e8316b23d337091abb5e",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_4F7FA"],
+      "members": ["LBZMiniS3_ArmFramesBySubtype"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/lbz/s3/miniboss.s",
-      "symbol": "byte_4F97A",
-      "scope": "byte_4F97A",
-      "first_line": 521,
-      "last_line": 530,
+      "symbol": "LBZMiniS3_CoverOpeningAnimation",
+      "scope": "LBZMiniS3_CoverOpeningAnimation",
+      "first_line": 524,
+      "last_line": 533,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 18,
-      "declarations_sha256": "e31d6740903aedfaa2038f3ca66aadab97f08a45ecf0ebf3d594ca1db743f6a6",
+      "declarations_sha256": "d0e0d863c5b76b2643f36cb8b0aa103bb22badc8c03a21440c4ce0205da128a8",
       "entries": [[0, "fixed"]],
       "external_symbols": [],
-      "members": ["byte_4F97A"],
+      "members": ["LBZMiniS3_CoverOpeningAnimation"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/lbz/sk/act1_robotnik_scene.s",
-      "symbol": "byte_8D280",
-      "scope": "byte_8D280",
-      "first_line": 667,
-      "last_line": 679,
+      "symbol": "LBZSceneSK_BoxOpenFrames6To8",
+      "scope": "LBZSceneSK_BoxOpenFrames6To8",
+      "first_line": 670,
+      "last_line": 682,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 28,
-      "declarations_sha256": "17b07d79bdad6e17b1d7b929b3b606ea114a53136f78da53f6c2df1ac845e237",
+      "declarations_sha256": "c20dae78b94cc592818a3e62732c529e37640be6b61d60a7df37c125e71ace0b",
       "entries": [
         [0, "fixed"],
         [5, "fixed"],
@@ -2700,49 +2717,56 @@
         [24, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_8D280", "byte_8D285", "byte_8D28A", "byte_8D28F", "byte_8D294", "byte_8D298"],
+      "members": [
+        "LBZSceneSK_BoxOpenFrames6To8",
+        "LBZSceneSK_BoxOpenFrames9To11",
+        "LBZSceneSK_BoxSettleFrames0To2",
+        "LBZSceneSK_BoxSettleFrames3To5",
+        "LBZSceneSK_BoxSplitFromFrame0",
+        "LBZSceneSK_BoxSplitFromFrame3"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/lbz/sk/act2_robotnik_ship.s",
-      "symbol": "RawAni_8D55C",
-      "scope": "RawAni_8D55C",
-      "first_line": 226,
-      "last_line": 228,
+      "symbol": "LBZShipSK_CarryFramesByCharacter",
+      "scope": "LBZShipSK_CarryFramesByCharacter",
+      "first_line": 228,
+      "last_line": 230,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 2,
-      "declarations_sha256": "7d2770044c749dc0eb88a3134d8d84e850e7e68aa08b88a7e9d02c2e738c8942",
+      "declarations_sha256": "3a2499fac64dc74f7345afcee834a61d7ed66c3a3f7f9d81fe868c66686f887a",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_8D55C"],
+      "members": ["LBZShipSK_CarryFramesByCharacter"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/lbz/sk/miniboss.s",
-      "symbol": "byte_727EE",
-      "scope": "byte_727EE",
-      "first_line": 386,
-      "last_line": 387,
+      "symbol": "LBZMiniSK_ArmFramesBySubtype",
+      "scope": "LBZMiniSK_ArmFramesBySubtype",
+      "first_line": 388,
+      "last_line": 389,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 6,
-      "declarations_sha256": "cd332ceded9cbee1730b3a4aa2692725601b5cfd12644a8a1fae596ffa33347b",
+      "declarations_sha256": "594b08bf40ad67b1c2a36e2c22ec39ee7e70105b075b44b01bd12eb6f62d0ce4",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_727EE"],
+      "members": ["LBZMiniSK_ArmFramesBySubtype"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/lbz/sk/miniboss.s",
-      "symbol": "byte_72988",
-      "scope": "byte_72988",
-      "first_line": 555,
-      "last_line": 564,
+      "symbol": "LBZMiniSK_CoverOpeningAnimation",
+      "scope": "LBZMiniSK_CoverOpeningAnimation",
+      "first_line": 559,
+      "last_line": 568,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 18,
-      "declarations_sha256": "e5138380e83d79a3b792ebecd29e824fdd7a2c75822960179d09a708f403b469",
+      "declarations_sha256": "e29b8f4f5cdea13e68fc9234789e2457ac9de5cb30a818c171fd65fcc89f024d",
       "entries": [[0, "fixed"]],
       "external_symbols": [],
-      "members": ["byte_72988"],
+      "members": ["LBZMiniSK_CoverOpeningAnimation"],
       "stored_markers": []
     },
     {

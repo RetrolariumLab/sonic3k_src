@@ -11,259 +11,261 @@ Obj_LBZMiniboss:
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 LBZMiniboss_Index:
-                dc.w    loc_72400-LBZMiniboss_Index
-                dc.w    loc_72452-LBZMiniboss_Index
-                dc.w    loc_72474-LBZMiniboss_Index
-                dc.w    loc_724BC-LBZMiniboss_Index
-                dc.w    loc_724E2-LBZMiniboss_Index
-                dc.w    loc_72558-LBZMiniboss_Index
+                dc.w    LBZMiniSK_InitBodyCoverAndArms-LBZMiniboss_Index
+                dc.w    LBZMiniSK_TickInitialMotionWait-LBZMiniboss_Index
+                dc.w    LBZMiniSK_MoveAndTickInitialHold-LBZMiniboss_Index
+                dc.w    LBZMiniSK_AnimateAndTickSpinUp-LBZMiniboss_Index
+                dc.w    LBZMiniSK_ChasePlayerWithDeadbands-LBZMiniboss_Index
+                dc.w    LBZMiniSK_RiseDuringHitFlash-LBZMiniboss_Index
 ; ---------------------------------------------------------------------------
 
-loc_72400:
+LBZMiniSK_InitBodyCoverAndArms:
                 lea     ObjDat_LBZMiniboss(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.b  #6,collision_property(a0)
                 move.b  #1,(Boss_flag).w
                 move.w  x_pos(a0),$3C(a0)
                 move.w  #$10,$2E(a0)
-                move.l  #loc_72458,$34(a0)
+                move.l  #LBZMiniSK_BeginVerticalHold,$34(a0)
                 lea     Pal_LBZMiniboss(pc),a1
                 jsr     (PalLoad_Line1).l
-                lea     ChildObjDat_7296E(pc),a2
+                lea     LBZMiniSK_CoverChild(pc),a2
                 jsr     (CreateChild1_Normal).l
-                lea     ChildObjDat_72976(pc),a2
+                lea     LBZMiniSK_FixedArmLinkedChildren(pc),a2
                 jsr     (CreateChild4_LinkListRepeated).l
-                lea     ChildObjDat_7297C(pc),a2
+                lea     LBZMiniSK_RemovableArmLinkedChildren(pc),a2
                 jmp     (CreateChild4_LinkListRepeated).l
 ; ---------------------------------------------------------------------------
 
-loc_72452:
+LBZMiniSK_TickInitialMotionWait:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_72458:
+LBZMiniSK_BeginVerticalHold:
                 move.b  #4,routine(a0)
                 move.w  #0,y_vel(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_72480,$34(a0)
+                move.l  #LBZMiniSK_BeginSpinUpAndSignalCover,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_72474:
+LBZMiniSK_MoveAndTickInitialHold:
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_72480:
+LBZMiniSK_BeginSpinUpAndSignalCover:
                 move.b  #6,routine(a0)
                 bset    #1,$38(a0)
-                lea     (byte_72982).l,a1
+                lea     (LBZMiniSK_RamAnimationSeed).l,a1
                 lea     (_unkFA82).w,a2
                 moveq   #6-1,d6
 
-loc_72498:
+LBZMiniSK_SeedSharedRamAnimation:
                 move.b  (a1)+,(a2)+
-                dbf     d6,loc_72498
+                dbf     d6,LBZMiniSK_SeedSharedRamAnimation
                 move.l  #_unkFA82,$30(a0)
                 move.b  #$10,anim_frame_timer(a0)
-                move.l  #loc_724C8,$34(a0)
+                move.l  #LBZMiniSK_ShortenRamAnimDelay,$34(a0)
 
-loc_724B4:
+LBZMiniSK_ReloadSpinUpDelay:
                 move.w  #$10,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_724BC:
+LBZMiniSK_AnimateAndTickSpinUp:
                 jsr     (Animate_Raw).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_724C8:
+; Decrease the shared animation delay until it reaches 2, then switch to pursuit
+LBZMiniSK_ShortenRamAnimDelay:
                 lea     (_unkFA82).w,a1
                 subq.b  #1,(a1)
                 cmpi.b  #2,(a1)
-                bhi.s   loc_724B4
+                bhi.s   LBZMiniSK_ReloadSpinUpDelay
                 move.b  #8,routine(a0)
                 move.b  #6,collision_flags(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_724E2:
+LBZMiniSK_ChasePlayerWithDeadbands:
                 lea     (Player_1).w,a1
                 moveq   #0,d0
                 moveq   #0,d1
                 move.w  x_pos(a0),d2
                 cmpi.b  #2,(Player_1+character_id).w
-                bne.s   loc_72502
+                bne.s   LBZMiniSK_CalcPlayerXDistance
                 moveq   #$20,d4
                 tst.b   subtype(a0)
-                beq.s   loc_72500
+                beq.s   LBZMiniSK_AddKnucklesChaseBias
                 neg.w   d4
 
-loc_72500:
+LBZMiniSK_AddKnucklesChaseBias:
                 add.w   d4,d2
 
-loc_72502:
+LBZMiniSK_CalcPlayerXDistance:
                 sub.w   x_pos(a1),d2
-                bpl.s   loc_7250C
+                bpl.s   LBZMiniSK_CalcChaseYDistance
                 neg.w   d2
                 addq.w  #2,d0
 
-loc_7250C:
+; Aim $38 pixels above player one
+LBZMiniSK_CalcChaseYDistance:
                 moveq   #0,d1
                 move.w  y_pos(a0),d3
                 move.w  y_pos(a1),d4
                 subi.w  #$38,d4
                 sub.w   d4,d3
-                bpl.s   loc_72522
+                bpl.s   LBZMiniSK_SetChaseXOutsideDeadband
                 neg.w   d3
                 addq.w  #2,d1
 
-loc_72522:
-                move.w  word_72554(pc,d0.w),x_vel(a0)
-                move.w  word_72554(pc,d1.w),y_vel(a0)
+LBZMiniSK_SetChaseXOutsideDeadband:
+                move.w  LBZMiniSK_ChaseSpeedWords(pc,d0.w),x_vel(a0)
+                move.w  LBZMiniSK_ChaseSpeedWords(pc,d1.w),y_vel(a0)
                 cmpi.w  #4,d2
-                bhi.s   loc_72538
+                bhi.s   LBZMiniSK_SetChaseYOutsideDeadband
                 clr.w   x_vel(a0)
 
-loc_72538:
+LBZMiniSK_SetChaseYOutsideDeadband:
                 cmpi.w  #4,d3
-                bhi.s   loc_72542
+                bhi.s   LBZMiniSK_MoveAndAnimateChase
                 clr.w   y_vel(a0)
 
-loc_72542:
+LBZMiniSK_MoveAndAnimateChase:
                 jsr     (MoveSprite2).l
                 jsr     (Animate_Raw).l
-                jmp     (loc_72840).l
+                jmp     (LBZMiniSK_CheckHitAndArmLoss).l
 ; ---------------------------------------------------------------------------
-word_72554:
+LBZMiniSK_ChaseSpeedWords:
                 dc.w    -$100,  $100
 ; ---------------------------------------------------------------------------
 
-loc_72558:
+LBZMiniSK_RiseDuringHitFlash:
                 subq.w  #2,y_pos(a0)
-                jmp     (loc_72840).l
+                jmp     (LBZMiniSK_CheckHitAndArmLoss).l
 ; ---------------------------------------------------------------------------
 
-loc_72562:
+LBZMiniSK_FinishDefeatByProfile:
                 cmpi.b  #2,(Player_1+character_id).w
-                beq.s   loc_72584
+                beq.s   LBZMiniSK_SignalKnucklesCoordinator
                 jsr     (AllocateObject).l
-                bne.s   loc_72578
+                bne.s   LBZMiniSK_RestoreXAndStartEndSign
                 move.l  #Obj_Song_Fade_ToLevelMusic,(a1)
 
-loc_72578:
+LBZMiniSK_RestoreXAndStartEndSign:
                 move.w  $3C(a0),x_pos(a0)
                 jmp     (Obj_EndSignControl).l
 ; ---------------------------------------------------------------------------
 
-loc_72584:
+LBZMiniSK_SignalKnucklesCoordinator:
                 movea.w parent3(a0),a1
                 move.b  subtype(a0),d0
                 bset    d0,$38(a1)
                 jmp     (Go_Delete_Sprite_2).l
 ; ---------------------------------------------------------------------------
 
-loc_72596:
+LBZMiniSK_CoverFollowDispatchAndDraw:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_725B0(pc,d0.w),d1
-                jsr     off_725B0(pc,d1.w)
+                move.w  LBZMiniSK_CoverStateOffsets(pc,d0.w),d1
+                jsr     LBZMiniSK_CoverStateOffsets(pc,d1.w)
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
-off_725B0:
-                dc.w    loc_725B6-off_725B0
-                dc.w    loc_725CA-off_725B0
-                dc.w    loc_725E8-off_725B0
+LBZMiniSK_CoverStateOffsets:
+                dc.w    LBZMiniSK_InitCoverAndAnim-LBZMiniSK_CoverStateOffsets
+                dc.w    LBZMiniSK_CoverWaitForOpening-LBZMiniSK_CoverStateOffsets
+                dc.w    LBZMiniSK_CoverAnimateOpening-LBZMiniSK_CoverStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_725B6:
-                lea     word_72962(pc),a1
+LBZMiniSK_InitCoverAndAnim:
+                lea     LBZMiniSK_CoverAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #byte_72988,$30(a0)
+                move.l  #LBZMiniSK_CoverOpeningAnimation,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_725CA:
+LBZMiniSK_CoverWaitForOpening:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                bne.s   loc_725D8
+                bne.s   LBZMiniSK_CoverBeginOpening
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_725D8:
+LBZMiniSK_CoverBeginOpening:
                 move.b  #4,routine(a0)
-                move.l  #byte_72988,$30(a0)
+                move.l  #LBZMiniSK_CoverOpeningAnimation,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_725E8:
+LBZMiniSK_CoverAnimateOpening:
                 jmp     (Animate_Raw).l
 ; ---------------------------------------------------------------------------
 
-loc_725EE:
+LBZMiniSK_MarkRemovableChain:
                 bset    #2,$38(a0)
 
-loc_725F4:
+LBZMiniSK_ArmDispatchAndCheckLife:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_72610(pc,d0.w),d1
-                jsr     off_72610(pc,d1.w)
+                move.w  LBZMiniSK_ArmStateOffsets(pc,d0.w),d1
+                jsr     LBZMiniSK_ArmStateOffsets(pc,d1.w)
                 tst.b   subtype(a0)
-                bne.s   loc_7260C
-                jmp     loc_728C8(pc)
+                bne.s   LBZMiniSK_ArmCheckLinkedLifetime
+                jmp     LBZMiniSK_ArmCheckBossDeathOrLoss(pc)
 ; ---------------------------------------------------------------------------
 
-loc_7260C:
-                jmp     loc_72902(pc)
+LBZMiniSK_ArmCheckLinkedLifetime:
+                jmp     LBZMiniSK_ArmCheckPropagatedDetach(pc)
 ; ---------------------------------------------------------------------------
-off_72610:
-                dc.w    loc_7261C-off_72610
-                dc.w    loc_72658-off_72610
-                dc.w    loc_72688-off_72610
-                dc.w    loc_726E4-off_72610
-                dc.w    loc_7270E-off_72610
-                dc.w    loc_7278E-off_72610
+LBZMiniSK_ArmStateOffsets:
+                dc.w    LBZMiniSK_InitArmGeometry-LBZMiniSK_ArmStateOffsets
+                dc.w    LBZMiniSK_ArmRefreshFirstNode-LBZMiniSK_ArmStateOffsets
+                dc.w    LBZMiniSK_ArmRotateWhileActive-LBZMiniSK_ArmStateOffsets
+                dc.w    LBZMiniSK_ArmFollowPreviousAngle-LBZMiniSK_ArmStateOffsets
+                dc.w    LBZMiniSK_ArmAdvanceAndPlace-LBZMiniSK_ArmStateOffsets
+                dc.w    LBZMiniSK_ArmPlaceStoppedEndNode-LBZMiniSK_ArmStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_7261C:
-                lea     word_72968(pc),a1
+LBZMiniSK_InitArmGeometry:
+                lea     LBZMinibossSK_Arm_PartialAttributePrefix(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.w  #$100,$2E(a0)
-                move.l  #loc_72674,$34(a0)
+                move.l  #LBZMiniSK_ArmBeginActivationDelay,$34(a0)
                 move.b  #4,$3D(a0)
                 move.w  #5,$3E(a0)
                 cmpi.b  #$A,subtype(a0)
-                bne.s   loc_72654
+                bne.s   LBZMiniSK_ArmApplySubtypeAppearance
                 move.w  #4,$3E(a0)
                 bset    #1,$38(a0)
 
-loc_72654:
-                bra.w   loc_727B0
+LBZMiniSK_ArmApplySubtypeAppearance:
+                bra.w   LBZMiniSK_ArmLoadSubtypePose
 ; ---------------------------------------------------------------------------
 
-loc_72658:
+LBZMiniSK_ArmRefreshFirstNode:
                 tst.b   subtype(a0)
-                bne.s   loc_72664
+                bne.s   LBZMiniSK_ArmPlaceAndTickInitialWait
                 jsr     (Refresh_ChildPositionAdjusted).l
 
-loc_72664:
+LBZMiniSK_ArmPlaceAndTickInitialWait:
                 move.w  $3E(a0),d2
                 jsr     (MoveSprite_CircularSimple).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_72674:
+LBZMiniSK_ArmBeginActivationDelay:
                 move.b  #4,routine(a0)
                 bsr.w   SetLBZMinibossArmActivationDelay
-                move.l  #loc_726B2,$34(a0)
+                move.l  #LBZMiniSK_ArmStartAndActivatePrev,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_72688:
+LBZMiniSK_ArmRotateWhileActive:
                 btst    #1,$38(a0)
-                beq.s   loc_726A8
+                beq.s   LBZMiniSK_ArmPlaceDormantNode
                 move.b  $3D(a0),d0
                 add.b   d0,$3C(a0)
                 move.w  $3E(a0),d2
@@ -271,16 +273,16 @@ loc_72688:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_726A8:
+LBZMiniSK_ArmPlaceDormantNode:
                 move.w  $3E(a0),d2
                 jmp     (MoveSprite_CircularSimple).l
 ; ---------------------------------------------------------------------------
 
-loc_726B2:
+LBZMiniSK_ArmStartAndActivatePrev:
                 bsr.w   SetLBZMinibossArmRotationDelay
-                move.l  #loc_72726,$34(a0)
+                move.l  #LBZMiniSK_ArmReverseAndResetPhase,$34(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_726DC
+                beq.s   LBZMiniSK_ArmFirstNodeRotate
                 move.b  #6,routine(a0)
                 movea.w parent3(a0),a1
                 bset    #1,$38(a1)
@@ -288,28 +290,28 @@ loc_726B2:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_726DC:
+LBZMiniSK_ArmFirstNodeRotate:
                 move.b  #8,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_726E4:
+LBZMiniSK_ArmFollowPreviousAngle:
                 movea.w parent3(a0),a1
                 move.b  $3C(a1),$3C(a0)
                 move.w  $3E(a0),d2
                 jsr     (MoveSprite_CircularSimple).l
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                beq.s   loc_72706
+                beq.s   LBZMiniSK_ArmRotateAfterPrevStops
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_72706:
+LBZMiniSK_ArmRotateAfterPrevStops:
                 move.b  #8,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7270E:
+LBZMiniSK_ArmAdvanceAndPlace:
                 move.b  $3D(a0),d0
                 add.b   d0,$3C(a0)
                 jsr     (Obj_Wait).l
@@ -317,81 +319,81 @@ loc_7270E:
                 jmp     (MoveSprite_CircularSimple).l
 ; ---------------------------------------------------------------------------
 
-loc_72726:
+LBZMiniSK_ArmReverseAndResetPhase:
                 bclr    #1,$38(a0)
                 neg.b   $3D(a0)
-                bsr.w   loc_72674
+                bsr.w   LBZMiniSK_ArmBeginActivationDelay
                 cmpi.b  #$A,subtype(a0)
-                bne.s   loc_72756
+                bne.s   LBZMiniSK_ArmChooseChainPhaseBank
                 move.b  #$A,routine(a0)
                 move.w  #$3C,$2E(a0)
-                move.l  #loc_72674,$34(a0)
+                move.l  #LBZMiniSK_ArmBeginActivationDelay,$34(a0)
                 bset    #1,$38(a0)
 
-loc_72756:
+LBZMiniSK_ArmChooseChainPhaseBank:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lsr.w   #1,d0
                 moveq   #0,d1
                 btst    #2,$38(a0)
-                beq.s   loc_7276A
+                beq.s   LBZMiniSK_ArmChooseReversePhaseBank
                 addq.w  #8,d1
 
-loc_7276A:
+LBZMiniSK_ArmChooseReversePhaseBank:
                 tst.b   $3D(a0)
-                bpl.s   loc_72772
+                bpl.s   LBZMiniSK_ArmLoadResetPhase
                 addq.w  #4,d1
 
-loc_72772:
-                movea.l off_7277E(pc,d1.w),a1
+LBZMiniSK_ArmLoadResetPhase:
+                movea.l LBZMiniSK_ArmResetPhaseBankPointers(pc,d1.w),a1
                 move.b  (a1,d0.w),$3C(a0)
                 rts
 ; ---------------------------------------------------------------------------
-off_7277E:
-                dc.l    byte_727F4
-                dc.l    byte_727FA
-                dc.l    byte_72800
-                dc.l    byte_72806
+LBZMiniSK_ArmResetPhaseBankPointers:
+                dc.l    LBZMiniSK_FixedArmPositivePhases
+                dc.l    LBZMiniSK_FixedArmNegativePhases
+                dc.l    LBZMiniSK_RemovableArmPositivePhases
+                dc.l    LBZMiniSK_RemovableArmNegativePhases
 ; ---------------------------------------------------------------------------
 
-loc_7278E:
+LBZMiniSK_ArmPlaceStoppedEndNode:
                 move.w  $3E(a0),d2
                 jsr     (MoveSprite_CircularSimple).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_7279E:
+LBZMiniSK_DetachedArmFallAndDraw:
                 jsr     (MoveSprite).l
                 jsr     (Obj_Wait).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_727B0:
+LBZMiniSK_ArmLoadSubtypePose:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_727E2(pc,d0.w),priority(a0)
+                move.w  LBZMiniSK_ArmPrioritiesBySubtype(pc,d0.w),priority(a0)
                 lsr.w   #1,d0
-                move.b  byte_727EE(pc,d0.w),mapping_frame(a0)
-                move.b  byte_727F4(pc,d0.w),$3C(a0)
+                move.b  LBZMiniSK_ArmFramesBySubtype(pc,d0.w),mapping_frame(a0)
+                move.b  LBZMiniSK_FixedArmPositivePhases(pc,d0.w),$3C(a0)
                 btst    #2,$38(a0)
-                beq.s   loc_727D8
-                move.b  byte_72800(pc,d0.w),$3C(a0)
+                beq.s   LBZMiniSK_ArmPlaceInitialPose
+                move.b  LBZMiniSK_RemovableArmPositivePhases(pc,d0.w),$3C(a0)
 
-loc_727D8:
+LBZMiniSK_ArmPlaceInitialPose:
                 move.w  $3E(a0),d2
                 jmp     (MoveSprite_CircularSimple).l
 ; ---------------------------------------------------------------------------
-word_727E2:
+LBZMiniSK_ArmPrioritiesBySubtype:
                 dc.w    $300,  $380,  $300,  $380,  $300,  $280
-byte_727EE:
+LBZMiniSK_ArmFramesBySubtype:
                 dc.b    7,   8,   7,   8,   7,   6
-byte_727F4:
+LBZMiniSK_FixedArmPositivePhases:
                 dc.b    $55,   0, $D5, $AA, $80, $68
-byte_727FA:
+LBZMiniSK_FixedArmNegativePhases:
                 dc.b    $2A, $7A, $B0, $DA,   0, $18
-byte_72800:
+LBZMiniSK_RemovableArmPositivePhases:
                 dc.b    $D5, $80, $55, $2A,   0, $F4
-byte_72806:
+LBZMiniSK_RemovableArmNegativePhases:
                 dc.b    $AA,   0, $2A, $55, $80, $8C
                 even
 
@@ -400,12 +402,12 @@ byte_72806:
 SetLBZMinibossArmActivationDelay:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_7281A(pc,d0.w),$2E(a0)
+                move.w  LBZMinibossSK_Arm_SixActivationWaitWords(pc,d0.w),$2E(a0)
                 rts
 ; End of function SetLBZMinibossArmActivationDelay
 
 ; ---------------------------------------------------------------------------
-word_7281A:
+LBZMinibossSK_Arm_SixActivationWaitWords:
                 dc.w    0
                 dc.w    $14
                 dc.w    9
@@ -418,12 +420,12 @@ word_7281A:
 SetLBZMinibossArmRotationDelay:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_72834(pc,d0.w),$2E(a0)
+                move.w  LBZMinibossSK_Arm_SixRotationWaitWords(pc,d0.w),$2E(a0)
                 rts
 ; End of function SetLBZMinibossArmRotationDelay
 
 ; ---------------------------------------------------------------------------
-word_72834:
+LBZMinibossSK_Arm_SixRotationWaitWords:
                 dc.w    $34
                 dc.w    $14
                 dc.w    9
@@ -432,97 +434,99 @@ word_72834:
                 dc.w    3
 ; ---------------------------------------------------------------------------
 
-loc_72840:
+; Set the removable-chain flag when the boss reaches three remaining hits
+LBZMiniSK_CheckHitAndArmLoss:
                 tst.b   collision_flags(a0)
-                bne.s   locret_72898
+                bne.s   LBZMiniSK_HitUpdateReturn
                 tst.b   collision_property(a0)
-                beq.s   loc_7289A
+                beq.s   LBZMiniSK_BeginDefeatExplosion
                 cmpi.b  #3,collision_property(a0)
-                bne.s   loc_7285A
+                bne.s   LBZMiniSK_SaveRoutineAndBeginHitRise
                 bset    #0,$38(a0)
 
-loc_7285A:
+LBZMiniSK_SaveRoutineAndBeginHitRise:
                 tst.b   $20(a0)
-                bne.s   loc_7287A
+                bne.s   LBZMiniSK_TickFlashAndRestoreRoutine
                 move.b  routine(a0),$3A(a0)
                 move.b  #$A,routine(a0)
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
 
-loc_7287A:
+LBZMiniSK_TickFlashAndRestoreRoutine:
                 jsr     (BossFlash).l
                 subq.b  #1,$20(a0)
-                bne.s   locret_72898
+                bne.s   LBZMiniSK_HitUpdateReturn
                 move.b  $3A(a0),routine(a0)
                 move.w  #$EEE,(Normal_palette_line_2+$2).w
                 move.b  $25(a0),collision_flags(a0)
 
-locret_72898:
+LBZMiniSK_HitUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7289A:
+LBZMiniSK_BeginDefeatExplosion:
                 move.l  #Wait_NewDelay,(a0)
-                move.l  #loc_72562,$34(a0)
+                move.l  #LBZMiniSK_FinishDefeatByProfile,$34(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild1_Normal).l
                 cmpi.w  #3,(Player_mode).w
-                beq.s   loc_728C2
+                beq.s   LBZMiniSK_AwardScoreWithoutStoppingTimer
                 jmp     (BossDefeated_StopTimer).l
 ; ---------------------------------------------------------------------------
 
-loc_728C2:
+LBZMiniSK_AwardScoreWithoutStoppingTimer:
                 jmp     (BossDefeated).l
 ; ---------------------------------------------------------------------------
 
-loc_728C8:
+LBZMiniSK_ArmCheckBossDeathOrLoss:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_728EA
+                bne.s   LBZMiniSK_ArmPropagateDetach
                 btst    #0,$38(a1)
-                beq.s   loc_728E4
+                beq.s   LBZMiniSK_ArmTouchDraw
                 btst    #2,$38(a0)
-                bne.s   loc_728EA
+                bne.s   LBZMiniSK_ArmPropagateDetach
 
-loc_728E4:
+LBZMiniSK_ArmTouchDraw:
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_728EA:
+; Mark the next linked segment before detaching the current one
+LBZMiniSK_ArmPropagateDetach:
                 move.w  $44(a0),d0
-                beq.s   loc_728F8
+                beq.s   LBZMiniSK_ArmDetachAndDraw
                 movea.w d0,a1
                 bset    #7,status(a1)
 
-loc_728F8:
+LBZMiniSK_ArmDetachAndDraw:
                 bsr.w   DetachLBZMinibossArmSegmentWithGravity
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_72902:
+LBZMiniSK_ArmCheckPropagatedDetach:
                 btst    #7,status(a0)
-                bne.s   loc_728EA
+                bne.s   LBZMiniSK_ArmPropagateDetach
                 jmp     (Draw_And_Touch_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
 DetachLBZMinibossArmSegmentWithGravity:
-                move.l  #loc_7279E,(a0)
+                move.l  #LBZMiniSK_DetachedArmFallAndDraw,(a0)
                 clr.b   collision_flags(a0)
                 move.w  #$80,$2E(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 add.w   d0,d0
-                lea     word_7293E(pc,d0.w),a1
+                lea     LBZMiniSK_DetachVelocityPairs(pc,d0.w),a1
                 move.w  (a1)+,x_vel(a0)
                 move.w  (a1)+,y_vel(a0)
                 rts
 ; End of function DetachLBZMinibossArmSegmentWithGravity
 
 ; ---------------------------------------------------------------------------
-word_7293E:
+LBZMiniSK_DetachVelocityPairs:
                 dc.w    $100, -$100
                 dc.w    -$200, -$200
                 dc.w    $300, -$200
@@ -534,27 +538,27 @@ ObjDat_LBZMiniboss:
                 dc.w    make_art_tile(ArtTile_LBZMiniboss,1,1)
                 dc.w    $280
                 dc.b    $20, $20,   0,   0
-word_72962:
+LBZMiniSK_CoverAttributes:
                 dc.w    $200
                 dc.b    $20, $20,   3,   0
-word_72968:
+LBZMinibossSK_Arm_PartialAttributePrefix:
                 dc.w    $180
                 dc.b    8,   8,   6, $98
-ChildObjDat_7296E:
+LBZMiniSK_CoverChild:
                 dc.w    1-1
-                dc.l    loc_72596
+                dc.l    LBZMiniSK_CoverFollowDispatchAndDraw
                 dc.b    0,   0
-ChildObjDat_72976:
+LBZMiniSK_FixedArmLinkedChildren:
                 dc.w    6-1
-                dc.l    loc_725F4
-ChildObjDat_7297C:
+                dc.l    LBZMiniSK_ArmDispatchAndCheckLife
+LBZMiniSK_RemovableArmLinkedChildren:
                 dc.w    6-1
-                dc.l    loc_725EE
-byte_72982:
+                dc.l    LBZMiniSK_MarkRemovableChain
+LBZMiniSK_RamAnimationSeed:
                 dc.b    $F,   0,   1,   0,   2, $FC
-byte_72988:
+LBZMiniSK_CoverOpeningAnimation:
                 dc.b    7,   3,   4,   5
-                dc.b    $F8, .jump-byte_72988
+                dc.b    $F8, .jump-LBZMiniSK_CoverOpeningAnimation
 
                 .jump:
                 dc.b    $3F,   5,   5,   5

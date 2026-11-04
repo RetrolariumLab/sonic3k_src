@@ -4,7 +4,7 @@
 ; ---------------------------------------------------------------------------
 
 Obj_LBZ1Robotnik:
-                lea     word_5A2F0(pc),a1
+                lea     LBZSceneS3_CameraActivationBounds(pc),a1
                 jsr     Check_CameraInRange(pc)
                 moveq   #0,d0
                 move.b  routine(a0),d0
@@ -14,19 +14,19 @@ Obj_LBZ1Robotnik:
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 LBZ1Robotnik_Index:
-                dc.w    loc_5A2F8-LBZ1Robotnik_Index
-                dc.w    loc_5A348-LBZ1Robotnik_Index
-                dc.w    loc_5A380-LBZ1Robotnik_Index
-                dc.w    loc_5A3AC-LBZ1Robotnik_Index
-                dc.w    loc_5A3D6-LBZ1Robotnik_Index
-                dc.w    loc_5A406-LBZ1Robotnik_Index
-                dc.w    loc_5A436-LBZ1Robotnik_Index
-                dc.w    loc_5A47E-LBZ1Robotnik_Index
-word_5A2F0:
+                dc.w    LBZSceneS3_InitRobotnikSceneAndBox-LBZ1Robotnik_Index
+                dc.w    LBZSceneS3_WaitPlayerForFirstRetreat-LBZ1Robotnik_Index
+                dc.w    LBZSceneS3_RiseToFirstHeightGate-LBZ1Robotnik_Index
+                dc.w    LBZSceneS3_CheckCameraAndGroundedPlayer-LBZ1Robotnik_Index
+                dc.w    LBZSceneS3_WaitForCollapseEvent-LBZ1Robotnik_Index
+                dc.w    LBZSceneS3_AdvanceCameraMinimumX-LBZ1Robotnik_Index
+                dc.w    LBZSceneS3_RiseToSecondHeightGate-LBZ1Robotnik_Index
+                dc.w    LBZSceneS3_MoveToExitHeight-LBZ1Robotnik_Index
+LBZSceneS3_CameraActivationBounds:
                 dc.w    $500,  $5E0, $3820, $3AC0
 ; ---------------------------------------------------------------------------
 
-loc_5A2F8:
+LBZSceneS3_InitRobotnikSceneAndBox:
                 lea     ObjDat_LBZ1Robotnik(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.b  #-1,collision_property(a0)
@@ -41,40 +41,40 @@ loc_5A2F8:
                 jsr     (Queue_Kos_Module).l
                 lea     (Child1_MakeRoboHead3).l,a2
                 jsr     CreateChild1_Normal(pc)
-                lea     ChildObjDat_5A800(pc),a2
+                lea     LBZSceneS3_AttachedBoxChild(pc),a2
                 jmp     CreateChild3_NormalRepeated(pc)
 ; ---------------------------------------------------------------------------
 
-loc_5A348:
+LBZSceneS3_WaitPlayerForFirstRetreat:
                 lea     (Player_1).w,a1
                 jsr     Find_OtherObject(pc)
                 tst.w   d1
-                beq.s   loc_5A372
+                beq.s   LBZSceneS3_BeginFirstFastRetreat
                 cmpi.w  #$70,d2
-                bhs.s   loc_5A368
+                bhs.s   LBZSceneS3_SwingAndMoveWhileWaiting
                 cmpi.w  #$60,d3
-                bhs.s   loc_5A368
+                bhs.s   LBZSceneS3_SwingAndMoveWhileWaiting
                 btst    #Status_InAir,status(a1)
-                beq.s   loc_5A372
+                beq.s   LBZSceneS3_BeginFirstFastRetreat
 
-loc_5A368:
+LBZSceneS3_SwingAndMoveWhileWaiting:
                 jsr     Swing_UpAndDown(pc)
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_5A372:
+LBZSceneS3_BeginFirstFastRetreat:
                 move.b  #4,routine(a0)
                 move.w  #-$400,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5A380:
+LBZSceneS3_RiseToFirstHeightGate:
                 cmpi.w  #$300,y_pos(a0)
-                blo.s   loc_5A38E
+                blo.s   LBZSceneS3_TeleportToSecondGate
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_5A38E:
+LBZSceneS3_TeleportToSecondGate:
                 move.b  #6,routine(a0)
                 bset    #0,render_flags(a0)
                 move.w  #$3EC0,x_pos(a0)
@@ -82,32 +82,33 @@ loc_5A38E:
                 jmp     (Swing_Setup1).l
 ; ---------------------------------------------------------------------------
 
-loc_5A3AC:
+LBZSceneS3_CheckCameraAndGroundedPlayer:
                 lea     (Player_1).w,a1
                 cmpi.w  #$3B40,(Camera_X_pos).w
-                blo.s   locret_5A3C8
+                blo.s   LBZSceneS3_CollapseGateReturn
                 cmpi.w  #$1C0,y_pos(a1)
-                blo.s   locret_5A3C8
+                blo.s   LBZSceneS3_CollapseGateReturn
                 btst    #Status_InAir,status(a1)
-                beq.s   loc_5A3CA
+                beq.s   LBZSceneS3_RequestLevelCollapse
 
-locret_5A3C8:
+LBZSceneS3_CollapseGateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5A3CA:
+; Set the event's high byte and then wait for the entire word to clear
+LBZSceneS3_RequestLevelCollapse:
                 move.b  #8,routine(a0)
                 st      (Events_fg_4).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5A3D6:
+LBZSceneS3_WaitForCollapseEvent:
                 tst.w   (Events_fg_4).w
-                beq.s   loc_5A3DE
+                beq.s   LBZSceneS3_QueueBoxArtAndOpenCamera
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5A3DE:
+LBZSceneS3_QueueBoxArtAndOpenCamera:
                 move.b  #$A,routine(a0)
                 lea     (ArtKosM_LBZMinibossBox).l,a1
                 move.w  #tiles_to_bytes(ArtTile_LBZMinibossBox),d2
@@ -117,33 +118,33 @@ loc_5A3DE:
                 jmp     (CreateChild6_Simple).l
 ; ---------------------------------------------------------------------------
 
-loc_5A406:
+LBZSceneS3_AdvanceCameraMinimumX:
                 move.w  (Camera_X_pos).w,d0
                 cmpi.w  #$3E50,d0
-                bhs.s   loc_5A414
+                bhs.s   LBZSceneS3_WaitPlayerForSecondRetreat
                 move.w  d0,(Camera_min_X_pos).w
 
-loc_5A414:
+LBZSceneS3_WaitPlayerForSecondRetreat:
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$60,d2
-                blo.s   loc_5A428
+                blo.s   LBZSceneS3_BeginSecondFastRetreat
                 jsr     Swing_UpAndDown(pc)
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_5A428:
+LBZSceneS3_BeginSecondFastRetreat:
                 move.b  #$C,routine(a0)
                 move.w  #-$400,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5A436:
+LBZSceneS3_RiseToSecondHeightGate:
                 cmpi.w  #$12C,y_pos(a0)
-                bls.s   loc_5A444
+                bls.s   LBZSceneS3_ReleaseBoxAndExitDiagonally
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_5A444:
+LBZSceneS3_ReleaseBoxAndExitDiagonally:
                 move.b  #$E,routine(a0)
                 move.w  #$12C,y_pos(a0)
                 bset    #1,$38(a0)
@@ -156,63 +157,63 @@ loc_5A444:
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_5A47E:
+LBZSceneS3_MoveToExitHeight:
                 jsr     (MoveSprite2).l
                 cmpi.w  #$1B8,y_pos(a0)
-                bhs.s   loc_5A48E
+                bhs.s   LBZSceneS3_BeginHorizontalExit
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5A48E:
-                move.l  #loc_5A49A,(a0)
+LBZSceneS3_BeginHorizontalExit:
+                move.l  #LBZSceneS3_MoveTickHitAndDraw,(a0)
                 clr.w   y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5A49A:
+LBZSceneS3_MoveTickHitAndDraw:
                 jsr     (MoveSprite2).l
                 jsr     (UpdateLBZAct1RobotnikHitCooldown).l
                 jmp     Sprite_CheckDeleteTouch2(pc)
 ; ---------------------------------------------------------------------------
 
-loc_5A4AA:
-                move.l  #loc_5A4BA,(a0)
-                lea     ChildObjDat_5A808(pc),a2
+LBZSceneS3_InitAttachedBoxAndParts:
+                move.l  #LBZSceneS3_AttachedBoxCheckRelease,(a0)
+                lea     LBZSceneS3_BoxPartChildren(pc),a2
                 jmp     (CreateChild3_NormalRepeated).l
 ; ---------------------------------------------------------------------------
 
-loc_5A4BA:
+LBZSceneS3_AttachedBoxCheckRelease:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                beq.s   loc_5A4E0
+                beq.s   LBZSceneS3_AttachedBoxFollow
                 move.l  #Obj_Wait,(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_5A4E4,$34(a0)
+                move.l  #LBZSceneS3_AttachedBoxTryMusic,$34(a0)
                 move.w  #$160,y_pos(a0)
 
-loc_5A4E0:
+LBZSceneS3_AttachedBoxFollow:
                 jmp     Refresh_ChildPosition(pc)
 ; ---------------------------------------------------------------------------
 
-loc_5A4E4:
+LBZSceneS3_AttachedBoxTryMusic:
                 jsr     (AllocateObject).l
-                bne.s   loc_5A4F8
+                bne.s   LBZSceneS3_ReleasePartsAndSpawnBoss
                 move.l  #Obj_Song_Fade_Transition,(a1)
                 move.b  #mus_Miniboss,subtype(a1)
 
-loc_5A4F8:
+LBZSceneS3_ReleasePartsAndSpawnBoss:
                 bset    #3,$38(a0)
                 moveq   #signextendB(sfx_BossActivate),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_5A810(pc),a2
+                lea     LBZSceneS3_MinibossRootChild(pc),a2
                 jsr     CreateChild1_Normal(pc)
                 jmp     Go_Delete_Sprite_2(pc)
 ; ---------------------------------------------------------------------------
 
 Obj_LBZMinibossBox:
                 tst.b   (_unkFAAB).w
-                bne.s   loc_5A572
-                move.l  #loc_5A57A,(a0)
+                bne.s   LBZSceneS3_StandaloneBoxSetRangeCull
+                move.l  #LBZSceneS3_StandaloneBoxCheckPlayer,(a0)
                 move.w  #$3EA0,(Camera_max_X_pos).w
                 move.w  #$3C00,(Camera_min_X_pos).w
                 lea     (ArtKosM_LBZMiniboss).l,a1
@@ -224,159 +225,159 @@ Obj_LBZMinibossBox:
                 lea     PLC_BossExplosion(pc),a1
                 jsr     (Load_PLC_Raw).l
                 jsr     (AllocateObject).l
-                bne.s   loc_5A568
+                bne.s   LBZSceneS3_StandaloneBoxSpawnParts
                 move.l  #Obj_Song_Fade_Transition,(a1)
                 move.b  #mus_Miniboss,subtype(a1)
 
-loc_5A568:
-                lea     ChildObjDat_5A808(pc),a2
+LBZSceneS3_StandaloneBoxSpawnParts:
+                lea     LBZSceneS3_BoxPartChildren(pc),a2
                 jmp     (CreateChild3_NormalRepeated).l
 ; ---------------------------------------------------------------------------
 
-loc_5A572:
+LBZSceneS3_StandaloneBoxSetRangeCull:
                 move.l  #Delete_Sprite_If_Not_In_Range,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5A57A:
+LBZSceneS3_StandaloneBoxCheckPlayer:
                 lea     (Player_1).w,a1
                 jsr     (Find_OtherObject).l
                 cmpi.w  #$70,d2
-                bhs.s   loc_5A5A4
+                bhs.s   LBZSceneS3_StandaloneBoxCheckRange
                 move.l  #Obj_Wait,(a0)
                 move.w  #$3DA0,(Camera_min_X_pos).w
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_5A4F8,$34(a0)
+                move.l  #LBZSceneS3_ReleasePartsAndSpawnBoss,$34(a0)
 
-loc_5A5A4:
+LBZSceneS3_StandaloneBoxCheckRange:
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.s   loc_5A5B8
+                bhi.s   LBZSceneS3_StandaloneBoxClearRespawn
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5A5B8:
+LBZSceneS3_StandaloneBoxClearRespawn:
                 jmp     S3Cull_ReleaseRespawnForStatusDelete(pc)
 ; ---------------------------------------------------------------------------
 
-loc_5A5BC:
+LBZSceneS3_BoxPartDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_5A5E0(pc,d0.w),d1
-                jsr     off_5A5E0(pc,d1.w)
+                move.w  LBZSceneS3_BoxPartStateOffsets(pc,d0.w),d1
+                jsr     LBZSceneS3_BoxPartStateOffsets(pc,d1.w)
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_5A5DC
+                bne.s   LBZSceneS3_BoxPartDeleteWithParent
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5A5DC:
+LBZSceneS3_BoxPartDeleteWithParent:
                 jmp     Go_Delete_Sprite(pc)
 ; ---------------------------------------------------------------------------
-off_5A5E0:
-                dc.w    loc_5A5EC-off_5A5E0
-                dc.w    loc_5A5FA-off_5A5E0
-                dc.w    loc_5A618-off_5A5E0
-                dc.w    loc_5A626-off_5A5E0
-                dc.w    loc_5A672-off_5A5E0
-                dc.w    loc_5A688-off_5A5E0
+LBZSceneS3_BoxPartStateOffsets:
+                dc.w    LBZSceneS3_InitBoxPartAndPlan-LBZSceneS3_BoxPartStateOffsets
+                dc.w    LBZSceneS3_BoxPartFollowUntilRelease-LBZSceneS3_BoxPartStateOffsets
+                dc.w    LBZSceneS3_BoxPartTickOpeningDelay-LBZSceneS3_BoxPartStateOffsets
+                dc.w    LBZSceneS3_BoxPartAnimateOpening-LBZSceneS3_BoxPartStateOffsets
+                dc.w    LBZSceneS3_BoxPartMoveAndTickSplit-LBZSceneS3_BoxPartStateOffsets
+                dc.w    LBZSceneS3_BoxPartAnimateFinal-LBZSceneS3_BoxPartStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_5A5EC:
-                lea     ObjDat3_5A7F4(pc),a1
+LBZSceneS3_InitBoxPartAndPlan:
+                lea     LBZSceneS3_BoxPartAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                bra.w   loc_5A6E4
+                bra.w   LBZSceneS3_BoxPartLoadSubtypePlan
 ; ---------------------------------------------------------------------------
 
-loc_5A5FA:
+LBZSceneS3_BoxPartFollowUntilRelease:
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                bne.s   loc_5A60A
+                bne.s   LBZSceneS3_BoxPartBeginOpeningDelay
                 jmp     Refresh_ChildPosition(pc)
 ; ---------------------------------------------------------------------------
 
-loc_5A60A:
+LBZSceneS3_BoxPartBeginOpeningDelay:
                 move.b  #4,routine(a0)
                 move.w  #$55,(Events_fg_4).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5A618:
+LBZSceneS3_BoxPartTickOpeningDelay:
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_5A624
+                bpl.s   LBZSceneS3_BoxPartDelayReturn
                 move.b  #6,routine(a0)
 
-locret_5A624:
+LBZSceneS3_BoxPartDelayReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5A626:
+LBZSceneS3_BoxPartAnimateOpening:
                 jmp     (Animate_Raw).l
 ; ---------------------------------------------------------------------------
 
-loc_5A62C:
+LBZSceneS3_BoxPartBeginSplitFlight:
                 move.b  #8,routine(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 subi.w  #$C,d0
-                move.w  word_5A66A(pc,d0.w),y_vel(a0)
+                move.w  LBZSceneS3_BoxPartSplitYSpeeds(pc,d0.w),y_vel(a0)
                 add.w   d0,d0
-                move.l  off_5A65A(pc,d0.w),$30(a0)
-                move.l  #loc_5A68E,$34(a0)
+                move.l  LBZSceneS3_BoxPartFinalAnimPointers(pc,d0.w),$30(a0)
+                move.l  #LBZSceneS3_BoxPartSetSettledDraw,$34(a0)
                 move.w  #$5F,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
-off_5A65A:
-                dc.l    byte_5A822
-                dc.l    byte_5A822
-                dc.l    byte_5A827
-                dc.l    byte_5A827
-word_5A66A:
+LBZSceneS3_BoxPartFinalAnimPointers:
+                dc.l    LBZSceneS3_BoxSettleFrames0To2
+                dc.l    LBZSceneS3_BoxSettleFrames0To2
+                dc.l    LBZSceneS3_BoxSettleFrames3To5
+                dc.l    LBZSceneS3_BoxSettleFrames3To5
+LBZSceneS3_BoxPartSplitYSpeeds:
                 dc.w    -$40,   $40,  -$40,   $40
 ; ---------------------------------------------------------------------------
 
-loc_5A672:
+LBZSceneS3_BoxPartMoveAndTickSplit:
                 jsr     (MoveSprite2).l
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_5A680
+                bmi.s   LBZSceneS3_BoxPartBeginFinalAnimation
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5A680:
+LBZSceneS3_BoxPartBeginFinalAnimation:
                 move.b  #$A,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5A688:
+LBZSceneS3_BoxPartAnimateFinal:
                 jmp     (Animate_Raw).l
 ; ---------------------------------------------------------------------------
 
-loc_5A68E:
-                move.l  #loc_5A69C,(a0)
+LBZSceneS3_BoxPartSetSettledDraw:
+                move.l  #LBZSceneS3_SettledBoxPartDrawOrCull,(a0)
                 move.w  #$380,priority(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5A69C:
+LBZSceneS3_SettledBoxPartDrawOrCull:
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.s   loc_5A6B4
+                bhi.s   LBZSceneS3_SettledBoxPartRestoreArt
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5A6B4:
+LBZSceneS3_SettledBoxPartRestoreArt:
                 cmpi.b  #$C,subtype(a0)
-                bne.s   loc_5A6D0
+                bne.s   LBZSceneS3_DeleteSettledBoxPart
                 lea     PLC_MonitorsSpikesSprings(pc),a1
                 jsr     (Load_PLC_Raw).l
                 lea     PLC_LBZRobotnikAfter(pc),a1
                 jsr     (Load_PLC_Raw).l
 
-loc_5A6D0:
+LBZSceneS3_DeleteSettledBoxPart:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 PLC_LBZRobotnikAfter:   plrlistheader
@@ -386,14 +387,14 @@ PLC_LBZRobotnikAfter_End:
                 plreq   ArtTile_LBZMisc, ArtNem_LBZMisc
 ; ---------------------------------------------------------------------------
 
-loc_5A6E4:
+LBZSceneS3_BoxPartLoadSubtypePlan:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_5A728(pc,d0.w),$2E(a0)
+                move.w  LBZSceneS3_BoxPartOpeningDelays(pc,d0.w),$2E(a0)
                 add.w   d0,d0
-                move.l  off_5A73C(pc,d0.w),$30(a0)
-                move.l  off_5A764(pc,d0.w),$34(a0)
-                lea     byte_5A78C(pc),a1
+                move.l  LBZSceneS3_BoxPartOpeningAnimPointers(pc,d0.w),$30(a0)
+                move.l  LBZSceneS3_BoxPartAnimCallbackPointers(pc,d0.w),$34(a0)
+                lea     LBZSceneS3_BoxPartSubtypePoseRecords(pc),a1
                 adda.w  d0,a1
                 move.b  (a1)+,mapping_frame(a0)
                 move.b  (a1)+,d1
@@ -408,7 +409,7 @@ loc_5A6E4:
                 add.w   d1,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
-word_5A728:
+LBZSceneS3_BoxPartOpeningDelays:
                 dc.w    0
                 dc.w    0
                 dc.w    $10
@@ -419,29 +420,29 @@ word_5A728:
                 dc.w    $50
                 dc.w    $70
                 dc.w    $60
-off_5A73C:
-                dc.l    byte_5A818
-                dc.l    byte_5A818
-                dc.l    byte_5A81D
-                dc.l    byte_5A81D
-                dc.l    byte_5A81D
-                dc.l    byte_5A81D
-                dc.l    byte_5A82C
-                dc.l    byte_5A82C
-                dc.l    byte_5A830
-                dc.l    byte_5A830
-off_5A764:
+LBZSceneS3_BoxPartOpeningAnimPointers:
+                dc.l    LBZSceneS3_BoxOpenFrames6To8
+                dc.l    LBZSceneS3_BoxOpenFrames6To8
+                dc.l    LBZSceneS3_BoxOpenFrames9To11
+                dc.l    LBZSceneS3_BoxOpenFrames9To11
+                dc.l    LBZSceneS3_BoxOpenFrames9To11
+                dc.l    LBZSceneS3_BoxOpenFrames9To11
+                dc.l    LBZSceneS3_BoxSplitFromFrame0
+                dc.l    LBZSceneS3_BoxSplitFromFrame0
+                dc.l    LBZSceneS3_BoxSplitFromFrame3
+                dc.l    LBZSceneS3_BoxSplitFromFrame3
+LBZSceneS3_BoxPartAnimCallbackPointers:
                 dc.l    Go_Delete_Sprite
                 dc.l    Go_Delete_Sprite
                 dc.l    Go_Delete_Sprite
                 dc.l    Go_Delete_Sprite
                 dc.l    Go_Delete_Sprite
                 dc.l    Go_Delete_Sprite
-                dc.l    loc_5A62C
-                dc.l    loc_5A62C
-                dc.l    loc_5A62C
-                dc.l    loc_5A62C
-byte_5A78C:
+                dc.l    LBZSceneS3_BoxPartBeginSplitFlight
+                dc.l    LBZSceneS3_BoxPartBeginSplitFlight
+                dc.l    LBZSceneS3_BoxPartBeginSplitFlight
+                dc.l    LBZSceneS3_BoxPartBeginSplitFlight
+LBZSceneS3_BoxPartSubtypePoseRecords:
                 dc.b    6,   0,-$10,   0
                 dc.b    6,   2, $10,   0
                 dc.b    9,   0,   0, $14
@@ -458,21 +459,21 @@ byte_5A78C:
 
 UpdateLBZAct1RobotnikHitCooldown:
                 tst.b   collision_flags(a0)
-                bne.s   locret_5A7E6
+                bne.s   LBZSceneS3_RobotnikHitUpdateReturn
                 tst.b   $20(a0)
-                bne.s   loc_5A7D4
+                bne.s   LBZSceneS3_RobotnikTickHitCooldown
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
                 bset    #6,status(a0)
 
-loc_5A7D4:
+LBZSceneS3_RobotnikTickHitCooldown:
                 subq.b  #1,$20(a0)
-                bne.s   locret_5A7E6
+                bne.s   LBZSceneS3_RobotnikHitUpdateReturn
                 bclr    #6,status(a0)
                 move.b  $25(a0),collision_flags(a0)
 
-locret_5A7E6:
+LBZSceneS3_RobotnikHitUpdateReturn:
                 rts
 ; End of function UpdateLBZAct1RobotnikHitCooldown
 
@@ -482,33 +483,33 @@ ObjDat_LBZ1Robotnik:
                 dc.w    make_art_tile(ArtTile_RobotnikShip,0,0)
                 dc.w    $100
                 dc.b    $20, $20,  $A,  $F
-ObjDat3_5A7F4:
+LBZSceneS3_BoxPartAttributes:
                 dc.l    Map_LBZMinibossBox
                 dc.w    make_art_tile(ArtTile_LBZMinibossBox,2,0)
                 dc.w    $100
                 dc.b    $14, $14,   0,   0
-ChildObjDat_5A800:
+LBZSceneS3_AttachedBoxChild:
                 dc.w    1-1
-                dc.l    loc_5A4AA
+                dc.l    LBZSceneS3_InitAttachedBoxAndParts
                 dc.b    0, $34
-ChildObjDat_5A808:
+LBZSceneS3_BoxPartChildren:
                 dc.w    $A-1
-                dc.l    loc_5A5BC
+                dc.l    LBZSceneS3_BoxPartDispatchAndDraw
                 dc.b    0,   0
-ChildObjDat_5A810:
+LBZSceneS3_MinibossRootChild:
                 dc.w    1-1
                 dc.l    Obj_LBZMiniboss
                 dc.b    0,   0
-byte_5A818:
+LBZSceneS3_BoxOpenFrames6To8:
                 dc.b    0,   6,   7,   8, $F4
-byte_5A81D:
+LBZSceneS3_BoxOpenFrames9To11:
                 dc.b    0,   9,  $A,  $B, $F4
-byte_5A822:
+LBZSceneS3_BoxSettleFrames0To2:
                 dc.b    5,   0,   1,   2, $F4
-byte_5A827:
+LBZSceneS3_BoxSettleFrames3To5:
                 dc.b    5,   3,   4,   5, $F4
-byte_5A82C:
+LBZSceneS3_BoxSplitFromFrame0:
                 dc.b    0,   0,   0, $F4
-byte_5A830:
+LBZSceneS3_BoxSplitFromFrame3:
                 dc.b    0,   3,   3, $F4
                 even

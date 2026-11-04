@@ -6,7 +6,7 @@
 Obj_LBZ2UnusedRobotnik:
                 lea     ObjDat_LBZ2UnusedRobotnik(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #loc_51BB6,(a0)
+                move.l  #LBZShipS3_LegacyScaleMoveAndDraw,(a0)
                 bset    #0,render_flags(a0)
                 move.w  #tiles_to_bytes(ArtTile_LBZFinalBoss2),$3A(a0)
                 move.b  #$30,$25(a0)
@@ -27,7 +27,7 @@ Obj_LBZ2UnusedRobotnik:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_51BB6:
+LBZShipS3_LegacyScaleMoveAndDraw:
                 bsr.w   LBZUnusedRobotnik_StepArtAndScale
                 bsr.w   LBZUnusedRobotnik_AdjustVel
                 bsr.w   LBZUnusedRobotnik_IntegrateAndProject

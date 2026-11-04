@@ -18,39 +18,39 @@ MoveAndSolidifyLBZEndBossTopPlatform:
 
 HandleLBZEndBossSingleColorHitOrEscape:
                 tst.l   (a0)
-                beq.s   locret_74038
+                beq.s   LBZBossSK_HitUpdateReturn
                 tst.b   collision_flags(a0)
-                bne.s   locret_74038
+                bne.s   LBZBossSK_HitUpdateReturn
                 tst.b   collision_property(a0)
-                beq.s   loc_7403A
+                beq.s   LBZBossSK_BeginDefeatEscape
                 tst.b   $20(a0)
-                bne.s   loc_74006
+                bne.s   LBZBossSK_HitChooseFlashColor
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
 
-loc_74006:
+LBZBossSK_HitChooseFlashColor:
                 bset    #6,status(a0)
                 lea     (Normal_palette_line_2+$16).w,a1
                 move.w  #$222,d0
                 btst    #0,$20(a0)
-                bne.s   loc_74020
+                bne.s   LBZBossSK_HitWriteColorAndTick
                 move.w  #$EEE,d0
 
-loc_74020:
+LBZBossSK_HitWriteColorAndTick:
                 move.w  d0,(a1)
                 subq.b  #1,$20(a0)
-                bne.s   locret_74038
+                bne.s   LBZBossSK_HitUpdateReturn
                 bclr    #6,status(a0)
                 move.w  #$222,(a1)
                 move.b  $25(a0),collision_flags(a0)
 
-locret_74038:
+LBZBossSK_HitUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7403A:
-                move.l  #loc_73A52,(a0)
+LBZBossSK_BeginDefeatEscape:
+                move.l  #LBZBossSK_EscapeMoveAndDraw,(a0)
                 clr.b   (Update_HUD_timer).w
                 moveq   #100,d0
                 jsr     (HUD_AddToScore).l
@@ -59,13 +59,13 @@ loc_7403A:
                 bset    #4,$38(a0)
                 move.w  #make_art_tile(ArtTile_LBZEndBoss,1,1),art_tile(a0)
                 move.w  #-$200,y_vel(a0)
-                move.l  #loc_73A6A,$34(a0)
+                move.l  #LBZBossSK_FinishEscapeAndRestoreMusic,$34(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild1_Normal).l
-                bne.s   loc_74086
+                bne.s   LBZBossSK_ExpandRightCameraBound
                 move.b  #4,subtype(a1)
 
-loc_74086:
+LBZBossSK_ExpandRightCameraBound:
                 move.w  #$3AB8,(Camera_stored_max_X_pos).w
                 lea     (Child6_IncLevX).l,a2
                 jmp     (CreateChild6_Simple).l
@@ -73,25 +73,25 @@ loc_74086:
 
 ; ---------------------------------------------------------------------------
 
-loc_74098:
+LBZBossSK_PlatformDrawOrBreakAway:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_740AA
+                bne.s   LBZBossSK_PlatformDetachAndRelease
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_740AA:
+LBZBossSK_PlatformDetachAndRelease:
                 move.l  #MoveChkDel,(a0)
                 bset    #7,status(a0)
                 move.w  #make_art_tile(ArtTile_LBZEndBoss,1,1),art_tile(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_740E4(pc,d0.w),x_vel(a0)
+                move.w  LBZBossSK_PlatformDefeatXSpeeds(pc,d0.w),x_vel(a0)
                 move.w  #-$200,y_vel(a0)
                 jsr     (Displace_PlayerOffObject).l
                 lea     (Player_2).w,a1
                 bclr    #Status_RollJump,status(a1)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-word_740E4:
+LBZBossSK_PlatformDefeatXSpeeds:
                 dc.w    $300,  $200, -$200, -$300

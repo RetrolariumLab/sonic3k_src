@@ -7,20 +7,20 @@ Obj_LBZ2RobotnikShip:
                 move.w  a0,(Events_bg+$00).w
                 lea     ObjDat_LBZ2RobotnikShip(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_8D2B6,(a0)
+                move.l  #LBZShipSK_CapturePlayerOnContact,(a0)
                 bset    #0,render_flags(a0)
 
-loc_8D2B6:
+LBZShipSK_CapturePlayerOnContact:
                 moveq   #0,d0
                 move.b  collision_property(a0),d0
-                beq.w   loc_8D33E
+                beq.w   LBZAct2ShipSK_Capture_CullTouchAndDraw
                 clr.b   collision_property(a0)
                 cmpi.b  #2,d0
-                beq.w   loc_8D33E
+                beq.w   LBZAct2ShipSK_Capture_CullTouchAndDraw
                 lea     (Player_1).w,a1
                 tst.b   object_control(a1)
-                bne.w   loc_8D33E
-                move.l  #loc_8D370,(a0)
+                bne.w   LBZAct2ShipSK_Capture_CullTouchAndDraw
+                move.l  #LBZShipSK_MoveAttachAndDrawCarry,(a0)
                 move.b  #$83,object_control(a1)
                 bclr    #0,render_flags(a1)
                 bclr    #Status_Facing,status(a1)
@@ -28,7 +28,7 @@ loc_8D2B6:
                 bset    #7,art_tile(a1)
                 move.w  #-$100,y_vel(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_8D344,$34(a0)
+                move.l  #LBZShipSK_BeginLongCarrySwing,$34(a0)
                 moveq   #signextendB(sfx_Rising),d0
                 jsr     (Play_SFX).l
                 st      (Anim_Counters+$F).w
@@ -39,23 +39,23 @@ loc_8D2B6:
                 jsr     (CreateChild1_Normal).l
                 jsr     LBZShip_SetPlayerCarryFrame(pc)
 
-loc_8D33E:
+LBZAct2ShipSK_Capture_CullTouchAndDraw:
                 jmp     (Sprite_CheckDeleteTouch).l
 ; ---------------------------------------------------------------------------
 
-loc_8D344:
-                move.l  #loc_8D36A,(a0)
+LBZShipSK_BeginLongCarrySwing:
+                move.l  #LBZShipSK_SwingDuringCarry,(a0)
                 move.w  y_pos(a0),$3A(a0)
                 move.w  #$100,x_vel(a0)
                 move.w  #$1DF,$2E(a0)
-                move.l  #loc_8D38A,$34(a0)
+                move.l  #LBZShipSK_BeginCarryPause,$34(a0)
                 jmp     (Swing_Setup1).l
 ; ---------------------------------------------------------------------------
 
-loc_8D36A:
+LBZShipSK_SwingDuringCarry:
                 jsr     (Swing_UpAndDown).l
 
-loc_8D370:
+LBZShipSK_MoveAttachAndDrawCarry:
                 jsr     (MoveSprite2).l
                 bsr.w   AttachPlayer1PositionToLBZRobotnikShip
                 jsr     (Obj_Wait).l
@@ -63,20 +63,20 @@ loc_8D370:
                 jmp     (Sprite_CheckDeleteTouch).l
 ; ---------------------------------------------------------------------------
 
-loc_8D38A:
+LBZShipSK_BeginCarryPause:
                 move.w  #$3F,$2E(a0)
                 clr.w   x_vel(a0)
-                move.l  #loc_8D39E,$34(a0)
+                move.l  #LBZAct2ShipSK_Carry_SelectTargetApproach,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8D39E:
-                move.l  #loc_8D3AC,(a0)
+LBZAct2ShipSK_Carry_SelectTargetApproach:
+                move.l  #LBZShipSK_ApproachTargetAndSignalImpact,(a0)
                 move.w  #$100,x_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8D3AC:
+LBZShipSK_ApproachTargetAndSignalImpact:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 bsr.w   AttachPlayer1PositionToLBZRobotnikShip
@@ -84,19 +84,19 @@ loc_8D3AC:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 cmpi.w  #$50,d0
-                bhs.s   loc_8D3E8
+                bhs.s   LBZShipSK_DrawAfterImpactCheck
                 bset    #1,$38(a1)
-                move.l  #loc_8D36A,(a0)
+                move.l  #LBZShipSK_SwingDuringCarry,(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_8D3F2,$34(a0)
+                move.l  #LBZShipSK_BeginBackwardBounce,$34(a0)
 
-loc_8D3E8:
+LBZShipSK_DrawAfterImpactCheck:
                 jsr     LBZShip_SetPlayerCarryFrame(pc)
                 jmp     (Sprite_CheckDeleteTouch).l
 ; ---------------------------------------------------------------------------
 
-loc_8D3F2:
-                move.l  #loc_8D40E,(a0)
+LBZShipSK_BeginBackwardBounce:
+                move.l  #LBZShipSK_BounceToSavedHeight,(a0)
                 move.w  #-$200,x_vel(a0)
                 move.w  #-$200,y_vel(a0)
                 moveq   #signextendB(sfx_Thump),d0
@@ -104,49 +104,49 @@ loc_8D3F2:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8D40E:
+LBZShipSK_BounceToSavedHeight:
                 jsr     (MoveSprite_LightGravity).l
                 bsr.w   AttachPlayer1PositionToLBZRobotnikShip
                 tst.w   y_vel(a0)
-                bmi.s   loc_8D446
+                bmi.s   LBZShipSK_DrawAfterBounce
                 move.w  y_pos(a0),d0
                 cmp.w   $3A(a0),d0
-                blo.s   loc_8D446
-                move.l  #loc_8D36A,(a0)
+                blo.s   LBZShipSK_DrawAfterBounce
+                move.l  #LBZShipSK_SwingDuringCarry,(a0)
                 clr.w   x_vel(a0)
                 move.w  #$5F,$2E(a0)
-                move.l  #loc_8D450,$34(a0)
+                move.l  #LBZShipSK_BeginShakeAndEventWait,$34(a0)
                 jsr     (Swing_Setup1).l
 
-loc_8D446:
+LBZShipSK_DrawAfterBounce:
                 jsr     LBZShip_SetPlayerCarryFrame(pc)
                 jmp     (Sprite_CheckDeleteTouch).l
 ; ---------------------------------------------------------------------------
 
-loc_8D450:
-                move.l  #loc_8D36A,(a0)
+LBZShipSK_BeginShakeAndEventWait:
+                move.l  #LBZShipSK_SwingDuringCarry,(a0)
                 st      (Screen_shake_flag).w
                 st      (Events_fg_5).w
                 move.w  #$FF,$2E(a0)
-                move.l  #loc_8D46E,$34(a0)
+                move.l  #LBZShipSK_BeginDepartureToReleaseX,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8D46E:
-                move.l  #loc_8D47C,(a0)
+LBZShipSK_BeginDepartureToReleaseX:
+                move.l  #LBZShipSK_MoveAndLaunchPlayerAtX,(a0)
                 move.w  #$100,x_vel(a0)
 
-locret_8D47A:
+LBZShipSK_DepartureReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8D47C:
+LBZShipSK_MoveAndLaunchPlayerAtX:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 bsr.w   AttachPlayer1PositionToLBZRobotnikShip
                 cmpi.w  #$4440,x_pos(a0)
-                blo.s   loc_8D4C2
-                move.l  #loc_8D4CC,(a0)
+                blo.s   LBZShipSK_DrawCarryPoseAfterRelease
+                move.l  #LBZShipSK_MoveEmptyShip,(a0)
                 clr.w   (Screen_shake_flag).w
                 lea     (Player_1).w,a1
                 clr.b   object_control(a1)
@@ -156,22 +156,24 @@ loc_8D47C:
                 move.b  #2,anim(a1)
                 clr.b   jumping(a1)
 
-loc_8D4C2:
+; The carry graphics are still forced on the update that releases player one
+LBZShipSK_DrawCarryPoseAfterRelease:
                 jsr     LBZShip_SetPlayerCarryFrame(pc)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_8D4CC:
+LBZShipSK_MoveEmptyShip:
                 tst.b   render_flags(a0)
-                bpl.s   loc_8D4E4
+                bpl.s   LBZShipSK_SpawnFinalBossOffscreen
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 jmp     (Sprite_CheckDeleteTouch2).l
 ; ---------------------------------------------------------------------------
 
-loc_8D4E4:
+; Leave the ship active and retry when boss allocation fails
+LBZShipSK_SpawnFinalBossOffscreen:
                 jsr     (AllocateObject).l
-                bne.w   locret_8D47A
+                bne.w   LBZShipSK_DepartureReturn
                 move.l  #Obj_LBZFinalBoss1,(a1)
                 move.w  #$44A0,x_pos(a1)
                 move.w  #$780,y_pos(a1)
@@ -192,20 +194,20 @@ AttachPlayer1PositionToLBZRobotnikShip:
 
 ; ---------------------------------------------------------------------------
 
-loc_8D522:                                              ; used in Sonic 3, unused in Sonic 3 & Knuckles
+LBZShipSK_WaitForP2Offscreen:                           ; used in Sonic 3, unused in Sonic 3 & Knuckles
                 lea     (Player_2).w,a1
                 tst.l   (a1)
-                beq.s   loc_8D538
+                beq.s   LBZShipSK_DeleteP2Cleanup
                 tst.b   render_flags(a1)
-                bpl.s   loc_8D532
+                bpl.s   LBZShipSK_ClearP2AndTailsHandlers
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8D532:
+LBZShipSK_ClearP2AndTailsHandlers:
                 clr.l   (a1)
                 clr.l   (Tails_tails).w
 
-loc_8D538:
+LBZShipSK_DeleteP2Cleanup:
                 jmp     (Delete_Current_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -215,18 +217,18 @@ LBZShip_SetPlayerCarryFrame:
                 lea     (Player_1).w,a1
                 moveq   #0,d0
                 move.b  character_id(a1),d0
-                move.b  RawAni_8D55C(pc,d0.w),mapping_frame(a1)
+                move.b  LBZShipSK_CarryFramesByCharacter(pc,d0.w),mapping_frame(a1)
                 add.w   d0,d0
-                movea.w word_8D55E(pc,d0.w),a2
+                movea.w LBZShipSK_PreviousFrameAddresses(pc,d0.w),a2
                 clr.b   (a2)
                 jmp     (Player_Load_PLC).l
 ; End of function LBZShip_SetPlayerCarryFrame
 
 ; ---------------------------------------------------------------------------
-RawAni_8D55C:
+LBZShipSK_CarryFramesByCharacter:
                 dc.b    $BA, $AD
                 even
-word_8D55E:
+LBZShipSK_PreviousFrameAddresses:
                 dc.w    Player_prev_frame, Player_prev_frame_P2
 ObjDat_LBZ2RobotnikShip:
                 dc.l    Map_RobotnikShip
