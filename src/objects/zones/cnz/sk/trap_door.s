@@ -11,9 +11,9 @@ Obj_CNZTrapDoor:
                 move.w  #$80,priority(a0)
                 move.b  #$20,width_pixels(a0)
                 move.b  #8,height_pixels(a0)
-                move.l  #loc_31CCA,(a0)
+                move.l  #SKCNZTrapDoor_UpdateTriggersAndDraw,(a0)
 
-loc_31CCA:
+SKCNZTrapDoor_UpdateTriggersAndDraw:
                 lea     (Player_1).w,a1
                 bsr.s   TriggerCnzTrapDoorFromBelow
                 lea     (Player_2).w,a1
@@ -33,17 +33,17 @@ TriggerCnzTrapDoorFromBelow:
                 sub.w   x_pos(a1),d0
                 addi.w  #$20,d0
                 cmpi.w  #$40,d0
-                bhs.s   locret_31D2C
+                bhs.s   SKCNZTrapDoor_TriggerReturn
                 move.w  y_pos(a0),d0
                 sub.w   y_pos(a1),d0
                 addi.w  #$20,d0
                 cmpi.w  #$20,d0
-                bhs.s   locret_31D2C
+                bhs.s   SKCNZTrapDoor_TriggerReturn
                 move.b  #1,anim(a0)
                 moveq   #signextendB(sfx_TrapDoor),d0
                 jsr     (Play_SFX).l
 
-locret_31D2C:
+SKCNZTrapDoor_TriggerReturn:
                 rts
 ; End of function TriggerCnzTrapDoorFromBelow
 

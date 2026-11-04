@@ -10,16 +10,16 @@ CNZ1_ScreenInit:
 
 CNZ1_ScreenEvent:
                 tst.w   (Events_bg+$06).w
-                beq.s   loc_51BAA
+                beq.s   SKCNZ1Screen_DrawFgAndTryRemoveArena
                 clr.w   (Events_bg+$06).w
                 jmp     Refresh_PlaneScreenDirect(pc)
 ; ---------------------------------------------------------------------------
 
-loc_51BAA:
+SKCNZ1Screen_DrawFgAndTryRemoveArena:
                 jsr     DrawTilesAsYouMove(pc)
                 lea     (Events_bg+$00).w,a5
                 tst.l   (a5)
-                beq.w   locret_51C6A
+                beq.w   SKCNZ1Screen_ArenaRemovalReturn
                 move.w  (a5)+,d0                        ; All this below is for removing chunks from the miniboss arena
                 move.w  (a5),d1
                 clr.l   -2(a5)
@@ -70,11 +70,11 @@ loc_51BAA:
                 clr.w   (Events_bg+$04).w
                 moveq   #4-1,d3
 
-loc_51C38:
+SKCNZ1Screen_ScanNextArenaBand:
                 lea     (a4),a5
                 moveq   #2,d2
 
-loc_51C3C:
+SKCNZ1Screen_CheckArenaBandEmpty:
                 moveq   #-1,d0
                 clr.w   d0
                 move.b  (a5)+,d0
@@ -82,19 +82,19 @@ loc_51C3C:
                 add.w   d1,d0
                 movea.l d0,a6
                 tst.l   (a6)+
-                bne.s   locret_51C6A
+                bne.s   SKCNZ1Screen_ArenaRemovalReturn
                 tst.l   (a6)+
-                bne.s   locret_51C6A
+                bne.s   SKCNZ1Screen_ArenaRemovalReturn
                 tst.l   (a6)+
-                bne.s   locret_51C6A
+                bne.s   SKCNZ1Screen_ArenaRemovalReturn
                 tst.l   (a6)
-                bne.s   locret_51C6A
-                dbf     d2,loc_51C3C
+                bne.s   SKCNZ1Screen_ArenaRemovalReturn
+                dbf     d2,SKCNZ1Screen_CheckArenaBandEmpty
                 addi.w  #$20,d1                         ; Basically, if a line of blocks is completely destroyed, the boss is lowered by $20 pixels to compensate
                 addi.w  #$20,(Events_bg+$04).w
-                dbf     d3,loc_51C38
+                dbf     d3,SKCNZ1Screen_ScanNextArenaBand
 
-locret_51C6A:
+SKCNZ1Screen_ArenaRemovalReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -131,9 +131,9 @@ CNZ1_BackgroundEvent_Index:
 
 CNZ1BGE_Normal:
                 cmpi.w  #$3000,(Camera_X_pos).w
-                blo.s   loc_51CFA
+                blo.s   SKCNZ1Screen_DrawNormalParallaxRow
                 cmpi.w  #$54C,(Camera_Y_pos).w
-                blo.s   loc_51CD2
+                blo.s   SKCNZ1Screen_EnterBossBackground
                 move.w  #$700,d0                        ; This is positional adjustment for Knuckles' path
                 sub.w   d0,(Player_1+y_pos).w
                 sub.w   d0,(Player_2+y_pos).w
@@ -141,7 +141,7 @@ CNZ1BGE_Normal:
                 sub.w   d0,(Camera_Y_pos_copy).w
                 jsr     Reset_TileOffsetPositionActual(pc)
 
-loc_51CD2:
+SKCNZ1Screen_EnterBossBackground:
                 jsr     CNZ1_BossLevelScroll(pc)
                 jsr     Reset_TileOffsetPositionEff(pc)
                 lea     (Pal_CNZMiniboss).l,a1
@@ -150,10 +150,10 @@ loc_51CD2:
                 move.w  d0,(Camera_min_Y_pos).w         ; Change level start Y
                 bset    #7,(Disable_wall_grab).w        ; Disable wall grabbing for Knuckles
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_51D26
+                bra.s   SKCNZ1Screen_DrawBossBackground
 ; ---------------------------------------------------------------------------
 
-loc_51CFA:
+SKCNZ1Screen_DrawNormalParallaxRow:
                 jsr     CNZ1_Deform(pc)
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
@@ -170,7 +170,7 @@ CNZ1BGE_BossStart:
                 jsr     CNZ1_ScrollToYStart(pc)
                 jsr     CNZ1_BossLevelScroll(pc)
 
-loc_51D26:
+SKCNZ1Screen_DrawBossBackground:
                 jsr     DrawBGAsYouMove(pc)
                 jmp     PlainDeformation(pc)
 ; ---------------------------------------------------------------------------
@@ -191,14 +191,14 @@ CNZ1BGE_AfterBoss:
                 move.w  #$1C0,d0
                 jsr     CNZ1_ScrollToYStart(pc)
                 tst.w   (Events_fg_5).w
-                bne.s   loc_51D6E
+                bne.s   SKCNZ1Screen_BeginPostBossFgRefresh
                 jsr     CNZ1_BossLevelScroll2(pc)
                 jsr     DrawBGAsYouMove(pc)
                 jsr     PlainDeformation(pc)
                 jmp     Get_BGActualEffectiveDiff(pc)
 ; ---------------------------------------------------------------------------
 
-loc_51D6E:
+SKCNZ1Screen_BeginPostBossFgRefresh:
                 clr.w   (Events_fg_5).w                 ; When signaled
                 move.w  #$2F0,(Draw_delayed_position).w  ; Set refresh position
                 move.w  #$F,(Draw_delayed_rowcount).w   ; Refresh number
@@ -211,7 +211,7 @@ CNZ1BGE_FGRefresh:
                 moveq   #0,d1
                 move.w  #$200,d2
                 jsr     Draw_PlaneVertSingleBottomUp(pc)  ; Refresh the foreground using BG chunks
-                bmi.s   loc_51DAE
+                bmi.s   SKCNZ1Screen_SetArenaLayoutCopy
                 move.w  #VRAM_Plane_B_Name_Table,d7
                 jsr     CNZ1_BossLevelScroll2(pc)
                 jsr     DrawBGAsYouMove(pc)
@@ -219,7 +219,7 @@ CNZ1BGE_FGRefresh:
                 jmp     Get_BGActualEffectiveDiff(pc)
 ; ---------------------------------------------------------------------------
 
-loc_51DAE:
+SKCNZ1Screen_SetArenaLayoutCopy:
                 movea.w $C(a3),a1                       ; $180 Y of BG
                 addq.w  #4,a1                           ; $200 X of BG
                 move.w  -8(a3),d0                       ; Get X size of BG
@@ -230,7 +230,7 @@ loc_51DAE:
                 subq.w  #5,d1
                 moveq   #6-1,d2
 
-loc_51DCA:
+SKCNZ1Screen_CopyArenaLayoutRow:
                 move.b  (a1)+,(a5)+                     ; Replace 5x5 portion of Foreground with equivalent from BG. Basically,
                 move.b  (a1)+,(a5)+                     ; transferring the actual layout to the FG for use with collision
                 move.b  (a1)+,(a5)+
@@ -238,7 +238,7 @@ loc_51DCA:
                 move.b  (a1)+,(a5)+
                 adda.w  d0,a1
                 adda.w  d1,a5
-                dbf     d2,loc_51DCA
+                dbf     d2,SKCNZ1Screen_CopyArenaLayoutRow
                 clr.b   (Background_collision_flag).w   ; Turn off BG collision
                 clr.w   (Events_bg+$08).w               ; Turn off scrolling
                 move.w  #$1C0,d0
@@ -261,7 +261,7 @@ CNZ1BGE_FGRefresh2:
                 move.w  (Camera_X_pos_copy).w,d1
                 move.w  (Camera_Y_pos_copy).w,d2
                 jsr     Draw_PlaneVertSingleBottomUp(pc)  ; Refresh the FG using FG chunks this time
-                bmi.s   loc_51E42
+                bmi.s   SKCNZ1Screen_TrySpawnEndSign
                 addq.w  #2,a3
                 move.w  #VRAM_Plane_B_Name_Table,d7
                 jsr     CNZ1_BossLevelScroll2(pc)
@@ -269,20 +269,20 @@ CNZ1BGE_FGRefresh2:
                 jmp     PlainDeformation(pc)
 ; ---------------------------------------------------------------------------
 
-loc_51E42:
+SKCNZ1Screen_TrySpawnEndSign:
                 addq.w  #2,a3
                 move.w  #VRAM_Plane_B_Name_Table,d7
                 jsr     (AllocateObject).l
-                bne.s   loc_51E5C
+                bne.s   SKCNZ1Screen_EnterActTransitionWait
                 move.l  #Obj_EndSign,(a1)
                 move.w  #$32C0,x_pos(a1)                ; Set up the end sign
 
-loc_51E5C:
+SKCNZ1Screen_EnterActTransitionWait:
                 addq.w  #4,(Events_routine_bg).w
 
 CNZ1BGE_DoTransition:
                 tst.w   (Events_fg_5).w
-                beq.w   loc_51F28                       ; Don't do anything until signpost lands
+                beq.w   SKCNZ1Screen_DrawOldBossScroll  ; Don't do anything until signpost lands
                 clr.w   (Events_fg_5).w
                 movem.l d7-a0/a2-a3,-(sp)
                 moveq   #PLCID_18,d0
@@ -300,10 +300,10 @@ CNZ1BGE_DoTransition:
                 jsr     (LoadSolids).l
                 jsr     (CheckLevelForWater).l          ; Level stuff, etc
                 cmpi.w  #3,(Player_mode).w
-                beq.s   loc_51EC0
+                beq.s   SKCNZ1Screen_LoadAct2PaletteAndRebase
                 move.w  #$8014,(VDP_control_port).l     ; Turn HInt on for water only if not playing as Knuckles
 
-loc_51EC0:
+SKCNZ1Screen_LoadAct2PaletteAndRebase:
                 moveq   #PalID_CNZ2,d0
                 jsr     (LoadPalette_Immediate).l       ; Load CNZ palette
                 movem.l (sp)+,d7-a0/a2-a3
@@ -329,7 +329,7 @@ loc_51EC0:
                 move.w  #$F,(Draw_delayed_rowcount).w
                 clr.w   (Events_routine_bg).w
 
-loc_51F28:
+SKCNZ1Screen_DrawOldBossScroll:
                 jsr     CNZ1_BossLevelScroll2(pc)
                 jsr     DrawBGAsYouMove(pc)
                 jmp     PlainDeformation(pc)
@@ -446,19 +446,19 @@ Obj_CNZMinibossScrollInit:
 
 Obj_CNZMinibossScrollMain:
                 tst.w   (Events_fg_5).w
-                bne.s   loc_52042
+                bne.s   SKCNZ1Screen_BeginScrollAlignment
                 move.l  (Events_bg+$0C).w,d0            ; Speed up scroll
                 cmpi.l  #$40000,d0
-                bhs.s   loc_5203C
+                bhs.s   SKCNZ1Screen_IntegrateMinibossScroll
                 addi.l  #$200,d0
                 move.l  d0,(Events_bg+$0C).w
 
-loc_5203C:
+SKCNZ1Screen_IntegrateMinibossScroll:
                 add.l   d0,(Events_bg+$08).w            ; Set BG scrolling speed
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_52042:
+SKCNZ1Screen_BeginScrollAlignment:
                 clr.w   (Events_fg_5).w                 ; When boss is completed
                 addq.b  #4,routine(a0)
 
@@ -466,39 +466,39 @@ Obj_CNZMinibossScrollWait:
                 move.w  (Events_bg+$08).w,d0
                 andi.w  #$FF,d0
                 cmpi.w  #4,d0
-                blo.s   loc_52062                       ; Wait until the offset is a multiple of $100
+                blo.s   SKCNZ1Screen_BeginScrollDeceleration  ; Wait until the offset is a multiple of $100
                 move.l  (Events_bg+$0C).w,d0
                 add.l   d0,(Events_bg+$08).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_52062:
+SKCNZ1Screen_BeginScrollDeceleration:
                 addq.b  #4,routine(a0)
 
 Obj_CNZMinibossScrollSlow:
                 move.l  (Events_bg+$0C).w,d0            ; Start slowing down the scrolling
                 cmpi.l  #$10000,d0
-                bls.s   loc_52082
+                bls.s   SKCNZ1Screen_BeginSlowScrollAlignment
                 subi.l  #$400,d0
                 move.l  d0,(Events_bg+$0C).w
                 add.l   d0,(Events_bg+$08).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_52082:
+SKCNZ1Screen_BeginSlowScrollAlignment:
                 addq.b  #4,routine(a0)
 
 Obj_CNZMinibossScrollWait2:
                 move.w  (Events_bg+$08).w,d0
                 andi.w  #$FF,d0
                 cmpi.w  #4,d0
-                blo.s   loc_5209E                       ; Keep going until offset is a multiple of $100 again
+                blo.s   SKCNZ1Screen_EnablePostBossCollision  ; Keep going until offset is a multiple of $100 again
                 move.l  (Events_bg+$0C).w,d0
                 add.l   d0,(Events_bg+$08).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5209E:
+SKCNZ1Screen_EnablePostBossCollision:
                 move.w  d0,(Events_bg+$08).w            ; Reset scroll offset
                 move.w  #$1000,(Camera_target_max_Y_pos).w  ; Reset Y end
                 st      (Background_collision_flag).w   ; BG collision is on
@@ -509,21 +509,21 @@ loc_5209E:
                 moveq   #0,d1
                 moveq   #6,d2
 
-loc_520C0:
+SKCNZ1Screen_ClearArenaColumn:
                 move.b  d1,(a1)                         ; Copy top of FG at $3380 downwards
                 adda.w  d0,a1
-                dbf     d2,loc_520C0
+                dbf     d2,SKCNZ1Screen_ClearArenaColumn
                 addq.b  #4,routine(a0)
 
 Obj_CNZMinibossScrollWait3:
                 cmpi.w  #$1C0,(Events_bg+$08).w         ; Wait till scroll offset is $1C0
-                bhs.s   loc_520DE
+                bhs.s   SKCNZ1Screen_FinishMinibossScroll
                 move.l  (Events_bg+$0C).w,d0
                 add.l   d0,(Events_bg+$08).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_520DE:
+SKCNZ1Screen_FinishMinibossScroll:
                 st      (Events_fg_5).w                 ; Set flag to continue next BG event
                 jmp     (Delete_Current_Sprite).l
 
@@ -532,15 +532,16 @@ loc_520DE:
 CNZ1_ScrollToYStart:
                 move.w  (Camera_Y_pos).w,d1
                 cmp.w   d0,d1
-                blo.s   loc_520F2
+                blo.s   SKCNZ1Screen_TryRaiseMinY
                 exg     d0,d1
 
-loc_520F2:
+; Raise the minimum Y only as far as the camera has reached, capped at the requested start
+SKCNZ1Screen_TryRaiseMinY:
                 cmp.w   (Camera_min_Y_pos).w,d1
-                bls.s   locret_520FC
+                bls.s   SKCNZ1Screen_MinYReturn
                 move.w  d1,(Camera_min_Y_pos).w
 
-locret_520FC:
+SKCNZ1Screen_MinYReturn:
                 rts
 ; End of function CNZ1_ScrollToYStart
 

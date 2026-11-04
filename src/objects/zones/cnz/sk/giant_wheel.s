@@ -6,9 +6,9 @@
 
 Obj_CNZGiantWheel:
                 move.b  #$60,$32(a0)
-                move.l  #loc_328D0,(a0)
+                move.l  #SKCNZGiantWheel_UpdatePlayersAndCull,(a0)
 
-loc_328D0:
+SKCNZGiantWheel_UpdatePlayersAndCull:
                 lea     $36(a0),a2
                 lea     (Player_1).w,a1
                 bsr.s   ConstrainPlayerSpeedOnCnzGiantWheel
@@ -28,72 +28,72 @@ ConstrainPlayerSpeedOnCnzGiantWheel:
                 sub.w   x_pos(a0),d0
                 add.w   d2,d0
                 cmp.w   d3,d0
-                bhs.s   loc_3291A
+                bhs.s   SKCNZGiantWheel_TryClearConvexStick
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 add.w   d2,d1
                 cmp.w   d3,d1
-                bhs.s   loc_3291A
+                bhs.s   SKCNZGiantWheel_TryClearConvexStick
                 btst    #Status_InAir,status(a1)
-                beq.s   loc_32926
+                beq.s   SKCNZGiantWheel_LatchGroundedEntry
                 clr.b   (a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3291A:
+SKCNZGiantWheel_TryClearConvexStick:
                 tst.b   (a2)
-                beq.s   locret_32924
+                beq.s   SKCNZGiantWheel_OutsideReturn
                 clr.b   stick_to_convex(a1)
                 clr.b   (a2)
 
-locret_32924:
+SKCNZGiantWheel_OutsideReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_32926:
+SKCNZGiantWheel_LatchGroundedEntry:
                 tst.b   (a2)
-                bne.s   loc_3294C
+                bne.s   SKCNZGiantWheel_ClampSpeedByDirection
                 move.b  #1,(a2)
                 btst    #Status_Roll,status(a1)
-                bne.s   loc_3293A
+                bne.s   SKCNZGiantWheel_BeginConvexStick
                 clr.b   anim(a1)
 
-loc_3293A:
+SKCNZGiantWheel_BeginConvexStick:
                 bclr    #Status_Push,status(a1)
                 move.b  #1,prev_anim(a1)
                 move.b  #1,stick_to_convex(a1)
 
-loc_3294C:
+SKCNZGiantWheel_ClampSpeedByDirection:
                 move.w  ground_vel(a1),d0
                 btst    #0,status(a0)
-                beq.s   loc_32974
+                beq.s   SKCNZGiantWheel_SetPositiveSpeedFloor
                 cmpi.w  #-$400,d0
-                ble.s   loc_32966
+                ble.s   SKCNZGiantWheel_CapNegativeSpeed
                 move.w  #-$400,ground_vel(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_32966:
+SKCNZGiantWheel_CapNegativeSpeed:
                 cmpi.w  #-$F00,d0
-                bge.s   locret_32972
+                bge.s   SKCNZGiantWheel_NegativeClampReturn
                 move.w  #-$F00,ground_vel(a1)
 
-locret_32972:
+SKCNZGiantWheel_NegativeClampReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_32974:
+SKCNZGiantWheel_SetPositiveSpeedFloor:
                 cmpi.w  #$400,d0
-                bge.s   loc_32982
+                bge.s   SKCNZGiantWheel_CapPositiveSpeed
                 move.w  #$400,ground_vel(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_32982:
+SKCNZGiantWheel_CapPositiveSpeed:
                 cmpi.w  #$F00,d0
-                ble.s   locret_3298E
+                ble.s   SKCNZGiantWheel_PositiveClampReturn
                 move.w  #$F00,ground_vel(a1)
 
-locret_3298E:
+SKCNZGiantWheel_PositiveClampReturn:
                 rts
 ; End of function ConstrainPlayerSpeedOnCnzGiantWheel

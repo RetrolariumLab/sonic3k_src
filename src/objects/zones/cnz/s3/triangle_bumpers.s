@@ -10,9 +10,9 @@ Obj_CNZTriangleBumpers:
                 move.w  d0,$34(a0)
                 add.w   d0,d0
                 move.w  d0,$32(a0)
-                move.l  #loc_31C36,(a0)
+                move.l  #S3CNZTriBump_TryBouncePlayersAndCull,(a0)
 
-loc_31C36:
+S3CNZTriBump_TryBouncePlayersAndCull:
                 lea     (Player_1).w,a1
                 bsr.s   BouncePlayerFromCnzTriangleRegion
                 lea     (Player_2).w,a1
@@ -26,52 +26,52 @@ BouncePlayerFromCnzTriangleRegion:
                 sub.w   x_pos(a0),d0
                 add.w   $34(a0),d0
                 cmp.w   $32(a0),d0
-                bhs.s   locret_31C74
+                bhs.s   S3CNZTriBump_BounceTestReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 addi.w  #$14,d1
                 cmpi.w  #$28,d1
-                bhs.s   locret_31C74
+                bhs.s   S3CNZTriBump_BounceTestReturn
                 cmpi.b  #4,routine(a1)
-                blo.s   loc_31C76
+                blo.s   S3CNZTriBump_SetDiagonalBounce
 
-locret_31C74:
+S3CNZTriBump_BounceTestReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_31C76:
+S3CNZTriBump_SetDiagonalBounce:
                 move.w  #-$800,x_vel(a1)
                 move.w  #-$800,y_vel(a1)
                 bset    #Status_Facing,status(a1)
                 btst    #0,status(a0)
-                bne.s   loc_31C9A
+                bne.s   S3CNZTriBump_TryFlipVerticalBounce
                 bclr    #Status_Facing,status(a1)
                 neg.w   x_vel(a1)
 
-loc_31C9A:
+S3CNZTriBump_TryFlipVerticalBounce:
                 btst    #1,status(a0)
-                beq.s   loc_31CA6
+                beq.s   S3CNZTriBump_LockAndSetGroundSpeed
                 neg.w   y_vel(a1)
 
-loc_31CA6:
+S3CNZTriBump_LockAndSetGroundSpeed:
                 move.w  #15,move_lock(a1)
                 move.w  x_vel(a1),ground_vel(a1)
                 btst    #Status_Roll,status(a1)
-                bne.s   loc_31CC0
+                bne.s   S3CNZTriBump_TryStartTumble
                 move.b  #0,anim(a1)
 
-loc_31CC0:
+S3CNZTriBump_TryStartTumble:
                 tst.b   flip_angle(a1)
-                bne.s   loc_31CEA
+                bne.s   S3CNZTriBump_FinishAirborneBounce
                 move.b  #1,flip_angle(a1)
                 move.b  #0,anim(a1)
                 move.b  #3,flips_remaining(a1)
                 move.b  #8,flip_speed(a1)
                 btst    #Status_Facing,status(a1)
-                beq.s   loc_31CEA
+                beq.s   S3CNZTriBump_FinishAirborneBounce
                 neg.b   flip_angle(a1)
 
-loc_31CEA:
+S3CNZTriBump_FinishAirborneBounce:
                 clr.b   jumping(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    #Status_RollJump,status(a1)

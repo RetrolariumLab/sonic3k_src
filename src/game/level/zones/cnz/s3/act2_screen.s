@@ -12,12 +12,12 @@ CNZ2_ScreenEvent:
                 move.w  (Screen_shake_offset).w,d0
                 add.w   d0,(Camera_Y_pos_copy).w
                 tst.w   (Events_bg+$06).w
-                beq.s   loc_3DA50
+                beq.s   S3CNZ2Screen_DrawForeground
                 clr.w   (Events_bg+$06).w
                 jmp     Refresh_PlaneScreenDirect(pc)
 ; ---------------------------------------------------------------------------
 
-loc_3DA50:
+S3CNZ2Screen_DrawForeground:
                 jmp     DrawTilesAsYouMove(pc)
 ; ---------------------------------------------------------------------------
 
@@ -38,14 +38,14 @@ CNZ2_BackgroundEvent:
 ; ---------------------------------------------------------------------------
 
 CNZ2_BackgroundEvent_Index:
-                bra.w   loc_3DA88
+                bra.w   S3CNZ2Screen_BeginBackgroundRedraw
 ; ---------------------------------------------------------------------------
-                bra.w   loc_3DAB6
+                bra.w   S3CNZ2Screen_DeformBeforeRedrawStep
 ; ---------------------------------------------------------------------------
-                bra.w   loc_3DACC
+                bra.w   S3CNZ2Screen_DeformNormalBackground
 ; ---------------------------------------------------------------------------
 
-loc_3DA88:
+S3CNZ2Screen_BeginBackgroundRedraw:
                 moveq   #0,d1
                 move.w  #$200,d2
                 jsr     Draw_PlaneVertSingleBottomUp(pc)
@@ -57,25 +57,25 @@ loc_3DA88:
                 move.w  d0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_3DABA
+                bra.s   S3CNZ2Screen_StepBackgroundRedraw
 ; ---------------------------------------------------------------------------
 
-loc_3DAB6:
+S3CNZ2Screen_DeformBeforeRedrawStep:
                 jsr     CNZ1_Deform(pc)
 
-loc_3DABA:
+S3CNZ2Screen_StepBackgroundRedraw:
                 moveq   #0,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 jsr     Draw_PlaneVertSingleBottomUp(pc)
-                bpl.s   loc_3DAD0
+                bpl.s   S3CNZ2Screen_DrawAndShakeBackground
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_3DAD0
+                bra.s   S3CNZ2Screen_DrawAndShakeBackground
 ; ---------------------------------------------------------------------------
 
-loc_3DACC:
+S3CNZ2Screen_DeformNormalBackground:
                 jsr     CNZ1_Deform(pc)
 
-loc_3DAD0:
+S3CNZ2Screen_DrawAndShakeBackground:
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
                 moveq   #0,d1

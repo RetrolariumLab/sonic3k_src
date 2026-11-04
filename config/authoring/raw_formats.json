@@ -541,19 +541,19 @@
     },
     {
       "path": "src/objects/cutscenes/knuckles/s3/angel_island.s",
-      "sha256": "a2b7f8ebe032a010aadfaa4173cd6b7569ebb3aeae04264af410bdb1f1b6dfcb"
+      "sha256": "5a85730f3dd6f35f2a8c9980f1c5e05d7e6ce361966bf4ae3e0e50996378c052"
     },
     {
       "path": "src/objects/cutscenes/knuckles/s3/carnival_night.s",
-      "sha256": "6cf19e2af71ea336945aa6345932f04ec336060709affdab317f2bbe400eae40"
+      "sha256": "c7e2b03e31fb7c69585b1c41fc72c00c26ac97a0e97dbbb0fa77ab36eee7b3b4"
     },
     {
       "path": "src/objects/cutscenes/knuckles/s3/hydrocity.s",
-      "sha256": "def30d0d5984862a40997636cf3120ac0efab8e8eeb08a4d3cfed3e60e392ff9"
+      "sha256": "08088bc6a801ca92cf1b11844ff5a56a60918283d829bb5a11929d9ae3a14d08"
     },
     {
       "path": "src/objects/cutscenes/knuckles/s3/launch_base.s",
-      "sha256": "722989b4a718d36213bffa4501ec0e3608a471a53c691ed433e0f60dc9a3b714"
+      "sha256": "b53ae8139a77f786ac8145a0e4ec881f54e35bf2ac16aaf7a34532992b0dc43d"
     },
     {
       "path": "src/objects/cutscenes/sk/angel_island.s",
@@ -681,19 +681,19 @@
     },
     {
       "path": "src/objects/enemies/cnz/s3/clamer.s",
-      "sha256": "6e6be3093a0b299b84a75c996a2d9a3d28fd099059eccb1e06879fa03aa7f946"
+      "sha256": "3527e9be0d8d563a58beadc2211574085ea46d9372a3604c35f8806a1a5da513"
     },
     {
       "path": "src/objects/enemies/cnz/s3/sparkle.s",
-      "sha256": "a576696ae4bc7bd11f4070a76691aea7f3498dce68706355f66e67481e453ff0"
+      "sha256": "9eba088ccc1fd9264854d1be7d2749946d277896210e20c5f84b9b9933d9d399"
     },
     {
       "path": "src/objects/enemies/cnz/sk/clamer.s",
-      "sha256": "c108b8112d6e8d4cd28701982712ccf0702320074ddab5c7e5816274571d5514"
+      "sha256": "8bd04d4b16d4d79ae3b0491b65d4f59a5254134f3ab149f09e716f26fc401ce2"
     },
     {
       "path": "src/objects/enemies/cnz/sk/sparkle.s",
-      "sha256": "61bfec147e6d4b45772f3f5b7b48e054df5e3c9e4725f78bb26635c10c7c5d35"
+      "sha256": "b48c7449cfcded7a0e509262113f8a343da260d4c6a3a1cd20b6bbfc70086622"
     },
     {
       "path": "src/objects/enemies/fbz/s3/batbot.s",
@@ -1185,23 +1185,23 @@
     },
     {
       "path": "src/objects/zones/cnz/s3/cylinder.s",
-      "sha256": "98be02832f390aebd2f420b44432159ae7b926500703ec19dc25078a4b5f3a74"
+      "sha256": "3c99558c5db44ea02c0ecd1997c3535965bbb5a99ad978961da44afe17645237"
     },
     {
       "path": "src/objects/zones/cnz/s3/water_level_controls.s",
-      "sha256": "55f291605ac83c8c932332c6c0358a01fa8129c2137860c0b92d3c1255e12a17"
+      "sha256": "4f08a37195b9d83f436a807f0dd3e43f9f7403b80e917c5906587c53bca71ca0"
     },
     {
       "path": "src/objects/zones/cnz/s3/wire_cage.s",
-      "sha256": "9a90f7475e06b0406b04452103ad8b2e684b5aad1a4c791ebc727deaaf04c062"
+      "sha256": "ae41159f71a46c6580fc9e612ef243e6b783c5e9b81c2a1d53c5a67d2dd01eea"
     },
     {
       "path": "src/objects/zones/cnz/sk/cylinder.s",
-      "sha256": "8a58cd3bb5bedaf7ca36f80dc3f99fd07efa39cc4a7ac2c40e08d17079e7f6d7"
+      "sha256": "65fc05154f61ba910862391f26aa3db49194a7360f690265871d58d2db28b1b2"
     },
     {
       "path": "src/objects/zones/cnz/sk/wire_cage.s",
-      "sha256": "8d91e45b52bb056834c89b1d3493cf9447b8249764991a7f711c2ee6115c0a45"
+      "sha256": "d3e08e0a21a622e2ea75cd5cd2f85ac579984c8dea1399ddda7ee3f3c06d3fda"
     },
     {
       "path": "src/objects/zones/dez/sk/gravity_hub.s",
@@ -3657,74 +3657,74 @@
     },
     {
       "path": "src/objects/enemies/cnz/s3/clamer.s",
-      "symbol": "byte_56F24",
-      "scope": "byte_56F24",
-      "first_line": 178,
-      "last_line": 197,
+      "symbol": "ClamerS3_Root_IdleFrameDelayPairs",
+      "scope": "ClamerS3_Root_IdleFrameDelayPairs",
+      "first_line": 179,
+      "last_line": 198,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 40,
-      "declarations_sha256": "2c0956bc9370c7de503479976d8228fe5a91c19faffd1beea21018e0f0a97122",
+      "declarations_sha256": "0f167ecc739f08f37e9b374b70e21e5c977dfea321ed8c8905f02b2365337fd8",
       "entries": [
         [0, "pairs"],
         [9, "fixed"],
         [21, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_56F24", "byte_56F2D", "byte_56F39"],
+      "members": ["ClamerS3_Root_IdleFrameDelayPairs", "S3Clamer_ContactAnim", "S3Clamer_FiringAnim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/cnz/s3/sparkle.s",
-      "symbol": "byte_57116",
-      "scope": "byte_57116",
-      "first_line": 208,
-      "last_line": 216,
+      "symbol": "S3Sparkle_ChargeAnim",
+      "scope": "S3Sparkle_ChargeAnim",
+      "first_line": 209,
+      "last_line": 217,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 20,
-      "declarations_sha256": "63b1f9bb595470fd78fc8743efe100ca4ec789f95b9a53855612a0f233d6fdd1",
+      "declarations_sha256": "a7b41687b341a96cf4f0f0f5914b250390b03c993c908dca9c8cb45e8d8688d1",
       "entries": [
         [0, "accelerating"],
         [5, "fixed"],
         [16, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_57116", "byte_5711B", "byte_57126"],
+      "members": ["S3Sparkle_ChargeAnim", "S3Sparkle_ColumnAnim", "SparkleS3_Projectile_UniformTwoFrameLoop"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/cnz/sk/clamer.s",
-      "symbol": "byte_89170",
-      "scope": "byte_89170",
-      "first_line": 180,
-      "last_line": 199,
+      "symbol": "ClamerSK_Root_IdleFrameDelayPairs",
+      "scope": "ClamerSK_Root_IdleFrameDelayPairs",
+      "first_line": 182,
+      "last_line": 201,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 40,
-      "declarations_sha256": "f4876b16bb2612cc6d727acd3a125659755f689f60a918cb8b22beb946d66617",
+      "declarations_sha256": "3dc3f2cb03962c54c3987883f8ff20ffe01e8918796c1540e7b90c23a265ac04",
       "entries": [
         [0, "pairs"],
         [9, "fixed"],
         [21, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_89170", "byte_89179", "byte_89185"],
+      "members": ["ClamerSK_Root_IdleFrameDelayPairs", "SKClamer_ContactAnim", "SKClamer_FiringAnim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/cnz/sk/sparkle.s",
-      "symbol": "byte_89362",
-      "scope": "byte_89362",
-      "first_line": 208,
-      "last_line": 216,
+      "symbol": "SKSparkle_ChargeAnim",
+      "scope": "SKSparkle_ChargeAnim",
+      "first_line": 209,
+      "last_line": 217,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 20,
-      "declarations_sha256": "5fa918679ca7e19d6f08175abc895220d2ab9632479d06e2e32c0d03ac21fe94",
+      "declarations_sha256": "6f78714ebbfe06b958ba098f83d900d02d96f8c22ad83e0065faa08bbc5150c6",
       "entries": [
         [0, "accelerating"],
         [5, "fixed"],
         [16, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_89362", "byte_89367", "byte_89372"],
+      "members": ["SKSparkle_ChargeAnim", "SKSparkle_ColumnAnim", "SparkleSK_Projectile_UniformTwoFrameLoop"],
       "stored_markers": []
     },
     {
@@ -5129,8 +5129,8 @@
       "path": "src/objects/zones/cnz/s3/cylinder.s",
       "symbol": "PlayerTwistFrames",
       "scope": "PlayerTwistFrames",
-      "first_line": 494,
-      "last_line": 495,
+      "first_line": 495,
+      "last_line": 496,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 12,
       "declarations_sha256": "04213f647d3f232c1d511170e1a9759a62c774d6e0c7ef5a85f72709440f8ae6",
@@ -5141,13 +5141,13 @@
     },
     {
       "path": "src/objects/zones/cnz/s3/water_level_controls.s",
-      "symbol": "byte_45766",
-      "scope": "byte_45766",
+      "symbol": "S3KnuxScene_LBZIdleAnim",
+      "scope": "S3KnuxScene_LBZIdleAnim",
       "first_line": 142,
       "last_line": 173,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 72,
-      "declarations_sha256": "775c39ac218b0a7aaaab6718fc9ad14a21a7245c8354e856864e48d48129a930",
+      "declarations_sha256": "2f160375db57732aaf98574d55eb665df03413cab6855b7efa4356c54b6fcf57",
       "entries": [
         [0, "fixed"],
         [5, "fixed"],
@@ -5160,51 +5160,51 @@
       ],
       "external_symbols": [],
       "members": [
-        "byte_45766",
-        "byte_4576B",
-        "byte_45775",
-        "byte_4577B",
-        "byte_45785",
-        "byte_4578B",
-        "byte_4578F",
-        "byte_4579E"
+        "S3KnuxScene_LBZIdleAnim",
+        "S3KnuxScene_RunAnim",
+        "S3KnuxScene_AIZDashAnim",
+        "S3KnuxScene_JumpAnim",
+        "S3KnuxScene_ChuckleStartAnim",
+        "S3KnuxScene_ChuckleLoopAnim",
+        "S3KnuxScene_LBZBombThrowAnim",
+        "S3KnuxScene_LBZSecondSceneAnim"
       ],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/cnz/s3/wire_cage.s",
-      "symbol": "RawAni_32D00",
-      "scope": "RawAni_32D00",
-      "first_line": 234,
-      "last_line": 237,
+      "symbol": "S3CNZCage_ActivePoseFrames",
+      "scope": "S3CNZCage_ActivePoseFrames",
+      "first_line": 235,
+      "last_line": 238,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 24,
-      "declarations_sha256": "996ec64ce1fa4913314fe917c33f75421f85ebfac32e4d3835aaa9ccf2e7b6a8",
+      "declarations_sha256": "5d1873c466228bab9d77e12c2e90a871e93763f542a7642290e949ab10c7692d",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_32D00"],
+      "members": ["S3CNZCage_ActivePoseFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/cnz/s3/wire_cage.s",
-      "symbol": "RawAni_32E50",
-      "scope": "RawAni_32E50",
-      "first_line": 341,
-      "last_line": 344,
+      "symbol": "S3CNZCage_PassivePoseFrames",
+      "scope": "S3CNZCage_PassivePoseFrames",
+      "first_line": 342,
+      "last_line": 345,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 24,
-      "declarations_sha256": "11aa77aa4b4a2356a662f38ace7d0ab586330649236629d5367a5e4703758935",
+      "declarations_sha256": "30f190de0948132fc073a995c5423432044ca171bfd9d034d2caddd44c4d25bd",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_32E50"],
+      "members": ["S3CNZCage_PassivePoseFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/cnz/sk/cylinder.s",
       "symbol": "PlayerTwistFrames",
       "scope": "PlayerTwistFrames",
-      "first_line": 502,
-      "last_line": 503,
+      "first_line": 504,
+      "last_line": 505,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 12,
       "declarations_sha256": "04213f647d3f232c1d511170e1a9759a62c774d6e0c7ef5a85f72709440f8ae6",
@@ -5215,30 +5215,30 @@
     },
     {
       "path": "src/objects/zones/cnz/sk/wire_cage.s",
-      "symbol": "RawAni_33AC6",
-      "scope": "RawAni_33AC6",
-      "first_line": 234,
-      "last_line": 237,
+      "symbol": "SKCNZCage_ActivePoseFrames",
+      "scope": "SKCNZCage_ActivePoseFrames",
+      "first_line": 235,
+      "last_line": 238,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 24,
-      "declarations_sha256": "736483b8ba2a08246cf928873421cb55e02e518164e3f3b8edb578ab18eeed13",
+      "declarations_sha256": "d3bc7cc184758a0be762d52c1b8ca7864f85e0e942f6b20629389e3173348afc",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_33AC6"],
+      "members": ["SKCNZCage_ActivePoseFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/cnz/sk/wire_cage.s",
-      "symbol": "RawAni_33C1C",
-      "scope": "RawAni_33C1C",
-      "first_line": 342,
-      "last_line": 345,
+      "symbol": "SKCNZCage_PassivePoseFrames",
+      "scope": "SKCNZCage_PassivePoseFrames",
+      "first_line": 343,
+      "last_line": 346,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 24,
-      "declarations_sha256": "d8c363a1a6aded9bd0a944ee12b86b5d76fa5aa5a9d8e06aaa2d5368f7c993d5",
+      "declarations_sha256": "c0c4c1e460f21d06da6b2223d9bfb13887cae8bbdbf4f3802a1ce5c7f74b02b9",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_33C1C"],
+      "members": ["SKCNZCage_PassivePoseFrames"],
       "stored_markers": []
     },
     {

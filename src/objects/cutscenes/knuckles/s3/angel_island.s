@@ -49,7 +49,7 @@ loc_4474C:
                 move.w  #$1400,x_pos(a0)
                 move.w  #$440,y_pos(a0)
                 bsr.w   SpawnKnucklesCutsceneMusicTransition
-                lea     ChildObjDat_45756(pc),a2
+                lea     S3KnuxScene_AIZ1CorkChild(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
@@ -70,7 +70,7 @@ loc_44790:
 ; ---------------------------------------------------------------------------
 
 loc_447B2:
-                lea     byte_4577B(pc),a1
+                lea     S3KnuxScene_JumpAnim(pc),a1
                 jsr     (Animate_RawNoSST).l
                 jsr     (MoveSprite).l
                 tst.l   d0
@@ -99,7 +99,7 @@ loc_447F2:
 loc_447F8:
                 move.b  #8,routine(a0)
                 bchg    #0,render_flags(a0)
-                move.l  #byte_45775,$30(a0)
+                move.l  #S3KnuxScene_AIZDashAnim,$30(a0)
                 move.w  #-$600,x_vel(a0)
                 clr.w   y_vel(a0)
                 move.w  #$29,$2E(a0)
@@ -134,7 +134,7 @@ loc_4486E:
 
 loc_4487A:
                 move.b  #$C,routine(a0)
-                move.l  #byte_45775,$30(a0)
+                move.l  #S3KnuxScene_AIZDashAnim,$30(a0)
                 move.w  #$600,x_vel(a0)
                 jsr     (AllocateObject).l
                 bne.s   locret_4489C
@@ -169,7 +169,7 @@ loc_448D2:
 ; ---------------------------------------------------------------------------
 
 loc_448EE:
-                lea     ObjDat3_4571E(pc),a1
+                lea     S3KnuxScene_AIZCorkAttrs(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #loc_448FE,(a0)
 
@@ -216,7 +216,7 @@ loc_44950:
                 move.l  #loc_449A8,$34(a0)
                 lea     Pal_CutsceneKnux(pc),a1
                 jsr     (PalLoad_Line1).l
-                lea     ChildObjDat_4572A(pc),a2
+                lea     S3KnuxScene_AIZ2BarrierChild(pc),a2
                 jsr     (CreateChild6_Simple).l
                 bne.s   locret_449A0
                 move.w  #$4B08,x_pos(a1)
@@ -241,7 +241,7 @@ loc_449B0:
                 cmpi.w  #$4B3C,d0
                 blo.s   loc_449CA
                 move.w  d0,x_pos(a0)
-                lea     byte_4576B(pc),a1
+                lea     S3KnuxScene_RunAnim(pc),a1
                 jmp     (Animate_RawNoSST).l
 ; ---------------------------------------------------------------------------
 
@@ -252,7 +252,7 @@ loc_449CA:
                 move.l  #loc_44A08,$34(a0)
 
 loc_449E4:
-                move.l  #byte_45785,$30(a0)
+                move.l  #S3KnuxScene_ChuckleStartAnim,$30(a0)
                 clr.b   anim_frame_timer(a0)
                 clr.b   anim_frame(a0)
                 move.b  #$1C,mapping_frame(a0)
@@ -274,7 +274,7 @@ loc_44A0E:
                 move.w  #-$400,y_vel(a0)
 
 loc_44A1A:
-                move.l  #byte_4577B,$30(a0)
+                move.l  #S3KnuxScene_JumpAnim,$30(a0)
                 clr.b   anim_frame_timer(a0)
                 clr.b   anim_frame(a0)
                 move.b  #8,mapping_frame(a0)

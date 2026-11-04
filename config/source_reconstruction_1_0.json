@@ -1089,9 +1089,15 @@
       "commits": ["a8938c6eb309066ee0ec04dac581209cbc1cb652"]
     },
     {
-      "id": "current-shorten-25-zone-mgz",
+      "id": "change-812ae1a66815",
       "kind": "source_or_tooling",
       "summary": "Apply 808 reviewed short labels for mgz.",
+      "commits": ["812ae1a6681515d79219d713727d92cccd9e69ca"]
+    },
+    {
+      "id": "current-shorten-26-zone-cnz",
+      "kind": "source_or_tooling",
+      "summary": "Apply 707 reviewed short labels for cnz.",
       "commits": ["release-commit"]
     }
   ],

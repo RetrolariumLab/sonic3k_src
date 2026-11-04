@@ -1,9 +1,9 @@
 ; Data owner: objects/shared/zones/cnz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_CNZCorkFloor_:
-                dc.w    Frame_229C4C-Map_CNZCorkFloor_
-                dc.w    Frame_229C7E-Map_CNZCorkFloor_
-Frame_229C4C:   dc.w    8
+                dc.w    CNZCorkFloorS3_MapSlot00-Map_CNZCorkFloor_
+                dc.w    CNZCorkFloorS3_MapSlot01-Map_CNZCorkFloor_
+CNZCorkFloorS3_MapSlot00:   dc.w    8
                 dc.b    $E0,  $D,   0,   0, $FF, $E0
                 dc.b    $E0,  $D,   8,   0,   0,   0
                 dc.b    $F0,  $D,   0,   8, $FF, $E0
@@ -12,7 +12,7 @@ Frame_229C4C:   dc.w    8
                 dc.b    0,  $D,   8,   8,   0,   0
                 dc.b    $10,  $D,   0, $10, $FF, $E0
                 dc.b    $10,  $D,   8, $10,   0,   0
-Frame_229C7E:   dc.w    $10
+CNZCorkFloorS3_MapSlot01:   dc.w    $10
                 dc.b    $E0,   5,   0,   0, $FF, $E0
                 dc.b    $E0,   5,   0,   4, $FF, $F0
                 dc.b    $E0,   5,   8,   4,   0,   0

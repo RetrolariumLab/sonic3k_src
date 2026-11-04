@@ -12,11 +12,11 @@ Obj_CNZSpiralTube:
                 bsr.s   UpdatePlayerInCnzSpiralTube
                 move.b  $30(a0),d0
                 add.b   $3A(a0),d0
-                beq.s   loc_330E8
+                beq.s   SKCNZSpiral_CullWhenIdle
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_330E8:
+SKCNZSpiral_CullWhenIdle:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -24,33 +24,33 @@ loc_330E8:
 UpdatePlayerInCnzSpiralTube:
                 moveq   #0,d0
                 move.b  (a4),d0
-                move.w  off_330FA(pc,d0.w),d0
-                jmp     off_330FA(pc,d0.w)
+                move.w  SKCNZSpiral_RiderStateTable(pc,d0.w),d0
+                jmp     SKCNZSpiral_RiderStateTable(pc,d0.w)
 ; End of function UpdatePlayerInCnzSpiralTube
 
 ; ---------------------------------------------------------------------------
-off_330FA:
-                dc.w    loc_33102-off_330FA
-                dc.w    loc_3318E-off_330FA
-                dc.w    loc_331CA-off_330FA
-                dc.w    loc_3320E-off_330FA
+SKCNZSpiral_RiderStateTable:
+                dc.w    SKCNZSpiral_TryCaptureAtEntrance-SKCNZSpiral_RiderStateTable
+                dc.w    SKCNZSpiral_OrbitEntrance-SKCNZSpiral_RiderStateTable
+                dc.w    SKCNZSpiral_DescendSpiral-SKCNZSpiral_RiderStateTable
+                dc.w    SKCNZSpiral_StepExitSegment-SKCNZSpiral_RiderStateTable
 ; ---------------------------------------------------------------------------
 
-loc_33102:
+SKCNZSpiral_TryCaptureAtEntrance:
                 tst.w   (Debug_placement_mode).w
-                bne.w   locret_3318C
+                bne.w   SKCNZSpiral_EntranceReturn
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$40,d0
                 cmpi.w  #$80,d0
-                bhs.s   locret_3318C
+                bhs.s   SKCNZSpiral_EntranceReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 addi.w  #$10,d1
                 cmpi.w  #$20,d1
-                bhs.s   locret_3318C
+                bhs.s   SKCNZSpiral_EntranceReturn
                 tst.b   object_control(a1)
-                bne.s   locret_3318C
+                bne.s   SKCNZSpiral_EntranceReturn
                 addq.b  #2,(a4)
                 move.b  #$81,object_control(a1)
                 move.b  #2,anim(a1)
@@ -62,22 +62,22 @@ loc_33102:
                 clr.b   1(a4)
                 moveq   #$30,d1
                 cmpi.w  #$40,d0
-                bhs.s   loc_33174
+                bhs.s   SKCNZSpiral_AlignEntrantAndPlayRoll
                 neg.w   d1
                 move.b  #$80,1(a4)
 
-loc_33174:
+SKCNZSpiral_AlignEntrantAndPlayRoll:
                 add.w   x_pos(a0),d1
                 move.w  d1,x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.w  #sfx_Roll,d0
                 jsr     (Play_SFX).l
 
-locret_3318C:
+SKCNZSpiral_EntranceReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3318E:
+SKCNZSpiral_OrbitEntrance:
                 move.b  1(a4),d0
                 addq.b  #8,1(a4)
                 jsr     (GetSineCosine).l
@@ -89,20 +89,21 @@ loc_3318E:
                 move.w  d0,x_pos(a1)
                 moveq   #0,d0
                 btst    #0,(Ring_count+1).w
-                beq.s   loc_331BA
+                beq.s   SKCNZSpiral_TryBeginDescent
                 move.w  #$80,d0
 
-loc_331BA:
+; Match the incremented orbit phase selected by ring-count parity before descending
+SKCNZSpiral_TryBeginDescent:
                 cmp.b   1(a4),d0
-                bne.s   locret_331C8
+                bne.s   SKCNZSpiral_OrbitReturn
                 addq.b  #2,(a4)
                 move.w  #$C0,2(a4)
 
-locret_331C8:
+SKCNZSpiral_OrbitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_331CA:
+SKCNZSpiral_DescendSpiral:
                 move.b  1(a4),d0
                 addi.b  #$C,1(a4)
                 jsr     (GetSineCosine).l
@@ -114,25 +115,25 @@ loc_331CA:
                 move.w  d0,x_pos(a1)
                 addq.w  #2,y_pos(a1)
                 subq.w  #1,2(a4)
-                bne.s   locret_3320C
+                bne.s   SKCNZSpiral_DescentReturn
                 moveq   #0,d0
                 move.w  x_pos(a0),d1
                 sub.w   x_pos(a1),d1
-                bcc.s   loc_33202
+                bcc.s   SKCNZSpiral_SelectExitRoute
                 moveq   #1,d0
 
-loc_33202:
+SKCNZSpiral_SelectExitRoute:
                 add.b   subtype(a0),d0
                 bsr.w   InitializeCnzSpiralExitRoute
                 addq.b  #2,(a4)
 
-locret_3320C:
+SKCNZSpiral_DescentReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3320E:
+SKCNZSpiral_StepExitSegment:
                 subq.b  #1,2(a4)
-                bpl.s   loc_3323A
+                bpl.s   SKCNZSpiral_IntegrateExitMotion
                 movea.l 6(a4),a2
                 move.w  (a2)+,d4
                 move.w  d4,x_pos(a1)
@@ -140,14 +141,14 @@ loc_3320E:
                 move.w  d5,y_pos(a1)
                 move.l  a2,6(a4)
                 subq.w  #4,4(a4)
-                beq.s   loc_33260
+                beq.s   SKCNZSpiral_ReleaseAtFinalWaypoint
                 move.w  (a2)+,d4
                 move.w  (a2)+,d5
                 move.w  #$C00,d2
-                bra.w   loc_332A2
+                bra.w   SKCNZSpiral_CalcSegmentVelocity
 ; ---------------------------------------------------------------------------
 
-loc_3323A:
+SKCNZSpiral_IntegrateExitMotion:
                 move.l  x_pos(a1),d2
                 move.l  y_pos(a1),d3
                 move.w  x_vel(a1),d0
@@ -163,19 +164,20 @@ loc_3323A:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_33260:
+; Clear object control, then still integrate one step with the current velocity
+SKCNZSpiral_ReleaseAtFinalWaypoint:
                 andi.w  #$FFF,y_pos(a1)
                 clr.b   (a4)
                 clr.b   object_control(a1)
                 clr.b   jumping(a1)
-                bra.s   loc_3323A
+                bra.s   SKCNZSpiral_IntegrateExitMotion
 
 ; =============== S U B R O U T I N E =======================================
 
 InitializeCnzSpiralExitRoute:
                 andi.w  #$F,d0
                 add.w   d0,d0
-                lea     (off_33320).l,a2
+                lea     (SKCNZSpiral_ExitRouteTable).l,a2
                 adda.w  (a2,d0.w),a2
                 move.w  (a2)+,4(a4)
                 subq.w  #4,4(a4)
@@ -188,26 +190,26 @@ InitializeCnzSpiralExitRoute:
                 move.w  (a2)+,d5
                 move.w  #$C00,d2
 
-loc_332A2:
+SKCNZSpiral_CalcSegmentVelocity:
                 moveq   #0,d0
                 move.w  d2,d3
                 move.w  d4,d0
                 sub.w   x_pos(a1),d0
-                bge.s   loc_332B2
+                bge.s   SKCNZSpiral_CalcSignedYDelta
                 neg.w   d0
                 neg.w   d2
 
-loc_332B2:
+SKCNZSpiral_CalcSignedYDelta:
                 moveq   #0,d1
                 move.w  d5,d1
                 sub.w   y_pos(a1),d1
-                bge.s   loc_332C0
+                bge.s   SKCNZSpiral_PickDominantAxis
                 neg.w   d1
                 neg.w   d3
 
-loc_332C0:
+SKCNZSpiral_PickDominantAxis:
                 cmp.w   d0,d1
-                blo.s   loc_332F2
+                blo.s   SKCNZSpiral_CalcXDominantSpeed
                 moveq   #0,d1
                 move.w  d5,d1
                 sub.w   y_pos(a1),d1
@@ -216,23 +218,23 @@ loc_332C0:
                 moveq   #0,d0
                 move.w  d4,d0
                 sub.w   x_pos(a1),d0
-                beq.s   loc_332DE
+                beq.s   SKCNZSpiral_StoreYDominantSpeed
                 swap    d0
                 divs.w  d1,d0
 
-loc_332DE:
+SKCNZSpiral_StoreYDominantSpeed:
                 move.w  d0,x_vel(a1)
                 move.w  d3,y_vel(a1)
                 tst.w   d1
-                bpl.s   loc_332EC
+                bpl.s   SKCNZSpiral_StoreYDominantDuration
                 neg.w   d1
 
-loc_332EC:
+SKCNZSpiral_StoreYDominantDuration:
                 move.w  d1,2(a4)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_332F2:
+SKCNZSpiral_CalcXDominantSpeed:
                 moveq   #0,d0
                 move.w  d4,d0
                 sub.w   x_pos(a1),d0
@@ -241,41 +243,41 @@ loc_332F2:
                 moveq   #0,d1
                 move.w  d5,d1
                 sub.w   y_pos(a1),d1
-                beq.s   loc_3330C
+                beq.s   SKCNZSpiral_StoreXDominantSpeed
                 swap    d1
                 divs.w  d0,d1
 
-loc_3330C:
+SKCNZSpiral_StoreXDominantSpeed:
                 move.w  d1,y_vel(a1)
                 move.w  d2,x_vel(a1)
                 tst.w   d0
-                bpl.s   loc_3331A
+                bpl.s   SKCNZSpiral_StoreXDominantDuration
                 neg.w   d0
 
-loc_3331A:
+SKCNZSpiral_StoreXDominantDuration:
                 move.w  d0,2(a4)
                 rts
 ; End of function InitializeCnzSpiralExitRoute
 
 ; ---------------------------------------------------------------------------
-off_33320:
-                dc.w    word_33328-off_33320
-                dc.w    word_33336-off_33320
-                dc.w    word_33344-off_33320
-                dc.w    word_33352-off_33320
-word_33328:     dc.w    $C
+SKCNZSpiral_ExitRouteTable:
+                dc.w    SKCNZSpiral_FirstLeftExit-SKCNZSpiral_ExitRouteTable
+                dc.w    SKCNZSpiral_FirstRightExit-SKCNZSpiral_ExitRouteTable
+                dc.w    SKCNZSpiral_SecondLeftExit-SKCNZSpiral_ExitRouteTable
+                dc.w    SKCNZSpiral_SecondRightExit-SKCNZSpiral_ExitRouteTable
+SKCNZSpiral_FirstLeftExit:  dc.w    $C
                 dc.w    $1390,  $2D0
                 dc.w    $1230,  $2D0
                 dc.w    $1230,  $300
-word_33336:     dc.w    $C
+SKCNZSpiral_FirstRightExit: dc.w    $C
                 dc.w    $13F0,  $2D0
                 dc.w    $1560,  $2D0
                 dc.w    $1560,  $280
-word_33344:     dc.w    $C
+SKCNZSpiral_SecondLeftExit: dc.w    $C
                 dc.w    $2090,  $650
                 dc.w    $2030,  $650
                 dc.w    $2030,  $680
-word_33352:     dc.w    $C
+SKCNZSpiral_SecondRightExit:    dc.w    $C
                 dc.w    $20F0,  $650
                 dc.w    $21E0,  $650
                 dc.w    $21E0,  $600

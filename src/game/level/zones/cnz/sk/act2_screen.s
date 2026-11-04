@@ -12,55 +12,55 @@ CNZ2_ScreenEvent:
                 move.w  (Screen_shake_offset).w,d0
                 add.w   d0,(Camera_Y_pos_copy).w
                 cmpi.w  #$4600,(Player_1+x_pos).w
-                bhs.s   loc_52138                       ; If player is far enough to the right, skip ahead
+                bhs.s   SKCNZ2Screen_TryDirectFgRefresh  ; If player is far enough to the right, skip ahead
                 moveq   #0,d0
                 cmpi.w  #$940,(Player_1+x_pos).w
-                bhs.s   loc_5212E
+                bhs.s   SKCNZ2Screen_TrySetMinY
                 move.w  #$580,d0                        ; If player is still in old boss arena, set the level Y start to $580, otherwise, make it 0 like normal
 
-loc_5212E:
+SKCNZ2Screen_TrySetMinY:
                 cmp.w   (Camera_min_Y_pos).w,d0
-                beq.s   loc_52138
+                beq.s   SKCNZ2Screen_TryDirectFgRefresh
                 move.w  d0,(Camera_min_Y_pos).w
 
-loc_52138:
+SKCNZ2Screen_TryDirectFgRefresh:
                 tst.w   (Events_bg+$06).w
-                beq.s   loc_52146
+                beq.s   SKCNZ2Screen_DispatchForeground
                 clr.w   (Events_bg+$06).w
                 jmp     Refresh_PlaneScreenDirect(pc)
 ; ---------------------------------------------------------------------------
 
-loc_52146:
+SKCNZ2Screen_DispatchForeground:
                 move.w  (Events_routine_fg).w,d0
                 jmp     CNZ2_ScreenEvent_Index(pc,d0.w)
 ; ---------------------------------------------------------------------------
 
 CNZ2_ScreenEvent_Index:
-                bra.w   loc_5215A
+                bra.w   SKCNZ2Screen_SelectKnucklesExit
 ; ---------------------------------------------------------------------------
-                bra.w   loc_521D2
+                bra.w   SKCNZ2Screen_TryExtendCameraAfterExit
 ; ---------------------------------------------------------------------------
                 bra.w   CNZ2SE_Normal
 ; ---------------------------------------------------------------------------
 
-loc_5215A:
+SKCNZ2Screen_SelectKnucklesExit:
                 cmpi.w  #3,(Player_mode).w
-                beq.s   loc_5216C
+                beq.s   SKCNZ2Screen_TrySpawnExitObjects
                 move.w  #8,(Events_routine_fg).w        ; If playing as Sonic/Tails, don't do any special screen events
                 bra.w   CNZ2SE_Normal
 ; ---------------------------------------------------------------------------
 
-loc_5216C:
+SKCNZ2Screen_TrySpawnExitObjects:
                 lea     (Player_1).w,a1                 ; Only do all this is Knuckles is playing
                 cmpi.w  #$4880,x_pos(a1)
                 blo.w   CNZ2SE_Normal                   ; If Knuckles is not past $4880 X, just play normally
                 cmpi.w  #$B00,y_pos(a1)
                 blo.s   CNZ2SE_Normal                   ; If Knuckles is not past $B00 Y, play normally
                 jsr     (AllocateObject).l
-                bne.s   loc_521BE
+                bne.s   SKCNZ2Screen_LockExitCamera
                 move.l  #Obj_CNZTeleporter,(a1)
                 jsr     (CreateNewSprite4).l
-                bne.s   loc_521BE
+                bne.s   SKCNZ2Screen_LockExitCamera
                 move.l  #Obj_EggCapsule,(a1)
                 move.w  #$4980,x_pos(a1)
                 move.w  #$A20,y_pos(a1)
@@ -69,13 +69,14 @@ loc_5216C:
                 jsr     (Load_PLC_Raw).l
                 movem.l (sp)+,d7-a0/a2-a3
 
-loc_521BE:
+; Lock the camera and advance the foreground event even if either exit object fails to allocate
+SKCNZ2Screen_LockExitCamera:
                 move.w  #$4750,(Camera_min_X_pos).w
                 move.w  #$48E0,(Camera_max_X_pos).w
                 clr.b   (End_of_level_flag).w
                 addq.w  #4,(Events_routine_fg).w
 
-loc_521D2:
+SKCNZ2Screen_TryExtendCameraAfterExit:
                 tst.b   (End_of_level_flag).w
                 beq.s   CNZ2SE_Normal
                 jsr     (AllocateObject).l
@@ -109,14 +110,14 @@ CNZ2_BackgroundEvent:
 ; ---------------------------------------------------------------------------
 
 CNZ2_BackgroundEvent_Index:
-                bra.w   loc_52238
+                bra.w   SKCNZ2Screen_BeginBackgroundRedraw
 ; ---------------------------------------------------------------------------
-                bra.w   loc_52266
+                bra.w   SKCNZ2Screen_DeformBeforeRedrawStep
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5227C
+                bra.w   SKCNZ2Screen_DeformNormalBackground
 ; ---------------------------------------------------------------------------
 
-loc_52238:
+SKCNZ2Screen_BeginBackgroundRedraw:
                 moveq   #0,d1
                 move.w  #$200,d2
                 jsr     Draw_PlaneVertSingleBottomUp(pc)
@@ -128,25 +129,25 @@ loc_52238:
                 move.w  d0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_5226A
+                bra.s   SKCNZ2Screen_StepBackgroundRedraw
 ; ---------------------------------------------------------------------------
 
-loc_52266:
+SKCNZ2Screen_DeformBeforeRedrawStep:
                 jsr     CNZ1_Deform(pc)
 
-loc_5226A:
+SKCNZ2Screen_StepBackgroundRedraw:
                 moveq   #0,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 jsr     Draw_PlaneVertSingleBottomUp(pc)
-                bpl.s   loc_52280
+                bpl.s   SKCNZ2Screen_DrawAndShakeBackground
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_52280
+                bra.s   SKCNZ2Screen_DrawAndShakeBackground
 ; ---------------------------------------------------------------------------
 
-loc_5227C:
+SKCNZ2Screen_DeformNormalBackground:
                 jsr     CNZ1_Deform(pc)
 
-loc_52280:
+SKCNZ2Screen_DrawAndShakeBackground:
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
                 moveq   #0,d1
@@ -161,15 +162,15 @@ loc_52280:
 Obj_CNZTeleporter:
                 lea     (Player_1).w,a1
                 cmpi.w  #$4A38,x_pos(a1)
-                blo.s   locret_522FE                    ; If Knuckles isn't in range, don't bother
+                blo.s   SKCNZ2Screen_WarpInitReturn     ; If Knuckles isn't in range, don't bother
                 btst    #Status_InAir,status(a1)
-                beq.s   loc_522C2
+                beq.s   SKCNZ2Screen_LockPlayerAndLoadWarpArt
                 move.w  #$4A40,d0
                 cmp.w   x_pos(a1),d0
-                bhi.s   locret_522FE
+                bhi.s   SKCNZ2Screen_WarpInitReturn
                 move.w  d0,x_pos(a1)                    ; While jumping, don't allow Knuckles past this point (so he lands on the teleporter)
 
-loc_522C2:
+SKCNZ2Screen_LockPlayerAndLoadWarpArt:
                 clr.w   x_vel(a1)
                 clr.w   ground_vel(a1)                  ; Stop Knuckles' momentum
                 st      (Ctrl_1_locked).w               ; Turn off player control
@@ -183,18 +184,18 @@ loc_522C2:
                 move.w  #$E80,$12(a1)                   ; Replace applicable palette entries
                 move.l  #Obj_CNZTeleporterMain,(a0)
 
-locret_522FE:
+SKCNZ2Screen_WarpInitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 Obj_CNZTeleporterMain:
                 tst.b   (Kos_modules_left).w
-                bne.s   locret_52348                    ; Don't do anything while art is loading
+                bne.s   SKCNZ2Screen_WarpSpawnReturn    ; Don't do anything while art is loading
                 lea     (Player_1).w,a1
                 btst    #Status_InAir,status(a1)
-                bne.s   locret_52348                    ; Wait till Knuckles is not in the air
+                bne.s   SKCNZ2Screen_WarpSpawnReturn    ; Wait till Knuckles is not in the air
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   locret_52348
+                bne.s   SKCNZ2Screen_WarpSpawnReturn
                 move.w  a1,$3C(a0)
                 move.l  #Obj_TeleporterBeam,(a1)
                 move.w  a0,parent2(a1)
@@ -204,39 +205,39 @@ Obj_CNZTeleporterMain:
                 move.w  #$A38,y_pos(a1)                 ; Set teleporter position/attributes
                 moveq   #signextendB(sfx_Charging),d0
                 jsr     (Play_SFX).l
-                move.l  #loc_5234A,(a0)
+                move.l  #SKCNZ2Screen_UpdatePlayerByBeamPhase,(a0)
 
-locret_52348:
+SKCNZ2Screen_WarpSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5234A:
+SKCNZ2Screen_UpdatePlayerByBeamPhase:
                 lea     (Player_1).w,a1
                 movea.w $3C(a0),a2
                 cmpi.b  #8,$46(a2)
-                blt.s   locret_523C8
-                beq.s   loc_523B6                       ; Once beam has expanded halfway. On the first frame this happen, set player state
+                blt.s   SKCNZ2Screen_BeamPhaseReturn
+                beq.s   SKCNZ2Screen_StartWarpRollPose  ; Once beam has expanded halfway. On the first frame this happen, set player state
                 cmpi.b  #$18,$46(a2)
-                bhs.s   loc_5238E
+                bhs.s   SKCNZ2Screen_FreezePlayerAndRaiseCam
                 btst    #0,(Level_frame_counter+1).w
-                beq.s   locret_523C8
+                beq.s   SKCNZ2Screen_BeamPhaseReturn
                 subq.w  #1,y_pos(a1)                    ; Raise player slightly
                 btst    #1,(Level_frame_counter+1).w
-                beq.s   locret_523C8
+                beq.s   SKCNZ2Screen_BeamPhaseReturn
                 moveq   #1,d1
                 move.w  x_pos(a1),d0
                 cmp.w   x_pos(a0),d0
-                beq.s   locret_523C8
-                bcs.s   loc_52388
+                beq.s   SKCNZ2Screen_BeamPhaseReturn
+                bcs.s   SKCNZ2Screen_StepTowardWarpCenter
                 neg.w   d1
 
-loc_52388:
+SKCNZ2Screen_StepTowardWarpCenter:
                 add.w   d1,x_pos(a1)                    ; Move player X towards center of beam X
-                bra.s   locret_523C8
+                bra.s   SKCNZ2Screen_BeamPhaseReturn
 ; ---------------------------------------------------------------------------
 
-loc_5238E:
-                move.l  #loc_523CA,(a0)                 ; When beam has expanded all the way
+SKCNZ2Screen_FreezePlayerAndRaiseCam:
+                move.l  #SKCNZ2Screen_RaiseCameraToIceCap,(a0)  ; When beam has expanded all the way
                 move.b  #3,object_control(a1)           ; Stop player animation
                 moveq   #0,d0
                 move.w  d0,y_pos(a1)                    ; Make player disappear!
@@ -245,27 +246,27 @@ loc_5238E:
                 moveq   #signextendB(sfx_Transporter),d0
                 jsr     (Play_SFX).l
                 st      (Scroll_lock).w
-                bra.s   locret_523C8
+                bra.s   SKCNZ2Screen_BeamPhaseReturn
 ; ---------------------------------------------------------------------------
 
-loc_523B6:
+SKCNZ2Screen_StartWarpRollPose:
                 move.b  #1,object_control(a1)           ; Player under object control
                 bset    #Status_Roll,status(a1)         ; Set to jumping state
                 move.b  #2,anim(a1)                     ; Rolling animation
 
-locret_523C8:
+SKCNZ2Screen_BeamPhaseReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_523CA:
+SKCNZ2Screen_RaiseCameraToIceCap:
                 subi.w  #$10,(Camera_Y_pos).w
                 cmpi.w  #$780,(Camera_Y_pos).w
-                bhs.s   locret_523EA
+                bhs.s   SKCNZ2Screen_CameraAscentReturn
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
                 move.w  #$500,d0                        ; Start Ice Cap
                 jmp     (StartNewLevel).l
 ; ---------------------------------------------------------------------------
 
-locret_523EA:
+SKCNZ2Screen_CameraAscentReturn:
                 rts

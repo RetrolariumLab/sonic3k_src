@@ -605,7 +605,7 @@ loc_26FF4:
 loc_27020:
                 moveq   #0,d0
                 move.b  angle(a0),d0
-                jmp     (loc_32610).l
+                jmp     (SKCNZCylinder_ApplyTwistFrameAndTiles).l
 ; ---------------------------------------------------------------------------
 
 locret_2702C:

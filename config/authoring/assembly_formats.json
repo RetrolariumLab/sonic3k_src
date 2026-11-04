@@ -6326,20 +6326,20 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 68
       },
-      "declarations_sha256": "c7b9f67ffd25466e2acbe8364544b9ab310f88b15e7e7d9347aa78197d0b9db8",
+      "declarations_sha256": "47f60c4a32c110274e9ad9e26c4149ae16e0f09abe1e3628777d686e6d183e1a",
       "labels": {
         "DPLC_Clamer_": 0,
-        "Frame_361A8E": 22,
-        "Frame_361A92": 26,
-        "Frame_361A96": 30,
-        "Frame_361A9A": 34,
-        "Frame_361A9E": 38,
-        "Frame_361AA2": 42,
-        "Frame_361AA6": 46,
-        "Frame_361AAA": 50,
-        "Frame_361AB0": 56,
-        "Frame_361AB4": 60,
-        "Frame_361AB8": 64
+        "ClamerS3_DPLCFrame00": 22,
+        "ClamerS3_DPLCFrame01": 26,
+        "ClamerS3_DPLCFrame02": 30,
+        "ClamerS3_DPLCFrame03": 34,
+        "ClamerS3_DPLCFrame04": 38,
+        "ClamerS3_DPLCFrame05": 42,
+        "ClamerS3_DPLCFrame06": 46,
+        "ClamerS3_DPLCFrame07": 50,
+        "ClamerS3_DPLCFrame08": 56,
+        "ClamerS3_DPLCFrame09": 60,
+        "ClamerS3_DPLCFrame0A": 64
       },
       "external_symbols": [],
       "blocks": [
@@ -6347,77 +6347,77 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361A8E",
+          "target": "ClamerS3_DPLCFrame00",
           "base": "DPLC_Clamer_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361A92",
+          "target": "ClamerS3_DPLCFrame01",
           "base": "DPLC_Clamer_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361A96",
+          "target": "ClamerS3_DPLCFrame02",
           "base": "DPLC_Clamer_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361A9A",
+          "target": "ClamerS3_DPLCFrame03",
           "base": "DPLC_Clamer_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361A9E",
+          "target": "ClamerS3_DPLCFrame04",
           "base": "DPLC_Clamer_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361AA2",
+          "target": "ClamerS3_DPLCFrame05",
           "base": "DPLC_Clamer_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361AA6",
+          "target": "ClamerS3_DPLCFrame06",
           "base": "DPLC_Clamer_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361AAA",
+          "target": "ClamerS3_DPLCFrame07",
           "base": "DPLC_Clamer_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361AB0",
+          "target": "ClamerS3_DPLCFrame08",
           "base": "DPLC_Clamer_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361AB4",
+          "target": "ClamerS3_DPLCFrame09",
           "base": "DPLC_Clamer_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361AB8",
+          "target": "ClamerS3_DPLCFrame0A",
           "base": "DPLC_Clamer_"
         },
         {
@@ -6486,21 +6486,21 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 120
       },
-      "declarations_sha256": "b366eaf4325e291ed93063067dadbf57fbb2b93d61376271b69dae350859c645",
+      "declarations_sha256": "2c9685bb5f15ee4a286010310674148325e3e2e8363f6ed1d1853bdba5f9739b",
       "labels": {
         "Map_Clamer_": 0,
-        "Frame_361AD4": 24,
-        "Frame_361ADC": 32,
-        "Frame_361AE4": 40,
-        "Frame_361AEC": 48,
-        "Frame_361AF4": 56,
-        "Frame_361AFC": 64,
-        "Frame_361B04": 72,
-        "Frame_361B0C": 80,
-        "Frame_361B1A": 94,
-        "Frame_361B22": 102,
-        "Frame_361B2A": 110,
-        "Frame_361B32": 118
+        "ClamerS3_MapFrame00": 24,
+        "ClamerS3_MapFrame01": 32,
+        "ClamerS3_MapFrame02": 40,
+        "ClamerS3_MapFrame03": 48,
+        "ClamerS3_MapFrame04": 56,
+        "ClamerS3_MapFrame05": 64,
+        "ClamerS3_MapFrame06": 72,
+        "ClamerS3_MapFrame07": 80,
+        "ClamerS3_MapFrame08": 94,
+        "ClamerS3_MapFrame09": 102,
+        "ClamerS3_MapFrame0A": 110,
+        "ClamerS3_MapFrame0B": 118
       },
       "external_symbols": [],
       "blocks": [
@@ -6508,84 +6508,84 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361AD4",
+          "target": "ClamerS3_MapFrame00",
           "base": "Map_Clamer_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361ADC",
+          "target": "ClamerS3_MapFrame01",
           "base": "Map_Clamer_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361AE4",
+          "target": "ClamerS3_MapFrame02",
           "base": "Map_Clamer_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361AEC",
+          "target": "ClamerS3_MapFrame03",
           "base": "Map_Clamer_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361AF4",
+          "target": "ClamerS3_MapFrame04",
           "base": "Map_Clamer_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361AFC",
+          "target": "ClamerS3_MapFrame05",
           "base": "Map_Clamer_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361B04",
+          "target": "ClamerS3_MapFrame06",
           "base": "Map_Clamer_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361B0C",
+          "target": "ClamerS3_MapFrame07",
           "base": "Map_Clamer_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361B1A",
+          "target": "ClamerS3_MapFrame08",
           "base": "Map_Clamer_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361B22",
+          "target": "ClamerS3_MapFrame09",
           "base": "Map_Clamer_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361B2A",
+          "target": "ClamerS3_MapFrame0A",
           "base": "Map_Clamer_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361B32",
+          "target": "ClamerS3_MapFrame0B",
           "base": "Map_Clamer_"
         },
         {
@@ -57967,18 +57967,18 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 156
       },
-      "declarations_sha256": "88521c36ae0fd9e00a66dae921ed94e7e962bfeb7a835b0a534807cc6f5f5307",
+      "declarations_sha256": "2cf2eb4249a68b8ca6307e9c641b4ef7c59905356d29eedc3ba4848494164477",
       "labels": {
         "Map_Sparkle_": 0,
-        "Frame_361B46": 18,
-        "Frame_361B4E": 26,
-        "Frame_361B56": 34,
-        "Frame_361B70": 60,
-        "Frame_361B8A": 86,
-        "Frame_361BA4": 112,
-        "Frame_361BBE": 138,
-        "Frame_361BC6": 146,
-        "Frame_361BCE": 154
+        "SparkleS3_MapFrame00": 18,
+        "SparkleS3_MapFrame01": 26,
+        "SparkleS3_MapFrame02": 34,
+        "SparkleS3_MapFrame03": 60,
+        "SparkleS3_MapFrame04": 86,
+        "SparkleS3_MapFrame05": 112,
+        "SparkleS3_MapFrame06": 138,
+        "SparkleS3_MapFrame07": 146,
+        "SparkleS3_MapFrame08": 154
       },
       "external_symbols": [],
       "blocks": [
@@ -57986,63 +57986,63 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361B46",
+          "target": "SparkleS3_MapFrame00",
           "base": "Map_Sparkle_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361B4E",
+          "target": "SparkleS3_MapFrame01",
           "base": "Map_Sparkle_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361B56",
+          "target": "SparkleS3_MapFrame02",
           "base": "Map_Sparkle_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361B70",
+          "target": "SparkleS3_MapFrame03",
           "base": "Map_Sparkle_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361B8A",
+          "target": "SparkleS3_MapFrame04",
           "base": "Map_Sparkle_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361BA4",
+          "target": "SparkleS3_MapFrame05",
           "base": "Map_Sparkle_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361BBE",
+          "target": "SparkleS3_MapFrame06",
           "base": "Map_Sparkle_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361BC6",
+          "target": "SparkleS3_MapFrame07",
           "base": "Map_Sparkle_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361BCE",
+          "target": "SparkleS3_MapFrame08",
           "base": "Map_Sparkle_"
         },
         {
@@ -84795,19 +84795,19 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 70
       },
-      "declarations_sha256": "6a9a285254976e39403e9ff9333e5e6c865d4f10fe37d95ed07c79895efd9de0",
+      "declarations_sha256": "463a19554a2474cdce9d00c0414147abf5b7755ee97c53ffcced43d2c6318538",
       "labels": {
         "Ani_CNZBalloon_": 0,
-        "byte_31872": 20,
-        "byte_31878": 26,
-        "byte_3187C": 30,
-        "byte_31882": 36,
-        "byte_31886": 40,
-        "byte_3188C": 46,
-        "byte_31890": 50,
-        "byte_31896": 56,
-        "byte_3189A": 60,
-        "byte_318A0": 66
+        "CNZBalloonShared_StandardAnim00": 20,
+        "CNZBalloonShared_StandardAnim01": 26,
+        "CNZBalloonShared_StandardAnim02": 30,
+        "CNZBalloonShared_StandardAnim03": 36,
+        "CNZBalloonShared_StandardAnim04": 40,
+        "CNZBalloonShared_StandardAnim05": 46,
+        "CNZBalloonShared_StandardAnim06": 50,
+        "CNZBalloonShared_StandardAnim07": 56,
+        "CNZBalloonShared_StandardAnim08": 60,
+        "CNZBalloonShared_StandardAnim09": 66
       },
       "external_symbols": [],
       "blocks": [
@@ -84815,70 +84815,70 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_31872",
+          "target": "CNZBalloonShared_StandardAnim00",
           "base": "Ani_CNZBalloon_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_31878",
+          "target": "CNZBalloonShared_StandardAnim01",
           "base": "Ani_CNZBalloon_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3187C",
+          "target": "CNZBalloonShared_StandardAnim02",
           "base": "Ani_CNZBalloon_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_31882",
+          "target": "CNZBalloonShared_StandardAnim03",
           "base": "Ani_CNZBalloon_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_31886",
+          "target": "CNZBalloonShared_StandardAnim04",
           "base": "Ani_CNZBalloon_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3188C",
+          "target": "CNZBalloonShared_StandardAnim05",
           "base": "Ani_CNZBalloon_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_31890",
+          "target": "CNZBalloonShared_StandardAnim06",
           "base": "Ani_CNZBalloon_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_31896",
+          "target": "CNZBalloonShared_StandardAnim07",
           "base": "Ani_CNZBalloon_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3189A",
+          "target": "CNZBalloonShared_StandardAnim08",
           "base": "Ani_CNZBalloon_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_318A0",
+          "target": "CNZBalloonShared_StandardAnim09",
           "base": "Ani_CNZBalloon_"
         },
         {
@@ -84952,12 +84952,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 20
       },
-      "declarations_sha256": "6c979cea65538de76896d78ebd5c8db44e7682480dd85b94d95e34ca7cc911f9",
+      "declarations_sha256": "ba67b1c9e3e355bc6173a3b17bac66e4940073a941a9f4eede353510f9d07888",
       "labels": {
         "Ani_CNZRisingPlatform_": 0,
-        "byte_31BFC": 6,
-        "byte_31BFF": 9,
-        "byte_31C04": 14
+        "CNZRisingPlatformShared_StandardAnim00": 6,
+        "CNZRisingPlatformShared_StandardAnim01": 9,
+        "CNZRisingPlatformShared_StandardAnim02": 14
       },
       "external_symbols": [],
       "blocks": [
@@ -84965,21 +84965,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_31BFC",
+          "target": "CNZRisingPlatformShared_StandardAnim00",
           "base": "Ani_CNZRisingPlatform_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_31BFF",
+          "target": "CNZRisingPlatformShared_StandardAnim01",
           "base": "Ani_CNZRisingPlatform_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_31C04",
+          "target": "CNZRisingPlatformShared_StandardAnim02",
           "base": "Ani_CNZRisingPlatform_"
         },
         {
@@ -85011,11 +85011,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 12
       },
-      "declarations_sha256": "22d7b0ec26d850d15eacf2804d598563da69fee5c2c26f6511821857b2609edb",
+      "declarations_sha256": "ae26685e95465e42f46293c758031af46dbaed7a30df318964fef95feed21029",
       "labels": {
         "Ani_CNZTrapDoor_": 0,
-        "byte_31D32": 4,
-        "byte_31D35": 7
+        "CNZTrapDoorShared_StandardAnim00": 4,
+        "CNZTrapDoorShared_StandardAnim01": 7
       },
       "external_symbols": [],
       "blocks": [
@@ -85023,14 +85023,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_31D32",
+          "target": "CNZTrapDoorShared_StandardAnim00",
           "base": "Ani_CNZTrapDoor_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_31D35",
+          "target": "CNZTrapDoorShared_StandardAnim01",
           "base": "Ani_CNZTrapDoor_"
         },
         {
@@ -85056,14 +85056,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 44
       },
-      "declarations_sha256": "432a8a497f4af6ff31d291bbb59b0de40c5f422ac9cce40eaff53be52ebc0daa",
+      "declarations_sha256": "d22b723c8c03a24c89e28503cfc9d591fd63b49b8ce10c200ff199f40ec38f43",
       "labels": {
         "DPLC_CNZCannon_": 0,
-        "word_31B84": 18,
-        "word_31B88": 22,
-        "word_31B8E": 28,
-        "word_31B94": 34,
-        "word_31B9A": 40
+        "CNZCannonShared_PrivateDPLCFrame04": 18,
+        "CNZCannonShared_PrivateDPLCSlots03_05": 22,
+        "CNZCannonShared_PrivateDPLCSlots02_06": 28,
+        "CNZCannonShared_PrivateDPLCSlots01_07": 34,
+        "CNZCannonShared_PrivateDPLCSlots00_08": 40
       },
       "external_symbols": [],
       "blocks": [
@@ -85071,63 +85071,63 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_31B9A",
+          "target": "CNZCannonShared_PrivateDPLCSlots00_08",
           "base": "DPLC_CNZCannon_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_31B94",
+          "target": "CNZCannonShared_PrivateDPLCSlots01_07",
           "base": "DPLC_CNZCannon_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_31B8E",
+          "target": "CNZCannonShared_PrivateDPLCSlots02_06",
           "base": "DPLC_CNZCannon_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_31B88",
+          "target": "CNZCannonShared_PrivateDPLCSlots03_05",
           "base": "DPLC_CNZCannon_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_31B84",
+          "target": "CNZCannonShared_PrivateDPLCFrame04",
           "base": "DPLC_CNZCannon_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_31B88",
+          "target": "CNZCannonShared_PrivateDPLCSlots03_05",
           "base": "DPLC_CNZCannon_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_31B8E",
+          "target": "CNZCannonShared_PrivateDPLCSlots02_06",
           "base": "DPLC_CNZCannon_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_31B94",
+          "target": "CNZCannonShared_PrivateDPLCSlots01_07",
           "base": "DPLC_CNZCannon_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_31B9A",
+          "target": "CNZCannonShared_PrivateDPLCSlots00_08",
           "base": "DPLC_CNZCannon_"
         },
         {
@@ -85166,34 +85166,34 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 610
       },
-      "declarations_sha256": "047cfc5478c0a9459e3ec63fbdd93d33c67e6dd5ac9ca184113bda43ffd0b465",
+      "declarations_sha256": "6de90fc13dba916bd76be32abeff79030207771ecc262cd62b7c87cc3035eed8",
       "labels": {
         "Map_CNZBalloon_": 0,
-        "Frame_230534": 50,
-        "Frame_230548": 70,
-        "Frame_23055C": 90,
-        "Frame_230570": 110,
-        "Frame_23058A": 136,
-        "Frame_2305A4": 162,
-        "Frame_2305B8": 182,
-        "Frame_2305CC": 202,
-        "Frame_2305E0": 222,
-        "Frame_2305FA": 248,
-        "Frame_230614": 274,
-        "Frame_230628": 294,
-        "Frame_23063C": 314,
-        "Frame_230650": 334,
-        "Frame_23066A": 360,
-        "Frame_230684": 386,
-        "Frame_230698": 406,
-        "Frame_2306AC": 426,
-        "Frame_2306C0": 446,
-        "Frame_2306DA": 472,
-        "Frame_2306F4": 498,
-        "Frame_230708": 518,
-        "Frame_23071C": 538,
-        "Frame_230730": 558,
-        "Frame_23074A": 584
+        "CNZBalloonS3_MapFrame00": 50,
+        "CNZBalloonS3_MapFrame01": 70,
+        "CNZBalloonS3_MapFrame02": 90,
+        "CNZBalloonS3_MapFrame03": 110,
+        "CNZBalloonS3_MapFrame04": 136,
+        "CNZBalloonS3_MapFrame05": 162,
+        "CNZBalloonS3_MapFrame06": 182,
+        "CNZBalloonS3_MapFrame07": 202,
+        "CNZBalloonS3_MapFrame08": 222,
+        "CNZBalloonS3_MapFrame09": 248,
+        "CNZBalloonS3_MapFrame0A": 274,
+        "CNZBalloonS3_MapFrame0B": 294,
+        "CNZBalloonS3_MapFrame0C": 314,
+        "CNZBalloonS3_MapFrame0D": 334,
+        "CNZBalloonS3_MapFrame0E": 360,
+        "CNZBalloonS3_MapFrame0F": 386,
+        "CNZBalloonS3_MapFrame10": 406,
+        "CNZBalloonS3_MapFrame11": 426,
+        "CNZBalloonS3_MapFrame12": 446,
+        "CNZBalloonS3_MapFrame13": 472,
+        "CNZBalloonS3_MapFrame14": 498,
+        "CNZBalloonS3_MapFrame15": 518,
+        "CNZBalloonS3_MapFrame16": 538,
+        "CNZBalloonS3_MapFrame17": 558,
+        "CNZBalloonS3_MapFrame18": 584
       },
       "external_symbols": [],
       "blocks": [
@@ -85201,175 +85201,175 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230534",
+          "target": "CNZBalloonS3_MapFrame00",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230548",
+          "target": "CNZBalloonS3_MapFrame01",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_23055C",
+          "target": "CNZBalloonS3_MapFrame02",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230570",
+          "target": "CNZBalloonS3_MapFrame03",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_23058A",
+          "target": "CNZBalloonS3_MapFrame04",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2305A4",
+          "target": "CNZBalloonS3_MapFrame05",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2305B8",
+          "target": "CNZBalloonS3_MapFrame06",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2305CC",
+          "target": "CNZBalloonS3_MapFrame07",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2305E0",
+          "target": "CNZBalloonS3_MapFrame08",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2305FA",
+          "target": "CNZBalloonS3_MapFrame09",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230614",
+          "target": "CNZBalloonS3_MapFrame0A",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230628",
+          "target": "CNZBalloonS3_MapFrame0B",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_23063C",
+          "target": "CNZBalloonS3_MapFrame0C",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230650",
+          "target": "CNZBalloonS3_MapFrame0D",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_23066A",
+          "target": "CNZBalloonS3_MapFrame0E",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230684",
+          "target": "CNZBalloonS3_MapFrame0F",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230698",
+          "target": "CNZBalloonS3_MapFrame10",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2306AC",
+          "target": "CNZBalloonS3_MapFrame11",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2306C0",
+          "target": "CNZBalloonS3_MapFrame12",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2306DA",
+          "target": "CNZBalloonS3_MapFrame13",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2306F4",
+          "target": "CNZBalloonS3_MapFrame14",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230708",
+          "target": "CNZBalloonS3_MapFrame15",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_23071C",
+          "target": "CNZBalloonS3_MapFrame16",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230730",
+          "target": "CNZBalloonS3_MapFrame17",
           "base": "Map_CNZBalloon_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_23074A",
+          "target": "CNZBalloonS3_MapFrame18",
           "base": "Map_CNZBalloon_"
         },
         {
@@ -85508,13 +85508,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 160
       },
-      "declarations_sha256": "fb41f53c3ad56c117c128ea625106655e6b5e7dfafdd5a0c576fa5f8a6c0ab3f",
+      "declarations_sha256": "dc230c271b2b4b15eecf2d5d609bdb732bcf3b9fcb5be68c17ec466439a2bfca",
       "labels": {
         "Map_CNZBreakableWall_": 0,
-        "word_1FE80": 8,
-        "word_1FE9A": 34,
-        "word_1FECC": 84,
-        "word_1FEE6": 110
+        "CNZBreakableWallS3_MapSlot00": 8,
+        "CNZBreakableWallS3_MapSlot01": 34,
+        "CNZBreakableWallS3_MapSlot02": 84,
+        "CNZBreakableWallS3_MapSlot03": 110
       },
       "external_symbols": [],
       "blocks": [
@@ -85522,28 +85522,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1FE80",
+          "target": "CNZBreakableWallS3_MapSlot00",
           "base": "Map_CNZBreakableWall_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1FE9A",
+          "target": "CNZBreakableWallS3_MapSlot01",
           "base": "Map_CNZBreakableWall_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1FECC",
+          "target": "CNZBreakableWallS3_MapSlot02",
           "base": "Map_CNZBreakableWall_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1FEE6",
+          "target": "CNZBreakableWallS3_MapSlot03",
           "base": "Map_CNZBreakableWall_"
         },
         {
@@ -85577,12 +85577,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 48
       },
-      "declarations_sha256": "e2e3c6c531a3f8ae4702e7dbdc61a097811b83f6face76ff1b33f138e878241e",
+      "declarations_sha256": "33fb9f3c936504cce17801279a12c31d75f22f531fe933492a1cbf9ae6e3b5a1",
       "labels": {
         "Map_CNZButton_": 0,
-        "Frame_22BD50": 6,
-        "Frame_22BD5E": 20,
-        "Frame_22BD6C": 34
+        "CNZButtonS3_MapSlot00": 6,
+        "CNZButtonS3_MapSlot01": 20,
+        "CNZButtonS3_MapSlot02": 34
       },
       "external_symbols": [],
       "blocks": [
@@ -85590,21 +85590,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22BD50",
+          "target": "CNZButtonS3_MapSlot00",
           "base": "Map_CNZButton_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22BD5E",
+          "target": "CNZButtonS3_MapSlot01",
           "base": "Map_CNZButton_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22BD6C",
+          "target": "CNZButtonS3_MapSlot02",
           "base": "Map_CNZButton_"
         },
         {
@@ -85633,19 +85633,19 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 382
       },
-      "declarations_sha256": "28d51263e22b7c7f06132f6cea7b84486c4edd37d2d5818995a672983aae7d90",
+      "declarations_sha256": "3cd44d27e081af52ae9d69e38553fbbc98b3b38cab3c5f3de0449af936fe73bd",
       "labels": {
         "Map_CNZCannon_": 0,
-        "Frame_230A46": 20,
-        "Frame_230A6C": 58,
-        "Frame_230A8C": 90,
-        "Frame_230AB2": 128,
-        "Frame_230AD8": 166,
-        "Frame_230AFE": 204,
-        "Frame_230B1E": 236,
-        "Frame_230B44": 274,
-        "Frame_230B6A": 312,
-        "Frame_230B90": 350
+        "CNZCannonS3_MapFrame09": 20,
+        "CNZCannonS3_MapFrame04": 58,
+        "CNZCannonS3_MapFrame03": 90,
+        "CNZCannonS3_MapFrame02": 128,
+        "CNZCannonS3_MapFrame01": 166,
+        "CNZCannonS3_MapFrame00": 204,
+        "CNZCannonS3_MapFrame05": 236,
+        "CNZCannonS3_MapFrame06": 274,
+        "CNZCannonS3_MapFrame07": 312,
+        "CNZCannonS3_MapFrame08": 350
       },
       "external_symbols": [],
       "blocks": [
@@ -85653,70 +85653,70 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230AFE",
+          "target": "CNZCannonS3_MapFrame00",
           "base": "Map_CNZCannon_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230AD8",
+          "target": "CNZCannonS3_MapFrame01",
           "base": "Map_CNZCannon_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230AB2",
+          "target": "CNZCannonS3_MapFrame02",
           "base": "Map_CNZCannon_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230A8C",
+          "target": "CNZCannonS3_MapFrame03",
           "base": "Map_CNZCannon_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230A6C",
+          "target": "CNZCannonS3_MapFrame04",
           "base": "Map_CNZCannon_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230B1E",
+          "target": "CNZCannonS3_MapFrame05",
           "base": "Map_CNZCannon_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230B44",
+          "target": "CNZCannonS3_MapFrame06",
           "base": "Map_CNZCannon_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230B6A",
+          "target": "CNZCannonS3_MapFrame07",
           "base": "Map_CNZCannon_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230B90",
+          "target": "CNZCannonS3_MapFrame08",
           "base": "Map_CNZCannon_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230A46",
+          "target": "CNZCannonS3_MapFrame09",
           "base": "Map_CNZCannon_"
         },
         {
@@ -85780,11 +85780,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 152
       },
-      "declarations_sha256": "a5e7cf9ace542678942c9ee65cc89406ad205d327e5b9245802b6ebd112a78ff",
+      "declarations_sha256": "f2fa65dfa2514fa8bc0dde0a548565f632965fabb4cd32d5ef18caaf0b0d0710",
       "labels": {
         "Map_CNZCorkFloor_": 0,
-        "Frame_229C4C": 4,
-        "Frame_229C7E": 54
+        "CNZCorkFloorS3_MapSlot00": 4,
+        "CNZCorkFloorS3_MapSlot01": 54
       },
       "external_symbols": [],
       "blocks": [
@@ -85792,14 +85792,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_229C4C",
+          "target": "CNZCorkFloorS3_MapSlot00",
           "base": "Map_CNZCorkFloor_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_229C7E",
+          "target": "CNZCorkFloorS3_MapSlot01",
           "base": "Map_CNZCorkFloor_"
         },
         {
@@ -85823,13 +85823,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 208
       },
-      "declarations_sha256": "3237825cea6ddd6326b100fd5816e4a818ab3f0a70878501c4b56b98e6048a10",
+      "declarations_sha256": "7089125887333b5cd87fc4249e8781e62afdf2f94483c3ed2b81d6fd031a4747",
       "labels": {
         "Map_CNZCylinder_": 0,
-        "Frame_2317B8": 8,
-        "Frame_2317EA": 58,
-        "Frame_23181C": 108,
-        "Frame_23184E": 158
+        "CNZCylinderS3_MapFrame00": 8,
+        "CNZCylinderS3_MapFrame01": 58,
+        "CNZCylinderS3_MapFrame02": 108,
+        "CNZCylinderS3_MapFrame03": 158
       },
       "external_symbols": [],
       "blocks": [
@@ -85837,28 +85837,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2317B8",
+          "target": "CNZCylinderS3_MapFrame00",
           "base": "Map_CNZCylinder_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2317EA",
+          "target": "CNZCylinderS3_MapFrame01",
           "base": "Map_CNZCylinder_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_23181C",
+          "target": "CNZCylinderS3_MapFrame02",
           "base": "Map_CNZCylinder_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_23184E",
+          "target": "CNZCylinderS3_MapFrame03",
           "base": "Map_CNZCylinder_"
         },
         {
@@ -85892,10 +85892,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 28
       },
-      "declarations_sha256": "e28009a379d904a0a99d37ba947bd71cd28bc586f8a25829f9f3688421253ef5",
+      "declarations_sha256": "5111f69954bd7135d3d491f281d97ca1f086c03df001ea822a46a225979669e1",
       "labels": {
         "Map_CNZDoorHorizontal_": 0,
-        "word_3110A": 2
+        "CNZHorizontalDoorShared_MapSlot00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -85903,7 +85903,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3110A",
+          "target": "CNZHorizontalDoorShared_MapSlot00",
           "base": "Map_CNZDoorHorizontal_"
         },
         {
@@ -86108,13 +86108,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 144
       },
-      "declarations_sha256": "1d70895091ebe78f5f33c5a671e43197257b1878aaf80ecbaf7662611ac82db2",
+      "declarations_sha256": "246f27e6c94a0c4916c9f7721cc915a79956764510f6d3d98a3934e36e4e1066",
       "labels": {
         "Map_CNZHoverFan_": 0,
-        "Frame_231020": 16,
-        "Frame_23102E": 30,
-        "Frame_231048": 56,
-        "Frame_23106E": 94
+        "CNZHoverFanS3_MapFrame00": 16,
+        "CNZHoverFanS3_MapFrame01": 30,
+        "CNZHoverFanS3_MapFrame02": 56,
+        "CNZHoverFanS3_MapSlots03To07": 94
       },
       "external_symbols": [],
       "blocks": [
@@ -86122,56 +86122,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_231020",
+          "target": "CNZHoverFanS3_MapFrame00",
           "base": "Map_CNZHoverFan_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_23102E",
+          "target": "CNZHoverFanS3_MapFrame01",
           "base": "Map_CNZHoverFan_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_231048",
+          "target": "CNZHoverFanS3_MapFrame02",
           "base": "Map_CNZHoverFan_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_23106E",
+          "target": "CNZHoverFanS3_MapSlots03To07",
           "base": "Map_CNZHoverFan_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_23106E",
+          "target": "CNZHoverFanS3_MapSlots03To07",
           "base": "Map_CNZHoverFan_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_23106E",
+          "target": "CNZHoverFanS3_MapSlots03To07",
           "base": "Map_CNZHoverFan_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_23106E",
+          "target": "CNZHoverFanS3_MapSlots03To07",
           "base": "Map_CNZHoverFan_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_23106E",
+          "target": "CNZHoverFanS3_MapSlots03To07",
           "base": "Map_CNZHoverFan_"
         },
         {
@@ -86205,11 +86205,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 44
       },
-      "declarations_sha256": "3d426385ff3407be8e0db8d95b7e3ffe6be7997fc9a8232914e10eb16c66a95d",
+      "declarations_sha256": "b8c19e594420654c09d3e006a43847190b6cd84898c4904100899f9302a96855",
       "labels": {
         "Map_CNZLightBulb_": 0,
-        "Frame_230E56": 4,
-        "Frame_230E70": 30
+        "CNZLightBulbS3_MapFrame00": 4,
+        "CNZLightBulbS3_MapFrame01": 30
       },
       "external_symbols": [],
       "blocks": [
@@ -86217,14 +86217,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230E56",
+          "target": "CNZLightBulbS3_MapFrame00",
           "base": "Map_CNZLightBulb_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230E70",
+          "target": "CNZLightBulbS3_MapFrame01",
           "base": "Map_CNZLightBulb_"
         },
         {
@@ -86551,12 +86551,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 84
       },
-      "declarations_sha256": "72efea7441e774fe6ba68fc32a21a349e31ce8add28d024268e593f72f6c04a9",
+      "declarations_sha256": "0be625a465e940965a75bd1e8211b597d2be83cf9d06869c33f6bdfc6b52cf98",
       "labels": {
         "Map_CNZRisingPlatform_": 0,
-        "Frame_230CE2": 6,
-        "Frame_230CFC": 32,
-        "Frame_230D16": 58
+        "CNZRisingPlatformS3_MapFrame00": 6,
+        "CNZRisingPlatformS3_MapFrame01": 32,
+        "CNZRisingPlatformS3_MapFrame02": 58
       },
       "external_symbols": [],
       "blocks": [
@@ -86564,21 +86564,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230CE2",
+          "target": "CNZRisingPlatformS3_MapFrame00",
           "base": "Map_CNZRisingPlatform_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230CFC",
+          "target": "CNZRisingPlatformS3_MapFrame01",
           "base": "Map_CNZRisingPlatform_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230D16",
+          "target": "CNZRisingPlatformS3_MapFrame02",
           "base": "Map_CNZRisingPlatform_"
         },
         {
@@ -86607,15 +86607,15 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 276
       },
-      "declarations_sha256": "1164abd5a89a46e4cf03134051c2e13d4a431f6ff2f7182eaa1b6247ea192692",
+      "declarations_sha256": "b671552c9f45b113efb1b32e2d014e9e557fcf947f7b039577bd0b97483b8f4b",
       "labels": {
         "Map_CNZSOZBreakableWall_": 0,
-        "word_21AC6": 12,
-        "word_21AE0": 38,
-        "word_21B12": 88,
-        "word_21B2C": 114,
-        "word_21B5E": 164,
-        "word_21B84": 202
+        "CNZSOZBreakableWallSK_MapSlot00": 12,
+        "CNZSOZBreakableWallSK_MapSlot01": 38,
+        "CNZSOZBreakableWallSK_MapSlot02": 88,
+        "CNZSOZBreakableWallSK_MapSlot03": 114,
+        "CNZSOZBreakableWallSK_MapSlot04": 164,
+        "CNZSOZBreakableWallSK_MapSlot05": 202
       },
       "external_symbols": [],
       "blocks": [
@@ -86623,42 +86623,42 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_21AC6",
+          "target": "CNZSOZBreakableWallSK_MapSlot00",
           "base": "Map_CNZSOZBreakableWall_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_21AE0",
+          "target": "CNZSOZBreakableWallSK_MapSlot01",
           "base": "Map_CNZSOZBreakableWall_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_21B12",
+          "target": "CNZSOZBreakableWallSK_MapSlot02",
           "base": "Map_CNZSOZBreakableWall_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_21B2C",
+          "target": "CNZSOZBreakableWallSK_MapSlot03",
           "base": "Map_CNZSOZBreakableWall_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_21B5E",
+          "target": "CNZSOZBreakableWallSK_MapSlot04",
           "base": "Map_CNZSOZBreakableWall_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_21B84",
+          "target": "CNZSOZBreakableWallSK_MapSlot05",
           "base": "Map_CNZSOZBreakableWall_"
         },
         {
@@ -86702,12 +86702,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 48
       },
-      "declarations_sha256": "06d8ad37c8b277634fe499551bafa0cd4df84bbbdce9997fb3cbd4a637406eb8",
+      "declarations_sha256": "104860acad2734a591547df50cd29b4ea98ec6c4e5f9bbf894ef9060d6ac19a0",
       "labels": {
         "Map_CNZTrapDoor_": 0,
-        "Frame_230DD2": 6,
-        "Frame_230DE0": 20,
-        "Frame_230DEE": 34
+        "CNZTrapDoorS3_MapFrame00": 6,
+        "CNZTrapDoorS3_MapFrame01": 20,
+        "CNZTrapDoorS3_MapFrame02": 34
       },
       "external_symbols": [],
       "blocks": [
@@ -86715,21 +86715,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230DD2",
+          "target": "CNZTrapDoorS3_MapFrame00",
           "base": "Map_CNZTrapDoor_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230DE0",
+          "target": "CNZTrapDoorS3_MapFrame01",
           "base": "Map_CNZTrapDoor_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230DEE",
+          "target": "CNZTrapDoorS3_MapFrame02",
           "base": "Map_CNZTrapDoor_"
         },
         {

@@ -3,7 +3,7 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 
 ; ---------------------------------------------------------------------------
-word_31252:
+S3CNZCylinder_SpringSpeedLimits:
                 dc.w    $4E0
                 dc.w    $6F0
                 dc.w    $870
@@ -19,7 +19,7 @@ Obj_CNZCylinder:
                 move.b  d0,d1
                 lsr.b   #3,d1
                 andi.w  #$E,d1
-                move.w  word_31252(pc,d1.w),d1
+                move.w  S3CNZCylinder_SpringSpeedLimits(pc,d1.w),d1
                 move.w  d1,$3E(a0)
                 add.w   d0,d0
                 andi.w  #$1E,d0
@@ -41,14 +41,14 @@ Obj_CNZCylinder:
                 andi.w  #$F0,d1
                 lsl.w   #2,d1
                 btst    #0,status(a0)
-                beq.s   loc_312D8
+                beq.s   S3CNZCylinder_SetPhaseStepAndStart
                 neg.w   d1
 
-loc_312D8:
+S3CNZCylinder_SetPhaseStepAndStart:
                 move.w  d1,$46(a0)
-                move.l  #loc_312E2,(a0)
+                move.l  #S3CNZCylinder_UpdateMotionAndRiders,(a0)
 
-loc_312E2:
+S3CNZCylinder_UpdateMotionAndRiders:
                 bsr.s   UpdateCnzCylinderMotion
                 lea     $32(a0),a2
                 lea     (Player_1).w,a1
@@ -66,12 +66,12 @@ loc_312E2:
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull).l
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_31332
+                bpl.s   S3CNZCylinder_DrawFromBaseX
                 move.b  #1,anim_frame_timer(a0)
                 addq.b  #1,mapping_frame(a0)
                 andi.b  #3,mapping_frame(a0)
 
-loc_31332:
+S3CNZCylinder_DrawFromBaseX:
                 move.w  $2E(a0),d0
                 jmp     (Sprite_OnScreen_Test2).l
 
@@ -79,126 +79,127 @@ loc_31332:
 
 UpdateCnzCylinderMotion:
                 move.w  $3A(a0),d0
-                move.w  off_31348(pc,d0.w),d0
-                jmp     off_31348(pc,d0.w)
+                move.w  S3CNZCylinder_MotionTable(pc,d0.w),d0
+                jmp     S3CNZCylinder_MotionTable(pc,d0.w)
 ; End of function UpdateCnzCylinderMotion
 
 ; ---------------------------------------------------------------------------
-off_31348:
-                dc.w    loc_31362-off_31348
-                dc.w    loc_3144A-off_31348
-                dc.w    loc_31468-off_31348
-                dc.w    loc_31486-off_31348
-                dc.w    loc_314AA-off_31348
-                dc.w    loc_314C8-off_31348
-                dc.w    loc_314E6-off_31348
-                dc.w    loc_31504-off_31348
-                dc.w    loc_31528-off_31348
-                dc.w    loc_31546-off_31348
-                dc.w    loc_31546-off_31348
-                dc.w    loc_31546-off_31348
-                dc.w    loc_31546-off_31348
+S3CNZCylinder_MotionTable:
+                dc.w    S3CNZCylinder_TrySpringOnNewContact-S3CNZCylinder_MotionTable
+                dc.w    S3CNZCylinder_OscillateX32-S3CNZCylinder_MotionTable
+                dc.w    S3CNZCylinder_OscillateX64-S3CNZCylinder_MotionTable
+                dc.w    S3CNZCylinder_OscillateX96-S3CNZCylinder_MotionTable
+                dc.w    S3CNZCylinder_OscillateX128-S3CNZCylinder_MotionTable
+                dc.w    S3CNZCylinder_OscillateY32-S3CNZCylinder_MotionTable
+                dc.w    S3CNZCylinder_OscillateY64-S3CNZCylinder_MotionTable
+                dc.w    S3CNZCylinder_OscillateY96-S3CNZCylinder_MotionTable
+                dc.w    S3CNZCylinder_OscillateY128-S3CNZCylinder_MotionTable
+                dc.w    S3CNZCylinder_StepSquarePhase-S3CNZCylinder_MotionTable
+                dc.w    S3CNZCylinder_StepSquarePhase-S3CNZCylinder_MotionTable
+                dc.w    S3CNZCylinder_StepSquarePhase-S3CNZCylinder_MotionTable
+                dc.w    S3CNZCylinder_StepSquarePhase-S3CNZCylinder_MotionTable
 ; ---------------------------------------------------------------------------
 
-loc_31362:
+; Compare standing masks numerically to decide whether to apply an impulse
+S3CNZCylinder_TrySpringOnNewContact:
                 move.w  $3C(a0),d1
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
                 cmp.w   d1,d0
-                beq.s   loc_313AE
+                beq.s   S3CNZCylinder_MoveSpringAndReadInput
                 move.w  d0,$3C(a0)
                 sub.w   d1,d0
-                bcs.s   loc_313AE
+                bcs.s   S3CNZCylinder_MoveSpringAndReadInput
                 move.w  y_vel(a0),d0
-                bpl.s   loc_31382
+                bpl.s   S3CNZCylinder_TryApplySpringImpulse
                 neg.w   d0
 
-loc_31382:
+S3CNZCylinder_TryApplySpringImpulse:
                 cmpi.w  #$200,d0
-                bhs.s   loc_313AE
+                bhs.s   S3CNZCylinder_MoveSpringAndReadInput
                 move.w  y_pos(a0),d0
                 sub.w   $30(a0),d0
                 addi.w  #$40,d0
                 cmpi.w  #$80,d0
-                bhs.s   loc_313AE
+                bhs.s   S3CNZCylinder_MoveSpringAndReadInput
                 addi.w  #$400,y_vel(a0)
                 move.w  $3E(a0),d0
                 cmp.w   y_vel(a0),d0
-                bgt.s   loc_313AE
+                bgt.s   S3CNZCylinder_MoveSpringAndReadInput
                 move.w  d0,y_vel(a0)
 
-loc_313AE:
+S3CNZCylinder_MoveSpringAndReadInput:
                 jsr     (MoveSprite2).l
                 moveq   #0,d5
                 btst    #p1_standing_bit,status(a0)
-                beq.s   loc_313C2
+                beq.s   S3CNZCylinder_MergeP2HeldInput
                 move.b  (Ctrl_1_held_logical).w,d5
 
-loc_313C2:
+S3CNZCylinder_MergeP2HeldInput:
                 btst    #p2_standing_bit,status(a0)
-                beq.s   loc_313CE
+                beq.s   S3CNZCylinder_CheckSpringSide
                 or.b    (Ctrl_2_held_logical).w,d5
 
-loc_313CE:
+S3CNZCylinder_CheckSpringSide:
                 move.w  y_pos(a0),d0
                 sub.w   $30(a0),d0
-                beq.s   loc_31434
-                bcc.s   loc_31406
+                beq.s   S3CNZCylinder_CheckSpeedAtBase
+                bcc.s   S3CNZCylinder_AccelerateBelowBase
                 move.w  $3E(a0),d0
                 cmp.w   y_vel(a0),d0
-                ble.s   locret_31448
+                ble.s   CNZCylinderS3_ReturnFromSpringMotionMode
                 addi.w  #$20,y_vel(a0)
                 tst.w   y_vel(a0)
-                bmi.s   loc_313FE
+                bmi.s   S3CNZCylinder_BrakeAboveBase
                 btst    #button_down,d5
-                beq.s   loc_31404
+                beq.s   S3CNZCylinder_AboveBaseReturn
                 addi.w  #$20,y_vel(a0)
-                bra.s   loc_31404
+                bra.s   S3CNZCylinder_AboveBaseReturn
 ; ---------------------------------------------------------------------------
 
-loc_313FE:
+S3CNZCylinder_BrakeAboveBase:
                 addi.w  #$10,y_vel(a0)
 
-loc_31404:
-                bra.s   locret_31448
+S3CNZCylinder_AboveBaseReturn:
+                bra.s   CNZCylinderS3_ReturnFromSpringMotionMode
 ; ---------------------------------------------------------------------------
 
-loc_31406:
+S3CNZCylinder_AccelerateBelowBase:
                 move.w  $3E(a0),d0
                 neg.w   d0
                 cmp.w   y_vel(a0),d0
-                bge.s   locret_31448
+                bge.s   CNZCylinderS3_ReturnFromSpringMotionMode
                 subi.w  #$20,y_vel(a0)
                 tst.w   y_vel(a0)
-                bpl.s   loc_3142C
+                bpl.s   S3CNZCylinder_BrakeBelowBase
                 btst    #button_up,d5
-                beq.s   loc_31432
+                beq.s   S3CNZCylinder_BelowBaseReturn
                 subi.w  #$20,y_vel(a0)
-                bra.s   loc_31432
+                bra.s   S3CNZCylinder_BelowBaseReturn
 ; ---------------------------------------------------------------------------
 
-loc_3142C:
+S3CNZCylinder_BrakeBelowBase:
                 subi.w  #$10,y_vel(a0)
 
-loc_31432:
-                bra.s   locret_31448
+S3CNZCylinder_BelowBaseReturn:
+                bra.s   CNZCylinderS3_ReturnFromSpringMotionMode
 ; ---------------------------------------------------------------------------
 
-loc_31434:
+S3CNZCylinder_CheckSpeedAtBase:
                 move.w  y_vel(a0),d0
-                bpl.s   loc_3143C
+                bpl.s   S3CNZCylinder_TryStopSpringAtBase
                 neg.w   d0
 
-loc_3143C:
+S3CNZCylinder_TryStopSpringAtBase:
                 cmpi.w  #$80,d0
-                bhs.s   locret_31448
+                bhs.s   CNZCylinderS3_ReturnFromSpringMotionMode
                 move.w  #0,y_vel(a0)
 
-locret_31448:
+CNZCylinderS3_ReturnFromSpringMotionMode:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3144A:
+S3CNZCylinder_OscillateX32:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 asr.w   #3,d0
@@ -209,7 +210,7 @@ loc_3144A:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_31468:
+S3CNZCylinder_OscillateX64:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 asr.w   #2,d0
@@ -220,7 +221,7 @@ loc_31468:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_31486:
+S3CNZCylinder_OscillateX96:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 asr.w   #2,d0
@@ -234,7 +235,7 @@ loc_31486:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_314AA:
+S3CNZCylinder_OscillateX128:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 asr.w   #1,d0
@@ -245,7 +246,7 @@ loc_314AA:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_314C8:
+S3CNZCylinder_OscillateY32:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 asr.w   #3,d0
@@ -256,7 +257,7 @@ loc_314C8:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_314E6:
+S3CNZCylinder_OscillateY64:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 asr.w   #2,d0
@@ -267,7 +268,7 @@ loc_314E6:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_31504:
+S3CNZCylinder_OscillateY96:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 asr.w   #2,d0
@@ -281,7 +282,7 @@ loc_31504:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_31528:
+S3CNZCylinder_OscillateY128:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 asr.w   #1,d0
@@ -292,49 +293,49 @@ loc_31528:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_31546:
+S3CNZCylinder_StepSquarePhase:
                 move.w  $46(a0),d0
-                bpl.s   loc_31588
+                bpl.s   S3CNZCylinder_StepForwardSquarePhase
                 add.w   d0,angle(a0)
                 move.b  angle(a0),d0
                 cmpi.b  #$80,d0
-                bhs.s   loc_31570
+                bhs.s   S3CNZCylinder_ClampReverseSquarePhase
                 andi.b  #$7F,d0
                 addi.b  #$80,d0
                 move.b  d0,angle(a0)
                 subq.b  #1,$44(a0)
                 andi.b  #3,$44(a0)
 
-loc_31570:
+S3CNZCylinder_ClampReverseSquarePhase:
                 move.w  #$20,d2
                 move.b  angle(a0),d0
                 cmpi.b  #$80,d0
-                bhs.s   loc_315B0
+                bhs.s   S3CNZCylinder_ProjectSquareTop
                 move.b  #$80,d0
                 move.b  d0,angle(a0)
-                bra.s   loc_315B0
+                bra.s   S3CNZCylinder_ProjectSquareTop
 ; ---------------------------------------------------------------------------
 
-loc_31588:
+S3CNZCylinder_StepForwardSquarePhase:
                 add.w   d0,angle(a0)
                 move.b  angle(a0),d0
                 cmpi.b  #$80,d0
-                bhs.s   loc_315AC
+                bhs.s   S3CNZCylinder_SetSquareHalfSize
                 andi.b  #$7F,d0
                 addi.b  #$80,d0
                 move.b  d0,angle(a0)
                 addq.b  #1,$44(a0)
                 andi.b  #3,$44(a0)
 
-loc_315AC:
+S3CNZCylinder_SetSquareHalfSize:
                 move.w  #$20,d2
 
-loc_315B0:
+S3CNZCylinder_ProjectSquareTop:
                 jsr     (GetSineCosine).l
                 asr.w   #3,d1
                 move.b  $44(a0),d3
                 andi.b  #3,d3
-                bne.s   loc_315D6
+                bne.s   S3CNZCylinder_TryProjectSquareRight
                 add.w   $2E(a0),d1
                 move.w  d1,x_pos(a0)
                 neg.w   d2
@@ -343,9 +344,9 @@ loc_315B0:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_315D6:
+S3CNZCylinder_TryProjectSquareRight:
                 subq.b  #1,d3
-                bne.s   loc_315EC
+                bne.s   S3CNZCylinder_TryProjectSquareBottom
                 add.w   $30(a0),d1
                 move.w  d1,y_pos(a0)
                 add.w   $2E(a0),d2
@@ -353,9 +354,9 @@ loc_315D6:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_315EC:
+S3CNZCylinder_TryProjectSquareBottom:
                 subq.b  #1,d3
-                bne.s   loc_31604
+                bne.s   CNZCylinderS3_ProjectSquareLeftEdge
                 neg.w   d1
                 add.w   $2E(a0),d1
                 move.w  d1,x_pos(a0)
@@ -364,7 +365,7 @@ loc_315EC:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_31604:
+CNZCylinderS3_ProjectSquareLeftEdge:
                 neg.w   d1
                 add.w   $30(a0),d1
                 move.w  d1,y_pos(a0)
@@ -377,17 +378,17 @@ loc_31604:
 
 UpdatePlayerOnCnzCylinder:
                 move.b  (a2),d0
-                bne.s   loc_31692
+                bne.s   S3CNZCylinder_OrbitOrReleaseRider
                 btst    d6,status(a0)
-                beq.s   locret_31690
+                beq.s   S3CNZCylinder_EntryReturn
                 move.b  #0,1(a2)
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
-                bpl.s   loc_3163C
+                bpl.s   S3CNZCylinder_CaptureRiderAndSetTwist
                 neg.w   d0
                 move.b  #$80,1(a2)
 
-loc_3163C:
+S3CNZCylinder_CaptureRiderAndSetTwist:
                 move.b  d0,2(a2)
                 move.w  #0,x_vel(a1)
                 move.w  #0,y_vel(a1)
@@ -402,20 +403,20 @@ loc_3163C:
                 move.b  #0,jumping(a1)
                 move.b  #0,anim(a1)
                 move.b  #1,(a2)
-                bra.w   loc_31764
+                bra.w   S3CNZCylinder_LoadRiderTwistPhase
 ; ---------------------------------------------------------------------------
 
-locret_31690:
+S3CNZCylinder_EntryReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_31692:
+S3CNZCylinder_OrbitOrReleaseRider:
                 tst.b   render_flags(a1)
-                bpl.w   loc_3174C
+                bpl.w   S3CNZCylinder_ReleaseControlAndPriority
                 cmpi.b  #4,routine(a1)
-                bhs.w   loc_3174C
+                bhs.w   S3CNZCylinder_ReleaseControlAndPriority
                 btst    d6,status(a0)
-                beq.w   loc_3175E
+                beq.w   S3CNZCylinder_ClearRiderRecord
                 moveq   #0,d0
                 move.b  1(a2),d0
                 jsr     (GetSineCosine).l
@@ -432,25 +433,25 @@ loc_31692:
                 move.w  #$100,priority(a1)
                 move.b  $35(a0),d0
                 cmp.b   3(a2),d0
-                bls.s   loc_316EE
+                bls.s   S3CNZCylinder_CalcSpringSpeedForPose
                 move.w  #$80,priority(a1)
 
-loc_316EE:
+S3CNZCylinder_CalcSpringSpeedForPose:
                 move.w  #0,ground_vel(a1)
                 move.w  y_vel(a0),d0
-                bpl.s   loc_316FC
+                bpl.s   S3CNZCylinder_TrySetFastRiderPose
                 neg.w   d0
 
-loc_316FC:
+S3CNZCylinder_TrySetFastRiderPose:
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_31710
+                bne.s   S3CNZCylinder_TryJumpWithSpringSpeed
                 cmpi.w  #$480,d0
-                blo.s   loc_31710
+                blo.s   S3CNZCylinder_TryJumpWithSpringSpeed
                 move.w  #$800,ground_vel(a1)
 
-loc_31710:
+S3CNZCylinder_TryJumpWithSpringSpeed:
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d5
-                beq.s   loc_31764
+                beq.s   S3CNZCylinder_LoadRiderTwistPhase
                 move.b  #1,jumping(a1)
                 move.b  #$E,y_radius(a1)
                 move.b  #7,x_radius(a1)
@@ -461,21 +462,21 @@ loc_31710:
                 move.w  #0,x_vel(a1)
                 move.w  #0,ground_vel(a1)
 
-loc_3174C:
+S3CNZCylinder_ReleaseControlAndPriority:
                 bset    #Status_InAir,status(a1)
                 move.w  #$100,priority(a1)
                 move.b  #0,object_control(a1)
 
-loc_3175E:
+S3CNZCylinder_ClearRiderRecord:
                 move.b  #0,(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_31764:
+S3CNZCylinder_LoadRiderTwistPhase:
                 moveq   #0,d0
                 move.b  1(a2),d0
 
-loc_3176A:                                              ; Used by LBZ cup elevator
+S3CNZCylinder_ApplyTwistFrameAndTiles:                  ; Used by LBZ cup elevator
                 addi.b  #$B,d0
                 divu.w  #$16,d0
                 move.b  PlayerTwistFrames(pc,d0.w),mapping_frame(a1)

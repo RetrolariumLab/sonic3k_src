@@ -8108,7 +8108,7 @@
       "responsibility": "Carnival Night act-one screen control, background events, deformation and miniboss scroll actors.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 549,
+      "physical_lines": 550,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -8138,7 +8138,7 @@
       "responsibility": "Carnival Night act-two screen control, background events and teleporter actor.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 271,
+      "physical_lines": 272,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -23759,7 +23759,7 @@
       "responsibility": "Clamer attack and projectile state, tracking slots and private graphics resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 197,
+      "physical_lines": 198,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -23804,7 +23804,7 @@
       "responsibility": "Sparkle controller and child actors with private attributes and construction data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 216,
+      "physical_lines": 217,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -23849,7 +23849,7 @@
       "responsibility": "Clamer attack and projectile state, tracking slots and private graphics resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 199,
+      "physical_lines": 201,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -23884,7 +23884,7 @@
       "responsibility": "Sparkle controller and child actors with private attributes and construction data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 216,
+      "physical_lines": 217,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -57106,7 +57106,7 @@
       "responsibility": "Carnival Night balloon collision, bounce, burst and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 119,
+      "physical_lines": 121,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "s3.s",
@@ -57236,7 +57236,7 @@
       "responsibility": "Carnival Night cylinder player capture, axial transport, release and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 498,
+      "physical_lines": 499,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "s3.s",
@@ -57446,7 +57446,7 @@
       "responsibility": "Preserved Carnival Night bumper streaming, collision and player rebound behavior.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 536,
+      "physical_lines": 539,
       "origin": {
         "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
         "path": "s3.s",
@@ -57586,7 +57586,7 @@
       "responsibility": "Carnival Night spiral tube player transport, directional motion and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 281,
+      "physical_lines": 283,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "s3.s",
@@ -57721,7 +57721,7 @@
       "responsibility": "Carnival Night vacuum tube capture, player transport and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 183,
+      "physical_lines": 184,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "s3.s",
@@ -57811,7 +57811,7 @@
       "responsibility": "Carnival Night wire-cage player capture, spin, motion and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 381,
+      "physical_lines": 382,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "s3.s",
@@ -57851,7 +57851,7 @@
       "responsibility": "Carnival Night balloon collision, bounce, burst and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 119,
+      "physical_lines": 121,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "sonic3k.s",
@@ -57951,7 +57951,7 @@
       "responsibility": "Carnival Night cylinder player capture, axial transport, release and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 506,
+      "physical_lines": 508,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "sonic3k.s",
@@ -58131,7 +58131,7 @@
       "responsibility": "Carnival Night spiral tube player transport, directional motion and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 281,
+      "physical_lines": 283,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "sonic3k.s",
@@ -58236,7 +58236,7 @@
       "responsibility": "Carnival Night vacuum tube capture, player transport and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 184,
+      "physical_lines": 185,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "sonic3k.s",
@@ -58271,7 +58271,7 @@
       "responsibility": "Carnival Night wire-cage player capture, spin, motion and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 370,
+      "physical_lines": 371,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "sonic3k.s",

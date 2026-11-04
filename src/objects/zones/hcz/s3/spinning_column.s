@@ -148,7 +148,7 @@ S3SpinningColumn_CaptureStandingRider:
                 move.b  #0,jumping(a1)
                 move.b  #0,anim(a1)
                 move.b  #1,(a2)
-                bra.w   loc_31764
+                bra.w   S3CNZCylinder_LoadRiderTwistPhase
 ; ---------------------------------------------------------------------------
 
 S3SpinningColumn_CaptureReturn:
@@ -194,7 +194,7 @@ S3SpinningColumn_TryBoostRiderSpeed:
 
 S3SpinningColumn_TryJumpRelease:
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d5
-                beq.w   loc_31764
+                beq.w   S3CNZCylinder_LoadRiderTwistPhase
                 move.b  #1,jumping(a1)
                 move.b  #$E,y_radius(a1)
                 move.b  #7,x_radius(a1)

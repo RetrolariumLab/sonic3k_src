@@ -18,32 +18,32 @@ Obj_CNZBalloon:
                 move.b  d0,anim(a0)
                 jsr     (Random_Number).l
                 move.b  d0,angle(a0)
-                move.l  #loc_31754,(a0)
+                move.l  #SKCNZBalloon_PollPlayerContacts,(a0)
 
-loc_31754:
+SKCNZBalloon_PollPlayerContacts:
                 tst.b   collision_property(a0)
-                beq.s   loc_31776
+                beq.s   SKCNZBalloon_AnimateAndCheckOffscreen
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
-                beq.s   loc_31768
+                beq.s   SKCNZBalloon_TryBounceP2
                 bsr.s   BouncePlayerFromCnzBalloon
 
-loc_31768:
+SKCNZBalloon_TryBounceP2:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
-                beq.s   loc_31776
+                beq.s   SKCNZBalloon_AnimateAndCheckOffscreen
                 bsr.s   BouncePlayerFromCnzBalloon
 
-loc_31776:
+SKCNZBalloon_AnimateAndCheckOffscreen:
                 lea     (Ani_CNZBalloon).l,a1
                 jsr     (Animate_Sprite).l
 ; Bug: probably meant to be routine(a0), and at some point the animation terminated
 ; with code $FC (increment routine counter) rather than $FB (move offscreen)
                 tst.b   routine
-                beq.s   loc_3178E
+                beq.s   SKCNZBalloon_BobAndCheckTouch
                 move.w  #$7F00,x_pos(a0)
 
-loc_3178E:
+SKCNZBalloon_BobAndCheckTouch:
                 moveq   #0,d0
                 move.b  angle(a0),d0
                 addq.b  #1,angle(a0)
@@ -64,13 +64,13 @@ BouncePlayerFromCnzBalloon:
                 move.b  #0,object_control(a1)
                 bset    #0,anim(a0)
                 tst.b   subtype(a0)
-                bpl.s   loc_31808
+                bpl.s   SKCNZBalloon_TryLatchBurst
                 move.w  #-$380,y_vel(a1)
                 tst.b   (Water_flag).w
-                beq.s   loc_31808
+                beq.s   SKCNZBalloon_TryLatchBurst
                 tst.b   $34(a0)
-                bne.s   loc_31808
-                lea     (byte_3185A).l,a2
+                bne.s   SKCNZBalloon_TryLatchBurst
+                lea     (SKCNZBalloon_BubbleSubtypes).l,a2
                 bsr.s   SpawnCnzBalloonAirBubble
                 bsr.s   SpawnCnzBalloonAirBubble
                 bsr.s   SpawnCnzBalloonAirBubble
@@ -78,14 +78,14 @@ BouncePlayerFromCnzBalloon:
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
 
-loc_31808:
+SKCNZBalloon_TryLatchBurst:
                 tst.b   $34(a0)
-                bne.s   locret_3181C
+                bne.s   CNZBalloonSK_ReturnAfterBounceSoundLatch
                 moveq   #signextendB(sfx_Balloon),d0
                 jsr     (Play_SFX).l
                 move.b  #1,$34(a0)
 
-locret_3181C:
+CNZBalloonSK_ReturnAfterBounceSoundLatch:
                 rts
 ; End of function BouncePlayerFromCnzBalloon
 
@@ -93,7 +93,7 @@ locret_3181C:
 
 SpawnCnzBalloonAirBubble:
                 jsr     (AllocateObject).l
-                bne.s   locret_31858
+                bne.s   SKCNZBalloon_SpawnBubbleReturn
                 move.l  #Obj_Bubbler,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 jsr     (Random_Number).l
@@ -107,12 +107,14 @@ SpawnCnzBalloonAirBubble:
                 add.w   d1,y_pos(a1)
                 move.b  (a2)+,subtype(a1)
 
-locret_31858:
+; Successful allocation leaves a1 pointing at the new bubble
+SKCNZBalloon_SpawnBubbleReturn:
                 rts
 ; End of function SpawnCnzBalloonAirBubble
 
 ; ---------------------------------------------------------------------------
-byte_3185A:
+; Advance the subtype pointer only after a bubble slot is allocated
+SKCNZBalloon_BubbleSubtypes:
                 dc.b    0,   0,   1,   3
                 even
 Ani_CNZBalloon:

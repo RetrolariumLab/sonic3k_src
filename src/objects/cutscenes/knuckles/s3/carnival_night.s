@@ -28,7 +28,7 @@ word_44C2E:
 loc_44C36:
                 lea     ObjSlot_CutsceneKnux(pc),a1
                 jsr     (SetUp_ObjAttributesSlotted).l
-                move.l  #byte_4578B,$30(a0)
+                move.l  #S3KnuxScene_ChuckleLoopAnim,$30(a0)
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
                 move.w  #2*60,$2E(a0)
@@ -43,7 +43,7 @@ loc_44C36:
                 move.l  #loc_44CAE,$34(a0)
                 lea     Pal_CutsceneKnux(pc),a1
                 jsr     (PalLoad_Line1).l
-                lea     ChildObjDat_45730(pc),a2
+                lea     S3KnuxScene_CNZTallBarrierChild(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
@@ -300,7 +300,7 @@ loc_44F44:
                 move.b  #$C,routine(a0)
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
-                move.l  #byte_4576B,$30(a0)
+                move.l  #S3KnuxScene_RunAnim,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 

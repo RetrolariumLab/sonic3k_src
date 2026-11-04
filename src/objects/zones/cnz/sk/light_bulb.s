@@ -11,21 +11,21 @@ Obj_CNZLightBulb:
                 move.b  #$10,width_pixels(a0)
                 move.b  #$10,height_pixels(a0)
                 tst.b   (Water_flag).w
-                bne.s   loc_31D6E
-                move.l  #loc_31D8A,(a0)
-                bra.s   loc_31D8A
+                bne.s   SKCNZLightBulb_StartWaterPoll
+                move.l  #SKCNZLightBulb_DrawAndCull,(a0)
+                bra.s   SKCNZLightBulb_DrawAndCull
 ; ---------------------------------------------------------------------------
 
-loc_31D6E:
-                move.l  #loc_31D74,(a0)
+SKCNZLightBulb_StartWaterPoll:
+                move.l  #SKCNZLightBulb_LatchFloodedFrame,(a0)
 
-loc_31D74:
+SKCNZLightBulb_LatchFloodedFrame:
                 move.w  (Water_level).w,d0
                 cmp.w   y_pos(a0),d0
-                bhs.s   loc_31D8A
+                bhs.s   SKCNZLightBulb_DrawAndCull
                 move.b  #1,mapping_frame(a0)
-                move.l  #loc_31D8A,(a0)
+                move.l  #SKCNZLightBulb_DrawAndCull,(a0)
 
-loc_31D8A:
+SKCNZLightBulb_DrawAndCull:
                 jmp     (Sprite_OnScreen_Test).l
 ; End of function Obj_CNZLightBulb

@@ -598,7 +598,7 @@ loc_260A2:
 loc_260CE:
                 moveq   #0,d0
                 move.b  angle(a0),d0
-                jmp     (loc_3176A).l
+                jmp     (S3CNZCylinder_ApplyTwistFrameAndTiles).l
 ; ---------------------------------------------------------------------------
 
 locret_260DA:

@@ -70,7 +70,7 @@ loc_44B42:
 
 loc_44B6C:
                 subq.w  #4,x_pos(a0)
-                lea     (byte_4576B).l,a1
+                lea     (S3KnuxScene_RunAnim).l,a1
                 jsr     (Animate_RawNoSST).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------

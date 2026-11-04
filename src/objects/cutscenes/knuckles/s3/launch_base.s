@@ -33,7 +33,7 @@ loc_44FE8:
                 move.w  #$A0,(Camera_min_Y_pos).w
                 lea     Pal_CutsceneKnux(pc),a1
                 jsr     (PalLoad_Line1).l
-                lea     ChildObjDat_45738(pc),a2
+                lea     S3KnuxScene_LBZCaptureChild(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
@@ -57,7 +57,7 @@ loc_4502C:
 
 loc_45046:
                 move.b  #6,routine(a0)
-                move.l  #byte_4578F,$30(a0)
+                move.l  #S3KnuxScene_LBZBombThrowAnim,$30(a0)
                 move.l  #loc_45064,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
@@ -72,7 +72,7 @@ loc_45064:
                 move.l  #loc_45096,$34(a0)
                 moveq   #signextendB(sfx_MissileThrow),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_45740(pc),a2
+                lea     S3KnuxScene_LBZBombChild(pc),a2
                 jsr     (CreateChild1_Normal).l
                 lea     (PLC_BossExplosion).l,a1
                 jmp     (Load_PLC_Raw).l
@@ -90,13 +90,13 @@ loc_450AE:
                 st      (Screen_shake_flag).w
                 move.w  #$5F,$2E(a0)
                 move.l  #loc_450D0,$34(a0)
-                lea     ChildObjDat_45748(pc),a2
+                lea     S3KnuxScene_LBZRisingExplosions(pc),a2
                 jmp     (CreateChild6_Simple).l
 ; ---------------------------------------------------------------------------
 
 loc_450D0:
                 move.b  #$E,routine(a0)
-                move.l  #byte_4576B,$30(a0)
+                move.l  #S3KnuxScene_RunAnim,$30(a0)
                 clr.b   anim_frame_timer(a0)
                 clr.b   anim_frame(a0)
                 rts
@@ -170,7 +170,7 @@ word_45196:
 ; ---------------------------------------------------------------------------
 
 loc_4519E:
-                lea     ObjDat3_456FA(pc),a1
+                lea     S3KnuxScene_LBZBombAttrs(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #loc_451C2,(a0)
                 move.w  #-$200,x_vel(a0)
@@ -234,7 +234,7 @@ loc_45242:
                 bsr.w   SpawnKnucklesCutsceneMusicTransition
                 lea     Pal_CutsceneKnux(pc),a1
                 jsr     (PalLoad_Line1).l
-                lea     ChildObjDat_4574E(pc),a2
+                lea     S3KnuxScene_LBZWobblingPillars(pc),a2
                 jmp     (CreateChild3_NormalRepeated).l
 ; ---------------------------------------------------------------------------
 
@@ -251,7 +251,7 @@ loc_4527A:
 ; ---------------------------------------------------------------------------
 
 loc_4528A:
-                lea     byte_4579E(pc),a1
+                lea     S3KnuxScene_LBZSecondSceneAnim(pc),a1
                 jmp     (Animate_RawNoSSTMultiDelay).l
 ; ---------------------------------------------------------------------------
 
@@ -265,7 +265,7 @@ loc_452A4:
                 tst.b   (Screen_shake_flag).w
                 beq.s   loc_452C0
                 move.b  #8,routine(a0)
-                move.l  #byte_45766,$30(a0)
+                move.l  #S3KnuxScene_LBZIdleAnim,$30(a0)
                 clr.b   anim_frame_timer(a0)
                 clr.b   anim_frame(a0)
 
@@ -310,7 +310,7 @@ loc_45322:
 ; ---------------------------------------------------------------------------
 
 loc_45330:
-                lea     ObjDat3_45706(pc),a1
+                lea     S3KnuxScene_LBZPillarAttrs(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #loc_4536C,(a0)
                 moveq   #0,d0

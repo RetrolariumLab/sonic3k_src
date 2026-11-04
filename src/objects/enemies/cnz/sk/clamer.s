@@ -14,112 +14,114 @@ Obj_Clamer:
                 jmp     Sprite_CheckDeleteTouchSlotted(pc)
 ; ---------------------------------------------------------------------------
 Clamer_Index:
-                dc.w    loc_88FDC-Clamer_Index
-                dc.w    loc_88FEC-Clamer_Index
-                dc.w    loc_8904E-Clamer_Index
-                dc.w    loc_89064-Clamer_Index
+                dc.w    SKClamer_InitAndSpawnContact-Clamer_Index
+                dc.w    SKClamer_CheckContactOrTarget-Clamer_Index
+                dc.w    SKClamer_AnimateContactResponse-Clamer_Index
+                dc.w    SKClamer_AnimateAndTryFire-Clamer_Index
 ; ---------------------------------------------------------------------------
 
-loc_88FDC:
+SKClamer_InitAndSpawnContact:
                 lea     ObjSlot_Clamer(pc),a1
                 jsr     SetUp_ObjAttributesSlotted(pc)
-                lea     ChildObjDat_89148(pc),a2
+                lea     SKClamer_ContactChildRecord(pc),a2
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
 
-loc_88FEC:
+SKClamer_CheckContactOrTarget:
                 btst    #0,$38(a0)
-                bne.s   loc_89014
+                bne.s   SKClamer_BeginContactResponse
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$60,d2
-                bhs.s   loc_8900C
+                bhs.s   ClamerSK_Root_DecodeIdleFrameDelayPairs
                 btst    #0,render_flags(a0)
-                beq.s   loc_89008
+                beq.s   SKClamer_CheckFacingTarget
                 subq.w  #2,d0
 
-loc_89008:
+SKClamer_CheckFacingTarget:
                 tst.w   d0
-                beq.s   loc_89036
+                beq.s   SKClamer_BeginFiring
 
-loc_8900C:
-                lea     byte_89170(pc),a1
+ClamerSK_Root_DecodeIdleFrameDelayPairs:
+                lea     ClamerSK_Root_IdleFrameDelayPairs(pc),a1
                 jmp     Animate_RawNoSSTMultiDelay(pc)
 ; ---------------------------------------------------------------------------
 
-loc_89014:
+SKClamer_BeginContactResponse:
                 move.b  #4,routine(a0)
                 clr.b   collision_flags(a0)
                 bclr    #0,$38(a0)
-                move.l  #loc_89056,$34(a0)
+                move.l  #SKClamer_RestoreIdleContact,$34(a0)
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_89036:
+SKClamer_BeginFiring:
                 move.b  #6,routine(a0)
-                move.l  #loc_89056,$34(a0)
+                move.l  #SKClamer_RestoreIdleContact,$34(a0)
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
 
-locret_8904C:
+SKClamer_StateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8904E:
-                lea     byte_89179(pc),a1
+SKClamer_AnimateContactResponse:
+                lea     SKClamer_ContactAnim(pc),a1
                 jmp     Animate_RawNoSST(pc)
 ; ---------------------------------------------------------------------------
 
-loc_89056:
+SKClamer_RestoreIdleContact:
                 move.b  #2,routine(a0)
                 move.b  #$A,collision_flags(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_89064:
-                lea     byte_89185(pc),a1
+; Fire only on entry to frame 8 while the object is visible
+SKClamer_AnimateAndTryFire:
+                lea     SKClamer_FiringAnim(pc),a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
                 tst.w   d2
-                beq.w   locret_8904C
+                beq.w   SKClamer_StateReturn
                 cmpi.b  #8,mapping_frame(a0)
-                bne.w   locret_8904C
+                bne.w   SKClamer_StateReturn
                 tst.b   render_flags(a0)
-                bpl.w   locret_8904C
-                lea     ChildObjDat_89150(pc),a2
+                bpl.w   SKClamer_StateReturn
+                lea     SKClamer_ProjectileChildRecord(pc),a2
                 jmp     CreateChild5_ComplexAdjusted(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8908C:
-                lea     word_89136(pc),a1
+SKClamer_InitContactChild:
+                lea     SKClamer_ContactAttrs(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
                 movea.w parent3(a0),a1
                 move.b  render_flags(a1),render_flags(a0)
                 clr.w   art_tile(a0)
-                move.l  #loc_890AA,(a0)
+                move.l  #SKClamer_TryLaunchOnContact,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_890AA:
+; A successful spring launch also requests a response from the parent Clamer
+SKClamer_TryLaunchOnContact:
                 bsr.w   Check_PlayerCollision
-                beq.s   loc_890C4
-                move.l  #loc_890C8,(a0)
+                beq.s   SKClamer_DrawContactChild
+                move.l  #SKClamer_WaitContactCooldown,(a0)
                 bsr.w   LaunchPlayerFromClamerContactTrigger
                 movea.w parent3(a0),a1
                 bset    #0,$38(a1)
 
-loc_890C4:
+SKClamer_DrawContactChild:
                 jmp     Child_DrawTouch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_890C8:
+SKClamer_WaitContactCooldown:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_890D0
+                bmi.s   SKClamer_RearmContact
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_890D0:
-                move.l  #loc_890AA,(a0)
+SKClamer_RearmContact:
+                move.l  #SKClamer_TryLaunchOnContact,(a0)
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -128,11 +130,11 @@ LaunchPlayerFromClamerContactTrigger:
                 move.w  #$800,d0
                 bclr    #Status_Facing,status(a1)
                 btst    #0,render_flags(a0)
-                beq.s   loc_890F2
+                beq.s   SKClamer_LaunchInFacingDirection
                 neg.w   d0
                 bset    #Status_Facing,status(a1)
 
-loc_890F2:
+SKClamer_LaunchInFacingDirection:
                 move.w  d0,x_vel(a1)
                 move.w  d0,ground_vel(a1)
                 move.w  #-$800,y_vel(a1)
@@ -154,22 +156,22 @@ ObjSlot_Clamer:
                 dc.l    Map_Clamer
                 dc.w    $280
                 dc.b    $14, $10,   0,  $A
-word_89136:
+SKClamer_ContactAttrs:
                 dc.w    $280
                 dc.b    8,   4,  $B, $D7
-ObjDat3_8913C:
+SKClamer_ProjectileAttrs:
                 dc.l    Map_Clamer
                 dc.w    make_art_tile(ArtTile_Clamer+$70,1,1)
                 dc.w    $200
                 dc.b    8,   8,   9, $98
-ChildObjDat_89148:
+SKClamer_ContactChildRecord:
                 dc.w    1-1
-                dc.l    loc_8908C
+                dc.l    SKClamer_InitContactChild
                 dc.b    0,  -8
-ChildObjDat_89150:
+SKClamer_ProjectileChildRecord:
                 dc.w    1-1
                 dc.l    SKCallbackShot_InitDeflectable
-                dc.l    ObjDat3_8913C
+                dc.l    SKClamer_ProjectileAttrs
                 dc.l    0
                 dc.l    MoveSprite2
                 dc.b    -$10,   2
@@ -177,15 +179,15 @@ ChildObjDat_89150:
 PLCPtr_Clamer:
                 dc.l    ArtUnc_Clamer
                 dc.l    DPLC_Clamer
-byte_89170:
+ClamerSK_Root_IdleFrameDelayPairs:
                 dc.b    1,   1
                 dc.b    0, $5F
                 dc.b    1,   1
                 dc.b    2,   1
                 dc.b    $FC
-byte_89179:
+SKClamer_ContactAnim:
                 dc.b    0,   0,   1,   2,   3,   4,   3,   2,   1,  $A,   0, $F4
-byte_89185:
+SKClamer_FiringAnim:
                 dc.b    0,   2
                 dc.b    5,   2
                 dc.b    6,   2

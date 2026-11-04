@@ -18,35 +18,35 @@ SpecialCNZBumpers_Init:
                 addq.b  #2,(CNZ_bumper_routine).w
                 lea     (SpecialCNZBumpers_Act1).l,a1
                 tst.b   (Current_act).w
-                beq.s   loc_F8E6
+                beq.s   S3CNZLegacyBump_InitCameraWindow
                 lea     (SpecialCNZBumpers_Act2).l,a1
 
-loc_F8E6:
+S3CNZLegacyBump_InitCameraWindow:
                 move.w  (Camera_X_pos).w,d4
                 subq.w  #8,d4
-                bhi.s   loc_F8F6
+                bhi.s   S3CNZLegacyBump_FindInitialStart
                 moveq   #1,d4
-                bra.s   loc_F8F6
+                bra.s   S3CNZLegacyBump_FindInitialStart
 ; ---------------------------------------------------------------------------
 
-loc_F8F2:
+S3CNZLegacyBump_AdvanceInitialStart:
                 lea     6(a1),a1
 
-loc_F8F6:
+S3CNZLegacyBump_FindInitialStart:
                 cmp.w   2(a1),d4
-                bhi.s   loc_F8F2
+                bhi.s   S3CNZLegacyBump_AdvanceInitialStart
                 move.l  a1,(CNZ_visible_bumpers_start).w
                 move.l  a1,(CNZ_Visible_bumpers_start_P2).w
                 addi.w  #$150,d4
-                bra.s   loc_F90E
+                bra.s   S3CNZLegacyBump_FindInitialEnd
 ; ---------------------------------------------------------------------------
 
-loc_F90A:
+S3CNZLegacyBump_AdvanceInitialEnd:
                 lea     6(a1),a1
 
-loc_F90E:
+S3CNZLegacyBump_FindInitialEnd:
                 cmp.w   2(a1),d4
-                bhi.s   loc_F90A
+                bhi.s   S3CNZLegacyBump_AdvanceInitialEnd
                 move.l  a1,(CNZ_Visible_bumpers_end).w
                 move.l  a1,(CNZ_Visible_bumpers_end_P2).w
                 move.b  #1,(CNZ_bumper_unk).w
@@ -57,100 +57,100 @@ SpecialCNZBumpers_Main:
                 movea.l (CNZ_visible_bumpers_start).w,a1
                 move.w  (Camera_X_pos).w,d4
                 subq.w  #8,d4
-                bhi.s   loc_F938
+                bhi.s   S3CNZLegacyBump_FindP1Start
                 moveq   #1,d4
-                bra.s   loc_F938
+                bra.s   S3CNZLegacyBump_FindP1Start
 ; ---------------------------------------------------------------------------
 
-loc_F934:
+S3CNZLegacyBump_AdvanceP1Start:
                 lea     6(a1),a1
 
-loc_F938:
+S3CNZLegacyBump_FindP1Start:
                 cmp.w   2(a1),d4
-                bhi.s   loc_F934
-                bra.s   loc_F942
+                bhi.s   S3CNZLegacyBump_AdvanceP1Start
+                bra.s   S3CNZLegacyBump_StoreP1Start
 ; ---------------------------------------------------------------------------
 
-loc_F940:
+S3CNZLegacyBump_RewindP1Start:
                 subq.w  #6,a1
 
-loc_F942:
+S3CNZLegacyBump_StoreP1Start:
                 cmp.w   -4(a1),d4
-                bls.s   loc_F940
+                bls.s   S3CNZLegacyBump_RewindP1Start
                 move.l  a1,(CNZ_visible_bumpers_start).w
                 movea.l (CNZ_Visible_bumpers_end).w,a2
                 addi.w  #$150,d4
-                bra.s   loc_F95A
+                bra.s   S3CNZLegacyBump_FindP1End
 ; ---------------------------------------------------------------------------
 
-loc_F956:
+S3CNZLegacyBump_AdvanceP1End:
                 lea     6(a2),a2
 
-loc_F95A:
+S3CNZLegacyBump_FindP1End:
                 cmp.w   2(a2),d4
-                bhi.s   loc_F956
-                bra.s   loc_F964
+                bhi.s   S3CNZLegacyBump_AdvanceP1End
+                bra.s   S3CNZLegacyBump_StoreP1EndAndCheckMode
 ; ---------------------------------------------------------------------------
 
-loc_F962:
+S3CNZLegacyBump_RewindP1End:
                 subq.w  #6,a2
 
-loc_F964:
+S3CNZLegacyBump_StoreP1EndAndCheckMode:
                 cmp.w   -4(a2),d4
-                bls.s   loc_F962
+                bls.s   S3CNZLegacyBump_RewindP1End
                 move.l  a2,(CNZ_Visible_bumpers_end).w
                 tst.w   (Competition_mode).w
-                bne.s   loc_F97E
+                bne.s   S3CNZLegacyBump_UpdateCompetitionP2
                 move.l  a1,(CNZ_Visible_bumpers_start_P2).w
                 move.l  a2,(CNZ_Visible_bumpers_end_P2).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_F97E:
+S3CNZLegacyBump_UpdateCompetitionP2:
                 movea.l (CNZ_Visible_bumpers_start_P2).w,a1
                 move.w  (Camera_X_pos_P2).w,d4
                 subq.w  #8,d4
-                bhi.s   loc_F992
+                bhi.s   S3CNZLegacyBump_FindP2Start
                 moveq   #1,d4
-                bra.s   loc_F992
+                bra.s   S3CNZLegacyBump_FindP2Start
 ; ---------------------------------------------------------------------------
 
-loc_F98E:
+S3CNZLegacyBump_AdvanceP2Start:
                 lea     6(a1),a1
 
-loc_F992:
+S3CNZLegacyBump_FindP2Start:
                 cmp.w   2(a1),d4
-                bhi.s   loc_F98E
-                bra.s   loc_F99C
+                bhi.s   S3CNZLegacyBump_AdvanceP2Start
+                bra.s   S3CNZLegacyBump_StoreP2Start
 ; ---------------------------------------------------------------------------
 
-loc_F99A:
+S3CNZLegacyBump_RewindP2Start:
                 subq.w  #6,a1
 
-loc_F99C:
+S3CNZLegacyBump_StoreP2Start:
                 cmp.w   -4(a1),d4
-                bls.s   loc_F99A
+                bls.s   S3CNZLegacyBump_RewindP2Start
                 move.l  a1,(CNZ_Visible_bumpers_start_P2).w
                 movea.l (CNZ_Visible_bumpers_end_P2).w,a2
                 addi.w  #$150,d4
-                bra.s   loc_F9B4
+                bra.s   S3CNZLegacyBump_FindP2End
 ; ---------------------------------------------------------------------------
 
-loc_F9B0:
+S3CNZLegacyBump_AdvanceP2End:
                 lea     6(a2),a2
 
-loc_F9B4:
+S3CNZLegacyBump_FindP2End:
                 cmp.w   2(a2),d4
-                bhi.s   loc_F9B0
-                bra.s   loc_F9BE
+                bhi.s   S3CNZLegacyBump_AdvanceP2End
+                bra.s   S3CNZLegacyBump_StoreP2End
 ; ---------------------------------------------------------------------------
 
-loc_F9BC:
+S3CNZLegacyBump_RewindP2End:
                 subq.w  #6,a2
 
-loc_F9BE:
+S3CNZLegacyBump_StoreP2End:
                 cmp.w   -4(a2),d4
-                bls.s   loc_F9BC
+                bls.s   S3CNZLegacyBump_RewindP2End
                 move.l  a2,(CNZ_Visible_bumpers_end_P2).w
                 rts
 
@@ -160,13 +160,13 @@ Check_CNZ_Bumpers:
                 movea.l (CNZ_visible_bumpers_start).w,a1
                 movea.l (CNZ_Visible_bumpers_end).w,a2
                 cmpa.w  #Player_1,a0
-                beq.s   loc_F9E0
+                beq.s   S3CNZLegacyBump_TryBuildPlayerBox
                 movea.l (CNZ_Visible_bumpers_start_P2).w,a1
                 movea.l (CNZ_Visible_bumpers_end_P2).w,a2
 
-loc_F9E0:
+S3CNZLegacyBump_TryBuildPlayerBox:
                 cmpa.l  a1,a2
-                beq.w   locret_FA7A
+                beq.w   S3CNZLegacyBump_ScanReturn
                 move.w  x_pos(a0),d2
                 move.w  y_pos(a0),d3
                 subi.w  #9,d2
@@ -175,53 +175,53 @@ loc_F9E0:
                 subq.b  #3,d5
                 sub.w   d5,d3
                 cmpi.b  #$4D,mapping_frame(a0)
-                bne.s   loc_FA0A
+                bne.s   S3CNZLegacyBump_SetBoxSizeAndScan
                 addi.w  #$C,d3
                 moveq   #$A,d5
 
-loc_FA0A:
+S3CNZLegacyBump_SetBoxSizeAndScan:
                 move.w  #$12,d4
                 add.w   d5,d5
 
 CNZ_Bumper_Loop:
                 move.w  (a1),d0
                 andi.w  #$E,d0
-                lea     byte_FA5A(pc,d0.w),a3
+                lea     S3CNZLegacyBump_HalfExtents(pc,d0.w),a3
                 moveq   #0,d1
                 move.b  (a3)+,d1
                 move.w  2(a1),d0
                 sub.w   d1,d0
                 sub.w   d2,d0
-                bcc.s   loc_FA32
+                bcc.s   S3CNZLegacyBump_CheckRightSeparation
                 add.w   d1,d1
                 add.w   d1,d0
-                bcs.s   loc_FA38
+                bcs.s   S3CNZLegacyBump_CheckVerticalOverlap
                 bra.w   CNZ_Bumper_Next
 ; ---------------------------------------------------------------------------
 
-loc_FA32:
+S3CNZLegacyBump_CheckRightSeparation:
                 cmp.w   d4,d0
                 bhi.w   CNZ_Bumper_Next
 
-loc_FA38:
+S3CNZLegacyBump_CheckVerticalOverlap:
                 moveq   #0,d1
                 move.b  (a3)+,d1
                 move.w  4(a1),d0
                 sub.w   d1,d0
                 sub.w   d3,d0
-                bcc.s   loc_FA52
+                bcc.s   S3CNZLegacyBump_CheckBottomSeparation
                 add.w   d1,d1
                 add.w   d1,d0
-                bcs.w   loc_FA66
+                bcs.w   S3CNZLegacyBump_DispatchContact
                 bra.w   CNZ_Bumper_Next
 ; ---------------------------------------------------------------------------
 
-loc_FA52:
+S3CNZLegacyBump_CheckBottomSeparation:
                 cmp.w   d5,d0
                 bhi.w   CNZ_Bumper_Next
-                bra.s   loc_FA66
+                bra.s   S3CNZLegacyBump_DispatchContact
 ; ---------------------------------------------------------------------------
-byte_FA5A:
+S3CNZLegacyBump_HalfExtents:
                 dc.b    $20
                 dc.b    $20
                 dc.b    $20
@@ -236,10 +236,10 @@ byte_FA5A:
                 dc.b    $40
 ; ---------------------------------------------------------------------------
 
-loc_FA66:
+S3CNZLegacyBump_DispatchContact:
                 move.w  (a1),d0
-                move.w  off_FA7C(pc,d0.w),d0
-                jmp     off_FA7C(pc,d0.w)
+                move.w  S3CNZLegacyBump_BounceTable(pc,d0.w),d0
+                jmp     S3CNZLegacyBump_BounceTable(pc,d0.w)
 ; ---------------------------------------------------------------------------
 
 CNZ_Bumper_Next:
@@ -247,81 +247,81 @@ CNZ_Bumper_Next:
                 cmpa.l  a1,a2
                 bne.w   CNZ_Bumper_Loop
 
-locret_FA7A:
+S3CNZLegacyBump_ScanReturn:
                 rts
 ; ---------------------------------------------------------------------------
-off_FA7C:
-                dc.w    loc_FA88-off_FA7C
-                dc.w    loc_FB3A-off_FA7C
-                dc.w    loc_FBA0-off_FA7C
-                dc.w    loc_FBF8-off_FA7C
-                dc.w    loc_FC4E-off_FA7C
-                dc.w    loc_FCA6-off_FA7C
+S3CNZLegacyBump_BounceTable:
+                dc.w    S3CNZLegacyBump_Type0_CheckBottom-S3CNZLegacyBump_BounceTable
+                dc.w    S3CNZLegacyBump_Type2_CheckBottom-S3CNZLegacyBump_BounceTable
+                dc.w    S3CNZLegacyBump_Type4_CheckBottom-S3CNZLegacyBump_BounceTable
+                dc.w    CNZLegacyBumpersS3_CheckTypeSixUpperFace-S3CNZLegacyBump_BounceTable
+                dc.w    S3CNZLegacyBump_Type8_CheckRight-S3CNZLegacyBump_BounceTable
+                dc.w    S3CNZLegacyBump_Type10_CheckLeft-S3CNZLegacyBump_BounceTable
 ; ---------------------------------------------------------------------------
 
-loc_FA88:
+S3CNZLegacyBump_Type0_CheckBottom:
                 move.w  4(a1),d0
                 sub.w   y_pos(a0),d0
                 neg.w   d0
                 cmpi.w  #$20,d0
-                blt.s   loc_FAA2
+                blt.s   S3CNZLegacyBump_Type0_CheckRight
                 move.w  #$A00,y_vel(a0)
-                bra.w   loc_FCFC
+                bra.w   S3CNZLegacyBump_FinishBounce
 ; ---------------------------------------------------------------------------
 
-loc_FAA2:
+S3CNZLegacyBump_Type0_CheckRight:
                 move.w  2(a1),d0
                 sub.w   x_pos(a0),d0
                 neg.w   d0
                 cmpi.w  #$20,d0
-                blt.s   loc_FABC
+                blt.s   S3CNZLegacyBump_Type0_ClampSlopeX
                 move.w  #$A00,x_vel(a0)
-                bra.w   loc_FCFC
+                bra.w   S3CNZLegacyBump_FinishBounce
 ; ---------------------------------------------------------------------------
 
-loc_FABC:
+S3CNZLegacyBump_Type0_ClampSlopeX:
                 move.w  2(a1),d0
                 sub.w   x_pos(a0),d0
                 cmpi.w  #$20,d0
-                blt.s   loc_FACE
+                blt.s   S3CNZLegacyBump_Type0_TrySlopeBounce
                 move.w  #$20,d0
 
-loc_FACE:
+S3CNZLegacyBump_Type0_TrySlopeBounce:
                 add.w   4(a1),d0
                 subq.w  #8,d0
                 move.w  y_pos(a0),d1
                 addi.w  #$E,d1
                 sub.w   d1,d0
-                bcc.s   locret_FAEA
+                bcc.s   S3CNZLegacyBump_Type0_SlopeReturn
                 move.w  #$20,d3
-                bsr.s   loc_FAEC
-                bra.w   loc_FCFC
+                bsr.s   S3CNZLegacyBump_ReflectVelocity
+                bra.w   S3CNZLegacyBump_FinishBounce
 ; ---------------------------------------------------------------------------
 
-locret_FAEA:
+S3CNZLegacyBump_Type0_SlopeReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_FAEC:
+S3CNZLegacyBump_ReflectVelocity:
                 move.w  x_vel(a0),d1
                 move.w  y_vel(a0),d2
                 jsr     (GetArcTan).l
                 move.b  d0,(_dbgFFDC).w
                 sub.w   d3,d0
                 move.w  d0,d1
-                bpl.s   loc_FB06
+                bpl.s   S3CNZLegacyBump_SelectBounceAngle
                 neg.w   d1
 
-loc_FB06:
+S3CNZLegacyBump_SelectBounceAngle:
                 neg.w   d0
                 add.w   d3,d0
                 move.b  d0,(_dbgFFDD).w
                 move.b  d1,(_dbgFFDF).w
                 cmpi.b  #$38,d1
-                bcs.s   loc_FB1A
+                bcs.s   S3CNZLegacyBump_SetBounceVelocity
                 move.w  d3,d0
 
-loc_FB1A:
+S3CNZLegacyBump_SetBounceVelocity:
                 move.b  d0,(_dbgFFDE).w
                 jsr     (GetSineCosine).l
                 muls.w  #-$A00,d1
@@ -333,200 +333,203 @@ loc_FB1A:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_FB3A:
+S3CNZLegacyBump_Type2_CheckBottom:
                 move.w  4(a1),d0
                 sub.w   y_pos(a0),d0
                 neg.w   d0
                 cmpi.w  #$20,d0
-                blt.s   loc_FB54
+                blt.s   S3CNZLegacyBump_Type2_CheckLeft
                 move.w  #$A00,y_vel(a0)
-                bra.w   loc_FCFC
+                bra.w   S3CNZLegacyBump_FinishBounce
 ; ---------------------------------------------------------------------------
 
-loc_FB54:
+S3CNZLegacyBump_Type2_CheckLeft:
                 move.w  2(a1),d0
                 sub.w   x_pos(a0),d0
                 cmpi.w  #$20,d0
-                blt.s   loc_FB6C
+                blt.s   S3CNZLegacyBump_Type2_ClampSlopeX
                 move.w  #-$A00,x_vel(a0)
-                bra.w   loc_FCFC
+                bra.w   S3CNZLegacyBump_FinishBounce
 ; ---------------------------------------------------------------------------
 
-loc_FB6C:
+S3CNZLegacyBump_Type2_ClampSlopeX:
                 move.w  2(a1),d0
                 sub.w   x_pos(a0),d0
                 neg.w   d0
                 cmpi.w  #$20,d0
-                blt.s   loc_FB80
+                blt.s   S3CNZLegacyBump_Type2_TrySlopeBounce
                 move.w  #$20,d0
 
-loc_FB80:
+S3CNZLegacyBump_Type2_TrySlopeBounce:
                 add.w   4(a1),d0
                 subq.w  #8,d0
                 move.w  y_pos(a0),d1
                 addi.w  #$E,d1
                 sub.w   d1,d0
-                bcc.s   locret_FB9E
+                bcc.s   S3CNZLegacyBump_Type2_SlopeReturn
                 move.w  #$60,d3
-                bsr.w   loc_FAEC
-                bra.w   loc_FCFC
+                bsr.w   S3CNZLegacyBump_ReflectVelocity
+                bra.w   S3CNZLegacyBump_FinishBounce
 ; ---------------------------------------------------------------------------
 
-locret_FB9E:
+S3CNZLegacyBump_Type2_SlopeReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_FBA0:
+S3CNZLegacyBump_Type4_CheckBottom:
                 move.w  4(a1),d0
                 sub.w   y_pos(a0),d0
                 neg.w   d0
                 cmpi.w  #8,d0
-                blt.s   loc_FBBA
+                blt.s   CNZLegacyBumpersS3_CheckTypeFourLeftEnd
                 move.w  #$A00,y_vel(a0)
-                bra.w   loc_FCFC
+                bra.w   S3CNZLegacyBump_FinishBounce
 ; ---------------------------------------------------------------------------
 
-loc_FBBA:
+CNZLegacyBumpersS3_CheckTypeFourLeftEnd:
                 move.w  2(a1),d0
                 sub.w   x_pos(a0),d0
                 cmpi.w  #$40,d0
-                blt.s   loc_FBD2
+                blt.s   CNZLegacyBumpersS3_CheckTypeFourRightEnd
                 move.w  #-$A00,x_vel(a0)
-                bra.w   loc_FCFC
+                bra.w   S3CNZLegacyBump_FinishBounce
 ; ---------------------------------------------------------------------------
 
-loc_FBD2:
+CNZLegacyBumpersS3_CheckTypeFourRightEnd:
                 neg.w   d0
                 cmpi.w  #$40,d0
-                blt.s   loc_FBE4
+                blt.s   S3CNZLegacyBump_Type4_SelectAngle
                 move.w  #$A00,x_vel(a0)
-                bra.w   loc_FCFC
+                bra.w   S3CNZLegacyBump_FinishBounce
 ; ---------------------------------------------------------------------------
 
-loc_FBE4:
+S3CNZLegacyBump_Type4_SelectAngle:
                 move.w  #$38,d3
                 tst.w   d0
-                bmi.s   loc_FBF0
+                bmi.s   S3CNZLegacyBump_Type4_BounceInside
                 move.w  #$48,d3
 
-loc_FBF0:
-                bsr.w   loc_FAEC
-                bra.w   loc_FCFC
+S3CNZLegacyBump_Type4_BounceInside:
+                bsr.w   S3CNZLegacyBump_ReflectVelocity
+                bra.w   S3CNZLegacyBump_FinishBounce
 ; ---------------------------------------------------------------------------
 
-loc_FBF8:
+CNZLegacyBumpersS3_CheckTypeSixUpperFace:
                 move.w  4(a1),d0
                 sub.w   y_pos(a0),d0
                 cmpi.w  #8,d0
-                blt.s   loc_FC10
+                blt.s   CNZLegacyBumpersS3_CheckTypeSixLeftEnd
                 move.w  #-$A00,y_vel(a0)
-                bra.w   loc_FCFC
+                bra.w   S3CNZLegacyBump_FinishBounce
 ; ---------------------------------------------------------------------------
 
-loc_FC10:
+CNZLegacyBumpersS3_CheckTypeSixLeftEnd:
                 move.w  2(a1),d0
                 sub.w   x_pos(a0),d0
                 cmpi.w  #$40,d0
-                blt.s   loc_FC28
+                blt.s   CNZLegacyBumpersS3_CheckTypeSixRightEnd
                 move.w  #-$A00,x_vel(a0)
-                bra.w   loc_FCFC
+                bra.w   S3CNZLegacyBump_FinishBounce
 ; ---------------------------------------------------------------------------
 
-loc_FC28:
+CNZLegacyBumpersS3_CheckTypeSixRightEnd:
                 neg.w   d0
                 cmpi.w  #$40,d0
-                blt.s   loc_FC3A
+                blt.s   S3CNZLegacyBump_Type6_SelectAngle
                 move.w  #$A00,x_vel(a0)
-                bra.w   loc_FCFC
+                bra.w   S3CNZLegacyBump_FinishBounce
 ; ---------------------------------------------------------------------------
 
-loc_FC3A:
+S3CNZLegacyBump_Type6_SelectAngle:
                 move.w  #$C8,d3
                 tst.w   d0
-                bmi.s   loc_FC46
+                bmi.s   S3CNZLegacyBump_Type6_BounceInside
                 move.w  #$B8,d3
 
-loc_FC46:
-                bsr.w   loc_FAEC
-                bra.w   loc_FCFC
+S3CNZLegacyBump_Type6_BounceInside:
+                bsr.w   S3CNZLegacyBump_ReflectVelocity
+                bra.w   S3CNZLegacyBump_FinishBounce
 ; ---------------------------------------------------------------------------
 
-loc_FC4E:
+S3CNZLegacyBump_Type8_CheckRight:
                 move.w  2(a1),d0
                 sub.w   x_pos(a0),d0
                 neg.w   d0
                 cmpi.w  #8,d0
-                blt.s   loc_FC68
+                blt.s   S3CNZLegacyBump_Type8_CheckTop
                 move.w  #$A00,x_vel(a0)
-                bra.w   loc_FCFC
+                bra.w   S3CNZLegacyBump_FinishBounce
 ; ---------------------------------------------------------------------------
 
-loc_FC68:
+S3CNZLegacyBump_Type8_CheckTop:
                 move.w  4(a1),d0
                 sub.w   y_pos(a0),d0
                 cmpi.w  #$40,d0
-                blt.s   loc_FC80
+                blt.s   S3CNZLegacyBump_Type8_CheckBottom
                 move.w  #-$A00,y_vel(a0)
-                bra.w   loc_FCFC
+                bra.w   S3CNZLegacyBump_FinishBounce
 ; ---------------------------------------------------------------------------
 
-loc_FC80:
+; A hit on the lower end sets X velocity to +$A00
+S3CNZLegacyBump_Type8_CheckBottom:
                 neg.w   d0
                 cmpi.w  #$40,d0
-                blt.s   loc_FC92
+                blt.s   S3CNZLegacyBump_Type8_SelectAngle
                 move.w  #$A00,x_vel(a0)
-                bra.w   loc_FCFC
+                bra.w   S3CNZLegacyBump_FinishBounce
 ; ---------------------------------------------------------------------------
 
-loc_FC92:
+S3CNZLegacyBump_Type8_SelectAngle:
                 move.w  #8,d3
                 tst.w   d0
-                bmi.s   loc_FC9E
+                bmi.s   S3CNZLegacyBump_Type8_BounceInside
                 move.w  #$F8,d3
 
-loc_FC9E:
-                bsr.w   loc_FAEC
-                bra.w   loc_FCFC
+S3CNZLegacyBump_Type8_BounceInside:
+                bsr.w   S3CNZLegacyBump_ReflectVelocity
+                bra.w   S3CNZLegacyBump_FinishBounce
 ; ---------------------------------------------------------------------------
 
-loc_FCA6:
+; A hit on the left face sets X velocity to +$A00
+S3CNZLegacyBump_Type10_CheckLeft:
                 move.w  2(a1),d0
                 sub.w   x_pos(a0),d0
                 cmpi.w  #8,d0
-                blt.s   loc_FCBE
+                blt.s   CNZLegacyBumpersS3_CheckTypeTenUpperEnd
                 move.w  #$A00,x_vel(a0)
-                bra.w   loc_FCFC
+                bra.w   S3CNZLegacyBump_FinishBounce
 ; ---------------------------------------------------------------------------
 
-loc_FCBE:
+CNZLegacyBumpersS3_CheckTypeTenUpperEnd:
                 move.w  4(a1),d0
                 sub.w   y_pos(a0),d0
                 cmpi.w  #$40,d0
-                blt.s   loc_FCD6
+                blt.s   S3CNZLegacyBump_Type10_CheckBottom
                 move.w  #-$A00,y_vel(a0)
-                bra.w   loc_FCFC
+                bra.w   S3CNZLegacyBump_FinishBounce
 ; ---------------------------------------------------------------------------
 
-loc_FCD6:
+; A hit on the lower end sets X velocity to +$A00
+S3CNZLegacyBump_Type10_CheckBottom:
                 neg.w   d0
                 cmpi.w  #$40,d0
-                blt.s   loc_FCE8
+                blt.s   S3CNZLegacyBump_Type10_SelectAngle
                 move.w  #$A00,x_vel(a0)
-                bra.w   loc_FCFC
+                bra.w   S3CNZLegacyBump_FinishBounce
 ; ---------------------------------------------------------------------------
 
-loc_FCE8:
+S3CNZLegacyBump_Type10_SelectAngle:
                 move.w  #$78,d3
                 tst.w   d0
-                bmi.s   loc_FCF4
+                bmi.s   S3CNZLegacyBump_Type10_BounceInside
                 move.w  #$88,d3
 
-loc_FCF4:
-                bsr.w   loc_FAEC
-                bra.w   loc_FCFC
+S3CNZLegacyBump_Type10_BounceInside:
+                bsr.w   S3CNZLegacyBump_ReflectVelocity
+                bra.w   S3CNZLegacyBump_FinishBounce
 ; ---------------------------------------------------------------------------
 
-loc_FCFC:
+S3CNZLegacyBump_FinishBounce:
                 bset    #Status_InAir,status(a0)
                 bclr    #Status_RollJump,status(a0)
                 bclr    #Status_Push,status(a0)

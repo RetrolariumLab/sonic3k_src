@@ -11,22 +11,22 @@ Obj_CNZLightBulb:
                 move.b  #$10,width_pixels(a0)
                 move.b  #$10,height_pixels(a0)
                 tst.b   (Water_flag).w
-                bne.s   loc_30E30
-                move.l  #loc_30E4C,(a0)
-                bra.s   loc_30E4C
+                bne.s   S3CNZLightBulb_StartWaterPoll
+                move.l  #S3CNZLightBulb_DrawAndCull,(a0)
+                bra.s   S3CNZLightBulb_DrawAndCull
 ; ---------------------------------------------------------------------------
 
-loc_30E30:
-                move.l  #loc_30E36,(a0)
+S3CNZLightBulb_StartWaterPoll:
+                move.l  #S3CNZLightBulb_LatchFloodedFrame,(a0)
 
-loc_30E36:
+S3CNZLightBulb_LatchFloodedFrame:
                 move.w  (Water_level).w,d0
                 cmp.w   y_pos(a0),d0
-                bhs.s   loc_30E4C
+                bhs.s   S3CNZLightBulb_DrawAndCull
                 move.b  #1,mapping_frame(a0)
-                move.l  #loc_30E4C,(a0)
+                move.l  #S3CNZLightBulb_DrawAndCull,(a0)
 
-loc_30E4C:
+S3CNZLightBulb_DrawAndCull:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_CNZLightBulb:

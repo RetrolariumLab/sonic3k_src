@@ -5,15 +5,15 @@
 
 Obj_CNZBarberPoleSprite:
                 tst.b   subtype(a0)
-                beq.s   loc_33370
-                move.l  #loc_335A8,(a0)
-                bra.w   loc_335A8
+                beq.s   SKCNZPole_StartDownSlope
+                move.l  #SKCNZPole_UpdateUpSlopeRiders,(a0)
+                bra.w   SKCNZPole_UpdateUpSlopeRiders
 ; ---------------------------------------------------------------------------
 
-loc_33370:
-                move.l  #loc_33376,(a0)
+SKCNZPole_StartDownSlope:
+                move.l  #SKCNZPole_UpdateDownSlopeRiders,(a0)
 
-loc_33376:
+SKCNZPole_UpdateDownSlopeRiders:
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
@@ -28,9 +28,9 @@ loc_33376:
 
 UpdatePlayerOnCnzFallingBarberPole:
                 btst    d6,status(a0)
-                bne.w   loc_334B6
+                bne.w   SKCNZPole_CheckDownSlopeSupport
                 btst    #Status_OnObj,status(a1)
-                bne.w   loc_3342A
+                bne.w   SKCNZPole_CheckDownSlopeTransfer
                 moveq   #0,d0
                 move.b  x_radius(a1),d0
                 neg.w   d0
@@ -38,7 +38,7 @@ UpdatePlayerOnCnzFallingBarberPole:
                 sub.w   x_pos(a0),d0
                 addi.w  #$40,d0
                 cmpi.w  #$A0,d0
-                bhs.s   locret_33428
+                bhs.s   SKCNZPole_DownEntryReturn
                 subi.w  #$61,d0
                 moveq   #0,d1
                 move.b  y_radius(a1),d1
@@ -46,17 +46,17 @@ UpdatePlayerOnCnzFallingBarberPole:
                 sub.w   y_pos(a0),d1
                 sub.w   d0,d1
                 cmpi.w  #$10,d1
-                bhs.s   locret_33428
+                bhs.s   SKCNZPole_DownEntryReturn
                 tst.b   object_control(a1)
-                bne.s   locret_33428
+                bne.s   SKCNZPole_DownEntryReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_33428
+                bne.s   SKCNZPole_DownEntryReturn
                 btst    #Status_InAir,status(a1)
-                beq.s   loc_333F2
+                beq.s   SKCNZPole_CaptureOnDownSlope
                 tst.w   y_vel(a1)
-                bmi.s   locret_33428
+                bmi.s   SKCNZPole_DownEntryReturn
 
-loc_333F2:
+SKCNZPole_CaptureOnDownSlope:
                 move.l  x_pos(a1),(a2)
                 move.w  (a2),d0
                 sub.w   x_pos(a0),d0
@@ -65,19 +65,19 @@ loc_333F2:
                 move.w  #0,4(a2)
                 subi.w  #$18,d0
                 cmpi.w  #$70,d0
-                bhs.s   loc_33418
+                bhs.s   SKCNZPole_AttachDownSlopeEntrant
                 move.w  #1,4(a2)
 
-loc_33418:
+SKCNZPole_AttachDownSlopeEntrant:
                 bsr.w   AttachPlayerToCnzBarberPole
                 move.b  #$20,angle(a1)
                 move.b  #2,flip_type(a1)
 
-locret_33428:
+SKCNZPole_DownEntryReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3342A:
+SKCNZPole_CheckDownSlopeTransfer:
                 moveq   #0,d0
                 move.b  x_radius(a1),d0
                 neg.w   d0
@@ -85,7 +85,7 @@ loc_3342A:
                 sub.w   x_pos(a0),d0
                 addi.w  #$30,d0
                 cmpi.w  #$80,d0
-                bhs.s   locret_334B4
+                bhs.s   SKCNZPole_DownTransferReturn
                 subi.w  #$51,d0
                 moveq   #0,d1
                 move.b  y_radius(a1),d1
@@ -93,18 +93,18 @@ loc_3342A:
                 sub.w   y_pos(a0),d1
                 sub.w   d0,d1
                 cmpi.w  #$10,d1
-                bhs.s   locret_334B4
+                bhs.s   SKCNZPole_DownTransferReturn
                 tst.b   object_control(a1)
-                bne.s   locret_334B4
+                bne.s   SKCNZPole_DownTransferReturn
                 btst    #Status_InAir,status(a1)
-                beq.s   loc_33472
+                beq.s   SKCNZPole_TryRecaptureDownSlope
                 tst.w   y_vel(a1)
-                bmi.s   locret_334B4
+                bmi.s   SKCNZPole_DownTransferReturn
 
-loc_33472:
+SKCNZPole_TryRecaptureDownSlope:
                 movea.w interact(a1),a3
-                cmpi.l  #loc_33376,(a3)
-                bne.s   locret_334B4
+                cmpi.l  #SKCNZPole_UpdateDownSlopeRiders,(a3)
+                bne.s   SKCNZPole_DownTransferReturn
                 move.l  x_pos(a1),(a2)
                 move.w  (a2),d0
                 sub.w   x_pos(a0),d0
@@ -113,35 +113,35 @@ loc_33472:
                 move.w  #0,4(a2)
                 subi.w  #$20,d0
                 cmpi.w  #$60,d0
-                bhs.s   loc_334A4
+                bhs.s   SKCNZPole_AttachDownSlopeTransfer
                 move.w  #1,4(a2)
 
-loc_334A4:
+SKCNZPole_AttachDownSlopeTransfer:
                 bsr.w   AttachPlayerToCnzBarberPole
                 move.b  #$20,angle(a1)
                 move.b  #2,flip_type(a1)
 
-locret_334B4:
+SKCNZPole_DownTransferReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_334B6:
+SKCNZPole_CheckDownSlopeSupport:
                 tst.w   4(a2)
-                bne.s   loc_334D2
+                bne.s   SKCNZPole_AdvanceDownSlopeRider
                 move.w  ground_vel(a1),d0
-                bpl.s   loc_334C4
+                bpl.s   SKCNZPole_CheckDownEdgeSpeed
                 neg.w   d0
 
-loc_334C4:
+SKCNZPole_CheckDownEdgeSpeed:
                 cmpi.w  #$118,d0
-                bhs.s   loc_334D2
+                bhs.s   SKCNZPole_AdvanceDownSlopeRider
                 bset    #Status_InAir,status(a1)
-                bra.s   loc_334FA
+                bra.s   SKCNZPole_ReleaseDownSlopeRider
 ; ---------------------------------------------------------------------------
 
-loc_334D2:
+SKCNZPole_AdvanceDownSlopeRider:
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_334FA
+                bne.s   SKCNZPole_ReleaseDownSlopeRider
                 move.w  x_vel(a1),d0
                 ext.l   d0
                 lsl.l   #6,d0
@@ -154,9 +154,9 @@ loc_334D2:
                 neg.w   d0
                 add.w   (a2),d0
                 cmpi.w  #$A0,d0
-                blo.s   loc_33518
+                blo.s   SKCNZPole_BeginDownProjection
 
-loc_334FA:
+SKCNZPole_ReleaseDownSlopeRider:
                 bclr    #Status_OnObj,status(a1)
                 bclr    d6,status(a0)
                 move.b  #0,flips_remaining(a1)
@@ -165,33 +165,33 @@ loc_334FA:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_33518:
+SKCNZPole_BeginDownProjection:
                 btst    #Status_OnObj,status(a1)
-                beq.w   locret_335A6
+                beq.w   SKCNZPole_DownProjectionReturn
                 move.w  d0,d2
                 subi.b  #$10,d0
-                bcc.s   loc_33532
+                bcc.s   SKCNZPole_ClampDownRotation
                 move.w  #0,4(a2)
                 moveq   #0,d0
 
-loc_33532:
+SKCNZPole_ClampDownRotation:
                 cmpi.b  #$80,d0
-                blo.s   loc_33542
+                blo.s   SKCNZPole_SetDownSlopePriority
                 move.w  #0,4(a2)
                 move.w  #$80,d0
 
-loc_33542:
+SKCNZPole_SetDownSlopePriority:
                 andi.w  #drawing_mask,art_tile(a1)
                 cmpi.b  #$34,d0
-                bhs.s   loc_33554
+                bhs.s   SKCNZPole_ZeroDownInteriorRotation
                 ori.w   #high_priority,art_tile(a1)
 
-loc_33554:
+SKCNZPole_ZeroDownInteriorRotation:
                 tst.w   4(a2)
-                beq.s   loc_3355C
+                beq.s   SKCNZPole_ProjectDownSlopeRider
                 moveq   #0,d0
 
-loc_3355C:
+SKCNZPole_ProjectDownSlopeRider:
                 add.w   d0,d0
                 move.b  d0,flip_angle(a1)
                 jsr     (GetSineCosine).l
@@ -219,13 +219,13 @@ loc_3355C:
                 sub.w   d1,d2
                 move.w  d2,y_pos(a1)
 
-locret_335A6:
+SKCNZPole_DownProjectionReturn:
                 rts
 ; End of function UpdatePlayerOnCnzFallingBarberPole
 
 ; ---------------------------------------------------------------------------
 
-loc_335A8:
+SKCNZPole_UpdateUpSlopeRiders:
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
@@ -240,16 +240,16 @@ loc_335A8:
 
 UpdatePlayerOnCnzRisingBarberPole:
                 btst    d6,status(a0)
-                bne.w   loc_336E4
+                bne.w   SKCNZPole_CheckUpSlopeSupport
                 btst    #Status_OnObj,status(a1)
-                bne.w   loc_3365A
+                bne.w   SKCNZPole_CheckUpSlopeTransfer
                 moveq   #0,d0
                 move.b  x_radius(a1),d0
                 add.w   x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$60,d0
                 cmpi.w  #$A0,d0
-                bhs.s   locret_33658
+                bhs.s   SKCNZPole_UpEntryReturn
                 subi.w  #$3E,d0
                 moveq   #0,d1
                 move.b  y_radius(a1),d1
@@ -257,17 +257,17 @@ UpdatePlayerOnCnzRisingBarberPole:
                 sub.w   y_pos(a0),d1
                 add.w   d0,d1
                 cmpi.w  #$10,d1
-                bhs.s   locret_33658
+                bhs.s   SKCNZPole_UpEntryReturn
                 tst.b   object_control(a1)
-                bne.s   locret_33658
+                bne.s   SKCNZPole_UpEntryReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_33658
+                bne.s   SKCNZPole_UpEntryReturn
                 btst    #Status_InAir,status(a1)
-                beq.s   loc_33622
+                beq.s   SKCNZPole_CaptureOnUpSlope
                 tst.w   y_vel(a1)
-                bmi.s   locret_33658
+                bmi.s   SKCNZPole_UpEntryReturn
 
-loc_33622:
+SKCNZPole_CaptureOnUpSlope:
                 move.l  x_pos(a1),(a2)
                 move.w  (a2),d0
                 sub.w   x_pos(a0),d0
@@ -276,26 +276,26 @@ loc_33622:
                 move.w  #0,4(a2)
                 subi.w  #$18,d0
                 cmpi.w  #$70,d0
-                bhs.s   loc_33648
+                bhs.s   SKCNZPole_AttachUpSlopeEntrant
                 move.w  #1,4(a2)
 
-loc_33648:
+SKCNZPole_AttachUpSlopeEntrant:
                 bsr.w   AttachPlayerToCnzBarberPole
                 move.b  #$E0,angle(a1)
                 move.b  #3,flip_type(a1)
 
-locret_33658:
+SKCNZPole_UpEntryReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3365A:
+SKCNZPole_CheckUpSlopeTransfer:
                 moveq   #0,d0
                 move.b  x_radius(a1),d0
                 add.w   x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$50,d0
                 cmpi.w  #$80,d0
-                bhs.s   locret_336E2
+                bhs.s   SKCNZPole_UpTransferReturn
                 subi.w  #$2E,d0
                 moveq   #0,d1
                 move.b  y_radius(a1),d1
@@ -303,18 +303,18 @@ loc_3365A:
                 sub.w   y_pos(a0),d1
                 add.w   d0,d1
                 cmpi.w  #$10,d1
-                bhs.s   locret_336E2
+                bhs.s   SKCNZPole_UpTransferReturn
                 tst.b   object_control(a1)
-                bne.s   locret_336E2
+                bne.s   SKCNZPole_UpTransferReturn
                 btst    #Status_InAir,status(a1)
-                beq.s   loc_336A0
+                beq.s   SKCNZPole_TryRecaptureUpSlope
                 tst.w   y_vel(a1)
-                bmi.s   locret_336E2
+                bmi.s   SKCNZPole_UpTransferReturn
 
-loc_336A0:
+SKCNZPole_TryRecaptureUpSlope:
                 movea.w interact(a1),a3
-                cmpi.l  #loc_335A8,(a3)
-                bne.s   locret_336E2
+                cmpi.l  #SKCNZPole_UpdateUpSlopeRiders,(a3)
+                bne.s   SKCNZPole_UpTransferReturn
                 move.l  x_pos(a1),(a2)
                 move.w  (a2),d0
                 sub.w   x_pos(a0),d0
@@ -323,35 +323,35 @@ loc_336A0:
                 move.w  #0,4(a2)
                 subi.w  #$20,d0
                 cmpi.w  #$60,d0
-                bhs.s   loc_336D2
+                bhs.s   SKCNZPole_AttachUpSlopeTransfer
                 move.w  #1,4(a2)
 
-loc_336D2:
+SKCNZPole_AttachUpSlopeTransfer:
                 bsr.w   AttachPlayerToCnzBarberPole
                 move.b  #$E0,angle(a1)
                 move.b  #3,flip_type(a1)
 
-locret_336E2:
+SKCNZPole_UpTransferReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_336E4:
+SKCNZPole_CheckUpSlopeSupport:
                 tst.w   4(a2)
-                bne.s   loc_33700
+                bne.s   SKCNZPole_AdvanceUpSlopeRider
                 move.w  ground_vel(a1),d0
-                bpl.s   loc_336F2
+                bpl.s   SKCNZPole_CheckUpEdgeSpeed
                 neg.w   d0
 
-loc_336F2:
+SKCNZPole_CheckUpEdgeSpeed:
                 cmpi.w  #$118,d0
-                bhs.s   loc_33700
+                bhs.s   SKCNZPole_AdvanceUpSlopeRider
                 bset    #Status_InAir,status(a1)
-                bra.s   loc_33726
+                bra.s   SKCNZPole_ReleaseUpSlopeRider
 ; ---------------------------------------------------------------------------
 
-loc_33700:
+SKCNZPole_AdvanceUpSlopeRider:
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_33726
+                bne.s   SKCNZPole_ReleaseUpSlopeRider
                 move.w  x_vel(a1),d0
                 ext.l   d0
                 lsl.l   #6,d0
@@ -363,9 +363,9 @@ loc_33700:
                 move.b  x_radius(a1),d0
                 add.w   (a2),d0
                 cmpi.w  #$A0,d0
-                blo.s   loc_33744
+                blo.s   SKCNZPole_BeginUpProjection
 
-loc_33726:
+SKCNZPole_ReleaseUpSlopeRider:
                 bclr    #Status_OnObj,status(a1)
                 bclr    d6,status(a0)
                 move.b  #0,flips_remaining(a1)
@@ -374,33 +374,33 @@ loc_33726:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_33744:
+SKCNZPole_BeginUpProjection:
                 btst    #Status_OnObj,status(a1)
-                beq.w   locret_337D6
+                beq.w   SKCNZPole_UpProjectionReturn
                 move.w  d0,d2
                 subi.b  #$10,d0
-                bcc.s   loc_3375E
+                bcc.s   SKCNZPole_ClampUpRotation
                 move.w  #0,4(a2)
                 moveq   #0,d0
 
-loc_3375E:
+SKCNZPole_ClampUpRotation:
                 cmpi.b  #$80,d0
-                blo.s   loc_3376E
+                blo.s   SKCNZPole_SetUpSlopePriority
                 move.w  #0,4(a2)
                 move.w  #$80,d0
 
-loc_3376E:
+SKCNZPole_SetUpSlopePriority:
                 andi.w  #drawing_mask,art_tile(a1)
                 cmpi.b  #$4C,d0
-                blo.s   loc_33780
+                blo.s   SKCNZPole_ZeroUpInteriorRotation
                 ori.w   #high_priority,art_tile(a1)
 
-loc_33780:
+SKCNZPole_ZeroUpInteriorRotation:
                 tst.w   4(a2)
-                beq.s   loc_33788
+                beq.s   SKCNZPole_ProjectUpSlopeRider
                 moveq   #0,d0
 
-loc_33788:
+SKCNZPole_ProjectUpSlopeRider:
                 neg.b   d0
                 add.w   d0,d0
                 move.b  d0,flip_angle(a1)
@@ -430,7 +430,7 @@ loc_33788:
                 sub.w   d1,d2
                 move.w  d2,y_pos(a1)
 
-locret_337D6:
+SKCNZPole_UpProjectionReturn:
                 rts
 ; End of function UpdatePlayerOnCnzRisingBarberPole
 
@@ -438,34 +438,34 @@ locret_337D6:
 
 AttachPlayerToCnzBarberPole:
                 btst    #Status_OnObj,status(a1)
-                beq.s   loc_337E8
+                beq.s   SKCNZPole_SetInteractionAndLand
                 movea.w interact(a1),a3
                 bclr    d6,status(a3)
 
-loc_337E8:
+SKCNZPole_SetInteractionAndLand:
                 move.w  a0,interact(a1)
                 btst    #Status_InAir,status(a1)
-                beq.s   loc_33824
+                beq.s   SKCNZPole_SetStandingFlags
                 move.w  #0,y_vel(a1)
                 move.w  x_vel(a1),ground_vel(a1)
                 move.l  a0,-(sp)
                 movea.l a1,a0
                 move.w  a0,d1
                 subi.w  #Player_1,d1
-                bne.s   loc_3381C
+                bne.s   SKCNZPole_LandTailsEntrant
                 cmpi.w  #2,(Player_mode).w
-                beq.s   loc_3381C
+                beq.s   SKCNZPole_LandTailsEntrant
                 jsr     (Player_TouchFloor).l
-                bra.s   loc_33822
+                bra.s   SKCNZPole_RestorePolePointer
 ; ---------------------------------------------------------------------------
 
-loc_3381C:
+SKCNZPole_LandTailsEntrant:
                 jsr     (Tails_TouchFloor).l
 
-loc_33822:
+SKCNZPole_RestorePolePointer:
                 movea.l (sp)+,a0
 
-loc_33824:
+SKCNZPole_SetStandingFlags:
                 bset    #Status_OnObj,status(a1)
                 bclr    #Status_InAir,status(a1)
                 bset    d6,status(a0)

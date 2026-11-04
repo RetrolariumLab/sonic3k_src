@@ -1,24 +1,24 @@
 ; Data owner: objects/shared/zones/cnz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Ani_CNZBalloon_:
-                dc.w    byte_31872-Ani_CNZBalloon_
-                dc.w    byte_31878-Ani_CNZBalloon_
-                dc.w    byte_3187C-Ani_CNZBalloon_
-                dc.w    byte_31882-Ani_CNZBalloon_
-                dc.w    byte_31886-Ani_CNZBalloon_
-                dc.w    byte_3188C-Ani_CNZBalloon_
-                dc.w    byte_31890-Ani_CNZBalloon_
-                dc.w    byte_31896-Ani_CNZBalloon_
-                dc.w    byte_3189A-Ani_CNZBalloon_
-                dc.w    byte_318A0-Ani_CNZBalloon_
-byte_31872:     dc.b    7,   0,   1,   2,   1, $FF
-byte_31878:     dc.b    2,   3,   4, $FB
-byte_3187C:     dc.b    7,   5,   6,   7,   6, $FF
-byte_31882:     dc.b    2,   8,   9, $FB
-byte_31886:     dc.b    7,  $A,  $B,  $C,  $B, $FF
-byte_3188C:     dc.b    2,  $D,  $E, $FB
-byte_31890:     dc.b    7,  $F, $10, $11, $10, $FF
-byte_31896:     dc.b    2, $12, $13, $FB
-byte_3189A:     dc.b    7, $14, $15, $16, $15, $FF
-byte_318A0:     dc.b    2, $17, $18, $FB
+                dc.w    CNZBalloonShared_StandardAnim00-Ani_CNZBalloon_
+                dc.w    CNZBalloonShared_StandardAnim01-Ani_CNZBalloon_
+                dc.w    CNZBalloonShared_StandardAnim02-Ani_CNZBalloon_
+                dc.w    CNZBalloonShared_StandardAnim03-Ani_CNZBalloon_
+                dc.w    CNZBalloonShared_StandardAnim04-Ani_CNZBalloon_
+                dc.w    CNZBalloonShared_StandardAnim05-Ani_CNZBalloon_
+                dc.w    CNZBalloonShared_StandardAnim06-Ani_CNZBalloon_
+                dc.w    CNZBalloonShared_StandardAnim07-Ani_CNZBalloon_
+                dc.w    CNZBalloonShared_StandardAnim08-Ani_CNZBalloon_
+                dc.w    CNZBalloonShared_StandardAnim09-Ani_CNZBalloon_
+CNZBalloonShared_StandardAnim00:    dc.b    7,   0,   1,   2,   1, $FF
+CNZBalloonShared_StandardAnim01:    dc.b    2,   3,   4, $FB
+CNZBalloonShared_StandardAnim02:    dc.b    7,   5,   6,   7,   6, $FF
+CNZBalloonShared_StandardAnim03:    dc.b    2,   8,   9, $FB
+CNZBalloonShared_StandardAnim04:    dc.b    7,  $A,  $B,  $C,  $B, $FF
+CNZBalloonShared_StandardAnim05:    dc.b    2,  $D,  $E, $FB
+CNZBalloonShared_StandardAnim06:    dc.b    7,  $F, $10, $11, $10, $FF
+CNZBalloonShared_StandardAnim07:    dc.b    2, $12, $13, $FB
+CNZBalloonShared_StandardAnim08:    dc.b    7, $14, $15, $16, $15, $FF
+CNZBalloonShared_StandardAnim09:    dc.b    2, $17, $18, $FB
                 even

@@ -11,12 +11,12 @@ Obj_CNZRisingPlatform:
                 move.b  #$30,width_pixels(a0)
                 move.b  #$10,height_pixels(a0)
                 move.b  #6,y_radius(a0)
-                move.l  #loc_31BD0,(a0)
+                move.l  #SKCNZRisePlat_UpdateMotion,(a0)
 
-loc_31BD0:
+SKCNZRisePlat_UpdateMotion:
                 bsr.s   UpdateCnzRisingPlatformMotion
 
-loc_31BD2:
+SKCNZRisePlat_ResolveSolidAndDraw:
                 move.w  #$30,d1
                 move.w  #$11,d3
                 move.w  x_pos(a0),d4
@@ -32,49 +32,49 @@ Ani_CNZRisingPlatform:
 
 UpdateCnzRisingPlatformMotion:
                 move.b  $30(a0),d0
-                bne.s   loc_31C4C
+                bne.s   SKCNZRisePlat_MoveWithRidersOrRelease
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                beq.s   loc_31C26
+                beq.s   SKCNZRisePlat_StepReturnMotion
                 move.b  #1,$30(a0)
                 move.w  #1<<8,anim(a0)                  ; and prev_anim
 
-loc_31C26:
+SKCNZRisePlat_StepReturnMotion:
                 tst.w   y_vel(a0)
-                beq.s   locret_31C4A
+                beq.s   SKCNZRisePlat_ReturnMotionDone
                 jsr     (MoveSprite2).l
                 addi.w  #8,y_vel(a0)
                 tst.w   y_vel(a0)
-                bmi.s   locret_31C4A
+                bmi.s   SKCNZRisePlat_ReturnMotionDone
                 move.w  #0,y_vel(a0)
                 move.w  #2<<8,anim(a0)                  ; and prev_anim
 
-locret_31C4A:
+SKCNZRisePlat_ReturnMotionDone:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_31C4C:
+SKCNZRisePlat_MoveWithRidersOrRelease:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                beq.s   loc_31C86
+                beq.s   SKCNZRisePlat_ReleaseUpward
                 jsr     (MoveSprite2).l
                 cmpi.w  #$200,y_vel(a0)
-                bge.s   loc_31C6A
+                bge.s   SKCNZRisePlat_TryStopAtFloor
                 addi.w  #$18,y_vel(a0)
 
-loc_31C6A:
+SKCNZRisePlat_TryStopAtFloor:
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.s   locret_31C84
+                bpl.s   SKCNZRisePlat_FloorTestReturn
                 add.w   d1,y_pos(a0)
-                move.l  #loc_31BD2,(a0)
+                move.l  #SKCNZRisePlat_ResolveSolidAndDraw,(a0)
                 move.w  #2<<8,anim(a0)                  ; and prev_anim
 
-locret_31C84:
+SKCNZRisePlat_FloorTestReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_31C86:
+SKCNZRisePlat_ReleaseUpward:
                 neg.w   y_vel(a0)
                 subi.w  #$80,y_vel(a0)
                 move.b  #0,$30(a0)

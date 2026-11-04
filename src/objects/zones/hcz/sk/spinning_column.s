@@ -148,7 +148,7 @@ SKSpinningColumn_CaptureStandingRider:
                 move.b  #0,jumping(a1)
                 move.b  #0,anim(a1)
                 move.b  #1,(a2)
-                bra.w   loc_3260A
+                bra.w   SKCNZCylinder_LoadRiderTwistPhase
 ; ---------------------------------------------------------------------------
 
 SKSpinningColumn_CaptureReturn:
@@ -194,7 +194,7 @@ SKSpinningColumn_TryBoostRiderSpeed:
 
 SKSpinningColumn_TryJumpRelease:
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d5
-                beq.w   loc_3260A
+                beq.w   SKCNZCylinder_LoadRiderTwistPhase
                 move.b  #1,jumping(a1)
                 move.b  #$E,y_radius(a1)
                 move.b  #7,x_radius(a1)
