@@ -12,40 +12,40 @@ FindWall:
                 move.b  (a4),Primary_Angle_save-Primary_Angle(a4)
                 move.w  d1,-(sp)
                 move.w  a3,d0
-                bpl.s   SKCollision_ShiftPositiveDirectionWallSampleIntoBackgroundX
+                bpl.s   SKWall_ShiftPositiveXToBG
                 eori.w  #$F,d3
                 sub.w   (Camera_X_diff).w,d3
                 eori.w  #$F,d3
-                bra.s   SKCollision_ProbeBackgroundWallAfterDirectionAwareXShift
+                bra.s   SKWall_SampleBG
 ; ---------------------------------------------------------------------------
 
-SKCollision_ShiftPositiveDirectionWallSampleIntoBackgroundX:
+SKWall_ShiftPositiveXToBG:
                 sub.w   (Camera_X_diff).w,d3
 
-SKCollision_ProbeBackgroundWallAfterDirectionAwareXShift:
+SKWall_SampleBG:
                 sub.w   (Camera_Y_diff).w,d2
                 lea     (Find_Tile_BG).l,a5
                 bsr.s   SampleWallDistanceWithNeighbor
                 move.w  a3,d0
-                bpl.s   SKCollision_RestorePositiveDirectionWallSampleX
+                bpl.s   SKWall_RestorePositiveX
                 eori.w  #$F,d3
                 add.w   (Camera_X_diff).w,d3
                 eori.w  #$F,d3
-                bra.s   SKCollision_RestoreWallYAndSelectNearerLayer
+                bra.s   SKWall_RestoreYAndPickLayer
 ; ---------------------------------------------------------------------------
 
-SKCollision_RestorePositiveDirectionWallSampleX:
+SKWall_RestorePositiveX:
                 add.w   (Camera_X_diff).w,d3
 
-SKCollision_RestoreWallYAndSelectNearerLayer:
+SKWall_RestoreYAndPickLayer:
                 add.w   (Camera_Y_diff).w,d2
                 move.w  (sp)+,d0
                 cmp.w   d0,d1
-                ble.s   SKCollision_ReturnForegroundOrSelectedBackgroundWallDistance
+                ble.s   SKWall_LayerReturn
                 move.b  Primary_Angle_save-Primary_Angle(a4),(a4)
                 move.w  d0,d1
 
-SKCollision_ReturnForegroundOrSelectedBackgroundWallDistance:
+SKWall_LayerReturn:
                 rts
 ; End of function FindWall
 
@@ -56,11 +56,11 @@ SampleWallDistanceWithNeighbor:
                 move.w  (a1),d0
                 move.w  d0,d4
                 andi.w  #$3FF,d0
-                beq.s   SKCollision_SampleForwardNeighborForEmptyWallBlock
+                beq.s   SKWall_SampleNextBlock
                 btst    d5,d4
-                bne.s   SKCollision_ReadWallCollisionByteAndVerticalFlipOfSample
+                bne.s   SKWall_LoadShapeAndAngle
 
-SKCollision_SampleForwardNeighborForEmptyWallBlock:
+SKWall_SampleNextBlock:
                 add.w   a3,d3
                 bsr.w   SampleSingleBlockWallDistance
                 sub.w   a3,d3
@@ -68,29 +68,30 @@ SKCollision_SampleForwardNeighborForEmptyWallBlock:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_ReadWallCollisionByteAndVerticalFlipOfSample:
+SKWall_LoadShapeAndAngle:
                 movea.l (Collision_addr).w,a2
                 add.w   d0,d0
                 move.b  (a2,d0.w),d0
                 andi.w  #$FF,d0
-                beq.s   SKCollision_SampleForwardNeighborForEmptyWallBlock
+                beq.s   SKWall_SampleNextBlock
                 lea     (AngleArray).l,a2
                 move.b  (a2,d0.w),(a4)
                 lsl.w   #4,d0
                 move.w  d2,d1
                 btst    #$B,d4
-                beq.s   SKCollision_TransformWallAngleForHorizontalFlip
+                beq.s   SKWall_FlipAngleX
                 not.w   d1
                 addi.b  #$40,(a4)
                 neg.b   (a4)
                 subi.b  #$40,(a4)
 
-SKCollision_TransformWallAngleForHorizontalFlip:
+SKWall_FlipAngleX:
                 btst    #$A,d4
-                beq.s   SKCollision_ReadSignedRotatedHeightAndEffectiveHorizontalFlip
+                beq.s   SKWall_ReadRotatedHeight
                 neg.b   (a4)
 
-SKCollision_ReadSignedRotatedHeightAndEffectiveHorizontalFlip:
+; Combine the block's X flip with the scan direction mask before applying the sign
+SKWall_ReadRotatedHeight:
                 andi.w  #$F,d1
                 add.w   d0,d1
                 lea     (HeightMapsRot).l,a2
@@ -98,15 +99,15 @@ SKCollision_ReadSignedRotatedHeightAndEffectiveHorizontalFlip:
                 ext.w   d0
                 eor.w   d6,d4
                 btst    #$A,d4
-                beq.s   SKCollision_ClassifyWallHeightAndPartialColumnDistance
+                beq.s   SKWall_ClassifyHeight
                 neg.w   d0
 
-SKCollision_ClassifyWallHeightAndPartialColumnDistance:
+SKWall_ClassifyHeight:
                 tst.w   d0
-                beq.s   SKCollision_SampleForwardNeighborForEmptyWallBlock
-                bmi.s   SKCollision_TestNegativeWallColumnAgainstWithinBlockX
+                beq.s   SKWall_SampleNextBlock
+                bmi.s   SKWall_TestNegHeightAtLocalX
                 cmpi.b  #$10,d0
-                beq.s   SKCollision_SampleBackwardNeighborForFullWallColumn
+                beq.s   SKWall_SamplePrevBlock
                 move.w  d3,d1
                 andi.w  #$F,d1
                 add.w   d1,d0
@@ -115,13 +116,13 @@ SKCollision_ClassifyWallHeightAndPartialColumnDistance:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_TestNegativeWallColumnAgainstWithinBlockX:
+SKWall_TestNegHeightAtLocalX:
                 move.w  d3,d1
                 andi.w  #$F,d1
                 add.w   d1,d0
-                bpl.w   SKCollision_SampleForwardNeighborForEmptyWallBlock
+                bpl.w   SKWall_SampleNextBlock
 
-SKCollision_SampleBackwardNeighborForFullWallColumn:
+SKWall_SamplePrevBlock:
                 sub.w   a3,d3
                 bsr.w   SampleSingleBlockWallDistance
                 add.w   a3,d3
@@ -136,11 +137,11 @@ SampleSingleBlockWallDistance:
                 move.w  (a1),d0
                 move.w  d0,d4
                 andi.w  #$3FF,d0
-                beq.s   SKCollision_ReturnEmptySingleWallBlockDistance
+                beq.s   SKWallBlock_EmptyDistance
                 btst    d5,d4
-                bne.s   SKCollision_ReadSingleWallIndexAndVerticalFlip
+                bne.s   SKWallBlock_LoadShapeAndAngle
 
-SKCollision_ReturnEmptySingleWallBlockDistance:
+SKWallBlock_EmptyDistance:
                 move.w  #$F,d1
                 move.w  d3,d0
                 andi.w  #$F,d0
@@ -148,29 +149,29 @@ SKCollision_ReturnEmptySingleWallBlockDistance:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_ReadSingleWallIndexAndVerticalFlip:
+SKWallBlock_LoadShapeAndAngle:
                 movea.l (Collision_addr).w,a2
                 add.w   d0,d0
                 move.b  (a2,d0.w),d0
                 andi.w  #$FF,d0
-                beq.s   SKCollision_ReturnEmptySingleWallBlockDistance
+                beq.s   SKWallBlock_EmptyDistance
                 lea     (AngleArray).l,a2
                 move.b  (a2,d0.w),(a4)
                 lsl.w   #4,d0
                 move.w  d2,d1
                 btst    #$B,d4
-                beq.s   SKCollision_TransformSingleWallAngleForHorizontalFlip
+                beq.s   SKWallBlock_FlipAngleX
                 not.w   d1
                 addi.b  #$40,(a4)
                 neg.b   (a4)
                 subi.b  #$40,(a4)
 
-SKCollision_TransformSingleWallAngleForHorizontalFlip:
+SKWallBlock_FlipAngleX:
                 btst    #$A,d4
-                beq.s   SKCollision_ReadSingleWallRotatedHeightWithEffectiveFlip
+                beq.s   SKWallBlock_ReadRotatedHeight
                 neg.b   (a4)
 
-SKCollision_ReadSingleWallRotatedHeightWithEffectiveFlip:
+SKWallBlock_ReadRotatedHeight:
                 andi.w  #$F,d1
                 add.w   d0,d1
                 lea     (HeightMapsRot).l,a2
@@ -178,13 +179,13 @@ SKCollision_ReadSingleWallRotatedHeightWithEffectiveFlip:
                 ext.w   d0
                 eor.w   d6,d4
                 btst    #$A,d4
-                beq.s   SKCollision_ComputeSingleWallDistanceFromSignedHeight
+                beq.s   SKWallBlock_ClassifyHeight
                 neg.w   d0
 
-SKCollision_ComputeSingleWallDistanceFromSignedHeight:
+SKWallBlock_ClassifyHeight:
                 tst.w   d0
-                beq.s   SKCollision_ReturnEmptySingleWallBlockDistance
-                bmi.s   SKCollision_ResolveNegativeSingleWallColumnDistance
+                beq.s   SKWallBlock_EmptyDistance
+                bmi.s   SKWallBlock_TestNegHeight
                 move.w  d3,d1
                 andi.w  #$F,d1
                 add.w   d1,d0
@@ -193,11 +194,11 @@ SKCollision_ComputeSingleWallDistanceFromSignedHeight:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_ResolveNegativeSingleWallColumnDistance:
+SKWallBlock_TestNegHeight:
                 move.w  d3,d1
                 andi.w  #$F,d1
                 add.w   d1,d0
-                bpl.w   SKCollision_ReturnEmptySingleWallBlockDistance
+                bpl.w   SKWallBlock_EmptyDistance
                 not.w   d1
                 rts
 ; End of function SampleSingleBlockWallDistance
@@ -209,10 +210,10 @@ ProbeNextSurfaceWithFixedLookahead:
                 bne.w   ProbeNextSurfaceWithBodyRadius
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   SKCollision_PredictFixedLookaheadPositionFromFullFractionalCoordinates
+                beq.s   SKFixedProbe_PredictXY
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-SKCollision_PredictFixedLookaheadPositionFromFullFractionalCoordinates:
+SKFixedProbe_PredictXY:
                 move.b  lrb_solid_bit(a0),d5
                 move.l  x_pos(a0),d3
                 move.l  y_pos(a0),d2
@@ -222,10 +223,11 @@ SKCollision_PredictFixedLookaheadPositionFromFullFractionalCoordinates:
                 add.l   d1,d3
                 move.w  y_vel(a0),d1
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKCollision_FinishGravityAdjustedFixedLookaheadAndRoundDirection
+                beq.s   SKFixedProbe_FinishYAndRoundAngle
                 neg.w   d1
 
-SKCollision_FinishGravityAdjustedFixedLookaheadAndRoundDirection:
+; The caller negates vertical speed in reverse gravity before reaching this step
+SKFixedProbe_FinishYAndRoundAngle:
                 ext.l   d1
                 asl.l   #8,d1
                 add.l   d1,d2
@@ -235,39 +237,40 @@ SKCollision_FinishGravityAdjustedFixedLookaheadAndRoundDirection:
                 move.b  d0,(Secondary_Angle).w
                 move.b  d0,d1
                 addi.b  #$20,d0
-                bpl.s   SKCollision_AdjustNegativeDirectionInLowerFixedLookaheadHalf
+                bpl.s   SKFixedProbe_AdjustLowerHalfAngle
                 move.b  d1,d0
-                bpl.s   SKCollision_FinishUpperHalfFixedLookaheadAngleBias
+                bpl.s   SKFixedProbe_UpperHalfBias
                 subq.b  #1,d0
 
-SKCollision_FinishUpperHalfFixedLookaheadAngleBias:
+SKFixedProbe_UpperHalfBias:
                 addi.b  #$20,d0
-                bra.s   SKCollision_DispatchFixedLookaheadFloorCeilingOrWall
+                bra.s   SKFixedProbe_DispatchSurface
 ; ---------------------------------------------------------------------------
 
-SKCollision_AdjustNegativeDirectionInLowerFixedLookaheadHalf:
+SKFixedProbe_AdjustLowerHalfAngle:
                 move.b  d1,d0
-                bpl.s   SKCollision_AddLowerHalfFixedLookaheadDirectionBias
+                bpl.s   SKFixedProbe_LowerHalfBias
                 addq.b  #1,d0
 
-SKCollision_AddLowerHalfFixedLookaheadDirectionBias:
+SKFixedProbe_LowerHalfBias:
                 addi.b  #$1F,d0
 
-SKCollision_DispatchFixedLookaheadFloorCeilingOrWall:
+; For an almost horizontal wall probe outside Competition, add eight pixels to sample lower
+SKFixedProbe_DispatchSurface:
                 andi.b  #$C0,d0
                 beq.w   CheckFloorDist_Part2
                 cmpi.b  #$80,d0
                 beq.w   CheckCeilingDist_Part2
                 tst.w   (Competition_mode).w
-                bne.s   SKCollision_DispatchFixedLookaheadWallByQuadrant
+                bne.s   SKFixedProbe_DispatchWall
                 andi.b  #$38,d1
-                bne.s   SKCollision_DispatchFixedLookaheadWallByQuadrant
+                bne.s   SKFixedProbe_DispatchWall
                 addq.w  #8,d2
 
-SKCollision_DispatchFixedLookaheadWallByQuadrant:
+SKFixedProbe_DispatchWall:
                 cmpi.b  #$40,d0
-                beq.w   SKCollision_ProbeLeftWallAtFixedTenPixelOffset
-                bra.w   SKCollision_ProbeRightWallAtFixedTenPixelOffset
+                beq.w   SKClearance_LeftAt10px
+                bra.w   SKClearance_RightAt10px
 ; End of function ProbeNextSurfaceWithFixedLookahead
 
 ; =============== S U B R O U T I N E =======================================
@@ -275,10 +278,11 @@ SKCollision_DispatchFixedLookaheadWallByQuadrant:
 ProbeNextSurfaceWithBodyRadius:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   SKCollision_PredictBodyRadiusLookaheadWithoutReverseYAdjustment
+                beq.s   SKRadiusProbe_PredictXY
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-SKCollision_PredictBodyRadiusLookaheadWithoutReverseYAdjustment:
+; Use vertical speed directly for this body-radius prediction in either gravity mode
+SKRadiusProbe_PredictXY:
                 move.b  lrb_solid_bit(a0),d5
                 move.l  x_pos(a0),d3
                 move.l  y_pos(a0),d2
@@ -296,30 +300,30 @@ SKCollision_PredictBodyRadiusLookaheadWithoutReverseYAdjustment:
                 move.b  d0,(Secondary_Angle).w
                 move.b  d0,d1
                 addi.b  #$20,d0
-                bpl.s   SKCollision_AdjustNegativeDirectionInLowerBodyRadiusHalf
+                bpl.s   SKRadiusProbe_AdjustLowerHalfAngle
                 move.b  d1,d0
-                bpl.s   SKCollision_FinishUpperHalfBodyRadiusDirectionBias
+                bpl.s   SKRadiusProbe_UpperHalfBias
                 subq.b  #1,d0
 
-SKCollision_FinishUpperHalfBodyRadiusDirectionBias:
+SKRadiusProbe_UpperHalfBias:
                 addi.b  #$20,d0
-                bra.s   SKCollision_DispatchPredictedBodyRadiusSurfaceProbe
+                bra.s   SKRadiusProbe_DispatchSurface
 ; ---------------------------------------------------------------------------
 
-SKCollision_AdjustNegativeDirectionInLowerBodyRadiusHalf:
+SKRadiusProbe_AdjustLowerHalfAngle:
                 move.b  d1,d0
-                bpl.s   SKCollision_AddLowerHalfBodyRadiusDirectionBias
+                bpl.s   SKRadiusProbe_LowerHalfBias
                 addq.b  #1,d0
 
-SKCollision_AddLowerHalfBodyRadiusDirectionBias:
+SKRadiusProbe_LowerHalfBias:
                 addi.b  #$1F,d0
 
-SKCollision_DispatchPredictedBodyRadiusSurfaceProbe:
+SKRadiusProbe_DispatchSurface:
                 andi.b  #$C0,d0
                 beq.w   ProbeFloorWithXRadiusOffset
                 cmpi.b  #$80,d0
                 beq.w   CheckCeilingDist_WithRadius
                 cmpi.b  #$40,d0
-                beq.w   SKCollision_ProbeLeftWallAtSignedBodyXRadius
-                bra.w   SKCollision_ProbeRightWallAtSignedBodyXRadius
+                beq.w   SKClearance_LeftAtXRadius
+                bra.w   SKClearance_RightAtXRadius
 ; End of function ProbeNextSurfaceWithBodyRadius

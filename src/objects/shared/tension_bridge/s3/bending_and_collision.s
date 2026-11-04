@@ -213,7 +213,7 @@ TryLandPlayerOnSlopedTensionBridge:
                 addq.w  #8,d3
                 move.w  y_pos(a0),d0
                 sub.w   d3,d0
-                jmp     (S3Collision_TestPlatformLandingWindowAndSnapRider).l
+                jmp     (S3Platform_CheckTopAndSnapRider).l
 ; ---------------------------------------------------------------------------
 
 locret_381D4:

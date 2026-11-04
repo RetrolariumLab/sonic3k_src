@@ -4108,7 +4108,7 @@
       "responsibility": "Overhead and floor clearance wrappers, floor-edge checks and object, fire and ring floor probes.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 301,
+      "physical_lines": 303,
       "origin": {
         "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
         "path": "s3.s",
@@ -4148,7 +4148,7 @@
       "responsibility": "Normal, shield and product-specific hyper contact response, hit boxes, enemy rewards and player harm.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 603,
+      "physical_lines": 605,
       "origin": {
         "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
         "path": "s3.s",
@@ -4188,7 +4188,7 @@
       "responsibility": "Rectangular solid-platform collision variants, offsets and player attachment motion.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 620,
+      "physical_lines": 623,
       "origin": {
         "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
         "path": "s3.s",
@@ -4228,7 +4228,7 @@
       "responsibility": "Sloped and top-only solid platforms, ride attachment and player release checks.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 324,
+      "physical_lines": 326,
       "origin": {
         "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
         "path": "s3.s",
@@ -4268,7 +4268,7 @@
       "responsibility": "Player floor-angle attachment and transitions along right walls, ceilings and left walls.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 386,
+      "physical_lines": 390,
       "origin": {
         "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
         "path": "s3.s",
@@ -4308,7 +4308,7 @@
       "responsibility": "Foreground/background chunk addressing and floor height sampling for players, objects and rings.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 349,
+      "physical_lines": 350,
       "origin": {
         "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
         "path": "s3.s",
@@ -4348,7 +4348,7 @@
       "responsibility": "Left and right wall and ceiling clearance wrappers, including product-specific reverse-gravity probes.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 415,
+      "physical_lines": 416,
       "origin": {
         "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
         "path": "s3.s",
@@ -4388,7 +4388,7 @@
       "responsibility": "Wall height sampling and direction-dependent collision angle conversion.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 324,
+      "physical_lines": 326,
       "origin": {
         "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
         "path": "s3.s",
@@ -4428,7 +4428,7 @@
       "responsibility": "Overhead and floor clearance wrappers, floor-edge checks and object, fire and ring floor probes.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 301,
+      "physical_lines": 303,
       "origin": {
         "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
         "path": "sonic3k.s",
@@ -4458,7 +4458,7 @@
       "responsibility": "Normal, shield and product-specific hyper contact response, hit boxes, enemy rewards and player harm.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 814,
+      "physical_lines": 817,
       "origin": {
         "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
         "path": "sonic3k.s",
@@ -4493,7 +4493,7 @@
       "responsibility": "Rectangular solid-platform collision variants, offsets and player attachment motion.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 686,
+      "physical_lines": 690,
       "origin": {
         "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
         "path": "sonic3k.s",
@@ -4523,7 +4523,7 @@
       "responsibility": "Sloped and top-only solid platforms, ride attachment and player release checks.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 431,
+      "physical_lines": 432,
       "origin": {
         "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
         "path": "sonic3k.s",
@@ -4553,7 +4553,7 @@
       "responsibility": "Player floor-angle attachment and transitions along right walls, ceilings and left walls.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 386,
+      "physical_lines": 390,
       "origin": {
         "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
         "path": "sonic3k.s",
@@ -4583,7 +4583,7 @@
       "responsibility": "Foreground/background chunk addressing and floor height sampling for players, objects and rings.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 352,
+      "physical_lines": 353,
       "origin": {
         "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
         "path": "sonic3k.s",
@@ -4613,7 +4613,7 @@
       "responsibility": "Left and right wall and ceiling clearance wrappers, including product-specific reverse-gravity probes.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 464,
+      "physical_lines": 465,
       "origin": {
         "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
         "path": "sonic3k.s",
@@ -4643,7 +4643,7 @@
       "responsibility": "Wall height sampling and direction-dependent collision angle conversion.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 325,
+      "physical_lines": 329,
       "origin": {
         "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
         "path": "sonic3k.s",

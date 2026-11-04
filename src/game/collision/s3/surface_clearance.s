@@ -34,7 +34,7 @@ CheckRightCeilingDist:
                 bsr.w   FindWall
                 move.w  (sp)+,d0
                 move.b  #-$40,d2
-                bra.w   S3Collision_SelectSmallerPairedClearanceAndItsAngle
+                bra.w   S3Clearance_PickNearerCorner
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -68,7 +68,7 @@ ProbeRightWallAtBodyExtents:
                 bsr.w   FindWall
                 move.w  (sp)+,d0
                 move.b  #-$40,d2
-                bra.w   S3Collision_SelectSmallerPairedClearanceAndItsAngle
+                bra.w   S3Clearance_PickNearerCorner
 ; End of function ProbeRightWallAtBodyExtents
 
 ; =============== S U B R O U T I N E =======================================
@@ -77,19 +77,19 @@ CheckRightWallDist:
                 move.w  y_pos(a0),d2
                 move.w  x_pos(a0),d3
                 tst.w   (Competition_mode).w
-                bne.s   S3Collision_ProbeRightWallWithHorizontalRadius
+                bne.s   S3Clearance_RightAtXRadius
 
-S3Collision_ProbeRightWallWithFixedTenPixelOffset:
+S3Clearance_RightAt10px:
                 addi.w  #$A,d3
                 lea     (Primary_Angle).w,a4
                 movea.w #Collision_Scan_Step,a3
                 move.w  #0,d6
                 bsr.w   FindWall
                 move.b  #-$40,d2
-                bra.w   S3Collision_ReplaceOddPrimaryClearanceAngleWithAxis
+                bra.w   S3Clearance_FilterPrimaryAngle
 ; ---------------------------------------------------------------------------
 
-S3Collision_ProbeRightWallWithHorizontalRadius:
+S3Clearance_RightAtXRadius:
                 move.b  x_radius(a0),d0
                 ext.w   d0
                 add.w   d0,d3
@@ -98,7 +98,7 @@ S3Collision_ProbeRightWallWithHorizontalRadius:
                 move.w  #0,d6
                 bsr.w   FindWall
                 move.b  #-$40,d2
-                bra.w   S3Collision_ReplaceOddPrimaryClearanceAngleWithAxis
+                bra.w   S3Clearance_FilterPrimaryAngle
 ; End of function CheckRightWallDist
 
 ; =============== S U B R O U T I N E =======================================
@@ -114,10 +114,10 @@ ObjCheckRightWallDist:
                 bsr.w   FindWall
                 move.b  (Primary_Angle).w,d3
                 btst    #0,d3
-                beq.s   S3Collision_ReturnObjectRightWallDistance
+                beq.s   S3Clearance_RightReturn
                 move.b  #-$40,d3
 
-S3Collision_ReturnObjectRightWallDistance:
+S3Clearance_RightReturn:
                 rts
 ; End of function ObjCheckRightWallDist
 
@@ -155,7 +155,7 @@ Sonic_CheckCeiling:
                 bsr.w   FindFloor
                 move.w  (sp)+,d0
                 move.b  #$80,d2
-                bra.w   S3Collision_SelectSmallerPairedClearanceAndItsAngle
+                bra.w   S3Clearance_PickNearerCorner
 ; End of function Sonic_CheckCeiling
 
 ; =============== S U B R O U T I N E =======================================
@@ -194,7 +194,7 @@ ProbeCeilingWithInsetHorizontalRadius:
                 bsr.w   FindFloor
                 move.w  (sp)+,d0
                 move.b  #$80,d2
-                bra.w   S3Collision_SelectSmallerPairedClearanceAndItsAngle
+                bra.w   S3Clearance_PickNearerCorner
 ; End of function ProbeCeilingWithInsetHorizontalRadius
 
 ; ---------------------------------------------------------------------------
@@ -211,7 +211,7 @@ CheckCeilingDist_Part2:
                 move.w  #$800,d6
                 bsr.w   FindFloor
                 move.b  #$80,d2
-                bra.w   S3Collision_ReplaceOddPrimaryClearanceAngleWithAxis
+                bra.w   S3Clearance_FilterPrimaryAngle
 ; ---------------------------------------------------------------------------
 
 ; loc_10F4A
@@ -225,7 +225,7 @@ CheckCeilingDist_WithRadius:
                 move.w  #$800,d6
                 bsr.w   FindFloor
                 move.b  #$80,d2
-                bra.w   S3Collision_ReplaceOddPrimaryClearanceAngleWithAxis
+                bra.w   S3Clearance_FilterPrimaryAngle
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -285,7 +285,7 @@ CheckLeftCeilingDist:
                 bsr.w   FindWall
                 move.w  (sp)+,d0
                 move.b  #$40,d2
-                bra.w   S3Collision_SelectSmallerPairedClearanceAndItsAngle
+                bra.w   S3Clearance_PickNearerCorner
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -321,7 +321,7 @@ ProbeLeftWallAtBodyExtents:
                 bsr.w   FindWall
                 move.w  (sp)+,d0
                 move.b  #$40,d2
-                bra.w   S3Collision_SelectSmallerPairedClearanceAndItsAngle
+                bra.w   S3Clearance_PickNearerCorner
 ; End of function ProbeLeftWallAtBodyExtents
 
 ; =============== S U B R O U T I N E =======================================
@@ -330,9 +330,9 @@ CheckLeftWallDist:
                 move.w  y_pos(a0),d2
                 move.w  x_pos(a0),d3
                 tst.w   (Competition_mode).w
-                bne.s   S3Collision_ProbeLeftWallWithHorizontalRadius
+                bne.s   S3Clearance_LeftAtXRadius
 
-S3Collision_ProbeLeftWallWithFixedTenPixelOffset:
+S3Clearance_LeftAt10px:
                 subi.w  #$A,d3
                 eori.w  #$F,d3
                 lea     (Primary_Angle).w,a4
@@ -340,10 +340,10 @@ S3Collision_ProbeLeftWallWithFixedTenPixelOffset:
                 move.w  #$400,d6
                 bsr.w   FindWall
                 move.b  #$40,d2
-                bra.w   S3Collision_ReplaceOddPrimaryClearanceAngleWithAxis
+                bra.w   S3Clearance_FilterPrimaryAngle
 ; ---------------------------------------------------------------------------
 
-S3Collision_ProbeLeftWallWithHorizontalRadius:
+S3Clearance_LeftAtXRadius:
                 move.b  x_radius(a0),d0
                 ext.w   d0
                 sub.w   d0,d3
@@ -353,7 +353,7 @@ S3Collision_ProbeLeftWallWithHorizontalRadius:
                 move.w  #$400,d6
                 bsr.w   FindWall
                 move.b  #$40,d2
-                bra.w   S3Collision_ReplaceOddPrimaryClearanceAngleWithAxis
+                bra.w   S3Clearance_FilterPrimaryAngle
 ; End of function CheckLeftWallDist
 
 ; =============== S U B R O U T I N E =======================================
@@ -361,10 +361,11 @@ S3Collision_ProbeLeftWallWithHorizontalRadius:
 ProbeLeftWallUsingYRadius:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   S3Collision_ProbeLeftWallUsingVerticalRadiusAndSideSolidity
+                beq.s   S3Clearance_LeftAtYRadius
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-S3Collision_ProbeLeftWallUsingVerticalRadiusAndSideSolidity:
+; Use the object's side solidity bit for the probe
+S3Clearance_LeftAtYRadius:
                 move.w  x_pos(a0),d3
                 move.w  y_pos(a0),d2
                 move.b  y_radius(a0),d0
@@ -379,10 +380,10 @@ S3Collision_ProbeLeftWallUsingVerticalRadiusAndSideSolidity:
                 bsr.w   FindWall
                 move.b  (Primary_Angle).w,d3
                 btst    #0,d3
-                beq.s   S3Collision_ReturnVerticalRadiusLeftWallDistance
+                beq.s   S3Clearance_LeftAtYRadiusReturn
                 move.b  #$40,d3
 
-S3Collision_ReturnVerticalRadiusLeftWallDistance:
+S3Clearance_LeftAtYRadiusReturn:
                 rts
 ; End of function ProbeLeftWallUsingYRadius
 

@@ -12,7 +12,7 @@ SolidObjectFull:
                 movem.l (sp)+,d1-d4
                 lea     (Player_2).w,a1
                 tst.b   render_flags(a1)
-                bpl.w   SKCollision_ReturnFullSolidCarryOrInvisiblePlayerTwoSkip
+                bpl.w   SKSolid_FullReturn
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
 ; End of function SolidObjectFull
 
@@ -20,7 +20,7 @@ SolidObjectFull:
 
 SolidObjectFull_1P:
                 btst    d6,status(a0)
-                beq.w   SKCollision_RequireRootNegativeRenderFlagForNewFullSolidContact
+                beq.w   SKSolid_CheckVisibleForNewContact
                 move.w  d1,d2
                 add.w   d2,d2
                 btst    #Status_InAir,status(a1)
@@ -45,7 +45,7 @@ SKCollision_CarryExistingFullSolidRider:
                 bsr.w   MvSonicOnPtfm
                 moveq   #0,d4
 
-SKCollision_ReturnFullSolidCarryOrInvisiblePlayerTwoSkip:
+SKSolid_FullReturn:
                 rts
 ; End of function SolidObjectFull_1P
 
@@ -69,15 +69,15 @@ SolidObjectFull2_1P:
                 move.w  d1,d2
                 add.w   d2,d2
                 btst    #Status_InAir,status(a1)
-                bne.s   SKCollision_DetachFullSolidWithoutVisibilityGateRider
+                bne.s   SKSolidUngated_DetachRider
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   SKCollision_DetachFullSolidWithoutVisibilityGateRider
+                bmi.s   SKSolidUngated_DetachRider
                 cmp.w   d2,d0
-                blo.s   SKCollision_CarryFullSolidWithoutVisibilityGateRider
+                blo.s   SKSolidUngated_CarryRider
 
-SKCollision_DetachFullSolidWithoutVisibilityGateRider:
+SKSolidUngated_DetachRider:
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    d6,status(a0)
@@ -85,7 +85,7 @@ SKCollision_DetachFullSolidWithoutVisibilityGateRider:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_CarryFullSolidWithoutVisibilityGateRider:
+SKSolidUngated_CarryRider:
                 move.w  d4,d2
                 bsr.w   MvSonicOnPtfm
                 moveq   #0,d4
@@ -108,19 +108,19 @@ CollidePlayersWithHeightProfileSolid:
 
 CollidePlayerWithHeightProfileSolid:
                 btst    d6,status(a0)
-                beq.w   SKCollision_BuildHalfResolutionHeightProfileNewContact
+                beq.w   SKSolidHalf_CheckNewContact
                 move.w  d1,d2
                 add.w   d2,d2
                 btst    #Status_InAir,status(a1)
-                bne.s   SKCollision_DetachHalfResolutionHeightProfileRider
+                bne.s   SKSolidHalf_DetachRider
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   SKCollision_DetachHalfResolutionHeightProfileRider
+                bmi.s   SKSolidHalf_DetachRider
                 cmp.w   d2,d0
-                blo.s   SKCollision_CarryHeightProfileRiderAndAccumulateTopContactBit
+                blo.s   SKSolidHalf_CarryAndMarkTop
 
-SKCollision_DetachHalfResolutionHeightProfileRider:
+SKSolidHalf_DetachRider:
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    d6,status(a0)
@@ -128,7 +128,7 @@ SKCollision_DetachHalfResolutionHeightProfileRider:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_CarryHeightProfileRiderAndAccumulateTopContactBit:
+SKSolidHalf_CarryAndMarkTop:
                 move.w  d4,d2
                 bsr.w   SolidObjSloped2
                 move.w  d6,d4
@@ -153,7 +153,7 @@ SKCollision_CarryHeightProfileRiderAndAccumulateTopContactBit:
 
 CollidePlayerWithDualHeightProfileSolid:
                 btst    d6,status(a0)
-                beq.w   SKCollision_BuildDualHeightProfileNewContact
+                beq.w   SKSolidDual_CheckNewContact
                 move.w  d1,d2
                 add.w   d2,d2
                 btst    #Status_InAir,status(a1)
@@ -196,26 +196,26 @@ CollidePlayersWithHeightProfileKeepAirState:
 
 CollidePlayerWithHeightProfileKeepAirState:
                 btst    d6,status(a0)
-                beq.w   SKCollision_BuildHalfResolutionHeightProfileNewContact
+                beq.w   SKSolidHalf_CheckNewContact
                 move.w  d1,d2
                 add.w   d2,d2
                 btst    #Status_InAir,status(a1)
-                bne.s   SKCollision_DetachHeightProfileRiderKeepingAirState
+                bne.s   SKSolidKeepAir_DetachRider
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   SKCollision_DetachHeightProfileRiderKeepingAirState
+                bmi.s   SKSolidKeepAir_DetachRider
                 cmp.w   d2,d0
-                blo.s   SKCollision_CarryKeepAirStateProfileRiderAndSetTopResult
+                blo.s   SKSolidKeepAir_CarryAndMarkTop
 
-SKCollision_DetachHeightProfileRiderKeepingAirState:
+SKSolidKeepAir_DetachRider:
                 bclr    #Status_OnObj,status(a1)
                 bclr    d6,status(a0)
                 moveq   #0,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_CarryKeepAirStateProfileRiderAndSetTopResult:
+SKSolidKeepAir_CarryAndMarkTop:
                 move.w  d4,d2
                 bsr.w   SolidObjSloped2
                 move.w  d6,d4
@@ -241,7 +241,7 @@ SolidObjectFull_Offset:
 
 SolidObjectFull_Offset_1P:
                 btst    d6,status(a0)
-                beq.w   SKCollision_BuildOffsetSolidNewContactOverlap
+                beq.w   SKSolidOffset_CheckNewContact
                 btst    #Status_InAir,status(a1)
                 bne.s   SKCollision_DetachOffsetFullSolidRider
                 move.w  x_pos(a1),d0
@@ -250,7 +250,7 @@ SolidObjectFull_Offset_1P:
                 bmi.s   SKCollision_DetachOffsetFullSolidRider
                 add.w   d1,d1
                 cmp.w   d1,d0
-                blo.s   SKCollision_SnapOffsetSolidRiderAndApplyHorizontalCarry
+                blo.s   SKSolidOffset_SnapAndCarryX
 
 SKCollision_DetachOffsetFullSolidRider:
                 bclr    #Status_OnObj,status(a1)
@@ -260,7 +260,7 @@ SKCollision_DetachOffsetFullSolidRider:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_SnapOffsetSolidRiderAndApplyHorizontalCarry:
+SKSolidOffset_SnapAndCarryX:
                 move.w  y_pos(a0),d0
                 sub.w   d2,d0
                 add.w   d3,d0
@@ -274,15 +274,15 @@ SKCollision_SnapOffsetSolidRiderAndApplyHorizontalCarry:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_BuildOffsetSolidNewContactOverlap:
+SKSolidOffset_CheckNewContact:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.w   SKCollision_ClearStalePushAndSelectWalkingWordAnimation
+                bmi.w   SKSolid_ClearStalePush
                 move.w  d1,d4
                 add.w   d4,d4
                 cmp.w   d4,d0
-                bhi.w   SKCollision_ClearStalePushAndSelectWalkingWordAnimation
+                bhi.w   SKSolid_ClearStalePush
                 move.w  y_pos(a0),d5
                 add.w   d3,d5
                 move.b  y_radius(a1),d3
@@ -292,30 +292,31 @@ SKCollision_BuildOffsetSolidNewContactOverlap:
                 sub.w   d5,d3
                 addq.w  #4,d3
                 add.w   d2,d3
-                bmi.w   SKCollision_ClearStalePushAndSelectWalkingWordAnimation
+                bmi.w   SKSolid_ClearStalePush
                 move.w  d2,d4
                 add.w   d4,d4
                 cmp.w   d4,d3
-                bhs.w   SKCollision_ClearStalePushAndSelectWalkingWordAnimation
-                bra.w   SKCollision_GateSolidResponseAndChooseNearestHorizontalBoundary
+                bhs.w   SKSolid_ClearStalePush
+                bra.w   SKSolid_CheckStateAndResolveX
 ; ---------------------------------------------------------------------------
 
-SKCollision_BuildHalfResolutionHeightProfileNewContact:
+SKSolidHalf_CheckNewContact:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.w   SKCollision_ClearStalePushAndSelectWalkingWordAnimation
+                bmi.w   SKSolid_ClearStalePush
                 move.w  d1,d3
                 add.w   d3,d3
                 cmp.w   d3,d0
-                bhi.w   SKCollision_ClearStalePushAndSelectWalkingWordAnimation
+                bhi.w   SKSolid_ClearStalePush
                 move.w  d0,d5
                 btst    #0,render_flags(a0)
-                beq.s   SKCollision_ComputeRelativeHeightProfileOverlapFromByteDifference
+                beq.s   SKSolidHalf_BuildRelativeOverlap
                 not.w   d5
                 add.w   d3,d5
 
-SKCollision_ComputeRelativeHeightProfileOverlapFromByteDifference:
+; Subtract the base height in byte precision before sign-extending the difference
+SKSolidHalf_BuildRelativeOverlap:
                 lsr.w   #1,d5
                 move.b  (a2,d5.w),d3
                 sub.b   (a2),d3
@@ -329,30 +330,31 @@ SKCollision_ComputeRelativeHeightProfileOverlapFromByteDifference:
                 sub.w   d5,d3
                 addq.w  #4,d3
                 add.w   d2,d3
-                bmi.w   SKCollision_ClearStalePushAndSelectWalkingWordAnimation
+                bmi.w   SKSolid_ClearStalePush
                 move.w  d2,d4
                 add.w   d4,d4
                 cmp.w   d4,d3
-                bhs.w   SKCollision_ClearStalePushAndSelectWalkingWordAnimation
-                bra.w   SKCollision_GateSolidResponseAndChooseNearestHorizontalBoundary
+                bhs.w   SKSolid_ClearStalePush
+                bra.w   SKSolid_CheckStateAndResolveX
 ; ---------------------------------------------------------------------------
 
-SKCollision_BuildDualHeightProfileNewContact:
+SKSolidDual_CheckNewContact:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.w   SKCollision_ClearStalePushAndSelectWalkingWordAnimation
+                bmi.w   SKSolid_ClearStalePush
                 move.w  d1,d3
                 add.w   d3,d3
                 cmp.w   d3,d0
-                bhi.w   SKCollision_ClearStalePushAndSelectWalkingWordAnimation
+                bhi.w   SKSolid_ClearStalePush
                 move.w  d0,d5
                 btst    #0,render_flags(a0)
-                beq.s   SKCollision_ReadDualProfileTopAndExtentAndTestVerticalOverlap
+                beq.s   SKSolidDual_ReadTopAndExtent
                 not.w   d5
                 add.w   d3,d5
 
-SKCollision_ReadDualProfileTopAndExtentAndTestVerticalOverlap:
+; Align the index to an even byte and read the top and extent from adjacent signed bytes
+SKSolidDual_ReadTopAndExtent:
                 andi.w  #$FFFE,d5
                 move.b  (a2,d5.w),d3
                 move.b  1(a2,d5.w),d2
@@ -366,18 +368,18 @@ SKCollision_ReadDualProfileTopAndExtentAndTestVerticalOverlap:
                 ext.w   d5
                 add.w   d5,d3
                 addq.w  #4,d3
-                bmi.w   SKCollision_ClearStalePushAndSelectWalkingWordAnimation
+                bmi.w   SKSolid_ClearStalePush
                 add.w   d5,d2
                 move.w  d2,d4
                 add.w   d5,d4
                 cmp.w   d4,d3
-                bhs.w   SKCollision_ClearStalePushAndSelectWalkingWordAnimation
-                bra.w   SKCollision_GateSolidResponseAndChooseNearestHorizontalBoundary
+                bhs.w   SKSolid_ClearStalePush
+                bra.w   SKSolid_CheckStateAndResolveX
 ; ---------------------------------------------------------------------------
 
-SKCollision_RequireRootNegativeRenderFlagForNewFullSolidContact:
+SKSolid_CheckVisibleForNewContact:
                 tst.b   render_flags(a0)
-                bpl.w   SKCollision_ClearStalePushAndSelectWalkingWordAnimation
+                bpl.w   SKSolid_ClearStalePush
 
 SolidObject_cont:
                 move.w  x_pos(a1),d0
@@ -386,9 +388,9 @@ SolidObject_cont:
                 move.w  d1,d3
                 add.w   d3,d3
                 cmp.w   d3,d0
-                bhi.w   SKCollision_ClearStalePushAndSelectWalkingWordAnimation
+                bhi.w   SKSolid_ClearStalePush
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKCollision_ComputeNormalGravitySolidVerticalOverlapWithTwelveBitWrap
+                beq.s   SKSolid_ComputeWrapped12BitY
                 move.b  default_y_radius(a1),d4
                 ext.w   d4
                 add.w   d2,d4
@@ -403,11 +405,11 @@ SolidObject_cont:
                 andi.w  #$FFF,d3
                 add.w   d2,d4
                 cmp.w   d4,d3
-                bhs.w   SKCollision_ClearStalePushAndSelectWalkingWordAnimation
-                bra.s   SKCollision_GateSolidResponseAndChooseNearestHorizontalBoundary
+                bhs.w   SKSolid_ClearStalePush
+                bra.s   SKSolid_CheckStateAndResolveX
 ; ---------------------------------------------------------------------------
 
-SKCollision_ComputeNormalGravitySolidVerticalOverlapWithTwelveBitWrap:
+SKSolid_ComputeWrapped12BitY:
                 move.b  default_y_radius(a1),d4
                 ext.w   d4
                 add.w   d2,d4
@@ -421,62 +423,62 @@ SKCollision_ComputeNormalGravitySolidVerticalOverlapWithTwelveBitWrap:
                 andi.w  #$FFF,d3
                 add.w   d2,d4
                 cmp.w   d4,d3
-                bhs.w   SKCollision_ClearStalePushAndSelectWalkingWordAnimation
+                bhs.w   SKSolid_ClearStalePush
 
-SKCollision_GateSolidResponseAndChooseNearestHorizontalBoundary:
+SKSolid_CheckStateAndResolveX:
                 tst.b   object_control(a1)
-                bmi.w   SKCollision_ClearStalePushAndSelectWalkingWordAnimation
+                bmi.w   SKSolid_ClearStalePush
                 cmpi.b  #6,routine(a1)
-                bhs.w   SKCollision_ReturnSolidNoReportedCollision
+                bhs.w   SKSolid_ReturnZeroD4
                 tst.w   (Debug_placement_mode).w
-                bne.w   SKCollision_ReturnSolidNoReportedCollision
+                bne.w   SKSolid_ReturnZeroD4
                 move.w  d0,d5
                 cmp.w   d0,d1
-                bhs.s   SKCollision_ChooseNearestVerticalBoundaryForSolidResponse
+                bhs.s   SKSolid_ChooseYCorrection
                 add.w   d1,d1
                 sub.w   d1,d0
                 move.w  d0,d5
                 neg.w   d5
 
-SKCollision_ChooseNearestVerticalBoundaryForSolidResponse:
+SKSolid_ChooseYCorrection:
                 move.w  d3,d1
                 cmp.w   d3,d2
-                bhs.s   SKCollision_SelectVerticalResponseForShallowerOrFourPixelContact
+                bhs.s   SKSolid_ChooseResolutionAxis
                 subq.w  #4,d3
                 sub.w   d4,d3
                 move.w  d3,d1
                 neg.w   d1
 
-SKCollision_SelectVerticalResponseForShallowerOrFourPixelContact:
+SKSolid_ChooseResolutionAxis:
                 cmp.w   d1,d5
-                bhi.w   SKCollision_ClassifyVerticalSolidContactBySignedCorrectionAndSixteenPixels
+                bhi.w   SKSolidY_ClassifyContact
                 cmpi.w  #4,d1
-                bls.w   SKCollision_ClassifyVerticalSolidContactBySignedCorrectionAndSixteenPixels
+                bls.w   SKSolidY_ClassifyContact
 
-SKCollision_ChooseSideCollisionVelocityStopByCorrectionSign:
+SKSolidSide_CheckMotionDirection:
                 tst.w   d0
-                beq.s   SKCollision_ApplySidePositionCorrectionAndGroundedPushContact
-                bmi.s   SKCollision_TestNegativeSideCorrectionAgainstHorizontalVelocity
+                beq.s   SKSolidSide_SeparateAndMarkPush
+                bmi.s   SKSolidSide_CheckNegativeXMotion
                 tst.w   x_vel(a1)
-                bmi.s   SKCollision_ApplySidePositionCorrectionAndGroundedPushContact
-                bra.s   SKCollision_StopHorizontalMotionAndFlagTertiarySideImpact
+                bmi.s   SKSolidSide_SeparateAndMarkPush
+                bra.s   SKSolidSide_StopAndFlagImpact
 ; ---------------------------------------------------------------------------
 
-SKCollision_TestNegativeSideCorrectionAgainstHorizontalVelocity:
+SKSolidSide_CheckNegativeXMotion:
                 tst.w   x_vel(a1)
-                bpl.s   SKCollision_ApplySidePositionCorrectionAndGroundedPushContact
+                bpl.s   SKSolidSide_SeparateAndMarkPush
 
-SKCollision_StopHorizontalMotionAndFlagTertiarySideImpact:
+SKSolidSide_StopAndFlagImpact:
                 move.w  #0,ground_vel(a1)
                 move.w  #0,x_vel(a1)
                 tst.b   status_tertiary(a1)
-                bpl.s   SKCollision_ApplySidePositionCorrectionAndGroundedPushContact
+                bpl.s   SKSolidSide_SeparateAndMarkPush
                 bset    #6,status_tertiary(a1)
 
-SKCollision_ApplySidePositionCorrectionAndGroundedPushContact:
+SKSolidSide_SeparateAndMarkPush:
                 sub.w   d0,x_pos(a1)
                 btst    #Status_InAir,status(a1)
-                bne.s   SKCollision_ClearAirbornePushAndReportSideCollision
+                bne.s   SKSolidSide_ClearAirbornePush
                 move.l  d6,d4
                 addq.b  #pushing_bit_delta,d4
                 bset    d4,status(a0)
@@ -488,7 +490,7 @@ SKCollision_ApplySidePositionCorrectionAndGroundedPushContact:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_ClearAirbornePushAndReportSideCollision:
+SKSolidSide_ClearAirbornePush:
                 bsr.s   ClearPlayerPushingSolid
                 move.w  d6,d4
                 addi.b  #$D,d4
@@ -497,11 +499,11 @@ SKCollision_ClearAirbornePushAndReportSideCollision:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_ClearStalePushAndSelectWalkingWordAnimation:
+SKSolid_ClearStalePush:
                 move.l  d6,d4
                 addq.b  #pushing_bit_delta,d4
                 btst    d4,status(a0)
-                beq.s   SKCollision_ReturnSolidNoReportedCollision
+                beq.s   SKSolid_ReturnZeroD4
                 cmpi.b  #2,anim(a1)
                 beq.s   ClearPlayerPushingSolid
                 cmpi.b  #9,anim(a1)
@@ -517,50 +519,50 @@ ClearPlayerPushingSolid:
                 bclr    d4,status(a0)
                 bclr    #Status_Push,status(a1)
 
-SKCollision_ReturnSolidNoReportedCollision:
+SKSolid_ReturnZeroD4:
                 moveq   #0,d4
                 rts
 ; End of function ClearPlayerPushingSolid
 
 ; ---------------------------------------------------------------------------
 
-SKCollision_ClassifyVerticalSolidContactBySignedCorrectionAndSixteenPixels:
+SKSolidY_ClassifyContact:
                 tst.w   d3
-                bmi.s   SKCollision_ResolveUndersideByAirborneAndVerticalVelocity
+                bmi.s   SKSolidUnder_CheckPlayerMotion
                 cmpi.w  #$10,d3
-                blo.s   SKCollision_ValidateTopContactUsingVisualWidthBeforeSnap
-                bra.s   SKCollision_ClearStalePushAndSelectWalkingWordAnimation
+                blo.s   SKSolidTop_CheckVisualWidth
+                bra.s   SKSolid_ClearStalePush
 ; ---------------------------------------------------------------------------
 
-SKCollision_ResolveUndersideByAirborneAndVerticalVelocity:
+SKSolidUnder_CheckPlayerMotion:
                 btst    #Status_InAir,status(a1)
-                bne.s   SKCollision_ZeroAirborneGroundSpeedBeforeUndersideCorrection
+                bne.s   SKSolidUnder_StopGroundSpeed
                 tst.w   y_vel(a1)
-                beq.s   SKCollision_TestZeroVerticalSpeedGroundedCrushLateralDepth
+                beq.s   SKSolidUnder_MeasureCrushDepth
                 bpl.s   SKCollision_FlagTertiaryUndersideImpact
                 tst.w   d3
                 bpl.s   SKCollision_FlagTertiaryUndersideImpact
-                bra.s   SKCollision_ReflectUndersideCorrectionForReverseGravity
+                bra.s   SKSolidUnder_ApplyGravityToY
 ; ---------------------------------------------------------------------------
 
-SKCollision_ZeroAirborneGroundSpeedBeforeUndersideCorrection:
+SKSolidUnder_StopGroundSpeed:
                 move.w  #0,ground_vel(a1)
 
-SKCollision_ReflectUndersideCorrectionForReverseGravity:
+SKSolidUnder_ApplyGravityToY:
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKCollision_ApplyUndersideYCorrectionAndStopVerticalSpeed
+                beq.s   SKSolidUnder_SeparateAndStopY
                 neg.w   d3
 
-SKCollision_ApplyUndersideYCorrectionAndStopVerticalSpeed:
+SKSolidUnder_SeparateAndStopY:
                 sub.w   d3,y_pos(a1)
                 move.w  #0,y_vel(a1)
 
 SKCollision_FlagTertiaryUndersideImpact:
                 tst.b   status_tertiary(a1)
-                bpl.s   SKCollision_AccumulateUndersideContactAndReturnMinusTwo
+                bpl.s   SKSolidUnder_MarkAndReturnMinus2
                 bset    #5,status_tertiary(a1)
 
-SKCollision_AccumulateUndersideContactAndReturnMinusTwo:
+SKSolidUnder_MarkAndReturnMinus2:
                 move.w  d6,d4
                 addi.b  #$F,d4
                 bset    d4,d6
@@ -568,16 +570,17 @@ SKCollision_AccumulateUndersideContactAndReturnMinusTwo:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_TestZeroVerticalSpeedGroundedCrushLateralDepth:
+SKSolidUnder_MeasureCrushDepth:
                 btst    #Status_InAir,status(a1)
                 bne.s   SKCollision_FlagTertiaryUndersideImpact
                 move.w  d0,d4
-                bpl.s   SKCollision_KillCrushedPlayerUnlessNearHorizontalEdge
+                bpl.s   SKSolidUnder_CheckCrush
                 neg.w   d4
 
-SKCollision_KillCrushedPlayerUnlessNearHorizontalEdge:
+; Route penetration below 16 pixels to side resolution
+SKSolidUnder_CheckCrush:
                 cmpi.w  #$10,d4
-                blo.w   SKCollision_ChooseSideCollisionVelocityStopByCorrectionSign
+                blo.w   SKSolidSide_CheckMotionDirection
                 move.l  a0,-(sp)
                 movea.l a1,a0
                 jsr     (Kill_Character).l
@@ -589,7 +592,7 @@ SKCollision_KillCrushedPlayerUnlessNearHorizontalEdge:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_ValidateTopContactUsingVisualWidthBeforeSnap:
+SKSolidTop_CheckVisualWidth:
                 subq.w  #4,d3
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
@@ -597,19 +600,20 @@ SKCollision_ValidateTopContactUsingVisualWidthBeforeSnap:
                 add.w   d2,d2
                 add.w   x_pos(a1),d1
                 sub.w   x_pos(a0),d1
-                bmi.s   SKCollision_ReturnRejectedTopContactWithZeroD4
+                bmi.s   SKSolidTop_ReturnZeroD4
                 cmp.w   d2,d1
-                bhs.s   SKCollision_ReturnRejectedTopContactWithZeroD4
+                bhs.s   SKSolidTop_ReturnZeroD4
                 subq.w  #1,y_pos(a1)
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKCollision_SnapTopContactAndAttachOnlyForNonnegativeVerticalVelocity
+                beq.s   SKSolidTop_SnapAndTryRide
                 neg.w   d3
                 addq.w  #2,y_pos(a1)
 
-SKCollision_SnapTopContactAndAttachOnlyForNonnegativeVerticalVelocity:
+; Position correction precedes the velocity check. Only a nonnegative Y speed attaches the rider
+SKSolidTop_SnapAndTryRide:
                 sub.w   d3,y_pos(a1)
                 tst.w   y_vel(a1)
-                bmi.s   SKCollision_ReturnRejectedTopContactWithZeroD4
+                bmi.s   SKSolidTop_ReturnZeroD4
                 bsr.w   RideObject_SetRide
                 move.w  d6,d4
                 addi.b  #$11,d4
@@ -618,7 +622,7 @@ SKCollision_SnapTopContactAndAttachOnlyForNonnegativeVerticalVelocity:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_ReturnRejectedTopContactWithZeroD4:
+SKSolidTop_ReturnZeroD4:
                 moveq   #0,d4
                 rts
 
@@ -626,36 +630,36 @@ SKCollision_ReturnRejectedTopContactWithZeroD4:
 
 MvSonicOnPtfm:
                 tst.b   (Reverse_gravity_flag).w
-                bne.s   SKCollision_ComputeReverseGravityFlatRiderSurface
+                bne.s   SKSolidRide_ComputeReverseSurface
                 move.w  y_pos(a0),d0
                 sub.w   d3,d0
-                bra.s   SKCollision_MoveFlatRiderAboveSurfaceWithControlAndDebugGates
+                bra.s   SKSolidRide_CarryAboveSurface
 ; ---------------------------------------------------------------------------
 
-SKCollision_ComputeReverseGravityFlatRiderSurface:
+SKSolidRide_ComputeReverseSurface:
                 move.w  y_pos(a0),d0
                 add.w   d3,d0
-                bra.s   SKCollision_MoveFlatRiderBelowSurfaceForReverseGravity
+                bra.s   SKSolidRide_CarryBelowSurface
 ; ---------------------------------------------------------------------------
 ; This is hilarious. The unused S1 code was upgraded with an S3K feature
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKCollision_ComputeRetainedFixedNinePixelNormalRiderSurface
+                beq.s   SKSolidRide_ComputeSurfaceMinus9
                 move.w  y_pos(a0),d0
                 addi.w  #9,d0
-                bra.s   SKCollision_MoveFlatRiderBelowSurfaceForReverseGravity
+                bra.s   SKSolidRide_CarryBelowSurface
 ; ---------------------------------------------------------------------------
 
-SKCollision_ComputeRetainedFixedNinePixelNormalRiderSurface:
+SKSolidRide_ComputeSurfaceMinus9:
                 move.w  y_pos(a0),d0
                 subi.w  #9,d0
 
-SKCollision_MoveFlatRiderAboveSurfaceWithControlAndDebugGates:
+SKSolidRide_CarryAboveSurface:
                 tst.b   object_control(a1)
-                bmi.s   SKCollision_ReturnNormalGravityFlatRiderMover
+                bmi.s   SKSolidRide_AboveReturn
                 cmpi.b  #6,routine(a1)
-                bhs.s   SKCollision_ReturnNormalGravityFlatRiderMover
+                bhs.s   SKSolidRide_AboveReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   SKCollision_ReturnNormalGravityFlatRiderMover
+                bne.s   SKSolidRide_AboveReturn
                 moveq   #0,d1
                 move.b  y_radius(a1),d1
                 sub.w   d1,d0
@@ -663,17 +667,17 @@ SKCollision_MoveFlatRiderAboveSurfaceWithControlAndDebugGates:
                 sub.w   x_pos(a0),d2
                 sub.w   d2,x_pos(a1)
 
-SKCollision_ReturnNormalGravityFlatRiderMover:
+SKSolidRide_AboveReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_MoveFlatRiderBelowSurfaceForReverseGravity:
+SKSolidRide_CarryBelowSurface:
                 tst.b   object_control(a1)
-                bmi.s   SKCollision_ReturnReverseGravityFlatRiderMover
+                bmi.s   SKSolidRide_BelowReturn
                 cmpi.b  #6,routine(a1)
-                bhs.s   SKCollision_ReturnReverseGravityFlatRiderMover
+                bhs.s   SKSolidRide_BelowReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   SKCollision_ReturnReverseGravityFlatRiderMover
+                bne.s   SKSolidRide_BelowReturn
                 moveq   #0,d1
                 move.b  y_radius(a1),d1
                 add.w   d1,d0
@@ -681,6 +685,6 @@ SKCollision_MoveFlatRiderBelowSurfaceForReverseGravity:
                 sub.w   x_pos(a0),d2
                 sub.w   d2,x_pos(a1)
 
-SKCollision_ReturnReverseGravityFlatRiderMover:
+SKSolidRide_BelowReturn:
                 rts
 ; End of function MvSonicOnPtfm

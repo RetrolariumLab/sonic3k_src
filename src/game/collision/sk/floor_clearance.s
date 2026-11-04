@@ -13,10 +13,10 @@
 CalcRoomOverHead:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   SKCollision_SelectOverheadSolidityAndDispatchRoundedSpineQuadrant
+                beq.s   SKClearance_DispatchOverhead
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-SKCollision_SelectOverheadSolidityAndDispatchRoundedSpineQuadrant:
+SKClearance_DispatchOverhead:
                 move.b  lrb_solid_bit(a0),d5
                 move.b  d0,(Primary_Angle).w
                 move.b  d0,(Secondary_Angle).w
@@ -39,10 +39,10 @@ SKCollision_SelectOverheadSolidityAndDispatchRoundedSpineQuadrant:
 Sonic_CheckFloor:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   SKCollision_ProbeBothBottomCornersOnSelectedTopLayer
+                beq.s   SKClearance_ProbeFeet
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-SKCollision_ProbeBothBottomCornersOnSelectedTopLayer:
+SKClearance_ProbeFeet:
                 move.b  top_solid_bit(a0),d5
                 move.w  y_pos(a0),d2
                 move.w  x_pos(a0),d3
@@ -74,19 +74,19 @@ SKCollision_ProbeBothBottomCornersOnSelectedTopLayer:
                 move.w  (sp)+,d0
                 move.b  #0,d2
 
-SKCollision_SelectNearerCornerDistanceAndItsAngle:
+SKClearance_PickNearerCorner:
                 move.b  (Secondary_Angle).w,d3
                 cmp.w   d0,d1
-                ble.s   SKCollision_ReplaceOddSelectedSurfaceAngleWithCallerFallback
+                ble.s   SKClearance_FilterCornerAngle
                 move.b  (Primary_Angle).w,d3
                 exg     d0,d1
 
-SKCollision_ReplaceOddSelectedSurfaceAngleWithCallerFallback:
+SKClearance_FilterCornerAngle:
                 btst    #0,d3
-                beq.s   SKCollision_ReturnSelectedCornerClearanceAndAngle
+                beq.s   SKClearance_CornerReturn
                 move.b  d2,d3
 
-SKCollision_ReturnSelectedCornerClearanceAndAngle:
+SKClearance_CornerReturn:
                 rts
 ; End of function Sonic_CheckFloor
 
@@ -115,13 +115,13 @@ CheckFloorDist_Part2:
 
 ; d2 what to use as angle if (Primary_Angle).w is odd
 ; returns angle in d3, or value in d2 if angle was odd
-SKCollision_ReadPrimaryProbeAngleWithOddFallback:
+SKClearance_FilterPrimaryAngle:
                 move.b  (Primary_Angle).w,d3
                 btst    #0,d3
-                beq.s   SKCollision_ReturnSingleProbeClearanceAngle
+                beq.s   SKClearance_PrimaryReturn
                 move.b  d2,d3
 
-SKCollision_ReturnSingleProbeClearanceAngle:
+SKClearance_PrimaryReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -135,7 +135,7 @@ ProbeFloorWithXRadiusOffset:
                 move.w  #0,d6
                 bsr.w   FindFloor
                 move.b  #0,d2
-                bra.s   SKCollision_ReadPrimaryProbeAngleWithOddFallback
+                bra.s   SKClearance_FilterPrimaryAngle
 ; End of function ProbeFloorWithXRadiusOffset
 
 ; =============== S U B R O U T I N E =======================================
@@ -146,10 +146,11 @@ CheckPlayerBodyFloorClearance:
                 subq.w  #4,d2
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$D,lrb_solid_bit(a0)
-                beq.s   SKCollision_ProbePlayerBodyAtYMinusFourWithLayerAndSavedAddressRegisters
+                beq.s   SKClearance_ProbeBodyFloor
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-SKCollision_ProbePlayerBodyAtYMinusFourWithLayerAndSavedAddressRegisters:
+; Use side solidity for this floor probe and preserve A4 through A6
+SKClearance_ProbeBodyFloor:
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
                 movea.w #Collision_Scan_Step,a3
@@ -182,10 +183,11 @@ ChkFloorEdge_Part2:
 ChkFloorEdge_Part3:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   SKCollision_ProbeActorFloorEdgeWithSavedAddressRegisters
+                beq.s   SKClearance_ProbeFloorEdge
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-SKCollision_ProbeActorFloorEdgeWithSavedAddressRegisters:
+; Use top solidity and preserve A4 through A6
+SKClearance_ProbeFloorEdge:
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
                 movea.w #Collision_Scan_Step,a3
@@ -214,10 +216,10 @@ SonicOnObjHitFloor:
                 add.w   d0,d2
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a1)
-                beq.s   SKCollision_ProbeRidingPlayerFloorUsingA1Actor
+                beq.s   SKClearance_ProbeRiderFeet
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-SKCollision_ProbeRidingPlayerFloorUsingA1Actor:
+SKClearance_ProbeRiderFeet:
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
                 movea.w #Collision_Scan_Step,a3
@@ -226,10 +228,10 @@ SKCollision_ProbeRidingPlayerFloorUsingA1Actor:
                 bsr.w   FindFloor
                 move.b  (Primary_Angle).w,d3
                 btst    #0,d3
-                beq.s   SKCollision_ReturnRidingPlayerFloorContactProbe
+                beq.s   SKClearance_RiderFloorReturn
                 move.b  #0,d3
 
-SKCollision_ReturnRidingPlayerFloorContactProbe:
+SKClearance_RiderFloorReturn:
                 rts
 ; End of function SonicOnObjHitFloor
 
@@ -256,10 +258,10 @@ ObjCheckFloorDist2:
                 bsr.w   FindFloor
                 move.b  (Primary_Angle).w,d3
                 btst    #0,d3
-                beq.s   SKCollision_ReturnObjectBottomFloorDistance
+                beq.s   SKClearance_ObjectFloorReturn
                 move.b  #0,d3
 
-SKCollision_ReturnObjectBottomFloorDistance:
+SKClearance_ObjectFloorReturn:
                 rts
 ; End of function ObjCheckFloorDist
 

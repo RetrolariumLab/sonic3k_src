@@ -4,44 +4,44 @@
 Player_AnglePos:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   SKCollision_BypassTerrainAttachmentForObjectRider
+                beq.s   SKAttach_CheckObjectRider
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-SKCollision_BypassTerrainAttachmentForObjectRider:
+SKAttach_CheckObjectRider:
                 move.b  top_solid_bit(a0),d5
                 btst    #Status_OnObj,status(a0)
-                beq.s   SKCollision_SeedUnresolvedAnglesAndRoundAttachmentQuadrant
+                beq.s   SKAttach_InitAnglesAndRound
                 moveq   #0,d0
                 move.b  d0,(Primary_Angle).w
                 move.b  d0,(Secondary_Angle).w
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_SeedUnresolvedAnglesAndRoundAttachmentQuadrant:
+SKAttach_InitAnglesAndRound:
                 moveq   #3,d0
                 move.b  d0,(Primary_Angle).w
                 move.b  d0,(Secondary_Angle).w
                 move.b  angle(a0),d0
                 addi.b  #$20,d0
-                bpl.s   SKCollision_AdjustNegativeAngleInNonnegativeAttachmentBiasHalf
+                bpl.s   SKAttach_AdjustLowerHalfAngle
                 move.b  angle(a0),d0
-                bpl.s   SKCollision_CompleteNegativeHalfAttachmentQuadrantBias
+                bpl.s   SKAttach_UpperHalfBias
                 subq.b  #1,d0
 
-SKCollision_CompleteNegativeHalfAttachmentQuadrantBias:
+SKAttach_UpperHalfBias:
                 addi.b  #$20,d0
-                bra.s   SKCollision_DispatchAttachmentAxisAndProbeFloorCorners
+                bra.s   SKAttach_DispatchSurface
 ; ---------------------------------------------------------------------------
 
-SKCollision_AdjustNegativeAngleInNonnegativeAttachmentBiasHalf:
+SKAttach_AdjustLowerHalfAngle:
                 move.b  angle(a0),d0
-                bpl.s   SKCollision_AddLowerHalfAttachmentQuadrantBias
+                bpl.s   SKAttach_LowerHalfBias
                 addq.b  #1,d0
 
-SKCollision_AddLowerHalfAttachmentQuadrantBias:
+SKAttach_LowerHalfBias:
                 addi.b  #$1F,d0
 
-SKCollision_DispatchAttachmentAxisAndProbeFloorCorners:
+SKAttach_DispatchSurface:
                 andi.b  #$C0,d0
                 cmpi.b  #$40,d0
                 beq.w   Player_WalkVertL
@@ -80,39 +80,41 @@ SKCollision_DispatchAttachmentAxisAndProbeFloorCorners:
                 move.w  (sp)+,d0
                 bsr.w   Player_Angle
                 tst.w   d1
-                beq.s   SKCollision_ReturnFloorAttachmentWithoutFurtherCorrection
-                bpl.s   SKCollision_TestFloorGapAgainstConvexOverrideAndHorizontalSpeedHighByte
+                beq.s   SKAttachFloor_Return
+                bpl.s   SKAttachFloor_CheckGap
                 cmpi.w  #-$E,d1
-                blt.s   SKCollision_ReturnFloorAttachmentWithoutFurtherCorrection
+                blt.s   SKAttachFloor_Return
                 add.w   d1,y_pos(a0)
 
-SKCollision_ReturnFloorAttachmentWithoutFurtherCorrection:
+SKAttachFloor_Return:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_TestFloorGapAgainstConvexOverrideAndHorizontalSpeedHighByte:
+; The convex flag bypasses the speed-based gap limit
+SKAttachFloor_CheckGap:
                 tst.b   stick_to_convex(a0)
-                bne.s   SKCollision_SnapFloorAttachmentByFullWordDistance
+                bne.s   SKAttachFloor_SnapY
                 move.b  x_vel(a0),d0
-                bpl.s   SKCollision_ClampFloorAttachmentGapAllowanceFromByteSpeed
+                bpl.s   SKAttachFloor_ClampGapLimit
                 neg.b   d0
 
-SKCollision_ClampFloorAttachmentGapAllowanceFromByteSpeed:
+; Use the magnitude of the high byte of X speed plus four, capped at 14 pixels
+SKAttachFloor_ClampGapLimit:
                 addq.b  #4,d0
                 cmpi.b  #$E,d0
-                blo.s   SKCollision_CompareFloorGapLowByteAgainstAllowance
+                blo.s   SKAttachFloor_CompareGapByte
                 move.b  #$E,d0
 
-SKCollision_CompareFloorGapLowByteAgainstAllowance:
+SKAttachFloor_CompareGapByte:
                 cmp.b   d0,d1
-                bgt.s   SKCollision_DetachFromFloorAndRestartAnimation
+                bgt.s   SKAttachFloor_Detach
 
-SKCollision_SnapFloorAttachmentByFullWordDistance:
+SKAttachFloor_SnapY:
                 add.w   d1,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_DetachFromFloorAndRestartAnimation:
+SKAttachFloor_Detach:
                 bset    #Status_InAir,status(a0)
                 bclr    #Status_Push,status(a0)
                 move.b  #1,prev_anim(a0)
@@ -125,27 +127,28 @@ Player_Angle:
                 move.w  d0,d3
                 move.b  (Secondary_Angle).w,d2
                 cmp.w   d0,d1
-                ble.s   SKCollision_AcceptSelectedSurfaceAngleOnlyWithinByteDeltaTwentyHex
+                ble.s   SKAttachAngle_CheckSample
                 move.b  (Primary_Angle).w,d2
                 move.w  d1,d3
                 move.w  d0,d1
 
-SKCollision_AcceptSelectedSurfaceAngleOnlyWithinByteDeltaTwentyHex:
+SKAttachAngle_CheckSample:
                 btst    #0,d2
-                bne.s   SKCollision_QuantizeExistingAngleWhenSampleOddOrAbrupt
+                bne.s   SKAttachAngle_RoundCurrent
                 move.b  d2,d0
                 sub.b   angle(a0),d0
-                bpl.s   SKCollision_ApplySurfaceAngleDeltaThresholdOrQuantize
+                bpl.s   SKAttachAngle_CheckDelta
                 neg.b   d0
 
-SKCollision_ApplySurfaceAngleDeltaThresholdOrQuantize:
+; Accept angle changes below $20. Larger changes use the current angle's quadrant
+SKAttachAngle_CheckDelta:
                 cmpi.b  #$20,d0
-                bhs.s   SKCollision_QuantizeExistingAngleWhenSampleOddOrAbrupt
+                bhs.s   SKAttachAngle_RoundCurrent
                 move.b  d2,angle(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_QuantizeExistingAngleWhenSampleOddOrAbrupt:
+SKAttachAngle_RoundCurrent:
                 move.b  angle(a0),d2
                 addi.b  #$20,d2
                 andi.b  #$C0,d2
@@ -188,24 +191,25 @@ Player_WalkVertR:
                 bsr.w   Player_Angle
                 tst.w   d1
                 beq.s   SKCollision_ReturnRightWallAttachment
-                bpl.s   SKCollision_TestRightWallGapAgainstConvexOrVerticalSpeedHighByte
+                bpl.s   SKAttachRight_CheckGap
                 cmpi.w  #-$E,d1
-                blt.s   SKCollision_ArmRightWallDeepOverlapRetryOnlyInZoneActZero
+                blt.s   SKAttachRight_ArmAngleHold
                 tst.b   $41(a0)
-                bne.s   SKCollision_CountDownRightWallDeepOverlapRetry
+                bne.s   SKAttachRight_TickAngleHold
                 add.w   d1,x_pos(a0)
 
 SKCollision_ReturnRightWallAttachment:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_CountDownRightWallDeepOverlapRetry:
+SKAttachRight_TickAngleHold:
                 subq.b  #1,$41(a0)
                 move.b  #$C0,angle(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_ArmRightWallDeepOverlapRetryOnlyInZoneActZero:
+; Only zone/act $0000 holds the $C0 wall angle for three updates
+SKAttachRight_ArmAngleHold:
                 tst.w   (Current_zone_and_act).w
                 bne.s   SKCollision_ReturnRightWallAttachment
                 move.b  #$C0,angle(a0)
@@ -213,14 +217,14 @@ SKCollision_ArmRightWallDeepOverlapRetryOnlyInZoneActZero:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_TestRightWallGapAgainstConvexOrVerticalSpeedHighByte:
+SKAttachRight_CheckGap:
                 tst.b   stick_to_convex(a0)
-                bne.s   SKCollision_SnapRightWallAttachmentByWordDistance
+                bne.s   SKAttachRight_SnapX
                 move.b  y_vel(a0),d0
-                bpl.s   SKCollision_ClampRightWallGapAllowanceByte
+                bpl.s   SKAttachRight_ClampGapLimit
                 neg.b   d0
 
-SKCollision_ClampRightWallGapAllowanceByte:
+SKAttachRight_ClampGapLimit:
                 addq.b  #4,d0
                 cmpi.b  #$E,d0
                 blo.s   SKCollision_CompareRightWallGapLowByte
@@ -228,14 +232,14 @@ SKCollision_ClampRightWallGapAllowanceByte:
 
 SKCollision_CompareRightWallGapLowByte:
                 cmp.b   d0,d1
-                bgt.s   SKCollision_DetachFromRightWallAndRestartAnimation
+                bgt.s   SKAttachRight_Detach
 
-SKCollision_SnapRightWallAttachmentByWordDistance:
+SKAttachRight_SnapX:
                 add.w   d1,x_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_DetachFromRightWallAndRestartAnimation:
+SKAttachRight_Detach:
                 bset    #Status_InAir,status(a0)
                 bclr    #Status_Push,status(a0)
                 move.b  #1,prev_anim(a0)
@@ -276,7 +280,7 @@ Player_WalkCeiling:
                 bsr.w   Player_Angle
                 tst.w   d1
                 beq.s   SKCollision_ReturnCeilingAttachment
-                bpl.s   SKCollision_TestCeilingGapAgainstConvexOrHorizontalSpeedHighByte
+                bpl.s   SKAttachCeiling_CheckGap
                 cmpi.w  #-$E,d1
                 blt.s   SKCollision_ReturnCeilingAttachment
                 sub.w   d1,y_pos(a0)
@@ -285,9 +289,9 @@ SKCollision_ReturnCeilingAttachment:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_TestCeilingGapAgainstConvexOrHorizontalSpeedHighByte:
+SKAttachCeiling_CheckGap:
                 tst.b   stick_to_convex(a0)
-                bne.s   SKCollision_SnapCeilingAttachmentByWordDistance
+                bne.s   SKAttachCeiling_SnapY
                 move.b  x_vel(a0),d0
                 bpl.s   SKCollision_ClampCeilingGapAllowanceByte
                 neg.b   d0
@@ -300,14 +304,14 @@ SKCollision_ClampCeilingGapAllowanceByte:
 
 SKCollision_CompareCeilingGapLowByte:
                 cmp.b   d0,d1
-                bgt.s   SKCollision_DetachFromCeilingAndRestartAnimation
+                bgt.s   SKAttachCeiling_Detach
 
-SKCollision_SnapCeilingAttachmentByWordDistance:
+SKAttachCeiling_SnapY:
                 sub.w   d1,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_DetachFromCeilingAndRestartAnimation:
+SKAttachCeiling_Detach:
                 bset    #Status_InAir,status(a0)
                 bclr    #Status_Push,status(a0)
                 move.b  #1,prev_anim(a0)
@@ -348,7 +352,7 @@ Player_WalkVertL:
                 bsr.w   Player_Angle
                 tst.w   d1
                 beq.s   SKCollision_ReturnLeftWallAttachment
-                bpl.s   SKCollision_TestLeftWallGapAgainstConvexOrVerticalSpeedHighByte
+                bpl.s   SKAttachLeft_CheckGap
                 cmpi.w  #-$E,d1
                 blt.s   SKCollision_ReturnLeftWallAttachment
                 sub.w   d1,x_pos(a0)
@@ -357,14 +361,14 @@ SKCollision_ReturnLeftWallAttachment:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_TestLeftWallGapAgainstConvexOrVerticalSpeedHighByte:
+SKAttachLeft_CheckGap:
                 tst.b   stick_to_convex(a0)
-                bne.s   SKCollision_SnapLeftWallAttachmentByWordDistance
+                bne.s   SKAttachLeft_SnapX
                 move.b  y_vel(a0),d0
-                bpl.s   SKCollision_ClampLeftWallGapAllowanceByte
+                bpl.s   SKAttachLeft_ClampGapLimit
                 neg.b   d0
 
-SKCollision_ClampLeftWallGapAllowanceByte:
+SKAttachLeft_ClampGapLimit:
                 addq.b  #4,d0
                 cmpi.b  #$E,d0
                 blo.s   SKCollision_CompareLeftWallGapLowByte
@@ -372,14 +376,14 @@ SKCollision_ClampLeftWallGapAllowanceByte:
 
 SKCollision_CompareLeftWallGapLowByte:
                 cmp.b   d0,d1
-                bgt.s   SKCollision_DetachFromLeftWallAndRestartAnimation
+                bgt.s   SKAttachLeft_Detach
 
-SKCollision_SnapLeftWallAttachmentByWordDistance:
+SKAttachLeft_SnapX:
                 sub.w   d1,x_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_DetachFromLeftWallAndRestartAnimation:
+SKAttachLeft_Detach:
                 bset    #Status_InAir,status(a0)
                 bclr    #Status_Push,status(a0)
                 move.b  #1,prev_anim(a0)

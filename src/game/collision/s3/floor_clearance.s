@@ -13,10 +13,10 @@
 CalcRoomOverHead:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   S3Collision_DispatchOverheadProbeFromRoundedSpineAngle
+                beq.s   S3Clearance_DispatchOverhead
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-S3Collision_DispatchOverheadProbeFromRoundedSpineAngle:
+S3Clearance_DispatchOverhead:
                 move.b  lrb_solid_bit(a0),d5
                 move.b  d0,(Primary_Angle).w
                 move.b  d0,(Secondary_Angle).w
@@ -39,10 +39,10 @@ S3Collision_DispatchOverheadProbeFromRoundedSpineAngle:
 Sonic_CheckFloor:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   S3Collision_ProbeBothFeetUsingTopSolidity
+                beq.s   S3Clearance_ProbeFeet
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-S3Collision_ProbeBothFeetUsingTopSolidity:
+S3Clearance_ProbeFeet:
                 move.b  top_solid_bit(a0),d5
                 move.w  y_pos(a0),d2
                 move.w  x_pos(a0),d3
@@ -74,19 +74,19 @@ S3Collision_ProbeBothFeetUsingTopSolidity:
                 move.w  (sp)+,d0
                 move.b  #0,d2
 
-S3Collision_SelectSmallerPairedClearanceAndItsAngle:
+S3Clearance_PickNearerCorner:
                 move.b  (Secondary_Angle).w,d3
                 cmp.w   d0,d1
-                ble.s   S3Collision_ReplaceOddPairedClearanceAngleWithAxis
+                ble.s   S3Clearance_FilterCornerAngle
                 move.b  (Primary_Angle).w,d3
                 exg     d0,d1
 
-S3Collision_ReplaceOddPairedClearanceAngleWithAxis:
+S3Clearance_FilterCornerAngle:
                 btst    #0,d3
-                beq.s   S3Collision_ReturnPairedClearanceDistanceAndAngle
+                beq.s   S3Clearance_CornerReturn
                 move.b  d2,d3
 
-S3Collision_ReturnPairedClearanceDistanceAndAngle:
+S3Clearance_CornerReturn:
                 rts
 ; End of function Sonic_CheckFloor
 
@@ -115,13 +115,13 @@ CheckFloorDist_Part2:
 
 ; d2 what to use as angle if (Primary_Angle).w is odd
 ; returns angle in d3, or value in d2 if angle was odd
-S3Collision_ReplaceOddPrimaryClearanceAngleWithAxis:
+S3Clearance_FilterPrimaryAngle:
                 move.b  (Primary_Angle).w,d3
                 btst    #0,d3
-                beq.s   S3Collision_ReturnPrimaryClearanceDistanceAndAngle
+                beq.s   S3Clearance_PrimaryReturn
                 move.b  d2,d3
 
-S3Collision_ReturnPrimaryClearanceDistanceAndAngle:
+S3Clearance_PrimaryReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -135,7 +135,7 @@ ProbeFloorWithXRadiusOffset:
                 move.w  #0,d6
                 bsr.w   FindFloor
                 move.b  #0,d2
-                bra.s   S3Collision_ReplaceOddPrimaryClearanceAngleWithAxis
+                bra.s   S3Clearance_FilterPrimaryAngle
 ; End of function ProbeFloorWithXRadiusOffset
 
 ; =============== S U B R O U T I N E =======================================
@@ -146,10 +146,11 @@ CheckPlayerBodyFloorClearance:
                 subq.w  #4,d2
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$D,lrb_solid_bit(a0)
-                beq.s   S3Collision_ProbeBodyFloorUsingSideSolidity
+                beq.s   S3Clearance_ProbeBodyFloor
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-S3Collision_ProbeBodyFloorUsingSideSolidity:
+; Use side solidity for this floor probe and preserve A4 through A6
+S3Clearance_ProbeBodyFloor:
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
                 movea.w #Collision_Scan_Step,a3
@@ -160,10 +161,10 @@ S3Collision_ProbeBodyFloorUsingSideSolidity:
                 movem.l (sp)+,a4-a6
                 move.b  (Primary_Angle).w,d3
                 btst    #0,d3
-                beq.s   S3Collision_ReturnBodyFloorClearanceAfterAddressRestore
+                beq.s   S3Clearance_BodyFloorReturn
                 move.b  #0,d3
 
-S3Collision_ReturnBodyFloorClearanceAfterAddressRestore:
+S3Clearance_BodyFloorReturn:
                 rts
 ; End of function CheckPlayerBodyFloorClearance
 
@@ -182,10 +183,11 @@ ChkFloorEdge_Part2:
 ChkFloorEdge_Part3:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   S3Collision_ProbeFloorEdgeUsingTopSolidity
+                beq.s   S3Clearance_ProbeFloorEdge
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-S3Collision_ProbeFloorEdgeUsingTopSolidity:
+; Use top solidity and preserve A4 through A6
+S3Clearance_ProbeFloorEdge:
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
                 movea.w #Collision_Scan_Step,a3
@@ -196,10 +198,10 @@ S3Collision_ProbeFloorEdgeUsingTopSolidity:
                 movem.l (sp)+,a4-a6
                 move.b  (Primary_Angle).w,d3
                 btst    #0,d3
-                beq.s   S3Collision_ReturnFloorEdgeProbeAfterAddressRestore
+                beq.s   S3Clearance_FloorEdgeReturn
                 move.b  #0,d3
 
-S3Collision_ReturnFloorEdgeProbeAfterAddressRestore:
+S3Clearance_FloorEdgeReturn:
                 rts
 ; End of function ChkFloorEdge
 
@@ -214,10 +216,10 @@ SonicOnObjHitFloor:
                 add.w   d0,d2
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a1)
-                beq.s   S3Collision_ProbeA1RiderFeetUsingTopSolidity
+                beq.s   S3Clearance_ProbeRiderFeet
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-S3Collision_ProbeA1RiderFeetUsingTopSolidity:
+S3Clearance_ProbeRiderFeet:
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
                 movea.w #Collision_Scan_Step,a3
@@ -256,10 +258,10 @@ ObjCheckFloorDist2:
                 bsr.w   FindFloor
                 move.b  (Primary_Angle).w,d3
                 btst    #0,d3
-                beq.s   S3Collision_ReturnObjectFloorDistanceAndFilteredAngle
+                beq.s   S3Clearance_ObjectFloorReturn
                 move.b  #0,d3
 
-S3Collision_ReturnObjectFloorDistanceAndFilteredAngle:
+S3Clearance_ObjectFloorReturn:
                 rts
 ; End of function ObjCheckFloorDist
 

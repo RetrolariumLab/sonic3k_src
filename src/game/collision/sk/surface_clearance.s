@@ -34,7 +34,7 @@ CheckRightCeilingDist:
                 bsr.w   FindWall
                 move.w  (sp)+,d0
                 move.b  #-$40,d2
-                bra.w   SKCollision_SelectNearerCornerDistanceAndItsAngle
+                bra.w   SKClearance_PickNearerCorner
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -68,7 +68,7 @@ ProbeRightWallAtBodyExtents:
                 bsr.w   FindWall
                 move.w  (sp)+,d0
                 move.b  #-$40,d2
-                bra.w   SKCollision_SelectNearerCornerDistanceAndItsAngle
+                bra.w   SKClearance_PickNearerCorner
 ; End of function ProbeRightWallAtBodyExtents
 
 ; =============== S U B R O U T I N E =======================================
@@ -77,19 +77,19 @@ CheckRightWallDist:
                 move.w  y_pos(a0),d2
                 move.w  x_pos(a0),d3
                 tst.w   (Competition_mode).w
-                bne.s   SKCollision_ProbeRightWallAtSignedBodyXRadius
+                bne.s   SKClearance_RightAtXRadius
 
-SKCollision_ProbeRightWallAtFixedTenPixelOffset:
+SKClearance_RightAt10px:
                 addi.w  #$A,d3
                 lea     (Primary_Angle).w,a4
                 movea.w #Collision_Scan_Step,a3
                 move.w  #0,d6
                 bsr.w   FindWall
                 move.b  #-$40,d2
-                bra.w   SKCollision_ReadPrimaryProbeAngleWithOddFallback
+                bra.w   SKClearance_FilterPrimaryAngle
 ; ---------------------------------------------------------------------------
 
-SKCollision_ProbeRightWallAtSignedBodyXRadius:
+SKClearance_RightAtXRadius:
                 move.b  x_radius(a0),d0
                 ext.w   d0
                 add.w   d0,d3
@@ -98,7 +98,7 @@ SKCollision_ProbeRightWallAtSignedBodyXRadius:
                 move.w  #0,d6
                 bsr.w   FindWall
                 move.b  #-$40,d2
-                bra.w   SKCollision_ReadPrimaryProbeAngleWithOddFallback
+                bra.w   SKClearance_FilterPrimaryAngle
 ; End of function CheckRightWallDist
 
 ; =============== S U B R O U T I N E =======================================
@@ -114,10 +114,10 @@ ObjCheckRightWallDist:
                 bsr.w   FindWall
                 move.b  (Primary_Angle).w,d3
                 btst    #0,d3
-                beq.s   SKCollision_ReturnObjectRightWallProbeWithAngleFallback
+                beq.s   SKClearance_RightReturn
                 move.b  #-$40,d3
 
-SKCollision_ReturnObjectRightWallProbeWithAngleFallback:
+SKClearance_RightReturn:
                 rts
 ; End of function ObjCheckRightWallDist
 
@@ -155,7 +155,7 @@ Sonic_CheckCeiling:
                 bsr.w   FindFloor
                 move.w  (sp)+,d0
                 move.b  #$80,d2
-                bra.w   SKCollision_SelectNearerCornerDistanceAndItsAngle
+                bra.w   SKClearance_PickNearerCorner
 ; End of function Sonic_CheckCeiling
 
 ; =============== S U B R O U T I N E =======================================
@@ -194,7 +194,7 @@ ProbeCeilingWithInsetHorizontalRadius:
                 bsr.w   FindFloor
                 move.w  (sp)+,d0
                 move.b  #$80,d2
-                bra.w   SKCollision_SelectNearerCornerDistanceAndItsAngle
+                bra.w   SKClearance_PickNearerCorner
 ; End of function ProbeCeilingWithInsetHorizontalRadius
 
 ; ---------------------------------------------------------------------------
@@ -211,7 +211,7 @@ CheckCeilingDist_Part2:
                 move.w  #$800,d6
                 bsr.w   FindFloor
                 move.b  #$80,d2
-                bra.w   SKCollision_ReadPrimaryProbeAngleWithOddFallback
+                bra.w   SKClearance_FilterPrimaryAngle
 ; ---------------------------------------------------------------------------
 
 ; sub_FBEE
@@ -225,7 +225,7 @@ CheckCeilingDist_WithRadius:
                 move.w  #$800,d6
                 bsr.w   FindFloor
                 move.b  #$80,d2
-                bra.w   SKCollision_ReadPrimaryProbeAngleWithOddFallback
+                bra.w   SKClearance_FilterPrimaryAngle
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -244,10 +244,10 @@ ObjCheckCeilingDist:
                 bsr.w   FindFloor
                 move.b  (Primary_Angle).w,d3
                 btst    #0,d3
-                beq.s   SKCollision_ReturnObjectCeilingProbeWithAngleFallback
+                beq.s   SKClearance_CeilingReturn
                 move.b  #$80,d3
 
-SKCollision_ReturnObjectCeilingProbeWithAngleFallback:
+SKClearance_CeilingReturn:
                 rts
 ; End of function ObjCheckCeilingDist
 
@@ -264,10 +264,10 @@ ChkFloorEdge_ReverseGravity:
 ChkFloorEdge_ReverseGravity_Part2:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   SKCollision_ProbeReverseGravityFloorEdgeAtCeilingCoordinates
+                beq.s   SKClearance_ReverseGravityFloor
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-SKCollision_ProbeReverseGravityFloorEdgeAtCeilingCoordinates:
+SKClearance_ReverseGravityFloor:
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
                 movea.w #-Collision_Scan_Step,a3
@@ -278,10 +278,10 @@ SKCollision_ProbeReverseGravityFloorEdgeAtCeilingCoordinates:
                 movem.l (sp)+,a4-a6
                 move.b  (Primary_Angle).w,d3
                 btst    #0,d3
-                beq.s   SKCollision_ReturnReverseGravityFloorEdgeProbe
+                beq.s   SKClearance_ReverseFloorReturn
                 move.b  #0,d3
 
-SKCollision_ReturnReverseGravityFloorEdgeProbe:
+SKClearance_ReverseFloorReturn:
                 rts
 ; End of function ChkFloorEdge_ReverseGravity_Part2
 
@@ -337,7 +337,7 @@ CheckLeftCeilingDist:
                 bsr.w   FindWall
                 move.w  (sp)+,d0
                 move.b  #$40,d2
-                bra.w   SKCollision_SelectNearerCornerDistanceAndItsAngle
+                bra.w   SKClearance_PickNearerCorner
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -373,7 +373,7 @@ ProbeLeftWallAtBodyExtents:
                 bsr.w   FindWall
                 move.w  (sp)+,d0
                 move.b  #$40,d2
-                bra.w   SKCollision_SelectNearerCornerDistanceAndItsAngle
+                bra.w   SKClearance_PickNearerCorner
 ; End of function ProbeLeftWallAtBodyExtents
 
 ; =============== S U B R O U T I N E =======================================
@@ -382,9 +382,9 @@ CheckLeftWallDist:
                 move.w  y_pos(a0),d2
                 move.w  x_pos(a0),d3
                 tst.w   (Competition_mode).w
-                bne.s   SKCollision_ProbeLeftWallAtSignedBodyXRadius
+                bne.s   SKClearance_LeftAtXRadius
 
-SKCollision_ProbeLeftWallAtFixedTenPixelOffset:
+SKClearance_LeftAt10px:
                 subi.w  #$A,d3
                 eori.w  #$F,d3
                 lea     (Primary_Angle).w,a4
@@ -392,10 +392,10 @@ SKCollision_ProbeLeftWallAtFixedTenPixelOffset:
                 move.w  #$400,d6
                 bsr.w   FindWall
                 move.b  #$40,d2
-                bra.w   SKCollision_ReadPrimaryProbeAngleWithOddFallback
+                bra.w   SKClearance_FilterPrimaryAngle
 ; ---------------------------------------------------------------------------
 
-SKCollision_ProbeLeftWallAtSignedBodyXRadius:
+SKClearance_LeftAtXRadius:
                 move.b  x_radius(a0),d0
                 ext.w   d0
                 sub.w   d0,d3
@@ -405,7 +405,7 @@ SKCollision_ProbeLeftWallAtSignedBodyXRadius:
                 move.w  #$400,d6
                 bsr.w   FindWall
                 move.b  #$40,d2
-                bra.w   SKCollision_ReadPrimaryProbeAngleWithOddFallback
+                bra.w   SKClearance_FilterPrimaryAngle
 ; End of function CheckLeftWallDist
 
 ; =============== S U B R O U T I N E =======================================
@@ -413,10 +413,11 @@ SKCollision_ProbeLeftWallAtSignedBodyXRadius:
 ProbeLeftWallUsingYRadius:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   SKCollision_ProbeLeftWallUsingBodyYRadiusAndSelectedLayer
+                beq.s   SKClearance_LeftAtYRadius
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-SKCollision_ProbeLeftWallUsingBodyYRadiusAndSelectedLayer:
+; Use the object's side solidity bit for the probe
+SKClearance_LeftAtYRadius:
                 move.w  x_pos(a0),d3
                 move.w  y_pos(a0),d2
                 move.b  y_radius(a0),d0
@@ -454,10 +455,10 @@ ObjCheckLeftWallDist_Part2:
                 bsr.w   FindWall
                 move.b  (Primary_Angle).w,d3
                 btst    #0,d3
-                beq.s   SKCollision_ReturnObjectLeftWallProbeWithAngleFallback
+                beq.s   SKClearance_LeftReturn
                 move.b  #$40,d3
 
-SKCollision_ReturnObjectLeftWallProbeWithAngleFallback:
+SKClearance_LeftReturn:
                 rts
 ; End of function ObjCheckLeftWallDist
 

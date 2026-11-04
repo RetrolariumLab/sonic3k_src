@@ -89,11 +89,11 @@ FindFloor:
                 add.w   (Camera_Y_diff).w,d2
                 move.w  (sp)+,d0
                 cmp.w   d0,d1
-                ble.s   SKCollision_ReturnNearerForegroundBackgroundFloorSample
+                ble.s   SKFloor_LayerReturn
                 move.b  Primary_Angle_save-Primary_Angle(a4),(a4)
                 move.w  d0,d1
 
-SKCollision_ReturnNearerForegroundBackgroundFloorSample:
+SKFloor_LayerReturn:
                 rts
 ; End of function FindFloor
 
@@ -104,11 +104,11 @@ SampleFloorDistanceWithNeighbor:
                 move.w  (a1),d0
                 move.w  d0,d4
                 andi.w  #$3FF,d0
-                beq.s   SKCollision_SampleForwardNeighborForEmptyFloorBlock
+                beq.s   SKFloor_SampleNextBlock
                 btst    d5,d4
-                bne.s   SKCollision_ReadInterleavedFloorCollisionIndexAndHorizontalFlip
+                bne.s   SKFloor_LoadShapeAndAngle
 
-SKCollision_SampleForwardNeighborForEmptyFloorBlock:
+SKFloor_SampleNextBlock:
                 add.w   a3,d2
                 bsr.w   SampleSingleBlockFloorDistance
                 sub.w   a3,d2
@@ -116,29 +116,30 @@ SKCollision_SampleForwardNeighborForEmptyFloorBlock:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_ReadInterleavedFloorCollisionIndexAndHorizontalFlip:
+SKFloor_LoadShapeAndAngle:
                 movea.l (Collision_addr).w,a2
                 add.w   d0,d0
                 move.b  (a2,d0.w),d0
                 andi.w  #$FF,d0
-                beq.s   SKCollision_SampleForwardNeighborForEmptyFloorBlock
+                beq.s   SKFloor_SampleNextBlock
                 lea     (AngleArray).l,a2
                 move.b  (a2,d0.w),(a4)
                 lsl.w   #4,d0
                 move.w  d3,d1
                 btst    #$A,d4
-                beq.s   SKCollision_TransformFloorAngleForVerticalBlockFlip
+                beq.s   SKFloor_FlipAngleY
                 not.w   d1
                 neg.b   (a4)
 
-SKCollision_TransformFloorAngleForVerticalBlockFlip:
+SKFloor_FlipAngleY:
                 btst    #$B,d4
-                beq.s   SKCollision_ReadSignedFloorColumnHeightAndApplyEffectiveVerticalFlip
+                beq.s   SKFloor_ReadSignedHeight
                 addi.b  #$40,(a4)
                 neg.b   (a4)
                 subi.b  #$40,(a4)
 
-SKCollision_ReadSignedFloorColumnHeightAndApplyEffectiveVerticalFlip:
+; Combine the block's Y flip with the scan direction mask before applying the sign
+SKFloor_ReadSignedHeight:
                 andi.w  #$F,d1
                 add.w   d0,d1
                 lea     (HeightMaps).l,a2
@@ -146,15 +147,15 @@ SKCollision_ReadSignedFloorColumnHeightAndApplyEffectiveVerticalFlip:
                 ext.w   d0
                 eor.w   d6,d4
                 btst    #$B,d4
-                beq.s   SKCollision_ClassifyFloorHeightAndComputePartialColumnDistance
+                beq.s   SKFloor_ClassifyHeight
                 neg.w   d0
 
-SKCollision_ClassifyFloorHeightAndComputePartialColumnDistance:
+SKFloor_ClassifyHeight:
                 tst.w   d0
-                beq.s   SKCollision_SampleForwardNeighborForEmptyFloorBlock
-                bmi.s   SKCollision_TestNegativeFloorColumnAgainstWithinBlockY
+                beq.s   SKFloor_SampleNextBlock
+                bmi.s   SKFloor_TestNegHeightAtLocalY
                 cmpi.b  #$10,d0
-                beq.s   SKCollision_SampleBackwardNeighborForFullOrOverlappedFloorColumn
+                beq.s   SKFloor_SamplePrevBlock
                 move.w  d2,d1
                 andi.w  #$F,d1
                 add.w   d1,d0
@@ -163,13 +164,13 @@ SKCollision_ClassifyFloorHeightAndComputePartialColumnDistance:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_TestNegativeFloorColumnAgainstWithinBlockY:
+SKFloor_TestNegHeightAtLocalY:
                 move.w  d2,d1
                 andi.w  #$F,d1
                 add.w   d1,d0
-                bpl.w   SKCollision_SampleForwardNeighborForEmptyFloorBlock
+                bpl.w   SKFloor_SampleNextBlock
 
-SKCollision_SampleBackwardNeighborForFullOrOverlappedFloorColumn:
+SKFloor_SamplePrevBlock:
                 sub.w   a3,d2
                 bsr.w   SampleSingleBlockFloorDistance
                 add.w   a3,d2
@@ -184,11 +185,11 @@ SampleSingleBlockFloorDistance:
                 move.w  (a1),d0
                 move.w  d0,d4
                 andi.w  #$3FF,d0
-                beq.s   SKCollision_ReturnEmptySingleFloorBlockDistance
+                beq.s   SKFloorBlock_EmptyDistance
                 btst    d5,d4
-                bne.s   SKCollision_ReadSingleFloorCollisionIndexAndHorizontalFlip
+                bne.s   SKFloorBlock_LoadShapeAndAngle
 
-SKCollision_ReturnEmptySingleFloorBlockDistance:
+SKFloorBlock_EmptyDistance:
                 move.w  #$F,d1
                 move.w  d2,d0
                 andi.w  #$F,d0
@@ -196,29 +197,29 @@ SKCollision_ReturnEmptySingleFloorBlockDistance:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_ReadSingleFloorCollisionIndexAndHorizontalFlip:
+SKFloorBlock_LoadShapeAndAngle:
                 movea.l (Collision_addr).w,a2
                 add.w   d0,d0
                 move.b  (a2,d0.w),d0
                 andi.w  #$FF,d0
-                beq.s   SKCollision_ReturnEmptySingleFloorBlockDistance
+                beq.s   SKFloorBlock_EmptyDistance
                 lea     (AngleArray).l,a2
                 move.b  (a2,d0.w),(a4)
                 lsl.w   #4,d0
                 move.w  d3,d1
                 btst    #$A,d4
-                beq.s   SKCollision_TransformSingleFloorAngleForVerticalFlip
+                beq.s   SKFloorBlock_FlipAngleY
                 not.w   d1
                 neg.b   (a4)
 
-SKCollision_TransformSingleFloorAngleForVerticalFlip:
+SKFloorBlock_FlipAngleY:
                 btst    #$B,d4
-                beq.s   SKCollision_ReadSingleFloorHeightWithEffectiveFlip
+                beq.s   SKFloorBlock_ReadSignedHeight
                 addi.b  #$40,(a4)
                 neg.b   (a4)
                 subi.b  #$40,(a4)
 
-SKCollision_ReadSingleFloorHeightWithEffectiveFlip:
+SKFloorBlock_ReadSignedHeight:
                 andi.w  #$F,d1
                 add.w   d0,d1
                 lea     (HeightMaps).l,a2
@@ -226,13 +227,13 @@ SKCollision_ReadSingleFloorHeightWithEffectiveFlip:
                 ext.w   d0
                 eor.w   d6,d4
                 btst    #$B,d4
-                beq.s   SKCollision_ComputeSingleFloorDistanceFromSignedHeight
+                beq.s   SKFloorBlock_ClassifyHeight
                 neg.w   d0
 
-SKCollision_ComputeSingleFloorDistanceFromSignedHeight:
+SKFloorBlock_ClassifyHeight:
                 tst.w   d0
-                beq.s   SKCollision_ReturnEmptySingleFloorBlockDistance
-                bmi.s   SKCollision_ResolveNegativeSingleFloorColumnDistance
+                beq.s   SKFloorBlock_EmptyDistance
+                bmi.s   SKFloorBlock_TestNegHeight
                 move.w  d2,d1
                 andi.w  #$F,d1
                 add.w   d1,d0
@@ -241,11 +242,11 @@ SKCollision_ComputeSingleFloorDistanceFromSignedHeight:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_ResolveNegativeSingleFloorColumnDistance:
+SKFloorBlock_TestNegHeight:
                 move.w  d2,d1
                 andi.w  #$F,d1
                 add.w   d1,d0
-                bpl.w   SKCollision_ReturnEmptySingleFloorBlockDistance
+                bpl.w   SKFloorBlock_EmptyDistance
                 not.w   d1
                 rts
 ; End of function SampleSingleBlockFloorDistance
@@ -281,38 +282,38 @@ SampleRingFloorDistance:
                 move.w  (a1),d0
                 move.w  d0,d4
                 andi.w  #$3FF,d0
-                beq.s   SKCollision_ReturnRingEmptyBlockDistanceSixteen
+                beq.s   SKRingFloor_EmptyReturn16
                 btst    d5,d4
-                bne.s   SKCollision_ReadRingFloorIndexAndHorizontalFlip
+                bne.s   SKRingFloor_LoadShapeAndAngle
 
-SKCollision_ReturnRingEmptyBlockDistanceSixteen:
+SKRingFloor_EmptyReturn16:
                 move.w  #$10,d1
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_ReadRingFloorIndexAndHorizontalFlip:
+SKRingFloor_LoadShapeAndAngle:
                 movea.l (Collision_addr).w,a2
                 add.w   d0,d0
                 move.b  (a2,d0.w),d0
                 andi.w  #$FF,d0
-                beq.s   SKCollision_ReturnRingEmptyBlockDistanceSixteen
+                beq.s   SKRingFloor_EmptyReturn16
                 lea     (AngleArray).l,a2
                 move.b  (a2,d0.w),(a4)
                 lsl.w   #4,d0
                 move.w  d3,d1
                 btst    #$A,d4
-                beq.s   SKCollision_TransformRingFloorAngleForVerticalFlip
+                beq.s   SKRingFloor_FlipAngleY
                 not.w   d1
                 neg.b   (a4)
 
-SKCollision_TransformRingFloorAngleForVerticalFlip:
+SKRingFloor_FlipAngleY:
                 btst    #$B,d4
-                beq.s   SKCollision_ReadRingFloorHeightWithEffectiveVerticalFlip
+                beq.s   SKRingFloor_ReadSignedHeight
                 addi.b  #$40,(a4)
                 neg.b   (a4)
                 subi.b  #$40,(a4)
 
-SKCollision_ReadRingFloorHeightWithEffectiveVerticalFlip:
+SKRingFloor_ReadSignedHeight:
                 andi.w  #$F,d1
                 add.w   d0,d1
                 lea     (HeightMaps).l,a2
@@ -320,15 +321,15 @@ SKCollision_ReadRingFloorHeightWithEffectiveVerticalFlip:
                 ext.w   d0
                 eor.w   d6,d4
                 btst    #$B,d4
-                beq.s   SKCollision_ClassifyRingFloorColumnAndPartialDistance
+                beq.s   SKRingFloor_ClassifyHeight
                 neg.w   d0
 
-SKCollision_ClassifyRingFloorColumnAndPartialDistance:
+SKRingFloor_ClassifyHeight:
                 tst.w   d0
-                beq.s   SKCollision_ReturnRingEmptyBlockDistanceSixteen
-                bmi.s   SKCollision_TestRingNegativeColumnForFallback
+                beq.s   SKRingFloor_EmptyReturn16
+                bmi.s   SKRingFloor_TestNegHeightAtLocalY
                 cmpi.b  #$10,d0
-                beq.s   SKCollision_ProbeBackwardFloorNeighborForRing
+                beq.s   SKRingFloor_SamplePrevBlock
                 move.w  d2,d1
                 andi.w  #$F,d1
                 add.w   d1,d0
@@ -337,13 +338,13 @@ SKCollision_ClassifyRingFloorColumnAndPartialDistance:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKCollision_TestRingNegativeColumnForFallback:
+SKRingFloor_TestNegHeightAtLocalY:
                 move.w  d2,d1
                 andi.w  #$F,d1
                 add.w   d1,d0
-                bpl.w   SKCollision_ReturnRingEmptyBlockDistanceSixteen
+                bpl.w   SKRingFloor_EmptyReturn16
 
-SKCollision_ProbeBackwardFloorNeighborForRing:
+SKRingFloor_SamplePrevBlock:
                 sub.w   a3,d2
                 bsr.w   SampleSingleBlockFloorDistance
                 add.w   a3,d2

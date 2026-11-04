@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 98
+    "commit_count": 99
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -635,9 +635,15 @@
       "commits": ["3bbe1784794668cb91e52cdeaa1b76df258f0b05"]
     },
     {
-      "id": "current-shorten-03c-runtime-motion",
+      "id": "change-e29aa0440dda",
       "kind": "source_or_tooling",
       "summary": "Shorten 156 motion, targeting and player interaction labels while preserving their data widths, flags and per-engine behavior.",
+      "commits": ["e29aa0440dda60da3c5057c4635a7997ef3c0037"]
+    },
+    {
+      "id": "current-shorten-04-collision",
+      "kind": "source_or_tooling",
+      "summary": "Shorten 347 terrain probe and contact labels and preserve the original source bindings.",
       "commits": ["release-commit"]
     }
   ],

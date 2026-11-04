@@ -63,7 +63,7 @@ Touch_NoInstaShield:
 Touch_Process:
                 lea     (Collision_response_list).w,a4
                 move.w  (a4)+,d6                        ; Get number of objects queued
-                beq.s   S3Collision_ReturnFromEmptyOrExhaustedTouchQueue  ; If there are none, return
+                beq.s   S3Touch_QueueReturn             ; If there are none, return
 
 Touch_Loop:
                 movea.w (a4)+,a1                        ; Get address of first object's RAM
@@ -75,7 +75,7 @@ Touch_NextObj:
                 bne.s   Touch_Loop                      ; If there are still objects left, loop
                 moveq   #0,d0
 
-S3Collision_ReturnFromEmptyOrExhaustedTouchQueue:
+S3Touch_QueueReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -391,46 +391,47 @@ Touch_Hurt:
 HurtCharacter:
                 move.w  (Ring_count).w,d0
                 cmpa.w  #Player_1,a0
-                beq.s   S3Collision_ApplyShieldRingOrTertiaryHurtResourceGate
+                beq.s   S3Hurt_CheckShieldAndRings
                 tst.w   (Competition_mode).w
-                beq.s   S3Collision_EnterHurtAndChooseWaterKnockback
+                beq.s   S3Hurt_SetStateAndKnockback
                 move.w  (Ring_count_P2).w,d0
 
-S3Collision_ApplyShieldRingOrTertiaryHurtResourceGate:
+; A negative tertiary status skips ring spilling and goes directly to hurt
+S3Hurt_CheckShieldAndRings:
                 btst    #0,status_secondary(a0)
-                bne.s   S3Collision_MaskSecondaryPowerBitsBeforeHurt
+                bne.s   S3Hurt_ClearShieldBits
                 tst.b   status_tertiary(a0)
-                bmi.s   S3Collision_EnterHurtAndChooseWaterKnockback
+                bmi.s   S3Hurt_SetStateAndKnockback
                 tst.w   d0
                 beq.w   Kill_Character
                 jsr     (AllocateObject).l
-                bne.s   S3Collision_MaskSecondaryPowerBitsBeforeHurt
+                bne.s   S3Hurt_ClearShieldBits
                 move.l  #Obj_Bouncing_Ring,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.w  a0,$3E(a1)
 
-S3Collision_MaskSecondaryPowerBitsBeforeHurt:
+S3Hurt_ClearShieldBits:
                 andi.b  #$8E,status_secondary(a0)
 
-S3Collision_EnterHurtAndChooseWaterKnockback:
+S3Hurt_SetStateAndKnockback:
                 move.b  #4,routine(a0)
                 jsr     (Player_TouchFloor).l
                 bset    #Status_InAir,status(a0)
                 move.w  #-$400,y_vel(a0)
                 move.w  #-$200,x_vel(a0)
                 btst    #Status_Underwater,status(a0)
-                beq.s   S3Collision_ChooseHurtHorizontalDirectionFromSourceX
+                beq.s   S3Hurt_OrientXFromHazard
                 move.w  #-$200,y_vel(a0)
                 move.w  #-$100,x_vel(a0)
 
-S3Collision_ChooseHurtHorizontalDirectionFromSourceX:
+S3Hurt_OrientXFromHazard:
                 move.w  x_pos(a0),d0
                 cmp.w   x_pos(a2),d0
-                blo.s   S3Collision_CommitHurtAnimationTimerSoundAndFailureValue
+                blo.s   S3Hurt_AnimateAndPlaySFX
                 neg.w   x_vel(a0)
 
-S3Collision_CommitHurtAnimationTimerSoundAndFailureValue:
+S3Hurt_AnimateAndPlaySFX:
                 move.w  #0,ground_vel(a0)
                 move.b  #$1A,anim(a0)
                 move.b  #120,invulnerability_timer(a0)
@@ -442,7 +443,7 @@ S3Collision_CommitHurtAnimationTimerSoundAndFailureValue:
 
 Kill_Character:
                 tst.w   (Debug_placement_mode).w
-                bne.s   S3Collision_ReturnDeathFailureValueIncludingPlacementBypass
+                bne.s   S3Kill_ReturnMinusOne
                 clr.b   status_secondary(a0)
                 clr.b   status_tertiary(a0)
                 move.b  #6,routine(a0)
@@ -456,7 +457,8 @@ Kill_Character:
                 moveq   #signextendB(sfx_Death),d0
                 jsr     (Play_SFX).l
 
-S3Collision_ReturnDeathFailureValueIncludingPlacementBypass:
+; Debug placement takes this return without entering the death state
+S3Kill_ReturnMinusOne:
                 moveq   #-1,d0
                 rts
 ; ---------------------------------------------------------------------------
@@ -465,27 +467,27 @@ Touch_Special:
                 move.b  collision_flags(a1),d1          ; Get collision_flags
                 andi.b  #$3F,d1                         ; Get only collision size (but that doesn't seems to be its use here)
                 cmpi.b  #7,d1
-                beq.s   S3Collision_IncrementSpecialContactPropertyByActorWordOffset
+                beq.s   S3Touch_CountSpecialContact
                 cmpi.b  #6,d1
-                beq.s   S3Collision_IncrementSpecialContactPropertyByActorWordOffset
+                beq.s   S3Touch_CountSpecialContact
                 cmpi.b  #$A,d1
-                beq.s   S3Collision_IncrementSpecialContactPropertyByActorWordOffset
+                beq.s   S3Touch_CountSpecialContact
                 cmpi.b  #$C,d1
-                beq.s   S3Collision_IncrementSpecialContactPropertyByActorWordOffset
+                beq.s   S3Touch_CountSpecialContact
                 cmpi.b  #$15,d1
-                beq.s   S3Collision_IncrementSpecialContactPropertyByActorWordOffset
+                beq.s   S3Touch_CountSpecialContact
                 cmpi.b  #$16,d1
-                beq.s   S3Collision_IncrementSpecialContactPropertyByActorWordOffset
+                beq.s   S3Touch_CountSpecialContact
                 cmpi.b  #$17,d1
-                beq.s   S3Collision_IncrementSpecialContactPropertyByActorWordOffset
+                beq.s   S3Touch_CountSpecialContact
                 cmpi.b  #$18,d1
-                beq.s   S3Collision_IncrementSpecialContactPropertyByActorWordOffset
+                beq.s   S3Touch_CountSpecialContact
                 cmpi.b  #$21,d1
-                beq.s   S3Collision_IncrementSpecialContactPropertyByActorWordOffset
+                beq.s   S3Touch_CountSpecialContact
                 rts
 ; ---------------------------------------------------------------------------
 
-S3Collision_IncrementSpecialContactPropertyByActorWordOffset:
+S3Touch_CountSpecialContact:
                 move.w  a0,d1                           ; Get RAM address of what object hit this
                 subi.w  #Object_RAM,d1
                 beq.s   .ismaincharacter                ; If the main character hit it, branch
@@ -514,7 +516,7 @@ Add_SpriteToCollisionResponseList:
 ShieldTouchResponse:
                 move.b  status_secondary(a0),d0
                 andi.b  #$71,d0                         ; Does the player have any shields?
-                beq.s   S3Collision_ReturnFromShieldContactFilterOrExhaustedQueue
+                beq.s   S3ShieldTouch_ScanReturn
                 move.w  x_pos(a0),d2                    ; Get player's x_pos
                 move.w  y_pos(a0),d3                    ; Get player's y_pos
                 subi.w  #$18,d2                         ; Subtract width of shield
@@ -523,7 +525,7 @@ ShieldTouchResponse:
                 move.w  #$30,d5                         ; Player's height
                 lea     (Collision_response_list).w,a4
                 move.w  (a4)+,d6                        ; Get number of objects queued
-                beq.s   S3Collision_ReturnFromShieldContactFilterOrExhaustedQueue  ; If there are none, return
+                beq.s   S3ShieldTouch_ScanReturn        ; If there are none, return
 
 ShieldTouch_Loop:
                 movea.w (a4)+,a1                        ; Get address of first object's RAM
@@ -536,7 +538,7 @@ ShieldTouch_NextObj:
                 subq.w  #2,d6                           ; Count the object as done
                 bne.s   ShieldTouch_Loop                ; If there are still objects left, loop
 
-S3Collision_ReturnFromShieldContactFilterOrExhaustedQueue:
+S3ShieldTouch_ScanReturn:
                 rts
 ; ---------------------------------------------------------------------------
 

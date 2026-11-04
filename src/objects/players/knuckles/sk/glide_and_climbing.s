@@ -848,11 +848,11 @@ GetDistanceFromWall:
 
 ; .facingRight:
                 move.w  x_pos(a0),d3
-                bra.w   SKCollision_ProbeRightWallAtSignedBodyXRadius
+                bra.w   SKClearance_RightAtXRadius
 ; ---------------------------------------------------------------------------
 ; loc_16F62:
                 .facingLeft:
                 move.w  x_pos(a0),d3
                 subq.w  #1,d3
-                bra.w   SKCollision_ProbeLeftWallAtSignedBodyXRadius
+                bra.w   SKClearance_LeftAtXRadius
 ; End of function GetDistanceFromWall

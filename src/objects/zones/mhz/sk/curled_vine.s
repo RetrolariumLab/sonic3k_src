@@ -218,7 +218,7 @@ loc_3EA1E:
                 add.w   d1,d0
                 move.w  $1A(a2,d0.w),d0
                 subq.w  #8,d0
-                jmp     (SKCollision_LandAtCallerComputedTopWithinUnsignedPenetrationWindow).l
+                jmp     (SKPlatform_CheckTopAndSnapRider).l
 ; ---------------------------------------------------------------------------
 
 locret_3EA4A:
